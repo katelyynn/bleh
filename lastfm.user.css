@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           bleh
 @namespace      github.com/katelmao/lastfm-bleh
-@version        1.0.5
+@version        1.0.6
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelmao/lastfm-bleh/raw/uwu/lastfm.user.css
@@ -1403,7 +1403,7 @@
         .pagination-previous
         {
             line-height: 26px;
-            padding: 0px 7px;
+            padding: 0px 12px;
             color: hsl(var(--l3));
             border-radius: 50px;
             box-shadow: none !important;
@@ -1415,17 +1415,32 @@
             color: inherit !important;
             text-decoration: none;
         }
-        [class^="pagination-"] a:before {
+        [class^="pagination-"] a:before, [class^="pagination-"] a:after {
             background: none;
             margin: initial;
             height: initial;
             width: initial;
-            position: initial;
+			font-weight: 700;
+			position: initial;
         }
-        .pagination-previous a:before {
-            content: '<';
+        /*.pagination-previous a:before {
+            content: '←';
             margin-right: 4px;
         }
+		.pagination-next a:after {
+            content: '→';
+            margin-left: 4px;
+        }*/
+
+		.pagination-next,
+        .pagination-previous
+		{
+			font-weight: 600;
+		}
+
+		.pagination-page span {
+			padding: initial;
+		}
 
         :is(.pagination-page,
         .pagination-next,
@@ -2658,6 +2673,12 @@
             /* align */
             padding-top: 9px;
         }
+
+		.inbox-notifications__item-description strong {
+			font-weight: 500;
+			color: hsl(var(--l2));
+		}
+
         /* notification dot */
         .auth-avatar-notification-count-badge,
         .notification-count-badge {
@@ -2666,6 +2687,7 @@
             color: hsl(var(--b6)) !important;
             font-weight: 700;
         }
+
         /* highlighted */
         .inbox-notifications .inbox-notifications__item--highlight {
             background-color: hsl(var(--base-hue), calc(var(--saturation)*40%), calc(var(--lightness)*26%)) !important;
