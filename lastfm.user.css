@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           bleh
 @namespace      github.com/katelmao/lastfm-bleh
-@version        1.0.4
+@version        1.0.1
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelmao/lastfm-bleh/raw/uwu/lastfm.user.css
@@ -400,6 +400,10 @@
 			display: none;
 		}
 
+		.listening-report-top {
+			flex: 1;
+		}
+
         .container:has(.features-page-bottom) {
             display: none;
         }
@@ -562,17 +566,57 @@
         .content-form input[type="text"],
         .content-form input[type="url"],
         .content-form select,
-        .content-form textarea {
+        .content-form textarea,
+		.library-search-input
+		{
             background: hsla(var(--b4), 50%) !important;
             border: 2px solid transparent !important;
             border-radius: 7px;
             color: hsl(var(--c2));
         }
-        .content-form .form-control:focus, .content-form input[type="date"]:focus, .content-form input[type="email"]:focus, .content-form input[type="number"]:focus, .content-form input[type="password"]:focus, .content-form input[type="text"]:focus, .content-form input[type="url"]:focus, .content-form select:focus, .content-form textarea:focus
+		.library-search-input input {
+			background: transparent;
+			border: none !important;
+			box-shadow: none !important;
+			border-radius: initial !important;
+		}
+        .content-form .form-control:focus, .content-form input[type="date"]:focus, .content-form input[type="email"]:focus, .content-form input[type="number"]:focus, .content-form input[type="password"]:focus, .content-form input[type="text"]:focus, .content-form input[type="url"]:focus, .content-form select:focus, .content-form textarea:focus,
+		.library-search-form[data-search-state="loaded"] > .library-search-input, .library-search-input:focus-within
         {
             box-shadow: none !important;
             border-color: hsla(var(--l1),10%) !important;
         }
+
+		.library-search-results {
+			z-index: 300;
+			color: hsl(var(--c2));
+			background-color: hsl(var(--b6));
+			border: 1px solid hsl(var(--b3));
+			border-radius: 10px;
+			box-shadow: var(--raise-4);
+			padding: 0;
+		}
+		/* all results */
+		.library-search-results .all-results-list {
+			padding: 0;
+		}
+		.library-search-results .all-results-list li, .column-tracks-item-wrap {
+			color: hsl(var(--c2)) !important;
+			transition: background 0.15s;
+			min-width: 220px;
+			border-radius: 0;
+			padding: 9px 16px !important;
+			height: initial;
+			cursor: pointer;
+		}
+		:is(.library-search-results .all-results-list li, .column-tracks-item-wrap):is(:hover, :active, :focus),
+		.column-tracks-item-wrap[style="background-color: rgb(249, 249, 249);"]
+		{
+			background: hsl(var(--b5)) !important;
+		}
+		.column-tracks-item-wrap h3 {
+			text-decoration: none !important;
+		}
 
         .control-label {
             font-weight: 600 !important;
@@ -2724,6 +2768,12 @@
         .header-new-background-overlay-mobile {
             display: none;
         }
+
+
+
+		hr {
+			border-color: hsl(var(--b3));
+		}
 
 
 
