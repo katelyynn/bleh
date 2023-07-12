@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           bleh
 @namespace      github.com/katelmao/lastfm-bleh
-@version        1.0.2
+@version        1.0.3
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelmao/lastfm-bleh/raw/uwu/lastfm.user.css
@@ -1608,6 +1608,22 @@
             background-image: linear-gradient(180deg, hsla(var(--base-hue), calc(var(--saturation)*0%), 6%, 85%) 0%, hsl(var(--b6)) 100%) !important;
             backdrop-filter: blur(10px);
         }
+
+		/* besties :3 */
+		:is(
+		.header-title a,
+		.header-metadata-display a
+		):is(
+		[href*="/user/katie4k"],
+		[href*="/user/ssneek"],
+		[href*="/user/peoplepleasr"]
+		)
+		{
+			background: linear-gradient(180deg, hsl(var(--c1)), hsl(var(--l3)));
+			-webkit-background-clip: text;
+			background-clip: text;
+			-webkit-text-fill-color: transparent;
+		}
 
         .header--overview.header--with-avatar .header-info,
         .header--with-avatar .container {
