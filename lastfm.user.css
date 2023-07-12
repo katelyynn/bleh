@@ -10,6 +10,7 @@
 
 @-moz-document domain("last.fm") {
     @import url(https://plexion.dev/css/reset.css);
+    @import url('https://fonts.googleapis.com/css2?family=League+Gothic&family=Spline+Sans:wght@300;400;500;600;700&display=swap');
     :root,
     body,
     .re-style,
@@ -92,7 +93,7 @@
         :root {
             /* fonts */
             --font-head: var(--font-main), ;
-            --font-main: Inter, Nunito, 'Space Grotesk', Heebo, Inter, -apple-system, BlinkMacSystemFont, Roboto, "Noto Sans JP", "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "TwemojiColor";
+            --font-main: 'Spline Sans', Inter, Nunito, 'Space Grotesk', Heebo, Inter, -apple-system, BlinkMacSystemFont, Roboto, "Noto Sans JP", "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "TwemojiColor";
             --font-code: "JetBrains Mono", "Courier New", consolas, monospace, var(--font-main);
 
             --underline-offset: 2px;
