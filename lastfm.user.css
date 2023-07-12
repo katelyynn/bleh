@@ -2514,6 +2514,106 @@
 
 
 
+        /* listeners u know experiment */
+        .header-info-secondary .header-metadata-item {
+            padding: 7px 14px;
+            border-radius: 7px;
+            background-color: hsla(var(--b5),20%);
+            /*border: 1px solid hsl(var(--b2));*/
+        }
+        .personal-stats-item {
+            padding-right: 28px;
+        }
+        .personal-stats-inner {
+            width: max-content;
+        }
+        .header-metadata-item:not(:first-child) {
+            margin-left: 7px;
+        }
+
+        .profile-header-set-obsession {
+            /*height: 56px;
+            padding: 7px 14px;
+            border-radius: 7px;*/
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /*bottom: calc(-58px - 16px);*/
+        }
+
+        .personal-stats {
+            display: flex;
+            padding: 14px 14px;
+            border-radius: 7px;
+            /*border: 1px solid hsl(var(--b4));*/
+            background-color: hsla(var(--b4),30%);
+        }
+        .personal-stats-item {
+            margin-left: 0;
+        }
+        .personal-stats .personal-stats-item:not(:first-child) .personal-stats-inner {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+        .personal-stats .personal-stats-item:not(:last-child) .personal-stats-inner {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+        .personal-stats-listener-avatar {
+            margin-left: -16px;
+        }
+        .personal-stats-listener-avatar img {
+            box-shadow: 0 0 0 3px hsl(var(--b5));
+            border-radius: 50%;
+        }
+        .personal-stats-item--listeners {
+            margin-left: 10px;
+        }
+
+        /*.personal-stats-item--listeners .personal-stats-body {
+            visibility: hidden;
+            width: 0;
+        }*/
+        .personal-stats-item--listeners .personal-stats-inner {
+            position: relative;
+            top: 5px;
+        }
+        .personal-stats-item--listeners .header-metadata-title {
+            display: none;
+        }
+        .personal-stats-item--listeners .header-metadata-display {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: hsl(var(--b3));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 16px;
+            position: relative;
+            right: 8px;
+        }
+
+        .personal-stats-listeners-more {
+            display: none;
+        }
+
+        .personal-stats-listeners:before {
+            content: '';
+            width: 100%;
+            height: 100%;
+            display: block;
+            z-index: 10;
+            top: 6px;
+            background: linear-gradient(90deg, rgba(0,0,0,0) 0%, hsla(var(--b5),70%) 100%);
+        }
+
+
+
+        /* tasty */
+        /*.tasteometer-compat-very_low .tasteometer-compat-colour { fill: hsl(var(--d1)); color: hsl(var(--d1)); font-weight: 500; }
+
 
         /* blur bg experiment */
         .header-new-background-image {
