@@ -2987,4 +2987,156 @@
 	[class*="ad-container"] {
 		display: none !important;
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+	/* custom hardcode covers */
+
+	/* glaive - cypress grove (sessions) */
+	[alt="2face"],
+	[alt="2 face"],
+	[alt="DEAD2ME"],
+	[alt="eyesore (demo)"],
+	[alt="Fuck Cancer (Freestyle)"],
+	[alt="hey hi hyd (demo)"],
+	[alt="im a mess"],
+	[alt="october's lullaby (demo) [feat. Savage Ga$p]"],
+	[alt="play 2 much"],
+	[alt="quicksand (v1)"],
+	[alt="quicksand (v2)"],
+	[alt="quicksand"]
+	{
+		content: url('https://lastfm.freetls.fastly.net/i/u/64s/027e5be7194a4a1337db7b261dc9a3f6.jpg') !important;
+	}
+
+	/* glaive - all dogs go to heaven (sessions) */
+	[alt="a date with karma"],
+	[alt="A Date w Karma (V1)"],
+	[alt="a date w karma (v2)"],
+	[alt="all dogs go to heaven (demo)"],
+	[alt="bastard (Demo)"],
+	[alt="bastard (open)"],
+	[alt="dial tone"],
+	[alt="fuck it"],
+	[alt="fuck this town (demo) [feat. ericdoa]"],
+	[alt="poison (demo)"],
+	[alt="rigor mortis (555)"],
+	[alt="stephany (demo)"],
+	[alt="SYNOPSIS (demo)"],
+	[alt="bird (v2)"],
+	[alt="crynomore"],
+	[alt="function"],
+	[alt="grow up"],
+	[alt="Prick (feat. Midwxst)"],
+	[alt="bird (v1)"],
+	[alt="perfect"]
+	{
+		content: url('https://lastfm.freetls.fastly.net/i/u/64s/eaa3636601712185d51ec96fa9fb702f.jpg') !important;
+	}
+
+	/* old dog, new tricks (sessions) */
+	[alt="girl i met (v1)"],
+	[alt="girl i met (v2)"],
+	[alt="girl i met (v3)"],
+	[alt="pretty stupid lol (77)"],
+	[alt="Stay + Love Story (Cover)"],
+	[alt="marie antoinette"],
+	[alt="Marrie Antoinette"],
+	[alt="wasting away again"],
+	[alt="prick (og)"],
+	[alt="dogs! dogs! dogs!"]
+	{
+		content: url('https://lastfm.freetls.fastly.net/i/u/64s/5d178106435f1366e2a7238b02110fa9.jpg') !important;
+	}
+
+	/* glaive - i care so much that i don't care at all (sessions) */
+	[alt="17250 (v1)"],
+	[alt="17250 (V2)"],
+	[alt="a mattress is a man's best friend"],
+	[alt="don't bring this up again (v1)"],
+	[alt="don't bring this up again (v2)"],
+	[alt="dr luke song"],
+	[alt="fear of god and the catholic church"],
+	[alt="fruit & cookie & a cute little muffin"],
+	[alt="fun time to be uhh"],
+	[alt="jesse ralph (this song is in a minor at 126 bpm v2)"],
+	[alt="grapes"],
+	[alt="i wish i could but my mom would kill me"],
+	[alt="minnesota is a place that exists (demo)"],
+	[alt="note to self nothing good has ever happened in florida"],
+	[alt="or are you drunk? i can never tell"],
+	[alt="the 6 most prescribed adhd medications"],
+	[alt="this song doesn't have a title yet"],
+	[alt="this song is in A Minor at 126 BPM"],
+	[alt="three wheels and it still drives! (v1)"],
+	[alt="unsaid (demo)"],
+	[alt="unsaid"],
+	[alt="zoe kravitz eat your heart out"],
+	[alt="zoe kravitz eat your heart out (v2)"],
+	[alt="fuck em we ball"],
+	[alt="fuck em we ball (remaster)"]
+	{
+		content: url('https://lastfm.freetls.fastly.net/i/u/64s/c6e2c29b245f4b23c0e49104efca965d.jpg') !important;
+	}
+
+	/* glaive - something terrible happened at ovine hall book club */
+	[alt="up+down"],
+	[alt="up + down"],
+	[alt="problems"],
+	[alt="hate2seeucry"],
+	[alt="Hate 2 See U Cry"],
+	[alt="i hate 2 see u cry"],
+	[alt="for u"],
+	[alt="up+down (pitched)"],
+	[alt="problems (pitched)"],
+	[alt="the car (pitched)"],
+	[alt="Shoreditch (Bsun N Thr6x Remix)"]
+	{
+		content: url('https://lastfm.freetls.fastly.net/i/u/64s/32e5689c1002e908a9fc64f977174f9e.jpg') !important;
+	}
+
+	/* glaive - cypress grove */
+	[alt="Teen Angst"] /* eyesore */
+	{
+		content: url('https://lastfm.freetls.fastly.net/i/u/64s/3a47b85891a67b78ee43f7f26506958c.jpg') !important;
+	}
+
+	/* glaive - all dogs go to heaven */
+	[alt="all dogs go to heaven (outro)"]
+	{
+		content: url('https://lastfm.freetls.fastly.net/i/u/64s/34a552ef32533002e628e080e0a49f42.jpg') !important;
+	}
+
+	/* glaive - then i'll be happy */
+	[alt="naturale"],
+	[alt="mental anguish"],
+	[alt="heather"],
+	[alt="pretending"],
+	[alt="physs"],
+	[alt="handle me"],
+	[alt="handle me (interlude)"]
+	{
+		content: url('https://lastfm.freetls.fastly.net/i/u/64s/11c76777452a03855fb9c22754c1b6fa.jpg') !important;
+	}
+
+	/* glaive - fuck this town */
+	[alt="fuck this town"]
+	{
+		content: url('https://lastfm.freetls.fastly.net/i/u/64s/56990d4ab5358065657cdf2a7542968e.jpg') !important;
+	}
+
+	/* glaive - cloak n dagger */
+	[alt="cloak n dagger"]
+	{
+		content: url('https://lastfm.freetls.fastly.net/i/u/64s/3407f6c2db1396a469127758edeba65c.jpg') !important;
+	}
 }
