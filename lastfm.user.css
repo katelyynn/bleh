@@ -133,6 +133,10 @@
 		--icon-clock: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABIklEQVQ4T42TMW7CQBBFYyniJJSpIIG0QANFDhKfIDiUCXACOAgFNEBNIKkoOQlCIv9Ja2tYL7ZHelp7Zvfv7Oxs9BC2R7kbounCvxr/xMWfHgXWj+X7EH7sKt9UJHaNnfSiwEw8i41YC3bGyKQnuuIgYrEnYAVwsHjodiI+cQL4MDLDhwgbZgKkzSS7mPjRLXxyoxVBKCEDCnYWW0Ga1kICxDleR9QQaImd+BRkUkWAQn6LVwTeBcUbiFVAoC7fyfkXGjlmXyxFVCbAOd+MqC8Q2yOMXFpeEsFfjvsl2mVFvCd2U0QmURAK419jSCDthewa00k/+qA5ikSIcVO5RkKELpy7kVYG28q0MdCxtDIiuQeDr+gxkTYFzCz0GglWfs7/eIBD77dAUnkAAAAASUVORK5CYII=');
 		--icon-arrow-up: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAApUlEQVQ4T2NkoBAwUqifgZABDVALYDSGffgMSAaqngPVkQKk52JzLS4DYJp/QzWxAmmshmAzAKb5LlDTf6gBIHXK2AxBNwBZszdQw1qoAcFAeis2Q5ANAGnYAsQgm0Hsm0B8BWqADpBWRzLEB8pGiQWQE2cAcQ5UM0gvsgEgPsiQKUCcAbWIYDSiG4AREYTSwTAwABQbIACKQqyAUBjg0gcXp9gAAFDLHxGTSLJOAAAAAElFTkSuQmCC');
 		--icon-arrow-down: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAApUlEQVQ4T2NkoBAwUqifgZAB3lALtuKyiJABV6AadUaIAcpAf84A4hwgvgn1M3oYqAPFpwBxBhDfBalBDkRQiG+BSoDYIEOQDQBpBsUGyCIfKBsjGpOBEnOQDFkLdUkwkuYUIHsuLFawRSOyIf+hCkHqQDajaEb3AnJUwwz5DRVkxaYZnwEgOZghIDaGzfi8gOySBigHRiPLgdmEkjKGBnQBig0AAF0IHxG8JYTuAAAAAElFTkSuQmCC');
+		--icon-flag: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAv0lEQVQ4T2NkQAVuQK4GEPMA8W0gPgTEL9HUoHAZoTwuIH0EiA2xKN4EFHsMxPOBGKTOBoi9gdgBiP/ADNAGcq4A8V4gbgTib0CcCMSyQOyHwwU6QPGr6AY0QA1A1iMO5NgBsSoQfwFiEyCOBWKiDUB3QD1QAGTRcDVgMdBvZ4AYXzrAGwbYYgw9HYAMcEYPRD2gwEUS0sF5oFpQgvpGTjq4AdS4C+ZUYgzAkRAhwoPHAJBrQDkMlCM/4nUzmiQAkBFBEWnBXigAAAAASUVORK5CYII=');
+		--icon-error: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAxUlEQVQ4T2NkwASmQCEvLOIgoW1AfBpZjhFNoQWQvxWIhXAY8A4o7g3EJ2DyyAYgay4EKtiNZogrkN8PxCiGwAxA1hwCVLQWhwuCgeJrkA0BGQDy8w6os9E1g5wLAiBvwQCyIR4gA+qBuAGIQc6egGbzFShfB028AOqdBmQDQIquEmmANlAdyHDaG9AOdVElmsuIdgGOyGDAagC2QDwENIEJiG3wBSK+aMTmAoxoBCmiKCHBbKEoKWMzBJvz8WYmmAaSsjMALD1BdTDkEPYAAAAASUVORK5CYII=');
+		--icon-menu: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAiUlEQVQ4T2NkoBAwUqifYdQABpQwsAAGqC0QTwPir9DAjYTSy6E0N5DOAuLDQHwCJAYLRC4g+w0QcwLxFiD2BWKQ5mVQjQpA+iEQgwyKAOLfQMyGy4AVUM3IBoDYIHGYAT+AbGEg/oYcjdi8ALINBECaQQDk0mwgxvACVJ50ajQhoSYk0kMQqAMARF4XEV8QvzgAAAAASUVORK5CYII=');
+		--icon-share: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAA00lEQVQ4T2NkwA8aoNIwGkM1Ix79yUC5OVD5FCA9F5taXAbANP+GamIF0lgNwWXAf6CGu0AMokEApE4ZSqM4BJsBIIUzgDgHiNdCVQcD6SlAnAE1GG4IvjAAKboCVamDK6yoasAhoC2dQLwVyTZsLvAGypcDsR0scEC0NtS5DUC6kYAB9UB5kDqQt67CvEAzA9qhrqlEchVJLsAW+LQxQAmaQGYD6Ym44hwqngek04AYlODuIaeDLUABUBQRA0BR7YMcjTBNkUCGGgETbgHll8PUAACA4DIRSjiMngAAAABJRU5ErkJggg==');
 	}
 
 	/* global themes */
@@ -336,17 +340,30 @@
 		margin-bottom: 20px;
 		font-weight: 600;
 	}
-	:is([class|="more-link"], .video-preview-replace) a, .tags-view-all, .btn-cancel, .js-shout-reply-cancel {
+	:is([class|="more-link"], .video-preview-replace) a, .tags-view-all, .btn-cancel, .js-shout-reply-cancel, .gallery-image-report {
 		padding: 6px 14px;
 		border-radius: 50px;
+		line-height: initial;
 	}
-	:is(:is([class|="more-link"], .video-preview-replace) a, .tags-view-all, .btn-cancel, .js-shout-reply-cancel, .library-header a):is(:hover,
+	:is(:is([class|="more-link"], .video-preview-replace) a, .tags-view-all, .btn-cancel, .js-shout-reply-cancel, .library-header a, .gallery-image-report):is(:hover,
 	:focus) {
 		background-color: hsla(var(--l3), 15%) !important;
 		text-decoration: none !important;
 	}
 	[class|="more-link"] a:before {
 		display: none;
+	}
+
+	.gallery-image-report
+	{
+		padding-left: 28px;
+	}
+	.gallery-image-report:before
+	{
+		background-image: var(--icon-flag) !important;
+		left: 8px !important;
+		filter: invert(1);
+		transform: scale(0.85);
 	}
 
 	/*.more-link-fullwidth-right-flush-top a,
@@ -1341,6 +1358,31 @@
 		color: hsla(var(--c1),85%);
 	}
 
+	/* icon row */
+	.section-with-control h2 {
+		width: fit-content;
+		position: relative;
+		top: 10px;
+	}
+	.section-settings-toggle, .share-chart .share-button-profile {
+		margin: 0;
+		top: 11px;
+	}
+	.section-control {
+		top: 8px !important;
+	}
+
+	.buffer-standard {
+		margin-top: 16px;
+	}
+
+	.share-chart .share-button-profile:before {
+		background-image: var(--icon-share) !important;
+	}
+	.section-settings-toggle:before {
+		background-image: var(--icon-menu) !important;
+	}
+
 	.album-overview-cover-art,
 	.music-featured-item,
 	.track-overview-new .video-preview,
@@ -1570,6 +1612,17 @@
 		background-color: hsl(var(--b6));
 		border-top-left-radius: 10px;
 		border-top-right-radius: 10px;
+	}
+
+	.page-content:has(.content-top-lower-row) {
+		border-bottom-left-radius: 0;
+		border-bottom-right-radius: 0;
+		box-shadow: none !important;
+	}
+	.page-content:has(.gallery-section) {
+		margin-top: -10px;
+		border-top-left-radius: 0;
+		border-top-right-radius: 0;
 	}
 
 	.gallery-sidebar,
