@@ -1,0 +1,161 @@
+/* ==UserStyle==
+@name           bleh (light addon)
+@namespace      github.com/katelmao/lastfm-bleh
+@version        1.0.1
+@license        GPL-3.0
+@author         kate
+@updateURL      https://github.com/katelmao/lastfm-bleh/raw/uwu/lastfm-light.user.css
+==/UserStyle== */
+
+@-moz-document domain("last.fm") {
+	:root {
+		/* shadow */
+		--raise-0: 0px 3px 3px 0px rgba(0,0,0,0.03);
+		--raise-1: 0px 5px 5px 0px rgba(0,0,0,0.1);
+		--raise-2: 0px 5px 5px 0px rgba(0,0,0,0.16);
+		--raise-3: 0px 5px 6px 0px rgba(0,0,0,0.22);
+		--raise-4: 0px 5px 7px 0px rgba(0,0,0,0.29);
+		--raise-5: 0px 5px 8px 0px rgba(0,0,0,0.36);
+		--raise-6: 0px 5px 12px 0px rgba(0,0,0,0.48);
+		--raise-7: 0px 5px 15px 5px rgba(0,0,0,0.60);
+	}
+
+    :root, body, .re-style,
+	.header-background
+	{
+		--theme-brightness-multiplier: 0.8;
+		--theme-icon-invert: 0;
+		--theme-icon-legacy-brightness: 200%;
+		--theme-font-weight: 500;
+		--theme-font-weight-slight-bold: 600;
+		--theme-font-weight-bold: 700;
+
+		/* text */
+		--text-link: hsl(var(--base-hue),calc(var(--saturation)*100%),70%);
+		--text-head: hsla(var(--base-hue),calc(var(--saturation)*50%),95%,1);
+		--text-main: hsla(var(--base-hue),calc(var(--saturation)*45%),0%,0.8);
+		--text-alt: hsla(var(--base-hue),calc(var(--saturation)*65%),90%,0.5);
+		--text-icon: hsl(var(--base-hue),calc(var(--saturation)*30%),75%);
+		--text-raised: var(--text-head);
+		/* backgrounds */
+		--highlight: hsl(var(--base-hue),calc(var(--saturation)*10%),6%);
+		--text-select: hsla(var(--base-hue),calc(var(--saturation)*100%),70%,20%);
+
+		/* b1-6 */
+		--b1: var(--base-hue),calc(var(--saturation)*12%),76%;
+		--b2: var(--base-hue),calc(var(--saturation)*11%),78%;
+		--b3: var(--base-hue),calc(var(--saturation)*10%),80%; /* card hover */
+		--b4: var(--base-hue),calc(var(--saturation)*9%),86%; /* card */
+		--b5: var(--base-hue),calc(var(--saturation)*8%),91%; /* content */
+		--b6: var(--base-hue),calc(var(--saturation)*7%),87%; /* body */
+		/* d1-6 */
+		--d1: var(--base-hue),calc(var(--saturation)*14%),55%;
+		--d2: var(--base-hue),calc(var(--saturation)*14%),60%;
+		--d3: var(--base-hue),calc(var(--saturation)*14%),65%;
+		--d4: var(--base-hue),calc(var(--saturation)*14%),70%; /* tab bar */
+		--d5: var(--base-hue),calc(var(--saturation)*14%),75%; /* header */
+		--d6: var(--base-hue),calc(var(--saturation)*14%),80%;
+		/* l1-4 */
+		--l1: var(--base-hue),calc(var(--saturation)*45%),92%;
+		--l2: var(--base-hue),calc(var(--saturation)*65%),50%;
+		--l3: var(--base-hue),calc(var(--saturation)*65%),55%; /* link */
+		--l4: var(--base-hue),calc(var(--saturation)*65%),80%;
+		/* c1-2 */
+		--c1: var(--base-hue),calc(var(--saturation)*20%),0%;
+		--c2: var(--base-hue),calc(var(--saturation)*12%),11%; /* subcontent */
+		--c3: var(--base-hue),calc(var(--saturation)*5%),23%,80%;
+		--c4: var(--base-hue),calc(var(--saturation)*5%),23%,75%;
+		/* custom */
+		--b0: var(--base-hue),calc(var(--saturation)*8%),55%;
+		--l5: var(--base-hue),calc(var(--saturation)*45%),26%;
+		--ba5: var(--base-hue),calc(var(--saturation)*8%),15%,94%;
+		--ba6: var(--base-hue),calc(var(--saturation)*8%),10%,94%;
+
+		/* text shadows */
+		--bb5: var(--base-hue),calc(var(--saturation)*8%),15%,10%;
+
+		/* colours */
+		--red: -2;
+		--orange: 45;
+		--green: 150;
+		--blue: 210;
+		--purple: 270;
+		--pink: 333;
+
+		/* accents */
+		--accent: var(--base-hue),calc(var(--saturation)*62%),88%;
+		--accent-raise: var(--base-hue),calc(var(--saturation)*62%),78%;
+		--accent-background: var(--base-hue),calc(var(--saturation)*56%),26%;
+		--dangerous: #9e1e1e;
+		--dangerous-raise: #CC3333;
+		/* targets */
+		--target: var(--base-hue),calc(var(--saturation)*100%),70%,60%;
+		--target-raise: var(--base-hue),calc(var(--saturation)*100%),70%,40%;
+	}
+
+	/* enforce solid black */
+	.shout .vote-button--voted,
+	.catalogue-tags .tag a, .catalogue-tags .tags-add, .catalogue-tags .tags-add-cta,
+	.header-new-title,
+	.header-metadata-tnew .header-metadata-tnew-display
+	{
+		color: hsl(var(--c1)) !important;
+	}
+
+	.header-new-crumb
+	{
+		color: hsl(var(--c2)) !important;
+	}
+
+	.btn-primary, .profile-header-set-obsession, .btn-subscribe.paypal-button
+	{
+		background-color: hsl(var(--accent-raise));
+	}
+
+	.chartlist-row--highlight, .chartlist-row--now-scrobbling
+	{
+		background-color: hsl(var(--base-hue),calc(var(--saturation)*45%),87%) !important;
+		box-shadow: none;
+	}
+	:is(.chartlist-row--highlight, .chartlist-row--now-scrobbling):is(:hover) {
+		background-color: hsl(var(--base-hue),calc(var(--saturation)*45%),80%) !important;
+	}
+
+	.chartlist-now-scrobbling,
+	.masthead-search-toggle
+	{
+		filter: invert(1);
+	}
+	.dropdown-menu-clickable-button::after, .js .date-range-picker-button .date-range-picker-button-inner::before
+	{
+		filter: grayscale(1) !important;
+	}
+
+	.content-form .form-control, .content-form input[type="date"], .content-form input[type="email"], .content-form input[type="number"], .content-form input[type="password"], .content-form input[type="text"], .content-form input[type="url"], .content-form select, .content-form textarea {
+		background: hsla(var(--b4),60%) !important;
+	}
+
+	.header-new-inner
+	{
+		background: transparent;
+	}
+
+	.header-background, .header-new-background {
+		opacity: 0.25;
+		filter: saturate(50%);
+	}
+
+
+	.header-metadata .header-metadata-display a, .metadata-display {
+		color: hsl(var(--c1));
+	}
+
+	/* blank pfp */
+	img[src*="/2a96cbd8b46e442fc41c2b86b821562f.jpg"],
+	img[src*="/4128a6eb29f94943c9d206c08e625904.jpg"],
+	img[src*="/c6f59c1e5e7240a4c0d427abd71f3dbb.jpg"],
+	img[src*="/818148bf682d429dc215c1705eb27b98.png"]
+	{
+		background-color: hsla(var(--c1),40%);
+	}
+}
