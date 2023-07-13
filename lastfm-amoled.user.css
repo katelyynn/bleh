@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           bleh (amoled addon)
 @namespace      github.com/katelmao/lastfm-bleh
-@version        1.0.0
+@version        1.0.1
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelmao/lastfm-bleh/raw/uwu/lastfm-amoled.user.css
@@ -14,26 +14,26 @@
 	.namespace--user_overview nav
 	{
 		/* text */
-		--text-link: var(--base-hue),calc(var(--saturation)*95%),63%;
+		--text-link: var(--base-hue),calc(var(--saturation)*95%),calc(var(--lightness)*63%);
 		/* b1-6 */
-		--b1: var(--base-hue),calc(var(--saturation)*11%),23%;
-		--b2: var(--base-hue),calc(var(--saturation)*10%),17%;
-		--b3: var(--base-hue),calc(var(--saturation)*9%),14%;
-		--b4: var(--base-hue),calc(var(--saturation)*8%),10%;
-		--b5: var(--base-hue),calc(var(--saturation)*7%),4%;
+		--b1: var(--base-hue),calc(var(--saturation)*11%),calc(var(--lightness)*19%);
+		--b2: var(--base-hue),calc(var(--saturation)*10%),calc(var(--lightness)*15%);
+		--b3: var(--base-hue),calc(var(--saturation)*9%),calc(var(--lightness)*11%);
+		--b4: var(--base-hue),calc(var(--saturation)*8%),calc(var(--lightness)*7%);
+		--b5: var(--base-hue),calc(var(--saturation)*7%),calc(var(--lightness)*4%);
 		--b6: var(--base-hue),0%,0%;
 		/* d1-6 */
-		--d1: var(--base-hue),calc(var(--saturation)*20%),27%;
-		--d2: var(--base-hue),calc(var(--saturation)*20%),22%;
-		--d3: var(--base-hue),calc(var(--saturation)*18%),18%;
-		--d4: var(--base-hue),calc(var(--saturation)*18%),15%;
-		--d5: var(--base-hue),calc(var(--saturation)*16%),10%;
-		--d6: var(--base-hue),calc(var(--saturation)*13%),6%;
+		--d1: var(--base-hue),calc(var(--saturation)*20%),calc(var(--lightness)*27%);
+		--d2: var(--base-hue),calc(var(--saturation)*20%),calc(var(--lightness)*22%);
+		--d3: var(--base-hue),calc(var(--saturation)*18%),calc(var(--lightness)*18%);
+		--d4: var(--base-hue),calc(var(--saturation)*18%),calc(var(--lightness)*15%);
+		--d5: var(--base-hue),calc(var(--saturation)*16%),calc(var(--lightness)*10%);
+		--d6: var(--base-hue),calc(var(--saturation)*13%),calc(var(--lightness)*6%);
 		/* custom */
-		--ba5: var(--base-hue),calc(var(--saturation)*7%),4%,93%;
-		--ba6: var(--base-hue),calc(var(--saturation)*0%),0%,93%;
+		--ba5: var(--base-hue),calc(var(--saturation)*7%),calc(var(--lightness)*4%,93%);
+		--ba6: var(--base-hue),calc(var(--saturation)*0%),calc(var(--lightness)*0%,93%);
 
 		/* accents */
-		--accent-background: var(--base-hue),calc(var(--saturation)*53%),22%;
+		--accent-background: var(--base-hue),calc(var(--saturation)*53%),calc(var(--lightness)*22%);
 	}
 }
