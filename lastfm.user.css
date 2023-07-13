@@ -167,6 +167,8 @@
 	.recs-feed-cover-image-wrap,
 	.namespace--user_overview nav {
 		--theme-brightness-multiplier: 1;
+		--theme-icon-invert: 1;
+		--theme-icon-legacy-brightness: 200%;
 
 		/* hue */
 		--error-hue: -2;
@@ -368,7 +370,7 @@
 	{
 		background-image: var(--icon-flag) !important;
 		left: 8px !important;
-		filter: invert(1);
+		filter: invert(var(--theme-icon-invert));
 		transform: scale(0.85);
 	}
 
@@ -670,7 +672,7 @@
 		display: none;
 	}
 	.search-form .search-submit:before, .search-form .search-reset:before {
-		filter: invert(1) brightness(250%);
+		filter: invert(var(--theme-icon-invert)) brightness(var(--theme-icon-legacy-brightness));
 		opacity: 0.5;
 	}
 	.search-form .search-reset:before {
@@ -826,7 +828,7 @@
 		text-decoration: none;
 		font-size: 14px;
 		line-height: 20px;
-		text-shadow: 0px 2px 4px var(--bb5);
+		text-shadow: 0px 2px 6px hsl(var(--bb5));
 		user-select: none;
 		-webkit-user-select: none;
 		/* display */
@@ -854,6 +856,11 @@
 	.attendance-btn--turn-off.attendance-btn--maybe,
 	.no-data-message-button):active {
 		transform: scale(0.97);
+	}
+
+	:is([class*="btn-"], [class*="gallery-image-vote"] span):before
+	{
+		filter: invert(var(--theme-icon-invert)) drop-shadow(0px 2px 2px hsl(var(--bb5))) !important;
 	}
 
 	.btn-sm
@@ -890,7 +897,7 @@
 	.header-new-actions .toggle-button:not([data-analytics-action="UnloveTrack"]):before,
 	.header-new-more-button:before,
 	.header-new-playlink:before {
-		filter: invert(1);
+		filter: invert(var(--theme-icon-invert));
 	}
 
 
@@ -1278,7 +1285,7 @@
 	}
 	.shout-more-actions::before {
 		background-image: var(--icon-menu);
-		filter: invert(1);
+		filter: invert(var(--theme-icon-invert));
 		background-position: 0 0 !important;
 		margin-left: -7px;
 		margin-top: -6px;
@@ -1683,7 +1690,7 @@
 	}
 
 	button[class|="gallery-image"][class*="-off"] span:before {
-		filter: invert(1) !important;
+		filter: invert(var(--theme-icon-invert)) !important;
 	}
 
 	.gallery-image-vote-up-on {
@@ -1701,16 +1708,14 @@
 
 	.gallery-image-preferred-states:before {
 		background-image: var(--icon-artist) !important;
-		filter: invert(1);
+		filter: invert(var(--theme-icon-invert));
 	}
 
 	button[class|="gallery-image"][class*="vote-up"] .gallery-image-votes:before {
 		background-image: var(--icon-arrow-up) !important;
-		filter: invert(1);
 	}
 	button[class|="gallery-image"][class*="vote-down"] .gallery-image-votes:before {
 		background-image: var(--icon-arrow-down) !important;
-		filter: invert(1);
 	}
 
 	.gallery-image-vote-up-on:is(:hover,
@@ -1786,7 +1791,7 @@
 		background-color: hsl(var(--b3)) !important;
 	}
 	.coloured-cta:before {
-		filter: invert(1) brightness(200%);
+		filter: invert(var(--theme-icon-invert)) brightness(var(--theme-icon-legacy-brightness));
 		opacity: 0.5;
 	}
 
@@ -1936,7 +1941,7 @@
 	/* icons */
 	.section-settings-toggle:before,
 	.share-chart .share-button-profile:before {
-		filter: invert(1) brightness(150%);
+		filter: invert(var(--theme-icon-invert));
 	}
 	.section-with-settings .section-control:before {
 		display: none;
@@ -2261,7 +2266,7 @@
 		margin-top: 2px;
 	}
 	.listening-report-promo-date:after {
-		filter: invert(1);
+		filter: invert(var(--theme-icon-invert));
 	}
 
 	/* chartlist bars */
@@ -2736,9 +2741,9 @@
 		z-index: 1000;
 	}
 	.dropdown-menu-clickable-button:after,
-	.js .date-range-picker-button .date-range-picker-button-inner::before {
+	.js .date-range-picker-button .date-range-picker-button-inner:before {
 		opacity: 1 !important;
-		filter: grayscale(1) invert(1);
+		filter: grayscale(1) invert(var(--theme-icon-invert));
 	}
 	.js .date-range-picker-button::before {
 		display: none;
@@ -2859,7 +2864,7 @@
 	/* icon */
 	.dropdown-menu-clickable-item:not(:is(.buylink, .more-item--delete, .more-item--report, .more-item--obsession)):before,
 	.resource-external-link--apple-music::before {
-		filter: invert(1);
+		filter: invert(var(--theme-icon-invert));
 	}
 	.dropdown-menu-clickable-item.buylink:before {
 		background-color: hsl(var(--c1));
