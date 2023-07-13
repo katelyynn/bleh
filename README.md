@@ -7,6 +7,8 @@
 
 <p align="center">this is still a WIP, it is NOT DONE. there are things broken and i am aware of most of them so don't worry they will be fixed someday. ty for using n leave feedback if u do <3</p>
 
+requires stylus extension!!
+
 <img src="https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/misc/transparent.png" height="30" width="0px"/>
 
 <h1 align="center">
