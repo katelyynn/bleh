@@ -137,6 +137,12 @@
 		--icon-error: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAxUlEQVQ4T2NkwASmQCEvLOIgoW1AfBpZjhFNoQWQvxWIhXAY8A4o7g3EJ2DyyAYgay4EKtiNZogrkN8PxCiGwAxA1hwCVLQWhwuCgeJrkA0BGQDy8w6os9E1g5wLAiBvwQCyIR4gA+qBuAGIQc6egGbzFShfB028AOqdBmQDQIquEmmANlAdyHDaG9AOdVElmsuIdgGOyGDAagC2QDwENIEJiG3wBSK+aMTmAoxoBCmiKCHBbKEoKWMzBJvz8WYmmAaSsjMALD1BdTDkEPYAAAAASUVORK5CYII=');
 		--icon-menu: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAiUlEQVQ4T2NkoBAwUqifYdQABpQwsAAGqC0QTwPir9DAjYTSy6E0N5DOAuLDQHwCJAYLRC4g+w0QcwLxFiD2BWKQ5mVQjQpA+iEQgwyKAOLfQMyGy4AVUM3IBoDYIHGYAT+AbGEg/oYcjdi8ALINBECaQQDk0mwgxvACVJ50ajQhoSYk0kMQqAMARF4XEV8QvzgAAAAASUVORK5CYII=');
 		--icon-share: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAA00lEQVQ4T2NkwA8aoNIwGkM1Ix79yUC5OVD5FCA9F5taXAbANP+GamIF0lgNwWXAf6CGu0AMokEApE4ZSqM4BJsBIIUzgDgHiNdCVQcD6SlAnAE1GG4IvjAAKboCVamDK6yoasAhoC2dQLwVyTZsLvAGypcDsR0scEC0NtS5DUC6kYAB9UB5kDqQt67CvEAzA9qhrqlEchVJLsAW+LQxQAmaQGYD6Ym44hwqngek04AYlODuIaeDLUABUBQRA0BR7YMcjTBNkUCGGgETbgHll8PUAACA4DIRSjiMngAAAABJRU5ErkJggg==');
+		--icon-red-delete: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABSElEQVQ4T2NkwAIe2ngLfmf/k/r//39OkDQjI+N3zp8ss+WPbH2PrpwRXQCk+RvbnxdAcTY0uV9cv1gk0A3BMOCGs3vZ//8MnYwM/zr//mdaDDKEmfFf7H8GpnJGRoZyjb07u5ANBhtw1cmtnZGBMQrIEQEq+gI0QAwofAeIf0IVswNpFaDcK6Acz38Ghjf/Gf4v0963qxJuADMjYxJY43+G5wyMDPxADffRvKAIlPsIlJMEGfT3//95cANACq87udUDg6vh338GHe39O69iC9yrju7aTIwMVxgY/jdo7tvVCA5gmEJ0A645unt/Y/57BCTP9ZfZRmv/zq1EGwDSBLMJYgHEZcjieF0wDAwAxcJ1J/f/jP8Z8zX275gEYv//zSD1n4VBiOhYIDkasSVhdEOwJWl4OsCTidDNQclUKJkJPRuj68SWrQGdqeURTdYtggAAAABJRU5ErkJggg==');
+		--icon-red-flag: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABIUlEQVQ4T92TQUsCURSFzxmxxRC0bNUyUKwgmqVEOqCF1D9o4S9Rf0mL/oEtInFMwqURUabQslVLIYbInNObKBhlcGoXvdW779537uW87xGRNSwelEhlBC1TfJxwcrXpec/Rmvk9w4P+zqFtr7z1TLAdU9yE8AToJLBoWwHzICqZ4HWP3e77p8CgUM5ZxL0JvCnRsAL5Aqsk1kz6KG6CQNjIXV4MZgRMl3q202pEL9y57mpa6V1R6wRfIDkCjn8sMN99WCzVANb/q4Bx9BRkfxEHCR7EItOU4YBfHKSEmnkFd8bEkbu/Jek2yoFxumqAieXACNz446W8c33m/5oDiaNs57z1PWuiwKJ/EOb+iEA4ykOhXPFT057Tbo+Txo7mPwCoTtERvV60YQAAAABJRU5ErkJggg==');
+		--icon-pin: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABGElEQVQ4T2NkwAQWQCF3LOIgoZ1AfAJZjhFNYRqQPxOHZphwOpAxC8ZBN+A4UEIRiEEG3UUzSBmq8T6QtsRlQBtQohKIrwLxZigbpLYdiH2BWBvKrsJlAEgcZEgREN8BYh2owitAWgWI+4AYrhkkh+4FmMEgDSCAbAAyH+47mhhgDjR+PxCfBGJHqFUgvh4Qe0HFcbpgN1DGBSqbDKTnQdlJQHoulD0dSGfBTED2QhhQcCUQrwbiHiA+BbcGwjAD4hIgDgXicCBeBRJENqAeyG8A4mlA/AqqWQ1K34LSYlDbQeoa0Q3IAwpMRLMVFzcfKDEJ3QAQH5RQkMEGKCcATRyU0MAAVzTC5NHTA4aLaG6AN9TKrbgCAwD34i4R+THuHQAAAABJRU5ErkJggg==');
+		--icon-activity: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAsUlEQVQ4T2NkoBAw4tA/CSqeR8h8bAYIATW9hWoUBtLv8BmCzYAkoIa5UE3JQHoeqQZsBmrwgWraAqR9STEA5nyQRhAAGYTXG+hegDkf5HQQAHkFrzdABngDcSdUgxyQ5oXaChICBSayN0Cx44TkpXJ0A0By+4AYFn2w8AB5A2bgZyDjEZQPNgAfIOglQgYQDFRCBoBchzdaiTEAb8IixgC8SZsYA0DewJm5iDUAZ0wBAKgqJKcqVSNEAAAAAElFTkSuQmCC');
+		--icon-purple-activity: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAA2klEQVQ4T6WTvRbBQBCFZ9JrKIOH0YqXwEmp1bHRaXVy8BJSexiSkkZv7CabHBFm1rHd/sy3997ZRfhz4Kf6OMo2Zj1c+jOJ3wDs1KX9QLwCAXhAnanq3ThIAxCvsjEQ7fMixEm48A+/AVR6BIQgLyJIQtUdOQNe5CeFAgg84m3ULFTytfRCgbYi2MBtlA4RcG1l9nVVy9xq5jbMyobtzqC0REDzd4DZO5Xti20eNSDgXZ85FxFpABeQiyUW4BIqCzDqShvf2ioDhIclAqSnLQJyG8zncgJwnXoCqmN6o/weoL0AAAAASUVORK5CYII=');
+		--icon-edit: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAA6UlEQVQ4T2NkIA0oA5VrAPFWmDZG0vQz7AaqdwHiFCCeC9JLrAHeUIvuQG0HuQRsCDEGJAMVzoEaANJ0BMkQH0IGwDQ/ghogB7UZZMgUIM7AZwBM812gQpgXdgHZIEN8YAGJywB0zTeBGtSBmCgDcGkGRR088HBFI0ma0aORZM3IBkQCOcuAGBZgMD9jdTZy4oMF4gqgYDgQWwLxCWiAEdSM7II3QM5tqAEWQHoJtgBDthk5EEG2HoOmMBYgDTIABODpHZtGZAMqgJx2qMBbIL0HiDcC8XJ8GpENYANyioD4IBAfJ0YTshoAFaE7fy0/UusAAAAASUVORK5CYII=');
 	}
 
 	/* global themes */
@@ -452,7 +458,8 @@
 	.your-progress .description,
 	.artist-top-albums-item-aux-text,
 	.artist-top-albums-item-regular-tags,
-	.topic-list .topic-excerpt
+	.topic-list .topic-excerpt,
+	.resource-list--release-list-item-aux-text
 	{
 		color: hsl(var(--c2));
 	}
@@ -480,7 +487,8 @@
 	.topic-list td,
 	table th,
 	.gallery-image-uploaded-by,
-	.similar-items-sidebar-item-aux-text, .similar-items-sidebar-item-regular-tags
+	.similar-items-sidebar-item-aux-text, .similar-items-sidebar-item-regular-tags,
+	.resource-list--release-list-item-listeners
 	{
 		color: hsla(var(--c3));
 	}
@@ -538,6 +546,9 @@
 	[title="Funeral"]
 	{
 		text-transform: lowercase;
+	}
+	.dropdown-menu-clickable-item {
+		text-transform: initial !important;
 	}
 
 	/* header style */
@@ -1115,8 +1126,8 @@
 		padding-right: 60px;
 		overflow: visible !important;
 	}
-	.shout-user a {
-		color: hsl(var(--l2));
+	.shout-user a, .listeners-section-item-name a {
+		color: hsl(var(--l2)) !important;
 	}
 	.shout-user-avatar,
 	.shout-user-avatar-link {
@@ -1260,13 +1271,15 @@
 	/* more . . . */
 	.shout-more-actions {
 		position: absolute;
-		left: 140px;
+		left: 40px;
 		width: 16px;
 		height: 16px;
-		transform: scale(0.9) rotate(90deg);
-		opacity: 0.8;
+		opacity: 0.4;
 	}
 	.shout-more-actions::before {
+		background-image: var(--icon-menu);
+		filter: invert(1);
+		background-position: 0 0 !important;
 		margin-left: -7px;
 		margin-top: -6px;
 	}
@@ -2790,14 +2803,51 @@
 		background: hsl(var(--b5)) !important;
 	}
 
-	.more-item--delete {
+	/* grr danger */
+	.more-item--delete, .more-item--report {
 		color: hsl(var(--red), calc(var(--saturation)*65%), calc(var(--lightness)*55%)) !important;
 		font-weight: 600;
 	}
-	.dropdown-menu-clickable-item.more-item--delete:is(:hover,
-	:active,
-	:focus) {
+	.dropdown-menu-clickable-item:is(
+	.more-item--delete, .more-item--report
+	):is(:hover, :active, :focus) {
 		background: hsla(var(--red), calc(var(--saturation)*65%), calc(var(--lightness)*55%), 8%) !important;
+	}
+
+	/* special! ^-^ */
+	.more-item--obsession {
+		color: hsl(255, calc(var(--saturation)*65%), calc(var(--lightness)*70%)) !important;
+		font-weight: 600;
+	}
+	.dropdown-menu-clickable-item:is(
+	.more-item--obsession
+	):is(:hover, :active, :focus) {
+		background: hsla(255, calc(var(--saturation)*65%), calc(var(--lightness)*70%), 9%) !important;
+	}
+
+	/* common! */
+	.more-item--edit-old {
+		font-weight: 600;
+	}
+
+	/* icon */
+	.more-item--edit-old:before {
+		background-image: var(--icon-edit);
+	}
+	.more-item--track:before {
+		background-image: var(--icon-track);
+	}
+	.more-item--artist:before {
+		background-image: var(--icon-artist);
+	}
+	.more-item--obsession:before {
+		background-image: var(--icon-purple-activity);
+	}
+	.more-item--delete:before {
+		background-image: var(--icon-red-delete);
+	}
+	.more-item--report:before {
+		background-image: var(--icon-red-flag);
 	}
 
 	.dropdown-menu-clickable-item:first-child {
@@ -2807,7 +2857,7 @@
 		margin-bottom: 0;
 	}
 	/* icon */
-	.dropdown-menu-clickable-item:not(:is(.buylink, .more-item--delete)):before,
+	.dropdown-menu-clickable-item:not(:is(.buylink, .more-item--delete, .more-item--report, .more-item--obsession)):before,
 	.resource-external-link--apple-music::before {
 		filter: invert(1);
 	}
