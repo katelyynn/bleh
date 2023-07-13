@@ -165,10 +165,15 @@
 	body,
 	.re-style,
 	.recs-feed-cover-image-wrap,
-	.namespace--user_overview nav {
+	.namespace--user_overview nav,
+	.grid-items-item-details
+	{
 		--theme-brightness-multiplier: 1;
 		--theme-icon-invert: 1;
 		--theme-icon-legacy-brightness: 200%;
+		--theme-font-weight: 400;
+		--theme-font-weight-slight-bold: 500;
+		--theme-font-weight-bold: 600;
 
 		/* hue */
 		--error-hue: -2;
@@ -215,6 +220,7 @@
 		--c2: var(--base-hue), calc(var(--saturation)*40%), calc(var(--lightness)*90%);
 		/* subcontent */
 		--c3: var(--c2), 50%;
+		--c4: var(--c2), 75%;
 		/* custom */
 		--b0: var(--base-hue), calc(var(--saturation)*8%), calc(var(--lightness)*55%);
 		--l5: var(--base-hue), calc(var(--saturation)*45%), calc(var(--lightness)*26%);
@@ -307,7 +313,7 @@
 		font-family: var(--font-main);
 		color: hsl(var(--c2));
 		font-size: 14px;
-		font-weight: 400;
+		font-weight: var(--theme-font-weight);
 		/* parity with chromium/webkit for firefox */
 		-webkit-font-smoothing: antialiased;
 		-moz-osx-font-smoothing: grayscale;
@@ -346,20 +352,35 @@
 	[class|="more-link"] {
 		padding-right: 0px;
 		margin-bottom: 20px;
-		font-weight: 600;
+		font-weight: var(--theme-font-weight-bold);
 	}
-	:is([class|="more-link"], .video-preview-replace) a, .tags-view-all, .btn-cancel, .js-shout-reply-cancel, .gallery-image-report {
+	:is([class|="more-link"], .video-preview-replace) a, .tags-view-all, .btn-cancel, .js-shout-reply-cancel, .library-header a:not(.text-colour-link), .gallery-image-report, .content-top-back-link a {
 		padding: 6px 14px;
 		border-radius: 50px;
 		line-height: initial;
 	}
-	:is(:is([class|="more-link"], .video-preview-replace) a, .tags-view-all, .btn-cancel, .js-shout-reply-cancel, .library-header a, .gallery-image-report):is(:hover,
+	:is(:is([class|="more-link"], .video-preview-replace) a, .tags-view-all, .btn-cancel, .js-shout-reply-cancel, .library-header a:not(.text-colour-link), .gallery-image-report, .content-top-back-link a):is(:hover,
 	:focus) {
 		background-color: hsla(var(--l3), 15%) !important;
 		text-decoration: none !important;
 	}
 	[class|="more-link"] a:before {
 		display: none;
+	}
+
+	.library-header a:not(.text-colour-link) {
+		padding: 2px 8px;
+	}
+
+	.content-top-back-link a:before {
+		background: initial;
+		width: initial;
+		height: initial;
+		content: 'Back (';
+		position: initial;
+	}
+	.content-top-back-link a:after {
+		content: ')';
 	}
 
 	.gallery-image-report
@@ -490,7 +511,8 @@
 	table th,
 	.gallery-image-uploaded-by,
 	.similar-items-sidebar-item-aux-text, .similar-items-sidebar-item-regular-tags,
-	.resource-list--release-list-item-listeners
+	.resource-list--release-list-item-listeners,
+	.content-top-back-link
 	{
 		color: hsla(var(--c3));
 	}
@@ -500,7 +522,7 @@
 	h2,
 	h3 {
 		/*font-style: italic !important;*/
-		font-weight: 600 !important;
+		font-weight: var(--theme-font-weight-bold) !important;
 	}
 
 	h1,
@@ -515,7 +537,7 @@
 	.topic-list-main-link a.title,
 	.latest-topic-list-item .main-link a.title,
 	.topic-list .main-link a.title {
-		font-weight: 600;
+		font-weight: var(--theme-font-weight-bold);
 		color: hsl(var(--c1)) !important;
 	}
 
@@ -680,7 +702,7 @@
 	}
 
 	.control-label {
-		font-weight: 600 !important;
+		font-weight: var(--theme-font-weight-bold) !important;
 		color: hsl(var(--c2)) !important;
 	}
 
@@ -824,7 +846,7 @@
 		text-transform: initial;
 		letter-spacing: initial;
 		color: hsl(var(--c1));
-		font-weight: 600;
+		font-weight: var(--theme-font-weight-bold);
 		text-decoration: none;
 		font-size: 14px;
 		line-height: 20px;
@@ -941,7 +963,7 @@
 	/* no data */
 	.no-data-message {
 		padding: 20px 0;
-		color: hsla(var(--c2), 75%) !important;
+		color: hsla(var(--c4)) !important;
 	}
 
 	/* tracklist */
@@ -968,10 +990,10 @@
 	/* move names etc. */
 	.chartlist-name {
 		line-height: 18px;
-		font-weight: 400 !important;
+		font-weight: var(--theme-font-weight) !important;
 	}
 	.chartlist-artist {
-		color: hsla(var(--c2), 75%);
+		color: hsla(var(--c4));
 	}
 	.chartlist.chartlist--with-artist:not(.chartlist--with-bar) .chartlist-row .chartlist-name {
 		position: relative;
@@ -1321,7 +1343,7 @@
 	/* links */
 	.resource-external-link,
 	.play-this-track-playlink {
-		font-weight: 500;
+		font-weight: var(--theme-font-weight-slight-bold);
 		text-transform: lowercase;
 		padding: 10px;
 		padding-left: 30px;
@@ -1572,7 +1594,7 @@
 	.pagination-next,
 	.pagination-previous
 	{
-		font-weight: 600;
+		font-weight: var(--theme-font-weight-bold);
 	}
 
 	.pagination-page span {
@@ -1587,7 +1609,7 @@
 	.pagination-page[aria-current="page"] {
 		background-color: hsl(var(--l4));
 		color: hsl(var(--c1));
-		font-weight: 500;
+		font-weight: var(--theme-font-weight-slight-bold);
 	}
 
 
@@ -1608,7 +1630,7 @@
 		color: hsl(var(--c2));
 	}
 	.events-list-sidebar .events-list-item-date-icon-day {
-		font-weight: 600;
+		font-weight: var(--theme-font-weight-bold);
 		color: hsl(var(--c1));
 	}
 
@@ -1805,7 +1827,7 @@
 		padding: 1px 16px;
 		min-height: 20px;
 		border-radius: 50px;
-		font-weight: 500;
+		font-weight: var(--theme-font-weight-slight-bold);
 		transition: background-color 0.2s;
 	}
 	:is(.catalogue-tags .tag a,
@@ -1860,6 +1882,14 @@
 
 
 	/* profile */
+	header .container {
+		box-shadow: none !important;
+	}
+
+	.header--overview {
+		color: hsl(var(--c2));
+	}
+
 	.anhv1 .page-content {
 		padding-top: 20px;
 		padding-bottom: 20px;
@@ -1889,7 +1919,7 @@
 		color: hsl(var(--c1));
 		border-radius: 10px;
 		padding: 9px 15px;
-		font-weight: 500;
+		font-weight: var(--theme-font-weight-slight-bold);
 	}
 	.container,
 	.two-column-layout .container {
@@ -1964,10 +1994,10 @@
 	/* info */
 	.user-list-name {
 		color: hsl(var(--l2));
-		font-weight: 600;
+		font-weight: var(--theme-font-weight-bold);
 	}
 	.user-list-about-me {
-		color: hsla(var(--c2), 80%);
+		color: hsla(var(--c4));
 	}
 	/* artists */
 	.user-list-shared-artists {
@@ -1987,7 +2017,7 @@
 	.obsession-candidate-artist {
 		margin-top: -2px;
 		line-height: 20px;
-		color: hsla(var(--c2), 75%);
+		color: hsla(var(--c4));
 	}
 
 	.obsession-candidate-inner .btn-sm {
@@ -2012,7 +2042,7 @@
 	}
 	.header-scrobble-since {
 		color: hsla(var(--c3));
-		font-weight: 400;
+		font-weight: var(--theme-font-weight);
 		padding-left: 1px;
 		overflow: hidden;
 	}
@@ -2053,11 +2083,11 @@
 	.tasteometer-compat-very_low .tasteometer-compat-colour {
 		fill: hsla(var(--c2), 80%) !important;
 		color: hsla(var(--c2), 80%) !important;
-		font-weight: 500;
+		font-weight: var(--theme-font-weight-slight-bold);
 	}
 
 	.tasteometer-compat-description {
-		font-weight: 600;
+		font-weight: var(--theme-font-weight-bold);
 	}
 
 	.profile-cards-container {
@@ -2071,7 +2101,7 @@
 	}
 
 	.header-new-chart-position-number {
-		font-weight: 600;
+		font-weight: var(--theme-font-weight-bold);
 	}
 
 	/* pro */
@@ -2193,7 +2223,7 @@
 
 	/* scrobbles this week */
 	.your-progress h3 {
-		font-weight: 600;
+		font-weight: var(--theme-font-weight-bold);
 	}
 	.your-progress .btn-subscribe {
 		margin: 12px 0 20px;
@@ -2299,7 +2329,7 @@
 	.chartlist-count-bar-value {
 		color: hsl(var(--c1));
 		/*text-shadow: 0 0 10px hsla(var(--base-hue),calc(var(--saturation)*50%),80%,30%);*/
-		font-weight: 600;
+		font-weight: var(--theme-font-weight-bold);
 	}
 
 
@@ -2315,7 +2345,7 @@
 	/* % difference */
 	.user-dashboard-comparison {
 		padding-left: initial;
-		font-weight: 600;
+		font-weight: var(--theme-font-weight-bold);
 	}
 	.user-dashboard-comparison:before {
 		background: none;
@@ -2379,7 +2409,7 @@
 	/* tag label */
 	.tag-label {
 		width: 56px;
-		height: 30px;
+		height: 28px;
 		border-radius: 50px;
 		background: hsl(var(--base-hue), calc(var(--saturation)*65%), calc(var(--lightness)*75%));
 		box-shadow: 0 0 0 4px hsl(var(--b5));
@@ -2412,6 +2442,10 @@
 	}
 	.tag-label--listening-time:before {
 		background-image: var(--icon-clock);
+	}
+
+	.listening-report-brick--with-tag-label .listening-report-brick-head {
+		margin-top: 6px;
 	}
 
 	/* highlight */
@@ -2459,7 +2493,7 @@
 		margin-bottom: 5px;
 	}
 	.listening-report-brick-rank {
-		font-weight: 600;
+		font-weight: var(--theme-font-weight-bold);
 	}
 
 	/* me */
@@ -2672,7 +2706,7 @@
 		margin-top: 20px !important;
 	}
 	.home-welcome-header {
-		font-weight: 600;
+		font-weight: var(--theme-font-weight-bold);
 		margin-bottom: 10px;
 		/*background: linear-gradient(180deg, hsl(var(--c1)), hsl(var(--base-hue),calc(var(--saturation)*60%),42%));
 		-webkit-background-clip: text;
@@ -2731,13 +2765,13 @@
 	.modal-subtitle {
 		margin-top: -6px !important;
 		color: hsl(var(--c2)) !important;
-		font-weight: 500 !important;
+		font-weight: var(--theme-font-weight-slight-bold) !important;
 	}
 
 	.dropdown-menu-clickable-button,
 	.js .date-range-picker-button {
 		color: var(--c2) !important;
-		font-weight: 600;
+		font-weight: var(--theme-font-weight-bold);
 		z-index: 1000;
 	}
 	.dropdown-menu-clickable-button:after,
@@ -2811,7 +2845,7 @@
 	/* grr danger */
 	.more-item--delete, .more-item--report {
 		color: hsl(var(--red), calc(var(--saturation)*65%), calc(var(--lightness)*55%)) !important;
-		font-weight: 600;
+		font-weight: var(--theme-font-weight-bold);
 	}
 	.dropdown-menu-clickable-item:is(
 	.more-item--delete, .more-item--report
@@ -2822,7 +2856,7 @@
 	/* special! ^-^ */
 	.more-item--obsession {
 		color: hsl(255, calc(var(--saturation)*65%), calc(var(--lightness)*70%)) !important;
-		font-weight: 600;
+		font-weight: var(--theme-font-weight-bold);
 	}
 	.dropdown-menu-clickable-item:is(
 	.more-item--obsession
@@ -2832,7 +2866,7 @@
 
 	/* common! */
 	.more-item--edit-old {
-		font-weight: 600;
+		font-weight: var(--theme-font-weight-bold);
 	}
 
 	/* icon */
@@ -2952,7 +2986,7 @@
 	}
 
 	.inbox-notifications__item-description strong {
-		font-weight: 500;
+		font-weight: var(--theme-font-weight-slight-bold);
 		color: hsl(var(--l2));
 	}
 
@@ -3072,7 +3106,7 @@
 
 
 	/* tasty */
-	/*.tasteometer-compat-very_low .tasteometer-compat-colour { fill: hsl(var(--d1)); color: hsl(var(--d1)); font-weight: 500; }
+	/*.tasteometer-compat-very_low .tasteometer-compat-colour { fill: hsl(var(--d1)); color: hsl(var(--d1)); font-weight: var(--theme-font-weight-slight-bold); }
 
 
 	/* blur bg experiment */
