@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           bleh
 @namespace      github.com/katelmao/lastfm-bleh
-@version        1.0.7
+@version        1.0.8
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelmao/lastfm-bleh/raw/uwu/lastfm.user.css
@@ -2581,14 +2581,14 @@
 		margin-top: 20px !important;
 	}
 
-	.form-submit {
+	.modal-body .form-submit {
 		display: flex;
 		justify-content: space-around;
 		width: 100% !important;
 		margin-left: initial !important;
 		margin-top: 20px !important;
 	}
-	.form-submit button {
+	.modal-body .form-submit button {
 		flex: 1;
 	}
 
