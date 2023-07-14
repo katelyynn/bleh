@@ -1895,8 +1895,8 @@
 		background-color: hsl(var(--l3));
 		height: 3px !important;
 		border-radius: 50px;
-		left: 15px !important;
-		right: 15px !important;
+		left: 10px !important;
+		right: 10px !important;
 	}
 
 	.library-controls .secondary-nav .secondary-nav-item-link--active,
@@ -2000,6 +2000,9 @@
 	/* nav */
 	.header--overview.header--with-avatar .navlist-items {
 		margin-left: -10px;
+	}
+	.secondary-nav {
+		box-shadow: inset 0 -3px hsl(var(--b4));
 	}
 
 	/* about */
