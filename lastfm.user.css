@@ -240,6 +240,8 @@
 		--purple: 270;
 		--pink: 333;
 
+		--pro-colour: 33;
+
 		/* accents */
 		--accent: var(--base-hue), var(--button-saturation), var(--button-lightness-hover);
 		--accent-raise: var(--base-hue), var(--button-saturation), var(--button-lightness);
@@ -1181,7 +1183,8 @@
 		box-shadow: var(--raise-0);
 	}
 	[title="Last.fm Pro user"] img {
-		filter: drop-shadow(0px 0px 40px hsla(45, 100%, 70%, 20%));
+		/*filter: drop-shadow(0px 0px 40px hsla(45, 100%, 70%, 20%));*/
+		box-shadow: 0px 0px 80px hsla(var(--pro-colour), 100%, 70%, 20%);
 	}
 
 	.shoutbox .no-data-message {
@@ -1224,8 +1227,8 @@
 	/* pro */
 	.avatar-status-dot--subscriber {
 		box-shadow: 0 0 0 3px hsl(var(--b5));
-		background-color: hsl(var(--orange), calc(var(--saturation)*65%), calc(var(--lightness)*75%));
-		border: 5px solid hsl(var(--orange), calc(var(--saturation)*65%), calc(var(--lightness)*70%));
+		background-color: hsl(var(--pro-colour), calc(var(--saturation)*65%), calc(var(--lightness)*75%));
+		border: 5px solid hsl(var(--pro-colour), calc(var(--saturation)*65%), calc(var(--lightness)*70%));
 	}
 
 	/* highlight (from notification) */
@@ -2132,9 +2135,9 @@
 		line-height: 23px;
 	}
 	.label.user-status-subscriber {
-		background-color: hsl(var(--base-hue), calc(var(--saturation)*65%), calc(var(--lightness)*75%)) !important;
+		background-color: hsl(var(--pro-colour), calc(var(--saturation)*65%), calc(var(--lightness)*75%)) !important;
 		color: hsl(var(--b6)) !important;
-		box-shadow: 0px 0px 30px 0px hsla(var(--base-hue), calc(var(--saturation)*65%), calc(var(--lightness)*75%), 80%), 0px 0px 120px 0px hsla(var(--orange), calc(var(--saturation)*65%), calc(var(--lightness)*75%), 60%);
+		box-shadow: 0px 0px 50px hsla(var(--pro-colour), calc(var(--saturation)*65%), calc(var(--lightness)*75%), 80%);
 		/*color: black;
 	   -webkit-text-fill-color: hsl(var(--l3));
 	   -webkit-text-stroke-width: 1px;
