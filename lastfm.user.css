@@ -239,7 +239,7 @@
 		--blue: 210;
 		--purple: 270;
 		--pink: 333;
-
+		
 		--pro-colour: 33;
 
 		/* accents */
@@ -371,11 +371,11 @@
 	[class|="more-link"] a:before {
 		display: none;
 	}
-
+	
 	.library-header a:not(.text-colour-link) {
 		padding: 2px 8px;
 	}
-
+	
 	.content-top-back-link a:before {
 		background: initial;
 		width: initial;
@@ -386,7 +386,7 @@
 	.content-top-back-link a:after {
 		content: ')';
 	}
-
+	
 	.gallery-image-report
 	{
 		padding-left: 28px;
@@ -883,18 +883,18 @@
 	.no-data-message-button):active {
 		transform: scale(0.97);
 	}
-
+	
 	:is([class*="btn-"], [class*="gallery-image-vote"] span):before
 	{
 		filter: invert(var(--theme-icon-invert)) drop-shadow(0px 2px 2px hsl(var(--bb5))) !important;
 	}
-
+	
 	.btn-sm
 	{
 		padding: 3px 20px;
 		font-size: 13px;
 	}
-
+	
 	.btn-cancel,
 	.js-shout-reply-cancel
 	{
@@ -908,11 +908,11 @@
 	.btn-big {
 		min-height: initial;
 	}
-
+	
 	.btn-add:before {
 		background-image: var(--icon-plus);
 	}
-
+	
 	.dropdown-menu-clickable-button:after, .date-range-picker-button-inner:before {
 		background-image: var(--icon-chevron-down) !important;
 		background-position: 0 0 !important;
@@ -999,7 +999,7 @@
 	.chartlist-play {
 		display: none !important;
 	}
-
+	
 	/* move names etc. */
 	.chartlist-name {
 		line-height: 18px;
@@ -1017,20 +1017,20 @@
 		top: 24px;
 		left: 106px;
 	}
-
+	
 	/* index */
 	.chartlist-index {
 		line-height: 21px;
 		color: hsla(var(--c3));
 	}
-
+	
 	/* cover */
 	.chartlist-row .cover-art,
 	.chartlist-row .chartlist-image {
 		min-width: 40px;
 		min-height: 40px;
 	}
-
+	
 	/* border */
 	.chartlist-row:after {
 		display: none;
@@ -1062,14 +1062,14 @@
 	.chartlist-row--highlight:is(:hover) {
 		background-color: hsla(var(--base-hue), calc(var(--saturation)*50%), calc(var(--lightness)*56%), 40%) !important;
 	}
-
+	
 	/* flash! (edit) */
 	/* TODO: not too happy with this but oh well */
 	.chartlist-row--flash {
 		animation-name: kate-flash;
 		animation-duration: 2s;
 	}
-
+	
 	@keyframes kate-flash {
 		from {
 			background-color: hsla(var(--l3),35%);
@@ -1190,6 +1190,20 @@
 	.shoutbox .no-data-message {
 		padding-bottom: 150px;
 	}
+	
+	.shout-container {
+		border-radius: 10px;
+		/* from --active */
+		padding-top: 15px;
+		margin-left: -15px;
+		margin-right: -15px;
+		padding-left: 15px;
+		padding-right: 15px;
+		transition: background-color 0.15s;
+	}
+	.shout-container:not(.shout-container--active):is(:hover, :focus-within) {
+		background-color: hsla(var(--b4),30%);
+	}
 
 	/* dumb n overflow zalgo? */
 	.shout-body {
@@ -1237,7 +1251,6 @@
 		background: linear-gradient(180deg,
 		hsla(var(--base-hue), calc(var(--saturation)*65%), calc(var(--lightness)*65%), 14%) 0%,
 		rgba(0, 0, 0, 0) 100%);
-		border-radius: 10px;
 	}
 	.shout-container--active .shout-body {
 		font-size: 14px !important;
@@ -1409,11 +1422,11 @@
 		height: initial;
 		aspect-ratio: 1 / 1;
 	}
-
+	
 	.grid-items-item-aux-text, .featured-item-artist {
 		color: hsla(var(--c1),85%);
 	}
-
+	
 	/* icon row */
 	.section-with-control h2 {
 		width: fit-content;
@@ -1427,18 +1440,18 @@
 	.section-control {
 		top: 8px !important;
 	}
-
+	
 	.buffer-standard {
 		margin-top: 16px;
 	}
-
+	
 	.share-chart .share-button-profile:before {
 		background-image: var(--icon-share) !important;
 	}
 	.section-settings-toggle:before {
 		background-image: var(--icon-menu) !important;
 	}
-
+	
 	.album-overview-cover-art,
 	.music-featured-item,
 	.track-overview-new .video-preview,
@@ -1448,18 +1461,18 @@
 		border-radius: 4%;
 		overflow: hidden;
 	}
-
+	
 	.track-overview-new .video-preview,
 	.video-preview-upload-cta {
 		border-radius: 10px;
 	}
-
+	
 	.about-artist-listeners,
 	.shout-timestamp,
 	.chartlist-timestamp {
 		color: hsla(var(--c3));
 	}
-
+	
 	.cover-art img,
 	.music-more-tags-tag-wrap,
 	.grid-items-item,
@@ -1499,7 +1512,7 @@
 	.col-main.masonry-left-bottom.buffer-standard .buffer-standard.section-with-separator {
 		display: none;
 	}
-
+	
 	/* similar artists */
 	.similar-items-sidebar-item-aux-text, .similar-items-sidebar-item-regular-tags {
 		margin-top: initial;
@@ -1669,7 +1682,7 @@
 		border-top-left-radius: 10px;
 		border-top-right-radius: 10px;
 	}
-
+	
 	.page-content:has(.content-top-lower-row) {
 		border-bottom-left-radius: 0;
 		border-bottom-right-radius: 0;
@@ -1741,12 +1754,12 @@
 		background-color: hsl(var(--base-hue), var(--button-saturation), var(--button-lightness));
 		box-shadow: var(--raise-0), 0px 0 100px 50px hsla(var(--base-hue), var(--button-saturation), var(--button-lightness), 23%) !important;
 	}
-
+	
 	.gallery-image-preferred-states:before {
 		background-image: var(--icon-artist) !important;
 		filter: invert(var(--theme-icon-invert));
 	}
-
+	
 	button[class|="gallery-image"][class*="vote-up"] .gallery-image-votes:before {
 		background-image: var(--icon-arrow-up) !important;
 	}
@@ -1899,11 +1912,11 @@
 	header .container {
 		box-shadow: none !important;
 	}
-
+	
 	.header--overview {
 		color: hsl(var(--c2));
 	}
-
+	
 	.anhv1 .page-content {
 		padding-top: 20px;
 		padding-bottom: 20px;
@@ -2023,7 +2036,7 @@
 	.obsession-candidates {
 		margin-top: 20px;
 	}
-
+	
 	.obsession-candidate-heading:first-child {
 		margin-top: 0;
 		line-height: 20px;
@@ -2033,11 +2046,11 @@
 		line-height: 20px;
 		color: hsla(var(--c4));
 	}
-
+	
 	.obsession-candidate-inner .btn-sm {
 		margin-top: 8px;
 	}
-
+	
 	/* pro-tip: doesn't exist anymore in this theme */
 	.obsession-search-results ._buffer-medium {
 		display: none;
@@ -2457,7 +2470,7 @@
 	.tag-label--listening-time:before {
 		background-image: var(--icon-clock);
 	}
-
+	
 	.listening-report-brick--with-tag-label .listening-report-brick-head {
 		margin-top: 6px;
 	}
@@ -2632,8 +2645,8 @@
 	.library-controls .navlist-item a:before {
 		display: none;
 	}
-
-
+	
+	
 	/* date picker */
 	.date-range-picker-content {
 		background-color: hsl(var(--b6));
@@ -2647,7 +2660,7 @@
 	.date-range-picker-content:before {
 		display: none;
 	}
-
+	
 	/* selections */
 	.date-range-picker-preset a {
 		color: hsl(var(--c2)) !important;
@@ -2660,7 +2673,7 @@
 	.date-range-picker-preset a:is(:hover, :active, :focus) {
 		background: hsl(var(--b5)) !important;
 	}
-
+	
 	.date-range-picker-form {
 		border: none;
 	}
@@ -2751,7 +2764,7 @@
 	.modal-body {
 		background-color: hsl(var(--b5));
 	}
-
+	
 	.content-form .form-group {
 		margin-top: 12px;
 	}
@@ -2761,7 +2774,7 @@
 	.form-group--edit_all {
 		margin-top: 20px !important;
 	}
-
+	
 	.modal-body .form-submit {
 		display: flex;
 		justify-content: space-around;
@@ -2866,7 +2879,7 @@
 	):is(:hover, :active, :focus) {
 		background: hsla(var(--red), calc(var(--saturation)*65%), calc(var(--lightness)*55%), 8%) !important;
 	}
-
+	
 	/* special! ^-^ */
 	.more-item--obsession {
 		color: hsl(255, calc(var(--saturation)*65%), calc(var(--lightness)*70%)) !important;
@@ -2877,12 +2890,12 @@
 	):is(:hover, :active, :focus) {
 		background: hsla(255, calc(var(--saturation)*65%), calc(var(--lightness)*70%), 9%) !important;
 	}
-
+	
 	/* common! */
 	.more-item--edit-old {
 		font-weight: var(--theme-font-weight-bold);
 	}
-
+	
 	/* icon */
 	.more-item--edit-old:before {
 		background-image: var(--icon-edit);
@@ -3205,20 +3218,20 @@
 	[class*="ad-container"] {
 		display: none !important;
 	}
-
-
-
-
-
-
-
-
-
-
-
-
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	/* custom hardcode covers */
-
+	
 	/* glaive - cypress grove (sessions) */
 	[alt="2face"],
 	[alt="2 face"],
@@ -3235,7 +3248,7 @@
 	{
 		content: url('https://lastfm.freetls.fastly.net/i/u/64s/027e5be7194a4a1337db7b261dc9a3f6.jpg') !important;
 	}
-
+	
 	/* glaive - all dogs go to heaven (sessions) */
 	[alt="a date with karma"],
 	[alt="A Date w Karma (V1)"],
@@ -3260,7 +3273,7 @@
 	{
 		content: url('https://lastfm.freetls.fastly.net/i/u/64s/eaa3636601712185d51ec96fa9fb702f.jpg') !important;
 	}
-
+	
 	/* old dog, new tricks (sessions) */
 	[alt="girl i met (v1)"],
 	[alt="girl i met (v2)"],
@@ -3275,7 +3288,7 @@
 	{
 		content: url('https://lastfm.freetls.fastly.net/i/u/64s/5d178106435f1366e2a7238b02110fa9.jpg') !important;
 	}
-
+	
 	/* glaive - i care so much that i don't care at all (sessions) */
 	[alt="17250 (V1)"],
 	[alt="17250 (V2)"],
@@ -3305,7 +3318,7 @@
 	{
 		content: url('https://lastfm.freetls.fastly.net/i/u/64s/c6e2c29b245f4b23c0e49104efca965d.jpg') !important;
 	}
-
+	
 	/* glaive - something terrible happened at ovine hall book club */
 	[alt="up+down"],
 	[alt="up + down"],
@@ -3321,19 +3334,19 @@
 	{
 		content: url('https://lastfm.freetls.fastly.net/i/u/64s/32e5689c1002e908a9fc64f977174f9e.jpg') !important;
 	}
-
+	
 	/* glaive - cypress grove */
 	[alt="Teen Angst"] /* eyesore */
 	{
 		content: url('https://lastfm.freetls.fastly.net/i/u/64s/3a47b85891a67b78ee43f7f26506958c.jpg') !important;
 	}
-
+	
 	/* glaive - all dogs go to heaven */
 	[alt="all dogs go to heaven (outro)"]
 	{
 		content: url('https://lastfm.freetls.fastly.net/i/u/64s/34a552ef32533002e628e080e0a49f42.jpg') !important;
 	}
-
+	
 	/* glaive - then i'll be happy */
 	[alt="naturale"],
 	[alt="mental anguish"],
@@ -3345,13 +3358,13 @@
 	{
 		content: url('https://lastfm.freetls.fastly.net/i/u/64s/11c76777452a03855fb9c22754c1b6fa.jpg') !important;
 	}
-
+	
 	/* glaive - fuck this town */
 	[alt="fuck this town"]
 	{
 		content: url('https://lastfm.freetls.fastly.net/i/u/64s/56990d4ab5358065657cdf2a7542968e.jpg') !important;
 	}
-
+	
 	/* glaive - cloak n dagger */
 	[alt="cloak n dagger"]
 	{
