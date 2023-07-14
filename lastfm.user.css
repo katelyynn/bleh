@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           bleh
 @namespace      github.com/katelmao/lastfm-bleh
-@version        1.1.0
+@version        1.1.1
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelmao/lastfm-bleh/raw/uwu/lastfm.user.css
@@ -143,6 +143,8 @@
 		--icon-activity: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAsUlEQVQ4T2NkoBAw4tA/CSqeR8h8bAYIATW9hWoUBtLv8BmCzYAkoIa5UE3JQHoeqQZsBmrwgWraAqR9STEA5nyQRhAAGYTXG+hegDkf5HQQAHkFrzdABngDcSdUgxyQ5oXaChICBSayN0Cx44TkpXJ0A0By+4AYFn2w8AB5A2bgZyDjEZQPNgAfIOglQgYQDFRCBoBchzdaiTEAb8IixgC8SZsYA0DewJm5iDUAZ0wBAKgqJKcqVSNEAAAAAElFTkSuQmCC');
 		--icon-purple-activity: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAA2klEQVQ4T6WTvRbBQBCFZ9JrKIOH0YqXwEmp1bHRaXVy8BJSexiSkkZv7CabHBFm1rHd/sy3997ZRfhz4Kf6OMo2Zj1c+jOJ3wDs1KX9QLwCAXhAnanq3ThIAxCvsjEQ7fMixEm48A+/AVR6BIQgLyJIQtUdOQNe5CeFAgg84m3ULFTytfRCgbYi2MBtlA4RcG1l9nVVy9xq5jbMyobtzqC0REDzd4DZO5Xti20eNSDgXZ85FxFpABeQiyUW4BIqCzDqShvf2ioDhIclAqSnLQJyG8zncgJwnXoCqmN6o/weoL0AAAAASUVORK5CYII=');
 		--icon-edit: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAA6UlEQVQ4T2NkIA0oA5VrAPFWmDZG0vQz7AaqdwHiFCCeC9JLrAHeUIvuQG0HuQRsCDEGJAMVzoEaANJ0BMkQH0IGwDQ/ghogB7UZZMgUIM7AZwBM812gQpgXdgHZIEN8YAGJywB0zTeBGtSBmCgDcGkGRR088HBFI0ma0aORZM3IBkQCOcuAGBZgMD9jdTZy4oMF4gqgYDgQWwLxCWiAEdSM7II3QM5tqAEWQHoJtgBDthk5EEG2HoOmMBYgDTIABODpHZtGZAMqgJx2qMBbIL0HiDcC8XJ8GpENYANyioD4IBAfJ0YTshoAFaE7fy0/UusAAAAASUVORK5CYII=');
+		--icon-plus: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAS0lEQVQ4T2NkoBAwUqifgZAB3lALtuKyiJABV6AadUaIAaAA60TzqwqUfwdNvBzIBwcsciBSbAC2gB5psYAtDChOygTzGqG8QNAAAGtYEBGgvu6fAAAAAElFTkSuQmCC');
+		--icon-chevron-down: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAY0lEQVQ4T2NkoBAwUqifYRgaUAEME3UgTsQRNvOB4jeBuAMmjx4GIAUJQLwAiyEwORQ92AIRmyE4DcYVC8gaQK7F5Sq80QgzBGQANi+Bg4FQOgAZAgK4ApWgAQQTKiEXjAQDAEFyEBEIxrInAAAAAElFTkSuQmCC');
 	}
 
 	/* global themes */
@@ -903,6 +905,15 @@
 	.no-data-message-button,
 	.btn-big {
 		min-height: initial;
+	}
+
+	.btn-add:before {
+		background-image: var(--icon-plus);
+	}
+
+	.dropdown-menu-clickable-button:after {
+		background-image: var(--icon-chevron-down);
+		background-position: 0 0;
 	}
 
 	/* song play btn */
@@ -2777,7 +2788,7 @@
 	.dropdown-menu-clickable-button:after,
 	.js .date-range-picker-button .date-range-picker-button-inner:before {
 		opacity: 1 !important;
-		filter: grayscale(1) invert(var(--theme-icon-invert));
+		filter: invert(var(--theme-icon-invert));
 	}
 	.js .date-range-picker-button::before {
 		display: none;
