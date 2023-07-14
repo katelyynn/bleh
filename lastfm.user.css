@@ -911,9 +911,9 @@
 		background-image: var(--icon-plus);
 	}
 
-	.dropdown-menu-clickable-button:after {
-		background-image: var(--icon-chevron-down);
-		background-position: 0 0;
+	.dropdown-menu-clickable-button:after, .date-range-picker-button-inner:before {
+		background-image: var(--icon-chevron-down) !important;
+		background-position: 0 0 !important;
 	}
 
 	/* song play btn */
@@ -1087,7 +1087,7 @@
 	}*/
 	.chartlist-loved {
 		order: -2;
-		opacity: 0.3;
+		opacity: 0.75;
 		transform: scale(0.85);
 	}
 
