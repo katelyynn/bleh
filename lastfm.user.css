@@ -2105,27 +2105,32 @@
 	.tasteometer .tasteometer-compat-colour {
 		fill: hsl(var(--ts-accent), calc(var(--saturation)*65%), calc(var(--lightness)*75%));
 		color: hsl(var(--ts-accent), calc(var(--saturation)*65%), calc(var(--lightness)*75%));
-		font-weight: 700;
+		font-weight: var(--theme-font-weight-bold);
 	}
-	.tasteometer-compat-super .tasteometer-compat-colour {
-		--ts-accent: var(--red);
+	.tasteometer-compat-super {
+		--ts-accent: 275;
 	}
-	.tasteometer-compat-very_high .tasteometer-compat-colour {
-		--ts-accent: var(--orange);
+	.tasteometer-compat-very_high {
+		--ts-accent: 20;
 	}
-	.tasteometer-compat-high .tasteometer-compat-colour {
+	.tasteometer-compat-high {
 		--ts-accent: var(--yellow);
 	}
-	.tasteometer-compat-medium .tasteometer-compat-colour {
+	.tasteometer-compat-medium {
 		--ts-accent: var(--green);
 	}
-	.tasteometer-compat-low .tasteometer-compat-colour {
+	.tasteometer-compat-low {
 		--ts-accent: var(--purple);
 	}
 	.tasteometer-compat-very_low .tasteometer-compat-colour {
-		fill: hsla(var(--c2), 80%) !important;
-		color: hsla(var(--c2), 80%) !important;
+		fill: hsla(var(--c2), 50%) !important;
+		color: hsla(var(--c1), 80%) !important;
 		font-weight: var(--theme-font-weight-slight-bold);
+	}
+
+	.tasteometer .tasteometer-donut {
+		box-shadow: 0 0 70px hsl(var(--ts-accent), calc(var(--saturation)*65%), calc(var(--lightness)*75%));
+		border-radius: 50px;
 	}
 
 	.tasteometer-compat-description {
