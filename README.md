@@ -12,7 +12,7 @@ requires stylus extension!!
 <img src="https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/misc/transparent.png" height="15" width="0px"/>
 
 <h2 align="center">
-	MAIN THEME
+	<a href="https://github.com/katelmao/lastfm-bleh/raw/uwu/lastfm.user.css">MAIN THEME</a>
 </h2>
 this is the main theme and **must** be installed for the theme to work!
 <details>
@@ -22,10 +22,8 @@ this is the main theme and **must** be installed for the theme to work!
 	<img src="https://github.com/katelmao/lastfm-bleh/assets/46572320/2e9b15ff-c839-4a53-ad77-c1f2eb7d4bea">
 </details>
 
-[![](https://github.com/katelmao/lastfm-bleh/assets/46572320/1443296c-f8c4-484f-886e-40f7826db4c6)](https://github.com/katelmao/lastfm-bleh/raw/uwu/lastfm.user.css)
-
 <h2 align="center">
-	AMOLED ADDON
+	<a href="https://github.com/katelmao/lastfm-bleh/raw/uwu/lastfm-amoled.user.css">AMOLED ADDON</a>
 </h2>
 this is an addon for the main theme (you must have the main theme) that makes everything a lot darker and easier on the eyes :3
 <details>
@@ -33,8 +31,6 @@ this is an addon for the main theme (you must have the main theme) that makes ev
 	<img src="https://github.com/katelmao/lastfm-bleh/assets/46572320/1ad0e4e1-c414-4056-9970-f87670d63486">
 	<img src="https://github.com/katelmao/lastfm-bleh/assets/46572320/9c7ad83f-5ca2-4f1c-9b20-3798f6f0f86a">
 </details>
-
-[![](https://github.com/katelmao/lastfm-bleh/assets/46572320/1443296c-f8c4-484f-886e-40f7826db4c6)](https://github.com/katelmao/lastfm-bleh/raw/uwu/lastfm-amoled.user.css)
 
 ---
 
