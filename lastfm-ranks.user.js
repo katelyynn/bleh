@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         bleh (rank colours addon)
 // @namespace    http://last.fm/music/
-// @version      0.1
+// @version      0.1.1
 // @description  bleh!!! ^-^
 // @author       kate
 // @match        https://www.last.fm/music/*
@@ -14,7 +14,7 @@
 (function() {
     'use strict';
 
-    window.onload = setTimeout(start_position,10);
+    window.onload = setTimeout(start_position,100);
 
     function start_position() {
         get_position();
@@ -40,6 +40,6 @@
             } else if (current_rank <= 30) {
                 em_rank.classList.add('rank--gradient','rank--30');
             }
-        } catch(e) {console.error(e)}
+        } catch(e) {}
     }
 })();
