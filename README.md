@@ -9,16 +9,31 @@
 
 requires stylus extension!!
 
-<img src="https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/misc/transparent.png" height="30" width="0px"/>
+<img src="https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/misc/transparent.png" height="15" width="0px"/>
 
-<h1 align="center">
-  <a href="https://github.com/katelmao/lastfm-bleh/raw/uwu/lastfm.user.css">click to install!!</a>
-</h1>
+<h2 align="center">
+	MAIN THEME
+</h2>
+this is the main theme and **must** be installed for the theme to work!
+<details>
+	<summary>screenshots!!</summary>
+	<img src="https://github.com/katelmao/lastfm-bleh/assets/46572320/28f1b428-2111-453e-a074-89091fc9d3d2">
+	<img src="https://github.com/katelmao/lastfm-bleh/assets/46572320/a57ee385-8a24-4324-a53a-6523ec7a5712">
+	<img src="https://github.com/katelmao/lastfm-bleh/assets/46572320/2e9b15ff-c839-4a53-ad77-c1f2eb7d4bea">
+</details>
+<a href="https://github.com/katelmao/lastfm-bleh/raw/uwu/lastfm.user.css"><img src="https://github.com/katelmao/lastfm-bleh/assets/46572320/1443296c-f8c4-484f-886e-40f7826db4c6" height="40"></a>
 
-THERE IS ALSO AN AMOLED THEME: <a href="https://github.com/katelmao/lastfm-bleh/raw/uwu/lastfm-amoled.user.css">click to install addon!!</a> (install along with main theme)
+<h2 align="center">
+	AMOLED ADDON
+</h2>
+this is an addon for the main theme (you must have the main theme) that makes everything a lot darker and easier on the eyes :3
+<details>
+	<summary>screenshots!!</summary>
+	<img src="https://github.com/katelmao/lastfm-bleh/assets/46572320/1ad0e4e1-c414-4056-9970-f87670d63486">
+	<img src="https://github.com/katelmao/lastfm-bleh/assets/46572320/9c7ad83f-5ca2-4f1c-9b20-3798f6f0f86a">
+</details>
+<a href="https://github.com/katelmao/lastfm-bleh/raw/uwu/lastfm-amoled.user.css"><img src="https://github.com/katelmao/lastfm-bleh/assets/46572320/1443296c-f8c4-484f-886e-40f7826db4c6" height="40"></a>
 
-these screenshots use the amoled theme ^-^
+---
 
-![firefox_LT3UBXRuMk](https://github.com/katelmao/lastfm-bleh/assets/46572320/38fc033e-e210-4e20-9cb5-cdca575561d9)
-![firefox_wTEqIhQdgK](https://github.com/katelmao/lastfm-bleh/assets/46572320/564a9651-83fd-4247-b058-ab2edea72b95)
-![firefox_Il133YiQbf](https://github.com/katelmao/lastfm-bleh/assets/46572320/9c7ad83f-5ca2-4f1c-9b20-3798f6f0f86a)
+kate 2023 <3
