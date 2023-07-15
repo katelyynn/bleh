@@ -145,6 +145,8 @@
 		--icon-edit: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAA6UlEQVQ4T2NkIA0oA5VrAPFWmDZG0vQz7AaqdwHiFCCeC9JLrAHeUIvuQG0HuQRsCDEGJAMVzoEaANJ0BMkQH0IGwDQ/ghogB7UZZMgUIM7AZwBM812gQpgXdgHZIEN8YAGJywB0zTeBGtSBmCgDcGkGRR088HBFI0ma0aORZM3IBkQCOcuAGBZgMD9jdTZy4oMF4gqgYDgQWwLxCWiAEdSM7II3QM5tqAEWQHoJtgBDthk5EEG2HoOmMBYgDTIABODpHZtGZAMqgJx2qMBbIL0HiDcC8XJ8GpENYANyioD4IBAfJ0YTshoAFaE7fy0/UusAAAAASUVORK5CYII=');
 		--icon-plus: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAS0lEQVQ4T2NkoBAwUqifgZAB3lALtuKyiJABV6AadUaIAaAA60TzqwqUfwdNvBzIBwcsciBSbAC2gB5psYAtDChOygTzGqG8QNAAAGtYEBGgvu6fAAAAAElFTkSuQmCC');
 		--icon-chevron-down: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAY0lEQVQ4T2NkoBAwUqifYRgaUAEME3UgTsQRNvOB4jeBuAMmjx4GIAUJQLwAiyEwORQ92AIRmyE4DcYVC8gaQK7F5Sq80QgzBGQANi+Bg4FQOgAZAgK4ApWgAQQTKiEXjAQDAEFyEBEIxrInAAAAAElFTkSuQmCC');
+		--icon-love: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABLUlEQVQ4T6WSPUsDQRCGjWBhKVa5HyHGRpsUqWInCtoE9a4U7A1JHTS92PptoaDY2VnYaOPHjxArsbCwEZPnhdljuVtZwYOH2ezMPLc7ucrIP5+K1z/JegtmYBReYNfym8QpGMAj9OFdOSdosD6FKnzAD0j4ZYJxa5B4At6gBbdO8MSPaViDY2taIJ7AJ2zAte2vEo/gGWoSNOEGrmDJimLhkoJFmJegAz2Yg4dYp+VniffQlSCFfdBg2n8U7FCngWcSJPBqxjrxOyIZI38HOkXihqg3b8MFrEQE5+SX7bR9/zvYY1PTPrRrhTwHbK7DGehvzL8DV+wKQpJgzj9BUaKGzDY15DR0upBAPa5BEj1q9oX59X4T+BKtg82hGeRm7+hauqsU86UhlgpiG0OCGzhLmVnBmgAAAABJRU5ErkJggg==');
+		--icon-fill-love: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJjdXJyZW50Q29sb3IiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1oZWFydCI+PHBhdGggZD0iTTE5IDE0YzEuNDktMS40NiAzLTMuMjEgMy01LjVBNS41IDUuNSAwIDAgMCAxNi41IDNjLTEuNzYgMC0zIC41LTQuNSAyLTEuNS0xLjUtMi43NC0yLTQuNS0yQTUuNSA1LjUgMCAwIDAgMiA4LjVjMCAyLjMgMS41IDQuMDUgMyA1LjVsNyA3WiIvPjwvc3ZnPg==');
 	}
 
 	/* global themes */
@@ -335,7 +337,8 @@
 	.mimic-link,
 	.more-items,
 	.btn-cancel,
-	.mimic-link.text-light.js-shout-reply-cancel
+	.mimic-link.text-light.js-shout-reply-cancel,
+	.library-track-metadata .love-button
 	{
 		color: hsl(var(--l3));
 		text-underline-offset: var(--underline-offset);
@@ -358,12 +361,12 @@
 		margin-bottom: 20px;
 		font-weight: var(--theme-font-weight-bold);
 	}
-	:is([class|="more-link"], .video-preview-replace) a, .tags-view-all, .btn-cancel, .js-shout-reply-cancel, .library-header a:not(.text-colour-link), .gallery-image-report, .content-top-back-link a {
+	:is([class|="more-link"], .video-preview-replace) a, .tags-view-all, .btn-cancel, .js-shout-reply-cancel, .library-header a:not(.text-colour-link), .gallery-image-report, .content-top-back-link a, .library-track-metadata .love-button {
 		padding: 6px 14px;
 		border-radius: 50px;
 		line-height: initial;
 	}
-	:is(:is([class|="more-link"], .video-preview-replace) a, .tags-view-all, .btn-cancel, .js-shout-reply-cancel, .library-header a:not(.text-colour-link), .gallery-image-report, .content-top-back-link a):is(:hover,
+	:is(:is([class|="more-link"], .video-preview-replace) a, .tags-view-all, .btn-cancel, .js-shout-reply-cancel, .library-header a:not(.text-colour-link), .gallery-image-report, .content-top-back-link a, .library-track-metadata .love-button):is(:hover,
 	:focus) {
 		background-color: hsla(var(--l3), 15%) !important;
 		text-decoration: none !important;
@@ -2699,6 +2702,73 @@
 	}
 	.library-controls .navlist-item a:before {
 		display: none;
+	}
+
+
+	/* links */
+	.library-header {
+		position: relative;
+	}
+
+	/* go to track page */
+	.library-header a:not(.text-colour-link)[href^="/music/"] {
+		padding: 10px;
+		display: inline-flex;
+		font-size: 0;
+		position: absolute;
+		right: calc(36px + 2px);
+		z-index: 10;
+	}
+	.library-header a:not(.text-colour-link)[href^="/music/"]:before {
+		content: '';
+		background-image: var(--icon-track);
+		width: 16px;
+		height: 16px;
+		filter: invert(1);
+	}
+
+	/* delete track from library */
+	.library-header a:not(.text-colour-link)[href^="/user/"] {
+		padding: 10px;
+		display: inline-flex;
+		font-size: 0;
+		position: absolute;
+		right: 0;
+		z-index: 10;
+	}
+	.library-header a:not(.text-colour-link)[href^="/user/"]:before {
+		content: '';
+		background-image: var(--icon-red-delete);
+		width: 16px;
+		height: 16px;
+	}
+
+	/* love */
+	.library-track-metadata .love-button {
+		padding: 10px;
+		display: inline-flex;
+		font-size: 0;
+		position: absolute;
+		right: calc((36px * 2) + 2px + 2px);
+		bottom: 18px;
+		z-index: 10;
+		width: initial !important;
+		height: initial !important;
+	}
+	.library-track-metadata .love-button:before {
+		content: '';
+		background-image: var(--icon-love) !important;
+		width: 16px;
+		height: 16px;
+		filter: invert(1);
+		opacity: 1 !important;
+		background-position: 0 0 !important;
+		background-size: 16px !important;
+		margin: initial !important;
+		position: static !important;
+	}
+	.library-track-metadata .love-button--loved:before {
+		background-image: var(--icon-fill-love) !important;
 	}
 
 
