@@ -2724,7 +2724,7 @@
 		background-image: var(--icon-track);
 		width: 16px;
 		height: 16px;
-		filter: invert(1);
+		filter: invert(var(--theme-icon-invert));
 	}
 
 	/* delete track from library */
@@ -2760,7 +2760,7 @@
 		background-image: var(--icon-love) !important;
 		width: 16px;
 		height: 16px;
-		filter: invert(1);
+		filter: invert(var(--theme-icon-invert));
 		opacity: 1 !important;
 		background-position: 0 0 !important;
 		background-size: 16px !important;
