@@ -21,7 +21,8 @@ this is the main theme and **must** be installed for the theme to work!
 	<img src="https://github.com/katelmao/lastfm-bleh/assets/46572320/a57ee385-8a24-4324-a53a-6523ec7a5712">
 	<img src="https://github.com/katelmao/lastfm-bleh/assets/46572320/2e9b15ff-c839-4a53-ad77-c1f2eb7d4bea">
 </details>
-<a href="https://github.com/katelmao/lastfm-bleh/raw/uwu/lastfm.user.css"><img src="https://github.com/katelmao/lastfm-bleh/assets/46572320/1443296c-f8c4-484f-886e-40f7826db4c6" height="40"></a>
+
+[![](https://github.com/katelmao/lastfm-bleh/assets/46572320/1443296c-f8c4-484f-886e-40f7826db4c6)](https://github.com/katelmao/lastfm-bleh/raw/uwu/lastfm.user.css)
 
 <h2 align="center">
 	AMOLED ADDON
@@ -32,7 +33,8 @@ this is an addon for the main theme (you must have the main theme) that makes ev
 	<img src="https://github.com/katelmao/lastfm-bleh/assets/46572320/1ad0e4e1-c414-4056-9970-f87670d63486">
 	<img src="https://github.com/katelmao/lastfm-bleh/assets/46572320/9c7ad83f-5ca2-4f1c-9b20-3798f6f0f86a">
 </details>
-<a href="https://github.com/katelmao/lastfm-bleh/raw/uwu/lastfm-amoled.user.css"><img src="https://github.com/katelmao/lastfm-bleh/assets/46572320/1443296c-f8c4-484f-886e-40f7826db4c6" height="40"></a>
+
+[![](https://github.com/katelmao/lastfm-bleh/assets/46572320/1443296c-f8c4-484f-886e-40f7826db4c6)](https://github.com/katelmao/lastfm-bleh/raw/uwu/lastfm-amoled.user.css)
 
 ---
 
