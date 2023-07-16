@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           bleh
 @namespace      github.com/katelmao/lastfm-bleh
-@version        1.1.5
+@version        1.1.6
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelmao/lastfm-bleh/raw/uwu/lastfm.user.css
@@ -1054,7 +1054,25 @@
 	.chartlist.chartlist--with-artist:not(.chartlist--with-bar) .chartlist-row .chartlist-artist {
 		position: absolute;
 		top: 24px;
-		left: 106px;
+		left: 107px;
+	}
+
+	.chartlist:not(.chartlist--with-image) .chartlist-row .chartlist-name {
+		bottom: 8px !important;
+	}
+	.chartlist:not(.chartlist--with-image) .chartlist-row .chartlist-artist {
+		top: 20px !important;
+		left: 52px !important;
+	}
+
+	.chartlist.chartlist--with-bar.chartlist--with-image .chartlist-row .chartlist-name {
+		position: relative;
+		top: 2px;
+	}
+	.chartlist.chartlist--with-bar.chartlist--with-image .chartlist-row .chartlist-artist {
+		position: absolute;
+		top: 14px;
+		left: 130px !important;
 	}
 
 	/* index */
@@ -1573,7 +1591,8 @@
 	.music-more-tags-tag-wrap,
 	.grid-items-item,
 	.obsession-candidate-image,
-	.gallery-preview-image, .gallery-preview-more
+	.gallery-preview-image, .gallery-preview-more,
+	.playlist-image img
 	{
 		border: 1px solid hsla(var(--b4), 30%);
 		box-shadow: 0 1px 1px rgba(0, 0, 0, .01), 0 2px 2px rgba(0, 0, 0, .01), 0 4px 4px rgba(0, 0, 0, .02), 0 8px 8px rgba(0, 0, 0, .03), 0 14px 14px rgba(0, 0, 0, .03);
@@ -3318,6 +3337,25 @@
 		z-index: 10;
 		top: 6px;
 		background: linear-gradient(90deg, rgba(0,0,0,0) 0%, hsla(var(--b5),70%) 100%);
+	}
+
+
+
+	/* playlists */
+
+	/* create new */
+	.playlisting-create-option {
+		background-color: hsl(var(--b4));
+		box-shadow: none !important;
+		border: none !important;
+		border-radius: 10px;
+		transition: background-color 0.15s, transform 0.15s;
+	}
+	.playlisting-create-option:is(:hover, :active, :focus) {
+		background-color: hsl(var(--b3));
+	}
+	.playlisting-create-option:active {
+		transform: scale(0.97);
 	}
 
 
