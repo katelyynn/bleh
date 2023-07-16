@@ -3699,7 +3699,7 @@
 	{
 		--this-cover: var(--cover-bipolar);
 		content: var(--this-cover);
-		background-image: var(--this-cover);
+		background-image: var(--this-cover) !important;
 	}
 
 	/* glaive - as if */
@@ -3708,7 +3708,7 @@
 	{
 		--this-cover: var(--cover-as-if);
 		content: var(--this-cover);
-		background-image: var(--this-cover);
+		background-image: var(--this-cover) !important;
 	}
 
 	/* glaive - 17250 */
@@ -3717,7 +3717,7 @@
 	{
 		--this-cover: var(--cover-icsm);
 		content: var(--this-cover);
-		background-image: var(--this-cover);
+		background-image: var(--this-cover) !important;
 	}
 
 	/* glaive - pardee urgent care */
@@ -3726,7 +3726,7 @@
 	{
 		--this-cover: var(--cover-pardee);
 		content: var(--this-cover);
-		background-image: var(--this-cover);
+		background-image: var(--this-cover) !important;
 	}
 
 	/* glaive - the car */
@@ -3735,7 +3735,7 @@
 	{
 		--this-cover: var(--cover-car);
 		content: var(--this-cover);
-		background-image: var(--this-cover);
+		background-image: var(--this-cover) !important;
 	}
 
 	/* glaive - i care so much that i dont care at all */
@@ -3743,7 +3743,7 @@
 	{
 		--this-cover: var(--cover-care);
 		content: var(--this-cover);
-		background-image: var(--this-cover);
+		background-image: var(--this-cover) !important;
 	}
 
 	/* glaive - all i do is try my best */
@@ -3752,7 +3752,7 @@
 	{
 		--this-cover: var(--cover-disney);
 		content: var(--this-cover);
-		background-image: var(--this-cover);
+		background-image: var(--this-cover) !important;
 	}
 
 	/* glaive - im nothing thats all i am */
@@ -3761,7 +3761,7 @@
 	{
 		--this-cover: var(--cover-stride);
 		content: var(--this-cover);
-		background-image: var(--this-cover);
+		background-image: var(--this-cover) !important;
 	}
 
 	/* glaive - the prom */
@@ -3770,7 +3770,7 @@
 	{
 		--this-cover: var(--cover-prom);
 		content: var(--this-cover);
-		background-image: var(--this-cover);
+		background-image: var(--this-cover) !important;
 	}
 
 	/* glaive - tiziana */
@@ -3779,7 +3779,7 @@
 	{
 		--this-cover: var(--cover-tiziana);
 		content: var(--this-cover);
-		background-image: var(--this-cover);
+		background-image: var(--this-cover) !important;
 	}
 
 	/* glaive - ive made worse mistakes */
@@ -3788,7 +3788,7 @@
 	{
 		--this-cover: var(--cover-mistakes);
 		content: var(--this-cover);
-		background-image: var(--this-cover);
+		background-image: var(--this-cover) !important;
 	}
 
 	/* glaive - the good the bad the olga */
@@ -3797,7 +3797,7 @@
 	{
 		--this-cover: var(--cover-olga);
 		content: var(--this-cover);
-		background-image: var(--this-cover);
+		background-image: var(--this-cover) !important;
 	}
 
 	/* glaive - 2005 barbie doll */
@@ -3806,6 +3806,6 @@
 	{
 		--this-cover: var(--cover-2005);
 		content: var(--this-cover);
-		background-image: var(--this-cover);
+		background-image: var(--this-cover) !important;
 	}
 }
