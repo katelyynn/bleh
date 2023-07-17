@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           bleh
 @namespace      github.com/katelmao/lastfm-bleh
-@version        1.1.6
+@version        1.1.7
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelmao/lastfm-bleh/raw/uwu/lastfm.user.css
@@ -423,7 +423,7 @@
 	/* override backgrounds */
 	.main-content,
 	.content-top-has-nav .content-top,
-	.two-column-layout .content-top,
+	/*.two-column-layout .content-top,*/
 	.user-dashboard-layout .container,
 	.user-dashboard-layout .main-content,
 	.sidebar-wrapper {
@@ -433,6 +433,12 @@
 	.content-top-has-nav .content-top::after,
 	.two-column-layout .content-top::after {
 		border-color: hsl(var(--b6));
+	}
+
+	.two-column-layout .content-top
+	{
+		background: transparent;
+		border: none !important;
 	}
 
 	/* TODO: move this and make it look better */
@@ -1186,6 +1192,41 @@
 		display: flex;
 		justify-content: center;
 		align-items: start !important;
+	}
+
+
+	/* going / interested */
+	.attendee-summary-users {
+		margin: 20px -5px;
+	}
+
+	.attendee-summary-user {
+		--w: 40px;
+		height: var(--w);
+		background-color: hsl(var(--b4));
+		padding-left: 0;
+		margin: 0 5px;
+		border-radius: 50px;
+		width: fit-content;
+		transition: background-color 0.15s;
+	}
+	.attendee-summary-user:is(:hover, :active, :focus) {
+		background-color: hsl(var(--b3));
+	}
+
+	.attendee-summary-user .avatar {
+		width: var(--w);
+		height: var(--w);
+	}
+
+	.attendee-summary-user-inner-wrap {
+		display: flex;
+		align-items: center;
+		height: var(--w);
+	}
+	.attendee-summary-user-inner-wrap .attendee-summary-user-link {
+		position: static;
+		font-weight: var(--theme-font-weight-slight-bold);
 	}
 
 
@@ -2053,13 +2094,19 @@
 		height: calc(152px + var(--header-background-height) + 200px);
 		margin-top: -60px;
 	}
+
 	.adaptive-skin-container, .header--sub-page {
 		z-index: 100;
 		margin-top: -60px;
 	}
+	header .container {
+		z-index: 200 !important;
+		position: relative;
+	}
 	.header--sub-page {
 		margin-bottom: 80px;
 	}
+
 	.namespace--user_overview .adaptive-skin-container {
 		margin-top: -10px;
 	}
