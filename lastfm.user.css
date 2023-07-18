@@ -2422,7 +2422,7 @@
 	[data-toggle-button-current-state="followed"] .header-follower-btn:before {
 		box-shadow: 0 0 20px hsl(var(--b6));
 	}
-	[data-toggle-button-current-state="followed"] .user-list-follower-btn {
+	.user-list-follower-btn {
 		transform: scale(0.8);
 		box-shadow: 0 0 14px hsl(var(--b6));
 	}
@@ -2431,11 +2431,24 @@
 	[data-toggle-button-current-state="followed"] .user-list-follower-btn
 	{
 		background-color: hsl(var(--base-hue), calc(var(--saturation)*70%), calc(var(--lightness)*65%));
+		transition: background-color 0.15s;
 	}
 	[data-toggle-button-current-state="followed"] .header-follower-btn:hover:before,
 	body:not(.js-focus-visible) body:not([data-whatinput="touch"]) [data-toggle-button-current-state="followed"] .user-list-follower-btn:hover:focus, body:not([data-whatinput="touch"]) [data-toggle-button-current-state="followed"] .user-list-follower-btn:hover .focus-visible, body:not([data-whatinput="touch"]) [data-toggle-button-current-state="followed"] .user-list-follower-btn:hover:hover
 	{
 		background-color: hsl(0, calc(var(--saturation)*70%), calc(var(--lightness)*45%));
+	}
+
+	[data-toggle-button-current-state="unfollowed"] .header-follower-btn:before,
+	[data-toggle-button-current-state="unfollowed"] .user-list-follower-btn
+	{
+		background-color: hsl(var(--b3));
+		transition: background-color 0.15s;
+	}
+	[data-toggle-button-current-state="unfollowed"] .header-follower-btn:hover:before,
+	body:not(.js-focus-visible) body:not([data-whatinput="touch"]) [data-toggle-button-current-state="unfollowed"] .user-list-follower-btn:focus, body:not([data-whatinput="touch"]) [data-toggle-button-current-state="unfollowed"] .user-list-follower-btn .focus-visible, body:not([data-whatinput="touch"]) [data-toggle-button-current-state="unfollowed"] .user-list-follower-btn:hover
+	{
+		background-color: hsl(var(--base-hue), calc(var(--saturation)*30%), calc(var(--lightness)*45%));
 	}
 
 	.about-me-sidebar p {
