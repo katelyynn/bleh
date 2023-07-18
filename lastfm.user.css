@@ -1622,7 +1622,7 @@
 	}
 
 	.buffer-standard {
-		margin-top: 16px;
+		/*margin-top: 16px;*/
 	}
 
 	.share-chart .share-button-profile:before {
@@ -3380,7 +3380,7 @@
 	.header-info-secondary .header-metadata-item {
 		padding: 7px 14px;
 		border-radius: 7px;
-		background-color: hsla(var(--b5),20%);
+		background-color: hsla(var(--b4),30%);
 		/*border: 1px solid hsl(var(--b2));*/
 	}
 	.personal-stats-item {
@@ -3408,7 +3408,7 @@
 		padding: 14px 14px;
 		border-radius: 7px;
 		/*border: 1px solid hsl(var(--b4));*/
-		background-color: hsla(var(--b4),30%);
+		background-color: hsla(var(--b4),40%);
 	}
 	.personal-stats-item {
 		margin-left: 0;
@@ -3818,7 +3818,7 @@
 	) .video-preview
 	{
 		position: initial !important;
-		margin-top: -150px;
+		margin-top: calc(-150px - 64px);
 		border-radius: 4% !important;
 	}
 
@@ -3966,6 +3966,26 @@
 		filter: blur(5px);
 		opacity: 0;
 		transition: opacity 1s;
+	}
+
+
+
+	/* 404 / 500 */
+	.error-page-marvin a {
+		display: none;
+	}
+	.error-page-marvin:after {
+		content: '(>w<)';
+		font-size: 90px;
+		font-weight: var(--theme-font-weight-bold);
+		color: hsl(var(--c1));
+		position: relative;
+		right: 30px;
+	}
+
+	[data-tealium-data*='"pageType": "error'] + div .page-content {
+		margin-top: 34vh;
+		margin-bottom: 23vh;
 	}
 }
 
