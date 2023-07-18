@@ -148,6 +148,11 @@
 		--icon-chevron-down: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAY0lEQVQ4T2NkoBAwUqifYRgaUAEME3UgTsQRNvOB4jeBuAMmjx4GIAUJQLwAiyEwORQ92AIRmyE4DcYVC8gaQK7F5Sq80QgzBGQANi+Bg4FQOgAZAgK4ApWgAQQTKiEXjAQDAEFyEBEIxrInAAAAAElFTkSuQmCC');
 		--icon-love: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABLUlEQVQ4T6WSPUsDQRCGjWBhKVa5HyHGRpsUqWInCtoE9a4U7A1JHTS92PptoaDY2VnYaOPHjxArsbCwEZPnhdljuVtZwYOH2ezMPLc7ucrIP5+K1z/JegtmYBReYNfym8QpGMAj9OFdOSdosD6FKnzAD0j4ZYJxa5B4At6gBbdO8MSPaViDY2taIJ7AJ2zAte2vEo/gGWoSNOEGrmDJimLhkoJFmJegAz2Yg4dYp+VniffQlSCFfdBg2n8U7FCngWcSJPBqxjrxOyIZI38HOkXihqg3b8MFrEQE5+SX7bR9/zvYY1PTPrRrhTwHbK7DGehvzL8DV+wKQpJgzj9BUaKGzDY15DR0upBAPa5BEj1q9oX59X4T+BKtg82hGeRm7+hauqsU86UhlgpiG0OCGzhLmVnBmgAAAABJRU5ErkJggg==');
 		--icon-fill-love: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJjdXJyZW50Q29sb3IiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1oZWFydCI+PHBhdGggZD0iTTE5IDE0YzEuNDktMS40NiAzLTMuMjEgMy01LjVBNS41IDUuNSAwIDAgMCAxNi41IDNjLTEuNzYgMC0zIC41LTQuNSAyLTEuNS0xLjUtMi43NC0yLTQuNS0yQTUuNSA1LjUgMCAwIDAgMiA4LjVjMCAyLjMgMS41IDQuMDUgMyA1LjVsNyA3WiIvPjwvc3ZnPg==');
+
+		--icon-24-calendar: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAr0lEQVRIS2NkoDFgJGD+Uqh8NA51hOQZCFnwH2owLnWE5DEsyAEamATEhmSG3HmgvnlAPAWmH9llIMMnk2kwurZcmCXIFpyDurwISPdDdRAKAnT5MqC+TiAG+cQIZAayBdgMIxSJ2ORRzCFkATkhNvAWkONqbHrAoYMtiGhuAaHMR8gBAx8Hoz4YjQNCqZRh4IIIVlyXA93YRdCd2BXgLa5pXuGA3ETTKpPMUMGvDQAZjjQZDZXhogAAAABJRU5ErkJggg==');
+		--icon-24-map-pin: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAACXklEQVRIS7WVS0hXQRSHE9q0MOhNgQm2KKjEChMyNVpIb0pIatsDyp0pFKSmUqBQLS3osVUKLNIetIieQkUvKqiFLQqMrFzUok2Q30/OyGWaufe26MDHzH/mzPmdMzN3/gVT/rMV5Ii/BZ9yWAmrzP8Z7XN4CoNpMdIECll4GvZlJHGe+UPwM+QXE9iMcw8shN/QZRkrc5kqUUVHYCp8hAa47ouEBJT5Gwt+k7YR3keqWGJVbjSRZX4lIYFzti0Kvilje9z0DToS0XbtT67xBXSgA7Yty2nfmfMi2lOw2n4/oW2CYfu92KrWdm2FyYP3BTqYbIPj0JoI/pr+NK+aX/xWEk7Ere1k7Jjz9QWUvaqogyvmpHa7BdqRGFNVV8GNaYu0VcpeVUyYLzDC2HwoBt0MmRsrpa9KZOq/gnZQ5rIZMAafYUFM4BsTs2AejOYQSAabi/8X+A6zYwKPmFgD1fDAnJJbpK2T9YO/RVWM3YchqIwJXGBiD3SDPiKZAuU5ZH2Mh+Ei7I0JSPkhfAWV7EwiJ6HCBh7TNoO7QRrWls6BtaCdmLDQhyYBCSWrSGgFuy57BZbApIUEapi9ax7baHV100xX8po5rKO9lyWg+aOgj+0TlIGuX8hmMvgSiqAFTvhOac+1e1/6WLQ7ItDL+C6IvltpAiUsfAHT4QzoOU6anvOD8ANWwIdQEln/aLUsugXyO2sBFUeCB+APbIDbkQqDt8j31UHrzZHIJZust+B6o9wBBzWyKnCL1tO5DDpUmQ59J9yJZe7G8wrIf6lVor4yf5sVXPP/IpAn3l8+41wIeRmop7dIAAAAAElFTkSuQmCC');
+		--icon-24-map: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAA1klEQVRIS2NkoDFgpLH5DIQsSAQ6oA/qiCIgPZ+Ag0DqQereAbE9SC0uC2AKddAMvAK1EN0ibOrBZqNbgK4QZCDMEnQ2ss+wqcGwYA/QMGeoi5Fd+h8qBtJAjM+Q1aP4ACaRhBbWKBqgloEsmgdl41WPHETYDAKZQZH4qAXYUiLBSEZPuqNxAC8MKAoKpCJlhMUB0UUCliIEo7CjpFBDLwT3Ai10Qc8kMAtILZaxqYfXF9jKIpDFpFQs+NSjFNcHgSqFcNRY6DUl0VUpoToZ3WCS+TS3AABxHmIZhenw0AAAAABJRU5ErkJggg==');
+		--icon-24-url: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAABAklEQVRIS2NkoDFgpLH5DKMWEAzhAQmiAqCznIHYGIgloU5cBqSj0Zy7FMiPgoo9B9JngXgvEE9AVofsA3mgxDQg9sLib0IWIGvZDuRkAvFDkCCyBduAfE8gfgTEK4B4KpRNMJyBCuSAOBuII6BskFneyBaAgqUfaqAVkH5KjKlY1EgDxY5BLSkEBRfMB5uBHB8g7gLicjINh2nrBDLKgHgLEPvCLHgG5IAiFBQPoCCCAeSIxGUvevyAggsU/qCIl6KbBTQPIppHMih8twIxKA9QI5mC8gI4P6FntOlAMVBeQAekZDRQHsiCRjTW4ppmRQWFyR+79gEpTanqk1EfEAxOALYyQBnYZEimAAAAAElFTkSuQmCC');
 	}
 
 	/* global themes */
@@ -514,7 +519,6 @@
 	.catalogue-overview-similar-artists-item-regular-tags,
 	.shout-reply,
 	.shout-action,
-	.featured-item-heading,
 	.inbox-notifications .inbox-notifications__item-timestamp,
 	dt,
 	.events-list-sidebar .events-list-item-attendees,
@@ -1196,6 +1200,27 @@
 		align-items: start !important;
 	}
 
+	/* icons */
+	.event-detail {
+		min-height: 24px;
+		justify-content: center;
+	}
+	.event-detail-heading-date:before {
+		background-image: var(--icon-24-calendar);
+		filter: invert(var(--theme-icon-invert));
+		opacity: 0.75;
+	}
+	.event-detail-heading-location:before {
+		background-image: var(--icon-24-map);
+		filter: invert(var(--theme-icon-invert));
+		opacity: 0.75;
+	}
+	.event-detail-heading-link:before {
+		background-image: var(--icon-24-url);
+		filter: invert(var(--theme-icon-invert));
+		opacity: 0.75;
+	}
+
 
 	/* going / interested */
 	.attendee-summary-users {
@@ -1305,7 +1330,14 @@
 		font-size: 14px;
 		padding: 10px 40px;
 		border-radius: 10px;
-		background: hsla(var(--red), calc(var(--saturation)*65%), calc(var(--lightness)*55%), 8%) !important;
+		background: hsla(var(--base-hue), calc(var(--saturation)*65%), calc(var(--lightness)*55%), 8%) !important;
+	}
+	.event-status--cancelled {
+		background: hsla(var(--red), calc(var(--saturation)*65%), calc(var(--lightness)*65%), 8%) !important;
+		color: hsl(var(--red), calc(var(--saturation)*65%), calc(var(--lightness)*55%)) !important;
+	}
+	.event-status--cancelled:before {
+		background-image: var(--icon-red-delete);
 	}
 
 
@@ -2134,6 +2166,29 @@
 		margin-bottom: 80px;
 	}
 
+
+	/* featured item (obsession) */
+	.featured-item-heading a {
+		text-transform: initial;
+	}
+	.featured-item-name {
+		color: hsl(var(--c2));
+		font-weight: var(--theme-font-weight);
+	}
+	.featured-item-artist {
+		color: hsl(var(--c3));
+	}
+
+	/*.header-featured-track {
+		position: relative;
+		top: 200px;
+		z-index: 2000 !important;
+	}
+	.namespace--user_overview .col-sidebar {
+		margin-top: 90px;
+	}*/
+
+
 	.namespace--user_overview .adaptive-skin-container {
 		margin-top: -10px;
 	}
@@ -2457,7 +2512,9 @@
 
 	h2:not(:is(.modal-title, .user-dashboard-section-header)),
 	.artist-header-featured-items-item-header,
-	.your-progress h4 {
+	.your-progress h4,
+	.featured-item-heading a
+	{
 		/*color: var(--text-alt);*/
 		/*font-size: 12px !important;*/
 		font-weight: 700;
@@ -2474,7 +2531,9 @@
 	h1,
 	h2,
 	h3,
-	.header-metadata .header-metadata-display {
+	.header-metadata .header-metadata-display,
+	.featured-item-heading a
+	{
 		color: hsl(var(--c1));
 		position: relative;
 		z-index: 100;
