@@ -586,7 +586,9 @@
 	{
 		text-transform: lowercase;
 	}
-	.dropdown-menu-clickable-item {
+	.dropdown-menu-clickable-item,
+	[class|="more-link"] a
+	{
 		text-transform: initial !important;
 	}
 
@@ -2252,10 +2254,28 @@
 	}
 	.user-list-about-me {
 		color: hsl(var(--c3));
+		padding-right: 80px;
 	}
 	/* artists */
 	.user-list-shared-artists {
 		border: none;
+	}
+
+	/* follows you! */
+	.user-list-inner-wrap {
+		position: relative;
+	}
+	.user-list-inner-wrap :is(.user-list-description, .user-list-about-me) {
+		margin-top: 3px;
+	}
+	.user-list-inner-wrap .user-follow {
+		position: absolute;
+		top: 0;
+		right: 0;
+		padding-top: 0;
+		padding-bottom: 0;
+		height: initial;
+		min-height: initial;
 	}
 
 
@@ -2398,11 +2418,11 @@
 		transform: scale(0.9);
 	}
 	[data-toggle-button-current-state="followed"] .header-follower-btn:before {
-		box-shadow: 0 0 0 10px hsl(var(--b6));
+		box-shadow: 0 0 20px hsl(var(--b6));
 	}
 	[data-toggle-button-current-state="followed"] .user-list-follower-btn {
 		transform: scale(0.8);
-		box-shadow: 0 0 0 6px hsl(var(--b6));
+		box-shadow: 0 0 14px hsl(var(--b6));
 	}
 
 	[data-toggle-button-current-state="followed"] .header-follower-btn:before,
