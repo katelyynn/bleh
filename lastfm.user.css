@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           bleh
 @namespace      github.com/katelmao/lastfm-bleh
-@version        1.1.9
+@version        1.2.0
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelmao/lastfm-bleh/raw/uwu/lastfm.user.css
@@ -201,11 +201,11 @@
 		--text-select: hsla(var(--base-hue), calc(var(--saturation)*100%), calc(var(--lightness)*70%), 30%);
 
 		/* b1-6 */
-		--b1: var(--base-hue), calc(var(--saturation)*10%), calc(var(--lightness)*33%);
-		--b2: var(--base-hue), calc(var(--saturation)*9%), calc(var(--lightness)*28%);
-		--b3: var(--base-hue), calc(var(--saturation)*8%), calc(var(--lightness)*23%);
+		--b1: var(--base-hue), calc(var(--saturation)*10%), calc(var(--lightness)*40%);
+		--b2: var(--base-hue), calc(var(--saturation)*9%), calc(var(--lightness)*30%);
+		--b3: var(--base-hue), calc(var(--saturation)*8%), calc(var(--lightness)*25%);
 		/* card hover */
-		--b4: var(--base-hue), calc(var(--saturation)*6%), calc(var(--lightness)*19%);
+		--b4: var(--base-hue), calc(var(--saturation)*6%), calc(var(--lightness)*20%);
 		/* card */
 		--b5: var(--base-hue), calc(var(--saturation)*4%), calc(var(--lightness)*15%);
 		/* content */
@@ -221,14 +221,14 @@
 		/* header */
 		--d6: var(--base-hue), calc(var(--saturation)*20%), calc(var(--lightness)*10%);
 		/* l1-4 */
-		--l1: var(--base-hue), calc(var(--saturation)*65%), calc(var(--lightness)*84%);
-		--l2: var(--base-hue), calc(var(--saturation)*65%), calc(var(--lightness)*79%);
-		--l3: var(--base-hue), calc(var(--saturation)*65%), calc(var(--lightness)*74%);
+		--l1: var(--base-hue), calc(var(--saturation)*50%), calc(var(--lightness)*75%);
+		--l2: var(--base-hue), calc(var(--saturation)*50%), calc(var(--lightness)*70%);
+		--l3: var(--base-hue), calc(var(--saturation)*50%), calc(var(--lightness)*65%);
 		/* link */
-		--l4: var(--base-hue), calc(var(--saturation)*50%), calc(var(--lightness)*56%);
+		--l4: var(--base-hue), calc(var(--saturation)*50%), calc(var(--lightness)*50%);
 		/* c1-2 */
 		--c1: var(--base-hue), calc(var(--saturation)*40%), calc(var(--lightness)*100%);
-		--c2: var(--base-hue), calc(var(--saturation)*40%), calc(var(--lightness)*88%);
+		--c2: var(--base-hue), calc(var(--saturation)*40%), calc(var(--lightness)*90%);
 		/* subcontent */
 		--c3: var(--base-hue), calc(var(--saturation)*10%), calc(var(--lightness)*60%);
 		--c4: var(--c2), 75%;
@@ -665,6 +665,7 @@
 		border: 2px solid transparent !important;
 		border-radius: 7px;
 		color: hsl(var(--c2));
+		caret-color: hsl(var(--l1));
 	}
 	.library-search-input input {
 		background: transparent;
@@ -676,7 +677,11 @@
 	.library-search-form[data-search-state="loaded"] > .library-search-input, .library-search-input:focus-within
 	{
 		box-shadow: none !important;
-		border-color: hsla(var(--l1),10%) !important;
+		border-color: hsl(var(--l1)) !important;
+	}
+
+	.form-group:focus-within label {
+		color: hsl(var(--l1)) !important;
 	}
 
 	.library-search-results {
@@ -1579,6 +1584,10 @@
 	}
 
 
+	/* related */
+
+
+
 	/* links */
 	.resource-external-link,
 	.play-this-track-playlink {
@@ -1690,12 +1699,20 @@
 	.grid-items-item,
 	.obsession-candidate-image,
 	.gallery-preview-image, .gallery-preview-more,
-	.playlist-image img
+	.playlist-image img,
+	.catalogue-overview-similar-artists-full-width-item-wrap img,
+	.artist-similar-artists-sidebar-item-wrap img
 	{
 		border: 1px solid hsla(var(--b4), 30%);
 		box-shadow: 0 1px 1px rgba(0, 0, 0, .01), 0 2px 2px rgba(0, 0, 0, .01), 0 4px 4px rgba(0, 0, 0, .02), 0 8px 8px rgba(0, 0, 0, .03), 0 14px 14px rgba(0, 0, 0, .03);
 		border-radius: 4%;
 		overflow: hidden;
+	}
+	.avatar-shape, .avatar:after {
+		border-radius: 4%;
+	}
+	.avatar:after, .cover-art:after, .image-list-item:after, .video-thumbnail:after {
+		box-shadow: none !important;
 	}
 
 	.gallery-preview-more-overlay {
@@ -2214,6 +2231,19 @@
 		background-color: hsla(var(--base-hue),calc(var(--saturation)*100%),8%,35%);*/
 		background-image: linear-gradient(180deg, hsla(var(--base-hue), calc(var(--saturation)*0%), calc(var(--lightness)*6%), 85%) 0%, hsl(var(--b6)) 100%) !important;
 		backdrop-filter: blur(10px);
+	}
+
+
+	.tooltip-dark {
+		background: hsl(var(--b6));
+		border: 1px solid hsl(var(--b3));
+		box-shadow: var(--raise-1) !important;
+		color: hsl(var(--c1));
+		border-radius: 10px;
+		padding: 8px 12px;
+	}
+	.tooltip-dark:before {
+		display: none;
 	}
 
 
