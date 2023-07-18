@@ -221,9 +221,9 @@
 		/* header */
 		--d6: var(--base-hue), calc(var(--saturation)*20%), calc(var(--lightness)*10%);
 		/* l1-4 */
-		--l1: var(--base-hue), calc(var(--saturation)*50%), calc(var(--lightness)*75%);
-		--l2: var(--base-hue), calc(var(--saturation)*50%), calc(var(--lightness)*70%);
-		--l3: var(--base-hue), calc(var(--saturation)*50%), calc(var(--lightness)*65%);
+		--l1: var(--base-hue), calc(var(--saturation)*50%), calc(var(--lightness)*80%);
+		--l2: var(--base-hue), calc(var(--saturation)*50%), calc(var(--lightness)*75%);
+		--l3: var(--base-hue), calc(var(--saturation)*50%), calc(var(--lightness)*70%);
 		/* link */
 		--l4: var(--base-hue), calc(var(--saturation)*50%), calc(var(--lightness)*50%);
 		/* c1-2 */
@@ -321,8 +321,8 @@
 		scroll-behavior: smooth;
 		/* smooth scrolling for #ids */
 	}
-	body {
-		background-color: hsl(var(--b6));
+	body, html body {
+		background: hsl(var(--b6));
 		font-family: var(--font-main);
 		color: hsl(var(--c2));
 		font-size: 14px;
