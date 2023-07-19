@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           bleh
 @namespace      github.com/katelmao/lastfm-bleh
-@version        1.2.1
+@version        1.2.2
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelmao/lastfm-bleh/raw/uwu/lastfm.user.css
@@ -354,7 +354,8 @@
 	.btn-cancel,
 	.mimic-link.text-light.js-shout-reply-cancel,
 	.library-track-metadata .love-button,
-	.header--overview .header-title-secondary a
+	.header--overview .header-title-secondary a,
+	.obsession-delete-button
 	{
 		color: hsl(var(--l3));
 		text-underline-offset: var(--underline-offset);
@@ -365,7 +366,8 @@
 	.more-items:is(:hover, :focus),
 	.btn-cancel:is(:hover, :focus),
 	.mimic-link.text-light.js-shout-reply-cancel:is(:hover, :focus),
-	.header--overview .header-title-secondary a:is(:hover, :focus)
+	.header--overview .header-title-secondary a:is(:hover, :focus),
+	.obsession-delete-button:is(:hover, :focus)
 	{
 		color: hsl(var(--c1));
 		text-decoration: underline;
@@ -382,12 +384,12 @@
 		margin-bottom: 20px;
 		font-weight: var(--theme-font-weight-bold);
 	}
-	:is([class*="more-link"], .video-preview-replace) a, .tags-view-all, .btn-cancel, .js-shout-reply-cancel, .library-header a:not(.text-colour-link), .gallery-image-report, .content-top-back-link a, .library-track-metadata .love-button {
+	:is([class*="more-link"], .video-preview-replace) a, .tags-view-all, .btn-cancel, .js-shout-reply-cancel, .library-header a:not(.text-colour-link), .gallery-image-report, .content-top-back-link a, .library-track-metadata .love-button, .js-close, .obsession-delete-button {
 		padding: 6px 14px;
 		border-radius: 50px;
 		line-height: initial;
 	}
-	:is(:is([class*="more-link"], .video-preview-replace) a, .tags-view-all, .btn-cancel, .js-shout-reply-cancel, .library-header a:not(.text-colour-link), .gallery-image-report, .content-top-back-link a, .library-track-metadata .love-button):is(:hover,
+	:is(:is([class*="more-link"], .video-preview-replace) a, .tags-view-all, .btn-cancel, .js-shout-reply-cancel, .library-header a:not(.text-colour-link), .gallery-image-report, .content-top-back-link a, .library-track-metadata .love-button, .js-close, .obsession-delete-button):is(:hover,
 	:focus) {
 		background-color: hsla(var(--l3), 15%) !important;
 		text-decoration: none !important;
@@ -490,6 +492,11 @@
 	}
 	.content-top-header {
 		display: none;
+	}
+
+	.obsession-container .container {
+		background: transparent !important;
+		box-shadow: none !important;
 	}
 
 	.content-top-lower:empty {
@@ -1284,7 +1291,7 @@
 
 
 	/* share */
-	.share-desktop {
+	.share-desktop, .share-options {
 		display: none;
 	}
 
@@ -2506,6 +2513,31 @@
 	/* obsessions */
 	.obsession-candidates {
 		margin-top: 20px;
+	}
+
+	.obsession-history {
+		margin-top: 20px;
+	}
+
+	.obsession-container {
+		margin-top: -20px;
+		margin-bottom: 10px;
+	}
+
+	.obsession-history-item-inner {
+		border-radius: 10px;
+		overflow: hidden;
+	}
+	.obsession-history-item-artist {
+		margin-bottom: 4px;
+	}
+
+	/* window */
+	.modal-dialog .big-modal-alert.alert-success {
+		padding-top: 0;
+	}
+	.modal-dialog .big-modal-alert.alert-success:before {
+		display: none;
 	}
 
 	.obsession-candidate-heading:first-child {
@@ -3793,7 +3825,8 @@
 	.stationlink,
 	.player-bar, .top-bar,
 	.section-playlink,
-	.desktop-playlink
+	.desktop-playlink,
+	.js-playlink-station
 	{
 		display: none;
 	}
