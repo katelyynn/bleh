@@ -110,13 +110,13 @@
 
 		/* shadow */
 		--raise-0: 0px 3px 3px 0px rgba(0, 0, 0, 0.1);
-		--raise-1: 0px 5px 5px 0px rgba(0, 0, 0, 0.25);
-		--raise-2: 0px 5px 5px 0px rgba(0, 0, 0, 0.35);
-		--raise-3: 0px 5px 6px 0px rgba(0, 0, 0, 0.55);
-		--raise-4: 0px 5px 7px 0px rgba(0, 0, 0, 0.65);
-		--raise-5: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
-		--raise-6: 0px 5px 12px 0px rgba(0, 0, 0, 0.8);
-		--raise-7: 0px 5px 15px 5px rgba(0, 0, 0, 0.85);
+		--raise-1: 0px 5px 6px 0px rgba(0, 0, 0, 0.25);
+		--raise-2: 0px 5px 10px 0px rgba(0, 0, 0, 0.35);
+		--raise-3: 0px 5px 14px 0px rgba(0, 0, 0, 0.55);
+		--raise-4: 0px 5px 19px 0px rgba(0, 0, 0, 0.65);
+		--raise-5: 0px 5px 26px 0px rgba(0, 0, 0, 0.75);
+		--raise-6: 0px 5px 32px 0px rgba(0, 0, 0, 0.8);
+		--raise-7: 0px 5px 38px 5px rgba(0, 0, 0, 0.85);
 
 
 		/* images */
@@ -595,23 +595,42 @@
 	}
 
 	/* fix capitalisation */
-	a:not(:is(.shout-permalink)):is([href="/music/Glaive"],
+	a:not(:is(.shout-permalink)):is(
+	/* links, like in tracklist */
+	[href="/music/Glaive"],
 	[href="/music/Aldn"],
 	[href="/music/Miraie"],
 	[href="/music/Underscores"],
 	[href="/music/Kurtains"],
 	[href="/music/Angelus"],
-	[href="/music/Quinn"]):not(.secondary-nav-item-link),
-	a:not(:is(.shout-permalink)):is([href*="/music/Glaive/_/"],
-	[href*="/music/brakence/_/"], [href*="hypochondriac"]):not(.secondary-nav-item-link):not(:is([href*="+lyrics"], [href*="+tags"], [href*="+link"], [href*="+wiki"])),
-	div:is([data-page-resource-name="Glaive"],
+	[href="/music/Quinn"],
+	[href="/music/Lieu"],
+	[href="/music/Funeral"]
+	):not(.secondary-nav-item-link),
+	a:not(:is(.shout-permalink)):is(
+	[href*="/music/Glaive/_/"],
+	[href*="/music/brakence/_/"], [href*="hypochondriac"]
+	):not(.secondary-nav-item-link):not(:is(
+	[href*="+lyrics"],
+	[href*="+tags"],
+	[href*="+link"],
+	[href*="+wiki"]
+	)),
+	div:is(
+	/* artist name on page */
+	[data-page-resource-name="Glaive"],
 	[data-page-resource-name="brakence"],
 	[data-page-resource-name="Aldn"],
 	[data-page-resource-name="Miraie"],
 	[data-page-resource-name="Underscores"],
-	[data-page-resource-name="Kurtains"]) .header-new-title[itemprop="name"],
-	div:is([data-page-resource-artist-name="Glaive"],
-	[data-page-resource-artist-name="brakence"]) .header-new-title[itemprop="name"],
+	[data-page-resource-name="Kurtains"],
+	[data-page-resource-name="Lieu"],
+	[data-page-resource-name="Funeral"]
+	) .header-new-title[itemprop="name"],
+	div:is(
+	[data-page-resource-artist-name="Glaive"],
+	[data-page-resource-artist-name="brakence"]
+	) .header-new-title[itemprop="name"],
 	[title="Glaive"],
 	[title="Aldn"],
 	[title="Miraie"],
@@ -3224,11 +3243,22 @@
 	/* links */
 	.library-header {
 		position: relative;
+		font-size: 0;
+	}
+	.library-header .library-header-title {
+		margin-top: 8px;
+		font-weight: var(--theme-font-weight) !important;
+		color: hsl(var(--c2)) !important;
+	}
+	.library-header a.text-colour-link {
+		font-size: 14px;
+		margin-top: 4px;
+		color: hsl(var(--c3)) !important;
 	}
 
 	/* go to track page */
 	.library-header a:not(.text-colour-link)[href^="/music/"] {
-		padding: 10px;
+		padding: 10px !important;
 		display: inline-flex;
 		font-size: 0;
 		position: absolute;
@@ -3245,7 +3275,7 @@
 
 	/* delete track from library */
 	.library-header a:not(.text-colour-link)[href^="/user/"] {
-		padding: 10px;
+		padding: 10px !important;
 		display: inline-flex;
 		font-size: 0;
 		position: absolute;
@@ -3261,7 +3291,7 @@
 
 	/* love */
 	.library-track-metadata .love-button {
-		padding: 10px;
+		padding: 10px !important;
 		display: inline-flex;
 		font-size: 0;
 		position: absolute;
@@ -3454,7 +3484,7 @@
 	/* auth dropdown menu thing */
 	.auth-dropdown-menu {
 		background: hsl(var(--b6)) !important;
-		box-shadow: var(--raise-4) !important;
+		box-shadow: var(--raise-2) !important;
 		border-radius: 10px !important;
 		padding: 0 !important;
 		display: flex;
@@ -3485,7 +3515,7 @@
 		border: 1px solid hsl(var(--b3));
 		border-radius: 10px;
 		overflow: hidden;
-		box-shadow: var(--raise-4);
+		box-shadow: var(--raise-2);
 	}
 	.dropdown-menu-clickable {
 		padding: 0;
