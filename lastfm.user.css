@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           bleh
 @namespace      github.com/katelmao/lastfm-bleh
-@version        2.1.3
+@version        2.1.4
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelmao/lastfm-bleh/raw/uwu/lastfm.user.css
@@ -723,7 +723,7 @@
 	[href="/music/Travis+Scott/_/telekinesis"],
 	[href="/music/Travis+Scott/_/Til+Further+Notice"],
 	[href="/music/Travis+Scott/_/My+Eyes"],
-	[href="/music/Travis+Scott/_/K-pop"]
+	[href="/music/Travis+Scott/K-pop"]
 	):not(.secondary-nav-item-link),
 	:is(
 	[data-page-resource-name="Utopia"][data-page-resource-artist-name="Travis Scott"],
