@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           bleh
 @namespace      github.com/katelmao/lastfm-bleh
-@version        2.1.2
+@version        2.1.3
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelmao/lastfm-bleh/raw/uwu/lastfm.user.css
@@ -715,7 +715,7 @@
 	}
 
 	a:is(
-	[href="/music/Travis+Scott/_/Utopia"],
+	[href="/music/Travis+Scott/Utopia"],
 	[href="/music/Travis+Scott/_/CIRCUS+MAXiMuS"],
 	[href="/music/Travis+Scott/_/Delresto+(echoes)"],
 	[href="/music/Travis+Scott/_/modern+JAM"],
