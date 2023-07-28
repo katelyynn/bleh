@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           bleh
 @namespace      github.com/katelmao/lastfm-bleh
-@version        2.1.0
+@version        2.1.1
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelmao/lastfm-bleh/raw/uwu/lastfm.user.css
@@ -724,6 +724,19 @@
 	) .header-new-title[itemprop="name"]
 	{
 		text-transform: uppercase;
+	}
+
+	[data-page-resource-name="Utopia"][data-page-resource-artist-name="Travis Scott"]
+	:is(.header-metadata-tnew-display, .header-new-title[itemprop="name"]) {
+		background: linear-gradient(90deg, hsl(var(--c1)) 0%, hsl(var(--l3)) 100%);
+		/*background: linear-gradient(336deg, #FFD966 0%, #FF84BF 54.70%, #84FFFF 100%);*/
+		background-clip: text;
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		font-weight: var(--theme-font-weight-bold) !important;
+	}
+	[data-page-resource-name="Utopia"][data-page-resource-artist-name="Travis Scott"] .header-new-background {
+		background: linear-gradient(180deg, hsla(var(--l4),10%) 0%, transparent 100%);
 	}
 
 	.masthead-inner-wrap .navlist-items :is(:nth-child(2), :nth-child(5), :nth-child(6)) {
