@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           bleh
 @namespace      github.com/katelmao/lastfm-bleh
-@version        2.1.1
+@version        2.1.2
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelmao/lastfm-bleh/raw/uwu/lastfm.user.css
@@ -715,11 +715,25 @@
 	}
 
 	a:is(
-	[href="/music/Travis+Scott/Utopia"],
-	[href="/music/Travis+Scott/K-pop"]
+	[href="/music/Travis+Scott/_/Utopia"],
+	[href="/music/Travis+Scott/_/CIRCUS+MAXiMuS"],
+	[href="/music/Travis+Scott/_/Delresto+(echoes)"],
+	[href="/music/Travis+Scott/_/modern+JAM"],
+	[href="/music/Travis+Scott/_/parasail"],
+	[href="/music/Travis+Scott/_/telekinesis"],
+	[href="/music/Travis+Scott/_/Til+Further+Notice"],
+	[href="/music/Travis+Scott/_/My+Eyes"],
+	[href="/music/Travis+Scott/_/K-pop"]
 	):not(.secondary-nav-item-link),
 	:is(
 	[data-page-resource-name="Utopia"][data-page-resource-artist-name="Travis Scott"],
+	[data-page-resource-name="CIRCUS MAXiMuS"][data-page-resource-artist-name="Travis Scott"],
+	[data-page-resource-name="Delresto (echoes)"][data-page-resource-artist-name="Travis Scott"],
+	[data-page-resource-name="modern JAM"][data-page-resource-artist-name="Travis Scott"],
+	[data-page-resource-name="parasail"][data-page-resource-artist-name="Travis Scott"],
+	[data-page-resource-name="telekinesis"][data-page-resource-artist-name="Travis Scott"],
+	[data-page-resource-name="Til Further Notice"][data-page-resource-artist-name="Travis Scott"],
+	[data-page-resource-name="My Eyes"][data-page-resource-artist-name="Travis Scott"],
 	[data-page-resource-name="K-pop"][data-page-resource-artist-name="Travis Scott"]
 	) .header-new-title[itemprop="name"]
 	{
@@ -1140,6 +1154,12 @@
 	{
 		padding: 3px 20px;
 		font-size: 13px;
+	}
+
+	.btn-primary.btn--loading {
+		background-image: none !important;
+		filter: brightness(60%) !important;
+		font-size: 14px !important;
 	}
 
 	.btn-cancel,
