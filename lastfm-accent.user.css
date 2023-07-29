@@ -1,0 +1,119 @@
+/* ==UserStyle==
+@name           bleh (themed album covers)
+@namespace      github.com/katelmao/lastfm-bleh
+@version        1.0.0
+@license        GPL-3.0
+@description    matches accent colours to albums
+@author         kate
+@updateURL      https://github.com/katelmao/lastfm-bleh/raw/uwu/lastfm-accent.user.css
+==/UserStyle== */
+
+@-moz-document domain("last.fm") {
+    /* pinky-red */
+	[data-page-resource-name="Legends Never Die"][data-page-resource-artist-name="Juice WRLD"],
+	[data-page-resource-name="Graduation"][data-page-resource-artist-name="Kanye West"]
+	{
+		--base-hue: -13;
+	}
+
+	/* PINK */
+	[data-page-resource-name="Pink Tape"][data-page-resource-artist-name="Lil Uzi Vert"],
+	[data-page-resource-name="Pim Tape"][data-page-resource-artist-name="Lil Uzi Vert"]
+	{
+		--base-hue: 333;
+		--saturation: 1.07;
+	}
+
+	/* red-orange */
+	[data-page-resource-name="Death Race for Love"][data-page-resource-artist-name="Juice WRLD"],
+	[data-page-resource-name*="Death Race For Love"][data-page-resource-artist-name="Juice WRLD"],
+	[data-page-resource-name*="In Utero"][data-page-resource-artist-name="Nirvana"]
+	{
+		--base-hue: 2;
+	}
+
+	/* orange */
+	[data-page-resource-name="old dog, new tricks"][data-page-resource-artist-name="glaive"],
+	[data-page-resource-name="HEROES & VILLAINS"][data-page-resource-artist-name="Metro Boomin"],
+	[data-page-resource-name="punk2"][data-page-resource-artist-name="brakence"],
+	[data-page-resource-name="The Life of Pablo"][data-page-resource-artist-name="Kanye West"]
+	{
+		--base-hue: 24;
+		--saturation: 1.05;
+	}
+
+	/* red */
+	[data-page-resource-name="Birds in the Trap Sing McKnight"][data-page-resource-artist-name="Travis Scott"],
+	[data-page-resource-name="Birds In The Trap Sing McKnight"][data-page-resource-artist-name="Travis Scott"],
+	[data-page-resource-name="Birds In The Trap Sing McKnight"][data-page-resource-artist-name="Young Thug"] /* lfm issue */,
+	[data-page-resource-name*="The Eminem Show"][data-page-resource-artist-name="Eminem"],
+	[data-page-resource-name="Music to Be Murdered By"][data-page-resource-artist-name="Eminem"],
+	[data-page-resource-name*="Music To Be Murdered By"][data-page-resource-artist-name="Eminem"],
+	[data-page-resource-name="My Beautiful Dark Twisted Fantasy"][data-page-resource-artist-name="Kanye West"],
+	[data-page-resource-name="Yeezus"][data-page-resource-artist-name="Kanye West"]
+	{
+		--base-hue: -2;
+		--saturation: 1.25;
+	}
+
+	/* blue */
+	[data-page-resource-name*="Fighting Demons"][data-page-resource-artist-name="Juice WRLD"]
+	{
+		--base-hue: 240;
+		--saturation: 0.6;
+	}
+
+	/* blue-green */
+	[data-page-resource-name="cypress grove"][data-page-resource-artist-name="glaive"],
+	[data-page-resource-name="cypress grove (Sessions)"][data-page-resource-artist-name="glaive"],
+	[data-page-resource-name="unreleased"][data-page-resource-artist-name="glaive"]
+	{
+		--base-hue: 155;
+		--saturation: 0.8;
+	}
+
+	/* green */
+	[data-page-resource-name="all dogs go to heaven"][data-page-resource-artist-name="glaive"],
+	[data-page-resource-name="all dogs go to heaven (Sessions)"][data-page-resource-artist-name="glaive"]
+	{
+		--base-hue: 150;
+		--saturation: 0.8;
+	}
+
+	/* light blue */
+	[data-page-resource-name="Goodbye & Good Riddance"][data-page-resource-artist-name="Juice WRLD"],
+	[data-page-resource-name*="Goodbye & Good Riddance (Anniversary"][data-page-resource-artist-name="Juice WRLD"],
+	[data-page-resource-name="Nevermind"][data-page-resource-artist-name="Nirvana"]
+	{
+		--base-hue: 213;
+	}
+
+	/* gold */
+	[data-page-resource-name*="Goodbye & Good Riddance (5 Year"][data-page-resource-artist-name="Juice WRLD"]
+	{
+		--base-hue: 34;
+	}
+
+	/* yellow */
+	[data-page-resource-name="hypochondriac"][data-page-resource-artist-name="brakence"],
+	[data-page-resource-name="Live at Reading"][data-page-resource-artist-name="Nirvana"]
+	{
+		--base-hue: 38;
+		--saturation: 1.3;
+	}
+
+	/* GOLD */
+	[data-page-resource-name="ASTROWORLD"][data-page-resource-artist-name="Travis Scott"]
+	{
+		--base-hue: 30;
+	}
+
+	/* brown */
+	/* TODO: come back to this one */
+	[data-page-resource-name="Utopia"][data-page-resource-artist-name="Travis Scott"],
+	[data-page-resource-name="Rodeo"][data-page-resource-artist-name="Travis Scott"]
+	{
+		--base-hue: 17;
+		--saturation: 0.5;
+	}
+}
