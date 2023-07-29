@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           bleh
 @namespace      github.com/katelmao/lastfm-bleh
-@version        2.2.0
+@version        2.2.1
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelmao/lastfm-bleh/raw/uwu/lastfm.user.css
@@ -1419,18 +1419,18 @@
 		left: 7px;
 		opacity: 1;
 	}
-	.chartlist-play .desktop-playlink {
+	.chartlist-play .chartlist-play-button {
 		width: 20px;
 		height: 20px;
 		background-color: transparent;
 		background-image: var(--icon-play);
-		opacity: 0.5;
+		opacity: 0.35;
 		background-size: 16px 16px;
 		background-repeat: no-repeat;
 		background-position: 0 0;
 		filter: invert(var(--theme-icon-invert));
 	}
-	.chartlist-play .desktop-playlink:before {
+	.chartlist-play .chartlist-play-button:before {
 		display: none;
 	}
 
