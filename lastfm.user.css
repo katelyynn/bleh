@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           bleh
 @namespace      github.com/katelmao/lastfm-bleh
-@version        2.2.1
+@version        2.2.2
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelmao/lastfm-bleh/raw/uwu/lastfm.user.css
@@ -1713,6 +1713,17 @@
 	}
 
 
+	/* buttons */
+	.header-metadata-item--event-attendance {
+		height: 56px;
+	}
+	.header-metadata-item--event-attendance form {
+		height: 100%;
+		display: flex;
+		align-items: center;
+	}
+
+
 	/* button icons */
 	/* yes */
 	.attendance-btn--turn-off.attendance-btn--attending:before, .attendance-btn--turn-off.attendance-btn--maybe:before,
@@ -2957,6 +2968,10 @@
 	}
 	.masthead-nav .masthead-nav-control {
 		line-height: initial;
+	}
+
+	.masthead-logo-loading {
+		display: none !important;
 	}
 
 	#auth-dropdown {
