@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           bleh (amoled addon)
 @namespace      github.com/katelmao/lastfm-bleh
-@version        1.0.4
+@version        1.0.5
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelmao/lastfm-bleh/raw/uwu/lastfm-amoled.user.css
@@ -11,7 +11,10 @@
     :root, body, .re-style,
 	header,
 	.recs-feed-cover-image-wrap,
-	.namespace--user_overview nav
+	.namespace--user_overview nav,
+	#current-subscription,/*,
+	.namespace--settings_subscription_overview .adaptive-skin-container*/
+	.main-content > div[data-page-resource-blacklist-level=""]
 	{
 		/* text */
 		--text-link: var(--base-hue),calc(var(--saturation)*95%),calc(var(--lightness)*63%);
