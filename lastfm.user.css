@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           bleh
 @namespace      github.com/katelmao/lastfm-bleh
-@version        2.2.2
+@version        2.2.3
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelmao/lastfm-bleh/raw/uwu/lastfm.user.css
@@ -4669,18 +4669,16 @@
 
 
 	/* nag bar */
-	.nag-bar {
+	.nag-bar, .anhv1 .nag-bar--corrections {
 		z-index: 10000;
 		color: hsl(var(--c1));
 		padding: initial;
-		position: fixed;
-		top: 56px;
+		margin: 0 20px 40px 10px;
 		width: 100%;
-		background: transparent;
+		background: transparent !important;
 	}
 	.nag-bar .container {
-		padding: 10px 20px;
-		background-color: hsla(var(--d4), 80%) !important;
+		padding: 0 20px !important;
 	}
 	.nag-bar .nag-bar-message:before,
 	.nag-bar-close:before {
