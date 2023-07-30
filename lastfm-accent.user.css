@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           bleh (themed album covers)
 @namespace      github.com/katelmao/lastfm-bleh
-@version        1.0.1
+@version        1.1.0
 @license        GPL-3.0
 @description    matches accent colours to albums
 @author         kate
@@ -56,13 +56,21 @@
 	/* red-orange */
 	[data-page-resource-name="Death Race for Love"][data-page-resource-artist-name="Juice WRLD"],
 	[data-page-resource-name*="Death Race For Love"][data-page-resource-artist-name="Juice WRLD"],
-	[data-page-resource-name*="In Utero"][data-page-resource-artist-name="Nirvana"],
 	[data-page-resource-name="Love Sick"][data-page-resource-artist-name="Don Toliver"],
 	[data-page-resource-name="Bad Boy (with Young Thug)"][data-page-resource-artist-name="Juice WRLD"],
 	[data-page-resource-name="Savage Mode II"][data-page-resource-artist-name="21 Savage"],
 	[data-page-resource-name="The College Dropout"][data-page-resource-artist-name="Kanye West"]
 	{
-		--base-hue: 2;
+		--base-hue: 11;
+		--saturation: 1.3;
+		--lightness: 0.8;
+	}
+
+	[data-page-resource-name*="In Utero"][data-page-resource-artist-name="Nirvana"]
+	{
+		--base-hue: 346;
+		--saturation: 0.7;
+		--lightness: 0.7;
 	}
 
 	/* orange */
@@ -73,14 +81,23 @@
 	[data-page-resource-name="Strike (Holster)"][data-page-resource-artist-name="Lil Yachty"],
 	[data-page-resource-name="Flower Boy"][data-page-resource-artist-name="Tyler, the Creator"]
 	{
-		--base-hue: 24;
+		--base-hue: 29;
 		--saturation: 1.05;
+		--lightness: 0.9;
+	}
+
+	[data-page-resource-name="Toxicity"][data-page-resource-artist-name="System of a Down"]
+	{
+		--base-hue: 35;
+		--saturation: 0.5;
+		--lightness: 0.8;
 	}
 
 	[data-page-resource-name="I NEVER LIKED YOU"][data-page-resource-artist-name="Future"]
 	{
-		--base-hue: 27;
-		--saturation: 0.92;
+		--base-hue: 356;
+		--saturation: 0.6;
+		--lightness: 0.6;
 	}
 
 	/* red */
@@ -98,10 +115,13 @@
 	[data-page-resource-name="DAMN."][data-page-resource-artist-name="Kendrick Lamar"],
 	[data-page-resource-name="Eternal Atake"][data-page-resource-artist-name="Lil Uzi Vert"],
 	[data-page-resource-name="808s & Heartbreak"][data-page-resource-artist-name="Kanye West"],
-	[data-page-resource-name="UNDERTALE Soundtrack"][data-page-resource-artist-name="Toby Fox"]
+	[data-page-resource-name="UNDERTALE Soundtrack"][data-page-resource-artist-name="Toby Fox"],
+	[data-page-resource-name="Koi No Yokan"][data-page-resource-artist-name="Deftones"],
+	[data-page-resource-name="Mezmerize"][data-page-resource-artist-name="System of a Down"]
 	{
-		--base-hue: -2;
+		--base-hue: 1;
 		--saturation: 1.25;
+		--lightness: 0.75;
 	}
 
 	[data-page-resource-name="Let’s Start Here."][data-page-resource-artist-name="Lil Yachty"]
@@ -113,6 +133,13 @@
 	/* blue */
 	[data-page-resource-name*="Fighting Demons"][data-page-resource-artist-name="Juice WRLD"]
 	{
+		--base-hue: 194;
+		--saturation: 0.4;
+		--lightness: 0.6;
+	}
+
+	[data-page-resource-name*="Tourist History"][data-page-resource-artist-name="Two Door Cinema Club"]
+	{
 		--base-hue: 240;
 		--saturation: 0.6;
 	}
@@ -121,7 +148,8 @@
 	[data-page-resource-name*="Encore"][data-page-resource-artist-name="Eminem"]
 	{
 		--base-hue: 232;
-		--saturation: 1.05;
+		--saturation: 1.1;
+		--lightness: 0.9;
 	}
 
 	/* blue purple */
@@ -133,7 +161,8 @@
 
 	/* LIGHT purple */
 	[data-page-resource-name="Currents"][data-page-resource-artist-name="Tame Impala"],
-	[data-page-resource-name="Witness of Another World"][data-page-resource-artist-name="C!erra My$t"]
+	[data-page-resource-name="Witness of Another World"][data-page-resource-artist-name="C!erra My$t"],
+	[data-page-resource-name="I Hope We Make It Out of This Alive"][data-page-resource-artist-name="Sold Soul"]
 	{
 		--base-hue: 279;
 		--saturation: 0.45;
@@ -159,12 +188,19 @@
 	}
 
 	[data-page-resource-name="Her Loss"][data-page-resource-artist-name="Drake"],
-	[data-page-resource-name="IGOR"][data-page-resource-artist-name="Tyler, the Creator"],
 	[data-page-resource-name="ultraviolet"][data-page-resource-artist-name="usedcvnt"],
 	[data-page-resource-name="Forever Alive"][data-page-resource-artist-name="C!erra My$t"]
 	{
-		--base-hue: 326;
+		--base-hue: 331;
 		--saturation: 0.42;
+		--lightness: 0.9;
+	}
+
+	[data-page-resource-name="IGOR"][data-page-resource-artist-name="Tyler, the Creator"]
+	{
+		--base-hue: 338;
+		--saturation: 0.6;
+		--lightness: 1.1;
 	}
 
 	/* blue-green */
@@ -176,10 +212,24 @@
 		--saturation: 0.8;
 	}
 
+	[data-page-resource-name="Collide With the Sky"][data-page-resource-artist-name="Pierce the Veil"]
+	{
+		--base-hue: 185;
+		--saturation: 0.6;
+		--lightness: 0.7;
+	}
+
 	[data-page-resource-name="underdrawing for three forms of unhappiness at the state of existence"][data-page-resource-artist-name="My Dead Girlfriend"]
 	{
 		--base-hue: 168;
 		--saturation: 0.78;
+	}
+
+	[data-page-resource-name="Saturday Night Wrist"][data-page-resource-artist-name="Deftones"]
+	{
+		--base-hue: 143;
+		--saturation: 0.5;
+		--lightness: 0.6;
 	}
 
 	/* green */
@@ -187,8 +237,16 @@
 	[data-page-resource-name="all dogs go to heaven (Sessions)"][data-page-resource-artist-name="glaive"],
 	[data-page-resource-name="bastard"][data-page-resource-artist-name="glaive"]
 	{
-		--base-hue: 150;
-		--saturation: 0.8;
+		--base-hue: 79;
+		--saturation: 0.55;
+		--lightness: 0.7;
+	}
+
+	[data-page-resource-name="better luck next time."][data-page-resource-artist-name="midwxst"]
+	{
+		--base-hue: 154;
+		--saturation: 0.7;
+		--lightness: 1.03;
 	}
 
 	[data-page-resource-name="greenhouse"][data-page-resource-artist-name="aldn"],
@@ -211,6 +269,20 @@
 		--base-hue: 208;
 	}
 
+	[data-page-resource-name="songs and music"][data-page-resource-artist-name="twikipedia"]
+	{
+		--base-hue: 204;
+		--saturation: 0.8;
+		--lightness: 1.3;
+	}
+
+	[data-page-resource-name="Public Target"][data-page-resource-artist-name="ericdoa"]
+	{
+		--base-hue: 213;
+		--saturation: 0.8;
+		--lightness: 0.7;
+	}
+
 	[data-page-resource-name="SWEET DAYS AND HER LAST KISS"][data-page-resource-artist-name="My Dead Girlfriend"]
 	{
 		--base-hue: 228;
@@ -219,10 +291,14 @@
 
 	[data-page-resource-name="then i'll be happy"][data-page-resource-artist-name="glaive"],
 	[data-page-resource-name="Lyfë"][data-page-resource-artist-name="Yeat"],
-	[data-page-resource-name="-"][data-page-resource-artist-name="Xxtarlit⚸"]
+	[data-page-resource-name="-"][data-page-resource-artist-name="Xxtarlit⚸"],
+	[data-page-resource-name="Ohms"][data-page-resource-artist-name="Deftones"],
+	[data-page-resource-name="Diamond Eyes"][data-page-resource-artist-name="Deftones"],
+	[data-page-resource-name="ANTICYCLONE"][data-page-resource-artist-name="稲葉曇"]
 	{
 		--base-hue: 213;
-		--saturation: 0.25;
+		--saturation: 0.3;
+		--lightness: 1.2;
 	}
 
 	/* gold */
@@ -240,10 +316,18 @@
 		--saturation: 1.3;
 	}
 
+	[data-page-resource-name="chronic"][data-page-resource-artist-name="twikipedia"]
+	{
+		--base-hue: 60;
+		--saturation: 0.5;
+		--lightness: 1.3;
+	}
+
 	[data-page-resource-name="JACKBOYS"][data-page-resource-artist-name="JACKBOYS"]
 	{
 		--base-hue: 61;
 		--saturation: 0.7;
+		--lightness: 0.65;
 	}
 
 	[data-page-resource-name="astrid"][data-page-resource-artist-name="glaive"]
@@ -265,11 +349,18 @@
 	[data-page-resource-name="Crystal Castles"][data-page-resource-artist-name="Crystal Castles"],
 	[data-page-resource-name="The Marshall Mathers LP"][data-page-resource-artist-name="Eminem"],
 	[data-page-resource-name="Late Registration"][data-page-resource-artist-name="Kanye West"],
-	[data-page-resource-name*="i care so much that i"][data-page-resource-artist-name="glaive"],
+	[data-page-resource-name*="i care so much that i"][data-page-resource-artist-name="glaive"]
+	{
+		--base-hue: 357;
+		--saturation: 0.2;
+		--lightness: 0.5;
+	}
+
 	[data-page-resource-name="Mr. Morale & the Big Steppers"][data-page-resource-artist-name="Kendrick Lamar"]
 	{
-		--base-hue: 5;
-		--saturation: 0.6;
+		--base-hue: 24;
+		--saturation: 0.8;
+		--lightness: 0.6;
 	}
 
 	[data-page-resource-name="Quinn"][data-page-resource-artist-name="Quinn"]
