@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           bleh
 @namespace      github.com/katelmao/lastfm-bleh
-@version        2.2.3
+@version        2.2.4
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelmao/lastfm-bleh/raw/uwu/lastfm.user.css
@@ -5493,6 +5493,12 @@
 		filter: blur(5px);
 		opacity: 0;
 		transition: opacity 1s;
+	}
+
+	/* utopia (can remove later) */
+	[src*="f44cfe7c4d075bb99dde06e00cbf0eb0"], [style*="f44cfe7c4d075bb99dde06e00cbf0eb0"]
+	{
+		display: none;
 	}
 
 
