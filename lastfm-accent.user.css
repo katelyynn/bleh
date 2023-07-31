@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           bleh (themed album covers)
 @namespace      github.com/katelmao/lastfm-bleh
-@version        1.1.0
+@version        1.1.1
 @license        GPL-3.0
 @description    matches accent colours to albums
 @author         kate
@@ -13,7 +13,10 @@
 	[data-page-resource-name="Legends Never Die"][data-page-resource-artist-name="Juice WRLD"],
 	[data-page-resource-name="Graduation"][data-page-resource-artist-name="Kanye West"],
 	[data-page-resource-name="Love Sick (Deluxe)"][data-page-resource-artist-name="Don Toliver"],
-	[data-page-resource-name="feathers n glue"][data-page-resource-artist-name="sewerperson"]
+	[data-page-resource-name="feathers n glue"][data-page-resource-artist-name="sewerperson"],
+	[data-page-resource-name*="Unplugged"][data-page-resource-artist-name="Nirvana"],
+	[data-page-resource-name="Loveless"][data-page-resource-artist-name="my bloody valentine"],
+	[data-page-resource-name="BEST OF LAPFOX VOL 1: Because Maybe!"][data-page-resource-artist-name="Renard"]
 	{
 		--base-hue: -13;
 	}
@@ -47,6 +50,12 @@
 		--saturation: 0.82;
 	}
 
+	[data-page-resource-name="Celeste (Original Soundtrack)"][data-page-resource-artist-name="Lena Raine"]
+	{
+		--base-hue: 346;
+		--saturation: 0.75;
+	}
+
 	[data-page-resource-name="Doki Doki Literature Club! (Original Soundtrack)"][data-page-resource-artist-name="Dan Salvato"]
 	{
 		--base-hue: 327;
@@ -59,14 +68,16 @@
 	[data-page-resource-name="Love Sick"][data-page-resource-artist-name="Don Toliver"],
 	[data-page-resource-name="Bad Boy (with Young Thug)"][data-page-resource-artist-name="Juice WRLD"],
 	[data-page-resource-name="Savage Mode II"][data-page-resource-artist-name="21 Savage"],
-	[data-page-resource-name="The College Dropout"][data-page-resource-artist-name="Kanye West"]
+	[data-page-resource-name="The College Dropout"][data-page-resource-artist-name="Kanye West"],
+	[data-page-resource-name="Minecraft - Volume Beta"][data-page-resource-artist-name="C418"]
 	{
 		--base-hue: 11;
 		--saturation: 1.3;
 		--lightness: 0.8;
 	}
 
-	[data-page-resource-name*="In Utero"][data-page-resource-artist-name="Nirvana"]
+	[data-page-resource-name*="In Utero"][data-page-resource-artist-name="Nirvana"],
+	[data-page-resource-name="Live and Loud"][data-page-resource-artist-name="Nirvana"]
 	{
 		--base-hue: 346;
 		--saturation: 0.7;
@@ -117,7 +128,8 @@
 	[data-page-resource-name="808s & Heartbreak"][data-page-resource-artist-name="Kanye West"],
 	[data-page-resource-name="UNDERTALE Soundtrack"][data-page-resource-artist-name="Toby Fox"],
 	[data-page-resource-name="Koi No Yokan"][data-page-resource-artist-name="Deftones"],
-	[data-page-resource-name="Mezmerize"][data-page-resource-artist-name="System of a Down"]
+	[data-page-resource-name="Mezmerize"][data-page-resource-artist-name="System of a Down"],
+	[data-page-resource-name="2 Alivë (Geëk Pack)"][data-page-resource-artist-name="Yeat"]
 	{
 		--base-hue: 1;
 		--saturation: 1.25;
@@ -131,7 +143,8 @@
 	}
 
 	/* blue */
-	[data-page-resource-name*="Fighting Demons"][data-page-resource-artist-name="Juice WRLD"]
+	[data-page-resource-name*="Fighting Demons"][data-page-resource-artist-name="Juice WRLD"],
+	[data-page-resource-name="Robbery"][data-page-resource-artist-name="Juice WRLD"]
 	{
 		--base-hue: 194;
 		--saturation: 0.4;
@@ -166,6 +179,13 @@
 	{
 		--base-hue: 279;
 		--saturation: 0.45;
+	}
+
+	[data-page-resource-name="Celeste B-Sides (Original Game Soundtrack)"][data-page-resource-artist-name="Lena Raine"]
+	{
+		--base-hue: 300;
+		--saturation: 0.75;
+		--lightness: 0.85;
 	}
 
 	[data-page-resource-name="The Slim Shady LP"][data-page-resource-artist-name="Eminem"],
@@ -232,6 +252,13 @@
 		--lightness: 0.6;
 	}
 
+	[data-page-resource-name="Incesticide"][data-page-resource-artist-name="Nirvana"]
+	{
+		--base-hue: 58;
+		--saturation: 0.5;
+		--lightness: 1.13;
+	}
+
 	/* green */
 	[data-page-resource-name="all dogs go to heaven"][data-page-resource-artist-name="glaive"],
 	[data-page-resource-name="all dogs go to heaven (Sessions)"][data-page-resource-artist-name="glaive"],
@@ -240,6 +267,20 @@
 		--base-hue: 79;
 		--saturation: 0.55;
 		--lightness: 0.7;
+	}
+
+	[data-page-resource-name="2 Alivë"][data-page-resource-artist-name="Yeat"]
+	{
+		--base-hue: 121;
+		--saturation: 0.5;
+		--lightness: 1.1;
+	}
+
+	[data-page-resource-name="Minecraft - Volume Alpha"][data-page-resource-artist-name="C418"]
+	{
+		--base-hue: 95;
+		--saturation: 0.8;
+		--lightness: 0.75;
 	}
 
 	[data-page-resource-name="better luck next time."][data-page-resource-artist-name="midwxst"]
@@ -260,13 +301,46 @@
 	/* light blue */
 	[data-page-resource-name="Goodbye & Good Riddance"][data-page-resource-artist-name="Juice WRLD"],
 	[data-page-resource-name*="Goodbye & Good Riddance (Anniversary"][data-page-resource-artist-name="Juice WRLD"],
-	[data-page-resource-name="Nevermind"][data-page-resource-artist-name="Nirvana"],
-	[data-page-resource-name="CALL ME IF YOU GET LOST: The Estate Sale"][data-page-resource-artist-name="Tyler, the Creator"],
-	[data-page-resource-name="Wolf"][data-page-resource-artist-name="Tyler, the Creator"],
-	[data-page-resource-name="Lift Yourself"][data-page-resource-artist-name="Kanye West"],
 	[data-page-resource-name="Luv Is Rage 2 (Deluxe)"][data-page-resource-artist-name="Lil Uzi Vert"]
 	{
-		--base-hue: 208;
+		--base-hue: 197;
+		--saturation: 0.85;
+		--lightness: 0.82;
+
+	}
+
+	[data-page-resource-name="Lift Yourself"][data-page-resource-artist-name="Kanye West"],
+	[data-page-resource-name="More Life"][data-page-resource-artist-name="Drake"]
+	{
+		--base-hue: 218;
+		--saturation: 1.5;
+		--lightness: 0.96;
+	}
+
+	[data-page-resource-name="Wolf"][data-page-resource-artist-name="Tyler, the Creator"]
+	{
+		--base-hue: 193;
+		--saturation: 0.7;
+		--lightness: 1.1;
+	}
+
+	[data-page-resource-name="CALL ME IF YOU GET LOST: The Estate Sale"][data-page-resource-artist-name="Tyler, the Creator"]
+	{
+		--base-hue: 176;
+		--saturation: 0.65;
+		--lightness: 0.9;
+	}
+
+	[data-page-resource-name="Rich Minion"][data-page-resource-artist-name="Yeat"]
+	{
+		--base-hue: 199;
+		--saturation: 1.5;
+	}
+
+	[data-page-resource-name*="Nevermind"][data-page-resource-artist-name="Nirvana"]
+	{
+		--base-hue: 194;
+		--lightness: 0.75;
 	}
 
 	[data-page-resource-name="songs and music"][data-page-resource-artist-name="twikipedia"]
@@ -294,7 +368,9 @@
 	[data-page-resource-name="-"][data-page-resource-artist-name="Xxtarlit⚸"],
 	[data-page-resource-name="Ohms"][data-page-resource-artist-name="Deftones"],
 	[data-page-resource-name="Diamond Eyes"][data-page-resource-artist-name="Deftones"],
-	[data-page-resource-name="ANTICYCLONE"][data-page-resource-artist-name="稲葉曇"]
+	[data-page-resource-name="ANTICYCLONE"][data-page-resource-artist-name="稲葉曇"],
+	[data-page-resource-name*="With The Lights Out"][data-page-resource-artist-name="Nirvana"],
+	[data-page-resource-name*="Bleach"][data-page-resource-artist-name="Nirvana"]
 	{
 		--base-hue: 213;
 		--saturation: 0.3;
@@ -304,7 +380,9 @@
 	/* gold */
 	[data-page-resource-name*="Goodbye & Good Riddance (5 Year"][data-page-resource-artist-name="Juice WRLD"]
 	{
-		--base-hue: 34;
+		--base-hue: 42;
+		--saturation: 1.3;
+		--lightness: 0.97;
 	}
 
 	/* yellow */
@@ -339,7 +417,9 @@
 	/* GOLD */
 	[data-page-resource-name="ASTROWORLD"][data-page-resource-artist-name="Travis Scott"]
 	{
-		--base-hue: 30;
+		--base-hue: 41;
+		--saturation: 1.1;
+		--lightness: 0.95;
 	}
 
 	/* brown */
@@ -353,7 +433,7 @@
 	{
 		--base-hue: 357;
 		--saturation: 0.2;
-		--lightness: 0.5;
+		--lightness: 0.7;
 	}
 
 	[data-page-resource-name="Mr. Morale & the Big Steppers"][data-page-resource-artist-name="Kendrick Lamar"]

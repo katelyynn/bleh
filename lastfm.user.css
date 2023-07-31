@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           bleh
 @namespace      github.com/katelmao/lastfm-bleh
-@version        2.2.5
+@version        2.2.6
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelmao/lastfm-bleh/raw/uwu/lastfm.user.css
@@ -44,15 +44,67 @@
 
         /* this controls the saturation/vibrancy!
            set it to a number between 0 and 1 */
-        --saturation: 1;
+        --accessibility-saturation: 1;
         /* 1 = vibrant! 0 = grey.... */
 
 
 
 		/* this controls the lightness!
 		   set it to a number between 0 and 1 */
-		--lightness: 1;
+		--accessibility-lightness: 1;
 		/* 1 = light! 0 = dark.... */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		--saturation: 1;
+		--lightness: 1;
     }
 
 
@@ -235,15 +287,15 @@
 		--text-select: hsla(var(--base-hue), calc(var(--saturation)*100%), calc(var(--lightness)*70%), 30%);
 
 		/* b1-6 */
-		--b1: var(--base-hue), calc(var(--saturation)*10%), 35%;
-		--b2: var(--base-hue), calc(var(--saturation)*9%), 28%;
-		--b3: var(--base-hue), calc(var(--saturation)*8%), 23%;
+		--b1: var(--base-hue), calc(var(--saturation)*10%), 32%;
+		--b2: var(--base-hue), calc(var(--saturation)*9%), 25%;
+		--b3: var(--base-hue), calc(var(--saturation)*8%), 20%;
 		/* card hover */
-		--b4: var(--base-hue), calc(var(--saturation)*6%), 20%;
+		--b4: var(--base-hue), calc(var(--saturation)*6%), 17%;
 		/* card */
-		--b5: var(--base-hue), calc(var(--saturation)*4%), 15%;
+		--b5: var(--base-hue), calc(var(--saturation)*4%), 12%;
 		/* content */
-		--b6: var(--base-hue), calc(var(--saturation)*2%), 10%;
+		--b6: var(--base-hue), calc(var(--saturation)*2%), 7%;
 		/* body */
 		/* d1-6 */
 		--d1: var(--base-hue), calc(var(--saturation)*20%), calc(var(--lightness)*35%);
@@ -267,10 +319,10 @@
 		--c3: var(--base-hue), calc(var(--saturation)*10%), 60%;
 		--c4: var(--c2), 75%;
 		/* custom */
-		--b0: var(--base-hue), calc(var(--saturation)*8%), 55%;
+		--b0: var(--base-hue), calc(var(--saturation)*8%), 52%;
 		--l5: var(--base-hue), calc(var(--saturation)*45%), 26%;
-		--ba5: var(--base-hue), calc(var(--saturation)*4%), 15%, 75%;
-		--ba6: var(--base-hue), calc(var(--saturation)*8%), 10%, 94%;
+		--ba5: var(--base-hue), calc(var(--saturation)*4%), 12%, 75%;
+		--ba6: var(--base-hue), calc(var(--saturation)*8%), 7%, 94%;
 
 		/* text shadows */
 		--bb5: var(--base-hue), calc(var(--saturation)*8%), 15%, 70%;
@@ -540,6 +592,19 @@
 		display: none;
 	}
 
+	[class*="namespace--user_follow"] .content-top-header {
+		display: flex;
+		font-size: 14px;
+		line-height: 8px;
+		position: relative;
+		top: 14px;
+	}
+
+	[class*="namespace--user_follow"] .page-content {
+		margin-top: -30px;
+		padding-top: 66px !important;
+	}
+
 	.obsession-container .container {
 		background: transparent !important;
 		box-shadow: none !important;
@@ -642,7 +707,8 @@
 	h2:not(:is(.modal-title)):before,
 	h2.text-18:before,
 	h3.text-18:before,
-	#shoutbox h2:before
+	#shoutbox h2:before,
+	.content-top-header:before
 	{
 		content: '';
 		display: inline-block;
@@ -801,6 +867,7 @@
 		opacity: 0.85;
 		font-size: 28px;
 		font-weight: var(--theme-font-weight-slight-bold);
+		color: hsl(var(--base-hue), calc(var(--saturation)*62%), 87%) !important;
 	}
 	/*span[itemprop="byArtist"] .header-new-crumb:before {
 		content: 'by ';
@@ -818,6 +885,7 @@
 		font-size: 40px;
 		line-height: 46px;
 		font-weight: var(--theme-font-weight-slight-bold) !important;
+		color: hsl(var(--base-hue), calc(var(--saturation)*62%), 92%) !important;
 	}
 	.header-new .header-new-title:before {
 		content: 'Track';
@@ -827,6 +895,13 @@
 		letter-spacing: 0.5px;
 		color: hsl(var(--c3));
 	}
+
+	/*.header-new-background-overlay-mobile[style*="background: linear-gradient("] {
+		background: hsl(var(--l4)) !important;
+		display: flex !important;
+		filter: blur(50px);
+		opacity: 0.2;
+	}*/
 
 	.header-new--album .header-new-title:before {
 		content: 'Album';
@@ -1336,6 +1411,14 @@
 		margin-top: 20px;
 	}
 	.chartlist {
+		margin-top: 10px;
+		text-align: left;
+	}
+
+	#tracklist .buffer-standard {
+		text-align: center;
+	}
+	#tracklist .more-items {
 		margin-top: 10px;
 	}
 
@@ -2104,8 +2187,8 @@
 		transition: transform 0.15s;
 	}
 	.shout .vote-button:hover {
-		border-color: hsl(var(--green), calc(var(--saturation)*65%), calc(var(--lightness)*75%));
-		box-shadow: 0 0 20px hsla(var(--green), calc(var(--saturation)*65%), calc(var(--lightness)*75%),30%);
+		border-color: hsl(var(--green), calc(var(--accessibility-saturation)*65%), calc(var(--accessibility-lightness)*75%));
+		box-shadow: 0 0 20px hsla(var(--green), calc(var(--accessibility-saturation)*65%), calc(var(--accessibility-lightness)*75%),30%);
 	}
 	.shout .vote-button:active {
 		transform: scale(0.95);
@@ -2123,14 +2206,14 @@
 	}
 	/* voted! */
 	.shout .vote-button--voted {
-		background-color: hsl(var(--green), calc(var(--saturation)*65%), calc(var(--lightness)*75%));
-		border-color: hsl(var(--green), calc(var(--saturation)*65%), calc(var(--lightness)*75%));
-		box-shadow: 0 0 50px hsla(var(--green), calc(var(--saturation)*65%), calc(var(--lightness)*75%),55%) !important;
+		background-color: hsl(var(--green), calc(var(--accessibility-saturation)*65%), calc(var(--accessibility-lightness)*75%));
+		border-color: hsl(var(--green), calc(var(--accessibility-saturation)*65%), calc(var(--accessibility-lightness)*75%));
+		box-shadow: 0 0 50px hsla(var(--green), calc(var(--accessibility-saturation)*65%), calc(var(--accessibility-lightness)*75%),55%) !important;
 		color: hsl(var(--b6));
 		font-weight: 700;
 	}
 	.shout .vote-button--voted:hover {
-		background-color: hsla(var(--green), calc(var(--saturation)*65%), calc(var(--lightness)*75%), 70%);
+		background-color: hsla(var(--green), calc(var(--accessibility-saturation)*65%), calc(var(--accessibility-lightness)*75%), 70%);
 	}
 
 	/* more . . . */
@@ -2791,7 +2874,7 @@
 		min-height: 56px;
 		display: flex;
 		align-items: center;
-		transition: background-color 0.2s, transform 0.15s;
+		transition: background-color 0.15s, transform 0.15s;
 	}
 	.coloured-cta:is(:hover) {
 		background-color: hsla(var(--b3),50%) !important;
@@ -2824,20 +2907,21 @@
 	.music-featured-artist-tags .tag a
 	{
 		box-shadow: none !important;
-		color: hsl(var(--l1)) !important;
-		background-color: hsla(var(--l1), 10%);
+		color: hsl(var(--l3)) !important;
+		background-color: hsla(var(--l3), 3%);
 		padding: 1px 16px;
 		min-height: 20px;
 		border-radius: 50px;
 		text-transform: lowercase;
 		font-weight: var(--theme-font-weight-slight-bold);
-		transition: background-color 0.2s;
+		transition: color 0.15s, background-color 0.15s;
 	}
 	:is(.catalogue-tags .tag a,
 	.catalogue-tags .tags-add,
 	.catalogue-tags .tags-add-cta,
 	.music-featured-artist-tags .tag a):is(:hover) {
-		background-color: hsla(var(--l2), 20%);
+		color: hsl(var(--l1)) !important;
+		background-color: hsla(var(--l3), 15%);
 	}
 
 	.music-featured-artist-tags .tag a {
@@ -4168,6 +4252,21 @@
 	.library-overview-header, .library-top {
 		margin-bottom: 10px;
 	}
+	.library-overview-header {
+		margin-top: 20px !important;
+	}
+
+	.library-overview-header + .message {
+		color: hsl(var(--c3));
+		font-size: 0;
+		text-align: center;
+		padding-top: 20px;
+		padding-bottom: 60px;
+	}
+	.library-overview-header + .message:after {
+		content: '....so empty ⠀ (〒﹏〒)';
+		font-size: 14px;
+	}
 
 	/* go to track page */
 	.library-header a:not(:is(.text-colour-link, .library-header-crumb))[href^="/music/"], .library-view-button {
@@ -4564,7 +4663,7 @@
 
 	/* grr danger */
 	.more-item--delete, .more-item--report, .auth-dropdown-menu-item[href="/logout"] {
-		color: hsl(var(--red), calc(var(--saturation)*65%), calc(var(--lightness)*55%)) !important;
+		color: hsl(var(--red), calc(var(--accessibility-saturation)*65%), calc(var(--accessibility-lightness)*55%)) !important;
 		font-weight: var(--theme-font-weight-bold);
 	}
 	.dropdown-menu-clickable-item:is(
@@ -4572,16 +4671,16 @@
 	):is(:hover, :active, :focus),
 	body:not([data-whatinput="touch"]) .auth-dropdown-menu-item[href="/logout"]:is(:hover, :active, :focus)
 	{
-		background: hsla(var(--red), calc(var(--saturation)*65%), calc(var(--lightness)*55%), 8%) !important;
+		background: hsla(var(--red), calc(var(--accessibility-saturation)*65%), calc(var(--accessibility-lightness)*55%), 8%) !important;
 	}
 
 	.mimic-link.btn-delete {
-		color: hsl(var(--red), calc(var(--saturation)*65%), calc(var(--lightness)*55%)) !important;
+		color: hsl(var(--red), calc(var(--accessibility-saturation)*65%), calc(var(--accessibility-lightness)*55%)) !important;
 		padding-left: 28px !important;
 	}
 	.mimic-link.btn-delete:is(:hover, :active, :focus) {
-		color: hsl(var(--red), calc(var(--saturation)*65%), calc(var(--lightness)*55%)) !important;
-		background: hsla(var(--red), calc(var(--saturation)*65%), calc(var(--lightness)*55%), 8%) !important;
+		color: hsl(var(--red), calc(var(--accessibility-saturation)*65%), calc(var(--accessibility-lightness)*55%)) !important;
+		background: hsla(var(--red), calc(var(--accessibility-saturation)*65%), calc(var(--accessibility-lightness)*55%), 8%) !important;
 		text-decoration: none;
 	}
 	.mimic-link.btn-delete:before {
@@ -4598,7 +4697,7 @@
 	.dropdown-menu-clickable-item:is(
 	.more-item--obsession
 	):is(:hover, :active, :focus) {
-		background: hsla(255, calc(var(--saturation)*65%), calc(var(--lightness)*70%), 9%) !important;
+		background: hsla(255, calc(var(--accessibility-saturation)*65%), calc(var(--accessibility-lightness)*70%), 9%) !important;
 	}
 
 	/* common! */
@@ -5503,6 +5602,17 @@
 	[src*="f44cfe7c4d075bb99dde06e00cbf0eb0"], [style*="f44cfe7c4d075bb99dde06e00cbf0eb0"]
 	{
 		display: none;
+	}
+
+
+	/* various artists */
+	img[alt="Various Artists"][src*="e127befa6792d2f42f667054d84c5c78"] {
+		background-color: hsl(var(--l4));
+		content: url('https://cdn.discordapp.com/attachments/973652851823878274/1135319778093957211/variousartists.png');
+	}
+	[style*="e127befa6792d2f42f667054d84c5c78"] {
+		background-color: hsl(var(--l4));
+		background-image: url('https://cdn.discordapp.com/attachments/973652851823878274/1135319778093957211/variousartists.png') !important;
 	}
 
 
