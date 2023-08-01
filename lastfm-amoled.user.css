@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           bleh (amoled addon)
 @namespace      github.com/katelmao/lastfm-bleh
-@version        1.0.6
+@version        1.0.7
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelmao/lastfm-bleh/raw/uwu/lastfm-amoled.user.css
@@ -19,11 +19,11 @@
 		/* text */
 		--text-link: var(--base-hue),calc(var(--saturation)*95%),calc(var(--lightness)*63%);
 		/* b1-6 */
-		--b1: var(--base-hue),calc(var(--saturation)*11%),23%;
-		--b2: var(--base-hue),calc(var(--saturation)*10%),19%;
-		--b3: var(--base-hue),calc(var(--saturation)*9%),14%;
-		--b4: var(--base-hue),calc(var(--saturation)*8%),10%;
-		--b5: var(--base-hue),calc(var(--saturation)*7%),6%;
+		--b1: var(--base-hue),calc(var(--saturation)*17%),23%;
+		--b2: var(--base-hue),calc(var(--saturation)*17%),19%;
+		--b3: var(--base-hue),calc(var(--saturation)*15%),14%;
+		--b4: var(--base-hue),calc(var(--saturation)*14%),10%;
+		--b5: var(--base-hue),calc(var(--saturation)*10%),6%;
 		--b6: var(--base-hue),0%,0%;
 		/* d1-6 */
 		--d1: var(--base-hue),calc(var(--saturation)*20%),calc(var(--lightness)*27%);
@@ -33,7 +33,7 @@
 		--d5: var(--base-hue),calc(var(--saturation)*16%),calc(var(--lightness)*10%);
 		--d6: var(--base-hue),calc(var(--saturation)*13%),calc(var(--lightness)*6%);
 		/* custom */
-		--ba5: var(--base-hue),calc(var(--saturation)*7%),5%,70%;
+		--ba5: var(--base-hue),calc(var(--saturation)*10%),5%,70%;
 		--ba6: var(--base-hue),calc(var(--saturation)*0%),0%,93%;
 
 		/* accents */

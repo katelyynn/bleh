@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           bleh
 @namespace      github.com/katelmao/lastfm-bleh
-@version        2.2.6
+@version        2.3.0
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelmao/lastfm-bleh/raw/uwu/lastfm.user.css
@@ -105,6 +105,7 @@
 
 		--saturation: 1;
 		--lightness: 1;
+		--invert-eligible: 1;
     }
 
 
@@ -287,15 +288,15 @@
 		--text-select: hsla(var(--base-hue), calc(var(--saturation)*100%), calc(var(--lightness)*70%), 30%);
 
 		/* b1-6 */
-		--b1: var(--base-hue), calc(var(--saturation)*10%), 32%;
-		--b2: var(--base-hue), calc(var(--saturation)*9%), 25%;
-		--b3: var(--base-hue), calc(var(--saturation)*8%), 20%;
+		--b1: var(--base-hue), calc(var(--saturation)*13%), 32%;
+		--b2: var(--base-hue), calc(var(--saturation)*13%), 25%;
+		--b3: var(--base-hue), calc(var(--saturation)*11%), 20%;
 		/* card hover */
-		--b4: var(--base-hue), calc(var(--saturation)*6%), 17%;
+		--b4: var(--base-hue), calc(var(--saturation)*9%), 17%;
 		/* card */
-		--b5: var(--base-hue), calc(var(--saturation)*4%), 12%;
+		--b5: var(--base-hue), calc(var(--saturation)*6%), 12%;
 		/* content */
-		--b6: var(--base-hue), calc(var(--saturation)*2%), 7%;
+		--b6: var(--base-hue), calc(var(--saturation)*4%), 7%;
 		/* body */
 		/* d1-6 */
 		--d1: var(--base-hue), calc(var(--saturation)*20%), calc(var(--lightness)*35%);
@@ -314,14 +315,16 @@
 		--l4: var(--base-hue), calc(var(--saturation)*52%), calc(var(--lightness)*50%);
 		/* c1-2 */
 		--c1: var(--base-hue), calc(var(--saturation)*40%), 100%;
-		--c2: var(--base-hue), calc(var(--saturation)*40%), 90%;
+		--c2: var(--base-hue), calc(var(--saturation)*60%), 90%;
 		/* subcontent */
 		--c3: var(--base-hue), calc(var(--saturation)*10%), 60%;
 		--c4: var(--c2), 75%;
+		/* can invert */
+		--c1-can-invert: var(--base-hue), calc(var(--saturation)*40%), calc(var(--invert-eligible)*100%);
 		/* custom */
 		--b0: var(--base-hue), calc(var(--saturation)*8%), 52%;
 		--l5: var(--base-hue), calc(var(--saturation)*45%), 26%;
-		--ba5: var(--base-hue), calc(var(--saturation)*4%), 12%, 75%;
+		--ba5: var(--base-hue), calc(var(--saturation)*6%), 12%, 75%;
 		--ba6: var(--base-hue), calc(var(--saturation)*8%), 7%, 94%;
 
 		/* text shadows */
@@ -419,6 +422,9 @@
 		overflow: overlay;
 		/* scrollbar overlay in webkit */
 	}
+	.main-content > div[data-page-resource-blacklist-level=""] {
+		color: hsl(var(--c2));
+	}
 	.main-content {
 		min-height: 900px !important;
 	}
@@ -460,7 +466,7 @@
 
 
 	/* links with -> arrow */
-	[class*="more-link"] {
+	[class*="more-link"]:not(.lyrics-snippet) {
 		padding-right: 0px;
 		margin-bottom: 20px;
 	}
@@ -484,9 +490,9 @@
 		display: none !important;
 	}
 
-	.lyrics-snippet-more-link a
+	.lyrics-snippet-more-link a, .lyrics-snippet--more-link
 	{
-		margin: initial !important;
+		margin: 0 !important;
 	}
 	.lyrics-snippet--more-link a:after {
 		content: '. . .' !important;
@@ -595,7 +601,7 @@
 	[class*="namespace--user_follow"] .content-top-header {
 		display: flex;
 		font-size: 14px;
-		line-height: 8px;
+		line-height: 6px;
 		position: relative;
 		top: 14px;
 	}
@@ -687,7 +693,9 @@
 	.responsive-table th,
 	.api-session-app-last-used, .api-session-status,
 	.footnotes,
-	.metadata-title
+	.metadata-title,
+	.lyrics-attribution,
+	.chartlist-duration
 	{
 		color: hsl(var(--c3));
 	}
@@ -798,7 +806,7 @@
 		text-transform: initial !important;
 	}
 
-	a:is(
+	/*a:is(
 	[href="/music/Travis+Scott/Utopia"],
 	[href="/music/Travis+Scott/_/CIRCUS+MAXiMuS"],
 	[href="/music/Travis+Scott/_/Delresto+(echoes)"],
@@ -822,28 +830,7 @@
 	) .header-new-title[itemprop="name"]
 	{
 		text-transform: uppercase;
-	}
-
-	[data-page-resource-name="Utopia"][data-page-resource-artist-name="Travis Scott"] {
-		background: #000;
-		/* AMOLED */
-		/* b1-6 */
-		--b1: var(--base-hue),calc(var(--saturation)*11%),calc(var(--lightness)*23%);
-		--b2: var(--base-hue),calc(var(--saturation)*10%),calc(var(--lightness)*19%);
-		--b3: var(--base-hue),calc(var(--saturation)*9%),calc(var(--lightness)*14%);
-		--b4: var(--base-hue),calc(var(--saturation)*8%),calc(var(--lightness)*10%);
-		--b5: var(--base-hue),calc(var(--saturation)*7%),calc(var(--lightness)*6%);
-		--b6: var(--base-hue),0%,0%;
-		/* d1-6 */
-		--d1: var(--base-hue),calc(var(--saturation)*20%),calc(var(--lightness)*27%);
-		--d2: var(--base-hue),calc(var(--saturation)*20%),calc(var(--lightness)*22%);
-		--d3: var(--base-hue),calc(var(--saturation)*18%),calc(var(--lightness)*18%);
-		--d4: var(--base-hue),calc(var(--saturation)*18%),calc(var(--lightness)*15%);
-		--d5: var(--base-hue),calc(var(--saturation)*16%),calc(var(--lightness)*10%);
-		--d6: var(--base-hue),calc(var(--saturation)*13%),calc(var(--lightness)*6%);
-		/* custom */
-		--ba5: var(--base-hue),calc(var(--saturation)*7%),calc(var(--lightness)*5%),70%;
-	}
+	}*/
 
 	.masthead-inner-wrap .navlist-items :is(:nth-child(2), :nth-child(5), :nth-child(6)) {
 		display: none;
@@ -894,6 +881,17 @@
 		line-height: 14px;
 		letter-spacing: 0.5px;
 		color: hsl(var(--c3));
+	}
+
+	.header-new-title[data-kate='true'] .inner {
+		display: flex;
+		align-items: baseline;
+		gap: 14px;
+	}
+	.header-new-title[data-kate='true'] .feat {
+		color: hsl(var(--base-hue), calc(var(--saturation)*62%), 87%) !important;
+		opacity: 0.85;
+		font-size: 28px !important;
 	}
 
 	/*.header-new-background-overlay-mobile[style*="background: linear-gradient("] {
@@ -1535,7 +1533,25 @@
 	.chartlist-name {
 		line-height: 18px;
 		font-weight: var(--theme-font-weight) !important;
+		transition: color 0.15s;
 	}
+	.chartlist-name a[data-kate='true'] {
+		display: flex;
+		gap: 7px;
+		width: fit-content;
+	}
+
+	/*.chartlist:has(a[data-kate='true']) .chartlist-artist {
+		margin-left: 16px; /* i really dont know why this is needed, comes from 7.5 * 2 (then +1 for alignment?) */
+		/* it seems to just get shifted around 7.5 pixels to the left when a chartlist has a kate-ified name */
+	/*}*/
+	.chartlist-name a .feat {
+		color: hsl(var(--c3));
+		opacity: 0.4;
+	}
+	/*.chartlist-row:not(.chartlist-row--now-scrobbling):hover .chartlist-name {
+		color: hsl(var(--base-hue), calc(var(--saturation)*52%), calc(var(--lightness)*98%));
+	}*/
 	.chartlist-artist {
 		color: hsl(var(--c3));
 	}
@@ -1605,6 +1621,14 @@
 	.chartlist-index {
 		line-height: 21px;
 		color: hsl(var(--c3));
+		position: relative;
+		margin-left: 0;
+		transition: margin-left 0.15s, opacity 0.15s;
+	}
+	.chartlist-row:hover:has(.chartlist-play-button):not(:has(.chartlist-loved)) .chartlist-index {
+		/*margin-left: 7px;*/
+		opacity: 0.3;
+		pointer-events: none;
 	}
 
 	/* cover */
@@ -2018,11 +2042,22 @@
 		border-bottom: 1px solid hsla(var(--b4),60%);
 	}
 
+	.shout-list {
+		--offset-left: 34px;
+	}
+	.shouting-unavailable + .shout-list {
+		--offset-left: 0px;
+	}
+
+	.shouting-unavailable {
+		display: none;
+	}
+
 	.shout,
 	.shout-form {
 		margin-left: 73px;
 		border: none;
-		min-height: initial !important;
+		min-height: 71px !important;
 	}
 	.shout-body {
 		margin-top: 3px;
@@ -2049,7 +2084,13 @@
 	}
 
 	.shoutbox .no-data-message {
+		font-size: 0;
+		color: hsl(var(--c3)) !important;
 		padding-bottom: 150px;
+	}
+	.shoutbox .no-data-message:after {
+		content: '. . . . so empty ⠀ (〒﹏〒)';
+		font-size: 14px;
 	}
 
 	.shout-container {
@@ -2070,6 +2111,9 @@
 	/* dumb n overflow zalgo? */
 	.shout-body {
 		overflow: hidden;
+	}
+	.shout-actions {
+		min-height: 18px;
 	}
 
 	/* reply */
@@ -2113,21 +2157,21 @@
 
 	.avatar-status-dot--subscriber {
 		box-shadow: 0 0 0 var(--border) hsl(var(--b5));
-		background-color: hsl(var(--pro-colour), calc(var(--saturation)*65%), 75%);
-		border: var(--size) solid hsl(var(--pro-colour), calc(var(--saturation)*65%), 70%);
+		background-color: hsl(var(--pro-colour), calc(var(--accessibility-saturation)*65%), 75%);
+		border: var(--size) solid hsl(var(--pro-colour), calc(var(--accessibility-saturation)*65%), 70%);
 	}
 	/* staff */
 	.avatar-status-dot--staff {
 		box-shadow: 0 0 0 var(--border) hsl(var(--b5));
-		background-color: hsl(var(--base-hue), calc(var(--saturation)*65%), *75%);
-		border: var(--size) solid hsl(var(--base-hue), calc(var(--saturation)*65%), *70%);
+		background-color: hsl(var(--base-hue), calc(var(--accessibility-saturation)*65%), *75%);
+		border: var(--size) solid hsl(var(--base-hue), calc(var(--accessibility-saturation)*65%), *70%);
 	}
 
 	/* highlight (from notification) */
 	.shout-container--active {
-		/*background-color: hsla(var(--base-hue),calc(var(--saturation)*65%),65%,14%);*/
+		/*background-color: hsla(var(--base-hue),calc(var(--accessibility-saturation)*65%),65%,14%);*/
 		background: linear-gradient(180deg,
-		hsla(var(--base-hue), calc(var(--saturation)*85%), 75%, 14%) 0%,
+		hsla(var(--base-hue), calc(var(--accessibility-saturation)*85%), 75%, 14%) 0%,
 		rgba(0, 0, 0, 0) 100%);
 	}
 	.shout-container--active .shout-body {
@@ -2140,7 +2184,7 @@
 		/*top: 65.5%;*/
 		top: unset;
 		bottom: 20px;
-		left: 60px;
+		left: calc(var(--offset-left) + 26px);
 		width: fit-content;
 		order: -2;
 		text-transform: lowercase;
@@ -2219,7 +2263,7 @@
 	/* more . . . */
 	.shout-more-actions {
 		position: absolute;
-		left: 34px;
+		left: var(--offset-left);
 		width: 16px;
 		height: 16px;
 		opacity: 0.4;
@@ -2251,7 +2295,7 @@
 	}
 
 	/* playlink */
-	.artist-top-albums-item-playlink {
+	[class*="-item-playlink"], .track-overview-video-column .video-preview-playlink .image-overlay-playlink-link {
 		background-color: hsla(255,0%,0%,50%);
 		width: calc(100% - 2px);
 		height: calc(100% - 2px);
@@ -2263,12 +2307,25 @@
 		border-radius: 3%;
 		transition: opacity 0.15s;
 	}
-	.artist-top-albums-item-playlink:before {
+	[class*="-item-playlink"]:before, .track-overview-video-column .video-preview-playlink .image-overlay-playlink-link:before {
 		background-image: var(--icon-32-play);
 		background-color: transparent !important;
 		filter: invert(var(--theme-icon-invert));
 		box-shadow: none !important;
 		border: none !important;
+		background-position: center;
+	}
+
+	.track-overview-video-column .video-preview-playlink .image-overlay-playlink-link {
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+	}
+	.track-overview-video-column .video-preview-playlink:not(:hover) .image-overlay-playlink-link {
+		opacity: 0;
 	}
 
 	.source-album-nodata {
@@ -2932,10 +2989,19 @@
 	.catalogue-tags .tags-add {
 		width: 40px;
 		height: 30px;
+		display: none;
 	}
-	.catalogue-tags .tags-add:before {
-		filter: grayscale(1) brightness(50%)
-	}
+	/*.catalogue-tags .tags-add:before {
+		content: '➕';
+		background: none;
+		width: initial;
+		height: initial;
+		position: static;
+		margin: initial;
+		display: block;
+		font-size: 14px;
+		line-height: 14px;
+	}*/
 	.catalogue-tags .tags-add-cta:before {
 		display: none;
 	}
@@ -3514,7 +3580,36 @@
 
 	.tasteometer-compat-description {
 		font-weight: var(--theme-font-weight-bold);
+		/*font-size: 0;*/
 	}
+	/*.tasteometer-compat-description span {
+		font-size: 14px;
+		font-weight: var(--theme-font-weight-bold);
+	}
+	.tasteometer-compat-description:before {
+		content: 'You have ';
+		font-size: 14px;
+		font-weight: var(--theme-font-weight);
+	}
+	.tasteometer-compat-description:after {
+		content: ' compatibility';
+		font-size: 14px;
+		font-weight: var(--theme-font-weight);
+	}
+
+	.tasteometer-shared-artists {
+		display: flex;
+		gap: 3px;
+		font-size: 0;
+		color: hsl(var(--c4));
+	}
+	.tasteometer-shared-artists:before {
+		content: 'Mutual artists:';
+		font-size: 14px;
+	}
+	.tasteometer-shared-artists a {
+		font-size: 14px;
+	}*/
 
 	.profile-cards-container {
 		display: none;
@@ -3549,7 +3644,7 @@
 		/*background-color: hsl(var(--pro-colour), calc(var(--saturation)*65%), calc(var(--lightness)*75%)) !important;
 		color: hsl(var(--b6)) !important;
 		box-shadow: 0px 0px 50px hsla(var(--pro-colour), calc(var(--saturation)*65%), calc(var(--lightness)*75%), 80%);*/
-		color: hsl(var(--pro-colour), calc(var(--saturation)*65%), calc(var(--lightness)*75%)) !important;
+		color: hsl(var(--pro-colour), calc(var(--accessibility-saturation)*65%), calc(var(--accessibility-lightness)*75%)) !important;
 		text-shadow: 0 0 10px currentColor;
 		/*color: black;
 	   -webkit-text-fill-color: hsl(var(--l3));
@@ -3559,7 +3654,7 @@
 	}
 
 	.label.user-follow {
-		color: hsl(var(--base-hue), calc(var(--saturation)*65%), calc(var(--lightness)*75%));
+		color: hsl(var(--base-hue), calc(var(--accessibility-saturation)*65%), calc(var(--accessibility-lightness)*75%));
 	}
 
 	/* follow */
@@ -3876,7 +3971,7 @@
 		box-shadow: 0px 0px 30px hsla(var(--l4), 40%);
 	}
 	.chartlist-count-bar-value {
-		color: hsl(var(--c1));
+		color: hsl(var(--c1-can-invert));
 		/*text-shadow: 0 0 10px hsla(var(--base-hue),calc(var(--saturation)*50%),80%,30%);*/
 		font-weight: var(--theme-font-weight-bold);
 	}
@@ -4264,7 +4359,7 @@
 		padding-bottom: 60px;
 	}
 	.library-overview-header + .message:after {
-		content: '....so empty ⠀ (〒﹏〒)';
+		content: '. . . . so empty ⠀ (〒﹏〒)';
 		font-size: 14px;
 	}
 
@@ -5052,6 +5147,14 @@
 		border-top-right-radius: 13px;
 		border-bottom-right-radius: 13px;
 		pointer-events: none;
+	}
+
+
+	.listeners-section-track {
+		text-transform: lowercase;
+	}
+	.listeners-section-track a {
+		text-transform: initial;
 	}
 
 

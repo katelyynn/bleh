@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           bleh (themed album covers)
 @namespace      github.com/katelmao/lastfm-bleh
-@version        1.1.1
+@version        1.2.0
 @license        GPL-3.0
 @description    matches accent colours to albums
 @author         kate
@@ -26,6 +26,20 @@
 	{
 		--base-hue: 260;
 		--saturation: 1.5;
+	}
+
+	[data-page-resource-name="Starving Slvts Always Get Their Fix"][data-page-resource-artist-name="Sewerslvt"]
+	{
+		--base-hue: 297;
+		--saturation: 1.1;
+		--lightness: 0.7;
+	}
+
+	[data-page-resource-name*="WRLD ON DRUGS"][data-page-resource-artist-name*="Future"]
+	{
+		--base-hue: 298;
+		--saturation: 0.45;
+		--lightness: 0.7;
 	}
 
 	/* lighty purple */
@@ -129,11 +143,15 @@
 	[data-page-resource-name="UNDERTALE Soundtrack"][data-page-resource-artist-name="Toby Fox"],
 	[data-page-resource-name="Koi No Yokan"][data-page-resource-artist-name="Deftones"],
 	[data-page-resource-name="Mezmerize"][data-page-resource-artist-name="System of a Down"],
-	[data-page-resource-name="2 Alivë (Geëk Pack)"][data-page-resource-artist-name="Yeat"]
+	[data-page-resource-name="2 Alivë (Geëk Pack)"][data-page-resource-artist-name="Yeat"],
+	[data-page-resource-name="K-POP"][data-page-resource-artist-name="Travis Scott"],
+	[data-page-resource-name="K-POP"][data-page-resource-artist-name="Travi$ Scott"],
+	[data-page-resource-name="titles"][data-page-resource-artist-name="twikipedia"],
+	[data-page-resource-name="DONDA: With Child"][data-page-resource-artist-name="Kanye West"]
 	{
 		--base-hue: 1;
-		--saturation: 1.25;
-		--lightness: 0.75;
+		--saturation: 1.45;
+		--lightness: 0.85;
 	}
 
 	[data-page-resource-name="Let’s Start Here."][data-page-resource-artist-name="Lil Yachty"]
@@ -144,7 +162,8 @@
 
 	/* blue */
 	[data-page-resource-name*="Fighting Demons"][data-page-resource-artist-name="Juice WRLD"],
-	[data-page-resource-name="Robbery"][data-page-resource-artist-name="Juice WRLD"]
+	[data-page-resource-name="Robbery"][data-page-resource-artist-name="Juice WRLD"],
+	[data-page-resource-name="Views"][data-page-resource-artist-name="Drake"]
 	{
 		--base-hue: 194;
 		--saturation: 0.4;
@@ -163,6 +182,13 @@
 		--base-hue: 232;
 		--saturation: 1.1;
 		--lightness: 0.9;
+	}
+
+	[data-page-resource-name="Honestly, Nevermind"][data-page-resource-artist-name="Drake"]
+	{
+		--base-hue: 197;
+		--saturation: 0.5;
+		--lightness: 0.93;
 	}
 
 	/* blue purple */
@@ -370,11 +396,20 @@
 	[data-page-resource-name="Diamond Eyes"][data-page-resource-artist-name="Deftones"],
 	[data-page-resource-name="ANTICYCLONE"][data-page-resource-artist-name="稲葉曇"],
 	[data-page-resource-name*="With The Lights Out"][data-page-resource-artist-name="Nirvana"],
-	[data-page-resource-name*="Bleach"][data-page-resource-artist-name="Nirvana"]
+	[data-page-resource-name*="Bleach"][data-page-resource-artist-name="Nirvana"],
+	[data-page-resource-name="talk"][data-page-resource-artist-name="twikipedia"]
 	{
 		--base-hue: 213;
-		--saturation: 0.3;
+		--saturation: 0.15;
 		--lightness: 1.2;
+	}
+
+	[data-page-resource-name="Donda"][data-page-resource-artist-name="Kanye West"],
+	[data-page-resource-name="Donda (Deluxe)"][data-page-resource-artist-name="Kanye West"]
+	{
+		--base-hue: 0;
+		--saturation: 0;
+		--lightness: 0.5;
 	}
 
 	/* gold */
@@ -388,7 +423,8 @@
 	/* yellow */
 	[data-page-resource-name="hypochondriac"][data-page-resource-artist-name="brakence"],
 	[data-page-resource-name="Live at Reading"][data-page-resource-artist-name="Nirvana"],
-	[data-page-resource-name="Doomsday"][data-page-resource-artist-name="Lyrical Lemonade"]
+	[data-page-resource-name="Doomsday"][data-page-resource-artist-name="Lyrical Lemonade"],
+	[data-page-resource-name="hotel"][data-page-resource-artist-name="twikipedia"]
 	{
 		--base-hue: 44;
 		--saturation: 1.3;
@@ -399,6 +435,12 @@
 		--base-hue: 60;
 		--saturation: 0.5;
 		--lightness: 1.3;
+	}
+
+	[data-page-resource-name*="Happier Than Ever"][data-page-resource-artist-name="Billie Eilish"]
+	{
+		--base-hue: 24;
+		--saturation: 0.3;
 	}
 
 	[data-page-resource-name="JACKBOYS"][data-page-resource-artist-name="JACKBOYS"]
@@ -423,8 +465,8 @@
 	}
 
 	/* brown */
-	[data-page-resource-name="Utopia"][data-page-resource-artist-name="Travis Scott"],
-	[data-page-resource-name="Utopia"][data-page-resource-artist-name="Travi$ Scott"],
+	[data-page-resource-name="UTOPIA"][data-page-resource-artist-name="Travis Scott"],
+	[data-page-resource-name="UTOPIA"][data-page-resource-artist-name="Travi$ Scott"],
 	[data-page-resource-name="Rodeo"][data-page-resource-artist-name="Travis Scott"],
 	[data-page-resource-name="Crystal Castles"][data-page-resource-artist-name="Crystal Castles"],
 	[data-page-resource-name="The Marshall Mathers LP"][data-page-resource-artist-name="Eminem"],
