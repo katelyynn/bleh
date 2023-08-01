@@ -1,10 +1,10 @@
 // ==UserScript==
 // @name         bleh (feat. addon)
 // @namespace    http://last.fm/music/
-// @version      1.0.0
+// @version      1.0.1
 // @description  bleh!!! ^-^
 // @author       kate
-// @match        https://www.last.fm/user/*
+// @match        https://www.last.fm/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=last.fm
 // @grant        none
 // @updateURL    https://github.com/katelmao/lastfm-bleh/raw/uwu/lastfm-feat.user.js
@@ -46,7 +46,7 @@
                     names[name].setAttribute('data-kate','true');
                 }
             }
-        } catch(e) {}
+        } catch(e) {console.error(e)}
         try {
             let name = document.querySelector('.header-new-title');
             let raw = name.innerHTML;
@@ -69,6 +69,6 @@
                 name.innerHTML = `<div class="inner"><div class="title">${title}</div><div class="feat">${feat}</div></div>`;
                 name.setAttribute('data-kate','true');
             }
-        } catch(e) {}
+        } catch(e) {console.error(e)}
     }
 })();
