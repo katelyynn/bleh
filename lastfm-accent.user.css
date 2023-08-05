@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           bleh (themed album covers)
 @namespace      github.com/katelmao/lastfm-bleh
-@version        1.2.0
+@version        1.2.1
 @license        GPL-3.0
 @description    matches accent colours to albums
 @author         kate
@@ -227,10 +227,12 @@
 		--saturation: 0.45;
 	}
 
-	[data-page-resource-name="HEROES & VILLAINS (Villains Version)"][data-page-resource-artist-name="Metro Boomin"]
+	[data-page-resource-name="HEROES & VILLAINS (Villains Version)"][data-page-resource-artist-name="Metro Boomin"],
+	[data-page-resource-name*="ChoppedNotSlopped"][data-page-resource-artist-name="Metro Boomin"]
 	{
-		--base-hue: 266;
-		--saturation: 1.2;
+		--base-hue: 290;
+		--saturation: 0.7;
+		--lightness: 0.9;
 	}
 
 	[data-page-resource-name="Her Loss"][data-page-resource-artist-name="Drake"],
@@ -405,7 +407,8 @@
 	}
 
 	[data-page-resource-name="Donda"][data-page-resource-artist-name="Kanye West"],
-	[data-page-resource-name="Donda (Deluxe)"][data-page-resource-artist-name="Kanye West"]
+	[data-page-resource-name="Donda (Deluxe)"][data-page-resource-artist-name="Kanye West"],
+	[data-page-resource-name="Scorpion"][data-page-resource-artist-name="Drake"]
 	{
 		--base-hue: 0;
 		--saturation: 0;
