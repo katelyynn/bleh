@@ -1,0 +1,30 @@
+/* ==UserStyle==
+@name           bleh (performance addon)
+@namespace      github.com/katelmao/lastfm-bleh
+@version        1.0.0
+@license        GPL-3.0
+@author         kate
+@updateURL      https://github.com/katelmao/lastfm-bleh/raw/uwu/lastfm-performance.user.css
+==/UserStyle== */
+
+@-moz-document domain("last.fm") {
+	:root {
+		--blur-multiplier: 0.00001;
+		--opacity-multiplier: 0.5;
+	}
+
+	.header-new-background-image:after,
+	.header--overview .header-background:after,
+	.playlisting-playlist-header-background-inner:after
+	{
+		content: '';
+		position: absolute;
+		display: block;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: linear-gradient(180deg, rgba(0,0,0,0) 0%, hsl(var(--b6)) 100%);
+		z-index: -1;
+	}
+}

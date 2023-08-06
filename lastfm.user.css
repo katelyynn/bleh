@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           bleh
 @namespace      github.com/katelmao/lastfm-bleh
-@version        2.3.1
+@version        2.3.2
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelmao/lastfm-bleh/raw/uwu/lastfm.user.css
@@ -159,6 +159,9 @@
 		--underline-offset: 2px;
 
 		--header-background-height: 200px;
+
+		--blur-multiplier: 1;
+		--opacity-multiplier: 1;
 
 		/* shadow */
 		--raise-0: 0px 3px 3px 0px rgba(0, 0, 0, 0.05);
@@ -966,6 +969,17 @@
 		box-shadow: none !important;
 		border-radius: initial !important;
 	}
+
+
+	/* about me, editor */
+	/*#id_about_me {
+		width: calc(370px + (12px * 2));
+		overflow-x: hidden;
+		word-break: break-word;
+		line-height: 20px;
+		display: initial !important;
+	}*/
+
 
 	.form-group:focus-within label {
 		color: hsl(var(--l1)) !important;
@@ -4584,15 +4598,15 @@
 		background: hsl(var(--c3));
 	}
 
-	.highcharts-series-0 .highcharts-point:not(:is(.highcharts-point-select, .highcharts-track, .highcharts-album, .highcharts-artist)) {
+	:is(.your-progress-chart, .scrobble-chart, .scrobble-stats-graph-chart) .highcharts-series-0 .highcharts-point:not(:is(.highcharts-point-select, .highcharts-track, .highcharts-album, .highcharts-artist)) {
 		fill: hsl(var(--l4)) !important;
 		rx: 10px;
 	}
-	.highcharts-series-1 .highcharts-point:not(:is(.highcharts-point-select, .highcharts-track, .highcharts-album, .highcharts-artist)) {
+	:is(.your-progress-chart, .scrobble-chart, .scrobble-stats-graph-chart) .highcharts-series-1 .highcharts-point:not(:is(.highcharts-point-select, .highcharts-track, .highcharts-album, .highcharts-artist)) {
 		fill: hsla(var(--l4),50%) !important;
 		rx: 10px;
 	}
-	.highcharts-series .highcharts-point-hover:not(:is(.highcharts-point-select, .highcharts-track, .highcharts-album, .highcharts-artist)) {
+	:is(.your-progress-chart, .scrobble-chart, .scrobble-stats-graph-chart) .highcharts-series .highcharts-point-hover:not(:is(.highcharts-point-select, .highcharts-track, .highcharts-album, .highcharts-artist)) {
 		fill: hsl(var(--l3)) !important;
 		rx: 10px;
 	}
@@ -5031,6 +5045,7 @@
 		border: 1px solid hsl(var(--b3));
 		border-radius: 10px;
 		overflow: hidden;
+		/*box-shadow: 0 0 60px 10px hsl(var(--b6));*/
 		box-shadow: var(--raise-4);
 	}
 	.dropdown-menu-clickable {
@@ -5508,6 +5523,10 @@
 		background: transparent;
 		color: hsl(var(--c1));
 	}
+	.header .header-background
+	{
+		background-color: transparent;
+	}
 	.header-new-background
 	{
 		overflow: hidden !important;
@@ -5525,10 +5544,10 @@
 	.header--overview .header-background,
 	.playlisting-playlist-header-background-inner
 	{
-		filter: blur(100px) saturate(145%);
+		filter: blur(calc(var(--blur-multiplier)*100px)) saturate(145%);
 		height: calc(var(--header-background-height) + 400px);
 		transform: scale(1.15);
-		opacity: 0.3;
+		opacity: calc(var(--opacity-multiplier)*0.3) !important;
 		/*position: relative;
 		top: calc(var(--header-background-height) - 10px);*/
 	}
@@ -6073,5 +6092,15 @@
 	[data-tealium-data*='"pageType": "error'] + div .page-content {
 		margin-top: 34vh;
 		margin-bottom: 23vh;
+	}
+
+
+
+	/* forum */
+	.topic-post.group-Team .onscreen-post:not(#post_1) .topic-body .cooked {
+		background-color: hsl(var(--d5));
+	}
+	.topic-body aside {
+		background: hsl(var(--b4)) !important;
 	}
 }
