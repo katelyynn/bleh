@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           bleh (performance addon)
 @namespace      github.com/katelmao/lastfm-bleh
-@version        1.0.1
+@version        1.0.2
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelmao/lastfm-bleh/raw/uwu/lastfm-performance.user.css
@@ -33,5 +33,12 @@
 		bottom: 0;
 		background: linear-gradient(180deg, rgba(0,0,0,0) 0%, hsl(var(--b6)) 100%);
 		z-index: -1;
+	}
+
+
+	/* now playing! */
+	.chartlist-row--now-scrobbling {
+		box-shadow: 0px 0 70px 20px hsla(var(--l4), 45%);
+		box-shadow: none;
 	}
 }
