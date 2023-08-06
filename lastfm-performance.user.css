@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           bleh (performance addon)
 @namespace      github.com/katelmao/lastfm-bleh
-@version        1.0.0
+@version        1.0.1
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelmao/lastfm-bleh/raw/uwu/lastfm-performance.user.css
@@ -10,7 +10,14 @@
 @-moz-document domain("last.fm") {
 	:root {
 		--blur-multiplier: 0.00001;
-		--opacity-multiplier: 0.5;
+		--opacity-multiplier: 0.7;
+	}
+
+	.header-new-background-image,
+	.header--overview .header-background,
+	.playlisting-playlist-header-background-inner
+	{
+		filter: saturate(145%) !important;
 	}
 
 	.header-new-background-image:after,
