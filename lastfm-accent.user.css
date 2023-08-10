@@ -1,12 +1,16 @@
 /* ==UserStyle==
 @name           bleh (themed album covers)
 @namespace      github.com/katelmao/lastfm-bleh
-@version        1.2.1
+@version        2023.0808
 @license        GPL-3.0
 @description    matches accent colours to albums
 @author         kate
 @updateURL      https://github.com/katelmao/lastfm-bleh/raw/uwu/lastfm-accent.user.css
 ==/UserStyle== */
+
+@-moz-document domain("plexion.dev") {
+	body {--accent-ver: 2023.0808 }
+}
 
 @-moz-document domain("last.fm") {
     /* pinky-red */

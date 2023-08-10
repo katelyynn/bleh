@@ -1,11 +1,34 @@
 /* ==UserStyle==
 @name           bleh (amoled addon)
 @namespace      github.com/katelmao/lastfm-bleh
-@version        1.0.7
+@version        2023.0808
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelmao/lastfm-bleh/raw/uwu/lastfm-amoled.user.css
 ==/UserStyle== */
+
+@-moz-document domain("plexion.dev") {
+	body {--amoled-ver: 2023.0808 }
+
+	:root, body {
+		--saturation: 1;
+		--lightness: 1;
+		/* b1-6 */
+		--b1: hsl(var(--base-hue),calc(var(--saturation)*17%),23%);
+		--b2: hsl(var(--base-hue),calc(var(--saturation)*17%),19%);
+		--b3: hsl(var(--base-hue),calc(var(--saturation)*15%),14%);
+		--b4: hsl(var(--base-hue),calc(var(--saturation)*14%),10%);
+		--b5: hsl(var(--base-hue),calc(var(--saturation)*10%),6%);
+		--b6: hsl(var(--base-hue),0%,0%);
+		/* d1-6 */
+		--d1: hsl(var(--base-hue),calc(var(--saturation)*20%),calc(var(--lightness)*27%));
+		--d2: hsl(var(--base-hue),calc(var(--saturation)*20%),calc(var(--lightness)*22%));
+		--d3: hsl(var(--base-hue),calc(var(--saturation)*18%),calc(var(--lightness)*18%));
+		--d4: hsl(var(--base-hue),calc(var(--saturation)*18%),calc(var(--lightness)*15%));
+		--d5: hsl(var(--base-hue),calc(var(--saturation)*16%),calc(var(--lightness)*10%));
+		--d6: hsl(var(--base-hue),calc(var(--saturation)*13%),calc(var(--lightness)*6%));
+	}
+}
 
 @-moz-document domain("last.fm") {
     :root, body, .re-style,
