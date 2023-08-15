@@ -9,7 +9,7 @@
 ==/UserStyle== */
 
 @-moz-document domain("plexion.dev") {
-	body                     {--theme-ver: 2021.08151 }
+	body                     {--theme-ver: 2023.08151 }
 	.installed-only          {display: initial       }
 	.uninstalled-only        {display: none          }
 	.button.installed-only   {display: inline-block  }
