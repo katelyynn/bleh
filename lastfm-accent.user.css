@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           bleh (themed album covers)
 @namespace      github.com/katelmao/lastfm-bleh
-@version        2023.0808
+@version        2023.0814
 @license        GPL-3.0
 @description    matches accent colours to albums
 @author         kate
@@ -9,7 +9,7 @@
 ==/UserStyle== */
 
 @-moz-document domain("plexion.dev") {
-	body {--accent-ver: 2023.0808 }
+	body {--accent-ver: 2023.0814 }
 }
 
 @-moz-document domain("last.fm") {
@@ -23,6 +23,13 @@
 	[data-page-resource-name="BEST OF LAPFOX VOL 1: Because Maybe!"][data-page-resource-artist-name="Renard"]
 	{
 		--base-hue: -13;
+	}
+
+	[data-page-resource-name="re:start"][data-page-resource-artist-name="Miraie"]
+	{
+		--base-hue: 316;
+		--saturation: 0.7;
+		--lightness: 0.95;
 	}
 
 	/* purple */
@@ -151,7 +158,8 @@
 	[data-page-resource-name="K-POP"][data-page-resource-artist-name="Travis Scott"],
 	[data-page-resource-name="K-POP"][data-page-resource-artist-name="Travi$ Scott"],
 	[data-page-resource-name="titles"][data-page-resource-artist-name="twikipedia"],
-	[data-page-resource-name="DONDA: With Child"][data-page-resource-artist-name="Kanye West"]
+	[data-page-resource-name="DONDA: With Child"][data-page-resource-artist-name="Kanye West"],
+	[data-page-resource-name="give up"][data-page-resource-artist-name="Miraie"]
 	{
 		--base-hue: 1;
 		--saturation: 1.45;

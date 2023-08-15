@@ -1,14 +1,14 @@
 /* ==UserStyle==
 @name           bleh (amoled addon)
 @namespace      github.com/katelmao/lastfm-bleh
-@version        2023.0808
+@version        2023.0815
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelmao/lastfm-bleh/raw/uwu/lastfm-amoled.user.css
 ==/UserStyle== */
 
 @-moz-document domain("plexion.dev") {
-	body {--amoled-ver: 2023.0808 }
+	body {--amoled-ver: 2023.0815 }
 
 	:root, body {
 		--saturation: 1;
@@ -37,7 +37,8 @@
 	.namespace--user_overview nav,
 	#current-subscription,/*,
 	.namespace--settings_subscription_overview .adaptive-skin-container*/
-	.main-content > div[data-page-resource-blacklist-level=""]
+	.main-content > div[data-page-resource-blacklist-level=""],
+	#ignorelist, #manage_data
 	{
 		/* text */
 		--text-link: var(--base-hue),calc(var(--saturation)*95%),calc(var(--lightness)*63%);
