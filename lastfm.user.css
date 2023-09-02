@@ -9,7 +9,11 @@
 ==/UserStyle== */
 
 @-moz-document domain("plexion.dev") {
-	body                     {--theme-ver: 2023.0902 } .installed-only, .btn-installed-only {display: initial !important} .uninstalled-only {display: none} .install {pointer-events: auto; opacity: 1; border-style: solid}
+	body                     {--theme-ver: 2023.0902 }
+	.installed-only          {display: initial       }
+	.uninstalled-only        {display: none          }
+	.button.installed-only   {display: inline-block  }
+	.install {pointer-events: auto; opacity: 1; border-style: solid}
 }
 
 @-moz-document domain("last.fm") {
