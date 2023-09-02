@@ -1,52 +1,81 @@
 /* ==UserStyle==
 @name           bleh (themed album covers)
 @namespace      github.com/katelmao/lastfm-bleh
-@version        2023.0814
+@version        2023.0902
 @license        GPL-3.0
 @description    matches accent colours to albums
 @author         kate
 @updateURL      https://github.com/katelmao/lastfm-bleh/raw/uwu/lastfm-accent.user.css
 ==/UserStyle== */
 
-@-moz-document domain("plexion.dev") {
-	body {--accent-ver: 2023.0814 }
+@-moz-document domain("localhost") {
+	body {--accent-ver: 2023.0902 }
 }
 
 @-moz-document domain("last.fm") {
+	/* invert loved button */
+	.chartlist-row--now-scrobbling:has(:is(
+	a[href*="/music/brakence/hypochondriac"],
+	a[href*="/music/Kanye+West/Donda+2"],
+	a[href*="/music/Nirvana/Incesticide"],
+	a[href*="/music/Nirvana/Nevermind"]
+	)) .chartlist-love-button[data-analytics-action="UnloveTrack"] {
+		filter: saturate(0) brightness(350%) !important;
+	}
+
+	.chartlist-row--now-scrobbling:has(:is(
+
+	)) .chartlist-love-button[data-analytics-action="UnloveTrack"] {
+		filter: saturate(0) brightness(10%) !important;
+	}
+
+
     /* pinky-red */
-	[data-page-resource-name="Legends Never Die"][data-page-resource-artist-name="Juice WRLD"],
-	[data-page-resource-name="Graduation"][data-page-resource-artist-name="Kanye West"],
-	[data-page-resource-name="Love Sick (Deluxe)"][data-page-resource-artist-name="Don Toliver"],
-	[data-page-resource-name="feathers n glue"][data-page-resource-artist-name="sewerperson"],
-	[data-page-resource-name*="Unplugged"][data-page-resource-artist-name="Nirvana"],
-	[data-page-resource-name="Loveless"][data-page-resource-artist-name="my bloody valentine"],
-	[data-page-resource-name="BEST OF LAPFOX VOL 1: Because Maybe!"][data-page-resource-artist-name="Renard"]
+	[data-page-resource-name="Legends Never Die"][data-page-resource-artist-name="Juice WRLD"], .chartlist-row--now-scrobbling:has(a[href*="/music/Juice+WRLD/Legends+Never+Die"]),
+	[data-page-resource-name="Graduation"][data-page-resource-artist-name="Kanye West"], .chartlist-row--now-scrobbling:has(a[href*="/music/Kanye+West/Graduation"]),
+	[data-page-resource-name="Love Sick (Deluxe)"][data-page-resource-artist-name="Don Toliver"], .chartlist-row--now-scrobbling:has(a[href*="/music/Don+Toliver/Love+Sick+(Deluxe)"]),
+	[data-page-resource-name="feathers n glue"][data-page-resource-artist-name="sewerperson"], .chartlist-row--now-scrobbling:has(a[href*="/music/sewerperson/feathers+n+glue"]),
+	[data-page-resource-name*="Unplugged"][data-page-resource-artist-name="Nirvana"], .chartlist-row--now-scrobbling:has(a[href*="/music/Nirvana/"][href*="Unplugged"]),
+	[data-page-resource-name="Loveless"][data-page-resource-artist-name="my bloody valentine"], .chartlist-row--now-scrobbling:has(a[href*="/music/my+bloody+valentine/Loveless"]),
+	[data-page-resource-name="BEST OF LAPFOX VOL 1: Because Maybe!"][data-page-resource-artist-name="Renard"], .chartlist-row--now-scrobbling:has(a[href*="/music/Renard/BEST+OF+LAPFOX+VOL+1"])
 	{
 		--base-hue: -13;
 	}
 
-	[data-page-resource-name="re:start"][data-page-resource-artist-name="Miraie"]
+	[data-page-resource-name="re:start"][data-page-resource-artist-name="Miraie"], .chartlist-row--now-scrobbling:has(a[href*="/music/Miraie/re:start"])
 	{
 		--base-hue: 316;
 		--saturation: 0.7;
 		--lightness: 0.95;
 	}
 
+	/* Shoebill - Scousecore (Album) */
+	[data-page-resource-name="Scousecore"][data-page-resource-artist-name="Shoebill"], .chartlist-row--now-scrobbling:has(a[href*="/music/Shoebill/Scousecore"]),
+	[data-page-resource-name="Drop Kick"][data-page-resource-artist-name="Shoebill"],
+	[data-page-resource-name="Crazy Mash Thing"][data-page-resource-artist-name="Shoebill"],
+	[data-page-resource-name="waaa kidda"][data-page-resource-artist-name="Shoebill"],
+	[data-page-resource-name="Amen-kun"][data-page-resource-artist-name="Shoebill"]
+	{
+		--base-hue: 343;
+		--saturation: 0.38;
+		--lightness: 0.95;
+	}
+
 	/* purple */
-	[data-page-resource-name="Voidcore"][data-page-resource-artist-name="SPURME"]
+	[data-page-resource-name="Voidcore"][data-page-resource-artist-name="SPURME"], .chartlist-row--now-scrobbling:has(a[href*="/music/SPURME/Voidcore"])
 	{
 		--base-hue: 260;
 		--saturation: 1.5;
 	}
 
-	[data-page-resource-name="Starving Slvts Always Get Their Fix"][data-page-resource-artist-name="Sewerslvt"]
+	[data-page-resource-name="Starving Slvts Always Get Their Fix"][data-page-resource-artist-name="Sewerslvt"], .chartlist-row--now-scrobbling:has(a[href*="/music/Sewerslvt/Starving+Slvts+Always+Get+Their+Fix"])
 	{
 		--base-hue: 297;
 		--saturation: 1.1;
 		--lightness: 0.7;
 	}
 
-	[data-page-resource-name*="WRLD ON DRUGS"][data-page-resource-artist-name*="Future"]
+	[data-page-resource-name*="WRLD ON DRUGS"][data-page-resource-artist-name*="Future"], .chartlist-row--now-scrobbling:has(a[href*="WRLD+ON+DRUGS"][href*="/music/Future"])
 	{
 		--base-hue: 298;
 		--saturation: 0.45;
@@ -54,149 +83,217 @@
 	}
 
 	/* lighty purple */
-	[data-page-resource-name="Skitzofrenia Simulation"][data-page-resource-artist-name="Sewerslvt"]
+	[data-page-resource-name="Skitzofrenia Simulation"][data-page-resource-artist-name="Sewerslvt"], .chartlist-row--now-scrobbling:has(a[href*="/music/Sewerslvt/Skitzofrenia+Simulation"])
 	{
 		--base-hue: 260;
 		--saturation: 1;
 	}
 
 	/* PINK */
-	[data-page-resource-name="Pink Tape"][data-page-resource-artist-name="Lil Uzi Vert"],
-	[data-page-resource-name="Pim Tape"][data-page-resource-artist-name="Lil Uzi Vert"]
+	[data-page-resource-name="Pink Tape"][data-page-resource-artist-name="Lil Uzi Vert"], .chartlist-row--now-scrobbling:has(a[href*="/music/Lil+Uzi+Vert/Pink+Tape"]),
+	[data-page-resource-name="Pim Tape"][data-page-resource-artist-name="Lil Uzi Vert"], .chartlist-row--now-scrobbling:has(a[href*="/music/Lil+Uzi+Vert/Pim+Tape"])
 	{
 		--base-hue: 333;
 		--saturation: 1.07;
 	}
 
 	/* light pink */
-	[data-page-resource-name="Draining Love Story"][data-page-resource-artist-name="Sewerslvt"]
+	[data-page-resource-name="Draining Love Story"][data-page-resource-artist-name="Sewerslvt"], .chartlist-row--now-scrobbling:has(a[href*="/music/Sewerslvt/Draining+Love+Story"])
 	{
 		--base-hue: 316;
 		--saturation: 0.82;
 	}
 
-	[data-page-resource-name="Celeste (Original Soundtrack)"][data-page-resource-artist-name="Lena Raine"]
+	[data-page-resource-name="Celeste (Original Soundtrack)"][data-page-resource-artist-name="Lena Raine"], .chartlist-row--now-scrobbling:has(a[href*="/music/Lena+Raine/Celeste+(Original+Soundtrack)"])
 	{
 		--base-hue: 346;
 		--saturation: 0.75;
 	}
 
-	[data-page-resource-name="Doki Doki Literature Club! (Original Soundtrack)"][data-page-resource-artist-name="Dan Salvato"]
+	[data-page-resource-name="Doki Doki Literature Club"][data-page-resource-artist-name="Dan Salvato"], .chartlist-row--now-scrobbling:has(a[href*="/music/Dan+Salvato/Doki Doki Literature Club"])
 	{
 		--base-hue: 327;
 		--saturation: 0.68;
 	}
 
 	/* red-orange */
-	[data-page-resource-name="Death Race for Love"][data-page-resource-artist-name="Juice WRLD"],
-	[data-page-resource-name*="Death Race For Love"][data-page-resource-artist-name="Juice WRLD"],
-	[data-page-resource-name="Love Sick"][data-page-resource-artist-name="Don Toliver"],
-	[data-page-resource-name="Bad Boy (with Young Thug)"][data-page-resource-artist-name="Juice WRLD"],
-	[data-page-resource-name="Savage Mode II"][data-page-resource-artist-name="21 Savage"],
-	[data-page-resource-name="The College Dropout"][data-page-resource-artist-name="Kanye West"],
-	[data-page-resource-name="Minecraft - Volume Beta"][data-page-resource-artist-name="C418"]
+	[data-page-resource-name="Death Race for Love"][data-page-resource-artist-name="Juice WRLD"], .chartlist-row--now-scrobbling:has(a[href*="/music/Juice+WRLD/Death+Race+for+Love"]),
+	[data-page-resource-name*="Death Race For Love"][data-page-resource-artist-name="Juice WRLD"], .chartlist-row--now-scrobbling:has(a[href*="/music/Juice+WRLD/Death+Race+For+Love"]),
+	[data-page-resource-name="Love Sick"][data-page-resource-artist-name="Don Toliver"], .chartlist-row--now-scrobbling:has(a[href*="/music/Don+Toliver/Love+Sick"]),
+	[data-page-resource-name="Bad Boy (with Young Thug)"][data-page-resource-artist-name="Juice WRLD"], .chartlist-row--now-scrobbling:has(a[href*="/music/Juice+WRLD/Bad+Boy+(with+Young+Thug)"]),
+	[data-page-resource-name="Savage Mode II"][data-page-resource-artist-name="21 Savage"], .chartlist-row--now-scrobbling:has(a[href*="/music/21+Savage/SAVAGE+MODE+II"]),
+	[data-page-resource-name="The College Dropout"][data-page-resource-artist-name="Kanye West"], .chartlist-row--now-scrobbling:has(a[href*="/music/Kanye+West/The+College+Dropout"]),
+	[data-page-resource-name="Minecraft - Volume Beta"][data-page-resource-artist-name="C418"], .chartlist-row--now-scrobbling:has(a[href*="/music/C418/Minecraft+-+Volume+Beta"])
 	{
 		--base-hue: 11;
 		--saturation: 1.3;
 		--lightness: 0.8;
 	}
 
-	[data-page-resource-name*="In Utero"][data-page-resource-artist-name="Nirvana"],
-	[data-page-resource-name="Live and Loud"][data-page-resource-artist-name="Nirvana"]
+	/* Nirvana - In Utero (Album) */
+	[data-page-resource-name*="In Utero"][data-page-resource-artist-name="Nirvana"], .chartlist-row--now-scrobbling:has(a[href*="/music/Nirvana/In+Utero"]),
+	[data-page-resource-name*="Serve"][data-page-resource-name="Servants"][data-page-resource-artist-name="Nirvana"],
+	[data-page-resource-name*="Scentless Apprentice"][data-page-resource-artist-name="Nirvana"],
+	[data-page-resource-name*="Heart-Shaped Box"][data-page-resource-artist-name="Nirvana"],
+	[data-page-resource-name*="Rape Me"][data-page-resource-artist-name="Nirvana"],
+	[data-page-resource-name*="Frances Farmer Will Have Her Revenge"][data-page-resource-name="n Seattle"][data-page-resource-artist-name="Nirvana"],
+	[data-page-resource-name*="Dumb"][data-page-resource-artist-name="Nirvana"],
+	[data-page-resource-name*="Very Ape"][data-page-resource-artist-name="Nirvana"],
+	[data-page-resource-name*="Milk It"][data-page-resource-artist-name="Nirvana"],
+	[data-page-resource-name*="Pennyroyal Tea"][data-page-resource-artist-name="Nirvana"],
+	[data-page-resource-name*="Radio Friendly Unit Shifter"][data-page-resource-artist-name="Nirvana"],
+	[data-page-resource-name*="ourette's"][data-page-resource-artist-name="Nirvana"],
+	[data-page-resource-name*="All Apologies"][data-page-resource-artist-name="Nirvana"],
+	[data-page-resource-name*="Live"][data-page-resource-name*=" Loud"][data-page-resource-artist-name="Nirvana"], .chartlist-row--now-scrobbling:has(a[href*="/music/Nirvana/Live+and+Loud"])
 	{
-		--base-hue: 346;
-		--saturation: 0.7;
-		--lightness: 0.7;
+		--base-hue: 50;
+		--saturation: 0.37;
+		--lightness: 1.1;
+	}
+
+	/* Nirvana - Outcesticide (Bootleg/Album) */
+	[data-page-resource-name*="Outcesticide"][data-page-resource-artist-name="Nirvana"], .chartlist-row--now-scrobbling:has(a[href*="/music/Nirvana/Outcesticide"])
+	{
+		--base-hue: 4;
+		--saturation: 1.1;
+		--lightness: 0.95;
+	}
+
+	/* Nirvana - Outcesticide III (Bootleg/Album) */
+	[data-page-resource-name*="Outcesticide III"][data-page-resource-artist-name="Nirvana"], .chartlist-row--now-scrobbling:has(a[href*="/music/Nirvana/Outcesticide+III"])
+	{
+		--base-hue: 148;
+		--saturation: 0.46;
+		--lightness: 0.8;
+	}
+
+	/* Nirvana - Outcesticide IV (Bootleg/Album) */
+	[data-page-resource-name*="Outcesticide IV"][data-page-resource-artist-name="Nirvana"], .chartlist-row--now-scrobbling:has(a[href*="/music/Nirvana/Outcesticide+IV"])
+	{
+		--base-hue: 223;
+		--saturation: 0.82;
+		--lightness: 0.75;
 	}
 
 	/* orange */
-	[data-page-resource-name="old dog, new tricks"][data-page-resource-artist-name="glaive"],
-	[data-page-resource-name="HEROES & VILLAINS"][data-page-resource-artist-name="Metro Boomin"],
-	[data-page-resource-name="punk2"][data-page-resource-artist-name="brakence"],
-	[data-page-resource-name="The Life of Pablo"][data-page-resource-artist-name="Kanye West"],
-	[data-page-resource-name="Strike (Holster)"][data-page-resource-artist-name="Lil Yachty"],
-	[data-page-resource-name="Flower Boy"][data-page-resource-artist-name="Tyler, the Creator"]
+	[data-page-resource-name="old dog, new tricks"][data-page-resource-artist-name*="laive"], .chartlist-row--now-scrobbling:has(a[href*="/music/Glaive/old+dog,+new+tricks"]),
+	[data-page-resource-name="HEROES & VILLAINS"][data-page-resource-artist-name="Metro Boomin"], .chartlist-row--now-scrobbling:has(a[href*="/music/Metro+Boomin/HEROES+&+VILLAINS"]),
+	[data-page-resource-name*="punk2"][data-page-resource-artist-name="brakence"], .chartlist-row--now-scrobbling:has(a[href*="/music/brakence/punk2"]),
+	[data-page-resource-name="The Life of Pablo"][data-page-resource-artist-name="Kanye West"], .chartlist-row--now-scrobbling:has(a[href*="/music/Kanye+West/The+Life+of+Pablo"]),
+	[data-page-resource-name="Strike (Holster)"][data-page-resource-artist-name="Lil Yachty"], .chartlist-row--now-scrobbling:has(a[href*="/music/Lil+Yachty/Strike+(Holster)"]),
+	[data-page-resource-name="Flower Boy"][data-page-resource-artist-name="Tyler, the Creator"], .chartlist-row--now-scrobbling:has(a[href*="/music/Tyler,+the+Creator/Flower+Boy"]),
+	[data-page-resource-name="Donda 2"][data-page-resource-artist-name="Kanye West"], .chartlist-row--now-scrobbling:has(a[href*="/music/Kanye+West/Donda+2"])
 	{
-		--base-hue: 29;
+		--base-hue: 25;
 		--saturation: 1.05;
 		--lightness: 0.9;
 	}
 
-	[data-page-resource-name="Toxicity"][data-page-resource-artist-name="System of a Down"]
+	[data-page-resource-name="Toxicity"][data-page-resource-artist-name="System of a Down"], .chartlist-row--now-scrobbling:has(a[href*="/music/System+of+a+Down/Toxicity"])
 	{
 		--base-hue: 35;
 		--saturation: 0.5;
 		--lightness: 0.8;
 	}
 
-	[data-page-resource-name="I NEVER LIKED YOU"][data-page-resource-artist-name="Future"]
+	/* Future - I NEVER LIKED YOU (Album) */
+	[data-page-resource-name="I NEVER LIKED YOU"][data-page-resource-artist-name="Future"], .chartlist-row--now-scrobbling:has(a[href*="/music/Future/I+NEVER+LIKED+YOU"]),
+	[data-page-resource-name="712PM"][data-page-resource-artist-name="Future"],
+	[data-page-resource-name*="I'M DAT N"][data-page-resource-artist-name="Future"],
+	[data-page-resource-name*="KEEP IT BURNIN"][data-page-resource-artist-name="Future"],
+	[data-page-resource-name*="FOR A NUT"][data-page-resource-artist-name="Future"],
+	[data-page-resource-name="PUFFIN ON ZOOTIEZ"][data-page-resource-artist-name="Future"],
+	[data-page-resource-name="GOLD STACKS"][data-page-resource-artist-name="Future"],
+	[data-page-resource-name*="WAIT FOR U"][data-page-resource-artist-name="Future"],
+	[data-page-resource-name="LOVE YOU BETTER"][data-page-resource-artist-name="Future"],
+	[data-page-resource-name="MASSAGING ME"][data-page-resource-artist-name="Future"],
+	[data-page-resource-name*="CHICKENS"][data-page-resource-artist-name="Future"],
+	[data-page-resource-name="WE JUS WANNA GET HIGH"][data-page-resource-artist-name="Future"],
+	[data-page-resource-name*="VOODOO"][data-page-resource-artist-name="Future"],
+	[data-page-resource-name="HOLY GHOST"][data-page-resource-artist-name="Future"],
+	[data-page-resource-name="THE WAY THINGS GOING"][data-page-resource-artist-name="Future"],
+	[data-page-resource-name*="I'M ON ONE"][data-page-resource-artist-name="Future"],
+	[data-page-resource-name="BACK TO THE BASICS"][data-page-resource-artist-name="Future"],
+	[data-page-resource-name*="NO SECRUTITY"][data-page-resource-artist-name="Future"],
+	[data-page-resource-name*="LIKE ME"][data-page-resource-artist-name="Future"],
+	[data-page-resource-name*="AFFILIATED"][data-page-resource-artist-name="Future"],
+	[data-page-resource-name*="STAYED DOWN"][data-page-resource-artist-name="Future"],
+	[data-page-resource-name="WORST DAY"][data-page-resource-artist-name="Future"],
+	[data-page-resource-name="JUST THE BEGINNING"][data-page-resource-artist-name="Future"]
 	{
 		--base-hue: 356;
-		--saturation: 0.6;
-		--lightness: 0.6;
+		--saturation: 0.72;
+		--lightness: 0.5;
 	}
 
 	/* red */
-	[data-page-resource-name="Birds in the Trap Sing McKnight"][data-page-resource-artist-name="Travis Scott"],
-	[data-page-resource-name="Birds In The Trap Sing McKnight"][data-page-resource-artist-name="Travis Scott"],
-	[data-page-resource-name="Birds In The Trap Sing McKnight"][data-page-resource-artist-name="Young Thug"] /* lfm issue */,
-	[data-page-resource-name*="The Eminem Show"][data-page-resource-artist-name="Eminem"],
-	[data-page-resource-name="Music to Be Murdered By"][data-page-resource-artist-name="Eminem"],
-	[data-page-resource-name*="Music To Be Murdered By"][data-page-resource-artist-name="Eminem"],
-	[data-page-resource-name="My Beautiful Dark Twisted Fantasy"][data-page-resource-artist-name="Kanye West"],
-	[data-page-resource-name="Yeezus"][data-page-resource-artist-name="Kanye West"],
-	[data-page-resource-name="LOST"][data-page-resource-artist-name="Yumi"],
-	[data-page-resource-name="Certified Lover Boy"][data-page-resource-artist-name="Drake"],
-	[data-page-resource-name="COA"][data-page-resource-artist-name="ericdoa"],
-	[data-page-resource-name="DAMN."][data-page-resource-artist-name="Kendrick Lamar"],
-	[data-page-resource-name="Eternal Atake"][data-page-resource-artist-name="Lil Uzi Vert"],
-	[data-page-resource-name="808s & Heartbreak"][data-page-resource-artist-name="Kanye West"],
-	[data-page-resource-name="UNDERTALE Soundtrack"][data-page-resource-artist-name="Toby Fox"],
-	[data-page-resource-name="Koi No Yokan"][data-page-resource-artist-name="Deftones"],
-	[data-page-resource-name="Mezmerize"][data-page-resource-artist-name="System of a Down"],
-	[data-page-resource-name="2 Alivë (Geëk Pack)"][data-page-resource-artist-name="Yeat"],
-	[data-page-resource-name="K-POP"][data-page-resource-artist-name="Travis Scott"],
-	[data-page-resource-name="K-POP"][data-page-resource-artist-name="Travi$ Scott"],
-	[data-page-resource-name="titles"][data-page-resource-artist-name="twikipedia"],
-	[data-page-resource-name="DONDA: With Child"][data-page-resource-artist-name="Kanye West"],
-	[data-page-resource-name="give up"][data-page-resource-artist-name="Miraie"]
+	[data-page-resource-name="Birds in the Trap Sing McKnight"][data-page-resource-artist-name="Travis Scott"], .chartlist-row--now-scrobbling:has(a[href*="/music/Travis+Scott/Birds+In+The+Trap+Sing+McKnight"]),
+	[data-page-resource-name="Birds In The Trap Sing McKnight"][data-page-resource-artist-name="Travis Scott"], .chartlist-row--now-scrobbling:has(a[href*="/music/Travi$+Scott/Birds+In+The+Trap+Sing+McKnight"]),
+	[data-page-resource-name="Birds In The Trap Sing McKnight"][data-page-resource-artist-name="Young Thug"], .chartlist-row--now-scrobbling:has(a[href*="/music/Young+Thug/Birds+In+The+Trap+Sing+McKnight"]) /* lfm issue */,
+	[data-page-resource-name*="The Eminem Show"][data-page-resource-artist-name="Eminem"], .chartlist-row--now-scrobbling:has(a[href*="/music/Eminem"][href*="The+Eminem+Show"]),
+	[data-page-resource-name="Music to Be Murdered By"][data-page-resource-artist-name="Eminem"], .chartlist-row--now-scrobbling:has(a[href*="/music/Eminem/Music+to+be+Murdered+By"]),
+	[data-page-resource-name*="Music To Be Murdered By"][data-page-resource-artist-name="Eminem"], .chartlist-row--now-scrobbling:has(a[href*="/music/Eminem/"][href*="Music+To+Be+Murdered+By"]),
+	[data-page-resource-name="My Beautiful Dark Twisted Fantasy"][data-page-resource-artist-name="Kanye West"], .chartlist-row--now-scrobbling:has(a[href*="/music/Kanye+West/My+Beautiful+Dark+Twisted+Fantasy"]),
+	[data-page-resource-name="Yeezus"][data-page-resource-artist-name="Kanye West"], .chartlist-row--now-scrobbling:has(a[href*="/music/Kanye+West/Yeezus"]),
+	[data-page-resource-name="LOST"][data-page-resource-artist-name="Yumi"], .chartlist-row--now-scrobbling:has(a[href*="/music/Yumi/LOST"]),
+	[data-page-resource-name="Certified Lover Boy"][data-page-resource-artist-name="Drake"], .chartlist-row--now-scrobbling:has(a[href*="/music/Drake/Certified+Lover+Boy"]),
+	[data-page-resource-name="COA"][data-page-resource-artist-name="ericdoa"], .chartlist-row--now-scrobbling:has(a[href*="/music/ericdoa/COA"]),
+	[data-page-resource-name="DAMN."][data-page-resource-artist-name="Kendrick Lamar"], .chartlist-row--now-scrobbling:has(a[href*="/music/Kendrick+Lamar/DAMN."]),
+	[data-page-resource-name="Eternal Atake"][data-page-resource-artist-name="Lil Uzi Vert"], .chartlist-row--now-scrobbling:has(a[href*="/music/Lil+Uzi+Vert/Eternal+Atake"]),
+	[data-page-resource-name="808s & Heartbreak"][data-page-resource-artist-name="Kanye West"], .chartlist-row--now-scrobbling:has(a[href*="/music/Kanye+West/808s+&+Heartbreak"]),
+	[data-page-resource-name="UNDERTALE Soundtrack"][data-page-resource-artist-name="Toby Fox"], .chartlist-row--now-scrobbling:has(a[href*="/music/Toby+Fox/UNDERTALE+Soundtrack"]),
+	[data-page-resource-name="Koi No Yokan"][data-page-resource-artist-name="Deftones"], .chartlist-row--now-scrobbling:has(a[href*="/music/Deftones/Koi+No+Yokan"]),
+	[data-page-resource-name="Mezmerize"][data-page-resource-artist-name="System of a Down"], .chartlist-row--now-scrobbling:has(a[href*="/music/System+of+a+Down/Mezmerize"]),
+	[data-page-resource-name="2 Alivë (Geëk Pack)"][data-page-resource-artist-name="Yeat"], .chartlist-row--now-scrobbling:has(a[href*="/music/2 alive geek pack"]),
+	[data-page-resource-name="K-POP"][data-page-resource-artist-name="Travis Scott"], .chartlist-row--now-scrobbling:has(a[href*="/music/Travis+Scott/K-POP"]),
+	[data-page-resource-name="K-POP"][data-page-resource-artist-name="Travi$ Scott"], .chartlist-row--now-scrobbling:has(a[href*="/music/Travi$+Scott/K-POP"]),
+	[data-page-resource-name="titles"][data-page-resource-artist-name="twikipedia"], .chartlist-row--now-scrobbling:has(a[href*="/music/twikipedia/titles"]),
+	[data-page-resource-name="DONDA: With Child"][data-page-resource-artist-name="Kanye West"], .chartlist-row--now-scrobbling:has(a[href*="/music/Kanye+West/DONDA:+With+Child"]),
+	[data-page-resource-name="give up"][data-page-resource-artist-name="Miraie"], .chartlist-row--now-scrobbling:has(a[href*="/music/Miraie/give+up"])
 	{
 		--base-hue: 1;
 		--saturation: 1.45;
 		--lightness: 0.85;
 	}
 
-	[data-page-resource-name="Let’s Start Here."][data-page-resource-artist-name="Lil Yachty"]
+	[data-page-resource-name="Let’s Start Here."][data-page-resource-artist-name="Lil Yachty"], .chartlist-row--now-scrobbling:has(a[href*="/music/Lil+Yachty/Let’s+Start+Here."])
 	{
 		--base-hue: -2;
 		--saturation: 0.85;
 	}
 
 	/* blue */
-	[data-page-resource-name*="Fighting Demons"][data-page-resource-artist-name="Juice WRLD"],
-	[data-page-resource-name="Robbery"][data-page-resource-artist-name="Juice WRLD"],
-	[data-page-resource-name="Views"][data-page-resource-artist-name="Drake"]
+	[data-page-resource-name*="Fighting Demons"][data-page-resource-artist-name="Juice WRLD"], .chartlist-row--now-scrobbling:has(a[href*="/music/Juice+WRLD/Fighting+Demons"]),
+	[data-page-resource-name="Robbery"][data-page-resource-artist-name="Juice WRLD"], .chartlist-row--now-scrobbling:has(a[href*="/music/Juice+WRLD/Robbery"]),
+	[data-page-resource-name="Views"][data-page-resource-artist-name="Drake"], .chartlist-row--now-scrobbling:has(a[href*="/music/Drake/Views"])
 	{
 		--base-hue: 194;
 		--saturation: 0.4;
 		--lightness: 0.6;
 	}
 
-	[data-page-resource-name*="Tourist History"][data-page-resource-artist-name="Two Door Cinema Club"]
+	[data-page-resource-name*="Tourist History"][data-page-resource-artist-name="Two Door Cinema Club"], .chartlist-row--now-scrobbling:has(a[href*="/music/Two+Door+Cinema+Club/Tourist+History"])
 	{
 		--base-hue: 240;
 		--saturation: 0.6;
 	}
 
+	[data-page-resource-name="all i do is try my best"][data-page-resource-artist-name*="laive"]
+	{
+		--base-hue: 210;
+		--saturation: 0.57;
+		--lightness: 0.7;
+	}
+
 	/* BLUE */
-	[data-page-resource-name*="Encore"][data-page-resource-artist-name="Eminem"]
+	[data-page-resource-name*="Encore"][data-page-resource-artist-name="Eminem"], .chartlist-row--now-scrobbling:has(a[href*="/music/Eminem/Encore"])
 	{
 		--base-hue: 232;
 		--saturation: 1.1;
 		--lightness: 0.9;
 	}
 
-	[data-page-resource-name="Honestly, Nevermind"][data-page-resource-artist-name="Drake"]
+	[data-page-resource-name="Honestly, Nevermind"][data-page-resource-artist-name="Drake"], .chartlist-row--now-scrobbling:has(a[href*="/music/Drake/Honestly,+Nevermind"])
 	{
 		--base-hue: 197;
 		--saturation: 0.5;
@@ -204,59 +301,59 @@
 	}
 
 	/* blue purple */
-	[data-page-resource-name="we had good times together, don't forget that"][data-page-resource-artist-name="Sewerslvt"]
+	[data-page-resource-name="we had good times together, don't forget that"][data-page-resource-artist-name="Sewerslvt"], .chartlist-row--now-scrobbling:has(a[href*="/music/Sewerslvt/we+had+good+times+together,+don't+forget+that"])
 	{
 		--base-hue: 242;
 		--saturation: 1.14;
 	}
 
 	/* LIGHT purple */
-	[data-page-resource-name="Currents"][data-page-resource-artist-name="Tame Impala"],
-	[data-page-resource-name="Witness of Another World"][data-page-resource-artist-name="C!erra My$t"],
-	[data-page-resource-name="I Hope We Make It Out of This Alive"][data-page-resource-artist-name="Sold Soul"]
+	[data-page-resource-name="Currents"][data-page-resource-artist-name="Tame Impala"], .chartlist-row--now-scrobbling:has(a[href*="/music/Tame+Impala/Currents"]),
+	[data-page-resource-name="Witness of Another World"][data-page-resource-artist-name="C!erra My$t"], .chartlist-row--now-scrobbling:has(a[href*="/music/C!erra+My$t/Witness+Of+Another+World"]),
+	[data-page-resource-name="I Hope We Make It Out of This Alive"][data-page-resource-artist-name="Sold Soul"], .chartlist-row--now-scrobbling:has(a[href*="/music/Sold+Soul/I+Hope+We+Make+It+Out+Of+This+Alive"])
 	{
 		--base-hue: 279;
 		--saturation: 0.45;
 	}
 
-	[data-page-resource-name="Celeste B-Sides (Original Game Soundtrack)"][data-page-resource-artist-name="Lena Raine"]
+	[data-page-resource-name="Celeste B-Sides (Original Game Soundtrack)"][data-page-resource-artist-name="Lena Raine"], .chartlist-row--now-scrobbling:has(a[href*="/music/Lena+Raine/Celeste+B-Sides+(Original+Game+Soundtrack)"])
 	{
 		--base-hue: 300;
 		--saturation: 0.75;
 		--lightness: 0.85;
 	}
 
-	[data-page-resource-name="The Slim Shady LP"][data-page-resource-artist-name="Eminem"],
-	[data-page-resource-name="growing pains"][data-page-resource-artist-name="50landing"]
+	[data-page-resource-name="The Slim Shady LP"][data-page-resource-artist-name="Eminem"], .chartlist-row--now-scrobbling:has(a[href*="/music/Eminem/The+Slim+Shady+LP"]),
+	[data-page-resource-name="growing pains"][data-page-resource-artist-name="50landing"], .chartlist-row--now-scrobbling:has(a[href*="/music/50landing/growing+pains"])
 	{
 		--base-hue: 259;
 		--saturation: 0.65;
 	}
 
-	[data-page-resource-name="fantasy world"][data-page-resource-artist-name="Miraie"]
+	[data-page-resource-name="fantasy world"][data-page-resource-artist-name="Miraie"], .chartlist-row--now-scrobbling:has(a[href*="/music/miraie/fantasy+world"])
 	{
 		--base-hue: 250;
 		--saturation: 0.45;
 	}
 
-	[data-page-resource-name="HEROES & VILLAINS (Villains Version)"][data-page-resource-artist-name="Metro Boomin"],
-	[data-page-resource-name*="ChoppedNotSlopped"][data-page-resource-artist-name="Metro Boomin"]
+	[data-page-resource-name="HEROES & VILLAINS (Villains Version)"][data-page-resource-artist-name="Metro Boomin"], .chartlist-row--now-scrobbling:has(a[href*="/music/HEROES+&+VILLAINS+(Villains+Version)"]),
+	[data-page-resource-name*="ChoppedNotSlopped"][data-page-resource-artist-name="Metro Boomin"], .chartlist-row--now-scrobbling:has(a[href*="/music/Metro+Boomin"][href*="ChoppedNotSlopped"])
 	{
 		--base-hue: 290;
 		--saturation: 0.7;
 		--lightness: 0.9;
 	}
 
-	[data-page-resource-name="Her Loss"][data-page-resource-artist-name="Drake"],
-	[data-page-resource-name="ultraviolet"][data-page-resource-artist-name="usedcvnt"],
-	[data-page-resource-name="Forever Alive"][data-page-resource-artist-name="C!erra My$t"]
+	[data-page-resource-name="Her Loss"][data-page-resource-artist-name="Drake"], .chartlist-row--now-scrobbling:has(a[href*="/music/Drake/Her+Loss"]),
+	[data-page-resource-name="ultraviolet"][data-page-resource-artist-name="usedcvnt"], .chartlist-row--now-scrobbling:has(a[href*="/music/usedcvnt/ultraviolet"]),
+	[data-page-resource-name="Forever Alive"][data-page-resource-artist-name="C!erra My$t"], .chartlist-row--now-scrobbling:has(a[href*="/music/C!erra+My$t/Forever+Alive"])
 	{
 		--base-hue: 331;
 		--saturation: 0.42;
 		--lightness: 0.9;
 	}
 
-	[data-page-resource-name="IGOR"][data-page-resource-artist-name="Tyler, the Creator"]
+	[data-page-resource-name="IGOR"][data-page-resource-artist-name="Tyler, the Creator"], .chartlist-row--now-scrobbling:has(a[href*="/music/Tyler,+the+Creator/IGOR"])
 	{
 		--base-hue: 338;
 		--saturation: 0.6;
@@ -264,84 +361,89 @@
 	}
 
 	/* blue-green */
-	[data-page-resource-name="cypress grove"][data-page-resource-artist-name="glaive"],
-	[data-page-resource-name="cypress grove (Sessions)"][data-page-resource-artist-name="glaive"],
-	[data-page-resource-name="unreleased"][data-page-resource-artist-name="glaive"]
+	[data-page-resource-name*="cypress grove"][data-page-resource-artist-name*="laive"], .chartlist-row--now-scrobbling:has(a[href*="laive/cypress+grove"]),
+	[data-page-resource-name="unreleased"][data-page-resource-artist-name*="laive"], .chartlist-row--now-scrobbling:has(a[href*="/music/Glaive/unreleased"])
 	{
 		--base-hue: 155;
 		--saturation: 0.8;
 	}
 
-	[data-page-resource-name="Collide With the Sky"][data-page-resource-artist-name="Pierce the Veil"]
+	[data-page-resource-name="Blonde"][data-page-resource-artist-name="Frank Ocean"], .chartlist-row--now-scrobbling:has(a[href*="/music/Frank+Ocean/Blonde"])
+	{
+		--base-hue: 118;
+		--saturation: 0.5;
+		--lightness: 0.9;
+	}
+
+	[data-page-resource-name="Collide With the Sky"][data-page-resource-artist-name="Pierce the Veil"], .chartlist-row--now-scrobbling:has(a[href*="/music/Pierce+the+Veil/Collide+With+the+Sky"])
 	{
 		--base-hue: 185;
 		--saturation: 0.6;
 		--lightness: 0.7;
 	}
 
-	[data-page-resource-name="underdrawing for three forms of unhappiness at the state of existence"][data-page-resource-artist-name="My Dead Girlfriend"]
+	[data-page-resource-name="underdrawing for three forms of unhappiness at the state of existence"][data-page-resource-artist-name="My Dead Girlfriend"], .chartlist-row--now-scrobbling:has(a[href*="/music/My+Dead+Girlfriend/underdrawing+for+three+forms+of+unhappiness+at+the+state+of+existence"])
 	{
 		--base-hue: 168;
 		--saturation: 0.78;
 	}
 
-	[data-page-resource-name="Saturday Night Wrist"][data-page-resource-artist-name="Deftones"]
+	[data-page-resource-name="Saturday Night Wrist"][data-page-resource-artist-name="Deftones"], .chartlist-row--now-scrobbling:has(a[href*="/music/Deftones/Saturday+Night+Wrist"])
 	{
 		--base-hue: 143;
 		--saturation: 0.5;
 		--lightness: 0.6;
 	}
 
-	[data-page-resource-name="Incesticide"][data-page-resource-artist-name="Nirvana"]
+	[data-page-resource-name="Incesticide"][data-page-resource-artist-name="Nirvana"], .chartlist-row--now-scrobbling:has(a[href*="/music/Nirvana/Incesticide"])
 	{
 		--base-hue: 58;
-		--saturation: 0.5;
-		--lightness: 1.13;
+		--saturation: 0.37;
+		--lightness: 1.26;
 	}
 
 	/* green */
-	[data-page-resource-name="all dogs go to heaven"][data-page-resource-artist-name="glaive"],
-	[data-page-resource-name="all dogs go to heaven (Sessions)"][data-page-resource-artist-name="glaive"],
-	[data-page-resource-name="bastard"][data-page-resource-artist-name="glaive"]
+	[data-page-resource-name*="all dogs go to heaven"][data-page-resource-artist-name*="laive"], .chartlist-row--now-scrobbling:has(a[href*="/music/Glaive/all+dogs+go+to+heaven"]),
+	[data-page-resource-name="bastard"][data-page-resource-artist-name*="laive"], .chartlist-row--now-scrobbling:has(a[href*="/music/Glaive/bastard"])
 	{
 		--base-hue: 79;
 		--saturation: 0.55;
 		--lightness: 0.7;
 	}
 
-	[data-page-resource-name="2 Alivë"][data-page-resource-artist-name="Yeat"]
+	[data-page-resource-name="2 Alivë"][data-page-resource-artist-name="Yeat"], .chartlist-row--now-scrobbling:has(a[href*="/music/Yeat/2 Alivë"])
 	{
 		--base-hue: 121;
 		--saturation: 0.5;
 		--lightness: 1.1;
 	}
 
-	[data-page-resource-name="Minecraft - Volume Alpha"][data-page-resource-artist-name="C418"]
+	[data-page-resource-name="Minecraft - Volume Alpha"][data-page-resource-artist-name="C418"], .chartlist-row--now-scrobbling:has(a[href*="/music/C418/Minecraft+-+Volume+Alpha"])
 	{
 		--base-hue: 95;
 		--saturation: 0.8;
 		--lightness: 0.75;
 	}
 
-	[data-page-resource-name="better luck next time."][data-page-resource-artist-name="midwxst"]
+	[data-page-resource-name="better luck next time."][data-page-resource-artist-name="midwxst"], .chartlist-row--now-scrobbling:has(a[href*="/music/midwxst/better+luck+next+time."])
 	{
 		--base-hue: 154;
 		--saturation: 0.7;
 		--lightness: 1.03;
 	}
 
-	[data-page-resource-name="greenhouse"][data-page-resource-artist-name="aldn"],
-	[data-page-resource-name="redeyes"][data-page-resource-artist-name="aldn"],
-	[data-page-resource-name="CALL ME IF YOU GET LOST"][data-page-resource-artist-name="Tyler, the Creator"]
+	[data-page-resource-name="greenhouse"][data-page-resource-artist-name="aldn"], .chartlist-row--now-scrobbling:has(a[href*="/music/aldn/greenhouse"]),
+	[data-page-resource-name="redeyes"][data-page-resource-artist-name="aldn"], .chartlist-row--now-scrobbling:has(a[href*="/music/aldn/redeyes"]),
+	[data-page-resource-name="CALL ME IF YOU GET LOST"][data-page-resource-artist-name="Tyler, the Creator"], .chartlist-row--now-scrobbling:has(a[href*="/music/Tyler,+the+Creator/CALL+ME+IF+YOU+GET+LOST"])
 	{
 		--base-hue: 150;
 		--saturation: 0.6;
 	}
 
 	/* light blue */
-	[data-page-resource-name="Goodbye & Good Riddance"][data-page-resource-artist-name="Juice WRLD"],
-	[data-page-resource-name*="Goodbye & Good Riddance (Anniversary"][data-page-resource-artist-name="Juice WRLD"],
-	[data-page-resource-name="Luv Is Rage 2 (Deluxe)"][data-page-resource-artist-name="Lil Uzi Vert"]
+	[data-page-resource-name="Goodbye & Good Riddance"][data-page-resource-artist-name="Juice WRLD"], .chartlist-row--now-scrobbling:has(a[href*="/music/Juice+WRLD/Goodbye+&+Good+Riddance"]),
+	[data-page-resource-name*="Goodbye & Good Riddance (Anniversary"][data-page-resource-artist-name="Juice WRLD"], .chartlist-row--now-scrobbling:has(a[href*="/music/Goodbye+&+Good+Riddance+(Anniversary"]),
+	[data-page-resource-name="Luv Is Rage 2 (Deluxe)"][data-page-resource-artist-name="Lil Uzi Vert"], .chartlist-row--now-scrobbling:has(a[href*="/music/Lil+Uzi+Vert/Luv+Is+Rage+2+(Deluxe)"])
 	{
 		--base-hue: 197;
 		--saturation: 0.85;
@@ -349,86 +451,106 @@
 
 	}
 
-	[data-page-resource-name="Lift Yourself"][data-page-resource-artist-name="Kanye West"],
-	[data-page-resource-name="More Life"][data-page-resource-artist-name="Drake"]
+	[data-page-resource-name="Lift Yourself"][data-page-resource-artist-name="Kanye West"], .chartlist-row--now-scrobbling:has(a[href*="/music/Kanye+West/Lift+Yourself"]),
+	[data-page-resource-name="More Life"][data-page-resource-artist-name="Drake"], .chartlist-row--now-scrobbling:has(a[href*="/music/Drake/More+Life"])
 	{
 		--base-hue: 218;
 		--saturation: 1.5;
 		--lightness: 0.96;
 	}
 
-	[data-page-resource-name="Wolf"][data-page-resource-artist-name="Tyler, the Creator"]
+	[data-page-resource-name="Wolf"][data-page-resource-artist-name="Tyler, the Creator"], .chartlist-row--now-scrobbling:has(a[href*="/music/Tyler,+the+Creator/Wolf"])
 	{
 		--base-hue: 193;
 		--saturation: 0.7;
 		--lightness: 1.1;
 	}
 
-	[data-page-resource-name="CALL ME IF YOU GET LOST: The Estate Sale"][data-page-resource-artist-name="Tyler, the Creator"]
+	[data-page-resource-name="CALL ME IF YOU GET LOST: The Estate Sale"][data-page-resource-artist-name="Tyler, the Creator"], .chartlist-row--now-scrobbling:has(a[href*="/music/Tyler,+the+Creator/CALL+ME+IF+YOU+GET+LOST:+THE+ESTATE+SALE"])
 	{
 		--base-hue: 176;
 		--saturation: 0.65;
 		--lightness: 0.9;
 	}
 
-	[data-page-resource-name="Rich Minion"][data-page-resource-artist-name="Yeat"]
+	[data-page-resource-name="Rich Minion"][data-page-resource-artist-name="Yeat"], .chartlist-row--now-scrobbling:has(a[href*="/music/Yeat/Rich+Minion"])
 	{
 		--base-hue: 199;
 		--saturation: 1.5;
 	}
 
-	[data-page-resource-name*="Nevermind"][data-page-resource-artist-name="Nirvana"]
+	/* Nirvana - Nevermind* (Album) */
+	[data-page-resource-name*="Nevermind"][data-page-resource-artist-name="Nirvana"], .chartlist-row--now-scrobbling:has(a[href*="/music/Nirvana/Nevermind"]),
+	[data-page-resource-name*="Smells Like Teen Spirit"][data-page-resource-artist-name="Nirvana"],
+	[data-page-resource-name*="In Bloom"][data-page-resource-artist-name="Nirvana"],
+	[data-page-resource-name*="Come As You Are"][data-page-resource-artist-name="Nirvana"],
+	[data-page-resource-name*="Breed"][data-page-resource-artist-name="Nirvana"],
+	[data-page-resource-name*="Lithium"][data-page-resource-artist-name="Nirvana"],
+	[data-page-resource-name*="Polly"][data-page-resource-artist-name="Nirvana"],
+	[data-page-resource-name*="Territorial Pissings"][data-page-resource-artist-name="Nirvana"],
+	[data-page-resource-name*="Drain You"][data-page-resource-artist-name="Nirvana"],
+	[data-page-resource-name*="Lounge Act"][data-page-resource-artist-name="Nirvana"],
+	[data-page-resource-name*="Stay Away"][data-page-resource-artist-name="Nirvana"],
+	[data-page-resource-name*="On"][data-page-resource-name*="Plain"][data-page-resource-artist-name="Nirvana"],
+	[data-page-resource-name*="Something"][data-page-resource-name*="Way"][data-page-resource-artist-name="Nirvana"],
+	[data-page-resource-name*="Endless, Nameless"][data-page-resource-artist-name="Nirvana"]
 	{
 		--base-hue: 194;
 		--lightness: 0.75;
 	}
 
-	[data-page-resource-name="songs and music"][data-page-resource-artist-name="twikipedia"]
+	[data-page-resource-name="songs and music"][data-page-resource-artist-name="twikipedia"], .chartlist-row--now-scrobbling:has(a[href*="/music/twikipedia/songs+and+music"])
 	{
 		--base-hue: 204;
 		--saturation: 0.8;
 		--lightness: 1.3;
 	}
 
-	[data-page-resource-name="Public Target"][data-page-resource-artist-name="ericdoa"]
+	[data-page-resource-name="Public Target"][data-page-resource-artist-name="ericdoa"], .chartlist-row--now-scrobbling:has(a[href*="/music/ericdoa/Public+Target"])
 	{
 		--base-hue: 213;
 		--saturation: 0.8;
 		--lightness: 0.7;
 	}
 
-	[data-page-resource-name="SWEET DAYS AND HER LAST KISS"][data-page-resource-artist-name="My Dead Girlfriend"]
+	[data-page-resource-name="SWEET DAYS AND HER LAST KISS"][data-page-resource-artist-name="My Dead Girlfriend"], .chartlist-row--now-scrobbling:has(a[href*="/music/My+Dead+Girlfriend/SWEET+DAYS+AND+HER+LAST+KISS"])
 	{
 		--base-hue: 228;
 		--saturation: 0.7;
 	}
 
-	[data-page-resource-name="then i'll be happy"][data-page-resource-artist-name="glaive"],
-	[data-page-resource-name="Lyfë"][data-page-resource-artist-name="Yeat"],
-	[data-page-resource-name="-"][data-page-resource-artist-name="Xxtarlit⚸"],
-	[data-page-resource-name="Ohms"][data-page-resource-artist-name="Deftones"],
-	[data-page-resource-name="Diamond Eyes"][data-page-resource-artist-name="Deftones"],
-	[data-page-resource-name="ANTICYCLONE"][data-page-resource-artist-name="稲葉曇"],
-	[data-page-resource-name*="With The Lights Out"][data-page-resource-artist-name="Nirvana"],
-	[data-page-resource-name*="Bleach"][data-page-resource-artist-name="Nirvana"],
-	[data-page-resource-name="talk"][data-page-resource-artist-name="twikipedia"]
+	[data-page-resource-name="then i'll be happy"][data-page-resource-artist-name*="laive"], .chartlist-row--now-scrobbling:has(a[href*="/music/glaive/then+i'll+be+happy"]),
+	[data-page-resource-name="Lyfë"][data-page-resource-artist-name="Yeat"], .chartlist-row--now-scrobbling:has(a[href*="/music/Yeat/Lyfë"]),
+	[data-page-resource-name="-"][data-page-resource-artist-name="Xxtarlit⚸"], .chartlist-row--now-scrobbling:has(a[href*="/music/Xxtarlit⚸/-"]),
+	[data-page-resource-name="Ohms"][data-page-resource-artist-name="Deftones"], .chartlist-row--now-scrobbling:has(a[href*="/music/Deftones/Ohms"]),
+	[data-page-resource-name="Diamond Eyes"][data-page-resource-artist-name="Deftones"], .chartlist-row--now-scrobbling:has(a[href*="/music/Deftones/Diamond+Eyes"]),
+	[data-page-resource-name="ANTICYCLONE"][data-page-resource-artist-name="稲葉曇"], .chartlist-row--now-scrobbling:has(a[href*="/music/稲葉曇/ANTICYCLONE"]),
+	[data-page-resource-name*="With The Lights Out"][data-page-resource-artist-name="Nirvana"], .chartlist-row--now-scrobbling:has(a[href*="/music/Nirvana/With+The+Lights+Out"]),
+	[data-page-resource-name*="Bleach"][data-page-resource-artist-name="Nirvana"], .chartlist-row--now-scrobbling:has(a[href*="/music/Nirvana/Bleach"]),
+	[data-page-resource-name="talk"][data-page-resource-artist-name="twikipedia"], .chartlist-row--now-scrobbling:has(a[href*="/music/twikipedia/talk"])
 	{
 		--base-hue: 213;
 		--saturation: 0.15;
 		--lightness: 1.2;
 	}
 
-	[data-page-resource-name="Donda"][data-page-resource-artist-name="Kanye West"],
-	[data-page-resource-name="Donda (Deluxe)"][data-page-resource-artist-name="Kanye West"],
-	[data-page-resource-name="Scorpion"][data-page-resource-artist-name="Drake"]
+	[data-page-resource-name="Scorpion"][data-page-resource-artist-name="Drake"], .chartlist-row--now-scrobbling:has(a[href*="/music/Drake/Scorpion"])
 	{
 		--base-hue: 0;
 		--saturation: 0;
 		--lightness: 0.5;
 	}
 
+	[data-page-resource-name="Donda"][data-page-resource-artist-name="Kanye West"], .chartlist-row--now-scrobbling:has(a[href*="/music/Kanye+West/Donda"]),
+	[data-page-resource-name="Donda (Deluxe)"][data-page-resource-artist-name="Kanye West"], .chartlist-row--now-scrobbling:has(a[href*="/music/Kanye+West/Donda+(Deluxe)"])
+	{
+		--base-hue: 0;
+		--saturation: 0;
+		--lightness: 0.35;
+	}
+
 	/* gold */
-	[data-page-resource-name*="Goodbye & Good Riddance (5 Year"][data-page-resource-artist-name="Juice WRLD"]
+	[data-page-resource-name*="Goodbye & Good Riddance (5 Year"][data-page-resource-artist-name="Juice WRLD"], .chartlist-row--now-scrobbling:has(a[href*="/music/Juice+WRLD/Goodbye+&+Good+Riddance+(5+Year"])
 	{
 		--base-hue: 42;
 		--saturation: 1.3;
@@ -436,43 +558,92 @@
 	}
 
 	/* yellow */
-	[data-page-resource-name="hypochondriac"][data-page-resource-artist-name="brakence"],
-	[data-page-resource-name="Live at Reading"][data-page-resource-artist-name="Nirvana"],
-	[data-page-resource-name="Doomsday"][data-page-resource-artist-name="Lyrical Lemonade"],
-	[data-page-resource-name="hotel"][data-page-resource-artist-name="twikipedia"]
+	/* brakence - hypochondriac (Album) */
+	[data-page-resource-name="hypochondriac"][data-page-resource-artist-name="brakence"], .chartlist-row--now-scrobbling:has(a[href*="/music/brakence/hypochondriac"]),
+	[data-page-resource-name="bugging!"][data-page-resource-artist-name="brakence"],
+	[data-page-resource-name="teeth"][data-page-resource-artist-name="brakence"],
+	[data-page-resource-name="intellectual greed"][data-page-resource-artist-name="brakence"],
+	[data-page-resource-name="5g"][data-page-resource-artist-name="brakence"],
+	[data-page-resource-name="preparation exercise no. 7 (trembling)"][data-page-resource-artist-name="brakence"],
+	[data-page-resource-name="stung"][data-page-resource-artist-name="brakence"],
+	[data-page-resource-name="argyle"][data-page-resource-artist-name="brakence"],
+	[data-page-resource-name="deepfake"][data-page-resource-artist-name="brakence"],
+	[data-page-resource-name*="ntrovert"][data-page-resource-artist-name="brakence"]
+	{
+		--base-hue: 35;
+		--saturation: 1.24;
+		--lightness: 0.96;
+	}
+
+	/* Nirvana - Live at Reading (Album) */
+	[data-page-resource-name*="Live at Reading"][data-page-resource-artist-name="Nirvana"], .chartlist-row--now-scrobbling:has(a[href*="/music/Nirvana/Live+at+Reading"])
+	{
+		--base-hue: 41;
+		--saturation: 1.33;
+		--lightness: 0.98;
+	}
+
+	[data-page-resource-name="Doomsday"][data-page-resource-artist-name="Lyrical Lemonade"], .chartlist-row--now-scrobbling:has(a[href*="/music/Lyrical+Lemonade/Doomsday"]),
+	[data-page-resource-name="hotel"][data-page-resource-artist-name="twikipedia"], .chartlist-row--now-scrobbling:has(a[href*="/music/twikipedia/hotel"])
 	{
 		--base-hue: 44;
 		--saturation: 1.3;
 	}
 
-	[data-page-resource-name="chronic"][data-page-resource-artist-name="twikipedia"]
+	/* yellow but quite green */
+	[data-page-resource-name="venus fly trap"][data-page-resource-artist-name="brakence"], .chartlist-row--now-scrobbling:has(a[href*="/music/brakence/venus+fly+trap"]),
+	[data-page-resource-name="cbd"][data-page-resource-artist-name="brakence"], .chartlist-row--now-scrobbling:has(a[href*="/music/brakence/cbd"])
+	{
+		--base-hue: 51;
+		--saturation: 0.6;
+		--lightness: 0.6;
+	}
+
+	/* Shoebill - hikikomori days (Album) */
+	[data-page-resource-name="hikikomori days"][data-page-resource-artist-name="Shoebill"], .chartlist-row--now-scrobbling:has(a[href*="/music/Shoebill/hikikomori+days"])
+	{
+		--base-hue: 76;
+		--saturation: 0.28;
+		--lightness: 1.05;
+	}
+
+	/* RENforshort - off saint dominique EP */
+	[data-page-resource-name="off saint dominique EP"][data-page-resource-artist-name="RENforshort"], .chartlist-row--now-scrobbling:has(a[href*="/music/RENforshort/off+saint+dominique+EP"])
+	{
+		--base-hue: 69;
+		--saturation: 0.4;
+		--lightness: 0.9;
+	}
+
+	[data-page-resource-name="chronic"][data-page-resource-artist-name="twikipedia"], .chartlist-row--now-scrobbling:has(a[href*="/music/twikipedia/chronic"])
 	{
 		--base-hue: 60;
 		--saturation: 0.5;
 		--lightness: 1.3;
 	}
 
-	[data-page-resource-name*="Happier Than Ever"][data-page-resource-artist-name="Billie Eilish"]
+	[data-page-resource-name*="Happier Than Ever"][data-page-resource-artist-name="Billie Eilish"], .chartlist-row--now-scrobbling:has(a[href*="/music/Billie+Eilish/Happier+Than+Ever"])
 	{
 		--base-hue: 24;
 		--saturation: 0.3;
 	}
 
-	[data-page-resource-name="JACKBOYS"][data-page-resource-artist-name="JACKBOYS"]
+	[data-page-resource-name="JACKBOYS"][data-page-resource-artist-name="JACKBOYS"], .chartlist-row--now-scrobbling:has(a[href*="/music/JACKBOYS/JACKBOYS"])
 	{
 		--base-hue: 61;
 		--saturation: 0.7;
 		--lightness: 0.65;
 	}
 
-	[data-page-resource-name="astrid"][data-page-resource-artist-name="glaive"]
+	[data-page-resource-name="astrid"][data-page-resource-artist-name*="laive"], .chartlist-row--now-scrobbling:has(a[href*="/music/Glaive/astrid"])
 	{
 		--base-hue: 44;
 		--saturation: 0.93;
 	}
 
 	/* GOLD */
-	[data-page-resource-name="ASTROWORLD"][data-page-resource-artist-name="Travis Scott"]
+	[data-page-resource-name="ASTROWORLD"][data-page-resource-artist-name="Travis Scott"], .chartlist-row--now-scrobbling:has(a[href*="/music/Travis+Scott/ASTROWORLD"]),
+	[data-page-resource-name="ASTROWORLD"][data-page-resource-artist-name="Travi$ Scott"], .chartlist-row--now-scrobbling:has(a[href*="/music/Travi$+Scott/ASTROWORLD"])
 	{
 		--base-hue: 41;
 		--saturation: 1.1;
@@ -480,29 +651,67 @@
 	}
 
 	/* brown */
-	[data-page-resource-name="UTOPIA"][data-page-resource-artist-name="Travis Scott"],
-	[data-page-resource-name="UTOPIA"][data-page-resource-artist-name="Travi$ Scott"],
-	[data-page-resource-name="Rodeo"][data-page-resource-artist-name="Travis Scott"],
-	[data-page-resource-name="Crystal Castles"][data-page-resource-artist-name="Crystal Castles"],
-	[data-page-resource-name="The Marshall Mathers LP"][data-page-resource-artist-name="Eminem"],
-	[data-page-resource-name="Late Registration"][data-page-resource-artist-name="Kanye West"],
-	[data-page-resource-name*="i care so much that i"][data-page-resource-artist-name="glaive"]
+	/* Travis Scott - UTOPIA (Album) */
+	[data-page-resource-name="UTOPIA"][data-page-resource-artist-name*="Scott"], .chartlist-row--now-scrobbling:has(a[href*="Scott/UTOPIA"]),
+	[data-page-resource-name="HYAENA"][data-page-resource-artist-name*="Scott"],
+	[data-page-resource-name="THANK GOD"][data-page-resource-artist-name*="Scott"],
+	[data-page-resource-name*="MODERN JAM"][data-page-resource-artist-name*="Scott"],
+	[data-page-resource-name="MY EYES"][data-page-resource-artist-name*="Scott"],
+	[data-page-resource-name="GOD'S COUNTRY"][data-page-resource-artist-name*="Scott"],
+	[data-page-resource-name="SIRENS"][data-page-resource-artist-name*="Scott"],
+	[data-page-resource-name*="MELTDOWN"][data-page-resource-artist-name*="Scott"],
+	[data-page-resource-name*="FE!N"][data-page-resource-artist-name*="Scott"],
+	[data-page-resource-name*="DELRESTO (ECHOES)"][data-page-resource-artist-name*="Scott"],
+	[data-page-resource-name="I KNOW ?"][data-page-resource-artist-name*="Scott"],
+	[data-page-resource-name*="TOPIA TWINS"][data-page-resource-artist-name*="Scott"],
+	[data-page-resource-name*="CIRCUS MAXIMUS"][data-page-resource-artist-name*="Scott"],
+	[data-page-resource-name*="PARASAIL"][data-page-resource-artist-name*="Scott"],
+	[data-page-resource-name*="SKITZO"][data-page-resource-artist-name*="Scott"],
+	[data-page-resource-name*="LOST FOREVER"][data-page-resource-artist-name*="Scott"],
+	[data-page-resource-name*="LOOOVE"][data-page-resource-artist-name*="Scott"],
+	[data-page-resource-name*="K-POP"][data-page-resource-artist-name*="Scott"],
+	[data-page-resource-name*="TELEKINESIS"][data-page-resource-artist-name*="Scott"],
+	[data-page-resource-name*="TIL FURTHER NOTICE"][data-page-resource-artist-name*="Scott"],
+	/* other */
+	[data-page-resource-name="Rodeo"][data-page-resource-artist-name="Travis Scott"], .chartlist-row--now-scrobbling:has(a[href*="/music/Travis+Scott/Rodeo"]),
+	[data-page-resource-name="Rodeo"][data-page-resource-artist-name="Travi$ Scott"], .chartlist-row--now-scrobbling:has(a[href*="/music/Travi$+Scott/Rodeo"]),
+	[data-page-resource-name="Crystal Castles"][data-page-resource-artist-name="Crystal Castles"], .chartlist-row--now-scrobbling:has(a[href*="/music/Crystal+Castles/Crystal+Castles"]),
+	[data-page-resource-name="The Marshall Mathers LP"][data-page-resource-artist-name="Eminem"], .chartlist-row--now-scrobbling:has(a[href*="/music/Eminem/The+Marshall+Mathers+LP"]),
+	[data-page-resource-name="Late Registration"][data-page-resource-artist-name="Kanye West"], .chartlist-row--now-scrobbling:has(a[href*="/music/Kanye+West/Late+Registration"]),
+	/* glaive - i care so much that i dont care at all (Album) */
+	[data-page-resource-name*="i care so much that i"][data-page-resource-artist-name*="laive"], .chartlist-row--now-scrobbling:has(a[href*="laive/i+care+so+much+that+i"]),
+	[data-page-resource-name="oh are you bipolar one or two?"][data-page-resource-artist-name*="laive"],
+	[data-page-resource-name="17250"][data-page-resource-artist-name*="laive"],
+	[data-page-resource-name="pardee urgent care"][data-page-resource-artist-name*="laive"],
+	[data-page-resource-name="the prom"][data-page-resource-artist-name*="laive"],
+	[data-page-resource-name="tiziana"][data-page-resource-artist-name*="laive"],
+	[data-page-resource-name="ive made worse mistakes"][data-page-resource-artist-name*="laive"],
+	[data-page-resource-name="the good the bad the olga"][data-page-resource-artist-name*="laive"],
+	[data-page-resource-name="2005 barbie doll"][data-page-resource-artist-name*="laive"]
 	{
-		--base-hue: 357;
+		--base-hue: 0;
 		--saturation: 0.2;
 		--lightness: 0.7;
 	}
 
-	[data-page-resource-name="Mr. Morale & the Big Steppers"][data-page-resource-artist-name="Kendrick Lamar"]
+	[data-page-resource-name="Mr. Morale & the Big Steppers"][data-page-resource-artist-name="Kendrick Lamar"], .chartlist-row--now-scrobbling:has(a[href*="/music/Kendrick+Lamar/Mr.+Morale/+&+the+Big+Steppers"])
 	{
 		--base-hue: 24;
 		--saturation: 0.8;
 		--lightness: 0.6;
 	}
 
-	[data-page-resource-name="Quinn"][data-page-resource-artist-name="Quinn"]
+	[data-page-resource-name="Quinn"][data-page-resource-artist-name="Quinn"], .chartlist-row--now-scrobbling:has(a[href*="/music/Quinn/Quinn"])
 	{
 		--base-hue: 5;
 		--saturation: 0.4;
+	}
+
+	/* ericdoa - fantasize */
+	[data-page-resource-name="fantasize"][data-page-resource-artist-name="ericdoa"]
+	{
+		--base-hue: 10;
+		--saturation: 0.85;
+		--lightness: 0.75;
 	}
 }

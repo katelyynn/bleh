@@ -21,38 +21,43 @@
         setInterval(get_position,80);
     }
 
+    let includes = [
+        '(feat', '[feat',
+        '(with', '[with',
+        '(ft', '[ft', 'ft.',
+        ' w/ ',
+        '(devonshire mix', '- devonshire mix',
+        '(remaster', '- remaster',
+        '(remix', '- remix',
+        '(live', '- live',
+        '(demo', '- demo',
+        '(rehearsal demo', '- rehearsal demo',
+        '(home demo', '- home demo',
+        '(solo acoustic', '- solo acoustic',
+        '(acoustic', '- acoustic',
+        '(bonus', '- bonus',
+        '- 1992/live'
+    ]
+
     function name_includes(raw2, return_type = false) {
         let raw = raw2.toLowerCase();
-        if (
-            raw.includes('(feat') ||
-            raw.includes('[feat') ||
-            raw.includes('(with') ||
-            raw.includes('[with') ||
-            raw.includes('(ft') ||
-            raw.includes('[ft') ||
-            raw.includes(' w/ ')
-        ) {
-            if (!return_type) {
-                return true;
-            } else {
-                if (raw.includes('(feat'))
-                    return '(feat';
-                else if (raw.includes('[feat'))
-                    return '[feat';
-                else if (raw.includes('(with'))
-                    return '(with';
-                else if (raw.includes('[with'))
-                    return '[with';
-                else if (raw.includes('(ft'))
-                    return '(ft';
-                else if (raw.includes('[ft'))
-                    return '[ft';
-                else if (raw.includes(' w/ '))
-                    return 'w/ ';
+        let does_include = false;
+        let include_type = '';
+
+        for (let include in includes)
+            if (raw.includes(includes[include])) {
+                does_include = true;
+                include_type = includes[include];
+                break;
             }
-        } else {
+
+        if (does_include)
+            if (!return_type)
+                return true;
+            else
+                return include_type;
+        else
             return false;
-        }
     }
 
     function get_position() {
@@ -62,34 +67,40 @@
 
             for (let name in names) {
                 let raw = names[name].innerHTML;
+                let raw_lower = raw.toLowerCase();
 
                 if (name_includes(raw) && names[name].getAttribute('data-kate') != 'true') {
                     let type = name_includes(raw, true);
-                    let chr = raw.indexOf(`${type}`);
+                    let chr = raw_lower.indexOf(`${type}`);
                     let title = raw.slice(0, (chr - 1));
-                    let feat = raw.replace(title,'').replaceAll('(','').replaceAll(')','').replaceAll('[','').replaceAll(']','');
+                    let feat = raw.replace(title,'').replaceAll('(','').replaceAll(')','').replaceAll('[','').replaceAll(']','').replace('Feat','feat').replace('Ft','ft').replace('With','with');
+
+                    if (type.includes('-')) feat = feat.replace('-','');
 
                     console.log(title, 'featuring', feat);
                     names[name].innerHTML = `<div class="title">${title}</div><div class="feat">${feat}</div>`;
                     names[name].setAttribute('data-kate','true');
                 }
             }
-        } catch(e) {console.error(e)}
+        } catch(e) {}
         try {
             // on music page
             let name = document.querySelector('.header-new-title');
             let raw = name.innerHTML;
+            let raw_lower = raw.toLowerCase();
 
             if (name_includes(raw) && name.getAttribute('data-kate') != 'true') {
                 let type = name_includes(raw, true);
-                let chr = raw.indexOf(`${type}`);
+                let chr = raw_lower.indexOf(`${type}`);
                 let title = raw.slice(0, (chr - 1));
-                let feat = raw.replace(title,'').replaceAll('(','').replaceAll(')','').replaceAll('[','').replaceAll(']','');
+                let feat = raw.replace(title,'').replaceAll('(','').replaceAll(')','').replaceAll('[','').replaceAll(']','').replace('Feat','feat').replace('Ft','ft').replace('With','with');
+
+                if (type.includes('-')) feat = feat.replace('-','');
 
                 console.log(title, 'featuring', feat);
                 name.innerHTML = `<div class="inner"><div class="title">${title}</div><div class="feat">${feat}</div></div>`;
                 name.setAttribute('data-kate','true');
             }
-        } catch(e) {console.error(e)}
+        } catch(e) {}
     }
 })();

@@ -1,47 +1,18 @@
 /* ==UserStyle==
 @name           bleh (amoled addon)
 @namespace      github.com/katelmao/lastfm-bleh
-@version        2023.0815
+@version        2023.0902
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelmao/lastfm-bleh/raw/uwu/lastfm-amoled.user.css
 ==/UserStyle== */
 
-@-moz-document domain("plexion.dev") {
-	body {--amoled-ver: 2023.0815 }
+@-moz-document domain("localhost") {
+	body {--amoled-ver: 2023.0902 }
 
 	:root, body {
 		--saturation: 1;
 		--lightness: 1;
-		/* b1-6 */
-		--b1: hsl(var(--base-hue),calc(var(--saturation)*17%),23%);
-		--b2: hsl(var(--base-hue),calc(var(--saturation)*17%),19%);
-		--b3: hsl(var(--base-hue),calc(var(--saturation)*15%),14%);
-		--b4: hsl(var(--base-hue),calc(var(--saturation)*14%),10%);
-		--b5: hsl(var(--base-hue),calc(var(--saturation)*10%),6%);
-		--b6: hsl(var(--base-hue),0%,0%);
-		/* d1-6 */
-		--d1: hsl(var(--base-hue),calc(var(--saturation)*20%),calc(var(--lightness)*27%));
-		--d2: hsl(var(--base-hue),calc(var(--saturation)*20%),calc(var(--lightness)*22%));
-		--d3: hsl(var(--base-hue),calc(var(--saturation)*18%),calc(var(--lightness)*18%));
-		--d4: hsl(var(--base-hue),calc(var(--saturation)*18%),calc(var(--lightness)*15%));
-		--d5: hsl(var(--base-hue),calc(var(--saturation)*16%),calc(var(--lightness)*10%));
-		--d6: hsl(var(--base-hue),calc(var(--saturation)*13%),calc(var(--lightness)*6%));
-	}
-}
-
-@-moz-document domain("last.fm") {
-    :root, body, .re-style,
-	header,
-	.recs-feed-cover-image-wrap,
-	.namespace--user_overview nav,
-	#current-subscription,/*,
-	.namespace--settings_subscription_overview .adaptive-skin-container*/
-	.main-content > div[data-page-resource-blacklist-level=""],
-	#ignorelist, #manage_data
-	{
-		/* text */
-		--text-link: var(--base-hue),calc(var(--saturation)*95%),calc(var(--lightness)*63%);
 		/* b1-6 */
 		--b1: var(--base-hue),calc(var(--saturation)*17%),23%;
 		--b2: var(--base-hue),calc(var(--saturation)*17%),19%;
@@ -56,8 +27,42 @@
 		--d4: var(--base-hue),calc(var(--saturation)*18%),calc(var(--lightness)*15%);
 		--d5: var(--base-hue),calc(var(--saturation)*16%),calc(var(--lightness)*10%);
 		--d6: var(--base-hue),calc(var(--saturation)*13%),calc(var(--lightness)*6%);
+	}
+}
+
+@-moz-document domain("last.fm") {
+    :root, body, .re-style,
+	header,
+	.recs-feed-cover-image-wrap,
+	.namespace--user_overview nav,
+	#current-subscription,/*,
+	.namespace--settings_subscription_overview .adaptive-skin-container*/
+	.main-content > div[data-page-resource-blacklist-level=""],
+	#ignorelist, #manage_data,
+	path,
+	.chartlist-row,
+	.mimic-link,
+	.header-follower-btn:after, .user-list-follower-btn,
+	.label
+	{
+		/* text */
+		--text-link: var(--base-hue),calc(var(--saturation)*95%),calc(var(--lightness)*63%);
+		/* b1-6 */
+		--b1: var(--base-hue),calc(var(--saturation)*22%),23%;
+		--b2: var(--base-hue),calc(var(--saturation)*22%),19%;
+		--b3: var(--base-hue),calc(var(--saturation)*22%),14%;
+		--b4: var(--base-hue),calc(var(--saturation)*20%),10%;
+		--b5: var(--base-hue),calc(var(--saturation)*16%),6%;
+		--b6: var(--base-hue),0%,0%;
+		/* d1-6 */
+		--d1: var(--base-hue),calc(var(--saturation)*20%),calc(var(--lightness)*27%);
+		--d2: var(--base-hue),calc(var(--saturation)*20%),calc(var(--lightness)*22%);
+		--d3: var(--base-hue),calc(var(--saturation)*18%),calc(var(--lightness)*18%);
+		--d4: var(--base-hue),calc(var(--saturation)*18%),calc(var(--lightness)*15%);
+		--d5: var(--base-hue),calc(var(--saturation)*16%),calc(var(--lightness)*10%);
+		--d6: var(--base-hue),calc(var(--saturation)*13%),calc(var(--lightness)*6%);
 		/* custom */
-		--ba5: var(--base-hue),calc(var(--saturation)*10%),5%,70%;
+		--ba5: var(--base-hue),calc(var(--saturation)*20%),5%,70%;
 		--ba6: var(--base-hue),calc(var(--saturation)*0%),0%,93%;
 
 		/* accents */
