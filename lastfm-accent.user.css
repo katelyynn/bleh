@@ -8,7 +8,7 @@
 @updateURL      https://github.com/katelmao/lastfm-bleh/raw/uwu/lastfm-accent.user.css
 ==/UserStyle== */
 
-@-moz-document domain("localhost") {
+@-moz-document domain("plexion.dev") {
 	body {--accent-ver: 2023.0902 }
 }
 

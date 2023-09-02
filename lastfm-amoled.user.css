@@ -7,7 +7,7 @@
 @updateURL      https://github.com/katelmao/lastfm-bleh/raw/uwu/lastfm-amoled.user.css
 ==/UserStyle== */
 
-@-moz-document domain("localhost") {
+@-moz-document domain("plexion.dev") {
 	body {--amoled-ver: 2023.0902 }
 
 	:root, body {
