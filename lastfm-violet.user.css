@@ -1,0 +1,21 @@
+/* ==UserStyle==
+@name           bleh (violet)
+@namespace      github.com/katelmao/lastfm-bleh
+@version        2023.0902
+@license        GPL-3.0
+@author         kate
+@updateURL      https://github.com/katelmao/lastfm-bleh/raw/uwu/lastfm-violet.user.css
+==/UserStyle== */
+
+@-moz-document domain("last.fm") {
+	:root {
+		color-scheme: dark;
+	}
+	body,
+	.container,
+	.main-content
+	{
+		background: #000;
+		color: #ccc;
+	}
+}

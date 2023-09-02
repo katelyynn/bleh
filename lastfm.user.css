@@ -683,7 +683,7 @@
 
 	.container,
 	.two-column-layout .container {
-		background-color: hsla(var(--ba5));
+		background-color: hsla(var(--ba5)) !important;
 		margin-bottom: 10px;
 		border-radius: 10px;
 		background-image: none !important;
