@@ -18,4 +18,16 @@
 		background: #000;
 		color: #ccc;
 	}
+	.header--overview
+	{
+		background: transparent;
+	}
+	.content-form .form-control, .content-form input[type="date"], .content-form input[type="email"], .content-form input[type="number"], .content-form input[type="password"], .content-form input[type="text"], .content-form input[type="url"], .content-form select, .content-form textarea
+	{
+		background-color: #111;
+	}
+	[fill="#ffffff"]
+	{
+		fill: #000;
+	}
 }

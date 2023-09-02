@@ -299,13 +299,13 @@
 		--text-select: hsla(var(--base-hue), calc(var(--saturation)*100%), calc(var(--lightness)*70%), 30%);
 
 		/* b1-6 */
-		--b1: var(--base-hue), calc(var(--saturation)*13%), 32%;
-		--b2: var(--base-hue), calc(var(--saturation)*13%), 25%;
-		--b3: var(--base-hue), calc(var(--saturation)*11%), 20%;
+		--b1: var(--base-hue), calc(var(--saturation)*13%), 30%;
+		--b2: var(--base-hue), calc(var(--saturation)*13%), 23%;
+		--b3: var(--base-hue), calc(var(--saturation)*11%), 18%;
 		/* card hover */
-		--b4: var(--base-hue), calc(var(--saturation)*9%), 17%;
+		--b4: var(--base-hue), calc(var(--saturation)*9%), 15%;
 		/* card */
-		--b5: var(--base-hue), calc(var(--saturation)*6%), 12%;
+		--b5: var(--base-hue), calc(var(--saturation)*6%), 10%;
 		/* content */
 		--b6: var(--base-hue), calc(var(--saturation)*4%), 7%;
 		/* body */
@@ -336,7 +336,7 @@
 		/* custom */
 		--b0: var(--base-hue), calc(var(--saturation)*8%), 52%;
 		--l5: var(--base-hue), calc(var(--saturation)*45%), 26%;
-		--ba5: var(--base-hue), calc(var(--saturation)*6%), 12%, 75%;
+		--ba5: var(--base-hue), calc(var(--saturation)*6%), 10%, 75%;
 		--ba6: var(--base-hue), calc(var(--saturation)*8%), 7%, 94%;
 
 		/* text shadows */
