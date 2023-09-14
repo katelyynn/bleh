@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           bleh (themed album covers)
 @namespace      github.com/katelmao/lastfm-bleh
-@version        2023.0902
+@version        2023.0914
 @license        GPL-3.0
 @description    matches accent colours to albums
 @author         kate
@@ -9,7 +9,7 @@
 ==/UserStyle== */
 
 @-moz-document domain("plexion.dev") {
-	body {--accent-ver: 2023.0902 }
+	body {--accent-ver: 2023.0914 }
 }
 
 @-moz-document domain("last.fm") {
@@ -146,9 +146,9 @@
 	[data-page-resource-name*="All Apologies"][data-page-resource-artist-name="Nirvana"],
 	[data-page-resource-name*="Live"][data-page-resource-name*=" Loud"][data-page-resource-artist-name="Nirvana"], .chartlist-row--now-scrobbling:has(a[href*="/music/Nirvana/Live+and+Loud"])
 	{
-		--base-hue: 50;
-		--saturation: 0.37;
-		--lightness: 1.1;
+		--base-hue: 13;
+		--saturation: 0.7;
+		--lightness: 0.8;
 	}
 
 	/* Nirvana - Outcesticide (Bootleg/Album) */
@@ -176,7 +176,6 @@
 	}
 
 	/* orange */
-	[data-page-resource-name="old dog, new tricks"][data-page-resource-artist-name*="laive"], .chartlist-row--now-scrobbling:has(a[href*="/music/Glaive/old+dog,+new+tricks"]),
 	[data-page-resource-name="HEROES & VILLAINS"][data-page-resource-artist-name="Metro Boomin"], .chartlist-row--now-scrobbling:has(a[href*="/music/Metro+Boomin/HEROES+&+VILLAINS"]),
 	[data-page-resource-name*="punk2"][data-page-resource-artist-name="brakence"], .chartlist-row--now-scrobbling:has(a[href*="/music/brakence/punk2"]),
 	[data-page-resource-name="The Life of Pablo"][data-page-resource-artist-name="Kanye West"], .chartlist-row--now-scrobbling:has(a[href*="/music/Kanye+West/The+Life+of+Pablo"]),
@@ -189,11 +188,33 @@
 		--lightness: 0.9;
 	}
 
+	/* glaive - old dog, new tricks (EP, Deluxe) */
+	[data-page-resource-name="old dog, new tricks"][data-page-resource-artist-name*="laive"], .chartlist-row--now-scrobbling:has(a[href*="laive/old+dog,+new+tricks"]),
+	[data-page-resource-name="lap #1"][data-page-resource-artist-name*="laive"],
+	[data-page-resource-name="icarus"][data-page-resource-artist-name*="laive"],
+	[data-page-resource-name="justlikeu4theimage"][data-page-resource-artist-name*="laive"],
+	[data-page-resource-name="walking around with no hands"][data-page-resource-artist-name*="laive"],
+	[data-page-resource-name="prick"][data-page-resource-artist-name*="laive"]
+	{
+		--base-hue: 28;
+		--saturation: 1.02;
+		--lightness: 0.84;
+	}
+
+	/* glaive - Spotify Singles (Single, Spotify exclusive) */
+	[data-page-resource-name="Spotify Singles"][data-page-resource-artist-name*="laive"], .chartlist-row--now-scrobbling:has(a[href*="laive/Spotify+Singles"]),
+	[data-page-resource-name*=" - Spotify Singles"][data-page-resource-artist-name*="laive"]
+	{
+		--base-hue: 38;
+		--saturation: 1.15;
+		--lightness: 1.01;
+	}
+
 	[data-page-resource-name="Toxicity"][data-page-resource-artist-name="System of a Down"], .chartlist-row--now-scrobbling:has(a[href*="/music/System+of+a+Down/Toxicity"])
 	{
-		--base-hue: 35;
-		--saturation: 0.5;
-		--lightness: 0.8;
+		--base-hue: 28;
+		--saturation: 1.23;
+		--lightness: 0.86;
 	}
 
 	/* Future - I NEVER LIKED YOU (Album) */
@@ -235,7 +256,6 @@
 	[data-page-resource-name*="Music To Be Murdered By"][data-page-resource-artist-name="Eminem"], .chartlist-row--now-scrobbling:has(a[href*="/music/Eminem/"][href*="Music+To+Be+Murdered+By"]),
 	[data-page-resource-name="My Beautiful Dark Twisted Fantasy"][data-page-resource-artist-name="Kanye West"], .chartlist-row--now-scrobbling:has(a[href*="/music/Kanye+West/My+Beautiful+Dark+Twisted+Fantasy"]),
 	[data-page-resource-name="Yeezus"][data-page-resource-artist-name="Kanye West"], .chartlist-row--now-scrobbling:has(a[href*="/music/Kanye+West/Yeezus"]),
-	[data-page-resource-name="LOST"][data-page-resource-artist-name="Yumi"], .chartlist-row--now-scrobbling:has(a[href*="/music/Yumi/LOST"]),
 	[data-page-resource-name="Certified Lover Boy"][data-page-resource-artist-name="Drake"], .chartlist-row--now-scrobbling:has(a[href*="/music/Drake/Certified+Lover+Boy"]),
 	[data-page-resource-name="COA"][data-page-resource-artist-name="ericdoa"], .chartlist-row--now-scrobbling:has(a[href*="/music/ericdoa/COA"]),
 	[data-page-resource-name="DAMN."][data-page-resource-artist-name="Kendrick Lamar"], .chartlist-row--now-scrobbling:has(a[href*="/music/Kendrick+Lamar/DAMN."]),
@@ -256,6 +276,22 @@
 		--lightness: 0.85;
 	}
 
+	/* Yumi - LOST (Album) */
+	[data-page-resource-name="LOST"][data-page-resource-artist-name="Yumi"], .chartlist-row--now-scrobbling:has(a[href*="/music/Yumi/LOST"]),
+	[data-page-resource-name="BLACKTOP"][data-page-resource-artist-name="Yumi"],
+	[data-page-resource-name="POISON"][data-page-resource-artist-name="Yumi"],
+	[data-page-resource-name="RUN"][data-page-resource-artist-name="Yumi"],
+	[data-page-resource-name="MIND"][data-page-resource-artist-name="Yumi"],
+	[data-page-resource-name="DANCE"][data-page-resource-artist-name="Yumi"],
+	[data-page-resource-name="Dance"][data-page-resource-artist-name="Yumi"],
+	[data-page-resource-name="FLOW"][data-page-resource-artist-name="Yumi"],
+	[data-page-resource-name="THERAPY"][data-page-resource-artist-name="Yumi"],
+	[data-page-resource-name="LIFE"][data-page-resource-artist-name="Yumi"]
+	{
+		--base-hue: 345;
+		--saturation: 1.6;
+	}
+
 	[data-page-resource-name="Let’s Start Here."][data-page-resource-artist-name="Lil Yachty"], .chartlist-row--now-scrobbling:has(a[href*="/music/Lil+Yachty/Let’s+Start+Here."])
 	{
 		--base-hue: -2;
@@ -270,6 +306,13 @@
 		--base-hue: 194;
 		--saturation: 0.4;
 		--lightness: 0.6;
+	}
+
+	[data-page-resource-name*="The Light"][data-page-resource-artist-name="Juice WRLD"], .chartlist-row--now-scrobbling:has(a[href*="/music/Juice+WRLD/The+Light"])
+	{
+		--base-hue: 220;
+		--saturation: 0.83;
+		--lightness: 0.8;
 	}
 
 	[data-page-resource-name*="Tourist History"][data-page-resource-artist-name="Two Door Cinema Club"], .chartlist-row--now-scrobbling:has(a[href*="/music/Two+Door+Cinema+Club/Tourist+History"])
@@ -355,9 +398,9 @@
 
 	[data-page-resource-name="IGOR"][data-page-resource-artist-name="Tyler, the Creator"], .chartlist-row--now-scrobbling:has(a[href*="/music/Tyler,+the+Creator/IGOR"])
 	{
-		--base-hue: 338;
-		--saturation: 0.6;
-		--lightness: 1.1;
+		--base-hue: 343;
+		--saturation: 0.76;
+		--lightness: 0.94;
 	}
 
 	/* blue-green */
@@ -402,9 +445,14 @@
 		--lightness: 1.26;
 	}
 
-	/* green */
-	[data-page-resource-name*="all dogs go to heaven"][data-page-resource-artist-name*="laive"], .chartlist-row--now-scrobbling:has(a[href*="/music/Glaive/all+dogs+go+to+heaven"]),
-	[data-page-resource-name="bastard"][data-page-resource-artist-name*="laive"], .chartlist-row--now-scrobbling:has(a[href*="/music/Glaive/bastard"])
+	/* glaive - all dogs go to heaven (EP) */
+	[data-page-resource-name*="all dogs go to heaven"][data-page-resource-artist-name*="laive"], .chartlist-row--now-scrobbling:has(a[href*="laive/all+dogs+go+to+heaven"]),
+	[data-page-resource-name="1984"][data-page-resource-artist-name*="laive"],
+	[data-page-resource-name="detest me"][data-page-resource-artist-name*="laive"],
+	[data-page-resource-name="poison"][data-page-resource-artist-name*="laive"],
+	[data-page-resource-name="stephany"][data-page-resource-artist-name*="laive"],
+	[data-page-resource-name="synopsis"][data-page-resource-artist-name*="laive"],
+	[data-page-resource-name="bastard"][data-page-resource-artist-name*="laive"], .chartlist-row--now-scrobbling:has(a[href*="laive/bastard"])
 	{
 		--base-hue: 79;
 		--saturation: 0.55;
@@ -434,7 +482,24 @@
 
 	[data-page-resource-name="greenhouse"][data-page-resource-artist-name="aldn"], .chartlist-row--now-scrobbling:has(a[href*="/music/aldn/greenhouse"]),
 	[data-page-resource-name="redeyes"][data-page-resource-artist-name="aldn"], .chartlist-row--now-scrobbling:has(a[href*="/music/aldn/redeyes"]),
-	[data-page-resource-name="CALL ME IF YOU GET LOST"][data-page-resource-artist-name="Tyler, the Creator"], .chartlist-row--now-scrobbling:has(a[href*="/music/Tyler,+the+Creator/CALL+ME+IF+YOU+GET+LOST"])
+	/* Tyler, The Creator - CALL ME IF YOU GET LOST (Album) */
+	[data-page-resource-name="CALL ME IF YOU GET LOST"][data-page-resource-artist-name="Tyler, the Creator"], .chartlist-row--now-scrobbling:has(a[href*="/music/Tyler,+the+Creator/CALL+ME+IF+YOU+GET+LOST"]),
+	[data-page-resource-name*="SIR BAUDELAIRE"][data-page-resource-artist-name="Tyler, the Creator"],
+	[data-page-resource-name="CORSO"][data-page-resource-artist-name="Tyler, the Creator"],
+	[data-page-resource-name*="LEMONHEAD"][data-page-resource-artist-name="Tyler, the Creator"],
+	[data-page-resource-name*="WUSYANAME"][data-page-resource-artist-name="Tyler, the Creator"],
+	[data-page-resource-name="LUMBERJACK"][data-page-resource-artist-name="Tyler, the Creator"],
+	[data-page-resource-name*="HOT WIND BLOWS"][data-page-resource-artist-name="Tyler, the Creator"],
+	[data-page-resource-name="MASSA"][data-page-resource-artist-name="Tyler, the Creator"],
+	[data-page-resource-name*="RUNITUP"][data-page-resource-artist-name="Tyler, the Creator"],
+	[data-page-resource-name*="MANIFESTO"][data-page-resource-artist-name="Tyler, the Creator"],
+	[data-page-resource-name*="SWEET / I THOUGHT YOU WANTED TO DANCE"][data-page-resource-artist-name="Tyler, the Creator"],
+	[data-page-resource-name="MOMMA TALK"][data-page-resource-artist-name="Tyler, the Creator"],
+	[data-page-resource-name*="RISE!"][data-page-resource-artist-name="Tyler, the Creator"],
+	[data-page-resource-name="BLESSED"][data-page-resource-artist-name="Tyler, the Creator"],
+	[data-page-resource-name*="JUGGERNAUT"][data-page-resource-artist-name="Tyler, the Creator"],
+	[data-page-resource-name="WILSHIRE"][data-page-resource-artist-name="Tyler, the Creator"],
+	[data-page-resource-name="SAFARI"][data-page-resource-artist-name="Tyler, the Creator"]
 	{
 		--base-hue: 150;
 		--saturation: 0.6;
@@ -449,6 +514,14 @@
 		--saturation: 0.85;
 		--lightness: 0.82;
 
+	}
+
+	/* glaive - live in London, Islington (2022) (Unofficial Album) */
+	[data-page-resource-name="live in London, Islington (2022)"][data-page-resource-artist-name*="laive"], .chartlist-row--now-scrobbling:has(a[href*="laive/live+in+London,+Islington+(2022)"])
+	{
+		--base-hue: 220;
+		--saturation: 1.08;
+		--lightness: 0.7;
 	}
 
 	[data-page-resource-name="Lift Yourself"][data-page-resource-artist-name="Kanye West"], .chartlist-row--now-scrobbling:has(a[href*="/music/Kanye+West/Lift+Yourself"]),
@@ -583,11 +656,12 @@
 		--lightness: 0.98;
 	}
 
-	[data-page-resource-name="Doomsday"][data-page-resource-artist-name="Lyrical Lemonade"], .chartlist-row--now-scrobbling:has(a[href*="/music/Lyrical+Lemonade/Doomsday"]),
+	[data-page-resource-name*="Doomsday"][data-page-resource-artist-name="Lyrical Lemonade"], .chartlist-row--now-scrobbling:has(a[href*="/music/Lyrical+Lemonade/Doomsday"]),
 	[data-page-resource-name="hotel"][data-page-resource-artist-name="twikipedia"], .chartlist-row--now-scrobbling:has(a[href*="/music/twikipedia/hotel"])
 	{
-		--base-hue: 44;
-		--saturation: 1.3;
+		--base-hue: 46;
+		--saturation: 1.12;
+		--lightness: 1;
 	}
 
 	/* yellow but quite green */
