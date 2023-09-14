@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         bleh (feat. addon)
 // @namespace    http://last.fm/music/
-// @version      1.0.1
+// @version      1.0.2
 // @description  bleh!!! ^-^
 // @author       kate
 // @match        https://www.last.fm/*
@@ -18,14 +18,14 @@
 
     function start_fm() {
         get_position();
-        setInterval(get_position,80);
+        setInterval(get_position,60);
     }
 
     let includes = [
         '(feat', '[feat',
         '(with', '[with',
         '(ft', '[ft', 'ft.',
-        ' w/ ',
+        'w/ ',
         '(devonshire mix', '- devonshire mix',
         '(remaster', '- remaster',
         '(remix', '- remix',
@@ -36,7 +36,9 @@
         '(solo acoustic', '- solo acoustic',
         '(acoustic', '- acoustic',
         '(bonus', '- bonus',
-        '- 1992/live'
+        '- 1992/live', '(boombox', '- boombox', '(mtv unplugged', '- mtv unplugged',
+        '(nevermind version', '- nevermind version', '(blew ep version', '- blew ep version',
+        '(b-side', '(c-side', '- b-side', '- c-side'
     ]
 
     function name_includes(raw2, return_type = false) {
@@ -75,7 +77,7 @@
                     let title = raw.slice(0, (chr - 1));
                     let feat = raw.replace(title,'').replaceAll('(','').replaceAll(')','').replaceAll('[','').replaceAll(']','').replace('Feat','feat').replace('Ft','ft').replace('With','with');
 
-                    if (type.includes('-')) feat = feat.replace('-','');
+                    if (type.includes('- ')) feat = feat.replace('- ','');
 
                     console.log(title, 'featuring', feat);
                     names[name].innerHTML = `<div class="title">${title}</div><div class="feat">${feat}</div>`;
