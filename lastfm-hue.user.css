@@ -1,54 +1,80 @@
 /* ==UserStyle==
 @name           bleh (hue)
 @namespace      github.com/katelmao/lastfm-bleh
-@version        2023.0915
+@version        2023.0922
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelmao/lastfm-bleh/raw/uwu/lastfm-hue.user.css
-@var text bleh "configure settings using the edit button!!" "click the pencil"
+@var text bleh "press the EDIT (pencil) button" "click the pencil"
 ==/UserStyle== */
 
-@-moz-document domain("last.fm") {
-    :root,html,body
-	{
-
-		/*													confused? check here --> https://plexion.dev/lfm/hue
-		*/
+@-moz-document domain("last.fm") {:root,html,body{
 
 
-		/* general hue */
+
+
+
+	/*		confused? check here --> https://plexion.dev/bleh/fm/customise
+	*/
+
+
+
+
+
+
+
+
+
+	/*
+			\/ \/ PASTE THE VALUES ON YOUR CLIPBOARD HERE \/ \/
+	*/
+
+
+
 		--base-hue: 255;
- 		/*
-        -2:  red
-        12:  orange
-        35:  yellow
-        115: green
-        145: turquoise?
-        185: aqua
-        225: blue
-        255: purple
-        285: magenta
-        325: pink
-        */
-
-
-		/* saturation/vibrancy */
 		--saturation: 1;
-		/*
-		2:   very vibrant
-		1:   vibrant
-		0:   grey
-		*/
-
-
-		/* lightness */
 		--lightness: 1;
-		/*
-		1.3: very light
-		1:   light
-		0:   dark
-		*/
+		--invert-btn: hsl(var(--b6));
 
 
+
+	/*
+			^^ paste here	(CTRL-V)
+	*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		}
 	}
-}
