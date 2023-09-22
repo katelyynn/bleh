@@ -5427,14 +5427,14 @@
 		border-style: solid;
 		border-color: hsl(var(--l3)) !important;
 		background-color: hsla(var(--l4),25%) !important;*/
-		background-color: hsla(var(--l3a), 65%) !important;
+		background-color: hsl(var(--l3)) !important;
 		/*background: linear-gradient(336deg, #FFD966 0%, #FF84BF 54.70%, #84FFFF 100%);*/
-		box-shadow: 0px 0px 16px hsla(var(--l3a), 40%);
+		box-shadow: 0px 0px 16px hsla(var(--l4), 50%);
 	}
 	.chartlist-count-bar-value {
-		color: hsl(var(--c1));
+		color: var(--invert-btn, hsl(var(--b6)));
 		/*text-shadow: 0 0 10px hsla(var(--base-hue),calc(var(--saturation)*50%),80%,30%);*/
-		font-weight: var(--theme-font-weight-bold);
+		font-weight: var(--theme-font-weight-slight-bold);
 		text-shadow: 0 0 10px hsla(var(--l3),90%);
 		/*mix-blend-mode: color-burn;*/
 		/*text-shadow: 0 0 10px hsla(var(--c1),90%);
