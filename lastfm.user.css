@@ -4651,11 +4651,11 @@
 		flex-basis: initial;
 	}
 
-	body:has(.header-title [href*="/user/katie4k"]),
+	/*body:has(.header-title [href*="/user/katie4k"]),
 	body:has(.header-title [href*="/user/katie4k"]) nav
 	{
 		--base-hue:255;
-	}
+	}*/
 
 
 	.header--overview.header--with-avatar .header-info,
