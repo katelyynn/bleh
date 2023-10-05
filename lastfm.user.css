@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           bleh
 @namespace      github.com/katelmao/lastfm-bleh
-@version        2023.0922
+@version        2023.1006
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelmao/lastfm-bleh/raw/uwu/lastfm.user.css
@@ -9,7 +9,7 @@
 ==/UserStyle== */
 
 @-moz-document domain("plexion.dev") {
-	body                     {--theme-ver: 2023.0922} .installed-only, .btn-installed-only {display: flex !important} .uninstalled-only {display: none} .install {pointer-events: auto; opacity: 1; border-style: solid}
+	body                     {--theme-ver: 2023.1006} .installed-only, .btn-installed-only {display: flex !important} .uninstalled-only {display: none} .install {pointer-events: auto; opacity: 1; border-style: solid}
 }
 
 
@@ -1053,6 +1053,8 @@
 		line-height: 42px !important;
 		font-weight: var(--theme-font-weight-slight-bold) !important;
 		color: hsl(var(--base-hue), calc(var(--saturation)*62%), 96%) !important;
+		font-family: 'Croissant One', var(--font-head);
+		font-weight: var(--theme-font-weight) !important;
 	}
 	.header-new .header-new-title:before, .namespace--tag_overview .header-title:before {
 		content: 'Track';
@@ -1061,6 +1063,7 @@
 		line-height: 14px;
 		letter-spacing: 0.5px;
 		color: hsl(var(--c3));
+		font-family: var(--font-main);
 	}
 
 	.header-new-title[data-kate='true'] .inner {
@@ -2556,6 +2559,12 @@
 
 
 	/* shoutbox */
+	/*#shoutbox {
+		min-height: 391px;
+	}*/
+	.shoutbox {
+		min-height: 355px;
+	}
 	.shoutbox > .shout-list > .shout-list-item {
 		padding: 10px 0;
 	}
@@ -2971,6 +2980,23 @@
 		text-decoration: none !important;
 	}
 
+	:is(.artist-top-albums-item, .resource-list--release-list-item) a[data-kate='true'] {
+		display: flex;
+		gap: 0 7px;
+		width: fit-content;
+		flex-wrap: wrap;
+	}
+	:is(.artist-top-albums-item, .resource-list--release-list-item) a .feat {
+		color: hsl(var(--c3));
+		opacity: 0.65;
+		font-weight: var(--theme-font-weight);
+	}
+
+	.resource-list--release-list-item-name {
+		height: 41px;
+	}
+
+
 	/* about this artist */
 	.gallery-preview-cta {
 		background-color: hsla(var(--b6),30%) !important;
@@ -3296,7 +3322,7 @@
 	}
 
 	.grid-items-cover-image-image:after {
-		background-image: linear-gradient(180deg,transparent 40%,hsla(var(--b6),80%));
+		background-image: linear-gradient(180deg,transparent 55%,hsla(var(--b6),90%));
 	}
 
 	.grid-items-item-main-text {
@@ -3455,7 +3481,7 @@
 	.album-overview-cover-art
 	{
 		background-color: hsla(var(--base-hue), calc(var(--saturation)*60%), calc(var(--lightness)*60%), 10%);
-		box-shadow: 0 0 70px hsla(var(--l3), 30%), var(--raise-2);
+		box-shadow: var(--raise-2), 0 0 100px hsla(var(--l4), 35%);
 	}
 
 	.track-overview-new .video-preview,
@@ -3471,7 +3497,7 @@
 
 	.cover-art img,
 	.music-more-tags-tag-wrap,
-	.grid-items-item,
+	.grid-items-item img,
 	.obsession-candidate-image,
 	.gallery-preview-image, .gallery-preview-more,
 	.playlist-image img,
@@ -4519,10 +4545,10 @@
 	.shout-user a
 	):is(
 	[href*="/user/katie4k"],
-	[href*="/user/ssneek"],
+	[href*="/user/ssneek"], [href*="/user/bIeak"],
 	[href*="/user/peoplepleasr"],
-	[href*="/user/underthefl00d"],
-	[href*="/user/BoHa1"]
+	[href*="/user/BoHa1"],
+	[href*="/user/ShinobuOmiya"]
 	):after
 	{
 		content: '';
@@ -4565,10 +4591,10 @@
 	.shout-user a
 	):is(
 	[href*="/user/katie4k"],
-	[href*="/user/ssneek"],
+	[href*="/user/ssneek"], [href*="/user/bIeak"],
 	[href*="/user/peoplepleasr"],
-	[href*="/user/underthefl00d"],
-	[href*="/user/BoHa1"]
+	[href*="/user/BoHa1"],
+	[href*="/user/ShinobuOmiya"]
 	)
 	{
 		padding-right: calc(var(--icon-size) + 4px);
@@ -4583,10 +4609,10 @@
 	.header-title a
 	):is(
 	[href*="/user/katie4k"],
-	[href*="/user/ssneek"],
+	[href*="/user/ssneek"], [href*="/user/bIeak"],
 	[href*="/user/peoplepleasr"],
-	[href*="/user/underthefl00d"],
-	[href*="/user/BoHa1"]
+	[href*="/user/BoHa1"],
+	[href*="/user/ShinobuOmiya"]
 	)
 	{
 		/*background: linear-gradient(90deg, hsl(var(--c1)) 0%, hsl(var(--l1)) 100%);
@@ -4600,21 +4626,21 @@
 
 	.chartlist-count-bar a:is(
 	[href*="/user/katie4k"],
-	[href*="/user/ssneek"],
+	[href*="/user/ssneek"], [href*="/user/bIeak"],
 	[href*="/user/peoplepleasr"],
-	[href*="/user/underthefl00d"],
-	[href*="/user/BoHa1"]
+	[href*="/user/BoHa1"],
+	[href*="/user/ShinobuOmiya"]
 	) .chartlist-count-bar-slug
 	{
-		background: linear-gradient(90deg, hsla(var(--l3a),65%) 0%, hsla(var(--l1),65%) 275%);
+		background: linear-gradient(90deg, hsl(var(--l3)) 0%, hsl(var(--c1)) 275%);
 	}
 
 	.shout-user a:is(
 	[href="/user/katie4k"],
 	[href="/user/ssneek"],
 	[href="/user/peoplepleasr"],
-	[href*="/user/underthefl00d"],
-	[href*="/user/BoHa1"]
+	[href*="/user/BoHa1"],
+	[href*="/user/ShinobuOmiya"]
 	)
 	{
 		/*background-color: hsla(var(--l2),10%);
@@ -5397,7 +5423,7 @@
 	/* chartlist bars */
 	.chartlist-count-bar {
 		line-height: 22px;
-		background-color: hsla(var(--b6), 30%);
+		background-color: hsla(var(--b1), 30%);
 		/*background: linear-gradient(90deg, hsla(var(--l3), 40%) 0%,  hsla(var(--b6), 30%) 34%);*/
 	}
 	.chartlist-count-bar-link {
@@ -5435,7 +5461,7 @@
 		color: var(--invert-btn, hsl(var(--b6)));
 		/*text-shadow: 0 0 10px hsla(var(--base-hue),calc(var(--saturation)*50%),80%,30%);*/
 		font-weight: var(--theme-font-weight-slight-bold);
-		text-shadow: 0 0 10px hsla(var(--l3),90%);
+		text-shadow: 0 0 6px hsl(var(--c1));
 		/*mix-blend-mode: color-burn;*/
 		/*text-shadow: 0 0 10px hsla(var(--c1),90%);
 		padding: 0 10px;
