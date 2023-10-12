@@ -1,21 +1,24 @@
 /* ==UserStyle==
 @name           bleh (amoled addon)
 @namespace      github.com/katelmao/lastfm-bleh
-@version        2023.0915
+@version        2023.1012
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelmao/lastfm-bleh/raw/uwu/lastfm-amoled.user.css
 ==/UserStyle== */
 
 @-moz-document domain("plexion.dev") {
-	body {--amoled-ver: 2023.0915 }
+	body {--amoled-ver: 2023.1012 }
 }
 
 @-moz-document domain("last.fm") {
-    :root, body, .re-style,
-	header,
+    :root,
+	body, html,
+	.re-style,
 	.recs-feed-cover-image-wrap,
 	.namespace--user_overview nav,
+	.grid-items-item-details,
+	header, .header-new,
 	#current-subscription,/*,
 	.namespace--settings_subscription_overview .adaptive-skin-container*/
 	.main-content > div[data-page-resource-blacklist-level=""],
@@ -26,7 +29,10 @@
 	.header-follower-btn:after, .user-list-follower-btn,
 	.label,
 	.recs-feed-cover-image-content,
-	.grid-items-cover-image-image:after
+	.grid-items-cover-image-image:after,
+	.topic-post,
+	.gallery-image-vote-up-on, .gallery-image-vote-down-on, .gallery-image-vote-preferred-on,
+	.row
 	{
 		/* text */
 		--text-link: var(--base-hue),calc(var(--saturation)*95%),calc(var(--lightness)*63%);

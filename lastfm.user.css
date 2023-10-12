@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           bleh
 @namespace      github.com/katelmao/lastfm-bleh
-@version        2023.1006
+@version        2023.1012
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelmao/lastfm-bleh/raw/uwu/lastfm.user.css
@@ -9,7 +9,7 @@
 ==/UserStyle== */
 
 @-moz-document domain("plexion.dev") {
-	body                     {--theme-ver: 2023.1006} .installed-only, .btn-installed-only {display: flex !important} .uninstalled-only {display: none} .install {pointer-events: auto; opacity: 1; border-style: solid}
+	body                     {--theme-ver: 2023.1012} .installed-only, .btn-installed-only {display: flex !important} .uninstalled-only {display: none} .install {pointer-events: auto; opacity: 1; border-style: solid}
 }
 
 
@@ -57,6 +57,7 @@
 @-moz-document domain("last.fm") {
     @import url(https://plexion.dev/css/reset.css);
     @import url('https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&display=swap');
+	/*@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200;12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&display=swap');*/
     :root,html,body
     {
         --base-hue: 255;
@@ -3322,14 +3323,16 @@
 	}
 
 	.grid-items-cover-image-image:after {
-		background-image: linear-gradient(180deg,transparent 55%,hsla(var(--b6),90%));
+		border-radius: 7px;
+		background-image: linear-gradient(180deg,transparent 44%,hsla(var(--b6),92%));
 	}
 
 	.grid-items-item-main-text {
 		color: hsl(var(--c1));
+		font-weight: var(--theme-font-weight-slight-bold);
 	}
 	.grid-items-item-aux-text, .featured-item-artist {
-		color: hsla(var(--c1),80%);
+		color: hsla(var(--c1),70%);
 	}
 
 	/* wiki */
@@ -5423,7 +5426,8 @@
 	/* chartlist bars */
 	.chartlist-count-bar {
 		line-height: 22px;
-		background-color: hsla(var(--b1), 30%);
+		background-color: hsl(var(--b3));
+		background: linear-gradient(90deg, hsl(var(--b1)) 7%, hsl(var(--b3)) 25%);
 		/*background: linear-gradient(90deg, hsla(var(--l3), 40%) 0%,  hsla(var(--b6), 30%) 34%);*/
 	}
 	.chartlist-count-bar-link {
@@ -5461,7 +5465,6 @@
 		color: var(--invert-btn, hsl(var(--b6)));
 		/*text-shadow: 0 0 10px hsla(var(--base-hue),calc(var(--saturation)*50%),80%,30%);*/
 		font-weight: var(--theme-font-weight-slight-bold);
-		text-shadow: 0 0 6px hsl(var(--c1));
 		/*mix-blend-mode: color-burn;*/
 		/*text-shadow: 0 0 10px hsla(var(--c1),90%);
 		padding: 0 10px;
@@ -6443,8 +6446,8 @@
 
 	/* auth dropdown menu thing */
 	.auth-dropdown-menu {
-		background: hsl(var(--b6)) !important;
-		box-shadow: var(--raise-2) !important;
+		background: hsla(var(--b6), 95%) !important;
+		box-shadow: var(--raise-4) !important;
 		border-radius: 10px !important;
 		padding: 0 !important;
 		display: flex;
@@ -6519,12 +6522,13 @@
 	.user-dashboard-controls-tooltip,
 	.events-filter-location-dropdown
 	{
-		background-color: hsl(var(--b6));
+		background-color: hsla(var(--b6), 95%);
 		border: 1px solid hsl(var(--b3));
 		border-radius: 10px;
 		overflow: hidden;
 		/*box-shadow: 0 0 60px 10px hsl(var(--b6));*/
 		box-shadow: var(--raise-4);
+		backdrop-filter: blur(10px);
 	}
 	.dropdown-menu-clickable {
 		padding: 0;
