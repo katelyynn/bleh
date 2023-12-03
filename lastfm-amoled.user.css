@@ -1,14 +1,14 @@
 /* ==UserStyle==
 @name           bleh (amoled addon)
 @namespace      github.com/katelmao/lastfm-bleh
-@version        2023.1012
+@version        2023.1203
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelmao/lastfm-bleh/raw/uwu/lastfm-amoled.user.css
 ==/UserStyle== */
 
 @-moz-document domain("plexion.dev") {
-	body {--amoled-ver: 2023.1012 }
+	body {--amoled-ver: 2023.1203 }
 }
 
 @-moz-document domain("last.fm") {
@@ -32,7 +32,9 @@
 	.grid-items-cover-image-image:after,
 	.topic-post,
 	.gallery-image-vote-up-on, .gallery-image-vote-down-on, .gallery-image-vote-preferred-on,
-	.row
+	.row,
+	.obsession-history-item-inner,
+	.user-dashboard-catalogue-chart-container, .user-dashboard
 	{
 		/* text */
 		--text-link: var(--base-hue),calc(var(--saturation)*95%),calc(var(--lightness)*63%);
@@ -44,12 +46,12 @@
 		--b5: var(--base-hue),calc(var(--saturation)*16%),6%;
 		--b6: var(--base-hue),0%,0%;
 		/* d1-6 */
-		--d1: var(--base-hue),calc(var(--saturation)*20%),calc(var(--lightness)*27%);
-		--d2: var(--base-hue),calc(var(--saturation)*20%),calc(var(--lightness)*22%);
-		--d3: var(--base-hue),calc(var(--saturation)*18%),calc(var(--lightness)*18%);
-		--d4: var(--base-hue),calc(var(--saturation)*18%),calc(var(--lightness)*15%);
-		--d5: var(--base-hue),calc(var(--saturation)*16%),calc(var(--lightness)*10%);
-		--d6: var(--base-hue),calc(var(--saturation)*13%),calc(var(--lightness)*6%);
+		--d1: var(--base-hue),calc(var(--saturation)*30%),calc(var(--lightness)*20%);
+		--d2: var(--base-hue),calc(var(--saturation)*30%),calc(var(--lightness)*16%);
+		--d3: var(--base-hue),calc(var(--saturation)*28%),calc(var(--lightness)*12%);
+		--d4: var(--base-hue),calc(var(--saturation)*28%),calc(var(--lightness)*10%);
+		--d5: var(--base-hue),calc(var(--saturation)*26%),calc(var(--lightness)*6%);
+		--d6: var(--base-hue),calc(var(--saturation)*20%),calc(var(--lightness)*6%);
 		/* custom */
 		--ba5: var(--base-hue),calc(var(--saturation)*20%),5%,70%;
 		--ba6: var(--base-hue),calc(var(--saturation)*0%),0%,93%;

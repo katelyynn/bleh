@@ -1,0 +1,110 @@
+[
+    {
+        "title": "Wallsocket",
+        "artist": "underscores",
+        "swatch": {
+            "hue": 218,
+            "saturation": 0.6,
+            "lightness": 1,
+            "invert": true
+        },
+        "tracks": [
+            {
+                "title": "Cops and robbers"
+            },
+            {
+                "title": [{
+                    "text": "Locals (Girls like us)",
+                    "start": true
+                }]
+            },
+            {
+                "title": "Duhhhhhhhhhhhhhhhhh"
+            },
+            {
+                "title": "You don't even know who I am"
+            },
+            {
+                "title": "Johnny johnny johnny"
+            },
+            {
+                "title": "Shoot to kill, kill your darlings"
+            },
+            {
+                "title": "Horror movie soundtrack"
+            },
+            {
+                "title": "Old money bitch"
+            },
+            {
+                "title": [{
+                    "text": "Geeze louise",
+                    "start": true
+                }]
+            },
+            {
+                "title": "Seventyseven dog years"
+            },
+            {
+                "title": [{
+                    "text": "Uncanny long arms",
+                    "start": true
+                }]
+            },
+            {
+                "title": "Good luck final girl"
+            }
+        ]
+    },
+    {
+        "title": "fishmonger",
+        "artist": "underscores",
+        "swatch": {
+            "hue": 217,
+            "saturation": 0.65,
+            "lightness": 0.9,
+            "invert": true
+        },
+        "tracks": [
+            {
+                "title": "70%"
+            },
+            {
+                "title": "Second hand embarrassment"
+            },
+            {
+                "title": "Bozo bozo bozo"
+            },
+            {
+                "title": "Kinko's field trip 2006"
+            },
+            {
+                "title": "Where did you fall"
+            },
+            {
+                "title": "Spoiled little brat"
+            },
+            {
+                "title": [{
+                    "text": "Your favorite sidekick",
+                    "start": true
+                }]
+            },
+            {
+                "title": [{
+                    "text": "Dry land 2001",
+                    "start": true
+                }]
+            },
+            {
+                "title": "The fish song"
+            },
+            {
+                "title": [{
+                    "text": "Del mar county fair 2008",
+                    "start": true
+                }]
+            }
+        ]
+    }
+]

@@ -1,0 +1,22 @@
+/* ==UserStyle==
+@name           bleh (undo winter)
+@namespace      github.com/katelmao/lastfm-bleh
+@version        2023.1203
+@license        GPL-3.0
+@author         kate
+@updateURL      https://github.com/katelmao/lastfm-bleh/raw/uwu/lastfm-winter-haters.user.css
+==/UserStyle== */
+
+@-moz-document domain("plexion.dev") {
+	body {--winter-haters-ver: 2023.1203 }
+}
+
+@-moz-document domain("last.fm") {
+	:root {
+		--overlay-snow-min: unset;
+		--overlay-ice: unset;
+	}
+	body:after {
+		display: none;
+	}
+}
