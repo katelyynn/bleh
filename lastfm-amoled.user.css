@@ -1,14 +1,14 @@
 /* ==UserStyle==
 @name           bleh (amoled addon)
 @namespace      github.com/katelmao/lastfm-bleh
-@version        2023.1203
+@version        2023.1210
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelmao/lastfm-bleh/raw/uwu/lastfm-amoled.user.css
 ==/UserStyle== */
 
 @-moz-document domain("plexion.dev") {
-	body {--amoled-ver: 2023.1203 }
+	body {--amoled-ver: 2023.1210 }
 }
 
 @-moz-document domain("last.fm") {
@@ -34,16 +34,17 @@
 	.gallery-image-vote-up-on, .gallery-image-vote-down-on, .gallery-image-vote-preferred-on,
 	.row,
 	.obsession-history-item-inner,
-	.user-dashboard-catalogue-chart-container, .user-dashboard
+	.user-dashboard-col, .user-dashboard,
+	.error-page-marvin:after
 	{
 		/* text */
 		--text-link: var(--base-hue),calc(var(--saturation)*95%),calc(var(--lightness)*63%);
 		/* b1-6 */
-		--b1: var(--base-hue),calc(var(--saturation)*22%),20%;
-		--b2: var(--base-hue),calc(var(--saturation)*22%),16%;
+		--b1: var(--base-hue),calc(var(--saturation)*22%),18%;
+		--b2: var(--base-hue),calc(var(--saturation)*22%),14%;
 		--b3: var(--base-hue),calc(var(--saturation)*22%),12%;
-		--b4: var(--base-hue),calc(var(--saturation)*20%),10%;
-		--b5: var(--base-hue),calc(var(--saturation)*16%),6%;
+		--b4: var(--base-hue),calc(var(--saturation)*20%),8%;
+		--b5: var(--base-hue),calc(var(--saturation)*16%),0%;
 		--b6: var(--base-hue),0%,0%;
 		/* d1-6 */
 		--d1: var(--base-hue),calc(var(--saturation)*30%),calc(var(--lightness)*20%);
@@ -53,15 +54,11 @@
 		--d5: var(--base-hue),calc(var(--saturation)*26%),calc(var(--lightness)*6%);
 		--d6: var(--base-hue),calc(var(--saturation)*20%),calc(var(--lightness)*6%);
 		/* custom */
-		--ba5: var(--base-hue),calc(var(--saturation)*20%),5%,70%;
+		--ba5: var(--base-hue),calc(var(--saturation)*20%),0%,70%;
 		--ba6: var(--base-hue),calc(var(--saturation)*0%),0%,93%;
 
 		/* accents */
 		--accent-background: var(--base-hue),calc(var(--saturation)*53%),calc(var(--lightness)*22%);
 	}
 
-
-	.chartlist-row:nth-child(odd):not(.chartlist-row--now-scrobbling):not(:hover) {
-		background-color: hsla(var(--b4), 40%);
-	}
 }

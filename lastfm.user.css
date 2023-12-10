@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           bleh
 @namespace      github.com/katelmao/lastfm-bleh
-@version        2023.1203
+@version        2023.1210
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelmao/lastfm-bleh/raw/uwu/lastfm.user.css
@@ -9,7 +9,7 @@
 ==/UserStyle== */
 
 @-moz-document domain("plexion.dev") {
-	body                     {--theme-ver: 2023.1203} .installed-only, .btn-installed-only {display: flex !important} .uninstalled-only {display: none} .install {pointer-events: auto; opacity: 1; border-style: solid}
+	body                     {--theme-ver: 2023.1210} .installed-only, .btn-installed-only {display: flex !important} .uninstalled-only {display: none} .install {pointer-events: auto; opacity: 1; border-style: solid}
 }
 
 
@@ -225,7 +225,7 @@
 	.gallery-image-vote-up-on, .gallery-image-vote-down-on, .gallery-image-vote-preferred-on,
 	.row,
 	.obsession-history-item-inner,
-	.user-dashboard-catalogue-chart-container, .user-dashboard,
+	.user-dashboard-col, .user-dashboard,
 	.error-page-marvin:after
 	{
 		--theme-brightness-multiplier: 1;
@@ -677,6 +677,8 @@
 	.container,
 	.two-column-layout .container {
 		background-color: hsla(var(--ba5)) !important;
+		border: 1px solid hsla(var(--b3), 50%) !important;
+		box-shadow: var(--raise-1) !important;
 		margin-bottom: 10px;
 		border-radius: 10px;
 		background-image: none !important;
@@ -685,6 +687,17 @@
 	.header-new-content
 	{
 		animation: fade_up 0.4s;
+	}
+	.profile-cards-container + .content-top-lower {
+		display: none !important;
+	}
+
+	/* fixes the border above */
+	.col-main {
+		width: calc(800px - 2px);
+	}
+	.col-sm-4 {
+		width: calc(400px - 2px);
 	}
 
 	.two-column-layout header .container {
@@ -718,6 +731,7 @@
 	}
 	.container.content-top-lower:not(:has([class*="navlist"])) {
 		background: transparent !important;
+		border: none !important;
 		margin-bottom: initial;
 		border-bottom-left-radius: 0;
 		border-bottom-right-radius: 0;
@@ -1409,9 +1423,13 @@
 		gap: 10px;
 		position: relative;
 		--base-hue: var(--pro-colour);
+		--saturation: 1;
+		--lightness: 1;
 	}
 	.namespace--settings_subscription_overview .adaptive-skin-container {
 		--base-hue: var(--pro-colour);
+		--saturation: 1;
+		--lightness: 1;
 	}
 	#current-subscription h3 {
 		font-size: 18px;
@@ -2870,7 +2888,7 @@
 	.shout .vote-button {
 		background-color: hsl(var(--b6));
 		color: hsl(var(--c1));
-		border: 2px solid hsl(var(--b4));
+		border: 2px solid hsla(var(--b4), 80%);
 		font-size: 12px;
 		padding: 1px 10px;
 		border-radius: 50px;
@@ -4158,11 +4176,16 @@
 		border-radius: 50px;
 		left: 15px !important;
 		right: 15px !important;
+		transform: scaleX(1) !important;
 	}
 	a.secondary-nav-item-link:focus:after,
 	a.secondary-nav-item-link:hover:after
 	{
 		background-color: hsl(var(--l1)) !important;
+	}
+
+	.secondary-nav-item-link--active[href^="/settings"]:after {
+		bottom: -2px !important;
 	}
 
 	.library-controls .secondary-nav .secondary-nav-item-link--active,
@@ -5798,6 +5821,9 @@
 	.link-block .link-block-cover-link, .listening-report-library-link {
 		z-index: 10;
 	}
+	.grid-items-item-aux-text a {
+		z-index: 11;
+	}
 
 	.user-dashboard-buffer, .user-dashboard-col, .user-dashboard-module {
 		z-index: 10;
@@ -5861,13 +5887,13 @@
 		border-radius: 10px;
 		width: 100%;
 	}
-	.user-dashboard-catalogue-chart-container:has(#highcharts-artist.active) {
+	.user-dashboard-col:has(#highcharts-artist.active) {
 		--base-hue: var(--orange);
 	}
-	.user-dashboard-catalogue-chart-container:has(#highcharts-album.active) {
+	.user-dashboard-col:has(#highcharts-album.active) {
 		--base-hue: var(--green);
 	}
-	.user-dashboard-catalogue-chart-container:has(#highcharts-track.active) {
+	.user-dashboard-col:has(#highcharts-track.active) {
 		--base-hue: var(--blue);
 	}
 
@@ -6730,14 +6756,14 @@
 
 	/* auth dropdown menu thing */
 	.auth-dropdown-menu {
-		background-color: hsla(var(--b6), 93%) !important;
+		background-color: hsla(var(--b6), 70%) !important;
 		box-shadow: var(--raise-2) !important;
 		border-radius: 10px !important;
 		padding: 0 !important;
 		display: flex;
 		flex-direction: column;
 		overflow: hidden;
-		border: 1px solid hsl(var(--b3)) !important;
+		border: 1px solid hsl(var(--b4)) !important;
 	}
 	.auth-dropdown-menu-item {
 		color: hsl(var(--c2)) !important;
@@ -6753,7 +6779,7 @@
 		justify-content: center;
 		flex-direction: column;
 		/* specific padding for icon */
-		padding: 9px 17px 9px calc(17px + 16px + 13px) !important;
+		padding: 11px 17px 11px calc(17px + 16px + 13px) !important;
 	}
 
 	.auth-dropdown-menu-item:before {
@@ -6809,14 +6835,13 @@
 	.user-dashboard-controls-tooltip,
 	.events-filter-location-dropdown
 	{
-		background-color: hsla(var(--b6), 93%);
-		border: 1px solid hsl(var(--b3));
+		background-color: hsl(var(--b6));
+		border: 1px solid hsl(var(--b4));
 		border-radius: 10px;
 		overflow: hidden;
 		/*box-shadow: 0 0 60px 10px hsl(var(--b6));*/
 		box-shadow: var(--raise-2);
 		padding: 0;
-		backdrop-filter: blur(10px);
 	}
 	.dropdown-menu-clickable {
 		z-index: 999;
@@ -6843,13 +6868,13 @@
 		border-radius: 0;
 		text-decoration: none !important;
 		/* specific padding for icon */
-		padding: 9px 17px 9px calc(17px + 16px + 13px) !important;
+		padding: 11px 17px 11px calc(17px + 16px + 13px) !important;
 	}
 	.dropdown-menu-clickable-item:is(:hover, :active, :focus),
 	.auth-dropdown-menu-item:active,
 	body:not([data-whatinput="touch"]) .auth-dropdown-menu-item:focus,
 	body:not([data-whatinput="touch"]) .auth-dropdown-menu-item:hover {
-		background: hsl(var(--b5)) !important;
+		background: hsla(var(--b4), 40%) !important;
 	}
 
 	/* grr danger */
@@ -6935,6 +6960,34 @@
 		margin-top: -10px;
 		background-position: 2px 2px;
 	}
+
+
+	/* custom sep */
+	.more-item--edit-old,
+	li:has(.more-item--obsession):not(:last-child),
+	[data-analytics-label="settings"],
+	[data-analytics-label="profile"]
+	{
+		margin-bottom: 9px !important;
+		position: relative;
+	}
+	.more-item--edit-old:after,
+	li:has(.more-item--obsession):not(:last-child):after,
+	[data-analytics-label="settings"]:after,
+	[data-analytics-label="profile"]:after
+	{
+		content: '';
+		display: block !important;
+		position: absolute;
+		bottom: -5px;
+		left: 6px;
+		right: 6px;
+		height: 1px;
+		background: hsl(var(--b4));
+		border: none !important;
+	}
+
+
 	/* divider */
 	.menu-title {
 		color: hsl(var(--c3));
@@ -7566,144 +7619,148 @@
 	/* custom hardcode covers */
 
 	/* glaive - cypress grove (sessions) */
-	[alt="2face"],
-	[alt="2 face"],
-	[alt="DEAD2ME"],
-	[alt="eyesore (demo)"],
-	[alt="Fuck Cancer (Freestyle)"],
-	[alt="hey hi hyd (demo)"],
-	[alt="im a mess"],
-	[alt="october's lullaby (demo) [feat. Savage Ga$p]"],
-	[alt="play 2 much"],
-	[alt="quicksand (v1)"],
-	[alt="quicksand (v2)"],
-	[alt="quicksand"]
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="2face"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="2 face"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="DEAD2ME"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="eyesore (demo)"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="Fuck Cancer (Freestyle)"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="hey hi hyd (demo)"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="im a mess"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="october's lullaby (demo) [feat. Savage Ga$p]"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="play 2 much"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="quicksand (v1)"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="quicksand (v2)"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="quicksand"]
 	{
 		content: url('https://lastfm.freetls.fastly.net/i/u/64s/027e5be7194a4a1337db7b261dc9a3f6.jpg') !important;
 	}
 
 	/* glaive - all dogs go to heaven (sessions) */
-	[alt="a date with karma"],
-	[alt="A Date w Karma (V1)"],
-	[alt="a date w karma (v2)"],
-	[alt="all dogs go to heaven (demo)"],
-	[alt="bastard (Demo)"],
-	[alt="bastard (open)"],
-	[alt="dial tone"],
-	[alt="fuck it"],
-	[alt="fuck this town (demo) [feat. ericdoa]"],
-	[alt="poison (demo)"],
-	[alt="rigor mortis (555)"],
-	[alt="stephany (demo)"],
-	[alt="SYNOPSIS (demo)"],
-	[alt="bird (v2)"],
-	[alt="crynomore"],
-	[alt="function"],
-	[alt="grow up"],
-	[alt="Prick (feat. Midwxst)"],
-	[alt="bird (v1)"],
-	[alt="perfect"]
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="a date with karma"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="A Date w Karma (V1)"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="a date w karma (v2)"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="all dogs go to heaven (demo)"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="bastard (Demo)"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="bastard (open)"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="dial tone"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="fuck it"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="fuck this town (demo) [feat. ericdoa]"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="poison (demo)"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="rigor mortis (555)"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="stephany (demo)"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="SYNOPSIS (demo)"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="bird (v2)"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="crynomore"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="function"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="grow up"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="Prick (feat. Midwxst)"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="bird (v1)"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="perfect"]
 	{
 		content: url('https://lastfm.freetls.fastly.net/i/u/64s/eaa3636601712185d51ec96fa9fb702f.jpg') !important;
 	}
 
 	/* old dog, new tricks (sessions) */
-	[alt="girl i met (v1)"],
-	[alt="girl i met (v2)"],
-	[alt="girl i met (v3)"],
-	[alt="pretty stupid lol (77)"],
-	[alt="Stay + Love Story (Cover)"],
-	[alt="marie antoinette"],
-	[alt="Marrie Antoinette"],
-	[alt="wasting away again"],
-	[alt="prick (og)"],
-	[alt="dogs! dogs! dogs!"]
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="girl i met (v1)"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="girl i met (v2)"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="girl i met (v3)"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="pretty stupid lol (77)"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="Stay + Love Story (Cover)"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="marie antoinette"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="Marrie Antoinette"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="wasting away again"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="prick (og)"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="dogs! dogs! dogs!"]
 	{
 		content: url('https://lastfm.freetls.fastly.net/i/u/64s/5d178106435f1366e2a7238b02110fa9.jpg') !important;
 	}
 
 	/* glaive - i care so much that i don't care at all (sessions) */
-	[alt="17250 (V1)"],
-	[alt="17250 (V2)"],
-	[alt="a mattress is a man's best friend"],
-	[alt="don't bring this up again (v1)"],
-	[alt="don't bring this up again (v2)"],
-	[alt="dr luke song"],
-	[alt="fear of god and the catholic church"],
-	[alt="fruit & cookie & a cute little muffin"],
-	[alt="fun time to be uhh"],
-	[alt="jesse ralph (this song is in a minor at 126 bpm v2)"],
-	[alt="grapes"],
-	[alt="i wish i could but my mom would kill me"],
-	[alt="Minnesota Is A Place That Exists (Demo)"],
-	[alt="note to self nothing good has ever happened in florida"],
-	[alt="or are you drunk? i can never tell"],
-	[alt="the 6 most prescribed adhd medications"],
-	[alt="this song doesn't have a title yet"],
-	[alt="this song is in A Minor at 126 BPM"],
-	[alt="three wheels and it still drives! (v1)"],
-	[alt="unsaid (demo)"],
-	[alt="unsaid"],
-	[alt="zoe kravitz eat your heart out"],
-	[alt="zoe kravitz eat your heart out (v2)"],
-	[alt="fuck em we ball"],
-	[alt="fuck em we ball (remaster)"]
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="17250 (V1)"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="17250 (V2)"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="a mattress is a man's best friend"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="don't bring this up again (v1)"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="don't bring this up again (v2)"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="dr luke song"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="fear of god and the catholic church"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="fruit & cookie & a cute little muffin"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="fun time to be uhh"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="jesse ralph (this song is in a minor at 126 bpm v2)"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="grapes"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="i wish i could but my mom would kill me"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="Minnesota Is A Place That Exists (Demo)"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="note to self nothing good has ever happened in florida"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="or are you drunk? i can never tell"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="the 6 most prescribed adhd medications"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="this song doesn't have a title yet"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="this song is in A Minor at 126 BPM"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="three wheels and it still drives! (v1)"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="unsaid (demo)"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="unsaid"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="zoe kravitz eat your heart out"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="zoe kravitz eat your heart out (v2)"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="fuck em we ball"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="fuck em we ball (remaster)"]
 	{
 		content: url('https://lastfm.freetls.fastly.net/i/u/64s/5e9ada703257cacef32eeba9e6e14bdd.jpg') !important;
 	}
 
 	/* glaive - something terrible happened at ovine hall book club */
-	[alt="up+down"],
-	[alt="up + down"],
-	[alt="problems"],
-	[alt="hate2seeucry"],
-	[alt="Hate 2 See U Cry"],
-	[alt="i hate 2 see u cry"],
-	[alt="for u"],
-	[alt="up+down (pitched)"],
-	[alt="problems (pitched)"],
-	[alt="the car (pitched)"],
-	[alt="Shoreditch (Bsun N Thr6x Remix)"]
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="up+down"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="up + down"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="problems"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="hate2seeucry"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="Hate 2 See U Cry"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="i hate 2 see u cry"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="for u"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="up+down (pitched)"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="problems (pitched)"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="the car (pitched)"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="Shoreditch (Bsun N Thr6x Remix)"]
 	{
 		content: url('https://lastfm.freetls.fastly.net/i/u/64s/32e5689c1002e908a9fc64f977174f9e.jpg') !important;
 	}
 
 	/* glaive - cypress grove */
-	[alt="Teen Angst"] /* eyesore */
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="Teen Angst"] /* eyesore */
 	{
 		content: url('https://lastfm.freetls.fastly.net/i/u/64s/3a47b85891a67b78ee43f7f26506958c.jpg') !important;
 	}
 
 	/* glaive - all dogs go to heaven */
-	[alt="all dogs go to heaven (outro)"]
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="all dogs go to heaven (outro)"]
 	{
 		content: url('https://lastfm.freetls.fastly.net/i/u/64s/34a552ef32533002e628e080e0a49f42.jpg') !important;
 	}
 
 	/* glaive - then i'll be happy */
-	[alt="naturale"],
-	[alt="mental anguish"],
-	[alt="heather"],
-	[alt="pretending"],
-	[alt="physs"],
-	[alt="handle me"],
-	[alt="handle me (interlude)"],
-	[alt="mental anguish (live concert)"],
-	[alt="heather (live concert)"]
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="naturale"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="mental anguish"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="heather"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="pretending"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="physs"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="handle me"],
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="handle me (interlude)"]
 	{
 		content: url('https://lastfm.freetls.fastly.net/i/u/64s/11c76777452a03855fb9c22754c1b6fa.jpg') !important;
 	}
 
 	/* glaive - fuck this town */
-	[alt="fuck this town"]
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="fuck this town"]
 	{
 		content: url('https://lastfm.freetls.fastly.net/i/u/64s/56990d4ab5358065657cdf2a7542968e.jpg') !important;
 	}
 
 	/* glaive - cloak n dagger */
-	[alt="cloak n dagger"]
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="cloak n dagger"]
 	{
 		content: url('https://lastfm.freetls.fastly.net/i/u/64s/3407f6c2db1396a469127758edeba65c.jpg') !important;
+	}
+
+	/* brakence - hypochondriac */
+	[src^="https://lastfm.freetls.fastly.net/i/u/64s"][alt="Hypochondriac (Demo)"]
+	{
+		content: url('https://lastfm.freetls.fastly.net/i/u/64s/ddee3b871289a6cda0e3c7d4b4580d62.jpg') !important;
 	}
 
 
@@ -7855,7 +7912,7 @@
 	#update-chart .form-header,
 	#website .form-header,
 	#playback .form-header,
-	#ignorelist .form-header, #ignorelist p,
+	#ignorelist .form-header, #ignorelist > p,
 	.secondary-nav-item-link[href*="+listeners"],
 	#update-picture .form-row-help-text,
 	.source-album-column h3,
@@ -7916,7 +7973,7 @@
 		content: 'Ignore users';
 		font-size: 14px;
 	}
-	[lang="en"] #ignorelist p:after
+	[lang="en"] #ignorelist > p:after
 	{
 		content: 'Prevents you from seeing messages and activity from the following users. Shouts on your profile are automatically removed.';
 		font-size: 14px;
@@ -8244,6 +8301,7 @@
 	}
 
 	/* this is set for .header but not .header-new */
+	.secondary-nav-item-link--active:after, .secondary-nav-item-link:focus:after, .secondary-nav-item-link:hover:after,
 	.header-new .secondary-nav-item-link--active::after, .header-new a.secondary-nav-item-link:focus::after, .header-new a.secondary-nav-item-link:hover::after,
 	.about-section .secondary-nav-item-link--active::after, .about-section a.secondary-nav-item-link:focus::after, .about-section a.secondary-nav-item-link:hover::after, .header .secondary-nav-item-link--active::after, .header a.secondary-nav-item-link:focus::after, .header a.secondary-nav-item-link:hover::after, .homefeed .secondary-nav-item-link--active::after, .homefeed a.secondary-nav-item-link:focus::after, .homefeed a.secondary-nav-item-link:hover::after, .listening-report-top .secondary-nav-item-link--active::after, .listening-report-top a.secondary-nav-item-link:focus::after, .listening-report-top a.secondary-nav-item-link:hover::after, .whats-new .secondary-nav-item-link--active::after, .whats-new a.secondary-nav-item-link:focus::after, .whats-new a.secondary-nav-item-link:hover::after
 	{
@@ -8262,6 +8320,10 @@
 		bottom: -5px;
 		transform: scaleX(0);
 		transition: background-color 0.15s, bottom 0.15s, transform 0.15s;
+	}
+
+	.content-top-has-nav .content-top .content-top-lower, .two-column-layout .content-top .content-top-lower {
+		padding-bottom: 12px;
 	}
 
 
@@ -8351,17 +8413,22 @@
 		top: 0;
 		left: 0;
 		right: 0;
-		height: 400px;
+		height: 600px;
+		max-height: 100%;
 		pointer-events: none;
-		background: linear-gradient(180deg, rgba(190,233,250,0.06) 0%, rgba(0,0,0,0) 100%);
+		background: linear-gradient(180deg, rgba(190,233,250,0.08) 0%, rgba(0,0,0,0) 100%);
 		content: '';
 		display: block;
 		border-top-left-radius: 10px;
 		border-top-right-radius: 10px;
 	}
+	.video-preview, .album-overview-cover-art {
+		z-index: 1;
+	}
 	.masthead {
-		height: 64px;
+		height: 464px;
 		pointer-events: none;
+		background-image: var(--overlay-snow-min), linear-gradient(180deg, rgba(190,233,250,0.11) 0%, rgba(0,0,0,0) 100%) !important;
 	}
 	/*.grid-items:after,*/
 	.dropdown-menu-clickable,
