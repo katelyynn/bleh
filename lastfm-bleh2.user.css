@@ -108,7 +108,8 @@
 	button, .gallery-image-report,
 	.gallery-image-preferred-states::before,
 	.masthead-logo a,
-	body:after
+	body:after,
+	.listening-report-brick--combo .tag-label
 	{
 		--c1: var(--hue), calc(var(--sat) * 40%), 100%;
 		--c2: var(--hue), calc(var(--sat) * 60%), 90%;
@@ -557,7 +558,7 @@
 		float: unset !important;
 	}
 	.col-main,
-	/* katie doesnt have any scrobbles yet */ .col-main > .no-data-message
+	/* katie doesnt have any scrobbles yet */ .profile-mobile-featured-track + .no-data-message
 	{
 		min-width: var(--cards-main-width);
 	}
@@ -587,7 +588,7 @@
 	/* gallery */ .js-gallery-image-details,
 	/* send a message box */ .header--overview:not(:has(.header-featured-track)):has(.header-message-user) + .adaptive-skin-container .col-sidebar:before,
 	/* listening reports */ .user-dashboard > .user-dashboard-buffer,
-	/* katie doesnt have any scrobbles yet */ .col-main > .no-data-message
+	/* katie doesnt have any scrobbles yet */ .profile-mobile-featured-track + .no-data-message
 	{
 		content: '';
 		background-color: hsl(var(--b5));
@@ -1657,7 +1658,9 @@
 	.library-artist-section-header,
 	.date-heading, .user-sidebar-header,
 	.gallery-image-title,
-	.your-progress h4
+	.your-progress h4,
+	.user-dashboard-section-header, .user-dashboard-module-title,
+	.graph-description h3
 	{
 		color: hsl(var(--c1));
 		font-size: var(--font-size);
@@ -1679,6 +1682,9 @@
 	.user-sidebar-header
 	{
 		min-width: 150px;
+	}
+	.user-dashboard-section-header:after {
+		display: none;
 	}
 	.content-top-header
 	{
@@ -2237,7 +2243,8 @@
 	.footer-links a, .footer-timezone a,
 	.library-search-results li,
 	.resource-external-link, .play-this-track-playlink, .replace-playlink,
-	.shout-more-replies-before
+	.shout-more-replies-before,
+	.listening-report-brick--combo .listening-report-brick-inner
 	{
 		--bg: hsl(var(--b4));
 		--bg-hov: hsla(var(--b4), 80%);
@@ -3185,9 +3192,23 @@
 
 
 	/*     LISTENING REPORT     */
-	.listening-report-brick .listening-report-brick-inner {
+	.highlights-comparison, .scrobble-stats-comparison {
+		color: hsl(var(--l3-c));
+	}
+
+	.user-dashboard-module-inner-wrap {
+		padding: unset;
+	}
+
+	.listening-report-brick:not(.listening-report-brick--combo) .listening-report-brick-inner {
 		margin: unset;
 		padding: unset !important;
+	}
+	.listening-report-brick--combo .listening-report-brick-inner {
+		margin: unset;
+	}
+	.listening-report-brick--combo .listening-report-brick-inner:not(:last-child) {
+		margin-bottom: 4px;
 	}
 	.listening-report-brick .listening-report-brick-item {
 		color: hsl(var(--c2));
@@ -3211,10 +3232,83 @@
 		border-radius: var(--item-big-radius);
 	}
 
+
+	/* lil boxes, 3s and 4s */
+	.listening-report-brick {
+		border: unset;
+	}
+	.listening-report-brick.listening-report-brick--combo {
+		padding: unset;
+	}
+	.listening-report-brick .listening-report-brick-head {
+		margin: unset !important;
+		padding-top: unset;
+	}
+
+	.listening-report-brick--combo .tag-label {
+		top: 0;
+		left: 0;
+		box-shadow: unset;
+		border-radius: var(--item-med-radius);
+		background: hsla(var(--l4), 20%);
+		--sat: 1;
+		--lit: 1;
+	}
+	.listening-report-brick--combo .tag-label:before {
+		background-image: unset !important;
+		background-color: hsl(var(--c2));
+		mask-image: var(--mask-icon);
+		margin-top: -9px;
+		mask-size: 16px;
+	}
+	.listening-report-brick--combo .header-metadata {
+		padding-left: calc(32px + 8px);
+		margin-bottom: 8px;
+	}
+
+	.tag-label--artist {
+		--hue: 25;
+		--mask-icon: var(--icon-16-artist);
+	}
+	.tag-label--album {
+		--hue: 160;
+		--mask-icon: var(--icon-16-album);
+	}
+	.tag-label--track {
+		--hue: 200;
+		--mask-icon: var(--icon-16-track);
+	}
+
+	.tag-label--total-scrobbles {
+		--mask-icon: var(--icon-16-scrobble);
+	}
+	.tag-label--discovery {
+		--mask-icon: var(--icon-16-globe);
+	}
+
+	.tag-label--average-daily-scrobbles {
+		--mask-icon: var(--icon-16-calendar);
+	}
+	.tag-label--listening-time {
+		--mask-icon: var(--icon-16-clock);
+	}
+
+	.user-dashboard-col:first-child, .user-dashboard-section-header + .user-dashboard-col {
+		padding-left: unset;
+	}
+	.user-dashboard-col:last-child {
+		padding-right: unset;
+	}
+
+
 	.user-dashboard {
 		display: flex;
 		flex-direction: column;
 		gap: var(--card-gap);
+	}
+	.user-dashboard-section-header, .graph-description h3 {
+		font-size: 16px;
+		margin-bottom: calc(12px + 4px) !important;
 	}
 
 
@@ -3342,7 +3436,8 @@
 	}
 	.resource-list--release-list-item-aux-text, .resource-list--release-list-item-regular-tags,
 	.artist-top-albums-item-aux-text, .artist-top-albums-item-regular-tags,
-	.similar-albums-item-aux-text, .similar-albums-item-regular-tags
+	.similar-albums-item-aux-text, .similar-albums-item-regular-tags,
+	.listening-report-brick-item-scrobbles
 	{
 		font-size: var(--font-size);
 		line-height: var(--line-height);
