@@ -1,0 +1,45 @@
+/* ==UserStyle==
+@name           bleh2 (oled)
+@namespace      github.com/katelyynn/bleh
+@version        2023.1231
+@license        GPL-3.0
+@author         kate
+@updateURL      https://github.com/katelyynn/bleh/raw/uwu/lastfm-bleh2-oled.user.css
+@var text bleh "configure settings using the edit button!!" "click the pencil"
+==/UserStyle== */
+
+@-moz-document domain("localhost") {
+	body {--bleh2-oled-ver: 2023.1231 }
+}
+
+@-moz-document domain("last.fm") {
+    /* backgrounds */
+	:root, [data-page-resource-type="album"],
+	.gallery-image-buttons button, .gallery-image-preferred-button,
+	.vote-button--voted
+	{
+		/* card border */
+		--b4: var(--hue), calc(var(--sat) * 8%), 8%;
+
+		/* card */
+		--b5: var(--hue), calc(var(--sat) * 20%), 2%;
+
+		/* root */
+		--b6: 0, 0%, 0%;
+		--b7: 0, 0%, 0%;
+	}
+
+	/* text */
+	:root
+	{
+		--c1: var(--hue), calc(var(--sat) * 40%), 100%;
+		--c2: var(--hue), calc(var(--sat) * 60%), 90%;
+		--c3: var(--hue), calc(var(--sat) * 10%), 60%;
+
+		--l3: var(--hue), calc(var(--sat) * 50%), calc(var(--lit) * 75%);
+		--l4: var(--hue), calc(var(--sat) * 60%), calc(var(--lit) * 45%);
+
+		--l3-c: var(--hue), calc(var(--sat) * 50%), calc(clamp(min(0.5), var(--lit), max(1.5)) * 70%);
+		--l4-c: var(--hue), calc(var(--sat) * 60%), calc(clamp(min(0.5), var(--lit), max(1.5)) * 45%);
+	}
+}

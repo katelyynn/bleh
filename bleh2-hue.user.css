@@ -1,0 +1,80 @@
+/* ==UserStyle==
+@name           bleh2 (hue)
+@namespace      github.com/katelyynn/bleh
+@version        2023.1231
+@license        GPL-3.0
+@author         kate
+@updateURL      https://github.com/katelyynn/bleh/raw/uwu/lastfm-bleh2-hue.user.css
+@var text bleh "press the EDIT (pencil) button" "click the pencil"
+==/UserStyle== */
+
+@-moz-document domain("last.fm") {:root,html,body{
+
+
+
+
+
+	/*		confused? check here --> https://plexion.dev/bleh/fm/customise2
+	*/
+
+
+
+
+
+
+
+
+
+	/*
+			\/ \/ PASTE THE VALUES ON YOUR CLIPBOARD HERE \/ \/
+	*/
+
+
+
+    --hue: 0;
+    --sat: 0;
+    --lit: 0;
+    --ovr: var(--c1);
+
+
+
+	/*
+			^^ paste here	(CTRL-V)
+	*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
+}
