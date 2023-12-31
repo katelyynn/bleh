@@ -2580,7 +2580,7 @@
 
 
 	/*     DROPDOWN     */
-	.dropdown-menu-clickable, .auth-dropdown-menu {
+	.dropdown-menu-clickable, .auth-dropdown-menu, .navlist-hidden-list-wrap .navlist-hidden-list {
 		padding: 5px !important;
 	}
 	.dropdown-menu-clickable-item, .auth-dropdown-menu-item, .navlist-hidden-list a,
