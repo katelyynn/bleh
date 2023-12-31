@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           bleh
 @namespace      github.com/katelmao/lastfm-bleh
-@version        2023.1210
+@version        2023.1231
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelmao/lastfm-bleh/raw/uwu/lastfm.user.css
@@ -9,7 +9,7 @@
 ==/UserStyle== */
 
 @-moz-document domain("plexion.dev") {
-	body                     {--theme-ver: 2023.1210} .installed-only, .btn-installed-only {display: flex !important} .uninstalled-only {display: none} .install {pointer-events: auto; opacity: 1; border-style: solid}
+	body                     {--theme-ver: 2023.1231} .installed-only, .btn-installed-only {display: flex !important} .uninstalled-only {display: none} .install {pointer-events: auto; opacity: 1; border-style: solid}
 }
 
 
@@ -329,8 +329,10 @@
 		content: '';
 		position: fixed;
 		inset: 0;
-		background-image: url("https://raw.githubusercontent.com/coolesding/shiggycord/v3/img/snow.gif") !important;
-		background-repeat: repeat;
+		height: 300px;
+		background-color: hsl(var(--l4));
+		mask-image: url("https://raw.githubusercontent.com/coolesding/shiggycord/v3/img/snow.gif") !important;
+		mask-repeat: repeat;
 		z-index: 10000000;
 		pointer-events: none;
 		opacity: 0.2;
@@ -8405,7 +8407,7 @@
 		background-image: var(--overlay-snow-min) !important;
 		background-repeat: repeat-x !important;
 	}
-	.page-content, .two-column-layout .container {
+	/*.page-content, .two-column-layout .container {
 		position: relative;
 	}
 	.page-content:after, .two-column-layout .container:after {
@@ -8421,7 +8423,7 @@
 		display: block;
 		border-top-left-radius: 10px;
 		border-top-right-radius: 10px;
-	}
+	}*/
 	.video-preview, .album-overview-cover-art {
 		z-index: 1;
 	}
