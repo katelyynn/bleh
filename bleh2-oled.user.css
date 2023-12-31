@@ -8,7 +8,7 @@
 @var text bleh "configure settings using the edit button!!" "click the pencil"
 ==/UserStyle== */
 
-@-moz-document domain("localhost") {
+@-moz-document domain("plexion.dev") {
 	body {--bleh2-oled-ver: 2023.1231 }
 }
 
