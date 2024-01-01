@@ -111,7 +111,8 @@
 	body:after,
 	.listening-report-brick--combo .tag-label,
 	.listening-report-promo--year,
-	.highcharts-point, .user-dashboard-legend-item::before, stop
+	.highcharts-point, .user-dashboard-legend-item::before, stop,
+	.user-dashboard--monthly, .user-dashboard--yearly
 	{
 		--c1: var(--hue), calc(var(--sat) * 40%), 100%;
 		--c2: var(--hue), calc(var(--sat) * 60%), 90%;
@@ -3273,13 +3274,18 @@
 		color: hsl(var(--c2)) !important;
 		fill: hsl(var(--c2)) !important;
 	}
+	text[style^="color: rgb(255, 172, 172)"] {
+		color: rgb(255, 172, 172) !important;
+		fill: rgb(255, 172, 172) !important;
+		font-size: 12px !important;
+	}
 
-	.highcharts-point:is([fill^="rgb(2"], [fill="#d92323"]) {
+	.your-progress .highcharts-point:is([fill^="rgb(2"], [fill="#d92323"]) {
 		fill: hsl(var(--l3-c)) !important;
 		stroke: hsl(var(--b5)) !important;
 		width: 7px !important;
 	}
-	.highcharts-point:is([fill^="rgb(1"], [fill="#999999"]) {
+	.your-progress .highcharts-point:is([fill^="rgb(1"], [fill="#999999"]) {
 		fill: hsl(var(--l4-c)) !important;
 		stroke: hsl(var(--b5)) !important;
 		width: 7px !important;
@@ -3496,7 +3502,7 @@
 	}
 
 
-	.highcharts-grid-line[stroke="#e6e6e6"] {
+	.user-dashboard--weekly .highcharts-grid-line[stroke="#e6e6e6"] {
 		stroke: hsl(var(--b4));
 	}
 	.listening-week-graph-chart .highcharts-point {
@@ -3514,14 +3520,14 @@
 		--lit: 1;
 	}
 
-	.scrobble-stats-graph-chart .highcharts-point {
+	.user-dashboard--weekly .scrobble-stats-graph-chart .highcharts-point {
 		fill: hsl(var(--l3-c));
 		stroke: unset !important;
 		--hue: 255;
 		--sat: 1;
 		--lit: 1;
 	}
-	.scrobble-stats-graph-chart .highcharts-point:hover {
+	.user-dashboard--weekly .scrobble-stats-graph-chart .highcharts-point:hover {
 		fill: hsla(var(--l3-c), 85%);
 		stroke: unset !important;
 		--hue: 255;
@@ -3587,6 +3593,71 @@
 	}
 	.listening-report-top-item-wrap.listening-report-top-item-wrap-with-tag-label .tag-label:before {
 		opacity: 0;
+	}
+
+
+
+
+	/*     PLAYBACK 2023 / LISTENING REPORT V3     */
+	.top-item-overview, .listening-report-top-item-wrap--version-3, .top-new-item-image img, .report-box-container, .top-new-item-type, .listening-report-top-item-badge {
+		border-radius: var(--item-med-radius);
+	}
+	.music-decades-chart-container rect, .highcharts-label-box {
+		rx: var(--item-med-radius) !important;
+		ry: var(--item-med-radius) !important;
+	}
+	.top-new-item {
+		border-top-left-radius: var(--item-med-radius);
+		border-top-right-radius: var(--item-med-radius);
+	}
+	.top-new-item--footer {
+		border-bottom-left-radius: var(--item-med-radius);
+		border-bottom-right-radius: var(--item-med-radius);
+	}
+
+
+	.user-dashboard-layout--version-3 .header-background {
+		background: #000 !important;
+	}
+	.user-dashboard-layout--version-3 .header-background:before {
+		display: none;
+	}
+
+
+	.user-dashboard--monthly, .user-dashboard--yearly {
+		--hue: -2;
+		--sat: 0;
+		--lit: 1;
+	}
+
+
+	.catalogue-chart-inner .item, .listening-clock-stat-container {
+		display: flex;
+		flex-direction: column;
+		gap: 7px;
+	}
+
+
+	.listening-report-top-item-heading {
+		color: hsl(var(--c1));
+	}
+	.user-dashboard-layout--version-3 .listening-report-top-item-wrap--version-3 .listening-report-top-item-heading .listening-report-top-item-heading-name {
+		font-size: 22px;
+	}
+
+
+	.top-item-overview__scrobbles, .quick-fact-data-value, .report-headline-total {
+		font-weight: 800;
+		letter-spacing: -2.6px;
+	}
+	.quick-fact-data-detail {
+		font-weight: 600;
+	}
+
+
+	.user-dashboard-layout--version-3 .listening-report-row--category {
+		font-family: var(--font);
+		text-transform: unset;
 	}
 
 
@@ -3810,7 +3881,7 @@
 
 
 	/*     UNDER CONSTRUCTION     */
-	body:is([class*="namespace--user_obsessions"], [class*="namespace--user_follow"], [class*="namespace--user_playlist"], [class*="namespace--user_neighbours"], [class*="events"], .user-dashboard-layout, [class*="namespace--settings"], [class*="namespace--music_bookmarks"], .music-landing-overview, [class*="namespace--charts"]):after {
+	body:is([class*="namespace--user_obsessions"], [class*="namespace--user_follow"], [class*="namespace--user_playlist"], [class*="namespace--user_neighbours"], [class*="events"], [class*="namespace--settings"], [class*="namespace--music_bookmarks"], .music-landing-overview, [class*="namespace--charts"]):after {
 		position: fixed;
 		left: 0;
 		right: 0;
