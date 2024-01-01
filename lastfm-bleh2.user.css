@@ -109,7 +109,9 @@
 	.gallery-image-preferred-states::before,
 	.masthead-logo a,
 	body:after,
-	.listening-report-brick--combo .tag-label
+	.listening-report-brick--combo .tag-label,
+	.listening-report-promo--year,
+	.highcharts-point, .user-dashboard-legend-item::before, stop
 	{
 		--c1: var(--hue), calc(var(--sat) * 40%), 100%;
 		--c2: var(--hue), calc(var(--sat) * 60%), 90%;
@@ -230,6 +232,9 @@
 		--icon-16-compose: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtbWFpbC1wbHVzIj48cGF0aCBkPSJNMjIgMTNWNmEyIDIgMCAwIDAtMi0ySDRhMiAyIDAgMCAwLTIgMnYxMmMwIDEuMS45IDIgMiAyaDgiLz48cGF0aCBkPSJtMjIgNy04Ljk3IDUuN2ExLjk0IDEuOTQgMCAwIDEtMi4wNiAwTDIgNyIvPjxwYXRoIGQ9Ik0xOSAxNnY2Ii8+PHBhdGggZD0iTTE2IDE5aDYiLz48L3N2Zz4=');
 		--icon-16-copy: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtY29weSI+PHJlY3Qgd2lkdGg9IjE0IiBoZWlnaHQ9IjE0IiB4PSI4IiB5PSI4IiByeD0iMiIgcnk9IjIiLz48cGF0aCBkPSJNNCAxNmMtMS4xIDAtMi0uOS0yLTJWNGMwLTEuMS45LTIgMi0yaDEwYzEuMSAwIDIgLjkgMiAyIi8+PC9zdmc+');
 		--icon-16-calendar-add: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtY2FsZW5kYXItcGx1cyI+PHBhdGggZD0iTTIxIDEzVjZhMiAyIDAgMCAwLTItMkg1YTIgMiAwIDAgMC0yIDJ2MTRhMiAyIDAgMCAwIDIgMmg4Ii8+PGxpbmUgeDE9IjE2IiB4Mj0iMTYiIHkxPSIyIiB5Mj0iNiIvPjxsaW5lIHgxPSI4IiB4Mj0iOCIgeTE9IjIiIHkyPSI2Ii8+PGxpbmUgeDE9IjMiIHgyPSIyMSIgeTE9IjEwIiB5Mj0iMTAiLz48bGluZSB4MT0iMTkiIHgyPSIxOSIgeTE9IjE2IiB5Mj0iMjIiLz48bGluZSB4MT0iMTYiIHgyPSIyMiIgeTE9IjE5IiB5Mj0iMTkiLz48L3N2Zz4=');
+		--icon-16-listening-report-weekly: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtbGluZS1jaGFydCI+PHBhdGggZD0iTTMgM3YxOGgxOCIvPjxwYXRoIGQ9Im0xOSA5LTUgNS00LTQtMyAzIi8+PC9zdmc+');
+		--icon-16-listening-report-monthly: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtYXJlYS1jaGFydCI+PHBhdGggZD0iTTMgM3YxOGgxOCIvPjxwYXRoIGQ9Ik03IDEydjVoMTJWOGwtNSA1LTQtNFoiLz48L3N2Zz4=');
+		--icon-16-listening-report-yearly: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtcGllLWNoYXJ0Ij48cGF0aCBkPSJNMjEuMjEgMTUuODlBMTAgMTAgMCAxIDEgOCAyLjgzIi8+PHBhdGggZD0iTTIyIDEyQTEwIDEwIDAgMCAwIDEyIDJ2MTB6Ii8+PC9zdmc+');
 
 		--icon-20-check: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImhzbCgyNTUsMjAlLDkwJSkiIHN0cm9rZS13aWR0aD0iMi4yNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1jaGVjayI+PHBhdGggZD0iTTIwIDYgOSAxN2wtNS01Ii8+PC9zdmc+');
 		--icon-20-plus: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImhzbCgyNTUsMjAlLDkwJSkiIHN0cm9rZS13aWR0aD0iMi4yNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1wbHVzIj48cGF0aCBkPSJNNSAxMmgxNCIvPjxwYXRoIGQ9Ik0xMiA1djE0Ii8+PC9zdmc+');
@@ -958,9 +963,12 @@
 		border-bottom: 2px solid hsl(var(--b4));
 		width: var(--cards-width);
 	}
-	.secondary-nav {
+	.secondary-nav, .user-dashboard-controls .secondary-nav {
 		box-shadow: unset;
-		border-bottom: 2px solid hsl(var(--b4));
+		border-bottom: 2px solid hsl(var(--b4)) !important;
+	}
+	.user-dashboard-controls .secondary-nav {
+		margin-top: unset !important;
 	}
 
 	.library-controls {
@@ -1072,6 +1080,11 @@
 		height: 3px !important;
 		bottom: -3px !important;
 		box-shadow: 0 0 15px hsl(var(--l4-c));
+		margin: unset !important;
+		width: unset !important;
+		border-radius: 0 !important;
+		border-top-left-radius: var(--item-small-radius) !important;
+		border-top-right-radius: var(--item-small-radius) !important;
 	}
 	.secondary-nav-item-link:not(.secondary-nav-item-link--active):hover::after {
 		display: none !important;
@@ -1210,6 +1223,16 @@
 	}
 	.secondary-nav-item--compose a:before {
 		mask-image: var(--icon-16-compose);
+	}
+
+	.secondary-nav-item--week a:before {
+		mask-image: var(--icon-16-listening-report-weekly);
+	}
+	.secondary-nav-item--month a:before {
+		mask-image: var(--icon-16-listening-report-monthly);
+	}
+	.secondary-nav-item--year a:before {
+		mask-image: var(--icon-16-listening-report-yearly);
 	}
 
 
@@ -2343,6 +2366,13 @@
 		--col: hsl(var(--ovr, var(--b7)));
 	}
 
+	.listening-report-promo--year
+	{
+		--bg: hsla(var(--l3), 20%);
+		--bg-hov: hsla(var(--l3), 15%);
+		--bg-atv: hsla(var(--l3), 10%);
+	}
+
 
 	/*     COVER LINK     */
 	.link-block-cover-link {
@@ -2575,17 +2605,19 @@
 	}
 
 
-	.listening-report-promo {
+	.promo-v3 .listening-report-promo {
 		position: relative;
 		background-image: unset !important;
 		display: flex;
 		gap: 10px;
 		margin-top: unset;
 	}
-	.listening-report-promo-title {
+	.promo-v3 .listening-report-promo-title {
 		min-width: 80px;
+		color: hsl(var(--c2));
+		order: -1;
 	}
-	.listening-report-promo-date {
+	.promo-v3 .listening-report-promo-date {
 		font-size: var(--font-size);
 		line-height: var(--line-height);
 		margin-top: unset;
@@ -2593,16 +2625,37 @@
 		font-weight: 500;
 		color: hsl(var(--c3));
 	}
-	.listening-report-promo:before {
+	.promo-v3 .listening-report-promo:before {
 		mask-image: var(--icon-16-listening-report);
 	}
-	.listening-report-promo-date:after {
+	.promo-v3 .listening-report-promo-date:after {
 		display: none;
 	}
 
-	.listening-report-promo + .listening-report-promo {
+	.promo-v3 .listening-report-promo + .listening-report-promo {
 		margin-top: 4px;
 	}
+
+	.listening-report-promo-animation-container {
+		height: 32px;
+		margin-top: -7px;
+		right: 12px;
+	}
+
+	.listening-report-promo--year {
+		--hue: 200;
+		--sat: 1;
+		--lit: 0.7;
+	}
+	/*.listening-report-promo--year .listening-report-promo-title {
+		color: hsl(var(--b7));
+	}
+	.listening-report-promo--year .listening-report-promo-date {
+		color: hsl(var(--b3));
+	}
+	.listening-report-promo--year:before {
+		background-color: hsl(var(--b7)) !important;
+	}*/
 
 
 	/*     DROPDOWN     */
@@ -3237,7 +3290,8 @@
 		padding: unset !important;
 	}
 	.listening-report-brick--combo .listening-report-brick-inner {
-		margin: unset;
+		margin: 0 -12px;
+		--bg: transparent;
 	}
 	.listening-report-brick--combo .listening-report-brick-inner:not(:last-child) {
 		margin-bottom: 4px;
@@ -3252,6 +3306,13 @@
 	}
 	.listening-report-brick-item-name + .listening-report-brick-item-artist {
 		color: hsla(var(--c2), 80%);
+	}
+
+	.listening-report-brick-inner--highlight {
+		--bg: hsla(var(--l4), 12%) !important;
+	}
+	.listening-report-brick-inner.listening-report-brick-inner--highlight::before {
+		display: none !important;
 	}
 
 	.listening-report-brick-image img {
@@ -3273,7 +3334,7 @@
 		padding: unset;
 	}
 	.listening-report-brick .listening-report-brick-head {
-		margin: unset !important;
+		margin: 0 !important;
 		padding-top: unset;
 	}
 
@@ -3318,11 +3379,21 @@
 		--mask-icon: var(--icon-16-globe);
 	}
 
-	.tag-label--average-daily-scrobbles {
+	.tag-label--average-daily-scrobbles, .tag-label--most-active-day {
 		--mask-icon: var(--icon-16-calendar);
 	}
 	.tag-label--listening-time {
 		--mask-icon: var(--icon-16-clock);
+	}
+	.tag-label--events {
+		--mask-icon: var(--icon-16-event);
+	}
+
+	.tag-label--followers {
+		--mask-icon: var(--icon-16-users);
+	}
+	.tag-label--loved-tracks {
+		--mask-icon: var(--icon-16-heart);
 	}
 
 	.user-dashboard-col:first-child, .user-dashboard-section-header + .user-dashboard-col {
@@ -3330,6 +3401,125 @@
 	}
 	.user-dashboard-col:last-child {
 		padding-right: unset;
+	}
+
+
+	:is(.tag-label--average-daily-scrobbles, .tag-label--total-scrobbles, .tag-label--streak, .tag-label--listening-time, .tag-label--most-active-day) + .listening-report-brick-head .header-metadata-title {
+		font-size: 0;
+	}
+	.user-dashboard-musical-matches .header-metadata-display {
+		font-size: 0;
+	}
+	.tag-label--average-daily-scrobbles + .listening-report-brick-head .header-metadata-title:after {
+		content: 'Average daily';
+		font-size: var(--font-size);
+	}
+	.tag-label--total-scrobbles + .listening-report-brick-head .header-metadata-title:after {
+		content: 'Total';
+		font-size: var(--font-size);
+	}
+	.tag-label--streak + .listening-report-brick-head .header-metadata-title:after {
+		content: 'Streak';
+		font-size: var(--font-size);
+	}
+	.tag-label--listening-time + .listening-report-brick-head .header-metadata-title:after {
+		content: 'Listening time';
+		font-size: var(--font-size);
+	}
+	.tag-label--most-active-day + .listening-report-brick-head .header-metadata-title:after {
+		content: 'Peak day';
+		font-size: var(--font-size);
+	}
+
+	.listening-report-brick-head {
+		min-height: 70px;
+	}
+	.user-dashboard-musical-matches .header-metadata-display strong {
+		font-weight: 400;
+		font-size: var(--font-size);
+	}
+	.user-dashboard-musical-matches .header-metadata-display strong:after {
+		content: ' other listeners';
+	}
+
+
+	.listening-report-brick-head {
+		position: relative;
+	}
+	.header-metadata-meta {
+		position: absolute;
+		font-size: var(--font-size) !important;
+		line-height: var(--line-height) !important;
+		top: 40px;
+		left: 0;
+	}
+
+	.user-dashboard-musical-matches, .user-dashboard-module {
+		margin-top: unset;
+	}
+
+
+	.user-dashboard-legend-item::before {
+		background: hsl(var(--l3-c)) !important;
+		border-radius: var(--item-small-radius);
+	}
+	.user-dashboard-legend-item {
+		padding-left: calc(12px + 6px);
+		font-weight: 500;
+	}
+
+	.user-dashboard-legend-item--current::before {
+		--hue: 200;
+		--sat: 1;
+		--lit: 1;
+	}
+
+
+	.highcharts-grid-line[stroke="#e6e6e6"] {
+		stroke: hsl(var(--b4));
+	}
+	.listening-week-graph-chart .highcharts-point {
+		fill: hsl(var(--l3-c));
+		stroke: unset !important;
+		--hue: 200;
+		--sat: 1;
+		--lit: 1;
+	}
+	.listening-week-graph-chart .highcharts-point:hover {
+		fill: hsla(var(--l3-c), 85%);
+		stroke: unset !important;
+		--hue: 200;
+		--sat: 1;
+		--lit: 1;
+	}
+
+	.scrobble-stats-graph-chart .highcharts-point {
+		fill: hsl(var(--l3-c));
+		stroke: unset !important;
+		--hue: 255;
+		--sat: 1;
+		--lit: 1;
+	}
+	.scrobble-stats-graph-chart .highcharts-point:hover {
+		fill: hsla(var(--l3-c), 85%);
+		stroke: unset !important;
+		--hue: 255;
+		--sat: 1;
+		--lit: 1;
+	}
+
+
+	stop[style^="stop-color:#00ae7e"] {
+		stop-color: hsl(var(--l4)) !important;
+		--hue: 255;
+		--sat: 1;
+		--lit: 1;
+	}
+	stop[style^="stop-color:#f4d06f"] {
+		stop-color: hsl(var(--l4)) !important;
+		--hue: 45;
+		--sat: 1;
+		--lit: 1.4;
 	}
 
 
@@ -3341,6 +3531,11 @@
 	.user-dashboard-section-header, .graph-description h3 {
 		font-size: 16px;
 		margin-bottom: calc(12px + 4px) !important;
+	}
+	.user-dashboard-buffer:first-child .user-dashboard-section-header {
+		font-size: 22px;
+		line-height: 30px;
+		margin-bottom: 22px !important;
 	}
 
 
