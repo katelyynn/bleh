@@ -1956,6 +1956,14 @@
 	}
 
 
+	/*     MORE     */
+	.chartlist-more-button::before {
+		background-image: unset;
+		background-color: hsl(var(--c2));
+		mask-image: var(--icon-16-dots);
+	}
+
+
 	/*     PLAY - brought over from bleh     */
 	.chartlist-play {
 		position: absolute;
@@ -2047,6 +2055,9 @@
 		padding-bottom: 6px;
 		min-height: unset;
 		margin-left: calc(var(--shout-avatar-size) + 12px);
+	}
+	.shout-form {
+		padding-bottom: 12px;
 	}
 	.shout-reply-ui {
 		margin-top:12px;
@@ -2723,6 +2734,13 @@
 		display: block !important;
 	}
 
+	li:first-child .more-item--delete {
+		margin-top: unset !important;
+	}
+	li:first-child .more-item--delete:after {
+		display: none !important;
+	}
+
 
 	/*     DROPDOWN ICONS     */
 	.dropdown-menu-clickable-item:before {
@@ -2839,6 +2857,9 @@
 		.content-form .form-control, .content-form input[type="date"], .content-form input[type="email"], .content-form input[type="number"], .content-form input[type="password"], .content-form input[type="text"], .content-form input[type="url"], .content-form select, .content-form textarea
 	):active {
 		background-color: var(--bg-atv) !important;
+	}
+	textarea::placeholder {
+		color: hsl(var(--c3)) !important;
 	}
 
 
