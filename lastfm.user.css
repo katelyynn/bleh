@@ -1,15 +1,15 @@
 /* ==UserStyle==
-@name           bleh
-@namespace      github.com/katelmao/lastfm-bleh
-@version        2023.1231
+@name           bleh1
+@namespace      github.com/katelyynn/bleh
+@version        2024.0101
 @license        GPL-3.0
 @author         kate
-@updateURL      https://github.com/katelmao/lastfm-bleh/raw/uwu/lastfm.user.css
+@updateURL      https://github.com/katelyynn/bleh/raw/uwu/lastfm.user.css
 @var text bleh "configure settings using the edit button!!" "click the pencil"
 ==/UserStyle== */
 
 @-moz-document domain("plexion.dev") {
-	body                     {--theme-ver: 2023.1231} .installed-only, .btn-installed-only {display: flex !important} .uninstalled-only {display: none} .install {pointer-events: auto; opacity: 1; border-style: solid}
+	body                     {--theme-ver: 2024.0101} .installed-only, .btn-installed-only {display: flex !important} .uninstalled-only {display: none} .install {pointer-events: auto; opacity: 1; border-style: solid}
 }
 
 
@@ -61,10 +61,9 @@
 	/*@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200;12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&display=swap');*/
     :root,html,body
     {
-		/* chilly */
-		--base-hue: 201;
-		--saturation: 0.8;
-		--lightness: 1.1;
+		--base-hue: 255;
+		--saturation: 1;
+		--lightness: 1;
 		--invert-btn: hsl(var(--b6));
 
 		--accessibility-saturation: 1;
@@ -329,13 +328,12 @@
 		content: '';
 		position: fixed;
 		inset: 0;
-		height: 300px;
-		background-color: hsl(var(--l4));
-		mask-image: url("https://raw.githubusercontent.com/coolesding/shiggycord/v3/img/snow.gif") !important;
-		mask-repeat: repeat;
+		background-image: url("https://raw.githubusercontent.com/coolesding/shiggycord/v3/img/snow.gif") !important;
+		background-repeat: repeat;
 		z-index: 10000000;
 		pointer-events: none;
 		opacity: 0.2;
+		height: 400px;
 		/*filter: drop-shadow(0 0 1px white);*/
 	}
 
@@ -5436,8 +5434,8 @@
 		transition: background-color 0.2s;
 	}
 
-	/* listening report promo */
-	.listening-report-promo {
+	/* listening report promo (v3) */
+	.promo-v3 .listening-report-promo {
 		position: relative;
 		display: flex;
 		align-items: center;
@@ -5448,12 +5446,13 @@
 		background-image: initial !important;
 		background-color: transparent;
 		box-shadow: none !important;
+		border: none !important;
 		transition: background-color 0.15s, transform 0.15s;
 	}
-	.listening-report-promo:is(:hover, :active, :focus) {
+	.promo-v3 .listening-report-promo:is(:hover, :active, :focus) {
 		background-color: hsla(var(--b4), 40%);
 	}
-	.listening-report-promo:before {
+	.promo-v3 .listening-report-promo:before {
 		content: '';
 		position: absolute;
 		top: 12px;
@@ -5465,17 +5464,18 @@
 		width: 24px;
 		height: 24px;
 	}
-	.listening-report-promo + .listening-report-promo {
+	.promo-v3 .listening-report-promo + .listening-report-promo {
 		margin-top: 3px;
 	}
 
-	.listening-report-promo-title {
+	.promo-v3 .listening-report-promo-title {
 		width: 80px;
-		flex: 1;
+		min-width: 80px;
 		line-height: 16px;
 		color: hsl(var(--c2));
+		order: -1;
 	}
-	.listening-report-promo-date {
+	.promo-v3 .listening-report-promo-date {
 		font-size: 14px;
 		line-height: 16px;
 		margin: 0;
@@ -5483,8 +5483,15 @@
 		font-weight: var(--theme-font-weight);
 		color: hsl(var(--c3));
 	}
-	.listening-report-promo-date:after {
+	.promo-v3 .listening-report-promo-date:after {
 		display: none;
+	}
+
+	/* ported directly from bleh2, slightly modified */
+	.listening-report-promo-animation-container {
+		height: 32px;
+		margin-top: 0;
+		right: 12px;
 	}
 
 	/* chartlist bars */
@@ -6545,7 +6552,7 @@
 		margin-bottom: -10px;
 	}
 	.footer-heading:after {
-		content: 'merry blehmas';
+		content: 'happy new bleh';
 		font-size: 50px;
 		line-height: 0px;
 		opacity: 0.05;
@@ -7892,7 +7899,7 @@
 		margin-top: 6px;
 	}
 	.homefeed .row:before {
-		content: 'bleh';
+		content: 'bleh..';
 		font-size: 30px;
 		line-height: 24px;
 		padding-left: 16px;
@@ -7901,10 +7908,30 @@
 		font-weight: var(--theme-font-weight-bold);
 	}
 	.homefeed .col-main:before {
-		content: 'Thank you for using my theme! If you notice any issues, create a post at github.com/katelyynn/lastfm-bleh';
+		content: 'hai! bleh2 is now in beta (a complete rewrite) - find the beta at plexion.dev/bleh/fm/bleh2';
 		font-size: 16px;
 		line-height: 24px;
 	}
+
+
+
+	/* bleh2 */
+	body:before {
+		content: 'Try out the bleh2 beta at plexion.dev/bleh/fm/bleh2';
+		position: fixed;
+		bottom: 10px;
+		left: 10px;
+		pointer-events: auto;
+		font-size: 15px;
+		line-height: 26px;
+		z-index: 100000000;
+		padding: 12px 60px 12px 12px;
+		border-radius: 10px;
+		background: hsla(var(--d5), 50%);
+		width: 323px;
+		opacity: 0.3;
+	}
+
 
 
 	/* text updates */
@@ -8407,7 +8434,7 @@
 		background-image: var(--overlay-snow-min) !important;
 		background-repeat: repeat-x !important;
 	}
-	/*.page-content, .two-column-layout .container {
+	.page-content, .two-column-layout .container {
 		position: relative;
 	}
 	.page-content:after, .two-column-layout .container:after {
@@ -8423,12 +8450,12 @@
 		display: block;
 		border-top-left-radius: 10px;
 		border-top-right-radius: 10px;
-	}*/
+	}
 	.video-preview, .album-overview-cover-art {
 		z-index: 1;
 	}
 	.masthead {
-		height: 464px;
+		height: 264px;
 		pointer-events: none;
 		background-image: var(--overlay-snow-min), linear-gradient(180deg, rgba(190,233,250,0.11) 0%, rgba(0,0,0,0) 100%) !important;
 	}
