@@ -350,9 +350,9 @@
 		background: linear-gradient(0deg, transparent 0%, hsl(var(--b6)) 100%);
 		pointer-events: none;
 		/* festive */
-		background: var(--overlay-ice), linear-gradient(180deg, rgba(190,233,250,0.11) 0%, rgba(0,0,0,0) 100%), linear-gradient(0deg, transparent 0%, hsl(var(--b6)) 100%);
+		/*background: var(--overlay-ice), linear-gradient(180deg, rgba(190,233,250,0.11) 0%, rgba(0,0,0,0) 100%), linear-gradient(0deg, transparent 0%, hsl(var(--b6)) 100%);
 		background-repeat: repeat-x;
-		background-position: unset !important;
+		background-position: unset !important;*/
 	}
 	.masthead-inner-wrap {
 		width: var(--cards-width);
@@ -3599,7 +3599,7 @@
 
 
 	/*     PLAYBACK 2023 / LISTENING REPORT V3     */
-	.top-item-overview, .listening-report-top-item-wrap--version-3, .top-new-item-image img, .report-box-container, .top-new-item-type, .listening-report-top-item-badge {
+	.top-item-overview, .listening-report-top-item-wrap--version-3, .top-new-item-image img, .report-box-container, .top-new-item-type, .listening-report-top-item-badge, .mainstream-score--artist-thumb img {
 		border-radius: var(--item-med-radius);
 	}
 	.music-decades-chart-container rect, .highcharts-label-box {
@@ -3689,6 +3689,13 @@
 		font-size: 40px;
 		font-weight: 400;
 		line-height: normal;
+	}
+
+	.report-dropdown-button {
+		padding: 0 !important;
+		--bg: hsla(var(--b7), 15%);
+		--bg-hov: hsla(var(--b7), 25%);
+		--bg-atv: hsla(var(--b7), 35%);
 	}
 
 	.report-box-container .user-dashboard-musical-matches .header-metadata-display strong {
