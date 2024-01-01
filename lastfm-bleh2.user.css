@@ -3655,9 +3655,56 @@
 	}
 
 
-	.user-dashboard-layout--version-3 .listening-report-row--category {
+	.user-dashboard-layout--version-3 .listening-report-row--category, .report-headline-title {
 		font-family: var(--font);
 		text-transform: unset;
+		font-weight: 500;
+	}
+
+
+	/* match the rest */
+	.user-dashboard-layout--version-3 .listening-report-row {
+		width: 1170px;
+	}
+
+
+	.report-box-container .header-metadata {
+		padding-left: unset;
+		margin-bottom: unset;
+		gap: unset;
+		width: unset;
+		padding-top: unset;
+	}
+	.report-box-container .header-metadata-item {
+		padding: unset;
+		background-color: unset;
+		border-radius: unset;
+		display: block;
+		gap: unset;
+		height: unset;
+		margin-left: 0;
+		margin-top: 0;
+	}
+	.report-box-container .header-metadata-display {
+		font-size: 40px;
+		font-weight: 400;
+		line-height: normal;
+	}
+
+	.report-box-container .user-dashboard-musical-matches .header-metadata-display strong {
+		font-size: 18px;
+		font-weight: 700;
+	}
+
+	.report-box-container .tag-label {
+		top: -16px;
+		left: 20px;
+		background: hsl(var(--l3));
+		--c2: var(--b7);
+	}
+
+	.report-box-container .listening-report-brick-inner {
+		margin: unset;
 	}
 
 
