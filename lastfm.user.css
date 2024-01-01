@@ -5530,24 +5530,24 @@
 
 	/* listening report */
 	.content-top-lower,
-	.user-dashboard-layout .container {
+	.user-dashboard-weekly .container {
 		background-color: hsla(var(--ba5)) !important;
 	}
 	.listening-report-top .secondary-nav {
 		border: none;
 	}
 
-	.user-dashboard-section-header:after {
+	.user-dashboard-weekly .user-dashboard-section-header:after {
 		background: hsla(var(--l3),50%);
 	}
 
 
 	/* % difference */
-	.user-dashboard-comparison {
+	.user-dashboard-weekly .user-dashboard-comparison {
 		padding-left: initial;
 		font-weight: var(--theme-font-weight-bold);
 	}
-	.user-dashboard-comparison:before {
+	.user-dashboard-weekly .user-dashboard-comparison:before {
 		background: none;
 		position: static;
 		width: initial;
@@ -5605,11 +5605,11 @@
 		padding: 2px 10px;
 	}
 
-	.listening-report-top-item-meta {
+	.user-dashboard-weekly .listening-report-top-item-meta {
 		padding-left: 25px;
 		bottom: 10px
 	}
-	.listening-report-top-item-badge {
+	.user-dashboard-weekly .listening-report-top-item-badge {
 		padding: unset;
 		width: 40px;
 		position: absolute;
@@ -5617,7 +5617,7 @@
 		left: calc(-16px + 4px);
 		bottom: 0;
 	}
-	.listening-report-top-item-badge > span {
+	.user-dashboard-weekly .listening-report-top-item-badge > span {
 		display: none;
 	}
 	.listening-report-top-item-badge:before {
@@ -5636,7 +5636,7 @@
 		width: 56px;
 		height: 28px;
 		border-radius: 50px;
-		background: hsl(var(--base-hue), calc(var(--saturation)*65%), calc(var(--lightness)*75%));
+		background: hsl(var(--base-hue), calc(var(--saturation)*65%), calc(var(--lightness)*75%)) !important;
 		box-shadow: var(--raise-0), 0 0 50px hsla(var(--base-hue), calc(var(--saturation)*65%), calc(var(--lightness)*75%),40%);
 	}
 	.listening-report-brick .tag-label {
@@ -5777,7 +5777,7 @@
 
 
 	/* header */
-	.row:first-child .user-dashboard-section-header {
+	.user-dashboard-weekly .row:first-child .user-dashboard-section-header {
 		font-size: 42px;
 		line-height: 50px;
 		margin: unset;
@@ -5789,14 +5789,14 @@
 		font-weight: 700 !important;
 		font-family: Rubik, var(--font-main) !important;
 	}
-	.user-dashboard-section-header:before, .user-dashboard-section-header:after {
+	.user-dashboard-weekly .user-dashboard-section-header:before, .user-dashboard-section-header:after {
 		display: none !important;
 	}
 
-	.page-content:has(.user-dashboard) {
+	.page-content:has(.user-dashboard-weekly) {
 		margin-top: -31px;
 	}
-	.user-dashboard:before {
+	.user-dashboard-weekly:before {
 		position: absolute;
 		inset: 0;
 		content: '';
@@ -5811,7 +5811,7 @@
 		z-index: 0;
 		pointer-events: none;
 	}
-	.user-dashboard:after {
+	.user-dashboard-weekly:after {
 		position: absolute;
 		left: 0;
 		right: 0;
@@ -5843,12 +5843,12 @@
 	.user-dashboard--weekly {
 		--base-hue: 90;
 	}
-	.user-dashboard--monthly {
+	/*.user-dashboard--monthly {
 		--base-hue: 230;
 	}
 	.user-dashboard--yearly {
 		--base-hue: 333;
-	}
+	}*/
 
 
 
@@ -5983,6 +5983,34 @@
 		content: '-';
 		margin: 0 3px;
 		color: hsl(var(--c3)) !important;
+	}
+
+
+
+
+	/* 2024, playback 2023 / listening report v3 */
+	/* this is very basic support, use bleh2 please */
+	:is(.user-dashboard--monthly, .user-dashboard--yearly) .container.page-content {
+		background: unset !important;
+		border: unset !important;
+		box-shadow: unset !important;
+		margin-bottom: unset !important;
+		animation: unset !important;
+		border-radius: unset !important;
+	}
+	:is(.user-dashboard--monthly, .user-dashboard--yearly) .container.page-content:after {
+		display: none;
+	}
+	:is(.user-dashboard--monthly, .user-dashboard--yearly) .col-sm-12 {
+		background: unset;
+	}
+
+
+	.user-dashboard-layout--version-3 .header-background {
+		background: #000 !important;
+	}
+	.user-dashboard-layout--version-3 .header-background:before {
+		display: none;
 	}
 
 
@@ -7929,7 +7957,26 @@
 		border-radius: 10px;
 		background: hsla(var(--d5), 50%);
 		width: 323px;
-		opacity: 0.3;
+		opacity: 0.6;
+	}
+
+	.listening-report-top {
+		margin-bottom: 2500px;
+		position: relative;
+	}
+	.listening-report-top:after {
+		content: 'Your listening report will look MUCH better in bleh2, get the beta here (for your own sake at least): plexion.dev/bleh/fm/bleh2';
+		position: absolute;
+		top: 100px;
+		left: 10px;
+		right: 10px;
+		pointer-events: auto;
+		font-size: 22px;
+		line-height: 40px;
+		z-index: 100000000;
+		padding: 120px 60px;
+		border-radius: 10px;
+		background: hsla(var(--l4), 50%);
 	}
 
 
@@ -8437,7 +8484,7 @@
 	.page-content, .two-column-layout .container {
 		position: relative;
 	}
-	.page-content:after, .two-column-layout .container:after {
+	/*.page-content:after, .two-column-layout .container:after {
 		position: absolute;
 		top: 0;
 		left: 0;
