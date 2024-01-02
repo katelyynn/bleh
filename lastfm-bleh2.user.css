@@ -3724,6 +3724,57 @@
 	}
 
 
+	.listening-report-daily-scrobbles-day {
+		--bg-hov: var(--bg);
+		--bg-atv: var(--bg);
+	}
+	.user-dashboard-daily-scrobbles .listening-report-daily-scrobbles-day--colour-0 {
+		--bg: rgba(143,191,241,.1);
+	}
+	.user-dashboard-daily-scrobbles .listening-report-daily-scrobbles-day--colour-1 {
+		--bg: rgba(143,191,241,.25);
+	}
+	.user-dashboard-daily-scrobbles .listening-report-daily-scrobbles-day--colour-2 {
+		--bg: rgba(143,191,241,.5);
+	}
+	.user-dashboard-daily-scrobbles .listening-report-daily-scrobbles-day--colour-3 {
+		--bg: rgba(143,191,241,.65);
+	}
+	.user-dashboard-daily-scrobbles .listening-report-daily-scrobbles-day--colour-4 {
+		--bg: rgba(143,191,241,.85);
+	}
+	.user-dashboard-daily-scrobbles .listening-report-daily-scrobbles-day--colour-5 {
+		--bg: #8fbff1;
+	}
+
+
+	.playback-app-container .header-black {
+		color: #000;
+	}
+	.playback-app-container .content span {
+		color: inherit;
+	}
+	.playback-app-container .content h2 {
+		line-height: 55px;
+		color: inherit;
+	}
+	.playback-app-container .content h3 {
+		line-height: 32px;
+		color: inherit;
+	}
+	.playback-app-container .content h4 {
+		line-height: 24px;
+		color: inherit;
+	}
+
+	.playback-app-container text[style^="color: rgb(255, 198, 65)"] {
+		color: rgb(255, 168, 65) !important;
+	}
+	.playback-app-container text[style*="fill: rgb(0, 0, 0)"] {
+		fill: rgb(0, 0, 0) !important;
+	}
+
+
 
 
 	/*     NAG BAR     */
