@@ -885,6 +885,7 @@
 	.featured-item-art {
 		width: 52px;
 		position: static;
+		flex-shrink: 0;
 	}
 
 	.featured-item-heading {
@@ -905,6 +906,7 @@
 		justify-content: center;
 		gap: 3px;
 		height: 52px;
+		overflow: hidden;
 	}
 	.featured-item-name, .featured-item-artist {
 		font-size: var(--font-size);
@@ -1921,6 +1923,12 @@
 		border: 1px solid hsl(var(--b4));
 		overflow: hidden;
 	}
+	.chartlist-image:has(.avatar) {
+		border-radius: 50%;
+	}
+	.chartlist-image img {
+		mask-size: 24px;
+	}
 
 	.chartlist--with-album .chartlist-name, .chartlist-row--with-artist .chartlist-name {
 		width: 70%;
@@ -2250,8 +2258,44 @@
 		mask-repeat: no-repeat;
 		mask-position: center;
 	}
+	/* missing album */
+	[src$="c6f59c1e5e7240a4c0d427abd71f3dbb.jpg"] {
+		content: url() !important;
+		font-size: 0;
+		background-color: hsl(var(--c3));
+		mask-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWRpc2MtYWxidW0iPjxyZWN0IHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgeD0iMyIgeT0iMyIgcng9IjIiLz48Y2lyY2xlIGN4PSIxMiIgY3k9IjEyIiByPSI1Ii8+PHBhdGggZD0iTTEyIDEyaC4wMSIvPjwvc3ZnPg==');
+		mask-size: 32px;
+		mask-repeat: no-repeat;
+		mask-position: center;
+		aspect-ratio: 1 / 1;
+	}
+	/* missing artist */
+	[src$="2a96cbd8b46e442fc41c2b86b821562f.jpg"] {
+		content: url() !important;
+		font-size: 0;
+		background-color: hsl(var(--c3));
+		mask-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLXN0YXIiPjxwb2x5Z29uIHBvaW50cz0iMTIgMiAxNS4wOSA4LjI2IDIyIDkuMjcgMTcgMTQuMTQgMTguMTggMjEuMDIgMTIgMTcuNzcgNS44MiAyMS4wMiA3IDE0LjE0IDIgOS4yNyA4LjkxIDguMjYgMTIgMiIvPjwvc3ZnPg==');
+		mask-size: 32px;
+		mask-repeat: no-repeat;
+		mask-position: center;
+		aspect-ratio: 1 / 1;
+	}
+	/* missing track */
+	[src$="4128a6eb29f94943c9d206c08e625904.jpg"] {
+		content: url() !important;
+		font-size: 0;
+		background-color: hsl(var(--c3));
+		mask-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLW11c2ljLTMiPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTgiIHI9IjQiLz48cGF0aCBkPSJNMTYgMThWMiIvPjwvc3ZnPg==');
+		mask-size: 32px;
+		mask-repeat: no-repeat;
+		mask-position: center;
+		aspect-ratio: 1 / 1;
+	}
 	.header-avatar-inner-wrap > .avatar img {
 		mask-size: 48px;
+	}
+	.grid-items-cover-image-image img {
+		mask-size: 96px;
 	}
 
 	.avatar-status-dot--subscriber {
@@ -3452,7 +3496,7 @@
 	}
 
 
-	:is(.tag-label--average-daily-scrobbles, .tag-label--total-scrobbles, .tag-label--streak, .tag-label--listening-time, .tag-label--most-active-day) + .listening-report-brick-head .header-metadata-title {
+	:is(.tag-label--average-daily-scrobbles, .tag-label--total-scrobbles, .tag-label--discovery, .tag-label--streak, .tag-label--listening-time, .tag-label--most-active-day) + .listening-report-brick-head .header-metadata-title {
 		font-size: 0;
 	}
 	.user-dashboard-musical-matches .header-metadata-display {
@@ -3476,6 +3520,10 @@
 	}
 	.tag-label--most-active-day + .listening-report-brick-head .header-metadata-title:after {
 		content: 'Peak day';
+		font-size: var(--font-size);
+	}
+	.tag-label--discovery + .listening-report-brick-head .header-metadata-title:after {
+		content: 'Discovery';
 		font-size: var(--font-size);
 	}
 
