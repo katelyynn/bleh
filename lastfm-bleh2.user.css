@@ -3500,7 +3500,7 @@
 		font-weight: 500;
 	}
 
-	.user-dashboard-legend-item--current::before {
+	.user-dashboard--weekly .user-dashboard-legend-item--current::before {
 		--hue: 200;
 		--sat: 1;
 		--lit: 1;
@@ -3633,9 +3633,9 @@
 	}
 
 
-	.user-dashboard--monthly, .user-dashboard--yearly {
+	.user-dashboard-layout--version-3 {
 		--hue: -2;
-		--sat: 0;
+		--sat: 1;
 		--lit: 1;
 	}
 
@@ -3710,6 +3710,15 @@
 	.report-box-container .user-dashboard-musical-matches .header-metadata-display strong {
 		font-size: 18px;
 		font-weight: 700;
+	}
+
+	text[style^="color: rgb(51, 51, 51)"] {
+		color: rgb(51, 51, 51) !important;
+		fill: rgb(51, 51, 51) !important;
+	}
+	text[style^="color: rgb(0, 0, 0)"] {
+		color: rgb(0, 0, 0) !important;
+		fill: rgb(0, 0, 0) !important;
 	}
 
 	.report-box-container .tag-label {
