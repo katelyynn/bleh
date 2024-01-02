@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           bleh2
 @namespace      github.com/katelyynn/bleh
-@version        2024.0101
+@version        2024.0102
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelyynn/bleh/raw/uwu/lastfm-bleh2.user.css
@@ -9,7 +9,7 @@
 ==/UserStyle== */
 
 @-moz-document domain("plexion.dev") {
-	body                     {--bleh2-ver: 2024.0101} .installed2-only, .btn-installed2-only {display: flex !important} .uninstalled2-only {display: none} .install2 {pointer-events: auto; opacity: 1; border-style: solid}
+	body                     {--bleh2-ver: 2024.0102} .installed2-only, .btn-installed2-only {display: flex !important} .uninstalled2-only {display: none} .install2 {pointer-events: auto; opacity: 1; border-style: solid}
 }
 
 
@@ -112,15 +112,18 @@
 	.listening-report-brick--combo .tag-label,
 	.listening-report-promo--year,
 	.highcharts-point, .user-dashboard-legend-item::before, stop,
-	.user-dashboard--monthly, .user-dashboard--yearly
+	.user-dashboard--monthly, .user-dashboard--yearly,
+	.alert
 	{
 		--c1: var(--hue), calc(var(--sat) * 40%), 100%;
 		--c2: var(--hue), calc(var(--sat) * 60%), 90%;
 		--c3: var(--hue), calc(var(--sat) * 10%), 60%;
 
+		--l2: var(--hue), calc(var(--sat) * 50%), calc(var(--lit) * 83%);
 		--l3: var(--hue), calc(var(--sat) * 60%), calc(var(--lit) * 70%);
 		--l4: var(--hue), calc(var(--sat) * 70%), calc(var(--lit) * 50%);
 
+		--l2-c: var(--hue), calc(var(--sat) * 50%), calc(clamp(min(0.5), var(--lit), max(1.5)) * 83%);
 		--l3-c: var(--hue), calc(var(--sat) * 60%), calc(clamp(min(0.5), var(--lit), max(1.5)) * 70%);
 		--l4-c: var(--hue), calc(var(--sat) * 70%), calc(clamp(min(0.5), var(--lit), max(1.5)) * 50%);
 
@@ -236,6 +239,7 @@
 		--icon-16-listening-report-weekly: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtbGluZS1jaGFydCI+PHBhdGggZD0iTTMgM3YxOGgxOCIvPjxwYXRoIGQ9Im0xOSA5LTUgNS00LTQtMyAzIi8+PC9zdmc+');
 		--icon-16-listening-report-monthly: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtYXJlYS1jaGFydCI+PHBhdGggZD0iTTMgM3YxOGgxOCIvPjxwYXRoIGQ9Ik03IDEydjVoMTJWOGwtNSA1LTQtNFoiLz48L3N2Zz4=');
 		--icon-16-listening-report-yearly: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtcGllLWNoYXJ0Ij48cGF0aCBkPSJNMjEuMjEgMTUuODlBMTAgMTAgMCAxIDEgOCAyLjgzIi8+PHBhdGggZD0iTTIyIDEyQTEwIDEwIDAgMCAwIDEyIDJ2MTB6Ii8+PC9zdmc+');
+		--icon-16-info: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtaW5mbyI+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMTAiLz48cGF0aCBkPSJNMTIgMTZ2LTQiLz48cGF0aCBkPSJNMTIgOGguMDEiLz48L3N2Zz4=');
 
 		--icon-20-check: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImhzbCgyNTUsMjAlLDkwJSkiIHN0cm9rZS13aWR0aD0iMi4yNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1jaGVjayI+PHBhdGggZD0iTTIwIDYgOSAxN2wtNS01Ii8+PC9zdmc+');
 		--icon-20-plus: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImhzbCgyNTUsMjAlLDkwJSkiIHN0cm9rZS13aWR0aD0iMi4yNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1wbHVzIj48cGF0aCBkPSJNNSAxMmgxNCIvPjxwYXRoIGQ9Ik0xMiA1djE0Ii8+PC9zdmc+');
@@ -917,6 +921,10 @@
 		right: -141px;
 	}
 
+	.featured-item-art .image-overlay-playlink-link {
+		display: none;
+	}
+
 	/*     MESSAGE USER (takes place)     */
 	.header-message-user {
 		top: calc(128px + 83px) !important; /* -129 to put top right */
@@ -1320,6 +1328,14 @@
 		opacity: unset;
 		font-size: 24px;
 		font-weight: var(--font-weight-medium);
+	}
+
+	.header-new-chart-position-desktop .header-new-chart-position-number {
+		font-size: 32px;
+		line-height: 32px;
+		margin-top: unset;
+		font-weight: 700;
+		color: hsl(var(--l2-c));
 	}
 
 	.header-new-info-desktop {
@@ -1887,13 +1903,13 @@
 		gap: 10px;
 		font-weight: var(--font-weight-medium);
 	}
-	.chartlist-name .feat, .chartlist-artist {
+	.chartlist-name .feat, .chartlist-artist, .featured-item-artist {
 		color: hsla(var(--c2), 80%);
 		font-weight: var(--font-weight);
 	}
 
 	.chartlist-timestamp, .chartlist-duration {
-		font-size: 13px;
+		font-size: calc(var(--font-size) - 1px);
 		color: hsl(var(--c3));
 	}
 
@@ -2003,7 +2019,7 @@
 	.chartlist-count-bar-link {
 		text-decoration: none !important;
 		padding: 0 14px !important;
-		font-size: 13px;
+		font-size: calc(var(--font-size) - 1px);
 	}
 	.chartlist-count-bar-link .stat-name {
 		display: none !important;
@@ -2061,7 +2077,7 @@
 		padding-bottom: 12px;
 	}
 	.shout-reply-ui {
-		margin-top:12px;
+		margin-top: 12px;
 		margin-left: calc(var(--shout-avatar-size) + 12px);
 	}
 	.shout-list-item .shout-list-item .shout-container {
@@ -2078,7 +2094,7 @@
 	.shout-actions {
 		margin-top: 4px;
 		margin-bottom: unset;
-		margin-left: 125px;
+		margin-left: 135px;
 		transition-property: opacity;
 		transition-duration: var(--trans);
 		transition-timing-function: var(--trans-function);
@@ -2145,7 +2161,7 @@
 	.shout-timestamp:before {
 		content: 'Copy link';
 		color: hsl(var(--c3)) !important;
-		font-size: 13px;
+		font-size: calc(var(--font-size) - 1px);
 		position: absolute;
 		top: 4px;
 		left: calc(16px + 6px);
@@ -3128,7 +3144,7 @@
 	.inbox-notifications .inbox-notifications__item-timestamp {
 		margin-top: unset;
 		padding-top: unset;
-		font-size: 13px;
+		font-size: calc(var(--font-size) - 1px);
 		color: hsl(var(--c3));
 	}
 
@@ -3625,6 +3641,14 @@
 	}*/
 
 
+	.report-box-container .header-metadata-display {
+		color: hsl(var(--c1));
+	}
+	.report-box-container .listening-report-brick-head {
+		min-height: 149px !important;
+	}
+
+
 	.user-dashboard-layout--version-3 .header-background {
 		background: #000 !important;
 	}
@@ -3722,7 +3746,7 @@
 	}
 
 	.report-box-container .tag-label {
-		top: -16px;
+		top: -20px;
 		left: 20px;
 		background: hsl(var(--l3));
 		--c2: var(--b7);
@@ -3823,7 +3847,7 @@
 		padding-right: 4px;
 		margin-top: 8px;
 	}
-	.image-list-item img {
+	.image-list-item img, .featured-item-art img {
 		border-radius: var(--item-med-radius);
 		box-shadow: var(--card-shadow);
 		border: 1px solid hsl(var(--b4));
@@ -3998,6 +4022,35 @@
 
 	.play-this-track-playlink:after {
 		display: none;
+	}
+
+
+
+
+	/*     ALERT     */
+	.alert {
+		font-size: var(--font-size);
+		line-height: var(--line-height);
+		margin-top: 12px;
+		padding: 7px 12px 7px calc(12px + 16px + 6px);
+		border-radius: var(--item-med-radius);
+		background-color: hsla(var(--l4), 20%);
+		color: hsl(var(--l3-c));
+	}
+	.alert:before {
+		left: 12px;
+		background-image: unset;
+		background-color: hsl(var(--l3-c));
+	}
+
+	.alert-warning::before, .alert-info::before {
+		mask-image: var(--icon-16-info);
+	}
+
+	.alert-warning {
+		--hue: 25;
+		--sat: 1;
+		--lit: 1;
 	}
 
 
