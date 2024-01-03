@@ -1355,11 +1355,15 @@
 	.header-new-more-button:before {
 		background-image: unset !important;
 		--mask: var(--icon-16-dots);
+		mask-image: var(--mask);
+		-webkit-mask-image: var(--mask);
 		background-color: var(--col) !important;
 	}
 	.header-new-bookmark-button:before {
 		background-image: unset !important;
 		--mask: var(--icon-16-bookmark);
+		mask-image: var(--mask);
+		-webkit-mask-image: var(--mask);
 		background-color: var(--col) !important;
 	}
 	[data-toggle-button-current-state="bookmarked"] .header-new-bookmark-button:before {
