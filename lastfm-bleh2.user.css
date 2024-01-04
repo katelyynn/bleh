@@ -2212,6 +2212,8 @@
 		content: '';
 		background-color: hsl(var(--c3));
 		--mask: var(--icon-16-copy);
+		mask-image: var(--mask);
+		-webkit-mask-image: var(--mask);
 		width: 16px;
 		height: 16px;
 		display: block;
@@ -2339,22 +2341,23 @@
 		background-image: var(--icon-pro);
 		filter: drop-shadow(2px 0px 0 hsl(var(--b5))) drop-shadow(0px 2px 0 hsl(var(--b5))) drop-shadow(-2px -0px 0 hsl(var(--b5))) drop-shadow(-0px -2px 0 hsl(var(--b5)));
 	}
-	.shout-user-avatar:has(.avatar-status-dot):before, .user-list-avatar:has(.avatar-status-dot):before {
+	.shout-user:has([href="/user/cutensilly"]) + .shout-user-avatar .avatar-status-dot:before, .user-list-name:has([href="/user/cutensilly"]) + .user-list-avatar .avatar-status-dot:before {
 		background: hsl(var(--b5));
-		content: '';
+		content: '' !important;
 		position: absolute;
 		right: 5px;
-		bottom: 5px;
+		bottom: 10px;
 		width: 10px;
-		height: 10px;
+		height: 3px;
 		border-radius: 50%;
-		z-index: 1 !important;
+		z-index: -2000 !important;
+		display: flex !important;
 	}
-	.user-list-avatar:has(.avatar-status-dot):before {
+	.user-list-name:has([href="/user/cutensilly"]) + .user-list-avatar .avatar-status-dot:before {
 		right: 6px;
-		bottom: 6px;
+		bottom: 11px;
 		width: 12px;
-		height: 12px;
+		height: 5px;
 	}
 
 
