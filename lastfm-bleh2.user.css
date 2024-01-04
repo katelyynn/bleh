@@ -105,7 +105,7 @@
 	.dropdown-menu-clickable-item, .auth-dropdown-menu-item,
 	.gallery-image-buttons button, .gallery-image-preferred-button,
 	.vote-button--voted,
-	button, .gallery-image-report,
+	button, .btn-primary, .gallery-image-report,
 	.gallery-image-preferred-states::before,
 	.masthead-logo a,
 	body:after,
@@ -2598,7 +2598,8 @@
 	.library-search-submit::before,
 	.resource-external-link:before, .play-this-track-playlink:before, .replace-playlink:before,
 	.shout-more-replies-before:before,
-	.coloured-cta:before
+	.coloured-cta:before,
+	.content-form .table .delete:before
 	{
 		content: '';
 		display: block !important;
@@ -2617,6 +2618,9 @@
 		background-color: hsl(var(--icon));
 		mask-image: var(--mask);
 		-webkit-mask-image: var(--mask);
+		transition-property: opacity !important;
+		transition-duration: var(--trans) !important;
+		transition-timing-function: var(--trans-function) !important;
 	}
 	.pagination-next a:before,
 	.more-link a:before, .more-link-fullwidth-right a:before, .more-link-fullwidth-right-flush-top a:before, .more-link-with-action a:not(.inline-add-icon):after,
@@ -2637,7 +2641,8 @@
 	.shout-more-actions,
 	.toggle-button:not(.dropdown-menu-clickable-item), .header-new-more-button,
 	.gallery-image-report,
-	.modal-dismiss
+	.modal-dismiss,
+	.content-form .table .delete
 	{
 		--font-size: 0;
 	}
@@ -2934,10 +2939,13 @@
 	/*     DANGEROUS     */
 	.more-item--delete, .more-item--report,
 	[href="/logout"],
-	[data-analytics-action="delete"]
+	[data-analytics-action="delete"],
+	#manage_data .btn-primary
 	{
 		--col: hsl(var(--l3));
 		--hue: -2;
+		--sat: 1;
+		--lit: 1;
 	}
 
 
@@ -2946,6 +2954,8 @@
 	{
 		--col: hsl(var(--l3));
 		--hue: 255;
+		--sat: 1;
+		--lit: 1;
 	}
 
 
@@ -4256,7 +4266,7 @@
 
 
 	/*     SETTINGS     */
-	.adaptive-skin-wrapper + .content-top {
+	#redirect-bar + .adaptive-skin-container .adaptive-skin-wrapper + .content-top {
 		margin-top: var(--card-gap);
 	}
 	.content-top-header {
@@ -4330,6 +4340,74 @@
 		font-size: var(--font-size);
 		line-height: var(--line-height);
 		font-weight: 500;
+	}
+
+
+
+
+	#ignorelist > form {
+		display: flex;
+	}
+	#ignorelist > form .form-group:last-child {
+		margin: unset;
+	}
+	#ignorelist > form .form-group:last-child .form-submit {
+		width: fit-content;
+	}
+	#ignorelist button {
+		--hue: -2;
+		--sat: 1;
+		--lit: 1;
+	}
+
+	#ignorelist > div.form-horizontal .form-group-controls {
+		max-height: 32px;
+		opacity: 0;
+		overflow: hidden;
+		transition-property: max-height, opacity;
+		transition-duration: calc(var(--trans) * 8);
+		transition-timing-function: ease 0.3s;
+	}
+	#ignorelist > div.form-horizontal .form-group-controls:hover {
+		max-height: 900px;
+		opacity: 1;
+	}
+	.content-form.ignore-list-form .ignore-list {
+		margin-top: unset !important;
+	}
+
+
+	table.table tr {
+		position: relative;
+	}
+	table.table td, table.table th {
+		padding: 7px 12px;
+		box-shadow: unset !important;
+	}
+	table.table tr:nth-child(2n) td {
+		background-color: hsla(var(--b4), 40%);
+	}
+
+	.content-form .table .delete {
+		width: 32px;
+		height: 32px;
+		position: absolute;
+		top: 0;
+		right: 0;
+		--bg: transparent;
+		--bg-hov: hsla(var(--b4), 50%);
+		--bg-atv: hsla(var(--b4), 70%);
+		--col: hsl(var(--l3-c));
+		--hue: -2;
+		--sat: 1;
+		--lit: 1;
+	}
+	.content-form .table .delete:before {
+		--mask: var(--icon-16-trash);
+		left: 8px !important;
+	}
+	.content-form .table .delete:not(:hover):before {
+		opacity: 0.2;
 	}
 
 
