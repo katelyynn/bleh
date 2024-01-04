@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           bleh2
 @namespace      github.com/katelyynn/bleh
-@version        2024.0102
+@version        2024.0103
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelyynn/bleh/raw/uwu/lastfm-bleh2.user.css
@@ -9,7 +9,7 @@
 ==/UserStyle== */
 
 @-moz-document domain("plexion.dev") {
-	body                     {--bleh2-ver: 2024.0102} .installed2-only, .btn-installed2-only {display: flex !important} .uninstalled2-only {display: none} .install2 {pointer-events: auto; opacity: 1; border-style: solid}
+	body                     {--bleh2-ver: 2024.0103} .installed2-only, .btn-installed2-only {display: flex !important} .uninstalled2-only {display: none} .install2 {pointer-events: auto; opacity: 1; border-style: solid}
 }
 
 
@@ -1481,7 +1481,7 @@
 
 
 	/*     PROFILE LABEL     */
-	.header-title-label-wrap .label, .header-new-on-tour {
+	.header-title-label-wrap .label, .header-new-on-tour, .user-list-inner-wrap .label {
 		/*width: 100%;*/
 		max-width: 24px;
 		height: 24px;
@@ -1505,7 +1505,7 @@
 		transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
 		transition-delay: 0.2s;
 	}
-	.header-title-label-wrap .label:hover, .header-new-on-tour:hover {
+	.header-title-label-wrap .label:hover, .header-new-on-tour:hover, .user-list-inner-wrap .label:hover {
 		max-width: 120px;
 		color: hsl(var(--c2)) !important;
 	}
@@ -1517,6 +1517,22 @@
 	}
 	.header-new-on-tour {
 		background-image: var(--icon-tour);
+	}
+
+	.user-list-inner-wrap .label {
+		padding-left: unset;
+		padding-right: calc(24px + 4px);
+		margin-right: unset;
+		margin-left: 4px;
+		text-align: right;
+		background-position: right;
+		position: absolute;
+		top: 40px;
+		right: 4px;
+		background-color: hsl(var(--b5));
+	}
+	.user-list-inner-wrap:has(.label.user-follow) .user-list-name a {
+		color: hsl(var(--l2-c));
 	}
 
 	.header-title-label-wrap {
@@ -1765,13 +1781,15 @@
 		text-underline-offset: 2px;
 	}
 
-	.external-link-cta .cta-link-wrap a, .lyrics-snippet-more-link a {
+	.external-link-cta .cta-link-wrap a, .lyrics-snippet-more-link a, .wiki-block-cta .cta-link-wrap a {
 		padding-right: calc(16px + 8px);
 	}
 	.external-link-cta .cta-link-wrap a::before, .external-link::after, .wiki-block-cta .cta-link-wrap a::before, .lyrics-snippet-more-link a::before {
 		background-color: currentColor;
 		background-image: unset;
 		--mask: var(--icon-16-external);
+		mask-image: var(--mask);
+		-webkit-mask-image: var(--mask);
 		width: 16px;
 		height: 16px;
 		margin-top: -8px;
@@ -1909,7 +1927,7 @@
 		gap: 10px;
 		font-weight: var(--font-weight-medium);
 	}
-	.chartlist-name .feat, .chartlist-artist, .featured-item-artist {
+	.chartlist-name .feat, .chartlist-artist, .featured-item-artist, .artist-top-albums-item-artist, .similar-albums-item-artist, .track-similar-tracks-item-artist {
 		color: hsla(var(--c2), 80%);
 		font-weight: var(--font-weight);
 	}
@@ -2320,7 +2338,7 @@
 		background-image: var(--icon-pro);
 		filter: drop-shadow(2px 0px 0 hsl(var(--b5))) drop-shadow(0px 2px 0 hsl(var(--b5))) drop-shadow(-2px -0px 0 hsl(var(--b5))) drop-shadow(-0px -2px 0 hsl(var(--b5)));
 	}
-	.shout-user-avatar:has(.avatar-status-dot):before {
+	.shout-user-avatar:has(.avatar-status-dot):before, .user-list-avatar:has(.avatar-status-dot):before {
 		background: hsl(var(--b5));
 		content: '';
 		position: absolute;
@@ -2331,11 +2349,18 @@
 		border-radius: 50%;
 		z-index: 1 !important;
 	}
+	.user-list-avatar:has(.avatar-status-dot):before {
+		right: 6px;
+		bottom: 6px;
+		width: 12px;
+		height: 12px;
+	}
 
 
 	/* blehhhh :3 */
 	.shout-user:has([href="/user/cutensilly"]) + .shout-user-avatar .avatar-status-dot,
-	.header-title:has([href="/user/cutensilly"]) + .user-status-subscriber
+	.header-title:has([href="/user/cutensilly"]) + .user-status-subscriber,
+	.user-list-name:has([href="/user/cutensilly"]) + .user-list-avatar .avatar-status-dot
 	{
 		background-image: var(--icon-blehhh) !important;
 	}
@@ -3386,6 +3411,28 @@
 	}
 
 
+	.listener-trend .highcharts-alternate-grid {
+		fill: hsla(var(--b4), 60%) !important;
+	}
+	.listener-trend .highcharts-graph {
+		stroke: hsl(var(--l3-c)) !important;
+	}
+	.listener-trend .highcharts-area {
+		fill: hsla(var(--l4), 10%) !important;
+	}
+
+	.listener-trend .highcharts-axis-labels text {
+		color: hsl(var(--c3)) !important;
+		fill: hsl(var(--c3)) !important;
+		font-size: calc(var(--font-size) - 1px) !important;
+	}
+
+	.highcharts-markers .highcharts-point {
+		fill: hsl(var(--b5)) !important;
+		stroke: hsl(var(--l2-c)) !important;
+	}
+
+
 
 
 	/*     LISTENING REPORT     */
@@ -3942,7 +3989,7 @@
 		margin-bottom: var(--card-gap);
 	}
 
-	.resource-list--release-list-item-image img, .artist-top-albums-item-image img, .similar-albums-item-image img {
+	.resource-list--release-list-item-image img, .artist-top-albums-item-image img, .similar-albums-item-image img, .source-album-art .cover-art img, .track-similar-tracks-item-image img {
 		border-radius: var(--item-med-radius);
 		box-shadow: var(--card-shadow);
 		border: 1px solid hsl(var(--b4));
@@ -3962,7 +4009,7 @@
 	{
 		margin-top: 6px;
 	}
-	.resource-list--release-list-item-name, .artist-top-albums-item-name, .similar-albums-item-name {
+	.resource-list--release-list-item-name, .artist-top-albums-item-name, .similar-albums-item-name, .source-album-name, .track-similar-tracks-item-name {
 		font-weight: 500;
 		font-size: var(--font-size);
 		line-height: var(--line-height);
@@ -3971,9 +4018,10 @@
 	.resource-list--release-list-item-aux-text, .resource-list--release-list-item-regular-tags,
 	.artist-top-albums-item-aux-text, .artist-top-albums-item-regular-tags,
 	.similar-albums-item-aux-text, .similar-albums-item-regular-tags,
-	.listening-report-brick-item-scrobbles
+	.listening-report-brick-item-scrobbles,
+	.source-album-stats
 	{
-		font-size: var(--font-size);
+		font-size: calc(var(--font-size) - 1px);
 		line-height: var(--line-height);
 		color: hsl(var(--c3));
 	}
@@ -3984,11 +4032,11 @@
 		inset: 0 !important;
 		z-index: 10;
 	}
-	.resource-list--release-list-item-name a, .artist-top-albums-item-name a, .similar-albums-item-name a, .similar-albums-item-artist a {
+	.resource-list--release-list-item-name a, .artist-top-albums-item-name a, .similar-albums-item-name a, .similar-albums-item-artist a, .source-album-name a, .source-album-artist a, .track-similar-tracks-item-name a, .track-similar-tracks-item-artist a {
 		text-decoration: none !important;
 	}
 
-	.resource-list--release-list-item-playlink, .similar-albums-item-playlink {
+	.resource-list--release-list-item-playlink, .similar-albums-item-playlink, .track-similar-tracks-item-playlink {
 		display: none;
 	}
 
@@ -4004,6 +4052,17 @@
 	}
 	:is(.artist-top-albums-item, .resource-list--release-list-item) a .feat {
 		color: hsl(var(--c3));
+	}
+
+
+
+
+	/*     TRACK FEATURED ON . . .     */
+	.source-album, .source-album-nodata, .track-similar-tracks {
+		margin-top: 12px;
+	}
+	.image-overlay-playlink-link {
+		display: none !important;
 	}
 
 
@@ -4124,8 +4183,52 @@
 
 
 
+	/*     FOLLOWS/FOLLOWERS     */
+	.user-list-avatar {
+		border: 1px solid hsl(var(--b4));
+		box-shadow: var(--card-shadow);
+		border-radius: 50%;
+		width: 64px;
+		height: 64px;
+	}
+
+	.user-list-avatar .avatar-status-dot {
+		width: 24px;
+		height: 24px;
+		background-size: 100%;
+	}
+
+	.user-list-follower-btn {
+		top: 0;
+		left: unset;
+		right: 0;
+	}
+
+	.user-list-name a {
+		text-decoration: none !important;
+	}
+	.user-list-description {
+		max-width: 240px;
+		-webkit-line-clamp: 2;
+		overflow: hidden;
+		display: -webkit-box;
+		-webkit-box-orient: vertical;
+	}
+
+	.user-list-shared-artists {
+		padding-top: unset;
+		border: unset;
+		color: hsl(var(--c3));
+		/* genuine last.fm bug related to ".user-list-description p:first-child" applying */
+		overflow: visible !important;
+		white-space: initial !important;
+	}
+
+
+
+
 	/*     UNDER CONSTRUCTION     */
-	body:is([class*="namespace--user_obsessions"], [class*="namespace--user_follow"], [class*="namespace--user_playlist"], [class*="namespace--user_neighbours"], [class*="events"], [class*="namespace--settings"], [class*="namespace--music_bookmarks"], .music-landing-overview, [class*="namespace--charts"]):after {
+	body:is([class*="namespace--user_obsessions"], [class*="namespace--user_playlist"], [class*="events"], [class*="namespace--settings"], [class*="namespace--music_bookmarks"], .music-landing-overview, [class*="namespace--charts"]):after {
 		position: fixed;
 		left: 0;
 		right: 0;
