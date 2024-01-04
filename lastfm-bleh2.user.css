@@ -3990,7 +3990,8 @@
 		margin-bottom: var(--card-gap);
 	}
 
-	.resource-list--release-list-item-image img, .artist-top-albums-item-image img, .similar-albums-item-image img, .source-album-art .cover-art img, .track-similar-tracks-item-image img {
+	.resource-list--release-list-item-image, .artist-top-albums-item-image, .similar-albums-item-image, .source-album-art .cover-art, .track-similar-tracks-item-image {
+		background-color: hsl(var(--b5));
 		border-radius: var(--item-med-radius);
 		box-shadow: var(--card-shadow);
 		border: 1px solid hsl(var(--b4));
@@ -4062,7 +4063,7 @@
 	.source-album, .source-album-nodata, .track-similar-tracks {
 		margin-top: 12px;
 	}
-	.image-overlay-playlink-link {
+	.image-overlay-playlink-link:not(#track-page-video-playlink) {
 		display: none !important;
 	}
 
