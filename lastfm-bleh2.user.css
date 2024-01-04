@@ -1940,6 +1940,7 @@
 	.chartlist-image {
 		width: 38px;
 		height: 38px;
+		background-color: hsl(var(--b5));
 		border-radius: var(--item-small-radius);
 		box-shadow: var(--card-shadow);
 		border: 1px solid hsl(var(--b4));
