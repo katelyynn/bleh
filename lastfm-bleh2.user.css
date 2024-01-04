@@ -61,13 +61,19 @@
 	@import url('https://fonts.googleapis.com/css2?family=Spline+Sans+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
 	@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+JP:wght@100;200;300;400;500;600;700&display=swap');
 
+	@font-face {
+		font-family: 'IBM Plex Sans';
+		src: url(https://fonts.gstatic.com/s/ibmplexsans/v19/zYX7KVElMYYaJe8bpLHnCwDKhdTm5IVcdvfu.woff2) format('woff2');
+		unicode-range: U+002E, U+2026;
+	}
+
 	:root {
 		--hue: var(--base-hue, 255);
 		--sat: var(--saturation, 1);
 		--lit: var(--lightness, 1);
 		--ovr: var(--invert-btn, var(--b7));
 
-		--font: IBM Plex Sans JP, Spline Sans, Inter, Roboto, Noto Sans, Noto Sans JP, sans-serif;
+		--font: IBM Plex Sans, IBM Plex Sans JP, Spline Sans, Inter, Roboto, Noto Sans, Noto Sans JP, sans-serif;
 		--font-code: Spline Sans Mono, Iosevka, JetBrains Mono, Roboto Mono, monospace;
 		--font-size: 14px;
 		--line-height: calc(var(--font-size) + 4px);
@@ -943,6 +949,9 @@
 	/* move the sidebar to fit */
 	.header--overview:has(.header-featured-track) + .adaptive-skin-container .col-sidebar {
 		padding-top: calc(138px + 33px) !important;
+	}
+	.about-me-header, .about-me-sidebar p {
+		overflow-y: hidden;
 	}
 	/* no featured track, leave space for message button box instead */
 	.header--overview:not(:has(.header-featured-track)):has(.header-message-user) + .adaptive-skin-container .col-sidebar {
@@ -4222,12 +4231,21 @@
 
 
 	/*     FOLLOWS/FOLLOWERS     */
+	.user-list-item {
+		margin-top: var(--card-gap);
+	}
+
 	.user-list-avatar {
 		border: 1px solid hsl(var(--b4));
 		box-shadow: var(--card-shadow);
 		border-radius: 50%;
 		width: 64px;
 		height: 64px;
+		margin-top: unset;
+	}
+
+	.user-list-inner-wrap {
+		padding-left: calc(64px + 10px);
 	}
 
 	.user-list-avatar .avatar-status-dot {
