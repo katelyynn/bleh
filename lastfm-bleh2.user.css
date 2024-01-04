@@ -119,7 +119,8 @@
 	.listening-report-promo--year,
 	.highcharts-point, .user-dashboard-legend-item::before, stop,
 	.user-dashboard--monthly, .user-dashboard--yearly,
-	.alert
+	.alert,
+	.play-this-track-playlink, .resource-external-link
 	{
 		--c1: var(--hue), calc(var(--sat) * 40%), 100%;
 		--c2: var(--hue), calc(var(--sat) * 60%), 90%;
@@ -602,7 +603,8 @@
 	/* gallery */ .js-gallery-image-details,
 	/* send a message box */ .header--overview:not(:has(.header-featured-track)):has(.header-message-user) + .adaptive-skin-container .col-sidebar:before,
 	/* listening reports */ .user-dashboard > .user-dashboard-buffer,
-	/* katie doesnt have any scrobbles yet */ .profile-mobile-featured-track + .no-data-message
+	/* katie doesnt have any scrobbles yet */ .profile-mobile-featured-track + .no-data-message,
+	/* quick create playlists */ .section-with-separator[action*="/create/from-"]
 	{
 		content: '';
 		background-color: hsl(var(--b5));
@@ -2523,6 +2525,11 @@
 	}
 
 
+	.section-with-separator[action*="/create/from-"] button {
+		margin-top: unset;
+	}
+
+
 	/*     BUTTON HAS ICON     */
 	.stationlink,
 	.dropdown-menu-clickable-item, .auth-dropdown-menu-item,
@@ -2543,12 +2550,13 @@
 	.pagination-next a,
 	.more-link a, .more-link-fullwidth-right a, .more-link-fullwidth-right-flush-top a,
 	.more-items,
-	.more-link-with-action a:not(.inline-add-icon)
+	.more-link-with-action a:not(.inline-add-icon),
+	.btn-shortcut
 	{
 		padding-right: calc(12px + 16px + 6px) !important;
 	}
 
-	.more-link a:before, .more-link-fullwidth-right a:before, .more-link-fullwidth-right-flush-top a:before, .more-link-with-action a:not(.inline-add-icon):after {
+	.more-link a:before, .more-link-fullwidth-right a:before, .more-link-fullwidth-right-flush-top a:before, .more-link-with-action a:not(.inline-add-icon):after, .btn-shortcut:before {
 		background-image: unset !important;
 		--mask: var(--icon-16-arrow-right) !important;
 		background-color: currentColor;
@@ -2608,7 +2616,8 @@
 	.resource-external-link:before, .play-this-track-playlink:before, .replace-playlink:before,
 	.shout-more-replies-before:before,
 	.coloured-cta:before,
-	.content-form .table .delete:before
+	.content-form .table .delete:before,
+	.btn-shortcut:before
 	{
 		content: '';
 		display: block !important;
@@ -2633,7 +2642,8 @@
 	}
 	.pagination-next a:before,
 	.more-link a:before, .more-link-fullwidth-right a:before, .more-link-fullwidth-right-flush-top a:before, .more-link-with-action a:not(.inline-add-icon):after,
-	.more-items:before
+	.more-items:before,
+	.btn-shortcut:before
 	{
 		left: unset !important;
 		right: 12px !important;
@@ -4158,6 +4168,41 @@
 	.play-this-track-playlink--youtube:before {
 		mask-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAALiIAAC4iAari3ZIAAANKSURBVHhe7dpPSBRhGMdxd8v8F8aSh0yxQ/coBIkgj3UooYvRqaJuXbrXLahzXToUHfIUeOlSUUeDqMD+HbxlJJYJhrWku2a6fX8z77usmrpB78y27/uBh3f+7DjzPPvOuzPjNARBEARBEPgqY9qqlEqlLTTNRKuJNtO2VLRa32Rim4lGE9p+K6H9qs0Sskz8IkqmXSIWTfw0sWCiSBSI+Yp2zrSKYiaT0fZVWbcAJLubpo/YR+wluogOYgexnbCJ2oTSYAtmC/OD+E7MEJ+I98Q74iVF+Uy7ORLvIm4Rs0S9UC7KSV/iCiu+OT5wmOYeoW+/HqkXnKI3PI1nKwpA8urqI4S6eD3TKdJPEXRqxAUgeQ1OSv6Q5j3wjFARluwofJzwJXlRrsq5/DM0aFqfRDln6f76ne7VjGd6lbt6QCfRHS3yi3LuVAF6CF3Y+EY599gC+CoqgI/d3+q2Y4BTXzAPM1tLojFANzhOvcBZvIVZVCs6VIBcPO1OI4axH9cwAbMqbTkVoD2eTsZl7MEQZmEWp6VdBdBDjcRkofYMTuAJFhCtTF6bDkYPNhKzDLUqxAiO4gJegyszPeBIUrPuBMe1Y5cewOxwDe7IyrfkV/ABZrMkjKsA0/G0OxsVQCqLIHfwFWZzl6Z1CuhBZqp0JGrt+HAex/AIRWiZIy3aeUEH4NJmPWA1Wwg5iefQ2GH+3L9UKO/IW1QhHxfDnWp7QOU3fxAPUYD5My7ka3YQnIHZ3KVoENR/VVKj5HUkmrY/g+ewE9EH3JpTDxjTAbj0px5Q2d2V8Cs4Gug2MqaDcPkzs4ZNXMn24zFu4gBWnwoJKCZ+CihxtXdxH0fQhGhl8uZUgHw8nYyr+IjTyMEsTkteBXB+S7qIQbzBJfTArErbrEbg60xcjOfd0COxdrTCLKoVN9QDpuJpd3ahBpOXKRVgMp720qQKUCvP59IwYQugV0t8o5yjAmgM8PE0UM5TWS6+9AbWaLTIL6PKXT1Ahk3rkyjn6NqbawFvX5Ep33xQBC9fkrKngO7LtWCAqO6Fwv+TchuwyUu5AMIKvT+nt0NvE9+0rE4oF+XUZ3IsW/f+m1PCi1dl/+rAzWBZVy9LB0EQBEEQeKqh4TfOKt6GKfbFHgAAAABJRU5ErkJggg==');
 		mask-size: 100%;
+	}
+
+	.play-this-track-playlink, .resource-external-link {
+		--col: hsl(var(--l3));
+		--sat: 1;
+		--lit: 1;
+		--icon: var(--l3);
+	}
+
+	.play-this-track-playlink--youtube {
+		--hue: -2;
+	}
+	.play-this-track-playlink--spotify {
+		--hue: 160;
+	}
+	.resource-external-link--soundcloud {
+		--hue: 15;
+	}
+	.play-this-track-playlink--itunes {
+		--hue: 333;
+	}
+
+	.resource-external-link--apple-music {
+		--hue: 333;
+	}
+	.resource-external-link--facebook {
+		--hue: 200;
+		--lit: 0.85;
+	}
+	.resource-external-link--twitter {
+		--col: hsl(var(--c1));
+		--icon: var(--c1);
+	}
+	.resource-external-link--instagram {
+		--hue: 300;
 	}
 
 	.replace-playlink:before {
