@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           bleh2
 @namespace      github.com/katelyynn/bleh
-@version        2024.0103
+@version        2024.0104
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelyynn/bleh/raw/uwu/lastfm-bleh2.user.css
@@ -9,7 +9,7 @@
 ==/UserStyle== */
 
 @-moz-document domain("plexion.dev") {
-	body                     {--bleh2-ver: 2024.0103} .installed2-only, .btn-installed2-only {display: flex !important} .uninstalled2-only {display: none} .install2 {pointer-events: auto; opacity: 1; border-style: solid}
+	body                     {--bleh2-ver: 2024.0104} .installed2-only, .btn-installed2-only {display: flex !important} .uninstalled2-only {display: none} .install2 {pointer-events: auto; opacity: 1; border-style: solid}
 }
 
 
@@ -2498,6 +2498,19 @@
 	}
 
 
+	.image-upload-remove
+	{
+		--col: hsl(var(--l3-c));
+	}
+
+	.image-upload-remove
+	{
+		--hue: -2;
+		--sat: 1;
+		--lit: 1;
+	}
+
+
 	/*     BUTTON HAS ICON     */
 	.stationlink,
 	.dropdown-menu-clickable-item, .auth-dropdown-menu-item,
@@ -4170,14 +4183,24 @@
 		left: 12px;
 		background-image: unset;
 		background-color: hsl(var(--l3-c));
+		mask-image: var(--mask);
+		-webkit-mask-image: var(--mask);
 	}
 
 	.alert-warning::before, .alert-info::before {
-		mask-image: var(--icon-16-info);
+		--mask: var(--icon-16-info);
+	}
+	.alert-success::before {
+		--mask: var(--icon-16-check);
 	}
 
 	.alert-warning {
 		--hue: 25;
+		--sat: 1;
+		--lit: 1;
+	}
+	.alert-success {
+		--hue: 160;
 		--sat: 1;
 		--lit: 1;
 	}
@@ -4224,6 +4247,86 @@
 		/* genuine last.fm bug related to ".user-list-description p:first-child" applying */
 		overflow: visible !important;
 		white-space: initial !important;
+	}
+
+
+
+
+	/*     SETTINGS     */
+	.adaptive-skin-wrapper + .content-top {
+		margin-top: var(--card-gap);
+	}
+	.content-top-header {
+		color: hsl(var(--c1));
+	}
+
+	.form-section .form-horizontal .form-group-controls {
+		width: 400px;
+	}
+
+	.image-upload-preview {
+		border: 2px solid hsl(var(--b4));
+		border-radius: 50%;
+		box-shadow: var(--card-shadow);
+	}
+	#update-picture .col-xs-4 {
+		width: 240px;
+	}
+	#update-picture .alert {
+		width: fit-content;
+	}
+
+	#update-picture .form-submit {
+		justify-content: left;
+	}
+
+	.btn-file-label, .btn-sm {
+		min-height: 32px;
+		line-height: var(--line-height);
+		padding: 7px 12px;
+	}
+	.btn-file-label {
+		color: hsl(var(--c3));
+	}
+
+	.content-form .form-group, .content-form form {
+		margin-top: var(--card-gap);
+	}
+	.form-header + form {
+		margin-top: unset;
+	}
+	.form-header + form input + .form-group {
+		margin: unset !important;
+		padding: unset !important;
+	}
+
+	.content-form .form-horizontal button, .content-form .form-horizontal input[type="date"], .content-form .form-horizontal input[type="email"], .content-form .form-horizontal input[type="password"], .content-form .form-horizontal input[type="text"], .content-form .form-horizontal input[type="url"], .content-form .form-horizontal select, .content-form .form-horizontal textarea {
+		margin-top: unset !important;
+	}
+	.control-label {
+		min-height: 32px !important;
+		display: flex !important;
+		justify-content: right;
+		align-items: center;
+	}
+	.content-form .form-horizontal .form-group-controls {
+		min-height: 32px !important;
+	}
+
+	.content-form .form-horizontal .form-group {
+		padding-top: unset;
+	}
+
+	.form-group--submit {
+		margin-top: var(--card-gap) !important;
+	}
+
+
+	.content-form legend {
+		color: hsl(var(--c1));
+		font-size: var(--font-size);
+		line-height: var(--line-height);
+		font-weight: 500;
 	}
 
 
