@@ -3155,9 +3155,16 @@
 		width: 350px;
 		padding-left: var(--card-gap);
 		padding-right: unset;
+		line-height: 32px;
 	}
 	.modal-body .content-form .form-horizontal .form-group-controls {
 		width: 410px;
+	}
+
+	.checkbox label {
+		display: flex;
+		align-items: center;
+		gap: 10px;
 	}
 
 	input:is([name="track_name"], [name="artist_name"], [name="album_name"], [name="album_artist_name"])
@@ -3789,16 +3796,8 @@
 		font-weight: 500;
 	}
 
-	.user-dashboard--weekly .user-dashboard-legend-item--current::before {
-		--hue: 200;
-		--sat: 1;
-		--lit: 1;
-	}
 
 
-	.user-dashboard--weekly .highcharts-grid-line[stroke="#e6e6e6"] {
-		stroke: hsl(var(--b4));
-	}
 	.listening-week-graph-chart .highcharts-point {
 		fill: hsl(var(--l3-c));
 		stroke: unset !important;
@@ -3810,21 +3809,6 @@
 		fill: hsla(var(--l3-c), 85%);
 		stroke: unset !important;
 		--hue: 200;
-		--sat: 1;
-		--lit: 1;
-	}
-
-	.user-dashboard--weekly .scrobble-stats-graph-chart .highcharts-point {
-		fill: hsl(var(--l3-c));
-		stroke: unset !important;
-		--hue: 255;
-		--sat: 1;
-		--lit: 1;
-	}
-	.user-dashboard--weekly .scrobble-stats-graph-chart .highcharts-point:hover {
-		fill: hsla(var(--l3-c), 85%);
-		stroke: unset !important;
-		--hue: 255;
 		--sat: 1;
 		--lit: 1;
 	}
