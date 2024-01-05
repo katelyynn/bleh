@@ -126,6 +126,7 @@
 		--c1: var(--hue), calc(var(--sat) * 40%), 100%;
 		--c2: var(--hue), calc(var(--sat) * 60%), 90%;
 		--c3: var(--hue), calc(var(--sat) * 10%), 60%;
+		--ov-c1: var(--c1);
 
 		--l2: var(--hue), calc(var(--sat) * 50%), calc(var(--lit) * 83%);
 		--l3: var(--hue), calc(var(--sat) * 60%), calc(var(--lit) * 70%);
@@ -3564,7 +3565,7 @@
 		stroke: hsl(var(--l3-c)) !important;
 	}
 	.listener-trend .highcharts-area {
-		fill: hsla(var(--l4), 10%) !important;
+		fill: hsla(var(--l4-c), 10%) !important;
 	}
 
 	.listener-trend .highcharts-axis-labels text {

@@ -1,0 +1,68 @@
+/* ==UserStyle==
+@name           bleh2 (light)
+@namespace      github.com/katelyynn/bleh
+@version        2024.0105
+@license        GPL-3.0
+@author         kate
+@updateURL      https://github.com/katelyynn/bleh/raw/uwu/lastfm-bleh2-light.user.css
+@var text bleh "configure settings using the edit button!!" "click the pencil"
+==/UserStyle== */
+
+@-moz-document domain("plexion.dev") {
+	body {--bleh2-light-ver: 2024.0105 }
+}
+
+@-moz-document domain("last.fm") {
+    /* backgrounds */
+	:root, [data-page-resource-type="album"],
+	.gallery-image-buttons button, .gallery-image-preferred-button,
+	.vote-button--voted
+	{
+		/* card border */
+		--b4: var(--hue), calc(var(--sat) * 6%), 89%;
+
+		/* card */
+		--b5: 0, 0%, 100%;
+
+		/* root */
+		--b6: 0, 0%, 98%;
+		--b7: 0, 0%, 0%;
+	}
+
+	/* text */
+	:root, [data-page-resource-type="album"],
+	.tasteometer-compat-colour,
+	.dropdown-menu-clickable-item, .auth-dropdown-menu-item,
+	.gallery-image-buttons button, .gallery-image-preferred-button,
+	.vote-button--voted,
+	button, .btn-primary, .gallery-image-report,
+	.gallery-image-preferred-states::before,
+	.masthead-logo a,
+	body:after,
+	.listening-report-brick--combo .tag-label,
+	.listening-report-promo--year,
+	.highcharts-point, .user-dashboard-legend-item::before, stop,
+	.user-dashboard--monthly, .user-dashboard--yearly,
+	.alert,
+	.play-this-track-playlink, .resource-external-link,
+	.chartlist-row--now-scrobbling
+	{
+		--c1: var(--hue), calc(var(--sat) * 6%), 0%;
+		--c2: var(--hue), calc(var(--sat) * 4%), 4%;
+		--c3: var(--hue), calc(var(--sat) * 10%), 40%;
+		--ov-c1: var(--hue), calc(var(--sat) * 40%), 100%;
+
+		--l3: var(--hue), calc(var(--sat) * 50%), calc(var(--lit) * 65%);
+		--l4: var(--hue), calc(var(--sat) * 60%), calc(var(--lit) * 35%);
+
+		--l3-c: var(--hue), calc(var(--sat) * 50%), calc(clamp(min(0.5), var(--lit), max(1.5)) * 65%);
+		--l4-c: var(--hue), calc(var(--sat) * 60%), calc(clamp(min(0.5), var(--lit), max(1.5)) * 35%);
+	}
+
+	/* attributes */
+	:root {
+		--card-shadow: hsla(var(--b7), 0.03) 0 2px 4px 0;
+
+		--menu-shadow: 2px 2px 24px 0 hsla(var(--b7), 0.15), 3px 6px 48px 16px hsla(var(--b7), 0.03);
+	}
+}

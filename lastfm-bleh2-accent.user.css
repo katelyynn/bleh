@@ -648,6 +648,7 @@
 		--hue: 0;
 		--sat: 0;
 		--lit: 0.35;
+		--ovr: var(--ov-c1);
 	}
 
 	/* gold */
