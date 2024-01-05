@@ -120,7 +120,8 @@
 	.highcharts-point, .user-dashboard-legend-item::before, stop,
 	.user-dashboard--monthly, .user-dashboard--yearly,
 	.alert,
-	.play-this-track-playlink, .resource-external-link
+	.play-this-track-playlink, .resource-external-link,
+	.chartlist-row--now-scrobbling
 	{
 		--c1: var(--hue), calc(var(--sat) * 40%), 100%;
 		--c2: var(--hue), calc(var(--sat) * 60%), 90%;
@@ -409,6 +410,48 @@
 	}
 
 
+	.masthead-nav-item {
+		height: 40px !important;
+	}
+	.masthead-nav-item .masthead-nav-control {
+		padding: 0 16px 0 calc(16px + 16px + 4px) !important;
+	}
+	.masthead-nav-control:before {
+		opacity: 1 !important;
+		margin-right: unset !important;
+		right: unset !important;
+		background-color: currentColor !important;
+	}
+
+	.masthead-nav-item:has([data-analytics-label="live"], [data-analytics-label="events"], [data-analytics-label="features"]) {
+		display: none;
+	}
+
+	.masthead-nav .masthead-nav-control {
+		color: inherit;
+	}
+
+
+	.site-auth {
+		margin-top: unset;
+	}
+	.auth-avatar-desktop {
+		width: 38px;
+		height: 38px;
+		border: 2px solid hsl(var(--b4));
+		box-shadow: var(--card-shadow);
+		transition-property: transform, border-color;
+		transition-duration: calc(var(--trans) * 1.5);
+		transition-timing-function: var(--trans-function);
+	}
+
+	.auth-link.disclose-active .auth-avatar-desktop {
+		transform: scale(1.1);
+		border-color: hsl(var(--l3-c));
+		border-width: 2px;
+	}
+
+
 	/*     NOTIFICATION DOT     */
 	.auth-avatar-notification-count-badge,
 	.notification-count-badge {
@@ -473,6 +516,13 @@
 	.footer-bottom .row {
 		margin-left: -15px;
 		margin-right: -15px;
+		display: flex;
+	}
+	.footer-bottom .row .col-sm-10 {
+		width: max-content;
+	}
+	.footer-bottom .row .col-sm-2 {
+		width: 150px;
 	}
 
 	#language-selector, .footer-timezone {
@@ -1072,12 +1122,12 @@
 		left: calc((-1 * var(--profile-header-avatar-size)) - 15px) !important;
 	}
 
-	.secondary-nav-item {
+	.secondary-nav-item, .masthead-nav-item {
 		margin-left: unset !important;
 		color: hsla(var(--c2), 85%);
 		height: 44px;
 	}
-	.navlist-more, .secondary-nav-item-link {
+	.navlist-more, .secondary-nav-item-link, .masthead-nav-control {
 		padding: 12px 16px 12px calc(16px + 16px + 4px) !important;
 		z-index: 1;
 		opacity: unset !important;
@@ -1111,7 +1161,7 @@
 	.secondary-nav-item-link:not(.secondary-nav-item-link--active):hover::after {
 		display: none !important;
 	}
-	.secondary-nav-item-link:hover {
+	.secondary-nav-item-link:hover, .masthead-nav-item:hover {
 		color: hsla(var(--c1), 90%);
 	}
 	.secondary-nav-item-link:before {
@@ -1120,7 +1170,7 @@
 
 
 	/*     ICON     */
-	.secondary-nav-item--overview a:before {
+	.secondary-nav-item--overview a:before, [data-analytics-label="home"]:before {
 		--mask: var(--icon-16-home);
 	}
 	.secondary-nav-item--listening-report a:before {
@@ -1159,7 +1209,7 @@
 	.secondary-nav-item--artists a:before {
 		--mask: var(--icon-16-artist);
 	}
-	.secondary-nav-item--tracks a:before {
+	.secondary-nav-item--tracks a:before, [data-analytics-label="music"]:before {
 		--mask: var(--icon-16-track);
 	}
 	.secondary-nav-item--albums a:before {
@@ -1187,6 +1237,10 @@
 	}
 	.secondary-nav-item--you-know a:before {
 		--mask: var(--icon-16-users);
+	}
+
+	[data-analytics-label="charts"]:before {
+		--mask: var(--icon-16-listening-report-weekly);
 	}
 
 	.secondary-nav-item:first-child a[href*="/+events"]:before {
@@ -2158,13 +2212,19 @@
 		--padding: 4px 12px;
 		height: 26px !important;
 		font-family: var(--font) !important;
-		font-size: var(--font-size) !important;
-		font-weight: var(--font-weight-medium) !important;
+		--force-font-weight: 400;
 	}
-	.shout-reply, .shout button:not(:is(.vote-button--voted, .dropdown-menu-clickable-item)) {
+	.shout-reply, .shout button:not(.dropdown-menu-clickable-item, .shout-more-actions) {
+		font-size: calc(var(--font-size) - 1px) !important;
+	}
+	.shout-reply, .shout button:not(.vote-button--voted, .dropdown-menu-clickable-item) {
 		--bg: transparent !important;
 		--bg-hov: hsla(var(--b4), 40%) !important;
 		--bg-atv: hsla(var(--b4), 60%) !important;
+	}
+	.vote-button--voted {
+		--col: hsl(var(--l3-c));
+		--force-font-weight: 500 !important;
 	}
 	.shout-more-actions::before {
 		background-image: unset !important;
@@ -2405,7 +2465,8 @@
 	.resource-external-link, .play-this-track-playlink, .replace-playlink,
 	.shout-more-replies-before,
 	.listening-report-brick--combo .listening-report-brick-inner,
-	.coloured-cta
+	.coloured-cta,
+	.gallery-image-preferred-off
 	{
 		--bg: hsl(var(--b4));
 		--bg-hov: hsla(var(--b4), 80%);
@@ -2421,7 +2482,7 @@
 		letter-spacing: unset !important;
 		font-family: var(--font) !important;
 		font-size: var(--font-size) !important;
-		font-weight: var(--font-weight-medium) !important;
+		font-weight: var(--force-font-weight, var(--font-weight-medium)) !important;
 		border-radius: var(--radius, var(--item-med-radius)) !important;
 		box-shadow: var(--shadow, unset) !important;
 		border: unset !important;
@@ -2451,7 +2512,8 @@
 		.library-search-results li,
 		.resource-external-link, .play-this-track-playlink, .replace-playlink,
 		.shout-more-replies-before,
-		.coloured-cta
+		.coloured-cta,
+		.gallery-image-preferred-off
 	):hover {
 		background-color: var(--bg-hov) !important;
 	}
@@ -2476,7 +2538,8 @@
 		.library-search-results li,
 		.resource-external-link, .play-this-track-playlink, .replace-playlink,
 		.shout-more-replies-before,
-		.coloured-cta
+		.coloured-cta,
+		.gallery-image-preferred-off
 	):active {
 		background-color: var(--bg-atv) !important;
 		transform: scale(0.98);
@@ -2486,7 +2549,6 @@
 	/*     PRIMARY     */
 	.btn-primary:is([type="submit"]),
 	.gallery-image-vote-up-on, .gallery-image-vote-down-on, .gallery-image-preferred-on,
-	.vote-button--voted,
 	.inbox-delete-button:not([disabled]),
 	.gallery-image-report--reported
 	{
@@ -2617,7 +2679,8 @@
 	.shout-more-replies-before:before,
 	.coloured-cta:before,
 	.content-form .table .delete:before,
-	.btn-shortcut:before
+	.btn-shortcut:before,
+	.masthead-nav-control:before
 	{
 		content: '';
 		display: block !important;
@@ -2943,6 +3006,10 @@
 		mask-image: var(--icon-16-logout);
 		background-color: hsl(var(--l3));
 	}
+	.auth-dropdown-menu-item[href="/pro"]:before {
+		mask-image: var(--icon-16-pro);
+		background-color: hsl(var(--l3));
+	}
 	[data-analytics-action="publish"]:before {
 		mask-image: var(--icon-16-public);
 	}
@@ -2973,6 +3040,21 @@
 	{
 		--col: hsl(var(--l3));
 		--hue: 255;
+		--sat: 1;
+		--lit: 1;
+	}
+
+
+	/*     PRO     */
+	.auth-dropdown-menu-item[href="/pro"]
+	{
+		--col: hsl(var(--l3));
+		--hue: 25;
+		--sat: 1;
+		--lit: 1;
+	}
+	#pro-header-cta button {
+		--hue: 25;
 		--sat: 1;
 		--lit: 1;
 	}
@@ -3174,7 +3256,7 @@
 	{
 		background-image: unset !important;
 		mask-image: var(--icon-16-arrow-up);
-		background-color: hsl(var(--icon));
+		background-color: currentColor;
 	}
 	.gallery-image-vote-up-on .gallery-image-votes::before,
 	.shout .vote-button--voted::before
@@ -3182,19 +3264,19 @@
 		background-image: unset !important;
 		mask-image: var(--icon-16-arrow-up);
 		background-position: 0 0;
-		background-color: hsl(var(--b7));
+		background-color: currentColor;
 	}
 
 	/* down :c */
 	.gallery-image-vote-down-off .gallery-image-votes::before {
 		background-image: unset !important;
 		mask-image: var(--icon-16-arrow-down);
-		background-color: hsl(var(--icon));
+		background-color: currentColor;
 	}
 	.gallery-image-vote-down-on .gallery-image-votes::before {
 		background-image: unset !important;
 		mask-image: var(--icon-16-arrow-down);
-		background-color: hsl(var(--b7));
+		background-color: currentColor;
 	}
 
 	/* preferred */
@@ -3211,6 +3293,15 @@
 		background-image: unset !important;
 		mask-image: var(--icon-16-star);
 		background-color: hsl(var(--b7));
+	}
+
+	/* no pro :c */
+	a.gallery-image-preferred-off {
+		opacity: 0.5;
+		cursor: not-allowed;
+	}
+	a.gallery-image-preferred-off .gallery-image-preferred-states::before {
+		background-color: hsl(var(--c2)) !important;
 	}
 
 
@@ -4170,7 +4261,7 @@
 		mask-size: 100%;
 	}
 
-	.play-this-track-playlink, .resource-external-link {
+	.play-this-track-playlink, .resource-external-link:not(.resource-external-link--homepage, .resource-external-link--twitter) {
 		--col: hsl(var(--l3));
 		--sat: 1;
 		--lit: 1;
