@@ -377,6 +377,11 @@
 		/*background: var(--overlay-ice), linear-gradient(180deg, rgba(190,233,250,0.11) 0%, rgba(0,0,0,0) 100%), linear-gradient(0deg, transparent 0%, hsl(var(--b6)) 100%);
 		background-repeat: repeat-x;
 		background-position: unset !important;*/
+
+		/* blur */
+		/*height: 60px;
+		background: hsla(var(--b6), 90%);
+		backdrop-filter: blur(10px);*/
 	}
 	.masthead-inner-wrap {
 		width: var(--cards-width);
@@ -422,17 +427,28 @@
 	}
 
 
-	.masthead-nav-item {
+	.masthead-nav-item, .masthead-search-toggle {
 		height: 40px !important;
 	}
 	.masthead-nav-item .masthead-nav-control {
 		padding: 0 16px 0 calc(16px + 16px + 4px) !important;
 	}
-	.masthead-nav-control:before {
+	.masthead-nav-control:before, .masthead-search-toggle:before {
 		opacity: 1 !important;
 		margin-right: unset !important;
 		right: unset !important;
 		background-color: currentColor !important;
+		background-image: unset !important;
+		mask-image: var(--mask);
+		-webkit-mask-image: var(--mask);
+	}
+	.masthead-search-toggle:before, .masthead-search-submit:before {
+		--mask: var(--icon-16-search);
+	}
+
+	.masthead-search-toggle {
+		color: hsl(var(--c2));
+		transition: color 0.2s ease;
 	}
 
 	.masthead-nav-item:has([data-analytics-label="live"], [data-analytics-label="events"], [data-analytics-label="features"]) {
@@ -441,6 +457,43 @@
 
 	.masthead-nav .masthead-nav-control {
 		color: inherit;
+	}
+
+
+	.masthead-search-form {
+		height: calc(32px + 8px);
+		right: 0;
+		top: 0;
+		margin-left: auto;
+		margin-right: auto;
+		width: calc(var(--cards-main-width) + var(--card-gap) + var(--cards-sidebar-width));
+		background: hsl(var(--b5));
+		border: 1px solid hsl(var(--b4));
+		border-radius: var(--card-radius);
+		box-shadow: var(--menu-shadow);
+		animation: dropdown calc(var(--trans) + 0.02s) var(--trans-function);
+		transform-origin: top;
+	}
+	.masthead-search-field {
+		font-size: var(--font-size);
+		line-height: var(--line-height);
+		height: calc(32px + 8px);
+		padding: 0 12px;
+		color: hsl(var(--c2));
+	}
+	.masthead-search-field::placeholder {
+		color: hsl(var(--c3)) !important;
+	}
+
+	.masthead-search-submit {
+		width: 32px;
+		height: 32px;
+		opacity: 1 !important;
+		top: 3px;
+		right: 3px;
+	}
+	.masthead-search-inner-wrap .masthead-search-submit:before {
+		left: 8px !important;
 	}
 
 
@@ -761,7 +814,8 @@
 	article, section, .buffer-standard, .buffer-standard:not(.col-sidebar) .buffer-standard:first-child, ._buffer,
 	.open-ad-container-desktop ~ .buffer-standard-ignore-hidden, :not(.visible-xs):not([data-ad-container]) ~ .buffer-standard-ignore-hidden /* lfm selector */,
 	.buffer-standard\@sm,
-	.content-form
+	.content-form,
+	/* album does not have a tracklist */ .visible-xs.buffer-standard + #shoutbox
 	{
 		margin-top: var(--card-gap);
 	}
@@ -1173,7 +1227,7 @@
 	.secondary-nav-item-link:not(.secondary-nav-item-link--active):hover::after {
 		display: none !important;
 	}
-	.secondary-nav-item-link:hover, .masthead-nav-item:hover {
+	.secondary-nav-item-link:hover, .masthead-nav-item:hover, .masthead-search-toggle:hover {
 		color: hsla(var(--c1), 90%);
 	}
 	.secondary-nav-item-link:before {
@@ -1640,6 +1694,13 @@
 	}
 	[data-toggle-button-current-state="followed"] .header-follower-btn::before {
 		background-image: var(--icon-check) !important;
+	}
+
+	.user-list-follower-btn:before {
+		background-image: unset !important;
+		background-color: currentColor !important;
+		mask-image: var(--mask);
+		-webkit-mask-image: var(--mask);
 	}
 
 	[data-toggle-button-current-state="unfollowed"] .user-list-follower-btn:before {
@@ -2701,7 +2762,8 @@
 	.coloured-cta:before,
 	.content-form .table .delete:before,
 	.btn-shortcut:before,
-	.masthead-nav-control:before
+	.masthead-nav-control:before,
+	.masthead-search-submit:before
 	{
 		content: '';
 		display: block !important;
@@ -2745,7 +2807,8 @@
 	.toggle-button:not(.dropdown-menu-clickable-item), .header-new-more-button,
 	.gallery-image-report,
 	.modal-dismiss,
-	.content-form .table .delete
+	.content-form .table .delete,
+	.masthead-search-submit
 	{
 		--font-size: 0;
 	}
@@ -2805,6 +2868,12 @@
 	}
 	.section-controls h3 {
 		margin-bottom: unset !important;
+	}
+
+	.section-controls {
+		max-height: 32px;
+		display: flex;
+		align-items: start;
 	}
 
 	.share-button-profile:before {
@@ -3155,16 +3224,27 @@
 		width: 350px;
 		padding-left: var(--card-gap);
 		padding-right: unset;
-		line-height: 32px;
+		display: flex;
+		align-items: center;
 	}
 	.modal-body .content-form .form-horizontal .form-group-controls {
 		width: 410px;
+	}
+
+	.form-group--create_automatic_edit_rule .form-group-controls {
+		flex-direction: column;
+		align-items: unset !important;
+		justify-content: center;
 	}
 
 	.checkbox label {
 		display: flex;
 		align-items: center;
 		gap: 10px;
+		height: 32px;
+	}
+	.checkbox {
+		height: 32px;
 	}
 
 	input:is([name="track_name"], [name="artist_name"], [name="album_name"], [name="album_artist_name"])
@@ -4130,12 +4210,19 @@
 	#artist-popular-albums-section {
 		margin-bottom: var(--card-gap);
 	}
+	.similar-items-sidebar {
+		margin-top: unset;
+	}
+	.similar-items-sidebar-item-wrap {
+		margin-top: 8px;
+	}
 
-	.resource-list--release-list-item-image, .artist-top-albums-item-image, .similar-albums-item-image, .source-album-art .cover-art, .track-similar-tracks-item-image {
+	.resource-list--release-list-item-image, .artist-top-albums-item-image, .similar-albums-item-image, .source-album-art .cover-art, .track-similar-tracks-item-image, .similar-items-sidebar-item-image {
 		background-color: hsl(var(--b5));
 		border-radius: var(--item-med-radius);
 		box-shadow: var(--card-shadow);
 		border: 1px solid hsl(var(--b4));
+		overflow: hidden;
 	}
 	.resource-list--release-list-item-wrap, .artist-top-albums-item-wrap, .similar-albums-item-wrap {
 		padding-left: 4px;
@@ -4152,7 +4239,7 @@
 	{
 		margin-top: 6px;
 	}
-	.resource-list--release-list-item-name, .artist-top-albums-item-name, .similar-albums-item-name, .source-album-name, .track-similar-tracks-item-name {
+	.resource-list--release-list-item-name, .artist-top-albums-item-name, .similar-albums-item-name, .source-album-name, .track-similar-tracks-item-name, .similar-items-sidebar-item-name {
 		font-weight: 500;
 		font-size: var(--font-size);
 		line-height: var(--line-height);
@@ -4162,7 +4249,9 @@
 	.artist-top-albums-item-aux-text, .artist-top-albums-item-regular-tags,
 	.similar-albums-item-aux-text, .similar-albums-item-regular-tags,
 	.listening-report-brick-item-scrobbles,
-	.source-album-stats
+	.source-album-stats,
+	.similar-albums-item-artist + .similar-albums-item-aux-text, .similar-albums-item-artist + .similar-albums-item-regular-tags,
+	.similar-items-sidebar-item-artist + .similar-items-sidebar-item-aux-text, .similar-items-sidebar-item-artist + .similar-items-sidebar-item-regular-tags
 	{
 		font-size: calc(var(--font-size) - 1px);
 		line-height: var(--line-height);
@@ -4175,7 +4264,7 @@
 		inset: 0 !important;
 		z-index: 10;
 	}
-	.resource-list--release-list-item-name a, .artist-top-albums-item-name a, .similar-albums-item-name a, .similar-albums-item-artist a, .source-album-name a, .source-album-artist a, .track-similar-tracks-item-name a, .track-similar-tracks-item-artist a {
+	.resource-list--release-list-item-name a, .artist-top-albums-item-name a, .similar-albums-item-name a, .similar-albums-item-artist a, .source-album-name a, .source-album-artist a, .track-similar-tracks-item-name a, .track-similar-tracks-item-artist a, .similar-items-sidebar-item-name a, .similar-items-sidebar-item-artist a {
 		text-decoration: none !important;
 	}
 
@@ -4399,6 +4488,10 @@
 		top: 0;
 		left: unset;
 		right: 0;
+	}
+	.user-list-item:not(:hover) [data-toggle-button-current-state="followed"] .user-list-follower-btn {
+		--bg: transparent;
+		--col: hsl(var(--b3));
 	}
 
 	.user-list-name a {
