@@ -163,6 +163,8 @@
 		--shout-inset: 64px;
 
 		--menu-shadow: 2px 2px 24px 0 hsla(var(--b7), 0.35), 3px 6px 48px 16px hsla(var(--b7), 0.25);
+
+		--noise: url('https://plexion.dev/img/noise.png');
 	}
 
 	/* icons */
@@ -288,6 +290,15 @@
 		letter-spacing: unset !important;
 		color-scheme: dark;
 		accent-color: hsl(var(--l3-c));
+	}
+	body:before {
+		content: '';
+		inset: 0;
+		position: fixed;
+		z-index: 100000000000;
+		opacity: 0.23;
+		pointer-events: none;
+		background-image: var(--noise);
 	}
 
 	address, blockquote, dl, ol, p, pre, ul {
