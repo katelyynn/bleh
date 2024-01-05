@@ -2314,6 +2314,15 @@
 	}
 
 
+	/*     DELETED / REPORTED     */
+	.shout--deleted, .shout--reported {
+		padding: 0 0 10px !important;
+		background: unset;
+		color: hsl(var(--c3));
+		margin-bottom: 0;
+	}
+
+
 	/*     ACTIVE     */
 	.shout-container--active {
 		background-color: hsla(var(--l3), 6%);
