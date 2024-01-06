@@ -67,13 +67,30 @@
 		unicode-range: U+002E, U+2026;
 	}
 
+	@font-face {
+		font-family: 'Spline Sans ALT';
+		font-style: normal;
+		font-weight: 400;
+		font-display: swap;
+		src: url(https://fonts.gstatic.com/s/splinesans/v10/_6_7ED73Uf-2WfU2LzycEbAimC0.woff2) format('woff2');
+		unicode-range: U+0049;
+	}
+	@font-face {
+		font-family: 'Spline Sans ALT';
+		font-style: normal;
+		font-weight: 500;
+		font-display: swap;
+		src: url(https://fonts.gstatic.com/s/splinesans/v10/_6_7ED73Uf-2WfU2LzycEbAimC0.woff2) format('woff2');
+		unicode-range: U+0049;
+	}
+
 	:root {
 		--hue: var(--base-hue, 255);
 		--sat: var(--saturation, 1);
 		--lit: var(--lightness, 1);
 		--ovr: var(--invert-btn, var(--b7));
 
-		--font: IBM Plex Sans, IBM Plex Sans JP, Spline Sans, Inter, Roboto, Noto Sans, Noto Sans JP, sans-serif;
+		--font: Spline Sans ALT, IBM Plex Sans, IBM Plex Sans JP, Spline Sans, Inter, Roboto, Noto Sans, Noto Sans JP, sans-serif;
 		--font-code: Spline Sans Mono, Iosevka, JetBrains Mono, Roboto Mono, monospace;
 		--font-size: 14px;
 		--line-height: calc(var(--font-size) + 4px);
