@@ -815,14 +815,19 @@
 		order: -1;
 		margin-top: unset !important;
 		/* for the margin-top to work (see below), we need a set height for the album main panel */
-		max-height: 209px;
-		height: 209px;
+		max-height: 210px;
+		height: 210px;
 	}
 	.header-new--album + .container > .row.buffer-reset\@sm > .col-sidebar:nth-child(1) {
 		height: calc(274px - 8px);
 	}
 	.header-new--album + .container > .row.buffer-reset\@sm > .col-main:nth-child(3) {
 		margin-top: -57px !important;
+	}
+
+	.namespace--music_album_overview .col-sidebar.hidden-xs {
+		position: relative;
+		top: -57px;
 	}
 
 
@@ -880,7 +885,7 @@
 		box-shadow: var(--card-shadow) !important;
 	}
 	.album-overview-cover-art, .album-artwork-upload-cta-container {
-		margin-top: -134px !important;
+		margin-top: -190px !important;
 		border: 1px solid hsl(var(--b4));
 		border-radius: var(--card-radius);
 		overflow: hidden;
@@ -1447,6 +1452,8 @@
 		padding: 20px !important;
 		width: var(--cards-width);
 		z-index: 1;
+		margin-left: unset;
+		margin-right: unset;
 	}
 	:is(.header-new--album, .header-new--track) .header-new-content {
 		display: flex;
@@ -1454,6 +1461,13 @@
 		gap: 10px;
 		justify-content: center;
 		padding: 20px 20px 10px 20px !important; /* weird extra 10px spacing lol */
+	}
+
+	.header-new--album :is(.header-new-content, .header-new-background, .header-new-inner) {
+		width: var(--cards-main-width);
+	}
+	.header-new--album .header-new-inner {
+		right: 207px;
 	}
 
 	.header-new-background {
