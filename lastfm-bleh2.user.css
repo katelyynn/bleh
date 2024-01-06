@@ -1152,6 +1152,7 @@
 	}
 	input::placeholder {
 		opacity: 1 !important;
+		color: hsl(var(--c3)) !important;
 	}
 
 	.library-search-input {
@@ -3349,13 +3350,16 @@
 	}
 	.library-header-image img {
 		border-radius: unset;
+		mask-size: 24px;
 	}
 
 	.library-header-title {
 		font-size: var(--font-size);
 		line-height: var(--line-height);
 		font-weight: 500 !important;
-		margin: 0 0 12px 0 !important;
+		margin: 0 0 8px 0 !important;
+		position: relative;
+		top: 4px;
 	}
 
 	[href$="/+delete"] {
@@ -3381,7 +3385,7 @@
 	/* add back spacing to account for image */
 	.library-header {
 		/* 48px = image width */
-		padding-left: calc(20px + 48px + 10px);
+		padding-left: calc(20px + 48px + 12px);
 		/* spacing between metadata-list */
 		margin-bottom: var(--card-gap);
 		/* account for height */
