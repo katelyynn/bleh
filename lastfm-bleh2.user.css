@@ -2057,6 +2057,7 @@
 		--bg: transparent;
 		--bg-hov: hsla(var(--b4), 80%);
 		--shadow: none;
+		color: hsl(var(--c2));
 		background-color: var(--bg);
 		padding: 7px 12px;
 		max-height: 46px;
