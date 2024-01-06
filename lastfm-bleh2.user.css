@@ -1817,6 +1817,11 @@
 		font-weight: unset;
 	}
 
+	/* fixes overlap over dropdown due to link-block-target */
+	.header-metadata-display a {
+		z-index: 0;
+	}
+
 	.metadata-and-wiki-row .catalogue-metadata .catalogue-metadata-heading, .factbox-heading {
 		font-weight: 500;
 		color: hsl(var(--c3));
