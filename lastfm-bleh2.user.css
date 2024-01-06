@@ -2322,9 +2322,10 @@
 		order: 1;
 		/*margin: -6px 0;*/
 	}
+	/* TODO: for light theme switch these to h3 */
 	.chartlist-count-bar {
 		line-height: 22px; /* 22 */
-		background: linear-gradient(90deg, hsla(var(--h3), 30%) 7%, hsl(var(--b4)) 35%);
+		background: linear-gradient(90deg, hsla(var(--l3), 30%) 7%, hsl(var(--b4)) 35%);
 		box-shadow: var(--interact-shadow);
 		width: 220px;
 	}
@@ -2346,8 +2347,8 @@
 		border-radius: var(--item-small-radius); /* 50 */
 	}
 	.chartlist-count-bar-slug {
-		background-color: hsl(var(--h3)) !important;
-		box-shadow: 0px 0px 16px hsla(var(--h3), 50%);
+		background-color: hsl(var(--l3)) !important;
+		box-shadow: 0px 0px 16px hsla(var(--l3), 50%);
 	}
 	.chartlist-count-bar-value {
 		color: hsl(var(--ovr, var(--b7)));
