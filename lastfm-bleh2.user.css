@@ -207,7 +207,8 @@
 		--icon-plus: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImhzbCgyNTUsMjAlLDkwJSkiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1wbHVzIj48cGF0aCBkPSJNNSAxMmgxNCIvPjxwYXRoIGQ9Ik0xMiA1djE0Ii8+PC9zdmc+');
 		--icon-play: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImhzbCgyNTUsMjAlLDkwJSkiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1wbGF5Ij48cG9seWdvbiBwb2ludHM9IjUgMyAxOSAxMiA1IDIxIDUgMyIvPjwvc3ZnPg==');
 		--icon-edit: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImhzbCgyNTUsMjAlLDkwJSkiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1wZW5jaWwiPjxwYXRoIGQ9Ik0xNyAzYTIuODUgMi44MyAwIDEgMSA0IDRMNy41IDIwLjUgMiAyMmwxLjUtNS41WiIvPjxwYXRoIGQ9Im0xNSA1IDQgNCIvPjwvc3ZnPg==');
-		--icon-video: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImhzbCgyNTUsMjAlLDkwJSkiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1wbGF5LXNxdWFyZSI+PHJlY3Qgd2lkdGg9IjE4IiBoZWlnaHQ9IjE4IiB4PSIzIiB5PSIzIiByeD0iMiIvPjxwYXRoIGQ9Im05IDggNiA0LTYgNFoiLz48L3N2Zz4=');
+		--icon-video: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLXBsYXktc3F1YXJlIj48cmVjdCB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHg9IjMiIHk9IjMiIHJ4PSIyIi8+PHBhdGggZD0ibTkgOCA2IDQtNiA0WiIvPjwvc3ZnPg==');
+		--icon-photo: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWltYWdlIj48cmVjdCB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHg9IjMiIHk9IjMiIHJ4PSIyIiByeT0iMiIvPjxjaXJjbGUgY3g9IjkiIGN5PSI5IiByPSIyIi8+PHBhdGggZD0ibTIxIDE1LTMuMDg2LTMuMDg2YTIgMiAwIDAgMC0yLjgyOCAwTDYgMjEiLz48L3N2Zz4=');
 
 		/* hsl(255,20%,90%) */
 		--icon-16-play: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImhzbCgyNTUsMjAlLDkwJSkiIHN0cm9rZS13aWR0aD0iMi41IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLXBsYXkiPjxwb2x5Z29uIHBvaW50cz0iNSAzIDE5IDEyIDUgMjEgNSAzIi8+PC9zdmc+');
@@ -868,7 +869,7 @@
 
 
 	/*     VIDEO/ALBUM COVER     */
-	.track-overview-new .video-preview, .video-preview-upload-cta.link-block {
+	.track-overview-new .video-preview, .video-preview-upload-cta.link-block, .album-artwork-upload-cta-container {
 		--bg: hsl(var(--b5));
 		--bg-hov: hsla(var(--b5), 80%);
 		--bg-atv: hsla(var(--b5), 60%);
@@ -878,7 +879,7 @@
 		overflow: hidden;
 		box-shadow: var(--card-shadow) !important;
 	}
-	.album-overview-cover-art {
+	.album-overview-cover-art, .album-artwork-upload-cta-container {
 		margin-top: -134px !important;
 		border: 1px solid hsl(var(--b4));
 		border-radius: var(--card-radius);
@@ -890,21 +891,43 @@
 		margin-top: unset !important;
 	}
 
+	.album-artwork-upload-cta {
+		box-shadow: unset;
+		--bg: hsl(var(--b5)) !important;
+		--bg-hov: hsla(var(--b5), 80%) !important;
+		--bg-atv: hsla(var(--b5), 60%) !important;
+	}
+
 	.video-preview-upload-cta:before {
-		background-image: var(--icon-video);
+		background-color: hsl(var(--c3));
+		background-image: unset !important;
+		--mask: var(--icon-video);
+		mask-image: var(--mask);
+		-webkit-mask-image: var(--mask);
 		width: 24px;
 		height: 24px;
 		margin-bottom: 6px;
 	}
-	.video-preview-upload-cta.link-block {
+	.video-preview-upload-cta.link-block, .album-artwork-upload-cta.link-block {
 		font-size: 0 !important;
 		line-height: 0 !important;
 	}
-	.video-preview-upload-cta a {
+	.video-preview-upload-cta a, .album-artwork-upload-cta a {
 		font-size: var(--font-size);
 		line-height: var(--line-height);
 		color: hsl(var(--c2));
 		text-decoration: none !important;
+	}
+
+	.album-artwork-upload-cta:before {
+		background-color: hsl(var(--c3));
+		background-image: unset !important;
+		--mask: var(--icon-photo);
+		mask-image: var(--mask);
+		-webkit-mask-image: var(--mask);
+		width: 24px;
+		height: 24px;
+		margin-bottom: 6px;
 	}
 
 
@@ -2111,7 +2134,7 @@
 	/*     INFO     */
 	.chartlist-name a {
 		display: flex;
-		gap: 10px;
+		gap: 6px;
 		font-weight: var(--font-weight-medium);
 	}
 	.chartlist-name .feat, .chartlist-artist, .featured-item-artist, .artist-top-albums-item-artist, .similar-albums-item-artist, .track-similar-tracks-item-artist {
@@ -2122,6 +2145,12 @@
 	.chartlist-timestamp, .chartlist-duration {
 		font-size: calc(var(--font-size) - 1px);
 		color: hsl(var(--c3));
+		height: fit-content;
+	}
+
+	.chartlist-index {
+		height: fit-content;
+		margin-right: unset;
 	}
 
 	.chartlist-image {
@@ -2149,6 +2178,19 @@
 	.chartlist-timestamp {
 		width: 150px;
 		/*order: 1;*/
+	}
+
+
+	.chartlist--with-bar.chartlist--with-index.chartlist--with-play.chartlist--with-image.chartlist--with-loved .chartlist-row--with-artist .chartlist-artist, .chartlist--with-multi-playlinks.chartlist--with-index.chartlist--with-play.chartlist--with-image.chartlist--with-loved .chartlist-row--with-artist .chartlist-artist {
+		left: 84px;
+		margin-top: 14px;
+	}
+	.chartlist--with-bar.chartlist--with-index.chartlist--with-play.chartlist--with-image.chartlist--with-loved.chartlist--with-index--length-3 .chartlist-row--with-artist .chartlist-artist, .chartlist--with-multi-playlinks.chartlist--with-index.chartlist--with-play.chartlist--with-image.chartlist--with-loved.chartlist--with-index--length-3 .chartlist-row--with-artist .chartlist-artist {
+		left: 92px;
+		margin-top: 14px;
+	}
+	.chartlist--with-bar.chartlist--with-index.chartlist--with-play.chartlist--with-image.chartlist--with-loved.chartlist--with-index--length-4 .chartlist-row--with-artist .chartlist-artist, .chartlist--with-multi-playlinks.chartlist--with-index.chartlist--with-play.chartlist--with-image.chartlist--with-loved.chartlist--with-index--length-4 .chartlist-row--with-artist .chartlist-artist {
+		left: 103px;
 	}
 
 
@@ -2249,6 +2291,7 @@
 	.chartlist-count-bar {
 		line-height: 22px;
 		background: linear-gradient(90deg, hsla(var(--h3), 30%) 7%, hsl(var(--b4)) 35%);
+		box-shadow: var(--interact-shadow);
 	}
 	.chartlist-count-bar-link {
 		text-decoration: none !important;
@@ -2276,6 +2319,8 @@
 		font-weight: var(--font-weight-medium);
 		padding: 0 10px;
 		margin: 0 -10px;
+		position: relative;
+		top: 1px;
 	}
 
 
@@ -2618,7 +2663,7 @@
 	.section-settings-toggle,
 	.pagination-next a, .pagination-previous a, .pagination-page a, .pagination-page span,
 	.more-link a, .more-link-fullwidth-right a, .more-link-fullwidth-right-flush-top a, .inline-add-icon, .more-link-with-action a,
-	.video-preview-upload-cta,
+	.video-preview-upload-cta, .album-artwork-upload-cta,
 	.gallery-image-report--reported,
 	li.listening-report-brick, .listening-report-library-link, .listening-report-promo,
 	#ot-sdk-btn,
@@ -2666,7 +2711,7 @@
 		.section-settings-toggle,
 		.pagination-next a, .pagination-previous a, .pagination-page a, .pagination-page span,
 		.more-link a, .more-link-fullwidth-right a, .more-link-fullwidth-right-flush-top a, .inline-add-icon, .more-link-with-action a,
-		.video-preview-upload-cta,
+		.video-preview-upload-cta, .album-artwork-upload-cta,
 		.gallery-image-report--reported,
 		li.listening-report-brick, .listening-report-library-link, .listening-report-promo,
 		#ot-sdk-btn,
@@ -2692,7 +2737,7 @@
 		.section-settings-toggle,
 		.pagination-next a, .pagination-previous a, .pagination-page a, .pagination-page span,
 		.more-link a, .more-link-fullwidth-right a, .more-link-fullwidth-right-flush-top a, .inline-add-icon, .more-link-with-action a,
-		.video-preview-upload-cta,
+		.video-preview-upload-cta, .album-artwork-upload-cta,
 		.gallery-image-report--reported,
 		li.listening-report-brick, .listening-report-library-link, .listening-report-promo,
 		#ot-sdk-btn,
