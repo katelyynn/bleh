@@ -2306,16 +2306,17 @@
 	/*     COUNT BAR - brought over from bleh */
 	.chartlist-bar {
 		order: 1;
+		/*margin: -6px 0;*/
 	}
 	.chartlist-count-bar {
-		line-height: 22px;
+		line-height: 22px; /* 22 */
 		background: linear-gradient(90deg, hsla(var(--h3), 30%) 7%, hsl(var(--b4)) 35%);
 		box-shadow: var(--interact-shadow);
 		width: 220px;
 	}
 	.chartlist-count-bar-link {
 		text-decoration: none !important;
-		padding: 0 14px !important;
+		padding: 0 7px !important; /* 14 */
 		font-size: calc(var(--font-size) - 1px);
 	}
 	.chartlist-count-bar-link .stat-name {
@@ -2328,7 +2329,7 @@
 
 	.chartlist-count-bar,
 	.chartlist-count-bar-slug {
-		border-radius: 50px;
+		border-radius: var(--item-small-radius); /* 50 */
 	}
 	.chartlist-count-bar-slug {
 		background-color: hsl(var(--h3)) !important;
