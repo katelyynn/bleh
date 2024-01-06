@@ -547,9 +547,9 @@
 	.auth-avatar-notification-count-badge,
 	.notification-count-badge {
 		border-radius: 50px;
-		background-color: hsl(var(--l3-c));
+		background-color: hsl(var(--h3));
 		color: hsl(var(--b7)) !important;
-		box-shadow: 0px 0 60px 20px hsla(var(--l3-c), 45%) !important;
+		box-shadow: 0px 0 60px 20px hsla(var(--h3), 45%) !important;
 		border: 2px solid hsl(var(--b4));
 		font-weight: 700;
 	}
@@ -2144,12 +2144,13 @@
 	}
 	.chartlist-timestamp {
 		width: 150px;
+		/*order: 1;*/
 	}
 
 
 	/*     LOVED - brought over from bleh     */
 	.chartlist-loved {
-		order: -2;
+		order: 1;
 		position: relative;
 		left: 1px;
 	}
@@ -2179,7 +2180,7 @@
 	}
 
 	[data-toggle-button-current-state="unloved"] .chartlist-love-button:not(:hover):before {
-		background-color: hsl(var(--c2)) !important;
+		background-color: hsl(var(--c3)) !important;
 	}
 	[data-toggle-button-current-state="loved"] .chartlist-love-button:after,
 	a.chartlist-love-button:after {
@@ -2238,6 +2239,9 @@
 
 
 	/*     COUNT BAR - brought over from bleh */
+	.chartlist-bar {
+		order: 1;
+	}
 	.chartlist-count-bar {
 		line-height: 22px;
 		background: linear-gradient(90deg, hsla(var(--h3), 30%) 7%, hsl(var(--b4)) 35%);
@@ -3723,6 +3727,10 @@
 
 
 	/*     NAV     */
+	.pagination-list {
+		cursor: default;
+	}
+
 	.pagination-page {
 		box-shadow: unset !important;
 	}
@@ -3737,6 +3745,7 @@
 		--bg-hov: hsla(var(--l4), 40%) !important;
 		--bg-atv: hsla(var(--l4), 60%) !important;
 		--shadow: none;
+		cursor: default;
 	}
 
 	.pagination-previous a:before {
