@@ -142,7 +142,7 @@
 
             for (let name in names) {
                 if (names[name].getAttribute('data-kate') != 'true') {
-                    let raw = names[name].innerHTML;
+                    let raw = names[name].textContent;
                     let name_include = name_includes(raw, true);
 
                     let text = name_include[0];
@@ -164,7 +164,7 @@
             let name = document.querySelector('.header-new-title');
 
             if (name.getAttribute('data-kate') != 'true') {
-                let raw = name.innerHTML;
+                let raw = name.textContent;
                 let name_include = name_includes(raw, true);
 
                 let text = name_include[0];
@@ -186,7 +186,7 @@
 
             for (let name in names) {
                 if (names[name].getAttribute('data-kate') != 'true') {
-                    let raw = names[name].innerHTML;
+                    let raw = names[name].textContent;
                     let name_include = name_includes(raw, true);
 
                     let text = name_include[0];
@@ -209,7 +209,7 @@
 
             for (let name in names) {
                 if (names[name].getAttribute('data-kate') != 'true') {
-                    let raw = names[name].innerHTML;
+                    let raw = names[name].textContent;
                     let name_include = name_includes(raw, true);
 
                     let text = name_include[0];
