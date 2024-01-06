@@ -121,7 +121,8 @@
 	.user-dashboard--monthly, .user-dashboard--yearly,
 	.alert,
 	.play-this-track-playlink, .resource-external-link,
-	.chartlist-row--now-scrobbling
+	.chartlist-row--now-scrobbling,
+	a
 	{
 		--c1: var(--hue), calc(var(--sat) * 40%), 100%;
 		--c2: var(--hue), calc(var(--sat) * 60%), 90%;
@@ -716,7 +717,8 @@
 	.shoutbox--with-header#shoutbox,
 	.header-featured-track,
 	:is(.namespace--user_following, .namespace--user_followers) :is(.col-main, .col-sidebar),
-	.namespace--user_library_overview .col-sidebar, .namespace--user_library_artists .col-sidebar, .namespace--user_library_albums .col-sidebar, .namespace--user_library_tracks .col-sidebar,
+	/* individual library selection */
+	body[class*="namespace--user_library_"] .col-sidebar, .library-header,
 	.page-content:has(.inbox-notifications),
 	/* gallery */ .js-gallery-image-details,
 	/* send a message box */ .header--overview:not(:has(.header-featured-track)):has(.header-message-user) + .adaptive-skin-container .col-sidebar:before,
@@ -3320,8 +3322,46 @@
 		margin-top: 12px !important;
 	}
 
-	.col-sidebar:has(.scrobble-chart) {
+	:is(.namespace--user_library_overview, .namespace--user_library_artists, .namespace--user_library_albums, .namespace--user_library_tracks) .col-sidebar {
 		--force-margin-top: 22px;
+	}
+
+
+	/*     HEADER     */
+	.library-header-image {
+		left: 20px;
+		top: 20px;
+		border: 1px solid hsl(var(--b4));
+		background-color: hsl(var(--b5));
+		border-radius: var(--item-small-radius);
+		box-shadow: var(--card-shadow);
+		overflow: hidden;
+	}
+	.library-header-image img {
+		border-radius: unset;
+	}
+
+	.library-header-title {
+		font-size: var(--font-size);
+		line-height: var(--line-height);
+		font-weight: 500 !important;
+		margin: 0 0 12px 0 !important;
+	}
+
+	[href$="/+delete"] {
+		--hue: -2;
+		--sat: 1;
+		--lit: 1;
+	}
+
+	/* add back spacing to account for image */
+	.library-header {
+		/* 48px = image width */
+		padding-left: calc(20px + 48px + 10px);
+		/* spacing between metadata-list */
+		margin-bottom: var(--card-gap);
+		/* account for height */
+		height: calc(20px + 48px + 20px);
 	}
 
 
