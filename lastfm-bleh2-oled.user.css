@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           bleh2 (oled)
 @namespace      github.com/katelyynn/bleh
-@version        2023.1231
+@version        2024.0106
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelyynn/bleh/raw/uwu/lastfm-bleh2-oled.user.css
@@ -9,12 +9,12 @@
 ==/UserStyle== */
 
 @-moz-document domain("plexion.dev") {
-	body {--bleh2-oled-ver: 2023.1231 }
+	body {--bleh2-oled-ver: 2024.0106 }
 }
 
 @-moz-document domain("last.fm") {
     /* backgrounds */
-	:root, [data-page-resource-type="album"],
+	:root, [data-page-resource-type="album"], [data-page-resource-type="track"],
 	.gallery-image-buttons button, .gallery-image-preferred-button,
 	.vote-button--voted
 	{
@@ -30,7 +30,24 @@
 	}
 
 	/* text */
-	:root
+	:root, [data-page-resource-type="album"], [data-page-resource-type="track"],
+	.tasteometer-compat-colour,
+	.dropdown-menu-clickable-item, .auth-dropdown-menu-item,
+	.gallery-image-buttons button, .gallery-image-preferred-button,
+	.vote-button--voted,
+	button, .btn-primary, .gallery-image-report,
+	.gallery-image-preferred-states::before,
+	.masthead-logo a,
+	body:after,
+	.listening-report-brick--combo .tag-label,
+	.listening-report-promo--year,
+	.highcharts-point, .user-dashboard-legend-item::before, stop,
+	.user-dashboard--monthly, .user-dashboard--yearly,
+	.alert,
+	.play-this-track-playlink, .resource-external-link,
+	.chartlist-row--now-scrobbling,
+	a,
+	.obsession-history-item-inner
 	{
 		--c1: var(--hue), calc(var(--sat) * 40%), 100%;
 		--c2: var(--hue), calc(var(--sat) * 60%), 90%;
