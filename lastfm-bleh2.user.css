@@ -3476,6 +3476,8 @@
 	{
 		background-image: unset !important;
 		--mask: var(--icon-16-arrow-up);
+		mask-image: var(--mask);
+		-webkit-mask-image: var(--mask);
 		background-color: currentColor;
 	}
 	.gallery-image-vote-up-on .gallery-image-votes::before,
@@ -3483,6 +3485,8 @@
 	{
 		background-image: unset !important;
 		--mask: var(--icon-16-arrow-up);
+		mask-image: var(--mask);
+		-webkit-mask-image: var(--mask);
 		background-position: 0 0;
 		background-color: currentColor;
 	}
@@ -3491,11 +3495,15 @@
 	.gallery-image-vote-down-off .gallery-image-votes::before {
 		background-image: unset !important;
 		--mask: var(--icon-16-arrow-down);
+		mask-image: var(--mask);
+		-webkit-mask-image: var(--mask);
 		background-color: currentColor;
 	}
 	.gallery-image-vote-down-on .gallery-image-votes::before {
 		background-image: unset !important;
 		--mask: var(--icon-16-arrow-down);
+		mask-image: var(--mask);
+		-webkit-mask-image: var(--mask);
 		background-color: currentColor;
 	}
 
@@ -3503,6 +3511,8 @@
 	.gallery-image-preferred-off .gallery-image-preferred-states::before {
 		background-image: unset !important;
 		--mask: var(--icon-16-star);
+		mask-image: var(--mask);
+		-webkit-mask-image: var(--mask);
 		background-color: hsl(var(--l3));
 		--hue: 15;
 		--sat: 1;
@@ -3512,6 +3522,8 @@
 	.gallery-image-preferred-on .gallery-image-preferred-states::before {
 		background-image: unset !important;
 		--mask: var(--icon-16-star);
+		mask-image: var(--mask);
+		-webkit-mask-image: var(--mask);
 		background-color: hsl(var(--b7));
 	}
 
@@ -3668,6 +3680,8 @@
 		left: calc(50% - 8px) !important;
 		background-image: unset !important;
 		--mask: var(--icon-16-report) !important;
+		mask-image: var(--mask);
+		-webkit-mask-image: var(--mask);
 		background-color: hsl(var(--l3)) !important;
 	}
 	.gallery-image-report--reported:before {
