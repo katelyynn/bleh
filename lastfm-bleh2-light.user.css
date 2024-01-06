@@ -53,11 +53,14 @@
 		--c3: var(--hue), calc(var(--sat) * 10%), 30%;
 		--ov-c1: var(--hue), calc(var(--sat) * 40%), 100%;
 
-		--l3: var(--hue), calc(var(--sat) * 50%), calc(var(--lit) * 65%);
-		--l4: var(--hue), calc(var(--sat) * 60%), calc(var(--lit) * 35%);
+		--l3: var(--hue), calc(var(--sat) * 50%), calc(var(--lit) * 55%);
+		--l4: var(--hue), calc(var(--sat) * 60%), calc(var(--lit) * 25%);
 
-		--l3-c: var(--hue), calc(var(--sat) * 50%), calc(clamp(min(0.5), var(--lit), max(1.5)) * 65%);
-		--l4-c: var(--hue), calc(var(--sat) * 60%), calc(clamp(min(0.5), var(--lit), max(1.5)) * 35%);
+		--l3-c: var(--hue), calc(var(--sat) * 50%), calc(clamp(min(0.5), var(--lit), max(1.5)) * 55%);
+		--l4-c: var(--hue), calc(var(--sat) * 60%), calc(clamp(min(0.5), var(--lit), max(1.5)) * 25%);
+
+		--h3: var(--hue), calc(var(--sat) * 50%), calc(clamp(min(0.5), var(--lit), max(1.5)) * 80%);
+		--h4: var(--hue), calc(var(--sat) * 60%), calc(clamp(min(0.5), var(--lit), max(1.5)) * 50%);
 	}
 
 	/* attributes */

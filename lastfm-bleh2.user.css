@@ -154,6 +154,10 @@
 		--l3-c: var(--hue), calc(var(--sat) * 60%), calc(clamp(min(0.5), var(--lit), max(1.5)) * 70%);
 		--l4-c: var(--hue), calc(var(--sat) * 70%), calc(clamp(min(0.5), var(--lit), max(1.5)) * 50%);
 
+		--h2: var(--l2-c);
+		--h3: var(--l3-c);
+		--h4: var(--l4-c);
+
 		--icon: var(--c2);
 	}
 
@@ -2236,7 +2240,7 @@
 	/*     COUNT BAR - brought over from bleh */
 	.chartlist-count-bar {
 		line-height: 22px;
-		background: linear-gradient(90deg, hsla(var(--l3), 30%) 7%, hsl(var(--b4)) 35%);
+		background: linear-gradient(90deg, hsla(var(--h3), 30%) 7%, hsl(var(--b4)) 35%);
 	}
 	.chartlist-count-bar-link {
 		text-decoration: none !important;
@@ -2256,8 +2260,8 @@
 		border-radius: 50px;
 	}
 	.chartlist-count-bar-slug {
-		background-color: hsl(var(--l3)) !important;
-		box-shadow: 0px 0px 16px hsla(var(--l3), 50%);
+		background-color: hsl(var(--h3)) !important;
+		box-shadow: 0px 0px 16px hsla(var(--h3), 50%);
 	}
 	.chartlist-count-bar-value {
 		color: hsl(var(--ovr, var(--b7)));
@@ -2700,9 +2704,9 @@
 	.inbox-delete-button:not([disabled]),
 	.gallery-image-report--reported
 	{
-		--bg: hsl(var(--l3));
-		--bg-hov: hsla(var(--l3), 80%);
-		--bg-atv: hsla(var(--l3), 60%);
+		--bg: hsl(var(--h3));
+		--bg-hov: hsla(var(--h3), 80%);
+		--bg-atv: hsla(var(--h3), 60%);
 		--col: hsl(var(--ovr, var(--b7)));
 	}
 
