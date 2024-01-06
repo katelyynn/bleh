@@ -5038,6 +5038,29 @@
 
 
 
+	/*     TAG PAGE     */
+	.header--tag .header-info {
+		position: relative;
+	}
+	.header--tag .header-info .secondary-nav {
+		bottom: unset !important;
+		top: 39px;
+	}
+
+	.header--tag .header-info-primary {
+		padding-top: unset;
+	}
+	.header--tag .header-info-primary .header-title {
+		text-transform: lowercase;
+	}
+
+	.recommended-next-page-container {
+		display: none;
+	}
+
+
+
+
 	/*     UNDER CONSTRUCTION     */
 	body:is(.namespace--user_obsessions_obsession, [class*="namespace--user_playlist"], [class*="events"], [class*="namespace--settings"], [class*="namespace--music_bookmarks"], .music-landing-overview, [class*="namespace--charts"]):after {
 		position: fixed;
