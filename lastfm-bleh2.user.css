@@ -1463,10 +1463,10 @@
 		padding: 20px 20px 10px 20px !important; /* weird extra 10px spacing lol */
 	}
 
-	.header-new--album :is(.header-new-content, .header-new-background, .header-new-inner) {
+	.namespace--music_album_overview :is(.header-new-content, .header-new-background, .header-new-inner) {
 		width: var(--cards-main-width);
 	}
-	.header-new--album .header-new-inner {
+	.namespace--music_album_overview .header-new-inner {
 		right: 207px;
 	}
 
