@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           bleh2 (themed album covers)
 @namespace      github.com/katelyynn/bleh
-@version        2023.0922
+@version        2024.0106
 @license        GPL-3.0
 @description    matches accent colours to albums
 @author         kate
@@ -9,7 +9,7 @@
 ==/UserStyle== */
 
 @-moz-document domain("plexion.dev") {
-	body {--accent-ver: 2024.0105}
+	body {--accent-ver: 2024.0106}
 }
 
 @-moz-document domain("last.fm") {
@@ -316,6 +316,13 @@
 		--hue: 194;
 		--sat: 0.4;
 		--lit: 0.6;
+	}
+
+	[data-page-resource-name="lazy study"][data-page-resource-artist-name="Miraie"], :is(.chartlist-row--now-scrobbling, [class*="namespace--user_library_music_album"] .row):has(a[href*="/music/Miraie/lazy+study"])
+	{
+		--hue: 217;
+		--sat: 0.8;
+		--lit: 0.8;
 	}
 
 	[data-page-resource-name*="The Light"][data-page-resource-artist-name="Juice WRLD"], :is(.chartlist-row--now-scrobbling, [class*="namespace--user_library_music_album"] .row):has(a[href*="/music/Juice+WRLD/The+Light"])

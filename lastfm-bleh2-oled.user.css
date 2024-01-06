@@ -58,5 +58,11 @@
 
 		--l3-c: var(--hue), calc(var(--sat) * 50%), calc(clamp(min(0.5), var(--lit), max(1.5)) * 70%);
 		--l4-c: var(--hue), calc(var(--sat) * 60%), calc(clamp(min(0.5), var(--lit), max(1.5)) * 45%);
+
+		--h2: var(--l2-c);
+		--h3: var(--l3-c);
+		--h4: var(--l4-c);
+
+		--icon: var(--c2);
 	}
 }

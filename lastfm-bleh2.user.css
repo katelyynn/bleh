@@ -1488,6 +1488,16 @@
 		z-index: 0;
 	}
 
+	header:is(.header-new--album, .header-new--track) .header-new-inner {
+		background: hsl(var(--h4)) !important;
+	}
+	header:is(.header-new--album, .header-new--track) .header-new-background-overlay {
+		background: hsl(var(--h4)) !important;
+		--mask: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(0,0,0,0) 100%);
+		mask-image: var(--mask);
+		-webkit-mask-image: var(--mask);
+	}
+
 	.header-new-title {
 		font-size: 32px;
 		letter-spacing: unset;
@@ -2098,8 +2108,8 @@
 		--shadow: none;
 		color: hsl(var(--c2));
 		background-color: var(--bg);
-		padding: 7px 12px;
-		max-height: 46px;
+		padding: 5px 12px;
+		max-height: 44px;
 		border-radius: var(--item-small-radius);
 		/*transition-property: background-color;
 		transition-duration: var(--trans);
@@ -2158,7 +2168,8 @@
 
 	.chartlist-index {
 		height: fit-content;
-		margin-right: unset;
+		color: hsl(var(--c3));
+		text-align: right;
 	}
 
 	.chartlist-image {
@@ -3373,7 +3384,7 @@
 		padding-left: unset;
 		padding-right: unset;
 	}
-	.content-form .form-horizontal .form-group-controls {
+	.content-form .form-horizontal .form-group-controls:not(:has(.btn-file-label)) {
 		width: 350px;
 		padding-left: var(--card-gap);
 		padding-right: unset;
@@ -3382,6 +3393,24 @@
 	}
 	.modal-body .content-form .form-horizontal .form-group-controls {
 		width: 410px;
+	}
+
+	.content-form .form-horizontal .form-group-controls {
+		margin-left: 150px;
+	}
+	.gallery-upload-rules {
+		background-color: hsla(var(--h4), 15%);
+		border-radius: var(--item-med-radius);
+		padding: 7px 12px;
+	}
+	.gallery-upload-rules h3 {
+		font-size: var(--font-size);
+		line-height: var(--line-height);
+		font-weight: 500;
+		color: hsl(var(--l3-c));
+	}
+	.gallery-upload-rules p, .gallery-upload-rules p + p, .gallery-upload-rules ul {
+		margin-top: 4px;
 	}
 
 	.form-group--create_automatic_edit_rule .form-group-controls {
