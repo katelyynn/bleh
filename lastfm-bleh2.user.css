@@ -983,7 +983,7 @@
 	/*     TAGS     */
 	.tags-list, .catalogue-tags {
 		display: flex !important;
-		gap: 2px;
+		gap: 6px;
 		margin: unset;
 	}
 	.catalogue-tags .tag {
@@ -2297,6 +2297,7 @@
 		line-height: 22px;
 		background: linear-gradient(90deg, hsla(var(--h3), 30%) 7%, hsl(var(--b4)) 35%);
 		box-shadow: var(--interact-shadow);
+		width: 220px;
 	}
 	.chartlist-count-bar-link {
 		text-decoration: none !important;
@@ -2321,7 +2322,7 @@
 	}
 	.chartlist-count-bar-value {
 		color: hsl(var(--ovr, var(--b7)));
-		font-weight: var(--font-weight-medium);
+		font-weight: 600;
 		padding: 0 10px;
 		margin: 0 -10px;
 		position: relative;
