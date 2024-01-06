@@ -2284,7 +2284,7 @@
 	.shout-actions {
 		margin-top: 4px;
 		margin-bottom: unset;
-		margin-left: 135px;
+		margin-left: 145px;
 		transition-property: opacity;
 		transition-duration: var(--trans);
 		transition-timing-function: var(--trans-function);
@@ -2305,7 +2305,7 @@
 		--force-font-weight: 400;
 	}
 	.shout-reply, .shout button:not(.dropdown-menu-clickable-item, .shout-more-actions) {
-		font-size: calc(var(--font-size) - 1px) !important;
+		--font-size: 13px !important;
 	}
 	.shout-reply, .shout button:not(.vote-button--voted, .dropdown-menu-clickable-item) {
 		--bg: transparent !important;
