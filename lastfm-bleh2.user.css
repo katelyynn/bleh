@@ -623,7 +623,7 @@
 		--bg: transparent !important;
 		--bg-hov: hsla(var(--b5), 60%) !important;
 		--bg-atv: hsla(var(--b5), 80%) !important;
-		--shadow: unset;
+		--shadow: none;
 	}
 	#ot-sdk-btn:not(:hover) {
 		opacity: 0;
@@ -1209,7 +1209,7 @@
 		--bg-hov: transparent;
 		--bg-atv: transparent;
 		--col: hsla(var(--c2), 85%);
-		--shadow: unset;
+		--shadow: none;
 	}
 	.secondary-nav-item-link--active {
 		color: hsl(var(--c1)) !important;
@@ -1854,7 +1854,7 @@
 		--bg: transparent !important;
 		--bg-hov: hsla(var(--b4), 40%) !important;
 		--bg-atv: hsla(var(--b4), 60%) !important;
-		--shadow: unset;
+		--shadow: none;
 	}
 
 
@@ -2032,7 +2032,7 @@
 	.chartlist-row {
 		--bg: transparent;
 		--bg-hov: hsla(var(--b4), 80%);
-		--shadow: unset;
+		--shadow: none;
 		background-color: var(--bg);
 		padding: 7px 12px;
 		max-height: 46px;
@@ -2300,7 +2300,7 @@
 		--bg: transparent !important;
 		--bg-hov: hsla(var(--b4), 40%) !important;
 		--bg-atv: hsla(var(--b4), 60%) !important;
-		--shadow: unset;
+		--shadow: none;
 	}
 	.vote-button--voted {
 		--col: hsl(var(--l3-c));
@@ -2660,7 +2660,7 @@
 		--bg: transparent;
 		--bg-hov: transparent;
 		--bg-atv: transparent;
-		--shadow: unset;
+		--shadow: none;
 	}
 
 
@@ -2828,7 +2828,7 @@
 		--bg: transparent;
 		--bg-hov: hsla(var(--b3), 30%);
 		--bg-atv: hsla(var(--b3), 50%);
-		--shadow: unset;
+		--shadow: none;
 	}
 
 
@@ -2989,7 +2989,7 @@
 		--bg: transparent;
 		--bg-hov: hsla(var(--b4), 30%);
 		--bg-atv: hsla(var(--b4), 50%);
-		--shadow: unset;
+		--shadow: none;
 		position: relative !important;
 		min-width: 170px !important;
 		--sat: 1;
@@ -3590,13 +3590,13 @@
 		--bg: transparent !important;
 		--bg-hov: hsla(var(--l4), 10%) !important;
 		--bg-atv: hsla(var(--l4), 30%) !important;
-		--shadow: unset;
+		--shadow: none;
 	}
 	.pagination-page[aria-current="page"] span {
 		--bg: hsla(var(--l4), 20%) !important;
 		--bg-hov: hsla(var(--l4), 40%) !important;
 		--bg-atv: hsla(var(--l4), 60%) !important;
-		--shadow: unset;
+		--shadow: none;
 	}
 
 	.pagination-previous a:before {
@@ -3708,7 +3708,7 @@
 	.listening-report-brick--combo .listening-report-brick-inner {
 		margin: 0 -12px;
 		--bg: transparent;
-		--shadow: unset;
+		--shadow: none;
 	}
 	.listening-report-brick--combo .listening-report-brick-inner:not(:last-child) {
 		margin-bottom: 4px;
@@ -4510,7 +4510,7 @@
 	.user-list-item:not(:hover) [data-toggle-button-current-state="followed"] .user-list-follower-btn {
 		--bg: transparent;
 		--col: hsl(var(--b3));
-		--shadow: unset;
+		--shadow: none;
 	}
 
 	.user-list-name a {
@@ -4668,7 +4668,7 @@
 		--bg: transparent;
 		--bg-hov: hsla(var(--b4), 50%);
 		--bg-atv: hsla(var(--b4), 70%);
-		--shadow: unset;
+		--shadow: none;
 		--col: hsl(var(--l3-c));
 		--hue: -2;
 		--sat: 1;
