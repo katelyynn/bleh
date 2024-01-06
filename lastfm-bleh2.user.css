@@ -4954,7 +4954,7 @@
 		transition-timing-function: ease 0.3s;
 	}
 	#ignorelist > div.form-horizontal .form-group-controls:hover {
-		max-height: 900px;
+		max-height: 6000px;
 		opacity: 1;
 	}
 	.content-form.ignore-list-form .ignore-list {

@@ -679,9 +679,9 @@
 	[data-page-resource-name="deepfake"][data-page-resource-artist-name="brakence"],
 	[data-page-resource-name*="ntrovert"][data-page-resource-artist-name="brakence"]
 	{
-		--hue: 35;
-		--sat: 1.24;
-		--lit: 0.96;
+		--hue: 49;
+		--sat: 1;
+		--lit: 0.9;
 	}
 
 	/* Nirvana - Live at Reading (Album) */
@@ -704,9 +704,9 @@
 	[data-page-resource-name="venus fly trap"][data-page-resource-artist-name="brakence"], :is(.chartlist-row--now-scrobbling, [class*="namespace--user_library_music_album"] .row):has(a[href*="/music/brakence/venus+fly+trap"]),
 	[data-page-resource-name="cbd"][data-page-resource-artist-name="brakence"], :is(.chartlist-row--now-scrobbling, [class*="namespace--user_library_music_album"] .row):has(a[href*="/music/brakence/cbd"])
 	{
-		--hue: 51;
-		--sat: 0.6;
-		--lit: 0.6;
+		--hue: 44;
+		--sat: 0.5;
+		--lit: 0.8;
 	}
 
 	/* Shoebill - hikikomori days (Album) */
