@@ -4440,6 +4440,8 @@
 		background-image: unset;
 		background-color: currentColor;
 		--mask: var(--icon-16-redirect);
+		mask-image: var(--mask);
+		-webkit-mask-image: var(--mask);
 	}
 
 
