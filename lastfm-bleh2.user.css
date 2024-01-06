@@ -1989,6 +1989,8 @@
 	}
 	.grid-items-item-aux-text {
 		opacity: 0.8;
+		z-index: 10;
+		position: relative;
 	}
 	.grid-items-item-details {
 		font-size: var(--font-size);
@@ -2040,9 +2042,9 @@
 		padding: 7px 12px;
 		max-height: 46px;
 		border-radius: var(--item-small-radius);
-		transition-property: background-color;
+		/*transition-property: background-color;
 		transition-duration: var(--trans);
-		transition-timing-function: var(--trans-function);
+		transition-timing-function: var(--trans-function);*/
 	}
 
 
@@ -2065,6 +2067,13 @@
 	.chartlist-row--now-scrobbling {
 		--bg: hsla(var(--l4), 30%) !important;
 		--bg-hov: hsla(var(--l4), 45%) !important;
+	}
+
+
+	/*     YOU!     */
+	.chartlist-row--highlight {
+		--bg: hsla(var(--l4), 15%) !important;
+		--bg-hov: hsla(var(--l4), 20%) !important;
 	}
 
 
