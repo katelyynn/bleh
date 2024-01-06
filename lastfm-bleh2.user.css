@@ -957,7 +957,7 @@
 		margin: unset;
 	}
 	.catalogue-tags .tag a, .catalogue-tags .tags-add-cta {
-		box-shadow: unset !important;
+		box-shadow: var(--interact-shadow) !important;
 		color: hsl(var(--c3)) !important;
 		background-color: hsl(var(--b4));
 		border-radius: 50px;
@@ -1473,7 +1473,7 @@
 		height: 38px;
 	}
 	.header-new-title .feat {
-		color: rgba(255,255,255, 0.8);
+		color: hsla(var(--c1), 0.8);
 		font-weight: var(--font-weight-medium);
 		font-size: 24px;
 	}
@@ -1483,7 +1483,7 @@
 	}
 
 	span[itemprop="byArtist"] .header-new-crumb {
-		color: rgba(255,255,255, 0.8);
+		color: hsla(var(--c1), 0.8);
 		opacity: unset;
 		font-size: 24px;
 		font-weight: var(--font-weight-medium);
@@ -1765,6 +1765,7 @@
 		gap: 10px;
 		height: 32px;
 		margin: unset !important;
+		box-shadow: var(--interact-shadow);
 	}
 	.personal-stats-inner .header-metadata-item, .header-metadata-tnew-item {
 		background-color: hsl(var(--b4));
