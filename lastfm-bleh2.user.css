@@ -2146,6 +2146,9 @@
 		color: hsla(var(--c2), 80%);
 		font-weight: var(--font-weight);
 	}
+	.chartlist-name .feat:is([data-type$="demo"], [data-type$="20"], [data-type$="19"]) {
+		color: hsl(var(--c3));
+	}
 
 	.chartlist-timestamp, .chartlist-duration {
 		font-size: calc(var(--font-size) - 1px);
