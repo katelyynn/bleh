@@ -165,6 +165,8 @@
 		--menu-shadow: 2px 2px 24px 0 hsla(var(--b7), 0.35), 3px 6px 48px 16px hsla(var(--b7), 0.25);
 
 		--noise: url('https://plexion.dev/img/noise.png');
+
+		--interact-shadow: hsla(var(--b7), 0.1) 0 2px 4px 0;
 	}
 
 	/* icons */
@@ -621,6 +623,7 @@
 		--bg: transparent !important;
 		--bg-hov: hsla(var(--b5), 60%) !important;
 		--bg-atv: hsla(var(--b5), 80%) !important;
+		--shadow: unset;
 	}
 	#ot-sdk-btn:not(:hover) {
 		opacity: 0;
@@ -1206,6 +1209,7 @@
 		--bg-hov: transparent;
 		--bg-atv: transparent;
 		--col: hsla(var(--c2), 85%);
+		--shadow: unset;
 	}
 	.secondary-nav-item-link--active {
 		color: hsl(var(--c1)) !important;
@@ -1850,6 +1854,7 @@
 		--bg: transparent !important;
 		--bg-hov: hsla(var(--b4), 40%) !important;
 		--bg-atv: hsla(var(--b4), 60%) !important;
+		--shadow: unset;
 	}
 
 
@@ -2027,6 +2032,7 @@
 	.chartlist-row {
 		--bg: transparent;
 		--bg-hov: hsla(var(--b4), 80%);
+		--shadow: unset;
 		background-color: var(--bg);
 		padding: 7px 12px;
 		max-height: 46px;
@@ -2294,6 +2300,7 @@
 		--bg: transparent !important;
 		--bg-hov: hsla(var(--b4), 40%) !important;
 		--bg-atv: hsla(var(--b4), 60%) !important;
+		--shadow: unset;
 	}
 	.vote-button--voted {
 		--col: hsl(var(--l3-c));
@@ -2566,7 +2573,7 @@
 		font-size: var(--font-size) !important;
 		font-weight: var(--force-font-weight, var(--font-weight-medium)) !important;
 		border-radius: var(--radius, var(--item-med-radius)) !important;
-		box-shadow: var(--shadow, unset) !important;
+		box-shadow: var(--shadow, var(--interact-shadow)) !important;
 		border: unset !important;
 		text-decoration: none !important;
 		transition-property: background-color, transform, box-shadow, color, opacity !important;
@@ -2653,6 +2660,7 @@
 		--bg: transparent;
 		--bg-hov: transparent;
 		--bg-atv: transparent;
+		--shadow: unset;
 	}
 
 
@@ -2820,6 +2828,7 @@
 		--bg: transparent;
 		--bg-hov: hsla(var(--b3), 30%);
 		--bg-atv: hsla(var(--b3), 50%);
+		--shadow: unset;
 	}
 
 
@@ -2980,6 +2989,7 @@
 		--bg: transparent;
 		--bg-hov: hsla(var(--b4), 30%);
 		--bg-atv: hsla(var(--b4), 50%);
+		--shadow: unset;
 		position: relative !important;
 		min-width: 170px !important;
 		--sat: 1;
@@ -3580,11 +3590,13 @@
 		--bg: transparent !important;
 		--bg-hov: hsla(var(--l4), 10%) !important;
 		--bg-atv: hsla(var(--l4), 30%) !important;
+		--shadow: unset;
 	}
 	.pagination-page[aria-current="page"] span {
 		--bg: hsla(var(--l4), 20%) !important;
 		--bg-hov: hsla(var(--l4), 40%) !important;
 		--bg-atv: hsla(var(--l4), 60%) !important;
+		--shadow: unset;
 	}
 
 	.pagination-previous a:before {
@@ -3696,6 +3708,7 @@
 	.listening-report-brick--combo .listening-report-brick-inner {
 		margin: 0 -12px;
 		--bg: transparent;
+		--shadow: unset;
 	}
 	.listening-report-brick--combo .listening-report-brick-inner:not(:last-child) {
 		margin-bottom: 4px;
@@ -4224,6 +4237,11 @@
 		border: 1px solid hsl(var(--b4));
 		overflow: hidden;
 	}
+
+	:is(.resource-list--release-list-item-image, .artist-top-albums-item-image, .similar-albums-item-image) img {
+		mask-size: 84px;
+	}
+
 	.resource-list--release-list-item-wrap, .artist-top-albums-item-wrap, .similar-albums-item-wrap {
 		padding-left: 4px;
 		padding-right: 4px;
@@ -4268,7 +4286,7 @@
 		text-decoration: none !important;
 	}
 
-	.resource-list--release-list-item-playlink, .similar-albums-item-playlink, .track-similar-tracks-item-playlink {
+	.resource-list--release-list-item-playlink, .similar-albums-item-playlink, .track-similar-tracks-item-playlink, .artist-top-albums-item-playlink {
 		display: none;
 	}
 
@@ -4492,6 +4510,7 @@
 	.user-list-item:not(:hover) [data-toggle-button-current-state="followed"] .user-list-follower-btn {
 		--bg: transparent;
 		--col: hsl(var(--b3));
+		--shadow: unset;
 	}
 
 	.user-list-name a {
@@ -4649,6 +4668,7 @@
 		--bg: transparent;
 		--bg-hov: hsla(var(--b4), 50%);
 		--bg-atv: hsla(var(--b4), 70%);
+		--shadow: unset;
 		--col: hsl(var(--l3-c));
 		--hue: -2;
 		--sat: 1;
