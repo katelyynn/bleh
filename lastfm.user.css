@@ -7936,7 +7936,7 @@
 		font-weight: var(--theme-font-weight-bold);
 	}
 	.homefeed .col-main:before {
-		content: 'hai! bleh2 is now in beta (a complete rewrite) - find the beta at plexion.dev/bleh/fm/bleh2';
+		content: 'hai! bleh2 is now in beta (a complete rewrite) - find the beta at plexion.dev/lfm';
 		font-size: 16px;
 		line-height: 24px;
 	}
@@ -7945,7 +7945,7 @@
 
 	/* bleh2 */
 	body:before {
-		content: 'Try out the bleh2 beta at plexion.dev/bleh/fm/bleh2';
+		content: 'Try out the bleh2 beta at plexion.dev/lfm';
 		position: fixed;
 		bottom: 10px;
 		left: 10px;
@@ -7965,7 +7965,7 @@
 		position: relative;
 	}
 	.listening-report-top:after {
-		content: 'Your listening report will look MUCH better in bleh2, get the beta here (for your own sake at least): plexion.dev/bleh/fm/bleh2';
+		content: 'Your listening report will look MUCH better in bleh2, get the beta here (for your own sake at least): plexion.dev/lfm';
 		position: absolute;
 		top: 100px;
 		left: 10px;
