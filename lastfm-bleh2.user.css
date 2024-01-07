@@ -817,19 +817,19 @@
 		order: -1;
 		margin-top: unset !important;
 		/* for the margin-top to work (see below), we need a set height for the album main panel */
-		max-height: 210px;
-		height: 210px;
+		max-height: 214px;
+		height: 214px;
 	}
 	.header-new--album + .container > .row.buffer-reset\@sm > .col-sidebar:nth-child(1) {
 		height: calc(274px - 8px);
 	}
 	.header-new--album + .container > .row.buffer-reset\@sm > .col-main:nth-child(3) {
-		margin-top: -56px !important;
+		margin-top: -52px !important;
 	}
 
 	.namespace--music_album_overview .col-sidebar.hidden-xs {
 		position: relative;
-		top: -56px;
+		top: -52px;
 	}
 
 
@@ -887,7 +887,7 @@
 		box-shadow: var(--card-shadow) !important;
 	}
 	.album-overview-cover-art, .album-artwork-upload-cta-container {
-		margin-top: -190px !important;
+		margin-top: -186px !important;
 		border: 1px solid hsl(var(--b4));
 		border-radius: var(--card-radius);
 		overflow: hidden;
