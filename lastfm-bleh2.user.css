@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           bleh2
 @namespace      github.com/katelyynn/bleh
-@version        2024.0106
+@version        2024.0107
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelyynn/bleh/raw/uwu/lastfm-bleh2.user.css
@@ -9,7 +9,7 @@
 ==/UserStyle== */
 
 @-moz-document domain("localhost") {
-	body                     {--bleh2-ver: 2024.0106} .installed2-only, .btn-installed2-only {display: flex !important} .uninstalled2-only {display: none} .install2 {pointer-events: auto; opacity: 1; border-style: solid}
+	body                     {--bleh2-ver: 2024.0107} .installed2-only, .btn-installed2-only {display: flex !important} .uninstalled2-only {display: none} .install2 {pointer-events: auto; opacity: 1; border-style: solid}
 }
 
 

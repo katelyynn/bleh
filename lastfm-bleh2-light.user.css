@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           bleh2 (light)
 @namespace      github.com/katelyynn/bleh
-@version        2024.0105
+@version        2024.0107
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelyynn/bleh/raw/uwu/lastfm-bleh2-light.user.css
@@ -9,7 +9,7 @@
 ==/UserStyle== */
 
 @-moz-document domain("plexion.dev") {
-	body {--bleh2-light-ver: 2024.0105 }
+	body {--bleh2-light-ver: 2024.0107 }
 }
 
 @-moz-document domain("last.fm") {
