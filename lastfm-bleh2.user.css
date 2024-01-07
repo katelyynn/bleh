@@ -1514,21 +1514,24 @@
 	}
 
 	.header-new-title {
-		font-size: 32px;
+		font-size: 30px;
 		letter-spacing: unset;
-		line-height: 38px;
+		line-height: 34px;
 		font-weight: var(--font-weight-bold);
 		margin-top: unset;
 		order: -1;
 		margin-bottom: -6px;
 		width: fit-content;
 		color: hsl(var(--c1));
+		/*--mask: linear-gradient(90deg, rgba(255,255,255,1) 93%, rgba(255,255,255,0) 100%);
+		mask-image: var(--mask);
+		-webkit-mask-image: var(--mask);*/
 	}
 	.header-new-title .inner {
 		display: flex;
-		gap: 10px;
+		gap: 0 10px;
 		align-items: baseline;
-		height: 38px;
+		flex-wrap: wrap;
 	}
 	.header-new-title .feat {
 		color: hsla(var(--c1), 0.8);
