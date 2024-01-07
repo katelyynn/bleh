@@ -4487,7 +4487,7 @@
 
 
 	/*     NAG BAR     */
-	.nag-bar {
+	.nag-bar, .anhv1 .nag-bar--corrections {
 		margin-top: var(--card-gap);
 		padding: unset;
 		background: unset !important;
@@ -4495,6 +4495,17 @@
 	}
 	.nag-bar:before {
 		display: none;
+	}
+
+	.anhv1 .nag-bar--corrections {
+		/*margin-top: -18px;*/
+		position: absolute;
+		top: 195px;
+		left: 210px;
+		right: 0;
+		margin-left: auto;
+		margin-right: auto;
+		width: var(--cards-width);
 	}
 
 	.nag-bar--corrections .nag-bar-message {
