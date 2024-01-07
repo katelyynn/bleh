@@ -2138,6 +2138,9 @@
 		transition-duration: var(--trans);
 		transition-timing-function: var(--trans-function);*/
 	}
+	.chartlist:not(.chartlist--with-image) .chartlist-row {
+		padding: 3px 12px;
+	}
 
 
 	/* let's make our own separators */
