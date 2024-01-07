@@ -4004,7 +4004,42 @@
 		fill: hsla(var(--l4-c), 10%) !important;
 	}
 
-	.listener-trend .highcharts-axis-labels text {
+	.highcharts-grid-line[stroke="#EBEBEB"], .highcharts-axis-line[stroke="#EBEBEB"] {
+		stroke: hsla(var(--b4), 60%) !important;
+	}
+
+	#scrobble-chart-content .highcharts-point {
+		fill: hsl(var(--h3)) !important;
+		rx: var(--item-small-radius);
+		width: 22px;
+		transform: translateX(8px) !important;
+	}
+
+	.highcharts-tooltip-box {
+		fill: unset !important;
+		stroke: unset !important;
+		height: 20px !important;
+		overflow: hidden;
+	}
+	.highcharts-tooltip text, .highcharts-tooltip text[style^="color: rgb(51, 51, 51)"], text.highcharts-title[style^="color: rgb(51, 51, 51)"] {
+		font-size: var(--font-size) !important;
+		color: hsl(var(--b5)) !important;
+		fill: hsl(var(--c2)) !important;
+	}
+
+	.user-dashboard-tooltip {
+		background: hsl(var(--b5));
+		border-radius: var(--item-med-radius);
+		border: 1px solid hsl(var(--b4));
+		box-shadow: var(--menu-shadow);
+		padding: 7px;
+		font-size: calc(var(--font-size) - 1px);
+		line-height: var(--line-height);
+		color: hsl(var(--c2));
+		margin-top: 2px;
+	}
+
+	.listener-trend .highcharts-axis-labels text, #scrobble-chart-content .highcharts-axis-labels text {
 		color: hsl(var(--c3)) !important;
 		fill: hsl(var(--c3)) !important;
 		font-size: calc(var(--font-size) - 1px) !important;

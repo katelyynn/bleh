@@ -71,4 +71,16 @@
 
 		--interact-shadow: hsla(var(--b7), 0.07) 0 2px 4px 0;
 	}
+
+
+
+
+	/*     COUNT BAR     */
+	.chartlist-count-bar {
+		background: linear-gradient(90deg, hsla(var(--h3), 30%) 7%, hsl(var(--b4)) 35%);
+	}
+	.chartlist-count-bar-slug {
+		background-color: hsl(var(--h3)) !important;
+		box-shadow: 0px 0px 16px hsla(var(--h3), 50%);
+	}
 }
