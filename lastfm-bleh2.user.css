@@ -2190,6 +2190,17 @@
 		color: hsl(var(--c3));
 	}
 
+	.chartlist:not(.chartlist--with-image) .chartlist-row--with-artist .chartlist-name {
+		margin-bottom: unset;
+		width: 30%;
+	}
+	.chartlist:not(.chartlist--with-image) .chartlist-row--with-artist .chartlist-artist {
+		margin-top: unset;
+		position: static;
+		margin-right: 7.5px !important;
+		width: 20%;
+	}
+
 	.chartlist-timestamp, .chartlist-duration {
 		font-size: calc(var(--font-size) - 1px);
 		color: hsl(var(--c3));
@@ -4593,10 +4604,15 @@
 		padding-right: 4px;
 		margin-top: 8px;
 	}
-	.image-list-item img, .featured-item-art img {
+	.image-list-item, .featured-item-art .cover-art {
 		border-radius: var(--item-med-radius);
 		box-shadow: var(--card-shadow);
 		border: 1px solid hsl(var(--b4));
+		overflow: hidden;
+		aspect-ratio: 1 / 1;
+	}
+	.featured-item-art .cover-art img {
+		mask-size: 28px;
 	}
 
 
