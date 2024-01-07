@@ -8,7 +8,7 @@
 @var text bleh "configure settings using the edit button!!" "click the pencil"
 ==/UserStyle== */
 
-@-moz-document domain("plexion.dev") {
+@-moz-document domain("localhost") {
 	body                     {--bleh2-ver: 2024.0106} .installed2-only, .btn-installed2-only {display: flex !important} .uninstalled2-only {display: none} .install2 {pointer-events: auto; opacity: 1; border-style: solid}
 }
 
@@ -436,7 +436,7 @@
 	.masthead-logo a:before {
 		content: 'bleh';
 		font-size: 26px;
-		font-family: Spline Sans, var(--font);
+		font-family: var(--font);
 		position: absolute;
 		top: 19px;
 		left: 0;
@@ -446,13 +446,13 @@
 	.masthead-logo a:after {
 		content: '2 BETA';
 		font-size: 18px;
-		font-family: Spline Sans, var(--font);
+		font-family: var(--font);
 		position: absolute;
 		top: 16px;
-		left: 56px;
+		left: 60px;
 		bottom: 0;
 		font-weight: 700;
-		color: hsla(var(--l3-c), 80%);
+		color: hsla(var(--c2), 80%);
 	}
 
 
@@ -2338,7 +2338,7 @@
 	/* TODO: for light theme switch these to h3 */
 	.chartlist-count-bar {
 		line-height: 22px; /* 22 */
-		background: linear-gradient(90deg, hsla(var(--l3), 30%) 7%, hsl(var(--b4)) 35%);
+		background: linear-gradient(90deg, hsla(var(--c2), 25%) 7%, hsl(var(--b4)) 35%);
 		box-shadow: var(--interact-shadow);
 		width: 220px;
 	}
@@ -4454,6 +4454,10 @@
 	text[style^="color: rgb(0, 0, 0)"] {
 		color: rgb(0, 0, 0) !important;
 		fill: rgb(0, 0, 0) !important;
+	}
+
+	.listener-trend .highcharts-label text {
+		display: none;
 	}
 
 	.report-box-container .tag-label {
