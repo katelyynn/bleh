@@ -3364,7 +3364,7 @@
 		font-size: var(--font-size) !important;
 		font-weight: var(--font-weight) !important;
 		border-radius: var(--radius, var(--item-med-radius)) !important;
-		box-shadow: var(--shadow, unset) !important;
+		box-shadow: var(--shadow, var(--interact-shadow)) !important;
 		border: unset !important;
 		height: unset;
 		transition-property: background-color, transform, box-shadow, color;
@@ -3417,6 +3417,8 @@
 		width: 150px;
 		padding-left: unset;
 		padding-right: unset;
+		justify-content: right;
+		min-height: 32px !important;
 	}
 	.content-form .form-horizontal .form-group-controls:not(:has(.btn-file-label)) {
 		width: 350px;
@@ -4971,11 +4973,11 @@
 		margin-top: unset !important;
 	}
 	.control-label {
-		min-height: 32px !important;
 		display: flex !important;
-		justify-content: right;
+		/*justify-content: right;*/
 		align-items: center;
 	}
+
 	.content-form .form-horizontal .form-group-controls {
 		min-height: 32px !important;
 	}
