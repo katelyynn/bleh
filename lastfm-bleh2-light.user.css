@@ -60,7 +60,7 @@
 		--l4-c: var(--hue), calc(var(--sat) * 60%), calc(clamp(min(0.5), var(--lit), max(1.5)) * 25%);
 
 		--h3: var(--hue), calc(var(--sat) * 50%), calc(clamp(min(0.5), var(--lit), max(1.5)) * 80%);
-		--h4: var(--hue), calc(var(--sat) * 60%), calc(clamp(min(0.5), var(--lit), max(1.5)) * 50%);
+		--h4: var(--hue), calc(var(--sat) * 60%), calc(clamp(min(0.5), var(--lit), max(1.5)) * 65%);
 	}
 
 	/* attributes */
@@ -70,6 +70,13 @@
 		--menu-shadow: 2px 2px 24px 0 hsla(var(--b7), 0.15), 3px 6px 48px 16px hsla(var(--b7), 0.03);
 
 		--interact-shadow: hsla(var(--b7), 0.07) 0 2px 4px 0;
+	}
+
+
+
+
+	body {
+		color-scheme: light;
 	}
 
 

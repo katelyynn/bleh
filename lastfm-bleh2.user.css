@@ -823,12 +823,12 @@
 		height: calc(274px - 8px);
 	}
 	.header-new--album + .container > .row.buffer-reset\@sm > .col-main:nth-child(3) {
-		margin-top: -57px !important;
+		margin-top: -56px !important;
 	}
 
 	.namespace--music_album_overview .col-sidebar.hidden-xs {
 		position: relative;
-		top: -57px;
+		top: -56px;
 	}
 
 
@@ -2157,15 +2157,15 @@
 
 	/*     ACTIVE     */
 	.chartlist-row--now-scrobbling {
-		--bg: hsla(var(--l4), 30%) !important;
-		--bg-hov: hsla(var(--l4), 45%) !important;
+		--bg: hsla(var(--h4), 30%) !important;
+		--bg-hov: hsla(var(--h4), 45%) !important;
 	}
 
 
 	/*     YOU!     */
 	.chartlist-row--highlight {
-		--bg: hsla(var(--l4), 15%) !important;
-		--bg-hov: hsla(var(--l4), 20%) !important;
+		--bg: hsla(var(--h4), 15%) !important;
+		--bg-hov: hsla(var(--h4), 20%) !important;
 	}
 
 
@@ -2223,16 +2223,17 @@
 	}
 
 
+	.chartlist--with-bar.chartlist--with-index.chartlist--with-play.chartlist--with-image .chartlist-row--with-artist .chartlist-artist, .chartlist--with-multi-playlinks.chartlist--with-index.chartlist--with-play.chartlist--with-image .chartlist-row--with-artist .chartlist-artist,
 	.chartlist--with-bar.chartlist--with-index.chartlist--with-play.chartlist--with-image.chartlist--with-loved .chartlist-row--with-artist .chartlist-artist, .chartlist--with-multi-playlinks.chartlist--with-index.chartlist--with-play.chartlist--with-image.chartlist--with-loved .chartlist-row--with-artist .chartlist-artist {
-		left: 84px;
+		left: calc(84px + 7px);
 		margin-top: 14px;
 	}
 	.chartlist--with-bar.chartlist--with-index.chartlist--with-play.chartlist--with-image.chartlist--with-loved.chartlist--with-index--length-3 .chartlist-row--with-artist .chartlist-artist, .chartlist--with-multi-playlinks.chartlist--with-index.chartlist--with-play.chartlist--with-image.chartlist--with-loved.chartlist--with-index--length-3 .chartlist-row--with-artist .chartlist-artist {
-		left: 92px;
+		left: calc(92px + 7px);
 		margin-top: 14px;
 	}
 	.chartlist--with-bar.chartlist--with-index.chartlist--with-play.chartlist--with-image.chartlist--with-loved.chartlist--with-index--length-4 .chartlist-row--with-artist .chartlist-artist, .chartlist--with-multi-playlinks.chartlist--with-index.chartlist--with-play.chartlist--with-image.chartlist--with-loved.chartlist--with-index--length-4 .chartlist-row--with-artist .chartlist-artist {
-		left: 103px;
+		left: calc(103px + 7px);
 	}
 
 
@@ -2310,6 +2311,7 @@
 		opacity: 0;
 		margin: 0 !important;
 		transition: left 0.15s, opacity 0.15s;
+		display: none !important;
 	}
 	.chartlist-row:hover .chartlist-play {
 		left: 3px;
