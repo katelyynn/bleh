@@ -753,7 +753,8 @@
 	/* send a message box */ .header--overview:not(:has(.header-featured-track)):has(.header-message-user) + .adaptive-skin-container .col-sidebar:before,
 	/* listening reports */ .user-dashboard > .user-dashboard-buffer,
 	/* katie doesnt have any scrobbles yet */ .profile-mobile-featured-track + .no-data-message,
-	/* quick create playlists */ .section-with-separator[action*="/create/from-"]
+	/* quick create playlists */ .section-with-separator[action*="/create/from-"],
+	/* add artwork */ .namespace--music_album_images_image-upload .full-bleed-ad-container + .page-content + .page-content .col-main .form-horizontal
 	{
 		content: '';
 		background-color: hsl(var(--b5));
@@ -5230,11 +5231,11 @@
 	.content-form .form-image-preview {
 		margin-top: unset;
 		position: absolute;
-		left: calc(500px + var(--card-gap));
-		top: 0;
+		left: calc(var(--cards-main-width) + var(--card-gap) - 171px);
+		top: -21px;
 		border-radius: var(--item-big-radius);
 		box-shadow: var(--card-shadow);
-		width: 400px;
+		width: var(--cards-sidebar-width);
 	}
 
 
