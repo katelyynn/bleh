@@ -52,6 +52,14 @@
 		--hue: -13;
 	}
 
+	[data-page-resource-name="dc snuff film / waste yrself"][data-page-resource-artist-name="Teen Suicide"], :is(.chartlist-row--now-scrobbling, [class*="namespace--user_library_music_album"] .row):has(a[href*="/music/Teen+Suicide/dc+snuff+film+%2F+waste+yrself"])
+	{
+		--hue: 310;
+		--sat: 0.675;
+		--lit: 1.025;
+		--ovr: var(--b7);
+	}
+
 	[data-page-resource-name="re:start"][data-page-resource-artist-name="Miraie"], :is(.chartlist-row--now-scrobbling, [class*="namespace--user_library_music_album"] .row):has(a[href*="/music/Miraie/re:start"])
 	{
 		--hue: 316;
@@ -190,12 +198,19 @@
 	[data-page-resource-name*="punk2"][data-page-resource-artist-name="brakence"], :is(.chartlist-row--now-scrobbling, [class*="namespace--user_library_music_album"] .row):has(a[href*="/music/brakence/punk2"]),
 	[data-page-resource-name="The Life of Pablo"][data-page-resource-artist-name="Kanye West"], :is(.chartlist-row--now-scrobbling, [class*="namespace--user_library_music_album"] .row):has(a[href*="/music/Kanye+West/The+Life+of+Pablo"]),
 	[data-page-resource-name="Strike (Holster)"][data-page-resource-artist-name="Lil Yachty"], :is(.chartlist-row--now-scrobbling, [class*="namespace--user_library_music_album"] .row):has(a[href*="/music/Lil+Yachty/Strike+(Holster)"]),
-	[data-page-resource-name="Flower Boy"][data-page-resource-artist-name="Tyler, the Creator"], :is(.chartlist-row--now-scrobbling, [class*="namespace--user_library_music_album"] .row):has(a[href*="/music/Tyler,+the+Creator/Flower+Boy"]),
 	[data-page-resource-name="Donda 2"][data-page-resource-artist-name="Kanye West"], :is(.chartlist-row--now-scrobbling, [class*="namespace--user_library_music_album"] .row):has(a[href*="/music/Kanye+West/Donda+2"])
 	{
 		--hue: 25;
 		--sat: 1.05;
 		--lit: 0.9;
+	}
+
+	[data-page-resource-name="Flower Boy"][data-page-resource-artist-name="Tyler, the Creator"], :is(.chartlist-row--now-scrobbling, [class*="namespace--user_library_music_album"] .row):has(a[href*="/music/Tyler,+the+Creator/Flower+Boy"])
+	{
+		--hue: 11;
+		--sat: 1.325;
+		--lit: 0.725;
+		--ovr: var(--b7);
 	}
 
 	/* glaive - old dog, new tricks (EP, Deluxe) */
@@ -316,6 +331,14 @@
 		--hue: 194;
 		--sat: 0.4;
 		--lit: 0.6;
+	}
+
+	[data-page-resource-name="no sleep"][data-page-resource-artist-name="m a l i b l u e : ("], :is(.chartlist-row--now-scrobbling, [class*="namespace--user_library_music_album"] .row):has(a[href*="/music/m+a+l+i+b+l+u+e+:+(/no+sleep"])
+	{
+		--hue: 221;
+		--sat: 0.75;
+		--lit: 0.85;
+		--ovr: var(--b7);
 	}
 
 	[data-page-resource-name="lazy study"][data-page-resource-artist-name="Miraie"], :is(.chartlist-row--now-scrobbling, [class*="namespace--user_library_music_album"] .row):has(a[href*="/music/Miraie/lazy+study"])
@@ -692,12 +715,19 @@
 		--lit: 0.98;
 	}
 
-	[data-page-resource-name*="Doomsday"][data-page-resource-artist-name="Lyrical Lemonade"], :is(.chartlist-row--now-scrobbling, [class*="namespace--user_library_music_album"] .row):has(a[href*="/music/Lyrical+Lemonade/Doomsday"]),
 	[data-page-resource-name="hotel"][data-page-resource-artist-name="twikipedia"], :is(.chartlist-row--now-scrobbling, [class*="namespace--user_library_music_album"] .row):has(a[href*="/music/twikipedia/hotel"])
 	{
 		--hue: 46;
 		--sat: 1.12;
 		--lit: 1;
+	}
+
+	[data-page-resource-name*="Doomsday"][data-page-resource-artist-name="Lyrical Lemonade"], :is(.chartlist-row--now-scrobbling, [class*="namespace--user_library_music_album"] .row):has(a[href*="/music/Lyrical+Lemonade/Doomsday"])
+	{
+		--hue: 50;
+		--sat: 1.5;
+		--lit: 0.75;
+		--ovr: var(--b7);
 	}
 
 	/* yellow but quite green */
