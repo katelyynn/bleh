@@ -801,7 +801,7 @@
 	.page-content:has(.subpage-breadcrumb [href*="/+images"]) {
 		padding-top: calc(46px + (var(--card-gap) * 2)) !important;
 	}
-	.subpage-breadcrumb + .subpage-title {
+	.subpage-breadcrumb + .subpage-title, .subpage-title.js-gallery-heading {
 		padding: unset !important;
 		margin: unset !important;
 	}
@@ -810,6 +810,13 @@
 		align-items: center;
 		gap: 10px;
 		height: 32px;
+	}
+	.namespace--music_album_images_image-upload .full-bleed-ad-container + .page-content {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		/* same height as the above one with button */
+		min-height: 123px;
 	}
 
 	/* on album pages, the artwork is the first child for some old reason, lets flip them */
@@ -1027,6 +1034,9 @@
 	.page-content {
 		padding-top: calc(46px + (var(--card-gap) * 2)) !important;
 		padding-bottom: var(--card-gap) !important;
+	}
+	.page-content + .page-content {
+		padding-top: unset !important;
 	}
 	.header-new + .page-content, .content-top:has(.secondary-nav) + .page-content {
 		padding-top: var(--card-gap) !important;
@@ -5008,6 +5018,7 @@
 		padding: unset !important;
 	}
 
+	.content-form .form-horizontal .btn-file-label, .content-form .form-horizontal .btn-sm,
 	.content-form .form-horizontal button, .content-form .form-horizontal input[type="date"], .content-form .form-horizontal input[type="email"], .content-form .form-horizontal input[type="password"], .content-form .form-horizontal input[type="text"], .content-form .form-horizontal input[type="url"], .content-form .form-horizontal select, .content-form .form-horizontal textarea {
 		margin-top: unset !important;
 	}
@@ -5210,6 +5221,20 @@
 
 	.recommended-next-page-container {
 		display: none;
+	}
+
+
+
+
+	/*     ADD ARTWORK     */
+	.content-form .form-image-preview {
+		margin-top: unset;
+		position: absolute;
+		left: calc(500px + var(--card-gap));
+		top: 0;
+		border-radius: var(--item-big-radius);
+		box-shadow: var(--card-shadow);
+		width: 400px;
 	}
 
 
