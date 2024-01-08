@@ -106,7 +106,8 @@
 	/* backgrounds */
 	:root, [data-page-resource-type="album"], [data-page-resource-type="track"],
 	.gallery-image-buttons button, .gallery-image-preferred-button,
-	.vote-button--voted
+	.vote-button--voted,
+	.user-dashboard-layout
 	{
 		/* any additional highlights */
 		--b3: var(--hue), calc(var(--sat) * 6%), 28%;
@@ -140,7 +141,8 @@
 	.play-this-track-playlink, .resource-external-link,
 	.chartlist-row--now-scrobbling,
 	a,
-	.obsession-history-item-inner
+	.obsession-history-item-inner,
+	.user-dashboard-layout
 	{
 		--c1: var(--hue), calc(var(--sat) * 40%), 100%;
 		--c2: var(--hue), calc(var(--sat) * 60%), 90%;
@@ -3399,10 +3401,13 @@
 		border-radius: var(--radius, var(--item-med-radius)) !important;
 		box-shadow: var(--shadow, var(--interact-shadow)) !important;
 		border: unset !important;
-		height: unset;
+		height: 32px;
 		transition-property: background-color, transform, box-shadow, color;
 		transition-duration: var(--trans);
 		transition-timing-function: var(--trans-function);
+	}
+	.content-form textarea {
+		height: unset;
 	}
 	:is(
 		.content-form .form-control, .content-form input[type="date"], .content-form input[type="email"], .content-form input[type="number"], .content-form input[type="password"], .content-form input[type="text"], .content-form input[type="url"], .content-form select, .content-form textarea
@@ -3460,6 +3465,16 @@
 		display: flex;
 		align-items: center;
 	}
+	.form-section .form-group-controls.form-control-description {
+		/* this should be vertical, otherwise settings is broken */
+		display: block !important;
+		/* align with control-label */
+		padding-top: 7px;
+	}
+	.content-form .form-horizontal .form-control-description label + select {
+		margin-top: 8px !important;
+	}
+
 	.modal-body .content-form .form-horizontal .form-group-controls {
 		width: 410px;
 	}
