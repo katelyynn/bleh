@@ -3875,6 +3875,7 @@
 	.gallery-image-title {
 		width: fit-content;
 		white-space: inherit;
+		min-width: 300px;
 	}
 	.gallery-image-uploaded-by {
 		color: hsl(var(--c3));
@@ -3883,12 +3884,14 @@
 		margin-top: unset;
 		width: fit-content;
 		white-space: inherit;
+		min-width: 300px;
 	}
 	.gallery-image-description {
 		margin-top: -8px;
 		margin-bottom: 12px;
 		width: fit-content;
 		white-space: inherit;
+		min-width: 300px;
 	}
 
 	.gallery-image-buttons, .gallery-image-report-form {
@@ -4737,6 +4740,15 @@
 	}*/
 	.wiki-truncate-4-lines, .wiki-truncate-5-lines, .wiki-truncate-6-lines {
 		-webkit-line-clamp: 4;
+	}
+
+	.wiki-legal {
+		color: hsl(var(--c3));
+		font-size: calc(var(--font-size) - 1px);
+		line-height: var(--line-height);
+		border-top: unset;
+		margin-top: var(--card-gap);
+		padding: unset;
 	}
 
 
