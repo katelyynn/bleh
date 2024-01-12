@@ -185,7 +185,7 @@
 		--profile-header-background-offset: 33%;
 
 		--shout-avatar-size: 52px;
-		--shout-inset: 64px;
+		--shout-inset: 52px;
 
 		--menu-shadow: 2px 2px 24px 0 hsla(var(--b7), 0.35), 3px 6px 48px 16px hsla(var(--b7), 0.25);
 
@@ -2443,6 +2443,24 @@
 	}
 	.shout-list-item .shout-list-item .shout-container {
 		padding-top: 12px;
+	}
+	.shout-list-item {
+		position: relative;
+	}
+
+	.shout-form + .shout-list {
+		margin-top: 12px;
+	}
+
+	.shout-list-item > .shout-list:before {
+		content: '';
+		position: absolute;
+		top: calc(var(--shout-avatar-size) + 18px + 14px);
+		bottom: 0;
+		left: calc(var(--shout-avatar-size) / 2);
+		display: block;
+		width: 1px;
+		background: hsl(var(--b4));
 	}
 
 	.shout-form {
