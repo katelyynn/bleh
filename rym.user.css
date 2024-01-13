@@ -33,6 +33,12 @@
 	}
 
 	:root {
+		--mono-e: hsl(var(--b5)) !important;
+		--link-text-default: hsl(var(--l3-c)) !important;
+		--background: hsl(var(--b6)) !important;
+	}
+
+	:root {
 		--hue: var(--base-hue, 255);
 		--sat: var(--saturation, 1);
 		--lit: var(--lightness, 1);
@@ -262,6 +268,16 @@
 		background-image: var(--noise);
 	}
 
+	body.has_background_image #content_wrapper {
+		background-color: unset;
+	}
+	body.has_background_image #content_wrapper_outer {
+		background: hsl(var(--b6)) !important;
+		/* todo: when working on header, adjust this */
+		margin-top: -5px;
+		padding-top: var(--card-gap);
+	}
+
 	address, blockquote, dl, ol, p, pre, ul {
 		margin-top: unset;
 	}
@@ -277,7 +293,7 @@
 	button,
 	.btn, input[type="button"], input[type="submit"],
 	.musictoolbar a,
-	.my_catalog_rating
+	.my_catalog_rating, .catalog_btn, .format_btn, .review_save_btn, .review_btn, .track_rating_btn, .listening_btn, .notes_btn, .more_btn, .tag_btn
 	{
 		--bg: hsl(var(--b4));
 		--bg-hov: hsla(var(--b4), 80%);
@@ -306,7 +322,7 @@
 		button,
 		.btn, input[type="button"], input[type="submit"],
 		.musictoolbar a,
-		.my_catalog_rating
+		.my_catalog_rating, .catalog_btn, .format_btn, .review_save_btn, .review_btn, .track_rating_btn, .listening_btn, .notes_btn, .more_btn, .tag_btn
 	):hover {
 		background-color: var(--bg-hov) !important;
 	}
@@ -314,7 +330,7 @@
 		button,
 		.btn, input[type="button"], input[type="submit"],
 		.musictoolbar a,
-		.my_catalog_rating
+		.my_catalog_rating, .catalog_btn, .format_btn, .review_save_btn, .review_btn, .track_rating_btn, .listening_btn, .notes_btn, .more_btn, .tag_btn
 	):active {
 		background-color: var(--bg-atv) !important;
 		transform: scale(0.98);
@@ -341,6 +357,7 @@
 		--bg: transparent;
 		--bg-hov: transparent;
 		--bg-atv: transparent;
+		--shadow: none;
 	}
 
 
@@ -390,10 +407,11 @@
 
 	/*     CARDS     */
 	.bubble_content, .bubble_header,
-	.columns > div
+	.columns > div,
+	.release_right_column .section_my_catalog.section_outer
 	{
 		content: '';
-		background-color: hsl(var(--b5));
+		background: hsl(var(--b5)) !important;
 		border: 1px solid hsl(var(--b4));
 		border-radius: var(--card-radius);
 		box-shadow: var(--card-shadow);
@@ -404,6 +422,11 @@
 		/*background-image: var(--overlay-ice)/*, linear-gradient(180deg, rgba(190,233,250,0.04) 0%, rgba(0,0,0,0) 100%)*/;
 		/*background-repeat: repeat-x;
 		mask-position: unset !important;*/
+	}
+
+	.release_left_column {
+		background: unset;
+		border-right: unset;
 	}
 
 	.bubble_header {
@@ -418,10 +441,10 @@
 		border-top-right-radius: unset;
 		border-top: unset;
 		margin-bottom: var(--card-gap) !important;
-		padding: var(--card-padding) !important;
+		padding: 0 var(--card-padding) var(--card-padding) var(--card-padding) !important;
 	}
 
-	.columns > div {
+	.columns > div, .page_release_art_frame + .color_bar {
 		margin-bottom: var(--card-gap);
 	}
 	#column_container_right {
@@ -432,8 +455,82 @@
 		border: unset !important;
 	}
 
+	.release_right_column .section_my_catalog.section_outer {
+		padding: var(--card-padding) !important;
+	}
+
 	.release_right_column, .film_right_column, .page_release #content {
 		background: unset;
+	}
+
+	.release_page_header, .page_object_section_discussion_header {
+		font-size: unset;
+		margin-bottom: unset;
+		height: fit-content;
+		line-height: unset;
+	}
+	.release_page_header h2, .page_object_section_discussion_header h2 {
+		color: hsl(var(--c1));
+		font-size: var(--font-size);
+		font-weight: 500;
+		margin-bottom: 12px;
+	}
+
+	.bubble_header {
+		color: hsl(var(--c1));
+		font-size: var(--font-size) !important;
+		font-weight: 500;
+		padding: var(--card-padding) var(--card-padding) 12px var(--card-padding) !important;
+		text-align: left !important;
+		font-weight: 500 !important;
+	}
+	.bubble_header a {
+		color: inherit !important;
+		font-size: inherit !important;
+	}
+
+
+	th.info_hdr {
+		font-size: var(--font-size);
+		line-height: var(--line-height);
+		color: hsl(var(--c3));
+		padding: unset;
+		width: 100px;
+		flex-shrink: 0;
+	}
+	table.album_info td, table.film_info td {
+		padding: unset !important;
+	}
+	table.album_info, table.film_info {
+		margin-top: var(--card-gap);
+		font-size: var(--font-size);
+	}
+
+	table.album_info tr, table.film_info tr {
+		display: flex;
+		margin-bottom: 8px;
+	}
+
+	.avg_rating {
+		font-size: inherit;
+		font-weight: 500;
+	}
+	.num_ratings, .max_rating {
+		font-size: var(--font-size);
+		color: hsl(var(--c2));
+	}
+
+	a.artist, .artist, a.game, a.work.major, a.user, a.film, a.film_artist {
+		font-weight: 500;
+	}
+
+
+	.album_title {
+		font-size: 30px;
+		line-height: 34px;
+		font-weight: var(--font-weight-bold);
+		padding: unset;
+		margin-bottom: 12px;
 	}
 
 
@@ -581,6 +678,17 @@
 		background-color: hsl(var(--l3-c));
 	}
 
+	.review_rating {
+		--mask: url('https://plexion.dev/img/star-full.png');
+		mask-image: var(--mask);
+		-webkit-mask-image: var(--mask);
+		background-color: hsl(var(--l3-c));
+		margin: unset;
+	}
+	.review_rating img {
+		display: none;
+	}
+
 	div.rating_num {
 		font-size: var(--font-size);
 		line-height: var(--line-height);
@@ -588,17 +696,17 @@
 		font-weight: 500;
 	}
 
-	.star-0m{mask-position:0 0!important;width:90px;height:16px}
-	.star-10m{mask-position:0 -66px!important;width:90px;height:16px}
-	.star-1m{mask-position:0 -132px!important;width:90px;height:16px}
-	.star-2m{mask-position:0 -198px!important;width:90px;height:16px}
-	.star-3m{mask-position:0 -264px!important;width:90px;height:16px}
-	.star-4m{mask-position:0 -330px!important;width:90px;height:16px}
-	.star-5m{mask-position:0 -396px!important;width:90px;height:16px}
-	.star-6m{mask-position:0 -462px!important;width:90px;height:16px}
-	.star-7m{mask-position:0 -528px!important;width:90px;height:16px}
-	.star-8m{mask-position:0 -594px!important;width:90px;height:16px}
-	.star-9m{mask-position:0 -660px!important;width:90px;height:16px}
+	.star-0m, .review_rating:has(img[alt^="0.00"])  {mask-position:0 0!important;width:90px;height:16px}
+	.star-10m, .review_rating:has(img[alt^="5.00"]) {mask-position:0 -66px!important;width:90px;height:16px}
+	.star-1m, .review_rating:has(img[alt^="0.50"])  {mask-position:0 -132px!important;width:90px;height:16px}
+	.star-2m, .review_rating:has(img[alt^="1.00"])  {mask-position:0 -198px!important;width:90px;height:16px}
+	.star-3m, .review_rating:has(img[alt^="1.50"])  {mask-position:0 -264px!important;width:90px;height:16px}
+	.star-4m, .review_rating:has(img[alt^="2.00"])  {mask-position:0 -330px!important;width:90px;height:16px}
+	.star-5m, .review_rating:has(img[alt^="2.50"])  {mask-position:0 -396px!important;width:90px;height:16px}
+	.star-6m, .review_rating:has(img[alt^="3.00"])  {mask-position:0 -462px!important;width:90px;height:16px}
+	.star-7m, .review_rating:has(img[alt^="3.50"])  {mask-position:0 -528px!important;width:90px;height:16px}
+	.star-8m, .review_rating:has(img[alt^="4.00"])  {mask-position:0 -594px!important;width:90px;height:16px}
+	.star-9m, .review_rating:has(img[alt^="4.50"])  {mask-position:0 -660px!important;width:90px;height:16px}
 
 	.my_catalog_rating:has(.star-0m):after{mask-position:0 0!important;width:90px;height:16px}
 	.my_catalog_rating:has(.star-10m):after{mask-position:0 -66px!important;width:90px;height:16px}
@@ -611,4 +719,44 @@
 	.my_catalog_rating:has(.star-7m):after{mask-position:0 -528px!important;width:90px;height:16px}
 	.my_catalog_rating:has(.star-8m):after{mask-position:0 -594px!important;width:90px;height:16px}
 	.my_catalog_rating:has(.star-9m):after{mask-position:0 -660px!important;width:90px;height:16px}
+
+
+
+
+	/*     REVIEW     */
+	.review_header {
+		display: flex;
+		align-items: center;
+		height: fit-content;
+		line-height: var(--line-height);
+		background: unset;
+	}
+	.review_header span:has(.review_rating) {
+		order: 1;
+	}
+	.review_header div[id^="review_voting"] {
+		flex: 1;
+	}
+
+	.review_date a {
+		color: hsl(var(--c3));
+	}
+	.review_header a.user, .review_header a.useri, .review_header a.usero {
+		font-weight: 500;
+	}
+	a.user {
+		color: hsl(var(--l3-c)) !important;
+	}
+
+	.review_body {
+		font-size: var(--font-size);
+		line-height: var(--line-height);
+		padding: 0 0 12px 0;
+		margin-top: 12px;
+		color: inherit !important;
+		border-bottom: 1px solid hsl(var(--b4));
+	}
+	.review_body span {
+		color: inherit !important;
+	}
 }
