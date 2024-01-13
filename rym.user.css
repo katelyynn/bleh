@@ -350,14 +350,38 @@
 	/*     TAB     */
 	.musictoolbar {
 		padding: unset;
-		height: 35px;
+		height: fit-content;
+		display: flex;
 		border-bottom: 2px solid hsl(var(--b4));
+		margin-bottom: var(--card-gap);
 	}
 	.musictoolbar a {
 		--bg: transparent;
 		--bg-hov: transparent;
 		--bg-atv: transparent;
 		--shadow: none;
+		padding: 12px 16px 12px calc(16px + 16px + 4px) !important;
+		position: relative;
+	}
+	.musictoolbar a:hover, .musictoolbar a[style="background: var(--gen-blue-light);"] {
+		--col: hsl(var(--c1));
+	}
+
+	.musictoolbar a:after {
+		position: absolute;
+		content: '';
+		left: 6px;
+		right: 6px;
+		height: 2px;
+		bottom: 0;
+		background-color: hsl(var(--l3-c));
+		box-shadow: 0 0 15px hsl(var(--l4-c));
+		border-top-left-radius: var(--item-small-radius);
+		border-top-right-radius: var(--item-small-radius);
+		opacity: 0;
+	}
+	.musictoolbar a[style="background: var(--gen-blue-light);"]:after {
+		opacity: 1;
 	}
 
 
@@ -562,6 +586,8 @@
 		background: var(--bg) !important;
 		padding: 5px 12px;
 		display: flex;
+		align-items: center;
+		gap: 10px;
 		max-height: 44px;
 		border-radius: var(--item-small-radius);
 		/*transition-property: background-color;
@@ -581,9 +607,79 @@
 
 	.mbgen td, #userlists td, #useralbums td, #userrec td, .discography td {
 		border: unset !important;
+		padding: unset;
 	}
 	.mbgen tr:nth-child(even) {
 		--bg: hsla(var(--b4), 40%);
+	}
+
+
+	.or_q_thumb_album {
+		width: 38px !important;
+		height: 38px;
+		aspect-ratio: 1 / 1;
+		border-radius: var(--item-small-radius);
+		box-shadow: var(--card-shadow);
+		border: 1px solid hsl(var(--b4));
+	}
+	.or_q_thumb_album img {
+		width: 38px;
+		height: 38px;
+		aspect-ratio: 1 / 1;
+		border-radius: unset;
+	}
+
+	.or_q_rating_date_d {
+		text-align: unset;
+		width: fit-content;
+	}
+	.or_q_rating_date_d .date_element {
+		display: flex;
+		gap: 4px;
+		background: unset;
+		border: unset;
+		font-size: calc(var(--font-size) - 1px);
+		line-height: var(--line-height);
+		font-weight: 400;
+		color: hsl(var(--c3));
+	}
+
+	.date_element_month, .date_element_year, .date_element_day {
+		font-size: inherit;
+		font-weight: inherit;
+		color: inherit;
+	}
+
+	.or_q_albumartist_td, .or_q_thumb_album {
+		order: -1;
+	}
+	.or_q_albumartist_td {
+		flex: 1;
+		font-size: 0;
+	}
+	.or_q_albumartist {
+		display: flex;
+		align-items: center;
+	}
+
+	.or_q_albumartist_td a.artist {
+		color: hsl(var(--c3));
+		width: 300px;
+		display: inline-block;
+		font-size: var(--font-size);
+		order: 1;
+		font-weight: 400;
+	}
+
+	.or_q_albumartist_td a.album {
+		color: hsl(var(--c2));
+		width: 300px;
+		display: inline-block;
+		font-size: var(--font-size);
+		font-style: initial;
+		display: flex;
+		align-items: center;
+		font-weight: 500;
 	}
 
 
@@ -758,5 +854,20 @@
 	}
 	.review_body span {
 		color: inherit !important;
+	}
+
+
+
+
+	/*     RANDOM PROFILE STUFF     */
+	div.profilesearch {
+		color: inherit;
+		padding: unset;
+		background: unset;
+		margin-bottom: var(--card-gap);
+		text-align: left;
+	}
+	div.profilesearch label {
+		font-weight: 400;
 	}
 }
