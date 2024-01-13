@@ -782,36 +782,37 @@
 	}
 
 	#rating_pct_10, td a[href$="/r5.0"], .my_catalog_rating:has(.star-10m) {
-		--hue: 180;
+		--hue: 195;
 	}
 	#rating_pct_9, td a[href$="/r4.5"], .my_catalog_rating:has(.star-9m) {
-		--hue: 150;
+		--hue: 160;
 	}
 	#rating_pct_8, td a[href$="/r4.0"], .my_catalog_rating:has(.star-8m) {
-		--hue: 130;
+		--hue: 135;
 	}
 	#rating_pct_7, td a[href$="/r3.5"], .my_catalog_rating:has(.star-7m) {
 		--hue: 105;
 	}
 	#rating_pct_6, td a[href$="/r3.0"], .my_catalog_rating:has(.star-6m) {
-		--hue: 83;
+		--hue: 85;
 	}
 	#rating_pct_5, td a[href$="/r2.5"], .my_catalog_rating:has(.star-5m) {
-		--hue: 55;
+		--hue: 50;
 	}
 	#rating_pct_4, td a[href$="/r2.0"], .my_catalog_rating:has(.star-4m) {
-		--hue: 35;
+		--hue: 30;
 	}
 	#rating_pct_3, td a[href$="/r1.5"], .my_catalog_rating:has(.star-3m) {
-		--hue: 17;
+		--hue: 15;
+		--lit: 0.95;
 	}
 	#rating_pct_2, td a[href$="/r1.0"], .my_catalog_rating:has(.star-2m) {
 		--hue: 8;
-		--lit: 0.95;
+		--lit: 0.86;
 	}
 	#rating_pct_1, td a[href$="/r0.5"], .my_catalog_rating:has(.star-1m) {
 		--hue: -2;
-		--lit: 0.9;
+		--lit: 0.8;
 	}
 	#rating_pct_0, td a[href$="/r0.0"], .my_catalog_rating:has(.star-0m) {
 		--sat: 0;
