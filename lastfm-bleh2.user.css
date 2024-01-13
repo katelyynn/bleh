@@ -4651,7 +4651,7 @@
 		padding-right: 4px;
 		margin-top: 8px;
 	}
-	.image-list-item, .featured-item-art .cover-art {
+	.image-list-item, .featured-item-art .cover-art, .globalchart .globalchart-playlink .cover-art {
 		border-radius: var(--item-med-radius);
 		box-shadow: var(--card-shadow);
 		border: 1px solid hsl(var(--b4));
@@ -5269,6 +5269,25 @@
 		border-radius: var(--item-big-radius);
 		box-shadow: var(--card-shadow);
 		width: var(--cards-sidebar-width);
+	}
+
+
+
+
+	/*     GLOBAL CHART     */
+	.globalchart {
+		margin-top: unset;
+	}
+
+	.globalchart .globalchart-item {
+		box-shadow: inset 0 -1px hsl(var(--b4));
+	}
+	.globalchart .countbar-bar {
+		background: unset;
+	}
+
+	.globalchart .globalchart-track-artist-name {
+		color: hsl(var(--c3));
 	}
 
 
