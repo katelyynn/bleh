@@ -296,7 +296,8 @@
 	.musictoolbar a,
 	.my_catalog_rating, .catalog_btn, .format_btn, .review_save_btn, .review_btn, .track_rating_btn, .listening_btn, .notes_btn, .more_btn, .tag_btn,
 	.header_item, .header_icon_link,
-	table#users td
+	table#users td,
+	#profile_tab a, #profile_tab li#currentp
 	{
 		--bg: hsl(var(--b4));
 		--bg-hov: hsla(var(--b4), 80%);
@@ -327,7 +328,8 @@
 		.musictoolbar a,
 		.my_catalog_rating, .catalog_btn, .format_btn, .review_save_btn, .review_btn, .track_rating_btn, .listening_btn, .notes_btn, .more_btn, .tag_btn,
 		.header_item, .header_icon_link,
-		table#users td
+		table#users td,
+		#profile_tab a, #profile_tab li#currentp
 	):hover {
 		background-color: var(--bg-hov) !important;
 	}
@@ -337,7 +339,8 @@
 		.musictoolbar a,
 		.my_catalog_rating, .catalog_btn, .format_btn, .review_save_btn, .review_btn, .track_rating_btn, .listening_btn, .notes_btn, .more_btn, .tag_btn,
 		.header_item, .header_icon_link,
-		table#users td
+		table#users td,
+		#profile_tab a, #profile_tab li#currentp
 	):active {
 		background-color: var(--bg-atv) !important;
 		transform: scale(0.98);
@@ -369,7 +372,8 @@
 	/*     HAS ICON     */
 	button:before,
 	.musictoolbar a:before,
-	td a[href*="/collection/"][href*="/r"]:before
+	td a[href*="/collection/"][href*="/r"]:before,
+	#profile_tab a:before, #profile_tab li#currentp:before
 	{
 		content: '';
 		display: block !important;
@@ -413,14 +417,16 @@
 
 
 	/*     TAB     */
-	.musictoolbar {
+	.musictoolbar, #profile_tab ul {
 		padding: unset;
 		height: fit-content;
 		display: flex;
 		border-bottom: 2px solid hsl(var(--b4));
 		margin-bottom: var(--card-gap);
 	}
-	.musictoolbar a {
+	.musictoolbar a,
+	#profile_tab a, #profile_tab li#currentp
+	{
 		--bg: transparent;
 		--bg-hov: transparent;
 		--bg-atv: transparent;
@@ -429,7 +435,9 @@
 		position: relative;
 		margin: unset;
 	}
-	.musictoolbar a:hover, .musictoolbar a[style="background: var(--gen-blue-light);"] {
+	.musictoolbar a:hover, .musictoolbar a[style="background: var(--gen-blue-light);"],
+	#profile_tab a:hover, #profile_tab li#currentp
+	{
 		--col: hsl(var(--c1));
 	}
 
@@ -462,6 +470,10 @@
 	}
 	#btnmusictag:before {
 		--mask: var(--icon-16-tag);
+	}
+
+	#btnftabfriends:before {
+		--mask: var(--icon-16-users);
 	}
 
 
@@ -512,7 +524,8 @@
 	/*     CARDS     */
 	.bubble_content, .bubble_header,
 	.columns > div,
-	.release_right_column .section_my_catalog.section_outer
+	.release_right_column .section_my_catalog.section_outer,
+	#mediumForm fieldset
 	{
 		content: '';
 		background: hsl(var(--b5)) !important;
@@ -635,6 +648,7 @@
 		font-weight: var(--font-weight-bold);
 		padding: unset;
 		margin-bottom: 12px;
+		color: hsl(var(--c1));
 	}
 
 
@@ -729,6 +743,35 @@
 		font-size: inherit;
 		font-weight: inherit;
 		color: inherit;
+	}
+
+	.or_q_rating_date_s {
+		height: 16px;
+		display: flex;
+		position: relative;
+		color: hsl(var(--c3));
+		font-size: calc(var(--font-size) - 1px);
+	}
+	.or_q_rating_date_s [title="shortcut"] {
+		position: absolute;
+		top: 0;
+		left: 0;
+		opacity: 0;
+		color: hsl(var(--c3));
+		transition-property: opacity;
+		transition-duration: var(--trans);
+		transition-timing-function: var(--trans-function);
+	}
+	.or_q_rating_date_s img {
+		transition-property: opacity;
+		transition-duration: var(--trans);
+		transition-timing-function: var(--trans-function);
+	}
+	.or_q_rating_date_s:hover [title="shortcut"] {
+		opacity: 1;
+	}
+	.or_q_rating_date_s:hover img {
+		opacity: 0;
 	}
 
 	.or_q_albumartist_td, .or_q_thumb_album {
@@ -1144,5 +1187,29 @@
 		text-overflow: ellipsis;
 		color: hsl(var(--c3));
 		overflow: hidden;
+	}
+
+
+
+
+	/*     SETTINGS     */
+	.steps {
+		border: unset;
+	}
+	.steps li {
+		font-size: 24px;
+		line-height: 30px;
+		font-weight: 500;
+		color: hsl(var(--c1));
+	}
+
+	#profile_tab ul {
+		padding: unset;
+	}
+
+	#signupcontainer {
+		width: 70em;
+		margin-left: auto;
+		margin-right: auto;
 	}
 }
