@@ -884,7 +884,7 @@
 		--hue: 214;
 		--lit: 0.9;
 	}
-	.catalog_rating:has(img[src$="0m.png"]),
+	.catalog_rating:has(img[src$="/0m.png"]),
 	#rating_pct_0, td a[href$="/r0.0"], .my_catalog_rating:has(.star-0m), .star-0m, .review_rating:has(img[alt^="0.00"]) {
 		--sat: 0;
 	}
@@ -1293,6 +1293,11 @@
 		order: 2;
 	}
 
+	.catalog_header a.user, .catalog_header a.useri, .catalog_header a.usero {
+		font-weight: 500;
+		font-size: var(--font-size);
+	}
+
 
 	.catalog_rating {
 		padding-left: calc(16px + 6px);
@@ -1344,7 +1349,7 @@
 	.catalog_rating:has(img[src$="1m.png"]):after {
 		content: '0.50';
 	}
-	.catalog_rating:has(img[src$="0m.png"]):after {
+	.catalog_rating:has(img[src$="/0m.png"]):after {
 		content: '0.00';
 	}
 
