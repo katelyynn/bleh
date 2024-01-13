@@ -1279,10 +1279,13 @@
 	.catalog_user {
 		flex: 1;
 	}
-	.catalog_rating_system_comment {
+	.catalog_rating_system_comment, .catalog_ownership {
 		margin: unset;
 		font-size: calc(var(--font-size) - 1px);
 		color: hsl(var(--c3));
+	}
+	.catalog_ownership {
+		color: hsla(var(--c3), 60%) !important;
 	}
 	.catalog_track_ratings, .catalog_no_track_ratings {
 		order: 1;
