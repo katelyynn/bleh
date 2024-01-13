@@ -380,7 +380,8 @@
 
 
 	/*     PRIMARY     */
-	.blue_btn
+	.blue_btn,
+	.track_rating_btn.has_ratings
 	{
 		--bg: hsl(var(--h3));
 		--bg-hov: hsla(var(--h3), 80%);
@@ -509,20 +510,23 @@
 	#btnmusicrating:before {
 		--mask: var(--icon-16-star);
 	}
-	#btnmusictrackratings:before {
+	#btnmusictrackratings:before, .track_rating_btn:before {
 		--mask: var(--icon-16-track);
 	}
-	#btnmusicownership:before {
+	#btnmusicownership:before, .catalog_btn:before {
 		--mask: var(--icon-16-library);
 	}
-	#btnmusicreview:before {
+	#btnmusicreview:before, .review_btn:before {
 		--mask: var(--icon-16-review);
 	}
 	#btnmusicwanted:before {
 		--mask: var(--icon-16)
 	}
-	#btnmusictag:before {
+	#btnmusictag:before, .tag_btn:before {
 		--mask: var(--icon-16-tag);
+	}
+	.listening_btn:before {
+		--mask: var(--icon-16-listening-report);
 	}
 
 	#btnftabfriends:before {
@@ -1506,5 +1510,80 @@
 		mask-size: 16px;
 		mask-repeat: no-repeat;
 		mask-position: center;
+	}
+
+
+
+
+	/*     TRACKLIST     */
+	ul.tracks {
+		border: unset;
+		border-radius: unset;
+	}
+	ul.tracks li.track {
+		--bg: transparent;
+		--bg-hov: hsla(var(--b4), 80%);
+		--shadow: none;
+		color: hsl(var(--c2));
+		background-color: var(--bg);
+		padding: 5px 12px;
+		display: flex;
+		justify-content: center;
+		flex-direction: column;
+		gap: 0;
+		min-height: 38px;
+		border-radius: var(--item-small-radius);
+		border: unset !important;
+	}
+	ul.tracks li.track:nth-child(even) {
+		--bg: hsla(var(--b4), 40%);
+	}
+
+	.tracklist_line {
+		display: flex;
+		align-items: center;
+	}
+
+	.tracklist_num {
+		margin-right: unset;
+		color: hsl(var(--c3));
+		font-weight: 400;
+		font-size: calc(var(--font-size) - 1px);
+		line-height: var(--line-height);
+		min-width: 18px;
+		text-align: right;
+		margin-right: 10px;
+	}
+
+	.tracklist_title {
+		font-size: var(--font-size);
+		margin: unset;
+		padding: unset;
+		display: flex;
+		align-items: center;
+		flex: 1;
+	}
+	.tracklist_title [itemprop="name"] {
+		flex: 1;
+	}
+	.tracklist_duration {
+		margin-left: unset;
+		color: hsl(var(--c3));
+		font-size: calc(var(--font-size) - 1px);
+	}
+
+	ul.tracks li.track ul.credits {
+		margin: unset;
+		font-size: calc(var(--font-size) - 1px);
+		border-radius: unset;
+	}
+	li.track ul.credits li {
+		padding: unset;
+		margin-left: 6px;
+		margin-bottom: unset;
+		color: hsl(var(--c3));
+	}
+	li.track ul.credits li b {
+		font-weight: 400;
 	}
 }
