@@ -294,7 +294,8 @@
 	.btn, input[type="button"], input[type="submit"],
 	.musictoolbar a,
 	.my_catalog_rating, .catalog_btn, .format_btn, .review_save_btn, .review_btn, .track_rating_btn, .listening_btn, .notes_btn, .more_btn, .tag_btn,
-	.header_item, .header_icon_link
+	.header_item, .header_icon_link,
+	table#users td
 	{
 		--bg: hsl(var(--b4));
 		--bg-hov: hsla(var(--b4), 80%);
@@ -324,7 +325,8 @@
 		.btn, input[type="button"], input[type="submit"],
 		.musictoolbar a,
 		.my_catalog_rating, .catalog_btn, .format_btn, .review_save_btn, .review_btn, .track_rating_btn, .listening_btn, .notes_btn, .more_btn, .tag_btn,
-		.header_item, .header_icon_link
+		.header_item, .header_icon_link,
+		table#users td
 	):hover {
 		background-color: var(--bg-hov) !important;
 	}
@@ -333,7 +335,8 @@
 		.btn, input[type="button"], input[type="submit"],
 		.musictoolbar a,
 		.my_catalog_rating, .catalog_btn, .format_btn, .review_save_btn, .review_btn, .track_rating_btn, .listening_btn, .notes_btn, .more_btn, .tag_btn,
-		.header_item, .header_icon_link
+		.header_item, .header_icon_link,
+		table#users td
 	):active {
 		background-color: var(--bg-atv) !important;
 		transform: scale(0.98);
@@ -422,6 +425,7 @@
 		--shadow: none;
 		padding: 12px 16px 12px calc(16px + 16px + 4px) !important;
 		position: relative;
+		margin: unset;
 	}
 	.musictoolbar a:hover, .musictoolbar a[style="background: var(--gen-blue-light);"] {
 		--col: hsl(var(--c1));
@@ -747,7 +751,7 @@
 
 	.or_q_albumartist_td a.album {
 		color: hsl(var(--c2));
-		width: 300px;
+		width: 450px;
 		display: inline-block;
 		font-size: var(--font-size);
 		font-style: initial;
@@ -970,7 +974,7 @@
 		padding: unset !important;
 		align-items: center;
 		height: 60px;
-		gap: 10px;
+		gap: 4px;
 	}
 
 	.header_profile {
@@ -1046,5 +1050,66 @@
 	}
 	.logo_name {
 		display: none;
+	}
+
+
+
+
+	/*     LISTS ON PROFILE     */
+	.bubble_content > div[style^="padding:"] {
+		padding: unset !important;
+		font-size: var(--font-size) !important;
+	}
+
+
+
+
+	/*     USERS     */
+	table#users tbody {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+	}
+	table#users tr {
+		padding: unset;
+		max-height: unset;
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+		--bg: transparent;
+	}
+	table#users td {
+		display: flex;
+		gap: 4px;
+		align-items: center;
+		/* this site has a forced "min-height: 50px !important" which is impossible to override,
+		gonna use padding to make up for it */
+		--padding: 8px !important;
+		height: 56px;
+		--bg: transparent;
+		--bg-hov: hsla(var(--b4), 40%);
+		--bg-atv: hsla(var(--b4), 60%);
+		text-align: left;
+	}
+
+	table#users td > a {
+		height: 40px;
+		flex-shrink: 0;
+	}
+	table#users td img {
+		width: 40px;
+		border-radius: var(--item-med-radius);
+		height: 40px;
+		box-shadow: var(--card-shadow);
+		border: 1px solid hsl(var(--b4)) !important;
+	}
+
+	table#users td a {
+		text-decoration: none;
+	}
+	table#users td b {
+		word-wrap: normal;
+		text-overflow: ellipsis;
+		color: hsl(var(--c3));
+		overflow: hidden;
 	}
 }
