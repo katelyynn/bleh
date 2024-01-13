@@ -293,7 +293,8 @@
 	button,
 	.btn, input[type="button"], input[type="submit"],
 	.musictoolbar a,
-	.my_catalog_rating, .catalog_btn, .format_btn, .review_save_btn, .review_btn, .track_rating_btn, .listening_btn, .notes_btn, .more_btn, .tag_btn
+	.my_catalog_rating, .catalog_btn, .format_btn, .review_save_btn, .review_btn, .track_rating_btn, .listening_btn, .notes_btn, .more_btn, .tag_btn,
+	.header_item, .header_icon_link
 	{
 		--bg: hsl(var(--b4));
 		--bg-hov: hsla(var(--b4), 80%);
@@ -322,7 +323,8 @@
 		button,
 		.btn, input[type="button"], input[type="submit"],
 		.musictoolbar a,
-		.my_catalog_rating, .catalog_btn, .format_btn, .review_save_btn, .review_btn, .track_rating_btn, .listening_btn, .notes_btn, .more_btn, .tag_btn
+		.my_catalog_rating, .catalog_btn, .format_btn, .review_save_btn, .review_btn, .track_rating_btn, .listening_btn, .notes_btn, .more_btn, .tag_btn,
+		.header_item, .header_icon_link
 	):hover {
 		background-color: var(--bg-hov) !important;
 	}
@@ -330,7 +332,8 @@
 		button,
 		.btn, input[type="button"], input[type="submit"],
 		.musictoolbar a,
-		.my_catalog_rating, .catalog_btn, .format_btn, .review_save_btn, .review_btn, .track_rating_btn, .listening_btn, .notes_btn, .more_btn, .tag_btn
+		.my_catalog_rating, .catalog_btn, .format_btn, .review_save_btn, .review_btn, .track_rating_btn, .listening_btn, .notes_btn, .more_btn, .tag_btn,
+		.header_item, .header_icon_link
 	):active {
 		background-color: var(--bg-atv) !important;
 		transform: scale(0.98);
@@ -344,6 +347,63 @@
 		--bg-hov: hsla(var(--h3), 80%);
 		--bg-atv: hsla(var(--h3), 60%);
 		--col: hsl(var(--ovr, var(--b7)));
+	}
+
+
+	/*     TRANS LINK     */
+	.header_item, .header_icon_link
+	{
+		--bg: transparent;
+		--bg-hov: hsla(var(--b4), 60%);
+		--bg-atv: hsla(var(--b4), 80%);
+	}
+	.header_icon_link {
+		--padding: 7px;
+	}
+
+
+	/*     HAS ICON     */
+	button:before,
+	.musictoolbar a:before
+	{
+		content: '';
+		display: block !important;
+		mask-position: 0 0 !important;
+		left: 12px !important;
+		margin-top: -8px !important;
+		margin-left: unset !important;
+		width: 16px !important;
+		height: 16px !important;
+		box-shadow: unset !important;
+		position: absolute;
+		right: auto;
+		top: 50% !important;
+		background-repeat: no-repeat;
+		margin-left: unset;
+		background-image: unset !important;
+		background-color: currentColor;
+		mask-image: var(--mask);
+		-webkit-mask-image: var(--mask);
+		transition-property: opacity !important;
+		transition-duration: var(--trans) !important;
+		transition-timing-function: var(--trans-function) !important;
+	}
+	.fa:before, .fas:before, .far:before, .fal:before, .fad:before, .fab:before {
+		content: '';
+		display: block !important;
+		mask-position: 0 0 !important;
+		width: 16px !important;
+		height: 16px !important;
+		box-shadow: unset !important;
+		background-repeat: no-repeat;
+		margin-left: unset;
+		background-image: unset !important;
+		background-color: currentColor;
+		mask-image: var(--mask);
+		-webkit-mask-image: var(--mask);
+		transition-property: opacity !important;
+		transition-duration: var(--trans) !important;
+		transition-timing-function: var(--trans-function) !important;
 	}
 
 
@@ -382,6 +442,20 @@
 	}
 	.musictoolbar a[style="background: var(--gen-blue-light);"]:after {
 		opacity: 1;
+	}
+
+
+	#btnmusicrecent:before {
+		--mask: var(--icon-16-music-list);
+	}
+	#btnmusicrating:before {
+		--mask: var(--icon-16-star);
+	}
+	#btnmusictrackratings:before {
+		--mask: var(--icon-16-track);
+	}
+	#btnmusictag:before {
+		--mask: var(--icon-16-tag);
 	}
 
 
@@ -869,5 +943,108 @@
 	}
 	div.profilesearch label {
 		font-weight: 400;
+	}
+
+
+
+
+	/*     HEADER     */
+	header {
+		height: fit-content;
+		background: unset;
+		box-shadow: unset;
+	}
+	header:before {
+		content: '';
+		position: fixed;
+		left: 0;
+		top: 0;
+		right: 0;
+		height: 80px;
+		background: linear-gradient(0deg, transparent 0%, hsl(var(--b6)) 100%);
+		pointer-events: none;
+	}
+
+	.header_inner {
+		display: flex;
+		padding: unset !important;
+		align-items: center;
+		height: 60px;
+		gap: 10px;
+	}
+
+	.header_profile {
+		order: 1;
+		float: unset;
+	}
+	.header_profile_main {
+		display: flex;
+		gap: 4px;
+		align-items: center;
+		margin: unset;
+		background: unset !important;
+	}
+	.header_user_img {
+		width: 38px;
+		height: 38px;
+		border: 2px solid hsl(var(--b4));
+		box-shadow: var(--card-shadow);
+		transition-property: transform, border-color;
+		transition-duration: calc(var(--trans) * 1.5);
+		transition-timing-function: var(--trans-function);
+		margin-top: unset;
+		border-radius: 50%;
+		background-size: 100% !important;
+		background-color: hsl(var(--b5)) !important;
+	}
+	a.header_item, .header_item, .header_mod_roles, .header_theme_buttons, a.header_icon_link, .header_icon_link {
+		color: hsl(var(--c2));
+		background: unset;
+		padding: unset;
+	}
+	.header_inner.logged_in .header_icon_link {
+		display: flex !important;
+		align-items: center;
+	}
+
+
+	.fa-check-double:before {
+		--mask: var(--icon-16-upload);
+	}
+	.fa-bars:before {
+		--mask: var(--icon-16-arrow-down);
+	}
+
+	div.header_icon_link {
+		order: 2;
+	}
+	a.header_icon_link {
+		order: 3;
+	}
+
+
+	.header_search {
+		flex: 1;
+		padding: 0 50px;
+	}
+
+
+	.header_links_inner .divider {
+		display: none;
+	}
+	.subscribe_label_fundraiser {
+		font-size: inherit !important;
+		font-weight: inherit !important;
+	}
+
+
+	.logo_header {
+		margin: unset;
+		width: 32px;
+		height: 32px;
+		background-size: 32px;
+	}
+	.logo_name {
+		display: none;
 	}
 }
