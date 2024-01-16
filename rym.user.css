@@ -604,6 +604,10 @@
 		font-size: var(--font-size) !important;
 	}
 
+	.release_right_column .section_main_info.section_outer {
+		padding: var(--card-padding) !important;
+	}
+
 	.release_left_column {
 		background: unset;
 		border-right: unset;
@@ -627,8 +631,15 @@
 	.columns > div, .page_release_art_frame + .color_bar {
 		margin-bottom: var(--card-gap);
 	}
+	#column_container_left {
+		position: absolute;
+		left: 0;
+	}
 	#column_container_right {
-		padding-left: var(--card-gap);
+		left: calc(var(--cards-sidebar-width) + var(--card-gap));
+	}
+	.row {
+		position: relative;
 	}
 	.columns > div .section_outer {
 		padding: unset !important;
@@ -1362,6 +1373,33 @@
 	}
 
 
+	.bubble_content tr:has(td[style="vertical-align:top;padding-right:10px;"]) {
+		display: flex;
+		flex-direction: column;
+	}
+	td[style="vertical-align:top;width:380px"] {
+		width: var(--cards-main-width) !important;
+	}
+	.smallcomment_area {
+		background: unset !important;
+		height: 500px !important;
+		border: unset !important;
+	}
+
+	h4 {
+		font-size: var(--font-size);
+		color: hsl(var(--c1));
+		font-weight: 500;
+		line-height: var(--line-height);
+		margin-bottom: 12px;
+		display: flex;
+	}
+
+	tr::empty {
+		display: none !important;
+	}
+
+
 
 
 	/*     SETTINGS     */
@@ -1626,5 +1664,45 @@
 	:is(.glitchwave_invite, .new_user_banner) > p {
 		flex: 1;
 		order: -1;
+	}
+
+
+
+
+	/*     COMMENTS     */
+	div.comment {
+		margin-bottom: unset !important;
+		border: unset !important;
+		color: hsl(var(--c2));
+		font-size: var(--font-size);
+		line-height: var(--line-height);
+	}
+
+	.commenttbl tr {
+		display: flex;
+		gap: 10px;
+	}
+	.commenttbl tr td:last-child {
+		flex: 1;
+		border-bottom: 1px solid hsl(var(--b4));
+	}
+	.commenttbl tr td {
+		padding: 4px 0 0 0;
+	}
+
+	.commenttblpic img {
+		width: 50px;
+		height: 50px;
+		aspect-ratio: 1 / 1;
+		border-radius: var(--item-small-radius);
+		box-shadow: var(--card-shadow);
+		border: 1px solid hsl(var(--b4));
+	}
+
+	.commenttbl .commentheadera {
+		padding: unset !important;
+	}
+	.commentbody {
+		padding: 3px 0;
 	}
 }
