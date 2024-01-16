@@ -3020,7 +3020,7 @@
 		background-repeat: no-repeat;
 		margin-left: unset;
 		background-image: unset !important;
-		background-color: hsl(var(--icon));
+		background-color: currentColor;
 		mask-image: var(--mask);
 		-webkit-mask-image: var(--mask);
 		transition-property: opacity !important;
