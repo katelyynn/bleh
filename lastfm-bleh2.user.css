@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           bleh2
 @namespace      github.com/katelyynn/bleh
-@version        2024.0113
+@version        2024.0118
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelyynn/bleh/raw/uwu/lastfm-bleh2.user.css
@@ -9,7 +9,7 @@
 ==/UserStyle== */
 
 @-moz-document domain("plexion.dev") {
-	body                     {--bleh2-ver: 2024.0113} .installed2-only, .btn-installed2-only {display: flex !important} .uninstalled2-only {display: none} .install2 {pointer-events: auto; opacity: 1; border-style: solid}
+	body                     {--bleh2-ver: 2024.0118} .installed2-only, .btn-installed2-only {display: flex !important} .uninstalled2-only {display: none} .install2 {pointer-events: auto; opacity: 1; border-style: solid}
 }
 
 
@@ -5337,4 +5337,35 @@
 		opacity: 0.2;
 		/*filter: drop-shadow(0 0 1px white);*/
 	/*}*/
+
+
+
+
+	/*     loser lol     */
+	[alt="Avatar for DXP6986"] {
+		content: url('https://plexion.dev/img/keionbu.jpg') !important;
+	}
+	.col-main:has(#shoutbox[data-lazy-load-content="/user/DXP6986/partial/shoutbox"]) + .col-sidebar .about-me-sidebar p,
+	.header-title-label-wrap:has(a[href="/user/DXP6986"]) + .header-title-secondary .header-title-display-name
+	{
+		font-size: 0;
+	}
+	.col-main:has(#shoutbox[data-lazy-load-content="/user/DXP6986/partial/shoutbox"]) + .col-sidebar .about-me-sidebar p:after {
+		content: 'Pick a # *looks at you* between 1 & 1000 & I\'ww give you an awbum wecommndation.  I do nyot add weebs, hypebeasts, awphabet they/thems, awtwight, wokists, MAGA, antifa, depwowabwes, *whispers to self* viwtue cwusadews ow (・`ω´・) aduwt UwU toddwews';
+		font-size: var(--font-size);
+	}
+	.header-title-label-wrap:has(a[href="/user/DXP6986"]) + .header-title-secondary .header-title-display-name:after {
+		content: 'uwu hehe >w<';
+		font-size: var(--font-size);
+	}
+
+	.shout:has(.shout-user a[href="/user/DXP6986"]) {
+		/*content: '';
+		position: absolute;
+		inset: 0;
+		background-image: url('https://plexion.dev/img/skull.png');
+		background-size: 20px;
+		opacity: 0.1;*/
+		opacity: 0.6;
+	}
 }
