@@ -2034,6 +2034,12 @@
 		color: hsl(var(--l3-c));
 		text-underline-offset: 2px;
 	}
+	.hide-link {
+		text-decoration: none !important;
+	}
+	.hide-link a:hover {
+		text-decoration: underline !important;
+	}
 
 	.external-link-cta .cta-link-wrap a, .lyrics-snippet-more-link a, .wiki-block-cta .cta-link-wrap a {
 		padding-right: calc(16px + 8px);
@@ -2515,10 +2521,10 @@
 		background-position: 0 0 !important;
 	}
 
-	.shout-user, .user-list-name {
+	.shout-user, .user-list-name, .listeners-section-item-name, .top-listeners-item-name {
 		line-height: var(--line-height) !important;
 	}
-	.shout-user a, .user-list-name {
+	.shout-user a, .user-list-name, .listeners-section-item-name, .top-listeners-item-name {
 		color: hsl(var(--l3-c));
 		font-weight: var(--font-weight-medium);
 	}
@@ -4951,6 +4957,8 @@
 		margin-top: var(--card-gap);
 	}
 
+	.listeners-section-item-image,
+	.top-listeners-item-image,
 	.user-list-avatar {
 		border: 1px solid hsl(var(--b4));
 		box-shadow: var(--card-shadow);
@@ -4960,7 +4968,7 @@
 		margin-top: unset;
 	}
 
-	.user-list-inner-wrap {
+	.user-list-inner-wrap, .listeners-section-item, .top-listeners-item {
 		padding-left: calc(64px + 10px);
 	}
 
@@ -4981,7 +4989,7 @@
 		--shadow: none;
 	}
 
-	.user-list-name a {
+	.user-list-name a, .listeners-section-item-name a, .top-listeners-item-name a {
 		text-decoration: none !important;
 	}
 	.user-list-description {
@@ -5000,6 +5008,22 @@
 		overflow: visible !important;
 		white-space: initial !important;
 	}
+
+
+	/*     ARTIST LISTENERS     */
+	.listeners-section-item, .top-listeners-item {
+		justify-content: unset;
+		min-height: 64px;
+	}
+	/* sidenote this actually uses a grid wtf? rare */
+	.listeners-section {
+		grid-gap: unset;
+		gap: var(--card-gap);
+		grid-template-columns: repeat(2,400px);
+		grid-template-rows: repeat(3,64px);
+		margin-top: unset;
+	}
+	/* TODO: the dedicated "top listeners" page */
 
 
 
