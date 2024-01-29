@@ -346,7 +346,7 @@
 
 	/*     FIRST STAGE     */
 	/* remove white backgrounds */
-	.main-content, .header--overview, .container:not(:has(form[action^="/inbox/"])),
+	.main-content, .header--overview, .container:not(:has(.inbox-notifications)),
 	.content-top-has-nav .content-top, .two-column-layout .content-top /* lfm tag */,
 	.two-column-layout .container, .two-column-layout .main-content /* for some reason lfm bundles a 1x1 white pixel tiled across the entire half of the screen? */
 	{
@@ -756,7 +756,8 @@
 	/* listening reports */ .user-dashboard > .user-dashboard-buffer,
 	/* katie doesnt have any scrobbles yet */ .profile-mobile-featured-track + .no-data-message,
 	/* quick create playlists */ .section-with-separator[action*="/create/from-"],
-	/* add artwork */ .namespace--music_album_images_image-upload .full-bleed-ad-container + .page-content + .page-content .col-main .form-horizontal
+	/* add artwork */ .namespace--music_album_images_image-upload .full-bleed-ad-container + .page-content + .page-content .col-main .form-horizontal,
+	/* inbox */ .inbox-compose-view, .inbox-message-view
 	{
 		content: '';
 		background-color: hsl(var(--b5));
@@ -1296,7 +1297,7 @@
 		background-color: hsl(var(--l3-c)) !important;
 		height: 3px !important;
 		bottom: -3px !important;
-		box-shadow: 0 0 15px hsl(var(--l4-c));
+		box-shadow: 0 -2px 20px 2px hsl(var(--l4-c));
 		margin: unset !important;
 		width: unset !important;
 		border-radius: 0 !important;
@@ -1526,6 +1527,15 @@
 		mask-image: var(--mask);
 		-webkit-mask-image: var(--mask);
 	}
+	/*.header-new--artist .header-new-background-overlay {
+		transform: unset !important;
+	}*/
+	.header-new--artist .header-new-inner.link-block--hover .header-new-background-overlay {
+		transform: scaleX(1) !important;
+		/*border-radius: 0 20px 20px 0;
+		right: 50px !important;
+		display: none;*/
+	}
 
 	.header-new-title {
 		font-size: 30px;
@@ -1644,6 +1654,18 @@
 
 	.artist-header-featured-items {
 		display: none;
+	}
+
+
+	.header-new-gallery--link .header-new-gallery-inner {
+		font-size: var(--font-size);
+		line-height: var(--line-height);
+		font-weight: 500;
+		background: unset;
+		position: relative !important;
+	}
+	.header-new-gallery--link .header-new-gallery-inner:before {
+		--mask: var(--icon-16-arrow-right);
 	}
 
 
@@ -1975,7 +1997,7 @@
 
 
 	/*     CARD HEAD     */
-	h2, h3.text-18, h2.text-18, .subpage-title,
+	h2, h3.text-18, h2.text-18, .subpage-title, h3,
 	.stationlinks-header,
 	.featured-item-heading,
 	.library-artist-section-header,
@@ -2939,7 +2961,8 @@
 	.more-items,
 	.more-link-with-action a:not(.inline-add-icon),
 	.btn-shortcut,
-	.gallery-next .arrow
+	.gallery-next .arrow,
+	.header-new-gallery--link .header-new-gallery-inner
 	{
 		padding-right: calc(12px + 16px + 6px) !important;
 	}
@@ -3009,7 +3032,8 @@
 	.masthead-nav-control:before,
 	.masthead-search-submit:before,
 	.love-button-toggle button:before,
-	.arrow:before
+	.arrow:before,
+	.header-new-gallery--link .header-new-gallery-inner:before
 	{
 		content: '';
 		display: block !important;
@@ -3037,7 +3061,8 @@
 	.more-link a:before, .more-link-fullwidth-right a:before, .more-link-fullwidth-right-flush-top a:before, .more-link-with-action a:not(.inline-add-icon):after,
 	.more-items:before,
 	.btn-shortcut:before,
-	.gallery-next .arrow:before
+	.gallery-next .arrow:before,
+	.header-new-gallery--link .header-new-gallery-inner:before
 	{
 		left: unset !important;
 		right: 12px !important;
@@ -3837,6 +3862,110 @@
 		padding-top: unset;
 		font-size: calc(var(--font-size) - 1px);
 		color: hsl(var(--c3));
+	}
+
+
+	.inbox-message {
+		display: inline-block;
+	}
+	.inbox-message-view .inbox-message-sender-avatar {
+		padding: unset !important;
+		width: fit-content;
+	}
+
+	.inbox-message {
+		display: flex !important;
+		gap: 30px;
+		border-radius: 10px;
+		margin-bottom: 2px;
+		transition: background-color 0.15s;
+	}
+	.inbox-message:hover {
+		background-color: hsla(var(--b4),40%);
+	}
+	.inbox-message.inbox-message--unviewed {
+		background-color: hsla(var(--d4),40%);
+	}
+	.inbox-message td {
+		display: flex !important;
+		flex-direction: column;
+		justify-content: center;
+	}
+	.inbox-message-status, .inbox-message-status:after {
+		display: none !important;
+		width: 0 !important;
+		order: -2;
+		margin-right: -30px;
+	}
+
+	.inbox-message-view .inbox-message {
+		display: block !important;
+		padding-left: 210px;
+		position: relative;
+		min-height: 400px;
+		background: transparent;
+		box-shadow: none !important;
+	}
+	.inbox-message-view .content-form {
+		padding-left: 180px;
+		border: none !important;
+	}
+	.inbox-message-view .inbox-message-sender-avatar {
+		position: absolute;
+		top: var(--card-padding);
+		left: var(--card-padding);
+		bottom: 0;
+		background: linear-gradient(180deg, hsla(var(--h4),30%) 0%, rgba(0,0,0,0) 100%);
+		width: 180px;
+		min-height: 400px;
+		display: flex;
+		justify-content: center;
+		padding: var(--card-padding) !important;
+		margin: -20px -5px;
+		border-radius: var(--card-radius);
+	}
+
+	.inbox-message-view .inbox-message {
+		height: 100%;
+	}
+
+	.inbox-message-view .inbox-message-preview, .inbox-message-view .inbox-message-info {
+		margin: initial;
+		padding: unset;
+	}
+	.inbox-message-view .inbox-message-message blockquote {
+		background-color: hsla(var(--d4),40%);
+		border: none;
+		border-radius: 7px;
+	}
+	.inbox-message-view .inbox-message-message blockquote cite {
+		color: hsl(var(--c3));
+		display: block;
+	}
+
+	.inbox-message-view .inbox-message-sender-name {
+		position: absolute;
+		top: 96px;
+		left: -195px;
+		width: 180px;
+		text-align: center;
+		font-size: 16px;
+	}
+	.inbox-message-view .inbox-message-timestamp {
+		position: absolute;
+		top: 120px;
+		left: -195px;
+		width: 180px;
+		text-align: center;
+		font-size: 14px;
+		color: hsl(var(--c3));
+	}
+
+	.inbox-message-view .inbox-message-buttons {
+		margin: initial;
+		margin-top: 30px;
+		padding-top: 20px;
+		border-top: 1px solid hsla(var(--b4),40%);
 	}
 
 
@@ -4957,6 +5086,7 @@
 		margin-top: var(--card-gap);
 	}
 
+	.inbox-message-sender-avatar .avatar,
 	.listeners-section-item-image,
 	.top-listeners-item-image,
 	.user-list-avatar {
@@ -5318,7 +5448,7 @@
 
 
 	/*     UNDER CONSTRUCTION     */
-	body:is(.namespace--user_obsessions_obsession, [class*="namespace--user_playlist"], [class*="events"], [class*="namespace--settings"], [class*="namespace--music_bookmarks"], .music-landing-overview, [class*="namespace--charts"]):after {
+	body:is(.namespace--user_obsessions_obsession, [class*="namespace--user_playlist"], [class*="events"], [class*="namespace--settings"], [class*="namespace--music_bookmarks"], .music-landing-overview, [class*="namespace--charts"], .namespace--inbox_overview, .namespace--inbox_sent_overview):after {
 		position: fixed;
 		left: 0;
 		right: 0;
