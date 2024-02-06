@@ -8,7 +8,7 @@
 @var text bleh "configure settings using the edit button!!" "click the pencil"
 ==/UserStyle== */
 
-@-moz-document domain("plexion.dev") {
+@-moz-document domain("cutensilly.org") {
 	body                     {--bleh2-ver: 2024.0118} .installed2-only, .btn-installed2-only {display: flex !important} .uninstalled2-only {display: none} .install2 {pointer-events: auto; opacity: 1; border-style: solid}
 }
 
@@ -28,7 +28,7 @@
 					hey! if you arrived here to change the
 					theme's colour, take a visit here:
 
-					https://plexion.dev/bleh/fm/customise
+					https://cutensilly.org/bleh/fm/customise
 
 */
 
@@ -205,6 +205,7 @@
 		--icon-boha: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImhzbCgyMDYsNzclLDcwJSkiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1jYXQiPjxwYXRoIGQ9Ik0xMiA1Yy42NyAwIDEuMzUuMDkgMiAuMjYgMS43OC0yIDUuMDMtMi44NCA2LjQyLTIuMjYgMS40LjU4LS40MiA3LS40MiA3IC41NyAxLjA3IDEgMi4yNCAxIDMuNDRDMjEgMTcuOSAxNi45NyAyMSAxMiAyMXMtOS0zLTktNy41NmMwLTEuMjUuNS0yLjQgMS0zLjQ0IDAgMC0xLjg5LTYuNDItLjUtNyAxLjM5LS41OCA0LjcyLjIzIDYuNSAyLjIzQTkuMDQgOS4wNCAwIDAgMSAxMiA1WiIvPjxwYXRoIGQ9Ik04IDE0di41Ii8+PHBhdGggZD0iTTE2IDE0di41Ii8+PHBhdGggZD0iTTExLjI1IDE2LjI1aDEuNUwxMiAxN2wtLjc1LS43NVoiLz48L3N2Zz4=');
 		--icon-neek: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImhzbCgyMDYsMCUsMTAwJSkiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1jYXQiPjxwYXRoIGQ9Ik0xMiA1Yy42NyAwIDEuMzUuMDkgMiAuMjYgMS43OC0yIDUuMDMtMi44NCA2LjQyLTIuMjYgMS40LjU4LS40MiA3LS40MiA3IC41NyAxLjA3IDEgMi4yNCAxIDMuNDRDMjEgMTcuOSAxNi45NyAyMSAxMiAyMXMtOS0zLTktNy41NmMwLTEuMjUuNS0yLjQgMS0zLjQ0IDAgMC0xLjg5LTYuNDItLjUtNyAxLjM5LS41OCA0LjcyLjIzIDYuNSAyLjIzQTkuMDQgOS4wNCAwIDAgMSAxMiA1WiIvPjxwYXRoIGQ9Ik04IDE0di41Ii8+PHBhdGggZD0iTTE2IDE0di41Ii8+PHBhdGggZD0iTTExLjI1IDE2LjI1aDEuNUwxMiAxN2wtLjc1LS43NVoiLz48L3N2Zz4=');
 		--icon-pleasr: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImhzbCgyNjUsODclLDcwJSkiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1jYXQiPjxwYXRoIGQ9Ik0xMiA1Yy42NyAwIDEuMzUuMDkgMiAuMjYgMS43OC0yIDUuMDMtMi44NCA2LjQyLTIuMjYgMS40LjU4LS40MiA3LS40MiA3IC41NyAxLjA3IDEgMi4yNCAxIDMuNDRDMjEgMTcuOSAxNi45NyAyMSAxMiAyMXMtOS0zLTktNy41NmMwLTEuMjUuNS0yLjQgMS0zLjQ0IDAgMC0xLjg5LTYuNDItLjUtNyAxLjM5LS41OCA0LjcyLjIzIDYuNSAyLjIzQTkuMDQgOS4wNCAwIDAgMSAxMiA1WiIvPjxwYXRoIGQ9Ik04IDE0di41Ii8+PHBhdGggZD0iTTE2IDE0di41Ii8+PHBhdGggZD0iTTExLjI1IDE2LjI1aDEuNUwxMiAxN2wtLjc1LS43NVoiLz48L3N2Zz4=');
+		--icon-2lay: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImhzbCgzMzMsNTclLDcwJSkiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1jYXQiPjxwYXRoIGQ9Ik0xMiA1Yy42NyAwIDEuMzUuMDkgMiAuMjYgMS43OC0yIDUuMDMtMi44NCA2LjQyLTIuMjYgMS40LjU4LS40MiA3LS40MiA3IC41NyAxLjA3IDEgMi4yNCAxIDMuNDRDMjEgMTcuOSAxNi45NyAyMSAxMiAyMXMtOS0zLTktNy41NmMwLTEuMjUuNS0yLjQgMS0zLjQ0IDAgMC0xLjg5LTYuNDItLjUtNyAxLjM5LS41OCA0LjcyLjIzIDYuNSAyLjIzQTkuMDQgOS4wNCAwIDAgMSAxMiA1WiIvPjxwYXRoIGQ9Ik04IDE0di41Ii8+PHBhdGggZD0iTTE2IDE0di41Ii8+PHBhdGggZD0iTTExLjI1IDE2LjI1aDEuNUwxMiAxN2wtLjc1LS43NVoiLz48L3N2Zz4=');
 
 		--icon-check: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImhzbCgyNTUsMjAlLDkwJSkiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1jaGVjayI+PHBhdGggZD0iTTIwIDYgOSAxN2wtNS01Ii8+PC9zdmc+');
 		--icon-plus: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImhzbCgyNTUsMjAlLDkwJSkiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1wbHVzIj48cGF0aCBkPSJNNSAxMmgxNCIvPjxwYXRoIGQ9Ik0xMiA1djE0Ii8+PC9zdmc+');
@@ -1997,7 +1998,7 @@
 
 
 	/*     CARD HEAD     */
-	h2, h3.text-18, h2.text-18, .subpage-title, h3,
+	h2, h3.text-18, h2.text-18, .subpage-title,
 	.stationlinks-header,
 	.featured-item-heading,
 	.library-artist-section-header,
@@ -2731,8 +2732,8 @@
 		background-image: var(--icon-pro);
 		filter: drop-shadow(2px 0px 0 hsl(var(--b5))) drop-shadow(0px 2px 0 hsl(var(--b5))) drop-shadow(-2px -0px 0 hsl(var(--b5))) drop-shadow(-0px -2px 0 hsl(var(--b5)));
 	}
-	.shout-user:has([href="/user/cutensilly"], [href="/user/BoHa1"], [href="/user/bIeak"], [href="/user/peoplepleasr"]) + .shout-user-avatar .avatar-status-dot:before,
-	.user-list-name:has([href="/user/cutensilly"], [href="/user/BoHa1"], [href="/user/bIeak"], [href="/user/peoplepleasr"]) + .user-list-avatar .avatar-status-dot:before
+	.shout-user:has([href="/user/cutensilly"], [href="/user/BoHa1"], [href="/user/bIeak"], [href="/user/peoplepleasr"], [href="/user/twolay"]) + .shout-user-avatar .avatar-status-dot:before,
+	.user-list-name:has([href="/user/cutensilly"], [href="/user/BoHa1"], [href="/user/bIeak"], [href="/user/peoplepleasr"], [href="/user/twolay"]) + .user-list-avatar .avatar-status-dot:before
 	{
 		background: hsl(var(--b5));
 		content: '' !important;
@@ -2745,7 +2746,7 @@
 		z-index: -2000 !important;
 		display: flex !important;
 	}
-	.user-list-name:has([href="/user/cutensilly"], [href="/user/BoHa1"], [href="/user/bIeak"], [href="/user/peoplepleasr"]) + .user-list-avatar .avatar-status-dot:before {
+	.user-list-name:has([href="/user/cutensilly"], [href="/user/BoHa1"], [href="/user/bIeak"], [href="/user/peoplepleasr"], [href="/user/twolay"]) + .user-list-avatar .avatar-status-dot:before {
 		right: 6px;
 		bottom: 11px;
 		width: 12px;
@@ -2780,6 +2781,13 @@
 	.user-list-name:has([href="/user/peoplepleasr"]) + .user-list-avatar .avatar-status-dot
 	{
 		background-image: var(--icon-pleasr) !important;
+	}
+	/* 2lay */
+	.shout-user:has([href="/user/twolay"]) + .shout-user-avatar .avatar-status-dot,
+	.header-title:has([href="/user/twolay"]) + .user-status-subscriber,
+	.user-list-name:has([href="/user/twolay"]) + .user-list-avatar .avatar-status-dot
+	{
+		background-image: var(--icon-2lay) !important;
 	}
 
 
