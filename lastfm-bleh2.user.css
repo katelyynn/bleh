@@ -142,7 +142,8 @@
 	.chartlist-row--now-scrobbling,
 	a,
 	.obsession-history-item-inner,
-	.user-dashboard-layout
+	.user-dashboard-layout,
+	.image-list-item-preferred-icon:before
 	{
 		--c1: var(--hue), calc(var(--sat) * 40%), 100%;
 		--c2: var(--hue), calc(var(--sat) * 60%), 90%;
@@ -4803,6 +4804,32 @@
 	}
 	.featured-item-art .cover-art img {
 		mask-size: 28px;
+	}
+
+	.image-list-item-preferred .image-list-item-preferred-container {
+		inset: 0;
+		width: unset;
+		height: 40px;
+		border-radius: unset;
+		background-color: unset;
+		display: flex;
+		justify-content: center;
+		padding-top: 8px;
+		background: linear-gradient(0deg, transparent 0%, hsl(var(--b4)) 100%);
+	}
+	.image-list-item-preferred-icon {
+		width: 16px;
+		height: 16px;
+	}
+	.image-list-item-preferred-icon:before {
+		background-image: unset;
+		background-color: hsl(var(--l3));
+		--mask: var(--icon-16-star);
+		mask-image: var(--mask);
+		-webkit-mask-image: var(--mask);
+		--hue: 15;
+		--sat: 1;
+		--lit: 1;
 	}
 
 
