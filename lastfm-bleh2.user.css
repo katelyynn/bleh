@@ -4832,6 +4832,10 @@
 		--lit: 1;
 	}
 
+	.gallery-image.gallery-image-preferred .gallery-image-preferred-container {
+		display: none;
+	}
+
 
 	/*     ON SIDEBAR     */
 	.sidebar-image-list {
