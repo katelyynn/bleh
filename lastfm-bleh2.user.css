@@ -2651,7 +2651,7 @@
 
 
 	.avatar-status-dot,
-	.shout-user:has([href="/user/aoivee"]) + .shout-user-avatar:before
+	.shout-user:has([href="/user/aoivee"], [href="/user/Serprety"]) + .shout-user-avatar:before
 	{
 		left: unset;
 		top: unset;
@@ -2670,7 +2670,7 @@
 		border-radius: 50%;
 	}
 	.shout-user-avatar .avatar-status-dot,
-	.shout-user:has([href="/user/aoivee"]) + .shout-user-avatar:before
+	.shout-user:has([href="/user/aoivee"], [href="/user/Serprety"]) + .shout-user-avatar:before
 	{
 		width: 20px;
 		height: 20px;
@@ -2684,6 +2684,15 @@
 	.header-title:has([href="/user/aoivee"]) + .user-status-None {
 		display: flex;
 		background-image: var(--icon-aoi);
+	}
+
+	.shout-user:has([href="/user/Serprety"]) + .shout-user-avatar:before {
+		background-image: var(--icon-blehhh);
+		filter: drop-shadow(2px 0px 0 hsl(var(--b5))) drop-shadow(0px 2px 0 hsl(var(--b5))) drop-shadow(-2px -0px 0 hsl(var(--b5))) drop-shadow(-0px -2px 0 hsl(var(--b5))) drop-shadow(0px 4px 0px hsl(var(--b5)));
+	}
+	.header-title:has([href="/user/Serprety"]) + .user-status-None {
+		display: flex;
+		background-image: var(--icon-blehhh);
 	}
 
 	/* missing avatar */
