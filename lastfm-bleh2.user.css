@@ -90,7 +90,7 @@
 		--lit: var(--lightness, 1);
 		--ovr: var(--invert-btn, var(--b7));
 
-		--font: Spline Sans ALT, IBM Plex Sans, IBM Plex Sans JP, Spline Sans, Inter, Roboto, Noto Sans, Noto Sans JP, sans-serif;
+		--font: Geist Sans, Spline Sans ALT, IBM Plex Sans, IBM Plex Sans JP, Spline Sans, Inter, Roboto, Noto Sans, Noto Sans JP, sans-serif;
 		--font-code: Spline Sans Mono, Iosevka, JetBrains Mono, Roboto Mono, monospace;
 		--font-size: 14px;
 		--line-height: calc(var(--font-size) + 4px);
@@ -664,6 +664,11 @@
 		opacity: 0;
 	}
 
+	.footer-timezone {
+		color: inherit;
+		margin-top: unset;
+	}
+
 	.footer .footer-legal {
 		color: hsl(var(--c3));
 		font-size: var(--font-size);
@@ -771,7 +776,7 @@
 		margin-left: unset;
 		margin-right: unset;
 		/* festive */
-		/*background-image: var(--overlay-ice)/*, linear-gradient(180deg, rgba(190,233,250,0.04) 0%, rgba(0,0,0,0) 100%)*/;
+		/*background-image: var(--overlay-ice)/*, linear-gradient(180deg, rgba(190,233,250,0.04) 0%, rgba(0,0,0,0) 100%);*/
 		/*background-repeat: repeat-x;
 		background-position: unset !important;*/
 	}
@@ -3083,7 +3088,6 @@
 		right: auto;
 		top: 50% !important;
 		background-repeat: no-repeat;
-		margin-left: unset;
 		background-image: unset !important;
 		background-color: currentColor;
 		mask-image: var(--mask);
@@ -4247,7 +4251,7 @@
 		stroke: hsl(var(--l3-c)) !important;
 	}
 	.listener-trend .highcharts-area {
-		fill: hsla(var(--l4-c), 10%) !important;
+		fill: hsla(var(--l4-c), 25%) !important;
 	}
 
 	.highcharts-grid-line[stroke="#EBEBEB"], .highcharts-axis-line[stroke="#EBEBEB"] {
