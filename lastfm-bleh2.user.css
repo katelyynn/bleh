@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           bleh2
 @namespace      github.com/katelyynn/bleh
-@version        2024.0208
+@version        2024.0216
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelyynn/bleh/raw/uwu/lastfm-bleh2.user.css
@@ -9,7 +9,7 @@
 ==/UserStyle== */
 
 @-moz-document domain("cutensilly.org") {
-	body                     {--bleh2-ver: 2024.0208} .installed2-only, .btn-installed2-only {display: flex !important} .uninstalled2-only {display: none} .install2 {pointer-events: auto; opacity: 1; border-style: solid}
+	body                     {--bleh2-ver: 2024.0216} .installed2-only, .btn-installed2-only {display: flex !important} .uninstalled2-only {display: none} .install2 {pointer-events: auto; opacity: 1; border-style: solid}
 }
 
 
@@ -2187,6 +2187,7 @@
 		padding: 5px 12px;
 		max-height: 44px;
 		border-radius: var(--item-small-radius);
+		box-shadow: var(--shadow);
 		/*transition-property: background-color;
 		transition-duration: var(--trans);
 		transition-timing-function: var(--trans-function);*/
@@ -2202,6 +2203,7 @@
 	}
 	.chartlist-row:nth-child(odd) {
 		--bg: hsla(var(--b4), 40%);
+		/*--shadow: var(--interact-shadow);*/
 	}
 
 
@@ -2213,8 +2215,9 @@
 
 	/*     ACTIVE     */
 	.chartlist-row--now-scrobbling {
-		--bg: hsla(var(--h4), 30%) !important;
-		--bg-hov: hsla(var(--h4), 45%) !important;
+		--bg: hsla(var(--h4), 40%) !important;
+		--bg-hov: hsla(var(--h4), 55%) !important;
+		--shadow: 0 0 15px 2px hsla(var(--h4), 35%) !important;
 	}
 
 
@@ -3073,7 +3076,8 @@
 	.masthead-search-submit:before,
 	.love-button-toggle button:before,
 	.arrow:before,
-	.header-new-gallery--link .header-new-gallery-inner:before
+	.header-new-gallery--link .header-new-gallery-inner:before,
+	.inbox-notifications__item-visual-summary:before
 	{
 		content: '';
 		display: block !important;
@@ -3857,6 +3861,25 @@
 		--hue: -2;
 	}
 
+	.inbox-notifications__item-visual-summary {
+		padding-left: calc(16px + 12px);
+	}
+	[href^="/user/"][href*="/shoutbox/"] .inbox-notifications__item-visual-summary:before {
+		--mask: var(--icon-16-shoutbox);
+	}
+	[href^="/music/"][href*="/+shoutbox/"] .inbox-notifications__item-visual-summary:before {
+		--mask: var(--icon-16-album);
+	}
+	[href^="/music/"][href*="/+images/"] .inbox-notifications__item-visual-summary:before {
+		--mask: var(--icon-16-photo);
+	}
+	[href^="/user/"][href$="/obsessions/set"] .inbox-notifications__item-visual-summary:before {
+		--mask: var(--icon-16-obsession);
+	}
+	[href^="/user/"][href$="/listening-report/month"] .inbox-notifications__item-visual-summary:before {
+		--mask: var(--icon-16-listening-report-monthly);
+	}
+
 	.inbox-notifications__item-link {
 		--padding: 18px 12px;
 		--bg: hsl(var(--b6));
@@ -3889,7 +3912,7 @@
 
 	.inbox-notifications .inbox-notifications__item-description {
 		padding-top: unset;
-		margin-left: calc(12px + 40px);
+		margin-left: calc(12px + 40px + (16px + 12px));
 	}
 	.inbox-notifications__item-description strong {
 		color: hsl(var(--l3-c));
@@ -5395,7 +5418,7 @@
 		border-radius: var(--item-big-radius);
 		box-shadow: var(--card-shadow);
 		overflow: hidden;
-		height: 239px;
+		height: 245px;
 		position: relative;
 	}
 
@@ -5566,7 +5589,7 @@
 
 	/*     loser lol     */
 	[alt="Avatar for DXP6986"] {
-		content: url('https://plexion.dev/img/keionbu.jpg') !important;
+		content: url('https://cutensilly.org/img/keionbu.jpg') !important;
 	}
 	.col-main:has(#shoutbox[data-lazy-load-content="/user/DXP6986/partial/shoutbox"]) + .col-sidebar .about-me-sidebar p,
 	.header-title-label-wrap:has(a[href="/user/DXP6986"]) + .header-title-secondary .header-title-display-name
@@ -5583,12 +5606,6 @@
 	}
 
 	.shout:has(.shout-user a[href="/user/DXP6986"]) {
-		/*content: '';
-		position: absolute;
-		inset: 0;
-		background-image: url('https://plexion.dev/img/skull.png');
-		background-size: 20px;
-		opacity: 0.1;*/
 		opacity: 0.6;
 	}
 }
