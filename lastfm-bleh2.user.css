@@ -143,7 +143,8 @@
 	a,
 	.obsession-history-item-inner,
 	.user-dashboard-layout,
-	.image-list-item-preferred-icon:before
+	.image-list-item-preferred-icon:before,
+	.header-metadata-item:after
 	{
 		--c1: var(--hue), calc(var(--sat) * 40%), 100%;
 		--c2: var(--hue), calc(var(--sat) * 60%), 90%;
@@ -190,7 +191,7 @@
 
 		--menu-shadow: 2px 2px 24px 0 hsla(var(--b7), 0.35), 3px 6px 48px 16px hsla(var(--b7), 0.25);
 
-		--noise: url('https://plexion.dev/img/noise.png');
+		--noise: url('https://cutensilly.org/img/noise.png');
 
 		--interact-shadow: hsla(var(--b7), 0.1) 0 2px 4px 0;
 	}
@@ -1879,6 +1880,7 @@
 		height: 32px;
 		margin: unset !important;
 		box-shadow: var(--interact-shadow);
+		position: relative;
 	}
 	.personal-stats-inner .header-metadata-item, .header-metadata-tnew-item {
 		background-color: hsl(var(--b4));
@@ -1889,13 +1891,67 @@
 		line-height: var(--line-height);
 		text-transform: unset;
 		font-weight: unset !important;
+		z-index: 5;
 	}
 	.header-metadata .header-metadata-display, .metadata-display, .header-metadata-tnew-display {
 		color: hsl(var(--c2));
 		font-size: var(--font-size);
 		line-height: var(--line-height);
 		font-weight: unset;
+		z-index: 5;
 	}
+
+	.header-metadata-item:after {
+		content: '';
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		height: 32px;
+		background-color: hsla(var(--l4-c), 35%);
+		box-shadow: 0 -2px 20px 2px hsla(var(--l4-c), 65%);
+		border-radius: var(--card-radius);
+		width: var(--percent, 0%);
+		/*box-sizing: border-box;
+		border: 2px solid hsla(var(--l3-c), 10%);*/
+		transition-property: opacity, width;
+		transition-duration: 1.3s;
+		transition-timing-function: ease;
+	}
+	.header-metadata-item:not([data-scrobbles]):after {
+		opacity: 0;
+	}
+
+
+	/*[data-scrobbles-milestone="0"] {
+		--hue: 145;
+	}
+	[data-scrobbles-milestone="1"] {
+		--hue: 165;
+	}
+	[data-scrobbles-milestone="2"] {
+		--hue: 185;
+	}
+	[data-scrobbles-milestone="3"] {
+		--hue: 202;
+	}
+	[data-scrobbles-milestone="4"] {
+		--hue: 230;
+	}
+	[data-scrobbles-milestone="5"] {
+		--hue: 260;
+	}
+	[data-scrobbles-milestone="6"] {
+		--hue: 305;
+	}
+	[data-scrobbles-milestone="7"] {
+		--hue: 340;
+	}
+	[data-scrobbles-milestone="8"] {
+		--hue: 8;
+	}*/
+
 
 	/* fixes overlap over dropdown due to link-block-target */
 	.header-metadata-display a {
@@ -5600,12 +5656,28 @@
 		content: 'Pick a # *looks at you* between 1 & 1000 & I\'ww give you an awbum wecommndation.  I do nyot add weebs, hypebeasts, awphabet they/thems, awtwight, wokists, MAGA, antifa, depwowabwes, *whispers to self* viwtue cwusadews ow (・`ω´・) aduwt UwU toddwews';
 		font-size: var(--font-size);
 	}
+
 	.header-title-label-wrap:has(a[href="/user/DXP6986"]) + .header-title-secondary .header-title-display-name:after {
 		content: 'uwu hehe >w<';
 		font-size: var(--font-size);
 	}
 
-	.shout:has(.shout-user a[href="/user/DXP6986"]) {
+	/* another loser */
+	[alt="Avatar for sleeptune"] {
+		content: url('https://cutensilly.org/img/miku.jpg') !important;
+	}
+	.header-title-label-wrap:has(a[href="/user/sleeptune"]) + .header-title-secondary .header-title-display-name
+	{
+		font-size: 0;
+	}
+	.header-title-label-wrap:has(a[href="/user/sleeptune"]) + .header-title-secondary .header-title-display-name:after {
+		content: 'teehee :3 s-sweeptune..';
+		font-size: var(--font-size);
+	}
+
+	.shout:has(.shout-user a[href="/user/DXP6986"]),
+	.shout:has(.shout-user a[href="/user/sleeptune"])
+	{
 		opacity: 0.6;
 	}
 }
