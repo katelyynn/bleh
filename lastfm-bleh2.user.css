@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           bleh2
 @namespace      github.com/katelyynn/bleh
-@version        2024.0218
+@version        2024.0311
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelyynn/bleh/raw/uwu/lastfm-bleh2.user.css
@@ -9,7 +9,7 @@
 ==/UserStyle== */
 
 @-moz-document domain("cutensilly.org") {
-	body                     {--bleh2-ver: 2024.0216} .installed2-only, .btn-installed2-only {display: flex !important} .uninstalled2-only {display: none} .install2 {pointer-events: auto; opacity: 1; border-style: solid}
+	body                     {--bleh2-ver: 2024.0311} .installed2-only, .btn-installed2-only {display: flex !important} .uninstalled2-only {display: none} .install2 {pointer-events: auto; opacity: 1; border-style: solid}
 }
 
 
@@ -144,7 +144,8 @@
 	.obsession-history-item-inner,
 	.user-dashboard-layout,
 	.image-list-item-preferred-icon:before,
-	.header-metadata-item:after
+	.header-metadata-item:after,
+	#current-subscription
 	{
 		--c1: var(--hue), calc(var(--sat) * 40%), 100%;
 		--c2: var(--hue), calc(var(--sat) * 60%), 90%;
@@ -172,6 +173,7 @@
 		--card-radius: 8px;
 		--card-shadow: hsla(var(--b7), 0.25) 0 2px 4px 0;
 		--card-gap: 15px;
+		--card-border: 1px solid hsl(var(--b4));
 
 		--cards-main-width: 843px; /* this makes it not 777, the grid looks better okay */
 		--cards-sidebar-width: 400px;
@@ -203,6 +205,7 @@
 		--icon-follow: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImhzbCgyNTUsODAlLDkwJSkiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS11c2VycyI+PHBhdGggZD0iTTE2IDIxdi0yYTQgNCAwIDAgMC00LTRINmE0IDQgMCAwIDAtNCA0djIiLz48Y2lyY2xlIGN4PSI5IiBjeT0iNyIgcj0iNCIvPjxwYXRoIGQ9Ik0yMiAyMXYtMmE0IDQgMCAwIDAtMy0zLjg3Ii8+PHBhdGggZD0iTTE2IDMuMTNhNCA0IDAgMCAxIDAgNy43NSIvPjwvc3ZnPg==');
 		--icon-tour: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImhzbCgzMzMsNTclLDcwJSkiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS10aWNrZXQiPjxwYXRoIGQ9Ik0yIDlhMyAzIDAgMCAxIDAgNnYyYTIgMiAwIDAgMCAyIDJoMTZhMiAyIDAgMCAwIDItMnYtMmEzIDMgMCAwIDEgMC02VjdhMiAyIDAgMCAwLTItMkg0YTIgMiAwIDAgMC0yIDJaIi8+PHBhdGggZD0iTTEzIDV2MiIvPjxwYXRoIGQ9Ik0xMyAxN3YyIi8+PHBhdGggZD0iTTEzIDExdjIiLz48L3N2Zz4=');
 
+		--icon-queen: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImhzbCgyNTUsNTclLDcwJSkiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1jcm93biI+PHBhdGggZD0ibTIgNCAzIDEyaDE0bDMtMTItNiA3LTQtNy00IDctNi03em0zIDE2aDE0Ii8+PC9zdmc+');
 		--icon-blehhh: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImhzbCgyNTUsNTclLDcwJSkiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1jYXQiPjxwYXRoIGQ9Ik0xMiA1Yy42NyAwIDEuMzUuMDkgMiAuMjYgMS43OC0yIDUuMDMtMi44NCA2LjQyLTIuMjYgMS40LjU4LS40MiA3LS40MiA3IC41NyAxLjA3IDEgMi4yNCAxIDMuNDRDMjEgMTcuOSAxNi45NyAyMSAxMiAyMXMtOS0zLTktNy41NmMwLTEuMjUuNS0yLjQgMS0zLjQ0IDAgMC0xLjg5LTYuNDItLjUtNyAxLjM5LS41OCA0LjcyLjIzIDYuNSAyLjIzQTkuMDQgOS4wNCAwIDAgMSAxMiA1WiIvPjxwYXRoIGQ9Ik04IDE0di41Ii8+PHBhdGggZD0iTTE2IDE0di41Ii8+PHBhdGggZD0iTTExLjI1IDE2LjI1aDEuNUwxMiAxN2wtLjc1LS43NVoiLz48L3N2Zz4=');
 		--icon-boha: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImhzbCgyMDYsNzclLDcwJSkiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1jYXQiPjxwYXRoIGQ9Ik0xMiA1Yy42NyAwIDEuMzUuMDkgMiAuMjYgMS43OC0yIDUuMDMtMi44NCA2LjQyLTIuMjYgMS40LjU4LS40MiA3LS40MiA3IC41NyAxLjA3IDEgMi4yNCAxIDMuNDRDMjEgMTcuOSAxNi45NyAyMSAxMiAyMXMtOS0zLTktNy41NmMwLTEuMjUuNS0yLjQgMS0zLjQ0IDAgMC0xLjg5LTYuNDItLjUtNyAxLjM5LS41OCA0LjcyLjIzIDYuNSAyLjIzQTkuMDQgOS4wNCAwIDAgMSAxMiA1WiIvPjxwYXRoIGQ9Ik04IDE0di41Ii8+PHBhdGggZD0iTTE2IDE0di41Ii8+PHBhdGggZD0iTTExLjI1IDE2LjI1aDEuNUwxMiAxN2wtLjc1LS43NVoiLz48L3N2Zz4=');
 		--icon-neek: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImhzbCgyMDYsMCUsMTAwJSkiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1jYXQiPjxwYXRoIGQ9Ik0xMiA1Yy42NyAwIDEuMzUuMDkgMiAuMjYgMS43OC0yIDUuMDMtMi44NCA2LjQyLTIuMjYgMS40LjU4LS40MiA3LS40MiA3IC41NyAxLjA3IDEgMi4yNCAxIDMuNDRDMjEgMTcuOSAxNi45NyAyMSAxMiAyMXMtOS0zLTktNy41NmMwLTEuMjUuNS0yLjQgMS0zLjQ0IDAgMC0xLjg5LTYuNDItLjUtNyAxLjM5LS41OCA0LjcyLjIzIDYuNSAyLjIzQTkuMDQgOS4wNCAwIDAgMSAxMiA1WiIvPjxwYXRoIGQ9Ik04IDE0di41Ii8+PHBhdGggZD0iTTE2IDE0di41Ii8+PHBhdGggZD0iTTExLjI1IDE2LjI1aDEuNUwxMiAxN2wtLjc1LS43NVoiLz48L3N2Zz4=');
@@ -460,6 +463,10 @@
 		bottom: 0;
 		font-weight: 700;
 		color: hsla(var(--c2), 80%);
+	}
+
+	.masthead-logo-loading {
+		display: none;
 	}
 
 
@@ -766,11 +773,12 @@
 	/* katie doesnt have any scrobbles yet */ .profile-mobile-featured-track + .no-data-message,
 	/* quick create playlists */ .section-with-separator[action*="/create/from-"],
 	/* add artwork */ .namespace--music_album_images_image-upload .full-bleed-ad-container + .page-content + .page-content .col-main .form-horizontal,
-	/* inbox */ .inbox-compose-view, .inbox-message-view
+	/* inbox */ .inbox-compose-view, .inbox-message-view,
+	#current-subscription
 	{
 		content: '';
-		background-color: hsl(var(--b5));
-		border: 1px solid hsl(var(--b4));
+		background-color: hsl(var(--card-background, var(--b5)));
+		border: var(--card-border);
 		border-radius: var(--card-radius);
 		box-shadow: var(--card-shadow);
 		padding: var(--card-padding);
@@ -996,7 +1004,6 @@
 	.video-preview-replace a:hover
 	{
 		opacity: 1;
-		backdrop-filter: blur(2px);
 	}
 	.track-overview-video-column .video-preview-playlink .image-overlay-playlink-link:before,
 	.track-overview-video-column .video-preview-playlink .image-overlay-playlink-link:after
@@ -1290,11 +1297,19 @@
 		transition: color 0.2s ease;
 	}
 	.navlist-more {
+		padding: 12px 16px 12px !important;
 		--bg: transparent;
 		--bg-hov: transparent;
 		--bg-atv: transparent;
 		--col: hsla(var(--c2), 85%);
 		--shadow: none;
+		--font-size: 0;
+		width: 48px;
+		--mask: var(--icon-16-dots);
+		position: relative;
+	}
+	.navlist-more:before {
+		--left: 16px;
 	}
 	.secondary-nav-item-link--active {
 		color: hsl(var(--c1)) !important;
@@ -1757,6 +1772,9 @@
 		max-width: 24px;
 		height: 24px;
 		font-size: var(--font-size);
+		font-weight: 500 !important;
+		display: flex;
+		align-items: center;
 		color: transparent !important;
 		padding: unset;
 		border-radius: 0;
@@ -1766,7 +1784,7 @@
 		letter-spacing: unset;
 		text-transform: unset;
 		font-weight: unset;
-		padding-left: calc(24px + 4px);
+		padding-left: calc(24px + 6px);
 		box-shadow: unset !important;
 		min-height: unset;
 		line-height: unset;
@@ -1995,26 +2013,39 @@
 		content: ' match';
 	}
 	.tasteometer-compat-colour {
-		fill: hsl(var(--l4)) !important;
-		color: hsl(var(--l4)) !important;
+		fill: hsl(var(--l3-c)) !important;
+		color: hsl(var(--l3-c)) !important;
 	}
 
-	.tasteometer-compat-super .tasteometer-compat-colour {
-		--hue: -2;
+	.tasteometer-body:not(:has(.tasteometer-compat-description)) {
+		font-size: 0;
 	}
-	.tasteometer-compat-very_high .tasteometer-compat-colour {
+	.tasteometer-body:not(:has(.tasteometer-compat-description)):after {
+		content: 'No scrobbles to match';
+		font-size: var(--font-size);
+		margin-left: -10px;
+		color: hsl(var(--c3));
+	}
+
+	.tasteometer-compat-super {
+		--hue: -2;
+		--sat: 1.4;
+		--lit: 0.95;
+	}
+	.tasteometer-compat-very_high {
 		--hue: 15;
 	}
-	.tasteometer-compat-high .tasteometer-compat-colour {
+	.tasteometer-compat-high {
 		--hue: 35;
 	}
-	.tasteometer-compat-medium .tasteometer-compat-colour {
+	.tasteometer-compat-medium {
 		--hue: 160;
 	}
-	.tasteometer-compat-low .tasteometer-compat-colour {
+	.tasteometer-compat-low {
 		--hue: 255;
 	}
-	.tasteometer-compat-very_low .tasteometer-compat-colour {
+	.tasteometer-compat-very_low .tasteometer-compat-colour,
+	.tasteometer-compat-very_low {
 		fill: hsl(var(--c3)) !important;
 		color: hsl(var(--c3)) !important;
 	}
@@ -2714,8 +2745,14 @@
 	}
 
 
+	[href="/user/cutensilly"] {
+		color: hsl(var(--l2-c)) !important;
+		text-shadow: 0 0 5px hsl(var(--l4-c)) !important;
+	}
+
+
 	.avatar-status-dot,
-	.shout-user:has([href="/user/aoivee"], [href="/user/Serprety"]) + .shout-user-avatar:before
+	.shout-user:has([href="/user/aoivee"], [href="/user/Serprety"], [href="/user/RazzBX"]) + .shout-user-avatar:before
 	{
 		left: unset;
 		top: unset;
@@ -2734,7 +2771,7 @@
 		border-radius: 50%;
 	}
 	.shout-user-avatar .avatar-status-dot,
-	.shout-user:has([href="/user/aoivee"], [href="/user/Serprety"]) + .shout-user-avatar:before
+	.shout-user:has([href="/user/aoivee"], [href="/user/Serprety"], [href="/user/RazzBX"]) + .shout-user-avatar:before
 	{
 		width: 20px;
 		height: 20px;
@@ -2755,6 +2792,15 @@
 		filter: drop-shadow(2px 0px 0 hsl(var(--b5))) drop-shadow(0px 2px 0 hsl(var(--b5))) drop-shadow(-2px -0px 0 hsl(var(--b5))) drop-shadow(-0px -2px 0 hsl(var(--b5))) drop-shadow(0px 4px 0px hsl(var(--b5)));
 	}
 	.header-title:has([href="/user/Serprety"]) + .user-status-None {
+		display: flex;
+		background-image: var(--icon-blehhh);
+	}
+
+	.shout-user:has([href="/user/RazzBX"]) + .shout-user-avatar:before {
+		background-image: var(--icon-blehhh);
+		filter: drop-shadow(2px 0px 0 hsl(var(--b5))) drop-shadow(0px 2px 0 hsl(var(--b5))) drop-shadow(-2px -0px 0 hsl(var(--b5))) drop-shadow(-0px -2px 0 hsl(var(--b5))) drop-shadow(0px 4px 0px hsl(var(--b5)));
+	}
+	.header-title:has([href="/user/RazzBX"]) + .user-status-None {
 		display: flex;
 		background-image: var(--icon-blehhh);
 	}
@@ -2850,7 +2896,7 @@
 	.header-title:has([href="/user/cutensilly"]) + .user-status-subscriber,
 	.user-list-name:has([href="/user/cutensilly"]) + .user-list-avatar .avatar-status-dot
 	{
-		background-image: var(--icon-blehhh) !important;
+		background-image: var(--icon-queen) !important;
 	}
 	/* boha */
 	.shout-user:has([href="/user/BoHa1"]) + .shout-user-avatar .avatar-status-dot,
@@ -3050,7 +3096,8 @@
 	.resource-external-link, .play-this-track-playlink, .replace-playlink,
 	.shout-more-replies-before,
 	.coloured-cta,
-	.gallery-previous .arrow
+	.gallery-previous .arrow,
+	.section-playlink
 	{
 		padding-left: calc(12px + 16px + 6px) !important;
 	}
@@ -3110,6 +3157,25 @@
 		--mask: var(--icon-16-calendar-add);
 	}
 
+	.section-controls {
+		position: relative;
+	}
+	.section-playlink {
+		--mask: var(--icon-16-play);
+		margin-left: unset;
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+	.section-controls h3 {
+		transition-property: opacity;
+		transition-duration: var(--trans);
+		transition-timing-function: var(--trans-function);
+	}
+	.section-with-hover-control:hover .section-controls h3 {
+		opacity: 0;
+	}
+
 	.stationlink-list .stationlink::before,
 	.dropdown-menu-clickable-item:before, .auth-dropdown-menu-item:before,
 	.shout .vote-button:before,
@@ -3133,12 +3199,14 @@
 	.love-button-toggle button:before,
 	.arrow:before,
 	.header-new-gallery--link .header-new-gallery-inner:before,
-	.inbox-notifications__item-visual-summary:before
+	.inbox-notifications__item-visual-summary:before,
+	.navlist-more:before,
+	.section-playlink:before
 	{
 		content: '';
 		display: block !important;
 		mask-position: 0 0 !important;
-		left: 12px !important;
+		left: var(--left, 12px) !important;
 		margin-top: -8px !important;
 		margin-left: unset !important;
 		width: 16px !important;
@@ -3150,6 +3218,7 @@
 		background-repeat: no-repeat;
 		background-image: unset !important;
 		background-color: currentColor;
+		border-radius: unset;
 		mask-image: var(--mask);
 		-webkit-mask-image: var(--mask);
 		transition-property: opacity !important;
@@ -3384,7 +3453,7 @@
 	.dropdown-menu-clickable-item:after, .auth-dropdown-menu-item:after {
 		content: '';
 		position: absolute;
-		bottom: -4px;
+		bottom: -6px;
 		left: 0;
 		right: 0;
 		height: 1px;
@@ -3397,17 +3466,17 @@
 	.more-item--delete:after
 	{
 		bottom: unset;
-		top: -4px;
+		top: -6px;
 	}
 
 	.more-item--edit-old,
 	.auth-dropdown-menu-item[href="/settings"], .auth-dropdown-menu-item[href^="/user/"]
 	{
-		margin-bottom: 7px !important;
+		margin-bottom: 11px !important;
 	}
 	.more-item--delete
 	{
-		margin-top: 7px !important;
+		margin-top: 11px !important;
 	}
 	.more-item--edit-old:after,
 	.more-item--delete:after,
@@ -3613,12 +3682,21 @@
 		display: flex;
 		align-items: center;
 	}
+
+
+
 	.form-section .form-group-controls.form-control-description {
 		/* this should be vertical, otherwise settings is broken */
 		display: block !important;
 		/* align with control-label */
 		padding-top: 7px;
 	}
+	:is(.form-group--about_me, .form-group--timezone, .form-group--current_username, .form-group--password, #playback > .form-horizontal, #email-settings > .form-horizontal) .form-group-controls {
+		display: block !important;
+	}
+
+
+
 	.content-form .form-horizontal .form-control-description label + select {
 		margin-top: 8px !important;
 	}
@@ -5590,6 +5668,23 @@
 
 	.globalchart .globalchart-track-artist-name {
 		color: hsl(var(--c3));
+	}
+
+
+
+
+	/*     PRO     */
+	#current-subscription {
+		--hue: 45;
+		--sat: 1;
+		--lit: 1;
+		--ovr: var(--b7);
+		background-color: hsla(var(--h4), 10%);
+	}
+	#current-subscription h3 {
+		margin-top: unset;
+		margin-bottom: 12px;
+		color: hsl(var(--l2-c));
 	}
 
 
