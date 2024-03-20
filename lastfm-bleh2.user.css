@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           bleh2
 @namespace      github.com/katelyynn/bleh
-@version        2024.0311
+@version        2024.0320
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelyynn/bleh/raw/uwu/lastfm-bleh2.user.css
@@ -9,7 +9,7 @@
 ==/UserStyle== */
 
 @-moz-document domain("cutensilly.org") {
-	body                     {--bleh2-ver: 2024.0311} .installed2-only, .btn-installed2-only {display: flex !important} .uninstalled2-only {display: none} .install2 {pointer-events: auto; opacity: 1; border-style: solid}
+	body                     {--bleh2-ver: 2024.0320} .installed2-only, .btn-installed2-only {display: flex !important} .uninstalled2-only {display: none} .install2 {pointer-events: auto; opacity: 1; border-style: solid}
 }
 
 
@@ -89,6 +89,10 @@
 		--sat: var(--saturation, 1);
 		--lit: var(--lightness, 1);
 		--ovr: var(--invert-btn, var(--b7));
+
+		--brand: 'bleh';
+		--brand-branch: '2 BETA';
+		--brand-info: '2024.0320';
 
 		--font: Geist Sans, Spline Sans ALT, IBM Plex Sans, IBM Plex Sans JP, Spline Sans, Inter, Roboto, Noto Sans, Noto Sans JP, sans-serif;
 		--font-code: Spline Sans Mono, Iosevka, JetBrains Mono, Roboto Mono, monospace;
@@ -194,6 +198,8 @@
 		--menu-shadow: 2px 2px 24px 0 hsla(var(--b7), 0.35), 3px 6px 48px 16px hsla(var(--b7), 0.25);
 
 		--noise: url('https://cutensilly.org/img/noise.png');
+		--gloss: url('https://cutensilly.org/img/gloss.svg');
+		--gloss-opacity: 0.16;
 
 		--interact-shadow: hsla(var(--b7), 0.1) 0 2px 4px 0;
 	}
@@ -204,6 +210,7 @@
 		--icon-pro: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImhzbCgyNSw2MCUsNzAlKSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLXNwYXJrbGUiPjxwYXRoIGQ9Im0xMiAzLTEuOSA1LjhhMiAyIDAgMCAxLTEuMjg3IDEuMjg4TDMgMTJsNS44IDEuOWEyIDIgMCAwIDEgMS4yODggMS4yODdMMTIgMjFsMS45LTUuOGEyIDIgMCAwIDEgMS4yODctMS4yODhMMjEgMTJsLTUuOC0xLjlhMiAyIDAgMCAxLTEuMjg4LTEuMjg3WiIvPjwvc3ZnPg==');
 		--icon-follow: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImhzbCgyNTUsODAlLDkwJSkiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS11c2VycyI+PHBhdGggZD0iTTE2IDIxdi0yYTQgNCAwIDAgMC00LTRINmE0IDQgMCAwIDAtNCA0djIiLz48Y2lyY2xlIGN4PSI5IiBjeT0iNyIgcj0iNCIvPjxwYXRoIGQ9Ik0yMiAyMXYtMmE0IDQgMCAwIDAtMy0zLjg3Ii8+PHBhdGggZD0iTTE2IDMuMTNhNCA0IDAgMCAxIDAgNy43NSIvPjwvc3ZnPg==');
 		--icon-tour: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImhzbCgzMzMsNTclLDcwJSkiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS10aWNrZXQiPjxwYXRoIGQ9Ik0yIDlhMyAzIDAgMCAxIDAgNnYyYTIgMiAwIDAgMCAyIDJoMTZhMiAyIDAgMCAwIDItMnYtMmEzIDMgMCAwIDEgMC02VjdhMiAyIDAgMCAwLTItMkg0YTIgMiAwIDAgMC0yIDJaIi8+PHBhdGggZD0iTTEzIDV2MiIvPjxwYXRoIGQ9Ik0xMyAxN3YyIi8+PHBhdGggZD0iTTEzIDExdjIiLz48L3N2Zz4=');
+		--icon-staff: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImhzbCgtMiw1NyUsNzAlKSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLXNldHRpbmdzIj48cGF0aCBkPSJNMTIuMjIgMmgtLjQ0YTIgMiAwIDAgMC0yIDJ2LjE4YTIgMiAwIDAgMS0xIDEuNzNsLS40My4yNWEyIDIgMCAwIDEtMiAwbC0uMTUtLjA4YTIgMiAwIDAgMC0yLjczLjczbC0uMjIuMzhhMiAyIDAgMCAwIC43MyAyLjczbC4xNS4xYTIgMiAwIDAgMSAxIDEuNzJ2LjUxYTIgMiAwIDAgMS0xIDEuNzRsLS4xNS4wOWEyIDIgMCAwIDAtLjczIDIuNzNsLjIyLjM4YTIgMiAwIDAgMCAyLjczLjczbC4xNS0uMDhhMiAyIDAgMCAxIDIgMGwuNDMuMjVhMiAyIDAgMCAxIDEgMS43M1YyMGEyIDIgMCAwIDAgMiAyaC40NGEyIDIgMCAwIDAgMi0ydi0uMThhMiAyIDAgMCAxIDEtMS43M2wuNDMtLjI1YTIgMiAwIDAgMSAyIDBsLjE1LjA4YTIgMiAwIDAgMCAyLjczLS43M2wuMjItLjM5YTIgMiAwIDAgMC0uNzMtMi43M2wtLjE1LS4wOGEyIDIgMCAwIDEtMS0xLjc0di0uNWEyIDIgMCAwIDEgMS0xLjc0bC4xNS0uMDlhMiAyIDAgMCAwIC43My0yLjczbC0uMjItLjM4YTIgMiAwIDAgMC0yLjczLS43M2wtLjE1LjA4YTIgMiAwIDAgMS0yIDBsLS40My0uMjVhMiAyIDAgMCAxLTEtMS43M1Y0YTIgMiAwIDAgMC0yLTJ6Ii8+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMyIvPjwvc3ZnPg==');
 
 		--icon-queen: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImhzbCgyNTUsNTclLDcwJSkiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1jcm93biI+PHBhdGggZD0ibTIgNCAzIDEyaDE0bDMtMTItNiA3LTQtNy00IDctNi03em0zIDE2aDE0Ii8+PC9zdmc+');
 		--icon-blehhh: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImhzbCgyNTUsNTclLDcwJSkiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1jYXQiPjxwYXRoIGQ9Ik0xMiA1Yy42NyAwIDEuMzUuMDkgMiAuMjYgMS43OC0yIDUuMDMtMi44NCA2LjQyLTIuMjYgMS40LjU4LS40MiA3LS40MiA3IC41NyAxLjA3IDEgMi4yNCAxIDMuNDRDMjEgMTcuOSAxNi45NyAyMSAxMiAyMXMtOS0zLTktNy41NmMwLTEuMjUuNS0yLjQgMS0zLjQ0IDAgMC0xLjg5LTYuNDItLjUtNyAxLjM5LS41OCA0LjcyLjIzIDYuNSAyLjIzQTkuMDQgOS4wNCAwIDAgMSAxMiA1WiIvPjxwYXRoIGQ9Ik04IDE0di41Ii8+PHBhdGggZD0iTTE2IDE0di41Ii8+PHBhdGggZD0iTTExLjI1IDE2LjI1aDEuNUwxMiAxN2wtLjc1LS43NVoiLz48L3N2Zz4=');
@@ -280,6 +287,7 @@
 		--icon-16-globe: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtZ2xvYmUiPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEwIi8+PHBhdGggZD0iTTEyIDJhMTQuNSAxNC41IDAgMCAwIDAgMjAgMTQuNSAxNC41IDAgMCAwIDAtMjAiLz48cGF0aCBkPSJNMiAxMmgyMCIvPjwvc3ZnPg==');
 		--icon-16-profile: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtYXQtc2lnbiI+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iNCIvPjxwYXRoIGQ9Ik0xNiA4djVhMyAzIDAgMCAwIDYgMHYtMWExMCAxMCAwIDEgMC00IDgiLz48L3N2Zz4=');
 		--icon-16-lock: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtbG9jayI+PHJlY3Qgd2lkdGg9IjE4IiBoZWlnaHQ9IjExIiB4PSIzIiB5PSIxMSIgcng9IjIiIHJ5PSIyIi8+PHBhdGggZD0iTTcgMTFWN2E1IDUgMCAwIDEgMTAgMHY0Ii8+PC9zdmc+');
+		--icon-16-unlock: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtbG9jay1vcGVuIj48cmVjdCB3aWR0aD0iMTgiIGhlaWdodD0iMTEiIHg9IjMiIHk9IjExIiByeD0iMiIgcnk9IjIiLz48cGF0aCBkPSJNNyAxMVY3YTUgNSAwIDAgMSA5LjktMSIvPjwvc3ZnPg==');
 		--icon-16-app: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtYXBwLXdpbmRvdyI+PHJlY3QgeD0iMiIgeT0iNCIgd2lkdGg9IjIwIiBoZWlnaHQ9IjE2IiByeD0iMiIvPjxwYXRoIGQ9Ik0xMCA0djQiLz48cGF0aCBkPSJNMiA4aDIwIi8+PHBhdGggZD0iTTYgNHY0Ii8+PC9zdmc+');
 		--icon-16-pro: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtc3BhcmtsZSI+PHBhdGggZD0ibTEyIDMtMS45IDUuOGEyIDIgMCAwIDEtMS4yODcgMS4yODhMMyAxMmw1LjggMS45YTIgMiAwIDAgMSAxLjI4OCAxLjI4N0wxMiAyMWwxLjktNS44YTIgMiAwIDAgMSAxLjI4Ny0xLjI4OEwyMSAxMmwtNS44LTEuOWEyIDIgMCAwIDEtMS4yODgtMS4yODdaIi8+PC9zdmc+');
 		--icon-16-sent-mail: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtbWFpbC1vcGVuIj48cGF0aCBkPSJNMjEuMiA4LjRjLjUuMzguOC45Ny44IDEuNnYxMGEyIDIgMCAwIDEtMiAySDRhMiAyIDAgMCAxLTItMlYxMGEyIDIgMCAwIDEgLjgtMS42bDgtNmEyIDIgMCAwIDEgMi40IDBsOCA2WiIvPjxwYXRoIGQ9Im0yMiAxMC04Ljk3IDUuN2ExLjk0IDEuOTQgMCAwIDEtMi4wNiAwTDIgMTAiLz48L3N2Zz4=');
@@ -290,6 +298,7 @@
 		--icon-16-listening-report-monthly: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtYXJlYS1jaGFydCI+PHBhdGggZD0iTTMgM3YxOGgxOCIvPjxwYXRoIGQ9Ik03IDEydjVoMTJWOGwtNSA1LTQtNFoiLz48L3N2Zz4=');
 		--icon-16-listening-report-yearly: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtcGllLWNoYXJ0Ij48cGF0aCBkPSJNMjEuMjEgMTUuODlBMTAgMTAgMCAxIDEgOCAyLjgzIi8+PHBhdGggZD0iTTIyIDEyQTEwIDEwIDAgMCAwIDEyIDJ2MTB6Ii8+PC9zdmc+');
 		--icon-16-info: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtaW5mbyI+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMTAiLz48cGF0aCBkPSJNMTIgMTZ2LTQiLz48cGF0aCBkPSJNMTIgOGguMDEiLz48L3N2Zz4=');
+		--icon-16-revert: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtdW5kby0yIj48cGF0aCBkPSJNOSAxNCA0IDlsNS01Ii8+PHBhdGggZD0iTTQgOWgxMC41YTUuNSA1LjUgMCAwIDEgNS41IDUuNXYwYTUuNSA1LjUgMCAwIDEtNS41IDUuNUgxMSIvPjwvc3ZnPg==');
 
 		--icon-20-check: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImhzbCgyNTUsMjAlLDkwJSkiIHN0cm9rZS13aWR0aD0iMi4yNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1jaGVjayI+PHBhdGggZD0iTTIwIDYgOSAxN2wtNS01Ii8+PC9zdmc+');
 		--icon-20-plus: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImhzbCgyNTUsMjAlLDkwJSkiIHN0cm9rZS13aWR0aD0iMi4yNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1wbHVzIj48cGF0aCBkPSJNNSAxMmgxNCIvPjxwYXRoIGQ9Ik0xMiA1djE0Ii8+PC9zdmc+');
@@ -431,20 +440,24 @@
 		justify-content: center;
 	}
 	.masthead-logo {
-		position: static;
+		position: relative;
+		left: unset;
 		flex: 1;
 		background-size: 104px;
 		background-position: left;
 		margin-left: unset;
 		/*opacity: 0.7;*/
 		background: unset;
+		font: inherit;
+		color: hsl(var(--c3));
 	}
 	.masthead-logo a {
 		width: 104px;
 		position: relative;
+		font: 0/0 a;
 	}
 	.masthead-logo a:before {
-		content: 'bleh';
+		content: var(--brand);
 		font-size: 26px;
 		font-family: var(--font);
 		position: absolute;
@@ -454,15 +467,23 @@
 		font-weight: 700;
 	}
 	.masthead-logo a:after {
-		content: '2 BETA';
-		font-size: 18px;
+		content: var(--brand-branch);
+		font-size: 16px;
 		font-family: var(--font);
 		position: absolute;
-		top: 16px;
+		top: 15px;
 		left: 60px;
 		bottom: 0;
 		font-weight: 700;
 		color: hsla(var(--c2), 80%);
+	}
+
+	.masthead-logo:after {
+		content: var(--brand-info);
+		position: absolute;
+		top: 16px;
+		left: 60px;
+		font-size: 9px;
 	}
 
 	.masthead-logo-loading {
@@ -774,7 +795,8 @@
 	/* quick create playlists */ .section-with-separator[action*="/create/from-"],
 	/* add artwork */ .namespace--music_album_images_image-upload .full-bleed-ad-container + .page-content + .page-content .col-main .form-horizontal,
 	/* inbox */ .inbox-compose-view, .inbox-message-view,
-	#current-subscription
+	#current-subscription,
+	.event-summary-with-poster
 	{
 		content: '';
 		background-color: hsl(var(--card-background, var(--b5)));
@@ -1076,6 +1098,28 @@
 		width: fit-content;
 		position: relative;
 		z-index: 10;
+	}
+
+	.namespace--events_event_overview .header-inner-wrap {
+		position: relative;
+		padding-bottom: 22px;
+	}
+	.namespace--events_event_overview .secondary-nav {
+		bottom: calc(-100px + var(--card-gap));
+	}
+	.namespace--events_event_overview .header-info-secondary {
+		top: calc(24px + 22px);
+		z-index: 10;
+	}
+
+	.header-info-primary--with-calendar .header-title, .header-info-primary--with-calendar .header-title-secondary, .header-info-primary--with-calendar .label {
+		top: unset;
+	}
+
+	.header-metadata-item--event-attendance {
+		padding: unset !important;
+		background: unset !important;
+		box-shadow: unset !important;
 	}
 
 
@@ -1542,7 +1586,7 @@
 		z-index: 0;
 	}
 
-	header:is(.header-new--album, .header-new--track) .header-new-inner {
+	/*header:is(.header-new--album, .header-new--track) .header-new-inner {
 		background: hsl(var(--h4)) !important;
 	}
 	header:is(.header-new--album, .header-new--track) .header-new-background-overlay {
@@ -1550,7 +1594,7 @@
 		--mask: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(0,0,0,0) 100%);
 		mask-image: var(--mask);
 		-webkit-mask-image: var(--mask);
-	}
+	}*/
 	/*.header-new--artist .header-new-background-overlay {
 		transform: unset !important;
 	}*/
@@ -1767,7 +1811,7 @@
 
 
 	/*     PROFILE LABEL     */
-	.header-title-label-wrap .label, .header-new-on-tour, .user-list-inner-wrap .label {
+	.header-title-label-wrap .label, .header-new-on-tour {
 		/*width: 100%;*/
 		max-width: 24px;
 		height: 24px;
@@ -1801,27 +1845,14 @@
 	.label.user-status-subscriber {
 		background-image: var(--icon-pro);
 	}
+	.label.user-status-staff {
+		background-image: var(--icon-staff);
+	}
 	.label.user-follow {
 		background-image: var(--icon-follow);
 	}
 	.header-new-on-tour {
 		background-image: var(--icon-tour);
-	}
-
-	.user-list-inner-wrap .label {
-		padding-left: unset;
-		padding-right: calc(24px + 4px);
-		margin-right: unset;
-		margin-left: 4px;
-		text-align: right;
-		background-position: right;
-		position: absolute;
-		top: 40px;
-		right: 4px;
-		background-color: hsl(var(--b5));
-	}
-	.user-list-inner-wrap:has(.label.user-follow) .user-list-name a {
-		color: hsl(var(--l2-c));
 	}
 
 	.header-title-label-wrap {
@@ -1844,14 +1875,22 @@
 		position: absolute !important;
 		top: 8px !important;
 		left: 8px !important;
-		background-color: unset !important;
+		background-color: currentColor !important;
+		background-image: unset !important;
+		color: inherit !important;
+		mask-image: var(--mask);
+		-webkit-mask-image: var(--mask);
+		mask-size: 20px;
+		mask-repeat: no-repeat;
+		-webkit-mask-size: 20px;
+		-webkit-mask-repeat: no-repeat;
 	}
 
 	[data-toggle-button-current-state="unfollowed"] .header-follower-btn::before {
-		background-image: var(--icon-plus) !important;
+		--mask: var(--icon-plus) !important;
 	}
 	[data-toggle-button-current-state="followed"] .header-follower-btn::before {
-		background-image: var(--icon-check) !important;
+		--mask: var(--icon-check) !important;
 	}
 
 	.user-list-follower-btn:before {
@@ -2214,6 +2253,27 @@
 		border: 1px solid hsl(var(--b4));
 	}
 
+
+	/*     COVER ART GLOSS     */
+	.cover-art:after,
+	.grid-items-item:after {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background-image: var(--gloss) !important;
+		background-size: 100% !important;
+		opacity: var(--gloss-opacity);
+		pointer-events: none;
+		padding: unset !important;
+		box-shadow: unset !important;
+	}
+	.cover-art img
+	{
+		position: static;
+		aspect-ratio: 1 / 1;
+	}
+
+
 	.grid-items-item-main-text {
 		font-size: var(--font-size);
 		font-weight: 500;
@@ -2272,12 +2332,13 @@
 		color: hsl(var(--c2));
 		background-color: var(--bg);
 		padding: 5px 12px;
+		min-height: 36px;
 		max-height: 44px;
 		border-radius: var(--item-small-radius);
 		box-shadow: var(--shadow);
-		/*transition-property: background-color;
+		transition-property: background-color;
 		transition-duration: var(--trans);
-		transition-timing-function: var(--trans-function);*/
+		transition-timing-function: var(--trans-function);
 	}
 	.chartlist:not(.chartlist--with-image) .chartlist-row {
 		padding: 3px 12px;
@@ -2304,7 +2365,7 @@
 	.chartlist-row--now-scrobbling {
 		--bg: hsla(var(--h4), 40%) !important;
 		--bg-hov: hsla(var(--h4), 55%) !important;
-		--shadow: 0 0 15px 2px hsla(var(--h4), 35%) !important;
+		--shadow: 0 0 50px 5px hsla(var(--h4), 35%) !important;
 	}
 
 
@@ -2765,6 +2826,7 @@
 		/* */
 		content: '';
 		position: absolute;
+		display: var(--show-status, initial);
 	}
 	.shout-user-avatar, .avatar {
 		background-color: hsl(var(--b5));
@@ -2858,6 +2920,7 @@
 		mask-position: center;
 		aspect-ratio: 1 / 1;
 	}
+	.source-album-art img,
 	.header-avatar-inner-wrap > .avatar img {
 		mask-size: 48px;
 	}
@@ -3040,7 +3103,8 @@
 	.btn-primary:is([type="submit"]),
 	.gallery-image-vote-up-on, .gallery-image-vote-down-on, .gallery-image-preferred-on,
 	.inbox-delete-button:not([disabled]),
-	.gallery-image-report--reported
+	.gallery-image-report--reported,
+	[data-toggle-button-current-state="followed"] .header-follower-btn
 	{
 		--bg: hsl(var(--h3));
 		--bg-hov: hsla(var(--h3), 80%);
@@ -3239,6 +3303,27 @@
 	.shout-reply:before
 	{
 		display: none;
+	}
+
+
+	.wiki-history-action:before {
+		background-image: unset !important;
+		background-color: currentColor;
+		mask-image: var(--mask);
+		-webkit-mask-image: var(--mask);
+		left: 0;
+	}
+	.wiki-history-action--edit {
+		--mask: var(--icon-16-edit);
+	}
+	.wiki-history-action--revert {
+		--mask: var(--icon-16-revert);
+	}
+	.wiki-history-action--locked {
+		--mask: var(--icon-16-lock);
+	}
+	.wiki-history-action--unlocked {
+		--mask: var(--icon-16-unlock);
 	}
 
 
@@ -3605,9 +3690,11 @@
 	/*     INPUT     */
 	.content-form .form-control, .content-form input[type="date"], .content-form input[type="email"], .content-form input[type="number"], .content-form input[type="password"], .content-form input[type="text"], .content-form input[type="url"], .content-form select, .content-form textarea
 	{
-		--bg: hsla(var(--b4), 60%);
-		--bg-hov: hsla(var(--b4), 40%);
-		--bg-atv: hsla(var(--b4), 20%);
+		--bg: hsl(var(--b4));
+		--bg-hov: var(--bg);
+		--bg-atv: var(--bg);
+		/* ^ on firefox (at least) transparent backgrounds get
+		overlayed over white, which is not readable at all */
 		--col: hsl(var(--c2));
 		background-color: var(--bg) !important;
 		color: var(--col) !important;
@@ -5309,7 +5396,7 @@
 
 	/*     FOLLOWS/FOLLOWERS     */
 	.user-list-item {
-		margin-top: var(--card-gap);
+		margin-top: unset;
 	}
 
 	.inbox-message-sender-avatar .avatar,
@@ -5323,9 +5410,51 @@
 		height: 64px;
 		margin-top: unset;
 	}
+	.user-list .link-block-cover-link,
+	.listeners-section-item-image,
+	.top-listeners-item-image,
+	.user-list-avatar {
+		width: 32px;
+		height: 32px;
+		--show-status: none;
+	}
 
 	.user-list-inner-wrap, .listeners-section-item, .top-listeners-item {
-		padding-left: calc(64px + 10px);
+		padding-left: calc(32px + var(--card-gap));
+		padding-right: unset;
+		margin: 6px 0;
+		min-height: unset;
+		height: 32px;
+	}
+	.user-list-item {
+		width: 100%;
+		padding: unset;
+	}
+
+	.user-list {
+		margin: -6px 0 !important;
+	}
+
+
+	.user-list-inner-wrap {
+		display: flex !important;
+		align-items: center;
+		gap: var(--card-gap);
+	}
+
+	.user-list-item:has(.label.user-follow) {
+		background: linear-gradient(90deg, hsla(var(--h4), 15%) 0%, transparent 100%);
+	}
+	.user-list-inner-wrap:has(.label.user-follow) .user-list-name a {
+		color: hsl(var(--l2-c));
+	}
+	.user-list-inner-wrap .label {
+		display: none;
+	}
+
+
+	.user-list-item + .user-list-item {
+		border-top: 1px solid hsl(var(--b4));
 	}
 
 	.user-list-avatar .avatar-status-dot {
@@ -5349,20 +5478,41 @@
 		text-decoration: none !important;
 	}
 	.user-list-description {
-		max-width: 240px;
-		-webkit-line-clamp: 2;
+		max-width: fit-content;
 		overflow: hidden;
-		display: -webkit-box;
-		-webkit-box-orient: vertical;
+		display: flex;
+		gap: var(--card-gap);
+		padding-right: var(--card-gap);
+	}
+	.user-list-description .text-light {
+		flex-shrink: 0;
+	}
+	.user-list-about-me {
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+	}
+
+	.user-list-item .class {
+		order: 1;
 	}
 
 	.user-list-shared-artists {
 		padding-top: unset;
+		margin-top: unset !important;
 		border: unset;
 		color: hsl(var(--c3));
-		/* genuine last.fm bug related to ".user-list-description p:first-child" applying */
-		overflow: visible !important;
-		white-space: initial !important;
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		flex-shrink: 0;
+	}
+	.user-list-description:has(.user-list-shared-artists) .user-list-about-me {
+		display: none;
+	}
+
+	.neighbours-items-section .user-list-name {
+		min-width: 200px;
 	}
 
 
@@ -5480,6 +5630,13 @@
 		--lit: 1;
 	}
 
+	[name="ignorelist"] .form-group {
+		margin-top: unset !important;
+	}
+	[name="ignorelist"] .alert {
+		display: none;
+	}
+
 	#ignorelist > div.form-horizontal .form-group-controls {
 		max-height: 32px;
 		opacity: 0;
@@ -5529,6 +5686,11 @@
 	}
 	.content-form .table .delete:not(:hover):before {
 		opacity: 0.2;
+	}
+
+
+	#id_about_me + div:after {
+		content: ' This textbox will not match the appearance on your profile.';
 	}
 
 
@@ -5690,25 +5852,95 @@
 
 
 
-	/*     UNDER CONSTRUCTION     */
-	body:is(.namespace--user_obsessions_obsession, [class*="namespace--user_playlist"], [class*="events"], [class*="namespace--settings"], [class*="namespace--music_bookmarks"], .music-landing-overview, [class*="namespace--charts"], .namespace--inbox_overview, .namespace--inbox_sent_overview):after {
-		position: fixed;
+	/*     WIKI     */
+	.wiki-history td, .wiki-history th {
+		padding: 6px;
+		box-shadow: unset;
+	}
+
+	.wiki-history-entry + .wiki-history-entry {
+		border-top: 1px solid hsl(var(--b4));
+	}
+
+
+	.wiki-history-table thead {
+		display: none;
+	}
+
+
+	.wiki-history-entry {
+		--bg: transparent;
+		--bg-hov: hsla(var(--b3), 30%);
+		--bg-atv: hsla(var(--b3), 50%);
+		background: var(--bg) !important;
+		transition-property: background-color, transform, box-shadow, color, opacity !important;
+		transition-duration: var(--trans) !important;
+		transition-timing-function: var(--trans-function) !important;
+	}
+	.wiki-history-entry:hover {
+		background: var(--bg-hov) !important;
+	}
+	.wiki-history-entry:active {
+		background: var(--bg-atv) !important;
+		/*transform: scale(0.98);*/
+	}
+
+
+	.wiki-history-author a {
+		color: hsl(var(--l3-c)) !important;
+		font-weight: var(--font-weight-medium);
+	}
+	.wiki-history-date {
+		color: hsl(var(--c3));
+		font-size: calc(var(--font-size) - 2px);
+	}
+
+	.wiki-history-summary:before {
+		display: none !important;
+	}
+
+	.wiki-history-action {
+		padding-left: calc(16px + 6px) !important;
+	}
+
+	.wiki-history-author {
+		padding-left: calc(32px + 6px) !important;
+	}
+	.wiki-history-author-avatar {
 		left: 0;
-		right: 0;
-		bottom: 0;
-		height: 64px;
-		content: 'This page is not finished, things will be strange';
-		font-size: 16px;
+	}
+
+	.wiki-history-revision-number {
+		font-size: var(--font-size);
+		line-height: var(--line-height);
+		color: hsl(var(--c3)) !important;
+	}
+
+
+
+
+	/*     UNDER CONSTRUCTION     */
+	body:is(.namespace--music_artist_overview, .namespace--music_artist_listeners_overview, .namespace--user_tags_overview, .namespace--music_track_tags_add, .namespace--music_artist_tags_add, .namespace--music_album_tags_add, .namespace--music_artist_tags_overview, .namespace--music_album_tags_overview, .namespace--music_track_tags_overview, .namespace--user_obsessions_set, .namespace--music_track_lyrics, .namespace--user_obsessions_obsession, [class*="namespace--user_playlist"], [class*="events"], [class*="namespace--settings"], [class*="namespace--music_bookmarks"], .music-landing-overview, [class*="namespace--charts"], .namespace--inbox_overview, .namespace--inbox_sent_overview):after {
+		position: fixed;
+		padding: var(--card-padding);
+		border-radius: var(--card-radius);
+		box-shadow: var(--card-shadow);
+		right: var(--card-gap);
+		bottom: var(--card-gap);
+		content: 'This page or a component on it is not finished, things may look weird.';
+		font-size: var(--font-size);
+		font-weight: 600;
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		background: linear-gradient(180deg, transparent 0%, hsl(var(--hue), calc(var(--sat) * 40%), calc(var(--lit) * 10%)) 90%);
+		background: hsla(var(--h4), 20%);
 		text-shadow: 0 0 20px hsl(var(--b6));
-		color: hsl(var(--l3));
+		color: hsl(var(--l2));
 		--hue: -2;
 		--sat: 1;
 		--lit: 1;
 		z-index: 100000;
+		width: 300px;
 	}
 
 

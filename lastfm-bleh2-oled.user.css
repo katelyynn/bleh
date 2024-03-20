@@ -1,15 +1,15 @@
 /* ==UserStyle==
 @name           bleh2 (oled)
 @namespace      github.com/katelyynn/bleh
-@version        2024.0106
+@version        2024.0320
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelyynn/bleh/raw/uwu/lastfm-bleh2-oled.user.css
 @var text bleh "configure settings using the edit button!!" "click the pencil"
 ==/UserStyle== */
 
-@-moz-document domain("plexion.dev") {
-	body {--bleh2-oled-ver: 2024.0106 }
+@-moz-document domain("cutensilly.org") {
+	body {--bleh2-oled-ver: 2024.0320}
 }
 
 @-moz-document domain("last.fm") {

@@ -1,15 +1,15 @@
 /* ==UserStyle==
 @name           bleh2 (themed album covers)
 @namespace      github.com/katelyynn/bleh
-@version        2024.0106
+@version        2024.0320
 @license        GPL-3.0
 @description    matches accent colours to albums
 @author         kate
 @updateURL      https://ggithub.com/katelyynn/bleh/raw/uwu/lastfm-bleh2-accent.user.css
 ==/UserStyle== */
 
-@-moz-document domain("plexion.dev") {
-	body {--accent-ver: 2024.0106}
+@-moz-document domain("cutensilly.org") {
+	body {--accent-ver: 2024.0320}
 }
 
 @-moz-document domain("last.fm") {
@@ -280,7 +280,6 @@
 	[data-page-resource-name="Music to Be Murdered By"][data-page-resource-artist-name="Eminem"], :is(.chartlist-row--now-scrobbling, [class*="namespace--user_library_music_album"] .row):has(a[href*="/music/Eminem/Music+to+be+Murdered+By"]),
 	[data-page-resource-name*="Music To Be Murdered By"][data-page-resource-artist-name="Eminem"], :is(.chartlist-row--now-scrobbling, [class*="namespace--user_library_music_album"] .row):has(a[href*="/music/Eminem/"][href*="Music+To+Be+Murdered+By"]),
 	[data-page-resource-name="My Beautiful Dark Twisted Fantasy"][data-page-resource-artist-name="Kanye West"], :is(.chartlist-row--now-scrobbling, [class*="namespace--user_library_music_album"] .row):has(a[href*="/music/Kanye+West/My+Beautiful+Dark+Twisted+Fantasy"]),
-	[data-page-resource-name="Yeezus"][data-page-resource-artist-name="Kanye West"], :is(.chartlist-row--now-scrobbling, [class*="namespace--user_library_music_album"] .row):has(a[href*="/music/Kanye+West/Yeezus"]),
 	[data-page-resource-name="Certified Lover Boy"][data-page-resource-artist-name="Drake"], :is(.chartlist-row--now-scrobbling, [class*="namespace--user_library_music_album"] .row):has(a[href*="/music/Drake/Certified+Lover+Boy"]),
 	[data-page-resource-name="COA"][data-page-resource-artist-name="ericdoa"], :is(.chartlist-row--now-scrobbling, [class*="namespace--user_library_music_album"] .row):has(a[href*="/music/ericdoa/COA"]),
 	[data-page-resource-name="DAMN."][data-page-resource-artist-name="Kendrick Lamar"], :is(.chartlist-row--now-scrobbling, [class*="namespace--user_library_music_album"] .row):has(a[href*="/music/Kendrick+Lamar/DAMN."]),
@@ -299,6 +298,13 @@
 		--hue: 1;
 		--sat: 1.45;
 		--lit: 0.85;
+	}
+
+	[data-page-resource-name="Yeezus"][data-page-resource-artist-name="Kanye West"], :is(.chartlist-row--now-scrobbling, [class*="namespace--user_library_music_album"] .row):has(a[href*="/music/Kanye+West/Yeezus"])
+	{
+		--hue: 0;
+		--sat: 1.6;
+		--lit: 0.8;
 	}
 
 	/* Yumi - LOST (Album) */
@@ -331,6 +337,14 @@
 		--hue: 194;
 		--sat: 0.4;
 		--lit: 0.6;
+	}
+
+	[data-page-resource-name="JESUS IS KING"][data-page-resource-artist-name="Kanye West"], :is(.chartlist-row--now-scrobbling, [class*="namespace--user_library_music_album"] .row):has(a[href*="/music/Kanye+West/JESUS+IS+KING"]),
+	[data-page-resource-name="Jesus is King II"][data-page-resource-artist-name="Kanye West"], :is(.chartlist-row--now-scrobbling, [class*="namespace--user_library_music_album"] .row):has(a[href*="/music/Kanye+West/Jesus+is+King+II"])
+	{
+		--hue: 240;
+		--sat: 1.7;
+		--lit: 0.9;
 	}
 
 	[data-page-resource-name="no sleep"][data-page-resource-artist-name="m a l i b l u e : ("], :is(.chartlist-row--now-scrobbling, [class*="namespace--user_library_music_album"] .row):has(a[href*="/music/m+a+l+i+b+l+u+e+:+(/no+sleep"])
