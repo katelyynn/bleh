@@ -1,15 +1,15 @@
 /* ==UserStyle==
 @name           bleh1
 @namespace      github.com/katelyynn/bleh
-@version        2024.0101
+@version        2024.0320
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelyynn/bleh/raw/uwu/lastfm.user.css
 @var text bleh "configure settings using the edit button!!" "click the pencil"
 ==/UserStyle== */
 
-@-moz-document domain("plexion.dev") {
-	body                     {--theme-ver: 2024.0101} .installed-only, .btn-installed-only {display: flex !important} .uninstalled-only {display: none} .install {pointer-events: auto; opacity: 1; border-style: solid}
+@-moz-document domain("cutensilly.org") {
+	body                     {--theme-ver: 2024.0320} .installed-only, .btn-installed-only {display: flex !important} .uninstalled-only {display: none} .install {pointer-events: auto; opacity: 1; border-style: solid}
 }
 
 
@@ -23,14 +23,7 @@
 
 
 
-/*
 
-					hey! if you arrived here to change the
-					theme's colour, take a visit here:
-
-					https://plexion.dev/bleh/fm/customise
-
-*/
 
 
 
@@ -55,7 +48,7 @@
 
 
 @-moz-document domain("last.fm") {
-    @import url(https://plexion.dev/css/reset.css);
+    @import url(https://cutensilly.org/css/reset.css);
     @import url('https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&display=swap');
 	@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@600;700&display=swap');
 	/*@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200;12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&display=swap');*/
@@ -7936,7 +7929,7 @@
 		font-weight: var(--theme-font-weight-bold);
 	}
 	.homefeed .col-main:before {
-		content: 'hai! bleh2 is now in beta (a complete rewrite) - find the beta at plexion.dev/lfm';
+		content: 'hai! bleh2 is now in beta (a complete rewrite) - find the beta at cutensilly.org/bleh/fm';
 		font-size: 16px;
 		line-height: 24px;
 	}
@@ -7945,7 +7938,7 @@
 
 	/* bleh2 */
 	body:before {
-		content: 'Try out the bleh2 beta at plexion.dev/lfm';
+		content: 'Try out the bleh2 beta at cutensilly.org/bleh/fm';
 		position: fixed;
 		bottom: 10px;
 		left: 10px;
@@ -7965,7 +7958,7 @@
 		position: relative;
 	}
 	.listening-report-top:after {
-		content: 'Your listening report will look MUCH better in bleh2, get the beta here (for your own sake at least): plexion.dev/lfm';
+		content: 'Your listening report will look MUCH better in bleh2, get the beta here (for your own sake at least): cutensilly.org/bleh/fm';
 		position: absolute;
 		top: 100px;
 		left: 10px;
