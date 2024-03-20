@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           bleh2
 @namespace      github.com/katelyynn/bleh
-@version        2024.0320
+@version        2024.0321
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelyynn/bleh/raw/uwu/lastfm-bleh2.user.css
@@ -9,7 +9,7 @@
 ==/UserStyle== */
 
 @-moz-document domain("cutensilly.org") {
-	body                     {--bleh2-ver: 2024.0320} .installed2-only, .btn-installed2-only {display: flex !important} .uninstalled2-only {display: none} .install2 {pointer-events: auto; opacity: 1; border-style: solid}
+	body                     {--bleh2-ver: 2024.0321} .installed2-only, .btn-installed2-only {display: flex !important} .uninstalled2-only {display: none} .install2 {pointer-events: auto; opacity: 1; border-style: solid}
 }
 
 
@@ -57,7 +57,6 @@
 
 
 @-moz-document domain("last.fm") {
-    @import url('https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&display=swap');
 	@import url('https://fonts.googleapis.com/css2?family=Spline+Sans+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
 	@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+JP:wght@100;200;300;400;500;600;700&display=swap');
 
@@ -92,9 +91,9 @@
 
 		--brand: 'bleh';
 		--brand-branch: '2 BETA';
-		--brand-info: '2024.0320';
+		--brand-info: '2024.0321';
 
-		--font: Geist Sans, Spline Sans ALT, IBM Plex Sans, IBM Plex Sans JP, Spline Sans, Inter, Roboto, Noto Sans, Noto Sans JP, sans-serif;
+		--font: Spline Sans ALT, IBM Plex Sans, IBM Plex Sans JP, Spline Sans, Inter, Roboto, Noto Sans, Noto Sans JP, sans-serif;
 		--font-code: Spline Sans Mono, Iosevka, JetBrains Mono, Roboto Mono, monospace;
 		--font-size: 14px;
 		--line-height: calc(var(--font-size) + 4px);
@@ -149,7 +148,8 @@
 	.user-dashboard-layout,
 	.image-list-item-preferred-icon:before,
 	.header-metadata-item:after,
-	#current-subscription
+	#current-subscription,
+	.shout
 	{
 		--c1: var(--hue), calc(var(--sat) * 40%), 100%;
 		--c2: var(--hue), calc(var(--sat) * 60%), 90%;
@@ -199,7 +199,7 @@
 
 		--noise: url('https://cutensilly.org/img/noise.png');
 		--gloss: url('https://cutensilly.org/img/gloss.svg');
-		--gloss-opacity: 0.16;
+		--gloss-opacity: 0.2;
 
 		--interact-shadow: hsla(var(--b7), 0.1) 0 2px 4px 0;
 	}
@@ -362,11 +362,11 @@
 
 	/*     FIRST STAGE     */
 	/* remove white backgrounds */
-	.main-content, .header--overview, .container:not(:has(.inbox-notifications)),
+	.main-content, .header--overview, .container,
 	.content-top-has-nav .content-top, .two-column-layout .content-top /* lfm tag */,
 	.two-column-layout .container, .two-column-layout .main-content /* for some reason lfm bundles a 1x1 white pixel tiled across the entire half of the screen? */
 	{
-		background: unset !important;
+		background: var(--override-background, transparent) !important;
 		color: unset; /* for header--overview, this is set to #fff */
 	}
 	.content-top-has-nav .content-top::after, .two-column-layout .content-top::after
@@ -779,7 +779,7 @@
 	.your-progress-component,
 	/* this fixes places of the site (tracks, artist, albums watever that use a weird method of 2 col-mains, 2 col-sidebars as appose to profiles */
 	.row.buffer-4 > .col-main:first-child, .row.buffer-4 > .col-main:nth-child(3) > :is(section, #shoutbox, .album-and-lyrics-row),
-	/* this is for artists */ .header-new--artist + .container > .row:not(.buffer-4):has(:nth-child(2)) > .col-main:nth-child(1),
+	/* this is for artists, appears to be targeting the bio box */ .header-new--artist + .container > .row/*:not(.buffer-4)*//*:has(:nth-child(2)) > .col-main:nth-child(1)*/ .col-main:first-child, /* there's 2 col-mains, the 2nd contains other cards */
 	/* this is for albums */ .container > .row.buffer-reset\@sm > .col-main:nth-child(2),
 	/* dont question it too far, refer to the above display: grid for more insight, this is jus applying the card styling */
 	.shoutbox--with-header#shoutbox,
@@ -799,6 +799,7 @@
 	.event-summary-with-poster
 	{
 		content: '';
+		--override-background: hsl(var(--card-background, var(--b5)));
 		background-color: hsl(var(--card-background, var(--b5)));
 		border: var(--card-border);
 		border-radius: var(--card-radius);
@@ -2255,6 +2256,7 @@
 
 
 	/*     COVER ART GLOSS     */
+	.library-header-image:after,
 	.cover-art:after,
 	.grid-items-item:after {
 		content: '';
@@ -2266,6 +2268,7 @@
 		pointer-events: none;
 		padding: unset !important;
 		box-shadow: unset !important;
+		border-radius: inherit;
 	}
 	.cover-art img
 	{
@@ -2932,26 +2935,18 @@
 		background-image: var(--icon-pro);
 		filter: drop-shadow(2px 0px 0 hsl(var(--b5))) drop-shadow(0px 2px 0 hsl(var(--b5))) drop-shadow(-2px -0px 0 hsl(var(--b5))) drop-shadow(-0px -2px 0 hsl(var(--b5))) drop-shadow(0px 4px 0px hsl(var(--b5)));
 	}
-	/*.shout-user:has([href="/user/cutensilly"], [href="/user/BoHa1"], [href="/user/bIeak"], [href="/user/peoplepleasr"], [href="/user/twolay"]) + .shout-user-avatar .avatar-status-dot:before,
-	.user-list-name:has([href="/user/cutensilly"], [href="/user/BoHa1"], [href="/user/bIeak"], [href="/user/peoplepleasr"], [href="/user/twolay"]) + .user-list-avatar .avatar-status-dot:before
-	{
-		background: hsl(var(--b5));
-		content: '' !important;
-		position: absolute;
-		right: 5px;
-		bottom: 10px;
-		width: 10px;
-		height: 3px;
-		border-radius: 50%;
-		z-index: -2000 !important;
-		display: flex !important;
+	.avatar-status-dot--staff {
+		background-image: var(--icon-staff);
+		filter: drop-shadow(2px 0px 0 hsl(var(--b5))) drop-shadow(0px 2px 0 hsl(var(--b5))) drop-shadow(-2px -0px 0 hsl(var(--b5))) drop-shadow(-0px -2px 0 hsl(var(--b5))) drop-shadow(0px 4px 0px hsl(var(--b5)));
 	}
-	.user-list-name:has([href="/user/cutensilly"], [href="/user/BoHa1"], [href="/user/bIeak"], [href="/user/peoplepleasr"], [href="/user/twolay"]) + .user-list-avatar .avatar-status-dot:before {
-		right: 6px;
-		bottom: 11px;
-		width: 12px;
-		height: 5px;
-	}*/
+
+
+	.shout:has(.avatar-status-dot--staff) {
+		--hue: -2;
+		--sat: 1;
+		--lit: 1;
+		color: hsl(var(--c2));
+	}
 
 
 	/* blehhhh :3 */
@@ -2962,9 +2957,9 @@
 		background-image: var(--icon-queen) !important;
 	}
 	/* boha */
-	.shout-user:has([href="/user/BoHa1"]) + .shout-user-avatar .avatar-status-dot,
-	.header-title:has([href="/user/BoHa1"]) + .user-status-subscriber,
-	.user-list-name:has([href="/user/BoHa1"]) + .user-list-avatar .avatar-status-dot
+	.shout-user:has([href="/user/Iexyy"]) + .shout-user-avatar .avatar-status-dot,
+	.header-title:has([href="/user/Iexyy"]) + .user-status-subscriber,
+	.user-list-name:has([href="/user/Iexyy"]) + .user-list-avatar .avatar-status-dot
 	{
 		background-image: var(--icon-boha) !important;
 	}
@@ -3017,7 +3012,8 @@
 	.listening-report-brick--combo .listening-report-brick-inner,
 	.coloured-cta,
 	.gallery-image-preferred-off,
-	.arrow
+	.arrow,
+	.date-range-picker-preset a
 	{
 		--bg: hsl(var(--b4));
 		--bg-hov: hsla(var(--b4), 80%);
@@ -3065,7 +3061,8 @@
 		.shout-more-replies-before,
 		.coloured-cta,
 		.gallery-image-preferred-off,
-		.arrow
+		.arrow,
+		.date-range-picker-preset a
 	):hover {
 		background-color: var(--bg-hov) !important;
 	}
@@ -3092,7 +3089,8 @@
 		.shout-more-replies-before,
 		.coloured-cta,
 		.gallery-image-preferred-off,
-		.arrow
+		.arrow,
+		.date-range-picker-preset a
 	):active {
 		background-color: var(--bg-atv) !important;
 		transform: scale(0.98);
@@ -3509,7 +3507,8 @@
 		padding: 5px !important;
 	}
 	.dropdown-menu-clickable-item, .auth-dropdown-menu-item, .navlist-hidden-list a,
-	.library-search-results li
+	.library-search-results li,
+	.date-range-picker-preset a
 	{
 		--bg: transparent;
 		--bg-hov: hsla(var(--b4), 30%);
@@ -3520,6 +3519,9 @@
 		--sat: 1;
 		--lit: 1;
 		--ovr: var(--b7);
+	}
+	.date-range-picker-preset a {
+		min-width: unset !important;
 	}
 	.auth-dropdown-menu-wrap {
 		padding-top: unset !important;
@@ -3685,6 +3687,23 @@
 	}
 
 
+	/*     DATE PICKER     */
+	.library-controls-datepicker .date-range-picker-form {
+		padding-top: var(--card-gap);
+		border-top: 1px solid hsl(var(--b4));
+	}
+	.date-range-picker-form .control-label {
+		text-transform: unset;
+	}
+	.date-range-picker-form .form-group-controls {
+		margin-top: 4px;
+	}
+
+	.date-range-picker-presets-wrap {
+		margin: unset;
+	}
+
+
 
 
 	/*     INPUT     */
@@ -3839,8 +3858,9 @@
 
 
 	/*     WINDOW     */
+	.date-range-picker-content,
 	.dropdown-menu-clickable, .auth-dropdown-menu, .navlist-hidden-list, .modal-body, .library-search-results, .events-filter-location-dropdown {
-		margin: unset;
+		margin: unset !important;
 		background: hsl(var(--b5)) !important;
 		border: 1px solid hsl(var(--b4)) !important;
 		border-radius: var(--card-radius) !important;
@@ -3853,11 +3873,17 @@
 		animation: dropdown calc(var(--trans) + 0.22s) var(--trans-function);
 		transform-origin: top;
 	}
+	.date-range-picker-content:before,
 	.dropdown-menu-clickable::before, .navlist-hidden-list::before {
 		display: none;
 	}
+	.date-range-picker-content,
 	.dropdown-menu-clickable--padded, .navlist-hidden-list, .modal-body, .library-search-results, .events-filter-location-dropdown {
 		padding: var(--card-gap) !important;
+	}
+
+	.date-range-picker-content {
+		width: fit-content;
 	}
 
 	.modal-body .modal-title {
@@ -5234,6 +5260,21 @@
 		-webkit-line-clamp: 4;
 	}
 
+	.wiki-block-inner-2 {
+		position: relative;
+		transition-property: color;
+		transition-duration: var(--trans);
+		transition-timing-function: var(--trans-function);
+	}
+	.wiki-block-inner-2 a:last-child {
+		position: absolute;
+		inset: 0;
+		opacity: 0;
+	}
+	.wiki-block-inner-2:hover {
+		color: hsl(var(--l2-c));
+	}
+
 	.wiki-legal {
 		color: hsl(var(--c3));
 		font-size: calc(var(--font-size) - 1px);
@@ -5444,9 +5485,10 @@
 
 	.user-list-item:has(.label.user-follow) {
 		background: linear-gradient(90deg, hsla(var(--h4), 15%) 0%, transparent 100%);
+		--override-link-col: hsl(var(--l2-c));
 	}
-	.user-list-inner-wrap:has(.label.user-follow) .user-list-name a {
-		color: hsl(var(--l2-c));
+	.user-list-name a {
+		color: var(--override-link-col, hsl(var(--l3-c))) !important;
 	}
 	.user-list-inner-wrap .label {
 		display: none;
@@ -5507,7 +5549,7 @@
 		text-overflow: ellipsis;
 		flex-shrink: 0;
 	}
-	.user-list-description:has(.user-list-shared-artists) .user-list-about-me {
+	.neighbours-items-section .user-list-about-me {
 		display: none;
 	}
 
