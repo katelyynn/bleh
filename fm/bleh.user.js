@@ -60,6 +60,12 @@ let profile_badges = {
     }
 };
 
+let theme_names = {
+    'dark': 'Dark',
+    'light': 'Light',
+    'oled': 'OLED'
+};
+
 
 let settings_template = {
     theme: 'dark',
@@ -88,12 +94,14 @@ let redacted = [
     'EminemIover911', 'Ranmaru1232', 'Littlegayman', 'OverKektor', 'Zigger0707', 'JTLDN', 'BakaAnon', 'TheWatcher777', 'Guicute', 'wempep', 'BeingofEvil', 'Marie_Cachet', 'rusnazi8814', 'Go1ngER', 'Pranav777', 'Creativezito', 'DjAngelInfinity', 'Cowboy-Robot', 'RiskGrave', 'charmingaxelotl', 'naterade20', 'Willgregg10', 'avantish', 'shaggy-maggot', 'SliceJosiah', 'airshots22', 'TacoMIW', 'DaveBFC', 'UkulilyFilly', 'SPEEPYBOO', 'roosterteethz', 'winter_demon', 'preziosestelle', 'Wess0', 'heruchris', 'MellowColonel', 'DXP6986', 'Leo_Marlow', 'newmetallic', 'Kotkaa', 'dodemea', 'CainRipley', 'frajestic', 'Danny_Top23', 'molochthagod', 'kanyelover900', 'Phosphoss', 'sugawarasatsuki', 'captivepleading', 'PaddyCM', 'burroughs3000', 'marblesodaa', 'muistu77', 'korimullanmusic', 'magikwand', 'EmpireoGrace', 'Psychonau', 'sk8erboi03', 'DOGTOME', 'milkvveed', 'ghastlygoblin', 'lsihc', 'Promethesis', 'NlCKlMlNAJ', 'so0catwoman', 'handsomegamer46', 'w28888ihateu', 'IIthe2nd', 'Jrwer', 'r0ann', 'Hetzghor', 'umabon', 'Karl_Nicenstein', 'forestgaze', 'Ghostcum', 'bigluke444', 'Mozzaddy', 'ahuehauheauauh', 'KINGJAXTERK', 'setitaIIablaze', 'araicd', 'juliusvc', 'mzumii', 'masskollaps', 'belenio', 'HoosierBallz', 'sh0ppingcart', 'brownieboy', 'martyrdomr', 'Vessel_Anathema', 'Twenty10s', 'Skuuuuuii', 'birodani115', 'lawlercopter_', 'samanthafox12', 'The_Diabolus', 'momasoooooos', 'tigohc', 'OrA4NGEpm', 'minakonyaa', 'RyukoProp', 'AntifaFemboy', 'nlec', 'jediwarlock1', 'epowjgpwak', 'anxrcxy', 'pissturd1', 'adxail', 'Suprremme', 'qwertyhomu', 'keblz', 'hotstep_', 'fadelooy', 'ApesOG', 'violentflowers', 'ItsThiagoBanger', 'SyrettePurp', 'swagstica', 'htgs', 'grigoriybalbes', 'heliosi', 'buttfartdhshs', 'Wonderglue', 'kanyewest2028', 'Caeshijque', 'MysteryBFDI', 'NikkiLee8208', 'JCK_FM', 'EtherealBangerz', 'iseenothing', 'achondrogenesis', 'theandromedaxo', 'SeanDerBeste', 'JCT08', 'TheV3locity4545', 'HumbleGold', 'Draincel', 'allyourbased', 'birdboiling', 'tharizdoom', 'SUPlNHO', 'dashywashy', 'gabcoelhomusic', 'ox_yd', 'bernkastel__', 'fearcuIt', 'gxlnd_', 'BrittanyMahomes', 'NuMetalFan69', 'SafireStar', 'IceSpoon', 'IssacJ06', 'ThePrio', 'LoveDiaries', 'sillycelery1974', 'nyqmii', 'gauItier', 'rspbrysda', 'pnavarre2330', 'lTSUP2ME', 'noolr', 'dakota0824', 'goncalvesrafael', 'DaequanBS', 'dwaqons', 'Bogurodzica69', 'GtzGold', 'roy_05', 'niloymahir', 'Ikarivktr', 'JE1934', 'Figaro-17', 'sugmaballs69', 'Don-Weaso', 'schrodngrSafety', 'okJosiah', 'anahausu', 'venusfleur', 'kristiyan47', 'mkulia', 'Nick-Valentine', 'raraee_', 'MJ-XX', 'Berk_Ziya', 'thatpower1', 'phantomchasm', 'StupidMetalhead'
 ];
 
+// use the top-right link to determine the current user
+let auth = '';
+
 
 (function() {
     'use strict';
 
-    // use the top-right link to determine the current user
-    const auth = document.querySelector('a.auth-link');
+    auth = document.querySelector('a.auth-link img').getAttribute('alt');
 
     if (auth)
         initia();
@@ -140,6 +148,7 @@ let redacted = [
     }
 
     function append_nav(element) {
+        let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
         let user_nav = element.querySelectorAll('.auth-dropdown-menu li')[0];
 
         if (!user_nav.hasAttribute('data-kate-processed')) {
@@ -148,9 +157,10 @@ let redacted = [
             let bleh_nav = document.createElement('li');
             bleh_nav.innerHTML = (`
             <li>
-                <button class="auth-dropdown-menu-item bleh--configure-menu-item" onclick="toggle_theme()">
+                <button class="auth-dropdown-menu-item bleh--theme-menu-item" onclick="toggle_theme()">
                     <span class="auth-dropdown-item-row">
-                        <span class="auth-dropdown-item-left">Toggle theme</span>
+                        <span class="auth-dropdown-item-left">Theme</span>
+                        <span class="auth-dropdown-item-right" id="theme-value">${theme_names[settings.theme]}</span>
                     </span>
                 </button>
             </li>
@@ -162,11 +172,11 @@ let redacted = [
                 </button>
             </li>
             <li>
-                <a class="auth-dropdown-menu-item bleh--check-updates-menu-item" href="https://cutensilly.org/bleh/fm" target="_blank">
+                <button class="auth-dropdown-menu-item bleh--configure-menu-item" onclick="open_bleh_settings()">
                     <span class="auth-dropdown-item-row">
-                        <span class="auth-dropdown-item-left">Check for updates</span>
+                        <span class="auth-dropdown-item-left">Configure bleh</span>
                     </span>
-                </a>
+                </button>
             </li>
             `);
 
@@ -250,6 +260,8 @@ let redacted = [
         else if (current_theme == 'light')
             current_theme = 'dark';
 
+        document.getElementById('theme-value').textContent = theme_names[current_theme];
+
         // save value
         settings.theme = current_theme;
         document.documentElement.setAttribute(`data-bleh--theme`, `${current_theme}`);
@@ -261,6 +273,7 @@ let redacted = [
 
     // patch profile pages
     function patch_profile(element) {
+        try {
         let profile_header = element.querySelector('.header-title-label-wrap');
         let profile_name = element.querySelector('.header-title-label-wrap a').textContent;
 
@@ -289,6 +302,18 @@ let redacted = [
                 `);
                 document.body.appendChild(redacted_message);
             } else {
+                // is this their profile?
+                if (profile_name == auth) {
+                    // make avatar clickable
+                    let header_avatar = document.querySelector('.header-avatar .avatar');
+
+                    let avatar_link = document.createElement('a');
+                    avatar_link.classList.add('bleh--avatar-clickable-link');
+                    avatar_link.href = '/settings';
+                    header_avatar.appendChild(avatar_link);
+                }
+
+                // badges
                 if (profile_badges.hasOwnProperty(profile_name)) {
                     let badge = document.createElement('span');
                     badge.classList.add('label',`user-status--bleh-${profile_badges[profile_name].type}`,`user-status--bleh-user-${profile_name}`);
@@ -297,6 +322,7 @@ let redacted = [
                 }
             }
         }
+        } catch(e) {}
     }
 
 
@@ -346,6 +372,95 @@ let redacted = [
                 element.appendChild(badge);
             }
         }
+    }
+
+
+
+
+    // bleh settings
+    unsafeWindow.open_bleh_settings = function() {
+        create_window('bleh_settings','Theme settings','');
+    }
+
+
+    // create a window
+    function create_window(id, title, inner_content) {
+        let background = document.createElement('div');
+        background.classList.add('popup_background');
+        background.setAttribute('id',`bleh--window-${id}--background`);
+        background.style = 'opacity: 0.8; visibility: visible; background-color: rgb(0, 0, 0); position: fixed; inset: 0px;';
+        background.setAttribute('data-kate-processed','true');
+
+        let wrapper = document.createElement('div');
+        wrapper.classList.add('popup_wrapper','popup_wrapper_visible');
+        wrapper.setAttribute('id',`bleh--window-${id}--wrapper`);
+        wrapper.style = 'opacity: 1; visibility: visible; position: fixed; overflow: auto; width: 100%; height: 100%; top: 0px; left: 0px; text-align: center;';
+        wrapper.setAttribute('data-kate-processed','true');
+
+
+        // dialog
+        let dialog = document.createElement('div');
+        dialog.classList.add('modal-dialog');
+        dialog.setAttribute('id',`bleh--window-${id}--dialog`);
+        dialog.style = 'opacity: 1; visibility: visible; pointer-events: auto; display: inline-block; outline: none; text-align: left; position: relative; vertical-align: middle;';
+        dialog.setAttribute('data-kate-processed','true');
+
+        // content
+        let content = document.createElement('div');
+        content.classList.add('modal-content');
+        content.setAttribute('id',`bleh--window-${id}--content`);
+        content.innerHTML = inner_content;
+        content.setAttribute('data-kate-processed','true');
+
+        // share content
+        let share = document.createElement('div');
+        share.classList.add('modal-share-content');
+        share.setAttribute('id',`bleh--window-${id}--share`);
+        share.setAttribute('data-kate-processed','true');
+
+        // body
+        let body = document.createElement('div');
+        body.classList.add('modal-body');
+        body.setAttribute('id',`bleh--window-${id}--body`);
+        body.setAttribute('data-kate-processed','true');
+
+        // title
+        let header = document.createElement('h2');
+        header.classList.add('modal-title');
+        header.textContent = title;
+        header.setAttribute('data-kate-processed','true');
+
+        // inner content
+        let inner_content_em = document.createElement('div');
+        inner_content_em.classList.add('modal-inner-content');
+        inner_content_em.innerHTML = inner_content;
+        inner_content_em.setAttribute('data-kate-processed','true');
+
+
+        let align = document.createElement('div');
+        align.classList.add('popup_align');
+        align.setAttribute('id',`bleh--window-${id}--align`);
+        align.style = 'display: inline-block; vertical-align: middle; height: 100%;';
+        align.setAttribute('data-kate-processed','true');
+
+
+        body.appendChild(header);
+        body.appendChild(inner_content_em)
+        share.appendChild(body);
+        content.appendChild(share);
+        dialog.appendChild(content);
+        wrapper.appendChild(dialog);
+        wrapper.appendChild(align);
+
+
+        document.body.appendChild(background);
+        document.body.appendChild(wrapper);
+    }
+
+    // kill a window
+    unsafeWindow.kill_window = function(id) {
+        document.body.removeChild(document.getElementById(`bleh--window-${id}--background`));
+        document.body.removeChild(document.getElementById(`bleh--window-${id}--wrapper`));
     }
 
 

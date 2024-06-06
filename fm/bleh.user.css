@@ -2933,6 +2933,13 @@ state is not active, which then falls back to primary button styling */
     padding: unset !important;
     border-radius: var(--avatar-radius);
     box-shadow: var(--card-shadow);
+
+    .bleh--avatar-clickable-link {
+        position: absolute;
+        inset: 0;
+        z-index: 50;
+        border-radius: var(--avatar-radius);
+    }
 }
 .header--overview.header--with-avatar .header-avatar {
     width: var(--profile-header-avatar-size);
@@ -5528,7 +5535,7 @@ on the bottom of a panel !! */
 }
 
 .auth-dropdown-menu-item {
-    width: 100%;
+    width: 100% !important;
 }
 
 .date-range-picker-preset a {
@@ -5567,7 +5574,7 @@ on the bottom of a panel !! */
     top: -6px;
 }
 
-.bleh--check-updates-menu-item,
+.bleh--configure-menu-item,
 .more-item--edit-old,
 .auth-dropdown-menu-item[href="/settings"], .auth-dropdown-menu-item[href^="/user/"]
 {
@@ -5577,7 +5584,7 @@ on the bottom of a panel !! */
 {
     margin-top: 11px !important;
 }
-.bleh--check-updates-menu-item:after,
+.bleh--configure-menu-item:after,
 .more-item--edit-old:after,
 .more-item--delete:after,
 .auth-dropdown-menu-item[href="/settings"]:after, .auth-dropdown-menu-item[href^="/user/"]:after
@@ -5670,11 +5677,14 @@ very, very, very dated - who looks up a song on ebay? */
 }
 
 
-.bleh--configure-menu-item {
+.bleh--theme-menu-item {
     --mask: var(--icon-16-themes);
 }
-.bleh--check-updates-menu-item {
-    --mask: var(--icon-16-refresh);
+.bleh--dev-menu-item {
+    --mask: var(--icon-16-dev);
+}
+.bleh--configure-menu-item {
+    --mask: var(--icon-16-settings);
 }
 
 
