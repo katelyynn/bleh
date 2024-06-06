@@ -1,0 +1,127 @@
+/* ==UserStyle==
+@name           bleh2 (light)
+@namespace      github.com/katelyynn/bleh
+@version        2024.0603
+@license        GPL-3.0
+@author         kate
+@updateURL      https://github.com/katelyynn/bleh/raw/uwu/lastfm-bleh2-light.user.css
+@var text bleh "configure settings using the edit button!!" "click the pencil"
+==/UserStyle== */
+
+@-moz-document domain("cutensilly.org") {
+	body {--bleh2-light-ver: 2024.0603}
+}
+
+@-moz-document domain("last.fm") {
+    /* backgrounds */
+	:root, [data-page-resource-type="album"], [data-page-resource-type="track"],
+	.gallery-image-buttons button, .gallery-image-preferred-button,
+	.vote-button--voted/*,
+	.user-dashboard-layout*/
+	{
+		/* any additional highlights */
+		--b3: var(--hue), calc(var(--sat) * 6%), 75%;
+
+		/* card border */
+		--b4: var(--hue), calc(var(--sat) * 6%), 89%;
+
+		/* card */
+		--b5: 0, 0%, 100%;
+
+		/* root */
+		--b6: 0, 0%, 98%;
+		--b7: 0, 0%, 0%;
+	}
+
+	/* text */
+	:root, [data-page-resource-type="album"], [data-page-resource-type="track"],
+	.tasteometer-compat-colour,
+	.dropdown-menu-clickable-item, .auth-dropdown-menu-item,
+	.gallery-image-buttons button, .gallery-image-preferred-button,
+	.vote-button--voted,
+	button, .btn-primary, .gallery-image-report,
+	.gallery-image-preferred-states::before,
+	.masthead-logo a,
+	body:after,
+	.listening-report-brick--combo .tag-label,
+	.listening-report-promo--year,
+	.highcharts-point, .user-dashboard-legend-item::before, stop,
+	.user-dashboard--monthly, .user-dashboard--yearly,
+	.alert, .event-status,
+	.play-this-track-playlink, .resource-external-link,
+	.chartlist-row--now-scrobbling,
+	a,
+	.obsession-history-item-inner,
+	/*.user-dashboard-layout,*/
+	.image-list-item-preferred-icon:before,
+	.header-metadata-item:after,
+	#current-subscription,
+	.shout,
+	/*.header-metadata-tnew-item,*/
+	.header:before,
+	#ignorelist p,
+	.events-list-item .events-list-item-date-icon
+	.async-content-error-message,
+	.avatar-status-dot, .label, .shout-user-avatar:before,
+	.masthead-nav-control,
+	.header-new-more-actions-menu .dropdown-menu-clickable-item
+	{
+		--c1: var(--hue), calc(var(--sat) * 6%), 0%;
+		--c2: var(--hue), calc(var(--sat) * 4%), 4%;
+		--c3: var(--hue), calc(var(--sat) * 10%), 30%;
+		--ov-c1: var(--hue), calc(var(--sat) * 40%), 100%;
+
+		--l2: var(--hue), calc(var(--sat) * 40%), calc(var(--lit) * 63%);
+		--l3: var(--hue), calc(var(--sat) * 50%), calc(var(--lit) * 55%);
+		--l4: var(--hue), calc(var(--sat) * 60%), calc(var(--lit) * 25%);
+
+		--l2-c: var(--hue), calc(var(--sat) * 40%), calc(clamp(min(0.5), var(--lit), max(1.5)) * 63%);
+		--l3-c: var(--hue), calc(var(--sat) * 50%), calc(clamp(min(0.5), var(--lit), max(1.5)) * 55%);
+		--l4-c: var(--hue), calc(var(--sat) * 60%), calc(clamp(min(0.5), var(--lit), max(1.5)) * 25%);
+
+		--h3: var(--hue), calc(var(--sat) * 50%), calc(clamp(min(0.5), var(--lit), max(1.5)) * 80%);
+		--h4: var(--hue), calc(var(--sat) * 60%), calc(clamp(min(0.5), var(--lit), max(1.5)) * 65%);
+	}
+
+	/* attributes */
+	:root {
+		--card-shadow: hsla(var(--b7), 0.05) 0 2px 4px 0;
+
+		--menu-shadow: 2px 2px 24px 0 hsla(var(--b7), 0.15), 3px 6px 48px 16px hsla(var(--b7), 0.03);
+
+		--interactable-outer: hsla(var(--b7), 0.07) 0 2px 4px 0;
+		--interactable-active-outer: transparent 0 0 0;
+	}
+
+
+
+
+	body:not(.namespace--user_listening-report_playback) {
+		color-scheme: light;
+	}
+
+
+	.header-new-inner:before {
+		opacity: 0.4;
+	}
+
+
+
+
+	.shout-user [href="/user/cutensilly"] {
+		color: hsl(var(--l2-c)) !important;
+		text-shadow: 0 0 5px hsla(var(--l4-c), 20%) !important;
+	}
+
+
+
+
+	/*     COUNT BAR     */
+	.chartlist-count-bar {
+		background: linear-gradient(90deg, hsla(var(--h3), 30%) 7%, hsl(var(--b4)) 35%);
+	}
+	.chartlist-count-bar-slug {
+		background-color: hsl(var(--h3)) !important;
+		box-shadow: 0px 0px 16px hsla(var(--h3), 50%);
+	}
+}
