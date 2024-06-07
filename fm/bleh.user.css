@@ -247,7 +247,7 @@ body {
     --interact-shadow: var(--interactable-inset), var(--interactable-outer);
     --active-shadow: var(--interactable-inset), var(--interactable-outer), var(--interactable-active-outer);
 
-    --chartlist-fill: var(--hue-gradient, hsl(var(--l3)));
+    --chartlist-fill: var(--hue-gradient, hsl(var(--h3)));
 
     --obsession-claimed-text: '#1';
 
@@ -3146,10 +3146,6 @@ state is not active, which then falls back to primary button styling */
 /* hides empty label unless user page has override */ .user-status-None {
     display: var(--override-none-status, none) !important;
 }
-.header-title:has([href="/user/aoivee"], [href="/user/Serprety"], [href="/user/RazzBX"], [href="/user/ivyshandle"], [href="/user/KuroinHeroin"], [href="/user/u5c"], [href="/user/destons"]) + .user-status-None {
-    color: hsl(var(--l3-c)) !important;
-    --override-none-status: flex;
-}
 
 .header-title-label-wrap {
     width: 600px;
@@ -4322,9 +4318,9 @@ p + .chartlist {
 .shout-list-item {
     position: relative;
 
-    &:has(> .shout-container > .shout--bleh-redacted) {
+    /*&:has(> .shout-container > .shout--bleh-redacted) {
         display: none;
-    }
+    }*/
 }
 
 .shout {
@@ -4559,6 +4555,7 @@ leading to a gap from their own css */
     }
 }
 
+[data-bleh--hide_hateful="true"] .shout--bleh-redacted[data-bleh--shout-expanded="false"],
 .shout--deleted, .shout--reported {
     padding: 0 0 10px !important;
     background: unset;
@@ -4572,6 +4569,7 @@ leading to a gap from their own css */
     }
 }
 
+[data-bleh--hide_hateful="true"] .shout--bleh-redacted[data-bleh--shout-expanded="false"]:before,
 .shout:not(.shout--deleted, .shout--reported):before {
     --mask: var(--icon-16-warning);
     color: hsla(var(--c3), 40%);
@@ -4603,15 +4601,14 @@ leading to a gap from their own css */
 
 .shout-user [href="/user/cutensilly"] {
     color: hsl(var(--l2-c)) !important;
-    text-shadow: 0 0 5px hsl(var(--l4-c)) !important;
+    text-shadow: 0 0 5px hsl(var(--h4)) !important;
     &:after {
         content: ' ᨐ';
     }
 }
 
 
-.avatar-status-dot,
-.shout-user:has([href="/user/aoivee"], [href="/user/Serprety"], [href="/user/RazzBX"], [href="/user/ivyshandle"], [href="/user/KuroinHeroin"], [href="/user/u5c"], [href="/user/destons"]) + .shout-user-avatar:before
+.avatar-status-dot
 {
     left: unset;
     top: unset;
@@ -4634,16 +4631,6 @@ leading to a gap from their own css */
     background: var(--override-bg, none) !important;
     filter: drop-shadow(2px 0px 0 hsl(var(--b5))) drop-shadow(0px 2px 0 hsl(var(--b5))) drop-shadow(-2px -0px 0 hsl(var(--b5))) drop-shadow(-0px -2px 0 hsl(var(--b5))) drop-shadow(0px 4px 0px hsl(var(--b5)));
 }
-.shout-user:has([href="/user/aoivee"], [href="/user/Serprety"], [href="/user/RazzBX"], [href="/user/ivyshandle"], [href="/user/KuroinHeroin"], [href="/user/u5c"], [href="/user/destons"]) + span.shout-user-avatar:before {
-    /* undo the positioning from the "button has icon" stuff
-    and move to bottom right */
-    left: unset !important;
-    --left: unset !important;
-    margin-top: unset !important;
-    --margin-top: unset !important;
-    top: unset !important;
-    right: 0 !important;
-}
 .shout-user-avatar, .avatar {
     /*background-color: var(--avatar-generic-background); support for transparent avatars */
     border-radius: var(--avatar-radius);
@@ -4651,7 +4638,6 @@ leading to a gap from their own css */
 
 
 .shout-user-avatar .avatar-status-dot,
-.shout-user:has([href="/user/aoivee"], [href="/user/Serprety"], [href="/user/RazzBX"], [href="/user/ivyshandle"], [href="/user/KuroinHeroin"], [href="/user/u5c"], [href="/user/destons"]) + .shout-user-avatar:before,
 .inbox-notifications .inbox-notifications__avatar--big-size .avatar-status-dot,
 .obsession-details-intro-avatar-wrap .avatar-status-dot
 {
@@ -4677,34 +4663,6 @@ leading to a gap from their own css */
 .obsession-details-intro-avatar-wrap .avatar-status-dot {
     /* remove the heavy bottom shadow */
     filter: drop-shadow(2px 0px 0 hsl(var(--b5))) drop-shadow(0px 2px 0 hsl(var(--b5))) drop-shadow(-2px -0px 0 hsl(var(--b5))) drop-shadow(-0px -2px 0 hsl(var(--b5)));
-}
-
-
-.shout-user:has([href="/user/aoivee"], [href="/user/Serprety"], [href="/user/RazzBX"], [href="/user/ivyshandle"], [href="/user/KuroinHeroin"], [href="/user/u5c"], [href="/user/destons"]) + .shout-user-avatar:after {
-    width: 24px;
-    height: 24px;
-    position: absolute;
-    right: -2px;
-    bottom: -2px;
-    padding-top: unset;
-    border-radius: 0;
-    content: '';
-    background-image: var(--icon-cat);
-    background-size: 20px;
-    background-position: center;
-    background-repeat: no-repeat;
-    z-index: 199;
-    box-shadow: unset;
-    filter: drop-shadow(2px 0px 0 hsl(var(--b5))) drop-shadow(0px 2px 0 hsl(var(--b5))) drop-shadow(-2px -0px 0 hsl(var(--b5))) drop-shadow(-0px -2px 0 hsl(var(--b5))) drop-shadow(0px 4px 0px hsl(var(--b5)));
-}
-.shout-user:has([href="/user/KuroinHeroin"]) + .shout-user-avatar:after {
-    background-image: var(--icon-mask);
-}
-.shout-user:has([href="/user/u5c"]) + .shout-user-avatar:after {
-    background-image: var(--icon-paw);
-}
-.shout-user:has([href="/user/destons"]) + .shout-user-avatar:after {
-    background-image: var(--icon-colon-three);
 }
 
 span.shout-user-avatar:before,
@@ -5203,7 +5161,6 @@ button:not(.playback-app-container button, .top-artist-list-item, .pixel, .liste
 :is(.header-title-label-wrap .label, .header-new-on-tour):before,
 /*     CUSTOM AVATAR ICONS WITHOUT PRO     */
 .avatar-status-dot:after,
-.shout-user:has([href="/user/aoivee"], [href="/user/Serprety"], [href="/user/RazzBX"], [href="/user/ivyshandle"], [href="/user/KuroinHeroin"], [href="/user/u5c"], [href="/user/destons"]) + .shout-user-avatar:before,
 /*     MODAL     */
 /*     SETTINGS     */
 #current-subscription h3:before, #current-subscription h2 + p b:before,
@@ -11865,8 +11822,24 @@ trying to list every song ever made by someone identifying as a female, which is
 
 
 /* ! hateful content that last.fm wont block */
-[data-bleh--hide_hateful="true"] .shout--bleh-redacted {
-    display: none;
+[data-bleh--hide_hateful="true"] .shout--bleh-redacted[data-bleh--shout-expanded="false"] {
+    .shout-user-avatar, .shout-user, .shout-user-avatar-link, .shout-permalink, .shout-body, .shout-action {
+        display: none;
+    }
+    .shout-actions {
+        position: absolute;
+        right: 0;
+        top: -9px;
+    }
+}
+[data-bleh--hide_hateful="false"] .shout--bleh-redacted[data-bleh--shout-expanded="false"],
+.shout--bleh-redacted[data-bleh--shout-expanded="true"] {
+    > p {
+        display: none;
+    }
+    .shout-user {
+        margin-top: unset !important;
+    }
 }
 
 

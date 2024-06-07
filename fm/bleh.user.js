@@ -467,6 +467,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         let shouts = element.querySelectorAll('.shout');
 
         shouts.forEach((shout) => {
+            try {
             if (!shout.hasAttribute('data-kate-processed')) {
                 shout.setAttribute('data-kate-processed', 'true');
 
@@ -475,12 +476,37 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
                 if (redacted.includes(shout_name.toLowerCase())) {
                     shout.classList.add('shout--bleh-redacted');
+                    shout.setAttribute('data-bleh--shout-expanded','false');
                     shout_avatar.classList.add('avatar--bleh-missing');
+
+                    let redacted_msg = document.createElement('p');
+                    redacted_msg.textContent = 'This user is hidden.';
+                    shout.insertBefore(redacted_msg, shout.firstChild);
+
+
+                    // gather shout id from more actions' id
+                    let shout_actions = shout.querySelector('.shout-more-actions-menu');
+                    let shout_id = shout_actions.getAttribute('id').replace('shout-more-actions-');
+                    shout.setAttribute('id',`bleh--shout-${shout_id}`);
+
+                    // append button
+                    let shout_show_button = document.createElement('li');
+                    shout_show_button.innerHTML = (`
+                        <button onclick="_show_hidden_shout('${shout_id}')" class="dropdown-menu-clickable-item more-item--bleh--show-hidden-shout">
+                            Show shout contents
+                        </button>
+                    `);
+                    shout_actions.appendChild(shout_show_button);
                 } else {
                     patch_avatar(shout_avatar, shout_name);
                 }
             }
+            } catch(e) {}
         });
+    }
+
+    unsafeWindow._show_hidden_shout = function(shout_id) {
+        document.getElementById(`bleh--shout-${shout_id}`).setAttribute('data-bleh--shout-expanded','true');
     }
 
 
@@ -809,7 +835,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                         <button class="btn reset" onclick="_reset_item('gendered_tags')">Reset to default</button>
                         <div class="heading">
                             <h5>Hide gendered tags</h5>
-                            <p>By default, gendered tags are hidden in bleh² due to their unorganised and impossible nature.</p>
+                            <p>By default, gendered tags are hidden in bleh due to their unorganised and impossible nature.</p>
                         </div>
                         <div class="toggle-wrap">
                             <button class="toggle" id="toggle-gendered_tags" onclick="_update_item('gendered_tags')" aria-checked="true">
