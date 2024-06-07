@@ -228,6 +228,11 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     }
 
     function append_style() {
+        let connect = document.createElement('link');
+        connect.setAttribute('rel','preconnect');
+        connect.setAttribute('href','https://katelyynn.github.io/');
+        document.head.appendChild(connect);
+
         let style = document.createElement('link');
         style.setAttribute('rel','stylesheet');
         style.setAttribute('href','https://katelyynn.github.io/bleh/fm/bleh.css');
