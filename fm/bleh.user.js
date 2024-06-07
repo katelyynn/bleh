@@ -126,8 +126,8 @@ let settings_base = {
     gendered_tags: {
         css: 'gendered_tags',
         unit: '',
-        value: false,
-        values: [false, true],
+        value: true,
+        values: [true, false],
         type: 'toggle'
     },
     hide_hateful: {
