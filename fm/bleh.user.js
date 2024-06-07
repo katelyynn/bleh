@@ -16,7 +16,7 @@ let version = '2024.0607';
 let profile_badges = {
     'cutensilly': {
         type: 'queen',
-        name: 'bleh Owner'
+        name: 'blehhhhhhhhhh!!'
     },
     'Iexyy': {
         type: 'cat',
@@ -81,7 +81,8 @@ let settings_template = {
     lit: 1,
     invert_interactable_colour: false,
     dev: 0,
-    hide_hateful: true
+    hide_hateful: true,
+    accessible_name_colours: false
 };
 let settings_base = {
     hue: {
@@ -134,6 +135,13 @@ let settings_base = {
         value: true,
         values: [true, false],
         type: 'toggle'
+    },
+    accessible_name_colours: {
+        css: 'accessible_name_colours',
+        unit: '',
+        value: false,
+        values: [true, false],
+        type: 'toggle'
     }
 }
 
@@ -169,6 +177,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
     function initia() {
         append_style();
+        load_settings();
         //get_scrobbles(document.body);
         append_nav(document.body);
         patch_masthead(document.body);
@@ -189,6 +198,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     if (node instanceof Element) {
                         if (!node.hasAttribute('data-kate-processed')) {
                             node.setAttribute('data-kate-processed', 'true');
+                            load_settings();
                             //get_scrobbles(node);
                             append_nav(document.body);
                             patch_masthead(document.body);
@@ -293,11 +303,6 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             user_nav.insertAdjacentElement('beforeend', bleh_nav);
         }
     }
-
-
-
-    // settings
-    load_settings();
 
     // create blank settings
     function create_settings_template() {
@@ -827,6 +832,37 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 <div class="bleh--panel">
                     <h3>Display</h3>
                     <div class="inner-preview pad flex">
+                        <div class="shout js-shout js-link-block" data-kate-processed="true">
+                            <h3 class="shout-user">
+                                <a>cutensilly</a>
+                            </h3>
+                            <span class="avatar shout-user-avatar" title="Last.fm Pro user" data-kate-processed="true">
+                                <img src="https://lastfm.freetls.fastly.net/i/u/avatar70s/ae26b1e16fed58f1393da04af42299b3.png" alt="Your avatar" loading="lazy">
+                                <span class="avatar-status-dot user-status--bleh-queen user-status--bleh-user-cutensilly" data-kate-processed="true"></span>
+                            </span>
+                            <a class="shout-permalink shout-timestamp">
+                                <time datetime="2024-06-05T02:33:39+01:00" title="Wednesday 5 Jun 2024, 2:33am">
+                                    5 Jun 2:33am
+                                </time>
+                            </a>
+                            <div class="shout-body">
+                                <p>some completely random text that doesn't mean anything</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="toggle-container" id="container-accessible_name_colours">
+                        <button class="btn reset" onclick="_reset_item('accessible_name_colours')">Reset to default</button>
+                        <div class="heading">
+                            <h5>Prefer accessible name colours</h5>
+                            <p>Use the default header text colour over a accented text colour.</p>
+                        </div>
+                        <div class="toggle-wrap">
+                            <button class="toggle" id="toggle-accessible_name_colours" onclick="_update_item('accessible_name_colours')" aria-checked="false">
+                                <div class="dot"></div>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="inner-preview pad flex">
                         <div class="preview-img">
                             <img id="gendered_tags-img" src="https://cutensilly.org/img/gendered_tags-hidden.png">
                         </div>
@@ -880,6 +916,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
         if (page == 'themes')
             show_theme_change_in_settings();
+        else if (page == 'customise')
+            refresh_all();
     }
 
     function show_theme_change_in_settings(theme = '') {
@@ -909,6 +947,12 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             reset_item(item);
     }
 
+    function refresh_all() {
+        let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
+        for (let item in settings_base)
+            update_item(item, settings[item], false);
+    }
+
     function reset_item(item) {
         update_item(item, settings_base[item].value);
     }
@@ -932,9 +976,11 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         update_item(item, value);
     }
 
-    function update_item(item, value) {
+    function update_item(item, value, modify=true) {
+        console.log('update item',item,value);
+        try {
         let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
-        if (settings_base[item].type == 'slider')
+        if (settings_base[item].type == 'slider' && modify)
             settings[item] = value;
 
         // determine interactable text colour based on --hue & --lit
@@ -970,7 +1016,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             document.body.style.setProperty(`--${item}`,value);
             document.documentElement.setAttribute(`data-bleh--${item}`, `${value}`);
         } else if (settings_base[item].type == 'toggle') {
-            if (settings[item] == settings_base[item].values[0]) {
+            if (settings[item] == settings_base[item].values[0] && modify) {
                 settings[item] = settings_base[item].values[1];
                 document.getElementById(`toggle-${item}`).setAttribute('aria-checked',false);
 
@@ -985,8 +1031,9 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 // save setting into body
                 document.body.style.setProperty(`--${item}`,settings_base[item].values[1]);
                 document.documentElement.setAttribute(`data-bleh--${item}`, `${settings_base[item].values[1]}`);
-            } else {
+            } else if (modify) {
                 settings[item] = settings_base[item].values[0];
+                console.log(`toggle-${item}`);
                 document.getElementById(`toggle-${item}`).setAttribute('aria-checked',true);
 
 
@@ -1000,11 +1047,19 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 // save setting into body
                 document.body.style.setProperty(`--${item}`,settings_base[item].values[0]);
                 document.documentElement.setAttribute(`data-bleh--${item}`, `${settings_base[item].values[0]}`);
+            } else {
+                // dont modify, just show
+                if (settings[item] == settings_base[item].values[0]) {
+                    document.getElementById(`toggle-${item}`).setAttribute('aria-checked',true);
+                } else {
+                    document.getElementById(`toggle-${item}`).setAttribute('aria-checked',false);
+                }
             }
         }
 
         // save to settings
         localStorage.setItem('bleh', JSON.stringify(settings));
+        } catch(e) {}
     }
 
 
