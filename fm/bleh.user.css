@@ -304,6 +304,8 @@ body {
 
     --icon-track: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLW11c2ljLTMiPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTgiIHI9IjQiLz48cGF0aCBkPSJNMTYgMThWMiIvPjwvc3ZnPg==');
 
+    --icon-10-revert: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLXJvdGF0ZS1jY3ciPjxwYXRoIGQ9Ik0zIDEyYTkgOSAwIDEgMCA5LTkgOS43NSA5Ljc1IDAgMCAwLTYuNzQgMi43NEwzIDgiLz48cGF0aCBkPSJNMyAzdjVoNSIvPjwvc3ZnPg==');
+
     --icon-20-shoutbox: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjI1IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLW1lc3NhZ2Utc3F1YXJlLWRvdCI+PHBhdGggZD0iTTExLjcgM0g1YTIgMiAwIDAgMC0yIDJ2MTZsNC00aDEyYTIgMiAwIDAgMCAyLTJ2LTIuNyIvPjxjaXJjbGUgY3g9IjE4IiBjeT0iNiIgcj0iMyIvPjwvc3ZnPg==');
     --icon-20-album: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjI1IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWRpc2MiPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEwIi8+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMiIvPjwvc3ZnPg==');
     --icon-20-photo: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjI1IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWltYWdlIj48cmVjdCB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHg9IjMiIHk9IjMiIHJ4PSIyIiByeT0iMiIvPjxjaXJjbGUgY3g9IjkiIGN5PSI5IiByPSIyIi8+PHBhdGggZD0ibTIxIDE1LTMuMDg2LTMuMDg2YTIgMiAwIDAgMC0yLjgyOCAwTDYgMjEiLz48L3N2Zz4=');
@@ -4247,13 +4249,17 @@ a.chartlist-love-button:after {
     right: 0;
 }
 .chartlist-count-bar-value {
-    color: hsl(var(--ovr, var(--b7)));
+    color: hsl(var(--b7));
     font-weight: 600;
     padding: 0 10px !important;
     margin: 0 -10px;
 
     .stat-name {
         display: none !important;
+    }
+
+    [data-bleh--invert_interactable_colour="true"] & {
+        color: hsl(var(--ov-c1)) !important;
     }
 }
 
@@ -4988,9 +4994,13 @@ button:not(.playback-app-container button, .top-artist-list-item, .pixel, .liste
         --bg: hsl(var(--h3)) !important;
         --bg-hov: hsla(var(--h3), 80%) !important;
         --bg-atv: hsla(var(--h3), 60%) !important;
-        --col: hsl(var(--ovr, var(--b7))) !important;
+        --col: hsl(var(--b7)) !important;
         --shadow: inset hsl(var(--l2-c)) 0 -1px 0, var(--interactable-outer);
         --shadow-hov: inset hsl(var(--l2-c)) 0 -1px 0, var(--interactable-outer), var(--interactable-active-outer);
+
+        [data-bleh--invert_interactable_colour="true"] & {
+            --col: hsl(var(--ov-c1)) !important;
+        }
     }
 
 
@@ -5166,6 +5176,7 @@ button:not(.playback-app-container button, .top-artist-list-item, .pixel, .liste
 /*     ICON MASK     */
 /*     BLEH     */
 .btns .btn:before,
+.btn.reset:before,
 /*     DROPDOWNS     */
 .dropdown-menu-clickable-item:before, .auth-dropdown-menu-item:before,
 .dropdown-menu-list-button::after, .dropdown-menu-clickable-button::after, .dropdown-menu-clickable-button-js-only::after,
@@ -10630,18 +10641,18 @@ so this is good enough - use the community docs */
 }
 
 
-.pallete {
+.palette {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
     gap: 4px;
     height: 50px;
 }
 
-.pallete.options {
+.palette.options {
     grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
     height: fit-content;
 }
-.pallete.options > button {
+.palette.options > button {
     aspect-ratio: 1 / 1;
     --bg: hsl(var(--l3));
     --bg-hov: hsla(var(--l3), 80%);
@@ -10654,15 +10665,15 @@ so this is good enough - use the community docs */
     height: unset;
 }
 
-.pallete + .pallete {
+.palette + .palette {
     margin-top: 6px;
 }
-.pallete > div {
+.palette > div {
     background-color: var(--col, hsl(var(--b6)));
     border-radius: var(--item-med-radius);
 }
 
-.pallete.albums {
+.palette.albums {
     grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
 }
 
@@ -10722,12 +10733,23 @@ so this is good enough - use the community docs */
         }
     }
 
-    .sep {
-        width: 100%;
-        height: 1px;
-        background-color: hsl(var(--b4));
-        margin: var(--card-gap) 0;
+    .btn-row {
+        display: flex;
+        align-items: center;
+        gap: var(--button-list-gap);
+
+        .chartlist-count-bar {
+            width: unset;
+            flex: 1;
+        }
     }
+}
+
+.sep {
+    width: 100%;
+    height: 1px;
+    background-color: hsl(var(--b4));
+    margin: var(--card-gap) 0;
 }
 
 .preview-img {
@@ -10837,6 +10859,16 @@ input[type="range"]::-moz-range-thumb {
     display: flex;
     flex-direction: column;
     gap: 6px;
+
+    h5 {
+        margin: unset;
+        color: hsl(var(--c1));
+        font-weight: var(--font-weight-medium);
+    }
+
+    & + .slider-container {
+        margin-top: var(--card-gap);
+    }
 }
 .slider-container .slider {
     display: flex;
@@ -10859,13 +10891,14 @@ input[type="range"]::-moz-range-thumb {
 
     p {
         position: absolute;
+        margin: unset;
     }
 }
 
 .slider-container .slider p {
-    font-size: 14px;
-    color: hsl(var(--c3));
-    font-weight: 500;
+    font-size: 12px;
+    color: hsl(var(--l3-c));
+    font-weight: var(--font-weight-medium);
 }
 
 .toggle-container .heading,
@@ -10894,38 +10927,44 @@ input[type="range"]::-moz-range-thumb {
         transition-timing-function: var(--trans-function);
     }
     &.modified h5 {
-        padding-left: 16px;
+        padding-left: 20px;
     }
     position: relative;
 }
 
 .btn.reset {
-    width: 10px;
-    height: 10px;
-    --bg: hsla(var(--h3), 100%);
-    --bg-hov: hsla(var(--h3), 80%);
-    --bg-atv: hsla(var(--h3), 60%);
+    width: 14px;
+    height: 14px;
+    --bg: hsla(var(--h4), 80%);
+    --bg-hov: hsla(var(--h4), 60%);
+    --bg-atv: hsla(var(--h4), 40%);
     --shadow: 0 0 10px hsl(var(--h4));
     --shadow-hov: var(--shadow);
-    --hue: 160;
-    --sat: 1;
-    --lit: 1;
     --font-size: 0;
     --padding: 0;
     --radius: 50%;
     border: 2px solid hsl(var(--b5));
 
     position: absolute;
-    top: 4px;
-    left: -16px;
+    top: 1px;
+    left: -20px;
     opacity: 0;
-    transition-property: opacity, left;
-    transition-duration: var(--trans);
-    transition-timing-function: var(--trans-function);
+    transition-property: opacity, left !important;
+    transition-duration: var(--trans) !important;
+    transition-timing-function: var(--trans-function) !important;
 
     .modified & {
         left: 0;
         opacity: 1;
+    }
+
+    &:before {
+        --left: 2px;
+        --top: 2px;
+        --margin-top: 0;
+        --mask-size: 10px;
+        --mask: var(--icon-10-revert);
+        color: hsl(var(--c1)) !important;
     }
 }
 
@@ -10938,22 +10977,34 @@ input[type="range"]::-moz-range-thumb {
 
 .toggle {
     display: flex;
+    justify-content: center;
+    align-items: center;
     width: 56px !important;
     height: 32px;
     position: relative;
-}
-.toggle .dot {
-    position: absolute;
-    width: 14px;
-    height: 14px;
-    left: 7px;
-    border-radius: var(--item-med-radius);
-    background: var(--col);
-}
 
-.toggle[aria-checked="true"] .dot {
-    left: unset;
-    right: 7px;
+    .dot {
+        position: absolute;
+        width: 14px;
+        height: 14px;
+        left: 7px;
+        border-radius: var(--item-med-radius);
+        background: var(--col);
+    }
+
+    &[aria-checked="true"] {
+        --bg: hsl(var(--h3)) !important;
+        --bg-hov: hsla(var(--h3), 80%) !important;
+        --bg-atv: hsla(var(--h3), 60%) !important;
+        --col: hsl(var(--ovr, var(--b7))) !important;
+        --shadow: inset hsl(var(--l2-c)) 0 -1px 0, var(--interactable-outer);
+        --shadow-hov: inset hsl(var(--l2-c)) 0 -1px 0, var(--interactable-outer), var(--interactable-active-outer);
+
+        .dot {
+            left: unset;
+            right: 7px;
+        }
+    }
 }
 
 

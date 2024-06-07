@@ -75,6 +75,7 @@ let settings_template = {
     hue: 255,
     sat: 1,
     lit: 1,
+    invert_interactable_colour: false,
     dev: 0,
     hide_hateful: true
 };
@@ -121,6 +122,13 @@ let settings_base = {
         unit: '',
         value: false,
         values: [false, true],
+        type: 'toggle'
+    },
+    hide_hateful: {
+        css: 'hide_hateful',
+        unit: '',
+        value: true,
+        values: [true, false],
         type: 'toggle'
     }
 }
@@ -583,7 +591,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 <div class="bleh--panel">
                     <h3>Colours</h3>
                     <h5>Presets</h5>
-                    <div class="pallete options">
+                    <div class="palette options">
                         <button class="btn" style="
                             --hue: -2;
                             --sat: 1;
@@ -673,7 +681,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 <div class="bleh--panel">
                     <h3>Artwork</h3>
                     <div class="inner-preview pad">
-                        <div class="pallete albums" style="height: fit-content">
+                        <div class="palette albums" style="height: fit-content">
                             <div class="album-cover" style="background-image: url('https://lastfm.freetls.fastly.net/i/u/770x0/1569198c4cf0a3b2ff8728975e8359fa.jpg')"></div>
                             <div class="album-cover" style="background-image: url('https://lastfm.freetls.fastly.net/i/u/770x0/b897255bf422baa93a42536af293f9f8.jpg')"></div>
                             <div class="album-cover" style="background-image: url('https://lastfm.freetls.fastly.net/i/u/770x0/a78bbd5ff0184115902f403212f04976.jpg')"></div>
@@ -691,6 +699,39 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                         <div class="slider">
                             <input type="range" min="0" max="1" value="0" step="0.05" id="slider-gloss" oninput="_update_item('gloss', this.value)">
                             <p id="value-gloss">0</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bleh--panel">
+                    <h3>Display</h3>
+                    <div class="inner-preview pad flex">
+                        <div class="preview-img">
+                            <img id="gendered_tags-img" src="https://cutensilly.org/img/gendered_tags-hidden.png">
+                        </div>
+                    </div>
+                    <div class="toggle-container" id="container-gendered_tags">
+                        <button class="btn reset" onclick="_reset_item('gendered_tags')">Reset to default</button>
+                        <div class="heading">
+                            <h5>Hide gendered tags</h5>
+                            <p>By default, gendered tags are hidden in bleh² due to their unorganised and impossible nature.</p>
+                        </div>
+                        <div class="toggle-wrap">
+                            <button class="toggle" id="toggle-gendered_tags" onclick="_update_item('gendered_tags')" aria-checked="true">
+                                <div class="dot"></div>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="sep"></div>
+                    <div class="toggle-container" id="container-hide_hateful">
+                        <button class="btn reset" onclick="_reset_item('hide_hateful')">Reset to default</button>
+                        <div class="heading">
+                            <h5>Hide hateful shouts</h5>
+                            <p>Hateful users are community-contributed, it is up to you if you prefer to view these shouts.</p>
+                        </div>
+                        <div class="toggle-wrap">
+                            <button class="toggle" id="toggle-hide_hateful" onclick="_update_item('hide_hateful')" aria-checked="true">
+                                <div class="dot"></div>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -774,20 +815,22 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         if (settings_base[item].type == 'slider')
             settings[item] = value;
 
-        // determine --ovr value based on --hue & --lit
-        /*if (item == 'hue' || item == 'lit') {
+        // determine interactable text colour based on --hue & --lit
+        if (item == 'hue' || item == 'lit') {
             if (settings.hue > 228 && settings.hue < 252 && settings.lit < 0.75) {
-                settings.ovr = 'var(--ov-c1)';
+                settings.invert_interactable_colour = true;
             } else if (settings.hue > 210 && settings.hue < 280 && settings.lit < 0.425) {
-                settings.ovr = 'var(--ov-c1)';
+                settings.invert_interactable_colour = true;
             } else if (settings.lit < 0.3) {
-                settings.ovr = 'var(--ov-c1)';
+                settings.invert_interactable_colour = true;
             } else {
-                settings.ovr = 'var(--b7)';
+                settings.invert_interactable_colour = false;
             }
 
-            document.body.style.setProperty(`--ovr`,settings.ovr);
-        }*/
+            // save setting into body
+            document.body.style.setProperty(`--invert_interactable_colour`,settings.invert_interactable_colour);
+            document.documentElement.setAttribute(`data-bleh--invert_interactable_colour`, `${settings.invert_interactable_colour}`);
+        }
 
         if (settings_base[item].type == 'slider') {
             // text to show current slider value
@@ -800,6 +843,10 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 else
                     document.getElementById(`container-${item}`).classList.remove('modified');
             } catch(e) {}
+
+            // save setting into body
+            document.body.style.setProperty(`--${item}`,value);
+            document.documentElement.setAttribute(`data-bleh--${item}`, `${value}`);
         } else if (settings_base[item].type == 'toggle') {
             if (settings[item] == settings_base[item].values[0]) {
                 settings[item] = settings_base[item].values[1];
@@ -812,6 +859,10 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 } else if (item == 'gendered_tags') {
                     document.getElementById('gendered_tags-img').setAttribute('src','https://cutensilly.org/img/gendered_tags-shown.png');
                 }
+
+                // save setting into body
+                document.body.style.setProperty(`--${item}`,settings_base[item].values[1]);
+                document.documentElement.setAttribute(`data-bleh--${item}`, `${settings_base[item].values[1]}`);
             } else {
                 settings[item] = settings_base[item].values[0];
                 document.getElementById(`toggle-${item}`).setAttribute('aria-checked',true);
@@ -823,12 +874,12 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 } else if (item == 'gendered_tags') {
                     document.getElementById('gendered_tags-img').setAttribute('src','https://cutensilly.org/img/gendered_tags-hidden.png');
                 }
+
+                // save setting into body
+                document.body.style.setProperty(`--${item}`,settings_base[item].values[0]);
+                document.documentElement.setAttribute(`data-bleh--${item}`, `${settings_base[item].values[0]}`);
             }
         }
-
-        // save setting into body
-        document.body.style.setProperty(`--${item}`,value);
-        document.documentElement.setAttribute(`data-bleh--${item}`, `${value}`);
 
         // save to settings
         localStorage.setItem('bleh', JSON.stringify(settings));
@@ -842,7 +893,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         <p>Colours are controlled by three values: hue, saturation, and lightness. Try out the sliders to get a feel.</p>
         <br>
         <div class="inner-preview pad">
-            <div class="pallete">
+            <div class="palette">
                 <div style="--col: hsl(var(--l2-c))"></div>
                 <div style="--col: hsl(var(--l3-c))"></div>
                 <div style="--col: hsl(var(--l4-c))"></div>
@@ -854,9 +905,11 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             <div class="btn-row">
                 <button class="btn">Example button</button>
                 <button class="btn primary">Example button</button>
-                <div class="chartlist-bar">
-                    <span class="fill"></span>
-                    <span class="text">44,551 plays</span>
+                <div class="chartlist-count-bar">
+                    <a class="chartlist-count-bar-link">
+                        <span class="chartlist-count-bar-slug" style="width: 60%"></span>
+                        <span class="chartlist-count-bar-value">44,551 plays</span>
+                    </a>
                 </div>
             </div>
         </div>
