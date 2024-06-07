@@ -865,7 +865,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                                 <a>cutensilly</a>
                             </h3>
                             <span class="avatar shout-user-avatar" title="Last.fm Pro user" data-kate-processed="true">
-                                <img src="https://lastfm.freetls.fastly.net/i/u/avatar70s/ae26b1e16fed58f1393da04af42299b3.png" alt="Your avatar" loading="lazy">
+                                <img src="https://lastfm.freetls.fastly.net/i/u/avatar70s/198d1a3bd66a0d586e8e7af8a31febe4.jpg" alt="Your avatar" loading="lazy">
                                 <span class="avatar-status-dot user-status--bleh-queen user-status--bleh-user-cutensilly" data-kate-processed="true"></span>
                             </span>
                             <a class="shout-permalink shout-timestamp">
