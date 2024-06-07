@@ -217,7 +217,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         if (settings.dev != 1) {
             let style = document.createElement('link');
             style.setAttribute('rel','stylesheet');
-            style.setAttribute('href','https://katelyynn.github.io/bleh/fm/bleh.user.css');
+            style.setAttribute('href','https://katelyynn.github.io/bleh/fm/bleh.css');
             document.documentElement.appendChild(style);
         }
     }
