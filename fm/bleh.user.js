@@ -244,30 +244,51 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             user_nav.setAttribute('data-kate-processed','true');
 
             let bleh_nav = document.createElement('li');
-            bleh_nav.innerHTML = (`
-            <li>
-                <button class="auth-dropdown-menu-item bleh--theme-menu-item" onclick="toggle_theme()">
-                    <span class="auth-dropdown-item-row">
-                        <span class="auth-dropdown-item-left">Theme</span>
-                        <span class="auth-dropdown-item-right" id="theme-value">${theme_names[settings.theme]}</span>
-                    </span>
-                </button>
-            </li>
-            <li>
-                <button class="auth-dropdown-menu-item bleh--dev-menu-item" onclick="toggle_setting('dev')">
-                    <span class="auth-dropdown-item-row">
-                        <span class="auth-dropdown-item-left">Toggle dev mode</span>
-                    </span>
-                </button>
-            </li>
-            <li>
-                <a class="auth-dropdown-menu-item bleh--configure-menu-item" href="/bleh">
-                    <span class="auth-dropdown-item-row">
-                        <span class="auth-dropdown-item-left">Configure bleh</span>
-                    </span>
-                </a>
-            </li>
-            `);
+            if (auth == 'cutensilly') {
+                bleh_nav.innerHTML = (`
+                    <li>
+                        <button class="auth-dropdown-menu-item bleh--theme-menu-item" onclick="toggle_theme()">
+                            <span class="auth-dropdown-item-row">
+                                <span class="auth-dropdown-item-left">Theme</span>
+                                <span class="auth-dropdown-item-right" id="theme-value">${theme_names[settings.theme]}</span>
+                            </span>
+                        </button>
+                    </li>
+                    <li>
+                        <button class="auth-dropdown-menu-item bleh--dev-menu-item" onclick="toggle_setting('dev')">
+                            <span class="auth-dropdown-item-row">
+                                <span class="auth-dropdown-item-left">Toggle dev mode</span>
+                            </span>
+                        </button>
+                    </li>
+                    <li>
+                        <a class="auth-dropdown-menu-item bleh--configure-menu-item" href="/bleh">
+                            <span class="auth-dropdown-item-row">
+                                <span class="auth-dropdown-item-left">Configure bleh</span>
+                            </span>
+                        </a>
+                    </li>
+                    `);
+            } else {
+                bleh_nav.innerHTML = (`
+                    <li>
+                        <button class="auth-dropdown-menu-item bleh--theme-menu-item" onclick="toggle_theme()">
+                            <span class="auth-dropdown-item-row">
+                                <span class="auth-dropdown-item-left">Theme</span>
+                                <span class="auth-dropdown-item-right" id="theme-value">${theme_names[settings.theme]}</span>
+                            </span>
+                        </button>
+                    </li>
+                    <li>
+                        <a class="auth-dropdown-menu-item bleh--configure-menu-item" href="/bleh">
+                            <span class="auth-dropdown-item-row">
+                                <span class="auth-dropdown-item-left">Configure bleh</span>
+                            </span>
+                        </a>
+                    </li>
+                    `);
+            }
+
 
             user_nav.insertAdjacentElement('beforeend', bleh_nav);
         }
