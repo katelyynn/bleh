@@ -236,9 +236,9 @@ body {
     --avatar-shadow: 3px 6px 15px 10px hsla(var(--b7), 0.05);
     --standout-shadow: 3px 6px 32px 16px hsla(var(--b7), 0.2);
 
-    --noise: url('noise.png');
-    --gloss: url('gloss.svg');
-    --gloss-opacity: var(--new-gloss, 0);
+    --noise: url('https://cutensilly.org/img/noise.png');
+    --gloss-image: url('https://cutensilly.org/img/gloss.svg');
+    --gloss: 0;
 
     --interactable-inset: inset hsl(var(--b3)) 0 -1px 0;
     --interactable-outer: hsla(var(--b7), 0.3) 0 2px 3px 0;
@@ -3696,9 +3696,9 @@ better than the default selector '#app a' i suppose */
     content: '';
     position: absolute;
     inset: 0;
-    background-image: var(--gloss) !important;
+    background-image: var(--gloss-image) !important;
     background-size: 100% !important;
-    opacity: var(--gloss-opacity);
+    opacity: var(--gloss);
     pointer-events: none;
     padding: unset !important;
     box-shadow: unset !important;
@@ -10660,6 +10660,31 @@ so this is good enough - use the community docs */
 .pallete > div {
     background-color: var(--col, hsl(var(--b6)));
     border-radius: var(--item-med-radius);
+}
+
+.pallete.albums {
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+}
+
+.album-cover {
+    aspect-ratio: 1 / 1;
+    position: relative;
+    overflow: hidden;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    box-sizing: border-box;
+}
+.album-cover:after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: var(--gloss-image) !important;
+    background-size: 100% !important;
+    opacity: var(--gloss, 0);
+    pointer-events: none;
+    padding: unset !important;
+    box-shadow: unset !important;
 }
 
 

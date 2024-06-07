@@ -670,6 +670,30 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                         Create a custom colour
                     </button>
                 </div>
+                <div class="bleh--panel">
+                    <h3>Artwork</h3>
+                    <div class="inner-preview pad">
+                        <div class="pallete albums" style="height: fit-content">
+                            <div class="album-cover" style="background-image: url('https://lastfm.freetls.fastly.net/i/u/770x0/1569198c4cf0a3b2ff8728975e8359fa.jpg')"></div>
+                            <div class="album-cover" style="background-image: url('https://lastfm.freetls.fastly.net/i/u/770x0/b897255bf422baa93a42536af293f9f8.jpg')"></div>
+                            <div class="album-cover" style="background-image: url('https://lastfm.freetls.fastly.net/i/u/770x0/a78bbd5ff0184115902f403212f04976.jpg')"></div>
+                            <div class="album-cover" style="background-image: url('https://lastfm.freetls.fastly.net/i/u/770x0/ddee3b871289a6cda0e3c7d4b4580d62.jpg')"></div>
+                            <div class="album-cover" style="background-image: url('https://lastfm.freetls.fastly.net/i/u/770x0/570021b68d3d9d2db08bc99a473303b0.jpg')"></div>
+                            <div class="album-cover" style="background-image: url('https://lastfm.freetls.fastly.net/i/u/770x0/e39eb31f874f4a5c4afa836845141437.jpg')"></div>
+                        </div>
+                    </div>
+                    <div class="slider-container" id="container-gloss">
+                        <button class="btn reset" onclick="_reset_item('gloss')">Reset to default</button>
+                        <div class="heading">
+                            <h5>Gloss overlay</h5>
+                            <p>Previously a default of 0.2, now disabled by default.</p>
+                        </div>
+                        <div class="slider">
+                            <input type="range" min="0" max="1" value="0" step="0.05" id="slider-gloss" oninput="_update_item('gloss', this.value)">
+                            <p id="value-gloss">0</p>
+                        </div>
+                    </div>
+                </div>
                 `);
         }
     }
