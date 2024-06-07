@@ -902,6 +902,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                             </button>
                         </div>
                     </div>
+                    <div class="sep"></div>
                     <div class="inner-preview pad flex">
                         <section class="catalogue-tags ">
                             <ul class="tags-list tags-list--global">

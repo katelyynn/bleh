@@ -10764,6 +10764,11 @@ so this is good enough - use the community docs */
     background-color: hsl(var(--b6));
     padding: var(--card-gap);
     border-radius: var(--item-med-radius);
+    box-shadow: 0 7px 5px 0 hsla(var(--b7), 0.25) inset, var(--card-shadow);
+
+    [data-bleh--theme="light"] & {
+        box-shadow: 0 4px 5px 0 hsla(var(--b7), 0.08) inset, var(--card-shadow);
+    }
 
     &.gap-top {
         margin-top: var(--card-gap);
