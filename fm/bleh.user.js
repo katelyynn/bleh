@@ -1,12 +1,14 @@
 // ==UserScript==
 // @name         bleh
 // @namespace    http://last.fm/
-// @version      1.0.0
+// @version      2024.0627
 // @description  bleh!!! ^-^
 // @author       kate
 // @match        https://www.last.fm/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=last.fm
 // @grant        GM_addStyle
+// @updateURL    https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.js
+// @downloadURL  https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.js
 // ==/UserScript==
 
 let version = '2024.0607';
