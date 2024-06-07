@@ -3906,9 +3906,9 @@ better than the default selector '#app a' i suppose */
     opacity: 0;
 }
 
-.chartlist-more, .chartlist-play {
+/*.chartlist-more, .chartlist-play {
     z-index: 5;
-}
+}*/
 .chartlist-timestamp {
     z-index: 4;
 }
@@ -4103,6 +4103,10 @@ better than the default selector '#app a' i suppose */
 }
 .chartlist--with-bar.chartlist--with-index.chartlist--with-play.chartlist--with-image.chartlist--with-loved.chartlist--with-index--length-4 .chartlist-row--with-artist .chartlist-artist, .chartlist--with-multi-playlinks.chartlist--with-index.chartlist--with-play.chartlist--with-image.chartlist--with-loved.chartlist--with-index--length-4 .chartlist-row--with-artist .chartlist-artist {
     left: calc(103px - 2px);
+}
+
+.chartlist--with-bar .chartlist-row--with-artist .chartlist-artist {
+    right: 300px;
 }
 
 /* playlist */
