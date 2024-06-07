@@ -10449,10 +10449,17 @@ so this is good enough - use the community docs */
     h3 {
         font-size: 24px;
         line-height: 28px;
+        color: hsl(var(--c1));
     }
     h4 {
         font-size: 16px;
         line-height: 20px;
+        color: hsl(var(--c1));
+    }
+    h5 {
+        margin: unset;
+        color: hsl(var(--c1));
+        font-weight: var(--font-weight-medium);
     }
 }
 
@@ -10620,6 +10627,39 @@ so this is good enough - use the community docs */
             }
         }
     }
+}
+
+
+.pallete {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+    gap: 4px;
+    height: 50px;
+}
+
+.pallete.options {
+    grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+    height: fit-content;
+}
+.pallete.options > button {
+    aspect-ratio: 1 / 1;
+    --bg: hsl(var(--l3));
+    --bg-hov: hsla(var(--l3), 80%);
+    --bg-atv: hsla(var(--l3), 60%);
+    --shadow: var(--card-shadow);
+    --shadow-hov: var(--shadow);
+    --sat: 1;
+    --lit: 1;
+    width: unset;
+    height: unset;
+}
+
+.pallete + .pallete {
+    margin-top: 6px;
+}
+.pallete > div {
+    background-color: var(--col, hsl(var(--b6)));
+    border-radius: var(--item-med-radius);
 }
 
 

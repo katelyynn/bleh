@@ -78,20 +78,66 @@ let settings_template = {
     dev: 0,
     hide_hateful: true
 };
+let settings_base = {
+    hue: {
+        css: 'hue',
+        unit: '',
+        value: 255,
+        type: 'slider'
+    },
+    sat: {
+        css: 'sat',
+        unit: '',
+        value: 1,
+        type: 'slider'
+    },
+    lit: {
+        css: 'lit',
+        unit: '',
+        value: 1,
+        type: 'slider'
+    },
+    gloss: {
+        css: 'gloss',
+        unit: '',
+        value: 0,
+        type: 'slider'
+    },
+    main_width: {
+        css: 'main_width',
+        unit: 'px',
+        value: 902,
+        type: 'slider'
+    },
+    nav: {
+        css: 'show_extra_nav',
+        unit: '',
+        value: true,
+        values: [true, false],
+        type: 'toggle'
+    },
+    gendered_tags: {
+        css: 'gendered_tags',
+        unit: '',
+        value: false,
+        values: [false, true],
+        type: 'toggle'
+    }
+}
 
 
 let redacted = [
     'underthefl00d',
-    'SonicGamer420', 'PunishedCav', 'whatisajuggalo', 'Spartan122s', 'ruszaj', 'Chandiwila999', 'deadaptation', 'ShamsRealm', 'DREAD1NAT0R', 'oskxzr', 'SuperSonic2324', 'luna', 'daysbeforepazi', 'Reypublican', 'urkel_waste', 'bloodtemptress', 'EnderBro1945', 'nxtready', 'Hammurabis', 'Flammenjunge', 'hotgreekman', 'MinajSpace',
-    'sudaengi', 'antisemitic', 'Alfonsorivera07', 'gueulescassees', 'bit188', 'Aryanorexic', 'archive44', 'goyslop', 'Lzxy', 'I984june', 'Babayoga88', 'GoatUser', 'SynagogueBurner', 'Cybercat2k6',
-    'TheKimsterAight', 'squiggins', 'atwistedpath', 'aeriscupid', 'nicefeetliberal', 'KanyeBestStan', 'A-_-_-_-_-_-_-_', 'Wurzel362', 'Chaosophile', 'Sagamore_BR', 'Account124', 'Oliwally2', 'lucasthales', 'thedadbrains', 'artofIettinggo', 'Lumyh', 'meltingwalls', 'meowpoopoo', 'aeest', 'AJRogers25', 'FLVCKO5000', 'YUNGRAPUNXOTA', 'sen_nn', 'Chickenoflight', 'majorCbartl', 'entranas', 'julyrent', 'misaeld7', 'sircarno', 'Getyuu', 'IFuckBees', 'BigBabyGOAT-116', 'MatRanc', 'Andre3x', 'Johanvillian666', 'souljahwitch_', 'selenabeer', 'kbasfm', 'c4alexo', 'aantoniotapia', 'Bobbygordon4', 'Con_8L', 'kebfm', 'Alex5un', 'Bluefacee', 'Itachiu1', 'TARDSLAYER87', 'sharosky',
-    'CraziiDago',
-    'calicowawawa', 'Ieo-',
-    'dyetzer09', 'SevenDotz', 'GeckoGunner21',
-    'Bigman_kam', 'JuanLuisGG15', 'xXAleSonikPS2Xx', 'noodlebaths',
+    'sonicgamer420', 'punishedcav', 'whatisajuggalo', 'spartan122s', 'ruszaj', 'chandiwila999', 'deadaptation', 'shamsrealm', 'dread1nat0r', 'oskxzr', 'supersonic2324', 'luna', 'daysbeforepazi', 'reypublican', 'urkel_waste', 'bloodtemptress', 'enderbro1945', 'nxtready', 'hammurabis', 'flammenjunge', 'hotgreekman', 'minajspace',
+    'sudaengi', 'antisemitic', 'alfonsorivera07', 'gueulescassees', 'bit188', 'aryanorexic', 'archive44', 'goyslop', 'lzxy', 'i984june', 'babayoga88', 'goatuser', 'synagogueburner', 'cybercat2k6',
+    'thekimsteraight', 'squiggins', 'atwistedpath', 'aeriscupid', 'nicefeetliberal', 'kanyebeststan', 'a-_-_-_-_-_-_-_', 'wurzel362', 'chaosophile', 'sagamore_br', 'account124', 'oliwally2', 'lucasthales', 'thedadbrains', 'artofiettinggo', 'lumyh', 'meltingwalls', 'meowpoopoo', 'aeest', 'ajrogers25', 'flvcko5000', 'yungrapunxota', 'sen_nn', 'chickenoflight', 'majorcbartl', 'entranas', 'julyrent', 'misaeld7', 'sircarno', 'getyuu', 'ifuckbees', 'bigbabygoat-116', 'matranc', 'andre3x', 'johanvillian666', 'souljahwitch_', 'selenabeer', 'kbasfm', 'c4alexo', 'aantoniotapia', 'bobbygordon4', 'con_8l', 'kebfm', 'alex5un', 'bluefacee', 'itachiu1', 'tardslayer87', 'sharosky',
+    'craziidago',
+    'calicowawawa', 'ieo-',
+    'dyetzer09', 'sevendotz', 'geckogunner21',
+    'bigman_kam', 'juanluisgg15', 'xxalesonikps2xx', 'noodlebaths',
     'entrys', 'haviebaby',
-    'ifuckenhatebts', 'cuteandfunny', 'NickiTheBarbie', 'kristojk', 'Lovethebabiesss', 'TheCryBabyGirl', 'faafasfJH12', 'lost', 'isucktoes_', 'rightangles', 'SupaDupaSeb', 'SeptemberSun-_-', 'yy02', 'breakpoint420', 'twillaz', 'angel-food', 'owenfomistu', 'nuhovich', 'einstieg', 'Sigmevious', 'lovedytea',
-    'EminemIover911', 'Ranmaru1232', 'Littlegayman', 'OverKektor', 'Zigger0707', 'JTLDN', 'BakaAnon', 'TheWatcher777', 'Guicute', 'wempep', 'BeingofEvil', 'Marie_Cachet', 'rusnazi8814', 'Go1ngER', 'Pranav777', 'Creativezito', 'DjAngelInfinity', 'Cowboy-Robot', 'RiskGrave', 'charmingaxelotl', 'naterade20', 'Willgregg10', 'avantish', 'shaggy-maggot', 'SliceJosiah', 'airshots22', 'TacoMIW', 'DaveBFC', 'UkulilyFilly', 'SPEEPYBOO', 'roosterteethz', 'winter_demon', 'preziosestelle', 'Wess0', 'heruchris', 'MellowColonel', 'DXP6986', 'Leo_Marlow', 'newmetallic', 'Kotkaa', 'dodemea', 'CainRipley', 'frajestic', 'Danny_Top23', 'molochthagod', 'kanyelover900', 'Phosphoss', 'sugawarasatsuki', 'captivepleading', 'PaddyCM', 'burroughs3000', 'marblesodaa', 'muistu77', 'korimullanmusic', 'magikwand', 'EmpireoGrace', 'Psychonau', 'sk8erboi03', 'DOGTOME', 'milkvveed', 'ghastlygoblin', 'lsihc', 'Promethesis', 'NlCKlMlNAJ', 'so0catwoman', 'handsomegamer46', 'w28888ihateu', 'IIthe2nd', 'Jrwer', 'r0ann', 'Hetzghor', 'umabon', 'Karl_Nicenstein', 'forestgaze', 'Ghostcum', 'bigluke444', 'Mozzaddy', 'ahuehauheauauh', 'KINGJAXTERK', 'setitaIIablaze', 'araicd', 'juliusvc', 'mzumii', 'masskollaps', 'belenio', 'HoosierBallz', 'sh0ppingcart', 'brownieboy', 'martyrdomr', 'Vessel_Anathema', 'Twenty10s', 'Skuuuuuii', 'birodani115', 'lawlercopter_', 'samanthafox12', 'The_Diabolus', 'momasoooooos', 'tigohc', 'OrA4NGEpm', 'minakonyaa', 'RyukoProp', 'AntifaFemboy', 'nlec', 'jediwarlock1', 'epowjgpwak', 'anxrcxy', 'pissturd1', 'adxail', 'Suprremme', 'qwertyhomu', 'keblz', 'hotstep_', 'fadelooy', 'ApesOG', 'violentflowers', 'ItsThiagoBanger', 'SyrettePurp', 'swagstica', 'htgs', 'grigoriybalbes', 'heliosi', 'buttfartdhshs', 'Wonderglue', 'kanyewest2028', 'Caeshijque', 'MysteryBFDI', 'NikkiLee8208', 'JCK_FM', 'EtherealBangerz', 'iseenothing', 'achondrogenesis', 'theandromedaxo', 'SeanDerBeste', 'JCT08', 'TheV3locity4545', 'HumbleGold', 'Draincel', 'allyourbased', 'birdboiling', 'tharizdoom', 'SUPlNHO', 'dashywashy', 'gabcoelhomusic', 'ox_yd', 'bernkastel__', 'fearcuIt', 'gxlnd_', 'BrittanyMahomes', 'NuMetalFan69', 'SafireStar', 'IceSpoon', 'IssacJ06', 'ThePrio', 'LoveDiaries', 'sillycelery1974', 'nyqmii', 'gauItier', 'rspbrysda', 'pnavarre2330', 'lTSUP2ME', 'noolr', 'dakota0824', 'goncalvesrafael', 'DaequanBS', 'dwaqons', 'Bogurodzica69', 'GtzGold', 'roy_05', 'niloymahir', 'Ikarivktr', 'JE1934', 'Figaro-17', 'sugmaballs69', 'Don-Weaso', 'schrodngrSafety', 'okJosiah', 'anahausu', 'venusfleur', 'kristiyan47', 'mkulia', 'Nick-Valentine', 'raraee_', 'MJ-XX', 'Berk_Ziya', 'thatpower1', 'phantomchasm', 'StupidMetalhead'
+    'ifuckenhatebts', 'cuteandfunny', 'nickithebarbie', 'kristojk', 'lovethebabiesss', 'thecrybabygirl', 'faafasfjh12', 'lost', 'isucktoes_', 'rightangles', 'supadupaseb', 'septembersun-_-', 'yy02', 'breakpoint420', 'twillaz', 'angel-food', 'owenfomistu', 'nuhovich', 'einstieg', 'sigmevious', 'lovedytea',
+    'eminemiover911', 'ranmaru1232', 'littlegayman', 'overkektor', 'zigger0707', 'jtldn', 'bakaanon', 'thewatcher777', 'guicute', 'wempep', 'beingofevil', 'marie_cachet', 'rusnazi8814', 'go1nger', 'pranav777', 'creativezito', 'djangelinfinity', 'cowboy-robot', 'riskgrave', 'charmingaxelotl', 'naterade20', 'willgregg10', 'avantish', 'shaggy-maggot', 'slicejosiah', 'airshots22', 'tacomiw', 'davebfc', 'ukulilyfilly', 'speepyboo', 'roosterteethz', 'winter_demon', 'preziosestelle', 'wess0', 'heruchris', 'mellowcolonel', 'dxp6986', 'leo_marlow', 'newmetallic', 'kotkaa', 'dodemea', 'cainripley', 'frajestic', 'danny_top23', 'molochthagod', 'kanyelover900', 'phosphoss', 'sugawarasatsuki', 'captivepleading', 'paddycm', 'burroughs3000', 'marblesodaa', 'muistu77', 'korimullanmusic', 'magikwand', 'empireograce', 'psychonau', 'sk8erboi03', 'dogtome', 'milkvveed', 'ghastlygoblin', 'lsihc', 'promethesis', 'nlcklmlnaj', 'so0catwoman', 'handsomegamer46', 'w28888ihateu', 'iithe2nd', 'jrwer', 'r0ann', 'hetzghor', 'umabon', 'karl_nicenstein', 'forestgaze', 'ghostcum', 'bigluke444', 'mozzaddy', 'ahuehauheauauh', 'kingjaxterk', 'setitaiiablaze', 'araicd', 'juliusvc', 'mzumii', 'masskollaps', 'belenio', 'hoosierballz', 'sh0ppingcart', 'brownieboy', 'martyrdomr', 'vessel_anathema', 'twenty10s', 'skuuuuuii', 'birodani115', 'lawlercopter_', 'samanthafox12', 'the_diabolus', 'momasoooooos', 'tigohc', 'ora4ngepm', 'minakonyaa', 'ryukoprop', 'antifafemboy', 'nlec', 'jediwarlock1', 'epowjgpwak', 'anxrcxy', 'pissturd1', 'adxail', 'suprremme', 'qwertyhomu', 'keblz', 'hotstep_', 'fadelooy', 'apesog', 'violentflowers', 'itsthiagobanger', 'syrettepurp', 'swagstica', 'htgs', 'grigoriybalbes', 'heliosi', 'buttfartdhshs', 'wonderglue', 'kanyewest2028', 'caeshijque', 'mysterybfdi', 'nikkilee8208', 'jck_fm', 'etherealbangerz', 'iseenothing', 'achondrogenesis', 'theandromedaxo', 'seanderbeste', 'jct08', 'thev3locity4545', 'humblegold', 'draincel', 'allyourbased', 'birdboiling', 'tharizdoom', 'suplnho', 'dashywashy', 'gabcoelhomusic', 'ox_yd', 'bernkastel__', 'fearcuit', 'gxlnd_', 'brittanymahomes', 'numetalfan69', 'safirestar', 'icespoon', 'issacj06', 'theprio', 'lovediaries', 'sillycelery1974', 'nyqmii', 'gauitier', 'rspbrysda', 'pnavarre2330', 'ltsup2me', 'noolr', 'dakota0824', 'goncalvesrafael', 'daequanbs', 'dwaqons', 'bogurodzica69', 'gtzgold', 'roy_05', 'niloymahir', 'ikarivktr', 'je1934', 'figaro-17', 'sugmaballs69', 'don-weaso', 'schrodngrsafety', 'okjosiah', 'anahausu', 'venusfleur', 'kristiyan47', 'mkulia', 'nick-valentine', 'raraee_', 'mj-xx', 'berk_ziya', 'thatpower1', 'phantomchasm', 'stupidmetalhead'
 ];
 
 // use the top-right link to determine the current user
@@ -220,8 +266,10 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 settings[setting] = settings_template[setting];
 
         // save setting into body
-        for (let setting in settings)
+        for (let setting in settings) {
+            document.body.style.setProperty(`--${setting}`, settings[setting]);
             document.documentElement.setAttribute(`data-bleh--${setting}`, `${settings[setting]}`);
+        }
 
         // save to settings
         localStorage.setItem('bleh', JSON.stringify(settings));
@@ -233,6 +281,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
         // save value
         settings[setting] = value;
+        document.body.style.setProperty(`--${setting}`, value);
         document.documentElement.setAttribute(`data-bleh--${setting}`, `${value}`);
 
         // save to settings
@@ -311,7 +360,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         if (!profile_header.hasAttribute('data-kate-processed')) {
             profile_header.setAttribute('data-kate-processed', 'true');
 
-            if (redacted.includes(profile_name)) {
+            if (redacted.includes(profile_name.toLowerCase())) {
                 let prior_redacted_msg = element.querySelector('.bleh--redacted-message');
                 if (prior_redacted_msg !== null)
                     document.body.removeChild(prior_redacted_msg);
@@ -375,7 +424,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 let shout_name = shout.querySelector('.shout-user a').textContent;
                 let shout_avatar = shout.querySelector('.shout-user-avatar');
 
-                if (redacted.includes(shout_name)) {
+                if (redacted.includes(shout_name.toLowerCase())) {
                     shout.classList.add('shout--bleh-redacted');
                     shout_avatar.classList.add('avatar--bleh-missing');
                 } else {
@@ -532,7 +581,90 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         } else if (page == 'customise') {
             return (`
                 <div class="bleh--panel">
-                    <h3>Customise</h3>
+                    <h3>Colours</h3>
+                    <h5>Presets</h5>
+                    <div class="pallete options">
+                        <button class="btn" style="
+                            --hue: -2;
+                            --sat: 1;
+                            --lit: 0.8" onclick="_update_params({
+                            hue: -2,
+                            sat: 1,
+                            lit: 0.8
+                        })"></button>
+                        <button class="btn" style="
+                            --hue: 10;
+                            --sat: 1;
+                            --lit: 0.9" onclick="_update_params({
+                            hue: 10,
+                            sat: 1,
+                            lit: 0.9
+                        })"></button>
+                        <button class="btn" style="
+                            --hue: 35;
+                            --sat: 1.2;
+                            --lit: 1" onclick="_update_params({
+                            hue: 35,
+                            sat: 1.2,
+                            lit: 1
+                        })"></button>
+                        <button class="btn" style="
+                            --hue: 85;
+                            --sat: 1;
+                            --lit: 1" onclick="_update_params({
+                            hue: 85,
+                            sat: 1,
+                            lit: 1
+                        })"></button>
+                        <button class="btn" style="
+                            --hue: 115;
+                            --sat: 1;
+                            --lit: 1" onclick="_update_params({
+                            hue: 115,
+                            sat: 1,
+                            lit: 1
+                        })"></button>
+                        <button class="btn" style="
+                            --hue: 155;
+                            --sat: 1;
+                            --lit: 1" onclick="_update_params({
+                            hue: 155,
+                            sat: 1,
+                            lit: 1
+                        })"></button>
+                        <button class="btn" style="
+                            --hue: 185;
+                            --sat: 1;
+                            --lit: 1" onclick="_update_params({
+                            hue: 185,
+                            sat: 1,
+                            lit: 1
+                        })"></button>
+                        <button class="btn" style="
+                            --hue: 222;
+                            --sat: 1;
+                            --lit: 0.9" onclick="_update_params({
+                            hue: 222,
+                            sat: 1,
+                            lit: 0.9
+                        })"></button>
+                        <button class="btn" style="
+                            --hue: 255;
+                            --sat: 1;
+                            --lit: 1" onclick="_update_params({
+                            hue: 255,
+                            sat: 1,
+                            lit: 1
+                        })"></button>
+                        <button class="btn" style="
+                            --hue: 333;
+                            --sat: 1;
+                            --lit: 1" onclick="_update_params({
+                            hue: 333,
+                            sat: 1,
+                            lit: 1
+                        })"></button>
+                    </div>
                 </div>
                 `);
         }
@@ -575,6 +707,100 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 btn.classList.add('active');
             }
         });
+    }
+
+
+
+
+    // settings-page specific
+    function reset_all() {
+        for (let item in settings_base)
+            reset_item(item);
+    }
+
+    function reset_item(item) {
+        update_item(item, settings_base[item].value);
+    }
+
+    function update_params(params={}) {
+        for (let item in params) {
+            update_item(item, params[item]);
+        }
+    }
+
+    unsafeWindow._reset_all = function() {
+        reset_all();
+    }
+    unsafeWindow._reset_item = function(item) {
+        reset_item(item);
+    }
+    unsafeWindow._update_params = function(params={}) {
+        update_params(params);
+    }
+
+    function update_item(item, value) {
+        let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
+        if (settings_base[item].type == 'slider')
+            settings[item] = value;
+
+        // determine --ovr value based on --hue & --lit
+        /*if (item == 'hue' || item == 'lit') {
+            if (settings.hue > 228 && settings.hue < 252 && settings.lit < 0.75) {
+                settings.ovr = 'var(--ov-c1)';
+            } else if (settings.hue > 210 && settings.hue < 280 && settings.lit < 0.425) {
+                settings.ovr = 'var(--ov-c1)';
+            } else if (settings.lit < 0.3) {
+                settings.ovr = 'var(--ov-c1)';
+            } else {
+                settings.ovr = 'var(--b7)';
+            }
+
+            document.body.style.setProperty(`--ovr`,settings.ovr);
+        }*/
+
+        if (settings_base[item].type == 'slider') {
+            // text to show current slider value
+            try {
+                document.getElementById(`value-${item}`).textContent = `${settings[item]}${settings_base[item].unit}`;
+                document.getElementById(`slider-${item}`).value = settings[item];
+
+                if (settings[item] != settings_base[item].value)
+                    document.getElementById(`container-${item}`).classList.add('modified');
+                else
+                    document.getElementById(`container-${item}`).classList.remove('modified');
+            } catch(e) {}
+        } else if (settings_base[item].type == 'toggle') {
+            if (settings[item] == settings_base[item].values[0]) {
+                settings[item] = settings_base[item].values[1];
+                document.getElementById(`toggle-${item}`).setAttribute('aria-checked',false);
+
+
+                if (item == 'nav') {
+                    document.getElementById('nav-img').setAttribute('src','https://cutensilly.org/img/nav-hidden.png');
+                    settings.auth_badge = settings_base.auth_badge.values[1];
+                } else if (item == 'gendered_tags') {
+                    document.getElementById('gendered_tags-img').setAttribute('src','https://cutensilly.org/img/gendered_tags-shown.png');
+                }
+            } else {
+                settings[item] = settings_base[item].values[0];
+                document.getElementById(`toggle-${item}`).setAttribute('aria-checked',true);
+
+
+                if (item == 'nav') {
+                    document.getElementById('nav-img').setAttribute('src','https://cutensilly.org/img/nav-shown.png');
+                    settings.auth_badge = settings_base.auth_badge.values[0];
+                } else if (item == 'gendered_tags') {
+                    document.getElementById('gendered_tags-img').setAttribute('src','https://cutensilly.org/img/gendered_tags-hidden.png');
+                }
+            }
+        }
+
+        // save setting into body
+        document.body.style.setProperty(`--${item}`,value);
+        document.documentElement.setAttribute(`data-bleh--${item}`, `${value}`);
+
+        // save to settings
+        localStorage.setItem('bleh', JSON.stringify(settings));
     }
 
 
