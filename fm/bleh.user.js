@@ -1087,6 +1087,11 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             </button>
         </div>
         `);
+
+        // this displays the "reset to default" button if you are not on the defaults
+        update_item('hue',settings.hue);
+        update_item('sat',settings.sat);
+        update_item('lit',settings.lit);
     }
 
 
