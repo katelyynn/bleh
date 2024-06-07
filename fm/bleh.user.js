@@ -97,6 +97,9 @@ let redacted = [
 // use the top-right link to determine the current user
 let auth = '';
 
+let bleh_url = 'https://www.last.fm/bleh';
+let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
+
 
 (function() {
     'use strict';
@@ -110,8 +113,15 @@ let auth = '';
         append_style();
         //get_scrobbles(document.body);
         append_nav(document.body);
-        patch_profile(document.body);
-        patch_shouts(document.body);
+
+        console.log(bleh_url,window.location.href,bleh_regex.test(window.location.href));
+
+        if (window.location.href == bleh_url || bleh_regex.test(window.location.href)) {
+            bleh_settings();
+        } else {
+            patch_profile(document.body);
+            patch_shouts(document.body);
+        }
 
         // last.fm is a single page application
         const observer = new MutationObserver((mutations) => {
@@ -122,8 +132,13 @@ let auth = '';
                             node.setAttribute('data-kate-processed', 'true');
                             //get_scrobbles(node);
                             append_nav(document.body);
-                            patch_profile(document.body);
-                            patch_shouts(document.body);
+
+                            if (window.location.href == bleh_url || bleh_regex.test(window.location.href)) {
+                                bleh_settings();
+                            } else {
+                                patch_profile(document.body);
+                                patch_shouts(document.body);
+                            }
                         }
                     }
                 }
@@ -172,11 +187,11 @@ let auth = '';
                 </button>
             </li>
             <li>
-                <button class="auth-dropdown-menu-item bleh--configure-menu-item" onclick="open_bleh_settings()">
+                <a class="auth-dropdown-menu-item bleh--configure-menu-item" href="/bleh">
                     <span class="auth-dropdown-item-row">
                         <span class="auth-dropdown-item-left">Configure bleh</span>
                     </span>
-                </button>
+                </a>
             </li>
             `);
 
@@ -265,6 +280,22 @@ let auth = '';
         // save value
         settings.theme = current_theme;
         document.documentElement.setAttribute(`data-bleh--theme`, `${current_theme}`);
+
+        // save to settings
+        localStorage.setItem('bleh', JSON.stringify(settings));
+    }
+
+    unsafeWindow.change_theme_from_settings = function(theme) {
+        let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
+
+        document.getElementById('theme-value').textContent = theme_names[theme];
+
+        // save value
+        settings.theme = theme;
+        document.documentElement.setAttribute(`data-bleh--theme`, `${theme}`);
+
+        // show in settings
+        show_theme_change_in_settings(theme);
 
         // save to settings
         localStorage.setItem('bleh', JSON.stringify(settings));
@@ -381,6 +412,172 @@ let auth = '';
     unsafeWindow.open_bleh_settings = function() {
         create_window('bleh_settings','Theme settings','');
     }
+
+    function bleh_settings() {
+        let adaptive_skin_container = document.querySelector('.adaptive-skin-container');
+
+        if (!adaptive_skin_container.hasAttribute('data-kate-processed')) {
+            adaptive_skin_container.setAttribute('data-kate-processed','true');
+
+            // initial
+            adaptive_skin_container.innerHTML = '';
+            document.title = 'bleh settings | Last.fm';
+
+
+            // go wild
+            let outer = document.createElement('div');
+            outer.classList.add('bleh--page-outer');
+
+            let inner = document.createElement('div');
+            inner.classList.add('bleh--page-inner');
+
+
+            let main = document.createElement('div');
+            main.classList.add('bleh--panel-main');
+            main.setAttribute('id','bleh--panel-main');
+
+            let side = document.createElement('div');
+            side.classList.add('bleh--panel-side');
+            side.innerHTML = (`
+                <div class="bleh--panel">
+                    <div class="btns">
+                        <button class="btn bleh--btn" data-bleh-page="home" onclick="_change_settings_page('home')">
+                            Home
+                        </button>
+                        <button class="btn bleh--btn" data-bleh-page="themes" onclick="_change_settings_page('themes')">
+                            Themes
+                        </button>
+                        <button class="btn bleh--btn" data-bleh-page="customise" onclick="_change_settings_page('customise')">
+                            Customise
+                        </button>
+                    </div>
+                </div>
+            `);
+
+
+            inner.appendChild(main);
+            inner.appendChild(side);
+            outer.appendChild(inner);
+            adaptive_skin_container.appendChild(outer);
+
+            change_settings_page('home');
+        }
+    }
+
+    function render_setting_page(page) {
+        if (page == 'home') {
+            return (`
+            <div class="bleh--panel">
+                <h3>Home</h3>
+            </div>
+            `);
+        } else if (page == 'themes') {
+            return (`
+                <div class="bleh--panel">
+                    <h3>Themes</h3>
+                    <h4>Dark</h4>
+                    <div class="setting-items">
+                        <div class="side-left full">
+                            <button class="btn setting-item has-image" data-bleh-theme="dark" onclick="change_theme_from_settings('dark')">
+                                <div class="image">
+                                    <div class="icon bleh--theme-dark">
+
+                                    </div>
+                                </div>
+                                <div class="text">
+                                    <h5>Dark</h5>
+                                    <p>The default flavour of bleh</p>
+                                </div>
+                                <div class="image-row">
+                                    <img src="https://cutensilly.org/img/bleh2-main.png" alt="Screenshot of bleh's default dark theme">
+                                </div>
+                            </button>
+                            <button class="btn setting-item has-image" data-bleh-theme="oled" onclick="change_theme_from_settings('oled')">
+                                <div class="image">
+                                    <div class="icon bleh--theme-oled">
+
+                                    </div>
+                                </div>
+                                <div class="text">
+                                    <h5>OLED</h5>
+                                    <p>Ultra blackout</p>
+                                </div>
+                                <div class="image-row">
+                                    <img src="https://cutensilly.org/img/bleh2-addon-oled.png" alt="Screenshot of bleh's oled theme">
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                    <h4>Light</h4>
+                    <div class="setting-items">
+                        <div class="side-left full">
+                            <button class="btn setting-item has-image" data-bleh-theme="light" onclick="change_theme_from_settings('light')">
+                                <div class="image">
+                                    <div class="icon bleh--theme-light">
+
+                                    </div>
+                                </div>
+                                <div class="text">
+                                    <h5>Light</h5>
+                                    <p>Low saturation, brightly coloured</p>
+                                </div>
+                                <div class="image-row">
+                                    <img src="https://cutensilly.org/img/bleh2-addon-light.png" alt="Screenshot of bleh's light theme">
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                `);
+        } else if (page == 'customise') {
+            return (`
+                <div class="bleh--panel">
+                    <h3>Customise</h3>
+                </div>
+                `);
+        }
+    }
+
+    unsafeWindow._change_settings_page = function(page) {
+        change_settings_page(page);
+    }
+
+    function change_settings_page(page) {
+        let btns = document.querySelectorAll('.bleh--btn');
+        btns.forEach((btn) => {
+            console.log(btn.getAttribute('data-bleh-page'),page);
+            if (btn.getAttribute('data-bleh-page') != page) {
+                btn.classList.remove('active');
+            } else {
+                btn.classList.add('active');
+            }
+        });
+
+        document.getElementById('bleh--panel-main').innerHTML = render_setting_page(page);
+
+        if (page == 'themes')
+            show_theme_change_in_settings();
+    }
+
+    function show_theme_change_in_settings(theme = '') {
+        let settings = {};
+        if (theme == '')
+            settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
+        else
+            settings.theme = theme;
+
+        let btns = document.querySelectorAll('.setting-item');
+        btns.forEach((btn) => {
+            console.log(btn.getAttribute('data-bleh-theme'),settings.theme);
+            if (btn.getAttribute('data-bleh-theme') != settings.theme) {
+                btn.classList.remove('active');
+            } else {
+                btn.classList.add('active');
+            }
+        });
+    }
+
+
 
 
     // create a window

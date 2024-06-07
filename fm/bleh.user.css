@@ -1241,12 +1241,14 @@ last.fm changes as of 2024-05-20 */
     padding: unset;
     float: unset !important;
 }
+.bleh--panel-main,
 .col-main,
 /* katie doesnt have any scrobbles yet */ .profile-mobile-featured-track + .no-data-message
 {
     width: var(--cards-main-width);
     min-width: var(--cards-main-width);
 }
+.bleh--panel-side,
 .col-sidebar {
     width: var(--cards-sidebar-width);
     min-width: var(--cards-sidebar-width);
@@ -1259,6 +1261,7 @@ last.fm changes as of 2024-05-20 */
 
 
 /*     GLOBAL CARD STYLES     */
+.bleh--panel,
 .col-main > section, .col-sidebar > section,
 .your-progress-component,
 /* this fixes places of the site (tracks, artist, albums watever that use a weird method of 2 col-mains, 2 col-sidebars as appose to profiles */
@@ -5161,6 +5164,8 @@ button:not(.playback-app-container button, .top-artist-list-item, .pixel, .liste
 
 
 /*     ICON MASK     */
+/*     BLEH     */
+.btns .btn:before,
 /*     DROPDOWNS     */
 .dropdown-menu-clickable-item:before, .auth-dropdown-menu-item:before,
 .dropdown-menu-list-button::after, .dropdown-menu-clickable-button::after, .dropdown-menu-clickable-button-js-only::after,
@@ -5576,7 +5581,7 @@ on the bottom of a panel !! */
 
 .bleh--configure-menu-item,
 .more-item--edit-old,
-.auth-dropdown-menu-item[href="/settings"], .auth-dropdown-menu-item[href^="/user/"]
+[data-analytics-label="settings"], [data-analytics-label="profile"]
 {
     margin-bottom: 11px !important;
 }
@@ -5587,7 +5592,7 @@ on the bottom of a panel !! */
 .bleh--configure-menu-item:after,
 .more-item--edit-old:after,
 .more-item--delete:after,
-.auth-dropdown-menu-item[href="/settings"]:after, .auth-dropdown-menu-item[href^="/user/"]:after
+[data-analytics-label="settings"]:after, [data-analytics-label="profile"]:after
 {
     display: block !important;
 }
@@ -5637,32 +5642,32 @@ very, very, very dated - who looks up a song on ebay? */
 .more-item--play {
     --mask: var(--icon-16-play);
 }
-.auth-dropdown-menu-item[href^="/user/"] {
+[data-analytics-label="profile"] {
     --mask: var(--icon-16-user);
 }
-.auth-dropdown-menu-item[href="/inbox/notifications"] {
+[data-analytics-label="notifications"] {
     --mask: var(--icon-16-notifications);
 }
-.auth-dropdown-menu-item[href="/inbox"] {
+[data-analytics-label="inbox"] {
     --mask: var(--icon-16-mail);
 }
 .masthead-nav-control[href="/labs"],
-.auth-dropdown-menu-item[href="/labs"] {
+[data-analytics-label="labs"] {
     --mask: var(--icon-16-labs);
 }
 .masthead-nav-control[href="/music/+bookmarks"],
-.auth-dropdown-menu-item[href="/music/+bookmarks"] {
+[data-analytics-label="bookmarks"] {
     --mask: var(--icon-16-bookmark);
 }
-.auth-dropdown-menu-item[href="/settings"] {
+[data-analytics-label="settings"] {
     --mask: var(--icon-16-settings);
 }
 .masthead-nav-control[href="/logout"],
-.auth-dropdown-menu-item[href="/logout"] {
+[data-analytics-label="logout"] {
     --mask: var(--icon-16-logout);
 }
 .masthead-nav-control[href="/pro"],
-.auth-dropdown-menu-item[href="/pro"] {
+[data-analytics-label="subscribe"] {
     --mask: var(--icon-16-pro);
 }
 [data-analytics-action="publish"] {
@@ -5690,7 +5695,7 @@ very, very, very dated - who looks up a song on ebay? */
 
 /*     DANGEROUS     */
 .more-item--delete, .more-item--report,
-[href="/logout"],
+[data-analytics-label="logout"],
 [data-analytics-action="delete"],
 [data-analytics-action="unpublish"], [data-analytics-action="publish"]
 {
@@ -5724,7 +5729,7 @@ very, very, very dated - who looks up a song on ebay? */
 
 
 /*     LABS     */
-[href="/labs"]
+[data-analytics-label="labs"]
 {
     --bg-hov: hsla(var(--h3), 8%) !important;
     --bg-atv: hsla(var(--h3), 18%) !important;
@@ -5736,7 +5741,7 @@ very, very, very dated - who looks up a song on ebay? */
 
 
 /*     PRO     */
-.auth-dropdown-menu-item[href="/pro"]
+[data-analytics-label="subscribe"]
 {
     --bg-hov: hsla(var(--h3), 8%) !important;
     --bg-atv: hsla(var(--h3), 18%) !important;
@@ -10359,6 +10364,262 @@ so this is good enough - use the community docs */
 
 .custom-block {
     background-color: hsl(var(--b5)) !important;
+}
+
+
+
+
+/*     BLEH     */
+.bleh--page-outer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-top: var(--card-gap);
+
+    .bleh--page-inner {
+        width: var(--cards-width);
+        display: flex;
+        align-items: stretch;
+        gap: var(--card-gap);
+
+
+        .bleh--panel-side, .bleh--panel-main {
+            display: flex;
+            flex-direction: column;
+            justify-content: stretch;
+            gap: var(--card-gap);
+        }
+
+
+        .bleh--panel {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            flex: 1;
+        }
+
+
+        .btns {
+            display: flex;
+            flex-direction: column;
+            gap: var(--button-list-gap);
+
+            .btn {
+                --shadow: none;
+                --shadow-hov: none;
+                --btn-left: calc(12px + 16px + 6px);
+                width: 100%;
+                text-align: left;
+                position: relative;
+
+                &[data-bleh-page="home"] {
+                    --mask: var(--icon-16-home);
+                }
+                &[data-bleh-page="themes"] {
+                    --mask: var(--icon-16-themes);
+                }
+                &[data-bleh-page="customise"] {
+                    --mask: var(--icon-16-palette);
+                }
+
+                &:not(.active) {
+                    --bg: transparent;
+                    --bg-hov: hsla(var(--b4), 20%);
+                    --bg-atv: hsla(var(--b4), 40%);
+                }
+
+                &.active {
+                    &:after {
+                        content: '';
+                        position: absolute;
+                        width: 3px;
+                        height: 14px;
+                        border-radius: 50px;
+                        background-color: hsl(var(--l3-c));
+                        left: 0;
+                        top: 50%;
+                        margin-top: -7px;
+                    }
+                }
+            }
+        }
+    }
+
+
+    h3 {
+        font-size: 24px;
+        line-height: 28px;
+    }
+    h4 {
+        font-size: 16px;
+        line-height: 20px;
+    }
+}
+
+
+.screen-row {
+    margin: 10px 0;
+    display: flex;
+    padding-bottom: 20px;
+    border-bottom: 1px solid hsl(var(--b4));
+
+    .screen-wrap {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex: 1;
+
+        .screen {
+            width: 120px;
+            aspect-ratio: 15 / 9;
+            border: 3px solid hsl(var(--b4));
+            border-radius: var(--item-med-radius);
+        }
+
+        .text {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+    }
+
+    .actions {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+
+        .action {
+            --bg: hsla(var(--b4), 20%);
+            --bg-hov: hsla(var(--b4), 60%);
+            --bg-atv: hsla(var(--b4), 80%);
+            --shadow: none;
+            --shadow-hov: var(--shadow);
+            --padding: 7px 16px;
+            gap: 12px;
+            text-decoration: none;
+
+            .icon {
+                padding: 6px;
+                background-color: hsl(var(--h3));
+                color: hsl(var(--b7));
+                border-radius: 50%;
+            }
+
+            &.update {
+                --bg: hsla(var(--h4), 10%);
+                --bg-hov: hsla(var(--h4), 20%);
+                --bg-atv: hsla(var(--h4), 40%);
+                --shadow: 0 0 30px 15px hsla(var(--h4), 8%);
+                --hue: 160;
+                --sat: 1;
+                --lit: 1;
+            }
+            &.downgrade {
+                --bg: hsla(var(--h4), 10%);
+                --bg-hov: hsla(var(--h4), 20%);
+                --bg-atv: hsla(var(--h4), 40%);
+                --hue: -2;
+                --sat: 1;
+                --lit: 1;
+            }
+
+            .text {
+                display: flex;
+                flex-direction: column;
+                gap: 4px;
+            }
+        }
+    }
+}
+
+
+.setting-items {
+    display: flex;
+    gap: var(--card-gap);
+
+    .side-left:not(.full) {
+        width: 488px;
+    }
+
+    .side-left.full {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+        gap: 6px;
+    }
+
+    .side-right {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        gap: 6px;
+
+        .btn {
+            width: unset;
+            justify-content: unset;
+        }
+    }
+
+    .setting-item {
+        --bg: hsla(var(--b4), 40%);
+        --bg-hov: hsla(var(--b4), 60%);
+        --bg-atv: hsla(var(--b4), 80%);
+        --shadow: none;
+        --shadow-hov: none;
+        gap: 9px 12px;
+        --padding: 7px 16px;
+        --radius: var(--card-radius);
+
+        .icon {
+            display: block;
+            width: 32px;
+            height: 32px;
+            padding: 6px;
+            background-color: hsl(var(--h3));
+            color: hsl(var(--b7));
+            border-radius: 50%;
+        }
+
+        &.active {
+            --bg: hsla(var(--h4), 40%);
+            --bg-hov: hsla(var(--h4), 60%);
+            --bg-atv: hsla(var(--h4), 80%);
+        }
+
+        &.has-image {
+            display: grid !important;
+            grid-template-columns: 32px auto;
+            grid-template-rows: auto auto;
+            grid-template-areas:
+            "icon text"
+            "image image";
+            --padding: 9px 16px;
+
+            h5 {
+                font-weight: var(--font-weight-medium);
+            }
+            p {
+                font-weight: var(--font-weight) !important;
+            }
+
+            .text {
+                text-align: left;
+                display: flex;
+                flex-direction: column;
+                gap: 2px;
+            }
+
+            .image-row {
+                grid-area: image;
+                width: 100%;
+
+                img {
+                    width: 100%;
+                    border-radius: var(--item-med-radius);
+                    box-shadow: var(--card-shadow);
+                }
+            }
+        }
+    }
 }
 
 
