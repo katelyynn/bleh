@@ -665,6 +665,10 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                             lit: 1
                         })"></button>
                     </div>
+                    <h5>Manual</h5>
+                    <button class="btn primary" onclick="_create_a_custom_colour()">
+                        Create a custom colour
+                    </button>
                 </div>
                 `);
         }
@@ -737,6 +741,9 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     unsafeWindow._update_params = function(params={}) {
         update_params(params);
     }
+    unsafeWindow._update_item = function(item, value) {
+        update_item(item, value);
+    }
 
     function update_item(item, value) {
         let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
@@ -804,6 +811,86 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     }
 
 
+    // create a custom colour
+    unsafeWindow._create_a_custom_colour = function() {
+        let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
+        create_window('custom_colour','Create a custom colour',`
+        <p>Colours are controlled by three values: hue, saturation, and lightness. Try out the sliders to get a feel.</p>
+        <br>
+        <div class="inner-preview pad">
+            <div class="pallete">
+                <div style="--col: hsl(var(--l2-c))"></div>
+                <div style="--col: hsl(var(--l3-c))"></div>
+                <div style="--col: hsl(var(--l4-c))"></div>
+                <div style="--col: hsl(var(--l2))"></div>
+                <div style="--col: hsl(var(--l3))"></div>
+                <div style="--col: hsl(var(--l4))"></div>
+            </div>
+            <div class="sep"></div>
+            <div class="btn-row">
+                <button class="btn">Example button</button>
+                <button class="btn primary">Example button</button>
+                <div class="chartlist-bar">
+                    <span class="fill"></span>
+                    <span class="text">44,551 plays</span>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="slider-container dim-using-hue-gradient" id="container-hue">
+            <button class="btn reset" onclick="_reset_item('hue')">Reset to default</button>
+            <div class="heading">
+                <h5>Accent colour</h5>
+            </div>
+            <div class="slider">
+                <input type="range" min="0" max="360" value="${settings.hue}" id="slider-hue" oninput="_update_item('hue', this.value)">
+                <p id="value-hue">${settings.hue}${settings_base.hue.unit}</p>
+            </div>
+            <div class="hint">
+                <p style="left: 0">0</p>
+                <p style="left: calc((255 / 360) * 100%)">255</p>
+                <p style="left: 100%">360</p>
+            </div>
+        </div>
+        <div class="slider-container dim-using-hue-gradient" id="container-sat">
+            <button class="btn reset" onclick="_reset_item('sat')">Reset to default</button>
+            <div class="heading">
+                <h5>Saturation</h5>
+            </div>
+            <div class="slider">
+                <input type="range" min="0" max="1.5" value="${settings.sat}" step="0.025" id="slider-sat" oninput="_update_item('sat', this.value)">
+                <p id="value-sat">${settings.sat}${settings_base.sat.unit}</p>
+            </div>
+            <div class="hint">
+                <p style="left: 0">0</p>
+                <p style="left: calc((1 / 1.5) * 100%)">1</p>
+                <p style="left: 100%">1.5</p>
+            </div>
+        </div>
+        <div class="slider-container dim-using-hue-gradient" id="container-lit">
+            <button class="btn reset" onclick="_reset_item('lit')">Reset to default</button>
+            <div class="heading">
+                <h5>Lightness</h5>
+            </div>
+            <div class="slider">
+                <input type="range" min="0" max="1.5" value="${settings.lit}" step="0.025" id="slider-lit" oninput="_update_item('lit', this.value)">
+                <p id="value-lit">${settings.lit}${settings_base.lit.unit}</p>
+            </div>
+            <div class="hint">
+                <p style="left: 0">0</p>
+                <p style="left: calc((1 / 1.5) * 100%)">1</p>
+                <p style="left: 100%">1.5</p>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn primary" onclick="_kill_window('custom_colour')">
+                Done
+            </button>
+        </div>
+        `);
+    }
+
+
 
 
     // create a window
@@ -832,7 +919,6 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         let content = document.createElement('div');
         content.classList.add('modal-content');
         content.setAttribute('id',`bleh--window-${id}--content`);
-        content.innerHTML = inner_content;
         content.setAttribute('data-kate-processed','true');
 
         // share content
@@ -881,7 +967,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     }
 
     // kill a window
-    unsafeWindow.kill_window = function(id) {
+    unsafeWindow._kill_window = function(id) {
         document.body.removeChild(document.getElementById(`bleh--window-${id}--background`));
         document.body.removeChild(document.getElementById(`bleh--window-${id}--wrapper`));
     }
