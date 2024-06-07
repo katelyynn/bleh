@@ -10987,8 +10987,8 @@ input[type="range"]::-moz-range-thumb {
 }
 
 .btn.reset {
-    width: 14px;
-    height: 14px;
+    width: 14px !important;
+    height: 14px !important;
     --bg: hsla(var(--h4), 80%);
     --bg-hov: hsla(var(--h4), 60%);
     --bg-atv: hsla(var(--h4), 40%);
