@@ -9,6 +9,8 @@
 // @grant        GM_addStyle
 // ==/UserScript==
 
+let version = '2024.0607';
+
 let profile_badges = {
     'cutensilly': {
         type: 'queen',
@@ -167,6 +169,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         append_style();
         //get_scrobbles(document.body);
         append_nav(document.body);
+        patch_masthead(document.body);
 
         console.log(bleh_url,window.location.href,bleh_regex.test(window.location.href));
 
@@ -186,6 +189,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                             node.setAttribute('data-kate-processed', 'true');
                             //get_scrobbles(node);
                             append_nav(document.body);
+                            patch_masthead(document.body);
 
                             if (window.location.href == bleh_url || bleh_regex.test(window.location.href)) {
                                 bleh_settings();
@@ -213,6 +217,20 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             style.setAttribute('rel','stylesheet');
             style.setAttribute('href','https://katelyynn.github.io/bleh/fm/bleh.user.css');
             document.documentElement.appendChild(style);
+        }
+    }
+
+    function patch_masthead(element) {
+        let masthead_logo = element.querySelector('.masthead-logo');
+
+        if (!masthead_logo.hasAttribute('data-kate-processed')) {
+            masthead_logo.setAttribute('data-kate-processed','true');
+
+            let version_text = document.createElement('p');
+            version_text.classList.add('bleh--version');
+            version_text.textContent = version;
+
+            masthead_logo.appendChild(version_text);
         }
     }
 
@@ -539,6 +557,50 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             return (`
             <div class="bleh--panel">
                 <h3>Home</h3>
+                <div class="screen-row">
+                    <div class="screen-wrap">
+                        <img class="screen" src="https://cutensilly.org/img/bleh2-main.png" alt="bleh">
+                        <div class="text">
+                            <h5>bleh</h5>
+                            <p>Version ${version}</p>
+                        </div>
+                    </div>
+                    <div class="actions">
+                        <a class="btn action" href="https://github.com/katelyynn/bleh/issues" target="_blank">
+                            <div class="icon bleh--issues"></div>
+                            <span class="text">
+                                <h5>Issues</h5>
+                                <p>Report bugs</p>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+                <h4>Recommended settings</h4>
+                <div class="setting-items">
+                    <div class="side-left">
+                        <button class="btn setting-item has-image" onclick="_change_settings_page('themes')">
+                            <div class="image">
+                                <div class="icon bleh--themes"></div>
+                            </div>
+                            <div class="text">
+                                <h5>Themes</h5>
+                                <p>Choose between light, dark, and oled.</p>
+                            </div>
+                            <div class="image-row">
+                                <img src="https://cutensilly.org/img/bleh2-addon-oled.png">
+                            </div>
+                        </button>
+                    </div>
+                    <div class="side-right">
+                        <button class="btn setting-item" onclick="_change_settings_page('customise')">
+                            <div class="icon bleh--palette"></div>
+                            <div class="text">
+                                <h5>Colours</h5>
+                                <p>Pick your favourite!</p>
+                            </div>
+                        </button>
+                    </div>
+                </div>
             </div>
             `);
         } else if (page == 'themes') {
@@ -550,9 +612,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                         <div class="side-left full">
                             <button class="btn setting-item has-image" data-bleh-theme="dark" onclick="change_theme_from_settings('dark')">
                                 <div class="image">
-                                    <div class="icon bleh--theme-dark">
-
-                                    </div>
+                                    <div class="icon bleh--theme-dark"></div>
                                 </div>
                                 <div class="text">
                                     <h5>Dark</h5>

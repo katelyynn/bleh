@@ -406,6 +406,10 @@ body {
     --icon-16-refresh: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtcmVmcmVzaC1jdyI+PHBhdGggZD0iTTMgMTJhOSA5IDAgMCAxIDktOSA5Ljc1IDkuNzUgMCAwIDEgNi43NCAyLjc0TDIxIDgiLz48cGF0aCBkPSJNMjEgM3Y1aC01Ii8+PHBhdGggZD0iTTIxIDEyYTkgOSAwIDAgMS05IDkgOS43NSA5Ljc1IDAgMCAxLTYuNzQtMi43NEwzIDE2Ii8+PHBhdGggZD0iTTggMTZIM3Y1Ii8+PC9zdmc+');
     --icon-16-themes: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtc3dhdGNoLWJvb2siPjxwYXRoIGQ9Ik0xMSAxN2E0IDQgMCAwIDEtOCAwVjVhMiAyIDAgMCAxIDItMmg0YTIgMiAwIDAgMSAyIDJaIi8+PHBhdGggZD0iTTE2LjcgMTNIMTlhMiAyIDAgMCAxIDIgMnY0YTIgMiAwIDAgMS0yIDJINyIvPjxwYXRoIGQ9Ik0gNyAxN2gwLjAxIi8+PHBhdGggZD0ibTExIDggMi4zLTIuM2EyLjQgMi40IDAgMCAxIDMuNDA0LjAwNEwxOC42IDcuNmEyLjQgMi40IDAgMCAxIC4wMjYgMy40MzRMOS45IDE5LjgiLz48L3N2Zz4=');
     --icon-16-palette: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtcGFsZXR0ZSI+PGNpcmNsZSBjeD0iMTMuNSIgY3k9IjYuNSIgcj0iLjUiIGZpbGw9ImN1cnJlbnRDb2xvciIvPjxjaXJjbGUgY3g9IjE3LjUiIGN5PSIxMC41IiByPSIuNSIgZmlsbD0iY3VycmVudENvbG9yIi8+PGNpcmNsZSBjeD0iOC41IiBjeT0iNy41IiByPSIuNSIgZmlsbD0iY3VycmVudENvbG9yIi8+PGNpcmNsZSBjeD0iNi41IiBjeT0iMTIuNSIgcj0iLjUiIGZpbGw9ImN1cnJlbnRDb2xvciIvPjxwYXRoIGQ9Ik0xMiAyQzYuNSAyIDIgNi41IDIgMTJzNC41IDEwIDEwIDEwYy45MjYgMCAxLjY0OC0uNzQ2IDEuNjQ4LTEuNjg4IDAtLjQzNy0uMTgtLjgzNS0uNDM3LTEuMTI1LS4yOS0uMjg5LS40MzgtLjY1Mi0uNDM4LTEuMTI1YTEuNjQgMS42NCAwIDAgMSAxLjY2OC0xLjY2OGgxLjk5NmMzLjA1MSAwIDUuNTU1LTIuNTAzIDUuNTU1LTUuNTU0QzIxLjk2NSA2LjAxMiAxNy40NjEgMiAxMiAyeiIvPjwvc3ZnPg==');
+    --icon-16-moon: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtbW9vbiI+PHBhdGggZD0iTTEyIDNhNiA2IDAgMCAwIDkgOSA5IDkgMCAxIDEtOS05WiIvPjwvc3ZnPg==');
+    --icon-16-moon-star: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtbW9vbi1zdGFyIj48cGF0aCBkPSJNMTIgM2E2IDYgMCAwIDAgOSA5IDkgOSAwIDEgMS05LTkiLz48cGF0aCBkPSJNMjAgM3Y0Ii8+PHBhdGggZD0iTTIyIDVoLTQiLz48L3N2Zz4=');
+    --icon-16-sun: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtc3VuIj48Y2lyY2xlIGN4PSIxMiIgY3k9IjEyIiByPSI0Ii8+PHBhdGggZD0iTTEyIDJ2MiIvPjxwYXRoIGQ9Ik0xMiAyMHYyIi8+PHBhdGggZD0ibTQuOTMgNC45MyAxLjQxIDEuNDEiLz48cGF0aCBkPSJtMTcuNjYgMTcuNjYgMS40MSAxLjQxIi8+PHBhdGggZD0iTTIgMTJoMiIvPjxwYXRoIGQ9Ik0yMCAxMmgyIi8+PHBhdGggZD0ibTYuMzQgMTcuNjYtMS40MSAxLjQxIi8+PHBhdGggZD0ibTE5LjA3IDQuOTMtMS40MSAxLjQxIi8+PC9zdmc+');
+    --icon-16-issues: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtZ2l0LW1lcmdlIj48Y2lyY2xlIGN4PSIxOCIgY3k9IjE4IiByPSIzIi8+PGNpcmNsZSBjeD0iNiIgY3k9IjYiIHI9IjMiLz48cGF0aCBkPSJNNiAyMVY5YTkgOSAwIDAgMCA5IDkiLz48L3N2Zz4=');
 
     --icon-20-check: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImhzbCgyNTUsMjAlLDkwJSkiIHN0cm9rZS13aWR0aD0iMi4yNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1jaGVjayI+PHBhdGggZD0iTTIwIDYgOSAxN2wtNS01Ii8+PC9zdmc+');
     --icon-20-plus: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImhzbCgyNTUsMjAlLDkwJSkiIHN0cm9rZS13aWR0aD0iMi4yNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1wbHVzIj48cGF0aCBkPSJNNSAxMmgxNCIvPjxwYXRoIGQ9Ik0xMiA1djE0Ii8+PC9zdmc+');
@@ -756,8 +760,13 @@ last.fm changes as of 2024-05-20 */
     font: inherit;
     color: hsl(var(--c3));
 
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: fit-content !important;
+
     a {
-        width: 104px;
+        width: 60px;
         position: relative;
         font: 0/0 a;
 
@@ -797,40 +806,6 @@ last.fm changes as of 2024-05-20 */
             bottom: 0;
             font-weight: 700;
         }
-
-        /* 2 */
-        /*&:after {
-            all: inherit;
-            content: var(--brand-branch);
-            font-size: var(--font-size);
-            line-height: var(--line-height);
-            font-family: var(--font);
-            position: absolute;
-            top: 4px;
-            left: 62px;
-            bottom: 0;
-            height: fit-content;
-            font-weight: var(--font-weight-medium);
-            letter-spacing: -0.6px;
-            color: hsla(var(--c1), 70%);
-            text-decoration: none !important;
-        }*/
-    }
-
-    /* ver */
-    &:after {
-        all: inherit;
-        content: ':3 v' var(--brand-info);
-        position: absolute;
-        /*top: 19px;
-        left: 62px;
-        font-size: 9px;
-        line-height: calc(9px + 4px);*/
-        top: 11px;
-        left: 62px;
-        font-size: var(--font-size);
-        line-height: var(--line-height);
-        height: fit-content;
     }
 }
 
@@ -1181,7 +1156,7 @@ last.fm changes as of 2024-05-20 */
     display: flex;
 }
 .footer .footer-legal ul:before {
-    content: 'cutensilly.org/' var(--brand) '/fm — ' var(--brand-info);
+    content: 'cutensilly.org/' var(--brand) '/fm';
     margin-right: var(--card-gap);
     width: fit-content;
     font-weight: var(--font-weight-medium);
@@ -4885,6 +4860,7 @@ span.shout-user-avatar:before,
 
 
 /*     BUTTON     */
+.btn,
 button:not(.playback-app-container button, .top-artist-list-item, .pixel, .listening-report-daily-scrobbles-day),
 .btn-primary,
 .shout-reply,
@@ -5178,6 +5154,7 @@ button:not(.playback-app-container button, .top-artist-list-item, .pixel, .liste
 /*     BLEH     */
 .btns .btn:before,
 .btn.reset:before,
+.setting-item .icon:before, .action .icon:before,
 /*     DROPDOWNS     */
 .dropdown-menu-clickable-item:before, .auth-dropdown-menu-item:before,
 .dropdown-menu-list-button::after, .dropdown-menu-clickable-button::after, .dropdown-menu-clickable-button-js-only::after,
@@ -5553,6 +5530,9 @@ on the bottom of a panel !! */
 
 .auth-dropdown-menu-item {
     width: 100% !important;
+}
+.auth-dropdown-item-right {
+    color: hsl(var(--c3));
 }
 
 .date-range-picker-preset a {
@@ -10540,11 +10520,35 @@ so this is good enough - use the community docs */
             gap: 12px;
             text-decoration: none;
 
+            display: flex;
+            align-items: center;
+            width: unset !important;
+
             .icon {
+                display: block;
+                width: 32px;
+                height: 32px;
                 padding: 6px;
                 background-color: hsl(var(--h3));
                 color: hsl(var(--b7));
                 border-radius: 50%;
+                position: relative;
+
+                &:before {
+                    --left: 50%;
+                    --margin-left: -8px;
+                }
+
+                &.bleh--issues {
+                    --mask: var(--icon-16-issues);
+                }
+            }
+
+            h5 {
+                font-weight: var(--font-weight-medium);
+            }
+            p {
+                font-weight: var(--font-weight) !important;
             }
 
             &.update {
@@ -10596,8 +10600,9 @@ so this is good enough - use the community docs */
         gap: 6px;
 
         .btn {
-            width: unset;
+            width: unset !important;
             justify-content: unset;
+            display: flex;
         }
     }
 
@@ -10610,6 +10615,7 @@ so this is good enough - use the community docs */
         gap: 9px 12px;
         --padding: 7px 16px;
         --radius: var(--card-radius);
+        text-align: left;
 
         .icon {
             display: block;
@@ -10619,12 +10625,41 @@ so this is good enough - use the community docs */
             background-color: hsl(var(--h3));
             color: hsl(var(--b7));
             border-radius: 50%;
+            position: relative;
+
+            &:before {
+                --left: 50%;
+                --margin-left: -8px;
+            }
+
+            &.bleh--theme-dark {
+                --mask: var(--icon-16-moon);
+            }
+            &.bleh--theme-oled {
+                --mask: var(--icon-16-moon-star);
+            }
+            &.bleh--theme-light {
+                --mask: var(--icon-16-sun);
+            }
+            &.bleh--themes {
+                --mask: var(--icon-16-themes);
+            }
+            &.bleh--palette {
+                --mask: var(--icon-16-palette);
+            }
         }
 
         &.active {
             --bg: hsla(var(--h4), 40%);
             --bg-hov: hsla(var(--h4), 60%);
             --bg-atv: hsla(var(--h4), 80%);
+        }
+
+        h5 {
+            font-weight: var(--font-weight-medium);
+        }
+        p {
+            font-weight: var(--font-weight) !important;
         }
 
         &.has-image {
@@ -10635,13 +10670,6 @@ so this is good enough - use the community docs */
             "icon text"
             "image image";
             --padding: 9px 16px;
-
-            h5 {
-                font-weight: var(--font-weight-medium);
-            }
-            p {
-                font-weight: var(--font-weight) !important;
-            }
 
             .text {
                 text-align: left;
