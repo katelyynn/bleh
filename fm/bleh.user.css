@@ -4385,7 +4385,7 @@ p + .chartlist {
 .shout-actions {
     margin-top: 4px;
     margin-bottom: unset;
-    margin-left: 145px;
+    margin-left: -9px;
 
     .shout:not(:hover, :focus-within) & {
         opacity: 0.4;
@@ -4397,6 +4397,7 @@ p + .chartlist {
 
 .shout-action {
     margin-left: 6px;
+    text-transform: lowercase;
 }
 
 .shout-more-actions {
@@ -4407,7 +4408,8 @@ p + .chartlist {
 
 /* apply some sizing adjustments to all except menu items */
 .shout-reply, .shout button:not(.dropdown-menu-clickable-item) {
-    --padding: 4px 12px;
+    --padding: 4px 9px;
+    --left: 9px;
     height: 26px !important;
     font-family: var(--font) !important;
     --force-font-weight: var(--font-weight);
@@ -4415,9 +4417,9 @@ p + .chartlist {
 }
 
 /* shrink text of all except menu items & more button (font size set to 0) */
-/*.shout-reply, .shout button:not(.dropdown-menu-clickable-item, .shout-more-actions) {
+.shout-reply, .shout button:not(.dropdown-menu-clickable-item, .shout-more-actions) {
     --font-size: 13px !important;
-}*/
+}
 
 /* make background invisible unless hovered, less distracting */
 .shout-reply, .shout button:not(.vote-button--voted, .dropdown-menu-clickable-item) {
@@ -4429,7 +4431,7 @@ p + .chartlist {
 }
 
 .vote-button {
-    --padding: 4px 12px 4px calc(12px + 16px + 6px) !important;
+    --padding: 4px 9px 4px calc(9px + 16px + 6px) !important;
 }
 .vote-button--voted {
     --col: hsl(var(--l3-c)) !important;
@@ -4458,28 +4460,32 @@ the body text becomes bigger by default - this reverts that */
 }
 
 
+.shout-user {
+    width: fit-content;
+    display: inline-flex;
+    margin-right: 6px;
+}
 .shout-timestamp {
-    height: 26px;
+    height: fit-content;
     color: hsla(var(--c3), 70%) !important;
-    font-size: var(--font-size);
-    display: flex;
+    font-size: 12px;
+    display: inline-flex;
     align-items: center;
     right: unset;
     top: unset;
-    bottom: 6px;
-    left: 0;
     transition-property: color;
     transition-duration: var(--trans);
     transition-timing-function: var(--trans-function);
     cursor: pointer;
+    position: relative;
 
     /* text */
     &:before {
         content: 'Copy link';
         color: hsl(var(--l2-c)) !important;
-        font-size: var(--font-size);
+        font-size: 12px;
         position: absolute;
-        top: 4px;
+        top: 0;
         left: calc(16px + 6px);
         width: 100px;
         opacity: 0;
@@ -4500,7 +4506,7 @@ the body text becomes bigger by default - this reverts that */
         display: block;
         position: absolute;
         /*inset: 4px calc(50% - 8px);*/
-        top: 4px;
+        top: 2px;
         left: 0;
         opacity: 0;
         transition-property: opacity;
@@ -10809,7 +10815,7 @@ so this is good enough - use the community docs */
 
     .shout {
         position: relative;
-        height: 68px;
+        height: 52px;
         padding-bottom: unset;
         border-bottom: none;
 
