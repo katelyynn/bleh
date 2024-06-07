@@ -903,9 +903,25 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                         </div>
                     </div>
                     <div class="inner-preview pad flex">
-                        <div class="preview-img">
-                            <img id="gendered_tags-img" src="https://cutensilly.org/img/gendered_tags-hidden.png">
-                        </div>
+                        <section class="catalogue-tags ">
+                            <ul class="tags-list tags-list--global">
+                                <li class="tag">
+                                    <a href="/tag/pop">pop</a>
+                                </li>
+                                <li class="tag">
+                                    <a href="/tag/country">country</a>
+                                </li>
+                                <li class="tag">
+                                    <a href="/tag/singer-songwriter">singer-songwriter</a>
+                                </li>
+                                <li class="tag">
+                                    <a href="/tag/female+vocalists">female vocalists</a>
+                                </li>
+                                <li class="tag">
+                                    <a href="/tag/synthpop">synthpop</a>
+                                </li>
+                            </ul>
+                        </section>
                     </div>
                     <div class="toggle-container" id="container-gendered_tags">
                         <button class="btn reset" onclick="_reset_item('gendered_tags')">Reset to default</button>
@@ -1083,8 +1099,6 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 if (item == 'nav') {
                     document.getElementById('nav-img').setAttribute('src','https://cutensilly.org/img/nav-hidden.png');
                     settings.auth_badge = settings_base.auth_badge.values[1];
-                } else if (item == 'gendered_tags') {
-                    document.getElementById('gendered_tags-img').setAttribute('src','https://cutensilly.org/img/gendered_tags-shown.png');
                 }
 
                 // save setting into body
@@ -1099,8 +1113,6 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 if (item == 'nav') {
                     document.getElementById('nav-img').setAttribute('src','https://cutensilly.org/img/nav-shown.png');
                     settings.auth_badge = settings_base.auth_badge.values[0];
-                } else if (item == 'gendered_tags') {
-                    document.getElementById('gendered_tags-img').setAttribute('src','https://cutensilly.org/img/gendered_tags-hidden.png');
                 } else if (item == 'dev') {
                     create_window('prompt_dev','Disable in-built theme loading',`
                         <p class="alert alert-info">Once you refresh the page, the in-built bleh theme will be disabled (unless you disable this option again).</p>

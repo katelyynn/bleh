@@ -1732,7 +1732,7 @@ span.header-new-gallery-inner a,
 .catalogue-tags .tag a, .catalogue-tags .tags-add-cta {
     box-shadow: var(--interact-shadow) !important;
     color: hsl(var(--c3)) !important;
-    font-weight: var(--font-weight-medium);
+    font-weight: var(--font-weight);
     background-color: hsl(var(--b4));
     border-radius: 50px;
     min-height: unset;
@@ -11892,8 +11892,8 @@ body:is(.namespace--user_playlists_create_overview, .music-landing-overview, [cl
 /* ordered alphabetically, this is configurable but from talking to people these tags are so far from
 being exhaustive lists, and also are like never helpful? theres a female vocalist in every genre it's basically
 trying to list every song ever made by someone identifying as a female, which is impossible */
-:is(.tag, .big-tags-item-wrap):has([href^="/tag/female+vocalist"], [href^="/tag/male+vocalist"], [href^="/tag/nonbinary+vocalist"]) {
-    display: var(--gendered-tags, none);
+[data-bleh--gendered_tags="true"] :is(.tag, .big-tags-item-wrap):has([href^="/tag/female+vocalist"], [href^="/tag/male+vocalist"], [href^="/tag/nonbinary+vocalist"]) {
+    display: none;
 }
 
 
