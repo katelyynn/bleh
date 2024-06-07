@@ -508,6 +508,19 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                             Customise
                         </button>
                     </div>
+                    <div class="btns sep">
+                        <button class="btn" data-bleh-action="import" onclick="_import_settings()">
+                            Import
+                        </button>
+                        <button class="btn" data-bleh-action="export" onclick="_export_settings()">
+                            Export
+                        </button>
+                    </div>
+                    <div class="btns sep">
+                        <button class="btn" data-bleh-action="reset" onclick="_reset_settings()">
+                            Reset
+                        </button>
+                    </div>
                 </div>
             `);
 
@@ -1044,9 +1057,111 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     }
 
     // kill a window
-    unsafeWindow._kill_window = function(id) {
+    function kill_window(id) {
         document.body.removeChild(document.getElementById(`bleh--window-${id}--background`));
         document.body.removeChild(document.getElementById(`bleh--window-${id}--wrapper`));
+    }
+
+    unsafeWindow._kill_window = function(id) {
+        kill_window(id);
+    }
+
+
+
+
+    // import settings
+    unsafeWindow._import_settings = function() {
+        create_window('import_settings','Import settings from a previous install',`
+            <p class="alert alert-warning">Anything you import will override your current settings, if you are importing settings from online ensure you trust the source.</p>
+            <br>
+            <textarea id="import_area"></textarea>
+            <div class="modal-footer">
+                <button class="btn primary" onclick="_confirm_import()">
+                    Import
+                </button>
+                <button class="btn" onclick="_kill_window('import_settings')">
+                    Cancel
+                </button>
+            </div>
+        `);
+    }
+
+    unsafeWindow._confirm_import = function() {
+        //localStorage.setItem('old_settings', localStorage.getItem('bleh'));
+
+        let requesting_setting = document.getElementById('import_area').value;
+        try {
+            let try_parse = JSON.parse(requesting_setting);
+
+            // can continue
+            localStorage.setItem('bleh', requesting_setting);
+            load_settings();
+
+            kill_window('import_settings');
+        } catch(e) {
+            // cannot continue, halt
+            kill_window('import_settings');
+            create_window('import_failed','Import failed',`
+            <p class="alert alert-error">The settings you attempted to import failed to parse, no changes were made.</p>
+            <div class="modal-footer">
+                <button class="btn primary" onclick="_kill_window('import_failed')">
+                    Confirm
+                </button>
+            </div>
+            `);
+        }
+    }
+
+
+    // export settings
+    function export_settings() {
+        let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
+
+        create_window('export_settings','Export your current settings',`
+            <p class="alert alert-success">Your current settings are in the textbox below ready for you to copy.</p>
+            <br>
+            <textarea>${JSON.stringify(settings)}</textarea>
+            <div class="modal-footer">
+                <button class="btn primary" onclick="_kill_window('export_settings')">
+                    Done
+                </button>
+            </div>
+        `);
+    }
+    unsafeWindow._export_settings = function() {
+        export_settings();
+    }
+
+
+    // reset settings
+    unsafeWindow._reset_settings = function() {
+        create_window('reset_settings','Reset your settings to default',`
+            <p class="alert alert-warning">Your settings will be <strong>reset to all defaults</strong> with no way to go back. Are you sure?</p>
+            <div class="modal-footer">
+                <button class="btn" onclick="_confirm_reset()">
+                    Yes, reset my settings
+                </button>
+                <button class="btn" onclick="_export_first()">
+                    Export first
+                </button>
+                <button class="btn" onclick="_kill_window('reset_settings')">
+                    Cancel
+                </button>
+            </div>
+        `);
+    }
+
+    unsafeWindow._confirm_reset = function() {
+        let settings = create_settings_template();
+        localStorage.setItem('bleh', JSON.stringify(settings));
+        load_settings();
+
+        kill_window('reset_settings');
+    }
+
+    unsafeWindow._export_first = function() {
+        kill_window('reset_settings');
+        export_settings();
     }
 
 

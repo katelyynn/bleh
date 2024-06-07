@@ -7696,6 +7696,7 @@ text[style^="color: rgb(0, 0, 0)"] {
     border-left: 2px solid hsl(var(--l3-c));
     color: hsl(var(--l3-c));
     text-align: left;
+    position: relative;
 }
 .async-content-error-message:before,
 .event-status:before,
@@ -7710,6 +7711,7 @@ text[style^="color: rgb(0, 0, 0)"] {
     margin-bottom: var(--card-gap);
 }
 
+.alert-error:before,
 .async-content-error-message:before {
     --mask: var(--icon-16-x);
 }
@@ -7733,6 +7735,7 @@ text[style^="color: rgb(0, 0, 0)"] {
     --sat: 1;
     --lit: 1;
 }
+.alert-error,
 .async-content-error-message,
 .event-status--cancelled {
     --hue: var(--hue-neg);
@@ -10407,6 +10410,11 @@ so this is good enough - use the community docs */
             flex-direction: column;
             gap: 20px;
             flex: 1;
+
+
+            .btn {
+                width: fit-content;
+            }
         }
 
 
@@ -10414,6 +10422,12 @@ so this is good enough - use the community docs */
             display: flex;
             flex-direction: column;
             gap: var(--button-list-gap);
+
+            &.sep {
+                margin-top: calc(20px - var(--card-gap));
+                padding-top: var(--card-gap);
+                border-top: 1px solid hsl(var(--b4));
+            }
 
             .btn {
                 --shadow: none;
@@ -10661,8 +10675,8 @@ so this is good enough - use the community docs */
     --shadow-hov: var(--shadow);
     --sat: 1;
     --lit: 1;
-    width: unset;
-    height: unset;
+    width: unset !important;
+    height: unset !important;
 }
 
 .palette + .palette {
@@ -10745,7 +10759,7 @@ so this is good enough - use the community docs */
     }
 }
 
-.sep {
+.sep:not(.btns) {
     width: 100%;
     height: 1px;
     background-color: hsl(var(--b4));
@@ -10770,6 +10784,7 @@ so this is good enough - use the community docs */
 
 .modal-footer {
     display: flex;
+    gap: var(--button-list-gap);
     justify-content: center;
     margin-top: var(--card-gap);
     padding-top: var(--card-gap);
@@ -10852,6 +10867,35 @@ input[type="range"]::-webkit-slider-thumb {
 }
 input[type="range"]::-moz-range-thumb {
     box-shadow: -407px 0 0 400px hsl(var(--l3));
+}
+
+
+.modal-body textarea {
+    --bg: hsl(var(--b4));
+    padding: var(--padding, 7px 12px);
+    height: 32px;
+    background-color: var(--bg);
+    border: none;
+    box-shadow: var(--shadow, var(--interact-shadow));
+    border-radius: var(--item-med-radius);
+    color: hsl(var(--c2));
+    caret-color: hsl(var(--l1));
+    font-family: var(--font);
+    font-size: var(--font-size);
+    line-height: var(--line-height);
+    width: 100%;
+    height: fit-content;
+    max-height: 140px;
+    resize: none;
+
+    transition-property: outline;
+    transition-duration: var(--trans);
+    transition-timing-function: var(--trans-function);
+
+    &:focus {
+        outline: 2px solid hsl(var(--l1));
+        transition: none;
+    }
 }
 
 
