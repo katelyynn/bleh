@@ -238,7 +238,7 @@ body {
     --interact-shadow: var(--interactable-inset), var(--interactable-outer);
     --active-shadow: var(--interactable-inset), var(--interactable-outer), var(--interactable-active-outer);
 
-    --chartlist-fill: var(--hue-gradient, hsl(var(--l3)));
+    --chartlist-fill: var(--hue-gradient, hsl(var(--h3)));
 
     --obsession-claimed-text: '#1';
 
@@ -252,6 +252,8 @@ body {
     --cover-size-100: 48px;
     --cover-size-200: 84px;
     --cover-size-300: 96px;
+
+    --name-colour: hsl(var(--l3-c));
 }
 
 [data-bleh--theme="light"] body {
@@ -261,6 +263,18 @@ body {
 
     --interactable-outer: hsla(var(--b7), 0.07) 0 2px 4px 0;
     --interactable-active-outer: transparent 0 0 0;
+
+    color-scheme: light !important;
+
+
+    .header-new-inner:before {
+		opacity: 0.3;
+	}
+
+    .shout-user [href="/user/cutensilly"] {
+		color: hsl(var(--l2-c)) !important;
+		text-shadow: 0 0 5px hsla(var(--l4-c), 20%) !important;
+	}
 }
 
 /* icons (from lucide.dev <3) */
@@ -408,6 +422,11 @@ body {
     --icon-20-menu: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjI1IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLW1lbnUiPjxsaW5lIHgxPSI0IiB4Mj0iMjAiIHkxPSIxMiIgeTI9IjEyIi8+PGxpbmUgeDE9IjQiIHgyPSIyMCIgeTE9IjYiIHkyPSI2Ii8+PGxpbmUgeDE9IjQiIHgyPSIyMCIgeTE9IjE4IiB5Mj0iMTgiLz48L3N2Zz4=');
     --icon-20-search: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjI1IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLXNlYXJjaCI+PGNpcmNsZSBjeD0iMTEiIGN5PSIxMSIgcj0iOCIvPjxwYXRoIGQ9Im0yMSAyMS00LjMtNC4zIi8+PC9zdmc+');
     --icon-20-obsession: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjI1IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLXRyZW5kaW5nLXVwIj48cG9seWxpbmUgcG9pbnRzPSIyMiA3IDEzLjUgMTUuNSA4LjUgMTAuNSAyIDE3Ii8+PHBvbHlsaW5lIHBvaW50cz0iMTYgNyAyMiA3IDIyIDEzIi8+PC9zdmc+');
+}
+
+
+[data-bleh--accessible_name_colours="true"] body {
+    --name-colour: hsl(var(--c1));
 }
 
 
@@ -1980,8 +1999,10 @@ li.header-metadata-item--event-attendance {
 .featured-item-name, .featured-item-artist {
     font-size: var(--font-size);
     line-height: var(--line-height);
-    font-weight: var(--font-weight);
     margin: unset;
+}
+.featured-item-name {
+    font-weight: var(--font-weight-medium);
 }
 
 
@@ -3137,10 +3158,6 @@ state is not active, which then falls back to primary button styling */
 /* hides empty label unless user page has override */ .user-status-None {
     display: var(--override-none-status, none) !important;
 }
-.header-title:has([href="/user/aoivee"], [href="/user/Serprety"], [href="/user/RazzBX"], [href="/user/ivyshandle"], [href="/user/KuroinHeroin"], [href="/user/u5c"], [href="/user/destons"]) + .user-status-None {
-    color: hsl(var(--l3-c)) !important;
-    --override-none-status: flex;
-}
 
 .header-title-label-wrap {
     width: 600px;
@@ -3538,6 +3555,10 @@ h2:not(.count, .mask-multi-text, .mask-text, .sr-only, .js-gallery-heading, .top
 a {
     color: hsl(var(--l3-c));
     text-underline-offset: 2px;
+
+    [data-bleh--underline_links="true"] & {
+        text-decoration: underline !important;
+    }
 }
 
 /* '.page a' is required for api docs :(
@@ -4002,7 +4023,7 @@ better than the default selector '#app a' i suppose */
 }
 .obsession-candidate-artist,
 .chartlist-name .feat, .chartlist-artist, .featured-item-artist, .artist-top-albums-item-artist, .similar-albums-item-artist, .track-similar-tracks-item-artist {
-    color: hsla(var(--c2), 80%);
+    color: hsla(var(--c2), 80%) !important;
     font-weight: var(--font-weight);
 }
 .chartlist-name .feat:is([data-type$="demo"], [data-type$="20"], [data-type$="19"], [data-type^="90"], [data-type*="long pond studio"], [data-type="(from the vault)"]) {
@@ -4313,9 +4334,9 @@ p + .chartlist {
 .shout-list-item {
     position: relative;
 
-    &:has(> .shout-container > .shout--bleh-redacted) {
+    /*&:has(> .shout-container > .shout--bleh-redacted) {
         display: none;
-    }
+    }*/
 }
 
 .shout {
@@ -4379,7 +4400,7 @@ p + .chartlist {
     --padding: 4px 12px;
     height: 26px !important;
     font-family: var(--font) !important;
-    --force-font-weight: 400;
+    --force-font-weight: var(--font-weight);
     --show-icon: block;
 }
 
@@ -4410,7 +4431,7 @@ p + .chartlist {
     line-height: var(--line-height) !important;
 }
 .shout-user a, .user-list-name, .listeners-section-item-name, .top-listeners-item-name {
-    color: hsl(var(--l3-c));
+    color: var(--name-colour);
     font-weight: var(--font-weight-medium);
 }
 
@@ -4550,6 +4571,7 @@ leading to a gap from their own css */
     }
 }
 
+[data-bleh--hide_hateful="true"] .shout--bleh-redacted[data-bleh--shout-expanded="false"],
 .shout--deleted, .shout--reported {
     padding: 0 0 10px !important;
     background: unset;
@@ -4563,6 +4585,7 @@ leading to a gap from their own css */
     }
 }
 
+[data-bleh--hide_hateful="true"] .shout--bleh-redacted[data-bleh--shout-expanded="false"]:before,
 .shout:not(.shout--deleted, .shout--reported):before {
     --mask: var(--icon-16-warning);
     color: hsla(var(--c3), 40%);
@@ -4594,15 +4617,14 @@ leading to a gap from their own css */
 
 .shout-user [href="/user/cutensilly"] {
     color: hsl(var(--l2-c)) !important;
-    text-shadow: 0 0 5px hsl(var(--l4-c)) !important;
+    text-shadow: 0 0 5px hsl(var(--h4)) !important;
     &:after {
         content: ' ᨐ';
     }
 }
 
 
-.avatar-status-dot,
-.shout-user:has([href="/user/aoivee"], [href="/user/Serprety"], [href="/user/RazzBX"], [href="/user/ivyshandle"], [href="/user/KuroinHeroin"], [href="/user/u5c"], [href="/user/destons"]) + .shout-user-avatar:before
+.avatar-status-dot
 {
     left: unset;
     top: unset;
@@ -4625,16 +4647,6 @@ leading to a gap from their own css */
     background: var(--override-bg, none) !important;
     filter: drop-shadow(2px 0px 0 hsl(var(--b5))) drop-shadow(0px 2px 0 hsl(var(--b5))) drop-shadow(-2px -0px 0 hsl(var(--b5))) drop-shadow(-0px -2px 0 hsl(var(--b5))) drop-shadow(0px 4px 0px hsl(var(--b5)));
 }
-.shout-user:has([href="/user/aoivee"], [href="/user/Serprety"], [href="/user/RazzBX"], [href="/user/ivyshandle"], [href="/user/KuroinHeroin"], [href="/user/u5c"], [href="/user/destons"]) + span.shout-user-avatar:before {
-    /* undo the positioning from the "button has icon" stuff
-    and move to bottom right */
-    left: unset !important;
-    --left: unset !important;
-    margin-top: unset !important;
-    --margin-top: unset !important;
-    top: unset !important;
-    right: 0 !important;
-}
 .shout-user-avatar, .avatar {
     /*background-color: var(--avatar-generic-background); support for transparent avatars */
     border-radius: var(--avatar-radius);
@@ -4642,7 +4654,6 @@ leading to a gap from their own css */
 
 
 .shout-user-avatar .avatar-status-dot,
-.shout-user:has([href="/user/aoivee"], [href="/user/Serprety"], [href="/user/RazzBX"], [href="/user/ivyshandle"], [href="/user/KuroinHeroin"], [href="/user/u5c"], [href="/user/destons"]) + .shout-user-avatar:before,
 .inbox-notifications .inbox-notifications__avatar--big-size .avatar-status-dot,
 .obsession-details-intro-avatar-wrap .avatar-status-dot
 {
@@ -4668,34 +4679,6 @@ leading to a gap from their own css */
 .obsession-details-intro-avatar-wrap .avatar-status-dot {
     /* remove the heavy bottom shadow */
     filter: drop-shadow(2px 0px 0 hsl(var(--b5))) drop-shadow(0px 2px 0 hsl(var(--b5))) drop-shadow(-2px -0px 0 hsl(var(--b5))) drop-shadow(-0px -2px 0 hsl(var(--b5)));
-}
-
-
-.shout-user:has([href="/user/aoivee"], [href="/user/Serprety"], [href="/user/RazzBX"], [href="/user/ivyshandle"], [href="/user/KuroinHeroin"], [href="/user/u5c"], [href="/user/destons"]) + .shout-user-avatar:after {
-    width: 24px;
-    height: 24px;
-    position: absolute;
-    right: -2px;
-    bottom: -2px;
-    padding-top: unset;
-    border-radius: 0;
-    content: '';
-    background-image: var(--icon-cat);
-    background-size: 20px;
-    background-position: center;
-    background-repeat: no-repeat;
-    z-index: 199;
-    box-shadow: unset;
-    filter: drop-shadow(2px 0px 0 hsl(var(--b5))) drop-shadow(0px 2px 0 hsl(var(--b5))) drop-shadow(-2px -0px 0 hsl(var(--b5))) drop-shadow(-0px -2px 0 hsl(var(--b5))) drop-shadow(0px 4px 0px hsl(var(--b5)));
-}
-.shout-user:has([href="/user/KuroinHeroin"]) + .shout-user-avatar:after {
-    background-image: var(--icon-mask);
-}
-.shout-user:has([href="/user/u5c"]) + .shout-user-avatar:after {
-    background-image: var(--icon-paw);
-}
-.shout-user:has([href="/user/destons"]) + .shout-user-avatar:after {
-    background-image: var(--icon-colon-three);
 }
 
 span.shout-user-avatar:before,
@@ -5194,7 +5177,6 @@ button:not(.playback-app-container button, .top-artist-list-item, .pixel, .liste
 :is(.header-title-label-wrap .label, .header-new-on-tour):before,
 /*     CUSTOM AVATAR ICONS WITHOUT PRO     */
 .avatar-status-dot:after,
-.shout-user:has([href="/user/aoivee"], [href="/user/Serprety"], [href="/user/RazzBX"], [href="/user/ivyshandle"], [href="/user/KuroinHeroin"], [href="/user/u5c"], [href="/user/destons"]) + .shout-user-avatar:before,
 /*     MODAL     */
 /*     SETTINGS     */
 #current-subscription h3:before, #current-subscription h2 + p b:before,
@@ -5456,6 +5438,7 @@ on the bottom of a panel !! */
 .promo-v3 .listening-report-promo-title {
     min-width: 80px;
     color: hsl(var(--c2));
+    font-weight: var(--font-weight-medium) !important;
     order: -1;
 }
 .promo-v3 .listening-report-promo-date {
@@ -6769,6 +6752,10 @@ form[action="/inbox/notifications"] {
     width: fit-content;
     white-space: inherit;
     min-width: 300px;
+
+    a {
+        font-weight: var(--font-weight-medium);
+    }
 }
 .gallery-image-description {
     margin-top: -8px;
@@ -10645,6 +10632,9 @@ so this is good enough - use the community docs */
             &.bleh--palette {
                 --mask: var(--icon-16-palette);
             }
+            &.bleh--link {
+                --mask: var(--icon-16-link);
+            }
         }
 
         &.active {
@@ -10791,6 +10781,24 @@ so this is good enough - use the community docs */
         .chartlist-count-bar {
             width: unset;
             flex: 1;
+        }
+    }
+
+
+    .shout {
+        position: relative;
+        height: 68px;
+        padding-bottom: unset;
+        border-bottom: none;
+
+        .shout-user {
+            font-size: var(--font-size);
+            line-height: var(--line-height);
+        }
+        .shout-timestamp {
+            line-height: inherit;
+            position: absolute;
+            height: fit-content;
         }
     }
 }
@@ -11856,8 +11864,24 @@ trying to list every song ever made by someone identifying as a female, which is
 
 
 /* ! hateful content that last.fm wont block */
-[data-bleh--hide_hateful="true"] .shout--bleh-redacted {
-    display: none;
+[data-bleh--hide_hateful="true"] .shout--bleh-redacted[data-bleh--shout-expanded="false"] {
+    .shout-user-avatar, .shout-user, .shout-user-avatar-link, .shout-permalink, .shout-body, .shout-action {
+        display: none;
+    }
+    .shout-actions {
+        position: absolute;
+        right: 0;
+        top: -9px;
+    }
+}
+[data-bleh--hide_hateful="false"] .shout--bleh-redacted[data-bleh--shout-expanded="false"],
+.shout--bleh-redacted[data-bleh--shout-expanded="true"] {
+    > p {
+        display: none;
+    }
+    .shout-user {
+        margin-top: unset !important;
+    }
 }
 
 
@@ -11892,6 +11916,7 @@ trying to list every song ever made by someone identifying as a female, which is
         gap: 6px;
 
         h5 {
+            color: hsl(var(--c1));
             font-weight: var(--font-weight-bold);
         }
         p {
@@ -11912,166 +11937,6 @@ trying to list every song ever made by someone identifying as a female, which is
             --col: hsla(var(--l3-c), 40%);
         }
     }
-}
-
-/*{
-    .shout:has(&):not(:hover, :has(.disclose-active)) {
-        padding: 0 0 10px !important;
-        height: 37px;
-        margin-bottom: 0;
-        position: relative;
-        top: 3px;
-        --show-icon: block;
-        :is(.shout-user, .shout-body, .shout-timestamp) {
-            font-size: 0 !important;
-            line-height: 0 !important;
-            pointer-events: none !important;
-        }
-        :is(.shout-user-avatar, .shout-user-avatar-link, .shout-actions) {
-            display: none !important;
-        }
-        .shout-body:after {
-            content: var(--hidden-msg);
-            font-size: var(--font-size) !important;
-            line-height: var(--line-height) !important;
-            color: hsla(var(--c3), 40%);
-        }
-    }
-
-    .inbox-notifications__item:has(&) {
-        .inbox-notifications__item-avatar {
-            --show-icon: block;
-            color: hsl(var(--c3));
-            --mask: var(--icon-16-warning);
-            span {
-                visibility: hidden;
-            }
-        }
-        :not(:hover) .inbox-notifications__item-description {
-            font-size: 0;
-            line-height: 0;
-            &:after {
-                content: 'Hateful user has been hidden, hover to reveal.';
-                font-size: var(--font-size);
-                line-height: var(--line-height);
-                color: hsl(var(--c3));
-                font-weight: var(--font-weight);
-            }
-        }
-    }
-
-    .inbox-message:has(&) {
-        .inbox-message-sender-avatar a {
-            --show-icon: block;
-            color: hsl(var(--c3));
-            --mask: var(--icon-16-warning);
-            span {
-                visibility: hidden;
-            }
-        }
-        &:not(:hover) :is(.inbox-message-sender-name, .inbox-message-subject, .inbox-message-message) {
-            font-size: 0;
-            line-height: 0;
-            &:after {
-                content: var(--hidden-msg);
-                font-size: var(--font-size);
-                line-height: var(--line-height);
-                color: hsl(var(--c3));
-                font-weight: var(--font-weight);
-            }
-        }
-    }
-
-    .user-list-inner-wrap:has(&) {
-        .user-list-avatar {
-            --show-icon: block;
-            color: hsl(var(--c3));
-            --left: 8px;
-            --mask: var(--icon-16-warning);
-            border: none;
-            box-shadow: none;
-            border-radius: 0;
-            img {
-                visibility: hidden;
-            }
-        }
-        &:not(:hover) :is(.user-list-name, .user-list-description) {
-            font-size: 0;
-            line-height: 0 !important;
-            &:after {
-                content: var(--hidden-msg);
-                font-size: var(--font-size);
-                line-height: var(--line-height) !important;
-                color: hsl(var(--c3));
-                font-weight: var(--font-weight);
-            }
-        }
-    }
-
-    .header:has(&) {
-        margin-top: 1000px;
-        .header-background:after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(0deg, transparent 0%, hsl(var(--b6)) 100%) !important;
-        }
-        &:before {
-            content: '..・ヾ(。＞＜)シ\a' '\a' 'this profile has been flagged as hateful, scroll to continue\a\a hateful users are community-contributed, visit cutensilly.org/hateful for more information.';
-            white-space: pre;
-            text-align: center;
-            position: absolute;
-            top: 0;
-            padding: calc(60px + var(--card-gap) + 60px) 0 calc(60px + var(--card-gap) + 60px * 4) 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: linear-gradient(0deg, transparent 0%, hsla(var(--h4), 20%) 100%);
-            color: hsl(var(--l2));
-            --hue: var(--hue-neg);
-            --sat: 1;
-            --lit: 1;
-            left: 0;
-            right: 0;
-        }
-    }
-
-    .masthead:has(.auth-avatar-mobile &) {
-        body & {
-            --noise2: url('https://cutensilly.org/img/cat.jpg');
-            img {
-                content: url('https://cutensilly.org/img/cat.jpg') !important;
-            }
-        }
-    }
-}
-
-.shout-user { --hidden-msg: '...'; }
-.shout-body { --hidden-msg: 'Hateful user\'s shouts are hidden'; }
-
-.user-list-name { --hidden-msg: 'Hateful user hidden, hover to reveal.' }
-
-#ignorelist > p {
-    --hue: var(--hue-neg);
-    --sat: 1;
-    --lit: 1;
-    &:after {
-        content: 'bleh² internally uses a community-contributed list of hateful users in order to warn users of and hide hateful shouts, notifications, direct messages, and profiles. Visit cutensilly.org/hateful for more information.';
-        color: hsl(var(--l3-c));
-        display: block;
-        margin-top: var(--card-gap);
-        font-size: var(--font-size) !important;
-        line-height: var(--line-height) !important;
-    }
-}
-
-/* silly */
-[alt="Avatar for DXP6986"] {
-    content: url('https://cutensilly.org/img/keionbu.jpg') !important;
-}
-
-.shout:has([alt="Avatar for lost"], [alt^="Avatar for VloneThug3"]) .shout-body {
-    display: none;
 }
 
 

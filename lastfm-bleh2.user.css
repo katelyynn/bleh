@@ -11033,14 +11033,15 @@
 
 
 	/*     UNDER CONSTRUCTION     */
-	body:is(.namespace--user_playlists_create_overview, .music-landing-overview, [class*="namespace--charts"]):after {
+	body:after {
 		position: fixed;
 		padding: 10px var(--card-gap);
 		border-radius: var(--item-big-radius);
 		box-shadow: var(--card-shadow);
-		right: var(--card-gap);
+		left: calc(50% - (580px / 2));
+		width: 580px;
 		bottom: var(--card-gap);
-		content: 'This page or a component on it is not finished, things may look weird.';
+		content: 'Your theme is out of date, please read cutensilly.org/migrate (this is a good thing)';
 		font-size: var(--font-size);
 		font-weight: var(--font-weight-medium);
 		display: flex;
