@@ -1144,7 +1144,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 <button class="btn" onclick="_export_first()">
                     Export first
                 </button>
-                <button class="btn" onclick="_kill_window('reset_settings')">
+                <button class="btn primary" onclick="_kill_window('reset_settings')">
                     Cancel
                 </button>
             </div>
