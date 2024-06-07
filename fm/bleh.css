@@ -7663,6 +7663,10 @@ text[style^="color: rgb(0, 0, 0)"] {
     color: hsl(var(--l2-c));
     text-align: left;
     position: relative;
+
+    [data-bleh--theme="light"] & {
+        color: hsl(var(--l4-c));
+    }
 }
 .async-content-error-message:before,
 .event-status:before,
@@ -10421,6 +10425,9 @@ so this is good enough - use the community docs */
                 &[data-bleh-action="reset"] {
                     --mask: var(--icon-16-revert);
                 }
+                &[data-bleh-page="performance"] {
+                    --mask: var(--icon-16-settings);
+                }
 
                 &:not(.active) {
                     --bg: transparent;
@@ -11092,6 +11099,36 @@ input[type="range"]::-moz-range-thumb {
             left: unset;
             right: 7px;
         }
+    }
+}
+
+
+.browser-choices {
+    margin-top: var(--card-gap);
+    display: flex;
+    justify-content: space-around;
+    gap: var(--card-gap);
+}
+
+.browser {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 6px;
+    width: 230px;
+
+    .browser-icon {
+        width: 32px !important;
+        height: 32px;
+        margin: 6px 0;
+    }
+
+    .caption {
+        font-size: 12px;
+        line-height: 16px;
+        font-weight: var(--font-weight);
+        color: hsl(var(--c3));
+        margin: unset !important;
     }
 }
 

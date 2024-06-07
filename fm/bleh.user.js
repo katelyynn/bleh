@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         bleh
 // @namespace    http://last.fm/
-// @version      2024.0607
+// @version      2024.0607.1
 // @description  bleh!!! ^-^
 // @author       kate
 // @match        https://www.last.fm/*
@@ -11,7 +11,7 @@
 // @downloadURL  https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.js
 // ==/UserScript==
 
-let version = '2024.0607';
+let version = '2024.0607.1';
 
 let profile_badges = {
     'cutensilly': {
@@ -146,6 +146,13 @@ let settings_base = {
     },
     underline_links: {
         css: 'underline_links',
+        unit: '',
+        value: false,
+        values: [true, false],
+        type: 'toggle'
+    },
+    dev: {
+        css: 'dev',
         unit: '',
         value: false,
         values: [true, false],
@@ -590,6 +597,9 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                         <button class="btn bleh--btn" data-bleh-page="customise" onclick="_change_settings_page('customise')">
                             Customise
                         </button>
+                        <button class="btn bleh--btn" data-bleh-page="performance" onclick="_change_settings_page('performance')">
+                            Performance
+                        </button>
                     </div>
                     <div class="btns sep">
                         <button class="btn" data-bleh-action="import" onclick="_import_settings()">
@@ -924,6 +934,25 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     </div>
                 </div>
                 `);
+        } else if (page == 'performance') {
+            return (`
+                <div class="bleh--panel">
+                    <h3>Performance</h3>
+                    <p>Running into noticeable issues in theme loading? Try out these settings.</p>
+                    <div class="toggle-container" id="container-dev">
+                        <button class="btn reset" onclick="_reset_item('dev')">Reset to default</button>
+                        <div class="heading">
+                            <h5>Disable in-built theme loading</h5>
+                            <p>This allows you to load the in-built theme via Stylus instead, which may be more performant.</p>
+                        </div>
+                        <div class="toggle-wrap">
+                            <button class="toggle" id="toggle-dev" onclick="_update_item('dev')" aria-checked="false">
+                                <div class="dot"></div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                `);
         }
     }
 
@@ -946,7 +975,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
         if (page == 'themes')
             show_theme_change_in_settings();
-        else if (page == 'customise')
+        else if (page == 'customise' || page == 'performance')
             refresh_all();
     }
 
@@ -1072,6 +1101,25 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     settings.auth_badge = settings_base.auth_badge.values[0];
                 } else if (item == 'gendered_tags') {
                     document.getElementById('gendered_tags-img').setAttribute('src','https://cutensilly.org/img/gendered_tags-hidden.png');
+                } else if (item == 'dev') {
+                    create_window('prompt_dev','Disable in-built theme loading',`
+                        <p class="alert alert-info">Once you refresh the page, the in-built bleh theme will be disabled (unless you disable this option again).</p>
+                        <br>
+                        If you do not already have the <strong>Stylus</strong> extension, choose your browser below:
+                        <br>
+                        <div class="browser-choices">
+                            <button class="btn browser" onclick="_chosen_chrome()">
+                                <img class="browser-icon" src="https://cutensilly.org/img/chrome.png">
+                                <p>Chrome</p>
+                                <p class="caption">for Chrome, Edge, Brave, Opera</p>
+                            </button>
+                            <button class="btn browser" onclick="_chosen_firefox()">
+                                <img class="browser-icon" src="https://cutensilly.org/img/firefox.png">
+                                <p>Firefox</p>
+                                <p class="caption">for Firefox only</p>
+                            </button>
+                        </div>
+                    `);
                 }
 
                 // save setting into body
@@ -1090,6 +1138,42 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         // save to settings
         localStorage.setItem('bleh', JSON.stringify(settings));
         } catch(e) {}
+    }
+
+
+    unsafeWindow._chosen_chrome = function() {
+        open('https://chromewebstore.google.com/detail/stylus/clngdbkpkpeebahjckkjfobafhncgmne');
+        continue_dev();
+    }
+    unsafeWindow._chosen_firefox = function() {
+        open('https://addons.mozilla.org/en-US/firefox/addon/styl-us/');
+        continue_dev();
+    }
+
+
+    function continue_dev() {
+        kill_window('prompt_dev');
+        create_window('continue_dev','Disable in-built theme loading',`
+            Once you have the extension installed, hit "Install style" on the new tab that will open.
+            <div class="modal-footer">
+                <button class="btn primary" onclick="_finish_dev()">
+                    Continue
+                </button>
+            </div>
+        `);
+    }
+
+    unsafeWindow._finish_dev = function() {
+        open('https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.css');
+        kill_window('continue_dev');
+        create_window('finish_dev','Disable in-built theme loading',`
+            <p class="alert alert-success">All done! From now on, styling will be handled via Stylus.</p>
+            <div class="modal-footer">
+                <button class="btn primary" onclick="_kill_window('finish_dev')">
+                    Done
+                </button>
+            </div>
+        `);
     }
 
 
