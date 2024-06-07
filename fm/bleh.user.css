@@ -3564,6 +3564,10 @@ h2:not(.count, .mask-multi-text, .mask-text, .sr-only, .js-gallery-heading, .top
 a {
     color: hsl(var(--l3-c));
     text-underline-offset: 2px;
+
+    [data-bleh--underline_links="true"] & {
+        text-decoration: underline !important;
+    }
 }
 
 /* '.page a' is required for api docs :(
@@ -5443,6 +5447,7 @@ on the bottom of a panel !! */
 .promo-v3 .listening-report-promo-title {
     min-width: 80px;
     color: hsl(var(--c2));
+    font-weight: var(--font-weight-medium) !important;
     order: -1;
 }
 .promo-v3 .listening-report-promo-date {
@@ -10635,6 +10640,9 @@ so this is good enough - use the community docs */
             }
             &.bleh--palette {
                 --mask: var(--icon-16-palette);
+            }
+            &.bleh--link {
+                --mask: var(--icon-16-link);
             }
         }
 

@@ -82,7 +82,8 @@ let settings_template = {
     invert_interactable_colour: false,
     dev: 0,
     hide_hateful: true,
-    accessible_name_colours: false
+    accessible_name_colours: false,
+    underline_links: false
 };
 let settings_base = {
     hue: {
@@ -138,6 +139,13 @@ let settings_base = {
     },
     accessible_name_colours: {
         css: 'accessible_name_colours',
+        unit: '',
+        value: false,
+        values: [true, false],
+        type: 'toggle'
+    },
+    underline_links: {
+        css: 'underline_links',
         unit: '',
         value: false,
         values: [true, false],
@@ -653,6 +661,13 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                                 <p>Pick your favourite!</p>
                             </div>
                         </button>
+                        <button class="btn setting-item" onclick="_change_settings_page('customise')">
+                            <div class="icon bleh--link"></div>
+                            <div class="text">
+                                <h5>Always underline links</h5>
+                                <p>Make links to interactables stand out.</p>
+                            </div>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -846,7 +861,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                                 </time>
                             </a>
                             <div class="shout-body">
-                                <p>some completely random text that doesn't mean anything</p>
+                                <p>some completely random text that doesn't mean <a href="https://cutensilly.org">anything at all</a></p>
                             </div>
                         </div>
                     </div>
@@ -858,6 +873,18 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                         </div>
                         <div class="toggle-wrap">
                             <button class="toggle" id="toggle-accessible_name_colours" onclick="_update_item('accessible_name_colours')" aria-checked="false">
+                                <div class="dot"></div>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="toggle-container" id="container-underline_links">
+                        <button class="btn reset" onclick="_reset_item('underline_links')">Reset to default</button>
+                        <div class="heading">
+                            <h5>Always underline links</h5>
+                            <p>Make links to interactables stand out with underlines.</p>
+                        </div>
+                        <div class="toggle-wrap">
+                            <button class="toggle" id="toggle-underline_links" onclick="_update_item('underline_links')" aria-checked="false">
                                 <div class="dot"></div>
                             </button>
                         </div>
