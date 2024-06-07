@@ -5682,6 +5682,9 @@ very, very, very dated - who looks up a song on ebay? */
     --mask: var(--icon-16-dev);
 }
 .bleh--configure-menu-item {
+    --bg-hov: hsla(var(--h3), 8%) !important;
+    --bg-atv: hsla(var(--h3), 18%) !important;
+    --col: hsl(var(--l3-c)) !important;
     --mask: var(--icon-16-settings);
 }
 .bleh--dev-menu-item {
