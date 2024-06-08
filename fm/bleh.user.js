@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         bleh
 // @namespace    http://last.fm/
-// @version      2024.0607.2
+// @version      2024.0608
 // @description  bleh!!! ^-^
 // @author       kate
 // @match        https://www.last.fm/*
@@ -10,9 +10,10 @@
 // @updateURL    https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.js
 // @downloadURL  https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.js
 // @run-at       document-body
+// @require      https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js
 // ==/UserScript==
 
-let version = '2024.0607.2';
+let version = '2024.0608';
 
 let profile_badges = {
     'cutensilly': {
@@ -497,6 +498,28 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
                 let shout_name = shout.querySelector('.shout-user a').textContent;
                 let shout_avatar = shout.querySelector('.shout-user-avatar');
+
+                let shout_body = shout.querySelector('.shout-body p');
+
+                let converter = new showdown.Converter({
+                    emoji: true,
+                    excludeTrailingPunctuationFromURLs: true,
+                    ghMentions: true,
+                    ghMentionsLink: '/user/{u}',
+                    headerLevelStart: 5,
+                    noHeaderId: true,
+                    openLinksInNewWindow: true,
+                    requireSpaceBeforeHeadingText: true,
+                    simpleLineBreaks: true,
+                    simplifiedAutoLink: true,
+                    strikethrough: true,
+                    underline: true,
+                    ghCodeBlocks: false,
+                    smartIndentationFix: true
+                });
+                let parsed_body = converter.makeHtml(shout_body.textContent);
+                console.log(shout_body.textContent, parsed_body);
+                shout_body.innerHTML = parsed_body;
 
                 if (redacted.includes(shout_name.toLowerCase())) {
                     shout.classList.add('shout--bleh-redacted');

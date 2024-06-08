@@ -10490,6 +10490,24 @@ so this is good enough - use the community docs */
     }
 }
 
+h6 {
+    margin: unset !important;
+    font-size: var(--font-size);
+    line-height: var(--line-height);
+    color: hsl(var(--c1));
+    font-weight: var(--font-weight-medium);
+}
+
+code, kbd, samp {
+    color: hsl(var(--c2));
+    background-color: hsl(var(--b6));
+    padding: 0 4px;
+    font-size: var(--font-size);
+    line-height: var(--line-height);
+    font-family: var(--font-code);
+    border-radius: var(--item-small-radius);
+}
+
 
 .screen-row {
     margin: 10px 0;
