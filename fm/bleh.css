@@ -4451,6 +4451,12 @@ the body text becomes bigger by default - this reverts that */
 .shout-body {
     font-size: var(--font-size) !important;
     line-height: var(--line-height) !important;
+    /* line breaks */
+    p {
+        max-height: 300px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
 }
 
 
