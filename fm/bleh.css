@@ -11176,6 +11176,16 @@ input[type="range"]::-moz-range-thumb {
 }
 
 
+/*     MENTION     */
+:is(.shout-body, .about-me-sidebar) a[href^="/user/"] {
+    padding: 0 4px;
+    background-color: hsla(var(--h4), 20%);
+    border-radius: var(--item-small-radius);
+    font-weight: var(--font-weight-medium);
+    text-decoration: none;
+}
+
+
 
 
 /*     SMALLER RESOLUTIONS     */

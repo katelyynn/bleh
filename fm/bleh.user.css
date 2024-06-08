@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           bleh (dev)
 @namespace      github.com/katelyynn/bleh
-@version        2024.06071
+@version        2024.0608
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.css
@@ -11183,6 +11183,16 @@ input[type="range"]::-moz-range-thumb {
         color: hsl(var(--c3));
         margin: unset !important;
     }
+}
+
+
+/*     MENTION     */
+:is(.shout-body, .about-me-sidebar) a[href^="/user/"] {
+    padding: 0 4px;
+    background-color: hsla(var(--h4), 20%);
+    border-radius: var(--item-small-radius);
+    font-weight: var(--font-weight-medium);
+    text-decoration: none;
 }
 
 
