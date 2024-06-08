@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         bleh
 // @namespace    http://last.fm/
-// @version      2024.0607.1
+// @version      2024.0607.2
 // @description  bleh!!! ^-^
 // @author       kate
 // @match        https://www.last.fm/*
@@ -9,9 +9,10 @@
 // @grant        GM_addStyle
 // @updateURL    https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.js
 // @downloadURL  https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.js
+// @run-at       document-body
 // ==/UserScript==
 
-let version = '2024.0607.1';
+let version = '2024.0607.2';
 
 let profile_badges = {
     'cutensilly': {
