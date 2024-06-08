@@ -476,6 +476,36 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 }
             }
         }
+
+        let about_me_sidebar = element.querySelector('.about-me-sidebar p');
+        if (!about_me_sidebar.hasAttribute('data-kate-processed')) {
+            about_me_sidebar.setAttribute('data-kate-processed','true');
+
+            let about_me_text = about_me_sidebar.textContent;
+            let converter = new showdown.Converter({
+                emoji: true,
+                excludeTrailingPunctuationFromURLs: true,
+                ghMentions: true,
+                ghMentionsLink: '/user/{u}',
+                headerLevelStart: 5,
+                noHeaderId: true,
+                openLinksInNewWindow: true,
+                requireSpaceBeforeHeadingText: true,
+                simpleLineBreaks: true,
+                simplifiedAutoLink: true,
+                strikethrough: true,
+                underline: true,
+                ghCodeBlocks: false,
+                smartIndentationFix: true
+            });
+            let parsed_body = converter.makeHtml(about_me_text
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#039;'));
+            about_me_sidebar.innerHTML = parsed_body;
+        }
         } catch(e) {}
     }
 
