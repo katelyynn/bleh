@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         bleh
 // @namespace    http://last.fm/
-// @version      2024.0608
+// @version      2024.0608.1
 // @description  bleh!!! ^-^
 // @author       kate
 // @match        https://www.last.fm/*
@@ -13,7 +13,7 @@
 // @require      https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js
 // ==/UserScript==
 
-let version = '2024.0608';
+let version = '2024.0608.1';
 
 let profile_badges = {
     'cutensilly': {
@@ -204,6 +204,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         } else {
             patch_profile(document.body);
             patch_shouts(document.body);
+            patch_lastfm_settings(document.body);
         }
 
         // last.fm is a single page application
@@ -223,6 +224,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                             } else {
                                 patch_profile(document.body);
                                 patch_shouts(document.body);
+                                patch_lastfm_settings(document.body);
                             }
                         }
                     }
@@ -422,6 +424,55 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
         // save to settings
         localStorage.setItem('bleh', JSON.stringify(settings));
+    }
+
+
+    // patch last.fm settings
+    function patch_lastfm_settings(element) {
+        try {
+        let about_me_box = document.getElementById('id_about_me');
+
+        if (!about_me_box.hasAttribute('data-kate-processed')) {
+            about_me_box.setAttribute('data-kate-processed','true');
+            about_me_box.setAttribute('oninput','_update_about_me_preview(this.value)');
+
+            let about_me_preview = document.createElement('span');
+            about_me_preview.classList.add('bleh--about-me-preview');
+            about_me_preview.setAttribute('id','about_me_preview');
+            about_me_box.after(about_me_preview);
+
+            update_about_me_preview(about_me_box.value);
+        }
+        } catch(e) {console.error(e)}
+    }
+
+    unsafeWindow._update_about_me_preview = function(value) {
+        update_about_me_preview(value);
+    }
+    function update_about_me_preview(value) {
+        let converter = new showdown.Converter({
+            emoji: true,
+            excludeTrailingPunctuationFromURLs: true,
+            ghMentions: true,
+            ghMentionsLink: '/user/{u}',
+            headerLevelStart: 5,
+            noHeaderId: true,
+            openLinksInNewWindow: true,
+            requireSpaceBeforeHeadingText: true,
+            simpleLineBreaks: true,
+            simplifiedAutoLink: true,
+            strikethrough: true,
+            underline: true,
+            ghCodeBlocks: false,
+            smartIndentationFix: true
+        });
+        let parsed_body = converter.makeHtml(value
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;'));
+        document.getElementById('about_me_preview').innerHTML = parsed_body;
     }
 
 

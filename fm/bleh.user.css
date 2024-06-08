@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           bleh (dev)
 @namespace      github.com/katelyynn/bleh
-@version        2024.0608
+@version        2024.06081
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.css
@@ -1290,7 +1290,6 @@ body[class*="namespace--user_library_"] .col-sidebar, .library-header,
 .wiki-history,
 /* error 500 */ .container:has(#marvin),
 /* error 404 */ .row:has(.error-page-marvin),
-/* bleh customiser ad in settings */ .namespace--settings_overview .page-content > .row:after,
 .profile-mobile-featured-track,
 .library-header + .metadata-list, .library-header + .library-track-metadata,
 .library-top,
@@ -5907,7 +5906,7 @@ textarea::placeholder {
     /* align with control-label */
     padding-top: 7px;
 }
-:is(.form-group--about_me, .form-group--timezone, .form-group--current_username, .form-group--password, #playback > .form-horizontal, #email-settings > .form-horizontal) .form-group-controls {
+:is(.form-group--timezone, .form-group--current_username, .form-group--password, #playback > .form-horizontal, #email-settings > .form-horizontal) .form-group-controls {
     display: block !important;
 }
 
@@ -8148,8 +8147,22 @@ table.table tr:nth-child(2n) td {
 }
 
 
+[for="id_about_me"] + .form-group-controls {
+    display: flex !important;
+    gap: var(--card-gap);
+    width: calc((380px * 2) + var(--card-gap)) !important;
+
+    .form-row-help-text {
+        display: none;
+    }
+}
 #id_about_me + div:after {
     content: ' This textbox will not match the appearance on your profile.';
+}
+
+#id_about_me,
+.bleh--about-me-preview {
+    width: 380px;
 }
 
 
@@ -9573,18 +9586,6 @@ hr {
 }*/
 .form-control-description :is(p, li) {
     color: hsl(var(--c3));
-}
-
-
-/*     BLEH CUSTOMISER     */
-.namespace--settings_overview .page-content > .row:after {
-    content: 'Your install of bleh can be configured using the\atheme customiser linked below:\a\a' 'cutensilly.org/bleh/fm/customise';
-    white-space: pre;
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: var(--cards-sidebar-width);
-    overflow: hidden;
 }
 
 
@@ -11187,7 +11188,7 @@ input[type="range"]::-moz-range-thumb {
 
 
 /*     MENTION     */
-:is(.shout-body, .about-me-sidebar) a[href^="/user/"] {
+:is(.shout-body, .about-me-sidebar, .bleh--about-me-preview) a[href^="/user/"] {
     padding: 0 4px;
     background-color: hsla(var(--h4), 20%);
     border-radius: var(--item-small-radius);
