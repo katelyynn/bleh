@@ -443,7 +443,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
             update_about_me_preview(about_me_box.value);
         }
-        } catch(e) {console.error(e)}
+        } catch(e) {}
     }
 
     unsafeWindow._update_about_me_preview = function(value) {
