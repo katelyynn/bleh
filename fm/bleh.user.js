@@ -517,7 +517,12 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     ghCodeBlocks: false,
                     smartIndentationFix: true
                 });
-                let parsed_body = converter.makeHtml(shout_body.textContent);
+                let parsed_body = converter.makeHtml(shout_body.textContent
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;'));
                 console.log(shout_body.textContent, parsed_body);
                 shout_body.innerHTML = parsed_body;
 
