@@ -4466,6 +4466,10 @@ the body text becomes bigger by default - this reverts that */
         max-height: 300px;
         overflow: hidden;
         text-overflow: ellipsis;
+
+        em {
+            color: hsla(var(--c2), 70%);
+        }
     }
 }
 
