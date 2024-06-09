@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         bleh
 // @namespace    http://last.fm/
-// @version      2024.0608.1
+// @version      2024.0609
 // @description  bleh!!! ^-^
 // @author       kate
 // @match        https://www.last.fm/*
@@ -13,7 +13,7 @@
 // @require      https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js
 // ==/UserScript==
 
-let version = '2024.0608.1';
+let version = '2024.0609';
 
 let profile_badges = {
     'cutensilly': {
@@ -85,7 +85,9 @@ let settings_template = {
     dev: 0,
     hide_hateful: true,
     accessible_name_colours: false,
-    underline_links: false
+    underline_links: false,
+    big_numbers: false,
+    format_guest_features: true
 };
 let settings_base = {
     hue: {
@@ -159,8 +161,66 @@ let settings_base = {
         value: false,
         values: [true, false],
         type: 'toggle'
+    },
+    big_numbers: {
+        css: 'big_numbers',
+        unit: '',
+        value: false,
+        values: [true, false],
+        type: 'toggle'
+    },
+    format_guest_features: {
+        css: 'format_guest_features',
+        unit: '',
+        value: true,
+        values: [true, false],
+        type: 'toggle'
     }
-}
+};
+
+let includes = [
+    // featuring
+    '(feat', '[feat',
+    '(with', '[with',
+    '(ft', '[ft', 'ft.',
+    'w/ ',
+    // tv
+    '(taylor',
+    // mixes / demos
+    '(devonshire mix', '- devonshire mix',
+    '(remaster', '- remaster',
+    '(remix', '- remix',
+    '(live', '- live',
+    '(demo', '- demo', '[demo', '[sample clearance demo',
+    '(rehearsal demo', '- rehearsal demo',
+    '(home demo', '- home demo',
+    '(solo acoustic', '- solo acoustic',
+    '(acoustic', '- acoustic',
+    '(alternative', '- alternative',
+    '(mix 1', '(mix 2', '(mix 3', '(mix 4', '(mix 5', '(mix 6', '(mix 7', '(mix 8', '(mix 9',
+    '- spotify singles',
+    '(acapella', '(instrumental', '- acapella', '- instrumental',
+    '(choppednotslopped', '- choppednotslopped',
+    '(skit', '- skit',
+    '(extended', '- extended',
+    '- 1992/live', '(boombox', '- boombox', '(mtv unplugged', '- mtv unplugged',
+    '(from the vault)',
+    // bonus!
+    '(bonus', '- bonus',
+    '(nevermind version', '- nevermind version', '(blew ep version', '- blew ep version',
+    '(b-side', '(c-side', '- b-side', '- c-side',
+    '(deluxe', '- deluxe', '(digital deluxe', '(complete edition', '(extended edition',
+    '(anniversary',
+    '(sessions', '(studio session',
+    '(lp', '(ep', '- lp', '- ep',
+    '(19', '- 19', '(20', '- 20',
+    '(original', '- original',
+    '(kate', // :3
+    '(smart session', '- smart session', '[smart session',
+    '- ep','- single',
+    '[clean]',
+    '(outro', '- outro'
+];
 
 
 let redacted = [
@@ -205,6 +265,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             patch_profile(document.body);
             patch_shouts(document.body);
             patch_lastfm_settings(document.body);
+            patch_titles(document.body);
+            patch_header_title(document.body);
         }
 
         // last.fm is a single page application
@@ -225,6 +287,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                                 patch_profile(document.body);
                                 patch_shouts(document.body);
                                 patch_lastfm_settings(document.body);
+                                patch_titles(document.body);
+                                patch_header_title(document.body);
                             }
                         }
                     }
@@ -1014,7 +1078,68 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     </div>
                     <div class="sep"></div>
                     <div class="inner-preview pad flex">
-                        <section class="catalogue-tags ">
+                        <table class="chartlist chartlist--with-index chartlist--with-index--length-2 chartlist--with-image chartlist--with-play chartlist--with-artist chartlist--with-bar">
+                            <tbody>
+                                <tr class="chartlist-row chartlist-row--with-artist">
+                                    <td class="chartlist-index">
+                                        1
+                                    </td>
+                                    <td class="chartlist-image">
+                                        <span class="cover-art">
+                                            <img src="https://lastfm.freetls.fastly.net/i/u/64s/c15d3ed1bd8574260f9378e26847501d.jpg" alt="fractions of infinity" loading="lazy">
+                                        </span>
+                                    </td>
+                                    <td class="chartlist-name">
+                                        <a href="/music/Quadeca/_/fractions+of+infinity" title="fractions of infinity" class="bleh--chartlist-name-without-features">fractions of infinity (feat. Sunday Service Choir)</a>
+                                        <a href="/music/Quadeca/_/fractions+of+infinity" title="fractions of infinity" class="bleh--chartlist-name-with-features">
+                                            <span class="title">fractions of infinity</span>
+                                            <span class="feat">feat. Sunday Service Choir</span>
+                                        </a>
+                                    </td>
+                                    <td class="chartlist-artist">
+                                        <a href="/music/Quadeca" title="Quadeca">Quadeca</a>
+                                    </td>
+                                    <td class="chartlist-bar">
+                                        <span class="chartlist-count-bar">
+                                            <span class="chartlist-count-bar-link">
+                                                <span class="chartlist-count-bar-slug" style="width:100.0%;"></span>
+                                                <span class="chartlist-count-bar-value">
+                                                    104,321
+                                                </span>
+                                            </span>
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="toggle-container" id="container-format_guest_features">
+                        <button class="btn reset" onclick="_reset_item('format_guest_features')">Reset to default</button>
+                        <div class="heading">
+                            <h5>Format guest features and song tags</h5>
+                            <p>Visually places less priority on song features & tags (eg. Remix, Deluxe Edition, etc.)</p>
+                        </div>
+                        <div class="toggle-wrap">
+                            <button class="toggle" id="toggle-format_guest_features" onclick="_update_item('format_guest_features')" aria-checked="true">
+                                <div class="dot"></div>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="toggle-container" id="container-big_numbers">
+                        <button class="btn reset" onclick="_reset_item('big_numbers')">Reset to default</button>
+                        <div class="heading">
+                            <h5>Use alternative numerical font</h5>
+                            <p>A special font solely for numbers, check it out!</p>
+                        </div>
+                        <div class="toggle-wrap">
+                            <button class="toggle" id="toggle-big_numbers" onclick="_update_item('big_numbers')" aria-checked="true">
+                                <div class="dot"></div>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="sep"></div>
+                    <div class="inner-preview pad flex">
+                        <section class="catalogue-tags">
                             <ul class="tags-list tags-list--global">
                                 <li class="tag">
                                     <a href="/tag/pop">pop</a>
@@ -1568,6 +1693,106 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     unsafeWindow._export_first = function() {
         kill_window('reset_settings');
         export_settings();
+    }
+
+
+
+
+    // feat.
+    function name_includes(original_title) {
+        let lowercase_title = original_title.toLowerCase();
+        let extras = [];
+        let formatted_title = original_title;
+
+        for (let include in includes)
+            if (lowercase_title.includes(includes[include])) {
+                let chr = lowercase_title.indexOf(`${includes[include]}`);
+
+                extras.push({
+                    type: includes[include],
+                    chr: chr
+                });
+            }
+
+        extras.sort((a, b) => a.chr - b.chr);
+
+        for (let extra in extras) {
+            formatted_title = original_title.slice(0, (extras[extra].chr - 1));
+            break;
+        }
+
+        for (let extra in extras) {
+            if ((parseInt(extra) + 1) < extras.length) {
+                let chr = extras[extra].chr;
+                let next_chr = extras[parseInt(extra) + 1].chr;
+
+                extras[extra].text = original_title.slice(chr, (next_chr - 1)).replaceAll('(','').replaceAll(')','').replaceAll('[','').replaceAll(']','').replaceAll('- ','');
+            } else {
+                let chr = extras[extra].chr;
+                extras[extra].text = original_title.slice(chr).replaceAll('(','').replaceAll(')','').replaceAll('[','').replaceAll(']','').replaceAll('- ','');
+            }
+        }
+
+        if (extras.length > 0)
+            return [formatted_title, extras];
+        else
+            return [formatted_title,[]];
+    }
+
+
+    function patch_titles(element) {
+        let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
+
+        if (settings.format_guest_features) {
+            try {
+            let track_titles = element.querySelectorAll('.chartlist-name a');
+
+            track_titles.forEach((track_title) => {
+                if (!track_title.hasAttribute('data-kate-processed')) {
+                    track_title.setAttribute('data-kate-processed','true');
+
+                    let formatted_title = name_includes(track_title.textContent);
+                    let song_title = formatted_title[0];
+                    let song_tags = formatted_title[1];
+
+                    // parse tags into text
+                    let song_tags_text = '';
+                    for (let song_tag in song_tags) {
+                        song_tags_text = `${song_tags_text}<div class="feat" data-bleh--tag-type="${song_tags[song_tag].type}">${song_tags[song_tag].text}</div>`;
+                    }
+
+                    // combine
+                    track_title.innerHTML = `<div class="title">${song_title}</div>${song_tags_text}`;
+                }
+            });
+            } catch(e) {}
+        }
+    }
+
+    function patch_header_title(element) {
+        let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
+
+        if (settings.format_guest_features) {
+            try {
+            let track_title = element.querySelector('.header-new-title');
+            if (!track_title.hasAttribute('data-kate-processed')) {
+                track_title.setAttribute('data-kate-processed','true');
+
+                let formatted_title = name_includes(track_title.textContent);
+                let song_title = formatted_title[0];
+                let song_tags = formatted_title[1];
+
+                // parse tags into text
+                let song_tags_text = '';
+                for (let song_tag in song_tags) {
+                    song_tags_text = `${song_tags_text}<div class="feat" data-bleh--tag-type="${song_tags[song_tag].type}">${song_tags[song_tag].text}</div>`;
+                }
+
+                // combine
+                track_title.innerHTML = `<div class="title">${song_title}</div>${song_tags_text}`;
+            }
+            } catch(e) {}
+        }
     }
 
 

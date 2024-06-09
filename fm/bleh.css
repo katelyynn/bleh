@@ -3,6 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu+Sans:ital,wght@0,100..800;1,100..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap');
 
 body {
     --hue: var(--new-hue, var(--base-hue, 255));
@@ -2700,18 +2701,21 @@ header:is(.header-new--album, .header-new--track) .header-new-background-overlay
     line-height: 34px;
     font-weight: var(--font-weight-bold);
     margin-top: unset;
+    margin-right: unset !important;
     order: -1;
     width: fit-content;
     color: hsl(var(--c1));
     /*--mask: linear-gradient(90deg, rgba(255,255,255,1) 93%, rgba(255,255,255,0) 100%);
     mask-image: var(--mask);
     -webkit-mask-image: var(--mask);*/
-}
-.header-new-title .inner {
     display: inline-flex;
     gap: 0 10px;
     align-items: baseline;
     flex-wrap: wrap;
+
+    .title, .feat {
+        width: fit-content;
+    }
 }
 .header-new-title .feat {
     color: hsla(var(--c1), 0.8);
@@ -2722,8 +2726,9 @@ header:is(.header-new--album, .header-new--track) .header-new-background-overlay
 
 .header-new-on-tour {
     width: fit-content;
-    display: inline-block !important;
+    display: none !important;
     top: -8px !important;
+    /* appears weird */
 }
 
 span[itemprop="byArtist"] .header-new-crumb {
@@ -11184,6 +11189,26 @@ input[type="range"]::-moz-range-thumb {
     border-radius: var(--item-small-radius);
     font-weight: var(--font-weight-medium);
     text-decoration: none;
+}
+
+
+[data-bleh--big_numbers="true"] {
+    .chartlist-count-bar-value {
+        font-family: Zen Dots, var(--font);
+        font-weight: 400;
+        font-size: 12px;
+    }
+}
+
+[data-bleh--format_guest_features="true"] {
+    .bleh--chartlist-name-without-features {
+        display: none;
+    }
+}
+[data-bleh--format_guest_features="false"] {
+    .bleh--chartlist-name-with-features {
+        display: none;
+    }
 }
 
 
