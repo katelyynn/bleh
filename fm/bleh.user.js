@@ -11,6 +11,7 @@
 // @downloadURL  https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.js
 // @run-at       document-body
 // @require      https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js
+// @resource bleh_theme https://katelyynn.github.io/bleh/fm/bleh.css
 // ==/UserScript==
 
 let version = '2024.0609';
@@ -303,19 +304,48 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     }
 
     function append_style() {
-        let connect = document.createElement('link');
-        connect.setAttribute('rel','preconnect');
-        connect.setAttribute('href','https://katelyynn.github.io/');
-        document.head.appendChild(connect);
+        let cached_style = localStorage.getItem('bleh_cached_style') || '';
+        if (cached_style == '') {
+            // style has never been cached
+            let style = document.createElement('link');
+            style.setAttribute('rel','stylesheet');
+            style.setAttribute('href','https://katelyynn.github.io/bleh/fm/bleh.css');
+            document.documentElement.appendChild(style);
 
-        let style = document.createElement('link');
-        style.setAttribute('rel','stylesheet');
-        style.setAttribute('href','https://katelyynn.github.io/bleh/fm/bleh.css');
-        document.documentElement.appendChild(style);
+            let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
+            if (settings.dev == 1) {
+                document.documentElement.removeChild(style);
+            } else {
+                // set cached style and timeout
+                fetch_new_style();
+            }
+        } else {
+            // style is currently cached, load that first
+            // ensures no flashing missing styles hopefully
+            let style_cache = document.createElement('style');
+            style_cache.textContent = cached_style;
+            document.documentElement.appendChild(style_cache);
 
-        let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
-        if (settings.dev == 1)
-            document.documentElement.removeChild(style);
+            // now, analyse if we should fetch a new one
+            check_if_style_cache_is_valid();
+        }
+    }
+
+    function check_if_style_cache_is_valid() {
+        let cached_style_timeout = localStorage.getItem('bleh_cached_style_timeout');
+
+        // todo: check if timeout has expired
+        // todo: if so, make a new webrequest with fetch_new_style();
+        // todo: then once the style is loaded into dom, delete old style previously loaded
+
+        // todo: if not, all is fine
+    }
+
+    function fetch_new_style() {
+        // todo: make webrequest to get css text itself, so we can cache and store lol
+        localStorage.setItem('bleh_cached_style','');
+        // todo: set timeout
+        localStorage.setItem('bleh_cached_style_timeout','');
     }
 
     function patch_masthead(element) {
