@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         bleh
 // @namespace    http://last.fm/
-// @version      2024.0609
+// @version      2024.0610
 // @description  bleh!!! ^-^
 // @author       kate
 // @match        https://www.last.fm/*
@@ -13,7 +13,7 @@
 // @require      https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js
 // ==/UserScript==
 
-let version = '2024.0609';
+let version = '2024.0610';
 
 let profile_badges = {
     'cutensilly': {
@@ -334,7 +334,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
     function append_nav(element) {
         let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
-        let user_nav = element.querySelectorAll('.auth-dropdown-menu li')[0];
+        let user_nav = element.querySelectorAll('.auth-dropdown-menu > li')[0];
+        let inbox_nav = element.querySelectorAll('.auth-dropdown-menu > li')[2];
 
         if (!user_nav.hasAttribute('data-kate-processed')) {
             user_nav.setAttribute('data-kate-processed','true');
@@ -384,9 +385,25 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     </li>
                     `);
             }
+            user_nav.appendChild(bleh_nav);
+        }
 
+        if (!inbox_nav.hasAttribute('data-kate-processed')) {
+            inbox_nav.setAttribute('data-kate-processed','true');
+            let profile_link = user_nav.querySelector('a').getAttribute('href');
 
-            user_nav.insertAdjacentElement('beforeend', bleh_nav);
+            let extra_nav = document.createElement('li');
+            extra_nav.innerHTML = (`
+                <li>
+                    <a class="auth-dropdown-menu-item bleh--shouts-menu-item" href="${profile_link}/shoutbox">
+                        <span class="auth-dropdown-item-row">
+                            <span class="auth-dropdown-item-left">Shouts</span>
+                        </span>
+                    </a>
+                </li>
+                `);
+
+            inbox_nav.appendChild(extra_nav);
         }
     }
 

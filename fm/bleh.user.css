@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           bleh (dev)
 @namespace      github.com/katelyynn/bleh
-@version        2024.0609
+@version        2024.0610
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.css
@@ -5697,6 +5697,9 @@ very, very, very dated - who looks up a song on ebay? */
 }
 .bleh--dev-menu-item {
     --mask: var(--icon-16-dev);
+}
+.bleh--shouts-menu-item {
+    --mask: var(--icon-16-shoutbox);
 }
 
 
