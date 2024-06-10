@@ -317,11 +317,17 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         } else {
             // style is currently cached, load that first
             // ensures no flashing missing styles hopefully
-            load_cached_style();
+            load_cached_style(cached_style);
 
             // now, analyse if we should fetch a new one
             check_if_style_cache_is_valid();
         }
+    }
+
+    function load_cached_style(cached_style) {
+        let style_cache = document.createElement('style');
+        style_cache.textContent = cached_style;
+        document.documentElement.appendChild(style_cache);
     }
 
     function check_if_style_cache_is_valid() {
@@ -332,13 +338,6 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         // todo: then once the style is loaded into dom, delete old style previously loaded
 
         // todo: if not, all is fine
-    }
-
-    function load_cached_style() {
-        // todo: this will change
-        let style_cache = document.createElement('style');
-        style_cache.textContent = cached_style;
-        document.documentElement.appendChild(style_cache);
     }
 
     function fetch_new_style() {
