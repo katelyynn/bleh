@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         bleh
 // @namespace    http://last.fm/
-// @version      2024.0610
+// @version      2024.0611
 // @description  bleh!!! ^-^
 // @author       kate
 // @match        https://www.last.fm/*
@@ -13,7 +13,79 @@
 // @require      https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js
 // ==/UserScript==
 
-let version = '2024.0610';
+let version = '2024.0611';
+
+let song_title_corrections = {
+    'Quadeca': {
+        'BORN YESTERDAY': 'born yesterday',
+        'Tell Me A Joke': 'tell me a joke',
+        'Gone Gone': 'gone gone',
+        'Guess Who?': 'GUESS WHO?',
+        'UNDER My Skin': 'UNDER MY SKIN',
+        'being yourself': 'BEING YOURSELF',
+        'I Make It Look Effortless': 'I MAKE IT LOOK EFFORTLESS',
+        'Scrapyard': 'SCRAPYARD',
+        'i didn\'t mean to haunt you': 'I Didn\'t Mean To Haunt You'
+    },
+    'yeule': {
+        'Sulky Baby': 'sulky baby'
+    },
+    'brakence': {
+        'Drank 3 of My Parents\' Craft Beers To Make Eye Contact With You (feat. Login)': 'drank 3 of my parents\' craft beers to make eye contact with you (feat. login)',
+        'tonight\'s no good how about wednesday oh you\'re in dallas on wednesday oh ok well then let\'s just not see each other for 8 months and It doesn\'t matter at all': 'tonight\'s no good how about wednesday oh you\'re in dallas on wednesday oh ok well then let\'s just not see each other for 8 months and it doesn\'t matter at all',
+        'Introvert': 'introvert',
+        'Hypochondriac (Demo)': 'hypochondriac (demo)'
+    },
+    'Young Thug': {
+        'Pick up the Phone': 'pick up the phone'
+    }
+};
+
+let includes = [
+    // featuring
+    '(feat', '[feat',
+    '(with', '[with',
+    '(ft', '[ft', 'ft.',
+    'w/ ',
+    // tv
+    '(taylor',
+    // mixes / demos
+    '(devonshire mix', '- devonshire mix',
+    '(remaster', '- remaster',
+    '(remix', '- remix',
+    '(live', '- live',
+    '(demo', '- demo', '[demo', '[sample clearance demo',
+    '(rehearsal demo', '- rehearsal demo',
+    '(home demo', '- home demo',
+    '(solo acoustic', '- solo acoustic',
+    '(acoustic', '- acoustic',
+    '(alternative', '- alternative',
+    '(mix 1', '(mix 2', '(mix 3', '(mix 4', '(mix 5', '(mix 6', '(mix 7', '(mix 8', '(mix 9',
+    '- spotify singles',
+    '(acapella', '(instrumental', '- acapella', '- instrumental',
+    '(choppednotslopped', '- choppednotslopped',
+    '(skit', '- skit',
+    '(extended', '- extended',
+    '- 1992/live', '(boombox', '- boombox', '(mtv unplugged', '- mtv unplugged',
+    '(from the vault)',
+    '(edit', '- edit',
+    '(from', '- from',
+    // bonus!
+    '(bonus', '- bonus',
+    '(nevermind version', '- nevermind version', '(blew ep version', '- blew ep version',
+    '(b-side', '(c-side', '- b-side', '- c-side',
+    '(deluxe', '- deluxe', '(digital deluxe', '(complete edition', '(extended edition',
+    '(anniversary',
+    '(sessions', '(studio session',
+    '(lp', '(ep', '- lp', '- ep',
+    '(19', '- 19', '(20', '- 20',
+    '(original', '- original',
+    '(kate', // :3
+    '(smart session', '- smart session', '[smart session',
+    '- ep','- single',
+    '[clean]',
+    '(outro', '- outro'
+];
 
 let profile_badges = {
     'cutensilly': {
@@ -177,50 +249,6 @@ let settings_base = {
         type: 'toggle'
     }
 };
-
-let includes = [
-    // featuring
-    '(feat', '[feat',
-    '(with', '[with',
-    '(ft', '[ft', 'ft.',
-    'w/ ',
-    // tv
-    '(taylor',
-    // mixes / demos
-    '(devonshire mix', '- devonshire mix',
-    '(remaster', '- remaster',
-    '(remix', '- remix',
-    '(live', '- live',
-    '(demo', '- demo', '[demo', '[sample clearance demo',
-    '(rehearsal demo', '- rehearsal demo',
-    '(home demo', '- home demo',
-    '(solo acoustic', '- solo acoustic',
-    '(acoustic', '- acoustic',
-    '(alternative', '- alternative',
-    '(mix 1', '(mix 2', '(mix 3', '(mix 4', '(mix 5', '(mix 6', '(mix 7', '(mix 8', '(mix 9',
-    '- spotify singles',
-    '(acapella', '(instrumental', '- acapella', '- instrumental',
-    '(choppednotslopped', '- choppednotslopped',
-    '(skit', '- skit',
-    '(extended', '- extended',
-    '- 1992/live', '(boombox', '- boombox', '(mtv unplugged', '- mtv unplugged',
-    '(from the vault)',
-    // bonus!
-    '(bonus', '- bonus',
-    '(nevermind version', '- nevermind version', '(blew ep version', '- blew ep version',
-    '(b-side', '(c-side', '- b-side', '- c-side',
-    '(deluxe', '- deluxe', '(digital deluxe', '(complete edition', '(extended edition',
-    '(anniversary',
-    '(sessions', '(studio session',
-    '(lp', '(ep', '- lp', '- ep',
-    '(19', '- 19', '(20', '- 20',
-    '(original', '- original',
-    '(kate', // :3
-    '(smart session', '- smart session', '[smart session',
-    '- ep','- single',
-    '[clean]',
-    '(outro', '- outro'
-];
 
 
 let redacted = [
@@ -1720,12 +1748,21 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
 
     // feat.
-    function name_includes(original_title) {
-        let lowercase_title = original_title.toLowerCase();
-        let extras = [];
+    function name_includes(original_title, original_artist) {
+        console.log(original_title, original_artist);
         let formatted_title = original_title;
 
-        for (let include in includes)
+        try {
+        if (song_title_corrections[original_artist][formatted_title] != undefined)
+            formatted_title = song_title_corrections[original_artist][formatted_title];
+        } catch(e) {}
+
+        let lowercase_title = formatted_title.toLowerCase();
+        let extras = [];
+
+        console.log(formatted_title, lowercase_title);
+
+        for (let include in includes) {
             if (lowercase_title.includes(includes[include])) {
                 let chr = lowercase_title.indexOf(`${includes[include]}`);
 
@@ -1734,14 +1771,16 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     chr: chr
                 });
             }
+        }
 
         extras.sort((a, b) => a.chr - b.chr);
 
         for (let extra in extras) {
-            formatted_title = original_title.slice(0, (extras[extra].chr - 1));
+            formatted_title = formatted_title.slice(0, (extras[extra].chr - 1));
             break;
         }
 
+        console.log(extras);
         for (let extra in extras) {
             if ((parseInt(extra) + 1) < extras.length) {
                 let chr = extras[extra].chr;
@@ -1755,9 +1794,9 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         }
 
         if (extras.length > 0)
-            return [formatted_title, extras];
+            return [formatted_title, extras, original_artist];
         else
-            return [formatted_title,[]];
+            return [formatted_title, [], original_artist];
     }
 
 
@@ -1772,7 +1811,9 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 if (!track_title.hasAttribute('data-kate-processed')) {
                     track_title.setAttribute('data-kate-processed','true');
 
-                    let formatted_title = name_includes(track_title.textContent);
+                    let track_artist = track_title.getAttribute('href').split('/')[2].replaceAll('+',' ');
+
+                    let formatted_title = name_includes(track_title.textContent, track_artist);
                     let song_title = formatted_title[0];
                     let song_tags = formatted_title[1];
 
@@ -1786,7 +1827,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     track_title.innerHTML = `<div class="title">${song_title}</div>${song_tags_text}`;
                 }
             });
-            } catch(e) {}
+            } catch(e) {console.error('AA',e)}
         }
     }
 
@@ -1796,10 +1837,11 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         if (settings.format_guest_features) {
             try {
             let track_title = element.querySelector('.header-new-title');
+            let track_artist = element.querySelector('.header-new-crumb span');
             if (!track_title.hasAttribute('data-kate-processed')) {
                 track_title.setAttribute('data-kate-processed','true');
 
-                let formatted_title = name_includes(track_title.textContent);
+                let formatted_title = name_includes(track_title.textContent, track_artist.textContent);
                 let song_title = formatted_title[0];
                 let song_tags = formatted_title[1];
 
