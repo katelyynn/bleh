@@ -6,12 +6,11 @@
 // @author       kate
 // @match        https://www.last.fm/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=last.fm
-// @grant        GM_getResourceText
+// @grant        GM_addStyle
 // @updateURL    https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.js
 // @downloadURL  https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.js
 // @run-at       document-body
 // @require      https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js
-// @resource bleh_theme https://katelyynn.github.io/bleh/fm/bleh.css
 // ==/UserScript==
 
 let version = '2024.0609';
@@ -304,8 +303,14 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     }
 
     function append_style() {
-        let style = document.createElement('style');
-        style.textContent = GM_getResourceText('bleh_theme');
+        let connect = document.createElement('link');
+        connect.setAttribute('rel','preconnect');
+        connect.setAttribute('href','https://katelyynn.github.io/');
+        document.head.appendChild(connect);
+
+        let style = document.createElement('link');
+        style.setAttribute('rel','stylesheet');
+        style.setAttribute('href','https://katelyynn.github.io/bleh/fm/bleh.css');
         document.documentElement.appendChild(style);
 
         let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
