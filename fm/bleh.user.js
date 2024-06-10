@@ -82,7 +82,7 @@ let settings_template = {
     sat: 1,
     lit: 1,
     invert_interactable_colour: false,
-    dev: 0,
+    dev: false,
     hide_hateful: true,
     accessible_name_colours: false,
     underline_links: false,
@@ -314,7 +314,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         document.documentElement.appendChild(style);
 
         let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
-        if (settings.dev == 1)
+        if (settings.dev)
             document.documentElement.removeChild(style);
     }
 
@@ -404,6 +404,10 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         for (let setting in settings_template)
             if (settings[setting] == undefined)
                 settings[setting] = settings_template[setting];
+
+        // todo: remove
+        if (settings.dev == 1)
+            settings.dev = true;
 
         // save setting into body
         for (let setting in settings) {
