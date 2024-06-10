@@ -83,7 +83,7 @@ let settings_template = {
     sat: 1,
     lit: 1,
     invert_interactable_colour: false,
-    dev: 0,
+    dev: false,
     hide_hateful: true,
     accessible_name_colours: false,
     underline_links: false,
@@ -305,26 +305,19 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
     function append_style() {
         let cached_style = localStorage.getItem('bleh_cached_style') || '';
+        let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
+
+        // style is not fetched in dev mode
+        if (settings.dev)
+            return;
+
         if (cached_style == '') {
             // style has never been cached
-            let style = document.createElement('link');
-            style.setAttribute('rel','stylesheet');
-            style.setAttribute('href','https://katelyynn.github.io/bleh/fm/bleh.css');
-            document.documentElement.appendChild(style);
-
-            let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
-            if (settings.dev == 1) {
-                document.documentElement.removeChild(style);
-            } else {
-                // set cached style and timeout
-                fetch_new_style();
-            }
+            fetch_new_style();
         } else {
             // style is currently cached, load that first
             // ensures no flashing missing styles hopefully
-            let style_cache = document.createElement('style');
-            style_cache.textContent = cached_style;
-            document.documentElement.appendChild(style_cache);
+            load_cached_style();
 
             // now, analyse if we should fetch a new one
             check_if_style_cache_is_valid();
@@ -339,6 +332,13 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         // todo: then once the style is loaded into dom, delete old style previously loaded
 
         // todo: if not, all is fine
+    }
+
+    function load_cached_style() {
+        // todo: this will change
+        let style_cache = document.createElement('style');
+        style_cache.textContent = cached_style;
+        document.documentElement.appendChild(style_cache);
     }
 
     function fetch_new_style() {
@@ -465,10 +465,10 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
         let value = settings[setting];
 
-        if (value == 0)
-            value = 1;
+        if (value == false)
+            value = true;
         else
-            value = 0;
+            value = false;
 
         // save value
         settings[setting] = value;
