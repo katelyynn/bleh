@@ -3968,7 +3968,7 @@ better than the default selector '#app a' i suppose */
 
 .chartlist-now-scrobbling:before {
     background: currentColor !important;
-    --mask: url('nowplaying.gif');
+    --mask: url('https://cutensilly.org/img/nowplaying.gif');
     mask-image: var(--mask);
     -webkit-mask-image: var(--mask);
     image-rendering: pixelated;
