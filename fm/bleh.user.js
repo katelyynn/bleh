@@ -1785,6 +1785,9 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             break;
         }
 
+        // find song guests
+        let song_guests = [];
+
         console.log(extras);
         for (let extra in extras) {
             if ((parseInt(extra) + 1) < extras.length) {
@@ -1796,12 +1799,22 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 let chr = extras[extra].chr;
                 extras[extra].text = original_title.slice(chr).replaceAll('(','').replaceAll(')','').replaceAll('[','').replaceAll(']','').replaceAll('- ','');
             }
+
+
+            let field_type = extras[extra].type;
+            let field_text = extras[extra].text.replace('feat. ','').replace('w/ ','').replace('with ','').replaceAll(' & ',';').replaceAll(', ','; ').replaceAll('Tyler; the', 'Tyler, the').replaceAll(' with ',';');
+            if (field_type == '(feat' || field_type == '[feat' || field_type == '(with' || field_type == '[with' || field_type == 'w/ ') {
+                console.info('GUESTS', field_text.split(';'));
+                song_guests = field_text.split(';');
+            } else {
+                console.log('skipping');
+            }
         }
 
         if (extras.length > 0)
-            return [formatted_title, extras, original_artist];
+            return [formatted_title, extras, original_artist, song_guests];
         else
-            return [formatted_title, [], original_artist];
+            return [formatted_title, [], original_artist, song_guests];
     }
 
 
@@ -1810,12 +1823,13 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
         if (settings.format_guest_features) {
             try {
-            let track_titles = element.querySelectorAll('.chartlist-name a');
+            let tracks = element.querySelectorAll('.chartlist-row');
 
-            track_titles.forEach((track_title) => {
-                if (!track_title.hasAttribute('data-kate-processed')) {
-                    track_title.setAttribute('data-kate-processed','true');
+            tracks.forEach((track) => {
+                if (!track.hasAttribute('data-kate-processed')) {
+                    track.setAttribute('data-kate-processed','true');
 
+                    let track_title = track.querySelector('.chartlist-name a');
                     let track_artist = track_title.getAttribute('href').split('/')[2].replaceAll('+',' ');
 
                     let formatted_title = name_includes(track_title.textContent, track_artist);
@@ -1830,6 +1844,20 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
                     // combine
                     track_title.innerHTML = `<div class="title">${song_title}</div>${song_tags_text}`;
+
+                    try {
+                        let song_artist_element = track.querySelector('.chartlist-artist');
+
+                        let song_guests = formatted_title[3];
+                        for (let guest in song_guests) {
+                            let guest_element = document.createElement('a');
+                            guest_element.setAttribute('href',`/music/${song_guests[guest]}`);
+                            guest_element.setAttribute('title',song_guests[guest]);
+                            guest_element.textContent = song_guests[guest];
+
+                            song_artist_element.appendChild(guest_element);
+                        }
+                    } catch(e) {console.error(e)}
                 }
             });
             } catch(e) {console.error('AA',e)}

@@ -4045,6 +4045,19 @@ better than the default selector '#app a' i suppose */
     color: hsl(var(--c3));
 }
 
+
+.chartlist-artist {
+    display: flex !important;
+    gap: 4px;
+
+    a + a:before {
+        content: '&';
+        color: hsl(var(--c3)) !important;
+        margin-right: 4px;
+    }
+}
+
+
 .chartlist:not(.chartlist--with-image) .chartlist-row--with-artist .chartlist-name {
     margin-bottom: unset;
     width: 30%;
