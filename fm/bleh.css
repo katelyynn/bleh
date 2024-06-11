@@ -417,6 +417,7 @@ body {
     --icon-16-moon-star: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtbW9vbi1zdGFyIj48cGF0aCBkPSJNMTIgM2E2IDYgMCAwIDAgOSA5IDkgOSAwIDEgMS05LTkiLz48cGF0aCBkPSJNMjAgM3Y0Ii8+PHBhdGggZD0iTTIyIDVoLTQiLz48L3N2Zz4=');
     --icon-16-sun: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtc3VuIj48Y2lyY2xlIGN4PSIxMiIgY3k9IjEyIiByPSI0Ii8+PHBhdGggZD0iTTEyIDJ2MiIvPjxwYXRoIGQ9Ik0xMiAyMHYyIi8+PHBhdGggZD0ibTQuOTMgNC45MyAxLjQxIDEuNDEiLz48cGF0aCBkPSJtMTcuNjYgMTcuNjYgMS40MSAxLjQxIi8+PHBhdGggZD0iTTIgMTJoMiIvPjxwYXRoIGQ9Ik0yMCAxMmgyIi8+PHBhdGggZD0ibTYuMzQgMTcuNjYtMS40MSAxLjQxIi8+PHBhdGggZD0ibTE5LjA3IDQuOTMtMS40MSAxLjQxIi8+PC9zdmc+');
     --icon-16-issues: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtZ2l0LW1lcmdlIj48Y2lyY2xlIGN4PSIxOCIgY3k9IjE4IiByPSIzIi8+PGNpcmNsZSBjeD0iNiIgY3k9IjYiIHI9IjMiLz48cGF0aCBkPSJNNiAyMVY5YTkgOSAwIDAgMCA5IDkiLz48L3N2Zz4=');
+    --icon-16-note-add: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtZmlsZS1wbHVzLTIiPjxwYXRoIGQ9Ik00IDIyaDE0YTIgMiAwIDAgMCAyLTJWN2wtNS01SDZhMiAyIDAgMCAwLTIgMnY0Ii8+PHBhdGggZD0iTTE0IDJ2NGEyIDIgMCAwIDAgMiAyaDQiLz48cGF0aCBkPSJNMyAxNWg2Ii8+PHBhdGggZD0iTTYgMTJ2NiIvPjwvc3ZnPg==');
     --icon-16-dev: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtY29kZSI+PHBvbHlsaW5lIHBvaW50cz0iMTYgMTggMjIgMTIgMTYgNiIvPjxwb2x5bGluZSBwb2ludHM9IjggNiAyIDEyIDggMTgiLz48L3N2Zz4=');
 
     --icon-20-check: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImhzbCgyNTUsMjAlLDkwJSkiIHN0cm9rZS13aWR0aD0iMi4yNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1jaGVjayI+PHBhdGggZD0iTTIwIDYgOSAxN2wtNS01Ii8+PC9zdmc+');
@@ -2055,6 +2056,65 @@ elements, this is how we detect its missing */
 .about-me-sidebar p {
     max-width: 358px;
 }
+
+
+/*     ADD NOTE     */
+.about-me-sidebar {
+    z-index: 10;
+    position: relative;
+
+    h2 {
+        display: flex;
+        /*justify-content: space-between;*/
+        gap: 8px;
+
+        .bleh--add-note {
+            --btn-left: 8px;
+            --btn-right: 8px;
+            height: 16px;
+            --bg: transparent !important;
+            --bg-hov: transparent !important;
+            --bg-atv: transparent !important;
+            --shadow: none !important;
+            --shadow-hov: none !important;
+            --font-size: 0;
+            position: relative;
+            --left: 0;
+            --mask: var(--icon-16-note-add);
+        }
+    }
+}
+
+.bleh--profile-note-panel {
+    padding-top: calc(var(--card-padding) + var(--card-gap)) !important;
+
+    #bleh--profile-note {
+        min-height: 50px;
+        z-index: 15;
+        position: relative;
+    }
+
+    &:not(:focus-within) .actions {
+        margin-top: -32px;
+        pointer-events: none;
+
+        .btn {
+            --shadow: none !important;
+        }
+    }
+
+    .actions {
+        display: flex;
+        gap: var(--button-list-gap);
+        justify-content: right;
+        margin-top: var(--card-gap);
+        transition-property: margin-top;
+        transition-duration: var(--trans);
+        transition-timing-function: var(--trans-function);
+    }
+}
+
+
 /* no featured track, leave space for message button box instead */
 .header--overview:not(:has(.header-featured-track)):has(.header-message-user) + .adaptive-skin-container .col-sidebar {
     padding-top: calc(138px + 33px - 82px) !important;
@@ -5155,6 +5215,7 @@ button:not(.playback-app-container button, .top-artist-list-item, .pixel, .liste
 .btns .btn:before,
 .btn.reset:before,
 .setting-item .icon:before, .action .icon:before,
+.bleh--add-note:before,
 /*     DROPDOWNS     */
 .dropdown-menu-clickable-item:before, .auth-dropdown-menu-item:before,
 .dropdown-menu-list-button::after, .dropdown-menu-clickable-button::after, .dropdown-menu-clickable-button-js-only::after,
@@ -6178,12 +6239,13 @@ body:is(.namespace--user_library_music_artist_overview, .namespace--user_library
 
 
 /* put below :3 */
+.bleh--profile-note-panel,
 .library-header + .metadata-list, .library-header + .library-track-metadata {
     /* the extra card-gap is used as a whitespace of sorts to seemlessly go under the library header */
     margin-top: calc((-1 * var(--card-gap))/* - var(--card-gap)*/) !important;
     padding-top: calc(var(--card-padding) + var(--card-gap));
     --card-specific-background: hsla(var(--b5), 50%);
-    --card-specific-border: 1px solid hsla(var(--b4), 50%);
+    --card-specific-border: 1px solid hsla(var(--b4), 60%);
 }
 
 .library-track-metadata .love-button-toggle {

@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         bleh
 // @namespace    http://last.fm/
-// @version      2024.0611.1
+// @version      2024.0611.2
 // @description  bleh!!! ^-^
 // @author       kate
 // @match        https://www.last.fm/*
@@ -13,7 +13,7 @@
 // @require      https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js
 // ==/UserScript==
 
-let version = '2024.0611.1';
+let version = '2024.0611.2';
 
 let song_title_corrections = {
     'Quadeca': {
@@ -595,6 +595,14 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         let profile_header = element.querySelector('.header-title-label-wrap');
         let profile_name = element.querySelector('.header-title-label-wrap a');
 
+        // profile note
+        let profile_notes = JSON.parse(localStorage.getItem('bleh_profile_notes')) || {};
+        let profile_note = profile_notes[profile_name.textContent];
+
+        let profile_has_note = false;
+        if (profile_note != undefined)
+            profile_has_note = true;
+
         if (!profile_header.hasAttribute('data-kate-processed')) {
             profile_header.setAttribute('data-kate-processed', 'true');
 
@@ -646,11 +654,12 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             }
         }
 
-        let about_me_sidebar = element.querySelector('.about-me-sidebar p');
+        let about_me_sidebar = element.querySelector('.about-me-sidebar');
         if (!about_me_sidebar.hasAttribute('data-kate-processed')) {
             about_me_sidebar.setAttribute('data-kate-processed','true');
 
-            let about_me_text = about_me_sidebar.textContent;
+            // parse body
+            let about_me_text = about_me_sidebar.querySelector('p');
             let converter = new showdown.Converter({
                 emoji: true,
                 excludeTrailingPunctuationFromURLs: true,
@@ -667,15 +676,86 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 ghCodeBlocks: false,
                 smartIndentationFix: true
             });
-            let parsed_body = converter.makeHtml(about_me_text
+            let parsed_body = converter.makeHtml(about_me_text.textContent
             .replace(/&/g, '&amp;')
             .replace(/</g, '&lt;')
             .replace(/>/g, '&gt;')
             .replace(/"/g, '&quot;')
             .replace(/'/g, '&#039;'));
-            about_me_sidebar.innerHTML = parsed_body;
+            about_me_text.innerHTML = parsed_body;
+
+            // add note button
+            if (!profile_has_note) {
+                let add_note_button = document.createElement('button');
+                add_note_button.classList.add('btn','bleh--add-note');
+                add_note_button.setAttribute('id','bleh--add-note');
+                add_note_button.textContent = 'Add note';
+                add_note_button.setAttribute('onclick',`_add_profile_note('${profile_name.textContent}',${profile_has_note})`);
+
+                let about_me_header = about_me_sidebar.querySelector('h2');
+                about_me_header.appendChild(add_note_button);
+            } else {
+                create_profile_note_panel(profile_name.textContent, true);
+            }
         }
         } catch(e) {}
+    }
+
+    unsafeWindow._add_profile_note = function(username, has_note) {
+        add_profile_note(username, has_note);
+    }
+    function add_profile_note(username, has_note) {
+        document.getElementById('bleh--add-note').style.setProperty('display','none');
+
+        create_profile_note_panel(username, has_note);
+    }
+
+
+    function create_profile_note_panel(username, has_note) {
+        let note_panel = document.createElement('section');
+        note_panel.classList.add('bleh--panel','bleh--profile-note-panel');
+
+        if (has_note) {
+            note_panel.innerHTML = (`
+            <h2>Your notes</h2>
+            <div class="content-form">
+                <textarea id="bleh--profile-note" placeholder="Enter a local note for this user">${JSON.parse(localStorage.getItem('bleh_profile_notes'))[username]}</textarea>
+            </div>
+            <div class="actions">
+                <button class="btn" onclick="_clear_profile_note('${username}')">Clear</button>
+                <button class="btn primary" onclick="_save_profile_note('${username}')">Save</button>
+            </div>
+            `);
+        } else {
+            note_panel.innerHTML = (`
+            <h2>Your notes</h2>
+            <div class="content-form">
+                <textarea id="bleh--profile-note" placeholder="Enter a local note for this user"></textarea>
+            </div>
+            <div class="actions">
+                <button class="btn" onclick="_clear_profile_note('${username}')">Clear</button>
+                <button class="btn primary" onclick="_save_profile_note('${username}')">Save</button>
+            </div>
+            `);
+        }
+
+        let about_me_sidebar = document.body.querySelector('.about-me-sidebar');
+        about_me_sidebar.after(note_panel);
+    }
+
+    unsafeWindow._clear_profile_note = function(username) {
+        let profile_notes = JSON.parse(localStorage.getItem('bleh_profile_notes')) || {};
+        delete profile_notes[username];
+        document.getElementById('bleh--profile-note').value = '';
+
+        localStorage.setItem('bleh_profile_notes',JSON.stringify(profile_notes));
+    }
+
+    unsafeWindow._save_profile_note = function(username) {
+        let profile_notes = JSON.parse(localStorage.getItem('bleh_profile_notes')) || {};
+        profile_notes[username] = document.getElementById('bleh--profile-note').value;
+
+        localStorage.setItem('bleh_profile_notes',JSON.stringify(profile_notes));
     }
 
 
