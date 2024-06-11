@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         bleh
 // @namespace    http://last.fm/
-// @version      2024.0611
+// @version      2024.0611.1
 // @description  bleh!!! ^-^
 // @author       kate
 // @match        https://www.last.fm/*
@@ -13,7 +13,7 @@
 // @require      https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js
 // ==/UserScript==
 
-let version = '2024.0611';
+let version = '2024.0611.1';
 
 let song_title_corrections = {
     'Quadeca': {
@@ -593,12 +593,12 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     function patch_profile(element) {
         try {
         let profile_header = element.querySelector('.header-title-label-wrap');
-        let profile_name = element.querySelector('.header-title-label-wrap a').textContent;
+        let profile_name = element.querySelector('.header-title-label-wrap a');
 
         if (!profile_header.hasAttribute('data-kate-processed')) {
             profile_header.setAttribute('data-kate-processed', 'true');
 
-            if (redacted.includes(profile_name.toLowerCase())) {
+            if (redacted.includes(profile_name.textContent.toLowerCase())) {
                 let prior_redacted_msg = element.querySelector('.bleh--redacted-message');
                 if (prior_redacted_msg !== null)
                     document.body.removeChild(prior_redacted_msg);
@@ -621,7 +621,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 document.body.appendChild(redacted_message);
             } else {
                 // is this their profile?
-                if (profile_name == auth) {
+                if (profile_name.textContent == auth) {
                     // make avatar clickable
                     let header_avatar = document.querySelector('.header-avatar .avatar');
 
@@ -632,11 +632,16 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 }
 
                 // badges
-                if (profile_badges.hasOwnProperty(profile_name)) {
+                if (profile_badges.hasOwnProperty(profile_name.textContent)) {
                     let badge = document.createElement('span');
-                    badge.classList.add('label',`user-status--bleh-${profile_badges[profile_name].type}`,`user-status--bleh-user-${profile_name}`);
-                    badge.textContent = profile_badges[profile_name].name;
+                    badge.classList.add('label',`user-status--bleh-${profile_badges[profile_name.textContent].type}`,`user-status--bleh-user-${profile_name.textContent}`);
+                    badge.textContent = profile_badges[profile_name.textContent].name;
                     profile_header.appendChild(badge);
+                }
+
+                // me :3
+                if (profile_name.textContent == 'cutensilly') {
+                    profile_name.classList.add('bleh--name-is-cute');
                 }
             }
         }
