@@ -756,7 +756,12 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     }
     function save_profile_note(username) {
         let profile_notes = JSON.parse(localStorage.getItem('bleh_profile_notes')) || {};
-        profile_notes[username] = document.getElementById('bleh--profile-note').value;
+        profile_notes[username] = document.getElementById('bleh--profile-note').value
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
 
         localStorage.setItem('bleh_profile_notes',JSON.stringify(profile_notes));
     }
@@ -1460,7 +1465,12 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
     unsafeWindow._save_profile_note_in_window = function(username) {
         let profile_notes = JSON.parse(localStorage.getItem('bleh_profile_notes')) || {};
-        let value_to_save = document.getElementById('bleh--profile-note').value;
+        let value_to_save = document.getElementById('bleh--profile-note').value
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
         profile_notes[username] = value_to_save;
 
         document.getElementById(`profile-note-row-preview--${username}`).textContent = value_to_save;
