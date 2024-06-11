@@ -38,6 +38,14 @@ let song_title_corrections = {
     },
     'Young Thug': {
         'Pick up the Phone': 'pick up the phone'
+    },
+    'Nirvana': {
+        'Tourette\'s - 1992/Live at Reading': 'tourette\'s - 1992/Live at Reading',
+        'Tourette\'s (Alternative Mix)': 'tourette\'s (Alternative Mix)',
+        'Tourette\'s (2013 Mix)': 'tourette\'s (2013 Mix)',
+        'Tourette\'s - 2013 Mix': 'tourette\'s - 2013 Mix',
+        'Tourette\'s (Demo / Instrumental)': 'tourette\'s (Demo / Instrumental)',
+        'Tourette\'s - Demo / Instrumental': 'tourette\'s - Demo / Instrumental'
     }
 };
 
