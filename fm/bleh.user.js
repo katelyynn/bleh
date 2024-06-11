@@ -752,6 +752,9 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     }
 
     unsafeWindow._save_profile_note = function(username) {
+        save_profile_note(username);
+    }
+    function save_profile_note(username) {
         let profile_notes = JSON.parse(localStorage.getItem('bleh_profile_notes')) || {};
         profile_notes[username] = document.getElementById('bleh--profile-note').value;
 
@@ -904,6 +907,9 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                         </button>
                         <button class="btn bleh--btn" data-bleh-page="customise" onclick="_change_settings_page('customise')">
                             Customise
+                        </button>
+                        <button class="btn bleh--btn" data-bleh-page="profiles" onclick="_change_settings_page('profiles')">
+                            Profiles
                         </button>
                         <button class="btn bleh--btn" data-bleh-page="performance" onclick="_change_settings_page('performance')">
                             Performance
@@ -1339,6 +1345,15 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     </div>
                 </div>
                 `);
+        } else if (page == 'profiles') {
+            return (`
+                <div class="bleh--panel">
+                    <h3>Profiles</h3>
+                    <p>Manage your personal data and data stored on other profiles.</p>
+                    <h4>Notes</h4>
+                    <div class="profile-notes" id="profile-notes"></div>
+                </div>
+                `);
         }
     }
 
@@ -1363,6 +1378,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             show_theme_change_in_settings();
         else if (page == 'customise' || page == 'performance')
             refresh_all();
+        else if (page == 'profiles')
+            init_profile_notes();
     }
 
     function show_theme_change_in_settings(theme = '') {
@@ -1381,6 +1398,75 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 btn.classList.add('active');
             }
         });
+    }
+
+
+    function init_profile_notes() {
+        let profile_notes = JSON.parse(localStorage.getItem('bleh_profile_notes')) || {};
+        let profile_notes_table = document.getElementById('profile-notes');
+
+        for (let user in profile_notes) {
+            let profile_note = document.createElement('div');
+            profile_note.classList.add('profile-note-row');
+            profile_note.setAttribute('id',`profile-note-row--${user}`);
+            profile_note.innerHTML = (`
+            <div class="name">
+                <h5>${user}</h5>
+            </div>
+            <div class="note-preview">
+                <p id="profile-note-row-preview--${user}">${profile_notes[user]}</p>
+            </div>
+            <div class="actions">
+                <button class="btn bleh--edit-note" onclick="_edit_profile_note('${user}')">
+                    Edit note
+                </button>
+                <button class="btn bleh--delete-note" onclick="_delete_profile_note('${user}')">
+                    Remove note
+                </button>
+            </div>
+            `);
+
+            profile_notes_table.appendChild(profile_note);
+        }
+    }
+
+    unsafeWindow._delete_profile_note = function(username) {
+        let profile_notes = JSON.parse(localStorage.getItem('bleh_profile_notes')) || {};
+        delete profile_notes[username];
+        document.getElementById(`profile-note-row--${username}`).style.setProperty('display','none');
+
+        localStorage.setItem('bleh_profile_notes',JSON.stringify(profile_notes));
+    }
+
+    unsafeWindow._edit_profile_note = function(username) {
+        let profile_notes = JSON.parse(localStorage.getItem('bleh_profile_notes')) || {};
+
+        create_window('edit_profile_note',`Edit profile note for ${username}`,`
+        <textarea id="bleh--profile-note" placeholder="Enter a local note for this user">${profile_notes[username]}</textarea>
+        <div class="modal-footer">
+            <button class="btn primary" onclick="_save_profile_note_in_window('${username}')">
+                Save changes
+            </button>
+            <button class="btn" onclick="_kill_window('edit_profile_note')">
+                Cancel
+            </button>
+        </div>
+        `);
+
+        profile_notes[username] = document.getElementById('bleh--profile-note').value;
+
+        localStorage.setItem('bleh_profile_notes',JSON.stringify(profile_notes));
+    }
+
+    unsafeWindow._save_profile_note_in_window = function(username) {
+        let profile_notes = JSON.parse(localStorage.getItem('bleh_profile_notes')) || {};
+        let value_to_save = document.getElementById('bleh--profile-note').value;
+        profile_notes[username] = value_to_save;
+
+        document.getElementById(`profile-note-row-preview--${username}`).textContent = value_to_save;
+
+        localStorage.setItem('bleh_profile_notes',JSON.stringify(profile_notes));
+        kill_window('edit_profile_note');
     }
 
 

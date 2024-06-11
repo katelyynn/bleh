@@ -2125,6 +2125,75 @@ elements, this is how we detect its missing */
 }
 
 
+/*     MANAGE NOTES     */
+.profile-notes {
+    display: flex;
+    flex-direction: column;
+    margin: -7px 0;
+
+    .profile-note-row {
+        display: flex;
+        align-items: center;
+        gap: var(--card-gap);
+        padding: 7px 0;
+
+        .name {
+            width: 200px;
+            display: -webkit-box;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            line-clamp: 1;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+        }
+
+        .note-preview {
+            flex: 1;
+            display: -webkit-box;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            line-clamp: 1;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+        }
+
+        .actions {
+            display: flex;
+            gap: var(--card-gap);
+
+            .btn {
+                --btn-left: 8px;
+                --btn-right: 8px;
+                height: 16px;
+                --bg: transparent !important;
+                --bg-hov: transparent !important;
+                --bg-atv: transparent !important;
+                --shadow: none !important;
+                --shadow-hov: none !important;
+                --font-size: 0;
+                position: relative;
+                --left: 0;
+
+                &.bleh--edit-note {
+                    --mask: var(--icon-16-edit);
+                }
+                &.bleh--delete-note {
+                    --mask: var(--icon-16-trash);
+                    --col: hsl(var(--l3-c));
+                    --hue: var(--hue-neg);
+                    --sat: 1;
+                    --lit: 1;
+                }
+            }
+        }
+
+        & + .profile-note-row {
+            border-top: 1px solid hsl(var(--b4));
+        }
+    }
+}
+
+
 /* no featured track, leave space for message button box instead */
 .header--overview:not(:has(.header-featured-track)):has(.header-message-user) + .adaptive-skin-container .col-sidebar {
     padding-top: calc(138px + 33px - 82px) !important;
@@ -5226,6 +5295,7 @@ button:not(.playback-app-container button, .top-artist-list-item, .pixel, .liste
 .btn.reset:before,
 .setting-item .icon:before, .action .icon:before,
 .bleh--add-note:before,
+.profile-note-row .btn:before,
 /*     DROPDOWNS     */
 .dropdown-menu-clickable-item:before, .auth-dropdown-menu-item:before,
 .dropdown-menu-list-button::after, .dropdown-menu-clickable-button::after, .dropdown-menu-clickable-button-js-only::after,
@@ -10529,6 +10599,9 @@ so this is good enough - use the community docs */
                 }
                 &[data-bleh-page="performance"] {
                     --mask: var(--icon-16-settings);
+                }
+                &[data-bleh-page="profiles"] {
+                    --mask: var(--icon-16-user);
                 }
 
                 &:not(.active) {
