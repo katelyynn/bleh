@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         bleh
 // @namespace    http://last.fm/
-// @version      2024.0611.2
+// @version      2024.0612
 // @description  bleh!!! ^-^
 // @author       kate
 // @match        https://www.last.fm/*
@@ -11,10 +11,17 @@
 // @downloadURL  https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.js
 // @run-at       document-body
 // @require      https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js
-// @resource bleh_theme https://katelyynn.github.io/bleh/fm/bleh.css
+// @require      https://unpkg.com/@popperjs/core@2
+// @require      https://unpkg.com/tippy.js@6
 // ==/UserScript==
 
-let version = '2024.0611.2';
+let version = '2024.0612';
+
+tippy.setDefaultProps({
+    arrow: false,
+    duration: [100, 300],
+    delay: [null, 50]
+});
 
 let song_title_corrections = {
     'Quadeca': {
@@ -764,6 +771,10 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 add_note_button.textContent = 'Add note';
                 add_note_button.setAttribute('onclick',`_add_profile_note('${profile_name.textContent}',${profile_has_note})`);
 
+                tippy(add_note_button, {
+                    content: `Edit ${profile_name.textContent}'s note`
+                });
+
                 let about_me_header = about_me_sidebar.querySelector('h2');
                 about_me_header.appendChild(add_note_button);
             } else {
@@ -932,10 +943,22 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 if (pre_existing_badge !== null)
                     element.removeChild(pre_existing_badge);
 
+                element.setAttribute('title','');
+
                 // make new badge
                 let badge = document.createElement('span');
                 badge.classList.add('avatar-status-dot',`user-status--bleh-${profile_badges[name].type}`,`user-status--bleh-user-${name}`);
                 element.appendChild(badge);
+
+                tippy(badge, {
+                    content: `${name}, ${profile_badges[name].name}`
+                });
+            } else {
+                let pre_existing_badge = element.querySelector('.avatar-status-dot');
+                tippy(pre_existing_badge, {
+                    content: `${name}, ${element.getAttribute('title')}`
+                });
+                element.setAttribute('title','');
             }
         }
     }
@@ -1494,16 +1517,22 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 <p id="profile-note-row-preview--${user}">${profile_notes[user]}</p>
             </div>
             <div class="actions">
-                <button class="btn bleh--edit-note" onclick="_edit_profile_note('${user}')">
+                <button class="btn bleh--edit-note" id="profile-note-row-edit--${user}" onclick="_edit_profile_note('${user}')">
                     Edit note
                 </button>
-                <button class="btn bleh--delete-note" onclick="_delete_profile_note('${user}')">
+                <button class="btn bleh--delete-note" id="profile-note-row-delete--${user}" onclick="_delete_profile_note('${user}')">
                     Remove note
                 </button>
             </div>
             `);
 
             profile_notes_table.appendChild(profile_note);
+            tippy(document.getElementById(`profile-note-row-edit--${user}`), {
+                content: `Edit ${user}'s note`
+            });
+            tippy(document.getElementById(`profile-note-row-delete--${user}`), {
+                content: `Delete ${user}'s note`
+            });
         }
     }
 

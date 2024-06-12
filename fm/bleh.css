@@ -7108,18 +7108,27 @@ text[style^="color: rgb(255, 172, 172)"] {
     fill: hsl(var(--c2)) !important;
 }
 
+.tippy-box,
 .user-dashboard-controls-tooltip,
 .tooltip-dark,
 .user-dashboard-tooltip {
-    background: hsl(var(--b5));
+    background: hsla(var(--b5), 70%);
+    backdrop-filter: blur(10px) saturate(160%);
     border-radius: var(--item-med-radius);
     border: 1px solid hsl(var(--b4));
     box-shadow: var(--menu-shadow);
-    padding: 7px;
+    padding: 5px 7px;
     font-size: calc(var(--font-size) - 1px);
     line-height: var(--line-height);
     color: hsl(var(--c2));
     margin-top: 2px;
+
+    [data-bleh--theme="light"] & {
+        background: hsla(var(--b5), 35%);
+    }
+}
+.tippy-content {
+    padding: unset;
 }
 .user-dashboard-controls-tooltip:before,
 .tooltip-dark:before {
