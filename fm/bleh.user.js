@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         bleh
 // @namespace    http://last.fm/
-// @version      2024.0609
+// @version      2024.0611.2
 // @description  bleh!!! ^-^
 // @author       kate
 // @match        https://www.last.fm/*
@@ -14,7 +14,87 @@
 // @resource bleh_theme https://katelyynn.github.io/bleh/fm/bleh.css
 // ==/UserScript==
 
-let version = '2024.0609';
+let version = '2024.0611.2';
+
+let song_title_corrections = {
+    'Quadeca': {
+        'BORN YESTERDAY': 'born yesterday',
+        'Tell Me A Joke': 'tell me a joke',
+        'Gone Gone': 'gone gone',
+        'Guess Who?': 'GUESS WHO?',
+        'UNDER My Skin': 'UNDER MY SKIN',
+        'being yourself': 'BEING YOURSELF',
+        'I Make It Look Effortless': 'I MAKE IT LOOK EFFORTLESS',
+        'Scrapyard': 'SCRAPYARD',
+        'i didn\'t mean to haunt you': 'I Didn\'t Mean To Haunt You'
+    },
+    'yeule': {
+        'Sulky Baby': 'sulky baby'
+    },
+    'brakence': {
+        'Drank 3 of My Parents\' Craft Beers To Make Eye Contact With You (feat. Login)': 'drank 3 of my parents\' craft beers to make eye contact with you (feat. login)',
+        'tonight\'s no good how about wednesday oh you\'re in dallas on wednesday oh ok well then let\'s just not see each other for 8 months and It doesn\'t matter at all': 'tonight\'s no good how about wednesday oh you\'re in dallas on wednesday oh ok well then let\'s just not see each other for 8 months and it doesn\'t matter at all',
+        'Introvert': 'introvert',
+        'Hypochondriac (Demo)': 'hypochondriac (demo)'
+    },
+    'Young Thug': {
+        'Pick up the Phone': 'pick up the phone'
+    },
+    'Nirvana': {
+        'Tourette\'s - 1992/Live at Reading': 'tourette\'s - 1992/Live at Reading',
+        'Tourette\'s (Alternative Mix)': 'tourette\'s (Alternative Mix)',
+        'Tourette\'s (2013 Mix)': 'tourette\'s (2013 Mix)',
+        'Tourette\'s - 2013 Mix': 'tourette\'s - 2013 Mix',
+        'Tourette\'s (Demo / Instrumental)': 'tourette\'s (Demo / Instrumental)',
+        'Tourette\'s - Demo / Instrumental': 'tourette\'s - Demo / Instrumental'
+    }
+};
+
+let includes = [
+    // featuring
+    '(feat', '[feat',
+    '(with', '[with',
+    '(ft', '[ft', 'ft.',
+    'w/ ',
+    // tv
+    '(taylor',
+    // mixes / demos
+    '(devonshire mix', '- devonshire mix',
+    '(remaster', '- remaster',
+    '(remix', '- remix',
+    '(live', '- live',
+    '(demo', '- demo', '[demo', '[sample clearance demo',
+    '(rehearsal demo', '- rehearsal demo',
+    '(home demo', '- home demo',
+    '(solo acoustic', '- solo acoustic',
+    '(acoustic', '- acoustic',
+    '(alternative', '- alternative',
+    '(mix 1', '(mix 2', '(mix 3', '(mix 4', '(mix 5', '(mix 6', '(mix 7', '(mix 8', '(mix 9',
+    '- spotify singles',
+    '(acapella', '(instrumental', '- acapella', '- instrumental',
+    '(choppednotslopped', '- choppednotslopped',
+    '(skit', '- skit',
+    '(extended', '- extended',
+    '- 1992/live', '(boombox', '- boombox', '(mtv unplugged', '- mtv unplugged',
+    '(from the vault)',
+    '(edit', '- edit',
+    '(from', '- from',
+    // bonus!
+    '(bonus', '- bonus',
+    '(nevermind version', '- nevermind version', '(blew ep version', '- blew ep version',
+    '(b-side', '(c-side', '- b-side', '- c-side',
+    '(deluxe', '- deluxe', '(digital deluxe', '(complete edition', '(extended edition',
+    '(anniversary',
+    '(sessions', '(studio session',
+    '(lp', '(ep', '- lp', '- ep',
+    '(19', '- 19', '(20', '- 20',
+    '(original', '- original',
+    '(kate', // :3
+    '(smart session', '- smart session', '[smart session',
+    '- ep','- single',
+    '[clean]',
+    '(outro', '- outro'
+];
 
 let profile_badges = {
     'cutensilly': {
@@ -178,50 +258,6 @@ let settings_base = {
         type: 'toggle'
     }
 };
-
-let includes = [
-    // featuring
-    '(feat', '[feat',
-    '(with', '[with',
-    '(ft', '[ft', 'ft.',
-    'w/ ',
-    // tv
-    '(taylor',
-    // mixes / demos
-    '(devonshire mix', '- devonshire mix',
-    '(remaster', '- remaster',
-    '(remix', '- remix',
-    '(live', '- live',
-    '(demo', '- demo', '[demo', '[sample clearance demo',
-    '(rehearsal demo', '- rehearsal demo',
-    '(home demo', '- home demo',
-    '(solo acoustic', '- solo acoustic',
-    '(acoustic', '- acoustic',
-    '(alternative', '- alternative',
-    '(mix 1', '(mix 2', '(mix 3', '(mix 4', '(mix 5', '(mix 6', '(mix 7', '(mix 8', '(mix 9',
-    '- spotify singles',
-    '(acapella', '(instrumental', '- acapella', '- instrumental',
-    '(choppednotslopped', '- choppednotslopped',
-    '(skit', '- skit',
-    '(extended', '- extended',
-    '- 1992/live', '(boombox', '- boombox', '(mtv unplugged', '- mtv unplugged',
-    '(from the vault)',
-    // bonus!
-    '(bonus', '- bonus',
-    '(nevermind version', '- nevermind version', '(blew ep version', '- blew ep version',
-    '(b-side', '(c-side', '- b-side', '- c-side',
-    '(deluxe', '- deluxe', '(digital deluxe', '(complete edition', '(extended edition',
-    '(anniversary',
-    '(sessions', '(studio session',
-    '(lp', '(ep', '- lp', '- ep',
-    '(19', '- 19', '(20', '- 20',
-    '(original', '- original',
-    '(kate', // :3
-    '(smart session', '- smart session', '[smart session',
-    '- ep','- single',
-    '[clean]',
-    '(outro', '- outro'
-];
 
 
 let redacted = [
@@ -398,7 +434,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
     function append_nav(element) {
         let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
-        let user_nav = element.querySelectorAll('.auth-dropdown-menu li')[0];
+        let user_nav = element.querySelectorAll('.auth-dropdown-menu > li')[0];
+        let inbox_nav = element.querySelectorAll('.auth-dropdown-menu > li')[2];
 
         if (!user_nav.hasAttribute('data-kate-processed')) {
             user_nav.setAttribute('data-kate-processed','true');
@@ -448,9 +485,25 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     </li>
                     `);
             }
+            user_nav.appendChild(bleh_nav);
+        }
 
+        if (!inbox_nav.hasAttribute('data-kate-processed')) {
+            inbox_nav.setAttribute('data-kate-processed','true');
+            let profile_link = user_nav.querySelector('a').getAttribute('href');
 
-            user_nav.insertAdjacentElement('beforeend', bleh_nav);
+            let extra_nav = document.createElement('li');
+            extra_nav.innerHTML = (`
+                <li>
+                    <a class="auth-dropdown-menu-item bleh--shouts-menu-item" href="${profile_link}/shoutbox">
+                        <span class="auth-dropdown-item-row">
+                            <span class="auth-dropdown-item-left">Shouts</span>
+                        </span>
+                    </a>
+                </li>
+                `);
+
+            inbox_nav.appendChild(extra_nav);
         }
     }
 
@@ -468,6 +521,10 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         for (let setting in settings_template)
             if (settings[setting] == undefined)
                 settings[setting] = settings_template[setting];
+
+        // todo: remove
+        if (settings.dev == 1)
+            settings.dev = true;
 
         // save setting into body
         for (let setting in settings) {
@@ -608,12 +665,20 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     function patch_profile(element) {
         try {
         let profile_header = element.querySelector('.header-title-label-wrap');
-        let profile_name = element.querySelector('.header-title-label-wrap a').textContent;
+        let profile_name = element.querySelector('.header-title-label-wrap a');
+
+        // profile note
+        let profile_notes = JSON.parse(localStorage.getItem('bleh_profile_notes')) || {};
+        let profile_note = profile_notes[profile_name.textContent];
+
+        let profile_has_note = false;
+        if (profile_note != undefined)
+            profile_has_note = true;
 
         if (!profile_header.hasAttribute('data-kate-processed')) {
             profile_header.setAttribute('data-kate-processed', 'true');
 
-            if (redacted.includes(profile_name.toLowerCase())) {
+            if (redacted.includes(profile_name.textContent.toLowerCase())) {
                 let prior_redacted_msg = element.querySelector('.bleh--redacted-message');
                 if (prior_redacted_msg !== null)
                     document.body.removeChild(prior_redacted_msg);
@@ -636,7 +701,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 document.body.appendChild(redacted_message);
             } else {
                 // is this their profile?
-                if (profile_name == auth) {
+                if (profile_name.textContent == auth) {
                     // make avatar clickable
                     let header_avatar = document.querySelector('.header-avatar .avatar');
 
@@ -647,20 +712,26 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 }
 
                 // badges
-                if (profile_badges.hasOwnProperty(profile_name)) {
+                if (profile_badges.hasOwnProperty(profile_name.textContent)) {
                     let badge = document.createElement('span');
-                    badge.classList.add('label',`user-status--bleh-${profile_badges[profile_name].type}`,`user-status--bleh-user-${profile_name}`);
-                    badge.textContent = profile_badges[profile_name].name;
+                    badge.classList.add('label',`user-status--bleh-${profile_badges[profile_name.textContent].type}`,`user-status--bleh-user-${profile_name.textContent}`);
+                    badge.textContent = profile_badges[profile_name.textContent].name;
                     profile_header.appendChild(badge);
+                }
+
+                // me :3
+                if (profile_name.textContent == 'cutensilly') {
+                    profile_name.classList.add('bleh--name-is-cute');
                 }
             }
         }
 
-        let about_me_sidebar = element.querySelector('.about-me-sidebar p');
+        let about_me_sidebar = element.querySelector('.about-me-sidebar');
         if (!about_me_sidebar.hasAttribute('data-kate-processed')) {
             about_me_sidebar.setAttribute('data-kate-processed','true');
 
-            let about_me_text = about_me_sidebar.textContent;
+            // parse body
+            let about_me_text = about_me_sidebar.querySelector('p');
             let converter = new showdown.Converter({
                 emoji: true,
                 excludeTrailingPunctuationFromURLs: true,
@@ -677,15 +748,94 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 ghCodeBlocks: false,
                 smartIndentationFix: true
             });
-            let parsed_body = converter.makeHtml(about_me_text
+            let parsed_body = converter.makeHtml(about_me_text.textContent
             .replace(/&/g, '&amp;')
             .replace(/</g, '&lt;')
             .replace(/>/g, '&gt;')
             .replace(/"/g, '&quot;')
             .replace(/'/g, '&#039;'));
-            about_me_sidebar.innerHTML = parsed_body;
+            about_me_text.innerHTML = parsed_body;
+
+            // add note button
+            if (!profile_has_note) {
+                let add_note_button = document.createElement('button');
+                add_note_button.classList.add('btn','bleh--add-note');
+                add_note_button.setAttribute('id','bleh--add-note');
+                add_note_button.textContent = 'Add note';
+                add_note_button.setAttribute('onclick',`_add_profile_note('${profile_name.textContent}',${profile_has_note})`);
+
+                let about_me_header = about_me_sidebar.querySelector('h2');
+                about_me_header.appendChild(add_note_button);
+            } else {
+                create_profile_note_panel(profile_name.textContent, true);
+            }
         }
         } catch(e) {}
+    }
+
+    unsafeWindow._add_profile_note = function(username, has_note) {
+        add_profile_note(username, has_note);
+    }
+    function add_profile_note(username, has_note) {
+        document.getElementById('bleh--add-note').style.setProperty('display','none');
+
+        create_profile_note_panel(username, has_note);
+    }
+
+
+    function create_profile_note_panel(username, has_note) {
+        let note_panel = document.createElement('section');
+        note_panel.classList.add('bleh--panel','bleh--profile-note-panel');
+
+        if (has_note) {
+            note_panel.innerHTML = (`
+            <h2>Your notes</h2>
+            <div class="content-form">
+                <textarea id="bleh--profile-note" placeholder="Enter a local note for this user">${JSON.parse(localStorage.getItem('bleh_profile_notes'))[username]}</textarea>
+            </div>
+            <div class="actions">
+                <button class="btn" onclick="_clear_profile_note('${username}')">Clear</button>
+                <button class="btn primary" onclick="_save_profile_note('${username}')">Save</button>
+            </div>
+            `);
+        } else {
+            note_panel.innerHTML = (`
+            <h2>Your notes</h2>
+            <div class="content-form">
+                <textarea id="bleh--profile-note" placeholder="Enter a local note for this user"></textarea>
+            </div>
+            <div class="actions">
+                <button class="btn" onclick="_clear_profile_note('${username}')">Clear</button>
+                <button class="btn primary" onclick="_save_profile_note('${username}')">Save</button>
+            </div>
+            `);
+        }
+
+        let about_me_sidebar = document.body.querySelector('.about-me-sidebar');
+        about_me_sidebar.after(note_panel);
+    }
+
+    unsafeWindow._clear_profile_note = function(username) {
+        let profile_notes = JSON.parse(localStorage.getItem('bleh_profile_notes')) || {};
+        delete profile_notes[username];
+        document.getElementById('bleh--profile-note').value = '';
+
+        localStorage.setItem('bleh_profile_notes',JSON.stringify(profile_notes));
+    }
+
+    unsafeWindow._save_profile_note = function(username) {
+        save_profile_note(username);
+    }
+    function save_profile_note(username) {
+        let profile_notes = JSON.parse(localStorage.getItem('bleh_profile_notes')) || {};
+        profile_notes[username] = document.getElementById('bleh--profile-note').value
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+
+        localStorage.setItem('bleh_profile_notes',JSON.stringify(profile_notes));
     }
 
 
@@ -834,6 +984,9 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                         </button>
                         <button class="btn bleh--btn" data-bleh-page="customise" onclick="_change_settings_page('customise')">
                             Customise
+                        </button>
+                        <button class="btn bleh--btn" data-bleh-page="profiles" onclick="_change_settings_page('profiles')">
+                            Profiles
                         </button>
                         <button class="btn bleh--btn" data-bleh-page="performance" onclick="_change_settings_page('performance')">
                             Performance
@@ -1269,6 +1422,15 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     </div>
                 </div>
                 `);
+        } else if (page == 'profiles') {
+            return (`
+                <div class="bleh--panel">
+                    <h3>Profiles</h3>
+                    <p>Manage your personal data and data stored on other profiles.</p>
+                    <h4>Notes</h4>
+                    <div class="profile-notes" id="profile-notes"></div>
+                </div>
+                `);
         }
     }
 
@@ -1293,6 +1455,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             show_theme_change_in_settings();
         else if (page == 'customise' || page == 'performance')
             refresh_all();
+        else if (page == 'profiles')
+            init_profile_notes();
     }
 
     function show_theme_change_in_settings(theme = '') {
@@ -1311,6 +1475,80 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 btn.classList.add('active');
             }
         });
+    }
+
+
+    function init_profile_notes() {
+        let profile_notes = JSON.parse(localStorage.getItem('bleh_profile_notes')) || {};
+        let profile_notes_table = document.getElementById('profile-notes');
+
+        for (let user in profile_notes) {
+            let profile_note = document.createElement('div');
+            profile_note.classList.add('profile-note-row');
+            profile_note.setAttribute('id',`profile-note-row--${user}`);
+            profile_note.innerHTML = (`
+            <div class="name">
+                <h5>${user}</h5>
+            </div>
+            <div class="note-preview">
+                <p id="profile-note-row-preview--${user}">${profile_notes[user]}</p>
+            </div>
+            <div class="actions">
+                <button class="btn bleh--edit-note" onclick="_edit_profile_note('${user}')">
+                    Edit note
+                </button>
+                <button class="btn bleh--delete-note" onclick="_delete_profile_note('${user}')">
+                    Remove note
+                </button>
+            </div>
+            `);
+
+            profile_notes_table.appendChild(profile_note);
+        }
+    }
+
+    unsafeWindow._delete_profile_note = function(username) {
+        let profile_notes = JSON.parse(localStorage.getItem('bleh_profile_notes')) || {};
+        delete profile_notes[username];
+        document.getElementById(`profile-note-row--${username}`).style.setProperty('display','none');
+
+        localStorage.setItem('bleh_profile_notes',JSON.stringify(profile_notes));
+    }
+
+    unsafeWindow._edit_profile_note = function(username) {
+        let profile_notes = JSON.parse(localStorage.getItem('bleh_profile_notes')) || {};
+
+        create_window('edit_profile_note',`Edit profile note for ${username}`,`
+        <textarea id="bleh--profile-note" placeholder="Enter a local note for this user">${profile_notes[username]}</textarea>
+        <div class="modal-footer">
+            <button class="btn primary" onclick="_save_profile_note_in_window('${username}')">
+                Save changes
+            </button>
+            <button class="btn" onclick="_kill_window('edit_profile_note')">
+                Cancel
+            </button>
+        </div>
+        `);
+
+        profile_notes[username] = document.getElementById('bleh--profile-note').value;
+
+        localStorage.setItem('bleh_profile_notes',JSON.stringify(profile_notes));
+    }
+
+    unsafeWindow._save_profile_note_in_window = function(username) {
+        let profile_notes = JSON.parse(localStorage.getItem('bleh_profile_notes')) || {};
+        let value_to_save = document.getElementById('bleh--profile-note').value
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+        profile_notes[username] = value_to_save;
+
+        document.getElementById(`profile-note-row-preview--${username}`).textContent = value_to_save;
+
+        localStorage.setItem('bleh_profile_notes',JSON.stringify(profile_notes));
+        kill_window('edit_profile_note');
     }
 
 
@@ -1763,12 +2001,21 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
 
     // feat.
-    function name_includes(original_title) {
-        let lowercase_title = original_title.toLowerCase();
-        let extras = [];
+    function name_includes(original_title, original_artist) {
+        console.log(original_title, original_artist);
         let formatted_title = original_title;
 
-        for (let include in includes)
+        try {
+        if (song_title_corrections[original_artist][formatted_title] != undefined)
+            formatted_title = song_title_corrections[original_artist][formatted_title];
+        } catch(e) {}
+
+        let lowercase_title = formatted_title.toLowerCase();
+        let extras = [];
+
+        console.log(formatted_title, lowercase_title);
+
+        for (let include in includes) {
             if (lowercase_title.includes(includes[include])) {
                 let chr = lowercase_title.indexOf(`${includes[include]}`);
 
@@ -1777,14 +2024,16 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     chr: chr
                 });
             }
+        }
 
         extras.sort((a, b) => a.chr - b.chr);
 
         for (let extra in extras) {
-            formatted_title = original_title.slice(0, (extras[extra].chr - 1));
+            formatted_title = formatted_title.slice(0, (extras[extra].chr - 1));
             break;
         }
 
+        console.log(extras);
         for (let extra in extras) {
             if ((parseInt(extra) + 1) < extras.length) {
                 let chr = extras[extra].chr;
@@ -1798,9 +2047,9 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         }
 
         if (extras.length > 0)
-            return [formatted_title, extras];
+            return [formatted_title, extras, original_artist];
         else
-            return [formatted_title,[]];
+            return [formatted_title, [], original_artist];
     }
 
 
@@ -1815,7 +2064,9 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 if (!track_title.hasAttribute('data-kate-processed')) {
                     track_title.setAttribute('data-kate-processed','true');
 
-                    let formatted_title = name_includes(track_title.textContent);
+                    let track_artist = track_title.getAttribute('href').split('/')[2].replaceAll('+',' ');
+
+                    let formatted_title = name_includes(track_title.textContent, track_artist);
                     let song_title = formatted_title[0];
                     let song_tags = formatted_title[1];
 
@@ -1829,7 +2080,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     track_title.innerHTML = `<div class="title">${song_title}</div>${song_tags_text}`;
                 }
             });
-            } catch(e) {}
+            } catch(e) {console.error('AA',e)}
         }
     }
 
@@ -1839,10 +2090,11 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         if (settings.format_guest_features) {
             try {
             let track_title = element.querySelector('.header-new-title');
+            let track_artist = element.querySelector('.header-new-crumb span');
             if (!track_title.hasAttribute('data-kate-processed')) {
                 track_title.setAttribute('data-kate-processed','true');
 
-                let formatted_title = name_includes(track_title.textContent);
+                let formatted_title = name_includes(track_title.textContent, track_artist.textContent);
                 let song_title = formatted_title[0];
                 let song_tags = formatted_title[1];
 
