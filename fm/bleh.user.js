@@ -11,6 +11,7 @@
 // @downloadURL  https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.js
 // @run-at       document-body
 // @require      https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js
+// @resource bleh_theme https://katelyynn.github.io/bleh/fm/bleh.css
 // ==/UserScript==
 
 let version = '2024.0611.2';
@@ -339,19 +340,82 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     }
 
     function append_style() {
-        let connect = document.createElement('link');
-        connect.setAttribute('rel','preconnect');
-        connect.setAttribute('href','https://katelyynn.github.io/');
-        document.head.appendChild(connect);
-
-        let style = document.createElement('link');
-        style.setAttribute('rel','stylesheet');
-        style.setAttribute('href','https://katelyynn.github.io/bleh/fm/bleh.css');
-        document.documentElement.appendChild(style);
-
+        let cached_style = localStorage.getItem('bleh_cached_style') || '';
         let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
+
+        // style is not fetched in dev mode
         if (settings.dev)
-            document.documentElement.removeChild(style);
+            return;
+
+        if (cached_style == '') {
+            // style has never been cached
+            console.info('bleh - style has never been cached, fetching now');
+            fetch_new_style();
+        } else {
+            // style is currently cached, load that first
+            // ensures no flashing missing styles hopefully
+            console.info('bleh - requesting cached style');
+            load_cached_style(cached_style);
+
+            // now, analyse if we should fetch a new one
+            console.info('bleh - checking cache timeout status of style');
+            check_if_style_cache_is_valid();
+        }
+    }
+
+    function load_cached_style(cached_style) {
+        let style_cache = document.createElement('style');
+        style_cache.setAttribute('id', 'bleh--cached-style');
+        style_cache.textContent = cached_style;
+        document.documentElement.appendChild(style_cache);
+
+        console.info('bleh - loaded cached style');
+        setTimeout(function() {document.body.classList.add('bleh');}, 200);
+    }
+
+    function check_if_style_cache_is_valid() {
+        let cached_style_timeout = new Date(localStorage.getItem('bleh_cached_style_timeout'));
+        let current_time = new Date();
+
+        // check if timeout has expired
+        if (cached_style_timeout < current_time) {
+            console.info('bleh - fetching new style, timeout has expired');
+            fetch_new_style();
+        } else {
+            console.info('bleh - style timeout is still valid');
+        }
+    }
+
+    function fetch_new_style(delete_old_style = false) {
+        let xhr = new XMLHttpRequest();
+        let url = 'https://katelyynn.github.io/bleh/fm/bleh.css';
+        xhr.open('GET',url,true);
+
+        xhr.onload = function() {
+            console.info('bleh - style responded with', xhr.status);
+
+            // create style element
+            let style = document.createElement('style');
+            style.textContent = this.response;
+            document.documentElement.appendChild(style);
+
+            // remove the old style, if needed
+            if (delete_old_style)
+                document.documentElement.removeChild(document.getElementById('bleh--cached-style'));
+
+            // save to cache for next page load
+            localStorage.setItem('bleh_cached_style',this.response);
+
+            // set expire date
+            let api_expire = new Date();
+            api_expire.setHours(api_expire.getHours() + 1);
+            localStorage.setItem('bleh_cached_style_timeout',api_expire);
+            console.info('bleh - style is cached until', api_expire);
+
+            setTimeout(function() {document.body.classList.add('bleh');}, 200);
+        }
+
+        xhr.send();
     }
 
     function patch_masthead(element) {
@@ -492,10 +556,10 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
         let value = settings[setting];
 
-        if (value == 0)
-            value = 1;
+        if (value == false)
+            value = true;
         else
-            value = 0;
+            value = false;
 
         // save value
         settings[setting] = value;
