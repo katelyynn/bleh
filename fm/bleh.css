@@ -10556,7 +10556,7 @@ so this is good enough - use the community docs */
             gap: var(--button-list-gap);
 
             &.sep {
-                margin-top: calc(20px - var(--card-gap));
+                margin-top: calc(-20px + var(--card-gap));
                 padding-top: var(--card-gap);
                 border-top: 1px solid hsl(var(--b4));
             }
