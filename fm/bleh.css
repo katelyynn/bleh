@@ -5795,6 +5795,13 @@ very, very, very dated - who looks up a song on ebay? */
 }
 [data-analytics-label="profile"] {
     --mask: var(--icon-16-user);
+    text-align: center;
+    --btn-top: calc(7px + 16px + 6px);
+    --left: 50%;
+    --margin-left: -8px;
+    --top: 7px;
+    --margin-top: 0;
+    --btn-left: 12px !important;
 }
 [data-analytics-label="notifications"] {
     --mask: var(--icon-16-notifications);
