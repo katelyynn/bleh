@@ -169,7 +169,8 @@ let profile_badges = {
 let theme_names = {
     'dark': 'Dark',
     'light': 'Light',
-    'oled': 'OLED'
+    'oled': 'OLED',
+    'darker': 'Darker'
 };
 
 
@@ -598,6 +599,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         let current_theme = settings.theme;
 
         if (current_theme == 'dark')
+            current_theme = 'darker';
+        else if (current_theme == 'darker')
             current_theme = 'oled';
         else if (current_theme == 'oled')
             current_theme = 'light';
@@ -1085,10 +1088,10 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                             </div>
                             <div class="text">
                                 <h5>Themes</h5>
-                                <p>Choose between light, dark, and oled.</p>
+                                <p>Choose from light to oled.</p>
                             </div>
                             <div class="image-row">
-                                <img src="https://cutensilly.org/img/bleh2-addon-oled.png">
+                                <img src="https://cutensilly.org/img/bleh3-theme-oled.png">
                             </div>
                         </button>
                     </div>
@@ -1117,7 +1120,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     <h3>Themes</h3>
                     <h4>Dark</h4>
                     <div class="setting-items">
-                        <div class="side-left full">
+                        <div class="side-left full more">
                             <button class="btn setting-item has-image" data-bleh-theme="dark" onclick="change_theme_from_settings('dark')">
                                 <div class="image">
                                     <div class="icon bleh--theme-dark"></div>
@@ -1127,7 +1130,19 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                                     <p>The default flavour of bleh</p>
                                 </div>
                                 <div class="image-row">
-                                    <img src="https://cutensilly.org/img/bleh2-main.png" alt="Screenshot of bleh's default dark theme">
+                                    <img src="https://cutensilly.org/img/bleh3-theme-dark.png" alt="Screenshot of bleh's default dark theme">
+                                </div>
+                            </button>
+                            <button class="btn setting-item has-image" data-bleh-theme="darker" onclick="change_theme_from_settings('darker')">
+                                <div class="image">
+                                    <div class="icon bleh--theme-dark"></div>
+                                </div>
+                                <div class="text">
+                                    <h5>Darker</h5>
+                                    <p>The in-between</p>
+                                </div>
+                                <div class="image-row">
+                                    <img src="https://cutensilly.org/img/bleh3-theme-darker.png" alt="Screenshot of bleh's darker theme">
                                 </div>
                             </button>
                             <button class="btn setting-item has-image" data-bleh-theme="oled" onclick="change_theme_from_settings('oled')">
@@ -1141,14 +1156,14 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                                     <p>Ultra blackout</p>
                                 </div>
                                 <div class="image-row">
-                                    <img src="https://cutensilly.org/img/bleh2-addon-oled.png" alt="Screenshot of bleh's oled theme">
+                                    <img src="https://cutensilly.org/img/bleh3-theme-oled.png" alt="Screenshot of bleh's oled theme">
                                 </div>
                             </button>
                         </div>
                     </div>
                     <h4>Light</h4>
                     <div class="setting-items">
-                        <div class="side-left full">
+                        <div class="side-left full more">
                             <button class="btn setting-item has-image" data-bleh-theme="light" onclick="change_theme_from_settings('light')">
                                 <div class="image">
                                     <div class="icon bleh--theme-light">
@@ -1157,10 +1172,10 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                                 </div>
                                 <div class="text">
                                     <h5>Light</h5>
-                                    <p>Low saturation, brightly coloured</p>
+                                    <p>Low saturation and bright</p>
                                 </div>
                                 <div class="image-row">
-                                    <img src="https://cutensilly.org/img/bleh2-addon-light.png" alt="Screenshot of bleh's light theme">
+                                    <img src="https://cutensilly.org/img/bleh3-theme-light.png" alt="Screenshot of bleh's light theme">
                                 </div>
                             </button>
                         </div>

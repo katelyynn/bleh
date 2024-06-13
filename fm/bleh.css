@@ -71,12 +71,26 @@ body, [data-page-resource-type="album"], [data-page-resource-type="track"],
     --b6: var(--hue), calc(var(--sat) * 12%), 10%;
     --b7: 0, 0%, 0%;
 
-    [data-bleh--theme="oled"] & {
+    [data-bleh--theme="darker"] & {
         /* any additional highlights */
-        --b3: var(--hue), calc(var(--sat) * 6%), 14%;
+        --b3: var(--hue), calc(var(--sat) * 4%), 24%;
 
         /* card border */
-        --b4: var(--hue), calc(var(--sat) * 8%), 8%;
+        --b4: var(--hue), calc(var(--sat) * 6%), 16%;
+
+        /* card */
+        --b5: var(--hue), calc(var(--sat) * 7%), 8%;
+
+        /* root */
+        --b6: var(--hue), calc(var(--sat) * 10%), 4%;
+        --b7: 0, 0%, 0%;
+    }
+    [data-bleh--theme="oled"] & {
+        /* any additional highlights */
+        --b3: var(--hue), calc(var(--sat) * 6%), 16%;
+
+        /* card border */
+        --b4: var(--hue), calc(var(--sat) * 8%), 9%;
 
         /* card */
         --b5: var(--hue), calc(var(--sat) * 20%), 2%;
@@ -10810,6 +10824,10 @@ code, kbd, samp {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
         gap: 6px;
+
+        &.more {
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        }
     }
 
     .side-right {
