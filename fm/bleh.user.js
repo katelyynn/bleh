@@ -2170,11 +2170,14 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
 
                     // duration
-                    try {let track_timestamp = track.querySelector('.chartlist-timestamp span');
-                    tippy(track_timestamp, {
-                        content: track_timestamp.getAttribute('title')
-                    });
-                    track_timestamp.setAttribute('title',''); } catch(e) {}
+                    let track_timestamp = track.querySelector('.chartlist-timestamp span');
+                    if (track_timestamp != undefined) {
+                        tippy(track_timestamp, {
+                            content: track_timestamp.getAttribute('title')
+                        });
+                        track_timestamp.setAttribute('title','');
+                    }
+
 
                     // image
                     let track_image = track.querySelector('.chartlist-image img');
