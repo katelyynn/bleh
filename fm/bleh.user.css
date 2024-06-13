@@ -11388,12 +11388,12 @@ input[type="range"]::-moz-range-thumb {
 
 [data-bleh--format_guest_features="true"] {
     .bleh--chartlist-name-without-features {
-        display: none;
+        display: none !important;
     }
 }
 [data-bleh--format_guest_features="false"] {
     .bleh--chartlist-name-with-features {
-        display: none;
+        display: none !important;
     }
 }
 

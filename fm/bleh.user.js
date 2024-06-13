@@ -1348,8 +1348,12 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                                             <span class="feat">feat. Sunday Service Choir</span>
                                         </a>
                                     </td>
-                                    <td class="chartlist-artist">
+                                    <td class="chartlist-artist bleh--chartlist-name-without-features">
                                         <a href="/music/Quadeca" title="Quadeca">Quadeca</a>
+                                    </td>
+                                    <td class="chartlist-artist bleh--chartlist-name-with-features">
+                                        <a href="/music/Quadeca" title="Quadeca">Quadeca</a>,
+                                        <a href="/music/Quadeca" title="Quadeca">Sunday Service Choir</a>
                                     </td>
                                     <td class="chartlist-bar">
                                         <span class="chartlist-count-bar">
@@ -2120,16 +2124,19 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
         if (settings.format_guest_features) {
             try {
-            let tracks = element.querySelectorAll('.chartlist-row');
+            let tracks = element.querySelectorAll('.chartlist-row:not(.chartlist__placeholder-row)');
 
             tracks.forEach((track) => {
                 if (!track.hasAttribute('data-kate-processed')) {
                     track.setAttribute('data-kate-processed','true');
 
+                    console.log(track);
+
                     let track_title = track.querySelector('.chartlist-name a');
                     let track_artist = track_title.getAttribute('href').split('/')[2].replaceAll('+',' ');
 
                     let formatted_title = name_includes(track_title.textContent, track_artist);
+                    console.log('formatted', formatted_title);
                     let song_title = formatted_title[0];
                     let song_tags = formatted_title[1];
 
@@ -2142,8 +2149,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     // combine
                     track_title.innerHTML = `<div class="title">${song_title}</div>${song_tags_text}`;
 
-                    try {
-                        let song_artist_element = track.querySelector('.chartlist-artist');
+                    let song_artist_element = track.querySelector('.chartlist-artist');
+                    if (song_artist_element != undefined) {
                         if (song_artist_element.textContent.replaceAll('+', ' ').trim() == track_artist) {
                             let song_guests = formatted_title[3];
                             for (let guest in song_guests) {
@@ -2158,9 +2165,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                                 song_artist_element.appendChild(guest_element);
                             }
                         }
+                    }
 
-
-                    } catch(e) {console.error(e)}
 
 
                     // duration
