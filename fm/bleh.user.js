@@ -41,51 +41,63 @@ let song_title_corrections = {
     }
 };
 
-let includes = [
-    // featuring
-    '(feat', '[feat',
-    '(with', '[with',
-    '(ft', '[ft', 'ft.',
-    'w/ ',
-    // tv
-    '(taylor',
-    // mixes / demos
-    '(devonshire mix', '- devonshire mix',
-    '(remaster', '- remaster',
-    '(remix', '- remix',
-    '(live', '- live',
-    '(demo', '- demo', '[demo', '[sample clearance demo',
-    '(rehearsal demo', '- rehearsal demo',
-    '(home demo', '- home demo',
-    '(solo acoustic', '- solo acoustic',
-    '(acoustic', '- acoustic',
-    '(alternative', '- alternative',
-    '(mix 1', '(mix 2', '(mix 3', '(mix 4', '(mix 5', '(mix 6', '(mix 7', '(mix 8', '(mix 9',
-    '- spotify singles',
-    '(acapella', '(instrumental', '- acapella', '- instrumental',
-    '(choppednotslopped', '- choppednotslopped',
-    '(skit', '- skit',
-    '(extended', '- extended',
-    '- 1992/live', '(boombox', '- boombox', '(mtv unplugged', '- mtv unplugged',
-    '(from the vault)',
-    '(edit', '- edit',
-    '(from', '- from',
-    // bonus!
-    '(bonus', '- bonus', '[bonus',
-    '(nevermind version', '- nevermind version', '(blew ep version', '- blew ep version',
-    '(b-side', '(c-side', '- b-side', '- c-side',
-    '(deluxe', '- deluxe', '(digital deluxe', '(complete edition', '(extended edition',
-    '(anniversary',
-    '(sessions', '(studio session',
-    '(lp', '(ep', '- lp', '- ep',
-    '(19', '- 19', '(20', '- 20',
-    '(original', '- original',
-    '(kate', // :3
-    '(smart session', '- smart session', '[smart session',
-    '- ep','- single',
-    '[clean]',
-    '(outro', '- outro'
-];
+let includes = {
+    guests: [
+        '- feat', '(feat', '[feat', 'feat.',
+        '- with', '(with', '[with',
+        '- ft', '(ft', '[ft', 'ft.',
+        'w/ '
+    ],
+    versions: [
+        '(taylor', '- spotify singles'
+    ],
+    mixes: [
+        '- devonshire mix', '(devonshire mix',
+        '- remaster', '(remaster',
+        '- remix', '(remix',
+        '- live', '(live',
+        '- demo', '(demo',
+        '(from the vault', '[from the vault',
+        '- rehearsal', '(rehearsal',
+        '- sample clearance', '(sample clearance', '[sample clearance',
+        '- home demo', '(home demo',
+        '- solo acoustic', '(solo acoustic',
+        '- acoustic', '(acoustic',
+        '- alternative', '(alternative',
+        '(mix 1', '(mix 2', '(mix 3', '(mix 4', '(mix 5', '(mix 6', '(mix 7', '(mix 8', '(mix 9',
+        '- choppednotslopped', '(choppednotslopped', '[choppednotslopped'
+    ],
+    stems: [
+        '- acapella', '(acapella', '[acapella',
+        '- instrumental', '(instrumental', '[instrumental',
+        '- session', '(session', '[session',
+        '- studio session', '(studio session', '[studio session',
+        '- smart session', '(smart session', '[smart session',
+        '- boombox', '(boombox',
+        '- mtv unplugged', '(mtv unplugged',
+        '- unplugged', '(unplugged',
+    ],
+    bonus: [
+        '- intro', '(intro', '[intro',
+        '- outro', '(outro', '[outro',
+        '- interlude', '(interlude', '[interlude',
+        '- bonus', '(bonus', '[bonus',
+        '- edit', '(edit', '[edit',
+        '- from', '(from', '[from',
+        '- skit', '(skit',
+        '- original', '(original', '[original',
+        '[clean', '[explicit',
+        '- deluxe', '(deluxe', '[deluxe',
+        '- digital deluxe', '(digital deluxe', '[digital deluxe',
+        '- complete edition', '(complete edition', '[complete edition',
+        '- extended', '(extended', '[extended',
+        '- anniversary', '(anniversary', '[anniversary',
+        '- b-side', '- c-side', '(b-side', '(c-side',
+        '- lp', '- ep', '(lp', '(ep',
+        '- single', '(single',
+        '- 19', '- 20', '(19', '(20'
+    ]
+}
 
 let profile_badges = {
     'cutensilly': {
@@ -1767,19 +1779,29 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
         console.log(formatted_title, lowercase_title);
 
-        for (let include in includes) {
-            if (lowercase_title.includes(includes[include])) {
-                let chr = lowercase_title.indexOf(`${includes[include]}`);
 
-                extras.push({
-                    type: includes[include],
-                    chr: chr
-                });
+        // includes is now sorted into groups, first we run thru groups
+        for (let group in includes) {
+            // now we run thru individual includes in said-group
+            for (let possible_match in includes[group]) {
+                // does the title include this text match?
+                if (lowercase_title.includes(includes[group][possible_match])) {
+                    // mark character in string
+                    let chr = lowercase_title.indexOf(`${includes[group][possible_match]}`);
+
+                    extras.push({
+                        type: includes[group][possible_match],
+                        group: group,
+                        chr: chr
+                    })
+                }
             }
         }
 
+        // sort by occurance in string
         extras.sort((a, b) => a.chr - b.chr);
 
+        // remove tags from original title
         for (let extra in extras) {
             formatted_title = formatted_title.slice(0, (extras[extra].chr - 1));
             break;
@@ -1801,14 +1823,12 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             }
 
 
-            let field_type = extras[extra].type;
+            let field_group = extras[extra].group;
+            // remove beginning tag
             let field_text = extras[extra].text.replace('feat. ','').replace('w/ ','').replace('with ','').replaceAll(' & ',';').replaceAll(', ','; ').replaceAll('Tyler; the', 'Tyler, the').replaceAll(' with ',';');
-            if (field_type == '(feat' || field_type == '[feat' || field_type == '(with' || field_type == '[with' || field_type == 'w/ ') {
-                console.info('GUESTS', field_text.split(';'));
+
+            if (field_group == 'guests')
                 song_guests = field_text.split(';');
-            } else {
-                console.log('skipping');
-            }
         }
 
         if (extras.length > 0)
@@ -1839,7 +1859,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     // parse tags into text
                     let song_tags_text = '';
                     for (let song_tag in song_tags) {
-                        song_tags_text = `${song_tags_text}<div class="feat" data-bleh--tag-type="${song_tags[song_tag].type}">${song_tags[song_tag].text}</div>`;
+                        song_tags_text = `${song_tags_text}<div class="feat" data-bleh--tag-type="${song_tags[song_tag].type}" data-bleh--tag-group="${song_tags[song_tag].group}">${song_tags[song_tag].text}</div>`;
                     }
 
                     // combine
