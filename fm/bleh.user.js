@@ -71,7 +71,7 @@ let includes = [
     '(edit', '- edit',
     '(from', '- from',
     // bonus!
-    '(bonus', '- bonus',
+    '(bonus', '- bonus', '[bonus',
     '(nevermind version', '- nevermind version', '(blew ep version', '- blew ep version',
     '(b-side', '(c-side', '- b-side', '- c-side',
     '(deluxe', '- deluxe', '(digital deluxe', '(complete edition', '(extended edition',
@@ -1847,16 +1847,22 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
                     try {
                         let song_artist_element = track.querySelector('.chartlist-artist');
+                        if (song_artist_element.textContent.replaceAll('+', ' ').trim() == track_artist) {
+                            let song_guests = formatted_title[3];
+                            for (let guest in song_guests) {
+                                // &
+                                song_artist_element.innerHTML = `${song_artist_element.innerHTML},`;
 
-                        let song_guests = formatted_title[3];
-                        for (let guest in song_guests) {
-                            let guest_element = document.createElement('a');
-                            guest_element.setAttribute('href',`/music/${song_guests[guest]}`);
-                            guest_element.setAttribute('title',song_guests[guest]);
-                            guest_element.textContent = song_guests[guest];
+                                let guest_element = document.createElement('a');
+                                guest_element.setAttribute('href',`/music/${song_guests[guest]}`);
+                                guest_element.setAttribute('title',song_guests[guest]);
+                                guest_element.textContent = song_guests[guest];
 
-                            song_artist_element.appendChild(guest_element);
+                                song_artist_element.appendChild(guest_element);
+                            }
                         }
+
+
                     } catch(e) {console.error(e)}
                 }
             });
@@ -1886,6 +1892,21 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
                 // combine
                 track_title.innerHTML = `<div class="title">${song_title}</div>${song_tags_text}`;
+
+                let song_artist_element = element.querySelector('span[itemprop="byArtist"]');
+                let song_guests = formatted_title[3];
+                for (let guest in song_guests) {
+                    // &
+                    song_artist_element.innerHTML = `${song_artist_element.innerHTML},`;
+
+                    let guest_element = document.createElement('a');
+                    guest_element.classList.add('header-new-crumb');
+                    guest_element.setAttribute('href',`/music/${song_guests[guest]}`);
+                    guest_element.setAttribute('title',song_guests[guest]);
+                    guest_element.textContent = song_guests[guest];
+
+                    song_artist_element.appendChild(guest_element);
+                }
             }
             } catch(e) {}
         }

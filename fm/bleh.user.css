@@ -2742,11 +2742,22 @@ header:is(.header-new--album, .header-new--track) .header-new-background-overlay
     /* appears weird */
 }
 
-span[itemprop="byArtist"] .header-new-crumb {
-    color: hsla(var(--c1), 0.8);
-    opacity: unset;
+span[itemprop="byArtist"] {
+    display: flex;
+    color: hsl(var(--c3));
     font-size: 24px;
-    font-weight: var(--font-weight-medium);
+    line-height: 24px;
+
+    .header-new-crumb {
+        color: hsla(var(--c1), 0.8);
+        opacity: unset;
+        font-size: 24px;
+        font-weight: var(--font-weight-medium);
+    }
+
+    a + a {
+        margin-left: 4px;
+    }
 }
 span[itemprop="byArtist"] + .header-new-title {
     margin-bottom: 4px !important;
@@ -4037,7 +4048,7 @@ better than the default selector '#app a' i suppose */
     position: relative;
 }
 .obsession-candidate-artist,
-.chartlist-name .feat, .chartlist-artist, .featured-item-artist, .artist-top-albums-item-artist, .similar-albums-item-artist, .track-similar-tracks-item-artist {
+.chartlist-name .feat, .chartlist-artist a, .featured-item-artist, .artist-top-albums-item-artist, .similar-albums-item-artist, .track-similar-tracks-item-artist {
     color: hsla(var(--c2), 80%) !important;
     font-weight: var(--font-weight);
 }
@@ -4048,12 +4059,10 @@ better than the default selector '#app a' i suppose */
 
 .chartlist-artist {
     display: flex !important;
-    gap: 4px;
+    color: hsl(var(--c3)) !important;
 
-    a + a:before {
-        content: '&';
-        color: hsl(var(--c3)) !important;
-        margin-right: 4px;
+    a + a {
+        margin-left: 4px;
     }
 }
 
@@ -4112,7 +4121,9 @@ better than the default selector '#app a' i suppose */
     width: 70%;
 }
 .chartlist-row--with-artist .chartlist-artist {
-    width: 25%;
+    width: 35%;
+    position: relative;
+    left: 30px;
 }
 .chartlist-timestamp {
     width: 150px;
