@@ -4052,8 +4052,12 @@ better than the default selector '#app a' i suppose */
     color: hsla(var(--c2), 80%) !important;
     font-weight: var(--font-weight);
 }
-.chartlist-name .feat:is([data-type$="demo"], [data-type$="20"], [data-type$="19"], [data-type^="90"], [data-type*="long pond studio"], [data-type="(from the vault)"]) {
-    color: hsl(var(--c3));
+.chartlist-name .feat:is(
+    [data-bleh--tag-group="mixes"],
+    [data-bleh--tag-group="stems"],
+    [data-bleh--tag-group="bonus"]
+) {
+    color: hsl(var(--c3)) !important;
 }
 
 

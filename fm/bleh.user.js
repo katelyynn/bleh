@@ -43,9 +43,9 @@ let song_title_corrections = {
 
 let includes = {
     guests: [
-        '- feat', '(feat', '[feat', 'feat.',
+        '- feat', '(feat', '[feat', ' feat.',
         '- with', '(with', '[with',
-        '- ft', '(ft', '[ft', 'ft.',
+        '- ft', '(ft', '[ft', ' ft.',
         'w/ '
     ],
     versions: [
@@ -57,7 +57,6 @@ let includes = {
         '- remix', '(remix',
         '- live', '(live',
         '- demo', '(demo',
-        '(from the vault', '[from the vault',
         '- rehearsal', '(rehearsal',
         '- sample clearance', '(sample clearance', '[sample clearance',
         '- home demo', '(home demo',
@@ -76,6 +75,7 @@ let includes = {
         '- boombox', '(boombox',
         '- mtv unplugged', '(mtv unplugged',
         '- unplugged', '(unplugged',
+        '- the long pond studio', '(the long pond studio'
     ],
     bonus: [
         '- intro', '(intro', '[intro',
