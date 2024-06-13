@@ -57,51 +57,63 @@ let song_title_corrections = {
     }
 };
 
-let includes = [
-    // featuring
-    '(feat', '[feat',
-    '(with', '[with',
-    '(ft', '[ft', 'ft.',
-    'w/ ',
-    // tv
-    '(taylor',
-    // mixes / demos
-    '(devonshire mix', '- devonshire mix',
-    '(remaster', '- remaster',
-    '(remix', '- remix',
-    '(live', '- live',
-    '(demo', '- demo', '[demo', '[sample clearance demo',
-    '(rehearsal demo', '- rehearsal demo',
-    '(home demo', '- home demo',
-    '(solo acoustic', '- solo acoustic',
-    '(acoustic', '- acoustic',
-    '(alternative', '- alternative',
-    '(mix 1', '(mix 2', '(mix 3', '(mix 4', '(mix 5', '(mix 6', '(mix 7', '(mix 8', '(mix 9',
-    '- spotify singles',
-    '(acapella', '(instrumental', '- acapella', '- instrumental',
-    '(choppednotslopped', '- choppednotslopped',
-    '(skit', '- skit',
-    '(extended', '- extended',
-    '- 1992/live', '(boombox', '- boombox', '(mtv unplugged', '- mtv unplugged',
-    '(from the vault)',
-    '(edit', '- edit',
-    '(from', '- from',
-    // bonus!
-    '(bonus', '- bonus',
-    '(nevermind version', '- nevermind version', '(blew ep version', '- blew ep version',
-    '(b-side', '(c-side', '- b-side', '- c-side',
-    '(deluxe', '- deluxe', '(digital deluxe', '(complete edition', '(extended edition',
-    '(anniversary',
-    '(sessions', '(studio session',
-    '(lp', '(ep', '- lp', '- ep',
-    '(19', '- 19', '(20', '- 20',
-    '(original', '- original',
-    '(kate', // :3
-    '(smart session', '- smart session', '[smart session',
-    '- ep','- single',
-    '[clean]',
-    '(outro', '- outro'
-];
+let includes = {
+    guests: [
+        '- feat', '(feat', '[feat', ' feat.',
+        '- with', '(with', '[with',
+        '- ft', '(ft', '[ft', ' ft.',
+        'w/ '
+    ],
+    versions: [
+        '(taylor', '- spotify singles'
+    ],
+    mixes: [
+        '- devonshire mix', '(devonshire mix',
+        '- remaster', '(remaster',
+        '- remix', '(remix',
+        '- live', '(live',
+        '- demo', '(demo',
+        '- rehearsal', '(rehearsal',
+        '- sample clearance', '(sample clearance', '[sample clearance',
+        '- home demo', '(home demo',
+        '- solo acoustic', '(solo acoustic',
+        '- acoustic', '(acoustic',
+        '- alternative', '(alternative',
+        '(mix 1', '(mix 2', '(mix 3', '(mix 4', '(mix 5', '(mix 6', '(mix 7', '(mix 8', '(mix 9',
+        '- choppednotslopped', '(choppednotslopped', '[choppednotslopped'
+    ],
+    stems: [
+        '- acapella', '(acapella', '[acapella',
+        '- instrumental', '(instrumental', '[instrumental',
+        '- session', '(session', '[session',
+        '- studio session', '(studio session', '[studio session',
+        '- smart session', '(smart session', '[smart session',
+        '- boombox', '(boombox',
+        '- mtv unplugged', '(mtv unplugged',
+        '- unplugged', '(unplugged',
+        '- the long pond studio', '(the long pond studio'
+    ],
+    bonus: [
+        '- intro', '(intro', '[intro',
+        '- outro', '(outro', '[outro',
+        '- interlude', '(interlude', '[interlude',
+        '- bonus', '(bonus', '[bonus',
+        '- edit', '(edit', '[edit',
+        '- from', '(from', '[from',
+        '- skit', '(skit',
+        '- original', '(original', '[original',
+        '[clean', '[explicit',
+        '- deluxe', '(deluxe', '[deluxe',
+        '- digital deluxe', '(digital deluxe', '[digital deluxe',
+        '- complete edition', '(complete edition', '[complete edition',
+        '- extended', '(extended', '[extended',
+        '- anniversary', '(anniversary', '[anniversary',
+        '- b-side', '- c-side', '(b-side', '(c-side',
+        '- lp', '- ep', '(lp', '(ep',
+        '- single', '(single',
+        '- 19', '- 20', '(19', '(20'
+    ]
+}
 
 let profile_badges = {
     'cutensilly': {
@@ -2044,23 +2056,36 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
         console.log(formatted_title, lowercase_title);
 
-        for (let include in includes) {
-            if (lowercase_title.includes(includes[include])) {
-                let chr = lowercase_title.indexOf(`${includes[include]}`);
 
-                extras.push({
-                    type: includes[include],
-                    chr: chr
-                });
+        // includes is now sorted into groups, first we run thru groups
+        for (let group in includes) {
+            // now we run thru individual includes in said-group
+            for (let possible_match in includes[group]) {
+                // does the title include this text match?
+                if (lowercase_title.includes(includes[group][possible_match])) {
+                    // mark character in string
+                    let chr = lowercase_title.indexOf(`${includes[group][possible_match]}`);
+
+                    extras.push({
+                        type: includes[group][possible_match],
+                        group: group,
+                        chr: chr
+                    })
+                }
             }
         }
 
+        // sort by occurance in string
         extras.sort((a, b) => a.chr - b.chr);
 
+        // remove tags from original title
         for (let extra in extras) {
             formatted_title = formatted_title.slice(0, (extras[extra].chr - 1));
             break;
         }
+
+        // find song guests
+        let song_guests = [];
 
         console.log(extras);
         for (let extra in extras) {
@@ -2073,12 +2098,20 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 let chr = extras[extra].chr;
                 extras[extra].text = original_title.slice(chr).replaceAll('(','').replaceAll(')','').replaceAll('[','').replaceAll(']','').replaceAll('- ','');
             }
+
+
+            let field_group = extras[extra].group;
+            // remove beginning tag
+            let field_text = extras[extra].text.replace('feat. ','').replace('w/ ','').replace('with ','').replaceAll(' & ',';').replaceAll(', ','; ').replaceAll('Tyler; the', 'Tyler, the').replaceAll(' with ',';');
+
+            if (field_group == 'guests')
+                song_guests = field_text.split(';');
         }
 
         if (extras.length > 0)
-            return [formatted_title, extras, original_artist];
+            return [formatted_title, extras, original_artist, song_guests];
         else
-            return [formatted_title, [], original_artist];
+            return [formatted_title, [], original_artist, song_guests];
     }
 
 
@@ -2087,12 +2120,13 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
         if (settings.format_guest_features) {
             try {
-            let track_titles = element.querySelectorAll('.chartlist-name a');
+            let tracks = element.querySelectorAll('.chartlist-row');
 
-            track_titles.forEach((track_title) => {
-                if (!track_title.hasAttribute('data-kate-processed')) {
-                    track_title.setAttribute('data-kate-processed','true');
+            tracks.forEach((track) => {
+                if (!track.hasAttribute('data-kate-processed')) {
+                    track.setAttribute('data-kate-processed','true');
 
+                    let track_title = track.querySelector('.chartlist-name a');
                     let track_artist = track_title.getAttribute('href').split('/')[2].replaceAll('+',' ');
 
                     let formatted_title = name_includes(track_title.textContent, track_artist);
@@ -2102,11 +2136,31 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     // parse tags into text
                     let song_tags_text = '';
                     for (let song_tag in song_tags) {
-                        song_tags_text = `${song_tags_text}<div class="feat" data-bleh--tag-type="${song_tags[song_tag].type}">${song_tags[song_tag].text}</div>`;
+                        song_tags_text = `${song_tags_text}<div class="feat" data-bleh--tag-type="${song_tags[song_tag].type}" data-bleh--tag-group="${song_tags[song_tag].group}">${song_tags[song_tag].text}</div>`;
                     }
 
                     // combine
                     track_title.innerHTML = `<div class="title">${song_title}</div>${song_tags_text}`;
+
+                    try {
+                        let song_artist_element = track.querySelector('.chartlist-artist');
+                        if (song_artist_element.textContent.replaceAll('+', ' ').trim() == track_artist) {
+                            let song_guests = formatted_title[3];
+                            for (let guest in song_guests) {
+                                // &
+                                song_artist_element.innerHTML = `${song_artist_element.innerHTML},`;
+
+                                let guest_element = document.createElement('a');
+                                guest_element.setAttribute('href',`/music/${song_guests[guest]}`);
+                                guest_element.setAttribute('title',song_guests[guest]);
+                                guest_element.textContent = song_guests[guest];
+
+                                song_artist_element.appendChild(guest_element);
+                            }
+                        }
+
+
+                    } catch(e) {console.error(e)}
                 }
             });
             } catch(e) {console.error('AA',e)}
@@ -2135,6 +2189,21 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
                 // combine
                 track_title.innerHTML = `<div class="title">${song_title}</div>${song_tags_text}`;
+
+                let song_artist_element = element.querySelector('span[itemprop="byArtist"]');
+                let song_guests = formatted_title[3];
+                for (let guest in song_guests) {
+                    // &
+                    song_artist_element.innerHTML = `${song_artist_element.innerHTML},`;
+
+                    let guest_element = document.createElement('a');
+                    guest_element.classList.add('header-new-crumb');
+                    guest_element.setAttribute('href',`/music/${song_guests[guest]}`);
+                    guest_element.setAttribute('title',song_guests[guest]);
+                    guest_element.textContent = song_guests[guest];
+
+                    song_artist_element.appendChild(guest_element);
+                }
             }
             } catch(e) {}
         }

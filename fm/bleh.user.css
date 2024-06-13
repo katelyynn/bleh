@@ -2871,11 +2871,22 @@ header:is(.header-new--album, .header-new--track) .header-new-background-overlay
     /* appears weird */
 }
 
-span[itemprop="byArtist"] .header-new-crumb {
-    color: hsla(var(--c1), 0.8);
-    opacity: unset;
+span[itemprop="byArtist"] {
+    display: flex;
+    color: hsl(var(--c3));
     font-size: 24px;
-    font-weight: var(--font-weight-medium);
+    line-height: 24px;
+
+    .header-new-crumb {
+        color: hsla(var(--c1), 0.8);
+        opacity: unset;
+        font-size: 24px;
+        font-weight: var(--font-weight-medium);
+    }
+
+    a + a {
+        margin-left: 4px;
+    }
 }
 span[itemprop="byArtist"] + .header-new-title {
     margin-bottom: 4px !important;
@@ -4166,13 +4177,28 @@ better than the default selector '#app a' i suppose */
     position: relative;
 }
 .obsession-candidate-artist,
-.chartlist-name .feat, .chartlist-artist, .featured-item-artist, .artist-top-albums-item-artist, .similar-albums-item-artist, .track-similar-tracks-item-artist {
+.chartlist-name .feat, .chartlist-artist a, .featured-item-artist, .artist-top-albums-item-artist, .similar-albums-item-artist, .track-similar-tracks-item-artist {
     color: hsla(var(--c2), 80%) !important;
     font-weight: var(--font-weight);
 }
-.chartlist-name .feat:is([data-type$="demo"], [data-type$="20"], [data-type$="19"], [data-type^="90"], [data-type*="long pond studio"], [data-type="(from the vault)"]) {
-    color: hsl(var(--c3));
+.chartlist-name .feat:is(
+    [data-bleh--tag-group="mixes"],
+    [data-bleh--tag-group="stems"],
+    [data-bleh--tag-group="bonus"]
+) {
+    color: hsl(var(--c3)) !important;
 }
+
+
+.chartlist-artist {
+    display: flex !important;
+    color: hsl(var(--c3)) !important;
+
+    a + a {
+        margin-left: 4px;
+    }
+}
+
 
 .chartlist:not(.chartlist--with-image) .chartlist-row--with-artist .chartlist-name {
     margin-bottom: unset;
@@ -4228,7 +4254,9 @@ better than the default selector '#app a' i suppose */
     width: 70%;
 }
 .chartlist-row--with-artist .chartlist-artist {
-    width: 25%;
+    width: 35%;
+    position: relative;
+    left: 30px;
 }
 .chartlist-timestamp {
     width: 150px;
