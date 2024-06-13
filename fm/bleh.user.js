@@ -2106,7 +2106,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
             let field_group = extras[extra].group;
             // remove beginning tag
-            let field_text = extras[extra].text.replace('feat. ','').replace('w/ ','').replace('with ','').replaceAll(' & ',';').replaceAll(', ','; ').replaceAll('Tyler; the', 'Tyler, the').replaceAll(' with ',';');
+            let field_text = extras[extra].text.replace('feat. ','').replace('w/ ','').replace('with ','').replaceAll(' & ',';').replaceAll(', ',';').replaceAll('Tyler;the', 'Tyler, the').replaceAll(' with ',';');
 
             if (field_group == 'guests')
                 song_guests = field_text.split(';');
