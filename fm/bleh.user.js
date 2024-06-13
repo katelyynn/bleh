@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         bleh
 // @namespace    http://last.fm/
-// @version      2024.0612
+// @version      2024.0613
 // @description  bleh!!! ^-^
 // @author       kate
 // @match        https://www.last.fm/*
@@ -15,7 +15,7 @@
 // @require      https://unpkg.com/tippy.js@6
 // ==/UserScript==
 
-let version = '2024.0612';
+let version = '2024.0613';
 
 tippy.setDefaultProps({
     arrow: false,
@@ -2161,6 +2161,20 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
 
                     } catch(e) {console.error(e)}
+
+
+                    // duration
+                    try {let track_timestamp = track.querySelector('.chartlist-timestamp span');
+                    tippy(track_timestamp, {
+                        content: track_timestamp.getAttribute('title')
+                    });
+                    track_timestamp.setAttribute('title',''); } catch(e) {}
+
+                    // image
+                    let track_image = track.querySelector('.chartlist-image img');
+                    tippy(track_image, {
+                        content: track_image.getAttribute('alt')
+                    })
                 }
             });
             } catch(e) {console.error('AA',e)}
