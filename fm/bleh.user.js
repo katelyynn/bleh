@@ -57,6 +57,84 @@ let song_title_corrections = {
     }
 };
 
+let ranks = {
+    0: {
+        hue: 200,
+        sat: 1.5,
+        lit: 0.925
+    },
+    1: {
+        hue: 180,
+        sat: 1.5,
+        lit: 0.925
+    },
+    2: {
+        hue: 160,
+        sat: 1.5,
+        lit: 0.925
+    },
+    3: {
+        hue: 148,
+        sat: 1.35,
+        lit: 0.925
+    },
+    4: {
+        hue: 130,
+        sat: 1.35,
+        lit: 0.925
+    },
+    5: {
+        hue: 103,
+        sat: 1.35,
+        lit: 0.925
+    },
+    6: {
+        hue: 80,
+        sat: 1.35,
+        lit: 0.925
+    },
+    7: {
+        hue: 60,
+        sat: 1.375,
+        lit: 0.95
+    },
+    8: {
+        hue: 25,
+        sat: 1.425,
+        lit: 0.925
+    },
+    9: {
+        hue: 4,
+        sat: 1.425,
+        lit: 0.925
+    },
+    10: {
+        hue: 350,
+        sat: 1.5,
+        lit: 0.875
+    },
+    11: {
+        hue: 332,
+        sat: 1.5,
+        lit: 0.875
+    },
+    12: {
+        hue: 290,
+        sat: 0.875,
+        lit: 0.85
+    },
+    13: {
+        hue: 246,
+        sat: 1.2,
+        lit: 0.9
+    },
+    14: {
+        hue: 240,
+        sat: 1,
+        lit: 0.575
+    }
+}
+
 let includes = {
     guests: [
         '- feat', '(feat', '[feat', ' feat.',
