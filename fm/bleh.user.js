@@ -58,11 +58,17 @@ let song_title_corrections = {
 };
 
 let ranks = {
+    15: {
+        start: 62_000,
+        hue: -135,
+        sat: 1.5,
+        lit: 0.35
+    },
     14: {
         start: 50_000,
         hue: -105,
-        sat: 0.9,
-        lit: 0.8
+        sat: 1,
+        lit: 0.85
     },
     13: {
         start: 38_000,
@@ -1166,8 +1172,9 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     function parse_scrobbles_as_rank(scrobbles) {
         let scrobble_milestone = 0;
         let scrobble_proximity = 1;
+        let max_rank = 15;
 
-        for (let rank = 14; rank >= 0; rank--) {
+        for (let rank = max_rank; rank >= 0; rank--) {
             if (scrobbles > ranks[rank].start) {
                 console.info('bleh - PARSING RANK:', rank, ranks[rank].start);
 
@@ -1178,7 +1185,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 let next_rank = this_rank + 1;
                 let prev_rank = this_rank - 1;
 
-                if (this_rank != 14 && this_rank != 0)
+                if (this_rank != max_rank && this_rank != 0)
                     scrobble_proximity = (scrobbles - ranks[prev_rank].start) / ranks[next_rank].start;
 
                 break;
@@ -1191,7 +1198,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
         console.info('bleh - default values will be', milestone_hue, milestone_sat, milestone_lit);
 
-        if (scrobble_milestone != 14) {
+        if (scrobble_milestone != max_rank) {
             let next_milestone_hue = ranks[scrobble_milestone + 1].hue;
             let next_milestone_sat = ranks[scrobble_milestone + 1].sat;
             let next_milestone_lit = ranks[scrobble_milestone + 1].lit;
