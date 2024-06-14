@@ -402,6 +402,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             patch_lastfm_settings(document.body);
             patch_titles(document.body);
             patch_header_title(document.body);
+            patch_artist_ranks(document.body);
         }
 
         // last.fm is a single page application
@@ -424,6 +425,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                                 patch_lastfm_settings(document.body);
                                 patch_titles(document.body);
                                 patch_header_title(document.body);
+                                patch_artist_ranks(document.body);
                             }
                         }
                     }
@@ -1053,6 +1055,62 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 });
                 element.setAttribute('title','');
             }
+        }
+    }
+
+
+
+
+    // artist ranks
+    function patch_artist_ranks(element) {
+        let personal_statistic = document.querySelector('.personal-stats-item--scrobbles');
+
+        if (personal_statistic == undefined)
+            return;
+
+        if (!personal_statistic.hasAttribute('data-kate-processed')) {
+            personal_statistic.setAttribute('data-kate-processed','true');
+
+            let scrobbles = parseInt(personal_statistic.querySelector('.link-block-target').textContent.replaceAll(',',''));
+            let scrobble_milestone = 0;
+
+            if (scrobbles > 150_000)
+                scrobble_milestone = 14;
+            else if (scrobbles > 100_000)
+                scrobble_milestone = 13;
+            else if (scrobbles > 75_000)
+                scrobble_milestone = 12;
+            else if (scrobbles > 65_000)
+                scrobble_milestone = 11;
+            else if (scrobbles > 50_000)
+                scrobble_milestone = 10;
+            else if (scrobbles > 35_000)
+                scrobble_milestone = 9;
+            else if (scrobbles > 25_000)
+                scrobble_milestone = 8;
+            else if (scrobbles > 15_000)
+                scrobble_milestone = 7;
+            else if (scrobbles > 9_000)
+                scrobble_milestone = 6;
+            else if (scrobbles > 5_000)
+                scrobble_milestone = 5;
+            else if (scrobbles > 3_500)
+                scrobble_milestone = 4;
+            else if (scrobbles > 2_000)
+                scrobble_milestone = 3;
+            else if (scrobbles > 1_000)
+                scrobble_milestone = 2;
+            else if (scrobbles > 500)
+                scrobble_milestone = 1;
+            else if (scrobbles > 100)
+                scrobble_milestone = 0;
+
+            console.info('bleh - scrobble milestone for artist is',scrobble_milestone,'with',scrobbles,'scrobbles');
+
+            personal_statistic.setAttribute('data-bleh--scrobble-milestone',scrobble_milestone);
+            personal_statistic.style.setProperty('--hue',ranks[scrobble_milestone].hue);
+            personal_statistic.style.setProperty('--sat',ranks[scrobble_milestone].sat);
+            personal_statistic.style.setProperty('--lit',ranks[scrobble_milestone].lit);
         }
     }
 
