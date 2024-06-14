@@ -3430,7 +3430,7 @@ state is not active, which then falls back to primary button styling */
 
 
 /* ranks */
-.personal-stats-item--scrobbles {
+.personal-stats-item--scrobbles[data-bleh--scrobble-milestone] {
     .header-metadata-item {
         position: relative;
 
@@ -3478,7 +3478,7 @@ state is not active, which then falls back to primary button styling */
 }
 
 .grid-items-item-aux-text {
-    [data-kate-processed="true"]:not(.grid-items-item-aux-block) {
+    [data-bleh--scrobble-milestone] {
         /*padding: 0 4px;
         background-color: hsl(var(--h3));
         border-radius: var(--item-med-radius);
