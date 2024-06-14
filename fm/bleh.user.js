@@ -527,6 +527,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             correct_generic_combo_no_artist('artist-top-albums-item');
             correct_generic_combo('source-album-details');
             correct_generic_combo('resource-list--release-list-item');
+            correct_generic_combo('similar-albums-item');
             correct_generic_combo('track-similar-tracks-item');
             correct_generic_combo('similar-items-sidebar-item');
         }
@@ -558,6 +559,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                                 correct_generic_combo_no_artist('artist-top-albums-item');
                                 correct_generic_combo('source-album-details');
                                 correct_generic_combo('resource-list--release-list-item');
+                                correct_generic_combo('similar-albums-item');
                                 correct_generic_combo('track-similar-tracks-item');
                                 correct_generic_combo('similar-items-sidebar-item');
                             }

@@ -4460,10 +4460,6 @@ better than the default selector '#app a' i suppose */
 }
 
 
-#more-similar-artists {
-    margin-top: 8px;
-}
-
 .chartlist--with-album .chartlist-name, .chartlist-row--with-artist .chartlist-name {
     width: 70%;
 }
@@ -7771,6 +7767,8 @@ text[style^="color: rgb(0, 0, 0)"] {
 .similar-items-sidebar {
     margin-top: unset;
 }
+#more-similar-albums,
+#more-similar-artists,
 #more-similar-tracks,
 .similar-items-sidebar-item-wrap {
     margin-top: 8px;
