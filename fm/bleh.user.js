@@ -32,7 +32,12 @@ let artist_corrections = {
     'Valorant': 'VALORANT',
     'Tuyu': 'TUYU',
     'Hivemind': 'HIVEMIND',
-    'MGK': 'mgk'
+    'MGK': 'mgk',
+    'Horrormovies': 'horrormovies',
+    'Lieu': 'lieu',
+    'Funeral': 'funeral',
+    'Kuru': 'kuru',
+    'idkwhyy': 'Reposters #suck'
 }
 let song_title_corrections = {
     'quadeca': {
