@@ -38,7 +38,8 @@ let artist_corrections = {
     'Funeral': 'funeral',
     'Kuru': 'kuru',
     'idkwhyy': 'Reposters #suck',
-    'Quinn': 'quinn'
+    'Quinn': 'quinn',
+    'Charli XCX': 'Charli xcx'
 }
 let song_title_corrections = {
     'quadeca': {
