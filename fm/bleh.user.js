@@ -553,7 +553,6 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                                 patch_header_title(document.body);
                                 patch_artist_ranks(document.body);
                                 patch_artist_grids(document.body);
-                                patch_top_albums(document.body);
 
                                 correct_generic_combo_no_artist('artist-header-featured-items-item');
                                 correct_generic_combo_no_artist('artist-top-albums-item');
@@ -1428,27 +1427,6 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     artist_name.setAttribute('href', `/music/${corrected_artist_name}`);
                     artist_name.setAttribute('title', corrected_artist_name);
                 }
-            }
-        });
-    }
-
-
-    function patch_top_albums(element) {
-        let albums = element.querySelectorAll('.artist-top-albums-item');
-
-        if (albums == undefined)
-            return;
-
-        albums.forEach((album) => {
-            if (!album.hasAttribute('data-kate-processed')) {
-                album.setAttribute('data-kate-processed','true');
-                console.info('bleh - correcting artist top albums');
-
-                let album_name = album.querySelector('.artist-top-albums-item-name a');
-                let artist_name = album_name.getAttribute('href').split('/')[2].replaceAll('+',' ');
-
-                let corrected_album_name = correct_item_by_artist(album_name.textContent, artist_name);
-                album_name.textContent = corrected_album_name;
             }
         });
     }
