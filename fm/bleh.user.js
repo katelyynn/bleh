@@ -109,29 +109,29 @@ let ranks = {
         lit: 0.925
     },
     10: {
-        hue: 350,
+        hue: -7,
         sat: 1.5,
         lit: 0.875
     },
     11: {
-        hue: 332,
+        hue: -25,
         sat: 1.5,
         lit: 0.875
     },
     12: {
-        hue: 290,
+        hue: -55,
         sat: 0.875,
         lit: 0.85
     },
     13: {
-        hue: 246,
+        hue: -85,
         sat: 1.2,
         lit: 0.9
     },
     14: {
-        hue: 240,
-        sat: 1,
-        lit: 0.7
+        hue: -105,
+        sat: 0.9,
+        lit: 0.8
     }
 }
 
@@ -403,6 +403,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             patch_titles(document.body);
             patch_header_title(document.body);
             patch_artist_ranks(document.body);
+            patch_artist_ranks_in_grid_view(document.body);
         }
 
         // last.fm is a single page application
@@ -426,6 +427,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                                 patch_titles(document.body);
                                 patch_header_title(document.body);
                                 patch_artist_ranks(document.body);
+                                patch_artist_ranks_in_grid_view(document.body);
                             }
                         }
                     }
@@ -1063,7 +1065,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
     // artist ranks
     function patch_artist_ranks(element) {
-        let personal_statistic = document.querySelector('.personal-stats-item--scrobbles');
+        let personal_statistic = element.querySelector('.personal-stats-item--scrobbles');
 
         if (personal_statistic == undefined)
             return;
@@ -1072,79 +1074,119 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             personal_statistic.setAttribute('data-kate-processed','true');
 
             let scrobbles = parseInt(personal_statistic.querySelector('.link-block-target').textContent.replaceAll(',',''));
-            let scrobble_milestone = 0;
-            let scrobble_proximity = 0;
+            let parsed_scrobble_as_rank = parse_scrobbles_as_rank(scrobbles);
 
-            if (scrobbles > 75_000) {
-                scrobble_milestone = 14; scrobble_proximity = 1;
-            } else if (scrobbles > 65_000) {
-                scrobble_milestone = 13; scrobble_proximity = (scrobbles - 50_000) / 75_000;
-            } else if (scrobbles > 50_000) {
-                scrobble_milestone = 12; scrobble_proximity = (scrobbles - 40_000) / 65_000;
-            } else if (scrobbles > 40_000) {
-                scrobble_milestone = 11; scrobble_proximity = (scrobbles - 30_000) / 50_000;
-            } else if (scrobbles > 30_000) {
-                scrobble_milestone = 10; scrobble_proximity = (scrobbles - 20_000) / 40_000;
-            } else if (scrobbles > 20_000) {
-                scrobble_milestone = 9; scrobble_proximity = (scrobbles - 10_000) / 30_000;
-            } else if (scrobbles > 10_000) {
-                scrobble_milestone = 8; scrobble_proximity = (scrobbles - 8_000) / 20_000;
-            } else if (scrobbles > 8_000) {
-                scrobble_milestone = 7; scrobble_proximity = (scrobbles - 5_000) / 10_000;
-            } else if (scrobbles > 5_000) {
-                scrobble_milestone = 6; scrobble_proximity = (scrobbles - 3_500) / 8_000;
-            } else if (scrobbles > 3_500) {
-                scrobble_milestone = 5; scrobble_proximity = (scrobbles - 2_000) / 5_000;
-            } else if (scrobbles > 2_000) {
-                scrobble_milestone = 4; scrobble_proximity = (scrobbles - 1_000) / 3_500;
-            } else if (scrobbles > 1_000) {
-                scrobble_milestone = 3; scrobble_proximity = (scrobbles - 500) / 2_000;
-            } else if (scrobbles > 500) {
-                scrobble_milestone = 2; scrobble_proximity = (scrobbles - 300) / 1_000;
-            } else if (scrobbles > 300) {
-                scrobble_milestone = 1; scrobble_proximity = (scrobbles - 100) / 500;
-            } else if (scrobbles > 100) {
-                scrobble_milestone = 0; scrobble_proximity = scrobbles / 300;
-            }
-
-            let milestone_hue = ranks[scrobble_milestone].hue;
-            let milestone_sat = ranks[scrobble_milestone].sat;
-            let milestone_lit = ranks[scrobble_milestone].lit;
-
-            console.info('bleh - default values will be', milestone_hue, milestone_sat, milestone_lit);
-
-            if (scrobble_milestone != 14) {
-                let next_milestone_hue = ranks[scrobble_milestone + 1].hue;
-                let next_milestone_sat = ranks[scrobble_milestone + 1].sat;
-                let next_milestone_lit = ranks[scrobble_milestone + 1].lit;
-
-                console.info('bleh - next up values will be', next_milestone_hue, next_milestone_sat, next_milestone_lit);
-
-                if (milestone_hue > next_milestone_hue)
-                    milestone_hue += (next_milestone_hue - milestone_hue) * scrobble_proximity;
-
-                if (milestone_sat < next_milestone_sat)
-                    milestone_sat += (milestone_sat - next_milestone_sat) * scrobble_proximity;
-                else
-                    milestone_sat += (next_milestone_sat - milestone_sat) * scrobble_proximity;
-
-                if (milestone_lit < next_milestone_lit)
-                    milestone_lit += (milestone_lit - next_milestone_lit) * scrobble_proximity;
-                else
-                    milestone_lit += (next_milestone_lit - milestone_lit) * scrobble_proximity;
-
-                console.info('bleh - created proximity values', milestone_hue, milestone_sat, milestone_lit);
-            }
-
-
-
-            console.info('bleh - scrobble milestone for artist is',scrobble_milestone,'with',scrobbles,'scrobbles','- scrobble proximity of',scrobble_proximity);
-
-            personal_statistic.setAttribute('data-bleh--scrobble-milestone',scrobble_milestone);
-            personal_statistic.style.setProperty('--hue',milestone_hue);
-            personal_statistic.style.setProperty('--sat',milestone_sat);
-            personal_statistic.style.setProperty('--lit',milestone_lit);
+            personal_statistic.setAttribute('data-bleh--scrobble-milestone',parsed_scrobble_as_rank.milestone);
+            personal_statistic.style.setProperty('--hue',parsed_scrobble_as_rank.hue);
+            personal_statistic.style.setProperty('--sat',parsed_scrobble_as_rank.sat);
+            personal_statistic.style.setProperty('--lit',parsed_scrobble_as_rank.lit);
         }
+    }
+
+    function patch_artist_ranks_in_grid_view(element) {
+        let artist_statistics = element.querySelectorAll('.grid-items-item-aux-text a');
+
+        console.info('artist statistic', artist_statistics);
+
+        if (artist_statistics == undefined)
+            return;
+
+        artist_statistics.forEach((artist_statistic) => {
+            if (!artist_statistic.hasAttribute('data-kate-processed')) {
+                artist_statistic.setAttribute('data-kate-processed','true');
+
+                if (!artist_statistic.getAttribute('href').endsWith('DAYS') && !artist_statistic.classList.contains('grid-items-item-aux-block')) {
+                    console.info('bleh - artist grid plays match');
+
+                    let scrobbles = parseInt(artist_statistic.textContent.replaceAll(',','').replace(' plays',''));
+                    let parsed_scrobble_as_rank = parse_scrobbles_as_rank(scrobbles);
+
+                    artist_statistic.setAttribute('data-bleh--scrobble-milestone',parsed_scrobble_as_rank.milestone);
+                    artist_statistic.style.setProperty('--hue',parsed_scrobble_as_rank.hue);
+                    artist_statistic.style.setProperty('--sat',parsed_scrobble_as_rank.sat);
+                    artist_statistic.style.setProperty('--lit',parsed_scrobble_as_rank.lit);
+                }
+            }
+        });
+    }
+
+
+    function parse_scrobbles_as_rank(scrobbles) {
+        let scrobble_milestone = 0;
+        let scrobble_proximity = 0;
+
+        if (scrobbles > 30_000) {
+            scrobble_milestone = 14; scrobble_proximity = 1;
+        } else if (scrobbles > 18_000) {
+            scrobble_milestone = 13; scrobble_proximity = (scrobbles - 50_000) / 75_000;
+        } else if (scrobbles > 13_000) {
+            scrobble_milestone = 12; scrobble_proximity = (scrobbles - 40_000) / 65_000;
+        } else if (scrobbles > 8_200) {
+            scrobble_milestone = 11; scrobble_proximity = (scrobbles - 30_000) / 50_000;
+        } else if (scrobbles > 6_900) {
+            scrobble_milestone = 10; scrobble_proximity = (scrobbles - 20_000) / 40_000;
+        } else if (scrobbles > 5_400) {
+            scrobble_milestone = 9; scrobble_proximity = (scrobbles - 10_000) / 30_000;
+        } else if (scrobbles > 4_600) {
+            scrobble_milestone = 8; scrobble_proximity = (scrobbles - 8_000) / 20_000;
+        } else if (scrobbles > 3_500) {
+            scrobble_milestone = 7; scrobble_proximity = (scrobbles - 5_000) / 10_000;
+        } else if (scrobbles > 2_550) {
+            scrobble_milestone = 6; scrobble_proximity = (scrobbles - 3_500) / 8_000;
+        } else if (scrobbles > 1_900) {
+            scrobble_milestone = 5; scrobble_proximity = (scrobbles - 2_000) / 5_000;
+        } else if (scrobbles > 1_300) {
+            scrobble_milestone = 4; scrobble_proximity = (scrobbles - 1_000) / 3_500;
+        } else if (scrobbles > 1_000) {
+            scrobble_milestone = 3; scrobble_proximity = (scrobbles - 500) / 2_000;
+        } else if (scrobbles > 500) {
+            scrobble_milestone = 2; scrobble_proximity = (scrobbles - 300) / 1_000;
+        } else if (scrobbles > 300) {
+            scrobble_milestone = 1; scrobble_proximity = (scrobbles - 100) / 500;
+        } else if (scrobbles > 100) {
+            scrobble_milestone = 0; scrobble_proximity = scrobbles / 300;
+        }
+
+        let milestone_hue = ranks[scrobble_milestone].hue;
+        let milestone_sat = ranks[scrobble_milestone].sat;
+        let milestone_lit = ranks[scrobble_milestone].lit;
+
+        console.info('bleh - default values will be', milestone_hue, milestone_sat, milestone_lit);
+
+        if (scrobble_milestone != 14) {
+            let next_milestone_hue = ranks[scrobble_milestone + 1].hue;
+            let next_milestone_sat = ranks[scrobble_milestone + 1].sat;
+            let next_milestone_lit = ranks[scrobble_milestone + 1].lit;
+
+            console.info('bleh - next up values will be', next_milestone_hue, next_milestone_sat, next_milestone_lit);
+
+            if (milestone_hue > next_milestone_hue)
+                milestone_hue += (next_milestone_hue - milestone_hue) * scrobble_proximity;
+
+            if (milestone_sat < next_milestone_sat)
+                milestone_sat += (milestone_sat - next_milestone_sat) * scrobble_proximity;
+            else
+                milestone_sat += (next_milestone_sat - milestone_sat) * scrobble_proximity;
+
+            if (milestone_lit < next_milestone_lit)
+                milestone_lit += (milestone_lit - next_milestone_lit) * scrobble_proximity;
+            else
+                milestone_lit += (next_milestone_lit - milestone_lit) * scrobble_proximity;
+
+            console.info('bleh - created proximity values', milestone_hue, milestone_sat, milestone_lit);
+        }
+
+
+
+        console.info('bleh - scrobble milestone for artist is',scrobble_milestone,'with',scrobbles,'scrobbles','- scrobble proximity of',scrobble_proximity);
+
+        return {
+            milestone: scrobble_milestone,
+            proximity: scrobble_proximity,
+            hue: milestone_hue,
+            sat: milestone_sat,
+            lit: milestone_lit
+        };
     }
 
 

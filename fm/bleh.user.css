@@ -3477,6 +3477,37 @@ state is not active, which then falls back to primary button styling */
     }
 }
 
+.grid-items-item-aux-text {
+    [data-kate-processed="true"]:not(.grid-items-item-aux-block) {
+        /*padding: 0 4px;
+        background-color: hsl(var(--h3));
+        border-radius: var(--item-med-radius);
+        color: hsl(var(--b7));
+        text-shadow: none;
+        font-weight: var(--font-weight-medium);
+        font-size: 12px;
+        line-height: 16px;*/
+        position: relative;
+        padding-left: calc(6px + 4px);
+        color: hsl(var(--l2-c));
+        font-weight: var(--font-weight-medium);
+
+        &:before {
+            content: '';
+            display: block;
+            background-color: hsl(var(--l3-c)) !important;
+            box-shadow: 0 0 30px 7px hsl(var(--h4));
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            position: absolute;
+            left: 0;
+            top: 50%;
+            margin-top: -3px;
+        }
+    }
+}
+
 
 .header-metadata-item, .metadata-item, .header-metadata-tnew-item {
     padding: 7px 12px !important; /* tasteometer overrides with padding-left: 20px */
