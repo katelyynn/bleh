@@ -51,7 +51,8 @@ let song_title_corrections = {
         'being yourself': 'BEING YOURSELF',
         'I Make It Look Effortless': 'I MAKE IT LOOK EFFORTLESS',
         'Scrapyard': 'SCRAPYARD',
-        'i didn\'t mean to haunt you': 'I Didn\'t Mean To Haunt You'
+        'i didn\'t mean to haunt you': 'I Didn\'t Mean To Haunt You',
+        'Scrapyard II - Single': 'SCRAPYARD II - Single'
     },
     'yeule': {
         'Sulky Baby': 'sulky baby'
@@ -521,6 +522,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             patch_artist_ranks(document.body);
             patch_artist_grids(document.body);
             patch_track_featured_on_albums(document.body);
+            patch_similar_tracks(document.body);
         }
 
         // last.fm is a single page application
@@ -546,6 +548,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                                 patch_artist_ranks(document.body);
                                 patch_artist_grids(document.body);
                                 patch_track_featured_on_albums(document.body);
+                                patch_similar_tracks(document.body);
                             }
                         }
                     }
@@ -1436,6 +1439,30 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 let corrected_artist_name = correct_artist(artist_name.textContent);
 
                 album_name.textContent = corrected_album_name;
+                artist_name.textContent = corrected_artist_name;
+            }
+        });
+    }
+
+
+    // artist corrections for similar tracks
+    function patch_similar_tracks(element) {
+        let tracks = element.querySelectorAll('.track-similar-tracks-item');
+
+        if (tracks == undefined)
+            return;
+
+        tracks.forEach((track) => {
+            if (!track.hasAttribute('data-kate-processed')) {
+                track.setAttribute('data-kate-processed','true');
+
+                let track_name = track.querySelector('.track-similar-tracks-item-name a');
+                let artist_name = track.querySelector('.track-similar-tracks-item-artist a');
+
+                let corrected_track_name = correct_item_by_artist(track_name.textContent, artist_name.textContent);
+                let corrected_artist_name = correct_artist(artist_name.textContent);
+
+                track_name.textContent = corrected_track_name;
                 artist_name.textContent = corrected_artist_name;
             }
         });
