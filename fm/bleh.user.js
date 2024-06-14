@@ -37,7 +37,8 @@ let artist_corrections = {
     'Lieu': 'lieu',
     'Funeral': 'funeral',
     'Kuru': 'kuru',
-    'idkwhyy': 'Reposters #suck'
+    'idkwhyy': 'Reposters #suck',
+    'Quinn': 'quinn'
 }
 let song_title_corrections = {
     'quadeca': {
@@ -75,6 +76,29 @@ let song_title_corrections = {
         'April’s-Bloom': 'april’s-bloom',
         'Pushing Daises': 'pushing daises',
         'Starjump / Kit': 'starjump/kit'
+    },
+    '21 savage': {
+        'Savage Mode II': 'SAVAGE MODE II'
+    },
+    'future': {
+        'OUT OF MY HANDS': 'Out Of My Hands',
+        'NIGHTS LIKE THIS': 'Night Like This',
+        'BEAT IT': 'Beat It',
+        'ONE BIG FAMILY': 'One Big Family',
+        'YOUNG METRO': 'Young Metro',
+        'ICE ATTACK': 'Ice Attack',
+        'TYPE SHIT': 'Type Shit',
+        'CLAUSTROPHOBIC': 'Claustrophobic',
+        'SLIMED IN': 'Slimed In',
+        'MAGIC DON JUAN (PRINCESS DIANA)': 'Magic Don Juan (Princess Diana)',
+        'RUNNIN OUTTA TIME': 'Runnin Outta Time',
+        'FRIED (SHE A VIBE)': 'Fried (She a Vibe)',
+        'AIN\'T NO LOVE': 'Ain\'t No Love',
+        'EVERYDAY HUSTLE': 'Everyday Hustle',
+        'SEEN IT ALL': 'Seen it All'
+    },
+    'quinn': {
+        'Quinn': 'quinn'
     }
 };
 
