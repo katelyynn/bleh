@@ -1451,6 +1451,11 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     }
 
 
+    /**
+     * correct capitalisation of a generic album/track name & artist combo
+     * @param {string} parent individual css selector for each item wrapper
+     * @returns if not found
+     */
     function correct_generic_combo(parent) {
         let albums = document.body.querySelectorAll(`.${parent}`);
 
