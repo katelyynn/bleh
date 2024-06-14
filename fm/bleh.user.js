@@ -1310,22 +1310,57 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 // test if this grid item is an album
                 let album_artist = artist.querySelector('.grid-items-item-aux-block');
 
-                if (album_artist != undefined)
-                    return;
+                if (album_artist != undefined) {
+                    // it is an album!
+                    let artist_name = artist.querySelector('.grid-items-item-aux-block');
+                    let corrected_artist_name = correct_artist(artist_name.textContent);
+                    artist_name.textContent = corrected_artist_name;
+                    artist_name.setAttribute('title', corrected_artist_name);
 
-                // not an album, must be an artist
-                let artist_name = artist.querySelector('.grid-items-item-main-text a');
-                if (artist_corrections.hasOwnProperty(artist_name.textContent)) {
-                    let corrected_name = artist_corrections[artist_name.textContent];
-
-                    artist_name.textContent = corrected_name;
-                    artist_name.setAttribute('href',`/music/${corrected_name}`);
-                    artist_name.setAttribute('title',corrected_name);
+                    // album name
+                    let album_name = artist.querySelector('.grid-items-item-main-text a');
+                    let corrected_album_name = correct_item_by_artist(album_name.textContent, artist_name.textContent);
+                    album_name.textContent = corrected_album_name;
+                    album_name.setAttribute('title', corrected_album_name);
+                } else {
+                    // not an album, must be an artist
+                    let artist_name = artist.querySelector('.grid-items-item-main-text a');
+                    let corrected_artist_name = correct_artist(artist_name.textContent);
+                    artist_name.textContent = corrected_artist_name;
+                    artist_name.setAttribute('href', `/music/${corrected_artist_name}`);
+                    artist_name.setAttribute('title', corrected_artist_name);
                 }
             }
         });
+    }
 
 
+    // correction handler
+    function correct_item_by_artist(item, artist) {
+        artist = artist.toLowerCase();
+        console.info('bleh - correction handler: correcting', item, 'by', artist);
+
+        if (song_title_corrections.hasOwnProperty(artist)) {
+            if (song_title_corrections[artist].hasOwnProperty(item)) {
+                console.info('bleh - correction handler: corrected as', song_title_corrections[artist][item]);
+                return song_title_corrections[artist][item];
+            } else {
+                return item;
+            }
+        } else {
+            return item;
+        }
+    }
+
+    function correct_artist(artist) {
+        console.info('bleh - correction handler: correcting', artist);
+
+        if (artist_corrections.hasOwnProperty(artist)) {
+            console.info('bleh - correction handler: corrected as', artist_corrections[artist]);
+            return artist_corrections[artist];
+        } else {
+            return artist;
+        }
     }
 
 
