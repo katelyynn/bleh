@@ -7848,6 +7848,7 @@ text[style^="color: rgb(0, 0, 0)"] {
 .artist-top-albums-item-name {
     max-height: 36px;
 }
+.resource-list--release-list-item-artist + .resource-list--release-list-item-aux-text, .resource-list--release-list-item-artist + .resource-list--release-list-item-regular-tags,
 .big-artist-list-listeners, .big-artist-list-bio,
 .playlisting-playlists-item-aux-text, .playlisting-playlists-item-regular-tags,
 .playlisting-playlists-item-description,

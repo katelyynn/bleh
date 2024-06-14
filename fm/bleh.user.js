@@ -522,8 +522,12 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             patch_header_title(document.body);
             patch_artist_ranks(document.body);
             patch_artist_grids(document.body);
-            patch_track_featured_on_albums(document.body);
-            patch_similar_tracks(document.body);
+            patch_top_albums(document.body);
+
+            correct_generic_combo('source-album-details');
+            correct_generic_combo('resource-list--release-list-item');
+            correct_generic_combo('track-similar-tracks-item');
+            correct_generic_combo('similar-items-sidebar-item');
         }
 
         // last.fm is a single page application
@@ -548,8 +552,12 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                                 patch_header_title(document.body);
                                 patch_artist_ranks(document.body);
                                 patch_artist_grids(document.body);
-                                patch_track_featured_on_albums(document.body);
-                                patch_similar_tracks(document.body);
+                                patch_top_albums(document.body);
+
+                                correct_generic_combo('source-album-details');
+                                correct_generic_combo('resource-list--release-list-item');
+                                correct_generic_combo('track-similar-tracks-item');
+                                correct_generic_combo('similar-items-sidebar-item');
                             }
                         }
                     }
@@ -1422,9 +1430,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     }
 
 
-    // artist corrections in "Featured On"
-    function patch_track_featured_on_albums(element) {
-        let albums = element.querySelectorAll('.source-album-details');
+    function patch_top_albums(element) {
+        let albums = element.querySelectorAll('.artist-top-albums-item');
 
         if (albums == undefined)
             return;
@@ -1432,60 +1439,36 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         albums.forEach((album) => {
             if (!album.hasAttribute('data-kate-processed')) {
                 album.setAttribute('data-kate-processed','true');
+                console.info('bleh - correcting artist top albums');
 
-                let album_name = album.querySelector('.source-album-name a');
-                let artist_name = album.querySelector('.source-album-artist a');
+                let album_name = album.querySelector('.artist-top-albums-item-name a');
+                let artist_name = album_name.getAttribute('href').split('/')[2].replaceAll('+',' ');
+
+                let corrected_album_name = correct_item_by_artist(album_name.textContent, artist_name);
+                album_name.textContent = corrected_album_name;
+            }
+        });
+    }
+
+
+    function correct_generic_combo(parent) {
+        let albums = document.body.querySelectorAll(`.${parent}`);
+
+        if (albums == undefined)
+            return;
+
+        albums.forEach((album) => {
+            if (!album.hasAttribute('data-kate-processed')) {
+                album.setAttribute('data-kate-processed','true');
+                console.info('bleh - correcting generic combo for a child of', parent);
+
+                let album_name = album.querySelector(`.${parent.replace('-details','')}-name a`);
+                let artist_name = album.querySelector(`.${parent.replace('-details','')}-artist a`);
 
                 let corrected_album_name = correct_item_by_artist(album_name.textContent, artist_name.textContent);
                 let corrected_artist_name = correct_artist(artist_name.textContent);
 
                 album_name.textContent = corrected_album_name;
-                artist_name.textContent = corrected_artist_name;
-            }
-        });
-    }
-
-
-    // artist corrections for similar tracks
-    function patch_similar_tracks(element) {
-        patch_subpage_similar_tracks(element);
-        let tracks = element.querySelectorAll('.track-similar-tracks-item');
-
-        if (tracks == undefined)
-            return;
-
-        tracks.forEach((track) => {
-            if (!track.hasAttribute('data-kate-processed')) {
-                track.setAttribute('data-kate-processed','true');
-
-                let track_name = track.querySelector('.track-similar-tracks-item-name a');
-                let artist_name = track.querySelector('.track-similar-tracks-item-artist a');
-
-                let corrected_track_name = correct_item_by_artist(track_name.textContent, artist_name.textContent);
-                let corrected_artist_name = correct_artist(artist_name.textContent);
-
-                track_name.textContent = corrected_track_name;
-                artist_name.textContent = corrected_artist_name;
-            }
-        });
-    }
-    function patch_subpage_similar_tracks(element) {
-        let tracks = element.querySelectorAll('.similar-items-sidebar-item');
-
-        if (tracks == undefined)
-            return;
-
-        tracks.forEach((track) => {
-            if (!track.hasAttribute('data-kate-processed')) {
-                track.setAttribute('data-kate-processed','true');
-
-                let track_name = track.querySelector('.similar-items-sidebar-item-name a');
-                let artist_name = track.querySelector('.similar-items-sidebar-item-artist a');
-
-                let corrected_track_name = correct_item_by_artist(track_name.textContent, artist_name.textContent);
-                let corrected_artist_name = correct_artist(artist_name.textContent);
-
-                track_name.textContent = corrected_track_name;
                 artist_name.textContent = corrected_artist_name;
             }
         });
