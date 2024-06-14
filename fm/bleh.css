@@ -286,6 +286,7 @@ body {
 
     .header-new-inner:before {
 		opacity: 0.3;
+        filter: brightness(50%);
 	}
 
     .shout-user [href="/user/cutensilly"] {
@@ -2880,7 +2881,7 @@ header:is(.header-new--album, .header-new--track) .header-new-background-overlay
 
 span[itemprop="byArtist"] {
     display: flex;
-    color: hsl(var(--c3));
+    color: hsla(var(--c1), 0.6);
     font-size: 24px;
     line-height: 24px;
 
@@ -2889,6 +2890,14 @@ span[itemprop="byArtist"] {
         opacity: unset;
         font-size: 24px;
         font-weight: var(--font-weight-medium);
+        transition-property: color;
+        transition-duration: var(--trans);
+        transition-timing-function: var(--trans-function);
+
+        &:hover {
+            color: hsl(var(--c1));
+            transition: none;
+        }
     }
 
     a + a {
