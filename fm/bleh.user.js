@@ -35,7 +35,7 @@ let artist_corrections = {
     'MGK': 'mgk'
 }
 let song_title_corrections = {
-    'Quadeca': {
+    'quadeca': {
         'BORN YESTERDAY': 'born yesterday',
         'Tell Me A Joke': 'tell me a joke',
         'Gone Gone': 'gone gone',
@@ -65,6 +65,11 @@ let song_title_corrections = {
         'Tourette\'s - 2013 Mix': 'tourette\'s - 2013 Mix',
         'Tourette\'s (Demo / Instrumental)': 'tourette\'s (Demo / Instrumental)',
         'Tourette\'s - Demo / Instrumental': 'tourette\'s - Demo / Instrumental'
+    },
+    'julie': {
+        'April’s-Bloom': 'april’s-bloom',
+        'Pushing Daises': 'pushing daises',
+        'Starjump / Kit': 'starjump/kit'
     }
 };
 
@@ -2547,10 +2552,10 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         console.log(original_title, original_artist);
         let formatted_title = original_title;
 
-        try {
-        if (song_title_corrections[original_artist][formatted_title] != undefined)
-            formatted_title = song_title_corrections[original_artist][formatted_title];
-        } catch(e) {}
+        if (song_title_corrections.hasOwnProperty(original_artist.toLowerCase())) {
+            if (song_title_corrections[original_artist.toLowerCase()].hasOwnProperty(formatted_title))
+                formatted_title = song_title_corrections[original_artist.toLowerCase()][formatted_title];
+        }
 
         let lowercase_title = formatted_title.toLowerCase();
         let extras = [];
