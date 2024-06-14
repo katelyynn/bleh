@@ -937,7 +937,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     let header_avatar = document.querySelector('.header--overview .header-avatar');
                     let header_follow_btn = header_avatar.querySelector('form');
 
-                    if (header_follow_btn == undefined) {
+                    if (header_follow_btn == undefined && header_avatar != undefined) {
                         // user is on their ignore list
                         let toggle_btn = document.createElement('button');
                         toggle_btn.classList.add('toggle-button','header-follower-btn','header-follower-btn--denied');
