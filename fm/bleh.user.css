@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           bleh (dev)
 @namespace      github.com/katelyynn/bleh
-@version        2024.0613
+@version        2024.0614
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.css
@@ -158,7 +158,8 @@ a,
 .masthead-nav-control,
 .header-new-actions :is(a, button), .header-new-inner, [itemprop="byArtist"] a,
 .user-dashboard-layout .masthead a,
-.bleh--redacted-message
+.bleh--redacted-message,
+.header-metadata-display, .chartlist-count-bar
 {
     --c1: var(--hue), calc(var(--sat) * 40%), 100%;
     --c2: var(--hue), calc(var(--sat) * 60%), 90%;
@@ -3427,6 +3428,97 @@ state is not active, which then falls back to primary button styling */
     margin-right: 6px;
 }
 
+/* these r last.fm default, needed 4 settings preview tho */
+.personal-stats-inner {
+    display: flex;
+    align-items: center;
+}
+.personal-stats-avatar {
+    width: 32px;
+    height: 32px;
+    order: -1;
+}
+
+
+/* ranks */
+.personal-stats-item--scrobbles[data-bleh--scrobble-milestone] {
+    .header-metadata-item {
+        position: relative;
+
+        &:after {
+            content: '';
+            position: absolute;
+            display: block;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 150px;
+            background: linear-gradient(90deg, transparent 0%, hsla(var(--h3), 20%) 100%);
+            border-top-right-radius: var(--item-med-radius);
+            border-bottom-right-radius: var(--item-med-radius);
+            pointer-events: none;
+        }
+    }
+
+
+    .header-metadata-display {
+        color: hsl(var(--l3-c)) !important;
+        text-shadow: 0 0 20px hsl(var(--h4));
+        padding-left: calc(6px + 4px);
+        position: relative;
+
+        [data-bleh--scrobble-milestone="14"] & {
+            --hue: 35;
+            --sat: 1;
+            --lit: 1;
+        }
+
+        &:before {
+            content: '';
+            display: block;
+            background-color: hsl(var(--l3-c)) !important;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            position: absolute;
+            left: 0;
+            top: 50%;
+            margin-top: -3px;
+        }
+    }
+}
+
+.grid-items-item-aux-text {
+    [data-bleh--scrobble-milestone] {
+        /*padding: 0 4px;
+        background-color: hsl(var(--h3));
+        border-radius: var(--item-med-radius);
+        color: hsl(var(--b7));
+        text-shadow: none;
+        font-weight: var(--font-weight-medium);
+        font-size: 12px;
+        line-height: 16px;*/
+        position: relative;
+        padding-left: calc(6px + 4px);
+        color: hsl(var(--l2-c));
+        font-weight: var(--font-weight-medium);
+
+        &:before {
+            content: '';
+            display: block;
+            background-color: hsl(var(--l3-c)) !important;
+            box-shadow: 0 0 30px 7px hsl(var(--h4));
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            position: absolute;
+            left: 0;
+            top: 50%;
+            margin-top: -3px;
+        }
+    }
+}
+
 
 .header-metadata-item, .metadata-item, .header-metadata-tnew-item {
     padding: 7px 12px !important; /* tasteometer overrides with padding-left: 20px */
@@ -3471,7 +3563,7 @@ state is not active, which then falls back to primary button styling */
 
 
 /*     ONLY AVAILABLE VIA ADDON THAT MAKES USE OF THIS     */
-.header-metadata-item:after {
+/*.header-metadata-item:after {
     content: '';
     position: absolute;
     left: 0;
@@ -3485,13 +3577,13 @@ state is not active, which then falls back to primary button styling */
     width: var(--percent, 0%);
     /*box-sizing: border-box;
     border: 2px solid hsla(var(--l3-c), 10%);*/
-    transition-property: opacity, width;
+    /*transition-property: opacity, width;
     transition-duration: 1.3s;
     transition-timing-function: ease;
 }
 .header-metadata-item:not([data-scrobbles]):after {
     opacity: 0;
-}
+}*/
 
 
 /*[data-scrobbles-milestone="0"] {
@@ -4422,7 +4514,7 @@ a.chartlist-love-button:after {
     border-radius: var(--item-small-radius); /* 50 */
 }
 .chartlist-count-bar-slug {
-    background: var(--chartlist-fill) !important;
+    background: hsl(var(--h3)) !important;
     box-shadow: inset hsl(var(--l2-c)) 0 -1px 0, 0px 0px 16px hsla(var(--l3), 50%);
     left: unset;
     right: 0;
@@ -11418,6 +11510,21 @@ input[type="range"]::-moz-range-thumb {
 }
 [data-bleh--format_guest_features="false"] {
     .bleh--chartlist-name-with-features {
+        display: none !important;
+    }
+}
+
+.personal-stats-preview {
+    display: flex;
+    justify-content: space-evenly;
+}
+[data-bleh--colourful_counts="true"] {
+    .bleh--personal-stats-if-not-colourful {
+        display: none !important;
+    }
+}
+[data-bleh--colourful_counts="false"] {
+    .bleh--personal-stats-if-colourful {
         display: none !important;
     }
 }

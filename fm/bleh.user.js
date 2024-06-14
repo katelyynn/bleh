@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         bleh
 // @namespace    http://last.fm/
-// @version      2024.0613
+// @version      2024.0614
 // @description  bleh!!! ^-^
 // @author       kate
 // @match        https://www.last.fm/*
@@ -15,7 +15,7 @@
 // @require      https://unpkg.com/tippy.js@6
 // ==/UserScript==
 
-let version = '2024.0613';
+let version = '2024.0614';
 
 tippy.setDefaultProps({
     arrow: false,
@@ -56,6 +56,99 @@ let song_title_corrections = {
         'Tourette\'s - Demo / Instrumental': 'tourette\'s - Demo / Instrumental'
     }
 };
+
+let ranks = {
+    14: {
+        start: 50_000,
+        hue: -105,
+        sat: 0.9,
+        lit: 0.8
+    },
+    13: {
+        start: 38_000,
+        hue: -85,
+        sat: 1.2,
+        lit: 0.95
+    },
+    12: {
+        start: 24_000,
+        hue: -55,
+        sat: 0.875,
+        lit: 0.85
+    },
+    11: {
+        start: 16_000,
+        hue: -25,
+        sat: 1.5,
+        lit: 0.875
+    },
+    10: {
+        start: 12_500,
+        hue: -7,
+        sat: 1.5,
+        lit: 0.875
+    },
+    9: {
+        start: 6_000,
+        hue: 4,
+        sat: 1.425,
+        lit: 0.9
+    },
+    8: {
+        start: 4_300,
+        hue: 25,
+        sat: 1.425,
+        lit: 0.925
+    },
+    7: {
+        start: 3_200,
+        hue: 60,
+        sat: 1.375,
+        lit: 0.95
+    },
+    6: {
+        start: 2_250,
+        hue: 80,
+        sat: 1.35,
+        lit: 0.925
+    },
+    5: {
+        start: 1_500,
+        hue: 103,
+        sat: 1.35,
+        lit: 0.925
+    },
+    4: {
+        start: 1_000,
+        hue: 130,
+        sat: 1.35,
+        lit: 0.925
+    },
+    3: {
+        start: 500,
+        hue: 148,
+        sat: 1.35,
+        lit: 0.925
+    },
+    2: {
+        start: 300,
+        hue: 160,
+        sat: 1.5,
+        lit: 0.925
+    },
+    1: {
+        start: 100,
+        hue: 180,
+        sat: 1.5,
+        lit: 0.875
+    },
+    0: {
+        start: 0,
+        hue: 200,
+        sat: 1.5,
+        lit: 0.925
+    }
+}
 
 let includes = {
     guests: [
@@ -188,7 +281,8 @@ let settings_template = {
     accessible_name_colours: false,
     underline_links: false,
     big_numbers: false,
-    format_guest_features: true
+    format_guest_features: true,
+    colourful_counts: true
 };
 let settings_base = {
     hue: {
@@ -276,6 +370,13 @@ let settings_base = {
         value: true,
         values: [true, false],
         type: 'toggle'
+    },
+    colourful_counts: {
+        css: 'colourful_counts',
+        unit: '',
+        value: true,
+        values: [true, false],
+        type: 'toggle'
     }
 };
 
@@ -324,6 +425,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             patch_lastfm_settings(document.body);
             patch_titles(document.body);
             patch_header_title(document.body);
+            patch_artist_ranks(document.body);
         }
 
         // last.fm is a single page application
@@ -346,6 +448,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                                 patch_lastfm_settings(document.body);
                                 patch_titles(document.body);
                                 patch_header_title(document.body);
+                                patch_artist_ranks(document.body);
                             }
                         }
                     }
@@ -981,6 +1084,152 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
 
 
+    // artist ranks
+    function patch_artist_ranks(element) {
+        let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
+
+        if (settings.colourful_counts) {
+            patch_artist_ranks_in_grid_view(document.body);
+
+            let personal_statistic = element.querySelector('.header-new--artist + .page-content .personal-stats-item--scrobbles');
+
+            if (personal_statistic == undefined)
+                return;
+
+            if (!personal_statistic.hasAttribute('data-kate-processed')) {
+                personal_statistic.setAttribute('data-kate-processed','true');
+
+                let scrobbles = parseInt(personal_statistic.querySelector('.link-block-target').textContent.replaceAll(',',''));
+                let parsed_scrobble_as_rank = parse_scrobbles_as_rank(scrobbles);
+
+                personal_statistic.setAttribute('data-bleh--scrobble-milestone',parsed_scrobble_as_rank.milestone);
+                personal_statistic.style.setProperty('--hue',parsed_scrobble_as_rank.hue);
+                personal_statistic.style.setProperty('--sat',parsed_scrobble_as_rank.sat);
+                personal_statistic.style.setProperty('--lit',parsed_scrobble_as_rank.lit);
+            }
+        }
+    }
+
+    function patch_artist_ranks_in_grid_view(element) {
+        let artist_statistics = element.querySelectorAll('.grid-items-item-aux-text a');
+
+        console.info('artist statistic', artist_statistics);
+
+        if (artist_statistics == undefined)
+            return;
+
+        artist_statistics.forEach((artist_statistic) => {
+            if (!artist_statistic.hasAttribute('data-kate-processed')) {
+                artist_statistic.setAttribute('data-kate-processed','true');
+
+                if (!artist_statistic.getAttribute('href').endsWith('DAYS') && !artist_statistic.classList.contains('grid-items-item-aux-block')) {
+                    console.info('bleh - artist grid plays match');
+
+                    let scrobbles = parseInt(artist_statistic.textContent.replaceAll(',','').replace(' plays',''));
+                    let parsed_scrobble_as_rank = parse_scrobbles_as_rank(scrobbles);
+
+                    artist_statistic.setAttribute('data-bleh--scrobble-milestone',parsed_scrobble_as_rank.milestone);
+                    artist_statistic.style.setProperty('--hue',parsed_scrobble_as_rank.hue);
+                    artist_statistic.style.setProperty('--sat',parsed_scrobble_as_rank.sat);
+                    artist_statistic.style.setProperty('--lit',parsed_scrobble_as_rank.lit);
+                }
+            }
+        });
+    }
+
+    function patch_artist_ranks_in_list_view(track) {
+        let count_bar = track.querySelector('.chartlist-count-bar');
+
+        if (count_bar == undefined)
+            return;
+
+        let count_bar_link = count_bar.querySelector('.chartlist-count-bar-link');
+        if (count_bar_link.getAttribute('href').endsWith('DAYS'))
+            return;
+
+        let count = parseInt(count_bar.querySelector('.chartlist-count-bar-value').textContent.replaceAll(',','').replace(' scrobbles',''));
+        console.info('count', count);
+
+        if (!count_bar.hasAttribute('data-kate-processed')) {
+            count_bar.setAttribute('data-kate-processed','true');
+
+            let parsed_scrobble_as_rank = parse_scrobbles_as_rank(count);
+
+            count_bar.setAttribute('data-bleh--scrobble-milestone',parsed_scrobble_as_rank.milestone);
+            count_bar.style.setProperty('--hue',parsed_scrobble_as_rank.hue);
+            count_bar.style.setProperty('--sat',parsed_scrobble_as_rank.sat);
+            count_bar.style.setProperty('--lit',parsed_scrobble_as_rank.lit);
+        }
+    }
+
+
+    function parse_scrobbles_as_rank(scrobbles) {
+        let scrobble_milestone = 0;
+        let scrobble_proximity = 1;
+
+        for (let rank = 14; rank >= 0; rank--) {
+            if (scrobbles > ranks[rank].start) {
+                console.info('bleh - PARSING RANK:', rank, ranks[rank].start);
+
+                let this_rank = parseInt(rank);
+
+                scrobble_milestone = this_rank;
+
+                let next_rank = this_rank + 1;
+                let prev_rank = this_rank - 1;
+
+                if (this_rank != 14 && this_rank != 0)
+                    scrobble_proximity = (scrobbles - ranks[prev_rank].start) / ranks[next_rank].start;
+
+                break;
+            }
+        }
+
+        let milestone_hue = ranks[scrobble_milestone].hue;
+        let milestone_sat = ranks[scrobble_milestone].sat;
+        let milestone_lit = ranks[scrobble_milestone].lit;
+
+        console.info('bleh - default values will be', milestone_hue, milestone_sat, milestone_lit);
+
+        if (scrobble_milestone != 14) {
+            let next_milestone_hue = ranks[scrobble_milestone + 1].hue;
+            let next_milestone_sat = ranks[scrobble_milestone + 1].sat;
+            let next_milestone_lit = ranks[scrobble_milestone + 1].lit;
+
+            console.info('bleh - next up values will be', next_milestone_hue, next_milestone_sat, next_milestone_lit);
+
+            if (milestone_hue > next_milestone_hue)
+                milestone_hue += (next_milestone_hue - milestone_hue) * scrobble_proximity;
+
+            if (milestone_sat < next_milestone_sat)
+                milestone_sat += (milestone_sat - next_milestone_sat) * scrobble_proximity;
+            else
+                milestone_sat += (next_milestone_sat - milestone_sat) * scrobble_proximity;
+
+            if (milestone_lit < next_milestone_lit)
+                milestone_lit += (milestone_lit - next_milestone_lit) * scrobble_proximity;
+            else
+                milestone_lit += (next_milestone_lit - milestone_lit) * scrobble_proximity;
+
+            console.info('bleh - created proximity values', milestone_hue, milestone_sat, milestone_lit);
+        }
+
+
+
+        console.info('bleh - scrobble milestone for artist is',scrobble_milestone,'with',scrobbles,'scrobbles','- scrobble proximity of',scrobble_proximity);
+
+        return {
+            milestone: scrobble_milestone,
+            proximity: scrobble_proximity,
+            hue: milestone_hue,
+            sat: milestone_sat,
+            lit: milestone_lit
+        };
+    }
+
+
+
+
     // bleh settings
     unsafeWindow.open_bleh_settings = function() {
         create_window('bleh_settings','Theme settings','');
@@ -1339,6 +1588,143 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                         </div>
                         <div class="toggle-wrap">
                             <button class="toggle" id="toggle-underline_links" onclick="_update_item('underline_links')" aria-checked="false">
+                                <div class="dot"></div>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="sep"></div>
+                    <div class="inner-preview pad">
+                        <div class="personal-stats-preview bleh--personal-stats-if-colourful">
+                            <div class="personal-stats-item personal-stats-item--scrobbles link-block js-link-block" data-kate-processed="true" data-bleh--scrobble-milestone="10" style="--hue: -14.921125; --sat: 1.5; --lit: 0.875;">
+                                <div class="personal-stats-inner">
+                                    <ul class="header-metadata">
+                                        <li class="header-metadata-item">
+                                            <h4 class="header-metadata-title">
+                                                Your scrobbles
+                                            </h4>
+                                            <div class="header-metadata-display">
+                                                <a class="link-block-target">
+                                                    13,041
+                                                </a>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <span class="avatar personal-stats-avatar">
+                                        <img src="https://lastfm.freetls.fastly.net/i/u/avatar70s/198d1a3bd66a0d586e8e7af8a31febe4.jpg" alt="Your avatar" loading="lazy">
+                                        <span class="avatar-status-dot user-status--bleh-queen user-status--bleh-user-cutensilly" data-kate-processed="true"></span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="personal-stats-item personal-stats-item--scrobbles link-block js-link-block" data-kate-processed="true" data-bleh--scrobble-milestone="5" style="--hue: 96.59066666666666; --sat: 1.35; --lit: 0.925;">
+                                <div class="personal-stats-inner">
+                                    <ul class="header-metadata">
+                                        <li class="header-metadata-item">
+                                            <h4 class="header-metadata-title">
+                                                Your scrobbles
+                                            </h4>
+                                            <div class="header-metadata-display">
+                                                <a class="link-block-target">
+                                                    1,627
+                                                </a>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <span class="avatar personal-stats-avatar">
+                                        <img src="https://lastfm.freetls.fastly.net/i/u/avatar70s/198d1a3bd66a0d586e8e7af8a31febe4.jpg" alt="Your avatar" loading="lazy">
+                                        <span class="avatar-status-dot user-status--bleh-queen user-status--bleh-user-cutensilly" data-kate-processed="true"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="personal-stats-preview bleh--personal-stats-if-not-colourful">
+                            <div class="personal-stats-item personal-stats-item--scrobbles link-block js-link-block">
+                                <div class="personal-stats-inner">
+                                    <ul class="header-metadata">
+                                        <li class="header-metadata-item">
+                                            <h4 class="header-metadata-title">
+                                                Your scrobbles
+                                            </h4>
+                                            <div class="header-metadata-display">
+                                                <a class="link-block-target">
+                                                    13,041
+                                                </a>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <span class="avatar personal-stats-avatar">
+                                        <img src="https://lastfm.freetls.fastly.net/i/u/avatar70s/198d1a3bd66a0d586e8e7af8a31febe4.jpg" alt="Your avatar" loading="lazy">
+                                        <span class="avatar-status-dot user-status--bleh-queen user-status--bleh-user-cutensilly" data-kate-processed="true"></span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="personal-stats-item personal-stats-item--scrobbles link-block js-link-block">
+                                <div class="personal-stats-inner">
+                                    <ul class="header-metadata">
+                                        <li class="header-metadata-item">
+                                            <h4 class="header-metadata-title">
+                                                Your scrobbles
+                                            </h4>
+                                            <div class="header-metadata-display">
+                                                <a class="link-block-target">
+                                                    1,627
+                                                </a>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <span class="avatar personal-stats-avatar">
+                                        <img src="https://lastfm.freetls.fastly.net/i/u/avatar70s/198d1a3bd66a0d586e8e7af8a31febe4.jpg" alt="Your avatar" loading="lazy">
+                                        <span class="avatar-status-dot user-status--bleh-queen user-status--bleh-user-cutensilly" data-kate-processed="true"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sep"></div>
+                        <table class="chartlist chartlist--with-index chartlist--with-index--length-2 chartlist--with-image chartlist--with-bar">
+                            <tbody>
+                                <tr class="chartlist-row chartlist-row--highlight">
+                                    <td class="chartlist-index">
+                                        1
+                                    </td>
+                                    <td class="chartlist-image">
+                                        <span class="avatar">
+                                            <img src="https://lastfm.freetls.fastly.net/i/u/avatar70s/198d1a3bd66a0d586e8e7af8a31febe4.jpg" alt="Your avatar" loading="lazy">
+                                        </span>
+                                    </td>
+                                    <td class="chartlist-name">
+                                        <a class="link-block-target">
+                                            cutensilly
+                                        </a>
+                                    </td>
+                                    <td class="chartlist-bar">
+                                        <span class="chartlist-count-bar bleh--personal-stats-if-colourful" data-bleh--scrobble-milestone="11" style="--hue: -33.2225; --sat: 1.3286979166666666; --lit: 0.8681479166666667;">
+                                            <span class="chartlist-count-bar-link">
+                                                <span class="chartlist-count-bar-slug" style="width:36.08268870690144%;"></span>
+                                                <span class="chartlist-count-bar-value">
+                                                    19,078
+                                                </span>
+                                            </span>
+                                        </span>
+                                        <span class="chartlist-count-bar bleh--personal-stats-if-not-colourful">
+                                            <span class="chartlist-count-bar-link">
+                                                <span class="chartlist-count-bar-slug" style="width:36.08268870690144%;"></span>
+                                                <span class="chartlist-count-bar-value">
+                                                    19,078
+                                                </span>
+                                            </span>
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="toggle-container" id="container-colourful_counts">
+                        <button class="btn reset" onclick="_reset_item('colourful_counts')">Reset to default</button>
+                        <div class="heading">
+                            <h5>Use a colour gradient for all-time charts</h5>
+                            <p>Assigns a colour from a gradient based on your position in all-time artist scrobbles.</p>
+                        </div>
+                        <div class="toggle-wrap">
+                            <button class="toggle" id="toggle-colourful_counts" onclick="_update_item('colourful_counts')" aria-checked="true">
                                 <div class="dot"></div>
                             </button>
                         </div>
@@ -2137,17 +2523,49 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     function patch_titles(element) {
         let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
 
-        if (settings.format_guest_features) {
-            try {
-            let tracks = element.querySelectorAll('.chartlist-row:not(.chartlist__placeholder-row)');
+        let tracks = element.querySelectorAll('.chartlist-row:not(.chartlist__placeholder-row)');
 
-            tracks.forEach((track) => {
-                if (!track.hasAttribute('data-kate-processed')) {
-                    track.setAttribute('data-kate-processed','true');
+        if (tracks == undefined)
+            return;
 
-                    console.log(track);
+        tracks.forEach((track => {
+            if (!track.hasAttribute('data-kate-processed')) {
+                track.setAttribute('data-kate-processed','true');
 
+                // duration
+                let track_timestamp = track.querySelector('.chartlist-timestamp span');
+                if (track_timestamp != undefined) {
+                    tippy(track_timestamp, {
+                        content: track_timestamp.getAttribute('title')
+                    });
+                    track_timestamp.setAttribute('title','');
+                }
+
+
+                // image
+                let track_image = track.querySelector('.chartlist-image span');
+
+                if (track_image != undefined) {
+                    let track_image_img = track_image.querySelector('img');
+                    tippy(track_image, {
+                        content: track_image_img.getAttribute('alt')
+                    })
+
+
+                    // artist statistic
+                    if (track_image.classList.contains('avatar') && settings.colourful_counts) {
+                        patch_artist_ranks_in_list_view(track);
+                        return;
+                    }
+                }
+
+                if (settings.format_guest_features) {
                     let track_title = track.querySelector('.chartlist-name a');
+                    console.info('bleh - guest features, track title:', track_title);
+
+                    if (track_title == undefined)
+                        return;
+
                     let track_artist = track_title.getAttribute('href').split('/')[2].replaceAll('+',' ');
 
                     let formatted_title = name_includes(track_title.textContent, track_artist);
@@ -2181,28 +2599,9 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                             }
                         }
                     }
-
-
-
-                    // duration
-                    let track_timestamp = track.querySelector('.chartlist-timestamp span');
-                    if (track_timestamp != undefined) {
-                        tippy(track_timestamp, {
-                            content: track_timestamp.getAttribute('title')
-                        });
-                        track_timestamp.setAttribute('title','');
-                    }
-
-
-                    // image
-                    let track_image = track.querySelector('.chartlist-image img');
-                    tippy(track_image, {
-                        content: track_image.getAttribute('alt')
-                    })
                 }
-            });
-            } catch(e) {console.error('AA',e)}
-        }
+            }
+        }));
     }
 
     function patch_header_title(element) {
