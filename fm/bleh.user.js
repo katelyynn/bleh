@@ -2834,7 +2834,10 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             }
         }
 
-        if (settings.format_guest_features && track_artist != undefined) {
+        if (track_artist == undefined)
+            return;
+
+        if (settings.format_guest_features) {
             try {
             if (!track_title.hasAttribute('data-kate-processed')) {
                 track_title.setAttribute('data-kate-processed','true');
@@ -2868,6 +2871,13 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 }
             }
             } catch(e) {}
+        } else {
+            if (!track_title.hasAttribute('data-kate-processed')) {
+                track_title.setAttribute('data-kate-processed','true');
+
+                let corrected_title = correct_item_by_artist(track_title.textContent, track_artist.textContent);
+                track_title.textContent = corrected_title;
+            }
         }
     }
 
