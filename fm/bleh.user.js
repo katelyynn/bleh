@@ -1110,6 +1110,27 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         });
     }
 
+    function patch_artist_ranks_in_list_view(track) {
+        let count_bar = track.querySelector('.chartlist-count-bar');
+
+        if (count_bar == undefined)
+            return;
+
+        let count = parseInt(count_bar.querySelector('.chartlist-count-bar-value').textContent.replaceAll(',','').replace(' scrobbles',''));
+        console.info('count', count);
+
+        if (!count_bar.hasAttribute('data-kate-processed')) {
+            count_bar.setAttribute('data-kate-processed','true');
+
+            let parsed_scrobble_as_rank = parse_scrobbles_as_rank(count);
+
+            count_bar.setAttribute('data-bleh--scrobble-milestone',parsed_scrobble_as_rank.milestone);
+            count_bar.style.setProperty('--hue',parsed_scrobble_as_rank.hue);
+            count_bar.style.setProperty('--sat',parsed_scrobble_as_rank.sat);
+            count_bar.style.setProperty('--lit',parsed_scrobble_as_rank.lit);
+        }
+    }
+
 
     function parse_scrobbles_as_rank(scrobbles) {
         let scrobble_milestone = 0;
@@ -2406,10 +2427,16 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
 
                     // image
-                    let track_image = track.querySelector('.chartlist-image img');
+                    let track_image = track.querySelector('.chartlist-image span');
+                    let track_image_img = track_image.querySelector('img');
                     tippy(track_image, {
-                        content: track_image.getAttribute('alt')
+                        content: track_image_img.getAttribute('alt')
                     })
+
+
+                    // artist statistic
+                    if (track_image.classList.contains('avatar'))
+                        patch_artist_ranks_in_list_view(track);
                 }
             });
             } catch(e) {console.error('AA',e)}

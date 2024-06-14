@@ -159,7 +159,7 @@ a,
 .header-new-actions :is(a, button), .header-new-inner, [itemprop="byArtist"] a,
 .user-dashboard-layout .masthead a,
 .bleh--redacted-message,
-.header-metadata-display, .header-metadata-item:after
+.header-metadata-display, .chartlist-count-bar
 {
     --c1: var(--hue), calc(var(--sat) * 40%), 100%;
     --c2: var(--hue), calc(var(--sat) * 60%), 90%;
@@ -4503,7 +4503,7 @@ a.chartlist-love-button:after {
     border-radius: var(--item-small-radius); /* 50 */
 }
 .chartlist-count-bar-slug {
-    background: var(--chartlist-fill) !important;
+    background: hsl(var(--h3)) !important;
     box-shadow: inset hsl(var(--l2-c)) 0 -1px 0, 0px 0px 16px hsla(var(--l3), 50%);
     left: unset;
     right: 0;
