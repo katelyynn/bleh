@@ -2784,6 +2784,11 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                             }
                         }
                     }
+                } else {
+                    let song_artist_element = track.querySelector('.chartlist-artist a');
+                    let corrected_artist = correct_artist(song_artist_element.textContent);
+                    song_artist_element.textContent = corrected_artist;
+                    song_artist_element.setAttribute('title', corrected_artist);
                 }
             }
         }));
