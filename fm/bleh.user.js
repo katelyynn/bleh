@@ -39,7 +39,8 @@ let artist_corrections = {
     'Kuru': 'kuru',
     'idkwhyy': 'Reposters #suck',
     'Quinn': 'quinn',
-    'Charli XCX': 'Charli xcx'
+    'Charli XCX': 'Charli xcx',
+    'Underscores': 'underscores'
 }
 let song_title_corrections = {
     'quadeca': {
@@ -1447,6 +1448,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
     // artist corrections for similar tracks
     function patch_similar_tracks(element) {
+        patch_subpage_similar_tracks(element);
         let tracks = element.querySelectorAll('.track-similar-tracks-item');
 
         if (tracks == undefined)
@@ -1458,6 +1460,27 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
                 let track_name = track.querySelector('.track-similar-tracks-item-name a');
                 let artist_name = track.querySelector('.track-similar-tracks-item-artist a');
+
+                let corrected_track_name = correct_item_by_artist(track_name.textContent, artist_name.textContent);
+                let corrected_artist_name = correct_artist(artist_name.textContent);
+
+                track_name.textContent = corrected_track_name;
+                artist_name.textContent = corrected_artist_name;
+            }
+        });
+    }
+    function patch_subpage_similar_tracks(element) {
+        let tracks = element.querySelectorAll('.similar-items-sidebar-item');
+
+        if (tracks == undefined)
+            return;
+
+        tracks.forEach((track) => {
+            if (!track.hasAttribute('data-kate-processed')) {
+                track.setAttribute('data-kate-processed','true');
+
+                let track_name = track.querySelector('.similar-items-sidebar-item-name a');
+                let artist_name = track.querySelector('.similar-items-sidebar-item-artist a');
 
                 let corrected_track_name = correct_item_by_artist(track_name.textContent, artist_name.textContent);
                 let corrected_artist_name = correct_artist(artist_name.textContent);

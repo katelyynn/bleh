@@ -7781,6 +7781,7 @@ text[style^="color: rgb(0, 0, 0)"] {
 .similar-items-sidebar {
     margin-top: unset;
 }
+#more-similar-tracks,
 .similar-items-sidebar-item-wrap {
     margin-top: 8px;
 }
