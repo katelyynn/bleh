@@ -1136,30 +1136,30 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         let scrobble_milestone = 0;
         let scrobble_proximity = 0;
 
-        if (scrobbles > 30_000) {
+        if (scrobbles > 50_000) {
             scrobble_milestone = 14; scrobble_proximity = 1;
-        } else if (scrobbles > 18_000) {
-            scrobble_milestone = 13; scrobble_proximity = (scrobbles - 50_000) / 75_000;
+        } else if (scrobbles > 20_000) {
+            scrobble_milestone = 13; scrobble_proximity = (scrobbles - 13_000) / 50_000;
         } else if (scrobbles > 13_000) {
-            scrobble_milestone = 12; scrobble_proximity = (scrobbles - 40_000) / 65_000;
+            scrobble_milestone = 12; scrobble_proximity = (scrobbles - 8_200) / 20_000;
         } else if (scrobbles > 8_200) {
-            scrobble_milestone = 11; scrobble_proximity = (scrobbles - 30_000) / 50_000;
+            scrobble_milestone = 11; scrobble_proximity = (scrobbles - 6_900) / 13_000;
         } else if (scrobbles > 6_900) {
-            scrobble_milestone = 10; scrobble_proximity = (scrobbles - 20_000) / 40_000;
+            scrobble_milestone = 10; scrobble_proximity = (scrobbles - 5_400) / 8_200;
         } else if (scrobbles > 5_400) {
-            scrobble_milestone = 9; scrobble_proximity = (scrobbles - 10_000) / 30_000;
+            scrobble_milestone = 9; scrobble_proximity = (scrobbles - 4_600) / 6_900;
         } else if (scrobbles > 4_600) {
-            scrobble_milestone = 8; scrobble_proximity = (scrobbles - 8_000) / 20_000;
+            scrobble_milestone = 8; scrobble_proximity = (scrobbles - 3_500) / 5_400;
         } else if (scrobbles > 3_500) {
-            scrobble_milestone = 7; scrobble_proximity = (scrobbles - 5_000) / 10_000;
+            scrobble_milestone = 7; scrobble_proximity = (scrobbles - 2_550) / 4_600;
         } else if (scrobbles > 2_550) {
-            scrobble_milestone = 6; scrobble_proximity = (scrobbles - 3_500) / 8_000;
+            scrobble_milestone = 6; scrobble_proximity = (scrobbles - 1_900) / 3_500;
         } else if (scrobbles > 1_900) {
-            scrobble_milestone = 5; scrobble_proximity = (scrobbles - 2_000) / 5_000;
+            scrobble_milestone = 5; scrobble_proximity = (scrobbles - 1_300) / 2_550;
         } else if (scrobbles > 1_300) {
-            scrobble_milestone = 4; scrobble_proximity = (scrobbles - 1_000) / 3_500;
+            scrobble_milestone = 4; scrobble_proximity = (scrobbles - 1_000) / 1_900;
         } else if (scrobbles > 1_000) {
-            scrobble_milestone = 3; scrobble_proximity = (scrobbles - 500) / 2_000;
+            scrobble_milestone = 3; scrobble_proximity = (scrobbles - 500) / 1_300;
         } else if (scrobbles > 500) {
             scrobble_milestone = 2; scrobble_proximity = (scrobbles - 300) / 1_000;
         } else if (scrobbles > 300) {
@@ -2369,17 +2369,45 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     function patch_titles(element) {
         let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
 
-        if (settings.format_guest_features) {
-            try {
-            let tracks = element.querySelectorAll('.chartlist-row:not(.chartlist__placeholder-row)');
+        let tracks = element.querySelectorAll('.chartlist-row:not(.chartlist__placeholder-row)');
 
-            tracks.forEach((track) => {
-                if (!track.hasAttribute('data-kate-processed')) {
-                    track.setAttribute('data-kate-processed','true');
+        if (tracks == undefined)
+            return;
 
-                    console.log(track);
+        tracks.forEach((track => {
+            if (!track.hasAttribute('data-kate-processed')) {
+                track.setAttribute('data-kate-processed','true');
 
+                // duration
+                let track_timestamp = track.querySelector('.chartlist-timestamp span');
+                if (track_timestamp != undefined) {
+                    tippy(track_timestamp, {
+                        content: track_timestamp.getAttribute('title')
+                    });
+                    track_timestamp.setAttribute('title','');
+                }
+
+
+                // image
+                let track_image = track.querySelector('.chartlist-image span');
+                let track_image_img = track_image.querySelector('img');
+                tippy(track_image, {
+                    content: track_image_img.getAttribute('alt')
+                })
+
+
+                // artist statistic
+                if (track_image.classList.contains('avatar')) {
+                    patch_artist_ranks_in_list_view(track);
+                    return;
+                }
+
+                if (settings.format_guest_features) {
                     let track_title = track.querySelector('.chartlist-name a');
+
+                    if (track_title == undefined)
+                        return;
+
                     let track_artist = track_title.getAttribute('href').split('/')[2].replaceAll('+',' ');
 
                     let formatted_title = name_includes(track_title.textContent, track_artist);
@@ -2413,34 +2441,9 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                             }
                         }
                     }
-
-
-
-                    // duration
-                    let track_timestamp = track.querySelector('.chartlist-timestamp span');
-                    if (track_timestamp != undefined) {
-                        tippy(track_timestamp, {
-                            content: track_timestamp.getAttribute('title')
-                        });
-                        track_timestamp.setAttribute('title','');
-                    }
-
-
-                    // image
-                    let track_image = track.querySelector('.chartlist-image span');
-                    let track_image_img = track_image.querySelector('img');
-                    tippy(track_image, {
-                        content: track_image_img.getAttribute('alt')
-                    })
-
-
-                    // artist statistic
-                    if (track_image.classList.contains('avatar'))
-                        patch_artist_ranks_in_list_view(track);
                 }
-            });
-            } catch(e) {console.error('AA',e)}
-        }
+            }
+        }));
     }
 
     function patch_header_title(element) {
