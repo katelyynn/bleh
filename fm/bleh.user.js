@@ -932,6 +932,22 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     avatar_link.classList.add('bleh--avatar-clickable-link');
                     avatar_link.href = '/settings';
                     header_avatar.appendChild(avatar_link);
+                } else {
+                    // is there a follow button?
+                    let header_avatar = document.querySelector('.header-avatar');
+                    let header_follow_btn = header_avatar.querySelector('form');
+
+                    if (header_follow_btn == undefined) {
+                        // user is on their ignore list
+                        let toggle_btn = document.createElement('button');
+                        toggle_btn.classList.add('toggle-button','header-follower-btn','header-follower-btn--denied');
+                        toggle_btn.textContent = 'You cannot follow this user';
+
+                        tippy(toggle_btn, {
+                            content: 'You are on this user\'s ignore list.'
+                        });
+                        header_avatar.appendChild(toggle_btn);
+                    }
                 }
 
                 // badges

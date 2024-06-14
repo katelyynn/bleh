@@ -3432,6 +3432,11 @@ state is not active, which then falls back to primary button styling */
 [data-toggle-button-current-state="followed"] .header-follower-btn::before {
     --mask: var(--icon-16-check) !important;
 }
+.header-follower-btn--denied {
+    --mask: var(--icon-16-block);
+    --col: hsl(var(--c3)) !important;
+    --left: 8px;
+}
 
 .header-inner-wrap:has(.header-info .user-follow) [data-toggle-button-current-state="followed"] .header-follower-btn:before {
     --mask: var(--icon-16-heart-solid) !important;
@@ -5533,6 +5538,7 @@ button:not(.playback-app-container button, .top-artist-list-item, .pixel, .liste
 .setting-item .icon:before, .action .icon:before,
 .bleh--add-note:before,
 .profile-note-row .btn:before,
+.header-follower-btn--denied:before,
 /*     DROPDOWNS     */
 .dropdown-menu-clickable-item:before, .auth-dropdown-menu-item:before,
 .dropdown-menu-list-button::after, .dropdown-menu-clickable-button::after, .dropdown-menu-clickable-button-js-only::after,
