@@ -1336,6 +1336,12 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
 
     // correction handler
+    /**
+     * correct item based on artist
+     * @param {string} item either a track/album title
+     * @param {string} artist artist name (is converted to lowercase)
+     * @returns corrected title if applicable or original title
+     */
     function correct_item_by_artist(item, artist) {
         artist = artist.toLowerCase();
         console.info('bleh - correction handler: correcting', item, 'by', artist);
@@ -1351,7 +1357,11 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             return item;
         }
     }
-
+    /**
+     * correct artist
+     * @param {string} artist artist name (NOT converted to lowercase)
+     * @returns corrected artist if applicable or original artist
+     */
     function correct_artist(artist) {
         console.info('bleh - correction handler: correcting', artist);
 
