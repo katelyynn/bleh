@@ -61,10 +61,10 @@ let song_title_corrections = {
         'Introvert': 'introvert',
         'Hypochondriac (Demo)': 'hypochondriac (demo)'
     },
-    'Young Thug': {
+    'young thug': {
         'Pick up the Phone': 'pick up the phone'
     },
-    'Nirvana': {
+    'nirvana': {
         'Tourette\'s - 1992/Live at Reading': 'tourette\'s - 1992/Live at Reading',
         'Tourette\'s (Alternative Mix)': 'tourette\'s (Alternative Mix)',
         'Tourette\'s (2013 Mix)': 'tourette\'s (2013 Mix)',
@@ -99,6 +99,23 @@ let song_title_corrections = {
     },
     'quinn': {
         'Quinn': 'quinn'
+    },
+    'glaive': {
+        'Huh': 'huh',
+        'Prick (feat. Midwxst)': 'prick (feat. midwxst)',
+        '17250 (V2)': '17250 (v2)',
+        'Hate 2 See U Cry': 'hate 2 see u cry',
+        'Bastard (V2)': 'bastard (v2)',
+        'Stay + Love Story (Cover)': 'stay + love story (cover)',
+        'SYNOPSIS (demo)': 'synopsis (demo)',
+        'Living Proof (That It Hurts)': 'living proof (that it hurts)',
+        'Shoreditch (Bsun N Thr6x Remix)': 'shoreditch (bsun n thr6x remix)',
+        'Que Onda': 'que onda',
+        'A Date w Karma (V1)': 'a date w karma (v1)'
+    },
+    'juice wrld': {
+        'Off the rip': 'Off the Rip',
+        'lace it (with eminem & benny blanco)': 'Lace It (with Eminem & benny blanco)'
     }
 };
 
