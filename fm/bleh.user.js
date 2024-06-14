@@ -1073,39 +1073,41 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
             let scrobbles = parseInt(personal_statistic.querySelector('.link-block-target').textContent.replaceAll(',',''));
             let scrobble_milestone = 0;
+            let scrobble_proximity = 0;
 
-            if (scrobbles > 150_000)
-                scrobble_milestone = 14;
-            else if (scrobbles > 100_000)
-                scrobble_milestone = 13;
-            else if (scrobbles > 75_000)
-                scrobble_milestone = 12;
-            else if (scrobbles > 65_000)
-                scrobble_milestone = 11;
-            else if (scrobbles > 50_000)
-                scrobble_milestone = 10;
-            else if (scrobbles > 35_000)
-                scrobble_milestone = 9;
-            else if (scrobbles > 25_000)
-                scrobble_milestone = 8;
-            else if (scrobbles > 15_000)
-                scrobble_milestone = 7;
-            else if (scrobbles > 9_000)
-                scrobble_milestone = 6;
-            else if (scrobbles > 5_000)
-                scrobble_milestone = 5;
-            else if (scrobbles > 3_500)
-                scrobble_milestone = 4;
-            else if (scrobbles > 2_000)
-                scrobble_milestone = 3;
-            else if (scrobbles > 1_000)
-                scrobble_milestone = 2;
-            else if (scrobbles > 500)
-                scrobble_milestone = 1;
-            else if (scrobbles > 100)
-                scrobble_milestone = 0;
+            if (scrobbles > 75_000) {
+                scrobble_milestone = 14; scrobble_proximity = (scrobbles - 65_000) / 75_000;
+            } else if (scrobbles > 65_000) {
+                scrobble_milestone = 13; scrobble_proximity = (scrobbles - 50_000) / 65_000;
+            } else if (scrobbles > 50_000) {
+                scrobble_milestone = 12; scrobble_proximity = (scrobbles - 40_000) / 50_000;
+            } else if (scrobbles > 40_000) {
+                scrobble_milestone = 11; scrobble_proximity = (scrobbles - 30_000) / 40_000;
+            } else if (scrobbles > 30_000) {
+                scrobble_milestone = 10; scrobble_proximity = (scrobbles - 20_000) / 30_000;
+            } else if (scrobbles > 20_000) {
+                scrobble_milestone = 9; scrobble_proximity = (scrobbles - 10_000) / 20_000;
+            } else if (scrobbles > 10_000) {
+                scrobble_milestone = 8; scrobble_proximity = (scrobbles - 8_000) / 10_000;
+            } else if (scrobbles > 8_000) {
+                scrobble_milestone = 7; scrobble_proximity = (scrobbles - 5_000) / 8_000;
+            } else if (scrobbles > 5_000) {
+                scrobble_milestone = 6; scrobble_proximity = (scrobbles - 3_500) / 5_000;
+            } else if (scrobbles > 3_500) {
+                scrobble_milestone = 5; scrobble_proximity = (scrobbles - 2_000) / 3_500;
+            } else if (scrobbles > 2_000) {
+                scrobble_milestone = 4; scrobble_proximity = (scrobbles - 1_000) / 2_000;
+            } else if (scrobbles > 1_000) {
+                scrobble_milestone = 3; scrobble_proximity = (scrobbles - 500) / 1_000;
+            } else if (scrobbles > 500) {
+                scrobble_milestone = 2; scrobble_proximity = (scrobbles - 300) / 500;
+            } else if (scrobbles > 300) {
+                scrobble_milestone = 1; scrobble_proximity = (scrobbles - 100) / 300;
+            } else if (scrobbles > 100) {
+                scrobble_milestone = 0; scrobble_proximity = scrobbles / 100;
+            }
 
-            console.info('bleh - scrobble milestone for artist is',scrobble_milestone,'with',scrobbles,'scrobbles');
+            console.info('bleh - scrobble milestone for artist is',scrobble_milestone,'with',scrobbles,'scrobbles','- scrobble proximity of',scrobble_proximity);
 
             personal_statistic.setAttribute('data-bleh--scrobble-milestone',scrobble_milestone);
             personal_statistic.style.setProperty('--hue',ranks[scrobble_milestone].hue);
