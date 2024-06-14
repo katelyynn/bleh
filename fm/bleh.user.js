@@ -23,6 +23,17 @@ tippy.setDefaultProps({
     delay: [null, 50]
 });
 
+let artist_corrections = {
+    'Miraie': 'miraie',
+    'Julie': 'julie',
+    'Glaive': 'glaive',
+    'Yandere': 'yandere',
+    'Mental': 'mental',
+    'Valorant': 'VALORANT',
+    'Tuyu': 'TUYU',
+    'Hivemind': 'HIVEMIND',
+    'MGK': 'mgk'
+}
 let song_title_corrections = {
     'Quadeca': {
         'BORN YESTERDAY': 'born yesterday',
@@ -394,7 +405,7 @@ let settings_base = {
 
 
 let redacted = [
-    'underthefl00d',
+    'underthefl00d', 'u1655609395',
     'sonicgamer420', 'punishedcav', 'whatisajuggalo', 'spartan122s', 'ruszaj', 'chandiwila999', 'deadaptation', 'shamsrealm', 'dread1nat0r', 'oskxzr', 'supersonic2324', 'luna', 'daysbeforepazi', 'reypublican', 'urkel_waste', 'bloodtemptress', 'enderbro1945', 'nxtready', 'hammurabis', 'flammenjunge', 'hotgreekman', 'minajspace',
     'sudaengi', 'antisemitic', 'alfonsorivera07', 'gueulescassees', 'bit188', 'aryanorexic', 'archive44', 'goyslop', 'lzxy', 'i984june', 'babayoga88', 'goatuser', 'synagogueburner', 'cybercat2k6',
     'thekimsteraight', 'squiggins', 'atwistedpath', 'aeriscupid', 'nicefeetliberal', 'kanyebeststan', 'a-_-_-_-_-_-_-_', 'wurzel362', 'chaosophile', 'sagamore_br', 'account124', 'oliwally2', 'lucasthales', 'thedadbrains', 'artofiettinggo', 'lumyh', 'meltingwalls', 'meowpoopoo', 'aeest', 'ajrogers25', 'flvcko5000', 'yungrapunxota', 'sen_nn', 'chickenoflight', 'majorcbartl', 'entranas', 'julyrent', 'misaeld7', 'sircarno', 'getyuu', 'ifuckbees', 'bigbabygoat-116', 'matranc', 'andre3x', 'johanvillian666', 'souljahwitch_', 'selenabeer', 'kbasfm', 'c4alexo', 'aantoniotapia', 'bobbygordon4', 'con_8l', 'kebfm', 'alex5un', 'bluefacee', 'itachiu1', 'tardslayer87', 'sharosky',
@@ -438,6 +449,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             patch_titles(document.body);
             patch_header_title(document.body);
             patch_artist_ranks(document.body);
+            patch_artist_grids(document.body);
         }
 
         // last.fm is a single page application
@@ -461,6 +473,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                                 patch_titles(document.body);
                                 patch_header_title(document.body);
                                 patch_artist_ranks(document.body);
+                                patch_artist_grids(document.body);
                             }
                         }
                     }
@@ -1273,6 +1286,41 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             sat: milestone_sat,
             lit: milestone_lit
         };
+    }
+
+
+
+
+    // artist corrections in grid view
+    function patch_artist_grids(element) {
+        let artists = element.querySelectorAll('.grid-items-item-details');
+
+        if (artists == undefined)
+            return;
+
+        artists.forEach((artist) => {
+            if (!artist.hasAttribute('data-kate-processed')) {
+                artist.setAttribute('data-kate-processed','true');
+
+                // test if this grid item is an album
+                let album_artist = artist.querySelector('.grid-items-item-aux-block');
+
+                if (album_artist != undefined)
+                    return;
+
+                // not an album, must be an artist
+                let artist_name = artist.querySelector('.grid-items-item-main-text a');
+                if (artist_corrections.hasOwnProperty(artist_name.textContent)) {
+                    let corrected_name = artist_corrections[artist_name.textContent];
+
+                    artist_name.textContent = corrected_name;
+                    artist_name.setAttribute('href',`/music/${corrected_name}`);
+                    artist_name.setAttribute('title',corrected_name);
+                }
+            }
+        });
+
+
     }
 
 
@@ -2561,6 +2609,12 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 song_guests = field_text.split(';');
         }
 
+
+        // song artist
+        if (artist_corrections.hasOwnProperty(original_artist))
+            original_artist = artist_corrections[original_artist];
+
+
         if (extras.length > 0)
             return [formatted_title, extras, original_artist, song_guests];
         else
@@ -2633,6 +2687,10 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     let song_artist_element = track.querySelector('.chartlist-artist');
                     if (song_artist_element != undefined) {
                         if (song_artist_element.textContent.replaceAll('+', ' ').trim() == track_artist) {
+                            // replaces with corrected artist if applicable
+                            song_artist_element.innerHTML = `<a href="/music/${formatted_title[2]}" title="${formatted_title[2]}">${formatted_title[2]}</a>`;
+
+                            // append guests
                             let song_guests = formatted_title[3];
                             for (let guest in song_guests) {
                                 // &
