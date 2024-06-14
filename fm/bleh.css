@@ -3062,18 +3062,25 @@ state is not active, which then falls back to primary button styling */
     height: var(--profile-header-background-height) !important;
     background-position: center var(--profile-header-background-offset) !important;
 }
-/* this is the lfm selector, we dont want to override custom backgrounds so we should use it to avoid !important */
-.header .header-background {
-    background-color: unset;
-}
-.header .header-background:not([style^="background-image:"]) {
-    background-image: url('https://lastfm.freetls.fastly.net/i/u/770x0/98f646bcb3c44ad7ed8df02fd12667d8.jpg');
-    background-size: 100%;
-    background-position: top !important;
-    filter: saturate(50%);
-}
-.header-background::before {
-    background: linear-gradient(180deg, hsla(var(--b6), 70%) 0%, hsl(var(--b6)) 100%) !important;
+.header {
+    /* new last.fm classic-playbar changes overriding again - 2024-06-14 */
+    height: fit-content !important;
+
+    /* this is the lfm selector, we dont want to override custom backgrounds so we should use it to avoid !important */
+    .header-background {
+        background-color: unset;
+
+        &:not([style^="background-image:"]) {
+            background-image: url('https://lastfm.freetls.fastly.net/i/u/770x0/98f646bcb3c44ad7ed8df02fd12667d8.jpg');
+            background-size: 100%;
+            background-position: top !important;
+            filter: saturate(50%);
+        }
+
+        &:before {
+            background: linear-gradient(180deg, hsla(var(--b6), 70%) 0%, hsl(var(--b6)) 100%) !important;
+        }
+    }
 }
 
 .header-inner-wrap {
