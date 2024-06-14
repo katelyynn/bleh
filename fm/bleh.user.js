@@ -2713,10 +2713,29 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     function patch_header_title(element) {
         let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
 
-        if (settings.format_guest_features) {
+        let track_title = element.querySelector('.header-new-title');
+        let track_artist = element.querySelector('.header-new-crumb span');
+
+        if (track_title == undefined)
+            return;
+
+        // correct artist
+        if (track_artist == undefined) {
+            // must be on artist page
+            if (artist_corrections.hasOwnProperty(track_title.textContent)) {
+                let corrected_artist = artist_corrections[track_title.textContent];
+                track_title.textContent = corrected_artist;
+            }
+        } else {
+            // album/track page
+            if (artist_corrections.hasOwnProperty(track_artist.textContent)) {
+                let corrected_artist = artist_corrections[track_artist.textContent];
+                track_artist.textContent = corrected_artist;
+            }
+        }
+
+        if (settings.format_guest_features && track_artist != undefined) {
             try {
-            let track_title = element.querySelector('.header-new-title');
-            let track_artist = element.querySelector('.header-new-crumb span');
             if (!track_title.hasAttribute('data-kate-processed')) {
                 track_title.setAttribute('data-kate-processed','true');
 
