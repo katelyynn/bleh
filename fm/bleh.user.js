@@ -870,7 +870,6 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                             badge.textContent = this_badge.name;
                             profile_header.appendChild(badge);
                         }
-
                     }
                 }
 
@@ -882,6 +881,10 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         }
 
         let about_me_sidebar = element.querySelector('.about-me-sidebar');
+
+        if (about_me_sidebar == undefined)
+            return;
+
         if (!about_me_sidebar.hasAttribute('data-kate-processed')) {
             about_me_sidebar.setAttribute('data-kate-processed','true');
 
@@ -1093,13 +1096,25 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
                 element.setAttribute('title','');
 
+                let this_badge = profile_badges[name];
+                if (!Array.isArray(profile_badges[name])) {
+                    // default
+                    console.info('bleh - user has 1 badge', profile_badges[name]);
+                } else {
+                    // multiple
+                    console.info('bleh - user has multiple badges', profile_badges[name]);
+                    let badges_length = Object.keys(profile_badges[name]).length - 1;
+                    this_badge = profile_badges[name][badges_length];
+                    console.info('bleh - using badge', badges_length, profile_badges[name][badges_length], 'as primary badge');
+                }
+
                 // make new badge
                 let badge = document.createElement('span');
-                badge.classList.add('avatar-status-dot',`user-status--bleh-${profile_badges[name].type}`,`user-status--bleh-user-${name}`);
+                badge.classList.add('avatar-status-dot',`user-status--bleh-${this_badge.type}`,`user-status--bleh-user-${name}`);
                 element.appendChild(badge);
 
                 tippy(badge, {
-                    content: `${name}, ${profile_badges[name].name}`
+                    content: `${name}, ${this_badge.name}`
                 });
             } else {
                 let pre_existing_badge = element.querySelector('.avatar-status-dot');
