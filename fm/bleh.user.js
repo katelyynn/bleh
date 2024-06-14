@@ -934,7 +934,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     header_avatar.appendChild(avatar_link);
                 } else {
                     // is there a follow button?
-                    let header_avatar = document.querySelector('.header-avatar');
+                    let header_avatar = document.querySelector('.header--overview .header-avatar');
                     let header_follow_btn = header_avatar.querySelector('form');
 
                     if (header_follow_btn == undefined) {
