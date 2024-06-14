@@ -522,8 +522,9 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             patch_header_title(document.body);
             patch_artist_ranks(document.body);
             patch_artist_grids(document.body);
-            patch_top_albums(document.body);
 
+            correct_generic_combo_no_artist('artist-header-featured-items-item');
+            correct_generic_combo_no_artist('artist-top-albums-item');
             correct_generic_combo('source-album-details');
             correct_generic_combo('resource-list--release-list-item');
             correct_generic_combo('track-similar-tracks-item');
@@ -554,6 +555,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                                 patch_artist_grids(document.body);
                                 patch_top_albums(document.body);
 
+                                correct_generic_combo_no_artist('artist-header-featured-items-item');
+                                correct_generic_combo_no_artist('artist-top-albums-item');
                                 correct_generic_combo('source-album-details');
                                 correct_generic_combo('resource-list--release-list-item');
                                 correct_generic_combo('track-similar-tracks-item');
@@ -1475,6 +1478,30 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
                 album_name.textContent = corrected_album_name;
                 artist_name.textContent = corrected_artist_name;
+            }
+        });
+    }
+    /**
+     * correct capitalisation of a generic album/track name (no artist field!!) combo
+     * @param {string} parent individual css selector for each item wrapper
+     * @returns if not found
+     */
+    function correct_generic_combo_no_artist(parent) {
+        let albums = document.body.querySelectorAll(`.${parent}`);
+
+        if (albums == undefined)
+            return;
+
+        albums.forEach((album) => {
+            if (!album.hasAttribute('data-kate-processed')) {
+                album.setAttribute('data-kate-processed','true');
+                console.info('bleh - correcting generic combo (no artist) for a child of', parent);
+
+                let album_name = album.querySelector(`.${parent.replace('-details','')}-name a`);
+                let artist_name = album_name.getAttribute('href').split('/')[2].replaceAll('+',' ');
+
+                let corrected_album_name = correct_item_by_artist(album_name.textContent, artist_name);
+                album_name.textContent = corrected_album_name;
             }
         });
     }
