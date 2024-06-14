@@ -3418,6 +3418,17 @@ state is not active, which then falls back to primary button styling */
     margin-right: 6px;
 }
 
+/* these r last.fm default, needed 4 settings preview tho */
+.personal-stats-inner {
+    display: flex;
+    align-items: center;
+}
+.personal-stats-avatar {
+    width: 32px;
+    height: 32px;
+    order: -1;
+}
+
 
 /* ranks */
 .personal-stats-item--scrobbles[data-bleh--scrobble-milestone] {
@@ -11489,6 +11500,21 @@ input[type="range"]::-moz-range-thumb {
 }
 [data-bleh--format_guest_features="false"] {
     .bleh--chartlist-name-with-features {
+        display: none !important;
+    }
+}
+
+.personal-stats-preview {
+    display: flex;
+    justify-content: space-evenly;
+}
+[data-bleh--colourful_counts="true"] {
+    .bleh--personal-stats-if-not-colourful {
+        display: none !important;
+    }
+}
+[data-bleh--colourful_counts="false"] {
+    .bleh--personal-stats-if-colourful {
         display: none !important;
     }
 }
