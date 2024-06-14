@@ -2397,8 +2397,9 @@ hr + .library-search-results-header {
     top: calc(46px + var(--card-gap) + 15px - 19px - 42px);
 }
 /* this aligns the content on sub pages to be 15px/card-gap below the tabs */
-.header--sub-page {
-    height: calc(81px + 49px + var(--card-gap));
+.header.header--sub-page {
+    /* this has to be !important due to classic-playbar - 2024-06-14 */
+    height: calc(81px + 49px + var(--card-gap)) !important;
 }
 /* this accounts for the tabs originally being next to the avatar */
 .header--user.header--overview .secondary-nav {
