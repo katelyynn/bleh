@@ -66,7 +66,7 @@ let ranks = {
     1: {
         hue: 180,
         sat: 1.5,
-        lit: 0.925
+        lit: 0.875
     },
     2: {
         hue: 160,
@@ -131,7 +131,7 @@ let ranks = {
     14: {
         hue: 240,
         sat: 1,
-        lit: 0.575
+        lit: 0.7
     }
 }
 
@@ -1076,43 +1076,74 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             let scrobble_proximity = 0;
 
             if (scrobbles > 75_000) {
-                scrobble_milestone = 14; scrobble_proximity = (scrobbles - 65_000) / 75_000;
+                scrobble_milestone = 14; scrobble_proximity = 1;
             } else if (scrobbles > 65_000) {
-                scrobble_milestone = 13; scrobble_proximity = (scrobbles - 50_000) / 65_000;
+                scrobble_milestone = 13; scrobble_proximity = (scrobbles - 50_000) / 75_000;
             } else if (scrobbles > 50_000) {
-                scrobble_milestone = 12; scrobble_proximity = (scrobbles - 40_000) / 50_000;
+                scrobble_milestone = 12; scrobble_proximity = (scrobbles - 40_000) / 65_000;
             } else if (scrobbles > 40_000) {
-                scrobble_milestone = 11; scrobble_proximity = (scrobbles - 30_000) / 40_000;
+                scrobble_milestone = 11; scrobble_proximity = (scrobbles - 30_000) / 50_000;
             } else if (scrobbles > 30_000) {
-                scrobble_milestone = 10; scrobble_proximity = (scrobbles - 20_000) / 30_000;
+                scrobble_milestone = 10; scrobble_proximity = (scrobbles - 20_000) / 40_000;
             } else if (scrobbles > 20_000) {
-                scrobble_milestone = 9; scrobble_proximity = (scrobbles - 10_000) / 20_000;
+                scrobble_milestone = 9; scrobble_proximity = (scrobbles - 10_000) / 30_000;
             } else if (scrobbles > 10_000) {
-                scrobble_milestone = 8; scrobble_proximity = (scrobbles - 8_000) / 10_000;
+                scrobble_milestone = 8; scrobble_proximity = (scrobbles - 8_000) / 20_000;
             } else if (scrobbles > 8_000) {
-                scrobble_milestone = 7; scrobble_proximity = (scrobbles - 5_000) / 8_000;
+                scrobble_milestone = 7; scrobble_proximity = (scrobbles - 5_000) / 10_000;
             } else if (scrobbles > 5_000) {
-                scrobble_milestone = 6; scrobble_proximity = (scrobbles - 3_500) / 5_000;
+                scrobble_milestone = 6; scrobble_proximity = (scrobbles - 3_500) / 8_000;
             } else if (scrobbles > 3_500) {
-                scrobble_milestone = 5; scrobble_proximity = (scrobbles - 2_000) / 3_500;
+                scrobble_milestone = 5; scrobble_proximity = (scrobbles - 2_000) / 5_000;
             } else if (scrobbles > 2_000) {
-                scrobble_milestone = 4; scrobble_proximity = (scrobbles - 1_000) / 2_000;
+                scrobble_milestone = 4; scrobble_proximity = (scrobbles - 1_000) / 3_500;
             } else if (scrobbles > 1_000) {
-                scrobble_milestone = 3; scrobble_proximity = (scrobbles - 500) / 1_000;
+                scrobble_milestone = 3; scrobble_proximity = (scrobbles - 500) / 2_000;
             } else if (scrobbles > 500) {
-                scrobble_milestone = 2; scrobble_proximity = (scrobbles - 300) / 500;
+                scrobble_milestone = 2; scrobble_proximity = (scrobbles - 300) / 1_000;
             } else if (scrobbles > 300) {
-                scrobble_milestone = 1; scrobble_proximity = (scrobbles - 100) / 300;
+                scrobble_milestone = 1; scrobble_proximity = (scrobbles - 100) / 500;
             } else if (scrobbles > 100) {
-                scrobble_milestone = 0; scrobble_proximity = scrobbles / 100;
+                scrobble_milestone = 0; scrobble_proximity = scrobbles / 300;
             }
+
+            let milestone_hue = ranks[scrobble_milestone].hue;
+            let milestone_sat = ranks[scrobble_milestone].sat;
+            let milestone_lit = ranks[scrobble_milestone].lit;
+
+            console.info('bleh - default values will be', milestone_hue, milestone_sat, milestone_lit);
+
+            if (scrobble_milestone != 14) {
+                let next_milestone_hue = ranks[scrobble_milestone + 1].hue;
+                let next_milestone_sat = ranks[scrobble_milestone + 1].sat;
+                let next_milestone_lit = ranks[scrobble_milestone + 1].lit;
+
+                console.info('bleh - next up values will be', next_milestone_hue, next_milestone_sat, next_milestone_lit);
+
+                if (milestone_hue > next_milestone_hue)
+                    milestone_hue += (next_milestone_hue - milestone_hue) * scrobble_proximity;
+
+                if (milestone_sat < next_milestone_sat)
+                    milestone_sat += (milestone_sat - next_milestone_sat) * scrobble_proximity;
+                else
+                    milestone_sat += (next_milestone_sat - milestone_sat) * scrobble_proximity;
+
+                if (milestone_lit < next_milestone_lit)
+                    milestone_lit += (milestone_lit - next_milestone_lit) * scrobble_proximity;
+                else
+                    milestone_lit += (next_milestone_lit - milestone_lit) * scrobble_proximity;
+
+                console.info('bleh - created proximity values', milestone_hue, milestone_sat, milestone_lit);
+            }
+
+
 
             console.info('bleh - scrobble milestone for artist is',scrobble_milestone,'with',scrobbles,'scrobbles','- scrobble proximity of',scrobble_proximity);
 
             personal_statistic.setAttribute('data-bleh--scrobble-milestone',scrobble_milestone);
-            personal_statistic.style.setProperty('--hue',ranks[scrobble_milestone].hue);
-            personal_statistic.style.setProperty('--sat',ranks[scrobble_milestone].sat);
-            personal_statistic.style.setProperty('--lit',ranks[scrobble_milestone].lit);
+            personal_statistic.style.setProperty('--hue',milestone_hue);
+            personal_statistic.style.setProperty('--sat',milestone_sat);
+            personal_statistic.style.setProperty('--lit',milestone_lit);
         }
     }
 
