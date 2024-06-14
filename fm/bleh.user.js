@@ -800,8 +800,11 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
     // patch profile pages
     function patch_profile(element) {
-        try {
         let profile_header = element.querySelector('.header-title-label-wrap');
+
+        if (profile_header == undefined)
+            return;
+
         let profile_name = element.querySelector('.header-title-label-wrap a');
 
         // profile note
@@ -932,7 +935,6 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 create_profile_note_panel(profile_name.textContent, true);
             }
         }
-        } catch(e) {console.info(e)}
     }
 
     unsafeWindow._add_profile_note = function(username, has_note) {
