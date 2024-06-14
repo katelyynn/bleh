@@ -2785,10 +2785,26 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                         }
                     }
                 } else {
+                    let track_title = track.querySelector('.chartlist-name a');
+
+                    if (track_title == undefined)
+                        return;
+
                     let song_artist_element = track.querySelector('.chartlist-artist a');
-                    let corrected_artist = correct_artist(song_artist_element.textContent);
-                    song_artist_element.textContent = corrected_artist;
-                    song_artist_element.setAttribute('title', corrected_artist);
+                    if (song_artist_element != undefined) {
+                        let corrected_title = correct_item_by_artist(track_title.textContent, song_artist_element.textContent);
+                        track_title.textContent = corrected_title;
+                        track_title.setAttribute('title', corrected_title);
+
+                        let corrected_artist = correct_artist(song_artist_element.textContent);
+                        song_artist_element.textContent = corrected_artist;
+                        song_artist_element.setAttribute('title', corrected_artist);
+                    } else {
+                        let track_artist = track_title.getAttribute('href').split('/')[2].replaceAll('+',' ');
+                        let corrected_title = correct_item_by_artist(track_title.textContent, track_artist);
+                        track_title.textContent = corrected_title;
+                        track_title.setAttribute('title', corrected_title);
+                    }
                 }
             }
         }));
