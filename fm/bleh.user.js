@@ -23,8 +23,25 @@ tippy.setDefaultProps({
     delay: [null, 50]
 });
 
+let artist_corrections = {
+    'Miraie': 'miraie',
+    'Julie': 'julie',
+    'Glaive': 'glaive',
+    'Yandere': 'yandere',
+    'Mental': 'mental',
+    'Valorant': 'VALORANT',
+    'Tuyu': 'TUYU',
+    'Hivemind': 'HIVEMIND',
+    'MGK': 'mgk',
+    'Horrormovies': 'horrormovies',
+    'Lieu': 'lieu',
+    'Funeral': 'funeral',
+    'Kuru': 'kuru',
+    'idkwhyy': 'Reposters #suck',
+    'Quinn': 'quinn'
+}
 let song_title_corrections = {
-    'Quadeca': {
+    'quadeca': {
         'BORN YESTERDAY': 'born yesterday',
         'Tell Me A Joke': 'tell me a joke',
         'Gone Gone': 'gone gone',
@@ -54,6 +71,34 @@ let song_title_corrections = {
         'Tourette\'s - 2013 Mix': 'tourette\'s - 2013 Mix',
         'Tourette\'s (Demo / Instrumental)': 'tourette\'s (Demo / Instrumental)',
         'Tourette\'s - Demo / Instrumental': 'tourette\'s - Demo / Instrumental'
+    },
+    'julie': {
+        'April’s-Bloom': 'april’s-bloom',
+        'Pushing Daises': 'pushing daises',
+        'Starjump / Kit': 'starjump/kit'
+    },
+    '21 savage': {
+        'Savage Mode II': 'SAVAGE MODE II'
+    },
+    'future': {
+        'OUT OF MY HANDS': 'Out Of My Hands',
+        'NIGHTS LIKE THIS': 'Night Like This',
+        'BEAT IT': 'Beat It',
+        'ONE BIG FAMILY': 'One Big Family',
+        'YOUNG METRO': 'Young Metro',
+        'ICE ATTACK': 'Ice Attack',
+        'TYPE SHIT': 'Type Shit',
+        'CLAUSTROPHOBIC': 'Claustrophobic',
+        'SLIMED IN': 'Slimed In',
+        'MAGIC DON JUAN (PRINCESS DIANA)': 'Magic Don Juan (Princess Diana)',
+        'RUNNIN OUTTA TIME': 'Runnin Outta Time',
+        'FRIED (SHE A VIBE)': 'Fried (She a Vibe)',
+        'AIN\'T NO LOVE': 'Ain\'t No Love',
+        'EVERYDAY HUSTLE': 'Everyday Hustle',
+        'SEEN IT ALL': 'Seen it All'
+    },
+    'quinn': {
+        'Quinn': 'quinn'
     }
 };
 
@@ -394,7 +439,7 @@ let settings_base = {
 
 
 let redacted = [
-    'underthefl00d',
+    'underthefl00d', 'u1655609395',
     'sonicgamer420', 'punishedcav', 'whatisajuggalo', 'spartan122s', 'ruszaj', 'chandiwila999', 'deadaptation', 'shamsrealm', 'dread1nat0r', 'oskxzr', 'supersonic2324', 'luna', 'daysbeforepazi', 'reypublican', 'urkel_waste', 'bloodtemptress', 'enderbro1945', 'nxtready', 'hammurabis', 'flammenjunge', 'hotgreekman', 'minajspace',
     'sudaengi', 'antisemitic', 'alfonsorivera07', 'gueulescassees', 'bit188', 'aryanorexic', 'archive44', 'goyslop', 'lzxy', 'i984june', 'babayoga88', 'goatuser', 'synagogueburner', 'cybercat2k6',
     'thekimsteraight', 'squiggins', 'atwistedpath', 'aeriscupid', 'nicefeetliberal', 'kanyebeststan', 'a-_-_-_-_-_-_-_', 'wurzel362', 'chaosophile', 'sagamore_br', 'account124', 'oliwally2', 'lucasthales', 'thedadbrains', 'artofiettinggo', 'lumyh', 'meltingwalls', 'meowpoopoo', 'aeest', 'ajrogers25', 'flvcko5000', 'yungrapunxota', 'sen_nn', 'chickenoflight', 'majorcbartl', 'entranas', 'julyrent', 'misaeld7', 'sircarno', 'getyuu', 'ifuckbees', 'bigbabygoat-116', 'matranc', 'andre3x', 'johanvillian666', 'souljahwitch_', 'selenabeer', 'kbasfm', 'c4alexo', 'aantoniotapia', 'bobbygordon4', 'con_8l', 'kebfm', 'alex5un', 'bluefacee', 'itachiu1', 'tardslayer87', 'sharosky',
@@ -438,6 +483,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             patch_titles(document.body);
             patch_header_title(document.body);
             patch_artist_ranks(document.body);
+            patch_artist_grids(document.body);
         }
 
         // last.fm is a single page application
@@ -461,6 +507,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                                 patch_titles(document.body);
                                 patch_header_title(document.body);
                                 patch_artist_ranks(document.body);
+                                patch_artist_grids(document.body);
                             }
                         }
                     }
@@ -1273,6 +1320,86 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             sat: milestone_sat,
             lit: milestone_lit
         };
+    }
+
+
+
+
+    // artist corrections in grid view
+    function patch_artist_grids(element) {
+        let artists = element.querySelectorAll('.grid-items-item-details');
+
+        if (artists == undefined)
+            return;
+
+        artists.forEach((artist) => {
+            if (!artist.hasAttribute('data-kate-processed')) {
+                artist.setAttribute('data-kate-processed','true');
+
+                // test if this grid item is an album
+                let album_artist = artist.querySelector('.grid-items-item-aux-block');
+
+                if (album_artist != undefined) {
+                    // it is an album!
+                    let artist_name = artist.querySelector('.grid-items-item-aux-block');
+                    let corrected_artist_name = correct_artist(artist_name.textContent);
+                    artist_name.textContent = corrected_artist_name;
+                    artist_name.setAttribute('title', corrected_artist_name);
+
+                    // album name
+                    let album_name = artist.querySelector('.grid-items-item-main-text a');
+                    let corrected_album_name = correct_item_by_artist(album_name.textContent, artist_name.textContent);
+                    album_name.textContent = corrected_album_name;
+                    album_name.setAttribute('title', corrected_album_name);
+                } else {
+                    // not an album, must be an artist
+                    let artist_name = artist.querySelector('.grid-items-item-main-text a');
+                    let corrected_artist_name = correct_artist(artist_name.textContent);
+                    artist_name.textContent = corrected_artist_name;
+                    artist_name.setAttribute('href', `/music/${corrected_artist_name}`);
+                    artist_name.setAttribute('title', corrected_artist_name);
+                }
+            }
+        });
+    }
+
+
+    // correction handler
+    /**
+     * correct item based on artist
+     * @param {string} item either a track/album title
+     * @param {string} artist artist name (is converted to lowercase)
+     * @returns corrected title if applicable or original title
+     */
+    function correct_item_by_artist(item, artist) {
+        artist = artist.toLowerCase();
+        console.info('bleh - correction handler: correcting', item, 'by', artist);
+
+        if (song_title_corrections.hasOwnProperty(artist)) {
+            if (song_title_corrections[artist].hasOwnProperty(item)) {
+                console.info('bleh - correction handler: corrected as', song_title_corrections[artist][item]);
+                return song_title_corrections[artist][item];
+            } else {
+                return item;
+            }
+        } else {
+            return item;
+        }
+    }
+    /**
+     * correct artist
+     * @param {string} artist artist name (NOT converted to lowercase)
+     * @returns corrected artist if applicable or original artist
+     */
+    function correct_artist(artist) {
+        console.info('bleh - correction handler: correcting', artist);
+
+        if (artist_corrections.hasOwnProperty(artist)) {
+            console.info('bleh - correction handler: corrected as', artist_corrections[artist]);
+            return artist_corrections[artist];
+        } else {
+            return artist;
+        }
     }
 
 
@@ -2499,10 +2626,10 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         console.log(original_title, original_artist);
         let formatted_title = original_title;
 
-        try {
-        if (song_title_corrections[original_artist][formatted_title] != undefined)
-            formatted_title = song_title_corrections[original_artist][formatted_title];
-        } catch(e) {}
+        if (song_title_corrections.hasOwnProperty(original_artist.toLowerCase())) {
+            if (song_title_corrections[original_artist.toLowerCase()].hasOwnProperty(formatted_title))
+                formatted_title = song_title_corrections[original_artist.toLowerCase()][formatted_title];
+        }
 
         let lowercase_title = formatted_title.toLowerCase();
         let extras = [];
@@ -2560,6 +2687,12 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             if (field_group == 'guests')
                 song_guests = field_text.split(';');
         }
+
+
+        // song artist
+        if (artist_corrections.hasOwnProperty(original_artist))
+            original_artist = artist_corrections[original_artist];
+
 
         if (extras.length > 0)
             return [formatted_title, extras, original_artist, song_guests];
@@ -2633,6 +2766,10 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     let song_artist_element = track.querySelector('.chartlist-artist');
                     if (song_artist_element != undefined) {
                         if (song_artist_element.textContent.replaceAll('+', ' ').trim() == track_artist) {
+                            // replaces with corrected artist if applicable
+                            song_artist_element.innerHTML = `<a href="/music/${formatted_title[2]}" title="${formatted_title[2]}">${formatted_title[2]}</a>`;
+
+                            // append guests
                             let song_guests = formatted_title[3];
                             for (let guest in song_guests) {
                                 // &
@@ -2655,10 +2792,29 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     function patch_header_title(element) {
         let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
 
-        if (settings.format_guest_features) {
+        let track_title = element.querySelector('.header-new-title');
+        let track_artist = element.querySelector('.header-new-crumb span');
+
+        if (track_title == undefined)
+            return;
+
+        // correct artist
+        if (track_artist == undefined) {
+            // must be on artist page
+            if (artist_corrections.hasOwnProperty(track_title.textContent)) {
+                let corrected_artist = artist_corrections[track_title.textContent];
+                track_title.textContent = corrected_artist;
+            }
+        } else {
+            // album/track page
+            if (artist_corrections.hasOwnProperty(track_artist.textContent)) {
+                let corrected_artist = artist_corrections[track_artist.textContent];
+                track_artist.textContent = corrected_artist;
+            }
+        }
+
+        if (settings.format_guest_features && track_artist != undefined) {
             try {
-            let track_title = element.querySelector('.header-new-title');
-            let track_artist = element.querySelector('.header-new-crumb span');
             if (!track_title.hasAttribute('data-kate-processed')) {
                 track_title.setAttribute('data-kate-processed','true');
 
