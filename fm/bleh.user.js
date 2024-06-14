@@ -520,6 +520,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             patch_header_title(document.body);
             patch_artist_ranks(document.body);
             patch_artist_grids(document.body);
+            patch_track_featured_on_albums(document.body);
         }
 
         // last.fm is a single page application
@@ -544,6 +545,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                                 patch_header_title(document.body);
                                 patch_artist_ranks(document.body);
                                 patch_artist_grids(document.body);
+                                patch_track_featured_on_albums(document.body);
                             }
                         }
                     }
@@ -1411,6 +1413,30 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     artist_name.setAttribute('href', `/music/${corrected_artist_name}`);
                     artist_name.setAttribute('title', corrected_artist_name);
                 }
+            }
+        });
+    }
+
+
+    // artist corrections in "Featured On"
+    function patch_track_featured_on_albums(element) {
+        let albums = element.querySelectorAll('.source-album-details');
+
+        if (albums == undefined)
+            return;
+
+        albums.forEach((album) => {
+            if (!album.hasAttribute('data-kate-processed')) {
+                album.setAttribute('data-kate-processed','true');
+
+                let album_name = album.querySelector('.source-album-name a');
+                let artist_name = album.querySelector('.source-album-artist a');
+
+                let corrected_album_name = correct_item_by_artist(album_name.textContent, artist_name.textContent);
+                let corrected_artist_name = correct_artist(artist_name.textContent);
+
+                album_name.textContent = corrected_album_name;
+                artist_name.textContent = corrected_artist_name;
             }
         });
     }
