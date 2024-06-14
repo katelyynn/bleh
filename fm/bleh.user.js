@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         bleh
 // @namespace    http://last.fm/
-// @version      2024.0614.1
+// @version      2024.0614.2
 // @description  bleh!!! ^-^
 // @author       kate
 // @match        https://www.last.fm/*
@@ -15,7 +15,7 @@
 // @require      https://unpkg.com/tippy.js@6
 // ==/UserScript==
 
-let version = '2024.0614.1';
+let version = '2024.0614.2';
 
 tippy.setDefaultProps({
     arrow: false,
@@ -278,10 +278,28 @@ let includes = {
 }
 
 let profile_badges = {
-    'cutensilly': {
-        type: 'queen',
-        name: 'blehhhhhhhhhh!!'
-    },
+    'cutensilly': [
+        {
+            type: 'k',
+            name: 'k'
+        },
+        {
+            type: 'a',
+            name: 'a'
+        },
+        {
+            type: 't',
+            name: 't'
+        },
+        {
+            type: 'e',
+            name: 'e'
+        },
+        {
+            type: 'queen',
+            name: 'blehhhhhhhhhh!!'
+        }
+    ],
     'Iexyy': {
         type: 'cat',
         name: 'it\'s a kitty!!'
