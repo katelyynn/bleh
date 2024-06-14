@@ -223,10 +223,16 @@ let profile_badges = {
         type: 'cat',
         name: 'it\'s a kitty!!'
     },
-    'bIeak': {
-        type: 'cat',
-        name: 'it\'s a kitty!!'
-    },
+    'bIeak': [
+        {
+            type: 'cat',
+            name: 'it\'s a kitty!!'
+        },
+        {
+            type: 'glaive',
+            name: '#1 glaive fan'
+        }
+    ],
     'peoplepleasr': {
         type: 'cat',
         name: 'it\'s a kitty!!'
@@ -844,10 +850,28 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
                 // badges
                 if (profile_badges.hasOwnProperty(profile_name.textContent)) {
-                    let badge = document.createElement('span');
-                    badge.classList.add('label',`user-status--bleh-${profile_badges[profile_name.textContent].type}`,`user-status--bleh-user-${profile_name.textContent}`);
-                    badge.textContent = profile_badges[profile_name.textContent].name;
-                    profile_header.appendChild(badge);
+                    if (!Array.isArray(profile_badges[profile_name.textContent])) {
+                        // default
+                        console.info('bleh - user has 1 badge', profile_badges[profile_name.textContent]);
+                        let this_badge = profile_badges[profile_name.textContent];
+
+                        let badge = document.createElement('span');
+                        badge.classList.add('label',`user-status--bleh-${this_badge.type}`,`user-status--bleh-user-${profile_name.textContent}`);
+                        badge.textContent = this_badge.name;
+                        profile_header.appendChild(badge);
+                    } else {
+                        // multiple
+                        console.info('bleh - user has multiple badges', profile_badges[profile_name.textContent]);
+                        for (let badge_entry in profile_badges[profile_name.textContent]) {
+                            let this_badge = profile_badges[profile_name.textContent][badge_entry];
+
+                            let badge = document.createElement('span');
+                            badge.classList.add('label',`user-status--bleh-${this_badge.type}`,`user-status--bleh-user-${profile_name.textContent}`);
+                            badge.textContent = this_badge.name;
+                            profile_header.appendChild(badge);
+                        }
+
+                    }
                 }
 
                 // me :3
@@ -905,7 +929,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 create_profile_note_panel(profile_name.textContent, true);
             }
         }
-        } catch(e) {}
+        } catch(e) {console.info(e)}
     }
 
     unsafeWindow._add_profile_note = function(username, has_note) {
