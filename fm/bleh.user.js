@@ -2175,7 +2175,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                         <button class="btn reset" onclick="_reset_item('rain')">Reset to default</button>
                         <div class="heading">
                             <h5>Let it rain</h5>
-                            <p>rain :3c</p>
+                            <p>rain :3c (may have performance impacts !! also may look bad !!)</p>
                         </div>
                         <div class="toggle-wrap">
                             <button class="toggle" id="toggle-rain" onclick="_update_item('rain')" aria-checked="true">
