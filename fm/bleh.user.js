@@ -1861,7 +1861,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                         })"></button>
                     </div>
                     <h5>Manual</h5>
-                    <button class="btn primary" onclick="_create_a_custom_colour()">
+                    <button class="btn primary btn--has-icon btn--has-icon-left btn--custom-colour" onclick="_create_a_custom_colour()">
                         Create a custom colour
                     </button>
                 </div>
