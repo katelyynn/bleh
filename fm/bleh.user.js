@@ -378,7 +378,8 @@ let settings_template = {
     underline_links: false,
     big_numbers: false,
     format_guest_features: true,
-    colourful_counts: true
+    colourful_counts: true,
+    rain: false
 };
 let settings_base = {
     hue: {
@@ -473,6 +474,13 @@ let settings_base = {
         value: true,
         values: [true, false],
         type: 'toggle'
+    },
+    rain: {
+        css: 'rain',
+        unit: '',
+        value: false,
+        values: [true, false],
+        type: 'toggle'
     }
 };
 
@@ -510,6 +518,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         //get_scrobbles(document.body);
         append_nav(document.body);
         patch_masthead(document.body);
+
+        start_rain();
 
         console.log(bleh_url,window.location.href,bleh_regex.test(window.location.href));
 
@@ -2161,6 +2171,18 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                         </div>
                     </div>
                     <div class="sep"></div>
+                    <div class="toggle-container" id="container-rain">
+                        <button class="btn reset" onclick="_reset_item('rain')">Reset to default</button>
+                        <div class="heading">
+                            <h5>Let it rain</h5>
+                            <p>rain :3c</p>
+                        </div>
+                        <div class="toggle-wrap">
+                            <button class="toggle" id="toggle-rain" onclick="_update_item('rain')" aria-checked="true">
+                                <div class="dot"></div>
+                            </button>
+                        </div>
+                    </div>
                     <div class="toggle-container" id="container-hide_hateful">
                         <button class="btn reset" onclick="_reset_item('hide_hateful')">Reset to default</button>
                         <div class="heading">
@@ -3036,6 +3058,57 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 track_title.textContent = corrected_title;
             }
         }
+    }
+
+
+
+
+    // rain
+    function rain() {
+        // clear old
+        let rain_container_old = document.getElementById('rain-container');
+        if (rain_container_old != undefined)
+            document.body.removeChild(rain_container_old);
+
+        // make anew
+        let rain_container = document.createElement('div');
+        rain_container.classList.add('rain-container');
+        rain_container.setAttribute('id', 'rain-container');
+        rain_container.innerHTML = (`
+            <div class="rain" id="rain"></div>
+            <div class="rain rain-back" id="rain-back"></div>
+        `);
+        document.body.appendChild(rain_container);
+
+        let increment = 0;
+        let drops = '';
+        let subtle_drops = '';
+
+        let rain_main = document.getElementById('rain');
+        let rain_back = document.getElementById('rain-back');
+
+        while (increment < 100) {
+            // random numbers
+            let randoms = [
+                (Math.floor(Math.random() * (98 - 1 + 1) + 1)),
+                (Math.floor(Math.random() * (5 - 2 + 1) + 2))
+            ];
+
+            increment += randoms[1];
+
+            drops += '<div class="drop" style="left: ' + increment + '%; bottom: ' + (randoms[1] + randoms[1] - 1 + 80) + '%; animation-delay: 0.' + randoms[0] + 's; animation-duration: 0.5' + randoms[0] + 's;"><div class="stem" style="animation-delay: 0.' + randoms[0] + 's; animation-duration: 0.5' + randoms[0] + 's;"></div><div class="splat" style="animation-delay: 0.' + randoms[0] + 's; animation-duration: 0.5' + randoms[0] + 's;"></div></div>';
+            subtle_drops += '<div class="drop" style="right: ' + increment + '%; bottom: ' + (randoms[1] + randoms[1] - 1 + 80) + '%; animation-delay: 0.' + randoms[0] + 's; animation-duration: 0.5' + randoms[0] + 's;"><div class="stem" style="animation-delay: 0.' + randoms[0] + 's; animation-duration: 0.5' + randoms[0] + 's;"></div><div class="splat" style="animation-delay: 0.' + randoms[0] + 's; animation-duration: 0.5' + randoms[0] + 's;"></div></div>';
+
+            rain_main.innerHTML = drops;
+            rain_back.innerHTML = subtle_drops;
+        }
+    }
+
+    function start_rain() {
+        let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
+
+        if (settings.rain)
+            rain();
     }
 
 
