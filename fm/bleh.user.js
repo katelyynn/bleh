@@ -885,22 +885,179 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
     // patch last.fm settings
     function patch_lastfm_settings(element) {
-        try {
+        // new form contents :3
+        let update_picture = document.getElementById('update-picture');
+
+        if (update_picture == undefined)
+            return;
+
+        if (update_picture.hasAttribute('data-kate-processed'))
+            return;
+
+        update_picture.setAttribute('data-kate-processed', 'true');
+
+        let avatar_url = element.querySelector('.image-upload-preview img').getAttribute('src');
+
+        let token = element.querySelector('[name="csrfmiddlewaretoken"]').getAttribute('value');
+
+        let form_display_name = document.getElementById('id_full_name').value;
+        let form_website = document.getElementById('id_homepage').value;
+        let form_country = document.getElementById('id_country').outerHTML;
+        let form_about_me = document.getElementById('id_about_me').textContent;
+
+        document.getElementById('update-profile').innerHTML = '';
+
+        update_picture.innerHTML = (`
+            <h2>Profile</h2>
+            <div class="profile-container">
+                <div class="avatar-side">
+                    <div class="avatar image-upload-preview" onclick="_open_avatar_changer('${token}')">
+                        <img src="${avatar_url}" alt="Your avatar" loading="lazy">
+                    </div>
+                </div>
+                <div class="info-side">
+                    <div class="header-info">
+                        <div class="header">
+                            <h1>${auth}</h1>
+                        </div>
+                        <div class="header-title-secondary">
+                            <span class="header-title-secondary--pre" id="header-title-display-name--pre"></span>
+                            <span class="header-title-display-name" id="header-title-display-name"></span>
+                            <!--<span class="header-title-secondary--pre" id="header-scrobble-since--pre">created</span>
+                            <span class="header-scrobble-since" id="header-scrobble-since"></span>-->
+                        </div>
+                    </div>
+                    <div class="sub-info">
+                        <form action="/settings#update-profile" name="profile-form" data-form-type="identity" method="post">
+                            <input type="hidden" name="csrfmiddlewaretoken" value="${token}">
+                            <div class="info-row">
+                                <div class="title">
+                                    Sub-title
+                                </div>
+                                <div class="input">
+                                    <input type="text" name="full_name" value="${form_display_name}" maxlength="50" id="id_full_name" oninput="_update_display_name(this.value)" data-form-type="other">
+                                </div>
+                            </div>
+                            <div class="info-row">
+                                <div class="title">
+                                    Country
+                                </div>
+                                <div class="input">
+                                    ${form_country}
+                                </div>
+                            </div>
+                            <div class="info-row">
+                                <div class="title">
+                                    Website
+                                </div>
+                                <div class="input">
+                                    <input type="url" name="homepage" value="${form_website}" id="id_homepage" data-form-type="website">
+                                </div>
+                            </div>
+                            <div class="info-row">
+                                <div class="title">
+                                    About
+                                </div>
+                                <div class="input about-me" data-bleh--show-preview="false" id="about_me">
+                                    <textarea name="about_me" cols="40" rows="10" class="textarea--s" maxlength="500" id="id_about_me" oninput="_update_about_me_preview(this.value)" data-form-type="other">${form_about_me}</textarea>
+                                    <span class="bleh--about-me-preview" id="about_me_preview"></span>
+                                </div>
+                            </div>
+                            <div class="save-row">
+                                <span class="btn btn--has-icon btn--has-icon-left btn--toggle-about-me-preview" onclick="_toggle_about_me_preview()">
+                                    Toggle preview
+                                </span>
+                                <div class="form-submit">
+                                    <button type="submit" class="btn-primary" data-form-type="action">
+                                        Save
+                                    </button>
+                                    <input type="hidden" value="profile" name="submit">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        `);
+
+
+        // about me
         let about_me_box = document.getElementById('id_about_me');
+        update_about_me_preview(about_me_box.value);
 
-        if (!about_me_box.hasAttribute('data-kate-processed')) {
-            about_me_box.setAttribute('data-kate-processed','true');
-            about_me_box.setAttribute('oninput','_update_about_me_preview(this.value)');
-
-            let about_me_preview = document.createElement('span');
-            about_me_preview.classList.add('bleh--about-me-preview');
-            about_me_preview.setAttribute('id','about_me_preview');
-            about_me_box.after(about_me_preview);
-
-            update_about_me_preview(about_me_box.value);
-        }
-        } catch(e) {}
+        // subtitle
+        update_display_name(form_display_name);
     }
+
+    unsafeWindow._toggle_about_me_preview = function() {
+        toggle_about_me_preview();
+    }
+    function toggle_about_me_preview() {
+        let about_me = document.getElementById('about_me');
+        if (about_me.getAttribute('data-bleh--show-preview') == 'false')
+            about_me.setAttribute('data-bleh--show-preview', 'true');
+        else
+            about_me.setAttribute('data-bleh--show-preview', 'false');
+    }
+
+    unsafeWindow._update_display_name = function(value) {
+        update_display_name(value);
+    }
+    function update_display_name(value) {
+        document.getElementById('header-title-display-name').textContent = value;
+
+        // pronouns?
+        let pronouns = false;
+        let display_name_no_spaces = value.replaceAll(' ','');
+        if (
+            display_name_no_spaces.startsWith('she/') ||
+            display_name_no_spaces.startsWith('he/') ||
+            display_name_no_spaces.startsWith('they/') ||
+            display_name_no_spaces.startsWith('it/')
+        ) pronouns = true;
+
+        document.getElementById('header-title-display-name--pre').textContent = pronouns ? 'pronouns' : 'aka.';
+    }
+
+
+    unsafeWindow._open_avatar_changer = function(token) {
+        open_avatar_changer(token);
+    }
+    function open_avatar_changer(token) {
+        create_window('edit_avatar','Edit avatar',`
+            <div class="bleh--upload-avatar-container">
+                <form class="avatar-upload-form bleh--upload-avatar-form" action="/settings" name="avatar-form" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="csrfmiddlewaretoken" value="${token}">
+                    <div class="form-group form-group--avatar js-form-group">
+                        <div class="js-form-group-controls form-group-controls">
+                            <span class="btn-secondary btn primary btn-file" data-kate-processed="true">
+                            Choose file
+                                <input type="file" name="avatar" data-require="components/file-input" data-file-input-copy="Choose file" data-no-file-copy="No file chosen" accept="image/*" required="" id="id_avatar" data-kate-processed="true">
+                            </span>
+                        </div>
+                        Upload file
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn-primary">
+                            Save
+                        </button>
+                        <input type="hidden" value="avatar" name="submit">
+                    </div>
+                </form>
+                <form class="image-remove-form bleh--upload-avatar-form" action="/settings/avatar/delete" method="post">
+                    <input type="hidden" name="csrfmiddlewaretoken" value="${token}">
+                    <div class="form-group">
+                        <button class="mimic-link image-upload-remove" type="submit" value="delete-avatar" name="delete-avatar">Delete picture</button>
+                        Delete avatar
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn" onclick="_kill_window('edit_avatar')">Cancel</button>
+                    </div>
+                </form>
+            </div>
+            `);
+    }
+
 
     unsafeWindow._update_about_me_preview = function(value) {
         update_about_me_preview(value);
