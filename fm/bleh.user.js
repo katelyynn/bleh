@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         bleh
 // @namespace    http://last.fm/
-// @version      2024.0615
+// @version      2024.0615.1
 // @description  bleh!!! ^-^
 // @author       kate
 // @match        https://www.last.fm/*
@@ -15,7 +15,7 @@
 // @require      https://unpkg.com/tippy.js@6
 // ==/UserScript==
 
-let version = '2024.0615';
+let version = '2024.0615.1';
 
 tippy.setDefaultProps({
     arrow: false,
@@ -933,10 +933,11 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                             <input type="hidden" name="csrfmiddlewaretoken" value="${token}">
                             <div class="info-row">
                                 <div class="title">
-                                    Sub-title
+                                    Subtitle
                                 </div>
                                 <div class="input">
                                     <input type="text" name="full_name" value="${form_display_name}" maxlength="50" id="id_full_name" oninput="_update_display_name(this.value)" data-form-type="other">
+                                    <div class="tip">Tip: If pronouns are placed first, "aka." will change to "pronouns".</div>
                                 </div>
                             </div>
                             <div class="info-row">
@@ -962,10 +963,11 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                                 <div class="input about-me" data-bleh--show-preview="false" id="about_me">
                                     <textarea name="about_me" cols="40" rows="10" class="textarea--s" maxlength="500" id="id_about_me" oninput="_update_about_me_preview(this.value)" data-form-type="other">${form_about_me}</textarea>
                                     <span class="bleh--about-me-preview" id="about_me_preview"></span>
+                                    <div class="tip bleh--about-me-preview-only">Note: New-lines, links, etc. only display to other bleh users, regular Last.fm users see new-lines as spaces.</div>
                                 </div>
                             </div>
                             <div class="save-row">
-                                <span class="btn btn--has-icon btn--has-icon-left btn--toggle-about-me-preview" onclick="_toggle_about_me_preview()">
+                                <span class="btn btn--has-icon btn--has-icon-left btn--toggle-about-me-preview" id="btn--toggle-about-me-preview" onclick="_toggle_about_me_preview()">
                                     Toggle preview
                                 </span>
                                 <div class="form-submit">
@@ -988,6 +990,11 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
         // subtitle
         update_display_name(form_display_name);
+
+        // preview
+        tippy(document.getElementById('btn--toggle-about-me-preview'), {
+            content: 'View how your bio looks to others'
+        })
     }
 
     unsafeWindow._toggle_about_me_preview = function() {
@@ -1039,7 +1046,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                         Upload file
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn-primary">
+                        <button type="submit" class="btn-primary" onclick="_save_avatar_changer()">
                             Save
                         </button>
                         <input type="hidden" value="avatar" name="submit">
@@ -1057,6 +1064,16 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 </form>
             </div>
             `);
+    }
+
+
+    unsafeWindow._save_avatar_changer = function() {
+        document.getElementById('bleh--window-edit_avatar--body').style.setProperty('pointer-events', 'none');
+        document.getElementById('bleh--window-edit_avatar--body').style.setProperty('opacity', '0.6');
+
+        setTimeout(function() {
+            kill_window('edit_avatar')
+        }, 5000);
     }
 
 
