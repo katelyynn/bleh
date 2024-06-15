@@ -2124,7 +2124,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                             </button>
                         </div>
                     </div>
-                    <div class="toggle-container" id="container-big_numbers">
+                    <!--<div class="toggle-container" id="container-big_numbers">
                         <button class="btn reset" onclick="_reset_item('big_numbers')">Reset to default</button>
                         <div class="heading">
                             <h5>Use alternative numerical font</h5>
@@ -2135,7 +2135,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                                 <div class="dot"></div>
                             </button>
                         </div>
-                    </div>
+                    </div>-->
                     <div class="sep"></div>
                     <div class="inner-preview pad flex">
                         <section class="catalogue-tags">

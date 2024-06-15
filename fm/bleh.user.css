@@ -13,7 +13,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu+Sans:ital,wght@0,100..800;1,100..800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap');
 
 body {
@@ -11642,10 +11641,10 @@ input[type="range"]::-moz-range-thumb {
 
 
 [data-bleh--big_numbers="true"] {
+    .header-metadata-display,
     .chartlist-count-bar-value {
-        font-family: Zen Dots, var(--font);
-        font-weight: 400;
-        font-size: 12px;
+        font-family: 'Exo 2', var(--font);
+        font-weight: 600;
     }
 }
 
