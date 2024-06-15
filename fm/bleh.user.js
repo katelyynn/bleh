@@ -1162,7 +1162,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                             <input type="hidden" name="csrfmiddlewaretoken" value="${token}">
                             <div class="info-row">
                                 <div class="title">
-                                    ${trans[lang].settings.profile.subtitle}
+                                    ${trans[lang].settings.profile.subtitle.name}
                                 </div>
                                 <div class="input">
                                     <input type="text" name="full_name" value="${form_display_name}" maxlength="50" id="id_full_name" oninput="_update_display_name(this.value)" data-form-type="other">
