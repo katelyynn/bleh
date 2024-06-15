@@ -244,7 +244,8 @@ let includes = {
         '- acoustic', '(acoustic',
         '- alternative', '(alternative',
         '(mix 1', '(mix 2', '(mix 3', '(mix 4', '(mix 5', '(mix 6', '(mix 7', '(mix 8', '(mix 9',
-        '- choppednotslopped', '(choppednotslopped', '[choppednotslopped'
+        '- choppednotslopped', '(choppednotslopped', '[choppednotslopped',
+        '(v1', '(v2', '(v3', '(v4', '(v5', '(v6', '(v7', '(v8', '(v9'
     ],
     stems: [
         '- acapella', '(acapella', '[acapella',
@@ -955,9 +956,13 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 } else {
                     // is there a follow button?
                     let header_avatar = document.querySelector('.header--overview .header-avatar');
+
+                    if (header_avatar == undefined)
+                        return;
+
                     let header_follow_btn = header_avatar.querySelector('form');
 
-                    if (header_follow_btn == undefined && header_avatar != undefined) {
+                    if (header_follow_btn == undefined) {
                         // user is on their ignore list
                         let toggle_btn = document.createElement('button');
                         toggle_btn.classList.add('toggle-button','header-follower-btn','header-follower-btn--denied');
