@@ -905,7 +905,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         let form_country = document.getElementById('id_country').outerHTML;
         let form_about_me = document.getElementById('id_about_me').textContent;
 
-        document.getElementById('update-profile').innerHTML = '';
+        document.getElementById('update-profile').outerHTML = '';
 
         update_picture.innerHTML = (`
             <h2>Profile</h2>
@@ -913,6 +913,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 <div class="avatar-side">
                     <div class="avatar image-upload-preview" onclick="_open_avatar_changer('${token}')">
                         <img src="${avatar_url}" alt="Your avatar" loading="lazy">
+                        <div class="avatar-overlay"></div>
                     </div>
                 </div>
                 <div class="info-side">
