@@ -1654,7 +1654,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 <h3>Home</h3>
                 <div class="screen-row">
                     <div class="screen-wrap">
-                        <img class="screen" src="https://cutensilly.org/img/bleh2-main.png" alt="bleh">
+                        <img class="screen" src="https://cutensilly.org/img/bleh3-theme-${document.documentElement.getAttribute('data-bleh--theme')}.png" alt="bleh">
                         <div class="text">
                             <h5>bleh</h5>
                             <p>Version ${version}</p>
