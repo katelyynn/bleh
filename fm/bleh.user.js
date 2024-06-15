@@ -919,7 +919,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         if (profile_header == undefined)
             return;
 
-        let profile_name = element.querySelector('.header-title-label-wrap a');
+        let profile_name = profile_header.querySelector('a');
 
         // profile note
         let profile_notes = JSON.parse(localStorage.getItem('bleh_profile_notes')) || {};
@@ -967,25 +967,25 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     // is there a follow button?
                     let header_avatar = document.querySelector('.header--overview .header-avatar');
 
-                    if (header_avatar == undefined)
-                        return;
+                    if (header_avatar != undefined) {
+                        let header_follow_btn = header_avatar.querySelector('form');
 
-                    let header_follow_btn = header_avatar.querySelector('form');
+                        if (header_follow_btn == undefined) {
+                            // user is on their ignore list
+                            let toggle_btn = document.createElement('button');
+                            toggle_btn.classList.add('toggle-button','header-follower-btn','header-follower-btn--denied');
+                            toggle_btn.textContent = 'You cannot follow this user';
 
-                    if (header_follow_btn == undefined) {
-                        // user is on their ignore list
-                        let toggle_btn = document.createElement('button');
-                        toggle_btn.classList.add('toggle-button','header-follower-btn','header-follower-btn--denied');
-                        toggle_btn.textContent = 'You cannot follow this user';
-
-                        tippy(toggle_btn, {
-                            content: 'You are on this user\'s ignore list.'
-                        });
-                        header_avatar.appendChild(toggle_btn);
+                            tippy(toggle_btn, {
+                                content: 'You are on this user\'s ignore list.'
+                            });
+                            header_avatar.appendChild(toggle_btn);
+                        }
                     }
                 }
 
                 // badges
+                console.info('bleh - checking if user', profile_name.textContent, 'has any badges');
                 if (profile_badges.hasOwnProperty(profile_name.textContent)) {
                     if (!Array.isArray(profile_badges[profile_name.textContent])) {
                         // default

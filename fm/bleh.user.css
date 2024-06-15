@@ -7799,6 +7799,24 @@ text[style^="color: rgb(0, 0, 0)"] {
     margin-top: 12px;
 }
 
+
+.artist-top-albums-item,
+.resource-list--release-list-item {
+    transition-property: transform, opacity;
+    transition-duration: var(--trans);
+    transition-timing-function: var(--trans-function);
+
+    &:hover {
+        transition: none;
+        opacity: 0.85
+    }
+    &:active {
+        opacity: 0.75;
+        transform: scale(0.98);
+    }
+}
+
+
 .big-artist-list-avatar-desktop,
 .playlist-image,
 .catalogue-overview-similar-artists-item-image,
