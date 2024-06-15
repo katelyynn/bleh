@@ -1726,7 +1726,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                             </button>
                             <button class="btn setting-item has-image" data-bleh-theme="darker" onclick="change_theme_from_settings('darker')">
                                 <div class="image">
-                                    <div class="icon bleh--theme-dark"></div>
+                                    <div class="icon bleh--theme-darker"></div>
                                 </div>
                                 <div class="text">
                                     <h5>Darker</h5>
