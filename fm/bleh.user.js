@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         bleh
 // @namespace    http://last.fm/
-// @version      2024.0614.2
+// @version      2024.0615
 // @description  bleh!!! ^-^
 // @author       kate
 // @match        https://www.last.fm/*
@@ -15,7 +15,7 @@
 // @require      https://unpkg.com/tippy.js@6
 // ==/UserScript==
 
-let version = '2024.0614.2';
+let version = '2024.0615';
 
 tippy.setDefaultProps({
     arrow: false,
@@ -522,6 +522,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             patch_header_title(document.body);
             patch_artist_ranks(document.body);
             patch_artist_grids(document.body);
+            patch_header_menu();
 
             correct_generic_combo_no_artist('artist-header-featured-items-item');
             correct_generic_combo_no_artist('artist-top-albums-item');
@@ -554,6 +555,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                                 patch_header_title(document.body);
                                 patch_artist_ranks(document.body);
                                 patch_artist_grids(document.body);
+                                patch_header_menu();
 
                                 correct_generic_combo_no_artist('artist-header-featured-items-item');
                                 correct_generic_combo_no_artist('artist-top-albums-item');
@@ -1522,6 +1524,33 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             return artist_corrections[artist];
         } else {
             return artist;
+        }
+    }
+
+
+
+
+    // patch track/album/artist menu
+    function patch_header_menu() {
+        let menu = document.body.querySelector('.header-new-more-actions-menu');
+
+        if (menu == undefined)
+            return;
+
+        if (!menu.hasAttribute('data-kate-processed')) {
+            menu.setAttribute('data-kate-processed','true');
+
+            let extra_items = document.createElement('li');
+            extra_items.innerHTML = (`
+            <a class="dropdown-menu-clickable-item more-item--submit-correction" href="https://docs.google.com/forms/d/e/1FAIpQLScRzZaMfpjgKUq4CCA8iuEQCxVdalyv9bwnZEjPDm7lit_Ohg/viewform" target="_blank">
+                Submit correction to Last.fm
+            </a>
+            <a class="dropdown-menu-clickable-item more-item--submit-correction-bleh" href="https://github.com/katelyynn/bleh/issues/9" target="_blank">
+                Submit correction to bleh
+            </a>
+            `);
+
+            menu.appendChild(extra_items);
         }
     }
 
