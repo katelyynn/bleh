@@ -36,11 +36,26 @@ const trans = {
             dev: 'Toggle dev mode',
             configure_bleh: 'Configure bleh'
         },
+        statistics: {
+            scrobbles: {
+                name: 'Your scrobbles'
+            }
+        },
+        profile: {
+            cannot_follow_user: 'You cannot follow this user.',
+            on_ignore_list: 'You are on this user\'s ignore list.'
+        },
         settings: {
             save: 'Save',
             cancel: 'Cancel',
             close: 'Close',
             clear: 'Clear',
+            done: 'Done',
+            continue: 'Continue',
+            reset: 'Reset to default',
+            examples: {
+                button: 'Example button'
+            },
             home: {
                 name: 'Home',
                 brand: 'bleh',
@@ -92,7 +107,15 @@ const trans = {
                     name: 'Colours',
                     presets: 'Presets',
                     manual: 'Manual',
-                    custom: 'Create a custom colour'
+                    custom: 'Create a custom colour',
+                    modals: {
+                        custom_colour: {
+                            preface: 'Colours are controlled by three values: hue, saturation, and lightness. Try out the sliders to get a feel.',
+                            hue: 'Accent colour',
+                            sat: 'Saturation',
+                            lit: 'Lightness'
+                        }
+                    }
                 },
                 artwork: {
                     name: 'Artwork'
@@ -131,7 +154,29 @@ const trans = {
                 bio: 'Running into noticeable issues in theme loading? Try out these settings.',
                 dev: {
                     name: 'Disable in-built theme loading',
-                    bio: 'This allows you to load the in-built theme via Stylus instead, which may be more performant.'
+                    bio: 'This allows you to load the in-built theme via Stylus instead, which may be more performant.',
+                    modals: {
+                        prompt: {
+                            alert: 'Once you refresh the page, the in-built bleh theme will be disabled (unless you disable this option again).',
+                            stylus: 'If you do not already have the <strong>Stylus</strong> extension, choose your browser below:',
+                            browsers: {
+                                chrome: {
+                                    name: 'Chrome',
+                                    bio: 'for Chrome, Edge, Brave, Opera'
+                                },
+                                firefox: {
+                                    name: 'Firefox',
+                                    bio: 'for Firefox only'
+                                }
+                            }
+                        },
+                        continue: {
+                            next_step: 'Once you have the extension installed, hit "Install style" on the new tab that will open.'
+                        },
+                        finish: {
+                            alert: 'All done! From now on, styling will be handled via Stylus.'
+                        }
+                    }
                 }
             },
             profiles: {
@@ -166,6 +211,41 @@ const trans = {
                     name: 'Edit avatar',
                     upload: 'Upload file',
                     delete: 'Delete avatar'
+                }
+            },
+            actions: {
+                import: {
+                    name: 'Import',
+                    modals: {
+                        initial: {
+                            name: 'Import settings from a previous install',
+                            alert: 'Anything you import will override your current settings, if you are importing settings from online ensure you trust the source.'
+                        },
+                        failed: {
+                            name: 'Import failed',
+                            alert: 'The settings you attempted to import failed to parse, no changes were made.'
+                        }
+                    }
+                },
+                export: {
+                    name: 'Export',
+                    modals: {
+                        initial: {
+                            name: 'Export your current settings',
+                            alert: 'Your current settings are in the textbox below ready for you to copy.'
+                        }
+                    }
+                },
+                reset: {
+                    name: 'Reset',
+                    modals: {
+                        initial: {
+                            name: 'Reset your settings to default',
+                            alert: 'Your settings will be <strong>reset to all defaults</strong> with no way to go back. Are you sure?',
+                            confirm: 'Yes, reset my settings',
+                            export: 'Export first'
+                        }
+                    }
                 }
             }
         }
@@ -636,7 +716,7 @@ let settings_base = {
 
 let redacted = [
     'underthefl00d', 'u1655609395',
-    'sonicgamer420', 'punishedcav', 'whatisajuggalo', 'spartan122s', 'ruszaj', 'chandiwila999', 'deadaptation', 'shamsrealm', 'dread1nat0r', 'oskxzr', 'supersonic2324', 'luna', 'daysbeforepazi', 'reypublican', 'urkel_waste', 'bloodtemptress', 'enderbro1945', 'nxtready', 'hammurabis', 'flammenjunge', 'hotgreekman', 'minajspace',
+    'sonicgamer420', 'punishedcav', 'whatisajuggalo', 'spartan122s', 'ruszaj', 'chandiwila999', 'deadaptation', 'shamsrealm', 'dread1nat0r', 'oskxzr', 'supersonic2324', 'luna', 'daysbeforepazi', 'reypublican', 'urkel_waste', 'bloodtemptress', 'enderbro1945', 'nxtready', 'hammurabis', 'flammenjunge', 'hotgreekman', 'minajspace', 'Matiiia',
     'sudaengi', 'antisemitic', 'alfonsorivera07', 'gueulescassees', 'bit188', 'aryanorexic', 'archive44', 'goyslop', 'lzxy', 'i984june', 'babayoga88', 'goatuser', 'synagogueburner', 'cybercat2k6',
     'thekimsteraight', 'squiggins', 'atwistedpath', 'aeriscupid', 'nicefeetliberal', 'kanyebeststan', 'a-_-_-_-_-_-_-_', 'wurzel362', 'chaosophile', 'sagamore_br', 'account124', 'oliwally2', 'lucasthales', 'thedadbrains', 'artofiettinggo', 'lumyh', 'meltingwalls', 'meowpoopoo', 'aeest', 'ajrogers25', 'flvcko5000', 'yungrapunxota', 'sen_nn', 'chickenoflight', 'majorcbartl', 'entranas', 'julyrent', 'misaeld7', 'sircarno', 'getyuu', 'ifuckbees', 'bigbabygoat-116', 'matranc', 'andre3x', 'johanvillian666', 'souljahwitch_', 'selenabeer', 'kbasfm', 'c4alexo', 'aantoniotapia', 'bobbygordon4', 'con_8l', 'kebfm', 'alex5un', 'bluefacee', 'itachiu1', 'tardslayer87', 'sharosky',
     'craziidago',
@@ -1318,10 +1398,10 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                             // user is on their ignore list
                             let toggle_btn = document.createElement('button');
                             toggle_btn.classList.add('toggle-button','header-follower-btn','header-follower-btn--denied');
-                            toggle_btn.textContent = 'You cannot follow this user';
+                            toggle_btn.textContent = trans[lang].profile.cannot_follow_user;
 
                             tippy(toggle_btn, {
-                                content: 'You are on this user\'s ignore list.'
+                                content: trans[lang].profile.on_ignore_list
                             });
                             header_avatar.appendChild(toggle_btn);
                         }
@@ -1434,7 +1514,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 add_note_button.setAttribute('onclick',`_add_profile_note('${profile_name.textContent}',${profile_has_note})`);
 
                 tippy(add_note_button, {
-                    content: `Edit ${profile_name.textContent}'s note`
+                    content: trans[lang].settings.profiles.notes.edit_user.replace('{u}', profile_name.textContent)
                 });
 
                 let about_me_header = about_me_sidebar.querySelector('h2');
@@ -1980,32 +2060,32 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 <div class="bleh--panel">
                     <div class="btns">
                         <button class="btn bleh--btn" data-bleh-page="home" onclick="_change_settings_page('home')">
-                            Home
+                            ${trans[lang].settings.home.name}
                         </button>
                         <button class="btn bleh--btn" data-bleh-page="themes" onclick="_change_settings_page('themes')">
-                            Themes
+                            ${trans[lang].settings.themes.name}
                         </button>
                         <button class="btn bleh--btn" data-bleh-page="customise" onclick="_change_settings_page('customise')">
-                            Customise
+                            ${trans[lang].settings.customise.name}
                         </button>
                         <button class="btn bleh--btn" data-bleh-page="profiles" onclick="_change_settings_page('profiles')">
-                            Profiles
+                            ${trans[lang].settings.profiles.name}
                         </button>
                         <button class="btn bleh--btn" data-bleh-page="performance" onclick="_change_settings_page('performance')">
-                            Performance
+                            ${trans[lang].settings.performance.name}
                         </button>
                     </div>
                     <div class="btns sep">
                         <button class="btn" data-bleh-action="import" onclick="_import_settings()">
-                            Import
+                            ${trans[lang].settings.actions.import.name}
                         </button>
                         <button class="btn" data-bleh-action="export" onclick="_export_settings()">
-                            Export
+                            ${trans[lang].settings.actions.export.name}
                         </button>
                     </div>
                     <div class="btns sep">
                         <button class="btn" data-bleh-action="reset" onclick="_reset_settings()">
-                            Reset
+                            ${trans[lang].settings.actions.reset.name}
                         </button>
                     </div>
                 </div>
@@ -2248,7 +2328,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                         </div>
                     </div>
                     <div class="slider-container" id="container-gloss">
-                        <button class="btn reset" onclick="_reset_item('gloss')">Reset to default</button>
+                        <button class="btn reset" onclick="_reset_item('gloss')">${trans[lang].settings.reset}</button>
                         <div class="heading">
                             <h5>${trans[lang].settings.customise.gloss.name}</h5>
                             <p>${trans[lang].settings.customise.gloss.bio}</p>
@@ -2281,7 +2361,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                         </div>
                     </div>
                     <div class="toggle-container" id="container-accessible_name_colours">
-                        <button class="btn reset" onclick="_reset_item('accessible_name_colours')">Reset to default</button>
+                        <button class="btn reset" onclick="_reset_item('accessible_name_colours')">${trans[lang].settings.reset}</button>
                         <div class="heading">
                             <h5>${trans[lang].settings.accessibility.accessible_name_colours.name}</h5>
                             <p>${trans[lang].settings.accessibility.accessible_name_colours.bio}</p>
@@ -2293,7 +2373,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                         </div>
                     </div>
                     <div class="toggle-container" id="container-underline_links">
-                        <button class="btn reset" onclick="_reset_item('underline_links')">Reset to default</button>
+                        <button class="btn reset" onclick="_reset_item('underline_links')">${trans[lang].settings.reset}</button>
                         <div class="heading">
                             <h5>${trans[lang].settings.accessibility.underline_links.name}</h5>
                             <p>${trans[lang].settings.accessibility.underline_links.bio}</p>
@@ -2312,7 +2392,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                                     <ul class="header-metadata">
                                         <li class="header-metadata-item">
                                             <h4 class="header-metadata-title">
-                                                Your scrobbles
+                                                ${trans[lang].statistics.scrobbles.name}
                                             </h4>
                                             <div class="header-metadata-display">
                                                 <a class="link-block-target">
@@ -2332,7 +2412,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                                     <ul class="header-metadata">
                                         <li class="header-metadata-item">
                                             <h4 class="header-metadata-title">
-                                                Your scrobbles
+                                                ${trans[lang].statistics.scrobbles.name}
                                             </h4>
                                             <div class="header-metadata-display">
                                                 <a class="link-block-target">
@@ -2354,7 +2434,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                                     <ul class="header-metadata">
                                         <li class="header-metadata-item">
                                             <h4 class="header-metadata-title">
-                                                Your scrobbles
+                                                ${trans[lang].statistics.scrobbles.name}
                                             </h4>
                                             <div class="header-metadata-display">
                                                 <a class="link-block-target">
@@ -2374,7 +2454,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                                     <ul class="header-metadata">
                                         <li class="header-metadata-item">
                                             <h4 class="header-metadata-title">
-                                                Your scrobbles
+                                                ${trans[lang].statistics.scrobbles.name}
                                             </h4>
                                             <div class="header-metadata-display">
                                                 <a class="link-block-target">
@@ -2430,7 +2510,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                         </table>
                     </div>
                     <div class="toggle-container" id="container-colourful_counts">
-                        <button class="btn reset" onclick="_reset_item('colourful_counts')">Reset to default</button>
+                        <button class="btn reset" onclick="_reset_item('colourful_counts')">${trans[lang].settings.reset}</button>
                         <div class="heading">
                             <h5>${trans[lang].settings.customise.colourful_counts.name}</h5>
                             <p>${trans[lang].settings.customise.colourful_counts.bio}</p>
@@ -2483,7 +2563,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                         </table>
                     </div>
                     <div class="toggle-container" id="container-format_guest_features">
-                        <button class="btn reset" onclick="_reset_item('format_guest_features')">Reset to default</button>
+                        <button class="btn reset" onclick="_reset_item('format_guest_features')">${trans[lang].settings.reset}</button>
                         <div class="heading">
                             <h5>${trans[lang].settings.customise.format_guest_features.name}</h5>
                             <p>${trans[lang].settings.customise.format_guest_features.bio}</p>
@@ -2495,7 +2575,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                         </div>
                     </div>
                     <!--<div class="toggle-container" id="container-big_numbers">
-                        <button class="btn reset" onclick="_reset_item('big_numbers')">Reset to default</button>
+                        <button class="btn reset" onclick="_reset_item('big_numbers')">${trans[lang].settings.reset}</button>
                         <div class="heading">
                             <h5>Use alternative numerical font</h5>
                             <p>A special font solely for numbers, check it out!</p>
@@ -2529,7 +2609,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                         </section>
                     </div>
                     <div class="toggle-container" id="container-gendered_tags">
-                        <button class="btn reset" onclick="_reset_item('gendered_tags')">Reset to default</button>
+                        <button class="btn reset" onclick="_reset_item('gendered_tags')">${trans[lang].settings.reset}</button>
                         <div class="heading">
                             <h5>${trans[lang].settings.customise.gendered_tags.name}</h5>
                             <p>${trans[lang].settings.customise.gendered_tags.bio}</p>
@@ -2542,7 +2622,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     </div>
                     <div class="sep"></div>
                     <div class="toggle-container" id="container-rain">
-                        <button class="btn reset" onclick="_reset_item('rain')">Reset to default</button>
+                        <button class="btn reset" onclick="_reset_item('rain')">${trans[lang].settings.reset}</button>
                         <div class="heading">
                             <h5>${trans[lang].settings.customise.rain.name}</h5>
                             <p>${trans[lang].settings.customise.rain.bio}</p>
@@ -2554,7 +2634,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                         </div>
                     </div>
                     <div class="toggle-container" id="container-hide_hateful">
-                        <button class="btn reset" onclick="_reset_item('hide_hateful')">Reset to default</button>
+                        <button class="btn reset" onclick="_reset_item('hide_hateful')">${trans[lang].settings.reset}</button>
                         <div class="heading">
                             <h5>${trans[lang].settings.customise.hide_hateful.name}</h5>
                             <p>${trans[lang].settings.customise.hide_hateful.bio}</p>
@@ -2573,7 +2653,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     <h3>Performance</h3>
                     <p>Running into noticeable issues in theme loading? Try out these settings.</p>
                     <div class="toggle-container" id="container-dev">
-                        <button class="btn reset" onclick="_reset_item('dev')">Reset to default</button>
+                        <button class="btn reset" onclick="_reset_item('dev')">${trans[lang].settings.reset}</button>
                         <div class="heading">
                             <h5>${trans[lang].settings.performance.dev.name}</h5>
                             <p>${trans[lang].settings.performance.dev.bio}</p>
@@ -2822,21 +2902,21 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     document.getElementById('nav-img').setAttribute('src','https://cutensilly.org/img/nav-shown.png');
                     settings.auth_badge = settings_base.auth_badge.values[0];
                 } else if (item == 'dev') {
-                    create_window('prompt_dev','Disable in-built theme loading',`
-                        <p class="alert alert-info">Once you refresh the page, the in-built bleh theme will be disabled (unless you disable this option again).</p>
+                    create_window('prompt_dev',trans[lang].settings.performance.dev.name,`
+                        <p class="alert alert-info">${trans[lang].settings.performance.dev.modals.prompt.alert}</p>
                         <br>
-                        If you do not already have the <strong>Stylus</strong> extension, choose your browser below:
+                        ${trans[lang].settings.performance.dev.modals.prompt.stylus}
                         <br>
                         <div class="browser-choices">
                             <button class="btn browser" onclick="_chosen_chrome()">
                                 <img class="browser-icon" src="https://cutensilly.org/img/chrome.png">
-                                <p>Chrome</p>
-                                <p class="caption">for Chrome, Edge, Brave, Opera</p>
+                                <p>${trans[lang].settings.performance.dev.modals.prompt.browsers.chrome.name}</p>
+                                <p class="caption">${trans[lang].settings.performance.dev.modals.prompt.browsers.chrome.bio}</p>
                             </button>
                             <button class="btn browser" onclick="_chosen_firefox()">
                                 <img class="browser-icon" src="https://cutensilly.org/img/firefox.png">
-                                <p>Firefox</p>
-                                <p class="caption">for Firefox only</p>
+                                <p>${trans[lang].settings.performance.dev.modals.prompt.browsers.firefox.name}</p>
+                                <p class="caption">${trans[lang].settings.performance.dev.modals.prompt.browsers.firefox.bio}</p>
                             </button>
                         </div>
                     `);
@@ -2873,11 +2953,11 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
     function continue_dev() {
         kill_window('prompt_dev');
-        create_window('continue_dev','Disable in-built theme loading',`
-            Once you have the extension installed, hit "Install style" on the new tab that will open.
+        create_window('continue_dev',trans[lang].settings.performance.dev.name,`
+            ${trans[lang].settings.performance.dev.modals.continue.next_step}
             <div class="modal-footer">
                 <button class="btn primary" onclick="_finish_dev()">
-                    Continue
+                    ${trans[lang].settings.continue}
                 </button>
             </div>
         `);
@@ -2886,11 +2966,11 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     unsafeWindow._finish_dev = function() {
         open('https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.css');
         kill_window('continue_dev');
-        create_window('finish_dev','Disable in-built theme loading',`
-            <p class="alert alert-success">All done! From now on, styling will be handled via Stylus.</p>
+        create_window('finish_dev',trans[lang].settings.performance.dev.name,`
+            <p class="alert alert-success">${trans[lang].settings.performance.dev.modals.finish.alert}</p>
             <div class="modal-footer">
                 <button class="btn primary" onclick="_kill_window('finish_dev')">
-                    Done
+                    ${trans[lang].settings.done}
                 </button>
             </div>
         `);
@@ -2900,8 +2980,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     // create a custom colour
     unsafeWindow._create_a_custom_colour = function() {
         let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
-        create_window('custom_colour','Create a custom colour',`
-        <p>Colours are controlled by three values: hue, saturation, and lightness. Try out the sliders to get a feel.</p>
+        create_window('custom_colour',trans[lang].settings.customise.colours.custom,`
+        <p>${trans[lang].settings.customise.colours.modals.custom_colour.preface}</p>
         <br>
         <div class="inner-preview pad">
             <div class="palette">
@@ -2914,21 +2994,21 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             </div>
             <div class="sep"></div>
             <div class="btn-row">
-                <button class="btn">Example button</button>
-                <button class="btn primary">Example button</button>
+                <button class="btn">${trans[lang].settings.examples.button}</button>
+                <button class="btn primary">${trans[lang].settings.examples.button}</button>
                 <div class="chartlist-count-bar">
                     <a class="chartlist-count-bar-link">
                         <span class="chartlist-count-bar-slug" style="width: 60%"></span>
-                        <span class="chartlist-count-bar-value">44,551 plays</span>
+                        <span class="chartlist-count-bar-value">44,551</span>
                     </a>
                 </div>
             </div>
         </div>
         <br>
         <div class="slider-container dim-using-hue-gradient" id="container-hue">
-            <button class="btn reset" onclick="_reset_item('hue')">Reset to default</button>
+            <button class="btn reset" onclick="_reset_item('hue')">${trans[lang].settings.reset}</button>
             <div class="heading">
-                <h5>Accent colour</h5>
+                <h5>${trans[lang].settings.customise.colours.modals.custom_colour.hue}</h5>
             </div>
             <div class="slider">
                 <input type="range" min="0" max="360" value="${settings.hue}" id="slider-hue" oninput="_update_item('hue', this.value)">
@@ -2941,9 +3021,9 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             </div>
         </div>
         <div class="slider-container dim-using-hue-gradient" id="container-sat">
-            <button class="btn reset" onclick="_reset_item('sat')">Reset to default</button>
+            <button class="btn reset" onclick="_reset_item('sat')">${trans[lang].settings.reset}</button>
             <div class="heading">
-                <h5>Saturation</h5>
+                <h5>${trans[lang].settings.customise.colours.modals.custom_colour.sat}</h5>
             </div>
             <div class="slider">
                 <input type="range" min="0" max="1.5" value="${settings.sat}" step="0.025" id="slider-sat" oninput="_update_item('sat', this.value)">
@@ -2956,9 +3036,9 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             </div>
         </div>
         <div class="slider-container dim-using-hue-gradient" id="container-lit">
-            <button class="btn reset" onclick="_reset_item('lit')">Reset to default</button>
+            <button class="btn reset" onclick="_reset_item('lit')">${trans[lang].settings.reset}</button>
             <div class="heading">
-                <h5>Lightness</h5>
+                <h5>${trans[lang].settings.customise.colours.modals.custom_colour.lit}</h5>
             </div>
             <div class="slider">
                 <input type="range" min="0" max="1.5" value="${settings.lit}" step="0.025" id="slider-lit" oninput="_update_item('lit', this.value)">
@@ -2972,7 +3052,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         </div>
         <div class="modal-footer">
             <button class="btn primary" onclick="_kill_window('custom_colour')">
-                Done
+                ${trans[lang].settings.done}
             </button>
         </div>
         `);
@@ -3074,16 +3154,16 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
     // import settings
     unsafeWindow._import_settings = function() {
-        create_window('import_settings','Import settings from a previous install',`
-            <p class="alert alert-warning">Anything you import will override your current settings, if you are importing settings from online ensure you trust the source.</p>
+        create_window('import_settings',trans[lang].settings.actions.import.modals.initial.name,`
+            <p class="alert alert-warning">${trans[lang].settings.actions.import.modals.initial.alert}</p>
             <br>
             <textarea id="import_area"></textarea>
             <div class="modal-footer">
                 <button class="btn primary" onclick="_confirm_import()">
-                    Import
+                    ${trans[lang].settings.actions.import.name}
                 </button>
                 <button class="btn" onclick="_kill_window('import_settings')">
-                    Cancel
+                    ${trans[lang].settings.cancel}
                 </button>
             </div>
         `);
@@ -3104,11 +3184,11 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         } catch(e) {
             // cannot continue, halt
             kill_window('import_settings');
-            create_window('import_failed','Import failed',`
-            <p class="alert alert-error">The settings you attempted to import failed to parse, no changes were made.</p>
+            create_window('import_failed',trans[lang].settings.actions.import.modals.failed.name,`
+            <p class="alert alert-error">${trans[lang].settings.actions.import.modals.failed.alert}</p>
             <div class="modal-footer">
                 <button class="btn primary" onclick="_kill_window('import_failed')">
-                    Confirm
+                    ${trans[lang].settings.done}
                 </button>
             </div>
             `);
@@ -3120,13 +3200,13 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     function export_settings() {
         let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
 
-        create_window('export_settings','Export your current settings',`
-            <p class="alert alert-success">Your current settings are in the textbox below ready for you to copy.</p>
+        create_window('export_settings',trans[lang].settings.actions.export.modals.initial.name,`
+            <p class="alert alert-success">${trans[lang].settings.actions.export.modals.initial.alert}</p>
             <br>
             <textarea>${JSON.stringify(settings)}</textarea>
             <div class="modal-footer">
                 <button class="btn primary" onclick="_kill_window('export_settings')">
-                    Done
+                    ${trans[lang].settings.done}
                 </button>
             </div>
         `);
@@ -3138,17 +3218,17 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
     // reset settings
     unsafeWindow._reset_settings = function() {
-        create_window('reset_settings','Reset your settings to default',`
-            <p class="alert alert-warning">Your settings will be <strong>reset to all defaults</strong> with no way to go back. Are you sure?</p>
+        create_window('reset_settings',trans[lang].settings.actions.reset.modals.initial.name,`
+            <p class="alert alert-warning">${trans[lang].settings.actions.reset.modals.initial.alert}</p>
             <div class="modal-footer">
                 <button class="btn" onclick="_confirm_reset()">
-                    Yes, reset my settings
+                    ${trans[lang].settings.actions.reset.modals.initial.confirm}
                 </button>
                 <button class="btn" onclick="_export_first()">
-                    Export first
+                    ${trans[lang].settings.actions.reset.modals.initial.export}
                 </button>
                 <button class="btn primary" onclick="_kill_window('reset_settings')">
-                    Cancel
+                    ${trans[lang].settings.cancel}
                 </button>
             </div>
         `);
