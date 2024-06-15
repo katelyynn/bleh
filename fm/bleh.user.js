@@ -667,6 +667,26 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         xhr.send();
     }
 
+
+    function add_menu_item(parent, id, type, name, action, open_externally=false, is_auth=false) {
+        let menu_item = document.createElement('li');
+        let menu_item_btn = document.createElement(type == 'btn' ? 'button' : 'a');
+        menu_item_btn.classList.add(
+            is_auth ? 'auth-dropdown-menu-item' : 'dropdown-menu-clickable-item',
+            `bleh--menu-item-${id}`
+        );
+        menu_item_btn.setAttribute(
+            type == 'btn' ? 'onclick' : 'href',
+            action
+        );
+        if (open_externally) menu_item_btn.setAttribute('_target', '_blank');
+        menu_item_btn.textContent = name;
+
+        menu_item.appendChild(menu_item_btn);
+        parent.appendChild(menu_item);
+    }
+
+
     function patch_masthead(element) {
         let masthead_logo = element.querySelector('.masthead-logo');
 
@@ -1014,6 +1034,36 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 if (profile_name.textContent == 'cutensilly') {
                     profile_name.classList.add('bleh--name-is-cute');
                 }
+
+                // secondary text
+                let profile_sub_text = element.querySelector('.header-title-secondary');
+
+                if (profile_sub_text == undefined)
+                    return;
+
+                let display_name = profile_sub_text.querySelector('.header-title-display-name');
+                let scrobble_since = profile_sub_text.querySelector('.header-scrobble-since');
+                scrobble_since.textContent = scrobble_since.textContent.replace('• scrobbling since ','');
+
+                // pronouns?
+                let pronouns = false;
+                let display_name_no_spaces = display_name.textContent.replaceAll(' ','');
+                if (
+                    display_name_no_spaces.startsWith('she/') ||
+                    display_name_no_spaces.startsWith('he/') ||
+                    display_name_no_spaces.startsWith('they/') ||
+                    display_name_no_spaces.startsWith('it/')
+                ) pronouns = true;
+
+                let display_name_pre = document.createElement('span');
+                display_name_pre.classList.add('header-title-secondary--pre');
+                display_name_pre.textContent = pronouns ? 'pronouns' : 'aka.';
+                profile_sub_text.insertBefore(display_name_pre, display_name);
+
+                let scrobble_since_pre = document.createElement('span');
+                scrobble_since_pre.classList.add('header-title-secondary--pre');
+                scrobble_since_pre.textContent = 'created';
+                profile_sub_text.insertBefore(scrobble_since_pre, scrobble_since);
             }
         }
 
@@ -1294,8 +1344,6 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     function patch_artist_ranks_in_grid_view(element) {
         let artist_statistics = element.querySelectorAll('.grid-items-item-aux-text a');
 
-        console.info('artist statistic', artist_statistics);
-
         if (artist_statistics == undefined)
             return;
 
@@ -1329,7 +1377,6 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             return;
 
         let count = parseInt(count_bar.querySelector('.chartlist-count-bar-value').textContent.replaceAll(',','').replace(' scrobbles',''));
-        console.info('count', count);
 
         if (!count_bar.hasAttribute('data-kate-processed')) {
             count_bar.setAttribute('data-kate-processed','true');
@@ -1351,7 +1398,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
         for (let rank = max_rank; rank >= 0; rank--) {
             if (scrobbles > ranks[rank].start) {
-                console.info('bleh - PARSING RANK:', rank, ranks[rank].start);
+                //console.info('bleh - PARSING RANK:', rank, ranks[rank].start);
 
                 let this_rank = parseInt(rank);
 
@@ -1371,14 +1418,14 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         let milestone_sat = ranks[scrobble_milestone].sat;
         let milestone_lit = ranks[scrobble_milestone].lit;
 
-        console.info('bleh - default values will be', milestone_hue, milestone_sat, milestone_lit);
+        //console.info('bleh - default values will be', milestone_hue, milestone_sat, milestone_lit);
 
         if (scrobble_milestone != max_rank) {
             let next_milestone_hue = ranks[scrobble_milestone + 1].hue;
             let next_milestone_sat = ranks[scrobble_milestone + 1].sat;
             let next_milestone_lit = ranks[scrobble_milestone + 1].lit;
 
-            console.info('bleh - next up values will be', next_milestone_hue, next_milestone_sat, next_milestone_lit);
+            //console.info('bleh - next up values will be', next_milestone_hue, next_milestone_sat, next_milestone_lit);
 
             if (milestone_hue > next_milestone_hue)
                 milestone_hue += (next_milestone_hue - milestone_hue) * scrobble_proximity;
@@ -1393,12 +1440,12 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             else
                 milestone_lit += (next_milestone_lit - milestone_lit) * scrobble_proximity;
 
-            console.info('bleh - created proximity values', milestone_hue, milestone_sat, milestone_lit);
+            //console.info('bleh - created proximity values', milestone_hue, milestone_sat, milestone_lit);
         }
 
 
 
-        console.info('bleh - scrobble milestone for artist is',scrobble_milestone,'with',scrobbles,'scrobbles','- scrobble proximity of',scrobble_proximity);
+        console.info('bleh - scrobble milestone for artist is', scrobble_milestone, 'with', scrobbles,'scrobbles', '- scrobble proximity of', scrobble_proximity, [milestone_hue, milestone_sat, milestone_lit]);
 
         return {
             milestone: scrobble_milestone,

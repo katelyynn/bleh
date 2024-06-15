@@ -3169,12 +3169,22 @@ state is not active, which then falls back to primary button styling */
     margin-top: 8px !important;
     font-size: var(--font-size) !important;
     line-height: var(--line-height) !important;
-}
-.header-scrobble-since, .header-title-display-name {
-    color: hsl(var(--c2));
-}
-.header-title-display-name + .header-scrobble-since {
-    color: hsl(var(--c3));
+
+    display: flex;
+    gap: 6px;
+
+    .header-title-secondary--pre {
+        padding: 0 4px;
+        background-color: hsl(var(--b6));
+        border-radius: var(--item-small-radius);
+        color: hsl(var(--c3));
+        font-weight: var(--font-weight-bold);
+        font-size: var(--font-size-sm);
+    }
+
+    .header-title-display-name, .header-scrobble-since {
+        color: hsl(var(--c2));
+    }
 }
 
 .header-title-display-name {
@@ -11376,7 +11386,7 @@ code, kbd, samp {
 
 
 input[type="range"] {
-    width: 500px;
+    width: 100%;
     outline: none;
     appearance: none;
     background: none;
@@ -11406,23 +11416,23 @@ input[type="range"]::-webkit-slider-thumb {
     /**/
     width: 8px;
     height: 20px;
-    background-color: hsl(var(--b4));
+    background-color: hsl(var(--h4));
     border-radius: var(--item-small-radius);
-    border: 2px solid hsl(var(--b5));
+    border: 2px solid hsl(var(--h4));
 }
 input[type="range"]::-moz-range-thumb {
     width: 8px;
     height: 20px;
-    background-color: hsl(var(--b4));
+    background-color: hsl(var(--h4));
     border-radius: var(--item-small-radius);
-    border: 2px solid hsl(var(--b5));
+    border: 2px solid hsl(var(--h4));
 }
 
 input[type="range"]::-webkit-slider-thumb {
-    box-shadow: -407px 0 0 400px hsl(var(--l3));
+    box-shadow: -407px 0 0 400px hsl(var(--h3));
 }
 input[type="range"]::-moz-range-thumb {
-    box-shadow: -407px 0 0 400px hsl(var(--l3));
+    box-shadow: -407px 0 0 400px hsl(var(--h3));
 }
 
 
@@ -11486,7 +11496,7 @@ input[type="range"]::-moz-range-thumb {
     color: hsl(var(--c3));
     font-size: 12px;
     position: relative;
-    width: 468px;
+    width: calc(100% - (36px + 26px));
     height: 18px;
 
     p {
@@ -11499,6 +11509,8 @@ input[type="range"]::-moz-range-thumb {
     font-size: 12px;
     color: hsl(var(--l3-c));
     font-weight: var(--font-weight-medium);
+    width: 30px;
+    flex-shrink: 0;
 }
 
 .toggle-container .heading,
