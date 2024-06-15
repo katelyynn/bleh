@@ -24,12 +24,6 @@ if (!valid_langs.includes(lang)) {
     lang = 'en';
 }
 
-tippy.setDefaultProps({
-    arrow: false,
-    duration: [100, 300],
-    delay: [null, 50]
-});
-
 const trans = {
     en: {
         auth_menu: {
@@ -251,6 +245,12 @@ const trans = {
         }
     }
 }
+
+tippy.setDefaultProps({
+    arrow: false,
+    duration: [100, 300],
+    delay: [null, 50]
+});
 
 let artist_corrections = {
     'Miraie': 'miraie',
