@@ -12568,3 +12568,86 @@ trying to list every song ever made by someone identifying as a female, which is
         left: 80px;
     }
 }
+
+
+
+
+/*     RAIN     */
+.rain-container {
+    position: fixed;
+    top: 0;
+    z-index: 9990;
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+    pointer-events: none;
+
+    .rain {
+        position: absolute;
+        inset: 0;
+        z-index: 9992;
+
+        &.rain-back {
+            bottom: 50px;
+            opacity: 0.5;
+            z-index: 9991;
+        }
+
+        .drop {
+            position: absolute;
+            bottom: 100%;
+            width: 15px;
+            height: 120px;
+            animation: drop 0.5s linear infinite;
+
+            .stem {
+                width: 1px;
+                height: 60%;
+                margin-left: 7px;
+                background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.25));
+                animation: stem 0.5s linear infinite;
+            }
+
+            .splat {
+                width: 15px;
+                height: 10px;
+                border-top: 2px dotted rgba(255, 255, 255, 0.5);
+                border-radius: 50%;
+                opacity: 1;
+                transform: scale(0);
+                animation: splat 0.5s linear infinite;
+            }
+        }
+    }
+}
+
+@keyframes drop {
+    from {
+        transform: translateY(0);
+    }
+    75%, to {
+        transform: translateY(90vh);
+    }
+}
+@keyframes stem {
+    from, 65% {
+        opacity: 1;
+    }
+    75%, to {
+        opacity: 0;
+    }
+}
+@keyframes splat {
+    from, 80% {
+        opacity: 1;
+        transform: scale(0);
+    }
+    90% {
+        opacity: 0.5;
+        transform: scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: scale(1.5);
+    }
+}

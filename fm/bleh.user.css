@@ -12585,10 +12585,10 @@ trying to list every song ever made by someone identifying as a female, which is
 /*     RAIN     */
 .rain-container {
     position: fixed;
-    inset: 0;
+    top: 0;
     z-index: 9990;
     width: 100%;
-    height: 100%;
+    height: 300px;
     overflow: hidden;
     pointer-events: none;
 
