@@ -17,6 +17,12 @@
 
 let version = '2024.0615.1';
 let lang = document.documentElement.getAttribute('lang');
+let valid_langs = ['en'];
+
+if (!valid_langs.includes(lang)) {
+    console.info('bleh - language fallback from', lang, 'to en (lang is not listed as valid)', valid_langs);
+    lang = 'en';
+}
 
 tippy.setDefaultProps({
     arrow: false,
