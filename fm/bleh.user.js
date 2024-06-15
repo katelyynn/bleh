@@ -199,7 +199,8 @@ const trans = {
                 about: 'About',
                 toggle_preview: {
                     name: 'Toggle preview',
-                    bio: 'Preview how your bio looks to others'
+                    bio: 'Preview how your bio looks to others',
+                    note: 'Note: New-lines, links, etc. only display to other bleh users, regular Last.fm users see new-lines as spaces.'
                 },
                 avatar: {
                     name: 'Edit avatar',
@@ -1192,7 +1193,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                                 <div class="input about-me" data-bleh--show-preview="false" id="about_me">
                                     <textarea name="about_me" cols="40" rows="10" class="textarea--s" maxlength="500" id="id_about_me" oninput="_update_about_me_preview(this.value)" data-form-type="other">${form_about_me}</textarea>
                                     <span class="bleh--about-me-preview" id="about_me_preview"></span>
-                                    <div class="tip bleh--about-me-preview-only">Note: New-lines, links, etc. only display to other bleh users, regular Last.fm users see new-lines as spaces.</div>
+                                    <div class="tip bleh--about-me-preview-only">${trans[lang].settings.profile.toggle_preview.note}</div>
                                 </div>
                             </div>
                             <div class="save-row">
