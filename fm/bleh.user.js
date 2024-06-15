@@ -1517,6 +1517,9 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 let album_name = album.querySelector(`.${parent.replace('-details','')}-name a`);
                 let artist_name = album.querySelector(`.${parent.replace('-details','')}-artist a`);
 
+                if (artist_name == undefined)
+                    return;
+
                 let corrected_album_name = correct_item_by_artist(album_name.textContent, artist_name.textContent);
                 let corrected_artist_name = correct_artist(artist_name.textContent);
 
