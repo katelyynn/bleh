@@ -11642,10 +11642,149 @@ input[type="range"]::-moz-range-thumb {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    margin: unset !important;
 }
 .settings-footer {
     display: flex;
     justify-content: end;
+}
+
+
+.inner-preview {
+    .tracks {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+
+        [data-bleh--inbuilt-id_chart_style_and_length_top_albums^="classic"] &.album,
+        [data-bleh--inbuilt-id_chart_style_and_length_top_albums^="grid"] &.album,
+        [data-bleh--inbuilt-id_chart_style_and_length_top_artists^="classic"] &.artist,
+        [data-bleh--inbuilt-id_chart_style_and_length_top_artists^="grid"] &.artist {
+            display: none;
+        }
+
+        .track {
+            background-color: hsla(var(--b4), 40%);
+            padding: 6px 12px;
+            min-height: 24px;
+            border-radius: var(--item-small-radius);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            .cover {
+                width: 20px;
+                height: 20px;
+                background-color: hsl(var(--b6));
+                border-radius: var(--item-small-radius);
+
+                .artist & {
+                    border-radius: 50%;
+                }
+
+                html:not([data-bleh--inbuilt-recent_artwork="true"]) & {
+                    display: none;
+                }
+            }
+            .title {
+                flex: 1;
+                height: 6px;
+                background-color: hsl(var(--c2));
+                border-radius: 50px;
+            }
+            .artist {
+                width: 150px;
+                height: 6px;
+                background-color: hsla(var(--c2), 80%);
+                border-radius: 50px;
+            }
+            .time {
+                width: 60px;
+                height: 6px;
+                background-color: hsl(var(--c3));
+                border-radius: 50px;
+            }
+            .bar {
+                width: 120px;
+                height: 16px;
+                background-color: hsl(var(--b4));
+                border-radius: var(--item-small-radius);
+                display: flex;
+                justify-content: end;
+
+                .fill {
+                    background-color: hsl(var(--h3));
+                    border-radius: var(--item-small-radius);
+                    height: 16px;
+                }
+            }
+
+            &.realtime {
+                background-color: hsla(var(--h3), 45%);
+
+                .title {
+                    background-color: hsl(var(--l2-c));
+                }
+            }
+        }
+    }
+
+    .item-grid {
+        display: flex;
+        justify-content: center;
+        gap: 4px;
+
+        [data-bleh--inbuilt-id_chart_style_and_length_top_albums^="list"] &.album,
+        [data-bleh--inbuilt-id_chart_style_and_length_top_artists^="list"] &.artist {
+            display: none;
+        }
+
+        .grid-primary {
+            aspect-ratio: 1 / 1;
+
+            .grid-item {
+                width: 224px;
+                height: 224px;
+                border-radius: var(--item-small-radius);
+                background-color: hsl(var(--b4));
+            }
+
+            [data-bleh--inbuilt-id_chart_style_and_length_top_albums="grid,4"] &.album,
+            [data-bleh--inbuilt-id_chart_style_and_length_top_albums="grid,8"] &.album,
+            [data-bleh--inbuilt-id_chart_style_and_length_top_artists="grid,4"] &.artist,
+            [data-bleh--inbuilt-id_chart_style_and_length_top_artists="grid,8"] &.artist {
+                display: none;
+            }
+        }
+
+        .grid-mains {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+
+            .grid-main {
+                display: flex;
+                gap: 4px;
+
+                .grid-item {
+                    width: 110px;
+                    height: 110px;
+                    border-radius: var(--item-small-radius);
+                    background-color: hsl(var(--b4));
+
+                    [data-bleh--inbuilt-id_chart_style_and_length_top_albums="classic,5"] &.grid-item--extra.album,
+                    [data-bleh--inbuilt-id_chart_style_and_length_top_artists="classic,5"] &.grid-item--extra.artist {
+                        display: none;
+                    }
+                }
+
+                [data-bleh--inbuilt-id_chart_style_and_length_top_albums="grid,4"] & + .grid-main.album,
+                [data-bleh--inbuilt-id_chart_style_and_length_top_artists="grid,4"] & + .grid-main.artist {
+                    display: none;
+                }
+            }
+        }
+    }
 }
 
 
