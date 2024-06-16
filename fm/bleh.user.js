@@ -1886,46 +1886,57 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 <div class="inner-preview pad">
                     <div class="shouts">
                         <div class="shout">
-
+                            <div class="avatar-side">
+                                <div class="shout-avatar-placeholder"></div>
+                            </div>
+                            <div class="info-side">
+                                <div class="header">
+                                    <div class="shout-username"></div>
+                                    <div class="shout-time"></div>
+                                </div>
+                                <div class="shout-contents"></div>
+                                <div class="shout-contents"></div>
+                            </div>
                         </div>
-                        <div class="track realtime">
-                            <div class="cover"></div>
-                            <div class="title"></div>
-                            <div class="artist"></div>
-                            <div class="time"></div>
+                        <div class="shout">
+                            <div class="avatar-side">
+                                <div class="shout-avatar-placeholder"></div>
+                            </div>
+                            <div class="info-side">
+                                <div class="header">
+                                    <div class="shout-username"></div>
+                                    <div class="shout-time"></div>
+                                </div>
+                                <div class="shout-contents"></div>
+                                <div class="shout-contents"></div>
+                            </div>
                         </div>
-                        <div class="track">
-                            <div class="cover"></div>
-                            <div class="title"></div>
-                            <div class="artist"></div>
-                            <div class="time"></div>
-                        </div>
-                        <div class="track">
-                            <div class="cover"></div>
-                            <div class="title"></div>
-                            <div class="artist"></div>
-                            <div class="time"></div>
-                        </div>
-                        <div class="track">
-                            <div class="cover"></div>
-                            <div class="title"></div>
-                            <div class="artist"></div>
-                            <div class="time"></div>
-                        </div>
-                        <div class="track">
-                            <div class="cover"></div>
-                            <div class="title"></div>
-                            <div class="artist"></div>
-                            <div class="time"></div>
+                        <div class="shout">
+                            <div class="avatar-side">
+                                <div class="shout-avatar-placeholder"></div>
+                            </div>
+                            <div class="info-side">
+                                <div class="header">
+                                    <div class="shout-username"></div>
+                                    <div class="shout-time"></div>
+                                </div>
+                                <div class="shout-contents"></div>
+                                <div class="shout-contents"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="select-container">
+                <div class="toggle-container" id="container-disable_shoutbox">
+                    <button class="btn reset" onclick="_reset_inbuilt_item('disable_shoutbox')">Reset to default</button>
                     <div class="heading">
-                        <h5>${trans[lang].settings.inbuilt.privacy.recent_listening.name}</h5>
+                        <h5>${trans[lang].settings.inbuilt.privacy.disable_shoutbox.name}</h5>
+                        <p>${trans[lang].settings.inbuilt.privacy.disable_shoutbox.bio}</p>
                     </div>
-                    <div class="select-wrap">
-                        ${original_privacy_settings.recent_listening}
+                    <div class="toggle-wrap">
+                        <input class="companion-checkbox" type="checkbox" name="hide_realtime" id="inbuilt-companion-checkbox-disable_shoutbox">
+                        <span class="btn toggle" id="toggle-disable_shoutbox" onclick="_update_inbuilt_item('disable_shoutbox')" aria-checked="false">
+                            <div class="dot"></div>
+                        </span>
                     </div>
                 </div>
                 <div class="sep"></div>
