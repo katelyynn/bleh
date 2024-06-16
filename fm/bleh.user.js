@@ -66,7 +66,7 @@ const trans = {
             },
             themes: {
                 name: 'Themes',
-                bio: 'Choose from light to oled.',
+                bio: 'Choose from light to midnight.',
                 dark: {
                     name: 'Dark',
                     bio: 'The default flavour of bleh'
@@ -76,7 +76,7 @@ const trans = {
                     bio: 'The in-between'
                 },
                 oled: {
-                    name: 'OLED',
+                    name: 'Midnight',
                     bio: 'Ultra blackout'
                 },
                 light: {
