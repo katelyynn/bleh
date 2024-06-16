@@ -518,6 +518,11 @@ html body {
 }
 
 
+.main-content {
+    padding-top: calc(var(--card-gap) + 40px) !important;
+}
+
+
 ::selection {
     background: hsla(var(--h4), 20%);
     color: hsl(var(--l3-c));
@@ -860,6 +865,7 @@ last.fm changes as of 2024-05-20 */
 
 /* align better with mobile buttons -> main links spacing */
 .masthead-nav {
+    display: flex !important;
     margin-left: 4px !important;
 }
 
@@ -868,6 +874,12 @@ last.fm changes as of 2024-05-20 */
 }
 .masthead-nav-item .masthead-nav-control {
     padding: 0 16px 0 calc(16px + 16px + 4px) !important;
+
+    /* if classic-playbar is not present, last.fm uses a new header design,
+    featuring this fancy underline thing */
+    &:after {
+        display: none !important;
+    }
 }
 .masthead-nav-control:before, .masthead-search-toggle:before {
     opacity: 1 !important;
@@ -1011,8 +1023,8 @@ last.fm changes as of 2024-05-20 */
     }
 }
 .auth-avatar-desktop {
-    width: 38px;
-    height: 38px;
+    width: 38px !important;
+    height: 38px !important;
     border: 2px solid hsl(var(--b4));
     box-shadow: var(--card-shadow);
     transition-property: transform, border-color, box-shadow;
