@@ -1340,16 +1340,16 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                         </div>
                         <div class="grid-mains">
                             <div class="grid-main artist">
-                                <div class="grid-item"></div>
-                                <div class="grid-item"></div>
                                 <div class="grid-item grid-item--extra artist"></div>
                                 <div class="grid-item grid-item--extra artist"></div>
+                                <div class="grid-item"></div>
+                                <div class="grid-item"></div>
                             </div>
                             <div class="grid-main artist">
-                                <div class="grid-item"></div>
-                                <div class="grid-item"></div>
                                 <div class="grid-item grid-item--extra artist"></div>
                                 <div class="grid-item grid-item--extra artist"></div>
+                                <div class="grid-item"></div>
+                                <div class="grid-item"></div>
                             </div>
                         </div>
                     </div>
