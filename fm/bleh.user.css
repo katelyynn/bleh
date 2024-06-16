@@ -158,7 +158,8 @@ a,
 .header-new-actions :is(a, button), .header-new-inner, span[itemprop="byArtist"] a,
 .user-dashboard-layout .masthead a,
 .bleh--redacted-message,
-.header-metadata-display, .chartlist-count-bar, .chartlist-count-bar-value
+.header-metadata-display, .chartlist-count-bar, .chartlist-count-bar-value,
+.primary-selection
 {
     --c1: var(--hue), calc(var(--sat) * 40%), 100%;
     --c2: var(--hue), calc(var(--sat) * 60%), 90%;
@@ -5570,6 +5571,7 @@ button:not(.playback-app-container button, .top-artist-list-item, .pixel, .liste
 .avatar-overlay:before,
 .grid-item:before,
 .select-wrap:before,
+.primary-selection:after,
 /*     DROPDOWNS     */
 .dropdown-menu-clickable-item:before, .auth-dropdown-menu-item:before,
 .dropdown-menu-list-button::after, .dropdown-menu-clickable-button::after, .dropdown-menu-clickable-button-js-only::after,
@@ -11662,6 +11664,76 @@ input[type="range"]::-moz-range-thumb {
 .settings-footer {
     display: flex;
     justify-content: end;
+}
+
+
+.primary-selections {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    select {
+        display: none;
+    }
+
+    .primary-selection {
+        --btn-top: 16px;
+        --btn-bottom: 16px;
+        --btn-left: calc(16px + 12px + 6px + 4px);
+        --mask: var(--icon-16-dot);
+        width: 100% !important;
+        position: relative;
+
+        &:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            width: 3px;
+            height: 28px;
+            top: 50%;
+            margin-top: -14px;
+            background-color: hsl(var(--l3-c));
+            box-shadow: 0 0 20px 3px hsl(var(--h4));
+            border-radius: 50px;
+            opacity: 0;
+        }
+
+        p {
+            font-size: 12px;
+            color: hsl(var(--c3));
+        }
+
+        &#primary-selection-receiving_msgs-everyone {
+            --hue: 160;
+            --sat: 1;
+            --lit: 1;
+        }
+        &#primary-selection-receiving_msgs-neighbours {
+            --hue: 35;
+            --sat: 1;
+            --lit: 1;
+        }
+        &#primary-selection-receiving_msgs-follow {
+            --hue: 0;
+            --sat: 1;
+            --lit: 1;
+        }
+
+        [data-bleh--inbuilt-id_message_privacy="all"] &#primary-selection-receiving_msgs-everyone,
+        [data-bleh--inbuilt-id_message_privacy="n"] &#primary-selection-receiving_msgs-neighbours,
+        [data-bleh--inbuilt-id_message_privacy="f"] &#primary-selection-receiving_msgs-follow {
+            --bg: hsla(var(--h3), 25%);
+            --bg-hov: hsla(var(--h3), 35%);
+            --bg-atv: hsla(var(--h3), 45%);
+            --shadow: none;
+            --shadow-hov: none;
+            --mask: var(--icon-16-check);
+
+            &:before {
+                opacity: 1;
+            }
+        }
+    }
 }
 
 

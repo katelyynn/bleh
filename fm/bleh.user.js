@@ -1866,21 +1866,28 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     </div>
                 </div>
                 <div class="sep"></div>
-                <div class="toggle-container" id="container-recent_artwork">
-                    <button class="btn reset" onclick="_reset_inbuilt_item('recent_artwork')">Reset to default</button>
-                    <div class="heading">
-                        <h5>${trans[lang].settings.inbuilt.charts.recent.artwork.name}</h5>
+                <h5>Who can send you messages?</h5>
+                <div class="primary-selections">
+                    ${original_privacy_settings.receiving_msgs}
+                    <div class="btn primary-selection" id="primary-selection-receiving_msgs-everyone" onclick="_update_inbuilt_selection('id_message_privacy', 0)">
+                        <h5>${trans[lang].settings.inbuilt.privacy.receiving_msgs.settings.everyone.name}</h5>
+                        <p>${trans[lang].settings.inbuilt.privacy.receiving_msgs.settings.everyone.bio}</p>
                     </div>
-                    <div class="toggle-wrap">
-                        <input class="companion-checkbox" type="checkbox" name="show_recent_tracks_artwork" id="inbuilt-companion-checkbox-recent_artwork">
-                        <span class="btn toggle" id="toggle-recent_artwork" onclick="_update_inbuilt_item('recent_artwork')" aria-checked="false">
-                            <div class="dot"></div>
-                        </span>
+                    <div class="btn primary-selection" id="primary-selection-receiving_msgs-neighbours" onclick="_update_inbuilt_selection('id_message_privacy', 1)">
+                        <h5>${trans[lang].settings.inbuilt.privacy.receiving_msgs.settings.neighbours.name}</h5>
+                        <p>${trans[lang].settings.inbuilt.privacy.receiving_msgs.settings.neighbours.bio}</p>
+                    </div>
+                    <div class="btn primary-selection" id="primary-selection-receiving_msgs-follow" onclick="_update_inbuilt_selection('id_message_privacy', 2)">
+                        <h5>${trans[lang].settings.inbuilt.privacy.receiving_msgs.settings.follow.name}</h5>
+                        <p>${trans[lang].settings.inbuilt.privacy.receiving_msgs.settings.follow.bio}</p>
                     </div>
                 </div>
                 <div class="sep"></div>
                 <div class="inner-preview pad">
-                    <div class="tracks recent_listening">
+                    <div class="shouts">
+                        <div class="shout">
+
+                        </div>
                         <div class="track realtime">
                             <div class="cover"></div>
                             <div class="title"></div>
@@ -1940,6 +1947,12 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             select.setAttribute('onchange', `_update_inbuilt_select('${select.getAttribute('id')}', this.value)`);
             update_inbuilt_select(select.getAttribute('id'), select.value);
         });
+    }
+
+
+    unsafeWindow._update_inbuilt_selection = function(id, index) {
+        document.getElementById(id).selectedIndex = index;
+        update_inbuilt_select(id, document.getElementById(id).value);
     }
 
 
