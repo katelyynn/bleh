@@ -186,26 +186,66 @@ const trans = {
                     delete_user: 'Remove {u}\'s note'
                 }
             },
-            profile: {
-                name: 'Profile',
-                subtitle: {
-                    name: 'Subtitle',
-                    aka: 'aka.',
-                    pronouns: 'pronouns'
+            inbuilt: {
+                profile: {
+                    name: 'Profile',
+                    subtitle: {
+                        name: 'Subtitle',
+                        aka: 'aka.',
+                        pronouns: 'pronouns'
+                    },
+                    pronoun_tip: 'Tip: If pronouns are placed first, "aka." will change to "pronouns".',
+                    country: 'Country',
+                    website: 'Website',
+                    about: 'About',
+                    toggle_preview: {
+                        name: 'Toggle preview',
+                        bio: 'Preview how your bio looks to others',
+                        note: 'Note: New-lines, links, etc. only display to other bleh users, regular Last.fm users see new-lines as spaces.'
+                    },
+                    avatar: {
+                        name: 'Edit avatar',
+                        upload: 'Upload file',
+                        delete: 'Delete avatar'
+                    }
                 },
-                pronoun_tip: 'Tip: If pronouns are placed first, "aka." will change to "pronouns".',
-                country: 'Country',
-                website: 'Website',
-                about: 'About',
-                toggle_preview: {
-                    name: 'Toggle preview',
-                    bio: 'Preview how your bio looks to others',
-                    note: 'Note: New-lines, links, etc. only display to other bleh users, regular Last.fm users see new-lines as spaces.'
-                },
-                avatar: {
-                    name: 'Edit avatar',
-                    upload: 'Upload file',
-                    delete: 'Delete avatar'
+                chart: {
+                    name: 'Charts',
+                    recent: {
+                        count: {
+                            name: 'Tracks to display'
+                        },
+                        artwork: {
+                            name: 'Display album artwork'
+                        },
+                        realtime: {
+                            name: 'Update tracks in realtime'
+                        }
+                    },
+                    artists: {
+                        timeframe: {
+                            name: 'Default timeframe'
+                        },
+                        style: {
+                            name: 'Chart style'
+                        }
+                    },
+                    albums: {
+                        timeframe: {
+                            name: 'Default timeframe'
+                        },
+                        style: {
+                            name: 'Chart style'
+                        }
+                    },
+                    tracks: {
+                        count: {
+                            name: 'Tracks to display'
+                        },
+                        timeframe: {
+                            name: 'Default timeframe'
+                        }
+                    }
                 }
             },
             actions: {
