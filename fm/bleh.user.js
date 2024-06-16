@@ -278,7 +278,7 @@ const trans = {
                     },
                     disable_shoutbox: {
                         name: 'Hide your shoutbox',
-                        bio: 'Removes your shoutbox from you and anyone else.'
+                        bio: 'Your shoutbox will be hidden for you and anyone else.'
                     }
                 }
             },
@@ -1933,7 +1933,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                         <p>${trans[lang].settings.inbuilt.privacy.disable_shoutbox.bio}</p>
                     </div>
                     <div class="toggle-wrap">
-                        <input class="companion-checkbox" type="checkbox" name="hide_realtime" id="inbuilt-companion-checkbox-disable_shoutbox">
+                        <input class="companion-checkbox" type="checkbox" name="shoutbox_disabled" id="inbuilt-companion-checkbox-disable_shoutbox">
                         <span class="btn toggle" id="toggle-disable_shoutbox" onclick="_update_inbuilt_item('disable_shoutbox')" aria-checked="false">
                             <div class="dot"></div>
                         </span>
@@ -1944,7 +1944,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     <button type="submit" class="btn-primary">
                         ${trans[lang].settings.save}
                     </button>
-                    <input type="hidden" value="chart" name="submit">
+                    <input type="hidden" value="privacy" name="submit">
                 </div>
             </form>
         `)
