@@ -224,7 +224,8 @@ const trans = {
                             name: 'Display album artwork'
                         },
                         realtime: {
-                            name: 'Update tracks in realtime'
+                            name: 'Update tracks in realtime',
+                            bio: 'Your recent tracks will refresh while you are on your profile.'
                         }
                     },
                     artists: {
@@ -1265,7 +1266,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             <form action="/settings#update-chart" name="chart-form" method="post">
                 <input type="hidden" name="csrfmiddlewaretoken" value="${token}">
                 <div class="inner-preview pad">
-                    <div class="tracks">
+                    <div class="tracks recent">
                         <div class="track realtime">
                             <div class="cover"></div>
                             <div class="title"></div>
@@ -1322,6 +1323,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     <button class="btn reset" onclick="_reset_inbuilt_item('recent_realtime')">Reset to default</button>
                     <div class="heading">
                         <h5>${trans[lang].settings.inbuilt.charts.recent.realtime.name}</h5>
+                        <p>${trans[lang].settings.inbuilt.charts.recent.realtime.bio}</p>
                     </div>
                     <div class="toggle-wrap">
                         <input class="companion-checkbox" type="checkbox" name="auto_refresh_recent_tracks" id="inbuilt-companion-checkbox-recent_realtime">

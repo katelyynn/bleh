@@ -11756,6 +11756,8 @@ input[type="range"]::-moz-range-thumb {
             align-items: center;
             gap: 12px;
 
+            animation: track_in var(--trans) var(--trans-function);
+
             .cover {
                 width: 20px;
                 height: 20px;
@@ -11766,7 +11768,7 @@ input[type="range"]::-moz-range-thumb {
                     border-radius: 50%;
                 }
 
-                html:not([data-bleh--inbuilt-recent_artwork="true"]) & {
+                html:not([data-bleh--inbuilt-recent_artwork="true"]) .tracks.recent & {
                     display: none;
                 }
             }
@@ -11840,6 +11842,8 @@ input[type="range"]::-moz-range-thumb {
                 --margin-left: calc(-1 * (var(--mask-size) / 2));
                 --margin-top: calc(-1 * (var(--mask-size) / 2));
 
+                animation: grid_primary var(--trans) var(--trans-function);
+
                 .artist & {
                     --mask: var(--icon-artist);
                 }
@@ -11876,6 +11880,8 @@ input[type="range"]::-moz-range-thumb {
                     --margin-left: calc(-1 * (var(--mask-size) / 2));
                     --margin-top: calc(-1 * (var(--mask-size) / 2));
 
+                    animation: grid_item var(--trans) var(--trans-function);
+
                     .artist & {
                         --mask: var(--icon-artist);
                     }
@@ -11909,6 +11915,8 @@ input[type="range"]::-moz-range-thumb {
             gap: 8px;
             height: unset;
             margin-left: unset;
+
+            animation: track_in var(--trans) var(--trans-function);
 
             .shout-avatar-placeholder {
                 width: 40px;
@@ -11955,6 +11963,37 @@ input[type="range"]::-moz-range-thumb {
                 }
             }
         }
+    }
+}
+
+@keyframes track_in {
+    from {
+        transform: translateY(5px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+@keyframes grid_primary {
+    from {
+        transform: translateX(10px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+@keyframes grid_item {
+    from {
+        transform: translateX(-5px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
     }
 }
 
