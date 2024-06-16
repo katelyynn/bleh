@@ -1178,7 +1178,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         document.getElementById('update-profile').outerHTML = '';
 
         update_picture.innerHTML = (`
-            <h2>${trans[lang].settings.profile.name}</h2>
+            <h2>${trans[lang].settings.inbuilt.profile.name}</h2>
             <div class="profile-container">
                 <div class="avatar-side">
                     <div class="avatar image-upload-preview" onclick="_open_avatar_changer('${token}')">
@@ -1203,16 +1203,16 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                             <input type="hidden" name="csrfmiddlewaretoken" value="${token}">
                             <div class="info-row">
                                 <div class="title">
-                                    ${trans[lang].settings.profile.subtitle.name}
+                                    ${trans[lang].settings.inbuilt.profile.subtitle.name}
                                 </div>
                                 <div class="input">
                                     <input type="text" name="full_name" value="${form_display_name}" maxlength="50" id="id_full_name" oninput="_update_display_name(this.value)" data-form-type="other">
-                                    <div class="tip">${trans[lang].settings.profile.pronoun_tip}</div>
+                                    <div class="tip">${trans[lang].settings.inbuilt.profile.pronoun_tip}</div>
                                 </div>
                             </div>
                             <div class="info-row">
                                 <div class="title">
-                                    ${trans[lang].settings.profile.country}
+                                    ${trans[lang].settings.inbuilt.profile.country}
                                 </div>
                                 <div class="input">
                                     ${form_country}
@@ -1220,7 +1220,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                             </div>
                             <div class="info-row">
                                 <div class="title">
-                                    ${trans[lang].settings.profile.website}
+                                    ${trans[lang].settings.inbuilt.profile.website}
                                 </div>
                                 <div class="input">
                                     <input type="url" name="homepage" value="${form_website}" id="id_homepage" data-form-type="website">
@@ -1228,17 +1228,17 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                             </div>
                             <div class="info-row">
                                 <div class="title">
-                                    ${trans[lang].settings.profile.about}
+                                    ${trans[lang].settings.inbuilt.profile.about}
                                 </div>
                                 <div class="input about-me" data-bleh--show-preview="false" id="about_me">
                                     <textarea name="about_me" cols="40" rows="10" class="textarea--s" maxlength="500" id="id_about_me" oninput="_update_about_me_preview(this.value)" data-form-type="other">${form_about_me}</textarea>
                                     <span class="bleh--about-me-preview" id="about_me_preview"></span>
-                                    <div class="tip bleh--about-me-preview-only">${trans[lang].settings.profile.toggle_preview.note}</div>
+                                    <div class="tip bleh--about-me-preview-only">${trans[lang].settings.inbuilt.profile.toggle_preview.note}</div>
                                 </div>
                             </div>
                             <div class="save-row">
                                 <span class="btn btn--has-icon btn--has-icon-left btn--toggle-about-me-preview" id="btn--toggle-about-me-preview" onclick="_toggle_about_me_preview()">
-                                    ${trans[lang].settings.profile.toggle_preview.name}
+                                    ${trans[lang].settings.inbuilt.profile.toggle_preview.name}
                                 </span>
                                 <div class="form-submit">
                                     <button type="submit" class="btn-primary" data-form-type="action">
@@ -1263,7 +1263,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
         // preview
         tippy(document.getElementById('btn--toggle-about-me-preview'), {
-            content: trans[lang].settings.profile.toggle_preview.bio
+            content: trans[lang].settings.inbuilt.profile.toggle_preview.bio
         })
     }
 
@@ -1302,7 +1302,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         open_avatar_changer(token);
     }
     function open_avatar_changer(token) {
-        create_window('edit_avatar',trans[lang].settings.profile.avatar.name,`
+        create_window('edit_avatar',trans[lang].settings.inbuilt.profile.avatar.name,`
             <div class="bleh--upload-avatar-container">
                 <form class="avatar-upload-form bleh--upload-avatar-form" action="/settings" name="avatar-form" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="csrfmiddlewaretoken" value="${token}">
@@ -1313,7 +1313,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                                 <input type="file" name="avatar" data-require="components/file-input" data-file-input-copy="Choose file" data-no-file-copy="No file chosen" accept="image/*" required="" id="id_avatar" data-kate-processed="true">
                             </span>
                         </div>
-                        ${trans[lang].settings.profile.avatar.upload}
+                        ${trans[lang].settings.inbuilt.profile.avatar.upload}
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn-primary" onclick="_save_avatar_changer()">
@@ -1326,7 +1326,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     <input type="hidden" name="csrfmiddlewaretoken" value="${token}">
                     <div class="form-group">
                         <button class="mimic-link image-upload-remove" type="submit" value="delete-avatar" name="delete-avatar">Delete picture</button>
-                        ${trans[lang].settings.profile.avatar.delete}
+                        ${trans[lang].settings.inbuilt.profile.avatar.delete}
                     </div>
                     <div class="modal-footer">
                         <button class="btn" onclick="_kill_window('edit_avatar')">${trans[lang].settings.cancel}</button>
@@ -1555,7 +1555,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 add_note_button.setAttribute('onclick',`_add_profile_note('${profile_name.textContent}',${profile_has_note})`);
 
                 tippy(add_note_button, {
-                    content: trans[lang].settings.profiles.notes.edit_user.replace('{u}', profile_name.textContent)
+                    content: trans[lang].settings.inbuilt.profiles.notes.edit_user.replace('{u}', profile_name.textContent)
                 });
 
                 let about_me_header = about_me_sidebar.querySelector('h2');
@@ -1582,9 +1582,9 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
         if (has_note) {
             note_panel.innerHTML = (`
-            <h2>${trans[lang].settings.profiles.notes.header}</h2>
+            <h2>${trans[lang].settings.inbuilt.profiles.notes.header}</h2>
             <div class="content-form">
-                <textarea id="bleh--profile-note" placeholder="${trans[lang].settings.profiles.notes.placeholder}">${JSON.parse(localStorage.getItem('bleh_profile_notes'))[username]}</textarea>
+                <textarea id="bleh--profile-note" placeholder="${trans[lang].settings.inbuilt.profiles.notes.placeholder}">${JSON.parse(localStorage.getItem('bleh_profile_notes'))[username]}</textarea>
             </div>
             <div class="actions">
                 <button class="btn" onclick="_clear_profile_note('${username}')">${trans[lang].settings.clear}</button>
@@ -1595,7 +1595,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             note_panel.innerHTML = (`
             <h2>Your notes</h2>
             <div class="content-form">
-                <textarea id="bleh--profile-note" placeholder="${trans[lang].settings.profiles.notes.placeholder}"></textarea>
+                <textarea id="bleh--profile-note" placeholder="${trans[lang].settings.inbuilt.profiles.notes.placeholder}"></textarea>
             </div>
             <div class="actions">
                 <button class="btn" onclick="_clear_profile_note('${username}')">${trans[lang].settings.clear}</button>
@@ -2110,7 +2110,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                             ${trans[lang].settings.customise.name}
                         </button>
                         <button class="btn bleh--btn" data-bleh-page="profiles" onclick="_change_settings_page('profiles')">
-                            ${trans[lang].settings.profiles.name}
+                            ${trans[lang].settings.inbuilt.profiles.name}
                         </button>
                         <button class="btn bleh--btn" data-bleh-page="performance" onclick="_change_settings_page('performance')">
                             ${trans[lang].settings.performance.name}
@@ -2710,9 +2710,9 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         } else if (page == 'profiles') {
             return (`
                 <div class="bleh--panel">
-                    <h3>${trans[lang].settings.profiles.name}</h3>
-                    <p>${trans[lang].settings.profiles.bio}</p>
-                    <h4>${trans[lang].settings.profiles.notes.name}</h4>
+                    <h3>${trans[lang].settings.inbuilt.profiles.name}</h3>
+                    <p>${trans[lang].settings.inbuilt.profiles.bio}</p>
+                    <h4>${trans[lang].settings.inbuilt.profiles.notes.name}</h4>
                     <div class="profile-notes" id="profile-notes"></div>
                 </div>
                 `);
@@ -2780,20 +2780,20 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             </div>
             <div class="actions">
                 <button class="btn bleh--edit-note" id="profile-note-row-edit--${user}" onclick="_edit_profile_note('${user}')">
-                    ${trans[lang].settings.profiles.notes.edit}
+                    ${trans[lang].settings.inbuilt.profiles.notes.edit}
                 </button>
                 <button class="btn bleh--delete-note" id="profile-note-row-delete--${user}" onclick="_delete_profile_note('${user}')">
-                    ${trans[lang].settings.profiles.notes.delete}
+                    ${trans[lang].settings.inbuilt.profiles.notes.delete}
                 </button>
             </div>
             `);
 
             profile_notes_table.appendChild(profile_note);
             tippy(document.getElementById(`profile-note-row-edit--${user}`), {
-                content: trans[lang].settings.profiles.notes.edit_user.replace('{u}', user)
+                content: trans[lang].settings.inbuilt.profiles.notes.edit_user.replace('{u}', user)
             });
             tippy(document.getElementById(`profile-note-row-delete--${user}`), {
-                content: trans[lang].settings.profiles.notes.delete_user.replace('{u}', user)
+                content: trans[lang].settings.inbuilt.profiles.notes.delete_user.replace('{u}', user)
             });
         }
     }
@@ -2809,7 +2809,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     unsafeWindow._edit_profile_note = function(username) {
         let profile_notes = JSON.parse(localStorage.getItem('bleh_profile_notes')) || {};
 
-        create_window('edit_profile_note',trans[lang].settings.profiles.notes.edit_user.replace('{u}', username),`
+        create_window('edit_profile_note',trans[lang].settings.inbuilt.profiles.notes.edit_user.replace('{u}', username),`
         <textarea id="bleh--profile-note" placeholder="Enter a local note for this user">${profile_notes[username]}</textarea>
         <div class="modal-footer">
             <button class="btn primary" onclick="_save_profile_note_in_window('${username}')">
