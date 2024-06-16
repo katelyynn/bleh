@@ -11749,7 +11749,7 @@ input[type="range"]::-moz-range-thumb {
                 border-radius: var(--item-small-radius);
                 background-color: hsl(var(--b4));
                 position: relative;
-                color: hsl(var(--b6));
+                color: hsl(var(--c3));
                 --mask: var(--icon-album);
                 --mask-size: 72px;
                 --left: 50%;
@@ -11785,7 +11785,7 @@ input[type="range"]::-moz-range-thumb {
                     border-radius: var(--item-small-radius);
                     background-color: hsl(var(--b4));
                     position: relative;
-                    color: hsl(var(--b6));
+                    color: hsl(var(--c3));
                     --mask: var(--icon-album);
                     --mask-size: 48px;
                     --left: 50%;
