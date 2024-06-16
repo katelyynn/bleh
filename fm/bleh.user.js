@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         bleh
 // @namespace    http://last.fm/
-// @version      2024.0616
+// @version      2024.0616.1
 // @description  bleh!!! ^-^
 // @author       kate
 // @match        https://www.last.fm/*
@@ -15,7 +15,7 @@
 // @require      https://unpkg.com/tippy.js@6
 // ==/UserScript==
 
-let version = '2024.0616';
+let version = '2024.0616.1';
 let lang = document.documentElement.getAttribute('lang');
 let valid_langs = ['en'];
 
@@ -250,6 +250,35 @@ const trans = {
                         timeframe: {
                             name: 'Default timeframe'
                         }
+                    }
+                },
+                privacy: {
+                    name: 'Privacy',
+                    recent_listening: {
+                        name: 'Hide your recent listening history',
+                        bio: 'Keep your recent listens a secret o.O'
+                    },
+                    receiving_msgs: {
+                        name: 'Control who can interact with you',
+                        bio: 'This setting controls who can post shouts and message you privately.',
+                        settings: {
+                            everyone: {
+                                name: 'Everyone',
+                                bio: 'Everyone except who you have ignored'
+                            },
+                            neighbours: {
+                                name: 'Who you follow and neighbours',
+                                bio: 'Everyone who you have chosen to follow, along with your Last.fm neighbours'
+                            },
+                            follow: {
+                                name: 'Who you follow only',
+                                bio: 'Only users who you have chosen to follow'
+                            }
+                        }
+                    },
+                    disable_shoutbox: {
+                        name: 'Hide your shoutbox',
+                        bio: 'Your shoutbox will be hidden for you and anyone else.'
                     }
                 }
             },
@@ -765,6 +794,20 @@ let inbuilt_settings = {
         value: true,
         values: [true, false],
         type: 'toggle'
+    },
+    recent_listening: {
+        css: 'recent_listening',
+        unit: '',
+        value: true,
+        values: [true, false],
+        type: 'toggle'
+    },
+    disable_shoutbox: {
+        css: 'disable_shoutbox',
+        unit: '',
+        value: true,
+        values: [true, false],
+        type: 'toggle'
     }
 }
 
@@ -1170,6 +1213,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     // patch last.fm settings
     function patch_lastfm_settings(element) {
         patch_settings_profile_tab();
+        patch_settings_privacy_tab();
     }
 
 
@@ -1741,6 +1785,188 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         .replace(/'/g, '&#039;'));
         document.getElementById('about_me_preview').innerHTML = parsed_body;
     }
+
+
+    // privacy
+    function patch_settings_privacy_tab() {
+        let privacy_panel = document.getElementById('privacy');
+
+        if (privacy_panel == undefined)
+            return;
+
+        // if we can continue, we are on privacy tab
+        let token = document.body.querySelector('[name="csrfmiddlewaretoken"]').getAttribute('value');
+
+        patch_settings_privacy_panel(token, privacy_panel);
+    }
+
+    function patch_settings_privacy_panel(token, privacy_panel) {
+        if (privacy_panel.hasAttribute('data-kate-processed'))
+            return;
+
+        privacy_panel.setAttribute('data-kate-processed', 'true');
+        privacy_panel.classList.add('bleh--panel');
+
+        // get info before destroying
+        let original_privacy_settings = {
+            recent_listening: document.getElementById('id_hide_realtime').checked,
+            receiving_msgs: document.getElementById('id_message_privacy').outerHTML,
+            disable_shoutbox: document.getElementById('id_shoutbox_disabled').checked
+        }
+
+        privacy_panel.innerHTML = (`
+            <h3>${trans[lang].settings.inbuilt.privacy.name}</h3>
+            <form action="/settings/privacy" name="privacy" method="post">
+                <input type="hidden" name="csrfmiddlewaretoken" value="${token}">
+                <div class="inner-preview pad">
+                    <div class="tracks recent_listening">
+                        <div class="track realtime">
+                            <div class="cover"></div>
+                            <div class="title"></div>
+                            <div class="artist"></div>
+                            <div class="time"></div>
+                        </div>
+                        <div class="track">
+                            <div class="cover"></div>
+                            <div class="title"></div>
+                            <div class="artist"></div>
+                            <div class="time"></div>
+                        </div>
+                        <div class="track">
+                            <div class="cover"></div>
+                            <div class="title"></div>
+                            <div class="artist"></div>
+                            <div class="time"></div>
+                        </div>
+                        <div class="track">
+                            <div class="cover"></div>
+                            <div class="title"></div>
+                            <div class="artist"></div>
+                            <div class="time"></div>
+                        </div>
+                        <div class="track">
+                            <div class="cover"></div>
+                            <div class="title"></div>
+                            <div class="artist"></div>
+                            <div class="time"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="toggle-container" id="container-recent_listening">
+                    <button class="btn reset" onclick="_reset_inbuilt_item('recent_listening')">Reset to default</button>
+                    <div class="heading">
+                        <h5>${trans[lang].settings.inbuilt.privacy.recent_listening.name}</h5>
+                        <p>${trans[lang].settings.inbuilt.privacy.recent_listening.bio}</p>
+                    </div>
+                    <div class="toggle-wrap">
+                        <input class="companion-checkbox" type="checkbox" name="hide_realtime" id="inbuilt-companion-checkbox-recent_listening">
+                        <span class="btn toggle" id="toggle-recent_listening" onclick="_update_inbuilt_item('recent_listening')" aria-checked="false">
+                            <div class="dot"></div>
+                        </span>
+                    </div>
+                </div>
+                <div class="sep"></div>
+                <h5>Who can send you messages?</h5>
+                <div class="primary-selections">
+                    ${original_privacy_settings.receiving_msgs}
+                    <div class="btn primary-selection" id="primary-selection-receiving_msgs-everyone" onclick="_update_inbuilt_selection('id_message_privacy', 0)">
+                        <h5>${trans[lang].settings.inbuilt.privacy.receiving_msgs.settings.everyone.name}</h5>
+                        <p>${trans[lang].settings.inbuilt.privacy.receiving_msgs.settings.everyone.bio}</p>
+                    </div>
+                    <div class="btn primary-selection" id="primary-selection-receiving_msgs-neighbours" onclick="_update_inbuilt_selection('id_message_privacy', 1)">
+                        <h5>${trans[lang].settings.inbuilt.privacy.receiving_msgs.settings.neighbours.name}</h5>
+                        <p>${trans[lang].settings.inbuilt.privacy.receiving_msgs.settings.neighbours.bio}</p>
+                    </div>
+                    <div class="btn primary-selection" id="primary-selection-receiving_msgs-follow" onclick="_update_inbuilt_selection('id_message_privacy', 2)">
+                        <h5>${trans[lang].settings.inbuilt.privacy.receiving_msgs.settings.follow.name}</h5>
+                        <p>${trans[lang].settings.inbuilt.privacy.receiving_msgs.settings.follow.bio}</p>
+                    </div>
+                </div>
+                <div class="sep"></div>
+                <div class="inner-preview pad">
+                    <div class="shouts">
+                        <div class="shout">
+                            <div class="avatar-side">
+                                <div class="shout-avatar-placeholder"></div>
+                            </div>
+                            <div class="info-side">
+                                <div class="header">
+                                    <div class="shout-username"></div>
+                                    <div class="shout-time"></div>
+                                </div>
+                                <div class="shout-contents"></div>
+                                <div class="shout-contents"></div>
+                            </div>
+                        </div>
+                        <div class="shout">
+                            <div class="avatar-side">
+                                <div class="shout-avatar-placeholder"></div>
+                            </div>
+                            <div class="info-side">
+                                <div class="header">
+                                    <div class="shout-username"></div>
+                                    <div class="shout-time"></div>
+                                </div>
+                                <div class="shout-contents"></div>
+                                <div class="shout-contents"></div>
+                            </div>
+                        </div>
+                        <div class="shout">
+                            <div class="avatar-side">
+                                <div class="shout-avatar-placeholder"></div>
+                            </div>
+                            <div class="info-side">
+                                <div class="header">
+                                    <div class="shout-username"></div>
+                                    <div class="shout-time"></div>
+                                </div>
+                                <div class="shout-contents"></div>
+                                <div class="shout-contents"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="toggle-container" id="container-disable_shoutbox">
+                    <button class="btn reset" onclick="_reset_inbuilt_item('disable_shoutbox')">Reset to default</button>
+                    <div class="heading">
+                        <h5>${trans[lang].settings.inbuilt.privacy.disable_shoutbox.name}</h5>
+                        <p>${trans[lang].settings.inbuilt.privacy.disable_shoutbox.bio}</p>
+                    </div>
+                    <div class="toggle-wrap">
+                        <input class="companion-checkbox" type="checkbox" name="shoutbox_disabled" id="inbuilt-companion-checkbox-disable_shoutbox">
+                        <span class="btn toggle" id="toggle-disable_shoutbox" onclick="_update_inbuilt_item('disable_shoutbox')" aria-checked="false">
+                            <div class="dot"></div>
+                        </span>
+                    </div>
+                </div>
+                <div class="sep"></div>
+                <div class="settings-footer">
+                    <button type="submit" class="btn-primary">
+                        ${trans[lang].settings.save}
+                    </button>
+                    <input type="hidden" value="privacy" name="submit">
+                </div>
+            </form>
+        `)
+
+        for (let setting in original_privacy_settings) {
+            update_inbuilt_item(setting, original_privacy_settings[setting], false);
+        }
+
+        let selects = document.body.querySelectorAll('select');
+        selects.forEach((select) => {
+            select.setAttribute('onchange', `_update_inbuilt_select('${select.getAttribute('id')}', this.value)`);
+            update_inbuilt_select(select.getAttribute('id'), select.value);
+        });
+    }
+
+
+    unsafeWindow._update_inbuilt_selection = function(id, index) {
+        document.getElementById(id).selectedIndex = index;
+        update_inbuilt_select(id, document.getElementById(id).value);
+    }
+
+
 
 
     // patch profile pages
