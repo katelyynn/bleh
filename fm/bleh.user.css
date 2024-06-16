@@ -11680,7 +11680,7 @@ input[type="range"]::-moz-range-thumb {
         --btn-top: 16px;
         --btn-bottom: 16px;
         --btn-left: calc(16px + 12px + 6px + 4px);
-        --mask: var(--icon-16-dot);
+        /*--mask: var(--icon-16-dot);*/
         width: 100% !important;
         position: relative;
 
@@ -11707,16 +11707,19 @@ input[type="range"]::-moz-range-thumb {
             --hue: 160;
             --sat: 1;
             --lit: 1;
+            --mask: var(--icon-16-globe);
         }
         &#primary-selection-receiving_msgs-neighbours {
-            --hue: 35;
+            --hue: 30;
             --sat: 1;
             --lit: 1;
+            --mask: var(--icon-16-users);
         }
         &#primary-selection-receiving_msgs-follow {
-            --hue: 0;
+            --hue: -2;
             --sat: 1;
             --lit: 1;
+            --mask: var(--icon-16-lock);
         }
 
         [data-bleh--inbuilt-id_message_privacy="all"] &#primary-selection-receiving_msgs-everyone,
@@ -11727,7 +11730,7 @@ input[type="range"]::-moz-range-thumb {
             --bg-atv: hsla(var(--h3), 45%);
             --shadow: none;
             --shadow-hov: none;
-            --mask: var(--icon-16-check);
+            /*--mask: var(--icon-16-check);*/
 
             &:before {
                 opacity: 1;
