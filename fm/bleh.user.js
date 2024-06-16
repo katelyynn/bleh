@@ -28,7 +28,8 @@ const trans = {
     en: {
         auth_menu: {
             dev: 'Toggle dev mode',
-            configure_bleh: 'Configure bleh'
+            configure_bleh: 'Configure bleh',
+            shouts: 'Shouts'
         },
         statistics: {
             scrobbles: {
@@ -1045,7 +1046,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 <li>
                     <a class="auth-dropdown-menu-item bleh--shouts-menu-item" href="${profile_link}/shoutbox">
                         <span class="auth-dropdown-item-row">
-                            <span class="auth-dropdown-item-left">Shouts</span>
+                            <span class="auth-dropdown-item-left">${trans[lang].auth_menu.shouts}</span>
                         </span>
                     </a>
                 </li>
