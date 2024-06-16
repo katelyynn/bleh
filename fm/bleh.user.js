@@ -31,6 +31,10 @@ const trans = {
             configure_bleh: 'Configure bleh',
             shouts: 'Shouts'
         },
+        music: {
+            submit_lastfm_correction: 'Submit correction to Last.fm',
+            submit_bleh_correction: 'Submit correction to bleh'
+        },
         statistics: {
             scrobbles: {
                 name: 'Your scrobbles'
@@ -2415,10 +2419,10 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             let extra_items = document.createElement('li');
             extra_items.innerHTML = (`
             <a class="dropdown-menu-clickable-item more-item--submit-correction" href="https://docs.google.com/forms/d/e/1FAIpQLScRzZaMfpjgKUq4CCA8iuEQCxVdalyv9bwnZEjPDm7lit_Ohg/viewform" target="_blank">
-                Submit correction to Last.fm
+                ${trans[lang].music.submit_lastfm_correction}
             </a>
             <a class="dropdown-menu-clickable-item more-item--submit-correction-bleh" href="https://github.com/katelyynn/bleh/issues/9" target="_blank">
-                Submit correction to bleh
+                ${trans[lang].music.submit_bleh_correction}
             </a>
             `);
 
