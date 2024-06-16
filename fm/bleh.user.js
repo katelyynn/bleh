@@ -209,7 +209,7 @@ const trans = {
                         delete: 'Delete avatar'
                     }
                 },
-                chart: {
+                charts: {
                     name: 'Charts',
                     recent: {
                         count: {
@@ -625,13 +625,6 @@ let profile_badges = {
     }
 };
 
-let theme_names = {
-    'dark': 'Dark',
-    'light': 'Light',
-    'oled': 'OLED',
-    'darker': 'Darker'
-};
-
 
 let settings_template = {
     theme: 'dark',
@@ -753,6 +746,22 @@ let settings_base = {
         type: 'toggle'
     }
 };
+let inbuilt_settings = {
+    recent_artwork: {
+        css: 'recent_artwork',
+        unit: '',
+        value: true,
+        values: [true, false],
+        type: 'toggle'
+    },
+    recent_realtime: {
+        css: 'recent_realtime',
+        unit: '',
+        value: true,
+        values: [true, false],
+        type: 'toggle'
+    }
+}
 
 
 let redacted = [
@@ -1155,20 +1164,167 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
     // patch last.fm settings
     function patch_lastfm_settings(element) {
-        // new form contents :3
+        patch_settings_profile_tab();
+    }
+
+
+    function patch_settings_profile_tab() {
         let update_picture = document.getElementById('update-picture');
 
         if (update_picture == undefined)
             return;
 
+        // if we can continue, we are on profile tab
+        patch_settings_profile_panel(update_picture);
+        patch_settings_charts_panel();
+    }
+
+    function patch_settings_charts_panel() {
+        let charts_panel = document.getElementById('update-chart');
+
+        if (charts_panel.hasAttribute('data-kate-processed'))
+            return;
+
+        charts_panel.setAttribute('data-kate-processed', 'true');
+        charts_panel.classList.add('bleh--panel');
+
+        // get info before destroying
+        let original_chart_settings = {
+            recent: {
+                recent_artwork: document.getElementById('id_show_recent_tracks_artwork').checked,
+                count: document.getElementById('id_chart_length_recent_tracks').outerHTML,
+                realtime: document.getElementById('id_auto_refresh_recent_tracks').checked
+            },
+            artists: {
+                timeframe: document.getElementById('id_chart_range_top_artists').outerHTML,
+                style: document.getElementById('id_chart_style_and_length_top_artists').outerHTML
+            },
+            albums: {
+                timeframe: document.getElementById('id_chart_range_top_albums').outerHTML,
+                style: document.getElementById('id_chart_style_and_length_top_albums').outerHTML
+            },
+            tracks: {
+                count: document.getElementById('id_chart_length_top_tracks').outerHTML,
+                timeframe: document.getElementById('id_chart_range_top_tracks').outerHTML
+            }
+        };
+
+        charts_panel.innerHTML = (`
+            <h3>${trans[lang].settings.inbuilt.charts.name}</h3>
+            <div class="inner-preview pad">
+
+            </div>
+            <div class="select-container">
+                <div class="heading">
+                    <h5>${trans[lang].settings.inbuilt.charts.recent.count.name}</h5>
+                </div>
+                <div class="select-wrap">
+                    ${original_chart_settings.recent.count}
+                </div>
+            </div>
+            <div class="toggle-container" id="container-recent_artwork">
+                <button class="btn reset" onclick="_reset_inbuilt_item('recent_artwork')">Reset to default</button>
+                <div class="heading">
+                    <h5>${trans[lang].settings.inbuilt.charts.recent.artwork.name}</h5>
+                </div>
+                <div class="toggle-wrap">
+                    <input class="companion-checkbox" type="checkbox" name="show_recent_tracks_artwork" id="inbuilt-companion-checkbox-recent_artwork">
+                    <button class="toggle" id="toggle-recent_artwork" onclick="_update_inbuilt_item('recent_artwork')" aria-checked="false">
+                        <div class="dot"></div>
+                    </button>
+                </div>
+            </div>
+            <div class="toggle-container" id="container-recent_realtime">
+                <button class="btn reset" onclick="_reset_inbuilt_item('recent_realtime')">Reset to default</button>
+                <div class="heading">
+                    <h5>${trans[lang].settings.inbuilt.charts.recent.realtime.name}</h5>
+                </div>
+                <div class="toggle-wrap">
+                    <input class="companion-checkbox" type="checkbox" name="auto_refresh_recent_tracks" id="inbuilt-companion-checkbox-recent_realtime">
+                    <button class="toggle" id="toggle-recent_realtime" onclick="_update_inbuilt_item('recent_realtime')" aria-checked="false">
+                        <div class="dot"></div>
+                    </button>
+                </div>
+            </div>
+            <div class="sep"></div>
+            <div class="inner-preview pad">
+
+            </div>
+            <div class="select-container">
+                <div class="heading">
+                    <h5>${trans[lang].settings.inbuilt.charts.artists.timeframe.name}</h5>
+                </div>
+                <div class="select-wrap">
+                    ${original_chart_settings.artists.timeframe}
+                </div>
+            </div>
+            <div class="select-container">
+                <div class="heading">
+                    <h5>${trans[lang].settings.inbuilt.charts.artists.style.name}</h5>
+                </div>
+                <div class="select-wrap">
+                    ${original_chart_settings.artists.style}
+                </div>
+            </div>
+            <div class="sep"></div>
+            <div class="inner-preview pad">
+
+            </div>
+            <div class="select-container">
+                <div class="heading">
+                    <h5>${trans[lang].settings.inbuilt.charts.albums.timeframe.name}</h5>
+                </div>
+                <div class="select-wrap">
+                    ${original_chart_settings.albums.timeframe}
+                </div>
+            </div>
+            <div class="select-container">
+                <div class="heading">
+                    <h5>${trans[lang].settings.inbuilt.charts.albums.style.name}</h5>
+                </div>
+                <div class="select-wrap">
+                    ${original_chart_settings.albums.style}
+                </div>
+            </div>
+            <div class="sep"></div>
+            <div class="inner-preview pad">
+
+            </div>
+            <div class="select-container">
+                <div class="heading">
+                    <h5>${trans[lang].settings.inbuilt.charts.tracks.timeframe.name}</h5>
+                </div>
+                <div class="select-wrap">
+                    ${original_chart_settings.tracks.timeframe}
+                </div>
+            </div>
+            <div class="select-container">
+                <div class="heading">
+                    <h5>${trans[lang].settings.inbuilt.charts.tracks.count.name}</h5>
+                </div>
+                <div class="select-wrap">
+                    ${original_chart_settings.tracks.count}
+                </div>
+            </div>
+        `);
+
+        for (let category in original_chart_settings) {
+            for (let setting in original_chart_settings[category]) {
+                update_inbuilt_item(setting, original_chart_settings[category][setting], false);
+            }
+        }
+    }
+
+    function patch_settings_profile_panel(update_picture) {
         if (update_picture.hasAttribute('data-kate-processed'))
             return;
 
         update_picture.setAttribute('data-kate-processed', 'true');
+        update_picture.classList.add('bleh--panel');
 
-        let avatar_url = element.querySelector('.image-upload-preview img').getAttribute('src');
+        let avatar_url = document.body.querySelector('.image-upload-preview img').getAttribute('src');
 
-        let token = element.querySelector('[name="csrfmiddlewaretoken"]').getAttribute('value');
+        let token = document.body.querySelector('[name="csrfmiddlewaretoken"]').getAttribute('value');
 
         let form_display_name = document.getElementById('id_full_name').value;
         let form_website = document.getElementById('id_homepage').value;
@@ -1178,7 +1334,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         document.getElementById('update-profile').outerHTML = '';
 
         update_picture.innerHTML = (`
-            <h2>${trans[lang].settings.inbuilt.profile.name}</h2>
+            <h3>${trans[lang].settings.inbuilt.profile.name}</h3>
             <div class="profile-container">
                 <div class="avatar-side">
                     <div class="avatar image-upload-preview" onclick="_open_avatar_changer('${token}')">
@@ -1264,7 +1420,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         // preview
         tippy(document.getElementById('btn--toggle-about-me-preview'), {
             content: trans[lang].settings.inbuilt.profile.toggle_preview.bio
-        })
+        });
     }
 
     unsafeWindow._toggle_about_me_preview = function() {
@@ -2979,6 +3135,54 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         // save to settings
         localStorage.setItem('bleh', JSON.stringify(settings));
         } catch(e) {}
+    }
+
+
+    unsafeWindow._reset_inbuilt_item = function(item) {
+        reset_inbuilt_item(item);
+    }
+    unsafeWindow._update_inbuilt_params = function(params={}) {
+        update_inbuilt_params(params);
+    }
+    unsafeWindow._update_inbuilt_item = function(item, value) {
+        update_inbuilt_item(item, value);
+    }
+
+    function update_inbuilt_item(item, value, modify=true) {
+        console.log('update item',item,value);
+
+        let test_if_valid = document.getElementById(`toggle-${item}`);
+        console.info(test_if_valid, item, value, inbuilt_settings[item], 'modify', modify);
+        if (test_if_valid == undefined)
+            return;
+
+        if (inbuilt_settings[item].type == 'toggle') {
+            if (modify) {
+                value = (document.getElementById(`toggle-${item}`).getAttribute('aria-checked') === 'true');
+                console.info('new value', value);
+            }
+
+            console.info(value, inbuilt_settings[item].values[0], value == inbuilt_settings[item].values[0], modify);
+
+            if (value == inbuilt_settings[item].values[0] && modify) {
+                document.getElementById(`inbuilt-companion-checkbox-${item}`).checked = false;
+                document.getElementById(`toggle-${item}`).setAttribute('aria-checked', false);
+                document.documentElement.setAttribute(`data-bleh--inbuilt-${item}`, inbuilt_settings[item].values[1]);
+            } else if (modify) {
+                document.getElementById(`inbuilt-companion-checkbox-${item}`).checked = true;
+                document.getElementById(`toggle-${item}`).setAttribute('aria-checked', true);
+                document.documentElement.setAttribute(`data-bleh--inbuilt-${item}`, inbuilt_settings[item].values[0]);
+            } else {
+                // dont modify, just show
+                if (value == inbuilt_settings[item].values[0]) {
+                    document.getElementById(`inbuilt-companion-checkbox-${item}`).checked = true;
+                    document.getElementById(`toggle-${item}`).setAttribute('aria-checked', true);
+                } else {
+                    document.getElementById(`inbuilt-companion-checkbox-${item}`).checked = false;
+                    document.getElementById(`toggle-${item}`).setAttribute('aria-checked', false);
+                }
+            }
+        }
     }
 
 

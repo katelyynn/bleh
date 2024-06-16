@@ -10954,6 +10954,34 @@ so this is good enough - use the community docs */
     }
 }
 
+.bleh--panel {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex: 1;
+
+
+    .btn {
+        width: fit-content;
+    }
+
+    h3 {
+        font-size: 24px;
+        line-height: 28px;
+        color: hsl(var(--c1));
+    }
+    h4 {
+        font-size: 16px;
+        line-height: 20px;
+        color: hsl(var(--c1));
+    }
+    h5 {
+        margin: unset;
+        color: hsl(var(--c1));
+        font-weight: var(--font-weight-medium);
+    }
+}
+
 h6 {
     margin: unset !important;
     font-size: var(--font-size);
@@ -11589,6 +11617,24 @@ input[type="range"]::-moz-range-thumb {
 
 .toggle-container {
     display: flex;
+
+    .companion-checkbox {
+        display: none;
+    }
+}
+
+.select-container {
+    display: flex;
+
+    .heading {
+        display: flex;
+        align-items: center;
+        flex: 1;
+    }
+
+    select {
+        min-width: 56px !important;
+    }
 }
 
 
