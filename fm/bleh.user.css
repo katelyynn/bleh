@@ -5569,6 +5569,7 @@ button:not(.playback-app-container button, .top-artist-list-item, .pixel, .liste
 .btn--has-icon:before,
 .avatar-overlay:before,
 .grid-item:before,
+.select-wrap:before,
 /*     DROPDOWNS     */
 .dropdown-menu-clickable-item:before, .auth-dropdown-menu-item:before,
 .dropdown-menu-list-button::after, .dropdown-menu-clickable-button::after, .dropdown-menu-clickable-button-js-only::after,
@@ -11633,8 +11634,21 @@ input[type="range"]::-moz-range-thumb {
         flex: 1;
     }
 
+    .select-wrap {
+        position: relative;
+        --mask: var(--icon-16-dropdown);
+        --left: none;
+        --margin-left: none;
+        --right: 12px;
+
+        &:before {
+            z-index: 10;
+        }
+    }
+
     select {
         min-width: 56px !important;
+        padding-right: calc(12px + 16px + 6px) !important;
     }
 }
 
