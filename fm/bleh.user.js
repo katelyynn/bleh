@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         bleh
 // @namespace    http://last.fm/
-// @version      2024.0615.2
+// @version      2024.0616
 // @description  bleh!!! ^-^
 // @author       kate
 // @match        https://www.last.fm/*
@@ -15,7 +15,7 @@
 // @require      https://unpkg.com/tippy.js@6
 // ==/UserScript==
 
-let version = '2024.0615.2';
+let version = '2024.0616';
 let lang = document.documentElement.getAttribute('lang');
 let valid_langs = ['en'];
 
@@ -28,7 +28,8 @@ const trans = {
     en: {
         auth_menu: {
             dev: 'Toggle dev mode',
-            configure_bleh: 'Configure bleh'
+            configure_bleh: 'Configure bleh',
+            shouts: 'Shouts'
         },
         statistics: {
             scrobbles: {
@@ -66,7 +67,7 @@ const trans = {
             },
             themes: {
                 name: 'Themes',
-                bio: 'Choose from light to oled.',
+                bio: 'Choose from light to midnight.',
                 dark: {
                     name: 'Dark',
                     bio: 'The default flavour of bleh'
@@ -76,7 +77,7 @@ const trans = {
                     bio: 'The in-between'
                 },
                 oled: {
-                    name: 'OLED',
+                    name: 'Midnight',
                     bio: 'Ultra blackout'
                 },
                 light: {
@@ -186,26 +187,66 @@ const trans = {
                     delete_user: 'Remove {u}\'s note'
                 }
             },
-            profile: {
-                name: 'Profile',
-                subtitle: {
-                    name: 'Subtitle',
-                    aka: 'aka.',
-                    pronouns: 'pronouns'
+            inbuilt: {
+                profile: {
+                    name: 'Profile',
+                    subtitle: {
+                        name: 'Subtitle',
+                        aka: 'aka.',
+                        pronouns: 'pronouns'
+                    },
+                    pronoun_tip: 'Tip: If pronouns are placed first, "aka." will change to "pronouns".',
+                    country: 'Country',
+                    website: 'Website',
+                    about: 'About',
+                    toggle_preview: {
+                        name: 'Toggle preview',
+                        bio: 'Preview how your bio looks to others',
+                        note: 'Note: New-lines, links, etc. only display to other bleh users, regular Last.fm users see new-lines as spaces.'
+                    },
+                    avatar: {
+                        name: 'Edit avatar',
+                        upload: 'Upload file',
+                        delete: 'Delete avatar'
+                    }
                 },
-                pronoun_tip: 'Tip: If pronouns are placed first, "aka." will change to "pronouns".',
-                country: 'Country',
-                website: 'Website',
-                about: 'About',
-                toggle_preview: {
-                    name: 'Toggle preview',
-                    bio: 'Preview how your bio looks to others',
-                    note: 'Note: New-lines, links, etc. only display to other bleh users, regular Last.fm users see new-lines as spaces.'
-                },
-                avatar: {
-                    name: 'Edit avatar',
-                    upload: 'Upload file',
-                    delete: 'Delete avatar'
+                charts: {
+                    name: 'Charts',
+                    recent: {
+                        count: {
+                            name: 'Tracks to display'
+                        },
+                        artwork: {
+                            name: 'Display album artwork'
+                        },
+                        realtime: {
+                            name: 'Update tracks in realtime'
+                        }
+                    },
+                    artists: {
+                        timeframe: {
+                            name: 'Default timeframe'
+                        },
+                        style: {
+                            name: 'Chart style'
+                        }
+                    },
+                    albums: {
+                        timeframe: {
+                            name: 'Default timeframe'
+                        },
+                        style: {
+                            name: 'Chart style'
+                        }
+                    },
+                    tracks: {
+                        count: {
+                            name: 'Tracks to display'
+                        },
+                        timeframe: {
+                            name: 'Default timeframe'
+                        }
+                    }
                 }
             },
             actions: {
@@ -585,13 +626,6 @@ let profile_badges = {
     }
 };
 
-let theme_names = {
-    'dark': 'Dark',
-    'light': 'Light',
-    'oled': 'OLED',
-    'darker': 'Darker'
-};
-
 
 let settings_template = {
     theme: 'dark',
@@ -713,6 +747,22 @@ let settings_base = {
         type: 'toggle'
     }
 };
+let inbuilt_settings = {
+    recent_artwork: {
+        css: 'recent_artwork',
+        unit: '',
+        value: true,
+        values: [true, false],
+        type: 'toggle'
+    },
+    recent_realtime: {
+        css: 'recent_realtime',
+        unit: '',
+        value: true,
+        values: [true, false],
+        type: 'toggle'
+    }
+}
 
 
 let redacted = [
@@ -996,7 +1046,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 <li>
                     <a class="auth-dropdown-menu-item bleh--shouts-menu-item" href="${profile_link}/shoutbox">
                         <span class="auth-dropdown-item-row">
-                            <span class="auth-dropdown-item-left">Shouts</span>
+                            <span class="auth-dropdown-item-left">${trans[lang].auth_menu.shouts}</span>
                         </span>
                     </a>
                 </li>
@@ -1086,7 +1136,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         else if (current_theme == 'light')
             current_theme = 'dark';
 
-        document.getElementById('theme-value').textContent = theme_names[current_theme];
+        document.getElementById('theme-value').textContent = trans[lang].settings.themes[current_theme].name;
 
         // save value
         settings.theme = current_theme;
@@ -1099,7 +1149,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     unsafeWindow.change_theme_from_settings = function(theme) {
         let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
 
-        document.getElementById('theme-value').textContent = theme_names[theme];
+        document.getElementById('theme-value').textContent = trans[lang].settings.themes[theme].name;
 
         // save value
         settings.theme = theme;
@@ -1115,20 +1165,372 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
     // patch last.fm settings
     function patch_lastfm_settings(element) {
-        // new form contents :3
+        patch_settings_profile_tab();
+    }
+
+
+    function patch_settings_profile_tab() {
         let update_picture = document.getElementById('update-picture');
 
         if (update_picture == undefined)
             return;
 
+        // if we can continue, we are on profile tab
+        let token = document.body.querySelector('[name="csrfmiddlewaretoken"]').getAttribute('value');
+
+        patch_settings_profile_panel(token, update_picture);
+        patch_settings_charts_panel(token);
+    }
+
+    function patch_settings_charts_panel(token) {
+        let charts_panel = document.getElementById('update-chart');
+
+        if (charts_panel.hasAttribute('data-kate-processed'))
+            return;
+
+        charts_panel.setAttribute('data-kate-processed', 'true');
+        charts_panel.classList.add('bleh--panel');
+
+        // get info before destroying
+        let original_chart_settings = {
+            recent: {
+                recent_artwork: document.getElementById('id_show_recent_tracks_artwork').checked,
+                count: document.getElementById('id_chart_length_recent_tracks').outerHTML,
+                realtime: document.getElementById('id_auto_refresh_recent_tracks').checked
+            },
+            artists: {
+                timeframe: document.getElementById('id_chart_range_top_artists').outerHTML,
+                style: document.getElementById('id_chart_style_and_length_top_artists').outerHTML
+            },
+            albums: {
+                timeframe: document.getElementById('id_chart_range_top_albums').outerHTML,
+                style: document.getElementById('id_chart_style_and_length_top_albums').outerHTML
+            },
+            tracks: {
+                count: document.getElementById('id_chart_length_top_tracks').outerHTML,
+                timeframe: document.getElementById('id_chart_range_top_tracks').outerHTML
+            }
+        };
+
+        charts_panel.innerHTML = (`
+            <h3>${trans[lang].settings.inbuilt.charts.name}</h3>
+            <form action="/settings#update-chart" name="chart-form" method="post">
+                <input type="hidden" name="csrfmiddlewaretoken" value="${token}">
+                <div class="inner-preview pad">
+                    <div class="tracks">
+                        <div class="track realtime">
+                            <div class="cover"></div>
+                            <div class="title"></div>
+                            <div class="artist"></div>
+                            <div class="time"></div>
+                        </div>
+                        <div class="track">
+                            <div class="cover"></div>
+                            <div class="title"></div>
+                            <div class="artist"></div>
+                            <div class="time"></div>
+                        </div>
+                        <div class="track">
+                            <div class="cover"></div>
+                            <div class="title"></div>
+                            <div class="artist"></div>
+                            <div class="time"></div>
+                        </div>
+                        <div class="track">
+                            <div class="cover"></div>
+                            <div class="title"></div>
+                            <div class="artist"></div>
+                            <div class="time"></div>
+                        </div>
+                        <div class="track">
+                            <div class="cover"></div>
+                            <div class="title"></div>
+                            <div class="artist"></div>
+                            <div class="time"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="select-container">
+                    <div class="heading">
+                        <h5>${trans[lang].settings.inbuilt.charts.recent.count.name}</h5>
+                    </div>
+                    <div class="select-wrap">
+                        ${original_chart_settings.recent.count}
+                    </div>
+                </div>
+                <div class="toggle-container" id="container-recent_artwork">
+                    <button class="btn reset" onclick="_reset_inbuilt_item('recent_artwork')">Reset to default</button>
+                    <div class="heading">
+                        <h5>${trans[lang].settings.inbuilt.charts.recent.artwork.name}</h5>
+                    </div>
+                    <div class="toggle-wrap">
+                        <input class="companion-checkbox" type="checkbox" name="show_recent_tracks_artwork" id="inbuilt-companion-checkbox-recent_artwork">
+                        <span class="btn toggle" id="toggle-recent_artwork" onclick="_update_inbuilt_item('recent_artwork')" aria-checked="false">
+                            <div class="dot"></div>
+                        </span>
+                    </div>
+                </div>
+                <div class="toggle-container" id="container-recent_realtime">
+                    <button class="btn reset" onclick="_reset_inbuilt_item('recent_realtime')">Reset to default</button>
+                    <div class="heading">
+                        <h5>${trans[lang].settings.inbuilt.charts.recent.realtime.name}</h5>
+                    </div>
+                    <div class="toggle-wrap">
+                        <input class="companion-checkbox" type="checkbox" name="auto_refresh_recent_tracks" id="inbuilt-companion-checkbox-recent_realtime">
+                        <span class="btn toggle" id="toggle-recent_realtime" onclick="_update_inbuilt_item('recent_realtime')" aria-checked="false">
+                            <div class="dot"></div>
+                        </span>
+                    </div>
+                </div>
+                <div class="sep"></div>
+                <div class="inner-preview pad">
+                    <div class="item-grid artist">
+                        <div class="grid-primary artist">
+                            <div class="grid-item"></div>
+                        </div>
+                        <div class="grid-mains">
+                            <div class="grid-main artist">
+                                <div class="grid-item"></div>
+                                <div class="grid-item"></div>
+                                <div class="grid-item grid-item--extra artist"></div>
+                                <div class="grid-item grid-item--extra artist"></div>
+                            </div>
+                            <div class="grid-main artist">
+                                <div class="grid-item"></div>
+                                <div class="grid-item"></div>
+                                <div class="grid-item grid-item--extra artist"></div>
+                                <div class="grid-item grid-item--extra artist"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tracks artist">
+                        <div class="track">
+                            <div class="cover"></div>
+                            <div class="title"></div>
+                            <div class="bar">
+                                <div class="fill" style="width: 100%"></div>
+                            </div>
+                        </div>
+                        <div class="track">
+                            <div class="cover"></div>
+                            <div class="title"></div>
+                            <div class="bar">
+                                <div class="fill" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="track">
+                            <div class="cover"></div>
+                            <div class="title"></div>
+                            <div class="bar">
+                                <div class="fill" style="width: 60%"></div>
+                            </div>
+                        </div>
+                        <div class="track">
+                            <div class="cover"></div>
+                            <div class="title"></div>
+                            <div class="bar">
+                                <div class="fill" style="width: 30%"></div>
+                            </div>
+                        </div>
+                        <div class="track">
+                            <div class="cover"></div>
+                            <div class="title"></div>
+                            <div class="bar">
+                                <div class="fill" style="width: 5%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="select-container">
+                    <div class="heading">
+                        <h5>${trans[lang].settings.inbuilt.charts.artists.timeframe.name}</h5>
+                    </div>
+                    <div class="select-wrap">
+                        ${original_chart_settings.artists.timeframe}
+                    </div>
+                </div>
+                <div class="select-container">
+                    <div class="heading">
+                        <h5>${trans[lang].settings.inbuilt.charts.artists.style.name}</h5>
+                    </div>
+                    <div class="select-wrap">
+                        ${original_chart_settings.artists.style}
+                    </div>
+                </div>
+                <div class="sep"></div>
+                <div class="inner-preview pad">
+                    <div class="item-grid album">
+                        <div class="grid-primary album">
+                            <div class="grid-item"></div>
+                        </div>
+                        <div class="grid-mains">
+                            <div class="grid-main album">
+                                <div class="grid-item"></div>
+                                <div class="grid-item"></div>
+                                <div class="grid-item grid-item--extra album"></div>
+                                <div class="grid-item grid-item--extra album"></div>
+                            </div>
+                            <div class="grid-main album">
+                                <div class="grid-item"></div>
+                                <div class="grid-item"></div>
+                                <div class="grid-item grid-item--extra album"></div>
+                                <div class="grid-item grid-item--extra album"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tracks album">
+                        <div class="track">
+                            <div class="cover"></div>
+                            <div class="title"></div>
+                            <div class="bar">
+                                <div class="fill" style="width: 100%"></div>
+                            </div>
+                        </div>
+                        <div class="track">
+                            <div class="cover"></div>
+                            <div class="title"></div>
+                            <div class="bar">
+                                <div class="fill" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="track">
+                            <div class="cover"></div>
+                            <div class="title"></div>
+                            <div class="bar">
+                                <div class="fill" style="width: 60%"></div>
+                            </div>
+                        </div>
+                        <div class="track">
+                            <div class="cover"></div>
+                            <div class="title"></div>
+                            <div class="bar">
+                                <div class="fill" style="width: 30%"></div>
+                            </div>
+                        </div>
+                        <div class="track">
+                            <div class="cover"></div>
+                            <div class="title"></div>
+                            <div class="bar">
+                                <div class="fill" style="width: 5%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="select-container">
+                    <div class="heading">
+                        <h5>${trans[lang].settings.inbuilt.charts.albums.timeframe.name}</h5>
+                    </div>
+                    <div class="select-wrap">
+                        ${original_chart_settings.albums.timeframe}
+                    </div>
+                </div>
+                <div class="select-container">
+                    <div class="heading">
+                        <h5>${trans[lang].settings.inbuilt.charts.albums.style.name}</h5>
+                    </div>
+                    <div class="select-wrap">
+                        ${original_chart_settings.albums.style}
+                    </div>
+                </div>
+                <div class="sep"></div>
+                <div class="inner-preview pad">
+                    <div class="tracks">
+                        <div class="track">
+                            <div class="cover"></div>
+                            <div class="title"></div>
+                            <div class="artist"></div>
+                            <div class="bar">
+                                <div class="fill" style="width: 100%"></div>
+                            </div>
+                        </div>
+                        <div class="track">
+                            <div class="cover"></div>
+                            <div class="title"></div>
+                            <div class="artist"></div>
+                            <div class="bar">
+                                <div class="fill" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="track">
+                            <div class="cover"></div>
+                            <div class="title"></div>
+                            <div class="artist"></div>
+                            <div class="bar">
+                                <div class="fill" style="width: 60%"></div>
+                            </div>
+                        </div>
+                        <div class="track">
+                            <div class="cover"></div>
+                            <div class="title"></div>
+                            <div class="artist"></div>
+                            <div class="bar">
+                                <div class="fill" style="width: 30%"></div>
+                            </div>
+                        </div>
+                        <div class="track">
+                            <div class="cover"></div>
+                            <div class="title"></div>
+                            <div class="artist"></div>
+                            <div class="bar">
+                                <div class="fill" style="width: 5%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="select-container">
+                    <div class="heading">
+                        <h5>${trans[lang].settings.inbuilt.charts.tracks.timeframe.name}</h5>
+                    </div>
+                    <div class="select-wrap">
+                        ${original_chart_settings.tracks.timeframe}
+                    </div>
+                </div>
+                <div class="select-container">
+                    <div class="heading">
+                        <h5>${trans[lang].settings.inbuilt.charts.tracks.count.name}</h5>
+                    </div>
+                    <div class="select-wrap">
+                        ${original_chart_settings.tracks.count}
+                    </div>
+                </div>
+                <div class="sep"></div>
+                <div class="settings-footer">
+                    <button type="submit" class="btn-primary">
+                        ${trans[lang].settings.save}
+                    </button>
+                    <input type="hidden" value="chart" name="submit">
+                </div>
+            </form>
+        `);
+
+        for (let category in original_chart_settings) {
+            for (let setting in original_chart_settings[category]) {
+                update_inbuilt_item(setting, original_chart_settings[category][setting], false);
+            }
+        }
+
+        let selects = document.body.querySelectorAll('select');
+        selects.forEach((select) => {
+            select.setAttribute('onchange', `_update_inbuilt_select('${select.getAttribute('id')}', this.value)`);
+            update_inbuilt_select(select.getAttribute('id'), select.value);
+        })
+    }
+
+    unsafeWindow._update_inbuilt_select = function(id, value) {
+        update_inbuilt_select(id, value);
+    }
+    function update_inbuilt_select(id, value) {
+        document.documentElement.setAttribute(`data-bleh--inbuilt-${id}`, value);
+    }
+
+    function patch_settings_profile_panel(token, update_picture) {
         if (update_picture.hasAttribute('data-kate-processed'))
             return;
 
         update_picture.setAttribute('data-kate-processed', 'true');
+        update_picture.classList.add('bleh--panel');
 
-        let avatar_url = element.querySelector('.image-upload-preview img').getAttribute('src');
-
-        let token = element.querySelector('[name="csrfmiddlewaretoken"]').getAttribute('value');
+        let avatar_url = document.body.querySelector('.image-upload-preview img').getAttribute('src');
 
         let form_display_name = document.getElementById('id_full_name').value;
         let form_website = document.getElementById('id_homepage').value;
@@ -1138,7 +1540,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         document.getElementById('update-profile').outerHTML = '';
 
         update_picture.innerHTML = (`
-            <h2>${trans[lang].settings.profile.name}</h2>
+            <h3>${trans[lang].settings.inbuilt.profile.name}</h3>
             <div class="profile-container">
                 <div class="avatar-side">
                     <div class="avatar image-upload-preview" onclick="_open_avatar_changer('${token}')">
@@ -1163,16 +1565,16 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                             <input type="hidden" name="csrfmiddlewaretoken" value="${token}">
                             <div class="info-row">
                                 <div class="title">
-                                    ${trans[lang].settings.profile.subtitle.name}
+                                    ${trans[lang].settings.inbuilt.profile.subtitle.name}
                                 </div>
                                 <div class="input">
                                     <input type="text" name="full_name" value="${form_display_name}" maxlength="50" id="id_full_name" oninput="_update_display_name(this.value)" data-form-type="other">
-                                    <div class="tip">${trans[lang].settings.profile.pronoun_tip}</div>
+                                    <div class="tip">${trans[lang].settings.inbuilt.profile.pronoun_tip}</div>
                                 </div>
                             </div>
                             <div class="info-row">
                                 <div class="title">
-                                    ${trans[lang].settings.profile.country}
+                                    ${trans[lang].settings.inbuilt.profile.country}
                                 </div>
                                 <div class="input">
                                     ${form_country}
@@ -1180,7 +1582,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                             </div>
                             <div class="info-row">
                                 <div class="title">
-                                    ${trans[lang].settings.profile.website}
+                                    ${trans[lang].settings.inbuilt.profile.website}
                                 </div>
                                 <div class="input">
                                     <input type="url" name="homepage" value="${form_website}" id="id_homepage" data-form-type="website">
@@ -1188,17 +1590,17 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                             </div>
                             <div class="info-row">
                                 <div class="title">
-                                    ${trans[lang].settings.profile.about}
+                                    ${trans[lang].settings.inbuilt.profile.about}
                                 </div>
                                 <div class="input about-me" data-bleh--show-preview="false" id="about_me">
                                     <textarea name="about_me" cols="40" rows="10" class="textarea--s" maxlength="500" id="id_about_me" oninput="_update_about_me_preview(this.value)" data-form-type="other">${form_about_me}</textarea>
                                     <span class="bleh--about-me-preview" id="about_me_preview"></span>
-                                    <div class="tip bleh--about-me-preview-only">${trans[lang].settings.profile.toggle_preview.note}</div>
+                                    <div class="tip bleh--about-me-preview-only">${trans[lang].settings.inbuilt.profile.toggle_preview.note}</div>
                                 </div>
                             </div>
                             <div class="save-row">
                                 <span class="btn btn--has-icon btn--has-icon-left btn--toggle-about-me-preview" id="btn--toggle-about-me-preview" onclick="_toggle_about_me_preview()">
-                                    ${trans[lang].settings.profile.toggle_preview.name}
+                                    ${trans[lang].settings.inbuilt.profile.toggle_preview.name}
                                 </span>
                                 <div class="form-submit">
                                     <button type="submit" class="btn-primary" data-form-type="action">
@@ -1223,8 +1625,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
         // preview
         tippy(document.getElementById('btn--toggle-about-me-preview'), {
-            content: trans[lang].settings.profile.toggle_preview.bio
-        })
+            content: trans[lang].settings.inbuilt.profile.toggle_preview.bio
+        });
     }
 
     unsafeWindow._toggle_about_me_preview = function() {
@@ -1262,7 +1664,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         open_avatar_changer(token);
     }
     function open_avatar_changer(token) {
-        create_window('edit_avatar',trans[lang].settings.profile.avatar.name,`
+        create_window('edit_avatar',trans[lang].settings.inbuilt.profile.avatar.name,`
             <div class="bleh--upload-avatar-container">
                 <form class="avatar-upload-form bleh--upload-avatar-form" action="/settings" name="avatar-form" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="csrfmiddlewaretoken" value="${token}">
@@ -1273,7 +1675,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                                 <input type="file" name="avatar" data-require="components/file-input" data-file-input-copy="Choose file" data-no-file-copy="No file chosen" accept="image/*" required="" id="id_avatar" data-kate-processed="true">
                             </span>
                         </div>
-                        ${trans[lang].settings.profile.avatar.upload}
+                        ${trans[lang].settings.inbuilt.profile.avatar.upload}
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn-primary" onclick="_save_avatar_changer()">
@@ -1286,7 +1688,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     <input type="hidden" name="csrfmiddlewaretoken" value="${token}">
                     <div class="form-group">
                         <button class="mimic-link image-upload-remove" type="submit" value="delete-avatar" name="delete-avatar">Delete picture</button>
-                        ${trans[lang].settings.profile.avatar.delete}
+                        ${trans[lang].settings.inbuilt.profile.avatar.delete}
                     </div>
                     <div class="modal-footer">
                         <button class="btn" onclick="_kill_window('edit_avatar')">${trans[lang].settings.cancel}</button>
@@ -2939,6 +3341,56 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         // save to settings
         localStorage.setItem('bleh', JSON.stringify(settings));
         } catch(e) {}
+    }
+
+
+    unsafeWindow._reset_inbuilt_item = function(item) {
+        reset_inbuilt_item(item);
+    }
+    unsafeWindow._update_inbuilt_params = function(params={}) {
+        update_inbuilt_params(params);
+    }
+    unsafeWindow._update_inbuilt_item = function(item, value) {
+        update_inbuilt_item(item, value);
+    }
+
+    function update_inbuilt_item(item, value, modify=true) {
+        console.log('update item',item,value);
+
+        let test_if_valid = document.getElementById(`toggle-${item}`);
+        console.info(test_if_valid, item, value, inbuilt_settings[item], 'modify', modify);
+        if (test_if_valid == undefined)
+            return;
+
+        if (inbuilt_settings[item].type == 'toggle') {
+            if (modify) {
+                value = (document.getElementById(`toggle-${item}`).getAttribute('aria-checked') === 'true');
+                console.info('new value', value);
+            }
+
+            console.info(value, inbuilt_settings[item].values[0], value == inbuilt_settings[item].values[0], modify);
+
+            if (value == inbuilt_settings[item].values[0] && modify) {
+                document.getElementById(`inbuilt-companion-checkbox-${item}`).checked = false;
+                document.getElementById(`toggle-${item}`).setAttribute('aria-checked', false);
+                document.documentElement.setAttribute(`data-bleh--inbuilt-${item}`, inbuilt_settings[item].values[1]);
+            } else if (modify) {
+                document.getElementById(`inbuilt-companion-checkbox-${item}`).checked = true;
+                document.getElementById(`toggle-${item}`).setAttribute('aria-checked', true);
+                document.documentElement.setAttribute(`data-bleh--inbuilt-${item}`, inbuilt_settings[item].values[0]);
+            } else {
+                // dont modify, just show
+                if (value == inbuilt_settings[item].values[0]) {
+                    document.getElementById(`inbuilt-companion-checkbox-${item}`).checked = true;
+                    document.getElementById(`toggle-${item}`).setAttribute('aria-checked', true);
+                    document.documentElement.setAttribute(`data-bleh--inbuilt-${item}`, inbuilt_settings[item].values[0]);
+                } else {
+                    document.getElementById(`inbuilt-companion-checkbox-${item}`).checked = false;
+                    document.getElementById(`toggle-${item}`).setAttribute('aria-checked', false);
+                    document.documentElement.setAttribute(`data-bleh--inbuilt-${item}`, inbuilt_settings[item].values[1]);
+                }
+            }
+        }
     }
 
 
