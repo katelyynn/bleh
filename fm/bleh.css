@@ -148,7 +148,8 @@ a,
 .header-new-actions :is(a, button), .header-new-inner, span[itemprop="byArtist"] a,
 .user-dashboard-layout .masthead a,
 .bleh--redacted-message,
-.header-metadata-display, .chartlist-count-bar, .chartlist-count-bar-value
+.header-metadata-display, .chartlist-count-bar, .chartlist-count-bar-value,
+.primary-selection
 {
     --c1: var(--hue), calc(var(--sat) * 40%), 100%;
     --c2: var(--hue), calc(var(--sat) * 60%), 90%;
@@ -5559,6 +5560,8 @@ button:not(.playback-app-container button, .top-artist-list-item, .pixel, .liste
 .btn--has-icon:before,
 .avatar-overlay:before,
 .grid-item:before,
+.select-wrap:before,
+.primary-selection:after,
 /*     DROPDOWNS     */
 .dropdown-menu-clickable-item:before, .auth-dropdown-menu-item:before,
 .dropdown-menu-list-button::after, .dropdown-menu-clickable-button::after, .dropdown-menu-clickable-button-js-only::after,
@@ -11623,8 +11626,21 @@ input[type="range"]::-moz-range-thumb {
         flex: 1;
     }
 
+    .select-wrap {
+        position: relative;
+        --mask: var(--icon-16-dropdown);
+        --left: none;
+        --margin-left: none;
+        --right: 12px;
+
+        &:before {
+            z-index: 10;
+        }
+    }
+
     select {
         min-width: 56px !important;
+        padding-right: calc(12px + 16px + 6px) !important;
     }
 }
 
@@ -11641,6 +11657,79 @@ input[type="range"]::-moz-range-thumb {
 }
 
 
+.primary-selections {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    select {
+        display: none;
+    }
+
+    .primary-selection {
+        --btn-top: 16px;
+        --btn-bottom: 16px;
+        --btn-left: calc(16px + 12px + 6px + 4px);
+        /*--mask: var(--icon-16-dot);*/
+        width: 100% !important;
+        position: relative;
+
+        &:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            width: 3px;
+            height: 28px;
+            top: 50%;
+            margin-top: -14px;
+            background-color: hsl(var(--l3-c));
+            box-shadow: 0 0 20px 3px hsl(var(--h4));
+            border-radius: 50px;
+            opacity: 0;
+        }
+
+        p {
+            font-size: 12px;
+            color: hsl(var(--c3));
+        }
+
+        &#primary-selection-receiving_msgs-everyone {
+            --hue: 160;
+            --sat: 1;
+            --lit: 1;
+            --mask: var(--icon-16-globe);
+        }
+        &#primary-selection-receiving_msgs-neighbours {
+            --hue: 30;
+            --sat: 1;
+            --lit: 1;
+            --mask: var(--icon-16-users);
+        }
+        &#primary-selection-receiving_msgs-follow {
+            --hue: -2;
+            --sat: 1;
+            --lit: 1;
+            --mask: var(--icon-16-lock);
+        }
+
+        [data-bleh--inbuilt-id_message_privacy="all"] &#primary-selection-receiving_msgs-everyone,
+        [data-bleh--inbuilt-id_message_privacy="n"] &#primary-selection-receiving_msgs-neighbours,
+        [data-bleh--inbuilt-id_message_privacy="f"] &#primary-selection-receiving_msgs-follow {
+            --bg: hsla(var(--h3), 25%);
+            --bg-hov: hsla(var(--h3), 35%);
+            --bg-atv: hsla(var(--h3), 45%);
+            --shadow: none;
+            --shadow-hov: none;
+            /*--mask: var(--icon-16-check);*/
+
+            &:before {
+                opacity: 1;
+            }
+        }
+    }
+}
+
+
 .inner-preview {
     .tracks {
         display: flex;
@@ -11652,6 +11741,10 @@ input[type="range"]::-moz-range-thumb {
         [data-bleh--inbuilt-id_chart_style_and_length_top_artists^="classic"] &.artist,
         [data-bleh--inbuilt-id_chart_style_and_length_top_artists^="grid"] &.artist {
             display: none;
+        }
+        [data-bleh--inbuilt-recent_listening="true"] &.recent_listening {
+            opacity: 0.5;
+            filter: blur(3px);
         }
 
         .track {
@@ -11796,6 +11889,69 @@ input[type="range"]::-moz-range-thumb {
                 [data-bleh--inbuilt-id_chart_style_and_length_top_albums="grid,4"] & + .grid-main.album,
                 [data-bleh--inbuilt-id_chart_style_and_length_top_artists="grid,4"] & + .grid-main.artist {
                     display: none;
+                }
+            }
+        }
+    }
+
+    .shouts {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        [data-bleh--inbuilt-disable_shoutbox="true"] & {
+            opacity: 0.5;
+            filter: blur(3px);
+        }
+
+        .shout {
+            display: flex;
+            gap: 8px;
+            height: unset;
+            margin-left: unset;
+
+            .shout-avatar-placeholder {
+                width: 40px;
+                height: 40px;
+                background-color: hsl(var(--b4));
+                border-radius: 50%;
+            }
+
+            .info-side {
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+                gap: 8px;
+
+                .header {
+                    display: flex;
+                    align-items: end;
+                    gap: 6px;
+
+                    .shout-username {
+                        width: 80px;
+                        height: 6px;
+                        background-color: hsl(var(--l3-c));
+                        border-radius: 50px;
+                    }
+
+                    .shout-time {
+                        width: 50px;
+                        height: 4px;
+                        background-color: hsl(var(--c3));
+                        border-radius: 50px;
+                    }
+                }
+
+                .shout-contents {
+                    width: 250px;
+                    height: 6px;
+                    background-color: hsl(var(--c2));
+                    border-radius: 50px;
+
+                    & + .shout-contents {
+                        width: 170px;
+                    }
                 }
             }
         }

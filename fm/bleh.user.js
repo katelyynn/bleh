@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         bleh
 // @namespace    http://last.fm/
-// @version      2024.0616
+// @version      2024.0616.1
 // @description  bleh!!! ^-^
 // @author       kate
 // @match        https://www.last.fm/*
@@ -15,7 +15,7 @@
 // @require      https://unpkg.com/tippy.js@6
 // ==/UserScript==
 
-let version = '2024.0616';
+let version = '2024.0616.1';
 let lang = document.documentElement.getAttribute('lang');
 let valid_langs = ['en'];
 
