@@ -11645,6 +11645,7 @@ input[type="range"]::-moz-range-thumb {
 
         &:before {
             z-index: 10;
+            pointer-events: none;
         }
     }
 
@@ -12023,6 +12024,10 @@ input[type="range"]::-moz-range-thumb {
         left: 7px;
         border-radius: var(--item-med-radius);
         background: var(--col);
+
+        transition-property: left;
+        transition-duration: var(--trans);
+        transition-timing-function: var(--trans-function);
     }
 
     &[aria-checked="true"] {
@@ -12034,8 +12039,7 @@ input[type="range"]::-moz-range-thumb {
         --shadow-hov: inset hsl(var(--l2-c)) 0 -1px 0, var(--interactable-outer), var(--interactable-active-outer);
 
         .dot {
-            left: unset;
-            right: 7px;
+            left: calc(56px - 7px - 12px);
         }
     }
 }
