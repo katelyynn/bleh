@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           bleh (dev)
 @namespace      github.com/katelyynn/bleh
-@version        2024.06151
+@version        2024.0616
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.css
@@ -5568,6 +5568,7 @@ button:not(.playback-app-container button, .top-artist-list-item, .pixel, .liste
 .header-follower-btn--denied:before,
 .btn--has-icon:before,
 .avatar-overlay:before,
+.grid-item:before,
 /*     DROPDOWNS     */
 .dropdown-menu-clickable-item:before, .auth-dropdown-menu-item:before,
 .dropdown-menu-list-button::after, .dropdown-menu-clickable-button::after, .dropdown-menu-clickable-button-js-only::after,
@@ -11747,6 +11748,18 @@ input[type="range"]::-moz-range-thumb {
                 height: 224px;
                 border-radius: var(--item-small-radius);
                 background-color: hsl(var(--b4));
+                position: relative;
+                color: hsl(var(--b6));
+                --mask: var(--icon-album);
+                --mask-size: 72px;
+                --left: 50%;
+                --top: 50%;
+                --margin-left: calc(-1 * (var(--mask-size) / 2));
+                --margin-top: calc(-1 * (var(--mask-size) / 2));
+
+                .artist & {
+                    --mask: var(--icon-artist);
+                }
             }
 
             [data-bleh--inbuilt-id_chart_style_and_length_top_albums="grid,4"] &.album,
@@ -11771,6 +11784,18 @@ input[type="range"]::-moz-range-thumb {
                     height: 110px;
                     border-radius: var(--item-small-radius);
                     background-color: hsl(var(--b4));
+                    position: relative;
+                    color: hsl(var(--b6));
+                    --mask: var(--icon-album);
+                    --mask-size: 48px;
+                    --left: 50%;
+                    --top: 50%;
+                    --margin-left: calc(-1 * (var(--mask-size) / 2));
+                    --margin-top: calc(-1 * (var(--mask-size) / 2));
+
+                    .artist & {
+                        --mask: var(--icon-artist);
+                    }
 
                     [data-bleh--inbuilt-id_chart_style_and_length_top_albums="classic,5"] &.grid-item--extra.album,
                     [data-bleh--inbuilt-id_chart_style_and_length_top_artists="classic,5"] &.grid-item--extra.artist {

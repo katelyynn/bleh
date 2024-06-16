@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         bleh
 // @namespace    http://last.fm/
-// @version      2024.0615.2
+// @version      2024.0616
 // @description  bleh!!! ^-^
 // @author       kate
 // @match        https://www.last.fm/*
@@ -15,7 +15,7 @@
 // @require      https://unpkg.com/tippy.js@6
 // ==/UserScript==
 
-let version = '2024.0615.2';
+let version = '2024.0616';
 let lang = document.documentElement.getAttribute('lang');
 let valid_langs = ['en'];
 
@@ -1359,7 +1359,62 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 </div>
                 <div class="sep"></div>
                 <div class="inner-preview pad">
-
+                    <div class="item-grid album">
+                        <div class="grid-primary album">
+                            <div class="grid-item"></div>
+                        </div>
+                        <div class="grid-mains">
+                            <div class="grid-main album">
+                                <div class="grid-item"></div>
+                                <div class="grid-item"></div>
+                                <div class="grid-item grid-item--extra album"></div>
+                                <div class="grid-item grid-item--extra album"></div>
+                            </div>
+                            <div class="grid-main album">
+                                <div class="grid-item"></div>
+                                <div class="grid-item"></div>
+                                <div class="grid-item grid-item--extra album"></div>
+                                <div class="grid-item grid-item--extra album"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tracks album">
+                        <div class="track">
+                            <div class="cover"></div>
+                            <div class="title"></div>
+                            <div class="bar">
+                                <div class="fill" style="width: 100%"></div>
+                            </div>
+                        </div>
+                        <div class="track">
+                            <div class="cover"></div>
+                            <div class="title"></div>
+                            <div class="bar">
+                                <div class="fill" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="track">
+                            <div class="cover"></div>
+                            <div class="title"></div>
+                            <div class="bar">
+                                <div class="fill" style="width: 60%"></div>
+                            </div>
+                        </div>
+                        <div class="track">
+                            <div class="cover"></div>
+                            <div class="title"></div>
+                            <div class="bar">
+                                <div class="fill" style="width: 30%"></div>
+                            </div>
+                        </div>
+                        <div class="track">
+                            <div class="cover"></div>
+                            <div class="title"></div>
+                            <div class="bar">
+                                <div class="fill" style="width: 5%"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="select-container">
                     <div class="heading">
@@ -1379,7 +1434,48 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 </div>
                 <div class="sep"></div>
                 <div class="inner-preview pad">
-
+                    <div class="tracks">
+                        <div class="track">
+                            <div class="cover"></div>
+                            <div class="title"></div>
+                            <div class="artist"></div>
+                            <div class="bar">
+                                <div class="fill" style="width: 100%"></div>
+                            </div>
+                        </div>
+                        <div class="track">
+                            <div class="cover"></div>
+                            <div class="title"></div>
+                            <div class="artist"></div>
+                            <div class="bar">
+                                <div class="fill" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="track">
+                            <div class="cover"></div>
+                            <div class="title"></div>
+                            <div class="artist"></div>
+                            <div class="bar">
+                                <div class="fill" style="width: 60%"></div>
+                            </div>
+                        </div>
+                        <div class="track">
+                            <div class="cover"></div>
+                            <div class="title"></div>
+                            <div class="artist"></div>
+                            <div class="bar">
+                                <div class="fill" style="width: 30%"></div>
+                            </div>
+                        </div>
+                        <div class="track">
+                            <div class="cover"></div>
+                            <div class="title"></div>
+                            <div class="artist"></div>
+                            <div class="bar">
+                                <div class="fill" style="width: 5%"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="select-container">
                     <div class="heading">
