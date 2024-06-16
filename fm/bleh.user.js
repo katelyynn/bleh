@@ -1175,11 +1175,13 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             return;
 
         // if we can continue, we are on profile tab
-        patch_settings_profile_panel(update_picture);
-        patch_settings_charts_panel();
+        let token = document.body.querySelector('[name="csrfmiddlewaretoken"]').getAttribute('value');
+
+        patch_settings_profile_panel(token, update_picture);
+        patch_settings_charts_panel(token);
     }
 
-    function patch_settings_charts_panel() {
+    function patch_settings_charts_panel(token) {
         let charts_panel = document.getElementById('update-chart');
 
         if (charts_panel.hasAttribute('data-kate-processed'))
@@ -1211,101 +1213,111 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
         charts_panel.innerHTML = (`
             <h3>${trans[lang].settings.inbuilt.charts.name}</h3>
-            <div class="inner-preview pad">
+            <form action="/settings#update-chart" name="chart-form" method="post">
+                <input type="hidden" name="csrfmiddlewaretoken" value="${token}">
+                <div class="inner-preview pad">
 
-            </div>
-            <div class="select-container">
-                <div class="heading">
-                    <h5>${trans[lang].settings.inbuilt.charts.recent.count.name}</h5>
                 </div>
-                <div class="select-wrap">
-                    ${original_chart_settings.recent.count}
+                <div class="select-container">
+                    <div class="heading">
+                        <h5>${trans[lang].settings.inbuilt.charts.recent.count.name}</h5>
+                    </div>
+                    <div class="select-wrap">
+                        ${original_chart_settings.recent.count}
+                    </div>
                 </div>
-            </div>
-            <div class="toggle-container" id="container-recent_artwork">
-                <button class="btn reset" onclick="_reset_inbuilt_item('recent_artwork')">Reset to default</button>
-                <div class="heading">
-                    <h5>${trans[lang].settings.inbuilt.charts.recent.artwork.name}</h5>
+                <div class="toggle-container" id="container-recent_artwork">
+                    <button class="btn reset" onclick="_reset_inbuilt_item('recent_artwork')">Reset to default</button>
+                    <div class="heading">
+                        <h5>${trans[lang].settings.inbuilt.charts.recent.artwork.name}</h5>
+                    </div>
+                    <div class="toggle-wrap">
+                        <input class="companion-checkbox" type="checkbox" name="show_recent_tracks_artwork" id="inbuilt-companion-checkbox-recent_artwork">
+                        <button class="toggle" id="toggle-recent_artwork" onclick="_update_inbuilt_item('recent_artwork')" aria-checked="false">
+                            <div class="dot"></div>
+                        </button>
+                    </div>
                 </div>
-                <div class="toggle-wrap">
-                    <input class="companion-checkbox" type="checkbox" name="show_recent_tracks_artwork" id="inbuilt-companion-checkbox-recent_artwork">
-                    <button class="toggle" id="toggle-recent_artwork" onclick="_update_inbuilt_item('recent_artwork')" aria-checked="false">
-                        <div class="dot"></div>
+                <div class="toggle-container" id="container-recent_realtime">
+                    <button class="btn reset" onclick="_reset_inbuilt_item('recent_realtime')">Reset to default</button>
+                    <div class="heading">
+                        <h5>${trans[lang].settings.inbuilt.charts.recent.realtime.name}</h5>
+                    </div>
+                    <div class="toggle-wrap">
+                        <input class="companion-checkbox" type="checkbox" name="auto_refresh_recent_tracks" id="inbuilt-companion-checkbox-recent_realtime">
+                        <button class="toggle" id="toggle-recent_realtime" onclick="_update_inbuilt_item('recent_realtime')" aria-checked="false">
+                            <div class="dot"></div>
+                        </button>
+                    </div>
+                </div>
+                <div class="sep"></div>
+                <div class="inner-preview pad">
+
+                </div>
+                <div class="select-container">
+                    <div class="heading">
+                        <h5>${trans[lang].settings.inbuilt.charts.artists.timeframe.name}</h5>
+                    </div>
+                    <div class="select-wrap">
+                        ${original_chart_settings.artists.timeframe}
+                    </div>
+                </div>
+                <div class="select-container">
+                    <div class="heading">
+                        <h5>${trans[lang].settings.inbuilt.charts.artists.style.name}</h5>
+                    </div>
+                    <div class="select-wrap">
+                        ${original_chart_settings.artists.style}
+                    </div>
+                </div>
+                <div class="sep"></div>
+                <div class="inner-preview pad">
+
+                </div>
+                <div class="select-container">
+                    <div class="heading">
+                        <h5>${trans[lang].settings.inbuilt.charts.albums.timeframe.name}</h5>
+                    </div>
+                    <div class="select-wrap">
+                        ${original_chart_settings.albums.timeframe}
+                    </div>
+                </div>
+                <div class="select-container">
+                    <div class="heading">
+                        <h5>${trans[lang].settings.inbuilt.charts.albums.style.name}</h5>
+                    </div>
+                    <div class="select-wrap">
+                        ${original_chart_settings.albums.style}
+                    </div>
+                </div>
+                <div class="sep"></div>
+                <div class="inner-preview pad">
+
+                </div>
+                <div class="select-container">
+                    <div class="heading">
+                        <h5>${trans[lang].settings.inbuilt.charts.tracks.timeframe.name}</h5>
+                    </div>
+                    <div class="select-wrap">
+                        ${original_chart_settings.tracks.timeframe}
+                    </div>
+                </div>
+                <div class="select-container">
+                    <div class="heading">
+                        <h5>${trans[lang].settings.inbuilt.charts.tracks.count.name}</h5>
+                    </div>
+                    <div class="select-wrap">
+                        ${original_chart_settings.tracks.count}
+                    </div>
+                </div>
+                <div class="sep"></div>
+                <div class="settings-footer">
+                    <button type="submit" class="btn-primary">
+                        ${trans[lang].settings.save}
                     </button>
+                    <input type="hidden" value="chart" name="submit">
                 </div>
-            </div>
-            <div class="toggle-container" id="container-recent_realtime">
-                <button class="btn reset" onclick="_reset_inbuilt_item('recent_realtime')">Reset to default</button>
-                <div class="heading">
-                    <h5>${trans[lang].settings.inbuilt.charts.recent.realtime.name}</h5>
-                </div>
-                <div class="toggle-wrap">
-                    <input class="companion-checkbox" type="checkbox" name="auto_refresh_recent_tracks" id="inbuilt-companion-checkbox-recent_realtime">
-                    <button class="toggle" id="toggle-recent_realtime" onclick="_update_inbuilt_item('recent_realtime')" aria-checked="false">
-                        <div class="dot"></div>
-                    </button>
-                </div>
-            </div>
-            <div class="sep"></div>
-            <div class="inner-preview pad">
-
-            </div>
-            <div class="select-container">
-                <div class="heading">
-                    <h5>${trans[lang].settings.inbuilt.charts.artists.timeframe.name}</h5>
-                </div>
-                <div class="select-wrap">
-                    ${original_chart_settings.artists.timeframe}
-                </div>
-            </div>
-            <div class="select-container">
-                <div class="heading">
-                    <h5>${trans[lang].settings.inbuilt.charts.artists.style.name}</h5>
-                </div>
-                <div class="select-wrap">
-                    ${original_chart_settings.artists.style}
-                </div>
-            </div>
-            <div class="sep"></div>
-            <div class="inner-preview pad">
-
-            </div>
-            <div class="select-container">
-                <div class="heading">
-                    <h5>${trans[lang].settings.inbuilt.charts.albums.timeframe.name}</h5>
-                </div>
-                <div class="select-wrap">
-                    ${original_chart_settings.albums.timeframe}
-                </div>
-            </div>
-            <div class="select-container">
-                <div class="heading">
-                    <h5>${trans[lang].settings.inbuilt.charts.albums.style.name}</h5>
-                </div>
-                <div class="select-wrap">
-                    ${original_chart_settings.albums.style}
-                </div>
-            </div>
-            <div class="sep"></div>
-            <div class="inner-preview pad">
-
-            </div>
-            <div class="select-container">
-                <div class="heading">
-                    <h5>${trans[lang].settings.inbuilt.charts.tracks.timeframe.name}</h5>
-                </div>
-                <div class="select-wrap">
-                    ${original_chart_settings.tracks.timeframe}
-                </div>
-            </div>
-            <div class="select-container">
-                <div class="heading">
-                    <h5>${trans[lang].settings.inbuilt.charts.tracks.count.name}</h5>
-                </div>
-                <div class="select-wrap">
-                    ${original_chart_settings.tracks.count}
-                </div>
-            </div>
+            </form>
         `);
 
         for (let category in original_chart_settings) {
@@ -1315,7 +1327,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         }
     }
 
-    function patch_settings_profile_panel(update_picture) {
+    function patch_settings_profile_panel(token, update_picture) {
         if (update_picture.hasAttribute('data-kate-processed'))
             return;
 
@@ -1323,8 +1335,6 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         update_picture.classList.add('bleh--panel');
 
         let avatar_url = document.body.querySelector('.image-upload-preview img').getAttribute('src');
-
-        let token = document.body.querySelector('[name="csrfmiddlewaretoken"]').getAttribute('value');
 
         let form_display_name = document.getElementById('id_full_name').value;
         let form_website = document.getElementById('id_homepage').value;

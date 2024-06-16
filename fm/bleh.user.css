@@ -11638,6 +11638,17 @@ input[type="range"]::-moz-range-thumb {
 }
 
 
+.bleh--panel > form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.settings-footer {
+    display: flex;
+    justify-content: end;
+}
+
+
 .toggle {
     display: flex;
     justify-content: center;
