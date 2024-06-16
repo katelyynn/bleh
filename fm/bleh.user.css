@@ -11677,6 +11677,10 @@ input[type="range"]::-moz-range-thumb {
         [data-bleh--inbuilt-id_chart_style_and_length_top_artists^="grid"] &.artist {
             display: none;
         }
+        [data-bleh--inbuilt-recent_listening="true"] &.recent_listening {
+            opacity: 0.5;
+            filter: blur(3px);
+        }
 
         .track {
             background-color: hsla(var(--b4), 40%);

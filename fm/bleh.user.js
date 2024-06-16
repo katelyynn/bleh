@@ -251,6 +251,35 @@ const trans = {
                             name: 'Default timeframe'
                         }
                     }
+                },
+                privacy: {
+                    name: 'Privacy',
+                    recent_listening: {
+                        name: 'Hide your recent listening history',
+                        bio: 'Keep your recent listens a secret o.O'
+                    },
+                    receiving_msgs: {
+                        name: 'Control who can interact with you',
+                        bio: 'This setting controls who can post shouts and message you privately.',
+                        settings: {
+                            everyone: {
+                                name: 'Everyone',
+                                bio: 'Everyone except who you have ignored'
+                            },
+                            neighbours: {
+                                name: 'Who you follow and neighbours',
+                                bio: 'Everyone who you have chosen to follow, along with your Last.fm neighbours'
+                            },
+                            follow: {
+                                name: 'Who you follow only',
+                                bio: 'Only users who you have chosen to follow'
+                            }
+                        }
+                    },
+                    disable_shoutbox: {
+                        name: 'Hide your shoutbox',
+                        bio: 'Removes your shoutbox from you and anyone else.'
+                    }
                 }
             },
             actions: {
@@ -765,6 +794,20 @@ let inbuilt_settings = {
         value: true,
         values: [true, false],
         type: 'toggle'
+    },
+    recent_listening: {
+        css: 'recent_listening',
+        unit: '',
+        value: true,
+        values: [true, false],
+        type: 'toggle'
+    },
+    disable_shoutbox: {
+        css: 'disable_shoutbox',
+        unit: '',
+        value: true,
+        values: [true, false],
+        type: 'toggle'
     }
 }
 
@@ -1170,6 +1213,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     // patch last.fm settings
     function patch_lastfm_settings(element) {
         patch_settings_profile_tab();
+        patch_settings_privacy_tab();
     }
 
 
@@ -1741,6 +1785,164 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         .replace(/'/g, '&#039;'));
         document.getElementById('about_me_preview').innerHTML = parsed_body;
     }
+
+
+    // privacy
+    function patch_settings_privacy_tab() {
+        let privacy_panel = document.getElementById('privacy');
+
+        if (privacy_panel == undefined)
+            return;
+
+        // if we can continue, we are on privacy tab
+        let token = document.body.querySelector('[name="csrfmiddlewaretoken"]').getAttribute('value');
+
+        patch_settings_privacy_panel(token, privacy_panel);
+    }
+
+    function patch_settings_privacy_panel(token, privacy_panel) {
+        if (privacy_panel.hasAttribute('data-kate-processed'))
+            return;
+
+        privacy_panel.setAttribute('data-kate-processed', 'true');
+        privacy_panel.classList.add('bleh--panel');
+
+        // get info before destroying
+        let original_privacy_settings = {
+            recent_listening: document.getElementById('id_hide_realtime').checked,
+            receiving_msgs: document.getElementById('id_message_privacy').outerHTML,
+            disable_shoutbox: document.getElementById('id_shoutbox_disabled').checked
+        }
+
+        privacy_panel.innerHTML = (`
+            <h3>${trans[lang].settings.inbuilt.privacy.name}</h3>
+            <form action="/settings/privacy" name="privacy" method="post">
+                <input type="hidden" name="csrfmiddlewaretoken" value="${token}">
+                <div class="inner-preview pad">
+                    <div class="tracks recent_listening">
+                        <div class="track realtime">
+                            <div class="cover"></div>
+                            <div class="title"></div>
+                            <div class="artist"></div>
+                            <div class="time"></div>
+                        </div>
+                        <div class="track">
+                            <div class="cover"></div>
+                            <div class="title"></div>
+                            <div class="artist"></div>
+                            <div class="time"></div>
+                        </div>
+                        <div class="track">
+                            <div class="cover"></div>
+                            <div class="title"></div>
+                            <div class="artist"></div>
+                            <div class="time"></div>
+                        </div>
+                        <div class="track">
+                            <div class="cover"></div>
+                            <div class="title"></div>
+                            <div class="artist"></div>
+                            <div class="time"></div>
+                        </div>
+                        <div class="track">
+                            <div class="cover"></div>
+                            <div class="title"></div>
+                            <div class="artist"></div>
+                            <div class="time"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="toggle-container" id="container-recent_listening">
+                    <button class="btn reset" onclick="_reset_inbuilt_item('recent_listening')">Reset to default</button>
+                    <div class="heading">
+                        <h5>${trans[lang].settings.inbuilt.privacy.recent_listening.name}</h5>
+                        <p>${trans[lang].settings.inbuilt.privacy.recent_listening.bio}</p>
+                    </div>
+                    <div class="toggle-wrap">
+                        <input class="companion-checkbox" type="checkbox" name="hide_realtime" id="inbuilt-companion-checkbox-recent_listening">
+                        <span class="btn toggle" id="toggle-recent_listening" onclick="_update_inbuilt_item('recent_listening')" aria-checked="false">
+                            <div class="dot"></div>
+                        </span>
+                    </div>
+                </div>
+                <div class="sep"></div>
+                <div class="toggle-container" id="container-recent_artwork">
+                    <button class="btn reset" onclick="_reset_inbuilt_item('recent_artwork')">Reset to default</button>
+                    <div class="heading">
+                        <h5>${trans[lang].settings.inbuilt.charts.recent.artwork.name}</h5>
+                    </div>
+                    <div class="toggle-wrap">
+                        <input class="companion-checkbox" type="checkbox" name="show_recent_tracks_artwork" id="inbuilt-companion-checkbox-recent_artwork">
+                        <span class="btn toggle" id="toggle-recent_artwork" onclick="_update_inbuilt_item('recent_artwork')" aria-checked="false">
+                            <div class="dot"></div>
+                        </span>
+                    </div>
+                </div>
+                <div class="sep"></div>
+                <div class="inner-preview pad">
+                    <div class="tracks recent_listening">
+                        <div class="track realtime">
+                            <div class="cover"></div>
+                            <div class="title"></div>
+                            <div class="artist"></div>
+                            <div class="time"></div>
+                        </div>
+                        <div class="track">
+                            <div class="cover"></div>
+                            <div class="title"></div>
+                            <div class="artist"></div>
+                            <div class="time"></div>
+                        </div>
+                        <div class="track">
+                            <div class="cover"></div>
+                            <div class="title"></div>
+                            <div class="artist"></div>
+                            <div class="time"></div>
+                        </div>
+                        <div class="track">
+                            <div class="cover"></div>
+                            <div class="title"></div>
+                            <div class="artist"></div>
+                            <div class="time"></div>
+                        </div>
+                        <div class="track">
+                            <div class="cover"></div>
+                            <div class="title"></div>
+                            <div class="artist"></div>
+                            <div class="time"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="select-container">
+                    <div class="heading">
+                        <h5>${trans[lang].settings.inbuilt.privacy.recent_listening.name}</h5>
+                    </div>
+                    <div class="select-wrap">
+                        ${original_privacy_settings.recent_listening}
+                    </div>
+                </div>
+                <div class="sep"></div>
+                <div class="settings-footer">
+                    <button type="submit" class="btn-primary">
+                        ${trans[lang].settings.save}
+                    </button>
+                    <input type="hidden" value="chart" name="submit">
+                </div>
+            </form>
+        `)
+
+        for (let setting in original_privacy_settings) {
+            update_inbuilt_item(setting, original_privacy_settings[setting], false);
+        }
+
+        let selects = document.body.querySelectorAll('select');
+        selects.forEach((select) => {
+            select.setAttribute('onchange', `_update_inbuilt_select('${select.getAttribute('id')}', this.value)`);
+            update_inbuilt_select(select.getAttribute('id'), select.value);
+        });
+    }
+
+
 
 
     // patch profile pages
