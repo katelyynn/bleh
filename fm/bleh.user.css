@@ -10955,7 +10955,7 @@ so this is good enough - use the community docs */
     }
 }
 
-.bleh--panel {
+.bleh--panel:not(.bleh--profile-note-panel) {
     display: flex;
     flex-direction: column;
     gap: 20px;
