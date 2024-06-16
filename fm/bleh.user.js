@@ -1135,7 +1135,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         else if (current_theme == 'light')
             current_theme = 'dark';
 
-        document.getElementById('theme-value').textContent = theme_names[current_theme];
+        document.getElementById('theme-value').textContent = trans[lang].settings.themes[current_theme].name;
 
         // save value
         settings.theme = current_theme;
@@ -1148,7 +1148,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     unsafeWindow.change_theme_from_settings = function(theme) {
         let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
 
-        document.getElementById('theme-value').textContent = theme_names[theme];
+        document.getElementById('theme-value').textContent = trans[lang].settings.themes[theme].name;
 
         // save value
         settings.theme = theme;
