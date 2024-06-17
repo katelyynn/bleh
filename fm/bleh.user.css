@@ -13365,6 +13365,7 @@ button.bleh--gallery-bookmark-image-btn {
         overflow: visible !important;
     }
 
+    & + .page-content + .page-content,
     & + .page-content {
         padding-top: var(--card-gap) !important;
     }

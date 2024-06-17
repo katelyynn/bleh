@@ -325,6 +325,9 @@ const trans = {
                 bookmarks: 'Saved'
             },
             bookmarks: {
+                name: 'Saved',
+                bio: 'Gallery photos can be saved for future reference.',
+                no_data: 'You have no images saved for this artist :(',
                 button: {
                     image_is_bookmarked: {
                         name: 'You have saved this image'
@@ -4298,6 +4301,10 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
         image_list.setAttribute('data-kate-processed', 'true');
 
+        let bookmarked_images = JSON.parse(localStorage.getItem('bleh_bookmarked_images')) || {};
+
+        let artist_name = document.body.querySelector('.header-new-title').textContent;
+
         let adaptive_skin = document.body.querySelector('.adaptive-skin-container');
         let page_content = adaptive_skin.querySelector('.page-content');
 
@@ -4328,9 +4335,43 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
 
         // content
+        let bookmarks_content = document.createElement('div');
+        bookmarks_content.classList.add('container', 'page-content', 'bleh--bookmarks');
+        bookmarks_content.innerHTML = (`
+            <div class="row buffer-4">
+                <div class="col-main">
+                    <h2>${trans[lang].gallery.bookmarks.name}</h2>
+                    <p>${trans[lang].gallery.bookmarks.bio}</p>
+                    <ul class="image-list" id="bleh--bookmarked-images" data-kate-processed="true"></ul>
+                </div>
+                <div class="col-sidebar"></div>
+            </div>
+        `);
+
+        adaptive_skin.insertBefore(bookmarks_content, page_content);
 
 
-        let bookmarked_images = JSON.parse(localStorage.getItem('bleh_bookmarked_images')) || {};
+        // append images
+        if (bookmarked_images.hasOwnProperty(artist_name)) {
+            bookmarked_images[artist_name].forEach((image) => {
+                console.info(image);
+                let image_element = document.createElement('li');
+                image_element.classList.add('image-list-item-wrapper');
+                image_element.innerHTML = (`
+                    <a class="image-list-item" href="/music/${artist_name}/+images/${image}">
+                        <img src="https://lastfm.freetls.fastly.net/i/u/avatar170s/${image}" loading="lazy">
+                    </a>
+                `);
+
+                document.getElementById('bleh--bookmarked-images').appendChild(image_element);
+            });
+        } else {
+            document.getElementById('bleh--bookmarked-images').outerHTML = (`
+                <div class="no-data-message bleh--no-image-bookmarks">
+                    <p>${trans[lang].gallery.bookmarks.no_data}</p>
+                </div>
+            `);
+        }
     }
 
     unsafeWindow._set_gallery_page = function(id) {
@@ -4408,7 +4449,15 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             // remove from bookmarks
 
             button.setAttribute('data-bleh--image-is-bookmarked', 'false');
-            delete bookmarked_images[artist][id];
+
+            let new_artist_bookmarks = [];
+            for (let image in bookmarked_images[artist]) {
+                if (bookmarked_images[artist][image] != id) {
+                    new_artist_bookmarks.push(bookmarked_images[artist][image]);
+                }
+            }
+            bookmarked_images[artist] = new_artist_bookmarks;
+
             console.info('bleh - image', id, 'from artist', artist, 'has been removed from bookmarks');
         } else {
             // add to bookmarks
