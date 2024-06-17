@@ -4360,7 +4360,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 // link has to open in new tab as sometimes last.fm breaks the rendering
                 // of the gallery image, no clue..
                 image_element.innerHTML = (`
-                    <a class="image-list-item" href="/music/${artist_name}/+images/${image}" _target="_blank">
+                    <a class="image-list-item" href="/music/${artist_name}/+images/${image}" target="_blank">
                         <img src="https://lastfm.freetls.fastly.net/i/u/avatar170s/${image}" loading="lazy">
                     </a>
                 `);
