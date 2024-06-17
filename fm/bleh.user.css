@@ -529,7 +529,7 @@ html body {
 
 
 .main-content {
-    padding-top: calc(var(--card-gap) + 40px) !important;
+    padding-top: calc(var(--card-gap) + 38px) !important;
 }
 
 
@@ -777,6 +777,26 @@ last.fm changes as of 2024-05-20 */
     justify-content: center;
     align-items: center;
 
+    &:after {
+        content: '';
+        position: fixed;
+        left: 0;
+        top: 0;
+        right: 0;
+        z-index: 11;
+        height: calc(var(--card-gap) + 38px + var(--card-gap));
+        background-color: hsl(var(--b5));
+        opacity: 0;
+        pointer-events: none;
+        transition-property: opacity, height;
+        transition-duration: var(--trans);
+        transition-timing-function: var(--trans-function);
+    }
+    [data-bleh--scrolled="true"] &:after {
+        opacity: 1;
+        height: calc(var(--card-gap) + 32px + var(--card-gap));
+    }
+
     &:before {
         content: '';
         position: fixed;
@@ -818,6 +838,7 @@ last.fm changes as of 2024-05-20 */
     background: unset;
     font: inherit;
     color: hsl(var(--c3));
+    height: 32px !important;
 
     display: flex;
     align-items: center;
@@ -880,7 +901,7 @@ last.fm changes as of 2024-05-20 */
 }
 
 .masthead-nav-item, .masthead-search-toggle {
-    height: 40px !important;
+    height: 32px !important;
 }
 .masthead-nav-item .masthead-nav-control {
     padding: 0 16px 0 calc(16px + 16px + 4px) !important;
@@ -921,7 +942,7 @@ last.fm changes as of 2024-05-20 */
     --bg-atv: var(--bg) !important;
     --shadow: none !important;
     --shadow-hov: none !important;
-    height: 40px !important;
+    height: 32px !important;
     display: flex !important;
     align-items: center;
 }
@@ -1037,9 +1058,14 @@ last.fm changes as of 2024-05-20 */
     height: 38px !important;
     border: 2px solid hsl(var(--b4));
     box-shadow: var(--card-shadow);
-    transition-property: transform, border-color, box-shadow;
-    transition-duration: calc(var(--trans-short) * 1.5);
+    transition-property: width, height, transform, border-color, box-shadow;
+    transition-duration: var(--trans);
     transition-timing-function: var(--trans-function);
+
+    [data-bleh--scrolled="true"] & {
+        width: 32px !important;
+        height: 32px !important;
+    }
 }
 
 .auth-link.disclose-active .auth-avatar-desktop {

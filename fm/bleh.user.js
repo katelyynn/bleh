@@ -872,6 +872,11 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
         start_rain();
 
+        scroller();
+        window.onscroll = function(e) {
+            scroller();
+        }
+
         console.log(bleh_url,window.location.href,bleh_regex.test(window.location.href));
 
         if (window.location.href == bleh_url || bleh_regex.test(window.location.href)) {
@@ -939,6 +944,13 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             childList: true,
             subtree: true
         });
+    }
+
+    function scroller() {
+        if (window.scrollY > 0)
+            document.body.setAttribute('data-bleh--scrolled', 'true');
+        else
+            document.body.setAttribute('data-bleh--scrolled', 'false');
     }
 
     function append_style() {
