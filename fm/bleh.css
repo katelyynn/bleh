@@ -2455,6 +2455,7 @@ hr + .library-search-results-header {
     margin: unset !important;
     font-weight: var(--font-weight-medium);
     color: hsl(var(--c2));
+    cursor: pointer;
     transition-property: color, transform;
     transition-duration: var(--trans);
     transition-timing-function: var(--trans-function);
@@ -2485,9 +2486,19 @@ hr + .library-search-results-header {
 .navlist-more:before {
     --left: 16px;
 }
+[data-bleh--gallery-tab="overview"] .secondary-nav-item--gallery-overview .secondary-nav-item-link,
+[data-bleh--gallery-tab="bookmarks"] .secondary-nav-item--gallery-bookmarks .secondary-nav-item-link,
 .secondary-nav-item-link--active {
     color: hsl(var(--c1)) !important;
     font-weight: var(--font-weight-bold);
+
+    &:hover:after,
+    &:after {
+        content: '' !important;
+        position: absolute !important;
+        z-index: 1 !important;
+        display: block !important;
+    }
 }
 .secondary-nav-item-link::after {
     left: 6px !important;
@@ -5375,7 +5386,8 @@ button:not(.playback-app-container button, .top-artist-list-item, .pixel, .liste
         .player-bar-btn--loved,
         .love-button--loved,
         #manage_data .btn-primary,
-        .primary
+        .primary,
+        [data-bleh--image-is-bookmarked="true"]
     ) {
         --bg: hsl(var(--h3)) !important;
         --bg-hov: hsla(var(--h3), 80%) !important;
@@ -6684,7 +6696,7 @@ body:is(.namespace--user_library_music_artist_overview, .namespace--user_library
 .gallery-image-vote-buttons {
     flex-grow: unset;
     display: flex;
-    gap: 6px;
+    gap: var(--button-list-gap);
 }
 .gallery-image-vote-buttons:before, .gallery-image-vote-buttons:after {
     display: none !important;
@@ -7226,6 +7238,9 @@ form[action="/inbox/notifications"] {
     min-width: 300px;
 }
 
+.gallery-image-buttons {
+    align-items: start;
+}
 .gallery-image-buttons, .gallery-image-report-form {
     margin-top: var(--card-gap);
     width: fit-content;
@@ -13315,4 +13330,54 @@ trying to list every song ever made by someone identifying as a female, which is
 .btn--toggle-about-me-preview {
     position: relative;
     --mask: var(--icon-16-preview);
+}
+
+
+
+
+/*     BOOKMARK     */
+button.bleh--gallery-bookmark-image-btn {
+    position: relative;
+    width: 40px;
+    --font-size: 0;
+    --mask: var(--icon-16-bookmark);
+    margin-left: var(--button-list-gap) !important;
+}
+
+
+.bleh--no-image-bookmarks {
+    padding: 60px 0;
+}
+
+
+.bleh--nav-wrap {
+    margin-top: 76px;
+    display: flex;
+    justify-content: center;
+
+    .navlist {
+        width: var(--cards-width);
+        overflow: visible !important;
+    }
+
+    & + .page-content + .page-content,
+    & + .page-content {
+        padding-top: var(--card-gap) !important;
+    }
+}
+
+.secondary-nav-item-link {
+    .secondary-nav-item--gallery-overview & {
+        --mask: var(--icon-16-photo);
+    }
+    .secondary-nav-item--gallery-bookmarks & {
+        --mask: var(--icon-16-bookmark);
+    }
+}
+
+[data-bleh--gallery-tab="bookmarks"] .container.page-content:not(.bleh--bookmarks) {
+    display: none;
+}
+[data-bleh--gallery-tab="overview"] .container.page-content.bleh--bookmarks {
+    display: none;
 }
