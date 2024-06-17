@@ -320,6 +320,10 @@ const trans = {
             }
         },
         gallery: {
+            tabs: {
+                overview: 'Photos',
+                bookmarks: 'Saved'
+            },
             bookmarks: {
                 button: {
                     image_is_bookmarked: {
@@ -4283,7 +4287,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             patch_gallery_focused_image(focused_image_details);
         } else {
             // we are on the gallery main page
-            patch_gallery_image_listing();
+            patch_gallery_image_listing(image_list);
         }
     }
 
@@ -4294,7 +4298,46 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
         image_list.setAttribute('data-kate-processed', 'true');
 
+        let adaptive_skin = document.body.querySelector('.adaptive-skin-container');
+        let page_content = adaptive_skin.querySelector('.page-content');
+
+        document.body.setAttribute('data-bleh--gallery-tab', 'overview');
+
+
+        // create nav
+        let bookmark_nav = document.createElement('div');
+        bookmark_nav.classList.add('bleh--nav-wrap');
+        bookmark_nav.innerHTML = (`
+            <nav class="navlist secondary-nav">
+                <ul class="navlist-items">
+                    <li class="navlist-item secondary-nav-item secondary-nav-item--gallery-overview">
+                        <a class="secondary-nav-item-link" onclick="_set_gallery_page('overview')">
+                            ${trans[lang].gallery.tabs.overview}
+                        </a>
+                    </li>
+                    <li class="navlist-item secondary-nav-item secondary-nav-item--gallery-bookmarks">
+                        <a class="secondary-nav-item-link" onclick="_set_gallery_page('bookmarks')">
+                            ${trans[lang].gallery.tabs.bookmarks}
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        `);
+
+        adaptive_skin.insertBefore(bookmark_nav, page_content);
+
+
+        // content
+
+
         let bookmarked_images = JSON.parse(localStorage.getItem('bleh_bookmarked_images')) || {};
+    }
+
+    unsafeWindow._set_gallery_page = function(id) {
+        set_gallery_page(id);
+    }
+    function set_gallery_page(id) {
+        document.body.setAttribute('data-bleh--gallery-tab', id);
     }
 
     // gallery focused image
