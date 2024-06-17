@@ -17,7 +17,7 @@
 
 let version = '2024.0617';
 let lang = document.documentElement.getAttribute('lang');
-let valid_langs = ['en'];
+let valid_langs = ['en', 'pl'];
 
 if (!valid_langs.includes(lang)) {
     console.info('bleh - language fallback from', lang, 'to en (lang is not listed as valid)', valid_langs);
