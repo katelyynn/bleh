@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           bleh (dev)
 @namespace      github.com/katelyynn/bleh
-@version        2024.06161
+@version        2024.0617
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.css
@@ -13352,6 +13352,11 @@ button.bleh--gallery-bookmark-image-btn {
     --font-size: 0;
     --mask: var(--icon-16-bookmark);
     margin-left: var(--button-list-gap) !important;
+}
+
+
+.bleh--no-image-bookmarks {
+    padding: 60px 0;
 }
 
 

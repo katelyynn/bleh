@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         bleh
 // @namespace    http://last.fm/
-// @version      2024.0616.1
+// @version      2024.0617
 // @description  bleh!!! ^-^
 // @author       kate
 // @match        https://www.last.fm/*
@@ -15,7 +15,7 @@
 // @require      https://unpkg.com/tippy.js@6
 // ==/UserScript==
 
-let version = '2024.0616.1';
+let version = '2024.0617';
 let lang = document.documentElement.getAttribute('lang');
 let valid_langs = ['en'];
 
@@ -327,7 +327,7 @@ const trans = {
             bookmarks: {
                 name: 'Saved',
                 bio: 'Gallery photos can be saved for future reference.',
-                no_data: 'You have no images saved for this artist :(',
+                no_data: 'no images saved (・・ )',
                 button: {
                     image_is_bookmarked: {
                         name: 'You have saved this image'
@@ -4357,8 +4357,10 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 console.info(image);
                 let image_element = document.createElement('li');
                 image_element.classList.add('image-list-item-wrapper');
+                // link has to open in new tab as sometimes last.fm breaks the rendering
+                // of the gallery image, no clue..
                 image_element.innerHTML = (`
-                    <a class="image-list-item" href="/music/${artist_name}/+images/${image}">
+                    <a class="image-list-item" href="/music/${artist_name}/+images/${image}" _target="_blank">
                         <img src="https://lastfm.freetls.fastly.net/i/u/avatar170s/${image}" loading="lazy">
                     </a>
                 `);
