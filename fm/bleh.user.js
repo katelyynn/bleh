@@ -333,11 +333,11 @@ const trans = {
                         name: 'You have saved this image'
                     },
                     bookmark_this_image: {
-                        name: 'Bookmark this image',
+                        name: 'Save this image',
                         bio: 'Save this image for later'
                     },
                     unbookmark_this_image: {
-                        name: 'Remove bookmark for this image',
+                        name: 'Unsave this image',
                         bio: 'Unsave this image'
                     }
                 }
@@ -349,6 +349,10 @@ const trans = {
             dev: 'Przełącz tryb deweloperski',
             configure_bleh: 'Skonfiguruj bleh',
             shouts: 'Wiadomości'
+        },
+        music: {
+            submit_lastfm_correction: 'Submit correction to Last.fm',
+            submit_bleh_correction: 'Submit correction to bleh'
         },
         statistics: {
             scrobbles: {
@@ -566,6 +570,35 @@ const trans = {
                             name: 'Domyślny przedział czasowy'
                         }
                     }
+                },
+                privacy: {
+                    name: 'Prywatność',
+                    recent_listening: {
+                        name: 'Hide your recent listening history',
+                        bio: 'Keep your recent listens a secret o.O'
+                    },
+                    receiving_msgs: {
+                        name: 'Control who can interact with you',
+                        bio: 'This setting controls who can post shouts and message you privately.',
+                        settings: {
+                            everyone: {
+                                name: 'Everyone',
+                                bio: 'Everyone except who you have ignored'
+                            },
+                            neighbours: {
+                                name: 'Who you follow and neighbours',
+                                bio: 'Everyone who you have chosen to follow, along with your Last.fm neighbours'
+                            },
+                            follow: {
+                                name: 'Who you follow only',
+                                bio: 'Only users who you have chosen to follow'
+                            }
+                        }
+                    },
+                    disable_shoutbox: {
+                        name: 'Hide your shoutbox',
+                        bio: 'Your shoutbox will be hidden for you and anyone else.'
+                    }
                 }
             },
             actions: {
@@ -600,6 +633,30 @@ const trans = {
                             confirm: 'Tak, resetuj moje ustawienia',
                             export: 'Eksportuj najpierw'
                         }
+                    }
+                }
+            }
+        },
+        gallery: {
+            tabs: {
+                overview: 'Zdjęcia',
+                bookmarks: 'Saved'
+            },
+            bookmarks: {
+                name: 'Saved',
+                bio: 'Gallery photos can be saved for future reference.',
+                no_data: 'no images saved (・・ )',
+                button: {
+                    image_is_bookmarked: {
+                        name: 'You have saved this image'
+                    },
+                    bookmark_this_image: {
+                        name: 'Save this image',
+                        bio: 'Save this image for later'
+                    },
+                    unbookmark_this_image: {
+                        name: 'Unsave this image',
+                        bio: 'Unsave this image'
                     }
                 }
             }
