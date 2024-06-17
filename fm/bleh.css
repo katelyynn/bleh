@@ -13375,7 +13375,7 @@ button.bleh--gallery-bookmark-image-btn {
     }
 }
 
-[data-bleh--gallery-tab="bookmarks"] .container.page-content:not(.bleh--bookmarks) {
+[data-bleh--gallery-tab="bookmarks"] .container.page-content:not(.bleh--bookmarks):has(.image-list) {
     display: none;
 }
 [data-bleh--gallery-tab="overview"] .container.page-content.bleh--bookmarks {
