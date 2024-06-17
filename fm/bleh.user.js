@@ -4277,6 +4277,10 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     // patch gallery pages
     function patch_gallery_page() {
         let header = document.body.querySelector('header');
+
+        if (header == undefined)
+            return;
+
         if (header.classList.contains('header-new--album'))
             return;
 
