@@ -3571,8 +3571,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         } else if (page == 'performance') {
             return (`
                 <div class="bleh--panel">
-                    <h3>Performance</h3>
-                    <p>Running into noticeable issues in theme loading? Try out these settings.</p>
+                    <h3>${trans[lang].settings.performance.name}</h3>
+                    <p>${trans[lang].settings.performance.bio}</p>
                     <div class="toggle-container" id="container-dev">
                         <button class="btn reset" onclick="_reset_item('dev')">${trans[lang].settings.reset}</button>
                         <div class="heading">
