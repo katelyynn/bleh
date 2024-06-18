@@ -5408,7 +5408,8 @@ button:not(.playback-app-container button, .top-artist-list-item, .pixel, .liste
     &:is(.gallery-next, .gallery-previous):hover .arrow,
     &:hover {
         background-color: var(--bg-hov) !important;
-        transition-property: padding !important;
+        transition-property: padding, transform !important;
+        transition-duration: 0.1s !important;
         --transition-property: opacity, left;
         box-shadow: var(--shadow-hov) !important;
     }
@@ -11812,9 +11813,9 @@ input[type="range"]::-moz-range-thumb {
         [data-bleh--inbuilt-id_message_privacy="all"] &#primary-selection-receiving_msgs-everyone,
         [data-bleh--inbuilt-id_message_privacy="n"] &#primary-selection-receiving_msgs-neighbours,
         [data-bleh--inbuilt-id_message_privacy="f"] &#primary-selection-receiving_msgs-follow {
-            --bg: hsla(var(--h3), 25%);
-            --bg-hov: hsla(var(--h3), 35%);
-            --bg-atv: hsla(var(--h3), 45%);
+            --bg: hsla(var(--h4), 35%);
+            --bg-hov: hsla(var(--h4), 45%);
+            --bg-atv: hsla(var(--h4), 55%);
             --shadow: none;
             --shadow-hov: none;
             /*--mask: var(--icon-16-check);*/
