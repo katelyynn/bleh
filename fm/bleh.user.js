@@ -2597,21 +2597,29 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
     // patch following
     function patch_profile_following() {
+        // this happens on your main profile, no matter the tab
+        let following_tab = document.body.querySelector('.secondary-nav-item--following');
+        if (following_tab == undefined)
+            return;
+
+        if (following_tab.hasAttribute('data-kate-processed'))
+            return;
+
+        following_tab.setAttribute('data-kate-processed', 'true');
+        following_tab.querySelector('a').textContent = trans[lang].profile.friends.name;
+
+
+        // the rest happens on a following/followers page
         let on_following_page = document.body.classList.contains('namespace--user_following');
         let on_followers_page = document.body.classList.contains('namespace--user_followers');
 
         if (!on_following_page && !on_followers_page)
             return;
 
-        let following_tab = document.body.querySelector('.secondary-nav-item--followers');
-        let followers_tab = document.body.querySelector('.secondary-nav-item--following');
+        //let following_tab = document.body.querySelector('.secondary-nav-item--following');
+        let followers_tab = document.body.querySelector('.secondary-nav-item--followers');
         let following_tab_html = following_tab.outerHTML;
         let followers_tab_html = followers_tab.outerHTML;
-
-        if (following_tab.hasAttribute('data-kate-processed'))
-            return;
-
-        following_tab.setAttribute('data-kate-processed', 'true');
 
         let tab = undefined;
         if (on_followers_page)
