@@ -2581,44 +2581,93 @@ hr + .library-search-results-header {
 
 /*     ICON     */
 /* for profiles and media types */
-.secondary-nav-item--overview a:before {
-    --mask: var(--icon-16-layout);
+.secondary-nav-item--overview {
+    order: 1;
+
+    a {
+        --mask: var(--icon-16-home);
+    }
 }
 [data-analytics-label="home"]:before {
     --mask: var(--icon-16-home);
 }
-.secondary-nav-item--listening-report a:before {
-    --mask: var(--icon-16-listening-report);
+.secondary-nav-item--listening-report {
+    order: 2;
+
+    a {
+        --mask: var(--icon-16-listening-report);
+    }
 }
-.secondary-nav-item--library a:before {
-    --mask: var(--icon-16-library);
+.secondary-nav-item--library {
+    order: 3;
+
+    a {
+        --mask: var(--icon-16-library);
+    }
 }
-.secondary-nav-item--playlists a:before {
-    --mask: var(--icon-16-playlist);
+.secondary-nav-item--playlists {
+    order: 10;
+
+    a {
+        --mask: var(--icon-16-playlist);
+    }
 }
-.secondary-nav-item--following a:before {
-    --mask: var(--icon-16-user);
+
+.secondary-nav-item--following,
+.secondary-nav-item--followers {
+    order: 4;
+
+    a {
+        --mask: var(--icon-16-users);
+    }
 }
-.secondary-nav-item--followers a:before {
-    --mask: var(--icon-16-users);
+
+.navlist-items:not(.bleh--navlist-items) .secondary-nav-item--following + .secondary-nav-item--followers:not(:has(a.secondary-nav-item-link--active)),
+.navlist-items:not(.bleh--navlist-items):has(.secondary-nav-item--followers .secondary-nav-item-link--active) .secondary-nav-item--following {
+    display: none;
 }
-.secondary-nav-item--loved a:before {
-    --mask: var(--icon-16-heart);
+
+.secondary-nav-item--loved {
+    order: 7;
+
+    a {
+        --mask: var(--icon-16-heart);
+    }
 }
-.secondary-nav-item--obsessions a:before {
-    --mask: var(--icon-16-obsession);
+.secondary-nav-item--obsessions {
+    order: 8;
+
+    a {
+        --mask: var(--icon-16-obsession);
+    }
 }
-.secondary-nav-item--events a:before {
-    --mask: var(--icon-16-event);
+.secondary-nav-item--events {
+    order: 9;
+
+    a {
+        --mask: var(--icon-16-event);
+    }
 }
-.secondary-nav-item--neighbours a:before {
-    --mask: var(--icon-16-neighbour);
+.secondary-nav-item--neighbours {
+    order: 5;
+
+    a {
+        --mask: var(--icon-16-neighbour);
+    }
 }
-.secondary-nav-item--tags a:before {
-    --mask: var(--icon-16-tag);
+.secondary-nav-item--tags {
+    order: 11;
+
+    a {
+        --mask: var(--icon-16-tag);
+    }
 }
-.secondary-nav-item--shoutbox a:before {
-    --mask: var(--icon-16-shoutbox);
+.secondary-nav-item--shoutbox {
+    order: 6;
+
+    a {
+        --mask: var(--icon-16-shoutbox);
+    }
 }
 .secondary-nav-item--artists a:before {
     --mask: var(--icon-16-artist);
@@ -13363,6 +13412,10 @@ button.bleh--gallery-bookmark-image-btn {
     margin-top: 76px;
     display: flex;
     justify-content: center;
+
+    .content-top + & {
+        margin-top: var(--card-gap);
+    }
 
     .navlist {
         width: var(--cards-width);

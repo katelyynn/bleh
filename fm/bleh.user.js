@@ -45,7 +45,10 @@ const trans = {
         },
         profile: {
             cannot_follow_user: 'You cannot follow this user.',
-            on_ignore_list: 'You are on this user\'s ignore list.'
+            on_ignore_list: 'You are on this user\'s ignore list.',
+            friends: {
+                name: 'Friends'
+            }
         },
         settings: {
             save: 'Save',
@@ -2331,6 +2334,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         if (profile_header == undefined)
             return;
 
+        patch_profile_following();
+
         let profile_name = profile_header.querySelector('a');
 
         // profile note
@@ -2587,6 +2592,53 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         let main_content = document.querySelector('.main-content');
         main_content.classList.remove('content--bleh-redacted');
         document.body.removeChild(document.body.querySelector('.bleh--redacted-message'));
+    }
+
+
+    // patch following
+    function patch_profile_following() {
+        let on_following_page = document.body.classList.contains('namespace--user_following');
+        let on_followers_page = document.body.classList.contains('namespace--user_followers');
+
+        if (!on_following_page && !on_followers_page)
+            return;
+
+        let following_tab = document.body.querySelector('.secondary-nav-item--followers');
+        let followers_tab = document.body.querySelector('.secondary-nav-item--following');
+        let following_tab_html = following_tab.outerHTML;
+        let followers_tab_html = followers_tab.outerHTML;
+
+        if (following_tab.hasAttribute('data-kate-processed'))
+            return;
+
+        following_tab.setAttribute('data-kate-processed', 'true');
+
+        let tab = undefined;
+        if (on_followers_page)
+            tab = following_tab;
+        else
+            tab = followers_tab;
+
+        tab.querySelector('a').textContent = trans[lang].profile.friends.name;
+
+
+        let adaptive_skin = document.body.querySelector('.adaptive-skin-container');
+        let page_content = adaptive_skin.querySelector('.page-content');
+
+
+        // create nav
+        let bookmark_nav = document.createElement('div');
+        bookmark_nav.classList.add('bleh--nav-wrap');
+        bookmark_nav.innerHTML = (`
+            <nav class="navlist secondary-nav">
+                <ul class="navlist-items bleh--navlist-items">
+                    ${following_tab_html}
+                    ${followers_tab_html}
+                </ul>
+            </nav>
+        `);
+
+        adaptive_skin.insertBefore(bookmark_nav, page_content);
     }
 
 
