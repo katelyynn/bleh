@@ -17,7 +17,7 @@
 
 let version = '2024.0617';
 let lang = document.documentElement.getAttribute('lang');
-let valid_langs = ['en'];
+let valid_langs = ['en', 'pl'];
 
 if (!valid_langs.includes(lang)) {
     console.info('bleh - language fallback from', lang, 'to en (lang is not listed as valid)', valid_langs);
@@ -333,17 +333,335 @@ const trans = {
                         name: 'You have saved this image'
                     },
                     bookmark_this_image: {
-                        name: 'Bookmark this image',
+                        name: 'Save this image',
                         bio: 'Save this image for later'
                     },
                     unbookmark_this_image: {
-                        name: 'Remove bookmark for this image',
+                        name: 'Unsave this image',
                         bio: 'Unsave this image'
                     }
                 }
             }
         }
-    }
+    },
+    pl: {
+        auth_menu: {
+            dev: 'Przełącz tryb deweloperski',
+            configure_bleh: 'Skonfiguruj bleh',
+            shouts: 'Wiadomości'
+        },
+        music: {
+            submit_lastfm_correction: 'Submit correction to Last.fm',
+            submit_bleh_correction: 'Submit correction to bleh'
+        },
+        statistics: {
+            scrobbles: {
+                name: 'Twoje scrobble'
+            }
+        },
+        profile: {
+            cannot_follow_user: 'Nie możesz zaobserwować tego użytkownika.',
+            on_ignore_list: 'Jesteś na liście ignorowanych tego użytkownika.'
+        },
+        settings: {
+            save: 'Zapisz',
+            cancel: 'Anuluj',
+            close: 'Zamknij',
+            clear: 'Wyczyść',
+            done: 'Gotowe',
+            continue: 'Kontynuuj',
+            reset: 'Przywróć domyślne',
+            examples: {
+                button: 'Przycisk przykładowy'
+            },
+            home: {
+                name: 'Strona główna',
+                brand: 'bleh',
+                version: 'Wersja {v}',
+                recommended: 'Zalecane ustawienia',
+                issues: {
+                    name: 'Problemy',
+                    bio: 'Zgłoś błędy'
+                },
+                colours: {
+                    name: 'Kolory',
+                    bio: 'Wybierz swój ulubiony!'
+                }
+            },
+            themes: {
+                name: 'Motywy',
+                bio: 'Wybierz od jasnego do ciemnego.',
+                dark: {
+                    name: 'Ciemny',
+                    bio: 'Domyślna wersja bleh'
+                },
+                darker: {
+                    name: 'Ciemniejszy',
+                    bio: 'Coś pomiędzy'
+                },
+                oled: {
+                    name: 'Północny',
+                    bio: 'Całkowita ciemność'
+                },
+                light: {
+                    name: 'Jasny',
+                    bio: 'Mało koloru i dużo światła'
+                }
+            },
+            accessibility: {
+                name: 'Accessibility',
+                accessible_name_colours: {
+                    name: 'Preferowane kolory dostępnej nazwy',
+                    bio: 'Użyj domyślnego koloru tekstu nagłówka zamiast koloru akcentowego.'
+                },
+                underline_links: {
+                    name: 'Zawsze podkreślaj linki',
+                    bio: 'Podkreślaj linki do elementów interaktywnych.'
+                }
+            },
+            customise: {
+                name: 'Dostosuj',
+                colours: {
+                    name: 'Kolory',
+                    presets: 'Ustawienia wstępne',
+                    manual: 'Ręcznie',
+                    custom: 'Stwórz niestandardowy kolor',
+                    modals: {
+                        custom_colour: {
+                            preface: 'Kolory są kontrolowane przez trzy wartości: odcień (hue), nasycenie (saturation) i jasność (lightness). Przesuń suwaki, aby dostosować kolor.',
+                            hue: 'Kolor akcentu (hue)',
+                            sat: 'Nasycenie (saturation)',
+                            lit: 'Jasność (lightness)'
+                        }
+                    }
+                },
+                artwork: {
+                    name: 'Okładka'
+                },
+                gloss: {
+                    name: 'Nakładka błyszcząca',
+                    bio: 'Dodaj odblasku do wszystkich okładek.'
+                },
+                display: {
+                    name: 'Wyświetlacz',
+                    shout_preview: 'jakikolwiek losowy tekst, który <a href="https://cutensilly.org">nic nie znaczy</a>'
+                },
+                colourful_counts: {
+                    name: 'Użyj gradientu kolorów dla wszystkich czasów rankingów',
+                    bio: 'Kolor jest przypisywany na podstawie twojej pozycji w wszechczasowych statystykach artystów.'
+                },
+                format_guest_features: {
+                    name: 'Formatuj występy i tagi utworów',
+                    bio: 'Mniej eksponuje występy i tagi utworów (np. Remix, Deluxe Edition, itp.)'
+                },
+                gendered_tags: {
+                    name: 'Ukryj tagi związane z płcią',
+                    bio: 'Domyślnie tagi związane z płcią są ukryte w bleh ze względu na ich nieuporządkowaną i problematyczną nature.'
+                },
+                rain: {
+                    name: 'Niech pada!',
+                    bio: 'deszcz :3c (może wpływać na wydajność!! może też wyglądać źle!!)'
+                },
+                hide_hateful: {
+                    name: 'Ukryj obraźliwe wiadomości',
+                    bio: 'Użytkownicy są zgłaszani przez społeczność ze względu na obraźliwe treści. Decydujesz czy chcesz zobaczyć wiadomości od tych użytkowników.'
+                }
+            },
+            performance: {
+                name: 'Wydajność',
+                bio: 'Napotykasz problemy z ładowaniem motywu? Wypróbuj te ustawienia.',
+                dev: {
+                    name: 'Wyłącz wbudowane ładowanie motywu',
+                    bio: 'Pozwala to na ładowanie wbudowanego motywu za pomocą rozszerzenia Stylus, co może być bardziej wydajne.',
+                    modals: {
+                        prompt: {
+                            alert: 'Po odświeżeniu strony wbudowany motyw bleh zostanie wyłączony (chyba że ponownie wyłączysz tę opcję).',
+                            stylus: 'Jeśli nie masz jeszcze rozszerzenia <strong>Stylus</strong>, wybierz swoją przeglądarkę poniżej:',
+                            browsers: {
+                                chrome: {
+                                    name: 'Chrome',
+                                    bio: 'dla Chrome, Edge, Brave, Opera'
+                                },
+                                firefox: {
+                                    name: 'Firefox',
+                                    bio: 'tylko dla Firefox'
+                                }
+                            }
+                        },
+                        continue: {
+                            next_step: 'Gdy już zainstalujesz rozszerzenie, kliknij "Zainstaluj styl" na nowej karcie, która się otworzy.'
+                        },
+                        finish: {
+                            alert: 'Gotowe! Od teraz motyw będzie obsługiwany za pomocą Stylus.'
+                        }
+                    }
+                }
+            },
+            profiles: {
+                name: 'Profile',
+                bio: 'Zarządzaj swoimi danymi i danymi zapisanych na innych profilach.',
+                notes: {
+                    name: 'Notatki',
+                    header: 'Notatka',
+                    placeholder: 'Wprowadź lokalną notatkę dla tego użytkownika',
+                    edit: 'Edytuj notatkę',
+                    delete: 'Usuń notatkę',
+                    edit_user: 'Edytuj notatkę dla {u}',
+                    delete_user: 'Usuń notatkę dla {u}'
+                }
+            },
+            inbuilt: {
+                profile: {
+                    name: 'Profil',
+                    subtitle: {
+                        name: 'Podtytuł',
+                        aka: 'aka.',
+                        pronouns: 'zaimki'
+                    },
+                    pronoun_tip: 'Wskazówka: Jeśli zaimki są umieszczone jako pierwsze, "aka." zmieni się na "zaimki".',
+                    country: 'Kraj',
+                    website: 'Strona internetowa',
+                    about: 'O mnie',
+                    toggle_preview: {
+                        name: 'Przełącz podgląd',
+                        bio: 'Podgląd, jak twój profil wygląda dla innych',
+                        note: 'Uwaga: Nowe linie, linki itp. są widoczne tylko dla innych użytkowników bleh, zwykli użytkownicy Last.fm widzą nowe linie jako spacje.'
+                    },
+                    avatar: {
+                        name: 'Edytuj awatar',
+                        upload: 'Prześlij plik',
+                        delete: 'Usuń awatar'
+                    }
+                },
+                charts: {
+                    name: 'Rankingi',
+                    recent: {
+                        count: {
+                            name: 'Liczba utworów do wyświetlenia'
+                        },
+                        artwork: {
+                            name: 'Wyświetl okładki albumów'
+                        },
+                        realtime: {
+                            name: 'Aktualizuj utwory w czasie rzeczywistym'
+                        }
+                    },
+                    artists: {
+                        timeframe: {
+                            name: 'Domyślny przedział czasowy'
+                        },
+                        style: {
+                            name: 'Styl rankingu'
+                        }
+                    },
+                    albums: {
+                        timeframe: {
+                            name: 'Domyślny przedział czasowy'
+                        },
+                        style: {
+                            name: 'Styl rankingu'
+                        }
+                    },
+                    tracks: {
+                        count: {
+                            name: 'Liczba utworów do wyświetlenia'
+                        },
+                        timeframe: {
+                            name: 'Domyślny przedział czasowy'
+                        }
+                    }
+                },
+                privacy: {
+                    name: 'Prywatność',
+                    recent_listening: {
+                        name: 'Ukryj historię ostatnich odsłuchów',
+                        bio: 'Zachowaj tajemnicę swoich ostatnich odsłuchów o.O'
+                    },
+                    receiving_msgs: {
+                        name: 'Kontroluj kto może się z Tobą zkontaktować',
+                        bio: 'To ustawienie kontroluje kto może wysyłać wiadomosci i prywatne wiadomości do ciebie.',
+                        settings: {
+                            everyone: {
+                                name: 'Każdy',
+                                bio: 'Każdy oprócz osób które zostały przez ciebie zignorowane'
+                            },
+                            neighbours: {
+                                name: 'Osoby których obserwujesz i sąsiadujący',
+                                bio: 'Wszyscy których obserwujesz oraz Twoi sąsiedzi na Last.fm'
+                            },
+                            follow: {
+                                name: 'Tylko osoby które obserwujesz',
+                                bio: 'Tylko użytkownicy których obserwujesz'
+                            }
+                        }
+                    },
+                    disable_shoutbox: {
+                        name: 'Ukryj swój shoutbox',
+                        bio: 'Twój shoutbox zostanie ukryty dla ciebie i dla innych użytkowników.'
+                    }
+                }
+            },
+            actions: {
+                import: {
+                    name: 'Importuj',
+                    modals: {
+                        initial: {
+                            name: 'Importuj ustawienia z poprzedniej instalacji',
+                            alert: 'Wszystko co zaimportujesz zastąpi twoje bieżące ustawienia. Importując ustawienia z internetu upewnij się że źródło jest zaufane.'
+                        },
+                        failed: {
+                            name: 'Import nie powiódł się',
+                            alert: 'Nie udało się przetworzyć importowanych ustawień. Żadne zmiany nie zostały wprowadzone.'
+                        }
+                    }
+                },
+                export: {
+                    name: 'Eksportuj',
+                    modals: {
+                        initial: {
+                            name: 'Eksportuj swoje bieżące ustawienia',
+                            alert: 'Twoje bieżące ustawienia są w polu tekstowym poniżej, gotowe do skopiowania.'
+                        }
+                    }
+                },
+                reset: {
+                    name: 'Resetuj',
+                    modals: {
+                        initial: {
+                            name: 'Resetuj ustawienia do domyślnych',
+                            alert: 'Twoje ustawienia zostaną <strong>zresetowane do domyślnych</strong> bez możliwości cofnięcia. Czy na pewno chcesz kontynuować?',
+                            confirm: 'Tak, resetuj moje ustawienia',
+                            export: 'Eksportuj najpierw'
+                        }
+                    }
+                }
+            }
+        },
+        gallery: {
+            tabs: {
+                overview: 'Zdjęcia',
+                bookmarks: 'Zapisane'
+            },
+            bookmarks: {
+                name: 'Zapisane',
+                bio: 'Zdjęcia galerii można zapisać na przyszłość.',
+                no_data: 'brak zapisanych zdjęć (・・ )',
+                button: {
+                    image_is_bookmarked: {
+                        name: 'Masz to zdjęcie zapisane'
+                    },
+                    bookmark_this_image: {
+                        name: 'Zapisz to zdjęcie',
+                        bio: 'Zapisz to zdjęcie na później'
+                    },
+                    unbookmark_this_image: {
+                        name: 'Usuń zapis tego zdjęcia',
+                        bio: 'Usuń zapis tego zdjęcia'
+                    }
+                }
+            }
+        }
+    },
 }
 
 tippy.setDefaultProps({
@@ -3310,8 +3628,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         } else if (page == 'performance') {
             return (`
                 <div class="bleh--panel">
-                    <h3>Performance</h3>
-                    <p>Running into noticeable issues in theme loading? Try out these settings.</p>
+                    <h3>${trans[lang].settings.performance.name}</h3>
+                    <p>${trans[lang].settings.performance.bio}</p>
                     <div class="toggle-container" id="container-dev">
                         <button class="btn reset" onclick="_reset_item('dev')">${trans[lang].settings.reset}</button>
                         <div class="heading">
