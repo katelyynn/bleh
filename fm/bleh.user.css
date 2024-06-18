@@ -243,8 +243,8 @@ body {
     --playlist-cover-size: 230px;
     --playlist-author-avatar-size: 36px;
 
-    --shout-avatar-size: 52px;
-    --shout-inset: 52px;
+    --shout-avatar-size: 48px;
+    --shout-inset: 48px;
 
     --avatar-generic-background: hsl(var(--b6));
     --avatar-radius: 50%;
@@ -4911,6 +4911,7 @@ the body text becomes bigger by default - this reverts that */
     align-items: center;
     right: unset;
     top: unset;
+    text-transform: lowercase;
     transition-property: color;
     transition-duration: var(--trans);
     transition-timing-function: var(--trans-function);
@@ -4924,28 +4925,8 @@ the body text becomes bigger by default - this reverts that */
         font-size: 12px;
         position: absolute;
         top: 0;
-        left: calc(16px + 6px);
-        width: 100px;
-        opacity: 0;
-        transition-property: opacity;
-        transition-duration: var(--trans);
-        transition-timing-function: var(--trans-function);
-    }
-
-    /* icon */
-    &:after {
-        content: '';
-        background-color: hsl(var(--l2-c));
-        --mask: var(--icon-16-copy);
-        mask-image: var(--mask);
-        -webkit-mask-image: var(--mask);
-        width: 16px;
-        height: 16px;
-        display: block;
-        position: absolute;
-        /*inset: 4px calc(50% - 8px);*/
-        top: 2px;
         left: 0;
+        width: 100px;
         opacity: 0;
         transition-property: opacity;
         transition-duration: var(--trans);
@@ -4955,10 +4936,12 @@ the body text becomes bigger by default - this reverts that */
     /* hide date on hover */
     &:hover {
         color: transparent !important;
+        transition: none;
 
         /* ..then show pseudo elements */
-        &:before, &:after {
+        &:before {
             opacity: 1;
+            transition: none;
         }
     }
 }
@@ -5097,9 +5080,9 @@ leading to a gap from their own css */
     --left: 0;
     --top: 0;
     --margin-top: 0;
-    --mask-size: 20px;
+    --mask-size: 18px;
     background: var(--override-bg, none) !important;
-    filter: drop-shadow(2px 0px 0 hsl(var(--b5))) drop-shadow(0px 2px 0 hsl(var(--b5))) drop-shadow(-2px -0px 0 hsl(var(--b5))) drop-shadow(-0px -2px 0 hsl(var(--b5))) drop-shadow(0px 4px 0px hsl(var(--b5)));
+    filter: drop-shadow(2px 0px 0 hsl(var(--b5))) drop-shadow(0px 2px 0 hsl(var(--b5))) drop-shadow(-2px -0px 0 hsl(var(--b5))) drop-shadow(-0px -2px 0 hsl(var(--b5))) drop-shadow(0px 3px 0px hsl(var(--b5)));
 }
 .shout-user-avatar, .avatar {
     /*background-color: var(--avatar-generic-background); support for transparent avatars */
@@ -5111,8 +5094,9 @@ leading to a gap from their own css */
 .inbox-notifications .inbox-notifications__avatar--big-size .avatar-status-dot,
 .obsession-details-intro-avatar-wrap .avatar-status-dot
 {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
+    --mask-size: 18px;
 }
 
 .attendee-summary-user-avatar .avatar-status-dot,
