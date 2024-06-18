@@ -4408,9 +4408,15 @@ better than the default selector '#app a' i suppose */
 
 /*     ACTIVE     */
 .chartlist-row--now-scrobbling {
-    --bg: var(--hue-gradient,hsla(var(--h3), 45%)) !important;
+    --bg: hsla(var(--h3), 45%) !important;
     --bg-hov: hsla(var(--h3), 60%) !important;
     --shadow: 0 0 50px 5px hsla(var(--h3), 45%) !important;
+
+    [data-bleh--theme="light"] & {
+        --bg: hsla(var(--h4), 35%) !important;
+        --bg-hov: hsla(var(--h4), 50%) !important;
+        --shadow: 0 0 50px 5px hsla(var(--h4), 35%) !important;
+    }
 }
 .chartlist-row--now-scrobbling:before {
     content: '';
@@ -5877,9 +5883,13 @@ span.header-new-gallery-inner a:before,
 }
 /* do not use section-with-control !! that refers to buttons
 on the bottom of a panel !! */
+#top-tracks > h2,
 :is(.grid-items-section /* other profiles */, .section-with-settings /* your profile */, .section-controls) > :is(h2, h3) {
     height: 32px;
     width: fit-content;
+}
+#top-tracks > .buffer-standard {
+    margin-top: 12px;
 }
 
 .section-controls {
