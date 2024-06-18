@@ -2599,8 +2599,6 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 let converter = new showdown.Converter({
                     emoji: true,
                     excludeTrailingPunctuationFromURLs: true,
-                    ghMentions: true,
-                    ghMentionsLink: '/user/{u}',
                     headerLevelStart: 5,
                     noHeaderId: true,
                     openLinksInNewWindow: true,
