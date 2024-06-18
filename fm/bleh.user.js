@@ -33,11 +33,14 @@ const trans = {
         },
         music: {
             submit_lastfm_correction: 'Submit correction to Last.fm',
-            submit_bleh_correction: 'Submit correction to bleh'
+            submit_bleh_correction: 'Submit correction to bleh',
         },
         statistics: {
             scrobbles: {
                 name: 'Your scrobbles'
+            },
+            plays: {
+                name: 'plays'
             }
         },
         profile: {
@@ -357,6 +360,9 @@ const trans = {
         statistics: {
             scrobbles: {
                 name: 'Twoje scrobble'
+            },
+            plays: {
+                name: 'odtworzeń'
             }
         },
         profile: {
@@ -2739,7 +2745,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 if (!artist_statistic.getAttribute('href').endsWith('DAYS') && !artist_statistic.classList.contains('grid-items-item-aux-block')) {
                     console.info('bleh - artist grid plays match');
 
-                    let scrobbles = parseInt(artist_statistic.textContent.replaceAll(',','').replace(' plays',''));
+                    let scrobbles = parseInt(artist_statistic.textContent.replaceAll(',','').replace(` ${trans[lang].statistics.plays.name}`,''));
                     let parsed_scrobble_as_rank = parse_scrobbles_as_rank(scrobbles);
 
                     artist_statistic.setAttribute('data-bleh--scrobble-milestone',parsed_scrobble_as_rank.milestone);
