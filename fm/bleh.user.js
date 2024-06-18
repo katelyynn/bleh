@@ -2123,6 +2123,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             smartIndentationFix: true
         });
         let parsed_body = converter.makeHtml(value
+        .replace(/(@[a-zA-Z0-9_]+)/g, '[$1](/user/$1)')
         .replace(/&/g, '&amp;')
         .replace(/</g, '&lt;')
         .replace(/>/g, '&gt;')
@@ -2476,6 +2477,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 smartIndentationFix: true
             });
             let parsed_body = converter.makeHtml(about_me_text.textContent
+            .replace(/(@[a-zA-Z0-9_]+)/g, '[$1](/user/$1)')
             .replace(/&/g, '&amp;')
             .replace(/</g, '&lt;')
             .replace(/>/g, '&gt;')
@@ -2559,6 +2561,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     function save_profile_note(username) {
         let profile_notes = JSON.parse(localStorage.getItem('bleh_profile_notes')) || {};
         profile_notes[username] = document.getElementById('bleh--profile-note').value
+        .replace(/(@[a-zA-Z0-9_]+)/g, '[$1](/user/$1)')
         .replace(/&/g, '&amp;')
         .replace(/</g, '&lt;')
         .replace(/>/g, '&gt;')
@@ -2607,6 +2610,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     smartIndentationFix: true
                 });
                 let parsed_body = converter.makeHtml(shout_body.textContent
+                .replace(/(@[a-zA-Z0-9_]+)/g, '[$1](/user/$1)')
                 .replace(/&/g, '&amp;')
                 .replace(/</g, '&lt;')
                 .replace(/>/g, '&gt;')
@@ -3766,6 +3770,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     unsafeWindow._save_profile_note_in_window = function(username) {
         let profile_notes = JSON.parse(localStorage.getItem('bleh_profile_notes')) || {};
         let value_to_save = document.getElementById('bleh--profile-note').value
+        .replace(/(@[a-zA-Z0-9_]+)/g, '[$1](/user/$1)')
         .replace(/&/g, '&amp;')
         .replace(/</g, '&lt;')
         .replace(/>/g, '&gt;')
