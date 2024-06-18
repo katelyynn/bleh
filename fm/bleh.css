@@ -5961,9 +5961,24 @@ on the bottom of a panel !! */
 
 .auth-dropdown-menu-item {
     width: 100% !important;
-}
-.auth-dropdown-item-right {
-    color: hsl(var(--c3));
+
+    .auth-dropdown-item-row {
+        display: flex;
+        gap: var(--card-gap);
+
+        .auth-dropdown-item-left {
+            display: flex;
+            flex: 1;
+        }
+        .auth-dropdown-item-right {
+            display: flex;
+            color: hsl(var(--c3));
+
+            .notification-count-badge {
+                margin: unset !important;
+            }
+        }
+    }
 }
 
 .date-range-picker-preset a {

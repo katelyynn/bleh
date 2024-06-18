@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           bleh (dev)
 @namespace      github.com/katelyynn/bleh
-@version        2024.0617
+@version        2024.0618
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.css
@@ -5971,9 +5971,24 @@ on the bottom of a panel !! */
 
 .auth-dropdown-menu-item {
     width: 100% !important;
-}
-.auth-dropdown-item-right {
-    color: hsl(var(--c3));
+
+    .auth-dropdown-item-row {
+        display: flex;
+        gap: var(--card-gap);
+
+        .auth-dropdown-item-left {
+            display: flex;
+            flex: 1;
+        }
+        .auth-dropdown-item-right {
+            display: flex;
+            color: hsl(var(--c3));
+
+            .notification-count-badge {
+                margin: unset !important;
+            }
+        }
+    }
 }
 
 .date-range-picker-preset a {
