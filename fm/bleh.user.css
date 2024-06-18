@@ -225,7 +225,7 @@ body {
     --card-radius: 8px;
     --card-shadow: hsla(var(--b7), 0.25) 0 2px 4px 0;
     --card-gap: 15px;
-    --card-border: 1px solid hsl(var(--b4));
+    --card-border: 1px solid hsla(var(--b4), 0.5);
 
     --cards-main-width: 902px;
     --cards-sidebar-width: 400px;
@@ -262,8 +262,8 @@ body {
     --interactable-outer: hsla(var(--b7), 0.3) 0 2px 3px 0;
     --interactable-active-outer: hsla(var(--c1), 0.03) 0 2px 25px 0;
 
-    --interact-shadow: var(--interactable-inset), var(--interactable-outer);
-    --active-shadow: var(--interactable-inset), var(--interactable-outer), var(--interactable-active-outer);
+    --interact-shadow: var(--interactable-outer);
+    --active-shadow: var(--interactable-outer), var(--interactable-active-outer);
 
     --chartlist-fill: var(--hue-gradient, hsl(var(--h3)));
 
@@ -1376,7 +1376,7 @@ body[class*="namespace--user_library_"] .col-sidebar, .library-header,
     border-left: var(--border-sides, var(--card-specific-border, var(--card-border)));
     border-right: var(--border-sides, var(--card-specific-border, var(--card-border)));
     border-top: var(--card-border-top, var(--card-specific-border, var(--card-border)));
-    border-bottom: var(--card-border-bottom, var(--card-specific-border, 1px solid hsl(var(--b3))));
+    border-bottom: var(--card-border-bottom, var(--card-specific-border, 1px solid hsla(var(--b3), 0.5)));
     border-radius: var(--card-specific-radius, var(--card-radius));
     box-shadow: var(--card-specific-shadow, var(--card-shadow));
     padding: var(--card-padding);
@@ -4243,7 +4243,8 @@ better than the default selector '#app a' i suppose */
 
 /*     CHARTLIST     */
 .chartlist {
-    animation: slide_down calc(var(--trans) * 1.5) var(--trans-function);
+    animation: slide_down var(--trans) var(--trans-function);
+    transform-origin: top;
     /*transform: skewX(var(--skew)) !important;*/
 }
 .chartlist tbody {
@@ -4280,12 +4281,12 @@ better than the default selector '#app a' i suppose */
 
 @keyframes slide_down {
     from {
-        transform: translateY(-10px);
+        transform: scaleY(0.85);
         opacity: 0;
     }
     to {
-        transform: unset;
-        opacity: unset;
+        transform: scaleY(1);
+        opacity: 1;
     }
 }
 
@@ -4726,7 +4727,7 @@ a.chartlist-love-button:after {
 }
 .chartlist-count-bar-slug {
     background: hsl(var(--h3)) !important;
-    box-shadow: inset hsl(var(--l2-c)) 0 -1px 0, 0px 0px 16px hsla(var(--l3), 50%);
+    box-shadow: 0px 0px 16px hsla(var(--l3), 50%);
     left: unset;
     right: 0;
 }
@@ -5442,8 +5443,8 @@ button:not(.playback-app-container button, .top-artist-list-item, .pixel, .liste
         --bg-hov: hsla(var(--h3), 80%) !important;
         --bg-atv: hsla(var(--h3), 60%) !important;
         --col: hsl(var(--b7)) !important;
-        --shadow: inset hsl(var(--l2-c)) 0 -1px 0, var(--interactable-outer);
-        --shadow-hov: inset hsl(var(--l2-c)) 0 -1px 0, var(--interactable-outer), var(--interactable-active-outer);
+        --shadow: var(--interactable-outer);
+        --shadow-hov: var(--interactable-outer), var(--interactable-active-outer);
 
         [data-bleh--invert_interactable_colour="true"] & {
             --col: hsl(var(--ov-c1)) !important;
@@ -12120,8 +12121,8 @@ input[type="range"]::-moz-range-thumb {
         --bg-hov: hsla(var(--h3), 80%) !important;
         --bg-atv: hsla(var(--h3), 60%) !important;
         --col: hsl(var(--ovr, var(--b7))) !important;
-        --shadow: inset hsl(var(--l2-c)) 0 -1px 0, var(--interactable-outer);
-        --shadow-hov: inset hsl(var(--l2-c)) 0 -1px 0, var(--interactable-outer), var(--interactable-active-outer);
+        --shadow: var(--interactable-outer);
+        --shadow-hov: var(--interactable-outer), var(--interactable-active-outer);
 
         .dot {
             left: calc(56px - 7px - 12px);
