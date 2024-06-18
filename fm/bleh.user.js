@@ -281,6 +281,18 @@ const trans = {
                         name: 'Hide your shoutbox',
                         bio: 'Your shoutbox will be hidden for you and anyone else.'
                     }
+                },
+                blocking: {
+                    name: 'Blocking users',
+                    bio: 'Users who you block will not be visible for you site-wide and said users will be unable to interact with you site-wide. This overrides the "Everyone" who can message you setting below.',
+                    button: {
+                        block_user: {
+                            name: 'Block user'
+                        },
+                        unblock_user: {
+                            name: 'Unblock user'
+                        }
+                    }
                 }
             },
             actions: {
@@ -2322,6 +2334,27 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     shout_actions.appendChild(shout_show_button);
                 } else {
                     patch_avatar(shout_avatar, shout_name);
+
+                    if (auth == shout_name)
+                        return;
+
+                    let shout_actions = shout.querySelector('.shout-more-actions-menu');
+
+                    let token = shout_actions.querySelector('[name="csrfmiddlewaretoken"]').getAttribute('value');
+
+                    let block_user = document.createElement('li');
+                    block_user.classList.add('bleh--block-user-item-wrapper');
+                    block_user.innerHTML = (`
+                        <form action="/settings/privacy#ignorelist" name="ignorelist" method="post">
+                            <input type="hidden" name="csrfmiddlewaretoken" value="${token}">
+                            <input type="text" name="user" value="${shout_name}">
+                            <button type="submit" class="dropdown-menu-clickable-item more-item--block-user">
+                                ${trans[lang].settings.inbuilt.blocking.button.block_user.name}
+                            </button>
+                        </form>
+                    `);
+
+                    shout_actions.appendChild(block_user);
                 }
             }
             } catch(e) {}

@@ -6069,6 +6069,9 @@ very, very, very dated - who looks up a song on ebay? */
 .more-item--delete, [data-analytics-action="delete"] {
     --mask: var(--icon-16-trash);
 }
+.more-item--block-user {
+    --mask: var(--icon-16-block);
+}
 .more-item--report {
     --mask: var(--icon-16-report);
 }
@@ -6149,6 +6152,7 @@ very, very, very dated - who looks up a song on ebay? */
 
 
 /*     DANGEROUS     */
+.more-item--block-user,
 .more-item--delete, .more-item--report,
 [data-analytics-label="logout"],
 [data-analytics-action="delete"],
@@ -6168,6 +6172,10 @@ very, very, very dated - who looks up a song on ebay? */
     --lit: 1;
     --mask: var(--icon-16-user-remove);
     position: relative;
+}
+
+.bleh--block-user-item-wrapper input {
+    display: none;
 }
 
 
