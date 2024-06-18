@@ -2123,6 +2123,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             smartIndentationFix: true
         });
         let parsed_body = converter.makeHtml(value
+        .replace(/(@[a-zA-Z0-9_]+)/g, '[$1](/user/$1)')
         .replace(/&/g, '&amp;')
         .replace(/</g, '&lt;')
         .replace(/>/g, '&gt;')
@@ -2476,6 +2477,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 smartIndentationFix: true
             });
             let parsed_body = converter.makeHtml(about_me_text.textContent
+            .replace(/(@[a-zA-Z0-9_]+)/g, '[$1](/user/$1)')
             .replace(/&/g, '&amp;')
             .replace(/</g, '&lt;')
             .replace(/>/g, '&gt;')
@@ -2607,6 +2609,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     smartIndentationFix: true
                 });
                 let parsed_body = converter.makeHtml(shout_body.textContent
+                .replace(/(@[a-zA-Z0-9_]+)/g, '[$1](/user/$1)')
                 .replace(/&/g, '&amp;')
                 .replace(/</g, '&lt;')
                 .replace(/>/g, '&gt;')
