@@ -574,30 +574,30 @@ const trans = {
                 privacy: {
                     name: 'Prywatność',
                     recent_listening: {
-                        name: 'Hide your recent listening history',
-                        bio: 'Keep your recent listens a secret o.O'
+                        name: 'Ukryj historię ostatnich odsłuchów',
+                        bio: 'Zachowaj tajemnicę swoich ostatnich odsłuchów o.O'
                     },
                     receiving_msgs: {
-                        name: 'Control who can interact with you',
-                        bio: 'This setting controls who can post shouts and message you privately.',
+                        name: 'Kontroluj kto może się z Tobą zkontaktować',
+                        bio: 'To ustawienie kontroluje kto może wysyłać wiadomosci i prywatne wiadomości do ciebie.',
                         settings: {
                             everyone: {
-                                name: 'Everyone',
-                                bio: 'Everyone except who you have ignored'
+                                name: 'Każdy',
+                                bio: 'Każdy oprócz osób które zostały przez ciebie zignorowane'
                             },
                             neighbours: {
-                                name: 'Who you follow and neighbours',
-                                bio: 'Everyone who you have chosen to follow, along with your Last.fm neighbours'
+                                name: 'Osoby których obserwujesz i sąsiadujący',
+                                bio: 'Wszyscy których obserwujesz oraz Twoi sąsiedzi na Last.fm'
                             },
                             follow: {
-                                name: 'Who you follow only',
-                                bio: 'Only users who you have chosen to follow'
+                                name: 'Tylko osoby które obserwujesz',
+                                bio: 'Tylko użytkownicy których obserwujesz'
                             }
                         }
                     },
                     disable_shoutbox: {
-                        name: 'Hide your shoutbox',
-                        bio: 'Your shoutbox will be hidden for you and anyone else.'
+                        name: 'Ukryj swój shoutbox',
+                        bio: 'Twój shoutbox zostanie ukryty dla ciebie i dla innych użytkowników.'
                     }
                 }
             },
@@ -640,23 +640,23 @@ const trans = {
         gallery: {
             tabs: {
                 overview: 'Zdjęcia',
-                bookmarks: 'Saved'
+                bookmarks: 'Zapisane'
             },
             bookmarks: {
-                name: 'Saved',
-                bio: 'Gallery photos can be saved for future reference.',
-                no_data: 'no images saved (・・ )',
+                name: 'Zapisane',
+                bio: 'Zdjęcia galerii można zapisać na przyszłość.',
+                no_data: 'brak zapisanych zdjęć (・・ )',
                 button: {
                     image_is_bookmarked: {
-                        name: 'You have saved this image'
+                        name: 'Masz to zdjęcie zapisane'
                     },
                     bookmark_this_image: {
-                        name: 'Save this image',
-                        bio: 'Save this image for later'
+                        name: 'Zapisz to zdjęcie',
+                        bio: 'Zapisz to zdjęcie na później'
                     },
                     unbookmark_this_image: {
-                        name: 'Unsave this image',
-                        bio: 'Unsave this image'
+                        name: 'Usuń zapis tego zdjęcia',
+                        bio: 'Usuń zapis tego zdjęcia'
                     }
                 }
             }
