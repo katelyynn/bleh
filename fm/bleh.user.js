@@ -2616,19 +2616,24 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         // the rest happens on a following/followers page
         let on_following_page = document.body.classList.contains('namespace--user_following');
         let on_followers_page = document.body.classList.contains('namespace--user_followers');
+        let on_neighbours_page = document.body.classList.contains('namespace--user_neighbours');
 
-        if (!on_following_page && !on_followers_page)
+        if (!on_following_page && !on_followers_page && !on_neighbours_page)
             return;
 
         //let following_tab = document.body.querySelector('.secondary-nav-item--following');
         let followers_tab = document.body.querySelector('.secondary-nav-item--followers');
         let followers_tab_html = followers_tab.outerHTML;
+        let neighbours_tab = document.body.querySelector('.secondary-nav-item--neighbours');
+        let neighbours_tab_html = neighbours_tab.outerHTML;
 
         let tab = undefined;
         if (on_followers_page)
             tab = followers_tab;
-        else
+        else if (on_following_page)
             tab = following_tab;
+        else
+            tab = neighbours_tab;
 
         tab.querySelector('a').textContent = trans[lang].profile.friends.name;
 
@@ -2645,6 +2650,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 <ul class="navlist-items bleh--navlist-items">
                     ${following_tab_html}
                     ${followers_tab_html}
+                    ${neighbours_tab_html}
                 </ul>
             </nav>
         `);

@@ -2617,6 +2617,8 @@ hr + .library-search-results-header {
     }
 }
 
+
+.secondary-nav-item--neighbours,
 .secondary-nav-item--following,
 .secondary-nav-item--followers {
     order: 4;
@@ -2625,11 +2627,21 @@ hr + .library-search-results-header {
         --mask: var(--icon-16-users);
     }
 }
+.bleh--friends-nav .secondary-nav-item--neighbours {
+    order: 5;
 
+    a {
+        --mask: var(--icon-16-arrows);
+    }
+}
+
+.navlist-items:not(.bleh--navlist-items):has(.secondary-nav-item--neighbours .secondary-nav-item-link--active) .secondary-nav-item--following,
+.navlist-items:not(.bleh--navlist-items) .secondary-nav-item--neighbours:not(:has(a.secondary-nav-item-link--active)),
 .navlist-items:not(.bleh--navlist-items) .secondary-nav-item--following + .secondary-nav-item--followers:not(:has(a.secondary-nav-item-link--active)),
 .navlist-items:not(.bleh--navlist-items):has(.secondary-nav-item--followers .secondary-nav-item-link--active) .secondary-nav-item--following {
     display: none;
 }
+
 
 .secondary-nav-item--loved {
     order: 7;
@@ -2650,13 +2662,6 @@ hr + .library-search-results-header {
 
     a {
         --mask: var(--icon-16-event);
-    }
-}
-.secondary-nav-item--neighbours {
-    order: 5;
-
-    a {
-        --mask: var(--icon-16-neighbour);
     }
 }
 .secondary-nav-item--tags {
@@ -2688,7 +2693,7 @@ hr + .library-search-results-header {
 .secondary-nav-item--listeners a:before {
     --mask: var(--icon-16-listener);
 }
-.secondary-nav-item--neighbours a:before, .secondary-nav-item--similar a:before {
+.secondary-nav-item--similar a {
     --mask: var(--icon-16-arrows);
 }
 .secondary-nav-item--wiki a:before {
@@ -10176,6 +10181,13 @@ hr {
 .col-main:has(#user-loved-tracks-section) + .col-sidebar,
 .namespace--music_bookmarks_overview .col-sidebar {
     display: none !important;
+}
+/* hide neighbours text */
+.bleh--friends-nav + .page-content .col-main > p {
+    display: none;
+}
+.bleh--friends-nav + .page-content .neighbours-items-section {
+    margin-top: unset !important;
 }
 
 .music-bookmarks-albums,
