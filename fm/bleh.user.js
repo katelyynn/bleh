@@ -2136,6 +2136,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         .replace(/\[artist\]([a-zA-Z0-9]+)\[\/artist\]/g, '[$1](/music/$1)')
         .replace(/\[album artist=([a-zA-Z0-9]+)\]([a-zA-Z0-9\s]+)\[\/album\]/g, '[$2](/music/$1/$2)')
         .replace(/\[track artist=([a-zA-Z0-9]+)\]([a-zA-Z0-9\s]+)\[\/track\]/g, '[$2](/music/$1/_/$2)')
+        .replace(/https:\/\/open\.spotify\.com\/user\/([A-Za-z0-9]+)\?si=([A-Za-z0-9]+)/g, '[@$1](https://open.spotify.com/user/$1)')
         .replace(/&/g, '&amp;')
         .replace(/</g, '&lt;')
         .replace(/>/g, '&gt;')
@@ -2495,6 +2496,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             .replace(/\[artist\]([a-zA-Z0-9]+)\[\/artist\]/g, '[$1](/music/$1)')
             .replace(/\[album artist=([a-zA-Z0-9]+)\]([a-zA-Z0-9\s]+)\[\/album\]/g, '[$2](/music/$1/$2)')
             .replace(/\[track artist=([a-zA-Z0-9]+)\]([a-zA-Z0-9\s]+)\[\/track\]/g, '[$2](/music/$1/_/$2)')
+            .replace(/https:\/\/open\.spotify\.com\/user\/([A-Za-z0-9]+)/g, '[@$1](https://open.spotify.com/user/$1)')
+            .replace(/https:\/\/open\.spotify\.com\/user\/([A-Za-z0-9]+)\?si=([A-Za-z0-9]+)/g, '[@$1](https://open.spotify.com/user/$1)')
             .replace(/&/g, '&amp;')
             .replace(/</g, '&lt;')
             .replace(/>/g, '&gt;')
@@ -2599,6 +2602,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     function patch_profile_following() {
         // this happens on your main profile, no matter the tab
         let following_tab = document.body.querySelector('.secondary-nav-item--following');
+        let following_tab_html = following_tab.outerHTML;
         if (following_tab == undefined)
             return;
 
@@ -2618,14 +2622,13 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
         //let following_tab = document.body.querySelector('.secondary-nav-item--following');
         let followers_tab = document.body.querySelector('.secondary-nav-item--followers');
-        let following_tab_html = following_tab.outerHTML;
         let followers_tab_html = followers_tab.outerHTML;
 
         let tab = undefined;
         if (on_followers_page)
-            tab = following_tab;
-        else
             tab = followers_tab;
+        else
+            tab = following_tab;
 
         tab.querySelector('a').textContent = trans[lang].profile.friends.name;
 
@@ -2636,7 +2639,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
         // create nav
         let bookmark_nav = document.createElement('div');
-        bookmark_nav.classList.add('bleh--nav-wrap');
+        bookmark_nav.classList.add('bleh--nav-wrap', 'bleh--friends-nav');
         bookmark_nav.innerHTML = (`
             <nav class="navlist secondary-nav">
                 <ul class="navlist-items bleh--navlist-items">
@@ -2685,6 +2688,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 .replace(/\[artist\]([a-zA-Z0-9]+)\[\/artist\]/g, '[$1](/music/$1)')
                 .replace(/\[album artist=([a-zA-Z0-9]+)\]([a-zA-Z0-9\s]+)\[\/album\]/g, '[$2](/music/$1/$2)')
                 .replace(/\[track artist=([a-zA-Z0-9]+)\]([a-zA-Z0-9\s]+)\[\/track\]/g, '[$2](/music/$1/_/$2)')
+                .replace(/https:\/\/open\.spotify\.com\/user\/([A-Za-z0-9]+)\?si=([A-Za-z0-9]+)/g, '[@$1](https://open.spotify.com/user/$1)')
                 .replace(/&/g, '&amp;')
                 .replace(/</g, '&lt;')
                 .replace(/>/g, '&gt;')
