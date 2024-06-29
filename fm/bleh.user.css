@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           bleh (dev)
 @namespace      github.com/katelyynn/bleh
-@version        2024.0618
+@version        2024.0629
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.css
@@ -159,7 +159,8 @@ a,
 .user-dashboard-layout .masthead a,
 .bleh--redacted-message,
 .header-metadata-display, .chartlist-count-bar, .chartlist-count-bar-value,
-.primary-selection
+.primary-selection,
+.nag-bar--alert
 {
     --c1: var(--hue), calc(var(--sat) * 40%), 100%;
     --c2: var(--hue), calc(var(--sat) * 60%), 90%;
@@ -5584,6 +5585,7 @@ button:not(.playback-app-container button, .top-artist-list-item, .pixel, .liste
 
 
 /*     ICON MASK     */
+.nag-bar-message:before,
 /*     BLEH     */
 .btns .btn:before,
 .btn.reset:before,
@@ -13405,5 +13407,25 @@ button.bleh--gallery-bookmark-image-btn {
 }
 [data-bleh--gallery-tab="overview"] .container.page-content.bleh--bookmarks {
     display: none;
+}
+
+
+
+
+/*     MIGRATION ALERT     */
+.nag-bar--alert {
+    color: hsl(var(--l3-c));
+    font-size: var(--font-size);
+    line-height: var(--line-height);
+    font-weight: var(--font-weight-medium);
+    --hue: var(--hue-neg);
+    --sat: 1;
+    --lit: 1;
+
+    .nag-bar-message {
+        padding-left: calc(16px + 6px);
+        --left: 0;
+        --mask: var(--icon-16-warning);
+    }
 }
 }
