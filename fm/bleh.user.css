@@ -9651,7 +9651,7 @@ event sidebar */
     position: relative;
     width: fit-content;
 }
-[data-lazy-filter-options="events-select"] .text-bold:after {
+/*[data-lazy-filter-options="events-select"] .text-bold:after {
     content: '';
     position: absolute;
     left: 100%;
@@ -9659,7 +9659,7 @@ event sidebar */
     width: 500px;
     height: 1px;
     background: hsl(var(--b4));
-}
+}*/
 
 
 /* now shown in icon */
