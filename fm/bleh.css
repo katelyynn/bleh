@@ -1095,7 +1095,8 @@ last.fm changes as of 2024-05-20 */
 #adSkinLeft, #adSkinRight, .adaptive-skin-wrapper:has(#adSkinLeft),
 /* don't want to see ads? upgrade now */ .mpu-subscription-upsell,
 /* this isn't an ad but it fits here */ .scrobble-stats-info-toggle, #explain-scrobblingdesktop + h4,
-/* neither is this but */ .share-desktop
+/* neither is this but */ .share-desktop,
+.full-bleed-ad-container, .open-ad-container-desktop
 {
     display: none !important;
 }
