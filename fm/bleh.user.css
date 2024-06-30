@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           bleh (dev)
 @namespace      github.com/katelyynn/bleh
-@version        2024.0629
+@version        2024.0630
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.css
@@ -38,8 +38,12 @@ body {
     --hue-brand-it: 345;
     --hue-brand-am: 345;
     --hue-brand-fb: 215;
+    --sat-brand-fb: 1.15;
     --lit-brand-fb: 0.95;
     --hue-brand-ig: 300;
+    --hue-brand-twt: 202;
+    --sat-brand-twt: 1.1;
+    --lit-brand-twt: 0.9;
 
     --font: Ubuntu Sans, Spline Sans, Inter, Roboto, Noto Sans, Noto Sans JP, Noto Color Emoji, -apple-system, BlinkMacSystemFont, sans-serif;
     --font-code: Spline Sans Mono, Iosevka, JetBrains Mono, Roboto Mono, monospace;
@@ -8079,7 +8083,7 @@ text[style^="color: rgb(0, 0, 0)"] {
     --mask: var(--icon-16-link);
 }
 .resource-external-link--twitter:before {
-    mask-image: url('data:image/svg+xml;base64,PHN2ZyByb2xlPSJpbWciIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48dGl0bGU+WDwvdGl0bGU+PHBhdGggZD0iTTE4LjkwMSAxLjE1M2gzLjY4bC04LjA0IDkuMTlMMjQgMjIuODQ2aC03LjQwNmwtNS44LTcuNTg0LTYuNjM4IDcuNTg0SC40NzRsOC42LTkuODNMMCAxLjE1NGg3LjU5NGw1LjI0MyA2LjkzMlpNMTcuNjEgMjAuNjQ0aDIuMDM5TDYuNDg2IDMuMjRINC4yOThaIi8+PC9zdmc+');
+    mask-image: url('data:image/svg+xml;base64,PHN2ZyByb2xlPSJpbWciIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48dGl0bGU+VHdpdHRlcjwvdGl0bGU+PHBhdGggZD0iTTIxLjU0MyA3LjEwNGMuMDE1LjIxMS4wMTUuNDIzLjAxNS42MzYgMCA2LjUwNy00Ljk1NCAxNC4wMS0xNC4wMSAxNC4wMXYtLjAwM0ExMy45NCAxMy45NCAwIDAgMSAwIDE5LjUzOWE5Ljg4IDkuODggMCAwIDAgNy4yODctMi4wNDEgNC45MyA0LjkzIDAgMCAxLTQuNi0zLjQyIDQuOTE2IDQuOTE2IDAgMCAwIDIuMjIzLS4wODRBNC45MjYgNC45MjYgMCAwIDEgLjk2IDkuMTY3di0uMDYyYTQuODg3IDQuODg3IDAgMCAwIDIuMjM1LjYxNkE0LjkyOCA0LjkyOCAwIDAgMSAxLjY3IDMuMTQ4IDEzLjk4IDEzLjk4IDAgMCAwIDExLjgyIDguMjkyYTQuOTI5IDQuOTI5IDAgMCAxIDguMzktNC40OSA5Ljg2OCA5Ljg2OCAwIDAgMCAzLjEyOC0xLjE5NiA0Ljk0MSA0Ljk0MSAwIDAgMS0yLjE2NSAyLjcyNEE5LjgyOCA5LjgyOCAwIDAgMCAyNCA0LjU1NWExMC4wMTkgMTAuMDE5IDAgMCAxLTIuNDU3IDIuNTQ5eiIvPjwvc3ZnPg==');
     mask-size: 100%;
 }
 .resource-external-link--soundcloud:before {
@@ -8107,7 +8111,7 @@ text[style^="color: rgb(0, 0, 0)"] {
     mask-size: 100%;
 }
 
-.play-this-track-playlink, .resource-external-link:not(.resource-external-link--homepage, .resource-external-link--twitter) {
+.play-this-track-playlink, .resource-external-link:not(.resource-external-link--homepage) {
     --col: hsl(var(--l3));
     --sat: 1;
     --lit: 1;
@@ -8116,11 +8120,11 @@ text[style^="color: rgb(0, 0, 0)"] {
 
 .play-this-track-playlink--youtube {
     --hue: var(--hue-brand-yt);
-    --lit: var(--lit-brand-yt);
+    --lit: var(--lit-brand-yt) !important;
 }
 .play-this-track-playlink--spotify {
     --hue: var(--hue-brand-sp);
-    --lit: var(--lit-brand-sp);
+    --lit: var(--lit-brand-sp) !important;
 }
 .resource-external-link--soundcloud {
     --hue: var(--hue-brand-sc);
@@ -8134,11 +8138,13 @@ text[style^="color: rgb(0, 0, 0)"] {
 }
 .resource-external-link--facebook {
     --hue: var(--hue-brand-fb);
+    --sat: var(--sat-brand-fb) !important;
     --lit: var(--lit-brand-fb) !important;
 }
 .resource-external-link--twitter {
-    --col: hsl(var(--c1));
-    --icon: var(--c1);
+    --hue: var(--hue-brand-twt);
+    --sat: var(--sat-brand-twt) !important;
+    --lit: var(--lit-brand-twt) !important;
 }
 .resource-external-link--instagram {
     --hue: var(--hue-brand-ig);
