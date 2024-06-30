@@ -230,7 +230,7 @@ body {
     --card-radius: 8px;
     --card-shadow: hsla(var(--b7), 0.25) 0 2px 4px 0;
     --card-gap: 15px;
-    --card-border: 1px solid hsl(var(--b4));
+    --card-border: 1px solid hsla(var(--b4), 0.7);
 
     --cards-main-width: 902px;
     --cards-sidebar-width: 400px;
@@ -248,8 +248,8 @@ body {
     --playlist-cover-size: 230px;
     --playlist-author-avatar-size: 36px;
 
-    --shout-avatar-size: 52px;
-    --shout-inset: 52px;
+    --shout-avatar-size: 48px;
+    --shout-inset: 48px;
 
     --avatar-generic-background: hsl(var(--b6));
     --avatar-radius: 50%;
@@ -267,8 +267,8 @@ body {
     --interactable-outer: hsla(var(--b7), 0.3) 0 2px 3px 0;
     --interactable-active-outer: hsla(var(--c1), 0.03) 0 2px 25px 0;
 
-    --interact-shadow: var(--interactable-inset), var(--interactable-outer);
-    --active-shadow: var(--interactable-inset), var(--interactable-outer), var(--interactable-active-outer);
+    --interact-shadow: var(--interactable-outer);
+    --active-shadow: var(--interactable-outer), var(--interactable-active-outer);
 
     --chartlist-fill: var(--hue-gradient, hsl(var(--h3)));
 
@@ -308,6 +308,10 @@ body {
         color: hsl(var(--l2-c)) !important;
         text-shadow: 0 0 5px hsla(var(--l4-c), 20%) !important;
     }
+}
+
+[data-bleh--theme="oled"] body {
+    --card-border: 1px solid hsl(var(--b4));
 }
 
 /* icons (from lucide.dev <3) */
@@ -354,7 +358,7 @@ body {
     --icon-40-x: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUteCI+PHBhdGggZD0iTTE4IDYgNiAxOCIvPjxwYXRoIGQ9Im02IDYgMTIgMTIiLz48L3N2Zz4=');
     --icon-40-edit: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtcGVuY2lsIj48cGF0aCBkPSJNMjEuMTc0IDYuODEyYTEgMSAwIDAgMC0zLjk4Ni0zLjk4N0wzLjg0MiAxNi4xNzRhMiAyIDAgMCAwLS41LjgzbC0xLjMyMSA0LjM1MmEuNS41IDAgMCAwIC42MjMuNjIybDQuMzUzLTEuMzJhMiAyIDAgMCAwIC44My0uNDk3eiIvPjxwYXRoIGQ9Im0xNSA1IDQgNCIvPjwvc3ZnPg==');
 
-    --icon-20-shoutbox: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjI1IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLW1lc3NhZ2Utc3F1YXJlLWRvdCI+PHBhdGggZD0iTTExLjcgM0g1YTIgMiAwIDAgMC0yIDJ2MTZsNC00aDEyYTIgMiAwIDAgMCAyLTJ2LTIuNyIvPjxjaXJjbGUgY3g9IjE4IiBjeT0iNiIgcj0iMyIvPjwvc3ZnPg==');
+    --icon-20-shoutbox: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjI1IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLW1lc3NhZ2UtY2lyY2xlIj48cGF0aCBkPSJNNy45IDIwQTkgOSAwIDEgMCA0IDE2LjFMMiAyMloiLz48L3N2Zz4=');
     --icon-20-album: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjI1IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWRpc2MiPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEwIi8+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMiIvPjwvc3ZnPg==');
     --icon-20-photo: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjI1IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWltYWdlIj48cmVjdCB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHg9IjMiIHk9IjMiIHJ4PSIyIiByeT0iMiIvPjxjaXJjbGUgY3g9IjkiIGN5PSI5IiByPSIyIi8+PHBhdGggZD0ibTIxIDE1LTMuMDg2LTMuMDg2YTIgMiAwIDAgMC0yLjgyOCAwTDYgMjEiLz48L3N2Zz4=');
     --icon-20-obsession-remove: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjI1IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLXRyZW5kaW5nLWRvd24iPjxwb2x5bGluZSBwb2ludHM9IjIyIDE3IDEzLjUgOC41IDguNSAxMy41IDIgNyIvPjxwb2x5bGluZSBwb2ludHM9IjE2IDE3IDIyIDE3IDIyIDExIi8+PC9zdmc+');
@@ -403,7 +407,7 @@ body {
     --icon-16-gallery-vertical: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtZ2FsbGVyeS12ZXJ0aWNhbC1lbmQiPjxwYXRoIGQ9Ik03IDJoMTAiLz48cGF0aCBkPSJNNSA2aDE0Ii8+PHJlY3Qgd2lkdGg9IjE4IiBoZWlnaHQ9IjEyIiB4PSIzIiB5PSIxMCIgcng9IjIiLz48L3N2Zz4=');
     --icon-16-library-square: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtbGlicmFyeS1zcXVhcmUiPjxyZWN0IHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgeD0iMyIgeT0iMyIgcng9IjIiLz48cGF0aCBkPSJNNyA3djEwIi8+PHBhdGggZD0iTTExIDd2MTAiLz48cGF0aCBkPSJtMTUgNyAyIDEwIi8+PC9zdmc+');
     --icon-16-library: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtbGlicmFyeSI+PHBhdGggZD0ibTE2IDYgNCAxNCIvPjxwYXRoIGQ9Ik0xMiA2djE0Ii8+PHBhdGggZD0iTTggOHYxMiIvPjxwYXRoIGQ9Ik00IDR2MTYiLz48L3N2Zz4=');
-    --icon-16-shoutbox: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtbWVzc2FnZXMtc3F1YXJlIj48cGF0aCBkPSJNMTQgOWEyIDIgMCAwIDEtMiAySDZsLTQgNFY0YzAtMS4xLjktMiAyLTJoOGEyIDIgMCAwIDEgMiAydjVaIi8+PHBhdGggZD0iTTE4IDloMmEyIDIgMCAwIDEgMiAydjExbC00LTRoLTZhMiAyIDAgMCAxLTItMnYtMSIvPjwvc3ZnPg==');
+    --icon-16-shoutbox: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtbWVzc2FnZS1jaXJjbGUiPjxwYXRoIGQ9Ik03LjkgMjBBOSA5IDAgMSAwIDQgMTYuMUwyIDIyWiIvPjwvc3ZnPg==');
     --icon-16-playlist: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtbGlzdC1tdXNpYyI+PHBhdGggZD0iTTIxIDE1VjYiLz48cGF0aCBkPSJNMTguNSAxOGEyLjUgMi41IDAgMSAwIDAtNSAyLjUgMi41IDAgMCAwIDAgNVoiLz48cGF0aCBkPSJNMTIgMTJIMyIvPjxwYXRoIGQ9Ik0xNiA2SDMiLz48cGF0aCBkPSJNMTIgMThIMyIvPjwvc3ZnPg==');
     --icon-16-listening-report: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtYWN0aXZpdHkiPjxwYXRoIGQ9Ik0yMiAxMmgtNGwtMyA5TDkgM2wtMyA5SDIiLz48L3N2Zz4=');
     --icon-16-heart: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9ImZlYXRoZXIgZmVhdGhlci1oZWFydCI+PHBhdGggZD0iTTIwLjg0IDQuNjFhNS41IDUuNSAwIDAgMC03Ljc4IDBMMTIgNS42N2wtMS4wNi0xLjA2YTUuNSA1LjUgMCAwIDAtNy43OCA3Ljc4bDEuMDYgMS4wNkwxMiAyMS4yM2w3Ljc4LTcuNzggMS4wNi0xLjA2YTUuNSA1LjUgMCAwIDAgMC03Ljc4eiI+PC9wYXRoPjwvc3ZnPg==');
@@ -459,7 +463,7 @@ body {
     --icon-16-moon-fill: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJjdXJyZW50Q29sb3IiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1tb29uIj48cGF0aCBkPSJNMTIgM2E2IDYgMCAwIDAgOSA5IDkgOSAwIDEgMS05LTlaIi8+PC9zdmc+');
     --icon-16-sun: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtc3VuIj48Y2lyY2xlIGN4PSIxMiIgY3k9IjEyIiByPSI0Ii8+PHBhdGggZD0iTTEyIDJ2MiIvPjxwYXRoIGQ9Ik0xMiAyMHYyIi8+PHBhdGggZD0ibTQuOTMgNC45MyAxLjQxIDEuNDEiLz48cGF0aCBkPSJtMTcuNjYgMTcuNjYgMS40MSAxLjQxIi8+PHBhdGggZD0iTTIgMTJoMiIvPjxwYXRoIGQ9Ik0yMCAxMmgyIi8+PHBhdGggZD0ibTYuMzQgMTcuNjYtMS40MSAxLjQxIi8+PHBhdGggZD0ibTE5LjA3IDQuOTMtMS40MSAxLjQxIi8+PC9zdmc+');
     --icon-16-issues: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtZ2l0LW1lcmdlIj48Y2lyY2xlIGN4PSIxOCIgY3k9IjE4IiByPSIzIi8+PGNpcmNsZSBjeD0iNiIgY3k9IjYiIHI9IjMiLz48cGF0aCBkPSJNNiAyMVY5YTkgOSAwIDAgMCA5IDkiLz48L3N2Zz4=');
-    --icon-16-note-add: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtZmlsZS1wbHVzLTIiPjxwYXRoIGQ9Ik00IDIyaDE0YTIgMiAwIDAgMCAyLTJWN2wtNS01SDZhMiAyIDAgMCAwLTIgMnY0Ii8+PHBhdGggZD0iTTE0IDJ2NGEyIDIgMCAwIDAgMiAyaDQiLz48cGF0aCBkPSJNMyAxNWg2Ii8+PHBhdGggZD0iTTYgMTJ2NiIvPjwvc3ZnPg==');
+    --icon-16-note-add: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtdGV4dC1zZWxlY3QiPjxwYXRoIGQ9Ik01IDNhMiAyIDAgMCAwLTIgMiIvPjxwYXRoIGQ9Ik0xOSAzYTIgMiAwIDAgMSAyIDIiLz48cGF0aCBkPSJNMjEgMTlhMiAyIDAgMCAxLTIgMiIvPjxwYXRoIGQ9Ik01IDIxYTIgMiAwIDAgMS0yLTIiLz48cGF0aCBkPSJNOSAzaDEiLz48cGF0aCBkPSJNOSAyMWgxIi8+PHBhdGggZD0iTTE0IDNoMSIvPjxwYXRoIGQ9Ik0xNCAyMWgxIi8+PHBhdGggZD0iTTMgOXYxIi8+PHBhdGggZD0iTTIxIDl2MSIvPjxwYXRoIGQ9Ik0zIDE0djEiLz48cGF0aCBkPSJNMjEgMTR2MSIvPjxsaW5lIHgxPSI3IiB4Mj0iMTUiIHkxPSI4IiB5Mj0iOCIvPjxsaW5lIHgxPSI3IiB4Mj0iMTciIHkxPSIxMiIgeTI9IjEyIi8+PGxpbmUgeDE9IjciIHgyPSIxMyIgeTE9IjE2IiB5Mj0iMTYiLz48L3N2Zz4=');
     --icon-16-correction: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtc3BlbGwtY2hlY2stMiI+PHBhdGggZD0ibTYgMTYgNi0xMiA2IDEyIi8+PHBhdGggZD0iTTggMTJoOCIvPjxwYXRoIGQ9Ik00IDIxYzEuMSAwIDEuMS0xIDIuMy0xczEuMSAxIDIuMyAxYzEuMSAwIDEuMS0xIDIuMy0xIDEuMSAwIDEuMSAxIDIuMyAxIDEuMSAwIDEuMS0xIDIuMy0xIDEuMSAwIDEuMSAxIDIuMyAxIDEuMSAwIDEuMS0xIDIuMy0xIi8+PC9zdmc+');
     --icon-16-sparkles: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtc3BhcmtsZXMiPjxwYXRoIGQ9Ik05LjkzNyAxNS41QTIgMiAwIDAgMCA4LjUgMTQuMDYzbC02LjEzNS0xLjU4MmEuNS41IDAgMCAxIDAtLjk2Mkw4LjUgOS45MzZBMiAyIDAgMCAwIDkuOTM3IDguNWwxLjU4Mi02LjEzNWEuNS41IDAgMCAxIC45NjMgMEwxNC4wNjMgOC41QTIgMiAwIDAgMCAxNS41IDkuOTM3bDYuMTM1IDEuNTgxYS41LjUgMCAwIDEgMCAuOTY0TDE1LjUgMTQuMDYzYTIgMiAwIDAgMC0xLjQzNyAxLjQzN2wtMS41ODIgNi4xMzVhLjUuNSAwIDAgMS0uOTYzIDB6Ii8+PHBhdGggZD0iTTIwIDN2NCIvPjxwYXRoIGQ9Ik0yMiA1aC00Ii8+PHBhdGggZD0iTTQgMTd2MiIvPjxwYXRoIGQ9Ik01IDE4SDMiLz48L3N2Zz4=');
     --icon-16-preview: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtc2Nhbi1leWUiPjxwYXRoIGQ9Ik0zIDdWNWEyIDIgMCAwIDEgMi0yaDIiLz48cGF0aCBkPSJNMTcgM2gyYTIgMiAwIDAgMSAyIDJ2MiIvPjxwYXRoIGQ9Ik0yMSAxN3YyYTIgMiAwIDAgMS0yIDJoLTIiLz48cGF0aCBkPSJNNyAyMUg1YTIgMiAwIDAgMS0yLTJ2LTIiLz48Y2lyY2xlIGN4PSIxMiIgY3k9IjEyIiByPSIxIi8+PHBhdGggZD0iTTUgMTJzMi41LTUgNy01IDcgNSA3IDUtMi41IDUtNyA1LTctNS03LTUiLz48L3N2Zz4=');
@@ -1381,7 +1385,7 @@ body[class*="namespace--user_library_"] .col-sidebar, .library-header,
     border-left: var(--border-sides, var(--card-specific-border, var(--card-border)));
     border-right: var(--border-sides, var(--card-specific-border, var(--card-border)));
     border-top: var(--card-border-top, var(--card-specific-border, var(--card-border)));
-    border-bottom: var(--card-border-bottom, var(--card-specific-border, 1px solid hsl(var(--b3))));
+    border-bottom: var(--card-border-bottom, var(--card-specific-border, 1px solid hsla(var(--b3), 0.7)));
     border-radius: var(--card-specific-radius, var(--card-radius));
     box-shadow: var(--card-specific-shadow, var(--card-shadow));
     padding: var(--card-padding);
@@ -1617,7 +1621,7 @@ article, section, .buffer-standard, .buffer-standard:not(.col-sidebar) .buffer-s
 /* border if default background is present */
 .video-preview-upload-cta.link-block, p.album-artwork-upload-cta {
     border: var(--card-border) !important;
-    border-bottom: 1px solid hsl(var(--b3)) !important;
+    border-bottom: 1px solid hsla(var(--b3), 0.7) !important;
 }
 
 /* take up full space */
@@ -2586,44 +2590,98 @@ hr + .library-search-results-header {
 
 /*     ICON     */
 /* for profiles and media types */
-.secondary-nav-item--overview a:before {
-    --mask: var(--icon-16-layout);
+.secondary-nav-item--overview {
+    order: 1;
+
+    a {
+        --mask: var(--icon-16-home);
+    }
 }
 [data-analytics-label="home"]:before {
     --mask: var(--icon-16-home);
 }
-.secondary-nav-item--listening-report a:before {
-    --mask: var(--icon-16-listening-report);
+.secondary-nav-item--listening-report {
+    order: 2;
+
+    a {
+        --mask: var(--icon-16-listening-report);
+    }
 }
-.secondary-nav-item--library a:before {
-    --mask: var(--icon-16-library);
+.secondary-nav-item--library {
+    order: 3;
+
+    a {
+        --mask: var(--icon-16-library);
+    }
 }
-.secondary-nav-item--playlists a:before {
-    --mask: var(--icon-16-playlist);
+.secondary-nav-item--playlists {
+    order: 10;
+
+    a {
+        --mask: var(--icon-16-playlist);
+    }
 }
-.secondary-nav-item--following a:before {
-    --mask: var(--icon-16-user);
+
+
+.secondary-nav-item--neighbours,
+.secondary-nav-item--following,
+.secondary-nav-item--followers {
+    order: 4;
+
+    a {
+        --mask: var(--icon-16-users);
+    }
 }
-.secondary-nav-item--followers a:before {
-    --mask: var(--icon-16-users);
+.bleh--friends-nav .secondary-nav-item--neighbours {
+    order: 5;
+
+    a {
+        --mask: var(--icon-16-arrows);
+    }
 }
-.secondary-nav-item--loved a:before {
-    --mask: var(--icon-16-heart);
+
+.navlist-items:not(.bleh--navlist-items):has(.secondary-nav-item--neighbours .secondary-nav-item-link--active) .secondary-nav-item--following,
+.navlist-items:not(.bleh--navlist-items) .secondary-nav-item--neighbours:not(:has(a.secondary-nav-item-link--active)),
+.navlist-items:not(.bleh--navlist-items) .secondary-nav-item--following + .secondary-nav-item--followers:not(:has(a.secondary-nav-item-link--active)),
+.navlist-items:not(.bleh--navlist-items):has(.secondary-nav-item--followers .secondary-nav-item-link--active) .secondary-nav-item--following {
+    display: none;
 }
-.secondary-nav-item--obsessions a:before {
-    --mask: var(--icon-16-obsession);
+
+
+.secondary-nav-item--loved {
+    order: 7;
+
+    a {
+        --mask: var(--icon-16-heart);
+    }
 }
-.secondary-nav-item--events a:before {
-    --mask: var(--icon-16-event);
+.secondary-nav-item--obsessions {
+    order: 8;
+
+    a {
+        --mask: var(--icon-16-obsession);
+    }
 }
-.secondary-nav-item--neighbours a:before {
-    --mask: var(--icon-16-neighbour);
+.secondary-nav-item--events {
+    order: 9;
+
+    a {
+        --mask: var(--icon-16-event);
+    }
 }
-.secondary-nav-item--tags a:before {
-    --mask: var(--icon-16-tag);
+.secondary-nav-item--tags {
+    order: 11;
+
+    a {
+        --mask: var(--icon-16-tag);
+    }
 }
-.secondary-nav-item--shoutbox a:before {
-    --mask: var(--icon-16-shoutbox);
+.secondary-nav-item--shoutbox {
+    order: 6;
+
+    a {
+        --mask: var(--icon-16-shoutbox);
+    }
 }
 .secondary-nav-item--artists a:before {
     --mask: var(--icon-16-artist);
@@ -2640,7 +2698,7 @@ hr + .library-search-results-header {
 .secondary-nav-item--listeners a:before {
     --mask: var(--icon-16-listener);
 }
-.secondary-nav-item--neighbours a:before, .secondary-nav-item--similar a:before {
+.secondary-nav-item--similar a {
     --mask: var(--icon-16-arrows);
 }
 .secondary-nav-item--wiki a:before {
@@ -3599,7 +3657,7 @@ state is not active, which then falls back to primary button styling */
 
 
     .header-metadata-display {
-        color: hsl(var(--l3-c)) !important;
+        color: hsl(var(--l2-c)) !important;
         text-shadow: 0 0 20px hsl(var(--h4));
         padding-left: calc(6px + 4px);
         position: relative;
@@ -4199,7 +4257,8 @@ better than the default selector '#app a' i suppose */
 
 /*     CHARTLIST     */
 .chartlist {
-    animation: slide_down calc(var(--trans) * 1.5) var(--trans-function);
+    animation: slide_down var(--trans) var(--trans-function);
+    transform-origin: top;
     /*transform: skewX(var(--skew)) !important;*/
 }
 .chartlist tbody {
@@ -4236,12 +4295,12 @@ better than the default selector '#app a' i suppose */
 
 @keyframes slide_down {
     from {
-        transform: translateY(-10px);
+        transform: scaleY(0.85);
         opacity: 0;
     }
     to {
-        transform: unset;
-        opacity: unset;
+        transform: scaleY(1);
+        opacity: 1;
     }
 }
 
@@ -4364,9 +4423,15 @@ better than the default selector '#app a' i suppose */
 
 /*     ACTIVE     */
 .chartlist-row--now-scrobbling {
-    --bg: var(--hue-gradient,hsla(var(--h3), 45%)) !important;
+    --bg: hsla(var(--h3), 45%) !important;
     --bg-hov: hsla(var(--h3), 60%) !important;
     --shadow: 0 0 50px 5px hsla(var(--h3), 45%) !important;
+
+    [data-bleh--theme="light"] & {
+        --bg: hsla(var(--h4), 35%) !important;
+        --bg-hov: hsla(var(--h4), 50%) !important;
+        --shadow: 0 0 50px 5px hsla(var(--h4), 35%) !important;
+    }
 }
 .chartlist-row--now-scrobbling:before {
     content: '';
@@ -4646,7 +4711,6 @@ a.chartlist-love-button:after {
     order: 1;
     /*margin: -6px 0;*/
 }
-/* TODO: for light theme switch these to h3 */
 .chartlist-count-bar {
     line-height: 22px; /* 22 */
     background: linear-gradient(270deg, hsla(var(--c2), 30%) 7%, hsl(var(--b4)) 40%);
@@ -4656,6 +4720,10 @@ a.chartlist-love-button:after {
     transition-property: transform;
     transition-duration: var(--trans);
     transition-timing-function: var(--trans-function);
+
+    [data-bleh--theme="light"] & {
+        background: hsl(var(--b4));
+    }
 }
 .chartlist-count-bar-link {
     text-decoration: none !important;
@@ -4676,7 +4744,7 @@ a.chartlist-love-button:after {
 }
 .chartlist-count-bar-slug {
     background: hsl(var(--h3)) !important;
-    box-shadow: inset hsl(var(--l2-c)) 0 -1px 0, 0px 0px 16px hsla(var(--l3), 50%);
+    box-shadow: 0px 0px 16px hsla(var(--h3), 50%);
     left: unset;
     right: 0;
 }
@@ -4747,7 +4815,7 @@ p + .chartlist {
 }
 
 
-.shoutbox, .shout-form, shouting-unavailable {
+.shoutbox, .shout-form, .shouting-unavailable {
     margin-top: unset;
 }
 .shout, .shout-form {
@@ -4759,6 +4827,9 @@ p + .chartlist {
 }
 .shout-form {
     padding-bottom: 12px;
+    /* shout-form's get margin-top of 24px if on a subpage,
+    most noteably the "shouts" tab */
+    margin-top: unset !important;
 }
 
 .shout-reply-ui {
@@ -4916,6 +4987,7 @@ the body text becomes bigger by default - this reverts that */
     align-items: center;
     right: unset;
     top: unset;
+    text-transform: lowercase;
     transition-property: color;
     transition-duration: var(--trans);
     transition-timing-function: var(--trans-function);
@@ -4929,28 +5001,8 @@ the body text becomes bigger by default - this reverts that */
         font-size: 12px;
         position: absolute;
         top: 0;
-        left: calc(16px + 6px);
-        width: 100px;
-        opacity: 0;
-        transition-property: opacity;
-        transition-duration: var(--trans);
-        transition-timing-function: var(--trans-function);
-    }
-
-    /* icon */
-    &:after {
-        content: '';
-        background-color: hsl(var(--l2-c));
-        --mask: var(--icon-16-copy);
-        mask-image: var(--mask);
-        -webkit-mask-image: var(--mask);
-        width: 16px;
-        height: 16px;
-        display: block;
-        position: absolute;
-        /*inset: 4px calc(50% - 8px);*/
-        top: 2px;
         left: 0;
+        width: 100px;
         opacity: 0;
         transition-property: opacity;
         transition-duration: var(--trans);
@@ -4960,10 +5012,12 @@ the body text becomes bigger by default - this reverts that */
     /* hide date on hover */
     &:hover {
         color: transparent !important;
+        transition: none;
 
         /* ..then show pseudo elements */
-        &:before, &:after {
+        &:before {
             opacity: 1;
+            transition: none;
         }
     }
 }
@@ -5102,9 +5156,9 @@ leading to a gap from their own css */
     --left: 0;
     --top: 0;
     --margin-top: 0;
-    --mask-size: 20px;
+    --mask-size: 18px;
     background: var(--override-bg, none) !important;
-    filter: drop-shadow(2px 0px 0 hsl(var(--b5))) drop-shadow(0px 2px 0 hsl(var(--b5))) drop-shadow(-2px -0px 0 hsl(var(--b5))) drop-shadow(-0px -2px 0 hsl(var(--b5))) drop-shadow(0px 4px 0px hsl(var(--b5)));
+    filter: drop-shadow(2px 0px 0 hsl(var(--b5))) drop-shadow(0px 2px 0 hsl(var(--b5))) drop-shadow(-2px -0px 0 hsl(var(--b5))) drop-shadow(-0px -2px 0 hsl(var(--b5))) drop-shadow(0px 3px 0px hsl(var(--b5)));
 }
 .shout-user-avatar, .avatar {
     /*background-color: var(--avatar-generic-background); support for transparent avatars */
@@ -5116,8 +5170,9 @@ leading to a gap from their own css */
 .inbox-notifications .inbox-notifications__avatar--big-size .avatar-status-dot,
 .obsession-details-intro-avatar-wrap .avatar-status-dot
 {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
+    --mask-size: 18px;
 }
 
 .attendee-summary-user-avatar .avatar-status-dot,
@@ -5373,7 +5428,8 @@ button:not(.playback-app-container button, .top-artist-list-item, .pixel, .liste
     &:is(.gallery-next, .gallery-previous):hover .arrow,
     &:hover {
         background-color: var(--bg-hov) !important;
-        transition-property: padding !important;
+        transition-property: padding, transform !important;
+        transition-duration: 0.1s !important;
         --transition-property: opacity, left;
         box-shadow: var(--shadow-hov) !important;
     }
@@ -5408,8 +5464,8 @@ button:not(.playback-app-container button, .top-artist-list-item, .pixel, .liste
         --bg-hov: hsla(var(--h3), 80%) !important;
         --bg-atv: hsla(var(--h3), 60%) !important;
         --col: hsl(var(--b7)) !important;
-        --shadow: inset hsl(var(--l2-c)) 0 -1px 0, var(--interactable-outer);
-        --shadow-hov: inset hsl(var(--l2-c)) 0 -1px 0, var(--interactable-outer), var(--interactable-active-outer);
+        --shadow: var(--interactable-outer);
+        --shadow-hov: var(--interactable-outer), var(--interactable-active-outer);
 
         [data-bleh--invert_interactable_colour="true"] & {
             --col: hsl(var(--ov-c1)) !important;
@@ -5602,6 +5658,7 @@ button:not(.playback-app-container button, .top-artist-list-item, .pixel, .liste
 .grid-item:before,
 .select-wrap:before,
 .primary-selection:after,
+:is(.shout-body, .about-me-sidebar, .bleh--about-me-preview) a:before,
 /*     DROPDOWNS     */
 .dropdown-menu-clickable-item:before, .auth-dropdown-menu-item:before,
 .dropdown-menu-list-button::after, .dropdown-menu-clickable-button::after, .dropdown-menu-clickable-button-js-only::after,
@@ -5850,9 +5907,13 @@ span.header-new-gallery-inner a:before,
 }
 /* do not use section-with-control !! that refers to buttons
 on the bottom of a panel !! */
+#top-tracks > h2,
 :is(.grid-items-section /* other profiles */, .section-with-settings /* your profile */, .section-controls) > :is(h2, h3) {
     height: 32px;
     width: fit-content;
+}
+#top-tracks > .buffer-standard {
+    margin-top: 12px;
 }
 
 .section-controls {
@@ -7424,7 +7485,7 @@ text[style^="color: rgb(255, 172, 172)"] {
     }
 
     .highcharts-area {
-        fill: hsla(var(--l4-c), 25%) !important;
+        fill: hsla(var(--h4), 20%) !important;
     }
 
     .highcharts-markers .highcharts-point {
@@ -8312,6 +8373,11 @@ text[style^="color: rgb(0, 0, 0)"] {
     background: linear-gradient(90deg, hsla(var(--h4), 15%) 0%, transparent 100%);
     --override-link-col: hsl(var(--l2-c));
 }
+
+.user-list-name {
+    min-width: 200px;
+}
+
 .user-list-name a {
     color: var(--override-link-col, hsl(var(--l3-c))) !important;
 }
@@ -8384,10 +8450,6 @@ text[style^="color: rgb(0, 0, 0)"] {
 }
 .neighbours-items-section .user-list-about-me {
     display: none;
-}
-
-.neighbours-items-section .user-list-name {
-    min-width: 200px;
 }
 
 .listeners-section-track {
@@ -10101,15 +10163,24 @@ hr {
 }
 
 /* no need for a sidebar */
+.bleh--friends-nav + .page-content .col-main,
 .namespace--user_obsessions_set .col-main,
 .col-main:has(#user-loved-tracks-section),
 .namespace--music_bookmarks_overview .col-main {
     width: var(--cards-width);
 }
+.bleh--friends-nav + .page-content .col-sidebar,
 .namespace--user_obsessions_set .col-sidebar,
 .col-main:has(#user-loved-tracks-section) + .col-sidebar,
 .namespace--music_bookmarks_overview .col-sidebar {
     display: none !important;
+}
+/* hide neighbours text */
+.bleh--friends-nav + .page-content .col-main > p {
+    display: none;
+}
+.bleh--friends-nav + .page-content .neighbours-items-section {
+    margin-top: unset !important;
 }
 
 .music-bookmarks-albums,
@@ -11776,9 +11847,9 @@ input[type="range"]::-moz-range-thumb {
         [data-bleh--inbuilt-id_message_privacy="all"] &#primary-selection-receiving_msgs-everyone,
         [data-bleh--inbuilt-id_message_privacy="n"] &#primary-selection-receiving_msgs-neighbours,
         [data-bleh--inbuilt-id_message_privacy="f"] &#primary-selection-receiving_msgs-follow {
-            --bg: hsla(var(--h3), 25%);
-            --bg-hov: hsla(var(--h3), 35%);
-            --bg-atv: hsla(var(--h3), 45%);
+            --bg: hsla(var(--h4), 35%);
+            --bg-hov: hsla(var(--h4), 45%);
+            --bg-atv: hsla(var(--h4), 55%);
             --shadow: none;
             --shadow-hov: none;
             /*--mask: var(--icon-16-check);*/
@@ -12085,8 +12156,8 @@ input[type="range"]::-moz-range-thumb {
         --bg-hov: hsla(var(--h3), 80%) !important;
         --bg-atv: hsla(var(--h3), 60%) !important;
         --col: hsl(var(--ovr, var(--b7))) !important;
-        --shadow: inset hsl(var(--l2-c)) 0 -1px 0, var(--interactable-outer);
-        --shadow-hov: inset hsl(var(--l2-c)) 0 -1px 0, var(--interactable-outer), var(--interactable-active-outer);
+        --shadow: var(--interactable-outer);
+        --shadow-hov: var(--interactable-outer), var(--interactable-active-outer);
 
         .dot {
             left: calc(56px - 7px - 12px);
@@ -12126,12 +12197,32 @@ input[type="range"]::-moz-range-thumb {
 
 
 /*     MENTION     */
+:is(.shout-body, .about-me-sidebar, .bleh--about-me-preview) a {
+    position: relative;
+    --show-icon: none;
+    --top: 50%;
+    --margin-top: -7px;
+    --left: 4px;
+    --mask-size: 14px;
+}
 :is(.shout-body, .about-me-sidebar, .bleh--about-me-preview) a[href^="/user/"] {
     padding: 0 4px;
     background-color: hsla(var(--h4), 20%);
     border-radius: var(--item-small-radius);
     font-weight: var(--font-weight-medium);
     text-decoration: none;
+}
+:is(.shout-body, .about-me-sidebar, .bleh--about-me-preview) a[href^="https://open.spotify.com/user/"] {
+    padding: 0 4px 0 calc(4px + 14px + 4px);
+    background-color: hsla(var(--h4), 20%);
+    border-radius: var(--item-small-radius);
+    font-weight: var(--font-weight-medium);
+    text-decoration: none;
+    --show-icon: block;
+    --mask: url('data:image/svg+xml;base64,PHN2ZyByb2xlPSJpbWciIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48dGl0bGU+U3BvdGlmeTwvdGl0bGU+PHBhdGggZD0iTTEyIDBDNS40IDAgMCA1LjQgMCAxMnM1LjQgMTIgMTIgMTIgMTItNS40IDEyLTEyUzE4LjY2IDAgMTIgMHptNS41MjEgMTcuMzRjLS4yNC4zNTktLjY2LjQ4LTEuMDIxLjI0LTIuODItMS43NC02LjM2LTIuMTAxLTEwLjU2MS0xLjE0MS0uNDE4LjEyMi0uNzc5LS4xNzktLjg5OS0uNTM5LS4xMi0uNDIxLjE4LS43OC41NC0uOSA0LjU2LTEuMDIxIDguNTItLjYgMTEuNjQgMS4zMi40Mi4xOC40NzkuNjU5LjMwMSAxLjAyem0xLjQ0LTMuM2MtLjMwMS40Mi0uODQxLjYtMS4yNjIuMy0zLjIzOS0xLjk4LTguMTU5LTIuNTgtMTEuOTM5LTEuMzgtLjQ3OS4xMi0xLjAyLS4xMi0xLjE0LS42LS4xMi0uNDguMTItMS4wMjEuNi0xLjE0MUM5LjYgOS45IDE1IDEwLjU2MSAxOC43MiAxMi44NGMuMzYxLjE4MS41NC43OC4yNDEgMS4yem0uMTItMy4zNkMxNS4yNCA4LjQgOC44MiA4LjE2IDUuMTYgOS4zMDFjLS42LjE3OS0xLjItLjE4MS0xLjM4LS43MjEtLjE4LS42MDEuMTgtMS4yLjcyLTEuMzgxIDQuMjYtMS4yNiAxMS4yOC0xLjAyIDE1LjcyMSAxLjYyMS41MzkuMy43MTkgMS4wMi40MTkgMS41Ni0uMjk5LjQyMS0xLjAyLjU5OS0xLjU1OS4zeiIvPjwvc3ZnPg==');
+    --hue: var(--hue-brand-sp);
+    --sat: 1;
+    --lit: var(--lit-brand-sp);
 }
 
 
@@ -13387,6 +13478,10 @@ button.bleh--gallery-bookmark-image-btn {
     margin-top: 76px;
     display: flex;
     justify-content: center;
+
+    .content-top + & {
+        margin-top: var(--card-gap);
+    }
 
     .navlist {
         width: var(--cards-width);
