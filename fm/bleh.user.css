@@ -225,7 +225,7 @@ body {
     --card-radius: 8px;
     --card-shadow: hsla(var(--b7), 0.25) 0 2px 4px 0;
     --card-gap: 15px;
-    --card-border: 1px solid hsla(var(--b4), 0.5);
+    --card-border: 1px solid hsla(var(--b4), 0.7);
 
     --cards-main-width: 902px;
     --cards-sidebar-width: 400px;
@@ -1380,7 +1380,7 @@ body[class*="namespace--user_library_"] .col-sidebar, .library-header,
     border-left: var(--border-sides, var(--card-specific-border, var(--card-border)));
     border-right: var(--border-sides, var(--card-specific-border, var(--card-border)));
     border-top: var(--card-border-top, var(--card-specific-border, var(--card-border)));
-    border-bottom: var(--card-border-bottom, var(--card-specific-border, 1px solid hsla(var(--b3), 0.5)));
+    border-bottom: var(--card-border-bottom, var(--card-specific-border, 1px solid hsla(var(--b3), 0.7)));
     border-radius: var(--card-specific-radius, var(--card-radius));
     box-shadow: var(--card-specific-shadow, var(--card-shadow));
     padding: var(--card-padding);
@@ -1616,7 +1616,7 @@ article, section, .buffer-standard, .buffer-standard:not(.col-sidebar) .buffer-s
 /* border if default background is present */
 .video-preview-upload-cta.link-block, p.album-artwork-upload-cta {
     border: var(--card-border) !important;
-    border-bottom: 1px solid hsl(var(--b3)) !important;
+    border-bottom: 1px solid hsla(var(--b3), 0.7) !important;
 }
 
 /* take up full space */
@@ -8378,7 +8378,7 @@ text[style^="color: rgb(0, 0, 0)"] {
 }
 
 .user-list-name {
-    min-width: 180px;
+    min-width: 200px;
 }
 
 .user-list-name a {
@@ -8453,10 +8453,6 @@ text[style^="color: rgb(0, 0, 0)"] {
 }
 .neighbours-items-section .user-list-about-me {
     display: none;
-}
-
-.neighbours-items-section .user-list-name {
-    min-width: 200px;
 }
 
 .listeners-section-track {
