@@ -5011,9 +5011,11 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             let album_artist = album_header.querySelector('.header-new-crumb span').textContent;
             let album_artist_link = album_header.querySelector('.header-new-crumb').getAttribute('href');
 
+            let tags = document.body.querySelector('.catalogue-tags');
+
             let album_metadata = album_header.querySelectorAll('.header-metadata-tnew-display');
-            let plays = album_metadata[1].querySelector('abbr').getAttribute('title');
-            let listeners = album_metadata[0].querySelector('abbr').getAttribute('title');
+            let plays = album_metadata[1].querySelector('abbr').textContent;
+            let listeners = album_metadata[0].querySelector('abbr').textContent;
 
 
             // panel
@@ -5028,10 +5030,43 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     <h2><a href="${album_artist_link}">${album_artist}</a></h2>
                 </div>
                 <div class="bottom-wiki">
-
+                    ${get_wiki(col_main)}
+                    ${tags.outerHTML}
                 </div>
             `);
             col_sidebar.insertBefore(album_main_panel, col_sidebar.firstChild);
+
+
+            // listeners
+            let listener_trend = col_sidebar.querySelector('.listener-trend');
+
+            let album_listeners_panel = document.createElement('section');
+            album_listeners_panel.classList.add('album-listeners-panel');
+            album_listeners_panel.innerHTML = (`
+                <div class="listener-row">
+                    <div class="listener-side">
+                        <h3>Listeners</h3>
+                        <p>${listeners}</p>
+                    </div>
+                    <div class="scrobbler-side">
+                        <h3>Scrobbles</h3>
+                        <p>${plays}</p>
+                    </div>
+                </div>
+                <div class="listener-trend-row">
+                    ${(listener_trend != null) ? listener_trend.outerHTML : ''}
+                </div>
+            `);
+            album_main_panel.after(album_listeners_panel);
         }
+    }
+
+
+    function get_wiki(col_main) {
+        let wiki = col_main.querySelector('.wiki-block.visible-lg');
+        if (wiki == null)
+            wiki = col_main.querySelector('.wiki-block-cta');
+
+        return wiki.outerHTML;
     }
 })();

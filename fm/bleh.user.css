@@ -13574,4 +13574,81 @@ button.bleh--gallery-bookmark-image-btn {
         --mask: var(--icon-16-warning);
     }
 }
+
+
+
+
+/*     REFRESH     */
+
+
+.album-main-panel {
+    display: flex;
+    flex-direction: column;
+    gap: var(--card-gap);
+
+    .middle-info {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+
+        h1 {
+            color: hsl(var(--c1));
+            font-size: 24px;
+            line-height: 28px;
+            font-weight: var(--font-weight-bold);
+        }
+        h2 {
+            color: hsl(var(--c2));
+            font-size: 18px;
+            line-height: 22px;
+            font-weight: var(--font-weight-bold);
+            margin: unset !important;
+
+            a {
+                color: inherit;
+            }
+        }
+    }
+
+    .bottom-wiki {
+        display: flex;
+        flex-direction: column;
+        gap: var(--card-gap);
+
+        padding-top: var(--card-gap);
+        border-top: 1px solid hsl(var(--b4));
+    }
+}
+
+
+.album-listeners-panel {
+    display: flex;
+    flex-direction: column;
+    gap: var(--card-gap);
+
+    .listener-row {
+        display: flex;
+
+        div {
+            flex: 1;
+
+            h3 {
+                color: hsl(var(--c3));
+                font-weight: var(--font-weight-medium);
+            }
+            p {
+                color: hsl(var(--c1));
+                font-size: 24px;
+                line-height: 28px;
+                font-weight: var(--font-weight-bold);
+            }
+        }
+    }
+}
+.col-main.upper-overview,
+.col-sidebar.masonry-right,
+.section-with-separator:has(.listener-trend)
+{
+    display: none;
+}
 }
