@@ -13638,7 +13638,7 @@ button.bleh--gallery-bookmark-image-btn {
 
 /* main column, align with sidebar */
 .masonry-left-bottom {
-    margin-top: 46px !important;
+    margin-top: unset !important; /* 46px if nav is not present */
 }
 
 .namespace--music_album_overview .col-sidebar.hidden-xs {

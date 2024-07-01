@@ -4965,10 +4965,45 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         let col_main = document.body.querySelector('.col-main:not(.visible-xs, .upper-overview)');
         let col_sidebar = document.body.querySelector('.col-sidebar:not(.masonry-right)');
 
-        if (is_subpage) {
-            let navlist = album_header.querySelector('.navlist');
-            col_main.insertBefore(navlist, col_main.firstChild);
+        let navlist = album_header.querySelector('.navlist');
+        if (!is_subpage) {
+            navlist = document.createElement('nav');
+            navlist.classList.add('navlist', 'secondary-nav', 'navlist--more');
+            navlist.setAttribute('aria-label', 'Secondary navigation');
+            navlist.setAttribute('data-require', 'components/collapsing-nav-v2');
+
+            navlist.innerHTML = (`
+                <ul class="navlist-items js-navlist-items" style="position: relative;">
+                    <li class="navlist-item secondary-nav-item secondary-nav-item--overview">
+                        <a class="secondary-nav-item-link secondary-nav-item-link--active" href="${window.location.href}">
+                            Overview
+                        </a>
+                    </li>
+                    <li class="navlist-item secondary-nav-item secondary-nav-item--wiki">
+                        <a class="secondary-nav-item-link" href="${window.location.href}/+wiki">
+                            Wiki
+                        </a>
+                    </li>
+                    <li class="navlist-item secondary-nav-item secondary-nav-item--tags">
+                        <a class="secondary-nav-item-link" href="${window.location.href}/+tags">
+                            Tags
+                        </a>
+                    </li>
+                    <li class="navlist-item secondary-nav-item secondary-nav-item--images">
+                        <a class="secondary-nav-item-link" href="${window.location.href}/+images">
+                            Artwork
+                        </a>
+                    </li>
+                    <li class="navlist-item secondary-nav-item secondary-nav-item--shoutbox">
+                        <a class="secondary-nav-item-link" href="${window.location.href}/+shoutbox">
+                            Shouts
+                        </a>
+                    </li>
+                </ul>
+            `);
         }
+
+        col_main.insertBefore(navlist, col_main.firstChild);
 
         if (!is_subpage) {
             let col_main_overview = document.body.querySelector('.col-main.upper-overview');
