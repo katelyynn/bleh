@@ -7475,7 +7475,7 @@ text[style^="color: rgb(255, 172, 172)"] {
 
 .listener-trend {
     /* makes the listener trend bigger */
-    padding-top: 50%;
+    padding-top: 55%;
 
     .highcharts-alternate-grid {
         fill: hsla(var(--b4), 60%) !important;
@@ -7486,7 +7486,7 @@ text[style^="color: rgb(255, 172, 172)"] {
     }
 
     .highcharts-area {
-        fill: hsla(var(--h4), 20%) !important;
+        fill: hsla(var(--h4), 25%) !important;
     }
 
     .highcharts-markers .highcharts-point {
