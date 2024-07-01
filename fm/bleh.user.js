@@ -4963,7 +4963,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
         let row = document.body.querySelector('.row');
         let col_main = document.body.querySelector('.col-main:not(.visible-xs, .upper-overview)');
-        let col_sidebar = document.body.querySelector('.col-sidebar.hidden-xs');
+        let col_sidebar = document.body.querySelector('.col-sidebar:not(.masonry-right)');
 
         let navlist = album_header.querySelector('.navlist');
         if (!is_subpage) {
@@ -5019,6 +5019,13 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             let plays = album_metadata[1].querySelector('abbr').textContent;
             let listeners = album_metadata[0].querySelector('abbr').textContent;
 
+            let header_bg_html = album_header.querySelector('.header-new-background-image');
+            let header_bg = '';
+            if (header_bg_html != null)
+                header_bg = header_bg_html.getAttribute('style');
+
+            create_header_bg(header_bg);
+
 
             // panel
             let album_main_panel = document.createElement('section');
@@ -5065,10 +5072,22 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
 
     function get_wiki(col_main) {
-        let wiki = col_main.querySelector('.wiki-block.visible-lg');
-        if (wiki == null)
-            wiki = col_main.querySelector('.wiki-block-cta');
+        if (col_main != null) {
+            let wiki = col_main.querySelector('.wiki-block.visible-lg');
+            if (wiki == null)
+                wiki = col_main.querySelector('.wiki-block-cta');
 
-        return wiki.outerHTML;
+            return wiki.outerHTML;
+        } else {
+            return document.body.querySelector('.coloured-cta--wiki-icon').outerHTML;
+        }
+    }
+
+    function create_header_bg(header_bg) {
+        let background = document.createElement('div');
+        background.classList.add('backing-bg');
+        background.style = header_bg;
+
+        document.body.appendChild(background);
     }
 })();

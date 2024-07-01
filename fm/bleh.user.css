@@ -1611,7 +1611,7 @@ article, section, .buffer-standard, .buffer-standard:not(.col-sidebar) .buffer-s
 }
 
 /* take up full space */
-.album-overview-cover-art, .album-artwork-upload-cta {
+.album-overview-cover-art, .album-artwork-upload-cta-container {
     margin-top: -83px !important;
     overflow: hidden;
     z-index: 1;
@@ -5899,7 +5899,7 @@ span.header-new-gallery-inner a:before,
     display: none;
 }
 
-.navlist + .section-with-separator .section-controls {
+.navlist + .section-with-separator:not(#tracklist) .section-controls {
     margin-top: var(--card-gap);
 }
 /* do not use section-with-control !! that refers to buttons
@@ -7523,6 +7523,8 @@ text[style^="color: rgb(255, 172, 172)"] {
     stroke: unset !important;
     height: 20px !important;
     overflow: hidden;
+    z-index: 3;
+    position: relative;
 }
 .highcharts-tooltip text, .highcharts-tooltip text[style^="color: rgb(51, 51, 51)"], text.highcharts-title[style^="color: rgb(51, 51, 51)"] {
     font-size: var(--font-size) !important;
@@ -13641,5 +13643,22 @@ button.bleh--gallery-bookmark-image-btn {
 .section-with-separator:has(.listener-trend)
 {
     display: none;
+}
+
+
+/* bg */
+.backing-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 800px;
+    z-index: -1;
+    background-size: cover;
+    --mask: linear-gradient(0deg, transparent 0%, rgb(0, 0, 0) 100%);
+    mask-image: var(--mask);
+    -webkit-mask-image: var(--mask);
+    opacity: 0.1;
+    filter: blur(10px) saturate(110%);
 }
 }
