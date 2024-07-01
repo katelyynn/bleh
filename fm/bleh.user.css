@@ -12981,6 +12981,7 @@ input[type="range"]::-moz-range-thumb {
 
 
 /*     UNDER CONSTRUCTION     */
+.nag-bar--alert,
 body:is(.namespace--user_playlists_create_overview, .music-landing-overview, [class*="namespace--charts"]):after {
     position: fixed;
     padding: 10px var(--card-gap);
@@ -12994,10 +12995,10 @@ body:is(.namespace--user_playlists_create_overview, .music-landing-overview, [cl
     display: flex;
     justify-content: center;
     align-items: center;
-    background: hsla(var(--h4), 20%);
+    background: hsla(var(--h4), 25%) !important;
     border: 2px solid transparent;
     border-left: 2px solid hsl(var(--l3-c));
-    color: hsl(var(--l2));
+    color: hsl(var(--l3-c));
     --hue: var(--hue-neg);
     --sat: 1;
     --lit: 1;
@@ -13516,16 +13517,14 @@ button.bleh--gallery-bookmark-image-btn {
 
 /*     MIGRATION ALERT     */
 .nag-bar--alert {
-    color: hsl(var(--l3-c));
-    font-size: var(--font-size);
-    line-height: var(--line-height);
-    font-weight: var(--font-weight-medium);
-    --hue: var(--hue-neg);
-    --sat: 1;
-    --lit: 1;
+    .container {
+        min-width: fit-content;
+        width: fit-content !important;
+    }
 
     .nag-bar-message {
         padding-left: calc(16px + 6px);
+        padding-right: unset;
         --left: 0;
         --mask: var(--icon-16-warning);
     }
