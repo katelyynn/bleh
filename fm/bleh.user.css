@@ -1772,9 +1772,6 @@ span.header-new-gallery-inner a,
     display: flex !important;
     gap: 6px;
     margin: unset;
-    /* todo: work on this better, it only occurs if
-    user tags are too long next to global tags */
-    flex-wrap: wrap;
 }
 
 .catalogue-tags {
@@ -1784,6 +1781,27 @@ span.header-new-gallery-inner a,
     the -2px is to re-align it with how it was before cus it changed somehow */
     padding-left: calc(16px + 6px + 11px + 1px - 2px);
     position: relative;
+    overflow: hidden;
+
+    .tags-list {
+        flex: 1;
+        overflow: hidden;
+        margin-left: -11px;
+        position: relative;
+
+        &:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 30px;
+            background: linear-gradient(90deg, transparent 0%, hsl(var(--b5)) 100%);
+            display: block;
+            z-index: 6;
+            pointer-events: none;
+        }
+    }
 }
 .catalogue-tags:before {
     --left: 0;
@@ -1795,6 +1813,7 @@ span.header-new-gallery-inner a,
     margin: unset;
 }
 /* apply tag styling to everything tag-related */
+.tags-view-all,
 .catalogue-tags .tags-add,
 .catalogue-tags .tag a, .catalogue-tags .tags-add-cta {
     box-shadow: var(--interact-shadow) !important;
@@ -1811,8 +1830,10 @@ span.header-new-gallery-inner a,
     transition-duration: var(--trans);
     transition-timing-function: var(--trans-function);
     /* -10 to overlap spacing, -1 for the border */
-    border-left: 1px solid hsl(var(--b5));
-    margin-left: -11px;
+    .tag:not(:first-child) & {
+        border-left: 1px solid hsl(var(--b5));
+        margin-left: -11px;
+    }
     /* last.fm by default sets this to 150px,
     with the padding in bleh this conflicts with eg.
     the underground hip-hop tag */
@@ -1876,13 +1897,20 @@ spacing between is removed and aligned to tag icon */
 
 
 /* add a tag */
+.tags-view-all,
 .catalogue-tags .tags-add {
     width: calc(16px + (10px * 2));
     height: 20px;
-}
-.tags-add:before {
-    --mask: var(--icon-16-plus);
     --left: 10px;
+    position: relative;
+    font-size: 0 !important;
+    margin-left: 0 !important;
+}
+.tags-add {
+    --mask: var(--icon-16-plus);
+}
+.tags-view-all {
+    --mask: var(--icon-16-search);
 }
 
 
@@ -5641,6 +5669,7 @@ button:not(.playback-app-container button, .top-artist-list-item, .pixel, .liste
 
 
 /*     ICON MASK     */
+.tags-view-all:before,
 .user-list-inner-wrap .label:before,
 .nag-bar-message:before,
 /*     BLEH     */
