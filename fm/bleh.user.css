@@ -1924,7 +1924,8 @@ spacing between is removed and aligned to tag icon */
 
 /*     SECONDARY NAV     */
 .page-content {
-    padding-top: calc(46px + (var(--card-gap) * 2)) !important;
+    /*padding-top: calc(46px + (var(--card-gap) * 2)) !important;*/
+    padding-top: var(--card-gap);
     padding-bottom: var(--card-gap) !important;
 }
 .page-content + .page-content {
@@ -13641,9 +13642,10 @@ button.bleh--gallery-bookmark-image-btn {
     margin-top: unset !important; /* 46px if nav is not present */
 }
 
-.namespace--music_album_overview .col-sidebar.hidden-xs {
+.col-sidebar.album-sidebar {
     position: relative;
     top: 31px;
+    margin-top: var(--card-gap);
 }
 
 

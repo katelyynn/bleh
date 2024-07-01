@@ -5004,6 +5004,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         }
 
         col_main.insertBefore(navlist, col_main.firstChild);
+        col_sidebar.classList.add('album-sidebar');
 
         if (!is_subpage) {
             let col_main_overview = document.body.querySelector('.col-main.upper-overview');
@@ -5075,7 +5076,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             let header_bg_html = album_header.querySelector('.header-new-background-image');
             let header_bg = '';
             if (header_bg_html != null)
-                header_bg = header_bg_html.getAttribute('style');
+                header_bg = header_bg_html.getAttribute('content');
 
             create_header_bg(header_bg);
 
@@ -5085,7 +5086,21 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             album_main_panel.classList.add('album-main-panel');
             album_main_panel.innerHTML = (`
                 <div class="top-cover">
+                    <div class="item-has-metadata artwork-and-metadata-row buffer-standard buffer-reset@sm">
+                        <div class="album-overview-cover-art js-focus-controls-container">
+                            <a class="cover-art" href="${col_main.querySelector('.secondary-nav-item--images a').getAttribute('href')}">
+                                <img src="${header_bg}" loading="lazy">
+                            </a>
+                            <div class="album-overview-cover-art-actions js-link-block link-block" style="display: none">
+                                <div class="album-overview-cover-art-action-row">
+                                    <span class="album-overview-cover-art-upload-action">
 
+                                    </span>
+                                </div>
+                                <a class="js-link-block-cover-link link-block-cover-link" href="${col_main.querySelector('.secondary-nav-item--images a').getAttribute('href')}"></a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="middle-info">
                     <h1>${album_name}</h1>
@@ -5115,11 +5130,11 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             let background = document.createElement('div');
             background.classList.add('backing-bg');
             background.setAttribute('id', 'backing-bg');
-            background.style = header_bg;
+            background.style.setProperty('background-image', header_bg);
 
             document.body.appendChild(background);
         } else {
-            previous_background.style = header_bg;
+            previous_background.style.setProperty('background-image', header_bg);
         }
     }
 })();
