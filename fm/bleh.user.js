@@ -4962,7 +4962,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         let is_subpage = album_header.classList.contains('header-new--subpage');
 
         let row = document.body.querySelector('.row');
-        let col_main = document.body.querySelector('.col-main:not(.visible-xs)');
+        let col_main = document.body.querySelector('.col-main:not(.visible-xs, .upper-overview)');
         let col_sidebar = document.body.querySelector('.col-sidebar.hidden-xs');
 
         let navlist = album_header.querySelector('.navlist');
@@ -5001,11 +5001,13 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     </li>
                 </ul>
             `);
-
-            document.querySelector('.header-new-content').appendChild(navlist);
         }
 
+        col_main.insertBefore(navlist, col_main.firstChild);
+
         if (!is_subpage) {
+            let col_main_overview = document.body.querySelector('.col-main.upper-overview');
+
             let album_artwork = document.body.querySelector('.col-sidebar.masonry-right').lastElementChild.outerHTML;
             let album_name = album_header.querySelector('.header-new-title').textContent;
             let album_artist = album_header.querySelector('.header-new-crumb span').textContent;
@@ -5030,7 +5032,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     <h2><a href="${album_artist_link}">${album_artist}</a></h2>
                 </div>
                 <div class="bottom-wiki">
-                    ${get_wiki(col_main)}
+                    ${get_wiki(col_main_overview)}
                     ${tags.outerHTML}
                 </div>
             `);

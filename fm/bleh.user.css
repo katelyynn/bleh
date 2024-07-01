@@ -1344,7 +1344,7 @@ last.fm changes as of 2024-05-20 */
 .col-main > section, .col-sidebar > section,
 .your-progress-component,
 /* this fixes places of the site (tracks, artist, albums watever that use a weird method of 2 col-mains, 2 col-sidebars as appose to profiles */
-/* -> could be simplified, idk if it affects other parts of the site tho */.row.buffer-4 > .col-main:first-child /* <- */, .row.buffer-4 > .col-main:nth-child(3) > :is(section, #shoutbox),
+.row.buffer-4 > .col-main:nth-child(3) > :is(section, #shoutbox),
 .album-and-lyrics-row,
 /* this is for artists, appears to be targeting the bio box */ .header-new--artist + .container > .row/*:not(.buffer-4)*//*:has(:nth-child(2)) > .col-main:nth-child(1)*/ .col-main:first-child, /* there's 2 col-mains, the 2nd contains other cards */
 /* this is for albums */ .container > .row.buffer-reset\@sm > .col-main:nth-child(2),
@@ -1502,14 +1502,6 @@ body[class*="namespace--user_library_"] .col-sidebar, .library-header,
     height: calc(274px - 8px);
     padding: unset !important;
 }
-.header-new--album + .container > .row.buffer-reset\@sm > .col-main:nth-child(3) {
-    margin-top: -32px !important;
-}
-
-.namespace--music_album_overview .col-sidebar.hidden-xs {
-    position: relative;
-    top: -32px;
-}
 
 .page-content > .section .row .col-main {
     margin-top: unset;
@@ -1552,20 +1544,6 @@ body[class*="namespace--user_library_"] .col-sidebar, .library-header,
 }
 .header-new--subpage ~ .full-bleed-ad-container + .page-content .col-sidebar .buffer-standard {
     --only-card-gap: 0;
-}
-
-
-/*     UNDO CARD STYLES     */
-.row.buffer-4 > .col-main:first-child > section /* for shoutbox in tabs */
-{
-    background-color: unset;
-    border: unset;
-    border-radius: unset;
-    box-shadow: unset;
-    padding: unset;
-    margin-top: unset;
-    background-image: unset;
-    background-repeat: unset;
 }
 
 .section-with-separator {
@@ -1634,7 +1612,7 @@ article, section, .buffer-standard, .buffer-standard:not(.col-sidebar) .buffer-s
 
 /* take up full space */
 .album-overview-cover-art, .album-artwork-upload-cta {
-    margin-top: -166px !important;
+    margin-top: -83px !important;
     overflow: hidden;
     z-index: 1;
 }
@@ -13619,6 +13597,14 @@ button.bleh--gallery-bookmark-image-btn {
         border-top: 1px solid hsl(var(--b4));
     }
 }
+.header-new--album + .container > .row.buffer-reset\@sm > .col-main:nth-child(3) {
+    margin-top: unset !important;
+}
+
+.namespace--music_album_overview .col-sidebar.hidden-xs {
+    position: relative;
+    top: 31px;
+}
 
 
 .album-listeners-panel {
@@ -13649,6 +13635,7 @@ button.bleh--gallery-bookmark-image-btn {
         color: hsl(var(--c3));
     }
 }
+.header-new--album,
 .col-main.upper-overview,
 .col-sidebar.masonry-right,
 .section-with-separator:has(.listener-trend)
