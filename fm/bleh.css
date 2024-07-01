@@ -12993,8 +12993,20 @@ body:is(.namespace--user_playlists_create_overview, .music-landing-overview, [cl
     --sat: 1;
     --lit: 1;
     z-index: 100000;
+    max-width: 400px;
+    opacity: 0.5;
     width: fit-content;
     backdrop-filter: blur(20px) saturate(120%);
+
+    transition-property: max-width, opacity;
+    transition-delay: 0.2s;
+    transition-duration: var(--trans);
+    transition-timing-function: var(--trans-function);
+
+    &:hover {
+        max-width: 900px;
+        opacity: 1;
+    }
 }
 
 
