@@ -2286,7 +2286,7 @@ header:not(:has(.header-featured-track)) .header-message-user {
 }
 
 
-.header-new--subpage .secondary-nav {
+.header-new .secondary-nav {
     margin-top: -46px;
     position: relative;
     top: calc(67px + var(--card-gap));

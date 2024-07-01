@@ -1214,6 +1214,9 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             patch_header_menu();
             patch_gallery_page();
 
+            // album pages
+            bleh_album_pages();
+
             correct_generic_combo_no_artist('artist-header-featured-items-item');
             correct_generic_combo_no_artist('artist-top-albums-item');
             correct_generic_combo('source-album-details');
@@ -1247,6 +1250,9 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                                 patch_artist_grids(document.body);
                                 patch_header_menu();
                                 patch_gallery_page();
+
+                                // album pages
+                                bleh_album_pages();
 
                                 correct_generic_combo_no_artist('artist-header-featured-items-item');
                                 correct_generic_combo_no_artist('artist-top-albums-item');
@@ -4937,5 +4943,95 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             item.setAttribute('data-scrobbles-milestone',colour);
             item.style.setProperty('--percent',`${Math.round(percent)}%`);
         } catch(e) {console.error('bwaaaaaaaa',e)}
+    }
+
+
+
+
+    // album pages
+    function bleh_album_pages() {
+        let album_header = document.body.querySelector('.header-new--album');
+
+        if (album_header == undefined)
+            return;
+
+        if (album_header.hasAttribute('data-bwaa'))
+            return;
+        album_header.setAttribute('data-bwaa', 'true');
+
+        let is_subpage = album_header.classList.contains('header-new--subpage');
+
+        let row = document.body.querySelector('.row');
+        let col_main = document.body.querySelector('.col-main:not(.visible-xs)');
+        let col_sidebar = document.body.querySelector('.col-sidebar.hidden-xs');
+
+        let navlist = album_header.querySelector('.navlist');
+        if (!is_subpage) {
+            navlist = document.createElement('nav');
+            navlist.classList.add('navlist', 'secondary-nav', 'navlist--more');
+            navlist.setAttribute('aria-label', 'Secondary navigation');
+            navlist.setAttribute('data-require', 'components/collapsing-nav-v2');
+
+            navlist.innerHTML = (`
+                <ul class="navlist-items js-navlist-items" style="position: relative;">
+                    <li class="navlist-item secondary-nav-item secondary-nav-item--overview">
+                        <a class="secondary-nav-item-link secondary-nav-item-link--active" href="${window.location.href}">
+                            Overview
+                        </a>
+                    </li>
+                    <li class="navlist-item secondary-nav-item secondary-nav-item--wiki">
+                        <a class="secondary-nav-item-link" href="${window.location.href}/+wiki">
+                            Wiki
+                        </a>
+                    </li>
+                    <li class="navlist-item secondary-nav-item secondary-nav-item--tags">
+                        <a class="secondary-nav-item-link" href="${window.location.href}/+tags">
+                            Tags
+                        </a>
+                    </li>
+                    <li class="navlist-item secondary-nav-item secondary-nav-item--images">
+                        <a class="secondary-nav-item-link" href="${window.location.href}/+images">
+                            Artwork
+                        </a>
+                    </li>
+                    <li class="navlist-item secondary-nav-item secondary-nav-item--shoutbox">
+                        <a class="secondary-nav-item-link" href="${window.location.href}/+shoutbox">
+                            Shouts
+                        </a>
+                    </li>
+                </ul>
+            `);
+
+            document.querySelector('.header-new-content').appendChild(navlist);
+        }
+
+        if (!is_subpage) {
+            let album_artwork = document.body.querySelector('.col-sidebar.masonry-right').lastElementChild.outerHTML;
+            let album_name = album_header.querySelector('.header-new-title').textContent;
+            let album_artist = album_header.querySelector('.header-new-crumb span').textContent;
+            let album_artist_link = album_header.querySelector('.header-new-crumb').getAttribute('href');
+
+            let album_metadata = album_header.querySelectorAll('.header-metadata-tnew-display');
+            let plays = album_metadata[1].querySelector('abbr').getAttribute('title');
+            let listeners = album_metadata[0].querySelector('abbr').getAttribute('title');
+
+
+            // panel
+            let album_main_panel = document.createElement('section');
+            album_main_panel.classList.add('album-main-panel');
+            album_main_panel.innerHTML = (`
+                <div class="top-cover">
+                    ${album_artwork}
+                </div>
+                <div class="middle-info">
+                    <h1>${album_name}</h1>
+                    <h2><a href="${album_artist_link}">${album_artist}</a></h2>
+                </div>
+                <div class="bottom-wiki">
+
+                </div>
+            `);
+            col_sidebar.insertBefore(album_main_panel, col_sidebar.firstChild);
+        }
     }
 })();
