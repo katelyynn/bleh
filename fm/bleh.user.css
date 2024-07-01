@@ -13644,6 +13644,10 @@ button.bleh--gallery-bookmark-image-btn {
             }
         }
     }
+
+    .listener-trend-row {
+        color: hsl(var(--c3));
+    }
 }
 .col-main.upper-overview,
 .col-sidebar.masonry-right,

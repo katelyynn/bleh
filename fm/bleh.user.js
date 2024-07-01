@@ -5054,7 +5054,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     </div>
                 </div>
                 <div class="listener-trend-row">
-                    ${(listener_trend != null) ? listener_trend.outerHTML : ''}
+                    ${(listener_trend != null) ? listener_trend.outerHTML : 'There\'s no listener trend yet, check back later.'}
                 </div>
             `);
             album_main_panel.after(album_listeners_panel);
