@@ -457,6 +457,9 @@ body {
     --icon-16-correction: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtc3BlbGwtY2hlY2stMiI+PHBhdGggZD0ibTYgMTYgNi0xMiA2IDEyIi8+PHBhdGggZD0iTTggMTJoOCIvPjxwYXRoIGQ9Ik00IDIxYzEuMSAwIDEuMS0xIDIuMy0xczEuMSAxIDIuMyAxYzEuMSAwIDEuMS0xIDIuMy0xIDEuMSAwIDEuMSAxIDIuMyAxIDEuMSAwIDEuMS0xIDIuMy0xIDEuMSAwIDEuMSAxIDIuMyAxIDEuMSAwIDEuMS0xIDIuMy0xIi8+PC9zdmc+');
     --icon-16-sparkles: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtc3BhcmtsZXMiPjxwYXRoIGQ9Ik05LjkzNyAxNS41QTIgMiAwIDAgMCA4LjUgMTQuMDYzbC02LjEzNS0xLjU4MmEuNS41IDAgMCAxIDAtLjk2Mkw4LjUgOS45MzZBMiAyIDAgMCAwIDkuOTM3IDguNWwxLjU4Mi02LjEzNWEuNS41IDAgMCAxIC45NjMgMEwxNC4wNjMgOC41QTIgMiAwIDAgMCAxNS41IDkuOTM3bDYuMTM1IDEuNTgxYS41LjUgMCAwIDEgMCAuOTY0TDE1LjUgMTQuMDYzYTIgMiAwIDAgMC0xLjQzNyAxLjQzN2wtMS41ODIgNi4xMzVhLjUuNSAwIDAgMS0uOTYzIDB6Ii8+PHBhdGggZD0iTTIwIDN2NCIvPjxwYXRoIGQ9Ik0yMiA1aC00Ii8+PHBhdGggZD0iTTQgMTd2MiIvPjxwYXRoIGQ9Ik01IDE4SDMiLz48L3N2Zz4=');
     --icon-16-preview: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtc2Nhbi1leWUiPjxwYXRoIGQ9Ik0zIDdWNWEyIDIgMCAwIDEgMi0yaDIiLz48cGF0aCBkPSJNMTcgM2gyYTIgMiAwIDAgMSAyIDJ2MiIvPjxwYXRoIGQ9Ik0yMSAxN3YyYTIgMiAwIDAgMS0yIDJoLTIiLz48cGF0aCBkPSJNNyAyMUg1YTIgMiAwIDAgMS0yLTJ2LTIiLz48Y2lyY2xlIGN4PSIxMiIgY3k9IjEyIiByPSIxIi8+PHBhdGggZD0iTTUgMTJzMi41LTUgNy01IDcgNSA3IDUtMi41IDUtNyA1LTctNS03LTUiLz48L3N2Zz4=');
+    --icon-16-following: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtYXJyb3ctdXAtZnJvbS1kb3QiPjxwYXRoIGQ9Im01IDkgNy03IDcgNyIvPjxwYXRoIGQ9Ik0xMiAxNlYyIi8+PGNpcmNsZSBjeD0iMTIiIGN5PSIyMSIgcj0iMSIvPjwvc3ZnPg==');
+    --icon-16-followers: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtYXJyb3ctZG93bi10by1kb3QiPjxwYXRoIGQ9Ik0xMiAydjE0Ii8+PHBhdGggZD0ibTE5IDktNyA3LTctNyIvPjxjaXJjbGUgY3g9IjEyIiBjeT0iMjEiIHI9IjEiLz48L3N2Zz4=');
+    --icon-16-neighbours: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtZ2l0LWNvbXBhcmUiPjxjaXJjbGUgY3g9IjE4IiBjeT0iMTgiIHI9IjMiLz48Y2lyY2xlIGN4PSI2IiBjeT0iNiIgcj0iMyIvPjxwYXRoIGQ9Ik0xMyA2aDNhMiAyIDAgMCAxIDIgMnY3Ii8+PHBhdGggZD0iTTExIDE4SDhhMiAyIDAgMCAxLTItMlY5Ii8+PC9zdmc+');
     --icon-16-dev: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtY29kZSI+PHBvbHlsaW5lIHBvaW50cz0iMTYgMTggMjIgMTIgMTYgNiIvPjxwb2x5bGluZSBwb2ludHM9IjggNiAyIDEyIDggMTgiLz48L3N2Zz4=');
 
     --icon-20-check: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImhzbCgyNTUsMjAlLDkwJSkiIHN0cm9rZS13aWR0aD0iMi4yNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1jaGVjayI+PHBhdGggZD0iTTIwIDYgOSAxN2wtNS01Ii8+PC9zdmc+');
@@ -484,16 +487,16 @@ body:not(.namespace--user_listening-report_playback) {
     letter-spacing: unset !important;
     color-scheme: dark;
     accent-color: hsl(var(--l3-c));
-}
-body:before {
-    content: '';
-    inset: 0;
-    position: fixed;
-    z-index: 100000000000;
-    opacity: 0.23;
-    pointer-events: none;
-    background-image: var(--noise2, var(--noise));
-    background-size: var(--noise-size, unset);
+
+    &:before {
+        content: '';
+        inset: 0;
+        position: fixed;
+        z-index: 100000000000;
+        opacity: 0.23;
+        pointer-events: none;
+        background-image: var(--noise);
+    }
 }
 
 address, blockquote, dl, ol, p, pre, ul {
@@ -541,7 +544,10 @@ html body {
     color: hsl(var(--l3-c));
 }
 
-:focus-visible {
+/* applies focus outline to everything except
+masthead search, as it looks too ugly and focus can be
+inferred by it being opened in the first place */
+:not(#masthead-search-field):focus-visible {
     outline: 2px solid hsl(var(--l3-c)) !important;
 }
 
@@ -609,18 +615,6 @@ html body {
 }
 
 
-.player-bar .player-bar-progress-wrap {
-    width: var(--cards-width);
-    left: calc((100% - var(--cards-width)) / 2);
-}
-.player-bar .player-bar-progress {
-    background: hsl(var(--b4));
-}
-.player-bar .player-bar-progress-slug {
-    background: hsl(var(--h4));
-}
-
-
 .player-bar {
     position: relative;
     z-index: 1000;
@@ -631,6 +625,17 @@ html body {
     justify-content: center;
     align-items: center;
 
+    .player-bar-progress-wrap {
+        width: var(--cards-width);
+        left: calc((100% - var(--cards-width)) / 2);
+    }
+    .player-bar-progress {
+        background: hsl(var(--b4));
+    }
+    .player-bar-progress-slug {
+        background: hsl(var(--h4));
+    }
+
     .player-bar-inner-wrap {
         padding: 7px 0;
         padding-right: unset;
@@ -640,57 +645,59 @@ html body {
         width: var(--cards-width);
         backdrop-filter: blur(10px) saturate(120%);
     }
-}
+
+    .player-bar-artwork {
+        margin: unset;
+        width: 38px;
+        height: 38px;
+        border-radius: var(--item-small-radius);
+        box-shadow: var(--card-shadow);
+        background-color: hsl(var(--b5));
+        --mask-size: var(--cover-size-32);
+        overflow: hidden;
+        order: -1;
+    }
+
+    .source-info {
+        width: unset;
+        height: unset;
+        margin: unset;
+    }
 
 
-.player-bar .player-bar-artwork {
-    margin: unset;
-    width: 38px;
-    height: 38px;
-    border-radius: var(--item-small-radius);
-    box-shadow: var(--card-shadow);
-    background-color: hsl(var(--b5));
-    --mask-size: var(--cover-size-32);
-    overflow: hidden;
-    order: -1;
-}
-.player-bar .source-info {
-    width: unset;
-    height: unset;
-    margin: unset;
-}
-
-.player-bar .player-bar-now-playing {
-    padding: unset;
-    order: -1;
-    flex: 1;
-}
-.player-bar .player-bar-track-name {
-    color: hsl(var(--c2)) !important;
-    font-weight: var(--font-weight-medium) !important;
-    opacity: unset !important;
-}
-.player-bar-artist-name {
-    color: hsla(var(--c2), 80%) !important;
-    font-weight: var(--font-weight) !important;
-    opacity: unset !important;
-}
+    .player-bar-now-playing {
+        padding: unset;
+        order: -1;
+        flex: 1;
+    }
+    .player-bar-track-name {
+        color: hsl(var(--c2)) !important;
+        font-weight: var(--font-weight-medium) !important;
+        opacity: unset !important;
+    }
+    .player-bar-artist-name {
+        color: hsla(var(--c2), 80%) !important;
+        font-weight: var(--font-weight) !important;
+        opacity: unset !important;
+    }
 
 
-.media-controls {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-}
-.player-bar .player-bar-btn {
-    width: 32px;
-    height: 32px;
-    opacity: unset !important;
-    --left: 8px;
-    --font-size: 0;
+    .media-controls {
+        display: flex;
+        align-items: center;
+        gap: 4px;
 
-    &.inactive {
-        --col: hsl(var(--c3));
+        .player-bar-btn {
+            width: 32px;
+            height: 32px;
+            opacity: unset !important;
+            --left: 8px;
+            --font-size: 0;
+
+            &.inactive {
+                --col: hsl(var(--c3));
+            }
+        }
     }
 }
 
@@ -2623,11 +2630,21 @@ hr + .library-search-results-header {
         --mask: var(--icon-16-users);
     }
 }
+.bleh--friends-nav .secondary-nav-item--followers {
+    a {
+        --mask: var(--icon-16-followers);
+    }
+}
+.bleh--friends-nav .secondary-nav-item--following {
+    a {
+        --mask: var(--icon-16-following);
+    }
+}
 .bleh--friends-nav .secondary-nav-item--neighbours {
     order: 5;
 
     a {
-        --mask: var(--icon-16-arrows);
+        --mask: var(--icon-16-neighbours);
     }
 }
 
@@ -3334,7 +3351,7 @@ state is not active, which then falls back to primary button styling */
         transition-delay: 0.2s;
     }
 }
-.header-title-label-wrap .label:hover, .header-new-on-tour:hover, .user-list-inner-wrap .label:hover {
+.header-title-label-wrap .label:hover, .header-new-on-tour:hover {
     max-width: 150px;
     padding-right: 6px;
     background-color: hsla(var(--h4), 15%) !important;
@@ -5636,6 +5653,7 @@ button:not(.playback-app-container button, .top-artist-list-item, .pixel, .liste
 
 
 /*     ICON MASK     */
+.user-list-inner-wrap .label:before,
 .nag-bar-message:before,
 /*     BLEH     */
 .btns .btn:before,
@@ -8360,9 +8378,10 @@ text[style^="color: rgb(0, 0, 0)"] {
     gap: var(--card-gap);
 }
 
-.user-list-item:has(.label.user-follow) {
-    background: linear-gradient(90deg, hsla(var(--h4), 15%) 0%, transparent 100%);
-    --override-link-col: hsl(var(--l2-c));
+.user-list-item:not(:has(.label.user-follow)) {
+    .user-list-name {
+        margin-left: calc(16px + var(--card-gap));
+    }
 }
 
 .user-list-name {
@@ -8373,7 +8392,21 @@ text[style^="color: rgb(0, 0, 0)"] {
     color: var(--override-link-col, hsl(var(--l3-c))) !important;
 }
 .user-list-inner-wrap .label {
-    display: none;
+    order: -1;
+    width: 16px;
+    text-align: center;
+    font-size: 0;
+    padding: 0;
+    position: relative;
+    background: unset !important;
+    --mask: var(--icon-16-followers);
+    --left: 0;
+    color: hsl(var(--c3)) !important;
+
+    .user-list-item:has(&) {
+        background: linear-gradient(90deg, hsla(var(--h4), 20%) 0%, transparent 100%);
+        --override-link-col: hsl(var(--l2-c));
+    }
 }
 
 

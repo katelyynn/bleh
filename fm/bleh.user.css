@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           bleh (dev)
 @namespace      github.com/katelyynn/bleh
-@version        2024.0630
+@version        2024.0701
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.css
@@ -497,16 +497,16 @@ body:not(.namespace--user_listening-report_playback) {
     letter-spacing: unset !important;
     color-scheme: dark;
     accent-color: hsl(var(--l3-c));
-}
-body:before {
-    content: '';
-    inset: 0;
-    position: fixed;
-    z-index: 100000000000;
-    opacity: 0.23;
-    pointer-events: none;
-    background-image: var(--noise2, var(--noise));
-    background-size: var(--noise-size, unset);
+
+    &:before {
+        content: '';
+        inset: 0;
+        position: fixed;
+        z-index: 100000000000;
+        opacity: 0.23;
+        pointer-events: none;
+        background-image: var(--noise);
+    }
 }
 
 address, blockquote, dl, ol, p, pre, ul {
@@ -554,7 +554,10 @@ html body {
     color: hsl(var(--l3-c));
 }
 
-:focus-visible {
+/* applies focus outline to everything except
+masthead search, as it looks too ugly and focus can be
+inferred by it being opened in the first place */
+:not(#masthead-search-field):focus-visible {
     outline: 2px solid hsl(var(--l3-c)) !important;
 }
 
@@ -622,18 +625,6 @@ html body {
 }
 
 
-.player-bar .player-bar-progress-wrap {
-    width: var(--cards-width);
-    left: calc((100% - var(--cards-width)) / 2);
-}
-.player-bar .player-bar-progress {
-    background: hsl(var(--b4));
-}
-.player-bar .player-bar-progress-slug {
-    background: hsl(var(--h4));
-}
-
-
 .player-bar {
     position: relative;
     z-index: 1000;
@@ -644,6 +635,17 @@ html body {
     justify-content: center;
     align-items: center;
 
+    .player-bar-progress-wrap {
+        width: var(--cards-width);
+        left: calc((100% - var(--cards-width)) / 2);
+    }
+    .player-bar-progress {
+        background: hsl(var(--b4));
+    }
+    .player-bar-progress-slug {
+        background: hsl(var(--h4));
+    }
+
     .player-bar-inner-wrap {
         padding: 7px 0;
         padding-right: unset;
@@ -653,57 +655,59 @@ html body {
         width: var(--cards-width);
         backdrop-filter: blur(10px) saturate(120%);
     }
-}
+
+    .player-bar-artwork {
+        margin: unset;
+        width: 38px;
+        height: 38px;
+        border-radius: var(--item-small-radius);
+        box-shadow: var(--card-shadow);
+        background-color: hsl(var(--b5));
+        --mask-size: var(--cover-size-32);
+        overflow: hidden;
+        order: -1;
+    }
+
+    .source-info {
+        width: unset;
+        height: unset;
+        margin: unset;
+    }
 
 
-.player-bar .player-bar-artwork {
-    margin: unset;
-    width: 38px;
-    height: 38px;
-    border-radius: var(--item-small-radius);
-    box-shadow: var(--card-shadow);
-    background-color: hsl(var(--b5));
-    --mask-size: var(--cover-size-32);
-    overflow: hidden;
-    order: -1;
-}
-.player-bar .source-info {
-    width: unset;
-    height: unset;
-    margin: unset;
-}
-
-.player-bar .player-bar-now-playing {
-    padding: unset;
-    order: -1;
-    flex: 1;
-}
-.player-bar .player-bar-track-name {
-    color: hsl(var(--c2)) !important;
-    font-weight: var(--font-weight-medium) !important;
-    opacity: unset !important;
-}
-.player-bar-artist-name {
-    color: hsla(var(--c2), 80%) !important;
-    font-weight: var(--font-weight) !important;
-    opacity: unset !important;
-}
+    .player-bar-now-playing {
+        padding: unset;
+        order: -1;
+        flex: 1;
+    }
+    .player-bar-track-name {
+        color: hsl(var(--c2)) !important;
+        font-weight: var(--font-weight-medium) !important;
+        opacity: unset !important;
+    }
+    .player-bar-artist-name {
+        color: hsla(var(--c2), 80%) !important;
+        font-weight: var(--font-weight) !important;
+        opacity: unset !important;
+    }
 
 
-.media-controls {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-}
-.player-bar .player-bar-btn {
-    width: 32px;
-    height: 32px;
-    opacity: unset !important;
-    --left: 8px;
-    --font-size: 0;
+    .media-controls {
+        display: flex;
+        align-items: center;
+        gap: 4px;
 
-    &.inactive {
-        --col: hsl(var(--c3));
+        .player-bar-btn {
+            width: 32px;
+            height: 32px;
+            opacity: unset !important;
+            --left: 8px;
+            --font-size: 0;
+
+            &.inactive {
+                --col: hsl(var(--c3));
+            }
+        }
     }
 }
 
@@ -3357,7 +3361,7 @@ state is not active, which then falls back to primary button styling */
         transition-delay: 0.2s;
     }
 }
-.header-title-label-wrap .label:hover, .header-new-on-tour:hover, .user-list-inner-wrap .label:hover {
+.header-title-label-wrap .label:hover, .header-new-on-tour:hover {
     max-width: 150px;
     padding-right: 6px;
     background-color: hsla(var(--h4), 15%) !important;
@@ -5659,6 +5663,7 @@ button:not(.playback-app-container button, .top-artist-list-item, .pixel, .liste
 
 
 /*     ICON MASK     */
+.user-list-inner-wrap .label:before,
 .nag-bar-message:before,
 /*     BLEH     */
 .btns .btn:before,
@@ -8383,9 +8388,10 @@ text[style^="color: rgb(0, 0, 0)"] {
     gap: var(--card-gap);
 }
 
-.user-list-item:has(.label.user-follow) {
-    background: linear-gradient(90deg, hsla(var(--h4), 15%) 0%, transparent 100%);
-    --override-link-col: hsl(var(--l2-c));
+.user-list-item:not(:has(.label.user-follow)) {
+    .user-list-name {
+        margin-left: calc(16px + var(--card-gap));
+    }
 }
 
 .user-list-name {
@@ -8396,7 +8402,21 @@ text[style^="color: rgb(0, 0, 0)"] {
     color: var(--override-link-col, hsl(var(--l3-c))) !important;
 }
 .user-list-inner-wrap .label {
-    display: none;
+    order: -1;
+    width: 16px;
+    text-align: center;
+    font-size: 0;
+    padding: 0;
+    position: relative;
+    background: unset !important;
+    --mask: var(--icon-16-followers);
+    --left: 0;
+    color: hsl(var(--c3)) !important;
+
+    .user-list-item:has(&) {
+        background: linear-gradient(90deg, hsla(var(--h4), 20%) 0%, transparent 100%);
+        --override-link-col: hsl(var(--l2-c));
+    }
 }
 
 
