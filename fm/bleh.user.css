@@ -1542,7 +1542,7 @@ body[class*="namespace--user_library_"] .col-sidebar, .library-header,
     padding-top: unset !important;
     margin-top: calc(-1 * var(--card-gap));
 }
-.header-new--subpage ~ .full-bleed-ad-container + .page-content .col-sidebar .buffer-standard {
+.header-new--track.header-new--subpage ~ .full-bleed-ad-container + .page-content .col-sidebar .buffer-standard {
     --only-card-gap: 0;
 }
 
@@ -1838,6 +1838,12 @@ span.header-new-gallery-inner a,
     with the padding in bleh this conflicts with eg.
     the underground hip-hop tag */
     max-width: 180px;
+
+    &:hover {
+        transition: none;
+        z-index: 5;
+        position: relative;
+    }
 }
 
 
@@ -1856,11 +1862,6 @@ span.header-new-gallery-inner a,
 
 .tags-list:has(.tag a:hover) .tag a:not(:hover) {
     opacity: 0.6;
-}
-.tag a:hover {
-    transition: none;
-    z-index: 5;
-    position: relative;
 }
 
 
@@ -1904,13 +1905,15 @@ spacing between is removed and aligned to tag icon */
     --left: 10px;
     position: relative;
     font-size: 0 !important;
-    margin-left: 0 !important;
 }
 .tags-add {
     --mask: var(--icon-16-plus);
+    margin-left: 0 !important;
 }
 .tags-view-all {
     --mask: var(--icon-16-search);
+    border-left: 1px solid hsl(var(--b5));
+    margin-left: -11px !important;
 }
 
 
@@ -8427,6 +8430,10 @@ text[style^="color: rgb(0, 0, 0)"] {
         --override-link-col: hsl(var(--l2-c));
     }
 }
+.namespace--user_followers .user-list-item:has([data-toggle-button-current-state="followed"]) {
+    background: linear-gradient(90deg, hsla(var(--h4), 20%) 0%, transparent 100%);
+    --override-link-col: hsl(var(--l2-c));
+}
 
 
 .user-list-item + .user-list-item {
@@ -13628,8 +13635,10 @@ button.bleh--gallery-bookmark-image-btn {
         border-top: 1px solid hsl(var(--b4));
     }
 }
-.header-new--album + .container > .row.buffer-reset\@sm > .col-main:nth-child(3) {
-    margin-top: unset !important;
+
+/* main column, align with sidebar */
+.masonry-left-bottom {
+    margin-top: 46px !important;
 }
 
 .namespace--music_album_overview .col-sidebar.hidden-xs {
@@ -13687,7 +13696,7 @@ button.bleh--gallery-bookmark-image-btn {
     --mask: linear-gradient(0deg, transparent 0%, rgb(0, 0, 0) 100%);
     mask-image: var(--mask);
     -webkit-mask-image: var(--mask);
-    opacity: 0.1;
+    opacity: 0.13;
     filter: blur(10px) saturate(110%);
 }
 }

@@ -4965,52 +4965,17 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         let col_main = document.body.querySelector('.col-main:not(.visible-xs, .upper-overview)');
         let col_sidebar = document.body.querySelector('.col-sidebar:not(.masonry-right)');
 
-        let navlist = album_header.querySelector('.navlist');
-        if (!is_subpage) {
-            navlist = document.createElement('nav');
-            navlist.classList.add('navlist', 'secondary-nav', 'navlist--more');
-            navlist.setAttribute('aria-label', 'Secondary navigation');
-            navlist.setAttribute('data-require', 'components/collapsing-nav-v2');
-
-            navlist.innerHTML = (`
-                <ul class="navlist-items js-navlist-items" style="position: relative;">
-                    <li class="navlist-item secondary-nav-item secondary-nav-item--overview">
-                        <a class="secondary-nav-item-link secondary-nav-item-link--active" href="${window.location.href}">
-                            Overview
-                        </a>
-                    </li>
-                    <li class="navlist-item secondary-nav-item secondary-nav-item--wiki">
-                        <a class="secondary-nav-item-link" href="${window.location.href}/+wiki">
-                            Wiki
-                        </a>
-                    </li>
-                    <li class="navlist-item secondary-nav-item secondary-nav-item--tags">
-                        <a class="secondary-nav-item-link" href="${window.location.href}/+tags">
-                            Tags
-                        </a>
-                    </li>
-                    <li class="navlist-item secondary-nav-item secondary-nav-item--images">
-                        <a class="secondary-nav-item-link" href="${window.location.href}/+images">
-                            Artwork
-                        </a>
-                    </li>
-                    <li class="navlist-item secondary-nav-item secondary-nav-item--shoutbox">
-                        <a class="secondary-nav-item-link" href="${window.location.href}/+shoutbox">
-                            Shouts
-                        </a>
-                    </li>
-                </ul>
-            `);
+        if (is_subpage) {
+            let navlist = album_header.querySelector('.navlist');
+            col_main.insertBefore(navlist, col_main.firstChild);
         }
-
-        col_main.insertBefore(navlist, col_main.firstChild);
 
         if (!is_subpage) {
             let col_main_overview = document.body.querySelector('.col-main.upper-overview');
 
             let album_artwork = document.body.querySelector('.col-sidebar.masonry-right').lastElementChild.outerHTML;
-            let album_name = album_header.querySelector('.header-new-title').textContent;
-            let album_artist = album_header.querySelector('.header-new-crumb span').textContent;
+            let album_name = album_header.querySelector('.header-new-title').innerHTML;
+            let album_artist = album_header.querySelector('.header-new-crumb span').innerHTML;
             let album_artist_link = album_header.querySelector('.header-new-crumb').getAttribute('href');
 
             let tags = document.body.querySelector('.catalogue-tags');
@@ -5067,6 +5032,32 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 </div>
             `);
             album_main_panel.after(album_listeners_panel);
+        } else {
+            let album_name = album_header.querySelector('.header-new-title').innerHTML;
+            let album_artist = album_header.querySelector('.header-new-crumb span').innerHTML;
+            let album_artist_link = album_header.querySelector('.header-new-crumb').getAttribute('href');
+
+            let header_bg_html = album_header.querySelector('.header-new-background-image');
+            let header_bg = '';
+            if (header_bg_html != null)
+                header_bg = header_bg_html.getAttribute('style');
+
+            create_header_bg(header_bg);
+
+
+            // panel
+            let album_main_panel = document.createElement('section');
+            album_main_panel.classList.add('album-main-panel');
+            album_main_panel.innerHTML = (`
+                <div class="top-cover">
+
+                </div>
+                <div class="middle-info">
+                    <h1>${album_name}</h1>
+                    <h2><a href="${album_artist_link}">${album_artist}</a></h2>
+                </div>
+            `);
+            col_sidebar.insertBefore(album_main_panel, col_sidebar.firstChild);
         }
     }
 
@@ -5084,10 +5075,16 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     }
 
     function create_header_bg(header_bg) {
-        let background = document.createElement('div');
-        background.classList.add('backing-bg');
-        background.style = header_bg;
+        let previous_background = document.getElementById('backing-bg');
+        if (previous_background == undefined) {
+            let background = document.createElement('div');
+            background.classList.add('backing-bg');
+            background.setAttribute('id', 'backing-bg');
+            background.style = header_bg;
 
-        document.body.appendChild(background);
+            document.body.appendChild(background);
+        } else {
+            previous_background.style = header_bg;
+        }
     }
 })();
