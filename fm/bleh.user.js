@@ -5023,6 +5023,10 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             create_header_bg(header_bg);
 
 
+            // chart position
+            let chart_position = artist_header.querySelector('.header-new-chart-position-number');
+
+
             // panel
             let album_main_panel = document.createElement('section');
             album_main_panel.classList.add('album-main-panel');
@@ -5032,7 +5036,10 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 </div>
                 <div class="middle-info">
                     <h3>Album</h3>
-                    <h1>${album_name}</h1>
+                    <span class="top">
+                        <h1>${album_name}</h1>
+                        ${(chart_position != null) ? `<h1>${chart_position.outerHTML}</h1>` : ''}
+                    </span>
                     <h2><a href="${album_artist_link}">${album_artist}</a></h2>
                 </div>
                 <div class="bottom-wiki">
@@ -5112,14 +5119,6 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                             <a class="cover-art" href="${col_main.querySelector('.secondary-nav-item--images a').getAttribute('href')}">
                                 <img src="${header_bg}" loading="lazy">
                             </a>
-                            <div class="album-overview-cover-art-actions js-link-block link-block" style="display: none">
-                                <div class="album-overview-cover-art-action-row">
-                                    <span class="album-overview-cover-art-upload-action">
-
-                                    </span>
-                                </div>
-                                <a class="js-link-block-cover-link link-block-cover-link" href="${col_main.querySelector('.secondary-nav-item--images a').getAttribute('href')}"></a>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -5271,10 +5270,12 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                         ${gallery_sidebar_photos[1]}
                     </div>
                 </div>
-                <div class="middle-info ${(chart_position != null) ? 'row' : ''}">
+                <div class="middle-info">
                     <h3>Artist</h3>
-                    <h1>${artist_name}</h1>
-                    ${(chart_position != null) ? `<h1>${chart_position.outerHTML}</h1>` : ''}
+                    <span class="top">
+                        <h1>${artist_name}</h1>
+                        ${(chart_position != null) ? `<h1>${chart_position.outerHTML}</h1>` : ''}
+                    </span>
                 </div>
                 <div class="bottom-wiki">
                     ${get_wiki(col_main_overview)}
@@ -5365,14 +5366,6 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                             <a class="cover-art" href="${col_main.querySelector('.secondary-nav-item--images a').getAttribute('href')}">
                                 <img src="${header_bg.replace('i/u/ar0', 'i/u/500x500')}" loading="lazy">
                             </a>
-                            <div class="album-overview-cover-art-actions js-link-block link-block" style="display: none">
-                                <div class="album-overview-cover-art-action-row">
-                                    <span class="album-overview-cover-art-upload-action">
-
-                                    </span>
-                                </div>
-                                <a class="js-link-block-cover-link link-block-cover-link" href="${col_main.querySelector('.secondary-nav-item--images a').getAttribute('href')}"></a>
-                            </div>
                         </div>
                     </div>
                 </div>
