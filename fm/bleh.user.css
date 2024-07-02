@@ -1297,7 +1297,7 @@ last.fm changes as of 2024-05-20 */
 }
 
 /* artist pages without a similar artists panel */
-.container > .row {
+/*.container > .row {
     position: relative;
 }
 .container > .row:has(.col-main + .col-main + .col-sidebar.hidden-xs):not(:has(.masonry-left-bottom)) .col-main + .col-main {
@@ -1314,7 +1314,7 @@ last.fm changes as of 2024-05-20 */
 .adaptive-skin-container:has(.container .row .col-main + .col-main + .col-sidebar.hidden-xs):not(:has(.masonry-left-bottom)) ~ .footer {
     position: relative;
     top: 1550px;
-}
+}*/
 
 .col-main, .col-sidebar {
     padding: unset;
@@ -1564,9 +1564,9 @@ article, section, .buffer-standard, .buffer-standard:not(.col-sidebar) .buffer-s
     margin-top: unset;
 }
 /* separator */
-.row.buffer-4 > .col-main:first-child .section-with-separator {
+/*.row.buffer-4 > .col-main:first-child .section-with-separator {
     padding-bottom: unset;
-}
+}*/
 .section-with-separator::after {
     display: none;
 }
@@ -13567,10 +13567,10 @@ button.bleh--gallery-bookmark-image-btn {
     }
 }
 
-[data-bleh--gallery-tab="bookmarks"] .container.page-content:not(.bleh--bookmarks):has(.image-list) {
+.namespace--music_artist_images_overview[data-bleh--gallery-tab="bookmarks"] .col-main:not(.bleh--bookmarks) {
     display: none;
 }
-[data-bleh--gallery-tab="overview"] .container.page-content.bleh--bookmarks {
+.namespace--music_artist_images_overview[data-bleh--gallery-tab="overview"] .bleh--bookmarks {
     display: none;
 }
 
@@ -13636,6 +13636,44 @@ button.bleh--gallery-bookmark-image-btn {
         border-top: 1px solid hsl(var(--b4));
     }
 }
+.artist-main-panel {
+    display: flex;
+    flex-direction: column;
+    gap: var(--card-gap);
+
+    .middle-info {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+
+        h1 {
+            color: hsl(var(--c1));
+            font-size: 24px;
+            line-height: 28px;
+            font-weight: var(--font-weight-bold);
+        }
+        h2 {
+            color: hsl(var(--c2));
+            font-size: 18px;
+            line-height: 22px;
+            font-weight: var(--font-weight-bold);
+            margin: unset !important;
+
+            a {
+                color: inherit;
+            }
+        }
+    }
+
+    .bottom-wiki {
+        display: flex;
+        flex-direction: column;
+        gap: var(--card-gap);
+
+        padding-top: var(--card-gap);
+        border-top: 1px solid hsl(var(--b4));
+    }
+}
 
 /* main column, align with sidebar */
 .masonry-left-bottom {
@@ -13649,6 +13687,7 @@ button.bleh--gallery-bookmark-image-btn {
 }
 
 
+.artist-listeners-panel,
 .album-listeners-panel {
     display: flex;
     flex-direction: column;
@@ -13677,6 +13716,7 @@ button.bleh--gallery-bookmark-image-btn {
         color: hsl(var(--c3));
     }
 }
+.header-new--artist.header-new--overview + .page-content .col-main:not(.buffer-standard),
 .header-new--album,
 .col-main.upper-overview,
 .col-sidebar.masonry-right,
