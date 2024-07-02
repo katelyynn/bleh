@@ -5117,7 +5117,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         let is_subpage = artist_header.classList.contains('header-new--subpage');
 
         let row = document.body.querySelector('.row');
-        let col_main = document.body.querySelector('.col-main:not(.bleh--bookmarks)');
+        let col_main = document.body.querySelector('.col-main:not(.bleh--bookmarks).buffer-standard');
         let col_sidebar = document.body.querySelector('.col-sidebar:not(.section-with-separator)');
 
         let navlist = artist_header.querySelector('.navlist');

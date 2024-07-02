@@ -5933,7 +5933,7 @@ span.header-new-gallery-inner a:before,
     display: none;
 }
 
-.navlist + .section-with-separator:not(#tracklist) .section-controls {
+.navlist + .section-with-separator:not(#tracklist, #top-tracks) .section-controls {
     margin-top: var(--card-gap);
 }
 /* do not use section-with-control !! that refers to buttons
@@ -13709,6 +13709,7 @@ button.bleh--gallery-bookmark-image-btn {
     margin-top: unset !important; /* 46px if nav is not present */
 }
 
+.col-sidebar.artist-sidebar,
 .col-sidebar.album-sidebar {
     position: relative;
     top: 31px;
@@ -13745,6 +13746,7 @@ button.bleh--gallery-bookmark-image-btn {
         color: hsl(var(--c3));
     }
 }
+.header-new--artist,
 .header-new--artist.header-new--overview + .page-content .col-main:not(.buffer-standard),
 .header-new--album,
 .col-main.upper-overview,
