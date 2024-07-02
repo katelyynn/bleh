@@ -1342,7 +1342,6 @@ body[class*="namespace--user_library_"] .col-sidebar, .library-header,
 .page-content:has(.inbox-notifications),
 .album-and-lyrics-row,
 /* gallery */ .js-gallery-image-details,
-/* send a message box */ .header--overview:not(:has(.header-featured-track)):has(.header-message-user) + .adaptive-skin-container .col-sidebar:before,
 /* listening reports */ .user-dashboard > .user-dashboard-buffer,
 /* katie doesnt have any scrobbles yet */ .profile-mobile-featured-track + .no-data-message,
 /* quick create playlists */ .section-with-separator[action*="/create/from-"],
@@ -2009,21 +2008,11 @@ elements, this is how we detect its missing */
 
 /*     MESSAGE USER (takes place)     */
 .header-message-user {
-    top: calc(128px + 83px) !important; /* -129 to put top right */
-    z-index: 2;
-    right: 21px !important;
-    width: fit-content !important;
-    margin: unset !important;
-}
-.header-message-user:before {
     --mask: var(--icon-16-mail) !important;
 }
 
 
 /* move the sidebar to fit */
-.header--overview:has(.header-featured-track) + .adaptive-skin-container .col-sidebar {
-    padding-top: calc(138px + 33px) !important;
-}
 .about-me-header, .about-me-sidebar p {
     overflow-y: hidden;
 }
@@ -2155,21 +2144,6 @@ elements, this is how we detect its missing */
             border-top: 1px solid hsl(var(--b4));
         }
     }
-}
-
-
-/* no featured track, leave space for message button box instead */
-.header--overview:not(:has(.header-featured-track)):has(.header-message-user) + .adaptive-skin-container .col-sidebar {
-    padding-top: calc(138px + 33px - 82px) !important;
-}
-.col-sidebar:before {
-    position: absolute;
-    width: var(--cards-sidebar-width);
-    height: calc(32px + 20px + 20px + 2px);
-    top: 0;
-}
-header:not(:has(.header-featured-track)) .header-message-user {
-    top: 129px !important;
 }
 
 
@@ -3135,30 +3109,6 @@ hr + .library-search-results-header {
 
 
 /*     FOLLOW     */
-.header-follower-btn {
-    width: 32px !important;
-    height: 32px !important;
-    margin-left: -31px !important;
-    margin-top: -31px !important;
-    --font-size: 0 !important;
-}
-.header-follower-btn:before {
-    width: 16px !important;
-    height: 16px !important;
-    margin: unset !important;
-    position: absolute !important;
-    top: 8px !important;
-    left: 8px !important;
-    background-color: currentColor !important;
-    background-image: unset !important;
-    color: inherit !important;
-    mask-image: var(--mask);
-    -webkit-mask-image: var(--mask);
-    mask-repeat: no-repeat;
-    -webkit-mask-repeat: no-repeat;
-    border-radius: unset !important;
-}
-
 [data-toggle-button-current-state="unfollowed"] .header-follower-btn::before {
     --mask: var(--icon-16-plus) !important;
 }
@@ -3168,7 +3118,6 @@ hr + .library-search-results-header {
 .header-follower-btn--denied {
     --mask: var(--icon-16-block);
     --col: hsl(var(--c3)) !important;
-    --left: 8px;
 }
 
 .header-inner-wrap:has(.header-info .user-follow) [data-toggle-button-current-state="followed"] .header-follower-btn:before {
@@ -5149,7 +5098,8 @@ button:not(.playback-app-container button, .top-artist-list-item, .pixel, .liste
 .player-bar .player-bar-playback-options-external-link, .player-bar .player-bar-playback-options-settings, .player-bar .player-bar-playback-options-switch-device,
 .event-metadata + .event-metadata a,
 #manage_data .btn-primary,
-.obsession-history-play-all
+.obsession-history-play-all,
+.header-follower-btn
 {
     --btn-left: calc(12px + 16px + 6px) !important;
 }
@@ -5262,6 +5212,7 @@ button:not(.playback-app-container button, .top-artist-list-item, .pixel, .liste
 
 
 /*     ICON MASK     */
+[data-toggle-button-current-state] .header-follower-btn:before, [data-toggle-button-current-state] .header-follower-btn:hover:before,
 .tags-view-all:before,
 .user-list-inner-wrap .label:before,
 .nag-bar-message:before,
@@ -5337,7 +5288,7 @@ button:not(.playback-app-container button, .top-artist-list-item, .pixel, .liste
 .profile-header-set-obsession:before,
 .share-button-profile:before, .section-settings-toggle:before,
 .stationlink-list .stationlink:before, .inline-section-control:before,
-.header .header-message-user:before,
+.header-message-user:before,
 /*     TRACK/ALBUM/ARTIST HEADER     */
 .header-new-love-button:before, .header-new-more-button:before, .header-new-bookmark-button:before,
 .header-metadata-item:before,
@@ -5451,7 +5402,7 @@ a:has(+ .js-gallery-heading):after,
 .chartlist-love-button, .chartlist-more-button, .chartlist-play-button,
 .share-button-profile,
 .shout-more-actions,
-.toggle-button:not(.dropdown-menu-clickable-item), .header-new-more-button,
+.toggle-button:not(.dropdown-menu-clickable-item, .header-follower-btn), .header-new-more-button,
 .gallery-image-report, .gallery-image-delete button,
 .modal-dismiss,
 .content-form .table .delete,
@@ -12855,5 +12806,111 @@ button.bleh--gallery-bookmark-image-btn {
             filter: brightness(0.15);
         }
     }
+}
+
+
+.profile-header-panel {
+    display: flex;
+    flex-direction: column;
+    gap: var(--card-gap);
+
+    .top-cover {
+        display: flex;
+        justify-content: center;
+
+        .avatar-container {
+            aspect-ratio: 1 / 1;
+            border-radius: 50%;
+            background-color: hsl(var(--b4));
+            --mask-size: 72px;
+            overflow: hidden;
+            box-shadow: var(--menu-shadow);
+            margin-top: -83px !important;
+            width: 170px;
+        }
+    }
+
+    .middle-info {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+
+        .top {
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+
+            h1:first-child {
+                flex: 1;
+            }
+        }
+
+        h3 {
+            font-size: var(--font-size);
+            line-height: var(--line-height);
+            color: hsl(var(--c3));
+            font-weight: var(--font-weight-medium);
+        }
+
+        h1 {
+            color: hsl(var(--c1));
+            font-size: 24px;
+            line-height: 28px;
+            font-weight: var(--font-weight-bold);
+            letter-spacing: unset;
+            margin: unset;
+        }
+        h2 {
+            color: hsl(var(--c2));
+            font-size: 18px;
+            line-height: 22px;
+            font-weight: var(--font-weight-bold);
+            margin: unset !important;
+
+            a {
+                color: inherit;
+            }
+        }
+    }
+
+    .bottom-wiki {
+        display: flex;
+        flex-direction: column;
+        gap: var(--card-gap);
+
+        padding-top: var(--card-gap);
+        border-top: 1px solid hsl(var(--b4));
+
+        .actions {
+            display: flex;
+            gap: var(--button-list-gap);
+            justify-content: end;
+            margin-left: unset;
+
+            a, button {
+                position: relative;
+            }
+
+            .header-follower-btn {
+                left: unset;
+                top: unset;
+                margin: unset;
+                width: fit-content;
+
+                &:before {
+                    background-color: currentColor !important;
+                    color: inherit !important;
+                    border-radius: 0 !important;
+                }
+            }
+
+            .edit-profile-button {
+                --mask: var(--icon-16-settings);
+            }
+        }
+    }
+}
+.header-featured-track {
+    display: none !important;
 }
 }

@@ -1181,6 +1181,8 @@ let redacted = [
 let auth = '';
 let auth_link = '';
 
+let root = '';
+
 let bleh_url = 'https://www.last.fm/bleh';
 let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
@@ -1188,6 +1190,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 (function() {
     'use strict';
 
+    root = document.querySelector('.masthead-logo a').getAttribute('href');
     auth_link = document.querySelector('a.auth-link');
     auth = auth_link.querySelector('img').getAttribute('alt');
     initia();
@@ -1220,6 +1223,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             bleh_album_pages();
             bleh_artist_pages();
             bleh_track_pages();
+            bleh_profile_pages();
 
             correct_generic_combo_no_artist('artist-header-featured-items-item');
             correct_generic_combo_no_artist('artist-top-albums-item');
@@ -1259,6 +1263,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                                 bleh_album_pages();
                                 bleh_artist_pages();
                                 bleh_track_pages();
+                                bleh_profile_pages();
 
                                 correct_generic_combo_no_artist('artist-header-featured-items-item');
                                 correct_generic_combo_no_artist('artist-top-albums-item');
@@ -2344,6 +2349,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
         if (profile_header == undefined)
             return;
+
+        return;
 
         patch_profile_following();
 
@@ -5583,6 +5590,73 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 </div>
             `);
             col_sidebar.insertBefore(track_main_panel, col_sidebar.firstChild);
+        }
+    }
+
+    // profile pages
+    function bleh_profile_pages() {
+        let profile_header = document.body.querySelector('.header--user');
+
+        if (profile_header == undefined)
+            return;
+
+        if (profile_header.hasAttribute('data-bleh'))
+            return;
+        profile_header.setAttribute('data-bleh', 'true');
+
+        let is_subpage = !profile_header.classList.contains('header--overview');
+
+        let row = document.body.querySelector('.row');
+        let col_main = document.body.querySelector('.col-main');
+        let col_sidebar = document.body.querySelector('.col-sidebar');
+        col_sidebar.classList.add('profile-sidebar');
+
+        if (!is_subpage) {
+            let profile_avatar = profile_header.querySelector('.avatar img');
+
+            let profile_name = profile_header.querySelector('.header-title a').textContent;
+            let profile_link = profile_header.querySelector('.header-title a').getAttribute('href');
+
+            let profile_subtitle = profile_header.querySelector('.header-title-display-name').textContent;
+
+            let scrobbling_since = profile_header.querySelector('.header-scrobble-since').textContent;
+
+            let header_metadata = profile_header.querySelectorAll('.header-metadata-display p');
+            let stat_scrobbles = header_metadata[0];
+            let stat_artists = header_metadata[1].querySelector('a');
+            let stat_loved_tracks = (header_metadata[2] != undefined) ? header_metadata[2].querySelector('a') : placeholder_loved_tracks();
+
+
+            let follow_button_wrap = profile_header.querySelector('[data-toggle-button=""]');
+            let msg_button = profile_header.querySelector('.header-message-user');
+
+
+            let is_self = (auth == profile_name);
+
+
+            let profile_header_panel = document.createElement('section');
+            profile_header_panel.classList.add('profile-header-panel');
+            profile_header_panel.innerHTML = (`
+                <div class="top-cover">
+                    <div class="avatar-container">
+                        ${profile_avatar.outerHTML}
+                    </div>
+                </div>
+                <div class="middle-info">
+                    <h3>User</h3>
+                    <span class="top">
+                        <h1>${profile_name}</h1>
+                    </span>
+                </div>
+                <div class="bottom-wiki">
+                    <div class="actions">
+                        ${(msg_button != null) ? msg_button.outerHTML : ''}
+                        ${(follow_button_wrap != null) ? follow_button_wrap.outerHTML : ''}
+                        ${(is_self) ? `<a class="btn btn--has-icon btn--has-icon-left edit-profile-button" href="${root}settings">Edit profile</a>` : ''}
+                    </div>
+                </div>
+            `);
+            col_sidebar.insertBefore(profile_header_panel, col_sidebar.firstChild);
         }
     }
 
