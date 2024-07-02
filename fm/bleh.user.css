@@ -13779,6 +13779,8 @@ button.bleh--gallery-bookmark-image-btn {
         color: hsl(var(--c3));
     }
 }
+[action$="/playlists/create/from-artist"],
+.section-with-separator:has(.sidebar-image-list),
 .header-new--artist,
 .header-new--artist.header-new--overview + .page-content .col-main:not(.buffer-standard),
 .header-new--album,
