@@ -5029,6 +5029,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     ${album_artwork}
                 </div>
                 <div class="middle-info">
+                    <h3>Album</h3>
                     <h1>${album_name}</h1>
                     <h2><a href="${album_artist_link}">${album_artist}</a></h2>
                 </div>
@@ -5121,6 +5122,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     </div>
                 </div>
                 <div class="middle-info">
+                    <h3>Album</h3>
                     <h1>${album_name}</h1>
                     <h2><a href="${album_artist_link}">${album_artist}</a></h2>
                 </div>
@@ -5268,6 +5270,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     </div>
                 </div>
                 <div class="middle-info ${(chart_position != null) ? 'row' : ''}">
+                    <h3>Artist</h3>
                     <h1>${artist_name}</h1>
                     ${(chart_position != null) ? `<h1>${chart_position.outerHTML}</h1>` : ''}
                 </div>
@@ -5372,6 +5375,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     </div>
                 </div>
                 <div class="middle-info">
+                    <h3>Artist</h3>
                     <h1>${artist_name}</h1>
                 </div>
             `);

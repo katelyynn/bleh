@@ -13609,6 +13609,11 @@ button.bleh--gallery-bookmark-image-btn {
         flex-direction: column;
         gap: 4px;
 
+        h3 {
+            color: hsl(var(--c3));
+            font-weight: var(--font-weight-medium);
+        }
+
         h1 {
             color: hsl(var(--c1));
             font-size: 24px;
@@ -13663,6 +13668,11 @@ button.bleh--gallery-bookmark-image-btn {
             h1:first-child {
                 flex: 1;
             }
+        }
+
+        h3 {
+            color: hsl(var(--c3));
+            font-weight: var(--font-weight-medium);
         }
 
         h1 {
