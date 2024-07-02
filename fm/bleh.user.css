@@ -13723,6 +13723,10 @@ button.bleh--gallery-bookmark-image-btn {
     flex-direction: column;
     gap: var(--card-gap);
 
+    h2 {
+        margin-bottom: 0 !important;
+    }
+
     .listener-row {
         display: flex;
 
@@ -13732,12 +13736,41 @@ button.bleh--gallery-bookmark-image-btn {
             h3 {
                 color: hsl(var(--c3));
                 font-weight: var(--font-weight-medium);
+
+                display: flex;
+                align-items: center;
+                gap: 2px;
+
+                img {
+                    width: 16px;
+                    height: 16px;
+                    border-radius: 50%;
+                    display: none;
+                }
+
+                a {
+                    color: inherit;
+                }
             }
             p {
                 color: hsl(var(--c1));
                 font-size: 24px;
                 line-height: 28px;
                 font-weight: var(--font-weight-bold);
+
+                display: flex;
+                align-items: center;
+                gap: 6px;
+
+                img {
+                    width: 20px;
+                    height: 20px;
+                    border-radius: 50%;
+                }
+
+                a {
+                    color: inherit;
+                }
             }
         }
     }

@@ -1179,6 +1179,7 @@ let redacted = [
 
 // use the top-right link to determine the current user
 let auth = '';
+let auth_link = '';
 
 let bleh_url = 'https://www.last.fm/bleh';
 let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
@@ -1187,7 +1188,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 (function() {
     'use strict';
 
-    auth = document.querySelector('a.auth-link img').getAttribute('alt');
+    auth_link = document.querySelector('a.auth-link');
+    auth = auth_link.querySelector('img').getAttribute('alt');
     initia();
 
     function initia() {
@@ -5039,6 +5041,30 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             col_sidebar.insertBefore(album_main_panel, col_sidebar.firstChild);
 
 
+            // plays
+            let my_avi = auth_link.querySelector('img').getAttribute('src');
+            let scrobble_count_element = document.body.querySelector('.personal-stats-item--scrobbles .header-metadata-display a');
+            let scrobble_count = 0;
+            let scrobble_link = '';
+            if (scrobble_count_element != undefined) {
+                scrobble_count = scrobble_count_element.textContent;
+                scrobble_link = scrobble_count_element.getAttribute('href');
+            }
+
+            let your_scrobbles = document.createElement('section');
+            your_scrobbles.classList.add('album-listeners-panel', 'album-listeners-you-know-panel');
+            your_scrobbles.innerHTML = (`
+                <h2>Listeners</h2>
+                <div class="listener-row">
+                    <div class="you-side">
+                        <h3><img src="${my_avi}"><a class="user" href="${auth_link}">You</a></h3>
+                        <p><a class="scrobbles" href="${scrobble_link}">${scrobble_count}</a></p>
+                    </div>
+                </div>
+            `);
+            album_main_panel.after(your_scrobbles);
+
+
             // listeners
             let listener_trend = col_sidebar.querySelector('.listener-trend');
 
@@ -5059,7 +5085,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     ${(listener_trend != null) ? listener_trend.outerHTML : 'There\'s no listener trend yet, check back later.'}
                 </div>
             `);
-            album_main_panel.after(album_listeners_panel);
+            your_scrobbles.after(album_listeners_panel);
         } else {
             let album_name = album_header.querySelector('.header-new-title').innerHTML;
             let album_artist = album_header.querySelector('.header-new-crumb span').innerHTML;
@@ -5251,6 +5277,43 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             col_sidebar.insertBefore(artist_main_panel, col_sidebar.firstChild);
 
 
+            // plays
+            let my_avi = auth_link.querySelector('img').getAttribute('src');
+            let scrobble_count_element = document.body.querySelector('.personal-stats-item--scrobbles .header-metadata-display a');
+            let scrobble_count = 0;
+            let scrobble_link = '';
+            if (scrobble_count_element != undefined) {
+                scrobble_count = scrobble_count_element.textContent;
+                scrobble_link = scrobble_count_element.getAttribute('href');
+            }
+
+            // listeners you! know
+            let listeners_you_know_element = document.body.querySelector('.personal-stats-item--listeners .header-metadata-display a');
+            let listeners_count = 0;
+            let listeners_link = '';
+            if (listeners_you_know_element != undefined) {
+                listeners_count = listeners_you_know_element.textContent;
+                listeners_link = listeners_you_know_element.getAttribute('href');
+            }
+
+            let your_scrobbles = document.createElement('section');
+            your_scrobbles.classList.add('artist-listeners-panel', 'artist-listeners-you-know-panel');
+            your_scrobbles.innerHTML = (`
+                <h2>Listeners</h2>
+                <div class="listener-row">
+                    <div class="you-side">
+                        <h3><img src="${my_avi}"><a class="user" href="${auth_link}">You</a></h3>
+                        <p><a class="scrobbles" href="${scrobble_link}">${scrobble_count}</a></p>
+                    </div>
+                    <div class="you-side">
+                        <h3>Others you know</h3>
+                        <p><a class="scrobbles" href="${listeners_link}">${listeners_count}</a></p>
+                    </div>
+                </div>
+            `);
+            artist_main_panel.after(your_scrobbles);
+
+
             // listeners
             let listener_trend = col_sidebar.querySelector('.listener-trend');
 
@@ -5271,7 +5334,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     ${(listener_trend != null) ? listener_trend.outerHTML : 'There\'s no listener trend yet, check back later.'}
                 </div>
             `);
-            artist_main_panel.after(artist_listeners_panel);
+            your_scrobbles.after(artist_listeners_panel);
         } else {
             let artist_name = artist_header.querySelector('.header-new-title').innerHTML;
 
