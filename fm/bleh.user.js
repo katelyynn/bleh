@@ -5479,7 +5479,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     <div class="item-has-metadata artwork-and-metadata-row buffer-standard buffer-reset@sm">
                         <div class="album-overview-cover-art js-focus-controls-container">
                             <a class="cover-art">
-                                <img src="${track_artwork}" loading="lazy">
+                                <img src="${track_artwork.replace('i/u/300x300', 'i/u/500x500')}" loading="lazy">
                             </a>
                         </div>
                     </div>
