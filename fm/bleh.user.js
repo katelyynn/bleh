@@ -5539,14 +5539,17 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
 
             // video
-            let track_video_panel = document.createElement('section');
-            track_video_panel.classList.add('track-video-panel');
-            track_video_panel.innerHTML = (`
-                <div class="video-inner">
-                    ${document.body.querySelector('.video-preview').outerHTML}
-                </div>
-            `);
-            navlist.after(track_video_panel);
+            let track_video = document.body.querySelector('.video-preview');
+            if (track_video != null) {
+                let track_video_panel = document.createElement('section');
+                track_video_panel.classList.add('track-video-panel');
+                track_video_panel.innerHTML = (`
+                    <div class="video-inner">
+                        ${document.body.querySelector('.video-preview').outerHTML}
+                    </div>
+                `);
+                navlist.after(track_video_panel);
+            }
         } else {
             let track_name = track_header.querySelector('.header-new-title').innerHTML;
             let track_artist = track_header.querySelector('.header-new-crumb span').innerHTML;
