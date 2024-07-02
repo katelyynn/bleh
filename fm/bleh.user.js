@@ -5337,7 +5337,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
             document.body.appendChild(background);
         } else {
-            previous_background.style.setProperty('background-image', header_bg);
+            previous_background.style.setProperty('background-image', `url(${header_bg})`);
         }
     }
 })();
