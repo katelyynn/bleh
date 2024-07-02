@@ -1333,7 +1333,6 @@ last.fm changes as of 2024-05-20 */
 /*     GLOBAL CARD STYLES     */
 .bleh--panel,
 .col-main > section, .col-sidebar > section,
-.your-progress-component,
 .shoutbox--with-header#shoutbox:not(#shoutbox > #shoutbox /* for shoutbox on gallery image */, section > #shoutbox /* events */),
 .header-featured-track,
 :is(.namespace--user_following, .namespace--user_followers) :is(.col-main, .col-sidebar),
@@ -12850,6 +12849,7 @@ button.bleh--gallery-bookmark-image-btn {
             line-height: var(--line-height);
             color: hsl(var(--c3));
             font-weight: var(--font-weight-medium);
+            margin: unset;
         }
 
         h1 {
@@ -12916,6 +12916,71 @@ button.bleh--gallery-bookmark-image-btn {
         }
     }
 }
+.profile-listens-panel {
+    display: flex;
+    flex-direction: column;
+    gap: var(--card-gap);
+
+    h2 {
+        margin-bottom: 0 !important;
+    }
+
+    .listener-row {
+        display: flex;
+
+        div {
+            flex: 1;
+
+            h3 {
+                font-size: var(--font-size);
+                line-height: var(--line-height);
+                color: hsl(var(--c3));
+                font-weight: var(--font-weight-medium);
+                margin: unset;
+
+                display: flex;
+                align-items: center;
+                gap: 2px;
+
+                img {
+                    width: 16px;
+                    height: 16px;
+                    border-radius: 50%;
+                    display: none;
+                }
+
+                a {
+                    color: inherit;
+                }
+            }
+            p {
+                color: hsl(var(--c1));
+                font-size: 24px;
+                line-height: 28px;
+                font-weight: var(--font-weight-bold);
+
+                display: flex;
+                align-items: center;
+                gap: 6px;
+
+                img {
+                    width: 20px;
+                    height: 20px;
+                    border-radius: 50%;
+                }
+
+                a {
+                    color: inherit;
+                }
+            }
+        }
+    }
+
+    .listener-trend-row {
+        color: hsl(var(--c3));
+    }
+}
+.col-sidebar > .your-progress-component,
 .about-me-sidebar,
 .header-featured-track {
     display: none !important;

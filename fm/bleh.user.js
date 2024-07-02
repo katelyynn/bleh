@@ -5626,8 +5626,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             let scrobbling_since = profile_header.querySelector('.header-scrobble-since').textContent;
 
             let header_metadata = profile_header.querySelectorAll('.header-metadata-display p');
-            let stat_scrobbles = header_metadata[0];
-            let stat_artists = header_metadata[1].querySelector('a');
+            let stat_scrobbles = header_metadata[0].textContent;
+            let stat_artists = header_metadata[1].querySelector('a').textContent;
             let stat_loved_tracks = (header_metadata[2] != undefined) ? header_metadata[2].querySelector('a') : placeholder_loved_tracks();
 
 
@@ -5689,6 +5689,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     <span class="top">
                         <h1>${profile_name}</h1>
                     </span>
+                    <!--<h3>${profile_subtitle}</h3>-->
                 </div>
                 <div class="bottom-wiki">
                     <div class="profile-bio ${(profile_is_empty) ? 'profile-bio-empty' : ''}">
@@ -5702,6 +5703,28 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 </div>
             `);
             col_sidebar.insertBefore(profile_header_panel, col_sidebar.firstChild);
+
+            // listens
+            let listening_trend = col_sidebar.querySelector('.your-progress-component');
+
+            let profile_listens_panel = document.createElement('section');
+            profile_listens_panel.classList.add('profile-listens-panel');
+            profile_listens_panel.innerHTML = (`
+                <div class="listener-row">
+                    <div class="scrobbles-side">
+                        <h3>Scrobbles</h3>
+                        <p>${stat_scrobbles}</p>
+                    </div>
+                    <div class="since-side">
+                        <h3>Since</h3>
+                        <p>${scrobbling_since.replace('• scrobbling since ', '')}</p>
+                    </div>
+                </div>
+                <div class="listener-trend-row">
+                    ${(listening_trend != null) ? listening_trend.outerHTML : 'There\'s no listening trend yet, check back later.'}
+                </div>
+            `);
+            profile_header_panel.after(profile_listens_panel);
         }
     }
 
