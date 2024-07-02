@@ -5216,6 +5216,10 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             }
 
 
+            // chart position
+            let chart_position = artist_header.querySelector('.header-new-chart-position-number');
+
+
             // panel
             let artist_main_panel = document.createElement('section');
             artist_main_panel.classList.add('artist-main-panel');
@@ -5229,8 +5233,9 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                         ${gallery_sidebar_photos[1]}
                     </div>
                 </div>
-                <div class="middle-info">
+                <div class="middle-info ${(chart_position != null) ? 'row' : ''}">
                     <h1>${artist_name}</h1>
+                    ${(chart_position != null) ? `<h1>${chart_position.outerHTML}</h1>` : ''}
                 </div>
                 <div class="bottom-wiki">
                     ${get_wiki(col_main_overview)}

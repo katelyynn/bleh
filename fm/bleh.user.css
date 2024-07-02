@@ -13647,11 +13647,29 @@ button.bleh--gallery-bookmark-image-btn {
         flex-direction: column;
         gap: 4px;
 
+        &:before, &:after {
+            display: none;
+        }
+
+        &.row {
+            flex-direction: row;
+            gap: 10px;
+
+            h1:first-child {
+                flex: 1;
+            }
+        }
+
         h1 {
             color: hsl(var(--c1));
             font-size: 24px;
             line-height: 28px;
             font-weight: var(--font-weight-bold);
+
+            a {
+                color: hsl(var(--l2-c));
+                text-shadow: 0 0 10px hsl(var(--l4-c));
+            }
         }
         h2 {
             color: hsl(var(--c2));
