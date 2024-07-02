@@ -13779,6 +13779,18 @@ button.bleh--gallery-bookmark-image-btn {
     margin-top: var(--card-gap);
 }
 
+.track-video-panel {
+    .video-inner {
+        display: flex;
+        justify-content: center;
+
+        & > .video-preview {
+            position: relative;
+            width: 700px;
+        }
+    }
+}
+
 .col-sidebar.track-sidebar,
 .col-sidebar.artist-sidebar,
 .col-sidebar.album-sidebar {
