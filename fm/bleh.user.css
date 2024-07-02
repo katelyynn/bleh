@@ -1611,6 +1611,7 @@ article, section, .buffer-standard, .buffer-standard:not(.col-sidebar) .buffer-s
 }
 
 /* take up full space */
+.artist-overview-cover-art,
 .album-overview-cover-art, .album-artwork-upload-cta-container {
     margin-top: -83px !important;
     overflow: hidden;
@@ -1911,7 +1912,7 @@ spacing between is removed and aligned to tag icon */
     margin-left: 0 !important;
 }
 .tags-view-all {
-    --mask: var(--icon-16-search);
+    --mask: var(--icon-16-dots);
     border-left: 1px solid hsl(var(--b5));
     margin-left: -11px !important;
 }
@@ -13740,5 +13741,47 @@ button.bleh--gallery-bookmark-image-btn {
     -webkit-mask-image: var(--mask);
     opacity: 0.13;
     filter: blur(10px) saturate(110%);
+}
+
+
+.artist-overview-cover-art {
+    height: 390px;
+    position: relative;
+
+    img {
+        border-radius: var(--card-radius);
+    }
+
+    .cover-art {
+        width: 350px;
+        height: 350px;
+        left: 50%;
+        margin-left: calc(-1 * (350px / 2));
+        position: absolute;
+        z-index: 7;
+    }
+    .image-list-item {
+        --size: 300px;
+
+        position: absolute;
+        top: calc(350px - (var(--size) - 20px));
+        width: var(--size);
+        height: var(--size);
+        left: 50%;
+        margin-left: calc(-1 * (var(--size) / 2));
+        z-index: 6;
+        filter: brightness(0.5);
+
+        &:after {
+            display: none;
+        }
+
+        & + .image-list-item {
+            top: calc(350px - (var(--size) - 40px));
+            --size: 250px;
+            z-index: 5;
+            filter: brightness(0.15);
+        }
+    }
 }
 }

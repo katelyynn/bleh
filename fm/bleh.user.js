@@ -5203,25 +5203,30 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             create_header_bg(header_bg);
 
 
+            // photos
+            let gallery_sidebar_photos_ems = document.body.querySelectorAll('.sidebar-image-list-item');
+            let gallery_sidebar_photos = [];
+            for (let i = 1; i < 5; i++) {
+                console.info('gallery', i, gallery_sidebar_photos_ems);
+                if (gallery_sidebar_photos_ems[i] != null) {
+                    gallery_sidebar_photos.push(gallery_sidebar_photos_ems[i].querySelector('a').outerHTML);
+                } else {
+                    gallery_sidebar_photos.push('');
+                }
+            }
+
+
             // panel
             let artist_main_panel = document.createElement('section');
             artist_main_panel.classList.add('artist-main-panel');
             artist_main_panel.innerHTML = (`
                 <div class="top-cover">
-                    <div class="item-has-metadata artwork-and-metadata-row buffer-standard buffer-reset@sm">
-                        <div class="album-overview-cover-art js-focus-controls-container">
-                            <a class="cover-art" href="${col_main.querySelector('.secondary-nav-item--images a').getAttribute('href')}">
-                                <img src="${header_bg.replace('i/u/ar0', 'i/u/500x500')}" loading="lazy">
-                            </a>
-                            <div class="album-overview-cover-art-actions js-link-block link-block" style="display: none">
-                                <div class="album-overview-cover-art-action-row">
-                                    <span class="album-overview-cover-art-upload-action">
-
-                                    </span>
-                                </div>
-                                <a class="js-link-block-cover-link link-block-cover-link" href="${col_main.querySelector('.secondary-nav-item--images a').getAttribute('href')}"></a>
-                            </div>
-                        </div>
+                    <div class="artist-overview-cover-art">
+                        <a class="cover-art" href="${col_main.querySelector('.secondary-nav-item--images a').getAttribute('href')}">
+                            <img src="${header_bg.replace('i/u/ar0', 'i/u/500x500')}" loading="lazy">
+                        </a>
+                        ${gallery_sidebar_photos[0]}
+                        ${gallery_sidebar_photos[1]}
                     </div>
                 </div>
                 <div class="middle-info">
