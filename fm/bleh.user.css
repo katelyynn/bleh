@@ -5313,6 +5313,7 @@ span.shout-user-avatar:before,
 }
 /* missing track */
 /*[alt*="Now That\'s What I Call Music"],*/
+[src=""],
 [src$="4128a6eb29f94943c9d206c08e625904.jpg"],
 .obsession-history-item-background[style*="url(https://lastfm.freetls.fastly.net/i/u/arG/4128a6eb29f94943c9d206c08e625904.jpg)"]
 {
@@ -13713,12 +13714,72 @@ button.bleh--gallery-bookmark-image-btn {
         }
     }
 }
+.track-main-panel {
+    display: flex;
+    flex-direction: column;
+    gap: var(--card-gap);
+
+    .cover-art {
+        background-color: hsl(var(--b4));
+        --mask-size: 96px;
+    }
+
+    .middle-info {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+
+        h3 {
+            color: hsl(var(--c3));
+            font-weight: var(--font-weight-medium);
+        }
+
+        h1 {
+            color: hsl(var(--c1));
+            font-size: 24px;
+            line-height: 28px;
+            font-weight: var(--font-weight-bold);
+        }
+        h2 {
+            color: hsl(var(--c2));
+            font-size: 18px;
+            line-height: 22px;
+            font-weight: var(--font-weight-bold);
+            margin: unset !important;
+
+            a {
+                color: inherit;
+            }
+        }
+    }
+
+    .bottom-wiki {
+        display: flex;
+        flex-direction: column;
+        gap: var(--card-gap);
+
+        padding-top: var(--card-gap);
+        border-top: 1px solid hsl(var(--b4));
+
+        .header-new-actions {
+            justify-content: end;
+            margin-left: unset;
+        }
+    }
+}
 
 /* main column, align with sidebar */
+.col-main:has(.album-and-lyrics-row),
 .masonry-left-bottom {
     margin-top: unset !important; /* 46px if nav is not present */
 }
 
+/* below nav */
+.album-and-lyrics-row {
+    margin-top: var(--card-gap);
+}
+
+.col-sidebar.track-sidebar,
 .col-sidebar.artist-sidebar,
 .col-sidebar.album-sidebar {
     position: relative;
@@ -13727,6 +13788,7 @@ button.bleh--gallery-bookmark-image-btn {
 }
 
 
+.track-listeners-panel,
 .artist-listeners-panel,
 .album-listeners-panel {
     display: flex;
@@ -13789,6 +13851,8 @@ button.bleh--gallery-bookmark-image-btn {
         color: hsl(var(--c3));
     }
 }
+.header-new--track,
+.col-main.buffer-standard.buffer-reset\@sm, .track-overview-video-column,
 [action$="/playlists/create/from-artist"],
 .section-with-separator:has(.sidebar-image-list),
 .header-new--artist,

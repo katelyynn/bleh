@@ -1219,6 +1219,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             // album pages
             bleh_album_pages();
             bleh_artist_pages();
+            bleh_track_pages();
 
             correct_generic_combo_no_artist('artist-header-featured-items-item');
             correct_generic_combo_no_artist('artist-top-albums-item');
@@ -1257,6 +1258,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                                 // album pages
                                 bleh_album_pages();
                                 bleh_artist_pages();
+                                bleh_track_pages();
 
                                 correct_generic_combo_no_artist('artist-header-featured-items-item');
                                 correct_generic_combo_no_artist('artist-top-albums-item');
@@ -5380,6 +5382,200 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 </div>
             `);
             col_sidebar.insertBefore(artist_main_panel, col_sidebar.firstChild);
+        }
+    }
+
+    // track pages
+    function bleh_track_pages() {
+        let track_header = document.body.querySelector('.header-new--track');
+
+        if (track_header == undefined)
+            return;
+
+        if (track_header.hasAttribute('data-bleh'))
+            return;
+        track_header.setAttribute('data-bleh', 'true');
+
+        let is_subpage = track_header.classList.contains('header-new--subpage');
+
+        let row = document.body.querySelector('.row');
+        let col_main = document.body.querySelector('.col-main:not([class*="buffer-reset"])');
+        let col_sidebar = document.body.querySelector('.col-sidebar:not(.track-overview-video-column)');
+
+        let navlist = track_header.querySelector('.navlist');
+        if (!is_subpage) {
+            navlist = document.createElement('nav');
+            navlist.classList.add('navlist', 'secondary-nav', 'navlist--more');
+            navlist.setAttribute('aria-label', 'Secondary navigation');
+            navlist.setAttribute('data-require', 'components/collapsing-nav-v2');
+
+            navlist.innerHTML = (`
+                <ul class="navlist-items js-navlist-items" style="position: relative;">
+                    <li class="navlist-item secondary-nav-item secondary-nav-item--overview">
+                        <a class="secondary-nav-item-link secondary-nav-item-link--active" href="${window.location.href}">
+                            Overview
+                        </a>
+                    </li>
+                    <li class="navlist-item secondary-nav-item secondary-nav-item--albums">
+                        <a class="secondary-nav-item-link" href="${window.location.href}/+albums">
+                            Albums
+                        </a>
+                    </li>
+                    <li class="navlist-item secondary-nav-item secondary-nav-item--wiki">
+                        <a class="secondary-nav-item-link" href="${window.location.href}/+wiki">
+                            Wiki
+                        </a>
+                    </li>
+                    <li class="navlist-item secondary-nav-item secondary-nav-item--tags">
+                        <a class="secondary-nav-item-link" href="${window.location.href}/+tags">
+                            Tags
+                        </a>
+                    </li>
+                    <li class="navlist-item secondary-nav-item secondary-nav-item--shoutbox">
+                        <a class="secondary-nav-item-link" href="${window.location.href}/+shoutbox">
+                            Shouts
+                        </a>
+                    </li>
+                </ul>
+            `);
+        }
+
+        col_main.insertBefore(navlist, col_main.firstChild);
+        col_sidebar.classList.add('track-sidebar');
+
+        if (!is_subpage) {
+            let col_main_overview = document.body.querySelector('.col-main[class*="buffer-reset"]');
+
+            let track_artwork_element = document.body.querySelector('.source-album-art img');
+            let track_artwork = '';
+            if (track_artwork_element != undefined)
+                track_artwork = track_artwork_element.getAttribute('src');
+
+            let track_name = track_header.querySelector('.header-new-title').innerHTML;
+            let track_artist = track_header.querySelector('.header-new-crumb span').innerHTML;
+            let track_artist_link = track_header.querySelector('.header-new-crumb').getAttribute('href');
+
+            let tags = document.body.querySelector('.catalogue-tags');
+
+            let actions = track_header.querySelector('.header-new-actions');
+
+            let track_metadata = track_header.querySelectorAll('.header-metadata-tnew-display');
+            let plays = track_metadata[1].querySelector('abbr').textContent;
+            let listeners = track_metadata[0].querySelector('abbr').textContent;
+
+            let header_bg_html = track_header.querySelector('.header-new-background-image');
+            let header_bg = '';
+            if (header_bg_html != null)
+                header_bg = header_bg_html.getAttribute('content');
+
+            create_header_bg(header_bg);
+
+
+            // panel
+            let track_main_panel = document.createElement('section');
+            track_main_panel.classList.add('track-main-panel');
+            track_main_panel.innerHTML = (`
+                <div class="top-cover">
+                    <div class="item-has-metadata artwork-and-metadata-row buffer-standard buffer-reset@sm">
+                        <div class="album-overview-cover-art js-focus-controls-container">
+                            <a class="cover-art">
+                                <img src="${track_artwork}" loading="lazy">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="middle-info">
+                    <h3>Track</h3>
+                    <h1>${track_name}</h1>
+                    <h2><a href="${track_artist_link}">${track_artist}</a></h2>
+                </div>
+                <div class="bottom-wiki">
+                    ${get_wiki(col_main_overview)}
+                    ${tags.outerHTML}
+                    ${actions.outerHTML}
+                </div>
+            `);
+            col_sidebar.insertBefore(track_main_panel, col_sidebar.firstChild);
+
+
+            // plays
+            let my_avi = auth_link.querySelector('img').getAttribute('src');
+            let scrobble_count_element = document.body.querySelector('.personal-stats-item--scrobbles .header-metadata-display a');
+            let scrobble_count = 0;
+            let scrobble_link = '';
+            if (scrobble_count_element != undefined) {
+                scrobble_count = scrobble_count_element.textContent;
+                scrobble_link = scrobble_count_element.getAttribute('href');
+            }
+
+            let your_scrobbles = document.createElement('section');
+            your_scrobbles.classList.add('track-listeners-panel', 'track-listeners-you-know-panel');
+            your_scrobbles.innerHTML = (`
+                <h2>Listeners</h2>
+                <div class="listener-row">
+                    <div class="you-side">
+                        <h3><img src="${my_avi}"><a class="user" href="${auth_link}">You</a></h3>
+                        <p><a class="scrobbles" href="${scrobble_link}">${scrobble_count}</a></p>
+                    </div>
+                </div>
+            `);
+            track_main_panel.after(your_scrobbles);
+
+
+            // listeners
+            let listener_trend = col_sidebar.querySelector('.listener-trend');
+
+            let track_listeners_panel = document.createElement('section');
+            track_listeners_panel.classList.add('track-listeners-panel');
+            track_listeners_panel.innerHTML = (`
+                <div class="listener-row">
+                    <div class="listener-side">
+                        <h3>Listeners</h3>
+                        <p>${listeners}</p>
+                    </div>
+                    <div class="scrobbler-side">
+                        <h3>Scrobbles</h3>
+                        <p>${plays}</p>
+                    </div>
+                </div>
+                <div class="listener-trend-row">
+                    ${(listener_trend != null) ? listener_trend.outerHTML : 'There\'s no listener trend yet, check back later.'}
+                </div>
+            `);
+            your_scrobbles.after(track_listeners_panel);
+        } else {
+            let track_name = track_header.querySelector('.header-new-title').innerHTML;
+            let track_artist = track_header.querySelector('.header-new-crumb span').innerHTML;
+            let track_artist_link = track_header.querySelector('.header-new-crumb').getAttribute('href');
+
+            let header_bg_html = track_header.querySelector('.header-new-background-image');
+            let header_bg = '';
+            if (header_bg_html != null)
+                header_bg = header_bg_html.getAttribute('content');
+
+            create_header_bg(header_bg);
+
+
+            // panel
+            let track_main_panel = document.createElement('section');
+            track_main_panel.classList.add('track-main-panel');
+            track_main_panel.innerHTML = (`
+                <div class="top-cover">
+                    <div class="item-has-metadata artwork-and-metadata-row buffer-standard buffer-reset@sm">
+                        <div class="album-overview-cover-art js-focus-controls-container">
+                            <a class="cover-art">
+                                <img src="" loading="lazy">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="middle-info">
+                    <h3>Track</h3>
+                    <h1>${track_name}</h1>
+                    <h2><a href="${track_artist_link}">${track_artist}</a></h2>
+                </div>
+            `);
+            col_sidebar.insertBefore(track_main_panel, col_sidebar.firstChild);
         }
     }
 
