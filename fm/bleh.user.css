@@ -12881,6 +12881,12 @@ button.bleh--gallery-bookmark-image-btn {
         padding-top: var(--card-gap);
         border-top: 1px solid hsl(var(--b4));
 
+        .profile-bio {
+            &.profile-bio-empty {
+                color: hsl(var(--c3));
+            }
+        }
+
         .actions {
             display: flex;
             gap: var(--button-list-gap);
