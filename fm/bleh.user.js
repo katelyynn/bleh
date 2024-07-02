@@ -5024,7 +5024,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
 
             // chart position
-            let chart_position = artist_header.querySelector('.header-new-chart-position-number');
+            let chart_position = album_header.querySelector('.header-new-chart-position-number');
 
 
             // panel
