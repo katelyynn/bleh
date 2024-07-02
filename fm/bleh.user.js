@@ -5208,6 +5208,9 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     </li>
                 </ul>
             `);
+        } else {
+            // subpage
+            col_main = document.body.querySelector('.col-main');
         }
 
         col_main.insertBefore(navlist, col_main.firstChild);
@@ -5336,6 +5339,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             `);
             your_scrobbles.after(artist_listeners_panel);
         } else {
+
             let artist_name = artist_header.querySelector('.header-new-title').innerHTML;
 
             let header_bg_html = artist_header.querySelector('.header-new-background-image');
