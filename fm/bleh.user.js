@@ -5005,6 +5005,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
             let tags = document.body.querySelector('.catalogue-tags');
 
+            let actions = album_header.querySelector('.header-new-actions');
+
             let album_metadata = album_header.querySelectorAll('.header-metadata-tnew-display');
             let plays = album_metadata[1].querySelector('abbr').textContent;
             let listeners = album_metadata[0].querySelector('abbr').textContent;
@@ -5031,6 +5033,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 <div class="bottom-wiki">
                     ${get_wiki(col_main_overview)}
                     ${tags.outerHTML}
+                    ${actions.outerHTML}
                 </div>
             `);
             col_sidebar.insertBefore(album_main_panel, col_sidebar.firstChild);
@@ -5191,6 +5194,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
             let tags = document.body.querySelector('.catalogue-tags');
 
+            let actions = artist_header.querySelector('.header-new-actions');
+
             let artist_metadata = artist_header.querySelectorAll('.header-metadata-tnew-display');
             let plays = artist_metadata[1].querySelector('abbr').textContent;
             let listeners = artist_metadata[0].querySelector('abbr').textContent;
@@ -5240,6 +5245,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 <div class="bottom-wiki">
                     ${get_wiki(col_main_overview)}
                     ${tags.outerHTML}
+                    ${actions.outerHTML}
                 </div>
             `);
             col_sidebar.insertBefore(artist_main_panel, col_sidebar.firstChild);

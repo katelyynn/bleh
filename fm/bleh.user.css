@@ -13635,6 +13635,11 @@ button.bleh--gallery-bookmark-image-btn {
 
         padding-top: var(--card-gap);
         border-top: 1px solid hsl(var(--b4));
+
+        .header-new-actions {
+            justify-content: end;
+            margin-left: unset;
+        }
     }
 }
 .artist-main-panel {
@@ -13691,6 +13696,11 @@ button.bleh--gallery-bookmark-image-btn {
 
         padding-top: var(--card-gap);
         border-top: 1px solid hsl(var(--b4));
+
+        .header-new-actions {
+            justify-content: end;
+            margin-left: unset;
+        }
     }
 }
 
