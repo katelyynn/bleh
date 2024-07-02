@@ -5327,11 +5327,13 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
     function create_header_bg(header_bg) {
         let previous_background = document.getElementById('backing-bg');
-        if (previous_background == undefined) {
+        if (previous_background == null) {
             let background = document.createElement('div');
             background.classList.add('backing-bg');
             background.setAttribute('id', 'backing-bg');
-            background.style.setProperty('background-image', header_bg);
+            background.style.setProperty('background-image', `url(${header_bg})`);
+
+            console.info('bg', header_bg, background);
 
             document.body.appendChild(background);
         } else {
