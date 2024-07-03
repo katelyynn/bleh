@@ -1392,7 +1392,7 @@ body[class*="namespace--user_library_"] .col-sidebar, .library-header,
     padding-top: var(--card-gap) !important;
 }
 .content-top-header,
-.header-new--artist + .container > .row:not(.buffer-4):has(:nth-child(2)) > .col-main:nth-child(3), .container > .row:not(.buffer-4):has(:nth-child(2)) > .col-sidebar:nth-child(2), .artist-similar-sidebar,
+.header-new--artist + .container > .row:not(.buffer-4):has(:nth-child(2)) > .col-main:nth-child(3), .artist-similar-sidebar,
 /* gallery */ .gallery-section
 {
     margin-top: var(--force-margin-top, unset) !important;
@@ -1456,9 +1456,6 @@ body[class*="namespace--user_library_"] .col-sidebar, .library-header,
     font-size: var(--font-size) !important;
 }
 
-.content-top:has(.content-top-back-link) + .page-content {
-    padding-top: var(--card-gap) !important;
-}
 .single-shout-information {
     display: none;
 }
@@ -1807,7 +1804,7 @@ spacing between is removed and aligned to tag icon */
 /*     SECONDARY NAV     */
 .page-content {
     /*padding-top: calc(46px + (var(--card-gap) * 2)) !important;*/
-    padding-top: var(--card-gap);
+    padding-top: var(--card-gap) !important;
     padding-bottom: var(--card-gap) !important;
 }
 .page-content + .page-content {
@@ -12660,6 +12657,7 @@ button.bleh--gallery-bookmark-image-btn {
     }
 }
 
+.col-sidebar.profile-sidebar,
 .col-sidebar.track-sidebar,
 .col-sidebar.artist-sidebar,
 .col-sidebar.album-sidebar {
@@ -12808,6 +12806,7 @@ button.bleh--gallery-bookmark-image-btn {
     display: flex;
     flex-direction: column;
     gap: var(--card-gap);
+    margin-top: var(--card-gap) !important;
 
     .top-cover {
         display: flex;
@@ -13016,6 +13015,7 @@ button.bleh--gallery-bookmark-image-btn {
         }
     }
 }
+.header--user,
 .col-sidebar > .your-progress-component,
 .about-me-sidebar,
 .header-featured-track {
