@@ -164,7 +164,8 @@
     .bleh--redacted-message,
     .header-metadata-display, .chartlist-count-bar, .chartlist-count-bar-value,
     .primary-selection,
-    .nag-bar--alert
+    .nag-bar--alert,
+    .user-badge
     {
         --c1: var(--hue), calc(var(--sat) * 40%), 100%;
         --c2: var(--hue), calc(var(--sat) * 60%), 90%;
@@ -308,7 +309,7 @@
 
     /* icons (from lucide.dev <3) */
     :root {
-        --icon-pro: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjI1IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLXNwYXJrbGUiPjxwYXRoIGQ9Im0xMiAzLTEuOSA1LjhhMiAyIDAgMCAxLTEuMjg3IDEuMjg4TDMgMTJsNS44IDEuOWEyIDIgMCAwIDEgMS4yODggMS4yODdMMTIgMjFsMS45LTUuOGEyIDIgMCAwIDEgMS4yODctMS4yODhMMjEgMTJsLTUuOC0xLjlhMiAyIDAgMCAxLTEuMjg4LTEuMjg3WiIvPjwvc3ZnPg==');
+        --icon-pro: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJjdXJyZW50Q29sb3IiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIuMjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtaGVhcnQiPjxwYXRoIGQ9Ik0xOSAxNGMxLjQ5LTEuNDYgMy0zLjIxIDMtNS41QTUuNSA1LjUgMCAwIDAgMTYuNSAzYy0xLjc2IDAtMyAuNS00LjUgMi0xLjUtMS41LTIuNzQtMi00LjUtMkE1LjUgNS41IDAgMCAwIDIgOC41YzAgMi4zIDEuNSA0LjA1IDMgNS41bDcgN1oiLz48L3N2Zz4=');
         --icon-follow: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjI1IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLXVzZXJzIj48cGF0aCBkPSJNMTYgMjF2LTJhNCA0IDAgMCAwLTQtNEg2YTQgNCAwIDAgMC00IDR2MiIvPjxjaXJjbGUgY3g9IjkiIGN5PSI3IiByPSI0Ii8+PHBhdGggZD0iTTIyIDIxdi0yYTQgNCAwIDAgMC0zLTMuODciLz48cGF0aCBkPSJNMTYgMy4xM2E0IDQgMCAwIDEgMCA3Ljc1Ii8+PC9zdmc+');
         --icon-tour: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjI1IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLXRpY2tldCI+PHBhdGggZD0iTTIgOWEzIDMgMCAwIDEgMCA2djJhMiAyIDAgMCAwIDIgMmgxNmEyIDIgMCAwIDAgMi0ydi0yYTMgMyAwIDAgMSAwLTZWN2EyIDIgMCAwIDAtMi0ySDRhMiAyIDAgMCAwLTIgMloiLz48cGF0aCBkPSJNMTMgNXYyIi8+PHBhdGggZD0iTTEzIDE3djIiLz48cGF0aCBkPSJNMTMgMTF2MiIvPjwvc3ZnPg==');
         --icon-staff: url('data:image/svg+xml;base64,PHN2ZyByb2xlPSJpbWciIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48dGl0bGU+TGFzdC5mbTwvdGl0bGU+PHBhdGggZD0iTTEwLjU4NCAxNy4yMWwtLjg4LTIuMzkycy0xLjQzIDEuNTk0LTMuNTczIDEuNTk0Yy0xLjg5NyAwLTMuMjQ0LTEuNjQ5LTMuMjQ0LTQuMjg4IDAtMy4zODIgMS43MDQtNC41OTEgMy4zODEtNC41OTEgMi40MiAwIDMuMTg5IDEuNTY3IDMuODQ5IDMuNTc0bC44OCAyLjc0OWMuODggMi42NjYgMi41MjkgNC44MSA3LjI4NSA0LjgxIDMuNDA5IDAgNS43MTgtMS4wNDQgNS43MTgtMy43OTMgMC0yLjIyNy0xLjI2NS0zLjM4MS0zLjYzLTMuOTMxbC0xLjc1OC0uMzg1Yy0xLjIxLS4yNzUtMS41NjctLjc3LTEuNTY3LTEuNTk1IDAtLjkzNC43NDItMS40ODQgMS45NTItMS40ODQgMS4zMiAwIDIuMDM0LjQ5NSAyLjE0NCAxLjY3N2wyLjc0OS0uMzNjLS4yMi0yLjQ3NC0xLjkyNC0zLjQ5Mi00LjcyOS0zLjQ5Mi0yLjQ3NCAwLTQuODkzLjkzNS00Ljg5MyAzLjkzMiAwIDEuODcuOTA3IDMuMDUxIDMuMTg5IDMuNjAxbDEuODcuNDRjMS40MDIuMzMgMS44NjkuOTA3IDEuODY5IDEuNzA0IDAgMS4wMTctLjk5IDEuNDMtMi44NiAxLjQzLTIuNzc2IDAtMy45My0xLjQ1Ny00LjU5LTMuNDY0bC0uOTA3LTIuNzVjLTEuMTU1LTMuNTczLTIuOTk3LTQuODkzLTYuNjUzLTQuODkzQzIuMTQ0IDUuMzMzIDAgNy44OSAwIDEyLjIzM2MwIDQuMTggMi4xNDQgNi40MzQgNS45OTMgNi40MzQgMy4xMDYgMCA0LjU5MS0xLjQ1NyA0LjU5MS0xLjQ1N3oiLz48L3N2Zz4=');
@@ -2944,21 +2945,21 @@
         padding-right: 6px;
         background-color: hsla(var(--h4), 15%) !important;
     }
-    .label.user-status-subscriber {
+    .user-badge--subscriber {
         --mask: var(--icon-pro);
         color: hsl(var(--l3-c)) !important;
         --hue: var(--hue-pro);
         --sat: 1;
         --lit: 1;
     }
-    .label.user-status-staff {
+    .user-badge--staff {
         --mask: var(--icon-staff);
         color: hsl(var(--l3-c)) !important;
         --hue: var(--hue-neg);
         --sat: 1;
         --lit: 1;
     }
-    .label.user-status-mod {
+    .user-badge--mod {
         --mask: var(--icon-mod);
         color: hsl(var(--l3-c)) !important;
         --hue: 10;
@@ -2967,123 +2968,110 @@
     }
 
     /* blehhhh :3 */
-    .user-status--bleh-queen,
-    .label.user-status--bleh-queen {
+    .user-badge--queen {
         --mask: var(--icon-queen);
         color: hsl(var(--l3-c)) !important;
         --hue: 20;
         --sat: 1.2;
         --lit: 1;
     }
-    .user-status--bleh-k,
-    .label.user-status--bleh-k {
+    .user-badge--k {
         --mask: var(--icon-k);
     }
-    .user-status--bleh-a,
-    .label.user-status--bleh-a {
+    .user-badge--a {
         --mask: var(--icon-a);
-        margin-left: -10px !important;
     }
-    .user-status--bleh-t,
-    .label.user-status--bleh-t {
+    .user-badge--t {
         --mask: var(--icon-t);
-        margin-left: -10px !important;
     }
-    .user-status--bleh-e,
-    .label.user-status--bleh-e {
+    .user-badge--e {
         --mask: var(--icon-e);
-        margin-left: -10px !important;
     }
 
-    .user-status--bleh-cat,
-    .label.user-status--bleh-cat {
+    .user-badge--cat {
         --mask: var(--icon-cat);
         color: hsl(var(--l3-c)) !important;
 
-        &.user-status--bleh-user-Iexyy {
+        &.user-badge--user-Iexyy {
             --hue: 206;
             --sat: 1;
             --lit: 1.1;
         }
-        &.user-status--bleh-user-bIeak {
+        &.user-badge--user-bIeak {
             --hue: 0;
             --sat: 0;
             --lit: 1.5;
         }
-        &.user-status--bleh-user-peoplepleasr {
+        &.user-badge--user-peoplepleasr {
             --hue: 264;
             --sat: 1;
             --lit: 1;
         }
-        &.user-status--bleh-user-twolay {
+        &.user-badge--user-twolay {
             --hue: 333;
             --sat: 1;
             --lit: 1;
         }
-        &.user-status--bleh-user-aoivee {
+        &.user-badge--user-aoivee {
             --hue: 110;
             --sat: 1;
             --lit: 1;
         }
-        &.user-status--bleh-user-Serprety {
+        &.user-badge--user-Serprety {
             --hue: 255;
             --sat: 1;
             --lit: 1;
         }
-        &.user-status--bleh-user-RazzBX {
+        &.user-badge--user-RazzBX {
             --hue: 245;
             --sat: 1;
             --lit: 1;
         }
-        &.user-status--bleh-user-ivyshandle {
+        &.user-badge--user-ivyshandle {
             --hue: 333;
             --sat: 1;
             --lit: 1.1;
         }
     }
 
-    .user-status--bleh-mask,
-    .label.user-status--bleh-mask {
+    .user-badge--mask {
         --mask: var(--icon-mask);
         color: hsl(var(--l3-c)) !important;
 
-        &.user-status--bleh-user-KuroinHeroin {
+        &.user-badge--user-KuroinHeroin {
             --hue: 343;
             --sat: 1.5;
             --lit: 0.9;
         }
     }
 
-    .user-status--bleh-paw,
-    .label.user-status--bleh-paw {
+    .user-badge--paw {
         --mask: var(--icon-paw);
         color: hsl(var(--l3-c)) !important;
 
-        &.user-status--bleh-user-u5c {
+        &.user-badge--user-u5c {
             --hue: 273;
             --sat: 1.15;
             --lit: 0.8;
         }
     }
 
-    .user-status--bleh-colon-three,
-    .label.user-status--bleh-colon-three {
+    .user-badge--colon-three {
         --mask: var(--icon-colon-three);
         color: hsl(var(--l3-c)) !important;
 
-        &.user-status--bleh-user-destons {
+        &.user-badge--user-destons {
             --hue: 35;
             --sat: 1.5;
             --lit: 1.05;
         }
     }
 
-    .user-status--bleh-glaive,
-    .label.user-status--bleh-glaive {
+    .user-badge--glaive {
         --mask: var(--icon-glaive);
         color: hsl(var(--l3-c)) !important;
 
-        &.user-status--bleh-user-bIeak {
+        &.user-badge--user-bIeak {
             --hue: 0;
             --sat: 0;
             --lit: 1.5;
@@ -5205,6 +5193,7 @@
 
 
     /*     ICON MASK     */
+    .user-badge:before,
     [data-toggle-button-current-state] .header-follower-btn:before, [data-toggle-button-current-state] .header-follower-btn:hover:before,
     .tags-view-all:before,
     .user-list-inner-wrap .label:before,
@@ -12882,10 +12871,28 @@
             .top {
                 display: flex;
                 flex-direction: row;
+                align-items: center;
                 gap: 10px;
 
-                h1:first-child {
-                    flex: 1;
+                .user-badges {
+                    display: flex;
+                    gap: 6px;
+                    padding-left: 10px;
+
+                    .user-badge {
+                        position: relative;
+                        width: 36px;
+                        height: 22px;
+                        --radius: 50px;
+                        --left: 8px;
+                        --bg: hsl(var(--h3));
+                        --bg-hov: hsla(var(--h3), 90%);
+                        --bg-atv: hsla(var(--h3), 90%);
+                        --col: hsl(var(--b7));
+                        --mask-size: 20px;
+                        --margin-top: -10px;
+                        margin-left: -10px;
+                    }
                 }
             }
 

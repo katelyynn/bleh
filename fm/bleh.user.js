@@ -5745,7 +5745,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     <h3>User</h3>
                     <span class="top">
                         <h1>${profile_name}</h1>
-                        ${display_badges(badges)}
+                        ${display_badges(badges, profile_name)}
                     </span>
                     <!--<h3>${profile_subtitle}</h3>-->
                 </div>
@@ -5796,7 +5796,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     <h3>User</h3>
                     <span class="top">
                         <h1>${profile_name}</h1>
-                        ${display_badges(badges)}
+                        ${display_badges(badges, profile_name)}
                     </span>
                 </div>
             `);
@@ -5809,14 +5809,14 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         }
     }
 
-    function display_badges(badges) {
+    function display_badges(badges, profile_name) {
         let badges_wrap = document.createElement('div');
         badges_wrap.classList.add('user-badges');
 
         badges.forEach((badge_data) => {
             let badge = document.createElement('button');
-            badge.classList.add('user-badge', `user-badge--${badge_data.type}`);
-            badge.setAttribute('onclick', `display_badge_prompt('${badge_data.type}')`);
+            badge.classList.add('user-badge', `user-badge--${badge_data.type}`, `user-badge--user-${profile_name}`);
+            badge.setAttribute('onclick', `_display_badge_prompt('${badge_data.type}')`);
 
             tippy(badge, {
                 content: badge_data.name
