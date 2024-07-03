@@ -5771,7 +5771,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 <div class="listener-row">
                     <div class="scrobbles-side">
                         <h3>Scrobbles</h3>
-                        <p>${stat_scrobbles}</p>
+                        <p><a href="${window.location.href}/library">${stat_scrobbles}</a></p>
                     </div>
                     <div class="since-side">
                         <h3>Since</h3>
@@ -5779,7 +5779,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     </div>
                 </div>
                 <div class="${(listening_trend != null ? 'listener-trend-row' : 'compat-row')}">
-                    ${(listening_trend != null) ? listening_trend.outerHTML : create_compat(compat, compat_avi, compat_lvl.outerHTML, compat_artists.outerHTML)}
+                    ${(listening_trend != null) ? listening_trend.outerHTML : create_compat(compat, compat_avi, compat_lvl.outerHTML, compat_artists.outerHTML, profile_avatar.outerHTML)}
                 </div>
             `);
             profile_header_panel.after(profile_listens_panel);
@@ -5841,7 +5841,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         return placeholder;
     }
 
-    function create_compat(compat_element, avi, lvl, artists) {
+    function create_compat(compat_element, avi, lvl, artists, profile_avi) {
         let percent = avi.getAttribute('title');
         let my_avi = auth_link.querySelector('img').getAttribute('src').replace('avatar42s', 'avatar170s');
 
@@ -5850,11 +5850,14 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         let compat = (`
             <div class="avatar-side lvl-${raw_lvl}">
                 <div class="avatar-with-ring">
+                    ${profile_avi}
+                </div>
+                <div class="avatar-with-ring secondary">
                     <img src="${my_avi}" alt="Your avatar">
                 </div>
             </div>
             <div class="info-side lvl-${raw_lvl}">
-                <div class="level">You are a ${lvl} match</div>
+                <div class="level">You share ${lvl} compatibility</div>
                 <div class="shared">${artists}</div>
             </div>
         `);

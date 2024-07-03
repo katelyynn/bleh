@@ -13041,8 +13041,12 @@
             gap: var(--card-gap);
 
             .avatar-side {
+                position: relative;
+                width: 52px;
+                height: 52px;
+
                 .avatar-with-ring {
-                    width: 70px;
+                    width: 34px;
                     border-radius: 50%;
                     border: 3px solid hsla(var(--h3), 85%);
                     box-shadow: 0 0 20px hsl(var(--h4));
@@ -13052,17 +13056,29 @@
                     img {
                         width: 100%;
                     }
+
+                    position: absolute;
+
+                    &:not(.secondary) {
+                        top: 0;
+                        left: 0;
+                    }
+                    &.secondary {
+                        width: 40px;
+                        bottom: 0;
+                        right: 0;
+                    }
                 }
             }
 
             .info-side {
                 display: flex;
                 flex-direction: column;
-                gap: 10px;
+                gap: 4px;
 
                 .level {
-                    font-size: 20px;
-                    line-height: 24px;
+                    font-size: 18px;
+                    line-height: 22px;
                     color: hsl(var(--c1));
                     font-weight: var(--font-weight-bold);
 
