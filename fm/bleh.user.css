@@ -2010,15 +2010,6 @@
     }
 
 
-    /* move the sidebar to fit */
-    .about-me-header, .about-me-sidebar p {
-        overflow-y: hidden;
-    }
-    .about-me-sidebar p {
-        max-width: 358px;
-    }
-
-
     /*     ADD NOTE     */
     .about-me-sidebar {
         z-index: 10;
@@ -5210,7 +5201,7 @@
     .grid-item:before,
     .select-wrap:before,
     .primary-selection:after,
-    :is(.shout-body, .about-me-sidebar, .bleh--about-me-preview) a:before,
+    :is(.shout-body, .profile-bio, .bleh--about-me-preview) a:before,
     /*     DROPDOWNS     */
     .dropdown-menu-clickable-item:before, .auth-dropdown-menu-item:before,
     .dropdown-menu-list-button::after, .dropdown-menu-clickable-button::after, .dropdown-menu-clickable-button-js-only::after,
@@ -11741,7 +11732,7 @@
 
 
     /*     MENTION     */
-    :is(.shout-body, .about-me-sidebar, .bleh--about-me-preview) a {
+    :is(.shout-body, .profile-bio, .bleh--about-me-preview) a {
         position: relative;
         --show-icon: none;
         --top: 50%;
@@ -11749,14 +11740,14 @@
         --left: 4px;
         --mask-size: 14px;
     }
-    :is(.shout-body, .about-me-sidebar, .bleh--about-me-preview) a[href^="/user/"] {
+    :is(.shout-body, .profile-bio, .bleh--about-me-preview) a[href^="/user/"] {
         padding: 0 4px;
         background-color: hsla(var(--h4), 20%);
         border-radius: var(--item-small-radius);
         font-weight: var(--font-weight-medium);
         text-decoration: none;
     }
-    :is(.shout-body, .about-me-sidebar, .bleh--about-me-preview) a[href^="https://open.spotify.com/user/"] {
+    :is(.shout-body, .profile-bio, .bleh--about-me-preview) a[href^="https://open.spotify.com/user/"] {
         padding: 0 4px 0 calc(4px + 14px + 4px);
         background-color: hsla(var(--h4), 20%);
         border-radius: var(--item-small-radius);
@@ -12911,6 +12902,10 @@
                 border-radius: var(--item-med-radius);
                 width: fit-content;
                 margin-top: calc(10px - 4px);
+
+                &:empty {
+                    display: none;
+                }
 
                 .user-badge {
                     position: relative;
