@@ -16,6 +16,7 @@
 // ==/UserScript==
 
 let version = '2024.0701.refresh';
+
 let lang = document.documentElement.getAttribute('lang');
 let valid_langs = ['en', 'pl'];
 
@@ -1195,12 +1196,15 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     auth = auth_link.querySelector('img').getAttribute('alt');
     initia();
 
+    deliver_notif(`loading bleh ${version}`);
+
     function initia() {
         append_style();
         load_settings();
         //get_scrobbles(document.body);
         append_nav(document.body);
         patch_masthead(document.body);
+        load_notifs();
 
         start_rain();
 
@@ -1245,6 +1249,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                             //get_scrobbles(node);
                             append_nav(document.body);
                             patch_masthead(document.body);
+                            load_notifs();
 
                             if (window.location.href == bleh_url || bleh_regex.test(window.location.href)) {
                                 bleh_settings();
@@ -2655,24 +2660,21 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         tab.querySelector('a').textContent = trans[lang].profile.friends.name;
 
 
-        let adaptive_skin = document.body.querySelector('.adaptive-skin-container');
-        let page_content = adaptive_skin.querySelector('.page-content');
+        let col_main = document.body.querySelector('.col-main');
 
 
         // create nav
-        let bookmark_nav = document.createElement('div');
-        bookmark_nav.classList.add('bleh--nav-wrap', 'bleh--friends-nav');
+        let bookmark_nav = document.createElement('nav');
+        bookmark_nav.classList.add('navlist', 'secondary-nav', 'navlist--more', 'bleh--friends-nav');
         bookmark_nav.innerHTML = (`
-            <nav class="navlist secondary-nav">
-                <ul class="navlist-items bleh--navlist-items">
-                    ${following_tab_html}
-                    ${followers_tab_html}
-                    ${neighbours_tab_html}
-                </ul>
-            </nav>
+            <ul class="navlist-items bleh--navlist-items">
+                ${following_tab_html}
+                ${followers_tab_html}
+                ${neighbours_tab_html}
+            </ul>
         `);
 
-        adaptive_skin.insertBefore(bookmark_nav, page_content);
+        col_main.insertBefore(bookmark_nav, col_main.firstChild);
     }
 
 
@@ -5621,6 +5623,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         if (profile_header == undefined)
             return;
 
+        patch_profile_following();
+
         if (profile_header.hasAttribute('data-bleh'))
             return;
         profile_header.setAttribute('data-bleh', 'true');
@@ -5701,6 +5705,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             let compat_lvl = profile_header.querySelector('.tasteometer-compat-description .tasteometer-compat-colour');
             let compat_artists = profile_header.querySelector('.tasteometer-shared-artists');
 
+            deliver_notif(`on profile overview`);
+
 
             let profile_header_panel = document.createElement('section');
             profile_header_panel.classList.add('profile-header-panel');
@@ -5751,6 +5757,35 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 </div>
             `);
             profile_header_panel.after(profile_listens_panel);
+        } else {
+            let profile_avatar = profile_header.querySelector('.avatar img');
+
+            let profile_name = profile_header.querySelector('.header-title a').textContent;
+
+            let is_self = (auth == profile_name);
+
+
+            let profile_header_panel = document.createElement('section');
+            profile_header_panel.classList.add('profile-header-panel');
+            profile_header_panel.innerHTML = (`
+                <div class="top-cover">
+                    <div class="avatar-container">
+                        ${profile_avatar.outerHTML}
+                    </div>
+                </div>
+                <div class="middle-info">
+                    <h3>User</h3>
+                    <span class="top">
+                        <h1>${profile_name}</h1>
+                    </span>
+                </div>
+            `);
+            col_sidebar.insertBefore(profile_header_panel, col_sidebar.firstChild);
+
+
+            // which subpage is it?
+            let subpage_type = document.body.classList[1];
+            deliver_notif(`on profile subpage ${subpage_type}`);
         }
     }
 
@@ -5809,5 +5844,46 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         } else {
             previous_background.style.setProperty('background-image', `url(${header_bg})`);
         }
+    }
+
+
+    // notifs
+    function load_notifs() {
+        let prev_notif = document.getElementById('bleh-notifs');
+        if (prev_notif == null) {
+            let notifs = document.createElement('div');
+            notifs.classList.add('bleh-notifs');
+            notifs.setAttribute('id', 'bleh-notifs');
+            document.body.appendChild(notifs);
+        }
+    }
+
+    unsafeWindow._deliver_notif = function(content, persist=false) {
+        deliver_notif(content, persist);
+    }
+    function deliver_notif(content, persist=false) {
+        let notif = document.createElement('button');
+        notif.classList.add('bleh-notif');
+        notif.setAttribute('onclick', '_kill_notif(this)');
+        notif.textContent = content;
+
+        document.getElementById('bleh-notifs').appendChild(notif);
+
+        if (persist)
+            return;
+
+        setTimeout(function() {
+            kill_notif(notif);
+        }, 3500);
+    }
+
+    unsafeWindow._kill_notif = function(notif) {
+        kill_notif(notif);
+    }
+    function kill_notif(notif) {
+        notif.classList.add('fade-out');
+        setTimeout(function() {
+            document.getElementById('bleh-notifs').removeChild(notif);
+        }, 400);
     }
 })();

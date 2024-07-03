@@ -1335,9 +1335,9 @@ last.fm changes as of 2024-05-20 */
 .col-main > section, .col-sidebar > section,
 .shoutbox--with-header#shoutbox:not(#shoutbox > #shoutbox /* for shoutbox on gallery image */, section > #shoutbox /* events */),
 .header-featured-track,
-:is(.namespace--user_following, .namespace--user_followers) :is(.col-main, .col-sidebar),
+:is(.namespace--user_following, .namespace--user_followers) .user-list,
 /* individual library selection */
-body[class*="namespace--user_library_"] .col-sidebar, .library-header,
+.library-header,
 .page-content:has(.inbox-notifications),
 .album-and-lyrics-row,
 /* gallery */ .js-gallery-image-details,
@@ -13074,10 +13074,70 @@ button.bleh--gallery-bookmark-image-btn {
         }
     }
 }
+.content-top,
 .header--user,
 .col-sidebar > .your-progress-component,
 .about-me-sidebar,
 .header-featured-track {
     display: none !important;
+}
+
+
+/*     FOLLOWING LIST     */
+.bleh--friends-nav {
+    margin-bottom: var(--card-gap);
+}
+
+
+/* notifs host */
+.bleh-notifs {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    gap: var(--button-list-gap);
+    justify-content: end;
+    align-items: center;
+    inset: 0;
+    pointer-events: none;
+    padding: var(--card-padding);
+    z-index: 99999;
+
+    .bleh-notif {
+        animation: notif var(--trans) var(--trans-function);
+        pointer-events: auto;
+
+        --padding: 7px 14px;
+        --bg: hsla(var(--h3), 80%);
+        --bg-hov: hsla(var(--h3), 70%);
+        --bg-atv: hsla(var(--h3), 60%);
+        --col: hsl(var(--b7));
+        --radius: 50px;
+
+        &.fade-out {
+            opacity: 0;
+            animation: notif_out var(--trans) var(--trans-function);
+        }
+    }
+}
+
+@keyframes notif {
+    from {
+        transform: translateY(var(--card-gap));
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+@keyframes notif_out {
+    to {
+        transform: translateY(var(--card-gap));
+        opacity: 0;
+    }
+    from {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 }
