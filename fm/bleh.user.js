@@ -5676,9 +5676,9 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             let is_self = (auth == profile_name);
 
             let compat = profile_header.querySelector('.tasteometer');
-            let compat_avi = compat.querySelector('.tasteometer-viz');
-            let compat_lvl = compat.querySelector('.tasteometer-compat-description .tasteometer-compat-colour');
-            let compat_artists = compat.querySelector('.tasteometer-shared-artists');
+            let compat_avi = profile_header.querySelector('.tasteometer-viz');
+            let compat_lvl = profile_header.querySelector('.tasteometer-compat-description .tasteometer-compat-colour');
+            let compat_artists = profile_header.querySelector('.tasteometer-shared-artists');
 
 
             let profile_header_panel = document.createElement('section');
