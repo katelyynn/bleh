@@ -5640,12 +5640,40 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         col_main.insertBefore(navlist, col_main.firstChild);
         col_sidebar.classList.add('profile-sidebar');
 
+
+        // global
+        let profile_avatar = profile_header.querySelector('.avatar img');
+
+        let profile_name = profile_header.querySelector('.header-title a').textContent;
+        let profile_link = profile_header.querySelector('.header-title a').getAttribute('href');
+
+        let is_self = (auth == profile_name);
+
+
+        // badges
+        let badges = [];
+        if (profile_header.querySelector('.user-status-subscriber') != null)
+            badges.push({
+                type: 'subscriber',
+                name: 'Subscriber'
+            });
+
+        // custom
+        if (profile_badges.hasOwnProperty(profile_name)) {
+            if (!Array.isArray(profile_badges[profile_name])) {
+                // 1 badge
+                badges.push(profile_badges[profile_name]);
+            } else {
+                // multiple
+                profile_badges[profile_name].forEach((badge) => {
+                    badges.push(badge);
+                });
+            }
+        }
+        badges.forEach((badge) => deliver_notif(`${profile_name} has badge ${badge.name}`));
+
+
         if (!is_subpage) {
-            let profile_avatar = profile_header.querySelector('.avatar img');
-
-            let profile_name = profile_header.querySelector('.header-title a').textContent;
-            let profile_link = profile_header.querySelector('.header-title a').getAttribute('href');
-
             let profile_subtitle = profile_header.querySelector('.header-title-display-name').textContent;
 
             let scrobbling_since = profile_header.querySelector('.header-scrobble-since').textContent;
@@ -5696,9 +5724,6 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
             let follow_button_wrap = profile_header.querySelector('[data-toggle-button=""]');
             let msg_button = profile_header.querySelector('.header-message-user');
-
-
-            let is_self = (auth == profile_name);
 
             let compat = profile_header.querySelector('.tasteometer');
             let compat_avi = profile_header.querySelector('.tasteometer-viz');
@@ -5758,13 +5783,6 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             `);
             profile_header_panel.after(profile_listens_panel);
         } else {
-            let profile_avatar = profile_header.querySelector('.avatar img');
-
-            let profile_name = profile_header.querySelector('.header-title a').textContent;
-
-            let is_self = (auth == profile_name);
-
-
             let profile_header_panel = document.createElement('section');
             profile_header_panel.classList.add('profile-header-panel');
             profile_header_panel.innerHTML = (`
