@@ -5353,6 +5353,7 @@ a:has(+ .js-gallery-heading):after,
     transition-duration: var(--trans) !important;
     transition-timing-function: var(--trans-function) !important;
 }
+.btn--has-icon-right:before,
 .pagination-next a:before,
 .more-link a:before, .more-link-fullwidth-right a:before, .more-link-fullwidth-right-flush-top a:before, .more-link-with-action a:not(.inline-add-icon):after,
 .more-items:before,
@@ -12646,13 +12647,71 @@ button.bleh--gallery-bookmark-image-btn {
 }
 
 .track-video-panel {
+    display: flex;
+    gap: var(--card-gap);
+
     .video-inner {
         display: flex;
-        justify-content: center;
 
         & > .video-preview {
             position: relative;
-            width: 700px;
+            width: 600px;
+        }
+    }
+
+    .actions-side {
+        display: flex;
+        flex-direction: column;
+        gap: var(--card-gap);
+        flex: 1;
+
+        .actions-2 {
+            display: flex;
+            gap: var(--button-list-gap);
+
+            a {
+                position: relative;
+                flex: 1;
+            }
+        }
+
+        .lyric-panel {
+            display: flex;
+            flex-direction: column;
+            gap: var(--card-gap);
+
+            h2 {
+                margin: unset !important;
+            }
+
+            .lyrics-blurb {
+                font-size: 22px;
+                line-height: 26px;
+                text-align: center;
+                position: relative;
+
+                &:before, &:after {
+                    font-size: 36px;
+                    line-height: 40px;
+                    color: hsl(var(--c3));
+                    position: absolute;
+                }
+
+                &:before {
+                    content: '“';
+                    top: 0;
+                    left: 0;
+                }
+                &:after {
+                    content: '„';
+                    bottom: 0;
+                    right: 0;
+                }
+            }
+
+            .search-lyrics {
+                --mask: var(--icon-16-search);
+            }
         }
     }
 }

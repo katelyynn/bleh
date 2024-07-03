@@ -879,7 +879,7 @@ let ranks = {
 
 let includes = {
     guests: [
-        '- feat', '(feat', '[feat', ' feat.',
+        '- feat', '(feat', '[feat', 'feat.',
         '- with', '(with', '[with',
         '- ft', '(ft', '[ft', ' ft.',
         'w/ '
@@ -5546,6 +5546,11 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
 
             // video
+            let lyrics_em = document.body.querySelector('.lyrics-snippet-more-link a');
+            let lyrics = 'hmm.. we don\'t know the lyrics yet';
+            if (lyrics_em != null)
+                lyrics = lyrics_em.textContent;
+
             let track_video = document.body.querySelector('.video-preview');
             if (track_video != null) {
                 let track_video_panel = document.createElement('section');
@@ -5553,6 +5558,22 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 track_video_panel.innerHTML = (`
                     <div class="video-inner">
                         ${document.body.querySelector('.video-preview').outerHTML}
+                    </div>
+                    <div class="actions-side">
+                        <div class="lyric-panel">
+                            <h2>Lyrics</h2>
+                            <div class="lyrics-blurb">
+                                ${lyrics}
+                            </div>
+                            <div class="actions-2">
+                                <a class="btn btn--has-icon btn--has-icon-right search-lyrics search-lyrics-w-musixmatch" href="${window.location.href}/+lyrics">
+                                    Musixmatch
+                                </a>
+                                <a class="btn btn--has-icon btn--has-icon-right search-lyrics search-lyrics-w-genius" href="" target="_blank">
+                                    Genius
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 `);
                 navlist.after(track_video_panel);
