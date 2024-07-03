@@ -5745,6 +5745,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     <h3>User</h3>
                     <span class="top">
                         <h1>${profile_name}</h1>
+                        ${display_badges(badges)}
                     </span>
                     <!--<h3>${profile_subtitle}</h3>-->
                 </div>
@@ -5795,6 +5796,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     <h3>User</h3>
                     <span class="top">
                         <h1>${profile_name}</h1>
+                        ${display_badges(badges)}
                     </span>
                 </div>
             `);
@@ -5805,6 +5807,25 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             let subpage_type = document.body.classList[1];
             deliver_notif(`on profile subpage ${subpage_type}`);
         }
+    }
+
+    function display_badges(badges) {
+        let badges_wrap = document.createElement('div');
+        badges_wrap.classList.add('user-badges');
+
+        badges.forEach((badge_data) => {
+            let badge = document.createElement('button');
+            badge.classList.add('user-badge', `user-badge--${badge_data.type}`);
+            badge.setAttribute('onclick', `display_badge_prompt('${badge_data.type}')`);
+
+            tippy(badge, {
+                content: badge_data.name
+            });
+
+            badges_wrap.appendChild(badge);
+        });
+
+        return badges_wrap.outerHTML;
     }
 
     function placeholder_loved_tracks() {
