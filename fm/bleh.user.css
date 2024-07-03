@@ -309,7 +309,7 @@
 
     /* icons (from lucide.dev <3) */
     :root {
-        --icon-pro: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJjdXJyZW50Q29sb3IiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIuMjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtaGVhcnQiPjxwYXRoIGQ9Ik0xOSAxNGMxLjQ5LTEuNDYgMy0zLjIxIDMtNS41QTUuNSA1LjUgMCAwIDAgMTYuNSAzYy0xLjc2IDAtMyAuNS00LjUgMi0xLjUtMS41LTIuNzQtMi00LjUtMkE1LjUgNS41IDAgMCAwIDIgOC41YzAgMi4zIDEuNSA0LjA1IDMgNS41bDcgN1oiLz48L3N2Zz4=');
+        --icon-pro: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjI1IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWhhbmQtaGVhcnQiPjxwYXRoIGQ9Ik0xMSAxNGgyYTIgMiAwIDEgMCAwLTRoLTNjLS42IDAtMS4xLjItMS40LjZMMyAxNiIvPjxwYXRoIGQ9Im03IDIwIDEuNi0xLjRjLjMtLjQuOC0uNiAxLjQtLjZoNGMxLjEgMCAyLjEtLjQgMi44LTEuMmw0LjYtNC40YTIgMiAwIDAgMC0yLjc1LTIuOTFsLTQuMiAzLjkiLz48cGF0aCBkPSJtMiAxNSA2IDYiLz48cGF0aCBkPSJNMTkuNSA4LjVjLjctLjcgMS41LTEuNiAxLjUtMi43QTIuNzMgMi43MyAwIDAgMCAxNiA0YTIuNzggMi43OCAwIDAgMC01IDEuOGMwIDEuMi44IDIgMS41IDIuOEwxNiAxMloiLz48L3N2Zz4=');
         --icon-follow: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjI1IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLXVzZXJzIj48cGF0aCBkPSJNMTYgMjF2LTJhNCA0IDAgMCAwLTQtNEg2YTQgNCAwIDAgMC00IDR2MiIvPjxjaXJjbGUgY3g9IjkiIGN5PSI3IiByPSI0Ii8+PHBhdGggZD0iTTIyIDIxdi0yYTQgNCAwIDAgMC0zLTMuODciLz48cGF0aCBkPSJNMTYgMy4xM2E0IDQgMCAwIDEgMCA3Ljc1Ii8+PC9zdmc+');
         --icon-tour: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjI1IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLXRpY2tldCI+PHBhdGggZD0iTTIgOWEzIDMgMCAwIDEgMCA2djJhMiAyIDAgMCAwIDIgMmgxNmEyIDIgMCAwIDAgMi0ydi0yYTMgMyAwIDAgMSAwLTZWN2EyIDIgMCAwIDAtMi0ySDRhMiAyIDAgMCAwLTIgMloiLz48cGF0aCBkPSJNMTMgNXYyIi8+PHBhdGggZD0iTTEzIDE3djIiLz48cGF0aCBkPSJNMTMgMTF2MiIvPjwvc3ZnPg==');
         --icon-staff: url('data:image/svg+xml;base64,PHN2ZyByb2xlPSJpbWciIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48dGl0bGU+TGFzdC5mbTwvdGl0bGU+PHBhdGggZD0iTTEwLjU4NCAxNy4yMWwtLjg4LTIuMzkycy0xLjQzIDEuNTk0LTMuNTczIDEuNTk0Yy0xLjg5NyAwLTMuMjQ0LTEuNjQ5LTMuMjQ0LTQuMjg4IDAtMy4zODIgMS43MDQtNC41OTEgMy4zODEtNC41OTEgMi40MiAwIDMuMTg5IDEuNTY3IDMuODQ5IDMuNTc0bC44OCAyLjc0OWMuODggMi42NjYgMi41MjkgNC44MSA3LjI4NSA0LjgxIDMuNDA5IDAgNS43MTgtMS4wNDQgNS43MTgtMy43OTMgMC0yLjIyNy0xLjI2NS0zLjM4MS0zLjYzLTMuOTMxbC0xLjc1OC0uMzg1Yy0xLjIxLS4yNzUtMS41NjctLjc3LTEuNTY3LTEuNTk1IDAtLjkzNC43NDItMS40ODQgMS45NTItMS40ODQgMS4zMiAwIDIuMDM0LjQ5NSAyLjE0NCAxLjY3N2wyLjc0OS0uMzNjLS4yMi0yLjQ3NC0xLjkyNC0zLjQ5Mi00LjcyOS0zLjQ5Mi0yLjQ3NCAwLTQuODkzLjkzNS00Ljg5MyAzLjkzMiAwIDEuODcuOTA3IDMuMDUxIDMuMTg5IDMuNjAxbDEuODcuNDRjMS40MDIuMzMgMS44NjkuOTA3IDEuODY5IDEuNzA0IDAgMS4wMTctLjk5IDEuNDMtMi44NiAxLjQzLTIuNzc2IDAtMy45My0xLjQ1Ny00LjU5LTMuNDY0bC0uOTA3LTIuNzVjLTEuMTU1LTMuNTczLTIuOTk3LTQuODkzLTYuNjUzLTQuODkzQzIuMTQ0IDUuMzMzIDAgNy44OSAwIDEyLjIzM2MwIDQuMTggMi4xNDQgNi40MzQgNS45OTMgNi40MzQgMy4xMDYgMCA0LjU5MS0xLjQ1NyA0LjU5MS0xLjQ1N3oiLz48L3N2Zz4=');
@@ -12873,27 +12873,6 @@
                 flex-direction: row;
                 align-items: center;
                 gap: 10px;
-
-                .user-badges {
-                    display: flex;
-                    gap: 6px;
-                    padding-left: 10px;
-
-                    .user-badge {
-                        position: relative;
-                        width: 36px;
-                        height: 22px;
-                        --radius: 50px;
-                        --left: 8px;
-                        --bg: hsl(var(--h3));
-                        --bg-hov: hsla(var(--h3), 90%);
-                        --bg-atv: hsla(var(--h3), 90%);
-                        --col: hsl(var(--b7));
-                        --mask-size: 20px;
-                        --margin-top: -10px;
-                        margin-left: -10px;
-                    }
-                }
             }
 
             h3 {
@@ -12921,6 +12900,30 @@
 
                 a {
                     color: inherit;
+                }
+            }
+
+            .user-badges {
+                display: flex;
+                gap: 2px;
+                padding: 2px;
+                background-color: hsla(var(--b4), 40%);
+                border-radius: var(--item-med-radius);
+                width: fit-content;
+                margin-top: calc(10px - 4px);
+
+                .user-badge {
+                    position: relative;
+                    width: 20px;
+                    height: 20px;
+                    --left: 2px;
+                    --bg: hsla(var(--h3), 0%);
+                    --bg-hov: hsla(var(--h3), 5%);
+                    --bg-atv: hsla(var(--h3), 10%);
+                    --shadow: none;
+                    --col: hsl(var(--l3-c));
+                    --mask-size: 20px;
+                    --margin-top: -10px;
                 }
             }
         }
@@ -13103,6 +13106,7 @@
         .bleh-notif {
             animation: notif var(--trans) var(--trans-function);
             pointer-events: auto;
+            position: relative;
 
             --padding: 7px 14px;
             --bg: hsla(var(--h3), 80%);
@@ -13110,6 +13114,11 @@
             --bg-atv: hsla(var(--h3), 60%);
             --col: hsl(var(--b7));
             --radius: 50px;
+
+            &.btn--has-icon {
+                --padding: 7px 14px 7px calc(14px + 16px + 6px);
+                --mask-size: 16px;
+            }
 
             &.fade-out {
                 opacity: 0;

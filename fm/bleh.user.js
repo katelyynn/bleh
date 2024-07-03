@@ -5745,9 +5745,9 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     <h3>User</h3>
                     <span class="top">
                         <h1>${profile_name}</h1>
-                        ${display_badges(badges, profile_name)}
                     </span>
                     <!--<h3>${profile_subtitle}</h3>-->
+                    <div class="user-badges" id="user-badges"></div>
                 </div>
                 <div class="bottom-wiki">
                     <div class="profile-bio ${(profile_is_empty) ? 'profile-bio-empty' : ''}">
@@ -5796,8 +5796,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     <h3>User</h3>
                     <span class="top">
                         <h1>${profile_name}</h1>
-                        ${display_badges(badges, profile_name)}
                     </span>
+                    <div class="user-badges" id="user-badges"></div>
                 </div>
             `);
             col_sidebar.insertBefore(profile_header_panel, col_sidebar.firstChild);
@@ -5807,25 +5807,30 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             let subpage_type = document.body.classList[1];
             deliver_notif(`on profile subpage ${subpage_type}`);
         }
+
+        // badges
+        display_badges(badges, profile_name);
     }
 
     function display_badges(badges, profile_name) {
-        let badges_wrap = document.createElement('div');
-        badges_wrap.classList.add('user-badges');
-
         badges.forEach((badge_data) => {
             let badge = document.createElement('button');
             badge.classList.add('user-badge', `user-badge--${badge_data.type}`, `user-badge--user-${profile_name}`);
-            badge.setAttribute('onclick', `_display_badge_prompt('${badge_data.type}')`);
+            badge.setAttribute('onclick', `_display_badge_prompt('${badge_data.type}', "${badge_data.name}")`);
 
             tippy(badge, {
                 content: badge_data.name
             });
 
-            badges_wrap.appendChild(badge);
+            document.getElementById('user-badges').appendChild(badge);
         });
+    }
 
-        return badges_wrap.outerHTML;
+    unsafeWindow._display_badge_prompt = function(type, name) {
+        display_badge_prompt(type, name);
+    }
+    function display_badge_prompt(type, name) {
+        deliver_notif(name, false, true, `user-badge--${type}`);
     }
 
     function placeholder_loved_tracks() {
@@ -5900,13 +5905,19 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     unsafeWindow._deliver_notif = function(content, persist=false) {
         deliver_notif(content, persist);
     }
-    function deliver_notif(content, persist=false) {
+    function deliver_notif(content, persist=false, has_icon=false, append_class='') {
         let notif = document.createElement('button');
         notif.classList.add('bleh-notif');
         notif.setAttribute('onclick', '_kill_notif(this)');
         notif.textContent = content;
 
         document.getElementById('bleh-notifs').appendChild(notif);
+
+        if (has_icon)
+            notif.classList.add('btn--has-icon');
+
+        if (append_class != '')
+            notif.classList.add(append_class);
 
         if (persist)
             return;
