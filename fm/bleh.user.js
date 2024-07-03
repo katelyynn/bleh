@@ -5675,6 +5675,11 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
             let is_self = (auth == profile_name);
 
+            let compat = profile_header.querySelector('.tasteometer');
+            let compat_avi = compat.querySelector('.tasteometer-viz');
+            let compat_lvl = compat.querySelector('.tasteometer-compat-description .tasteometer-compat-colour');
+            let compat_artists = compat.querySelector('.tasteometer-shared-artists');
+
 
             let profile_header_panel = document.createElement('section');
             profile_header_panel.classList.add('profile-header-panel');
@@ -5720,12 +5725,32 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                         <p>${scrobbling_since.replace('• scrobbling since ', '')}</p>
                     </div>
                 </div>
-                <div class="listener-trend-row">
-                    ${(listening_trend != null) ? listening_trend.outerHTML : 'There\'s no listening trend yet, check back later.'}
+                <div class="${(listening_trend != null ? 'listener-trend-row' : 'compat-row')}">
+                    ${(listening_trend != null) ? listening_trend.outerHTML : create_compat(compat, compat_avi, compat_lvl.outerHTML, compat_artists.outerHTML)}
                 </div>
             `);
             profile_header_panel.after(profile_listens_panel);
         }
+    }
+
+    function create_compat(compat_element, avi, lvl, artists) {
+        let percent = avi.getAttribute('title');
+        let my_avi = auth_link.querySelector('img').getAttribute('src').replace('avatar42s', 'avatar170s');
+
+        let raw_lvl = compat_element.classList[1].replace('tasteometer-compat-', '');
+
+        let compat = (`
+            <div class="avatar-side lvl-${raw_lvl}">
+                <div class="avatar-with-ring">
+                    <img src="${my_avi}" alt="Your avatar">
+                </div>
+            </div>
+            <div class="info-side lvl-${raw_lvl}">
+                <div class="level">You are a ${lvl} match</div>
+                <div class="shared">${artists}</div>
+            </div>
+        `);
+        return compat;
     }
 
 
