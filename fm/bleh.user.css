@@ -5315,7 +5315,7 @@
         top: var(--top, 50%) !important;
         background-repeat: no-repeat;
         background-image: unset !important;
-        background-color: currentColor;
+        background-color: currentColor !important;
         border-radius: unset;
         mask-image: var(--mask);
         -webkit-mask-image: var(--mask);
