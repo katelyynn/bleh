@@ -9725,24 +9725,11 @@ hr {
     margin-top: var(--card-gap);
 }
 
-/* no need for a sidebar */
-.bleh--friends-nav + .page-content .col-main,
-.namespace--user_obsessions_set .col-main,
-.col-main:has(#user-loved-tracks-section),
-.namespace--music_bookmarks_overview .col-main {
-    width: var(--cards-width);
-}
-.bleh--friends-nav + .page-content .col-sidebar,
-.namespace--user_obsessions_set .col-sidebar,
-.col-main:has(#user-loved-tracks-section) + .col-sidebar,
-.namespace--music_bookmarks_overview .col-sidebar {
-    display: none !important;
-}
 /* hide neighbours text */
-.bleh--friends-nav + .page-content .col-main > p {
+.bleh--friends-nav + p {
     display: none;
 }
-.bleh--friends-nav + .page-content .neighbours-items-section {
+.bleh--friends-nav + .neighbours-items-section {
     margin-top: unset !important;
 }
 
