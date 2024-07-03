@@ -2594,7 +2594,9 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         delete profile_notes[username];
         document.getElementById('bleh--profile-note').value = '';
 
-        localStorage.setItem('bleh_profile_notes',JSON.stringify(profile_notes));
+        localStorage.setItem('bleh_profile_notes', JSON.stringify(profile_notes));
+
+        deliver_notif(`cleared profile note for ${username}`);
     }
 
     unsafeWindow._save_profile_note = function(username) {
@@ -2609,7 +2611,9 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         .replace(/"/g, '&quot;')
         .replace(/'/g, '&#039;');
 
-        localStorage.setItem('bleh_profile_notes',JSON.stringify(profile_notes));
+        localStorage.setItem('bleh_profile_notes', JSON.stringify(profile_notes));
+
+        deliver_notif(`saved profile note for ${username}, ${document.getElementById('bleh--profile-note').value}`);
     }
 
 
@@ -2783,7 +2787,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
                 // make new badge
                 let badge = document.createElement('span');
-                badge.classList.add('avatar-status-dot',`user-status--bleh-${this_badge.type}`,`user-status--bleh-user-${name}`);
+                badge.classList.add('avatar-status-dot',`user-badge--${this_badge.type}`,`user-badge--user-${name}`);
                 element.appendChild(badge);
 
                 tippy(badge, {
@@ -5783,6 +5787,35 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 </div>
             `);
             profile_header_panel.after(profile_listens_panel);
+
+            // note
+            let profile_notes = JSON.parse(localStorage.getItem('bleh_profile_notes')) || {};
+            let profile_note = profile_notes[profile_name];
+
+            let profile_has_note = false;
+            if (profile_note != undefined)
+                profile_has_note = true;
+
+            let profile_note_panel = document.createElement('section');
+            profile_note_panel.classList.add('profile-note-panel');
+            profile_note_panel.innerHTML = (`
+                <div class="middle-info">
+                    <h1>${trans[lang].settings.profiles.notes.header}</h1>
+                    <div class="content-form">
+                        ${(profile_has_note)
+                        ? `<textarea id="bleh--profile-note" placeholder="${trans[lang].settings.profiles.notes.placeholder}">${JSON.parse(localStorage.getItem('bleh_profile_notes'))[profile_name]}</textarea>`
+                        : `<textarea id="bleh--profile-note" placeholder="${trans[lang].settings.profiles.notes.placeholder}"></textarea>`
+                        }
+                    </div>
+                </div>
+                <div class="bottom-wiki">
+                    <div class="actions">
+                        <button class="btn" onclick="_clear_profile_note('${profile_name}')">${trans[lang].settings.clear}</button>
+                        <button class="btn primary" onclick="_save_profile_note('${profile_name}')">${trans[lang].settings.save}</button>
+                    </div>
+                </div>
+            `);
+            profile_listens_panel.after(profile_note_panel);
         } else {
             let profile_header_panel = document.createElement('section');
             profile_header_panel.classList.add('profile-header-panel');

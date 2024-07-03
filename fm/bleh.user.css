@@ -2936,6 +2936,7 @@
         padding-right: 6px;
         background-color: hsla(var(--h4), 15%) !important;
     }
+    .avatar-status-dot--subscriber,
     .user-badge--subscriber {
         --mask: var(--icon-pro);
         color: hsl(var(--l3-c)) !important;
@@ -2943,6 +2944,7 @@
         --sat: 1;
         --lit: 1;
     }
+    .avatar-status-dot--staff,
     .user-badge--staff {
         --mask: var(--icon-staff);
         color: hsl(var(--l3-c)) !important;
@@ -2950,6 +2952,7 @@
         --sat: 1;
         --lit: 1;
     }
+    .avatar-status-dot--mod,
     .user-badge--mod {
         --mask: var(--icon-mod);
         color: hsl(var(--l3-c)) !important;
@@ -4736,25 +4739,6 @@
     .avatar-status-dot:after {
         color: hsl(var(--l3-c));
         --override-bg: currentColor !important;
-    }
-
-    .avatar-status-dot--subscriber {
-        --mask: var(--icon-pro);
-        --hue: var(--hue-pro);
-        --sat: 1;
-        --lit: 1;
-    }
-    .avatar-status-dot--staff {
-        --mask: var(--icon-staff);
-        --hue: var(--hue-neg);
-        --sat: 1;
-        --lit: 1;
-    }
-    .avatar-status-dot--mod {
-        --mask: var(--icon-mod);
-        --hue: 10;
-        --sat: 1;
-        --lit: 1;
     }
 
 
@@ -12898,7 +12882,8 @@
                 display: flex;
                 gap: 2px;
                 padding: 2px;
-                background-color: hsla(var(--b4), 40%);
+                background-color: hsla(var(--b6), 40%);
+                border: 1px solid hsl(var(--b4));
                 border-radius: var(--item-med-radius);
                 width: fit-content;
                 margin-top: calc(10px - 4px);
@@ -12909,12 +12894,12 @@
 
                 .user-badge {
                     position: relative;
-                    width: 20px;
-                    height: 20px;
+                    width: 22px;
+                    height: 22px;
                     --left: 2px;
                     --bg: hsla(var(--h3), 0%);
-                    --bg-hov: hsla(var(--h3), 5%);
-                    --bg-atv: hsla(var(--h3), 10%);
+                    --bg-hov: hsla(var(--h3), 15%);
+                    --bg-atv: hsla(var(--h3), 25%);
                     --shadow: none;
                     --col: hsl(var(--l3-c));
                     --mask-size: 20px;
@@ -13087,6 +13072,62 @@
             }
         }
     }
+
+    .profile-note-panel {
+        display: flex;
+        flex-direction: column;
+        gap: var(--card-gap);
+
+        .middle-info {
+            display: flex;
+            flex-direction: column;
+            gap: var(--card-gap);
+
+            h1 {
+                color: hsl(var(--c1));
+                font-size: 24px;
+                line-height: 28px;
+                font-weight: var(--font-weight-bold);
+                letter-spacing: unset;
+                margin: unset;
+
+                display: flex;
+                align-items: center;
+                gap: 6px;
+
+                img {
+                    width: 20px;
+                    height: 20px;
+                    border-radius: 50%;
+                }
+
+                a {
+                    color: inherit;
+                }
+            }
+
+            .content-form {
+                margin: unset;
+            }
+        }
+
+        .bottom-wiki {
+            display: flex;
+            flex-direction: column;
+            gap: var(--card-gap);
+
+            padding-top: var(--card-gap);
+            border-top: 1px solid hsl(var(--b4));
+
+            .actions {
+                display: flex;
+                gap: var(--button-list-gap);
+                justify-content: end;
+                margin-left: unset;
+            }
+        }
+    }
+
     .content-top,
     .header--user,
     .col-sidebar > .your-progress-component,
