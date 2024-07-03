@@ -5733,6 +5733,14 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         }
     }
 
+    function placeholder_loved_tracks() {
+        let placeholder = document.createElement('a');
+        placeholder.setAttribute('href', '');
+        placeholder.textContent = '0';
+
+        return placeholder;
+    }
+
     function create_compat(compat_element, avi, lvl, artists) {
         let percent = avi.getAttribute('title');
         let my_avi = auth_link.querySelector('img').getAttribute('src').replace('avatar42s', 'avatar170s');
