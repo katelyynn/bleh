@@ -13039,6 +13039,7 @@
                 position: relative;
                 width: 52px;
                 height: 52px;
+                flex-shrink: 0;
 
                 .avatar-with-ring {
                     width: 34px;

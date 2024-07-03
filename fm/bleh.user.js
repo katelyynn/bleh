@@ -880,7 +880,7 @@ let ranks = {
 
 let includes = {
     guests: [
-        '- feat', '(feat', '[feat', 'feat.',
+        '- feat', 'feat.',
         '- with', '(with', '[with',
         '- ft', '(ft', '[ft', ' ft.',
         'w/ '
