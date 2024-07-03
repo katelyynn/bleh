@@ -4330,9 +4330,13 @@
     .shoutbox {
         /* on user pages */
         margin-top: var(--card-gap) !important;
+
+        #shoutbox {
+            margin-top: unset;
+        }
     }
-    #shoutbox {
-        margin-top: unset;
+    #shoutbox .shoutbox {
+        margin-top: unset !important;
     }
 
     #shoutbox.shoutbox--with-header {
