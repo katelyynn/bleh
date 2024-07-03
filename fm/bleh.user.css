@@ -1364,7 +1364,6 @@
     /* home page recommendations */ .homefeed .col-main,
     /* playlist content */ .playlisting-playlist-header + .page-content > .row,
     .playlisting-playlists,
-    .obsession-history,
     /* event lineup */ .big-artist-list,
     /* set an obsession */ .obsession-search, .obsession-search-results,
     /* user did not scrobble album in date range */ .library-header + .message,
@@ -1415,8 +1414,7 @@
     }
 
     /* no playlists */ .namespace--user_playlists_playlists .page-content,
-    .page-content:has(.playlisting-playlists, .gallery-section, .obsession-search),
-    /* obsessions */ .namespace--user_obsessions_overview .container.page-content
+    .page-content:has(.playlisting-playlists, .gallery-section, .obsession-search)
     {
         padding-top: unset !important;
     }
@@ -4329,6 +4327,14 @@
 
 
     /*     SHOUTBOX     */
+    .shoutbox {
+        /* on user pages */
+        margin-top: var(--card-gap) !important;
+    }
+    #shoutbox {
+        margin-top: unset;
+    }
+
     #shoutbox.shoutbox--with-header {
         min-height: unset;
     }
@@ -4356,7 +4362,7 @@
     }
 
 
-    .shoutbox, .shout-form, .shouting-unavailable {
+    .shout-form, .shouting-unavailable {
         margin-top: unset;
     }
     .shout, .shout-form {
@@ -4980,7 +4986,8 @@
             .love-button--loved,
             #manage_data .btn-primary,
             .primary,
-            [data-bleh--image-is-bookmarked="true"]
+            [data-bleh--image-is-bookmarked="true"],
+            .bottom-wiki .btn-primary
         ) {
             --bg: hsl(var(--h3)) !important;
             --bg-hov: hsla(var(--h3), 80%) !important;
@@ -6898,6 +6905,10 @@
 
 
     /*     NAV     */
+    .pagination {
+        margin-top: var(--card-gap);
+    }
+
     .pagination-list {
         cursor: default;
     }
@@ -13124,6 +13135,61 @@
                 gap: var(--button-list-gap);
                 justify-content: end;
                 margin-left: unset;
+            }
+        }
+    }
+
+    .sidebar-information-panel {
+        display: flex;
+        flex-direction: column;
+        gap: var(--card-gap);
+
+        .middle-info {
+            display: flex;
+            flex-direction: column;
+            gap: var(--card-gap);
+
+            h1 {
+                color: hsl(var(--c1));
+                font-size: 24px;
+                line-height: 28px;
+                font-weight: var(--font-weight-bold);
+                letter-spacing: unset;
+                margin: unset;
+
+                display: flex;
+                align-items: center;
+                gap: 6px;
+
+                img {
+                    width: 20px;
+                    height: 20px;
+                    border-radius: 50%;
+                }
+
+                a {
+                    color: inherit;
+                }
+            }
+        }
+
+        .bottom-wiki {
+            display: flex;
+            flex-direction: column;
+            gap: var(--card-gap);
+
+            padding-top: var(--card-gap);
+            border-top: 1px solid hsl(var(--b4));
+
+            .actions {
+                display: flex;
+                gap: var(--button-list-gap);
+                justify-content: end;
+                margin-left: unset;
+
+                .obsession-history-play-all {
+                    margin: unset;
+                }
             }
         }
     }

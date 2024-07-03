@@ -5635,11 +5635,29 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
         let is_subpage = !profile_header.classList.contains('header--overview');
 
-        let row = document.body.querySelector('.row');
+        let row = document.body.querySelector('.row:not(._buffer)');
         let col_main = document.body.querySelector('.col-main');
         let col_sidebar = document.body.querySelector('.col-sidebar');
 
         let navlist = profile_header.querySelector('.navlist');
+
+        if (col_main == null) {
+            let row = document.createElement('div');
+            row.classList.add('row');
+
+            col_main = document.createElement('div');
+            col_main.classList.add('col-main');
+
+            col_sidebar = document.createElement('div');
+            col_sidebar.classList.add('col-sidebar');
+
+            row.appendChild(col_main);
+            row.appendChild(col_sidebar);
+
+            let page_content = document.body.querySelector('.container.page-content');
+
+            page_content.insertBefore(row, page_content.firstChild);
+        }
 
         col_main.insertBefore(navlist, col_main.firstChild);
         col_sidebar.classList.add('profile-sidebar');
@@ -5837,8 +5855,43 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
 
             // which subpage is it?
-            let subpage_type = document.body.classList[1];
+            let subpage_type = document.body.classList[1].replace('namespace--', '');
             deliver_notif(`on profile subpage ${subpage_type}`);
+
+            if (subpage_type == 'user_obsessions_overview') {
+                // obsessions history
+                let obsession_history = document.body.querySelector('.obsession-history');
+                let pagination = document.body.querySelector('.pagination');
+
+                let obsession_container = document.createElement('section');
+                obsession_container.classList.add('obsession-history-panel');
+                obsession_container.appendChild(obsession_history);
+                obsession_container.appendChild(pagination);
+
+                col_main.appendChild(obsession_container);
+
+                //
+
+                let section_controls = document.body.querySelector('.section-controls');
+                let section_title = section_controls.querySelector('.content-top-header').textContent;
+                let play_all_btn = section_controls.querySelector('.obsession-history-play-all');
+                let set_obsession_btn = section_controls.querySelector('.btn-primary');
+
+                let sidebar_information_panel = document.createElement('section');
+                sidebar_information_panel.classList.add('sidebar-information-panel', 'obsession-information-panel');
+                sidebar_information_panel.innerHTML = (`
+                    <div class="middle-info">
+                        <h1>${section_title}</h1>
+                    </div>
+                    <div class="bottom-wiki">
+                        <div class="actions">
+                            ${(play_all_btn != null) ? play_all_btn.outerHTML : ''}
+                            ${(set_obsession_btn != null) ? set_obsession_btn.outerHTML : ''}
+                        </div>
+                    </div>
+                `);
+                col_sidebar.appendChild(sidebar_information_panel);
+            }
         }
 
         // badges
