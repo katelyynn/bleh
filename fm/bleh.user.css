@@ -3274,7 +3274,7 @@
                 content: '';
                 display: block;
                 background-color: hsl(var(--l3-c)) !important;
-                box-shadow: 0 0 30px 7px hsl(var(--h4));
+                box-shadow: 0 0 30px 4px hsl(var(--h4));
                 width: 6px;
                 height: 6px;
                 border-radius: 50%;
