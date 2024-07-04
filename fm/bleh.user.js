@@ -1406,6 +1406,9 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         let user_nav = element.querySelectorAll('.auth-dropdown-menu > li')[0];
         let inbox_nav = element.querySelectorAll('.auth-dropdown-menu > li')[2];
 
+        let my_avi = auth_link.querySelector('img').getAttribute('src').replace('avatar42s', 'avatar170s');
+        document.querySelector('.auth-dropdown-menu').style.setProperty('--url', `url(${my_avi})`);
+
         if (!user_nav.hasAttribute('data-bleh')) {
             user_nav.setAttribute('data-bleh','true');
 
@@ -5044,7 +5047,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             if (header_bg_html != null)
                 header_bg = header_bg_html.getAttribute('content');
 
-            create_header_bg(header_bg);
+            insert_top_nav(header_bg);
 
 
             // chart position
@@ -5130,7 +5133,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             if (header_bg_html != null)
                 header_bg = header_bg_html.getAttribute('content');
 
-            create_header_bg(header_bg);
+            insert_top_nav(header_bg);
 
 
             // panel
@@ -5261,7 +5264,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             if (header_bg_html != null)
                 header_bg = header_bg_html.getAttribute('content');
 
-            create_header_bg(header_bg);
+            insert_top_nav(header_bg);
 
 
             // photos
@@ -5377,7 +5380,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             if (header_bg_html != null)
                 header_bg = header_bg_html.getAttribute('content');
 
-            create_header_bg(header_bg);
+            insert_top_nav(header_bg);
 
 
             // panel
@@ -5485,7 +5488,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             if (header_bg_html != null)
                 header_bg = header_bg_html.getAttribute('content');
 
-            create_header_bg(header_bg);
+            insert_top_nav(header_bg);
 
 
             // panel
@@ -5605,7 +5608,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             if (header_bg_html != null)
                 header_bg = header_bg_html.getAttribute('content');
 
-            create_header_bg(header_bg);
+            insert_top_nav(header_bg);
 
 
             // panel
@@ -5649,6 +5652,15 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         let row = document.body.querySelector('.row:not(._buffer)');
         let col_main = document.body.querySelector('.col-main');
         let col_sidebar = document.body.querySelector('.col-sidebar');
+
+
+        let header_bg_html = profile_header.querySelector('.header-background');
+        let header_bg = '';
+        if (header_bg_html != null)
+            header_bg = header_bg_html.getAttribute('style').replace('background-image: url(', '').replace(');', '');
+
+        insert_top_nav(header_bg);
+
 
         let navlist = profile_header.querySelector('.navlist');
 
@@ -5778,9 +5790,9 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     <h3>User</h3>
                     <span class="top">
                         <h1>${profile_name}</h1>
+                        <div class="user-badges" id="user-badges"></div>
                     </span>
                     <!--<h3>${profile_subtitle}</h3>-->
-                    <div class="user-badges" id="user-badges"></div>
                 </div>
                 <div class="bottom-wiki">
                     <div class="profile-bio ${(profile_is_empty) ? 'profile-bio-empty' : ''}">
@@ -5858,8 +5870,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     <h3>User</h3>
                     <span class="top">
                         <h1>${profile_name}</h1>
+                        <div class="user-badges" id="user-badges"></div>
                     </span>
-                    <div class="user-badges" id="user-badges"></div>
                 </div>
             `);
             col_sidebar.insertBefore(profile_header_panel, col_sidebar.firstChild);
@@ -6035,5 +6047,28 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         setTimeout(function() {
             document.getElementById('bleh-notifs').removeChild(notif);
         }, 400);
+    }
+
+
+    function insert_top_nav(header_bg) {
+        create_header_bg(header_bg);
+        return;
+
+        let top_nav = document.getElementById('top-nav');
+        let container = document.body.querySelector('.adaptive-skin-container');
+
+        if (top_nav == null) {
+            top_nav = document.createElement('section');
+            top_nav.classList.add('top-nav');
+            top_nav.setAttribute('id', 'top-nav');
+            container.insertBefore(top_nav, container.firstChild);
+        }
+
+        top_nav.innerHTML = (`
+            <div class="backing-bg" id="backing-bg" style="background-image: url(${header_bg})"></div>
+            <div class="top-nav-inner">
+                profiles
+            </div>
+        `);
     }
 })();
