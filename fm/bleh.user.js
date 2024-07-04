@@ -1244,40 +1244,38 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
         // last.fm is a single page application
         const observer = new MutationObserver((mutations) => {
-            for (const mutation of mutations) {
-                load_settings();
-                //get_scrobbles(node);
-                append_nav(document.body);
-                patch_masthead(document.body);
-                load_notifs();
+            load_settings();
+            //get_scrobbles(node);
+            append_nav(document.body);
+            patch_masthead(document.body);
+            load_notifs();
 
-                if (window.location.href == bleh_url || bleh_regex.test(window.location.href)) {
-                    bleh_settings();
-                } else {
-                    patch_profile(document.body);
-                    patch_shouts(document.body);
-                    patch_lastfm_settings(document.body);
-                    patch_titles(document.body);
-                    patch_header_title(document.body);
-                    patch_artist_ranks(document.body);
-                    patch_artist_grids(document.body);
-                    patch_header_menu();
-                    patch_gallery_page();
+            if (window.location.href == bleh_url || bleh_regex.test(window.location.href)) {
+                bleh_settings();
+            } else {
+                patch_profile(document.body);
+                patch_shouts(document.body);
+                patch_lastfm_settings(document.body);
+                patch_titles(document.body);
+                patch_header_title(document.body);
+                patch_artist_ranks(document.body);
+                patch_artist_grids(document.body);
+                patch_header_menu();
+                patch_gallery_page();
 
-                    // album pages
-                    bleh_album_pages();
-                    bleh_artist_pages();
-                    bleh_track_pages();
-                    bleh_profile_pages();
+                // album pages
+                bleh_album_pages();
+                bleh_artist_pages();
+                bleh_track_pages();
+                bleh_profile_pages();
 
-                    correct_generic_combo_no_artist('artist-header-featured-items-item');
-                    correct_generic_combo_no_artist('artist-top-albums-item');
-                    correct_generic_combo('source-album-details');
-                    correct_generic_combo('resource-list--release-list-item');
-                    correct_generic_combo('similar-albums-item');
-                    correct_generic_combo('track-similar-tracks-item');
-                    correct_generic_combo('similar-items-sidebar-item');
-                }
+                correct_generic_combo_no_artist('artist-header-featured-items-item');
+                correct_generic_combo_no_artist('artist-top-albums-item');
+                correct_generic_combo('source-album-details');
+                correct_generic_combo('resource-list--release-list-item');
+                correct_generic_combo('similar-albums-item');
+                correct_generic_combo('track-similar-tracks-item');
+                correct_generic_combo('similar-items-sidebar-item');
             }
         });
 
