@@ -1219,7 +1219,6 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         } else {
             patch_profile(document.body);
             patch_shouts(document.body);
-            patch_lastfm_settings(document.body);
             patch_titles(document.body);
             patch_header_title(document.body);
             patch_artist_ranks(document.body);
@@ -1232,6 +1231,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             bleh_artist_pages();
             bleh_track_pages();
             bleh_profile_pages();
+            patch_lastfm_settings();
 
             correct_generic_combo_no_artist('artist-header-featured-items-item');
             correct_generic_combo_no_artist('artist-top-albums-item');
@@ -1255,7 +1255,6 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             } else {
                 patch_profile(document.body);
                 patch_shouts(document.body);
-                patch_lastfm_settings(document.body);
                 patch_titles(document.body);
                 patch_header_title(document.body);
                 patch_artist_ranks(document.body);
@@ -1268,6 +1267,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 bleh_artist_pages();
                 bleh_track_pages();
                 bleh_profile_pages();
+                patch_lastfm_settings();
 
                 correct_generic_combo_no_artist('artist-header-featured-items-item');
                 correct_generic_combo_no_artist('artist-top-albums-item');
@@ -1584,7 +1584,20 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
 
     // patch last.fm settings
-    function patch_lastfm_settings(element) {
+    function patch_lastfm_settings() {
+        // this is how we check we're in the settings
+        if (!document.body.classList[2].startsWith('namespace--settings'))
+            return;
+
+        let col_main = document.body.querySelector('.col-main');
+
+        if (col_main.hasAttribute('data-bleh'))
+            return;
+        col_main.setAttribute('data-bleh', 'true');
+
+        let navlist = document.body.querySelector('.secondary-nav');
+        col_main.insertBefore(navlist, col_main.firstChild);
+
         patch_settings_profile_tab();
         patch_settings_privacy_tab();
     }
