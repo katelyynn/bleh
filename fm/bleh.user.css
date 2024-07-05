@@ -131,7 +131,7 @@ body, [data-page-resource-type="album"], [data-page-resource-type="track"],
 
 /* text */
 body, [data-page-resource-type="album"], [data-page-resource-type="track"],
-.compat-row :is(.avatar-with-ring, .tasteometer-compat-colour, a),
+.compat-row :is(.progress-bar .fill, .avatar-with-ring, .tasteometer-compat-colour, a),
 .dropdown-menu-clickable-item, .auth-dropdown-menu-item,
 .gallery-image-buttons button, .gallery-image-preferred-button,
 .vote-button--voted,
@@ -894,8 +894,6 @@ last.fm changes as of 2024-05-20 */
     height: 40px !important;
 }
 .masthead-nav-item .masthead-nav-control {
-    padding: 0 16px 0 calc(16px + 16px + 4px) !important;
-
     /* if classic-playbar is not present, last.fm uses a new header design,
     featuring this fancy underline thing */
     &:after {
@@ -904,12 +902,6 @@ last.fm changes as of 2024-05-20 */
 }
 .masthead-nav-control:before, .masthead-search-toggle:before {
     opacity: 1 !important;
-    margin-right: unset !important;
-    right: unset !important;
-    background-color: currentColor !important;
-    background-image: unset !important;
-    mask-image: var(--mask);
-    -webkit-mask-image: var(--mask);
 }
 .masthead-search-toggle:before, .masthead-search-submit:before {
     --mask: var(--icon-16-search);
@@ -927,11 +919,6 @@ last.fm changes as of 2024-05-20 */
     --shadow-hov: none !important;
 }
 .masthead-nav .masthead-nav-control {
-    --bg: transparent !important;
-    --bg-hov: var(--bg) !important;
-    --bg-atv: var(--bg) !important;
-    --shadow: none !important;
-    --shadow-hov: none !important;
     height: 40px !important;
     display: flex !important;
     align-items: center;
@@ -2303,7 +2290,13 @@ hr + .library-search-results-header {
 .user-dashboard-pagination a, .user-dashboard-pagination span:not(.user-dashboard-controls-tooltip),
 .navlist-more, .secondary-nav-item-link, .masthead-nav-control {
     /* left padding for icon, otherwise just 12px 16px */
-    padding: 12px 0 12px calc(16px + 6px) !important;
+    --padding: 12px 0 12px calc(16px + 6px) !important;
+    --bg: transparent !important;
+    --bg-hov: var(--bg) !important;
+    --bg-atv: var(--bg) !important;
+    --shadow: none !important;
+    --shadow-hov: none !important;
+
     z-index: 1;
     opacity: unset !important;
     margin: unset !important;
@@ -3467,8 +3460,12 @@ hr + .library-search-results-header {
     --lit: 1;
 }
 .lvl-very_low {
-    fill: hsl(var(--c3)) !important;
-    color: hsl(var(--c3)) !important;
+    --sat: 0.25;
+    --lit: 1;
+
+    .tasteometer-compat-colour {
+        color: hsl(var(--c3)) !important;
+    }
 }
 
 
@@ -4913,7 +4910,7 @@ button:not(.playback-app-container button, .top-artist-list-item, .pixel, .liste
 .no-data-message-button,
 .playlisting-create-option,
 /* home page welcome close */ .home-welcome-close,
-.masthead-nav-control,
+.masthead-nav-control, .secondary-nav-item-link,
 .dropdown-menu-item-dark,
 .btn-secondary,
 /* track love button in other's library */ .love-button,
@@ -13033,56 +13030,80 @@ button.bleh--gallery-bookmark-image-btn {
 
     .compat-row {
         display: flex;
-        align-items: center;
+        flex-direction: column;
         gap: var(--card-gap);
 
-        .avatar-side {
-            position: relative;
-            width: 52px;
-            height: 52px;
-            flex-shrink: 0;
+        .top {
+            display: flex;
 
-            .avatar-with-ring {
-                width: 34px;
-                border-radius: 50%;
-                border: 3px solid hsla(var(--h3), 85%);
-                box-shadow: 0 0 20px hsl(var(--h4));
-                overflow: hidden;
-                aspect-ratio: 1 / 1;
+            .progress-bar {
+                display: flex;
+                flex: 1;
+                height: 8px;
+                background-color: hsl(var(--b4));
+                border-radius: 50px;
 
-                img {
-                    width: 100%;
-                }
-
-                position: absolute;
-
-                &:not(.secondary) {
-                    top: 0;
-                    left: 0;
-                }
-                &.secondary {
-                    width: 40px;
-                    bottom: 0;
-                    right: 0;
+                .fill {
+                    height: 8px;
+                    background-color: hsl(var(--h3));
+                    box-shadow: 0 0 7px hsl(var(--h4));
+                    border-radius: 50px;
                 }
             }
         }
-
-        .info-side {
+        .bottom {
             display: flex;
-            flex-direction: column;
-            gap: 4px;
+            align-items: center;
+            gap: var(--card-gap);
 
-            .level {
-                font-size: 18px;
-                line-height: 22px;
-                color: hsl(var(--c1));
-                font-weight: var(--font-weight-bold);
+            .avatar-side {
+                position: relative;
+                width: 52px;
+                height: 52px;
+                flex-shrink: 0;
 
-                .tasteometer-compat-colour {
-                    font-size: inherit;
-                    line-height: inherit;
-                    font-weight: inherit;
+                .avatar-with-ring {
+                    width: 34px;
+                    border-radius: 50%;
+                    border: 3px solid hsla(var(--h3), 85%);
+                    box-shadow: 0 0 20px hsl(var(--h4));
+                    overflow: hidden;
+                    aspect-ratio: 1 / 1;
+
+                    img {
+                        width: 100%;
+                    }
+
+                    position: absolute;
+
+                    &:not(.secondary) {
+                        top: 0;
+                        left: 0;
+                    }
+                    &.secondary {
+                        width: 40px;
+                        bottom: 0;
+                        right: 0;
+                    }
+                }
+            }
+
+            .info-side {
+                display: flex;
+                flex-direction: column;
+                gap: 4px;
+
+                .level {
+                    font-size: 18px;
+                    line-height: 22px;
+                    color: hsl(var(--c1));
+                    font-weight: var(--font-weight-bold);
+
+                    .tasteometer-compat-colour {
+                        font-size: inherit;
+                        line-height: inherit;
+                        font-weight: inherit;
+                    }
                 }
             }
         }
@@ -13278,9 +13299,11 @@ button.bleh--gallery-bookmark-image-btn {
     top: 0;
     left: 0;
     right: 0;
-    height: 800px;
+    height: 400px;
     z-index: -1;
     background-size: cover;
+    background-position: 0 27%;
+    background-repeat: no-repeat;
     --mask: linear-gradient(0deg, transparent 0%, rgb(0, 0, 0) 100%);
     mask-image: var(--mask);
     -webkit-mask-image: var(--mask);

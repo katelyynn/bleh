@@ -5656,7 +5656,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
         let header_bg_html = profile_header.querySelector('.header-background');
         let header_bg = '';
-        if (header_bg_html != null)
+        if (header_bg_html != null && header_bg_html.hasAttribute('style'))
             header_bg = header_bg_html.getAttribute('style').replace('background-image: url(', '').replace(');', '');
 
         insert_top_nav(header_bg);
@@ -5774,6 +5774,10 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             let compat_avi = profile_header.querySelector('.tasteometer-viz');
             let compat_lvl = profile_header.querySelector('.tasteometer-compat-description .tasteometer-compat-colour');
             let compat_artists = profile_header.querySelector('.tasteometer-shared-artists');
+            if (compat_artists == null) {
+                compat_artists = document.createElement('div');
+                compat_artists.textContent = 'You have no artists in common :(';
+            }
 
             deliver_notif(`on profile overview`);
 
@@ -5828,6 +5832,13 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 </div>
             `);
             profile_header_panel.after(profile_listens_panel);
+
+            let compat_fill = document.getElementById('compat-fill');
+            if (compat_fill != null) {
+                tippy(compat_fill, {
+                    content: `Musical compatibility score of ${compat_fill.getAttribute('data-percent')}`
+                })
+            }
 
             // note
             let profile_notes = JSON.parse(localStorage.getItem('bleh_profile_notes')) || {};
@@ -5957,17 +5968,24 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         let raw_lvl = compat_element.classList[1].replace('tasteometer-compat-', '');
 
         let compat = (`
-            <div class="avatar-side lvl-${raw_lvl}">
-                <div class="avatar-with-ring">
-                    ${profile_avi}
-                </div>
-                <div class="avatar-with-ring secondary">
-                    <img src="${my_avi}" alt="Your avatar">
+            <div class="top">
+                <div class="progress-bar lvl-${raw_lvl}">
+                    <div class="fill" id="compat-fill" data-percent="${percent}" style="width: ${percent}"></div>
                 </div>
             </div>
-            <div class="info-side lvl-${raw_lvl}">
-                <div class="level">You share ${lvl} compatibility</div>
-                <div class="shared">${artists}</div>
+            <div class="bottom">
+                <div class="avatar-side lvl-${raw_lvl}">
+                    <div class="avatar-with-ring">
+                        ${profile_avi}
+                    </div>
+                    <div class="avatar-with-ring secondary">
+                        <img src="${my_avi}" alt="Your avatar">
+                    </div>
+                </div>
+                <div class="info-side lvl-${raw_lvl}">
+                    <div class="level">You share ${lvl} compatibility</div>
+                    <div class="shared">${artists}</div>
+                </div>
             </div>
         `);
         return compat;
