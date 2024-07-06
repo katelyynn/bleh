@@ -1191,6 +1191,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     initia();
 
     function initia() {
+        let performance_start = performance.now();
+
         append_style();
         load_settings();
         //get_scrobbles(document.body);
@@ -1266,6 +1268,9 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             childList: true,
             subtree: true
         });
+
+        let performance_end = performance.now();
+        console.info(`bleh finished loading in ${performance_end - performance_start}`);
     }
 
     function append_style() {
