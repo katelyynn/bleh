@@ -1372,11 +1372,27 @@ last.fm changes as of 2024-05-20 */
     margin-left: unset;
     margin-right: unset;
     backdrop-filter: var(--card-filter, unset);
+    transform-origin: top;
+    animation: card var(--trans) var(--trans-function);
     /* festive */
     /*background-image: var(--overlay-ice)/*, linear-gradient(180deg, rgba(190,233,250,0.04) 0%, rgba(0,0,0,0) 100%);*/
     /*background-repeat: repeat-x;
     background-position: unset !important;*/
 }
+
+
+@keyframes card {
+    from {
+        transform: scaleY(0.85);
+        opacity: 0;
+    }
+    to {
+        transform: scaleY(1);
+        opacity: 1;
+    }
+}
+
+
 .page-content:has(.no-events),
 :is(.namespace--user_library_overview, .namespace--user_library_artists, .namespace--user_library_albums, .namespace--user_library_tracks, .namespace--user_following, .namespace--user_followers, .namespace--user_loved, .namespace--user_neighbours, .namespace--user_tags_overview, .namespace--user_shoutbox_overview) .page-content {
     padding-top: var(--card-gap) !important;
