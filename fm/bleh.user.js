@@ -904,7 +904,8 @@ let includes = {
         '- alternative', '(alternative',
         '(mix 1', '(mix 2', '(mix 3', '(mix 4', '(mix 5', '(mix 6', '(mix 7', '(mix 8', '(mix 9',
         '- choppednotslopped', '(choppednotslopped', '[choppednotslopped',
-        '(v1', '(v2', '(v3', '(v4', '(v5', '(v6', '(v7', '(v8', '(v9'
+        '(v1', '(v2', '(v3', '(v4', '(v5', '(v6', '(v7', '(v8', '(v9',
+        '- nevermind version', '(nevermind version'
     ],
     stems: [
         '- acapella', '(acapella', '[acapella',
@@ -5123,6 +5124,46 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 </div>
             `);
             your_scrobbles.after(album_listeners_panel);
+
+
+            // tracklist
+            let tracklist = document.getElementById('tracklist');
+            if (tracklist == null) {
+                tracklist = document.createElement('section');
+                tracklist.innerHTML = (`
+                    <h3 class="text-18">Tracklist</h3>
+                    <div class="no-data-message">
+                        <p class="no-data-message">hmm.. we're missing a tracklist</p>
+                        <p class="no-data-message">wait a sec for last.fm to fetch your plays on this album</p>
+                    </div>
+                `)
+                navlist.after(tracklist);
+
+                let url_split = window.location.href.split('/');
+                let album_url = `${url_split[(url_split.length - 2)]}/${url_split[(url_split.length - 1)]}`;
+
+
+                // we need to fetch the tracklist
+                fetch(`/user/${auth}/library/music/${album_url}`)
+                    .then(function(response) {
+                        console.error('returned', response, response.text);
+
+                        return response.text();
+                    })
+                    .then(function(html) {
+                        let doc = new DOMParser().parseFromString(html, 'text/html');
+
+                        deliver_notif(`using url ${`/user/${auth}/library/music/${album_url}`}`);
+                        console.error('DOC', doc);
+
+                        let inner_tracklist = doc.querySelector('#top-tracks-section [v-else=""] .chartlist');
+
+                        tracklist.innerHTML = (`
+                            <h3 class="text-18">Tracklist</h3>
+                            ${inner_tracklist.outerHTML}
+                        `);
+                    })
+            }
         } else {
             let album_name = album_header.querySelector('.header-new-title').innerHTML;
             let album_artist = album_header.querySelector('.header-new-crumb span').innerHTML;
