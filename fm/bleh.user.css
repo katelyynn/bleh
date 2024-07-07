@@ -12984,6 +12984,8 @@ button.bleh--gallery-bookmark-image-btn {
         border-top: 1px solid hsl(var(--b4));
 
         .profile-bio {
+            width: 358px; /* parity with prior bleh2 design */
+
             &.profile-bio-empty {
                 color: hsl(var(--c3));
             }
