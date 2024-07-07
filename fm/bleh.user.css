@@ -2292,8 +2292,8 @@ hr + .library-search-results-header {
     /* left padding for icon, otherwise just 12px 16px */
     --padding: 12px 0 12px calc(16px + 6px) !important;
     --bg: transparent !important;
-    --bg-hov: var(--bg) !important;
-    --bg-atv: var(--bg) !important;
+    --bg-hov: hsla(var(--b4), 20%) !important;
+    --bg-atv: hsla(var(--b4), 40%) !important;
     --shadow: none !important;
     --shadow-hov: none !important;
 
@@ -6067,7 +6067,7 @@ input:is([name="track_name"], [name="artist_name"], [name="album_name"], [name="
 .date-range-picker-content,
 .dropdown-menu-clickable, .auth-dropdown-menu, .navlist-hidden-list, .modal-body, .library-search-results, .events-filter-location-dropdown {
     margin: unset !important;
-    background: hsl(var(--b5)) !important;
+    background: hsl(var(--b6)) !important;
     border: var(--card-border) !important;
     border-radius: var(--card-radius) !important;
     box-shadow: var(--menu-shadow) !important;
@@ -12896,8 +12896,7 @@ button.bleh--gallery-bookmark-image-btn {
             display: flex;
             gap: 2px;
             padding: 2px;
-            background-color: hsla(var(--b6), 40%);
-            border: 1px solid hsl(var(--b4));
+            background-color: hsl(var(--b6));
             border-radius: var(--item-med-radius);
             width: fit-content;
 
