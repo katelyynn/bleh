@@ -5157,6 +5157,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             `);
             col_sidebar.insertBefore(album_main_panel, col_sidebar.firstChild);
         }
+
+        album_header.innerHTML = '';
     }
 
     // artist pages
@@ -5403,6 +5405,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             `);
             col_sidebar.insertBefore(artist_main_panel, col_sidebar.firstChild);
         }
+
+        artist_header.innerHTML = '';
     }
 
     // track pages
@@ -5632,6 +5636,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             `);
             col_sidebar.insertBefore(track_main_panel, col_sidebar.firstChild);
         }
+
+        track_header.innerHTML = '';
     }
 
     // profile pages
