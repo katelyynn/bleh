@@ -2283,10 +2283,16 @@ hr + .library-search-results-header {
     color: hsla(var(--c2), 85%);
     height: 44px;
 }
+
 .navlist-items {
     display: flex;
     gap: 24px;
 }
+/* navlist-more isnt contained in navlist-items */
+button.navlist-more {
+    margin-left: 24px !important;
+}
+
 .user-dashboard-pagination a, .user-dashboard-pagination span:not(.user-dashboard-controls-tooltip),
 .navlist-more, .secondary-nav-item-link, .masthead-nav-control {
     /* left padding for icon, otherwise just 12px 16px */
@@ -2359,20 +2365,11 @@ hr + .library-search-results-header {
     }
 }
 .navlist-more {
-    --padding: 12px 16px 12px !important;
-    --bg: transparent !important;
-    --bg-hov: transparent !important;
-    --bg-atv: transparent !important;
-    --col: hsla(var(--c2), 85%) !important;
-    --shadow: none !important;
-    --shadow-hov: none !important;
     --font-size: 0;
-    width: 48px;
+    width: 22px;
     --mask: var(--icon-16-dots);
+    --left: 3px;
     position: relative;
-}
-.navlist-more:before {
-    --left: 16px;
 }
 
 .masthead-search-toggle:hover {
