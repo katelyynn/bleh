@@ -1562,7 +1562,7 @@ article, section, .buffer-standard, .buffer-standard:not(.col-sidebar) .buffer-s
 /* take up full space */
 .artist-overview-cover-art,
 .album-overview-cover-art, .album-artwork-upload-cta-container {
-    margin-top: -83px !important;
+    margin-top: -81px !important;
     overflow: hidden;
     z-index: 1;
 }
@@ -12945,7 +12945,7 @@ button.bleh--gallery-bookmark-image-btn {
             --mask-size: 72px;
             overflow: hidden;
             box-shadow: var(--menu-shadow);
-            margin-top: -83px !important;
+            margin-top: -81px !important;
             width: 170px;
         }
     }
