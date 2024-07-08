@@ -18,7 +18,12 @@
 let version = {
     build: '2024.0708',
     sku: 'refresh',
-    feature_flags_enabled: true
+    feature_flags: {
+        test: {
+            default: false,
+            name: 'Test out feature flags'
+        }
+    }
 }
 
 let lang = document.documentElement.getAttribute('lang');
@@ -1036,7 +1041,8 @@ let settings_template = {
     big_numbers: false,
     format_guest_features: true,
     colourful_counts: true,
-    rain: false
+    rain: false,
+    feature_flags: {}
 };
 let settings_base = {
     hue: {
@@ -3180,6 +3186,9 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                         <button class="btn bleh--btn" data-bleh-page="performance" onclick="_change_settings_page('performance')">
                             ${trans[lang].settings.performance.name}
                         </button>
+                        <button class="btn bleh--btn" data-bleh-page="sku" onclick="_change_settings_page('sku')">
+                            Configure your bleh sku
+                        </button>
                     </div>
                     <div class="btns sep">
                         <button class="btn" data-bleh-action="import" onclick="_import_settings()">
@@ -3217,7 +3226,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                         <img class="screen" src="https://cutensilly.org/img/bleh3-theme-${document.documentElement.getAttribute('data-bleh--theme')}.png" alt="bleh">
                         <div class="text">
                             <h5>${trans[lang].settings.home.brand}</h5>
-                            <p>${trans[lang].settings.home.version.replace('{v}', version)}</p>
+                            <p onclick="_change_settings_page('sku')">${trans[lang].settings.home.version.replace('{v}', `${version.build}.${version.sku}`)}</p>
                         </div>
                     </div>
                     <div class="actions">
@@ -3781,6 +3790,38 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     <div class="profile-notes" id="profile-notes"></div>
                 </div>
                 `);
+        } else if (page == 'sku') {
+            return (`
+                <div class="bleh--panel">
+                    <h3>Configure your bleh sku</h3>
+                    <div class="screen-row">
+                        <div class="screen-wrap">
+                            <img class="screen" src="https://cutensilly.org/img/bleh3-theme-${document.documentElement.getAttribute('data-bleh--theme')}.png" alt="bleh">
+                            <div class="text">
+                                <h5>${trans[lang].settings.home.brand}</h5>
+                            </div>
+                        </div>
+                        <div class="actions">
+                            <a class="btn action">
+                                <div class="icon bleh--issues"></div>
+                                <span class="text">
+                                    <h5>build</h5>
+                                    <p>${version.build}</p>
+                                </span>
+                            </a>
+                            <a class="btn action">
+                                <div class="icon bleh--issues"></div>
+                                <span class="text">
+                                    <h5>sku</h5>
+                                    <p>${version.sku}</p>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                    <h3>Feature Flags</h3>
+                    <div class="feature-flags" id="feature-flags"></div>
+                </div>
+                `);
         }
     }
 
@@ -3807,6 +3848,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             refresh_all();
         else if (page == 'profiles')
             init_profile_notes();
+        else if (page == 'sku')
+            bleh_sku_page();
     }
 
     function show_theme_change_in_settings(theme = '') {
@@ -6239,5 +6282,53 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             count: count,
             percent: percent
         }
+    }
+
+
+    function bleh_sku_page() {
+        let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
+        let flags_container = document.getElementById('feature-flags');
+
+        for (let flag in version.feature_flags) {
+            let current_state = version.feature_flags[flag].default;
+            if (settings.feature_flags[flag] != undefined) current_state = settings.feature_flags[flag];
+
+            let feature_flag_element = document.createElement('div');
+            feature_flag_element.classList.add('toggle-container');
+            feature_flag_element.innerHTML = (`
+                <div class="heading">
+                    <h5>${version.feature_flags[flag].name}</h5>
+                    <p>${flag}</p>
+                </div>
+                <div class="toggle-wrap">
+                    <button id="feature-flag-toggle-${flag}" class="toggle" onclick="_update_flag_toggle('${flag}', this)" aria-checked="${current_state}">
+                        <div class="dot"></div>
+                    </button>
+                </div>
+            `);
+
+            flags_container.appendChild(feature_flag_element);
+        }
+    }
+
+    unsafeWindow._update_flag_toggle = function(flag, button) {
+        update_flag_toggle(flag, button);
+    }
+    function update_flag_toggle(flag, button) {
+        let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
+
+        let current_state = version.feature_flags[flag].default;
+        if (settings.feature_flags[flag] != undefined) current_state = settings.feature_flags[flag];
+
+        if (current_state == true) {
+            button.setAttribute('aria-checked', 'false');
+            settings.feature_flags[flag] = false;
+        } else {
+            button.setAttribute('aria-checked', 'true');
+            settings.feature_flags[flag] = true;
+        }
+
+        // save to settings
+        localStorage.setItem('bleh', JSON.stringify(settings));
     }
 })();
