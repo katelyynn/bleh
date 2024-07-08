@@ -6157,6 +6157,11 @@ input:is([name="track_name"], [name="artist_name"], [name="album_name"], [name="
     animation: dropdown calc(var(--trans-short) + 0.02s) var(--trans-function);
     transform-origin: top;
     color: hsl(var(--c2));
+
+    [data-ff--aero="true"] & {
+        background: hsla(var(--b6), 75%) !important;
+        backdrop-filter: blur(10px) saturate(150%) !important;
+    }
 }
 .modal-content {
     animation: dropdown calc(var(--trans-short) + 0.22s) var(--trans-function);
@@ -11208,16 +11213,16 @@ input[type="range"]::-webkit-slider-thumb {
     /**/
     width: 8px;
     height: 20px;
-    background-color: hsl(var(--h4));
+    background-color: hsl(var(--h2));
     border-radius: var(--item-small-radius);
-    border: 2px solid hsl(var(--h4));
+    border: 2px solid hsl(var(--h2));
 }
 input[type="range"]::-moz-range-thumb {
     width: 8px;
     height: 20px;
-    background-color: hsl(var(--h4));
+    background-color: hsl(var(--h2));
     border-radius: var(--item-small-radius);
-    border: 2px solid hsl(var(--h4));
+    border: 2px solid hsl(var(--h2));
 }
 
 input[type="range"]::-webkit-slider-thumb {

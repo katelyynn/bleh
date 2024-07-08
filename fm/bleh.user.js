@@ -34,6 +34,10 @@ let version = {
         card_animations: {
             default: true,
             name: 'Use card animations'
+        },
+        aero: {
+            default: false,
+            name: 'Aero'
         }
     }
 }
