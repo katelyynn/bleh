@@ -5861,24 +5861,45 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             // listens
             let listening_trend = col_sidebar.querySelector('.your-progress-component');
 
+
+            let scrobbles_calculated = calculate_scrobbles(stat_scrobbles);
+
+
             let profile_listens_panel = document.createElement('section');
             profile_listens_panel.classList.add('profile-listens-panel');
             profile_listens_panel.innerHTML = (`
+                <div class="scrobble-row">
+                    <!--<div class="big-bar" id="scrobble-bar">
+                        <div class="fill" style="width: ${scrobbles_calculated.percent}%"></div>
+                        <div class="text">${stat_scrobbles} <div class="sub">scrobbles</div></div>
+                    </div>-->
+                    <div class="progress-bar" id="scrobble-bar">
+                        <div class="fill" data-percent="${scrobbles_calculated.percent}" style="width: ${scrobbles_calculated.percent}%"></div>
+                    </div>
+                </div>
                 <div class="listener-row">
                     <div class="scrobbles-side">
                         <h3>Scrobbles</h3>
                         <p><a href="${window.location.href}/library">${stat_scrobbles}</a></p>
                     </div>
-                    <div class="since-side">
+                    <div class="artists-side">
+                        <h3>Artists</h3>
+                        <p><a href="${window.location.href}/library/artists?format=grid">${stat_artists}</a></p>
+                    </div>
+                    <!--<div class="since-side">
                         <h3>Since</h3>
                         <p>${scrobbling_since.replace('• scrobbling since ', '')}</p>
-                    </div>
+                    </div>-->
                 </div>
                 <div class="${(listening_trend != null ? 'listener-trend-row' : 'compat-row')}">
                     ${(listening_trend != null) ? listening_trend.outerHTML : create_compat(compat, compat_avi, compat_lvl.outerHTML, compat_artists.outerHTML, profile_avatar.outerHTML)}
                 </div>
             `);
             profile_header_panel.after(profile_listens_panel);
+
+            tippy(document.getElementById('scrobble-bar'), {
+                content: `${Math.round(scrobbles_calculated.percent)}% to the next goal`
+            })
 
             let compat_fill = document.getElementById('compat-fill');
             if (compat_fill != null) {
@@ -6135,5 +6156,28 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 profiles
             </div>
         `);
+    }
+
+    function calculate_scrobbles(count_original) {
+        let count = parseInt(count_original.replaceAll(',', ''));
+        let percent = 0;
+
+        if (count <= 100_300) {
+            percent = (count / 100_000) * 100;
+        } else if (count <= 200_300) {
+            count = count - 100_300;
+            percent = (count / 100_000) * 100;
+        } else if (count <= 300_300) {
+            count = count - 200_300;
+            percent = (count / 100_000) * 100;
+        } else if (count <= 400_300) {
+            count = count - 300_300;
+            percent = (count / 100_000) * 100;
+        }
+
+        return {
+            count: count,
+            percent: percent
+        }
     }
 })();

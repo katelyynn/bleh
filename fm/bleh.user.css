@@ -13,7 +13,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu+Sans:ital,wght@0,100..800;1,100..800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wdth,wght@8..144,151,100..1000&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Shrikhand&display=swap');
 
 body {
@@ -53,6 +53,21 @@ body {
     --line-height: calc(var(--font-size) + 4px);
     --font-size-sm: 12px;
     --line-height-sm: calc(var(--font-size-sm) + 4px);
+
+    --font-flex: Roboto Flex, var(--font);
+    --font-flex-settings:
+    "slnt" 0,
+    "wdth" 151,
+    "GRAD" 0,
+    "XOPQ" 96,
+    "XTRA" 468,
+    "YOPQ" 79,
+    "YTAS" 750,
+    "YTDE" -203,
+    "YTFI" 738,
+    "YTLC" 514,
+    "YTUC" 712;
+    --font-flex-weight: 600;
 
     --font-weight: 480;
     --font-weight-medium: 650;
@@ -12807,7 +12822,9 @@ button.bleh--gallery-bookmark-image-btn {
                 color: hsl(var(--c1));
                 font-size: 24px;
                 line-height: 28px;
-                font-weight: var(--font-weight-bold);
+                font-weight: var(--font-flex-weight);
+                font-family: var(--font-flex);
+                font-feature-settings: var(--font-flex-settings);
 
                 display: flex;
                 align-items: center;
@@ -13029,6 +13046,75 @@ button.bleh--gallery-bookmark-image-btn {
         margin-bottom: 0 !important;
     }
 
+    .scrobble-row {
+        display: flex;
+
+        .big-bar {
+            flex: 1;
+            display: flex;
+            background-color: hsl(var(--b6));
+            position: relative;
+            height: 44px;
+            border-radius: var(--item-med-radius);
+
+            .fill {
+                background-color: hsl(var(--h3));
+                border-radius: var(--item-med-radius);
+                position: relative;
+
+                &:after {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    bottom: 0;
+                    width: 12px;
+                    background-color: hsl(var(--h2));
+                    border-radius: var(--item-med-radius);
+                }
+            }
+
+            .text {
+                color: hsl(var(--c1));
+                font-size: 20px;
+                line-height: var(--height);
+                --height: 24px;
+                font-weight: var(--font-flex-weight);
+                font-family: var(--font-flex);
+                font-feature-settings: var(--font-flex-settings);
+                display: flex;
+                gap: 8px;
+                display: none;
+
+                position: absolute;
+                top: 50%;
+                right: 0;
+                margin-top: calc(-1 * (var(--height) / 2));
+
+                .sub {
+                    font-size: var(--font-size);
+                    line-height: var(--line-height);
+                    color: hsl(var(--c2));
+                }
+            }
+        }
+
+        .progress-bar {
+            display: flex;
+            flex: 1;
+            height: 8px;
+            background-color: hsl(var(--b4));
+            border-radius: 50px;
+
+            .fill {
+                height: 8px;
+                background-color: hsl(var(--h3));
+                box-shadow: 0 0 7px hsl(var(--h4));
+                border-radius: 50px;
+            }
+        }
+    }
+
     .listener-row {
         display: flex;
 
@@ -13061,7 +13147,9 @@ button.bleh--gallery-bookmark-image-btn {
                 color: hsl(var(--c1));
                 font-size: 24px;
                 line-height: 28px;
-                font-weight: var(--font-weight-bold);
+                font-weight: var(--font-flex-weight);
+                font-family: var(--font-flex);
+                font-feature-settings: var(--font-flex-settings);
 
                 display: flex;
                 align-items: center;
