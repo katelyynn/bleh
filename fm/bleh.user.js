@@ -6068,6 +6068,11 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
         let raw_lvl = compat_element.classList[1].replace('tasteometer-compat-', '');
 
+
+        // last.fm for some reason caps at 99%, which is annoying
+        if (percent == '99%') percent = '100%';
+
+
         let compat = (`
             <div class="top">
                 <div class="progress-bar lvl-${raw_lvl}">
