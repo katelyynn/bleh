@@ -1814,7 +1814,7 @@ spacing between is removed and aligned to tag icon */
     margin-left: 0 !important;
 }
 .tags-view-all {
-    --mask: var(--icon-16-dots);
+    --mask: var(--icon-16-arrow-right);
     border-left: 1px solid hsl(var(--b5));
     margin-left: -11px !important;
 }
