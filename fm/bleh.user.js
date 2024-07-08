@@ -26,6 +26,14 @@ let version = {
         use_flexible_numbers: {
             default: false,
             name: 'Use Roboto Flex for numbers in chartlists'
+        },
+        use_new_logo: {
+            default: false,
+            name: 'Use new logo sizing'
+        },
+        card_animations: {
+            default: true,
+            name: 'Use card animations'
         }
     }
 }
@@ -6291,7 +6299,9 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             feature_flag_element.innerHTML = (`
                 <div class="heading">
                     <h5>${version.feature_flags[flag].name}</h5>
-                    <p>${flag}</p>
+                    <div class="info-row">
+                        <div class="default-flag flag-${version.feature_flags[flag].default}">${version.feature_flags[flag].default}</div><p>${flag}</p>
+                    </div>
                 </div>
                 <div class="toggle-wrap">
                     <button id="feature-flag-toggle-${flag}" class="toggle" onclick="_update_flag_toggle('${flag}', this)" aria-checked="${current_state}">

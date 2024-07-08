@@ -180,7 +180,8 @@ a,
 .header-metadata-display, .chartlist-count-bar, .chartlist-count-bar-value,
 .primary-selection,
 .nag-bar--alert,
-.user-badge
+.user-badge,
+.default-flag
 {
     --c1: var(--hue), calc(var(--sat) * 40%), 100%;
     --c2: var(--hue), calc(var(--sat) * 60%), 90%;
@@ -855,25 +856,22 @@ last.fm changes as of 2024-05-20 */
         position: relative;
         font: 0/0 a;
 
-        /* this isnt using https://cesque.com/gaydient/ but shoutout,
-        based on https://codepen.io/charliewilco/pen/BzrJzE */
-        --g-red: hsl(8, 62%, 60%);
-        --g-orange: hsl(24, 86%, 60%);
-        --g-yellow: hsl(44, 100%, 60%);
-        --g-green: hsl(163, 100%, 60%);
-        --g-blue: hsl(199, 79%, 60%);
-        --g-indigo: hsl(254, 46%, 60%);
         background-image: linear-gradient(90deg,
-        var(--g-red) 16.6666%,
-        var(--g-orange) 33.333%,
-        var(--g-yellow) 50%,
-        var(--g-green) 66.6666%,
-        var(--g-blue) 83.3333%,
-        var(--g-indigo) 100%
+        #1845A0 0%,
+        #259E5C 100%
         );
         background-clip: text;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
+
+        [data-ff--use_new_logo="true"] & {
+            width: 55px;
+
+            &:before {
+                font-size: 24px;
+                line-height: 30px;
+            }
+        }
 
         /* bleh */
         &:before {
@@ -1402,12 +1400,15 @@ last.fm changes as of 2024-05-20 */
     margin-left: unset;
     margin-right: unset;
     backdrop-filter: var(--card-filter, unset);
-    transform-origin: top;
-    animation: card var(--trans) var(--trans-function);
     /* festive */
     /*background-image: var(--overlay-ice)/*, linear-gradient(180deg, rgba(190,233,250,0.04) 0%, rgba(0,0,0,0) 100%);*/
     /*background-repeat: repeat-x;
     background-position: unset !important;*/
+
+    [data-ff--card_animations="true"] & {
+        animation: card var(--trans) var(--trans-function);
+        transform-origin: top;
+    }
 }
 
 
@@ -13596,6 +13597,35 @@ button.bleh--gallery-bookmark-image-btn {
                     color: #fff;
                     opacity: 0.8;
                 }
+            }
+        }
+    }
+}
+
+.feature-flags {
+    display: flex;
+    flex-direction: column;
+    gap: var(--card-gap);
+
+    .info-row {
+        display: flex;
+        gap: 10px;
+        margin-top: 4px;
+
+        .default-flag {
+            padding: 0 4px;
+            background-color: hsl(var(--b6));
+            border-radius: var(--item-med-radius);
+            font-size: 12px;
+            width: 45px;
+            text-align: center;
+            color: hsl(var(--l3-c));
+            --hue: var(--hue-neg);
+            --sat: 1;
+            --lit: 1;
+
+            &.flag-true {
+                --hue: var(--hue-pos);
             }
         }
     }
