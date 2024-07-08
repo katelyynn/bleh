@@ -5869,6 +5869,17 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             deliver_notif(`on profile overview`);
 
 
+            // pronouns?
+            let pronouns = false;
+            let display_name_no_spaces = profile_subtitle.replaceAll(' ','');
+            if (
+                display_name_no_spaces.startsWith('she/') ||
+                display_name_no_spaces.startsWith('he/') ||
+                display_name_no_spaces.startsWith('they/') ||
+                display_name_no_spaces.startsWith('it/')
+            ) pronouns = true;
+
+
             let profile_header_panel = document.createElement('section');
             profile_header_panel.classList.add('profile-header-panel');
             profile_header_panel.innerHTML = (`
@@ -5883,7 +5894,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                         <h1>${profile_name}</h1>
                         <div class="user-badges" id="user-badges"></div>
                     </span>
-                    <!--<h3>${profile_subtitle}</h3>-->
+                    <h4 class="subtitle"><div class="title">${(pronouns) ? 'pronouns' : 'aka.'}</div>${profile_subtitle}</h4>
                 </div>
                 <div class="bottom-wiki">
                     <div class="profile-bio ${(profile_is_empty) ? 'profile-bio-empty' : ''}">
