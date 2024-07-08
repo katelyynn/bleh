@@ -3734,6 +3734,15 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 <div class="bleh--panel">
                     <h3>${trans[lang].settings.performance.name}</h3>
                     <p>${trans[lang].settings.performance.bio}</p>
+                    <div class="toggle-container">
+                        <div class="heading">
+                            <h5>Refresh theme</h5>
+                            <p>Force download the latest version of the stylesheet</p>
+                        </div>
+                        <div class="toggle-wrap">
+                            <button class="bleh--btn primary" onclick="_force_refresh_theme()">Refresh</button>
+                        </div>
+                    </div>
                     <div class="toggle-container" id="container-dev">
                         <button class="btn reset" onclick="_reset_item('dev')">${trans[lang].settings.reset}</button>
                         <div class="heading">
@@ -4957,5 +4966,10 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             item.setAttribute('data-scrobbles-milestone',colour);
             item.style.setProperty('--percent',`${Math.round(percent)}%`);
         } catch(e) {console.error('bwaaaaaaaa',e)}
+    }
+
+    unsafeWindow._force_refresh_theme = function() {
+        localStorage.removeItem('bleh_cached_style');
+        localStorage.removeItem('bleh_cached_style_timeout');
     }
 })();
