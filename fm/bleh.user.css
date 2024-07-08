@@ -3573,6 +3573,7 @@ h2:not(.count, .mask-multi-text, .mask-text, .sr-only, .js-gallery-heading, .top
     font-weight: var(--font-weight-bold);
     letter-spacing: unset;
     text-transform: unset;
+    cursor: default;
     /* undo hiding text */
     clip: unset;
     border: unset;
@@ -12514,6 +12515,7 @@ button.bleh--gallery-bookmark-image-btn {
         h3 {
             color: hsl(var(--c3));
             font-weight: var(--font-weight-medium);
+            cursor: default;
         }
 
         h1 {
@@ -12565,6 +12567,7 @@ button.bleh--gallery-bookmark-image-btn {
                 color: hsl(var(--c3));
                 padding-left: calc(16px + 6px);
                 position: relative;
+                cursor: default;
             }
             .date {
                 --mask: var(--icon-16-calendar);
@@ -12604,6 +12607,7 @@ button.bleh--gallery-bookmark-image-btn {
         h3 {
             color: hsl(var(--c3));
             font-weight: var(--font-weight-medium);
+            cursor: default;
         }
 
         h1 {
@@ -12662,6 +12666,7 @@ button.bleh--gallery-bookmark-image-btn {
         h3 {
             color: hsl(var(--c3));
             font-weight: var(--font-weight-medium);
+            cursor: default;
         }
 
         h1 {
@@ -12824,6 +12829,7 @@ button.bleh--gallery-bookmark-image-btn {
             h3 {
                 color: hsl(var(--c3));
                 font-weight: var(--font-weight-medium);
+                cursor: default;
 
                 display: flex;
                 align-items: center;
@@ -12964,6 +12970,7 @@ button.bleh--gallery-bookmark-image-btn {
             color: hsl(var(--c3));
             font-weight: var(--font-weight-medium);
             margin: unset;
+            cursor: default;
         }
 
         h1 {
@@ -13149,6 +13156,7 @@ button.bleh--gallery-bookmark-image-btn {
                 color: hsl(var(--c3));
                 font-weight: var(--font-weight-medium);
                 margin: unset;
+                cursor: default;
 
                 display: flex;
                 align-items: center;
