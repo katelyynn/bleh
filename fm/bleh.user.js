@@ -19,9 +19,9 @@ let version = {
     build: '2024.0708',
     sku: 'refresh',
     feature_flags: {
-        test: {
+        dev: {
             default: false,
-            name: 'Test out feature flags'
+            name: 'Use developer mode, which disables style loading'
         },
         use_flexible_numbers: {
             default: false,
@@ -1308,7 +1308,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
 
         // style is not fetched in dev mode
-        if (settings.dev)
+        if (settings.feature_flags.dev)
             return;
 
         if (cached_style == '') {
@@ -1428,50 +1428,32 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             user_nav.setAttribute('data-bleh','true');
 
             let bleh_nav = document.createElement('li');
-            if (auth == 'cutensilly') {
-                bleh_nav.innerHTML = (`
-                    <li>
-                        <button class="auth-dropdown-menu-item bleh--theme-menu-item" onclick="toggle_theme()">
-                            <span class="auth-dropdown-item-row">
-                                <span class="auth-dropdown-item-left">${trans[lang].settings.themes.name}</span>
-                                <span class="auth-dropdown-item-right" id="theme-value">${trans[lang].settings.themes[settings.theme].name}</span>
-                            </span>
-                        </button>
-                    </li>
-                    <li>
-                        <button class="auth-dropdown-menu-item bleh--dev-menu-item" onclick="toggle_setting('dev')">
-                            <span class="auth-dropdown-item-row">
-                                <span class="auth-dropdown-item-left">${trans[lang].auth_menu.dev}</span>
-                            </span>
-                        </button>
-                    </li>
-                    <li>
-                        <a class="auth-dropdown-menu-item bleh--configure-menu-item" href="/bleh">
-                            <span class="auth-dropdown-item-row">
-                                <span class="auth-dropdown-item-left">${trans[lang].auth_menu.configure_bleh}</span>
-                            </span>
-                        </a>
-                    </li>
-                    `);
-            } else {
-                bleh_nav.innerHTML = (`
-                    <li>
-                        <button class="auth-dropdown-menu-item bleh--theme-menu-item" onclick="toggle_theme()">
-                            <span class="auth-dropdown-item-row">
-                                <span class="auth-dropdown-item-left">${trans[lang].settings.themes.name}</span>
-                                <span class="auth-dropdown-item-right" id="theme-value">${trans[lang].settings.themes[settings.theme].name}</span>
-                            </span>
-                        </button>
-                    </li>
-                    <li>
-                        <a class="auth-dropdown-menu-item bleh--configure-menu-item" href="/bleh">
-                            <span class="auth-dropdown-item-row">
-                                <span class="auth-dropdown-item-left">${trans[lang].auth_menu.configure_bleh}</span>
-                            </span>
-                        </a>
-                    </li>
-                    `);
-            }
+            bleh_nav.innerHTML = (`
+                <li>
+                    <button class="auth-dropdown-menu-item bleh--theme-menu-item" onclick="toggle_theme()">
+                        <span class="auth-dropdown-item-row">
+                            <span class="auth-dropdown-item-left">${trans[lang].settings.themes.name}</span>
+                            <span class="auth-dropdown-item-right" id="theme-value">${trans[lang].settings.themes[settings.theme].name}</span>
+                        </span>
+                    </button>
+                </li>
+                ${(settings.feature_flags.dev) ? (`
+                <li>
+                    <button class="auth-dropdown-menu-item bleh--dev-menu-item" onclick="_update_flag_toggle('dev', this)" aria-checked="true">
+                        <span class="auth-dropdown-item-row">
+                            <span class="auth-dropdown-item-left">${trans[lang].auth_menu.dev}</span>
+                        </span>
+                    </button>
+                </li>
+                `) : ''}
+                <li>
+                    <a class="auth-dropdown-menu-item bleh--configure-menu-item" href="/bleh">
+                        <span class="auth-dropdown-item-row">
+                            <span class="auth-dropdown-item-left">${trans[lang].auth_menu.configure_bleh}</span>
+                        </span>
+                    </a>
+                </li>
+            `);
             user_nav.appendChild(bleh_nav);
         }
 
@@ -1510,8 +1492,10 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 settings[setting] = settings_template[setting];
 
         // todo: remove
-        if (settings.dev == 1)
-            settings.dev = true;
+        if (settings.dev) {
+            settings.feature_flags.dev = true;
+            settings.dev = false;
+        }
 
         // save setting into body
         for (let setting in settings) {
