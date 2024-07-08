@@ -5098,10 +5098,10 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 <div class="bottom-wiki">
                     ${get_wiki(col_main_overview)}
                     <div class="release-row">
-                        <div class="date">
+                        <div class="date" id="date">
                             ${release_date}
                         </div>
-                        <div class="length">
+                        <div class="length" id="length">
                             ${album_length}
                         </div>
                     </div>
@@ -5110,6 +5110,13 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 </div>
             `);
             col_sidebar.insertBefore(album_main_panel, col_sidebar.firstChild);
+
+            tippy(document.getElementById('date'), {
+                content: 'Release date'
+            });
+            tippy(document.getElementById('length'), {
+                content: 'Album length'
+            });
 
 
             // plays
