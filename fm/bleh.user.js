@@ -15,7 +15,11 @@
 // @require      https://unpkg.com/tippy.js@6
 // ==/UserScript==
 
-let version = '2024.0708.refresh';
+let version = {
+    build: '2024.0708',
+    sku: 'refresh',
+    feature_flags_enabled: true
+}
 
 let lang = document.documentElement.getAttribute('lang');
 let valid_langs = ['en', 'pl'];
@@ -1199,7 +1203,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     auth = auth_link.querySelector('img').getAttribute('alt');
     initia();
 
-    deliver_notif(`loading bleh ${version}`);
+    deliver_notif(`loading bleh ${version.build} with sku ${version.sku}`);
 
     function initia() {
         let performance_start = performance.now();
@@ -1396,7 +1400,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
             let version_text = document.createElement('p');
             version_text.classList.add('bleh--version');
-            version_text.textContent = version;
+            version_text.textContent = `${version.build}.${version.sku}`;
 
             masthead_logo.appendChild(version_text);
         }
