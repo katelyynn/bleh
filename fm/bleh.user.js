@@ -1515,6 +1515,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             document.documentElement.setAttribute(`data-bleh--${setting}`, `${settings[setting]}`);
         }
 
+        load_skus(settings);
+
         // save to settings
         localStorage.setItem('bleh', JSON.stringify(settings));
     }
@@ -6285,6 +6287,15 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     }
 
 
+    function load_skus(settings) {
+        for (let flag in version.feature_flags) {
+            let current_state = version.feature_flags[flag].default;
+            if (settings.feature_flags[flag] != undefined) current_state = settings.feature_flags[flag];
+
+            document.documentElement.setAttribute(`data-ff--${flag}`, current_state);
+        }
+    }
+
     function bleh_sku_page() {
         let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
         let flags_container = document.getElementById('feature-flags');
@@ -6308,6 +6319,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             `);
 
             flags_container.appendChild(feature_flag_element);
+
+            document.documentElement.setAttribute(`data-ff--${flag}`, current_state);
         }
     }
 
@@ -6323,9 +6336,11 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         if (current_state == true) {
             button.setAttribute('aria-checked', 'false');
             settings.feature_flags[flag] = false;
+            document.documentElement.setAttribute(`data-ff--${flag}`, false);
         } else {
             button.setAttribute('aria-checked', 'true');
             settings.feature_flags[flag] = true;
+            document.documentElement.setAttribute(`data-ff--${flag}`, true);
         }
 
         // save to settings
