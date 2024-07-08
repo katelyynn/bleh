@@ -3782,25 +3782,17 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 `);
         } else if (page == 'sku') {
             return (`
-                <div class="bleh--panel">
-                    <h3>Configure your bleh sku</h3>
+                <div class="bleh--panel shh">
+                    shhh...<br>let's not leak<br>our hard work
                     <div class="screen-row">
-                        <div class="screen-wrap">
-                            <img class="screen" src="https://cutensilly.org/img/bleh3-theme-${document.documentElement.getAttribute('data-bleh--theme')}.png" alt="bleh">
-                            <div class="text">
-                                <h5>${trans[lang].settings.home.brand}</h5>
-                            </div>
-                        </div>
                         <div class="actions">
                             <a class="btn action">
-                                <div class="icon bleh--issues"></div>
                                 <span class="text">
                                     <h5>build</h5>
                                     <p>${version.build}</p>
                                 </span>
                             </a>
                             <a class="btn action">
-                                <div class="icon bleh--issues"></div>
                                 <span class="text">
                                     <h5>sku</h5>
                                     <p>${version.sku}</p>
@@ -3808,6 +3800,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                             </a>
                         </div>
                     </div>
+                </div>
+                <div class="bleh--panel">
                     <h3>Feature Flags</h3>
                     <div class="feature-flags" id="feature-flags"></div>
                 </div>

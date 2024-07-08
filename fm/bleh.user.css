@@ -13565,4 +13565,39 @@ button.bleh--gallery-bookmark-image-btn {
         filter: blur(10px) saturate(110%);
     }
 }
+
+
+.shh {
+    font-size: 74px;
+    line-height: 90px;
+    font-family: Segoe UI, var(--font);
+    font-weight: 400;
+    color: #fff;
+    background: linear-gradient(159deg, rgba(0,0,0,1) 0%, rgba(1,11,70,1) 32%, rgba(1,21,84,1) 50%, rgba(1,29,94,1) 62%, rgba(2,61,95,1) 76%, rgba(2,90,78,1) 88%, rgba(0,119,55,1) 100%);
+    position: relative;
+
+    .screen-row {
+        position: absolute;
+        top: var(--card-padding);
+        right: var(--card-padding);
+        margin: unset;
+        padding: unset;
+        border: none;
+
+        .action {
+            --bg: hsla(var(--b7), 15%);
+            --bg-hov: hsla(var(--b7), 25%);
+            --bg-atv: hsla(var(--b7), 35%);
+
+            .text {
+                flex-direction: row;
+
+                p {
+                    color: #fff;
+                    opacity: 0.8;
+                }
+            }
+        }
+    }
+}
 }
