@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         bleh
 // @namespace    http://last.fm/
-// @version      2024.0630
+// @version      2024.0708
 // @description  bleh!!! ^-^
 // @author       kate
 // @match        https://www.last.fm/*
@@ -15,7 +15,7 @@
 // @require      https://unpkg.com/tippy.js@6
 // ==/UserScript==
 
-let version = '2024.0630';
+let version = '2024.0708';
 let lang = document.documentElement.getAttribute('lang');
 let valid_langs = ['en', 'pl'];
 
@@ -152,6 +152,10 @@ const trans = {
                 hide_hateful: {
                     name: 'Hide hateful shouts',
                     bio: 'Hateful users are community-contributed, it is up to you if you prefer to view these shouts.'
+                },
+                show_your_progress: {
+                    name: 'Show your weekly progress',
+                    bio: 'too many numbers ~w~'
                 }
             },
             performance: {
@@ -1028,7 +1032,8 @@ let settings_template = {
     big_numbers: false,
     format_guest_features: true,
     colourful_counts: true,
-    rain: false
+    rain: false,
+    show_your_progress: true
 };
 let settings_base = {
     hue: {
@@ -1128,6 +1133,13 @@ let settings_base = {
         css: 'rain',
         unit: '',
         value: false,
+        values: [true, false],
+        type: 'toggle'
+    },
+    show_your_progress: {
+        css: 'show_your_progress',
+        unit: '',
+        value: true,
         values: [true, false],
         type: 'toggle'
     }
@@ -3679,6 +3691,18 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                         </div>
                     </div>
                     <div class="sep"></div>
+                    <div class="toggle-container" id="container-show_your_progress">
+                        <button class="btn reset" onclick="_reset_item('show_your_progress')">${trans[lang].settings.reset}</button>
+                        <div class="heading">
+                            <h5>${trans[lang].settings.customise.show_your_progress.name}</h5>
+                            <p>${trans[lang].settings.customise.show_your_progress.bio}</p>
+                        </div>
+                        <div class="toggle-wrap">
+                            <button class="toggle" id="toggle-show_your_progress" onclick="_update_item('show_your_progress')" aria-checked="true">
+                                <div class="dot"></div>
+                            </button>
+                        </div>
+                    </div>
                     <div class="toggle-container" id="container-rain">
                         <button class="btn reset" onclick="_reset_item('rain')">${trans[lang].settings.reset}</button>
                         <div class="heading">
