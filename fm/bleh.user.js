@@ -5054,6 +5054,31 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             // chart position
             let chart_position = album_header.querySelector('.header-new-chart-position-number');
 
+            // about this album
+            let release_year = 0;
+            let release_date = 'never :(';
+            let track_count = 'No tracks';
+            let album_length = '0:00'
+
+            let meta = col_main_overview.querySelectorAll('.metadata-column .catalogue-metadata-description');
+            meta.forEach((meta_item, index) => {
+                let meta_text = meta_item.textContent;
+                deliver_notif(meta_text);
+
+                if (index == 0) {
+                    // track count & length
+                    let split = meta_text.split(', ');
+
+                    track_count = split[0];
+                    if (split.length > 1)
+                        album_length = split[1].trim();
+                } else {
+                    // release date
+                    release_date = meta_text;
+                    release_year = new Date(release_date).getFullYear();
+                }
+            });
+
 
             // panel
             let album_main_panel = document.createElement('section');
@@ -5072,6 +5097,14 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 </div>
                 <div class="bottom-wiki">
                     ${get_wiki(col_main_overview)}
+                    <div class="release-row">
+                        <div class="date">
+                            ${release_date}
+                        </div>
+                        <div class="length">
+                            ${album_length}
+                        </div>
+                    </div>
                     ${tags.outerHTML}
                     ${actions.outerHTML}
                 </div>

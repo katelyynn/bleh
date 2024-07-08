@@ -1679,13 +1679,14 @@ span.header-new-gallery-inner a,
     the -2px is to re-align it with how it was before cus it changed somehow */
     padding-left: calc(16px + 6px + 11px + 1px - 2px);
     position: relative;
-    overflow: hidden;
 
     .tags-list {
         flex: 1;
         overflow: hidden;
         margin-left: -11px;
         position: relative;
+        box-shadow: var(--interact-shadow);
+        border-radius: 50px;
 
         &:after {
             content: '';
@@ -1714,7 +1715,7 @@ span.header-new-gallery-inner a,
 .tags-view-all,
 .catalogue-tags .tags-add,
 .catalogue-tags .tag a, .catalogue-tags .tags-add-cta {
-    box-shadow: var(--interact-shadow) !important;
+    box-shadow: none !important;
     color: hsl(var(--c3)) !important;
     font-weight: var(--font-weight);
     background-color: hsl(var(--b4));
@@ -1741,6 +1742,10 @@ span.header-new-gallery-inner a,
         transition: none;
         z-index: 5;
         position: relative;
+    }
+
+    &:not(.tag &) {
+        box-shadow: var(--interact-shadow) !important;
     }
 }
 
@@ -5219,6 +5224,7 @@ button:not(.playback-app-container button, .top-artist-list-item, .pixel, .liste
 
 
 /*     ICON MASK     */
+.release-row div:before,
 .user-badge:before,
 [data-toggle-button-current-state] .header-follower-btn:before, [data-toggle-button-current-state] .header-follower-btn:hover:before,
 .tags-view-all:before,
@@ -12548,6 +12554,22 @@ button.bleh--gallery-bookmark-image-btn {
 
         padding-top: var(--card-gap);
         border-top: 1px solid hsl(var(--b4));
+
+        .release-row {
+            display: flex;
+            gap: var(--card-gap);
+
+            div {
+                --left: 0;
+                --mask: var(--icon-16-clock);
+                color: hsl(var(--c3));
+                padding-left: calc(16px + 6px);
+                position: relative;
+            }
+            .date {
+                --mask: var(--icon-16-calendar);
+            }
+        }
 
         .header-new-actions {
             justify-content: end;
