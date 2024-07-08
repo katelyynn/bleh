@@ -892,6 +892,14 @@ last.fm changes as of 2024-05-20 */
             font-weight: 700;
         }
     }
+
+    .bleh--version {
+        [data-ff--use_flexible_numbers="true"] & {
+            font-weight: var(--font-flex-weight);
+            font-family: var(--font-flex);
+            font-feature-settings: var(--font-flex-settings);
+        }
+    }
 }
 
 .masthead-logo-loading {
@@ -1084,6 +1092,13 @@ last.fm changes as of 2024-05-20 */
     min-width: 18px;
     height: 18px;
     padding: 0 4px;
+
+    [data-ff--use_flexible_numbers="true"] & {
+        font-size: 11px;
+        font-weight: var(--font-flex-weight) !important;
+        font-family: var(--font-flex);
+        font-feature-settings: var(--font-flex-settings);
+    }
 }
 .masthead-nav .masthead-nav-item .notification-count-badge {
     animation: bubble 0.9s var(--trans-function);
@@ -4142,6 +4157,12 @@ better than the default selector '#app a' i suppose */
     height: fit-content;
     color: hsl(var(--c3));
     text-align: right;
+
+    [data-ff--use_flexible_numbers="true"] & {
+        font-weight: var(--font-flex-weight);
+        font-family: var(--font-flex);
+        font-feature-settings: var(--font-flex-settings);
+    }
 }
 
 .obsession-candidate-image,
@@ -4334,6 +4355,12 @@ a.chartlist-love-button:after {
     font-weight: 600;
     padding: 0 10px !important;
     margin: 0 -10px;
+
+    [data-ff--use_flexible_numbers="true"] & {
+        font-weight: var(--font-flex-weight);
+        font-family: var(--font-flex);
+        font-feature-settings: var(--font-flex-settings);
+    }
 
     .stat-name {
         display: none !important;
@@ -10640,6 +10667,10 @@ so this is good enough - use the community docs */
                     --bg: transparent;
                     --bg-hov: hsla(var(--b4), 20%);
                     --bg-atv: hsla(var(--b4), 40%);
+
+                    &[data-bleh-page="sku"] {
+                        display: none;
+                    }
                 }
 
                 &.active {

@@ -22,6 +22,10 @@ let version = {
         test: {
             default: false,
             name: 'Test out feature flags'
+        },
+        use_flexible_numbers: {
+            default: false,
+            name: 'Use Roboto Flex for numbers in chartlists'
         }
     }
 }
