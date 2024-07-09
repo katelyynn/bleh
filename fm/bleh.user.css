@@ -6989,6 +6989,9 @@ form[action="/inbox/notifications"] {
 [href^="/user/"][href$="/listening-report/year"] .inbox-notifications__item-visual-summary:before {
     --mask: var(--icon-20-listening-report-yearly);
 }
+:is([href^="/festival/"], [href^="/event/"]) .inbox-notifications__item-visual-summary:before {
+    --mask: var(--icon-20-event);
+}
 
 
 .inbox-notifications__item-link {
