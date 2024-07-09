@@ -2377,6 +2377,7 @@ button.navlist-more {
         transform: scale(0.98);
     }
 
+    &.secondary-nav-item-link.active,
     &.secondary-nav-item-link--active {
         color: hsl(var(--c1)) !important;
         font-weight: var(--font-weight-bold);
@@ -2405,6 +2406,7 @@ button.navlist-more {
         transition-timing-function: var(--trans-function);
     }
 
+    &.secondary-nav-item-link.active,
     [data-bleh--gallery-tab="overview"] .secondary-nav-item--gallery-overview  &,
     [data-bleh--gallery-tab="bookmarks"] .secondary-nav-item--gallery-bookmarks &,
     &:hover, &.secondary-nav-item-link--active {
@@ -6158,11 +6160,36 @@ input:is([name="track_name"], [name="artist_name"], [name="album_name"], [name="
     transform-origin: top;
     color: hsl(var(--c2));
 
+    .modal-dialog & {
+        background: hsl(var(--b5)) !important;
+    }
+
     [data-ff--aero="true"] & {
         background: hsla(var(--b6), 75%) !important;
-        backdrop-filter: blur(10px) saturate(150%) !important;
+        backdrop-filter: blur(20px) saturate(150%) !important;
+
+        .modal-dialog & {
+            background: hsla(var(--b5), 75%) !important;
+        }
     }
 }
+
+.popup_background {
+    animation: fade_popup var(--trans) var(--trans-function);
+
+    &[style^="opacity: 0.8;"] {
+        opacity: 0.4 !important;
+    }
+}
+@keyframes fade_popup {
+    from {
+        transform: scaleY(0);
+    }
+    to {
+        transform: scaleY(1);
+    }
+}
+
 .modal-content {
     animation: dropdown calc(var(--trans-short) + 0.22s) var(--trans-function);
     transform-origin: top;
@@ -10695,6 +10722,28 @@ so this is good enough - use the community docs */
                 }
             }
         }
+
+        .secondary-nav-item-link {
+            &[data-bleh-page="home"] {
+                --mask: var(--icon-16-home);
+            }
+            &[data-bleh-page="themes"] {
+                --mask: var(--icon-16-themes);
+            }
+            &[data-bleh-page="customise"] {
+                --mask: var(--icon-16-palette);
+            }
+            &[data-bleh-page="performance"] {
+                --mask: var(--icon-16-settings);
+            }
+            &[data-bleh-page="profiles"] {
+                --mask: var(--icon-16-user);
+            }
+
+            &[data-bleh-page="sku"]:not(.active) {
+                display: none;
+            }
+        }
     }
 
 
@@ -12805,8 +12854,11 @@ button.bleh--gallery-bookmark-image-btn {
                 line-height: 26px;
                 text-align: center;
                 position: relative;
-                font-family: Shrikhand;
                 padding: 0 20px;
+
+                [data-ff--shrikhand_lyrics_blurb="true"] & {
+                    font-family: Shrikhand;
+                }
 
                 &:before, &:after {
                     font-size: 36px;
@@ -13609,7 +13661,7 @@ button.bleh--gallery-bookmark-image-btn {
 
 .feature-flags {
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     gap: var(--card-gap);
 
     .info-row {
@@ -13632,6 +13684,15 @@ button.bleh--gallery-bookmark-image-btn {
             &.flag-true {
                 --hue: var(--hue-pos);
             }
+        }
+
+        .date {
+            width: 62px;
+            color: hsla(var(--c3), 80%);
+        }
+
+        p {
+            margin: unset;
         }
     }
 }

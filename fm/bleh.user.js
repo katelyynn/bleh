@@ -16,28 +16,43 @@
 // ==/UserScript==
 
 let version = {
-    build: '2024.0708',
+    build: '2024.0709',
     sku: 'refresh',
     feature_flags: {
         dev: {
             default: false,
-            name: 'Use developer mode, which disables style loading'
+            name: 'Use developer mode, which disables style loading',
+            date: '2024-06-07'
         },
         use_flexible_numbers: {
             default: false,
-            name: 'Use Roboto Flex for numbers in chartlists'
+            name: 'Use Roboto Flex for numbers in chartlists',
+            date: '2024-07-08'
         },
         use_new_logo: {
             default: false,
-            name: 'Use new logo sizing'
+            name: 'Use new logo sizing',
+            date: '2024-07-08'
         },
         card_animations: {
             default: true,
-            name: 'Use card animations'
+            name: 'Use card animations',
+            date: '2024-07-08'
         },
         aero: {
             default: false,
-            name: 'Aero'
+            name: 'Aero',
+            date: '2024-07-09'
+        },
+        shrikhand_lyrics_blurb: {
+            default: true,
+            name: 'Shrikhand lyrics blurb',
+            date: '2024-07-09'
+        },
+        bleh_settings_tabs: {
+            default: true,
+            name: 'Utilise new bleh settings tabs',
+            date: '2024-07-09'
         }
     }
 }
@@ -3146,6 +3161,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     }
 
     function bleh_settings() {
+        let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
         let adaptive_skin_container = document.querySelector('.adaptive-skin-container');
 
         if (!adaptive_skin_container.hasAttribute('data-bleh')) {
@@ -3170,43 +3186,64 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
             let side = document.createElement('div');
             side.classList.add('bleh--panel-side');
-            side.innerHTML = (`
-                <div class="bleh--panel">
-                    <div class="btns">
-                        <button class="btn bleh--btn" data-bleh-page="home" onclick="_change_settings_page('home')">
-                            ${trans[lang].settings.home.name}
-                        </button>
-                        <button class="btn bleh--btn" data-bleh-page="themes" onclick="_change_settings_page('themes')">
-                            ${trans[lang].settings.themes.name}
-                        </button>
-                        <button class="btn bleh--btn" data-bleh-page="customise" onclick="_change_settings_page('customise')">
-                            ${trans[lang].settings.customise.name}
-                        </button>
-                        <button class="btn bleh--btn" data-bleh-page="profiles" onclick="_change_settings_page('profiles')">
-                            ${trans[lang].settings.profiles.name}
-                        </button>
-                        <button class="btn bleh--btn" data-bleh-page="performance" onclick="_change_settings_page('performance')">
-                            ${trans[lang].settings.performance.name}
-                        </button>
-                        <button class="btn bleh--btn" data-bleh-page="sku" onclick="_change_settings_page('sku')">
-                            Configure your bleh sku
-                        </button>
+
+            if (settings.feature_flags.bleh_settings_tabs) {
+                side.innerHTML = (`
+                    <div class="bleh--panel">
+                        <div class="btns">
+                            <button class="btn" data-bleh-action="import" onclick="_import_settings()">
+                                ${trans[lang].settings.actions.import.name}
+                            </button>
+                            <button class="btn" data-bleh-action="export" onclick="_export_settings()">
+                                ${trans[lang].settings.actions.export.name}
+                            </button>
+                        </div>
+                        <div class="btns sep">
+                            <button class="btn" data-bleh-action="reset" onclick="_reset_settings()">
+                                ${trans[lang].settings.actions.reset.name}
+                            </button>
+                        </div>
                     </div>
-                    <div class="btns sep">
-                        <button class="btn" data-bleh-action="import" onclick="_import_settings()">
-                            ${trans[lang].settings.actions.import.name}
-                        </button>
-                        <button class="btn" data-bleh-action="export" onclick="_export_settings()">
-                            ${trans[lang].settings.actions.export.name}
-                        </button>
+                `);
+            } else {
+                side.innerHTML = (`
+                    <div class="bleh--panel">
+                        <div class="btns">
+                            <button class="btn bleh--btn bleh--nav" data-bleh-page="home" onclick="_change_settings_page('home')">
+                                ${trans[lang].settings.home.name}
+                            </button>
+                            <button class="btn bleh--btn bleh--nav" data-bleh-page="themes" onclick="_change_settings_page('themes')">
+                                ${trans[lang].settings.themes.name}
+                            </button>
+                            <button class="btn bleh--btn bleh--nav" data-bleh-page="customise" onclick="_change_settings_page('customise')">
+                                ${trans[lang].settings.customise.name}
+                            </button>
+                            <button class="btn bleh--btn bleh--nav" data-bleh-page="profiles" onclick="_change_settings_page('profiles')">
+                                ${trans[lang].settings.profiles.name}
+                            </button>
+                            <button class="btn bleh--btn bleh--nav" data-bleh-page="performance" onclick="_change_settings_page('performance')">
+                                ${trans[lang].settings.performance.name}
+                            </button>
+                            <button class="btn bleh--btn" data-bleh-page="sku" onclick="_change_settings_page('sku')">
+                                Configure your bleh sku
+                            </button>
+                        </div>
+                        <div class="btns sep">
+                            <button class="btn" data-bleh-action="import" onclick="_import_settings()">
+                                ${trans[lang].settings.actions.import.name}
+                            </button>
+                            <button class="btn" data-bleh-action="export" onclick="_export_settings()">
+                                ${trans[lang].settings.actions.export.name}
+                            </button>
+                        </div>
+                        <div class="btns sep">
+                            <button class="btn" data-bleh-action="reset" onclick="_reset_settings()">
+                                ${trans[lang].settings.actions.reset.name}
+                            </button>
+                        </div>
                     </div>
-                    <div class="btns sep">
-                        <button class="btn" data-bleh-action="reset" onclick="_reset_settings()">
-                            ${trans[lang].settings.actions.reset.name}
-                        </button>
-                    </div>
-                </div>
-            `);
+                `);
+            }
 
 
             inner.appendChild(main);
@@ -3826,7 +3863,49 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     }
 
     function change_settings_page(page) {
-        let btns = document.querySelectorAll('.bleh--btn');
+        let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
+
+        document.getElementById('bleh--panel-main').innerHTML = '';
+
+        if (settings.feature_flags.bleh_settings_tabs)
+            document.getElementById('bleh--panel-main').innerHTML = (`
+                <nav class="navlist secondary-nav navlist--more">
+                    <ul class="navlist-items">
+                        <li class="navlist-item secondary-nav-item">
+                            <a class="secondary-nav-item-link bleh--nav" data-bleh-page="home" onclick="_change_settings_page('home')">
+                                ${trans[lang].settings.home.name}
+                            </a>
+                        </li>
+                        <li class="navlist-item secondary-nav-item">
+                            <a class="secondary-nav-item-link bleh--nav" data-bleh-page="themes" onclick="_change_settings_page('themes')">
+                                ${trans[lang].settings.themes.name}
+                            </a>
+                        </li>
+                        <li class="navlist-item secondary-nav-item">
+                            <a class="secondary-nav-item-link bleh--nav" data-bleh-page="customise" onclick="_change_settings_page('customise')">
+                                ${trans[lang].settings.customise.name}
+                            </a>
+                        </li>
+                        <li class="navlist-item secondary-nav-item">
+                            <a class="secondary-nav-item-link bleh--nav" data-bleh-page="profiles" onclick="_change_settings_page('profiles')">
+                                ${trans[lang].settings.profiles.name}
+                            </a>
+                        </li>
+                        <li class="navlist-item secondary-nav-item">
+                            <a class="secondary-nav-item-link bleh--nav" data-bleh-page="performance" onclick="_change_settings_page('performance')">
+                                ${trans[lang].settings.performance.name}
+                            </a>
+                        </li>
+                        <li class="navlist-item secondary-nav-item">
+                            <a class="secondary-nav-item-link bleh--nav" data-bleh-page="sku" onclick="_change_settings_page('sku')">
+                                shhh...
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            `);
+
+        let btns = document.querySelectorAll('.bleh--nav');
         btns.forEach((btn) => {
             console.log(btn.getAttribute('data-bleh-page'),page);
             if (btn.getAttribute('data-bleh-page') != page) {
@@ -3836,7 +3915,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             }
         });
 
-        document.getElementById('bleh--panel-main').innerHTML = render_setting_page(page);
+        document.getElementById('bleh--panel-main').innerHTML = document.getElementById('bleh--panel-main').innerHTML + render_setting_page(page);
 
         if (page == 'themes')
             show_theme_change_in_settings();
@@ -6304,7 +6383,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 <div class="heading">
                     <h5>${version.feature_flags[flag].name}</h5>
                     <div class="info-row">
-                        <div class="default-flag flag-${version.feature_flags[flag].default}">${version.feature_flags[flag].default}</div><p>${flag}</p>
+                        <div class="default-flag flag-${version.feature_flags[flag].default}">${version.feature_flags[flag].default}</div><p class="date">${version.feature_flags[flag].date}</p><p>${flag}</p>
                     </div>
                 </div>
                 <div class="toggle-wrap">
