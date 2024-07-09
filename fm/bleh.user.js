@@ -3199,25 +3199,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             let side = document.createElement('div');
             side.classList.add('bleh--panel-side');
 
-            if (settings.feature_flags.bleh_settings_tabs) {
-                side.innerHTML = (`
-                    <div class="bleh--panel">
-                        <div class="btns">
-                            <button class="btn" data-bleh-action="import" onclick="_import_settings()">
-                                ${trans[lang].settings.actions.import.name}
-                            </button>
-                            <button class="btn" data-bleh-action="export" onclick="_export_settings()">
-                                ${trans[lang].settings.actions.export.name}
-                            </button>
-                        </div>
-                        <div class="btns sep">
-                            <button class="btn" data-bleh-action="reset" onclick="_reset_settings()">
-                                ${trans[lang].settings.actions.reset.name}
-                            </button>
-                        </div>
-                    </div>
-                `);
-            } else {
+            if (!settings.feature_flags.bleh_settings_tabs) {
                 side.innerHTML = (`
                     <div class="bleh--panel">
                         <div class="btns">
@@ -3241,6 +3223,24 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                             </button>
                         </div>
                         <div class="btns sep">
+                            <button class="btn" data-bleh-action="import" onclick="_import_settings()">
+                                ${trans[lang].settings.actions.import.name}
+                            </button>
+                            <button class="btn" data-bleh-action="export" onclick="_export_settings()">
+                                ${trans[lang].settings.actions.export.name}
+                            </button>
+                        </div>
+                        <div class="btns sep">
+                            <button class="btn" data-bleh-action="reset" onclick="_reset_settings()">
+                                ${trans[lang].settings.actions.reset.name}
+                            </button>
+                        </div>
+                    </div>
+                `);
+            } else {
+                side.innerHTML = (`
+                    <div class="bleh--panel">
+                        <div class="btns">
                             <button class="btn" data-bleh-action="import" onclick="_import_settings()">
                                 ${trans[lang].settings.actions.import.name}
                             </button>
@@ -3898,9 +3898,9 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     function change_settings_page(page) {
         let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
 
-        document.getElementById('bleh--panel-main').innerHTML = '';
-
-        if (settings.feature_flags.bleh_settings_tabs)
+        if (!settings.feature_flags.bleh_settings_tabs)
+            document.getElementById('bleh--panel-main').innerHTML = '';
+        else
             document.getElementById('bleh--panel-main').innerHTML = (`
                 <nav class="navlist secondary-nav navlist--more">
                     <ul class="navlist-items">
