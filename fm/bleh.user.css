@@ -10637,6 +10637,10 @@ so this is good enough - use the community docs */
             flex-direction: column;
             justify-content: stretch;
             gap: var(--card-gap);
+
+            [data-ff--bleh_settings_tabs="true"] &.bleh--panel-side {
+                margin-top: 61px;
+            }
         }
 
 
