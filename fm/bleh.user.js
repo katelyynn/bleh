@@ -53,6 +53,11 @@ let version = {
             default: true,
             name: 'Utilise new bleh settings tabs',
             date: '2024-07-09'
+        },
+        header_refresh: {
+            default: true,
+            name: 'Header refresh',
+            date: '2024-07-09'
         }
     }
 }
@@ -1266,6 +1271,11 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
         start_rain();
 
+        scroller();
+        window.onscroll = function(e) {
+            scroller();
+        }
+
         console.log(bleh_url,window.location.href,bleh_regex.test(window.location.href));
 
         if (window.location.href == bleh_url || bleh_regex.test(window.location.href)) {
@@ -1340,6 +1350,13 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
         let performance_end = performance.now();
         deliver_notif(`bleh finished loading in ${performance_end - performance_start}`);
+    }
+
+    function scroller() {
+        if (window.scrollY > 0)
+            document.body.setAttribute('data-bleh--scrolled', 'true');
+        else
+            document.body.setAttribute('data-bleh--scrolled', 'false');
     }
 
     function append_style() {

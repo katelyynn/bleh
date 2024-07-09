@@ -199,6 +199,7 @@ a,
     --h2: var(--l2-c);
     --h3: var(--l3-c);
     --h4: var(--l4-c);
+    --g4: var(--hue), calc(var(--sat) * 40%), calc(clamp(min(0.5), var(--lit), max(1.5)) * 15%);
 
     --icon: var(--c2);
 
@@ -216,6 +217,7 @@ a,
         --h2: var(--l2-c);
         --h3: var(--l3-c);
         --h4: var(--l4-c);
+        --g4: var(--hue), calc(var(--sat) * 40%), calc(clamp(min(0.5), var(--lit), max(1.5)) * 10%);
 
         --icon: var(--c2);
     }
@@ -236,6 +238,7 @@ a,
 
         --h3: var(--hue), calc(var(--sat) * 50%), calc(clamp(min(0.5), var(--lit), max(1.5)) * 80%);
         --h4: var(--hue), calc(var(--sat) * 60%), calc(clamp(min(0.5), var(--lit), max(1.5)) * 65%);
+        --g4: var(--hue), calc(var(--sat) * 70%), 92%;
     }
 }
 
@@ -553,6 +556,10 @@ html body {
 .main-content {
     /*padding-top: 0 !important;*/
     padding-top: calc(var(--card-gap) + 40px) !important;
+
+    [data-ff--header_refresh="true"] & {
+        padding-top: calc(80px - var(--card-gap)) !important;
+    }
 }
 
 
@@ -804,7 +811,28 @@ last.fm changes as of 2024-05-20 */
     justify-content: center;
     align-items: center;
 
-    &:before {
+    [data-ff--header_refresh="true"] & {
+        top: 0 !important;
+        padding: var(--card-padding) !important;
+        /*border-radius: var(--card-radius);*/
+
+        transition-property: padding, background, box-shadow, backdrop-filter;
+        transition-duration: var(--trans);
+        transition-timing-function: var(--trans-function);
+
+        [data-bleh--scrolled="true"] & {
+            padding: 8px var(--card-padding) !important;
+            background: hsl(var(--g4)) !important;
+            box-shadow: var(--card-shadow);
+
+            [data-ff--aero="true"] & {
+                background: hsla(var(--g4), 75%) !important;
+                backdrop-filter: blur(20px) saturate(150%) !important;
+            }
+        }
+    }
+
+    [data-ff--header_refresh="false"] &:before {
         content: '';
         position: fixed;
         left: 0;
@@ -2377,6 +2405,7 @@ button.navlist-more {
         transform: scale(0.98);
     }
 
+    /*&.masthead-nav-control--active,*/
     &.secondary-nav-item-link.active,
     &.secondary-nav-item-link--active {
         color: hsl(var(--c1)) !important;
@@ -2406,6 +2435,7 @@ button.navlist-more {
         transition-timing-function: var(--trans-function);
     }
 
+    /*&.masthead-nav-control--active,*/
     &.secondary-nav-item-link.active,
     [data-bleh--gallery-tab="overview"] .secondary-nav-item--gallery-overview  &,
     [data-bleh--gallery-tab="bookmarks"] .secondary-nav-item--gallery-bookmarks &,
