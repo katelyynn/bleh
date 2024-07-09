@@ -3,7 +3,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu+Sans:ital,wght@0,100..800;1,100..800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap');
 
 body {
     --hue: var(--new-hue, var(--base-hue, 255));
@@ -7433,6 +7432,10 @@ form[action="/inbox/notifications"] {
 
 
 /*     CHART     */
+[data-bleh--show_your_progress="false"] .your-progress-component {
+    /* while loading, this would get overrided */
+    display: none !important;
+}
 .your-progress-chart {
     margin-top: -7px;
 }

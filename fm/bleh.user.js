@@ -195,6 +195,10 @@ const trans = {
                 hide_hateful: {
                     name: 'Hide hateful shouts',
                     bio: 'Hateful users are community-contributed, it is up to you if you prefer to view these shouts.'
+                },
+                show_your_progress: {
+                    name: 'Show your weekly progress',
+                    bio: 'too many numbers ~w~'
                 }
             },
             performance: {
@@ -1073,7 +1077,8 @@ let settings_template = {
     format_guest_features: true,
     colourful_counts: true,
     rain: false,
-    feature_flags: {}
+    feature_flags: {},
+    show_your_progress: true
 };
 let settings_base = {
     hue: {
@@ -1175,6 +1180,13 @@ let settings_base = {
         value: false,
         values: [true, false],
         type: 'toggle'
+    },
+    show_your_progress: {
+        css: 'show_your_progress',
+        unit: '',
+        value: true,
+        values: [true, false],
+        type: 'toggle'
     }
 };
 let inbuilt_settings = {
@@ -1210,7 +1222,7 @@ let inbuilt_settings = {
 
 
 let redacted = [
-    'sonicgamer420', 'punishedcav', 'whatisajuggalo', 'underthefl00d', 'u1655609395', 'spartan122s', 'ruszaj', 'chandiwila999', 'deadaptation', 'shamsrealm', 'dread1nat0r', 'oskxzr', 'supersonic2324', 'luna', 'daysbeforepazi', 'reypublican', 'urkel_waste', 'bloodtemptress', 'enderbro1945', 'nxtready', 'hammurabis', 'flammenjunge', 'hotgreekman', 'minajspace', 'Matiiia',
+    'sonicgamer420', 'punishedcav', 'whatisajuggalo', 'underthefl00d', 'u1655609395', 'spartan122s', 'ruszaj', 'chandiwila999', 'deadaptation', 'faceIDbroke', 'shamsrealm', 'dread1nat0r', 'oskxzr', 'supersonic2324', 'luna', 'daysbeforepazi', 'reypublican', 'urkel_waste', 'bloodtemptress', 'enderbro1945', 'nxtready', 'hammurabis', 'flammenjunge', 'hotgreekman', 'minajspace', 'Matiiia',
     'sudaengi', 'antisemitic', 'alfonsorivera07', 'gueulescassees', 'bit188', 'aryanorexic', 'archive44', 'goyslop', 'lzxy', 'i984june', 'babayoga88', 'goatuser', 'synagogueburner', 'cybercat2k6',
     'thekimsteraight', 'squiggins', 'atwistedpath', 'aeriscupid', 'nicefeetliberal', 'kanyebeststan', 'a-_-_-_-_-_-_-_', 'wurzel362', 'chaosophile', 'sagamore_br', 'account124', 'oliwally2', 'lucasthales', 'thedadbrains', 'artofiettinggo', 'lumyh', 'meltingwalls', 'meowpoopoo', 'aeest', 'ajrogers25', 'flvcko5000', 'yungrapunxota', 'sen_nn', 'chickenoflight', 'majorcbartl', 'entranas', 'julyrent', 'misaeld7', 'sircarno', 'getyuu', 'ifuckbees', 'bigbabygoat-116', 'matranc', 'andre3x', 'johanvillian666', 'souljahwitch_', 'selenabeer', 'kbasfm', 'c4alexo', 'aantoniotapia', 'bobbygordon4', 'con_8l', 'kebfm', 'alex5un', 'bluefacee', 'itachiu1', 'tardslayer87', 'sharosky',
     'craziidago',
@@ -3775,6 +3787,18 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                         </div>
                     </div>
                     <div class="sep"></div>
+                    <div class="toggle-container" id="container-show_your_progress">
+                        <button class="btn reset" onclick="_reset_item('show_your_progress')">${trans[lang].settings.reset}</button>
+                        <div class="heading">
+                            <h5>${trans[lang].settings.customise.show_your_progress.name}</h5>
+                            <p>${trans[lang].settings.customise.show_your_progress.bio}</p>
+                        </div>
+                        <div class="toggle-wrap">
+                            <button class="toggle" id="toggle-show_your_progress" onclick="_update_item('show_your_progress')" aria-checked="true">
+                                <div class="dot"></div>
+                            </button>
+                        </div>
+                    </div>
                     <div class="toggle-container" id="container-rain">
                         <button class="btn reset" onclick="_reset_item('rain')">${trans[lang].settings.reset}</button>
                         <div class="heading">
@@ -3806,6 +3830,15 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 <div class="bleh--panel">
                     <h3>${trans[lang].settings.performance.name}</h3>
                     <p>${trans[lang].settings.performance.bio}</p>
+                    <div class="toggle-container">
+                        <div class="heading">
+                            <h5>Refresh theme</h5>
+                            <p>Force download the latest version of the stylesheet</p>
+                        </div>
+                        <div class="toggle-wrap">
+                            <button class="bleh--btn primary" onclick="_force_refresh_theme()">Refresh</button>
+                        </div>
+                    </div>
                     <div class="toggle-container" id="container-dev">
                         <button class="btn reset" onclick="_reset_item('dev')">${trans[lang].settings.reset}</button>
                         <div class="heading">
@@ -6420,5 +6453,10 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
         // save to settings
         localStorage.setItem('bleh', JSON.stringify(settings));
+    }
+
+    unsafeWindow._force_refresh_theme = function() {
+        localStorage.removeItem('bleh_cached_style');
+        localStorage.removeItem('bleh_cached_style_timeout');
     }
 })();

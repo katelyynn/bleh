@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           bleh (dev)
 @namespace      github.com/katelyynn/bleh
-@version        2024.0701
+@version        2024.0708
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.css
@@ -7095,6 +7095,10 @@ form[action="/inbox/notifications"] {
 
 
 /*     CHART     */
+[data-bleh--show_your_progress="false"] .your-progress-component {
+    /* while loading, this would get overrided */
+    display: none !important;
+}
 .your-progress-chart {
     margin-top: -7px;
 }
