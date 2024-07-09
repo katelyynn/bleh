@@ -55,7 +55,7 @@ let version = {
             date: '2024-07-09'
         },
         header_refresh: {
-            default: true,
+            default: false,
             name: 'Header refresh',
             date: '2024-07-09'
         }
