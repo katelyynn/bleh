@@ -1362,6 +1362,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     function append_style() {
         let cached_style = localStorage.getItem('bleh_cached_style') || '';
         let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
+        if (settings.feature_flags == undefined)
+            settings.feature_flags = {};
 
         // style is not fetched in dev mode
         if (settings.feature_flags.dev)
