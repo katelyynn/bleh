@@ -17,7 +17,7 @@
 // ==/UserScript==
 
 let version = {
-    build: '2024.0709',
+    build: '2024.0710',
     sku: 'refresh',
     feature_flags: {
         dev: {
