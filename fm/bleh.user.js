@@ -24,6 +24,11 @@ let version = {
             name: 'Use developer mode, which disables style loading',
             date: '2024-06-07'
         },
+        experimental_top_nav: {
+            default: false,
+            name: 'Experimental top nav, its ugly',
+            date: '2024-07-04'
+        },
         use_flexible_numbers: {
             default: false,
             name: 'Use Roboto Flex for numbers in chartlists',
@@ -6367,25 +6372,28 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
 
     function insert_top_nav(header_bg) {
-        create_header_bg(header_bg);
-        return;
+        let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
 
-        let top_nav = document.getElementById('top-nav');
-        let container = document.body.querySelector('.adaptive-skin-container');
+        if (settings.feature_flags.experimental_top_nav) {
+            let top_nav = document.getElementById('top-nav');
+            let container = document.body.querySelector('.adaptive-skin-container');
 
-        if (top_nav == null) {
-            top_nav = document.createElement('section');
-            top_nav.classList.add('top-nav');
-            top_nav.setAttribute('id', 'top-nav');
-            container.insertBefore(top_nav, container.firstChild);
+            if (top_nav == null) {
+                top_nav = document.createElement('section');
+                top_nav.classList.add('top-nav');
+                top_nav.setAttribute('id', 'top-nav');
+                container.insertBefore(top_nav, container.firstChild);
+            }
+
+            top_nav.innerHTML = (`
+                <div class="backing-bg" id="backing-bg" style="background-image: url(${header_bg})"></div>
+                <div class="top-nav-inner">
+                    profiles
+                </div>
+            `);
+        } else {
+            create_header_bg(header_bg);
         }
-
-        top_nav.innerHTML = (`
-            <div class="backing-bg" id="backing-bg" style="background-image: url(${header_bg})"></div>
-            <div class="top-nav-inner">
-                profiles
-            </div>
-        `);
     }
 
     function calculate_scrobbles(count_original) {

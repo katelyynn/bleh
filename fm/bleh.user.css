@@ -13664,6 +13664,9 @@ button.bleh--gallery-bookmark-image-btn {
         filter: blur(10px) saturate(110%);
     }
 }
+[data-ff--experimental_top_nav="true"] .main-content {
+    padding-top: 0 !important;
+}
 
 
 .shh {
