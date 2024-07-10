@@ -13823,10 +13823,18 @@ button.bleh--gallery-bookmark-image-btn {
 
     .top-row {
         display: flex;
-        gap: 4px;
+        flex-direction: column;
 
-        h2 {
-            margin-bottom: unset !important;
+        h3 {
+            font-size: var(--font-size);
+            line-height: var(--line-height);
+            color: hsl(var(--c3));
+            font-weight: var(--font-weight-medium);
+            margin: unset;
+            cursor: default;
+        }
+        .library-date-picker {
+            flex-direction: row;
         }
 
         &:has(.date-range-picker-button.disclose-active) {
@@ -13850,7 +13858,7 @@ button.bleh--gallery-bookmark-image-btn {
             --bg-atv: transparent;
             --shadow: none;
             --shadow-hov: none;
-            text-transform: lowercase !important;
+            /*text-transform: lowercase !important;*/
             --col: hsl(var(--c1));
 
             &:before {

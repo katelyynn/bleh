@@ -6296,7 +6296,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 scrobble_sidebar.classList.add('scrobble-sidebar');
                 scrobble_sidebar.innerHTML = (`
                     <div class="top-row">
-                        <h2>Viewing</h2>
+                        <h3>Viewing</h3>
                         ${date_picker.outerHTML}
                     </div>
                 `);
