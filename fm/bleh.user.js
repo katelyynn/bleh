@@ -1029,12 +1029,12 @@ let profile_badges = {
             name: 'it\'s a kitty!!'
         },
         {
-            type: 'contributor',
-            name: 'bleh contributor'
-        },
-        {
             type: 'translation',
             name: 'translated bleh into polish'
+        },
+        {
+            type: 'contributor',
+            name: 'bleh contributor'
         }
     ],
     'aoivee': {

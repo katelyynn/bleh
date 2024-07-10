@@ -3625,7 +3625,7 @@ h2:not(.count, .mask-multi-text, .mask-text, .sr-only, .js-gallery-heading, .top
     clip: unset;
     border: unset;
     height: unset;
-    margin: 0 0 12px 0 !important;
+    margin: 0 0 var(--card-gap) 0 !important;
     overflow: unset;
     padding: unset;
     position: static;
@@ -3633,11 +3633,12 @@ h2:not(.count, .mask-multi-text, .mask-text, .sr-only, .js-gallery-heading, .top
 }
 
 
+h2.text-18, h2,
 h3.text-18 {
     color: hsl(var(--c1));
-    font-size: 24px;
-    line-height: 28px;
-    font-weight: var(--font-weight-bold);
+    font-size: 24px !important;
+    line-height: 28px !important;
+    font-weight: var(--font-weight-bold) !important;
 }
 
 
@@ -4482,20 +4483,20 @@ p + .chartlist {
     --show-icon: none;
 }
 .shout-form {
-    padding-bottom: 12px;
+    padding-bottom: var(--card-gap);
     /* shout-form's get margin-top of 24px if on a subpage,
     most noteably the "shouts" tab */
     margin-top: unset !important;
 }
 
 .shout-reply-ui {
-    margin-top: 12px;
+    margin-top: var(--card-gap);
     margin-left: var(--shout-inset);
     animation: slide_left calc(var(--trans) * 1.5) var(--trans-function);
 }
 
 .shout-list-item .shout-list-item .shout-container {
-    padding-top: 12px;
+    padding-top: var(--card-gap);
 
     /*&:has(> .shout--bleh-redacted) {
         display: none;
@@ -4535,7 +4536,7 @@ p + .chartlist {
 }
 
 .shout-form {
-    padding-top: 12px !important;
+    padding-top: var(--card-gap) !important;
 
     .form-group--submit {
         --override-margin-top: 8px !important;
@@ -4775,7 +4776,7 @@ the body text becomes bigger by default - this reverts that */
 
 
 .shout-more-replies-after, .shout-more-replies-before {
-    margin-top: 12px;
+    margin-top: var(--card-gap);
     margin-left: var(--shout-inset);
 }
 .shout-list-item .shout-list-item {
@@ -5591,7 +5592,7 @@ on the bottom of a panel !! */
     width: fit-content;
 }
 #top-tracks > .buffer-standard {
-    margin-top: 12px;
+    margin-top: var(--card-gap);
 }
 
 .section-controls {
@@ -5671,7 +5672,7 @@ on the bottom of a panel !! */
 .listening-report-promo-animation-container {
     height: 32px;
     margin-top: -7px;
-    right: 12px;
+    right: var(--card-gap);
 }
 
 .listening-report-promo--week {
@@ -6346,7 +6347,7 @@ that literally is 1 user from 2007 who hasnt even gotten a scrobble */
 
 .library-overview-header + section {
     /* this margin is already accounted for */
-    margin-top: 12px !important;
+    margin-top: var(--card-gap) !important;
 }
 
 .namespace--user_library_overview .col-sidebar {
