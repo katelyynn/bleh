@@ -5503,6 +5503,12 @@ a:has(+ .js-gallery-heading):after,
 }
 
 
+/* if there's only a refresh btn, the panel does not inherit
+relative position from last.fm css */
+#recent-tracks-section {
+    position: relative;
+}
+
 .refresh-tracklist-btn,
 .share-chart .share-button-profile, .section-settings-toggle {
     width: 32px;
@@ -5554,7 +5560,7 @@ a:has(+ .js-gallery-heading):after,
 }
 
 /* align dropdown next to settings button */
-.refresh-tracklist-btn,
+#recent-tracks-section:has(.section-settings-toggle) .refresh-tracklist-btn,
 .section-with-settings.section-with-share .section-control {
     /*right: calc(var(--card-padding) + 32px + 4px + 36px);*/
     /* 32px refers to the settings button,
@@ -5574,6 +5580,7 @@ a:has(+ .js-gallery-heading):after,
 }
 /* do not use section-with-control !! that refers to buttons
 on the bottom of a panel !! */
+/* 2024.0710.refresh - all track panels have a button now */ #recent-tracks-section > h2,
 #top-tracks > h2,
 :is(.grid-items-section /* other profiles */, .section-with-settings /* your profile */, .section-controls) > :is(h2, h3) {
     height: 32px;
