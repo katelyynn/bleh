@@ -2205,7 +2205,7 @@ elements, this is how we detect its missing */
 .secondary-nav, .user-dashboard-controls .secondary-nav {
     box-shadow: unset;
     border-bottom: 2px solid hsl(var(--b4)) !important;
-    margin: 0 var(--card-padding);
+    margin: 0 var(--card-padding) !important;
 }
 .user-dashboard-controls .secondary-nav {
     margin-top: unset !important;
@@ -2213,12 +2213,6 @@ elements, this is how we detect its missing */
 
 .library-controls {
     margin: unset !important;
-}
-.library-controls .secondary-nav {
-    margin-top: var(--card-gap) !important;
-    padding: unset !important;
-    border-bottom: 2px solid hsl(var(--b4));
-    width: var(--cards-width);
 }
 
 
@@ -2341,7 +2335,7 @@ hr + .library-search-results-header {
 
 
 .secondary-nav {
-    margin-top: var(--card-gap);
+    margin-top: var(--card-gap) !important;
 }
 
 .header--user.header--sub-page .secondary-nav {
@@ -13738,6 +13732,25 @@ button.bleh--gallery-bookmark-image-btn {
         p {
             margin: unset;
         }
+    }
+}
+
+
+/*     library     */
+.library-controls-header {
+    display: flex;
+
+    .library-controls {
+        float: unset;
+        display: flex;
+
+        .secondary-nav {
+            padding: unset;
+            width: unset;
+            flex: 1;
+        }
+
+        flex: 1;
     }
 }
 }
