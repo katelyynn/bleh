@@ -65,9 +65,14 @@ let version = {
             name: 'Header refresh',
             date: '2024-07-09'
         },
+        use_new_library: {
+            default: false,
+            name: 'Use new library, not feature-complete or bug-proof',
+            date: '2024-07-10'
+        },
         library_graph_on_left: {
             default: false,
-            name: 'Library graph on left',
+            name: 'Library graph on left, depends on use_new_library',
             date: '2024-07-10'
         }
     }
@@ -6260,6 +6265,9 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
 
                 // scrobble stats
+                if (!settings.feature_flags.use_new_library)
+                    return;
+
                 let scrobble_table = document.getElementById('scrobble-chart-content');
                 let scrobble_statistics_raw = scrobble_table.querySelector('table');
                 deliver_notif('harvested scrobble statistics');
