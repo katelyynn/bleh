@@ -6166,6 +6166,22 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 </div>
             `);
             profile_listens_panel.after(profile_note_panel);
+
+
+            // tracklist
+            let tracklist_panel = document.getElementById('recent-tracks-section');
+            if (tracklist_panel != null) {
+                let refresh_btn = document.createElement('button');
+                refresh_btn.classList.add('refresh-tracklist-btn');
+                refresh_btn.textContent = 'Refresh';
+                refresh_btn.setAttribute('onclick', '_refresh_tracks(this)');
+
+                tippy(refresh_btn, {
+                    content: 'Refresh tracks'
+                });
+
+                tracklist_panel.appendChild(refresh_btn);
+            }
         } else {
             let profile_header_panel = document.createElement('section');
             profile_header_panel.classList.add('profile-header-panel');
@@ -6497,5 +6513,50 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     unsafeWindow._force_refresh_theme = function() {
         localStorage.removeItem('bleh_cached_style');
         localStorage.removeItem('bleh_cached_style_timeout');
+    }
+
+
+    unsafeWindow._refresh_tracks = function(button) {
+        refresh_tracks(button);
+    }
+    function refresh_tracks(button) {
+        button.setAttribute('onclick', '');
+        button.setAttribute('disabled', '');
+
+        // we need to fetch the tracklist, this function presumes that
+        // the user has a tracklist to begin with, as that is the only
+        // way to call the function on the frontend
+        fetch(window.location.href)
+        .then(function(response) {
+            console.error('returned', response, response.text);
+
+            return response.text();
+        })
+        .then(function(html) {
+            let doc = new DOMParser().parseFromString(html, 'text/html');
+            console.error('DOC', doc);
+
+            deliver_notif('refreshed tracks');
+
+            let tracklist_panel = doc.getElementById('recent-tracks-section');
+
+            if (tracklist_panel == null) {
+                deliver_notif('recent tracks could not be found ;-;');
+                return;
+            }
+
+            document.getElementById('recent-tracks-section').innerHTML = tracklist_panel.innerHTML;
+
+            let refresh_btn = document.createElement('button');
+            refresh_btn.classList.add('refresh-tracklist-btn');
+            refresh_btn.textContent = 'Refresh';
+            refresh_btn.setAttribute('onclick', '_refresh_tracks(this)');
+
+            tippy(refresh_btn, {
+                content: 'Refresh tracks'
+            });
+
+            document.getElementById('recent-tracks-section').appendChild(refresh_btn);
+        })
     }
 })();
