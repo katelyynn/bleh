@@ -5079,6 +5079,21 @@ button:not(.playback-app-container button, .top-artist-list-item, .pixel, .liste
     }
 
 
+    /*     LOADING     */
+    &.btn--loading {
+        background-image: unset;
+        position: relative;
+
+        &:after {
+            --left: 50%;
+            --margin-left: -8px;
+            --mask: var(--icon-16-spinner);
+            --show-icon: block;
+            animation: spinner 0.8s linear infinite;
+        }
+    }
+
+
     /*     STYLES     */
 
 
@@ -5133,6 +5148,16 @@ button:not(.playback-app-container button, .top-artist-list-item, .pixel, .liste
     &[disabled] {
         opacity: 0.7 !important;
         --col: hsl(var(--c3)) !important;
+    }
+}
+
+
+@keyframes spinner {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
     }
 }
 
@@ -5416,7 +5441,9 @@ a:has(+ .js-gallery-heading):after,
 /*     SEARCH     */
 .search-submit:before, .search-reset:before,
 /*     SET AN OBSESSION     */
-.obsession-candidate-inner .btn-sm:before
+.obsession-candidate-inner .btn-sm:before,
+/*     GENERIC     */
+.btn--loading:after
 {
     content: '';
     display: var(--show-icon, block) !important;
@@ -5540,16 +5567,8 @@ relative position from last.fm css */
     --font-size: 0;
 
     &[disabled]:before {
-        animation: spin var(--trans) var(--trans-function);
-    }
-}
-
-@keyframes spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(180deg);
+        --mask: var(--icon-16-spinner);
+        animation: spinner 0.8s linear infinite;
     }
 }
 
