@@ -74,6 +74,11 @@ let version = {
             default: false,
             name: 'Library graph on left, depends on use_new_library',
             date: '2024-07-10'
+        },
+        use_library_scrobble_bar: {
+            default: false,
+            name: 'Use library scrobble bar, sorted by sub to dom',
+            date: '2024-07-10'
         }
     }
 }
@@ -6277,9 +6282,24 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 let scrobble_statistics = [];
                 let scrobble_labels = [];
 
+                let highest_date = {
+                    label: '',
+                    stat: 0
+                };
+
                 scrobble_statistics_raw.querySelectorAll('tbody tr').forEach((tr) => {
-                    scrobble_labels.push(tr.querySelector('.js-period a').textContent.replaceAll('\n', '').trim());
-                    scrobble_statistics.push(tr.querySelector('.js-scrobbles').textContent);
+                    let label = tr.querySelector('.js-period a').textContent.replaceAll('\n', '').trim();
+                    let stat = parseInt(tr.querySelector('.js-scrobbles').textContent);
+
+                    if (stat > highest_date.stat) {
+                        highest_date = {
+                            label: label,
+                            stat: stat
+                        }
+                    }
+
+                    scrobble_labels.push(label);
+                    scrobble_statistics.push(stat);
                 });
 
 
@@ -6287,6 +6307,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 let link_col = `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c')})`;
                 let link_bg_col = `hsla(${getComputedStyle(document.body).getPropertyValue('--h4')}, 20%)`;
                 let text_col = `hsl(${getComputedStyle(document.body).getPropertyValue('--c3')})`;
+                let bg_col = `hsl(${getComputedStyle(document.body).getPropertyValue('--b5')})`;
 
 
                 // sidebar
@@ -6342,6 +6363,148 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     document.querySelector('.library-controls-header').after(scrobble_sidebar);
                 else
                     profile_header_panel.after(scrobble_sidebar);
+
+                // top chart
+                let stats = document.body.querySelectorAll('.metadata-display');
+
+
+                if (settings.feature_flags.use_library_scrobble_bar) {
+                    // display all scrobbles onto a bar, with the max being the
+                    // highest charting day
+                    let scrobble_insight_bar = document.createElement('div');
+                    scrobble_insight_bar.classList.add('bar', 'scrobble-insight-bar');
+
+                    // to display this, we need to loop through the statistics
+                    let combined_stats = [];
+                    scrobble_statistics.forEach((stat, index) => {
+                        combined_stats.push({
+                            label: scrobble_labels[index],
+                            stat: stat
+                        })
+                    });
+
+                    let sorted_stats = combined_stats.sort((a, b) => a.stat - b.stat);
+                    let last_used_stat = {
+                        label: '',
+                        stat: 0
+                    }
+                    sorted_stats.forEach((stat, index) => {
+                        console.info(stat, last_used_stat);
+                        if (stat.stat - last_used_stat.stat > 25 || last_used_stat.stat == 0) {
+                            deliver_notif(index);
+                            last_used_stat = stat;
+
+                            let fill = document.createElement('div');
+                            fill.classList.add('fill');
+                            fill.style.setProperty('--index', (5 + index + 1));
+                            //fill.style.setProperty('z-index', (5 + index + 1));
+                            fill.style.setProperty('width', `${(stat.stat / highest_date.stat) * 100}%`);
+                            fill.style.setProperty('--stat', stat.stat);
+
+                            scrobble_insight_bar.appendChild(fill);
+                        }
+                    });
+
+
+                    let scrobble_insight_sidebar = document.createElement('section');
+                    scrobble_insight_sidebar.classList.add('scrobble-insight-sidebar');
+                    scrobble_insight_sidebar.innerHTML = (`
+                        <div class="stats top-stats">
+                            <div class="scrobbles-side">
+                                <h3>Scrobbles</h3>
+                                <p>${stats[0].textContent}</p>
+                            </div>
+                            <div class="per-day-side">
+                                <h3>Daily</h3>
+                                <p>${stats[1].textContent}</p>
+                            </div>
+                        </div>
+                        <div class="scrobble-bar">
+                            ${scrobble_insight_bar.outerHTML}
+                        </div>
+                        <div class="stats bottom-stats">
+                            <div class="scrobbles-side">
+                                <h3>Top Day</h3>
+                                <p>${highest_date.label}</p>
+                            </div>
+                            <div class="per-day-side">
+                                <h3>Scrobbles</h3>
+                                <p>${highest_date.stat}</p>
+                            </div>
+                        </div>
+                    `);
+
+                    if (settings.feature_flags.library_graph_on_left)
+                        profile_header_panel.after(scrobble_insight_sidebar);
+                    else
+                        scrobble_sidebar.after(scrobble_insight_sidebar);
+                } else {
+                    let scrobble_insight_sidebar = document.createElement('section');
+                    scrobble_insight_sidebar.classList.add('scrobble-insight-sidebar');
+                    scrobble_insight_sidebar.innerHTML = (`
+                        <div class="stats top-stats">
+                            <div class="scrobbles-side">
+                                <h3>Scrobbles</h3>
+                                <p>${stats[0].textContent}</p>
+                            </div>
+                            <div class="per-day-side">
+                                <h3>Daily</h3>
+                                <p>${stats[1].textContent}</p>
+                            </div>
+                        </div>
+                        <div class="scrobble-insight-canvas-container">
+                            <canvas class="scrobble-insight-canvas" id="scrobble-insight-canvas"></canvas>
+                        </div>
+                        <div class="stats bottom-stats">
+                            <div class="scrobbles-side">
+                                <h3>Highest Point</h3>
+                                <p>${highest_date.label}</p>
+                            </div>
+                            <div class="per-day-side">
+                                <h3>Scrobbles</h3>
+                                <p>${highest_date.stat}</p>
+                            </div>
+                        </div>
+                    `);
+
+                    if (settings.feature_flags.library_graph_on_left)
+                        profile_header_panel.after(scrobble_insight_sidebar);
+                    else
+                        scrobble_sidebar.after(scrobble_insight_sidebar);
+
+                    /*let combined_stats = [];
+                    scrobble_statistics.forEach((stat, index) => {
+                        combined_stats.push({
+                            label: scrobble_labels[index],
+                            stat: stat
+                        })
+                    });
+                    let sorted_stats_combined = combined_stats.sort((a, b) => a.stat - b.stat);
+                    let sorted_labels = [];
+                    let sorted_stats = [];
+                    sorted_stats_combined.forEach((stat) => {
+                        sorted_labels.push(stat.label);
+                        sorted_stats.push(stat.stat);
+                    })*/
+
+                    let scrobble_chart = new Chart(document.getElementById('scrobble-insight-canvas').getContext('2d'), {
+                        type: 'doughnut',
+                        data: {
+                            datasets: [{
+                                data: scrobble_statistics
+                            }],
+                            labels: scrobble_labels
+                        },
+                        options: {
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: {
+                                    display: false
+                                }
+                            }
+                        }
+                    });
+                }
             }
         }
 

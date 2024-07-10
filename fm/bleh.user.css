@@ -181,7 +181,8 @@ a,
 .primary-selection,
 .nag-bar--alert,
 .user-badge,
-.default-flag
+.default-flag,
+.bar .fill
 {
     --c1: var(--hue), calc(var(--sat) * 40%), 100%;
     --c2: var(--hue), calc(var(--sat) * 60%), 90%;
@@ -13870,5 +13871,102 @@ button.bleh--gallery-bookmark-image-btn {
     .scrobble-canvas-container {
         height: 240px;
     }
+}
+
+
+.scrobble-insight-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: var(--card-gap);
+
+    .bar {
+        display: flex;
+        flex: 1;
+        height: 8px;
+        background-color: hsl(var(--b4));
+        border-radius: 50px;
+        position: relative;
+
+        .fill {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            height: 8px;
+            /*background-color: hsla(var(--h3), calc(10% / (var(--index) / 10)));*/
+            background-color: hsla(var(--h3), 60%);
+            border-radius: 50px;
+            /*--hue: var(--stat);
+            --sat: 1;
+            --lit: 1;*/
+
+            &[style$="100%"] {
+                box-shadow: 0 0 7px hsl(var(--h4));
+            }
+        }
+    }
+
+    .scrobble-insight-canvas-container {
+        height: 300px;
+    }
+
+    .stats {
+        display: flex;
+
+        div {
+            flex: 1;
+
+            h3 {
+                font-size: var(--font-size);
+                line-height: var(--line-height);
+                color: hsl(var(--c3));
+                font-weight: var(--font-weight-medium);
+                margin: unset;
+                cursor: default;
+
+                display: flex;
+                align-items: center;
+                gap: 2px;
+
+                img {
+                    width: 16px;
+                    height: 16px;
+                    border-radius: 50%;
+                    display: none;
+                }
+
+                a {
+                    color: inherit;
+                }
+            }
+            p {
+                color: hsl(var(--c1));
+                font-size: 24px;
+                line-height: 28px;
+                font-weight: var(--font-flex-weight);
+                font-family: var(--font-flex);
+                font-feature-settings: var(--font-flex-settings);
+
+                display: flex;
+                align-items: center;
+                gap: 6px;
+
+                img {
+                    width: 20px;
+                    height: 20px;
+                    border-radius: 50%;
+                }
+
+                a {
+                    color: inherit;
+                }
+            }
+        }
+    }
+}
+
+
+.metadata-list {
+    display: none !important;
 }
 }
