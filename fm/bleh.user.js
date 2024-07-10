@@ -6359,6 +6359,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                             tooltip: {
                                 backgroundColor: root_bg_col,
                                 titleColor: text_primary_col,
+                                bodyColor: text_primary_col,
                                 padding: 7,
                                 cornerRadius: 10,
                                 caretSize: 0
@@ -6538,6 +6539,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                                 tooltip: {
                                     backgroundColor: root_bg_col,
                                     titleColor: text_primary_col,
+                                    bodyColor: text_primary_col,
                                     padding: 7,
                                     cornerRadius: 10,
                                     caretSize: 0
