@@ -6018,9 +6018,9 @@ very, very, very dated - who looks up a song on ebay? */
 
 
 /*     DATE PICKER     */
-.library-controls-datepicker .date-range-picker-form {
-    padding-top: var(--card-gap);
-    border-top: 1px solid hsl(var(--b4));
+.date-range-picker-form {
+    padding-top: var(--card-gap) !important;
+    border-top: 1px solid hsl(var(--b4)) !important;
 }
 .date-range-picker-form .control-label {
     text-transform: unset;

@@ -6307,7 +6307,9 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 let link_col = `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c')})`;
                 let link_bg_col = `hsla(${getComputedStyle(document.body).getPropertyValue('--h4')}, 20%)`;
                 let text_col = `hsl(${getComputedStyle(document.body).getPropertyValue('--c3')})`;
+                let text_primary_col = `hsl(${getComputedStyle(document.body).getPropertyValue('--c2')})`;
                 let bg_col = `hsl(${getComputedStyle(document.body).getPropertyValue('--b5')})`;
+                let root_bg_col = `hsl(${getComputedStyle(document.body).getPropertyValue('--b6')})`;
                 let hue = getComputedStyle(document.body).getPropertyValue('--hue');
 
 
@@ -6353,6 +6355,13 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                         plugins: {
                             legend: {
                                 display: false
+                            },
+                            tooltip: {
+                                backgroundColor: root_bg_col,
+                                titleColor: text_primary_col,
+                                padding: 7,
+                                cornerRadius: 10,
+                                caretSize: 0
                             }
                         }
                     }
@@ -6525,6 +6534,13 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                             plugins: {
                                 legend: {
                                     display: false
+                                },
+                                tooltip: {
+                                    backgroundColor: root_bg_col,
+                                    titleColor: text_primary_col,
+                                    padding: 7,
+                                    cornerRadius: 10,
+                                    caretSize: 0
                                 }
                             }
                         }
