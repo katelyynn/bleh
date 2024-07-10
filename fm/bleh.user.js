@@ -6223,7 +6223,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     </div>
                 `);
                 col_sidebar.appendChild(sidebar_information_panel);
-            } else if (subpage_type == 'user_library_overview') {
+            } else if (subpage_type.startsWith('user_library')) {
                 // let's grab the library navlist
                 let library_controls = document.body.querySelector('.content-top .library-controls');
                 let library_search = document.body.querySelector('.content-top .search-form');
@@ -6232,43 +6232,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 library_control_header.classList.add('library-controls-header');
                 library_control_header.innerHTML = (`
                     ${library_controls.outerHTML}
-                    ${library_search.outerHTML}
-                `);
-                navlist.after(library_control_header);
-            } else if (subpage_type == 'user_library_artists') {
-                // let's grab the library navlist
-                let library_controls = document.body.querySelector('.content-top .library-controls');
-                let library_search = document.body.querySelector('.content-top .search-form');
-
-                let library_control_header = document.createElement('div');
-                library_control_header.classList.add('library-controls-header');
-                library_control_header.innerHTML = (`
-                    ${library_controls.outerHTML}
-                    ${library_search.outerHTML}
-                `);
-                navlist.after(library_control_header);
-            } else if (subpage_type == 'user_library_albums') {
-                // let's grab the library navlist
-                let library_controls = document.body.querySelector('.content-top .library-controls');
-                let library_search = document.body.querySelector('.content-top .search-form');
-
-                let library_control_header = document.createElement('div');
-                library_control_header.classList.add('library-controls-header');
-                library_control_header.innerHTML = (`
-                    ${library_controls.outerHTML}
-                    ${library_search.outerHTML}
-                `);
-                navlist.after(library_control_header);
-            } else if (subpage_type == 'user_library_tracks') {
-                // let's grab the library navlist
-                let library_controls = document.body.querySelector('.content-top .library-controls');
-                let library_search = document.body.querySelector('.content-top .search-form');
-
-                let library_control_header = document.createElement('div');
-                library_control_header.classList.add('library-controls-header');
-                library_control_header.innerHTML = (`
-                    ${library_controls.outerHTML}
-                    ${library_search.outerHTML}
+                    ${(library_search != null) ? library_search.outerHTML : ''}
                 `);
                 navlist.after(library_control_header);
             }

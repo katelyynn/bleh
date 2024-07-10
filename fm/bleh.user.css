@@ -2334,7 +2334,7 @@ hr + .library-search-results-header {
 }
 
 
-.secondary-nav {
+.secondary-nav:not(:first-child) {
     margin-top: var(--card-gap) !important;
 }
 
@@ -13739,6 +13739,7 @@ button.bleh--gallery-bookmark-image-btn {
 /*     library     */
 .library-controls-header {
     display: flex;
+    margin-top: var(--card-gap);
 
     .library-controls {
         float: unset;
