@@ -3633,7 +3633,7 @@ h2:not(.count, .mask-multi-text, .mask-text, .sr-only, .js-gallery-heading, .top
 }
 
 
-h2.text-18, h2,
+h2.text-18, h2:not(.middle-info h2),
 h3.text-18 {
     color: hsl(var(--c1));
     font-size: 24px !important;
@@ -13794,6 +13794,13 @@ button.bleh--gallery-bookmark-image-btn {
         }
 
         flex: 1;
+    }
+}
+
+
+.scrobble-sidebar {
+    .scrobble-canvas-container {
+        height: 240px;
     }
 }
 }

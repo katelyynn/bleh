@@ -13,6 +13,7 @@
 // @require      https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js
 // @require      https://unpkg.com/@popperjs/core@2
 // @require      https://unpkg.com/tippy.js@6
+// @require      https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js
 // ==/UserScript==
 
 let version = {
@@ -63,6 +64,11 @@ let version = {
             default: false,
             name: 'Header refresh',
             date: '2024-07-09'
+        },
+        library_graph_on_left: {
+            default: false,
+            name: 'Library graph on left',
+            date: '2024-07-10'
         }
     }
 }
@@ -6238,6 +6244,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 `);
                 col_sidebar.appendChild(sidebar_information_panel);
             } else if (subpage_type.startsWith('user_library')) {
+                let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
+
                 // let's grab the library navlist
                 let library_controls = document.body.querySelector('.content-top .library-controls');
                 let library_search = document.body.querySelector('.content-top .search-form');
@@ -6249,6 +6257,80 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     ${(library_search != null) ? library_search.outerHTML : ''}
                 `);
                 navlist.after(library_control_header);
+
+
+                // scrobble stats
+                let scrobble_table = document.getElementById('scrobble-chart-content');
+                let scrobble_statistics_raw = scrobble_table.querySelector('table');
+                deliver_notif('harvested scrobble statistics');
+                console.info('harvested scrobble statistics', scrobble_statistics_raw);
+                scrobble_table.innerHTML = '';
+
+                let scrobble_statistics = [];
+                let scrobble_labels = [];
+
+                scrobble_statistics_raw.querySelectorAll('tbody tr').forEach((tr) => {
+                    scrobble_labels.push(tr.querySelector('.js-period a').textContent.replaceAll('\n', '').trim());
+                    scrobble_statistics.push(tr.querySelector('.js-scrobbles').textContent);
+                });
+
+
+                // colours
+                let link_col = `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c')})`;
+                let link_bg_col = `hsla(${getComputedStyle(document.body).getPropertyValue('--h4')}, 20%)`;
+                let text_col = `hsl(${getComputedStyle(document.body).getPropertyValue('--c3')})`;
+
+
+                // sidebar
+                let scrobble_sidebar = document.createElement('section');
+                scrobble_sidebar.classList.add('scrobble-sidebar');
+                scrobble_sidebar.innerHTML = (`
+                    <div class="top-row">
+                        <h2>bwaa :3</h2>
+                    </div>
+                `);
+
+                let scrobble_canvas_container = document.createElement('div');
+                scrobble_canvas_container.classList.add('scrobble-canvas-container');
+
+                let scrobble_canvas = document.createElement('canvas');
+                scrobble_canvas.classList.add('scrobble-canvas');
+
+                console.info('stats', scrobble_statistics, 'labels', scrobble_labels);
+
+                Chart.defaults.color = text_col;
+                Chart.defaults.font.family = 'Ubuntu Sans';
+                let scrobble_chart = new Chart(scrobble_canvas.getContext('2d'), {
+                    type: 'line',
+                    data: {
+                        labels: scrobble_labels,
+                        datasets: [{
+                            data: scrobble_statistics,
+                            borderWidth: 2.5,
+                            backgroundColor: link_bg_col,
+                            borderColor: link_col,
+                            fill: true,
+                            pointRadius: 0,
+                            pointHitRadius: 20,
+                            tension: 0.1
+                        }]
+                    },
+                    options: {
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        }
+                    }
+                });
+
+                scrobble_canvas_container.appendChild(scrobble_canvas);
+                scrobble_sidebar.appendChild(scrobble_canvas_container);
+                if (settings.feature_flags.library_graph_on_left)
+                    document.querySelector('.library-controls-header').after(scrobble_sidebar);
+                else
+                    profile_header_panel.after(scrobble_sidebar);
             }
         }
 
