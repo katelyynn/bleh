@@ -6282,11 +6282,14 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
 
                 // sidebar
+                let date_picker = document.body.querySelector('.library-date-picker');
+
                 let scrobble_sidebar = document.createElement('section');
                 scrobble_sidebar.classList.add('scrobble-sidebar');
                 scrobble_sidebar.innerHTML = (`
                     <div class="top-row">
-                        <h2>bwaa :3</h2>
+                        <h2>Viewing</h2>
+                        ${date_picker.outerHTML}
                     </div>
                 `);
 

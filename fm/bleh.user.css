@@ -5169,7 +5169,6 @@ button:not(.playback-app-container button, .top-artist-list-item, .pixel, .liste
 .coloured-cta,
 .gallery-previous .arrow,
 .section-playlink,
-.date-range-picker-button,
 .attendance-btn--turn-off, .attendance-btn--turn-on:hover, .attendance-btn--turn-off:hover + .attendance-btn--turn-on,
 .image-upload-remove,
 .profile-header-set-obsession,
@@ -5410,7 +5409,7 @@ a:has(+ .js-gallery-heading):after,
 .all-results-list li:before,
 .library-view-button:before,
 .library-search-submit::before,
-.date-range-picker-button:before, .date-range-picker-button:after,
+.date-range-picker-button:after,
 .love-button:before,
 /*     WIKI     */
 .wiki-history-action:before,
@@ -13799,6 +13798,48 @@ button.bleh--gallery-bookmark-image-btn {
 
 
 .scrobble-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: var(--card-gap);
+
+    .top-row {
+        display: flex;
+        gap: 4px;
+
+        h2 {
+            margin-bottom: unset !important;
+        }
+
+        &:has(.date-range-picker-button.disclose-active) {
+            .date-range-picker-content {
+                display: block !important;
+            }
+        }
+
+        [v-else=""] {
+            height: 28px;
+        }
+
+        .date-range-picker-button {
+            --font-size: 24px;
+            --line-height: 28px;
+            --btn-left: 0;
+            --btn-top: 0;
+            --btn-bottom: 0;
+            --bg: transparent;
+            --bg-hov: transparent;
+            --bg-atv: transparent;
+            --shadow: none;
+            --shadow-hov: none;
+            text-transform: lowercase !important;
+            --col: hsl(var(--c1));
+
+            &:before {
+                display: none !important;
+            }
+        }
+    }
+
     .scrobble-canvas-container {
         height: 240px;
     }
