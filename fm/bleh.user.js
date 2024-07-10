@@ -6308,6 +6308,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 let link_bg_col = `hsla(${getComputedStyle(document.body).getPropertyValue('--h4')}, 20%)`;
                 let text_col = `hsl(${getComputedStyle(document.body).getPropertyValue('--c3')})`;
                 let bg_col = `hsl(${getComputedStyle(document.body).getPropertyValue('--b5')})`;
+                let hue = getComputedStyle(document.body).getPropertyValue('--hue');
 
 
                 // sidebar
@@ -6456,13 +6457,13 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                             <canvas class="scrobble-insight-canvas" id="scrobble-insight-canvas"></canvas>
                         </div>
                         <div class="stats bottom-stats">
-                            <div class="scrobbles-side">
-                                <h3>Highest Point</h3>
-                                <p>${highest_date.label}</p>
-                            </div>
-                            <div class="per-day-side">
-                                <h3>Scrobbles</h3>
+                            <div class="highest-point-scrobbles-side">
+                                <h3>Peak Scrobbles</h3>
                                 <p>${highest_date.stat}</p>
+                            </div>
+                            <div class="highest-point-side">
+                                <h3>Achieved</h3>
+                                <p>${highest_date.label}</p>
                             </div>
                         </div>
                     `);
@@ -6491,7 +6492,31 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                         type: 'doughnut',
                         data: {
                             datasets: [{
-                                data: scrobble_statistics
+                                data: scrobble_statistics,
+                                backgroundColor: [
+                                    `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '360')})`,
+                                    `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '340')})`,
+                                    `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '320')})`,
+                                    `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '300')})`,
+                                    `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '280')})`,
+                                    `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '270')})`,
+                                    `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '255')})`,
+                                    `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '235')})`,
+                                    `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '220')})`,
+                                    `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '208')})`,
+                                    `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '200')})`,
+                                    `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '180')})`,
+                                    `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '160')})`,
+                                    `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '140')})`,
+                                    `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '120')})`,
+                                    `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '100')})`,
+                                    `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '80')})`,
+                                    `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '60')})`,
+                                    `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '40')})`,
+                                    `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '20')})`
+                                ],
+                                borderWidth: 1,
+                                borderColor: bg_col
                             }],
                             labels: scrobble_labels
                         },
