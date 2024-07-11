@@ -6670,12 +6670,60 @@ let scrobble_statistics_raw;
 
         // colours
         let link_col = `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c')})`;
+        let link_h_col = getComputedStyle(document.body).getPropertyValue('--l3-c');
         let link_bg_col = `hsla(${getComputedStyle(document.body).getPropertyValue('--h4')}, 20%)`;
         let text_col = `hsl(${getComputedStyle(document.body).getPropertyValue('--c3')})`;
+        let axis_col = `hsla(${getComputedStyle(document.body).getPropertyValue('--b4')}, 40%)`;
         let text_primary_col = `hsl(${getComputedStyle(document.body).getPropertyValue('--c2')})`;
         let bg_col = `hsl(${getComputedStyle(document.body).getPropertyValue('--b5')})`;
-        let root_bg_col = `hsl(${getComputedStyle(document.body).getPropertyValue('--b6')})`;
+        let root_bg_col = `hsla(${getComputedStyle(document.body).getPropertyValue('--b6')}, 85%)`;
         let hue = getComputedStyle(document.body).getPropertyValue('--hue');
+
+        // options
+        let chart_line_options = {
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    backgroundColor: root_bg_col,
+                    titleColor: text_primary_col,
+                    bodyColor: text_primary_col,
+                    padding: 7,
+                    cornerRadius: 10,
+                    caretSize: 0
+                }
+            },
+            scales: {
+                x: {
+                    grid: {
+                        color: axis_col
+                    }
+                },
+                y: {
+                    grid: {
+                        display: false
+                    }
+                }
+            }
+        }
+        let chart_options = {
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    backgroundColor: root_bg_col,
+                    titleColor: text_primary_col,
+                    bodyColor: text_primary_col,
+                    padding: 7,
+                    cornerRadius: 10,
+                    caretSize: 0
+                }
+            }
+        }
 
 
         // sidebar
@@ -6720,22 +6768,7 @@ let scrobble_statistics_raw;
                     tension: 0.1
                 }]
             },
-            options: {
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: false
-                    },
-                    tooltip: {
-                        backgroundColor: root_bg_col,
-                        titleColor: text_primary_col,
-                        bodyColor: text_primary_col,
-                        padding: 7,
-                        cornerRadius: 10,
-                        caretSize: 0
-                    }
-                }
-            }
+            options: chart_line_options
         });
 
         scrobble_canvas_container.appendChild(scrobble_canvas);
@@ -6898,48 +6931,33 @@ let scrobble_statistics_raw;
                     datasets: [{
                         data: scrobble_statistics,
                         backgroundColor: [
-                            `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '360')})`,
-                            `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '340')})`,
-                            `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '320')})`,
-                            `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '300')})`,
-                            `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '280')})`,
-                            `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '270')})`,
-                            `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '255')})`,
-                            `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '235')})`,
-                            `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '220')})`,
-                            `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '208')})`,
-                            `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '200')})`,
-                            `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '180')})`,
-                            `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '160')})`,
-                            `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '140')})`,
-                            `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '120')})`,
-                            `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '100')})`,
-                            `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '80')})`,
-                            `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '60')})`,
-                            `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '40')})`,
-                            `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '20')})`
+                            `hsl(${link_h_col.replace(hue, '360')})`,
+                            `hsl(${link_h_col.replace(hue, '340')})`,
+                            `hsl(${link_h_col.replace(hue, '320')})`,
+                            `hsl(${link_h_col.replace(hue, '300')})`,
+                            `hsl(${link_h_col.replace(hue, '280')})`,
+                            `hsl(${link_h_col.replace(hue, '270')})`,
+                            `hsl(${link_h_col.replace(hue, '255')})`,
+                            `hsl(${link_h_col.replace(hue, '235')})`,
+                            `hsl(${link_h_col.replace(hue, '220')})`,
+                            `hsl(${link_h_col.replace(hue, '208')})`,
+                            `hsl(${link_h_col.replace(hue, '200')})`,
+                            `hsl(${link_h_col.replace(hue, '180')})`,
+                            `hsl(${link_h_col.replace(hue, '160')})`,
+                            `hsl(${link_h_col.replace(hue, '140')})`,
+                            `hsl(${link_h_col.replace(hue, '120')})`,
+                            `hsl(${link_h_col.replace(hue, '100')})`,
+                            `hsl(${link_h_col.replace(hue, '80')})`,
+                            `hsl(${link_h_col.replace(hue, '60')})`,
+                            `hsl(${link_h_col.replace(hue, '40')})`,
+                            `hsl(${link_h_col.replace(hue, '20')})`
                         ],
                         borderWidth: 1,
                         borderColor: bg_col
                     }],
                     labels: scrobble_labels
                 },
-                options: {
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            display: false
-                        },
-                        tooltip: {
-                            backgroundColor: root_bg_col,
-                            titleColor: text_primary_col,
-                            bodyColor: text_primary_col,
-                            padding: 7,
-                            cornerRadius: 10,
-                            caretSize: 0
-                        }
-                    }
-                }
+                options: chart_options
             });
 
 
@@ -6991,48 +7009,33 @@ let scrobble_statistics_raw;
                         datasets: [{
                             data: more_scrobble_statistics,
                             backgroundColor: [
-                                `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '360')})`,
-                                `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '340')})`,
-                                `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '320')})`,
-                                `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '300')})`,
-                                `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '280')})`,
-                                `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '270')})`,
-                                `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '255')})`,
-                                `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '235')})`,
-                                `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '220')})`,
-                                `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '208')})`,
-                                `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '200')})`,
-                                `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '180')})`,
-                                `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '160')})`,
-                                `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '140')})`,
-                                `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '120')})`,
-                                `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '100')})`,
-                                `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '80')})`,
-                                `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '60')})`,
-                                `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '40')})`,
-                                `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '20')})`
+                                `hsl(${link_h_col.replace(hue, '360')})`,
+                                `hsl(${link_h_col.replace(hue, '340')})`,
+                                `hsl(${link_h_col.replace(hue, '320')})`,
+                                `hsl(${link_h_col.replace(hue, '300')})`,
+                                `hsl(${link_h_col.replace(hue, '280')})`,
+                                `hsl(${link_h_col.replace(hue, '270')})`,
+                                `hsl(${link_h_col.replace(hue, '255')})`,
+                                `hsl(${link_h_col.replace(hue, '235')})`,
+                                `hsl(${link_h_col.replace(hue, '220')})`,
+                                `hsl(${link_h_col.replace(hue, '208')})`,
+                                `hsl(${link_h_col.replace(hue, '200')})`,
+                                `hsl(${link_h_col.replace(hue, '180')})`,
+                                `hsl(${link_h_col.replace(hue, '160')})`,
+                                `hsl(${link_h_col.replace(hue, '140')})`,
+                                `hsl(${link_h_col.replace(hue, '120')})`,
+                                `hsl(${link_h_col.replace(hue, '100')})`,
+                                `hsl(${link_h_col.replace(hue, '80')})`,
+                                `hsl(${link_h_col.replace(hue, '60')})`,
+                                `hsl(${link_h_col.replace(hue, '40')})`,
+                                `hsl(${link_h_col.replace(hue, '20')})`
                             ],
                             borderWidth: 1,
                             borderColor: bg_col
                         }],
                         labels: more_scrobble_labels
                     },
-                    options: {
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: {
-                                display: false
-                            },
-                            tooltip: {
-                                backgroundColor: root_bg_col,
-                                titleColor: text_primary_col,
-                                bodyColor: text_primary_col,
-                                padding: 7,
-                                cornerRadius: 10,
-                                caretSize: 0
-                            }
-                        }
-                    }
+                    options: chart_options
                 });
             }
         }
