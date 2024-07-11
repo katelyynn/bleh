@@ -856,7 +856,7 @@ last.fm changes as of 2024-05-20 */
 .masthead-inner-wrap {
     width: var(--cards-width) !important;
     max-width: unset !important;
-    padding: unset !important;
+    padding: 0 var(--card-padding) !important;
     float: unset !important;
     display: flex;
     justify-content: center;
