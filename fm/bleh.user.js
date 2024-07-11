@@ -6793,7 +6793,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                         <h3>Scrobbles</h3>
                         <p>${stats[0].textContent}</p>
                     </div>
-                    ${(!subpage_type.startsWith('user_library_music_artist'))
+                    ${(subpage_type.startsWith('user_library') && subpage_type.includes('overview'))
                     ? (`
                     <div class="per-day-side">
                         <h3>Daily</h3>
@@ -6837,7 +6837,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                         <h3>Scrobbles</h3>
                         <p>${stats[0].textContent}</p>
                     </div>
-                    ${(!subpage_type.startsWith('user_library_music_artist'))
+                    ${(subpage_type.startsWith('user_library') && subpage_type.includes('overview'))
                     ? (`
                     <div class="per-day-side">
                         <h3>Daily</h3>
