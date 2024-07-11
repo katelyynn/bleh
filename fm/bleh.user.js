@@ -1310,6 +1310,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             bleh_artist_pages();
             bleh_track_pages();
             bleh_profile_pages();
+            load_bleh_user_library();
             patch_lastfm_settings();
 
             patch_shouts();
@@ -1346,6 +1347,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 bleh_artist_pages();
                 bleh_track_pages();
                 bleh_profile_pages();
+                load_bleh_user_library();
                 patch_lastfm_settings();
 
                 patch_shouts();
@@ -6268,6 +6270,9 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 navlist.after(library_control_header);
 
 
+                if (!settings.feature_flags.use_new_library)
+                    return;
+
                 load_bleh_user_library(profile_header, is_subpage, subpage_type, settings, profile_header_panel);
             }
         }
@@ -6586,6 +6591,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         settings = undefined,
         profile_header_panel = undefined
     ) {
+        let initial_load = true;
+
         if (profile_header == undefined)
             profile_header = document.body.querySelector('.header--user');
 
@@ -6606,6 +6613,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             // initial bleh load, hence the subpage check
             if (!subpage_type.startsWith('user_library'))
                 return;
+
+            initial_load = false;
         }
 
 
@@ -6613,10 +6622,14 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
 
         // scrobble stats
-        if (!settings.feature_flags.use_new_library)
-            return;
-
         let scrobble_table = document.getElementById('scrobble-chart-content');
+        // this element is re-created if the chart data changes
+        // if it still has our attribute, we don't need to run anything
+        // as data has not changed
+        if (scrobble_table.hasAttribute('data-bleh--library'))
+            return;
+        scrobble_table.setAttribute('data-bleh--library', 'true');
+
         let scrobble_statistics_raw = scrobble_table.querySelector('table');
         deliver_notif('harvested scrobble statistics');
         console.info('harvested scrobble statistics', scrobble_statistics_raw);
@@ -6659,8 +6672,13 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         // sidebar
         let date_picker = document.body.querySelector('.library-date-picker');
 
-        let scrobble_sidebar = document.createElement('section');
-        scrobble_sidebar.classList.add('scrobble-sidebar');
+        let scrobble_sidebar;
+        if (initial_load) {
+            scrobble_sidebar = document.createElement('section');
+            scrobble_sidebar.classList.add('scrobble-sidebar');
+        } else {
+            scrobble_sidebar = document.body.querySelector('.scrobble-sidebar');
+        }
         scrobble_sidebar.innerHTML = (`
             <div class="top-row">
                 <h3>Viewing</h3>
@@ -6713,10 +6731,12 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
         scrobble_canvas_container.appendChild(scrobble_canvas);
         scrobble_sidebar.appendChild(scrobble_canvas_container);
-        if (settings.feature_flags.library_graph_on_left)
-            document.querySelector('.library-controls-header').after(scrobble_sidebar);
-        else
-            profile_header_panel.after(scrobble_sidebar);
+        if (initial_load) {
+            if (settings.feature_flags.library_graph_on_left)
+                document.querySelector('.library-controls-header').after(scrobble_sidebar);
+            else
+                profile_header_panel.after(scrobble_sidebar);
+        }
 
         // top chart
         let stats = document.body.querySelectorAll('.metadata-display');
@@ -6760,8 +6780,13 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             });
 
 
-            let scrobble_insight_sidebar = document.createElement('section');
-            scrobble_insight_sidebar.classList.add('scrobble-insight-sidebar');
+            let scrobble_insight_sidebar;
+            if (initial_load) {
+                scrobble_insight_sidebar = document.createElement('div');
+                scrobble_insight_sidebar.classList.add('scrobble-insight-sidebar');
+            } else {
+                scrobble_insight_sidebar = document.body.querySelector('.scrobble-insight-sidebar');
+            }
             scrobble_insight_sidebar.innerHTML = (`
                 <div class="stats top-stats">
                     <div class="scrobbles-side">
@@ -6792,13 +6817,20 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 </div>
             `);
 
-            if (settings.feature_flags.library_graph_on_left)
-                profile_header_panel.after(scrobble_insight_sidebar);
-            else
-                scrobble_sidebar.after(scrobble_insight_sidebar);
+            if (initial_load) {
+                if (settings.feature_flags.library_graph_on_left)
+                    profile_header_panel.after(scrobble_insight_sidebar);
+                else
+                    scrobble_sidebar.after(scrobble_insight_sidebar);
+            }
         } else {
-            let scrobble_insight_sidebar = document.createElement('section');
-            scrobble_insight_sidebar.classList.add('scrobble-insight-sidebar');
+            let scrobble_insight_sidebar;
+            if (initial_load) {
+                scrobble_insight_sidebar = document.createElement('section');
+                scrobble_insight_sidebar.classList.add('scrobble-insight-sidebar');
+            } else {
+                scrobble_insight_sidebar = document.body.querySelector('.scrobble-insight-sidebar');
+            }
             scrobble_insight_sidebar.innerHTML = (`
                 <div class="stats top-stats">
                     <div class="scrobbles-side">
@@ -6829,10 +6861,12 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 </div>
             `);
 
-            if (settings.feature_flags.library_graph_on_left)
-                profile_header_panel.after(scrobble_insight_sidebar);
-            else
-                scrobble_sidebar.after(scrobble_insight_sidebar);
+            if (initial_load) {
+                if (settings.feature_flags.library_graph_on_left)
+                    profile_header_panel.after(scrobble_insight_sidebar);
+                else
+                    scrobble_sidebar.after(scrobble_insight_sidebar);
+            }
 
             /*let combined_stats = [];
             scrobble_statistics.forEach((stat, index) => {
@@ -6902,8 +6936,13 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
             // artist albums
             if (subpage_type == 'user_library_music_artist_albums') {
-                let more_scrobble_insight_sidebar = document.createElement('section');
-                more_scrobble_insight_sidebar.classList.add('more-scrobble-insight-sidebar');
+                let more_scrobble_insight_sidebar;
+                if (initial_load) {
+                    more_scrobble_insight_sidebar = document.createElement('div');
+                    more_scrobble_insight_sidebar.classList.add('more-scrobble-insight-sidebar');
+                } else {
+                    more_scrobble_insight_sidebar = document.body.querySelector('.more-scrobble-insight-sidebar');
+                }
                 more_scrobble_insight_sidebar.innerHTML = (`
                     <div class="stats top-stats">
                         <div class="top-album-side">
@@ -6920,7 +6959,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     </div>
                 `);
 
-                scrobble_insight_sidebar.after(more_scrobble_insight_sidebar);
+                if (initial_load)
+                    scrobble_insight_sidebar.after(more_scrobble_insight_sidebar);
 
                 let album_container = document.getElementById('library-sort-section');
                 let more_scrobble_labels = [];
