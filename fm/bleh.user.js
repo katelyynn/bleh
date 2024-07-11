@@ -79,6 +79,11 @@ let version = {
             default: false,
             name: 'Use library scrobble bar, sorted by sub to dom',
             date: '2024-07-10'
+        },
+        show_album_chart_as_line: {
+            default: false,
+            name: 'Show album chart as line, silly',
+            date: '2024-07-11'
         }
     }
 }
@@ -6628,6 +6633,85 @@ let scrobble_statistics_raw;
         // load
 
 
+        // colours
+        let link_col = `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c')})`;
+        let link_h_col = getComputedStyle(document.body).getPropertyValue('--l3-c');
+        let link_bg_col = `hsla(${getComputedStyle(document.body).getPropertyValue('--h4')}, 20%)`;
+        let text_col = `hsl(${getComputedStyle(document.body).getPropertyValue('--c3')})`;
+        let axis_col = `hsla(${getComputedStyle(document.body).getPropertyValue('--b4')}, 40%)`;
+        let text_primary_col = `hsl(${getComputedStyle(document.body).getPropertyValue('--c2')})`;
+        let bg_col = `hsl(${getComputedStyle(document.body).getPropertyValue('--b5')})`;
+        let root_bg_col = `hsla(${getComputedStyle(document.body).getPropertyValue('--b6')}, 85%)`;
+        let hue = getComputedStyle(document.body).getPropertyValue('--hue');
+        let chart_colours = {
+            link_col: link_col,
+            link_h_col: link_h_col,
+            link_bg_col: link_bg_col,
+            text_col: text_col,
+            axis_col: axis_col,
+            text_primary_col: text_primary_col,
+            bg_col: bg_col,
+            root_bg_col: root_bg_col,
+            hue: hue
+        }
+
+        // options
+        let chart_line_options = {
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    backgroundColor: root_bg_col,
+                    titleColor: text_primary_col,
+                    bodyColor: text_primary_col,
+                    padding: 7,
+                    cornerRadius: 10,
+                    caretSize: 0
+                }
+            },
+            scales: {
+                x: {
+                    grid: {
+                        color: axis_col
+                    }
+                },
+                y: {
+                    grid: {
+                        display: false
+                    }
+                }
+            }
+        }
+        let chart_options = {
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    backgroundColor: chart_colours.root_bg_col,
+                    titleColor: chart_colours.text_primary_col,
+                    bodyColor: chart_colours.text_primary_col,
+                    padding: 7,
+                    cornerRadius: 10,
+                    caretSize: 0
+                }
+            }
+        }
+
+
+        //
+        load_bleh_user_library_for_artists(
+            chart_colours,
+            chart_options, chart_line_options,
+            subpage_type,
+            initial_load,
+            settings
+        );
+
+
         // scrobble stats
         let scrobble_table = document.getElementById('scrobble-chart-content');
         // this element is re-created if the chart data changes
@@ -6666,64 +6750,6 @@ let scrobble_statistics_raw;
             scrobble_labels.push(label);
             scrobble_statistics.push(stat);
         });
-
-
-        // colours
-        let link_col = `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c')})`;
-        let link_h_col = getComputedStyle(document.body).getPropertyValue('--l3-c');
-        let link_bg_col = `hsla(${getComputedStyle(document.body).getPropertyValue('--h4')}, 20%)`;
-        let text_col = `hsl(${getComputedStyle(document.body).getPropertyValue('--c3')})`;
-        let axis_col = `hsla(${getComputedStyle(document.body).getPropertyValue('--b4')}, 40%)`;
-        let text_primary_col = `hsl(${getComputedStyle(document.body).getPropertyValue('--c2')})`;
-        let bg_col = `hsl(${getComputedStyle(document.body).getPropertyValue('--b5')})`;
-        let root_bg_col = `hsla(${getComputedStyle(document.body).getPropertyValue('--b6')}, 85%)`;
-        let hue = getComputedStyle(document.body).getPropertyValue('--hue');
-
-        // options
-        let chart_line_options = {
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    display: false
-                },
-                tooltip: {
-                    backgroundColor: root_bg_col,
-                    titleColor: text_primary_col,
-                    bodyColor: text_primary_col,
-                    padding: 7,
-                    cornerRadius: 10,
-                    caretSize: 0
-                }
-            },
-            scales: {
-                x: {
-                    grid: {
-                        color: axis_col
-                    }
-                },
-                y: {
-                    grid: {
-                        display: false
-                    }
-                }
-            }
-        }
-        let chart_options = {
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    display: false
-                },
-                tooltip: {
-                    backgroundColor: root_bg_col,
-                    titleColor: text_primary_col,
-                    bodyColor: text_primary_col,
-                    padding: 7,
-                    cornerRadius: 10,
-                    caretSize: 0
-                }
-            }
-        }
 
 
         // sidebar
@@ -6931,111 +6957,174 @@ let scrobble_statistics_raw;
                     datasets: [{
                         data: scrobble_statistics,
                         backgroundColor: [
-                            `hsl(${link_h_col.replace(hue, '360')})`,
-                            `hsl(${link_h_col.replace(hue, '340')})`,
-                            `hsl(${link_h_col.replace(hue, '320')})`,
-                            `hsl(${link_h_col.replace(hue, '300')})`,
-                            `hsl(${link_h_col.replace(hue, '280')})`,
-                            `hsl(${link_h_col.replace(hue, '270')})`,
-                            `hsl(${link_h_col.replace(hue, '255')})`,
-                            `hsl(${link_h_col.replace(hue, '235')})`,
-                            `hsl(${link_h_col.replace(hue, '220')})`,
-                            `hsl(${link_h_col.replace(hue, '208')})`,
-                            `hsl(${link_h_col.replace(hue, '200')})`,
-                            `hsl(${link_h_col.replace(hue, '180')})`,
-                            `hsl(${link_h_col.replace(hue, '160')})`,
-                            `hsl(${link_h_col.replace(hue, '140')})`,
-                            `hsl(${link_h_col.replace(hue, '120')})`,
-                            `hsl(${link_h_col.replace(hue, '100')})`,
-                            `hsl(${link_h_col.replace(hue, '80')})`,
-                            `hsl(${link_h_col.replace(hue, '60')})`,
-                            `hsl(${link_h_col.replace(hue, '40')})`,
-                            `hsl(${link_h_col.replace(hue, '20')})`
+                            `hsl(${link_h_col.replace(chart_colours.hue, '360')})`,
+                            `hsl(${link_h_col.replace(chart_colours.hue, '340')})`,
+                            `hsl(${link_h_col.replace(chart_colours.hue, '320')})`,
+                            `hsl(${link_h_col.replace(chart_colours.hue, '300')})`,
+                            `hsl(${link_h_col.replace(chart_colours.hue, '280')})`,
+                            `hsl(${link_h_col.replace(chart_colours.hue, '270')})`,
+                            `hsl(${link_h_col.replace(chart_colours.hue, '255')})`,
+                            `hsl(${link_h_col.replace(chart_colours.hue, '235')})`,
+                            `hsl(${link_h_col.replace(chart_colours.hue, '220')})`,
+                            `hsl(${link_h_col.replace(chart_colours.hue, '208')})`,
+                            `hsl(${link_h_col.replace(chart_colours.hue, '200')})`,
+                            `hsl(${link_h_col.replace(chart_colours.hue, '180')})`,
+                            `hsl(${link_h_col.replace(chart_colours.hue, '160')})`,
+                            `hsl(${link_h_col.replace(chart_colours.hue, '140')})`,
+                            `hsl(${link_h_col.replace(chart_colours.hue, '120')})`,
+                            `hsl(${link_h_col.replace(chart_colours.hue, '100')})`,
+                            `hsl(${link_h_col.replace(chart_colours.hue, '80')})`,
+                            `hsl(${link_h_col.replace(chart_colours.hue, '60')})`,
+                            `hsl(${link_h_col.replace(chart_colours.hue, '40')})`,
+                            `hsl(${link_h_col.replace(chart_colours.hue, '20')})`
                         ],
                         borderWidth: 1,
-                        borderColor: bg_col
+                        borderColor: chart_colours.bg_col
                     }],
                     labels: scrobble_labels
                 },
                 options: chart_options
             });
+        }
+    }
 
+    function load_bleh_user_library_for_artists(
+        chart_colours,
+        chart_options, chart_line_options,
+        subpage_type,
+        initial_load,
+        settings
+    ) {
+        let scrobble_insight_sidebar = document.querySelector('.scrobble-insight-sidebar');
+        if (scrobble_insight_sidebar == null)
+            return;
 
-            // artist albums
-            if (subpage_type == 'user_library_music_artist_albums') {
-                let more_scrobble_insight_sidebar;
-                if (initial_load) {
-                    more_scrobble_insight_sidebar = document.createElement('div');
-                    more_scrobble_insight_sidebar.classList.add('more-scrobble-insight-sidebar');
-                } else {
-                    more_scrobble_insight_sidebar = document.body.querySelector('.more-scrobble-insight-sidebar');
+        // artist albums
+        if (subpage_type == 'user_library_music_artist_albums') {
+            let album_container = document.querySelector('#library-sort-section .chartlist:not(.chartlist__placeholder)');
+            if (album_container == null)
+                return;
+
+            if (album_container.hasAttribute('data-bleh--library'))
+                return;
+            album_container.setAttribute('data-bleh--library', 'true');
+
+            let more_scrobble_labels = [];
+            let more_scrobble_statistics = [];
+
+            let highest_album = {
+                label: '',
+                link: '',
+                stat: 0,
+                img: ''
+            };
+
+            album_container.querySelectorAll('.chartlist-row').forEach((album) => {
+                let label = album.querySelector('.chartlist-name a').textContent;
+                let stat = parseInt(album.querySelector('.chartlist-count-bar-value').textContent.replaceAll('\n', '').trim());
+
+                if (stat > highest_album.stat) {
+                    highest_album = {
+                        label: label,
+                        link: album.querySelector('.chartlist-name a').getAttribute('href'),
+                        stat: stat,
+                        img: album.querySelector('.chartlist-image img').getAttribute('src')
+                    }
                 }
-                more_scrobble_insight_sidebar.innerHTML = (`
-                    <div class="stats top-stats">
-                        <div class="top-album-side">
-                            <h3>Top Album</h3>
-                            <p>In Utero</p>
-                        </div>
-                        <div class="top-album-side">
-                            <h3>Scrobbles</h3>
-                            <p>53,928</p>
-                        </div>
+
+                more_scrobble_labels.push(label);
+                more_scrobble_statistics.push(stat);
+            });
+
+            console.info(more_scrobble_labels, more_scrobble_statistics);
+
+
+            let more_scrobble_insight_sidebar;
+            let attempted_find_of_more_scrobble_insight_sidebar = document.body.querySelector('.more-scrobble-insight-sidebar');
+
+            if (initial_load || (attempted_find_of_more_scrobble_insight_sidebar == null)) {
+                more_scrobble_insight_sidebar = document.createElement('section');
+                more_scrobble_insight_sidebar.classList.add('more-scrobble-insight-sidebar');
+            } else {
+                more_scrobble_insight_sidebar = attempted_find_of_more_scrobble_insight_sidebar;
+            }
+            more_scrobble_insight_sidebar.innerHTML = (`
+                <div class="backing-img" style="background-image: url(${highest_album.img})" alt="Cover for ${highest_album.label}"></div>
+                <div class="stats top-stats">
+                    <div class="top-album-side">
+                        <h3>Top Album</h3>
+                        <p><a href="${highest_album.link}" id="album-link">${highest_album.label}</a></p>
                     </div>
-                    <div class="scrobble-insight-canvas-container">
-                        <canvas class="more-scrobble-insight-canvas" id="more-scrobble-insight-canvas"></canvas>
+                    <div class="top-album-scrobbles-side">
+                        <h3>Scrobbles</h3>
+                        <p>${highest_album.stat}</p>
                     </div>
-                `);
+                </div>
+                <div class="scrobble-insight-canvas-container">
+                    <canvas class="more-scrobble-insight-canvas" id="more-scrobble-insight-canvas"></canvas>
+                </div>
+            `);
 
-                if (initial_load)
-                    scrobble_insight_sidebar.after(more_scrobble_insight_sidebar);
+            if (initial_load || (attempted_find_of_more_scrobble_insight_sidebar == null))
+                scrobble_insight_sidebar.after(more_scrobble_insight_sidebar);
 
-                let album_container = document.getElementById('library-sort-section');
-                let more_scrobble_labels = [];
-                let more_scrobble_statistics = [];
-                album_container.querySelectorAll('.chartlist-row').forEach((album) => {
-                    console.info(album);
-                    // todo: this returns a placeholder chartlist, this requires loading
-                    // graphs dynamically, something to look into
-                    // ^ will also fix the issue of a statistics changing dynamically without
-                    // a page reload causing a de-sync
+            tippy(document.getElementById('album-link'), {
+                content: highest_album.label
+            });
 
-                    //more_scrobble_labels.push(album.querySelector('.chartlist-name a').textContent);
-                    //more_scrobble_statistics.push(album.querySelector('.chartlist-count-bar-value').textContent);
+
+            if (settings.feature_flags.show_album_chart_as_line) {
+                let more_scrobble_chart = new Chart(document.getElementById('more-scrobble-insight-canvas').getContext('2d'), {
+                    type: 'line',
+                    data: {
+                        datasets: [{
+                            data: more_scrobble_statistics,
+                            borderWidth: 2.5,
+                            backgroundColor: chart_colours.link_bg_col,
+                            borderColor: chart_colours.link_col,
+                            fill: true,
+                            pointRadius: 0,
+                            pointHitRadius: 20,
+                            tension: 0.1
+                        }],
+                        labels: more_scrobble_labels
+                    },
+                    options: chart_line_options
                 });
-
+            } else {
                 let more_scrobble_chart = new Chart(document.getElementById('more-scrobble-insight-canvas').getContext('2d'), {
                     type: 'doughnut',
                     data: {
                         datasets: [{
                             data: more_scrobble_statistics,
                             backgroundColor: [
-                                `hsl(${link_h_col.replace(hue, '360')})`,
-                                `hsl(${link_h_col.replace(hue, '340')})`,
-                                `hsl(${link_h_col.replace(hue, '320')})`,
-                                `hsl(${link_h_col.replace(hue, '300')})`,
-                                `hsl(${link_h_col.replace(hue, '280')})`,
-                                `hsl(${link_h_col.replace(hue, '270')})`,
-                                `hsl(${link_h_col.replace(hue, '255')})`,
-                                `hsl(${link_h_col.replace(hue, '235')})`,
-                                `hsl(${link_h_col.replace(hue, '220')})`,
-                                `hsl(${link_h_col.replace(hue, '208')})`,
-                                `hsl(${link_h_col.replace(hue, '200')})`,
-                                `hsl(${link_h_col.replace(hue, '180')})`,
-                                `hsl(${link_h_col.replace(hue, '160')})`,
-                                `hsl(${link_h_col.replace(hue, '140')})`,
-                                `hsl(${link_h_col.replace(hue, '120')})`,
-                                `hsl(${link_h_col.replace(hue, '100')})`,
-                                `hsl(${link_h_col.replace(hue, '80')})`,
-                                `hsl(${link_h_col.replace(hue, '60')})`,
-                                `hsl(${link_h_col.replace(hue, '40')})`,
-                                `hsl(${link_h_col.replace(hue, '20')})`
+                                `hsl(${chart_colours.link_h_col.replace(chart_colours.hue, '360')})`,
+                                `hsl(${chart_colours.link_h_col.replace(chart_colours.hue, '340')})`,
+                                `hsl(${chart_colours.link_h_col.replace(chart_colours.hue, '320')})`,
+                                `hsl(${chart_colours.link_h_col.replace(chart_colours.hue, '300')})`,
+                                `hsl(${chart_colours.link_h_col.replace(chart_colours.hue, '280')})`,
+                                `hsl(${chart_colours.link_h_col.replace(chart_colours.hue, '270')})`,
+                                `hsl(${chart_colours.link_h_col.replace(chart_colours.hue, '255')})`,
+                                `hsl(${chart_colours.link_h_col.replace(chart_colours.hue, '235')})`,
+                                `hsl(${chart_colours.link_h_col.replace(chart_colours.hue, '220')})`,
+                                `hsl(${chart_colours.link_h_col.replace(chart_colours.hue, '208')})`,
+                                `hsl(${chart_colours.link_h_col.replace(chart_colours.hue, '200')})`,
+                                `hsl(${chart_colours.link_h_col.replace(chart_colours.hue, '180')})`,
+                                `hsl(${chart_colours.link_h_col.replace(chart_colours.hue, '160')})`,
+                                `hsl(${chart_colours.link_h_col.replace(chart_colours.hue, '140')})`,
+                                `hsl(${chart_colours.link_h_col.replace(chart_colours.hue, '120')})`,
+                                `hsl(${chart_colours.link_h_col.replace(chart_colours.hue, '100')})`,
+                                `hsl(${chart_colours.link_h_col.replace(chart_colours.hue, '80')})`,
+                                `hsl(${chart_colours.link_h_col.replace(chart_colours.hue, '60')})`,
+                                `hsl(${chart_colours.link_h_col.replace(chart_colours.hue, '40')})`,
+                                `hsl(${chart_colours.link_h_col.replace(chart_colours.hue, '20')})`
                             ],
                             borderWidth: 1,
-                            borderColor: bg_col
+                            borderColor: chart_colours.bg_col
                         }],
                         labels: more_scrobble_labels
                     },
-                    options: chart_options
+                    options: chart_line_options
                 });
             }
         }

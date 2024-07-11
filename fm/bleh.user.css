@@ -13982,6 +13982,100 @@ button.bleh--gallery-bookmark-image-btn {
         }
     }
 }
+.more-scrobble-insight-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: var(--card-gap);
+    position: relative;
+    overflow: hidden;
+
+    .backing-img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 120px;
+        background-size: cover;
+        background-position: 0 27%;
+        background-repeat: no-repeat;
+        --mask: linear-gradient(0deg, transparent 0%, rgb(0, 0, 0) 100%);
+        mask-image: var(--mask);
+        -webkit-mask-image: var(--mask);
+        opacity: 0.3;
+        filter: blur(2px) saturate(110%);
+    }
+
+    .scrobble-insight-canvas-container {
+        height: 300px;
+        z-index: 3;
+    }
+
+    .stats {
+        display: flex;
+        z-index: 3;
+
+        .top-album-side {
+            p a {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                line-clamp: 1;
+                -webkit-line-clamp: 1;
+                -webkit-box-orient: vertical;
+            }
+        }
+
+        div {
+            flex: 1;
+
+            h3 {
+                font-size: var(--font-size);
+                line-height: var(--line-height);
+                color: hsl(var(--c3));
+                font-weight: var(--font-weight-medium);
+                margin: unset;
+                cursor: default;
+
+                display: flex;
+                align-items: center;
+                gap: 2px;
+
+                img {
+                    width: 16px;
+                    height: 16px;
+                    border-radius: 50%;
+                    display: none;
+                }
+
+                a {
+                    color: inherit;
+                }
+            }
+            p {
+                color: hsl(var(--c1));
+                font-size: 24px;
+                line-height: 28px;
+                font-weight: var(--font-flex-weight);
+                font-family: var(--font-flex);
+                font-feature-settings: var(--font-flex-settings);
+
+                display: flex;
+                align-items: center;
+                gap: 6px;
+
+                img {
+                    width: 20px;
+                    height: 20px;
+                    border-radius: 50%;
+                }
+
+                a {
+                    color: inherit;
+                }
+            }
+        }
+    }
+}
 
 
 .metadata-list {
