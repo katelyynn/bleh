@@ -7124,7 +7124,7 @@ let scrobble_statistics_raw;
                         }],
                         labels: more_scrobble_labels
                     },
-                    options: chart_line_options
+                    options: chart_options
                 });
             }
         }
