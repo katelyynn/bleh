@@ -5,7 +5,7 @@
 // @description  bleh!!! ^-^
 // @author       kate
 // @match        https://www.last.fm/*
-// @icon         https://www.google.com/s2/favicons?sz=64&domain=last.fm
+// @icon         https://www.google.com/s2/favicons?sz=64&domain=cutensilly.org
 // @grant        GM_addStyle
 // @updateURL    https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.js
 // @downloadURL  https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.js
@@ -90,8 +90,6 @@ if (!valid_langs.includes(lang)) {
     console.info('bleh - language fallback from', lang, 'to en (lang is not listed as valid)', valid_langs);
     lang = 'en';
 }
-
-let forbidden_nodes = ['path', 'clipPath', 'rect', 'text', 'g', 'svg', 'button', 'a', 'script'];
 
 const trans = {
     en: {
@@ -1300,8 +1298,6 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         if (window.location.href == bleh_url || bleh_regex.test(window.location.href)) {
             bleh_settings();
         } else {
-            patch_profile(document.body);
-            patch_shouts(document.body);
             patch_titles(document.body);
             patch_header_title(document.body);
             patch_artist_ranks(document.body);
@@ -1315,6 +1311,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             bleh_track_pages();
             bleh_profile_pages();
             patch_lastfm_settings();
+
+            patch_shouts();
 
             correct_generic_combo_no_artist('artist-header-featured-items-item');
             correct_generic_combo_no_artist('artist-top-albums-item');
@@ -1336,8 +1334,6 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             if (window.location.href == bleh_url || bleh_regex.test(window.location.href)) {
                 bleh_settings();
             } else {
-                patch_profile(document.body);
-                patch_shouts(document.body);
                 patch_titles(document.body);
                 patch_header_title(document.body);
                 patch_artist_ranks(document.body);
@@ -1351,6 +1347,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 bleh_track_pages();
                 bleh_profile_pages();
                 patch_lastfm_settings();
+
+                patch_shouts();
 
                 correct_generic_combo_no_artist('artist-header-featured-items-item');
                 correct_generic_combo_no_artist('artist-top-albums-item');
@@ -2775,75 +2773,76 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
 
     // patch shouts
-    function patch_shouts(element) {
-        let shouts = element.querySelectorAll('.shout');
+    function patch_shouts() {
+        let shouts = document.body.querySelectorAll('.shout');
 
         shouts.forEach((shout) => {
-            try {
-            if (!shout.hasAttribute('data-bleh')) {
-                shout.setAttribute('data-bleh', 'true');
+            if (shout.hasAttribute('data-bleh'))
+                return;
+            shout.setAttribute('data-bleh', 'true');
 
-                let shout_name = shout.querySelector('.shout-user a').textContent;
-                let shout_avatar = shout.querySelector('.shout-user-avatar');
+            let shout_body = shout.querySelector('.shout-body p');
+            // shout is deleted, reported, or something else
+            if (shout_body == null)
+                return;
 
-                let shout_body = shout.querySelector('.shout-body p');
+            let shout_name = shout.querySelector('.shout-user a').textContent;
+            let shout_avatar = shout.querySelector('.shout-user-avatar');
 
-                let converter = new showdown.Converter({
-                    emoji: true,
-                    excludeTrailingPunctuationFromURLs: true,
-                    headerLevelStart: 5,
-                    noHeaderId: true,
-                    openLinksInNewWindow: true,
-                    requireSpaceBeforeHeadingText: true,
-                    simpleLineBreaks: true,
-                    simplifiedAutoLink: true,
-                    strikethrough: true,
-                    underline: true,
-                    ghCodeBlocks: false,
-                    smartIndentationFix: true
-                });
-                let parsed_body = converter.makeHtml(shout_body.textContent
-                .replace(/([@])([a-zA-Z0-9_]+)/g, '[$1$2](/user/$2)')
-                .replace(/\[artist\]([a-zA-Z0-9]+)\[\/artist\]/g, '[$1](/music/$1)')
-                .replace(/\[album artist=([a-zA-Z0-9]+)\]([a-zA-Z0-9\s]+)\[\/album\]/g, '[$2](/music/$1/$2)')
-                .replace(/\[track artist=([a-zA-Z0-9]+)\]([a-zA-Z0-9\s]+)\[\/track\]/g, '[$2](/music/$1/_/$2)')
-                .replace(/https:\/\/open\.spotify\.com\/user\/([A-Za-z0-9]+)\?si=([A-Za-z0-9]+)/g, '[@$1](https://open.spotify.com/user/$1)')
-                .replace(/&/g, '&amp;')
-                .replace(/</g, '&lt;')
-                .replace(/>/g, '&gt;')
-                .replace(/"/g, '&quot;')
-                .replace(/'/g, '&#039;'));
-                console.log(shout_body.textContent, parsed_body);
-                shout_body.innerHTML = parsed_body;
+            let converter = new showdown.Converter({
+                emoji: true,
+                excludeTrailingPunctuationFromURLs: true,
+                headerLevelStart: 5,
+                noHeaderId: true,
+                openLinksInNewWindow: true,
+                requireSpaceBeforeHeadingText: true,
+                simpleLineBreaks: true,
+                simplifiedAutoLink: true,
+                strikethrough: true,
+                underline: true,
+                ghCodeBlocks: false,
+                smartIndentationFix: true
+            });
+            let parsed_body = converter.makeHtml(shout_body.textContent
+            .replace(/([@])([a-zA-Z0-9_]+)/g, '[$1$2](/user/$2)')
+            .replace(/\[artist\]([a-zA-Z0-9]+)\[\/artist\]/g, '[$1](/music/$1)')
+            .replace(/\[album artist=([a-zA-Z0-9]+)\]([a-zA-Z0-9\s]+)\[\/album\]/g, '[$2](/music/$1/$2)')
+            .replace(/\[track artist=([a-zA-Z0-9]+)\]([a-zA-Z0-9\s]+)\[\/track\]/g, '[$2](/music/$1/_/$2)')
+            .replace(/https:\/\/open\.spotify\.com\/user\/([A-Za-z0-9]+)\?si=([A-Za-z0-9]+)/g, '[@$1](https://open.spotify.com/user/$1)')
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#039;'));
+            console.log(shout_body.textContent, parsed_body);
+            shout_body.innerHTML = parsed_body;
 
-                if (redacted.includes(shout_name.toLowerCase())) {
-                    shout.classList.add('shout--bleh-redacted');
-                    shout.setAttribute('data-bleh--shout-expanded','false');
-                    shout_avatar.classList.add('avatar--bleh-missing');
+            if (redacted.includes(shout_name.toLowerCase())) {
+                shout.classList.add('shout--bleh-redacted');
+                shout.setAttribute('data-bleh--shout-expanded','false');
+                shout_avatar.classList.add('avatar--bleh-missing');
 
-                    let redacted_msg = document.createElement('p');
-                    redacted_msg.textContent = 'This user is hidden.';
-                    shout.insertBefore(redacted_msg, shout.firstChild);
+                let redacted_msg = document.createElement('p');
+                redacted_msg.textContent = 'This user is hidden.';
+                shout.insertBefore(redacted_msg, shout.firstChild);
 
 
-                    // gather shout id from more actions' id
-                    let shout_actions = shout.querySelector('.shout-more-actions-menu');
-                    let shout_id = shout_actions.getAttribute('id').replace('shout-more-actions-');
-                    shout.setAttribute('id',`bleh--shout-${shout_id}`);
+                // gather shout id from more actions' id
+                let shout_actions = shout.querySelector('.shout-more-actions-menu');
+                let shout_id = shout_actions.getAttribute('id').replace('shout-more-actions-');
+                shout.setAttribute('id',`bleh--shout-${shout_id}`);
 
-                    // append button
-                    let shout_show_button = document.createElement('li');
-                    shout_show_button.innerHTML = (`
-                        <button onclick="_show_hidden_shout('${shout_id}')" class="dropdown-menu-clickable-item more-item--bleh--show-hidden-shout">
-                            Show shout contents
-                        </button>
-                    `);
-                    shout_actions.appendChild(shout_show_button);
-                } else {
-                    patch_avatar(shout_avatar, shout_name);
-                }
+                // append button
+                let shout_show_button = document.createElement('li');
+                shout_show_button.innerHTML = (`
+                    <button onclick="_show_hidden_shout('${shout_id}')" class="dropdown-menu-clickable-item more-item--bleh--show-hidden-shout">
+                        Show shout contents
+                    </button>
+                `);
+                shout_actions.appendChild(shout_show_button);
+            } else {
+                patch_avatar(shout_avatar, shout_name);
             }
-            } catch(e) {}
         });
     }
 
@@ -2854,44 +2853,44 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
     // patch avatar
     function patch_avatar(element, name) {
-        if (!element.hasAttribute('data-bleh')) {
-            element.setAttribute('data-bleh', 'true');
+        if (element.hasAttribute('data-bleh'))
+            return;
+        element.setAttribute('data-bleh', 'true');
 
-            if (profile_badges.hasOwnProperty(name)) {
-                // remove pre-existing badge
-                let pre_existing_badge = element.querySelector('.avatar-status-dot');
-                if (pre_existing_badge !== null)
-                    element.removeChild(pre_existing_badge);
+        if (profile_badges.hasOwnProperty(name)) {
+            // remove pre-existing badge
+            let pre_existing_badge = element.querySelector('.avatar-status-dot');
+            if (pre_existing_badge !== null)
+                element.removeChild(pre_existing_badge);
 
-                element.setAttribute('title','');
+            element.setAttribute('title','');
 
-                let this_badge = profile_badges[name];
-                if (!Array.isArray(profile_badges[name])) {
-                    // default
-                    console.info('bleh - user has 1 badge', profile_badges[name]);
-                } else {
-                    // multiple
-                    console.info('bleh - user has multiple badges', profile_badges[name]);
-                    let badges_length = Object.keys(profile_badges[name]).length - 1;
-                    this_badge = profile_badges[name][badges_length];
-                    console.info('bleh - using badge', badges_length, profile_badges[name][badges_length], 'as primary badge');
-                }
-
-                // make new badge
-                let badge = document.createElement('span');
-                badge.classList.add('avatar-status-dot',`user-badge--${this_badge.type}`,`user-badge--user-${name}`);
-                element.appendChild(badge);
-
-                tippy(badge, {
-                    content: `${name}, ${this_badge.name}`
-                });
+            let this_badge = profile_badges[name];
+            if (!Array.isArray(profile_badges[name])) {
+                // default
+                console.info('bleh - user has 1 badge', profile_badges[name]);
             } else {
-                let pre_existing_badge = element.querySelector('.avatar-status-dot');
-                tippy(pre_existing_badge, {
-                    content: `${name}, ${element.getAttribute('title')}`
-                });
-                element.setAttribute('title','');
+                // multiple
+                console.info('bleh - user has multiple badges', profile_badges[name]);
+                let badges_length = Object.keys(profile_badges[name]).length - 1;
+                this_badge = profile_badges[name][badges_length];
+                console.info('bleh - using badge', badges_length, profile_badges[name][badges_length], 'as primary badge');
             }
+
+            // make new badge
+            let badge = document.createElement('span');
+            badge.classList.add('avatar-status-dot',`user-badge--${this_badge.type}`,`user-badge--user-${name}`);
+            element.appendChild(badge);
+
+            tippy(badge, {
+                content: `${name}, ${this_badge.name}`
+            });
+        } else {
+            let pre_existing_badge = element.querySelector('.avatar-status-dot');
+            tippy(pre_existing_badge, {
+                content: `${name}, ${element.getAttribute('title')}`
+            });
+            element.setAttribute('title','');
         }
     }
 
@@ -6425,10 +6424,14 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                                 <h3>Scrobbles</h3>
                                 <p>${stats[0].textContent}</p>
                             </div>
+                            ${(!subpage_type.startsWith('user_library_music_artist'))
+                            ? (`
                             <div class="per-day-side">
                                 <h3>Daily</h3>
                                 <p>${stats[1].textContent}</p>
                             </div>
+                            `)
+                            : ''}
                         </div>
                         <div class="scrobble-bar">
                             ${scrobble_insight_bar.outerHTML}
@@ -6458,10 +6461,14 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                                 <h3>Scrobbles</h3>
                                 <p>${stats[0].textContent}</p>
                             </div>
+                            ${(!subpage_type.startsWith('user_library_music_artist'))
+                            ? (`
                             <div class="per-day-side">
                                 <h3>Daily</h3>
                                 <p>${stats[1].textContent}</p>
                             </div>
+                            `)
+                            : ''}
                         </div>
                         <div class="scrobble-insight-canvas-container">
                             <canvas class="scrobble-insight-canvas" id="scrobble-insight-canvas"></canvas>
@@ -6547,6 +6554,94 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                             }
                         }
                     });
+
+
+                    // artist albums
+                    if (subpage_type == 'user_library_music_artist_albums') {
+                        let more_scrobble_insight_sidebar = document.createElement('section');
+                        more_scrobble_insight_sidebar.classList.add('more-scrobble-insight-sidebar');
+                        more_scrobble_insight_sidebar.innerHTML = (`
+                            <div class="stats top-stats">
+                                <div class="top-album-side">
+                                    <h3>Top Album</h3>
+                                    <p>In Utero</p>
+                                </div>
+                                <div class="top-album-side">
+                                    <h3>Scrobbles</h3>
+                                    <p>53,928</p>
+                                </div>
+                            </div>
+                            <div class="scrobble-insight-canvas-container">
+                                <canvas class="more-scrobble-insight-canvas" id="more-scrobble-insight-canvas"></canvas>
+                            </div>
+                        `);
+
+                        scrobble_insight_sidebar.after(more_scrobble_insight_sidebar);
+
+                        let album_container = document.getElementById('library-sort-section');
+                        let more_scrobble_labels = [];
+                        let more_scrobble_statistics = [];
+                        album_container.querySelectorAll('.chartlist-row').forEach((album) => {
+                            console.info(album);
+                            // todo: this returns a placeholder chartlist, this requires loading
+                            // graphs dynamically, something to look into
+                            // ^ will also fix the issue of a statistics changing dynamically without
+                            // a page reload causing a de-sync
+
+                            //more_scrobble_labels.push(album.querySelector('.chartlist-name a').textContent);
+                            //more_scrobble_statistics.push(album.querySelector('.chartlist-count-bar-value').textContent);
+                        });
+
+                        let more_scrobble_chart = new Chart(document.getElementById('more-scrobble-insight-canvas').getContext('2d'), {
+                            type: 'doughnut',
+                            data: {
+                                datasets: [{
+                                    data: more_scrobble_statistics,
+                                    backgroundColor: [
+                                        `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '360')})`,
+                                        `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '340')})`,
+                                        `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '320')})`,
+                                        `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '300')})`,
+                                        `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '280')})`,
+                                        `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '270')})`,
+                                        `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '255')})`,
+                                        `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '235')})`,
+                                        `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '220')})`,
+                                        `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '208')})`,
+                                        `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '200')})`,
+                                        `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '180')})`,
+                                        `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '160')})`,
+                                        `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '140')})`,
+                                        `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '120')})`,
+                                        `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '100')})`,
+                                        `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '80')})`,
+                                        `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '60')})`,
+                                        `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '40')})`,
+                                        `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '20')})`
+                                    ],
+                                    borderWidth: 1,
+                                    borderColor: bg_col
+                                }],
+                                labels: more_scrobble_labels
+                            },
+                            options: {
+                                maintainAspectRatio: false,
+                                plugins: {
+                                    legend: {
+                                        display: false
+                                    },
+                                    tooltip: {
+                                        backgroundColor: root_bg_col,
+                                        titleColor: text_primary_col,
+                                        bodyColor: text_primary_col,
+                                        padding: 7,
+                                        cornerRadius: 10,
+                                        caretSize: 0
+                                    }
+                                }
+                            }
+                        });
+                    }
                 }
             }
         }
