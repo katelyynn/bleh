@@ -1266,6 +1266,8 @@ let bleh_url = 'https://www.last.fm/bleh';
 let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
 
+let scrobble_statistics_raw;
+
 (function() {
     'use strict';
 
@@ -1645,6 +1647,11 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
         // save to settings
         localStorage.setItem('bleh', JSON.stringify(settings));
+
+        let scrobble_table = document.getElementById('scrobble-chart-content');
+        if (scrobble_table != null)
+            scrobble_table.removeAttribute('data-bleh--library');
+        load_bleh_user_library();
     }
 
     unsafeWindow.change_theme_from_settings = function(theme) {
@@ -6630,10 +6637,12 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             return;
         scrobble_table.setAttribute('data-bleh--library', 'true');
 
-        let scrobble_statistics_raw = scrobble_table.querySelector('table');
-        deliver_notif('harvested scrobble statistics');
-        console.info('harvested scrobble statistics', scrobble_statistics_raw);
-        scrobble_table.innerHTML = '';
+        if (scrobble_table.querySelector('table') != null) {
+            scrobble_statistics_raw = scrobble_table.querySelector('table');
+            deliver_notif('harvested scrobble statistics');
+            console.info('harvested scrobble statistics', scrobble_statistics_raw);
+            scrobble_table.innerHTML = '';
+        }
 
         let scrobble_statistics = [];
         let scrobble_labels = [];
