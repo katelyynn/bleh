@@ -6268,381 +6268,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 navlist.after(library_control_header);
 
 
-                // scrobble stats
-                if (!settings.feature_flags.use_new_library)
-                    return;
-
-                let scrobble_table = document.getElementById('scrobble-chart-content');
-                let scrobble_statistics_raw = scrobble_table.querySelector('table');
-                deliver_notif('harvested scrobble statistics');
-                console.info('harvested scrobble statistics', scrobble_statistics_raw);
-                scrobble_table.innerHTML = '';
-
-                let scrobble_statistics = [];
-                let scrobble_labels = [];
-
-                let highest_date = {
-                    label: '',
-                    stat: 0
-                };
-
-                scrobble_statistics_raw.querySelectorAll('tbody tr').forEach((tr) => {
-                    let label = tr.querySelector('.js-period a').textContent.replaceAll('\n', '').trim();
-                    let stat = parseInt(tr.querySelector('.js-scrobbles').textContent);
-
-                    if (stat > highest_date.stat) {
-                        highest_date = {
-                            label: label,
-                            stat: stat
-                        }
-                    }
-
-                    scrobble_labels.push(label);
-                    scrobble_statistics.push(stat);
-                });
-
-
-                // colours
-                let link_col = `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c')})`;
-                let link_bg_col = `hsla(${getComputedStyle(document.body).getPropertyValue('--h4')}, 20%)`;
-                let text_col = `hsl(${getComputedStyle(document.body).getPropertyValue('--c3')})`;
-                let text_primary_col = `hsl(${getComputedStyle(document.body).getPropertyValue('--c2')})`;
-                let bg_col = `hsl(${getComputedStyle(document.body).getPropertyValue('--b5')})`;
-                let root_bg_col = `hsl(${getComputedStyle(document.body).getPropertyValue('--b6')})`;
-                let hue = getComputedStyle(document.body).getPropertyValue('--hue');
-
-
-                // sidebar
-                let date_picker = document.body.querySelector('.library-date-picker');
-
-                let scrobble_sidebar = document.createElement('section');
-                scrobble_sidebar.classList.add('scrobble-sidebar');
-                scrobble_sidebar.innerHTML = (`
-                    <div class="top-row">
-                        <h3>Viewing</h3>
-                        ${date_picker.outerHTML}
-                    </div>
-                `);
-
-                let scrobble_canvas_container = document.createElement('div');
-                scrobble_canvas_container.classList.add('scrobble-canvas-container');
-
-                let scrobble_canvas = document.createElement('canvas');
-                scrobble_canvas.classList.add('scrobble-canvas');
-
-                console.info('stats', scrobble_statistics, 'labels', scrobble_labels);
-
-                Chart.defaults.color = text_col;
-                Chart.defaults.font.family = 'Ubuntu Sans';
-                let scrobble_chart = new Chart(scrobble_canvas.getContext('2d'), {
-                    type: 'line',
-                    data: {
-                        labels: scrobble_labels,
-                        datasets: [{
-                            data: scrobble_statistics,
-                            borderWidth: 2.5,
-                            backgroundColor: link_bg_col,
-                            borderColor: link_col,
-                            fill: true,
-                            pointRadius: 0,
-                            pointHitRadius: 20,
-                            tension: 0.1
-                        }]
-                    },
-                    options: {
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: {
-                                display: false
-                            },
-                            tooltip: {
-                                backgroundColor: root_bg_col,
-                                titleColor: text_primary_col,
-                                bodyColor: text_primary_col,
-                                padding: 7,
-                                cornerRadius: 10,
-                                caretSize: 0
-                            }
-                        }
-                    }
-                });
-
-                scrobble_canvas_container.appendChild(scrobble_canvas);
-                scrobble_sidebar.appendChild(scrobble_canvas_container);
-                if (settings.feature_flags.library_graph_on_left)
-                    document.querySelector('.library-controls-header').after(scrobble_sidebar);
-                else
-                    profile_header_panel.after(scrobble_sidebar);
-
-                // top chart
-                let stats = document.body.querySelectorAll('.metadata-display');
-
-
-                if (settings.feature_flags.use_library_scrobble_bar) {
-                    // display all scrobbles onto a bar, with the max being the
-                    // highest charting day
-                    let scrobble_insight_bar = document.createElement('div');
-                    scrobble_insight_bar.classList.add('bar', 'scrobble-insight-bar');
-
-                    // to display this, we need to loop through the statistics
-                    let combined_stats = [];
-                    scrobble_statistics.forEach((stat, index) => {
-                        combined_stats.push({
-                            label: scrobble_labels[index],
-                            stat: stat
-                        })
-                    });
-
-                    let sorted_stats = combined_stats.sort((a, b) => a.stat - b.stat);
-                    let last_used_stat = {
-                        label: '',
-                        stat: 0
-                    }
-                    sorted_stats.forEach((stat, index) => {
-                        console.info(stat, last_used_stat);
-                        if (stat.stat - last_used_stat.stat > 25 || last_used_stat.stat == 0) {
-                            deliver_notif(index);
-                            last_used_stat = stat;
-
-                            let fill = document.createElement('div');
-                            fill.classList.add('fill');
-                            fill.style.setProperty('--index', (5 + index + 1));
-                            //fill.style.setProperty('z-index', (5 + index + 1));
-                            fill.style.setProperty('width', `${(stat.stat / highest_date.stat) * 100}%`);
-                            fill.style.setProperty('--stat', stat.stat);
-
-                            scrobble_insight_bar.appendChild(fill);
-                        }
-                    });
-
-
-                    let scrobble_insight_sidebar = document.createElement('section');
-                    scrobble_insight_sidebar.classList.add('scrobble-insight-sidebar');
-                    scrobble_insight_sidebar.innerHTML = (`
-                        <div class="stats top-stats">
-                            <div class="scrobbles-side">
-                                <h3>Scrobbles</h3>
-                                <p>${stats[0].textContent}</p>
-                            </div>
-                            ${(!subpage_type.startsWith('user_library_music_artist'))
-                            ? (`
-                            <div class="per-day-side">
-                                <h3>Daily</h3>
-                                <p>${stats[1].textContent}</p>
-                            </div>
-                            `)
-                            : ''}
-                        </div>
-                        <div class="scrobble-bar">
-                            ${scrobble_insight_bar.outerHTML}
-                        </div>
-                        <div class="stats bottom-stats">
-                            <div class="scrobbles-side">
-                                <h3>Top Day</h3>
-                                <p>${highest_date.label}</p>
-                            </div>
-                            <div class="per-day-side">
-                                <h3>Scrobbles</h3>
-                                <p>${highest_date.stat}</p>
-                            </div>
-                        </div>
-                    `);
-
-                    if (settings.feature_flags.library_graph_on_left)
-                        profile_header_panel.after(scrobble_insight_sidebar);
-                    else
-                        scrobble_sidebar.after(scrobble_insight_sidebar);
-                } else {
-                    let scrobble_insight_sidebar = document.createElement('section');
-                    scrobble_insight_sidebar.classList.add('scrobble-insight-sidebar');
-                    scrobble_insight_sidebar.innerHTML = (`
-                        <div class="stats top-stats">
-                            <div class="scrobbles-side">
-                                <h3>Scrobbles</h3>
-                                <p>${stats[0].textContent}</p>
-                            </div>
-                            ${(!subpage_type.startsWith('user_library_music_artist'))
-                            ? (`
-                            <div class="per-day-side">
-                                <h3>Daily</h3>
-                                <p>${stats[1].textContent}</p>
-                            </div>
-                            `)
-                            : ''}
-                        </div>
-                        <div class="scrobble-insight-canvas-container">
-                            <canvas class="scrobble-insight-canvas" id="scrobble-insight-canvas"></canvas>
-                        </div>
-                        <div class="stats bottom-stats">
-                            <div class="highest-point-scrobbles-side">
-                                <h3>Peak Scrobbles</h3>
-                                <p>${highest_date.stat}</p>
-                            </div>
-                            <div class="highest-point-side">
-                                <h3>Achieved</h3>
-                                <p>${highest_date.label}</p>
-                            </div>
-                        </div>
-                    `);
-
-                    if (settings.feature_flags.library_graph_on_left)
-                        profile_header_panel.after(scrobble_insight_sidebar);
-                    else
-                        scrobble_sidebar.after(scrobble_insight_sidebar);
-
-                    /*let combined_stats = [];
-                    scrobble_statistics.forEach((stat, index) => {
-                        combined_stats.push({
-                            label: scrobble_labels[index],
-                            stat: stat
-                        })
-                    });
-                    let sorted_stats_combined = combined_stats.sort((a, b) => a.stat - b.stat);
-                    let sorted_labels = [];
-                    let sorted_stats = [];
-                    sorted_stats_combined.forEach((stat) => {
-                        sorted_labels.push(stat.label);
-                        sorted_stats.push(stat.stat);
-                    })*/
-
-                    let scrobble_chart = new Chart(document.getElementById('scrobble-insight-canvas').getContext('2d'), {
-                        type: 'doughnut',
-                        data: {
-                            datasets: [{
-                                data: scrobble_statistics,
-                                backgroundColor: [
-                                    `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '360')})`,
-                                    `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '340')})`,
-                                    `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '320')})`,
-                                    `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '300')})`,
-                                    `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '280')})`,
-                                    `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '270')})`,
-                                    `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '255')})`,
-                                    `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '235')})`,
-                                    `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '220')})`,
-                                    `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '208')})`,
-                                    `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '200')})`,
-                                    `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '180')})`,
-                                    `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '160')})`,
-                                    `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '140')})`,
-                                    `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '120')})`,
-                                    `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '100')})`,
-                                    `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '80')})`,
-                                    `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '60')})`,
-                                    `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '40')})`,
-                                    `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '20')})`
-                                ],
-                                borderWidth: 1,
-                                borderColor: bg_col
-                            }],
-                            labels: scrobble_labels
-                        },
-                        options: {
-                            maintainAspectRatio: false,
-                            plugins: {
-                                legend: {
-                                    display: false
-                                },
-                                tooltip: {
-                                    backgroundColor: root_bg_col,
-                                    titleColor: text_primary_col,
-                                    bodyColor: text_primary_col,
-                                    padding: 7,
-                                    cornerRadius: 10,
-                                    caretSize: 0
-                                }
-                            }
-                        }
-                    });
-
-
-                    // artist albums
-                    if (subpage_type == 'user_library_music_artist_albums') {
-                        let more_scrobble_insight_sidebar = document.createElement('section');
-                        more_scrobble_insight_sidebar.classList.add('more-scrobble-insight-sidebar');
-                        more_scrobble_insight_sidebar.innerHTML = (`
-                            <div class="stats top-stats">
-                                <div class="top-album-side">
-                                    <h3>Top Album</h3>
-                                    <p>In Utero</p>
-                                </div>
-                                <div class="top-album-side">
-                                    <h3>Scrobbles</h3>
-                                    <p>53,928</p>
-                                </div>
-                            </div>
-                            <div class="scrobble-insight-canvas-container">
-                                <canvas class="more-scrobble-insight-canvas" id="more-scrobble-insight-canvas"></canvas>
-                            </div>
-                        `);
-
-                        scrobble_insight_sidebar.after(more_scrobble_insight_sidebar);
-
-                        let album_container = document.getElementById('library-sort-section');
-                        let more_scrobble_labels = [];
-                        let more_scrobble_statistics = [];
-                        album_container.querySelectorAll('.chartlist-row').forEach((album) => {
-                            console.info(album);
-                            // todo: this returns a placeholder chartlist, this requires loading
-                            // graphs dynamically, something to look into
-                            // ^ will also fix the issue of a statistics changing dynamically without
-                            // a page reload causing a de-sync
-
-                            //more_scrobble_labels.push(album.querySelector('.chartlist-name a').textContent);
-                            //more_scrobble_statistics.push(album.querySelector('.chartlist-count-bar-value').textContent);
-                        });
-
-                        let more_scrobble_chart = new Chart(document.getElementById('more-scrobble-insight-canvas').getContext('2d'), {
-                            type: 'doughnut',
-                            data: {
-                                datasets: [{
-                                    data: more_scrobble_statistics,
-                                    backgroundColor: [
-                                        `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '360')})`,
-                                        `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '340')})`,
-                                        `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '320')})`,
-                                        `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '300')})`,
-                                        `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '280')})`,
-                                        `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '270')})`,
-                                        `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '255')})`,
-                                        `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '235')})`,
-                                        `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '220')})`,
-                                        `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '208')})`,
-                                        `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '200')})`,
-                                        `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '180')})`,
-                                        `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '160')})`,
-                                        `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '140')})`,
-                                        `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '120')})`,
-                                        `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '100')})`,
-                                        `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '80')})`,
-                                        `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '60')})`,
-                                        `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '40')})`,
-                                        `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '20')})`
-                                    ],
-                                    borderWidth: 1,
-                                    borderColor: bg_col
-                                }],
-                                labels: more_scrobble_labels
-                            },
-                            options: {
-                                maintainAspectRatio: false,
-                                plugins: {
-                                    legend: {
-                                        display: false
-                                    },
-                                    tooltip: {
-                                        backgroundColor: root_bg_col,
-                                        titleColor: text_primary_col,
-                                        bodyColor: text_primary_col,
-                                        padding: 7,
-                                        cornerRadius: 10,
-                                        caretSize: 0
-                                    }
-                                }
-                            }
-                        });
-                    }
-                }
+                load_bleh_user_library(profile_header, is_subpage, subpage_type, settings, profile_header_panel);
             }
         }
 
@@ -6950,5 +6576,416 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
             document.getElementById('recent-tracks-section').appendChild(refresh_btn);
         })
+    }
+
+
+    function load_bleh_user_library(
+        profile_header = undefined,
+        is_subpage = undefined,
+        subpage_type = undefined,
+        settings = undefined,
+        profile_header_panel = undefined
+    ) {
+        if (profile_header == undefined)
+            profile_header = document.body.querySelector('.header--user');
+
+        // we know for sure not to continue
+        if (profile_header == null)
+            return;
+
+        if (settings == undefined)
+            settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
+
+        if (is_subpage == undefined)
+            is_subpage = !profile_header.classList.contains('header--overview');
+
+        if (subpage_type == undefined) {
+            subpage_type = document.body.classList[1].replace('namespace--', '');
+
+            // as this value wasnt provided, we know this was run after
+            // initial bleh load, hence the subpage check
+            if (!subpage_type.startsWith('user_library'))
+                return;
+        }
+
+
+        // load
+
+
+        // scrobble stats
+        if (!settings.feature_flags.use_new_library)
+            return;
+
+        let scrobble_table = document.getElementById('scrobble-chart-content');
+        let scrobble_statistics_raw = scrobble_table.querySelector('table');
+        deliver_notif('harvested scrobble statistics');
+        console.info('harvested scrobble statistics', scrobble_statistics_raw);
+        scrobble_table.innerHTML = '';
+
+        let scrobble_statistics = [];
+        let scrobble_labels = [];
+
+        let highest_date = {
+            label: '',
+            stat: 0
+        };
+
+        scrobble_statistics_raw.querySelectorAll('tbody tr').forEach((tr) => {
+            let label = tr.querySelector('.js-period a').textContent.replaceAll('\n', '').trim();
+            let stat = parseInt(tr.querySelector('.js-scrobbles').textContent);
+
+            if (stat > highest_date.stat) {
+                highest_date = {
+                    label: label,
+                    stat: stat
+                }
+            }
+
+            scrobble_labels.push(label);
+            scrobble_statistics.push(stat);
+        });
+
+
+        // colours
+        let link_col = `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c')})`;
+        let link_bg_col = `hsla(${getComputedStyle(document.body).getPropertyValue('--h4')}, 20%)`;
+        let text_col = `hsl(${getComputedStyle(document.body).getPropertyValue('--c3')})`;
+        let text_primary_col = `hsl(${getComputedStyle(document.body).getPropertyValue('--c2')})`;
+        let bg_col = `hsl(${getComputedStyle(document.body).getPropertyValue('--b5')})`;
+        let root_bg_col = `hsl(${getComputedStyle(document.body).getPropertyValue('--b6')})`;
+        let hue = getComputedStyle(document.body).getPropertyValue('--hue');
+
+
+        // sidebar
+        let date_picker = document.body.querySelector('.library-date-picker');
+
+        let scrobble_sidebar = document.createElement('section');
+        scrobble_sidebar.classList.add('scrobble-sidebar');
+        scrobble_sidebar.innerHTML = (`
+            <div class="top-row">
+                <h3>Viewing</h3>
+                ${date_picker.outerHTML}
+            </div>
+        `);
+
+        let scrobble_canvas_container = document.createElement('div');
+        scrobble_canvas_container.classList.add('scrobble-canvas-container');
+
+        let scrobble_canvas = document.createElement('canvas');
+        scrobble_canvas.classList.add('scrobble-canvas');
+
+        console.info('stats', scrobble_statistics, 'labels', scrobble_labels);
+
+        Chart.defaults.color = text_col;
+        Chart.defaults.font.family = 'Ubuntu Sans';
+        let scrobble_chart = new Chart(scrobble_canvas.getContext('2d'), {
+            type: 'line',
+            data: {
+                labels: scrobble_labels,
+                datasets: [{
+                    data: scrobble_statistics,
+                    borderWidth: 2.5,
+                    backgroundColor: link_bg_col,
+                    borderColor: link_col,
+                    fill: true,
+                    pointRadius: 0,
+                    pointHitRadius: 20,
+                    tension: 0.1
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        backgroundColor: root_bg_col,
+                        titleColor: text_primary_col,
+                        bodyColor: text_primary_col,
+                        padding: 7,
+                        cornerRadius: 10,
+                        caretSize: 0
+                    }
+                }
+            }
+        });
+
+        scrobble_canvas_container.appendChild(scrobble_canvas);
+        scrobble_sidebar.appendChild(scrobble_canvas_container);
+        if (settings.feature_flags.library_graph_on_left)
+            document.querySelector('.library-controls-header').after(scrobble_sidebar);
+        else
+            profile_header_panel.after(scrobble_sidebar);
+
+        // top chart
+        let stats = document.body.querySelectorAll('.metadata-display');
+
+
+        if (settings.feature_flags.use_library_scrobble_bar) {
+            // display all scrobbles onto a bar, with the max being the
+            // highest charting day
+            let scrobble_insight_bar = document.createElement('div');
+            scrobble_insight_bar.classList.add('bar', 'scrobble-insight-bar');
+
+            // to display this, we need to loop through the statistics
+            let combined_stats = [];
+            scrobble_statistics.forEach((stat, index) => {
+                combined_stats.push({
+                    label: scrobble_labels[index],
+                    stat: stat
+                })
+            });
+
+            let sorted_stats = combined_stats.sort((a, b) => a.stat - b.stat);
+            let last_used_stat = {
+                label: '',
+                stat: 0
+            }
+            sorted_stats.forEach((stat, index) => {
+                console.info(stat, last_used_stat);
+                if (stat.stat - last_used_stat.stat > 25 || last_used_stat.stat == 0) {
+                    deliver_notif(index);
+                    last_used_stat = stat;
+
+                    let fill = document.createElement('div');
+                    fill.classList.add('fill');
+                    fill.style.setProperty('--index', (5 + index + 1));
+                    //fill.style.setProperty('z-index', (5 + index + 1));
+                    fill.style.setProperty('width', `${(stat.stat / highest_date.stat) * 100}%`);
+                    fill.style.setProperty('--stat', stat.stat);
+
+                    scrobble_insight_bar.appendChild(fill);
+                }
+            });
+
+
+            let scrobble_insight_sidebar = document.createElement('section');
+            scrobble_insight_sidebar.classList.add('scrobble-insight-sidebar');
+            scrobble_insight_sidebar.innerHTML = (`
+                <div class="stats top-stats">
+                    <div class="scrobbles-side">
+                        <h3>Scrobbles</h3>
+                        <p>${stats[0].textContent}</p>
+                    </div>
+                    ${(!subpage_type.startsWith('user_library_music_artist'))
+                    ? (`
+                    <div class="per-day-side">
+                        <h3>Daily</h3>
+                        <p>${stats[1].textContent}</p>
+                    </div>
+                    `)
+                    : ''}
+                </div>
+                <div class="scrobble-bar">
+                    ${scrobble_insight_bar.outerHTML}
+                </div>
+                <div class="stats bottom-stats">
+                    <div class="scrobbles-side">
+                        <h3>Top Day</h3>
+                        <p>${highest_date.label}</p>
+                    </div>
+                    <div class="per-day-side">
+                        <h3>Scrobbles</h3>
+                        <p>${highest_date.stat}</p>
+                    </div>
+                </div>
+            `);
+
+            if (settings.feature_flags.library_graph_on_left)
+                profile_header_panel.after(scrobble_insight_sidebar);
+            else
+                scrobble_sidebar.after(scrobble_insight_sidebar);
+        } else {
+            let scrobble_insight_sidebar = document.createElement('section');
+            scrobble_insight_sidebar.classList.add('scrobble-insight-sidebar');
+            scrobble_insight_sidebar.innerHTML = (`
+                <div class="stats top-stats">
+                    <div class="scrobbles-side">
+                        <h3>Scrobbles</h3>
+                        <p>${stats[0].textContent}</p>
+                    </div>
+                    ${(!subpage_type.startsWith('user_library_music_artist'))
+                    ? (`
+                    <div class="per-day-side">
+                        <h3>Daily</h3>
+                        <p>${stats[1].textContent}</p>
+                    </div>
+                    `)
+                    : ''}
+                </div>
+                <div class="scrobble-insight-canvas-container">
+                    <canvas class="scrobble-insight-canvas" id="scrobble-insight-canvas"></canvas>
+                </div>
+                <div class="stats bottom-stats">
+                    <div class="highest-point-scrobbles-side">
+                        <h3>Peak Scrobbles</h3>
+                        <p>${highest_date.stat}</p>
+                    </div>
+                    <div class="highest-point-side">
+                        <h3>Achieved</h3>
+                        <p>${highest_date.label}</p>
+                    </div>
+                </div>
+            `);
+
+            if (settings.feature_flags.library_graph_on_left)
+                profile_header_panel.after(scrobble_insight_sidebar);
+            else
+                scrobble_sidebar.after(scrobble_insight_sidebar);
+
+            /*let combined_stats = [];
+            scrobble_statistics.forEach((stat, index) => {
+                combined_stats.push({
+                    label: scrobble_labels[index],
+                    stat: stat
+                })
+            });
+            let sorted_stats_combined = combined_stats.sort((a, b) => a.stat - b.stat);
+            let sorted_labels = [];
+            let sorted_stats = [];
+            sorted_stats_combined.forEach((stat) => {
+                sorted_labels.push(stat.label);
+                sorted_stats.push(stat.stat);
+            })*/
+
+            let scrobble_chart = new Chart(document.getElementById('scrobble-insight-canvas').getContext('2d'), {
+                type: 'doughnut',
+                data: {
+                    datasets: [{
+                        data: scrobble_statistics,
+                        backgroundColor: [
+                            `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '360')})`,
+                            `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '340')})`,
+                            `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '320')})`,
+                            `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '300')})`,
+                            `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '280')})`,
+                            `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '270')})`,
+                            `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '255')})`,
+                            `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '235')})`,
+                            `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '220')})`,
+                            `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '208')})`,
+                            `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '200')})`,
+                            `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '180')})`,
+                            `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '160')})`,
+                            `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '140')})`,
+                            `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '120')})`,
+                            `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '100')})`,
+                            `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '80')})`,
+                            `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '60')})`,
+                            `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '40')})`,
+                            `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '20')})`
+                        ],
+                        borderWidth: 1,
+                        borderColor: bg_col
+                    }],
+                    labels: scrobble_labels
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            backgroundColor: root_bg_col,
+                            titleColor: text_primary_col,
+                            bodyColor: text_primary_col,
+                            padding: 7,
+                            cornerRadius: 10,
+                            caretSize: 0
+                        }
+                    }
+                }
+            });
+
+
+            // artist albums
+            if (subpage_type == 'user_library_music_artist_albums') {
+                let more_scrobble_insight_sidebar = document.createElement('section');
+                more_scrobble_insight_sidebar.classList.add('more-scrobble-insight-sidebar');
+                more_scrobble_insight_sidebar.innerHTML = (`
+                    <div class="stats top-stats">
+                        <div class="top-album-side">
+                            <h3>Top Album</h3>
+                            <p>In Utero</p>
+                        </div>
+                        <div class="top-album-side">
+                            <h3>Scrobbles</h3>
+                            <p>53,928</p>
+                        </div>
+                    </div>
+                    <div class="scrobble-insight-canvas-container">
+                        <canvas class="more-scrobble-insight-canvas" id="more-scrobble-insight-canvas"></canvas>
+                    </div>
+                `);
+
+                scrobble_insight_sidebar.after(more_scrobble_insight_sidebar);
+
+                let album_container = document.getElementById('library-sort-section');
+                let more_scrobble_labels = [];
+                let more_scrobble_statistics = [];
+                album_container.querySelectorAll('.chartlist-row').forEach((album) => {
+                    console.info(album);
+                    // todo: this returns a placeholder chartlist, this requires loading
+                    // graphs dynamically, something to look into
+                    // ^ will also fix the issue of a statistics changing dynamically without
+                    // a page reload causing a de-sync
+
+                    //more_scrobble_labels.push(album.querySelector('.chartlist-name a').textContent);
+                    //more_scrobble_statistics.push(album.querySelector('.chartlist-count-bar-value').textContent);
+                });
+
+                let more_scrobble_chart = new Chart(document.getElementById('more-scrobble-insight-canvas').getContext('2d'), {
+                    type: 'doughnut',
+                    data: {
+                        datasets: [{
+                            data: more_scrobble_statistics,
+                            backgroundColor: [
+                                `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '360')})`,
+                                `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '340')})`,
+                                `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '320')})`,
+                                `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '300')})`,
+                                `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '280')})`,
+                                `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '270')})`,
+                                `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '255')})`,
+                                `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '235')})`,
+                                `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '220')})`,
+                                `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '208')})`,
+                                `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '200')})`,
+                                `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '180')})`,
+                                `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '160')})`,
+                                `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '140')})`,
+                                `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '120')})`,
+                                `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '100')})`,
+                                `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '80')})`,
+                                `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '60')})`,
+                                `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '40')})`,
+                                `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c').replace(hue, '20')})`
+                            ],
+                            borderWidth: 1,
+                            borderColor: bg_col
+                        }],
+                        labels: more_scrobble_labels
+                    },
+                    options: {
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                backgroundColor: root_bg_col,
+                                titleColor: text_primary_col,
+                                bodyColor: text_primary_col,
+                                padding: 7,
+                                cornerRadius: 10,
+                                caretSize: 0
+                            }
+                        }
+                    }
+                });
+            }
+        }
     }
 })();
