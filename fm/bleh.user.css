@@ -5902,7 +5902,7 @@ very, very, very dated - who looks up a song on ebay? */
         inset: 0 !important;
         width: unset !important;
         height: 110px !important;
-        background-size: cover;
+        background-size: cover !important;
         --mask: linear-gradient(0deg, transparent 0%, rgb(0, 0, 0) 100%);
         mask-image: var(--mask);
         -webkit-mask-image: var(--mask);
