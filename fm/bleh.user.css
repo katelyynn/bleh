@@ -13821,7 +13821,7 @@ button.bleh--gallery-bookmark-image-btn {
 .bleh--panel.welcome {
     position: relative;
     overflow: hidden;
-    background: linear-gradient(97deg, hsl(var(--h4)) 0%, hsl(var(--h3)) 41%, hsl(var(--h2)) 100%);
+    background: linear-gradient(97deg, hsla(var(--h3), 90%) 0%, hsla(var(--h2), 90%) 100%);
     display: flex;
     flex-direction: column;
     gap: var(--card-gap);
@@ -13841,7 +13841,9 @@ button.bleh--gallery-bookmark-image-btn {
         line-height: 90px;
         font-weight: 700;
         color: transparent;
-        -webkit-text-stroke: 2px hsla(var(--h4), 20%);
+        -webkit-text-stroke: 2px hsla(var(--b6), 40%);
+        user-select: none;
+        cursor: default;
     }
 }
 
@@ -14075,8 +14077,27 @@ button.bleh--gallery-bookmark-image-btn {
     }
 
     .scrobble-insight-canvas-container {
+        position: relative;
         height: 300px;
         z-index: 3;
+
+        img {
+            position: absolute;
+            --w: 70px;
+            width: var(--w);
+            height: var(--w);
+            object-fit: cover;
+            border-radius: var(--item-small-radius);
+            top: 50%;
+            left: 50%;
+            margin-left: calc(-1 * (var(--w) / 2));
+            margin-top: calc(-1 * (var(--w) / 2));
+        }
+
+        canvas {
+            position: relative;
+            z-index: 4;
+        }
     }
 
     .stats {
@@ -14147,6 +14168,7 @@ button.bleh--gallery-bookmark-image-btn {
 }
 
 
+[data-ff--use_new_library="true"] .row:has(> .date-range-header),
 .metadata-list {
     display: none !important;
 }
