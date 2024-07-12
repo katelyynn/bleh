@@ -3880,57 +3880,33 @@ let scrobble_statistics_raw;
                 </div>
                 `);
         } else if (page == 'performance') {
-            if (version.sku == 'main') {
-                return (`
-                    <div class="bleh--panel">
-                        <h3>${trans[lang].settings.performance.name}</h3>
-                        <p>${trans[lang].settings.performance.bio}</p>
-                        <div class="toggle-container">
-                            <div class="heading">
-                                <h5>Refresh theme</h5>
-                                <p>Force download the latest version of the stylesheet</p>
-                            </div>
-                            <div class="toggle-wrap">
-                                <button class="bleh--btn primary" onclick="_force_refresh_theme()">Refresh</button>
-                            </div>
+            return (`
+                <div class="bleh--panel">
+                    <h3>${trans[lang].settings.performance.name}</h3>
+                    <p>${trans[lang].settings.performance.bio}</p>
+                    <div class="toggle-container">
+                        <div class="heading">
+                            <h5>Refresh theme</h5>
+                            <p>Force download the latest version of the stylesheet</p>
                         </div>
-                        <div class="toggle-container" id="container-dev">
-                            <button class="btn reset" onclick="_reset_item('dev')">${trans[lang].settings.reset}</button>
-                            <div class="heading">
-                                <h5>${trans[lang].settings.performance.dev.name}</h5>
-                                <p>${trans[lang].settings.performance.dev.bio}</p>
-                            </div>
-                            <div class="toggle-wrap">
-                                <button class="toggle" id="toggle-dev" onclick="_update_item('dev')" aria-checked="false">
-                                    <div class="dot"></div>
-                                </button>
-                            </div>
+                        <div class="toggle-wrap">
+                            <button class="bleh--btn primary" onclick="_force_refresh_theme()">Refresh</button>
                         </div>
                     </div>
-                `);
-            } else {
-                return (`
-                    <div class="bleh--panel shh">
-                        shhh...<br>let's not leak<br>our hard work
-                        <div class="screen-row">
-                            <div class="actions">
-                                <a class="btn action">
-                                    <span class="text">
-                                        <h5>build</h5>
-                                        <p>${version.build}</p>
-                                    </span>
-                                </a>
-                                <a class="btn action">
-                                    <span class="text">
-                                        <h5>sku</h5>
-                                        <p>${version.sku}</p>
-                                    </span>
-                                </a>
-                            </div>
+                    <div class="toggle-container" id="container-dev">
+                        <button class="btn reset" onclick="_reset_item('dev')">${trans[lang].settings.reset}</button>
+                        <div class="heading">
+                            <h5>${trans[lang].settings.performance.dev.name}</h5>
+                            <p>${trans[lang].settings.performance.dev.bio}</p>
+                        </div>
+                        <div class="toggle-wrap">
+                            <button class="toggle" id="toggle-dev" onclick="_update_item('dev')" aria-checked="false">
+                                <div class="dot"></div>
+                            </button>
                         </div>
                     </div>
-                `);
-            }
+                </div>
+            `);
         } else if (page == 'profiles') {
             return (`
                 <div class="bleh--panel">
@@ -3972,6 +3948,18 @@ let scrobble_statistics_raw;
     unsafeWindow._change_settings_page = function(page) {
         if (page == 'sku' && version.sku == 'main') {
             deliver_notif(`secrets are not available for your sku (${version.sku})`)
+            return;
+        }
+
+        if (page == 'performance' && version.sku == 'refresh') {
+            create_window('performance_in_refresh_sku', 'shhh...', (`
+                <div class="alert alert-error">Performance options are not accessible when bleh is under the <code>refresh</code> sku.</div>
+                <div class="modal-footer">
+                    <button class="btn primary" onclick="_kill_window('performance_in_refresh_sku')">
+                        ${trans[lang].settings.continue}
+                    </button>
+                </div>
+            `));
             return;
         }
 
