@@ -5396,15 +5396,15 @@ let scrobble_statistics_raw;
                 tracklist = document.createElement('section');
                 tracklist.innerHTML = (`
                     <h3 class="text-18">Tracklist</h3>
-                    <div class="no-data-message">
-                        <p class="no-data-message">hmm.. we're missing a tracklist</p>
-                        <p class="no-data-message">wait a sec for last.fm to fetch your plays on this album</p>
+                    <div class="loading-data-container">
+                        <p class="loading-data-text">Fetching your plays on this album</p>
                     </div>
-                `)
+                `);
                 navlist.after(tracklist);
 
                 let url_split = window.location.href.split('/');
                 let album_url = `${url_split[(url_split.length - 2)]}/${url_split[(url_split.length - 1)]}`;
+                let album_as_track_url = window.location.href.replace(album_url, `${url_split[(url_split.length - 2)]}/_/${url_split[(url_split.length - 1)]}`);
 
 
                 // we need to fetch the tracklist
@@ -5421,6 +5421,16 @@ let scrobble_statistics_raw;
                         console.error('DOC', doc);
 
                         let inner_tracklist = doc.querySelector('#top-tracks-section [v-else=""] .chartlist');
+                        if (inner_tracklist == null) {
+                            tracklist.innerHTML = (`
+                                <h3 class="text-18">Tracklist</h3>
+                                <div class="loading-data-container">
+                                    <p class="loading-data-text failed">You do not have any plays on this album.</p>
+                                    <a class="btn" href="${album_as_track_url}">Open album title as a track</a>
+                                </div>
+                            `);
+                            return;
+                        }
 
                         tracklist.innerHTML = (`
                             <h3 class="text-18">Tracklist</h3>
