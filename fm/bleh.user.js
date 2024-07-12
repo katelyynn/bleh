@@ -7051,7 +7051,7 @@ let scrobble_statistics_raw;
 
             album_container.querySelectorAll('.chartlist-row').forEach((album) => {
                 let label = album.querySelector('.chartlist-name a').textContent;
-                let stat = parseInt(album.querySelector('.chartlist-count-bar-value').textContent.replaceAll('\n', '').trim());
+                let stat = parseInt(album.querySelector('.chartlist-count-bar-value').textContent.replaceAll('\n', '').replaceAll(',', '').trim());
 
                 if (stat > highest_album.stat) {
                     highest_album = {
@@ -7091,6 +7091,7 @@ let scrobble_statistics_raw;
                     </div>
                 </div>
                 <div class="scrobble-insight-canvas-container">
+                    <img src="${highest_album.img}" alt="Cover for ${highest_album.label}">
                     <canvas class="more-scrobble-insight-canvas" id="more-scrobble-insight-canvas"></canvas>
                 </div>
             `);
