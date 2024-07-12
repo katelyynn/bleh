@@ -88,41 +88,41 @@ body, [data-page-resource-type="album"], [data-page-resource-type="track"],
 .user-dashboard-layout
 {
     /* any additional highlights */
-    --b3: var(--hue), calc(var(--sat) * 6%), 30%;
+    --b3: var(--hue), calc(var(--sat) * 10%), 25%;
 
     /* card border */
-    --b4: var(--hue), calc(var(--sat) * 8%), 22%;
+    --b4: var(--hue), calc(var(--sat) * 10%), 20%;
 
     /* card */
-    --b5: var(--hue), calc(var(--sat) * 9%), 15%;
+    --b5: var(--hue), calc(var(--sat) * 10%), 15%;
 
     /* root */
-    --b6: var(--hue), calc(var(--sat) * 12%), 10%;
+    --b6: var(--hue), calc(var(--sat) * 10%), 10%;
     --b7: 0, 0%, 0%;
 
     [data-bleh--theme="darker"] & {
         /* any additional highlights */
-        --b3: var(--hue), calc(var(--sat) * 4%), 24%;
+        --b3: var(--hue), calc(var(--sat) * 4%), 20%;
 
         /* card border */
-        --b4: var(--hue), calc(var(--sat) * 6%), 16%;
+        --b4: var(--hue), calc(var(--sat) * 6%), 15%;
 
         /* card */
-        --b5: var(--hue), calc(var(--sat) * 7%), 8%;
+        --b5: var(--hue), calc(var(--sat) * 7%), 10%;
 
         /* root */
-        --b6: var(--hue), calc(var(--sat) * 10%), 4%;
+        --b6: var(--hue), calc(var(--sat) * 10%), 5%;
         --b7: 0, 0%, 0%;
     }
     [data-bleh--theme="oled"] & {
         /* any additional highlights */
-        --b3: var(--hue), calc(var(--sat) * 6%), 12%;
+        --b3: var(--hue), calc(var(--sat) * 6%), 13%;
 
         /* card border */
         --b4: var(--hue), calc(var(--sat) * 8%), 8%;
 
         /* card */
-        --b5: var(--hue), calc(var(--sat) * 10%), 4%;
+        --b5: var(--hue), calc(var(--sat) * 10%), 3%;
 
         /* root */
         --b6: 0, 0%, 0%;
@@ -11394,18 +11394,18 @@ input[type="range"] {
     background: none;
     cursor: pointer;
     border: none;
-    height: 24px;
+    height: 32px;
     border-radius: var(--item-small-radius);
     overflow: hidden;
 
     &::-webkit-slider-runnable-track {
-        height: 24px;
+        height: 22px;
         background: linear-gradient(90deg, hsla(var(--c2), 25%) 7%, hsl(var(--b4)) 35%);
         box-shadow: var(--interact-shadow);
         border-radius: var(--item-small-radius);
     }
     &::-moz-range-track {
-        height: 24px;
+        height: 22px;
         background: linear-gradient(90deg, hsla(var(--c2), 25%) 7%, hsl(var(--b4)) 35%);
         box-shadow: var(--interact-shadow);
         border-radius: var(--item-small-radius);
@@ -11435,15 +11435,11 @@ input[type="range"] {
             );
         }
 
-        &::-webkit-slider-thumb {
-            background-color: hsl(var(--c1));
-            border: 2px solid hsl(var(--c1));
-            box-shadow: none;
+        &::-webkit-progress-value {
+            background: none;
         }
-        &::-moz-range-thumb {
-            background-color: hsl(var(--c1));
-            border: 2px solid hsl(var(--c1));
-            box-shadow: none;
+        &::-moz-range-progress {
+            background: none;
         }
     }
 }
@@ -11453,24 +11449,28 @@ input[type="range"]::-webkit-slider-thumb {
     appearance: none;
     /**/
     width: 8px;
-    height: 24px;
+    height: 28px;
     background-color: hsl(var(--h2));
     border-radius: var(--item-small-radius);
-    border: 2px solid hsl(var(--h2));
+    border: 2px solid hsl(var(--c1));
 }
 input[type="range"]::-moz-range-thumb {
     width: 8px;
-    height: 24px;
+    height: 28px;
     background-color: hsl(var(--h2));
     border-radius: var(--item-small-radius);
-    border: 2px solid hsl(var(--h2));
+    border: 2px solid hsl(var(--c1));
 }
 
-input[type="range"]::-webkit-slider-thumb {
-    box-shadow: -407px 0 0 400px hsl(var(--h3));
+input[type="range"]::-webkit-progress-value {
+    background: hsl(var(--h3));
+    height: 22px;
+    border-radius: var(--item-small-radius);
 }
-input[type="range"]::-moz-range-thumb {
-    box-shadow: -407px 0 0 400px hsl(var(--h3));
+input[type="range"]::-moz-range-progress {
+    background: hsl(var(--h3));
+    height: 22px;
+    border-radius: var(--item-small-radius);
 }
 
 
@@ -11523,8 +11523,8 @@ input[type="range"]::-moz-range-thumb {
     align-items: center;
     gap: var(--card-gap);
     overflow: hidden;
-    height: 22px;
-    border-radius: var(--item-med-radius);
+    height: 32px;
+    border-radius: none;
 
     input {
         padding: unset;
