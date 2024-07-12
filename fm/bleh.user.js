@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         bleh
 // @namespace    http://last.fm/
-// @version      2024.0708
+// @version      2024.0712
 // @description  bleh!!! ^-^
 // @author       kate
 // @match        https://www.last.fm/*
@@ -15,7 +15,7 @@
 // @require      https://unpkg.com/tippy.js@6
 // ==/UserScript==
 
-let version = '2024.0708';
+let version = '2024.0712';
 let lang = document.documentElement.getAttribute('lang');
 let valid_langs = ['en', 'pl'];
 
@@ -1019,7 +1019,7 @@ let profile_badges = {
 let settings_template = {
     theme: 'dark',
     gloss: 0,
-    gendered_tags: false,
+    gendered_tags: true,
     show_extra_nav: true,
     hue: 255,
     sat: 1,
