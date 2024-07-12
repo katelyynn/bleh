@@ -1305,7 +1305,6 @@ let scrobble_statistics_raw;
         if (window.location.href == bleh_url || bleh_regex.test(window.location.href)) {
             bleh_settings();
         } else {
-            patch_titles(document.body);
             patch_header_title(document.body);
             patch_artist_ranks(document.body);
             patch_artist_grids(document.body);
@@ -1321,6 +1320,7 @@ let scrobble_statistics_raw;
             patch_lastfm_settings();
 
             patch_shouts();
+            patch_titles(document.body);
 
             correct_generic_combo_no_artist('artist-header-featured-items-item');
             correct_generic_combo_no_artist('artist-top-albums-item');
@@ -1342,7 +1342,6 @@ let scrobble_statistics_raw;
             if (window.location.href == bleh_url || bleh_regex.test(window.location.href)) {
                 bleh_settings();
             } else {
-                patch_titles(document.body);
                 patch_header_title(document.body);
                 patch_artist_ranks(document.body);
                 patch_artist_grids(document.body);
@@ -1358,6 +1357,7 @@ let scrobble_statistics_raw;
                 patch_lastfm_settings();
 
                 patch_shouts();
+                patch_titles(document.body);
 
                 correct_generic_combo_no_artist('artist-header-featured-items-item');
                 correct_generic_combo_no_artist('artist-top-albums-item');
@@ -7105,10 +7105,11 @@ let scrobble_statistics_raw;
                                 `hsl(${chart_colours.link_h_col.replace(chart_colours.hue, '280')})`,
                                 `hsl(${chart_colours.link_h_col.replace(chart_colours.hue, '270')})`,
                                 `hsl(${chart_colours.link_h_col.replace(chart_colours.hue, '255')})`,
-                                `hsl(${chart_colours.link_h_col.replace(chart_colours.hue, '235')})`,
+                                `hsl(${chart_colours.link_h_col.replace(chart_colours.hue, '247')})`,
+                                `hsl(${chart_colours.link_h_col.replace(chart_colours.hue, '232')})`,
                                 `hsl(${chart_colours.link_h_col.replace(chart_colours.hue, '220')})`,
                                 `hsl(${chart_colours.link_h_col.replace(chart_colours.hue, '208')})`,
-                                `hsl(${chart_colours.link_h_col.replace(chart_colours.hue, '200')})`,
+                                `hsl(${chart_colours.link_h_col.replace(chart_colours.hue, '195')})`,
                                 `hsl(${chart_colours.link_h_col.replace(chart_colours.hue, '180')})`,
                                 `hsl(${chart_colours.link_h_col.replace(chart_colours.hue, '160')})`,
                                 `hsl(${chart_colours.link_h_col.replace(chart_colours.hue, '140')})`,
