@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         bleh
 // @namespace    http://last.fm/
-// @version      2024.0710
+// @version      2024.0712
 // @description  bleh!!! ^-^
 // @author       kate
 // @match        https://www.last.fm/*
@@ -17,7 +17,7 @@
 // ==/UserScript==
 
 let version = {
-    build: '2024.0710',
+    build: '2024.0712',
     sku: 'refresh',
     feature_flags: {
         dev: {
@@ -3321,17 +3321,18 @@ let scrobble_statistics_raw;
     function render_setting_page(page) {
         if (page == 'home') {
             return (`
-            <div class="bleh--panel">
-                <h3>${trans[lang].settings.home.name}</h3>
+            <div class="bleh--panel welcome">
+                <h1 class="welcome-text">welcome</h1>
+                <h2>You are running ${trans[lang].settings.home.brand} <span onclick="_change_settings_page('sku')">${version.build}</span></h2>
                 <div class="screen-row">
-                    <div class="screen-wrap">
-                        <img class="screen" src="https://cutensilly.org/img/bleh3-theme-${document.documentElement.getAttribute('data-bleh--theme')}.png" alt="bleh">
-                        <div class="text">
-                            <h5>${trans[lang].settings.home.brand}</h5>
-                            <p onclick="_change_settings_page('sku')">${trans[lang].settings.home.version.replace('{v}', `${version.build}.${version.sku}`)}</p>
-                        </div>
-                    </div>
                     <div class="actions">
+                        <a class="btn action" onclick="_change_settings_page('customise')">
+                            <div class="icon bleh--palette"></div>
+                            <span class="text">
+                                <h5>${trans[lang].settings.home.colours.name}</h5>
+                                <p>${trans[lang].settings.home.colours.bio}</p>
+                            </span>
+                        </a>
                         <a class="btn action" href="https://github.com/katelyynn/bleh/issues" target="_blank">
                             <div class="icon bleh--issues"></div>
                             <span class="text">
@@ -3341,7 +3342,9 @@ let scrobble_statistics_raw;
                         </a>
                     </div>
                 </div>
-                <h4>${trans[lang].settings.home.recommended}</h4>
+            </div>
+            <div class="bleh--panel">
+                <h3>${trans[lang].settings.home.recommended}</h3>
                 <div class="setting-items">
                     <div class="side-left">
                         <button class="btn setting-item has-image" onclick="_change_settings_page('themes')">
@@ -3877,33 +3880,57 @@ let scrobble_statistics_raw;
                 </div>
                 `);
         } else if (page == 'performance') {
-            return (`
-                <div class="bleh--panel">
-                    <h3>${trans[lang].settings.performance.name}</h3>
-                    <p>${trans[lang].settings.performance.bio}</p>
-                    <div class="toggle-container">
-                        <div class="heading">
-                            <h5>Refresh theme</h5>
-                            <p>Force download the latest version of the stylesheet</p>
+            if (version.sku == 'main') {
+                return (`
+                    <div class="bleh--panel">
+                        <h3>${trans[lang].settings.performance.name}</h3>
+                        <p>${trans[lang].settings.performance.bio}</p>
+                        <div class="toggle-container">
+                            <div class="heading">
+                                <h5>Refresh theme</h5>
+                                <p>Force download the latest version of the stylesheet</p>
+                            </div>
+                            <div class="toggle-wrap">
+                                <button class="bleh--btn primary" onclick="_force_refresh_theme()">Refresh</button>
+                            </div>
                         </div>
-                        <div class="toggle-wrap">
-                            <button class="bleh--btn primary" onclick="_force_refresh_theme()">Refresh</button>
+                        <div class="toggle-container" id="container-dev">
+                            <button class="btn reset" onclick="_reset_item('dev')">${trans[lang].settings.reset}</button>
+                            <div class="heading">
+                                <h5>${trans[lang].settings.performance.dev.name}</h5>
+                                <p>${trans[lang].settings.performance.dev.bio}</p>
+                            </div>
+                            <div class="toggle-wrap">
+                                <button class="toggle" id="toggle-dev" onclick="_update_item('dev')" aria-checked="false">
+                                    <div class="dot"></div>
+                                </button>
+                            </div>
                         </div>
                     </div>
-                    <div class="toggle-container" id="container-dev">
-                        <button class="btn reset" onclick="_reset_item('dev')">${trans[lang].settings.reset}</button>
-                        <div class="heading">
-                            <h5>${trans[lang].settings.performance.dev.name}</h5>
-                            <p>${trans[lang].settings.performance.dev.bio}</p>
-                        </div>
-                        <div class="toggle-wrap">
-                            <button class="toggle" id="toggle-dev" onclick="_update_item('dev')" aria-checked="false">
-                                <div class="dot"></div>
-                            </button>
-                        </div>
-                    </div>
-                </div>
                 `);
+            } else {
+                return (`
+                    <div class="bleh--panel shh">
+                        shhh...<br>let's not leak<br>our hard work
+                        <div class="screen-row">
+                            <div class="actions">
+                                <a class="btn action">
+                                    <span class="text">
+                                        <h5>build</h5>
+                                        <p>${version.build}</p>
+                                    </span>
+                                </a>
+                                <a class="btn action">
+                                    <span class="text">
+                                        <h5>sku</h5>
+                                        <p>${version.sku}</p>
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                `);
+            }
         } else if (page == 'profiles') {
             return (`
                 <div class="bleh--panel">
@@ -3943,6 +3970,11 @@ let scrobble_statistics_raw;
     }
 
     unsafeWindow._change_settings_page = function(page) {
+        if (page == 'sku' && version.sku == 'main') {
+            deliver_notif(`secrets are not available for your sku (${version.sku})`)
+            return;
+        }
+
         change_settings_page(page);
     }
 
@@ -4339,8 +4371,6 @@ let scrobble_statistics_raw;
     unsafeWindow._create_a_custom_colour = function() {
         let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
         create_window('custom_colour',trans[lang].settings.customise.colours.custom,`
-        <p>${trans[lang].settings.customise.colours.modals.custom_colour.preface}</p>
-        <br>
         <div class="inner-preview pad">
             <div class="palette">
                 <div style="--col: hsl(var(--l2-c))"></div>
