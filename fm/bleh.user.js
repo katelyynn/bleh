@@ -7030,14 +7030,32 @@ let scrobble_statistics_raw;
             return;
 
         // artist albums
-        if (subpage_type == 'user_library_music_artist_albums') {
+        if (subpage_type == 'user_library_music_artist_albums' || subpage_type == 'user_library_albums' ||
+            subpage_type == 'user_library_artists'
+        ) {
             let album_container = document.querySelector('#library-sort-section .chartlist:not(.chartlist__placeholder)');
-            if (album_container == null)
+            let album_grid_container = document.querySelector('#library-sort-section .grid-items:not(.grid-items__placeholder)');
+            if (album_container == null && album_grid_container == null)
                 return;
 
-            if (album_container.hasAttribute('data-bleh--library'))
-                return;
-            album_container.setAttribute('data-bleh--library', 'true');
+            let chart_type = 'chartlist';
+            let is_artists;
+            if (album_grid_container != null)
+                chart_type = 'grid';
+
+            if (chart_type == 'chartlist') {
+                if (album_container.hasAttribute('data-bleh--library'))
+                    return;
+                album_container.setAttribute('data-bleh--library', 'true');
+
+                is_artists = ((album_container.querySelector('.avatar')) != null);
+            } else {
+                if (album_grid_container.hasAttribute('data-bleh--library'))
+                    return;
+                album_grid_container.setAttribute('data-bleh--library', 'true');
+
+                is_artists = ((album_grid_container.querySelector('.grid-items-item-aux-block')) == null);
+            }
 
             let more_scrobble_labels = [];
             let more_scrobble_statistics = [];
@@ -7049,22 +7067,41 @@ let scrobble_statistics_raw;
                 img: ''
             };
 
-            album_container.querySelectorAll('.chartlist-row').forEach((album) => {
-                let label = album.querySelector('.chartlist-name a').textContent;
-                let stat = parseInt(album.querySelector('.chartlist-count-bar-value').textContent.replaceAll('\n', '').replaceAll(',', '').trim());
+            if (chart_type == 'chartlist') {
+                album_container.querySelectorAll('.chartlist-row').forEach((album) => {
+                    let label = album.querySelector('.chartlist-name a').textContent;
+                    let stat = parseInt(album.querySelector('.chartlist-count-bar-value').textContent.replaceAll('\n', '').replaceAll(',', '').trim());
 
-                if (stat > highest_album.stat) {
-                    highest_album = {
-                        label: label,
-                        link: album.querySelector('.chartlist-name a').getAttribute('href'),
-                        stat: stat,
-                        img: album.querySelector('.chartlist-image img').getAttribute('src')
+                    if (stat > highest_album.stat) {
+                        highest_album = {
+                            label: label,
+                            link: album.querySelector('.chartlist-name a').getAttribute('href'),
+                            stat: stat,
+                            img: album.querySelector('.chartlist-image img').getAttribute('src')
+                        }
                     }
-                }
 
-                more_scrobble_labels.push(label);
-                more_scrobble_statistics.push(stat);
-            });
+                    more_scrobble_labels.push(label);
+                    more_scrobble_statistics.push(stat);
+                });
+            } else {
+                album_grid_container.querySelectorAll('.grid-items-item').forEach((album) => {
+                    let label = album.querySelector('.grid-items-item-main-text a').textContent;
+                    let stat = parseInt(album.querySelector('.grid-items-item-aux-text').textContent.replaceAll('\n', '').replaceAll(',', '').replaceAll(' plays', '').trim());
+
+                    if (stat > highest_album.stat) {
+                        highest_album = {
+                            label: label,
+                            link: album.querySelector('.grid-items-item-main-text a').getAttribute('href'),
+                            stat: stat,
+                            img: album.querySelector('.grid-items-cover-image-image img').getAttribute('src')
+                        }
+                    }
+
+                    more_scrobble_labels.push(label);
+                    more_scrobble_statistics.push(stat);
+                });
+            }
 
             console.info(more_scrobble_labels, more_scrobble_statistics);
 
@@ -7082,7 +7119,7 @@ let scrobble_statistics_raw;
                 <div class="backing-img" style="background-image: url(${highest_album.img})" alt="Cover for ${highest_album.label}"></div>
                 <div class="stats top-stats">
                     <div class="top-album-side">
-                        <h3>Top Album</h3>
+                        <h3>Top ${(is_artists) ? 'Artist' : 'Album'}</h3>
                         <p><a href="${highest_album.link}" id="album-link">${highest_album.label}</a></p>
                     </div>
                     <div class="top-album-scrobbles-side">

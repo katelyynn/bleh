@@ -14148,6 +14148,7 @@ button.bleh--gallery-bookmark-image-btn {
                 font-weight: var(--font-flex-weight);
                 font-family: var(--font-flex);
                 font-feature-settings: var(--font-flex-settings);
+                max-width: 180px;
 
                 display: flex;
                 align-items: center;
