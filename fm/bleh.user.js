@@ -6023,6 +6023,21 @@ let scrobble_statistics_raw;
                 type: 'subscriber',
                 name: 'Subscriber'
             });
+        if (profile_header.querySelector('.user-status-staff') != null)
+            badges.push({
+                type: 'staff',
+                name: 'Staff'
+            });
+        if (profile_header.querySelector('.user-status-mod') != null)
+            badges.push({
+                type: 'mod',
+                name: 'Mod'
+            });
+        if (profile_header.querySelector('.user-status-alum') != null)
+            badges.push({
+                type: 'alum',
+                name: 'Alum'
+            });
 
         // custom
         if (profile_badges.hasOwnProperty(profile_name)) {
