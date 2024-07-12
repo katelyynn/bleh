@@ -1090,7 +1090,7 @@ let profile_badges = {
 let settings_template = {
     theme: 'dark',
     gloss: 0,
-    gendered_tags: false,
+    gendered_tags: true,
     show_extra_nav: true,
     hue: 255,
     sat: 1,
