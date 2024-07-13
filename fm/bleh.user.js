@@ -1516,6 +1516,31 @@ let scrobble_statistics_raw;
         auth_link.appendChild(text);
 
 
+        let notif_btn = document.body.querySelector('.masthead-nav-control[data-analytics-label="notifications"]');
+        let notif_count = notif_btn.querySelector('.notification-count-badge');
+        if (notif_count != null) {
+            tippy(notif_btn, {
+                content: `${notif_count.textContent} notifications`
+            });
+        } else {
+            tippy(notif_btn, {
+                content: 'No new notifications'
+            });
+        }
+
+        let inbox_btn = document.body.querySelector('.masthead-nav-control[data-analytics-label="inbox"]');
+        let inbox_count = inbox_btn.querySelector('.notification-count-badge');
+        if (inbox_count != null) {
+            tippy(inbox_btn, {
+                content: `${inbox_count.textContent} messages`
+            });
+        } else {
+            tippy(inbox_btn, {
+                content: 'No new messages'
+            });
+        }
+
+
         let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
         let user_nav = element.querySelectorAll('.auth-dropdown-menu > li')[0];
         let inbox_nav = element.querySelectorAll('.auth-dropdown-menu > li')[2];

@@ -1174,6 +1174,22 @@ last.fm changes as of 2024-05-20 */
     animation: bubble 0.9s var(--trans-function);
 }
 
+
+.masthead-nav .masthead-nav-item .notification-count-badge,
+.auth-avatar-notification-count-badge {
+    font-family: var(--font-code);
+    font-size: 8px;
+    line-height: 8px;
+    min-width: 12px;
+    height: 12px;
+    padding: 0;
+    width: 12px;
+    color: transparent !important;
+}
+.masthead-nav .masthead-nav-item .notification-count-badge {
+    top: 5px;
+}
+
 @keyframes bubble {
     from {
         transform: scale(0.9);
