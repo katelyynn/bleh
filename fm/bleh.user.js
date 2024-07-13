@@ -1022,6 +1022,10 @@ let profile_badges = {
         {
             type: 'queen',
             name: 'blehhhhhhhhhh!!'
+        },
+        {
+            type: 'cute',
+            name: 'cute'
         }
     ],
     'Iexyy': {
