@@ -1111,13 +1111,26 @@ last.fm changes as of 2024-05-20 */
     }
 }
 .auth-avatar-desktop {
-    width: 38px !important;
-    height: 38px !important;
-    border: 2px solid hsl(var(--b4));
+    width: 24px !important;
+    height: 24px !important;
+    border: 0 solid hsl(var(--b4));
     box-shadow: var(--card-shadow);
     transition-property: transform, border-color, box-shadow;
     transition-duration: calc(var(--trans-short) * 1.5);
     transition-timing-function: var(--trans-function);
+}
+
+.auth-link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    height: 40px !important;
+    text-decoration: none !important;
+    padding-right: calc(16px + 6px) !important;
+    --mask: var(--icon-16-arrow-down);
+    --left: none !important;
+    --right: 0;
 }
 
 .auth-link.disclose-active .auth-avatar-desktop {
@@ -2404,6 +2417,7 @@ button.navlist-more {
     gap: 10px;
 }
 
+.auth-link,
 .user-dashboard-pagination a, .user-dashboard-pagination span:not(.user-dashboard-controls-tooltip),
 .navlist-more, .secondary-nav-item-link, .masthead-nav-control {
     /* left padding for icon, otherwise just 12px 16px */
@@ -5399,6 +5413,7 @@ button:not(.playback-app-container button, .top-artist-list-item, .pixel, .liste
 
 
 /*     ICON MASK     */
+.auth-link:before,
 .masthead-logo a:after,
 .loading-data-text:before,
 .release-row div:before,

@@ -1505,6 +1505,17 @@ let scrobble_statistics_raw;
     }
 
     function append_nav(element) {
+        let auth_link = document.body.querySelector('.auth-link');
+
+        if (auth_link.hasAttribute('data-bwaa'))
+            return;
+        auth_link.setAttribute('data-bwaa', 'true');
+
+        let text = document.createElement('p');
+        text.textContent = auth;
+        auth_link.appendChild(text);
+
+
         let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
         let user_nav = element.querySelectorAll('.auth-dropdown-menu > li')[0];
         let inbox_nav = element.querySelectorAll('.auth-dropdown-menu > li')[2];
