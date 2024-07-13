@@ -1540,6 +1540,19 @@ let scrobble_statistics_raw;
             });
         }
 
+        let inbox_container = document.body.querySelector('.masthead-nav-item:has([data-analytics-label="inbox"])');
+        let bleh_container = document.createElement('li');
+        bleh_container.classList.add('masthead-nav-item');
+        bleh_container.innerHTML = (`
+            <a class="masthead-nav-control" href="/bleh" data-bleh--label="bleh">
+                ${trans[lang].auth_menu.configure_bleh}
+            </a>
+        `);
+        tippy(bleh_container, {
+            content: trans[lang].auth_menu.configure_bleh
+        });
+        inbox_container.after(bleh_container);
+
 
         let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
         let user_nav = element.querySelectorAll('.auth-dropdown-menu > li')[0];
