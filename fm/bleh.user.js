@@ -7016,7 +7016,7 @@ let scrobble_statistics_raw;
                 <div class="stats bottom-stats">
                     <div class="highest-point-scrobbles-side">
                         <h3>Peak Scrobbles</h3>
-                        <p>${highest_date.stat}</p>
+                        <p>${highest_date.stat.toLocaleString('gb')}</p>
                     </div>
                     <div class="highest-point-side">
                         <h3>Achieved</h3>
@@ -7190,7 +7190,7 @@ let scrobble_statistics_raw;
                     </div>
                     <div class="top-album-scrobbles-side">
                         <h3>Scrobbles</h3>
-                        <p>${highest_album.stat}</p>
+                        <p>${highest_album.stat.toLocaleString('gb')}</p>
                     </div>
                 </div>
                 <div class="scrobble-insight-canvas-container">
