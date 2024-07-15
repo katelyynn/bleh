@@ -6394,6 +6394,9 @@ let scrobble_statistics_raw;
             let track = feat_track_element.querySelector('.featured-item-name').outerHTML;
             let artist = feat_track_element.querySelector('.featured-item-artist').outerHTML;
 
+            let set_obsession_btn = profile_header.querySelector('.header-info-primary > .profile-header-set-obsession');
+            let remove_obsession_btn = profile_header.querySelector('.header-info-primary > form');
+
             let featured_track_panel = document.createElement('section');
             featured_track_panel.classList.add('featured-track-panel');
             featured_track_panel.innerHTML = (`
@@ -6409,6 +6412,24 @@ let scrobble_statistics_raw;
                         <h2>${artist}</h2>
                     </div>
                 </div>
+                ${(set_obsession_btn != null)
+                ? (`
+                <div class="bottom-wiki">
+                    <div class="actions">
+                        ${set_obsession_btn.outerHTML}
+                    </div>
+                </div>
+                `)
+                : ''}
+                ${(remove_obsession_btn != null)
+                ? (`
+                <div class="bottom-wiki">
+                    <div class="actions">
+                        ${remove_obsession_btn.outerHTML}
+                    </div>
+                </div>
+                `)
+                : ''}
             `);
 
             document.body.querySelector('.profile-header-panel').after(featured_track_panel);

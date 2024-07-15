@@ -2052,13 +2052,15 @@ li.header-metadata-item--event-attendance {
 
 /*     MANAGE OBSESSION     */
 .profile-header-set-obsession {
-    bottom: calc(-128px - 83px); /* -129 to put top right */
-    z-index: 2;
-    right: 21px;
+    position: relative;
+    bottom: unset;
+    right: unset;
+    width: fit-content;
     --mask: var(--icon-16-obsession);
-}
-[action$="/obsessions/remove"] .profile-header-set-obsession {
-    --mask: var(--icon-16-obsession-remove);
+
+    [action$="/obsessions/remove"] & {
+        --mask: var(--icon-16-obsession-remove);
+    }
 }
 
 /*     MESSAGE USER (takes place)     */
@@ -14325,40 +14327,11 @@ button.bleh--gallery-bookmark-image-btn {
         padding-top: var(--card-gap);
         border-top: 1px solid hsl(var(--b4));
 
-        .profile-bio {
-            width: 358px; /* parity with prior bleh2 design */
-
-            &.profile-bio-empty {
-                color: hsl(var(--c3));
-            }
-        }
-
         .actions {
             display: flex;
             gap: var(--button-list-gap);
             justify-content: end;
             margin-left: unset;
-
-            a, button {
-                position: relative;
-            }
-
-            .header-follower-btn {
-                left: unset;
-                top: unset;
-                margin: unset;
-                width: fit-content;
-
-                &:before {
-                    background-color: currentColor !important;
-                    color: inherit !important;
-                    border-radius: 0 !important;
-                }
-            }
-
-            .edit-profile-button {
-                --mask: var(--icon-16-settings);
-            }
         }
     }
 }
