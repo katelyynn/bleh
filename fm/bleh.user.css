@@ -10007,8 +10007,8 @@ hr {
 .bleh--friends-nav + p {
     display: none;
 }
-.bleh--friends-nav + .neighbours-items-section {
-    margin-top: unset !important;
+.bleh--friends-nav + .user-list {
+    margin-top: var(--card-gap) !important;
 }
 
 .music-bookmarks-albums,
