@@ -6385,6 +6385,40 @@ let scrobble_statistics_raw;
             }
         }
 
+
+        // featured track
+        let feat_track_element = profile_header.querySelector('.header-featured-track');
+        if (feat_track_element != null) {
+            let cover = feat_track_element.querySelector('img').outerHTML;
+            let type = feat_track_element.querySelector('.featured-item-heading').textContent;
+            let track = feat_track_element.querySelector('.featured-item-name').outerHTML;
+            let artist = feat_track_element.querySelector('.featured-item-artist').outerHTML;
+
+            let featured_track_panel = document.createElement('section');
+            featured_track_panel.classList.add('featured-track-panel');
+            featured_track_panel.innerHTML = (`
+                <div class="feat-inner">
+                    <div class="cover-side">
+                        <div class="cover-art">
+                            ${cover}
+                        </div>
+                    </div>
+                    <div class="info-side">
+                        <h3>${type}</h3>
+                        <h1 id="featured-track-title">${track}</h1>
+                        <h2>${artist}</h2>
+                    </div>
+                </div>
+            `);
+
+            document.body.querySelector('.profile-header-panel').after(featured_track_panel);
+
+            tippy(document.getElementById('featured-track-title'), {
+                content: feat_track_element.querySelector('.featured-item-name').textContent
+            });
+        }
+
+
         // badges
         display_badges(badges, profile_name);
     }

@@ -2050,75 +2050,6 @@ li.header-metadata-item--event-attendance {
 }
 
 
-/*     FEATURED TRACK     */
-.header-featured-track {
-    padding-right: unset;
-    position: absolute;
-    top: 172px;
-    right: 0;
-    left: unset;
-    bottom: unset;
-    width: var(--cards-sidebar-width);
-    min-height: calc(123px + 33px); /* additions for the button */
-    max-width: unset;
-    display: flex !important;
-    gap: 10px;
-    z-index: 1;
-}
-.featured-item--right {
-    text-align: left;
-}
-
-.header--sub-page .header-featured-track {
-    display: none !important;
-}
-
-.featured-item-art {
-    width: 52px;
-    position: static;
-    flex-shrink: 0;
-}
-
-.featured-item-heading {
-    position: absolute !important;
-    top: 20px;
-    left: 20px;
-}
-.featured-item-heading-link {
-    color: inherit;
-}
-.featured-item-art, .featured-item-details {
-    margin-top: calc(18px + 12px); /* for the header */
-}
-
-.featured-item-details {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 3px;
-    height: 52px;
-    overflow: hidden;
-}
-.featured-item-name, .featured-item-artist {
-    font-size: var(--font-size);
-    line-height: var(--line-height);
-    margin: unset;
-}
-.featured-item-name {
-    font-weight: var(--font-weight-medium);
-}
-
-
-/* rare case where the header-featured-track does not render,
-hide the button in this case
-
-usually there would be header-featured-track in between these two
-elements, this is how we detect its missing */
-.header-info-primary-col1 + form:has(.profile-header-set-obsession) {
-    display: none;
-}
-
-
 /*     MANAGE OBSESSION     */
 .profile-header-set-obsession {
     bottom: calc(-128px - 83px); /* -129 to put top right */
@@ -2128,10 +2059,6 @@ elements, this is how we detect its missing */
 }
 [action$="/obsessions/remove"] .profile-header-set-obsession {
     --mask: var(--icon-16-obsession-remove);
-}
-
-.featured-item-art .image-overlay-playlink-link {
-    display: none;
 }
 
 /*     MESSAGE USER (takes place)     */
@@ -3689,7 +3616,6 @@ button.navlist-more {
 /*     CARD HEAD     */
 h2:not(.count, .mask-multi-text, .mask-text, .sr-only, .js-gallery-heading, .top-item-modal-header), h3.text-18, h2.text-18, .subpage-title:not(.subpage-breadcrumb + .subpage-title, .js-gallery-heading),
 .stationlinks-header,
-.featured-item-heading,
 .library-artist-section-header,
 .date-heading, .user-sidebar-header,
 .gallery-image-title,
@@ -3720,7 +3646,7 @@ h2:not(.count, .mask-multi-text, .mask-text, .sr-only, .js-gallery-heading, .top
 }
 
 
-h2.text-18, h2:not(.middle-info h2),
+h2.text-18, h2:not(.middle-info h2, .info-side h2),
 h3.text-18 {
     color: hsl(var(--c1));
     font-size: 24px !important;
@@ -4234,7 +4160,7 @@ better than the default selector '#app a' i suppose */
     position: relative;
 }
 .obsession-candidate-artist,
-.chartlist-name .feat, .chartlist-artist a, .featured-item-artist, .artist-top-albums-item-artist, .similar-albums-item-artist, .track-similar-tracks-item-artist {
+.chartlist-name .feat, .chartlist-artist a, .artist-top-albums-item-artist, .similar-albums-item-artist, .track-similar-tracks-item-artist {
     color: hsla(var(--c2), 80%) !important;
     font-weight: var(--font-weight);
 }
@@ -7749,15 +7675,12 @@ text[style^="color: rgb(0, 0, 0)"] {
     width: unset;
 }
 .other-obsession-artwork,
-.image-list-item, .featured-item-art .cover-art, .globalchart .globalchart-playlink .cover-art {
+.image-list-item, .globalchart .globalchart-playlink .cover-art {
     border-radius: var(--item-med-radius);
     box-shadow: var(--card-shadow);
     overflow: hidden;
     aspect-ratio: 1 / 1;
     background-color: var(--avatar-generic-background);
-}
-.featured-item-art .cover-art img {
-    mask-size: 28px;
 }
 
 .image-list-item-preferred .image-list-item-preferred-container {
@@ -14285,5 +14208,158 @@ button.bleh--gallery-bookmark-image-btn {
 [data-ff--use_new_library="true"] .row:has(> .date-range-header),
 .metadata-list {
     display: none !important;
+}
+
+
+.featured-track-panel {
+    display: flex;
+    flex-direction: column;
+    gap: var(--card-gap);
+    margin-top: var(--card-gap) !important;
+
+    --card-specific-background:
+    linear-gradient(hsl(var(--b5)), hsl(var(--g4))) padding-box,
+    linear-gradient(0deg, hsla(var(--h3), 80%) 0%, hsl(var(--b5)) 100%) border-box;
+    border: 2px solid transparent !important;
+    padding: calc(var(--card-padding) - 2px) !important;
+
+    .feat-inner {
+        display: flex;
+        flex-direction: row-reverse;
+        gap: var(--card-gap);
+
+        .cover-side {
+            aspect-ratio: 1 / 1;
+            flex-shrink: 0;
+
+            .cover-art {
+                background-color: var(--avatar-generic-background);
+                border-radius: var(--item-med-radius);
+                box-shadow: var(--card-shadow);
+                overflow: hidden;
+            }
+        }
+
+        .info-side {
+            flex: 1;
+
+            h3 {
+                font-size: var(--font-size);
+                line-height: var(--line-height);
+                color: hsl(var(--c3));
+                font-weight: var(--font-weight-medium);
+                margin: unset;
+                cursor: default;
+            }
+
+            h1 {
+                color: hsl(var(--c1));
+                font-size: 24px;
+                line-height: 28px;
+                font-weight: var(--font-weight-bold);
+                letter-spacing: unset;
+                margin: unset;
+
+                display: -webkit-box;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                line-clamp: 1;
+                -webkit-line-clamp: 1;
+                -webkit-box-orient: vertical;
+
+                a {
+                    color: inherit;
+                    font-size: inherit;
+                    line-height: inherit;
+                    font-weight: inherit;
+                    margin: inherit;
+                }
+            }
+            h2 {
+                color: hsl(var(--c2));
+                font-size: 18px;
+                line-height: 22px;
+                font-weight: var(--font-weight-bold);
+                margin: unset !important;
+
+                display: -webkit-box;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                line-clamp: 1;
+                -webkit-line-clamp: 1;
+                -webkit-box-orient: vertical;
+
+                a {
+                    color: inherit !important;
+                    font-size: inherit;
+                    line-height: inherit;
+                    font-weight: inherit;
+                    margin: inherit;
+                }
+            }
+
+            h4 {
+                font-size: var(--font-size);
+                line-height: var(--line-height);
+                font-weight: var(--font-weight);
+                display: flex;
+
+                .title {
+                    padding: 0 4px;
+                    background-color: hsl(var(--b6));
+                    border-radius: var(--item-small-radius);
+                    color: hsl(var(--c3));
+                    font-weight: var(--font-weight-bold);
+                    font-size: var(--font-size-sm);
+                    margin-right: 6px;
+                }
+            }
+        }
+    }
+
+    .bottom-wiki {
+        display: flex;
+        flex-direction: column;
+        gap: var(--card-gap);
+
+        padding-top: var(--card-gap);
+        border-top: 1px solid hsl(var(--b4));
+
+        .profile-bio {
+            width: 358px; /* parity with prior bleh2 design */
+
+            &.profile-bio-empty {
+                color: hsl(var(--c3));
+            }
+        }
+
+        .actions {
+            display: flex;
+            gap: var(--button-list-gap);
+            justify-content: end;
+            margin-left: unset;
+
+            a, button {
+                position: relative;
+            }
+
+            .header-follower-btn {
+                left: unset;
+                top: unset;
+                margin: unset;
+                width: fit-content;
+
+                &:before {
+                    background-color: currentColor !important;
+                    color: inherit !important;
+                    border-radius: 0 !important;
+                }
+            }
+
+            .edit-profile-button {
+                --mask: var(--icon-16-settings);
+            }
+        }
+    }
 }
 }
