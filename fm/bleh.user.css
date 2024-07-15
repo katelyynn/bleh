@@ -4071,6 +4071,8 @@ better than the default selector '#app a' i suppose */
 
 
 /*     ACTIVE     */
+.namespace--user_followers .user-list-inner-wrap:has([data-toggle-button-current-state="followed"]),
+.user-list-inner-wrap:has(.label),
 .chartlist-row--now-scrobbling {
     --bg: hsla(var(--h3), 45%) !important;
     --bg-hov: hsla(var(--h3), 60%) !important;
@@ -8161,18 +8163,40 @@ text[style^="color: rgb(0, 0, 0)"] {
 .listeners-section-item-image,
 .top-listeners-item-image,
 .user-list-avatar {
-    width: 32px;
-    height: 32px;
+    width: 38px;
+    height: 38px;
     --show-status: none;
     --mask-size: var(--cover-size-32);
+    top: 3px;
+    left: 12px;
 }
 
-.user-list-inner-wrap, .listeners-section-item, .top-listeners-item {
-    padding-left: calc(32px + var(--card-gap));
+.user-list-inner-wrap, .listeners-section-item-wrap, .top-listeners-item-wrap {
+    --bg: hsla(var(--b4), 40%);
+    --bg-hov: hsla(var(--b4), 80%);
+    --shadow: none !important;
+    --shadow-hov: none !important;
+
+    background-color: var(--bg);
+    border-radius: var(--item-med-radius);
+    box-shadow: var(--shadow);
+
+    padding-left: calc(12px + 38px + var(--card-gap));
     padding-right: unset;
-    margin: 6px 0;
+    margin: unset;
     min-height: unset;
-    height: 32px;
+    height: 44px;
+    transition-property: background-color;
+    transition-duration: var(--trans);
+    transition-timing-function: var(--trans-function);
+
+    &:hover {
+        background-color: var(--bg-hov);
+        transition: none !important;
+    }
+}
+.user-list-item, .listeners-section-item, .top-listeners-item {
+    margin: 2px 0 !important;
 }
 .user-list-item {
     width: 100%;
@@ -8180,7 +8204,7 @@ text[style^="color: rgb(0, 0, 0)"] {
 }
 
 .user-list {
-    margin: unset !important;
+    margin: -2px 0 !important;
 }
 
 
@@ -8215,19 +8239,14 @@ text[style^="color: rgb(0, 0, 0)"] {
     --left: 0;
     color: hsl(var(--c3)) !important;
 
-    .user-list-item:has(&) {
-        background: linear-gradient(90deg, hsla(var(--h4), 20%) 0%, transparent 100%);
-        --override-link-col: hsl(var(--l2-c));
+    .user-list-inner-wrap:has(&) {
+        /*background: linear-gradient(90deg, hsla(var(--h4), 20%) 0%, transparent 100%);*/
+        /*--override-link-col: hsl(var(--l2-c));*/
     }
 }
 .namespace--user_followers .user-list-item:has([data-toggle-button-current-state="followed"]) {
-    background: linear-gradient(90deg, hsla(var(--h4), 20%) 0%, transparent 100%);
-    --override-link-col: hsl(var(--l2-c));
-}
-
-
-.user-list-item + .user-list-item {
-    border-top: 1px solid hsl(var(--b4));
+    /*background: linear-gradient(90deg, hsla(var(--h4), 20%) 0%, transparent 100%);*/
+    /*--override-link-col: hsl(var(--l2-c));*/
 }
 
 .user-list-avatar {
