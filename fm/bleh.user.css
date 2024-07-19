@@ -15,6 +15,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu+Sans:ital,wght@0,100..800;1,100..800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wdth,wght@8..144,151,100..1000&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Shrikhand&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap');
 
 body {
     --hue: var(--new-hue, var(--base-hue, 255));
@@ -79,6 +80,14 @@ body {
     --trans-short: 0.25s;
     --trans: 0.4s;
     --trans-function: cubic-bezier(1.000, 0.000, 0.000, 1.000);
+
+    [data-ff--exo="true"] & {
+        --font: 'Exo 2', Ubuntu Sans, Spline Sans, Inter, Roboto, Noto Sans, Noto Sans JP, Noto Color Emoji, -apple-system, BlinkMacSystemFont, sans-serif;
+
+        --font-weight: 500;
+        --font-weight-medium: 620;
+        --font-weight-bold: 700;
+    }
 }
 
 /* backgrounds */

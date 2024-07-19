@@ -84,6 +84,11 @@ let version = {
             default: false,
             name: 'Show album chart as line, silly',
             date: '2024-07-11'
+        },
+        exo: {
+            default: false,
+            name: 'exo',
+            date: '2024-07-19'
         }
     }
 }
