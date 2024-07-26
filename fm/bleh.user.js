@@ -5,7 +5,7 @@
 // @description  bleh!!! ^-^
 // @author       kate
 // @match        https://www.last.fm/*
-// @icon         https://www.google.com/s2/favicons?sz=64&domain=last.fm
+// @icon         https://www.google.com/s2/favicons?sz=64&domain=cutensilly.org
 // @grant        GM_addStyle
 // @updateURL    https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.js
 // @downloadURL  https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.js
@@ -13,9 +13,86 @@
 // @require      https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js
 // @require      https://unpkg.com/@popperjs/core@2
 // @require      https://unpkg.com/tippy.js@6
+// @require      https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js
 // ==/UserScript==
 
-let version = '2024.0712';
+let version = {
+    build: '2024.0712',
+    sku: 'refresh',
+    feature_flags: {
+        dev: {
+            default: false,
+            name: 'Use developer mode, which disables style loading',
+            date: '2024-06-07'
+        },
+        experimental_top_nav: {
+            default: false,
+            name: 'Experimental top nav, its ugly',
+            date: '2024-07-04'
+        },
+        use_flexible_numbers: {
+            default: false,
+            name: 'Use Roboto Flex for numbers in chartlists',
+            date: '2024-07-08'
+        },
+        use_new_logo: {
+            default: false,
+            name: 'Use new logo sizing',
+            date: '2024-07-08'
+        },
+        card_animations: {
+            default: true,
+            name: 'Use card animations',
+            date: '2024-07-08'
+        },
+        aero: {
+            default: false,
+            name: 'Aero',
+            date: '2024-07-09'
+        },
+        shrikhand_lyrics_blurb: {
+            default: true,
+            name: 'Shrikhand lyrics blurb',
+            date: '2024-07-09'
+        },
+        bleh_settings_tabs: {
+            default: true,
+            name: 'Utilise new bleh settings tabs',
+            date: '2024-07-09'
+        },
+        header_refresh: {
+            default: false,
+            name: 'Header refresh',
+            date: '2024-07-09'
+        },
+        use_new_library: {
+            default: false,
+            name: 'Use new library, not feature-complete or bug-proof',
+            date: '2024-07-10'
+        },
+        library_graph_on_left: {
+            default: false,
+            name: 'Library graph on left, depends on use_new_library',
+            date: '2024-07-10'
+        },
+        use_library_scrobble_bar: {
+            default: false,
+            name: 'Use library scrobble bar, sorted by sub to dom',
+            date: '2024-07-10'
+        },
+        show_album_chart_as_line: {
+            default: false,
+            name: 'Show album chart as line, silly',
+            date: '2024-07-11'
+        },
+        exo: {
+            default: false,
+            name: 'exo',
+            date: '2024-07-19'
+        }
+    }
+}
+
 let lang = document.documentElement.getAttribute('lang');
 let valid_langs = ['en', 'pl'];
 
@@ -883,7 +960,7 @@ let ranks = {
 
 let includes = {
     guests: [
-        '- feat', '(feat', '[feat', ' feat.',
+        '- feat', 'feat.',
         '- with', '(with', '[with',
         '- ft', '(ft', '[ft', ' ft.',
         'w/ '
@@ -905,7 +982,8 @@ let includes = {
         '- alternative', '(alternative',
         '(mix 1', '(mix 2', '(mix 3', '(mix 4', '(mix 5', '(mix 6', '(mix 7', '(mix 8', '(mix 9',
         '- choppednotslopped', '(choppednotslopped', '[choppednotslopped',
-        '(v1', '(v2', '(v3', '(v4', '(v5', '(v6', '(v7', '(v8', '(v9'
+        '(v1', '(v2', '(v3', '(v4', '(v5', '(v6', '(v7', '(v8', '(v9',
+        '- nevermind version', '(nevermind version'
     ],
     stems: [
         '- acapella', '(acapella', '[acapella',
@@ -943,24 +1021,16 @@ let includes = {
 let profile_badges = {
     'cutensilly': [
         {
-            type: 'k',
-            name: 'k'
-        },
-        {
-            type: 'a',
-            name: 'a'
-        },
-        {
-            type: 't',
-            name: 't'
-        },
-        {
-            type: 'e',
-            name: 'e'
+            type: 'contributor',
+            name: 'bleh contributor'
         },
         {
             type: 'queen',
             name: 'blehhhhhhhhhh!!'
+        },
+        {
+            type: 'cute',
+            name: 'cute'
         }
     ],
     'Iexyy': {
@@ -981,10 +1051,20 @@ let profile_badges = {
         type: 'cat',
         name: 'it\'s a kitty!!'
     },
-    'twolay': {
-        type: 'cat',
-        name: 'it\'s a kitty!!'
-    },
+    'twolay': [
+        {
+            type: 'cat',
+            name: 'it\'s a kitty!!'
+        },
+        {
+            type: 'translation',
+            name: 'translated bleh into polish'
+        },
+        {
+            type: 'contributor',
+            name: 'bleh contributor'
+        }
+    ],
     'aoivee': {
         type: 'cat',
         name: 'it\'s a kitty!!'
@@ -1033,6 +1113,7 @@ let settings_template = {
     format_guest_features: true,
     colourful_counts: true,
     rain: false,
+    feature_flags: {},
     show_your_progress: true
 };
 let settings_base = {
@@ -1191,16 +1272,25 @@ let redacted = [
 
 // use the top-right link to determine the current user
 let auth = '';
+let auth_link = '';
+
+let root = '';
 
 let bleh_url = 'https://www.last.fm/bleh';
 let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
 
+let scrobble_statistics_raw;
+
 (function() {
     'use strict';
 
-    auth = document.querySelector('a.auth-link img').getAttribute('alt');
+    root = document.querySelector('.masthead-logo a').getAttribute('href');
+    auth_link = document.querySelector('a.auth-link');
+    auth = auth_link.querySelector('img').getAttribute('alt');
     initia();
+
+    deliver_notif(`loading bleh ${version.build} with sku ${version.sku}`);
 
     function initia() {
         let performance_start = performance.now();
@@ -1210,23 +1300,36 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         //get_scrobbles(document.body);
         append_nav(document.body);
         patch_masthead(document.body);
+        load_notifs();
 
         start_rain();
+
+        scroller();
+        window.onscroll = function(e) {
+            scroller();
+        }
 
         console.log(bleh_url,window.location.href,bleh_regex.test(window.location.href));
 
         if (window.location.href == bleh_url || bleh_regex.test(window.location.href)) {
             bleh_settings();
         } else {
-            patch_profile(document.body);
-            patch_shouts(document.body);
-            patch_lastfm_settings(document.body);
-            patch_titles(document.body);
             patch_header_title(document.body);
             patch_artist_ranks(document.body);
             patch_artist_grids(document.body);
             patch_header_menu();
             patch_gallery_page();
+
+            // album pages
+            bleh_album_pages();
+            bleh_artist_pages();
+            bleh_track_pages();
+            bleh_profile_pages();
+            load_bleh_user_library();
+            patch_lastfm_settings();
+
+            patch_shouts();
+            patch_titles(document.body);
 
             correct_generic_combo_no_artist('artist-header-featured-items-item');
             correct_generic_combo_no_artist('artist-top-albums-item');
@@ -1243,19 +1346,27 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             //get_scrobbles(node);
             append_nav(document.body);
             patch_masthead(document.body);
+            load_notifs();
 
             if (window.location.href == bleh_url || bleh_regex.test(window.location.href)) {
                 bleh_settings();
             } else {
-                patch_profile(document.body);
-                patch_shouts(document.body);
-                patch_lastfm_settings(document.body);
-                patch_titles(document.body);
                 patch_header_title(document.body);
                 patch_artist_ranks(document.body);
                 patch_artist_grids(document.body);
                 patch_header_menu();
                 patch_gallery_page();
+
+                // album pages
+                bleh_album_pages();
+                bleh_artist_pages();
+                bleh_track_pages();
+                bleh_profile_pages();
+                load_bleh_user_library();
+                patch_lastfm_settings();
+
+                patch_shouts();
+                patch_titles(document.body);
 
                 correct_generic_combo_no_artist('artist-header-featured-items-item');
                 correct_generic_combo_no_artist('artist-top-albums-item');
@@ -1273,15 +1384,24 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         });
 
         let performance_end = performance.now();
-        console.info(`bleh finished loading in ${performance_end - performance_start}`);
+        deliver_notif(`bleh finished loading in ${performance_end - performance_start}`);
+    }
+
+    function scroller() {
+        if (window.scrollY > 0)
+            document.body.setAttribute('data-bleh--scrolled', 'true');
+        else
+            document.body.setAttribute('data-bleh--scrolled', 'false');
     }
 
     function append_style() {
         let cached_style = localStorage.getItem('bleh_cached_style') || '';
         let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
+        if (settings.feature_flags == undefined)
+            settings.feature_flags = {};
 
         // style is not fetched in dev mode
-        if (settings.dev)
+        if (settings.feature_flags.dev)
             return;
 
         if (cached_style == '') {
@@ -1378,75 +1498,109 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     function patch_masthead(element) {
         let masthead_logo = element.querySelector('.masthead-logo');
 
-        if (!masthead_logo.hasAttribute('data-kate-processed')) {
-            masthead_logo.setAttribute('data-kate-processed','true');
+        if (!masthead_logo.hasAttribute('data-bleh')) {
+            masthead_logo.setAttribute('data-bleh','true');
 
             let version_text = document.createElement('p');
             version_text.classList.add('bleh--version');
-            version_text.textContent = version;
+            version_text.textContent = `${version.build}.${version.sku}`;
 
             masthead_logo.appendChild(version_text);
         }
     }
 
     function append_nav(element) {
+        let auth_link = document.body.querySelector('.auth-link');
+
+        if (auth_link.hasAttribute('data-bwaa'))
+            return;
+        auth_link.setAttribute('data-bwaa', 'true');
+
+        let text = document.createElement('p');
+        text.textContent = auth;
+        auth_link.appendChild(text);
+
+
+        let notif_btn = document.body.querySelector('.masthead-nav-control[data-analytics-label="notifications"]');
+        let notif_count = notif_btn.querySelector('.notification-count-badge');
+        if (notif_count != null) {
+            tippy(notif_btn, {
+                content: `${notif_count.textContent} notifications`
+            });
+        } else {
+            tippy(notif_btn, {
+                content: 'No new notifications'
+            });
+        }
+
+        let inbox_btn = document.body.querySelector('.masthead-nav-control[data-analytics-label="inbox"]');
+        let inbox_count = inbox_btn.querySelector('.notification-count-badge');
+        if (inbox_count != null) {
+            tippy(inbox_btn, {
+                content: `${inbox_count.textContent} messages`
+            });
+        } else {
+            tippy(inbox_btn, {
+                content: 'No new messages'
+            });
+        }
+
+        let inbox_container = document.body.querySelector('.masthead-nav-item:has([data-analytics-label="inbox"])');
+        let bleh_container = document.createElement('li');
+        bleh_container.classList.add('masthead-nav-item');
+        bleh_container.innerHTML = (`
+            <a class="masthead-nav-control" href="/bleh" data-bleh--label="bleh">
+                ${trans[lang].auth_menu.configure_bleh}
+            </a>
+        `);
+        tippy(bleh_container, {
+            content: trans[lang].auth_menu.configure_bleh
+        });
+        inbox_container.after(bleh_container);
+
+
         let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
         let user_nav = element.querySelectorAll('.auth-dropdown-menu > li')[0];
         let inbox_nav = element.querySelectorAll('.auth-dropdown-menu > li')[2];
 
-        if (!user_nav.hasAttribute('data-kate-processed')) {
-            user_nav.setAttribute('data-kate-processed','true');
+        let my_avi = auth_link.querySelector('img').getAttribute('src').replace('avatar42s', 'avatar170s');
+        document.querySelector('.auth-dropdown-menu').style.setProperty('--url', `url(${my_avi})`);
+
+        if (!user_nav.hasAttribute('data-bleh')) {
+            user_nav.setAttribute('data-bleh','true');
 
             let bleh_nav = document.createElement('li');
-            if (auth == 'cutensilly') {
-                bleh_nav.innerHTML = (`
-                    <li>
-                        <button class="auth-dropdown-menu-item bleh--theme-menu-item" onclick="toggle_theme()">
-                            <span class="auth-dropdown-item-row">
-                                <span class="auth-dropdown-item-left">${trans[lang].settings.themes.name}</span>
-                                <span class="auth-dropdown-item-right" id="theme-value">${trans[lang].settings.themes[settings.theme].name}</span>
-                            </span>
-                        </button>
-                    </li>
-                    <li>
-                        <button class="auth-dropdown-menu-item bleh--dev-menu-item" onclick="toggle_setting('dev')">
-                            <span class="auth-dropdown-item-row">
-                                <span class="auth-dropdown-item-left">${trans[lang].auth_menu.dev}</span>
-                            </span>
-                        </button>
-                    </li>
-                    <li>
-                        <a class="auth-dropdown-menu-item bleh--configure-menu-item" href="/bleh">
-                            <span class="auth-dropdown-item-row">
-                                <span class="auth-dropdown-item-left">${trans[lang].auth_menu.configure_bleh}</span>
-                            </span>
-                        </a>
-                    </li>
-                    `);
-            } else {
-                bleh_nav.innerHTML = (`
-                    <li>
-                        <button class="auth-dropdown-menu-item bleh--theme-menu-item" onclick="toggle_theme()">
-                            <span class="auth-dropdown-item-row">
-                                <span class="auth-dropdown-item-left">${trans[lang].settings.themes.name}</span>
-                                <span class="auth-dropdown-item-right" id="theme-value">${trans[lang].settings.themes[settings.theme].name}</span>
-                            </span>
-                        </button>
-                    </li>
-                    <li>
-                        <a class="auth-dropdown-menu-item bleh--configure-menu-item" href="/bleh">
-                            <span class="auth-dropdown-item-row">
-                                <span class="auth-dropdown-item-left">${trans[lang].auth_menu.configure_bleh}</span>
-                            </span>
-                        </a>
-                    </li>
-                    `);
-            }
+            bleh_nav.innerHTML = (`
+                <li>
+                    <button class="auth-dropdown-menu-item bleh--theme-menu-item" onclick="toggle_theme()">
+                        <span class="auth-dropdown-item-row">
+                            <span class="auth-dropdown-item-left">${trans[lang].settings.themes.name}</span>
+                            <span class="auth-dropdown-item-right" id="theme-value">${trans[lang].settings.themes[settings.theme].name}</span>
+                        </span>
+                    </button>
+                </li>
+                ${(settings.feature_flags.dev) ? (`
+                <li>
+                    <button class="auth-dropdown-menu-item bleh--dev-menu-item" onclick="_update_flag_toggle('dev', this)" aria-checked="true">
+                        <span class="auth-dropdown-item-row">
+                            <span class="auth-dropdown-item-left">${trans[lang].auth_menu.dev}</span>
+                        </span>
+                    </button>
+                </li>
+                `) : ''}
+                <li>
+                    <a class="auth-dropdown-menu-item bleh--configure-menu-item" href="/bleh">
+                        <span class="auth-dropdown-item-row">
+                            <span class="auth-dropdown-item-left">${trans[lang].auth_menu.configure_bleh}</span>
+                        </span>
+                    </a>
+                </li>
+            `);
             user_nav.appendChild(bleh_nav);
         }
 
-        if (!inbox_nav.hasAttribute('data-kate-processed')) {
-            inbox_nav.setAttribute('data-kate-processed','true');
+        if (!inbox_nav.hasAttribute('data-bleh')) {
+            inbox_nav.setAttribute('data-bleh','true');
             let profile_link = user_nav.querySelector('a').getAttribute('href');
 
             let extra_nav = document.createElement('li');
@@ -1480,14 +1634,18 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 settings[setting] = settings_template[setting];
 
         // todo: remove
-        if (settings.dev == 1)
-            settings.dev = true;
+        if (settings.dev) {
+            settings.feature_flags.dev = true;
+            settings.dev = false;
+        }
 
         // save setting into body
         for (let setting in settings) {
             document.body.style.setProperty(`--${setting}`, settings[setting]);
             document.documentElement.setAttribute(`data-bleh--${setting}`, `${settings[setting]}`);
         }
+
+        load_skus(settings);
 
         // save to settings
         localStorage.setItem('bleh', JSON.stringify(settings));
@@ -1552,6 +1710,11 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
         // save to settings
         localStorage.setItem('bleh', JSON.stringify(settings));
+
+        let scrobble_table = document.getElementById('scrobble-chart-content');
+        if (scrobble_table != null)
+            scrobble_table.removeAttribute('data-bleh--library');
+        load_bleh_user_library();
     }
 
     unsafeWindow.change_theme_from_settings = function(theme) {
@@ -1572,7 +1735,20 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
 
     // patch last.fm settings
-    function patch_lastfm_settings(element) {
+    function patch_lastfm_settings() {
+        // this is how we check we're in the settings
+        if (!document.body.classList[2].startsWith('namespace--settings'))
+            return;
+
+        let col_main = document.body.querySelector('.col-main');
+
+        if (col_main.hasAttribute('data-bleh'))
+            return;
+        col_main.setAttribute('data-bleh', 'true');
+
+        let navlist = document.body.querySelector('.secondary-nav');
+        col_main.insertBefore(navlist, col_main.firstChild);
+
         patch_settings_profile_tab();
         patch_settings_privacy_tab();
     }
@@ -1594,10 +1770,10 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     function patch_settings_charts_panel(token) {
         let charts_panel = document.getElementById('update-chart');
 
-        if (charts_panel.hasAttribute('data-kate-processed'))
+        if (charts_panel.hasAttribute('data-bleh'))
             return;
 
-        charts_panel.setAttribute('data-kate-processed', 'true');
+        charts_panel.setAttribute('data-bleh', 'true');
         charts_panel.classList.add('bleh--panel');
 
         // get info before destroying
@@ -1934,10 +2110,10 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     }
 
     function patch_settings_profile_panel(token, update_picture) {
-        if (update_picture.hasAttribute('data-kate-processed'))
+        if (update_picture.hasAttribute('data-bleh'))
             return;
 
-        update_picture.setAttribute('data-kate-processed', 'true');
+        update_picture.setAttribute('data-bleh', 'true');
         update_picture.classList.add('bleh--panel');
 
         let avatar_url = document.body.querySelector('.image-upload-preview img').getAttribute('src');
@@ -2080,9 +2256,9 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     <input type="hidden" name="csrfmiddlewaretoken" value="${token}">
                     <div class="form-group form-group--avatar js-form-group">
                         <div class="js-form-group-controls form-group-controls">
-                            <span class="btn-secondary btn primary btn-file" data-kate-processed="true">
+                            <span class="btn-secondary btn primary btn-file" data-bleh="true">
                             Choose file
-                                <input type="file" name="avatar" data-require="components/file-input" data-file-input-copy="Choose file" data-no-file-copy="No file chosen" accept="image/*" required="" id="id_avatar" data-kate-processed="true">
+                                <input type="file" name="avatar" data-require="components/file-input" data-file-input-copy="Choose file" data-no-file-copy="No file chosen" accept="image/*" required="" id="id_avatar" data-bleh="true">
                             </span>
                         </div>
                         ${trans[lang].settings.inbuilt.profile.avatar.upload}
@@ -2166,10 +2342,10 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     }
 
     function patch_settings_privacy_panel(token, privacy_panel) {
-        if (privacy_panel.hasAttribute('data-kate-processed'))
+        if (privacy_panel.hasAttribute('data-bleh'))
             return;
 
-        privacy_panel.setAttribute('data-kate-processed', 'true');
+        privacy_panel.setAttribute('data-bleh', 'true');
         privacy_panel.classList.add('bleh--panel');
 
         // get info before destroying
@@ -2341,6 +2517,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         if (profile_header == undefined)
             return;
 
+        return;
+
         patch_profile_following();
 
         let profile_name = profile_header.querySelector('a');
@@ -2353,8 +2531,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         if (profile_note != undefined)
             profile_has_note = true;
 
-        if (!profile_header.hasAttribute('data-kate-processed')) {
-            profile_header.setAttribute('data-kate-processed', 'true');
+        if (!profile_header.hasAttribute('data-bleh')) {
+            profile_header.setAttribute('data-bleh', 'true');
 
             if (redacted.includes(profile_name.textContent.toLowerCase())) {
                 let prior_redacted_msg = element.querySelector('.bleh--redacted-message');
@@ -2476,8 +2654,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         if (about_me_sidebar == undefined)
             return;
 
-        if (!about_me_sidebar.hasAttribute('data-kate-processed')) {
-            about_me_sidebar.setAttribute('data-kate-processed','true');
+        if (!about_me_sidebar.hasAttribute('data-bleh')) {
+            about_me_sidebar.setAttribute('data-bleh','true');
 
             // parse body
             let about_me_text = about_me_sidebar.querySelector('p');
@@ -2578,7 +2756,9 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         delete profile_notes[username];
         document.getElementById('bleh--profile-note').value = '';
 
-        localStorage.setItem('bleh_profile_notes',JSON.stringify(profile_notes));
+        localStorage.setItem('bleh_profile_notes', JSON.stringify(profile_notes));
+
+        deliver_notif(`cleared profile note for ${username}`);
     }
 
     unsafeWindow._save_profile_note = function(username) {
@@ -2593,7 +2773,9 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         .replace(/"/g, '&quot;')
         .replace(/'/g, '&#039;');
 
-        localStorage.setItem('bleh_profile_notes',JSON.stringify(profile_notes));
+        localStorage.setItem('bleh_profile_notes', JSON.stringify(profile_notes));
+
+        deliver_notif(`saved profile note for ${username}, ${document.getElementById('bleh--profile-note').value}`);
     }
 
 
@@ -2612,10 +2794,10 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         if (following_tab == undefined)
             return;
 
-        if (following_tab.hasAttribute('data-kate-processed'))
+        if (following_tab.hasAttribute('data-bleh'))
             return;
 
-        following_tab.setAttribute('data-kate-processed', 'true');
+        following_tab.setAttribute('data-bleh', 'true');
         following_tab.querySelector('a').textContent = trans[lang].profile.friends.name;
 
 
@@ -2644,97 +2826,95 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         tab.querySelector('a').textContent = trans[lang].profile.friends.name;
 
 
-        let adaptive_skin = document.body.querySelector('.adaptive-skin-container');
-        let page_content = adaptive_skin.querySelector('.page-content');
+        let col_main = document.body.querySelector('.col-main');
 
 
         // create nav
-        let bookmark_nav = document.createElement('div');
-        bookmark_nav.classList.add('bleh--nav-wrap', 'bleh--friends-nav');
+        let bookmark_nav = document.createElement('nav');
+        bookmark_nav.classList.add('navlist', 'secondary-nav', 'navlist--more', 'bleh--friends-nav');
         bookmark_nav.innerHTML = (`
-            <nav class="navlist secondary-nav">
-                <ul class="navlist-items bleh--navlist-items">
-                    ${following_tab_html}
-                    ${followers_tab_html}
-                    ${neighbours_tab_html}
-                </ul>
-            </nav>
+            <ul class="navlist-items bleh--navlist-items">
+                ${following_tab_html}
+                ${followers_tab_html}
+                ${neighbours_tab_html}
+            </ul>
         `);
 
-        adaptive_skin.insertBefore(bookmark_nav, page_content);
+        col_main.insertBefore(bookmark_nav, col_main.firstChild);
     }
 
 
     // patch shouts
-    function patch_shouts(element) {
-        let shouts = element.querySelectorAll('.shout');
+    function patch_shouts() {
+        let shouts = document.body.querySelectorAll('.shout');
 
         shouts.forEach((shout) => {
-            try {
-            if (!shout.hasAttribute('data-kate-processed')) {
-                shout.setAttribute('data-kate-processed', 'true');
+            if (shout.hasAttribute('data-bleh'))
+                return;
+            shout.setAttribute('data-bleh', 'true');
 
-                let shout_name = shout.querySelector('.shout-user a').textContent;
-                let shout_avatar = shout.querySelector('.shout-user-avatar');
+            let shout_body = shout.querySelector('.shout-body p');
+            // shout is deleted, reported, or something else
+            if (shout_body == null)
+                return;
 
-                let shout_body = shout.querySelector('.shout-body p');
+            let shout_name = shout.querySelector('.shout-user a').textContent;
+            let shout_avatar = shout.querySelector('.shout-user-avatar');
 
-                let converter = new showdown.Converter({
-                    emoji: true,
-                    excludeTrailingPunctuationFromURLs: true,
-                    headerLevelStart: 5,
-                    noHeaderId: true,
-                    openLinksInNewWindow: true,
-                    requireSpaceBeforeHeadingText: true,
-                    simpleLineBreaks: true,
-                    simplifiedAutoLink: true,
-                    strikethrough: true,
-                    underline: true,
-                    ghCodeBlocks: false,
-                    smartIndentationFix: true
-                });
-                let parsed_body = converter.makeHtml(shout_body.textContent
-                .replace(/([@])([a-zA-Z0-9_]+)/g, '[$1$2](/user/$2)')
-                .replace(/\[artist\]([a-zA-Z0-9]+)\[\/artist\]/g, '[$1](/music/$1)')
-                .replace(/\[album artist=([a-zA-Z0-9]+)\]([a-zA-Z0-9\s]+)\[\/album\]/g, '[$2](/music/$1/$2)')
-                .replace(/\[track artist=([a-zA-Z0-9]+)\]([a-zA-Z0-9\s]+)\[\/track\]/g, '[$2](/music/$1/_/$2)')
-                .replace(/https:\/\/open\.spotify\.com\/user\/([A-Za-z0-9]+)\?si=([A-Za-z0-9]+)/g, '[@$1](https://open.spotify.com/user/$1)')
-                .replace(/&/g, '&amp;')
-                .replace(/</g, '&lt;')
-                .replace(/>/g, '&gt;')
-                .replace(/"/g, '&quot;')
-                .replace(/'/g, '&#039;'));
-                console.log(shout_body.textContent, parsed_body);
-                shout_body.innerHTML = parsed_body;
+            let converter = new showdown.Converter({
+                emoji: true,
+                excludeTrailingPunctuationFromURLs: true,
+                headerLevelStart: 5,
+                noHeaderId: true,
+                openLinksInNewWindow: true,
+                requireSpaceBeforeHeadingText: true,
+                simpleLineBreaks: true,
+                simplifiedAutoLink: true,
+                strikethrough: true,
+                underline: true,
+                ghCodeBlocks: false,
+                smartIndentationFix: true
+            });
+            let parsed_body = converter.makeHtml(shout_body.textContent
+            .replace(/([@])([a-zA-Z0-9_]+)/g, '[$1$2](/user/$2)')
+            .replace(/\[artist\]([a-zA-Z0-9]+)\[\/artist\]/g, '[$1](/music/$1)')
+            .replace(/\[album artist=([a-zA-Z0-9]+)\]([a-zA-Z0-9\s]+)\[\/album\]/g, '[$2](/music/$1/$2)')
+            .replace(/\[track artist=([a-zA-Z0-9]+)\]([a-zA-Z0-9\s]+)\[\/track\]/g, '[$2](/music/$1/_/$2)')
+            .replace(/https:\/\/open\.spotify\.com\/user\/([A-Za-z0-9]+)\?si=([A-Za-z0-9]+)/g, '[@$1](https://open.spotify.com/user/$1)')
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#039;'));
+            console.log(shout_body.textContent, parsed_body);
+            shout_body.innerHTML = parsed_body;
 
-                if (redacted.includes(shout_name.toLowerCase())) {
-                    shout.classList.add('shout--bleh-redacted');
-                    shout.setAttribute('data-bleh--shout-expanded','false');
-                    shout_avatar.classList.add('avatar--bleh-missing');
+            if (redacted.includes(shout_name.toLowerCase())) {
+                shout.classList.add('shout--bleh-redacted');
+                shout.setAttribute('data-bleh--shout-expanded','false');
+                shout_avatar.classList.add('avatar--bleh-missing');
 
-                    let redacted_msg = document.createElement('p');
-                    redacted_msg.textContent = 'This user is hidden.';
-                    shout.insertBefore(redacted_msg, shout.firstChild);
+                let redacted_msg = document.createElement('p');
+                redacted_msg.textContent = 'This user is hidden.';
+                shout.insertBefore(redacted_msg, shout.firstChild);
 
 
-                    // gather shout id from more actions' id
-                    let shout_actions = shout.querySelector('.shout-more-actions-menu');
-                    let shout_id = shout_actions.getAttribute('id').replace('shout-more-actions-');
-                    shout.setAttribute('id',`bleh--shout-${shout_id}`);
+                // gather shout id from more actions' id
+                let shout_actions = shout.querySelector('.shout-more-actions-menu');
+                let shout_id = shout_actions.getAttribute('id').replace('shout-more-actions-');
+                shout.setAttribute('id',`bleh--shout-${shout_id}`);
 
-                    // append button
-                    let shout_show_button = document.createElement('li');
-                    shout_show_button.innerHTML = (`
-                        <button onclick="_show_hidden_shout('${shout_id}')" class="dropdown-menu-clickable-item more-item--bleh--show-hidden-shout">
-                            Show shout contents
-                        </button>
-                    `);
-                    shout_actions.appendChild(shout_show_button);
-                } else {
-                    patch_avatar(shout_avatar, shout_name);
-                }
+                // append button
+                let shout_show_button = document.createElement('li');
+                shout_show_button.innerHTML = (`
+                    <button onclick="_show_hidden_shout('${shout_id}')" class="dropdown-menu-clickable-item more-item--bleh--show-hidden-shout">
+                        Show shout contents
+                    </button>
+                `);
+                shout_actions.appendChild(shout_show_button);
+            } else {
+                patch_avatar(shout_avatar, shout_name);
             }
-            } catch(e) {}
         });
     }
 
@@ -2745,44 +2925,44 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
     // patch avatar
     function patch_avatar(element, name) {
-        if (!element.hasAttribute('data-kate-processed')) {
-            element.setAttribute('data-kate-processed', 'true');
+        if (element.hasAttribute('data-bleh'))
+            return;
+        element.setAttribute('data-bleh', 'true');
 
-            if (profile_badges.hasOwnProperty(name)) {
-                // remove pre-existing badge
-                let pre_existing_badge = element.querySelector('.avatar-status-dot');
-                if (pre_existing_badge !== null)
-                    element.removeChild(pre_existing_badge);
+        if (profile_badges.hasOwnProperty(name)) {
+            // remove pre-existing badge
+            let pre_existing_badge = element.querySelector('.avatar-status-dot');
+            if (pre_existing_badge !== null)
+                element.removeChild(pre_existing_badge);
 
-                element.setAttribute('title','');
+            element.setAttribute('title','');
 
-                let this_badge = profile_badges[name];
-                if (!Array.isArray(profile_badges[name])) {
-                    // default
-                    console.info('bleh - user has 1 badge', profile_badges[name]);
-                } else {
-                    // multiple
-                    console.info('bleh - user has multiple badges', profile_badges[name]);
-                    let badges_length = Object.keys(profile_badges[name]).length - 1;
-                    this_badge = profile_badges[name][badges_length];
-                    console.info('bleh - using badge', badges_length, profile_badges[name][badges_length], 'as primary badge');
-                }
-
-                // make new badge
-                let badge = document.createElement('span');
-                badge.classList.add('avatar-status-dot',`user-status--bleh-${this_badge.type}`,`user-status--bleh-user-${name}`);
-                element.appendChild(badge);
-
-                tippy(badge, {
-                    content: `${name}, ${this_badge.name}`
-                });
+            let this_badge = profile_badges[name];
+            if (!Array.isArray(profile_badges[name])) {
+                // default
+                console.info('bleh - user has 1 badge', profile_badges[name]);
             } else {
-                let pre_existing_badge = element.querySelector('.avatar-status-dot');
-                tippy(pre_existing_badge, {
-                    content: `${name}, ${element.getAttribute('title')}`
-                });
-                element.setAttribute('title','');
+                // multiple
+                console.info('bleh - user has multiple badges', profile_badges[name]);
+                let badges_length = Object.keys(profile_badges[name]).length - 1;
+                this_badge = profile_badges[name][badges_length];
+                console.info('bleh - using badge', badges_length, profile_badges[name][badges_length], 'as primary badge');
             }
+
+            // make new badge
+            let badge = document.createElement('span');
+            badge.classList.add('avatar-status-dot',`user-badge--${this_badge.type}`,`user-badge--user-${name}`);
+            element.appendChild(badge);
+
+            tippy(badge, {
+                content: `${name}, ${this_badge.name}`
+            });
+        } else {
+            let pre_existing_badge = element.querySelector('.avatar-status-dot');
+            tippy(pre_existing_badge, {
+                content: `${name}, ${element.getAttribute('title')}`
+            });
+            element.setAttribute('title','');
         }
     }
 
@@ -2801,8 +2981,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             if (personal_statistic == undefined)
                 return;
 
-            if (!personal_statistic.hasAttribute('data-kate-processed')) {
-                personal_statistic.setAttribute('data-kate-processed','true');
+            if (!personal_statistic.hasAttribute('data-bleh')) {
+                personal_statistic.setAttribute('data-bleh','true');
 
                 let scrobbles = parseInt(personal_statistic.querySelector('.link-block-target').textContent.replaceAll(',',''));
                 let parsed_scrobble_as_rank = parse_scrobbles_as_rank(scrobbles);
@@ -2822,8 +3002,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             return;
 
         artist_statistics.forEach((artist_statistic) => {
-            if (!artist_statistic.hasAttribute('data-kate-processed')) {
-                artist_statistic.setAttribute('data-kate-processed','true');
+            if (!artist_statistic.hasAttribute('data-bleh')) {
+                artist_statistic.setAttribute('data-bleh','true');
 
                 if (!artist_statistic.getAttribute('href').endsWith('DAYS') && !artist_statistic.classList.contains('grid-items-item-aux-block')) {
                     console.info('bleh - artist grid plays match');
@@ -2852,8 +3032,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
         let count = parseInt(count_bar.querySelector('.chartlist-count-bar-value').textContent.replaceAll(',','').replace(' scrobbles',''));
 
-        if (!count_bar.hasAttribute('data-kate-processed')) {
-            count_bar.setAttribute('data-kate-processed','true');
+        if (!count_bar.hasAttribute('data-bleh')) {
+            count_bar.setAttribute('data-bleh','true');
 
             let parsed_scrobble_as_rank = parse_scrobbles_as_rank(count);
 
@@ -2941,8 +3121,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             return;
 
         artists.forEach((artist) => {
-            if (!artist.hasAttribute('data-kate-processed')) {
-                artist.setAttribute('data-kate-processed','true');
+            if (!artist.hasAttribute('data-bleh')) {
+                artist.setAttribute('data-bleh','true');
 
                 // test if this grid item is an album
                 let album_artist = artist.querySelector('.grid-items-item-aux-block');
@@ -2984,8 +3164,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             return;
 
         albums.forEach((album) => {
-            if (!album.hasAttribute('data-kate-processed')) {
-                album.setAttribute('data-kate-processed','true');
+            if (!album.hasAttribute('data-bleh')) {
+                album.setAttribute('data-bleh','true');
                 console.info('bleh - correcting generic combo for a child of', parent);
 
                 let album_name = album.querySelector(`.${parent.replace('-details','')}-name a`);
@@ -3014,8 +3194,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             return;
 
         albums.forEach((album) => {
-            if (!album.hasAttribute('data-kate-processed')) {
-                album.setAttribute('data-kate-processed','true');
+            if (!album.hasAttribute('data-bleh')) {
+                album.setAttribute('data-bleh','true');
                 console.info('bleh - correcting generic combo (no artist) for a child of', parent);
 
                 let album_name = album.querySelector(`.${parent.replace('-details','')}-name a`);
@@ -3076,8 +3256,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         if (menu == undefined)
             return;
 
-        if (!menu.hasAttribute('data-kate-processed')) {
-            menu.setAttribute('data-kate-processed','true');
+        if (!menu.hasAttribute('data-bleh')) {
+            menu.setAttribute('data-bleh','true');
 
             let extra_items = document.createElement('li');
             extra_items.innerHTML = (`
@@ -3102,10 +3282,11 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     }
 
     function bleh_settings() {
+        let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
         let adaptive_skin_container = document.querySelector('.adaptive-skin-container');
 
-        if (!adaptive_skin_container.hasAttribute('data-kate-processed')) {
-            adaptive_skin_container.setAttribute('data-kate-processed','true');
+        if (!adaptive_skin_container.hasAttribute('data-bleh')) {
+            adaptive_skin_container.setAttribute('data-bleh','true');
 
             // initial
             adaptive_skin_container.innerHTML = '';
@@ -3126,40 +3307,64 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
             let side = document.createElement('div');
             side.classList.add('bleh--panel-side');
-            side.innerHTML = (`
-                <div class="bleh--panel">
-                    <div class="btns">
-                        <button class="btn bleh--btn" data-bleh-page="home" onclick="_change_settings_page('home')">
-                            ${trans[lang].settings.home.name}
-                        </button>
-                        <button class="btn bleh--btn" data-bleh-page="themes" onclick="_change_settings_page('themes')">
-                            ${trans[lang].settings.themes.name}
-                        </button>
-                        <button class="btn bleh--btn" data-bleh-page="customise" onclick="_change_settings_page('customise')">
-                            ${trans[lang].settings.customise.name}
-                        </button>
-                        <button class="btn bleh--btn" data-bleh-page="profiles" onclick="_change_settings_page('profiles')">
-                            ${trans[lang].settings.profiles.name}
-                        </button>
-                        <button class="btn bleh--btn" data-bleh-page="performance" onclick="_change_settings_page('performance')">
-                            ${trans[lang].settings.performance.name}
-                        </button>
+
+            if (!settings.feature_flags.bleh_settings_tabs) {
+                side.innerHTML = (`
+                    <div class="bleh--panel">
+                        <div class="btns">
+                            <button class="btn bleh--btn bleh--nav" data-bleh-page="home" onclick="_change_settings_page('home')">
+                                ${trans[lang].settings.home.name}
+                            </button>
+                            <button class="btn bleh--btn bleh--nav" data-bleh-page="themes" onclick="_change_settings_page('themes')">
+                                ${trans[lang].settings.themes.name}
+                            </button>
+                            <button class="btn bleh--btn bleh--nav" data-bleh-page="customise" onclick="_change_settings_page('customise')">
+                                ${trans[lang].settings.customise.name}
+                            </button>
+                            <button class="btn bleh--btn bleh--nav" data-bleh-page="profiles" onclick="_change_settings_page('profiles')">
+                                ${trans[lang].settings.profiles.name}
+                            </button>
+                            <button class="btn bleh--btn bleh--nav" data-bleh-page="performance" onclick="_change_settings_page('performance')">
+                                ${trans[lang].settings.performance.name}
+                            </button>
+                            <button class="btn bleh--btn" data-bleh-page="sku" onclick="_change_settings_page('sku')">
+                                Configure your bleh sku
+                            </button>
+                        </div>
+                        <div class="btns sep">
+                            <button class="btn" data-bleh-action="import" onclick="_import_settings()">
+                                ${trans[lang].settings.actions.import.name}
+                            </button>
+                            <button class="btn" data-bleh-action="export" onclick="_export_settings()">
+                                ${trans[lang].settings.actions.export.name}
+                            </button>
+                        </div>
+                        <div class="btns sep">
+                            <button class="btn" data-bleh-action="reset" onclick="_reset_settings()">
+                                ${trans[lang].settings.actions.reset.name}
+                            </button>
+                        </div>
                     </div>
-                    <div class="btns sep">
-                        <button class="btn" data-bleh-action="import" onclick="_import_settings()">
-                            ${trans[lang].settings.actions.import.name}
-                        </button>
-                        <button class="btn" data-bleh-action="export" onclick="_export_settings()">
-                            ${trans[lang].settings.actions.export.name}
-                        </button>
+                `);
+            } else {
+                side.innerHTML = (`
+                    <div class="bleh--panel">
+                        <div class="btns">
+                            <button class="btn" data-bleh-action="import" onclick="_import_settings()">
+                                ${trans[lang].settings.actions.import.name}
+                            </button>
+                            <button class="btn" data-bleh-action="export" onclick="_export_settings()">
+                                ${trans[lang].settings.actions.export.name}
+                            </button>
+                        </div>
+                        <div class="btns sep">
+                            <button class="btn" data-bleh-action="reset" onclick="_reset_settings()">
+                                ${trans[lang].settings.actions.reset.name}
+                            </button>
+                        </div>
                     </div>
-                    <div class="btns sep">
-                        <button class="btn" data-bleh-action="reset" onclick="_reset_settings()">
-                            ${trans[lang].settings.actions.reset.name}
-                        </button>
-                    </div>
-                </div>
-            `);
+                `);
+            }
 
 
             inner.appendChild(main);
@@ -3174,17 +3379,18 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     function render_setting_page(page) {
         if (page == 'home') {
             return (`
-            <div class="bleh--panel">
-                <h3>${trans[lang].settings.home.name}</h3>
+            <div class="bleh--panel welcome">
+                <h1 class="welcome-text">welcome</h1>
+                <h2>You are running ${trans[lang].settings.home.brand} <span onclick="_change_settings_page('sku')">${version.build}</span></h2>
                 <div class="screen-row">
-                    <div class="screen-wrap">
-                        <img class="screen" src="https://cutensilly.org/img/bleh3-theme-${document.documentElement.getAttribute('data-bleh--theme')}.png" alt="bleh">
-                        <div class="text">
-                            <h5>${trans[lang].settings.home.brand}</h5>
-                            <p>${trans[lang].settings.home.version.replace('{v}', version)}</p>
-                        </div>
-                    </div>
                     <div class="actions">
+                        <a class="btn action" onclick="_change_settings_page('customise')">
+                            <div class="icon bleh--palette"></div>
+                            <span class="text">
+                                <h5>${trans[lang].settings.home.colours.name}</h5>
+                                <p>${trans[lang].settings.home.colours.bio}</p>
+                            </span>
+                        </a>
                         <a class="btn action" href="https://github.com/katelyynn/bleh/issues" target="_blank">
                             <div class="icon bleh--issues"></div>
                             <span class="text">
@@ -3194,7 +3400,9 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                         </a>
                     </div>
                 </div>
-                <h4>${trans[lang].settings.home.recommended}</h4>
+            </div>
+            <div class="bleh--panel">
+                <h3>${trans[lang].settings.home.recommended}</h3>
                 <div class="setting-items">
                     <div class="side-left">
                         <button class="btn setting-item has-image" onclick="_change_settings_page('themes')">
@@ -3412,13 +3620,13 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 <div class="bleh--panel">
                     <h3>${trans[lang].settings.customise.display.name}</h3>
                     <div class="inner-preview pad flex">
-                        <div class="shout js-shout js-link-block" data-kate-processed="true">
+                        <div class="shout js-shout js-link-block" data-bleh="true">
                             <h3 class="shout-user">
                                 <a>cutensilly</a>
                             </h3>
-                            <span class="avatar shout-user-avatar" title="Last.fm Pro user" data-kate-processed="true">
+                            <span class="avatar shout-user-avatar" title="Last.fm Pro user" data-bleh="true">
                                 <img src="https://lastfm.freetls.fastly.net/i/u/avatar70s/198d1a3bd66a0d586e8e7af8a31febe4.jpg" alt="Your avatar" loading="lazy">
-                                <span class="avatar-status-dot user-status--bleh-queen user-status--bleh-user-cutensilly" data-kate-processed="true"></span>
+                                <span class="avatar-status-dot user-status--bleh-queen user-status--bleh-user-cutensilly" data-bleh="true"></span>
                             </span>
                             <a class="shout-permalink shout-timestamp">
                                 <time datetime="2024-06-05T02:33:39+01:00" title="Wednesday 5 Jun 2024, 2:33am">
@@ -3457,7 +3665,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     <div class="sep"></div>
                     <div class="inner-preview pad">
                         <div class="personal-stats-preview bleh--personal-stats-if-colourful">
-                            <div class="personal-stats-item personal-stats-item--scrobbles link-block js-link-block" data-kate-processed="true" data-bleh--scrobble-milestone="10" style="--hue: -14.921125; --sat: 1.5; --lit: 0.875;">
+                            <div class="personal-stats-item personal-stats-item--scrobbles link-block js-link-block" data-bleh="true" data-bleh--scrobble-milestone="10" style="--hue: -14.921125; --sat: 1.5; --lit: 0.875;">
                                 <div class="personal-stats-inner">
                                     <ul class="header-metadata">
                                         <li class="header-metadata-item">
@@ -3473,11 +3681,11 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                                     </ul>
                                     <span class="avatar personal-stats-avatar">
                                         <img src="https://lastfm.freetls.fastly.net/i/u/avatar70s/198d1a3bd66a0d586e8e7af8a31febe4.jpg" alt="Your avatar" loading="lazy">
-                                        <span class="avatar-status-dot user-status--bleh-queen user-status--bleh-user-cutensilly" data-kate-processed="true"></span>
+                                        <span class="avatar-status-dot user-status--bleh-queen user-status--bleh-user-cutensilly" data-bleh="true"></span>
                                     </span>
                                 </div>
                             </div>
-                            <div class="personal-stats-item personal-stats-item--scrobbles link-block js-link-block" data-kate-processed="true" data-bleh--scrobble-milestone="5" style="--hue: 96.59066666666666; --sat: 1.35; --lit: 0.925;">
+                            <div class="personal-stats-item personal-stats-item--scrobbles link-block js-link-block" data-bleh="true" data-bleh--scrobble-milestone="5" style="--hue: 96.59066666666666; --sat: 1.35; --lit: 0.925;">
                                 <div class="personal-stats-inner">
                                     <ul class="header-metadata">
                                         <li class="header-metadata-item">
@@ -3493,7 +3701,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                                     </ul>
                                     <span class="avatar personal-stats-avatar">
                                         <img src="https://lastfm.freetls.fastly.net/i/u/avatar70s/198d1a3bd66a0d586e8e7af8a31febe4.jpg" alt="Your avatar" loading="lazy">
-                                        <span class="avatar-status-dot user-status--bleh-queen user-status--bleh-user-cutensilly" data-kate-processed="true"></span>
+                                        <span class="avatar-status-dot user-status--bleh-queen user-status--bleh-user-cutensilly" data-bleh="true"></span>
                                     </span>
                                 </div>
                             </div>
@@ -3515,7 +3723,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                                     </ul>
                                     <span class="avatar personal-stats-avatar">
                                         <img src="https://lastfm.freetls.fastly.net/i/u/avatar70s/198d1a3bd66a0d586e8e7af8a31febe4.jpg" alt="Your avatar" loading="lazy">
-                                        <span class="avatar-status-dot user-status--bleh-queen user-status--bleh-user-cutensilly" data-kate-processed="true"></span>
+                                        <span class="avatar-status-dot user-status--bleh-queen user-status--bleh-user-cutensilly" data-bleh="true"></span>
                                     </span>
                                 </div>
                             </div>
@@ -3535,7 +3743,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                                     </ul>
                                     <span class="avatar personal-stats-avatar">
                                         <img src="https://lastfm.freetls.fastly.net/i/u/avatar70s/198d1a3bd66a0d586e8e7af8a31febe4.jpg" alt="Your avatar" loading="lazy">
-                                        <span class="avatar-status-dot user-status--bleh-queen user-status--bleh-user-cutensilly" data-kate-processed="true"></span>
+                                        <span class="avatar-status-dot user-status--bleh-queen user-status--bleh-user-cutensilly" data-bleh="true"></span>
                                     </span>
                                 </div>
                             </div>
@@ -3756,7 +3964,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                         </div>
                     </div>
                 </div>
-                `);
+            `);
         } else if (page == 'profiles') {
             return (`
                 <div class="bleh--panel">
@@ -3766,15 +3974,100 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     <div class="profile-notes" id="profile-notes"></div>
                 </div>
                 `);
+        } else if (page == 'sku') {
+            return (`
+                <div class="bleh--panel shh">
+                    shhh...<br>let's not leak<br>our hard work
+                    <div class="screen-row">
+                        <div class="actions">
+                            <a class="btn action">
+                                <span class="text">
+                                    <h5>build</h5>
+                                    <p>${version.build}</p>
+                                </span>
+                            </a>
+                            <a class="btn action">
+                                <span class="text">
+                                    <h5>sku</h5>
+                                    <p>${version.sku}</p>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="bleh--panel">
+                    <h3>Feature Flags</h3>
+                    <div class="feature-flags" id="feature-flags"></div>
+                </div>
+                `);
         }
     }
 
     unsafeWindow._change_settings_page = function(page) {
+        if (page == 'sku' && version.sku == 'main') {
+            deliver_notif(`secrets are not available for your sku (${version.sku})`)
+            return;
+        }
+
+        if (page == 'performance' && version.sku == 'refresh') {
+            create_window('performance_in_refresh_sku', 'shhh...', (`
+                <div class="alert alert-error">Performance options are not accessible when bleh is under the <code>refresh</code> sku.</div>
+                <div class="modal-footer">
+                    <button class="btn primary" onclick="_kill_window('performance_in_refresh_sku')">
+                        ${trans[lang].settings.continue}
+                    </button>
+                </div>
+            `));
+            return;
+        }
+
         change_settings_page(page);
     }
 
     function change_settings_page(page) {
-        let btns = document.querySelectorAll('.bleh--btn');
+        let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
+
+        if (!settings.feature_flags.bleh_settings_tabs)
+            document.getElementById('bleh--panel-main').innerHTML = '';
+        else
+            document.getElementById('bleh--panel-main').innerHTML = (`
+                <nav class="navlist secondary-nav navlist--more">
+                    <ul class="navlist-items">
+                        <li class="navlist-item secondary-nav-item">
+                            <a class="secondary-nav-item-link bleh--nav" data-bleh-page="home" onclick="_change_settings_page('home')">
+                                ${trans[lang].settings.home.name}
+                            </a>
+                        </li>
+                        <li class="navlist-item secondary-nav-item">
+                            <a class="secondary-nav-item-link bleh--nav" data-bleh-page="themes" onclick="_change_settings_page('themes')">
+                                ${trans[lang].settings.themes.name}
+                            </a>
+                        </li>
+                        <li class="navlist-item secondary-nav-item">
+                            <a class="secondary-nav-item-link bleh--nav" data-bleh-page="customise" onclick="_change_settings_page('customise')">
+                                ${trans[lang].settings.customise.name}
+                            </a>
+                        </li>
+                        <li class="navlist-item secondary-nav-item">
+                            <a class="secondary-nav-item-link bleh--nav" data-bleh-page="profiles" onclick="_change_settings_page('profiles')">
+                                ${trans[lang].settings.profiles.name}
+                            </a>
+                        </li>
+                        <li class="navlist-item secondary-nav-item">
+                            <a class="secondary-nav-item-link bleh--nav" data-bleh-page="performance" onclick="_change_settings_page('performance')">
+                                ${trans[lang].settings.performance.name}
+                            </a>
+                        </li>
+                        <li class="navlist-item secondary-nav-item">
+                            <a class="secondary-nav-item-link bleh--nav" data-bleh-page="sku" onclick="_change_settings_page('sku')">
+                                shhh...
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            `);
+
+        let btns = document.querySelectorAll('.bleh--nav');
         btns.forEach((btn) => {
             console.log(btn.getAttribute('data-bleh-page'),page);
             if (btn.getAttribute('data-bleh-page') != page) {
@@ -3784,7 +4077,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             }
         });
 
-        document.getElementById('bleh--panel-main').innerHTML = render_setting_page(page);
+        document.getElementById('bleh--panel-main').innerHTML = document.getElementById('bleh--panel-main').innerHTML + render_setting_page(page);
 
         if (page == 'themes')
             show_theme_change_in_settings();
@@ -3792,6 +4085,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             refresh_all();
         else if (page == 'profiles')
             init_profile_notes();
+        else if (page == 'sku')
+            bleh_sku_page();
     }
 
     function show_theme_change_in_settings(theme = '') {
@@ -4122,8 +4417,6 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     unsafeWindow._create_a_custom_colour = function() {
         let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
         create_window('custom_colour',trans[lang].settings.customise.colours.custom,`
-        <p>${trans[lang].settings.customise.colours.modals.custom_colour.preface}</p>
-        <br>
         <div class="inner-preview pad">
             <div class="palette">
                 <div style="--col: hsl(var(--l2-c))"></div>
@@ -4213,13 +4506,13 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         background.classList.add('popup_background');
         background.setAttribute('id',`bleh--window-${id}--background`);
         background.style = 'opacity: 0.8; visibility: visible; background-color: rgb(0, 0, 0); position: fixed; inset: 0px;';
-        background.setAttribute('data-kate-processed','true');
+        background.setAttribute('data-bleh','true');
 
         let wrapper = document.createElement('div');
         wrapper.classList.add('popup_wrapper','popup_wrapper_visible');
         wrapper.setAttribute('id',`bleh--window-${id}--wrapper`);
         wrapper.style = 'opacity: 1; visibility: visible; position: fixed; overflow: auto; width: 100%; height: 100%; top: 0px; left: 0px; text-align: center;';
-        wrapper.setAttribute('data-kate-processed','true');
+        wrapper.setAttribute('data-bleh','true');
 
 
         // dialog
@@ -4227,44 +4520,44 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         dialog.classList.add('modal-dialog');
         dialog.setAttribute('id',`bleh--window-${id}--dialog`);
         dialog.style = 'opacity: 1; visibility: visible; pointer-events: auto; display: inline-block; outline: none; text-align: left; position: relative; vertical-align: middle;';
-        dialog.setAttribute('data-kate-processed','true');
+        dialog.setAttribute('data-bleh','true');
 
         // content
         let content = document.createElement('div');
         content.classList.add('modal-content');
         content.setAttribute('id',`bleh--window-${id}--content`);
-        content.setAttribute('data-kate-processed','true');
+        content.setAttribute('data-bleh','true');
 
         // share content
         let share = document.createElement('div');
         share.classList.add('modal-share-content');
         share.setAttribute('id',`bleh--window-${id}--share`);
-        share.setAttribute('data-kate-processed','true');
+        share.setAttribute('data-bleh','true');
 
         // body
         let body = document.createElement('div');
         body.classList.add('modal-body');
         body.setAttribute('id',`bleh--window-${id}--body`);
-        body.setAttribute('data-kate-processed','true');
+        body.setAttribute('data-bleh','true');
 
         // title
         let header = document.createElement('h2');
         header.classList.add('modal-title');
         header.textContent = title;
-        header.setAttribute('data-kate-processed','true');
+        header.setAttribute('data-bleh','true');
 
         // inner content
         let inner_content_em = document.createElement('div');
         inner_content_em.classList.add('modal-inner-content');
         inner_content_em.innerHTML = inner_content;
-        inner_content_em.setAttribute('data-kate-processed','true');
+        inner_content_em.setAttribute('data-bleh','true');
 
 
         let align = document.createElement('div');
         align.classList.add('popup_align');
         align.setAttribute('id',`bleh--window-${id}--align`);
         align.style = 'display: inline-block; vertical-align: middle; height: 100%;';
-        align.setAttribute('data-kate-processed','true');
+        align.setAttribute('data-bleh','true');
 
 
         body.appendChild(header);
@@ -4480,8 +4773,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             return;
 
         tracks.forEach((track => {
-            if (!track.hasAttribute('data-kate-processed')) {
-                track.setAttribute('data-kate-processed','true');
+            if (!track.hasAttribute('data-bleh')) {
+                track.setAttribute('data-bleh','true');
 
                 // duration
                 let track_timestamp = track.querySelector('.chartlist-timestamp span');
@@ -4609,8 +4902,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
         if (settings.format_guest_features) {
             try {
-            if (!track_title.hasAttribute('data-kate-processed')) {
-                track_title.setAttribute('data-kate-processed','true');
+            if (!track_title.hasAttribute('data-bleh')) {
+                track_title.setAttribute('data-bleh','true');
 
                 let formatted_title = name_includes(track_title.textContent, track_artist.textContent);
                 let song_title = formatted_title[0];
@@ -4642,8 +4935,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             }
             } catch(e) {}
         } else {
-            if (!track_title.hasAttribute('data-kate-processed')) {
-                track_title.setAttribute('data-kate-processed','true');
+            if (!track_title.hasAttribute('data-bleh')) {
+                track_title.setAttribute('data-bleh','true');
 
                 let corrected_title = correct_item_by_artist(track_title.textContent, track_artist.textContent);
                 track_title.textContent = corrected_title;
@@ -4735,25 +5028,24 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
     // gallery main page
     function patch_gallery_image_listing(image_list) {
-        if (image_list.hasAttribute('data-kate-processed'))
+        if (image_list.hasAttribute('data-bleh'))
             return;
 
-        image_list.setAttribute('data-kate-processed', 'true');
+        image_list.setAttribute('data-bleh', 'true');
 
         let bookmarked_images = JSON.parse(localStorage.getItem('bleh_bookmarked_images')) || {};
 
         let artist_name = document.body.querySelector('.header-new-title').textContent;
 
-        let adaptive_skin = document.body.querySelector('.adaptive-skin-container');
-        let page_content = adaptive_skin.querySelector('.page-content');
+        let row = document.body.querySelector('.page-content .row');
 
         document.body.setAttribute('data-bleh--gallery-tab', 'overview');
 
 
-        // create nav
-        let bookmark_nav = document.createElement('div');
-        bookmark_nav.classList.add('bleh--nav-wrap');
-        bookmark_nav.innerHTML = (`
+        // content
+        let bookmarks_content = document.createElement('div');
+        bookmarks_content.classList.add('col-main', 'bleh--bookmarks');
+        bookmarks_content.innerHTML = (`
             <nav class="navlist secondary-nav">
                 <ul class="navlist-items">
                     <li class="navlist-item secondary-nav-item secondary-nav-item--gallery-overview">
@@ -4768,26 +5060,14 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     </li>
                 </ul>
             </nav>
+            <section>
+                <h2>${trans[lang].gallery.bookmarks.name}</h2>
+                <p>${trans[lang].gallery.bookmarks.bio}</p>
+                <ul class="image-list" id="bleh--bookmarked-images" data-bleh="true"></ul>
+            </section>
         `);
 
-        adaptive_skin.insertBefore(bookmark_nav, page_content);
-
-
-        // content
-        let bookmarks_content = document.createElement('div');
-        bookmarks_content.classList.add('container', 'page-content', 'bleh--bookmarks');
-        bookmarks_content.innerHTML = (`
-            <div class="row buffer-4">
-                <div class="col-main">
-                    <h2>${trans[lang].gallery.bookmarks.name}</h2>
-                    <p>${trans[lang].gallery.bookmarks.bio}</p>
-                    <ul class="image-list" id="bleh--bookmarked-images" data-kate-processed="true"></ul>
-                </div>
-                <div class="col-sidebar"></div>
-            </div>
-        `);
-
-        adaptive_skin.insertBefore(bookmarks_content, page_content);
+        row.insertBefore(bookmarks_content, row.firstChild);
 
 
         // append images
@@ -4825,10 +5105,10 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     // gallery focused image
     function patch_gallery_focused_image(focused_image_details) {
         console.info(focused_image_details);
-        if (focused_image_details.hasAttribute('data-kate-processed'))
+        if (focused_image_details.hasAttribute('data-bleh'))
             return;
 
-        focused_image_details.setAttribute('data-kate-processed', 'true');
+        focused_image_details.setAttribute('data-bleh', 'true');
 
         let artist_name = document.body.querySelector('.header-new-title').textContent;
         let focused_image_id = focused_image_details.querySelector('div[data-image-url]').getAttribute('data-image-url').split('/')[4];
@@ -4968,8 +5248,2080 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         } catch(e) {console.error('bwaaaaaaaa',e)}
     }
 
+
+
+
+    // album pages
+    function bleh_album_pages() {
+        let album_header = document.body.querySelector('.header-new--album');
+
+        if (album_header == undefined)
+            return;
+
+        if (album_header.hasAttribute('data-bleh'))
+            return;
+        album_header.setAttribute('data-bleh', 'true');
+
+        let is_subpage = album_header.classList.contains('header-new--subpage');
+
+        let row = document.body.querySelector('.row');
+        let col_main = document.body.querySelector('.col-main:not(.visible-xs, .upper-overview)');
+        let col_sidebar = document.body.querySelector('.col-sidebar:not(.masonry-right)');
+
+        let navlist = album_header.querySelector('.navlist');
+        if (!is_subpage) {
+            navlist = document.createElement('nav');
+            navlist.classList.add('navlist', 'secondary-nav', 'navlist--more');
+            navlist.setAttribute('aria-label', 'Secondary navigation');
+            navlist.setAttribute('data-require', 'components/collapsing-nav-v2');
+
+            navlist.innerHTML = (`
+                <ul class="navlist-items js-navlist-items" style="position: relative;">
+                    <li class="navlist-item secondary-nav-item secondary-nav-item--overview">
+                        <a class="secondary-nav-item-link secondary-nav-item-link--active" href="${window.location.href}">
+                            Overview
+                        </a>
+                    </li>
+                    <li class="navlist-item secondary-nav-item secondary-nav-item--wiki">
+                        <a class="secondary-nav-item-link" href="${window.location.href}/+wiki">
+                            Wiki
+                        </a>
+                    </li>
+                    <li class="navlist-item secondary-nav-item secondary-nav-item--tags">
+                        <a class="secondary-nav-item-link" href="${window.location.href}/+tags">
+                            Tags
+                        </a>
+                    </li>
+                    <li class="navlist-item secondary-nav-item secondary-nav-item--images">
+                        <a class="secondary-nav-item-link" href="${window.location.href}/+images">
+                            Artwork
+                        </a>
+                    </li>
+                    <li class="navlist-item secondary-nav-item secondary-nav-item--shoutbox">
+                        <a class="secondary-nav-item-link" href="${window.location.href}/+shoutbox">
+                            Shouts
+                        </a>
+                    </li>
+                </ul>
+            `);
+        }
+
+        col_main.insertBefore(navlist, col_main.firstChild);
+        col_sidebar.classList.add('album-sidebar');
+
+        if (!is_subpage) {
+            let col_main_overview = document.body.querySelector('.col-main.upper-overview');
+
+            let album_artwork = document.body.querySelector('.col-sidebar.masonry-right').lastElementChild.outerHTML;
+            let album_name = album_header.querySelector('.header-new-title').innerHTML;
+            let album_artist = album_header.querySelector('.header-new-crumb span').innerHTML;
+            let album_artist_link = album_header.querySelector('.header-new-crumb').getAttribute('href');
+
+            let tags = document.body.querySelector('.catalogue-tags');
+
+            let actions = album_header.querySelector('.header-new-actions');
+
+            let album_metadata = album_header.querySelectorAll('.header-metadata-tnew-display');
+            let plays = album_metadata[1].querySelector('abbr').textContent;
+            let listeners = album_metadata[0].querySelector('abbr').textContent;
+
+            let header_bg_html = album_header.querySelector('.header-new-background-image');
+            let header_bg = '';
+            if (header_bg_html != null)
+                header_bg = header_bg_html.getAttribute('content');
+
+            insert_top_nav(header_bg);
+
+
+            // chart position
+            let chart_position = album_header.querySelector('.header-new-chart-position-number');
+
+            // about this album
+            let release_year = 0;
+            let release_date = 'never :(';
+            let track_count = 'No tracks';
+            let album_length = '0:00'
+
+            let meta = col_main_overview.querySelectorAll('.metadata-column .catalogue-metadata-description');
+            meta.forEach((meta_item, index) => {
+                let meta_text = meta_item.textContent;
+                deliver_notif(meta_text);
+
+                if (index == 0) {
+                    // track count & length
+                    let split = meta_text.split(', ');
+
+                    track_count = split[0];
+                    if (split.length > 1)
+                        album_length = split[1].trim();
+                } else {
+                    // release date
+                    release_date = meta_text;
+                    release_year = new Date(release_date).getFullYear();
+                }
+            });
+
+
+            // panel
+            let album_main_panel = document.createElement('section');
+            album_main_panel.classList.add('album-main-panel');
+            album_main_panel.innerHTML = (`
+                <div class="top-cover">
+                    ${album_artwork}
+                </div>
+                <div class="middle-info">
+                    <h3>Album</h3>
+                    <span class="top">
+                        <h1>${album_name}</h1>
+                        ${(chart_position != null) ? `<h1>${chart_position.outerHTML}</h1>` : ''}
+                    </span>
+                    <h2><a href="${album_artist_link}">${album_artist}</a></h2>
+                </div>
+                <div class="bottom-wiki">
+                    ${get_wiki(col_main_overview)}
+                    <div class="release-row">
+                        <div class="date" id="date">
+                            ${release_date}
+                        </div>
+                        <div class="length" id="length">
+                            ${album_length}
+                        </div>
+                    </div>
+                    ${tags.outerHTML}
+                    ${actions.outerHTML}
+                </div>
+            `);
+            col_sidebar.insertBefore(album_main_panel, col_sidebar.firstChild);
+
+            tippy(document.getElementById('date'), {
+                content: 'Release date'
+            });
+            tippy(document.getElementById('length'), {
+                content: 'Album length'
+            });
+
+
+            // plays
+            let my_avi = auth_link.querySelector('img').getAttribute('src');
+            let scrobble_count_element = document.body.querySelector('.personal-stats-item--scrobbles .header-metadata-display a');
+            let scrobble_count = 0;
+            let scrobble_link = '';
+            if (scrobble_count_element != undefined) {
+                scrobble_count = scrobble_count_element.textContent;
+                scrobble_link = scrobble_count_element.getAttribute('href');
+            }
+
+            let your_scrobbles = document.createElement('section');
+            your_scrobbles.classList.add('album-listeners-panel', 'album-listeners-you-know-panel');
+            your_scrobbles.innerHTML = (`
+                <h2>Listeners</h2>
+                <div class="listener-row">
+                    <div class="you-side">
+                        <h3><img src="${my_avi}"><a class="user" href="${auth_link}">You</a></h3>
+                        <p><a class="scrobbles" href="${scrobble_link}">${scrobble_count}</a></p>
+                    </div>
+                </div>
+            `);
+            album_main_panel.after(your_scrobbles);
+
+
+            // listeners
+            let listener_trend = col_sidebar.querySelector('.listener-trend');
+
+            let album_listeners_panel = document.createElement('section');
+            album_listeners_panel.classList.add('album-listeners-panel');
+            album_listeners_panel.innerHTML = (`
+                <div class="listener-row">
+                    <div class="listener-side">
+                        <h3>Listeners</h3>
+                        <p>${listeners}</p>
+                    </div>
+                    <div class="scrobbler-side">
+                        <h3>Scrobbles</h3>
+                        <p>${plays}</p>
+                    </div>
+                </div>
+                <div class="listener-trend-row">
+                    ${(listener_trend != null) ? listener_trend.outerHTML : 'There\'s no listener trend yet, check back later.'}
+                </div>
+            `);
+            your_scrobbles.after(album_listeners_panel);
+
+
+            // tracklist
+            let tracklist = document.getElementById('tracklist');
+            if (tracklist == null) {
+                tracklist = document.createElement('section');
+                tracklist.innerHTML = (`
+                    <h3 class="text-18">Tracklist</h3>
+                    <div class="loading-data-container">
+                        <p class="loading-data-text">Fetching your plays on this album</p>
+                    </div>
+                `);
+                navlist.after(tracklist);
+
+                let url_split = window.location.href.split('/');
+                let album_url = `${url_split[(url_split.length - 2)]}/${url_split[(url_split.length - 1)]}`;
+                let album_as_track_url = window.location.href.replace(album_url, `${url_split[(url_split.length - 2)]}/_/${url_split[(url_split.length - 1)]}`);
+
+
+                // we need to fetch the tracklist
+                fetch(`/user/${auth}/library/music/${album_url}`)
+                    .then(function(response) {
+                        console.error('returned', response, response.text);
+
+                        return response.text();
+                    })
+                    .then(function(html) {
+                        let doc = new DOMParser().parseFromString(html, 'text/html');
+
+                        deliver_notif(`using url ${`/user/${auth}/library/music/${album_url}`}`);
+                        console.error('DOC', doc);
+
+                        let inner_tracklist = doc.querySelector('#top-tracks-section [v-else=""] .chartlist');
+                        if (inner_tracklist == null) {
+                            tracklist.innerHTML = (`
+                                <h3 class="text-18">Tracklist</h3>
+                                <div class="loading-data-container">
+                                    <p class="loading-data-text failed">You do not have any plays on this album.</p>
+                                    <a class="btn" href="${album_as_track_url}">Open album title as a track</a>
+                                </div>
+                            `);
+                            return;
+                        }
+
+                        tracklist.innerHTML = (`
+                            <h3 class="text-18">Tracklist</h3>
+                            ${inner_tracklist.outerHTML}
+                        `);
+                    })
+            }
+        } else {
+            let album_name = album_header.querySelector('.header-new-title').innerHTML;
+            let album_artist = album_header.querySelector('.header-new-crumb span').innerHTML;
+            let album_artist_link = album_header.querySelector('.header-new-crumb').getAttribute('href');
+
+            let header_bg_html = album_header.querySelector('.header-new-background-image');
+            let header_bg = '';
+            if (header_bg_html != null)
+                header_bg = header_bg_html.getAttribute('content');
+
+            insert_top_nav(header_bg);
+
+
+            // panel
+            let album_main_panel = document.createElement('section');
+            album_main_panel.classList.add('album-main-panel');
+            album_main_panel.innerHTML = (`
+                <div class="top-cover">
+                    <div class="item-has-metadata artwork-and-metadata-row buffer-standard buffer-reset@sm">
+                        <div class="album-overview-cover-art js-focus-controls-container">
+                            <a class="cover-art" href="${col_main.querySelector('.secondary-nav-item--images a').getAttribute('href')}">
+                                <img src="${header_bg}" loading="lazy">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="middle-info">
+                    <h3>Album</h3>
+                    <h1>${album_name}</h1>
+                    <h2><a href="${album_artist_link}">${album_artist}</a></h2>
+                </div>
+            `);
+            col_sidebar.insertBefore(album_main_panel, col_sidebar.firstChild);
+        }
+
+        album_header.innerHTML = '';
+    }
+
+    // artist pages
+    function bleh_artist_pages() {
+        let artist_header = document.body.querySelector('.header-new--artist');
+
+        if (artist_header == undefined)
+            return;
+
+        if (artist_header.hasAttribute('data-bleh'))
+            return;
+        artist_header.setAttribute('data-bleh', 'true');
+
+        let is_subpage = artist_header.classList.contains('header-new--subpage');
+
+        let row = document.body.querySelector('.row');
+        let col_main = document.body.querySelector('.col-main:not(.bleh--bookmarks).buffer-standard');
+        let col_sidebar = document.body.querySelector('.col-sidebar:not(.section-with-separator)');
+
+        let navlist = artist_header.querySelector('.navlist');
+        if (!is_subpage) {
+            navlist = document.createElement('nav');
+            navlist.classList.add('navlist', 'secondary-nav', 'navlist--more');
+            navlist.setAttribute('aria-label', 'Secondary navigation');
+            navlist.setAttribute('data-require', 'components/collapsing-nav-v2');
+
+            navlist.innerHTML = (`
+                <ul class="navlist-items js-navlist-items" style="position: relative;">
+                    <li class="navlist-item secondary-nav-item secondary-nav-item--overview">
+                        <a class="secondary-nav-item-link secondary-nav-item-link--active" href="${window.location.href}">
+                            Overview
+                        </a>
+                    </li>
+                    <li class="navlist-item secondary-nav-item secondary-nav-item--tracks">
+                        <a class="secondary-nav-item-link" href="${window.location.href}/+tracks">
+                            Tracks
+                        </a>
+                    </li>
+                    <li class="navlist-item secondary-nav-item secondary-nav-item--albums">
+                        <a class="secondary-nav-item-link" href="${window.location.href}/+albums">
+                            Albums
+                            <span class="sr-only">(current section)</span>
+                        </a>
+                    </li>
+                    <li class="navlist-item secondary-nav-item secondary-nav-item--images">
+                        <a class="secondary-nav-item-link" href="${window.location.href}/+images">
+                            Photos
+                        </a>
+                    </li>
+                    <li class="navlist-item secondary-nav-item secondary-nav-item--similar">
+                        <a class="secondary-nav-item-link" href="${window.location.href}/+similar">
+                            Similar Artists
+                        </a>
+                    </li>
+                    <li class="navlist-item secondary-nav-item secondary-nav-item--events">
+                        <a class="secondary-nav-item-link" href="${window.location.href}/+events">
+                            Events
+                        </a>
+                    </li>
+                    <li class="navlist-item secondary-nav-item secondary-nav-item--wiki">
+                        <a class="secondary-nav-item-link" href="${window.location.href}/+wiki">
+                            Biography
+                        </a>
+                    </li>
+                    <li class="navlist-item secondary-nav-item secondary-nav-item--tags">
+                        <a class="secondary-nav-item-link" href="${window.location.href}/+tags">
+                            Tags
+                        </a>
+                    </li>
+                    <li class="navlist-item secondary-nav-item secondary-nav-item--shoutbox">
+                        <a class="secondary-nav-item-link" href="${window.location.href}/+shoutbox">
+                            Shouts
+                        </a>
+                    </li>
+                    <li class="navlist-item secondary-nav-item secondary-nav-item--listeners">
+                        <a class="secondary-nav-item-link" href="${window.location.href}/+listeners">
+                            Listeners
+                        </a>
+                    </li>
+                </ul>
+            `);
+        } else {
+            // subpage
+            col_main = document.body.querySelector('.col-main');
+        }
+
+        col_main.insertBefore(navlist, col_main.firstChild);
+        col_sidebar.classList.add('artist-sidebar');
+
+        if (!is_subpage) {
+            let col_main_overview = document.body.querySelector('.col-main:not(.buffer-standard)');
+
+            let artist_name = artist_header.querySelector('.header-new-title').innerHTML;
+
+            let tags = document.body.querySelector('.catalogue-tags');
+
+            let actions = artist_header.querySelector('.header-new-actions');
+
+            let artist_metadata = artist_header.querySelectorAll('.header-metadata-tnew-display');
+            let plays = artist_metadata[1].querySelector('abbr').textContent;
+            let listeners = artist_metadata[0].querySelector('abbr').textContent;
+
+            let header_bg_html = artist_header.querySelector('.header-new-background-image');
+            let header_bg = '';
+            if (header_bg_html != null)
+                header_bg = header_bg_html.getAttribute('content');
+
+            insert_top_nav(header_bg);
+
+
+            // photos
+            let gallery_sidebar_photos_ems = document.body.querySelectorAll('.sidebar-image-list-item');
+            let gallery_sidebar_photos = [];
+            for (let i = 1; i < 5; i++) {
+                console.info('gallery', i, gallery_sidebar_photos_ems);
+                if (gallery_sidebar_photos_ems[i] != null) {
+                    gallery_sidebar_photos.push(gallery_sidebar_photos_ems[i].querySelector('a').outerHTML);
+                } else {
+                    gallery_sidebar_photos.push('');
+                }
+            }
+
+
+            // chart position
+            let chart_position = artist_header.querySelector('.header-new-chart-position-number');
+
+
+            // panel
+            let artist_main_panel = document.createElement('section');
+            artist_main_panel.classList.add('artist-main-panel');
+            artist_main_panel.innerHTML = (`
+                <div class="top-cover">
+                    <div class="artist-overview-cover-art">
+                        <a class="cover-art" href="${col_main.querySelector('.secondary-nav-item--images a').getAttribute('href')}">
+                            <img src="${header_bg.replace('i/u/ar0', 'i/u/500x500')}" loading="lazy">
+                        </a>
+                        ${gallery_sidebar_photos[0]}
+                        ${gallery_sidebar_photos[1]}
+                    </div>
+                </div>
+                <div class="middle-info">
+                    <h3>Artist</h3>
+                    <span class="top">
+                        <h1>${artist_name}</h1>
+                        ${(chart_position != null) ? `<h1>${chart_position.outerHTML}</h1>` : ''}
+                    </span>
+                </div>
+                <div class="bottom-wiki">
+                    ${get_wiki(col_main_overview)}
+                    ${tags.outerHTML}
+                    ${actions.outerHTML}
+                </div>
+            `);
+            col_sidebar.insertBefore(artist_main_panel, col_sidebar.firstChild);
+
+
+            // plays
+            let my_avi = auth_link.querySelector('img').getAttribute('src');
+            let scrobble_count_element = document.body.querySelector('.personal-stats-item--scrobbles .header-metadata-display a');
+            let scrobble_count = 0;
+            let scrobble_link = '';
+            if (scrobble_count_element != undefined) {
+                scrobble_count = scrobble_count_element.textContent;
+                scrobble_link = scrobble_count_element.getAttribute('href');
+            }
+
+            // listeners you! know
+            let listeners_you_know_element = document.body.querySelector('.personal-stats-item--listeners .header-metadata-display a');
+            let listeners_count = 0;
+            let listeners_link = '';
+            if (listeners_you_know_element != undefined) {
+                listeners_count = listeners_you_know_element.textContent;
+                listeners_link = listeners_you_know_element.getAttribute('href');
+            }
+
+            let your_scrobbles = document.createElement('section');
+            your_scrobbles.classList.add('artist-listeners-panel', 'artist-listeners-you-know-panel');
+            your_scrobbles.innerHTML = (`
+                <h2>Listeners</h2>
+                <div class="listener-row">
+                    <div class="you-side">
+                        <h3><img src="${my_avi}"><a class="user" href="${auth_link}">You</a></h3>
+                        <p><a class="scrobbles" href="${scrobble_link}">${scrobble_count}</a></p>
+                    </div>
+                    <div class="you-side">
+                        <h3>Others you know</h3>
+                        <p><a class="scrobbles" href="${listeners_link}">${listeners_count}</a></p>
+                    </div>
+                </div>
+            `);
+            artist_main_panel.after(your_scrobbles);
+
+
+            // listeners
+            let listener_trend = col_sidebar.querySelector('.listener-trend');
+
+            let artist_listeners_panel = document.createElement('section');
+            artist_listeners_panel.classList.add('artist-listeners-panel');
+            artist_listeners_panel.innerHTML = (`
+                <div class="listener-row">
+                    <div class="listener-side">
+                        <h3>Listeners</h3>
+                        <p>${listeners}</p>
+                    </div>
+                    <div class="scrobbler-side">
+                        <h3>Scrobbles</h3>
+                        <p>${plays}</p>
+                    </div>
+                </div>
+                <div class="listener-trend-row">
+                    ${(listener_trend != null) ? listener_trend.outerHTML : 'There\'s no listener trend yet, check back later.'}
+                </div>
+            `);
+            your_scrobbles.after(artist_listeners_panel);
+        } else {
+
+            let artist_name = artist_header.querySelector('.header-new-title').innerHTML;
+
+            let header_bg_html = artist_header.querySelector('.header-new-background-image');
+            let header_bg = '';
+            if (header_bg_html != null)
+                header_bg = header_bg_html.getAttribute('content');
+
+            insert_top_nav(header_bg);
+
+
+            // panel
+            let artist_main_panel = document.createElement('section');
+            artist_main_panel.classList.add('artist-main-panel');
+            artist_main_panel.innerHTML = (`
+                <div class="top-cover">
+                    <div class="item-has-metadata artwork-and-metadata-row buffer-standard buffer-reset@sm">
+                        <div class="album-overview-cover-art js-focus-controls-container">
+                            <a class="cover-art" href="${col_main.querySelector('.secondary-nav-item--images a').getAttribute('href')}">
+                                <img src="${header_bg.replace('i/u/ar0', 'i/u/500x500')}" loading="lazy">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="middle-info">
+                    <h3>Artist</h3>
+                    <h1>${artist_name}</h1>
+                </div>
+            `);
+            col_sidebar.insertBefore(artist_main_panel, col_sidebar.firstChild);
+        }
+
+        artist_header.innerHTML = '';
+    }
+
+    // track pages
+    function bleh_track_pages() {
+        let track_header = document.body.querySelector('.header-new--track');
+
+        if (track_header == undefined)
+            return;
+
+        if (track_header.hasAttribute('data-bleh'))
+            return;
+        track_header.setAttribute('data-bleh', 'true');
+
+        let is_subpage = track_header.classList.contains('header-new--subpage');
+
+        let row = document.body.querySelector('.row');
+        let col_main = document.body.querySelector('.col-main:not([class*="buffer-reset"])');
+        let col_sidebar = document.body.querySelector('.col-sidebar:not(.track-overview-video-column)');
+
+        let navlist = track_header.querySelector('.navlist');
+        if (!is_subpage) {
+            navlist = document.createElement('nav');
+            navlist.classList.add('navlist', 'secondary-nav', 'navlist--more');
+            navlist.setAttribute('aria-label', 'Secondary navigation');
+            navlist.setAttribute('data-require', 'components/collapsing-nav-v2');
+
+            navlist.innerHTML = (`
+                <ul class="navlist-items js-navlist-items" style="position: relative;">
+                    <li class="navlist-item secondary-nav-item secondary-nav-item--overview">
+                        <a class="secondary-nav-item-link secondary-nav-item-link--active" href="${window.location.href}">
+                            Overview
+                        </a>
+                    </li>
+                    <li class="navlist-item secondary-nav-item secondary-nav-item--albums">
+                        <a class="secondary-nav-item-link" href="${window.location.href}/+albums">
+                            Albums
+                        </a>
+                    </li>
+                    <li class="navlist-item secondary-nav-item secondary-nav-item--wiki">
+                        <a class="secondary-nav-item-link" href="${window.location.href}/+wiki">
+                            Wiki
+                        </a>
+                    </li>
+                    <li class="navlist-item secondary-nav-item secondary-nav-item--tags">
+                        <a class="secondary-nav-item-link" href="${window.location.href}/+tags">
+                            Tags
+                        </a>
+                    </li>
+                    <li class="navlist-item secondary-nav-item secondary-nav-item--shoutbox">
+                        <a class="secondary-nav-item-link" href="${window.location.href}/+shoutbox">
+                            Shouts
+                        </a>
+                    </li>
+                </ul>
+            `);
+        }
+
+        col_main.insertBefore(navlist, col_main.firstChild);
+        col_sidebar.classList.add('track-sidebar');
+
+        if (!is_subpage) {
+            let col_main_overview = document.body.querySelector('.col-main[class*="buffer-reset"]');
+
+            let track_artwork_element = document.body.querySelector('.source-album-art img');
+            let track_artwork = '';
+            if (track_artwork_element != undefined)
+                track_artwork = track_artwork_element.getAttribute('src');
+
+            let track_name = track_header.querySelector('.header-new-title').innerHTML;
+            let track_artist = track_header.querySelector('.header-new-crumb span').innerHTML;
+            let track_artist_link = track_header.querySelector('.header-new-crumb').getAttribute('href');
+
+            let tags = document.body.querySelector('.catalogue-tags');
+
+            let actions = track_header.querySelector('.header-new-actions');
+
+            let track_metadata = track_header.querySelectorAll('.header-metadata-tnew-display');
+            let plays = track_metadata[1].querySelector('abbr').textContent;
+            let listeners = track_metadata[0].querySelector('abbr').textContent;
+
+            let header_bg_html = track_header.querySelector('.header-new-background-image');
+            let header_bg = '';
+            if (header_bg_html != null)
+                header_bg = header_bg_html.getAttribute('content');
+
+            insert_top_nav(header_bg);
+
+
+            // panel
+            let track_main_panel = document.createElement('section');
+            track_main_panel.classList.add('track-main-panel');
+            track_main_panel.innerHTML = (`
+                <div class="top-cover">
+                    <div class="item-has-metadata artwork-and-metadata-row buffer-standard buffer-reset@sm">
+                        <div class="album-overview-cover-art js-focus-controls-container">
+                            <a class="cover-art">
+                                <img src="${track_artwork.replace('i/u/300x300', 'i/u/500x500')}" loading="lazy">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="middle-info">
+                    <h3>Track</h3>
+                    <h1>${track_name}</h1>
+                    <h2><a href="${track_artist_link}">${track_artist}</a></h2>
+                </div>
+                <div class="bottom-wiki">
+                    ${get_wiki(col_main_overview)}
+                    ${tags.outerHTML}
+                    ${actions.outerHTML}
+                </div>
+            `);
+            col_sidebar.insertBefore(track_main_panel, col_sidebar.firstChild);
+
+
+            // plays
+            let my_avi = auth_link.querySelector('img').getAttribute('src');
+            let scrobble_count_element = document.body.querySelector('.personal-stats-item--scrobbles .header-metadata-display a');
+            let scrobble_count = 0;
+            let scrobble_link = '';
+            if (scrobble_count_element != undefined) {
+                scrobble_count = scrobble_count_element.textContent;
+                scrobble_link = scrobble_count_element.getAttribute('href');
+            }
+
+            let your_scrobbles = document.createElement('section');
+            your_scrobbles.classList.add('track-listeners-panel', 'track-listeners-you-know-panel');
+            your_scrobbles.innerHTML = (`
+                <h2>Listeners</h2>
+                <div class="listener-row">
+                    <div class="you-side">
+                        <h3><img src="${my_avi}"><a class="user" href="${auth_link}">You</a></h3>
+                        <p><a class="scrobbles" href="${scrobble_link}">${scrobble_count}</a></p>
+                    </div>
+                </div>
+            `);
+            track_main_panel.after(your_scrobbles);
+
+
+            // listeners
+            let listener_trend = col_sidebar.querySelector('.listener-trend');
+
+            let track_listeners_panel = document.createElement('section');
+            track_listeners_panel.classList.add('track-listeners-panel');
+            track_listeners_panel.innerHTML = (`
+                <div class="listener-row">
+                    <div class="listener-side">
+                        <h3>Listeners</h3>
+                        <p>${listeners}</p>
+                    </div>
+                    <div class="scrobbler-side">
+                        <h3>Scrobbles</h3>
+                        <p>${plays}</p>
+                    </div>
+                </div>
+                <div class="listener-trend-row">
+                    ${(listener_trend != null) ? listener_trend.outerHTML : 'There\'s no listener trend yet, check back later.'}
+                </div>
+            `);
+            your_scrobbles.after(track_listeners_panel);
+
+
+            // video
+            let lyrics_em = document.body.querySelector('.lyrics-snippet-more-link a');
+            let lyrics = 'hmm.. we don\'t know the lyrics yet';
+            if (lyrics_em != null)
+                lyrics = lyrics_em.textContent;
+
+            let track_video = document.body.querySelector('.video-preview');
+            if (track_video != null) {
+                let track_video_panel = document.createElement('section');
+                track_video_panel.classList.add('track-video-panel');
+                track_video_panel.innerHTML = (`
+                    <div class="video-inner">
+                        ${document.body.querySelector('.video-preview').outerHTML}
+                    </div>
+                    <div class="actions-side">
+                        <div class="lyric-panel">
+                            <h2>Lyrics</h2>
+                            <div class="lyrics-blurb">
+                                ${lyrics}
+                            </div>
+                            <div class="actions-2">
+                                <a class="btn btn--has-icon btn--has-icon-right search-lyrics search-lyrics-w-musixmatch" href="${window.location.href}/+lyrics">
+                                    Musixmatch
+                                </a>
+                                <a class="btn btn--has-icon btn--has-icon-right search-lyrics search-lyrics-w-genius" href="" target="_blank">
+                                    Genius
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                `);
+                navlist.after(track_video_panel);
+            }
+        } else {
+            let track_name = track_header.querySelector('.header-new-title').innerHTML;
+            let track_artist = track_header.querySelector('.header-new-crumb span').innerHTML;
+            let track_artist_link = track_header.querySelector('.header-new-crumb').getAttribute('href');
+
+            let header_bg_html = track_header.querySelector('.header-new-background-image');
+            let header_bg = '';
+            if (header_bg_html != null)
+                header_bg = header_bg_html.getAttribute('content');
+
+            insert_top_nav(header_bg);
+
+
+            // panel
+            let track_main_panel = document.createElement('section');
+            track_main_panel.classList.add('track-main-panel');
+            track_main_panel.innerHTML = (`
+                <div class="top-cover">
+                    <div class="item-has-metadata artwork-and-metadata-row buffer-standard buffer-reset@sm">
+                        <div class="album-overview-cover-art js-focus-controls-container">
+                            <a class="cover-art">
+                                <img src="" loading="lazy">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="middle-info">
+                    <h3>Track</h3>
+                    <h1>${track_name}</h1>
+                    <h2><a href="${track_artist_link}">${track_artist}</a></h2>
+                </div>
+            `);
+            col_sidebar.insertBefore(track_main_panel, col_sidebar.firstChild);
+        }
+
+        track_header.innerHTML = '';
+    }
+
+    // profile pages
+    function bleh_profile_pages() {
+        let profile_header = document.body.querySelector('.header--user');
+
+        if (profile_header == undefined)
+            return;
+
+        patch_profile_following();
+
+        if (profile_header.hasAttribute('data-bleh'))
+            return;
+        profile_header.setAttribute('data-bleh', 'true');
+
+        let is_subpage = !profile_header.classList.contains('header--overview');
+
+        let row = document.body.querySelector('.row:not(._buffer)');
+        let col_main = document.body.querySelector('.col-main');
+        let col_sidebar = document.body.querySelector('.col-sidebar');
+
+
+        let header_bg_html = profile_header.querySelector('.header-background');
+        let header_bg = '';
+        if (header_bg_html != null && header_bg_html.hasAttribute('style'))
+            header_bg = header_bg_html.getAttribute('style').replace('background-image: url(', '').replace(');', '');
+
+        insert_top_nav(header_bg);
+
+
+        let navlist = profile_header.querySelector('.navlist');
+
+        if (col_main == null) {
+            let row = document.createElement('div');
+            row.classList.add('row');
+
+            col_main = document.createElement('div');
+            col_main.classList.add('col-main');
+
+            col_sidebar = document.createElement('div');
+            col_sidebar.classList.add('col-sidebar');
+
+            row.appendChild(col_main);
+            row.appendChild(col_sidebar);
+
+            let page_content = document.body.querySelector('.container.page-content');
+
+            page_content.insertBefore(row, page_content.firstChild);
+        }
+
+        col_main.insertBefore(navlist, col_main.firstChild);
+        col_sidebar.classList.add('profile-sidebar');
+
+
+        // global
+        let profile_avatar = profile_header.querySelector('.avatar img');
+
+        let profile_name = profile_header.querySelector('.header-title a').textContent;
+        let profile_link = profile_header.querySelector('.header-title a').getAttribute('href');
+
+        let is_self = (auth == profile_name);
+
+
+        // badges
+        let badges = [];
+        if (profile_header.querySelector('.user-status-subscriber') != null)
+            badges.push({
+                type: 'subscriber',
+                name: 'Subscriber'
+            });
+        if (profile_header.querySelector('.user-status-staff') != null)
+            badges.push({
+                type: 'staff',
+                name: 'Staff'
+            });
+        if (profile_header.querySelector('.user-status-mod') != null)
+            badges.push({
+                type: 'mod',
+                name: 'Mod'
+            });
+        if (profile_header.querySelector('.user-status-alum') != null)
+            badges.push({
+                type: 'alum',
+                name: 'Alum'
+            });
+
+        // custom
+        if (profile_badges.hasOwnProperty(profile_name)) {
+            if (!Array.isArray(profile_badges[profile_name])) {
+                // 1 badge
+                badges.push(profile_badges[profile_name]);
+            } else {
+                // multiple
+                profile_badges[profile_name].forEach((badge) => {
+                    badges.push(badge);
+                });
+            }
+        }
+        badges.forEach((badge) => deliver_notif(`${profile_name} has badge ${badge.name}`));
+
+
+        if (!is_subpage) {
+            let profile_subtitle = profile_header.querySelector('.header-title-display-name').textContent;
+
+            let scrobbling_since = profile_header.querySelector('.header-scrobble-since').textContent;
+
+            let header_metadata = profile_header.querySelectorAll('.header-metadata-display p');
+            let stat_scrobbles = header_metadata[0].textContent;
+            let stat_artists = header_metadata[1].querySelector('a').textContent;
+            let stat_loved_tracks = (header_metadata[2] != undefined) ? header_metadata[2].querySelector('a') : placeholder_loved_tracks();
+
+
+            let profile_bio_raw = col_sidebar.querySelector('.about-me-sidebar p');
+            let profile_bio_parsed = 'very mysterious . . .';
+            let profile_is_empty = true;
+            if (profile_bio_raw != null) {
+                profile_is_empty = false;
+
+                let converter = new showdown.Converter({
+                    emoji: true,
+                    excludeTrailingPunctuationFromURLs: true,
+                    ghMentions: true,
+                    ghMentionsLink: '/user/{u}',
+                    headerLevelStart: 5,
+                    noHeaderId: true,
+                    openLinksInNewWindow: true,
+                    requireSpaceBeforeHeadingText: true,
+                    simpleLineBreaks: true,
+                    simplifiedAutoLink: true,
+                    strikethrough: true,
+                    underline: true,
+                    ghCodeBlocks: false,
+                    smartIndentationFix: true
+                });
+                profile_bio_parsed = converter.makeHtml(profile_bio_raw.textContent
+                .replace(/([@])([a-zA-Z0-9_]+)/g, '[$1$2](/user/$2)')
+                .replace(/\[artist\]([a-zA-Z0-9]+)\[\/artist\]/g, '[$1](/music/$1)')
+                .replace(/\[album artist=([a-zA-Z0-9]+)\]([a-zA-Z0-9\s]+)\[\/album\]/g, '[$2](/music/$1/$2)')
+                .replace(/\[track artist=([a-zA-Z0-9]+)\]([a-zA-Z0-9\s]+)\[\/track\]/g, '[$2](/music/$1/_/$2)')
+                .replace(/https:\/\/open\.spotify\.com\/user\/([A-Za-z0-9]+)/g, '[@$1](https://open.spotify.com/user/$1)')
+                .replace(/https:\/\/open\.spotify\.com\/user\/([A-Za-z0-9]+)\?si=([A-Za-z0-9]+)/g, '[@$1](https://open.spotify.com/user/$1)')
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;'));
+            }
+
+
+
+            let follow_button_wrap = profile_header.querySelector('[data-toggle-button=""]');
+            let msg_button = profile_header.querySelector('.header-message-user');
+
+            let compat = profile_header.querySelector('.tasteometer');
+            let compat_avi = profile_header.querySelector('.tasteometer-viz');
+            let compat_lvl = profile_header.querySelector('.tasteometer-compat-description .tasteometer-compat-colour');
+            let compat_artists = profile_header.querySelector('.tasteometer-shared-artists');
+            if (compat_artists == null) {
+                compat_artists = document.createElement('div');
+                compat_artists.textContent = 'You have no artists in common :(';
+            }
+
+            deliver_notif(`on profile overview`);
+
+
+            // pronouns?
+            let pronouns = false;
+            let display_name_no_spaces = profile_subtitle.replaceAll(' ','');
+            if (
+                display_name_no_spaces.startsWith('she/') ||
+                display_name_no_spaces.startsWith('he/') ||
+                display_name_no_spaces.startsWith('they/') ||
+                display_name_no_spaces.startsWith('it/')
+            ) pronouns = true;
+
+
+            let profile_header_panel = document.createElement('section');
+            profile_header_panel.classList.add('profile-header-panel');
+            profile_header_panel.innerHTML = (`
+                <div class="top-cover">
+                    <div class="avatar-container">
+                        ${profile_avatar.outerHTML}
+                    </div>
+                </div>
+                <div class="middle-info">
+                    <h3>User</h3>
+                    <span class="top">
+                        <h1>${profile_name}</h1>
+                        <div class="user-badges" id="user-badges"></div>
+                    </span>
+                    <h4 class="subtitle"><div class="title">${(pronouns) ? 'pronouns' : 'aka.'}</div>${profile_subtitle}</h4>
+                </div>
+                <div class="bottom-wiki">
+                    <div class="profile-bio ${(profile_is_empty) ? 'profile-bio-empty' : ''}">
+                        ${profile_bio_parsed}
+                    </div>
+                    <div class="actions">
+                        ${(msg_button != null) ? msg_button.outerHTML : ''}
+                        ${(follow_button_wrap != null) ? follow_button_wrap.outerHTML : ''}
+                        ${(is_self) ? `<a class="btn btn--has-icon btn--has-icon-left edit-profile-button" href="${root}settings">Edit profile</a>` : ''}
+                    </div>
+                </div>
+            `);
+            col_sidebar.insertBefore(profile_header_panel, col_sidebar.firstChild);
+
+            // listens
+            let listening_trend = col_sidebar.querySelector('.your-progress-component');
+
+
+            let scrobbles_calculated = calculate_scrobbles(stat_scrobbles);
+
+
+            let profile_listens_panel = document.createElement('section');
+            profile_listens_panel.classList.add('profile-listens-panel');
+            profile_listens_panel.innerHTML = (`
+                <div class="scrobble-row">
+                    <!--<div class="big-bar" id="scrobble-bar">
+                        <div class="fill" style="width: ${scrobbles_calculated.percent}%"></div>
+                        <div class="text">${stat_scrobbles} <div class="sub">scrobbles</div></div>
+                    </div>-->
+                    <div class="progress-bar" id="scrobble-bar">
+                        <div class="fill" data-percent="${scrobbles_calculated.percent}" style="width: ${scrobbles_calculated.percent}%"></div>
+                    </div>
+                </div>
+                <div class="listener-row">
+                    <div class="scrobbles-side">
+                        <h3>Scrobbles</h3>
+                        <p><a href="${window.location.href}/library">${stat_scrobbles}</a></p>
+                    </div>
+                    <div class="artists-side">
+                        <h3>Artists</h3>
+                        <p><a href="${window.location.href}/library/artists?format=grid">${stat_artists}</a></p>
+                    </div>
+                    <!--<div class="since-side">
+                        <h3>Since</h3>
+                        <p>${scrobbling_since.replace('• scrobbling since ', '')}</p>
+                    </div>-->
+                </div>
+                <div class="${(listening_trend != null ? 'listener-trend-row' : 'compat-row')}">
+                    ${(listening_trend != null) ? listening_trend.outerHTML : create_compat(compat, compat_avi, compat_lvl.outerHTML, compat_artists.outerHTML, profile_avatar.outerHTML)}
+                </div>
+            `);
+            profile_header_panel.after(profile_listens_panel);
+
+            tippy(document.getElementById('scrobble-bar'), {
+                content: `${Math.round(scrobbles_calculated.percent)}% to the next goal`
+            })
+
+            let compat_fill = document.getElementById('compat-fill');
+            if (compat_fill != null) {
+                tippy(compat_fill, {
+                    content: `Musical compatibility score of ${compat_fill.getAttribute('data-percent')}`
+                })
+            }
+
+            // note
+            let profile_notes = JSON.parse(localStorage.getItem('bleh_profile_notes')) || {};
+            let profile_note = profile_notes[profile_name];
+
+            let profile_has_note = false;
+            if (profile_note != undefined)
+                profile_has_note = true;
+
+            let profile_note_panel = document.createElement('section');
+            profile_note_panel.classList.add('profile-note-panel');
+            profile_note_panel.innerHTML = (`
+                <div class="middle-info">
+                    <h1>${trans[lang].settings.profiles.notes.header}</h1>
+                    <div class="content-form">
+                        ${(profile_has_note)
+                        ? `<textarea id="bleh--profile-note" placeholder="${trans[lang].settings.profiles.notes.placeholder}">${JSON.parse(localStorage.getItem('bleh_profile_notes'))[profile_name]}</textarea>`
+                        : `<textarea id="bleh--profile-note" placeholder="${trans[lang].settings.profiles.notes.placeholder}"></textarea>`
+                        }
+                    </div>
+                </div>
+                <div class="bottom-wiki">
+                    <div class="actions">
+                        <button class="btn" onclick="_clear_profile_note('${profile_name}')">${trans[lang].settings.clear}</button>
+                        <button class="btn primary" onclick="_save_profile_note('${profile_name}')">${trans[lang].settings.save}</button>
+                    </div>
+                </div>
+            `);
+            profile_listens_panel.after(profile_note_panel);
+
+
+            // tracklist
+            let tracklist_panel = document.getElementById('recent-tracks-section');
+            if (tracklist_panel != null) {
+                let refresh_btn = document.createElement('button');
+                refresh_btn.classList.add('refresh-tracklist-btn');
+                refresh_btn.textContent = 'Refresh';
+                refresh_btn.setAttribute('onclick', '_refresh_tracks(this)');
+
+                tippy(refresh_btn, {
+                    content: 'Refresh tracks'
+                });
+
+                tracklist_panel.appendChild(refresh_btn);
+            }
+        } else {
+            let profile_header_panel = document.createElement('section');
+            profile_header_panel.classList.add('profile-header-panel');
+            profile_header_panel.innerHTML = (`
+                <div class="top-cover">
+                    <div class="avatar-container">
+                        ${profile_avatar.outerHTML}
+                    </div>
+                </div>
+                <div class="middle-info">
+                    <h3>User</h3>
+                    <span class="top">
+                        <h1>${profile_name}</h1>
+                        <div class="user-badges" id="user-badges"></div>
+                    </span>
+                </div>
+            `);
+            col_sidebar.insertBefore(profile_header_panel, col_sidebar.firstChild);
+
+
+            // which subpage is it?
+            let subpage_type = document.body.classList[1].replace('namespace--', '');
+            deliver_notif(`on profile subpage ${subpage_type}`);
+
+            if (subpage_type == 'user_obsessions_overview') {
+                // obsessions history
+                let obsession_history = document.body.querySelector('.obsession-history');
+                let pagination = document.body.querySelector('.pagination');
+
+                let obsession_container = document.createElement('section');
+                obsession_container.classList.add('obsession-history-panel');
+                obsession_container.appendChild(obsession_history);
+                obsession_container.appendChild(pagination);
+
+                col_main.appendChild(obsession_container);
+
+                //
+
+                let section_controls = document.body.querySelector('.section-controls');
+                let section_title = section_controls.querySelector('.content-top-header').textContent;
+                let play_all_btn = section_controls.querySelector('.obsession-history-play-all');
+                let set_obsession_btn = section_controls.querySelector('.btn-primary');
+
+                let sidebar_information_panel = document.createElement('section');
+                sidebar_information_panel.classList.add('sidebar-information-panel', 'obsession-information-panel');
+                sidebar_information_panel.innerHTML = (`
+                    <div class="middle-info">
+                        <h1>${section_title}</h1>
+                    </div>
+                    <div class="bottom-wiki">
+                        <div class="actions">
+                            ${(play_all_btn != null) ? play_all_btn.outerHTML : ''}
+                            ${(set_obsession_btn != null) ? set_obsession_btn.outerHTML : ''}
+                        </div>
+                    </div>
+                `);
+                col_sidebar.appendChild(sidebar_information_panel);
+            } else if (subpage_type.startsWith('user_library')) {
+                let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
+
+                // let's grab the library navlist
+                let library_controls = document.body.querySelector('.content-top .library-controls');
+                let library_search = document.body.querySelector('.content-top .search-form');
+
+                let library_control_header = document.createElement('div');
+                library_control_header.classList.add('library-controls-header');
+                library_control_header.innerHTML = (`
+                    ${library_controls.outerHTML}
+                    ${(library_search != null) ? library_search.outerHTML : ''}
+                `);
+                navlist.after(library_control_header);
+
+
+                if (!settings.feature_flags.use_new_library)
+                    return;
+
+                load_bleh_user_library(profile_header, is_subpage, subpage_type, settings, profile_header_panel);
+            }
+        }
+
+
+        // featured track
+        let feat_track_element = profile_header.querySelector('.header-featured-track');
+        if (feat_track_element != null) {
+            let cover = feat_track_element.querySelector('img').outerHTML;
+            let type = feat_track_element.querySelector('.featured-item-heading').textContent;
+            let track = feat_track_element.querySelector('.featured-item-name').outerHTML;
+            let artist = feat_track_element.querySelector('.featured-item-artist').outerHTML;
+
+            let set_obsession_btn = profile_header.querySelector('.header-info-primary > .profile-header-set-obsession');
+            let remove_obsession_btn = profile_header.querySelector('.header-info-primary > form');
+
+            let featured_track_panel = document.createElement('section');
+            featured_track_panel.classList.add('featured-track-panel');
+            featured_track_panel.innerHTML = (`
+                <div class="feat-inner">
+                    <div class="cover-side">
+                        <div class="cover-art">
+                            ${cover}
+                        </div>
+                    </div>
+                    <div class="info-side">
+                        <h3>${type}</h3>
+                        <h1 id="featured-track-title">${track}</h1>
+                        <h2>${artist}</h2>
+                    </div>
+                </div>
+                ${(set_obsession_btn != null)
+                ? (`
+                <div class="bottom-wiki">
+                    <div class="actions">
+                        ${set_obsession_btn.outerHTML}
+                    </div>
+                </div>
+                `)
+                : ''}
+                ${(remove_obsession_btn != null)
+                ? (`
+                <div class="bottom-wiki">
+                    <div class="actions">
+                        ${remove_obsession_btn.outerHTML}
+                    </div>
+                </div>
+                `)
+                : ''}
+            `);
+
+            document.body.querySelector('.profile-header-panel').after(featured_track_panel);
+
+            tippy(document.getElementById('featured-track-title'), {
+                content: feat_track_element.querySelector('.featured-item-name').textContent
+            });
+        }
+
+
+        // badges
+        display_badges(badges, profile_name);
+    }
+
+    function display_badges(badges, profile_name) {
+        badges.forEach((badge_data) => {
+            let badge = document.createElement('button');
+            badge.classList.add('user-badge', `user-badge--${badge_data.type}`, `user-badge--user-${profile_name}`);
+            badge.setAttribute('onclick', `_display_badge_prompt('${badge_data.type}', "${badge_data.name}")`);
+
+            tippy(badge, {
+                content: badge_data.name
+            });
+
+            document.getElementById('user-badges').appendChild(badge);
+        });
+    }
+
+    unsafeWindow._display_badge_prompt = function(type, name) {
+        display_badge_prompt(type, name);
+    }
+    function display_badge_prompt(type, name) {
+        deliver_notif(name, false, true, `user-badge--${type}`);
+    }
+
+    function placeholder_loved_tracks() {
+        let placeholder = document.createElement('a');
+        placeholder.setAttribute('href', '');
+        placeholder.textContent = '0';
+
+        return placeholder;
+    }
+
+    function create_compat(compat_element, avi, lvl, artists, profile_avi) {
+        let percent = avi.getAttribute('title');
+        let my_avi = auth_link.querySelector('img').getAttribute('src').replace('avatar42s', 'avatar170s');
+
+        let raw_lvl = compat_element.classList[1].replace('tasteometer-compat-', '');
+
+
+        // last.fm for some reason caps at 99%, which is annoying
+        if (percent == '99%') percent = '100%';
+
+
+        let compat = (`
+            <div class="top">
+                <div class="progress-bar lvl-${raw_lvl}">
+                    <div class="fill" id="compat-fill" data-percent="${percent}" style="width: ${percent}"></div>
+                </div>
+            </div>
+            <div class="bottom">
+                <div class="avatar-side lvl-${raw_lvl}">
+                    <div class="avatar-with-ring">
+                        ${profile_avi}
+                    </div>
+                    <div class="avatar-with-ring secondary">
+                        <img src="${my_avi}" alt="Your avatar">
+                    </div>
+                </div>
+                <div class="info-side lvl-${raw_lvl}">
+                    <div class="level">You share ${lvl} compatibility</div>
+                    <div class="shared">${artists}</div>
+                </div>
+            </div>
+        `);
+        return compat;
+    }
+
+
+    function get_wiki(col_main) {
+        if (col_main != null) {
+            let wiki = col_main.querySelector('.wiki-block.visible-lg');
+            if (wiki == null)
+                wiki = col_main.querySelector('.wiki-block-cta');
+
+            return wiki.outerHTML;
+        } else {
+            return document.body.querySelector('.coloured-cta--wiki-icon').outerHTML;
+        }
+    }
+
+    function create_header_bg(header_bg) {
+        let previous_background = document.getElementById('backing-bg');
+        if (previous_background == null) {
+            let background = document.createElement('div');
+            background.classList.add('backing-bg');
+            background.setAttribute('id', 'backing-bg');
+            background.style.setProperty('background-image', `url(${header_bg})`);
+
+            console.info('bg', header_bg, background);
+
+            document.body.appendChild(background);
+        } else {
+            previous_background.style.setProperty('background-image', `url(${header_bg})`);
+        }
+    }
+
+
+    // notifs
+    function load_notifs() {
+        let prev_notif = document.getElementById('bleh-notifs');
+        if (prev_notif == null) {
+            let notifs = document.createElement('div');
+            notifs.classList.add('bleh-notifs');
+            notifs.setAttribute('id', 'bleh-notifs');
+            document.body.appendChild(notifs);
+        }
+    }
+
+    unsafeWindow._deliver_notif = function(content, persist=false) {
+        deliver_notif(content, persist);
+    }
+    function deliver_notif(content, persist=false, has_icon=false, append_class='') {
+        let notif = document.createElement('button');
+        notif.classList.add('bleh-notif');
+        notif.setAttribute('onclick', '_kill_notif(this)');
+        notif.textContent = content;
+
+        document.getElementById('bleh-notifs').appendChild(notif);
+
+        if (has_icon)
+            notif.classList.add('btn--has-icon');
+
+        if (append_class != '')
+            notif.classList.add(append_class);
+
+        if (persist)
+            return;
+
+        setTimeout(function() {
+            kill_notif(notif);
+        }, 3500);
+    }
+
+    unsafeWindow._kill_notif = function(notif) {
+        kill_notif(notif);
+    }
+    function kill_notif(notif) {
+        notif.classList.add('fade-out');
+        setTimeout(function() {
+            document.getElementById('bleh-notifs').removeChild(notif);
+        }, 400);
+    }
+
+
+    function insert_top_nav(header_bg) {
+        let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
+
+        if (settings.feature_flags.experimental_top_nav) {
+            let top_nav = document.getElementById('top-nav');
+            let container = document.body.querySelector('.adaptive-skin-container');
+
+            if (top_nav == null) {
+                top_nav = document.createElement('section');
+                top_nav.classList.add('top-nav');
+                top_nav.setAttribute('id', 'top-nav');
+                container.insertBefore(top_nav, container.firstChild);
+            }
+
+            top_nav.innerHTML = (`
+                <div class="backing-bg" id="backing-bg" style="background-image: url(${header_bg})"></div>
+                <div class="top-nav-inner">
+                    profiles
+                </div>
+            `);
+        } else {
+            create_header_bg(header_bg);
+        }
+    }
+
+    function calculate_scrobbles(count_original) {
+        let count = parseInt(count_original.replaceAll(',', ''));
+        let percent = 0;
+
+        if (count <= 100_300) {
+            percent = (count / 100_000) * 100;
+        } else if (count <= 200_300) {
+            count = count - 100_300;
+            percent = (count / 100_000) * 100;
+        } else if (count <= 300_300) {
+            count = count - 200_300;
+            percent = (count / 100_000) * 100;
+        } else if (count <= 400_300) {
+            count = count - 300_300;
+            percent = (count / 100_000) * 100;
+        }
+
+        return {
+            count: count,
+            percent: percent
+        }
+    }
+
+
+    function load_skus(settings) {
+        for (let flag in version.feature_flags) {
+            let current_state = version.feature_flags[flag].default;
+            if (settings.feature_flags[flag] != undefined) current_state = settings.feature_flags[flag];
+
+            document.documentElement.setAttribute(`data-ff--${flag}`, current_state);
+        }
+    }
+
+    function bleh_sku_page() {
+        let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
+        let flags_container = document.getElementById('feature-flags');
+
+        for (let flag in version.feature_flags) {
+            let current_state = version.feature_flags[flag].default;
+            if (settings.feature_flags[flag] != undefined) current_state = settings.feature_flags[flag];
+
+            let feature_flag_element = document.createElement('div');
+            feature_flag_element.classList.add('toggle-container');
+            feature_flag_element.innerHTML = (`
+                <div class="heading">
+                    <h5>${version.feature_flags[flag].name}</h5>
+                    <div class="info-row">
+                        <div class="default-flag flag-${version.feature_flags[flag].default}">${version.feature_flags[flag].default}</div><p class="date">${version.feature_flags[flag].date}</p><p>${flag}</p>
+                    </div>
+                </div>
+                <div class="toggle-wrap">
+                    <button id="feature-flag-toggle-${flag}" class="toggle" onclick="_update_flag_toggle('${flag}', this)" aria-checked="${current_state}">
+                        <div class="dot"></div>
+                    </button>
+                </div>
+            `);
+
+            flags_container.appendChild(feature_flag_element);
+
+            document.documentElement.setAttribute(`data-ff--${flag}`, current_state);
+        }
+    }
+
+    unsafeWindow._update_flag_toggle = function(flag, button) {
+        update_flag_toggle(flag, button);
+    }
+    function update_flag_toggle(flag, button) {
+        let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
+
+        let current_state = version.feature_flags[flag].default;
+        if (settings.feature_flags[flag] != undefined) current_state = settings.feature_flags[flag];
+
+        if (current_state == true) {
+            button.setAttribute('aria-checked', 'false');
+            settings.feature_flags[flag] = false;
+            document.documentElement.setAttribute(`data-ff--${flag}`, false);
+        } else {
+            button.setAttribute('aria-checked', 'true');
+            settings.feature_flags[flag] = true;
+            document.documentElement.setAttribute(`data-ff--${flag}`, true);
+        }
+
+        // save to settings
+        localStorage.setItem('bleh', JSON.stringify(settings));
+    }
+
     unsafeWindow._force_refresh_theme = function() {
         localStorage.removeItem('bleh_cached_style');
         localStorage.removeItem('bleh_cached_style_timeout');
+    }
+
+
+    unsafeWindow._refresh_tracks = function(button) {
+        refresh_tracks(button);
+    }
+    function refresh_tracks(button) {
+        button.setAttribute('onclick', '');
+        button.setAttribute('disabled', '');
+
+        // we need to fetch the tracklist, this function presumes that
+        // the user has a tracklist to begin with, as that is the only
+        // way to call the function on the frontend
+        fetch(window.location.href)
+        .then(function(response) {
+            console.error('returned', response, response.text);
+
+            return response.text();
+        })
+        .then(function(html) {
+            let doc = new DOMParser().parseFromString(html, 'text/html');
+            console.error('DOC', doc);
+
+            deliver_notif('refreshed tracks');
+
+            let tracklist_panel = doc.getElementById('recent-tracks-section');
+
+            if (tracklist_panel == null) {
+                deliver_notif('recent tracks could not be found ;-;');
+                return;
+            }
+
+            document.getElementById('recent-tracks-section').innerHTML = tracklist_panel.innerHTML;
+
+            let refresh_btn = document.createElement('button');
+            refresh_btn.classList.add('refresh-tracklist-btn');
+            refresh_btn.textContent = 'Refresh';
+            refresh_btn.setAttribute('onclick', '_refresh_tracks(this)');
+
+            tippy(refresh_btn, {
+                content: 'Refresh tracks'
+            });
+
+            document.getElementById('recent-tracks-section').appendChild(refresh_btn);
+        })
+    }
+
+
+    function load_bleh_user_library(
+        profile_header = undefined,
+        is_subpage = undefined,
+        subpage_type = undefined,
+        settings = undefined,
+        profile_header_panel = undefined
+    ) {
+        let initial_load = true;
+
+        if (profile_header == undefined)
+            profile_header = document.body.querySelector('.header--user');
+
+        // we know for sure not to continue
+        if (profile_header == null)
+            return;
+
+        if (settings == undefined)
+            settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
+
+        if (is_subpage == undefined)
+            is_subpage = !profile_header.classList.contains('header--overview');
+
+        if (subpage_type == undefined) {
+            subpage_type = document.body.classList[1].replace('namespace--', '');
+
+            // as this value wasnt provided, we know this was run after
+            // initial bleh load, hence the subpage check
+            if (!subpage_type.startsWith('user_library'))
+                return;
+
+            initial_load = false;
+        }
+
+
+        // load
+
+
+        // colours
+        let link_col = `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c')})`;
+        let link_h_col = getComputedStyle(document.body).getPropertyValue('--l3-c');
+        let link_bg_col = `hsla(${getComputedStyle(document.body).getPropertyValue('--h4')}, 20%)`;
+        let text_col = `hsl(${getComputedStyle(document.body).getPropertyValue('--c3')})`;
+        let axis_col = `hsla(${getComputedStyle(document.body).getPropertyValue('--b4')}, 40%)`;
+        let text_primary_col = `hsl(${getComputedStyle(document.body).getPropertyValue('--c2')})`;
+        let bg_col = `hsl(${getComputedStyle(document.body).getPropertyValue('--b5')})`;
+        let root_bg_col = `hsla(${getComputedStyle(document.body).getPropertyValue('--b6')}, 85%)`;
+        let hue = getComputedStyle(document.body).getPropertyValue('--hue');
+        let chart_colours = {
+            link_col: link_col,
+            link_h_col: link_h_col,
+            link_bg_col: link_bg_col,
+            text_col: text_col,
+            axis_col: axis_col,
+            text_primary_col: text_primary_col,
+            bg_col: bg_col,
+            root_bg_col: root_bg_col,
+            hue: hue
+        }
+
+        // options
+        let chart_line_options = {
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    backgroundColor: root_bg_col,
+                    titleColor: text_primary_col,
+                    bodyColor: text_primary_col,
+                    padding: 7,
+                    cornerRadius: 10,
+                    caretSize: 0
+                }
+            },
+            scales: {
+                x: {
+                    grid: {
+                        color: axis_col
+                    }
+                },
+                y: {
+                    grid: {
+                        display: false
+                    }
+                }
+            }
+        }
+        let chart_options = {
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    backgroundColor: chart_colours.root_bg_col,
+                    titleColor: chart_colours.text_primary_col,
+                    bodyColor: chart_colours.text_primary_col,
+                    padding: 7,
+                    cornerRadius: 10,
+                    caretSize: 0
+                }
+            }
+        }
+
+
+        //
+        load_bleh_user_library_for_artists(
+            chart_colours,
+            chart_options, chart_line_options,
+            subpage_type,
+            initial_load,
+            settings
+        );
+
+
+        // scrobble stats
+        let scrobble_table = document.getElementById('scrobble-chart-content');
+        // this element is re-created if the chart data changes
+        // if it still has our attribute, we don't need to run anything
+        // as data has not changed
+        if (scrobble_table.hasAttribute('data-bleh--library'))
+            return;
+        scrobble_table.setAttribute('data-bleh--library', 'true');
+
+        if (scrobble_table.querySelector('table') != null) {
+            scrobble_statistics_raw = scrobble_table.querySelector('table');
+            deliver_notif('harvested scrobble statistics');
+            console.info('harvested scrobble statistics', scrobble_statistics_raw);
+            scrobble_table.innerHTML = '';
+        }
+
+        let scrobble_statistics = [];
+        let scrobble_labels = [];
+
+        let highest_date = {
+            label: '',
+            stat: 0
+        };
+
+        scrobble_statistics_raw.querySelectorAll('tbody tr').forEach((tr) => {
+            let label = tr.querySelector('.js-period a').textContent.replaceAll('\n', '').trim();
+            let stat = parseInt(tr.querySelector('.js-scrobbles').textContent);
+
+            if (stat > highest_date.stat) {
+                highest_date = {
+                    label: label,
+                    stat: stat
+                }
+            }
+
+            scrobble_labels.push(label);
+            scrobble_statistics.push(stat);
+        });
+
+
+        // sidebar
+        let date_picker = document.body.querySelector('.library-date-picker');
+
+        let scrobble_sidebar;
+        if (initial_load) {
+            scrobble_sidebar = document.createElement('section');
+            scrobble_sidebar.classList.add('scrobble-sidebar');
+        } else {
+            scrobble_sidebar = document.body.querySelector('.scrobble-sidebar');
+        }
+        scrobble_sidebar.innerHTML = (`
+            <div class="top-row">
+                <h3>Viewing</h3>
+                ${date_picker.outerHTML}
+            </div>
+        `);
+
+        let scrobble_canvas_container = document.createElement('div');
+        scrobble_canvas_container.classList.add('scrobble-canvas-container');
+
+        let scrobble_canvas = document.createElement('canvas');
+        scrobble_canvas.classList.add('scrobble-canvas');
+
+        console.info('stats', scrobble_statistics, 'labels', scrobble_labels);
+
+        Chart.defaults.color = text_col;
+        Chart.defaults.font.family = 'Ubuntu Sans';
+        let scrobble_chart = new Chart(scrobble_canvas.getContext('2d'), {
+            type: 'line',
+            data: {
+                labels: scrobble_labels,
+                datasets: [{
+                    data: scrobble_statistics,
+                    borderWidth: 2.5,
+                    backgroundColor: link_bg_col,
+                    borderColor: link_col,
+                    fill: true,
+                    pointRadius: 0,
+                    pointHitRadius: 20,
+                    tension: 0.1
+                }]
+            },
+            options: chart_line_options
+        });
+
+        scrobble_canvas_container.appendChild(scrobble_canvas);
+        scrobble_sidebar.appendChild(scrobble_canvas_container);
+        if (initial_load) {
+            if (settings.feature_flags.library_graph_on_left)
+                document.querySelector('.library-controls-header').after(scrobble_sidebar);
+            else
+                profile_header_panel.after(scrobble_sidebar);
+        }
+
+        // top chart
+        let stats = document.body.querySelectorAll('.metadata-display');
+
+
+        if (settings.feature_flags.use_library_scrobble_bar) {
+            // display all scrobbles onto a bar, with the max being the
+            // highest charting day
+            let scrobble_insight_bar = document.createElement('div');
+            scrobble_insight_bar.classList.add('bar', 'scrobble-insight-bar');
+
+            // to display this, we need to loop through the statistics
+            let combined_stats = [];
+            scrobble_statistics.forEach((stat, index) => {
+                combined_stats.push({
+                    label: scrobble_labels[index],
+                    stat: stat
+                })
+            });
+
+            let sorted_stats = combined_stats.sort((a, b) => a.stat - b.stat);
+            let last_used_stat = {
+                label: '',
+                stat: 0
+            }
+            sorted_stats.forEach((stat, index) => {
+                console.info(stat, last_used_stat);
+                if (stat.stat - last_used_stat.stat > 25 || last_used_stat.stat == 0) {
+                    deliver_notif(index);
+                    last_used_stat = stat;
+
+                    let fill = document.createElement('div');
+                    fill.classList.add('fill');
+                    fill.style.setProperty('--index', (5 + index + 1));
+                    //fill.style.setProperty('z-index', (5 + index + 1));
+                    fill.style.setProperty('width', `${(stat.stat / highest_date.stat) * 100}%`);
+                    fill.style.setProperty('--stat', stat.stat);
+
+                    scrobble_insight_bar.appendChild(fill);
+                }
+            });
+
+
+            let scrobble_insight_sidebar;
+            if (initial_load) {
+                scrobble_insight_sidebar = document.createElement('div');
+                scrobble_insight_sidebar.classList.add('scrobble-insight-sidebar');
+            } else {
+                scrobble_insight_sidebar = document.body.querySelector('.scrobble-insight-sidebar');
+            }
+            scrobble_insight_sidebar.innerHTML = (`
+                <div class="stats top-stats">
+                    <div class="scrobbles-side">
+                        <h3>Scrobbles</h3>
+                        <p>${stats[0].textContent}</p>
+                    </div>
+                    ${(subpage_type.startsWith('user_library') && subpage_type.includes('overview'))
+                    ? (`
+                    <div class="per-day-side">
+                        <h3>Daily</h3>
+                        <p>${stats[1].textContent}</p>
+                    </div>
+                    `)
+                    : ''}
+                </div>
+                <div class="scrobble-bar">
+                    ${scrobble_insight_bar.outerHTML}
+                </div>
+                <div class="stats bottom-stats">
+                    <div class="scrobbles-side">
+                        <h3>Top Day</h3>
+                        <p>${highest_date.label}</p>
+                    </div>
+                    <div class="per-day-side">
+                        <h3>Scrobbles</h3>
+                        <p>${highest_date.stat}</p>
+                    </div>
+                </div>
+            `);
+
+            if (initial_load) {
+                if (settings.feature_flags.library_graph_on_left)
+                    profile_header_panel.after(scrobble_insight_sidebar);
+                else
+                    scrobble_sidebar.after(scrobble_insight_sidebar);
+            }
+        } else {
+            let scrobble_insight_sidebar;
+            if (initial_load) {
+                scrobble_insight_sidebar = document.createElement('section');
+                scrobble_insight_sidebar.classList.add('scrobble-insight-sidebar');
+            } else {
+                scrobble_insight_sidebar = document.body.querySelector('.scrobble-insight-sidebar');
+            }
+            scrobble_insight_sidebar.innerHTML = (`
+                <div class="stats top-stats">
+                    <div class="scrobbles-side">
+                        <h3>Scrobbles</h3>
+                        <p>${stats[0].textContent}</p>
+                    </div>
+                    ${(subpage_type.startsWith('user_library') && subpage_type.includes('overview'))
+                    ? (`
+                    <div class="per-day-side">
+                        <h3>Daily</h3>
+                        <p>${stats[1].textContent}</p>
+                    </div>
+                    `)
+                    : ''}
+                </div>
+                <div class="scrobble-insight-canvas-container">
+                    <canvas class="scrobble-insight-canvas" id="scrobble-insight-canvas"></canvas>
+                </div>
+                <div class="stats bottom-stats">
+                    <div class="highest-point-scrobbles-side">
+                        <h3>Peak Scrobbles</h3>
+                        <p>${highest_date.stat.toLocaleString('gb')}</p>
+                    </div>
+                    <div class="highest-point-side">
+                        <h3>Achieved</h3>
+                        <p>${highest_date.label}</p>
+                    </div>
+                </div>
+            `);
+
+            if (initial_load) {
+                if (settings.feature_flags.library_graph_on_left)
+                    profile_header_panel.after(scrobble_insight_sidebar);
+                else
+                    scrobble_sidebar.after(scrobble_insight_sidebar);
+            }
+
+            /*let combined_stats = [];
+            scrobble_statistics.forEach((stat, index) => {
+                combined_stats.push({
+                    label: scrobble_labels[index],
+                    stat: stat
+                })
+            });
+            let sorted_stats_combined = combined_stats.sort((a, b) => a.stat - b.stat);
+            let sorted_labels = [];
+            let sorted_stats = [];
+            sorted_stats_combined.forEach((stat) => {
+                sorted_labels.push(stat.label);
+                sorted_stats.push(stat.stat);
+            })*/
+
+            let scrobble_chart = new Chart(document.getElementById('scrobble-insight-canvas').getContext('2d'), {
+                type: 'doughnut',
+                data: {
+                    datasets: [{
+                        data: scrobble_statistics,
+                        backgroundColor: [
+                            `hsl(${link_h_col.replace(chart_colours.hue, '360')})`,
+                            `hsl(${link_h_col.replace(chart_colours.hue, '340')})`,
+                            `hsl(${link_h_col.replace(chart_colours.hue, '320')})`,
+                            `hsl(${link_h_col.replace(chart_colours.hue, '300')})`,
+                            `hsl(${link_h_col.replace(chart_colours.hue, '280')})`,
+                            `hsl(${link_h_col.replace(chart_colours.hue, '270')})`,
+                            `hsl(${link_h_col.replace(chart_colours.hue, '255')})`,
+                            `hsl(${link_h_col.replace(chart_colours.hue, '235')})`,
+                            `hsl(${link_h_col.replace(chart_colours.hue, '220')})`,
+                            `hsl(${link_h_col.replace(chart_colours.hue, '208')})`,
+                            `hsl(${link_h_col.replace(chart_colours.hue, '200')})`,
+                            `hsl(${link_h_col.replace(chart_colours.hue, '180')})`,
+                            `hsl(${link_h_col.replace(chart_colours.hue, '160')})`,
+                            `hsl(${link_h_col.replace(chart_colours.hue, '140')})`,
+                            `hsl(${link_h_col.replace(chart_colours.hue, '120')})`,
+                            `hsl(${link_h_col.replace(chart_colours.hue, '100')})`,
+                            `hsl(${link_h_col.replace(chart_colours.hue, '80')})`,
+                            `hsl(${link_h_col.replace(chart_colours.hue, '60')})`,
+                            `hsl(${link_h_col.replace(chart_colours.hue, '40')})`,
+                            `hsl(${link_h_col.replace(chart_colours.hue, '20')})`
+                        ],
+                        borderWidth: 1,
+                        borderColor: chart_colours.bg_col
+                    }],
+                    labels: scrobble_labels
+                },
+                options: chart_options
+            });
+        }
+    }
+
+    function load_bleh_user_library_for_artists(
+        chart_colours,
+        chart_options, chart_line_options,
+        subpage_type,
+        initial_load,
+        settings
+    ) {
+        let scrobble_insight_sidebar = document.querySelector('.scrobble-insight-sidebar');
+        if (scrobble_insight_sidebar == null)
+            return;
+
+        // artist albums
+        if (subpage_type == 'user_library_music_artist_albums' || subpage_type == 'user_library_albums' ||
+            subpage_type == 'user_library_artists'
+        ) {
+            let album_container = document.querySelector('#library-sort-section .chartlist:not(.chartlist__placeholder)');
+            let album_grid_container = document.querySelector('#library-sort-section .grid-items:not(.grid-items__placeholder)');
+            if (album_container == null && album_grid_container == null)
+                return;
+
+            let chart_type = 'chartlist';
+            let is_artists;
+            if (album_grid_container != null)
+                chart_type = 'grid';
+
+            if (chart_type == 'chartlist') {
+                if (album_container.hasAttribute('data-bleh--library'))
+                    return;
+                album_container.setAttribute('data-bleh--library', 'true');
+
+                is_artists = ((album_container.querySelector('.avatar')) != null);
+            } else {
+                if (album_grid_container.hasAttribute('data-bleh--library'))
+                    return;
+                album_grid_container.setAttribute('data-bleh--library', 'true');
+
+                is_artists = ((album_grid_container.querySelector('.grid-items-item-aux-block')) == null);
+            }
+
+            let more_scrobble_labels = [];
+            let more_scrobble_statistics = [];
+
+            let highest_album = {
+                label: '',
+                link: '',
+                stat: 0,
+                img: ''
+            };
+
+            if (chart_type == 'chartlist') {
+                album_container.querySelectorAll('.chartlist-row').forEach((album) => {
+                    let label = album.querySelector('.chartlist-name a').textContent;
+                    let stat = parseInt(album.querySelector('.chartlist-count-bar-value').textContent.replaceAll('\n', '').replaceAll(',', '').trim());
+
+                    if (stat > highest_album.stat) {
+                        highest_album = {
+                            label: label,
+                            link: album.querySelector('.chartlist-name a').getAttribute('href'),
+                            stat: stat,
+                            img: album.querySelector('.chartlist-image img').getAttribute('src')
+                        }
+                    }
+
+                    more_scrobble_labels.push(label);
+                    more_scrobble_statistics.push(stat);
+                });
+            } else {
+                album_grid_container.querySelectorAll('.grid-items-item').forEach((album) => {
+                    let label = album.querySelector('.grid-items-item-main-text a').textContent;
+                    let stat = parseInt(album.querySelector('.grid-items-item-aux-text').textContent.replaceAll('\n', '').replaceAll(',', '').replaceAll(' plays', '').trim());
+
+                    if (stat > highest_album.stat) {
+                        highest_album = {
+                            label: label,
+                            link: album.querySelector('.grid-items-item-main-text a').getAttribute('href'),
+                            stat: stat,
+                            img: album.querySelector('.grid-items-cover-image-image img').getAttribute('src')
+                        }
+                    }
+
+                    more_scrobble_labels.push(label);
+                    more_scrobble_statistics.push(stat);
+                });
+            }
+
+            console.info(more_scrobble_labels, more_scrobble_statistics);
+
+
+            let more_scrobble_insight_sidebar;
+            let attempted_find_of_more_scrobble_insight_sidebar = document.body.querySelector('.more-scrobble-insight-sidebar');
+
+            if (initial_load || (attempted_find_of_more_scrobble_insight_sidebar == null)) {
+                more_scrobble_insight_sidebar = document.createElement('section');
+                more_scrobble_insight_sidebar.classList.add('more-scrobble-insight-sidebar');
+            } else {
+                more_scrobble_insight_sidebar = attempted_find_of_more_scrobble_insight_sidebar;
+            }
+            more_scrobble_insight_sidebar.innerHTML = (`
+                <div class="backing-img" style="background-image: url(${highest_album.img})" alt="Cover for ${highest_album.label}"></div>
+                <div class="stats top-stats">
+                    <div class="top-album-side">
+                        <h3>Top ${(is_artists) ? 'Artist' : 'Album'}</h3>
+                        <p><a href="${highest_album.link}" id="album-link">${highest_album.label}</a></p>
+                    </div>
+                    <div class="top-album-scrobbles-side">
+                        <h3>Scrobbles</h3>
+                        <p>${highest_album.stat.toLocaleString('gb')}</p>
+                    </div>
+                </div>
+                <div class="scrobble-insight-canvas-container">
+                    <img src="${highest_album.img}" alt="Cover for ${highest_album.label}">
+                    <canvas class="more-scrobble-insight-canvas" id="more-scrobble-insight-canvas"></canvas>
+                </div>
+            `);
+
+            if (initial_load || (attempted_find_of_more_scrobble_insight_sidebar == null))
+                scrobble_insight_sidebar.after(more_scrobble_insight_sidebar);
+
+            tippy(document.getElementById('album-link'), {
+                content: highest_album.label
+            });
+
+
+            if (settings.feature_flags.show_album_chart_as_line) {
+                let more_scrobble_chart = new Chart(document.getElementById('more-scrobble-insight-canvas').getContext('2d'), {
+                    type: 'line',
+                    data: {
+                        datasets: [{
+                            data: more_scrobble_statistics,
+                            borderWidth: 2.5,
+                            backgroundColor: chart_colours.link_bg_col,
+                            borderColor: chart_colours.link_col,
+                            fill: true,
+                            pointRadius: 0,
+                            pointHitRadius: 20,
+                            tension: 0.1
+                        }],
+                        labels: more_scrobble_labels
+                    },
+                    options: chart_line_options
+                });
+            } else {
+                let more_scrobble_chart = new Chart(document.getElementById('more-scrobble-insight-canvas').getContext('2d'), {
+                    type: 'doughnut',
+                    data: {
+                        datasets: [{
+                            data: more_scrobble_statistics,
+                            backgroundColor: [
+                                `hsl(${chart_colours.link_h_col.replace(chart_colours.hue, '360')})`,
+                                `hsl(${chart_colours.link_h_col.replace(chart_colours.hue, '340')})`,
+                                `hsl(${chart_colours.link_h_col.replace(chart_colours.hue, '320')})`,
+                                `hsl(${chart_colours.link_h_col.replace(chart_colours.hue, '300')})`,
+                                `hsl(${chart_colours.link_h_col.replace(chart_colours.hue, '280')})`,
+                                `hsl(${chart_colours.link_h_col.replace(chart_colours.hue, '270')})`,
+                                `hsl(${chart_colours.link_h_col.replace(chart_colours.hue, '255')})`,
+                                `hsl(${chart_colours.link_h_col.replace(chart_colours.hue, '247')})`,
+                                `hsl(${chart_colours.link_h_col.replace(chart_colours.hue, '232')})`,
+                                `hsl(${chart_colours.link_h_col.replace(chart_colours.hue, '220')})`,
+                                `hsl(${chart_colours.link_h_col.replace(chart_colours.hue, '208')})`,
+                                `hsl(${chart_colours.link_h_col.replace(chart_colours.hue, '195')})`,
+                                `hsl(${chart_colours.link_h_col.replace(chart_colours.hue, '180')})`,
+                                `hsl(${chart_colours.link_h_col.replace(chart_colours.hue, '160')})`,
+                                `hsl(${chart_colours.link_h_col.replace(chart_colours.hue, '140')})`,
+                                `hsl(${chart_colours.link_h_col.replace(chart_colours.hue, '120')})`,
+                                `hsl(${chart_colours.link_h_col.replace(chart_colours.hue, '100')})`,
+                                `hsl(${chart_colours.link_h_col.replace(chart_colours.hue, '80')})`,
+                                `hsl(${chart_colours.link_h_col.replace(chart_colours.hue, '60')})`,
+                                `hsl(${chart_colours.link_h_col.replace(chart_colours.hue, '40')})`,
+                                `hsl(${chart_colours.link_h_col.replace(chart_colours.hue, '20')})`
+                            ],
+                            borderWidth: 1,
+                            borderColor: chart_colours.bg_col
+                        }],
+                        labels: more_scrobble_labels
+                    },
+                    options: chart_options
+                });
+            }
+        }
     }
 })();
