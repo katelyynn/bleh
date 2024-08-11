@@ -13,7 +13,7 @@
 
 	:root {
 		--hue: var(--new-hue, 225);
-		--sat: var(--new-sat, 2);
+		--sat: var(--new-sat, 1);
 		--lit: var(--new-lit, 1);
 		--ovr: var(--new-ovr, var(--b7));
 
@@ -22,11 +22,11 @@
 		--hue-fav: 15;
 		--hue-pro: 174;
 
-		--hue-film: 45;
-		--sat-film: 1.5;
+		--hue-film: 35;
+		--sat-film: 1;
 		--lit-film: 1;
 
-		--font: Ubuntu Sans, Spline Sans, Inter, Roboto, Noto Sans, Noto Sans JP, Noto Color Emoji, -apple-system, BlinkMacSystemFont, sans-serif;
+		--font: Ubuntu Sans, Spline Sans, Inter, Roboto, Noto Sans, Noto Sans JP, /*Noto Color Emoji, */-apple-system, BlinkMacSystemFont, sans-serif;
 		--font-code: Spline Sans Mono, Iosevka, JetBrains Mono, Roboto Mono, monospace;
 		/*--font-brand: Comfortaa, var(--font);*/
 		--font-size: 14px;
@@ -347,8 +347,8 @@
 		--icon-16-photo: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtaW1hZ2UiPjxyZWN0IHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgeD0iMyIgeT0iMyIgcng9IjIiIHJ5PSIyIi8+PGNpcmNsZSBjeD0iOSIgY3k9IjkiIHI9IjIiLz48cGF0aCBkPSJtMjEgMTUtMy4wODYtMy4wODZhMiAyIDAgMCAwLTIuODI4IDBMNiAyMSIvPjwvc3ZnPg==');
 		--icon-16-gallery-vertical: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtZ2FsbGVyeS12ZXJ0aWNhbC1lbmQiPjxwYXRoIGQ9Ik03IDJoMTAiLz48cGF0aCBkPSJNNSA2aDE0Ii8+PHJlY3Qgd2lkdGg9IjE4IiBoZWlnaHQ9IjEyIiB4PSIzIiB5PSIxMCIgcng9IjIiLz48L3N2Zz4=');
 		--icon-16-library-square: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtbGlicmFyeS1zcXVhcmUiPjxyZWN0IHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgeD0iMyIgeT0iMyIgcng9IjIiLz48cGF0aCBkPSJNNyA3djEwIi8+PHBhdGggZD0iTTExIDd2MTAiLz48cGF0aCBkPSJtMTUgNyAyIDEwIi8+PC9zdmc+');
-		--icon-16-library: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtbGlicmFyeS1iaWciPjxyZWN0IHdpZHRoPSI4IiBoZWlnaHQ9IjE4IiB4PSIzIiB5PSIzIiByeD0iMSIvPjxwYXRoIGQ9Ik03IDN2MTgiLz48cGF0aCBkPSJNMjAuNCAxOC45Yy4yLjUtLjEgMS4xLS42IDEuM2wtMS45LjdjLS41LjItMS4xLS4xLTEuMy0uNkwxMS4xIDUuMWMtLjItLjUuMS0xLjEuNi0xLjNsMS45LS43Yy41LS4yIDEuMS4xIDEuMy42WiIvPjwvc3ZnPg==');
-		--icon-16-shoutbox: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtbWVzc2FnZXMtc3F1YXJlIj48cGF0aCBkPSJNMTQgOWEyIDIgMCAwIDEtMiAySDZsLTQgNFY0YzAtMS4xLjktMiAyLTJoOGEyIDIgMCAwIDEgMiAydjVaIi8+PHBhdGggZD0iTTE4IDloMmEyIDIgMCAwIDEgMiAydjExbC00LTRoLTZhMiAyIDAgMCAxLTItMnYtMSIvPjwvc3ZnPg==');
+		--icon-16-library: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtbGlicmFyeSI+PHBhdGggZD0ibTE2IDYgNCAxNCIvPjxwYXRoIGQ9Ik0xMiA2djE0Ii8+PHBhdGggZD0iTTggOHYxMiIvPjxwYXRoIGQ9Ik00IDR2MTYiLz48L3N2Zz4=');
+		--icon-16-shoutbox: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtbWVzc2FnZS1jaXJjbGUiPjxwYXRoIGQ9Ik03LjkgMjBBOSA5IDAgMSAwIDQgMTYuMUwyIDIyWiIvPjwvc3ZnPg==');
 		--icon-16-playlist: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtbGlzdC1tdXNpYyI+PHBhdGggZD0iTTIxIDE1VjYiLz48cGF0aCBkPSJNMTguNSAxOGEyLjUgMi41IDAgMSAwIDAtNSAyLjUgMi41IDAgMCAwIDAgNVoiLz48cGF0aCBkPSJNMTIgMTJIMyIvPjxwYXRoIGQ9Ik0xNiA2SDMiLz48cGF0aCBkPSJNMTIgMThIMyIvPjwvc3ZnPg==');
 		--icon-16-listening-report: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtYWN0aXZpdHkiPjxwYXRoIGQ9Ik0yMiAxMmgtNGwtMyA5TDkgM2wtMyA5SDIiLz48L3N2Zz4=');
 		--icon-16-heart: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9ImZlYXRoZXIgZmVhdGhlci1oZWFydCI+PHBhdGggZD0iTTIwLjg0IDQuNjFhNS41IDUuNSAwIDAgMC03Ljc4IDBMMTIgNS42N2wtMS4wNi0xLjA2YTUuNSA1LjUgMCAwIDAtNy43OCA3Ljc4bDEuMDYgMS4wNkwxMiAyMS4yM2w3Ljc4LTcuNzggMS4wNi0xLjA2YTUuNSA1LjUgMCAwIDAgMC03Ljc4eiI+PC9wYXRoPjwvc3ZnPg==');
@@ -404,6 +404,7 @@
 		--icon-16-limited: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtYmFkZ2UtcGx1cyI+PHBhdGggZD0iTTMuODUgOC42MmE0IDQgMCAwIDEgNC43OC00Ljc3IDQgNCAwIDAgMSA2Ljc0IDAgNCA0IDAgMCAxIDQuNzggNC43OCA0IDQgMCAwIDEgMCA2Ljc0IDQgNCAwIDAgMS00Ljc3IDQuNzggNCA0IDAgMCAxLTYuNzUgMCA0IDQgMCAwIDEtNC43OC00Ljc3IDQgNCAwIDAgMSAwLTYuNzZaIi8+PGxpbmUgeDE9IjEyIiB4Mj0iMTIiIHkxPSI4IiB5Mj0iMTYiLz48bGluZSB4MT0iOCIgeDI9IjE2IiB5MT0iMTIiIHkyPSIxMiIvPjwvc3ZnPg==');
 		--icon-16-user-list: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtYWxpZ24tbGVmdCI+PGxpbmUgeDE9IjIxIiB4Mj0iMyIgeTE9IjYiIHkyPSI2Ii8+PGxpbmUgeDE9IjE1IiB4Mj0iMyIgeTE9IjEyIiB5Mj0iMTIiLz48bGluZSB4MT0iMTciIHgyPSIzIiB5MT0iMTgiIHkyPSIxOCIvPjwvc3ZnPg==');
 		--icon-16-film: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtZmlsbSI+PHJlY3Qgd2lkdGg9IjE4IiBoZWlnaHQ9IjE4IiB4PSIzIiB5PSIzIiByeD0iMiIvPjxwYXRoIGQ9Ik03IDN2MTgiLz48cGF0aCBkPSJNMyA3LjVoNCIvPjxwYXRoIGQ9Ik0zIDEyaDE4Ii8+PHBhdGggZD0iTTMgMTYuNWg0Ii8+PHBhdGggZD0iTTE3IDN2MTgiLz48cGF0aCBkPSJNMTcgNy41aDQiLz48cGF0aCBkPSJNMTcgMTYuNWg0Ii8+PC9zdmc+');
+		--icon-16-music-recent: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtY2xvY2stMiI+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMTAiLz48cG9seWxpbmUgcG9pbnRzPSIxMiA2IDEyIDEyIDE2IDEwIi8+PC9zdmc+');
 	}
 
 
@@ -824,10 +825,12 @@
 	.musictoolbar, #profile_tab ul {
 		padding: unset;
 		height: fit-content;
-		display: flex;
 		border-bottom: 2px solid hsl(var(--b4));
 		margin-bottom: var(--card-gap);
 		float: unset;
+
+		display: flex;
+		gap: 24px;
 	}
 	.artist_page_section > :is(a, div),
 	.musictoolbar a,
@@ -837,35 +840,43 @@
 		--bg-hov: transparent;
 		--bg-atv: transparent;
 		--shadow: none;
-		padding: 12px 16px 12px calc(16px + 16px + 4px) !important;
+		padding: 12px 0 12px calc(16px + 4px) !important;
 		position: relative;
 		margin: unset;
 		text-transform: lowercase !important;
-	}
-	.artist_page_section > div,
-	.musictoolbar a:hover, .musictoolbar a[style="background: var(--gen-blue-light);"],
-	#profile_tab a:hover, #profile_tab li#currentp
-	{
-		--col: hsl(var(--c1));
-	}
 
-	.artist_page_section > :is(a, div):after,
-	.musictoolbar a:after {
-		position: absolute;
-		content: '';
-		left: 6px;
-		right: 6px;
-		height: 2px;
-		bottom: -2px;
-		background-color: hsl(var(--l3-c));
-		box-shadow: 0 -2px 20px 2px hsl(var(--l4-c));
-		border-top-left-radius: var(--item-small-radius);
-		border-top-right-radius: var(--item-small-radius);
-		opacity: 0;
-	}
-	.artist_page_section > div:after,
-	.musictoolbar a[style="background: var(--gen-blue-light);"]:after {
-		opacity: 1;
+		--left: 0;
+
+		&:hover, &:is(div),
+		&[style="background: var(--gen-blue-light);"],
+		&#currentp {
+			--col: hsl(var(--c1));
+
+			&:after {
+				transform: scaleY(1);
+			}
+		}
+		&:hover:after {
+			transition: none;
+		}
+
+		&:after {
+			position: absolute;
+			content: '';
+			left: 0;
+			right: 0;
+			height: 2px;
+			bottom: -2px;
+			background-color: hsl(var(--l3-c));
+			box-shadow: 0 -2px 20px 2px hsl(var(--l4-c));
+			border-top-left-radius: var(--item-small-radius);
+			border-top-right-radius: var(--item-small-radius);
+
+			transform: scaleY(0);
+			transition-property: transform;
+			transition-duration: var(--trans);
+			transition-timing-function: var(--trans-function);
+		}
 	}
 
 
@@ -878,9 +889,11 @@
 
 
 	.artist_page_section_button_music:not([href$="/credits/"]),
-	.artist_page_section:has(.artist_page_section_button_music[href$="/credits/"]) .artist_page_section_active_music,
-	#btnmusicrecent:before {
+	.artist_page_section:has(.artist_page_section_button_music[href$="/credits/"]) .artist_page_section_active_music {
 		--mask: var(--icon-16-music-list);
+	}
+	#btnmusicrecent:before {
+		--mask: var(--icon-16-music-recent);
 	}
 	.artist_page_section_button_music[href$="/credits/"],
 	.artist_page_section:not(:has(.artist_page_section_button_music[href$="/credits/"])) .artist_page_section_active_music {
@@ -979,10 +992,10 @@
 	{
 		content: '';
 		background: hsl(var(--b5)) !important;
-		border-left: var(--border-sides, var(--card-specific-border, var(--card-border)));
-		border-right: var(--border-sides, var(--card-specific-border, var(--card-border)));
-		border-top: var(--card-border-top, var(--card-specific-border, var(--card-border)));
-		border-bottom: var(--card-border-bottom, var(--card-specific-border, var(--card-border)));
+		border-left: var(--border-sides, var(--card-specific-border, var(--card-border))) !important;
+		border-right: var(--border-sides, var(--card-specific-border, var(--card-border))) !important;
+		border-top: var(--card-border-top, var(--card-specific-border, var(--card-border))) !important;
+		border-bottom: var(--card-border-bottom, var(--card-specific-border, var(--card-border))) !important;
 		border-radius: var(--card-radius);
 		box-shadow: var(--card-shadow);
 		padding: var(--card-padding) !important;
@@ -1013,6 +1026,7 @@
 		padding: var(--card-padding) !important;
 	}
 
+	.film_left_column,
 	.release_left_column {
 		background: unset;
 		border-right: unset;
@@ -1042,6 +1056,7 @@
 	.columns > div, .page_release_art_frame + .color_bar {
 		margin-bottom: var(--card-gap);
 	}
+	.film_left_column,
 	#column_container_left {
 		position: absolute;
 		left: 0;
@@ -1052,6 +1067,7 @@
 	#column_container_right {
 		left: calc(var(--cards-sidebar-width) + var(--card-gap));
 	}
+	.release_right_column,
 	.artist_page #column_container_right {
 		left: unset;
 		right: unset;
@@ -1074,10 +1090,12 @@
 	}
 
 	.release_page_header, .page_object_section_discussion_header {
+		color: hsl(var(--c1)) !important;
 		font-size: var(--font-size);
+		line-height: var(--line-height);
+		font-weight: var(--font-weight-bold);
 		margin-bottom: unset;
 		height: fit-content;
-		line-height: var(--line-height);
 		display: flex;
 	}
 	.page_release .page_section_features_frame h2,
@@ -1178,6 +1196,7 @@
 	}
 
 
+	.film_title,
 	h1.artist_name_hdr,
 	.album_title {
 		font-size: 30px;
@@ -1186,8 +1205,19 @@
 		padding: unset;
 		margin-bottom: 12px;
 		color: hsl(var(--c1));
+
+		h1 {
+			font-size: inherit;
+			color: inherit;
+			font-weight: inherit;
+		}
+
+		.sub_text {
+			font-size: var(--font-size);
+		}
 	}
 
+	.film_shortcut,
 	.rym_shortcut,
 	.album_title .album_shortcut, .album_shortcut {
 		color: hsl(var(--c3));
@@ -1222,6 +1252,13 @@
 	}
 	a:hover {
 		text-decoration: underline;
+	}
+
+	a.film_artist {
+		color: hsl(var(--l3-c));
+		--hue: var(--hue-film);
+		--sat: var(--sat-film);
+		--lit: var(--lit-film);
 	}
 
 
@@ -1534,27 +1571,32 @@
 		position: relative;
 		color: hsl(var(--c3));
 		font-size: calc(var(--font-size) - 1px);
-	}
-	.or_q_rating_date_s [title="shortcut"] {
-		position: absolute;
-		top: 0;
-		left: 0;
-		opacity: 0;
-		color: hsl(var(--c3));
-		transition-property: opacity;
-		transition-duration: var(--trans);
-		transition-timing-function: var(--trans-function);
-	}
-	.or_q_rating_date_s img {
-		transition-property: opacity;
-		transition-duration: var(--trans);
-		transition-timing-function: var(--trans-function);
-	}
-	.or_q_rating_date_s:hover [title="shortcut"] {
-		opacity: 1;
-	}
-	.or_q_rating_date_s:hover img {
-		opacity: 0;
+
+		[title="shortcut"] {
+			position: absolute;
+			top: 0;
+			left: 0;
+			opacity: 0;
+			color: hsl(var(--c3));
+			transition-property: opacity;
+			transition-duration: var(--trans);
+			transition-timing-function: var(--trans-function);
+		}
+
+		img {
+			transition-property: opacity;
+			transition-duration: var(--trans);
+			transition-timing-function: var(--trans-function);
+		}
+
+		&:hover {
+			[title="shortcut"] {
+				opacity: 1;
+			}
+			img {
+				opacity: 0;
+			}
+		}
 	}
 
 	.or_q_small_album,
@@ -1568,6 +1610,10 @@
 	.or_q_albumartist {
 		display: flex;
 		align-items: center;
+
+		.artist + .artist {
+			margin-left: 10px;
+		}
 	}
 
 	.or_q_albumartist_td a.artist {
@@ -1578,9 +1624,6 @@
 		font-size: var(--font-size);
 		order: 1;
 		font-weight: var(--font-weight);
-	}
-	.or_q_albumartist .artist + .artist {
-		margin-left: 10px;
 	}
 
 	.or_q_albumartist_td a.album {
@@ -1736,15 +1779,37 @@
 		line-height: var(--line-height);
 	}
 
-	.my_catalog_review {
-		order: 4;
+	.my_catalog_rating {
+		order: 0;
 	}
-	.my_catalog_listening {
-		order: 5;
+	.my_catalog_rate_tracks {
+		order: 1;
 	}
 	.my_catalog_bump {
+		order: 2;
+
+		/* the bumpable class on the child does not actually represent
+		this case, so we use the style thats applied instead */
+		&:not(:has([style="display: block;"])) {
+			display: none;
+		}
+	}
+	.my_catalog_catalog {
+		order: 3;
+	}
+	.my_catalog_format {
+		order: 4;
+	}
+	.my_catalog_review {
+		order: 5;
+	}
+	.my_catalog_tags {
 		order: 6;
 	}
+	.my_catalog_listening {
+		order: 7;
+	}
+
 
 	.my_catalog_format,
 	.my_catalog_catalog {
@@ -2029,6 +2094,7 @@
 		margin: var(--card-gap) 0 0 0;
 		background-color: unset;
 		border-radius: var(--item-med-radius);
+		border: 1px solid hsl(var(--b4));
 	}
 	.profile_set_listening_box {
 		gap: 10px;
@@ -3761,7 +3827,8 @@
 		}
 
 
-		&:has([href^="/votes"], [href="/account/comment_history"])     { --mask: var(--icon-16-shoutbox) } /* im not sure how this works when its not my profile yet */
+		&:has([href^="/votes"])                                        { --mask: var(--icon-16-profile-votes) }
+		&:has([href="/account/comment_history"])                       { --mask: var(--icon-16-shoutbox) }
 		&:has([href^="/admin/imaq"])                                   { --mask: var(--icon-16-photo) }
 		&:has([href^="/rgenre/vote_history"])                          { --mask: var(--icon-16-tag) }
 		&:has([href^="/admin/corq"])                                   { --mask: var(--icon-16-edit) }
@@ -3792,6 +3859,7 @@
 
 
 	/*     NOTE     */
+	/* voting */ .commentheadery, .commentheadern, .commentheadera:not(.comment .commentheadera),
 	.glitchwave_invite, .new_user_banner,
 	.votingbox :is(.genrea, .genred),
 	.descriptora, .descriptord,
@@ -3824,6 +3892,33 @@
 			border-radius: 6px;
 			background-color: hsl(var(--h4));
 		}
+
+		&.commentheadery {
+			--hue: var(--hue-pos);
+			--sat: 1;
+			--lit: 1;
+		}
+		&.commentheadern {
+			--hue: var(--hue-neg);
+			--sat: 1;
+			--lit: 1;
+		}
+	}
+
+	/* voting */
+	.commentheadery, .commentheadern, .commentheadera:not(.comment .commentheadera) {
+		display: flex;
+		gap: 5px;
+
+		td {
+			width: fit-content !important;
+		}
+	}
+	.mbgen + br {
+		display: none;
+	}
+	.mbgen + .anchor + h3 {
+		margin-top: var(--card-gap) !important;
 	}
 
 	.note:has(#block) {
@@ -4162,62 +4257,79 @@
 		right: 0;
 		width: var(--cards-sidebar-width);
 		height: 500px !important;
-	}
-	#allNotifications:not(:hover) {
-		overflow: hidden !important;
-	}
 
+		/* hide the scrollbar unless hovering, could be removed if
+		overlay scrollbars were standard (never happening on windows
+		below 11 so rip) */
+		&:not(:hover) {
+			overflow: hidden !important;
+		}
 
-	#allNotifications .mbgen td {
-		max-width: calc(var(--cards-sidebar-width) - (21px * 2)) !important;
-	}
-	#allNotifications .mbgen tbody {
-		display: flex;
-		flex-direction: column;
-		gap: 6px;
-	}
-	#allNotifications .mbgen tr {
-		background: unset !important;
-	}
+		.mbgen {
+			tbody {
+				display: flex;
+				flex-direction: column;
+				gap: 6px;
 
-	.notification td {
-		--bg: hsl(var(--b6));
-		--bg-hov: hsla(var(--b6), 80%);
-		--bg-atv: hsla(var(--b6), 60%);
-		background: var(--bg) !important;
-		display: block;
-		position: relative;
-		padding-right: calc(20px + 12px) !important;
-		overflow: hidden;
-	}
+				tr {
+					background: unset !important;
+				}
+				td {
+					max-width: calc(var(--cards-sidebar-width) - (21px * 2)) !important;
+				}
 
-	.notification td .btn {
-		position: absolute;
-		top: 50%;
-		margin-top: -10px;
-		right: 12px;
-		--padding: 6px;
-		width: 20px !important;
-		height: 20px !important;
-		min-width: unset !important;
-		min-height: unset !important;
-		--font-size: 0;
-		--left: 2px;
-		--mask: var(--icon-16-x);
-		--bg: transparent;
-		--bg-hov: transparent;
-		--bg-atv: transparent;
-		--shadow: none;
-	}
+				.notification {
+					td {
+						--bg: hsl(var(--b6));
+						--bg-hov: hsla(var(--b6), 80%);
+						--bg-atv: hsla(var(--b6), 60%);
+						background: var(--bg) !important;
+						display: block;
+						position: relative;
+						padding-right: calc(20px + 12px) !important;
+						overflow: hidden;
 
-	.notification br + br {
-		display: none;
-	}
-	.notification td .smallgray {
-		color: hsl(var(--c3));
-		font-size: var(--font-size-sm);
-		line-height: var(--line-height-sm);
-		margin-left: -7px;
+						/* dismiss btn */
+						.btn {
+							position: absolute;
+							top: 50%;
+							margin-top: -10px;
+							right: 12px;
+							--padding: 6px;
+							width: 20px !important;
+							height: 20px !important;
+							min-width: unset !important;
+							min-height: unset !important;
+							--font-size: 0;
+							--left: 2px;
+							--mask: var(--icon-16-x);
+							--bg: transparent;
+							--bg-hov: transparent;
+							--bg-atv: transparent;
+							--shadow: none;
+						}
+
+						/* date */
+						.smallgray {
+							color: hsl(var(--c3));
+							font-size: var(--font-size-sm);
+							line-height: var(--line-height-sm);
+
+							/* remove line on the left */
+							margin-left: -7px;
+
+							--mask: linear-gradient(90deg, transparent 4%, #fff 5%);
+							mask-image: var(--mask);
+							-webkit-mask-image: var(--mask);
+						}
+					}
+
+					br + br {
+						display: none;
+					}
+				}
+			}
+		}
 	}
 
 
@@ -4647,5 +4759,16 @@
 		font-size: var(--font-size);
 		line-height: var(--line-height);
 		padding: unset;
+	}
+
+
+
+
+	/*     VOTING ON PROFILES     */
+	.mbgen:has(.commentheadery, .commentheadern, .commentheadera) {
+		tr:not(:first-child) {
+			background: unset;
+			padding: 0 10px;
+		}
 	}
 }
