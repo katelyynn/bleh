@@ -557,7 +557,10 @@
 	.commentbody + div a,
 	.ui_search_scope_selector_item,
 	.discussion_breadcrumb a,
-	.group_frame
+	.group_frame,
+	.page_object_discussion_thread,
+	.page_chart_query_advanced_show_label a, .page_chart_query_item_type_selector, .page_charts_section_scope_item,
+	.page_charts_section_charts_version_selector a, .page_charts_view_mode, .ui_pagination_btn
 	{
 		--bg: hsl(var(--b4));
 		--bg-hov: hsla(var(--b4), 80%);
@@ -597,6 +600,24 @@
 			background: var(--bg-atv) !important;
 			transform: scale(0.98);
 		}
+
+
+		&.blue_btn:not(.profile_set_listening_btn .btn, .profile_view_play_history_btn .btn),
+		&.track_rating_btn.has_ratings,
+		#follow_user &[onclick*="FollowUnfollowUser"],
+		/* sponsor btn */ [style="border-top:1px solid var(--mono-d);padding:15px;padding-left:50px;padding-right:50px;padding-bottom:20px;"] [style="font-size:0.85em;padding-top:8px"] &,
+		.votingbox [disabled="disabled"]:not([value="report genre"]),
+		&.catalog_btn:not(.catalog_n), &.format_btn,
+		&.tag_btn.has_tags,
+		&.my_catalog_rating:not(:has(.star-0m)),
+		&.review_btn.has_review,
+		&.selected, &.active
+		{
+			--bg: hsl(var(--h3));
+			--bg-hov: hsla(var(--h3), 80%);
+			--bg-atv: hsla(var(--h3), 60%);
+			--col: hsl(var(--ovr, var(--b7)));
+		}
 	}
 
 	.header_icon_link[onclick="RYMheader.onClickBars()"] {
@@ -616,25 +637,6 @@
 
 	.issues + script + div {
 		margin: var(--card-gap) 0 0 0 !important;
-	}
-
-
-	/*     PRIMARY     */
-	.blue_btn:not(.profile_set_listening_btn .btn, .profile_view_play_history_btn .btn),
-	.track_rating_btn.has_ratings,
-	#follow_user a[onclick*="FollowUnfollowUser"],
-	/* sponsor btn */ [style="border-top:1px solid var(--mono-d);padding:15px;padding-left:50px;padding-right:50px;padding-bottom:20px;"] [style="font-size:0.85em;padding-top:8px"] .ui_button,
-	.votingbox [disabled="disabled"]:not([value="report genre"]),
-	.catalog_btn:not(.catalog_n), .format_btn,
-	.tag_btn.has_tags,
-	.my_catalog_rating:not(:has(.star-0m)),
-	.review_btn.has_review,
-	.ui_search_scope_selector_item.selected
-	{
-		--bg: hsl(var(--h3));
-		--bg-hov: hsla(var(--h3), 80%);
-		--bg-atv: hsla(var(--h3), 60%);
-		--col: hsl(var(--ovr, var(--b7)));
 	}
 
 
@@ -699,7 +701,8 @@
 	ul.lists li:before,
 	.artist_page_section > :is(a, div):before,
 	.mbgen:not(#allNotifications .mbgen) tr:has(a[href^="/list/"]):before,
-	.format_btn_option:before, .catalog_btn_option:before
+	.format_btn_option:before, .catalog_btn_option:before,
+	.page_object_discussion_thread:before
 	{
 		content: '';
 		display: block !important;
@@ -1413,33 +1416,57 @@
 		flex: 1;
 	}
 
+	.page_object_discussion_threads,
 	ul.lists {
 		margin-top: unset;
 		border-radius: unset;
 		font-size: var(--font-size);
-	}
-	ul.lists li {
-		color: hsl(var(--c3));
-		padding: 5px 12px 5px calc(12px + 16px + 6px) !important;
-		font-size: var(--font-size);
-		--mask: var(--icon-16-user-list);
+
+		li {
+			color: hsl(var(--c3));
+			padding: 5px 12px 5px calc(12px + 16px + 6px) !important;
+			font-size: var(--font-size);
+			--mask: var(--icon-16-user-list);
+
+			&.page_object_discussion_thread {
+				--mask: var(--icon-16-shoutbox);
+				display: flex;
+				flex-direction: column;
+			}
+
+			.list_image {
+				display: none;
+			}
+			.list_info {
+				margin-left: unset;
+			}
+
+			& > a,
+			.list_name a {
+				font-size: var(--font-size) !important;
+				line-height: var(--line-height) !important;
+				font-weight: var(--font-weight-medium) !important;
+				color: hsl(var(--c2)) !important;
+				text-decoration: none !important;
+			}
+			.page_object_discussion_group_name,
+			.list_author {
+				color: hsla(var(--c2), 80%) !important;
+				font-size: var(--font-size) !important;
+				line-height: var(--line-height) !important;
+				font-weight: var(--font-weight);
+				cursor: pointer;
+				margin: unset;
+
+				a.user {
+					all: inherit !important;
+				}
+			}
+		}
 	}
 
 	.list_info {
 		overflow: hidden;
-	}
-
-	div.list_name a {
-		font-size: var(--font-size) !important;
-		line-height: var(--line-height) !important;
-		font-weight: var(--font-weight-medium) !important;
-		color: hsl(var(--c2)) !important;
-	}
-	.list_author a.user {
-		color: hsla(var(--c2), 80%) !important;
-		font-size: var(--font-size) !important;
-		line-height: var(--line-height) !important;
-		font-weight: var(--font-weight);
 	}
 
 	.lists .expand_button {
@@ -2989,16 +3016,28 @@
 		margin: unset;
 		padding: unset;
 		display: flex;
+		justify-content: space-between;
 		align-items: center;
 		flex: 1;
-	}
-	.tracklist_title [itemprop="name"] {
-		flex: 1;
-	}
-	.tracklist_duration {
-		margin-left: unset;
-		color: hsl(var(--c3));
-		font-size: calc(var(--font-size) - 1px);
+
+		.song {
+			color: hsl(var(--c2));
+			font-weight: var(--font-weight-medium);
+
+			&.bolded {
+				color: hsl(var(--c1));
+				font-weight: var(--font-weight-bold);
+				background-color: hsla(var(--h4), 35%);
+				box-shadow: 0 0 50px hsl(var(--h4));
+				border-radius: var(--item-small-radius);
+				padding: 0 4px;
+			}
+		}
+		.tracklist_duration {
+			margin-left: unset;
+			color: hsl(var(--c3));
+			font-size: calc(var(--font-size) - 1px);
+		}
 	}
 
 	ul.tracks li.track ul.credits {
