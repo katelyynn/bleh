@@ -60,7 +60,7 @@
 
 		--mono-d8: hsl(var(--b4)) !important;
 
-		--mono-0: hsla(var(--c3), 80%) !important;
+		--mono-0: hsla(var(--c3), 70%) !important;
 		--mono-1: hsl(var(--c2)) !important;
 		--mono-4: hsl(var(--c2)) !important;
 		--mono-5: hsl(var(--c2)) !important;
@@ -488,7 +488,7 @@
 	#content
 	{
 		width: var(--cards-width);
-		overflow: hidden;
+		/*overflow: hidden;*/
 		max-width: unset;
 		padding: unset;
 		margin-top: unset;
@@ -560,7 +560,8 @@
 	.group_frame,
 	.page_object_discussion_thread,
 	.page_chart_query_advanced_show_label a, .page_chart_query_item_type_selector, .page_charts_section_scope_item,
-	.page_charts_section_charts_version_selector a, .page_charts_view_mode, .ui_pagination_btn
+	.page_charts_section_charts_version_selector a, .page_charts_view_mode, .ui_pagination_btn,
+	.issue_info
 	{
 		--bg: hsl(var(--b4));
 		--bg-hov: hsla(var(--b4), 80%);
@@ -609,14 +610,23 @@
 		.votingbox [disabled="disabled"]:not([value="report genre"]),
 		&.catalog_btn:not(.catalog_n), &.format_btn,
 		&.tag_btn.has_tags,
-		&.my_catalog_rating:not(:has(.star-0m)),
+		.release_my_catalog &.my_catalog_rating:not(:has(.star-0m)),
 		&.review_btn.has_review,
-		&.selected, &.active
+		&.selected:not(.sort_choice), &.active
 		{
 			--bg: hsl(var(--h3));
 			--bg-hov: hsla(var(--h3), 80%);
 			--bg-atv: hsla(var(--h3), 60%);
 			--col: hsl(var(--ovr, var(--b7)));
+
+			/* override since they use !important in their own css */
+			--btn-primary-background-disabled: var(--bg) !important;
+			--btn-primary-text-disabled: var(--col) !important;
+		}
+
+		&.disabled {
+			opacity: 0.6 !important;
+			cursor: not-allowed !important;
 		}
 	}
 
@@ -993,6 +1003,7 @@
 		/* queue page */
 		padding: unset !important;
 	}
+	.page_song_temp_section,
 	.bubble_content, .bubble_header,
 	.columns > div,
 	.release_right_column .section_my_catalog.section_outer,
@@ -1110,6 +1121,7 @@
 		height: fit-content;
 		display: flex;
 	}
+	#page_song h2,
 	.page_release .page_section_features_frame h2,
 	.artist_page_header h2, .page_object_section_discussion_header h2,
 	.release_page_header h2, .page_object_section_discussion_header h2 {
@@ -1117,6 +1129,10 @@
 		font-size: var(--font-size);
 		font-weight: var(--font-weight-medium);
 		margin-bottom: 12px;
+
+		a {
+			color: inherit;
+		}
 	}
 
 	.connatix_video {
@@ -1209,6 +1225,7 @@
 	}
 
 
+	#page_song h1,
 	.film_title,
 	h1.artist_name_hdr,
 	.album_title {
@@ -1421,6 +1438,13 @@
 		margin-top: unset;
 		border-radius: unset;
 		font-size: var(--font-size);
+		background: unset;
+		border: unset;
+		padding: unset;
+
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
 
 		li {
 			color: hsl(var(--c3));
@@ -1999,7 +2023,8 @@
 	.navspan {
 		margin: unset;
 		line-height: var(--line-height);
-		display: flex;
+		display: flex !important;
+		justify-content: center;
 		align-items: center;
 
 		/* this removes the massive amount of page numbers which cause overflow,
@@ -2477,7 +2502,7 @@
 		border-radius: var(--item-med-radius);
 		height: 40px;
 		box-shadow: var(--card-shadow);
-		border: 1px solid hsl(var(--b4)) !important;
+		border: unset !important;
 	}
 
 	table#users td a {
@@ -2598,6 +2623,21 @@
 
 
 	/*     CATALOG     */
+	.rating_info_table {
+		display: flex;
+		justify-content: center;
+		gap: var(--button-list-gap);
+
+		& > div {
+			width: unset;
+			height: 32px;
+			justify-content: center;
+			gap: 4px;
+			flex: 1;
+		}
+	}
+
+
 	.catalog_list {
 		display: flex;
 		flex-direction: column;
@@ -2954,44 +2994,100 @@
 
 
 	/*     TRACKLIST     */
+	.page_artist_songs,
 	ul.tracks {
 		border: unset;
 		border-radius: unset;
 		display: flex;
 		flex-direction: column;
 		gap: 4px;
-	}
-	ul.tracks li.track {
-		--bg: hsla(var(--b4), 40%);
-		--bg-hov: hsla(var(--b4), 80%);
-		--shadow: none;
-		color: hsl(var(--c2));
-		background-color: var(--bg);
-		padding: 5px 12px;
-		display: flex;
-		justify-content: center;
-		flex-direction: column;
-		gap: 0;
-		min-height: 38px;
-		border-radius: var(--item-small-radius);
-		border: unset !important;
-		transition-property: background-color;
-		transition-duration: var(--trans);
-		transition-timing-function: var(--trans-function);
-	}
-	ul.tracks li.track:hover {
-		background-color: var(--bg-hov);
-		transition: none !important;
+
+		.page_artist_songs_song,
+		li.track {
+			--bg: hsla(var(--b4), 40%);
+			--bg-hov: hsla(var(--b4), 80%);
+			--shadow: none;
+			color: hsl(var(--c2));
+			background: var(--bg) !important;
+			padding: 5px 12px;
+			display: flex;
+
+			&.track {
+				justify-content: center;
+				flex-direction: column;
+			}
+
+			gap: 0;
+			min-height: 38px;
+			border-radius: var(--item-small-radius);
+			border: unset !important;
+			overflow: hidden;
+			transition-property: background-color;
+			transition-duration: var(--trans);
+			transition-timing-function: var(--trans-function);
+
+			&:hover {
+				background: var(--bg-hov) !important;
+				transition: none !important;
+			}
+
+			&.selected {
+				--bg: hsla(var(--h4), 35%);
+				--bg-hov: hsla(var(--h4), 50%);
+			}
+
+
+			.tracklist_num {
+				margin-right: unset;
+				color: hsl(var(--c3));
+				font-weight: var(--font-weight);
+				font-size: calc(var(--font-size) - 1px);
+				line-height: var(--line-height);
+				min-width: 30px;
+				text-align: right;
+				margin-right: 10px;
+			}
+			.page_artist_songs_song_info,
+			.tracklist_title {
+				font-size: var(--font-size);
+				margin: unset;
+				padding: unset;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				flex: 1;
+
+				.song {
+					color: hsl(var(--c2));
+					font-weight: var(--font-weight-medium);
+
+					&.bolded {
+						color: hsl(var(--c1));
+						font-weight: var(--font-weight-bold);
+						background-color: hsla(var(--h4), 35%);
+						box-shadow: 0 0 50px hsl(var(--h4));
+						border-radius: var(--item-small-radius);
+						padding: 0 4px;
+						margin-left: -4px;
+					}
+				}
+				.page_artist_songs_song_has_lyrics, .page_artist_songs_song_has_work,
+				.tracklist_duration {
+					margin-left: unset;
+					color: hsl(var(--c3));
+					font-size: calc(var(--font-size) - 1px);
+					background: unset;
+					padding: unset;
+					border-radius: unset;
+				}
+			}
+		}
 	}
 
 
 	.no_track_ratings {
 		/* 6px is alr accounted for by the tracklist above it (it stays) */
 		margin: 0 0 6px 0;
-		padding: unset;
-		background: unset;
-		color: hsl(var(--c3));
-		border-radius: unset;
 	}
 
 
@@ -3000,45 +3096,9 @@
 		align-items: center;
 	}
 
-	.tracklist_num {
-		margin-right: unset;
-		color: hsl(var(--c3));
-		font-weight: var(--font-weight);
-		font-size: calc(var(--font-size) - 1px);
-		line-height: var(--line-height);
-		min-width: 30px;
-		text-align: right;
-		margin-right: 10px;
-	}
 
-	.tracklist_title {
-		font-size: var(--font-size);
-		margin: unset;
-		padding: unset;
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		flex: 1;
 
-		.song {
-			color: hsl(var(--c2));
-			font-weight: var(--font-weight-medium);
 
-			&.bolded {
-				color: hsl(var(--c1));
-				font-weight: var(--font-weight-bold);
-				background-color: hsla(var(--h4), 35%);
-				box-shadow: 0 0 50px hsl(var(--h4));
-				border-radius: var(--item-small-radius);
-				padding: 0 4px;
-			}
-		}
-		.tracklist_duration {
-			margin-left: unset;
-			color: hsl(var(--c3));
-			font-size: calc(var(--font-size) - 1px);
-		}
-	}
 
 	ul.tracks li.track ul.credits {
 		margin: unset;
@@ -3303,6 +3363,29 @@
 		display: flex;
 		flex-direction: column;
 		gap: 6px;
+		max-height: calc(162px + 36px);
+		position: relative;
+
+		/*&:after {
+			content: '';
+			position: absolute;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			height: 40px;
+			display: block;
+			background: linear-gradient(180deg, transparent 0%, hsl(var(--b5)) 100%);
+			pointer-events: none;
+			transform-origin: bottom;
+			transition-property: transform;
+			transition-duration: var(--trans);
+			transition-timing-function: var(--trans-function);
+		}
+		&:hover, &:focus-within {
+			&:after {
+				transform: scaleY(0);
+			}
+		}*/
 
 		li {
 			--bg-hov: hsla(var(--b4), 80%);
@@ -3310,19 +3393,20 @@
 			display: flex;
 			justify-content: center;
 			flex-direction: column;
-			height: 40px;
+			height: calc(40px + (7px * 2));
 			background: unset;
 			color: hsl(var(--c2));
 			font-size: var(--font-size);
 			margin: unset;
-			padding-left: calc(40px + 6px);
+			padding-left: calc(12px + 40px + 6px) !important;
 			position: relative;
 			border-radius: var(--item-small-radius);
+			flex-shrink: 0; /* ? */
 			transition-property: background-color, transform !important;
 			transition-duration: var(--trans) !important;
 			transition-timing-function: var(--trans-function) !important;
 
-			&.release-view {
+			&.release_view {
 				height: 32px;
 			}
 		}
@@ -3335,20 +3419,19 @@
 		margin-right: unset;
 		border-radius: var(--item-small-radius);
 		position: absolute;
-		top: 0;
-		left: 0;
+		top: 7px;
+		left: 12px;
 	}
 
 	ul.issues li.current .issue_info_top {
 		font-weight: var(--font-weight-medium);
 	}
 
-	div.issue_info_bottom,
-	div.issue_info_top {
-		height: unset;
-		line-height: var(--line-height);
-		padding-left: unset;
-		padding-right: unset;
+	.issue_info_bottom,
+	.issue_info_top {
+		height: unset !important;
+		padding-left: unset !important;
+		padding-right: unset !important;
 	}
 
 	span.main_issue_info {
@@ -3361,12 +3444,16 @@
 		align-items: center;
 		gap: 6px;
 	}
+	.issue_info_top {
+		line-height: var(--line-height) !important;
+	}
 	span.issue_title a {
 		font-size: inherit;
 	}
 	span.issue_attributes {
 		margin-left: unset;
 		color: hsl(var(--c3));
+		font-weight: var(--font-weight) !important;
 	}
 	.primary_indicator {
 		font-size: 0;
@@ -3379,10 +3466,12 @@
 		-webkit-mask-image: var(--mask);
 		mask-size: 100%;
 		-webkit-mask-size: 100%;
+		margin-top: -2px;
 	}
 
 	.issue_info_bottom {
-		font-size: calc(var(--font-size) - 1px);
+		font-size: var(--font-size-sm);
+		line-height: var(--line-height-sm) !important;
 		color: var(--mono-0);
 	}
 	span.issue_year {
@@ -3720,9 +3809,15 @@
 
 
 	/*     COVER     */
-	.page_release_art_frame img {
-		border-radius: var(--item-big-radius);
-		box-shadow: var(--card-shadow);
+	.page_release_art_frame {
+		[href="buy/"] > div {
+			margin-top: calc(-1 * (var(--card-padding) + (var(--card-gap) * 2)));
+
+			img {
+				border-radius: var(--item-big-radius);
+				box-shadow: var(--card-shadow);
+			}
+		}
 	}
 
 
@@ -3925,6 +4020,7 @@
 
 
 	/*     NOTE     */
+	#subscription_update_banner,
 	/* voting */ .commentheadery, .commentheadern, .commentheadera:not(.comment .commentheadera),
 	.glitchwave_invite, .new_user_banner,
 	.votingbox :is(.genrea, .genred),
@@ -3968,6 +4064,26 @@
 			--hue: var(--hue-neg);
 			--sat: 1;
 			--lit: 1;
+		}
+
+		&#subscription_update_banner {
+			padding: var(--card-padding) !important;
+			max-width: var(--cards-width);
+			margin: 0 0 var(--card-gap) 0;
+
+			& > .btn {
+				top: var(--card-padding) !important;
+				right: var(--card-padding) !important;
+			}
+			.page_chart_description_textandbtns {
+				margin: -10px 100px 0 0;
+
+				.subscription_update_title {
+					font-size: inherit;
+					line-height: inherit;
+					margin: 10px 0;
+				}
+			}
 		}
 	}
 
@@ -4402,12 +4518,14 @@
 
 
 	/*     NO CONTENT (REVIEWS)     */
+	.no_track_ratings,
 	.no_content_message {
 		background: unset;
 		border: unset;
 		color: hsl(var(--c3));
-		padding: unset;
+		padding: 0 100px;
 		border-radius: unset;
+		text-align: center;
 	}
 
 
@@ -4616,19 +4734,24 @@
 
 	.disco_mainline {
 		height: unset;
+		color: hsl(var(--c2));
 		font-size: var(--font-size);
 		line-height: var(--line-height);
 		font-weight: var(--font-weight-medium);
 
 		&:has(.disco_mainline_recommended) {
+			color: hsl(var(--c1));
+			font-weight: var(--font-weight-bold);
 			background-color: hsla(var(--h4), 45%);
 			box-shadow: 0 0 50px hsl(var(--h4));
 			border-radius: var(--item-small-radius);
 			padding: 0 4px;
+			margin-left: -4px;
 		}
-	}
-	.disco_mainline a.album {
-		color: hsl(var(--c2));
+
+		a.album {
+			color: inherit !important;
+		}
 	}
 	.disco_mainline span.subtext,
 	.disco_subline {
@@ -5088,5 +5211,27 @@
 				}
 			}
 		}
+	}
+
+
+
+
+	/*     INDIVIDUAL TRACK PAGES (NEW)     */
+	.page_song sections {
+		grid-template-columns: var(--cards-main-width) var(--cards-sidebar-width);
+		gap: var(--card-gap);
+	}
+	group {
+		padding: unset !important;
+		display: flex;
+		flex-direction: column;
+		gap: var(--card-gap);
+	}
+	.page_song_temp_section {
+		margin: unset !important;
+	}
+
+	#page_song_temp_section_header {
+		gap: var(--card-padding);
 	}
 }
