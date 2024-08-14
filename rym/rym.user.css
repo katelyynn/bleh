@@ -357,7 +357,7 @@
 		--icon-16-listening-report: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtYWN0aXZpdHkiPjxwYXRoIGQ9Ik0yMiAxMmgtNGwtMyA5TDkgM2wtMyA5SDIiLz48L3N2Zz4=');
 		--icon-16-heart: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9ImZlYXRoZXIgZmVhdGhlci1oZWFydCI+PHBhdGggZD0iTTIwLjg0IDQuNjFhNS41IDUuNSAwIDAgMC03Ljc4IDBMMTIgNS42N2wtMS4wNi0xLjA2YTUuNSA1LjUgMCAwIDAtNy43OCA3Ljc4bDEuMDYgMS4wNkwxMiAyMS4yM2w3Ljc4LTcuNzggMS4wNi0xLjA2YTUuNSA1LjUgMCAwIDAgMC03Ljc4eiI+PC9wYXRoPjwvc3ZnPg==');
 		--icon-16-heart-solid: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJjdXJyZW50Q29sb3IiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0iZmVhdGhlciBmZWF0aGVyLWhlYXJ0Ij48cGF0aCBkPSJNMjAuODQgNC42MWE1LjUgNS41IDAgMCAwLTcuNzggMEwxMiA1LjY3bC0xLjA2LTEuMDZhNS41IDUuNSAwIDAgMC03Ljc4IDcuNzhsMS4wNiAxLjA2TDEyIDIxLjIzbDcuNzgtNy43OCAxLjA2LTEuMDZhNS41IDUuNSAwIDAgMCAwLTcuNzh6Ij48L3BhdGg+PC9zdmc+');
-		--icon-16-home: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtaG9tZSI+PHBhdGggZD0ibTMgOSA5LTcgOSA3djExYTIgMiAwIDAgMS0yIDJINWEyIDIgMCAwIDEtMi0yeiIvPjxwb2x5bGluZSBwb2ludHM9IjkgMjIgOSAxMiAxNSAxMiAxNSAyMiIvPjwvc3ZnPg==');
+		--icon-16-home: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtaG9tZSI+PHBhdGggZD0ibTMgOSA5LTcgOSA3djExYTIgMiAwIDAgMS0yIDJINWEyIDIgMCAwIDEtMi0yeiIvPjwvc3ZnPg==');
 		--icon-16-users: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtdXNlcnMiPjxwYXRoIGQ9Ik0xNiAyMXYtMmE0IDQgMCAwIDAtNC00SDZhNCA0IDAgMCAwLTQgNHYyIi8+PGNpcmNsZSBjeD0iOSIgY3k9IjciIHI9IjQiLz48cGF0aCBkPSJNMjIgMjF2LTJhNCA0IDAgMCAwLTMtMy44NyIvPjxwYXRoIGQ9Ik0xNiAzLjEzYTQgNCAwIDAgMSAwIDcuNzUiLz48L3N2Zz4=');
 		--icon-16-event: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtdGlja2V0Ij48cGF0aCBkPSJNMiA5YTMgMyAwIDAgMSAwIDZ2MmEyIDIgMCAwIDAgMiAyaDE2YTIgMiAwIDAgMCAyLTJ2LTJhMyAzIDAgMCAxIDAtNlY3YTIgMiAwIDAgMC0yLTJINGEyIDIgMCAwIDAtMiAyWiIvPjxwYXRoIGQ9Ik0xMyA1djIiLz48cGF0aCBkPSJNMTMgMTd2MiIvPjxwYXRoIGQ9Ik0xMyAxMXYyIi8+PC9zdmc+');
 		--icon-16-tag: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtdGFnIj48cGF0aCBkPSJNMTIgMkgydjEwbDkuMjkgOS4yOWMuOTQuOTQgMi40OC45NCAzLjQyIDBsNi41OC02LjU4Yy45NC0uOTQuOTQtMi40OCAwLTMuNDJMMTIgMloiLz48cGF0aCBkPSJNNyA3aC4wMSIvPjwvc3ZnPg==');
@@ -409,6 +409,7 @@
 		--icon-16-user-list: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtYWxpZ24tbGVmdCI+PGxpbmUgeDE9IjIxIiB4Mj0iMyIgeTE9IjYiIHkyPSI2Ii8+PGxpbmUgeDE9IjE1IiB4Mj0iMyIgeTE9IjEyIiB5Mj0iMTIiLz48bGluZSB4MT0iMTciIHgyPSIzIiB5MT0iMTgiIHkyPSIxOCIvPjwvc3ZnPg==');
 		--icon-16-film: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtZmlsbSI+PHJlY3Qgd2lkdGg9IjE4IiBoZWlnaHQ9IjE4IiB4PSIzIiB5PSIzIiByeD0iMiIvPjxwYXRoIGQ9Ik03IDN2MTgiLz48cGF0aCBkPSJNMyA3LjVoNCIvPjxwYXRoIGQ9Ik0zIDEyaDE4Ii8+PHBhdGggZD0iTTMgMTYuNWg0Ii8+PHBhdGggZD0iTTE3IDN2MTgiLz48cGF0aCBkPSJNMTcgNy41aDQiLz48cGF0aCBkPSJNMTcgMTYuNWg0Ii8+PC9zdmc+');
 		--icon-16-music-recent: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtY2xvY2stMiI+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMTAiLz48cG9seWxpbmUgcG9pbnRzPSIxMiA2IDEyIDEyIDE2IDEwIi8+PC9zdmc+');
+		--icon-16-music-label: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjc1IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLW1lZ2FwaG9uZSI+PHBhdGggZD0ibTMgMTEgMTgtNXYxMkwzIDE0di0zeiIvPjxwYXRoIGQ9Ik0xMS42IDE2LjhhMyAzIDAgMSAxLTUuOC0xLjYiLz48L3N2Zz4=');
 	}
 
 
@@ -434,6 +435,13 @@
 		pointer-events: none;
 		background-image: var(--noise);
 	}
+
+
+	/*     ADS     */
+	#page_charts_section_ad_desktop_video_topright {
+		display: none;
+	}
+
 
 	[style="clear:both;"] {
 		display: none;
@@ -502,6 +510,12 @@
 		width: 100% !important;
 	}
 
+
+	#content_cover {
+		display: none !important;
+	}
+
+
 	/* required to fit width for some reason */
 	#content > table:not(.mbgen) > tbody > tr {
 		display: flex;
@@ -561,7 +575,10 @@
 	.page_object_discussion_thread,
 	.page_chart_query_advanced_show_label a, .page_chart_query_item_type_selector, .page_charts_section_scope_item,
 	.page_charts_section_charts_version_selector a, .page_charts_view_mode, .ui_pagination_btn,
-	.issue_info
+	.issue_info,
+	/* subscribe to see similar release suggestions */ [style="text-decoration:none;color:var(--gen-blue-darkest);"][href="/subscribe/"],
+	.page_charts_section_charts_save_actions a,
+	.page_charts_recommendations_banner
 	{
 		--bg: hsl(var(--b4));
 		--bg-hov: hsla(var(--b4), 80%);
@@ -600,6 +617,10 @@
 		&:active {
 			background: var(--bg-atv) !important;
 			transform: scale(0.98);
+		}
+
+		.fa {
+			margin-right: 6px;
 		}
 
 
@@ -670,6 +691,10 @@
 		--padding: 7px;
 		display: flex;
 		justify-content: center;
+
+		.fa {
+			margin: unset !important;
+		}
 	}
 
 	.header_profile_main:hover {
@@ -712,7 +737,10 @@
 	.artist_page_section > :is(a, div):before,
 	.mbgen:not(#allNotifications .mbgen) tr:has(a[href^="/list/"]):before,
 	.format_btn_option:before, .catalog_btn_option:before,
-	.page_object_discussion_thread:before
+	.page_object_discussion_thread:before,
+	.issue_label:before,
+	.disco_search:before,
+	.page_charts_section_charts_save_actions a:before
 	{
 		content: '';
 		display: block !important;
@@ -732,7 +760,7 @@
 		background-color: currentColor;
 		mask-image: var(--mask);
 		-webkit-mask-image: var(--mask);
-		transition-property: opacity !important;
+		transition-property: opacity, transform !important;
 		transition-duration: var(--trans) !important;
 		transition-timing-function: var(--trans-function) !important;
 	}
@@ -766,6 +794,7 @@
 	{
 		padding-left: calc(12px + 16px + 6px) !important;
 	}
+	.ui_search_autocomplete_result,
 	.disco_expandissues, .format_btn
 	{
 		padding-right: calc(12px + 16px + 6px) !important;
@@ -957,7 +986,8 @@
 	.page_discussion_search_searchterm,
 	input[type="date"], input[type="email"], input[type="number"], input[type="password"], input[type="text"], input[type="url"], select, textarea,
 	.ui_search,
-	.tag_tags
+	.tag_tags,
+	#disco_search
 	{
 		--bg: hsl(var(--b4));
 		--bg-hov: var(--bg);
@@ -1003,6 +1033,8 @@
 		/* queue page */
 		padding: unset !important;
 	}
+	#page_charts_group_main_left, #page_charts_group_main_right section,
+	.page_charts_section_scope_share_inner,
 	.page_song_temp_section,
 	.bubble_content, .bubble_header,
 	.columns > div,
@@ -1083,12 +1115,18 @@
 	#column_container_left:not(:has(.page_discussion_thread)) {
 		position: absolute;
 		left: 0;
+		padding: unset !important;
 	}
 	.artist_page #column_container_left {
 		position: static;
 	}
 	#column_container_right {
 		left: calc(var(--cards-sidebar-width) + var(--card-gap));
+		padding: unset !important;
+
+		&.page_home_section_column_right {
+			position: static;
+		}
 	}
 	.release_right_column,
 	.artist_page #column_container_right {
@@ -1121,6 +1159,7 @@
 		height: fit-content;
 		display: flex;
 	}
+	.page_home_section_header h2,
 	#page_song h2,
 	.page_release .page_section_features_frame h2,
 	.artist_page_header h2, .page_object_section_discussion_header h2,
@@ -1129,6 +1168,10 @@
 		font-size: var(--font-size);
 		font-weight: var(--font-weight-medium);
 		margin-bottom: 12px;
+
+		background: unset;
+		-webkit-background-clip: unset;
+		-webkit-text-fill-color: unset;
 
 		a {
 			color: inherit;
@@ -1268,6 +1311,9 @@
 	}
 
 
+	.release_page {
+		margin-top: var(--card-gap);
+	}
 	.release_page #column_container_left,
 	.release_page #column_container_right {
 		position: static;
@@ -1793,8 +1839,8 @@
 		width: fit-content !important;
 	}
 
-	.my_catalog_rating:has(.star-10m) {
-		--shadow: 0 0 20px hsla(var(--l4-c), 35%);
+	.my_catalog_rating:not(:has(.star-0m)) {
+		--shadow: 0 0 20px hsl(var(--h4));
 	}
 
 	.mbgen tr:has(a[href$="/r5.0"]) {
@@ -2914,6 +2960,7 @@
 		height: unset;
 		position: relative;
 		color: hsl(var(--l3-c)) !important;
+		text-shadow: 0 0 20px hsl(var(--h4));
 		font-size: var(--font-size);
 		line-height: var(--line-height);
 	}
@@ -3057,7 +3104,8 @@
 				align-items: center;
 				flex: 1;
 
-				.song {
+				/* legacy */ [itemprop="name"],
+				/* new tracks that have track pages and can be bolded */ .song {
 					color: hsl(var(--c2));
 					font-weight: var(--font-weight-medium);
 
@@ -3133,6 +3181,7 @@
 		--bg-atv: transparent;
 		--shadow: none !important;
 		--col: hsl(var(--l3-c));
+		text-shadow: 0 0 20px hsl(var(--h4));
 	}
 
 
@@ -3421,6 +3470,7 @@
 		position: absolute;
 		top: 7px;
 		left: 12px;
+		background-color: hsl(var(--b6));
 	}
 
 	ul.issues li.current .issue_info_top {
@@ -3484,6 +3534,13 @@
 		margin: unset;
 	}
 
+	.issue_label {
+		position: relative;
+		padding-left: calc(16px + 6px);
+		--left: 0;
+		--mask: var(--icon-16-music-label);
+	}
+
 
 	span.issue_title a,
 	a.sametitle, a.sametitle:hover {
@@ -3517,6 +3574,7 @@
 		width: 240px;
 
 		&.ui_search_rest {
+			padding: var(--card-gap);
 			top: calc(32px + var(--card-gap));
 			left: 0;
 			right: 0;
@@ -3529,20 +3587,61 @@
 				border: unset;
 				background: unset;
 
+				padding-bottom: var(--card-gap);
+				margin-bottom: var(--card-gap);
+				border-bottom: 1px solid hsl(var(--b4));
+
+				font-size: 0;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				gap: 10px;
+
+				.ui_search_debug {
+					display: none;
+				}
+
 				.ui_search_object_label {
 					color: inherit;
-					font-size: inherit;
+					font-size: var(--font-size);
 					margin: unset;
 				}
 
 				.ui_search_scope_selector_item {
 					color: var(--col) !important;
 				}
+
+				.ui_search_object_selector {
+					display: flex;
+					gap: 4px;
+				}
 			}
 
 			.ui_search_frame_outer:has(&) {
 				position: relative;
 				height: unset;
+			}
+
+			.ui_search_results_frame {
+				max-height: 300px;
+				height: fit-content;
+				padding: unset;
+				background: unset;
+
+				&:not(:hover) {
+					overflow: hidden !important;
+				}
+
+				.ui_search_autocomplete_result {
+					--mask: var(--icon-16-arrow-right);
+					--left: none !important;
+					--right: 12px;
+
+					&:hover:before {
+						transform: scaleY(1.2) !important;
+						transition: none !important;
+					}
+				}
 			}
 		}
 
@@ -4608,10 +4707,62 @@
 
 
 	/*     DISCOG     */
-	#discography > div:not(.disco_header_section) {
-		display: flex;
-		flex-direction: column;
-		gap: 2px;
+	.artist_page_section_nav {
+		border-radius: unset;
+		font-size: var(--font-size);
+		line-height: var(--line-height);
+		height: fit-content;
+	}
+	.section_artist_discography {
+		.disco_search {
+			border: unset;
+			background: unset;
+			border-radius: unset;
+			line-height: var(--line-height);
+			margin-top: unset;
+
+			color: hsl(var(--c3));
+			position: relative;
+			--left: 7px;
+			--mask: var(--icon-16-search);
+
+			#disco_search {
+				width: 100%;
+				margin: unset;
+				padding-left: calc(7px + 16px + 6px) !important;
+			}
+			.disco_search_icon {
+				display: none;
+			}
+		}
+	}
+
+
+	#discography {
+		[id^="disco_type_"] {
+			display: flex;
+			flex-direction: column;
+			gap: 2px;
+		}
+
+		.disco_header_top {
+			display: flex;
+			height: fit-content;
+			margin: var(--card-gap) 0 !important;
+			font-size: var(--font-size) !important;
+			line-height: var(--line-height) !important;
+
+			h3 {
+				margin: unset !important;
+				flex: 1;
+			}
+			.disco_showing {
+				margin: unset;
+				color: hsl(var(--c3));
+				font-size: var(--font-size-sm);
+				font-weight: var(--font-weight-medium);
+			}
+		}
 	}
 	.disco_release {
 		height: unset;
@@ -5233,5 +5384,238 @@
 
 	#page_song_temp_section_header {
 		gap: var(--card-padding);
+	}
+
+
+
+
+	/*     ALBUM - SEE SIMILAR RELEASE SUGGESTIONS     */
+	[style^="text-align:center;padding:0.5em;"][style$="margin-top:1em;display:block;font-size:1em;"] {
+		margin-top: var(--card-gap) !important;
+		padding: unset !important;
+	}
+
+
+
+
+	/*     BUBBLE     */
+	.badge_count_bubble {
+		/* this font isnt visible, do not standardise the font weight between themes */
+		font-size: 8px !important;
+		line-height: 8px !important;
+		font-weight: 600 !important;
+		padding: 0 2px !important;
+		min-width: 8px !important;
+
+		border-radius: 50px !important;
+		background: hsl(var(--h3)) !important;
+		border: 2px solid hsl(var(--b6)) !important;
+		box-shadow: 0 0 100px 25px hsl(var(--h4)) !important;
+		color: transparent !important;
+
+		.profile_num_messages {
+			color: inherit;
+		}
+	}
+
+
+
+
+	/*     CHARTS     */
+	.shortcut_link_btn {
+		.fa {
+			display: none;
+		}
+	}
+
+	#page_charts sections {
+		grid-template-columns: var(--cards-main-width) var(--cards-sidebar-width);
+		gap: var(--card-gap);
+		max-width: var(--cards-width);
+		padding-top: unset;
+	}
+
+	#page_charts_section_scope_share {
+		background: unset;
+		height: unset;
+		border: unset;
+		position: static;
+	}
+	.page_charts_section_scope_share_inner {
+		.page_charts_section_scope {
+			display: flex;
+			gap: var(--button-list-gap);
+		}
+	}
+
+	.ui_pagination {
+		display: flex;
+		gap: var(--card-gap);
+
+		.ui_pagination_btn {
+			.fa {
+				display: none;
+			}
+		}
+
+		.ui_pagination_pages {
+			display: flex;
+			gap: var(--button-list-gap);
+		}
+
+		.ui_pagination_page_chooser_frame {
+			&:has([style="display: none;"]) {
+				display: none;
+			}
+		}
+	}
+	.page_charts_section_charts_nav_view_mode {
+		padding: unset;
+
+		.page_charts_section_charts_nav_view_mode_desktop {
+			display: flex;
+			gap: var(--button-list-gap);
+		}
+	}
+
+	#page_charts_section_header {
+		display: flex;
+		flex-direction: column;
+		gap: var(--card-gap);
+
+		.page_charts_section_charts_header_main {
+			padding: unset;
+			margin: unset;
+
+			display: flex;
+			align-items: center;
+
+			h1 {
+				font-size: 30px;
+				line-height: 34px;
+				font-weight: var(--font-weight-bold);
+				padding: unset;
+				color: hsl(var(--c1));
+			}
+
+			.page_charts_section_charts_save_actions {
+				display: flex;
+				gap: var(--button-list-gap);
+
+				a {
+					--left: 8px;
+
+					&#page_charts_section_charts_actions_set_home {
+						--mask: var(--icon-16-home);
+					}
+					&#page_charts_section_charts_actions_save {
+						--mask: var(--icon-16-bookmark);
+					}
+
+					i {
+						display: none;
+					}
+				}
+			}
+		}
+		.page_charts_common_charts {
+			height: fit-content;
+			padding: unset;
+			margin: unset;
+
+			display: flex;
+			gap: var(--button-list-gap);
+
+			a {
+				margin: unset;
+			}
+		}
+		.page_charts_section_charts_nav_view {
+			padding: unset;
+			flex-wrap: wrap;
+			gap: var(--button-list-gap);
+
+			.page_charts_section_charts_legend_date {
+				padding: unset;
+
+				.page_charts_section_charts_version_selector {
+					border: unset;
+					width: fit-content;
+					height: fit-content;
+					background: unset;
+
+					display: flex;
+					gap: var(--button-list-gap);
+
+					a {
+						flex: unset;
+					}
+				}
+			}
+			.page_charts_section_charts_pagination_settings_frame {
+				.page_charts_section_charts_settings_btn {
+					--left: 8px;
+					--mask: var(--icon-16-settings);
+
+					.fa {
+						display: none;
+					}
+				}
+			}
+		}
+	}
+
+	.page_charts_recommendations_banner {
+		.page_charts_recommendations_banner_title {
+			font: inherit;
+			color: inherit;
+		}
+		.page_charts_recommendations_banner_description {
+			font-size: var(--font-size-sm);
+			line-height: var(--line-height-sm);
+			color: hsl(var(--c3));
+		}
+	}
+
+	.page_charts_section_header_dialog_settings {
+		padding: unset;
+		gap: var(--card-gap);
+
+		h3 {
+			font-size: 30px !important;
+			line-height: 34px !important;
+			font-weight: var(--font-weight-bold) !important;
+			color: hsl(var(--c1)) !important;
+			margin: unset !important;
+
+			/*
+			font-size: 70px !important;
+			line-height: 70px !important;
+			font-weight: var(--font-weight-bold) !important;
+			color: hsl(var(--c1)) !important;
+			margin: unset !important;
+
+			-webkit-text-fill-color: transparent;
+			-webkit-background-clip: transparent;
+			-webkit-text-stroke: 1px hsl(var(--c1));
+			*/
+		}
+
+		label {
+			gap: 6px;
+			font-weight: var(--font-weight);
+			color: hsl(var(--c2));
+		}
+
+		.page_charts_section_header_dialog_message {
+			font-size: var(--font-size);
+			color: hsl(var(--c3));
+		}
+
+		.ui_button {
+			&:before {
+				display: none !important;
+			}
+		}
 	}
 }
