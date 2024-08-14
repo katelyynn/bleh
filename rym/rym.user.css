@@ -1926,12 +1926,28 @@
 		z-index: 10;
 	}
 	.format_btn {
-		margin-left: -2px;
+		/*margin-left: -2px;*/
+		margin-left: -4px;
+		/*border-left: 2px solid var(--col) !important;*/
 		border-top-left-radius: 0 !important;
 		border-bottom-left-radius: 0 !important;
 		--left: none;
 		--right: 12px;
 		--mask: var(--icon-16-dropdown);
+
+		&:after {
+			content: '';
+			--size: 12px;
+			width: 2px;
+			height: var(--size);
+			border-radius: 10px;
+			display: block;
+			position: absolute;
+			left: -1px;
+			top: 50%;
+			margin-top: calc(-1 * (var(--size) / 2));
+			background-color: var(--col);
+		}
 	}
 	.catalog_btn:not(.catalog_n) {
 		border-top-right-radius: 0 !important;
