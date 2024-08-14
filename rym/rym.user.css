@@ -136,7 +136,7 @@
 	.theme_eve :is(
 		.avg_rating_friends,
 		.rating_pct, a,
-		.my_catalog_rating, .mbgen tr, .review_rating, .catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .disco_cat_inner_issue, .disco_cat_inner, .track_rating_disp,
+		.my_catalog_rating, .mbgen tr, .review_rating, .catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .disco_cat_inner_issue, .disco_cat_inner, .track_rating_disp, .mbgen:not(#users):has(tbody tr:nth-child(2) td:last-child img) td:not(:nth-child(2)),
 		.ribbon,
 		.r0,
 		div.corqcomment_owner,
@@ -708,7 +708,7 @@
 	.musictoolbar a:before,
 	td a.medium[href^="/collection/"][href*="/r"]:not([href$="/recent/"]):before,
 	#profile_tab a:before, #profile_tab li#currentp:before,
-	.catalog_rating:before, .or_q_rating_date_s:before, .page_review_feature_rating:before, .review_rating:before, .track_rating_disp:before,
+	.catalog_rating:before, .or_q_rating_date_s:before, .page_review_feature_rating:before, .review_rating:before, .track_rating_disp:before, .mbgen:not(#users):has(tbody tr:nth-child(2) td:last-child img) td:not(:nth-child(2)):before,
 	:is(.catalog_btn, .format_btn, .review_save_btn, .review_btn, .track_rating_btn, .listening_btn, .notes_btn, .more_btn, .tag_btn):before,
 	.disco_avg_rating:before, .disco_cat_inner_issue:before, .disco_cat_inner:before,
 	#follow_user a:before, #block i, .btn[href^="/compare"]:before, .btn[href^="/messages/compose"]:before, .btn[href^="/recommend"]:before,
@@ -814,55 +814,55 @@
 		--hue: -2;
 		--sat: 1;
 		--lit: 1;
-	}
-	#block:not([data-blocked="true"]):after {
-		content: 'Block';
-	}
 
-
+		&:not([data-blocked="true"]):after {
+			content: 'Block';
+		}
+	}
 	#follow_user a:after {
 		content: 'Follow';
 		font-size: var(--font-size) !important;
 		line-height: var(--line-height) !important;
-	}
-	#follow_user a[onclick*="FollowUnfollowUser"]:after {
-		content: 'Following';
-	}
 
-
+		&:after {
+			content: 'Following';
+		}
+	}
 	.btn[href^="/compare"] {
-		font-size: 0 !important;
-		line-height: 0 !important;
 		--mask: var(--icon-16-arrows);
-	}
-	.btn[href^="/compare"]:after {
-		content: 'Compare';
-		font-size: var(--font-size) !important;
-		line-height: var(--line-height) !important;
-	}
 
+		&.tool_btn {
+			font-size: 0 !important;
+			line-height: 0 !important;
 
+			&:after {
+				content: 'Compare';
+				font-size: var(--font-size) !important;
+				line-height: var(--line-height) !important;
+			}
+		}
+	}
 	.btn[href^="/messages/compose"] {
 		font-size: 0 !important;
 		line-height: 0 !important;
 		--mask: var(--icon-16-mail);
-	}
-	.btn[href^="/messages/compose"]:after {
-		content: 'Message';
-		font-size: var(--font-size) !important;
-		line-height: var(--line-height) !important;
-	}
 
-
+		&:after {
+			content: 'Message';
+			font-size: var(--font-size) !important;
+			line-height: var(--line-height) !important;
+		}
+	}
 	.btn[href^="/recommend"] {
 		font-size: 0 !important;
 		line-height: 0 !important;
 		--mask: var(--icon-16-track);
-	}
-	.btn[href^="/recommend"]:after {
-		content: 'Recommend';
-		font-size: var(--font-size) !important;
-		line-height: var(--line-height) !important;
+
+		&:after {
+			content: 'Recommend';
+			font-size: var(--font-size) !important;
+			line-height: var(--line-height) !important;
+		}
 	}
 
 
@@ -1361,6 +1361,7 @@
 		flex-direction: column;
 		gap: 4px;
 	}
+	.mbgen:not(#users):has(tbody tr:nth-child(2) td:last-child img) tr,
 	.mbgen:not(#allNotifications .mbgen) tr:has(a[href^="/list/"]),
 	ul.lists li,
 	.mbgen[style="margin:14px;"] tr,
@@ -1767,67 +1768,67 @@
 		--lit: 1;
 	}
 
-	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp):has(img[src$="10m.png"]),
+	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp, .mbgen:not(#users):has(tbody tr:nth-child(2) td:last-child img) td:not(:nth-child(2))):has(img[src$="10m.png"]),
 	#rating_pct_10, td a:not(.btn)[href$="/r5.0"], .my_catalog_rating:has(.star-10m), .star-10m, .review_rating:has(img[alt^="5.00"]) {
 		--hue: 250;
 		--sat: 1.3;
 		--lit: 1;
 	}
-	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp):has(img[src$="9m.png"]),
+	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp, .mbgen:not(#users):has(tbody tr:nth-child(2) td:last-child img) td:not(:nth-child(2))):has(img[src$="9m.png"]),
 	#rating_pct_9, td a:not(.btn)[href$="/r4.5"], .my_catalog_rating:has(.star-9m), .star-9m, .review_rating:has(img[alt^="4.50"]) {
 		--hue: 284;
 		--sat: 1.1;
 		--lit: 0.9;
 	}
-	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp):has(img[src$="8m.png"]),
+	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp, .mbgen:not(#users):has(tbody tr:nth-child(2) td:last-child img) td:not(:nth-child(2))):has(img[src$="8m.png"]),
 	#rating_pct_8, td a:not(.btn)[href$="/r4.0"], .my_catalog_rating:has(.star-8m), .star-8m, .review_rating:has(img[alt^="4.00"]) {
 		--hue: 338;
 		--sat: 1;
 		--lit: 0.83;
 	}
-	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp):has(img[src$="7m.png"]),
+	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp, .mbgen:not(#users):has(tbody tr:nth-child(2) td:last-child img) td:not(:nth-child(2))):has(img[src$="7m.png"]),
 	#rating_pct_7, td a:not(.btn)[href$="/r3.5"], .my_catalog_rating:has(.star-7m), .star-7m, .review_rating:has(img[alt^="3.50"]) {
 		--hue: 360;
 		--sat: 1;
 		--lit: 0.94;
 	}
-	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp):has(img[src$="6m.png"]),
+	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp, .mbgen:not(#users):has(tbody tr:nth-child(2) td:last-child img) td:not(:nth-child(2))):has(img[src$="6m.png"]),
 	#rating_pct_6, td a:not(.btn)[href$="/r3.0"], .my_catalog_rating:has(.star-6m), .star-6m, .review_rating:has(img[alt^="3.00"]) {
 		--hue: 17;
 		--sat: 1.1;
 		--lit: 1;
 	}
-	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp):has(img[src$="5m.png"]),
+	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp, .mbgen:not(#users):has(tbody tr:nth-child(2) td:last-child img) td:not(:nth-child(2))):has(img[src$="5m.png"]),
 	#rating_pct_5, td a:not(.btn)[href$="/r2.5"], .my_catalog_rating:has(.star-5m), .star-5m, .review_rating:has(img[alt^="2.50"]) {
 		--hue: 52;
 		--sat: 1;
 		--lit: 1;
 	}
-	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp):has(img[src$="4m.png"]),
+	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp, .mbgen:not(#users):has(tbody tr:nth-child(2) td:last-child img) td:not(:nth-child(2))):has(img[src$="4m.png"]),
 	#rating_pct_4, td a:not(.btn)[href$="/r2.0"], .my_catalog_rating:has(.star-4m), .star-4m, .review_rating:has(img[alt^="2.00"]) {
 		--hue: 87;
 		--sat: 1;
 		--lit: 1;
 	}
-	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp):has(img[src$="3m.png"]),
+	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp, .mbgen:not(#users):has(tbody tr:nth-child(2) td:last-child img) td:not(:nth-child(2))):has(img[src$="3m.png"]),
 	#rating_pct_3, td a:not(.btn)[href$="/r1.5"], .my_catalog_rating:has(.star-3m), .star-3m, .review_rating:has(img[alt^="1.50"]) {
 		--hue: 133;
 		--sat: 1;
 		--lit: 0.95;
 	}
-	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp):has(img[src$="2m.png"]),
+	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp, .mbgen:not(#users):has(tbody tr:nth-child(2) td:last-child img) td:not(:nth-child(2))):has(img[src$="2m.png"]),
 	#rating_pct_2, td a:not(.btn)[href$="/r1.0"], .my_catalog_rating:has(.star-2m), .star-2m, .review_rating:has(img[alt^="1.00"]) {
 		--hue: 193;
 		--sat: 1;
 		--lit: 0.93;
 	}
-	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp):has(img[src$="1m.png"]),
+	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp, .mbgen:not(#users):has(tbody tr:nth-child(2) td:last-child img) td:not(:nth-child(2))):has(img[src$="1m.png"]),
 	#rating_pct_1, td a:not(.btn)[href$="/r0.5"], .my_catalog_rating:has(.star-1m), .star-1m, .review_rating:has(img[alt^="0.50"]) {
 		--hue: 208;
 		--sat: 1;
 		--lit: 0.82;
 	}
-	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp):has(img[src$="/0m.png"]),
+	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp, .mbgen:not(#users):has(tbody tr:nth-child(2) td:last-child img) td:not(:nth-child(2))):has(img[src$="/0m.png"]),
 	#rating_pct_0, td a:not(.btn)[href$="/r0.0"], .my_catalog_rating:has(.star-0m), .star-0m, .review_rating:has(img[alt^="0.00"]) {
 		--sat: 0;
 		--lit: 0.9;
@@ -2948,6 +2949,7 @@
 	}
 
 
+	.mbgen:not(#users):has(tbody tr:nth-child(2) td:last-child img) td:not(:nth-child(2)),
 	.track_rating_disp, span.track_rating_disp,
 	.review_rating,
 	.disco_cat_inner_issue, .disco_cat_inner,
@@ -2964,16 +2966,19 @@
 		font-size: var(--font-size);
 		line-height: var(--line-height);
 	}
+	.mbgen:not(#users):has(tbody tr:nth-child(2) td:last-child img) img,
 	.track_rating_disp img,
 	.catalog_rating img, .or_q_rating_date_s img, .page_review_feature_rating img {
 		display: none;
 	}
+	.mbgen:not(#users):has(tbody tr:nth-child(2) td:last-child img) td:not(:nth-child(2)):after,
 	.track_rating_disp:after,
 	.review_rating:after,
 	.catalog_rating:after, .or_q_rating_date_s:after, .page_review_feature_rating:after {
 		content: '---';
 		font-weight: var(--font-weight-bold);
 	}
+	.mbgen:not(#users):has(tbody tr:nth-child(2) td:last-child img) td:not(:nth-child(2)):before,
 	.track_rating_disp:before,
 	.review_rating:before,
 	.page_review_feature_rating:before,
@@ -3003,37 +3008,37 @@
 	}
 
 
-	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp):has(img[src$="10m.png"]):after {
+	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp, .mbgen:not(#users):has(tbody tr:nth-child(2) td:last-child img) td:not(:nth-child(2))):has(img[src$="10m.png"]):after {
 		content: '5.0';
 	}
-	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp):has(img[src$="9m.png"]):after {
+	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp, .mbgen:not(#users):has(tbody tr:nth-child(2) td:last-child img) td:not(:nth-child(2))):has(img[src$="9m.png"]):after {
 		content: '4.5';
 	}
-	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp):has(img[src$="8m.png"]):after {
+	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp, .mbgen:not(#users):has(tbody tr:nth-child(2) td:last-child img) td:not(:nth-child(2))):has(img[src$="8m.png"]):after {
 		content: '4.0';
 	}
-	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp):has(img[src$="7m.png"]):after {
+	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp, .mbgen:not(#users):has(tbody tr:nth-child(2) td:last-child img) td:not(:nth-child(2))):has(img[src$="7m.png"]):after {
 		content: '3.5';
 	}
-	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp):has(img[src$="6m.png"]):after {
+	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp, .mbgen:not(#users):has(tbody tr:nth-child(2) td:last-child img) td:not(:nth-child(2))):has(img[src$="6m.png"]):after {
 		content: '3.0';
 	}
-	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp):has(img[src$="5m.png"]):after {
+	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp, .mbgen:not(#users):has(tbody tr:nth-child(2) td:last-child img) td:not(:nth-child(2))):has(img[src$="5m.png"]):after {
 		content: '2.5';
 	}
-	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp):has(img[src$="4m.png"]):after {
+	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp, .mbgen:not(#users):has(tbody tr:nth-child(2) td:last-child img) td:not(:nth-child(2))):has(img[src$="4m.png"]):after {
 		content: '2.0';
 	}
-	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp):has(img[src$="3m.png"]):after {
+	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp, .mbgen:not(#users):has(tbody tr:nth-child(2) td:last-child img) td:not(:nth-child(2))):has(img[src$="3m.png"]):after {
 		content: '1.5';
 	}
-	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp):has(img[src$="2m.png"]):after {
+	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp, .mbgen:not(#users):has(tbody tr:nth-child(2) td:last-child img) td:not(:nth-child(2))):has(img[src$="2m.png"]):after {
 		content: '1.0';
 	}
-	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp):has(img[src$="1m.png"]):after {
+	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp, .mbgen:not(#users):has(tbody tr:nth-child(2) td:last-child img) td:not(:nth-child(2))):has(img[src$="1m.png"]):after {
 		content: '0.5';
 	}
-	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp):has(img[src$="/0m.png"]):after {
+	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp, .mbgen:not(#users):has(tbody tr:nth-child(2) td:last-child img) td:not(:nth-child(2))):has(img[src$="/0m.png"]):after {
 		content: '0.0';
 	}
 
@@ -5616,6 +5621,21 @@
 			&:before {
 				display: none !important;
 			}
+		}
+	}
+
+
+
+
+	/*     COMPARISON PAGE     */
+	.mbgen:not(#users):has(tbody tr:nth-child(2) td:last-child img) {
+		tr:first-child {
+			display: none;
+		}
+
+		td:nth-child(2) {
+			order: -1;
+			width: var(--cards-main-width);
 		}
 	}
 }
