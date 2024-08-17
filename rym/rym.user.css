@@ -576,7 +576,7 @@
 	.ui_search_scope_selector_item,
 	.discussion_breadcrumb a,
 	.group_frame,
-	.page_object_discussion_thread,
+	.page_object_discussion_thread, ul.lists li,
 	.page_chart_query_advanced_show_label a, .page_chart_query_item_type_selector, .page_charts_section_scope_item,
 	.page_charts_section_charts_version_selector a, .page_charts_view_mode, .ui_pagination_btn,
 	.issue_info,
@@ -772,7 +772,8 @@
 	.page_chart_query_item_option:before,
 	.page_charts_section_charts_item_movement_indicator:before,
 	.avg_rating:before, .avg_rating_friends:before,
-	.tracks_lyric_link:before
+	.tracks_lyric_link:before,
+	.icon_globe + a:before
 	{
 		content: '';
 		display: block !important;
@@ -1469,7 +1470,6 @@
 	}
 	.mbgen:not(#users, #musicrating > .mbgen):has(tbody tr:nth-child(2) td:last-child img):not(:has(tr[id^="page_catalog_item_"])) tr,
 	.mbgen:not(#allNotifications .mbgen) tr:has(a[href^="/list/"]),
-	ul.lists li,
 	.mbgen[style="margin:14px;"] tr,
 	[id^="ftabfav"] tr,
 	.page_user_appears_on_item,
@@ -1597,10 +1597,9 @@
 
 		display: flex;
 		flex-direction: column;
-		gap: 4px;
+		gap: var(--button-list-gap);
 
 		li {
-			color: hsl(var(--c3));
 			padding: 5px 12px 5px calc(12px + 16px + 6px) !important;
 			font-size: var(--font-size);
 			--mask: var(--icon-16-user-list);
@@ -2392,7 +2391,7 @@
 		overflow: hidden;
 	}
 	td[style^="width:266px;"] > div {
-		width: fit-content !important;
+		width: 100% !important;
 		max-width: 274px !important;
 	}
 
@@ -2412,11 +2411,25 @@
 		display: flex;
 		flex-direction: column;
 		margin: 0 var(--card-gap);
-	}
-	.profilehii .mbgen {
-		margin: unset !important;
-		min-width: unset !important;
-		max-width: unset !important;
+
+		.mbgen {
+			margin: unset !important;
+			min-width: unset !important;
+			max-width: unset !important;
+
+			.icon_globe {
+				font-size: var(--font-size);
+				width: 16px;
+				display: none;
+
+				& + a {
+					position: relative;
+					padding-left: calc(16px + 6px);
+					--left: 0;
+					--mask: var(--icon-16-location);
+				}
+			}
+		}
 	}
 	.profilehii .mbgen:first-child tr:nth-child(2) {
 		text-transform: lowercase;
@@ -3239,7 +3252,7 @@
 				line-height: var(--line-height);
 				min-width: 30px;
 				text-align: right;
-				margin-right: 10px;
+				margin: 0 10px 0 0;
 			}
 			.page_artist_songs_song_info,
 			.tracklist_title {
@@ -3255,6 +3268,7 @@
 					display: flex;
 					align-items: center;
 					gap: 6px;
+					flex-shrink: 1;
 				}
 
 				/* legacy */ [itemprop="name"],
