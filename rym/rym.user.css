@@ -27,7 +27,7 @@
 		--lit-film: 1;
 
 		--font: Ubuntu Sans, Spline Sans, Inter, Roboto, Noto Sans, Noto Sans JP, /*Noto Color Emoji, */-apple-system, BlinkMacSystemFont, sans-serif;
-		--font-code: Spline Sans Mono, Iosevka, JetBrains Mono, Roboto Mono, monospace;
+		--font-code: Iosevka, Iosevka Comfy Duo, Spline Sans Mono, JetBrains Mono, Roboto Mono, monospace;
 		/*--font-brand: Comfortaa, var(--font);*/
 		--font-size: 14px;
 		--line-height: calc(var(--font-size) + 4px);
@@ -136,7 +136,7 @@
 	.theme_eve :is(
 		.avg_rating_friends,
 		.rating_pct, a,
-		.my_catalog_rating, .mbgen tr, .review_rating, .catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .disco_cat_inner_issue, .disco_cat_inner, .track_rating_disp, .mbgen:not(#users):has(tbody tr:nth-child(2) td:last-child img) td:not(:nth-child(2)),
+		.my_catalog_rating, .mbgen tr, .review_rating, .catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .disco_cat_inner_issue, .disco_cat_inner, .track_rating_disp, .mbgen:not(#users, #musicrating > .mbgen):has(tbody tr:nth-child(2) td:last-child img):not(:has(tr[id^="page_catalog_item_"])) td:not(:nth-child(2)),
 		.ribbon,
 		.r0,
 		div.corqcomment_owner,
@@ -150,8 +150,9 @@
 		.votingbox :is(.genrea, .genred), .descriptora, .descriptord,
 		[type="button"],
 		.note,
-		#track_rating_success, #notes_success, #acq_date_success, #listening_success,
-		.ui_search_scope_selector_item
+		#track_rating_status, #notes_success, #acq_date_success, #listening_success,
+		.ui_search_scope_selector_item,
+		.page_charts_section_charts_item_movement_indicator
 	)
 	{
 		--c1: var(--hue), calc(var(--sat) * 40%), 100%;
@@ -191,8 +192,9 @@
 		.votingbox :is(.genrea, .genred), .descriptora, .descriptord,
 		[type="button"],
 		.note,
-		#track_rating_success, #notes_success, #acq_date_success, #listening_success,
-		.ui_search_scope_selector_item
+		#track_rating_status, #notes_success, #acq_date_success, #listening_success,
+		.ui_search_scope_selector_item,
+		.page_charts_section_charts_item_movement_indicator
 	)
 	{
 		--c1: var(--hue), calc(var(--sat) * 40%), 100%;
@@ -232,8 +234,9 @@
 		.votingbox :is(.genrea, .genred), .descriptora, .descriptord,
 		[type="button"],
 		.note,
-		#track_rating_success, #notes_success, #acq_date_success, #listening_success,
-		.ui_search_scope_selector_item
+		#track_rating_status, #notes_success, #acq_date_success, #listening_success,
+		.ui_search_scope_selector_item,
+		.page_charts_section_charts_item_movement_indicator
 	)
 	{
 		--c1: var(--hue), calc(var(--sat) * 6%), 0%;
@@ -410,6 +413,7 @@
 		--icon-16-film: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtZmlsbSI+PHJlY3Qgd2lkdGg9IjE4IiBoZWlnaHQ9IjE4IiB4PSIzIiB5PSIzIiByeD0iMiIvPjxwYXRoIGQ9Ik03IDN2MTgiLz48cGF0aCBkPSJNMyA3LjVoNCIvPjxwYXRoIGQ9Ik0zIDEyaDE4Ii8+PHBhdGggZD0iTTMgMTYuNWg0Ii8+PHBhdGggZD0iTTE3IDN2MTgiLz48cGF0aCBkPSJNMTcgNy41aDQiLz48cGF0aCBkPSJNMTcgMTYuNWg0Ii8+PC9zdmc+');
 		--icon-16-music-recent: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtY2xvY2stMiI+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMTAiLz48cG9seWxpbmUgcG9pbnRzPSIxMiA2IDEyIDEyIDE2IDEwIi8+PC9zdmc+');
 		--icon-16-music-label: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjc1IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLW1lZ2FwaG9uZSI+PHBhdGggZD0ibTMgMTEgMTgtNXYxMkwzIDE0di0zeiIvPjxwYXRoIGQ9Ik0xMS42IDE2LjhhMyAzIDAgMSAxLTUuOC0xLjYiLz48L3N2Zz4=');
+		--icon-16-music-lyrics: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtbWljLXZvY2FsIj48cGF0aCBkPSJtMTEgNy42MDEtNS45OTQgOC4xOWExIDEgMCAwIDAgLjEgMS4yOThsLjgxNy44MThhMSAxIDAgMCAwIDEuMzE0LjA4N0wxNS4wOSAxMiIvPjxwYXRoIGQ9Ik0xNi41IDIxLjE3NEMxNS41IDIwLjUgMTQuMzcyIDIwIDEzIDIwYy0yLjA1OCAwLTMuOTI4IDIuMzU2LTYgMi0yLjA3Mi0uMzU2LTIuNzc1LTMuMzY5LTEuNS00LjUiLz48Y2lyY2xlIGN4PSIxNiIgY3k9IjciIHI9IjUiLz48L3N2Zz4=');
 	}
 
 
@@ -578,12 +582,18 @@
 	.issue_info,
 	/* subscribe to see similar release suggestions */ [style="text-decoration:none;color:var(--gen-blue-darkest);"][href="/subscribe/"],
 	.page_charts_section_charts_save_actions a,
-	.page_charts_recommendations_banner
+	.page_charts_recommendations_banner,
+	/* review btn on homepage */ a:has(.page_home_section_featured_content_content_item_banner),
+	.page_chart_query_item_option,
+	.page_charts_section_charts_item,
+	.track_credit_show_link
 	{
 		--bg: hsl(var(--b4));
 		--bg-hov: hsla(var(--b4), 80%);
 		--bg-atv: hsla(var(--b4), 60%);
 		--col: hsl(var(--c2));
+		--col-alt: hsl(var(--c3));
+		--col-hai: hsl(var(--l2-c));
 		background: var(--bg) !important;
 		color: var(--col) !important;
 		padding: var(--padding, 7px 12px) !important;
@@ -614,9 +624,12 @@
 			transition-property: padding, transform !important;
 			transition-duration: 0.1s !important;
 		}
-		&:active {
+		&:not(.page_charts_section_charts_item):active {
 			background: var(--bg-atv) !important;
 			transform: scale(0.98);
+		}
+		&:focus-visible {
+			animation: flash calc(var(--trans) * 2.2) cubic-bezier(0, 0, 0.07, 1) !important;
 		}
 
 		.fa {
@@ -624,6 +637,7 @@
 		}
 
 
+		&.current,
 		&.blue_btn:not(.profile_set_listening_btn .btn, .profile_view_play_history_btn .btn),
 		&.track_rating_btn.has_ratings,
 		#follow_user &[onclick*="FollowUnfollowUser"],
@@ -639,15 +653,28 @@
 			--bg-hov: hsla(var(--h3), 80%);
 			--bg-atv: hsla(var(--h3), 60%);
 			--col: hsl(var(--ovr, var(--b7)));
+			--col-alt: hsl(var(--b7), 60%);
+			--col-hai: hsl(var(--l4-c));
 
 			/* override since they use !important in their own css */
 			--btn-primary-background-disabled: var(--bg) !important;
 			--btn-primary-text-disabled: var(--col) !important;
+
+			animation: flash calc(var(--trans) * 2.2) cubic-bezier(0, 0, 0.07, 1) !important;
 		}
 
 		&.disabled {
 			opacity: 0.6 !important;
 			cursor: not-allowed !important;
+		}
+	}
+
+	@keyframes flash {
+		from, to {
+			filter: unset;
+		}
+		40% {
+			filter: brightness(150%);
 		}
 	}
 
@@ -708,7 +735,7 @@
 	.musictoolbar a:before,
 	td a.medium[href^="/collection/"][href*="/r"]:not([href$="/recent/"]):before,
 	#profile_tab a:before, #profile_tab li#currentp:before,
-	.catalog_rating:before, .or_q_rating_date_s:before, .page_review_feature_rating:before, .review_rating:before, .track_rating_disp:before, .mbgen:not(#users):has(tbody tr:nth-child(2) td:last-child img) td:not(:nth-child(2)):before,
+	.catalog_rating:before, .or_q_rating_date_s:before, .page_review_feature_rating:before, .review_rating:before, .track_rating_disp:before, .mbgen:not(#users, #musicrating > .mbgen):has(tbody tr:nth-child(2) td:last-child img):not(:has(tr[id^="page_catalog_item_"])) td:not(:nth-child(2)):before,
 	:is(.catalog_btn, .format_btn, .review_save_btn, .review_btn, .track_rating_btn, .listening_btn, .notes_btn, .more_btn, .tag_btn):before,
 	.disco_avg_rating:before, .disco_cat_inner_issue:before, .disco_cat_inner:before,
 	#follow_user a:before, #block i, .btn[href^="/compare"]:before, .btn[href^="/messages/compose"]:before, .btn[href^="/recommend"]:before,
@@ -740,7 +767,12 @@
 	.page_object_discussion_thread:before,
 	.issue_label:before,
 	.disco_search:before,
-	.page_charts_section_charts_save_actions a:before
+	.page_charts_section_charts_save_actions a:before,
+	.page_chart_query_item_type_selector:before,
+	.page_chart_query_item_option:before,
+	.page_charts_section_charts_item_movement_indicator:before,
+	.avg_rating:before, .avg_rating_friends:before,
+	.tracks_lyric_link:before
 	{
 		content: '';
 		display: block !important;
@@ -764,6 +796,10 @@
 		transition-duration: var(--trans) !important;
 		transition-timing-function: var(--trans-function) !important;
 	}
+	.page_chart_query_item_type_selector:before {
+		--left: none;
+		--right: 12px;
+	}
 	.fa:before, .fas:before, .far:before, .fal:before, .fad:before, .fab:before {
 		content: '';
 		display: block !important;
@@ -782,6 +818,7 @@
 		transition-timing-function: var(--trans-function) !important;
 	}
 
+	.page_chart_query_item_option,
 	[for="page_discussion_search_searchterm"] + .btn, .page_discussion_search .btn,
 	.header_extended_section .header_item,
 	.catalog_btn, .review_save_btn, .review_btn, .track_rating_btn, .listening_btn, .notes_btn, .more_btn, .tag_btn,
@@ -794,6 +831,7 @@
 	{
 		padding-left: calc(12px + 16px + 6px) !important;
 	}
+	.page_chart_query_item_type_selector,
 	.ui_search_autocomplete_result,
 	.disco_expandissues, .format_btn
 	{
@@ -953,29 +991,29 @@
 		--mask: var(--icon-16-film);
 	}
 
-	#btnmusicrating:before {
+	#btnmusicrating {
 		--mask: var(--icon-16-star);
 	}
-	#btnmusictrackratings:before, .track_rating_btn:before {
+	#btnmusictrackratings, .track_rating_btn {
 		--mask: var(--icon-16-playlist);
 	}
-	#btnmusicownership:before, .catalog_btn:before {
+	#btnmusicownership, .catalog_btn {
 		--mask: var(--icon-16-library);
 	}
-	#btnmusicreview:before, .review_btn:before {
+	#btnmusicreview, .review_btn {
 		--mask: var(--icon-16-review);
 	}
-	#btnmusicwanted:before {
+	#btnmusicwanted {
 		--mask: var(--icon-16-shopping-bag)
 	}
-	#btnmusictag:before, .tag_btn:before {
+	#btnmusictag, .tag_btn {
 		--mask: var(--icon-16-tag);
 	}
-	.listening_btn:before {
+	.listening_btn {
 		--mask: var(--icon-16-listening-report);
 	}
 
-	#btnftabfriends:before {
+	#btnftabfriends {
 		--mask: var(--icon-16-users);
 	}
 
@@ -983,6 +1021,7 @@
 
 
 	/*     INPUT     */
+	.ui_browser_input,
 	.page_discussion_search_searchterm,
 	input[type="date"], input[type="email"], input[type="number"], input[type="password"], input[type="text"], input[type="url"], select, textarea,
 	.ui_search,
@@ -995,7 +1034,7 @@
 		--col: hsl(var(--c2));
 		background-color: var(--bg) !important;
 		color: var(--col) !important;
-		padding: var(--padding, 7px) !important;
+		padding: var(--padding, 7px 12px) !important;
 		line-height: var(--line-height);
 		font-size: var(--font-size) !important;
 		font-weight: var(--font-weight) !important;
@@ -1026,6 +1065,14 @@
 	}
 
 
+	/*     SELECTOR     */
+	.page_chart_query_item_type_selector {
+		--mask: var(--icon-16-dropdown);
+
+		.page_chart_query_item_selector {
+			display: none;
+		}
+	}
 
 
 	/*     CARDS     */
@@ -1073,10 +1120,6 @@
 		border: 1px solid hsl(var(--b4)) !important;
 	}
 
-	div.bubble_header.profile_header {
-		font-size: var(--font-size) !important;
-	}
-
 	.release_right_column .section_main_info.section_outer {
 		padding: var(--card-padding) !important;
 	}
@@ -1087,12 +1130,62 @@
 		border-right: unset;
 	}
 
-	.bubble_header {
+	div.bubble_header {
 		border-bottom-left-radius: unset;
 		border-bottom-right-radius: unset;
 		box-shadow: unset;
 		border-bottom: unset !important;
 		padding: var(--card-padding) !important;
+
+		&.profile_header {
+			font-size: var(--font-size) !important;
+
+			display: flex;
+			align-items: baseline;
+			color: hsl(var(--c2));
+			position: relative;
+
+			#profilename {
+				order: -1;
+				margin-left: unset;
+				font-size: 30px;
+				line-height: 34px;
+				font-weight: inherit;
+				font-family: var(--font);
+				padding-right: calc(var(--card-gap) - 4px);
+				color: hsl(var(--c1));
+			}
+
+			.ribbon_frame {
+				position: absolute;
+				width: fit-content;
+				top: var(--card-padding);
+				right: 0;
+
+				.ribbon {
+					top: 0;
+					right: 0;
+					padding: 6px var(--card-padding) !important;
+					font-size: var(--font-size) !important;
+					font-weight: var(--font-weight-medium) !important;
+					color: hsl(var(--b7)) !important;
+
+					&.base.supporter {
+						--hue: var(--hue-pro);
+						--sat: 1;
+						--lit: 1;
+						background: linear-gradient(to right,hsl(var(--l2-c)),hsl(var(--l3-c)));
+
+						&:before {
+							border-top: 1.8em solid hsl(var(--l2-c));
+						}
+						&:after {
+							border-bottom: 1.8em solid hsl(var(--l2-c));
+						}
+					}
+				}
+			}
+		}
 	}
 	.bubble_content {
 		border-top-left-radius: unset;
@@ -1100,11 +1193,10 @@
 		border-top: unset !important;
 		margin-bottom: var(--card-gap) !important;
 		padding: 0 var(--card-padding) var(--card-padding) var(--card-padding) !important;
-	}
 
-
-	.bubble_content > div {
-		padding: unset !important;
+		& > div {
+			padding: unset !important;
+		}
 	}
 
 
@@ -1158,6 +1250,11 @@
 		margin-bottom: unset;
 		height: fit-content;
 		display: flex;
+		align-items: center;
+
+		h2 {
+			flex: 1;
+		}
 	}
 	.page_home_section_header h2,
 	#page_song h2,
@@ -1193,6 +1290,7 @@
 		text-align: left !important;
 		font-weight: var(--font-weight-bold) !important;
 		display: flex;
+		gap: 4px;
 		position: relative;
 	}
 	.bubble_header a {
@@ -1216,27 +1314,31 @@
 		color: hsl(var(--c3));
 		font-weight: var(--font-weight);
 		padding: unset;
-		width: 100px;
+		width: 120px;
 		flex-shrink: 0;
-	}
-	table.album_info td, table.film_info td {
-		padding: unset !important;
 	}
 	table.album_info, table.film_info {
 		margin-top: var(--card-gap);
 		font-size: var(--font-size);
-	}
 
-	table.album_info tr, table.film_info tr {
-		display: flex;
-		margin-bottom: 6px;
+		td {
+			padding: unset !important;
+		}
+		tr {
+			display: flex;
+			margin-bottom: 10px;
+
+			&:last-child {
+				margin: unset;
+			}
+		}
 	}
 
 	.avg_rating, div.disco_avg_rating {
-		font-size: inherit;
+		font-size: var(--font-size) !important;
 		font-weight: var(--font-weight-bold);
 		color: hsl(var(--l2-c)) !important;
-		font-size: var(--font-size) !important;
+		text-shadow: 0 0 20px hsl(var(--h3));
 	}
 	div.disco_avg_rating:not(.enough_data) {
 		color: hsla(var(--l2-c), 60%) !important;
@@ -1248,10 +1350,14 @@
 		--hue: 160;
 		--sat: 1;
 		--lit: 1;
+		text-shadow: 0 0 20px hsl(var(--h4));
 	}
-	.num_ratings, .max_rating {
+	.num_ratings {
 		font-size: var(--font-size);
-		color: hsl(var(--c2));
+		color: hsl(var(--c2), 80%);
+	}
+	.max_rating {
+		display: none;
 	}
 
 	a.artist, .artist, a.game, a.work.major, a.user, a.film, a.film_artist {
@@ -1361,7 +1467,7 @@
 		flex-direction: column;
 		gap: 4px;
 	}
-	.mbgen:not(#users):has(tbody tr:nth-child(2) td:last-child img) tr,
+	.mbgen:not(#users, #musicrating > .mbgen):has(tbody tr:nth-child(2) td:last-child img):not(:has(tr[id^="page_catalog_item_"])) tr,
 	.mbgen:not(#allNotifications .mbgen) tr:has(a[href^="/list/"]),
 	ul.lists li,
 	.mbgen[style="margin:14px;"] tr,
@@ -1768,70 +1874,69 @@
 		--lit: 1;
 	}
 
-	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp, .mbgen:not(#users):has(tbody tr:nth-child(2) td:last-child img) td:not(:nth-child(2))):has(img[src$="10m.png"]),
+	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp, .mbgen:not(#users, #musicrating > .mbgen):has(tbody tr:nth-child(2) td:last-child img):not(:has(tr[id^="page_catalog_item_"])) td:not(:nth-child(2))):has(img[src$="10m.png"]),
 	#rating_pct_10, td a:not(.btn)[href$="/r5.0"], .my_catalog_rating:has(.star-10m), .star-10m, .review_rating:has(img[alt^="5.00"]) {
 		--hue: 250;
 		--sat: 1.3;
 		--lit: 1;
 	}
-	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp, .mbgen:not(#users):has(tbody tr:nth-child(2) td:last-child img) td:not(:nth-child(2))):has(img[src$="9m.png"]),
+	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp, .mbgen:not(#users, #musicrating > .mbgen):has(tbody tr:nth-child(2) td:last-child img):not(:has(tr[id^="page_catalog_item_"])) td:not(:nth-child(2))):has(img[src$="9m.png"]),
 	#rating_pct_9, td a:not(.btn)[href$="/r4.5"], .my_catalog_rating:has(.star-9m), .star-9m, .review_rating:has(img[alt^="4.50"]) {
 		--hue: 284;
 		--sat: 1.1;
 		--lit: 0.9;
 	}
-	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp, .mbgen:not(#users):has(tbody tr:nth-child(2) td:last-child img) td:not(:nth-child(2))):has(img[src$="8m.png"]),
+	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp, .mbgen:not(#users, #musicrating > .mbgen):has(tbody tr:nth-child(2) td:last-child img):not(:has(tr[id^="page_catalog_item_"])) td:not(:nth-child(2))):has(img[src$="8m.png"]),
 	#rating_pct_8, td a:not(.btn)[href$="/r4.0"], .my_catalog_rating:has(.star-8m), .star-8m, .review_rating:has(img[alt^="4.00"]) {
 		--hue: 338;
 		--sat: 1;
 		--lit: 0.83;
 	}
-	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp, .mbgen:not(#users):has(tbody tr:nth-child(2) td:last-child img) td:not(:nth-child(2))):has(img[src$="7m.png"]),
+	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp, .mbgen:not(#users, #musicrating > .mbgen):has(tbody tr:nth-child(2) td:last-child img):not(:has(tr[id^="page_catalog_item_"])) td:not(:nth-child(2))):has(img[src$="7m.png"]),
 	#rating_pct_7, td a:not(.btn)[href$="/r3.5"], .my_catalog_rating:has(.star-7m), .star-7m, .review_rating:has(img[alt^="3.50"]) {
 		--hue: 360;
 		--sat: 1;
 		--lit: 0.94;
 	}
-	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp, .mbgen:not(#users):has(tbody tr:nth-child(2) td:last-child img) td:not(:nth-child(2))):has(img[src$="6m.png"]),
+	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp, .mbgen:not(#users, #musicrating > .mbgen):has(tbody tr:nth-child(2) td:last-child img):not(:has(tr[id^="page_catalog_item_"])) td:not(:nth-child(2))):has(img[src$="6m.png"]),
 	#rating_pct_6, td a:not(.btn)[href$="/r3.0"], .my_catalog_rating:has(.star-6m), .star-6m, .review_rating:has(img[alt^="3.00"]) {
 		--hue: 17;
 		--sat: 1.1;
 		--lit: 1;
 	}
-	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp, .mbgen:not(#users):has(tbody tr:nth-child(2) td:last-child img) td:not(:nth-child(2))):has(img[src$="5m.png"]),
+	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp, .mbgen:not(#users, #musicrating > .mbgen):has(tbody tr:nth-child(2) td:last-child img):not(:has(tr[id^="page_catalog_item_"])) td:not(:nth-child(2))):has(img[src$="5m.png"]),
 	#rating_pct_5, td a:not(.btn)[href$="/r2.5"], .my_catalog_rating:has(.star-5m), .star-5m, .review_rating:has(img[alt^="2.50"]) {
 		--hue: 52;
 		--sat: 1;
 		--lit: 1;
 	}
-	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp, .mbgen:not(#users):has(tbody tr:nth-child(2) td:last-child img) td:not(:nth-child(2))):has(img[src$="4m.png"]),
+	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp, .mbgen:not(#users, #musicrating > .mbgen):has(tbody tr:nth-child(2) td:last-child img):not(:has(tr[id^="page_catalog_item_"])) td:not(:nth-child(2))):has(img[src$="4m.png"]),
 	#rating_pct_4, td a:not(.btn)[href$="/r2.0"], .my_catalog_rating:has(.star-4m), .star-4m, .review_rating:has(img[alt^="2.00"]) {
 		--hue: 87;
 		--sat: 1;
 		--lit: 1;
 	}
-	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp, .mbgen:not(#users):has(tbody tr:nth-child(2) td:last-child img) td:not(:nth-child(2))):has(img[src$="3m.png"]),
+	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp, .mbgen:not(#users, #musicrating > .mbgen):has(tbody tr:nth-child(2) td:last-child img):not(:has(tr[id^="page_catalog_item_"])) td:not(:nth-child(2))):has(img[src$="3m.png"]),
 	#rating_pct_3, td a:not(.btn)[href$="/r1.5"], .my_catalog_rating:has(.star-3m), .star-3m, .review_rating:has(img[alt^="1.50"]) {
 		--hue: 133;
 		--sat: 1;
 		--lit: 0.95;
 	}
-	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp, .mbgen:not(#users):has(tbody tr:nth-child(2) td:last-child img) td:not(:nth-child(2))):has(img[src$="2m.png"]),
+	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp, .mbgen:not(#users, #musicrating > .mbgen):has(tbody tr:nth-child(2) td:last-child img):not(:has(tr[id^="page_catalog_item_"])) td:not(:nth-child(2))):has(img[src$="2m.png"]),
 	#rating_pct_2, td a:not(.btn)[href$="/r1.0"], .my_catalog_rating:has(.star-2m), .star-2m, .review_rating:has(img[alt^="1.00"]) {
 		--hue: 193;
 		--sat: 1;
 		--lit: 0.93;
 	}
-	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp, .mbgen:not(#users):has(tbody tr:nth-child(2) td:last-child img) td:not(:nth-child(2))):has(img[src$="1m.png"]),
+	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp, .mbgen:not(#users, #musicrating > .mbgen):has(tbody tr:nth-child(2) td:last-child img):not(:has(tr[id^="page_catalog_item_"])) td:not(:nth-child(2))):has(img[src$="1m.png"]),
 	#rating_pct_1, td a:not(.btn)[href$="/r0.5"], .my_catalog_rating:has(.star-1m), .star-1m, .review_rating:has(img[alt^="0.50"]) {
 		--hue: 208;
 		--sat: 1;
 		--lit: 0.82;
 	}
-	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp, .mbgen:not(#users):has(tbody tr:nth-child(2) td:last-child img) td:not(:nth-child(2))):has(img[src$="/0m.png"]),
+	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp, .mbgen:not(#users, #musicrating > .mbgen):has(tbody tr:nth-child(2) td:last-child img):not(:has(tr[id^="page_catalog_item_"])) td:not(:nth-child(2))):has(img[src$="/0m.png"]),
 	#rating_pct_0, td a:not(.btn)[href$="/r0.0"], .my_catalog_rating:has(.star-0m), .star-0m, .review_rating:has(img[alt^="0.00"]) {
-		--sat: 0;
-		--lit: 0.9;
+		--col: hsl(var(--c3)) !important;
 	}
 
 	.review_rating {
@@ -1841,7 +1946,7 @@
 	}
 
 	.my_catalog_rating:not(:has(.star-0m)) {
-		--shadow: 0 0 20px hsl(var(--h4));
+		--shadow: 0 0 40px hsl(var(--h4));
 	}
 
 	.mbgen tr:has(a[href$="/r5.0"]) {
@@ -1963,13 +2068,22 @@
 		mask-image: var(--mask);
 		-webkit-mask-image: var(--mask);
 		background: unset;
-		background-color: hsla(var(--c2), 80%); /* c2 */
+		background-color: hsl(var(--c3)); /* c2 */
+
+		.release_my_catalog & {
+			background-color: var(--col);
+			opacity: 0.6;
+		}
 	}
 	.my_catalog_rating {
 		position: relative;
 		padding: 7px 12px;
 		width: fit-content;
 		opacity: 1 !important;
+
+		&:hover:after {
+			animation: flash calc(var(--trans) * 2.2) cubic-bezier(0, 0, 0.07, 1) !important;
+		}
 	}
 	.my_catalog_rating:has(.rating_stars):after {
 		content: '';
@@ -2012,6 +2126,11 @@
 	.star-8m, .review_rating:has(img[alt^="4.00"])  {mask-position:0 -594px!important;width:90px;height:16px}
 	.star-9m, .review_rating:has(img[alt^="4.50"])  {mask-position:0 -660px!important;width:90px;height:16px}
 
+	:root {
+		--stars-t: var(--trans);
+		--stars-f: var(--trans-function);
+	}
+
 	.my_catalog_rating:has(.star-0m):after{mask-position:0 0!important;width:90px;height:16px}
 	.my_catalog_rating:has(.star-10m):after{mask-position:0 -66px!important;width:90px;height:16px}
 	.my_catalog_rating:has(.star-1m):after{mask-position:0 -132px!important;width:90px;height:16px}
@@ -2023,6 +2142,15 @@
 	.my_catalog_rating:has(.star-7m):after{mask-position:0 -528px!important;width:90px;height:16px}
 	.my_catalog_rating:has(.star-8m):after{mask-position:0 -594px!important;width:90px;height:16px}
 	.my_catalog_rating:has(.star-9m):after{mask-position:0 -660px!important;width:90px;height:16px}
+
+	@keyframes slide_stars {
+		from {
+			transform: scale(0.95);
+		}
+		to {
+			transform: scale(1);
+		}
+	}
 
 
 
@@ -2166,12 +2294,37 @@
 
 
 	/*     SUCCESS     */
-	#track_rating_success, #notes_success, #acq_date_success, #listening_success {
+	#notes_success, #acq_date_success, #listening_success {
 		color: hsl(var(--l3-c));
 		margin-left: calc(var(--card-gap) - 3.46px);
 		--hue: var(--hue-pos);
 		--sat: 1;
 		--lit: 1;
+	}
+
+	#track_rating_status {
+		font-size: var(--font-size);
+		line-height: var(--line-height);
+		margin-top: var(--card-gap);
+		color: hsl(var(--c3));
+
+		height: fit-content;
+		margin-bottom: unset;
+
+		&:not(.saving, .saved) {
+			display: none;
+		}
+
+		.saving {
+			color: inherit !important;
+		}
+		&.saved {
+			color: hsl(var(--l3-c));
+			font-weight: var(--font-weight-bold);
+			--hue: var(--hue-pos);
+			--sat: 1;
+			--lit: 1;
+		}
 	}
 
 
@@ -2273,57 +2426,6 @@
 		display: flex;
 		gap: 10px;
 		align-items: center;
-	}
-
-
-	.profile_header {
-		display: flex;
-		align-items: baseline;
-		color: hsl(var(--c2));
-		position: relative;
-	}
-	#profilename {
-		order: -1;
-		margin-left: unset;
-		font-size: 30px;
-		line-height: 34px;
-		font-weight: inherit;
-		font-family: var(--font);
-		padding-right: var(--card-gap);
-		color: hsl(var(--c1));
-	}
-
-
-	.ribbon_frame {
-		position: absolute;
-		width: fit-content;
-		top: var(--card-padding);
-		right: 0;
-	}
-	.ribbon {
-		top: 0;
-		right: 0;
-		padding: 6px var(--card-padding) !important;
-		font-size: var(--font-size) !important;
-		font-weight: var(--font-weight-medium) !important;
-		color: hsl(var(--b7)) !important;
-	}
-
-	.ribbon.base.supporter {
-		background: linear-gradient(to right,hsl(var(--l2-c)),hsl(var(--l3-c)))
-	}
-	.ribbon.base.supporter::before {
-		border-top: 1.8em solid hsl(var(--l2-c));
-	}
-	.ribbon.base.supporter::after {
-		border-bottom: 1.8em solid hsl(var(--l2-c));
-	}
-
-
-	.supporter {
-		--hue: var(--hue-pro);
-		--sat: 1;
-		--lit: 1;
 	}
 
 
@@ -2449,6 +2551,12 @@
 	}
 	.fa-quote-right {
 		--mask: var(--icon-16-external);
+	}
+	.fa-bookmark {
+		--mask: var(--icon-16-bookmark);
+	}
+	.fa-home-alt {
+		--mask: var(--icon-16-home);
 	}
 
 	div.header_icon_link {
@@ -2738,14 +2846,18 @@
 
 			.catalog_line.my_rating &,
 			&.friend {
-				--bg: hsla(var(--h4), 35%) !important;
-				--bg-hov: hsla(var(--h4), 45%) !important;
-				--shadow: 0 0 50px 5px hsla(var(--h4), 40%) !important;
+				--bg: hsla(var(--h4), 30%) !important;
+				--bg-hov: hsla(var(--h4), 40%) !important;
+				--shadow: 0 0 50px 5px hsla(var(--h4), 30%) !important;
 			}
 			.catalog_line.my_rating & {
 				--hue: 38;
 				--sat: 1;
 				--lit: 1;
+
+				/* place above the rest */
+				z-index: 10;
+				position: relative;
 			}
 		}
 	}
@@ -2764,8 +2876,16 @@
 		max-width: unset;
 	}
 
+	#release_touch_catalog_guidance {
+		display: none;
+	}
 	ul.tracks {
-		margin: 6px 0 !important;
+		margin: unset !important;
+
+		&#track_ratings {
+			margin-top: var(--button-list-gap) !important;
+			max-width: unset;
+		}
 	}
 	.track_rating_hide {
 		animation: dropdown calc(var(--trans) - 0.1s) var(--trans-function);
@@ -2965,7 +3085,8 @@
 	}
 
 
-	.mbgen:not(#users):has(tbody tr:nth-child(2) td:last-child img) td:not(:nth-child(2)),
+	.avg_rating, .avg_rating_friends,
+	.mbgen:not(#users, #musicrating > .mbgen):has(tbody tr:nth-child(2) td:last-child img):not(:has(tr[id^="page_catalog_item_"])) td:not(:nth-child(2)),
 	.track_rating_disp, span.track_rating_disp,
 	.review_rating,
 	.disco_cat_inner_issue, .disco_cat_inner,
@@ -2977,34 +3098,39 @@
 		width: unset;
 		height: unset;
 		position: relative;
-		color: hsl(var(--l3-c)) !important;
 		text-shadow: 0 0 20px hsl(var(--h4));
 		font-size: var(--font-size);
 		line-height: var(--line-height);
+
+		&:not(.avg_rating, .disco_avg_rating) {
+			color: hsl(var(--l3-c)) !important;
+		}
 	}
-	.mbgen:not(#users):has(tbody tr:nth-child(2) td:last-child img) img,
+	.mbgen:not(#users, #musicrating > .mbgen):has(tbody tr:nth-child(2) td:last-child img):not(:has(tr[id^="page_catalog_item_"])) img,
 	.track_rating_disp img,
 	.catalog_rating img, .or_q_rating_date_s img, .page_review_feature_rating img {
 		display: none;
 	}
-	.mbgen:not(#users):has(tbody tr:nth-child(2) td:last-child img) td:not(:nth-child(2)):after,
+	.mbgen:not(#users, #musicrating > .mbgen):has(tbody tr:nth-child(2) td:last-child img):not(:has(tr[id^="page_catalog_item_"])) td:not(:nth-child(2)):after,
 	.track_rating_disp:after,
 	.review_rating:after,
 	.catalog_rating:after, .or_q_rating_date_s:after, .page_review_feature_rating:after {
 		content: '---';
 		font-weight: var(--font-weight-bold);
 	}
-	.mbgen:not(#users):has(tbody tr:nth-child(2) td:last-child img) td:not(:nth-child(2)):before,
+	.avg_rating_friends,
+	.mbgen:not(#users, #musicrating > .mbgen):has(tbody tr:nth-child(2) td:last-child img):not(:has(tr[id^="page_catalog_item_"])) td:not(:nth-child(2)):before,
 	.track_rating_disp:before,
 	.review_rating:before,
 	.page_review_feature_rating:before,
 	.disco_cat_inner_issue:before, .disco_cat_inner:before,
 	.catalog_rating:before, .or_q_rating_date_s:before {
-		left: 0 !important;
+		--left: 0;
 		--mask: var(--icon-16-star-fill);
 	}
+	.avg_rating,
 	.disco_avg_rating:before {
-		left: 0 !important;
+		--left: 0;
 		--mask: var(--icon-16-star-alt);
 	}
 
@@ -3024,37 +3150,37 @@
 	}
 
 
-	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp, .mbgen:not(#users):has(tbody tr:nth-child(2) td:last-child img) td:not(:nth-child(2))):has(img[src$="10m.png"]):after {
+	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp, .mbgen:not(#users, #musicrating > .mbgen):has(tbody tr:nth-child(2) td:last-child img):not(:has(tr[id^="page_catalog_item_"])) td:not(:nth-child(2))):has(img[src$="10m.png"]):after {
 		content: '5.0';
 	}
-	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp, .mbgen:not(#users):has(tbody tr:nth-child(2) td:last-child img) td:not(:nth-child(2))):has(img[src$="9m.png"]):after {
+	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp, .mbgen:not(#users, #musicrating > .mbgen):has(tbody tr:nth-child(2) td:last-child img):not(:has(tr[id^="page_catalog_item_"])) td:not(:nth-child(2))):has(img[src$="9m.png"]):after {
 		content: '4.5';
 	}
-	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp, .mbgen:not(#users):has(tbody tr:nth-child(2) td:last-child img) td:not(:nth-child(2))):has(img[src$="8m.png"]):after {
+	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp, .mbgen:not(#users, #musicrating > .mbgen):has(tbody tr:nth-child(2) td:last-child img):not(:has(tr[id^="page_catalog_item_"])) td:not(:nth-child(2))):has(img[src$="8m.png"]):after {
 		content: '4.0';
 	}
-	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp, .mbgen:not(#users):has(tbody tr:nth-child(2) td:last-child img) td:not(:nth-child(2))):has(img[src$="7m.png"]):after {
+	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp, .mbgen:not(#users, #musicrating > .mbgen):has(tbody tr:nth-child(2) td:last-child img):not(:has(tr[id^="page_catalog_item_"])) td:not(:nth-child(2))):has(img[src$="7m.png"]):after {
 		content: '3.5';
 	}
-	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp, .mbgen:not(#users):has(tbody tr:nth-child(2) td:last-child img) td:not(:nth-child(2))):has(img[src$="6m.png"]):after {
+	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp, .mbgen:not(#users, #musicrating > .mbgen):has(tbody tr:nth-child(2) td:last-child img):not(:has(tr[id^="page_catalog_item_"])) td:not(:nth-child(2))):has(img[src$="6m.png"]):after {
 		content: '3.0';
 	}
-	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp, .mbgen:not(#users):has(tbody tr:nth-child(2) td:last-child img) td:not(:nth-child(2))):has(img[src$="5m.png"]):after {
+	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp, .mbgen:not(#users, #musicrating > .mbgen):has(tbody tr:nth-child(2) td:last-child img):not(:has(tr[id^="page_catalog_item_"])) td:not(:nth-child(2))):has(img[src$="5m.png"]):after {
 		content: '2.5';
 	}
-	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp, .mbgen:not(#users):has(tbody tr:nth-child(2) td:last-child img) td:not(:nth-child(2))):has(img[src$="4m.png"]):after {
+	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp, .mbgen:not(#users, #musicrating > .mbgen):has(tbody tr:nth-child(2) td:last-child img):not(:has(tr[id^="page_catalog_item_"])) td:not(:nth-child(2))):has(img[src$="4m.png"]):after {
 		content: '2.0';
 	}
-	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp, .mbgen:not(#users):has(tbody tr:nth-child(2) td:last-child img) td:not(:nth-child(2))):has(img[src$="3m.png"]):after {
+	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp, .mbgen:not(#users, #musicrating > .mbgen):has(tbody tr:nth-child(2) td:last-child img):not(:has(tr[id^="page_catalog_item_"])) td:not(:nth-child(2))):has(img[src$="3m.png"]):after {
 		content: '1.5';
 	}
-	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp, .mbgen:not(#users):has(tbody tr:nth-child(2) td:last-child img) td:not(:nth-child(2))):has(img[src$="2m.png"]):after {
+	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp, .mbgen:not(#users, #musicrating > .mbgen):has(tbody tr:nth-child(2) td:last-child img):not(:has(tr[id^="page_catalog_item_"])) td:not(:nth-child(2))):has(img[src$="2m.png"]):after {
 		content: '1.0';
 	}
-	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp, .mbgen:not(#users):has(tbody tr:nth-child(2) td:last-child img) td:not(:nth-child(2))):has(img[src$="1m.png"]):after {
+	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp, .mbgen:not(#users, #musicrating > .mbgen):has(tbody tr:nth-child(2) td:last-child img):not(:has(tr[id^="page_catalog_item_"])) td:not(:nth-child(2))):has(img[src$="1m.png"]):after {
 		content: '0.5';
 	}
-	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp, .mbgen:not(#users):has(tbody tr:nth-child(2) td:last-child img) td:not(:nth-child(2))):has(img[src$="/0m.png"]):after {
+	:is(.catalog_rating, .or_q_rating_date_s, .page_review_feature_rating, .review_rating, .track_rating_disp, .mbgen:not(#users, #musicrating > .mbgen):has(tbody tr:nth-child(2) td:last-child img):not(:has(tr[id^="page_catalog_item_"])) td:not(:nth-child(2))):has(img[src$="/0m.png"]):after {
 		content: '0.0';
 	}
 
@@ -3125,6 +3251,12 @@
 				align-items: center;
 				flex: 1;
 
+				& > span {
+					display: flex;
+					align-items: center;
+					gap: 6px;
+				}
+
 				/* legacy */ [itemprop="name"],
 				/* new tracks that have track pages and can be bolded */ .song {
 					color: hsl(var(--c2));
@@ -3148,6 +3280,31 @@
 					background: unset;
 					padding: unset;
 					border-radius: unset;
+				}
+
+				.tracks_lyric_link {
+					position: relative;
+					--left: 0;
+					--mask: var(--icon-16-music-lyrics);
+
+					font-size: 0;
+					background: unset;
+					border-radius: unset;
+
+					display: inline-flex;
+					width: 16px;
+					height: 16px;
+
+					color: hsl(var(--c3));
+
+					transition-property: color !important;
+					transition-duration: var(--trans) !important;
+					transition-timing-function: var(--trans-function) !important;
+
+					&:hover {
+						color: hsl(var(--c1));
+						transition: none !important;
+					}
 				}
 			}
 		}
@@ -3458,14 +3615,12 @@
 		}*/
 
 		li {
-			--bg-hov: hsla(var(--b4), 80%);
-			--bg-atv: hsla(var(--b4), 60%);
 			display: flex;
 			justify-content: center;
 			flex-direction: column;
 			height: calc(40px + (7px * 2));
 			background: unset;
-			color: hsl(var(--c2));
+			color: var(--col);
 			font-size: var(--font-size);
 			margin: unset;
 			padding-left: calc(12px + 40px + 6px) !important;
@@ -3478,6 +3633,10 @@
 
 			&.release_view {
 				height: 32px;
+
+				a {
+					color: inherit !important;
+				}
 			}
 		}
 	}
@@ -3523,12 +3682,14 @@
 	}
 	span.issue_attributes {
 		margin-left: unset;
-		color: hsl(var(--c3));
-		font-weight: var(--font-weight) !important;
+		color: var(--col-alt);
+		font-size: var(--font-size-sm);
+		line-height: var(--line-height-sm);
+		font-weight: var(--font-weight-medium) !important;
 	}
 	.primary_indicator {
 		font-size: 0;
-		background-color: hsl(var(--l3-c));
+		background-color: var(--col-hai);
 		display: inline-flex;
 		width: 12px;
 		height: 12px;
@@ -3543,13 +3704,13 @@
 	.issue_info_bottom {
 		font-size: var(--font-size-sm);
 		line-height: var(--line-height-sm) !important;
-		color: var(--mono-0);
+		color: var(--col-alt);
 	}
 	span.issue_year {
 		width: unset;
 		font-size: inherit;
 		margin: unset;
-		color: hsl(var(--c3)) !important;
+		color: inherit !important;
 	}
 	span.issue_countries {
 		margin: unset;
@@ -3560,12 +3721,16 @@
 		padding-left: calc(16px + 6px);
 		--left: 0;
 		--mask: var(--icon-16-music-label);
+
+		.label {
+			color: var(--col-hai) !important;
+		}
 	}
 
 
 	span.issue_title a,
 	a.sametitle, a.sametitle:hover {
-		color: hsl(var(--c2)) !important;
+		color: inherit !important;
 	}
 	a.sametitle:has( + .primary_indicator) {
 		font-weight: var(--font-weight-medium);
@@ -3580,6 +3745,7 @@
 
 
 	/*     MENU / DROPDOWN     */
+	.chart_ui_filter_list,
 	.ui_search_rest,
 	.format_btn_options,
 	.catalog_btn_options,
@@ -3955,6 +4121,10 @@
 	div.release_navigation_guidance {
 		border: unset;
 		color: inherit;
+
+		.fa {
+			margin: unset !important;
+		}
 	}
 
 	div.prev_image, div.next_image,
@@ -4140,6 +4310,7 @@
 
 
 	/*     NOTE     */
+	.ui_featured_content_comment,
 	#subscription_update_banner,
 	/* voting */ .commentheadery, .commentheadern, .commentheadera:not(.comment .commentheadera),
 	.glitchwave_invite, .new_user_banner,
@@ -4160,6 +4331,11 @@
 		line-height: var(--line-height) !important;
 		color: hsl(var(--c2));
 		position: relative;
+
+		font-style: inherit;
+		h4:last-child {
+			margin-bottom: unset !important;
+		}
 
 		&:before {
 			content: '';
@@ -4744,13 +4920,12 @@
 
 			color: hsl(var(--c3));
 			position: relative;
-			--left: 7px;
 			--mask: var(--icon-16-search);
 
 			#disco_search {
 				width: 100%;
 				margin: unset;
-				padding-left: calc(7px + 16px + 6px) !important;
+				padding-left: calc(12px + 16px + 6px) !important;
 			}
 			.disco_search_icon {
 				display: none;
@@ -5644,7 +5819,7 @@
 
 
 	/*     COMPARISON PAGE     */
-	.mbgen:not(#users):has(tbody tr:nth-child(2) td:last-child img) {
+	.mbgen:not(#users, #musicrating > .mbgen):has(tbody tr:nth-child(2) td:last-child img):not(:has(tr[id^="page_catalog_item_"])) {
 		tr:first-child {
 			display: none;
 		}
@@ -5652,6 +5827,188 @@
 		td:nth-child(2) {
 			order: -1;
 			width: var(--cards-main-width);
+		}
+	}
+
+
+
+
+	/*     HOME PAGE     */
+	.page_home_section_featured_content_content_item_banner {
+		position: static;
+		padding: unset;
+		font: inherit;
+		background: unset;
+		color: inherit;
+		box-shadow: unset;
+	}
+
+
+
+
+	/*     CHART FILTER DROPDOWN     */
+	.chart_ui_filter_list {
+		width: fit-content;
+
+		.page_chart_query_item_option {
+			display: flex;
+			flex-direction: column;
+
+			--bg: transparent;
+			--bg-hov: hsla(var(--b4), 30%);
+			--bg-atv: hsla(var(--b4), 50%);
+			--shadow: none;
+
+			--mask: var(--icon-16-dot);
+
+			.page_chart_query_item_option_icon {
+				display: none;
+			}
+			.page_chart_query_item_option_label {
+				font-size: inherit;
+				line-height: inherit;
+				margin: unset;
+			}
+			.page_chart_query_item_option_description {
+				font-size: var(--font-size-sm);
+				line-height: var(--line-height-sm);
+				color: hsl(var(--c3));
+				margin: unset;
+			}
+
+			.page_chart_query_item_option_icon {
+				.page_chart_query.chart_type_top &.page_chart_query_item_option_icon_chart_type_top,
+				.page_chart_query.chart_type_esoteric &.page_chart_query_item_option_icon_chart_type_esoteric,
+				.page_chart_query.chart_type_popular &.page_chart_query_item_option_icon_chart_type_popular,
+				.page_chart_query.chart_type_diverse &.page_chart_query_item_option_icon_chart_type_diverse,
+				.page_chart_query.chart_type_bottom &.page_chart_query_item_option_icon_chart_type_bottom,
+				/* */
+				.page_chart_query.object_release &.page_chart_query_item_option_icon_object_release,
+				.page_chart_query.object_film &.page_chart_query_item_option_icon_object_film,
+				.page_chart_query.object_song &.page_chart_query_item_option_icon_object_song,
+				.page_chart_query.object_game &.page_chart_query_item_option_icon_object_game
+				{
+					.page_chart_query_item_option:has(&) {
+						--mask: var(--icon-16-check);
+
+						--bg: hsla(var(--h4), 10%);
+						--bg-hov: hsla(var(--h4), 20%);
+						--bg-atv: hsla(var(--h4), 30%);
+					}
+				}
+			}
+
+			.page_chart_query.date_type_all_time &.page_chart_query_item_option_date_type_all_time,
+			.page_chart_query.date_type_year_range &.page_chart_query_item_option_date_type_year_range,
+			.page_chart_query.date_type_year_decade &.page_chart_query_item_option_date_type_year_decade
+			{
+				--mask: var(--icon-16-check);
+
+				--bg: hsla(var(--h4), 10%);
+				--bg-hov: hsla(var(--h4), 20%);
+				--bg-atv: hsla(var(--h4), 30%);
+			}
+		}
+	}
+
+	.page_charts_settings_summary {
+		padding: unset;
+		border-radius: unset;
+		background: unset;
+		border: unset;
+	}
+	.page_chart_query_become_subscriber {
+		padding: var(--card-padding);
+		margin: var(--card-gap) calc(-1 * var(--card-padding)) calc(-1 * var(--card-padding));
+		border-radius: unset;
+		font-size: var(--font-size);
+
+		background: hsla(var(--h4), 20%);
+		box-shadow: 0 0 20px 15px hsla(var(--h4), 20%);
+		color: hsl(var(--l2-c));
+	}
+
+	.page_charts_section {
+		margin: unset !important;
+		overflow: hidden;
+	}
+	.page_section_collapsible_header {
+		margin-bottom: var(--card-gap);
+	}
+
+
+	.page_charts_settings_saved_charts_info i {
+		/* -3px to align with text height,
+		-2px to replace relative in default css */
+		margin: -3px 2px;
+	}
+
+	.page_chart_query_frame_inner {
+		align-items: center;
+		gap: var(--button-list-gap);
+
+		.label {
+			padding: unset;
+			margin: unset;
+			border-radius: unset;
+			color: inherit;
+			font: inherit;
+		}
+	}
+
+
+	.page_charts_section_charts_item {
+		display: flex;
+
+		#page_body.setting_view_mode_desktop__gallery & {
+			--padding: 0;
+
+			.page_charts_section_charts_item_image_link {
+				position: static;
+				padding: 0;
+				border-radius: 0;
+			}
+		}
+
+		.page_charts_section_charts_item_number {
+			min-width: 32px;
+			margin: unset;
+			font-size: var(--font-size);
+			line-height: var(--line-height);
+			font-weight: var(--font-weight-bold);
+
+			&:before {
+				font-size: 18px;
+				line-height: 22px;
+			}
+
+			.page_charts_section_charts_item_movement_indicator {
+				margin-top: 10px;
+				padding-right: calc(16px + 6px);
+				--left: none;
+				--right: 0;
+				position: relative;
+
+				font-size: inherit;
+				line-height: inherit;
+				font-weight: inherit;
+				color: hsl(var(--l3-c));
+				text-shadow: 0 0 20px hsl(var(--h4));
+
+				--hue: var(--hue-pos);
+				--sat: 1;
+				--lit: 1;
+				--mask: var(--icon-16-arrow-up);
+
+				&:has(.icon-chart_placement_down) {
+					--hue: var(--hue-neg);
+					--mask: var(--icon-16-arrow-down);
+				}
+
+				img {
+					display: none;
+				}
+			}
 		}
 	}
 }
