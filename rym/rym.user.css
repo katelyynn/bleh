@@ -94,7 +94,6 @@
 		--b6: var(--hue), calc(var(--sat) * 12%), 10%;
 		--b7: 0, 0%, 0%;
 	}
-	body,
 	.theme_night,
 	.theme_night :is(
 		.voted
@@ -175,7 +174,6 @@
 
 		--icon: var(--c2);
 	}
-	body,
 	.theme_night,
 	.theme_night :is(
 		.avg_rating_friends,
@@ -416,6 +414,7 @@
 		--icon-16-music-recent: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtY2xvY2stMiI+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMTAiLz48cG9seWxpbmUgcG9pbnRzPSIxMiA2IDEyIDEyIDE2IDEwIi8+PC9zdmc+');
 		--icon-16-music-label: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjc1IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLW1lZ2FwaG9uZSI+PHBhdGggZD0ibTMgMTEgMTgtNXYxMkwzIDE0di0zeiIvPjxwYXRoIGQ9Ik0xMS42IDE2LjhhMyAzIDAgMSAxLTUuOC0xLjYiLz48L3N2Zz4=');
 		--icon-16-music-lyrics: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtbWljLXZvY2FsIj48cGF0aCBkPSJtMTEgNy42MDEtNS45OTQgOC4xOWExIDEgMCAwIDAgLjEgMS4yOThsLjgxNy44MThhMSAxIDAgMCAwIDEuMzE0LjA4N0wxNS4wOSAxMiIvPjxwYXRoIGQ9Ik0xNi41IDIxLjE3NEMxNS41IDIwLjUgMTQuMzcyIDIwIDEzIDIwYy0yLjA1OCAwLTMuOTI4IDIuMzU2LTYgMi0yLjA3Mi0uMzU2LTIuNzc1LTMuMzY5LTEuNS00LjUiLz48Y2lyY2xlIGN4PSIxNiIgY3k9IjciIHI9IjUiLz48L3N2Zz4=');
+		--icon-16-spinner: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtbG9hZGVyLWNpcmNsZSI+PHBhdGggZD0iTTIxIDEyYTkgOSAwIDEgMS02LjIxOS04LjU2Ii8+PC9zdmc+');
 	}
 
 
@@ -776,7 +775,8 @@
 	.avg_rating:before, .avg_rating_friends:before,
 	.tracks_lyric_link:before,
 	.icon_globe + a:before,
-	.track:before
+	.track:before,
+	.or_q_tags_td div:last-child:before
 	{
 		content: '';
 		display: var(--show-icon, block) !important;
@@ -2179,15 +2179,67 @@
 
 	.review {
 		position: relative;
+		border-bottom: unset;
+
+		&:has(.friend):before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: calc(-1 * var(--card-padding));
+			right: calc(-1 * var(--card-padding));
+			height: 200px;
+			background: linear-gradient(0deg, transparent 0%, hsla(var(--h4), 20%) 100%);
+			pointer-events: none;
+		}
+
+		.review_body {
+			font-size: var(--font-size);
+			line-height: var(--line-height);
+			padding: 0 0 var(--card-gap) 0;
+			margin-top: var(--card-gap);
+			color: inherit !important;
+			border-bottom: 1px solid hsl(var(--b4));
+
+			background: unset;
+			border: unset;
+		}
+		.review_body span:not(.track_rating_disp) {
+			color: inherit !important;
+		}
 	}
-	.review:has(.friend):before {
-		content: '';
-		position: absolute;
-		top: 0;
-		left: calc(-1 * var(--card-padding));
-		right: calc(-1 * var(--card-padding));
-		height: 300px;
-		background: linear-gradient(0deg, transparent 0%, hsla(var(--h4), 15%) 100%);
+
+	#my_review {
+		width: unset;
+		background: unset;
+		border: unset;
+		padding: unset;
+		margin-top: var(--button-list-gap);
+
+		.saved_review {
+			background: unset;
+			border: unset;
+			border-radius: unset;
+			padding: unset;
+		}
+
+		#review_delete_btn {
+			--hue: var(--hue-neg);
+			--sat: 1;
+			--lit: 1;
+		}
+	}
+
+	.review_publish_status {
+		font-size: var(--font-size-sm);
+		line-height: var(--line-height-sm);
+		font-weight: var(--font-weight-medium);
+		color: hsl(var(--c3));
+		margin-top: var(--card-gap);
+
+		input {
+			font: inherit;
+			color: inherit;
+		}
 	}
 
 
@@ -2258,6 +2310,7 @@
 		height: 32px;
 		margin-right: unset;
 		border-radius: var(--item-small-radius);
+		background-color: hsl(var(--b6)) !important;
 	}
 
 	.review_title {
@@ -2277,21 +2330,6 @@
 	}
 	a.user {
 		color: hsl(var(--l3-c)) !important;
-	}
-
-	.review {
-		border-bottom: unset;
-	}
-	.review_body {
-		font-size: var(--font-size);
-		line-height: var(--line-height);
-		padding: 0 0 12px 0;
-		margin-top: 12px;
-		color: inherit !important;
-		border-bottom: 1px solid hsl(var(--b4));
-	}
-	.review_body span:not(.track_rating_disp) {
-		color: inherit !important;
 	}
 
 
@@ -3000,12 +3038,34 @@
 	.catalog_user {
 		flex: 1;
 	}
+	.or_q_tags_td,
 	.catalog_rating_system_comment, .catalog_ownership, .or_q_ownership {
 		margin: unset;
 		font-size: var(--font-size-sm);
 		line-height: var(--line-height-sm);
 		color: hsl(var(--c3));
+
+		div {
+			color: inherit;
+
+			a {
+				color: inherit;
+			}
+		}
 	}
+
+	.or_q_tags_td div:last-child {
+		--mask: var(--icon-16-tag);
+		padding-right: 16px;
+		position: relative;
+		--left: none;
+		--right: 0;
+
+		&:empty {
+			display: none;
+		}
+	}
+
 	.catalog_ownership, .or_q_ownership {
 		color: hsla(var(--c3), 60%) !important;
 	}
@@ -3117,6 +3177,9 @@
 		text-shadow: 0 0 20px hsl(var(--h4));
 		font-size: var(--font-size);
 		line-height: var(--line-height);
+		--left: 0;
+		--mask: var(--icon-16-star-fill);
+		--show-icon: block;
 
 		&:not(.avg_rating, .disco_avg_rating) {
 			color: hsl(var(--l3-c)) !important;
@@ -3134,18 +3197,8 @@
 		content: '---';
 		font-weight: var(--font-weight-bold);
 	}
-	.avg_rating_friends,
-	.mbgen:not(#users, #musicrating > .mbgen):has(tbody tr:nth-child(2) td:last-child img):not(:has(tr[id^="page_catalog_item_"])) td:not(:nth-child(2)):before,
-	.track_rating_disp:before,
-	.review_rating:before,
-	.page_review_feature_rating:before,
-	.disco_cat_inner_issue:before, .disco_cat_inner:before,
-	.catalog_rating:before, .or_q_rating_date_s:before {
-		--left: 0;
-		--mask: var(--icon-16-star-fill);
-	}
 	.avg_rating,
-	.disco_avg_rating:before {
+	.disco_avg_rating {
 		--left: 0;
 		--mask: var(--icon-16-star-alt);
 	}
@@ -6054,5 +6107,32 @@
 				}
 			}
 		}
+	}
+
+
+	[id^=disco_type_] {
+		min-height: fit-content !important;
+	}
+	.loading_disco {
+		border-radius: unset;
+		background: unset;
+		color: hsl(var(--c3));
+		margin: unset;
+		height: unset;
+		padding: 60px 0;
+		font-size: var(--font-size);
+		line-height: var(--line-height);
+		font-weight: var(--font-weight-medium);
+
+		text-transform: lowercase;
+
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.fa-spin {
+		--mask: var(--icon-16-spinner);
+		margin-right: 6px;
 	}
 }
