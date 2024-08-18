@@ -94,6 +94,7 @@
 		--b6: var(--hue), calc(var(--sat) * 12%), 10%;
 		--b7: 0, 0%, 0%;
 	}
+	body,
 	.theme_night,
 	.theme_night :is(
 		.voted
@@ -174,6 +175,7 @@
 
 		--icon: var(--c2);
 	}
+	body,
 	.theme_night,
 	.theme_night :is(
 		.avg_rating_friends,
@@ -773,10 +775,11 @@
 	.page_charts_section_charts_item_movement_indicator:before,
 	.avg_rating:before, .avg_rating_friends:before,
 	.tracks_lyric_link:before,
-	.icon_globe + a:before
+	.icon_globe + a:before,
+	.track:before
 	{
 		content: '';
-		display: block !important;
+		display: var(--show-icon, block) !important;
 		mask-position: 0 0 !important;
 		left: var(--left, 12px) !important;
 		margin-top: -8px !important;
@@ -3218,6 +3221,31 @@
 			background: var(--bg) !important;
 			padding: 5px 12px;
 			display: flex;
+			--show-icon: none;
+
+			/* disc */
+			&:has(
+				/*.tracklist_num:empty + .tracklist_title [data-inseconds="0"]*/
+				.tracklist_title b
+			) {
+				position: relative;
+				color: hsl(var(--c3));
+				--show-icon: block;
+				--bg: transparent;
+				--bg-hov: transparent;
+				--left: calc(12px + 7px + 7px);
+				--mask: var(--icon-16-album);
+				padding: 0 12px;
+				min-height: 24px;
+
+				&:first-child {
+					margin-top: calc(-1 * ((24px - 18px) / 2));
+				}
+
+				span {
+					color: inherit !important;
+				}
+			}
 
 			&.track {
 				justify-content: center;
@@ -3298,6 +3326,7 @@
 
 				.tracks_lyric_link {
 					position: relative;
+					--show-icon: block;
 					--left: 0;
 					--mask: var(--icon-16-music-lyrics);
 
@@ -4740,7 +4769,8 @@
 		width: var(--cards-main-width);
 	}
 	.profile_header + .bubble_content:has(#allNotifications) {
-		height: calc(500px - 67px);
+		/* 75px represents the height of bubble_header */
+		height: calc(500px - 75px);
 	}
 
 	#allNotifications {
