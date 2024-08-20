@@ -149,10 +149,6 @@ const trans = {
                     name: 'Let it rain!',
                     bio: 'rain :3c (may have performance impacts !! also may look bad !!)'
                 },
-                hide_hateful: {
-                    name: 'Hide hateful shouts',
-                    bio: 'Hateful users are community-contributed, it is up to you if you prefer to view these shouts.'
-                },
                 show_your_progress: {
                     name: 'Show your weekly progress',
                     bio: 'too many numbers ~w~'
@@ -474,10 +470,6 @@ const trans = {
                 rain: {
                     name: 'Niech pada!',
                     bio: 'deszcz :3c (może wpływać na wydajność!! może też wyglądać źle!!)'
-                },
-                hide_hateful: {
-                    name: 'Ukryj obraźliwe wiadomości',
-                    bio: 'Użytkownicy są zgłaszani przez społeczność ze względu na obraźliwe treści. Decydujesz czy chcesz zobaczyć wiadomości od tych użytkowników.'
                 }
             },
             performance: {
@@ -1174,20 +1166,6 @@ let inbuilt_settings = {
         type: 'toggle'
     }
 }
-
-
-let redacted = [
-    'sonicgamer420', 'punishedcav', 'whatisajuggalo', 'underthefl00d', 'u1655609395', 'spartan122s', 'ruszaj', 'chandiwila999', 'deadaptation', 'faceidbroke', 'shamsrealm', 'dread1nat0r', 'oskxzr', 'supersonic2324', 'luna', 'daysbeforepazi', 'reypublican', 'urkel_waste', 'bloodtemptress', 'enderbro1945', 'nxtready', 'hammurabis', 'flammenjunge', 'hotgreekman', 'minajspace', 'Matiiia',
-    'sudaengi', 'antisemitic', 'alfonsorivera07', 'gueulescassees', 'bit188', 'aryanorexic', 'archive44', 'goyslop', 'lzxy', 'i984june', 'babayoga88', 'goatuser', 'synagogueburner', 'cybercat2k6',
-    'thekimsteraight', 'squiggins', 'atwistedpath', 'aeriscupid', 'nicefeetliberal', 'kanyebeststan', 'a-_-_-_-_-_-_-_', 'wurzel362', 'chaosophile', 'sagamore_br', 'account124', 'oliwally2', 'lucasthales', 'thedadbrains', 'artofiettinggo', 'lumyh', 'meltingwalls', 'meowpoopoo', 'aeest', 'ajrogers25', 'flvcko5000', 'yungrapunxota', 'sen_nn', 'chickenoflight', 'majorcbartl', 'entranas', 'julyrent', 'misaeld7', 'sircarno', 'getyuu', 'ifuckbees', 'bigbabygoat-116', 'matranc', 'andre3x', 'johanvillian666', 'souljahwitch_', 'selenabeer', 'kbasfm', 'c4alexo', 'aantoniotapia', 'bobbygordon4', 'con_8l', 'kebfm', 'alex5un', 'bluefacee', 'itachiu1', 'tardslayer87', 'sharosky',
-    'craziidago',
-    'calicowawawa', 'ieo-',
-    'dyetzer09', 'sevendotz', 'geckogunner21',
-    'bigman_kam', 'juanluisgg15', 'xxalesonikps2xx', 'noodlebaths',
-    'entrys', 'haviebaby',
-    'ifuckenhatebts', 'cuteandfunny', 'nickithebarbie', 'kristojk', 'lovethebabiesss', 'thecrybabygirl', 'faafasfjh12', 'lost', 'isucktoes_', 'rightangles', 'supadupaseb', 'septembersun-_-', 'yy02', 'breakpoint420', 'twillaz', 'angel-food', 'owenfomistu', 'nuhovich', 'sigmevious', 'lovedytea',
-    'eminemiover911', 'ranmaru1232', 'littlegayman', 'overkektor', 'zigger0707', 'jtldn', 'bakaanon', 'thewatcher777', 'guicute', 'wempep', 'beingofevil', 'marie_cachet', 'rusnazi8814', 'go1nger', 'pranav777', 'creativezito', 'djangelinfinity', 'cowboy-robot', 'riskgrave', 'charmingaxelotl', 'naterade20', 'willgregg10', 'avantish', 'shaggy-maggot', 'slicejosiah', 'airshots22', 'tacomiw', 'davebfc', 'ukulilyfilly', 'speepyboo', 'roosterteethz', 'winter_demon', 'ddavid_', 'wess0', 'heruchris', 'mellowcolonel', 'dxp6986', 'leo_marlow', 'newmetallic', 'kotkaa', 'dodemea', 'cainripley', 'frajestic', 'danny_top23', 'molochthagod', 'kanyelover900', 'phosphoss', 'sugawarasatsuki', 'captivepleading', 'paddycm', 'burroughs3000', 'marblesodaa', 'muistu77', 'korimullanmusic', 'magikwand', 'empireograce', 'psychonau', 'sk8erboi03', 'dogtome', 'milkvveed', 'ghastlygoblin', 'lsihc', 'promethesis', 'nlcklmlnaj', 'so0catwoman', 'handsomegamer46', 'w28888ihateu', 'iithe2nd', 'jrwer', 'r0ann', 'hetzghor', 'umabon', 'karl_nicenstein', 'forestgaze', 'ghostcum', 'bigluke444', 'mozzaddy', 'ahuehauheauauh', 'kingjaxterk', 'setitaiiablaze', 'araicd', 'juliusvc', 'mzumii', 'masskollaps', 'belenio', 'hoosierballz', 'sh0ppingcart', 'brownieboy', 'martyrdomr', 'twenty10s', 'skuuuuuii', 'birodani115', 'lawlercopter_', 'samanthafox12', 'the_diabolus', 'momasoooooos', 'tigohc', 'ora4ngepm', 'minakonyaa', 'ryukoprop', 'antifafemboy', 'nlec', 'jediwarlock1', 'epowjgpwak', 'anxrcxy', 'pissturd1', 'adxail', 'suprremme', 'qwertyhomu', 'keblz', 'hotstep_', 'fadelooy', 'apesog', 'violentflowers', 'itsthiagobanger', 'syrettepurp', 'swagstica', 'htgs', 'grigoriybalbes', 'heliosi', 'buttfartdhshs', 'wonderglue', 'kanyewest2028', 'caeshijque', 'mysterybfdi', 'nikkilee8208', 'jck_fm', 'etherealbangerz', 'iseenothing', 'achondrogenesis', 'theandromedaxo', 'seanderbeste', 'jct08', 'thev3locity4545', 'humblegold', 'draincel', 'allyourbased', 'birdboiling', 'tharizdoom', 'suplnho', 'dashywashy', 'ox_yd', 'bernkastel__', 'fearcuit', 'gxlnd_', 'brittanymahomes', 'numetalfan69', 'safirestar', 'icespoon', 'issacj06', 'theprio', 'lovediaries', 'sillycelery1974', 'nyqmii', 'gauitier', 'rspbrysda', 'pnavarre2330', 'ltsup2me', 'noolr', 'dakota0824', 'goncalvesrafael', 'daequanbs', 'dwaqons', 'bogurodzica69', 'gtzgold', 'roy_05', 'niloymahir', 'ikarivktr', 'je1934', 'sugmaballs69', 'don-weaso', 'schrodngrsafety', 'okjosiah', 'anahausu', 'venusfleur', 'kristiyan47', 'mkulia', 'nick-valentine', 'raraee_', 'mj-xx', 'berk_ziya', 'thatpower1', 'phantomchasm', 'stupidmetalhead', 'daeae', 'drakedrank69'
-];
 
 // use the top-right link to determine the current user
 let auth = '';
@@ -2356,119 +2334,96 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         if (!profile_header.hasAttribute('data-kate-processed')) {
             profile_header.setAttribute('data-kate-processed', 'true');
 
-            if (redacted.includes(profile_name.textContent.toLowerCase())) {
-                let prior_redacted_msg = element.querySelector('.bleh--redacted-message');
-                if (prior_redacted_msg !== null)
-                    document.body.removeChild(prior_redacted_msg);
+            // is this their profile?
+            if (profile_name.textContent == auth) {
+                // make avatar clickable
+                let header_avatar = document.querySelector('.header-avatar .avatar');
 
-                let main_content = document.querySelector('.main-content');
-                main_content.classList.add('content--bleh-redacted');
-
-                let redacted_message = document.createElement('div');
-                redacted_message.classList.add('bleh--redacted-message');
-                redacted_message.innerHTML = (`
-                    <span class="text">
-                        <h5>Profile hidden</h5>
-                        <p>This user has been flagged as hateful through community contributions, you can choose to continue or go back.</p>
-                    </span>
-                    <span class="actions">
-                        <button class="btn secondary" onclick="undo_profile_hiding()">Un-hide profile</button>
-                        <button class="btn primary" onclick="history.back()">Go back</button>
-                    </span>
-                `);
-                document.body.appendChild(redacted_message);
+                let avatar_link = document.createElement('a');
+                avatar_link.classList.add('bleh--avatar-clickable-link');
+                avatar_link.href = '/settings';
+                header_avatar.appendChild(avatar_link);
             } else {
-                // is this their profile?
-                if (profile_name.textContent == auth) {
-                    // make avatar clickable
-                    let header_avatar = document.querySelector('.header-avatar .avatar');
+                // is there a follow button?
+                let header_avatar = document.querySelector('.header--overview .header-avatar');
 
-                    let avatar_link = document.createElement('a');
-                    avatar_link.classList.add('bleh--avatar-clickable-link');
-                    avatar_link.href = '/settings';
-                    header_avatar.appendChild(avatar_link);
-                } else {
-                    // is there a follow button?
-                    let header_avatar = document.querySelector('.header--overview .header-avatar');
+                if (header_avatar != undefined) {
+                    let header_follow_btn = header_avatar.querySelector('form');
 
-                    if (header_avatar != undefined) {
-                        let header_follow_btn = header_avatar.querySelector('form');
+                    if (header_follow_btn == undefined) {
+                        // user is on their ignore list
+                        let toggle_btn = document.createElement('button');
+                        toggle_btn.classList.add('toggle-button','header-follower-btn','header-follower-btn--denied');
+                        toggle_btn.textContent = trans[lang].profile.cannot_follow_user;
 
-                        if (header_follow_btn == undefined) {
-                            // user is on their ignore list
-                            let toggle_btn = document.createElement('button');
-                            toggle_btn.classList.add('toggle-button','header-follower-btn','header-follower-btn--denied');
-                            toggle_btn.textContent = trans[lang].profile.cannot_follow_user;
-
-                            tippy(toggle_btn, {
-                                content: trans[lang].profile.on_ignore_list
-                            });
-                            header_avatar.appendChild(toggle_btn);
-                        }
+                        tippy(toggle_btn, {
+                            content: trans[lang].profile.on_ignore_list
+                        });
+                        header_avatar.appendChild(toggle_btn);
                     }
                 }
+            }
 
-                // badges
-                console.info('bleh - checking if user', profile_name.textContent, 'has any badges');
-                if (profile_badges.hasOwnProperty(profile_name.textContent)) {
-                    if (!Array.isArray(profile_badges[profile_name.textContent])) {
-                        // default
-                        console.info('bleh - user has 1 badge', profile_badges[profile_name.textContent]);
-                        let this_badge = profile_badges[profile_name.textContent];
+            // badges
+            console.info('bleh - checking if user', profile_name.textContent, 'has any badges');
+            if (profile_badges.hasOwnProperty(profile_name.textContent)) {
+                if (!Array.isArray(profile_badges[profile_name.textContent])) {
+                    // default
+                    console.info('bleh - user has 1 badge', profile_badges[profile_name.textContent]);
+                    let this_badge = profile_badges[profile_name.textContent];
+
+                    let badge = document.createElement('span');
+                    badge.classList.add('label',`user-status--bleh-${this_badge.type}`,`user-status--bleh-user-${profile_name.textContent}`);
+                    badge.textContent = this_badge.name;
+                    profile_header.appendChild(badge);
+                } else {
+                    // multiple
+                    console.info('bleh - user has multiple badges', profile_badges[profile_name.textContent]);
+                    for (let badge_entry in profile_badges[profile_name.textContent]) {
+                        let this_badge = profile_badges[profile_name.textContent][badge_entry];
 
                         let badge = document.createElement('span');
                         badge.classList.add('label',`user-status--bleh-${this_badge.type}`,`user-status--bleh-user-${profile_name.textContent}`);
                         badge.textContent = this_badge.name;
                         profile_header.appendChild(badge);
-                    } else {
-                        // multiple
-                        console.info('bleh - user has multiple badges', profile_badges[profile_name.textContent]);
-                        for (let badge_entry in profile_badges[profile_name.textContent]) {
-                            let this_badge = profile_badges[profile_name.textContent][badge_entry];
-
-                            let badge = document.createElement('span');
-                            badge.classList.add('label',`user-status--bleh-${this_badge.type}`,`user-status--bleh-user-${profile_name.textContent}`);
-                            badge.textContent = this_badge.name;
-                            profile_header.appendChild(badge);
-                        }
                     }
                 }
-
-                // me :3
-                if (profile_name.textContent == 'cutensilly') {
-                    profile_name.classList.add('bleh--name-is-cute');
-                }
-
-                // secondary text
-                let profile_sub_text = element.querySelector('.header-title-secondary');
-
-                if (profile_sub_text == undefined)
-                    return;
-
-                let display_name = profile_sub_text.querySelector('.header-title-display-name');
-                let scrobble_since = profile_sub_text.querySelector('.header-scrobble-since');
-                scrobble_since.textContent = scrobble_since.textContent.replace('• scrobbling since ','');
-
-                // pronouns?
-                let pronouns = false;
-                let display_name_no_spaces = display_name.textContent.replaceAll(' ','');
-                if (
-                    display_name_no_spaces.startsWith('she/') ||
-                    display_name_no_spaces.startsWith('he/') ||
-                    display_name_no_spaces.startsWith('they/') ||
-                    display_name_no_spaces.startsWith('it/')
-                ) pronouns = true;
-
-                let display_name_pre = document.createElement('span');
-                display_name_pre.classList.add('header-title-secondary--pre');
-                display_name_pre.textContent = pronouns ? 'pronouns' : 'aka.';
-                profile_sub_text.insertBefore(display_name_pre, display_name);
-
-                let scrobble_since_pre = document.createElement('span');
-                scrobble_since_pre.classList.add('header-title-secondary--pre');
-                scrobble_since_pre.textContent = 'created';
-                profile_sub_text.insertBefore(scrobble_since_pre, scrobble_since);
             }
+
+            // me :3
+            if (profile_name.textContent == 'cutensilly') {
+                profile_name.classList.add('bleh--name-is-cute');
+            }
+
+            // secondary text
+            let profile_sub_text = element.querySelector('.header-title-secondary');
+
+            if (profile_sub_text == undefined)
+                return;
+
+            let display_name = profile_sub_text.querySelector('.header-title-display-name');
+            let scrobble_since = profile_sub_text.querySelector('.header-scrobble-since');
+            scrobble_since.textContent = scrobble_since.textContent.replace('• scrobbling since ','');
+
+            // pronouns?
+            let pronouns = false;
+            let display_name_no_spaces = display_name.textContent.replaceAll(' ','');
+            if (
+                display_name_no_spaces.startsWith('she/') ||
+                display_name_no_spaces.startsWith('he/') ||
+                display_name_no_spaces.startsWith('they/') ||
+                display_name_no_spaces.startsWith('it/')
+            ) pronouns = true;
+
+            let display_name_pre = document.createElement('span');
+            display_name_pre.classList.add('header-title-secondary--pre');
+            display_name_pre.textContent = pronouns ? 'pronouns' : 'aka.';
+            profile_sub_text.insertBefore(display_name_pre, display_name);
+
+            let scrobble_since_pre = document.createElement('span');
+            scrobble_since_pre.classList.add('header-title-secondary--pre');
+            scrobble_since_pre.textContent = 'created';
+            profile_sub_text.insertBefore(scrobble_since_pre, scrobble_since);
         }
 
         let about_me_sidebar = element.querySelector('.about-me-sidebar');
@@ -2597,13 +2552,6 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     }
 
 
-    unsafeWindow.undo_profile_hiding = function() {
-        let main_content = document.querySelector('.main-content');
-        main_content.classList.remove('content--bleh-redacted');
-        document.body.removeChild(document.body.querySelector('.bleh--redacted-message'));
-    }
-
-
     // patch following
     function patch_profile_following() {
         // this happens on your main profile, no matter the tab
@@ -2707,32 +2655,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 console.log(shout_body.textContent, parsed_body);
                 shout_body.innerHTML = parsed_body;
 
-                if (redacted.includes(shout_name.toLowerCase())) {
-                    shout.classList.add('shout--bleh-redacted');
-                    shout.setAttribute('data-bleh--shout-expanded','false');
-                    shout_avatar.classList.add('avatar--bleh-missing');
-
-                    let redacted_msg = document.createElement('p');
-                    redacted_msg.textContent = 'This user is hidden.';
-                    shout.insertBefore(redacted_msg, shout.firstChild);
-
-
-                    // gather shout id from more actions' id
-                    let shout_actions = shout.querySelector('.shout-more-actions-menu');
-                    let shout_id = shout_actions.getAttribute('id').replace('shout-more-actions-');
-                    shout.setAttribute('id',`bleh--shout-${shout_id}`);
-
-                    // append button
-                    let shout_show_button = document.createElement('li');
-                    shout_show_button.innerHTML = (`
-                        <button onclick="_show_hidden_shout('${shout_id}')" class="dropdown-menu-clickable-item more-item--bleh--show-hidden-shout">
-                            Show shout contents
-                        </button>
-                    `);
-                    shout_actions.appendChild(shout_show_button);
-                } else {
-                    patch_avatar(shout_avatar, shout_name);
-                }
+                patch_avatar(shout_avatar, shout_name);
             }
             } catch(e) {}
         });
@@ -3711,18 +3634,6 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                         </div>
                         <div class="toggle-wrap">
                             <button class="toggle" id="toggle-rain" onclick="_update_item('rain')" aria-checked="true">
-                                <div class="dot"></div>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="toggle-container" id="container-hide_hateful">
-                        <button class="btn reset" onclick="_reset_item('hide_hateful')">${trans[lang].settings.reset}</button>
-                        <div class="heading">
-                            <h5>${trans[lang].settings.customise.hide_hateful.name}</h5>
-                            <p>${trans[lang].settings.customise.hide_hateful.bio}</p>
-                        </div>
-                        <div class="toggle-wrap">
-                            <button class="toggle" id="toggle-hide_hateful" onclick="_update_item('hide_hateful')" aria-checked="true">
                                 <div class="dot"></div>
                             </button>
                         </div>
