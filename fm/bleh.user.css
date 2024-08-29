@@ -8582,7 +8582,7 @@ text[style^="color: rgb(0, 0, 0)"] {
 }
 
 .user-list-name a {
-    color: var(--override-link-col, hsl(var(--l3-c))) !important;
+    color: hsl(var(--l3-c)) !important;
 }
 .user-list-inner-wrap .label {
     order: -1;
@@ -8598,7 +8598,6 @@ text[style^="color: rgb(0, 0, 0)"] {
 
     .user-list-item:has(&) {
         background: linear-gradient(90deg, hsla(var(--h4), 20%) 0%, transparent 100%);
-        --override-link-col: hsl(var(--l2-c));
     }
 }
 
