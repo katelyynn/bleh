@@ -15,7 +15,12 @@
 // @require      https://unpkg.com/tippy.js@6
 // ==/UserScript==
 
-let version = '2024.0712';
+let version = {
+    build: '2024.0829',
+    sku: 'main',
+    feature_flags: {}
+}
+
 let lang = document.documentElement.getAttribute('lang');
 let valid_langs = ['en', 'pl'];
 
@@ -1025,6 +1030,7 @@ let settings_template = {
     format_guest_features: true,
     colourful_counts: true,
     rain: false,
+    feature_flags: {},
     show_your_progress: true
 };
 let settings_base = {
@@ -1180,6 +1186,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     auth = document.querySelector('a.auth-link img').getAttribute('alt');
     initia();
 
+    console.info('loading bleh', version.build, 'with sku', version.sku);
+
     function initia() {
         let performance_start = performance.now();
 
@@ -1251,7 +1259,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         });
 
         let performance_end = performance.now();
-        console.info(`bleh finished loading in ${performance_end - performance_start}`);
+        console.info('bleh finished loading in', performance_end - performance_start);
     }
 
     function append_style() {
@@ -1361,7 +1369,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
             let version_text = document.createElement('p');
             version_text.classList.add('bleh--version');
-            version_text.textContent = version;
+            version_text.textContent = `${version.build}.${version.sku}`;
 
             masthead_logo.appendChild(version_text);
         }
@@ -3104,7 +3112,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                         <img class="screen" src="https://cutensilly.org/img/bleh3-theme-${document.documentElement.getAttribute('data-bleh--theme')}.png" alt="bleh">
                         <div class="text">
                             <h5>${trans[lang].settings.home.brand}</h5>
-                            <p>${trans[lang].settings.home.version.replace('{v}', version)}</p>
+                            <p>${trans[lang].settings.home.version.replace('{v}', version.build)}</p>
                         </div>
                     </div>
                     <div class="actions">
