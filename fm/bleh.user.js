@@ -164,6 +164,10 @@ const trans = {
                 show_your_progress: {
                     name: 'Show your weekly progress',
                     bio: 'too many numbers ~w~'
+                },
+                travis: {
+                    name: 'No, I didn\'t mean Travi$ Scott',
+                    bio: 'Hides redirect messages from the top of pages.'
                 }
             },
             performance: {
@@ -1041,7 +1045,8 @@ let settings_template = {
     colourful_counts: true,
     rain: false,
     feature_flags: {},
-    show_your_progress: true
+    show_your_progress: true,
+    travis: false
 };
 let settings_base = {
     hue: {
@@ -1148,6 +1153,13 @@ let settings_base = {
         css: 'show_your_progress',
         unit: '',
         value: true,
+        values: [true, false],
+        type: 'toggle'
+    },
+    travis: {
+        css: 'travis',
+        unit: '',
+        value: false,
         values: [true, false],
         type: 'toggle'
     }
@@ -3698,6 +3710,18 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                         </div>
                     </div>
                     <div class="sep"></div>
+                    <div class="toggle-container" id="container-travis">
+                        <button class="btn reset" onclick="_reset_item('travis')">${trans[lang].settings.reset}</button>
+                        <div class="heading">
+                            <h5>${trans[lang].settings.customise.travis.name}</h5>
+                            <p>${trans[lang].settings.customise.travis.bio}</p>
+                        </div>
+                        <div class="toggle-wrap">
+                            <button class="toggle" id="toggle-travis" onclick="_update_item('travis')" aria-checked="true">
+                                <div class="dot"></div>
+                            </button>
+                        </div>
+                    </div>
                     <div class="toggle-container" id="container-show_your_progress">
                         <button class="btn reset" onclick="_reset_item('show_your_progress')">${trans[lang].settings.reset}</button>
                         <div class="heading">

@@ -7968,17 +7968,16 @@ text[style^="color: rgb(0, 0, 0)"] {
 }
 
 .nag-bar--corrections .nag-bar-message {
-    padding-left: calc(16px + 8px);
+    padding-left: calc(16px + 6px);
     font-size: var(--font-size);
     line-height: var(--line-height);
     color: hsl(var(--c3));
-}
-.nag-bar--corrections .nag-bar-message::before {
-    background-image: unset;
-    background-color: currentColor;
+    --left: 0;
     --mask: var(--icon-16-redirect);
-    mask-image: var(--mask);
-    -webkit-mask-image: var(--mask);
+}
+
+[data-bleh--travis="true"] .nag-bar--corrections {
+    display: none !important;
 }
 
 
