@@ -3127,6 +3127,13 @@ state is not active, which then falls back to primary button styling */
     --mask: var(--icon-16-heart-solid) !important;
 }
 
+.search-similar-btn {
+    position: relative;
+    --mask: var(--icon-16-search);
+    --font-size: 0;
+    width: 40px;
+}
+
 /*[data-toggle-button-current-state="bookmarked"] .header-new-bookmark-button:after,
 [data-toggle-button-current-state="loved"] .header-new-love-button:after {
     content: '';
@@ -5716,6 +5723,7 @@ button:not(.playback-app-container button, .top-artist-list-item, .pixel, .liste
 .user-list-inner-wrap .label:before,
 .nag-bar-message:before,
 /*     BLEH     */
+.search-similar-btn:before,
 .btns .btn:before,
 .btn.reset:before,
 .setting-item .icon:before, .action .icon:before,

@@ -39,6 +39,7 @@ const trans = {
         music: {
             submit_lastfm_correction: 'Submit correction to Last.fm',
             submit_bleh_correction: 'Submit correction to bleh',
+            search_variations: 'Search for variations of this title'
         },
         statistics: {
             scrobbles: {
@@ -363,7 +364,8 @@ const trans = {
         },
         music: {
             submit_lastfm_correction: 'Submit correction to Last.fm',
-            submit_bleh_correction: 'Submit correction to bleh'
+            submit_bleh_correction: 'Submit correction to bleh',
+            search_variations: 'Search for variations of this title'
         },
         statistics: {
             scrobbles: {
@@ -1178,6 +1180,8 @@ let inbuilt_settings = {
 // use the top-right link to determine the current user
 let auth = '';
 
+let root = '';
+
 let bleh_url = 'https://www.last.fm/bleh';
 let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
@@ -1185,6 +1189,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 (function() {
     'use strict';
 
+    root = document.querySelector('.masthead-logo a').getAttribute('href');
     auth = document.querySelector('a.auth-link img').getAttribute('alt');
     initia();
 
@@ -1207,6 +1212,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         if (window.location.href == bleh_url || bleh_regex.test(window.location.href)) {
             bleh_settings();
         } else {
+            patch_actions();
             patch_profile(document.body);
             patch_shouts(document.body);
             patch_lastfm_settings(document.body);
@@ -1236,6 +1242,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             if (window.location.href == bleh_url || bleh_regex.test(window.location.href)) {
                 bleh_settings();
             } else {
+                patch_actions();
                 patch_profile(document.body);
                 patch_shouts(document.body);
                 patch_lastfm_settings(document.body);
@@ -3049,6 +3056,38 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
             menu.appendChild(extra_items);
         }
+    }
+
+
+    function patch_actions() {
+        let actions = document.body.querySelector('.header-new-actions');
+
+        if (actions == undefined)
+            return;
+
+        if (actions.hasAttribute('data-kate-processed'))
+            return;
+        actions.setAttribute('data-kate-processed', 'true');
+
+        let type = document.querySelector('.header-new').classList[1].replace('header-new--', '');
+
+        let text = document.querySelector('.header-new-title').textContent.replaceAll(' ', '+');
+
+        let artist = document.querySelector('.header-new-crumb');
+        if (artist != undefined)
+            text = `${text}+${artist.textContent.replaceAll(' ', '+')}`;
+
+        let search_btn = document.createElement('a');
+        search_btn.classList.add('btn', 'search-similar-btn');
+        search_btn.textContent = trans[lang].music.search_variations;
+        search_btn.href = `${root}search/${type}s?q=${text}`;
+        search_btn.target = '_blank';
+
+        tippy(search_btn, {
+            content: trans[lang].music.search_variations
+        });
+
+        actions.appendChild(search_btn);
     }
 
 
