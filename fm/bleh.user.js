@@ -2697,16 +2697,19 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         if (col_main == null)
             col_main = page_content.querySelector('.neighbours-items-section');
 
+        col_main.classList.add('friends-col-main');
+
         let view_buttons = document.createElement('div');
-        view_buttons.classList.add('view-buttons');
-        view_buttons.setAttribute('id', 'container-list_view');
+        view_buttons.classList.add('view-buttons-wrapper');
         view_buttons.innerHTML = (`
-            <button class="btn list-view-item" id="toggle-list_view-1" data-toggle="list_view" data-toggle-value="1" onclick="_update_item('list_view', 1)">
-                Grid
-            </button>
-            <button class="btn list-view-item" id="toggle-list_view-0" data-toggle="list_view" data-toggle-value="0" onclick="_update_item('list_view', 0)">
-                List
-            </button>
+            <div class="view-buttons">
+                <button class="btn list-view-item" id="toggle-list_view-1" data-toggle="list_view" data-toggle-value="1" onclick="_update_item('list_view', 1)">
+                    Grid
+                </button>
+                <button class="btn list-view-item" id="toggle-list_view-0" data-toggle="list_view" data-toggle-value="0" onclick="_update_item('list_view', 0)">
+                    List
+                </button>
+            </div>
         `);
         col_main.insertBefore(view_buttons, col_main.firstElementChild);
 

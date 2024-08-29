@@ -1352,7 +1352,7 @@ last.fm changes as of 2024-05-20 */
 
 /*     GLOBAL CARD STYLES     */
 .bleh--panel,
-.col-main > section, .col-sidebar > section,
+.col-main > section:not(.neighbours-items-section), .col-sidebar > section,
 .your-progress-component,
 /* this fixes places of the site (tracks, artist, albums watever that use a weird method of 2 col-mains, 2 col-sidebars as appose to profiles */
 /* -> could be simplified, idk if it affects other parts of the site tho */.row.buffer-4 > .col-main:first-child /* <- */, .row.buffer-4 > .col-main:nth-child(3) > :is(section, #shoutbox),
@@ -1396,7 +1396,8 @@ body[class*="namespace--user_library_"] .col-sidebar, .library-header,
 /* set an obsession */ .obsession-search, .obsession-search-results,
 /* user did not scrobble album in date range */ .library-header + .message,
 /* no loved tracks */ .namespace--user_loved .no-data-message,
-/* no playlists */ .no-data-message--playlists
+/* no playlists */ .no-data-message--playlists,
+/* neighbours */ .friends-col-main
 {
     content: '';
     --override-background: hsl(var(--card-specific-background, var(--card-background, var(--b5))));
@@ -13786,6 +13787,30 @@ button.bleh--gallery-bookmark-image-btn {
     from {
         transform: translateY(0);
         opacity: 1;
+    }
+}
+
+
+
+
+.view-buttons-wrapper {
+    display: flex;
+    justify-content: end;
+}
+.view-buttons {
+    display: flex;
+    gap: var(--button-list-gap);
+    padding: var(--button-list-gap);
+    background-color: hsl(var(--b6));
+    border-radius: var(--item-med-radius);
+    margin-bottom: var(--card-gap);
+
+    .btn:not([aria-checked="true"]) {
+        --bg: transparent;
+        --bg-hov: hsla(var(--b4), 40%);
+        --bg-atv: hsla(var(--b4), 60%);
+        --shadow: none;
+        --shadow-hov: none;
     }
 }
 }
