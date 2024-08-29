@@ -5151,13 +5151,15 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             `);
             masonry.insertBefore(tracklist, masonry.firstElementChild);
 
-            let url_split = window.location.href.split('/');
+            /*let url_split = window.location.href.split('/');
             let album_url = `${url_split[(url_split.length - 2)]}/${url_split[(url_split.length - 1)]}`;
-            let album_as_track_url = window.location.href.replace(album_url, `${url_split[(url_split.length - 2)]}/_/${url_split[(url_split.length - 1)]}`);
+            let album_as_track_url = window.location.href.replace(album_url, `${url_split[(url_split.length - 2)]}/_/${url_split[(url_split.length - 1)]}`);*/
+
+            let url = document.querySelector('.header-metadata-display a').getAttribute('href');
 
 
             // we need to fetch the tracklist
-            fetch(`/user/${auth}/library/music/${album_url}`)
+            fetch(url)
                 .then(function(response) {
                     console.error('returned', response, response.text);
 
