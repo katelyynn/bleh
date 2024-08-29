@@ -940,24 +940,16 @@ let includes = {
 let profile_badges = {
     'cutensilly': [
         {
-            type: 'k',
-            name: 'k'
-        },
-        {
-            type: 'a',
-            name: 'a'
-        },
-        {
-            type: 't',
-            name: 't'
-        },
-        {
-            type: 'e',
-            name: 'e'
+            type: 'contributor',
+            name: 'bleh contributor'
         },
         {
             type: 'queen',
             name: 'blehhhhhhhhhh!!'
+        },
+        {
+            type: 'cute',
+            name: 'cute'
         }
     ],
     'Iexyy': {
@@ -978,10 +970,20 @@ let profile_badges = {
         type: 'cat',
         name: 'it\'s a kitty!!'
     },
-    'twolay': {
-        type: 'cat',
-        name: 'it\'s a kitty!!'
-    },
+    'twolay': [
+        {
+            type: 'cat',
+            name: 'it\'s a kitty!!'
+        },
+        {
+            type: 'translation',
+            name: 'translated bleh into polish'
+        },
+        {
+            type: 'contributor',
+            name: 'bleh contributor'
+        }
+    ],
     'aoivee': {
         type: 'cat',
         name: 'it\'s a kitty!!'
