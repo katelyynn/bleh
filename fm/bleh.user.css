@@ -240,6 +240,7 @@ body {
     --card-shadow: hsla(var(--b7), 0.25) 0 2px 4px 0;
     --card-gap: 15px;
     --card-border: 1px solid hsla(var(--b4), 0.7);
+    --card-border-base: hsla(var(--b4), 0.7);
 
     --cards-main-width: 902px;
     --cards-sidebar-width: 400px;
@@ -5475,7 +5476,7 @@ button:not(.playback-app-container button, .top-artist-list-item, .pixel, .liste
         transition-property: padding, transform !important;
         transition-duration: 0.1s !important;
         --transition-property: opacity, left;
-        box-shadow: var(--shadow-hov) !important;
+        /*box-shadow: var(--shadow-hov) !important;*/
     }
 
     &:is(.gallery-next, .gallery-previous):active .arrow,
@@ -6312,9 +6313,6 @@ very, very, very dated - who looks up a song on ebay? */
     --mask: var(--icon-16-dev);
 }
 .bleh--configure-menu-item {
-    --bg-hov: hsla(var(--h3), 8%) !important;
-    --bg-atv: hsla(var(--h3), 18%) !important;
-    --col: hsl(var(--l3-c)) !important;
     --mask: var(--icon-16-settings);
 }
 .bleh--dev-menu-item {
@@ -6326,17 +6324,27 @@ very, very, very dated - who looks up a song on ebay? */
 
 
 /*     DANGEROUS     */
+.more-item--obsession,
+[data-analytics-label="labs"],
+.bleh--configure-menu-item,
 .more-item--delete, .more-item--report,
 [data-analytics-label="logout"],
 [data-analytics-action="delete"],
 [data-analytics-action="unpublish"], [data-analytics-action="publish"]
 {
-    --bg-hov: hsla(var(--h3), 8%) !important;
-    --bg-atv: hsla(var(--h3), 18%) !important;
+    --bg-hov: hsla(var(--h4), 10%) !important;
+    --bg-atv: hsla(var(--h4), 20%) !important;
     --col: hsl(var(--l3-c)) !important;
-    --hue: var(--hue-neg);
-    --sat: 1;
-    --lit: 1;
+
+    &:not(
+        .bleh--configure-menu-item,
+        [data-analytics-label="labs"],
+        .more-item--obsession
+        ) {
+        --hue: var(--hue-neg);
+        --sat: 1;
+        --lit: 1;
+    }
 }
 #manage_data .btn-primary
 {
@@ -6351,9 +6359,6 @@ very, very, very dated - who looks up a song on ebay? */
 /*     SPECIAL     */
 .more-item--obsession
 {
-    --bg-hov: hsla(var(--h3), 8%) !important;
-    --bg-atv: hsla(var(--h3), 18%) !important;
-    --col: hsl(var(--l3-c)) !important;
     --hue: 255;
     --sat: 1;
     --lit: 1;
@@ -6363,9 +6368,6 @@ very, very, very dated - who looks up a song on ebay? */
 /*     LABS     */
 [data-analytics-label="labs"]
 {
-    --bg-hov: hsla(var(--h3), 8%) !important;
-    --bg-atv: hsla(var(--h3), 18%) !important;
-    --col: hsl(var(--l3-c)) !important;
     --hue: 200;
     --sat: 1;
     --lit: 1;
@@ -11118,7 +11120,7 @@ so this is good enough - use the community docs */
             &.sep {
                 margin-top: calc(-20px + var(--card-gap));
                 padding-top: var(--card-gap);
-                border-top: 1px solid hsl(var(--b4));
+                border-top: var(--card-border);
             }
 
             .btn {
@@ -11528,14 +11530,12 @@ code, kbd, samp {
     text-align: left;
 }
 .inner-preview {
-    border: 1px solid hsl(var(--b4));
     background-color: hsl(var(--b6));
     padding: var(--card-gap);
     border-radius: var(--item-med-radius);
-    box-shadow: 0 7px 5px 0 hsla(var(--b7), 0.25) inset, var(--card-shadow);
 
-    [data-bleh--theme="light"] & {
-        box-shadow: 0 4px 5px 0 hsla(var(--b7), 0.08) inset, var(--card-shadow);
+    [data-bleh--theme="oled"] & {
+        border: var(--card-border);
     }
 
     &.gap-top {
@@ -11596,8 +11596,7 @@ code, kbd, samp {
 .sep:not(.btns) {
     width: 100%;
     height: 1px;
-    background-color: hsl(var(--b4));
-    margin: var(--card-gap) 0;
+    background-color: var(--card-border-base);
 }
 
 .preview-img {
@@ -11724,14 +11723,14 @@ input[type="range"]::-webkit-slider-thumb {
     height: 28px;
     background-color: hsl(var(--h2));
     border-radius: var(--item-small-radius);
-    border: 2px solid hsl(var(--c1));
+    border: 2px solid hsl(var(--b5));
 }
 input[type="range"]::-moz-range-thumb {
     width: 8px;
     height: 28px;
     background-color: hsl(var(--h2));
     border-radius: var(--item-small-radius);
-    border: 2px solid hsl(var(--c1));
+    border: 2px solid hsl(var(--b5));
 }
 
 input[type="range"]::-webkit-progress-value {
@@ -13516,7 +13515,7 @@ trying to list every song ever made by someone identifying as a female, which is
             [data-bleh--theme="oled"] &,
             [data-bleh--theme="light"] & {
                 background-color: transparent;
-                border: 1px solid hsl(var(--b4));
+                border: var(--card-border);
             }
 
             form {
@@ -13542,7 +13541,8 @@ trying to list every song ever made by someone identifying as a female, which is
 
                         .tip {
                             color: hsl(var(--c3));
-                            font-size: 12px;
+                            font-size: var(--font-size-sm);
+                            line-height: var(--line-height-sm);
                         }
 
                         &.about-me {
@@ -13566,7 +13566,7 @@ trying to list every song ever made by someone identifying as a female, which is
                 .save-row {
                     display: flex;
                     padding-top: var(--card-gap);
-                    border-top: 1px solid hsl(var(--b4));
+                    border-top: var(--card-border);
                     justify-content: end;
                     gap: var(--button-list-gap)
                 }
