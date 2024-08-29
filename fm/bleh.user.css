@@ -8511,11 +8511,18 @@ text[style^="color: rgb(0, 0, 0)"] {
     [data-bleh--list_view="1"] & {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-        gap: var(--item-list-gap);
+        gap: var(--card-gap);
+
+        .user-list-item {
+            border: unset !important;
+            padding: var(--item-list-gap);
+            border-radius: var(--item-med-radius);
+        }
 
         .user-list-inner-wrap {
             flex-direction: column;
             align-items: unset;
+            gap: 0;
             margin: unset;
             height: 56px;
             padding-left: calc(56px + 10px);
@@ -8528,6 +8535,12 @@ text[style^="color: rgb(0, 0, 0)"] {
 
             .user-list-name {
                 margin: unset !important;
+            }
+            .user-list-description {
+                overflow: visible;
+                padding-right: 32px;
+                flex-direction: column;
+                gap: 0;
             }
 
             .user-follow {
@@ -8542,6 +8555,10 @@ text[style^="color: rgb(0, 0, 0)"] {
 
                 --margin-top: -7px;
                 --left: 1px;
+
+                .user-list-item:has(&) {
+                    background: hsla(var(--h4), 20%);
+                }
             }
         }
     }
