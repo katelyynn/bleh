@@ -11948,6 +11948,10 @@ input[type="range"]::-moz-range-progress {
     .companion-checkbox {
         display: none;
     }
+
+    .toggle-wrap {
+        flex-shrink: 0;
+    }
 }
 
 .select-container {

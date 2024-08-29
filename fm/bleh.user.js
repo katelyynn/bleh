@@ -215,6 +215,11 @@ const trans = {
                 travis: {
                     name: 'No, I didn\'t mean Travi$ Scott',
                     bio: 'Hides redirect messages from the top of pages.'
+                },
+                autocorrect: {
+                    name: 'Scrobble auto-correction',
+                    bio: 'By default, last.fm will \'auto-correct\' some of your scrobbles using this system. This will make your scrobbles appear as <i>Travis Scott</i> rather than <i>Travi$ Scott</i>, however the redirection system is not fully disabled.',
+                    action: 'Open Settings'
                 }
             },
             inbuilt: {
@@ -3804,6 +3809,15 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                             <button class="toggle" id="toggle-travis" onclick="_update_item('travis')" aria-checked="true">
                                 <div class="dot"></div>
                             </button>
+                        </div>
+                    </div>
+                    <div class="toggle-container">
+                        <div class="heading">
+                            <h5>${trans[lang].settings.redirects.autocorrect.name}</h5>
+                            <p>${trans[lang].settings.redirects.autocorrect.bio}</p>
+                        </div>
+                        <div class="toggle-wrap">
+                            <a class="btn bleh--btn primary" href="${root}settings/website" target="_blank">${trans[lang].settings.redirects.autocorrect.action}</a>
                         </div>
                     </div>
                 </div>
