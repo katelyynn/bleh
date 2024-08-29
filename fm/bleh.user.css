@@ -8569,6 +8569,10 @@ text[style^="color: rgb(0, 0, 0)"] {
     display: flex !important;
     align-items: center;
     gap: var(--card-gap);
+
+    > * {
+        transition: all var(--trans) var(--trans-function);
+    }
 }
 
 .user-list-item:not(:has(.label.user-follow)) {
