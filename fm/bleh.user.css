@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           bleh (dev)
 @namespace      github.com/katelyynn/bleh
-@version        2024.0829
+@version        2024.08291
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.css
@@ -4305,6 +4305,12 @@ better than the default selector '#app a' i suppose */
     animation: slide_down var(--trans) var(--trans-function);
     transform-origin: top;
     /*transform: skewX(var(--skew)) !important;*/
+
+    &:not(.chartlist--with-image) {
+        .chartlist-image {
+            display: none;
+        }
+    }
 }
 .chartlist tbody {
     display: flex;
@@ -5103,6 +5109,45 @@ the body text becomes bigger by default - this reverts that */
             line-height: var(--line-height);
         }
     }
+
+    /* what even...............
+    on followers/following pages, lastfm returns
+    .no-data-message followed by a blank <p></p>,
+    leading to a gap from their own css */
+    & + p:empty {
+        display: none;
+    }
+}
+.loading-data-container {
+    padding: 30px 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--card-gap);
+    justify-content: center;
+    align-items: center;
+
+    .loading-data-text {
+        font-weight: var(--font-weight-medium);
+        color: hsl(var(--c3));
+        position: relative;
+        padding-left: calc(16px + 6px);
+        --left: 0;
+        --mask: var(--icon-16-spinner);
+        user-select: none;
+        cursor: default;
+
+        &:before {
+            animation: spinner 0.8s linear infinite;
+        }
+
+        &.failed {
+            --mask: var(--icon-16-info);
+
+            &:before {
+                animation: none;
+            }
+        }
+    }
 }
 
 .no-data-message-heading {
@@ -5724,6 +5769,7 @@ button:not(.playback-app-container button, .top-artist-list-item, .pixel, .liste
 .user-list-inner-wrap .label:before,
 .nag-bar-message:before,
 /*     BLEH     */
+.loading-data-text:before,
 .search-similar-btn:before,
 .btns .btn:before,
 .btn.reset:before,
@@ -7640,16 +7686,14 @@ text[style^="color: rgb(255, 172, 172)"] {
 .user-dashboard-controls-tooltip,
 .tooltip-dark,
 .user-dashboard-tooltip {
-    background: hsla(var(--b5), 70%);
+    background: hsla(var(--b6), 70%);
     backdrop-filter: blur(10px) saturate(160%);
-    border-radius: var(--item-med-radius);
-    border: 1px solid hsl(var(--b4));
+    border-radius: 50px;
     box-shadow: var(--menu-shadow);
-    padding: 5px 7px;
-    font-size: calc(var(--font-size) - 1px);
+    padding: 7px 14px;
+    font-size: var(--font-size);
     line-height: var(--line-height);
     color: hsl(var(--c2));
-    margin-top: 2px;
 
     [data-bleh--theme="light"] & {
         background: hsla(var(--b5), 35%);

@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         bleh
 // @namespace    http://last.fm/
-// @version      2024.0712
+// @version      2024.0829
 // @description  bleh!!! ^-^
 // @author       kate
 // @match        https://www.last.fm/*
@@ -16,7 +16,7 @@
 // ==/UserScript==
 
 let version = {
-    build: '2024.0829',
+    build: '2024.0829.1',
     sku: 'main',
     feature_flags: {}
 }
@@ -39,7 +39,13 @@ const trans = {
         music: {
             submit_lastfm_correction: 'Submit correction to Last.fm',
             submit_bleh_correction: 'Submit correction to bleh',
-            search_variations: 'Search for variations of this title'
+            search_variations: 'Search for variations of this title',
+            fetch_plays: {
+                name: 'Tracklist',
+                loading: 'Fetching your plays on this album',
+                fail: 'You do not have any plays on this album',
+                open_as_track: 'Open album title as a track'
+            }
         },
         statistics: {
             scrobbles: {
@@ -1223,6 +1229,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             patch_header_menu();
             patch_gallery_page();
 
+            album_missing_a_tracklist();
+
             correct_generic_combo_no_artist('artist-header-featured-items-item');
             correct_generic_combo_no_artist('artist-top-albums-item');
             correct_generic_combo('source-album-details');
@@ -1252,6 +1260,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 patch_artist_grids(document.body);
                 patch_header_menu();
                 patch_gallery_page();
+
+                album_missing_a_tracklist();
 
                 correct_generic_combo_no_artist('artist-header-featured-items-item');
                 correct_generic_combo_no_artist('artist-top-albums-item');
@@ -5052,5 +5062,71 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         setTimeout(function() {
             document.getElementById('bleh-notifs').removeChild(notif);
         }, 400);
+    }
+
+
+
+
+    function album_missing_a_tracklist() {
+        let header = document.querySelector('.header-new--album');
+        if (header == null)
+            return;
+
+        if (header.hasAttribute('data-kate-processed'))
+            return;
+        header.setAttribute('data-kate-processed', 'true');
+
+        // tracklist
+        let tracklist = document.getElementById('tracklist');
+        if (tracklist == null) {
+            let masonry = document.querySelector('.masonry-left-bottom');
+
+            tracklist = document.createElement('section');
+            tracklist.innerHTML = (`
+                <h3 class="text-18">${trans[lang].music.fetch_plays.name}</h3>
+                <div class="loading-data-container">
+                    <p class="loading-data-text">${trans[lang].music.fetch_plays.loading}</p>
+                </div>
+            `);
+            masonry.insertBefore(tracklist, masonry.firstElementChild);
+
+            let url_split = window.location.href.split('/');
+            let album_url = `${url_split[(url_split.length - 2)]}/${url_split[(url_split.length - 1)]}`;
+            let album_as_track_url = window.location.href.replace(album_url, `${url_split[(url_split.length - 2)]}/_/${url_split[(url_split.length - 1)]}`);
+
+
+            // we need to fetch the tracklist
+            fetch(`/user/${auth}/library/music/${album_url}`)
+                .then(function(response) {
+                    console.error('returned', response, response.text);
+
+                    return response.text();
+                })
+                .then(function(html) {
+                    let doc = new DOMParser().parseFromString(html, 'text/html');
+
+                    //deliver_notif(`using url ${`/user/${auth}/library/music/${album_url}`}`);
+                    console.error('DOC', doc);
+
+                    let inner_tracklist = doc.querySelector('#top-tracks-section [v-else=""] .chartlist');
+                    if (inner_tracklist == null) {
+                        tracklist.innerHTML = (`
+                            <h3 class="text-18">${trans[lang].music.fetch_plays.name}</h3>
+                            <div class="loading-data-container">
+                                <p class="loading-data-text failed">${trans[lang].music.fetch_plays.fail}</p>
+                                <a class="btn" href="${album_as_track_url}">${trans[lang].music.fetch_plays.open_as_track}</a>
+                            </div>
+                        `);
+                        return;
+                    }
+
+                    inner_tracklist.classList.remove('chartlist--with-image');
+
+                    tracklist.innerHTML = (`
+                        <h3 class="text-18">${trans[lang].music.fetch_plays.name}</h3>
+                        ${inner_tracklist.outerHTML}
+                    `);
+                })
+        }
     }
 })();
