@@ -8507,6 +8507,44 @@ text[style^="color: rgb(0, 0, 0)"] {
 
 .user-list {
     margin: unset !important;
+
+    [data-bleh--list_view="1"] & {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+        gap: var(--item-list-gap);
+
+        .user-list-inner-wrap {
+            flex-direction: column;
+            align-items: unset;
+            margin: unset;
+            height: 56px;
+            padding-left: calc(56px + 10px);
+
+            .user-list-avatar {
+                width: 56px;
+                height: 56px;
+                --mask-size: var(--cover-size-50);
+            }
+
+            .user-list-name {
+                margin: unset !important;
+            }
+
+            .user-follow {
+                position: absolute;
+                top: calc(56px - 18px);
+                left: calc(56px - 18px);
+                z-index: 12;
+                width: calc(16px + (1px * 2));
+                height: calc(16px + (1px * 2));
+                padding: 1px !important;
+                background-color: hsl(var(--b5)) !important;
+
+                --margin-top: -7px;
+                --left: 1px;
+            }
+        }
+    }
 }
 
 
