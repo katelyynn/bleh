@@ -13308,21 +13308,6 @@ trying to list every song ever made by someone identifying as a female, which is
         bottom: calc(12px + 7px);
         z-index: 3;
     }
-
-    /* hateful warning */
-    &:after {
-        content: 'Hateful shouts will lead to your account being hidden.';
-        position: absolute;
-        bottom: calc(12px + 7px);
-        left: 0;
-        color: hsla(var(--c3), 40%);
-        transition-property: left;
-        transition-duration: var(--trans);
-        transition-timing-function: var(--trans-function);
-    }
-    &:focus-within:after {
-        left: 80px;
-    }
 }
 
 
