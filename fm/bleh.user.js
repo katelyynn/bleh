@@ -5155,7 +5155,22 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             let album_url = `${url_split[(url_split.length - 2)]}/${url_split[(url_split.length - 1)]}`;
             let album_as_track_url = window.location.href.replace(album_url, `${url_split[(url_split.length - 2)]}/_/${url_split[(url_split.length - 1)]}`);*/
 
-            let url = document.querySelector('.header-metadata-display a').getAttribute('href');
+            let url = document.querySelector('.header-metadata-display a');
+            if (url == undefined) {
+                let url_split = window.location.href.split('/');
+                let album_url = `${url_split[(url_split.length - 2)]}/${url_split[(url_split.length - 1)]}`;
+                let album_as_track_url = window.location.href.replace(album_url, `${url_split[(url_split.length - 2)]}/_/${url_split[(url_split.length - 1)]}`);
+
+                tracklist.innerHTML = (`
+                    <h3 class="text-18">${trans[lang].music.fetch_plays.name}</h3>
+                    <div class="loading-data-container">
+                        <p class="loading-data-text failed">${trans[lang].music.fetch_plays.fail}</p>
+                        <a class="btn" href="${album_as_track_url}">${trans[lang].music.fetch_plays.open_as_track}</a>
+                    </div>
+                `);
+                return;
+            }
+            url = url.getAttribute('href');
 
 
             // we need to fetch the tracklist
