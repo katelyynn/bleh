@@ -1196,6 +1196,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         //get_scrobbles(document.body);
         append_nav(document.body);
         patch_masthead(document.body);
+        load_notifs();
 
         start_rain();
 
@@ -2328,6 +2329,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             return;
 
         patch_profile_following();
+        patch_profile_tracks();
 
         let profile_name = profile_header.querySelector('a');
 
@@ -2492,6 +2494,29 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 create_profile_note_panel(profile_name.textContent, true);
             }
         }
+    }
+
+    function patch_profile_tracks() {
+        // tracklist
+        let tracklist_panel = document.getElementById('recent-tracks-section');
+
+        if (tracklist_panel == null)
+            return;
+
+        if (tracklist_panel.hasAttribute('data-kate-processed'))
+            return;
+        tracklist_panel.setAttribute('data-kate-processed', 'true');
+
+        let refresh_btn = document.createElement('button');
+        refresh_btn.classList.add('refresh-tracklist-btn');
+        refresh_btn.textContent = 'Refresh';
+        refresh_btn.setAttribute('onclick', '_refresh_tracks(this)');
+
+        tippy(refresh_btn, {
+            content: 'Refresh tracks'
+        });
+
+        tracklist_panel.appendChild(refresh_btn);
     }
 
     unsafeWindow._add_profile_note = function(username, has_note) {
@@ -4890,5 +4915,101 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     unsafeWindow._force_refresh_theme = function() {
         localStorage.removeItem('bleh_cached_style');
         localStorage.removeItem('bleh_cached_style_timeout');
+    }
+
+
+
+
+    unsafeWindow._refresh_tracks = function(button) {
+        refresh_tracks(button);
+    }
+    function refresh_tracks(button) {
+        button.setAttribute('onclick', '');
+        button.setAttribute('disabled', '');
+
+        // we need to fetch the tracklist, this function presumes that
+        // the user has a tracklist to begin with, as that is the only
+        // way to call the function on the frontend
+        fetch(window.location.href)
+        .then(function(response) {
+            console.error('returned', response, response.text);
+
+            return response.text();
+        })
+        .then(function(html) {
+            let doc = new DOMParser().parseFromString(html, 'text/html');
+            console.error('DOC', doc);
+
+            deliver_notif('refreshed tracks');
+
+            let tracklist_panel = doc.getElementById('recent-tracks-section');
+
+            if (tracklist_panel == null) {
+                deliver_notif('recent tracks could not be found ;-;');
+                return;
+            }
+
+            document.getElementById('recent-tracks-section').innerHTML = tracklist_panel.innerHTML;
+
+            let refresh_btn = document.createElement('button');
+            refresh_btn.classList.add('refresh-tracklist-btn');
+            refresh_btn.textContent = 'Refresh';
+            refresh_btn.setAttribute('onclick', '_refresh_tracks(this)');
+
+            tippy(refresh_btn, {
+                content: 'Refresh tracks'
+            });
+
+            document.getElementById('recent-tracks-section').appendChild(refresh_btn);
+        })
+    }
+
+
+
+
+    // notifs
+    function load_notifs() {
+        let prev_notif = document.getElementById('bleh-notifs');
+        if (prev_notif == null) {
+            let notifs = document.createElement('div');
+            notifs.classList.add('bleh-notifs');
+            notifs.setAttribute('id', 'bleh-notifs');
+            document.body.appendChild(notifs);
+        }
+    }
+
+    unsafeWindow._deliver_notif = function(content, persist=false) {
+        deliver_notif(content, persist);
+    }
+    function deliver_notif(content, persist=false, has_icon=false, append_class='') {
+        let notif = document.createElement('button');
+        notif.classList.add('bleh-notif');
+        notif.setAttribute('onclick', '_kill_notif(this)');
+        notif.textContent = content;
+
+        document.getElementById('bleh-notifs').appendChild(notif);
+
+        if (has_icon)
+            notif.classList.add('btn--has-icon');
+
+        if (append_class != '')
+            notif.classList.add(append_class);
+
+        if (persist)
+            return;
+
+        setTimeout(function() {
+            kill_notif(notif);
+        }, 3500);
+    }
+
+    unsafeWindow._kill_notif = function(notif) {
+        kill_notif(notif);
+    }
+    function kill_notif(notif) {
+        notif.classList.add('fade-out');
+        setTimeout(function() {
+            document.getElementById('bleh-notifs').removeChild(notif);
+        }, 400);
     }
 })();
