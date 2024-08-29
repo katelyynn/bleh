@@ -5124,6 +5124,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
                     tracklist.innerHTML = (`
                         <h3 class="text-18">${trans[lang].music.fetch_plays.name}</h3>
+                        <p>Tracks listed here are based on your album plays as this album does not have a tracklist available.</p>
                         ${inner_tracklist.outerHTML}
                     `);
                 })
