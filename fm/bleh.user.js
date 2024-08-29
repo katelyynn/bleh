@@ -16,7 +16,7 @@
 // ==/UserScript==
 
 let version = {
-    build: '2024.0829.2',
+    build: '2024.0829.3',
     sku: 'main',
     feature_flags: {}
 }
@@ -1056,7 +1056,7 @@ let settings_template = {
     feature_flags: {},
     show_your_progress: true,
     travis: false,
-    list_view: 0
+    list_view: 1
 };
 let settings_base = {
     hue: {

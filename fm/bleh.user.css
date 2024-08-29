@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           bleh (dev)
 @namespace      github.com/katelyynn/bleh
-@version        2024.08292
+@version        2024.08293
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.css
@@ -8517,7 +8517,7 @@ text[style^="color: rgb(0, 0, 0)"] {
 
         .user-list-item {
             border: unset !important;
-            padding: var(--item-list-gap);
+            padding: var(--button-list-gap);
             border-radius: var(--item-med-radius);
         }
 
@@ -8540,7 +8540,7 @@ text[style^="color: rgb(0, 0, 0)"] {
             }
             .user-list-description {
                 overflow: visible;
-                padding-right: 32px;
+                padding-right: calc(32px + 10px);
                 flex-direction: column;
                 gap: 0;
             }
@@ -8560,7 +8560,29 @@ text[style^="color: rgb(0, 0, 0)"] {
 
                 .user-list-item:has(&) {
                     background: hsla(var(--h4), 20%);
+
+                    .user-list-follower-btn {
+                        --bg: hsla(var(--h4), 0%);
+                        --bg-hov: hsla(var(--h4), 20%);
+                        --bg-atv: hsla(var(--h4), 20%);
+                        --shadow: none;
+                        --shadow-hov: none;
+
+                        .user-list-item:not(:hover) [data-toggle-button-current-state="followed"] & {
+                            --col: hsl(var(--l3-c));
+                        }
+                    }
                 }
+            }
+
+            .user-list-follower-btn {
+                top: 50%;
+                margin-top: -16px;
+                --bg: hsla(var(--b4), 0%);
+                --bg-hov: hsla(var(--b4), 40%);
+                --bg-atv: hsla(var(--b4), 60%);
+                --shadow: none;
+                --shadow-hov: none;
             }
         }
     }
@@ -8633,9 +8655,9 @@ text[style^="color: rgb(0, 0, 0)"] {
     --shadow: none !important;
     --shadow-hov: none !important;
 }
-.user-list-item:hover .user-list-follower-btn {
-    transition: none !important;
-}
+/*.user-list-item:hover .user-list-follower-btn {
+    transition-property: none !important;
+}*/
 
 .user-list-name a, .listeners-section-item-name a, .top-listeners-item-name a {
     text-decoration: none !important;
