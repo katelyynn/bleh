@@ -4305,6 +4305,12 @@ better than the default selector '#app a' i suppose */
     animation: slide_down var(--trans) var(--trans-function);
     transform-origin: top;
     /*transform: skewX(var(--skew)) !important;*/
+
+    &:not(.chartlist--with-image) {
+        .chartlist-image {
+            display: none;
+        }
+    }
 }
 .chartlist tbody {
     display: flex;
@@ -7680,16 +7686,14 @@ text[style^="color: rgb(255, 172, 172)"] {
 .user-dashboard-controls-tooltip,
 .tooltip-dark,
 .user-dashboard-tooltip {
-    background: hsla(var(--b5), 70%);
+    background: hsla(var(--b6), 70%);
     backdrop-filter: blur(10px) saturate(160%);
-    border-radius: var(--item-med-radius);
-    border: 1px solid hsl(var(--b4));
+    border-radius: 50px;
     box-shadow: var(--menu-shadow);
-    padding: 5px 7px;
-    font-size: calc(var(--font-size) - 1px);
+    padding: 7px 14px;
+    font-size: var(--font-size);
     line-height: var(--line-height);
     color: hsl(var(--c2));
-    margin-top: 2px;
 
     [data-bleh--theme="light"] & {
         background: hsla(var(--b5), 35%);
