@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           bleh (dev)
 @namespace      github.com/katelyynn/bleh
-@version        2024.08291
+@version        2024.08292
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.css
@@ -7976,7 +7976,7 @@ text[style^="color: rgb(0, 0, 0)"] {
     --mask: var(--icon-16-redirect);
 }
 
-[data-bleh--travis="true"] .nag-bar--corrections {
+[data-bleh--travis="true"] .nag-bar--corrections:not(.preview-bar) {
     display: none !important;
 }
 
@@ -11198,6 +11198,9 @@ so this is good enough - use the community docs */
                 &[data-bleh-page="profiles"] {
                     --mask: var(--icon-16-user);
                 }
+                &[data-bleh-page="redirects"] {
+                    --mask: var(--icon-16-redirect);
+                }
 
                 &:not(.active) {
                     --bg: transparent;
@@ -11606,6 +11609,10 @@ code, kbd, samp {
         }
     }
 
+    .sep {
+        margin: var(--card-gap) 0 !important;
+    }
+
     .btn-row {
         display: flex;
         align-items: center;
@@ -11632,6 +11639,17 @@ code, kbd, samp {
             line-height: inherit;
             position: absolute;
             height: fit-content;
+        }
+    }
+
+
+    .nag-bar {
+        position: static !important;
+        width: fit-content !important;
+        margin: unset !important;
+
+        .container {
+            background: unset !important;
         }
     }
 }

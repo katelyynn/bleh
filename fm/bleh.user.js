@@ -16,7 +16,7 @@
 // ==/UserScript==
 
 let version = {
-    build: '2024.0829.1',
+    build: '2024.0829.2',
     sku: 'main',
     feature_flags: {}
 }
@@ -164,10 +164,6 @@ const trans = {
                 show_your_progress: {
                     name: 'Show your weekly progress',
                     bio: 'too many numbers ~w~'
-                },
-                travis: {
-                    name: 'No, I didn\'t mean Travi$ Scott',
-                    bio: 'Hides redirect messages from the top of pages.'
                 }
             },
             performance: {
@@ -211,6 +207,14 @@ const trans = {
                     delete: 'Remove note',
                     edit_user: 'Edit {u}\'s note',
                     delete_user: 'Remove {u}\'s note'
+                }
+            },
+            redirects: {
+                name: 'Redirects',
+                bio: 'Manage last.fm\'s (not) handy redirection system as best as possible.',
+                travis: {
+                    name: 'No, I didn\'t mean Travi$ Scott',
+                    bio: 'Hides redirect messages from the top of pages.'
                 }
             },
             inbuilt: {
@@ -3157,6 +3161,9 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                         <button class="btn bleh--btn" data-bleh-page="customise" onclick="_change_settings_page('customise')">
                             ${trans[lang].settings.customise.name}
                         </button>
+                        <button class="btn bleh--btn" data-bleh-page="redirects" onclick="_change_settings_page('redirects')">
+                            ${trans[lang].settings.redirects.name}
+                        </button>
                         <button class="btn bleh--btn" data-bleh-page="profiles" onclick="_change_settings_page('profiles')">
                             ${trans[lang].settings.profiles.name}
                         </button>
@@ -3710,18 +3717,6 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                         </div>
                     </div>
                     <div class="sep"></div>
-                    <div class="toggle-container" id="container-travis">
-                        <button class="btn reset" onclick="_reset_item('travis')">${trans[lang].settings.reset}</button>
-                        <div class="heading">
-                            <h5>${trans[lang].settings.customise.travis.name}</h5>
-                            <p>${trans[lang].settings.customise.travis.bio}</p>
-                        </div>
-                        <div class="toggle-wrap">
-                            <button class="toggle" id="toggle-travis" onclick="_update_item('travis')" aria-checked="true">
-                                <div class="dot"></div>
-                            </button>
-                        </div>
-                    </div>
                     <div class="toggle-container" id="container-show_your_progress">
                         <button class="btn reset" onclick="_reset_item('show_your_progress')">${trans[lang].settings.reset}</button>
                         <div class="heading">
@@ -3785,6 +3780,34 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     <div class="profile-notes" id="profile-notes"></div>
                 </div>
                 `);
+        } else if (page == 'redirects') {
+            return (`
+                <div class="bleh--panel">
+                    <h3>${trans[lang].settings.redirects.name}</h3>
+                    <p>${trans[lang].settings.redirects.bio}</p>
+                    <div class="inner-preview">
+                        <div class="nag-bar nag-bar--corrections nag-bar--corrections--artist preview-bar">
+                            <div class="container">
+                                <p class="nag-bar-message">
+                                    Did you mean <strong><a href="/music/Travi$+Scott">Travi$ Scott</a></strong>? <strong><a href="/music/Lil%27+Wayne">Lil' Wayne</a></strong> maybe?
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="toggle-container" id="container-travis">
+                        <button class="btn reset" onclick="_reset_item('travis')">${trans[lang].settings.reset}</button>
+                        <div class="heading">
+                            <h5>${trans[lang].settings.redirects.travis.name}</h5>
+                            <p>${trans[lang].settings.redirects.travis.bio}</p>
+                        </div>
+                        <div class="toggle-wrap">
+                            <button class="toggle" id="toggle-travis" onclick="_update_item('travis')" aria-checked="true">
+                                <div class="dot"></div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                `);
         }
     }
 
@@ -3807,7 +3830,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
         if (page == 'themes')
             show_theme_change_in_settings();
-        else if (page == 'customise' || page == 'performance')
+        else if (page == 'customise' || page == 'performance' || page == 'redirects')
             refresh_all();
         else if (page == 'profiles')
             init_profile_notes();

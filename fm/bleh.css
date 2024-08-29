@@ -7958,17 +7958,16 @@ text[style^="color: rgb(0, 0, 0)"] {
 }
 
 .nag-bar--corrections .nag-bar-message {
-    padding-left: calc(16px + 8px);
+    padding-left: calc(16px + 6px);
     font-size: var(--font-size);
     line-height: var(--line-height);
     color: hsl(var(--c3));
-}
-.nag-bar--corrections .nag-bar-message::before {
-    background-image: unset;
-    background-color: currentColor;
+    --left: 0;
     --mask: var(--icon-16-redirect);
-    mask-image: var(--mask);
-    -webkit-mask-image: var(--mask);
+}
+
+[data-bleh--travis="true"] .nag-bar--corrections:not(.preview-bar) {
+    display: none !important;
 }
 
 
@@ -11189,6 +11188,9 @@ so this is good enough - use the community docs */
                 &[data-bleh-page="profiles"] {
                     --mask: var(--icon-16-user);
                 }
+                &[data-bleh-page="redirects"] {
+                    --mask: var(--icon-16-redirect);
+                }
 
                 &:not(.active) {
                     --bg: transparent;
@@ -11597,6 +11599,10 @@ code, kbd, samp {
         }
     }
 
+    .sep {
+        margin: var(--card-gap) 0 !important;
+    }
+
     .btn-row {
         display: flex;
         align-items: center;
@@ -11623,6 +11629,17 @@ code, kbd, samp {
             line-height: inherit;
             position: absolute;
             height: fit-content;
+        }
+    }
+
+
+    .nag-bar {
+        position: static !important;
+        width: fit-content !important;
+        margin: unset !important;
+
+        .container {
+            background: unset !important;
         }
     }
 }
