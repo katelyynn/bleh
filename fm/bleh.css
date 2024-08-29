@@ -259,8 +259,8 @@ body {
     --avatar-shadow: 3px 6px 15px 10px hsla(var(--b7), 0.05);
     --standout-shadow: 3px 6px 32px 16px hsla(var(--b7), 0.2);
 
-    --noise: url('https://cutensilly.org/img/noise.png');
-    --gloss-image: url('https://cutensilly.org/img/gloss.svg');
+    --noise: url('https://katelyynn.github.io/bleh/fm/noise.png');
+    --gloss-image: url('https://katelyynn.github.io/bleh/fm/gloss.svg');
     --gloss: 0;
 
     --interactable-inset: inset hsl(var(--b3)) 0 -1px 0;
@@ -4486,7 +4486,7 @@ better than the default selector '#app a' i suppose */
 
 .chartlist-now-scrobbling:before {
     background: currentColor !important;
-    --mask: url('https://cutensilly.org/img/nowplaying.gif');
+    --mask: url('https://katelyynn.github.io/bleh/fm/nowplaying.gif');
     mask-image: var(--mask);
     -webkit-mask-image: var(--mask);
     image-rendering: pixelated;
