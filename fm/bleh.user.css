@@ -5103,6 +5103,45 @@ the body text becomes bigger by default - this reverts that */
             line-height: var(--line-height);
         }
     }
+
+    /* what even...............
+    on followers/following pages, lastfm returns
+    .no-data-message followed by a blank <p></p>,
+    leading to a gap from their own css */
+    & + p:empty {
+        display: none;
+    }
+}
+.loading-data-container {
+    padding: 30px 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--card-gap);
+    justify-content: center;
+    align-items: center;
+
+    .loading-data-text {
+        font-weight: var(--font-weight-medium);
+        color: hsl(var(--c3));
+        position: relative;
+        padding-left: calc(16px + 6px);
+        --left: 0;
+        --mask: var(--icon-16-spinner);
+        user-select: none;
+        cursor: default;
+
+        &:before {
+            animation: spinner 0.8s linear infinite;
+        }
+
+        &.failed {
+            --mask: var(--icon-16-info);
+
+            &:before {
+                animation: none;
+            }
+        }
+    }
 }
 
 .no-data-message-heading {
@@ -5724,6 +5763,7 @@ button:not(.playback-app-container button, .top-artist-list-item, .pixel, .liste
 .user-list-inner-wrap .label:before,
 .nag-bar-message:before,
 /*     BLEH     */
+.loading-data-text:before,
 .search-similar-btn:before,
 .btns .btn:before,
 .btn.reset:before,
