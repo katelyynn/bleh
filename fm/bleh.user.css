@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           bleh (dev)
 @namespace      github.com/katelyynn/bleh
-@version        2024.0709
+@version        2024.0829
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.css
@@ -12414,22 +12414,7 @@ input[type="range"]::-moz-range-progress {
 
 
 .bleh--name-is-cute {
-    /* this isnt using https://cesque.com/gaydient/ but shoutout,
-    based on https://codepen.io/charliewilco/pen/BzrJzE */
-    --g-red: hsl(8, 62%, 60%);
-    --g-orange: hsl(24, 86%, 60%);
-    --g-yellow: hsl(44, 100%, 60%);
-    --g-green: hsl(163, 100%, 60%);
-    --g-blue: hsl(199, 79%, 60%);
-    --g-indigo: hsl(254, 46%, 60%);
-    background-image: linear-gradient(90deg,
-    var(--g-red) 16.6666%,
-    var(--g-orange) 33.333%,
-    var(--g-yellow) 50%,
-    var(--g-green) 66.6666%,
-    var(--g-blue) 83.3333%,
-    var(--g-indigo) 100%
-    );
+    background-image: linear-gradient(90deg, hsl(var(--c1)) 0%, hsl(var(--l3-c)) 100%);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
