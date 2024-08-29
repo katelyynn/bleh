@@ -442,7 +442,7 @@ body {
     --icon-16-info: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtaW5mbyI+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMTAiLz48cGF0aCBkPSJNMTIgMTZ2LTQiLz48cGF0aCBkPSJNMTIgOGguMDEiLz48L3N2Zz4=');
     --icon-16-revert: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtdW5kby0yIj48cGF0aCBkPSJNOSAxNCA0IDlsNS01Ii8+PHBhdGggZD0iTTQgOWgxMC41YTUuNSA1LjUgMCAwIDEgNS41IDUuNXYwYTUuNSA1LjUgMCAwIDEtNS41IDUuNUgxMSIvPjwvc3ZnPg==');
     --icon-16-grid: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtbGF5b3V0LWdyaWQiPjxyZWN0IHdpZHRoPSI3IiBoZWlnaHQ9IjciIHg9IjMiIHk9IjMiIHJ4PSIxIi8+PHJlY3Qgd2lkdGg9IjciIGhlaWdodD0iNyIgeD0iMTQiIHk9IjMiIHJ4PSIxIi8+PHJlY3Qgd2lkdGg9IjciIGhlaWdodD0iNyIgeD0iMTQiIHk9IjE0IiByeD0iMSIvPjxyZWN0IHdpZHRoPSI3IiBoZWlnaHQ9IjciIHg9IjMiIHk9IjE0IiByeD0iMSIvPjwvc3ZnPg==');
-    --icon-16-list: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtbGF5b3V0LWxpc3QiPjxyZWN0IHdpZHRoPSI3IiBoZWlnaHQ9IjciIHg9IjMiIHk9IjMiIHJ4PSIxIi8+PHJlY3Qgd2lkdGg9IjciIGhlaWdodD0iNyIgeD0iMyIgeT0iMTQiIHJ4PSIxIi8+PHBhdGggZD0iTTE0IDRoNyIvPjxwYXRoIGQ9Ik0xNCA5aDciLz48cGF0aCBkPSJNMTQgMTVoNyIvPjxwYXRoIGQ9Ik0xNCAyMGg3Ii8+PC9zdmc+');
+    --icon-16-list: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtbWVudSI+PGxpbmUgeDE9IjQiIHgyPSIyMCIgeTE9IjEyIiB5Mj0iMTIiLz48bGluZSB4MT0iNCIgeDI9IjIwIiB5MT0iNiIgeTI9IjYiLz48bGluZSB4MT0iNCIgeDI9IjIwIiB5MT0iMTgiIHkyPSIxOCIvPjwvc3ZnPg==');
     --icon-16-block: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtY2lyY2xlLXNsYXNoIj48bGluZSB4MT0iOSIgeDI9IjE1IiB5MT0iMTUiIHkyPSI5Ii8+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMTAiLz48L3N2Zz4=');
     --icon-16-warning: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtdHJpYW5nbGUtYWxlcnQiPjxwYXRoIGQ9Im0yMS43MyAxOC04LTE0YTIgMiAwIDAgMC0zLjQ4IDBsLTggMTRBMiAyIDAgMCAwIDQgMjFoMTZhMiAyIDAgMCAwIDEuNzMtMyIvPjxwYXRoIGQ9Ik0xMiA5djQiLz48cGF0aCBkPSJNMTIgMTdoLjAxIi8+PC9zdmc+');
     --icon-16-layout: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtbWVudSI+PGxpbmUgeDE9IjQiIHgyPSIyMCIgeTE9IjEyIiB5Mj0iMTIiLz48bGluZSB4MT0iNCIgeDI9IjIwIiB5MT0iNiIgeTI9IjYiLz48bGluZSB4MT0iNCIgeDI9IjIwIiB5MT0iMTgiIHkyPSIxOCIvPjwvc3ZnPg==');
@@ -1342,7 +1342,7 @@ last.fm changes as of 2024-05-20 */
 
 /*     GLOBAL CARD STYLES     */
 .bleh--panel,
-.col-main > section, .col-sidebar > section,
+.col-main > section:not(.neighbours-items-section), .col-sidebar > section,
 .your-progress-component,
 /* this fixes places of the site (tracks, artist, albums watever that use a weird method of 2 col-mains, 2 col-sidebars as appose to profiles */
 /* -> could be simplified, idk if it affects other parts of the site tho */.row.buffer-4 > .col-main:first-child /* <- */, .row.buffer-4 > .col-main:nth-child(3) > :is(section, #shoutbox),
@@ -1386,7 +1386,8 @@ body[class*="namespace--user_library_"] .col-sidebar, .library-header,
 /* set an obsession */ .obsession-search, .obsession-search-results,
 /* user did not scrobble album in date range */ .library-header + .message,
 /* no loved tracks */ .namespace--user_loved .no-data-message,
-/* no playlists */ .no-data-message--playlists
+/* no playlists */ .no-data-message--playlists,
+/* neighbours */ .friends-col-main
 {
     content: '';
     --override-background: hsl(var(--card-specific-background, var(--card-background, var(--b5))));
@@ -5620,6 +5621,7 @@ button:not(.playback-app-container button, .top-artist-list-item, .pixel, .liste
 
 
 /*     BUTTON HAS ICON     */
+.list-view-item,
 .btn--has-icon-left,
 .stationlink,
 .dropdown-menu-clickable-item, .auth-dropdown-menu-item,
@@ -5759,6 +5761,7 @@ button:not(.playback-app-container button, .top-artist-list-item, .pixel, .liste
 .user-list-inner-wrap .label:before,
 .nag-bar-message:before,
 /*     BLEH     */
+.list-view-item:before,
 .loading-data-text:before,
 .search-similar-btn:before,
 .btns .btn:before,
@@ -8496,6 +8499,83 @@ text[style^="color: rgb(0, 0, 0)"] {
 
 .user-list {
     margin: unset !important;
+
+    [data-bleh--list_view="1"] & {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+        gap: var(--card-gap);
+
+        .user-list-item {
+            border: unset !important;
+            padding: var(--button-list-gap);
+            border-radius: var(--item-med-radius);
+        }
+
+        .user-list-inner-wrap {
+            flex-direction: column;
+            align-items: unset;
+            gap: 0;
+            margin: unset;
+            height: 56px;
+            padding-left: calc(56px + 10px);
+
+            .user-list-avatar {
+                width: 56px;
+                height: 56px;
+                --mask-size: var(--cover-size-50);
+            }
+
+            .user-list-name {
+                margin: unset !important;
+            }
+            .user-list-description {
+                overflow: visible;
+                padding-right: calc(32px + 10px);
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .user-follow {
+                position: absolute;
+                top: calc(56px - 18px);
+                left: calc(56px - 18px);
+                z-index: 12;
+                width: calc(16px + (1px * 2));
+                height: calc(16px + (1px * 2));
+                padding: 1px !important;
+                background-color: hsl(var(--b5)) !important;
+
+                --margin-top: -7px;
+                --left: 1px;
+
+                .user-list-item:has(&) {
+                    background: hsla(var(--h4), 20%);
+
+                    .user-list-follower-btn {
+                        --bg: hsla(var(--h4), 0%);
+                        --bg-hov: hsla(var(--h4), 20%);
+                        --bg-atv: hsla(var(--h4), 20%);
+                        --shadow: none;
+                        --shadow-hov: none;
+
+                        .user-list-item:not(:hover) [data-toggle-button-current-state="followed"] & {
+                            --col: hsl(var(--l3-c));
+                        }
+                    }
+                }
+            }
+
+            .user-list-follower-btn {
+                top: 50%;
+                margin-top: -16px;
+                --bg: hsla(var(--b4), 0%);
+                --bg-hov: hsla(var(--b4), 40%);
+                --bg-atv: hsla(var(--b4), 60%);
+                --shadow: none;
+                --shadow-hov: none;
+            }
+        }
+    }
 }
 
 
@@ -8503,6 +8583,10 @@ text[style^="color: rgb(0, 0, 0)"] {
     display: flex !important;
     align-items: center;
     gap: var(--card-gap);
+
+    > * {
+        transition: all var(--trans) var(--trans-function);
+    }
 }
 
 .user-list-item:not(:has(.label.user-follow)) {
@@ -8516,7 +8600,7 @@ text[style^="color: rgb(0, 0, 0)"] {
 }
 
 .user-list-name a {
-    color: var(--override-link-col, hsl(var(--l3-c))) !important;
+    color: hsl(var(--l3-c)) !important;
 }
 .user-list-inner-wrap .label {
     order: -1;
@@ -8532,7 +8616,6 @@ text[style^="color: rgb(0, 0, 0)"] {
 
     .user-list-item:has(&) {
         background: linear-gradient(90deg, hsla(var(--h4), 20%) 0%, transparent 100%);
-        --override-link-col: hsl(var(--l2-c));
     }
 }
 
@@ -8562,9 +8645,9 @@ text[style^="color: rgb(0, 0, 0)"] {
     --shadow: none !important;
     --shadow-hov: none !important;
 }
-.user-list-item:hover .user-list-follower-btn {
-    transition: none !important;
-}
+/*.user-list-item:hover .user-list-follower-btn {
+    transition-property: none !important;
+}*/
 
 .user-list-name a, .listeners-section-item-name a, .top-listeners-item-name a {
     text-decoration: none !important;
@@ -13776,5 +13859,43 @@ button.bleh--gallery-bookmark-image-btn {
     from {
         transform: translateY(0);
         opacity: 1;
+    }
+}
+
+
+
+
+.view-buttons-wrapper {
+    display: flex;
+    justify-content: end;
+}
+.view-buttons {
+    display: flex;
+    gap: var(--button-list-gap);
+    padding: var(--button-list-gap);
+    background-color: hsl(var(--b6));
+    border-radius: var(--item-med-radius);
+    margin-bottom: var(--card-gap);
+
+    .btn:not([aria-checked="true"]) {
+        --bg: transparent;
+        --bg-hov: hsla(var(--b4), 40%);
+        --bg-atv: hsla(var(--b4), 60%);
+        --shadow: none;
+        --shadow-hov: none;
+    }
+
+    .list-view-item {
+        position: relative;
+        /*--font-size: 0;
+        --left: 8px;
+        width: 32px;*/
+
+        &[data-toggle-value="1"] {
+            --mask: var(--icon-16-grid);
+        }
+        &[data-toggle-value="0"] {
+            --mask: var(--icon-16-list);
+        }
     }
 }

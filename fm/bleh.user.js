@@ -16,7 +16,7 @@
 // ==/UserScript==
 
 let version = {
-    build: '2024.0829.2',
+    build: '2024.0829.3',
     sku: 'main',
     feature_flags: {}
 }
@@ -1055,7 +1055,8 @@ let settings_template = {
     rain: false,
     feature_flags: {},
     show_your_progress: true,
-    travis: false
+    travis: false,
+    list_view: 1
 };
 let settings_base = {
     hue: {
@@ -1171,6 +1172,12 @@ let settings_base = {
         value: false,
         values: [true, false],
         type: 'toggle'
+    },
+    list_view: {
+        css: 'list_view',
+        unit: '',
+        value: 0,
+        type: 'options'
     }
 };
 let inbuilt_settings = {
@@ -2670,9 +2677,9 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
 
         // create nav
-        let bookmark_nav = document.createElement('div');
-        bookmark_nav.classList.add('bleh--nav-wrap', 'bleh--friends-nav');
-        bookmark_nav.innerHTML = (`
+        let follow_nav = document.createElement('div');
+        follow_nav.classList.add('bleh--nav-wrap', 'bleh--friends-nav');
+        follow_nav.innerHTML = (`
             <nav class="navlist secondary-nav">
                 <ul class="navlist-items bleh--navlist-items">
                     ${following_tab_html}
@@ -2682,7 +2689,31 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             </nav>
         `);
 
-        adaptive_skin.insertBefore(bookmark_nav, page_content);
+        adaptive_skin.insertBefore(follow_nav, page_content);
+
+
+        // view-related buttons
+        let col_main = page_content.querySelector('.col-main');
+        if (col_main == null)
+            col_main = page_content.querySelector('.neighbours-items-section');
+
+        col_main.classList.add('friends-col-main');
+
+        let view_buttons = document.createElement('div');
+        view_buttons.classList.add('view-buttons-wrapper');
+        view_buttons.innerHTML = (`
+            <div class="view-buttons">
+                <button class="btn list-view-item" id="toggle-list_view-1" data-toggle="list_view" data-toggle-value="1" onclick="_update_item('list_view', 1)">
+                    Grid
+                </button>
+                <button class="btn list-view-item" id="toggle-list_view-0" data-toggle="list_view" data-toggle-value="0" onclick="_update_item('list_view', 0)">
+                    List
+                </button>
+            </div>
+        `);
+        col_main.insertBefore(view_buttons, col_main.firstElementChild);
+
+        refresh_all();
     }
 
 
@@ -4078,6 +4109,31 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     document.getElementById(`toggle-${item}`).setAttribute('aria-checked',true);
                 } else {
                     document.getElementById(`toggle-${item}`).setAttribute('aria-checked',false);
+                }
+            }
+        } else if (settings_base[item].type == 'options') {
+            if (modify) {
+                document.getElementById(`toggle-${item}-${value}`).setAttribute('aria-checked', true);
+                settings[item] = value;
+
+                let other_toggles = document.querySelectorAll(`[data-toggle="${item}"]`);
+                other_toggles.forEach((toggle) => {
+                    let other_value = toggle.getAttribute('data-toggle-value');
+                    if (other_value == value)
+                        return;
+                    else
+                        toggle.setAttribute('aria-checked', false);
+                });
+
+                // save setting into body
+                document.body.style.setProperty(`--${item}`, value);
+                document.documentElement.setAttribute(`data-bleh--${item}`, value);
+            } else {
+                // dont modify, just show
+                if (settings[item] == value) {
+                    document.getElementById(`toggle-${item}-${value}`).setAttribute('aria-checked', true);
+                } else {
+                    document.getElementById(`toggle-${item}-${value}`).setAttribute('aria-checked', false);
                 }
             }
         }
