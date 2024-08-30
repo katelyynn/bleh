@@ -443,7 +443,13 @@ const trans = {
         music: {
             submit_lastfm_correction: 'Submit correction to Last.fm',
             submit_bleh_correction: 'Submit correction to bleh',
-            search_variations: 'Search for variations of this title'
+            search_variations: 'Search for variations of this title',
+            fetch_plays: {
+                name: 'Tracklist',
+                loading: 'Fetching your plays on this album',
+                fail: 'You do not have any plays on this album',
+                open_as_track: 'Open album title as a track'
+            }
         },
         statistics: {
             scrobbles: {
@@ -455,7 +461,10 @@ const trans = {
         },
         profile: {
             cannot_follow_user: 'Nie możesz zaobserwować tego użytkownika.',
-            on_ignore_list: 'Jesteś na liście ignorowanych tego użytkownika.'
+            on_ignore_list: 'Jesteś na liście ignorowanych tego użytkownika.',
+            friends: {
+                name: 'Friends'
+            }
         },
         settings: {
             save: 'Zapisz',
@@ -465,6 +474,7 @@ const trans = {
             done: 'Gotowe',
             continue: 'Kontynuuj',
             reset: 'Przywróć domyślne',
+            go: 'Go',
             examples: {
                 button: 'Przycisk przykładowy'
             },
@@ -504,6 +514,7 @@ const trans = {
             },
             accessibility: {
                 name: 'Accessibility',
+                shout_preview: 'jakikolwiek losowy tekst, który <a href="https://cutensilly.org">nic nie znaczy</a>',
                 accessible_name_colours: {
                     name: 'Preferowane kolory dostępnej nazwy',
                     bio: 'Użyj domyślnego koloru tekstu nagłówka zamiast koloru akcentowego.'
@@ -537,16 +548,11 @@ const trans = {
                     bio: 'Dodaj odblasku do wszystkich okładek.'
                 },
                 display: {
-                    name: 'Wyświetlacz',
-                    shout_preview: 'jakikolwiek losowy tekst, który <a href="https://cutensilly.org">nic nie znaczy</a>'
+                    name: 'Wyświetlacz'
                 },
                 colourful_counts: {
                     name: 'Użyj gradientu kolorów dla wszystkich czasów rankingów',
                     bio: 'Kolor jest przypisywany na podstawie twojej pozycji w wszechczasowych statystykach artystów.'
-                },
-                format_guest_features: {
-                    name: 'Formatuj występy i tagi utworów',
-                    bio: 'Mniej eksponuje występy i tagi utworów (np. Remix, Deluxe Edition, itp.)'
                 },
                 gendered_tags: {
                     name: 'Ukryj tagi związane z płcią',
@@ -555,6 +561,10 @@ const trans = {
                 rain: {
                     name: 'Niech pada!',
                     bio: 'deszcz :3c (może wpływać na wydajność!! może też wyglądać źle!!)'
+                },
+                show_your_progress: {
+                    name: 'Show your weekly progress',
+                    bio: 'too many numbers ~w~'
                 }
             },
             performance: {
@@ -585,6 +595,10 @@ const trans = {
                             alert: 'Gotowe! Od teraz motyw będzie obsługiwany za pomocą Stylus.'
                         }
                     }
+                },
+                bug: {
+                    name: 'Something wrong?',
+                    bio: 'Report a bug in the bleh repo to get it fixed.'
                 }
             },
             profiles: {
@@ -598,6 +612,60 @@ const trans = {
                     delete: 'Usuń notatkę',
                     edit_user: 'Edytuj notatkę dla {u}',
                     delete_user: 'Usuń notatkę dla {u}'
+                }
+            },
+            redirects: {
+                name: 'Redirects',
+                bio: 'Manage last.fm\'s (not) handy redirection system as best as possible.',
+                travis: {
+                    name: 'No, I didn\'t mean Travi$ Scott',
+                    bio: 'Hides redirect messages from the top of pages.'
+                },
+                autocorrect: {
+                    name: 'Scrobble auto-correction',
+                    bio: 'By default, last.fm will \'auto-correct\' some of your scrobbles using this system. This will make your scrobbles appear as <i>Travis Scott</i> rather than <i>Travi$ Scott</i>, however the redirection system is not fully disabled.',
+                    action: 'Open Settings'
+                }
+            },
+            corrections: {
+                name: 'Corrections',
+                bio: 'Manage bleh\'s in-built correction system for artist, album, and track titles.',
+                toggle: {
+                    name: 'Enable the correction system'
+                },
+                format_guest_features: {
+                    name: 'Formatuj występy i tagi utworów',
+                    bio: 'Mniej eksponuje występy i tagi utworów (np. Remix, Deluxe Edition, itp.)'
+                },
+                submit: {
+                    name: 'Submit new correction',
+                    bio: 'Have an artist, album, or track name that you feel is capitalised wrong?',
+                    action: 'Submit'
+                },
+                listing: {
+                    artists: 'Artists',
+                    albums_tracks: 'Albums and tracks'
+                }
+            },
+            language: {
+                name: 'Language',
+                bio: 'bleh aims to support alongside last.fm\'s native translation system, powered by community contributions. It\'s still early days but contributions are very appreciated!',
+                by: 'by {users}',
+                submit: {
+                    name: 'Are you fluent in another language?',
+                    bio: 'Translations are community-contributed and greatly appreciated for everyone.',
+                    action: 'Submit translation'
+                }
+            },
+            text: {
+                name: 'Text',
+                shout_preview_md: 'jakikolwiek <strong>losowy</strong> tekst,<br>który <a href="https://cutensilly.org">nic nie znaczy</a>',
+                shout_preview: 'jakikolwiek losowy tekst, który nic nie znaczy',
+                markdown: {
+                    name: 'Use markdown formatting',
+                    bio: 'Enables line-breaks, bold, italics, and links.',
+                    shouts: 'In shouts',
+                    profile: 'In profile bios'
                 }
             },
             inbuilt: {
