@@ -231,7 +231,7 @@ const trans = {
                 },
                 format_guest_features: {
                     name: 'Format guest features and song tags',
-                    bio: 'Visually places less priority on song features & tags (eg. Remix, Deluxe Edition, etc.)'
+                    bio: 'Visually places less priority on song features and tags (eg. Remix, Deluxe Edition, etc.)'
                 },
                 submit: {
                     name: 'Submit new correction',
@@ -3916,6 +3916,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                             <a class="btn bleh--btn primary" href="https://github.com/katelyynn/bleh/issues/new/choose" target="_blank">${trans[lang].settings.corrections.submit.action}</a>
                         </div>
                     </div>
+                    <div class="sep"></div>
                     <div class="inner-preview pad flex">
                         <table class="chartlist chartlist--with-index chartlist--with-index--length-2 chartlist--with-image chartlist--with-play chartlist--with-artist chartlist--with-bar">
                             <tbody>
