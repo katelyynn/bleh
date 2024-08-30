@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         bleh
 // @namespace    http://last.fm/
-// @version      2024.0829
+// @version      2024.0830
 // @description  bleh!!! ^-^
 // @author       kate
 // @match        https://www.last.fm/*
@@ -16,7 +16,7 @@
 // ==/UserScript==
 
 let version = {
-    build: '2024.0829.3',
+    build: '2024.0830',
     sku: 'main',
     feature_flags: {}
 }
