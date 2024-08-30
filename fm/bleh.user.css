@@ -2361,7 +2361,6 @@ elements, this is how we detect its missing */
             display: block;
             width: 32px;
             height: 32px;
-            background-color: hsl(var(--b4));
             border-radius: var(--item-med-radius);
         }
 

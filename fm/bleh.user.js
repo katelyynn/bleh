@@ -4269,7 +4269,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
             lang_row.innerHTML = (`
             <div class="flag-container">
-
+                <img src="https://katelyynn.github.io/bleh/fm/flags/${language}.svg" alt="flag for ${language}">
             </div>
             <div class="name">
                 <h5>${lang_info[language].name}</h5>
