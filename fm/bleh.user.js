@@ -2895,7 +2895,12 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             if (!shout.hasAttribute('data-kate-processed')) {
                 shout.setAttribute('data-kate-processed', 'true');
 
-                let shout_name = shout.querySelector('.shout-user a').textContent;
+                let shout_name = shout.querySelector('.shout-user a');
+
+                if (shout_name == null)
+                    return;
+                shout_name = shout_name.textContent;
+
                 let shout_avatar = shout.querySelector('.shout-user-avatar');
 
                 patch_avatar(shout_avatar, shout_name);
