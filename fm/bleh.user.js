@@ -730,7 +730,6 @@ let artist_corrections = {
     'Lieu': 'lieu',
     'Funeral': 'funeral',
     'Kuru': 'kuru',
-    'idkwhyy': 'Reposters #suck',
     'Quinn': 'quinn',
     'Charli XCX': 'Charli xcx',
     'Underscores': 'underscores',
