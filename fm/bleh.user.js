@@ -4265,7 +4265,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
             let users = '';
             for (let user in lang_info[language].by)
-                users = `<a class="mention" href="${root}user${lang_info[language].by[user]}" target="_blank">@${lang_info[language].by[user]}</a> `;
+                users = `<a class="mention" href="${root}user/${lang_info[language].by[user]}" target="_blank">@${lang_info[language].by[user]}</a> `;
 
             lang_row.innerHTML = (`
             <div class="flag-container">
