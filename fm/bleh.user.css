@@ -2284,6 +2284,65 @@ elements, this is how we detect its missing */
 }
 
 
+
+
+/*     MANAGE CORRECTIONS     */
+.corrections {
+    display: flex;
+    flex-direction: column;
+    margin: -7px 0;
+
+    .artist-row {
+        padding: 7px 0;
+
+        /*&:not(:first-child) {
+            border-top: var(--card-border);
+        }*/
+        &:not(:first-child) {
+            margin-top: calc(var(--card-gap) - 7px);
+        }
+    }
+
+    .correction-row {
+        display: flex;
+        align-items: center;
+        gap: var(--card-gap);
+        padding: 7px 0;
+
+        .primary-name {
+            flex: 1;
+            display: -webkit-box;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            line-clamp: 1;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+
+            &.pre-transition h5 {
+                color: hsl(var(--c3));
+            }
+        }
+
+        .arrow-divider {
+            position: relative;
+            color: hsl(var(--c3));
+            --mask: var(--icon-16-arrow-right);
+            --left: 0;
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+            display: block;
+        }
+
+        & + .correction-row {
+            border-top: var(--card-border);
+        }
+    }
+}
+
+
+
+
 /* no featured track, leave space for message button box instead */
 .header--overview:not(:has(.header-featured-track)):has(.header-message-user) + .adaptive-skin-container .col-sidebar {
     padding-top: calc(138px + 33px - 82px) !important;
@@ -5772,6 +5831,7 @@ button:not(.playback-app-container button, .top-artist-list-item, .pixel, .liste
 .user-list-inner-wrap .label:before,
 .nag-bar-message:before,
 /*     BLEH     */
+.arrow-divider:before,
 .list-view-item:before,
 .loading-data-text:before,
 .search-similar-btn:before,

@@ -3965,6 +3965,9 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             refresh_all();
         else if (page == 'profiles')
             init_profile_notes();
+
+        if (page == 'corrections')
+            prepare_corrections_page();
     }
 
     function show_theme_change_in_settings(theme = '') {
@@ -4063,6 +4066,59 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
         localStorage.setItem('bleh_profile_notes',JSON.stringify(profile_notes));
         kill_window('edit_profile_note');
+    }
+
+
+
+
+    function prepare_corrections_page() {
+        let corrections_table_artist = document.getElementById('corrections-artist');
+
+        for (let artist in artist_corrections) {
+            let correction = document.createElement('div');
+            correction.classList.add('correction-row');
+            correction.innerHTML = (`
+            <div class="primary-name pre-transition">
+                <h5>${artist}</h5>
+            </div>
+            <div class="arrow-divider"></div>
+            <div class="primary-name post-transition">
+                <h5>${artist_corrections[artist]}</h5>
+            </div>
+            `);
+
+            corrections_table_artist.appendChild(correction);
+        }
+
+        //
+
+        let corrections_table_albums_tracks = document.getElementById('corrections-albums_tracks');
+
+        for (let artist in song_title_corrections) {
+            let artist_row = document.createElement('div');
+            artist_row.classList.add('artist-row');
+            artist_row.innerHTML = (`
+                <h5>${artist}</h5>
+            `);
+
+            corrections_table_albums_tracks.appendChild(artist_row);
+
+            for (let media in song_title_corrections[artist]) {
+                let correction = document.createElement('div');
+                correction.classList.add('correction-row');
+                correction.innerHTML = (`
+                <div class="primary-name pre-transition">
+                    <h5>${media}</h5>
+                </div>
+                <div class="arrow-divider"></div>
+                <div class="primary-name post-transition">
+                    <h5>${song_title_corrections[artist][media]}</h5>
+                </div>
+                `);
+
+                corrections_table_albums_tracks.appendChild(correction);
+            }
+        }
     }
 
 
