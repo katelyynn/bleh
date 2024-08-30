@@ -1640,7 +1640,6 @@ article, section, .buffer-standard, .buffer-standard:not(.col-sidebar) .buffer-s
 /* border if default background is present */
 .video-preview-upload-cta.link-block, p.album-artwork-upload-cta {
     border: var(--card-border) !important;
-    border-bottom: 1px solid hsla(var(--b3), 0.7) !important;
 }
 
 /* take up full space */

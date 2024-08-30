@@ -458,7 +458,8 @@ body {
     --icon-16-switch-device: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtbW9uaXRvci1zcGVha2VyIj48cGF0aCBkPSJNNS41IDIwSDgiLz48cGF0aCBkPSJNMTcgOWguMDEiLz48cmVjdCB3aWR0aD0iMTAiIGhlaWdodD0iMTYiIHg9IjEyIiB5PSI0IiByeD0iMiIvPjxwYXRoIGQ9Ik04IDZINGEyIDIgMCAwIDAtMiAydjZhMiAyIDAgMCAwIDIgMmg0Ii8+PGNpcmNsZSBjeD0iMTciIGN5PSIxNSIgcj0iMSIvPjwvc3ZnPg==');
     --icon-16-view: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtdmlldyI+PHBhdGggZD0iTTUgMTJzMi41NDUtNSA3LTVjNC40NTQgMCA3IDUgNyA1cy0yLjU0NiA1LTcgNWMtNC40NTUgMC03LTUtNy01eiIvPjxwYXRoIGQ9Ik0xMiAxM2ExIDEgMCAxIDAgMC0yIDEgMSAwIDAgMCAwIDJ6Ii8+PHBhdGggZD0iTTIxIDE3djJhMiAyIDAgMCAxLTIgMkg1YTIgMiAwIDAgMS0yLTJ2LTIiLz48cGF0aCBkPSJNMjEgN1Y1YTIgMiAwIDAgMC0yLTJINWEyIDIgMCAwIDAtMiAydjIiLz48L3N2Zz4=');
     --icon-16-spinner: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtbG9hZGVyLWNpcmNsZSI+PHBhdGggZD0iTTIxIDEyYTkgOSAwIDEgMS02LjIxOS04LjU2Ii8+PC9zdmc+');
-    --icon-16-refresh: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtcmVmcmVzaC1jdyI+PHBhdGggZD0iTTMgMTJhOSA5IDAgMCAxIDktOSA5Ljc1IDkuNzUgMCAwIDEgNi43NCAyLjc0TDIxIDgiLz48cGF0aCBkPSJNMjEgM3Y1aC01Ii8+PHBhdGggZD0iTTIxIDEyYTkgOSAwIDAgMS05IDkgOS43NSA5Ljc1IDAgMCAxLTYuNzQtMi43NEwzIDE2Ii8+PHBhdGggZD0iTTggMTZIM3Y1Ii8+PC9zdmc+');
+    --icon-16-refresh: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtcm90YXRlLWN3Ij48cGF0aCBkPSJNMjEgMTJhOSA5IDAgMSAxLTktOWMyLjUyIDAgNC45MyAxIDYuNzQgMi43NEwyMSA4Ii8+PHBhdGggZD0iTTIxIDN2NWgtNSIvPjwvc3ZnPg==');
+    --icon-16-refresh-music: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtbGlzdC1yZXN0YXJ0Ij48cGF0aCBkPSJNMjEgNkgzIi8+PHBhdGggZD0iTTcgMTJIMyIvPjxwYXRoIGQ9Ik03IDE4SDMiLz48cGF0aCBkPSJNMTIgMThhNSA1IDAgMCAwIDktMyA0LjUgNC41IDAgMCAwLTQuNS00LjVjLTEuMzMgMC0yLjU0LjU0LTMuNDEgMS40MUwxMSAxNCIvPjxwYXRoIGQ9Ik0xMSAxMHY0aDQiLz48L3N2Zz4=');
     --icon-16-themes: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtc3dhdGNoLWJvb2siPjxwYXRoIGQ9Ik0xMSAxN2E0IDQgMCAwIDEtOCAwVjVhMiAyIDAgMCAxIDItMmg0YTIgMiAwIDAgMSAyIDJaIi8+PHBhdGggZD0iTTE2LjcgMTNIMTlhMiAyIDAgMCAxIDIgMnY0YTIgMiAwIDAgMS0yIDJINyIvPjxwYXRoIGQ9Ik0gNyAxN2gwLjAxIi8+PHBhdGggZD0ibTExIDggMi4zLTIuM2EyLjQgMi40IDAgMCAxIDMuNDA0LjAwNEwxOC42IDcuNmEyLjQgMi40IDAgMCAxIC4wMjYgMy40MzRMOS45IDE5LjgiLz48L3N2Zz4=');
     --icon-16-palette: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtcGFsZXR0ZSI+PGNpcmNsZSBjeD0iMTMuNSIgY3k9IjYuNSIgcj0iLjUiIGZpbGw9ImN1cnJlbnRDb2xvciIvPjxjaXJjbGUgY3g9IjE3LjUiIGN5PSIxMC41IiByPSIuNSIgZmlsbD0iY3VycmVudENvbG9yIi8+PGNpcmNsZSBjeD0iOC41IiBjeT0iNy41IiByPSIuNSIgZmlsbD0iY3VycmVudENvbG9yIi8+PGNpcmNsZSBjeD0iNi41IiBjeT0iMTIuNSIgcj0iLjUiIGZpbGw9ImN1cnJlbnRDb2xvciIvPjxwYXRoIGQ9Ik0xMiAyQzYuNSAyIDIgNi41IDIgMTJzNC41IDEwIDEwIDEwYy45MjYgMCAxLjY0OC0uNzQ2IDEuNjQ4LTEuNjg4IDAtLjQzNy0uMTgtLjgzNS0uNDM3LTEuMTI1LS4yOS0uMjg5LS40MzgtLjY1Mi0uNDM4LTEuMTI1YTEuNjQgMS42NCAwIDAgMSAxLjY2OC0xLjY2OGgxLjk5NmMzLjA1MSAwIDUuNTU1LTIuNTAzIDUuNTU1LTUuNTU0QzIxLjk2NSA2LjAxMiAxNy40NjEgMiAxMiAyeiIvPjwvc3ZnPg==');
     --icon-16-moon: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtbW9vbiI+PHBhdGggZD0iTTEyIDNhNiA2IDAgMCAwIDkgOSA5IDkgMCAxIDEtOS05WiIvPjwvc3ZnPg==');
@@ -473,6 +474,7 @@ body {
     --icon-16-followers: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtYXJyb3ctZG93bi10by1kb3QiPjxwYXRoIGQ9Ik0xMiAydjE0Ii8+PHBhdGggZD0ibTE5IDktNyA3LTctNyIvPjxjaXJjbGUgY3g9IjEyIiBjeT0iMjEiIHI9IjEiLz48L3N2Zz4=');
     --icon-16-neighbours: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtZ2l0LWNvbXBhcmUiPjxjaXJjbGUgY3g9IjE4IiBjeT0iMTgiIHI9IjMiLz48Y2lyY2xlIGN4PSI2IiBjeT0iNiIgcj0iMyIvPjxwYXRoIGQ9Ik0xMyA2aDNhMiAyIDAgMCAxIDIgMnY3Ii8+PHBhdGggZD0iTTExIDE4SDhhMiAyIDAgMCAxLTItMlY5Ii8+PC9zdmc+');
     --icon-16-dev: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtY29kZSI+PHBvbHlsaW5lIHBvaW50cz0iMTYgMTggMjIgMTIgMTYgNiIvPjxwb2x5bGluZSBwb2ludHM9IjggNiAyIDEyIDggMTgiLz48L3N2Zz4=');
+    --icon-16-accessibility: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtcGVyc29uLXN0YW5kaW5nIj48Y2lyY2xlIGN4PSIxMiIgY3k9IjUiIHI9IjEiLz48cGF0aCBkPSJtOSAyMCAzLTYgMyA2Ii8+PHBhdGggZD0ibTYgOCA2IDIgNi0yIi8+PHBhdGggZD0iTTEyIDEwdjQiLz48L3N2Zz4=');
 
     --icon-20-check: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImhzbCgyNTUsMjAlLDkwJSkiIHN0cm9rZS13aWR0aD0iMi4yNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1jaGVjayI+PHBhdGggZD0iTTIwIDYgOSAxN2wtNS01Ii8+PC9zdmc+');
     --icon-20-plus: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImhzbCgyNTUsMjAlLDkwJSkiIHN0cm9rZS13aWR0aD0iMi4yNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1wbHVzIj48cGF0aCBkPSJNNSAxMmgxNCIvPjxwYXRoIGQ9Ik0xMiA1djE0Ii8+PC9zdmc+');
@@ -1171,6 +1173,9 @@ last.fm changes as of 2024-05-20 */
     margin-right: unset;
     display: flex;
 }
+.footer-bottom .row {
+    flex-direction: column;
+}
 .footer-bottom .row .col-sm-10 {
     width: max-content;
 }
@@ -1207,10 +1212,9 @@ last.fm changes as of 2024-05-20 */
 
 
 #language-selector, .footer-timezone {
-    padding-left: calc(16px + 6px);
+    padding-left: calc(var(--button-list-gap) + 16px + var(--button-list-gap)) !important;
     position: relative;
-    display: flex;
-    --left: 0 !important;
+    --left: var(--button-list-gap) !important;
 }
 .footer #language-selector {
     --mask: var(--icon-16-language);
@@ -1225,12 +1229,6 @@ last.fm changes as of 2024-05-20 */
 
 .footer .footer-language {
     margin-right: unset;
-}
-.footer-language strong {
-    padding: var(--padding, 7px 12px) !important;
-    display: inline-block;
-    height: 32px;
-    font-weight: var(--font-weight-medium) !important;
 }
 .footer-language-form .mimic-link, #ot-sdk-btn, .footer-links a, .footer-links button, .footer-timezone a {
     --bg: transparent !important;
@@ -1632,7 +1630,6 @@ article, section, .buffer-standard, .buffer-standard:not(.col-sidebar) .buffer-s
 /* border if default background is present */
 .video-preview-upload-cta.link-block, p.album-artwork-upload-cta {
     border: var(--card-border) !important;
-    border-bottom: 1px solid hsla(var(--b3), 0.7) !important;
 }
 
 /* take up full space */
@@ -2225,6 +2222,10 @@ elements, this is how we detect its missing */
             line-clamp: 1;
             -webkit-line-clamp: 1;
             -webkit-box-orient: vertical;
+
+            h5 {
+                color: hsl(var(--c2));
+            }
         }
 
         .note-preview {
@@ -2308,6 +2309,10 @@ elements, this is how we detect its missing */
             -webkit-line-clamp: 1;
             -webkit-box-orient: vertical;
 
+            &.post-transition h5 {
+                color: hsl(var(--c2));
+            }
+
             &.pre-transition h5 {
                 color: hsl(var(--c3));
             }
@@ -2325,6 +2330,66 @@ elements, this is how we detect its missing */
         }
 
         & + .correction-row {
+            border-top: var(--card-border);
+        }
+    }
+}
+
+
+
+
+/*     LANGUAGES     */
+.languages {
+    display: flex;
+    flex-direction: column;
+    margin: -7px 0;
+
+    .language-row {
+        display: flex;
+        align-items: center;
+        gap: var(--card-gap);
+        padding: 7px 0;
+
+        .flag-container {
+            display: block;
+            width: 32px;
+            height: 32px;
+            border-radius: var(--item-med-radius);
+        }
+
+        .name {
+            width: 100%;
+            max-width: 600px;
+            /*width: 200px;
+            display: -webkit-box;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            line-clamp: 1;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;*/
+            display: flex;
+            flex-direction: column;
+
+            h5 {
+                color: hsl(var(--c2));
+            }
+            p {
+                color: hsla(var(--c2), 80%);
+            }
+        }
+
+        .date {
+            flex-shrink: 0;
+            color: hsl(var(--c3));
+            display: -webkit-box;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            line-clamp: 1;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+        }
+
+        & + .language-row {
             border-top: var(--card-border);
         }
     }
@@ -5508,7 +5573,7 @@ button:not(.playback-app-container button, .top-artist-list-item, .pixel, .liste
 .gallery-image-report--reported,
 .listening-report-library-link, .listening-report-promo,
 #ot-sdk-btn,
-.footer-links a, .footer-timezone a,
+.footer-links a, .footer-timezone strong,
 .library-search-results li,
 .resource-external-link, .play-this-track-playlink, .replace-playlink,
 .shout-more-replies-before,
@@ -5532,7 +5597,8 @@ button:not(.playback-app-container button, .top-artist-list-item, .pixel, .liste
 /* track love button in other's library */ .love-button,
 /* go to tag page for a user tag */ .col-main > p > [href^="/tag/"],
 /* gallery upload artwork breadcrumbs */ a:has(+ .js-gallery-heading), .js-gallery-heading,
-.chartlist-play-button
+.chartlist-play-button,
+.footer-language :is(strong, button)
 {
     --bg: hsl(var(--b4));
     --bg-hov: hsla(var(--b4), 80%);
@@ -11338,6 +11404,15 @@ so this is good enough - use the community docs */
                 &[data-bleh-page="corrections"] {
                     --mask: var(--icon-16-correction);
                 }
+                &[data-bleh-page="accessibility"] {
+                    --mask: var(--icon-16-accessibility);
+                }
+                &[data-bleh-page="language"] {
+                    --mask: var(--icon-16-language);
+                }
+                &[data-bleh-page="text"] {
+                    --mask: var(--icon-16-shoutbox);
+                }
 
                 &:not(.active) {
                     --bg: transparent;
@@ -12027,6 +12102,10 @@ input[type="range"]::-moz-range-progress {
     justify-content: center;
     width: 100%;
 
+    h5 {
+        color: hsl(var(--c2));
+    }
+
     p {
         font-size: 12px;
         color: hsl(var(--c3));
@@ -12558,12 +12637,13 @@ input[type="range"]::-moz-range-progress {
     --left: 4px;
     --mask-size: 14px;
 }
+.mention,
 :is(.shout-body, .about-me-sidebar, .bleh--about-me-preview) a[href^="/user/"] {
     padding: 0 4px;
     background-color: hsla(var(--h4), 20%);
     border-radius: var(--item-small-radius);
     font-weight: var(--font-weight-medium);
-    text-decoration: none;
+    text-decoration: none !important;
 }
 :is(.shout-body, .about-me-sidebar, .bleh--about-me-preview) a[href^="https://open.spotify.com/user/"] {
     padding: 0 4px 0 calc(4px + 14px + 4px);
@@ -13945,6 +14025,8 @@ button.bleh--gallery-bookmark-image-btn {
     display: flex;
     justify-content: end;
 }
+.footer-timezone,
+#language-selector,
 .view-buttons {
     display: flex;
     gap: var(--button-list-gap);
@@ -13953,6 +14035,23 @@ button.bleh--gallery-bookmark-image-btn {
     border-radius: var(--item-med-radius);
     margin-bottom: var(--card-gap);
 
+    .footer-language {
+        display: flex;
+    }
+    &#language-selector {
+        margin-bottom: var(--button-list-gap);
+    }
+    &.footer-timezone {
+        a {
+            display: flex;
+            align-items: center;
+            /*gap: var(--button-list-gap);*/
+            font-size: 0;
+            width: fit-content;
+        }
+    }
+
+    .footer-language .mimic-link,
     .btn:not([aria-checked="true"]) {
         --bg: transparent;
         --bg-hov: hsla(var(--b4), 40%);
@@ -13973,5 +14072,27 @@ button.bleh--gallery-bookmark-image-btn {
         &[data-toggle-value="0"] {
             --mask: var(--icon-16-list);
         }
+    }
+}
+
+
+
+
+[data-bleh--shout_markdown="false"] .if-markdown-on,
+[data-bleh--shout_markdown="true"] .if-markdown-off {
+    display: none;
+}
+
+
+
+
+.personal-stats-preview-bar {
+    display: block;
+    height: 24px;
+    width: 100%;
+    border-radius: var(--item-big-radius);
+
+    [data-bleh--colourful_counts="false"] & {
+        background: hsl(var(--h3)) !important;
     }
 }
