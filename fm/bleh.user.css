@@ -2233,6 +2233,10 @@ elements, this is how we detect its missing */
             line-clamp: 1;
             -webkit-line-clamp: 1;
             -webkit-box-orient: vertical;
+
+            h5 {
+                color: hsl(var(--c2));
+            }
         }
 
         .note-preview {
@@ -2316,6 +2320,10 @@ elements, this is how we detect its missing */
             -webkit-line-clamp: 1;
             -webkit-box-orient: vertical;
 
+            &.post-transition h5 {
+                color: hsl(var(--c2));
+            }
+
             &.pre-transition h5 {
                 color: hsl(var(--c3));
             }
@@ -2372,6 +2380,13 @@ elements, this is how we detect its missing */
             -webkit-box-orient: vertical;*/
             display: flex;
             flex-direction: column;
+
+            h5 {
+                color: hsl(var(--c2));
+            }
+            p {
+                color: hsla(var(--c2), 80%);
+            }
         }
 
         .date {
@@ -12097,6 +12112,10 @@ input[type="range"]::-moz-range-progress {
     flex-direction: column;
     justify-content: center;
     width: 100%;
+
+    h5 {
+        color: hsl(var(--c2));
+    }
 
     p {
         font-size: 12px;
