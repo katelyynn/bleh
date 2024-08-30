@@ -21,11 +21,15 @@ let version = {
     feature_flags: {}
 }
 
+// loads your selected language in last.fm
 let lang = document.documentElement.getAttribute('lang');
+// WARN: fill this out if translating
+// lists all languages with valid bleh translations
+// any custom translations will not load if not listed here!!
 let valid_langs = ['en', 'pl'];
 
 if (!valid_langs.includes(lang)) {
-    console.info('bleh - language fallback from', lang, 'to en (lang is not listed as valid)', valid_langs);
+    console.info('bleh - language fallback from', lang, 'to en (language is not listed as valid)', valid_langs);
     lang = 'en';
 }
 
@@ -110,6 +114,7 @@ const trans = {
             },
             accessibility: {
                 name: 'Accessibility',
+                shout_preview: 'some completely random text that doesn\'t mean <a href="https://cutensilly.org">anything at all</a>',
                 accessible_name_colours: {
                     name: 'Prefer accessible name colours',
                     bio: 'Use the default header text colour over a accented text colour.'
@@ -143,8 +148,7 @@ const trans = {
                     bio: 'Apply flair to all cover arts.'
                 },
                 display: {
-                    name: 'Display',
-                    shout_preview: 'some completely random text that doesn\'t mean <a href="https://cutensilly.org">anything at all</a>'
+                    name: 'Display'
                 },
                 colourful_counts: {
                     name: 'Use a colour gradient for all-time charts',
@@ -241,6 +245,38 @@ const trans = {
                 listing: {
                     artists: 'Artists',
                     albums_tracks: 'Albums and tracks'
+                }
+            },
+            language: {
+                name: 'Language',
+                bio: 'bleh aims to support alongside last.fm\'s native translation system, powered by community contributions. It\'s still early days but contributions are very appreciated!',
+                listing: {
+                    en: {
+                        name: 'English',
+                        by: ['cutensilly'],
+                        last_updated: 'latest'
+                    },
+                    pl: {
+                        name: 'Polski',
+                        by: ['twolay'],
+                        last_updated:  '2024-06-17'
+                    }
+                },
+                submit: {
+                    name: 'Are you fluent in another language?',
+                    bio: 'Translations are community-contributed and greatly appreciated for everyone.',
+                    action: 'Submit translation'
+                }
+            },
+            text: {
+                name: 'Text',
+                shout_preview_md: 'some <strong>completely</strong> random!<br>text that doesn\'t mean <a href="https://cutensilly.org">anything at all</a>',
+                shout_preview: 'some completely random! text that doesn\'t mean anything at all',
+                markdown: {
+                    name: 'Use markdown formatting',
+                    bio: 'Enables line-breaks, bold, italics, and links.',
+                    shouts: 'In shouts',
+                    profile: 'In profile bios'
                 }
             },
             inbuilt: {
@@ -1087,7 +1123,9 @@ let settings_template = {
     feature_flags: {},
     show_your_progress: true,
     travis: false,
-    list_view: 1
+    list_view: 1,
+    shout_markdown: true,
+    bio_markdown: true
 };
 let settings_base = {
     hue: {
@@ -1216,6 +1254,20 @@ let settings_base = {
         unit: '',
         value: 0,
         type: 'options'
+    },
+    shout_markdown: {
+        css: 'shout_markdown',
+        unit: '',
+        value: true,
+        values: [true, false],
+        type: 'toggle'
+    },
+    bio_markdown: {
+        css: 'bio_markdown',
+        unit: '',
+        value: true,
+        values: [true, false],
+        type: 'toggle'
     }
 };
 let inbuilt_settings = {
@@ -2413,6 +2465,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
     // patch profile pages
     function patch_profile(element) {
+        let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
         let profile_header = element.querySelector('.header-title-label-wrap');
 
         if (profile_header == undefined)
@@ -2534,37 +2587,39 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         if (!about_me_sidebar.hasAttribute('data-kate-processed')) {
             about_me_sidebar.setAttribute('data-kate-processed','true');
 
-            // parse body
-            let about_me_text = about_me_sidebar.querySelector('p');
-            let converter = new showdown.Converter({
-                emoji: true,
-                excludeTrailingPunctuationFromURLs: true,
-                ghMentions: true,
-                ghMentionsLink: '/user/{u}',
-                headerLevelStart: 5,
-                noHeaderId: true,
-                openLinksInNewWindow: true,
-                requireSpaceBeforeHeadingText: true,
-                simpleLineBreaks: true,
-                simplifiedAutoLink: true,
-                strikethrough: true,
-                underline: true,
-                ghCodeBlocks: false,
-                smartIndentationFix: true
-            });
-            let parsed_body = converter.makeHtml(about_me_text.textContent
-            .replace(/([@])([a-zA-Z0-9_]+)/g, '[$1$2](/user/$2)')
-            .replace(/\[artist\]([a-zA-Z0-9]+)\[\/artist\]/g, '[$1](/music/$1)')
-            .replace(/\[album artist=([a-zA-Z0-9]+)\]([a-zA-Z0-9\s]+)\[\/album\]/g, '[$2](/music/$1/$2)')
-            .replace(/\[track artist=([a-zA-Z0-9]+)\]([a-zA-Z0-9\s]+)\[\/track\]/g, '[$2](/music/$1/_/$2)')
-            .replace(/https:\/\/open\.spotify\.com\/user\/([A-Za-z0-9]+)/g, '[@$1](https://open.spotify.com/user/$1)')
-            .replace(/https:\/\/open\.spotify\.com\/user\/([A-Za-z0-9]+)\?si=([A-Za-z0-9]+)/g, '[@$1](https://open.spotify.com/user/$1)')
-            .replace(/&/g, '&amp;')
-            .replace(/</g, '&lt;')
-            .replace(/>/g, '&gt;')
-            .replace(/"/g, '&quot;')
-            .replace(/'/g, '&#039;'));
-            about_me_text.innerHTML = parsed_body;
+            if (settings.bio_markdown) {
+                // parse body
+                let about_me_text = about_me_sidebar.querySelector('p');
+                let converter = new showdown.Converter({
+                    emoji: true,
+                    excludeTrailingPunctuationFromURLs: true,
+                    ghMentions: true,
+                    ghMentionsLink: '/user/{u}',
+                    headerLevelStart: 5,
+                    noHeaderId: true,
+                    openLinksInNewWindow: true,
+                    requireSpaceBeforeHeadingText: true,
+                    simpleLineBreaks: true,
+                    simplifiedAutoLink: true,
+                    strikethrough: true,
+                    underline: true,
+                    ghCodeBlocks: false,
+                    smartIndentationFix: true
+                });
+                let parsed_body = converter.makeHtml(about_me_text.textContent
+                .replace(/([@])([a-zA-Z0-9_]+)/g, '[$1$2](/user/$2)')
+                .replace(/\[artist\]([a-zA-Z0-9]+)\[\/artist\]/g, '[$1](/music/$1)')
+                .replace(/\[album artist=([a-zA-Z0-9]+)\]([a-zA-Z0-9\s]+)\[\/album\]/g, '[$2](/music/$1/$2)')
+                .replace(/\[track artist=([a-zA-Z0-9]+)\]([a-zA-Z0-9\s]+)\[\/track\]/g, '[$2](/music/$1/_/$2)')
+                .replace(/https:\/\/open\.spotify\.com\/user\/([A-Za-z0-9]+)/g, '[@$1](https://open.spotify.com/user/$1)')
+                .replace(/https:\/\/open\.spotify\.com\/user\/([A-Za-z0-9]+)\?si=([A-Za-z0-9]+)/g, '[@$1](https://open.spotify.com/user/$1)')
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;'));
+                about_me_text.innerHTML = parsed_body;
+            }
 
             // add note button
             if (!profile_has_note) {
@@ -2762,6 +2817,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
     // patch shouts
     function patch_shouts(element) {
+        let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
         let shouts = element.querySelectorAll('.shout');
 
         shouts.forEach((shout) => {
@@ -2772,39 +2828,44 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 let shout_name = shout.querySelector('.shout-user a').textContent;
                 let shout_avatar = shout.querySelector('.shout-user-avatar');
 
-                let shout_body = shout.querySelector('.shout-body p');
-
-                let converter = new showdown.Converter({
-                    emoji: true,
-                    excludeTrailingPunctuationFromURLs: true,
-                    headerLevelStart: 5,
-                    noHeaderId: true,
-                    openLinksInNewWindow: true,
-                    requireSpaceBeforeHeadingText: true,
-                    simpleLineBreaks: true,
-                    simplifiedAutoLink: true,
-                    strikethrough: true,
-                    underline: true,
-                    ghCodeBlocks: false,
-                    smartIndentationFix: true
-                });
-                let parsed_body = converter.makeHtml(shout_body.textContent
-                .replace(/([@])([a-zA-Z0-9_]+)/g, '[$1$2](/user/$2)')
-                .replace(/\[artist\]([a-zA-Z0-9]+)\[\/artist\]/g, '[$1](/music/$1)')
-                .replace(/\[album artist=([a-zA-Z0-9]+)\]([a-zA-Z0-9\s]+)\[\/album\]/g, '[$2](/music/$1/$2)')
-                .replace(/\[track artist=([a-zA-Z0-9]+)\]([a-zA-Z0-9\s]+)\[\/track\]/g, '[$2](/music/$1/_/$2)')
-                .replace(/https:\/\/open\.spotify\.com\/user\/([A-Za-z0-9]+)\?si=([A-Za-z0-9]+)/g, '[@$1](https://open.spotify.com/user/$1)')
-                .replace(/&/g, '&amp;')
-                .replace(/</g, '&lt;')
-                .replace(/>/g, '&gt;')
-                .replace(/"/g, '&quot;')
-                .replace(/'/g, '&#039;'));
-                console.log(shout_body.textContent, parsed_body);
-                shout_body.innerHTML = parsed_body;
-
                 patch_avatar(shout_avatar, shout_name);
+
+                if (settings.shout_markdown) {
+                    let shout_body = shout.querySelector('.shout-body p');
+
+                    let converter = new showdown.Converter({
+                        emoji: true,
+                        excludeTrailingPunctuationFromURLs: true,
+                        headerLevelStart: 5,
+                        noHeaderId: true,
+                        openLinksInNewWindow: true,
+                        requireSpaceBeforeHeadingText: true,
+                        simpleLineBreaks: true,
+                        simplifiedAutoLink: true,
+                        strikethrough: true,
+                        underline: true,
+                        ghCodeBlocks: false,
+                        smartIndentationFix: true
+                    });
+                    let parsed_body = converter.makeHtml(shout_body.textContent
+                    .replace(/([@])([a-zA-Z0-9_]+)/g, '[$1$2](/user/$2)')
+                    .replace(/\[artist\]([a-zA-Z0-9]+)\[\/artist\]/g, '[$1](/music/$1)')
+                    .replace(/\[album artist=([a-zA-Z0-9]+)\]([a-zA-Z0-9\s]+)\[\/album\]/g, '[$2](/music/$1/$2)')
+                    .replace(/\[track artist=([a-zA-Z0-9]+)\]([a-zA-Z0-9\s]+)\[\/track\]/g, '[$2](/music/$1/_/$2)')
+                    .replace(/https:\/\/open\.spotify\.com\/user\/([A-Za-z0-9]+)\?si=([A-Za-z0-9]+)/g, '[@$1](https://open.spotify.com/user/$1)')
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;')
+                    .replace(/'/g, '&#039;'));
+                    console.log(shout_body.textContent, parsed_body);
+                    shout_body.innerHTML = parsed_body;
+                }
             }
-            } catch(e) {}
+            } catch(e) {
+                deliver_notif('a shout on this page failed to be modified :(');
+                console.error('bleh - a shout failed to patch', e);
+            }
         });
     }
 
@@ -3290,6 +3351,17 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                         </button>
                     </div>
                     <div class="btns sep">
+                        <button class="btn bleh--btn" data-bleh-page="accessibility" onclick="_change_settings_page('accessibility')">
+                            ${trans[lang].settings.accessibility.name}
+                        </button>
+                        <button class="btn bleh--btn" data-bleh-page="text" onclick="_change_settings_page('text')">
+                            ${trans[lang].settings.text.name}
+                        </button>
+                        <button class="btn bleh--btn" data-bleh-page="language" onclick="_change_settings_page('language')">
+                            ${trans[lang].settings.language.name}
+                        </button>
+                    </div>
+                    <div class="btns sep">
                         <button class="btn bleh--btn" data-bleh-page="corrections" onclick="_change_settings_page('corrections')">
                             ${trans[lang].settings.corrections.name}
                         </button>
@@ -3566,50 +3638,6 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 </div>
                 <div class="bleh--panel">
                     <h3>${trans[lang].settings.customise.display.name}</h3>
-                    <div class="inner-preview pad flex">
-                        <div class="shout js-shout js-link-block" data-kate-processed="true">
-                            <h3 class="shout-user">
-                                <a>cutensilly</a>
-                            </h3>
-                            <span class="avatar shout-user-avatar" title="Last.fm Pro user" data-kate-processed="true">
-                                <img src="https://lastfm.freetls.fastly.net/i/u/avatar70s/198d1a3bd66a0d586e8e7af8a31febe4.jpg" alt="Your avatar" loading="lazy">
-                                <span class="avatar-status-dot user-status--bleh-queen user-status--bleh-user-cutensilly" data-kate-processed="true"></span>
-                            </span>
-                            <a class="shout-permalink shout-timestamp">
-                                <time datetime="2024-06-05T02:33:39+01:00" title="Wednesday 5 Jun 2024, 2:33am">
-                                    5 Jun 2:33am
-                                </time>
-                            </a>
-                            <div class="shout-body">
-                                <p>${trans[lang].settings.customise.display.shout_preview}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="toggle-container" id="container-accessible_name_colours">
-                        <button class="btn reset" onclick="_reset_item('accessible_name_colours')">${trans[lang].settings.reset}</button>
-                        <div class="heading">
-                            <h5>${trans[lang].settings.accessibility.accessible_name_colours.name}</h5>
-                            <p>${trans[lang].settings.accessibility.accessible_name_colours.bio}</p>
-                        </div>
-                        <div class="toggle-wrap">
-                            <button class="toggle" id="toggle-accessible_name_colours" onclick="_update_item('accessible_name_colours')" aria-checked="false">
-                                <div class="dot"></div>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="toggle-container" id="container-underline_links">
-                        <button class="btn reset" onclick="_reset_item('underline_links')">${trans[lang].settings.reset}</button>
-                        <div class="heading">
-                            <h5>${trans[lang].settings.accessibility.underline_links.name}</h5>
-                            <p>${trans[lang].settings.accessibility.underline_links.bio}</p>
-                        </div>
-                        <div class="toggle-wrap">
-                            <button class="toggle" id="toggle-underline_links" onclick="_update_item('underline_links')" aria-checked="false">
-                                <div class="dot"></div>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="sep"></div>
                     <div class="inner-preview pad">
                         <div class="personal-stats-preview bleh--personal-stats-if-colourful">
                             <div class="personal-stats-item personal-stats-item--scrobbles link-block js-link-block" data-kate-processed="true" data-bleh--scrobble-milestone="10" style="--hue: -14.921125; --sat: 1.5; --lit: 0.875;">
@@ -3976,6 +4004,114 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     <div class="corrections album_tracks" id="corrections-albums_tracks"></div>
                 </div>
                 `);
+        } else if (page == 'language') {
+            return (`
+                <div class="bleh--panel">
+                    <h3>${trans[lang].settings.language.name}</h3>
+                    <p>${trans[lang].settings.language.bio}</p>
+                </div>
+                `);
+        } else if (page == 'accessibility') {
+            return (`
+                <div class="bleh--panel">
+                    <h3>${trans[lang].settings.accessibility.name}</h3>
+                    <div class="inner-preview pad flex">
+                        <div class="shout js-shout js-link-block" data-kate-processed="true">
+                            <h3 class="shout-user">
+                                <a>cutensilly</a>
+                            </h3>
+                            <span class="avatar shout-user-avatar" title="Last.fm Pro user" data-kate-processed="true">
+                                <img src="https://lastfm.freetls.fastly.net/i/u/avatar70s/198d1a3bd66a0d586e8e7af8a31febe4.jpg" alt="Your avatar" loading="lazy">
+                                <span class="avatar-status-dot user-status--bleh-queen user-status--bleh-user-cutensilly" data-kate-processed="true"></span>
+                            </span>
+                            <a class="shout-permalink shout-timestamp">
+                                <time datetime="2024-06-05T02:33:39+01:00" title="Wednesday 5 Jun 2024, 2:33am">
+                                    5 Jun 2:33am
+                                </time>
+                            </a>
+                            <div class="shout-body">
+                                <p>${trans[lang].settings.accessibility.shout_preview}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="toggle-container" id="container-accessible_name_colours">
+                        <button class="btn reset" onclick="_reset_item('accessible_name_colours')">${trans[lang].settings.reset}</button>
+                        <div class="heading">
+                            <h5>${trans[lang].settings.accessibility.accessible_name_colours.name}</h5>
+                            <p>${trans[lang].settings.accessibility.accessible_name_colours.bio}</p>
+                        </div>
+                        <div class="toggle-wrap">
+                            <button class="toggle" id="toggle-accessible_name_colours" onclick="_update_item('accessible_name_colours')" aria-checked="false">
+                                <div class="dot"></div>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="toggle-container" id="container-underline_links">
+                        <button class="btn reset" onclick="_reset_item('underline_links')">${trans[lang].settings.reset}</button>
+                        <div class="heading">
+                            <h5>${trans[lang].settings.accessibility.underline_links.name}</h5>
+                            <p>${trans[lang].settings.accessibility.underline_links.bio}</p>
+                        </div>
+                        <div class="toggle-wrap">
+                            <button class="toggle" id="toggle-underline_links" onclick="_update_item('underline_links')" aria-checked="false">
+                                <div class="dot"></div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                `);
+        } else if (page == 'text') {
+            return (`
+                <div class="bleh--panel">
+                    <h3>${trans[lang].settings.text.name}</h3>
+                    <div class="inner-preview pad flex">
+                        <div class="shout js-shout js-link-block" data-kate-processed="true">
+                            <h3 class="shout-user">
+                                <a>cutensilly</a>
+                            </h3>
+                            <span class="avatar shout-user-avatar" title="Last.fm Pro user" data-kate-processed="true">
+                                <img src="https://lastfm.freetls.fastly.net/i/u/avatar70s/198d1a3bd66a0d586e8e7af8a31febe4.jpg" alt="Your avatar" loading="lazy">
+                                <span class="avatar-status-dot user-status--bleh-queen user-status--bleh-user-cutensilly" data-kate-processed="true"></span>
+                            </span>
+                            <a class="shout-permalink shout-timestamp">
+                                <time datetime="2024-06-05T02:33:39+01:00" title="Wednesday 5 Jun 2024, 2:33am">
+                                    5 Jun 2:33am
+                                </time>
+                            </a>
+                            <div class="shout-body if-markdown-on">
+                                <p>${trans[lang].settings.text.shout_preview_md}</p>
+                            </div>
+                            <div class="shout-body if-markdown-off">
+                                <p>${trans[lang].settings.text.shout_preview}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <h4>${trans[lang].settings.text.markdown.name}</h4>
+                    <p>${trans[lang].settings.text.markdown.bio}</p>
+                    <div class="toggle-container" id="container-shout_markdown">
+                        <button class="btn reset" onclick="_reset_item('shout_markdown')">${trans[lang].settings.reset}</button>
+                        <div class="heading">
+                            <h5>${trans[lang].settings.text.markdown.shouts}</h5>
+                        </div>
+                        <div class="toggle-wrap">
+                            <button class="toggle" id="toggle-shout_markdown" onclick="_update_item('shout_markdown')" aria-checked="false">
+                                <div class="dot"></div>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="toggle-container" id="container-bio_markdown">
+                        <button class="btn reset" onclick="_reset_item('bio_markdown')">${trans[lang].settings.reset}</button>
+                        <div class="heading">
+                            <h5>${trans[lang].settings.text.markdown.profile}</h5>
+                        </div>
+                        <div class="toggle-wrap">
+                            <button class="toggle" id="toggle-bio_markdown" onclick="_update_item('bio_markdown')" aria-checked="false">
+                                <div class="dot"></div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                `);
         }
     }
 
@@ -3998,7 +4134,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
         if (page == 'themes')
             show_theme_change_in_settings();
-        else if (page == 'customise' || page == 'performance' || page == 'redirects' || page == 'corrections')
+        else if (page == 'customise' || page == 'performance' || page == 'redirects' || page == 'corrections' || page == 'accessibility' || page == 'text')
             refresh_all();
         else if (page == 'profiles')
             init_profile_notes();
