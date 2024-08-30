@@ -164,7 +164,8 @@ a,
 .header-metadata-display, .chartlist-count-bar, .chartlist-count-bar-value,
 .primary-selection,
 .nag-bar--alert,
-input[type="range"]
+input[type="range"],
+.form-row-help-text
 {
     --c1: var(--hue), calc(var(--sat) * 40%), 100%;
     --c2: var(--hue), calc(var(--sat) * 60%), 90%;
@@ -432,6 +433,7 @@ body {
     --icon-16-external: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtc3F1YXJlLWFycm93LW91dC11cC1yaWdodCI+PHBhdGggZD0iTTIxIDEzdjZhMiAyIDAgMCAxLTIgMkg1YTIgMiAwIDAgMS0yLTJWNWEyIDIgMCAwIDEgMi0yaDYiLz48cGF0aCBkPSJtMjEgMy05IDkiLz48cGF0aCBkPSJNMTUgM2g2djYiLz48L3N2Zz4=');
     --icon-16-calendar: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtY2FsZW5kYXIiPjxyZWN0IHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgeD0iMyIgeT0iNCIgcng9IjIiIHJ5PSIyIi8+PGxpbmUgeDE9IjE2IiB4Mj0iMTYiIHkxPSIyIiB5Mj0iNiIvPjxsaW5lIHgxPSI4IiB4Mj0iOCIgeTE9IjIiIHkyPSI2Ii8+PGxpbmUgeDE9IjMiIHgyPSIyMSIgeTE9IjEwIiB5Mj0iMTAiLz48L3N2Zz4=');
     --icon-16-redirect: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtcmVkby0yIj48cGF0aCBkPSJtMTUgMTQgNS01LTUtNSIvPjxwYXRoIGQ9Ik0yMCA5SDkuNUE1LjUgNS41IDAgMCAwIDQgMTQuNXYwQTUuNSA1LjUgMCAwIDAgOS41IDIwSDEzIi8+PC9zdmc+');
+    --icon-16-correction: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtYm9vay1vcGVuLWNoZWNrIj48cGF0aCBkPSJNOCAzSDJ2MTVoN2MxLjcgMCAzIDEuMyAzIDNWN2MwLTIuMi0xLjgtNC00LTRaIi8+PHBhdGggZD0ibTE2IDEyIDIgMiA0LTQiLz48cGF0aCBkPSJNMjIgNlYzaC02Yy0yLjIgMC00IDEuOC00IDR2MTRjMC0xLjcgMS4zLTMgMy0zaDd2LTIuMyIvPjwvc3ZnPg==');
     --icon-16-language: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtbGFuZ3VhZ2VzIj48cGF0aCBkPSJtNSA4IDYgNiIvPjxwYXRoIGQ9Im00IDE0IDYtNiAyLTMiLz48cGF0aCBkPSJNMiA1aDEyIi8+PHBhdGggZD0iTTcgMmgxIi8+PHBhdGggZD0ibTIyIDIyLTUtMTAtNSAxMCIvPjxwYXRoIGQ9Ik0xNCAxOGg2Ii8+PC9zdmc+');
     --icon-16-clock: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtY2xvY2siPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEwIi8+PHBvbHlsaW5lIHBvaW50cz0iMTIgNiAxMiAxMiAxNiAxNCIvPjwvc3ZnPg==');
     --icon-16-scrobble: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtcGxheS1zcXVhcmUiPjxyZWN0IHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgeD0iMyIgeT0iMyIgcng9IjIiLz48cGF0aCBkPSJtOSA4IDYgNC02IDRaIi8+PC9zdmc+');
@@ -475,7 +477,6 @@ body {
     --icon-16-sun: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtc3VuIj48Y2lyY2xlIGN4PSIxMiIgY3k9IjEyIiByPSI0Ii8+PHBhdGggZD0iTTEyIDJ2MiIvPjxwYXRoIGQ9Ik0xMiAyMHYyIi8+PHBhdGggZD0ibTQuOTMgNC45MyAxLjQxIDEuNDEiLz48cGF0aCBkPSJtMTcuNjYgMTcuNjYgMS40MSAxLjQxIi8+PHBhdGggZD0iTTIgMTJoMiIvPjxwYXRoIGQ9Ik0yMCAxMmgyIi8+PHBhdGggZD0ibTYuMzQgMTcuNjYtMS40MSAxLjQxIi8+PHBhdGggZD0ibTE5LjA3IDQuOTMtMS40MSAxLjQxIi8+PC9zdmc+');
     --icon-16-issues: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtZ2l0LW1lcmdlIj48Y2lyY2xlIGN4PSIxOCIgY3k9IjE4IiByPSIzIi8+PGNpcmNsZSBjeD0iNiIgY3k9IjYiIHI9IjMiLz48cGF0aCBkPSJNNiAyMVY5YTkgOSAwIDAgMCA5IDkiLz48L3N2Zz4=');
     --icon-16-note-add: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtdGV4dC1zZWxlY3QiPjxwYXRoIGQ9Ik01IDNhMiAyIDAgMCAwLTIgMiIvPjxwYXRoIGQ9Ik0xOSAzYTIgMiAwIDAgMSAyIDIiLz48cGF0aCBkPSJNMjEgMTlhMiAyIDAgMCAxLTIgMiIvPjxwYXRoIGQ9Ik01IDIxYTIgMiAwIDAgMS0yLTIiLz48cGF0aCBkPSJNOSAzaDEiLz48cGF0aCBkPSJNOSAyMWgxIi8+PHBhdGggZD0iTTE0IDNoMSIvPjxwYXRoIGQ9Ik0xNCAyMWgxIi8+PHBhdGggZD0iTTMgOXYxIi8+PHBhdGggZD0iTTIxIDl2MSIvPjxwYXRoIGQ9Ik0zIDE0djEiLz48cGF0aCBkPSJNMjEgMTR2MSIvPjxsaW5lIHgxPSI3IiB4Mj0iMTUiIHkxPSI4IiB5Mj0iOCIvPjxsaW5lIHgxPSI3IiB4Mj0iMTciIHkxPSIxMiIgeTI9IjEyIi8+PGxpbmUgeDE9IjciIHgyPSIxMyIgeTE9IjE2IiB5Mj0iMTYiLz48L3N2Zz4=');
-    --icon-16-correction: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtc3BlbGwtY2hlY2stMiI+PHBhdGggZD0ibTYgMTYgNi0xMiA2IDEyIi8+PHBhdGggZD0iTTggMTJoOCIvPjxwYXRoIGQ9Ik00IDIxYzEuMSAwIDEuMS0xIDIuMy0xczEuMSAxIDIuMyAxYzEuMSAwIDEuMS0xIDIuMy0xIDEuMSAwIDEuMSAxIDIuMyAxIDEuMSAwIDEuMS0xIDIuMy0xIDEuMSAwIDEuMSAxIDIuMyAxIDEuMSAwIDEuMS0xIDIuMy0xIi8+PC9zdmc+');
     --icon-16-sparkles: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtc3BhcmtsZXMiPjxwYXRoIGQ9Ik05LjkzNyAxNS41QTIgMiAwIDAgMCA4LjUgMTQuMDYzbC02LjEzNS0xLjU4MmEuNS41IDAgMCAxIDAtLjk2Mkw4LjUgOS45MzZBMiAyIDAgMCAwIDkuOTM3IDguNWwxLjU4Mi02LjEzNWEuNS41IDAgMCAxIC45NjMgMEwxNC4wNjMgOC41QTIgMiAwIDAgMCAxNS41IDkuOTM3bDYuMTM1IDEuNTgxYS41LjUgMCAwIDEgMCAuOTY0TDE1LjUgMTQuMDYzYTIgMiAwIDAgMC0xLjQzNyAxLjQzN2wtMS41ODIgNi4xMzVhLjUuNSAwIDAgMS0uOTYzIDB6Ii8+PHBhdGggZD0iTTIwIDN2NCIvPjxwYXRoIGQ9Ik0yMiA1aC00Ii8+PHBhdGggZD0iTTQgMTd2MiIvPjxwYXRoIGQ9Ik01IDE4SDMiLz48L3N2Zz4=');
     --icon-16-preview: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtc2Nhbi1leWUiPjxwYXRoIGQ9Ik0zIDdWNWEyIDIgMCAwIDEgMi0yaDIiLz48cGF0aCBkPSJNMTcgM2gyYTIgMiAwIDAgMSAyIDJ2MiIvPjxwYXRoIGQ9Ik0yMSAxN3YyYTIgMiAwIDAgMS0yIDJoLTIiLz48cGF0aCBkPSJNNyAyMUg1YTIgMiAwIDAgMS0yLTJ2LTIiLz48Y2lyY2xlIGN4PSIxMiIgY3k9IjEyIiByPSIxIi8+PHBhdGggZD0iTTUgMTJzMi41LTUgNy01IDcgNSA3IDUtMi41IDUtNyA1LTctNS03LTUiLz48L3N2Zz4=');
     --icon-16-following: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtYXJyb3ctdXAtZnJvbS1kb3QiPjxwYXRoIGQ9Im01IDkgNy03IDcgNyIvPjxwYXRoIGQ9Ik0xMiAxNlYyIi8+PGNpcmNsZSBjeD0iMTIiIGN5PSIyMSIgcj0iMSIvPjwvc3ZnPg==');
@@ -2277,10 +2278,69 @@ elements, this is how we detect its missing */
         }
 
         & + .profile-note-row {
-            border-top: 1px solid hsl(var(--b4));
+            border-top: var(--card-border);
         }
     }
 }
+
+
+
+
+/*     MANAGE CORRECTIONS     */
+.corrections {
+    display: flex;
+    flex-direction: column;
+    margin: -7px 0;
+
+    .artist-row {
+        padding: 7px 0;
+
+        /*&:not(:first-child) {
+            border-top: var(--card-border);
+        }*/
+        &:not(:first-child) {
+            margin-top: calc(var(--card-gap) - 7px);
+        }
+    }
+
+    .correction-row {
+        display: flex;
+        align-items: center;
+        gap: var(--card-gap);
+        padding: 7px 0;
+
+        .primary-name {
+            flex: 1;
+            display: -webkit-box;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            line-clamp: 1;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+
+            &.pre-transition h5 {
+                color: hsl(var(--c3));
+            }
+        }
+
+        .arrow-divider {
+            position: relative;
+            color: hsl(var(--c3));
+            --mask: var(--icon-16-arrow-right);
+            --left: 0;
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+            display: block;
+        }
+
+        & + .correction-row {
+            border-top: var(--card-border);
+        }
+    }
+}
+
+
 
 
 /* no featured track, leave space for message button box instead */
@@ -5771,6 +5831,7 @@ button:not(.playback-app-container button, .top-artist-list-item, .pixel, .liste
 .user-list-inner-wrap .label:before,
 .nag-bar-message:before,
 /*     BLEH     */
+.arrow-divider:before,
 .list-view-item:before,
 .loading-data-text:before,
 .search-similar-btn:before,
@@ -11220,7 +11281,7 @@ so this is good enough - use the community docs */
         .bleh--panel-side, .bleh--panel-main {
             display: flex;
             flex-direction: column;
-            justify-content: stretch;
+            height: fit-content;
             gap: var(--card-gap);
         }
 
@@ -11283,6 +11344,9 @@ so this is good enough - use the community docs */
                 }
                 &[data-bleh-page="redirects"] {
                     --mask: var(--icon-16-redirect);
+                }
+                &[data-bleh-page="corrections"] {
+                    --mask: var(--icon-16-correction);
                 }
 
                 &:not(.active) {
@@ -13442,6 +13506,18 @@ trying to list every song ever made by someone identifying as a female, which is
         transition-timing-function: var(--trans-function);
         z-index: 2;
         user-select: none;
+
+        &.shout-form-char-count--limit {
+            color: hsl(var(--l3-c));
+            --hue: var(--hue-neg);
+            --sat: 1;
+            --lit: 1;
+            opacity: 0.5;
+
+            /*&:after {
+                content: ' (not enough characters)';
+            }*/
+        }
     }
     &:focus-within .form-row-help-text {
         left: 0;

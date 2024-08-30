@@ -70,6 +70,7 @@ const trans = {
             done: 'Done',
             continue: 'Continue',
             reset: 'Reset to default',
+            go: 'Go',
             examples: {
                 button: 'Example button'
             },
@@ -149,10 +150,6 @@ const trans = {
                     name: 'Use a colour gradient for all-time charts',
                     bio: 'Assigns a colour from a gradient based on your position in all-time artist scrobbles.'
                 },
-                format_guest_features: {
-                    name: 'Format guest features and song tags',
-                    bio: 'Visually places less priority on song features & tags (eg. Remix, Deluxe Edition, etc.)'
-                },
                 gendered_tags: {
                     name: 'Hide gendered tags',
                     bio: 'By default, gendered tags are hidden in bleh due to their unorganised and impossible nature.'
@@ -167,7 +164,7 @@ const trans = {
                 }
             },
             performance: {
-                name: 'Performance',
+                name: 'Troubleshooting',
                 bio: 'Running into noticeable issues in theme loading? Try out these settings.',
                 dev: {
                     name: 'Disable in-built theme loading',
@@ -194,6 +191,10 @@ const trans = {
                             alert: 'All done! From now on, styling will be handled via Stylus.'
                         }
                     }
+                },
+                bug: {
+                    name: 'Something wrong?',
+                    bio: 'Report a bug in the bleh repo to get it fixed.'
                 }
             },
             profiles: {
@@ -220,6 +221,26 @@ const trans = {
                     name: 'Scrobble auto-correction',
                     bio: 'By default, last.fm will \'auto-correct\' some of your scrobbles using this system. This will make your scrobbles appear as <i>Travis Scott</i> rather than <i>Travi$ Scott</i>, however the redirection system is not fully disabled.',
                     action: 'Open Settings'
+                }
+            },
+            corrections: {
+                name: 'Corrections',
+                bio: 'Manage bleh\'s in-built correction system for artist, album, and track titles.',
+                toggle: {
+                    name: 'Enable the correction system'
+                },
+                format_guest_features: {
+                    name: 'Format guest features and song tags',
+                    bio: 'Visually places less priority on song features and tags (eg. Remix, Deluxe Edition, etc.)'
+                },
+                submit: {
+                    name: 'Submit new correction',
+                    bio: 'Have an artist, album, or track name that you feel is capitalised wrong?',
+                    action: 'Submit'
+                },
+                listing: {
+                    artists: 'Artists',
+                    albums_tracks: 'Albums and tracks'
                 }
             },
             inbuilt: {
@@ -715,10 +736,11 @@ let artist_corrections = {
     'Lieu': 'lieu',
     'Funeral': 'funeral',
     'Kuru': 'kuru',
-    'idkwhyy': 'Reposters #suck',
     'Quinn': 'quinn',
     'Charli XCX': 'Charli xcx',
-    'Underscores': 'underscores'
+    'Underscores': 'underscores',
+    'Thrown': 'thrown',
+    'Mitsu': 'mitsu'
 }
 let song_title_corrections = {
     'quadeca': {
@@ -797,6 +819,15 @@ let song_title_corrections = {
     'juice wrld': {
         'Off the rip': 'Off the Rip',
         'lace it (with eminem & benny blanco)': 'Lace It (with Eminem & benny blanco)'
+    },
+    'travis scott': {
+        'Days Before Rodeo': 'DAYS BEFORE RODEO',
+        'Mamacita (Feat. Rich Homie Quan & Young Thug)': 'Mamacita (feat. Rich Homie Quan & Young Thug)',
+        'Basement Freestyle (Live)': 'BASEMENT FREESTYLE (Live)',
+        'Mamacita (live)': 'MAMACITA (Live)'
+    },
+    'yumi': {
+        'Dance': 'DANCE'
     }
 };
 
@@ -901,17 +932,16 @@ let ranks = {
 
 let includes = {
     guests: [
-        '- feat', '(feat', '[feat', ' feat.',
-        '- with', '(with', '[with',
-        '- ft', '(ft', '[ft', ' ft.',
-        'w/ '
+        'feat.', 'featuring',
+        '- with', '(with', '[with', 'w/ ',
+        'ft.'
     ],
     versions: [
         '(taylor', '- spotify singles'
     ],
     mixes: [
         '- devonshire mix', '(devonshire mix',
-        '- remaster', '(remaster',
+        '- remaster', '(remaster', 'mike dean master',
         '- remix', '(remix',
         '- live', '(live',
         '- demo', '(demo',
@@ -922,7 +952,7 @@ let includes = {
         '- acoustic', '(acoustic',
         '- alternative', '(alternative',
         '(mix 1', '(mix 2', '(mix 3', '(mix 4', '(mix 5', '(mix 6', '(mix 7', '(mix 8', '(mix 9',
-        '- choppednotslopped', '(choppednotslopped', '[choppednotslopped',
+        '- chopped', '(chopped', '[chopped',
         '(v1', '(v2', '(v3', '(v4', '(v5', '(v6', '(v7', '(v8', '(v9'
     ],
     stems: [
@@ -938,7 +968,7 @@ let includes = {
     ],
     bonus: [
         '- intro', '(intro', '[intro',
-        '- outro', '(outro', '[outro',
+        '- outro', '(outro', '[outro', 'dean outro',
         '- interlude', '(interlude', '[interlude',
         '- bonus', '(bonus', '[bonus',
         '- edit', '(edit', '[edit',
@@ -1051,6 +1081,7 @@ let settings_template = {
     underline_links: false,
     big_numbers: false,
     format_guest_features: true,
+    corrections: true,
     colourful_counts: true,
     rain: false,
     feature_flags: {},
@@ -1145,6 +1176,13 @@ let settings_base = {
         values: [true, false],
         type: 'toggle'
     },
+    corrections: {
+        css: 'corrections',
+        unit: '',
+        value: true,
+        values: [true, false],
+        type: 'toggle'
+    },
     colourful_counts: {
         css: 'colourful_counts',
         unit: '',
@@ -1210,6 +1248,7 @@ let inbuilt_settings = {
         type: 'toggle'
     }
 }
+let latest_settings_cache = {};
 
 // use the top-right link to determine the current user
 let auth = '';
@@ -1250,15 +1289,16 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             patch_profile(document.body);
             patch_shouts(document.body);
             patch_lastfm_settings(document.body);
-            patch_titles(document.body);
-            patch_header_title(document.body);
             patch_artist_ranks(document.body);
-            patch_artist_grids(document.body);
             patch_header_menu();
             patch_gallery_page();
 
             album_missing_a_tracklist();
+            prep_combo_settings();
 
+            patch_header_title(document.body);
+            patch_artist_grids(document.body);
+            patch_titles(document.body);
             correct_generic_combo_no_artist('artist-header-featured-items-item');
             correct_generic_combo_no_artist('artist-top-albums-item');
             correct_generic_combo('source-album-details');
@@ -1266,6 +1306,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             correct_generic_combo('similar-albums-item');
             correct_generic_combo('track-similar-tracks-item');
             correct_generic_combo('similar-items-sidebar-item');
+            patch_about_this_artist();
         }
 
         // last.fm is a single page application
@@ -1282,15 +1323,16 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 patch_profile(document.body);
                 patch_shouts(document.body);
                 patch_lastfm_settings(document.body);
-                patch_titles(document.body);
-                patch_header_title(document.body);
                 patch_artist_ranks(document.body);
-                patch_artist_grids(document.body);
                 patch_header_menu();
                 patch_gallery_page();
 
                 album_missing_a_tracklist();
+                prep_combo_settings();
 
+                patch_header_title(document.body);
+                patch_artist_grids(document.body);
+                patch_titles(document.body);
                 correct_generic_combo_no_artist('artist-header-featured-items-item');
                 correct_generic_combo_no_artist('artist-top-albums-item');
                 correct_generic_combo('source-album-details');
@@ -1298,6 +1340,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 correct_generic_combo('similar-albums-item');
                 correct_generic_combo('track-similar-tracks-item');
                 correct_generic_combo('similar-items-sidebar-item');
+                patch_about_this_artist();
             }
         });
 
@@ -2999,6 +3042,11 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     }
 
 
+    function prep_combo_settings() {
+        latest_settings_cache = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
+    }
+
+
     /**
      * correct capitalisation of a generic album/track name & artist combo
      * @param {string} parent individual css selector for each item wrapper
@@ -3008,6 +3056,11 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         let albums = document.body.querySelectorAll(`.${parent}`);
 
         if (albums == undefined)
+            return;
+
+        console.info(latest_settings_cache);
+
+        if (!latest_settings_cache.corrections)
             return;
 
         albums.forEach((album) => {
@@ -3040,6 +3093,11 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         if (albums == undefined)
             return;
 
+        console.info(latest_settings_cache);
+
+        if (!latest_settings_cache.corrections)
+            return;
+
         albums.forEach((album) => {
             if (!album.hasAttribute('data-kate-processed')) {
                 album.setAttribute('data-kate-processed','true');
@@ -3066,6 +3124,11 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         artist = artist.toLowerCase();
         console.info('bleh - correction handler: correcting', item, 'by', artist);
 
+        console.info(latest_settings_cache);
+
+        if (!latest_settings_cache.corrections)
+            return item;
+
         if (song_title_corrections.hasOwnProperty(artist)) {
             if (song_title_corrections[artist].hasOwnProperty(item)) {
                 console.info('bleh - correction handler: corrected as', song_title_corrections[artist][item]);
@@ -3085,12 +3148,37 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     function correct_artist(artist) {
         console.info('bleh - correction handler: correcting', artist);
 
+        console.info(latest_settings_cache);
+
+        if (!latest_settings_cache.corrections)
+            return artist;
+
         if (artist_corrections.hasOwnProperty(artist)) {
             console.info('bleh - correction handler: corrected as', artist_corrections[artist]);
             return artist_corrections[artist];
         } else {
             return artist;
         }
+    }
+
+
+
+
+    function patch_about_this_artist() {
+        if (!latest_settings_cache.corrections)
+            return;
+
+        let about_artist_name = document.querySelector('.about-artist-name');
+
+        if (about_artist_name == null)
+            return;
+
+        if (about_artist_name.hasAttribute('data-kate-processed'))
+            return;
+        about_artist_name.setAttribute('data-kate-processed', 'true');
+
+        let artist_name = about_artist_name.querySelector('a');
+        artist_name.textContent = correct_artist(artist_name.textContent);
     }
 
 
@@ -3111,7 +3199,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             <a class="dropdown-menu-clickable-item more-item--submit-correction" href="https://docs.google.com/forms/d/e/1FAIpQLScRzZaMfpjgKUq4CCA8iuEQCxVdalyv9bwnZEjPDm7lit_Ohg/viewform" target="_blank">
                 ${trans[lang].music.submit_lastfm_correction}
             </a>
-            <a class="dropdown-menu-clickable-item more-item--submit-correction-bleh" href="https://github.com/katelyynn/bleh/issues/9" target="_blank">
+            <a class="dropdown-menu-clickable-item more-item--submit-correction-bleh" href="https://github.com/katelyynn/bleh/issues/new/choose" target="_blank">
                 ${trans[lang].music.submit_bleh_correction}
             </a>
             `);
@@ -3197,14 +3285,16 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                         <button class="btn bleh--btn" data-bleh-page="customise" onclick="_change_settings_page('customise')">
                             ${trans[lang].settings.customise.name}
                         </button>
-                        <button class="btn bleh--btn" data-bleh-page="redirects" onclick="_change_settings_page('redirects')">
-                            ${trans[lang].settings.redirects.name}
-                        </button>
                         <button class="btn bleh--btn" data-bleh-page="profiles" onclick="_change_settings_page('profiles')">
                             ${trans[lang].settings.profiles.name}
                         </button>
-                        <button class="btn bleh--btn" data-bleh-page="performance" onclick="_change_settings_page('performance')">
-                            ${trans[lang].settings.performance.name}
+                    </div>
+                    <div class="btns sep">
+                        <button class="btn bleh--btn" data-bleh-page="corrections" onclick="_change_settings_page('corrections')">
+                            ${trans[lang].settings.corrections.name}
+                        </button>
+                        <button class="btn bleh--btn" data-bleh-page="redirects" onclick="_change_settings_page('redirects')">
+                            ${trans[lang].settings.redirects.name}
                         </button>
                     </div>
                     <div class="btns sep">
@@ -3216,6 +3306,9 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                         </button>
                     </div>
                     <div class="btns sep">
+                        <button class="btn bleh--btn" data-bleh-page="performance" onclick="_change_settings_page('performance')">
+                            ${trans[lang].settings.performance.name}
+                        </button>
                         <button class="btn" data-bleh-action="reset" onclick="_reset_settings()">
                             ${trans[lang].settings.actions.reset.name}
                         </button>
@@ -3655,71 +3748,6 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     </div>
                     <div class="sep"></div>
                     <div class="inner-preview pad flex">
-                        <table class="chartlist chartlist--with-index chartlist--with-index--length-2 chartlist--with-image chartlist--with-play chartlist--with-artist chartlist--with-bar">
-                            <tbody>
-                                <tr class="chartlist-row chartlist-row--with-artist">
-                                    <td class="chartlist-index">
-                                        1
-                                    </td>
-                                    <td class="chartlist-image">
-                                        <span class="cover-art">
-                                            <img src="https://lastfm.freetls.fastly.net/i/u/64s/c15d3ed1bd8574260f9378e26847501d.jpg" alt="fractions of infinity" loading="lazy">
-                                        </span>
-                                    </td>
-                                    <td class="chartlist-name">
-                                        <a href="/music/Quadeca/_/fractions+of+infinity" title="fractions of infinity" class="bleh--chartlist-name-without-features">fractions of infinity (feat. Sunday Service Choir)</a>
-                                        <a href="/music/Quadeca/_/fractions+of+infinity" title="fractions of infinity" class="bleh--chartlist-name-with-features">
-                                            <span class="title">fractions of infinity</span>
-                                            <span class="feat">feat. Sunday Service Choir</span>
-                                        </a>
-                                    </td>
-                                    <td class="chartlist-artist bleh--chartlist-name-without-features">
-                                        <a href="/music/Quadeca" title="Quadeca">Quadeca</a>
-                                    </td>
-                                    <td class="chartlist-artist bleh--chartlist-name-with-features">
-                                        <a href="/music/Quadeca" title="Quadeca">Quadeca</a>,
-                                        <a href="/music/Quadeca" title="Quadeca">Sunday Service Choir</a>
-                                    </td>
-                                    <td class="chartlist-bar">
-                                        <span class="chartlist-count-bar">
-                                            <span class="chartlist-count-bar-link">
-                                                <span class="chartlist-count-bar-slug" style="width:100.0%;"></span>
-                                                <span class="chartlist-count-bar-value">
-                                                    104,321
-                                                </span>
-                                            </span>
-                                        </span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="toggle-container" id="container-format_guest_features">
-                        <button class="btn reset" onclick="_reset_item('format_guest_features')">${trans[lang].settings.reset}</button>
-                        <div class="heading">
-                            <h5>${trans[lang].settings.customise.format_guest_features.name}</h5>
-                            <p>${trans[lang].settings.customise.format_guest_features.bio}</p>
-                        </div>
-                        <div class="toggle-wrap">
-                            <button class="toggle" id="toggle-format_guest_features" onclick="_update_item('format_guest_features')" aria-checked="true">
-                                <div class="dot"></div>
-                            </button>
-                        </div>
-                    </div>
-                    <!--<div class="toggle-container" id="container-big_numbers">
-                        <button class="btn reset" onclick="_reset_item('big_numbers')">${trans[lang].settings.reset}</button>
-                        <div class="heading">
-                            <h5>Use alternative numerical font</h5>
-                            <p>A special font solely for numbers, check it out!</p>
-                        </div>
-                        <div class="toggle-wrap">
-                            <button class="toggle" id="toggle-big_numbers" onclick="_update_item('big_numbers')" aria-checked="true">
-                                <div class="dot"></div>
-                            </button>
-                        </div>
-                    </div>-->
-                    <div class="sep"></div>
-                    <div class="inner-preview pad flex">
                         <section class="catalogue-tags">
                             <ul class="tags-list tags-list--global">
                                 <li class="tag">
@@ -3805,6 +3833,16 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                             </button>
                         </div>
                     </div>
+                    <div class="sep"></div>
+                    <div class="toggle-container">
+                        <div class="heading">
+                            <h5>${trans[lang].settings.performance.bug.name}</h5>
+                            <p>${trans[lang].settings.performance.bug.bio}</p>
+                        </div>
+                        <div class="toggle-wrap">
+                            <a class="btn bleh--btn primary" href="https://github.com/katelyynn/bleh/issues/new/choose" target="_blank">${trans[lang].settings.go}</a>
+                        </div>
+                    </div>
                 </div>
                 `);
         } else if (page == 'profiles') {
@@ -3853,6 +3891,91 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     </div>
                 </div>
                 `);
+        } else if (page == 'corrections') {
+            return (`
+                <div class="bleh--panel">
+                    <h3>${trans[lang].settings.corrections.name}</h3>
+                    <p>${trans[lang].settings.corrections.bio}</p>
+                    <div class="toggle-container" id="container-corrections">
+                        <button class="btn reset" onclick="_reset_item('corrections')">${trans[lang].settings.reset}</button>
+                        <div class="heading">
+                            <h5>${trans[lang].settings.corrections.toggle.name}</h5>
+                        </div>
+                        <div class="toggle-wrap">
+                            <button class="toggle" id="toggle-corrections" onclick="_update_item('corrections')" aria-checked="true">
+                                <div class="dot"></div>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="toggle-container">
+                        <div class="heading">
+                            <h5>${trans[lang].settings.corrections.submit.name}</h5>
+                            <p>${trans[lang].settings.corrections.submit.bio}</p>
+                        </div>
+                        <div class="toggle-wrap">
+                            <a class="btn bleh--btn primary" href="https://github.com/katelyynn/bleh/issues/new/choose" target="_blank">${trans[lang].settings.corrections.submit.action}</a>
+                        </div>
+                    </div>
+                    <div class="sep"></div>
+                    <div class="inner-preview pad flex">
+                        <table class="chartlist chartlist--with-index chartlist--with-index--length-2 chartlist--with-image chartlist--with-play chartlist--with-artist chartlist--with-bar">
+                            <tbody>
+                                <tr class="chartlist-row chartlist-row--with-artist">
+                                    <td class="chartlist-index">
+                                        1
+                                    </td>
+                                    <td class="chartlist-image">
+                                        <span class="cover-art">
+                                            <img src="https://lastfm.freetls.fastly.net/i/u/64s/c15d3ed1bd8574260f9378e26847501d.jpg" alt="fractions of infinity" loading="lazy">
+                                        </span>
+                                    </td>
+                                    <td class="chartlist-name">
+                                        <a href="/music/Quadeca/_/fractions+of+infinity" title="fractions of infinity" class="bleh--chartlist-name-without-features">fractions of infinity (feat. Sunday Service Choir)</a>
+                                        <a href="/music/Quadeca/_/fractions+of+infinity" title="fractions of infinity" class="bleh--chartlist-name-with-features">
+                                            <span class="title">fractions of infinity</span>
+                                            <span class="feat">feat. Sunday Service Choir</span>
+                                        </a>
+                                    </td>
+                                    <td class="chartlist-artist bleh--chartlist-name-without-features">
+                                        <a href="/music/Quadeca" title="Quadeca">Quadeca</a>
+                                    </td>
+                                    <td class="chartlist-artist bleh--chartlist-name-with-features">
+                                        <a href="/music/Quadeca" title="Quadeca">Quadeca</a>,
+                                        <a href="/music/Quadeca" title="Quadeca">Sunday Service Choir</a>
+                                    </td>
+                                    <td class="chartlist-bar">
+                                        <span class="chartlist-count-bar">
+                                            <span class="chartlist-count-bar-link">
+                                                <span class="chartlist-count-bar-slug" style="width:100.0%;"></span>
+                                                <span class="chartlist-count-bar-value">
+                                                    104,321
+                                                </span>
+                                            </span>
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="toggle-container" id="container-format_guest_features">
+                        <button class="btn reset" onclick="_reset_item('format_guest_features')">${trans[lang].settings.reset}</button>
+                        <div class="heading">
+                            <h5>${trans[lang].settings.corrections.format_guest_features.name}</h5>
+                            <p>${trans[lang].settings.corrections.format_guest_features.bio}</p>
+                        </div>
+                        <div class="toggle-wrap">
+                            <button class="toggle" id="toggle-format_guest_features" onclick="_update_item('format_guest_features')" aria-checked="true">
+                                <div class="dot"></div>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="sep"></div>
+                    <h4>${trans[lang].settings.corrections.listing.artists}</h4>
+                    <div class="corrections artist" id="corrections-artist"></div>
+                    <h4>${trans[lang].settings.corrections.listing.albums_tracks}</h4>
+                    <div class="corrections album_tracks" id="corrections-albums_tracks"></div>
+                </div>
+                `);
         }
     }
 
@@ -3875,10 +3998,13 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
         if (page == 'themes')
             show_theme_change_in_settings();
-        else if (page == 'customise' || page == 'performance' || page == 'redirects')
+        else if (page == 'customise' || page == 'performance' || page == 'redirects' || page == 'corrections')
             refresh_all();
         else if (page == 'profiles')
             init_profile_notes();
+
+        if (page == 'corrections')
+            prepare_corrections_page();
     }
 
     function show_theme_change_in_settings(theme = '') {
@@ -3977,6 +4103,59 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
         localStorage.setItem('bleh_profile_notes',JSON.stringify(profile_notes));
         kill_window('edit_profile_note');
+    }
+
+
+
+
+    function prepare_corrections_page() {
+        let corrections_table_artist = document.getElementById('corrections-artist');
+
+        for (let artist in artist_corrections) {
+            let correction = document.createElement('div');
+            correction.classList.add('correction-row');
+            correction.innerHTML = (`
+            <div class="primary-name pre-transition">
+                <h5>${artist}</h5>
+            </div>
+            <div class="arrow-divider"></div>
+            <div class="primary-name post-transition">
+                <h5>${artist_corrections[artist]}</h5>
+            </div>
+            `);
+
+            corrections_table_artist.appendChild(correction);
+        }
+
+        //
+
+        let corrections_table_albums_tracks = document.getElementById('corrections-albums_tracks');
+
+        for (let artist in song_title_corrections) {
+            let artist_row = document.createElement('div');
+            artist_row.classList.add('artist-row');
+            artist_row.innerHTML = (`
+                <h5>${artist}</h5>
+            `);
+
+            corrections_table_albums_tracks.appendChild(artist_row);
+
+            for (let media in song_title_corrections[artist]) {
+                let correction = document.createElement('div');
+                correction.classList.add('correction-row');
+                correction.innerHTML = (`
+                <div class="primary-name pre-transition">
+                    <h5>${media}</h5>
+                </div>
+                <div class="arrow-divider"></div>
+                <div class="primary-name post-transition">
+                    <h5>${song_title_corrections[artist][media]}</h5>
+                </div>
+                `);
+
+                corrections_table_albums_tracks.appendChild(correction);
+            }
+        }
     }
 
 
@@ -4508,7 +4687,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         console.log(original_title, original_artist);
         let formatted_title = original_title;
 
-        if (song_title_corrections.hasOwnProperty(original_artist.toLowerCase())) {
+        if (song_title_corrections.hasOwnProperty(original_artist.toLowerCase()) && latest_settings_cache.corrections) {
             if (song_title_corrections[original_artist.toLowerCase()].hasOwnProperty(formatted_title))
                 formatted_title = song_title_corrections[original_artist.toLowerCase()][formatted_title];
         }
@@ -4564,7 +4743,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
             let field_group = extras[extra].group;
             // remove beginning tag
-            let field_text = extras[extra].text.replace(' feat. ','').replace('feat. ','').replace('w/ ','').replace('with ','').replaceAll(' & ',';').replaceAll(', ',';').replaceAll('Tyler;the', 'Tyler, the').replaceAll(' with ',';');
+            let field_text = extras[extra].text.replace(' feat. ','').replace('feat. ','').replace('w/ ','').replace('with ','').replaceAll(' & ',';').replaceAll(', ',';').replaceAll('Tyler;the', 'Tyler, the').replaceAll(' with ',';').replaceAll('- ', '');
 
             if (field_group == 'guests')
                 song_guests = field_text.split(';');
@@ -4666,7 +4845,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                             }
                         }
                     }
-                } else {
+                } else if (latest_settings_cache.corrections) {
                     let track_title = track.querySelector('.chartlist-name a');
 
                     if (track_title == undefined)
