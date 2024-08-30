@@ -70,6 +70,7 @@ const trans = {
             done: 'Done',
             continue: 'Continue',
             reset: 'Reset to default',
+            go: 'Go',
             examples: {
                 button: 'Example button'
             },
@@ -163,7 +164,7 @@ const trans = {
                 }
             },
             performance: {
-                name: 'Performance',
+                name: 'Troubleshooting',
                 bio: 'Running into noticeable issues in theme loading? Try out these settings.',
                 dev: {
                     name: 'Disable in-built theme loading',
@@ -190,6 +191,10 @@ const trans = {
                             alert: 'All done! From now on, styling will be handled via Stylus.'
                         }
                     }
+                },
+                bug: {
+                    name: 'Something wrong?',
+                    bio: 'Report a bug in the bleh repo to get it fixed.'
                 }
             },
             profiles: {
@@ -230,6 +235,7 @@ const trans = {
                 },
                 submit: {
                     name: 'Submit new correction',
+                    bio: 'Have an artist, album, or track name that you feel is capitalised wrong?',
                     action: 'Submit'
                 },
                 listing: {
@@ -3189,7 +3195,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             <a class="dropdown-menu-clickable-item more-item--submit-correction" href="https://docs.google.com/forms/d/e/1FAIpQLScRzZaMfpjgKUq4CCA8iuEQCxVdalyv9bwnZEjPDm7lit_Ohg/viewform" target="_blank">
                 ${trans[lang].music.submit_lastfm_correction}
             </a>
-            <a class="dropdown-menu-clickable-item more-item--submit-correction-bleh" href="https://github.com/katelyynn/bleh/issues/9" target="_blank">
+            <a class="dropdown-menu-clickable-item more-item--submit-correction-bleh" href="https://github.com/katelyynn/bleh/issues/new/choose" target="_blank">
                 ${trans[lang].music.submit_bleh_correction}
             </a>
             `);
@@ -3275,17 +3281,16 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                         <button class="btn bleh--btn" data-bleh-page="customise" onclick="_change_settings_page('customise')">
                             ${trans[lang].settings.customise.name}
                         </button>
-                        <button class="btn bleh--btn" data-bleh-page="redirects" onclick="_change_settings_page('redirects')">
-                            ${trans[lang].settings.redirects.name}
-                        </button>
-                        <button class="btn bleh--btn" data-bleh-page="corrections" onclick="_change_settings_page('corrections')">
-                            ${trans[lang].settings.corrections.name}
-                        </button>
                         <button class="btn bleh--btn" data-bleh-page="profiles" onclick="_change_settings_page('profiles')">
                             ${trans[lang].settings.profiles.name}
                         </button>
-                        <button class="btn bleh--btn" data-bleh-page="performance" onclick="_change_settings_page('performance')">
-                            ${trans[lang].settings.performance.name}
+                    </div>
+                    <div class="btns sep">
+                        <button class="btn bleh--btn" data-bleh-page="corrections" onclick="_change_settings_page('corrections')">
+                            ${trans[lang].settings.corrections.name}
+                        </button>
+                        <button class="btn bleh--btn" data-bleh-page="redirects" onclick="_change_settings_page('redirects')">
+                            ${trans[lang].settings.redirects.name}
                         </button>
                     </div>
                     <div class="btns sep">
@@ -3297,6 +3302,9 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                         </button>
                     </div>
                     <div class="btns sep">
+                        <button class="btn bleh--btn" data-bleh-page="performance" onclick="_change_settings_page('performance')">
+                            ${trans[lang].settings.performance.name}
+                        </button>
                         <button class="btn" data-bleh-action="reset" onclick="_reset_settings()">
                             ${trans[lang].settings.actions.reset.name}
                         </button>
@@ -3821,6 +3829,16 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                             </button>
                         </div>
                     </div>
+                    <div class="sep"></div>
+                    <div class="toggle-container">
+                        <div class="heading">
+                            <h5>${trans[lang].settings.performance.bug.name}</h5>
+                            <p>${trans[lang].settings.performance.bug.bio}</p>
+                        </div>
+                        <div class="toggle-wrap">
+                            <a class="btn bleh--btn primary" href="https://github.com/katelyynn/bleh/issues/new/choose" target="_blank">${trans[lang].settings.go}</a>
+                        </div>
+                    </div>
                 </div>
                 `);
         } else if (page == 'profiles') {
@@ -3883,6 +3901,15 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                             <button class="toggle" id="toggle-corrections" onclick="_update_item('corrections')" aria-checked="true">
                                 <div class="dot"></div>
                             </button>
+                        </div>
+                    </div>
+                    <div class="toggle-container">
+                        <div class="heading">
+                            <h5>${trans[lang].settings.corrections.submit.name}</h5>
+                            <p>${trans[lang].settings.corrections.submit.bio}</p>
+                        </div>
+                        <div class="toggle-wrap">
+                            <a class="btn bleh--btn primary" href="https://github.com/katelyynn/bleh/issues/new/choose" target="_blank">${trans[lang].settings.corrections.submit.action}</a>
                         </div>
                     </div>
                     <div class="inner-preview pad flex">
