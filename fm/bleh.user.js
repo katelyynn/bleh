@@ -739,7 +739,8 @@ let artist_corrections = {
     'Quinn': 'quinn',
     'Charli XCX': 'Charli xcx',
     'Underscores': 'underscores',
-    'Thrown': 'thrown'
+    'Thrown': 'thrown',
+    'Mitsu': 'mitsu'
 }
 let song_title_corrections = {
     'quadeca': {
@@ -824,6 +825,9 @@ let song_title_corrections = {
         'Mamacita (Feat. Rich Homie Quan & Young Thug)': 'Mamacita (feat. Rich Homie Quan & Young Thug)',
         'Basement Freestyle (Live)': 'BASEMENT FREESTYLE (Live)',
         'Mamacita (live)': 'MAMACITA (Live)'
+    },
+    'yumi': {
+        'Dance': 'DANCE'
     }
 };
 
@@ -938,7 +942,7 @@ let includes = {
     mixes: [
         'devonshire mix',
         'remaster', 'mike dean master',
-        'remix', ' - ',
+        'remix', '- ',
         'live',
         'demo',
         'rehearsal',
