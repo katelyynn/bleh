@@ -2345,6 +2345,60 @@ elements, this is how we detect its missing */
 
 
 
+/*     LANGUAGES     */
+.languages {
+    display: flex;
+    flex-direction: column;
+    margin: -7px 0;
+
+    .language-row {
+        display: flex;
+        align-items: center;
+        gap: var(--card-gap);
+        padding: 7px 0;
+
+        .flag-container {
+            display: block;
+            width: 32px;
+            height: 32px;
+            background-color: hsl(var(--b4));
+            border-radius: var(--item-med-radius);
+        }
+
+        .name {
+            width: 100%;
+            max-width: 600px;
+            /*width: 200px;
+            display: -webkit-box;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            line-clamp: 1;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;*/
+            display: flex;
+            flex-direction: column;
+        }
+
+        .date {
+            flex-shrink: 0;
+            color: hsl(var(--c3));
+            display: -webkit-box;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            line-clamp: 1;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+        }
+
+        & + .language-row {
+            border-top: var(--card-border);
+        }
+    }
+}
+
+
+
+
 /* no featured track, leave space for message button box instead */
 .header--overview:not(:has(.header-featured-track)):has(.header-message-user) + .adaptive-skin-container .col-sidebar {
     padding-top: calc(138px + 33px - 82px) !important;
@@ -12579,12 +12633,13 @@ input[type="range"]::-moz-range-progress {
     --left: 4px;
     --mask-size: 14px;
 }
+.mention,
 :is(.shout-body, .about-me-sidebar, .bleh--about-me-preview) a[href^="/user/"] {
     padding: 0 4px;
     background-color: hsla(var(--h4), 20%);
     border-radius: var(--item-small-radius);
     font-weight: var(--font-weight-medium);
-    text-decoration: none;
+    text-decoration: none !important;
 }
 :is(.shout-body, .about-me-sidebar, .bleh--about-me-preview) a[href^="https://open.spotify.com/user/"] {
     padding: 0 4px 0 calc(4px + 14px + 4px);
@@ -14012,6 +14067,10 @@ button.bleh--gallery-bookmark-image-btn {
     display: block;
     height: 24px;
     width: 100%;
-    border-radius: 50px;
+    border-radius: var(--item-big-radius);
+
+    [data-bleh--colourful_counts="false"] & {
+        background: hsl(var(--h3)) !important;
+    }
 }
 }

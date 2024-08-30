@@ -33,6 +33,19 @@ if (!valid_langs.includes(lang)) {
     lang = 'en';
 }
 
+let lang_info = {
+    en: {
+        name: 'English',
+        by: ['cutensilly'],
+        last_updated: 'latest'
+    },
+    pl: {
+        name: 'Polski',
+        by: ['twolay'],
+        last_updated:  '2024-06-17'
+    }
+}
+
 const trans = {
     en: {
         auth_menu: {
@@ -250,18 +263,7 @@ const trans = {
             language: {
                 name: 'Language',
                 bio: 'bleh aims to support alongside last.fm\'s native translation system, powered by community contributions. It\'s still early days but contributions are very appreciated!',
-                listing: {
-                    en: {
-                        name: 'English',
-                        by: ['cutensilly'],
-                        last_updated: 'latest'
-                    },
-                    pl: {
-                        name: 'Polski',
-                        by: ['twolay'],
-                        last_updated:  '2024-06-17'
-                    }
-                },
+                by: 'by {users}',
                 submit: {
                     name: 'Are you fluent in another language?',
                     bio: 'Translations are community-contributed and greatly appreciated for everyone.',
@@ -3670,90 +3672,6 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
                             </div>
                         </div>
-                        <div class="personal-stats-preview bleh--personal-stats-if-colourful">
-                            <div class="personal-stats-item personal-stats-item--scrobbles link-block js-link-block" data-kate-processed="true" data-bleh--scrobble-milestone="10" style="--hue: -14.921125; --sat: 1.5; --lit: 0.875;">
-                                <div class="personal-stats-inner">
-                                    <ul class="header-metadata">
-                                        <li class="header-metadata-item">
-                                            <h4 class="header-metadata-title">
-                                                ${trans[lang].statistics.scrobbles.name}
-                                            </h4>
-                                            <div class="header-metadata-display">
-                                                <a class="link-block-target">
-                                                    13,041
-                                                </a>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                    <span class="avatar personal-stats-avatar">
-                                        <img src="https://lastfm.freetls.fastly.net/i/u/avatar70s/198d1a3bd66a0d586e8e7af8a31febe4.jpg" alt="Your avatar" loading="lazy">
-                                        <span class="avatar-status-dot user-status--bleh-queen user-status--bleh-user-cutensilly" data-kate-processed="true"></span>
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="personal-stats-item personal-stats-item--scrobbles link-block js-link-block" data-kate-processed="true" data-bleh--scrobble-milestone="5" style="--hue: 96.59066666666666; --sat: 1.35; --lit: 0.925;">
-                                <div class="personal-stats-inner">
-                                    <ul class="header-metadata">
-                                        <li class="header-metadata-item">
-                                            <h4 class="header-metadata-title">
-                                                ${trans[lang].statistics.scrobbles.name}
-                                            </h4>
-                                            <div class="header-metadata-display">
-                                                <a class="link-block-target">
-                                                    1,627
-                                                </a>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                    <span class="avatar personal-stats-avatar">
-                                        <img src="https://lastfm.freetls.fastly.net/i/u/avatar70s/198d1a3bd66a0d586e8e7af8a31febe4.jpg" alt="Your avatar" loading="lazy">
-                                        <span class="avatar-status-dot user-status--bleh-queen user-status--bleh-user-cutensilly" data-kate-processed="true"></span>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="personal-stats-preview bleh--personal-stats-if-not-colourful">
-                            <div class="personal-stats-item personal-stats-item--scrobbles link-block js-link-block">
-                                <div class="personal-stats-inner">
-                                    <ul class="header-metadata">
-                                        <li class="header-metadata-item">
-                                            <h4 class="header-metadata-title">
-                                                ${trans[lang].statistics.scrobbles.name}
-                                            </h4>
-                                            <div class="header-metadata-display">
-                                                <a class="link-block-target">
-                                                    13,041
-                                                </a>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                    <span class="avatar personal-stats-avatar">
-                                        <img src="https://lastfm.freetls.fastly.net/i/u/avatar70s/198d1a3bd66a0d586e8e7af8a31febe4.jpg" alt="Your avatar" loading="lazy">
-                                        <span class="avatar-status-dot user-status--bleh-queen user-status--bleh-user-cutensilly" data-kate-processed="true"></span>
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="personal-stats-item personal-stats-item--scrobbles link-block js-link-block">
-                                <div class="personal-stats-inner">
-                                    <ul class="header-metadata">
-                                        <li class="header-metadata-item">
-                                            <h4 class="header-metadata-title">
-                                                ${trans[lang].statistics.scrobbles.name}
-                                            </h4>
-                                            <div class="header-metadata-display">
-                                                <a class="link-block-target">
-                                                    1,627
-                                                </a>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                    <span class="avatar personal-stats-avatar">
-                                        <img src="https://lastfm.freetls.fastly.net/i/u/avatar70s/198d1a3bd66a0d586e8e7af8a31febe4.jpg" alt="Your avatar" loading="lazy">
-                                        <span class="avatar-status-dot user-status--bleh-queen user-status--bleh-user-cutensilly" data-kate-processed="true"></span>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
                         <div class="sep"></div>
                         <table class="chartlist chartlist--with-index chartlist--with-index--length-2 chartlist--with-image chartlist--with-bar">
                             <tbody>
@@ -3762,8 +3680,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                                         1
                                     </td>
                                     <td class="chartlist-image">
-                                        <span class="avatar">
-                                            <img src="https://lastfm.freetls.fastly.net/i/u/avatar70s/198d1a3bd66a0d586e8e7af8a31febe4.jpg" alt="Your avatar" loading="lazy">
+                                        <span class="avatar avatar--bleh-missing">
+                                            <img src="" alt="Your avatar" loading="lazy">
                                         </span>
                                     </td>
                                     <td class="chartlist-name">
@@ -4040,6 +3958,18 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 <div class="bleh--panel">
                     <h3>${trans[lang].settings.language.name}</h3>
                     <p>${trans[lang].settings.language.bio}</p>
+                    <div class="languages" id="languages"></div>
+                    <div class="sep"></div>
+                    <div class="alert alert-warning">This page is still under construction! A wiki page dedicated to submitting a language is not available currently.</div>
+                    <div class="toggle-container">
+                        <div class="heading">
+                            <h5>${trans[lang].settings.language.submit.name}</h5>
+                            <p>${trans[lang].settings.language.submit.bio}</p>
+                        </div>
+                        <div class="toggle-wrap">
+                            <a class="btn bleh--btn primary" href="https://github.com/katelyynn/bleh/wiki" target="_blank">${trans[lang].settings.language.submit.action}</a>
+                        </div>
+                    </div>
                 </div>
                 `);
         } else if (page == 'accessibility') {
@@ -4049,11 +3979,10 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     <div class="inner-preview pad flex">
                         <div class="shout js-shout js-link-block" data-kate-processed="true">
                             <h3 class="shout-user">
-                                <a>cutensilly</a>
+                                <a>${auth}</a>
                             </h3>
-                            <span class="avatar shout-user-avatar" title="Last.fm Pro user" data-kate-processed="true">
-                                <img src="https://lastfm.freetls.fastly.net/i/u/avatar70s/198d1a3bd66a0d586e8e7af8a31febe4.jpg" alt="Your avatar" loading="lazy">
-                                <span class="avatar-status-dot user-status--bleh-queen user-status--bleh-user-cutensilly" data-kate-processed="true"></span>
+                            <span class="avatar shout-user-avatar avatar--bleh-missing">
+                                <img src="" alt="Your avatar" loading="lazy">
                             </span>
                             <a class="shout-permalink shout-timestamp">
                                 <time datetime="2024-06-05T02:33:39+01:00" title="Wednesday 5 Jun 2024, 2:33am">
@@ -4098,11 +4027,10 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     <div class="inner-preview pad flex">
                         <div class="shout js-shout js-link-block" data-kate-processed="true">
                             <h3 class="shout-user">
-                                <a>cutensilly</a>
+                                <a>${auth}</a>
                             </h3>
-                            <span class="avatar shout-user-avatar" title="Last.fm Pro user" data-kate-processed="true">
-                                <img src="https://lastfm.freetls.fastly.net/i/u/avatar70s/198d1a3bd66a0d586e8e7af8a31febe4.jpg" alt="Your avatar" loading="lazy">
-                                <span class="avatar-status-dot user-status--bleh-queen user-status--bleh-user-cutensilly" data-kate-processed="true"></span>
+                            <span class="avatar shout-user-avatar avatar--bleh-missing">
+                                <img src="" alt="Your avatar" loading="lazy">
                             </span>
                             <a class="shout-permalink shout-timestamp">
                                 <time datetime="2024-06-05T02:33:39+01:00" title="Wednesday 5 Jun 2024, 2:33am">
@@ -4169,6 +4097,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             refresh_all();
         else if (page == 'profiles')
             init_profile_notes();
+        else if (page == 'language')
+            prepare_language_page();
 
         if (page == 'corrections')
             prepare_corrections_page();
@@ -4322,6 +4252,35 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
                 corrections_table_albums_tracks.appendChild(correction);
             }
+        }
+    }
+
+
+    function prepare_language_page() {
+        let languages_table = document.getElementById('languages');
+
+        for (let language in lang_info) {
+            let lang_row = document.createElement('div');
+            lang_row.classList.add('language-row');
+
+            let users = '';
+            for (let user in lang_info[language].by)
+                users = `<a class="mention" href="${root}user${lang_info[language].by[user]}" target="_blank">@${lang_info[language].by[user]}</a> `;
+
+            lang_row.innerHTML = (`
+            <div class="flag-container">
+
+            </div>
+            <div class="name">
+                <h5>${lang_info[language].name}</h5>
+                <p>${trans[lang].settings.language.by.replace('{users}', users)}</p>
+            </div>
+            <div class="date">
+                <p>${lang_info[language].last_updated}</p>
+            </div>
+            `);
+
+            languages_table.appendChild(lang_row);
         }
     }
 
