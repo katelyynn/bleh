@@ -812,6 +812,12 @@ let song_title_corrections = {
     'juice wrld': {
         'Off the rip': 'Off the Rip',
         'lace it (with eminem & benny blanco)': 'Lace It (with Eminem & benny blanco)'
+    },
+    'travis scott': {
+        'Days Before Rodeo': 'DAYS BEFORE RODEO',
+        'Mamacita (Feat. Rich Homie Quan & Young Thug)': 'Mamacita (feat. Rich Homie Quan & Young Thug)',
+        'Basement Freestyle (Live)': 'BASEMENT FREESTYLE (Live)',
+        'Mamacita (live)': 'MAMACITA (Live)'
     }
 };
 
@@ -916,60 +922,59 @@ let ranks = {
 
 let includes = {
     guests: [
-        '- feat', '(feat', '[feat', ' feat.',
-        '- with', '(with', '[with',
-        '- ft', '(ft', '[ft', ' ft.',
-        'w/ '
+        'feat.', 'ft.',  'featuring',
+        'with', 'w/',
     ],
     versions: [
-        '(taylor', '- spotify singles'
+        '(taylor', '- spotify singles',
+        'short ver.', 'cut ver.'
     ],
     mixes: [
-        '- devonshire mix', '(devonshire mix',
-        '- remaster', '(remaster',
-        '- remix', '(remix',
-        '- live', '(live',
-        '- demo', '(demo',
-        '- rehearsal', '(rehearsal',
-        '- sample clearance', '(sample clearance', '[sample clearance',
-        '- home demo', '(home demo',
-        '- solo acoustic', '(solo acoustic',
-        '- acoustic', '(acoustic',
-        '- alternative', '(alternative',
-        '(mix 1', '(mix 2', '(mix 3', '(mix 4', '(mix 5', '(mix 6', '(mix 7', '(mix 8', '(mix 9',
-        '- choppednotslopped', '(choppednotslopped', '[choppednotslopped',
-        '(v1', '(v2', '(v3', '(v4', '(v5', '(v6', '(v7', '(v8', '(v9'
+        'devonshire mix',
+        'remaster', 'mike dean master',
+        'remix', ' - ',
+        'live',
+        'demo',
+        'rehearsal',
+        'sample clearance',
+        'home demo',
+        'solo acoustic',
+        'acoustic',
+        'alternative',
+        'mix 1', 'mix 2', 'mix 3', 'mix 4', 'mix 5', 'mix 6', 'mix 7', 'mix 8', 'mix 9',
+        'choppednotslopped', 'chopped and screwed',
+        'v1', 'v2', 'v3', 'v4', 'v5', 'v6', 'v7', 'v8', 'v9'
     ],
     stems: [
-        '- acapella', '(acapella', '[acapella',
-        '- instrumental', '(instrumental', '[instrumental',
-        '- session', '(session', '[session',
-        '- studio session', '(studio session', '[studio session',
-        '- smart session', '(smart session', '[smart session',
-        '- boombox', '(boombox',
-        '- mtv unplugged', '(mtv unplugged',
-        '- unplugged', '(unplugged',
-        '- the long pond studio', '(the long pond studio'
+        'acapella',
+        'instrumental',
+        'sessions',
+        'studio session',
+        'smart session',
+        'boombox',
+        'mtv unplugged',
+        'unplugged',
+        'the long pond studio'
     ],
     bonus: [
-        '- intro', '(intro', '[intro',
-        '- outro', '(outro', '[outro',
-        '- interlude', '(interlude', '[interlude',
-        '- bonus', '(bonus', '[bonus',
-        '- edit', '(edit', '[edit',
-        '- from', '(from', '[from',
-        '- skit', '(skit',
-        '- original', '(original', '[original',
-        '[clean', '[explicit',
-        '- deluxe', '(deluxe', '[deluxe',
-        '- digital deluxe', '(digital deluxe', '[digital deluxe',
-        '- complete edition', '(complete edition', '[complete edition',
-        '- extended', '(extended', '[extended',
-        '- anniversary', '(anniversary', '[anniversary',
-        '- b-side', '- c-side', '(b-side', '(c-side',
-        '- lp', '- ep', '(lp', '(ep',
-        '- single', '(single',
-        '- 19', '- 20', '(19', '(20'
+        'intro',
+        'dean outro', 'outro',
+        'interlude',
+        'bonus',
+        'edit',
+        'from',
+        'skit',
+        'original',
+        'clean', 'explicit',
+        'deluxe',
+        'digital deluxe',
+        'complete edition',
+        'extended',
+        'anniversary',
+        'b-side', 'c-side',
+        'lp', 'ep',
+        'single',
+        '19', '20',
     ]
 }
 
