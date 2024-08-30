@@ -3521,15 +3521,30 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 </div>
                 `);
         } else if (page == 'customise') {
-            let preview_bar = 'background: linear-gradient(90deg,';
+            let preview_bar = 'background: linear-gradient(90deg';
 
+            // global sat/lit is used to substitute the values computed in h3 sat/lit
+            // as they return eg. calc(0.85 * 50%), so we use global_sat to get 0.85
+            // which can then be used in a .replace(global_sat, 'whatever we want')
             let global_sat = getComputedStyle(document.body).getPropertyValue('--sat');
             let global_lit = getComputedStyle(document.body).getPropertyValue('--lit');
             let h3_sat = getComputedStyle(document.body).getPropertyValue('--h3-sat');
             let h3_lit = getComputedStyle(document.body).getPropertyValue('--h3-lit');
 
+            let maximum = 16_000;
+            let max_rank = 11;
+
+            //console.info(maximum, max_rank);
+            for (let rank = 0; rank <= max_rank; rank++) {
+                let this_rank = ranks[parseInt(rank)];
+                //console.info(this_rank);
+
+                let percent = ((this_rank.start / maximum) * 100);
+                preview_bar = `${preview_bar}, hsl(${this_rank.hue}, ${h3_sat.replace(global_sat, this_rank.sat)}, ${h3_lit.replace(global_lit, this_rank.lit)}) ${percent}%`;
+            }
+
             preview_bar = `${preview_bar});`;
-            console.info('preview bar', preview_bar, global_sat, h3_sat, global_lit, h3_lit);
+            //console.info('preview bar', preview_bar, global_sat, h3_sat, global_lit, h3_lit);
 
             return (`
                 <div class="bleh--panel">
@@ -3650,15 +3665,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     <h3>${trans[lang].settings.customise.display.name}</h3>
                     <div class="inner-preview pad">
                         <div class="personal-stats-preview-bar-container">
-                            <div class="personal-stats-preview-bar" style="
-                            background: linear-gradient(90deg,
-                            hsl(0, var(--h3-sat), var(--h3-lit)) 0%,
-                            hsl(0, var(--h3-sat), var(--h3-lit)) 27%,
-                            hsl(0, var(--h3-sat), var(--h3-lit)) 52%,
-                            hsl(0, var(--h3-sat), var(--h3-lit)) 71%,
-                            hsl(0, var(--h3-sat), var(--h3-lit)) 100%
-                            );
-                            "></div>
+                            <div class="personal-stats-preview-bar" style="${preview_bar}"></div>
                             <div class="personal-stats-preview-text">
 
                             </div>
