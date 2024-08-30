@@ -154,7 +154,8 @@ a,
 .header-metadata-display, .chartlist-count-bar, .chartlist-count-bar-value,
 .primary-selection,
 .nag-bar--alert,
-input[type="range"]
+input[type="range"],
+.form-row-help-text
 {
     --c1: var(--hue), calc(var(--sat) * 40%), 100%;
     --c2: var(--hue), calc(var(--sat) * 60%), 90%;
@@ -13432,6 +13433,18 @@ trying to list every song ever made by someone identifying as a female, which is
         transition-timing-function: var(--trans-function);
         z-index: 2;
         user-select: none;
+
+        &.shout-form-char-count--limit {
+            color: hsl(var(--l3-c));
+            --hue: var(--hue-neg);
+            --sat: 1;
+            --lit: 1;
+            opacity: 0.5;
+
+            /*&:after {
+                content: ' (not enough characters)';
+            }*/
+        }
     }
     &:focus-within .form-row-help-text {
         left: 0;
