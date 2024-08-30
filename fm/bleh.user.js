@@ -149,10 +149,6 @@ const trans = {
                     name: 'Use a colour gradient for all-time charts',
                     bio: 'Assigns a colour from a gradient based on your position in all-time artist scrobbles.'
                 },
-                format_guest_features: {
-                    name: 'Format guest features and song tags',
-                    bio: 'Visually places less priority on song features & tags (eg. Remix, Deluxe Edition, etc.)'
-                },
                 gendered_tags: {
                     name: 'Hide gendered tags',
                     bio: 'By default, gendered tags are hidden in bleh due to their unorganised and impossible nature.'
@@ -220,6 +216,25 @@ const trans = {
                     name: 'Scrobble auto-correction',
                     bio: 'By default, last.fm will \'auto-correct\' some of your scrobbles using this system. This will make your scrobbles appear as <i>Travis Scott</i> rather than <i>Travi$ Scott</i>, however the redirection system is not fully disabled.',
                     action: 'Open Settings'
+                }
+            },
+            corrections: {
+                name: 'Corrections',
+                bio: 'Manage bleh\'s in-built correction system for artist, album, and track titles.',
+                toggle: {
+                    name: 'Enable the correction system'
+                },
+                format_guest_features: {
+                    name: 'Format guest features and song tags',
+                    bio: 'Visually places less priority on song features & tags (eg. Remix, Deluxe Edition, etc.)'
+                },
+                submit: {
+                    name: 'Submit new correction',
+                    action: 'Submit'
+                },
+                listing: {
+                    artists: 'Artists',
+                    albums_tracks: 'Albums and tracks'
                 }
             },
             inbuilt: {
@@ -1051,6 +1066,7 @@ let settings_template = {
     underline_links: false,
     big_numbers: false,
     format_guest_features: true,
+    corrections: true,
     colourful_counts: true,
     rain: false,
     feature_flags: {},
@@ -1140,6 +1156,13 @@ let settings_base = {
     },
     format_guest_features: {
         css: 'format_guest_features',
+        unit: '',
+        value: true,
+        values: [true, false],
+        type: 'toggle'
+    },
+    corrections: {
+        css: 'corrections',
         unit: '',
         value: true,
         values: [true, false],
@@ -3200,6 +3223,9 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                         <button class="btn bleh--btn" data-bleh-page="redirects" onclick="_change_settings_page('redirects')">
                             ${trans[lang].settings.redirects.name}
                         </button>
+                        <button class="btn bleh--btn" data-bleh-page="corrections" onclick="_change_settings_page('corrections')">
+                            ${trans[lang].settings.corrections.name}
+                        </button>
                         <button class="btn bleh--btn" data-bleh-page="profiles" onclick="_change_settings_page('profiles')">
                             ${trans[lang].settings.profiles.name}
                         </button>
@@ -3694,18 +3720,6 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                             </tbody>
                         </table>
                     </div>
-                    <div class="toggle-container" id="container-format_guest_features">
-                        <button class="btn reset" onclick="_reset_item('format_guest_features')">${trans[lang].settings.reset}</button>
-                        <div class="heading">
-                            <h5>${trans[lang].settings.customise.format_guest_features.name}</h5>
-                            <p>${trans[lang].settings.customise.format_guest_features.bio}</p>
-                        </div>
-                        <div class="toggle-wrap">
-                            <button class="toggle" id="toggle-format_guest_features" onclick="_update_item('format_guest_features')" aria-checked="true">
-                                <div class="dot"></div>
-                            </button>
-                        </div>
-                    </div>
                     <!--<div class="toggle-container" id="container-big_numbers">
                         <button class="btn reset" onclick="_reset_item('big_numbers')">${trans[lang].settings.reset}</button>
                         <div class="heading">
@@ -3853,6 +3867,41 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     </div>
                 </div>
                 `);
+        } else if (page == 'corrections') {
+            return (`
+                <div class="bleh--panel">
+                    <h3>${trans[lang].settings.corrections.name}</h3>
+                    <p>${trans[lang].settings.corrections.bio}</p>
+                    <div class="toggle-container" id="container-corrections">
+                        <button class="btn reset" onclick="_reset_item('corrections')">${trans[lang].settings.reset}</button>
+                        <div class="heading">
+                            <h5>${trans[lang].settings.corrections.toggle.name}</h5>
+                        </div>
+                        <div class="toggle-wrap">
+                            <button class="toggle" id="toggle-corrections" onclick="_update_item('corrections')" aria-checked="true">
+                                <div class="dot"></div>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="toggle-container" id="container-format_guest_features">
+                        <button class="btn reset" onclick="_reset_item('format_guest_features')">${trans[lang].settings.reset}</button>
+                        <div class="heading">
+                            <h5>${trans[lang].settings.corrections.format_guest_features.name}</h5>
+                            <p>${trans[lang].settings.corrections.format_guest_features.bio}</p>
+                        </div>
+                        <div class="toggle-wrap">
+                            <button class="toggle" id="toggle-format_guest_features" onclick="_update_item('format_guest_features')" aria-checked="true">
+                                <div class="dot"></div>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="sep"></div>
+                    <h4>${trans[lang].settings.corrections.listing.artists}</h4>
+                    <div class="corrections artist" id="corrections-artist"></div>
+                    <h4>${trans[lang].settings.corrections.listing.albums_tracks}</h4>
+                    <div class="corrections album_tracks" id="corrections-albums_tracks"></div>
+                </div>
+                `);
         }
     }
 
@@ -3875,7 +3924,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
         if (page == 'themes')
             show_theme_change_in_settings();
-        else if (page == 'customise' || page == 'performance' || page == 'redirects')
+        else if (page == 'customise' || page == 'performance' || page == 'redirects' || page == 'corrections')
             refresh_all();
         else if (page == 'profiles')
             init_profile_notes();
