@@ -5894,6 +5894,7 @@ button:not(.playback-app-container button, .top-artist-list-item, .pixel, .liste
 
 
 /*     ICON MASK     */
+.data-loading:before, .lazy-shoutbox.async-content-loading:before, .loading:not(.library-fetch, .library-date-picker):before,
 .user-list-inner-wrap .label:before,
 .nag-bar-message:before,
 /*     BLEH     */
@@ -10369,32 +10370,33 @@ a:has(+ .js-gallery-heading), .js-gallery-heading,
     min-height: 200px !important;
 }
 
-.lazy-shoutbox.async-content-loading:after {
-    top: 50%;
-    left: 50%;
-    margin-left: -16px;
-    margin-top: -16px;
-}
-
-.lazy-shoutbox.async-content-loading:after,
-.loading:not(.library-fetch, .library-date-picker) {
-    width: 32px !important;
-    height: 32px !important;
+.data-loading,
+.loading:not(.library-fetch, .library-date-picker),
+.lazy-shoutbox.async-content-loading {
+    color: hsl(var(--c3));
+    position: relative;
+    --left: 50%;
+    --margin-left: -8px;
+    --mask: var(--icon-16-spinner);
     background: unset !important;
-    border: 4px solid hsl(var(--b4));
-    border-bottom-color: transparent;
-    border-radius: 50%;
-    display: inline-flex;
-    box-sizing: border-box;
-    animation: rotation 1s linear infinite;
+
+    &:before {
+        animation: spinner 0.8s linear infinite;
+    }
+
+    &:after {
+        display: none;
+    }
 }
-@keyframes rotation {
-    from {
-        transform: rotate(0deg);
+.data-loading {
+    margin: unset !important;
+
+    .your-progress & {
+        height: 193px !important;
     }
-    to {
-        transform: rotate(360deg);
-    }
+}
+.buffer-3 {
+    margin-top: var(--card-gap);
 }
 
 .library-top__placeholder,
