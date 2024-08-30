@@ -1291,6 +1291,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             correct_generic_combo('similar-albums-item');
             correct_generic_combo('track-similar-tracks-item');
             correct_generic_combo('similar-items-sidebar-item');
+            patch_about_this_artist();
         }
 
         // last.fm is a single page application
@@ -1324,6 +1325,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 correct_generic_combo('similar-albums-item');
                 correct_generic_combo('track-similar-tracks-item');
                 correct_generic_combo('similar-items-sidebar-item');
+                patch_about_this_artist();
             }
         });
 
@@ -3142,6 +3144,26 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         } else {
             return artist;
         }
+    }
+
+
+
+
+    function patch_about_this_artist() {
+        if (!latest_settings_cache.corrections)
+            return;
+
+        let about_artist_name = document.querySelector('.about-artist-name');
+
+        if (about_artist_name == null)
+            return;
+
+        if (about_artist_name.hasAttribute('data-kate-processed'))
+            return;
+        about_artist_name.setAttribute('data-kate-processed', 'true');
+
+        let artist_name = about_artist_name.querySelector('a');
+        artist_name.textContent = correct_artist(artist_name.textContent);
     }
 
 
