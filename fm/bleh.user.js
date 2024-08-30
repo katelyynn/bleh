@@ -733,7 +733,8 @@ let artist_corrections = {
     'idkwhyy': 'Reposters #suck',
     'Quinn': 'quinn',
     'Charli XCX': 'Charli xcx',
-    'Underscores': 'underscores'
+    'Underscores': 'underscores',
+    'Thrown': 'thrown'
 }
 let song_title_corrections = {
     'quadeca': {
