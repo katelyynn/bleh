@@ -178,6 +178,9 @@ const trans = {
                 show_your_progress: {
                     name: 'Show your weekly progress',
                     bio: 'too many numbers ~w~'
+                },
+                pretty_obsessions: {
+                    name: 'Pretty obsessions'
                 }
             },
             performance: {
@@ -565,6 +568,9 @@ const trans = {
                 show_your_progress: {
                     name: 'Show your weekly progress',
                     bio: 'too many numbers ~w~'
+                },
+                pretty_obsessions: {
+                    name: 'Pretty obsessions'
                 }
             },
             performance: {
@@ -1195,7 +1201,8 @@ let settings_template = {
     travis: false,
     list_view: 1,
     shout_markdown: true,
-    bio_markdown: true
+    bio_markdown: true,
+    pretty_obsessions: true
 };
 let settings_base = {
     hue: {
@@ -1334,6 +1341,13 @@ let settings_base = {
     },
     bio_markdown: {
         css: 'bio_markdown',
+        unit: '',
+        value: true,
+        values: [true, false],
+        type: 'toggle'
+    },
+    pretty_obsessions: {
+        css: 'pretty_obsessions',
         unit: '',
         value: true,
         values: [true, false],
@@ -3711,33 +3725,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     <button class="btn primary btn--has-icon btn--has-icon-left btn--custom-colour" onclick="_create_a_custom_colour()">
                         ${trans[lang].settings.customise.colours.custom}
                     </button>
-                </div>
-                <div class="bleh--panel">
-                    <h3>${trans[lang].settings.customise.artwork.name}</h3>
-                    <div class="inner-preview pad">
-                        <div class="palette albums" style="height: fit-content">
-                            <div class="album-cover" style="background-image: url('https://lastfm.freetls.fastly.net/i/u/770x0/1569198c4cf0a3b2ff8728975e8359fa.jpg')"></div>
-                            <div class="album-cover" style="background-image: url('https://lastfm.freetls.fastly.net/i/u/770x0/b897255bf422baa93a42536af293f9f8.jpg')"></div>
-                            <div class="album-cover" style="background-image: url('https://lastfm.freetls.fastly.net/i/u/770x0/a78bbd5ff0184115902f403212f04976.jpg')"></div>
-                            <div class="album-cover" style="background-image: url('https://lastfm.freetls.fastly.net/i/u/770x0/ddee3b871289a6cda0e3c7d4b4580d62.jpg')"></div>
-                            <div class="album-cover" style="background-image: url('https://lastfm.freetls.fastly.net/i/u/770x0/570021b68d3d9d2db08bc99a473303b0.jpg')"></div>
-                            <div class="album-cover" style="background-image: url('https://lastfm.freetls.fastly.net/i/u/770x0/e39eb31f874f4a5c4afa836845141437.jpg')"></div>
-                        </div>
-                    </div>
-                    <div class="slider-container" id="container-gloss">
-                        <button class="btn reset" onclick="_reset_item('gloss')">${trans[lang].settings.reset}</button>
-                        <div class="heading">
-                            <h5>${trans[lang].settings.customise.gloss.name}</h5>
-                            <p>${trans[lang].settings.customise.gloss.bio}</p>
-                        </div>
-                        <div class="slider">
-                            <input type="range" min="0" max="1" value="0" step="0.05" id="slider-gloss" oninput="_update_item('gloss', this.value)">
-                            <p id="value-gloss">0</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="bleh--panel">
-                    <h3>${trans[lang].settings.customise.display.name}</h3>
+                    <div class="sep"></div>
                     <div class="inner-preview pad">
                         <div class="personal-stats-preview-bar-container">
                             <div class="personal-stats-preview-bar" style="${preview_bar}"></div>
@@ -3796,7 +3784,33 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                             </button>
                         </div>
                     </div>
-                    <div class="sep"></div>
+                </div>
+                <div class="bleh--panel">
+                    <h3>${trans[lang].settings.customise.artwork.name}</h3>
+                    <div class="inner-preview pad">
+                        <div class="palette albums" style="height: fit-content">
+                            <div class="album-cover" style="background-image: url('https://lastfm.freetls.fastly.net/i/u/770x0/1569198c4cf0a3b2ff8728975e8359fa.jpg')"></div>
+                            <div class="album-cover" style="background-image: url('https://lastfm.freetls.fastly.net/i/u/770x0/b897255bf422baa93a42536af293f9f8.jpg')"></div>
+                            <div class="album-cover" style="background-image: url('https://lastfm.freetls.fastly.net/i/u/770x0/a78bbd5ff0184115902f403212f04976.jpg')"></div>
+                            <div class="album-cover" style="background-image: url('https://lastfm.freetls.fastly.net/i/u/770x0/ddee3b871289a6cda0e3c7d4b4580d62.jpg')"></div>
+                            <div class="album-cover" style="background-image: url('https://lastfm.freetls.fastly.net/i/u/770x0/570021b68d3d9d2db08bc99a473303b0.jpg')"></div>
+                            <div class="album-cover" style="background-image: url('https://lastfm.freetls.fastly.net/i/u/770x0/e39eb31f874f4a5c4afa836845141437.jpg')"></div>
+                        </div>
+                    </div>
+                    <div class="slider-container" id="container-gloss">
+                        <button class="btn reset" onclick="_reset_item('gloss')">${trans[lang].settings.reset}</button>
+                        <div class="heading">
+                            <h5>${trans[lang].settings.customise.gloss.name}</h5>
+                            <p>${trans[lang].settings.customise.gloss.bio}</p>
+                        </div>
+                        <div class="slider">
+                            <input type="range" min="0" max="1" value="0" step="0.05" id="slider-gloss" oninput="_update_item('gloss', this.value)">
+                            <p id="value-gloss">0</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bleh--panel">
+                    <h3>${trans[lang].settings.customise.display.name}</h3>
                     <div class="inner-preview pad flex">
                         <section class="catalogue-tags">
                             <ul class="tags-list tags-list--global">
@@ -3831,6 +3845,17 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                         </div>
                     </div>
                     <div class="sep"></div>
+                    <div class="toggle-container" id="container-pretty_obsessions">
+                        <button class="btn reset" onclick="_reset_item('pretty_obsessions')">${trans[lang].settings.reset}</button>
+                        <div class="heading">
+                            <h5>${trans[lang].settings.customise.pretty_obsessions.name}</h5>
+                        </div>
+                        <div class="toggle-wrap">
+                            <button class="toggle" id="toggle-pretty_obsessions" onclick="_update_item('pretty_obsessions')" aria-checked="true">
+                                <div class="dot"></div>
+                            </button>
+                        </div>
+                    </div>
                     <div class="toggle-container" id="container-show_your_progress">
                         <button class="btn reset" onclick="_reset_item('show_your_progress')">${trans[lang].settings.reset}</button>
                         <div class="heading">

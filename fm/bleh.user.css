@@ -262,7 +262,8 @@ body {
     --shout-avatar-size: 48px;
     --shout-inset: 48px;
 
-    --avatar-generic-background: hsl(var(--b6));
+    /*--avatar-generic-background: hsl(var(--b6));*/
+    --avatar-generic-background: linear-gradient(180deg, hsla(var(--h3), 20%) 0%, hsl(var(--b6)) 100%);
     --avatar-radius: 50%;
 
     --menu-shadow: 2px 2px 24px 0 hsla(var(--b7), 0.35), 3px 6px 48px 16px hsla(var(--b7), 0.25);
@@ -2060,6 +2061,20 @@ li.header-metadata-item--event-attendance {
     display: flex !important;
     gap: 10px;
     z-index: 1;
+
+    padding: var(--card-padding) !important;
+
+    [data-bleh--pretty_obsessions="true"] & {
+        --card-specific-background:
+        linear-gradient(hsl(var(--b5)), hsl(var(--g4))) padding-box,
+        linear-gradient(0deg, hsla(var(--h3), 80%) 0%, hsl(var(--b5)) 100%) border-box;
+        border: 2px solid transparent !important;
+        padding: calc(var(--card-padding) - 1px) !important;
+
+        /*.cover-art {
+            background: linear-gradient(180deg, hsla(var(--h3), 20%) 0%, var(--avatar-generic-background) 100%);
+        }*/
+    }
 }
 .featured-item--right {
     text-align: left;
@@ -2077,8 +2092,13 @@ li.header-metadata-item--event-attendance {
 
 .featured-item-heading {
     position: absolute !important;
-    top: 20px;
-    left: 20px;
+    top: var(--card-padding);
+    left: var(--card-padding);
+
+    [data-bleh--pretty_obsessions="true"] & {
+        top: calc(var(--card-padding) - 1px);
+        left: calc(var(--card-padding) - 1px);
+    }
 }
 .featured-item-heading-link {
     color: inherit;
@@ -3312,7 +3332,7 @@ state is not active, which then falls back to primary button styling */
 
 .artist-header-featured-items-item-video,
 .artist-header-featured-items-item-image {
-    background-color: var(--avatar-generic-background);
+    background: var(--avatar-generic-background);
     border-radius: var(--item-med-radius);
     box-shadow: var(--card-shadow);
     overflow: hidden;
@@ -4294,7 +4314,7 @@ better than the default selector '#app a' i suppose */
 
 
 .grid-items-item .grid-items-cover-image-image {
-    background-color: var(--avatar-generic-background);
+    background: var(--avatar-generic-background);
     transition-property: filter;
     transition-duration: var(--trans);
     transition-timing-function: var(--trans-function);
@@ -4744,7 +4764,7 @@ better than the default selector '#app a' i suppose */
     border-radius: var(--item-small-radius);
     box-shadow: var(--card-shadow);
     overflow: hidden;
-    background-color: var(--avatar-generic-background);
+    background: var(--avatar-generic-background);
 }
 .chartlist-image:has(.avatar) {
     border-radius: var(--avatar-radius);
@@ -5377,7 +5397,7 @@ leading to a gap from their own css */
     filter: drop-shadow(2px 0px 0 hsl(var(--b5))) drop-shadow(0px 2px 0 hsl(var(--b5))) drop-shadow(-2px -0px 0 hsl(var(--b5))) drop-shadow(-0px -2px 0 hsl(var(--b5))) drop-shadow(0px 3px 0px hsl(var(--b5)));
 }
 .shout-user-avatar, .avatar {
-    /*background-color: var(--avatar-generic-background); support for transparent avatars */
+    /*background: var(--avatar-generic-background); support for transparent avatars */
     border-radius: var(--avatar-radius);
 }
 
@@ -5462,7 +5482,7 @@ span.shout-user-avatar:before,
 
     /* support for transparent avatars */
     :is(.shout-user-avatar, .avatar):has(&) {
-        background-color: var(--avatar-generic-background);
+        background: var(--avatar-generic-background);
     }
 }
 /* missing album */
@@ -6902,7 +6922,7 @@ that literally is 1 user from 2007 who hasnt even gotten a scrobble */
 .library-header-image {
     left: var(--card-padding);
     top: var(--card-padding);
-    background-color: var(--avatar-generic-background);
+    background: var(--avatar-generic-background);
     border-radius: var(--item-small-radius);
     box-shadow: var(--card-shadow);
     overflow: hidden;
@@ -8135,7 +8155,7 @@ text[style^="color: rgb(0, 0, 0)"] {
     box-shadow: var(--card-shadow);
     overflow: hidden;
     aspect-ratio: 1 / 1;
-    background-color: var(--avatar-generic-background);
+    background: var(--avatar-generic-background);
 }
 .featured-item-art .cover-art img {
     mask-size: 28px;
@@ -8235,7 +8255,7 @@ text[style^="color: rgb(0, 0, 0)"] {
     border-radius: var(--item-med-radius);
     box-shadow: var(--card-shadow);
     overflow: hidden;
-    background-color: var(--avatar-generic-background);
+    background: var(--avatar-generic-background);
 }
 .catalogue-overview-similar-artists-item-image img,
 .artist-similar-artists-sidebar-item-image img {
@@ -8611,7 +8631,7 @@ text[style^="color: rgb(0, 0, 0)"] {
     width: 64px;
     height: 64px;
     margin-top: unset;
-    background-color: var(--avatar-generic-background);
+    background: var(--avatar-generic-background);
 }
 .user-list .link-block-cover-link,
 .listeners-section-item-image,
@@ -8922,7 +8942,7 @@ text[style^="color: rgb(0, 0, 0)"] {
 }
 
 .image-upload-preview {
-    background-color: var(--avatar-generic-background);
+    background: var(--avatar-generic-background);
     border-radius: var(--avatar-radius);
     box-shadow: var(--card-shadow);
 }
@@ -9121,7 +9141,7 @@ table.table tr:nth-child(2n) td {
     width: unset;
 }
 .obsession-history-item-inner {
-    background-color: var(--avatar-generic-background);
+    background: var(--avatar-generic-background);
     border-radius: var(--item-med-radius);
     box-shadow: var(--card-shadow);
     overflow: hidden;
@@ -9490,7 +9510,7 @@ table.table tr:nth-child(2n) td {
 
 
 .gallery-preview-cta {
-    background-color: var(--avatar-generic-background) !important;
+    background: var(--avatar-generic-background) !important;
     box-sizing: border-box;
     border-radius: var(--item-med-radius);
     padding: var(--card-padding);
@@ -10378,7 +10398,7 @@ a:has(+ .js-gallery-heading), .js-gallery-heading,
     --left: 50%;
     --margin-left: -8px;
     --mask: var(--icon-16-spinner);
-    background: unset !important;
+    background-image: unset !important;
 
     &:before {
         animation: spinner 0.8s linear infinite;
