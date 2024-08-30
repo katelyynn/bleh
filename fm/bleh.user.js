@@ -3521,6 +3521,16 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 </div>
                 `);
         } else if (page == 'customise') {
+            let preview_bar = 'background: linear-gradient(90deg,';
+
+            let global_sat = getComputedStyle(document.body).getPropertyValue('--sat');
+            let global_lit = getComputedStyle(document.body).getPropertyValue('--lit');
+            let h3_sat = getComputedStyle(document.body).getPropertyValue('--h3-sat');
+            let h3_lit = getComputedStyle(document.body).getPropertyValue('--h3-lit');
+
+            preview_bar = `${preview_bar});`;
+            console.info('preview bar', preview_bar, global_sat, h3_sat, global_lit, h3_lit);
+
             return (`
                 <div class="bleh--panel">
                     <h3>${trans[lang].settings.customise.colours.name}</h3>
@@ -3639,6 +3649,20 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 <div class="bleh--panel">
                     <h3>${trans[lang].settings.customise.display.name}</h3>
                     <div class="inner-preview pad">
+                        <div class="personal-stats-preview-bar-container">
+                            <div class="personal-stats-preview-bar" style="
+                            background: linear-gradient(90deg,
+                            hsl(0, var(--h3-sat), var(--h3-lit)) 0%,
+                            hsl(0, var(--h3-sat), var(--h3-lit)) 27%,
+                            hsl(0, var(--h3-sat), var(--h3-lit)) 52%,
+                            hsl(0, var(--h3-sat), var(--h3-lit)) 71%,
+                            hsl(0, var(--h3-sat), var(--h3-lit)) 100%
+                            );
+                            "></div>
+                            <div class="personal-stats-preview-text">
+
+                            </div>
+                        </div>
                         <div class="personal-stats-preview bleh--personal-stats-if-colourful">
                             <div class="personal-stats-item personal-stats-item--scrobbles link-block js-link-block" data-kate-processed="true" data-bleh--scrobble-milestone="10" style="--hue: -14.921125; --sat: 1.5; --lit: 0.875;">
                                 <div class="personal-stats-inner">
