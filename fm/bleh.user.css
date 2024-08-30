@@ -1183,6 +1183,9 @@ last.fm changes as of 2024-05-20 */
     margin-right: unset;
     display: flex;
 }
+.footer-bottom .row {
+    flex-direction: column;
+}
 .footer-bottom .row .col-sm-10 {
     width: max-content;
 }
@@ -1219,10 +1222,9 @@ last.fm changes as of 2024-05-20 */
 
 
 #language-selector, .footer-timezone {
-    padding-left: calc(16px + 6px);
+    padding-left: calc(var(--button-list-gap) + 16px + var(--button-list-gap)) !important;
     position: relative;
-    display: flex;
-    --left: 0 !important;
+    --left: var(--button-list-gap) !important;
 }
 .footer #language-selector {
     --mask: var(--icon-16-language);
@@ -1237,12 +1239,6 @@ last.fm changes as of 2024-05-20 */
 
 .footer .footer-language {
     margin-right: unset;
-}
-.footer-language strong {
-    padding: var(--padding, 7px 12px) !important;
-    display: inline-block;
-    height: 32px;
-    font-weight: var(--font-weight-medium) !important;
 }
 .footer-language-form .mimic-link, #ot-sdk-btn, .footer-links a, .footer-links button, .footer-timezone a {
     --bg: transparent !important;
@@ -5573,7 +5569,7 @@ button:not(.playback-app-container button, .top-artist-list-item, .pixel, .liste
 .gallery-image-report--reported,
 .listening-report-library-link, .listening-report-promo,
 #ot-sdk-btn,
-.footer-links a, .footer-timezone a,
+.footer-links a, .footer-timezone strong,
 .library-search-results li,
 .resource-external-link, .play-this-track-playlink, .replace-playlink,
 .shout-more-replies-before,
@@ -5597,7 +5593,8 @@ button:not(.playback-app-container button, .top-artist-list-item, .pixel, .liste
 /* track love button in other's library */ .love-button,
 /* go to tag page for a user tag */ .col-main > p > [href^="/tag/"],
 /* gallery upload artwork breadcrumbs */ a:has(+ .js-gallery-heading), .js-gallery-heading,
-.chartlist-play-button
+.chartlist-play-button,
+.footer-language :is(strong, button)
 {
     --bg: hsl(var(--b4));
     --bg-hov: hsla(var(--b4), 80%);
@@ -14020,6 +14017,8 @@ button.bleh--gallery-bookmark-image-btn {
     display: flex;
     justify-content: end;
 }
+.footer-timezone,
+#language-selector,
 .view-buttons {
     display: flex;
     gap: var(--button-list-gap);
@@ -14028,6 +14027,23 @@ button.bleh--gallery-bookmark-image-btn {
     border-radius: var(--item-med-radius);
     margin-bottom: var(--card-gap);
 
+    .footer-language {
+        display: flex;
+    }
+    &#language-selector {
+        margin-bottom: var(--button-list-gap);
+    }
+    &.footer-timezone {
+        a {
+            display: flex;
+            align-items: center;
+            /*gap: var(--button-list-gap);*/
+            font-size: 0;
+            width: fit-content;
+        }
+    }
+
+    .footer-language .mimic-link,
     .btn:not([aria-checked="true"]) {
         --bg: transparent;
         --bg-hov: hsla(var(--b4), 40%);
