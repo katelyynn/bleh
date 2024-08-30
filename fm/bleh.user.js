@@ -3731,59 +3731,6 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     </div>
                     <div class="sep"></div>
                     <div class="inner-preview pad flex">
-                        <table class="chartlist chartlist--with-index chartlist--with-index--length-2 chartlist--with-image chartlist--with-play chartlist--with-artist chartlist--with-bar">
-                            <tbody>
-                                <tr class="chartlist-row chartlist-row--with-artist">
-                                    <td class="chartlist-index">
-                                        1
-                                    </td>
-                                    <td class="chartlist-image">
-                                        <span class="cover-art">
-                                            <img src="https://lastfm.freetls.fastly.net/i/u/64s/c15d3ed1bd8574260f9378e26847501d.jpg" alt="fractions of infinity" loading="lazy">
-                                        </span>
-                                    </td>
-                                    <td class="chartlist-name">
-                                        <a href="/music/Quadeca/_/fractions+of+infinity" title="fractions of infinity" class="bleh--chartlist-name-without-features">fractions of infinity (feat. Sunday Service Choir)</a>
-                                        <a href="/music/Quadeca/_/fractions+of+infinity" title="fractions of infinity" class="bleh--chartlist-name-with-features">
-                                            <span class="title">fractions of infinity</span>
-                                            <span class="feat">feat. Sunday Service Choir</span>
-                                        </a>
-                                    </td>
-                                    <td class="chartlist-artist bleh--chartlist-name-without-features">
-                                        <a href="/music/Quadeca" title="Quadeca">Quadeca</a>
-                                    </td>
-                                    <td class="chartlist-artist bleh--chartlist-name-with-features">
-                                        <a href="/music/Quadeca" title="Quadeca">Quadeca</a>,
-                                        <a href="/music/Quadeca" title="Quadeca">Sunday Service Choir</a>
-                                    </td>
-                                    <td class="chartlist-bar">
-                                        <span class="chartlist-count-bar">
-                                            <span class="chartlist-count-bar-link">
-                                                <span class="chartlist-count-bar-slug" style="width:100.0%;"></span>
-                                                <span class="chartlist-count-bar-value">
-                                                    104,321
-                                                </span>
-                                            </span>
-                                        </span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <!--<div class="toggle-container" id="container-big_numbers">
-                        <button class="btn reset" onclick="_reset_item('big_numbers')">${trans[lang].settings.reset}</button>
-                        <div class="heading">
-                            <h5>Use alternative numerical font</h5>
-                            <p>A special font solely for numbers, check it out!</p>
-                        </div>
-                        <div class="toggle-wrap">
-                            <button class="toggle" id="toggle-big_numbers" onclick="_update_item('big_numbers')" aria-checked="true">
-                                <div class="dot"></div>
-                            </button>
-                        </div>
-                    </div>-->
-                    <div class="sep"></div>
-                    <div class="inner-preview pad flex">
                         <section class="catalogue-tags">
                             <ul class="tags-list tags-list--global">
                                 <li class="tag">
@@ -3932,6 +3879,46 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                                 <div class="dot"></div>
                             </button>
                         </div>
+                    </div>
+                    <div class="inner-preview pad flex">
+                        <table class="chartlist chartlist--with-index chartlist--with-index--length-2 chartlist--with-image chartlist--with-play chartlist--with-artist chartlist--with-bar">
+                            <tbody>
+                                <tr class="chartlist-row chartlist-row--with-artist">
+                                    <td class="chartlist-index">
+                                        1
+                                    </td>
+                                    <td class="chartlist-image">
+                                        <span class="cover-art">
+                                            <img src="https://lastfm.freetls.fastly.net/i/u/64s/c15d3ed1bd8574260f9378e26847501d.jpg" alt="fractions of infinity" loading="lazy">
+                                        </span>
+                                    </td>
+                                    <td class="chartlist-name">
+                                        <a href="/music/Quadeca/_/fractions+of+infinity" title="fractions of infinity" class="bleh--chartlist-name-without-features">fractions of infinity (feat. Sunday Service Choir)</a>
+                                        <a href="/music/Quadeca/_/fractions+of+infinity" title="fractions of infinity" class="bleh--chartlist-name-with-features">
+                                            <span class="title">fractions of infinity</span>
+                                            <span class="feat">feat. Sunday Service Choir</span>
+                                        </a>
+                                    </td>
+                                    <td class="chartlist-artist bleh--chartlist-name-without-features">
+                                        <a href="/music/Quadeca" title="Quadeca">Quadeca</a>
+                                    </td>
+                                    <td class="chartlist-artist bleh--chartlist-name-with-features">
+                                        <a href="/music/Quadeca" title="Quadeca">Quadeca</a>,
+                                        <a href="/music/Quadeca" title="Quadeca">Sunday Service Choir</a>
+                                    </td>
+                                    <td class="chartlist-bar">
+                                        <span class="chartlist-count-bar">
+                                            <span class="chartlist-count-bar-link">
+                                                <span class="chartlist-count-bar-slug" style="width:100.0%;"></span>
+                                                <span class="chartlist-count-bar-value">
+                                                    104,321
+                                                </span>
+                                            </span>
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                     <div class="toggle-container" id="container-format_guest_features">
                         <button class="btn reset" onclick="_reset_item('format_guest_features')">${trans[lang].settings.reset}</button>
