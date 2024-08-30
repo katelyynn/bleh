@@ -7818,7 +7818,7 @@ text[style^="color: rgb(255, 172, 172)"] {
 .user-dashboard-tooltip {
     background: hsla(var(--b6), 70%);
     backdrop-filter: blur(10px) saturate(160%);
-    border-radius: 50px;
+    border-radius: 20px;
     box-shadow: var(--menu-shadow);
     padding: 7px 14px;
     font-size: var(--font-size);
@@ -7831,6 +7831,29 @@ text[style^="color: rgb(255, 172, 172)"] {
 }
 .tippy-content {
     padding: unset;
+
+    &:has(.header) {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .header {
+        font-weight: var(--font-weight-medium);
+    }
+    .body {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        color: hsla(var(--c2), 80%);
+
+        font-size: var(--font-size-sm);
+        line-height: var(--line-height-sm);
+
+        &:empty {
+            display: none;
+        }
+    }
 }
 .user-dashboard-controls-tooltip:before,
 .tooltip-dark:before {

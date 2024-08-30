@@ -5044,6 +5044,17 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                             }
                         }
                     }
+
+
+                    tippy(track_title, {
+                        content: (`
+                            <div class="header">
+                                <div class="title">${song_title}</div>
+                            </div>
+                            <div class="body">${song_tags_text}</div>
+                        `),
+                        allowHTML: true
+                    });
                 } else if (latest_settings_cache.corrections) {
                     let track_title = track.querySelector('.chartlist-name a');
 
