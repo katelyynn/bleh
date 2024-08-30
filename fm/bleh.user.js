@@ -5513,6 +5513,11 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         if (tracklist == null) {
             let masonry = document.querySelector('.masonry-left-bottom');
 
+            if (masonry == null) {
+                deliver_notif('an error occured loading your tracklist');
+                return;
+            }
+
             tracklist = document.createElement('section');
             tracklist.innerHTML = (`
                 <h3 class="text-18">${trans[lang].music.fetch_plays.name}</h3>
