@@ -3622,6 +3622,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 `);
         } else if (page == 'customise') {
             let preview_bar = 'background: linear-gradient(90deg';
+            let preview_bar_text = '';
 
             // global sat/lit is used to substitute the values computed in h3 sat/lit
             // as they return eg. calc(0.85 * 50%), so we use global_sat to get 0.85
@@ -3641,6 +3642,12 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
                 let percent = ((this_rank.start / maximum) * 100);
                 preview_bar = `${preview_bar}, hsl(${this_rank.hue}, ${h3_sat.replace(global_sat, this_rank.sat)}, ${h3_lit.replace(global_lit, this_rank.lit)}) ${percent}%`;
+
+                if ((this_rank.start > 500 || this_rank.start == 0) && this_rank.start != 1500) {
+                    let text = `${this_rank.start}`;
+
+                    preview_bar_text = `${preview_bar_text}<div class="preview-bar-text-entry" style="left: ${percent}%">${text.replaceAll('_', ',')}</div>`;
+                }
             }
 
             preview_bar = `${preview_bar});`;
@@ -3740,9 +3747,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     <div class="inner-preview pad">
                         <div class="personal-stats-preview-bar-container">
                             <div class="personal-stats-preview-bar" style="${preview_bar}"></div>
-                            <div class="personal-stats-preview-text">
-
-                            </div>
+                            <div class="personal-stats-preview-text">${preview_bar_text}</div>
                         </div>
                         <div class="sep"></div>
                         <table class="chartlist chartlist--with-index chartlist--with-index--length-2 chartlist--with-image chartlist--with-bar">

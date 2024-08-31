@@ -14160,3 +14160,38 @@ button.bleh--gallery-bookmark-image-btn {
         background: hsl(var(--h3)) !important;
     }
 }
+.personal-stats-preview-text {
+    display: flex;
+    position: relative;
+    height: 16px;
+    margin: var(--item-list-gap) -6px var(--card-gap) -6px;
+
+    &:before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        margin-top: -1px;
+        height: 1px;
+        display: block;
+        background-color: var(--card-border-base);
+    }
+
+    .preview-bar-text-entry {
+        position: absolute;
+        top: 0;
+        color: hsl(var(--c3));
+        font-size: var(--font-size-sm);
+        line-height: var(--line-height-sm);
+        font-weight: var(--font-weight-medium);
+
+        padding: 0 6px;
+        background-color: hsl(var(--b6));
+
+        &[style="left: 100%"] {
+            left: unset !important;
+            right: 0;
+        }
+    }
+}
