@@ -63,7 +63,8 @@ body {
 body, [data-page-resource-type="album"], [data-page-resource-type="track"],
 .gallery-image-buttons button, .gallery-image-preferred-button,
 .vote-button--voted,
-.user-dashboard-layout
+.user-dashboard-layout,
+.obsession-history-item-inner
 {
     /* any additional highlights */
     --b3: var(--hue), calc(var(--sat) * 6%), 30%;
@@ -9180,12 +9181,15 @@ table.table tr:nth-child(2n) td {
 .obsession-history-item-artist {
     font-size: var(--font-size);
     line-height: var(--line-height);
+    font-weight: var(--font-weight);
     overflow: visible;
+    opacity: 0.8;
 }
 .obsession-history-item-date {
     font-size: calc(var(--font-size) - 1px);
     line-height: var(--line-height);
     overflow: visible;
+    margin: unset;
 }
 
 .obsession-first {
@@ -9195,28 +9199,40 @@ table.table tr:nth-child(2n) td {
         --hue: 25;
         --sat: 1;
         --lit: 1;
-        border: 2px solid hsl(var(--l3-c));
-        box-shadow: var(--card-shadow), 0 -5px 20px hsla(var(--l3-c), 15%);
+        background:
+        var(--avatar-generic-background) padding-box,
+        linear-gradient(0deg, hsla(var(--h3), 80%) 0%, hsl(var(--b5)) 100%) border-box;
+        border: 2px solid transparent;
+        box-shadow: var(--card-shadow), 0 0 20px 2px hsla(var(--h4), 30%);
         position: relative;
+
+        .obsession-history-item-body {
+            padding: calc(var(--card-gap) - 2px);
+        }
 
         &:after {
             content: var(--obsession-claimed-text);
             position: absolute;
-            background: hsl(var(--l3-c));
-            color: hsl(var(--b7));
+            background: hsl(var(--b5));
+            color: hsl(var(--l3-c));
             opacity: unset;
             mix-blend-mode: unset;
+
             bottom: unset;
             top: 0;
-            right: 10px;
+            left: 50%;
+            margin-left: -25px;
+            width: 50px;
+            height: fit-content;
+            padding: 2px 6px;
+
             border-radius: var(--item-small-radius);
             border-top-left-radius: 0;
             border-top-right-radius: 0;
-            height: 24px;
-            font-size: 12px;
-            font-weight: 600;
-            line-height: 22px;
-            padding: 0 4px;
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-bold);
+            line-height: var(--line-height-sm);
+            text-align: center;
             box-shadow: var(--interact-shadow);
             text-shadow: none !important;
             /* */
@@ -9229,7 +9245,7 @@ table.table tr:nth-child(2n) td {
     display: flex;
     flex-direction: column;
     justify-content: end;
-    padding-top: 15px;
+    padding: var(--card-gap);
     overflow: hidden;
     text-shadow: 0 0 10px rgba(0,0,0,1);
 }
