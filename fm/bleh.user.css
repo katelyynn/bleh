@@ -5576,7 +5576,6 @@ span.shout-user-avatar:before,
     aspect-ratio: 1 / 1;
 }
 
-.source-album-art img,
 .header-avatar-inner-wrap > .avatar img {
     --mask-size: var(--cover-size-100);
 }
@@ -5631,7 +5630,8 @@ button:not(.playback-app-container button, .top-artist-list-item, .pixel, .liste
 /* go to tag page for a user tag */ .col-main > p > [href^="/tag/"],
 /* gallery upload artwork breadcrumbs */ a:has(+ .js-gallery-heading), .js-gallery-heading,
 .chartlist-play-button,
-.footer-language :is(strong, button)
+.footer-language :is(strong, button),
+.source-album
 {
     --bg: hsl(var(--b4));
     --bg-hov: hsla(var(--b4), 80%);
@@ -5816,7 +5816,8 @@ button:not(.playback-app-container button, .top-artist-list-item, .pixel, .liste
 .btn-shortcut,
 .gallery-next .arrow,
 .header-new-gallery--link .header-new-gallery-inner,
-.date-range-picker-button
+.date-range-picker-button,
+.source-album
 {
     --btn-right: calc(12px + 16px + 6px) !important;
 }
@@ -5919,6 +5920,7 @@ button:not(.playback-app-container button, .top-artist-list-item, .pixel, .liste
 .data-loading:before, .lazy-shoutbox.async-content-loading:before, .loading:not(.library-fetch, .library-date-picker):before,
 .user-list-inner-wrap .label:before,
 .nag-bar-message:before,
+.source-album:before,
 /*     BLEH     */
 .arrow-divider:before,
 .list-view-item:before,
@@ -7735,6 +7737,48 @@ form[action="/inbox/notifications"] {
     margin: unset !important;
 }
 
+.source-album {
+    position: relative;
+    --left: none;
+    --right: 12px;
+    --mask: var(--icon-16-arrow-right);
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    .link-block-cover-link {
+        height: unset;
+        width: unset;
+        inset: 0;
+    }
+
+    .source-album-art {
+        margin: unset;
+        flex-shrink: 0;
+        width: 64px;
+
+        img {
+            --mask-size: var(--cover-size-50);
+        }
+    }
+    .source-album-details {
+        .source-album-name {
+            margin: unset;
+        }
+        .source-album-artist {
+            font-weight: var(--font-weight);
+            color: hsla(var(--c2), 80%);
+        }
+        .source-album-stats {
+            font-size: var(--font-size-sm);
+            line-height: var(--line-height-sm);
+            font-weight: var(--font-weight);
+            margin: unset;
+        }
+    }
+}
+
 
 
 
@@ -8331,7 +8375,7 @@ text[style^="color: rgb(0, 0, 0)"] {
     font-weight: var(--font-weight-medium);
     font-size: var(--font-size);
     line-height: var(--line-height);
-    margin-bottom: 2px;
+    margin: unset;
 }
 .big-artist-list-title,
 .playlisting-playlists-item-name,
@@ -8355,9 +8399,10 @@ text[style^="color: rgb(0, 0, 0)"] {
 .similar-items-sidebar-item-aux-text, .similar-items-sidebar-item-regular-tags,
 .music-bookmarks-artists-item-aux-text, .music-bookmarks-albums-item-artist + .music-bookmarks-albums-item-aux-text
 {
-    font-size: calc(var(--font-size) - 1px);
-    line-height: var(--line-height);
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-sm);
     color: hsl(var(--c3));
+    margin: unset;
 }
 
 .catalogue-overview-similar-artists-item .link-block-cover-link,
@@ -8400,7 +8445,10 @@ text[style^="color: rgb(0, 0, 0)"] {
 
 
 /*     TRACK FEATURED ON . . .     */
-.source-album, .source-album-nodata, .track-similar-tracks {
+.source-album, .source-album-nodata {
+    margin-top: unset;
+}
+.track-similar-tracks {
     margin-top: 12px;
 }
 .image-overlay-playlink-link:not(#track-page-video-playlink) {
