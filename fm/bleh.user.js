@@ -1470,6 +1470,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             }
 
             patch_about_this_artist();
+            patch_obsession_view();
         }
 
         // last.fm is a single page application
@@ -1507,6 +1508,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 }
 
                 patch_about_this_artist();
+                patch_obsession_view();
             }
         });
 
@@ -5800,5 +5802,31 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     `);
                 })
         }
+    }
+
+
+
+
+    function patch_obsession_view() {
+        let obsession_container = document.querySelector('.obsession-container');
+
+        if (obsession_container == null)
+            return;
+
+        if (obsession_container.hasAttribute('data-kate-processed'))
+            return;
+        obsession_container.setAttribute('data-kate-processed', 'true');
+
+        let obsession_author = document.querySelector('.obsession-details-intro a').textContent;
+        let obsession_avatar = document.querySelector('.obsession-details-intro-avatar-wrap .avatar');
+
+        patch_avatar(obsession_avatar, obsession_author);
+
+
+        // remove quotations
+        let obsession_reason = document.querySelector('.obsession-reason');
+        let obsession_reason_text = obsession_reason.textContent;
+
+        obsession_reason.textContent = obsession_reason_text.trim().substr(1).slice(0, -1);
     }
 })();
