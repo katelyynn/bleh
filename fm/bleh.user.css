@@ -5419,6 +5419,13 @@ leading to a gap from their own css */
     --mask-size: 18px;
 }
 
+.obsession-details-intro-avatar-wrap .avatar-status-dot
+{
+    width: 24px;
+    height: 24px;
+    --mask-size: 24px;
+}
+
 .attendee-summary-user-avatar .avatar-status-dot,
 .playlisting-playlist-author-image .avatar-status-dot,
 .wiki-history-author-avatar .avatar-status-dot {
@@ -9653,6 +9660,35 @@ table.table tr:nth-child(2n) td {
     align-items: center;
     padding: calc(60px + var(--card-gap)) calc((100% - var(--cards-width)) / 2) !important;
     animation: var(--reduced-motion, zoom_in 0.3s ease);
+
+    .obsession-details-intro-avatar-wrap {
+        .avatar {
+            box-shadow: var(--menu-shadow);
+        }
+    }
+
+    .obsession-extra {
+        padding-left: 24px;
+        position: relative;
+        margin-top: calc(var(--card-gap) * 2);
+
+        &:before {
+            content: '❝';
+            font-size: 110px;
+            line-height: 60px;
+            color: rgba(255, 255, 255, 15%);
+
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .obsession-reason {
+            font-size: 20px;
+            z-index: 5;
+            position: relative;
+        }
+    }
 }
 @keyframes zoom_in {
     from {
@@ -9681,13 +9717,6 @@ table.table tr:nth-child(2n) td {
     line-height: 27px;
 }
 
-.obsession-extra {
-    margin-top: calc(var(--card-gap) * 2);
-}
-.obsession-reason {
-    text-align: center;
-    font-size: 20px;
-}
 .obsession-share {
     display: none;
 }
