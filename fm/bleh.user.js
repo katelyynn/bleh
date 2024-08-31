@@ -3411,6 +3411,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     }
 
     function bleh_settings() {
+        document.body.style.removeProperty('--hue-album');
         let adaptive_skin_container = document.querySelector('.adaptive-skin-container');
 
         if (!adaptive_skin_container.hasAttribute('data-kate-processed')) {
