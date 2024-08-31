@@ -941,7 +941,8 @@ let song_title_corrections = {
         'Days Before Rodeo': 'DAYS BEFORE RODEO',
         'Mamacita (Feat. Rich Homie Quan & Young Thug)': 'Mamacita (feat. Rich Homie Quan & Young Thug)',
         'Basement Freestyle (Live)': 'BASEMENT FREESTYLE (Live)',
-        'Mamacita (live)': 'MAMACITA (Live)'
+        'Mamacita (live)': 'MAMACITA (Live)',
+        'Astroworld [Explicit]': 'ASTROWORLD [Explicit]'
     },
     'yumi': {
         'Dance': 'DANCE'
