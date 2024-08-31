@@ -259,7 +259,7 @@ body {
     --menu-shadow: 2px 2px 24px 0 hsla(var(--b7), 0.35), 3px 6px 48px 16px hsla(var(--b7), 0.25);
     --menu-overlay-shadow: 0 -250px 10px 100px hsla(var(--b6), 70%);
     --avatar-shadow: 3px 6px 15px 10px hsla(var(--b7), 0.05);
-    --standout-shadow: 3px 6px 32px 16px hsla(var(--b7), 0.2);
+    --standout-shadow: 3px 6px 20px 7px hsla(var(--b7), 0.2);
 
     --noise: url('https://katelyynn.github.io/bleh/fm/noise.png');
     --gloss-image: url('https://katelyynn.github.io/bleh/fm/gloss.svg');
