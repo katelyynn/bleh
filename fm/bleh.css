@@ -4639,9 +4639,9 @@ better than the default selector '#app a' i suppose */
 
 /*     YOU!     */
 .chartlist-row--highlight {
-    --bg: var(--hue-gradient,hsla(var(--h3), 25%)) !important;
-    --bg-hov: hsla(var(--h3), 35%) !important;
-    --shadow: 0 0 50px 5px hsla(var(--h3), 25%) !important;
+    --bg: hsla(var(--h4), 25%) !important;
+    --bg-hov: hsla(var(--h4), 35%) !important;
+    --shadow: 0 0 50px 5px hsla(var(--h4), 35%) !important;
 }
 
 

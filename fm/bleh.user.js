@@ -3752,35 +3752,97 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                         <div class="sep"></div>
                         <table class="chartlist chartlist--with-index chartlist--with-index--length-2 chartlist--with-image chartlist--with-bar">
                             <tbody>
-                                <tr class="chartlist-row chartlist-row--highlight">
-                                    <td class="chartlist-index">
-                                        1
-                                    </td>
-                                    <td class="chartlist-image">
-                                        <span class="avatar avatar--bleh-missing">
-                                            <img src="" alt="Your avatar" loading="lazy">
-                                        </span>
-                                    </td>
-                                    <td class="chartlist-name">
-                                        <a class="link-block-target">
-                                            cutensilly
-                                        </a>
-                                    </td>
+                                <tr class="chartlist-row">
+                                    <td class="chartlist-index">1</td>
+                                    <td class="chartlist-image"><span class="avatar avatar--bleh-missing"><img src="" alt="Your avatar" loading="lazy"></span></td>
+                                    <td class="chartlist-name"><a class="link-block-target">${auth}</a></td>
                                     <td class="chartlist-bar">
-                                        <span class="chartlist-count-bar bleh--personal-stats-if-colourful" data-bleh--scrobble-milestone="11" style="--hue: -33.2225; --sat: 1.3286979166666666; --lit: 0.8681479166666667;">
+                                        <span class="chartlist-count-bar bleh--personal-stats-if-colourful" data-bleh--scrobble-milestone="10" style="--hue: -16.888749999999998; --sat: 1.5; --lit: 0.875;">
                                             <span class="chartlist-count-bar-link">
-                                                <span class="chartlist-count-bar-slug" style="width:36.08268870690144%;"></span>
-                                                <span class="chartlist-count-bar-value">
-                                                    19,078
-                                                </span>
+                                                <span class="chartlist-count-bar-slug" style="width: 100%;"></span>
+                                                <span class="chartlist-count-bar-value">14,790</span>
                                             </span>
                                         </span>
                                         <span class="chartlist-count-bar bleh--personal-stats-if-not-colourful">
                                             <span class="chartlist-count-bar-link">
-                                                <span class="chartlist-count-bar-slug" style="width:36.08268870690144%;"></span>
-                                                <span class="chartlist-count-bar-value">
-                                                    19,078
-                                                </span>
+                                                <span class="chartlist-count-bar-slug" style="width: 100%;"></span>
+                                                <span class="chartlist-count-bar-value">14,790</span>
+                                            </span>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr class="chartlist-row chartlist-row--highlight">
+                                    <td class="chartlist-index">2</td>
+                                    <td class="chartlist-image"><span class="avatar avatar--bleh-missing"><img src="" alt="Your avatar" loading="lazy"></span></td>
+                                    <td class="chartlist-name"><a class="link-block-target">${auth}</a></td>
+                                    <td class="chartlist-bar">
+                                        <span class="chartlist-count-bar bleh--personal-stats-if-colourful" data-bleh--scrobble-milestone="9" style="--hue: 0.21863999999999972; --sat: 1.399218; --lit: 0.891406;">
+                                            <span class="chartlist-count-bar-link">
+                                                <span class="chartlist-count-bar-slug" style="width: 57%;"></span>
+                                                <span class="chartlist-count-bar-value">8,597</span>
+                                            </span>
+                                        </span>
+                                        <span class="chartlist-count-bar bleh--personal-stats-if-not-colourful">
+                                            <span class="chartlist-count-bar-link">
+                                                <span class="chartlist-count-bar-slug" style="width: 57%;"></span>
+                                                <span class="chartlist-count-bar-value">8,597</span>
+                                            </span>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr class="chartlist-row">
+                                    <td class="chartlist-index">3</td>
+                                    <td class="chartlist-image"><span class="avatar avatar--bleh-missing"><img src="" alt="Your avatar" loading="lazy"></span></td>
+                                    <td class="chartlist-name"><a class="link-block-target">${auth}</a></td>
+                                    <td class="chartlist-bar">
+                                        <span class="chartlist-count-bar bleh--personal-stats-if-colourful" data-bleh--scrobble-milestone="8" style="--hue: 18.77; --sat: 1.425; --lit: 0.9175833333333334;">
+                                            <span class="chartlist-count-bar-link">
+                                                <span class="chartlist-count-bar-slug" style="width: 33%;"></span>
+                                                <span class="chartlist-count-bar-value">4,980</span>
+                                            </span>
+                                        </span>
+                                        <span class="chartlist-count-bar bleh--personal-stats-if-not-colourful">
+                                            <span class="chartlist-count-bar-link">
+                                                <span class="chartlist-count-bar-slug" style="width: 33%;"></span>
+                                                <span class="chartlist-count-bar-value">4,980</span>
+                                            </span>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr class="chartlist-row">
+                                    <td class="chartlist-index">4</td>
+                                    <td class="chartlist-image"><span class="avatar avatar--bleh-missing"><img src="" alt="Your avatar" loading="lazy"></span></td>
+                                    <td class="chartlist-name"><a class="link-block-target">${auth}</a></td>
+                                    <td class="chartlist-bar">
+                                        <span class="chartlist-count-bar bleh--personal-stats-if-colourful" data-bleh--scrobble-milestone="7" style="--hue: 50.769767441860466; --sat: 1.361813953488372; --lit: 0.943406976744186;">
+                                            <span class="chartlist-count-bar-link">
+                                                <span class="chartlist-count-bar-slug" style="width: 23%;"></span>
+                                                <span class="chartlist-count-bar-value">3,384</span>
+                                            </span>
+                                        </span>
+                                        <span class="chartlist-count-bar bleh--personal-stats-if-not-colourful">
+                                            <span class="chartlist-count-bar-link">
+                                                <span class="chartlist-count-bar-slug" style="width: 23%;"></span>
+                                                <span class="chartlist-count-bar-value">3,384</span>
+                                            </span>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr class="chartlist-row">
+                                    <td class="chartlist-index">5</td>
+                                    <td class="chartlist-image"><span class="avatar avatar--bleh-missing"><img src="" alt="Your avatar" loading="lazy"></span></td>
+                                    <td class="chartlist-name"><a class="link-block-target">${auth}</a></td>
+                                    <td class="chartlist-bar">
+                                        <span class="chartlist-count-bar bleh--personal-stats-if-colourful" data-bleh--scrobble-milestone="5" style="--hue: 92.42; --sat: 1.35; --lit: 0.925;">
+                                            <span class="chartlist-count-bar-link">
+                                                <span class="chartlist-count-bar-slug" style="width: 14%;"></span>
+                                                <span class="chartlist-count-bar-value">2,035</span>
+                                            </span>
+                                        </span>
+                                        <span class="chartlist-count-bar bleh--personal-stats-if-not-colourful">
+                                            <span class="chartlist-count-bar-link">
+                                                <span class="chartlist-count-bar-slug" style="width: 14%;"></span>
+                                                <span class="chartlist-count-bar-value">2,035</span>
                                             </span>
                                         </span>
                                     </td>
