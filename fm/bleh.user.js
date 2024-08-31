@@ -1388,6 +1388,7 @@ let latest_settings_cache = {};
 
 // use the top-right link to determine the current user
 let auth = '';
+let auth_link = '';
 
 let root = '';
 
@@ -1399,7 +1400,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     'use strict';
 
     root = document.querySelector('.masthead-logo a').getAttribute('href');
-    auth = document.querySelector('a.auth-link img').getAttribute('alt');
+    auth_link = document.querySelector('a.auth-link');
+    auth = auth_link.querySelector('img').getAttribute('alt');
     initia();
 
     console.info('loading bleh', version.build, 'with sku', version.sku);
@@ -1606,6 +1608,9 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
         let user_nav = element.querySelectorAll('.auth-dropdown-menu > li')[0];
         let inbox_nav = element.querySelectorAll('.auth-dropdown-menu > li')[2];
+
+        let my_avi = auth_link.querySelector('img').getAttribute('src').replace('avatar42s', 'avatar170s');
+        document.querySelector('.auth-dropdown-menu').style.setProperty('--url', `url(${my_avi})`);
 
         if (!user_nav.hasAttribute('data-kate-processed')) {
             user_nav.setAttribute('data-kate-processed','true');

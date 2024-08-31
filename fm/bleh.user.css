@@ -399,6 +399,7 @@ body {
     --icon-16-arrow-right: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtY2hldnJvbi1yaWdodCI+PHBhdGggZD0ibTkgMTggNi02LTYtNiIvPjwvc3ZnPg==');
     --icon-16-star: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImhzbCgyNTUsMjAlLDkwJSkiIHN0cm9rZS13aWR0aD0iMi41IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLXN0YXIiPjxwb2x5Z29uIHBvaW50cz0iMTIgMiAxNS4wOSA4LjI2IDIyIDkuMjcgMTcgMTQuMTQgMTguMTggMjEuMDIgMTIgMTcuNzcgNS44MiAyMS4wMiA3IDE0LjE0IDIgOS4yNyA4LjkxIDguMjYgMTIgMiIvPjwvc3ZnPg==');
     --icon-16-dots: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtZWxsaXBzaXMiPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEiLz48Y2lyY2xlIGN4PSIxOSIgY3k9IjEyIiByPSIxIi8+PGNpcmNsZSBjeD0iNSIgY3k9IjEyIiByPSIxIi8+PC9zdmc+');
+    --icon-16-mention: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtYXQtc2lnbiI+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iNCIvPjxwYXRoIGQ9Ik0xNiA4djVhMyAzIDAgMCAwIDYgMHYtMWExMCAxMCAwIDEgMC00IDgiLz48L3N2Zz4=');
     --icon-16-user: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtdXNlciI+PHBhdGggZD0iTTE5IDIxdi0yYTQgNCAwIDAgMC00LTRIOWE0IDQgMCAwIDAtNCA0djIiLz48Y2lyY2xlIGN4PSIxMiIgY3k9IjciIHI9IjQiLz48L3N2Zz4=');
     --icon-16-user-remove: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtdXNlci14Ij48cGF0aCBkPSJNMTYgMjF2LTJhNCA0IDAgMCAwLTQtNEg2YTQgNCAwIDAgMC00IDR2MiIvPjxjaXJjbGUgY3g9IjkiIGN5PSI3IiByPSI0Ii8+PGxpbmUgeDE9IjE3IiB4Mj0iMjIiIHkxPSI4IiB5Mj0iMTMiLz48bGluZSB4MT0iMjIiIHgyPSIxNyIgeTE9IjgiIHkyPSIxMyIvPjwvc3ZnPg==');
     --icon-16-upload: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtYXJyb3ctdXAtZnJvbS1saW5lIj48cGF0aCBkPSJtMTggOS02LTYtNiA2Ii8+PHBhdGggZD0iTTEyIDN2MTQiLz48cGF0aCBkPSJNNSAyMWgxNCIvPjwvc3ZnPg==');
@@ -4079,6 +4080,7 @@ state is not active, which then falls back to primary button styling */
 .tasteometer-compat-colour {
     fill: hsl(var(--l3-c)) !important;
     color: hsl(var(--l3-c)) !important;
+    font-weight: var(--font-weight-medium) !important;
 }
 
 .tasteometer-body:not(:has(.tasteometer-compat-description)) {
@@ -4124,6 +4126,7 @@ state is not active, which then falls back to primary button styling */
 .tasteometer-compat-very_low {
     fill: hsl(var(--c3)) !important;
     color: hsl(var(--c3)) !important;
+    font-weight: var(--font-weight) !important;
 }
 
 
@@ -6457,7 +6460,7 @@ very, very, very dated - who looks up a song on ebay? */
     --mask: var(--icon-16-correction);
 }
 [data-analytics-label="profile"] {
-    --mask: var(--icon-16-user);
+    --mask: var(--icon-16-mention);
     text-align: center;
     --btn-top: calc(7px + 16px + 6px);
     --left: 50%;
@@ -6465,7 +6468,32 @@ very, very, very dated - who looks up a song on ebay? */
     --top: 7px;
     --margin-top: 0;
     --btn-left: 12px !important;
+
+    --bg: transparent !important;
+    --bg-hov: transparent !important;
+    --bg-atv: transparent !important;
 }
+.auth-dropdown-menu {
+    overflow: hidden;
+
+    &:before {
+        content: '';
+        display: block !important;
+
+        background-image: var(--url) !important;
+        position: absolute;
+        inset: 0 !important;
+        width: unset !important;
+        height: 110px !important;
+        background-size: cover !important;
+        background-position-y: 30% !important;
+        --mask: linear-gradient(0deg, transparent 0%, rgb(0, 0, 0) 100%);
+        mask-image: var(--mask);
+        -webkit-mask-image: var(--mask);
+        opacity: 0.22;
+    }
+}
+
 [data-analytics-label="notifications"] {
     --mask: var(--icon-16-notifications);
 }
