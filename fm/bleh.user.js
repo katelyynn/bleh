@@ -3545,7 +3545,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                                 <p>${trans[lang].settings.home.colours.bio}</p>
                             </div>
                         </button>
-                        <button class="btn setting-item" onclick="_change_settings_page('customise')">
+                        <button class="btn setting-item" onclick="_change_settings_page('accessibility')">
                             <div class="icon bleh--link"></div>
                             <div class="text">
                                 <h5>${trans[lang].settings.accessibility.underline_links.name}</h5>
@@ -5010,8 +5010,6 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
 
     function patch_titles(element) {
-        let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
-
         let tracks = element.querySelectorAll('.chartlist-row:not(.chartlist__placeholder-row)');
 
         if (tracks == undefined)
@@ -5021,31 +5019,24 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             if (!track.hasAttribute('data-kate-processed')) {
                 track.setAttribute('data-kate-processed','true');
 
+                // image
+                let track_image = track.querySelector('.chartlist-image span');
+
+                if (track_image != undefined) {
+                    // artist statistic
+                    if (track_image.classList.contains('avatar') && settings.colourful_counts) {
+                        patch_artist_ranks_in_list_view(track);
+                        return;
+                    }
+                }
+
                 // duration
                 let track_timestamp = track.querySelector('.chartlist-timestamp span');
                 if (track_timestamp != undefined) {
                     tippy(track_timestamp, {
                         content: track_timestamp.getAttribute('title')
                     });
-                    track_timestamp.setAttribute('title','');
-                }
-
-
-                // image
-                let track_image = track.querySelector('.chartlist-image span');
-
-                if (track_image != undefined) {
-                    let track_image_img = track_image.querySelector('img');
-                    tippy(track_image, {
-                        content: track_image_img.getAttribute('alt')
-                    })
-
-
-                    // artist statistic
-                    if (track_image.classList.contains('avatar') && settings.colourful_counts) {
-                        patch_artist_ranks_in_list_view(track);
-                        return;
-                    }
+                    track_timestamp.setAttribute('title', '');
                 }
 
                 if (settings.format_guest_features) {
