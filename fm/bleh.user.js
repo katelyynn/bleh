@@ -1183,6 +1183,7 @@ let profile_badges = {
 };
 
 
+let settings;
 let settings_template = {
     theme: 'dark',
     gloss: 0,
@@ -1397,7 +1398,6 @@ let inbuilt_settings = {
         type: 'toggle'
     }
 }
-let latest_settings_cache = {};
 
 // use the top-right link to determine the current user
 let auth = '';
@@ -1415,9 +1415,10 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     root = document.querySelector('.masthead-logo a').getAttribute('href');
     auth_link = document.querySelector('a.auth-link');
     auth = auth_link.querySelector('img').getAttribute('alt');
-    initia();
 
     console.info('loading bleh', version.build, 'with sku', version.sku);
+
+    initia();
 
     function initia() {
         let performance_start = performance.now();
@@ -1445,18 +1446,21 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             patch_gallery_page();
 
             album_missing_a_tracklist();
-            prep_combo_settings();
 
             patch_header_title(document.body);
             patch_artist_grids(document.body);
             patch_titles(document.body);
-            correct_generic_combo_no_artist('artist-header-featured-items-item');
-            correct_generic_combo_no_artist('artist-top-albums-item');
-            correct_generic_combo('source-album-details');
-            correct_generic_combo('resource-list--release-list-item');
-            correct_generic_combo('similar-albums-item');
-            correct_generic_combo('track-similar-tracks-item');
-            correct_generic_combo('similar-items-sidebar-item');
+
+            if (settings.corrections) {
+                correct_generic_combo_no_artist('artist-header-featured-items-item');
+                correct_generic_combo_no_artist('artist-top-albums-item');
+                correct_generic_combo('source-album-details');
+                correct_generic_combo('resource-list--release-list-item');
+                correct_generic_combo('similar-albums-item');
+                correct_generic_combo('track-similar-tracks-item');
+                correct_generic_combo('similar-items-sidebar-item');
+            }
+
             patch_about_this_artist();
         }
 
@@ -1479,18 +1483,21 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 patch_gallery_page();
 
                 album_missing_a_tracklist();
-                prep_combo_settings();
 
                 patch_header_title(document.body);
                 patch_artist_grids(document.body);
                 patch_titles(document.body);
-                correct_generic_combo_no_artist('artist-header-featured-items-item');
-                correct_generic_combo_no_artist('artist-top-albums-item');
-                correct_generic_combo('source-album-details');
-                correct_generic_combo('resource-list--release-list-item');
-                correct_generic_combo('similar-albums-item');
-                correct_generic_combo('track-similar-tracks-item');
-                correct_generic_combo('similar-items-sidebar-item');
+
+                if (settings.corrections) {
+                    correct_generic_combo_no_artist('artist-header-featured-items-item');
+                    correct_generic_combo_no_artist('artist-top-albums-item');
+                    correct_generic_combo('source-album-details');
+                    correct_generic_combo('resource-list--release-list-item');
+                    correct_generic_combo('similar-albums-item');
+                    correct_generic_combo('track-similar-tracks-item');
+                    correct_generic_combo('similar-items-sidebar-item');
+                }
+
                 patch_about_this_artist();
             }
         });
@@ -1703,7 +1710,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
     // load settings
     function load_settings() {
-        let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
+        settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
 
         // missing? set to default value
         for (let setting in settings_template)
@@ -3212,12 +3219,6 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     }
 
 
-    function prep_combo_settings() {
-        console.info('bleh - latest settings state saved');
-        latest_settings_cache = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
-    }
-
-
     /**
      * correct capitalisation of a generic album/track name & artist combo
      * @param {string} parent individual css selector for each item wrapper
@@ -3229,9 +3230,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         if (albums == undefined)
             return;
 
-        console.info(latest_settings_cache);
-
-        if (!latest_settings_cache.corrections)
+        if (!settings.corrections)
             return;
 
         albums.forEach((album) => {
@@ -3264,11 +3263,6 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         if (albums == undefined)
             return;
 
-        console.info(latest_settings_cache);
-
-        if (!latest_settings_cache.corrections)
-            return;
-
         albums.forEach((album) => {
             if (!album.hasAttribute('data-kate-processed')) {
                 album.setAttribute('data-kate-processed','true');
@@ -3295,9 +3289,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         artist = artist.toLowerCase();
         console.info('bleh - correction handler: correcting', item, 'by', artist);
 
-        console.info(latest_settings_cache);
-
-        if (!latest_settings_cache.corrections)
+        if (!settings.corrections)
             return item;
 
         if (song_title_corrections.hasOwnProperty(artist)) {
@@ -3319,9 +3311,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     function correct_artist(artist) {
         console.info('bleh - correction handler: correcting', artist);
 
-        console.info(latest_settings_cache);
-
-        if (!latest_settings_cache.corrections)
+        if (!settings.corrections)
             return artist;
 
         if (artist_corrections.hasOwnProperty(artist)) {
@@ -3336,7 +3326,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
 
     function patch_about_this_artist() {
-        if (!latest_settings_cache.corrections)
+        if (!settings.corrections)
             return;
 
         let about_artist_name = document.querySelector('.about-artist-name');
@@ -4944,7 +4934,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         console.log(original_title, original_artist);
         let formatted_title = original_title;
 
-        if (song_title_corrections.hasOwnProperty(original_artist.toLowerCase()) && latest_settings_cache.corrections) {
+        if (song_title_corrections.hasOwnProperty(original_artist.toLowerCase()) && settings.corrections) {
             if (song_title_corrections[original_artist.toLowerCase()].hasOwnProperty(formatted_title))
                 formatted_title = song_title_corrections[original_artist.toLowerCase()][formatted_title];
         }
@@ -5102,7 +5092,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                             }
                         }
                     }
-                } else if (latest_settings_cache.corrections) {
+                } else if (settings.corrections) {
                     let track_title = track.querySelector('.chartlist-name a');
 
                     if (track_title == undefined)
@@ -5671,27 +5661,13 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             return;
 
         // cover
-        if (latest_settings_cache.hue_from_album) {
+        if (settings.hue_from_album) {
             let header_inner = document.querySelector('.header-new-inner');
             let bg = header_inner.getAttribute('style').replace('background: #', '');
             let hsl = hex_to_hsl(bg);
             console.info('hsl', hsl);
             if (hsl.h > 0)
                 document.body.style.setProperty('--hue-album', hsl.h);
-            /*document.querySelector('.album-overview-cover-art img').setAttribute('crossOrigin', 'anonymous');
-            document.querySelector('.album-overview-cover-art img').addEventListener('load',function() {
-                console.error('thing loaded');
-                try {
-                    let vibrant = new Vibrant(document.querySelector('.album-overview-cover-art img'));
-                    let swatches = vibrant.swatches();
-                    for (let swatch in swatches) {
-                        let hsl = swatches.DarkVibrant.getHsl();
-                        document.body.style.setProperty('--hue',Math.round(hsl[0] * 360));
-                        document.body.style.setProperty('--sat',hsl[1]);
-                        document.body.style.setProperty('--lit',clamp_lit(Math.round(hsl[0] * 360),hsl[2]));
-                    }
-                } catch(e) { console.error('vibrant error', e); document.body.style.setProperty('--hue','0'); document.body.style.setProperty('--sat','0'); }
-            });*/
         }
 
         if (header.hasAttribute('data-kate-processed'))
