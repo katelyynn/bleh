@@ -856,7 +856,8 @@ let artist_corrections = {
     'Charli XCX': 'Charli xcx',
     'Underscores': 'underscores',
     'Thrown': 'thrown',
-    'Mitsu': 'mitsu'
+    'Mitsu': 'mitsu',
+    'Vexed': 'VEXED'
 }
 let song_title_corrections = {
     'quadeca': {
