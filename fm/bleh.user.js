@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         bleh
 // @namespace    http://last.fm/
-// @version      2024.0830
+// @version      2024.0831
 // @description  bleh!!! ^-^
 // @author       kate
 // @match        https://www.last.fm/*
@@ -16,7 +16,7 @@
 // ==/UserScript==
 
 let version = {
-    build: '2024.0830',
+    build: '2024.0831',
     sku: 'main',
     feature_flags: {}
 }
@@ -3502,7 +3502,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                         <img class="screen" src="https://cutensilly.org/img/bleh3-theme-${document.documentElement.getAttribute('data-bleh--theme')}.png" alt="bleh">
                         <div class="text">
                             <h5>${trans[lang].settings.home.brand}</h5>
-                            <p>${trans[lang].settings.home.version.replace('{v}', version.build)}</p>
+                            <p>${trans[lang].settings.home.version.replace('{v}', `${version.build}.${version.sku}`)}</p>
                         </div>
                     </div>
                     <div class="actions">

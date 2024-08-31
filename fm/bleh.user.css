@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           bleh (dev)
 @namespace      github.com/katelyynn/bleh
-@version        2024.0830
+@version        2024.0831
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.css
@@ -15,14 +15,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu+Sans:ital,wght@0,100..800;1,100..800&display=swap');
 
 body {
-    --hue: var(--new-hue, var(--base-hue, 255));
-    --sat: var(--new-sat, var(--saturation, 1));
-    --lit: var(--new-lit, var(--lightness, 1));
-    --ovr: var(--new-ovr, var(--b7));
+    --hue: 255;
+    --sat: 1;
+    --lit: 1;
+    --ovr: var(--b7);
 
     --brand: 'bleh';
-    --brand-branch: '';
-    --brand-info: '2024.0606';
 
     --hue-pos: 160;
     --hue-neg: -2;
@@ -55,9 +53,6 @@ body {
     --font-weight: 480;
     --font-weight-medium: 650;
     --font-weight-bold: 730;
-
-    --skew: -2deg;
-    --skew-anti: 2deg;
 
     --trans-short: 0.25s;
     --trans: 0.4s;
@@ -293,8 +288,8 @@ body {
     /* cover masks */
     --cover-size-32: 20px;
     --cover-size-50: 32px;
-    --cover-size-100: 48px;
-    --cover-size-200: 84px;
+    --cover-size-100: 40px;
+    --cover-size-200: 72px;
     --cover-size-300: 96px;
 
     --name-colour: hsl(var(--l3-c));
@@ -4453,7 +4448,6 @@ better than the default selector '#app a' i suppose */
 .chartlist {
     animation: slide_down var(--trans) var(--trans-function);
     transform-origin: top;
-    /*transform: skewX(var(--skew)) !important;*/
 
     &:not(.chartlist--with-image) {
         .chartlist-image {
@@ -4505,9 +4499,6 @@ better than the default selector '#app a' i suppose */
 }
 
 
-/*.chartlist-row > * {
-    transform: skewX(var(--skew-anti)) !important;
-}*/
 .chartlist--with-image .chartlist-row, .chartlist--with-index.chartlist--with-image .chartlist-row, .chartlist--with-index .chartlist-row, .chartlist--with-more.chartlist--with-mobile-play .chartlist-row, .chartlist--with-more .chartlist-row, .chartlist--with-reorder.chartlist--with-image .chartlist-row, .chartlist--with-reorder .chartlist-row, .chartlist--with-type.chartlist--with-image .chartlist-row, .chartlist-row
 {
     padding-left: 12px;
@@ -5667,7 +5658,6 @@ button:not(.playback-app-container button, .top-artist-list-item, .pixel, .liste
     transition-timing-function: var(--trans-function) !important;
     user-select: none;
     cursor: pointer;
-    /*transform: skewX(var(--skew)) !important;*/
 
     &:is(.gallery-next, .gallery-previous):hover .arrow,
     &:hover {
