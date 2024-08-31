@@ -4899,6 +4899,10 @@ a.chartlist-love-button:after {
 .chartlist-play-button {
     --left: 8px;
     --mask: var(--icon-16-play);
+
+    &:before {
+        background-color: currentColor !important;
+    }
 }
 
 .chartlist-row:not(:hover) .chartlist-play {
