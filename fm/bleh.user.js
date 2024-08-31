@@ -5673,8 +5673,9 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             let header_inner = document.querySelector('.header-new-inner');
             let bg = header_inner.getAttribute('style').replace('background: #', '');
             let hsl = hex_to_hsl(bg);
-            console.error('hsl', hsl);
-            document.body.style.setProperty('--hue-album', hsl.h);
+            console.info('hsl', hsl);
+            if (hsl.h > 0)
+                document.body.style.setProperty('--hue-album', hsl.h);
             /*document.querySelector('.album-overview-cover-art img').setAttribute('crossOrigin', 'anonymous');
             document.querySelector('.album-overview-cover-art img').addEventListener('load',function() {
                 console.error('thing loaded');
