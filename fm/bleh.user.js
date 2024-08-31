@@ -156,6 +156,10 @@ const trans = {
                 artwork: {
                     name: 'Artwork'
                 },
+                hue_from_album: {
+                    name: 'Automatically colour album pages',
+                    bio: 'Picks the primary colour from an album cover to paint the page.'
+                },
                 gloss: {
                     name: 'Gloss overlay',
                     bio: 'Apply flair to all cover arts.'
@@ -1202,11 +1206,12 @@ let settings_template = {
     list_view: 1,
     shout_markdown: true,
     bio_markdown: true,
-    pretty_obsessions: true
+    pretty_obsessions: true,
+    hue_from_album: true
 };
 let settings_base = {
     hue: {
-        css: 'hue',
+        css: 'hue-preference',
         unit: '',
         value: 255,
         type: 'slider'
@@ -1348,6 +1353,13 @@ let settings_base = {
     },
     pretty_obsessions: {
         css: 'pretty_obsessions',
+        unit: '',
+        value: true,
+        values: [true, false],
+        type: 'toggle'
+    },
+    hue_from_album: {
+        css: 'hue_from_album',
         unit: '',
         value: true,
         values: [true, false],
@@ -1703,7 +1715,9 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
         // save setting into body
         for (let setting in settings) {
-            document.body.style.setProperty(`--${setting}`, settings[setting]);
+            try {
+                document.body.style.setProperty(`--${settings_base[setting].css}`, settings[setting]);
+            } catch(e) {}
             document.documentElement.setAttribute(`data-bleh--${setting}`, `${settings[setting]}`);
         }
 
@@ -1717,7 +1731,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
         // save value
         settings[setting] = value;
-        document.body.style.setProperty(`--${setting}`, value);
+        document.body.style.setProperty(`--${settings_base[setting].css}`, value);
         document.documentElement.setAttribute(`data-bleh--${setting}`, `${value}`);
 
         // save to settings
@@ -3802,6 +3816,18 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                             <div class="album-cover" style="background-image: url('https://lastfm.freetls.fastly.net/i/u/770x0/e39eb31f874f4a5c4afa836845141437.jpg')"></div>
                         </div>
                     </div>
+                    <div class="toggle-container" id="container-hue_from_album">
+                        <button class="btn reset" onclick="_reset_item('hue_from_album')">${trans[lang].settings.reset}</button>
+                        <div class="heading">
+                            <h5>${trans[lang].settings.customise.hue_from_album.name}</h5>
+                            <p>${trans[lang].settings.customise.hue_from_album.bio}</p>
+                        </div>
+                        <div class="toggle-wrap">
+                            <button class="toggle" id="toggle-hue_from_album" onclick="_update_item('hue_from_album')" aria-checked="true">
+                                <div class="dot"></div>
+                            </button>
+                        </div>
+                    </div>
                     <div class="slider-container" id="container-gloss">
                         <button class="btn reset" onclick="_reset_item('gloss')">${trans[lang].settings.reset}</button>
                         <div class="heading">
@@ -5591,11 +5617,79 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
 
 
+    /* https://stackoverflow.com/questions/46432335/hex-to-hsl-convert-javascript */
+    function hex_to_hsl(hex) {
+        let result = new RegExp(/^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i).exec(hex);
+
+        let r = parseInt(result[1], 16);
+        let g = parseInt(result[2], 16);
+        let b = parseInt(result[3], 16);
+
+        r /= 255, g /= 255, b /= 255;
+        let max = Math.max(r, g, b), min = Math.min(r, g, b);
+        let h, s, l = (max + min) / 2;
+
+        if (max == min) {
+            h = s = 0; // achromatic
+        } else {
+            let d = max - min;
+            s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+            switch (max) {
+                case r:
+                    h = (g - b) / d + (g < b ? 6 : 0);
+                    break;
+                case g:
+                    h = (b - r) / d + 2;
+                    break;
+                case b:
+                    h = (r - g) / d + 4;
+                    break;
+            }
+            h /= 6;
+        }
+
+        h = Math.round(h * 360);
+        s = s * 100;
+        s = Math.round(s);
+        l = l * 100;
+        l = Math.round(l);
+
+        return {
+            h: h,
+            s: s,
+            l: l
+        };
+    }
 
     function album_missing_a_tracklist() {
+        document.body.style.removeProperty('--hue-album');
+
         let header = document.querySelector('.header-new--album');
         if (header == null)
             return;
+
+        // cover
+        if (latest_settings_cache.hue_from_album) {
+            let header_inner = document.querySelector('.header-new-inner');
+            let bg = header_inner.getAttribute('style').replace('background: #', '');
+            let hsl = hex_to_hsl(bg);
+            console.error('hsl', hsl);
+            document.body.style.setProperty('--hue-album', hsl.h);
+            /*document.querySelector('.album-overview-cover-art img').setAttribute('crossOrigin', 'anonymous');
+            document.querySelector('.album-overview-cover-art img').addEventListener('load',function() {
+                console.error('thing loaded');
+                try {
+                    let vibrant = new Vibrant(document.querySelector('.album-overview-cover-art img'));
+                    let swatches = vibrant.swatches();
+                    for (let swatch in swatches) {
+                        let hsl = swatches.DarkVibrant.getHsl();
+                        document.body.style.setProperty('--hue',Math.round(hsl[0] * 360));
+                        document.body.style.setProperty('--sat',hsl[1]);
+                        document.body.style.setProperty('--lit',clamp_lit(Math.round(hsl[0] * 360),hsl[2]));
+                    }
+                } catch(e) { console.error('vibrant error', e); document.body.style.setProperty('--hue','0'); document.body.style.setProperty('--sat','0'); }
+            });*/
+        }
 
         if (header.hasAttribute('data-kate-processed'))
             return;
