@@ -1520,8 +1520,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     }
 
     function append_style() {
-        let cached_style = localStorage.getItem('bleh_cached_style') || '';
         let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
+        let cached_style = localStorage.getItem('bleh_cached_style') || '';
 
         // style is not fetched in dev mode
         if (settings.dev)
@@ -1633,7 +1633,6 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     }
 
     function append_nav(element) {
-        let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
         let user_nav = element.querySelectorAll('.auth-dropdown-menu > li')[0];
         let inbox_nav = element.querySelectorAll('.auth-dropdown-menu > li')[2];
 
@@ -1743,8 +1742,6 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
     // save a setting
     function setting(setting, value) {
-        let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
-
         // save value
         settings[setting] = value;
         document.body.style.setProperty(`--${settings_base[setting].css}`, value);
@@ -1757,7 +1754,6 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
     // toggle setting
     unsafeWindow.toggle_setting = function(setting) {
-        let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
 
         let value = settings[setting];
 
@@ -1779,7 +1775,6 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
     // theme
     unsafeWindow.toggle_theme = function() {
-        let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
 
         let current_theme = settings.theme;
 
@@ -1803,7 +1798,6 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     }
 
     unsafeWindow.change_theme_from_settings = function(theme) {
-        let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
 
         document.getElementById('theme-value').textContent = trans[lang].settings.themes[theme].name;
 
@@ -2584,7 +2578,6 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
     // patch profile pages
     function patch_profile(element) {
-        let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
         let profile_header = element.querySelector('.header-title-label-wrap');
 
         if (profile_header == undefined)
@@ -2936,7 +2929,6 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
     // patch shouts
     function patch_shouts(element) {
-        let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
         let shouts = element.querySelectorAll('.shout');
 
         shouts.forEach((shout) => {
@@ -3046,7 +3038,6 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
     // artist ranks
     function patch_artist_ranks(element) {
-        let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
 
         if (settings.colourful_counts) {
             patch_artist_ranks_in_grid_view(document.body);
@@ -4490,7 +4481,6 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     }
 
     function refresh_all() {
-        let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
         for (let item in settings_base)
             update_item(item, settings[item], false);
     }
@@ -4521,7 +4511,6 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     function update_item(item, value, modify=true) {
         console.log('update item',item,value);
         try {
-        let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
         if (settings_base[item].type == 'slider' && modify)
             settings[item] = value;
 
@@ -4733,7 +4722,6 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
     // create a custom colour
     unsafeWindow._create_a_custom_colour = function() {
-        let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
         create_window('custom_colour',trans[lang].settings.customise.colours.custom,`
         <p>${trans[lang].settings.customise.colours.modals.custom_colour.preface}</p>
         <br>
@@ -4952,7 +4940,6 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
     // export settings
     function export_settings() {
-        let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
 
         create_window('export_settings',trans[lang].settings.actions.export.modals.initial.name,`
             <p class="alert alert-success">${trans[lang].settings.actions.export.modals.initial.alert}</p>
@@ -5185,7 +5172,6 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     }
 
     function patch_header_title(element) {
-        let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
 
         let track_title = element.querySelector('.header-new-title');
         let track_artist = element.querySelector('.header-new-crumb span');
@@ -5300,7 +5286,6 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     }
 
     function start_rain() {
-        let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
 
         if (settings.rain)
             rain();
