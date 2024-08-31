@@ -550,6 +550,10 @@ const trans = {
                 artwork: {
                     name: 'Okładka'
                 },
+                hue_from_album: {
+                    name: 'Automatically colour album pages',
+                    bio: 'Picks the primary colour from an album cover to paint the page.'
+                },
                 gloss: {
                     name: 'Nakładka błyszcząca',
                     bio: 'Dodaj odblasku do wszystkich okładek.'
@@ -1655,7 +1659,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                         </button>
                     </li>
                     <li>
-                        <a class="auth-dropdown-menu-item bleh--configure-menu-item" href="/bleh">
+                        <a class="auth-dropdown-menu-item bleh--configure-menu-item" href="${root}bleh">
                             <span class="auth-dropdown-item-row">
                                 <span class="auth-dropdown-item-left">${trans[lang].auth_menu.configure_bleh}</span>
                             </span>
@@ -1864,7 +1868,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
         charts_panel.innerHTML = (`
             <h3>${trans[lang].settings.inbuilt.charts.name}</h3>
-            <form action="/settings#update-chart" name="chart-form" method="post">
+            <form action="${root}settings#update-chart" name="chart-form" method="post">
                 <input type="hidden" name="csrfmiddlewaretoken" value="${token}">
                 <div class="inner-preview pad">
                     <div class="tracks recent">
@@ -2212,7 +2216,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                         </div>
                     </div>
                     <div class="sub-info">
-                        <form action="/settings#update-profile" name="profile-form" data-form-type="identity" method="post">
+                        <form action="${root}settings#update-profile" name="profile-form" data-form-type="identity" method="post">
                             <input type="hidden" name="csrfmiddlewaretoken" value="${token}">
                             <div class="info-row">
                                 <div class="title">
@@ -2317,7 +2321,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     function open_avatar_changer(token) {
         create_window('edit_avatar',trans[lang].settings.inbuilt.profile.avatar.name,`
             <div class="bleh--upload-avatar-container">
-                <form class="avatar-upload-form bleh--upload-avatar-form" action="/settings" name="avatar-form" method="post" enctype="multipart/form-data">
+                <form class="avatar-upload-form bleh--upload-avatar-form" action="${root}settings" name="avatar-form" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="csrfmiddlewaretoken" value="${token}">
                     <div class="form-group form-group--avatar js-form-group">
                         <div class="js-form-group-controls form-group-controls">
@@ -2335,7 +2339,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                         <input type="hidden" value="avatar" name="submit">
                     </div>
                 </form>
-                <form class="image-remove-form bleh--upload-avatar-form" action="/settings/avatar/delete" method="post">
+                <form class="image-remove-form bleh--upload-avatar-form" action="${root}settings/avatar/delete" method="post">
                     <input type="hidden" name="csrfmiddlewaretoken" value="${token}">
                     <div class="form-group">
                         <button class="mimic-link image-upload-remove" type="submit" value="delete-avatar" name="delete-avatar">Delete picture</button>
@@ -2422,7 +2426,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
         privacy_panel.innerHTML = (`
             <h3>${trans[lang].settings.inbuilt.privacy.name}</h3>
-            <form action="/settings/privacy" name="privacy" method="post">
+            <form action="${root}settings/privacy" name="privacy" method="post">
                 <input type="hidden" name="csrfmiddlewaretoken" value="${token}">
                 <div class="inner-preview pad">
                     <div class="tracks recent_listening">
@@ -2606,7 +2610,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
                 let avatar_link = document.createElement('a');
                 avatar_link.classList.add('bleh--avatar-clickable-link');
-                avatar_link.href = '/settings';
+                avatar_link.href = `${root}settings`;
                 header_avatar.appendChild(avatar_link);
             } else {
                 // is there a follow button?
