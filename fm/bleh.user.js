@@ -5701,7 +5701,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             let masonry = document.querySelector('.masonry-left-bottom');
 
             if (masonry == null) {
-                deliver_notif('an error occured loading your tracklist');
+                /*deliver_notif('an error occured loading your tracklist');*/
                 return;
             }
 
