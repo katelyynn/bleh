@@ -52,7 +52,6 @@ body {
 /* backgrounds */
 body, [data-page-resource-type="album"], [data-page-resource-type="track"],
 .gallery-image-buttons button, .gallery-image-preferred-button,
-.vote-button--voted,
 .user-dashboard-layout,
 .obsession-history-item-inner
 {
@@ -5124,6 +5123,11 @@ p + .chartlist {
     --padding: 4px 9px 4px calc(9px + 16px + 6px) !important;
 }
 .vote-button--voted {
+    --bg: hsla(var(--h4), 20%) !important;
+    --bg-hov: hsla(var(--h4), 40%) !important;
+    --bg-atv: hsla(var(--h4), 60%) !important;
+    --shadow: none !important;
+    --shadow-hov: none !important;
     --col: hsl(var(--l3-c)) !important;
     --force-font-weight: var(--font-weight-medium) !important;
 }
