@@ -5,7 +5,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu+Sans:ital,wght@0,100..800;1,100..800&display=swap');
 
 body {
-    --hue: 255;
+    --hue: var(--hue-album, var(--hue-preference, 255));
     --sat: 1;
     --lit: 1;
     --ovr: var(--b7);
