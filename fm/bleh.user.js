@@ -5825,6 +5825,10 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
         // remove quotations
         let obsession_reason = document.querySelector('.obsession-reason');
+
+        if (obsession_reason == null)
+            return;
+
         let obsession_reason_text = obsession_reason.textContent;
 
         obsession_reason.textContent = obsession_reason_text.trim().substr(1).slice(0, -1);
