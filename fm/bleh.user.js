@@ -861,7 +861,10 @@ let artist_corrections = {
     'Underscores': 'underscores',
     'Thrown': 'thrown',
     'Mitsu': 'mitsu',
-    'Vexed': 'VEXED'
+    'Vexed': 'VEXED',
+    'HeavensGate': 'HEAVENSGATE',
+    'Tool': 'TOOL',
+    'Blackshape': 'BLACKSHAPE'
 }
 let song_title_corrections = {
     'quadeca': {
