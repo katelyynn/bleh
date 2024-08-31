@@ -3213,6 +3213,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
 
     function prep_combo_settings() {
+        console.info('bleh - latest settings state saved');
         latest_settings_cache = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
     }
 
