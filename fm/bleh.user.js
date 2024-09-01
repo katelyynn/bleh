@@ -5073,7 +5073,12 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
             let field_group = extras[extra].group;
             // remove beginning tag
-            let field_text = extras[extra].text.replace(' feat. ','').replace('feat. ','').replace('featuring ','').replace('w/ ','').replace('with ','').replaceAll(' & ',';').replaceAll(', ',';').replaceAll(' and ',';').replaceAll('Tyler;the', 'Tyler, the').replaceAll(' with ',';').replaceAll('- ', '');
+            let field_text = extras[extra].text
+            .replace(' feat. ', '').replace('feat. ', '').replace('featuring ', '').replace('Feat. ', '').replace('ft. ', '')
+            .replace('w/ ', '').replace('with ', '')
+            .replaceAll(' & ', ';').replaceAll(', ', ';').replaceAll(' and ', ';')
+            .replaceAll('Tyler;the', 'Tyler, the').replaceAll(' with ', ';')
+            .replaceAll('- ', '');
 
             if (field_group == 'guests')
                 song_guests = field_text.split(';');
@@ -5165,7 +5170,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     if (song_artist_element != undefined) {
                         if (song_artist_element.textContent.replaceAll('+', ' ').trim() == track_artist) {
                             // replaces with corrected artist if applicable
-                            song_artist_element.innerHTML = `<a href="/music/${formatted_title[2]}" title="${formatted_title[2]}">${formatted_title[2]}</a>`;
+                            song_artist_element.innerHTML = `<a href="/music/${formatted_title[2].replaceAll(' ', '+')}" title="${formatted_title[2]}">${formatted_title[2]}</a>`;
 
                             // append guests
                             let song_guests = formatted_title[3];
@@ -5174,8 +5179,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                                 song_artist_element.innerHTML = `${song_artist_element.innerHTML},`;
 
                                 let guest_element = document.createElement('a');
-                                guest_element.setAttribute('href',`/music/${song_guests[guest]}`);
-                                guest_element.setAttribute('title',song_guests[guest]);
+                                guest_element.setAttribute('href', `${root}music/${song_guests[guest].replaceAll(' ', '+')}`);
+                                guest_element.setAttribute('title', song_guests[guest]);
                                 guest_element.textContent = song_guests[guest];
 
                                 song_artist_element.appendChild(guest_element);
