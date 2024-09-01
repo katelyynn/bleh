@@ -5085,14 +5085,28 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 track.setAttribute('data-kate-processed','true');
 
                 // image
-                let track_image = track.querySelector('.chartlist-image span');
+                let track_image = track.querySelector('.chartlist-image a.cover-art');
 
-                if (track_image != undefined) {
+                if (track_image != null) {
+                    // this has an album
+                    let track_image_img = track_image.querySelector('img');
+                    tippy(track_image, {
+                        content: track_image_img.getAttribute('alt')
+                    });
+                } else {
+                    // is there an avatar?
+                    track_image = track.querySelector('.chartlist-image > span');
+
                     // artist statistic
                     if (track_image.classList.contains('avatar') && settings.colourful_counts) {
                         patch_artist_ranks_in_list_view(track);
                         return;
                     }
+
+                    let track_image_img = track_image.querySelector('img');
+                    tippy(track_image, {
+                        content: track_image_img.getAttribute('alt')
+                    });
                 }
 
                 // duration
