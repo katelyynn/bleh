@@ -123,6 +123,10 @@ const trans = {
                 light: {
                     name: 'Light',
                     bio: 'Low saturation and bright'
+                },
+                classic: {
+                    name: 'Classic',
+                    bio: 'Re-live early computing'
                 }
             },
             accessibility: {
@@ -517,6 +521,10 @@ const trans = {
                 light: {
                     name: 'Jasny',
                     bio: 'Mało koloru i dużo światła'
+                },
+                classic: {
+                    name: 'Classic',
+                    bio: 'Re-live early computing'
                 }
             },
             accessibility: {
@@ -1777,14 +1785,13 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
     // theme
     unsafeWindow.toggle_theme = function() {
-
         let current_theme = settings.theme;
 
         if (current_theme == 'dark')
             current_theme = 'darker';
         else if (current_theme == 'darker')
             current_theme = 'oled';
-        else if (current_theme == 'oled')
+        else if (current_theme == 'oled' || current_theme == 'classic')
             current_theme = 'light';
         else if (current_theme == 'light')
             current_theme = 'dark';
@@ -1800,7 +1807,6 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     }
 
     unsafeWindow.change_theme_from_settings = function(theme) {
-
         document.getElementById('theme-value').textContent = trans[lang].settings.themes[theme].name;
 
         // save value
@@ -3618,6 +3624,18 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                                     <img src="https://cutensilly.org/img/bleh3-theme-light.png" alt="Screenshot of bleh's light theme">
                                 </div>
                             </button>
+                            <!--<button class="btn setting-item has-image" data-bleh-theme="classic" onclick="change_theme_from_settings('classic')">
+                                <div class="image">
+                                    <div class="icon bleh--theme-classic"></div>
+                                </div>
+                                <div class="text">
+                                    <h5>${trans[lang].settings.themes.classic.name}</h5>
+                                    <p>${trans[lang].settings.themes.classic.bio}</p>
+                                </div>
+                                <div class="image-row">
+                                    <img src="https://cutensilly.org/img/bleh3-theme-classic.png" alt="Screenshot of bleh's classic theme">
+                                </div>
+                            </button>-->
                         </div>
                     </div>
                 </div>
