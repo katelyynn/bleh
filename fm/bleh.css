@@ -7815,6 +7815,7 @@ form[action="/inbox/notifications"] {
     .source-album-details {
         .source-album-name {
             margin: unset;
+            -webkit-line-clamp: 1;
         }
         .source-album-artist {
             font-weight: var(--font-weight);
