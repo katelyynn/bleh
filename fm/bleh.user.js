@@ -123,6 +123,10 @@ const trans = {
                 light: {
                     name: 'Light',
                     bio: 'Low saturation and bright'
+                },
+                classic: {
+                    name: 'Classic',
+                    bio: 'Re-live early computing'
                 }
             },
             accessibility: {
@@ -517,6 +521,10 @@ const trans = {
                 light: {
                     name: 'Jasny',
                     bio: 'Mało koloru i dużo światła'
+                },
+                classic: {
+                    name: 'Classic',
+                    bio: 'Re-live early computing'
                 }
             },
             accessibility: {
@@ -1777,14 +1785,13 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
     // theme
     unsafeWindow.toggle_theme = function() {
-
         let current_theme = settings.theme;
 
         if (current_theme == 'dark')
             current_theme = 'darker';
         else if (current_theme == 'darker')
             current_theme = 'oled';
-        else if (current_theme == 'oled')
+        else if (current_theme == 'oled' || current_theme == 'classic')
             current_theme = 'light';
         else if (current_theme == 'light')
             current_theme = 'dark';
@@ -1800,7 +1807,6 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     }
 
     unsafeWindow.change_theme_from_settings = function(theme) {
-
         document.getElementById('theme-value').textContent = trans[lang].settings.themes[theme].name;
 
         // save value
@@ -3618,6 +3624,18 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                                     <img src="https://cutensilly.org/img/bleh3-theme-light.png" alt="Screenshot of bleh's light theme">
                                 </div>
                             </button>
+                            <!--<button class="btn setting-item has-image" data-bleh-theme="classic" onclick="change_theme_from_settings('classic')">
+                                <div class="image">
+                                    <div class="icon bleh--theme-classic"></div>
+                                </div>
+                                <div class="text">
+                                    <h5>${trans[lang].settings.themes.classic.name}</h5>
+                                    <p>${trans[lang].settings.themes.classic.bio}</p>
+                                </div>
+                                <div class="image-row">
+                                    <img src="https://cutensilly.org/img/bleh3-theme-classic.png" alt="Screenshot of bleh's classic theme">
+                                </div>
+                            </button>-->
                         </div>
                     </div>
                 </div>
@@ -5055,7 +5073,12 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
             let field_group = extras[extra].group;
             // remove beginning tag
-            let field_text = extras[extra].text.replace(' feat. ','').replace('feat. ','').replace('featuring ','').replace('w/ ','').replace('with ','').replaceAll(' & ',';').replaceAll(', ',';').replaceAll(' and ',';').replaceAll('Tyler;the', 'Tyler, the').replaceAll(' with ',';').replaceAll('- ', '');
+            let field_text = extras[extra].text
+            .replace(' feat. ', '').replace('feat. ', '').replace('featuring ', '').replace('Feat. ', '').replace('ft. ', '')
+            .replace('w/ ', '').replace('with ', '')
+            .replaceAll(' & ', ';').replaceAll(', ', ';').replaceAll(' and ', ';')
+            .replaceAll('Tyler;the', 'Tyler, the').replaceAll(' with ', ';')
+            .replaceAll('- ', '');
 
             if (field_group == 'guests')
                 song_guests = field_text.split(';');
@@ -5147,7 +5170,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     if (song_artist_element != undefined) {
                         if (song_artist_element.textContent.replaceAll('+', ' ').trim() == track_artist) {
                             // replaces with corrected artist if applicable
-                            song_artist_element.innerHTML = `<a href="/music/${formatted_title[2]}" title="${formatted_title[2]}">${formatted_title[2]}</a>`;
+                            song_artist_element.innerHTML = `<a href="/music/${formatted_title[2].replaceAll(' ', '+')}" title="${formatted_title[2]}">${formatted_title[2]}</a>`;
 
                             // append guests
                             let song_guests = formatted_title[3];
@@ -5156,8 +5179,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                                 song_artist_element.innerHTML = `${song_artist_element.innerHTML},`;
 
                                 let guest_element = document.createElement('a');
-                                guest_element.setAttribute('href',`/music/${song_guests[guest]}`);
-                                guest_element.setAttribute('title',song_guests[guest]);
+                                guest_element.setAttribute('href', `${root}music/${song_guests[guest].replaceAll(' ', '+')}`);
+                                guest_element.setAttribute('title', song_guests[guest]);
                                 guest_element.textContent = song_guests[guest];
 
                                 song_artist_element.appendChild(guest_element);

@@ -110,6 +110,20 @@ body, [data-page-resource-type="album"], [data-page-resource-type="track"],
         --b6: 0, 0%, 98%;
         --b7: 0, 0%, 0%;
     }
+    [data-bleh--theme="classic"] &:not(.user-dashboard-layout) {
+        /* any additional highlights */
+        --b3: var(--hue), calc(var(--sat) * 6%), 75%;
+
+        /* card border */
+        --b4: 45, 4%, 89%;
+
+        /* card */
+        --b5: 0, 0%, 100%;
+
+        /* root */
+        --b6: 39, 11%, 87%;
+        --b7: 0, 0%, 0%;
+    }
 }
 
 /* text */
@@ -217,6 +231,29 @@ input[type="range"],
         --h4: var(--hue), calc(var(--sat) * 60%), calc(clamp(min(0.5), var(--lit), max(1.5)) * 65%);
         --g4: var(--hue), calc(var(--sat) * 70%), 92%;
     }
+    [data-bleh--theme="classic"] &:not(
+        .user-dashboard-layout, .header-metadata-tnew-item,
+        .header-new-actions :is(a, button),
+        .header-new-inner, span[itemprop="byArtist"] a, .user-dashboard-layout .masthead a) {
+        --c1: var(--hue), calc(var(--sat) * 6%), 0%;
+        --c2: var(--hue), calc(var(--sat) * 4%), 4%;
+        --c3: var(--hue), calc(var(--sat) * 10%), 30%;
+        --ov-c1: var(--hue), calc(var(--sat) * 40%), 100%;
+
+        --l2: var(--hue), calc(var(--sat) * 40%), calc(var(--lit) * 63%);
+        --l3: var(--hue), calc(var(--sat) * 50%), calc(var(--lit) * 50%);
+        --l4: var(--hue), calc(var(--sat) * 50%), calc(var(--lit) * 20%);
+
+        --l2-c: var(--hue), calc(var(--sat) * 40%), calc(clamp(min(0.5), var(--lit), max(1.5)) * 63%);
+        --l3-c: var(--hue), calc(var(--sat) * 50%), calc(clamp(min(0.5), var(--lit), max(1.5)) * 50%);
+        --l4-c: var(--hue), calc(var(--sat) * 50%), calc(clamp(min(0.5), var(--lit), max(1.5)) * 20%);
+
+        --h3: var(--hue), calc(var(--sat) * 50%), calc(clamp(min(0.5), var(--lit), max(1.5)) * 80%);
+        --h3-sat: calc(var(--sat) * 50%);
+        --h3-lit: calc(clamp(min(0.5), var(--lit), max(1.5)) * 80%);
+        --h4: var(--hue), calc(var(--sat) * 60%), calc(clamp(min(0.5), var(--lit), max(1.5)) * 65%);
+        --g4: var(--hue), calc(var(--sat) * 70%), 92%;
+    }
 }
 
 /* attributes */
@@ -285,6 +322,7 @@ body {
     --name-colour: hsl(var(--l3-c));
 }
 
+[data-bleh--theme="classic"] body,
 [data-bleh--theme="light"] body {
     --card-shadow: hsla(var(--b7), 0.05) 0 2px 4px 0;
 
@@ -305,6 +343,16 @@ body {
         color: hsl(var(--l2-c)) !important;
         text-shadow: 0 0 5px hsla(var(--l4-c), 20%) !important;
     }
+}
+[data-bleh--theme="classic"] body {
+    --card-shadow: unset;
+    --card-radius: 0;
+    --item-small-radius: 0;
+    --item-med-radius: 0;
+    --item-big-radius: 0;
+
+    --card-border: 1px solid hsl(0, 0%, 75%);
+    --card-border-base: hsl(0, 0%, 75%);
 }
 
 [data-bleh--theme="oled"] body {
@@ -2433,7 +2481,7 @@ header:not(:has(.header-featured-track)) .header-message-user {
     margin-top: -46px;
     position: relative;
     top: calc(67px + var(--card-gap));
-    border-bottom: 2px solid hsl(var(--b4));
+    border-bottom: 2px solid var(--card-border-base);
     left: -21px;
     right: -21px;
     width: var(--cards-width);
@@ -2445,12 +2493,12 @@ header:not(:has(.header-featured-track)) .header-message-user {
 .header--user .secondary-nav {
     position: relative;
     top: calc(46px + var(--card-gap) + 15px - 19px);
-    border-bottom: 2px solid hsl(var(--b4));
+    border-bottom: 2px solid var(--card-border-base);
     width: var(--cards-width);
 }
 .secondary-nav, .user-dashboard-controls .secondary-nav {
     box-shadow: unset;
-    border-bottom: 2px solid hsl(var(--b4)) !important;
+    border-bottom: 2px solid var(--card-border-base) !important;
 }
 .user-dashboard-controls .secondary-nav {
     margin-top: unset !important;
@@ -2462,7 +2510,7 @@ header:not(:has(.header-featured-track)) .header-message-user {
 .library-controls .secondary-nav {
     margin-top: var(--card-gap) !important;
     padding: unset !important;
-    border-bottom: 2px solid hsl(var(--b4));
+    border-bottom: 2px solid var(--card-border-base);
     width: var(--cards-width);
 }
 
