@@ -2949,11 +2949,10 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
     // patch shouts
     function patch_shouts(element) {
-        let shouts = element.querySelectorAll('.shout');
+        let shouts = element.querySelectorAll('.shout:not([data-kate-processed])');
 
         shouts.forEach((shout) => {
             try {
-            if (!shout.hasAttribute('data-kate-processed')) {
                 shout.setAttribute('data-kate-processed', 'true');
 
                 let shout_name = shout.querySelector('.shout-user a');
@@ -2997,11 +2996,19 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     console.log(shout_body.textContent, parsed_body);
                     shout_body.innerHTML = parsed_body;
                 }
-            }
             } catch(e) {
                 deliver_notif('a shout on this page failed to be modified :(');
                 console.error('bleh - a shout failed to patch', e);
             }
+        });
+
+        // enter a shout field
+        let shout_forms = document.querySelectorAll('.shout-form:not([data-kate-processed])');
+        shout_forms.forEach((shout_form) => {
+            shout_form.setAttribute('data-kate-processed', 'true');
+            let shout_avatar = shout_form.querySelector('.shout-user-avatar');
+
+            patch_avatar(shout_avatar, auth);
         });
     }
 
