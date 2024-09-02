@@ -1542,7 +1542,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         let cached_style = localStorage.getItem('bleh_cached_style') || '';
 
         // style is not fetched in dev mode
-        if (settings.dev)
+        if (settings.dev || document.body.classList.contains('namespace--user_listening-report_playback'))
             return;
 
         if (cached_style == '') {
