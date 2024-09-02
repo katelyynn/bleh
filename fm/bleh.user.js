@@ -4040,6 +4040,14 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                             <a class="btn bleh--btn primary" href="https://github.com/katelyynn/bleh/issues/new/choose" target="_blank">${trans[lang].settings.go}</a>
                         </div>
                     </div>
+                    <div class="sep"></div>
+                    <h5>Debug information</h5>
+                    <ul>
+                        <li>Theme loading is currently ${settings.dev}</li>
+                        <li>Theme will expire at ${new Date(localStorage.getItem('bleh_cached_style_timeout'))}</li>
+                        <li>It is currently ${new Date()}</li>
+                        <li>Has the timeout expired? ${new Date(localStorage.getItem('bleh_cached_style_timeout')) < new Date()}</li>
+                    </ul>
                 </div>
                 `);
         } else if (page == 'profiles') {
