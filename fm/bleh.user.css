@@ -106,7 +106,7 @@ body, [data-page-resource-type="album"], [data-page-resource-type="track"],
         --b6: 0, 0%, 0%;
         --b7: 0, 0%, 0%;
     }
-    [data-bleh--theme="light"] &:not(.user-dashboard-layout) {
+    [data-bleh--theme="light"] & {
         /* any additional highlights */
         --b3: var(--hue), calc(var(--sat) * 6%), 75%;
 
@@ -120,7 +120,7 @@ body, [data-page-resource-type="album"], [data-page-resource-type="track"],
         --b6: 0, 0%, 98%;
         --b7: 0, 0%, 0%;
     }
-    [data-bleh--theme="classic"] &:not(.user-dashboard-layout) {
+    [data-bleh--theme="classic"] & {
         /* any additional highlights */
         --b3: var(--hue), calc(var(--sat) * 6%), 75%;
 
@@ -219,7 +219,7 @@ input[type="range"],
         --icon: var(--c2);
     }
     [data-bleh--theme="light"] &:not(
-        .user-dashboard-layout, .header-metadata-tnew-item,
+        .header-metadata-tnew-item,
         .header-new-actions :is(a, button),
         .header-new-inner, span[itemprop="byArtist"] a, .user-dashboard-layout .masthead a) {
         --c1: var(--hue), calc(var(--sat) * 6%), 0%;
@@ -1110,7 +1110,6 @@ last.fm changes as of 2024-05-20 */
 .auth-avatar-desktop {
     width: 38px !important;
     height: 38px !important;
-    border: 2px solid hsl(var(--b4));
     box-shadow: var(--card-shadow);
     transition-property: transform, border-color, box-shadow;
     transition-duration: calc(var(--trans-short) * 1.5);
@@ -1119,8 +1118,6 @@ last.fm changes as of 2024-05-20 */
 
 .auth-link.disclose-active .auth-avatar-desktop {
     transform: scale(1.1);
-    border-color: hsl(var(--l3-c));
-    border-width: 2px;
     box-shadow: 0 0 10px hsl(var(--h4)), var(--card-shadow);
 }
 
@@ -1395,7 +1392,7 @@ last.fm changes as of 2024-05-20 */
 
 
 /*     GLOBAL CARD STYLES     */
-.bleh--panel,
+.bleh--panel, .bleh--blank-panel,
 .col-main > section:not(.neighbours-items-section), .col-sidebar > section,
 .your-progress-component,
 /* this fixes places of the site (tracks, artist, albums watever that use a weird method of 2 col-mains, 2 col-sidebars as appose to profiles */
@@ -3457,7 +3454,15 @@ state is not active, which then falls back to primary button styling */
 .header-avatar {
     padding: unset !important;
     border-radius: var(--avatar-radius);
-    box-shadow: var(--card-shadow);
+    box-shadow: var(--menu-shadow);
+
+    transition-property: transform;
+    transition-duration: var(--trans);
+    transition-timing-function: var(--trans-function);
+
+    &:has(a):hover {
+        transform: scale(1.08);
+    }
 
     .bleh--avatar-clickable-link {
         position: absolute;
@@ -5455,6 +5460,12 @@ leading to a gap from their own css */
 .shout-user-avatar, .avatar {
     /*background: var(--avatar-generic-background); support for transparent avatars */
     border-radius: var(--avatar-radius);
+    aspect-ratio: 1 / 1;
+
+    /* weird inner box shadow */
+    &:after {
+        display: none;
+    }
 }
 
 
@@ -9511,24 +9522,26 @@ table.table tr:nth-child(2n) td {
 
 
 
-/*     WIKI     */
-.wiki-container {
+/*     EDIT WIKI     */
+.wiki-container,
+.wiki-edit-container {
     margin-top: unset;
 }
-
-
-/*     EDIT WIKI     */
+.wiki-edit-container {
+    .alert-warning {
+        display: none;
+    }
+}
 .wiki-edit-form textarea {
     height: 500px;
     font-size: 16px !important;
     line-height: 24px;
     margin-bottom: var(--card-gap);
-}
 
-.wiki-edit-form .form-group--body:after {
-    white-space: pre;
-    line-height: 26px;
-    content: 'Easy clickable links can be made with the following syntax:\a\a' '[artist]Nirvana[/artist] — Clickable artist link for Nirvana' '\a' '[album artist=Nirvana]Bleach[/album] — Clickable album link for Bleach, by Nirvana' '\a' '[track artist=Nirvana]tourette\'s[/track] — Clickable track link for tourette\'s, by Nirvana' '\a\aThe same works for other media on the site:\a\a' '[tag]grunge[/tag] — Clickable tag link for grunge' '\a' '[user]LastfmSupport[/user] — Clickable user link for LastfmSupport (if only they were useful)';
+    --bg: transparent !important;
+    --bg-hov: transparent !important;
+    --bg-atv: transparent !important;
+    border: var(--card-border) !important;
 }
 
 
@@ -14364,6 +14377,35 @@ button.bleh--gallery-bookmark-image-btn {
             left: unset !important;
             right: 0;
         }
+    }
+}
+
+
+
+
+.wiki-syntax-panel {
+    margin-top: unset;
+    margin-bottom: var(--card-gap);
+
+    .syntax-listing {
+        display: flex;
+        flex-direction: column;
+        gap: var(--item-list-gap);
+
+        .syntax-listing-item {
+            display: flex;
+            /*justify-content: space-between;*/
+            flex-direction: column;
+
+            .code-side {
+                color: hsl(var(--c3));
+                letter-spacing: 0.4px;
+            }
+        }
+    }
+
+    .sep {
+        margin: var(--card-gap) 0;
     }
 }
 }

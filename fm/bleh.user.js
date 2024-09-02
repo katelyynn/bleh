@@ -382,6 +382,12 @@ const trans = {
                         name: 'Hide your shoutbox',
                         bio: 'Your shoutbox will be hidden for you and anyone else.'
                     }
+                },
+                wiki: {
+                    syntax: {
+                        name: 'Use fancy syntax when editing',
+                        links_to: 'Links to {link}'
+                    }
                 }
             },
             actions: {
@@ -1479,6 +1485,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
             patch_about_this_artist();
             patch_obsession_view();
+            patch_wiki_editor()
         }
 
         // last.fm is a single page application
@@ -1517,6 +1524,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
                 patch_about_this_artist();
                 patch_obsession_view();
+                patch_wiki_editor()
             }
         });
 
@@ -1748,6 +1756,10 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
         // save to settings
         localStorage.setItem('bleh', JSON.stringify(settings));
+
+        // override theme when browsing listening reports
+        if (document.body.classList.contains('user-dashboard-layout'))
+            document.documentElement.setAttribute('data-bleh--theme', 'oled');
     }
 
     // save a setting
@@ -5872,5 +5884,66 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         let obsession_reason_text = obsession_reason.textContent;
 
         obsession_reason.textContent = obsession_reason_text.trim().substr(1).slice(0, -1);
+    }
+
+
+
+
+    function patch_wiki_editor() {
+        let wiki_editor_container = document.querySelector('.wiki-edit-container');
+
+        if (wiki_editor_container == null)
+            return;
+
+        if (wiki_editor_container.hasAttribute('data-kate-processed'))
+            return;
+        wiki_editor_container.setAttribute('data-kate-processed', 'true');
+
+
+        let col_sidebar = document.querySelector('.col-sidebar');
+
+        let wiki_syntax = document.createElement('section');
+        wiki_syntax.classList.add('bleh--blank-panel', 'wiki-syntax-panel');
+        wiki_syntax.innerHTML = (`
+            <h3 class="text-18">${trans[lang].settings.inbuilt.wiki.syntax.name}</h3>
+            <div class="syntax-listing">
+                <div class="syntax-listing-item">
+                    <div class="code-side">[artist]julie[/artist]</div>
+                    <div class="detail-side">${trans[lang].settings.inbuilt.wiki.syntax.links_to.replace('{link}', `<a href="${root}music/julie" target="_blank">julie</a>`)}</div>
+                </div>
+                <div class="syntax-listing-item">
+                    <div class="code-side">[album artist=julie]pushing daisies[/album]</div>
+                    <div class="detail-side">${trans[lang].settings.inbuilt.wiki.syntax.links_to.replace('{link}', `<a href="${root}music/julie/pushing+daisies" target="_blank">pushing daisies</a>`)}</div>
+                </div>
+                <div class="syntax-listing-item">
+                    <div class="code-side">[track artist=julie]very little effort[/track]</div>
+                    <div class="detail-side">${trans[lang].settings.inbuilt.wiki.syntax.links_to.replace('{link}', `<a href="${root}music/julie/_/very+little+effort" target="_blank">very little effort</a>`)}</div>
+                </div>
+            </div>
+            <div class="sep"></div>
+            <div class="syntax-listing">
+                <div class="syntax-listing-item">
+                    <div class="code-side">[url]https://cutensilly.org/bleh/fm[/url]</div>
+                    <div class="detail-side">${trans[lang].settings.inbuilt.wiki.syntax.links_to.replace('{link}', `<a href="https://cutensilly.org/bleh/fm" target="_blank">https://cutensilly.org/bleh/fm</a>`)}</div>
+                </div>
+                <div class="syntax-listing-item">
+                    <div class="code-side">[url=https://cutensilly.org/bleh/fm]blehhh[/url]</div>
+                    <div class="detail-side">${trans[lang].settings.inbuilt.wiki.syntax.links_to.replace('{link}', `<a href="https://cutensilly.org/bleh/fm" target="_blank">blehhh</a>`)}</div>
+                </div>
+            </div>
+            <div class="sep"></div>
+            <div class="syntax-listing">
+                <div class="syntax-listing-item">
+                    <div class="code-side">[tag]grunge[/tag]</div>
+                    <div class="detail-side">${trans[lang].settings.inbuilt.wiki.syntax.links_to.replace('{link}', `<a href="${root}tag/grunge" target="_blank">grunge</a>`)}</div>
+                </div>
+                <div class="syntax-listing-item">
+                    <div class="code-side">[user]${auth}[/user]</div>
+                    <div class="detail-side">${trans[lang].settings.inbuilt.wiki.syntax.links_to.replace('{link}', `<a class="mention" href="${root}user/${auth}" target="_blank">@${auth}</a>`)}</div>
+                </div>
+            </div>
+        `);
+
+        col_sidebar.insertBefore(wiki_syntax, col_sidebar.firstElementChild);
     }
 })();
