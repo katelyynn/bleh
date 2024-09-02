@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         bleh
 // @namespace    http://last.fm/
-// @version      2024.0901
+// @version      2024.0903
 // @description  bleh!!! ^-^
 // @author       kate
 // @match        https://www.last.fm/*
@@ -16,7 +16,7 @@
 // ==/UserScript==
 
 let version = {
-    build: '2024.0901',
+    build: '2024.0903',
     sku: 'main',
     feature_flags: {}
 }
@@ -3408,11 +3408,15 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
         let type = document.querySelector('.header-new').classList[1].replace('header-new--', '');
 
-        let text = document.querySelector('.header-new-title').textContent.replaceAll(' ', '+');
+        let text = document.querySelector('.header-new-title').textContent
+        .replaceAll(' ', '+')
+        .replaceAll('&', '%26');
 
         let artist = document.querySelector('.header-new-crumb');
         if (artist != undefined)
-            text = `${text}+${artist.textContent.replaceAll(' ', '+')}`;
+            text = `${text}+${artist.textContent
+            .replaceAll(' ', '+')
+            .replaceAll('&', '%26')}`;
 
         let search_btn = document.createElement('a');
         search_btn.classList.add('btn', 'search-similar-btn');
