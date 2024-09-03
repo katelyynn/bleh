@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           bleh (dev)
 @namespace      github.com/katelyynn/bleh
-@version        2024.0901
+@version        2024.0903
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.css
@@ -5667,7 +5667,7 @@ span.shout-user-avatar:before,
 
 /*     BUTTON     */
 .btn,
-button:not(.playback-app-container button, .top-artist-list-item, .pixel, .listening-report-daily-scrobbles-day),
+button,
 .btn-primary,
 .shout-reply,
 .content-form select,
@@ -7885,7 +7885,7 @@ form[action="/inbox/notifications"] {
 text {
     font-family: var(--font) !important;
 }
-text:not(.music-decades-chart-container text, .js-top-tags-over-time-target text, .js-mainstream-chart-container text, .summary-chart-container text, .bubble-chart-container text, .playback-app-container text) {
+text:not(.music-decades-chart-container text, .js-top-tags-over-time-target text, .js-mainstream-chart-container text, .summary-chart-container text) {
     font-size: var(--font-size) !important;
     line-height: var(--line-height) !important;
     font-weight: var(--font-weight) !important;
@@ -8208,36 +8208,6 @@ text[style^="color: rgb(0, 0, 0)"] {
 
 .report-box-container .listening-report-brick-inner {
     margin: unset;
-}
-
-
-.playback-app-container {
-    .header-black {
-        color: #000;
-    }
-
-    b {
-        font-weight: 600;
-    }
-
-    .content {
-        span {
-            color: inherit;
-        }
-        h2, h3, h4 {
-            line-height: auto;
-            color: inherit;
-        }
-    }
-
-    text {
-        &[style^="color: rgb(255, 198, 65)"] {
-            color: rgb(255, 168, 65) !important;
-        }
-        &[style*="fill: rgb(0, 0, 0)"] {
-            fill: rgb(0, 0, 0) !important;
-        }
-    }
 }
 
 
