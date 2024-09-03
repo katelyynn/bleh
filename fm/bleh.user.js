@@ -3638,7 +3638,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                             </button>
                         </div>
                     </div>
-                    <h4>Light</h4>
+                    <h4>${trans[lang].settings.themes.light.name}</h4>
                     <div class="setting-items">
                         <div class="side-left full more">
                             <button class="btn setting-item has-image" data-bleh-theme="light" onclick="change_theme_from_settings('light')">
