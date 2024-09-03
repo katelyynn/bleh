@@ -5753,7 +5753,7 @@ button,
     }
 
     &:is(.gallery-next, .gallery-previous):active .arrow,
-    &:active {
+    &:not([disabled]):active {
         background-color: var(--bg-atv) !important;
         transform: scale(0.98);
     }
@@ -5827,6 +5827,7 @@ button,
     &[disabled] {
         opacity: 0.7 !important;
         --col: hsl(var(--c3)) !important;
+        cursor: not-allowed;
     }
 }
 
@@ -5858,7 +5859,7 @@ button,
 
 
 /*     BUTTON HAS ICON     */
-.list-view-item,
+.view-item,
 .btn--has-icon-left,
 .stationlink,
 .dropdown-menu-clickable-item, .auth-dropdown-menu-item,
@@ -6003,7 +6004,7 @@ button,
 .source-album:before,
 /*     BLEH     */
 .arrow-divider:before,
-.list-view-item:before,
+.view-item:before,
 .loading-data-text:before,
 .search-similar-btn:before,
 .btns .btn:before,
@@ -14264,6 +14265,11 @@ button.bleh--gallery-bookmark-image-btn {
     border-radius: var(--item-med-radius);
     margin-bottom: var(--card-gap);
 
+    [data-bleh--theme="light"] & {
+        background-color: transparent;
+        outline: var(--card-border);
+    }
+
     .footer-language {
         display: flex;
     }
@@ -14289,18 +14295,62 @@ button.bleh--gallery-bookmark-image-btn {
         --shadow-hov: none;
     }
 
-    .list-view-item {
+    .view-item {
         position: relative;
         /*--font-size: 0;
         --left: 8px;
         width: 32px;*/
 
-        &[data-toggle-value="1"] {
-            --mask: var(--icon-16-grid);
+        .view-item-avatar {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+
+            margin: calc(-1 * ((20px - 16px) / 2)) 0;
+            margin-right: 6px !important;
         }
-        &[data-toggle-value="0"] {
-            --mask: var(--icon-16-list);
+
+        &[data-toggle="list_view"] {
+            &[data-toggle-value="1"] {
+                --mask: var(--icon-16-grid);
+            }
+            &[data-toggle-value="0"] {
+                --mask: var(--icon-16-list);
+            }
         }
+        &[data-toggle="track_list_view"] {
+            &[data-toggle-value="0"] {
+                --mask: var(--icon-16-music-list);
+            }
+            &[data-toggle-value="1"] {
+                --mask: var(--icon-16-user);
+                --show-icon: none;
+                --btn-left: 12px !important;
+            }
+        }
+    }
+}
+.tracklist-controls {
+    justify-content: unset;
+    align-items: center;
+    max-height: unset;
+
+    gap: var(--item-list-gap);
+
+    h3 {
+        height: 40px;
+        flex: 1;
+    }
+
+    .view-buttons {
+        margin: unset;
+    }
+}
+
+[data-require="components/lazy-filter"] {
+    [data-bleh--track_list_view="1"] &,
+    [data-bleh--track_list_view="2"] & {
+        display: none;
     }
 }
 
