@@ -4616,7 +4616,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             } catch(e) {}
 
             // save setting into body
-            document.body.style.setProperty(`--${item}`,value);
+            document.body.style.setProperty(`--${settings_base[item].css}`,value);
             document.documentElement.setAttribute(`data-bleh--${item}`, `${value}`);
         } else if (settings_base[item].type == 'toggle') {
             if (settings[item] == settings_base[item].values[0] && modify) {
@@ -4630,7 +4630,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 }
 
                 // save setting into body
-                document.body.style.setProperty(`--${item}`,settings_base[item].values[1]);
+                document.body.style.setProperty(`--${settings_base[item].css}`,settings_base[item].values[1]);
                 document.documentElement.setAttribute(`data-bleh--${item}`, `${settings_base[item].values[1]}`);
             } else if (modify) {
                 settings[item] = settings_base[item].values[0];
@@ -4663,7 +4663,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 }
 
                 // save setting into body
-                document.body.style.setProperty(`--${item}`,settings_base[item].values[0]);
+                document.body.style.setProperty(`--${settings_base[item].css}`,settings_base[item].values[0]);
                 document.documentElement.setAttribute(`data-bleh--${item}`, `${settings_base[item].values[0]}`);
             } else {
                 // dont modify, just show
@@ -4688,7 +4688,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 });
 
                 // save setting into body
-                document.body.style.setProperty(`--${item}`, value);
+                document.body.style.setProperty(`--${settings_base[item].css}`, value);
                 document.documentElement.setAttribute(`data-bleh--${item}`, value);
             } else {
                 // dont modify, just show
@@ -5874,12 +5874,20 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             let controls = tracklist.querySelector('.section-controls');
             controls.classList.add('tracklist-controls');
 
+            let track_count = '0';
+            let meta = document.querySelector('.hidden-xs .catalogue-metadata-description');
+
+            // track count & length
+            let split = meta.textContent.split(', ');
+
+            track_count = split[0];
+
             let track_view_mode = document.querySelector('div');
             track_view_mode.classList.add('view-buttons', 'track-view-buttons');
             track_view_mode.setAttribute('id', 'tracklist-controls');
             track_view_mode.innerHTML = (`
                 <button class="btn view-item track-list-view-item" id="toggle-track_list_view-0" data-toggle="track_list_view" data-toggle-value="0" onclick="_update_item('track_list_view', 0)">
-                    ${trans[lang].music.track_list_view.tracklist}
+                    ${track_count}
                 </button>
                 <button class="btn view-item track-list-view-item" id="toggle-track_list_view-1" data-toggle="track_list_view" data-toggle-value="1" onclick="_update_item('track_list_view', 1)">
                     <img class="view-item-avatar" src="${my_avi}" alt="${auth}">${trans[lang].music.track_list_view.listens.replace('{count}', scrobble_count)}

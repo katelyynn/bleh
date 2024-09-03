@@ -3847,6 +3847,12 @@ state is not active, which then falls back to primary button styling */
 }
 
 
+/*.personal-stats:not(:has(.personal-stats-listeners)) {
+    display: none;
+}*/
+.metadata-and-wiki-row {
+    margin-top: unset !important;
+}
 .personal-stats-item {
     margin-left: var(--card-gap);
 }
@@ -14349,7 +14355,7 @@ button.bleh--gallery-bookmark-image-btn {
 }
 
 .tracklist-controls .dropdown-menu-clickable-button,
-[data-require="components/lazy-filter"] {
+#tracklist [data-require="components/lazy-filter"] {
     [data-bleh--track_list_view="1"] &,
     [data-bleh--track_list_view="2"] & {
         display: none;
