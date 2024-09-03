@@ -8119,13 +8119,13 @@ text[style^="color: rgb(255, 172, 172)"] {
 }
 
 
-.user-dashboard-layout--version-3 .header-background {
+/*.user-dashboard-layout--version-3 .header-background {
     background: #000 !important;
 
     &:before {
         display: none;
     }
-}
+}*/
 
 
 /*.user-dashboard-layout--version-3 {
