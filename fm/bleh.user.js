@@ -22,16 +22,11 @@ let version = {
 }
 
 // loads your selected language in last.fm
-let lang = document.documentElement.getAttribute('lang');
+let lang;
 // WARN: fill this out if translating
 // lists all languages with valid bleh translations
 // any custom translations will not load if not listed here!!
 let valid_langs = ['en', 'pl'];
-
-if (!valid_langs.includes(lang)) {
-    console.info('bleh - language fallback from', lang, 'to en (language is not listed as valid)', valid_langs);
-    lang = 'en';
-}
 
 let lang_info = {
     en: {
@@ -850,6 +845,15 @@ const trans = {
     },
 }
 
+function lookup_lang() {
+    lang = document.documentElement.getAttribute('lang');
+
+    if (!valid_langs.includes(lang)) {
+        console.info('bleh - language fallback from', lang, 'to en (language is not listed as valid)', valid_langs);
+        lang = 'en';
+    }
+}
+
 tippy.setDefaultProps({
     arrow: false,
     duration: [100, 300],
@@ -1446,6 +1450,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         let performance_start = performance.now();
 
         append_style();
+        lookup_lang();
         load_settings();
         //get_scrobbles(document.body);
         append_nav(document.body);
@@ -1490,6 +1495,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
         // last.fm is a single page application
         const observer = new MutationObserver((mutations) => {
+            lookup_lang();
             load_settings();
             //get_scrobbles(node);
             append_nav(document.body);
@@ -4197,6 +4203,9 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 <div class="bleh--panel">
                     <h3>${trans[lang].settings.language.name}</h3>
                     <p>${trans[lang].settings.language.bio}</p>
+                    ${(!valid_langs.includes(document.documentElement.getAttribute('lang'))) ? `
+                    <div class="alert alert-error">Selected language is not currently supported in bleh, sorry for the inconvenience.</div>
+                    ` : ''}
                     <div class="languages" id="languages"></div>
                     <div class="sep"></div>
                     <div class="alert alert-warning">This page is still under construction! A wiki page dedicated to submitting a language is not available currently.</div>

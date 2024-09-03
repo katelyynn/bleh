@@ -11577,6 +11577,10 @@ so this is good enough - use the community docs */
             .btn {
                 width: fit-content;
             }
+
+            .alert {
+                margin: unset;
+            }
         }
 
 
