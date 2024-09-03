@@ -11513,37 +11513,6 @@ h2.playlisting-create-option-title {
 
 
 
-/*     LABS     */
-
-
-/*     ARTIST VELOCITY     */
-/* put search input back in box */
-.top-artists-search {
-    /* default 35px */
-    width: calc(100% - 36px) !important;
-}
-
-
-/*     BUBBLES     */
-/* fix user picker */
-.user-following-item {
-    background: unset !important;
-}
-.user-following-item > *:not(button) {
-    z-index: 5;
-}
-
-.user-following-username {
-    color: hsl(var(--l3-c));
-    font-weight: var(--font-weight-medium);
-}
-.user-following-fullname {
-    color: hsl(var(--c3));
-}
-
-
-
-
 /*     API DOCS     */
 /* i dont really want to deal with this code any longer,
 so this is good enough - use the community docs */
