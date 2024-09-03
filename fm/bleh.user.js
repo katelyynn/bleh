@@ -846,6 +846,7 @@ const trans = {
 }
 
 function lookup_lang() {
+    root = document.querySelector('.masthead-logo a').getAttribute('href');
     lang = document.documentElement.getAttribute('lang');
 
     if (!valid_langs.includes(lang)) {
@@ -1438,7 +1439,6 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 (function() {
     'use strict';
 
-    root = document.querySelector('.masthead-logo a').getAttribute('href');
     auth_link = document.querySelector('a.auth-link');
     auth = auth_link.querySelector('img').getAttribute('alt');
 
