@@ -5468,6 +5468,20 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
                 document.getElementById('bleh--bookmarked-images').appendChild(image_element);
             });
+
+
+            // mark images as bookmarked
+            let col_main = page_content.querySelector('.col-main');
+            let image_list = col_main.querySelectorAll('.image-list-item');
+            image_list.forEach((image_list_item) => {
+                let image_id_split = image_list_item.getAttribute('href').split('/');
+                let image_id_length = image_id_split.length;
+                let image_id = image_id_split[image_id_length - 1];
+
+                if (bookmarked_images[artist_name].includes(image_id)) {
+                    image_list_item.classList.add('image-list-item-bookmarked');
+                }
+            });
         } else {
             document.getElementById('bleh--bookmarked-images').outerHTML = (`
                 <div class="no-data-message bleh--no-image-bookmarks">

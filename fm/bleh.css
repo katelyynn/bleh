@@ -5986,6 +5986,7 @@ button:not(.playback-app-container button, .top-artist-list-item, .pixel, .liste
 
 
 /*     ICON MASK     */
+.image-list-item-bookmarked:after, .image-list-item-preferred:after,
 .data-loading:before, .lazy-shoutbox.async-content-loading:before, .loading:not(.library-fetch, .library-date-picker):before,
 .user-list-inner-wrap .label:before,
 .nag-bar-message:before,
@@ -8302,35 +8303,65 @@ text[style^="color: rgb(0, 0, 0)"] {
     mask-size: 28px;
 }
 
-.image-list-item-preferred .image-list-item-preferred-container {
-    inset: 0;
-    width: unset;
-    height: 40px;
-    border-radius: unset;
-    background-color: unset;
-    display: flex;
-    justify-content: center;
-    padding-top: 8px;
-    background: linear-gradient(0deg, transparent 0%, hsl(var(--b4)) 100%);
-}
-.image-list-item-preferred-icon {
-    width: 16px;
-    height: 16px;
 
-    &:before {
-        background-image: unset;
-        background-color: hsl(var(--l3));
+.image-list-item {
+    position: relative;
+    --show-icon: none;
+    --left: none;
+    --top: 8px;
+    --right: 8px;
+    --margin-top: none;
+
+    transition-property: transform;
+    transition-duration: var(--trans);
+    transition-timing-function: var(--trans-function);
+
+    &:hover {
+        transform: scale(1.05);
+    }
+
+    &.image-list-item-preferred,
+    &.image-list-item-bookmarked {
+        --show-icon: flex;
+    }
+    &.image-list-item-bookmarked {
+        --mask: var(--icon-16-bookmark-saved);
+    }
+    &.image-list-item-preferred {
         --mask: var(--icon-16-star);
-        mask-image: var(--mask);
-        -webkit-mask-image: var(--mask);
         --hue: var(--hue-fav);
         --sat: 1;
         --lit: 1;
     }
-}
 
-.gallery-image.gallery-image-preferred .gallery-image-preferred-container {
-    display: none;
+    &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 3;
+        border-bottom-left-radius: var(--item-med-radius);
+
+        display: var(--show-icon);
+        width: calc(16px + (8px * 2));
+        height: calc(16px + (8px * 2));
+        background-color: hsla(var(--h4), 70%);
+    }
+    &:after {
+        z-index: 4;
+
+        box-shadow: unset;
+        padding: unset;
+        position: absolute;
+        background: currentColor !important;
+        transition: unset !important;
+
+        color: #fff;
+    }
+
+    .image-list-item-preferred-container {
+        display: none !important;
+    }
 }
 
 
