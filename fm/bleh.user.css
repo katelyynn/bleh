@@ -14340,6 +14340,7 @@ button.bleh--gallery-bookmark-image-btn {
     h3 {
         height: 40px;
         flex: 1;
+        width: unset;
     }
 
     .view-buttons {
@@ -14347,8 +14348,15 @@ button.bleh--gallery-bookmark-image-btn {
     }
 }
 
+.tracklist-controls .dropdown-menu-clickable-button,
 [data-require="components/lazy-filter"] {
     [data-bleh--track_list_view="1"] &,
+    [data-bleh--track_list_view="2"] & {
+        display: none;
+    }
+}
+#tracklist:has([data-require="components/lazy-filter"]) .tracklist-scrobbles-page {
+    [data-bleh--track_list_view="0"] &,
     [data-bleh--track_list_view="2"] & {
         display: none;
     }

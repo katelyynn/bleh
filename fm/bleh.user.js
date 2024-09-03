@@ -5838,7 +5838,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         let personal_stats = document.querySelector('.personal-stats');
         let my_avi = document.querySelector('.auth-avatar-desktop').getAttribute('src');
         let scrobble_count = '0';
-        let scrobble_link = '';
+        let scrobble_link;
         if (personal_stats != null) {
             scrobble_link = personal_stats.querySelector('.header-metadata-display a');
             scrobble_count = scrobble_link.textContent;
@@ -5855,58 +5855,65 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             }
 
             tracklist = document.createElement('section');
+            tracklist.setAttribute('id', 'tracklist');
             tracklist.innerHTML = (`
-                <div class="section-controls tracklist-controls">
-                        <h3 class="text-18">${trans[lang].music.fetch_plays.name}</h3>
-                        <div class="view-buttons track-view-buttons">
-                            <button class="btn view-item track-list-view-item" id="toggle-track_list_view-0" data-toggle="track_list_view" data-toggle-value="0" disabled>
-                                ${trans[lang].music.track_list_view.tracklist}
-                            </button>
-                            <button class="btn view-item track-list-view-item" id="toggle-track_list_view-1" data-toggle="track_list_view" data-toggle-value="1" aria-checked="true">
-                                <img class="view-item-avatar" src="${my_avi}" alt="${auth}">${trans[lang].music.track_list_view.listens.replace('{count}', scrobble_count)}
-                            </button>
-                        </div>
+                <div class="section-controls tracklist-controls" id="tracklist-controls">
+                    <h3 class="text-18">${trans[lang].music.fetch_plays.name}</h3>
+                    <div class="view-buttons track-view-buttons">
+                        <button class="btn view-item track-list-view-item" id="toggle-track_list_view-0" data-toggle="track_list_view" data-toggle-value="0" disabled>
+                            ${trans[lang].music.track_list_view.tracklist}
+                        </button>
+                        <button class="btn view-item track-list-view-item" id="toggle-track_list_view-1" data-toggle="track_list_view" data-toggle-value="1" aria-checked="true">
+                            <img class="view-item-avatar" src="${my_avi}" alt="${auth}">${trans[lang].music.track_list_view.listens.replace('{count}', scrobble_count)}
+                        </button>
                     </div>
-                <div class="loading-data-container">
-                    <p class="loading-data-text">${trans[lang].music.fetch_plays.loading}</p>
                 </div>
             `);
             masonry.insertBefore(tracklist, masonry.firstElementChild);
+        } else {
+            let controls = tracklist.querySelector('.section-controls');
+            controls.classList.add('tracklist-controls');
 
-            /*let url_split = window.location.href.split('/');
+            let track_view_mode = document.querySelector('div');
+            track_view_mode.classList.add('view-buttons', 'track-view-buttons');
+            track_view_mode.setAttribute('id', 'tracklist-controls');
+            track_view_mode.innerHTML = (`
+                <button class="btn view-item track-list-view-item" id="toggle-track_list_view-0" data-toggle="track_list_view" data-toggle-value="0" onclick="_update_item('track_list_view', 0)">
+                    ${trans[lang].music.track_list_view.tracklist}
+                </button>
+                <button class="btn view-item track-list-view-item" id="toggle-track_list_view-1" data-toggle="track_list_view" data-toggle-value="1" onclick="_update_item('track_list_view', 1)">
+                    <img class="view-item-avatar" src="${my_avi}" alt="${auth}">${trans[lang].music.track_list_view.listens.replace('{count}', scrobble_count)}
+                </button>
+            `);
+            controls.appendChild(track_view_mode);
+
+            refresh_all();
+        }
+
+        let tracklist_scrobbles_page = document.createElement('div');
+        tracklist_scrobbles_page.classList.add('tracklist-scrobbles-page', 'buffer-standard');
+        tracklist_scrobbles_page.innerHTML = (`
+            <div class="loading-data-container">
+                <p class="loading-data-text">${trans[lang].music.fetch_plays.loading}</p>
+            </div>
+        `);
+        tracklist.appendChild(tracklist_scrobbles_page);
+
+        // you have no scrobbles yet
+        if (scrobble_link == undefined) {
+            let url_split = window.location.href.split('/');
             let album_url = `${url_split[(url_split.length - 2)]}/${url_split[(url_split.length - 1)]}`;
-            let album_as_track_url = window.location.href.replace(album_url, `${url_split[(url_split.length - 2)]}/_/${url_split[(url_split.length - 1)]}`);*/
+            let album_as_track_url = window.location.href.replace(album_url, `${url_split[(url_split.length - 2)]}/_/${url_split[(url_split.length - 1)]}`);
 
-            let url = document.querySelector('.header-metadata-display a');
-            if (url == undefined) {
-                let url_split = window.location.href.split('/');
-                let album_url = `${url_split[(url_split.length - 2)]}/${url_split[(url_split.length - 1)]}`;
-                let album_as_track_url = window.location.href.replace(album_url, `${url_split[(url_split.length - 2)]}/_/${url_split[(url_split.length - 1)]}`);
-
-                tracklist.innerHTML = (`
-                    <div class="section-controls tracklist-controls">
-                        <h3 class="text-18">${trans[lang].music.fetch_plays.name}</h3>
-                        <div class="view-buttons track-view-buttons">
-                            <button class="btn view-item track-list-view-item" id="toggle-track_list_view-0" data-toggle="track_list_view" data-toggle-value="0" disabled>
-                                ${trans[lang].music.track_list_view.tracklist}
-                            </button>
-                            <button class="btn view-item track-list-view-item" id="toggle-track_list_view-1" data-toggle="track_list_view" data-toggle-value="1" aria-checked="true">
-                                <img class="view-item-avatar" src="${my_avi}" alt="${auth}">${trans[lang].music.track_list_view.listens.replace('{count}', scrobble_count)}
-                            </button>
-                        </div>
-                    </div>
-                    <div class="loading-data-container">
-                        <p class="loading-data-text failed">${trans[lang].music.fetch_plays.fail}</p>
-                        <a class="btn" href="${album_as_track_url}">${trans[lang].music.fetch_plays.open_as_track}</a>
-                    </div>
-                `);
-                return;
-            }
-            url = url.getAttribute('href');
-
-
+            tracklist_scrobbles_page.innerHTML = (`
+                <div class="loading-data-container">
+                    <p class="loading-data-text failed">${trans[lang].music.fetch_plays.fail}</p>
+                    <a class="btn" href="${album_as_track_url}">${trans[lang].music.fetch_plays.open_as_track}</a>
+                </div>
+            `);
+        } else {
             // we need to fetch the tracklist
-            fetch(url)
+            fetch(scrobble_link)
                 .then(function(response) {
                     console.error('returned', response, response.text);
 
@@ -5920,18 +5927,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
                     let inner_tracklist = doc.querySelector('#top-tracks-section [v-else=""] .chartlist');
                     if (inner_tracklist == null) {
-                        tracklist.innerHTML = (`
-                            <div class="section-controls tracklist-controls">
-                                <h3 class="text-18">${trans[lang].music.fetch_plays.name}</h3>
-                                <div class="view-buttons track-view-buttons">
-                                    <button class="btn view-item track-list-view-item" id="toggle-track_list_view-0" data-toggle="track_list_view" data-toggle-value="0" disabled>
-                                        ${trans[lang].music.track_list_view.tracklist}
-                                    </button>
-                                    <button class="btn view-item track-list-view-item" id="toggle-track_list_view-1" data-toggle="track_list_view" data-toggle-value="1" aria-checked="true">
-                                        <img class="view-item-avatar" src="${my_avi}" alt="${auth}">${trans[lang].music.track_list_view.listens.replace('{count}', scrobble_count)}
-                                    </button>
-                                </div>
-                            </div>
+                        tracklist_scrobbles_page.innerHTML = (`
                             <div class="loading-data-container">
                                 <p class="loading-data-text failed">${trans[lang].music.fetch_plays.fail}</p>
                                 <a class="btn" href="${album_as_track_url}">${trans[lang].music.fetch_plays.open_as_track}</a>
@@ -5942,39 +5938,22 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
                     inner_tracklist.classList.remove('chartlist--with-image');
 
-                    tracklist.innerHTML = (`
-                        <div class="section-controls tracklist-controls">
-                            <h3 class="text-18">${trans[lang].music.fetch_plays.name}</h3>
-                            <div class="view-buttons track-view-buttons">
-                                <button class="btn view-item track-list-view-item" id="toggle-track_list_view-0" data-toggle="track_list_view" data-toggle-value="0" disabled>
-                                    ${trans[lang].music.track_list_view.tracklist}
-                                </button>
-                                <button class="btn view-item track-list-view-item" id="toggle-track_list_view-1" data-toggle="track_list_view" data-toggle-value="1" aria-checked="true">
-                                    <img class="view-item-avatar" src="${my_avi}" alt="${auth}">${trans[lang].music.track_list_view.listens.replace('{count}', scrobble_count)}
-                                </button>
-                            </div>
+                    /*let track_controls = document.getElementById('tracklist-controls');
+                    track_controls.innerHTML = (`
+                        <h3 class="text-18">${trans[lang].music.fetch_plays.name}</h3>
+                        <div class="view-buttons track-view-buttons">
+                            <button class="btn view-item track-list-view-item" id="toggle-track_list_view-0" data-toggle="track_list_view" data-toggle-value="0" disabled>
+                                ${trans[lang].music.track_list_view.tracklist}
+                            </button>
+                            <button class="btn view-item track-list-view-item" id="toggle-track_list_view-1" data-toggle="track_list_view" data-toggle-value="1" aria-checked="true">
+                                <img class="view-item-avatar" src="${my_avi}" alt="${auth}">${trans[lang].music.track_list_view.listens.replace('{count}', scrobble_count)}
+                            </button>
                         </div>
-                        <p>Tracks listed here are based on your album plays as this album does not have a tracklist available.</p>
+                    `);*/
+                    tracklist_scrobbles_page.innerHTML = (`
                         ${inner_tracklist.outerHTML}
                     `);
-                })
-        } else {
-            let controls = tracklist.querySelector('.section-controls');
-            controls.classList.add('tracklist-controls');
-
-            let track_view_mode = document.querySelector('div');
-            track_view_mode.classList.add('view-buttons', 'track-view-buttons');
-            track_view_mode.innerHTML = (`
-                <button class="btn view-item track-list-view-item" id="toggle-track_list_view-0" data-toggle="track_list_view" data-toggle-value="0" onclick="_update_item('track_list_view', 0)">
-                    ${trans[lang].music.track_list_view.tracklist}
-                </button>
-                <button class="btn view-item track-list-view-item" id="toggle-track_list_view-1" data-toggle="track_list_view" data-toggle-value="1" onclick="_update_item('track_list_view', 1)">
-                    <img class="view-item-avatar" src="${my_avi}" alt="${auth}">${trans[lang].music.track_list_view.listens.replace('{count}', scrobble_count)}
-                </button>
-            `);
-            controls.appendChild(track_view_mode);
-
-            refresh_all();
+                });
         }
     }
 
