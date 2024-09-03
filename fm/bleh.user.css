@@ -4571,6 +4571,14 @@ better than the default selector '#app a' i suppose */
 }
 .chartlist-image {
     margin-left: unset !important;
+
+    transition-property: transform;
+    transition-duration: var(--trans);
+    transition-timing-function: var(--trans-function);
+
+    &:has(a):hover {
+        transform: scale(1.1);
+    }
 }
 .chartlist-bar:last-child,
 .chartlist:not(.chartlist--with-bar) .chartlist-loved
