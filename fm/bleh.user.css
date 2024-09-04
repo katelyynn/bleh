@@ -14349,8 +14349,19 @@ button.bleh--gallery-bookmark-image-btn {
                 --btn-left: 12px !important;
             }
         }
+        &[data-toggle="album_view"] {
+            &[data-toggle-value="0"] {
+                --mask: var(--icon-16-album);
+            }
+            &[data-toggle-value="1"] {
+                --mask: var(--icon-16-user);
+                --show-icon: none;
+                --btn-left: 12px !important;
+            }
+        }
     }
 }
+.album-controls,
 .tracklist-controls {
     justify-content: unset;
     align-items: center;
@@ -14391,6 +14402,29 @@ button.bleh--gallery-bookmark-image-btn {
 #tracklist:has([data-require="components/lazy-filter"]) .tracklist-scrobbles-page {
     [data-bleh--track_list_view="0"] &,
     [data-bleh--track_list_view="2"] & {
+        display: none;
+    }
+}
+
+.album-controls .dropdown-menu-clickable-button {
+    transform: translateX(0);
+
+    [data-bleh--album_view="1"] &,
+    [data-bleh--album_view="2"] & {
+        opacity: 0;
+        transform: translateX(var(--item-list-gap));
+        pointer-events: none;
+    }
+}
+#top-albums [data-require="components/lazy-filter"] {
+    [data-bleh--album_view="1"] &,
+    [data-bleh--album_view="2"] & {
+        display: none;
+    }
+}
+#top-albums:has([data-require="components/lazy-filter"]) .top-albums-scrobbles-page {
+    [data-bleh--album_view="0"] &,
+    [data-bleh--album_view="2"] & {
         display: none;
     }
 }

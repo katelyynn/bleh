@@ -58,11 +58,26 @@ const trans = {
                 fail: 'You do not have any plays on this album',
                 open_as_track: 'Open album title as a track'
             },
+            fetch_tracks: {
+                name: 'Tracklist',
+                loading: 'Fetching your top tracks',
+                fail: 'You have not listened to this artist before :('
+            },
+            fetch_albums: {
+                name: 'Tracklist',
+                loading: 'Fetching your top albums',
+                fail: 'You have not listened to an album by this artist before :('
+            },
             track_list_view: {
                 tracklist: 'Tracklist',
                 listens: '{count} listens',
                 top_tracks: 'Top tracks'
             },
+            album_view: {
+                tracklist: 'Tracklist',
+                listens: '{count} listens',
+                top_albums: 'Top albums'
+            }
         },
         statistics: {
             scrobbles: {
@@ -1239,6 +1254,7 @@ let settings_template = {
     travis: false,
     list_view: 1,
     track_list_view: 0,
+    album_view: 0,
     shout_markdown: true,
     bio_markdown: true,
     pretty_obsessions: true,
@@ -1374,6 +1390,12 @@ let settings_base = {
     },
     track_list_view: {
         css: 'track_list_view',
+        unit: '',
+        value: 0,
+        type: 'options'
+    },
+    album_view: {
+        css: 'album_view',
         unit: '',
         value: 0,
         type: 'options'
@@ -5981,8 +6003,6 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         header.setAttribute('data-kate-processed', 'true');
 
 
-        let top_tracks = document.getElementById('top-tracks');
-
         let personal_stats = document.querySelector('.personal-stats-item--scrobbles');
         let my_avi = document.querySelector('.auth-avatar-desktop').getAttribute('src');
         let scrobble_count = '0';
@@ -5994,7 +6014,17 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             scrobble_link = scrobble_link.getAttribute('href');
         }
 
+        let top_tracks = document.getElementById('top-tracks');
+        if (top_tracks != null) {
+            patch_artist_top_tracks(top_tracks, my_avi, scrobble_count, scrobble_link);
+        }
+        let top_albums = document.getElementById('top-albums');
+        if (top_albums != null) {
+            patch_artist_top_albums(top_albums, my_avi, scrobble_count, scrobble_link);
+        }
+    }
 
+    function patch_artist_top_tracks(top_tracks, my_avi, scrobble_count, scrobble_link) {
         let controls = top_tracks.querySelector('.section-controls');
         controls.classList.add('tracklist-controls');
 
@@ -6017,7 +6047,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         top_tracks_scrobbles_page.classList.add('top-tracks-scrobbles-page', 'buffer-standard');
         top_tracks_scrobbles_page.innerHTML = (`
             <div class="loading-data-container">
-                <p class="loading-data-text">${trans[lang].music.fetch_plays.loading}</p>
+                <p class="loading-data-text">${trans[lang].music.fetch_tracks.loading}</p>
             </div>
         `);
         top_tracks.appendChild(top_tracks_scrobbles_page);
@@ -6026,7 +6056,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         if (scrobble_link == undefined) {
             top_tracks_scrobbles_page.innerHTML = (`
                 <div class="loading-data-container">
-                    <p class="loading-data-text failed">${trans[lang].music.fetch_plays.fail}</p>
+                    <p class="loading-data-text failed">${trans[lang].music.fetch_tracks.fail}</p>
                 </div>
             `);
         } else {
@@ -6048,7 +6078,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     if (inner_tracklist == null) {
                         top_tracks_scrobbles_page.innerHTML = (`
                             <div class="loading-data-container">
-                                <p class="loading-data-text failed">${trans[lang].music.fetch_plays.fail}</p>
+                                <p class="loading-data-text failed">${trans[lang].music.fetch_tracks.fail}</p>
                             </div>
                         `);
                         return;
@@ -6056,7 +6086,75 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
                     top_tracks_scrobbles_page.innerHTML = (`
                         ${inner_tracklist.outerHTML}
-                        ${view_more_btn.outerHTML}
+                        ${(view_more_btn != null) ? view_more_btn.outerHTML : ''}
+                    `);
+                });
+        }
+    }
+
+    function patch_artist_top_albums(top_albums, my_avi, scrobble_count, scrobble_link) {
+        let controls = top_albums.querySelector('.section-controls');
+        controls.classList.add('album-controls');
+
+        let album_view_mode = document.querySelector('div');
+        album_view_mode.classList.add('view-buttons', 'album-view-buttons');
+        album_view_mode.setAttribute('id', 'album-controls');
+        album_view_mode.innerHTML = (`
+            <button class="btn view-item album-view-item" id="toggle-album_view-0" data-toggle="album_view" data-toggle-value="0" onclick="_update_item('album_view', 0)">
+                ${trans[lang].music.album_view.top_albums}
+            </button>
+            <button class="btn view-item album-view-item" id="toggle-album_view-1" data-toggle="album_view" data-toggle-value="1" onclick="_update_item('album_view', 1)">
+                <img class="view-item-avatar" src="${my_avi}" alt="${auth}">${trans[lang].music.album_view.listens.replace('{count}', scrobble_count)}
+            </button>
+        `);
+        controls.appendChild(album_view_mode);
+
+        refresh_all();
+
+        let top_albums_scrobbles_page = document.createElement('div');
+        top_albums_scrobbles_page.classList.add('top-albums-scrobbles-page', 'buffer-standard');
+        top_albums_scrobbles_page.innerHTML = (`
+            <div class="loading-data-container">
+                <p class="loading-data-text">${trans[lang].music.fetch_albums.loading}</p>
+            </div>
+        `);
+        top_albums.appendChild(top_albums_scrobbles_page);
+
+        // you have no scrobbles yet
+        if (scrobble_link == undefined) {
+            top_albums_scrobbles_page.innerHTML = (`
+                <div class="loading-data-container">
+                    <p class="loading-data-text failed">${trans[lang].music.fetch_albums.fail}</p>
+                </div>
+            `);
+        } else {
+            // we need to fetch the album list
+            fetch(scrobble_link)
+                .then(function(response) {
+                    console.error('returned', response, response.text);
+
+                    return response.text();
+                })
+                .then(function(html) {
+                    let doc = new DOMParser().parseFromString(html, 'text/html');
+
+                    //deliver_notif(`using url ${`/user/${auth}/library/music/${album_url}`}`);
+                    console.error('DOC', doc);
+
+                    let inner_tracklist = doc.querySelector('#top-albums-section [v-else=""] .chartlist');
+                    let view_more_btn = doc.querySelector('#top-albums-section + .more-link');
+                    if (inner_tracklist == null) {
+                        top_albums_scrobbles_page.innerHTML = (`
+                            <div class="loading-data-container">
+                                <p class="loading-data-text failed">${trans[lang].music.fetch_albums.fail}</p>
+                            </div>
+                        `);
+                        return;
+                    }
+
+                    top_albums_scrobbles_page.innerHTML = (`
+                        ${inner_tracklist.outerHTML}
+                        ${(view_more_btn != null) ? view_more_btn.outerHTML : ''}
                     `);
                 });
         }
