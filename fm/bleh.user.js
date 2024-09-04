@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         bleh
 // @namespace    http://last.fm/
-// @version      2024.0903
+// @version      2024.0904
 // @description  bleh!!! ^-^
 // @author       kate
 // @match        https://www.last.fm/*
@@ -16,8 +16,8 @@
 // ==/UserScript==
 
 let version = {
-    build: '2024.0903',
-    sku: 'main',
+    build: '2024.0904',
+    sku: 'scrobble-redesign',
     feature_flags: {}
 }
 
