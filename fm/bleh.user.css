@@ -14354,7 +14354,17 @@ button.bleh--gallery-bookmark-image-btn {
     }
 }
 
-.tracklist-controls .dropdown-menu-clickable-button,
+
+.tracklist-controls .dropdown-menu-clickable-button {
+    transform: translateX(0);
+
+    [data-bleh--track_list_view="1"] &,
+    [data-bleh--track_list_view="2"] & {
+        opacity: 0;
+        transform: translateX(var(--item-list-gap));
+        pointer-events: none;
+    }
+}
 #tracklist [data-require="components/lazy-filter"] {
     [data-bleh--track_list_view="1"] &,
     [data-bleh--track_list_view="2"] & {
