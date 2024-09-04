@@ -1385,6 +1385,21 @@ last.fm changes as of 2024-05-20 */
     min-width: var(--cards-sidebar-width);
 }
 
+.col-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: var(--card-gap);
+
+    & > section,
+    & > .buffer-standard {
+        margin-top: unset;
+    }
+
+    & > form[action*="/playlists/create/"] {
+        order: 100;
+    }
+}
+
 /* in settings */
 .content-form .form-section {
     margin-top: var(--card-gap);
