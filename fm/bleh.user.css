@@ -14391,14 +14391,14 @@ button.bleh--gallery-bookmark-image-btn {
         pointer-events: none;
     }
 }
-#top-tracks [data-require="components/lazy-filter"],
+.artist-top-tracks [data-require="components/lazy-filter"],
 #tracklist [data-require="components/lazy-filter"] {
     [data-bleh--track_list_view="1"] &,
     [data-bleh--track_list_view="2"] & {
         display: none;
     }
 }
-#top-tracks:has([data-require="components/lazy-filter"]) .top-tracks-scrobbles-page,
+.artist-top-tracks:has([data-require="components/lazy-filter"]) .top-tracks-scrobbles-page,
 #tracklist:has([data-require="components/lazy-filter"]) .tracklist-scrobbles-page {
     [data-bleh--track_list_view="0"] &,
     [data-bleh--track_list_view="2"] & {
@@ -14416,13 +14416,13 @@ button.bleh--gallery-bookmark-image-btn {
         pointer-events: none;
     }
 }
-#top-albums [data-require="components/lazy-filter"] {
+.artist-top-albums-card [data-require="components/lazy-filter"] {
     [data-bleh--album_view="1"] &,
     [data-bleh--album_view="2"] & {
         display: none;
     }
 }
-#top-albums:has([data-require="components/lazy-filter"]) .top-albums-scrobbles-page {
+.artist-top-albums-card:has([data-require="components/lazy-filter"]) .top-albums-scrobbles-page {
     [data-bleh--album_view="0"] &,
     [data-bleh--album_view="2"] & {
         display: none;

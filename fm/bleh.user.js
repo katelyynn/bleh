@@ -6020,10 +6020,12 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
         let top_tracks = document.getElementById('top-tracks');
         if (top_tracks != null) {
+            top_tracks.classList.add('artist-top-tracks');
             patch_artist_top_tracks(top_tracks, my_avi, scrobble_count, scrobble_link);
         }
         let top_albums = document.getElementById('top-albums');
         if (top_albums != null) {
+            top_albums.classList.add('artist-top-albums-card');
             patch_artist_top_albums(top_albums, my_avi, scrobble_count, scrobble_link);
         }
     }
@@ -6161,6 +6163,12 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                         ${(view_more_btn != null) ? view_more_btn.outerHTML : ''}
                     `);
                 });
+        }
+
+        // the fuck??
+        if (album_view_mode.classList.contains('top-bar')) {
+            deliver_notif('last.fm has failed to render one component, this is not a bleh issue');
+            album_view_mode.classList.remove('top-bar');
         }
     }
 
