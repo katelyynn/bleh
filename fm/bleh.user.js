@@ -865,8 +865,98 @@ const trans = {
     },
 }
 
+// create a window
+function create_window(id, title, inner_content) {
+    let background = document.createElement('div');
+    background.classList.add('popup_background');
+    background.setAttribute('id',`bleh--window-${id}--background`);
+    background.style = 'opacity: 0.8; visibility: visible; background-color: rgb(0, 0, 0); position: fixed; inset: 0px;';
+    background.setAttribute('data-kate-processed','true');
+
+    let wrapper = document.createElement('div');
+    wrapper.classList.add('popup_wrapper','popup_wrapper_visible');
+    wrapper.setAttribute('id',`bleh--window-${id}--wrapper`);
+    wrapper.style = 'opacity: 1; visibility: visible; position: fixed; overflow: auto; width: 100%; height: 100%; top: 0px; left: 0px; text-align: center;';
+    wrapper.setAttribute('data-kate-processed','true');
+
+
+    // dialog
+    let dialog = document.createElement('div');
+    dialog.classList.add('modal-dialog');
+    dialog.setAttribute('id',`bleh--window-${id}--dialog`);
+    dialog.style = 'opacity: 1; visibility: visible; pointer-events: auto; display: inline-block; outline: none; text-align: left; position: relative; vertical-align: middle;';
+    dialog.setAttribute('data-kate-processed','true');
+
+    // content
+    let content = document.createElement('div');
+    content.classList.add('modal-content');
+    content.setAttribute('id',`bleh--window-${id}--content`);
+    content.setAttribute('data-kate-processed','true');
+
+    // share content
+    let share = document.createElement('div');
+    share.classList.add('modal-share-content');
+    share.setAttribute('id',`bleh--window-${id}--share`);
+    share.setAttribute('data-kate-processed','true');
+
+    // body
+    let body = document.createElement('div');
+    body.classList.add('modal-body');
+    body.setAttribute('id',`bleh--window-${id}--body`);
+    body.setAttribute('data-kate-processed','true');
+
+    // title
+    let header = document.createElement('h2');
+    header.classList.add('modal-title');
+    header.textContent = title;
+    header.setAttribute('data-kate-processed','true');
+
+    // inner content
+    let inner_content_em = document.createElement('div');
+    inner_content_em.classList.add('modal-inner-content');
+    inner_content_em.innerHTML = inner_content;
+    inner_content_em.setAttribute('data-kate-processed','true');
+
+
+    let align = document.createElement('div');
+    align.classList.add('popup_align');
+    align.setAttribute('id',`bleh--window-${id}--align`);
+    align.style = 'display: inline-block; vertical-align: middle; height: 100%;';
+    align.setAttribute('data-kate-processed','true');
+
+
+    body.appendChild(header);
+    body.appendChild(inner_content_em)
+    share.appendChild(body);
+    content.appendChild(share);
+    dialog.appendChild(content);
+    wrapper.appendChild(dialog);
+    wrapper.appendChild(align);
+
+
+    document.body.appendChild(background);
+    document.body.appendChild(wrapper);
+}
+
+// kill a window
+function kill_window(id) {
+    document.body.removeChild(document.getElementById(`bleh--window-${id}--background`));
+    document.body.removeChild(document.getElementById(`bleh--window-${id}--wrapper`));
+}
+
+unsafeWindow._kill_window = function(id) {
+    kill_window(id);
+}
+
 function lookup_lang() {
-    root = document.querySelector('.masthead-logo a').getAttribute('href');
+    root = document.querySelector('.masthead-logo a');
+
+    if (root == null) {
+        create_window('failure', 'last.fm has failed to load', 'last.fm has failed to load any site content<br>please refresh');
+        return;
+    }
+    root = root.getAttribute('href');
+
     lang = document.documentElement.getAttribute('lang');
 
     if (!valid_langs.includes(lang)) {
@@ -1484,12 +1574,12 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         let performance_start = performance.now();
 
         append_style();
+        load_notifs();
         lookup_lang();
         load_settings();
         //get_scrobbles(document.body);
         append_nav(document.body);
         patch_masthead(document.body);
-        load_notifs();
 
         start_rain();
 
@@ -4900,92 +4990,6 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         update_item('hue',settings.hue);
         update_item('sat',settings.sat);
         update_item('lit',settings.lit);
-    }
-
-
-
-
-    // create a window
-    function create_window(id, title, inner_content) {
-        let background = document.createElement('div');
-        background.classList.add('popup_background');
-        background.setAttribute('id',`bleh--window-${id}--background`);
-        background.style = 'opacity: 0.8; visibility: visible; background-color: rgb(0, 0, 0); position: fixed; inset: 0px;';
-        background.setAttribute('data-kate-processed','true');
-
-        let wrapper = document.createElement('div');
-        wrapper.classList.add('popup_wrapper','popup_wrapper_visible');
-        wrapper.setAttribute('id',`bleh--window-${id}--wrapper`);
-        wrapper.style = 'opacity: 1; visibility: visible; position: fixed; overflow: auto; width: 100%; height: 100%; top: 0px; left: 0px; text-align: center;';
-        wrapper.setAttribute('data-kate-processed','true');
-
-
-        // dialog
-        let dialog = document.createElement('div');
-        dialog.classList.add('modal-dialog');
-        dialog.setAttribute('id',`bleh--window-${id}--dialog`);
-        dialog.style = 'opacity: 1; visibility: visible; pointer-events: auto; display: inline-block; outline: none; text-align: left; position: relative; vertical-align: middle;';
-        dialog.setAttribute('data-kate-processed','true');
-
-        // content
-        let content = document.createElement('div');
-        content.classList.add('modal-content');
-        content.setAttribute('id',`bleh--window-${id}--content`);
-        content.setAttribute('data-kate-processed','true');
-
-        // share content
-        let share = document.createElement('div');
-        share.classList.add('modal-share-content');
-        share.setAttribute('id',`bleh--window-${id}--share`);
-        share.setAttribute('data-kate-processed','true');
-
-        // body
-        let body = document.createElement('div');
-        body.classList.add('modal-body');
-        body.setAttribute('id',`bleh--window-${id}--body`);
-        body.setAttribute('data-kate-processed','true');
-
-        // title
-        let header = document.createElement('h2');
-        header.classList.add('modal-title');
-        header.textContent = title;
-        header.setAttribute('data-kate-processed','true');
-
-        // inner content
-        let inner_content_em = document.createElement('div');
-        inner_content_em.classList.add('modal-inner-content');
-        inner_content_em.innerHTML = inner_content;
-        inner_content_em.setAttribute('data-kate-processed','true');
-
-
-        let align = document.createElement('div');
-        align.classList.add('popup_align');
-        align.setAttribute('id',`bleh--window-${id}--align`);
-        align.style = 'display: inline-block; vertical-align: middle; height: 100%;';
-        align.setAttribute('data-kate-processed','true');
-
-
-        body.appendChild(header);
-        body.appendChild(inner_content_em)
-        share.appendChild(body);
-        content.appendChild(share);
-        dialog.appendChild(content);
-        wrapper.appendChild(dialog);
-        wrapper.appendChild(align);
-
-
-        document.body.appendChild(background);
-        document.body.appendChild(wrapper);
-    }
-
-    // kill a window
-    function kill_window(id) {
-        document.body.removeChild(document.getElementById(`bleh--window-${id}--background`));
-        document.body.removeChild(document.getElementById(`bleh--window-${id}--wrapper`));
-    }
-
-    unsafeWindow._kill_window = function(id) {
-        kill_window(id);
     }
 
 
