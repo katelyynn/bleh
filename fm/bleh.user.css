@@ -1385,7 +1385,7 @@ last.fm changes as of 2024-05-20 */
     min-width: var(--cards-sidebar-width);
 }
 
-.col-sidebar {
+.col-sidebar:not(.track-overview-video-column) {
     display: flex;
     flex-direction: column;
     gap: var(--card-gap);
@@ -14380,12 +14380,14 @@ button.bleh--gallery-bookmark-image-btn {
         pointer-events: none;
     }
 }
+#top-tracks [data-require="components/lazy-filter"],
 #tracklist [data-require="components/lazy-filter"] {
     [data-bleh--track_list_view="1"] &,
     [data-bleh--track_list_view="2"] & {
         display: none;
     }
 }
+#top-tracks:has([data-require="components/lazy-filter"]) .top-tracks-scrobbles-page,
 #tracklist:has([data-require="components/lazy-filter"]) .tracklist-scrobbles-page {
     [data-bleh--track_list_view="0"] &,
     [data-bleh--track_list_view="2"] & {
