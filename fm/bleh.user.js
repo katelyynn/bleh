@@ -6110,6 +6110,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         if (track_view_mode.classList.contains('top-bar')) {
             deliver_notif('last.fm has failed to render one component, this is not a bleh issue');
             track_view_mode.classList.remove('top-bar');
+
+            // todo: this sucks, but its not my fault im not sure how to fix it
             window.location.reload(false);
         }
     }
@@ -6165,6 +6167,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         if (album_view_mode.classList.contains('top-bar')) {
             deliver_notif('last.fm has failed to render one component, this is not a bleh issue');
             album_view_mode.classList.remove('top-bar');
+
+            // todo: this sucks, but its not my fault im not sure how to fix it
             window.location.reload(false);
         }
     }
