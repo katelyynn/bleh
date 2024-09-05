@@ -6036,6 +6036,9 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         let inner_top_albums_btn;
         let inner_top_albums_status = 'none';
 
+        prepare_patch_artist_top_tracks(top_tracks, my_avi, scrobble_count);
+        prepare_patch_artist_top_albums(top_albums, my_avi, scrobble_count);
+
         // you have no scrobbles yet
         if (scrobble_link != undefined) {
             // we need to fetch the tracklist
@@ -6065,16 +6068,17 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     else
                         inner_top_albums_status = 'success';
 
+                    let top_bar = doc.querySelector('.top-bar');
+
                     console.info('top tracks', inner_top_tracks_status, 'top albums', inner_top_albums_status);
 
-                    patch_artist_top_tracks(top_tracks, inner_top_tracks, inner_top_tracks_btn, inner_top_tracks_status, my_avi, scrobble_count, scrobble_link);
-                    patch_artist_top_albums(top_albums, inner_top_albums, inner_top_albums_btn, inner_top_albums_status, my_avi, scrobble_count, scrobble_link);
+                    patch_artist_top_tracks(top_tracks, inner_top_tracks, inner_top_tracks_btn, inner_top_tracks_status, my_avi, scrobble_count, scrobble_link, top_bar);
+                    patch_artist_top_albums(top_albums, inner_top_albums, inner_top_albums_btn, inner_top_albums_status, my_avi, scrobble_count, scrobble_link, top_bar);
                 });
         }
     }
 
-    function patch_artist_top_tracks(top_tracks, inner_top_tracks, inner_top_tracks_btn, inner_top_tracks_status, my_avi, scrobble_count, scrobble_link) {
-        console.info('bleh - patching artist top tracks with status', inner_top_tracks_status);
+    function prepare_patch_artist_top_tracks(top_tracks, my_avi, scrobble_count) {
         let controls = top_tracks.querySelector('.section-controls');
         controls.classList.add('tracklist-controls');
 
@@ -6102,6 +6106,19 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         `);
         top_tracks.appendChild(top_tracks_scrobbles_page);
 
+        // the fuck??
+        if (track_view_mode.classList.contains('top-bar')) {
+            deliver_notif('last.fm has failed to render one component, this is not a bleh issue');
+            track_view_mode.classList.remove('top-bar');
+            window.location.reload(false);
+        }
+    }
+
+    function patch_artist_top_tracks(top_tracks, inner_top_tracks, inner_top_tracks_btn, inner_top_tracks_status, my_avi, scrobble_count, scrobble_link, top_bar) {
+        console.info('bleh - patching artist top tracks with status', inner_top_tracks_status);
+
+        let top_tracks_scrobbles_page = document.body.querySelector('.top-tracks-scrobbles-page');
+
         if (inner_top_tracks_status == 'success') {
             top_tracks_scrobbles_page.innerHTML = (`
                 ${inner_top_tracks.outerHTML}
@@ -6114,16 +6131,9 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 </div>
             `);
         }
-
-        // the fuck??
-        if (track_view_mode.classList.contains('top-bar')) {
-            deliver_notif('last.fm has failed to render one component, this is not a bleh issue');
-            track_view_mode.classList.remove('top-bar');
-        }
     }
 
-    function patch_artist_top_albums(top_albums, inner_top_albums, inner_top_albums_btn, inner_top_albums_status, my_avi, scrobble_count, scrobble_link) {
-        console.info('bleh - patching artist top albums with status', inner_top_albums_status);
+    function prepare_patch_artist_top_albums(top_albums, my_avi, scrobble_count) {
         let controls = top_albums.querySelector('.section-controls');
         controls.classList.add('album-controls');
 
@@ -6151,6 +6161,19 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         `);
         top_albums.appendChild(top_albums_scrobbles_page);
 
+        // the fuck??
+        if (album_view_mode.classList.contains('top-bar')) {
+            deliver_notif('last.fm has failed to render one component, this is not a bleh issue');
+            album_view_mode.classList.remove('top-bar');
+            window.location.reload(false);
+        }
+    }
+
+    function patch_artist_top_albums(top_albums, inner_top_albums, inner_top_albums_btn, inner_top_albums_status, my_avi, scrobble_count, scrobble_link, top_bar) {
+        console.info('bleh - patching artist top albums with status', inner_top_albums_status);
+
+        let top_albums_scrobbles_page = document.body.querySelector('.top-albums-scrobbles-page');
+
         if (inner_top_albums_status == 'success') {
             top_albums_scrobbles_page.innerHTML = (`
                 ${inner_top_albums.outerHTML}
@@ -6162,12 +6185,6 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     <p class="loading-data-text failed">${trans[lang].music.fetch_albums.fail}</p>
                 </div>
             `);
-        }
-
-        // the fuck??
-        if (album_view_mode.classList.contains('top-bar')) {
-            deliver_notif('last.fm has failed to render one component, this is not a bleh issue');
-            album_view_mode.classList.remove('top-bar');
         }
     }
 

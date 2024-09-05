@@ -167,7 +167,7 @@ a,
 .async-content-error-message,
 .avatar-status-dot, .label, .shout-user-avatar:before, .user-status-None,
 .masthead-nav-control,
-.header-new-actions :is(a, button), .header-new-inner, span[itemprop="byArtist"] a,
+.header-new-inner:not(.header-new-inner--without-image) .header-new-actions :is(a, button), .header-new-inner:not(.header-new-inner--without-image), .header-new-inner:not(.header-new-inner--without-image) span[itemprop="byArtist"] a,
 .user-dashboard-layout .masthead a,
 .bleh--redacted-message,
 .header-metadata-display, .chartlist-count-bar, .chartlist-count-bar-value,
@@ -219,9 +219,9 @@ input[type="range"],
         --icon: var(--c2);
     }
     [data-bleh--theme="light"] &:not(
-        .header-metadata-tnew-item,
-        .header-new-actions :is(a, button),
-        .header-new-inner, span[itemprop="byArtist"] a, .user-dashboard-layout .masthead a) {
+        .header-new-inner:not(.header-new-inner--without-image) .header-metadata-tnew-item,
+        .header-new-inner:not(.header-new-inner--without-image) .header-new-actions :is(a, button),
+        .header-new-inner:not(.header-new-inner--without-image) .header-new-inner, .header-new-inner:not(.header-new-inner--without-image) span[itemprop="byArtist"] a, .user-dashboard-layout .masthead a) {
         --c1: var(--hue), calc(var(--sat) * 6%), 0%;
         --c2: var(--hue), calc(var(--sat) * 4%), 4%;
         --c3: var(--hue), calc(var(--sat) * 10%), 30%;
@@ -3210,7 +3210,7 @@ header:is(.header-new--album, .header-new--track) .header-new-background-overlay
     margin-right: unset !important;
     order: -1;
     width: fit-content;
-    color: hsl(var(--c1));
+    color: #fff;
     /*--mask: linear-gradient(90deg, rgba(255,255,255,1) 93%, rgba(255,255,255,0) 100%);
     mask-image: var(--mask);
     -webkit-mask-image: var(--mask);*/
@@ -3222,12 +3222,20 @@ header:is(.header-new--album, .header-new--track) .header-new-background-overlay
     .title, .feat {
         width: fit-content;
     }
+
+    .header-new-inner--without-image & {
+        color: hsl(var(--c1));
+    }
 }
 .header-new-title .feat {
-    color: hsla(var(--c1), 0.8);
+    color: rgba(255, 255, 255, 0.8);
     font-weight: var(--font-weight-medium);
     font-size: 24px;
     line-height: 28px;
+
+    .header-new-inner--without-image & {
+        color: hsla(var(--c1), 80%);
+    }
 }
 
 .header-new-on-tour {
@@ -3239,12 +3247,16 @@ header:is(.header-new--album, .header-new--track) .header-new-background-overlay
 
 span[itemprop="byArtist"] {
     display: flex;
-    color: hsla(var(--c1), 0.6);
+    color: rgba(255, 255, 255, 0.8);
     font-size: 24px;
     line-height: 24px;
 
-    .header-new-crumb {
+    .header-new-inner--without-image & {
         color: hsla(var(--c1), 0.8);
+    }
+
+    .header-new-crumb {
+        color: inherit;
         opacity: unset;
         font-size: 24px;
         font-weight: var(--font-weight-medium);
@@ -3253,8 +3265,12 @@ span[itemprop="byArtist"] {
         transition-timing-function: var(--trans-function);
 
         &:hover {
-            color: hsl(var(--c1));
+            color: #fff;
             transition: none;
+        }
+
+        .header-new-inner--without-image &:hover {
+            color: hsl(var(--c1));
         }
     }
 
@@ -3272,6 +3288,11 @@ span[itemprop="byArtist"] + .header-new-title {
     margin-top: unset;
     font-weight: 700;
     text-shadow: 0 0 10px rgba(255,255,255, 0.7);
+
+    .header-new-inner--without-image & {
+        color: hsl(var(--c1));
+        text-shadow: unset;
+    }
 }
 
 .header-new-info-desktop {
@@ -3409,14 +3430,26 @@ state is not active, which then falls back to primary button styling */
     font-size: var(--font-size);
     line-height: var(--line-height);
     font-weight: var(--font-weight-medium);
+
+    .header-new-inner--without-image & {
+        color: hsl(var(--c2));
+    }
 }
 .artist-header-featured-items-item-aux-text {
     font-size: calc(var(--font-size) - 1px);
     line-height: var(--line-height);
     color: rgba(255,255,255, 0.7);
+
+    .header-new-inner--without-image & {
+        color: hsla(var(--c2), 80%);
+    }
 }
 .artist-header-featured-items-item-header {
     text-transform: initial;
+
+    .header-new-inner--without-image & {
+        color: hsl(var(--c3));
+    }
 }
 
 
@@ -3981,12 +4014,6 @@ state is not active, which then falls back to primary button styling */
         color: hsl(var(--l2-c)) !important;
         font-weight: var(--font-weight-medium);
 
-        &[data-bleh--scrobble-milestone="15"],
-        &[data-bleh--scrobble-milestone="14"] {
-            color: #fff;
-            text-shadow: 0 0 5px #D38628, 0 0 12px hsl(var(--l4-c));
-        }
-
         &:before {
             content: '';
             display: block;
@@ -4392,7 +4419,7 @@ better than the default selector '#app a' i suppose */
     transition-timing-function: var(--trans-function);
 }
 .grid-items-cover-image-image:after {
-    background-image: linear-gradient(180deg,transparent 0,rgba(0,0,0,.3) 80%,rgba(0,0,0,.7));
+    background-image: linear-gradient(180deg,transparent 0,transparent 60%,rgba(0,0,0,.7));
 }
 .grid-items-item:hover .grid-items-cover-image-image {
     filter: brightness(115%);
@@ -6018,6 +6045,7 @@ button,
 
 
 /*     ICON MASK     */
+.gallery-placeholder:before,
 .image-list-item-bookmarked:after, .image-list-item-preferred:after,
 .data-loading:before, .lazy-shoutbox.async-content-loading:before, .loading:not(.library-fetch, .library-date-picker):before,
 .user-list-inner-wrap .label:before,
@@ -7658,10 +7686,26 @@ form[action="/inbox/notifications"] {
 }
 
 .gallery-image {
-    padding: 20px;
+    padding: var(--card-padding);
+
+    img {
+        border-radius: var(--item-big-radius);
+    }
 }
-.gallery-image img {
-    border-radius: var(--item-big-radius);
+.gallery--initialised .gallery-slide {
+    transition: left var(--trans) var(--trans-function);
+}
+.gallery-placeholder {
+    color: hsl(var(--c3));
+    --mask-size: 32px;
+    --left: 50%;
+    --margin-left: calc(-1 * (var(--mask-size) / 2));
+    --margin-top: calc(-1 * (var(--mask-size) / 2));
+    --mask: var(--icon-16-spinner);
+
+    &:before {
+        animation: spinner 0.8s linear infinite;
+    }
 }
 
 
@@ -7676,30 +7720,29 @@ form[action="/inbox/notifications"] {
     --col: hsl(var(--c3));
     --shadow: none !important;
     --shadow-hov: none !important;
+
+    &:before {
+        background-color: currentColor !important;
+    }
+    &:after {
+        content: var(--arrow-txt);
+        font-size: var(--font-size) !important;
+    }
+
+    .gallery-previous & {
+        --arrow-txt: 'Prev';
+        --mask: var(--icon-16-arrow-left);
+    }
+    .gallery-next & {
+        --arrow-txt: 'Next';
+        --mask: var(--icon-16-arrow-right);
+        --left: none;
+        --right: 12px;
+    }
 }
 /*.arrow:before {
     left: 24px !important;
 }*/
-.gallery-previous .arrow:before {
-    --mask: var(--icon-16-arrow-left);
-}
-.gallery-next .arrow:before {
-    --mask: var(--icon-16-arrow-right);
-}
-
-.arrow:before {
-    background-color: currentColor !important;
-}
-
-.arrow:after {
-    font-size: var(--font-size) !important;
-}
-.gallery-previous .arrow:after {
-    content: 'Prev';
-}
-.gallery-next .arrow:after {
-    content: 'Next';
-}
 
 .gallery-next, .gallery-previous {
     opacity: unset !important;
@@ -7722,8 +7765,8 @@ form[action="/inbox/notifications"] {
     transition-timing-function: var(--trans-function);
 }
 .gallery-thumbnails li.selected {
-    border: 2px solid hsl(var(--l3));
-    box-shadow: 0 0 10px hsl(var(--l4));
+    border: 2px solid hsl(var(--l3-c));
+    box-shadow: 0 0 20px hsl(var(--h4));
 }
 
 /* ensure padding, due to section-with-sep.. */
