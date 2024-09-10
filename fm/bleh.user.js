@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         bleh
 // @namespace    http://last.fm/
-// @version      2024.0903
+// @version      2024.0911
 // @description  bleh!!! ^-^
 // @author       kate
 // @match        https://www.last.fm/*
@@ -16,7 +16,7 @@
 // ==/UserScript==
 
 let version = {
-    build: '2024.0903',
+    build: '2024.0911',
     sku: 'main',
     feature_flags: {}
 }
@@ -883,7 +883,10 @@ let artist_corrections = {
     'Vexed': 'VEXED',
     'HeavensGate': 'HEAVENSGATE',
     'Tool': 'TOOL',
-    'Blackshape': 'BLACKSHAPE'
+    'Blackshape': 'BLACKSHAPE',
+    'Olivia': 'OLIVIA',
+    'Diesect': 'DIESECT',
+    'Milet': 'milet'
 }
 let song_title_corrections = {
     'quadeca': {
