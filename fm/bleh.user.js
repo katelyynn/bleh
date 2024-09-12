@@ -975,6 +975,9 @@ let song_title_corrections = {
     },
     'yumi': {
         'Dance': 'DANCE'
+    },
+    'ericdoa': {
+        'Search & Destroy': 'search & destroy'
     }
 };
 
