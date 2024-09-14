@@ -978,6 +978,10 @@ let song_title_corrections = {
     },
     'ericdoa': {
         'Search & Destroy': 'search & destroy'
+    },
+    'playboi carti': {
+        'All Red': 'ALL RED',
+        'Music': 'MUSIC'
     }
 };
 
