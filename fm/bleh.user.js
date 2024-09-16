@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         bleh
 // @namespace    http://last.fm/
-// @version      2024.0911
+// @version      2024.0916
 // @description  bleh!!! ^-^
 // @author       kate
 // @match        https://www.last.fm/*
@@ -16,8 +16,8 @@
 // ==/UserScript==
 
 let version = {
-    build: '2024.0911',
-    sku: 'main',
+    build: '2024.0916',
+    sku: 'promo_patch',
     feature_flags: {}
 }
 
@@ -3599,6 +3599,24 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                                 <p>${trans[lang].settings.accessibility.underline_links.bio}</p>
                             </div>
                         </button>
+                    </div>
+                </div>
+                <div class="sep"></div>
+                <h4>Try out the latest</h4>
+                <div class="setting-items">
+                    <div class="side-left">
+                        <a class="btn setting-item has-image" href="https://cutensilly.org/bwaa/fm" target="_blank">
+                            <div class="image">
+                                <div class="icon bleh--bwaa"></div>
+                            </div>
+                            <div class="text">
+                                <h5>bwaa (BETA) for Last.fm</h5>
+                                <p>bring last.fm back to 2012 while retaining all modern features. (includes a dark mode)</p>
+                            </div>
+                            <div class="image-row">
+                                <img src="https://cutensilly.org/img/bwaa-image.png">
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>
