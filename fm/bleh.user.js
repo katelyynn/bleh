@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         bleh
 // @namespace    http://last.fm/
-// @version      2024.0916
+// @version      2024.0922
 // @description  bleh!!! ^-^
 // @author       kate
 // @match        https://www.last.fm/*
@@ -16,8 +16,8 @@
 // ==/UserScript==
 
 let version = {
-    build: '2024.0916',
-    sku: 'promo_patch',
+    build: '2024.0922',
+    sku: 'scawy',
     feature_flags: {}
 }
 
@@ -855,6 +855,80 @@ function lookup_lang() {
     }
 }
 
+// seasonal
+let stored_season;
+let seasonal_events = [
+    {
+        id: 'halloween',
+        icon: 'moon',
+        name: 'Halloween',
+        start: 'y0-09-22',
+        end: 'y0-11-02',
+
+        snowflakes: {
+            state: false,
+            count: 0
+        }
+    },
+    {
+        id: 'fall',
+        icon: 'leaf',
+        name: 'Fall',
+        start: 'y0-11-05',
+        end: 'y0-11-19',
+
+        snowflakes: {
+            state: true,
+            count: 2
+        }
+    },
+    {
+        id: 'christmas',
+        icon: 'snowflake',
+        name: 'Christmas',
+        start: 'y0-11-19',
+        end: 'y0-12-31',
+
+        snowflakes: {
+            state: true,
+            count: 30
+        }
+    },
+    {
+        id: 'new_years',
+        icon: 'party-popper',
+        name: 'New Years',
+        start: 'y0-01-01',
+        end: 'y0-01-10',
+
+        snowflakes: {
+            state: true,
+            count: 18
+        }
+    }
+];
+
+function set_season() {
+    if (!settings.seasonal)
+        return;
+
+    let now = new Date();
+
+    let current_year = now.getFullYear();
+
+    seasonal_events.forEach((season) => {
+        if (
+            now >= new Date(season.start.replace('y0', current_year)) &&
+            now <= new Date(season.end.replace('y0', current_year))
+        ) {
+            stored_season = season;
+            console.info('bleh - it is season', season.name, 'starting', season.start, 'ending', season.end, season);
+
+            document.documentElement.setAttribute('data-bleh--season', season.id);
+        }
+    });
+}
+
 tippy.setDefaultProps({
     arrow: false,
     duration: [100, 300],
@@ -1246,23 +1320,24 @@ let settings_template = {
     shout_markdown: true,
     bio_markdown: true,
     pretty_obsessions: true,
-    hue_from_album: true
+    hue_from_album: true,
+    seasonal: true
 };
 let settings_base = {
     hue: {
-        css: 'hue-preference',
+        css: 'hue-user',
         unit: '',
         value: 255,
         type: 'slider'
     },
     sat: {
-        css: 'sat',
+        css: 'sat-user',
         unit: '',
         value: 1,
         type: 'slider'
     },
     lit: {
-        css: 'lit',
+        css: 'lit-user',
         unit: '',
         value: 1,
         type: 'slider'
@@ -1403,6 +1478,13 @@ let settings_base = {
         value: true,
         values: [true, false],
         type: 'toggle'
+    },
+    seasonal: {
+        css: 'seasonal',
+        unit: '',
+        value: true,
+        values: [true, false],
+        type: 'toggle'
     }
 };
 let inbuilt_settings = {
@@ -1467,6 +1549,9 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         patch_masthead(document.body);
         load_notifs();
 
+        // load seasonal data
+        set_season();
+
         start_rain();
 
         console.log(bleh_url,window.location.href,bleh_regex.test(window.location.href));
@@ -1510,6 +1595,9 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             //get_scrobbles(node);
             append_nav(document.body);
             patch_masthead(document.body);
+
+            // load seasonal data
+            set_season();
 
             if (window.location.href == bleh_url || bleh_regex.test(window.location.href)) {
                 bleh_settings();
@@ -1764,6 +1852,13 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
         // save setting into body
         for (let setting in settings) {
+            if (
+                (setting == 'hue' || setting == 'sat' || setting == 'lit') &&
+                settings.hue == settings_base.hue.value &&
+                settings.sat == settings_base.sat.value &&
+                settings.lit == settings_base.lit.value
+            ) continue;
+
             try {
                 document.body.style.setProperty(`--${settings_base[setting].css}`, settings[setting]);
             } catch(e) {}
@@ -4633,8 +4728,19 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             } catch(e) {}
 
             // save setting into body
-            document.body.style.setProperty(`--${item}`,value);
+            document.body.style.setProperty(`--${settings_base[item].css}`, value);
             document.documentElement.setAttribute(`data-bleh--${item}`, `${value}`);
+
+            if (
+                (item == 'hue' || item == 'sat' || item == 'lit') &&
+                settings.hue == settings_base.hue.value &&
+                settings.sat == settings_base.sat.value &&
+                settings.lit == settings_base.lit.value
+            ) {
+                document.body.style.removeProperty(`--${settings_base.hue.css}`);
+                document.body.style.removeProperty(`--${settings_base.sat.css}`);
+                document.body.style.removeProperty(`--${settings_base.lit.css}`);
+            }
         } else if (settings_base[item].type == 'toggle') {
             if (settings[item] == settings_base[item].values[0] && modify) {
                 settings[item] = settings_base[item].values[1];

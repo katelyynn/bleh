@@ -15,10 +15,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu+Sans:ital,wght@0,100..800;1,100..800&display=swap');
 
 body {
-    --hue: var(--hue-album, var(--hue-preference, 255));
-    --sat: 1;
-    --lit: 1;
-    --ovr: var(--b7);
+    --hue: var(--hue-album,
+            var(--hue-user,
+            var(--hue-seasonal,
+            255)));
+    --sat: var(--sat-user,
+            var(--sat-seasonal,
+            1));
+    --lit: var(--lit-user,
+            var(--lit-seasonal,
+            1));
 
     --brand: 'bleh';
 
@@ -7173,19 +7179,16 @@ body:is(.namespace--user_library_music_artist_overview, .namespace--user_library
     --hue: var(--hue-pos);
     --sat: 1;
     --lit: 1;
-    --ovr: var(--b7);
 }
 .gallery-image-vote-down-on/*, .gallery-image-vote-down-off*/ {
     --hue: var(--hue-neg);
     --sat: 1;
     --lit: 1;
-    --ovr: var(--b7);
 }
 .gallery-image-preferred-on/*, .gallery-image-preferred-off*/ {
     --hue: var(--hue-fav);
     --sat: 1;
     --lit: 1;
-    --ovr: var(--b7);
 }
 
 .gallery-image-vote-buttons {
@@ -7283,7 +7286,6 @@ body:is(.namespace--user_library_music_artist_overview, .namespace--user_library
     --hue: var(--hue-fav);
     --sat: 1;
     --lit: 1;
-    --ovr: var(--b7);
 }
 .gallery-image-preferred-on .gallery-image-preferred-states::before {
     background-image: unset !important;
@@ -7758,7 +7760,6 @@ form[action="/inbox/notifications"] {
     --hue: var(--hue-neg);
     --sat: 1;
     --lit: 1;
-    --ovr: var(--b7);
     --col: hsl(var(--l3-c));
 }
 .gallery-image-report {
@@ -9469,7 +9470,6 @@ table.table tr:nth-child(2n) td {
         --hue: var(--hue-pro);
         --sat: 1;
         --lit: 1;
-        --ovr: var(--b7);
         background-color: hsla(var(--h4), 20%);
         border-left: 2px solid hsl(var(--l3-c));
         color: hsl(var(--l3-c));
@@ -12820,7 +12820,6 @@ input[type="range"]::-moz-range-progress {
         --bg: hsl(var(--h3)) !important;
         --bg-hov: hsla(var(--h3), 80%) !important;
         --bg-atv: hsla(var(--h3), 60%) !important;
-        --col: hsl(var(--ovr, var(--b7))) !important;
         --shadow: var(--interactable-outer);
         --shadow-hov: var(--interactable-outer), var(--interactable-active-outer);
 
