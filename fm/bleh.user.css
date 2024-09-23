@@ -5845,7 +5845,7 @@ button,
         }
 
         [data-bleh--season="halloween"] & {
-            --hue-seasonal: 255;
+            --hue-seasonal: 70;
         }
     }
 
@@ -12870,7 +12870,7 @@ input[type="range"]::-moz-range-progress {
         }
 
         [data-bleh--season="halloween"] & {
-            --hue-seasonal: 255;
+            --hue-seasonal: 70;
         }
     }
 }
