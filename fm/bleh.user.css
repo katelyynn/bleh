@@ -27,7 +27,7 @@ body {
             1));
 
     [data-bleh--season="halloween"] & {
-        --hue-seasonal: 5;
+        --hue-seasonal: 8;
         --sat-seasonal: 1.1;
     }
     [data-bleh--season="fall"] & {
@@ -202,6 +202,17 @@ a,
 input[type="range"],
 .form-row-help-text
 {
+    --hue:  var(--hue-album,
+            var(--hue-user,
+            var(--hue-seasonal,
+            255)));
+    --sat:  var(--sat-user,
+            var(--sat-seasonal,
+            1));
+    --lit:  var(--lit-user,
+            var(--lit-seasonal,
+            1));
+
     --c1: var(--hue), calc(var(--sat) * 40%), 100%;
     --c2: var(--hue), calc(var(--sat) * 60%), 90%;
     --c3: var(--hue), calc(var(--sat) * 10%), 60%;
@@ -5831,6 +5842,10 @@ button,
 
         [data-bleh--invert_interactable_colour="true"] & {
             --col: hsl(var(--ov-c1)) !important;
+        }
+
+        [data-bleh--season="halloween"] & {
+            --hue-seasonal: 255;
         }
     }
 
@@ -12852,6 +12867,10 @@ input[type="range"]::-moz-range-progress {
 
         .dot {
             left: calc(56px - 7px - 12px);
+        }
+
+        [data-bleh--season="halloween"] & {
+            --hue-seasonal: 255;
         }
     }
 }

@@ -4807,7 +4807,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 (item == 'hue' || item == 'sat' || item == 'lit') &&
                 settings.hue == settings_base.hue.value &&
                 settings.sat == settings_base.sat.value &&
-                settings.lit == settings_base.lit.value
+                settings.lit == settings_base.lit.value &&
+                settings.seasonal && stored_season.id != 'none'
             ) {
                 document.body.style.removeProperty(`--${settings_base.hue.css}`);
                 document.body.style.removeProperty(`--${settings_base.sat.css}`);
