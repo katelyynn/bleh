@@ -3223,9 +3223,9 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 let parsed_scrobble_as_rank = parse_scrobbles_as_rank(scrobbles);
 
                 personal_statistic.setAttribute('data-bleh--scrobble-milestone',parsed_scrobble_as_rank.milestone);
-                personal_statistic.style.setProperty('--hue',parsed_scrobble_as_rank.hue);
-                personal_statistic.style.setProperty('--sat',parsed_scrobble_as_rank.sat);
-                personal_statistic.style.setProperty('--lit',parsed_scrobble_as_rank.lit);
+                personal_statistic.style.setProperty('--hue-user',parsed_scrobble_as_rank.hue);
+                personal_statistic.style.setProperty('--sat-user',parsed_scrobble_as_rank.sat);
+                personal_statistic.style.setProperty('--lit-user',parsed_scrobble_as_rank.lit);
             }
         }
     }
