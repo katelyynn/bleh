@@ -15,16 +15,36 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu+Sans:ital,wght@0,100..800;1,100..800&display=swap');
 
 body {
-    --hue: var(--hue-album,
+    --hue:  var(--hue-album,
             var(--hue-user,
             var(--hue-seasonal,
             255)));
-    --sat: var(--sat-user,
+    --sat:  var(--sat-user,
             var(--sat-seasonal,
             1));
-    --lit: var(--lit-user,
+    --lit:  var(--lit-user,
             var(--lit-seasonal,
             1));
+
+    [data-bleh--season="halloween"] & {
+        --hue-seasonal: 5;
+        --sat-seasonal: 1.1;
+    }
+    [data-bleh--season="fall"] & {
+        --hue-seasonal: 228;
+        --sat-seasonal: 0.85;
+        --lit-seasonal: 1.1;
+    }
+    [data-bleh--season="christmas"] & {
+        --hue-seasonal: 204;
+        --sat-seasonal: 0.85;
+        --lit-seasonal: 1.2;
+    }
+    [data-bleh--season="new_years"] & {
+        --hue-seasonal: 233;
+        --sat-seasonal: 0.925;
+        --lit-seasonal: 1.1;
+    }
 
     --brand: 'bleh';
 
@@ -537,6 +557,8 @@ body {
     --icon-16-dev: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtY29kZSI+PHBvbHlsaW5lIHBvaW50cz0iMTYgMTggMjIgMTIgMTYgNiIvPjxwb2x5bGluZSBwb2ludHM9IjggNiAyIDEyIDggMTgiLz48L3N2Zz4=');
     --icon-16-accessibility: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtcGVyc29uLXN0YW5kaW5nIj48Y2lyY2xlIGN4PSIxMiIgY3k9IjUiIHI9IjEiLz48cGF0aCBkPSJtOSAyMCAzLTYgMyA2Ii8+PHBhdGggZD0ibTYgOCA2IDIgNi0yIi8+PHBhdGggZD0iTTEyIDEwdjQiLz48L3N2Zz4=');
     --icon-16-bwaa: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtaGlzdG9yeSI+PHBhdGggZD0iTTMgMTJhOSA5IDAgMSAwIDktOSA5Ljc1IDkuNzUgMCAwIDAtNi43NCAyLjc0TDMgOCIvPjxwYXRoIGQ9Ik0zIDN2NWg1Ii8+PHBhdGggZD0iTTEyIDd2NWw0IDIiLz48L3N2Zz4=');
+    --icon-16-fall: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtbGVhZiI+PHBhdGggZD0iTTExIDIwQTcgNyAwIDAgMSA5LjggNi4xQzE1LjUgNSAxNyA0LjQ4IDE5IDJjMSAyIDIgNC4xOCAyIDggMCA1LjUtNC43OCAxMC0xMCAxMFoiLz48cGF0aCBkPSJNMiAyMWMwLTMgMS44NS01LjM2IDUuMDgtNkM5LjUgMTQuNTIgMTIgMTMgMTMgMTIiLz48L3N2Zz4=');
+    --icon-16-snow: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtc25vd2ZsYWtlIj48bGluZSB4MT0iMiIgeDI9IjIyIiB5MT0iMTIiIHkyPSIxMiIvPjxsaW5lIHgxPSIxMiIgeDI9IjEyIiB5MT0iMiIgeTI9IjIyIi8+PHBhdGggZD0ibTIwIDE2LTQtNCA0LTQiLz48cGF0aCBkPSJtNCA4IDQgNC00IDQiLz48cGF0aCBkPSJtMTYgNC00IDQtNC00Ii8+PHBhdGggZD0ibTggMjAgNC00IDQgNCIvPjwvc3ZnPg==');
 
     --icon-20-check: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImhzbCgyNTUsMjAlLDkwJSkiIHN0cm9rZS13aWR0aD0iMi4yNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1jaGVjayI+PHBhdGggZD0iTTIwIDYgOSAxN2wtNS01Ii8+PC9zdmc+');
     --icon-20-plus: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImhzbCgyNTUsMjAlLDkwJSkiIHN0cm9rZS13aWR0aD0iMi4yNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1wbHVzIj48cGF0aCBkPSJNNSAxMmgxNCIvPjxwYXRoIGQ9Ik0xMiA1djE0Ii8+PC9zdmc+');
@@ -6009,6 +6031,7 @@ button,
 .nag-bar-message:before,
 .source-album:before,
 /*     BLEH     */
+.current-season:before,
 .arrow-divider:before,
 .list-view-item:before,
 .loading-data-text:before,
@@ -12033,7 +12056,10 @@ code, kbd, samp {
         margin-top: var(--card-gap);
     }
 
-    pointer-events: none;
+    &:not(.click-thru) {
+        pointer-events: none;
+    }
+
     user-select: none;
 
     /* instant colour change */
@@ -12820,6 +12846,7 @@ input[type="range"]::-moz-range-progress {
         --bg: hsl(var(--h3)) !important;
         --bg-hov: hsla(var(--h3), 80%) !important;
         --bg-atv: hsla(var(--h3), 60%) !important;
+        --col: hsl(var(--b7)) !important;
         --shadow: var(--interactable-outer);
         --shadow-hov: var(--interactable-outer), var(--interactable-active-outer);
 
@@ -14390,6 +14417,60 @@ button.bleh--gallery-bookmark-image-btn {
 
     .sep {
         margin: var(--card-gap) 0;
+    }
+}
+
+
+
+
+.hide-if-seasonal-disabled {
+    [data-bleh--seasonal="false"] & {
+        pointer-events: none !important;
+        opacity: 0.4 !important;
+    }
+}
+
+.current-season {
+    font-weight: var(--font-weight-bold);
+    position: relative;
+    padding-left: calc(16px + 6px);
+
+    --left: 0;
+
+    &:not([data-season="none"]) {
+        color: hsl(var(--l3-c));
+        text-shadow: 0 0 20px hsl(var(--h4));
+    }
+
+    &[data-season="halloween"] {
+        --mask: var(--icon-16-moon-fill);
+    }
+    &[data-season="fall"] {
+        --mask: var(--icon-16-fall);
+    }
+    &[data-season="christmas"] {
+        --mask: var(--icon-16-snow);
+    }
+}
+
+.seasonal-hsl-alert {
+    margin: 0 0 12px 0;
+    transition-property: margin, opacity;
+    transition-duration: calc(var(--trans) * 1.7);
+    transition-timing-function: var(--trans-function);
+
+    [data-bleh--hsl-override="false"] & {
+        margin: 0 0 -36px 0;
+        opacity: 0;
+    }
+}
+.dim-during-seasonal {
+    transition-property: opacity;
+    transition-duration: calc(var(--trans) * 1.7);
+    transition-timing-function: var(--trans-function);
+
+    [data-bleh--hsl-override="true"] & {
+        opacity: 0.5;
     }
 }
 }

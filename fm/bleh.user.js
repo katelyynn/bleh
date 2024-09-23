@@ -13,6 +13,7 @@
 // @require      https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js
 // @require      https://unpkg.com/@popperjs/core@2
 // @require      https://unpkg.com/tippy.js@6
+// @require      https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js
 // ==/UserScript==
 
 let version = {
@@ -148,8 +149,28 @@ const trans = {
                             preface: 'Colours are controlled by three values: hue, saturation, and lightness. Try out the sliders to get a feel.',
                             hue: 'Accent colour',
                             sat: 'Saturation',
-                            lit: 'Lightness'
+                            lit: 'Lightness',
+                            seasonal_alert: 'The current season is overriding your accent colour, adjust sliders to disable.'
                         }
+                    }
+                },
+                seasonal: {
+                    name: 'Seasonal',
+                    bio: 'During seasonal events, bleh can automatically change the default accent colour, add particles, and add overlays to various interface elements.',
+                    option: 'Enable seasonal events',
+                    marker: {
+                        current: 'The current season is {season} for {time}.',
+                        none: 'There is no active season currently.',
+                        disabled: 'You have seasons disabled, enable to view current event.'
+                    },
+                    particles: {
+                        name: 'Display particles during select seasons'
+                    },
+                    show_less_particles: {
+                        name: 'Display a reduced number of particles'
+                    },
+                    overlays: {
+                        name: 'Display user interface overlays'
                     }
                 },
                 artwork: {
@@ -856,7 +877,9 @@ function lookup_lang() {
 }
 
 // seasonal
-let stored_season;
+let stored_season = {
+    id: 'none'
+};
 let seasonal_events = [
     {
         id: 'halloween',
@@ -1321,7 +1344,8 @@ let settings_template = {
     bio_markdown: true,
     pretty_obsessions: true,
     hue_from_album: true,
-    seasonal: true
+    seasonal: true,
+    seasonal_particles: true
 };
 let settings_base = {
     hue: {
@@ -1481,6 +1505,13 @@ let settings_base = {
     },
     seasonal: {
         css: 'seasonal',
+        unit: '',
+        value: true,
+        values: [true, false],
+        type: 'toggle'
+    },
+    seasonal_particles: {
+        css: 'seasonal_particles',
         unit: '',
         value: true,
         values: [true, false],
@@ -4036,6 +4067,40 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     </div>
                 </div>
                 <div class="bleh--panel">
+                    <h3>${trans[lang].settings.customise.seasonal.name}</h3>
+                    <p>${trans[lang].settings.customise.seasonal.bio}</p>
+                    <div class="inner-preview pad click-thru">
+                        <div class="current-season" data-season="${stored_season.id}" id="current_season">
+                            ${(stored_season.id != 'none')
+                            ? trans[lang].settings.customise.seasonal.marker.current.replace('{season}', stored_season.name).replace('{time}', moment(stored_season.end.replace('y0', new Date().getFullYear())).toNow(true))
+                            : (settings.seasonal) ? trans[lang].settings.customise.seasonal.marker.none : trans[lang].settings.customise.seasonal.marker.disabled}
+                        </div>
+                    </div>
+                    <div class="toggle-container" id="container-seasonal">
+                        <button class="btn reset" onclick="_reset_item('seasonal')">${trans[lang].settings.reset}</button>
+                        <div class="heading">
+                            <h5>${trans[lang].settings.customise.seasonal.option}</h5>
+                        </div>
+                        <div class="toggle-wrap">
+                            <button class="toggle" id="toggle-seasonal" onclick="_update_item('seasonal')" aria-checked="true">
+                                <div class="dot"></div>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="sep"></div>
+                    <div class="toggle-container hide-if-seasonal-disabled" id="container-seasonal_particles">
+                        <button class="btn reset" onclick="_reset_item('seasonal_particles')">${trans[lang].settings.reset}</button>
+                        <div class="heading">
+                            <h5>${trans[lang].settings.customise.seasonal.particles.name}</h5>
+                        </div>
+                        <div class="toggle-wrap">
+                            <button class="toggle" id="toggle-seasonal_particles" onclick="_update_item('seasonal_particles')" aria-checked="true">
+                                <div class="dot"></div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="bleh--panel">
                     <h3>${trans[lang].settings.customise.artwork.name}</h3>
                     <div class="inner-preview pad">
                         <div class="palette albums" style="height: fit-content">
@@ -4473,6 +4538,11 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
         if (page == 'corrections')
             prepare_corrections_page();
+
+        if (page == 'customise' && settings.seasonal && stored_season.id != 'none')
+            tippy(document.getElementById('current_season'), {
+                content: new Date(stored_season.end.replace('y0', new Date().getFullYear()))
+            });
     }
 
     function show_theme_change_in_settings(theme = '') {
@@ -4731,6 +4801,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             document.body.style.setProperty(`--${settings_base[item].css}`, value);
             document.documentElement.setAttribute(`data-bleh--${item}`, `${value}`);
 
+            document.documentElement.setAttribute('data-bleh--hsl-override', 'false');
+
             if (
                 (item == 'hue' || item == 'sat' || item == 'lit') &&
                 settings.hue == settings_base.hue.value &&
@@ -4740,6 +4812,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 document.body.style.removeProperty(`--${settings_base.hue.css}`);
                 document.body.style.removeProperty(`--${settings_base.sat.css}`);
                 document.body.style.removeProperty(`--${settings_base.lit.css}`);
+                document.documentElement.setAttribute('data-bleh--hsl-override', 'true');
             }
         } else if (settings_base[item].type == 'toggle') {
             if (settings[item] == settings_base[item].values[0] && modify) {
@@ -4826,6 +4899,11 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         // save to settings
         localStorage.setItem('bleh', JSON.stringify(settings));
         } catch(e) {}
+
+        /*if (item.startsWith('seasonal') && modify) {
+            document.getElementById('bleh--panel-main').innerHTML = render_setting_page('customise');
+            refresh_all();
+        }*/
     }
 
 
@@ -4942,7 +5020,10 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             </div>
         </div>
         <br>
-        <div class="slider-container dim-using-hue-gradient" id="container-hue">
+        <div class="alert alert-info seasonal-hsl-alert">
+            ${trans[lang].settings.customise.colours.modals.custom_colour.seasonal_alert}
+        </div>
+        <div class="slider-container dim-using-hue-gradient dim-during-seasonal" id="container-hue">
             <button class="btn reset" onclick="_reset_item('hue')">${trans[lang].settings.reset}</button>
             <div class="heading">
                 <h5>${trans[lang].settings.customise.colours.modals.custom_colour.hue}</h5>
@@ -4957,7 +5038,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 <p style="left: 100%">360</p>
             </div>
         </div>
-        <div class="slider-container dim-using-hue-gradient" id="container-sat">
+        <div class="slider-container dim-using-hue-gradient dim-during-seasonal" id="container-sat">
             <button class="btn reset" onclick="_reset_item('sat')">${trans[lang].settings.reset}</button>
             <div class="heading">
                 <h5>${trans[lang].settings.customise.colours.modals.custom_colour.sat}</h5>
@@ -4972,7 +5053,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 <p style="left: 100%">1.5</p>
             </div>
         </div>
-        <div class="slider-container dim-using-hue-gradient" id="container-lit">
+        <div class="slider-container dim-using-hue-gradient dim-during-seasonal" id="container-lit">
             <button class="btn reset" onclick="_reset_item('lit')">${trans[lang].settings.reset}</button>
             <div class="heading">
                 <h5>${trans[lang].settings.customise.colours.modals.custom_colour.lit}</h5>
