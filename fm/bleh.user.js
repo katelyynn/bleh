@@ -14,7 +14,7 @@
 // @require      https://unpkg.com/@popperjs/core@2
 // @require      https://unpkg.com/tippy.js@6
 // @require      https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js
-// @require      https://katelyynn.github.io/bleh/fm/js/snow.js
+// @require      https://katelyynn.github.io/bleh/fm/js/snow.js?a=b
 // ==/UserScript==
 
 let version = {
@@ -898,22 +898,23 @@ let seasonal_events = [
         icon: 'leaf',
         name: 'Pre-Fall',
         start: 'y0-11-05',
-        end: 'y0-11-10',
+        end: 'y0-11-12',
 
         snowflakes: {
-            state: false
+            state: true,
+            count: 2
         }
     },
     {
         id: 'fall',
         icon: 'leaf',
         name: 'Fall',
-        start: 'y0-11-11',
+        start: 'y0-11-13',
         end: 'y0-11-22',
 
         snowflakes: {
             state: true,
-            count: 20
+            count: 16
         }
     },
     {
@@ -946,7 +947,7 @@ function set_season() {
     if (!settings.seasonal)
         return;
 
-    let now = new Date('2024-11-15');
+    let now = new Date();
 
     let current_year = now.getFullYear();
 
@@ -961,15 +962,31 @@ function set_season() {
 
             document.documentElement.setAttribute('data-bleh--season', season.id);
 
-            console.info(season, season.snowflakes.state, snowStorm.autoStart);
-
             // snow
             if (season.snowflakes.state) {
+                prep_snow();
+
                 snowflakes_enabled = true;
                 snowflakes_count = season.snowflakes.count;
+                begin_snowflakes();
             }
         }
     });
+}
+
+function prep_snow() {
+    let prev_container = document.getElementById('snowflakes');
+    if (prev_container != null)
+        return;
+
+    let container = document.createElement('div');
+    container.classList.add('snow-container');
+    container.setAttribute('id', 'snowflakes');
+    container.innerHTML = (`
+        <span class="snow snowflake"></span>
+    `);
+
+    document.documentElement.appendChild(container);
 }
 
 tippy.setDefaultProps({
