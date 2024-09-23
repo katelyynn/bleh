@@ -14,6 +14,7 @@
 // @require      https://unpkg.com/@popperjs/core@2
 // @require      https://unpkg.com/tippy.js@6
 // @require      https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js
+// @require      https://katelyynn.github.io/bleh/fm/js/snowstorm/snowstorm-min.js
 // ==/UserScript==
 
 let version = {
@@ -913,7 +914,8 @@ let seasonal_events = [
 
         snowflakes: {
             state: true,
-            count: 2
+            count: 20,
+            interval: 120
         }
     },
     {
@@ -925,7 +927,8 @@ let seasonal_events = [
 
         snowflakes: {
             state: true,
-            count: 30
+            count: 80,
+            interval: 40
         }
     },
     {
@@ -937,16 +940,21 @@ let seasonal_events = [
 
         snowflakes: {
             state: true,
-            count: 18
+            count: 50,
+            interval: 40
         }
     }
 ];
 
 function set_season() {
+    snowStorm.freeze();
+    snowStorm.vMaxX = 1.2;
+    snowStorm.vMaxY = 0.4;
+
     if (!settings.seasonal)
         return;
 
-    let now = new Date('2024-11-05');
+    let now = new Date('2024-11-15');
 
     let current_year = now.getFullYear();
 
@@ -960,6 +968,17 @@ function set_season() {
             console.info('bleh - it is season', season.name, 'starting', season.start, 'ending', season.end, season);
 
             document.documentElement.setAttribute('data-bleh--season', season.id);
+
+            console.info(season, season.snowflakes.state, snowStorm.autoStart);
+
+            // snow
+            if (season.snowflakes.state) {
+                try {
+                    snowStorm.resume();
+                } catch(e) {}
+                snowStorm.flakesMaxActive = season.snowflakes.count;
+                snowStorm.animationInterval = season.snowflakes.interval;
+            }
         }
     });
 }
