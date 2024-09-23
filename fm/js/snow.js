@@ -19,15 +19,11 @@ var reset_position = false;
 
 // accessibility
 let animations = true;
-if (settings.reduced_motion)
-    animations = false;
 
 // the beginning
 function begin_snowflakes() {
-    if (animations) {
-        window.addEventListener("DOMContentLoaded", create_snowflakes, false);
-        window.addEventListener("resize", call_reset, false);
-    }
+    window.addEventListener("DOMContentLoaded", create_snowflakes, false);
+    window.addEventListener("resize", call_reset, false);
 }
 
 
