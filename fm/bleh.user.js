@@ -894,11 +894,22 @@ let seasonal_events = [
         }
     },
     {
+        id: 'pre_fall',
+        icon: 'leaf',
+        name: 'Pre-Fall',
+        start: 'y0-11-05',
+        end: 'y0-11-10',
+
+        snowflakes: {
+            state: false
+        }
+    },
+    {
         id: 'fall',
         icon: 'leaf',
         name: 'Fall',
-        start: 'y0-11-05',
-        end: 'y0-11-19',
+        start: 'y0-11-11',
+        end: 'y0-11-22',
 
         snowflakes: {
             state: true,
@@ -909,7 +920,7 @@ let seasonal_events = [
         id: 'christmas',
         icon: 'snowflake',
         name: 'Christmas',
-        start: 'y0-11-19',
+        start: 'y0-11-23',
         end: 'y0-12-31',
 
         snowflakes: {
@@ -935,7 +946,7 @@ function set_season() {
     if (!settings.seasonal)
         return;
 
-    let now = new Date();
+    let now = new Date('2024-11-05');
 
     let current_year = now.getFullYear();
 
@@ -945,6 +956,7 @@ function set_season() {
             now <= new Date(season.end.replace('y0', current_year))
         ) {
             stored_season = season;
+            stored_season.now = now;
             console.info('bleh - it is season', season.name, 'starting', season.start, 'ending', season.end, season);
 
             document.documentElement.setAttribute('data-bleh--season', season.id);
@@ -4072,7 +4084,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     <div class="inner-preview pad click-thru">
                         <div class="current-season" data-season="${stored_season.id}" id="current_season">
                             ${(stored_season.id != 'none')
-                            ? trans[lang].settings.customise.seasonal.marker.current.replace('{season}', stored_season.name).replace('{time}', moment(stored_season.end.replace('y0', new Date().getFullYear())).toNow(true))
+                            ? trans[lang].settings.customise.seasonal.marker.current.replace('{season}', stored_season.name).replace('{time}', moment(stored_season.end.replace('y0', new Date().getFullYear())).to(stored_season.now, true))
                             : (settings.seasonal) ? trans[lang].settings.customise.seasonal.marker.none : trans[lang].settings.customise.seasonal.marker.disabled}
                         </div>
                     </div>
