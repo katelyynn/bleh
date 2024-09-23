@@ -30,8 +30,9 @@ body {
             1)));
 
     [data-bleh--season="halloween"] & {
-        --hue-seasonal: 8;
-        --sat-seasonal: 1.1;
+        --hue-seasonal: 12;
+        --sat-seasonal: 2;
+        --lit: 1.1;
 
         --icon-16-home: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtY2FzdGxlIj48cGF0aCBkPSJNMjIgMjB2LTlIMnY5YTIgMiAwIDAgMCAyIDJoMTZhMiAyIDAgMCAwIDItMloiLz48cGF0aCBkPSJNMTggMTFWNEg2djciLz48cGF0aCBkPSJNMTUgMjJ2LTRhMyAzIDAgMCAwLTMtM2EzIDMgMCAwIDAtMyAzdjQiLz48cGF0aCBkPSJNMjIgMTFWOSIvPjxwYXRoIGQ9Ik0yIDExVjkiLz48cGF0aCBkPSJNNiA0VjIiLz48cGF0aCBkPSJNMTggNFYyIi8+PHBhdGggZD0iTTEwIDRWMiIvPjxwYXRoIGQ9Ik0xNCA0VjIiLz48L3N2Zz4=');
         /*--icon-16-artist: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtc2t1bGwiPjxwYXRoIGQ9Im0xMi41IDE3LS41LTEtLjUgMWgxeiIvPjxwYXRoIGQ9Ik0xNSAyMmExIDEgMCAwIDAgMS0xdi0xYTIgMiAwIDAgMCAxLjU2LTMuMjUgOCA4IDAgMSAwLTExLjEyIDBBMiAyIDAgMCAwIDggMjB2MWExIDEgMCAwIDAgMSAxeiIvPjxjaXJjbGUgY3g9IjE1IiBjeT0iMTIiIHI9IjEiLz48Y2lyY2xlIGN4PSI5IiBjeT0iMTIiIHI9IjEiLz48L3N2Zz4=');
@@ -40,6 +41,7 @@ body {
         */--icon-album: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWNhc3NldHRlLXRhcGUiPjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIxNiIgeD0iMiIgeT0iNCIgcng9IjIiLz48Y2lyY2xlIGN4PSI4IiBjeT0iMTAiIHI9IjIiLz48cGF0aCBkPSJNOCAxMmg4Ii8+PGNpcmNsZSBjeD0iMTYiIGN5PSIxMCIgcj0iMiIvPjxwYXRoIGQ9Im02IDIwIC43LTIuOUExLjQgMS40IDAgMCAxIDguMSAxNmg3LjhhMS40IDEuNCAwIDAgMSAxLjQgMWwuNyAzIi8+PC9zdmc+');
 
         --icon-16-heart: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtaGVhcnQtY3JhY2siPjxwYXRoIGQ9Ik0xOSAxNGMxLjQ5LTEuNDYgMy0zLjIxIDMtNS41QTUuNSA1LjUgMCAwIDAgMTYuNSAzYy0xLjc2IDAtMyAuNS00LjUgMi0xLjUtMS41LTIuNzQtMi00LjUtMkE1LjUgNS41IDAgMCAwIDIgOC41YzAgMi4zIDEuNSA0LjA1IDMgNS41bDcgN1oiLz48cGF0aCBkPSJtMTIgMTMtMS0xIDItMi0zLTMgMi0yIi8+PC9zdmc+');
+        --icon-16-mention: var(--icon-16-pumpkin);
     }
     [data-bleh--season="pre_fall"] & {
         --hue-seasonal: 244;
@@ -216,7 +218,8 @@ a,
 .primary-selection,
 .nag-bar--alert,
 input[type="range"],
-.form-row-help-text
+.form-row-help-text,
+.chartlist-loved
 {
     --hue:  var(--hue-over,
             var(--hue-album,
@@ -589,6 +592,7 @@ body {
     --icon-16-bwaa: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtaGlzdG9yeSI+PHBhdGggZD0iTTMgMTJhOSA5IDAgMSAwIDktOSA5Ljc1IDkuNzUgMCAwIDAtNi43NCAyLjc0TDMgOCIvPjxwYXRoIGQ9Ik0zIDN2NWg1Ii8+PHBhdGggZD0iTTEyIDd2NWw0IDIiLz48L3N2Zz4=');
     --icon-16-fall: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtbGVhZiI+PHBhdGggZD0iTTExIDIwQTcgNyAwIDAgMSA5LjggNi4xQzE1LjUgNSAxNyA0LjQ4IDE5IDJjMSAyIDIgNC4xOCAyIDggMCA1LjUtNC43OCAxMC0xMCAxMFoiLz48cGF0aCBkPSJNMiAyMWMwLTMgMS44NS01LjM2IDUuMDgtNkM5LjUgMTQuNTIgMTIgMTMgMTMgMTIiLz48L3N2Zz4=');
     --icon-16-snow: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtc25vd2ZsYWtlIj48bGluZSB4MT0iMiIgeDI9IjIyIiB5MT0iMTIiIHkyPSIxMiIvPjxsaW5lIHgxPSIxMiIgeDI9IjEyIiB5MT0iMiIgeTI9IjIyIi8+PHBhdGggZD0ibTIwIDE2LTQtNCA0LTQiLz48cGF0aCBkPSJtNCA4IDQgNC00IDQiLz48cGF0aCBkPSJtMTYgNC00IDQtNC00Ii8+PHBhdGggZD0ibTggMjAgNC00IDQgNCIvPjwvc3ZnPg==');
+    --icon-16-pumpkin: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtcHVtcGtpbiI+PHBhdGggZD0iTTEzIDJjLTEgMS0xIDItMSAyIi8+PHBhdGggZD0iTTE3IDRjLS45IDAtMS44LjQtMi41IDEuMmEzLjMyIDMuMzIgMCAwIDAtNSAwQzguOCA0LjQgNy45IDQgNyA0Yy0yLjggMC01IDQtNSA5czIuMiA5IDUgOWMuOSAwIDEuOC0uNCAyLjUtMS4yYTMuMzIgMy4zMiAwIDAgMCA1IDBjLjcuOCAxLjYgMS4yIDIuNSAxLjIgMi44IDAgNS00IDUtOXMtMi4yLTktNS05Ii8+PHBhdGggZD0iTTEwIDExIDggOWwtMiAyIi8+PHBhdGggZD0ibTE4IDExLTItMi0yIDIiLz48cGF0aCBkPSJtNiAxNSAyIDIgMi0yIDIgMiAyLTIgMiAyIDItMiIvPjwvc3ZnPg==');
 
     --icon-20-check: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImhzbCgyNTUsMjAlLDkwJSkiIHN0cm9rZS13aWR0aD0iMi4yNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1jaGVjayI+PHBhdGggZD0iTTIwIDYgOSAxN2wtNS01Ii8+PC9zdmc+');
     --icon-20-plus: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImhzbCgyNTUsMjAlLDkwJSkiIHN0cm9rZS13aWR0aD0iMi4yNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1wbHVzIj48cGF0aCBkPSJNNSAxMmgxNCIvPjxwYXRoIGQ9Ik0xMiA1djE0Ii8+PC9zdmc+');
@@ -1502,6 +1506,11 @@ body[class*="namespace--user_library_"] .col-sidebar, .library-header,
     /*background-repeat: repeat-x;
     background-position: unset !important;*/
 
+    [data-bleh--hue="255"][data-bleh--sat="1"][data-bleh--lit="1"] & {
+        [data-bleh--season="halloween"] & {
+            background-image: linear-gradient(0deg, hsla(var(--h4), 0.02) 0%, rgba(0,0,0,0) 100%);
+        }
+    }
     [data-bleh--season="fall"] &,
     [data-bleh--season="christmas"] &,
     [data-bleh--season="new_years"] & {
@@ -2158,6 +2167,7 @@ li.header-metadata-item--event-attendance {
     padding: var(--card-padding) !important;
 
     [data-bleh--pretty_obsessions="true"] & {
+        background: var(--card-specific-background) !important;
         --card-specific-background:
         linear-gradient(hsl(var(--b5)), hsl(var(--g4))) padding-box,
         linear-gradient(0deg, hsla(var(--h3), 80%) 0%, hsl(var(--b5)) 100%) border-box;
@@ -4680,6 +4690,12 @@ better than the default selector '#app a' i suppose */
     margin: unset !important;
     display: flex !important;
     align-items: center;
+
+    [data-bleh--season="halloween"] & {
+        --hue-seasonal: 70;
+        --sat-seasonal: 1;
+        --lit-seasonal: 1;
+    }
 }
 .chartlist-loved:before {
     content: '';
@@ -5036,6 +5052,11 @@ a.chartlist-love-button:after {
 
     [data-bleh--theme="light"] & {
         background: hsl(var(--b4));
+    }
+    [data-bleh--season="halloween"] & {
+        --hue-seasonal: 70;
+        --sat-seasonal: 1;
+        --lit-seasonal: 1;
     }
 }
 .chartlist-count-bar-link {
@@ -5858,6 +5879,8 @@ button,
 
         [data-bleh--season="halloween"] & {
             --hue-seasonal: 255;
+            --sat-seasonal: 1;
+            --lit-seasonal: 1;
         }
     }
 
@@ -14474,7 +14497,7 @@ button.bleh--gallery-bookmark-image-btn {
     }
 
     &[data-season="halloween"] {
-        --mask: var(--icon-16-moon-fill);
+        --mask: var(--icon-16-pumpkin);
     }
     &[data-season="pre_fall"] {
         --mask: var(--icon-16-fall);
