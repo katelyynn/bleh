@@ -14,7 +14,7 @@
 // @require      https://unpkg.com/@popperjs/core@2
 // @require      https://unpkg.com/tippy.js@6
 // @require      https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js
-// @require      https://katelyynn.github.io/bleh/fm/js/snowstorm/snowstorm-min.js
+// @require      https://katelyynn.github.io/bleh/fm/js/snow.js
 // ==/UserScript==
 
 let version = {
@@ -890,8 +890,7 @@ let seasonal_events = [
         end: 'y0-11-02',
 
         snowflakes: {
-            state: false,
-            count: 0
+            state: false
         }
     },
     {
@@ -914,8 +913,7 @@ let seasonal_events = [
 
         snowflakes: {
             state: true,
-            count: 20,
-            interval: 120
+            count: 20
         }
     },
     {
@@ -927,8 +925,7 @@ let seasonal_events = [
 
         snowflakes: {
             state: true,
-            count: 80,
-            interval: 40
+            count: 80
         }
     },
     {
@@ -940,17 +937,12 @@ let seasonal_events = [
 
         snowflakes: {
             state: true,
-            count: 50,
-            interval: 40
+            count: 50
         }
     }
 ];
 
 function set_season() {
-    snowStorm.freeze();
-    snowStorm.vMaxX = 1.2;
-    snowStorm.vMaxY = 0.4;
-
     if (!settings.seasonal)
         return;
 
@@ -973,11 +965,8 @@ function set_season() {
 
             // snow
             if (season.snowflakes.state) {
-                try {
-                    snowStorm.resume();
-                } catch(e) {}
-                snowStorm.flakesMaxActive = season.snowflakes.count;
-                snowStorm.animationInterval = season.snowflakes.interval;
+                snowflakes_enabled = true;
+                snowflakes_count = season.snowflakes.count;
             }
         }
     });
