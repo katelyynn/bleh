@@ -161,6 +161,7 @@ const trans = {
                     option: 'Enable seasonal events',
                     marker: {
                         current: 'The current season is {season} for {time}.',
+                        started: 'started {time}',
                         none: 'There is no active season currently.',
                         disabled: 'You have seasons disabled, enable to view current event.'
                     },
@@ -171,7 +172,7 @@ const trans = {
                         name: 'Display a reduced number of particles'
                     },
                     overlays: {
-                        name: 'Display user interface overlays'
+                        name: 'Display card overlays'
                     }
                 },
                 artwork: {
@@ -887,7 +888,7 @@ let seasonal_events = [
         icon: 'moon',
         name: 'Halloween',
         start: 'y0-09-22',
-        end: 'y0-11-02',
+        end: 'y0-11-02T23:59:59',
 
         snowflakes: {
             state: false
@@ -898,7 +899,7 @@ let seasonal_events = [
         icon: 'leaf',
         name: 'Pre-Fall',
         start: 'y0-11-05',
-        end: 'y0-11-12',
+        end: 'y0-11-12T23:59:59',
 
         snowflakes: {
             state: true,
@@ -910,7 +911,7 @@ let seasonal_events = [
         icon: 'leaf',
         name: 'Fall',
         start: 'y0-11-13',
-        end: 'y0-11-22',
+        end: 'y0-11-22T23:59:59',
 
         snowflakes: {
             state: true,
@@ -922,7 +923,7 @@ let seasonal_events = [
         icon: 'snowflake',
         name: 'Christmas',
         start: 'y0-11-23',
-        end: 'y0-12-31',
+        end: 'y0-12-31T23:59:59',
 
         snowflakes: {
             state: true,
@@ -934,7 +935,7 @@ let seasonal_events = [
         icon: 'party-popper',
         name: 'New Years',
         start: 'y0-01-01',
-        end: 'y0-01-10',
+        end: 'y0-01-10T23:59:59',
 
         snowflakes: {
             state: true,
@@ -958,12 +959,13 @@ function set_season() {
         ) {
             stored_season = season;
             stored_season.now = now;
+            stored_season.year = current_year;
             console.info('bleh - it is season', season.name, 'starting', season.start, 'ending', season.end, season);
 
             document.documentElement.setAttribute('data-bleh--season', season.id);
 
             // snow
-            if (season.snowflakes.state) {
+            if (season.snowflakes.state && settings.seasonal_particles) {
                 prep_snow();
 
                 snowflakes_enabled = true;
@@ -1382,7 +1384,8 @@ let settings_template = {
     pretty_obsessions: true,
     hue_from_album: true,
     seasonal: true,
-    seasonal_particles: true
+    seasonal_particles: true,
+    seasonal_overlays: true
 };
 let settings_base = {
     hue: {
@@ -1549,6 +1552,13 @@ let settings_base = {
     },
     seasonal_particles: {
         css: 'seasonal_particles',
+        unit: '',
+        value: true,
+        values: [true, false],
+        type: 'toggle'
+    },
+    seasonal_overlays: {
+        css: 'seasonal_overlays',
         unit: '',
         value: true,
         values: [true, false],
@@ -4107,10 +4117,17 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     <h3>${trans[lang].settings.customise.seasonal.name}</h3>
                     <p>${trans[lang].settings.customise.seasonal.bio}</p>
                     <div class="inner-preview pad click-thru">
-                        <div class="current-season" data-season="${stored_season.id}" id="current_season">
-                            ${(stored_season.id != 'none')
-                            ? trans[lang].settings.customise.seasonal.marker.current.replace('{season}', stored_season.name).replace('{time}', moment(stored_season.end.replace('y0', new Date().getFullYear())).to(stored_season.now, true))
-                            : (settings.seasonal) ? trans[lang].settings.customise.seasonal.marker.none : trans[lang].settings.customise.seasonal.marker.disabled}
+                        <div class="current-season-container">
+                            <div class="current-season" data-season="${stored_season.id}" id="current_season">
+                                ${(stored_season.id != 'none')
+                                ? trans[lang].settings.customise.seasonal.marker.current.replace('{season}', stored_season.name).replace('{time}', moment(stored_season.end.replace('y0', stored_season.year)).to(stored_season.now, true))
+                                : (settings.seasonal) ? trans[lang].settings.customise.seasonal.marker.none : trans[lang].settings.customise.seasonal.marker.disabled}
+                            </div>
+                            <div class="current-season-started" id="current_season_start">
+                                ${(stored_season.id != 'none')
+                                ? trans[lang].settings.customise.seasonal.marker.started.replace('{time}', moment(stored_season.start.replace('y0', stored_season.year)).from(stored_season.now))
+                                : ''}
+                            </div>
                         </div>
                     </div>
                     <div class="toggle-container" id="container-seasonal">
@@ -4132,6 +4149,17 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                         </div>
                         <div class="toggle-wrap">
                             <button class="toggle" id="toggle-seasonal_particles" onclick="_update_item('seasonal_particles')" aria-checked="true">
+                                <div class="dot"></div>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="toggle-container hide-if-seasonal-disabled" id="container-seasonal_overlays">
+                        <button class="btn reset" onclick="_reset_item('seasonal_overlays')">${trans[lang].settings.reset}</button>
+                        <div class="heading">
+                            <h5>${trans[lang].settings.customise.seasonal.overlays.name}</h5>
+                        </div>
+                        <div class="toggle-wrap">
+                            <button class="toggle" id="toggle-seasonal_overlays" onclick="_update_item('seasonal_overlays')" aria-checked="true">
                                 <div class="dot"></div>
                             </button>
                         </div>
@@ -4576,10 +4604,14 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         if (page == 'corrections')
             prepare_corrections_page();
 
-        if (page == 'customise' && settings.seasonal && stored_season.id != 'none')
+        if (page == 'customise' && settings.seasonal && stored_season.id != 'none') {
             tippy(document.getElementById('current_season'), {
-                content: new Date(stored_season.end.replace('y0', new Date().getFullYear()))
+                content: new Date(stored_season.end.replace('y0', stored_season.year))
             });
+            tippy(document.getElementById('current_season_start'), {
+                content: new Date(stored_season.start.replace('y0', stored_season.year))
+            });
+        }
     }
 
     function show_theme_change_in_settings(theme = '') {
