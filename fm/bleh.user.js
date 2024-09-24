@@ -3912,7 +3912,15 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 <div class="bleh--panel">
                     <h3>${trans[lang].settings.customise.colours.name}</h3>
                     <h5>${trans[lang].settings.customise.colours.presets}</h5>
-                    <div class="palette options">
+                    <div class="palette options colours">
+                        <button class="btn default" style="
+                            --hue: var(--hue-seasonal, 255);
+                            --sat: var(--sat-seasonal, 1);
+                            --lit: var(--lit-seasonal, 1)" onclick="_update_params({
+                            hue: 255,
+                            sat: 1,
+                            lit: 1
+                        })"></button>
                         <button class="btn" style="
                             --hue: -2;
                             --sat: 1;
@@ -3980,10 +3988,10 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                         <button class="btn" style="
                             --hue: 255;
                             --sat: 1;
-                            --lit: 1" onclick="_update_params({
+                            --lit: 1.05" onclick="_update_params({
                             hue: 255,
                             sat: 1,
-                            lit: 1
+                            lit: 1.05
                         })"></button>
                         <button class="btn" style="
                             --hue: 333;
@@ -4982,6 +4990,28 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             document.getElementById('bleh--panel-main').innerHTML = render_setting_page('customise');
             refresh_all();
         }*/
+
+        if (item == 'hue' || item == 'sat' || item == 'lit') {
+            update_colour_swatches();
+        }
+    }
+
+    function update_colour_swatches() {
+        let swatches = document.body.querySelectorAll('.options.colours button');
+        swatches.forEach((swatch) => {
+            let h = swatch.style.getPropertyValue('--hue');
+            let s = swatch.style.getPropertyValue('--sat');
+            let l = swatch.style.getPropertyValue('--lit');
+
+            if (
+                (h == settings.hue && s == settings.sat && l == settings.lit) ||
+                (swatch.classList.contains('default') && settings.hue == 255 && settings.sat == 1 && settings.lit == 1) // default
+            ) {
+                swatch.classList.add('selected');
+            } else {
+                swatch.classList.remove('selected');
+            }
+        });
     }
 
 
