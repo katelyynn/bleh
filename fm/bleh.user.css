@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           bleh (dev)
 @namespace      github.com/katelyynn/bleh
-@version        2024.0916
+@version        2024.0924
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.css
@@ -15,10 +15,54 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu+Sans:ital,wght@0,100..800;1,100..800&display=swap');
 
 body {
-    --hue: var(--hue-album, var(--hue-preference, 255));
-    --sat: 1;
-    --lit: 1;
-    --ovr: var(--b7);
+    --hue:  var(--hue-over,
+            var(--hue-album,
+            var(--hue-user,
+            var(--hue-seasonal,
+            255))));
+    --sat:  var(--sat-over,
+            var(--sat-user,
+            var(--sat-seasonal,
+            1)));
+    --lit:  var(--lit-over,
+            var(--lit-user,
+            var(--lit-seasonal,
+            1)));
+
+    [data-bleh--season="halloween"] & {
+        --hue-seasonal: 12;
+        --sat-seasonal: 2;
+        --lit: 1.1;
+
+        --icon-16-home: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtY2FzdGxlIj48cGF0aCBkPSJNMjIgMjB2LTlIMnY5YTIgMiAwIDAgMCAyIDJoMTZhMiAyIDAgMCAwIDItMloiLz48cGF0aCBkPSJNMTggMTFWNEg2djciLz48cGF0aCBkPSJNMTUgMjJ2LTRhMyAzIDAgMCAwLTMtM2EzIDMgMCAwIDAtMyAzdjQiLz48cGF0aCBkPSJNMjIgMTFWOSIvPjxwYXRoIGQ9Ik0yIDExVjkiLz48cGF0aCBkPSJNNiA0VjIiLz48cGF0aCBkPSJNMTggNFYyIi8+PHBhdGggZD0iTTEwIDRWMiIvPjxwYXRoIGQ9Ik0xNCA0VjIiLz48L3N2Zz4=');
+        /*--icon-16-artist: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtc2t1bGwiPjxwYXRoIGQ9Im0xMi41IDE3LS41LTEtLjUgMWgxeiIvPjxwYXRoIGQ9Ik0xNSAyMmExIDEgMCAwIDAgMS0xdi0xYTIgMiAwIDAgMCAxLjU2LTMuMjUgOCA4IDAgMSAwLTExLjEyIDBBMiAyIDAgMCAwIDggMjB2MWExIDEgMCAwIDAgMSAxeiIvPjxjaXJjbGUgY3g9IjE1IiBjeT0iMTIiIHI9IjEiLz48Y2lyY2xlIGN4PSI5IiBjeT0iMTIiIHI9IjEiLz48L3N2Zz4=');
+        */--icon-16-album: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtY2Fzc2V0dGUtdGFwZSI+PHJlY3Qgd2lkdGg9IjIwIiBoZWlnaHQ9IjE2IiB4PSIyIiB5PSI0IiByeD0iMiIvPjxjaXJjbGUgY3g9IjgiIGN5PSIxMCIgcj0iMiIvPjxwYXRoIGQ9Ik04IDEyaDgiLz48Y2lyY2xlIGN4PSIxNiIgY3k9IjEwIiByPSIyIi8+PHBhdGggZD0ibTYgMjAgLjctMi45QTEuNCAxLjQgMCAwIDEgOC4xIDE2aDcuOGExLjQgMS40IDAgMCAxIDEuNCAxbC43IDMiLz48L3N2Zz4=');
+        /*--icon-artist: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLXNrdWxsIj48cGF0aCBkPSJtMTIuNSAxNy0uNS0xLS41IDFoMXoiLz48cGF0aCBkPSJNMTUgMjJhMSAxIDAgMCAwIDEtMXYtMWEyIDIgMCAwIDAgMS41Ni0zLjI1IDggOCAwIDEgMC0xMS4xMiAwQTIgMiAwIDAgMCA4IDIwdjFhMSAxIDAgMCAwIDEgMXoiLz48Y2lyY2xlIGN4PSIxNSIgY3k9IjEyIiByPSIxIi8+PGNpcmNsZSBjeD0iOSIgY3k9IjEyIiByPSIxIi8+PC9zdmc+');
+        */--icon-album: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWNhc3NldHRlLXRhcGUiPjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIxNiIgeD0iMiIgeT0iNCIgcng9IjIiLz48Y2lyY2xlIGN4PSI4IiBjeT0iMTAiIHI9IjIiLz48cGF0aCBkPSJNOCAxMmg4Ii8+PGNpcmNsZSBjeD0iMTYiIGN5PSIxMCIgcj0iMiIvPjxwYXRoIGQ9Im02IDIwIC43LTIuOUExLjQgMS40IDAgMCAxIDguMSAxNmg3LjhhMS40IDEuNCAwIDAgMSAxLjQgMWwuNyAzIi8+PC9zdmc+');
+
+        --icon-16-heart: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtaGVhcnQtY3JhY2siPjxwYXRoIGQ9Ik0xOSAxNGMxLjQ5LTEuNDYgMy0zLjIxIDMtNS41QTUuNSA1LjUgMCAwIDAgMTYuNSAzYy0xLjc2IDAtMyAuNS00LjUgMi0xLjUtMS41LTIuNzQtMi00LjUtMkE1LjUgNS41IDAgMCAwIDIgOC41YzAgMi4zIDEuNSA0LjA1IDMgNS41bDcgN1oiLz48cGF0aCBkPSJtMTIgMTMtMS0xIDItMi0zLTMgMi0yIi8+PC9zdmc+');
+        --icon-16-mention: var(--icon-16-pumpkin);
+    }
+    [data-bleh--season="pre_fall"] & {
+        --hue-seasonal: 244;
+        --sat-seasonal: 0.9;
+        --lit-seasonal: 1.1;
+    }
+    [data-bleh--season="fall"] & {
+        --hue-seasonal: 228;
+        --sat-seasonal: 0.85;
+        --lit-seasonal: 1.1;
+    }
+    [data-bleh--season="christmas"] & {
+        --hue-seasonal: 204;
+        --sat-seasonal: 0.85;
+        --lit-seasonal: 1.2;
+    }
+    [data-bleh--season="new_years"] & {
+        --hue-seasonal: 233;
+        --sat-seasonal: 0.925;
+        --lit-seasonal: 1.1;
+    }
 
     --brand: 'bleh';
 
@@ -174,8 +218,23 @@ a,
 .primary-selection,
 .nag-bar--alert,
 input[type="range"],
-.form-row-help-text
+.form-row-help-text,
+.chartlist-loved
 {
+    --hue:  var(--hue-over,
+            var(--hue-album,
+            var(--hue-user,
+            var(--hue-seasonal,
+            255))));
+    --sat:  var(--sat-over,
+            var(--sat-user,
+            var(--sat-seasonal,
+            1)));
+    --lit:  var(--lit-over,
+            var(--lit-user,
+            var(--lit-seasonal,
+            1)));
+
     --c1: var(--hue), calc(var(--sat) * 40%), 100%;
     --c2: var(--hue), calc(var(--sat) * 60%), 90%;
     --c3: var(--hue), calc(var(--sat) * 10%), 60%;
@@ -531,6 +590,10 @@ body {
     --icon-16-dev: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtY29kZSI+PHBvbHlsaW5lIHBvaW50cz0iMTYgMTggMjIgMTIgMTYgNiIvPjxwb2x5bGluZSBwb2ludHM9IjggNiAyIDEyIDggMTgiLz48L3N2Zz4=');
     --icon-16-accessibility: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtcGVyc29uLXN0YW5kaW5nIj48Y2lyY2xlIGN4PSIxMiIgY3k9IjUiIHI9IjEiLz48cGF0aCBkPSJtOSAyMCAzLTYgMyA2Ii8+PHBhdGggZD0ibTYgOCA2IDIgNi0yIi8+PHBhdGggZD0iTTEyIDEwdjQiLz48L3N2Zz4=');
     --icon-16-bwaa: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtaGlzdG9yeSI+PHBhdGggZD0iTTMgMTJhOSA5IDAgMSAwIDktOSA5Ljc1IDkuNzUgMCAwIDAtNi43NCAyLjc0TDMgOCIvPjxwYXRoIGQ9Ik0zIDN2NWg1Ii8+PHBhdGggZD0iTTEyIDd2NWw0IDIiLz48L3N2Zz4=');
+    --icon-16-fall: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtbGVhZiI+PHBhdGggZD0iTTExIDIwQTcgNyAwIDAgMSA5LjggNi4xQzE1LjUgNSAxNyA0LjQ4IDE5IDJjMSAyIDIgNC4xOCAyIDggMCA1LjUtNC43OCAxMC0xMCAxMFoiLz48cGF0aCBkPSJNMiAyMWMwLTMgMS44NS01LjM2IDUuMDgtNkM5LjUgMTQuNTIgMTIgMTMgMTMgMTIiLz48L3N2Zz4=');
+    --icon-16-snow: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtc25vd2ZsYWtlIj48bGluZSB4MT0iMiIgeDI9IjIyIiB5MT0iMTIiIHkyPSIxMiIvPjxsaW5lIHgxPSIxMiIgeDI9IjEyIiB5MT0iMiIgeTI9IjIyIi8+PHBhdGggZD0ibTIwIDE2LTQtNCA0LTQiLz48cGF0aCBkPSJtNCA4IDQgNC00IDQiLz48cGF0aCBkPSJtMTYgNC00IDQtNC00Ii8+PHBhdGggZD0ibTggMjAgNC00IDQgNCIvPjwvc3ZnPg==');
+    --icon-16-pumpkin: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtcHVtcGtpbiI+PHBhdGggZD0iTTEzIDJjLTEgMS0xIDItMSAyIi8+PHBhdGggZD0iTTE3IDRjLS45IDAtMS44LjQtMi41IDEuMmEzLjMyIDMuMzIgMCAwIDAtNSAwQzguOCA0LjQgNy45IDQgNyA0Yy0yLjggMC01IDQtNSA5czIuMiA5IDUgOWMuOSAwIDEuOC0uNCAyLjUtMS4yYTMuMzIgMy4zMiAwIDAgMCA1IDBjLjcuOCAxLjYgMS4yIDIuNSAxLjIgMi44IDAgNS00IDUtOXMtMi4yLTktNS05Ii8+PHBhdGggZD0iTTEwIDExIDggOWwtMiAyIi8+PHBhdGggZD0ibTE4IDExLTItMi0yIDIiLz48cGF0aCBkPSJtNiAxNSAyIDIgMi0yIDIgMiAyLTIgMiAyIDItMiIvPjwvc3ZnPg==');
+    --icon-16-new-years: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtcGFydHktcG9wcGVyIj48cGF0aCBkPSJNNS44IDExLjMgMiAyMmwxMC43LTMuNzkiLz48cGF0aCBkPSJNNCAzaC4wMSIvPjxwYXRoIGQ9Ik0yMiA4aC4wMSIvPjxwYXRoIGQ9Ik0xNSAyaC4wMSIvPjxwYXRoIGQ9Ik0yMiAyMGguMDEiLz48cGF0aCBkPSJtMjIgMi0yLjI0Ljc1YTIuOSAyLjkgMCAwIDAtMS45NiAzLjEyYy4xLjg2LS41NyAxLjYzLTEuNDUgMS42M2gtLjM4Yy0uODYgMC0xLjYuNi0xLjc2IDEuNDRMMTQgMTAiLz48cGF0aCBkPSJtMjIgMTMtLjgyLS4zM2MtLjg2LS4zNC0xLjgyLjItMS45OCAxLjExYy0uMTEuNy0uNzIgMS4yMi0xLjQzIDEuMjJIMTciLz48cGF0aCBkPSJtMTEgMiAuMzMuODJjLjM0Ljg2LS4yIDEuODItMS4xMSAxLjk4QzkuNTIgNC45IDkgNS41MiA5IDYuMjNWNyIvPjxwYXRoIGQ9Ik0xMSAxM2MxLjkzIDEuOTMgMi44MyA0LjE3IDIgNS0uODMuODMtMy4wNy0uMDctNS0yLTEuOTMtMS45My0yLjgzLTQuMTctMi01IC44My0uODMgMy4wNy4wNyA1IDJaIi8+PC9zdmc+');
 
     --icon-20-check: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImhzbCgyNTUsMjAlLDkwJSkiIHN0cm9rZS13aWR0aD0iMi4yNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1jaGVjayI+PHBhdGggZD0iTTIwIDYgOSAxN2wtNS01Ii8+PC9zdmc+');
     --icon-20-plus: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImhzbCgyNTUsMjAlLDkwJSkiIHN0cm9rZS13aWR0aD0iMi4yNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1wbHVzIj48cGF0aCBkPSJNNSAxMmgxNCIvPjxwYXRoIGQ9Ik0xMiA1djE0Ii8+PC9zdmc+');
@@ -905,22 +968,7 @@ last.fm changes as of 2024-05-20 */
         position: relative;
         font: 0/0 a;
 
-        /* this isnt using https://cesque.com/gaydient/ but shoutout,
-        based on https://codepen.io/charliewilco/pen/BzrJzE */
-        --g-red: hsl(8, 62%, 60%);
-        --g-orange: hsl(24, 86%, 60%);
-        --g-yellow: hsl(44, 100%, 60%);
-        --g-green: hsl(163, 100%, 60%);
-        --g-blue: hsl(199, 79%, 60%);
-        --g-indigo: hsl(254, 46%, 60%);
-        background-image: linear-gradient(90deg,
-        var(--g-red) 16.6666%,
-        var(--g-orange) 33.333%,
-        var(--g-yellow) 50%,
-        var(--g-green) 66.6666%,
-        var(--g-blue) 83.3333%,
-        var(--g-indigo) 100%
-        );
+        background-image: linear-gradient(90deg, hsl(var(--c1)) 0%, hsl(var(--l3-c)) 100%);
         background-clip: text;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
@@ -1458,6 +1506,19 @@ body[class*="namespace--user_library_"] .col-sidebar, .library-header,
     /*background-image: var(--overlay-ice)/*, linear-gradient(180deg, rgba(190,233,250,0.04) 0%, rgba(0,0,0,0) 100%);*/
     /*background-repeat: repeat-x;
     background-position: unset !important;*/
+
+    [data-bleh--seasonal_overlays="true"][data-bleh--hue="255"][data-bleh--sat="1"][data-bleh--lit="1"] & {
+        [data-bleh--season="halloween"] &:not(.header-featured-track) {
+            background-image: linear-gradient(0deg, hsla(var(--h4), 0.02) 0%, rgba(0,0,0,0) 100%) !important;
+        }
+    }
+    [data-bleh--seasonal_overlays="true"][data-bleh--season="fall"] &:not(.header-featured-track),
+    [data-bleh--seasonal_overlays="true"][data-bleh--season="christmas"] &:not(.header-featured-track),
+    [data-bleh--seasonal_overlays="true"][data-bleh--season="new_years"] &:not(.header-featured-track) {
+        background-image: var(--overlay-ice), linear-gradient(180deg, rgba(190,233,250,0.04) 0%, rgba(0,0,0,0) 100%) !important;
+        background-repeat: repeat-x;
+        background-position: unset !important;
+    }
 }
 .page-content:has(.no-events),
 :is(.namespace--user_library_overview, .namespace--user_library_artists, .namespace--user_library_albums, .namespace--user_library_tracks, .namespace--user_following, .namespace--user_followers, .namespace--user_loved, .namespace--user_neighbours, .namespace--user_tags_overview, .namespace--user_shoutbox_overview) .page-content {
@@ -1612,7 +1673,7 @@ body[class*="namespace--user_library_"] .col-sidebar, .library-header,
 /*     UNDO CARD STYLES     */
 .row.buffer-4 > .col-main:first-child > section /* for shoutbox in tabs */
 {
-    background-color: unset;
+    --override-background: unset !important;
     border: unset;
     border-radius: unset;
     box-shadow: unset;
@@ -2107,6 +2168,7 @@ li.header-metadata-item--event-attendance {
     padding: var(--card-padding) !important;
 
     [data-bleh--pretty_obsessions="true"] & {
+        background: var(--card-specific-background) !important;
         --card-specific-background:
         linear-gradient(hsl(var(--b5)), hsl(var(--g4))) padding-box,
         linear-gradient(0deg, hsla(var(--h3), 80%) 0%, hsl(var(--b5)) 100%) border-box;
@@ -4629,6 +4691,12 @@ better than the default selector '#app a' i suppose */
     margin: unset !important;
     display: flex !important;
     align-items: center;
+
+    [data-bleh--season="halloween"] & {
+        --hue-seasonal: 70;
+        --sat-seasonal: 1;
+        --lit-seasonal: 1;
+    }
 }
 .chartlist-loved:before {
     content: '';
@@ -4985,6 +5053,11 @@ a.chartlist-love-button:after {
 
     [data-bleh--theme="light"] & {
         background: hsl(var(--b4));
+    }
+    [data-bleh--season="halloween"] & {
+        --hue-seasonal: 70;
+        --sat-seasonal: 1;
+        --lit-seasonal: 1;
     }
 }
 .chartlist-count-bar-link {
@@ -5574,7 +5647,7 @@ span.shout-user-avatar:before,
     content: url() !important;
     font-size: 0;
     background-color: hsl(var(--c3));
-    --mask: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWRpc2MiPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEwIi8+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMiIvPjwvc3ZnPg==');
+    --mask: var(--icon-album);
     mask-image: var(--mask);
     -webkit-mask-image: var(--mask);
     mask-size: var(--mask-size, var(--cover-size-50));
@@ -5590,7 +5663,7 @@ span.shout-user-avatar:before,
     content: url() !important;
     font-size: 0;
     background-color: hsl(var(--c3));
-    --mask: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLXN0YXIiPjxwb2x5Z29uIHBvaW50cz0iMTIgMiAxNS4wOSA4LjI2IDIyIDkuMjcgMTcgMTQuMTQgMTguMTggMjEuMDIgMTIgMTcuNzcgNS44MiAyMS4wMiA3IDE0LjE0IDIgOS4yNyA4LjkxIDguMjYgMTIgMiIvPjwvc3ZnPg==');
+    --mask: var(--icon-artist);
     mask-image: var(--mask);
     -webkit-mask-image: var(--mask);
     mask-size: var(--mask-size, var(--cover-size-50));
@@ -5609,7 +5682,7 @@ span.shout-user-avatar:before,
     content: url() !important;
     font-size: 0;
     background-color: hsl(var(--c3));
-    --mask: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLW11c2ljLTMiPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTgiIHI9IjQiLz48cGF0aCBkPSJNMTYgMThWMiIvPjwvc3ZnPg==');
+    --mask: var(--icon-track);
     mask-image: var(--mask);
     -webkit-mask-image: var(--mask);
     mask-size: var(--mask-size, var(--cover-size-50));
@@ -5803,6 +5876,12 @@ button,
 
         [data-bleh--invert_interactable_colour="true"] & {
             --col: hsl(var(--ov-c1)) !important;
+        }
+
+        [data-bleh--season="halloween"] & {
+            --hue-seasonal: 255;
+            --sat-seasonal: 1;
+            --lit-seasonal: 1;
         }
     }
 
@@ -6003,6 +6082,7 @@ button,
 .nag-bar-message:before,
 .source-album:before,
 /*     BLEH     */
+.current-season:before,
 .arrow-divider:before,
 .list-view-item:before,
 .loading-data-text:before,
@@ -6922,10 +7002,27 @@ input:is([name="track_name"], [name="artist_name"], [name="album_name"], [name="
     border: var(--card-border) !important;
     border-radius: var(--card-radius) !important;
     box-shadow: var(--menu-shadow) !important;
-    animation: dropdown var(--trans-short) var(--trans-function);
+    animation: dropdown calc(var(--trans-short) + 0.02s) var(--trans-function);
     transform-origin: top;
     color: hsl(var(--c2));
 }
+
+.popup_background {
+    animation: fade_popup var(--trans) var(--trans-function);
+
+    &[style^="opacity: 0.8;"] {
+        opacity: 0.4 !important;
+    }
+}
+@keyframes fade_popup {
+    from {
+        transform: scaleY(0);
+    }
+    to {
+        transform: scaleY(1);
+    }
+}
+
 .modal-content {
     animation: dropdown calc(var(--trans-short) + 0.22s) var(--trans-function);
     transform-origin: top;
@@ -7170,22 +7267,19 @@ body:is(.namespace--user_library_music_artist_overview, .namespace--user_library
 
 /*     VOTING     */
 .gallery-image-vote-up-on/*, .gallery-image-vote-up-off*/, .vote-button--voted {
-    --hue: var(--hue-pos);
-    --sat: 1;
-    --lit: 1;
-    --ovr: var(--b7);
+    --hue-over: var(--hue-pos);
+    --sat-over: 1;
+    --lit-over: 1;
 }
 .gallery-image-vote-down-on/*, .gallery-image-vote-down-off*/ {
-    --hue: var(--hue-neg);
-    --sat: 1;
-    --lit: 1;
-    --ovr: var(--b7);
+    --hue-over: var(--hue-neg);
+    --sat-over: 1;
+    --lit-over: 1;
 }
 .gallery-image-preferred-on/*, .gallery-image-preferred-off*/ {
-    --hue: var(--hue-fav);
-    --sat: 1;
-    --lit: 1;
-    --ovr: var(--b7);
+    --hue-over: var(--hue-fav);
+    --sat-over: 1;
+    --lit-over: 1;
 }
 
 .gallery-image-vote-buttons {
@@ -7280,10 +7374,9 @@ body:is(.namespace--user_library_music_artist_overview, .namespace--user_library
     mask-image: var(--mask);
     -webkit-mask-image: var(--mask);
     background-color: hsl(var(--l3));
-    --hue: var(--hue-fav);
-    --sat: 1;
-    --lit: 1;
-    --ovr: var(--b7);
+    --hue-over: var(--hue-fav);
+    --sat-over: 1;
+    --lit-over: 1;
 }
 .gallery-image-preferred-on .gallery-image-preferred-states::before {
     background-image: unset !important;
@@ -7335,9 +7428,9 @@ form[action="/inbox/notifications"] {
 }
 
 .inbox-delete-button {
-    --hue: var(--hue-neg);
-    --sat: 1;
-    --lit: 1;
+    --hue-over: var(--hue-neg);
+    --sat-over: 1;
+    --lit-over: 1;
 }
 
 .inbox-notifications__item-visual-summary {
@@ -7616,9 +7709,9 @@ form[action="/inbox/notifications"] {
 }
 .delete-button {
     --mask: var(--icon-16-trash);
-    --hue: var(--hue-neg);
-    --sat: 1;
-    --lit: 1;
+    --hue-over: var(--hue-neg);
+    --sat-over: 1;
+    --lit-over: 1;
 }
 
 
@@ -7755,10 +7848,9 @@ form[action="/inbox/notifications"] {
 
 .gallery-image-delete button,
 .gallery-image-report {
-    --hue: var(--hue-neg);
-    --sat: 1;
-    --lit: 1;
-    --ovr: var(--b7);
+    --hue-over: var(--hue-neg);
+    --sat-over: 1;
+    --lit-over: 1;
     --col: hsl(var(--l3-c));
 }
 .gallery-image-report {
@@ -8310,9 +8402,9 @@ text[style^="color: rgb(0, 0, 0)"] {
     }
     &.image-list-item-preferred {
         --mask: var(--icon-16-star);
-        --hue: var(--hue-fav);
-        --sat: 1;
-        --lit: 1;
+        --hue-over: var(--hue-fav);
+        --sat-over: 1;
+        --lit-over: 1;
     }
 
     &:before {
@@ -8634,35 +8726,35 @@ text[style^="color: rgb(0, 0, 0)"] {
 }
 
 .play-this-track-playlink--youtube {
-    --hue: var(--hue-brand-yt);
-    --lit: var(--lit-brand-yt) !important;
+    --hue-over: var(--hue-brand-yt);
+    --lit-over: var(--lit-brand-yt) !important;
 }
 .play-this-track-playlink--spotify {
-    --hue: var(--hue-brand-sp);
-    --lit: var(--lit-brand-sp) !important;
+    --hue-over: var(--hue-brand-sp);
+    --lit-over: var(--lit-brand-sp) !important;
 }
 .resource-external-link--soundcloud {
-    --hue: var(--hue-brand-sc);
+    --hue-over: var(--hue-brand-sc);
 }
 .play-this-track-playlink--itunes {
-    --hue: var(--hue-brand-it);
+    --hue-over: var(--hue-brand-it);
 }
 
 .resource-external-link--apple-music {
-    --hue: var(--hue-brand-am);
+    --hue-over: var(--hue-brand-am);
 }
 .resource-external-link--facebook {
-    --hue: var(--hue-brand-fb);
-    --sat: var(--sat-brand-fb) !important;
-    --lit: var(--lit-brand-fb) !important;
+    --hue-over: var(--hue-brand-fb);
+    --sat-over: var(--sat-brand-fb) !important;
+    --lit-over: var(--lit-brand-fb) !important;
 }
 .resource-external-link--twitter {
-    --hue: var(--hue-brand-twt);
-    --sat: var(--sat-brand-twt) !important;
-    --lit: var(--lit-brand-twt) !important;
+    --hue-over: var(--hue-brand-twt);
+    --sat-over: var(--sat-brand-twt) !important;
+    --lit-over: var(--lit-brand-twt) !important;
 }
 .resource-external-link--instagram {
-    --hue: var(--hue-brand-ig);
+    --hue-over: var(--hue-brand-ig);
 }
 
 
@@ -8754,21 +8846,21 @@ text[style^="color: rgb(0, 0, 0)"] {
 }
 
 .alert-warning {
-    --hue: 25;
-    --sat: 1;
-    --lit: 1;
+    --hue-over: 25;
+    --sat-over: 1;
+    --lit-over: 1;
 }
 .alert-success {
-    --hue: var(--hue-pos);
-    --sat: 1;
-    --lit: 1;
+    --hue-over: var(--hue-pos);
+    --sat-over: 1;
+    --lit-over: 1;
 }
 .alert-error,
 .async-content-error-message,
 .event-status--cancelled {
-    --hue: var(--hue-neg);
-    --sat: 1;
-    --lit: 1;
+    --hue-over: var(--hue-neg);
+    --sat-over: 1;
+    --lit-over: 1;
 }
 
 
@@ -9186,9 +9278,9 @@ text[style^="color: rgb(0, 0, 0)"] {
     width: fit-content;
 }
 #ignorelist button {
-    --hue: var(--hue-neg);
-    --sat: 1;
-    --lit: 1;
+    --hue-over: var(--hue-neg);
+    --sat-over: 1;
+    --lit-over: 1;
 }
 
 [name="ignorelist"] .form-group {
@@ -9260,9 +9352,9 @@ table.table tr:nth-child(2n) td {
     --shadow: none !important;
     --shadow-hov: none !important;
     --col: hsl(var(--l3-c));
-    --hue: var(--hue-neg);
-    --sat: 1;
-    --lit: 1;
+    --hue-over: var(--hue-neg);
+    --sat-over: 1;
+    --lit-over: 1;
 }
 .content-form .table .delete:before {
     --mask: var(--icon-16-trash);
@@ -9330,9 +9422,9 @@ table.table tr:nth-child(2n) td {
     display: none;
 
     .obsession-history-item-inner:has(&) {
-        --hue: 25;
-        --sat: 1;
-        --lit: 1;
+        --hue-over: 25;
+        --sat-over: 1;
+        --lit-over: 1;
         background:
         var(--avatar-generic-background) padding-box,
         linear-gradient(0deg, hsla(var(--h3), 80%) 0%, hsl(var(--b5)) 100%) border-box;
@@ -9466,10 +9558,9 @@ table.table tr:nth-child(2n) td {
     color: hsl(var(--c2));
 
     &:has(.subscription-button-row) {
-        --hue: var(--hue-pro);
-        --sat: 1;
-        --lit: 1;
-        --ovr: var(--b7);
+        --hue-over: var(--hue-pro);
+        --sat-over: 1;
+        --lit-over: 1;
         background-color: hsla(var(--h4), 20%);
         border-left: 2px solid hsl(var(--l3-c));
         color: hsl(var(--l3-c));
@@ -10264,9 +10355,9 @@ event sidebar */
     }
 
     &.events-list-item--attending {
-        --hue: var(--hue-pos);
-        --sat: 1;
-        --lit: 1;
+        --hue-over: var(--hue-pos);
+        --sat-over: 1;
+        --lit-over: 1;
 
         .events-list-item-date-icon, .calendar-icon {
             --event-icon: var(--icon-16-check-circle);
@@ -10275,9 +10366,9 @@ event sidebar */
     }
 
     &.events-list-item--cancelled {
-        --hue: var(--hue-neg);
-        --sat: 1;
-        --lit: 1;
+        --hue-over: var(--hue-neg);
+        --sat-over: 1;
+        --lit-over: 1;
 
         .events-list-item-date-icon, .calendar-icon {
             --event-icon: var(--icon-16-block);
@@ -11469,9 +11560,9 @@ h2.playlisting-create-option-title {
         --mask: var(--icon-16-add);
         width: 32px;
         --col: hsl(var(--l3-c));
-        --hue: 255;
-        --sat: 1;
-        --lit: 1;
+        --hue-over: 255;
+        --sat-over: 1;
+        --lit-over: 1;
         margin-left: 4px; /* 12px total */
     }
 }
@@ -11809,17 +11900,17 @@ code, kbd, samp {
                 --bg-hov: hsla(var(--h4), 20%);
                 --bg-atv: hsla(var(--h4), 40%);
                 --shadow: 0 0 30px 15px hsla(var(--h4), 8%);
-                --hue: 160;
-                --sat: 1;
-                --lit: 1;
+                --hue-over: 160;
+                --sat-over: 1;
+                --lit-over: 1;
             }
             &.downgrade {
                 --bg: hsla(var(--h4), 10%);
                 --bg-hov: hsla(var(--h4), 20%);
                 --bg-atv: hsla(var(--h4), 40%);
-                --hue: -2;
-                --sat: 1;
-                --lit: 1;
+                --hue-over: -2;
+                --sat-over: 1;
+                --lit-over: 1;
             }
 
             .text {
@@ -12033,7 +12124,10 @@ code, kbd, samp {
         margin-top: var(--card-gap);
     }
 
-    pointer-events: none;
+    &:not(.click-thru) {
+        pointer-events: none;
+    }
+
     user-select: none;
 
     /* instant colour change */
@@ -12491,21 +12585,21 @@ input[type="range"]::-moz-range-progress {
         }
 
         &#primary-selection-receiving_msgs-everyone {
-            --hue: 160;
-            --sat: 1;
-            --lit: 1;
+            --hue-over: 160;
+            --sat-over: 1;
+            --lit-over: 1;
             --mask: var(--icon-16-globe);
         }
         &#primary-selection-receiving_msgs-neighbours {
-            --hue: 30;
-            --sat: 1;
-            --lit: 1;
+            --hue-over: 30;
+            --sat-over: 1;
+            --lit-over: 1;
             --mask: var(--icon-16-users);
         }
         &#primary-selection-receiving_msgs-follow {
-            --hue: -2;
-            --sat: 1;
-            --lit: 1;
+            --hue-over: -2;
+            --sat-over: 1;
+            --lit-over: 1;
             --mask: var(--icon-16-lock);
         }
 
@@ -12820,12 +12914,16 @@ input[type="range"]::-moz-range-progress {
         --bg: hsl(var(--h3)) !important;
         --bg-hov: hsla(var(--h3), 80%) !important;
         --bg-atv: hsla(var(--h3), 60%) !important;
-        --col: hsl(var(--ovr, var(--b7))) !important;
+        --col: hsl(var(--b7)) !important;
         --shadow: var(--interactable-outer);
         --shadow-hov: var(--interactable-outer), var(--interactable-active-outer);
 
         .dot {
             left: calc(56px - 7px - 12px);
+        }
+
+        [data-bleh--season="halloween"] & {
+            --hue-seasonal: 255;
         }
     }
 }
@@ -12886,9 +12984,9 @@ input[type="range"]::-moz-range-progress {
     text-decoration: none;
     --show-icon: block;
     --mask: url('data:image/svg+xml;base64,PHN2ZyByb2xlPSJpbWciIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48dGl0bGU+U3BvdGlmeTwvdGl0bGU+PHBhdGggZD0iTTEyIDBDNS40IDAgMCA1LjQgMCAxMnM1LjQgMTIgMTIgMTIgMTItNS40IDEyLTEyUzE4LjY2IDAgMTIgMHptNS41MjEgMTcuMzRjLS4yNC4zNTktLjY2LjQ4LTEuMDIxLjI0LTIuODItMS43NC02LjM2LTIuMTAxLTEwLjU2MS0xLjE0MS0uNDE4LjEyMi0uNzc5LS4xNzktLjg5OS0uNTM5LS4xMi0uNDIxLjE4LS43OC41NC0uOSA0LjU2LTEuMDIxIDguNTItLjYgMTEuNjQgMS4zMi40Mi4xOC40NzkuNjU5LjMwMSAxLjAyem0xLjQ0LTMuM2MtLjMwMS40Mi0uODQxLjYtMS4yNjIuMy0zLjIzOS0xLjk4LTguMTU5LTIuNTgtMTEuOTM5LTEuMzgtLjQ3OS4xMi0xLjAyLS4xMi0xLjE0LS42LS4xMi0uNDguMTItMS4wMjEuNi0xLjE0MUM5LjYgOS45IDE1IDEwLjU2MSAxOC43MiAxMi44NGMuMzYxLjE4MS41NC43OC4yNDEgMS4yem0uMTItMy4zNkMxNS4yNCA4LjQgOC44MiA4LjE2IDUuMTYgOS4zMDFjLS42LjE3OS0xLjItLjE4MS0xLjM4LS43MjEtLjE4LS42MDEuMTgtMS4yLjcyLTEuMzgxIDQuMjYtMS4yNiAxMS4yOC0xLjAyIDE1LjcyMSAxLjYyMS41MzkuMy43MTkgMS4wMi40MTkgMS41Ni0uMjk5LjQyMS0xLjAyLjU5OS0xLjU1OS4zeiIvPjwvc3ZnPg==');
-    --hue: var(--hue-brand-sp);
-    --sat: 1;
-    --lit: var(--lit-brand-sp);
+    --hue-over: var(--hue-brand-sp);
+    --sat-over: 1;
+    --lit-over: var(--lit-brand-sp);
 }
 
 
@@ -13649,9 +13747,9 @@ body:is(.namespace--user_playlists_create_overview, .music-landing-overview, [cl
     border: 2px solid transparent;
     border-left: 2px solid hsl(var(--l3-c));
     color: hsl(var(--l3-c));
-    --hue: var(--hue-neg);
-    --sat: 1;
-    --lit: 1;
+    --hue-over: var(--hue-neg);
+    --sat-over: 1;
+    --lit-over: 1;
     z-index: 100000;
     max-width: 400px;
     opacity: 0.5;
@@ -13753,9 +13851,9 @@ trying to list every song ever made by someone identifying as a female, which is
     background-color: hsla(var(--h4), 20%);
     border-radius: 16px;
 
-    --hue: var(--hue-neg);
-    --sat: 1;
-    --lit: 1;
+    --hue-over: var(--hue-neg);
+    --sat-over: 1;
+    --lit-over: 1;
 
     display: flex;
     align-items: center;
@@ -13812,9 +13910,9 @@ trying to list every song ever made by someone identifying as a female, which is
 
         &.shout-form-char-count--limit {
             color: hsl(var(--l3-c));
-            --hue: var(--hue-neg);
-            --sat: 1;
-            --lit: 1;
+            --hue-over: var(--hue-neg);
+            --sat-over: 1;
+            --lit-over: 1;
             opacity: 0.5;
 
             /*&:after {
@@ -14392,5 +14490,106 @@ button.bleh--gallery-bookmark-image-btn {
     .sep {
         margin: var(--card-gap) 0;
     }
+}
+
+
+
+
+.hide-if-seasonal-disabled {
+    [data-bleh--seasonal="false"] & {
+        pointer-events: none !important;
+        opacity: 0.4 !important;
+    }
+}
+
+.current-season-container {
+    display: flex;
+    gap: var(--card-padding);
+
+    .current-season {
+        color: hsl(var(--c3));
+        font-weight: var(--font-weight-bold);
+        position: relative;
+        padding-left: calc(16px + 6px);
+
+        --left: 0;
+        --mask: var(--icon-16-x);
+
+        &:not([data-season="none"]) {
+            color: hsl(var(--l3-c));
+            text-shadow: 0 0 20px hsl(var(--h4));
+        }
+
+        &[data-season="halloween"] {
+            --mask: var(--icon-16-pumpkin);
+        }
+        &[data-season="pre_fall"] {
+            --mask: var(--icon-16-fall);
+        }
+        &[data-season="fall"] {
+            --mask: var(--icon-16-fall);
+        }
+        &[data-season="christmas"] {
+            --mask: var(--icon-16-snow);
+        }
+        &[data-season="new_years"] {
+            --mask: var(--icon-16-new-years);
+        }
+    }
+    .current-season-started {
+        color: hsl(var(--c3));
+    }
+}
+
+.seasonal-hsl-alert {
+    margin: 0 0 12px 0;
+    transition-property: margin, opacity;
+    transition-duration: calc(var(--trans) * 1.7);
+    transition-timing-function: var(--trans-function);
+
+    [data-bleh--hsl-override="false"] & {
+        margin: 0 0 -36px 0;
+        opacity: 0;
+    }
+}
+.dim-during-seasonal {
+    transition-property: opacity;
+    transition-duration: calc(var(--trans) * 1.7);
+    transition-timing-function: var(--trans-function);
+
+    [data-bleh--hsl-override="true"] & {
+        opacity: 0.5;
+    }
+}
+
+
+
+
+/*     SNOW     */
+#snowflakes {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    display: none;
+    /*filter: drop-shadow(0 0 5px white);*/
+    z-index: 900;
+    user-select: none;
+    pointer-events: none;
+    opacity: 0.8;
+
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.snow {
+    position: fixed;
+    background-color: snow;
+    user-select: none;
+    z-index: 1000;
+    pointer-events: none;
+    border-radius: 50%;
+    width: 7px;
+    height: 7px;
 }
 }
