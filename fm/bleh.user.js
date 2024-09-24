@@ -3325,9 +3325,9 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             let parsed_scrobble_as_rank = parse_scrobbles_as_rank(count);
 
             count_bar.setAttribute('data-bleh--scrobble-milestone',parsed_scrobble_as_rank.milestone);
-            count_bar.style.setProperty('--hue',parsed_scrobble_as_rank.hue);
-            count_bar.style.setProperty('--sat',parsed_scrobble_as_rank.sat);
-            count_bar.style.setProperty('--lit',parsed_scrobble_as_rank.lit);
+            count_bar.style.setProperty('--hue-over',parsed_scrobble_as_rank.hue);
+            count_bar.style.setProperty('--sat-over',parsed_scrobble_as_rank.sat);
+            count_bar.style.setProperty('--lit-over',parsed_scrobble_as_rank.lit);
         }
     }
 
@@ -3913,7 +3913,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     <h3>${trans[lang].settings.customise.colours.name}</h3>
                     <h5>${trans[lang].settings.customise.colours.presets}</h5>
                     <div class="palette options colours">
-                        <button class="btn default" style="
+                        <button class="swatch btn default" style="
                             --hue: var(--hue-seasonal, 255);
                             --sat: var(--sat-seasonal, 1);
                             --lit: var(--lit-seasonal, 1)" onclick="_update_params({
@@ -3921,23 +3921,53 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                             sat: 1,
                             lit: 1
                         })"></button>
-                        <button class="btn" style="
-                            --hue: -2;
-                            --sat: 1;
-                            --lit: 0.8" onclick="_update_params({
-                            hue: -2,
-                            sat: 1,
-                            lit: 0.8
-                        })"></button>
-                        <button class="btn" style="
-                            --hue: 10;
-                            --sat: 1;
+                        <button class="swatch btn custom" style="
+                            --hue: var(--hue-user, 255);
+                            --sat: var(--sat-user, 1);
+                            --lit: var(--lit-user, 1)" onclick="_create_a_custom_colour()"></button>
+                    </div>
+                    <div class="palette options colours">
+                        <button class="swatch btn" style="
+                            --hue: 340;
+                            --sat: 1.2;
                             --lit: 0.9" onclick="_update_params({
-                            hue: 10,
-                            sat: 1,
+                            hue: 340,
+                            sat: 1.2,
                             lit: 0.9
                         })"></button>
-                        <button class="btn" style="
+                        <button class="swatch btn" style="
+                            --hue: 350;
+                            --sat: 1.2;
+                            --lit: 0.9" onclick="_update_params({
+                            hue: 350,
+                            sat: 1.2,
+                            lit: 0.9
+                        })"></button>
+                        <button class="swatch btn" style="
+                            --hue: -2;
+                            --sat: 1.2;
+                            --lit: 0.9" onclick="_update_params({
+                            hue: -2,
+                            sat: 1.2,
+                            lit: 0.9
+                        })"></button>
+                        <button class="swatch btn" style="
+                            --hue: 8;
+                            --sat: 1.1;
+                            --lit: 0.9" onclick="_update_params({
+                            hue: 8,
+                            sat: 1.1,
+                            lit: 0.9
+                        })"></button>
+                        <button class="swatch btn" style="
+                            --hue: 16;
+                            --sat: 1;
+                            --lit: 0.95" onclick="_update_params({
+                            hue: 16,
+                            sat: 1,
+                            lit: 0.95
+                        })"></button>
+                        <button class="swatch btn" style="
                             --hue: 35;
                             --sat: 1.2;
                             --lit: 1" onclick="_update_params({
@@ -3945,7 +3975,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                             sat: 1.2,
                             lit: 1
                         })"></button>
-                        <button class="btn" style="
+                        <button class="swatch btn" style="
                             --hue: 85;
                             --sat: 1;
                             --lit: 1" onclick="_update_params({
@@ -3953,7 +3983,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                             sat: 1,
                             lit: 1
                         })"></button>
-                        <button class="btn" style="
+                        <button class="swatch btn" style="
                             --hue: 115;
                             --sat: 1;
                             --lit: 1" onclick="_update_params({
@@ -3961,7 +3991,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                             sat: 1,
                             lit: 1
                         })"></button>
-                        <button class="btn" style="
+                        <button class="swatch btn" style="
                             --hue: 155;
                             --sat: 1;
                             --lit: 1" onclick="_update_params({
@@ -3969,7 +3999,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                             sat: 1,
                             lit: 1
                         })"></button>
-                        <button class="btn" style="
+                        <button class="swatch btn" style="
                             --hue: 185;
                             --sat: 1;
                             --lit: 1" onclick="_update_params({
@@ -3977,7 +4007,15 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                             sat: 1,
                             lit: 1
                         })"></button>
-                        <button class="btn" style="
+                        <button class="swatch btn" style="
+                            --hue: 205;
+                            --sat: 1;
+                            --lit: 1" onclick="_update_params({
+                            hue: 205,
+                            sat: 1,
+                            lit: 1
+                        })"></button>
+                        <button class="swatch btn" style="
                             --hue: 222;
                             --sat: 1;
                             --lit: 0.9" onclick="_update_params({
@@ -3985,7 +4023,23 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                             sat: 1,
                             lit: 0.9
                         })"></button>
-                        <button class="btn" style="
+                        <button class="swatch btn" style="
+                            --hue: 230;
+                            --sat: 1.3;
+                            --lit: 0.9" onclick="_update_params({
+                            hue: 230,
+                            sat: 1.3,
+                            lit: 0.9
+                        })"></button>
+                        <button class="swatch btn" style="
+                            --hue: 255;
+                            --sat: 1.2;
+                            --lit: 0.9" onclick="_update_params({
+                            hue: 255,
+                            sat: 1.2,
+                            lit: 0.9
+                        })"></button>
+                        <button class="swatch btn" style="
                             --hue: 255;
                             --sat: 1;
                             --lit: 1.05" onclick="_update_params({
@@ -3993,7 +4047,31 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                             sat: 1,
                             lit: 1.05
                         })"></button>
-                        <button class="btn" style="
+                        <button class="swatch btn" style="
+                            --hue: 280;
+                            --sat: 1.2;
+                            --lit: 0.9" onclick="_update_params({
+                            hue: 280,
+                            sat: 1.2,
+                            lit: 0.9
+                        })"></button>
+                        <button class="swatch btn" style="
+                            --hue: 300;
+                            --sat: 1.2;
+                            --lit: 0.9" onclick="_update_params({
+                            hue: 300,
+                            sat: 1.2,
+                            lit: 0.9
+                        })"></button>
+                        <button class="swatch btn" style="
+                            --hue: 320;
+                            --sat: 1.2;
+                            --lit: 0.9" onclick="_update_params({
+                            hue: 320,
+                            sat: 1.2,
+                            lit: 0.9
+                        })"></button>
+                        <button class="swatch btn" style="
                             --hue: 333;
                             --sat: 1;
                             --lit: 1" onclick="_update_params({
@@ -4997,7 +5075,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     }
 
     function update_colour_swatches() {
-        let swatches = document.body.querySelectorAll('.options.colours button');
+        let swatches = document.body.querySelectorAll('.swatch');
         swatches.forEach((swatch) => {
             let h = swatch.style.getPropertyValue('--hue');
             let s = swatch.style.getPropertyValue('--sat');
