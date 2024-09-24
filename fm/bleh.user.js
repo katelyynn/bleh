@@ -158,7 +158,10 @@ const trans = {
                 seasonal: {
                     name: 'Seasonal',
                     bio: 'During seasonal events, bleh can automatically change the default accent colour, add particles, and add overlays to various interface elements.',
-                    option: 'Enable seasonal events',
+                    option: {
+                        name: 'Enable seasonal event system',
+                        bio: 'If you want to choose your own accent, just choose one above - no need to disable seasons!'
+                    },
                     marker: {
                         current: 'The current season is {season} for {time}.',
                         started: 'started {time}',
@@ -166,13 +169,15 @@ const trans = {
                         disabled: 'You have seasons disabled, enable to view current event.'
                     },
                     particles: {
-                        name: 'Display particles during select seasons'
+                        name: 'Display particles during select seasons',
+                        bio: 'During winter seasons you get snowflakes!'
                     },
                     show_less_particles: {
                         name: 'Display a reduced number of particles'
                     },
                     overlays: {
-                        name: 'Display card overlays'
+                        name: 'Display card overlays',
+                        bio: 'During winter seasons this is used for ice effects, otherwise mainly just gradients.'
                     }
                 },
                 artwork: {
@@ -4133,7 +4138,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     <div class="toggle-container" id="container-seasonal">
                         <button class="btn reset" onclick="_reset_item('seasonal')">${trans[lang].settings.reset}</button>
                         <div class="heading">
-                            <h5>${trans[lang].settings.customise.seasonal.option}</h5>
+                            <h5>${trans[lang].settings.customise.seasonal.option.name}</h5>
+                            <p>${trans[lang].settings.customise.seasonal.option.bio}</p>
                         </div>
                         <div class="toggle-wrap">
                             <button class="toggle" id="toggle-seasonal" onclick="_update_item('seasonal')" aria-checked="true">
@@ -4146,6 +4152,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                         <button class="btn reset" onclick="_reset_item('seasonal_particles')">${trans[lang].settings.reset}</button>
                         <div class="heading">
                             <h5>${trans[lang].settings.customise.seasonal.particles.name}</h5>
+                            <p>${trans[lang].settings.customise.seasonal.particles.bio}</p>
                         </div>
                         <div class="toggle-wrap">
                             <button class="toggle" id="toggle-seasonal_particles" onclick="_update_item('seasonal_particles')" aria-checked="true">
@@ -4157,6 +4164,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                         <button class="btn reset" onclick="_reset_item('seasonal_overlays')">${trans[lang].settings.reset}</button>
                         <div class="heading">
                             <h5>${trans[lang].settings.customise.seasonal.overlays.name}</h5>
+                            <p>${trans[lang].settings.customise.seasonal.overlays.bio}</p>
                         </div>
                         <div class="toggle-wrap">
                             <button class="toggle" id="toggle-seasonal_overlays" onclick="_update_item('seasonal_overlays')" aria-checked="true">
