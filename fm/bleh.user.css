@@ -4205,33 +4205,33 @@ state is not active, which then falls back to primary button styling */
 }
 
 .tasteometer-compat-super {
-    --hue: var(--hue-neg);
-    --sat: 1.4;
-    --lit: 0.95;
+    --hue-over: var(--hue-neg);
+    --sat-over: 1.4;
+    --lit-over: 0.95;
 
     .tasteometer-compat-colour, a {
         text-shadow: 0 0 10px hsl(var(--h4));
     }
 }
 .tasteometer-compat-very_high {
-    --hue: 15;
-    --sat: 1;
-    --lit: 1;
+    --hue-over: 15;
+    --sat-over: 1;
+    --lit-over: 1;
 }
 .tasteometer-compat-high {
-    --hue: 35;
-    --sat: 1;
-    --lit: 1;
+    --hue-over: 35;
+    --sat-over: 1;
+    --lit-over: 1;
 }
 .tasteometer-compat-medium {
-    --hue: var(--hue-pos);
-    --sat: 1;
-    --lit: 1;
+    --hue-over: var(--hue-pos);
+    --sat-over: 1;
+    --lit-over: 1;
 }
 .tasteometer-compat-low {
-    --hue: 255;
-    --sat: 1;
-    --lit: 1;
+    --hue-over: 255;
+    --sat-over: 1;
+    --lit-over: 1;
 }
 .tasteometer-compat-very_low .tasteometer-compat-colour,
 .tasteometer-compat-very_low {
