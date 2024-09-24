@@ -1569,6 +1569,10 @@ body[class*="namespace--user_library_"] .col-sidebar, .library-header,
     align-items: center;
     gap: 16px;
     height: 32px;
+
+    .navlist {
+        position: absolute;
+    }
 }
 .content-top-lower-row .subpage-breadcrumb li {
     margin: unset !important;
@@ -2048,6 +2052,8 @@ spacing between is removed and aligned to tag icon */
 
 
 /* some pages due to recent changes (see event danger zone in this code) have cards go beneath tabs */
+.content-top:has(.content-top-back-link ~ .navlist) + .page-content,
+/* */
 .header--tag:not(.header--sub-page) + .adaptive-skin-container .page-content,
 [class*="namespace--events"][class*="_overview"]:not([class*="_shoutbox"]) .page-content {
     padding-top: calc(46px + (9px + var(--card-gap)) + (var(--card-gap) * 2)) !important;
@@ -3024,11 +3030,17 @@ hr + .library-search-results-header {
     display: none !important;
 }
 
-.secondary-nav-item--lineup a:before {
+.secondary-nav-item--venue a {
+    --mask: var(--icon-16-location);
+}
+.secondary-nav-item--lineup a {
     --mask: var(--icon-16-artist);
 }
-.secondary-nav-item--attendance a:before {
+.secondary-nav-item--attendance a {
     --mask: var(--icon-16-users);
+}
+.secondary-nav-item--info a {
+    --mask: var(--icon-16-bio);
 }
 
 
@@ -3645,23 +3657,30 @@ state is not active, which then falls back to primary button styling */
 .label.user-status-subscriber {
     --mask: var(--icon-pro);
     color: hsl(var(--l3-c)) !important;
-    --hue: var(--hue-pro);
-    --sat: 1;
-    --lit: 1;
+    --hue-over: var(--hue-pro);
+    --sat-over: 1;
+    --lit-over: 1;
 }
 .label.user-status-staff {
     --mask: var(--icon-staff);
     color: hsl(var(--l3-c)) !important;
-    --hue: var(--hue-neg);
-    --sat: 1;
-    --lit: 1;
+    --hue-over: var(--hue-neg);
+    --sat-over: 1;
+    --lit-over: 1;
 }
 .label.user-status-mod {
     --mask: var(--icon-mod);
     color: hsl(var(--l3-c)) !important;
-    --hue: 10;
-    --sat: 1;
-    --lit: 1;
+    --hue-over: 10;
+    --sat-over: 1;
+    --lit-over: 1;
+}
+.label.user-status-alum {
+    --mask: var(--icon-alum);
+    color: hsl(var(--l3-c)) !important;
+    --hue-over: 20;
+    --sat-over: 1;
+    --lit-over: 1;
 }
 
 /* blehhhh :3 */
@@ -3688,44 +3707,44 @@ state is not active, which then falls back to primary button styling */
     color: hsl(var(--l3-c)) !important;
 
     &.user-status--bleh-user-Iexyy {
-        --hue: 206;
-        --sat: 1;
-        --lit: 1.1;
+        --hue-over: 206;
+        --sat-over: 1;
+        --lit-over: 1.1;
     }
     &.user-status--bleh-user-bIeak {
-        --hue: 0;
-        --sat: 0;
-        --lit: 1.5;
+        --hue-over: 0;
+        --sat-over: 0;
+        --lit-over: 1.5;
     }
     &.user-status--bleh-user-peoplepleasr {
-        --hue: 264;
-        --sat: 1;
-        --lit: 1;
+        --hue-over: 264;
+        --sat-over: 1;
+        --lit-over: 1;
     }
     &.user-status--bleh-user-twolay {
-        --hue: 333;
-        --sat: 1;
-        --lit: 1;
+        --hue-over: 333;
+        --sat-over: 1;
+        --lit-over: 1;
     }
     &.user-status--bleh-user-aoivee {
-        --hue: 110;
-        --sat: 1;
-        --lit: 1;
+        --hue-over: 110;
+        --sat-over: 1;
+        --lit-over: 1;
     }
     &.user-status--bleh-user-Serprety {
-        --hue: 255;
-        --sat: 1;
-        --lit: 1;
+        --hue-over: 255;
+        --sat-over: 1;
+        --lit-over: 1;
     }
     &.user-status--bleh-user-RazzBX {
-        --hue: 245;
-        --sat: 1;
-        --lit: 1;
+        --hue-over: 245;
+        --sat-over: 1;
+        --lit-over: 1;
     }
     &.user-status--bleh-user-ivyshandle {
-        --hue: 333;
-        --sat: 1;
-        --lit: 1.1;
+        --hue-over: 333;
+        --sat-over: 1;
+        --lit-over: 1.1;
     }
 }
 
@@ -5595,28 +5614,34 @@ span.shout-user-avatar:before,
 
 .avatar-status-dot--subscriber {
     --mask: var(--icon-pro);
-    --hue: var(--hue-pro);
-    --sat: 1;
-    --lit: 1;
+    --hue-over: var(--hue-pro);
+    --sat-over: 1;
+    --lit-over: 1;
 }
 .avatar-status-dot--staff {
     --mask: var(--icon-staff);
-    --hue: var(--hue-neg);
-    --sat: 1;
-    --lit: 1;
+    --hue-over: var(--hue-neg);
+    --sat-over: 1;
+    --lit-over: 1;
 }
 .avatar-status-dot--mod {
     --mask: var(--icon-mod);
-    --hue: 10;
-    --sat: 1;
-    --lit: 1;
+    --hue-over: 10;
+    --sat-over: 1;
+    --lit-over: 1;
+}
+.avatar-status-dot--alum {
+    --mask: var(--icon-alum);
+    --hue-over: 20;
+    --sat-over: 1;
+    --lit-over: 1;
 }
 
 
 .shout:has(.avatar-status-dot--staff) {
-    --hue: var(--hue-neg);
-    --sat: 1;
-    --lit: 1;
+    --hue-over: var(--hue-neg);
+    --sat-over: 1;
+    --lit-over: 1;
     color: hsl(var(--c2));
 }
 
@@ -6917,6 +6942,7 @@ textarea::placeholder {
 
 
 
+.form-group--name .form-group-controls,
 #manage_data .form-group-controls,
 [action$="/+tags/add"] .form-group-controls,
 .form-section .form-group-controls.form-control-description {
@@ -6925,6 +6951,7 @@ textarea::placeholder {
     /* align with control-label */
     padding-top: 7px;
 }
+.form-group--start_time .form-group-controls,
 :is(.form-group--timezone, .form-group--current_username, .form-group--password, #playback > .form-horizontal, #email-settings > .form-horizontal) .form-group-controls {
     display: block !important;
 }
@@ -9190,20 +9217,10 @@ text[style^="color: rgb(0, 0, 0)"] {
     width: 400px;
 }
 
-.image-upload-preview {
+.avatar-side .image-upload-preview {
     background: var(--avatar-generic-background);
     border-radius: var(--avatar-radius);
     box-shadow: var(--card-shadow);
-}
-#update-picture .col-xs-4 {
-    width: 240px;
-}
-#update-picture .alert {
-    width: fit-content;
-}
-
-#update-picture .form-submit {
-    justify-content: left;
 }
 
 .btn-file-label, .btn-sm {
@@ -12422,6 +12439,7 @@ input[type="range"]::-moz-range-progress {
     flex-shrink: 0;
 }
 
+.select-container .heading,
 .toggle-container .heading,
 .slider-container .heading {
     display: flex;
@@ -12509,12 +12527,6 @@ input[type="range"]::-moz-range-progress {
 
 .select-container {
     display: flex;
-
-    .heading {
-        display: flex;
-        align-items: center;
-        flex: 1;
-    }
 
     .select-wrap {
         position: relative;

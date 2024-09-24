@@ -2787,9 +2787,9 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
     // patch profile pages
     function patch_profile(element) {
-        let profile_header = element.querySelector('.header-title-label-wrap');
+        let profile_header = element.querySelector('.header--user .header-title-label-wrap');
 
-        if (profile_header == undefined)
+        if (profile_header == null)
             return;
 
         patch_profile_following();
