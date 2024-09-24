@@ -12924,6 +12924,8 @@ input[type="range"]::-moz-range-progress {
 
         [data-bleh--season="halloween"] & {
             --hue-seasonal: 255;
+            --sat-seasonal: 1;
+            --lit-seasonal: 1;
         }
     }
 }
