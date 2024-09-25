@@ -6000,7 +6000,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
             let focused_image_details = document.body.querySelector('.gallery-sidebar');
 
-            if (focused_image_details == undefined)
+            if (focused_image_details == null)
                 return;
 
             // we are focused on a gallery image
@@ -6115,15 +6115,17 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     }
 
     // gallery focused image
-    function patch_gallery_focused_image(focused_image_details) {
-        console.info(focused_image_details);
-        if (focused_image_details.hasAttribute('data-kate-processed'))
+    function patch_gallery_focused_image(sidebar) {
+        let focused_image_details = sidebar.querySelector('.js-gallery-image-details > div');
+        if (focused_image_details == null)
             return;
 
+        if (focused_image_details.hasAttribute('data-kate-processed'))
+            return;
         focused_image_details.setAttribute('data-kate-processed', 'true');
 
         let artist_name = document.body.querySelector('.header-new-title').textContent;
-        let focused_image_id = focused_image_details.querySelector('div[data-image-url]').getAttribute('data-image-url').split('/')[4];
+        let focused_image_id = focused_image_details.getAttribute('data-image-url').split('/')[4];
 
         let bookmarked_images = JSON.parse(localStorage.getItem('bleh_bookmarked_images')) || {};
         let image_is_bookmarked = false;
