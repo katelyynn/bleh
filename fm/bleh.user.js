@@ -3753,6 +3753,21 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                         </a>
                     </div>
                 </div>
+                <h4>${trans[lang].settings.customise.seasonal.name}</h4>
+                <div class="inner-preview pad click-thru">
+                    <div class="current-season-container">
+                        <div class="current-season" data-season="${stored_season.id}" id="current_season">
+                            ${(stored_season.id != 'none')
+                            ? trans[lang].settings.customise.seasonal.marker.current.replace('{season}', stored_season.name).replace('{time}', moment(stored_season.end.replace('y0', stored_season.year)).to(stored_season.now, true))
+                            : (settings.seasonal) ? trans[lang].settings.customise.seasonal.marker.none : trans[lang].settings.customise.seasonal.marker.disabled}
+                        </div>
+                        <div class="current-season-started" id="current_season_start">
+                            ${(stored_season.id != 'none')
+                            ? trans[lang].settings.customise.seasonal.marker.started.replace('{time}', moment(stored_season.start.replace('y0', stored_season.year)).from(stored_season.now))
+                            : ''}
+                        </div>
+                    </div>
+                </div>
                 <h4>${trans[lang].settings.home.recommended}</h4>
                 <div class="setting-items">
                     <div class="side-left">
