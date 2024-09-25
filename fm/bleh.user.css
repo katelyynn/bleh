@@ -11857,10 +11857,14 @@ so this is good enough - use the community docs */
                 &:not(.active) {
                     --bg: transparent;
                     --bg-hov: hsla(var(--b4), 20%);
-                    --bg-atv: hsla(var(--b4), 40%);
+                    --bg-atv: hsla(var(--h4), 10%);
                 }
 
                 &.active {
+                    --bg: hsla(var(--h4), 20%);
+                    --bg-hov: var(--bg);
+                    --bg-atv: var(--bg);
+
                     &:after {
                         content: '';
                         position: absolute;
