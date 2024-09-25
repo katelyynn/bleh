@@ -112,7 +112,8 @@ body {
 body, [data-page-resource-type="album"], [data-page-resource-type="track"],
 .gallery-image-buttons button, .gallery-image-preferred-button,
 .user-dashboard-layout,
-.obsession-history-item-inner
+.obsession-history-item-inner,
+.preview, .preview[data-bleh--theme="dark"]
 {
     /* any additional highlights */
     --b3: var(--hue), calc(var(--sat) * 6%), 30%;
@@ -127,7 +128,8 @@ body, [data-page-resource-type="album"], [data-page-resource-type="track"],
     --b6: var(--hue), calc(var(--sat) * 12%), 10%;
     --b7: 0, 0%, 0%;
 
-    [data-bleh--theme="darker"] & {
+    .preview[data-bleh--theme="darker"],
+    [data-bleh--theme="darker"] &:not(.preview) {
         /* any additional highlights */
         --b3: var(--hue), calc(var(--sat) * 4%), 24%;
 
@@ -141,7 +143,8 @@ body, [data-page-resource-type="album"], [data-page-resource-type="track"],
         --b6: var(--hue), calc(var(--sat) * 10%), 4%;
         --b7: 0, 0%, 0%;
     }
-    [data-bleh--theme="oled"] & {
+    .preview[data-bleh--theme="oled"],
+    [data-bleh--theme="oled"] &:not(.preview) {
         /* any additional highlights */
         --b3: var(--hue), calc(var(--sat) * 6%), 16%;
 
@@ -155,7 +158,8 @@ body, [data-page-resource-type="album"], [data-page-resource-type="track"],
         --b6: 0, 0%, 0%;
         --b7: 0, 0%, 0%;
     }
-    [data-bleh--theme="light"] & {
+    .preview[data-bleh--theme="light"],
+    [data-bleh--theme="light"] &:not(.preview) {
         /* any additional highlights */
         --b3: var(--hue), calc(var(--sat) * 6%), 75%;
 
@@ -224,7 +228,8 @@ a,
 .nag-bar--alert,
 input[type="range"],
 .form-row-help-text,
-.chartlist-loved
+.chartlist-loved,
+.preview, .preview[data-bleh--theme="dark"]
 {
     --hue:  var(--hue-over,
             var(--hue-album,
@@ -262,7 +267,8 @@ input[type="range"],
 
     --icon: var(--c2);
 
-    [data-bleh--theme="oled"] & {
+    .preview[data-bleh--theme="oled"],
+    [data-bleh--theme="oled"] &:not(.preview) {
         --c1: var(--hue), calc(var(--sat) * 40%), 100%;
         --c2: var(--hue), calc(var(--sat) * 60%), 90%;
         --c3: var(--hue), calc(var(--sat) * 10%), 60%;
@@ -282,7 +288,9 @@ input[type="range"],
 
         --icon: var(--c2);
     }
+    .preview[data-bleh--theme="light"],
     [data-bleh--theme="light"] &:not(
+        .preview,
         .header-new-inner:not(.header-new-inner--without-image) .header-metadata-tnew-item,
         .header-new-inner:not(.header-new-inner--without-image) .header-new-actions :is(a, button),
         .header-new-inner:not(.header-new-inner--without-image) .header-new-inner, .header-new-inner:not(.header-new-inner--without-image) span[itemprop="byArtist"] a, .user-dashboard-layout .masthead a) {
@@ -331,6 +339,7 @@ input[type="range"],
 }
 
 /* attributes */
+.preview,
 body {
     --card-padding: 20px;
     --card-radius: 8px;
@@ -396,6 +405,7 @@ body {
     --name-colour: hsl(var(--l3-c));
 }
 
+.preview[data-bleh--theme="light"],
 [data-bleh--theme="classic"] body,
 [data-bleh--theme="light"] body {
     --card-shadow: hsla(var(--b7), 0.05) 0 2px 4px 0;
@@ -429,6 +439,7 @@ body {
     --card-border-base: hsl(0, 0%, 75%);
 }
 
+.preview[data-bleh--theme="oled"],
 [data-bleh--theme="oled"] body {
     --card-border: 1px solid hsl(var(--b4));
 }
@@ -1519,7 +1530,7 @@ body[class*="namespace--user_library_"] .col-sidebar, .library-header,
 
     [data-bleh--seasonal_overlays="true"] & {
         [data-bleh--season="halloween"] &:not(.header-featured-track) {
-            background-image: linear-gradient(0deg, hsla(var(--h4), 0.03) 0%, rgba(0,0,0,0) 100%) !important;
+            background-image: linear-gradient(0deg, rgba(252, 139, 105, 0.04) 0%, rgba(0,0,0,0) 100%) !important;
             background-repeat: repeat-x;
             background-position: unset !important;
         }
@@ -12020,10 +12031,14 @@ code, kbd, samp {
     .side-left.full {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+        width: 100%;
         gap: 6px;
 
         &.more {
             grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        }
+        &.even-more {
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
         }
     }
 
@@ -12129,6 +12144,103 @@ code, kbd, samp {
                     width: 100%;
                     border-radius: var(--item-med-radius);
                     box-shadow: var(--card-shadow);
+                }
+            }
+        }
+    }
+}
+
+
+.theme-item {
+    --bg: hsla(var(--b4), 40%);
+    --bg-hov: hsla(var(--b4), 60%);
+    --bg-atv: hsla(var(--b4), 80%);
+    --shadow: none;
+    --shadow-hov: none;
+    --padding: 7px;
+    --radius: var(--card-radius);
+    text-align: left;
+
+    width: 100% !important;
+    height: 140px;
+    display: flex;
+    gap: 7px;
+    flex-direction: column;
+
+    &.active {
+        --bg: hsla(var(--h4), 40%);
+        --bg-hov: hsla(var(--h4), 60%);
+        --bg-atv: hsla(var(--h4), 80%);
+    }
+
+    h5 {
+        font-weight: var(--font-weight-medium);
+    }
+
+    .preview {
+        display: flex;
+        flex: 1;
+        background-color: hsl(var(--b6));
+        position: relative;
+        border-radius: var(--item-med-radius);
+        overflow: hidden;
+
+        .preview-inner {
+            display: block;
+            width: 100%;
+            padding: 20px 0 0 20px;
+
+            .preview-card {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                height: 100%;
+                background-color: hsl(var(--b5));
+                box-shadow: var(--card-shadow);
+                border: var(--card-border);
+                border-top-left-radius: var(--card-radius);
+                border-right: unset;
+                border-bottom: unset;
+
+                padding: 10px;
+
+                .preview-header {
+                    display: block;
+                    width: 90px;
+                    height: 8px;
+                    background-color: hsl(var(--c1));
+                    border-radius: var(--item-med-radius);
+                }
+
+                .preview-text {
+                    display: block;
+                    width: 80px;
+                    height: 4px;
+                    background-color: hsl(var(--c2));
+                    border-radius: var(--item-med-radius);
+
+                    margin-top: -4px;
+
+                    &.row-2 {
+                        width: 40px;
+                    }
+                }
+
+                .preview-buttons {
+                    display: flex;
+                    gap: 6px;
+
+                    .preview-button {
+                        display: flex;
+                        width: 40px;
+                        height: 12px;
+                        background-color: hsl(var(--b4));
+                        border-radius: var(--item-small-radius);
+
+                        &.preview-button-primary {
+                            background-color: hsl(var(--h3));
+                        }
+                    }
                 }
             }
         }

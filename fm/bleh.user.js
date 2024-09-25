@@ -102,6 +102,9 @@ const trans = {
                     bio: 'Pick your favourite!'
                 }
             },
+            appearance: {
+                name: 'Appearance'
+            },
             themes: {
                 name: 'Themes',
                 bio: 'Choose from light to midnight.',
@@ -3673,7 +3676,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                             ${trans[lang].settings.home.name}
                         </button>
                         <button class="btn bleh--btn" data-bleh-page="themes" onclick="_change_settings_page('themes')">
-                            ${trans[lang].settings.themes.name}
+                            ${trans[lang].settings.appearance.name}
                         </button>
                         <button class="btn bleh--btn" data-bleh-page="customise" onclick="_change_settings_page('customise')">
                             ${trans[lang].settings.customise.name}
@@ -3854,77 +3857,63 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             preview_bar = `${preview_bar});`;
             //console.info('preview bar', preview_bar, global_sat, h3_sat, global_lit, h3_lit);
 
-            return (`
-                <div class="bleh--panel">
-                    <h3>${trans[lang].settings.themes.name}</h3>
-                    <!--<h4>${trans[lang].settings.themes.dark.name}</h4>-->
-                    <div class="setting-items">
-                        <div class="side-left full more">
-                            <button class="btn setting-item has-image" data-bleh-theme="dark" onclick="change_theme_from_settings('dark')">
-                                <div class="image">
-                                    <div class="icon bleh--theme-dark"></div>
-                                </div>
-                                <div class="text">
-                                    <h5>${trans[lang].settings.themes.dark.name}</h5>
-                                    <p>${trans[lang].settings.themes.dark.bio}</p>
-                                </div>
-                                <div class="image-row">
-                                    <img src="https://cutensilly.org/img/bleh3-theme-dark.png" alt="Screenshot of bleh's default dark theme">
-                                </div>
-                            </button>
-                            <button class="btn setting-item has-image" data-bleh-theme="darker" onclick="change_theme_from_settings('darker')">
-                                <div class="image">
-                                    <div class="icon bleh--theme-darker"></div>
-                                </div>
-                                <div class="text">
-                                    <h5>${trans[lang].settings.themes.darker.name}</h5>
-                                    <p>${trans[lang].settings.themes.darker.bio}</p>
-                                </div>
-                                <div class="image-row">
-                                    <img src="https://cutensilly.org/img/bleh3-theme-darker.png" alt="Screenshot of bleh's darker theme">
-                                </div>
-                            </button>
-                            <button class="btn setting-item has-image" data-bleh-theme="oled" onclick="change_theme_from_settings('oled')">
-                                <div class="image">
-                                    <div class="icon bleh--theme-oled"></div>
-                                </div>
-                                <div class="text">
-                                    <h5>${trans[lang].settings.themes.oled.name}</h5>
-                                    <p>${trans[lang].settings.themes.oled.bio}</p>
-                                </div>
-                                <div class="image-row">
-                                    <img src="https://cutensilly.org/img/bleh3-theme-oled.png" alt="Screenshot of bleh's oled theme">
-                                </div>
-                            </button>
+            let theme_preview = (`
+                <div class="preview-inner">
+                    <div class="preview-card">
+                        <div class="preview-header"></div>
+                        <div class="preview-text"></div>
+                        <div class="preview-text row-2"></div>
+                        <div class="preview-buttons">
+                            <div class="preview-button preview-button-primary">
+
+                            </div>
+                            <div class="preview-button">
+
+                            </div>
                         </div>
                     </div>
-                    <!--<h4>${trans[lang].settings.themes.light.name}</h4>-->
-                    <div class="setting-items">
-                        <div class="side-left full more">
-                            <button class="btn setting-item has-image" data-bleh-theme="light" onclick="change_theme_from_settings('light')">
-                                <div class="image">
-                                    <div class="icon bleh--theme-light"></div>
+                </div>
+            `);
+
+            return (`
+                <div class="bleh--panel">
+                    <h3>${trans[lang].settings.appearance.name}</h3>
+                    <h4>${trans[lang].settings.themes.name}</h4>
+                    <!--<h4>${trans[lang].settings.themes.dark.name}</h4>-->
+                    <div class="setting-items full">
+                        <div class="side-left full even-more">
+                            <button class="btn theme-item" data-bleh-theme="light" onclick="change_theme_from_settings('light')">
+                                <div class="preview" data-bleh--theme="light">
+                                    ${theme_preview}
                                 </div>
                                 <div class="text">
                                     <h5>${trans[lang].settings.themes.light.name}</h5>
-                                    <p>${trans[lang].settings.themes.light.bio}</p>
-                                </div>
-                                <div class="image-row">
-                                    <img src="https://cutensilly.org/img/bleh3-theme-light.png" alt="Screenshot of bleh's light theme">
                                 </div>
                             </button>
-                            <!--<button class="btn setting-item has-image" data-bleh-theme="classic" onclick="change_theme_from_settings('classic')">
-                                <div class="image">
-                                    <div class="icon bleh--theme-classic"></div>
+                            <button class="btn theme-item" data-bleh-theme="dark" onclick="change_theme_from_settings('dark')">
+                                <div class="preview" data-bleh--theme="dark">
+                                    ${theme_preview}
                                 </div>
                                 <div class="text">
-                                    <h5>${trans[lang].settings.themes.classic.name}</h5>
-                                    <p>${trans[lang].settings.themes.classic.bio}</p>
+                                    <h5>${trans[lang].settings.themes.dark.name}</h5>
                                 </div>
-                                <div class="image-row">
-                                    <img src="https://cutensilly.org/img/bleh3-theme-classic.png" alt="Screenshot of bleh's classic theme">
+                            </button>
+                            <button class="btn theme-item" data-bleh-theme="darker" onclick="change_theme_from_settings('darker')">
+                                <div class="preview" data-bleh--theme="darker">
+                                    ${theme_preview}
                                 </div>
-                            </button>-->
+                                <div class="text">
+                                    <h5>${trans[lang].settings.themes.darker.name}</h5>
+                                </div>
+                            </button>
+                            <button class="btn theme-item" data-bleh-theme="oled" onclick="change_theme_from_settings('oled')">
+                                <div class="preview" data-bleh--theme="oled">
+                                    ${theme_preview}
+                                </div>
+                                <div class="text">
+                                    <h5>${trans[lang].settings.themes.oled.name}</h5>
+                                </div>
+                            </button>
                         </div>
                     </div>
                     <div class="sep"></div>
@@ -4879,31 +4868,35 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
         document.getElementById('bleh--panel-main').innerHTML = render_setting_page(page);
 
-        if (page == 'themes')
-            show_theme_change_in_settings();
-        else if (page == 'customise' || page == 'performance' || page == 'redirects' || page == 'corrections' || page == 'accessibility' || page == 'text')
+        if (page == 'themes') {
             refresh_all();
-        else if (page == 'profiles')
+            show_theme_change_in_settings();
+        } else if (page == 'customise' || page == 'performance' || page == 'redirects' || page == 'corrections' || page == 'accessibility' || page == 'text') {
+            refresh_all();
+        } else if (page == 'profiles') {
             init_profile_notes();
-        else if (page == 'language')
+        } else if (page == 'language') {
             prepare_language_page();
+        }
 
         if (page == 'corrections')
             prepare_corrections_page();
 
-        if (page == 'customise' && settings.seasonal && stored_season.id != 'none') {
-            tippy(document.getElementById('current_season'), {
-                content: new Date(stored_season.end.replace('y0', stored_season.year)).toLocaleString()
-            });
-            tippy(document.getElementById('current_season_start'), {
-                content: new Date(stored_season.start.replace('y0', stored_season.year)).toLocaleString()
-            });
-
+        if (page == 'themes') {
             tippy(document.body.querySelector('.swatch.default'), {
                 content: (stored_season.id != 'none') ? trans[lang].settings.customise.colours.default_with_season.replace('{season}', stored_season.name) : trans[lang].settings.customise.colours.default
             });
             tippy(document.body.querySelector('.swatch.custom'), {
                 content: trans[lang].settings.customise.colours.custom
+            });
+        }
+
+        if ((page == 'customise' || page == 'home') && settings.seasonal && stored_season.id != 'none') {
+            tippy(document.getElementById('current_season'), {
+                content: new Date(stored_season.end.replace('y0', stored_season.year)).toLocaleString()
+            });
+            tippy(document.getElementById('current_season_start'), {
+                content: new Date(stored_season.start.replace('y0', stored_season.year)).toLocaleString()
             });
         }
     }
@@ -4915,7 +4908,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         else
             settings.theme = theme;
 
-        let btns = document.querySelectorAll('.setting-item');
+        let btns = document.querySelectorAll('.theme-item');
         btns.forEach((btn) => {
             console.log(btn.getAttribute('data-bleh-theme'),settings.theme);
             if (btn.getAttribute('data-bleh-theme') != settings.theme) {
