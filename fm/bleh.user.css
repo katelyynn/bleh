@@ -6266,15 +6266,15 @@ span.header-new-gallery-inner a:before,
 .more-link a:before, .more-link-fullwidth-right a:before, .more-link-fullwidth-right-flush-top a:before, .more-link-with-action a:not(.inline-add-icon):after,
 .more-items:before,
 .btn-shortcut:before,
-.gallery-next .arrow:before,
+.gallery-next .arrow,
 .header-new-gallery--link .header-new-gallery-inner:before,
 .date-range-picker-button:after,
 .form-group-controls:has(select):before,
 .dropdown-menu-list-button::after, .dropdown-menu-clickable-button::after, .dropdown-menu-clickable-button-js-only::after,
 .all-results-list li:before
 {
-    left: unset !important;
-    right: 12px !important;
+    --left: none !important;
+    --right: 12px !important;
 }
 
 /* only shows on mobile (currently?) */
