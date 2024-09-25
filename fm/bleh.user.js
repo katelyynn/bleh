@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         bleh
 // @namespace    http://last.fm/
-// @version      2024.0924
+// @version      2024.0925
 // @description  bleh!!! ^-^
 // @author       kate
 // @match        https://www.last.fm/*
@@ -18,7 +18,7 @@
 // ==/UserScript==
 
 let version = {
-    build: '2024.0924',
+    build: '2024.0925',
     sku: 'scawy',
     feature_flags: {}
 }
@@ -145,6 +145,8 @@ const trans = {
                     presets: 'Presets',
                     manual: 'Manual',
                     custom: 'Create a custom colour',
+                    default_with_season: 'Default colour for {season}',
+                    default: 'Default colour',
                     modals: {
                         custom_colour: {
                             preface: 'Colours are controlled by three values: hue, saturation, and lightness. Try out the sliders to get a feel.',
@@ -889,8 +891,28 @@ let stored_season = {
 };
 let seasonal_events = [
     {
+        id: 'new_years',
+        name: 'New Years',
+        start: 'y0-01-01',
+        end: 'y0-01-10T23:59:59',
+
+        snowflakes: {
+            state: true,
+            count: 50
+        }
+    },
+    {
+        id: 'easter',
+        name: 'Easter',
+        start: 'y0-04-05',
+        end: 'y0-04-30T23:59:59',
+
+        snowflakes: {
+            state: false
+        }
+    },
+    {
         id: 'halloween',
-        icon: 'moon',
         name: 'Halloween',
         start: 'y0-09-22',
         end: 'y0-11-02T23:59:59',
@@ -901,7 +923,6 @@ let seasonal_events = [
     },
     {
         id: 'pre_fall',
-        icon: 'leaf',
         name: 'Pre-Fall',
         start: 'y0-11-05',
         end: 'y0-11-12T23:59:59',
@@ -913,7 +934,6 @@ let seasonal_events = [
     },
     {
         id: 'fall',
-        icon: 'leaf',
         name: 'Fall',
         start: 'y0-11-13',
         end: 'y0-11-22T23:59:59',
@@ -925,7 +945,6 @@ let seasonal_events = [
     },
     {
         id: 'christmas',
-        icon: 'snowflake',
         name: 'Christmas',
         start: 'y0-11-23',
         end: 'y0-12-31T23:59:59',
@@ -933,18 +952,6 @@ let seasonal_events = [
         snowflakes: {
             state: true,
             count: 80
-        }
-    },
-    {
-        id: 'new_years',
-        icon: 'party-popper',
-        name: 'New Years',
-        start: 'y0-01-01',
-        end: 'y0-01-10T23:59:59',
-
-        snowflakes: {
-            state: true,
-            count: 50
         }
     }
 ];
@@ -3325,9 +3332,9 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             let parsed_scrobble_as_rank = parse_scrobbles_as_rank(count);
 
             count_bar.setAttribute('data-bleh--scrobble-milestone',parsed_scrobble_as_rank.milestone);
-            count_bar.style.setProperty('--hue',parsed_scrobble_as_rank.hue);
-            count_bar.style.setProperty('--sat',parsed_scrobble_as_rank.sat);
-            count_bar.style.setProperty('--lit',parsed_scrobble_as_rank.lit);
+            count_bar.style.setProperty('--hue-over',parsed_scrobble_as_rank.hue);
+            count_bar.style.setProperty('--sat-over',parsed_scrobble_as_rank.sat);
+            count_bar.style.setProperty('--lit-over',parsed_scrobble_as_rank.lit);
         }
     }
 
@@ -3746,6 +3753,21 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                         </a>
                     </div>
                 </div>
+                <h4>${trans[lang].settings.customise.seasonal.name}</h4>
+                <div class="inner-preview pad click-thru">
+                    <div class="current-season-container">
+                        <div class="current-season" data-season="${stored_season.id}" id="current_season">
+                            ${(stored_season.id != 'none')
+                            ? trans[lang].settings.customise.seasonal.marker.current.replace('{season}', stored_season.name).replace('{time}', moment(stored_season.end.replace('y0', stored_season.year)).to(stored_season.now, true))
+                            : (settings.seasonal) ? trans[lang].settings.customise.seasonal.marker.none : trans[lang].settings.customise.seasonal.marker.disabled}
+                        </div>
+                        <div class="current-season-started" id="current_season_start">
+                            ${(stored_season.id != 'none')
+                            ? trans[lang].settings.customise.seasonal.marker.started.replace('{time}', moment(stored_season.start.replace('y0', stored_season.year)).from(stored_season.now))
+                            : ''}
+                        </div>
+                    </div>
+                </div>
                 <h4>${trans[lang].settings.home.recommended}</h4>
                 <div class="setting-items">
                     <div class="side-left">
@@ -3912,92 +3934,350 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 <div class="bleh--panel">
                     <h3>${trans[lang].settings.customise.colours.name}</h3>
                     <h5>${trans[lang].settings.customise.colours.presets}</h5>
-                    <div class="palette options">
-                        <button class="btn" style="
-                            --hue: -2;
-                            --sat: 1;
-                            --lit: 0.8" onclick="_update_params({
-                            hue: -2,
-                            sat: 1,
-                            lit: 0.8
-                        })"></button>
-                        <button class="btn" style="
-                            --hue: 10;
-                            --sat: 1;
-                            --lit: 0.9" onclick="_update_params({
-                            hue: 10,
-                            sat: 1,
-                            lit: 0.9
-                        })"></button>
-                        <button class="btn" style="
-                            --hue: 35;
-                            --sat: 1.2;
-                            --lit: 1" onclick="_update_params({
-                            hue: 35,
-                            sat: 1.2,
-                            lit: 1
-                        })"></button>
-                        <button class="btn" style="
-                            --hue: 85;
-                            --sat: 1;
-                            --lit: 1" onclick="_update_params({
-                            hue: 85,
-                            sat: 1,
-                            lit: 1
-                        })"></button>
-                        <button class="btn" style="
-                            --hue: 115;
-                            --sat: 1;
-                            --lit: 1" onclick="_update_params({
-                            hue: 115,
-                            sat: 1,
-                            lit: 1
-                        })"></button>
-                        <button class="btn" style="
-                            --hue: 155;
-                            --sat: 1;
-                            --lit: 1" onclick="_update_params({
-                            hue: 155,
-                            sat: 1,
-                            lit: 1
-                        })"></button>
-                        <button class="btn" style="
-                            --hue: 185;
-                            --sat: 1;
-                            --lit: 1" onclick="_update_params({
-                            hue: 185,
-                            sat: 1,
-                            lit: 1
-                        })"></button>
-                        <button class="btn" style="
-                            --hue: 222;
-                            --sat: 1;
-                            --lit: 0.9" onclick="_update_params({
-                            hue: 222,
-                            sat: 1,
-                            lit: 0.9
-                        })"></button>
-                        <button class="btn" style="
-                            --hue: 255;
-                            --sat: 1;
-                            --lit: 1" onclick="_update_params({
+                    <div class="palette options colours" id="custom_colours">
+                        <button class="swatch btn default" style="
+                            --hue: var(--hue-seasonal, 255);
+                            --sat: var(--sat-seasonal, 1);
+                            --lit: var(--lit-seasonal, 1)" onclick="_update_params({
                             hue: 255,
                             sat: 1,
                             lit: 1
                         })"></button>
-                        <button class="btn" style="
-                            --hue: 333;
-                            --sat: 1;
-                            --lit: 1" onclick="_update_params({
-                            hue: 333,
-                            sat: 1,
-                            lit: 1
-                        })"></button>
+                        <button class="swatch btn custom" style="
+                            --hue: var(--hue-user, 255);
+                            --sat: var(--sat-user, 1);
+                            --lit: var(--lit-user, 1)" onclick="_create_a_custom_colour()"></button>
                     </div>
-                    <h5>${trans[lang].settings.customise.colours.manual}</h5>
-                    <button class="btn primary btn--has-icon btn--has-icon-left btn--custom-colour" onclick="_create_a_custom_colour()">
-                        ${trans[lang].settings.customise.colours.custom}
-                    </button>
+                    <div class="palette options colours">
+                        <div class="side">
+                            <button class="swatch btn" style="
+                                --hue: -2;
+                                --sat: 1.35;
+                                --lit: 0.8" onclick="_update_params({
+                                hue: -2,
+                                sat: 1.35,
+                                lit: 0.8
+                            })"></button>
+                            <button class="swatch btn" style="
+                                --hue: -2;
+                                --sat: 1.25;
+                                --lit: 0.85" onclick="_update_params({
+                                hue: -2,
+                                sat: 1.25,
+                                lit: 0.85
+                            })"></button>
+                            <button class="swatch btn" style="
+                                --hue: 354;
+                                --sat: 1.25;
+                                --lit: 0.9" onclick="_update_params({
+                                hue: 354,
+                                sat: 1.25,
+                                lit: 0.9
+                            })"></button>
+                            <button class="swatch btn" style="
+                                --hue: 349;
+                                --sat: 1.2;
+                                --lit: 0.9" onclick="_update_params({
+                                hue: 349,
+                                sat: 1.2,
+                                lit: 0.9
+                            })"></button>
+                            <button class="swatch btn" style="
+                                --hue: 342;
+                                --sat: 1.3;
+                                --lit: 0.8" onclick="_update_params({
+                                hue: 342,
+                                sat: 1.3,
+                                lit: 0.8
+                            })"></button>
+                            <button class="swatch btn" style="
+                                --hue: 333;
+                                --sat: 1.3;
+                                --lit: 0.85" onclick="_update_params({
+                                hue: 333,
+                                sat: 1.3,
+                                lit: 0.85
+                            })"></button>
+                            <button class="swatch btn" style="
+                                --hue: 326;
+                                --sat: 1.1;
+                                --lit: 0.9" onclick="_update_params({
+                                hue: 326,
+                                sat: 1.1,
+                                lit: 0.9
+                            })"></button>
+                            <button class="swatch btn" style="
+                                --hue: 300;
+                                --sat: 1.2;
+                                --lit: 0.9" onclick="_update_params({
+                                hue: 300,
+                                sat: 1.2,
+                                lit: 0.9
+                            })"></button>
+                            <button class="swatch btn" style="
+                                --hue: 280;
+                                --sat: 1.2;
+                                --lit: 0.9" onclick="_update_params({
+                                hue: 280,
+                                sat: 1.2,
+                                lit: 0.9
+                            })"></button>
+                            <button class="swatch btn" style="
+                                --hue: 270;
+                                --sat: 1.25;
+                                --lit: 0.9" onclick="_update_params({
+                                hue: 270,
+                                sat: 1.25,
+                                lit: 0.9
+                            })"></button>
+                        </div>
+                        <div class="side">
+                            <button class="swatch btn" style="
+                                --hue: 7;
+                                --sat: 1.35;
+                                --lit: 0.87" onclick="_update_params({
+                                hue: 7,
+                                sat: 1.35,
+                                lit: 0.87
+                            })"></button>
+                            <button class="swatch btn" style="
+                                --hue: 9;
+                                --sat: 1.25;
+                                --lit: 0.9" onclick="_update_params({
+                                hue: 9,
+                                sat: 1.25,
+                                lit: 0.9
+                            })"></button>
+                            <button class="swatch btn" style="
+                                --hue: 14;
+                                --sat: 1.25;
+                                --lit: 0.9" onclick="_update_params({
+                                hue: 14,
+                                sat: 1.25,
+                                lit: 0.9
+                            })"></button>
+                            <button class="swatch btn" style="
+                                --hue: 18;
+                                --sat: 1.2;
+                                --lit: 0.95" onclick="_update_params({
+                                hue: 18,
+                                sat: 1.2,
+                                lit: 0.95
+                            })"></button>
+                            <button class="swatch btn" style="
+                                --hue: 24;
+                                --sat: 1.2;
+                                --lit: 0.95" onclick="_update_params({
+                                hue: 24,
+                                sat: 1.2,
+                                lit: 0.95
+                            })"></button>
+                            <button class="swatch btn" style="
+                                --hue: 30;
+                                --sat: 1.3;
+                                --lit: 1" onclick="_update_params({
+                                hue: 30,
+                                sat: 1.3,
+                                lit: 1
+                            })"></button>
+                            <button class="swatch btn" style="
+                                --hue: 38;
+                                --sat: 1.4;
+                                --lit: 1" onclick="_update_params({
+                                hue: 38,
+                                sat: 1.4,
+                                lit: 1
+                            })"></button>
+                            <button class="swatch btn" style="
+                                --hue: 49;
+                                --sat: 1.4;
+                                --lit: 1" onclick="_update_params({
+                                hue: 49,
+                                sat: 1.4,
+                                lit: 1
+                            })"></button>
+                            <button class="swatch btn" style="
+                                --hue: 53;
+                                --sat: 1.3;
+                                --lit: 1" onclick="_update_params({
+                                hue: 53,
+                                sat: 1.3,
+                                lit: 1
+                            })"></button>
+                            <button class="swatch btn" style="
+                                --hue: 62;
+                                --sat: 1.25;
+                                --lit: 1" onclick="_update_params({
+                                hue: 62,
+                                sat: 1.25,
+                                lit: 1
+                            })"></button>
+                        </div>
+                        <div class="side">
+                            <button class="swatch btn" style="
+                                --hue: 75;
+                                --sat: 1.1;
+                                --lit: 1" onclick="_update_params({
+                                hue: 75,
+                                sat: 1.1,
+                                lit: 1
+                            })"></button>
+                            <button class="swatch btn" style="
+                                --hue: 85;
+                                --sat: 1;
+                                --lit: 1" onclick="_update_params({
+                                hue: 85,
+                                sat: 1,
+                                lit: 1
+                            })"></button>
+                            <button class="swatch btn" style="
+                                --hue: 95;
+                                --sat: 1.1;
+                                --lit: 1" onclick="_update_params({
+                                hue: 95,
+                                sat: 1.1,
+                                lit: 1
+                            })"></button>
+                            <button class="swatch btn" style="
+                                --hue: 115;
+                                --sat: 1;
+                                --lit: 1" onclick="_update_params({
+                                hue: 115,
+                                sat: 1,
+                                lit: 1
+                            })"></button>
+                            <button class="swatch btn" style="
+                                --hue: 130;
+                                --sat: 1.2;
+                                --lit: 1" onclick="_update_params({
+                                hue: 130,
+                                sat: 1.2,
+                                lit: 1
+                            })"></button>
+                            <button class="swatch btn" style="
+                                --hue: 140;
+                                --sat: 1.2;
+                                --lit: 0.95" onclick="_update_params({
+                                hue: 140,
+                                sat: 1.2,
+                                lit: 0.95
+                            })"></button>
+                            <button class="swatch btn" style="
+                                --hue: 155;
+                                --sat: 1.2;
+                                --lit: 1" onclick="_update_params({
+                                hue: 155,
+                                sat: 1.2,
+                                lit: 1
+                            })"></button>
+                            <button class="swatch btn" style="
+                                --hue: 165;
+                                --sat: 1.1;
+                                --lit: 1" onclick="_update_params({
+                                hue: 165,
+                                sat: 1.1,
+                                lit: 1
+                            })"></button>
+                            <button class="swatch btn" style="
+                                --hue: 174;
+                                --sat: 1.1;
+                                --lit: 1" onclick="_update_params({
+                                hue: 174,
+                                sat: 1.1,
+                                lit: 1
+                            })"></button>
+                            <button class="swatch btn" style="
+                                --hue: 184;
+                                --sat: 1;
+                                --lit: 1.05" onclick="_update_params({
+                                hue: 184,
+                                sat: 1,
+                                lit: 1.05
+                            })"></button>
+                        </div>
+                        <div class="side">
+                            <button class="swatch btn" style="
+                                --hue: 205;
+                                --sat: 1;
+                                --lit: 1" onclick="_update_params({
+                                hue: 205,
+                                sat: 1,
+                                lit: 1
+                            })"></button>
+                            <button class="swatch btn" style="
+                                --hue: 222;
+                                --sat: 1;
+                                --lit: 0.9" onclick="_update_params({
+                                hue: 222,
+                                sat: 1,
+                                lit: 0.9
+                            })"></button>
+                            <button class="swatch btn" style="
+                                --hue: 230;
+                                --sat: 1.3;
+                                --lit: 0.9" onclick="_update_params({
+                                hue: 230,
+                                sat: 1.3,
+                                lit: 0.9
+                            })"></button>
+                            <button class="swatch btn" style="
+                                --hue: 230;
+                                --sat: 1.3;
+                                --lit: 0.825" onclick="_update_params({
+                                hue: 230,
+                                sat: 1.3,
+                                lit: 0.825
+                            })"></button>
+                            <button class="swatch btn" style="
+                                --hue: 243;
+                                --sat: 1.3;
+                                --lit: 0.9" onclick="_update_params({
+                                hue: 243,
+                                sat: 1.3,
+                                lit: 0.9
+                            })"></button>
+                            <button class="swatch btn" style="
+                                --hue: 249;
+                                --sat: 1.3;
+                                --lit: 0.9" onclick="_update_params({
+                                hue: 249,
+                                sat: 1.3,
+                                lit: 0.9
+                            })"></button>
+                            <button class="swatch btn" style="
+                                --hue: 255;
+                                --sat: 1.2;
+                                --lit: 0.9" onclick="_update_params({
+                                hue: 255,
+                                sat: 1.2,
+                                lit: 0.9
+                            })"></button>
+                            <button class="swatch btn" style="
+                                --hue: 263;
+                                --sat: 1.2;
+                                --lit: 0.9" onclick="_update_params({
+                                hue: 263,
+                                sat: 1.2,
+                                lit: 0.9
+                            })"></button>
+                            <button class="swatch btn" style="
+                                --hue: 260;
+                                --sat: 1.1;
+                                --lit: 0.95" onclick="_update_params({
+                                hue: 260,
+                                sat: 1.1,
+                                lit: 0.95
+                            })"></button>
+                            <button class="swatch btn" style="
+                                --hue: 255;
+                                --sat: 1;
+                                --lit: 0.95" onclick="_update_params({
+                                hue: 255,
+                                sat: 1,
+                                lit: 0.95
+                            })"></button>
+                        </div>
+                    </div>
                     <div class="sep"></div>
                     <div class="inner-preview pad">
                         <div class="personal-stats-preview-bar-container">
@@ -4177,12 +4457,12 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     <h3>${trans[lang].settings.customise.artwork.name}</h3>
                     <div class="inner-preview pad">
                         <div class="palette albums" style="height: fit-content">
-                            <div class="album-cover" style="background-image: url('https://lastfm.freetls.fastly.net/i/u/770x0/1569198c4cf0a3b2ff8728975e8359fa.jpg')"></div>
-                            <div class="album-cover" style="background-image: url('https://lastfm.freetls.fastly.net/i/u/770x0/b897255bf422baa93a42536af293f9f8.jpg')"></div>
-                            <div class="album-cover" style="background-image: url('https://lastfm.freetls.fastly.net/i/u/770x0/a78bbd5ff0184115902f403212f04976.jpg')"></div>
-                            <div class="album-cover" style="background-image: url('https://lastfm.freetls.fastly.net/i/u/770x0/ddee3b871289a6cda0e3c7d4b4580d62.jpg')"></div>
-                            <div class="album-cover" style="background-image: url('https://lastfm.freetls.fastly.net/i/u/770x0/570021b68d3d9d2db08bc99a473303b0.jpg')"></div>
-                            <div class="album-cover" style="background-image: url('https://lastfm.freetls.fastly.net/i/u/770x0/e39eb31f874f4a5c4afa836845141437.jpg')"></div>
+                            <div class="album-cover swatch" style="background-image: url('https://lastfm.freetls.fastly.net/i/u/770x0/1569198c4cf0a3b2ff8728975e8359fa.jpg')"></div>
+                            <div class="album-cover swatch" style="background-image: url('https://lastfm.freetls.fastly.net/i/u/770x0/b897255bf422baa93a42536af293f9f8.jpg')"></div>
+                            <div class="album-cover swatch" style="background-image: url('https://lastfm.freetls.fastly.net/i/u/770x0/def68d94aae8e52ef2d1c0c9d3e16ff4.jpg')"></div>
+                            <div class="album-cover swatch" style="background-image: url('https://lastfm.freetls.fastly.net/i/u/770x0/e9dd5c8d3294ca0a0f58cbf7ad5fd6a6.jpg')"></div>
+                            <div class="album-cover swatch" style="background-image: url('https://lastfm.freetls.fastly.net/i/u/770x0/570021b68d3d9d2db08bc99a473303b0.jpg')"></div>
+                            <div class="album-cover swatch" style="background-image: url('https://lastfm.freetls.fastly.net/i/u/770x0/4cc13056c7568b5c207dd7aee03fdb0f.jpg')"></div>
                         </div>
                     </div>
                     <div class="toggle-container" id="container-hue_from_album">
@@ -4614,10 +4894,17 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
         if (page == 'customise' && settings.seasonal && stored_season.id != 'none') {
             tippy(document.getElementById('current_season'), {
-                content: new Date(stored_season.end.replace('y0', stored_season.year))
+                content: new Date(stored_season.end.replace('y0', stored_season.year)).toLocaleString()
             });
             tippy(document.getElementById('current_season_start'), {
-                content: new Date(stored_season.start.replace('y0', stored_season.year))
+                content: new Date(stored_season.start.replace('y0', stored_season.year)).toLocaleString()
+            });
+
+            tippy(document.body.querySelector('.swatch.default'), {
+                content: (stored_season.id != 'none') ? trans[lang].settings.customise.colours.default_with_season.replace('{season}', stored_season.name) : trans[lang].settings.customise.colours.default
+            });
+            tippy(document.body.querySelector('.swatch.custom'), {
+                content: trans[lang].settings.customise.colours.custom
             });
         }
     }
@@ -4982,6 +5269,28 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             document.getElementById('bleh--panel-main').innerHTML = render_setting_page('customise');
             refresh_all();
         }*/
+
+        if (item == 'hue' || item == 'sat' || item == 'lit') {
+            update_colour_swatches();
+        }
+    }
+
+    function update_colour_swatches() {
+        let swatches = document.body.querySelectorAll('.swatch');
+        swatches.forEach((swatch) => {
+            let h = swatch.style.getPropertyValue('--hue');
+            let s = swatch.style.getPropertyValue('--sat');
+            let l = swatch.style.getPropertyValue('--lit');
+
+            if (
+                (h == settings.hue && s == settings.sat && l == settings.lit) ||
+                (swatch.classList.contains('default') && settings.hue == 255 && settings.sat == 1 && settings.lit == 1) // default
+            ) {
+                swatch.classList.add('selected');
+            } else {
+                swatch.classList.remove('selected');
+            }
+        });
     }
 
 
@@ -5078,12 +5387,12 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         <br>
         <div class="inner-preview pad">
             <div class="palette">
-                <div style="--col: hsl(var(--l2-c))"></div>
-                <div style="--col: hsl(var(--l3-c))"></div>
-                <div style="--col: hsl(var(--l4-c))"></div>
-                <div style="--col: hsl(var(--l2))"></div>
-                <div style="--col: hsl(var(--l3))"></div>
-                <div style="--col: hsl(var(--l4))"></div>
+                <div class="swatch" style="--col: hsl(var(--l2-c))"></div>
+                <div class="swatch" style="--col: hsl(var(--l3-c))"></div>
+                <div class="swatch" style="--col: hsl(var(--l4-c))"></div>
+                <div class="swatch" style="--col: hsl(var(--l2))"></div>
+                <div class="swatch" style="--col: hsl(var(--l3))"></div>
+                <div class="swatch" style="--col: hsl(var(--l4))"></div>
             </div>
             <div class="sep"></div>
             <div class="btn-row">
@@ -5370,6 +5679,11 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     // mark character in string
                     let chr = lowercase_title.indexOf(`${includes[group][possible_match]}`);
 
+                    // featuring ty dolla $ign
+                    // skips if this is the first character
+                    if (chr < 1)
+                        return;
+
                     extras.push({
                         type: includes[group][possible_match],
                         group: group,
@@ -5407,7 +5721,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             let field_group = extras[extra].group;
             // remove beginning tag
             let field_text = extras[extra].text
-            .replace(' feat. ', '').replace('feat. ', '').replace('featuring ', '').replace('Feat. ', '').replace('ft. ', '')
+            .replace(' feat. ', '').replace('feat. ', '').replace('featuring ', '').replace('Feat. ', '').replace('ft. ', '').replace('FEAT. ', '')
             .replace('w/ ', '').replace('with ', '')
             .replaceAll(' & ', ';').replaceAll(', ', ';').replaceAll(' and ', ';')
             .replaceAll('Tyler;the', 'Tyler, the').replaceAll(' with ', ';')
