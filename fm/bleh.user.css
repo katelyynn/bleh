@@ -12075,6 +12075,7 @@ code, kbd, samp {
 }
 
 
+.palette .side,
 .palette {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
@@ -12083,10 +12084,21 @@ code, kbd, samp {
 }
 
 .palette.options {
-    grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+    width: fit-content;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    height: fit-content;
+
+    .swatch {
+        width: 50px !important;
+        height: 50px !important;
+    }
+}
+.palette .side {
+    width: fit-content;
+    grid-template-columns: 1fr 1fr;
     height: fit-content;
 }
-.palette.options > button {
+.swatch {
     aspect-ratio: 1 / 1;
     --bg: hsl(var(--h3));
     --bg-hov: hsla(var(--h3), 90%);
@@ -12126,7 +12138,7 @@ code, kbd, samp {
     }
 
     &.selected {
-        outline: 2px solid hsl(var(--c1));
+        outline: 2px solid hsl(var(--c1)) !important;
         /*border: 3px solid hsl(var(--b6)) !important;
 
         --left: 10px;*/
@@ -12141,7 +12153,7 @@ code, kbd, samp {
 .palette + .palette {
     margin-top: 6px;
 }
-.palette > div {
+.swatch {
     background-color: var(--col, hsl(var(--b6)));
     border-radius: var(--item-med-radius);
 }
