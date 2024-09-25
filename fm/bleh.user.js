@@ -3822,10 +3822,42 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             </div>
             `);
         } else if (page == 'themes') {
+            let preview_bar = 'background: linear-gradient(90deg';
+            let preview_bar_text = '';
+
+            // global sat/lit is used to substitute the values computed in h3 sat/lit
+            // as they return eg. calc(0.85 * 50%), so we use global_sat to get 0.85
+            // which can then be used in a .replace(global_sat, 'whatever we want')
+            let global_sat = getComputedStyle(document.body).getPropertyValue('--sat');
+            let global_lit = getComputedStyle(document.body).getPropertyValue('--lit');
+            let h3_sat = getComputedStyle(document.body).getPropertyValue('--h3-sat');
+            let h3_lit = getComputedStyle(document.body).getPropertyValue('--h3-lit');
+
+            let maximum = 16_000;
+            let max_rank = 11;
+
+            //console.info(maximum, max_rank);
+            for (let rank = 0; rank <= max_rank; rank++) {
+                let this_rank = ranks[parseInt(rank)];
+                //console.info(this_rank);
+
+                let percent = ((this_rank.start / maximum) * 100);
+                preview_bar = `${preview_bar}, hsl(${this_rank.hue}, ${h3_sat.replace(global_sat, this_rank.sat)}, ${h3_lit.replace(global_lit, this_rank.lit)}) ${percent}%`;
+
+                if ((this_rank.start > 500 || this_rank.start == 0) && this_rank.start != 1500) {
+                    let text = `${this_rank.start}`;
+
+                    preview_bar_text = `${preview_bar_text}<div class="preview-bar-text-entry" style="left: ${percent}%">${text.replaceAll('_', ',')}</div>`;
+                }
+            }
+
+            preview_bar = `${preview_bar});`;
+            //console.info('preview bar', preview_bar, global_sat, h3_sat, global_lit, h3_lit);
+
             return (`
                 <div class="bleh--panel">
                     <h3>${trans[lang].settings.themes.name}</h3>
-                    <h4>${trans[lang].settings.themes.dark.name}</h4>
+                    <!--<h4>${trans[lang].settings.themes.dark.name}</h4>-->
                     <div class="setting-items">
                         <div class="side-left full more">
                             <button class="btn setting-item has-image" data-bleh-theme="dark" onclick="change_theme_from_settings('dark')">
@@ -3866,7 +3898,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                             </button>
                         </div>
                     </div>
-                    <h4>${trans[lang].settings.themes.light.name}</h4>
+                    <!--<h4>${trans[lang].settings.themes.light.name}</h4>-->
                     <div class="setting-items">
                         <div class="side-left full more">
                             <button class="btn setting-item has-image" data-bleh-theme="light" onclick="change_theme_from_settings('light')">
@@ -3895,45 +3927,9 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                             </button>-->
                         </div>
                     </div>
-                </div>
-                `);
-        } else if (page == 'customise') {
-            let preview_bar = 'background: linear-gradient(90deg';
-            let preview_bar_text = '';
-
-            // global sat/lit is used to substitute the values computed in h3 sat/lit
-            // as they return eg. calc(0.85 * 50%), so we use global_sat to get 0.85
-            // which can then be used in a .replace(global_sat, 'whatever we want')
-            let global_sat = getComputedStyle(document.body).getPropertyValue('--sat');
-            let global_lit = getComputedStyle(document.body).getPropertyValue('--lit');
-            let h3_sat = getComputedStyle(document.body).getPropertyValue('--h3-sat');
-            let h3_lit = getComputedStyle(document.body).getPropertyValue('--h3-lit');
-
-            let maximum = 16_000;
-            let max_rank = 11;
-
-            //console.info(maximum, max_rank);
-            for (let rank = 0; rank <= max_rank; rank++) {
-                let this_rank = ranks[parseInt(rank)];
-                //console.info(this_rank);
-
-                let percent = ((this_rank.start / maximum) * 100);
-                preview_bar = `${preview_bar}, hsl(${this_rank.hue}, ${h3_sat.replace(global_sat, this_rank.sat)}, ${h3_lit.replace(global_lit, this_rank.lit)}) ${percent}%`;
-
-                if ((this_rank.start > 500 || this_rank.start == 0) && this_rank.start != 1500) {
-                    let text = `${this_rank.start}`;
-
-                    preview_bar_text = `${preview_bar_text}<div class="preview-bar-text-entry" style="left: ${percent}%">${text.replaceAll('_', ',')}</div>`;
-                }
-            }
-
-            preview_bar = `${preview_bar});`;
-            //console.info('preview bar', preview_bar, global_sat, h3_sat, global_lit, h3_lit);
-
-            return (`
-                <div class="bleh--panel">
-                    <h3>${trans[lang].settings.customise.colours.name}</h3>
-                    <h5>${trans[lang].settings.customise.colours.presets}</h5>
+                    <div class="sep"></div>
+                    <h4>${trans[lang].settings.customise.colours.name}</h4>
+                    <!--<h5>${trans[lang].settings.customise.colours.presets}</h5>-->
                     <div class="palette options colours" id="custom_colours">
                         <button class="swatch btn default" style="
                             --hue: var(--hue-seasonal, 255);
@@ -4398,6 +4394,9 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                         </div>
                     </div>
                 </div>
+                `);
+        } else if (page == 'customise') {
+            return (`
                 <div class="bleh--panel">
                     <h3>${trans[lang].settings.customise.seasonal.name}</h3>
                     <p>${trans[lang].settings.customise.seasonal.bio}</p>
