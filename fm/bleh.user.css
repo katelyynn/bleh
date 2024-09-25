@@ -11831,6 +11831,28 @@ so this is good enough - use the community docs */
                 &[data-bleh-page="text"] {
                     --mask: var(--icon-16-shoutbox);
                 }
+                &[data-bleh-page="seasonal"] {
+                    --mask: var(--icon-16-calendar);
+
+                    &[data-season="easter"] {
+                        --mask: var(--icon-16-egg);
+                    }
+                    &[data-season="halloween"] {
+                        --mask: var(--icon-16-pumpkin);
+                    }
+                    &[data-season="pre_fall"] {
+                        --mask: var(--icon-16-fall);
+                    }
+                    &[data-season="fall"] {
+                        --mask: var(--icon-16-fall);
+                    }
+                    &[data-season="christmas"] {
+                        --mask: var(--icon-16-snow);
+                    }
+                    &[data-season="new_years"] {
+                        --mask: var(--icon-16-new-years);
+                    }
+                }
 
                 &:not(.active) {
                     --bg: transparent;
@@ -12207,7 +12229,7 @@ code, kbd, samp {
                 .preview-header {
                     display: block;
                     width: 90px;
-                    height: 8px;
+                    height: 6px;
                     background-color: hsl(var(--c1));
                     border-radius: var(--item-med-radius);
                 }
@@ -12215,14 +12237,16 @@ code, kbd, samp {
                 .preview-text {
                     display: block;
                     width: 80px;
-                    height: 4px;
+                    height: 3px;
                     background-color: hsl(var(--c2));
-                    border-radius: var(--item-med-radius);
+                    border-radius: 50px;
 
                     margin-top: -4px;
 
                     &.row-2 {
                         width: 40px;
+
+                        margin-top: -6px;
                     }
                 }
 

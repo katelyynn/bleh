@@ -3678,17 +3678,17 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                         <button class="btn bleh--btn" data-bleh-page="themes" onclick="_change_settings_page('themes')">
                             ${trans[lang].settings.appearance.name}
                         </button>
-                        <button class="btn bleh--btn" data-bleh-page="customise" onclick="_change_settings_page('customise')">
-                            ${trans[lang].settings.customise.name}
-                        </button>
-                        <button class="btn bleh--btn" data-bleh-page="profiles" onclick="_change_settings_page('profiles')">
-                            ${trans[lang].settings.profiles.name}
-                        </button>
-                    </div>
-                    <div class="btns sep">
                         <button class="btn bleh--btn" data-bleh-page="accessibility" onclick="_change_settings_page('accessibility')">
                             ${trans[lang].settings.accessibility.name}
                         </button>
+                        <button class="btn bleh--btn" data-bleh-page="seasonal" data-season="${stored_season.id}" onclick="_change_settings_page('seasonal')">
+                            ${trans[lang].settings.customise.seasonal.name}
+                        </button>
+                        <button class="btn bleh--btn" data-bleh-page="customise" onclick="_change_settings_page('customise')">
+                            ${trans[lang].settings.customise.name}
+                        </button>
+                    </div>
+                    <div class="btns sep">
                         <button class="btn bleh--btn" data-bleh-page="text" onclick="_change_settings_page('text')">
                             ${trans[lang].settings.text.name}
                         </button>
@@ -3713,6 +3713,9 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                         </button>
                     </div>
                     <div class="btns sep">
+                        <button class="btn bleh--btn" data-bleh-page="profiles" onclick="_change_settings_page('profiles')">
+                            ${trans[lang].settings.profiles.name}
+                        </button>
                         <button class="btn bleh--btn" data-bleh-page="performance" onclick="_change_settings_page('performance')">
                             ${trans[lang].settings.performance.name}
                         </button>
@@ -4387,61 +4390,6 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         } else if (page == 'customise') {
             return (`
                 <div class="bleh--panel">
-                    <h3>${trans[lang].settings.customise.seasonal.name}</h3>
-                    <p>${trans[lang].settings.customise.seasonal.bio}</p>
-                    <div class="inner-preview pad click-thru">
-                        <div class="current-season-container">
-                            <div class="current-season" data-season="${stored_season.id}" id="current_season">
-                                ${(stored_season.id != 'none')
-                                ? trans[lang].settings.customise.seasonal.marker.current.replace('{season}', stored_season.name).replace('{time}', moment(stored_season.end.replace('y0', stored_season.year)).to(stored_season.now, true))
-                                : (settings.seasonal) ? trans[lang].settings.customise.seasonal.marker.none : trans[lang].settings.customise.seasonal.marker.disabled}
-                            </div>
-                            <div class="current-season-started" id="current_season_start">
-                                ${(stored_season.id != 'none')
-                                ? trans[lang].settings.customise.seasonal.marker.started.replace('{time}', moment(stored_season.start.replace('y0', stored_season.year)).from(stored_season.now))
-                                : ''}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="toggle-container" id="container-seasonal">
-                        <button class="btn reset" onclick="_reset_item('seasonal')">${trans[lang].settings.reset}</button>
-                        <div class="heading">
-                            <h5>${trans[lang].settings.customise.seasonal.option.name}</h5>
-                            <p>${trans[lang].settings.customise.seasonal.option.bio}</p>
-                        </div>
-                        <div class="toggle-wrap">
-                            <button class="toggle" id="toggle-seasonal" onclick="_update_item('seasonal')" aria-checked="true">
-                                <div class="dot"></div>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="sep"></div>
-                    <div class="toggle-container hide-if-seasonal-disabled" id="container-seasonal_particles">
-                        <button class="btn reset" onclick="_reset_item('seasonal_particles')">${trans[lang].settings.reset}</button>
-                        <div class="heading">
-                            <h5>${trans[lang].settings.customise.seasonal.particles.name}</h5>
-                            <p>${trans[lang].settings.customise.seasonal.particles.bio}</p>
-                        </div>
-                        <div class="toggle-wrap">
-                            <button class="toggle" id="toggle-seasonal_particles" onclick="_update_item('seasonal_particles')" aria-checked="true">
-                                <div class="dot"></div>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="toggle-container hide-if-seasonal-disabled" id="container-seasonal_overlays">
-                        <button class="btn reset" onclick="_reset_item('seasonal_overlays')">${trans[lang].settings.reset}</button>
-                        <div class="heading">
-                            <h5>${trans[lang].settings.customise.seasonal.overlays.name}</h5>
-                            <p>${trans[lang].settings.customise.seasonal.overlays.bio}</p>
-                        </div>
-                        <div class="toggle-wrap">
-                            <button class="toggle" id="toggle-seasonal_overlays" onclick="_update_item('seasonal_overlays')" aria-checked="true">
-                                <div class="dot"></div>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="bleh--panel">
                     <h3>${trans[lang].settings.customise.artwork.name}</h3>
                     <div class="inner-preview pad">
                         <div class="palette albums" style="height: fit-content">
@@ -4550,6 +4498,64 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     </div>
                 </div>
                 `);
+        } else if (page == 'seasonal') {
+            return (`
+                <div class="bleh--panel">
+                    <h3>${trans[lang].settings.customise.seasonal.name}</h3>
+                    <p>${trans[lang].settings.customise.seasonal.bio}</p>
+                    <div class="inner-preview pad click-thru">
+                        <div class="current-season-container">
+                            <div class="current-season" data-season="${stored_season.id}" id="current_season">
+                                ${(stored_season.id != 'none')
+                                ? trans[lang].settings.customise.seasonal.marker.current.replace('{season}', stored_season.name).replace('{time}', moment(stored_season.end.replace('y0', stored_season.year)).to(stored_season.now, true))
+                                : (settings.seasonal) ? trans[lang].settings.customise.seasonal.marker.none : trans[lang].settings.customise.seasonal.marker.disabled}
+                            </div>
+                            <div class="current-season-started" id="current_season_start">
+                                ${(stored_season.id != 'none')
+                                ? trans[lang].settings.customise.seasonal.marker.started.replace('{time}', moment(stored_season.start.replace('y0', stored_season.year)).from(stored_season.now))
+                                : ''}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="toggle-container" id="container-seasonal">
+                        <button class="btn reset" onclick="_reset_item('seasonal')">${trans[lang].settings.reset}</button>
+                        <div class="heading">
+                            <h5>${trans[lang].settings.customise.seasonal.option.name}</h5>
+                            <p>${trans[lang].settings.customise.seasonal.option.bio}</p>
+                        </div>
+                        <div class="toggle-wrap">
+                            <button class="toggle" id="toggle-seasonal" onclick="_update_item('seasonal')" aria-checked="true">
+                                <div class="dot"></div>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="sep"></div>
+                    <div class="toggle-container hide-if-seasonal-disabled" id="container-seasonal_particles">
+                        <button class="btn reset" onclick="_reset_item('seasonal_particles')">${trans[lang].settings.reset}</button>
+                        <div class="heading">
+                            <h5>${trans[lang].settings.customise.seasonal.particles.name}</h5>
+                            <p>${trans[lang].settings.customise.seasonal.particles.bio}</p>
+                        </div>
+                        <div class="toggle-wrap">
+                            <button class="toggle" id="toggle-seasonal_particles" onclick="_update_item('seasonal_particles')" aria-checked="true">
+                                <div class="dot"></div>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="toggle-container hide-if-seasonal-disabled" id="container-seasonal_overlays">
+                        <button class="btn reset" onclick="_reset_item('seasonal_overlays')">${trans[lang].settings.reset}</button>
+                        <div class="heading">
+                            <h5>${trans[lang].settings.customise.seasonal.overlays.name}</h5>
+                            <p>${trans[lang].settings.customise.seasonal.overlays.bio}</p>
+                        </div>
+                        <div class="toggle-wrap">
+                            <button class="toggle" id="toggle-seasonal_overlays" onclick="_update_item('seasonal_overlays')" aria-checked="true">
+                                <div class="dot"></div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `);
         } else if (page == 'performance') {
             return (`
                 <div class="bleh--panel">
@@ -4891,7 +4897,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             });
         }
 
-        if ((page == 'customise' || page == 'home') && settings.seasonal && stored_season.id != 'none') {
+        if ((page == 'seasonal' || page == 'home') && settings.seasonal && stored_season.id != 'none') {
             tippy(document.getElementById('current_season'), {
                 content: new Date(stored_season.end.replace('y0', stored_season.year)).toLocaleString()
             });
