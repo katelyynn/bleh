@@ -145,6 +145,8 @@ const trans = {
                     presets: 'Presets',
                     manual: 'Manual',
                     custom: 'Create a custom colour',
+                    default_with_season: 'Default colour for {season}',
+                    default: 'Default colour',
                     modals: {
                         custom_colour: {
                             preface: 'Colours are controlled by three values: hue, saturation, and lightness. Try out the sliders to get a feel.',
@@ -889,8 +891,28 @@ let stored_season = {
 };
 let seasonal_events = [
     {
+        id: 'new_years',
+        name: 'New Years',
+        start: 'y0-01-01',
+        end: 'y0-01-10T23:59:59',
+
+        snowflakes: {
+            state: true,
+            count: 50
+        }
+    },
+    {
+        id: 'easter',
+        name: 'Easter',
+        start: 'y0-04-05',
+        end: 'y0-04-30T23:59:59',
+
+        snowflakes: {
+            state: false
+        }
+    },
+    {
         id: 'halloween',
-        icon: 'moon',
         name: 'Halloween',
         start: 'y0-09-22',
         end: 'y0-11-02T23:59:59',
@@ -901,7 +923,6 @@ let seasonal_events = [
     },
     {
         id: 'pre_fall',
-        icon: 'leaf',
         name: 'Pre-Fall',
         start: 'y0-11-05',
         end: 'y0-11-12T23:59:59',
@@ -913,7 +934,6 @@ let seasonal_events = [
     },
     {
         id: 'fall',
-        icon: 'leaf',
         name: 'Fall',
         start: 'y0-11-13',
         end: 'y0-11-22T23:59:59',
@@ -925,7 +945,6 @@ let seasonal_events = [
     },
     {
         id: 'christmas',
-        icon: 'snowflake',
         name: 'Christmas',
         start: 'y0-11-23',
         end: 'y0-12-31T23:59:59',
@@ -933,18 +952,6 @@ let seasonal_events = [
         snowflakes: {
             state: true,
             count: 80
-        }
-    },
-    {
-        id: 'new_years',
-        icon: 'party-popper',
-        name: 'New Years',
-        start: 'y0-01-01',
-        end: 'y0-01-10T23:59:59',
-
-        snowflakes: {
-            state: true,
-            count: 50
         }
     }
 ];
@@ -3912,7 +3919,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 <div class="bleh--panel">
                     <h3>${trans[lang].settings.customise.colours.name}</h3>
                     <h5>${trans[lang].settings.customise.colours.presets}</h5>
-                    <div class="palette options colours">
+                    <div class="palette options colours" id="custom_colours">
                         <button class="swatch btn default" style="
                             --hue: var(--hue-seasonal, 255);
                             --sat: var(--sat-seasonal, 1);
@@ -4256,10 +4263,6 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                             })"></button>
                         </div>
                     </div>
-                    <h5>${trans[lang].settings.customise.colours.manual}</h5>
-                    <button class="btn primary btn--has-icon btn--has-icon-left btn--custom-colour" onclick="_create_a_custom_colour()">
-                        ${trans[lang].settings.customise.colours.custom}
-                    </button>
                     <div class="sep"></div>
                     <div class="inner-preview pad">
                         <div class="personal-stats-preview-bar-container">
@@ -4876,10 +4879,17 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
         if (page == 'customise' && settings.seasonal && stored_season.id != 'none') {
             tippy(document.getElementById('current_season'), {
-                content: new Date(stored_season.end.replace('y0', stored_season.year))
+                content: new Date(stored_season.end.replace('y0', stored_season.year)).toLocaleString()
             });
             tippy(document.getElementById('current_season_start'), {
-                content: new Date(stored_season.start.replace('y0', stored_season.year))
+                content: new Date(stored_season.start.replace('y0', stored_season.year)).toLocaleString()
+            });
+
+            tippy(document.body.querySelector('.swatch.default'), {
+                content: (stored_season.id != 'none') ? trans[lang].settings.customise.colours.default_with_season.replace('{season}', stored_season.name) : trans[lang].settings.customise.colours.default
+            });
+            tippy(document.body.querySelector('.swatch.custom'), {
+                content: trans[lang].settings.customise.colours.custom
             });
         }
     }
@@ -5654,6 +5664,11 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     // mark character in string
                     let chr = lowercase_title.indexOf(`${includes[group][possible_match]}`);
 
+                    // featuring ty dolla $ign
+                    // skips if this is the first character
+                    if (chr < 1)
+                        return;
+
                     extras.push({
                         type: includes[group][possible_match],
                         group: group,
@@ -5691,7 +5706,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             let field_group = extras[extra].group;
             // remove beginning tag
             let field_text = extras[extra].text
-            .replace(' feat. ', '').replace('feat. ', '').replace('featuring ', '').replace('Feat. ', '').replace('ft. ', '')
+            .replace(' feat. ', '').replace('feat. ', '').replace('featuring ', '').replace('Feat. ', '').replace('ft. ', '').replace('FEAT. ', '')
             .replace('w/ ', '').replace('with ', '')
             .replaceAll(' & ', ';').replaceAll(', ', ';').replaceAll(' and ', ';')
             .replaceAll('Tyler;the', 'Tyler, the').replaceAll(' with ', ';')

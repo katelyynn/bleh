@@ -29,6 +29,11 @@ body {
             var(--lit-seasonal,
             1)));
 
+    [data-bleh--season="easter"] & {
+        --hue-seasonal: 155;
+        --sat-seasonal: 1;
+        --lit-seasonal: 1.15;
+    }
     [data-bleh--season="halloween"] & {
         --hue-seasonal: 14;
         --sat-seasonal: 1.6;
@@ -594,6 +599,7 @@ body {
     --icon-16-snow: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtc25vd2ZsYWtlIj48bGluZSB4MT0iMiIgeDI9IjIyIiB5MT0iMTIiIHkyPSIxMiIvPjxsaW5lIHgxPSIxMiIgeDI9IjEyIiB5MT0iMiIgeTI9IjIyIi8+PHBhdGggZD0ibTIwIDE2LTQtNCA0LTQiLz48cGF0aCBkPSJtNCA4IDQgNC00IDQiLz48cGF0aCBkPSJtMTYgNC00IDQtNC00Ii8+PHBhdGggZD0ibTggMjAgNC00IDQgNCIvPjwvc3ZnPg==');
     --icon-16-pumpkin: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtcHVtcGtpbiI+PHBhdGggZD0iTTEzIDJjLTEgMS0xIDItMSAyIi8+PHBhdGggZD0iTTE3IDRjLS45IDAtMS44LjQtMi41IDEuMmEzLjMyIDMuMzIgMCAwIDAtNSAwQzguOCA0LjQgNy45IDQgNyA0Yy0yLjggMC01IDQtNSA5czIuMiA5IDUgOWMuOSAwIDEuOC0uNCAyLjUtMS4yYTMuMzIgMy4zMiAwIDAgMCA1IDBjLjcuOCAxLjYgMS4yIDIuNSAxLjIgMi44IDAgNS00IDUtOXMtMi4yLTktNS05Ii8+PHBhdGggZD0iTTEwIDExIDggOWwtMiAyIi8+PHBhdGggZD0ibTE4IDExLTItMi0yIDIiLz48cGF0aCBkPSJtNiAxNSAyIDIgMi0yIDIgMiAyLTIgMiAyIDItMiIvPjwvc3ZnPg==');
     --icon-16-new-years: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtcGFydHktcG9wcGVyIj48cGF0aCBkPSJNNS44IDExLjMgMiAyMmwxMC43LTMuNzkiLz48cGF0aCBkPSJNNCAzaC4wMSIvPjxwYXRoIGQ9Ik0yMiA4aC4wMSIvPjxwYXRoIGQ9Ik0xNSAyaC4wMSIvPjxwYXRoIGQ9Ik0yMiAyMGguMDEiLz48cGF0aCBkPSJtMjIgMi0yLjI0Ljc1YTIuOSAyLjkgMCAwIDAtMS45NiAzLjEyYy4xLjg2LS41NyAxLjYzLTEuNDUgMS42M2gtLjM4Yy0uODYgMC0xLjYuNi0xLjc2IDEuNDRMMTQgMTAiLz48cGF0aCBkPSJtMjIgMTMtLjgyLS4zM2MtLjg2LS4zNC0xLjgyLjItMS45OCAxLjExYy0uMTEuNy0uNzIgMS4yMi0xLjQzIDEuMjJIMTciLz48cGF0aCBkPSJtMTEgMiAuMzMuODJjLjM0Ljg2LS4yIDEuODItMS4xMSAxLjk4QzkuNTIgNC45IDkgNS41MiA5IDYuMjNWNyIvPjxwYXRoIGQ9Ik0xMSAxM2MxLjkzIDEuOTMgMi44MyA0LjE3IDIgNS0uODMuODMtMy4wNy0uMDctNS0yLTEuOTMtMS45My0yLjgzLTQuMTctMi01IC44My0uODMgMy4wNy4wNyA1IDJaIi8+PC9zdmc+');
+    --icon-16-egg: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtZWdnIj48cGF0aCBkPSJNMTIgMjJjNi4yMy0uMDUgNy44Ny01LjU3IDcuNS0xMC0uMzYtNC4zNC0zLjk1LTkuOTYtNy41LTEwLTMuNTUuMDQtNy4xNCA1LjY2LTcuNSAxMC0uMzcgNC40MyAxLjI3IDkuOTUgNy41IDEweiIvPjwvc3ZnPg==');
 
     --icon-20-check: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImhzbCgyNTUsMjAlLDkwJSkiIHN0cm9rZS13aWR0aD0iMi4yNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1jaGVjayI+PHBhdGggZD0iTTIwIDYgOSAxN2wtNS01Ii8+PC9zdmc+');
     --icon-20-plus: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImhzbCgyNTUsMjAlLDkwJSkiIHN0cm9rZS13aWR0aD0iMi4yNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1wbHVzIj48cGF0aCBkPSJNNSAxMmgxNCIvPjxwYXRoIGQ9Ik0xMiA1djE0Ii8+PC9zdmc+');
@@ -1513,7 +1519,7 @@ body[class*="namespace--user_library_"] .col-sidebar, .library-header,
 
     [data-bleh--seasonal_overlays="true"] & {
         [data-bleh--season="halloween"] &:not(.header-featured-track) {
-            background-image: linear-gradient(0deg, hsla(var(--h4), 0.02) 0%, rgba(0,0,0,0) 100%) !important;
+            background-image: linear-gradient(0deg, hsla(var(--h4), 0.03) 0%, rgba(0,0,0,0) 100%) !important;
             background-repeat: repeat-x;
             background-position: unset !important;
         }
@@ -7027,6 +7033,14 @@ input:is([name="track_name"], [name="artist_name"], [name="album_name"], [name="
     animation: dropdown calc(var(--trans-short) + 0.02s) var(--trans-function);
     transform-origin: top;
     color: hsl(var(--c2));
+
+    [data-bleh--seasonal_overlays="true"][data-bleh--season="fall"] &,
+    [data-bleh--seasonal_overlays="true"][data-bleh--season="christmas"] &,
+    [data-bleh--seasonal_overlays="true"][data-bleh--season="new_years"] & {
+        background-image: var(--overlay-snow-min), linear-gradient(180deg, rgba(190,233,250,0.04) 0%, rgba(0,0,0,0) 100%) !important;
+        background-repeat: repeat-x !important;
+        background-position: unset !important;
+    }
 }
 
 .popup_background {
@@ -14589,6 +14603,9 @@ button.bleh--gallery-bookmark-image-btn {
             text-shadow: 0 0 20px hsl(var(--h4));
         }
 
+        &[data-season="easter"] {
+            --mask: var(--icon-16-egg);
+        }
         &[data-season="halloween"] {
             --mask: var(--icon-16-pumpkin);
         }
