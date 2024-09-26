@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         bleh
 // @namespace    http://last.fm/
-// @version      2024.0925
+// @version      2024.0926
 // @description  bleh!!! ^-^
 // @author       kate
 // @match        https://www.last.fm/*
@@ -18,7 +18,7 @@
 // ==/UserScript==
 
 let version = {
-    build: '2024.0925',
+    build: '2024.0926',
     sku: 'scawy',
     feature_flags: {}
 }
@@ -85,6 +85,7 @@ const trans = {
             continue: 'Continue',
             reset: 'Reset to default',
             go: 'Go',
+            reload: 'A setting you changed requires a page reload to take effect, click to reload.',
             examples: {
                 button: 'Example button'
             },
@@ -1006,6 +1007,9 @@ function prep_snow() {
     document.documentElement.appendChild(container);
 }
 
+// require page reload
+let reload_pending = false;
+
 tippy.setDefaultProps({
     arrow: false,
     duration: [100, 300],
@@ -1508,7 +1512,8 @@ let settings_base = {
         unit: '',
         value: false,
         values: [true, false],
-        type: 'toggle'
+        type: 'toggle',
+        require_reload: true
     },
     show_your_progress: {
         css: 'show_your_progress',
@@ -1563,14 +1568,16 @@ let settings_base = {
         unit: '',
         value: true,
         values: [true, false],
-        type: 'toggle'
+        type: 'toggle',
+        require_reload: true
     },
     seasonal_particles: {
         css: 'seasonal_particles',
         unit: '',
         value: true,
         values: [true, false],
-        type: 'toggle'
+        type: 'toggle',
+        require_reload: true
     },
     seasonal_overlays: {
         css: 'seasonal_overlays',
@@ -4877,7 +4884,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         if (page == 'themes') {
             refresh_all();
             show_theme_change_in_settings();
-        } else if (page == 'customise' || page == 'performance' || page == 'redirects' || page == 'corrections' || page == 'accessibility' || page == 'text') {
+        } else if (page == 'customise' || page == 'performance' || page == 'redirects' || page == 'corrections' || page == 'accessibility' || page == 'text' || page == 'seasonal') {
             refresh_all();
         } else if (page == 'profiles') {
             init_profile_notes();
@@ -5127,6 +5134,15 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     function update_item(item, value, modify=true) {
         console.log('update item',item,value);
         try {
+        // is this a new value?
+        let new_value = false;
+        if (value != settings[item])
+            new_value = true;
+
+        if (settings_base[item].require_reload && new_value)
+            request_reload();
+
+
         if (settings_base[item].type == 'slider' && modify)
             settings[item] = value;
 
@@ -5271,6 +5287,17 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         if (item == 'hue' || item == 'sat' || item == 'lit') {
             update_colour_swatches();
         }
+    }
+
+    function request_reload() {
+        reload_pending = true;
+        deliver_notif(trans[lang].settings.reload, true, false, '', '_invoke_reload()');
+    }
+    unsafeWindow._invoke_reload = function() {
+        invoke_reload();
+    }
+    function invoke_reload() {
+        window.location.reload();
     }
 
     function update_colour_swatches() {
@@ -6326,10 +6353,10 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         }
     }
 
-    unsafeWindow._deliver_notif = function(content, persist=false) {
-        deliver_notif(content, persist);
+    unsafeWindow._deliver_notif = function(content, persist=false, has_icon=false, append_class='', action='') {
+        deliver_notif(content, persist, has_icon, append_class, action);
     }
-    function deliver_notif(content, persist=false, has_icon=false, append_class='') {
+    function deliver_notif(content, persist=false, has_icon=false, append_class='', action='') {
         let notif = document.createElement('button');
         notif.classList.add('bleh-notif');
         notif.setAttribute('onclick', '_kill_notif(this)');
@@ -6342,6 +6369,9 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
         if (append_class != '')
             notif.classList.add(append_class);
+
+        if (action != '')
+            notif.setAttribute('onclick', action);
 
         if (persist)
             return;
