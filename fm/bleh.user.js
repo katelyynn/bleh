@@ -166,7 +166,7 @@ const trans = {
                     bio: 'During seasonal events, bleh can automatically change the default accent colour, add particles, and add overlays to various interface elements.',
                     option: {
                         name: 'Enable seasonal event system',
-                        bio: 'If you want to choose your own accent, just choose one above - no need to disable seasons!'
+                        bio: 'If you want to choose your own accent, head to the appearance tab - no need to disable seasons!'
                     },
                     marker: {
                         current: 'The current season is {season} for {time}.',
