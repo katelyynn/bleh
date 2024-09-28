@@ -1142,6 +1142,9 @@ let song_title_corrections = {
     'playboi carti': {
         'All Red': 'ALL RED',
         'Music': 'MUSIC'
+    },
+    '2hollis': {
+        'TEENAGE SOLDIER': 'teenage soldier'
     }
 };
 
