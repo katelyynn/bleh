@@ -4862,6 +4862,30 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                             </button>
                         </div>
                     </div>
+                    <div class="sep"></div>
+                    <h4>${trans[lang].settings.customise.profile_header.name}</h4>
+                    <div class="toggle-container" id="container-profile_header_own">
+                        <button class="btn reset" onclick="_reset_item('profile_header_own')">${trans[lang].settings.reset}</button>
+                        <div class="heading">
+                            <h5>${trans[lang].settings.customise.profile_header.for_own}</h5>
+                        </div>
+                        <div class="toggle-wrap">
+                            <button class="toggle" id="toggle-profile_header_own" onclick="_update_item('profile_header_own')" aria-checked="false">
+                                <div class="dot"></div>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="toggle-container" id="container-profile_header_others">
+                        <button class="btn reset" onclick="_reset_item('profile_header_others')">${trans[lang].settings.reset}</button>
+                        <div class="heading">
+                            <h5>${trans[lang].settings.customise.profile_header.for_others}</h5>
+                        </div>
+                        <div class="toggle-wrap">
+                            <button class="toggle" id="toggle-profile_header_others" onclick="_update_item('profile_header_others')" aria-checked="false">
+                                <div class="dot"></div>
+                            </button>
+                        </div>
+                    </div>
                 </div>
                 `);
         } else if (page == 'text') {
