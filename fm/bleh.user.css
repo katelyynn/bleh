@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           bleh (dev)
 @namespace      github.com/katelyynn/bleh
-@version        2024.0925
+@version        2024.0928
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.css
@@ -3552,6 +3552,11 @@ state is not active, which then falls back to primary button styling */
 .header-background {
     height: var(--profile-header-background-height) !important;
     background-position: center var(--profile-header-background-offset) !important;
+
+    [data-bleh--profile_header_others="false"] .header--user:not([data-is-own-profile="true"]) &,
+    [data-bleh--profile_header_own="false"] [data-is-own-profile="true"] & {
+        display: none !important;
+    }
 }
 .header {
     /* new last.fm classic-playbar changes overriding again - 2024-06-14 */

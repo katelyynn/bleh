@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         bleh
 // @namespace    http://last.fm/
-// @version      2024.0926
+// @version      2024.0928
 // @description  bleh!!! ^-^
 // @author       kate
 // @match        https://www.last.fm/*
@@ -18,7 +18,7 @@
 // ==/UserScript==
 
 let version = {
-    build: '2024.0926',
+    build: '2024.0928',
     sku: 'scawy',
     feature_flags: {}
 }
@@ -218,6 +218,11 @@ const trans = {
                 },
                 pretty_obsessions: {
                     name: 'Pretty obsessions'
+                },
+                profile_header: {
+                    name: 'Display profile backgrounds',
+                    for_own: 'On my profile',
+                    for_others: 'On other profiles'
                 }
             },
             performance: {
@@ -1404,7 +1409,9 @@ let settings_template = {
     hue_from_album: true,
     seasonal: true,
     seasonal_particles: true,
-    seasonal_overlays: true
+    seasonal_overlays: true,
+    profile_header_own: true,
+    profile_header_others: true
 };
 let settings_base = {
     hue: {
@@ -1581,6 +1588,20 @@ let settings_base = {
     },
     seasonal_overlays: {
         css: 'seasonal_overlays',
+        unit: '',
+        value: true,
+        values: [true, false],
+        type: 'toggle'
+    },
+    profile_header_own: {
+        css: 'profile_header_own',
+        unit: '',
+        value: true,
+        values: [true, false],
+        type: 'toggle'
+    },
+    profile_header_others: {
+        css: 'profile_header_others',
         unit: '',
         value: true,
         values: [true, false],
@@ -2818,6 +2839,10 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         patch_profile_tracks();
 
         let profile_name = profile_header.querySelector('a');
+        let is_own_profile = (profile_name.textContent == auth);
+
+        if (is_own_profile)
+            document.body.querySelector('.header--user').setAttribute('data-is-own-profile', 'true');
 
         // profile note
         let profile_notes = JSON.parse(localStorage.getItem('bleh_profile_notes')) || {};
@@ -4468,17 +4493,30 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                         </div>
                     </div>
                     <div class="sep"></div>
-                    <div class="toggle-container" id="container-pretty_obsessions">
-                        <button class="btn reset" onclick="_reset_item('pretty_obsessions')">${trans[lang].settings.reset}</button>
+                    <h4>${trans[lang].settings.customise.profile_header.name}</h4>
+                    <div class="toggle-container" id="container-profile_header_own">
+                        <button class="btn reset" onclick="_reset_item('profile_header_own')">${trans[lang].settings.reset}</button>
                         <div class="heading">
-                            <h5>${trans[lang].settings.customise.pretty_obsessions.name}</h5>
+                            <h5>${trans[lang].settings.customise.profile_header.for_own}</h5>
                         </div>
                         <div class="toggle-wrap">
-                            <button class="toggle" id="toggle-pretty_obsessions" onclick="_update_item('pretty_obsessions')" aria-checked="true">
+                            <button class="toggle" id="toggle-profile_header_own" onclick="_update_item('profile_header_own')" aria-checked="false">
                                 <div class="dot"></div>
                             </button>
                         </div>
                     </div>
+                    <div class="toggle-container" id="container-profile_header_others">
+                        <button class="btn reset" onclick="_reset_item('profile_header_others')">${trans[lang].settings.reset}</button>
+                        <div class="heading">
+                            <h5>${trans[lang].settings.customise.profile_header.for_others}</h5>
+                        </div>
+                        <div class="toggle-wrap">
+                            <button class="toggle" id="toggle-profile_header_others" onclick="_update_item('profile_header_others')" aria-checked="false">
+                                <div class="dot"></div>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="sep"></div>
                     <div class="toggle-container" id="container-show_your_progress">
                         <button class="btn reset" onclick="_reset_item('show_your_progress')">${trans[lang].settings.reset}</button>
                         <div class="heading">
@@ -4491,6 +4529,19 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                             </button>
                         </div>
                     </div>
+                    <div class="sep"></div>
+                    <div class="toggle-container" id="container-pretty_obsessions">
+                        <button class="btn reset" onclick="_reset_item('pretty_obsessions')">${trans[lang].settings.reset}</button>
+                        <div class="heading">
+                            <h5>${trans[lang].settings.customise.pretty_obsessions.name}</h5>
+                        </div>
+                        <div class="toggle-wrap">
+                            <button class="toggle" id="toggle-pretty_obsessions" onclick="_update_item('pretty_obsessions')" aria-checked="true">
+                                <div class="dot"></div>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="sep"></div>
                     <div class="toggle-container" id="container-rain">
                         <button class="btn reset" onclick="_reset_item('rain')">${trans[lang].settings.reset}</button>
                         <div class="heading">
