@@ -293,7 +293,15 @@ const trans = {
                 },
                 format_guest_features: {
                     name: 'Format guest features and song tags',
-                    bio: 'Visually places less priority on song features and tags (eg. Remix, Deluxe Edition, etc.)'
+                    bio: 'Splits track and album titles into their individual tags such as guest features, versions, remixes.'
+                },
+                show_guest_features: {
+                    name: 'Display guest features in title and artist',
+                    bio: 'Turning off will remove from title and prefer artist field.'
+                },
+                stacked_chartlist_info: {
+                    name: 'Stack track name and title',
+                    bio: 'Both matches streaming services and increases max length of each.'
                 },
                 submit: {
                     name: 'Submit new correction',
@@ -1403,6 +1411,8 @@ let settings_template = {
     underline_links: false,
     big_numbers: false,
     format_guest_features: true,
+    show_guest_features: false,
+    stacked_chartlist_info: true,
     corrections: true,
     colourful_counts: true,
     rain: false,
@@ -1502,6 +1512,20 @@ let settings_base = {
     },
     format_guest_features: {
         css: 'format_guest_features',
+        unit: '',
+        value: true,
+        values: [true, false],
+        type: 'toggle'
+    },
+    show_guest_features: {
+        css: 'show_guest_features',
+        unit: '',
+        value: false,
+        values: [true, false],
+        type: 'toggle'
+    },
+    stacked_chartlist_info: {
+        css: 'stacked_chartlist_info',
         unit: '',
         value: true,
         values: [true, false],
@@ -4755,7 +4779,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                                         <a href="/music/Quadeca/_/fractions+of+infinity" title="fractions of infinity" class="bleh--chartlist-name-without-features">fractions of infinity (feat. Sunday Service Choir)</a>
                                         <a href="/music/Quadeca/_/fractions+of+infinity" title="fractions of infinity" class="bleh--chartlist-name-with-features">
                                             <span class="title">fractions of infinity</span>
-                                            <span class="feat">feat. Sunday Service Choir</span>
+                                            <span class="feat" data-bleh--tag-group="guests">feat. Sunday Service Choir</span>
                                         </a>
                                     </td>
                                     <td class="chartlist-artist bleh--chartlist-name-without-features">
@@ -4787,6 +4811,30 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                         </div>
                         <div class="toggle-wrap">
                             <button class="toggle" id="toggle-format_guest_features" onclick="_update_item('format_guest_features')" aria-checked="true">
+                                <div class="dot"></div>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="toggle-container" id="container-show_guest_features">
+                        <button class="btn reset" onclick="_reset_item('show_guest_features')">${trans[lang].settings.reset}</button>
+                        <div class="heading">
+                            <h5>${trans[lang].settings.corrections.show_guest_features.name}</h5>
+                            <p>${trans[lang].settings.corrections.show_guest_features.bio}</p>
+                        </div>
+                        <div class="toggle-wrap">
+                            <button class="toggle" id="toggle-show_guest_features" onclick="_update_item('show_guest_features')" aria-checked="true">
+                                <div class="dot"></div>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="toggle-container" id="container-stacked_chartlist_info">
+                        <button class="btn reset" onclick="_reset_item('stacked_chartlist_info')">${trans[lang].settings.reset}</button>
+                        <div class="heading">
+                            <h5>${trans[lang].settings.corrections.stacked_chartlist_info.name}</h5>
+                            <p>${trans[lang].settings.corrections.stacked_chartlist_info.bio}</p>
+                        </div>
+                        <div class="toggle-wrap">
+                            <button class="toggle" id="toggle-stacked_chartlist_info" onclick="_update_item('stacked_chartlist_info')" aria-checked="true">
                                 <div class="dot"></div>
                             </button>
                         </div>
@@ -6005,7 +6053,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 // parse tags into text
                 let song_tags_text = '';
                 for (let song_tag in song_tags) {
-                    song_tags_text = `${song_tags_text}<div class="feat" data-bleh--tag-type="${song_tags[song_tag].type}">${song_tags[song_tag].text}</div>`;
+                    song_tags_text = `${song_tags_text}<div class="feat" data-bleh--tag-type="${song_tags[song_tag].type}" data-bleh--tag-group="${song_tags[song_tag].group}">${song_tags[song_tag].text}</div>`;
                 }
 
                 // combine
