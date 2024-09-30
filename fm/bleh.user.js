@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         bleh
 // @namespace    http://last.fm/
-// @version      2024.0928
+// @version      2024.0930
 // @description  bleh!!! ^-^
 // @author       kate
 // @match        https://www.last.fm/*
@@ -18,7 +18,7 @@
 // ==/UserScript==
 
 let version = {
-    build: '2024.0928',
+    build: '2024.0930',
     sku: 'scawy',
     feature_flags: {}
 }
@@ -1251,7 +1251,8 @@ let includes = {
     guests: [
         'feat.', 'featuring',
         '- with', '(with', '[with', 'w/ ',
-        'ft.'
+        'ft.',
+        'ref.'
     ],
     versions: [
         '(taylor', '- spotify singles'
@@ -1270,7 +1271,8 @@ let includes = {
         '- alternative', '(alternative',
         '(mix 1', '(mix 2', '(mix 3', '(mix 4', '(mix 5', '(mix 6', '(mix 7', '(mix 8', '(mix 9',
         '- chopped', '(chopped', '[chopped',
-        '(v1', '(v2', '(v3', '(v4', '(v5', '(v6', '(v7', '(v8', '(v9'
+        '(v1', '(v2', '(v3', '(v4', '(v5', '(v6', '(v7', '(v8', '(v9',
+        '[v1', '[v2', '[v3', '[v4', '[v5', '[v6', '[v7', '[v8', '[v9'
     ],
     stems: [
         '- acapella', '(acapella', '[acapella',
