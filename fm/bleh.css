@@ -14562,12 +14562,11 @@ button.bleh--gallery-bookmark-image-btn {
     display: flex;
     flex-direction: column;
     gap: var(--button-list-gap);
-    justify-content: end;
     align-items: center;
     inset: 0;
     pointer-events: none;
-    padding: var(--card-padding);
-    z-index: 99999;
+    padding: calc(var(--card-padding) * 3) var(--card-padding);
+    z-index: 99999999999;
 
     .bleh-notif {
         animation: notif var(--trans) var(--trans-function);
@@ -14580,6 +14579,8 @@ button.bleh--gallery-bookmark-image-btn {
         --bg-atv: hsla(var(--h3), 60%);
         --col: hsl(var(--b7));
         --radius: 50px;
+
+        backdrop-filter: blur(3px);
 
         &.btn--has-icon {
             --padding: 7px 14px 7px calc(14px + 16px + 6px);
@@ -14595,7 +14596,7 @@ button.bleh--gallery-bookmark-image-btn {
 
 @keyframes notif {
     from {
-        transform: translateY(var(--card-gap));
+        transform: translateY(calc(-1 * var(--card-gap)));
         opacity: 0;
     }
     to {
@@ -14605,7 +14606,7 @@ button.bleh--gallery-bookmark-image-btn {
 }
 @keyframes notif_out {
     to {
-        transform: translateY(var(--card-gap));
+        transform: translateY(calc(-1 * var(--card-gap)));
         opacity: 0;
     }
     from {
