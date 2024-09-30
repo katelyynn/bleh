@@ -1391,7 +1391,13 @@ let profile_badges = {
     'destons': {
         type: 'colon-three',
         name: ':3²'
-    }
+    },
+    'inozom': [
+        {
+            type: 'cute',
+            name: 'cute'
+        }
+    ]
 };
 
 
