@@ -3641,6 +3641,11 @@ state is not active, which then falls back to primary button styling */
         color: hsl(var(--c3));
         font-weight: var(--font-weight-bold);
         font-size: var(--font-size-sm);
+
+        [data-bleh--profile_header_others="false"] .header--user:not([data-is-own-profile="true"]) &,
+        [data-bleh--profile_header_own="false"] [data-is-own-profile="true"] & {
+            background-color: hsla(var(--b4), 50%);
+        }
     }
 
     .header-title-display-name, .header-scrobble-since {
