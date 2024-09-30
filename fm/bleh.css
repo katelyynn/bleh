@@ -1755,7 +1755,7 @@ article, section, .buffer-standard, .buffer-standard:not(.col-sidebar) .buffer-s
 /* remove lastfm box shadow */
 .album-overview-cover-art {
     border-radius: var(--card-radius) !important;
-    box-shadow: var(--shadow) !important;
+    box-shadow: var(--card-shadow) !important;
 }
 
 /* border if default background is present */
@@ -3766,6 +3766,11 @@ state is not active, which then falls back to primary button styling */
         --hue-over: 0;
         --sat-over: 0;
         --lit-over: 1.5;
+
+        [data-bleh--theme="light"] & {
+            color: hsl(var(--c1)) !important;
+            --lit-over: 1;
+        }
     }
     &.user-status--bleh-user-peoplepleasr {
         --hue-over: 264;
@@ -3844,6 +3849,11 @@ state is not active, which then falls back to primary button styling */
         --hue: 0;
         --sat: 0;
         --lit: 1.5;
+
+        [data-bleh--theme="light"] & {
+            color: hsl(var(--c1)) !important;
+            --lit-over: 1;
+        }
     }
 }
 
@@ -5661,6 +5671,10 @@ span.shout-user-avatar:before,
     color: hsl(var(--l3-c));
     --override-bg: currentColor !important;
 }
+[data-bleh--theme="light"] .user-status--bleh-user-bIeak:after {
+    color: hsl(var(--c1)) !important;
+    --lit-over: 1;
+}
 
 .avatar-status-dot--subscriber {
     --mask: var(--icon-pro);
@@ -6023,7 +6037,6 @@ button,
 .coloured-cta,
 .gallery-previous .arrow,
 .section-playlink,
-.date-range-picker-button,
 .attendance-btn--turn-off, .attendance-btn--turn-on:hover, .attendance-btn--turn-off:hover + .attendance-btn--turn-on,
 .image-upload-remove,
 .profile-header-set-obsession,
@@ -6272,7 +6285,7 @@ span.header-new-gallery-inner a:before,
 .all-results-list li:before,
 .library-view-button:before,
 .library-search-submit::before,
-.date-range-picker-button:before, .date-range-picker-button:after,
+.date-range-picker-button:after,
 .love-button:before,
 /*     WIKI     */
 .wiki-history-action:before,
@@ -6850,6 +6863,47 @@ very, very, very dated - who looks up a song on ebay? */
 
 
 /*     DATE PICKER     */
+.row:has(> .library-controls-datepicker) {
+    display: flex;
+    flex-direction: column;
+
+    .user-sidebar-header {
+        margin: unset !important;
+        color: hsl(var(--c3));
+    }
+
+    .library-controls-datepicker > .library-date-picker {
+        display: flex;
+        justify-content: start;
+        height: 30px;
+
+        .date-range-picker-button {
+            --bg: transparent;
+            --bg-hov: transparent;
+            --bg-atv: transparent;
+            --shadow: none;
+
+            --mask: var(--icon-16-dropdown);
+            --btn-top: 0;
+            --btn-left: 0;
+            --btn-right: calc(16px + 6px) !important;
+            --right: 0;
+            --btn-bottom: 0;
+
+            font-size: 24px !important;
+            line-height: 30px !important;
+
+            .date-range-picker-button-inner {
+                max-width: unset;
+            }
+
+            &:before {
+                display: none;
+            }
+        }
+    }
+}
+
 .library-controls-datepicker .date-range-picker-form {
     padding-top: var(--card-gap);
     border-top: 1px solid hsl(var(--b4));
@@ -6877,12 +6931,6 @@ very, very, very dated - who looks up a song on ebay? */
 
 .library-controls-datepicker {
     padding: unset;
-}
-.date-range-picker-button:before {
-    --mask: var(--icon-16-calendar);
-}
-.date-range-picker-button:after {
-    --mask: var(--icon-16-dropdown);
 }
 
 .date-range-picker-button-inner {
