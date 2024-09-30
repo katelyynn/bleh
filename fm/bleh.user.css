@@ -4913,11 +4913,16 @@ better than the default selector '#app a' i suppose */
     font-weight: var(--font-weight);
 }
 .chartlist-name .feat:is(
-    [data-bleh--tag-group="mixes"],
+    [data-bleh--tag-group="mixes"], [data-bleh--tag-group="mixes_numbers"],
     [data-bleh--tag-group="stems"],
     [data-bleh--tag-group="bonus"]
 ) {
     color: hsl(var(--c3)) !important;
+}
+[data-bleh--tag-group="mixes_numbers"] {
+    text-transform: uppercase;
+    order: 10;
+    font-size: var(--font-size-sm);
 }
 
 

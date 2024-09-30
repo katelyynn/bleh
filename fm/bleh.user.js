@@ -1271,6 +1271,8 @@ let includes = {
         '- alternative', '(alternative',
         '(mix 1', '(mix 2', '(mix 3', '(mix 4', '(mix 5', '(mix 6', '(mix 7', '(mix 8', '(mix 9',
         '- chopped', '(chopped', '[chopped',
+    ],
+    mixes_numbers: [
         '(v1', '(v2', '(v3', '(v4', '(v5', '(v6', '(v7', '(v8', '(v9',
         '[v1', '[v2', '[v3', '[v4', '[v5', '[v6', '[v7', '[v8', '[v9'
     ],
@@ -6527,11 +6529,15 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         // cover
         if (settings.hue_from_album) {
             let header_inner = document.querySelector('.header-new-inner');
-            let bg = header_inner.getAttribute('style').replace('background: #', '');
-            let hsl = hex_to_hsl(bg);
-            console.info('hsl', hsl);
-            if (hsl.h > 0)
-                document.body.style.setProperty('--hue-album', hsl.h);
+            try {
+                let bg = header_inner.getAttribute('style').replace('background: #', '');
+                let hsl = hex_to_hsl(bg);
+                console.info('hsl', hsl);
+                if (hsl.h > 0)
+                    document.body.style.setProperty('--hue-album', hsl.h);
+            } catch(e) {
+                console.info('bleh - album is missing a cover');
+            }
         }
 
         if (header.hasAttribute('data-kate-processed'))
