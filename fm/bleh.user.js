@@ -2031,16 +2031,16 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             let theme_menu_item = tippy(document.getElementById('theme_menu_item'), {
                 theme: 'menu',
                 content: (`
-                    <button class="dropdown-menu-clickable-item theme-item-in-menu ${(settings.theme == 'light') ? 'active' : ''}" data-bleh-theme="light" onclick="change_theme_from_menu('light')">
+                    <button class="dropdown-menu-clickable-item theme-item-in-menu" data-bleh-theme="light" onclick="change_theme_from_menu('light')">
                         ${trans[lang].settings.themes.light.name}
                     </button>
-                    <button class="dropdown-menu-clickable-item theme-item-in-menu ${(settings.theme == 'dark') ? 'active' : ''}" data-bleh-theme="dark" onclick="change_theme_from_menu('dark')">
+                    <button class="dropdown-menu-clickable-item theme-item-in-menu" data-bleh-theme="dark" onclick="change_theme_from_menu('dark')">
                         ${trans[lang].settings.themes.dark.name}
                     </button>
-                    <button class="dropdown-menu-clickable-item theme-item-in-menu ${(settings.theme == 'darker') ? 'active' : ''}" data-bleh-theme="darker" onclick="change_theme_from_menu('darker')">
+                    <button class="dropdown-menu-clickable-item theme-item-in-menu" data-bleh-theme="darker" onclick="change_theme_from_menu('darker')">
                         ${trans[lang].settings.themes.darker.name}
                     </button>
-                    <button class="dropdown-menu-clickable-item theme-item-in-menu ${(settings.theme == 'oled') ? 'active' : ''}" data-bleh-theme="oled" onclick="change_theme_from_menu('oled')">
+                    <button class="dropdown-menu-clickable-item theme-item-in-menu" data-bleh-theme="oled" onclick="change_theme_from_menu('oled')">
                         ${trans[lang].settings.themes.oled.name}
                     </button>
                 `),
@@ -2048,10 +2048,12 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 placement: 'left',
                 hideOnClick: false,
                 interactive: true,
-                interactiveBorder: 10
-            });
+                interactiveBorder: 10,
 
-            show_theme_change_in_menu();
+                onShow(instance) {
+                    show_theme_change_in_menu('', instance.popper);
+                }
+            });
         }
     }
 
@@ -2144,6 +2146,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             current_theme = 'dark';
 
         document.getElementById('theme-value').textContent = trans[lang].settings.themes[current_theme].name;
+        show_theme_change_in_menu(current_theme);
 
         // save value
         settings.theme = current_theme;
@@ -2162,6 +2165,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
         // show in settings
         show_theme_change_in_settings(theme);
+        show_theme_change_in_menu(theme);
 
         // save to settings
         localStorage.setItem('bleh', JSON.stringify(settings));
@@ -5156,11 +5160,11 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             }
         });
     }
-    function show_theme_change_in_menu(theme = '') {
+    function show_theme_change_in_menu(theme = '', element = document.body) {
         if (theme != '')
             settings.theme = theme;
 
-        let btns = document.querySelectorAll('.theme-item-in-menu');
+        let btns = element.querySelectorAll('.theme-item-in-menu');
         btns.forEach((btn) => {
             console.log(btn.getAttribute('data-bleh-theme'),settings.theme);
             if (btn.getAttribute('data-bleh-theme') != settings.theme) {
