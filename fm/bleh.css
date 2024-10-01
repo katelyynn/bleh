@@ -6707,6 +6707,12 @@ on the bottom of a panel !! */
     position: relative !important;
     min-width: 170px !important;
     --show-icon: block;
+
+    &.active {
+        --bg: hsla(var(--h4), 20%) !important;
+        --bg-hov: var(--bg) !important;
+        --bg-atv: var(--bg) !important;
+    }
 }
 
 .auth-dropdown-menu-item {
@@ -6851,12 +6857,13 @@ very, very, very dated - who looks up a song on ebay? */
     --bg-atv: transparent !important;
 }
 .auth-dropdown-menu {
-    overflow: hidden;
+    /*overflow: hidden;*/
 
     &:before {
         content: '';
         display: block !important;
 
+        border-radius: 6px;
         background-image: var(--url) !important;
         position: absolute;
         inset: 0 !important;
@@ -7350,6 +7357,16 @@ input:is([name="track_name"], [name="artist_name"], [name="album_name"], [name="
     }
     to {
         transform: scaleY(1);
+        opacity: 1;
+    }
+}
+@keyframes dropdown_side {
+    from {
+        transform: scaleX(0.85);
+        opacity: 0;
+    }
+    to {
+        transform: scaleX(1);
         opacity: 1;
     }
 }
@@ -8385,6 +8402,32 @@ text[style^="color: rgb(255, 172, 172)"] {
         background: hsla(var(--b5), 35%);
     }
 
+    &[data-theme="menu"] {
+        padding: 5px !important;
+        background: hsl(var(--b5)) !important;
+        border: var(--card-border) !important;
+        border-radius: var(--card-radius) !important;
+        box-shadow: var(--menu-shadow) !important;
+        animation: dropdown_side calc(var(--trans-short) + 0.02s) var(--trans-function);
+        transform-origin: right;
+        color: hsl(var(--c2));
+
+        font-size: var(--font-size);
+
+        [data-bleh--seasonal_overlays="true"][data-bleh--season="fall"] &,
+        [data-bleh--seasonal_overlays="true"][data-bleh--season="christmas"] &,
+        [data-bleh--seasonal_overlays="true"][data-bleh--season="new_years"] & {
+            background-image: var(--overlay-snow-min), linear-gradient(180deg, rgba(190,233,250,0.04) 0%, rgba(0,0,0,0) 100%) !important;
+            background-repeat: repeat-x !important;
+            background-position: unset !important;
+        }
+
+        &[data-state="hidden"] {
+            transform: scaleX(0.85);
+            opacity: 0;
+        }
+    }
+
     transition-timing-function: var(--trans-function);
 
     &[data-state="hidden"] {
@@ -8402,6 +8445,19 @@ text[style^="color: rgb(255, 172, 172)"] {
 
 .user-dashboard-controls-tooltip {
     top: -40px !important;
+}
+
+[data-bleh-theme="light"] {
+    --mask: var(--icon-16-sun);
+}
+[data-bleh-theme="dark"] {
+    --mask: var(--icon-16-moon);
+}
+[data-bleh-theme="darker"] {
+    --mask: var(--icon-16-moon-star);
+}
+[data-bleh-theme="oled"] {
+    --mask: var(--icon-16-moon-fill);
 }
 
 

@@ -2002,7 +2002,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             let bleh_nav = document.createElement('li');
             bleh_nav.innerHTML = (`
                 <li>
-                    <button class="auth-dropdown-menu-item bleh--theme-menu-item" onclick="toggle_theme()">
+                    <button class="auth-dropdown-menu-item bleh--theme-menu-item" id="theme_menu_item" onclick="toggle_theme()">
                         <span class="auth-dropdown-item-row">
                             <span class="auth-dropdown-item-left">${trans[lang].settings.themes.name}</span>
                             <span class="auth-dropdown-item-right" id="theme-value">${trans[lang].settings.themes[settings.theme].name}</span>
@@ -2027,6 +2027,31 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 </li>
             `);
             user_nav.appendChild(bleh_nav);
+
+            let theme_menu_item = tippy(document.getElementById('theme_menu_item'), {
+                theme: 'menu',
+                content: (`
+                    <button class="dropdown-menu-clickable-item theme-item-in-menu ${(settings.theme == 'light') ? 'active' : ''}" data-bleh-theme="light" onclick="change_theme_from_menu('light')">
+                        ${trans[lang].settings.themes.light.name}
+                    </button>
+                    <button class="dropdown-menu-clickable-item theme-item-in-menu ${(settings.theme == 'dark') ? 'active' : ''}" data-bleh-theme="dark" onclick="change_theme_from_menu('dark')">
+                        ${trans[lang].settings.themes.dark.name}
+                    </button>
+                    <button class="dropdown-menu-clickable-item theme-item-in-menu ${(settings.theme == 'darker') ? 'active' : ''}" data-bleh-theme="darker" onclick="change_theme_from_menu('darker')">
+                        ${trans[lang].settings.themes.darker.name}
+                    </button>
+                    <button class="dropdown-menu-clickable-item theme-item-in-menu ${(settings.theme == 'oled') ? 'active' : ''}" data-bleh-theme="oled" onclick="change_theme_from_menu('oled')">
+                        ${trans[lang].settings.themes.oled.name}
+                    </button>
+                `),
+                allowHTML: true,
+                placement: 'left',
+                hideOnClick: false,
+                interactive: true,
+                interactiveBorder: 10
+            });
+
+            show_theme_change_in_menu();
         }
     }
 
@@ -2137,6 +2162,19 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
         // show in settings
         show_theme_change_in_settings(theme);
+
+        // save to settings
+        localStorage.setItem('bleh', JSON.stringify(settings));
+    }
+    unsafeWindow.change_theme_from_menu = function(theme) {
+        document.getElementById('theme-value').textContent = trans[lang].settings.themes[theme].name;
+
+        // save value
+        settings.theme = theme;
+        document.documentElement.setAttribute(`data-bleh--theme`, `${theme}`);
+
+        // show in settings
+        show_theme_change_in_menu(theme);
 
         // save to settings
         localStorage.setItem('bleh', JSON.stringify(settings));
@@ -5105,13 +5143,24 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     }
 
     function show_theme_change_in_settings(theme = '') {
-        let settings = {};
-        if (theme == '')
-            settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
-        else
+        if (theme != '')
             settings.theme = theme;
 
         let btns = document.querySelectorAll('.theme-item');
+        btns.forEach((btn) => {
+            console.log(btn.getAttribute('data-bleh-theme'),settings.theme);
+            if (btn.getAttribute('data-bleh-theme') != settings.theme) {
+                btn.classList.remove('active');
+            } else {
+                btn.classList.add('active');
+            }
+        });
+    }
+    function show_theme_change_in_menu(theme = '') {
+        if (theme != '')
+            settings.theme = theme;
+
+        let btns = document.querySelectorAll('.theme-item-in-menu');
         btns.forEach((btn) => {
             console.log(btn.getAttribute('data-bleh-theme'),settings.theme);
             if (btn.getAttribute('data-bleh-theme') != settings.theme) {
