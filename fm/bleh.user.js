@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         bleh
 // @namespace    http://last.fm/
-// @version      2024.0930
+// @version      2024.1001
 // @description  bleh!!! ^-^
 // @author       kate
 // @match        https://www.last.fm/*
@@ -18,7 +18,7 @@
 // ==/UserScript==
 
 let version = {
-    build: '2024.0930',
+    build: '2024.1001',
     sku: 'scawy',
     feature_flags: {}
 }
@@ -48,6 +48,7 @@ const trans = {
         auth_menu: {
             dev: 'Toggle dev mode',
             configure_bleh: 'Configure bleh',
+            library: 'Library',
             shouts: 'Shouts'
         },
         music: {
@@ -1025,7 +1026,7 @@ let reload_pending = false;
 
 tippy.setDefaultProps({
     arrow: false,
-    duration: [100, 300],
+    duration: [250, 400],
     delay: [null, 50]
 });
 
@@ -1904,8 +1905,9 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         if (!masthead_logo.hasAttribute('data-kate-processed')) {
             masthead_logo.setAttribute('data-kate-processed','true');
 
-            let version_text = document.createElement('p');
+            let version_text = document.createElement('a');
             version_text.classList.add('bleh--version');
+            version_text.setAttribute('href', `${root}bleh`);
             version_text.textContent = `${version.build}.${version.sku}`;
 
             masthead_logo.appendChild(version_text);
@@ -1913,69 +1915,75 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     }
 
     function append_nav(element) {
+        let auth_link = document.body.querySelector('.auth-link');
+
+        if (auth_link.hasAttribute('data-bwaa'))
+            return;
+        auth_link.setAttribute('data-bwaa', 'true');
+
+        let text = document.createElement('p');
+        text.textContent = auth;
+        auth_link.appendChild(text);
+
+
+        let notif_btn = document.body.querySelector('.masthead-nav-control[data-analytics-label="notifications"]');
+        let notif_count = notif_btn.querySelector('.notification-count-badge');
+        if (notif_count != null) {
+            tippy(notif_btn, {
+                content: `${notif_count.textContent} notifications`
+            });
+        } else {
+            tippy(notif_btn, {
+                content: 'No new notifications'
+            });
+        }
+
+        let inbox_btn = document.body.querySelector('.masthead-nav-control[data-analytics-label="inbox"]');
+        let inbox_count = inbox_btn.querySelector('.notification-count-badge');
+        if (inbox_count != null) {
+            tippy(inbox_btn, {
+                content: `${inbox_count.textContent} messages`
+            });
+        } else {
+            tippy(inbox_btn, {
+                content: 'No new messages'
+            });
+        }
+
+        let inbox_container = document.body.querySelector('.masthead-nav-item:has([data-analytics-label="inbox"])');
+        let bleh_container = document.createElement('li');
+        bleh_container.classList.add('masthead-nav-item');
+        bleh_container.innerHTML = (`
+            <a class="masthead-nav-control" href="/bleh" data-bleh--label="bleh">
+                ${trans[lang].auth_menu.configure_bleh}
+            </a>
+        `);
+        tippy(bleh_container, {
+            content: trans[lang].auth_menu.configure_bleh
+        });
+        inbox_container.after(bleh_container);
+
+
+        let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
         let user_nav = element.querySelectorAll('.auth-dropdown-menu > li')[0];
         let inbox_nav = element.querySelectorAll('.auth-dropdown-menu > li')[2];
 
         let my_avi = auth_link.querySelector('img').getAttribute('src').replace('avatar42s', 'avatar170s');
         document.querySelector('.auth-dropdown-menu').style.setProperty('--url', `url(${my_avi})`);
 
-        if (!user_nav.hasAttribute('data-kate-processed')) {
-            user_nav.setAttribute('data-kate-processed','true');
-
-            let bleh_nav = document.createElement('li');
-            if (auth == 'cutensilly') {
-                bleh_nav.innerHTML = (`
-                    <li>
-                        <button class="auth-dropdown-menu-item bleh--theme-menu-item" onclick="toggle_theme()">
-                            <span class="auth-dropdown-item-row">
-                                <span class="auth-dropdown-item-left">${trans[lang].settings.themes.name}</span>
-                                <span class="auth-dropdown-item-right" id="theme-value">${trans[lang].settings.themes[settings.theme].name}</span>
-                            </span>
-                        </button>
-                    </li>
-                    <li>
-                        <button class="auth-dropdown-menu-item bleh--dev-menu-item" onclick="toggle_setting('dev')">
-                            <span class="auth-dropdown-item-row">
-                                <span class="auth-dropdown-item-left">${trans[lang].auth_menu.dev}</span>
-                            </span>
-                        </button>
-                    </li>
-                    <li>
-                        <a class="auth-dropdown-menu-item bleh--configure-menu-item" href="${root}bleh">
-                            <span class="auth-dropdown-item-row">
-                                <span class="auth-dropdown-item-left">${trans[lang].auth_menu.configure_bleh}</span>
-                            </span>
-                        </a>
-                    </li>
-                    `);
-            } else {
-                bleh_nav.innerHTML = (`
-                    <li>
-                        <button class="auth-dropdown-menu-item bleh--theme-menu-item" onclick="toggle_theme()">
-                            <span class="auth-dropdown-item-row">
-                                <span class="auth-dropdown-item-left">${trans[lang].settings.themes.name}</span>
-                                <span class="auth-dropdown-item-right" id="theme-value">${trans[lang].settings.themes[settings.theme].name}</span>
-                            </span>
-                        </button>
-                    </li>
-                    <li>
-                        <a class="auth-dropdown-menu-item bleh--configure-menu-item" href="/bleh">
-                            <span class="auth-dropdown-item-row">
-                                <span class="auth-dropdown-item-left">${trans[lang].auth_menu.configure_bleh}</span>
-                            </span>
-                        </a>
-                    </li>
-                    `);
-            }
-            user_nav.appendChild(bleh_nav);
-        }
-
-        if (!inbox_nav.hasAttribute('data-kate-processed')) {
-            inbox_nav.setAttribute('data-kate-processed','true');
+        if (!inbox_nav.hasAttribute('data-bleh')) {
+            inbox_nav.setAttribute('data-bleh','true');
             let profile_link = user_nav.querySelector('a').getAttribute('href');
 
             let extra_nav = document.createElement('li');
             extra_nav.innerHTML = (`
+                <li>
+                    <a class="auth-dropdown-menu-item bleh--library-menu-item" href="${profile_link}/library">
+                        <span class="auth-dropdown-item-row">
+                            <span class="auth-dropdown-item-left">${trans[lang].auth_menu.library}</span>
+                        </span>
+                    </a>
+                </li>
                 <li>
                     <a class="auth-dropdown-menu-item bleh--shouts-menu-item" href="${profile_link}/shoutbox">
                         <span class="auth-dropdown-item-row">
@@ -1985,7 +1993,40 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 </li>
                 `);
 
-            inbox_nav.appendChild(extra_nav);
+            user_nav.appendChild(extra_nav);
+        }
+
+        if (!user_nav.hasAttribute('data-bleh')) {
+            user_nav.setAttribute('data-bleh','true');
+
+            let bleh_nav = document.createElement('li');
+            bleh_nav.innerHTML = (`
+                <li>
+                    <button class="auth-dropdown-menu-item bleh--theme-menu-item" onclick="toggle_theme()">
+                        <span class="auth-dropdown-item-row">
+                            <span class="auth-dropdown-item-left">${trans[lang].settings.themes.name}</span>
+                            <span class="auth-dropdown-item-right" id="theme-value">${trans[lang].settings.themes[settings.theme].name}</span>
+                        </span>
+                    </button>
+                </li>
+                ${(settings.feature_flags.dev) ? (`
+                <li>
+                    <button class="auth-dropdown-menu-item bleh--dev-menu-item" onclick="_update_flag_toggle('dev', this)" aria-checked="true">
+                        <span class="auth-dropdown-item-row">
+                            <span class="auth-dropdown-item-left">${trans[lang].auth_menu.dev}</span>
+                        </span>
+                    </button>
+                </li>
+                `) : ''}
+                <li>
+                    <a class="auth-dropdown-menu-item bleh--configure-menu-item" href="/bleh">
+                        <span class="auth-dropdown-item-row">
+                            <span class="auth-dropdown-item-left">${trans[lang].auth_menu.configure_bleh}</span>
+                        </span>
+                    </a>
+                </li>
+            `);
+            user_nav.appendChild(bleh_nav);
         }
     }
 
@@ -2918,6 +2959,19 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                             content: trans[lang].profile.on_ignore_list
                         });
                         header_avatar.appendChild(toggle_btn);
+                    } else {
+                        let inner_btn = header_follow_btn.querySelector('button');
+                        let inner_btn_tooltip = tippy(inner_btn, {
+                            content: inner_btn.textContent
+                        });
+
+                        console.info(inner_btn_tooltip);
+
+                        inner_btn.addEventListener('click', () => {
+                            window.setTimeout(() => {
+                                inner_btn_tooltip.setContent(inner_btn.textContent);
+                            }, 50);
+                        });
                     }
                 }
             }
