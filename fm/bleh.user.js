@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         bleh
 // @namespace    http://last.fm/
-// @version      2024.1001
+// @version      2024.1002
 // @description  bleh!!! ^-^
 // @author       kate
 // @match        https://www.last.fm/*
@@ -18,7 +18,7 @@
 // ==/UserScript==
 
 let version = {
-    build: '2024.1001',
+    build: '2024.1002',
     sku: 'scawy',
     feature_flags: {}
 }
@@ -60,7 +60,8 @@ const trans = {
                 loading: 'Fetching your plays on this album',
                 fail: 'You do not have any plays on this album',
                 open_as_track: 'Open album title as a track'
-            }
+            },
+            from_the_album: 'From the album: {album}'
         },
         statistics: {
             scrobbles: {
@@ -6227,13 +6228,13 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                             <h5 class="title">${formatted_title[0]}</h5>
                             <p class="artist">${song_artist_element.innerHTML}</p>
                             <div class="tags">${song_tags_text}</div>
-                            <p class="album">From the album: ${track_image.querySelector('img').getAttribute('alt')}</p>
+                            <p class="album">${trans[lang].music.from_the_album.replace('{album}', correct_item_by_artist(track_image.querySelector('img').getAttribute('alt'), track_artist))}</p>
                         </div>
                     `),
                     allowHTML: true,
                     delay: [500, 50],
-                    placement: 'bottom',
-                    hideOnClick: false
+                    placement: 'bottom'/*,
+                    hideOnClick: false*/
                 });
             } else if (settings.corrections) {
                 let track_title = track.querySelector('.chartlist-name a');
