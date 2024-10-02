@@ -5374,6 +5374,14 @@ p + .chartlist {
     most noteably the "shouts" tab */
     margin-top: unset !important;
 }
+.btn-post-shout {
+    position: relative;
+    --mask: var(--icon-16-shoutbox);
+
+    &:before {
+        --show-icon: block !important;
+    }
+}
 
 .shout-reply-ui {
     margin-top: 12px;
@@ -6150,6 +6158,7 @@ button,
 
 
 /*     BUTTON HAS ICON     */
+.btn-post-shout,
 .list-view-item,
 .btn--has-icon-left,
 .stationlink,
@@ -6287,6 +6296,7 @@ button,
 
 
 /*     ICON MASK     */
+.btn-post-shout:before,
 .auth-link:before,
 .gallery-placeholder:before,
 .image-list-item-bookmarked:after, .image-list-item-preferred:after,
@@ -7112,9 +7122,9 @@ very, very, very dated - who looks up a song on ebay? */
     transition-timing-function: var(--trans-function);
 
     &:not(select) {
-        --bg: transparent;
-        --bg-hov: transparent;
-        --bg-transparent: transparent;
+        --bg: hsla(var(--b6), 20%);
+        --bg-hov: hsla(var(--b6), 40%);
+        --bg-transparent: hsla(var(--b6), 40%);
         border: 1px solid hsl(var(--b4)) !important;
         --shadow: none !important;
         outline: none !important;
@@ -8437,6 +8447,69 @@ text[style^="color: rgb(255, 172, 172)"] {
         &[data-state="hidden"] {
             transform: scaleX(0.85);
             opacity: 0;
+        }
+    }
+
+    &[data-theme="track"] {
+        padding: 10px !important;
+        background: hsl(var(--b5)) !important;
+        border: var(--card-border) !important;
+        border-radius: var(--card-radius) !important;
+        box-shadow: var(--menu-shadow) !important;
+        animation: dropdown calc(var(--trans-short) + 0.02s) var(--trans-function);
+        transform-origin: top;
+        color: hsl(var(--c2));
+        max-width: 500px !important;
+
+        font-size: var(--font-size);
+
+        .tippy-content {
+            display: flex;
+            gap: 10px;
+
+            .image {
+                flex-shrink: 0;
+
+                .inner-image {
+                    width: 60px;
+                    height: 60px;
+                    background: var(--avatar-generic-background);
+                    border-radius: var(--item-med-radius);
+                    overflow: hidden;
+
+                    img {
+                        width: 100%;
+                    }
+                }
+            }
+            .info {
+                display: flex;
+                flex-direction: column;
+                gap: 2px;
+                flex: 1;
+
+                .title {
+                    font-weight: var(--font-weight-medium);
+                    margin: unset;
+                }
+                .artist {
+                    color: hsla(var(--c2), 80%);
+
+                    a {
+                        color: inherit;
+
+                        & + a {
+                            margin-left: 4px;
+                        }
+                    }
+                }
+                .album {
+                    display: flex;
+                    font-size: calc(var(--font-size) - 1px);
+                    color: hsl(var(--c3));
+                    margin: unset;
+                }
+            }
         }
     }
 

@@ -6112,6 +6112,29 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                             }
                         }
                     }
+
+                    // tooltip
+                    if (track_image == null)
+                        return;
+
+                    tippy(track, {
+                        theme: 'track',
+                        content: (`
+                            <div class="image">
+                                <div class="inner-image">
+                                    ${track_image.querySelector('img').outerHTML}
+                                </div>
+                            </div>
+                            <div class="info">
+                                <h5 class="title">${formatted_title[0]}</h5>
+                                <p class="artist">${song_artist_element.innerHTML}</p>
+                                <p class="album">From the album: ${track_image.querySelector('img').getAttribute('alt')}</p>
+                            </div>
+                        `),
+                        allowHTML: true,
+                        delay: [500, 50],
+                        placement: 'bottom'
+                    })
                 } else if (settings.corrections) {
                     let track_title = track.querySelector('.chartlist-name a');
 
