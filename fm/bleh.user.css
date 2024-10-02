@@ -2629,28 +2629,27 @@ header:not(:has(.header-featured-track)) .header-message-user {
 
 
 .header-new--subpage .secondary-nav {
-    margin-top: -46px;
     position: relative;
     top: calc(67px + var(--card-gap));
     border-bottom: 2px solid var(--card-border-base);
-    left: -21px;
-    right: -21px;
-    width: calc(var(--cards-width) - ((var(--card-padding) + 1px) * 2));
+    left: calc(-1 * (var(--card-padding) + 1px));
+    right: calc(-1 * (var(--card-padding) + 1px));
 }
-.header-new--subpage.header-new--artist .secondary-nav {
-    /* artists dont have a track title, so smaller */
-    margin-top: -46px;
-}
+
 .header--user .secondary-nav {
     position: relative;
     top: calc(46px + var(--card-gap) + 15px - 19px);
     border-bottom: 2px solid var(--card-border-base);
-    width: calc(var(--cards-width) - ((var(--card-padding) + 1px) * 2));
 }
 .secondary-nav, .user-dashboard-controls .secondary-nav {
     box-shadow: unset;
     border-bottom: 2px solid var(--card-border-base) !important;
     margin: 0 calc(var(--card-padding) + 1px) !important;
+    width: calc(var(--cards-width) - ((var(--card-padding) + 1px) * 2));
+
+    .header-new--subpage & {
+        margin-top: -46px !important;
+    }
 }
 .user-dashboard-controls .secondary-nav {
     margin-top: unset !important;
@@ -2663,7 +2662,6 @@ header:not(:has(.header-featured-track)) .header-message-user {
     margin-top: var(--card-gap) !important;
     padding: unset !important;
     border-bottom: 2px solid var(--card-border-base);
-    width: calc(var(--cards-width) - ((var(--card-padding) + 1px) * 2));
 }
 
 
