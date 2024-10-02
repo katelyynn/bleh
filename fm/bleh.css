@@ -693,7 +693,8 @@ html body {
 masthead search, as it looks too ugly and focus can be
 inferred by it being opened in the first place */
 :not(#masthead-search-field):focus-visible {
-    outline: 2px solid hsl(var(--l3-c)) !important;
+    /* should only be overrided if a better solution can be given */
+    outline: var(--focus-outline, 2px solid hsl(var(--l3-c))) !important;
 }
 
 
@@ -7106,26 +7107,39 @@ very, very, very dated - who looks up a song on ebay? */
     box-shadow: var(--shadow, var(--interact-shadow)) !important;
     border: unset !important;
     height: 32px;
-    transition-property: background-color, transform, box-shadow, color;
+    transition-property: background-color, transform, box-shadow, color, border;
     transition-duration: var(--trans);
     transition-timing-function: var(--trans-function);
+
+    &:not(select) {
+        --bg: transparent;
+        --bg-hov: transparent;
+        --bg-transparent: transparent;
+        border: 1px solid hsl(var(--b4)) !important;
+        --shadow: none !important;
+        outline: none !important;
+
+        &:focus-visible {
+            --focus-outline: none !important;
+            border: 1px solid hsl(var(--l3-c)) !important;
+            --shadow: 0 0 20px hsla(var(--h4), 40%) !important;
+        }
+    }
+
+    &:hover, &:focus-visible {
+        background-color: var(--bg-hov) !important;
+        transition: none !important;
+    }
+    &:active {
+        background-color: var(--bg-atv) !important;
+    }
+
+    &::placeholder {
+        color: hsl(var(--c3)) !important;
+    }
 }
 .content-form textarea {
     height: unset;
-}
-:is(
-    .content-form .form-control, .content-form input[type="date"], .content-form input[type="email"], .content-form input[type="number"], .content-form input[type="password"], .content-form input[type="text"], .content-form input[type="url"], .content-form select, .content-form textarea
-):is(:hover, :focus-visible) {
-    background-color: var(--bg-hov) !important;
-    transition: none !important;
-}
-:is(
-    .content-form .form-control, .content-form input[type="date"], .content-form input[type="email"], .content-form input[type="number"], .content-form input[type="password"], .content-form input[type="text"], .content-form input[type="url"], .content-form select, .content-form textarea
-):active {
-    background-color: var(--bg-atv) !important;
-}
-textarea::placeholder {
-    color: hsl(var(--c3)) !important;
 }
 
 .content-form .checkbox label, .content-form .form-group .form-group-controls--checkbox label, .content-form .form-group .form-group-controls--radio label, .content-form .form-group ul:not(.bulleted-list):not(.redactor-toolbar) li label, .content-form .radio label {

@@ -5935,10 +5935,11 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         // remove double feature detection in titles breakign things
         // eg. (with A$AP Rocky & feat. Takeoff)
         formatted_title = formatted_title
-        .replaceAll(' & feat. ', ' & ')
-        .replaceAll(' & with ', ' & ');
+        .replaceAll(' & feat. ', ';')
+        .replaceAll(' & with ', ';');
 
         let lowercase_title = formatted_title.toLowerCase();
+        console.log('lowercase', lowercase_title);
         let extras = [];
 
         console.log(formatted_title, lowercase_title);
@@ -5981,6 +5982,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
         console.log(extras);
         for (let extra in extras) {
+            console.log(extras[extra]);
             if ((parseInt(extra) + 1) < extras.length) {
                 let chr = extras[extra].chr;
                 let next_chr = extras[parseInt(extra) + 1].chr;
@@ -5997,9 +5999,11 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             let field_text = extras[extra].text
             .replace(' feat. ', '').replace('feat. ', '').replace('featuring ', '').replace('Feat. ', '').replace('ft. ', '').replace('FEAT. ', '')
             .replace('w/ ', '').replace('with ', '')
-            .replaceAll(' & ', ';').replaceAll(', ', ';').replaceAll(' and ', ';')
+            .replaceAll(' &', ';').replaceAll(', ', ';').replaceAll(' and ', ';')
             .replaceAll('Tyler;the', 'Tyler, the').replaceAll(' with ', ';')
             .replaceAll('- ', '');
+
+            console.log('pre-split', field_text);
 
             if (field_group == 'guests')
                 song_guests = field_text.split(';');
@@ -6091,7 +6095,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     if (song_artist_element != undefined) {
                         if (song_artist_element.textContent.replaceAll('+', ' ').trim() == track_artist) {
                             // replaces with corrected artist if applicable
-                            song_artist_element.innerHTML = `<a href="/music/${formatted_title[2].replaceAll(' ', '+')}" title="${formatted_title[2]}">${formatted_title[2]}</a>`;
+                            song_artist_element.innerHTML = `<a href="/music/${sanitise(formatted_title[2])}" title="${formatted_title[2]}">${formatted_title[2]}</a>`;
 
                             // append guests
                             let song_guests = formatted_title[3];
@@ -6100,7 +6104,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                                 song_artist_element.innerHTML = `${song_artist_element.innerHTML},`;
 
                                 let guest_element = document.createElement('a');
-                                guest_element.setAttribute('href', `${root}music/${song_guests[guest].replaceAll(' ', '+')}`);
+                                guest_element.setAttribute('href', `${root}music/${sanitise(song_guests[guest])}`);
                                 guest_element.setAttribute('title', song_guests[guest]);
                                 guest_element.textContent = song_guests[guest];
 
@@ -6186,7 +6190,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
                     let guest_element = document.createElement('a');
                     guest_element.classList.add('header-new-crumb');
-                    guest_element.setAttribute('href',`/music/${song_guests[guest]}`);
+                    guest_element.setAttribute('href',`/music/${sanitise(song_guests[guest])}`);
                     guest_element.setAttribute('title',song_guests[guest]);
                     guest_element.textContent = song_guests[guest];
 
