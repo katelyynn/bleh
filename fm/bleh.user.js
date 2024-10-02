@@ -5932,6 +5932,12 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 formatted_title = song_title_corrections[original_artist.toLowerCase()][formatted_title];
         }
 
+        // remove double feature detection in titles breakign things
+        // eg. (with A$AP Rocky & feat. Takeoff)
+        formatted_title = formatted_title
+        .replaceAll(' & feat. ', ' & ')
+        .replaceAll(' & with ', ' & ');
+
         let lowercase_title = formatted_title.toLowerCase();
         let extras = [];
 
