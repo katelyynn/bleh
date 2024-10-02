@@ -3332,7 +3332,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
                 let shout_avatar = shout.querySelector('.shout-user-avatar');
 
-                patch_avatar(shout_avatar, shout_name);
+                patch_avatar(shout_avatar, shout_name, 'shout');
 
                 if (settings.shout_markdown) {
                     let shout_body = shout.querySelector('.shout-body p');
@@ -3387,7 +3387,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
 
     // patch avatar
-    function patch_avatar(element, name) {
+    function patch_avatar(element, name, type = '') {
         if (!element.hasAttribute('data-kate-processed')) {
             element.setAttribute('data-kate-processed', 'true');
 
@@ -3416,15 +3416,67 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 badge.classList.add('avatar-status-dot',`user-status--bleh-${this_badge.type}`,`user-status--bleh-user-${name}`);
                 element.appendChild(badge);
 
-                tippy(badge, {
-                    content: `${name}, ${this_badge.name}`
+                tippy(element, {
+                    theme: 'user',
+                    content: (`
+                        <div class="image">
+                            <div class="inner-image">
+                                ${element.querySelector('img').outerHTML}
+                            </div>
+                        </div>
+                        <div class="info">
+                            <h5 class="title ${(name == 'cutensilly') ? 'bleh--name-is-cute-less' : ''}">${name}</h5>
+                            <p class="descriptor">Top Badge</p>
+                            <p class="badge user-status--bleh-${this_badge.type} user-status--bleh-user-${name}" data-badge-type="${this_badge.type}" data-badge-user="${name}">${this_badge.name}</p>
+                        </div>
+                    `),
+                    allowHTML: true,
+                    delay: [100, 50],
+                    placement: 'bottom',
+                    hideOnClick: false
                 });
             } else {
                 let pre_existing_badge = element.querySelector('.avatar-status-dot');
-                tippy(pre_existing_badge, {
-                    content: `${name}, ${element.getAttribute('title')}`
-                });
-                element.setAttribute('title','');
+                if (pre_existing_badge == null) {
+                    tippy(element, {
+                        theme: 'user',
+                        content: (`
+                            <div class="image">
+                                <div class="inner-image">
+                                    ${element.querySelector('img').outerHTML}
+                                </div>
+                            </div>
+                            <div class="info">
+                                <h5 class="title ${(name == 'cutensilly') ? 'bleh--name-is-cute-less' : ''}">${name}</h5>
+                            </div>
+                        `),
+                        allowHTML: true,
+                        delay: [100, 50],
+                        placement: 'bottom',
+                        hideOnClick: false
+                    });
+                } else {
+                    tippy(element, {
+                        theme: 'user',
+                        content: (`
+                            <div class="image">
+                                <div class="inner-image">
+                                    ${element.querySelector('img').outerHTML}
+                                </div>
+                            </div>
+                            <div class="info">
+                                <h5 class="title ${(name == 'cutensilly') ? 'bleh--name-is-cute-less' : ''}">${name}</h5>
+                                <p class="descriptor">Top Badge</p>
+                                <p class="badge ${pre_existing_badge.classList[1]}">${element.getAttribute('title')}</p>
+                            </div>
+                        `),
+                        allowHTML: true,
+                        delay: [100, 50],
+                        placement: 'bottom',
+                        hideOnClick: false
+                    });
+                    element.setAttribute('title', '');
+                }
             }
         }
     }
@@ -6135,7 +6187,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                         delay: [500, 50],
                         placement: 'bottom',
                         hideOnClick: false
-                    })
+                    });
                 } else if (settings.corrections) {
                     let track_title = track.querySelector('.chartlist-name a');
 
