@@ -6065,7 +6065,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     if (track_title == undefined)
                         return;
 
-                    let track_artist = track_title.getAttribute('href').split('/')[2].replaceAll('+',' ');
+                    let track_artist = return_artist_from_track(track_title.getAttribute('href'));
 
                     let formatted_title = name_includes(track_title.textContent, track_artist);
                     console.log('formatted', formatted_title);
@@ -6871,5 +6871,25 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
         `);
 
         col_sidebar.insertBefore(wiki_syntax, col_sidebar.firstElementChild);
+    }
+
+
+    function sanitise(text) {
+        return text
+        .replaceAll(' ', '+')
+        .replaceAll('?', '%3F');
+    }
+    function desanitise(text) {
+        return text
+        .replaceAll('+', ' ')
+        .replaceAll('%3F', '?');
+    }
+
+
+    function return_artist_from_track(url) {
+        let split = url.split('/');
+        let length = (split.length - 1);
+
+        return desanitise(split[length - 2]);
     }
 })();
