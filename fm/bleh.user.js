@@ -304,6 +304,10 @@ const trans = {
                     name: 'Stack track name and title',
                     bio: 'Both matches streaming services and increases max length of each.'
                 },
+                show_remaster_tags: {
+                    name: 'Show remaster tags',
+                    bio: 'Nobody likes remasters (or the tags), if you\'d prefer to still listen but remove the annoyance hide them!'
+                },
                 submit: {
                     name: 'Submit new correction',
                     bio: 'Have an artist, album, or track name that you feel is capitalised wrong?',
@@ -1266,9 +1270,12 @@ let includes = {
     versions: [
         '(taylor', '- spotify singles'
     ],
+    remasters: [
+        '- remaster', '(remaster'
+    ],
     mixes: [
         '- devonshire mix', '(devonshire mix',
-        '- remaster', '(remaster', 'mike dean master',
+        'mike dean master',
         '- remix', '(remix',
         '- live', '(live',
         '- demo', '(demo',
@@ -1424,6 +1431,7 @@ let settings_template = {
     format_guest_features: true,
     show_guest_features: false,
     stacked_chartlist_info: true,
+    show_remaster_tags: true,
     corrections: true,
     colourful_counts: true,
     rain: false,
@@ -1537,6 +1545,13 @@ let settings_base = {
     },
     stacked_chartlist_info: {
         css: 'stacked_chartlist_info',
+        unit: '',
+        value: true,
+        values: [true, false],
+        type: 'toggle'
+    },
+    show_remaster_tags: {
+        css: 'show_remaster_tags',
         unit: '',
         value: true,
         values: [true, false],
@@ -4985,6 +5000,18 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                             </button>
                         </div>
                     </div>
+                    <div class="toggle-container" id="container-show_remaster_tags">
+                        <button class="btn reset" onclick="_reset_item('show_remaster_tags')">${trans[lang].settings.reset}</button>
+                        <div class="heading">
+                            <h5>${trans[lang].settings.corrections.show_remaster_tags.name}</h5>
+                            <p>${trans[lang].settings.corrections.show_remaster_tags.bio}</p>
+                        </div>
+                        <div class="toggle-wrap">
+                            <button class="toggle" id="toggle-show_remaster_tags" onclick="_update_item('show_remaster_tags')" aria-checked="true">
+                                <div class="dot"></div>
+                            </button>
+                        </div>
+                    </div>
                     <div class="toggle-container" id="container-stacked_chartlist_info">
                         <button class="btn reset" onclick="_reset_item('stacked_chartlist_info')">${trans[lang].settings.reset}</button>
                         <div class="heading">
@@ -6084,141 +6111,150 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
 
     function patch_titles(element) {
-        let tracks = element.querySelectorAll('.chartlist-row:not(.chartlist__placeholder-row)');
-
-        if (tracks == undefined)
+        let tracklist = element.querySelector('.chartlist:not(.chartlist__placeholder)');
+        if (tracklist == null)
             return;
 
-        tracks.forEach((track => {
-            if (!track.hasAttribute('data-kate-processed')) {
-                track.setAttribute('data-kate-processed','true');
+        console.log(tracklist);
 
-                // image
-                let track_image = track.querySelector('.chartlist-image a.cover-art');
+        // used to ensure this hasnt been ran thru
+        if (tracklist.querySelector('tbody > .chartlist-row:first-child > .kate-placeholder') != null)
+            return;
+
+        let tracks = tracklist.querySelectorAll('.chartlist-row:not(.chartlist__placeholder-row)');
+
+        tracks.forEach((track => {
+            console.log('track', track);
+
+            let bla = document.createElement('div');
+            bla.classList.add('kate-placeholder');
+            track.appendChild(bla);
+
+            // image
+            let track_image = track.querySelector('.chartlist-image a.cover-art');
+
+            if (track_image != null) {
+                // this has an album
+                let track_image_img = track_image.querySelector('img');
+                tippy(track_image, {
+                    content: track_image_img.getAttribute('alt')
+                });
+            } else {
+                // is there an avatar?
+                track_image = track.querySelector('.chartlist-image > span');
 
                 if (track_image != null) {
-                    // this has an album
+                    // artist statistic
+                    if (track_image.classList.contains('avatar') && settings.colourful_counts) {
+                        patch_artist_ranks_in_list_view(track);
+                        return;
+                    }
+
                     let track_image_img = track_image.querySelector('img');
                     tippy(track_image, {
                         content: track_image_img.getAttribute('alt')
                     });
+                }
+            }
+
+            // duration
+            let track_timestamp = track.querySelector('.chartlist-timestamp span');
+            if (track_timestamp != undefined) {
+                tippy(track_timestamp, {
+                    content: track_timestamp.getAttribute('title')
+                });
+                track_timestamp.setAttribute('title', '');
+            }
+
+            if (settings.format_guest_features) {
+                let track_title = track.querySelector('.chartlist-name a');
+                console.info('bleh - guest features, track title:', track_title);
+
+                if (track_title == undefined)
+                    return;
+
+                let track_artist = return_artist_from_track(track_title.getAttribute('href'));
+
+                let formatted_title = name_includes(track_title.getAttribute('title'), track_artist);
+                console.log('formatted', formatted_title);
+                let song_title = formatted_title[0];
+                let song_tags = formatted_title[1];
+
+                // parse tags into text
+                let song_tags_text = '';
+                for (let song_tag in song_tags) {
+                    song_tags_text = `${song_tags_text}<div class="feat" data-bleh--tag-type="${song_tags[song_tag].type}" data-bleh--tag-group="${song_tags[song_tag].group}">${song_tags[song_tag].text}</div>`;
+                }
+
+                // combine
+                track_title.innerHTML = `<div class="title">${song_title}</div>${song_tags_text}`;
+
+                let song_artist_element = track.querySelector('.chartlist-artist');
+                if (song_artist_element != undefined) {
+                    if (song_artist_element.textContent.replaceAll('+', ' ').trim() == track_artist) {
+                        // replaces with corrected artist if applicable
+                        song_artist_element.innerHTML = `<a href="/music/${sanitise(formatted_title[2])}" title="${formatted_title[2]}">${formatted_title[2]}</a>`;
+
+                        // append guests
+                        let song_guests = formatted_title[3];
+                        for (let guest in song_guests) {
+                            // &
+                            song_artist_element.innerHTML = `${song_artist_element.innerHTML},`;
+
+                            let guest_element = document.createElement('a');
+                            guest_element.setAttribute('href', `${root}music/${sanitise(song_guests[guest])}`);
+                            guest_element.setAttribute('title', song_guests[guest]);
+                            guest_element.textContent = song_guests[guest];
+
+                            song_artist_element.appendChild(guest_element);
+                        }
+                    }
+                }
+
+                // tooltip
+                if (track_image == null)
+                    return;
+
+                tippy(track, {
+                    theme: 'track',
+                    content: (`
+                        <div class="image">
+                            <div class="inner-image">
+                                ${track_image.querySelector('img').outerHTML}
+                            </div>
+                        </div>
+                        <div class="info">
+                            <h5 class="title">${formatted_title[0]}</h5>
+                            <p class="artist">${song_artist_element.innerHTML}</p>
+                            <div class="tags">${song_tags_text}</div>
+                            <p class="album">From the album: ${track_image.querySelector('img').getAttribute('alt')}</p>
+                        </div>
+                    `),
+                    allowHTML: true,
+                    delay: [500, 50],
+                    placement: 'bottom',
+                    hideOnClick: false
+                });
+            } else if (settings.corrections) {
+                let track_title = track.querySelector('.chartlist-name a');
+
+                if (track_title == undefined)
+                    return;
+
+                let song_artist_element = track.querySelector('.chartlist-artist a');
+                if (song_artist_element != undefined) {
+                    let corrected_title = correct_item_by_artist(track_title.textContent, song_artist_element.textContent);
+                    track_title.textContent = corrected_title;
+                    track_title.setAttribute('title', corrected_title);
+
+                    let corrected_artist = correct_artist(song_artist_element.textContent);
+                    song_artist_element.textContent = corrected_artist;
+                    song_artist_element.setAttribute('title', corrected_artist);
                 } else {
-                    // is there an avatar?
-                    track_image = track.querySelector('.chartlist-image > span');
-
-                    if (track_image != null) {
-                        // artist statistic
-                        if (track_image.classList.contains('avatar') && settings.colourful_counts) {
-                            patch_artist_ranks_in_list_view(track);
-                            return;
-                        }
-
-                        let track_image_img = track_image.querySelector('img');
-                        tippy(track_image, {
-                            content: track_image_img.getAttribute('alt')
-                        });
-                    }
-                }
-
-                // duration
-                let track_timestamp = track.querySelector('.chartlist-timestamp span');
-                if (track_timestamp != undefined) {
-                    tippy(track_timestamp, {
-                        content: track_timestamp.getAttribute('title')
-                    });
-                    track_timestamp.setAttribute('title', '');
-                }
-
-                if (settings.format_guest_features) {
-                    let track_title = track.querySelector('.chartlist-name a');
-                    console.info('bleh - guest features, track title:', track_title);
-
-                    if (track_title == undefined)
-                        return;
-
-                    let track_artist = return_artist_from_track(track_title.getAttribute('href'));
-
-                    let formatted_title = name_includes(track_title.textContent, track_artist);
-                    console.log('formatted', formatted_title);
-                    let song_title = formatted_title[0];
-                    let song_tags = formatted_title[1];
-
-                    // parse tags into text
-                    let song_tags_text = '';
-                    for (let song_tag in song_tags) {
-                        song_tags_text = `${song_tags_text}<div class="feat" data-bleh--tag-type="${song_tags[song_tag].type}" data-bleh--tag-group="${song_tags[song_tag].group}">${song_tags[song_tag].text}</div>`;
-                    }
-
-                    // combine
-                    track_title.innerHTML = `<div class="title">${song_title}</div>${song_tags_text}`;
-
-                    let song_artist_element = track.querySelector('.chartlist-artist');
-                    if (song_artist_element != undefined) {
-                        if (song_artist_element.textContent.replaceAll('+', ' ').trim() == track_artist) {
-                            // replaces with corrected artist if applicable
-                            song_artist_element.innerHTML = `<a href="/music/${sanitise(formatted_title[2])}" title="${formatted_title[2]}">${formatted_title[2]}</a>`;
-
-                            // append guests
-                            let song_guests = formatted_title[3];
-                            for (let guest in song_guests) {
-                                // &
-                                song_artist_element.innerHTML = `${song_artist_element.innerHTML},`;
-
-                                let guest_element = document.createElement('a');
-                                guest_element.setAttribute('href', `${root}music/${sanitise(song_guests[guest])}`);
-                                guest_element.setAttribute('title', song_guests[guest]);
-                                guest_element.textContent = song_guests[guest];
-
-                                song_artist_element.appendChild(guest_element);
-                            }
-                        }
-                    }
-
-                    // tooltip
-                    if (track_image == null)
-                        return;
-
-                    tippy(track, {
-                        theme: 'track',
-                        content: (`
-                            <div class="image">
-                                <div class="inner-image">
-                                    ${track_image.querySelector('img').outerHTML}
-                                </div>
-                            </div>
-                            <div class="info">
-                                <h5 class="title">${formatted_title[0]}</h5>
-                                <p class="artist">${song_artist_element.innerHTML}</p>
-                                <div class="tags">${song_tags_text}</div>
-                                <p class="album">From the album: ${track_image.querySelector('img').getAttribute('alt')}</p>
-                            </div>
-                        `),
-                        allowHTML: true,
-                        delay: [500, 50],
-                        placement: 'bottom',
-                        hideOnClick: false
-                    });
-                } else if (settings.corrections) {
-                    let track_title = track.querySelector('.chartlist-name a');
-
-                    if (track_title == undefined)
-                        return;
-
-                    let song_artist_element = track.querySelector('.chartlist-artist a');
-                    if (song_artist_element != undefined) {
-                        let corrected_title = correct_item_by_artist(track_title.textContent, song_artist_element.textContent);
-                        track_title.textContent = corrected_title;
-                        track_title.setAttribute('title', corrected_title);
-
-                        let corrected_artist = correct_artist(song_artist_element.textContent);
-                        song_artist_element.textContent = corrected_artist;
-                        song_artist_element.setAttribute('title', corrected_artist);
-                    } else {
-                        let track_artist = track_title.getAttribute('href').split('/')[2].replaceAll('+',' ');
-                        let corrected_title = correct_item_by_artist(track_title.textContent, track_artist);
-                        track_title.textContent = corrected_title;
-                        track_title.setAttribute('title', corrected_title);
-                    }
+                    let track_artist = track_title.getAttribute('href').split('/')[2].replaceAll('+',' ');
+                    let corrected_title = correct_item_by_artist(track_title.textContent, track_artist);
+                    track_title.textContent = corrected_title;
+                    track_title.setAttribute('title', corrected_title);
                 }
             }
         }));

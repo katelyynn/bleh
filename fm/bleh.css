@@ -5037,6 +5037,13 @@ better than the default selector '#app a' i suppose */
         }
     }
 }
+[data-bleh--show_remaster_tags="false"] {
+    .feat {
+        &[data-bleh--tag-group="remasters"] {
+            display: none;
+        }
+    }
+}
 
 [data-bleh--stacked_chartlist_info="true"] {
     .chartlist.chartlist--with-artist {
