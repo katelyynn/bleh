@@ -1280,6 +1280,10 @@ let includes = {
         '- alternative', '(alternative',
         '(mix 1', '(mix 2', '(mix 3', '(mix 4', '(mix 5', '(mix 6', '(mix 7', '(mix 8', '(mix 9',
         '- chopped', '(chopped', '[chopped',
+        '(kate',
+        '(asmr',
+        '(agressive', '(aggressive', 'brazilian phonk', // lol
+        '- sped up', '(sped up', '- slow', '(slow'
     ],
     mixes_numbers: [
         '(v1', '(v2', '(v3', '(v4', '(v5', '(v6', '(v7', '(v8', '(v9',
@@ -6049,22 +6053,27 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             let field_group = extras[extra].group;
             // remove beginning tag
             let field_text = extras[extra].text
-            .replace(' feat. ', '').replace('feat. ', '').replace('featuring ', '').replace('Feat. ', '').replace('ft. ', '').replace('FEAT. ', '')
+            .replace(' feat. ', '').replace('feat. ', '').replace('featuring ', '').replace('Feat. ', '').replace('ft. ', '').replace('FEAT. ', '').replace('WITH', 'with')
             .replace('w/ ', '').replace('with ', '')
             .replaceAll(' &', ';').replaceAll(', ', ';').replaceAll(' and ', ';')
             .replaceAll('Tyler;the', 'Tyler, the').replaceAll(' with ', ';')
-            .replaceAll('- ', '');
+            .replaceAll('- ', '')
+            .replaceAll(',; ', ';');
 
             console.log('pre-split', field_text);
 
-            if (field_group == 'guests')
+            if (field_group == 'guests') {
                 song_guests = field_text.split(';');
+
+                for (let guest in song_guests)
+                    song_guests[guest] = correct_artist(song_guests[guest]);
+            }
         }
 
 
         // song artist
         if (artist_corrections.hasOwnProperty(original_artist))
-            original_artist = artist_corrections[original_artist];
+            original_artist = correct_artist(artist_corrections[original_artist]);
 
 
         if (extras.length > 0)
@@ -6180,6 +6189,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                             <div class="info">
                                 <h5 class="title">${formatted_title[0]}</h5>
                                 <p class="artist">${song_artist_element.innerHTML}</p>
+                                <div class="tags">${song_tags_text}</div>
                                 <p class="album">From the album: ${track_image.querySelector('img').getAttribute('alt')}</p>
                             </div>
                         `),
