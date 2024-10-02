@@ -6133,7 +6133,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                         `),
                         allowHTML: true,
                         delay: [500, 50],
-                        placement: 'bottom'
+                        placement: 'bottom',
+                        hideOnClick: false
                     })
                 } else if (settings.corrections) {
                     let track_title = track.querySelector('.chartlist-name a');
