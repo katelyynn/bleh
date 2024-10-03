@@ -2634,6 +2634,7 @@ header:not(:has(.header-featured-track)) .header-message-user {
     top: calc(46px + var(--card-gap) + 15px - 19px);
     border-bottom: 2px solid var(--card-border-base);
 }
+.bleh--nav-wrap .navlist,
 .secondary-nav, .user-dashboard-controls .secondary-nav {
     box-shadow: unset;
     border-bottom: 2px solid var(--card-border-base) !important;
@@ -14998,7 +14999,6 @@ button.bleh--gallery-bookmark-image-btn {
     }
 
     .navlist {
-        width: var(--cards-width);
         overflow: visible !important;
     }
 
