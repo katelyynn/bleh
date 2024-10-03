@@ -4353,6 +4353,10 @@ state is not active, which then falls back to primary button styling */
     }
 }
 
+.tasteometer-donut-base {
+    fill: hsl(var(--b5));
+}
+
 .tasteometer-compat-description {
     font-size: 0;
     margin-top: unset !important;
@@ -4875,16 +4879,21 @@ better than the default selector '#app a' i suppose */
         --sat-seasonal: 1;
         --lit-seasonal: 1;
     }
-}
-.chartlist-loved:before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(90deg, transparent 0%, hsla(var(--h3), 40%) 100%);
-    border-radius: var(--item-med-radius);
-    transition-property: opacity;
-    transition-duration: var(--trans);
-    transition-timing-function: var(--trans-function);
+
+    &:before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(90deg, transparent 0%, hsla(var(--h3), 40%) 100%);
+        border-radius: var(--item-med-radius);
+        transition-property: opacity;
+        transition-duration: var(--trans);
+        transition-timing-function: var(--trans-function);
+    }
+
+    [data-bleh--theme="light"] &:before {
+        background: linear-gradient(90deg, transparent 0%, hsla(var(--h4), 35%) 100%);
+    }
 }
 .chartlist-loved:has([data-toggle-button-current-state="unloved"]):before {
     opacity: 0;
