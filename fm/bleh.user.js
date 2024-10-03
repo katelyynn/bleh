@@ -1272,7 +1272,8 @@ let includes = {
         '(taylor', '- spotify singles'
     ],
     remasters: [
-        '- remaster', '(remaster'
+        '- remaster', '(remaster',
+        '- 19', '- 20', '(19', '(20'
     ],
     mixes: [
         '- devonshire mix', '(devonshire mix',
@@ -1325,8 +1326,7 @@ let includes = {
         '- anniversary', '(anniversary', '[anniversary',
         '- b-side', '- c-side', '(b-side', '(c-side',
         '- lp', '- ep', '(lp', '(ep',
-        '- single', '(single',
-        '- 19', '- 20', '(19', '(20'
+        '- single', '(single'
     ]
 }
 
@@ -6126,6 +6126,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
         tracks.forEach((track => {
             console.log('track', track);
+            track.classList.add('chartlist-row--with-artist');
 
             let bla = document.createElement('div');
             bla.classList.add('kate-placeholder');
@@ -6192,7 +6193,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
                 let song_artist_element = track.querySelector('.chartlist-artist');
                 if (song_artist_element != undefined) {
-                    if (song_artist_element.textContent.replaceAll('+', ' ').trim() == track_artist) {
+                    // if artist matches OR artist is blank
+                    if (song_artist_element.textContent.replaceAll('+', ' ').trim() == track_artist || song_artist_element.textContent.trim() == '') {
                         // replaces with corrected artist if applicable
                         song_artist_element.innerHTML = `<a href="/music/${sanitise(formatted_title[2])}" title="${formatted_title[2]}">${formatted_title[2]}</a>`;
 
@@ -6213,7 +6215,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 }
 
                 // tooltip
-                if (track_image == null)
+                if (track_image == null || song_artist_element == null)
                     return;
 
                 tippy(track, {

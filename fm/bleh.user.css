@@ -4776,6 +4776,10 @@ better than the default selector '#app a' i suppose */
         background-color: var(--bg-hov);
         transition: none !important;
     }
+
+    .kate-placeholder {
+        display: none;
+    }
 }
 .chartlist:not(.chartlist--with-image) .chartlist-row {
     padding: 3px 12px;
@@ -5048,7 +5052,7 @@ better than the default selector '#app a' i suppose */
     }
 }
 [data-bleh--show_remaster_tags="false"] {
-    .feat {
+    .chartlist-name .feat {
         &[data-bleh--tag-group="remasters"] {
             display: none;
         }
