@@ -6030,7 +6030,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             let field_text = extras[extra].text
             .replace(' feat. ', '').replace('feat. ', '').replace('featuring ', '').replace('Feat. ', '').replace('ft. ', '').replace('FEAT. ', '').replace('WITH', 'with')
             .replace('w/ ', '').replace('with ', '')
-            .replaceAll(' &', ';').replaceAll(', ', ';').replaceAll(' and ', ';')
+            .replaceAll(' & ', ';').replaceAll(', ', ';').replaceAll(' and ', ';')
             .replaceAll('Tyler;the', 'Tyler, the').replaceAll(' with ', ';')
             .replaceAll('- ', '')
             .replaceAll(',; ', ';');
