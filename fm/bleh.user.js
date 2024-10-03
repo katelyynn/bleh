@@ -1120,6 +1120,10 @@ let song_title_corrections = {
         'EVERYDAY HUSTLE': 'Everyday Hustle',
         'SEEN IT ALL': 'Seen it All'
     },
+    'tyler, the creator': {
+        'What A Day': 'WHAT A DAY',
+        'Sorry Not Sorry': 'SORRY NOT SORRY'
+    },
     'quinn': {
         'Quinn': 'quinn'
     },
