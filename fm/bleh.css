@@ -2666,7 +2666,7 @@ header:not(:has(.header-featured-track)) .header-message-user {
     margin-top: unset !important;
     position: absolute;
     top: 50px;
-    right: 0;
+    right: calc(var(--card-padding) + 1px);
     z-index: 100;
 }
 .library-search-submit {
@@ -4240,7 +4240,7 @@ state is not active, which then falls back to primary button styling */
     /* undo sr-only */
     clip: unset;
     border: unset;
-    width: unset;
+    width: max-content !important;
     height: unset;
     margin: unset;
     overflow: unset;
@@ -4253,6 +4253,7 @@ state is not active, which then falls back to primary button styling */
     line-height: var(--line-height);
     font-weight: var(--font-weight-medium);
     z-index: 5;
+    margin: unset !important;
 }
 
 
@@ -4505,6 +4506,8 @@ h2:not(.count, .mask-multi-text, .mask-text, .sr-only, .js-gallery-heading, .top
     font-weight: var(--font-weight-medium) !important;
     letter-spacing: unset !important;
     text-transform: unset !important;
+
+    margin-left: calc(var(--card-padding) + 1px);
 }
 
 
@@ -7443,6 +7446,10 @@ that literally is 1 user from 2007 who hasnt even gotten a scrobble */
 /*     LIBRARY     */
 .library-overview-header {
     margin-top: var(--card-gap);
+
+    .metadata-list + & {
+        padding: 0 calc(var(--card-padding) + 1px);
+    }
 }
 .library-artist-section-header {
     margin-bottom: unset !important;

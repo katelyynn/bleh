@@ -6175,7 +6175,12 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 if (track_title == undefined)
                     return;
 
-                let track_artist = return_artist_from_track(track_title.getAttribute('href'));
+                let is_user = (track.querySelector('.chartlist-image .avatar') != null);
+                let is_album = ((!is_user && track.querySelector('.chartlist-artist') == null) || track.classList.contains('bleh--is-album'));
+                if (is_album)
+                    track.classList.add('bleh--is-album');
+
+                let track_artist = return_artist_from_track(track_title.getAttribute('href'), is_album);
 
                 let formatted_title = name_includes(track_title.getAttribute('title'), track_artist);
                 console.log('formatted', formatted_title);
@@ -6192,7 +6197,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 track_title.innerHTML = `<div class="title">${song_title}</div>${song_tags_text}`;
 
                 let song_artist_element = track.querySelector('.chartlist-artist');
-                if (song_artist_element == null && track.querySelector('.chartlist-album') != null) {
+                if (song_artist_element == null && !is_user) {
                     song_artist_element = document.createElement('td');
                     song_artist_element.classList.add('chartlist-artist');
                     track.appendChild(song_artist_element);
@@ -6234,7 +6239,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                             <h5 class="title">${formatted_title[0]}</h5>
                             <p class="artist">${song_artist_element.innerHTML}</p>
                             <div class="tags">${song_tags_text}</div>
-                            <p class="album">${trans[lang].music.from_the_album.replace('{album}', correct_item_by_artist(track_image.querySelector('img').getAttribute('alt'), track_artist))}</p>
+                            ${(is_album) ? '' : `<p class="album">${trans[lang].music.from_the_album.replace('{album}', correct_item_by_artist(track_image.querySelector('img').getAttribute('alt'), track_artist))}</p>`}
                         </div>
                     `),
                     allowHTML: true,
@@ -7025,10 +7030,13 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     }
 
 
-    function return_artist_from_track(url) {
+    function return_artist_from_track(url, is_album) {
         let split = url.split('/');
         let length = (split.length - 1);
 
-        return desanitise(split[length - 2]);
+        if (is_album)
+            return desanitise(split[length - 1]);
+        else
+            return desanitise(split[length - 2]);
     }
 })();
