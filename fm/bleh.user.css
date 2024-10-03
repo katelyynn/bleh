@@ -230,7 +230,8 @@ input[type="range"],
 .form-row-help-text,
 .chartlist-loved,
 .preview, .preview[data-bleh--theme="dark"],
-.badge
+.badge,
+.track .bar .colourful
 {
     --hue:  var(--hue-over,
             var(--hue-album,
@@ -13778,12 +13779,12 @@ input[type="range"]::-moz-range-progress {
     justify-content: space-evenly;
 }
 [data-bleh--colourful_counts="true"] {
-    .bleh--personal-stats-if-not-colourful {
+    .not-colourful {
         display: none !important;
     }
 }
 [data-bleh--colourful_counts="false"] {
-    .bleh--personal-stats-if-colourful {
+    .colourful {
         display: none !important;
     }
 }
