@@ -2016,7 +2016,7 @@ span.header-new-gallery-inner a,
 /* apply tag styling to everything tag-related */
 .catalogue-tags .tags-add,
 .catalogue-tags .tag a, .catalogue-tags .tags-add-cta {
-    box-shadow: var(--interact-shadow) !important;
+    box-shadow: 0 0 0 1px hsla(var(--b3), 40%) inset, var(--interact-shadow) !important;
     color: hsl(var(--c3)) !important;
     font-weight: var(--font-weight);
     background-color: hsl(var(--b4));
@@ -2030,8 +2030,7 @@ span.header-new-gallery-inner a,
     transition-duration: var(--trans);
     transition-timing-function: var(--trans-function);
     /* -10 to overlap spacing, -1 for the border */
-    border-left: 1px solid hsl(var(--b5));
-    margin-left: -11px;
+    margin-left: -10px;
     /* last.fm by default sets this to 150px,
     with the padding in bleh this conflicts with eg.
     the underground hip-hop tag */
@@ -4236,7 +4235,7 @@ state is not active, which then falls back to primary button styling */
     gap: 10px;
     height: 32px;
     margin: unset !important;
-    box-shadow: var(--interact-shadow);
+    box-shadow: 0 0 0 1px hsla(var(--b3), 40%) inset, var(--interact-shadow);
     position: relative;
     --show-icon: none;
 }
