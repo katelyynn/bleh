@@ -1060,7 +1060,18 @@ let artist_corrections = {
     'Blackshape': 'BLACKSHAPE',
     'Olivia': 'OLIVIA',
     'Diesect': 'DIESECT',
-    'Milet': 'milet'
+    'Milet': 'milet',
+    //
+    'ty dolla $ign': 'Ty Dolla $ign',
+    'juicy J': 'Juicy J',
+    'eminem': 'Eminem',
+    'project pat': 'Project Pat',
+    'kenny Mason': 'Kenny Mason',
+    'SKI mask THE slump God': 'Ski Mask The Slump God',
+    //
+    'J.I.D | J.1.D': 'J.I.D',
+    'ZILLAKAMI | JPEGMAF1A + Z1LLAKAM1': 'ZILLAKAMI',
+    'GOLDLINK | TWELVE\'LEN + GOLDL1NK': 'GOLDLINK'
 }
 let song_title_corrections = {
     'quadeca': {

@@ -57,21 +57,27 @@ body {
         --hue-seasonal: 228;
         --sat-seasonal: 0.85;
         --lit-seasonal: 1.1;
+
+        --hue-pos: 150;
     }
     [data-bleh--season="christmas"] & {
         --hue-seasonal: 204;
         --sat-seasonal: 0.85;
         --lit-seasonal: 1.2;
+
+        --hue-pos: 150;
     }
     [data-bleh--season="new_years"] & {
         --hue-seasonal: 233;
         --sat-seasonal: 0.925;
         --lit-seasonal: 1.1;
+
+        --hue-pos: 150;
     }
 
     --brand: 'bleh';
 
-    --hue-pos: 160;
+    --hue-pos: 130;
     --hue-neg: -2;
     --hue-fav: 15;
     --hue-pro: 174;
