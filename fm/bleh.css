@@ -280,7 +280,7 @@ input[type="range"],
         --h2: var(--l2-c);
         --h3: var(--l3-c);
         --h3-sat: calc(var(--sat) * 50%);
-        --h3-lit: calc(clamp(min(0.5), var(--lit), max(1.5)) * 60%);
+        --h3-lit: calc(clamp(min(0.5), var(--lit), max(1.5)) * 70%);
         --h4: var(--l4-c);
         --g4: var(--hue), calc(var(--sat) * 40%), calc(clamp(min(0.5), var(--lit), max(1.5)) * 10%);
 
