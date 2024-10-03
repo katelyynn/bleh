@@ -6192,25 +6192,29 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 track_title.innerHTML = `<div class="title">${song_title}</div>${song_tags_text}`;
 
                 let song_artist_element = track.querySelector('.chartlist-artist');
-                if (song_artist_element != undefined) {
-                    // if artist matches OR artist is blank
-                    if (song_artist_element.textContent.replaceAll('+', ' ').trim() == track_artist || song_artist_element.textContent.trim() == '') {
-                        // replaces with corrected artist if applicable
-                        song_artist_element.innerHTML = `<a href="/music/${sanitise(formatted_title[2])}" title="${formatted_title[2]}">${formatted_title[2]}</a>`;
+                if (song_artist_element == null && track.querySelector('.chartlist-album') != null) {
+                    song_artist_element = document.createElement('td');
+                    song_artist_element.classList.add('chartlist-artist');
+                    track.appendChild(song_artist_element);
+                }
 
-                        // append guests
-                        let song_guests = formatted_title[3];
-                        for (let guest in song_guests) {
-                            // &
-                            song_artist_element.innerHTML = `${song_artist_element.innerHTML},`;
+                // if artist matches OR artist is blank
+                if (song_artist_element.textContent.replaceAll('+', ' ').trim() == track_artist || song_artist_element.textContent.trim() == '') {
+                    // replaces with corrected artist if applicable
+                    song_artist_element.innerHTML = `<a href="/music/${sanitise(formatted_title[2])}" title="${formatted_title[2]}">${formatted_title[2]}</a>`;
 
-                            let guest_element = document.createElement('a');
-                            guest_element.setAttribute('href', `${root}music/${sanitise(song_guests[guest])}`);
-                            guest_element.setAttribute('title', song_guests[guest]);
-                            guest_element.textContent = song_guests[guest];
+                    // append guests
+                    let song_guests = formatted_title[3];
+                    for (let guest in song_guests) {
+                        // &
+                        song_artist_element.innerHTML = `${song_artist_element.innerHTML},`;
 
-                            song_artist_element.appendChild(guest_element);
-                        }
+                        let guest_element = document.createElement('a');
+                        guest_element.setAttribute('href', `${root}music/${sanitise(song_guests[guest])}`);
+                        guest_element.setAttribute('title', song_guests[guest]);
+                        guest_element.textContent = song_guests[guest];
+
+                        song_artist_element.appendChild(guest_element);
                     }
                 }
 

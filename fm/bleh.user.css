@@ -5180,17 +5180,13 @@ better than the default selector '#app a' i suppose */
 /*     LOVED - brought over from bleh     */
 .chartlist-love-button {
     position: relative;
+    --mask: var(--icon-16-heart);
 
     &:before {
         color: hsl(var(--l3-c));
     }
 }
-.chartlist-love-button:before, .love-button:before {
-    --mask: var(--icon-16-heart);
-    --left: 8px;
-}
-[data-toggle-button-current-state=loved] .chartlist-love-button:before,
-.love-button--loved:before
+[data-toggle-button-current-state=loved] .chartlist-love-button:before
 {
     --mask: var(--icon-16-heart-solid);
 }
@@ -6038,6 +6034,7 @@ button,
 .dropdown-menu-item-dark,
 .btn-secondary,
 /* track love button in other's library */ .love-button,
+.library-header-cta-item,
 /* go to tag page for a user tag */ .col-main > p > [href^="/tag/"],
 /* gallery upload artwork breadcrumbs */ a:has(+ .js-gallery-heading), .js-gallery-heading,
 .chartlist-play-button,
@@ -6459,7 +6456,7 @@ span.header-new-gallery-inner a:before,
 .library-view-button:before,
 .library-search-submit::before,
 .date-range-picker-button:after,
-.love-button:before,
+.love-button:before, .library-header-cta-item:before,
 /*     WIKI     */
 .wiki-history-action:before,
 /*     SEARCH     */
@@ -7497,10 +7494,42 @@ that literally is 1 user from 2007 who hasnt even gotten a scrobble */
     top: 4px;
 }
 
-[href$="/+delete"] {
-    --hue: var(--hue-neg);
-    --sat: 1;
-    --lit: 1;
+.library-header-ctas__wrapper.library-header-ctas__wrapper--2 {
+    width: fit-content !important;
+    top: var(--card-padding);
+    right: var(--card-padding);
+}
+.library-header-ctas {
+    display: flex;
+    gap: var(--button-list-gap);
+
+    .library-header-cta-item,
+    .love-button {
+        display: flex;
+        width: 32px !important;
+        height: 32px !important;
+        --left: 8px;
+
+        &.love-button {
+            --mask: var(--icon-16-heart);
+
+            &.love-button--loved {
+                --mask: var(--icon-16-heart-solid);
+            }
+        }
+
+        &.delete-icon {
+            --mask: var(--icon-16-trash);
+            --col: hsl(var(--l3-c));
+            --hue-over: var(--hue-neg);
+            --sat-over: 1;
+            --lit-over: 1;
+        }
+
+        &:before {
+            opacity: unset !important;
+        }
+    }
 }
 
 /* add back spacing to account for image */
@@ -7570,16 +7599,6 @@ body:is(.namespace--user_library_music_artist_overview, .namespace--user_library
     padding-top: calc(var(--card-padding) + var(--card-gap));
     --card-specific-background: hsla(var(--b5), 50%);
     --card-specific-border: 1px solid hsla(var(--b4), 60%);
-}
-
-.library-track-metadata .love-button-toggle {
-    /* 1px is representing the width of the card border */
-    top: calc(var(--card-padding) + var(--card-gap) + 1px);
-    right: calc(var(--card-padding) + 1px);
-}
-/* track love button in other's library */
-.love-button {
-    --font-size: 0;
 }
 
 .library-sort {
@@ -8450,6 +8469,7 @@ text[style^="color: rgb(255, 172, 172)"] {
     box-shadow: var(--menu-shadow);
     padding: 5px 14px;
     font-size: calc(var(--font-size) - 1px);
+    font-weight: var(--font-weight);
     line-height: var(--line-height);
     color: hsl(var(--c2));
 
