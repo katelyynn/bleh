@@ -7494,11 +7494,15 @@ that literally is 1 user from 2007 who hasnt even gotten a scrobble */
     top: 4px;
 }
 
+/* fuck this !important shit :sob:, i have to override it so specifically */
+.library-header-ctas__wrapper,
+.library-header-ctas__wrapper.library-header-ctas__wrapper--1,
 .library-header-ctas__wrapper.library-header-ctas__wrapper--2 {
     width: fit-content !important;
     top: var(--card-padding);
     right: var(--card-padding);
 }
+
 .library-header-ctas {
     display: flex;
     gap: var(--button-list-gap);
