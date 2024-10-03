@@ -1163,6 +1163,9 @@ let song_title_corrections = {
     },
     '2hollis': {
         'TEENAGE SOLDIER': 'teenage soldier'
+    },
+    'denzel curry': {
+        'cole pImp (with ty dolla $ign & juicy J)': 'COLE PIMP (with Ty Dolla $ign & Juicy J)'
     }
 };
 
