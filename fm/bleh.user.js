@@ -6176,7 +6176,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     return;
 
                 let is_user = (track.querySelector('.chartlist-image .avatar') != null);
-                let is_album = ((!is_user && track.querySelector('.chartlist-artist') == null) || track.classList.contains('bleh--is-album'));
+                let is_album = ((!is_user && track.querySelector('.chartlist-artist') == null && track.querySelector('.chartlist-love-button') == null) || track.classList.contains('bleh--is-album'));
                 if (is_album)
                     track.classList.add('bleh--is-album');
 

@@ -5176,6 +5176,7 @@ better than the default selector '#app a' i suppose */
 /*     LOVED - brought over from bleh     */
 .chartlist-love-button {
     position: relative;
+    --left: 8px;
     --mask: var(--icon-16-heart);
 
     &:before {
