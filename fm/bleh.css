@@ -2665,9 +2665,16 @@ header:not(:has(.header-featured-track)) .header-message-user {
 .library-search {
     margin-top: unset !important;
     position: absolute;
-    top: 50px;
+    top: calc(92px + var(--card-gap) + var(--card-padding)); /* 50px */
     right: calc(var(--card-padding) + 1px);
+    width: calc(var(--cards-sidebar-width) - ((var(--card-padding) + 1px) * 2));
     z-index: 100;
+
+    .library-search-input {
+        padding-left: unset !important;
+        padding-right: unset !important;
+        width: 100% !important; /* 220 */
+    }
 }
 .library-search-submit {
     background: unset !important;
@@ -2688,11 +2695,6 @@ input::placeholder {
     color: hsl(var(--c3)) !important;
 }
 
-.library-search-input {
-    padding-left: unset !important;
-    padding-right: unset !important;
-    width: 220px !important;
-}
 .library-search-form[data-search-state="loaded"] > .library-search-input, .library-search-input:focus-within {
     border: unset !important;
     box-shadow: unset !important;
@@ -7043,6 +7045,9 @@ very, very, very dated - who looks up a song on ebay? */
 .row:has(> .library-controls-datepicker) {
     display: flex;
     flex-direction: column;
+
+    /* space for search */
+    margin-top: calc(32px + var(--card-gap));
 
     .user-sidebar-header {
         margin: unset !important;
