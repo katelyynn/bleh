@@ -1082,6 +1082,7 @@ let artist_corrections = {
     'project pat': 'Project Pat',
     'kenny Mason': 'Kenny Mason',
     'SKI mask THE slump God': 'Ski Mask The Slump God',
+    'that mexican ot': 'That Mexican OT',
     //
     'J.I.D | J.1.D': 'J.I.D',
     'ZILLAKAMI | JPEGMAF1A + Z1LLAKAM1': 'ZILLAKAMI',
@@ -1190,7 +1191,9 @@ let song_title_corrections = {
         'TEENAGE SOLDIER': 'teenage soldier'
     },
     'denzel curry': {
-        'cole pImp (with ty dolla $ign & juicy J)': 'COLE PIMP (with Ty Dolla $ign & Juicy J)'
+        'cole pImp (with ty dolla $ign & juicy J)': 'COLE PIMP (with Ty Dolla $ign & Juicy J)',
+        'sked (with kenny Mason & project pat)': 'SKED (with Kenny Mason & Project Pat)',
+        'black FlAG freestyle (with that mexican ot)': 'BLACK FLAG FREESTYLE (with That Mexican OT)'
     }
 };
 
@@ -1358,7 +1361,11 @@ let includes = {
         '- anniversary', '(anniversary', '[anniversary',
         '- b-side', '- c-side', '(b-side', '(c-side',
         '- lp', '- ep', '(lp', '(ep',
-        '- single', '(single'
+        '- single', '(single',
+        '- box set', '(box set',
+        //
+        '- 10th', '- 19th', '- 20th', '- 25th', '- 30th', '- 35th', '- 40th', '- 50th', '- 60th',
+        '(10th', '(19th', '(20th', '(25th', '(30th', '(35th', '(40th', '(50th', '(60th'
     ]
 }
 
@@ -3924,6 +3931,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
     function bleh_settings() {
         document.body.style.removeProperty('--hue-album');
+        document.body.style.removeProperty('--sat-album');
         let adaptive_skin_container = document.querySelector('.adaptive-skin-container');
 
         if (!adaptive_skin_container.hasAttribute('data-kate-processed')) {
@@ -6204,11 +6212,18 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     if (chr < 1)
                         return;
 
-                    extras.push({
-                        type: includes[group][possible_match],
-                        group: group,
-                        chr: chr
-                    })
+                    // differentiate 2017 remaster to 20th deluxe
+                    console.log(group, group == 'remasters', lowercase_title.includes(' remaster'));
+                    if (group == 'remasters' && !lowercase_title.includes(' remaster')) {
+                        continue;
+                    } else {
+                        // everything else
+                        extras.push({
+                            type: includes[group][possible_match],
+                            group: group,
+                            chr: chr
+                        });
+                    }
                 }
             }
         }
@@ -6990,6 +7005,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
     function album_missing_a_tracklist() {
         document.body.style.removeProperty('--hue-album');
+        document.body.style.removeProperty('--sat-album');
 
         let header = document.querySelector('.header-new--album');
         if (header == null)
@@ -7002,8 +7018,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 let bg = header_inner.getAttribute('style').replace('background: #', '');
                 let hsl = hex_to_hsl(bg);
                 console.info('hsl', hsl);
-                if (hsl.h > 0)
-                    document.body.style.setProperty('--hue-album', hsl.h);
+                document.body.style.setProperty('--hue-album', hsl.h);
+                document.body.style.setProperty('--sat-album', (hsl.s / 100) * 3);
             } catch(e) {
                 console.info('bleh - album is missing a cover');
             }

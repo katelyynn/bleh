@@ -11,13 +11,15 @@ body {
             var(--hue-seasonal,
             255))));
     --sat:  var(--sat-over,
+            var(--sat-album,
             var(--sat-user,
             var(--sat-seasonal,
-            1)));
+            1))));
     --lit:  var(--lit-over,
+            var(--lit-album,
             var(--lit-user,
             var(--lit-seasonal,
-            1)));
+            1))));
 
     [data-bleh--season="easter"] & {
         --hue-seasonal: 155;
@@ -235,13 +237,15 @@ input[type="range"],
             var(--hue-seasonal,
             255))));
     --sat:  var(--sat-over,
+            var(--sat-album,
             var(--sat-user,
             var(--sat-seasonal,
-            1)));
+            1))));
     --lit:  var(--lit-over,
+            var(--lit-album,
             var(--lit-user,
             var(--lit-seasonal,
-            1)));
+            1))));
 
     --c1: var(--hue), calc(var(--sat) * 40%), 100%;
     --c2: var(--hue), calc(var(--sat) * 60%), 90%;
@@ -3319,7 +3323,7 @@ button.navlist-more {
     width: var(--cards-main-width);
 }
 .namespace--music_album_overview .header-new-inner {
-    right: 207px;
+    right: 208px;
 }
 
 .header-new-background {
@@ -5066,6 +5070,7 @@ better than the default selector '#app a' i suppose */
     }
 }
 [data-bleh--show_remaster_tags="false"] {
+    .header-new-title .feat,
     .chartlist-name .feat {
         &[data-bleh--tag-group="remasters"] {
             display: none;
