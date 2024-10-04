@@ -2239,7 +2239,7 @@ li.header-metadata-item--event-attendance {
     left: unset;
     bottom: unset;
     width: var(--cards-sidebar-width);
-    min-height: calc(123px + 33px); /* additions for the button */
+    min-height: calc(123px + 36px); /* additions for the button */
     max-width: unset;
     display: flex !important;
     gap: 10px;
@@ -2288,7 +2288,7 @@ li.header-metadata-item--event-attendance {
     color: inherit;
 }
 .featured-item-art, .featured-item-details {
-    margin-top: calc(18px + 12px); /* for the header */
+    margin-top: calc(18px + var(--card-gap)); /* for the header */
 }
 
 .featured-item-details {
@@ -2321,7 +2321,7 @@ elements, this is how we detect its missing */
 
 /*     MANAGE OBSESSION     */
 .profile-header-set-obsession {
-    bottom: calc(-128px - 83px); /* -129 to put top right */
+    bottom: calc(-128px - 86px); /* -129 to put top right */
     z-index: 2;
     right: 21px;
     --mask: var(--icon-16-obsession);
@@ -2349,7 +2349,7 @@ elements, this is how we detect its missing */
 
 /* move the sidebar to fit */
 .header--overview:has(.header-featured-track) + .adaptive-skin-container .col-sidebar {
-    padding-top: calc(138px + 33px) !important;
+    padding-top: calc(138px + 36px) !important;
 }
 .about-me-header, .about-me-sidebar p {
     overflow-y: hidden;
