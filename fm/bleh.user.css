@@ -15537,4 +15537,34 @@ button.bleh--gallery-bookmark-image-btn {
     width: 7px;
     height: 7px;
 }
+
+
+
+
+.bleh-setup {
+    background-size: 100%;
+    background-position: 40%;
+
+    .main-content {
+        position: absolute;
+        inset: 0;
+        backdrop-filter: blur(60px) saturate(80%);
+
+        &:after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-color: hsl(var(--b6));
+            opacity: 0.9; /* 0.9 */
+        }
+
+        [data-bleh--theme="light"] &:after {
+            opacity: 0.7; /* 0.7 */
+        }
+    }
+
+    .footer {
+        display: none;
+    }
+}
 }

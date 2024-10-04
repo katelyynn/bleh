@@ -36,6 +36,7 @@ let version = {
 
 // loads your selected language in last.fm
 let lang;
+let non_override_lang;
 // WARN: fill this out if translating
 // lists all languages with valid bleh translations
 // any custom translations will not load if not listed here!!
@@ -914,7 +915,10 @@ const trans = {
 
 function lookup_lang() {
     root = document.querySelector('.masthead-logo a').getAttribute('href');
+    if (auth_link != null)
+        my_avi = auth_link.querySelector('img').getAttribute('src');
     lang = document.documentElement.getAttribute('lang');
+    non_override_lang = lang;
 
     if (!valid_langs.includes(lang)) {
         console.info('bleh - language fallback from', lang, 'to en (language is not listed as valid)', valid_langs);
@@ -1749,10 +1753,20 @@ let inbuilt_settings = {
 let auth = '';
 let auth_link = '';
 
+// stores ur current authorised avatar
+let my_avi = '';
+
+// stores the current root of the page, most applicable in other languages:
+// en: /
+// jp: /jp/
+// etc.
 let root = '';
 
 let bleh_url = 'https://www.last.fm/bleh';
 let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
+
+let setup_url = 'https://www.last.fm/bleh/setup';
+let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
 
 
 (function() {
@@ -1781,10 +1795,18 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
 
         start_rain();
 
+        // everything past this point requires authorisation
+        if (auth == '')
+            return;
+
         console.log(bleh_url,window.location.href,bleh_regex.test(window.location.href));
 
         if (window.location.href == bleh_url || bleh_regex.test(window.location.href)) {
+            // start bleh settings
             bleh_settings();
+        } else if (window.location.href == setup_url || setup_regex.test(window.location.href)) {
+            // start bwaa setup
+            bleh_setup();
         } else {
             patch_actions();
             patch_profile(document.body);
@@ -1827,7 +1849,11 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             set_season();
 
             if (window.location.href == bleh_url || bleh_regex.test(window.location.href)) {
+                // start bleh settings
                 bleh_settings();
+            } else if (window.location.href == setup_url || setup_regex.test(window.location.href)) {
+                // start bwaa setup
+                bleh_setup();
             } else {
                 patch_actions();
                 patch_profile(document.body);
@@ -7219,5 +7245,36 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             return desanitise(split[length - 1]);
         else
             return desanitise(split[length - 2]);
+    }
+
+
+
+
+    function bleh_setup() {
+        document.body.style.removeProperty('--hue-album');
+        document.body.style.removeProperty('--sat-album');
+
+        console.info('bleh - loading first-time setup');
+
+        let adaptive_skin_container = document.querySelector('.adaptive-skin-container:not([data-kate-processed])');
+
+        if (adaptive_skin_container == null)
+            return;
+        adaptive_skin_container.setAttribute('data-kate-processed','true');
+
+        // initial
+        adaptive_skin_container.innerHTML = '';
+        document.title = 'bleh setup | Last.fm';
+
+
+        // go wild
+        adaptive_skin_container.innerHTML = (`
+            <div class="bleh--page-outer">
+                <div class="bleh--page-inner bleh-setup-container"></div>
+            </div>
+        `);
+
+        document.body.classList.add('bleh-setup');
+        document.body.style.setProperty('background-image', `url(${my_avi})`);
     }
 })();
