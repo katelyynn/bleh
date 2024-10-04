@@ -1581,15 +1581,15 @@ body[class*="namespace--user_library_"] .col-sidebar, .library-header,
     background-position: unset !important;*/
 
     [data-bleh--seasonal_overlays="true"] & {
-        [data-bleh--season="halloween"] &:not(.header-featured-track) {
+        [data-bleh--season="halloween"] &:not(.header-featured-track, .shh) {
             background-image: linear-gradient(0deg, rgba(252, 139, 105, 0.04) 0%, rgba(0,0,0,0) 100%) !important;
             background-repeat: repeat-x;
             background-position: unset !important;
         }
     }
-    [data-bleh--seasonal_overlays="true"][data-bleh--season="fall"] &:not(.header-featured-track),
-    [data-bleh--seasonal_overlays="true"][data-bleh--season="christmas"] &:not(.header-featured-track),
-    [data-bleh--seasonal_overlays="true"][data-bleh--season="new_years"] &:not(.header-featured-track) {
+    [data-bleh--seasonal_overlays="true"][data-bleh--season="fall"] &:not(.header-featured-track, .shh),
+    [data-bleh--seasonal_overlays="true"][data-bleh--season="christmas"] &:not(.header-featured-track, .shh),
+    [data-bleh--seasonal_overlays="true"][data-bleh--season="new_years"] &:not(.header-featured-track, .shh) {
         background-image: var(--overlay-ice), linear-gradient(180deg, rgba(190,233,250,0.04) 0%, rgba(0,0,0,0) 100%) !important;
         background-repeat: repeat-x;
         background-position: unset !important;
@@ -7147,6 +7147,7 @@ very, very, very dated - who looks up a song on ebay? */
 
 
 /*     INPUT     */
+.modal-body textarea,
 .content-form .form-control, .content-form input[type="date"], .content-form input[type="email"], .content-form input[type="number"], .content-form input[type="password"], .content-form input[type="text"], .content-form input[type="url"], .content-form select, .content-form textarea
 {
     --bg: hsl(var(--b4));
@@ -9396,12 +9397,11 @@ text[style^="color: rgb(0, 0, 0)"] {
 .alert {
     font-size: var(--font-size);
     line-height: var(--line-height);
-    margin-top: 12px;
+    margin-top: var(--card-gap);
     padding: 7px 12px 7px calc(12px + 16px + 6px);
     border-radius: var(--item-big-radius);
     background-color: hsla(var(--h4), 20%);
-    border: 2px solid transparent;
-    border-left: 2px solid hsl(var(--l3-c));
+    box-shadow: 0 0 0 1px hsla(var(--h2), 40%) inset, 0 0 20px hsla(var(--h4), 15%);
     color: hsl(var(--l2-c));
     text-align: left;
     position: relative;
@@ -12362,6 +12362,10 @@ so this is good enough - use the community docs */
                     --bg: transparent;
                     --bg-hov: hsla(var(--b4), 20%);
                     --bg-atv: hsla(var(--h4), 10%);
+
+                    &[data-bleh-page="sku"] {
+                        display: none;
+                    }
                 }
 
                 &.active {
@@ -12381,6 +12385,74 @@ so this is good enough - use the community docs */
                         margin-top: -7px;
                     }
                 }
+            }
+        }
+
+        .secondary-nav-item-link {
+            &[data-bleh-page="home"] {
+                --mask: var(--icon-16-home);
+            }
+            &[data-bleh-page="themes"] {
+                --mask: var(--icon-16-themes);
+            }
+            &[data-bleh-page="customise"] {
+                --mask: var(--icon-16-palette);
+            }
+            &[data-bleh-action="import"] {
+                --mask: var(--icon-16-download);
+            }
+            &[data-bleh-action="export"] {
+                --mask: var(--icon-16-upload);
+            }
+            &[data-bleh-action="reset"] {
+                --mask: var(--icon-16-revert);
+            }
+            &[data-bleh-page="performance"] {
+                --mask: var(--icon-16-settings);
+            }
+            &[data-bleh-page="profiles"] {
+                --mask: var(--icon-16-user);
+            }
+            &[data-bleh-page="redirects"] {
+                --mask: var(--icon-16-redirect);
+            }
+            &[data-bleh-page="corrections"] {
+                --mask: var(--icon-16-correction);
+            }
+            &[data-bleh-page="accessibility"] {
+                --mask: var(--icon-16-accessibility);
+            }
+            &[data-bleh-page="language"] {
+                --mask: var(--icon-16-language);
+            }
+            &[data-bleh-page="text"] {
+                --mask: var(--icon-16-shoutbox);
+            }
+            &[data-bleh-page="seasonal"] {
+                --mask: var(--icon-16-calendar);
+
+                &[data-season="easter"] {
+                    --mask: var(--icon-16-egg);
+                }
+                &[data-season="halloween"] {
+                    --mask: var(--icon-16-pumpkin);
+                }
+                &[data-season="pre_fall"] {
+                    --mask: var(--icon-16-fall);
+                }
+                &[data-season="fall"] {
+                    --mask: var(--icon-16-fall);
+                }
+                &[data-season="christmas"] {
+                    --mask: var(--icon-16-snow);
+                }
+                &[data-season="new_years"] {
+                    --mask: var(--icon-16-new-years);
+                }
+            }
+
+            &[data-bleh-page="sku"]:not(.active) {
+                display: none;
             }
         }
     }
@@ -13127,31 +13199,10 @@ input[type="range"]::-moz-range-progress {
 
 
 .modal-body textarea {
-    --bg: hsl(var(--b4));
-    padding: var(--padding, 7px 12px);
-    height: 32px;
-    background-color: var(--bg);
-    border: none;
-    box-shadow: var(--shadow, var(--interact-shadow));
-    border-radius: var(--item-med-radius);
-    color: hsl(var(--c2));
-    caret-color: hsl(var(--l1));
-    font-family: var(--font);
-    font-size: var(--font-size);
-    line-height: var(--line-height);
     width: 100%;
-    height: fit-content;
-    max-height: 140px;
+    height: 150px;
+    max-height: 150px;
     resize: none;
-
-    transition-property: outline;
-    transition-duration: var(--trans);
-    transition-timing-function: var(--trans-function);
-
-    &:focus {
-        outline: 2px solid hsl(var(--l1));
-        transition: none;
-    }
 }
 
 
@@ -15120,6 +15171,108 @@ button.bleh--gallery-bookmark-image-btn {
     from {
         transform: translateY(0);
         opacity: 1;
+    }
+}
+
+
+.shh {
+    font-size: 44px;
+    line-height: 60px;
+    font-weight: 900;
+    color: #fff;
+    background: linear-gradient(159deg, rgba(0,0,0,1) 0%, rgba(1,11,70,1) 32%, rgba(1,21,84,1) 50%, rgba(1,29,94,1) 62%, rgba(2,61,95,1) 76%, rgba(2,90,78,1) 88%, rgba(0,119,55,1) 100%);
+    border: unset;
+    padding: calc(var(--card-padding) + 1px);
+    position: relative;
+
+    .screen-row {
+        position: absolute;
+        top: calc(var(--card-padding) + 1px);
+        right: calc(var(--card-padding) + 1px);
+        margin: unset;
+        padding: unset;
+        border: none;
+
+        .action {
+            --bg: hsla(var(--b7), 15%);
+            --bg-hov: hsla(var(--b7), 25%);
+            --bg-atv: hsla(var(--b7), 35%);
+
+            .text {
+                flex-direction: row;
+
+                p {
+                    color: #fff;
+                    opacity: 0.8;
+                }
+            }
+        }
+    }
+}
+.bleh--panel.welcome {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(97deg, hsla(var(--h3), 90%) 0%, hsla(var(--h2), 90%) 100%);
+    display: flex;
+    flex-direction: column;
+    gap: var(--card-gap);
+
+    h2 {
+        font-size: 32px !important;
+        line-height: 36px !important;
+        font-weight: 700 !important;
+        margin: unset !important;
+    }
+
+    .welcome-text {
+        position: absolute;
+        right: var(--card-padding);
+        bottom: -14px;
+        font-size: 74px;
+        line-height: 90px;
+        font-weight: 700;
+        color: transparent;
+        -webkit-text-stroke: 2px hsla(var(--b6), 40%);
+        user-select: none;
+        cursor: default;
+    }
+}
+
+.feature-flags {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: var(--card-gap);
+
+    .info-row {
+        display: flex;
+        gap: 10px;
+        margin-top: 4px;
+
+        .default-flag {
+            padding: 0 4px;
+            background-color: hsl(var(--b6));
+            border-radius: var(--item-med-radius);
+            font-size: 12px;
+            width: 45px;
+            text-align: center;
+            color: hsl(var(--l3-c));
+            --hue: var(--hue-neg);
+            --sat: 1;
+            --lit: 1;
+
+            &.flag-true {
+                --hue: var(--hue-pos);
+            }
+        }
+
+        .date {
+            width: 62px;
+            color: hsla(var(--c3), 80%);
+        }
+
+        p {
+            margin: unset;
+        }
     }
 }
 

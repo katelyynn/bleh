@@ -20,7 +20,18 @@
 let version = {
     build: '2024.1003',
     sku: 'scawy',
-    feature_flags: {}
+    feature_flags: {
+        bleh_settings_tabs: {
+            default: false,
+            name: 'Utilise new bleh settings tabs',
+            date: '2024-07-09'
+        },
+        high_contrast: {
+            default: false,
+            name: 'Enable visibility of high contrast (experimental)',
+            date: '2024-10-04'
+        }
+    }
 }
 
 // loads your selected language in last.fm
@@ -162,6 +173,9 @@ const trans = {
                             seasonal_alert: 'The current season is overriding your accent colour, adjust sliders to disable.'
                         }
                     }
+                },
+                high_contrast: {
+                    name: 'Enable high contrast mode'
                 },
                 seasonal: {
                     name: 'Seasonal',
@@ -355,7 +369,7 @@ const trans = {
                     toggle_preview: {
                         name: 'Toggle preview',
                         bio: 'Preview how your bio looks to others',
-                        note: 'Note: New-lines, links, etc. only display to other bleh users, regular Last.fm users see new-lines as spaces.'
+                        note: 'To non-bleh users, multiple lines display as spaces, and links, bold, italics will be plain text.'
                     },
                     avatar: {
                         name: 'Edit avatar',
@@ -1435,6 +1449,7 @@ let profile_badges = {
 let settings;
 let settings_template = {
     theme: 'dark',
+    high_contrast: false,
     gloss: 0,
     gendered_tags: true,
     show_extra_nav: true,
@@ -1469,6 +1484,13 @@ let settings_template = {
     profile_header_others: true
 };
 let settings_base = {
+    high_contrast: {
+        css: 'high_contrast',
+        unit: '',
+        value: false,
+        values: [true, false],
+        type: 'toggle'
+    },
     hue: {
         css: 'hue-user',
         unit: '',
@@ -2128,6 +2150,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             } catch(e) {}
             document.documentElement.setAttribute(`data-bleh--${setting}`, `${settings[setting]}`);
         }
+
+        load_skus();
 
         // save to settings
         localStorage.setItem('bleh', JSON.stringify(settings));
@@ -3950,6 +3974,9 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                         <button class="btn bleh--btn" data-bleh-page="language" onclick="_change_settings_page('language')">
                             ${trans[lang].settings.language.name}
                         </button>
+                        <button class="btn bleh--btn" data-bleh-page="sku" onclick="_change_settings_page('sku')">
+                            shhh...
+                        </button>
                     </div>
                     <div class="btns sep">
                         <button class="btn bleh--btn" data-bleh-page="corrections" onclick="_change_settings_page('corrections')">
@@ -4001,7 +4028,7 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                         <img class="screen" src="https://cutensilly.org/img/bleh3-theme-${document.documentElement.getAttribute('data-bleh--theme')}.png" alt="bleh">
                         <div class="text">
                             <h5>${trans[lang].settings.home.brand}</h5>
-                            <p>${trans[lang].settings.home.version.replace('{v}', `${version.build}.${version.sku}`)}</p>
+                            <p onclick="_change_settings_page('sku')">${trans[lang].settings.home.version.replace('{v}', `${version.build}.${version.sku}`)}</p>
                         </div>
                     </div>
                     <div class="actions">
@@ -4174,6 +4201,19 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                             </button>
                         </div>
                     </div>
+                    ${(settings.feature_flags.high_contrast) ? (`
+                    <div class="toggle-container" id="container-high_contrast">
+                        <button class="btn reset" onclick="_reset_item('high_contrast')">${trans[lang].settings.reset}</button>
+                        <div class="heading">
+                            <h5>${trans[lang].settings.customise.high_contrast.name}</h5>
+                        </div>
+                        <div class="toggle-wrap">
+                            <button class="toggle" id="toggle-high_contrast" onclick="_update_item('high_contrast')" aria-checked="true">
+                                <div class="dot"></div>
+                            </button>
+                        </div>
+                    </div>
+                    `) : ''}
                     <div class="sep"></div>
                     <h4>${trans[lang].settings.customise.colours.name}</h4>
                     <!--<h5>${trans[lang].settings.customise.colours.presets}</h5>-->
@@ -5138,6 +5178,32 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                     </div>
                 </div>
                 `);
+        } else if (page == 'sku') {
+            return (`
+                <div class="bleh--panel shh">
+                    ☆⌒(>w<)
+                    <div class="screen-row">
+                        <div class="actions">
+                            <a class="btn action">
+                                <span class="text">
+                                    <h5>build</h5>
+                                    <p>${version.build}</p>
+                                </span>
+                            </a>
+                            <a class="btn action">
+                                <span class="text">
+                                    <h5>sku</h5>
+                                    <p>${version.sku}</p>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="bleh--panel">
+                    <h3>Feature Flags</h3>
+                    <div class="feature-flags" id="feature-flags"></div>
+                </div>
+                `);
         }
     }
 
@@ -5146,6 +5212,76 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
     }
 
     function change_settings_page(page) {
+        if (!settings.feature_flags.bleh_settings_tabs)
+            document.getElementById('bleh--panel-main').innerHTML = '';
+        else
+            document.getElementById('bleh--panel-main').innerHTML = (`
+                <nav class="navlist secondary-nav navlist--more">
+                    <ul class="navlist-items">
+                        <li class="navlist-item secondary-nav-item">
+                            <a class="secondary-nav-item-link bleh--nav" data-bleh-page="home" onclick="_change_settings_page('home')">
+                                ${trans[lang].settings.home.name}
+                            </a>
+                        </li>
+                        <li class="navlist-item secondary-nav-item">
+                            <a class="secondary-nav-item-link bleh--nav" data-bleh-page="themes" onclick="_change_settings_page('themes')">
+                                ${trans[lang].settings.appearance.name}
+                            </a>
+                        </li>
+                        <li class="navlist-item secondary-nav-item">
+                            <a class="secondary-nav-item-link bleh--nav" data-bleh-page="accessibility" onclick="_change_settings_page('accessibility')">
+                                ${trans[lang].settings.accessibility.name}
+                            </a>
+                        </li>
+                        <li class="navlist-item secondary-nav-item">
+                            <a class="secondary-nav-item-link bleh--nav" data-bleh-page="seasonal" onclick="_change_settings_page('seasonal')">
+                                ${trans[lang].settings.customise.seasonal.name}
+                            </a>
+                        </li>
+                        <li class="navlist-item secondary-nav-item">
+                            <a class="secondary-nav-item-link bleh--nav" data-bleh-page="customise" onclick="_change_settings_page('customise')">
+                                ${trans[lang].settings.customise.name}
+                            </a>
+                        </li>
+                        <li class="navlist-item secondary-nav-item">
+                            <a class="secondary-nav-item-link bleh--nav" data-bleh-page="text" onclick="_change_settings_page('text')">
+                                ${trans[lang].settings.text.name}
+                            </a>
+                        </li>
+                        <li class="navlist-item secondary-nav-item">
+                            <a class="secondary-nav-item-link bleh--nav" data-bleh-page="language" onclick="_change_settings_page('language')">
+                                ${trans[lang].settings.language.name}
+                            </a>
+                        </li>
+                        <li class="navlist-item secondary-nav-item">
+                            <a class="secondary-nav-item-link bleh--nav" data-bleh-page="corrections" onclick="_change_settings_page('corrections')">
+                                ${trans[lang].settings.corrections.name}
+                            </a>
+                        </li>
+                        <li class="navlist-item secondary-nav-item">
+                            <a class="secondary-nav-item-link bleh--nav" data-bleh-page="redirects" onclick="_change_settings_page('redirects')">
+                                ${trans[lang].settings.redirects.name}
+                            </a>
+                        </li>
+                        <li class="navlist-item secondary-nav-item">
+                            <a class="secondary-nav-item-link bleh--nav" data-bleh-page="profiles" onclick="_change_settings_page('profiles')">
+                                ${trans[lang].settings.profiles.name}
+                            </a>
+                        </li>
+                        <li class="navlist-item secondary-nav-item">
+                            <a class="secondary-nav-item-link bleh--nav" data-bleh-page="performance" onclick="_change_settings_page('performance')">
+                                ${trans[lang].settings.performance.name}
+                            </a>
+                        </li>
+                        <li class="navlist-item secondary-nav-item">
+                            <a class="secondary-nav-item-link bleh--nav" data-bleh-page="sku" onclick="_change_settings_page('sku')">
+                                shhh...
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            `);
+
         let btns = document.querySelectorAll('.bleh--btn');
         btns.forEach((btn) => {
             console.log(btn.getAttribute('data-bleh-page'),page);
@@ -5167,6 +5303,8 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
             init_profile_notes();
         } else if (page == 'language') {
             prepare_language_page();
+        } else if (page == 'sku') {
+            bleh_sku_page();
         }
 
         if (page == 'corrections')
@@ -5218,6 +5356,68 @@ let bleh_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh$');
                 btn.classList.add('active');
             }
         });
+    }
+
+
+    function load_skus() {
+        for (let flag in version.feature_flags) {
+            let current_state = version.feature_flags[flag].default;
+            console.info('flag', flag, current_state);
+            if (settings.feature_flags[flag] != undefined) current_state = settings.feature_flags[flag];
+            console.info('flag', flag, current_state);
+
+            document.documentElement.setAttribute(`data-ff--${flag}`, current_state);
+        }
+    }
+
+    function bleh_sku_page() {
+        let flags_container = document.getElementById('feature-flags');
+
+        for (let flag in version.feature_flags) {
+            let current_state = version.feature_flags[flag].default;
+            if (settings.feature_flags[flag] != undefined) current_state = settings.feature_flags[flag];
+
+            let feature_flag_element = document.createElement('div');
+            feature_flag_element.classList.add('toggle-container');
+            feature_flag_element.innerHTML = (`
+                <div class="heading">
+                    <h5>${version.feature_flags[flag].name}</h5>
+                    <div class="info-row">
+                        <div class="default-flag flag-${version.feature_flags[flag].default}">${version.feature_flags[flag].default}</div><p class="date">${version.feature_flags[flag].date}</p><p>${flag}</p>
+                    </div>
+                </div>
+                <div class="toggle-wrap">
+                    <button id="feature-flag-toggle-${flag}" class="toggle" onclick="_update_flag_toggle('${flag}', this)" aria-checked="${current_state}">
+                        <div class="dot"></div>
+                    </button>
+                </div>
+            `);
+
+            flags_container.appendChild(feature_flag_element);
+
+            document.documentElement.setAttribute(`data-ff--${flag}`, current_state);
+        }
+    }
+
+    unsafeWindow._update_flag_toggle = function(flag, button) {
+        update_flag_toggle(flag, button);
+    }
+    function update_flag_toggle(flag, button) {
+        let current_state = version.feature_flags[flag].default;
+        if (settings.feature_flags[flag] != undefined) current_state = settings.feature_flags[flag];
+
+        if (current_state == true) {
+            button.setAttribute('aria-checked', 'false');
+            settings.feature_flags[flag] = false;
+            document.documentElement.setAttribute(`data-ff--${flag}`, false);
+        } else {
+            button.setAttribute('aria-checked', 'true');
+            settings.feature_flags[flag] = true;
+            document.documentElement.setAttribute(`data-ff--${flag}`, true);
+        }
+
+        // save to settings
+        localStorage.setItem('bleh', JSON.stringify(settings));
     }
 
 
