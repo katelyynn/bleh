@@ -4499,11 +4499,14 @@ h2:not(.count, .mask-multi-text, .mask-text, .sr-only, .js-gallery-heading, .top
     clip: unset;
     border: unset;
     height: unset;
-    margin: 0 0 12px 0 !important;
+    margin: 0 0 var(--card-gap) 0 !important;
     overflow: unset;
     padding: unset;
     position: static;
     width: unset;
+
+    /*font-size: 24px !important;
+    line-height: 30px !important;*/
 }
 .user-sidebar-header
 {
