@@ -5103,6 +5103,20 @@ better than the default selector '#app a' i suppose */
                 }
             }
         }
+        &.chartlist--with-bar {
+            .chartlist-row {
+                .chartlist-name {
+                    margin-bottom: 16px;
+                }
+                .chartlist-artist {
+                    position: absolute;
+                    left: calc(84px - 2px - 42px);
+                    margin-top: 16px;
+                    right: 300px;
+                    width: 60%;
+                }
+            }
+        }
     }
 }
 
@@ -6217,6 +6231,7 @@ button,
 
 
 /*     BUTTON HAS ICON     */
+.btn.back,
 .btn-post-shout,
 .list-view-item,
 .btn--has-icon-left,
@@ -6245,6 +6260,7 @@ button,
 {
     --btn-left: calc(12px + 16px + 6px) !important;
 }
+.continue,
 .btn--has-icon-right,
 .dropdown-menu-clickable-button, .dropdown-menu-clickable-button-js-only,
 .pagination-next a,
@@ -6355,6 +6371,8 @@ button,
 
 
 /*     ICON MASK     */
+.btn.back:before,
+.continue:before,
 .badge:before,
 .btn-post-shout:before,
 .auth-link:before,
@@ -6520,6 +6538,7 @@ span.header-new-gallery-inner a:before,
     transition-duration: var(--trans) !important;
     transition-timing-function: var(--trans-function) !important;
 }
+.continue:before,
 .pagination-next a:before,
 .more-link a:before, .more-link-fullwidth-right a:before, .more-link-fullwidth-right-flush-top a:before, .more-link-with-action a:not(.inline-add-icon):after,
 .more-items:before,
@@ -12797,6 +12816,7 @@ code, kbd, samp {
     .preview {
         display: flex;
         flex: 1;
+        max-height: 101px;
         background-color: hsl(var(--b6));
         position: relative;
         border-radius: var(--item-med-radius);
@@ -13095,7 +13115,7 @@ code, kbd, samp {
     justify-content: center;
     margin-top: var(--card-gap);
     padding-top: var(--card-gap);
-    border-top: 1px solid hsl(var(--b4));
+    border-top: var(--card-border);
 }
 
 .lfm-preview {
@@ -13279,6 +13299,7 @@ input[type="range"]::-moz-range-progress {
 
     h5 {
         color: hsl(var(--c2));
+        font-weight: var(--font-weight-medium);
     }
 
     p {
@@ -15555,16 +15576,75 @@ button.bleh--gallery-bookmark-image-btn {
             position: absolute;
             inset: 0;
             background-color: hsl(var(--b6));
-            opacity: 0.9; /* 0.9 */
+            opacity: 0.7; /* 0.9 */
         }
 
         [data-bleh--theme="light"] &:after {
-            opacity: 0.7; /* 0.7 */
+            opacity: 0.5; /* 0.7 */
         }
     }
 
     .footer {
         display: none;
+    }
+}
+
+
+.btn.back {
+    position: relative;
+    --mask: var(--icon-16-arrow-left);
+}
+.continue {
+    position: relative;
+    --mask: var(--icon-16-arrow-right);
+}
+
+
+/* this allows tooltips */
+.modal-background, .modal-dialog, .popup_background, .popup_wrapper {
+    z-index: 9998;
+}
+
+.modal--setup {
+    .modal-dialog:has(&) {
+        width: 900px;
+    }
+
+    .modal-title {
+        display: none;
+    }
+    .modal-inner-content {
+        margin: unset !important;
+    }
+
+    .setup-sides {
+        display: flex;
+
+        .setup-preview {
+            width: 340px;
+        }
+
+        .setup-body {
+            /*margin-left: var(--card-padding);
+            padding-left: var(--card-padding);
+            border-left: var(--card-border);*/
+
+            flex-grow: 1;
+
+            .setup-body-main {
+                display: flex;
+                flex-direction: column;
+                gap: var(--card-gap);
+            }
+
+            .modal-footer {
+                justify-content: end;
+
+                .btn-fill {
+                    flex: 1;
+                }
+            }
+        }
     }
 }
 }

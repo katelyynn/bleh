@@ -99,6 +99,8 @@ const trans = {
             continue: 'Continue',
             reset: 'Reset to default',
             go: 'Go',
+            skip: 'Skip',
+            back: 'Back',
             reload: 'A setting you changed requires a page reload to take effect, click to reload.',
             examples: {
                 button: 'Example button'
@@ -487,6 +489,11 @@ const trans = {
                         }
                     }
                 }
+            }
+        },
+        setup: {
+            start: {
+
             }
         },
         gallery: {
@@ -1044,6 +1051,24 @@ function prep_snow() {
     document.documentElement.appendChild(container);
 }
 
+let theme_preview = (`
+    <div class="preview-inner">
+        <div class="preview-card">
+            <div class="preview-header"></div>
+            <div class="preview-text"></div>
+            <div class="preview-text row-2"></div>
+            <div class="preview-buttons">
+                <div class="preview-button preview-button-primary">
+
+                </div>
+                <div class="preview-button">
+
+                </div>
+            </div>
+        </div>
+    </div>
+`);
+
 // require page reload
 let reload_pending = false;
 
@@ -1090,7 +1115,8 @@ let artist_corrections = {
     //
     'J.I.D | J.1.D': 'J.I.D',
     'ZILLAKAMI | JPEGMAF1A + Z1LLAKAM1': 'ZILLAKAMI',
-    'GOLDLINK | TWELVE\'LEN + GOLDL1NK': 'GOLDLINK'
+    'GOLDLINK | TWELVE\'LEN + GOLDL1NK': 'GOLDLINK',
+    'Pharrell': 'Pharrell Williams'
 }
 let song_title_corrections = {
     'quadeca': {
@@ -1198,6 +1224,9 @@ let song_title_corrections = {
         'cole pImp (with ty dolla $ign & juicy J)': 'COLE PIMP (with Ty Dolla $ign & Juicy J)',
         'sked (with kenny Mason & project pat)': 'SKED (with Kenny Mason & Project Pat)',
         'black FlAG freestyle (with that mexican ot)': 'BLACK FLAG FREESTYLE (with That Mexican OT)'
+    },
+    'olivia rodrigo': {
+        'Guts': 'GUTS'
     }
 };
 
@@ -4177,24 +4206,6 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
             preview_bar = `${preview_bar});`;
             //console.info('preview bar', preview_bar, global_sat, h3_sat, global_lit, h3_lit);
 
-            let theme_preview = (`
-                <div class="preview-inner">
-                    <div class="preview-card">
-                        <div class="preview-header"></div>
-                        <div class="preview-text"></div>
-                        <div class="preview-text row-2"></div>
-                        <div class="preview-buttons">
-                            <div class="preview-button preview-button-primary">
-
-                            </div>
-                            <div class="preview-button">
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `);
-
             return (`
                 <div class="bleh--panel">
                     <h3>${trans[lang].settings.appearance.name}</h3>
@@ -6020,7 +6031,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
 
 
     // create a window
-    function create_window(id, title, inner_content) {
+    function create_window(id, title, inner_content, classname='') {
         let background = document.createElement('div');
         background.classList.add('popup_background');
         background.setAttribute('id',`bleh--window-${id}--background`);
@@ -6059,6 +6070,9 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
         body.setAttribute('id',`bleh--window-${id}--body`);
         body.setAttribute('data-kate-processed','true');
 
+        if (classname != '')
+            body.classList.add(`modal--${classname}`);
+
         // title
         let header = document.createElement('h2');
         header.classList.add('modal-title');
@@ -6094,8 +6108,10 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
 
     // kill a window
     function kill_window(id) {
-        document.body.removeChild(document.getElementById(`bleh--window-${id}--background`));
-        document.body.removeChild(document.getElementById(`bleh--window-${id}--wrapper`));
+        try {
+            document.body.removeChild(document.getElementById(`bleh--window-${id}--background`));
+            document.body.removeChild(document.getElementById(`bleh--window-${id}--wrapper`));
+        } catch(e) {}
     }
 
     unsafeWindow._kill_window = function(id) {
@@ -7276,5 +7292,498 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
 
         document.body.classList.add('bleh-setup');
         document.body.style.setProperty('background-image', `url(${my_avi})`);
+
+        create_window('bleh_setup_start','',`
+            <div class="setup-sides">
+                <div class="setup-preview">
+
+                </div>
+                <div class="setup-body">
+                    <div class="setup-body-main">
+                        <h1>haaiiiii welcome to bleh</h1>
+                        <p>thank u for isntalling :3333 here you can conmfigur settings.. n stuff.. or skip! if u got it</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn skip" onclick="_setup_skip()">
+                            ${trans[lang].settings.skip}
+                        </button>
+                        <button class="btn primary continue" onclick="_setup_appearance()">
+                            ${trans[lang].settings.continue}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `, 'setup');
+    }
+
+    unsafeWindow._setup_appearance = function() {
+        kill_window('bleh_setup_start');
+        kill_window('bleh_setup_theme');
+        create_window('bleh_setup_appearance','',`
+            <div class="setup-sides">
+                <div class="setup-preview">
+
+                </div>
+                <div class="setup-body">
+                    <div class="setup-body-main">
+                        <h1>your appearanc</h1>
+                        <p>you can configur bleh's look for ur own liking!! why not pick a preset colour to get started?</p>
+                        <h4>${trans[lang].settings.customise.colours.name}</h4>
+                        <!--<h5>${trans[lang].settings.customise.colours.presets}</h5>-->
+                        <div class="palette options colours" id="custom_colours">
+                            <button class="swatch btn default" style="
+                                --hue: var(--hue-seasonal, 255);
+                                --sat: var(--sat-seasonal, 1);
+                                --lit: var(--lit-seasonal, 1)" onclick="_update_params({
+                                hue: 255,
+                                sat: 1,
+                                lit: 1
+                            })"></button>
+                            <button class="swatch btn custom" style="
+                                --hue: var(--hue-user, 255);
+                                --sat: var(--sat-user, 1);
+                                --lit: var(--lit-user, 1)" onclick="_create_a_custom_colour()"></button>
+                        </div>
+                        <div class="palette options colours">
+                            <div class="side">
+                                <button class="swatch btn" style="
+                                    --hue: -2;
+                                    --sat: 1.35;
+                                    --lit: 0.85" onclick="_update_params({
+                                    hue: -2,
+                                    sat: 1.35,
+                                    lit: 0.85
+                                })"></button>
+                                <button class="swatch btn" style="
+                                    --hue: -2;
+                                    --sat: 1.25;
+                                    --lit: 0.85" onclick="_update_params({
+                                    hue: -2,
+                                    sat: 1.25,
+                                    lit: 0.85
+                                })"></button>
+                                <button class="swatch btn" style="
+                                    --hue: 356;
+                                    --sat: 1.25;
+                                    --lit: 0.9" onclick="_update_params({
+                                    hue: 356,
+                                    sat: 1.25,
+                                    lit: 0.9
+                                })"></button>
+                                <button class="swatch btn" style="
+                                    --hue: 351;
+                                    --sat: 1.2;
+                                    --lit: 0.9" onclick="_update_params({
+                                    hue: 351,
+                                    sat: 1.2,
+                                    lit: 0.9
+                                })"></button>
+                                <button class="swatch btn" style="
+                                    --hue: 346;
+                                    --sat: 1.3;
+                                    --lit: 0.85" onclick="_update_params({
+                                    hue: 346,
+                                    sat: 1.3,
+                                    lit: 0.85
+                                })"></button>
+                                <button class="swatch btn" style="
+                                    --hue: 339;
+                                    --sat: 1.3;
+                                    --lit: 0.85" onclick="_update_params({
+                                    hue: 339,
+                                    sat: 1.3,
+                                    lit: 0.85
+                                })"></button>
+                                <button class="swatch btn" style="
+                                    --hue: 331;
+                                    --sat: 1.1;
+                                    --lit: 0.8" onclick="_update_params({
+                                    hue: 331,
+                                    sat: 1.1,
+                                    lit: 0.8
+                                })"></button>
+                                <button class="swatch btn" style="
+                                    --hue: 310;
+                                    --sat: 1.2;
+                                    --lit: 0.85" onclick="_update_params({
+                                    hue: 310,
+                                    sat: 1.2,
+                                    lit: 0.85
+                                })"></button>
+                                <button class="swatch btn" style="
+                                    --hue: 286;
+                                    --sat: 1.2;
+                                    --lit: 0.9" onclick="_update_params({
+                                    hue: 286,
+                                    sat: 1.2,
+                                    lit: 0.9
+                                })"></button>
+                                <button class="swatch btn" style="
+                                    --hue: 274;
+                                    --sat: 1.25;
+                                    --lit: 0.9" onclick="_update_params({
+                                    hue: 274,
+                                    sat: 1.25,
+                                    lit: 0.9
+                                })"></button>
+                            </div>
+                            <div class="side">
+                                <button class="swatch btn" style="
+                                    --hue: 7;
+                                    --sat: 1.35;
+                                    --lit: 0.8" onclick="_update_params({
+                                    hue: 7,
+                                    sat: 1.35,
+                                    lit: 0.8
+                                })"></button>
+                                <button class="swatch btn" style="
+                                    --hue: 9;
+                                    --sat: 1.25;
+                                    --lit: 0.84" onclick="_update_params({
+                                    hue: 9,
+                                    sat: 1.25,
+                                    lit: 0.84
+                                })"></button>
+                                <button class="swatch btn" style="
+                                    --hue: 14;
+                                    --sat: 1.25;
+                                    --lit: 0.88" onclick="_update_params({
+                                    hue: 14,
+                                    sat: 1.25,
+                                    lit: 0.88
+                                })"></button>
+                                <button class="swatch btn" style="
+                                    --hue: 18;
+                                    --sat: 1.2;
+                                    --lit: 0.9" onclick="_update_params({
+                                    hue: 18,
+                                    sat: 1.2,
+                                    lit: 0.9
+                                })"></button>
+                                <button class="swatch btn" style="
+                                    --hue: 24;
+                                    --sat: 1.2;
+                                    --lit: 0.93" onclick="_update_params({
+                                    hue: 24,
+                                    sat: 1.2,
+                                    lit: 0.93
+                                })"></button>
+                                <button class="swatch btn" style="
+                                    --hue: 30;
+                                    --sat: 1.3;
+                                    --lit: 1" onclick="_update_params({
+                                    hue: 30,
+                                    sat: 1.3,
+                                    lit: 1
+                                })"></button>
+                                <button class="swatch btn" style="
+                                    --hue: 38;
+                                    --sat: 1.3;
+                                    --lit: 0.98" onclick="_update_params({
+                                    hue: 38,
+                                    sat: 1.3,
+                                    lit: 0.98
+                                })"></button>
+                                <button class="swatch btn" style="
+                                    --hue: 49;
+                                    --sat: 1.3;
+                                    --lit: 0.98" onclick="_update_params({
+                                    hue: 49,
+                                    sat: 1.3,
+                                    lit: 0.98
+                                })"></button>
+                                <button class="swatch btn" style="
+                                    --hue: 53;
+                                    --sat: 1.3;
+                                    --lit: 0.95" onclick="_update_params({
+                                    hue: 53,
+                                    sat: 1.3,
+                                    lit: 0.95
+                                })"></button>
+                                <button class="swatch btn" style="
+                                    --hue: 62;
+                                    --sat: 1.25;
+                                    --lit: 0.95" onclick="_update_params({
+                                    hue: 62,
+                                    sat: 1.25,
+                                    lit: 0.95
+                                })"></button>
+                            </div>
+                            <div class="side">
+                                <button class="swatch btn" style="
+                                    --hue: 75;
+                                    --sat: 1.1;
+                                    --lit: 1" onclick="_update_params({
+                                    hue: 75,
+                                    sat: 1.1,
+                                    lit: 1
+                                })"></button>
+                                <button class="swatch btn" style="
+                                    --hue: 85;
+                                    --sat: 1;
+                                    --lit: 1" onclick="_update_params({
+                                    hue: 85,
+                                    sat: 1,
+                                    lit: 1
+                                })"></button>
+                                <button class="swatch btn" style="
+                                    --hue: 95;
+                                    --sat: 1.1;
+                                    --lit: 1" onclick="_update_params({
+                                    hue: 95,
+                                    sat: 1.1,
+                                    lit: 1
+                                })"></button>
+                                <button class="swatch btn" style="
+                                    --hue: 115;
+                                    --sat: 1;
+                                    --lit: 1" onclick="_update_params({
+                                    hue: 115,
+                                    sat: 1,
+                                    lit: 1
+                                })"></button>
+                                <button class="swatch btn" style="
+                                    --hue: 130;
+                                    --sat: 1.2;
+                                    --lit: 0.95" onclick="_update_params({
+                                    hue: 130,
+                                    sat: 1.2,
+                                    lit: 0.95
+                                })"></button>
+                                <button class="swatch btn" style="
+                                    --hue: 140;
+                                    --sat: 1.2;
+                                    --lit: 0.9" onclick="_update_params({
+                                    hue: 140,
+                                    sat: 1.2,
+                                    lit: 0.9
+                                })"></button>
+                                <button class="swatch btn" style="
+                                    --hue: 155;
+                                    --sat: 1.2;
+                                    --lit: 0.85" onclick="_update_params({
+                                    hue: 155,
+                                    sat: 1.2,
+                                    lit: 0.85
+                                })"></button>
+                                <button class="swatch btn" style="
+                                    --hue: 165;
+                                    --sat: 1.1;
+                                    --lit: 0.8" onclick="_update_params({
+                                    hue: 165,
+                                    sat: 1.1,
+                                    lit: 0.8
+                                })"></button>
+                                <button class="swatch btn" style="
+                                    --hue: 174;
+                                    --sat: 1.1;
+                                    --lit: 0.8" onclick="_update_params({
+                                    hue: 174,
+                                    sat: 1.1,
+                                    lit: 0.8
+                                })"></button>
+                                <button class="swatch btn" style="
+                                    --hue: 184;
+                                    --sat: 1.05;
+                                    --lit: 0.75" onclick="_update_params({
+                                    hue: 184,
+                                    sat: 1.05,
+                                    lit: 0.75
+                                })"></button>
+                            </div>
+                            <div class="side">
+                                <button class="swatch btn" style="
+                                    --hue: 205;
+                                    --sat: 1;
+                                    --lit: 1" onclick="_update_params({
+                                    hue: 205,
+                                    sat: 1,
+                                    lit: 1
+                                })"></button>
+                                <button class="swatch btn" style="
+                                    --hue: 222;
+                                    --sat: 1;
+                                    --lit: 0.9" onclick="_update_params({
+                                    hue: 222,
+                                    sat: 1,
+                                    lit: 0.9
+                                })"></button>
+                                <button class="swatch btn" style="
+                                    --hue: 230;
+                                    --sat: 1.3;
+                                    --lit: 0.9" onclick="_update_params({
+                                    hue: 230,
+                                    sat: 1.3,
+                                    lit: 0.9
+                                })"></button>
+                                <button class="swatch btn" style="
+                                    --hue: 230;
+                                    --sat: 1.3;
+                                    --lit: 0.825" onclick="_update_params({
+                                    hue: 230,
+                                    sat: 1.3,
+                                    lit: 0.825
+                                })"></button>
+                                <button class="swatch btn" style="
+                                    --hue: 243;
+                                    --sat: 1.3;
+                                    --lit: 0.9" onclick="_update_params({
+                                    hue: 243,
+                                    sat: 1.3,
+                                    lit: 0.9
+                                })"></button>
+                                <button class="swatch btn" style="
+                                    --hue: 249;
+                                    --sat: 1.3;
+                                    --lit: 0.9" onclick="_update_params({
+                                    hue: 249,
+                                    sat: 1.3,
+                                    lit: 0.9
+                                })"></button>
+                                <button class="swatch btn" style="
+                                    --hue: 255;
+                                    --sat: 1.2;
+                                    --lit: 0.9" onclick="_update_params({
+                                    hue: 255,
+                                    sat: 1.2,
+                                    lit: 0.9
+                                })"></button>
+                                <button class="swatch btn" style="
+                                    --hue: 263;
+                                    --sat: 1.2;
+                                    --lit: 0.9" onclick="_update_params({
+                                    hue: 263,
+                                    sat: 1.2,
+                                    lit: 0.9
+                                })"></button>
+                                <button class="swatch btn" style="
+                                    --hue: 260;
+                                    --sat: 1.1;
+                                    --lit: 0.95" onclick="_update_params({
+                                    hue: 260,
+                                    sat: 1.1,
+                                    lit: 0.95
+                                })"></button>
+                                <button class="swatch btn" style="
+                                    --hue: 255;
+                                    --sat: 1;
+                                    --lit: 0.95" onclick="_update_params({
+                                    hue: 255,
+                                    sat: 1,
+                                    lit: 0.95
+                                })"></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn back" disabled onclick="_setup_appearance()">
+                            ${trans[lang].settings.back}
+                        </button>
+                        <div class="btn-fill"></div>
+                        <button class="btn skip" onclick="_setup_skip()">
+                            ${trans[lang].settings.skip}
+                        </button>
+                        <button class="btn primary continue" onclick="_setup_theme()">
+                            ${trans[lang].settings.continue}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `, 'setup');
+        refresh_all();
+
+        tippy(document.body.querySelector('.swatch.default'), {
+            content: (stored_season.id != 'none') ? trans[lang].settings.customise.colours.default_with_season.replace('{season}', stored_season.name) : trans[lang].settings.customise.colours.default
+        });
+        tippy(document.body.querySelector('.swatch.custom'), {
+            content: trans[lang].settings.customise.colours.custom
+        });
+    }
+
+    unsafeWindow._setup_theme = function() {
+        kill_window('bleh_setup_appearance');
+        create_window('bleh_setup_theme','',`
+            <div class="setup-sides">
+                <div class="setup-preview">
+
+                </div>
+                <div class="setup-body">
+                    <div class="setup-body-main">
+                        <h1>your appearanc</h1>
+                        <p>now u can pick one of 4 thems..</p>
+                        <h4>${trans[lang].settings.themes.name}</h4>
+                        <!--<h4>${trans[lang].settings.themes.dark.name}</h4>-->
+                        <div class="setting-items full">
+                            <div class="side-left full even-more">
+                                <button class="btn theme-item" data-bleh-theme="light" onclick="change_theme_from_settings('light')">
+                                    <div class="preview" data-bleh--theme="light">
+                                        ${theme_preview}
+                                    </div>
+                                    <div class="text">
+                                        <h5>${trans[lang].settings.themes.light.name}</h5>
+                                    </div>
+                                </button>
+                                <button class="btn theme-item" data-bleh-theme="dark" onclick="change_theme_from_settings('dark')">
+                                    <div class="preview" data-bleh--theme="dark">
+                                        ${theme_preview}
+                                    </div>
+                                    <div class="text">
+                                        <h5>${trans[lang].settings.themes.dark.name}</h5>
+                                    </div>
+                                </button>
+                                <button class="btn theme-item" data-bleh-theme="darker" onclick="change_theme_from_settings('darker')">
+                                    <div class="preview" data-bleh--theme="darker">
+                                        ${theme_preview}
+                                    </div>
+                                    <div class="text">
+                                        <h5>${trans[lang].settings.themes.darker.name}</h5>
+                                    </div>
+                                </button>
+                                <button class="btn theme-item" data-bleh-theme="oled" onclick="change_theme_from_settings('oled')">
+                                    <div class="preview" data-bleh--theme="oled">
+                                        ${theme_preview}
+                                    </div>
+                                    <div class="text">
+                                        <h5>${trans[lang].settings.themes.oled.name}</h5>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+                        ${(settings.feature_flags.high_contrast) ? (`
+                        <div class="toggle-container" id="container-high_contrast">
+                            <button class="btn reset" onclick="_reset_item('high_contrast')">${trans[lang].settings.reset}</button>
+                            <div class="heading">
+                                <h5>${trans[lang].settings.customise.high_contrast.name}</h5>
+                            </div>
+                            <div class="toggle-wrap">
+                                <button class="toggle" id="toggle-high_contrast" onclick="_update_item('high_contrast')" aria-checked="true">
+                                    <div class="dot"></div>
+                                </button>
+                            </div>
+                        </div>
+                        `) : ''}
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn back" onclick="_setup_appearance()">
+                            ${trans[lang].settings.back}
+                        </button>
+                        <div class="btn-fill"></div>
+                        <button class="btn skip" onclick="_setup_skip()">
+                            ${trans[lang].settings.skip}
+                        </button>
+                        <button class="btn primary continue" onclick="_setup_theme()">
+                            ${trans[lang].settings.continue}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `, 'setup');
+        refresh_all();
+        show_theme_change_in_settings();
+    }
+
+    unsafeWindow._setup_skip = function() {
+        kill_window('bleh_setup_start');
+        document.location.href = `${root}bleh`;
     }
 })();
