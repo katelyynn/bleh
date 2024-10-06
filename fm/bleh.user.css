@@ -13303,6 +13303,7 @@ input[type="range"]::-moz-range-progress {
     h5 {
         color: hsl(var(--c2));
         font-weight: var(--font-weight-medium);
+        margin: unset;
     }
 
     p {
@@ -13831,7 +13832,7 @@ input[type="range"]::-moz-range-progress {
     --mask-size: 14px;
 }
 .mention,
-:is(.shout-body, .about-me-sidebar, .bleh--about-me-preview) a[href^="/user/"] {
+:is(.shout-body, .about-me-sidebar, .bleh--about-me-preview, .wiki-content) a[href*="/user/"] {
     padding: 0 4px;
     background-color: hsla(var(--h4), 20%);
     border-radius: var(--item-small-radius);
@@ -15610,7 +15611,7 @@ button.bleh--gallery-bookmark-image-btn {
 
 .modal--setup {
     .modal-dialog:has(&) {
-        width: 900px;
+        width: 940px;
     }
 
     .modal-title {

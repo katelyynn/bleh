@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         bleh
 // @namespace    http://last.fm/
-// @version      2024.1003
+// @version      2024.1006
 // @description  bleh!!! ^-^
 // @author       kate
 // @match        https://www.last.fm/*
@@ -18,8 +18,8 @@
 // ==/UserScript==
 
 let version = {
-    build: '2024.1003',
-    sku: 'scawy',
+    build: '2024.1006',
+    sku: 'setup',
     feature_flags: {
         bleh_settings_tabs: {
             default: false,
@@ -88,6 +88,15 @@ const trans = {
             on_ignore_list: 'You are on this user\'s ignore list.',
             friends: {
                 name: 'Friends'
+            },
+            display_name: {
+                aka: 'aka.',
+                pronouns: 'pronouns'
+            },
+            created: {
+                name: 'created',
+
+                replace: '• scrobbling since '
             }
         },
         settings: {
@@ -96,6 +105,7 @@ const trans = {
             close: 'Close',
             clear: 'Clear',
             done: 'Done',
+            finish: 'Finish',
             continue: 'Continue',
             reset: 'Reset to default',
             go: 'Go',
@@ -2077,7 +2087,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
         let bleh_container = document.createElement('li');
         bleh_container.classList.add('masthead-nav-item');
         bleh_container.innerHTML = (`
-            <a class="masthead-nav-control" href="/bleh" data-bleh--label="bleh">
+            <a class="masthead-nav-control" href="${root}bleh" data-bleh--label="bleh">
                 ${trans[lang].auth_menu.configure_bleh}
             </a>
         `);
@@ -2142,7 +2152,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                 </li>
                 `) : ''}
                 <li>
-                    <a class="auth-dropdown-menu-item bleh--configure-menu-item" href="/bleh">
+                    <a class="auth-dropdown-menu-item bleh--configure-menu-item" href="${root}bleh">
                         <span class="auth-dropdown-item-row">
                             <span class="auth-dropdown-item-left">${trans[lang].auth_menu.configure_bleh}</span>
                         </span>
@@ -2796,16 +2806,25 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
         document.getElementById('header-title-display-name').textContent = value;
 
         // pronouns?
-        let pronouns = false;
-        let display_name_no_spaces = value.replaceAll(' ','');
-        if (
-            display_name_no_spaces.startsWith('she/') ||
-            display_name_no_spaces.startsWith('he/') ||
-            display_name_no_spaces.startsWith('they/') ||
-            display_name_no_spaces.startsWith('it/')
-        ) pronouns = true;
+        let pronouns = use_pronouns(value);
 
         document.getElementById('header-title-display-name--pre').textContent = pronouns ? 'pronouns' : 'aka.';
+    }
+
+
+    function use_pronouns(value) {
+        // no spaces, easier to detect
+        value = value.replaceAll(' ', '');
+
+        if (value.startsWith('she/') ||
+            value.startsWith('he/') ||
+            value.startsWith('they/') ||
+            value.startsWith('it/') ||
+            value.startsWith('xe/') ||
+            value.startsWith('any/')
+        ) return true;
+
+        return false;
     }
 
 
@@ -2877,10 +2896,10 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
             smartIndentationFix: true
         });
         let parsed_body = converter.makeHtml(value
-        .replace(/([@])([a-zA-Z0-9_]+)/g, '[$1$2](/user/$2)')
-        .replace(/\[artist\]([a-zA-Z0-9]+)\[\/artist\]/g, '[$1](/music/$1)')
-        .replace(/\[album artist=([a-zA-Z0-9]+)\]([a-zA-Z0-9\s]+)\[\/album\]/g, '[$2](/music/$1/$2)')
-        .replace(/\[track artist=([a-zA-Z0-9]+)\]([a-zA-Z0-9\s]+)\[\/track\]/g, '[$2](/music/$1/_/$2)')
+        .replace(/([@])([a-zA-Z0-9_]+)/g, `[$1$2](${root}user/$2)`)
+        .replace(/\[artist\]([a-zA-Z0-9]+)\[\/artist\]/g, `[$1](${root}music/$1)`)
+        .replace(/\[album artist=([a-zA-Z0-9]+)\]([a-zA-Z0-9\s]+)\[\/album\]/g, `[$2](${root}music/$1/$2)`)
+        .replace(/\[track artist=([a-zA-Z0-9]+)\]([a-zA-Z0-9\s]+)\[\/track\]/g, `[$2](${root}music/$1/_/$2)`)
         .replace(/https:\/\/open\.spotify\.com\/user\/([A-Za-z0-9]+)\?si=([A-Za-z0-9]+)/g, '[@$1](https://open.spotify.com/user/$1)')
         .replace(/&/g, '&amp;')
         .replace(/</g, '&lt;')
@@ -3182,26 +3201,19 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
 
             let display_name = profile_sub_text.querySelector('.header-title-display-name');
             let scrobble_since = profile_sub_text.querySelector('.header-scrobble-since');
-            scrobble_since.textContent = scrobble_since.textContent.replace('• scrobbling since ','');
+            scrobble_since.textContent = scrobble_since.textContent.replace(trans[lang].profile.created.replace,'');
 
             // pronouns?
-            let pronouns = false;
-            let display_name_no_spaces = display_name.textContent.replaceAll(' ','');
-            if (
-                display_name_no_spaces.startsWith('she/') ||
-                display_name_no_spaces.startsWith('he/') ||
-                display_name_no_spaces.startsWith('they/') ||
-                display_name_no_spaces.startsWith('it/')
-            ) pronouns = true;
+            let pronouns = use_pronouns(display_name.textContent);
 
             let display_name_pre = document.createElement('span');
             display_name_pre.classList.add('header-title-secondary--pre');
-            display_name_pre.textContent = pronouns ? 'pronouns' : 'aka.';
+            display_name_pre.textContent = pronouns ? trans[lang].profile.display_name.pronouns : trans[lang].profile.display_name.aka;
             profile_sub_text.insertBefore(display_name_pre, display_name);
 
             let scrobble_since_pre = document.createElement('span');
             scrobble_since_pre.classList.add('header-title-secondary--pre');
-            scrobble_since_pre.textContent = 'created';
+            scrobble_since_pre.textContent = trans[lang].profile.created.name;
             profile_sub_text.insertBefore(scrobble_since_pre, scrobble_since);
         }
 
@@ -3220,7 +3232,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                     emoji: true,
                     excludeTrailingPunctuationFromURLs: true,
                     ghMentions: true,
-                    ghMentionsLink: '/user/{u}',
+                    ghMentionsLink: `${root}user/{u}`,
                     headerLevelStart: 5,
                     noHeaderId: true,
                     openLinksInNewWindow: true,
@@ -3233,11 +3245,10 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                     smartIndentationFix: true
                 });
                 let parsed_body = converter.makeHtml(about_me_text.textContent
-                .replace(/([@])([a-zA-Z0-9_]+)/g, '[$1$2](/user/$2)')
-                .replace(/\[artist\]([a-zA-Z0-9]+)\[\/artist\]/g, '[$1](/music/$1)')
-                .replace(/\[album artist=([a-zA-Z0-9]+)\]([a-zA-Z0-9\s]+)\[\/album\]/g, '[$2](/music/$1/$2)')
-                .replace(/\[track artist=([a-zA-Z0-9]+)\]([a-zA-Z0-9\s]+)\[\/track\]/g, '[$2](/music/$1/_/$2)')
-                .replace(/https:\/\/open\.spotify\.com\/user\/([A-Za-z0-9]+)/g, '[@$1](https://open.spotify.com/user/$1)')
+                .replace(/([@])([a-zA-Z0-9_]+)/g, `[$1$2](${root}user/$2)`)
+                .replace(/\[artist\]([a-zA-Z0-9]+)\[\/artist\]/g, `[$1](${root}music/$1)`)
+                .replace(/\[album artist=([a-zA-Z0-9]+)\]([a-zA-Z0-9\s]+)\[\/album\]/g, `[$2](${root}music/$1/$2)`)
+                .replace(/\[track artist=([a-zA-Z0-9]+)\]([a-zA-Z0-9\s]+)\[\/track\]/g, `[$2](${root}music/$1/_/$2)`)
                 .replace(/https:\/\/open\.spotify\.com\/user\/([A-Za-z0-9]+)\?si=([A-Za-z0-9]+)/g, '[@$1](https://open.spotify.com/user/$1)')
                 .replace(/&/g, '&amp;')
                 .replace(/</g, '&lt;')
@@ -3477,10 +3488,10 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                         smartIndentationFix: true
                     });
                     let parsed_body = converter.makeHtml(shout_body.textContent
-                    .replace(/([@])([a-zA-Z0-9_]+)/g, '[$1$2](/user/$2)')
-                    .replace(/\[artist\]([a-zA-Z0-9]+)\[\/artist\]/g, '[$1](/music/$1)')
-                    .replace(/\[album artist=([a-zA-Z0-9]+)\]([a-zA-Z0-9\s]+)\[\/album\]/g, '[$2](/music/$1/$2)')
-                    .replace(/\[track artist=([a-zA-Z0-9]+)\]([a-zA-Z0-9\s]+)\[\/track\]/g, '[$2](/music/$1/_/$2)')
+                    .replace(/([@])([a-zA-Z0-9_]+)/g, `[$1$2](${root}user/$2)`)
+                    .replace(/\[artist\]([a-zA-Z0-9]+)\[\/artist\]/g, `[$1](${root}music/$1)`)
+                    .replace(/\[album artist=([a-zA-Z0-9]+)\]([a-zA-Z0-9\s]+)\[\/album\]/g, `[$2](${root}music/$1/$2)`)
+                    .replace(/\[track artist=([a-zA-Z0-9]+)\]([a-zA-Z0-9\s]+)\[\/track\]/g, `[$2](${root}music/$1/_/$2)`)
                     .replace(/https:\/\/open\.spotify\.com\/user\/([A-Za-z0-9]+)\?si=([A-Za-z0-9]+)/g, '[@$1](https://open.spotify.com/user/$1)')
                     .replace(/&/g, '&amp;')
                     .replace(/</g, '&lt;')
@@ -7672,6 +7683,18 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                                 })"></button>
                             </div>
                         </div>
+                        <div class="toggle-container" id="container-hue_from_album">
+                            <button class="btn reset" onclick="_reset_item('hue_from_album')">${trans[lang].settings.reset}</button>
+                            <div class="heading">
+                                <h5>${trans[lang].settings.customise.hue_from_album.name}</h5>
+                                <p>${trans[lang].settings.customise.hue_from_album.bio}</p>
+                            </div>
+                            <div class="toggle-wrap">
+                                <button class="toggle" id="toggle-hue_from_album" onclick="_update_item('hue_from_album')" aria-checked="true">
+                                    <div class="dot"></div>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button class="btn back" disabled onclick="_setup_appearance()">
@@ -7700,6 +7723,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
 
     unsafeWindow._setup_theme = function() {
         kill_window('bleh_setup_appearance');
+        kill_window('bleh_setup_corrections');
         create_window('bleh_setup_theme','',`
             <div class="setup-sides">
                 <div class="setup-preview">
@@ -7769,7 +7793,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                         <button class="btn skip" onclick="_setup_skip()">
                             ${trans[lang].settings.skip}
                         </button>
-                        <button class="btn primary continue" onclick="_setup_theme()">
+                        <button class="btn primary continue" onclick="_setup_corrections()">
                             ${trans[lang].settings.continue}
                         </button>
                     </div>
@@ -7778,6 +7802,111 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
         `, 'setup');
         refresh_all();
         show_theme_change_in_settings();
+    }
+
+    unsafeWindow._setup_corrections = function() {
+        kill_window('bleh_setup_theme');
+        create_window('bleh_setup_corrections','',`
+            <div class="setup-sides">
+                <div class="setup-preview">
+
+                </div>
+                <div class="setup-body">
+                    <div class="setup-body-main">
+                        <h1>correction s</h1>
+                        <p>ummmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm</p>
+                        <div class="inner-preview pad flex">
+                            <table class="chartlist chartlist--with-index chartlist--with-index--length-2 chartlist--with-image chartlist--with-play chartlist--with-artist chartlist--with-bar">
+                                <tbody>
+                                    <tr class="chartlist-row chartlist-row--with-artist">
+                                        <td class="chartlist-index">
+                                            1
+                                        </td>
+                                        <td class="chartlist-image">
+                                            <span class="cover-art">
+                                                <img src="https://lastfm.freetls.fastly.net/i/u/64s/c15d3ed1bd8574260f9378e26847501d.jpg" alt="fractions of infinity" loading="lazy">
+                                            </span>
+                                        </td>
+                                        <td class="chartlist-name">
+                                            <a href="/music/Quadeca/_/fractions+of+infinity" title="fractions of infinity" class="bleh--chartlist-name-without-features">fractions of infinity (feat. Sunday Service Choir)</a>
+                                            <a href="/music/Quadeca/_/fractions+of+infinity" title="fractions of infinity" class="bleh--chartlist-name-with-features">
+                                                <span class="title">fractions of infinity</span>
+                                                <span class="feat" data-bleh--tag-group="guests">feat. Sunday Serv..</span>
+                                            </a>
+                                        </td>
+                                        <td class="chartlist-artist bleh--chartlist-name-without-features">
+                                            <a href="/music/Quadeca" title="Quadeca">Quadeca</a>
+                                        </td>
+                                        <td class="chartlist-artist bleh--chartlist-name-with-features">
+                                            <a href="/music/Quadeca" title="Quadeca">Quadeca</a>,
+                                            <a href="/music/Quadeca" title="Quadeca">Sunday Service</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="toggle-container" id="container-format_guest_features">
+                            <button class="btn reset" onclick="_reset_item('format_guest_features')">${trans[lang].settings.reset}</button>
+                            <div class="heading">
+                                <h5>${trans[lang].settings.corrections.format_guest_features.name}</h5>
+                                <p>${trans[lang].settings.corrections.format_guest_features.bio}</p>
+                            </div>
+                            <div class="toggle-wrap">
+                                <button class="toggle" id="toggle-format_guest_features" onclick="_update_item('format_guest_features')" aria-checked="true">
+                                    <div class="dot"></div>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="toggle-container" id="container-show_guest_features">
+                            <button class="btn reset" onclick="_reset_item('show_guest_features')">${trans[lang].settings.reset}</button>
+                            <div class="heading">
+                                <h5>${trans[lang].settings.corrections.show_guest_features.name}</h5>
+                                <p>${trans[lang].settings.corrections.show_guest_features.bio}</p>
+                            </div>
+                            <div class="toggle-wrap">
+                                <button class="toggle" id="toggle-show_guest_features" onclick="_update_item('show_guest_features')" aria-checked="true">
+                                    <div class="dot"></div>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="toggle-container" id="container-show_remaster_tags">
+                            <button class="btn reset" onclick="_reset_item('show_remaster_tags')">${trans[lang].settings.reset}</button>
+                            <div class="heading">
+                                <h5>${trans[lang].settings.corrections.show_remaster_tags.name}</h5>
+                                <p>${trans[lang].settings.corrections.show_remaster_tags.bio}</p>
+                            </div>
+                            <div class="toggle-wrap">
+                                <button class="toggle" id="toggle-show_remaster_tags" onclick="_update_item('show_remaster_tags')" aria-checked="true">
+                                    <div class="dot"></div>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="toggle-container" id="container-stacked_chartlist_info">
+                            <button class="btn reset" onclick="_reset_item('stacked_chartlist_info')">${trans[lang].settings.reset}</button>
+                            <div class="heading">
+                                <h5>${trans[lang].settings.corrections.stacked_chartlist_info.name}</h5>
+                                <p>${trans[lang].settings.corrections.stacked_chartlist_info.bio}</p>
+                            </div>
+                            <div class="toggle-wrap">
+                                <button class="toggle" id="toggle-stacked_chartlist_info" onclick="_update_item('stacked_chartlist_info')" aria-checked="true">
+                                    <div class="dot"></div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn back" onclick="_setup_theme()">
+                            ${trans[lang].settings.back}
+                        </button>
+                        <div class="btn-fill"></div>
+                        <button class="btn primary continue" onclick="_setup_skip()">
+                            ${trans[lang].settings.finish}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `, 'setup');
+        refresh_all();
     }
 
     unsafeWindow._setup_skip = function() {
