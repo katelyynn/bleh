@@ -124,6 +124,14 @@ const trans = {
                     name: 'Issues',
                     bio: 'Report bugs'
                 },
+                update: {
+                    name: 'Updates',
+                    bio: 'Check now'
+                },
+                setup: {
+                    name: 'Setup',
+                    bio: 'Re-enter setup'
+                },
                 colours: {
                     name: 'Colours',
                     bio: 'Pick your favourite!'
@@ -166,6 +174,10 @@ const trans = {
                 underline_links: {
                     name: 'Always underline links',
                     bio: 'Make links to interactables stand out.'
+                },
+                reduced_motion: {
+                    name: 'Reduce animations around interfaces',
+                    bio: 'Will in most cases either slowly fade or hard-cut, no scaling.'
                 }
             },
             customise: {
@@ -1511,6 +1523,7 @@ let settings_template = {
     dev: false,
     hide_hateful: true,
     accessible_name_colours: false,
+    reduced_motion: false,
     underline_links: false,
     big_numbers: false,
     format_guest_features: true,
@@ -1595,6 +1608,13 @@ let settings_base = {
     },
     accessible_name_colours: {
         css: 'accessible_name_colours',
+        unit: '',
+        value: false,
+        values: [true, false],
+        type: 'toggle'
+    },
+    reduced_motion: {
+        css: 'reduced_motion',
         unit: '',
         value: false,
         values: [true, false],
@@ -4107,6 +4127,13 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                         </div>
                     </div>
                     <div class="actions">
+                        <a class="btn action" href="https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.js">
+                            <div class="icon bleh--updates"></div>
+                            <span class="text">
+                                <h5>${trans[lang].settings.home.update.name}</h5>
+                                <p>${trans[lang].settings.home.update.bio}</p>
+                            </span>
+                        </a>
                         <a class="btn action" href="https://github.com/katelyynn/bleh/issues" target="_blank">
                             <div class="icon bleh--issues"></div>
                             <span class="text">
@@ -4132,27 +4159,34 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                     </div>
                 </div>
                 <h4>${trans[lang].settings.home.recommended}</h4>
-                <div class="setting-items">
-                    <div class="side-left">
-                        <button class="btn setting-item has-image" onclick="_change_settings_page('themes')">
-                            <div class="image">
-                                <div class="icon bleh--themes"></div>
-                            </div>
+                <div class="setting-items full">
+                    <div class="side-right full">
+                        <button class="btn setting-item" onclick="_change_settings_page('customise')">
+                            <div class="icon bleh--themes"></div>
                             <div class="text">
                                 <h5>${trans[lang].settings.themes.name}</h5>
                                 <p>${trans[lang].settings.themes.bio}</p>
                             </div>
-                            <div class="image-row">
-                                <img src="https://cutensilly.org/img/bleh3-theme-oled.png">
-                            </div>
                         </button>
-                    </div>
-                    <div class="side-right">
                         <button class="btn setting-item" onclick="_change_settings_page('customise')">
                             <div class="icon bleh--palette"></div>
                             <div class="text">
                                 <h5>${trans[lang].settings.home.colours.name}</h5>
                                 <p>${trans[lang].settings.home.colours.bio}</p>
+                            </div>
+                        </button>
+                        <button class="btn setting-item" onclick="_change_settings_page('corrections')">
+                            <div class="icon bleh--corrections"></div>
+                            <div class="text">
+                                <h5>${trans[lang].settings.corrections.name}</h5>
+                                <p>${trans[lang].settings.corrections.bio}</p>
+                            </div>
+                        </button>
+                        <button class="btn setting-item" onclick="_change_settings_page('accessibility')">
+                            <div class="icon bleh--motion"></div>
+                            <div class="text">
+                                <h5>${trans[lang].settings.accessibility.reduced_motion.name}</h5>
+                                <p>${trans[lang].settings.accessibility.reduced_motion.bio}</p>
                             </div>
                         </button>
                         <button class="btn setting-item" onclick="_change_settings_page('accessibility')">
@@ -5116,6 +5150,18 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
             return (`
                 <div class="bleh--panel">
                     <h3>${trans[lang].settings.accessibility.name}</h3>
+                    <div class="toggle-container" id="container-reduced_motion">
+                        <button class="btn reset" onclick="_reset_item('reduced_motion')">${trans[lang].settings.reset}</button>
+                        <div class="heading">
+                            <h5>${trans[lang].settings.accessibility.reduced_motion.name}</h5>
+                            <p>${trans[lang].settings.accessibility.reduced_motion.bio}</p>
+                        </div>
+                        <div class="toggle-wrap">
+                            <button class="toggle" id="toggle-reduced_motion" onclick="_update_item('reduced_motion')" aria-checked="false">
+                                <div class="dot"></div>
+                            </button>
+                        </div>
+                    </div>
                     <div class="inner-preview pad flex">
                         <div class="shout js-shout js-link-block" data-kate-processed="true">
                             <h3 class="shout-user">
@@ -7305,14 +7351,105 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
         create_window('bleh_setup_start','',`
             <div class="setup-sides">
                 <div class="setup-preview">
-
+                    <div class="setup-icon setup-icon-main setup-icon-home"></div>
                 </div>
                 <div class="setup-body">
                     <div class="setup-body-main">
-                        <h1>haaiiiii welcome to bleh</h1>
-                        <p>thank u for isntalling :3333 here you can conmfigur settings.. n stuff.. or skip! if u got it</p>
+                        <h1>haiii :3 welcome to bleh!!</h1>
+                        <p>Thank you for installing, ${auth}!</p>
+                        <p>This is the first-time setup to help you get started with common tasks for new users, which include:</p>
+                        <ul>
+                            <li>Manage accessibility, such as reduced motion</li>
+                            <li>Configuring your accent colour</li>
+                            <li>Changing your interface theme</li>
+                            <li>Adjusting song corrections and tagging</li>
+                        </ul>
+                        <p>If you're already set, you can skip.</p>
                     </div>
                     <div class="modal-footer">
+                        <button class="btn skip" onclick="_setup_skip()">
+                            ${trans[lang].settings.skip}
+                        </button>
+                        <button class="btn primary continue" onclick="_setup_accessibility()">
+                            ${trans[lang].settings.continue}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `, 'setup');
+    }
+
+    unsafeWindow._setup_accessibility = function() {
+        kill_window('bleh_setup_start');
+        kill_window('bleh_setup_appearance');
+        create_window('bleh_setup_accessibility','',`
+            <div class="setup-sides">
+                <div class="setup-preview">
+                    <div class="setup-icon setup-icon-main setup-icon-accessibility"></div>
+                </div>
+                <div class="setup-body">
+                    <div class="setup-body-main">
+                        <h1>${trans[lang].settings.accessibility.name}</h1>
+                        <div class="toggle-container" id="container-reduced_motion">
+                            <button class="btn reset" onclick="_reset_item('reduced_motion')">${trans[lang].settings.reset}</button>
+                            <div class="heading">
+                                <h5>${trans[lang].settings.accessibility.reduced_motion.name}</h5>
+                                <p>${trans[lang].settings.accessibility.reduced_motion.bio}</p>
+                            </div>
+                            <div class="toggle-wrap">
+                                <button class="toggle" id="toggle-reduced_motion" onclick="_update_item('reduced_motion')" aria-checked="false">
+                                    <div class="dot"></div>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="inner-preview pad flex">
+                            <div class="shout js-shout js-link-block" data-kate-processed="true">
+                                <h3 class="shout-user">
+                                    <a>${auth}</a>
+                                </h3>
+                                <span class="avatar shout-user-avatar avatar--bleh-missing">
+                                    <img src="" alt="Your avatar" loading="lazy">
+                                </span>
+                                <a class="shout-permalink shout-timestamp">
+                                    <time datetime="2024-06-05T02:33:39+01:00" title="Wednesday 5 Jun 2024, 2:33am">
+                                        5 Jun 2:33am
+                                    </time>
+                                </a>
+                                <div class="shout-body">
+                                    <p>${trans[lang].settings.accessibility.shout_preview}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="toggle-container" id="container-accessible_name_colours">
+                            <button class="btn reset" onclick="_reset_item('accessible_name_colours')">${trans[lang].settings.reset}</button>
+                            <div class="heading">
+                                <h5>${trans[lang].settings.accessibility.accessible_name_colours.name}</h5>
+                                <p>${trans[lang].settings.accessibility.accessible_name_colours.bio}</p>
+                            </div>
+                            <div class="toggle-wrap">
+                                <button class="toggle" id="toggle-accessible_name_colours" onclick="_update_item('accessible_name_colours')" aria-checked="false">
+                                    <div class="dot"></div>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="toggle-container" id="container-underline_links">
+                            <button class="btn reset" onclick="_reset_item('underline_links')">${trans[lang].settings.reset}</button>
+                            <div class="heading">
+                                <h5>${trans[lang].settings.accessibility.underline_links.name}</h5>
+                                <p>${trans[lang].settings.accessibility.underline_links.bio}</p>
+                            </div>
+                            <div class="toggle-wrap">
+                                <button class="toggle" id="toggle-underline_links" onclick="_update_item('underline_links')" aria-checked="false">
+                                    <div class="dot"></div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn back" disabled>
+                            ${trans[lang].settings.back}
+                        </button>
+                        <div class="btn-fill"></div>
                         <button class="btn skip" onclick="_setup_skip()">
                             ${trans[lang].settings.skip}
                         </button>
@@ -7323,20 +7460,25 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                 </div>
             </div>
         `, 'setup');
+        refresh_all();
     }
 
     unsafeWindow._setup_appearance = function() {
-        kill_window('bleh_setup_start');
+        kill_window('bleh_setup_accessibility');
         kill_window('bleh_setup_theme');
         create_window('bleh_setup_appearance','',`
             <div class="setup-sides">
                 <div class="setup-preview">
-
+                    <div class="setup-icon setup-icon-main setup-icon-appearance">
+                        <div class="setup-colour-behind for-appearance-0"></div>
+                        <div class="setup-colour-behind for-appearance-1"></div>
+                        <div class="setup-colour-behind for-appearance-2"></div>
+                    </div>
                 </div>
                 <div class="setup-body">
                     <div class="setup-body-main">
-                        <h1>your appearanc</h1>
-                        <p>you can configur bleh's look for ur own liking!! why not pick a preset colour to get started?</p>
+                        <h1>${trans[lang].settings.appearance.name}</h1>
+                        <p>Configure the colour of bleh from one of the available presets, or make your own colour combination!</p>
                         <h4>${trans[lang].settings.customise.colours.name}</h4>
                         <!--<h5>${trans[lang].settings.customise.colours.presets}</h5>-->
                         <div class="palette options colours" id="custom_colours">
@@ -7353,6 +7495,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                                 --sat: var(--sat-user, 1);
                                 --lit: var(--lit-user, 1)" onclick="_create_a_custom_colour()"></button>
                         </div>
+                        <p class="subtext">During seasonal events, the default colour changes automatically.</p>
                         <div class="palette options colours">
                             <div class="side">
                                 <button class="swatch btn" style="
@@ -7697,7 +7840,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn back" disabled onclick="_setup_appearance()">
+                        <button class="btn back" onclick="_setup_accessibility()">
                             ${trans[lang].settings.back}
                         </button>
                         <div class="btn-fill"></div>
@@ -7727,12 +7870,11 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
         create_window('bleh_setup_theme','',`
             <div class="setup-sides">
                 <div class="setup-preview">
-
+                    <div class="setup-icon setup-icon-main setup-icon-theme"></div>
                 </div>
                 <div class="setup-body">
                     <div class="setup-body-main">
-                        <h1>your appearanc</h1>
-                        <p>now u can pick one of 4 thems..</p>
+                        <h1>${trans[lang].settings.appearance.name}</h1>
                         <h4>${trans[lang].settings.themes.name}</h4>
                         <!--<h4>${trans[lang].settings.themes.dark.name}</h4>-->
                         <div class="setting-items full">
@@ -7809,12 +7951,12 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
         create_window('bleh_setup_corrections','',`
             <div class="setup-sides">
                 <div class="setup-preview">
-
+                    <div class="setup-icon setup-icon-main setup-icon-corrections"></div>
                 </div>
                 <div class="setup-body">
                     <div class="setup-body-main">
-                        <h1>correction s</h1>
-                        <p>ummmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm</p>
+                        <h1>${trans[lang].settings.corrections.name}</h1>
+                        <p>${trans[lang].settings.corrections.bio}</p>
                         <div class="inner-preview pad flex">
                             <table class="chartlist chartlist--with-index chartlist--with-index--length-2 chartlist--with-image chartlist--with-play chartlist--with-artist chartlist--with-bar">
                                 <tbody>
@@ -7911,6 +8053,6 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
 
     unsafeWindow._setup_skip = function() {
         kill_window('bleh_setup_start');
-        document.location.href = `${root}bleh`;
+        document.location.href = `${root}user/${auth}`;
     }
 })();
