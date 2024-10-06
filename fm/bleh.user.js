@@ -6347,7 +6347,6 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
 
             tracks.forEach((track => {
                 console.log('track', track);
-                track.classList.add('chartlist-row--with-artist');
 
                 let bla = document.createElement('div');
                 bla.classList.add('kate-placeholder');
@@ -6356,13 +6355,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                 // image
                 let track_image = track.querySelector('.chartlist-image a.cover-art');
 
-                if (track_image != null) {
-                    // this has an album
-                    let track_image_img = track_image.querySelector('img');
-                    tippy(track_image, {
-                        content: track_image_img.getAttribute('alt')
-                    });
-                } else {
+                if (track_image == null) {
                     // is there an avatar?
                     track_image = track.querySelector('.chartlist-image > span');
 
@@ -6372,13 +6365,9 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                             patch_artist_ranks_in_list_view(track);
                             return;
                         }
-
-                        let track_image_img = track_image.querySelector('img');
-                        tippy(track_image, {
-                            content: track_image_img.getAttribute('alt')
-                        });
                     }
                 }
+                track.classList.add('chartlist-row--with-artist');
 
                 // duration
                 let track_timestamp = track.querySelector('.chartlist-timestamp span');
@@ -7046,6 +7035,15 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
         };
     }
 
+    // saturation should not exceed 2, definitely not
+    // reaching 3 or even 4 in some cases
+    function clamp_sat(sat) {
+        if (sat > 2)
+            return 2;
+
+        return sat;
+    }
+
     function album_missing_a_tracklist() {
         document.body.style.removeProperty('--hue-album');
         document.body.style.removeProperty('--sat-album');
@@ -7062,7 +7060,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                 let hsl = hex_to_hsl(bg);
                 console.info('hsl', hsl);
                 document.body.style.setProperty('--hue-album', hsl.h);
-                document.body.style.setProperty('--sat-album', (hsl.s / 100) * 3);
+                document.body.style.setProperty('--sat-album', clamp_sat((hsl.s / 100) * 3));
             } catch(e) {
                 console.info('bleh - album is missing a cover');
             }

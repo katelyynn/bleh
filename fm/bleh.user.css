@@ -279,6 +279,7 @@ input[type="range"],
 
     --icon: var(--c2);
 
+    .grid-items-item [data-bleh--scrobble-milestone],
     .preview[data-bleh--theme="oled"],
     [data-bleh--theme="oled"] &:not(.preview) {
         --c1: var(--hue), calc(var(--sat) * 40%), 100%;
@@ -302,7 +303,7 @@ input[type="range"],
     }
     .preview[data-bleh--theme="light"],
     [data-bleh--theme="light"] &:not(
-        .preview,
+        .preview, .grid-items-item [data-bleh--scrobble-milestone],
         .header-new-inner:not(.header-new-inner--without-image) .header-metadata-tnew-item,
         .header-new-inner:not(.header-new-inner--without-image) .header-new-actions :is(a, button),
         .header-new-inner:not(.header-new-inner--without-image) .header-new-inner, .header-new-inner:not(.header-new-inner--without-image) span[itemprop="byArtist"] a, .user-dashboard-layout .masthead a) {
@@ -326,7 +327,7 @@ input[type="range"],
         --g4: var(--hue), calc(var(--sat) * 70%), 92%;
     }
     [data-bleh--theme="classic"] &:not(
-        .user-dashboard-layout, .header-metadata-tnew-item,
+        .user-dashboard-layout, .header-metadata-tnew-item, .grid-items-item,
         .header-new-actions :is(a, button),
         .header-new-inner, span[itemprop="byArtist"] a, .user-dashboard-layout .masthead a) {
         --c1: var(--hue), calc(var(--sat) * 6%), 0%;
@@ -7570,6 +7571,8 @@ that literally is 1 user from 2007 who hasnt even gotten a scrobble */
         width: 32px !important;
         height: 32px !important;
         --left: 8px;
+
+        --font-size: 0;
 
         &.love-button {
             --mask: var(--icon-16-heart);
