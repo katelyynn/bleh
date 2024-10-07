@@ -4161,14 +4161,14 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                 <h4>${trans[lang].settings.home.recommended}</h4>
                 <div class="setting-items full">
                     <div class="side-right full">
-                        <button class="btn setting-item" onclick="_change_settings_page('customise')">
+                        <button class="btn setting-item" onclick="_change_settings_page('themes')">
                             <div class="icon bleh--themes"></div>
                             <div class="text">
                                 <h5>${trans[lang].settings.themes.name}</h5>
                                 <p>${trans[lang].settings.themes.bio}</p>
                             </div>
                         </button>
-                        <button class="btn setting-item" onclick="_change_settings_page('customise')">
+                        <button class="btn setting-item" onclick="_change_settings_page('themes')">
                             <div class="icon bleh--palette"></div>
                             <div class="text">
                                 <h5>${trans[lang].settings.home.colours.name}</h5>

@@ -627,6 +627,7 @@ body {
     --icon-16-pumpkin: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtcHVtcGtpbiI+PHBhdGggZD0iTTEzIDJjLTEgMS0xIDItMSAyIi8+PHBhdGggZD0iTTE3IDRjLS45IDAtMS44LjQtMi41IDEuMmEzLjMyIDMuMzIgMCAwIDAtNSAwQzguOCA0LjQgNy45IDQgNyA0Yy0yLjggMC01IDQtNSA5czIuMiA5IDUgOWMuOSAwIDEuOC0uNCAyLjUtMS4yYTMuMzIgMy4zMiAwIDAgMCA1IDBjLjcuOCAxLjYgMS4yIDIuNSAxLjIgMi44IDAgNS00IDUtOXMtMi4yLTktNS05Ii8+PHBhdGggZD0iTTEwIDExIDggOWwtMiAyIi8+PHBhdGggZD0ibTE4IDExLTItMi0yIDIiLz48cGF0aCBkPSJtNiAxNSAyIDIgMi0yIDIgMiAyLTIgMiAyIDItMiIvPjwvc3ZnPg==');
     --icon-16-new-years: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtcGFydHktcG9wcGVyIj48cGF0aCBkPSJNNS44IDExLjMgMiAyMmwxMC43LTMuNzkiLz48cGF0aCBkPSJNNCAzaC4wMSIvPjxwYXRoIGQ9Ik0yMiA4aC4wMSIvPjxwYXRoIGQ9Ik0xNSAyaC4wMSIvPjxwYXRoIGQ9Ik0yMiAyMGguMDEiLz48cGF0aCBkPSJtMjIgMi0yLjI0Ljc1YTIuOSAyLjkgMCAwIDAtMS45NiAzLjEyYy4xLjg2LS41NyAxLjYzLTEuNDUgMS42M2gtLjM4Yy0uODYgMC0xLjYuNi0xLjc2IDEuNDRMMTQgMTAiLz48cGF0aCBkPSJtMjIgMTMtLjgyLS4zM2MtLjg2LS4zNC0xLjgyLjItMS45OCAxLjExYy0uMTEuNy0uNzIgMS4yMi0xLjQzIDEuMjJIMTciLz48cGF0aCBkPSJtMTEgMiAuMzMuODJjLjM0Ljg2LS4yIDEuODItMS4xMSAxLjk4QzkuNTIgNC45IDkgNS41MiA5IDYuMjNWNyIvPjxwYXRoIGQ9Ik0xMSAxM2MxLjkzIDEuOTMgMi44MyA0LjE3IDIgNS0uODMuODMtMy4wNy0uMDctNS0yLTEuOTMtMS45My0yLjgzLTQuMTctMi01IC44My0uODMgMy4wNy4wNyA1IDJaIi8+PC9zdmc+');
     --icon-16-egg: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtZWdnIj48cGF0aCBkPSJNMTIgMjJjNi4yMy0uMDUgNy44Ny01LjU3IDcuNS0xMC0uMzYtNC4zNC0zLjk1LTkuOTYtNy41LTEwLTMuNTUuMDQtNy4xNCA1LjY2LTcuNSAxMC0uMzcgNC40MyAxLjI3IDkuOTUgNy41IDEweiIvPjwvc3ZnPg==');
+    --icon-16-motion: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtbGF5ZXJzLTIiPjxwYXRoIGQ9Im0xNi4wMiAxMiA1LjQ4IDMuMTNhMSAxIDAgMCAxIDAgMS43NEwxMyAyMS43NGEyIDIgMCAwIDEtMiAwbC04LjUtNC44N2ExIDEgMCAwIDEgMC0xLjc0TDcuOTggMTIiLz48cGF0aCBkPSJNMTMgMTMuNzRhMiAyIDAgMCAxLTIgMEwyLjUgOC44N2ExIDEgMCAwIDEgMC0xLjc0TDExIDIuMjZhMiAyIDAgMCAxIDIgMGw4LjUgNC44N2ExIDEgMCAwIDEgMCAxLjc0WiIvPjwvc3ZnPg==');
 
     --icon-20-check: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImhzbCgyNTUsMjAlLDkwJSkiIHN0cm9rZS13aWR0aD0iMi4yNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1jaGVjayI+PHBhdGggZD0iTTIwIDYgOSAxN2wtNS01Ii8+PC9zdmc+');
     --icon-20-plus: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImhzbCgyNTUsMjAlLDkwJSkiIHN0cm9rZS13aWR0aD0iMi4yNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1wbHVzIj48cGF0aCBkPSJNNSAxMmgxNCIvPjxwYXRoIGQ9Ik0xMiA1djE0Ii8+PC9zdmc+');
@@ -641,6 +642,7 @@ body {
     --icon-corrections: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWJvb2stb3Blbi1jaGVjayI+PHBhdGggZD0iTTEyIDIxVjciLz48cGF0aCBkPSJtMTYgMTIgMiAyIDQtNCIvPjxwYXRoIGQ9Ik0yMiA2VjRhMSAxIDAgMCAwLTEtMWgtNWE0IDQgMCAwIDAtNCA0IDQgNCAwIDAgMC00LTRIM2ExIDEgMCAwIDAtMSAxdjEzYTEgMSAwIDAgMCAxIDFoNmEzIDMgMCAwIDEgMyAzIDMgMyAwIDAgMSAzLTNoNmExIDEgMCAwIDAgMS0xdi0xLjMiLz48L3N2Zz4=');
     --icon-bleh: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWxheW91dC1ncmlkIj48cmVjdCB3aWR0aD0iNyIgaGVpZ2h0PSI3IiB4PSIzIiB5PSIzIiByeD0iMSIvPjxyZWN0IHdpZHRoPSI3IiBoZWlnaHQ9IjciIHg9IjE0IiB5PSIzIiByeD0iMSIvPjxyZWN0IHdpZHRoPSI3IiBoZWlnaHQ9IjciIHg9IjE0IiB5PSIxNCIgcng9IjEiLz48cmVjdCB3aWR0aD0iNyIgaGVpZ2h0PSI3IiB4PSIzIiB5PSIxNCIgcng9IjEiLz48L3N2Zz4=');
     --icon-accessibility: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLXBlcnNvbi1zdGFuZGluZyI+PGNpcmNsZSBjeD0iMTIiIGN5PSI1IiByPSIxIi8+PHBhdGggZD0ibTkgMjAgMy02IDMgNiIvPjxwYXRoIGQ9Im02IDggNiAyIDYtMiIvPjxwYXRoIGQ9Ik0xMiAxMHY0Ii8+PC9zdmc+');
+    --icon-start: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLXNpZ25wb3N0Ij48cGF0aCBkPSJNMTIgMTN2OCIvPjxwYXRoIGQ9Ik0xMiAzdjMiLz48cGF0aCBkPSJNMTggNmEyIDIgMCAwIDEgMS4zODcuNTZsMi4zMDcgMi4yMmExIDEgMCAwIDEgMCAxLjQ0bC0yLjMwNyAyLjIyQTIgMiAwIDAgMSAxOCAxM0g2YTIgMiAwIDAgMS0xLjM4Ny0uNTZsLTIuMzA2LTIuMjJhMSAxIDAgMCAxIDAtMS40NGwyLjMwNi0yLjIyQTIgMiAwIDAgMSA2IDZ6Ii8+PC9zdmc+');
 }
 
 
@@ -6274,6 +6276,7 @@ button,
 {
     --btn-left: calc(12px + 16px + 6px) !important;
 }
+.side-right .setting-item,
 .continue,
 .btn--has-icon-right,
 .dropdown-menu-clickable-button, .dropdown-menu-clickable-button-js-only,
@@ -6385,6 +6388,7 @@ button,
 
 
 /*     ICON MASK     */
+.side-right .setting-item:before, .action:before,
 .setup-icon:before, .setup-icon:after,
 .btn.back:before,
 .continue:before,
@@ -12366,6 +12370,8 @@ so this is good enough - use the community docs */
             }
 
             .btn {
+                --btn-top: 9px;
+                --btn-bottom: 9px;
                 --shadow: none;
                 --shadow-hov: none;
                 --btn-left: calc(12px + 16px + 6px);
@@ -12638,14 +12644,16 @@ code, kbd, samp {
         gap: 6px;
 
         .action {
-            --bg: hsla(var(--b4), 20%);
-            --bg-hov: hsla(var(--b4), 60%);
-            --bg-atv: hsla(var(--b4), 80%);
-            --shadow: none;
-            --shadow-hov: var(--shadow);
-            --padding: 7px 16px;
+            --padding: 9px 16px;
+            padding-right: calc(16px + 16px + 6px) !important;
             gap: 12px;
             text-decoration: none;
+
+            position: relative;
+            --show-icon: block;
+            --mask: var(--icon-16-arrow-right);
+            --left: none;
+            --right: 12px;
 
             display: flex;
             align-items: center;
@@ -12658,7 +12666,7 @@ code, kbd, samp {
                 padding: 6px;
                 background-color: hsl(var(--h3));
                 color: hsl(var(--b7));
-                border-radius: 50%;
+                border-radius: var(--item-med-radius);
                 position: relative;
 
                 &:before {
@@ -12668,6 +12676,9 @@ code, kbd, samp {
 
                 &.bleh--issues {
                     --mask: var(--icon-16-issues);
+                }
+                &.bleh--updates {
+                    --mask: var(--icon-16-download);
                 }
             }
 
@@ -12699,7 +12710,6 @@ code, kbd, samp {
             .text {
                 display: flex;
                 flex-direction: column;
-                gap: 4px;
             }
         }
     }
@@ -12738,19 +12748,24 @@ code, kbd, samp {
             width: unset !important;
             justify-content: unset;
             display: flex;
+
+            position: relative;
+            --show-icon: block;
+            --mask: var(--icon-16-arrow-right);
+            --left: none;
+            --right: 12px;
+
+            padding-right: calc(16px + 16px + 6px) !important;
         }
     }
 
     .setting-item {
-        --bg: hsla(var(--b4), 40%);
-        --bg-hov: hsla(var(--b4), 60%);
-        --bg-atv: hsla(var(--b4), 80%);
-        --shadow: none;
-        --shadow-hov: none;
         gap: 9px 12px;
-        --padding: 7px 16px;
+        --padding: 9px 16px;
         --radius: var(--card-radius);
         text-align: left;
+
+        align-items: center;
 
         .icon {
             display: block;
@@ -12759,7 +12774,7 @@ code, kbd, samp {
             padding: 6px;
             background-color: hsl(var(--h3));
             color: hsl(var(--b7));
-            border-radius: 50%;
+            border-radius: var(--item-med-radius);
             position: relative;
 
             &:before {
@@ -12790,6 +12805,12 @@ code, kbd, samp {
             }
             &.bleh--link {
                 --mask: var(--icon-16-link);
+            }
+            &.bleh--corrections {
+                --mask: var(--icon-16-correction);
+            }
+            &.bleh--motion {
+                --mask: var(--icon-16-motion);
             }
         }
 
@@ -12838,11 +12859,6 @@ code, kbd, samp {
 
 
 .theme-item {
-    --bg: hsla(var(--b4), 40%);
-    --bg-hov: hsla(var(--b4), 60%);
-    --bg-atv: hsla(var(--b4), 80%);
-    --shadow: none;
-    --shadow-hov: none;
     --padding: 7px;
     --radius: var(--card-radius);
     text-align: left;
@@ -15694,7 +15710,7 @@ button.bleh--gallery-bookmark-image-btn {
                 height: var(--mask-size);
 
                 &.setup-icon-home {
-                    --mask: var(--icon-bleh);
+                    --mask: var(--icon-start);
                 }
                 &.setup-icon-appearance {
                     /*color: hsl(var(--c1));*/
