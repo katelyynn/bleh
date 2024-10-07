@@ -2888,8 +2888,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
 
 
     unsafeWindow._save_avatar_changer = function() {
-        document.getElementById('bleh--window-edit_avatar--body').style.setProperty('pointer-events', 'none');
-        document.getElementById('bleh--window-edit_avatar--body').style.setProperty('opacity', '0.6');
+        document.getElementById('bleh--window-edit_avatar--body').classList.add('modal-processing');
 
         setTimeout(function() {
             kill_window('edit_avatar')

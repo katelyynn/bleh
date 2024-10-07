@@ -6388,6 +6388,7 @@ button,
 
 
 /*     ICON MASK     */
+.modal-processing:before,
 .side-right .setting-item:before, .action:before,
 .setup-icon:before, .setup-icon:after,
 .btn.back:before,
@@ -7456,6 +7457,14 @@ input:is([name="track_name"], [name="artist_name"], [name="album_name"], [name="
     }
 }
 
+.modal-processing {
+    pointer-events: none;
+
+    & > * {
+        opacity: 0;
+    }
+}
+
 .modal-content {
     animation: dropdown calc(var(--trans-short) + 0.22s) var(--trans-function);
     transform-origin: top;
@@ -8218,6 +8227,7 @@ form[action="/inbox/notifications"] {
 .gallery--initialised .gallery-slide {
     transition: left var(--trans) var(--trans-function);
 }
+.modal-processing,
 .gallery-placeholder {
     color: hsl(var(--c3));
     --mask-size: 32px;
