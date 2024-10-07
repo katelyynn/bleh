@@ -129,6 +129,7 @@ const trans = {
                 },
                 update: {
                     name: 'Updates',
+                    css: 'Update style',
                     bio: 'Check now'
                 },
                 setup: {
@@ -138,7 +139,8 @@ const trans = {
                 colours: {
                     name: 'Colours',
                     bio: 'Pick your favourite!'
-                }
+                },
+                thanks: 'Welcome {m}, you are running bleh {v}.',
             },
             appearance: {
                 name: 'Appearance'
@@ -4135,14 +4137,15 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
             return (`
             <div class="bleh--panel">
                 <h3>${trans[lang].settings.home.name}</h3>
-                <div class="screen-row">
-                    <div class="screen-wrap">
-                        <img class="screen" src="https://cutensilly.org/img/bleh3-theme-${document.documentElement.getAttribute('data-bleh--theme')}.png" alt="bleh">
-                        <div class="text">
-                            <h5>${trans[lang].settings.home.brand}</h5>
-                            <p onclick="_change_settings_page('sku')">${trans[lang].settings.home.version.replace('{v}', `${version.build}.${version.sku}`)}</p>
-                        </div>
-                    </div>
+                <div class="user-top-panel">
+                    <div class="user-top-avatar user-top-avatar-side-left"></div>
+                    <img class="user-top-avatar user-top-avatar-main" src="${my_avi.replace('avatar42s', 'avatar170s')}" alt="${auth}">
+                    <div class="user-top-avatar user-top-avatar-side-right"></div>
+                </div>
+                <h4>${trans[lang].settings.home.thanks
+                .replace('{m}', `<a class="mention" href="${root}user/${auth}">@${auth}</a>`)
+                .replace('{v}', `<span class="version-link" onclick="_change_settings_page('sku')">${version.build}.${version.sku}</span>`)}</h4>
+                <div class="screen-row actions-only">
                     <div class="actions">
                         <a class="btn action" href="https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.js">
                             <div class="icon bleh--updates"></div>
@@ -4151,6 +4154,15 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                                 <p>${trans[lang].settings.home.update.bio}</p>
                             </span>
                         </a>
+                        ${(settings.dev ? (`
+                        <a class="btn action" href="https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.css">
+                            <div class="icon bleh--updates"></div>
+                            <span class="text">
+                                <h5>${trans[lang].settings.home.update.css}</h5>
+                                <p>${trans[lang].settings.home.update.bio}</p>
+                            </span>
+                        </a>
+                        `) : '')}
                         <a class="btn action" href="https://github.com/katelyynn/bleh/issues" target="_blank">
                             <div class="icon bleh--issues"></div>
                             <span class="text">
@@ -4160,6 +4172,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                         </a>
                     </div>
                 </div>
+                <div class="sep"></div>
                 <h4>${trans[lang].settings.customise.seasonal.name}</h4>
                 <div class="inner-preview pad click-thru">
                     <div class="current-season-container">
