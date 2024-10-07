@@ -12881,9 +12881,11 @@ code, kbd, samp {
     flex-direction: column;
 
     &.active {
-        --bg: hsla(var(--h4), 40%);
-        --bg-hov: hsla(var(--h4), 60%);
-        --bg-atv: hsla(var(--h4), 80%);
+        --bg: hsl(var(--h3));
+        --bg-hov: hsla(var(--h3), 80%);
+        --bg-atv: hsla(var(--h3), 60%);
+        --col: hsl(var(--b7));
+        --shadow: 0 0 0 1px hsla(var(--h2), 40%) inset, var(--interactable-outer);
     }
 
     h5 {
