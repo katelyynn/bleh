@@ -3673,7 +3673,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
             if (!personal_statistic.hasAttribute('data-kate-processed')) {
                 personal_statistic.setAttribute('data-kate-processed','true');
 
-                let scrobbles = parseInt(personal_statistic.querySelector('.link-block-target').textContent.replaceAll(',',''));
+                let scrobbles = clean_number(personal_statistic.querySelector('.link-block-target').textContent);
                 let parsed_scrobble_as_rank = parse_scrobbles_as_rank(scrobbles);
 
                 personal_statistic.setAttribute('data-bleh--scrobble-milestone',parsed_scrobble_as_rank.milestone);
@@ -3682,6 +3682,13 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                 personal_statistic.style.setProperty('--lit-user',parsed_scrobble_as_rank.lit);
             }
         }
+    }
+
+    function clean_number(string) {
+        return parseInt(string
+        .replaceAll(',','')
+        .replaceAll('.','')
+        );
     }
 
     function patch_artist_ranks_in_grid_view(element) {
@@ -3697,7 +3704,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                 if (!artist_statistic.getAttribute('href').endsWith('DAYS') && !artist_statistic.classList.contains('grid-items-item-aux-block')) {
                     console.info('bleh - artist grid plays match');
 
-                    let scrobbles = parseInt(artist_statistic.textContent.replaceAll(',','').replace(` ${trans[lang].statistics.plays.name}`,''));
+                    let scrobbles = clean_number(artist_statistic.textContent.replace(` ${trans[lang].statistics.plays.name}`,''));
                     let parsed_scrobble_as_rank = parse_scrobbles_as_rank(scrobbles);
 
                     artist_statistic.setAttribute('data-bleh--scrobble-milestone',parsed_scrobble_as_rank.milestone);
@@ -3719,7 +3726,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
         if (count_bar_link.getAttribute('href').endsWith('DAYS'))
             return;
 
-        let count = parseInt(count_bar.querySelector('.chartlist-count-bar-value').textContent.replaceAll(',','').replace(' scrobbles',''));
+        let count = clean_number(count_bar.querySelector('.chartlist-count-bar-value').textContent.replace(' scrobbles',''));
 
         if (!count_bar.hasAttribute('data-kate-processed')) {
             count_bar.setAttribute('data-kate-processed','true');
@@ -6929,7 +6936,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
             let item = element.querySelectorAll('.header-metadata-item')[0];
             let link = element.querySelectorAll('.header-metadata-item p a')[0];
 
-            let value = parseInt(link.textContent.replaceAll(',',''));
+            let value = clean_number(link.textContent);
             item.setAttribute('data-scrobbles',value);
             let percent = 0;
 
