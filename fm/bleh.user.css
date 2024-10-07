@@ -240,7 +240,8 @@ input[type="range"],
 .preview, .preview[data-bleh--theme="dark"],
 .badge,
 .track .bar .colourful,
-.setup-colour-behind
+.setup-colour-behind,
+.action .icon
 {
     --hue:  var(--hue-over,
             var(--hue-album,
@@ -12678,6 +12679,7 @@ code, kbd, samp {
                 height: 32px;
                 padding: 6px;
                 background-color: hsl(var(--h3));
+                box-shadow: 0 0 0 1px hsla(var(--h2), 40%) inset;
                 color: hsl(var(--b7));
                 border-radius: var(--item-med-radius);
                 position: relative;
@@ -12692,6 +12694,9 @@ code, kbd, samp {
                 }
                 &.bleh--updates {
                     --mask: var(--icon-16-download);
+                    --hue-over: var(--hue-pos);
+                    --sat-over: 1;
+                    --lit-over: 1;
                 }
             }
 
@@ -12786,6 +12791,7 @@ code, kbd, samp {
             height: 32px;
             padding: 6px;
             background-color: hsl(var(--h3));
+            box-shadow: 0 0 0 1px hsla(var(--h2), 40%) inset;
             color: hsl(var(--b7));
             border-radius: var(--item-med-radius);
             position: relative;
