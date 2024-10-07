@@ -6170,7 +6170,7 @@ button,
 
     /*     PRIMARY     */
     &:is(
-        .btn-primary:is([type="submit"]),
+        .btn-primary:is([type="submit"]), .btn-primary.js-close,
         .gallery-image-vote-up-on, .gallery-image-vote-down-on, .gallery-image-preferred-on,
         .inbox-delete-button:not([disabled]),
         .gallery-image-report--reported,
@@ -6218,6 +6218,12 @@ button,
     &[disabled] {
         opacity: 0.7 !important;
         --col: hsl(var(--c3)) !important;
+    }
+
+    &.btn-primary.js-close {
+        --hue-over: var(--hue-neg);
+        --sat-over: 1;
+        --lit-over: 1;
     }
 }
 
