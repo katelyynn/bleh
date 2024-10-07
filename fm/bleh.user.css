@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           bleh (dev)
 @namespace      github.com/katelyynn/bleh
-@version        2024.1003
+@version        2024.1007
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.css
@@ -2423,6 +2423,7 @@ elements, this is how we detect its missing */
 
     &:not(:focus-within) .actions {
         margin-top: -32px;
+        opacity: 0;
         pointer-events: none;
 
         .btn {
@@ -2435,7 +2436,7 @@ elements, this is how we detect its missing */
         gap: var(--button-list-gap);
         justify-content: right;
         margin-top: var(--card-gap);
-        transition-property: margin-top;
+        transition-property: margin-top, opacity;
         transition-duration: var(--trans);
         transition-timing-function: var(--trans-function);
     }
@@ -7338,7 +7339,7 @@ very, very, very dated - who looks up a song on ebay? */
 }
 
 .modal-body .content-form .form-horizontal .form-group-controls {
-    width: 410px;
+    width: 478px;
 }
 
 .content-form .form-horizontal .form-group-controls {
@@ -8595,7 +8596,7 @@ text[style^="color: rgb(255, 172, 172)"] {
     color: hsl(var(--c2));
 
     [data-bleh--theme="light"] & {
-        background: hsla(var(--b5), 55%);
+        background: hsla(var(--b5), 70%);
     }
 
     [data-bleh--reduced_motion="true"] & {
@@ -13190,6 +13191,10 @@ code, kbd, samp {
     padding-top: var(--card-gap);
     border-top: var(--card-border);
 }
+.modal-body .form-group--submit {
+    padding-top: var(--card-gap) !important;
+    border-top: var(--card-border);
+}
 
 .lfm-preview {
     display: flex;
@@ -15643,18 +15648,18 @@ button.bleh--gallery-bookmark-image-btn {
     .main-content {
         position: absolute;
         inset: 0;
-        backdrop-filter: blur(60px) saturate(80%);
+        backdrop-filter: blur(60px) saturate(180%);
 
         &:after {
             content: '';
             position: absolute;
             inset: 0;
             background-color: hsl(var(--b6));
-            opacity: 0.7; /* 0.9 */
+            opacity: 0.5; /* 0.9 */
         }
 
         [data-bleh--theme="light"] &:after {
-            opacity: 0.5; /* 0.7 */
+            opacity: 0.3; /* 0.7 */
         }
     }
 
@@ -15693,10 +15698,10 @@ button.bleh--gallery-bookmark-image-btn {
 
     .setup-sides {
         display: flex;
-        min-height: 350px;
+        min-height: 550px;
 
         .setup-preview {
-            width: 340px;
+            width: 320px;
             position: relative;
 
             /*background-color: hsla(var(--b6), 40%);
@@ -15826,7 +15831,7 @@ button.bleh--gallery-bookmark-image-btn {
                 }
 
                 & > p {
-                    max-width: 550px;
+                    max-width: 520px;
                 }
 
                 ul {
@@ -15858,6 +15863,33 @@ button.bleh--gallery-bookmark-image-btn {
                 .btn-fill {
                     flex: 1;
                 }
+            }
+        }
+    }
+
+    .user-top-panel {
+        padding: calc(var(--card-gap) * 2) calc(var(--card-gap) * 6);
+        background-color: hsl(var(--b6));
+        border-radius: var(--item-med-radius);
+        user-select: none;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .user-top-avatar {
+            --w: 80px;
+            width: var(--w);
+            height: var(--w);
+            background-color: hsla(var(--b4), 60%);
+            border-radius: 50%;
+
+            &.user-top-avatar-main {
+                --w: 120px;
+                box-shadow: var(--card-shadow);
+
+                margin: 0 20px;
+                z-index: 10000000;
             }
         }
     }

@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         bleh
 // @namespace    http://last.fm/
-// @version      2024.1006
+// @version      2024.1007
 // @description  bleh!!! ^-^
 // @author       kate
 // @match        https://www.last.fm/*
@@ -18,7 +18,7 @@
 // ==/UserScript==
 
 let version = {
-    build: '2024.1006',
+    build: '2024.1007',
     sku: 'setup',
     feature_flags: {
         bleh_settings_tabs: {
@@ -98,6 +98,9 @@ const trans = {
 
                 replace: '• scrobbling since '
             }
+        },
+        messaging: {
+            update: 'bleh has updated to {v}, welcome aboard!'
         },
         settings: {
             save: 'Save',
@@ -515,7 +518,20 @@ const trans = {
         },
         setup: {
             start: {
-
+                name: 'haiii :3 welcome to bleh!!',
+                thanks: 'Thank you for installing, {m}',
+                info: [
+                    'This is the first-time setup to help you get started with common tasks for new users, which include:',
+                    'Manage accessibility, such as reduced motion',
+                    'Configuring your accent colour',
+                    'Changing your interface theme',
+                    'Adjusting song corrections and tagging',
+                    'If you\'re already set, you can skip.'
+                ]
+            },
+            appearance: {
+                bio: 'Configure the colour of bleh from one of the available presets, or make your own colour combination!',
+                subtext: 'During seasonal events, the default colour changes automatically.'
             }
         },
         gallery: {
@@ -1858,13 +1874,15 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
         if (auth == '')
             return;
 
+        notify_if_new_update();
+
         console.log(bleh_url,window.location.href,bleh_regex.test(window.location.href));
 
         if (window.location.href == bleh_url || bleh_regex.test(window.location.href)) {
             // start bleh settings
             bleh_settings();
         } else if (window.location.href == setup_url || setup_regex.test(window.location.href)) {
-            // start bwaa setup
+            // start bleh setup
             bleh_setup();
         } else {
             patch_actions();
@@ -1911,7 +1929,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                 // start bleh settings
                 bleh_settings();
             } else if (window.location.href == setup_url || setup_regex.test(window.location.href)) {
-                // start bwaa setup
+                // start bleh setup
                 bleh_setup();
             } else {
                 patch_actions();
@@ -2070,9 +2088,9 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
     function append_nav(element) {
         let auth_link = document.body.querySelector('.auth-link');
 
-        if (auth_link.hasAttribute('data-bwaa'))
+        if (auth_link.hasAttribute('data-bleh'))
             return;
-        auth_link.setAttribute('data-bwaa', 'true');
+        auth_link.setAttribute('data-bleh', 'true');
 
         let text = document.createElement('p');
         text.textContent = auth;
@@ -7354,16 +7372,21 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                 </div>
                 <div class="setup-body">
                     <div class="setup-body-main">
-                        <h1>haiii :3 welcome to bleh!!</h1>
-                        <p>Thank you for installing, ${auth}!</p>
-                        <p>This is the first-time setup to help you get started with common tasks for new users, which include:</p>
+                        <h1>${trans[lang].setup.start.name}</h1>
+                        <div class="user-top-panel">
+                            <div class="user-top-avatar user-top-avatar-side-left"></div>
+                            <img class="user-top-avatar user-top-avatar-main" src="${my_avi.replace('avatar42s', 'avatar170s')}" alt="${auth}">
+                            <div class="user-top-avatar user-top-avatar-side-right"></div>
+                        </div>
+                        <h4>${trans[lang].setup.start.thanks.replace('{m}', `<a class="mention" href="${root}user/${auth}">@${auth}</a>`)}</h4>
+                        <p>${trans[lang].setup.start.info[0]}</p>
                         <ul>
-                            <li>Manage accessibility, such as reduced motion</li>
-                            <li>Configuring your accent colour</li>
-                            <li>Changing your interface theme</li>
-                            <li>Adjusting song corrections and tagging</li>
+                            <li>${trans[lang].setup.start.info[1]}</li>
+                            <li>${trans[lang].setup.start.info[2]}</li>
+                            <li>${trans[lang].setup.start.info[3]}</li>
+                            <li>${trans[lang].setup.start.info[4]}</li>
                         </ul>
-                        <p>If you're already set, you can skip.</p>
+                        <p>${trans[lang].setup.start.info[5]}</p>
                     </div>
                     <div class="modal-footer">
                         <button class="btn skip" onclick="_setup_skip()">
@@ -7477,7 +7500,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                 <div class="setup-body">
                     <div class="setup-body-main">
                         <h1>${trans[lang].settings.appearance.name}</h1>
-                        <p>Configure the colour of bleh from one of the available presets, or make your own colour combination!</p>
+                        <p>${trans[lang].setup.appearance.bio}</p>
                         <h4>${trans[lang].settings.customise.colours.name}</h4>
                         <!--<h5>${trans[lang].settings.customise.colours.presets}</h5>-->
                         <div class="palette options colours" id="custom_colours">
@@ -7494,7 +7517,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                                 --sat: var(--sat-user, 1);
                                 --lit: var(--lit-user, 1)" onclick="_create_a_custom_colour()"></button>
                         </div>
-                        <p class="subtext">During seasonal events, the default colour changes automatically.</p>
+                        <p class="subtext">${trans[lang].setup.appearance.subtext}</p>
                         <div class="palette options colours">
                             <div class="side">
                                 <button class="swatch btn" style="
@@ -8053,5 +8076,29 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
     unsafeWindow._setup_skip = function() {
         kill_window('bleh_setup_start');
         document.location.href = `${root}user/${auth}`;
+    }
+
+
+
+
+    /**
+     * notify user if new update and stores in localStorage for next time
+     * @returns if first-time installing, redirect to setup
+     */
+    function notify_if_new_update() {
+        let last_version_used = localStorage.getItem('bleh_last_version_used') || '';
+
+        // enter first-time setup
+        if (last_version_used == '') {
+            window.location.href = `${root}bleh/setup`;
+            localStorage.setItem('bleh_last_version_used', version.build);
+            return;
+        }
+
+        // otherwise, it's a usual update
+        if (last_version_used != version.build) {
+            deliver_notif(trans[lang].messaging.update.replace('{v}', `${version.build}.${version.sku}`), true);
+            localStorage.setItem('bleh_last_version_used', version.build);
+        }
     }
 })();
