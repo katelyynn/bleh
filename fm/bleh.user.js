@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         bleh
 // @namespace    http://last.fm/
-// @version      2024.1007
+// @version      2024.1008
 // @description  bleh!!! ^-^
 // @author       kate
 // @match        https://www.last.fm/*
@@ -9,7 +9,7 @@
 // @grant        GM_addStyle
 // @updateURL    https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.js
 // @downloadURL  https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.js
-// @run-at       document-body
+// @run-at       document-end
 // @require      https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js
 // @require      https://unpkg.com/@popperjs/core@2
 // @require      https://unpkg.com/tippy.js@6
@@ -18,7 +18,7 @@
 // ==/UserScript==
 
 let version = {
-    build: '2024.1007',
+    build: '2024.1008',
     sku: 'setup',
     feature_flags: {
         bleh_settings_tabs: {
@@ -1849,6 +1849,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
 (function() {
     'use strict';
 
+    // this runs on page load only once!
     auth_link = document.querySelector('a.auth-link');
     auth = auth_link.querySelector('img').getAttribute('alt');
 
@@ -2141,8 +2142,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
         let user_nav = element.querySelectorAll('.auth-dropdown-menu > li')[0];
         let inbox_nav = element.querySelectorAll('.auth-dropdown-menu > li')[2];
 
-        let my_avi = auth_link.querySelector('img').getAttribute('src').replace('avatar42s', 'avatar170s');
-        document.querySelector('.auth-dropdown-menu').style.setProperty('--url', `url(${my_avi})`);
+        document.querySelector('.auth-dropdown-menu').style.setProperty('--url', `url(${my_avi.replace('avatar42s', 'avatar170s')})`);
 
         if (!inbox_nav.hasAttribute('data-bleh')) {
             inbox_nav.setAttribute('data-bleh','true');
