@@ -1109,6 +1109,8 @@ let theme_preview = (`
     </div>
 `);
 
+let cute = ['cutensilly', 'inozom'];
+
 // require page reload
 let reload_pending = false;
 
@@ -3228,7 +3230,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
             }
 
             // me :3
-            if (profile_name.textContent == 'cutensilly') {
+            if (cute.includes(profile_name.textContent)) {
                 profile_name.classList.add('bleh--name-is-cute');
             }
 
@@ -3600,7 +3602,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                             </div>
                         </div>
                         <div class="info">
-                            <h5 class="title ${(name == 'cutensilly') ? 'bleh--name-is-cute-less' : ''}">${name}</h5>
+                            <h5 class="title ${(cute.includes(name)) ? 'bleh--name-is-cute-less' : ''}">${name}</h5>
                             <p class="descriptor">Top Badge</p>
                             <p class="badge user-status--bleh-${this_badge.type} user-status--bleh-user-${name}" data-badge-type="${this_badge.type}" data-badge-user="${name}">${this_badge.name}</p>
                         </div>
@@ -3622,7 +3624,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                                 </div>
                             </div>
                             <div class="info">
-                                <h5 class="title ${(name == 'cutensilly') ? 'bleh--name-is-cute-less' : ''}">${name}</h5>
+                                <h5 class="title ${(cute.includes(name)) ? 'bleh--name-is-cute-less' : ''}">${name}</h5>
                             </div>
                         `),
                         allowHTML: true,
@@ -3640,7 +3642,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                                 </div>
                             </div>
                             <div class="info">
-                                <h5 class="title ${(name == 'cutensilly') ? 'bleh--name-is-cute-less' : ''}">${name}</h5>
+                                <h5 class="title ${(cute.includes(name)) ? 'bleh--name-is-cute-less' : ''}">${name}</h5>
                                 <p class="descriptor">Top Badge</p>
                                 <p class="badge ${pre_existing_badge.classList[1]}">${element.getAttribute('title')}</p>
                             </div>
