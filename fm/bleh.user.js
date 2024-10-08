@@ -5826,12 +5826,6 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                 settings[item] = settings_base[item].values[1];
                 document.getElementById(`toggle-${item}`).setAttribute('aria-checked',false);
 
-
-                if (item == 'nav') {
-                    document.getElementById('nav-img').setAttribute('src','https://cutensilly.org/img/nav-hidden.png');
-                    settings.auth_badge = settings_base.auth_badge.values[1];
-                }
-
                 // save setting into body
                 document.body.style.setProperty(`--${item}`,settings_base[item].values[1]);
                 document.documentElement.setAttribute(`data-bleh--${item}`, `${settings_base[item].values[1]}`);
@@ -5841,10 +5835,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                 document.getElementById(`toggle-${item}`).setAttribute('aria-checked',true);
 
 
-                if (item == 'nav') {
-                    document.getElementById('nav-img').setAttribute('src','https://cutensilly.org/img/nav-shown.png');
-                    settings.auth_badge = settings_base.auth_badge.values[0];
-                } else if (item == 'dev') {
+                if (item == 'dev') {
                     create_window('prompt_dev',trans[lang].settings.performance.dev.name,`
                         <p class="alert alert-info">${trans[lang].settings.performance.dev.modals.prompt.alert}</p>
                         <br>
