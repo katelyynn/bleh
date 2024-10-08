@@ -13056,6 +13056,8 @@ code, kbd, samp {
 }
 
 .album-cover {
+    --col: transparent;
+
     aspect-ratio: 1 / 1;
     position: relative;
     overflow: hidden;
@@ -13063,17 +13065,18 @@ code, kbd, samp {
     background-repeat: no-repeat;
     background-position: center;
     box-sizing: border-box;
-}
-.album-cover:after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image: var(--gloss-image) !important;
-    background-size: 100% !important;
-    opacity: var(--gloss, 0);
-    pointer-events: none;
-    padding: unset !important;
-    box-shadow: unset !important;
+
+    &:after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-image: var(--gloss-image) !important;
+        background-size: 100% !important;
+        opacity: var(--gloss, 0);
+        pointer-events: none;
+        padding: unset !important;
+        box-shadow: unset !important;
+    }
 }
 
 
