@@ -120,6 +120,7 @@ const trans = {
             skip: 'Skip',
             back: 'Back',
             reload: 'A setting you changed requires a page reload to take effect, click to reload.',
+            new: 'New',
             examples: {
                 button: 'Example button'
             },
@@ -359,6 +360,7 @@ const trans = {
                     name: 'View current corrections',
                     bio: 'Lists all active in your install'
                 },
+                formatting: 'Smart music titles',
                 format_guest_features: {
                     name: 'Format guest features and song tags',
                     bio: 'Splits track and album titles into their individual tags such as guest features, versions, remixes.'
@@ -2180,6 +2182,11 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
 
             let extra_nav = document.createElement('li');
             extra_nav.innerHTML = (`
+                <li>
+                    <a class="auth-dropdown-menu-item bleh--shortcut-menu-item" data-profile-shortcut="${settings.profile_shortcut}" id="profile_shortcut" href="${root}user/${settings.profile_shortcut}">
+                        ${settings.profile_shortcut}
+                    </a>
+                </li>
                 <li>
                     <a class="auth-dropdown-menu-item bleh--library-menu-item" href="${profile_link}/library">
                         <span class="auth-dropdown-item-row">
@@ -5312,7 +5319,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                         </div>
                     </div>
                     <div class="sep"></div>
-                    <h4>${trans[lang].settings.music.profile_shortcut.name}</h4>
+                    <h4>${trans[lang].settings.music.profile_shortcut.name} <div class="new-badge">${trans[lang].settings.new}</div></h4>
                     <p>${trans[lang].settings.music.profile_shortcut.bio}</p>
                     <div class="text-container" id="container-profile_shortcut">
                         <button class="btn reset" onclick="_reset_item('profile_shortcut')">${trans[lang].settings.reset}</button>
@@ -5371,6 +5378,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                         </div>
                     </div>
                     <div class="sep"></div>
+                    <h4>${trans[lang].settings.corrections.formatting}</h4>
                     <div class="inner-preview pad flex">
                         <table class="chartlist chartlist--with-index chartlist--with-index--length-2 chartlist--with-image chartlist--with-play chartlist--with-artist chartlist--with-bar">
                             <tbody>
@@ -8225,9 +8233,15 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
         let profile_name = document.getElementById('text-profile_shortcut').value;
         let profile_img = document.getElementById('avatar-profile_shortcut');
 
+        let menu_item = document.getElementById('profile_shortcut');
+
         if (profile_name == '' || profile_name == auth) {
             localStorage.removeItem('bleh_profile_shortcut_avi');
             document.getElementById('avatar_src-profile_shortcut').setAttribute('src', '');
+
+            menu_item.setAttribute('data-profile-shortcut', '');
+            menu_item.setAttribute('href', '');
+            menu_item.textContent = '';
 
             // save to settings
             settings.profile_shortcut = '';
@@ -8256,6 +8270,10 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                 document.getElementById('avatar_src-profile_shortcut').setAttribute('src', avatar_src);
                 deliver_notif(trans[lang].settings.music.profile_shortcut.saved);
 
+                menu_item.setAttribute('data-profile-shortcut', profile_name);
+                menu_item.setAttribute('href', `${root}user/${profile_name}`);
+                menu_item.textContent = profile_name;
+
                 // save to settings
                 settings.profile_shortcut = profile_name;
                 localStorage.setItem('bleh', JSON.stringify(settings));
@@ -8263,6 +8281,10 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                 deliver_notif(trans[lang].settings.music.profile_shortcut.failed);
                 localStorage.removeItem('bleh_profile_shortcut_avi');
                 document.getElementById('avatar_src-profile_shortcut').setAttribute('src', '');
+
+                menu_item.setAttribute('data-profile-shortcut', '');
+                menu_item.setAttribute('href', '');
+                menu_item.textContent = '';
             }
         });
     }

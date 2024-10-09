@@ -6917,6 +6917,7 @@ very, very, very dated - who looks up a song on ebay? */
 .more-item--submit-correction, .more-item--submit-correction-bleh {
     --mask: var(--icon-16-correction);
 }
+.bleh--shortcut-menu-item,
 [data-analytics-label="profile"] {
     --mask: var(--icon-16-profile);
     text-align: center;
@@ -7005,6 +7006,13 @@ very, very, very dated - who looks up a song on ebay? */
 }
 .bleh--dev-menu-item {
     --mask: var(--icon-16-dev);
+}
+.bleh--shortcut-menu-item {
+    --mask: var(--icon-16-profile);
+
+    &[data-profile-shortcut=""] {
+        display: none;
+    }
 }
 .bleh--library-menu-item {
     --mask: var(--icon-16-library);
@@ -7195,7 +7203,7 @@ very, very, very dated - who looks up a song on ebay? */
     &:not(select) {
         --bg: hsla(var(--b6), 20%);
         --bg-hov: hsla(var(--b6), 40%);
-        --bg-transparent: hsla(var(--b6), 40%);
+        --bg-atv: hsla(var(--b6), 40%);
         border: 1px solid hsl(var(--b4)) !important;
         --shadow: none !important;
         outline: none !important;
@@ -7209,7 +7217,7 @@ very, very, very dated - who looks up a song on ebay? */
         &.masthead-search-form {
             --bg: hsl(var(--b6)) !important;
             --bg-hov: var(--bg) !important;
-            --bg-transparent: var(--bg) !important;
+            --bg-atv: var(--bg) !important;
             --shadow: var(--menu-shadow) !important;
 
             right: 0;
@@ -10317,11 +10325,6 @@ table.table tr:nth-child(2n) td {
     font-size: 16px !important;
     line-height: 24px;
     margin-bottom: var(--card-gap);
-
-    --bg: transparent !important;
-    --bg-hov: transparent !important;
-    --bg-atv: transparent !important;
-    border: var(--card-border) !important;
 }
 
 
@@ -16079,5 +16082,17 @@ h4 {
             margin-top: calc(-1 * var(--card-gap));
         }
     }
+}
+
+
+.new-badge {
+    display: inline-flex;
+    background-color: hsla(var(--h4), 40%);
+    box-shadow: 0 0 0 1px hsla(var(--h2), 40%) inset, 0 0 20px hsla(var(--h3), 60%);
+    color: hsl(var(--l2-c));
+
+    font-size: var(--font-size-sm);
+    padding: 0 6px;
+    border-radius: var(--item-med-radius);
 }
 }
