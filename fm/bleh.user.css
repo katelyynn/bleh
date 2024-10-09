@@ -4401,12 +4401,23 @@ state is not active, which then falls back to primary button styling */
     --sat-over: 1;
     --lit-over: 1;
 }
-[data-taste="very_low"],
 .tasteometer-compat-very_low .tasteometer-compat-colour,
 .tasteometer-compat-very_low {
     fill: hsl(var(--c3)) !important;
     color: hsl(var(--c3)) !important;
     font-weight: var(--font-weight) !important;
+}
+[data-taste="very_low"] {
+    .taste-badge {
+        box-shadow: unset;
+        background-color: hsl(var(--b6));
+        color: hsl(var(--c3));
+        outline: var(--card-border);
+    }
+
+    &:after {
+        background-color: hsl(var(--c3)) !important;
+    }
 }
 
 
