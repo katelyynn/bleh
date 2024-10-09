@@ -73,7 +73,11 @@ const trans = {
                 fail: 'You do not have any plays on this album',
                 open_as_track: 'Open album title as a track'
             },
-            from_the_album: 'From the album: {album}'
+            from_the_album: 'From the album: {album}',
+            listens: {
+                count_listens: '{c} listens',
+                loading_listens: 'listens'
+            }
         },
         statistics: {
             scrobbles: {
@@ -1923,6 +1927,8 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
             patch_artist_grids(document.body);
             patch_titles(document.body);
 
+            show_your_scrobbles();
+
             if (settings.corrections) {
                 correct_generic_combo_no_artist('artist-header-featured-items-item');
                 correct_generic_combo_no_artist('artist-top-albums-item');
@@ -3498,10 +3504,10 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
         view_buttons.classList.add('view-buttons-wrapper');
         view_buttons.innerHTML = (`
             <div class="view-buttons">
-                <button class="btn list-view-item" id="toggle-list_view-1" data-toggle="list_view" data-toggle-value="1" onclick="_update_item('list_view', 1)">
+                <button class="btn view-item" id="toggle-list_view-1" data-toggle="list_view" data-toggle-value="1" onclick="_update_item('list_view', 1)">
                     Grid
                 </button>
-                <button class="btn list-view-item" id="toggle-list_view-0" data-toggle="list_view" data-toggle-value="0" onclick="_update_item('list_view', 0)">
+                <button class="btn view-item" id="toggle-list_view-0" data-toggle="list_view" data-toggle-value="0" onclick="_update_item('list_view', 0)">
                     List
                 </button>
             </div>
@@ -5431,7 +5437,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                             </button>
                         </div>
                     </div>
-                    <div class="toggle-container" id="container-show_guest_features">
+                    <div class="toggle-container hide-if-format-guest-disabled" id="container-show_guest_features">
                         <button class="btn reset" onclick="_reset_item('show_guest_features')">${trans[lang].settings.reset}</button>
                         <div class="heading">
                             <h5>${trans[lang].settings.corrections.show_guest_features.name}</h5>
@@ -5443,7 +5449,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                             </button>
                         </div>
                     </div>
-                    <div class="toggle-container" id="container-show_remaster_tags">
+                    <div class="toggle-container hide-if-format-guest-disabled" id="container-show_remaster_tags">
                         <button class="btn reset" onclick="_reset_item('show_remaster_tags')">${trans[lang].settings.reset}</button>
                         <div class="heading">
                             <h5>${trans[lang].settings.corrections.show_remaster_tags.name}</h5>
@@ -8233,12 +8239,12 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
         let profile_name = document.getElementById('text-profile_shortcut').value;
         let profile_img = document.getElementById('avatar-profile_shortcut');
 
-        if (profile_name == '') {
+        if (profile_name == '' || profile_name == auth) {
             localStorage.removeItem('bleh_profile_shortcut_avi');
             document.getElementById('avatar_src-profile_shortcut').setAttribute('src', '');
 
             // save to settings
-            settings.profile_shortcut = profile_name;
+            settings.profile_shortcut = '';
             localStorage.setItem('bleh', JSON.stringify(settings));
 
             return;
@@ -8256,6 +8262,8 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
             let doc = new DOMParser().parseFromString(html, 'text/html');
             console.log('DOC', doc);
 
+            profile_img.classList.remove('requesting');
+
             try {
                 let avatar_src = doc.querySelector('.header-avatar-inner-wrap img').getAttribute('src');
                 localStorage.setItem('bleh_profile_shortcut_avi', avatar_src);
@@ -8270,8 +8278,87 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                 localStorage.removeItem('bleh_profile_shortcut_avi');
                 document.getElementById('avatar_src-profile_shortcut').setAttribute('src', '');
             }
-
-            profile_img.classList.remove('requesting');
         });
+    }
+
+
+
+
+    function show_your_scrobbles() {
+        let header_new = document.body.querySelector('.header-new');
+
+        if (header_new == null)
+            return;
+
+        if (header_new.hasAttribute('data-bleh'))
+            return;
+        header_new.setAttribute('data-bleh', 'true');
+
+        let header_type = header_new.classList[1].replace('header-new--', '');
+
+
+        let col_main = document.body.querySelector('.col-main');
+
+
+        // create container
+        let listen_container = document.createElement('div');
+        listen_container.classList.add('listen-container', 'view-buttons');
+
+
+        // you
+        let your_listens = {
+            name: auth,
+            listens: 0,
+            link: '',
+            avi: my_avi
+        };
+        // check to see if you have scrobbles
+        let scrobble_button = col_main.querySelector('.personal-stats-item--scrobbles .hidden-xs a');
+        if (scrobble_button != null) {
+            your_listens.listens = parseInt(scrobble_button.textContent.trim());
+            your_listens.link = scrobble_button.getAttribute('href');
+        }
+        // create child for u
+        listen_container.appendChild(
+            create_listen_item(your_listens)
+        );
+
+
+        // person shortcut :3
+        if (settings.person_shortcut != '') {
+            let shortcut_listens = {
+                name: settings.person_shortcut,
+                listens: -1,
+                link: '',
+                avi: localStorage.getItem('bleh_profile_shortcut_avi')
+            }
+            // create child for them
+            listen_container.appendChild(
+                create_listen_item(shortcut_listens)
+            );
+        }
+
+
+        // append
+        col_main.insertBefore(listen_container, col_main.firstElementChild);
+    }
+
+    function create_listen_item({name, listens, link, avi}) {
+        let listen_item = document.createElement('a');
+        listen_item.classList.add('btn', 'listen-item', 'view-item');
+        listen_item.setAttribute('href', link);
+        listen_item.setAttribute('data-listens', listens);
+
+        if (listens > -1) {
+            listen_item.innerHTML = (`
+                <img class="view-item-avatar" src="${avi}" alt="${name}">${trans[lang].music.listens.count_listens.replace('{c}', listens)}
+            `);
+        } else {
+            listen_item.innerHTML = (`
+                <img class="view-item-avatar" src="${avi}" alt="${name}">${trans[lang].music.listens.loading_listens}
+            `);
+        }
+
+        return listen_item;
     }
 })();
