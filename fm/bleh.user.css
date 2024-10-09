@@ -4122,26 +4122,6 @@ state is not active, which then falls back to primary button styling */
 }
 
 
-.personal-stats-item {
-    margin-left: var(--card-gap);
-}
-.personal-stats-listeners,
-.personal-stats-item--scrobbles .personal-stats-avatar {
-    margin-right: 6px;
-}
-
-/* these r last.fm default, needed 4 settings preview tho */
-.personal-stats-inner {
-    display: flex;
-    align-items: center;
-}
-.personal-stats-avatar {
-    width: 32px;
-    height: 32px;
-    order: -1;
-}
-
-
 /* ranks */
 .personal-stats-item--scrobbles[data-bleh--scrobble-milestone] {
     .header-metadata-item {
@@ -4264,7 +4244,7 @@ state is not active, which then falls back to primary button styling */
     position: relative;
     --show-icon: none;
 }
-.personal-stats-inner .header-metadata-item, .header-metadata-tnew-item {
+.header-metadata-tnew-item {
     background-color: hsl(var(--b4));
 }
 .header-metadata-item--attendees .sr-only,
@@ -4357,19 +4337,6 @@ state is not active, which then falls back to primary button styling */
 .metadata-and-wiki-row .catalogue-metadata .catalogue-metadata-heading, .factbox-heading {
     font-weight: var(--font-weight-medium);
     color: hsl(var(--c3));
-}
-
-
-.personal-stats-listeners-more {
-    display: none;
-}
-.personal-stats-listener + .personal-stats-listener {
-    margin-left: -4px;
-}
-.personal-stats-avatar, .personal-stats-listener-avatar {
-    box-shadow: var(--card-shadow);
-    border-radius: var(--avatar-radius);
-    --mask-size: var(--cover-size-32);
 }
 
 
@@ -5884,9 +5851,7 @@ leading to a gap from their own css */
     filter: drop-shadow(2px 0px 0 hsl(var(--b5))) drop-shadow(0px 2px 0 hsl(var(--b5))) drop-shadow(-2px -0px 0 hsl(var(--b5))) drop-shadow(-0px -2px 0 hsl(var(--b5)));
 }
 
-.personal-stats-listener-avatar .avatar-status-dot,
-.catalogue-tags .tags-user-avatar .avatar-status-dot,
-.personal-stats-item--scrobbles .personal-stats-avatar .avatar-status-dot {
+.catalogue-tags .tags-user-avatar .avatar-status-dot {
     display: none;
 }
 .obsession-details-intro-avatar-wrap .avatar-status-dot {
@@ -14408,16 +14373,6 @@ input[type="range"]::-moz-range-progress {
     }
 
 
-    /* personal stats */
-    .personal-stats-item {
-        margin: 1px 0;
-        padding: 12px 0;
-    }
-    .personal-stats-item::after, .personal-stats-item::before {
-        left: 0;
-        right: 0;
-        border-top: 1px solid hsl(var(--b4));
-    }
     .wiki-block::after, .wiki-block::before {
         border-top: 1px solid hsl(var(--b4));
     }
@@ -15445,6 +15400,7 @@ button.bleh--gallery-bookmark-image-btn {
 #language-selector,
 .view-buttons {
     display: flex;
+    align-items: center;
     gap: var(--button-list-gap);
     padding: var(--button-list-gap);
     background-color: hsl(var(--b6));
@@ -15487,6 +15443,8 @@ button.bleh--gallery-bookmark-image-btn {
     }
 
     .view-item {
+        display: flex;
+        align-items: center;
         position: relative;
         /*--font-size: 0;
         --left: 8px;
@@ -15497,7 +15455,7 @@ button.bleh--gallery-bookmark-image-btn {
             height: 20px;
             border-radius: 50%;
 
-            margin: -3px 0 -1px 0;
+            margin: -2px 0;
             margin-right: 6px !important;
 
             position: relative;
@@ -15506,6 +15464,11 @@ button.bleh--gallery-bookmark-image-btn {
             transition-property: margin-right;
             transition-duration: var(--trans);
             transition-timing-function: var(--trans-function);
+
+            & + .view-item-avatar {
+                margin-left: -12px;
+                border-left: 1px solid hsl(var(--b5));
+            }
         }
 
         &[data-toggle-value="1"] {
@@ -15533,14 +15496,16 @@ button.bleh--gallery-bookmark-image-btn {
                 }
             }
 
-            &:not([data-listens="-1"]) {
+            &:not([data-listens="-1"], [data-listens="-2"]) {
                 --bg: transparent;
-                --bg-hov: hsla(var(--h3), 20%);
-                --bg-atv: hsla(var(--h3), 40%);
+                --bg-hov: hsla(var(--h3), 10%);
+                --bg-atv: hsla(var(--h3), 20%);
                 --col: hsl(var(--l2-c));
                 text-shadow: 0 0 10px hsla(var(--h4), 60%);
 
                 [data-bleh--theme="light"] & {
+                    --bg-hov: hsla(var(--h3), 20%);
+                    --bg-atv: hsla(var(--h3), 40%);
                     --col: hsl(var(--l4-c));
                 }
             }
@@ -15551,6 +15516,13 @@ button.bleh--gallery-bookmark-image-btn {
                 background-color: hsl(var(--c3)) !important;
             }
         }
+    }
+
+    .listen-divider {
+        display: block;
+        width: 1px;
+        height: 16px;
+        background: var(--card-border-base);
     }
 }
 
@@ -15565,6 +15537,9 @@ button.bleh--gallery-bookmark-image-btn {
 
 
 
+.personal-stats {
+    display: none;
+}
 .personal-stats-preview-bar {
     display: block;
     height: 24px;

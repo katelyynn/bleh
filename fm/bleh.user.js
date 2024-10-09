@@ -76,7 +76,8 @@ const trans = {
             from_the_album: 'From the album: {album}',
             listens: {
                 count_listens: '{c} listens',
-                loading_listens: 'listens'
+                loading_listens: 'listens',
+                other_listeners: '{c} others'
             }
         },
         statistics: {
@@ -8373,9 +8374,38 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
 
         // append
         col_main.insertBefore(listen_container, col_main.firstElementChild);
+
+
+        // other listeners
+        if (header_type == 'artist') {
+            //
+            let other_container = col_main.querySelector('.personal-stats-item--listeners');
+            if (other_container == null)
+                return;
+
+            let listen_divider = document.createElement('div');
+            listen_divider.classList.add('listen-divider');
+
+            listen_container.appendChild(listen_divider);
+
+            let avatars = other_container.querySelectorAll('.personal-stats-listener-avatar img');
+            let count = other_container.querySelector('.header-metadata-display a');
+
+            let other_listeners = {
+                name: 'others',
+                listens: -2,
+                link: scrobble_page,
+                avi: avatars,
+                count: (count != null) ? clean_number(count.textContent.trim()) : 5
+            }
+            // create child for them
+            create_listen_item(listen_container, other_listeners);
+        }
     }
 
-    function create_listen_item(parent, {name, listens, link, avi}) {
+    function create_listen_item(parent, {name, listens, link, avi, count=0}) {
+        console.info('bleh - creating listen item', name, listens, link, avi, count);
+
         let listen_item = document.createElement('a');
         listen_item.classList.add('btn', 'listen-item', 'view-item');
         listen_item.setAttribute('href', `${root}user/${name}/library/music/${link}`);
@@ -8383,13 +8413,24 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
         listen_item.setAttribute('id', `listen-item--${name}`);
 
         if (listens > -1) {
+            // 0 listens
             listen_item.innerHTML = (`
                 <img class="view-item-avatar" src="${avi}" alt="${name}">${trans[lang].music.listens.count_listens.replace('{c}', listens)}
             `);
-        } else {
+        } else if (listens > -2) {
+            // loading listens
             listen_item.innerHTML = (`
                 <img class="view-item-avatar" src="${avi}" alt="${name}">${trans[lang].music.listens.loading_listens}
             `);
+        } else {
+            // other listeners by clicking this link (artist)
+            listen_item.innerHTML = (`
+                ${(avi[0] != null) ? `<img class="view-item-avatar" src="${avi[0].getAttribute('src')}">` : ''}
+                ${(avi[1] != null) ? `<img class="view-item-avatar" src="${avi[1].getAttribute('src')}">` : ''}
+                ${(avi[2] != null) ? `<img class="view-item-avatar" src="${avi[2].getAttribute('src')}">` : ''}
+                ${trans[lang].music.listens.other_listeners.replace('{c}', count)}
+            `);
+            listen_item.setAttribute('href', `${window.location.href}/+listeners/you-know`);
         }
 
         // colourful counts
@@ -8403,6 +8444,10 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
         }
 
         parent.appendChild(listen_item);
+
+        // ensure proper listeners element
+        if (listens < -1)
+            return;
 
         tippy(listen_item, {
             content: name
