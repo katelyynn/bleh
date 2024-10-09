@@ -1153,26 +1153,11 @@ last.fm changes as of 2024-05-20 */
 }
 
 
-.masthead-search-form {
-    height: 34px;
-    right: 0;
-    top: 0 !important;
-    bottom: unset !important;
-    margin-left: auto;
-    margin-right: auto;
-    width: calc(var(--cards-main-width) + var(--card-gap) + var(--cards-sidebar-width));
-    background: hsl(var(--b5));
-    border: 1px solid hsl(var(--b4));
-    border-radius: var(--card-radius);
-    box-shadow: var(--menu-shadow);
-    animation: dropdown calc(var(--trans-short) + 0.02s) var(--trans-function);
-    transform-origin: top;
-}
 .masthead-search-field {
     font-size: var(--font-size);
     line-height: var(--line-height);
-    height: 34px;
-    padding: 0 12px;
+    height: fit-content;
+    padding: 0;
     color: hsl(var(--c2));
 
     &::placeholder {
@@ -7183,6 +7168,7 @@ very, very, very dated - who looks up a song on ebay? */
 
 
 /*     INPUT     */
+.masthead-search-form,
 .modal-body textarea,
 .content-form .form-control, .content-form input[type="date"], .content-form input[type="email"], .content-form input[type="number"], .content-form input[type="password"], .content-form input[type="text"], .content-form input[type="url"], .content-form select, .content-form textarea
 {
@@ -7218,6 +7204,31 @@ very, very, very dated - who looks up a song on ebay? */
             --focus-outline: none !important;
             border: 1px solid hsl(var(--l3-c)) !important;
             --shadow: 0 0 20px hsla(var(--h4), 40%) !important;
+        }
+
+        &.masthead-search-form {
+            --bg: hsl(var(--b6)) !important;
+            --bg-hov: var(--bg) !important;
+            --bg-transparent: var(--bg) !important;
+            --shadow: var(--menu-shadow) !important;
+
+            right: 0;
+            top: 50px !important;
+            bottom: unset !important;
+            margin-left: auto;
+            margin-right: auto;
+            width: calc(var(--cards-main-width) + var(--card-gap) + var(--cards-sidebar-width));
+            animation: dropdown calc(var(--trans-short) + 0.02s) var(--trans-function);
+            transform-origin: top;
+
+            z-index: 10000;
+
+            div:has(> .masthead &:not(.disclose-hide)) {
+                .adaptive-skin-container {
+                    opacity: 0.5;
+                    pointer-events: none;
+                }
+            }
         }
     }
 
