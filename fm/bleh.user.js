@@ -8276,6 +8276,9 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
         if (header_new == null)
             return;
 
+        if (header_new.classList.contains('header-new--subpage'))
+            return;
+
         if (header_new.hasAttribute('data-bleh'))
             return;
         header_new.setAttribute('data-bleh', 'true');
