@@ -15525,6 +15525,9 @@ button.bleh--gallery-bookmark-image-btn {
         background: var(--card-border-base);
     }
 }
+.metadata-and-wiki-row {
+    --only-card-gap: 0;
+}
 
 
 

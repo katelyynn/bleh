@@ -8318,7 +8318,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
             your_listens.listens = clean_number(scrobble_button.textContent.trim());
         }
         // create child for u
-        create_listen_item(listen_container, your_listens);
+        create_listen_item(listen_container, your_listens, header_type);
 
 
         // profile shortcut :3
@@ -8360,7 +8360,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                 `);
 
                 // colourful counts
-                if (settings.colourful_counts) {
+                if (settings.colourful_counts && header_type == 'artist') {
                     let parsed_scrobble_as_rank = parse_scrobbles_as_rank(listens);
 
                     listen_item.setAttribute('data-bleh--scrobble-milestone',parsed_scrobble_as_rank.milestone);
@@ -8399,11 +8399,11 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                 count: (count != null) ? clean_number(count.textContent.trim()) : 5
             }
             // create child for them
-            create_listen_item(listen_container, other_listeners);
+            create_listen_item(listen_container, other_listeners, header_type);
         }
     }
 
-    function create_listen_item(parent, {name, listens, link, avi, count=0}) {
+    function create_listen_item(parent, {name, listens, link, avi, count=0}, header_type) {
         console.info('bleh - creating listen item', name, listens, link, avi, count);
 
         let listen_item = document.createElement('a');
@@ -8434,7 +8434,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
         }
 
         // colourful counts
-        if (settings.colourful_counts && listens > -1) {
+        if (settings.colourful_counts && listens > -1 && header_type == 'artist') {
             let parsed_scrobble_as_rank = parse_scrobbles_as_rank(listens);
 
             listen_item.setAttribute('data-bleh--scrobble-milestone',parsed_scrobble_as_rank.milestone);
