@@ -15496,7 +15496,7 @@ button.bleh--gallery-bookmark-image-btn {
                 }
             }
 
-            &:not([data-listens="-1"], [data-listens="-2"]) {
+            &[data-scrobble-milestone] {
                 --bg: transparent;
                 --bg-hov: hsla(var(--h3), 10%);
                 --bg-atv: hsla(var(--h3), 20%);
