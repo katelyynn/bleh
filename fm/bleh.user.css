@@ -412,6 +412,7 @@ body {
     --item-list-gap: 8px;
 
     /* cover masks */
+    --cover-size-20: 14px;
     --cover-size-32: 20px;
     --cover-size-50: 32px;
     --cover-size-100: 40px;
@@ -15494,6 +15495,8 @@ button.bleh--gallery-bookmark-image-btn {
             width: 20px;
             height: 20px;
             border-radius: 50%;
+
+            --mask-size: var(--cover-size-32);
 
             margin: -2px 0;
             margin-right: 6px !important;

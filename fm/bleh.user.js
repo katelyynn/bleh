@@ -1202,10 +1202,11 @@ let artist_corrections = {
     'kenny Mason': 'Kenny Mason',
     'SKI mask THE slump God': 'Ski Mask The Slump God',
     'that mexican ot': 'That Mexican OT',
+    'TWELVE\'LEN': 'Twelve\'len',
     //
     'J.I.D | J.1.D': 'J.I.D',
     'ZILLAKAMI | JPEGMAF1A + Z1LLAKAM1': 'ZILLAKAMI',
-    'GOLDLINK | TWELVE\'LEN + GOLDL1NK': 'GOLDLINK',
+    'GOLDLINK | TWELVE\'LEN + GOLDL1NK': 'GoldLink',
     'Pharrell': 'Pharrell Williams'
 }
 let song_title_corrections = {
@@ -1481,6 +1482,7 @@ let includes = {
         '- digital deluxe', '(digital deluxe', '[digital deluxe',
         '- complete edition', '(complete edition', '[complete edition',
         '- extended', '(extended', '[extended',
+        '- expanded', '(expanded', '[expanded',
         '- anniversary', '(anniversary', '[anniversary',
         '- b-side', '- c-side', '(b-side', '(c-side',
         '- lp', '- ep', '(lp', '(ep',
@@ -8603,7 +8605,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
         if (listens > -1) {
             // 0 listens
             listen_item.innerHTML = (`
-                <img class="view-item-avatar" src="${avi}" alt="${name}">${trans[lang].music.listens.count_listens.replace('{c}', listens)}
+                <img class="view-item-avatar" src="${avi}" alt="${name}">${trans[lang].music.listens.count_listens.replace('{c}', listens.toLocaleString(lang))}
             `);
         } else if (listens > -2) {
             // loading listens
