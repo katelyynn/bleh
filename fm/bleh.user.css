@@ -4367,6 +4367,7 @@ state is not active, which then falls back to primary button styling */
     color: hsl(var(--c3));
 }
 
+[data-taste="super"],
 .tasteometer-compat-super {
     --hue-over: var(--hue-neg);
     --sat-over: 1.4;
@@ -4376,26 +4377,31 @@ state is not active, which then falls back to primary button styling */
         text-shadow: 0 0 10px hsl(var(--h4));
     }
 }
+[data-taste="very_high"],
 .tasteometer-compat-very_high {
     --hue-over: 15;
     --sat-over: 1;
     --lit-over: 1;
 }
+[data-taste="high"],
 .tasteometer-compat-high {
     --hue-over: 35;
     --sat-over: 1;
     --lit-over: 1;
 }
+[data-taste="medium"],
 .tasteometer-compat-medium {
     --hue-over: var(--hue-pos);
     --sat-over: 1;
     --lit-over: 1;
 }
+[data-taste="low"],
 .tasteometer-compat-low {
     --hue-over: 255;
     --sat-over: 1;
     --lit-over: 1;
 }
+[data-taste="very_low"],
 .tasteometer-compat-very_low .tasteometer-compat-colour,
 .tasteometer-compat-very_low {
     fill: hsl(var(--c3)) !important;
@@ -6209,7 +6215,7 @@ button,
 /*     BUTTON HAS ICON     */
 .btn.back,
 .btn-post-shout,
-.view-item:not(.listen-item),
+.view-item:not(.listen-item, .profile-top-item--taste),
 .btn--has-icon-left,
 .stationlink,
 .dropdown-menu-clickable-item, .auth-dropdown-menu-item,
@@ -6367,7 +6373,7 @@ button,
 .swatch:before,
 .current-season:before,
 .arrow-divider:before,
-.view-item:before,
+.view-item:not(.profile-top-item--taste):before,
 .loading-data-text:before,
 .search-similar-btn:before,
 .btns .btn:before,
@@ -15430,6 +15436,11 @@ button.bleh--gallery-bookmark-image-btn {
         outline: var(--card-border);
     }
 
+    html:not([data-bleh--theme="oled"], [data-bleh--theme="light"]) &.profile-top-header {
+        background-color: hsl(var(--b5));
+        outline: var(--card-border);
+    }
+
     &.profile-top-header,
     &.listen-container {
         width: fit-content;
@@ -15544,6 +15555,29 @@ button.bleh--gallery-bookmark-image-btn {
             }
             &.profile-top-item--loved {
                 --mask: var(--icon-16-heart);
+            }
+
+            &.profile-top-item--taste {
+                --show-icon: none;
+
+                &:after {
+                    content: '';
+                    position: absolute;
+                    left: 12px;
+                    right: 12px;
+                    bottom: -4px;
+                    height: 2px;
+                    background-color: hsl(var(--l3-c));
+                    box-shadow: 0 -2px 20px 2px hsl(var(--l4-c));
+                    border-top-left-radius: var(--item-med-radius);
+                    border-top-right-radius: var(--item-med-radius);
+
+                    width: calc(var(--data-taste-percent) - (12px * 2));
+                }
+            }
+
+            .taste-badge {
+                margin-right: 6px;
             }
         }
     }
@@ -16104,6 +16138,7 @@ h4 {
 }
 
 
+.taste-badge,
 .new-badge {
     display: inline-flex;
     background-color: hsla(var(--h4), 40%);

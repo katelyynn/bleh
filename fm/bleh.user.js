@@ -111,7 +111,21 @@ const trans = {
             scrobbles: 'Scrobbles',
             artists: 'Artists',
             loved: 'Loved tracks',
-            taste: 'Taste similarity'
+            taste: 'Taste similarity',
+            taste_meter: {
+                level: {
+                    super: 'Super',
+                    very_high: 'Very High',
+                    high: 'High',
+                    medium: 'Medium',
+                    low: 'Low',
+                    very_low: 'Very Low',
+                    unknown: 'Unknown'
+                },
+                you_share_1: 'You share {artist}',
+                you_share_2: 'You share {artist1} and {artist2}',
+                you_share_3: 'You share {artist1}, {artist2}, and {artist3}'
+            }
         },
         messaging: {
             update: 'bleh has updated to {v}, welcome aboard!'
@@ -3370,6 +3384,11 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
     function redesign_profile_header(profile_name, is_own_profile) {
         let base_header = document.body.querySelector('.header-info-secondary');
 
+        if (base_header == null)
+            return;
+
+        profile_name = profile_name.textContent.trim();
+
         // acquire info
         let metadata = base_header.querySelectorAll('.header-metadata-display');
 
@@ -3394,7 +3413,9 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
 
         // taste
         let taste = '';
+        let taste_percentage = '';
         let taste_artists = [];
+        let profile_avi = '';
 
         if (!is_own_profile) {
             let taste_meter = base_header.querySelector('.tasteometer');
@@ -3405,12 +3426,40 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
             artists.forEach((artist) => {
                 taste_artists.push(correct_artist(artist.textContent.trim()));
             });
+
+            profile_avi = document.body.querySelector('.header-avatar img');
+            if (profile_avi != null)
+                profile_avi = profile_avi.getAttribute('src');
+            else
+                profile_avi = '';
+
+            taste_percentage = taste_meter.querySelector('.tasteometer-viz').getAttribute('title');
+            if (taste_percentage == '99%')
+                taste_percentage = '100%';
         }
 
 
         // create new
         let profile_header = document.createElement('div');
         profile_header.classList.add('profile-top-header', 'view-buttons');
+
+        if (!is_own_profile) {
+            // taste
+            create_profile_top_item(profile_header, {
+                name: profile_name,
+                type: 'taste',
+                link: `${root}user/${profile_name}/library/artists?date_preset=LAST_7_DAYS&page=1`,
+                taste: taste,
+                artists: taste_artists,
+                avi: profile_avi,
+                percent: taste_percentage
+            });
+
+            let listen_divider = document.createElement('div');
+            listen_divider.classList.add('listen-divider');
+
+            profile_header.appendChild(listen_divider);
+        }
 
         create_profile_top_item(profile_header, {
             name: profile_name,
@@ -3434,7 +3483,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
         base_header.appendChild(profile_header);
     }
 
-    function create_profile_top_item(parent, {name, link, text, type}) {
+    function create_profile_top_item(parent, {name, link, text='', type, taste='', artists=[], avi='', percent=''}) {
         console.info('bleh - creating profile top item', name, link, text);
 
         let listen_item = document.createElement('a');
@@ -3442,12 +3491,22 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
         listen_item.setAttribute('href', link);
         listen_item.setAttribute('target', '_blank');
 
-        if (type != 'taste')
+        if (type != 'taste') {
             text = text.toLocaleString(lang);
-
-        listen_item.innerHTML = (`
-            ${text}
-        `);
+            listen_item.innerHTML = text;
+        } else {
+            // taste
+            listen_item.setAttribute('data-taste', taste);
+            listen_item.style.setProperty('--data-taste-percent', percent);
+            listen_item.innerHTML = (`
+                <img class="view-item-avatar" src="${avi}" alt="${name}">
+                <img class="view-item-avatar" src="${my_avi}" alt="${auth}">
+                <div class="taste-badge">${trans[lang].profile.taste_meter.level[taste]}</div>
+                ${(artists.length == 1) ? trans[lang].profile.taste_meter.you_share_1.replace('{artist}', artists[0]) : ''}
+                ${(artists.length == 2) ? trans[lang].profile.taste_meter.you_share_2.replace('{artist1}', artists[0]).replace('{artist2}', artists[1]) : ''}
+                ${(artists.length == 3) ? trans[lang].profile.taste_meter.you_share_3.replace('{artist1}', artists[0]).replace('{artist2}', artists[1]).replace('{artist3}', artists[2]) : ''}
+            `);
+        }
 
         parent.appendChild(listen_item);
 
