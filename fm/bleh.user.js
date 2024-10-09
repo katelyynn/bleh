@@ -3501,7 +3501,8 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
             listen_item.innerHTML = (`
                 <img class="view-item-avatar" src="${avi}" alt="${name}">
                 <img class="view-item-avatar" src="${my_avi}" alt="${auth}">
-                <div class="taste-badge">${trans[lang].profile.taste_meter.level[taste]}</div>
+                <!--<div class="taste-badge">${trans[lang].profile.taste_meter.level[taste]}</div>-->
+                <div class="taste-badge">${percent}</div>
                 ${(artists.length == 1) ? trans[lang].profile.taste_meter.you_share_1.replace('{artist}', artists[0]) : ''}
                 ${(artists.length == 2) ? trans[lang].profile.taste_meter.you_share_2.replace('{artist1}', artists[0]).replace('{artist2}', artists[1]) : ''}
                 ${(artists.length == 3) ? trans[lang].profile.taste_meter.you_share_3.replace('{artist1}', artists[0]).replace('{artist2}', artists[1]).replace('{artist3}', artists[2]) : ''}
