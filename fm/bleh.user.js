@@ -3693,23 +3693,6 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
 
         if (settings.colourful_counts) {
             patch_artist_ranks_in_grid_view(document.body);
-
-            let personal_statistic = element.querySelector('.header-new--artist + .page-content .personal-stats-item--scrobbles');
-
-            if (personal_statistic == undefined)
-                return;
-
-            if (!personal_statistic.hasAttribute('data-kate-processed')) {
-                personal_statistic.setAttribute('data-kate-processed','true');
-
-                let scrobbles = clean_number(personal_statistic.querySelector('.link-block-target').textContent);
-                let parsed_scrobble_as_rank = parse_scrobbles_as_rank(scrobbles);
-
-                personal_statistic.setAttribute('data-bleh--scrobble-milestone',parsed_scrobble_as_rank.milestone);
-                personal_statistic.style.setProperty('--hue-user',parsed_scrobble_as_rank.hue);
-                personal_statistic.style.setProperty('--sat-user',parsed_scrobble_as_rank.sat);
-                personal_statistic.style.setProperty('--lit-user',parsed_scrobble_as_rank.lit);
-            }
         }
     }
 
@@ -8316,7 +8299,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
         let scrobble_page = page_url_split[page_url_length];
         if (header_type == 'album') {
             scrobble_page = page_url_split[page_url_length - 1] + '/' + page_url_split[page_url_length];
-        } else {
+        } else if (header_type == 'track') {
             scrobble_page = page_url_split[page_url_length - 2] + '/_/' + page_url_split[page_url_length];
         }
 
@@ -8331,12 +8314,10 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
         // check to see if you have scrobbles
         let scrobble_button = col_main.querySelector('.personal-stats-item--scrobbles .hidden-xs a');
         if (scrobble_button != null) {
-            your_listens.listens = parseInt(scrobble_button.textContent.trim());
+            your_listens.listens = clean_number(scrobble_button.textContent.trim());
         }
         // create child for u
-        listen_container.appendChild(
-            create_listen_item(your_listens)
-        );
+        create_listen_item(listen_container, your_listens);
 
 
         // profile shortcut :3
@@ -8348,9 +8329,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                 avi: localStorage.getItem('bleh_profile_shortcut_avi')
             }
             // create child for them
-            listen_container.appendChild(
-                create_listen_item(shortcut_listens)
-            );
+            create_listen_item(listen_container, shortcut_listens);
 
             fetch(`${root}user/${shortcut_listens.name}/library/music/${scrobble_page}`)
             .then(function(response) {
@@ -8364,17 +8343,30 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
 
                 let first_metadata_item = doc.querySelector('.metadata-item .metadata-display');
 
-                if (first_metadata_item == null)
-                    return;
-
-                let listens = parseInt(first_metadata_item.textContent.trim());
+                let listens = 0;
 
                 let listen_item = document.getElementById(`listen-item--${shortcut_listens.name}`);
                 listen_item.setAttribute('data-listens', listens);
 
+                // sometimes this fails even thou they do have plays, this is just a last.fm bug
+                // i dont feel comfortable displaying 0 here as it may not be true
+                // but i guess i should?
+                if (first_metadata_item != null)
+                    listens = clean_number(first_metadata_item.textContent.trim());
+
                 listen_item.innerHTML = (`
                     <img class="view-item-avatar" src="${shortcut_listens.avi}" alt="${shortcut_listens.name}">${trans[lang].music.listens.count_listens.replace('{c}', listens)}
                 `);
+
+                // colourful counts
+                if (settings.colourful_counts) {
+                    let parsed_scrobble_as_rank = parse_scrobbles_as_rank(listens);
+
+                    listen_item.setAttribute('data-bleh--scrobble-milestone',parsed_scrobble_as_rank.milestone);
+                    listen_item.style.setProperty('--hue-user',parsed_scrobble_as_rank.hue);
+                    listen_item.style.setProperty('--sat-user',parsed_scrobble_as_rank.sat);
+                    listen_item.style.setProperty('--lit-user',parsed_scrobble_as_rank.lit);
+                }
             });
         }
 
@@ -8383,7 +8375,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
         col_main.insertBefore(listen_container, col_main.firstElementChild);
     }
 
-    function create_listen_item({name, listens, link, avi}) {
+    function create_listen_item(parent, {name, listens, link, avi}) {
         let listen_item = document.createElement('a');
         listen_item.classList.add('btn', 'listen-item', 'view-item');
         listen_item.setAttribute('href', `${root}user/${name}/library/music/${link}`);
@@ -8400,6 +8392,20 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
             `);
         }
 
-        return listen_item;
+        // colourful counts
+        if (settings.colourful_counts && listens > -1) {
+            let parsed_scrobble_as_rank = parse_scrobbles_as_rank(listens);
+
+            listen_item.setAttribute('data-bleh--scrobble-milestone',parsed_scrobble_as_rank.milestone);
+            listen_item.style.setProperty('--hue-user',parsed_scrobble_as_rank.hue);
+            listen_item.style.setProperty('--sat-user',parsed_scrobble_as_rank.sat);
+            listen_item.style.setProperty('--lit-user',parsed_scrobble_as_rank.lit);
+        }
+
+        parent.appendChild(listen_item);
+
+        tippy(listen_item, {
+            content: name
+        });
     }
 })();
