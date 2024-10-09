@@ -169,6 +169,18 @@ const trans = {
                     bio: 'Re-live early computing'
                 }
             },
+            music: {
+                name: 'Music',
+                bio: 'Configure your music-related settings for profiles, artists, albums, and tracks.',
+                profile_shortcut: {
+                    name: 'Profile shortcut',
+                    bio: 'Quickly access a user\'s plays on an artist, album, or track page.',
+                    placeholder: 'Profile',
+                    header: 'Enter username',
+                    saved: 'Profile shortcut is valid',
+                    failed: 'Profile does not exist or failed to load'
+                }
+            },
             accessibility: {
                 name: 'Accessibility',
                 shout_preview: 'some completely random text that doesn\'t mean <a href="https://cutensilly.org">anything at all</a>',
@@ -315,7 +327,8 @@ const trans = {
                     edit: 'Edit note',
                     delete: 'Remove note',
                     edit_user: 'Edit {u}\'s note',
-                    delete_user: 'Remove {u}\'s note'
+                    delete_user: 'Remove {u}\'s note',
+                    view: 'View your profile notes'
                 }
             },
             redirects: {
@@ -337,6 +350,10 @@ const trans = {
                 toggle: {
                     name: 'Enable the correction system'
                 },
+                view: {
+                    name: 'View current corrections',
+                    bio: 'Lists all active in your install'
+                },
                 format_guest_features: {
                     name: 'Format guest features and song tags',
                     bio: 'Splits track and album titles into their individual tags such as guest features, versions, remixes.'
@@ -355,7 +372,7 @@ const trans = {
                 },
                 submit: {
                     name: 'Submit new correction',
-                    bio: 'Have an artist, album, or track name that you feel is capitalised wrong?',
+                    bio: 'Have a name that you feel is capitalised wrong?',
                     action: 'Submit'
                 },
                 listing: {
@@ -1565,7 +1582,8 @@ let settings_template = {
     seasonal_particles: true,
     seasonal_overlays: true,
     profile_header_own: true,
-    profile_header_others: true
+    profile_header_others: true,
+    profile_shortcut: ''
 };
 let settings_base = {
     high_contrast: {
@@ -1825,7 +1843,8 @@ let inbuilt_settings = {
         value: true,
         values: [true, false],
         type: 'toggle'
-    }
+    },
+    profile_shortcut: {}
 }
 
 // use the top-right link to determine the current user
@@ -2769,7 +2788,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                                     ${trans[lang].settings.inbuilt.profile.subtitle.name}
                                 </div>
                                 <div class="input">
-                                    <input type="text" name="full_name" value="${form_display_name}" maxlength="50" id="id_full_name" oninput="_update_display_name(this.value)" data-form-type="other">
+                                    <input type="text" name="full_name" value="${form_display_name}" maxlength="36" id="id_full_name" oninput="_update_display_name(this.value)" data-form-type="other">
                                     <div class="tip">${trans[lang].settings.inbuilt.profile.pronoun_tip}</div>
                                 </div>
                             </div>
@@ -4080,6 +4099,9 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                         <button class="btn bleh--btn" data-bleh-page="themes" onclick="_change_settings_page('themes')">
                             ${trans[lang].settings.appearance.name}
                         </button>
+                        <button class="btn bleh--btn" data-bleh-page="music" onclick="_change_settings_page('music')">
+                            ${trans[lang].settings.music.name}
+                        </button>
                         <button class="btn bleh--btn" data-bleh-page="accessibility" onclick="_change_settings_page('accessibility')">
                             ${trans[lang].settings.accessibility.name}
                         </button>
@@ -5047,116 +5069,6 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                 <div class="bleh--panel">
                     <h3>${trans[lang].settings.corrections.name}</h3>
                     <p>${trans[lang].settings.corrections.bio}</p>
-                    <div class="toggle-container" id="container-corrections">
-                        <button class="btn reset" onclick="_reset_item('corrections')">${trans[lang].settings.reset}</button>
-                        <div class="heading">
-                            <h5>${trans[lang].settings.corrections.toggle.name}</h5>
-                        </div>
-                        <div class="toggle-wrap">
-                            <button class="toggle" id="toggle-corrections" onclick="_update_item('corrections')" aria-checked="true">
-                                <div class="dot"></div>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="toggle-container">
-                        <div class="heading">
-                            <h5>${trans[lang].settings.corrections.submit.name}</h5>
-                            <p>${trans[lang].settings.corrections.submit.bio}</p>
-                        </div>
-                        <div class="toggle-wrap">
-                            <a class="btn bleh--btn primary" href="https://github.com/katelyynn/bleh/issues/new/choose" target="_blank">${trans[lang].settings.corrections.submit.action}</a>
-                        </div>
-                    </div>
-                    <div class="sep"></div>
-                    <div class="inner-preview pad flex">
-                        <table class="chartlist chartlist--with-index chartlist--with-index--length-2 chartlist--with-image chartlist--with-play chartlist--with-artist chartlist--with-bar">
-                            <tbody>
-                                <tr class="chartlist-row chartlist-row--with-artist">
-                                    <td class="chartlist-index">
-                                        1
-                                    </td>
-                                    <td class="chartlist-image">
-                                        <span class="cover-art">
-                                            <img src="https://lastfm.freetls.fastly.net/i/u/64s/c15d3ed1bd8574260f9378e26847501d.jpg" alt="fractions of infinity" loading="lazy">
-                                        </span>
-                                    </td>
-                                    <td class="chartlist-name">
-                                        <a href="/music/Quadeca/_/fractions+of+infinity" title="fractions of infinity" class="bleh--chartlist-name-without-features">fractions of infinity (feat. Sunday Service Choir)</a>
-                                        <a href="/music/Quadeca/_/fractions+of+infinity" title="fractions of infinity" class="bleh--chartlist-name-with-features">
-                                            <span class="title">fractions of infinity</span>
-                                            <span class="feat" data-bleh--tag-group="guests">feat. Sunday Service Choir</span>
-                                        </a>
-                                    </td>
-                                    <td class="chartlist-artist bleh--chartlist-name-without-features">
-                                        <a href="/music/Quadeca" title="Quadeca">Quadeca</a>
-                                    </td>
-                                    <td class="chartlist-artist bleh--chartlist-name-with-features">
-                                        <a href="/music/Quadeca" title="Quadeca">Quadeca</a>,
-                                        <a href="/music/Quadeca" title="Quadeca">Sunday Service Choir</a>
-                                    </td>
-                                    <td class="chartlist-bar">
-                                        <span class="chartlist-count-bar">
-                                            <span class="chartlist-count-bar-link">
-                                                <span class="chartlist-count-bar-slug" style="width:100.0%;"></span>
-                                                <span class="chartlist-count-bar-value">
-                                                    104,321
-                                                </span>
-                                            </span>
-                                        </span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="toggle-container" id="container-format_guest_features">
-                        <button class="btn reset" onclick="_reset_item('format_guest_features')">${trans[lang].settings.reset}</button>
-                        <div class="heading">
-                            <h5>${trans[lang].settings.corrections.format_guest_features.name}</h5>
-                            <p>${trans[lang].settings.corrections.format_guest_features.bio}</p>
-                        </div>
-                        <div class="toggle-wrap">
-                            <button class="toggle" id="toggle-format_guest_features" onclick="_update_item('format_guest_features')" aria-checked="true">
-                                <div class="dot"></div>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="toggle-container" id="container-show_guest_features">
-                        <button class="btn reset" onclick="_reset_item('show_guest_features')">${trans[lang].settings.reset}</button>
-                        <div class="heading">
-                            <h5>${trans[lang].settings.corrections.show_guest_features.name}</h5>
-                            <p>${trans[lang].settings.corrections.show_guest_features.bio}</p>
-                        </div>
-                        <div class="toggle-wrap">
-                            <button class="toggle" id="toggle-show_guest_features" onclick="_update_item('show_guest_features')" aria-checked="true">
-                                <div class="dot"></div>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="toggle-container" id="container-show_remaster_tags">
-                        <button class="btn reset" onclick="_reset_item('show_remaster_tags')">${trans[lang].settings.reset}</button>
-                        <div class="heading">
-                            <h5>${trans[lang].settings.corrections.show_remaster_tags.name}</h5>
-                            <p>${trans[lang].settings.corrections.show_remaster_tags.bio}</p>
-                        </div>
-                        <div class="toggle-wrap">
-                            <button class="toggle" id="toggle-show_remaster_tags" onclick="_update_item('show_remaster_tags')" aria-checked="true">
-                                <div class="dot"></div>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="toggle-container" id="container-stacked_chartlist_info">
-                        <button class="btn reset" onclick="_reset_item('stacked_chartlist_info')">${trans[lang].settings.reset}</button>
-                        <div class="heading">
-                            <h5>${trans[lang].settings.corrections.stacked_chartlist_info.name}</h5>
-                            <p>${trans[lang].settings.corrections.stacked_chartlist_info.bio}</p>
-                        </div>
-                        <div class="toggle-wrap">
-                            <button class="toggle" id="toggle-stacked_chartlist_info" onclick="_update_item('stacked_chartlist_info')" aria-checked="true">
-                                <div class="dot"></div>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="sep"></div>
                     <h4>${trans[lang].settings.corrections.listing.artists}</h4>
                     <div class="corrections artist" id="corrections-artist"></div>
                     <h4>${trans[lang].settings.corrections.listing.albums_tracks}</h4>
@@ -5344,6 +5256,205 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                 <div class="bleh--panel">
                     <h3>Feature Flags</h3>
                     <div class="feature-flags" id="feature-flags"></div>
+                </div>
+                `);
+        } else if (page == 'music') {
+            return (`
+                <div class="bleh--panel">
+                    <h3>${trans[lang].settings.music.name}</h3>
+                    <p>${trans[lang].settings.music.bio}</p>
+                    <div class="inner-preview pad">
+                        <div class="tracks">
+                            <div class="track realtime">
+                                <div class="cover"></div>
+                                <div class="info">
+                                    <div class="title"></div>
+                                    <div class="artist"></div>
+                                </div>
+                                <div class="time"></div>
+                            </div>
+                            <div class="track">
+                                <div class="cover"></div>
+                                <div class="info">
+                                    <div class="title"></div>
+                                    <div class="artist"></div>
+                                </div>
+                                <div class="time"></div>
+                            </div>
+                            <div class="track">
+                                <div class="cover"></div>
+                                <div class="info">
+                                    <div class="title"></div>
+                                    <div class="artist"></div>
+                                </div>
+                                <div class="time"></div>
+                            </div>
+                            <div class="track">
+                                <div class="cover"></div>
+                                <div class="info">
+                                    <div class="title"></div>
+                                    <div class="artist"></div>
+                                </div>
+                                <div class="time"></div>
+                            </div>
+                            <div class="track">
+                                <div class="cover"></div>
+                                <div class="info">
+                                    <div class="title"></div>
+                                    <div class="artist"></div>
+                                </div>
+                                <div class="time"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="toggle-container" id="container-stacked_chartlist_info">
+                        <button class="btn reset" onclick="_reset_item('stacked_chartlist_info')">${trans[lang].settings.reset}</button>
+                        <div class="heading">
+                            <h5>${trans[lang].settings.corrections.stacked_chartlist_info.name}</h5>
+                            <p>${trans[lang].settings.corrections.stacked_chartlist_info.bio}</p>
+                        </div>
+                        <div class="toggle-wrap">
+                            <button class="toggle" id="toggle-stacked_chartlist_info" onclick="_update_item('stacked_chartlist_info')" aria-checked="true">
+                                <div class="dot"></div>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="sep"></div>
+                    <h4>${trans[lang].settings.music.profile_shortcut.name}</h4>
+                    <p>${trans[lang].settings.music.profile_shortcut.bio}</p>
+                    <div class="text-container" id="container-profile_shortcut">
+                        <button class="btn reset" onclick="_reset_item('profile_shortcut')">${trans[lang].settings.reset}</button>
+                        <div class="avatar-container">
+                            <div class="avatar-inner" id="avatar-profile_shortcut">
+                                <img id="avatar_src-profile_shortcut" src="${localStorage.getItem('bleh_profile_shortcut_avi') || ''}">
+                            </div>
+                        </div>
+                        <div class="heading content-form">
+                            <h5>${trans[lang].settings.music.profile_shortcut.placeholder}</h5>
+                            <div class="input-container">
+                                <input type="text" maxlength="40" id="text-profile_shortcut" value="${settings.profile_shortcut}" placeholder="${trans[lang].settings.music.profile_shortcut.header}">
+                                <button class="bleh--btn primary" onclick="_save_profile_shortcut()">${trans[lang].settings.save}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bleh--panel">
+                    <h3>${trans[lang].settings.corrections.name}</h3>
+                    <p>${trans[lang].settings.corrections.bio}</p>
+                    <!--<div class="screen-row actions-only">
+                        <div class="actions">
+                            <a class="btn action" href="https://github.com/katelyynn/bleh/issues/new/choose" target="_blank">
+                                <div class="icon bleh--correction"></div>
+                                <span class="text">
+                                    <h5>${trans[lang].settings.corrections.submit.name}</h5>
+                                </span>
+                            </a>
+                            <button class="btn action" onclick="_open_correction_modal()">
+                                <div class="icon bleh--correction_modal"></div>
+                                <span class="text">
+                                    <h5>${trans[lang].settings.corrections.view.name}</h5>
+                                </span>
+                            </button>
+                        </div>
+                    </div>-->
+                    <div class="screen-row actions-only">
+                        <div class="actions">
+                            <a class="btn primary external" href="https://github.com/katelyynn/bleh/issues/new/choose" target="_blank">
+                                ${trans[lang].settings.corrections.submit.name}
+                            </a>
+                            <button class="btn continue" onclick="_open_correction_modal()">
+                                ${trans[lang].settings.corrections.view.name}
+                            </button>
+                        </div>
+                    </div>
+                    <div class="toggle-container" id="container-corrections">
+                        <button class="btn reset" onclick="_reset_item('corrections')">${trans[lang].settings.reset}</button>
+                        <div class="heading">
+                            <h5>${trans[lang].settings.corrections.toggle.name}</h5>
+                        </div>
+                        <div class="toggle-wrap">
+                            <button class="toggle" id="toggle-corrections" onclick="_update_item('corrections')" aria-checked="true">
+                                <div class="dot"></div>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="sep"></div>
+                    <div class="inner-preview pad flex">
+                        <table class="chartlist chartlist--with-index chartlist--with-index--length-2 chartlist--with-image chartlist--with-play chartlist--with-artist chartlist--with-bar">
+                            <tbody>
+                                <tr class="chartlist-row chartlist-row--with-artist">
+                                    <td class="chartlist-index">
+                                        1
+                                    </td>
+                                    <td class="chartlist-image">
+                                        <span class="cover-art">
+                                            <img src="https://lastfm.freetls.fastly.net/i/u/64s/c15d3ed1bd8574260f9378e26847501d.jpg" alt="fractions of infinity" loading="lazy">
+                                        </span>
+                                    </td>
+                                    <td class="chartlist-name">
+                                        <a href="/music/Quadeca/_/fractions+of+infinity" title="fractions of infinity" class="bleh--chartlist-name-without-features">fractions of infinity (feat. Sunday Service Choir)</a>
+                                        <a href="/music/Quadeca/_/fractions+of+infinity" title="fractions of infinity" class="bleh--chartlist-name-with-features">
+                                            <span class="title">fractions of infinity</span>
+                                            <span class="feat" data-bleh--tag-group="guests">feat. Sunday Service Choir</span>
+                                        </a>
+                                    </td>
+                                    <td class="chartlist-artist bleh--chartlist-name-without-features">
+                                        <a href="/music/Quadeca" title="Quadeca">Quadeca</a>
+                                    </td>
+                                    <td class="chartlist-artist bleh--chartlist-name-with-features">
+                                        <a href="/music/Quadeca" title="Quadeca">Quadeca</a>,
+                                        <a href="/music/Quadeca" title="Quadeca">Sunday Service Choir</a>
+                                    </td>
+                                    <td class="chartlist-bar">
+                                        <span class="chartlist-count-bar">
+                                            <span class="chartlist-count-bar-link">
+                                                <span class="chartlist-count-bar-slug" style="width:100.0%;"></span>
+                                                <span class="chartlist-count-bar-value">
+                                                    104,321
+                                                </span>
+                                            </span>
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="toggle-container" id="container-format_guest_features">
+                        <button class="btn reset" onclick="_reset_item('format_guest_features')">${trans[lang].settings.reset}</button>
+                        <div class="heading">
+                            <h5>${trans[lang].settings.corrections.format_guest_features.name}</h5>
+                            <p>${trans[lang].settings.corrections.format_guest_features.bio}</p>
+                        </div>
+                        <div class="toggle-wrap">
+                            <button class="toggle" id="toggle-format_guest_features" onclick="_update_item('format_guest_features')" aria-checked="true">
+                                <div class="dot"></div>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="toggle-container" id="container-show_guest_features">
+                        <button class="btn reset" onclick="_reset_item('show_guest_features')">${trans[lang].settings.reset}</button>
+                        <div class="heading">
+                            <h5>${trans[lang].settings.corrections.show_guest_features.name}</h5>
+                            <p>${trans[lang].settings.corrections.show_guest_features.bio}</p>
+                        </div>
+                        <div class="toggle-wrap">
+                            <button class="toggle" id="toggle-show_guest_features" onclick="_update_item('show_guest_features')" aria-checked="true">
+                                <div class="dot"></div>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="toggle-container" id="container-show_remaster_tags">
+                        <button class="btn reset" onclick="_reset_item('show_remaster_tags')">${trans[lang].settings.reset}</button>
+                        <div class="heading">
+                            <h5>${trans[lang].settings.corrections.show_remaster_tags.name}</h5>
+                            <p>${trans[lang].settings.corrections.show_remaster_tags.bio}</p>
+                        </div>
+                        <div class="toggle-wrap">
+                            <button class="toggle" id="toggle-show_remaster_tags" onclick="_update_item('show_remaster_tags')" aria-checked="true">
+                                <div class="dot"></div>
+                            </button>
+                        </div>
+                    </div>
                 </div>
                 `);
         }
@@ -7021,7 +7132,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
             });
 
             document.getElementById('recent-tracks-section').appendChild(refresh_btn);
-        })
+        });
     }
 
 
@@ -8113,5 +8224,54 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
             deliver_notif(trans[lang].messaging.update.replace('{v}', `${version.build}.${version.sku}`), true);
             localStorage.setItem('bleh_last_version_used', version.build);
         }
+    }
+
+
+
+
+    unsafeWindow._save_profile_shortcut = function() {
+        let profile_name = document.getElementById('text-profile_shortcut').value;
+        let profile_img = document.getElementById('avatar-profile_shortcut');
+
+        if (profile_name == '') {
+            localStorage.removeItem('bleh_profile_shortcut_avi');
+            document.getElementById('avatar_src-profile_shortcut').setAttribute('src', '');
+
+            // save to settings
+            settings.profile_shortcut = profile_name;
+            localStorage.setItem('bleh', JSON.stringify(settings));
+
+            return;
+        }
+
+        profile_img.classList.add('requesting');
+
+        fetch(`${root}user/${profile_name}/tags`)
+        .then(function(response) {
+            console.log('returned', response, response.text);
+
+            return response.text();
+        })
+        .then(function(html) {
+            let doc = new DOMParser().parseFromString(html, 'text/html');
+            console.log('DOC', doc);
+
+            try {
+                let avatar_src = doc.querySelector('.header-avatar-inner-wrap img').getAttribute('src');
+                localStorage.setItem('bleh_profile_shortcut_avi', avatar_src);
+                document.getElementById('avatar_src-profile_shortcut').setAttribute('src', avatar_src);
+                deliver_notif(trans[lang].settings.music.profile_shortcut.saved);
+
+                // save to settings
+                settings.profile_shortcut = profile_name;
+                localStorage.setItem('bleh', JSON.stringify(settings));
+            } catch(e) {
+                deliver_notif(trans[lang].settings.music.profile_shortcut.failed);
+                localStorage.removeItem('bleh_profile_shortcut_avi');
+                document.getElementById('avatar_src-profile_shortcut').setAttribute('src', '');
+            }
+
+            profile_img.classList.remove('requesting');
+        });
     }
 })();

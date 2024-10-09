@@ -5937,6 +5937,7 @@ span.shout-user-avatar:before,
 }
 
 /* missing avatar */
+[src=""],
 .avatar--bleh-missing img,
 [src$="818148bf682d429dc215c1705eb27b98.png"] {
     content: url() !important;
@@ -6285,7 +6286,7 @@ button,
     --btn-left: calc(12px + 16px + 6px) !important;
 }
 .side-right .setting-item,
-.continue,
+.continue, .external,
 .btn--has-icon-right,
 .dropdown-menu-clickable-button, .dropdown-menu-clickable-button-js-only,
 .pagination-next a,
@@ -6396,11 +6397,12 @@ button,
 
 
 /*     ICON MASK     */
+.requesting:before,
 .modal-processing:before,
 .side-right .setting-item:before, .action:before,
 .setup-icon:before, .setup-icon:after,
 .btn.back:before,
-.continue:before,
+.continue:before, .external:before,
 .badge:before,
 .btn-post-shout:before,
 .auth-link:before,
@@ -6566,7 +6568,7 @@ span.header-new-gallery-inner a:before,
     transition-duration: var(--trans) !important;
     transition-timing-function: var(--trans-function) !important;
 }
-.continue:before,
+.continue:before, .external:before,
 .pagination-next a:before,
 .more-link a:before, .more-link-fullwidth-right a:before, .more-link-fullwidth-right-flush-top a:before, .more-link-with-action a:not(.inline-add-icon):after,
 .more-items:before,
@@ -12410,6 +12412,9 @@ so this is good enough - use the community docs */
                 &[data-bleh-page="themes"] {
                     --mask: var(--icon-16-themes);
                 }
+                &[data-bleh-page="music"] {
+                    --mask: var(--icon-16-track);
+                }
                 &[data-bleh-page="customise"] {
                     --mask: var(--icon-16-palette);
                 }
@@ -13623,6 +13628,23 @@ input[type="range"]::-moz-range-progress {
 
                 html:not([data-bleh--inbuilt-recent_artwork="true"]) .tracks.recent & {
                     display: none;
+                }
+            }
+            .info {
+                display: flex;
+                gap: 12px;
+                flex: 1;
+
+                [data-bleh--stacked_chartlist_info="true"] & {
+                    display: inline-block;
+
+                    .title {
+                        width: 180px;
+                    }
+                    .artist {
+                        margin-top: 4px;
+                        width: 70px;
+                    }
                 }
             }
             .title {
@@ -15697,6 +15719,10 @@ button.bleh--gallery-bookmark-image-btn {
     position: relative;
     --mask: var(--icon-16-arrow-right);
 }
+.external {
+    position: relative;
+    --mask: var(--icon-16-external);
+}
 
 
 /* this allows tooltips */
@@ -15914,5 +15940,69 @@ button.bleh--gallery-bookmark-image-btn {
             z-index: 10000000;
         }
     }
+}
+
+
+
+
+.text-container {
+    display: flex;
+    gap: var(--card-gap);
+
+    .avatar-container {
+        .avatar-inner {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--avatar-generic-background);
+            box-shadow: var(--card-shadow);
+            overflow: hidden;
+
+            position: relative;
+
+            &.requesting {
+                --left: 50%;
+                --margin-left: -8px;
+                color: hsl(var(--c3));
+                --mask: var(--icon-16-spinner);
+
+                img {
+                    opacity: 0;
+                }
+
+                &:before {
+                    animation: spinner 0.8s linear infinite;
+                }
+            }
+
+            img {
+                width: 100%;
+                height: 100%;
+
+                --mask-size: var(--cover-size-50);
+                transition-property: opacity;
+                transition-duration: var(--trans);
+                transition-timing-function: var(--trans-function);
+            }
+        }
+    }
+
+    .heading {
+        margin: unset;
+
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+
+        .input-container {
+            display: flex;
+            gap: var(--button-list-gap);
+        }
+    }
+}
+
+
+h4 + p {
+    margin-top: calc(-1 * var(--card-gap));
 }
 }
