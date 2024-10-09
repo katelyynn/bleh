@@ -30,6 +30,11 @@ let version = {
             default: false,
             name: 'Enable visibility of high contrast (experimental)',
             date: '2024-10-04'
+        },
+        redesigned_profile_header: {
+            default: false,
+            name: 'Redesigned profile header info',
+            date: '2024-10-09'
         }
     }
 }
@@ -3185,6 +3190,9 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
         if (is_own_profile)
             document.body.querySelector('.header--user').setAttribute('data-is-own-profile', 'true');
 
+        if (settings.feature_flags.redesigned_profile_header)
+            redesign_profile_header(profile_name, is_own_profile);
+
         // profile note
         let profile_notes = JSON.parse(localStorage.getItem('bleh_profile_notes')) || {};
         let profile_note = profile_notes[profile_name.textContent];
@@ -3352,6 +3360,47 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
             } else {
                 create_profile_note_panel(profile_name.textContent, true);
             }
+        }
+    }
+
+    function redesign_profile_header(profile_name, is_own_profile) {
+        let base_header = document.body.querySelector('.header-info-secondary');
+
+        // acquire info
+        let metadata = base_header.querySelectorAll('.header-metadata-display');
+
+        let scrobbles = 0;
+        let average = 0;
+        let artists = 0;
+        let loved = 0;
+
+        metadata.forEach((item, index) => {
+            if (index == 0) {
+                let para = item.querySelector('p');
+
+                scrobbles = clean_number(para.textContent.trim());
+                average = para.getAttribute('title');
+            } else if (index == 1) {
+                artists = clean_number(item.textContent.trim());
+            } else if (index == 2) {
+                loved = clean_number(item.textContent.trim());
+            }
+        });
+
+
+        // taste
+        let taste = '';
+        let taste_artists = [];
+
+        if (!is_own_profile) {
+            let taste_meter = base_header.querySelector('.tasteometer');
+
+            taste = taste_meter.classList[1].replace('tasteometer-compat-', '');
+
+            let artists = taste_meter.querySelectorAll('a');
+            artists.forEach((artist) => {
+                taste_artists.push(correct_artist(artist.textContent.trim()));
+            });
         }
     }
 
