@@ -2169,7 +2169,7 @@ spacing between is removed and aligned to tag icon */
 }
 
 .header--overview.header--with-avatar .header-info {
-    width: calc(var(--cards-width) - 96px);
+    width: calc(var(--cards-width) - var(--profile-header-avatar-size));
 }
 .header--overview.header--with-avatar .header-info {
     padding-left: var(--card-gap);
@@ -2177,7 +2177,7 @@ spacing between is removed and aligned to tag icon */
 }
 
 .header--overview .header-info-primary--with-columns, .header--sub-page .header-info-primary--with-columns {
-    width: calc(var(--cards-width) - 96px - var(--card-gap)) !important;
+    width: calc(var(--cards-width) - var(--profile-header-avatar-size) - var(--card-gap)) !important;
     display: flex !important;
 }
 
@@ -2247,7 +2247,7 @@ li.header-metadata-item--event-attendance {
 .header-featured-track {
     padding-right: unset;
     position: absolute;
-    top: 172px;
+    top: calc(var(--profile-header-avatar-size) + 76px);
     right: 0;
     left: unset;
     bottom: unset;
@@ -2651,7 +2651,7 @@ header:not(:has(.header-featured-track)) .header-message-user {
 
 .header--user .secondary-nav {
     position: relative;
-    top: calc(46px + var(--card-gap) + 15px - 19px);
+    top: calc((var(--profile-header-avatar-size) - 50px) + var(--card-gap) + 15px - 19px);
     border-bottom: 2px solid var(--card-border-base);
 }
 .bleh--nav-wrap .navlist,
@@ -3766,7 +3766,7 @@ state is not active, which then falls back to primary button styling */
 
 .header-title-display-name {
     /* last.fm defaults 350px */
-    max-width: calc(var(--cards-width) - 96px - var(--card-gap) - var(--cards-sidebar-width));
+    max-width: calc(var(--cards-width) - var(--profile-header-avatar-size) - var(--card-gap) - var(--cards-sidebar-width));
 }
 
 .header--sub-page.header--with-avatar .header-info {
@@ -4079,7 +4079,7 @@ state is not active, which then falls back to primary button styling */
 }
 .header-metadata {
     padding-top: unset !important;
-    width: calc(var(--cards-width) - 96px - var(--card-gap));
+    width: calc(var(--cards-width) - var(--profile-header-avatar-size) - var(--card-gap));
 }
 .personal-stats-inner .header-metadata {
     width: fit-content;
@@ -8155,7 +8155,7 @@ form[action="/inbox/notifications"] {
 
 .inbox-message-view .inbox-message-sender-name {
     position: absolute;
-    top: 96px;
+    top: var(--profile-header-avatar-size);
     left: -195px;
     width: 180px;
     text-align: center;
@@ -15419,7 +15419,10 @@ button.bleh--gallery-bookmark-image-btn {
     padding: var(--button-list-gap);
     background-color: hsl(var(--b6));
     border-radius: var(--item-med-radius);
-    margin-bottom: var(--card-gap);
+
+    &:not(.profile-top-header) {
+        margin-bottom: var(--card-gap);
+    }
 
     [data-bleh--theme="oled"] &,
     [data-bleh--theme="light"] & {
@@ -15427,6 +15430,7 @@ button.bleh--gallery-bookmark-image-btn {
         outline: var(--card-border);
     }
 
+    &.profile-top-header,
     &.listen-container {
         width: fit-content;
     }
@@ -15530,6 +15534,18 @@ button.bleh--gallery-bookmark-image-btn {
                 background-color: hsl(var(--c3)) !important;
             }
         }
+
+        &.profile-top-item {
+            &.profile-top-item--scrobbles {
+                --mask: var(--icon-16-library);
+            }
+            &.profile-top-item--artists {
+                --mask: var(--icon-16-artist);
+            }
+            &.profile-top-item--loved {
+                --mask: var(--icon-16-heart);
+            }
+        }
     }
 
     .listen-divider {
@@ -15541,6 +15557,9 @@ button.bleh--gallery-bookmark-image-btn {
 }
 .metadata-and-wiki-row {
     --only-card-gap: 0;
+}
+[data-ff--redesigned_profile_header="true"] body {
+    --profile-header-avatar-size: 104px;
 }
 
 
@@ -16094,5 +16113,14 @@ h4 {
     font-size: var(--font-size-sm);
     padding: 0 6px;
     border-radius: var(--item-med-radius);
+}
+
+
+
+
+.header-metadata {
+    [data-ff--redesigned_profile_header="true"] & {
+        display: none !important;
+    }
 }
 }

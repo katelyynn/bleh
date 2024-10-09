@@ -107,7 +107,11 @@ const trans = {
                 name: 'created',
 
                 replace: '• scrobbling since '
-            }
+            },
+            scrobbles: 'Scrobbles',
+            artists: 'Artists',
+            loved: 'Loved tracks',
+            taste: 'Taste similarity'
         },
         messaging: {
             update: 'bleh has updated to {v}, welcome aboard!'
@@ -3190,9 +3194,6 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
         if (is_own_profile)
             document.body.querySelector('.header--user').setAttribute('data-is-own-profile', 'true');
 
-        if (settings.feature_flags.redesigned_profile_header)
-            redesign_profile_header(profile_name, is_own_profile);
-
         // profile note
         let profile_notes = JSON.parse(localStorage.getItem('bleh_profile_notes')) || {};
         let profile_note = profile_notes[profile_name.textContent];
@@ -3204,8 +3205,11 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
         if (!profile_header.hasAttribute('data-kate-processed')) {
             profile_header.setAttribute('data-kate-processed', 'true');
 
+            if (settings.feature_flags.redesigned_profile_header)
+                redesign_profile_header(profile_name, is_own_profile);
+
             // is this their profile?
-            if (profile_name.textContent == auth) {
+            if (is_own_profile) {
                 // make avatar clickable
                 let header_avatar = document.querySelector('.header-avatar .avatar');
 
@@ -3402,6 +3406,54 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                 taste_artists.push(correct_artist(artist.textContent.trim()));
             });
         }
+
+
+        // create new
+        let profile_header = document.createElement('div');
+        profile_header.classList.add('profile-top-header', 'view-buttons');
+
+        create_profile_top_item(profile_header, {
+            name: profile_name,
+            text: scrobbles,
+            type: 'scrobbles',
+            link: `${root}user/${profile_name}/library`
+        });
+        create_profile_top_item(profile_header, {
+            name: profile_name,
+            text: artists,
+            type: 'artists',
+            link: `${root}user/${profile_name}/library/artists`
+        });
+        create_profile_top_item(profile_header, {
+            name: profile_name,
+            text: loved,
+            type: 'loved',
+            link: `${root}user/${profile_name}/loved`
+        });
+
+        base_header.appendChild(profile_header);
+    }
+
+    function create_profile_top_item(parent, {name, link, text, type}) {
+        console.info('bleh - creating profile top item', name, link, text);
+
+        let listen_item = document.createElement('a');
+        listen_item.classList.add('btn', 'profile-top-item', `profile-top-item--${type}`, 'view-item');
+        listen_item.setAttribute('href', link);
+        listen_item.setAttribute('target', '_blank');
+
+        if (type != 'taste')
+            text = text.toLocaleString(lang);
+
+        listen_item.innerHTML = (`
+            ${text}
+        `);
+
+        parent.appendChild(listen_item);
+
+        tippy(listen_item, {
+            content: trans[lang].profile[type]
+        });
     }
 
     function patch_profile_tracks() {
