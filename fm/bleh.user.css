@@ -15515,7 +15515,8 @@ button.bleh--gallery-bookmark-image-btn {
         }
 
         &.listen-item {
-            --left: calc(12px + 2px);
+            /*--left: calc(12px + 2px);*/
+            --left: calc(12px + 20px + 6px);
             --mask: var(--icon-16-spinner);
 
             &[data-listens="-1"] {
@@ -15524,10 +15525,17 @@ button.bleh--gallery-bookmark-image-btn {
                 .view-item-avatar {
                     margin-right: calc(6px + 16px + 6px) !important;
                 }
+
+                &:before {
+                    --show-icon: block;
+                    opacity: 1;
+                }
             }
 
             &:before {
                 animation: spinner 0.8s linear infinite;
+                --show-icon: none;
+                background-color: hsl(var(--c3)) !important;
             }
         }
     }

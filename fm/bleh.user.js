@@ -1976,6 +1976,8 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                 patch_artist_grids(document.body);
                 patch_titles(document.body);
 
+                show_your_scrobbles();
+
                 if (settings.corrections) {
                     correct_generic_combo_no_artist('artist-header-featured-items-item');
                     correct_generic_combo_no_artist('artist-top-albums-item');
@@ -8305,18 +8307,31 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
         listen_container.classList.add('listen-container', 'view-buttons');
 
 
+        // page url
+        let page_url = window.location.href;
+        let page_url_split = page_url.split('/');
+        let page_url_length = (page_url_split.length - 1);
+
+        // artist
+        let scrobble_page = page_url_split[page_url_length];
+        if (header_type == 'album') {
+            scrobble_page = page_url_split[page_url_length - 1] + '/' + page_url_split[page_url_length];
+        } else {
+            scrobble_page = page_url_split[page_url_length - 2] + '/_/' + page_url_split[page_url_length];
+        }
+
+
         // you
         let your_listens = {
             name: auth,
             listens: 0,
-            link: '',
+            link: scrobble_page,
             avi: my_avi
         };
         // check to see if you have scrobbles
         let scrobble_button = col_main.querySelector('.personal-stats-item--scrobbles .hidden-xs a');
         if (scrobble_button != null) {
             your_listens.listens = parseInt(scrobble_button.textContent.trim());
-            your_listens.link = scrobble_button.getAttribute('href');
         }
         // create child for u
         listen_container.appendChild(
@@ -8324,18 +8339,43 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
         );
 
 
-        // person shortcut :3
-        if (settings.person_shortcut != '') {
+        // profile shortcut :3
+        if (settings.profile_shortcut != '') {
             let shortcut_listens = {
-                name: settings.person_shortcut,
+                name: settings.profile_shortcut,
                 listens: -1,
-                link: '',
+                link: scrobble_page,
                 avi: localStorage.getItem('bleh_profile_shortcut_avi')
             }
             // create child for them
             listen_container.appendChild(
                 create_listen_item(shortcut_listens)
             );
+
+            fetch(`${root}user/${shortcut_listens.name}/library/music/${scrobble_page}`)
+            .then(function(response) {
+                console.log('returned', response, response.text);
+
+                return response.text();
+            })
+            .then(function(html) {
+                let doc = new DOMParser().parseFromString(html, 'text/html');
+                console.log('DOC', doc);
+
+                let first_metadata_item = doc.querySelector('.metadata-item .metadata-display');
+
+                if (first_metadata_item == null)
+                    return;
+
+                let listens = parseInt(first_metadata_item.textContent.trim());
+
+                let listen_item = document.getElementById(`listen-item--${shortcut_listens.name}`);
+                listen_item.setAttribute('data-listens', listens);
+
+                listen_item.innerHTML = (`
+                    <img class="view-item-avatar" src="${shortcut_listens.avi}" alt="${shortcut_listens.name}">${trans[lang].music.listens.count_listens.replace('{c}', listens)}
+                `);
+            });
         }
 
 
@@ -8346,8 +8386,9 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
     function create_listen_item({name, listens, link, avi}) {
         let listen_item = document.createElement('a');
         listen_item.classList.add('btn', 'listen-item', 'view-item');
-        listen_item.setAttribute('href', link);
+        listen_item.setAttribute('href', `${root}user/${name}/library/music/${link}`);
         listen_item.setAttribute('data-listens', listens);
+        listen_item.setAttribute('id', `listen-item--${name}`);
 
         if (listens > -1) {
             listen_item.innerHTML = (`
