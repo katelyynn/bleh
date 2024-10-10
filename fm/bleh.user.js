@@ -1942,7 +1942,6 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
             // start bleh setup
             bleh_setup();
         } else {
-            patch_actions();
             patch_profile(document.body);
             patch_shouts(document.body);
             patch_lastfm_settings(document.body);
@@ -1991,7 +1990,6 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                 // start bleh setup
                 bleh_setup();
             } else {
-                patch_actions();
                 patch_profile(document.body);
                 patch_shouts(document.body);
                 patch_lastfm_settings(document.body);
@@ -4180,42 +4178,6 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
 
             menu.appendChild(extra_items);
         }
-    }
-
-
-    function patch_actions() {
-        let actions = document.body.querySelector('.header-new-actions');
-
-        if (actions == undefined)
-            return;
-
-        if (actions.hasAttribute('data-kate-processed'))
-            return;
-        actions.setAttribute('data-kate-processed', 'true');
-
-        let type = document.querySelector('.header-new').classList[1].replace('header-new--', '');
-
-        let text = document.querySelector('.header-new-title').textContent
-        .replaceAll(' ', '+')
-        .replaceAll('&', '%26');
-
-        let artist = document.querySelector('.header-new-crumb');
-        if (artist != undefined)
-            text = `${text}+${artist.textContent
-            .replaceAll(' ', '+')
-            .replaceAll('&', '%26')}`;
-
-        let search_btn = document.createElement('a');
-        search_btn.classList.add('btn', 'search-similar-btn');
-        search_btn.textContent = trans[lang].music.search_variations;
-        search_btn.href = `${root}search/${type}s?q=${text}`;
-        search_btn.target = '_blank';
-
-        tippy(search_btn, {
-            content: trans[lang].music.search_variations
-        });
-
-        actions.appendChild(search_btn);
     }
 
 
@@ -8601,6 +8563,17 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
         interact_container.classList.add('interact-container', 'view-buttons');
 
 
+        let text = document.body.querySelector('.header-new-title').textContent
+        .replaceAll(' ', '+')
+        .replaceAll('&', '%26');
+
+        let artist = document.body.querySelector('.header-new-crumb');
+        if (artist != undefined)
+            text = `${text}+${artist.textContent
+            .replaceAll(' ', '+')
+            .replaceAll('&', '%26')}`;
+
+
         // temp probably
         let header_actions = document.body.querySelector('.header-new-actions');
 
@@ -8614,10 +8587,20 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
             if (button.classList[0] == 'header-new-more-button')
                 interact_container.removeChild(button.parentElement);
         });
-        let links = interact_container.querySelectorAll('a:not(.dropdown-menu-clickable-item)');
-        links.forEach((button) => {
-            button.classList.add('btn', 'view-item', 'interact-item');
+
+
+        // search similar!
+        let search_btn = document.createElement('a');
+        search_btn.classList.add('btn', 'view-item', 'interact-item', 'search-similar-btn');
+        search_btn.textContent = trans[lang].music.search_variations;
+        search_btn.href = `${root}search/${header_type}s?q=${text}`;
+        search_btn.target = '_blank';
+
+        tippy(search_btn, {
+            content: trans[lang].music.search_variations
         });
+
+        interact_container.appendChild(search_btn);
 
 
         top_container.appendChild(interact_container);
