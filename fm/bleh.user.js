@@ -8520,8 +8520,12 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
 
         let header_type = header_new.classList[1].replace('header-new--', '');
 
+        show_numbers_on_side(header_type);
 
-        let col_main = document.body.querySelector('.col-main');
+
+        let col_main = document.body.querySelector('.top-overview-panel');
+        if (col_main == null)
+            col_main = document.body.querySelector('.col-main');
 
 
         // create container
@@ -8695,11 +8699,6 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
 
 
         top_container.appendChild(interact_container);
-
-
-
-
-        show_numbers_on_side();
     }
 
     function create_listen_item(parent, {name, listens, link, avi, count=0}, header_type) {
@@ -8755,7 +8754,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
     }
 
 
-    function show_numbers_on_side() {
+    function show_numbers_on_side(header_type) {
         let metadata = document.body.querySelectorAll('.header-metadata-tnew-item');
 
         let listeners = {};
@@ -8778,7 +8777,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
 
 
         // get panel
-        let col_sidebar = document.body.querySelector('.col-sidebar:not(.track-overview-video-column)');
+        let col_sidebar = document.body.querySelector('.col-sidebar:not(.track-overview-video-column, .masonry-right)');
 
         let panel = col_sidebar.querySelector('section.section-with-separator');
 
@@ -8806,5 +8805,29 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
         `);
 
         panel.insertBefore(row, panel.firstElementChild);
+
+
+        // is there album artwork?
+        if (header_type == 'album') {
+            let album_artwork = document.body.querySelector('.artwork-and-metadata-row');
+
+            if (album_artwork != null) {
+                col_sidebar.insertBefore(album_artwork, col_sidebar.firstElementChild);
+            }
+        }
+
+        if (header_type == 'album' || header_type == 'artist') {
+            let upper = document.body.querySelector('.col-main');
+            upper.classList.add('upper-overview-to-hide');
+
+            let new_upper = document.createElement('section');
+            new_upper.classList.add('top-overview-panel');
+            new_upper.setAttribute('data-page-type', header_type);
+            new_upper.innerHTML = upper.innerHTML;
+
+            let col_main = document.body.querySelector('.col-main:not(.upper-overview, :first-child)');
+
+            col_main.insertBefore(new_upper, col_main.firstElementChild);
+        }
     }
 })();

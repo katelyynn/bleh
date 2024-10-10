@@ -1713,23 +1713,23 @@ body[class*="namespace--user_library_"] .col-sidebar, .library-header,
     /* same height as the above one with button */
     min-height: 123px;
 }
+.upper-overview-to-hide,
+.col-sidebar.masonry-right {
+    display: none !important;
+}
 
 
-/* on album pages, the artwork is the first child for some old reason, lets flip them */
-.header-new--album + .container > .row.buffer-reset\@sm > .col-main:nth-child(2) {
-    order: -1;
-    margin-top: unset !important;
-    /* for the margin-top to work (see below), we need a set height for the album main panel */
-    max-height: 234px;
-    height: 234px;
+.top-overview-panel {
+    &[data-page-type="album"] {
+        /* remove card-gap from container */
+        margin-top: calc(-1 * var(--card-gap));
+    }
+
+    .masonry-left {
+        float: unset;
+    }
 }
-.header-new--album + .container > .row.buffer-reset\@sm > .col-sidebar:nth-child(1) {
-    height: calc(274px - 8px);
-    padding: unset !important;
-}
-.header-new--album + .container > .row.buffer-reset\@sm > .col-main:nth-child(3) {
-    margin-top: -32px !important;
-}
+
 
 .namespace--music_album_overview .col-sidebar.hidden-xs {
     position: relative;
@@ -1858,7 +1858,7 @@ article, section, .buffer-standard, .buffer-standard:not(.col-sidebar) .buffer-s
 
 /* take up full space */
 .album-overview-cover-art, .album-artwork-upload-cta {
-    margin-top: -166px !important;
+    margin-top: -102px !important;
     overflow: hidden;
     z-index: 1;
 }
@@ -2143,8 +2143,11 @@ spacing between is removed and aligned to tag icon */
 .page-content + .page-content {
     padding-top: unset !important;
 }
-.header-new + .page-content, .content-top:has(.secondary-nav) + .page-content {
+.header-new:not(.header-new--artist) + .page-content, .content-top:has(.secondary-nav) + .page-content {
     padding-top: var(--override-padding-top, var(--card-gap)) !important;
+}
+.header-new--artist + .page-content {
+    padding-top: unset !important;
 }
 
 
