@@ -3806,8 +3806,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                     `),
                     allowHTML: true,
                     delay: [100, 50],
-                    placement: 'bottom',
-                    hideOnClick: false
+                    placement: 'bottom'
                 });
             } else {
                 let pre_existing_badge = element.querySelector('.avatar-status-dot');
@@ -3826,8 +3825,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                         `),
                         allowHTML: true,
                         delay: [100, 50],
-                        placement: 'bottom',
-                        hideOnClick: false
+                        placement: 'bottom'
                     });
                 } else {
                     tippy(element, {
@@ -3846,8 +3844,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                         `),
                         allowHTML: true,
                         delay: [100, 50],
-                        placement: 'bottom',
-                        hideOnClick: false
+                        placement: 'bottom'
                     });
                     element.setAttribute('title', '');
                 }
@@ -8586,6 +8583,10 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
 
             if (button.classList[0] == 'header-new-more-button')
                 interact_container.removeChild(button.parentElement);
+        });
+        let links = interact_container.querySelectorAll('a');
+        links.forEach((button) => {
+            button.classList.add('btn', 'view-item', 'interact-item');
         });
 
 
