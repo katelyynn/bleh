@@ -8537,9 +8537,64 @@ text[style^="color: rgb(255, 172, 172)"] {
 }
 
 
+.listen-panel {
+    h3.text-18 {
+        display: none;
+    }
+
+    .listener-row {
+        display: flex;
+        justify-content: space-evenly;
+
+        div {
+            h3 {
+                color: hsl(var(--c3));
+                font-weight: var(--font-weight-medium);
+                cursor: default;
+
+                display: flex;
+                align-items: center;
+                gap: 2px;
+
+                img {
+                    width: 16px;
+                    height: 16px;
+                    border-radius: 50%;
+                    display: none;
+                }
+
+                a {
+                    color: inherit;
+                }
+            }
+            p {
+                color: hsl(var(--c1));
+                font-weight: var(--font-weight-bold);
+                font-size: 24px;
+                line-height: 28px;
+
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 6px;
+
+                img {
+                    width: 20px;
+                    height: 20px;
+                    border-radius: 50%;
+                }
+
+                a {
+                    color: inherit;
+                }
+            }
+        }
+    }
+}
 .listener-trend {
     /* makes the listener trend bigger */
     padding-top: 55%;
+    margin-top: var(--card-gap);
 
     .highcharts-alternate-grid {
         fill: hsla(var(--b4), 60%) !important;
@@ -15670,7 +15725,7 @@ button.bleh--gallery-bookmark-image-btn {
     --profile-header-avatar-size: 104px;
 }
 
-.header-new-actions {
+.header-new-info-desktop {
     display: none;
 }
 

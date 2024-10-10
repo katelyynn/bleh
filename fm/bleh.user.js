@@ -8695,6 +8695,11 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
 
 
         top_container.appendChild(interact_container);
+
+
+
+
+        show_numbers_on_side();
     }
 
     function create_listen_item(parent, {name, listens, link, avi, count=0}, header_type) {
@@ -8747,5 +8752,59 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
         tippy(listen_item, {
             content: name
         });
+    }
+
+
+    function show_numbers_on_side() {
+        let metadata = document.body.querySelectorAll('.header-metadata-tnew-item');
+
+        let listeners = {};
+        let scrobbles = {};
+
+        metadata.forEach((item, index) => {
+            let text = item.querySelector('.header-metadata-tnew-title').textContent.trim();
+            let value = item.querySelector('.header-metadata-tnew-display abbr');
+
+            if (index == 0) {
+                listeners.text = text;
+                listeners.value = clean_number(value.getAttribute('title'));
+                listeners.abbr = value.textContent.trim();
+            } else {
+                scrobbles.text = text;
+                scrobbles.value = clean_number(value.getAttribute('title'));
+                scrobbles.abbr = value.textContent.trim();
+            }
+        });
+
+
+        // get panel
+        let col_sidebar = document.body.querySelector('.col-sidebar:not(.track-overview-video-column)');
+
+        let panel = col_sidebar.querySelector('section.section-with-separator');
+
+        if (panel == null) {
+            panel = document.createElement('section');
+            panel.classList.add('section-with-separator');
+
+            col_sidebar.insertBefore(panel, col_sidebar.firstElementChild);
+        }
+
+        panel.classList.add('listen-panel');
+
+
+        let row = document.createElement('div');
+        row.classList.add('listener-row');
+        row.innerHTML = (`
+            <div class="listener-side">
+                <h3>${listeners.text}</h3>
+                <p>${listeners.abbr}</p>
+            </div>
+            <div class="scrobble-side">
+                <h3>${scrobbles.text}</h3>
+                <p>${scrobbles.abbr}</p>
+            </div>
+        `);
+
+        panel.insertBefore(row, panel.firstElementChild);
     }
 })();
