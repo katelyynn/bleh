@@ -8610,6 +8610,9 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
         let buttons = interact_container.querySelectorAll('button');
         buttons.forEach((button) => {
             button.classList.add('btn', 'view-item', 'interact-item');
+
+            if (button.classList[0] == 'header-new-more-button')
+                interact_container.removeChild(button.parentElement);
         });
         let links = interact_container.querySelectorAll('a:not(.dropdown-menu-clickable-item)');
         links.forEach((button) => {
