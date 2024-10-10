@@ -631,6 +631,7 @@ body {
     --icon-16-new-years: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtcGFydHktcG9wcGVyIj48cGF0aCBkPSJNNS44IDExLjMgMiAyMmwxMC43LTMuNzkiLz48cGF0aCBkPSJNNCAzaC4wMSIvPjxwYXRoIGQ9Ik0yMiA4aC4wMSIvPjxwYXRoIGQ9Ik0xNSAyaC4wMSIvPjxwYXRoIGQ9Ik0yMiAyMGguMDEiLz48cGF0aCBkPSJtMjIgMi0yLjI0Ljc1YTIuOSAyLjkgMCAwIDAtMS45NiAzLjEyYy4xLjg2LS41NyAxLjYzLTEuNDUgMS42M2gtLjM4Yy0uODYgMC0xLjYuNi0xLjc2IDEuNDRMMTQgMTAiLz48cGF0aCBkPSJtMjIgMTMtLjgyLS4zM2MtLjg2LS4zNC0xLjgyLjItMS45OCAxLjExYy0uMTEuNy0uNzIgMS4yMi0xLjQzIDEuMjJIMTciLz48cGF0aCBkPSJtMTEgMiAuMzMuODJjLjM0Ljg2LS4yIDEuODItMS4xMSAxLjk4QzkuNTIgNC45IDkgNS41MiA5IDYuMjNWNyIvPjxwYXRoIGQ9Ik0xMSAxM2MxLjkzIDEuOTMgMi44MyA0LjE3IDIgNS0uODMuODMtMy4wNy0uMDctNS0yLTEuOTMtMS45My0yLjgzLTQuMTctMi01IC44My0uODMgMy4wNy4wNyA1IDJaIi8+PC9zdmc+');
     --icon-16-egg: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtZWdnIj48cGF0aCBkPSJNMTIgMjJjNi4yMy0uMDUgNy44Ny01LjU3IDcuNS0xMC0uMzYtNC4zNC0zLjk1LTkuOTYtNy41LTEwLTMuNTUuMDQtNy4xNCA1LjY2LTcuNSAxMC0uMzcgNC40MyAxLjI3IDkuOTUgNy41IDEweiIvPjwvc3ZnPg==');
     --icon-16-motion: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtbGF5ZXJzLTIiPjxwYXRoIGQ9Im0xNi4wMiAxMiA1LjQ4IDMuMTNhMSAxIDAgMCAxIDAgMS43NEwxMyAyMS43NGEyIDIgMCAwIDEtMiAwbC04LjUtNC44N2ExIDEgMCAwIDEgMC0xLjc0TDcuOTggMTIiLz48cGF0aCBkPSJNMTMgMTMuNzRhMiAyIDAgMCAxLTIgMEwyLjUgOC44N2ExIDEgMCAwIDEgMC0xLjc0TDExIDIuMjZhMiAyIDAgMCAxIDIgMGw4LjUgNC44N2ExIDEgMCAwIDEgMCAxLjc0WiIvPjwvc3ZnPg==');
+    --icon-16-profile-shortcut: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtbGluayI+PHBhdGggZD0iTTEwIDEzYTUgNSAwIDAgMCA3LjU0LjU0bDMtM2E1IDUgMCAwIDAtNy4wNy03LjA3bC0xLjcyIDEuNzEiLz48cGF0aCBkPSJNMTQgMTFhNSA1IDAgMCAwLTcuNTQtLjU0bC0zIDNhNSA1IDAgMCAwIDcuMDcgNy4wN2wxLjcxLTEuNzEiLz48L3N2Zz4=');
 
     --icon-20-check: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImhzbCgyNTUsMjAlLDkwJSkiIHN0cm9rZS13aWR0aD0iMi4yNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1jaGVjayI+PHBhdGggZD0iTTIwIDYgOSAxN2wtNS01Ii8+PC9zdmc+');
     --icon-20-plus: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImhzbCgyNTUsMjAlLDkwJSkiIHN0cm9rZS13aWR0aD0iMi4yNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1wbHVzIj48cGF0aCBkPSJNNSAxMmgxNCIvPjxwYXRoIGQ9Ik0xMiA1djE0Ii8+PC9zdmc+');
@@ -1507,6 +1508,21 @@ last.fm changes as of 2024-05-20 */
 .col-main, .col-sidebar {
     padding: unset;
     float: unset !important;
+
+    &.col-sidebar:not(.track-overview-video-column) {
+        display: flex;
+        flex-direction: column;
+        gap: var(--card-gap);
+
+        & > div,
+        & > section {
+            margin-top: unset;
+        }
+    }
+
+    form {
+        order: 10;
+    }
 }
 .bleh--panel-main,
 .col-main,
@@ -6224,7 +6240,7 @@ button,
 /*     BUTTON HAS ICON     */
 .btn.back,
 .btn-post-shout,
-.view-item:not(.listen-item, .profile-top-item--taste, .interact-item),
+.view-item:not(.listen-item, .profile-top-item--taste, .interact-item, .profile-top-item--shortcut),
 .btn--has-icon-left,
 .stationlink,
 .dropdown-menu-clickable-item, .auth-dropdown-menu-item,
@@ -6946,6 +6962,10 @@ very, very, very dated - who looks up a song on ebay? */
     --bg: transparent !important;
     --bg-hov: transparent !important;
     --bg-atv: transparent !important;
+
+    &.bleh--shortcut-menu-item {
+        --mask: var(--icon-16-profile-shortcut);
+    }
 }
 .auth-dropdown-menu {
     /*overflow: hidden;*/
@@ -7729,6 +7749,10 @@ body:is(.namespace--user_library_music_artist_overview, .namespace--user_library
     padding-top: calc(var(--card-padding) + var(--card-gap));
     --card-specific-background: hsla(var(--b5), 50%);
     --card-specific-border: 1px solid hsla(var(--b4), 60%);
+
+    &.bleh--profile-note-panel {
+        margin-top: calc((-1 * var(--card-gap)) - var(--card-padding)) !important;
+    }
 }
 
 .library-sort {
@@ -15493,6 +15517,7 @@ button.bleh--gallery-bookmark-image-btn {
         width: 32px;*/
 
         width: fit-content;
+        min-width: 40px !important;
         height: 32px;
 
         .view-item-avatar {
@@ -15574,6 +15599,13 @@ button.bleh--gallery-bookmark-image-btn {
             &.profile-top-item--loved {
                 --mask: var(--icon-16-heart);
             }
+            &.profile-top-item--shortcut {
+                --mask: var(--icon-16-profile-shortcut);
+
+                &[data-is-shortcut="false"] {
+                    --mask: var(--icon-16-add);
+                }
+            }
 
             &.profile-top-item--taste {
                 --show-icon: none;
@@ -15600,10 +15632,6 @@ button.bleh--gallery-bookmark-image-btn {
         }
 
         &.interact-item {
-            &:not(.header-new-playlink) {
-                width: 40px;
-            }
-
             [data-toggle-button-current-state="loved"] &,
             [data-toggle-button-current-state="bookmarked"] &
             {

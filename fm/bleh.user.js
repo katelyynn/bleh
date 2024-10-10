@@ -108,6 +108,12 @@ const trans = {
 
                 replace: '• scrobbling since '
             },
+            follow: 'Follow',
+            following: 'Following',
+            shortcut: {
+                add: 'Add as shortcut',
+                remove: 'Your profiles are linked!'
+            },
             scrobbles: 'Scrobbles',
             artists: 'Artists',
             loved: 'Loved tracks',
@@ -3455,6 +3461,14 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                 percent: taste_percentage
             });
 
+            // shortcut
+            create_profile_top_item(profile_header, {
+                name: profile_name,
+                type: 'shortcut',
+                link: `_set_profile_as_shortcut(this, '${profile_name}')`,
+                action: 'button'
+            });
+
             let listen_divider = document.createElement('div');
             listen_divider.classList.add('listen-divider');
 
@@ -3483,13 +3497,18 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
         base_header.appendChild(profile_header);
     }
 
-    function create_profile_top_item(parent, {name, link, text='', type, taste='', artists=[], avi='', percent=''}) {
+    function create_profile_top_item(parent, {name, link, text='', type, taste='', artists=[], avi='', percent='', action=''}) {
         console.info('bleh - creating profile top item', name, link, text);
 
-        let listen_item = document.createElement('a');
+        let listen_item = document.createElement((action != 'button') ? 'a' : 'button');
         listen_item.classList.add('btn', 'profile-top-item', `profile-top-item--${type}`, 'view-item');
-        listen_item.setAttribute('href', link);
-        listen_item.setAttribute('target', '_blank');
+
+        if (action != 'button') {
+            listen_item.setAttribute('href', link);
+            listen_item.setAttribute('target', '_blank');
+        } else {
+            listen_item.setAttribute('onclick', link);
+        }
 
         if (type != 'taste') {
             text = text.toLocaleString(lang);
@@ -3510,6 +3529,23 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
         }
 
         parent.appendChild(listen_item);
+
+        if (type == 'shortcut') {
+            if (name == settings.profile_shortcut) {
+                listen_item.setAttribute('data-is-shortcut', 'true');
+                listen_item.removeAttribute('onclick');
+                tippy(listen_item, {
+                    content: trans[lang].profile.shortcut.remove
+                });
+            } else {
+                listen_item.setAttribute('data-is-shortcut', 'false');
+                tippy(listen_item, {
+                    content: trans[lang].profile.shortcut.add
+                });
+            }
+
+            return;
+        }
 
         tippy(listen_item, {
             content: trans[lang].profile[type]
@@ -8351,6 +8387,27 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
 
 
 
+
+    unsafeWindow._set_profile_as_shortcut = function(button, profile_name) {
+        let menu_item = document.getElementById('profile_shortcut');
+
+        let avatar_src = document.body.querySelector('.header-avatar-inner-wrap img').getAttribute('src');
+        localStorage.setItem('bleh_profile_shortcut_avi', avatar_src);
+        deliver_notif(trans[lang].settings.music.profile_shortcut.saved);
+
+        menu_item.setAttribute('data-profile-shortcut', profile_name);
+        menu_item.setAttribute('href', `${root}user/${profile_name}`);
+        menu_item.textContent = profile_name;
+
+        // show on button
+        button.setAttribute('data-is-shortcut', 'true');
+        button.removeAttribute('onclick');
+        button._tippy.setContent(trans[lang].profile.shortcut.remove);
+
+        // save to settings
+        settings.profile_shortcut = profile_name;
+        localStorage.setItem('bleh', JSON.stringify(settings));
+    }
 
     unsafeWindow._save_profile_shortcut = function() {
         let profile_name = document.getElementById('text-profile_shortcut').value;
