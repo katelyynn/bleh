@@ -2080,7 +2080,6 @@ span.header-new-gallery-inner a,
 
 .col-sm-8:has(.catalogue-tags) {
     padding: unset !important;
-    margin-top: var(--card-gap);
 }
 
 
@@ -9253,6 +9252,10 @@ text[style^="color: rgb(0, 0, 0)"] {
     font-size: var(--font-size);
     line-height: var(--line-height);
     margin: unset;
+
+    &.artist-similar-artists-sidebar-item-name {
+        margin-top: 6px;
+    }
 }
 .big-artist-list-title,
 .playlisting-playlists-item-name,
