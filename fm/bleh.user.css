@@ -16294,4 +16294,12 @@ h4 {
         display: none !important;
     }
 }
+
+
+
+
+.lastfm-bulk-edit-list {
+    display: flex;
+    flex-direction: column;
+}
 }
