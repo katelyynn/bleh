@@ -8759,6 +8759,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
 
         let listeners = {};
         let scrobbles = {};
+        let metascore = {};
 
         metadata.forEach((item, index) => {
             let text = item.querySelector('.header-metadata-tnew-title').textContent.trim();
@@ -8768,10 +8769,18 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                 listeners.text = text;
                 listeners.value = clean_number(value.getAttribute('title'));
                 listeners.abbr = value.textContent.trim();
-            } else {
+            } else if (index == 1) {
                 scrobbles.text = text;
                 scrobbles.value = clean_number(value.getAttribute('title'));
                 scrobbles.abbr = value.textContent.trim();
+            } else if (index == 2) {
+                let link = item.querySelector('a');
+                if (link == null)
+                    return;
+
+                metascore.text = text;
+                metascore.abbr = value.textContent.trim();
+                metascore.link = link.getAttribute('href');
             }
         });
 
@@ -8802,6 +8811,12 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                 <h3>${scrobbles.text}</h3>
                 <p>${scrobbles.abbr}</p>
             </div>
+            ${(metascore.text != undefined) ? (`
+            <div class="metascore-side">
+                <h3>${metascore.text}</h3>
+                <p><a href="${metascore.link}" target="_blank">${metascore.abbr}</a></p>
+            </div>
+            `) : ''}
         `);
 
         panel.insertBefore(row, panel.firstElementChild);
