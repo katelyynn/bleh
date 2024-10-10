@@ -631,7 +631,8 @@ body {
     --icon-16-new-years: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtcGFydHktcG9wcGVyIj48cGF0aCBkPSJNNS44IDExLjMgMiAyMmwxMC43LTMuNzkiLz48cGF0aCBkPSJNNCAzaC4wMSIvPjxwYXRoIGQ9Ik0yMiA4aC4wMSIvPjxwYXRoIGQ9Ik0xNSAyaC4wMSIvPjxwYXRoIGQ9Ik0yMiAyMGguMDEiLz48cGF0aCBkPSJtMjIgMi0yLjI0Ljc1YTIuOSAyLjkgMCAwIDAtMS45NiAzLjEyYy4xLjg2LS41NyAxLjYzLTEuNDUgMS42M2gtLjM4Yy0uODYgMC0xLjYuNi0xLjc2IDEuNDRMMTQgMTAiLz48cGF0aCBkPSJtMjIgMTMtLjgyLS4zM2MtLjg2LS4zNC0xLjgyLjItMS45OCAxLjExYy0uMTEuNy0uNzIgMS4yMi0xLjQzIDEuMjJIMTciLz48cGF0aCBkPSJtMTEgMiAuMzMuODJjLjM0Ljg2LS4yIDEuODItMS4xMSAxLjk4QzkuNTIgNC45IDkgNS41MiA5IDYuMjNWNyIvPjxwYXRoIGQ9Ik0xMSAxM2MxLjkzIDEuOTMgMi44MyA0LjE3IDIgNS0uODMuODMtMy4wNy0uMDctNS0yLTEuOTMtMS45My0yLjgzLTQuMTctMi01IC44My0uODMgMy4wNy4wNyA1IDJaIi8+PC9zdmc+');
     --icon-16-egg: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtZWdnIj48cGF0aCBkPSJNMTIgMjJjNi4yMy0uMDUgNy44Ny01LjU3IDcuNS0xMC0uMzYtNC4zNC0zLjk1LTkuOTYtNy41LTEwLTMuNTUuMDQtNy4xNCA1LjY2LTcuNSAxMC0uMzcgNC40MyAxLjI3IDkuOTUgNy41IDEweiIvPjwvc3ZnPg==');
     --icon-16-motion: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtbGF5ZXJzLTIiPjxwYXRoIGQ9Im0xNi4wMiAxMiA1LjQ4IDMuMTNhMSAxIDAgMCAxIDAgMS43NEwxMyAyMS43NGEyIDIgMCAwIDEtMiAwbC04LjUtNC44N2ExIDEgMCAwIDEgMC0xLjc0TDcuOTggMTIiLz48cGF0aCBkPSJNMTMgMTMuNzRhMiAyIDAgMCAxLTIgMEwyLjUgOC44N2ExIDEgMCAwIDEgMC0xLjc0TDExIDIuMjZhMiAyIDAgMCAxIDIgMGw4LjUgNC44N2ExIDEgMCAwIDEgMCAxLjc0WiIvPjwvc3ZnPg==');
-    --icon-16-profile-shortcut: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtbGluayI+PHBhdGggZD0iTTEwIDEzYTUgNSAwIDAgMCA3LjU0LjU0bDMtM2E1IDUgMCAwIDAtNy4wNy03LjA3bC0xLjcyIDEuNzEiLz48cGF0aCBkPSJNMTQgMTFhNSA1IDAgMCAwLTcuNTQtLjU0bC0zIDNhNSA1IDAgMCAwIDcuMDcgNy4wN2wxLjcxLTEuNzEiLz48L3N2Zz4=');
+    --icon-16-profile-shortcut: var(--icon-16-link);
+    --icon-16-unlink: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtdW5saW5rLTIiPjxwYXRoIGQ9Ik0xNSA3aDJhNSA1IDAgMCAxIDAgMTBoLTJtLTYgMEg3QTUgNSAwIDAgMSA3IDdoMiIvPjwvc3ZnPg==');
 
     --icon-20-check: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImhzbCgyNTUsMjAlLDkwJSkiIHN0cm9rZS13aWR0aD0iMi4yNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1jaGVjayI+PHBhdGggZD0iTTIwIDYgOSAxN2wtNS01Ii8+PC9zdmc+');
     --icon-20-plus: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImhzbCgyNTUsMjAlLDkwJSkiIHN0cm9rZS13aWR0aD0iMi4yNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1wbHVzIj48cGF0aCBkPSJNNSAxMmgxNCIvPjxwYXRoIGQ9Ik0xMiA1djE0Ii8+PC9zdmc+');
@@ -4057,22 +4058,6 @@ state is not active, which then falls back to primary button styling */
     border-radius: unset !important;
 }
 
-[data-toggle-button-current-state="unfollowed"] .header-follower-btn::before {
-    --mask: var(--icon-16-plus) !important;
-}
-[data-toggle-button-current-state="followed"] .header-follower-btn::before {
-    --mask: var(--icon-16-check) !important;
-}
-.header-follower-btn--denied {
-    --mask: var(--icon-16-block);
-    --col: hsl(var(--c3)) !important;
-    --left: 8px;
-}
-
-.header-inner-wrap:has(.header-info .user-follow) [data-toggle-button-current-state="followed"] .header-follower-btn:before {
-    --mask: var(--icon-16-heart-solid) !important;
-}
-
 .user-list-follower-btn:before {
     background-image: unset !important;
     background-color: currentColor !important;
@@ -6159,7 +6144,6 @@ button,
         .gallery-image-vote-up-on, .gallery-image-vote-down-on, .gallery-image-preferred-on,
         .inbox-delete-button:not([disabled]),
         .gallery-image-report--reported,
-        [data-toggle-button-current-state="followed"] .header-follower-btn,/* .header-inner-wrap:has(.header-info .user-follow) [data-toggle-button-current-state="followed"] .header-follower-btn,*/
         .attendance-btn--turn-off,
         .player-bar-btn--loved,
         .love-button--loved,
@@ -6240,7 +6224,7 @@ button,
 /*     BUTTON HAS ICON     */
 .btn.back,
 .btn-post-shout,
-.view-item:not(.listen-item, .profile-top-item--taste, .interact-item, .profile-top-item--shortcut),
+.view-item:not(.listen-item, .profile-top-item--taste, .interact-item, .profile-top-item--shortcut, .profile-top-item--follow, .profile-top-item--message),
 .btn--has-icon-left,
 .stationlink,
 .dropdown-menu-clickable-item, .auth-dropdown-menu-item,
@@ -15603,8 +15587,33 @@ button.bleh--gallery-bookmark-image-btn {
                 --mask: var(--icon-16-profile-shortcut);
 
                 &[data-is-shortcut="false"] {
-                    --mask: var(--icon-16-add);
+                    --mask: var(--icon-16-unlink);
                 }
+            }
+            &.profile-top-item--follow {
+                --mask: var(--icon-16-plus);
+                --font-size: 0 !important;
+
+                &[data-ignored="true"] {
+                    --mask: var(--icon-16-block);
+                    --col: hsl(var(--c3)) !important;
+                }
+
+                [data-toggle-button-current-state="followed"] & {
+                    --mask: var(--icon-16-check);
+                }
+
+                .header-inner-wrap:has(.header-info .user-follow) [data-toggle-button-current-state="followed"] & {
+                    --mask: var(--icon-16-heart-solid) !important;
+                }
+            }
+
+            [data-toggle-button-current-state="followed"] &,
+            &[data-is-shortcut="true"] {
+                --bg: hsla(var(--h3), 30%);
+                --bg-hov: hsla(var(--h3), 40%);
+                --bg-atv: hsla(var(--h3), 50%);
+                --col: hsl(var(--c1));
             }
 
             &.profile-top-item--taste {
@@ -15638,6 +15647,7 @@ button.bleh--gallery-bookmark-image-btn {
                 --bg: hsla(var(--h3), 30%);
                 --bg-hov: hsla(var(--h3), 40%);
                 --bg-atv: hsla(var(--h3), 50%);
+                --col: hsl(var(--c1));
             }
         }
     }

@@ -3241,7 +3241,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                 // is there a follow button?
                 let header_avatar = document.querySelector('.header--overview .header-avatar');
 
-                if (header_avatar != undefined) {
+                if (header_avatar != undefined && !settings.feature_flags.redesigned_profile_header) {
                     let header_follow_btn = header_avatar.querySelector('form');
 
                     if (header_follow_btn == undefined) {
@@ -3450,6 +3450,47 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
         profile_header.classList.add('profile-top-header', 'view-buttons');
 
         if (!is_own_profile) {
+            // follow
+            let follow_wrap = document.body.querySelector('.header-avatar .class > div');
+
+            if (follow_wrap != null) {
+                let follow_btn = follow_wrap.querySelector('button');
+                follow_btn.classList.add('btn', 'profile-top-item', 'profile-top-item--follow', 'view-item');
+                follow_btn.classList.remove('toggle-button', 'header-follower-btn');
+                profile_header.appendChild(follow_wrap);
+
+                tippy(follow_btn, {
+                    content: follow_btn.textContent
+                });
+
+                follow_btn.addEventListener('click', () => {
+                    window.setTimeout(() => {
+                        follow_btn._tippy.setContent(follow_btn.textContent);
+                    }, 50);
+                });
+            } else {
+                // ignore list
+                let follow_placeholder = document.createElement('button');
+                follow_placeholder.classList.add('btn', 'profile-top-item', 'profile-top-item--follow', 'view-item');
+                follow_placeholder.textContent = trans[lang].profile.cannot_follow_user;
+
+                follow_placeholder.setAttribute('data-ignored', 'true');
+
+                tippy(follow_placeholder, {
+                    content: trans[lang].profile.on_ignore_list
+                });
+
+                profile_header.appendChild(follow_placeholder);
+            }
+
+            // shortcut
+            create_profile_top_item(profile_header, {
+                name: profile_name,
+                type: 'shortcut',
+                link: `_set_profile_as_shortcut(this, '${profile_name}')`,
+                action: 'button'
+            });
+
             // taste
             create_profile_top_item(profile_header, {
                 name: profile_name,
@@ -3459,14 +3500,6 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                 artists: taste_artists,
                 avi: profile_avi,
                 percent: taste_percentage
-            });
-
-            // shortcut
-            create_profile_top_item(profile_header, {
-                name: profile_name,
-                type: 'shortcut',
-                link: `_set_profile_as_shortcut(this, '${profile_name}')`,
-                action: 'button'
             });
 
             let listen_divider = document.createElement('div');
