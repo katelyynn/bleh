@@ -8476,6 +8476,9 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
 
 
         // create container
+        let top_container = document.createElement('div');
+        top_container.classList.add('top-container');
+
         let listen_container = document.createElement('div');
         listen_container.classList.add('listen-container', 'view-buttons');
 
@@ -8562,7 +8565,8 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
 
 
         // append
-        col_main.insertBefore(listen_container, col_main.firstElementChild);
+        top_container.appendChild(listen_container);
+        col_main.insertBefore(top_container, col_main.firstElementChild);
 
 
         // other listeners
@@ -8590,6 +8594,30 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
             // create child for them
             create_listen_item(listen_container, other_listeners, header_type);
         }
+
+
+        // interactables on the right
+        let interact_container = document.createElement('div');
+        interact_container.classList.add('interact-container', 'view-buttons');
+
+
+        // temp probably
+        let header_actions = document.body.querySelector('.header-new-actions');
+
+        interact_container.innerHTML = header_actions.innerHTML;
+
+
+        let buttons = interact_container.querySelectorAll('button');
+        buttons.forEach((button) => {
+            button.classList.add('btn', 'view-item', 'interact-item');
+        });
+        let links = interact_container.querySelectorAll('a:not(.dropdown-menu-clickable-item)');
+        links.forEach((button) => {
+            button.classList.add('btn', 'view-item', 'interact-item');
+        });
+
+
+        top_container.appendChild(interact_container);
     }
 
     function create_listen_item(parent, {name, listens, link, avi, count=0}, header_type) {

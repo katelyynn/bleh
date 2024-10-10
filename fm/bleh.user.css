@@ -6145,8 +6145,6 @@ button,
         .gallery-image-report--reported,
         [data-toggle-button-current-state="followed"] .header-follower-btn,/* .header-inner-wrap:has(.header-info .user-follow) [data-toggle-button-current-state="followed"] .header-follower-btn,*/
         .attendance-btn--turn-off,
-        [data-toggle-button-current-state="loved"] .header-new-love-button,
-        [data-toggle-button-current-state="bookmarked"] .header-new-bookmark-button,
         .player-bar-btn--loved,
         .love-button--loved,
         #manage_data .btn-primary,
@@ -6226,7 +6224,7 @@ button,
 /*     BUTTON HAS ICON     */
 .btn.back,
 .btn-post-shout,
-.view-item:not(.listen-item, .profile-top-item--taste),
+.view-item:not(.listen-item, .profile-top-item--taste, .interact-item),
 .btn--has-icon-left,
 .stationlink,
 .dropdown-menu-clickable-item, .auth-dropdown-menu-item,
@@ -15494,6 +15492,9 @@ button.bleh--gallery-bookmark-image-btn {
         --left: 8px;
         width: 32px;*/
 
+        width: fit-content;
+        height: 32px;
+
         .view-item-avatar {
             width: 20px;
             height: 20px;
@@ -15597,6 +15598,20 @@ button.bleh--gallery-bookmark-image-btn {
                 margin-right: 6px;
             }
         }
+
+        &.interact-item {
+            &:not(.header-new-playlink) {
+                width: 40px;
+            }
+
+            [data-toggle-button-current-state="loved"] &,
+            [data-toggle-button-current-state="bookmarked"] &
+            {
+                --bg: hsla(var(--h3), 30%);
+                --bg-hov: hsla(var(--h3), 40%);
+                --bg-atv: hsla(var(--h3), 50%);
+            }
+        }
     }
 
     .listen-divider {
@@ -15606,11 +15621,19 @@ button.bleh--gallery-bookmark-image-btn {
         background: var(--card-border-base);
     }
 }
+.top-container {
+    display: flex;
+    justify-content: space-between;
+}
 .metadata-and-wiki-row {
     --only-card-gap: 0;
 }
 [data-ff--redesigned_profile_header="true"] body {
     --profile-header-avatar-size: 104px;
+}
+
+.header-new-actions {
+    display: none;
 }
 
 
