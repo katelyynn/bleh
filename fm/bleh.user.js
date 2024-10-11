@@ -1953,10 +1953,9 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
     function initia() {
         let performance_start = performance.now();
 
+        load_settings();
         append_style();
         lookup_lang();
-        load_settings();
-        //get_scrobbles(document.body);
         append_nav(document.body);
         patch_masthead(document.body);
         load_notifs();
@@ -2013,9 +2012,9 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
 
         // last.fm is a single page application
         const observer = new MutationObserver((mutations) => {
-            lookup_lang();
+            console.log('new bleh mutation');
             load_settings();
-            //get_scrobbles(node);
+            lookup_lang();
             append_nav(document.body);
             patch_masthead(document.body);
 
@@ -2056,7 +2055,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
 
                 patch_about_this_artist();
                 patch_obsession_view();
-                patch_wiki_editor()
+                patch_wiki_editor();
             }
         });
 
@@ -2070,11 +2069,11 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
     }
 
     function append_style() {
-        let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
         let cached_style = localStorage.getItem('bleh_cached_style') || '';
+        let body = document.body.classList;
 
         // style is not fetched in dev mode
-        if (settings.dev || document.body.classList.contains('namespace--user_listening-report_playback') || (document.body.classList.contains('labs-section') && !document.body.classList.contains('namespace--labs_overview')))
+        if (settings.dev || body.contains('namespace--user_listening-report_playback') || (body.contains('labs-section') && !body.contains('namespace--labs_overview')))
             return;
 
         if (cached_style == '') {
@@ -6795,11 +6794,13 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
             if (tracklist == null)
                 return;
 
-            console.log(tracklist);
+            console.log('tracklist found', tracklist);
 
             // used to ensure this hasnt been ran thru
             if (tracklist.querySelector('tbody > .chartlist-row:first-child > .kate-placeholder') != null)
                 return;
+
+            console.log('tracklist has not been run thru', tracklist);
 
             let tracks = tracklist.querySelectorAll('.chartlist-row:not(.chartlist__placeholder-row)');
 
@@ -7288,60 +7289,6 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
 
 
 
-
-
-
-
-
-
-
-    function get_scrobbles(element) {
-        try {
-            let item = element.querySelectorAll('.header-metadata-item')[0];
-            let link = element.querySelectorAll('.header-metadata-item p a')[0];
-
-            let value = clean_number(link.textContent);
-            item.setAttribute('data-scrobbles',value);
-            let percent = 0;
-
-            let colour = 0;
-            if (value <= 50_000) {
-                colour = 1;
-            } else if (value <= 75_000) {
-                colour = 2;
-            } else if (value <= 100_300) {
-                colour = 3;
-            } else if (value <= 125_000) {
-                colour = 4;
-            } else if (value <= 150_000) {
-                colour = 5;
-            } else if (value <= 175_000) {
-                colour = 6;
-            } else if (value <= 200_300) {
-                colour = 7;
-            } else if (value <= 225_000) {
-                colour = 8;
-            }
-
-            let milestone = 0;
-            if (value <= 100_300) {
-                percent = (value / 100_000) * 100;
-            } else if (value <= 200_300) {
-                value = value - 100_300;
-                percent = (value / 100_000) * 100;
-            } else if (value <= 300_300) {
-                value = value - 200_300;
-                percent = (value / 100_000) * 100;
-            } else if (value <= 400_300) {
-                value = value - 300_300;
-                percent = (value / 100_000) * 100;
-            }
-
-            item.setAttribute('data-scrobbles-percent',percent);
-            item.setAttribute('data-scrobbles-milestone',colour);
-            item.style.setProperty('--percent',`${Math.round(percent)}%`);
-        } catch(e) {console.error('bwaaaaaaaa',e)}
-    }
 
     unsafeWindow._force_refresh_theme = function() {
         localStorage.removeItem('bleh_cached_style');
