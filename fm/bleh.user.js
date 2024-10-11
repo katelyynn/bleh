@@ -110,6 +110,7 @@ const trans = {
             },
             follow: 'Follow',
             following: 'Following',
+            edit: 'Edit profile',
             shortcut: {
                 add: 'Add as shortcut',
                 remove: 'Your profiles are linked!'
@@ -3251,6 +3252,10 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
         if (!profile_header.hasAttribute('data-kate-processed')) {
             profile_header.setAttribute('data-kate-processed', 'true');
 
+            let adaptive_skin = document.body.querySelector('.adaptive-skin-container');
+            let content_top = adaptive_skin.querySelector('.content-top');
+            adaptive_skin.removeChild(content_top);
+
             if (settings.feature_flags.redesigned_profile_header)
                 redesign_profile_header(profile_name, is_own_profile);
 
@@ -3516,12 +3521,19 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                 link: `_set_profile_as_shortcut(this, '${profile_name}')`,
                 action: 'button'
             });
-
-            let listen_divider = document.createElement('div');
-            listen_divider.classList.add('listen-divider');
-
-            profile_header.appendChild(listen_divider);
+        } else {
+            // edit
+            create_profile_top_item(profile_header, {
+                name: profile_name,
+                type: 'edit',
+                link: `${root}settings`
+            });
         }
+
+        let listen_divider = document.createElement('div');
+        listen_divider.classList.add('listen-divider');
+
+        profile_header.appendChild(listen_divider);
 
         create_profile_top_item(profile_header, {
             name: profile_name,
@@ -8713,6 +8725,20 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
         });
 
 
+        // obsession
+        let obsession_form = header_actions.querySelector('form[action$="obsessions"]');
+        if (obsession_form != null) {
+            let obsession_btn = obsession_form.querySelector('button');
+            obsession_btn.classList = 'btn view-item interact-item obsession-btn';
+
+            tippy(obsession_btn, {
+                content: obsession_btn.textContent
+            });
+
+            interact_container.appendChild(obsession_form);
+        }
+
+
         // search similar!
         let search_btn = document.createElement('a');
         search_btn.classList.add('btn', 'view-item', 'interact-item', 'search-similar-btn');
@@ -8832,11 +8858,11 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
         let row = document.createElement('div');
         row.classList.add('listener-row');
         row.innerHTML = (`
-            <div class="listener-side">
+            <div class="listener-side" id="listeners">
                 <h3>${listeners.text}</h3>
                 <p>${listeners.abbr}</p>
             </div>
-            <div class="scrobble-side">
+            <div class="scrobble-side" id="scrobbles">
                 <h3>${scrobbles.text}</h3>
                 <p>${scrobbles.abbr}</p>
             </div>
@@ -8849,6 +8875,13 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
         `);
 
         panel.insertBefore(row, panel.firstElementChild);
+
+        tippy(document.getElementById('listeners'), {
+            content: listeners.value.toLocaleString(lang)
+        });
+        tippy(document.getElementById('scrobbles'), {
+            content: scrobbles.value.toLocaleString(lang)
+        });
 
 
         // is there album artwork?
@@ -8869,7 +8902,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
             new_upper.setAttribute('data-page-type', header_type);
             new_upper.innerHTML = upper.innerHTML;
 
-            let col_main = document.body.querySelector('.col-main:not(.upper-overview, :first-child)');
+            let col_main = document.body.querySelector('.col-main:not(.upper-overview-to-hide)');
 
             col_main.insertBefore(new_upper, col_main.firstElementChild);
         }

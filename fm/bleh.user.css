@@ -1302,12 +1302,9 @@ last.fm changes as of 2024-05-20 */
 /*     REMOVE ADS     */
 .subscribe-cta,
 .profile-cards-container, .profile-cards-container + .content-top-lower,
-.lastfm-ad,
-#adSkinLeft, #adSkinRight, .adaptive-skin-wrapper:has(#adSkinLeft),
 /* don't want to see ads? upgrade now */ .mpu-subscription-upsell,
 /* this isn't an ad but it fits here */ .scrobble-stats-info-toggle, #explain-scrobblingdesktop + h4,
-/* neither is this but */ .share-desktop,
-.full-bleed-ad-container, .open-ad-container-desktop
+/* neither is this but */ .share-desktop
 {
     display: none !important;
 }
@@ -1509,6 +1506,7 @@ last.fm changes as of 2024-05-20 */
 .col-main, .col-sidebar {
     padding: unset;
     float: unset !important;
+    margin-top: var(--card-gap) !important;
 
     &.col-sidebar:not(.track-overview-video-column) {
         display: flex;
@@ -1521,10 +1519,15 @@ last.fm changes as of 2024-05-20 */
         }
     }
 
-    form {
+    & > :first-child {
+        margin-top: 0;
+    }
+
+    & > form {
         order: 10;
     }
 }
+
 .bleh--panel-main,
 .col-main,
 /* katie doesnt have any scrobbles yet */ .profile-mobile-featured-track + .no-data-message
@@ -1631,7 +1634,7 @@ body[class*="namespace--user_library_"] .col-sidebar, .library-header,
     padding-top: var(--card-gap) !important;
 }
 .content-top-header,
-.header-new--artist + .container > .row:not(.buffer-4):has(:nth-child(2)) > .col-main:nth-child(3), .container > .row:not(.buffer-4):has(:nth-child(2)) > .col-sidebar:nth-child(2), .artist-similar-sidebar,
+.artist-similar-sidebar,
 /* gallery */ .gallery-section
 {
     margin-top: var(--force-margin-top, unset) !important;
@@ -1651,6 +1654,7 @@ body[class*="namespace--user_library_"] .col-sidebar, .library-header,
     margin-top: var(--card-gap) !important;
 }
 
+.content-top + .page-content,
 /* no playlists */ .namespace--user_playlists_playlists .page-content,
 .page-content:has(.playlisting-playlists, .gallery-section, .obsession-search),
 /* obsessions */ .namespace--user_obsessions_overview .container.page-content
@@ -1713,6 +1717,7 @@ body[class*="namespace--user_library_"] .col-sidebar, .library-header,
     /* same height as the above one with button */
     min-height: 123px;
 }
+.page-content:has(> .section .upper-overview-to-hide),
 .upper-overview-to-hide,
 .col-sidebar.masonry-right {
     display: none !important;
@@ -1720,37 +1725,11 @@ body[class*="namespace--user_library_"] .col-sidebar, .library-header,
 
 
 .top-overview-panel {
-    &[data-page-type="album"] {
-        /* remove card-gap from container */
-        margin-top: calc(-1 * var(--card-gap));
-    }
-
     .masonry-left {
         float: unset;
     }
 }
 
-
-.namespace--music_album_overview .col-sidebar.hidden-xs {
-    position: relative;
-    top: -32px;
-}
-
-.page-content > .section .row .col-main {
-    margin-top: unset;
-    /* for the margin-top to work (see below), we need a set height for the album main panel */
-    max-height: 214px;
-    height: 214px;
-}
-/* album pages without pro, first section */ .page-content > .section .row .masonry-right {
-    order: 2;
-    height: calc(274px - 8px);
-    margin-top: -214px !important;
-    padding: unset !important;
-}
-/* album pages without pro, second section */ .page-content:has(> .section) + .full-bleed-ad-container + .page-content .row {
-    margin-top: calc(-52px - var(--card-gap)) !important;
-}
 .page-content:has(> .section) + .full-bleed-ad-container + .page-content {
     padding-top: unset !important;
 }
@@ -1763,10 +1742,6 @@ body[class*="namespace--user_library_"] .col-sidebar, .library-header,
 .header-new--artist ~ .full-bleed-ad-container + .page-content {
     margin-top: calc(-1 * var(--card-gap));
     padding-top: unset !important;
-}
-.header-new--artist ~ .full-bleed-ad-container + .page-content #top-tracks {
-    margin-top: 0 !important;
-    /* can't use only-card-gap due to buffer-standard inside this card */
 }
 
 
@@ -1966,49 +1941,6 @@ span.header-new-gallery-inner a,
 .video-preview-replace {
     margin-top: unset;
 }
-.video-preview-replace a {
-    position: absolute;
-    top: 1px;
-    right: 1px;
-    bottom: 1px;
-    width: 50%;
-    font-size: 0;
-    background-image: var(--icon-edit);
-    background-repeat: no-repeat;
-    background-position: center;
-    border-radius: 5px;
-    background-color: hsla(var(--b7), 40%);
-    opacity: 0;
-    transform: scale(0.9);
-    transition-property: opacity, transform;
-    transition-duration: var(--trans);
-    transition-timing-function: var(--trans-function);
-}
-.track-overview-video-column .video-preview-playlink .image-overlay-playlink-link {
-    width: 50%;
-    background-image: var(--icon-play);
-    background-repeat: no-repeat;
-    background-position: center;
-    border-radius: 5px;
-    background-color: hsla(var(--b7), 40%);
-    opacity: 0;
-    transform: scale(0.9);
-    transition-property: opacity, transform;
-    transition-duration: var(--trans);
-    transition-timing-function: var(--trans-function);
-}
-.track-overview-video-column .video-preview-playlink .image-overlay-playlink-link:hover,
-.video-preview-replace a:hover
-{
-    opacity: 1;
-    transform: scale(1);
-    transition: none;
-}
-.track-overview-video-column .video-preview-playlink .image-overlay-playlink-link:before,
-.track-overview-video-column .video-preview-playlink .image-overlay-playlink-link:after
-{
-    display: none;
-}
 
 
 
@@ -2137,13 +2069,21 @@ spacing between is removed and aligned to tag icon */
 
 /*     SECONDARY NAV     */
 .page-content {
-    padding-top: calc(46px + (var(--card-gap) * 2)) !important;
+    padding-top: unset !important;
     padding-bottom: var(--card-gap) !important;
+
+    .adaptive-skin-wrapper + &,
+    header.header-new--subpage + &,
+    header.header-new--subpage + .full-bleed-ad-container + &
+    {
+        padding-top: calc(46px + (var(--card-gap))) !important;
+    }
 }
+.header-new:not(.header-new--artist) + .page-content,
 .page-content + .page-content {
     padding-top: unset !important;
 }
-.header-new:not(.header-new--artist) + .page-content, .content-top:has(.secondary-nav) + .page-content {
+.content-top:has(.secondary-nav) + .page-content {
     padding-top: var(--override-padding-top, var(--card-gap)) !important;
 }
 .header-new--artist + .page-content {
@@ -2153,7 +2093,6 @@ spacing between is removed and aligned to tag icon */
 
 /* subpage */
 .header-new--artist.header-new--subpage + .full-bleed-ad-container + .page-content {
-    padding-top: calc(36px + (var(--card-gap) * 2) + 10px) !important;
     margin-top: unset !important; /* ad fixes */
 }
 
@@ -2356,6 +2295,10 @@ elements, this is how we detect its missing */
     z-index: 2;
     right: 21px;
     --mask: var(--icon-16-obsession);
+
+    [data-ff--redesigned_profile_header="true"] & {
+        bottom: calc(-125px - 86px);
+    }
 }
 [action$="/obsessions/remove"] .profile-header-set-obsession {
     --mask: var(--icon-16-obsession-remove);
@@ -2367,7 +2310,7 @@ elements, this is how we detect its missing */
 
 /*     MESSAGE USER (takes place)     */
 .header-message-user {
-    top: calc(128px + 83px) !important; /* -129 to put top right */
+    top: calc((var(--profile-header-avatar-size) + 32px) + 83px) !important; /* -129 to put top right */
     z-index: 2;
     right: 21px !important;
     width: fit-content !important;
@@ -3554,13 +3497,6 @@ state is not active, which then falls back to primary button styling */
     --mask: var(--icon-16-heart-solid) !important;
 }
 
-.search-similar-btn {
-    position: relative;
-    --mask: var(--icon-16-search);
-    --font-size: 0;
-    width: 40px;
-}
-
 /*[data-toggle-button-current-state="bookmarked"] .header-new-bookmark-button:after,
 [data-toggle-button-current-state="loved"] .header-new-love-button:after {
     content: '';
@@ -4324,6 +4260,11 @@ state is not active, which then falls back to primary button styling */
 .metadata-and-wiki-row .catalogue-metadata .catalogue-metadata-heading, .factbox-heading {
     font-weight: var(--font-weight-medium);
     color: hsl(var(--c3));
+}
+
+/* empty lyrics container on pro pages */
+.catalogue-metadata-lyrics {
+    display: none !important;
 }
 
 
@@ -6121,6 +6062,14 @@ button,
     }
 
 
+    /* breaks bleh settings */
+    /*[data-bleh--theme="light"] & {
+        --bg: hsla(var(--b4), 70%);
+        --bg-hov: hsla(var(--b4), 50%);
+        --bg-atv: hsla(var(--b4), 30%);
+    }*/
+
+
     /*     LOADING     */
     &.btn--loading {
         background-image: unset;
@@ -6150,7 +6099,8 @@ button,
         .love-button--loved,
         #manage_data .btn-primary,
         .primary,
-        [data-bleh--image-is-bookmarked="true"]
+        [data-bleh--image-is-bookmarked="true"],
+        .profile-header-set-obsession
     ) {
         --bg: hsl(var(--h3)) !important;
         --bg-hov: hsla(var(--h3), 80%) !important;
@@ -6225,7 +6175,7 @@ button,
 /*     BUTTON HAS ICON     */
 .btn.back,
 .btn-post-shout,
-.view-item:not(.listen-item, .profile-top-item--taste, .interact-item, .profile-top-item--shortcut, .profile-top-item--follow, .profile-top-item--message),
+.view-item:not(.listen-item, .profile-top-item--taste, .interact-item, .profile-top-item--shortcut, .profile-top-item--follow, .profile-top-item--message, .profile-top-item--edit),
 .btn--has-icon-left,
 .stationlink,
 .dropdown-menu-clickable-item, .auth-dropdown-menu-item,
@@ -6385,7 +6335,6 @@ button,
 .arrow-divider:before,
 .view-item:not(.profile-top-item--taste):before,
 .loading-data-text:before,
-.search-similar-btn:before,
 .btns .btn:before,
 .btn.reset:before,
 .setting-item .icon:before, .action .icon:before,
@@ -8554,6 +8503,7 @@ text[style^="color: rgb(255, 172, 172)"] {
                 cursor: default;
 
                 display: flex;
+                justify-content: center;
                 align-items: center;
                 gap: 2px;
 
@@ -8573,6 +8523,7 @@ text[style^="color: rgb(255, 172, 172)"] {
                 font-weight: var(--font-weight-bold);
                 font-size: 24px;
                 line-height: 28px;
+                cursor: default;
 
                 display: flex;
                 justify-content: center;
@@ -15270,7 +15221,6 @@ button.bleh--gallery-bookmark-image-btn {
 
 
 .bleh--nav-wrap {
-    margin-top: 76px;
     display: flex;
     justify-content: center;
 
@@ -15284,7 +15234,7 @@ button.bleh--gallery-bookmark-image-btn {
 
     & + .page-content + .page-content,
     & + .page-content {
-        padding-top: var(--card-gap) !important;
+        padding-top: unset !important;
     }
 }
 
@@ -15664,6 +15614,9 @@ button.bleh--gallery-bookmark-image-btn {
                     --mask: var(--icon-16-heart-solid) !important;
                 }
             }
+            &.profile-top-item--edit {
+                --mask: var(--icon-16-settings);
+            }
 
             [data-toggle-button-current-state="followed"] &,
             &[data-is-shortcut="true"] {
@@ -15705,6 +15658,15 @@ button.bleh--gallery-bookmark-image-btn {
                 --bg-hov: hsla(var(--h3), 40%);
                 --bg-atv: hsla(var(--h3), 50%);
                 --col: hsl(var(--c1));
+            }
+
+            &.search-similar-btn {
+                --mask: var(--icon-16-search);
+                --font-size: 0;
+            }
+            &.obsession-btn {
+                --mask: var(--icon-16-obsession);
+                --font-size: 0;
             }
         }
     }
