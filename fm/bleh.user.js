@@ -1339,7 +1339,8 @@ let song_title_corrections = {
         'Guts': 'GUTS'
     },
     'charli xcx': {
-        'talk talk featuring troye sivan': 'Talk talk featuring Troye Sivan'
+        'talk talk featuring troye sivan': 'Talk talk featuring Troye Sivan',
+        'guess featuring billie eilish': 'Guess featuring billie eilish'
     }
 };
 
