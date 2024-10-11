@@ -1628,10 +1628,11 @@ body[class*="namespace--user_library_"] .col-sidebar, .library-header,
         background-repeat: repeat-x;
         background-position: unset !important;
     }
-}
-.page-content:has(.no-events),
-:is(.namespace--user_library_overview, .namespace--user_library_artists, .namespace--user_library_albums, .namespace--user_library_tracks, .namespace--user_following, .namespace--user_followers, .namespace--user_loved, .namespace--user_neighbours, .namespace--user_tags_overview, .namespace--user_shoutbox_overview) .page-content {
-    padding-top: var(--card-gap) !important;
+
+    .navlist {
+        margin: unset !important;
+        width: 100%;
+    }
 }
 .content-top-header,
 .artist-similar-sidebar,
@@ -1660,11 +1661,6 @@ body[class*="namespace--user_library_"] .col-sidebar, .library-header,
 /* obsessions */ .namespace--user_obsessions_overview .container.page-content
 {
     padding-top: unset !important;
-}
-
-/* this aligns the gallery crumb header 15px under the tabs */
-.page-content:has(.subpage-breadcrumb [href*="/+images"]) {
-    padding-top: calc(46px + (var(--card-gap) * 2)) !important;
 }
 
 .subpage-breadcrumb + .subpage-title {
@@ -1833,7 +1829,7 @@ article, section, .buffer-standard, .buffer-standard:not(.col-sidebar) .buffer-s
 
 /* take up full space */
 .album-overview-cover-art, .album-artwork-upload-cta {
-    margin-top: calc(-102px - var(--card-gap)) !important;
+    margin-top: calc(-104px - var(--card-gap)) !important;
     overflow: hidden;
     z-index: 1;
 }
@@ -2072,22 +2068,21 @@ spacing between is removed and aligned to tag icon */
     padding-top: unset !important;
     padding-bottom: var(--card-gap) !important;
 
-    .adaptive-skin-wrapper + &,
+    .header--user.header--overview + .adaptive-skin-container > &,
     header.header-new--subpage + &,
     header.header-new--subpage + .full-bleed-ad-container + &
     {
         padding-top: calc(46px + (var(--card-gap))) !important;
     }
 }
-.header-new:not(.header-new--artist) + .page-content,
-.page-content + .page-content {
-    padding-top: unset !important;
+
+/* profile subpages with tabs eg. library */ .content-top-lower,
+/* gallery page breadcrumbs */ .content-top-lower-row,
+/* floating breadcrumbs */ .buffer-4 > .subpage-breadcrumb {
+    margin-top: var(--card-gap) !important;
 }
-.content-top:has(.secondary-nav) + .page-content {
-    padding-top: var(--override-padding-top, var(--card-gap)) !important;
-}
-.header-new--artist + .page-content {
-    padding-top: unset !important;
+/* gallery page breadcrumbs */ .content-top-lower-row {
+    margin-bottom: calc(-1 * var(--card-gap));
 }
 
 
@@ -2626,6 +2621,18 @@ header:not(:has(.header-featured-track)) .header-message-user {
         margin-top: -46px !important;
     }
 }
+
+
+.bleh--nav-wrap {
+    margin-top: var(--card-gap);
+
+    .header-new--subpage ~ & {
+        /* artist photo nav */
+        margin-top: calc(var(--card-gap) + 46px + var(--card-gap));
+    }
+}
+
+
 .user-dashboard-controls .secondary-nav {
     margin-top: unset !important;
 }
@@ -2647,7 +2654,8 @@ header:not(:has(.header-featured-track)) .header-message-user {
 .library-search {
     margin-top: unset !important;
     position: absolute;
-    top: calc(92px + var(--card-gap) + var(--card-padding)); /* 50px */
+    /*top: calc(92px + var(--card-gap) + var(--card-padding)); /* 50px */
+    top: 50px; /* revert to above once theres an easy way to detect searchbox presence */
     right: calc(var(--card-padding) + 1px);
     width: calc(var(--cards-sidebar-width) - ((var(--card-padding) + 1px) * 2));
     z-index: 100;
@@ -2778,7 +2786,7 @@ hr + .library-search-results-header {
 /* this aligns the content on sub pages to be 15px/card-gap below the tabs */
 .header.header--sub-page {
     /* this has to be !important due to classic-playbar - 2024-06-14 */
-    height: calc(81px + 49px + var(--card-gap)) !important;
+    height: calc(81px + 49px) !important;
 }
 /* this accounts for the tabs originally being next to the avatar */
 .header--user.header--overview .secondary-nav {
@@ -4381,22 +4389,10 @@ state is not active, which then falls back to primary button styling */
 
 /*     SCROBBLE PROGRESS     */
 .tab-container {
-    height: 32px;
-    border-radius: unset;
-    background: unset;
-    display: flex;
-    gap: 10px;
+    height: fit-content;
 }
 .tab-container .selector {
     display: none;
-}
-
-.tab-container button:not(.tab--selected) {
-    --bg: transparent !important;
-    --bg-hov: hsla(var(--b4), 40%) !important;
-    --bg-atv: hsla(var(--b4), 60%) !important;
-    --shadow: none !important;
-    --shadow-hov: none !important;
 }
 
 
@@ -4438,6 +4434,12 @@ h2:not(.count, .mask-multi-text, .mask-text, .sr-only, .js-gallery-heading, .top
 
     /*font-size: 24px !important;
     line-height: 30px !important;*/
+
+    &.subtle-header {
+        color: hsl(var(--c3));
+        margin: 0 0 var(--item-list-gap) 0 !important;
+        cursor: default;
+    }
 }
 .user-sidebar-header
 {
@@ -6100,7 +6102,7 @@ button,
         #manage_data .btn-primary,
         .primary,
         [data-bleh--image-is-bookmarked="true"],
-        .profile-header-set-obsession
+        .btn-primary.profile-header-set-obsession
     ) {
         --bg: hsl(var(--h3)) !important;
         --bg-hov: hsla(var(--h3), 80%) !important;
@@ -15443,6 +15445,7 @@ button.bleh--gallery-bookmark-image-btn {
     display: flex;
     justify-content: end;
 }
+.tab-container,
 .footer-timezone,
 #language-selector,
 .view-buttons {
@@ -15489,6 +15492,7 @@ button.bleh--gallery-bookmark-image-btn {
         }
     }
 
+    &.tab-container button:not(.tab--selected),
     .footer-language .mimic-link,
     .btn:not([aria-checked="true"]) {
         --bg: transparent;

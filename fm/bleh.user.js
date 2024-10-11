@@ -32,9 +32,14 @@ let version = {
             date: '2024-10-04'
         },
         redesigned_profile_header: {
-            default: false,
+            default: true,
             name: 'Redesigned profile header info',
             date: '2024-10-09'
+        },
+        show_wiki_label: {
+            default: false,
+            name: 'Show \'About\' label above wikis',
+            date: '2024-10-11'
         }
     }
 }
@@ -83,7 +88,8 @@ const trans = {
                 count_listens: '{c} listens',
                 loading_listens: 'listens',
                 other_listeners: '{c} others'
-            }
+            },
+            wiki: 'About'
         },
         statistics: {
             scrobbles: {
@@ -3254,9 +3260,12 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
 
             let adaptive_skin = document.body.querySelector('.adaptive-skin-container');
             let content_top = adaptive_skin.querySelector('.content-top');
-            adaptive_skin.removeChild(content_top);
 
-            if (settings.feature_flags.redesigned_profile_header)
+            // has navlist?
+            if (content_top.querySelector('.navlist') == null)
+                adaptive_skin.removeChild(content_top);
+
+            if (settings.feature_flags.redesigned_profile_header != false)
                 redesign_profile_header(profile_name, is_own_profile);
 
             patch_profile_obsession();
@@ -7098,7 +7107,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
 
         // create nav
         let bookmark_nav = document.createElement('div');
-        bookmark_nav.classList.add('bleh--nav-wrap');
+        bookmark_nav.classList.add('bleh--nav-wrap', 'bleh--nav-wrap--bookmarks');
         bookmark_nav.innerHTML = (`
             <nav class="navlist secondary-nav">
                 <ul class="navlist-items">
@@ -8908,6 +8917,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
             }
         }
 
+        let main_panel = document.body.querySelector('.col-main');
         if (header_type == 'album' || header_type == 'artist') {
             let upper = document.body.querySelector('.col-main');
             upper.classList.add('upper-overview-to-hide');
@@ -8920,6 +8930,9 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
             let col_main = document.body.querySelector('.col-main:not(.upper-overview-to-hide)');
 
             col_main.insertBefore(new_upper, col_main.firstElementChild);
+
+
+            main_panel = new_upper;
         }
 
 
@@ -8956,6 +8969,18 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                     content: replace.textContent
                 });
             }
+        }
+
+
+        // add info notes to things
+        if (settings.feature_flags.show_wiki_label) {
+            let wiki_col = main_panel.querySelector('.wiki-column');
+
+            let wiki_header = document.createElement('h3');
+            wiki_header.classList.add('text-18', 'subtle-header');
+            wiki_header.textContent = trans[lang].music.wiki;
+
+            wiki_col.insertBefore(wiki_header, wiki_col.firstElementChild);
         }
     }
 })();
