@@ -1833,7 +1833,7 @@ article, section, .buffer-standard, .buffer-standard:not(.col-sidebar) .buffer-s
 
 /* take up full space */
 .album-overview-cover-art, .album-artwork-upload-cta {
-    margin-top: -102px !important;
+    margin-top: calc(-102px - var(--card-gap)) !important;
     overflow: hidden;
     z-index: 1;
 }
@@ -6175,7 +6175,7 @@ button,
 /*     BUTTON HAS ICON     */
 .btn.back,
 .btn-post-shout,
-.view-item:not(.listen-item, .profile-top-item--taste, .interact-item, .profile-top-item--shortcut, .profile-top-item--follow, .profile-top-item--message, .profile-top-item--edit),
+.view-item:not(.video-item, .listen-item, .profile-top-item--taste, .interact-item, .profile-top-item--shortcut, .profile-top-item--follow, .profile-top-item--message, .profile-top-item--edit),
 .btn--has-icon-left,
 .stationlink,
 .dropdown-menu-clickable-item, .auth-dropdown-menu-item,
@@ -15671,6 +15671,17 @@ button.bleh--gallery-bookmark-image-btn {
         }
     }
 
+    .video-item {
+        --font-size: 0;
+
+        &.video-item--play {
+            --mask: var(--icon-16-play);
+        }
+        &.video-item--edit {
+            --mask: var(--icon-16-settings);
+        }
+    }
+
     .listen-divider {
         display: block;
         width: 1px;
@@ -15689,8 +15700,48 @@ button.bleh--gallery-bookmark-image-btn {
     --profile-header-avatar-size: 104px;
 }
 
+.video-preview-replace,
 .header-new-info-desktop {
     display: none;
+}
+
+.video-preview {
+    img {
+        transition-property: opacity;
+        transition-duration: var(--trans);
+        transition-timing-function: var(--trans-function);
+    }
+
+    &:hover {
+        img {
+            opacity: 0.4;
+            transition: none;
+        }
+
+        .video-overlay-container {
+            opacity: 1;
+            transition: none;
+        }
+    }
+}
+.video-overlay-container {
+    position: absolute;
+    inset: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    opacity: 0;
+
+    transition-property: opacity;
+    transition-duration: var(--trans);
+    transition-timing-function: var(--trans-function);
+
+    .view-buttons {
+        background-color: hsl(var(--b5)) !important;
+        box-shadow: var(--card-shadow);
+    }
 }
 
 

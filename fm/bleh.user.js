@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         bleh
 // @namespace    http://last.fm/
-// @version      2024.1008
+// @version      2024.1011
 // @description  bleh!!! ^-^
 // @author       kate
 // @match        https://www.last.fm/*
@@ -18,8 +18,8 @@
 // ==/UserScript==
 
 let version = {
-    build: '2024.1008',
-    sku: 'setup',
+    build: '2024.1011',
+    sku: 'falter',
     feature_flags: {
         bleh_settings_tabs: {
             default: false,
@@ -8920,6 +8920,42 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
             let col_main = document.body.querySelector('.col-main:not(.upper-overview-to-hide)');
 
             col_main.insertBefore(new_upper, col_main.firstElementChild);
+        }
+
+
+        // is there a video?
+        if (header_type == 'track') {
+            let video_col = document.body.querySelector('.track-overview-video-column.col-sidebar');
+            let video = video_col.querySelector('.video-preview');
+
+            console.info(video_col, video);
+
+            if (video != null) {
+                let container = document.createElement('div');
+                container.classList.add('video-overlay-container');
+
+                let view_buttons = document.createElement('div');
+                view_buttons.classList.add('view-buttons');
+
+                let playlink = video.querySelector('.video-preview-playlink a');
+                let replace = video_col.querySelector('.video-preview-replace a');
+
+                playlink.classList = 'btn view-item video-item video-item--play';
+                replace.classList = 'btn view-item video-item video-item--edit';
+
+                view_buttons.appendChild(playlink);
+                view_buttons.appendChild(replace);
+
+                container.appendChild(view_buttons);
+                video.appendChild(container);
+
+                tippy(playlink, {
+                    content: playlink.textContent
+                });
+                tippy(replace, {
+                    content: replace.textContent
+                });
+            }
         }
     }
 })();
