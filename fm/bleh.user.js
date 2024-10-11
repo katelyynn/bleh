@@ -5809,7 +5809,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
         if (page == 'themes') {
             refresh_all();
             show_theme_change_in_settings();
-        } else if (page == 'customise' || page == 'performance' || page == 'redirects' || page == 'corrections' || page == 'accessibility' || page == 'text' || page == 'seasonal') {
+        } else if (page == 'customise' || page == 'performance' || page == 'redirects' || page == 'corrections' || page == 'accessibility' || page == 'text' || page == 'seasonal' || page == 'music') {
             refresh_all();
         } else if (page == 'profiles') {
             init_profile_notes();
