@@ -2066,6 +2066,7 @@ spacing between is removed and aligned to tag icon */
     }
 }
 
+/* obsessions */ .section-controls,
 /* profile subpages with tabs eg. library */ .content-top-lower,
 /* gallery page breadcrumbs */ .content-top-lower-row,
 /* floating breadcrumbs */ .buffer-4 > .subpage-breadcrumb {

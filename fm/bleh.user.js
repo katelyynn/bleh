@@ -3260,8 +3260,8 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
             let adaptive_skin = document.body.querySelector('.adaptive-skin-container');
             let content_top = adaptive_skin.querySelector('.content-top');
 
-            // has navlist?
-            if (content_top.querySelector('.navlist') == null)
+            // has header?
+            if (content_top.querySelector('h1') == null)
                 adaptive_skin.removeChild(content_top);
 
             if (settings.feature_flags.redesigned_profile_header != false)
