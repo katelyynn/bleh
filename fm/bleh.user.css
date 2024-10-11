@@ -2076,6 +2076,7 @@ spacing between is removed and aligned to tag icon */
     }
 }
 
+/* playlists */ .section-controls-full-width,
 /* obsessions */ .section-controls,
 /* profile subpages with tabs eg. library */ .content-top-lower,
 /* gallery page breadcrumbs */ .content-top-lower-row,
