@@ -1623,6 +1623,10 @@ body[class*="namespace--user_library_"] .col-sidebar, .library-header,
         margin: unset !important;
         width: 100%;
     }
+
+    .section-controls {
+        margin-top: unset !important;
+    }
 }
 .content-top-header,
 .artist-similar-sidebar,
