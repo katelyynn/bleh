@@ -15608,17 +15608,18 @@ button.bleh--gallery-bookmark-image-btn {
                 }
             }
 
-            &[data-scrobble-milestone] {
+            &[data-bleh--scrobble-milestone] {
                 --bg: transparent;
                 --bg-hov: hsla(var(--h3), 10%);
                 --bg-atv: hsla(var(--h3), 20%);
                 --col: hsl(var(--l2-c));
-                text-shadow: 0 0 10px hsla(var(--h4), 60%);
+                text-shadow: 0 0 10px hsla(var(--h4), 90%);
 
                 [data-bleh--theme="light"] & {
                     --bg-hov: hsla(var(--h3), 20%);
                     --bg-atv: hsla(var(--h3), 40%);
-                    --col: hsl(var(--l4-c));
+                    --col: hsl(var(--l4-c));;
+                    text-shadow: 0 0 10px hsla(var(--h4), 60%);
                 }
             }
 

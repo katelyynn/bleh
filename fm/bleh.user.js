@@ -1304,7 +1304,15 @@ let song_title_corrections = {
         'Living Proof (That It Hurts)': 'living proof (that it hurts)',
         'Shoreditch (Bsun N Thr6x Remix)': 'shoreditch (bsun n thr6x remix)',
         'Que Onda': 'que onda',
-        'A Date w Karma (V1)': 'a date w karma (v1)'
+        'A Date w Karma (V1)': 'a date w karma (v1)',
+        //
+        'may it never falter': 'May It Never Falter',
+        'for god and country': 'For God and country',
+        'count it up': 'Count It Up',
+        'knock, draw, release': 'Knock, Draw, Release',
+        'everydog has its day': 'Everydog has its day',
+        'Nobodys fault / Accept my own': 'Nobodys Fault / Accept My Own',
+        'by birthright': 'By Birthright'
     },
     'juice wrld': {
         'Off the rip': 'Off the Rip',
@@ -8610,7 +8618,6 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                 let listens = 0;
 
                 let listen_item = document.getElementById(`listen-item--${shortcut_listens.name}`);
-                listen_item.setAttribute('data-listens', listens);
 
                 // sometimes this fails even thou they do have plays, this is just a last.fm bug
                 // i dont feel comfortable displaying 0 here as it may not be true
@@ -8618,8 +8625,10 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                 if (first_metadata_item != null)
                     listens = clean_number(first_metadata_item.textContent.trim());
 
+                listen_item.setAttribute('data-listens', listens);
+
                 listen_item.innerHTML = (`
-                    <img class="view-item-avatar" src="${shortcut_listens.avi}" alt="${shortcut_listens.name}">${trans[lang].music.listens.count_listens.replace('{c}', listens)}
+                    <img class="view-item-avatar" src="${shortcut_listens.avi}" alt="${shortcut_listens.name}">${trans[lang].music.listens.count_listens.replace('{c}', listens.toLocaleString(lang))}
                 `);
 
                 // colourful counts
