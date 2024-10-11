@@ -15579,7 +15579,7 @@ button.bleh--gallery-bookmark-image-btn {
 
         &.profile-top-item {
             &.profile-top-item--scrobbles {
-                --mask: var(--icon-16-library);
+                --mask: var(--icon-16-track);
             }
             &.profile-top-item--artists {
                 --mask: var(--icon-16-artist);
