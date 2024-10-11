@@ -7201,13 +7201,6 @@ very, very, very dated - who looks up a song on ebay? */
             transform-origin: top;
 
             z-index: 10000;
-
-            div:has(> .masthead &:not(.disclose-hide)) {
-                .adaptive-skin-container {
-                    opacity: 0.5;
-                    pointer-events: none;
-                }
-            }
         }
     }
 
