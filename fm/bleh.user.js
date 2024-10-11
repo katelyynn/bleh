@@ -3259,6 +3259,8 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
             if (settings.feature_flags.redesigned_profile_header)
                 redesign_profile_header(profile_name, is_own_profile);
 
+            patch_profile_obsession();
+
             // is this their profile?
             if (is_own_profile) {
                 // make avatar clickable
@@ -3416,6 +3418,19 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                 create_profile_note_panel(profile_name.textContent, true);
             }
         }
+    }
+
+    function patch_profile_obsession() {
+        let header_featured_track = document.body.querySelector('.featured-item-details');
+
+        let name_elem = header_featured_track.querySelector('.featured-item-name');
+        let artist_elem = header_featured_track.querySelector('.featured-item-artist');
+
+        let name = correct_item_by_artist(name_elem.textContent.trim(), artist_elem.textContent.trim());
+        let artist = correct_artist(artist_elem.textContent.trim());
+
+        name_elem.textContent = name;
+        artist_elem.textContent = artist;
     }
 
     function redesign_profile_header(profile_name, is_own_profile) {
