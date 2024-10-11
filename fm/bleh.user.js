@@ -3282,7 +3282,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                 // is there a follow button?
                 let header_avatar = document.querySelector('.header--overview .header-avatar');
 
-                if (header_avatar != undefined && !settings.feature_flags.redesigned_profile_header) {
+                if (header_avatar != undefined && settings.feature_flags.redesigned_profile_header == false) {
                     let header_follow_btn = header_avatar.querySelector('form');
 
                     if (header_follow_btn == undefined) {
