@@ -3517,17 +3517,6 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                 action: 'button'
             });
 
-            // taste
-            create_profile_top_item(profile_header, {
-                name: profile_name,
-                type: 'taste',
-                link: `${root}user/${profile_name}/library/artists?date_preset=LAST_7_DAYS&page=1`,
-                taste: taste,
-                artists: taste_artists,
-                avi: profile_avi,
-                percent: taste_percentage
-            });
-
             let listen_divider = document.createElement('div');
             listen_divider.classList.add('listen-divider');
 
@@ -3552,6 +3541,19 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
             type: 'loved',
             link: `${root}user/${profile_name}/loved`
         });
+
+        if (!is_own_profile) {
+            // taste
+            create_profile_top_item(profile_header, {
+                name: profile_name,
+                type: 'taste',
+                link: `${root}user/${profile_name}/library/artists?date_preset=LAST_7_DAYS&page=1`,
+                taste: taste,
+                artists: taste_artists,
+                avi: profile_avi,
+                percent: taste_percentage
+            });
+        }
 
         base_header.appendChild(profile_header);
     }
