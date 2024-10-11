@@ -2190,10 +2190,12 @@ spacing between is removed and aligned to tag icon */
 
 .header--overview.header--with-avatar .header-info {
     width: calc(var(--cards-width) - var(--profile-header-avatar-size));
-}
-.header--overview.header--with-avatar .header-info {
     padding-left: var(--card-gap);
     padding-right: unset;
+
+    [data-ff--redesigned_profile_header="true"] & {
+        height: 104px;
+    }
 }
 
 .header--overview .header-info-primary--with-columns, .header--sub-page .header-info-primary--with-columns {

@@ -1209,6 +1209,19 @@ let artist_corrections = {
     'SKI mask THE slump God': 'Ski Mask The Slump God',
     'that mexican ot': 'That Mexican OT',
     'TWELVE\'LEN': 'Twelve\'len',
+    'ariana grande': 'Ariana Grande',
+    'robyn': 'Robyn',
+    'yung lean': 'Yung Lean',
+    'troye sivan': 'Troye Sivan',
+    'addison rae': 'Addison Rae',
+    'a. g. cook': 'A. G. Cook',
+    'lorde': 'Lorde',
+    'the japanese house': 'The Japanese House',
+    'tinashe': 'Tinashe',
+    'julian casablancas': 'Julian Casablancas',
+    'bon iver': 'Bon Iver',
+    'shygirl': 'Shygirl',
+    'billie eilish': 'Billie Eilish',
     //
     'J.I.D | J.1.D': 'J.I.D',
     'ZILLAKAMI | JPEGMAF1A + Z1LLAKAM1': 'ZILLAKAMI',
@@ -1324,6 +1337,9 @@ let song_title_corrections = {
     },
     'olivia rodrigo': {
         'Guts': 'GUTS'
+    },
+    'charli xcx': {
+        'talk talk featuring troye sivan': 'Talk talk featuring Troye Sivan'
     }
 };
 
@@ -1457,7 +1473,8 @@ let includes = {
         '(kate',
         '(asmr',
         '(agressive', '(aggressive', 'brazilian phonk', // lol
-        '- sped up', '(sped up', '- slow', '(slow'
+        '- sped up', '(sped up', '- slow', '(slow',
+        'a. g. cook remix'
     ],
     mixes_numbers: [
         '(v1', '(v2', '(v3', '(v4', '(v5', '(v6', '(v7', '(v8', '(v9',
