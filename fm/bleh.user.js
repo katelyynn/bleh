@@ -1176,7 +1176,7 @@ let reload_pending = false;
 
 tippy.setDefaultProps({
     arrow: false,
-    duration: [250, 400],
+    duration: [150, 250],
     delay: [null, 50]
 });
 
@@ -5617,7 +5617,11 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                             <a class="btn primary external" href="https://github.com/katelyynn/bleh/issues/new/choose" target="_blank">
                                 ${trans[lang].settings.corrections.submit.name}
                             </a>
-                            <button class="btn continue" onclick="_open_correction_modal()">
+                            <!--<button class="btn continue" onclick="_open_correction_modal()">
+                                ${trans[lang].settings.corrections.view.name}
+                            </button>-->
+                            <!-- TEMP: make a modal for this like above -->
+                            <button class="btn continue" onclick="_change_settings_page('corrections')">
                                 ${trans[lang].settings.corrections.view.name}
                             </button>
                         </div>
