@@ -1207,6 +1207,10 @@ let artist_corrections = {
     'Diesect': 'DIESECT',
     'Milet': 'milet',
     'Ino': 'ino',
+    'Hana': 'HANA',
+    'Boa': 'BoA',
+    'Paris Match': 'paris match',
+    'Iri': 'iri',
     //
     'ty dolla $ign': 'Ty Dolla $ign',
     'juicy J': 'Juicy J',
