@@ -94,7 +94,8 @@ const trans = {
                 loading_listens: 'listens',
                 other_listeners: '{c} others'
             },
-            wiki: 'About'
+            wiki: 'About',
+            refresh_tracks: 'Refresh tracks'
         },
         statistics: {
             scrobbles: {
@@ -105,7 +106,6 @@ const trans = {
             }
         },
         profile: {
-            cannot_follow_user: 'You cannot follow this user.',
             on_ignore_list: 'You are on this user\'s ignore list.',
             friends: {
                 name: 'Friends'
@@ -144,7 +144,7 @@ const trans = {
             }
         },
         messaging: {
-            update: 'bleh has updated to {v}, welcome aboard!'
+            update: 'bleh has updated to version {v}!'
         },
         settings: {
             save: 'Save',
@@ -185,7 +185,7 @@ const trans = {
                     name: 'Colours',
                     bio: 'Pick your favourite!'
                 },
-                thanks: 'Welcome {m}, you are running bleh {v}.',
+                thanks: 'Welcome {m}, you are running bleh version {v}.',
             },
             appearance: {
                 name: 'Appearance'
@@ -455,14 +455,14 @@ const trans = {
                         aka: 'aka.',
                         pronouns: 'pronouns'
                     },
-                    pronoun_tip: 'Tip: If pronouns are placed first, "aka." will change to "pronouns".',
+                    pronoun_tip: 'When pronouns are placed first, "aka." will change to "pronouns".',
                     country: 'Country',
                     website: 'Website',
                     about: 'About',
                     toggle_preview: {
                         name: 'Toggle preview',
                         bio: 'Preview how your bio looks to others',
-                        note: 'To non-bleh users, multiple lines display as spaces, and links, bold, italics will be plain text.'
+                        note: 'For non-bleh users, multiple lines display as spaces and links, bold, italics will be plain text.'
                     },
                     avatar: {
                         name: 'Edit avatar',
@@ -636,18 +636,19 @@ const trans = {
             submit_bleh_correction: 'Submit correction to bleh',
             search_variations: 'Search for variations of this title',
             fetch_plays: {
-                name: 'Tracklist',
-                loading: 'Fetching your plays on this album',
-                fail: 'You do not have any plays on this album',
-                open_as_track: 'Open album title as a track'
+                name: 'Titelliste',
+                loading: 'Deine Wiedergaben auf diesem Album werden abgerufen',
+                fail: 'Du hast keine Scrobbel auf diesem Album',
+                open_as_track: 'Albumtitel als Titel öffnen'
             },
-            from_the_album: 'From the album: {album}',
+            from_the_album: 'Aus dem Album: {album}',
             listens: {
                 count_listens: '{c} scrobbels',
                 loading_listens: 'scrobbels',
                 other_listeners: '{c} hörer'
             },
-            wiki: 'About'
+            wiki: 'Über',
+            refresh_tracks: 'Titel aktualisieren'
         },
         statistics: {
             scrobbles: {
@@ -658,8 +659,7 @@ const trans = {
             }
         },
         profile: {
-            cannot_follow_user: 'You cannot follow this user.',
-            on_ignore_list: 'You are on this user\'s ignore list.',
+            on_ignore_list: 'Du stehst auf der Ignorierliste dieses Benutzers.',
             friends: {
                 name: 'Freunde'
             },
@@ -672,10 +672,10 @@ const trans = {
 
                 replace: '• scrobbelt seit '
             },
-            edit: 'Edit profile',
+            edit: 'Profil bearbeiten',
             shortcut: {
-                add: 'Add as shortcut',
-                remove: 'Your profiles are linked!'
+                add: 'Als Verknüpfung hinzufügen',
+                remove: 'Deine Profile sind verlinkt!'
             },
             scrobbles: 'Scrobbels',
             artists: 'Künstler',
@@ -697,7 +697,7 @@ const trans = {
             }
         },
         messaging: {
-            update: 'bleh has updated to {v}, welcome aboard!'
+            update: 'bleh wurde auf Version {v} aktualisiert!'
         },
         settings: {
             save: 'Speichern',
@@ -711,24 +711,24 @@ const trans = {
             go: 'Fortfahren',
             skip: 'Überspringen',
             back: 'Zurück',
-            reload: 'A setting you changed requires a page reload to take effect, click to reload.',
-            new: 'New',
+            reload: 'Klicke zum Neuladen, um deine Einstellungen zu übernehmen.',
+            new: 'Neu',
             examples: {
-                button: 'Example button'
+                button: 'Beispiel-Taste'
             },
             home: {
                 name: 'Startseite',
                 brand: 'bleh',
                 version: 'Version {v}',
-                recommended: 'Recommended settings',
+                recommended: 'Empfohlene Einstellungen',
                 issues: {
-                    name: 'Issues',
-                    bio: 'Report bugs'
+                    name: 'Probleme',
+                    bio: 'Bugs reporten'
                 },
                 update: {
-                    name: 'Updates',
-                    css: 'Update style',
-                    bio: 'Check now'
+                    name: 'Aktualisierungen',
+                    css: 'Stil aktualisieren',
+                    bio: 'Jetzt prüfen'
                 },
                 setup: {
                     name: 'Setup',
@@ -738,7 +738,7 @@ const trans = {
                     name: 'Farbe',
                     bio: 'Pick your favourite!'
                 },
-                thanks: 'Welcome {m}, you are running bleh {v}.',
+                thanks: 'Willkommen {m}, du verwendest bleh Version {v}.'
             },
             appearance: {
                 name: 'Aussehen'
@@ -769,14 +769,14 @@ const trans = {
             },
             music: {
                 name: 'Musik',
-                bio: 'Configure your music-related settings for profiles, artists, albums, and tracks.',
+                bio: 'Konfiguriere deine musikbezogene Einstellungen für Profile, Künstler, Alben und Titel.',
                 profile_shortcut: {
-                    name: 'Profile shortcut',
-                    bio: 'Quickly access a user\'s plays on an artist, album, or track page.',
+                    name: 'Profilverknüpfung',
+                    bio: 'Schnell auf die Wiedergaben eines Benutzers auf einer Künstler-, Album- oder Titelseite zugreifen.',
                     placeholder: 'Profil',
-                    header: 'Enter username',
-                    saved: 'Profile shortcut is valid',
-                    failed: 'Profile does not exist or failed to load'
+                    header: 'Benutzernamen eingeben',
+                    saved: 'Die Profilverknüpfung ist gültig',
+                    failed: 'Das Profil existiert nicht oder konnte nicht geladen werden.'
                 }
             },
             accessibility: {
@@ -799,11 +799,11 @@ const trans = {
                 name: 'Anpassen',
                 colours: {
                     name: 'Farbe',
-                    presets: 'Presets',
-                    manual: 'Manual',
-                    custom: 'Create a custom colour',
-                    default_with_season: 'Default colour for {season}',
-                    default: 'Default colour',
+                    presets: 'Voreinstellungen',
+                    manual: 'Anleitung',
+                    custom: 'Erstelle eine eigene Farbe',
+                    default_with_season: 'Standardfarbe für {season}',
+                    default: 'Standardfarbe',
                     modals: {
                         custom_colour: {
                             preface: 'Colours are controlled by three values: hue, saturation, and lightness. Try out the sliders to get a feel.',
@@ -825,10 +825,10 @@ const trans = {
                         bio: 'If you want to choose your own accent, head to the appearance tab - no need to disable seasons!'
                     },
                     marker: {
-                        current: 'The current season is {season} for {time}.',
-                        started: 'started {time}',
-                        none: 'There is no active season currently.',
-                        disabled: 'You have seasons disabled, enable to view current event.'
+                        current: 'Die aktuelle Saison ist {season} für {time}',
+                        started: 'vor {time} angefangen',
+                        none: 'Derzeit gibt es keine aktive Saison.',
+                        disabled: 'Saisons sind deaktiviert. Aktiviere diese, um die aktuelle Saison anzuzeigen.'
                     },
                     particles: {
                         name: 'Display particles during select seasons',
@@ -982,11 +982,11 @@ const trans = {
             language: {
                 name: 'Sprache',
                 bio: 'bleh aims to support alongside last.fm\'s native translation system, powered by community contributions. It\'s still early days but contributions are very appreciated!',
-                by: 'by {users}',
+                by: 'von {users}',
                 submit: {
                     name: 'Are you fluent in another language?',
                     bio: 'Translations are community-contributed and greatly appreciated for everyone.',
-                    action: 'Submit translation'
+                    action: 'Übersetzung einreichen'
                 }
             },
             text: {
@@ -1004,23 +1004,21 @@ const trans = {
                 profile: {
                     name: 'Profil',
                     subtitle: {
-                        name: 'Subtitle',
-                        aka: 'aka.',
-                        pronouns: 'pronouns'
+                        name: 'Untertitel'
                     },
-                    pronoun_tip: 'Tip: If pronouns are placed first, "aka." will change to "pronouns".',
+                    pronoun_tip: 'Wenn Pronomen an den Anfang gestellt werden, ändert sich „aka.“ in „Pronomen“.',
                     country: 'Land',
                     website: 'Website',
                     about: 'Über mich',
                     toggle_preview: {
-                        name: 'Toggle preview',
-                        bio: 'Preview how your bio looks to others',
-                        note: 'To non-bleh users, multiple lines display as spaces, and links, bold, italics will be plain text.'
+                        name: 'Vorschau umschalten',
+                        bio: 'Vorschau deiner biographie für andere',
+                        note: 'Für nicht bleh Benutzer, mehrere Zeilen werden als Leerzeichen und Links angezeigt, Fett- und Kursivschrift wird als einfacher Text angezeigt.'
                     },
                     avatar: {
-                        name: 'Edit avatar',
-                        upload: 'Upload file',
-                        delete: 'Delete avatar'
+                        name: 'Profilbild bearbeiten',
+                        upload: 'Datei hochladen',
+                        delete: 'Profilbild löschen'
                     }
                 },
                 charts: {
@@ -1430,7 +1428,7 @@ const trans = {
                         aka: 'aka.',
                         pronouns: 'zaimki'
                     },
-                    pronoun_tip: 'Wskazówka: Jeśli zaimki są umieszczone jako pierwsze, "aka." zmieni się na "zaimki".',
+                    pronoun_tip: 'Jeśli zaimki są umieszczone jako pierwsze, "aka." zmieni się na "zaimki".',
                     country: 'Kraj',
                     website: 'Strona internetowa',
                     about: 'O mnie',
@@ -3868,7 +3866,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                         // user is on their ignore list
                         let toggle_btn = document.createElement('button');
                         toggle_btn.classList.add('toggle-button','header-follower-btn','header-follower-btn--denied');
-                        toggle_btn.textContent = trans[lang].profile.cannot_follow_user;
+                        toggle_btn.textContent = trans[lang].profile.on_ignore_list;
 
                         tippy(toggle_btn, {
                             content: trans[lang].profile.on_ignore_list
@@ -4244,7 +4242,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
         refresh_btn.setAttribute('onclick', '_refresh_tracks(this)');
 
         tippy(refresh_btn, {
-            content: 'Refresh tracks'
+            content: trans[lang].music.refresh_tracks
         });
 
         tracklist_panel.appendChild(refresh_btn);
@@ -4730,7 +4728,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                     let artist_name = artist.querySelector('.grid-items-item-main-text a');
                     let corrected_artist_name = correct_artist(artist_name.textContent);
                     artist_name.textContent = corrected_artist_name;
-                    artist_name.setAttribute('href', `/music/${corrected_artist_name}`);
+                    artist_name.setAttribute('href', `${root}music/${corrected_artist_name}`);
                     artist_name.setAttribute('title', corrected_artist_name);
                 }
             }
@@ -7454,7 +7452,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                     // if artist matches OR artist is blank
                     if (song_artist_element.textContent.replaceAll('+', ' ').trim() == track_artist || song_artist_element.textContent.trim() == '') {
                         // replaces with corrected artist if applicable
-                        song_artist_element.innerHTML = `<a href="/music/${sanitise(formatted_title[2])}" title="${formatted_title[2]}">${formatted_title[2]}</a>`;
+                        song_artist_element.innerHTML = `<a href="${root}music/${sanitise(formatted_title[2])}" title="${formatted_title[2]}">${formatted_title[2]}</a>`;
 
                         // append guests
                         let song_guests = formatted_title[3];
@@ -7573,7 +7571,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
 
                     let guest_element = document.createElement('a');
                     guest_element.classList.add('header-new-crumb');
-                    guest_element.setAttribute('href',`/music/${sanitise(song_guests[guest])}`);
+                    guest_element.setAttribute('href',`${root}music/${sanitise(song_guests[guest])}`);
                     guest_element.setAttribute('title',song_guests[guest]);
                     guest_element.textContent = song_guests[guest];
 
