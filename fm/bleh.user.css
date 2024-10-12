@@ -1483,26 +1483,6 @@ last.fm changes as of 2024-05-20 */
     width: var(--cards-width);
 }
 
-/* artist pages without a similar artists panel */
-.container > .row {
-    position: relative;
-}
-.container > .row:has(.col-main + .col-main + .col-sidebar.hidden-xs):not(:has(.masonry-left-bottom)) .col-main + .col-main {
-    order: 2;
-    margin-top: unset;
-    position: absolute;
-    top: calc(191px + (var(--card-gap) * 4));
-    padding-bottom: 550px;
-}
-.container > .row:has(.col-main + .col-main + .col-sidebar.hidden-xs):not(:has(.masonry-left-bottom)) .col-main:first-child {
-    height: 251px;
-}
-
-.adaptive-skin-container:has(.container .row .col-main + .col-main + .col-sidebar.hidden-xs):not(:has(.masonry-left-bottom)) ~ .footer {
-    position: relative;
-    top: 1550px;
-}
-
 .col-main, .col-sidebar {
     padding: unset;
     float: unset !important;
@@ -1520,11 +1500,12 @@ last.fm changes as of 2024-05-20 */
     }
 
     & > :first-child {
-        margin-top: 0;
+        margin-top: unset;
     }
 
     & > form {
         order: 10;
+        margin-top: unset;
     }
 }
 

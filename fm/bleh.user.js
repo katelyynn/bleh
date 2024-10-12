@@ -1357,6 +1357,23 @@ let song_title_corrections = {
     'charli xcx': {
         'talk talk featuring troye sivan': 'Talk talk featuring Troye Sivan',
         'guess featuring billie eilish': 'Guess featuring billie eilish'
+    },
+    'my bloody valentine': {
+        'Loveless': 'loveless',
+        'Only Shallow': 'only shallow',
+        'Loomer': 'loomer',
+        'Touched': 'touched',
+        'To Here Knows When': 'to here knows when',
+        'When You Sleep': 'when you sleep',
+        'I Only Said': 'i only said',
+        'Come in Alone': 'come in alone',
+        'Sometimes': 'sometimes',
+        'Blown a Wish': 'blown a wish',
+        'What You Want': 'what you want',
+        'Soon': 'soon'
+    },
+    'jpegmafia': {
+        'Are you happy?': 'ARE YOU HAPPY?'
     }
 };
 
@@ -1491,7 +1508,8 @@ let includes = {
         '(asmr',
         '(agressive', '(aggressive', 'brazilian phonk', // lol
         '- sped up', '(sped up', '- slow', '(slow',
-        'a. g. cook remix'
+        'a. g. cook remix',
+        '- offline', '- og mix'
     ],
     mixes_numbers: [
         '(v1', '(v2', '(v3', '(v4', '(v5', '(v6', '(v7', '(v8', '(v9',
@@ -8819,7 +8837,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
         // get panel
         let col_sidebar = document.body.querySelector('.col-sidebar:not(.track-overview-video-column, .masonry-right)');
 
-        let panel = col_sidebar.querySelector('section.section-with-separator');
+        let panel = col_sidebar.querySelector('section.section-with-separator:has(.listener-trend)');
 
         if (panel == null) {
             panel = document.createElement('section');
