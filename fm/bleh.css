@@ -102,7 +102,7 @@ body {
     --font-weight-bold: 730;
 
     --trans-short: 0.25s;
-    --trans: 0.4s;
+    --trans: 0.3s;
     --trans-function: cubic-bezier(1.000, 0.000, 0.000, 1.000);
 }
 
@@ -8504,6 +8504,18 @@ text[style^="color: rgb(255, 172, 172)"] {
                 justify-content: center;
                 align-items: center;
                 gap: 6px;
+
+                margin: 0 -6px;
+                padding: 0 6px;
+                border-radius: var(--item-med-radius);
+                transition-property: background-color;
+                transition-duration: var(--trans);
+                transition-timing-function: var(--trans-function);
+
+                .listener-side[aria-describedby] &, .scrobble-side[aria-describedby] & {
+                    background-color: hsla(var(--h4), 30%);
+                    transition: none;
+                }
 
                 img {
                     width: 20px;
