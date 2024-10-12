@@ -50,13 +50,18 @@ let non_override_lang;
 // WARN: fill this out if translating
 // lists all languages with valid bleh translations
 // any custom translations will not load if not listed here!!
-let valid_langs = ['en', 'pl'];
+let valid_langs = ['en', 'de', 'pl'];
 
 let lang_info = {
     en: {
         name: 'English',
         by: ['cutensilly'],
         last_updated: 'latest'
+    },
+    de: {
+        name: 'Deutsch',
+        by: ['inozom', 'cutensilly'],
+        last_updated:  'latest'
     },
     pl: {
         name: 'Polski',
@@ -67,6 +72,561 @@ let lang_info = {
 
 const trans = {
     en: {
+        auth_menu: {
+            dev: 'Toggle dev mode',
+            configure_bleh: 'Configure bleh',
+            library: 'Library',
+            shouts: 'Shouts'
+        },
+        music: {
+            submit_lastfm_correction: 'Submit correction to Last.fm',
+            submit_bleh_correction: 'Submit correction to bleh',
+            search_variations: 'Search for variations of this title',
+            fetch_plays: {
+                name: 'Tracklist',
+                loading: 'Fetching your plays on this album',
+                fail: 'You do not have any plays on this album',
+                open_as_track: 'Open album title as a track'
+            },
+            from_the_album: 'From the album: {album}',
+            listens: {
+                count_listens: '{c} listens',
+                loading_listens: 'listens',
+                other_listeners: '{c} others'
+            },
+            wiki: 'About'
+        },
+        statistics: {
+            scrobbles: {
+                name: 'Your scrobbles'
+            },
+            plays: {
+                name: 'plays'
+            }
+        },
+        profile: {
+            cannot_follow_user: 'You cannot follow this user.',
+            on_ignore_list: 'You are on this user\'s ignore list.',
+            friends: {
+                name: 'Friends'
+            },
+            display_name: {
+                aka: 'aka.',
+                pronouns: 'pronouns'
+            },
+            created: {
+                name: 'created',
+
+                replace: '• scrobbling since '
+            },
+            follow: 'Follow',
+            following: 'Following',
+            edit: 'Edit profile',
+            shortcut: {
+                add: 'Add as shortcut',
+                remove: 'Your profiles are linked!'
+            },
+            scrobbles: 'Scrobbles',
+            artists: 'Artists',
+            loved: 'Loved tracks',
+            taste: 'Taste similarity',
+            taste_meter: {
+                level: {
+                    super: 'Super',
+                    very_high: 'Very High',
+                    high: 'High',
+                    medium: 'Medium',
+                    low: 'Low',
+                    very_low: 'Very Low',
+                    unknown: 'Unknown'
+                },
+                you_share_1: 'You share {artist}',
+                you_share_2: 'You share {artist1} and {artist2}',
+                you_share_3: 'You share {artist1}, {artist2}, and {artist3}'
+            }
+        },
+        messaging: {
+            update: 'bleh has updated to {v}, welcome aboard!'
+        },
+        settings: {
+            save: 'Save',
+            cancel: 'Cancel',
+            close: 'Close',
+            clear: 'Clear',
+            done: 'Done',
+            finish: 'Finish',
+            continue: 'Continue',
+            reset: 'Reset to default',
+            go: 'Go',
+            skip: 'Skip',
+            back: 'Back',
+            reload: 'A setting you changed requires a page reload to take effect, click to reload.',
+            new: 'New',
+            examples: {
+                button: 'Example button'
+            },
+            home: {
+                name: 'Home',
+                brand: 'bleh',
+                version: 'Version {v}',
+                recommended: 'Recommended settings',
+                issues: {
+                    name: 'Issues',
+                    bio: 'Report bugs'
+                },
+                update: {
+                    name: 'Updates',
+                    css: 'Update style',
+                    bio: 'Check now'
+                },
+                setup: {
+                    name: 'Setup',
+                    bio: 'Re-enter setup'
+                },
+                colours: {
+                    name: 'Colours',
+                    bio: 'Pick your favourite!'
+                },
+                thanks: 'Welcome {m}, you are running bleh {v}.',
+            },
+            appearance: {
+                name: 'Appearance'
+            },
+            themes: {
+                name: 'Themes',
+                bio: 'Choose from light to midnight.',
+                dark: {
+                    name: 'Dark',
+                    bio: 'The default flavour of bleh'
+                },
+                darker: {
+                    name: 'Darker',
+                    bio: 'The in-between'
+                },
+                oled: {
+                    name: 'Midnight',
+                    bio: 'Ultra blackout'
+                },
+                light: {
+                    name: 'Light',
+                    bio: 'Low saturation and bright'
+                },
+                classic: {
+                    name: 'Classic',
+                    bio: 'Re-live early computing'
+                }
+            },
+            music: {
+                name: 'Music',
+                bio: 'Configure your music-related settings for profiles, artists, albums, and tracks.',
+                profile_shortcut: {
+                    name: 'Profile shortcut',
+                    bio: 'Quickly access a user\'s plays on an artist, album, or track page.',
+                    placeholder: 'Profile',
+                    header: 'Enter username',
+                    saved: 'Profile shortcut is valid',
+                    failed: 'Profile does not exist or failed to load'
+                }
+            },
+            accessibility: {
+                name: 'Accessibility',
+                shout_preview: 'some completely random text that doesn\'t mean <a href="https://cutensilly.org">anything at all</a>',
+                accessible_name_colours: {
+                    name: 'Prefer accessible name colours',
+                    bio: 'Use the default header text colour over a accented text colour.'
+                },
+                underline_links: {
+                    name: 'Always underline links',
+                    bio: 'Make links to interactables stand out.'
+                },
+                reduced_motion: {
+                    name: 'Reduce animations around interfaces',
+                    bio: 'Will in most cases either slowly fade or hard-cut, no scaling.'
+                }
+            },
+            customise: {
+                name: 'Customise',
+                colours: {
+                    name: 'Colours',
+                    presets: 'Presets',
+                    manual: 'Manual',
+                    custom: 'Create a custom colour',
+                    default_with_season: 'Default colour for {season}',
+                    default: 'Default colour',
+                    modals: {
+                        custom_colour: {
+                            preface: 'Colours are controlled by three values: hue, saturation, and lightness. Try out the sliders to get a feel.',
+                            hue: 'Accent colour',
+                            sat: 'Saturation',
+                            lit: 'Lightness',
+                            seasonal_alert: 'The current season is overriding your accent colour, adjust sliders to disable.'
+                        }
+                    }
+                },
+                high_contrast: {
+                    name: 'Enable high contrast mode'
+                },
+                seasonal: {
+                    name: 'Seasonal',
+                    bio: 'During seasonal events, bleh can automatically change the default accent colour, add particles, and add overlays to various interface elements.',
+                    option: {
+                        name: 'Enable seasonal event system',
+                        bio: 'If you want to choose your own accent, head to the appearance tab - no need to disable seasons!'
+                    },
+                    marker: {
+                        current: 'The current season is {season} for {time}.',
+                        started: 'started {time}',
+                        none: 'There is no active season currently.',
+                        disabled: 'You have seasons disabled, enable to view current event.'
+                    },
+                    particles: {
+                        name: 'Display particles during select seasons',
+                        bio: 'During winter seasons you get snowflakes!'
+                    },
+                    show_less_particles: {
+                        name: 'Display a reduced number of particles'
+                    },
+                    overlays: {
+                        name: 'Display card overlays',
+                        bio: 'During winter seasons this is used for ice effects, otherwise mainly just gradients.'
+                    }
+                },
+                artwork: {
+                    name: 'Artwork'
+                },
+                hue_from_album: {
+                    name: 'Automatically colour album pages',
+                    bio: 'Picks the primary colour from an album cover to paint the page.'
+                },
+                gloss: {
+                    name: 'Gloss overlay',
+                    bio: 'Apply flair to all cover arts.'
+                },
+                display: {
+                    name: 'Display'
+                },
+                colourful_counts: {
+                    name: 'Use a colour gradient for all-time charts',
+                    bio: 'Assigns a colour from a gradient based on your position in all-time artist scrobbles.'
+                },
+                gendered_tags: {
+                    name: 'Hide gendered tags',
+                    bio: 'By default, gendered tags are hidden in bleh due to their unorganised and impossible nature.'
+                },
+                rain: {
+                    name: 'Let it rain!',
+                    bio: 'rain :3c (may have performance impacts !! also may look bad !!)'
+                },
+                show_your_progress: {
+                    name: 'Show your weekly progress',
+                    bio: 'too many numbers ~w~'
+                },
+                pretty_obsessions: {
+                    name: 'Pretty obsessions'
+                },
+                profile_header: {
+                    name: 'Display profile backgrounds',
+                    for_own: 'On my profile',
+                    for_others: 'On other profiles'
+                }
+            },
+            performance: {
+                name: 'Troubleshooting',
+                bio: 'Running into noticeable issues in theme loading? Try out these settings.',
+                dev: {
+                    name: 'Disable in-built theme loading',
+                    bio: 'This allows you to load the in-built theme via Stylus instead, which may be more performant.',
+                    modals: {
+                        prompt: {
+                            alert: 'Once you refresh the page, the in-built bleh theme will be disabled (unless you disable this option again).',
+                            stylus: 'If you do not already have the <strong>Stylus</strong> extension, choose your browser below:',
+                            browsers: {
+                                chrome: {
+                                    name: 'Chrome',
+                                    bio: 'for Chrome, Edge, Brave, Opera'
+                                },
+                                firefox: {
+                                    name: 'Firefox',
+                                    bio: 'for Firefox only'
+                                }
+                            }
+                        },
+                        continue: {
+                            next_step: 'Once you have the extension installed, hit "Install style" on the new tab that will open.'
+                        },
+                        finish: {
+                            alert: 'All done! From now on, styling will be handled via Stylus.'
+                        }
+                    }
+                },
+                bug: {
+                    name: 'Something wrong?',
+                    bio: 'Report a bug in the bleh repo to get it fixed.'
+                }
+            },
+            profiles: {
+                name: 'Profiles',
+                bio: 'Manage your personal data and data stored on other profiles.',
+                notes: {
+                    name: 'Notes',
+                    header: 'Note',
+                    placeholder: 'Enter a local note for this user',
+                    edit: 'Edit note',
+                    delete: 'Remove note',
+                    edit_user: 'Edit {u}\'s note',
+                    delete_user: 'Remove {u}\'s note',
+                    view: 'View your profile notes'
+                }
+            },
+            redirects: {
+                name: 'Redirects',
+                bio: 'Manage last.fm\'s (not) handy redirection system as best as possible.',
+                travis: {
+                    name: 'No, I didn\'t mean Travi$ Scott',
+                    bio: 'Hides redirect messages from the top of pages.'
+                },
+                autocorrect: {
+                    name: 'Scrobble auto-correction',
+                    bio: 'By default, last.fm will \'auto-correct\' some of your scrobbles using this system. This will make your scrobbles appear as <i>Travis Scott</i> rather than <i>Travi$ Scott</i>, however the redirection system is not fully disabled.',
+                    action: 'Open Settings'
+                }
+            },
+            corrections: {
+                name: 'Corrections',
+                bio: 'Manage bleh\'s in-built correction system for artist, album, and track titles.',
+                toggle: {
+                    name: 'Enable the correction system'
+                },
+                view: {
+                    name: 'View current corrections',
+                    bio: 'Lists all active in your install'
+                },
+                formatting: 'Smart music titles',
+                format_guest_features: {
+                    name: 'Format guest features and song tags',
+                    bio: 'Splits track and album titles into their individual tags such as guest features, versions, remixes.'
+                },
+                show_guest_features: {
+                    name: 'Display guest features in title and artist',
+                    bio: 'Turning off will remove from title and prefer artist field.'
+                },
+                stacked_chartlist_info: {
+                    name: 'Stack track name and title',
+                    bio: 'Both matches streaming services and increases max length of each.'
+                },
+                show_remaster_tags: {
+                    name: 'Show remaster tags',
+                    bio: 'Nobody likes remasters (or the tags), if you\'d prefer to still listen but remove the annoyance hide them!'
+                },
+                submit: {
+                    name: 'Submit new correction',
+                    bio: 'Have a name that you feel is capitalised wrong?',
+                    action: 'Submit'
+                },
+                listing: {
+                    artists: 'Artists',
+                    albums_tracks: 'Albums and tracks'
+                }
+            },
+            language: {
+                name: 'Language',
+                bio: 'bleh aims to support alongside last.fm\'s native translation system, powered by community contributions. It\'s still early days but contributions are very appreciated!',
+                by: 'by {users}',
+                submit: {
+                    name: 'Are you fluent in another language?',
+                    bio: 'Translations are community-contributed and greatly appreciated for everyone.',
+                    action: 'Submit translation'
+                }
+            },
+            text: {
+                name: 'Text',
+                shout_preview_md: 'some <strong>completely</strong> random!<br>text that doesn\'t mean <a href="https://cutensilly.org">anything at all</a>',
+                shout_preview: 'some completely random! text that doesn\'t mean anything at all',
+                markdown: {
+                    name: 'Use markdown formatting',
+                    bio: 'Enables line-breaks, bold, italics, and links.',
+                    shouts: 'In shouts',
+                    profile: 'In profile bios'
+                }
+            },
+            inbuilt: {
+                profile: {
+                    name: 'Profile',
+                    subtitle: {
+                        name: 'Subtitle',
+                        aka: 'aka.',
+                        pronouns: 'pronouns'
+                    },
+                    pronoun_tip: 'Tip: If pronouns are placed first, "aka." will change to "pronouns".',
+                    country: 'Country',
+                    website: 'Website',
+                    about: 'About',
+                    toggle_preview: {
+                        name: 'Toggle preview',
+                        bio: 'Preview how your bio looks to others',
+                        note: 'To non-bleh users, multiple lines display as spaces, and links, bold, italics will be plain text.'
+                    },
+                    avatar: {
+                        name: 'Edit avatar',
+                        upload: 'Upload file',
+                        delete: 'Delete avatar'
+                    }
+                },
+                charts: {
+                    name: 'Charts',
+                    recent: {
+                        count: {
+                            name: 'Tracks to display'
+                        },
+                        artwork: {
+                            name: 'Display album artwork'
+                        },
+                        realtime: {
+                            name: 'Update tracks in realtime',
+                            bio: 'Your recent tracks will refresh while you are on your profile.'
+                        }
+                    },
+                    artists: {
+                        timeframe: {
+                            name: 'Default timeframe'
+                        },
+                        style: {
+                            name: 'Chart style'
+                        }
+                    },
+                    albums: {
+                        timeframe: {
+                            name: 'Default timeframe'
+                        },
+                        style: {
+                            name: 'Chart style'
+                        }
+                    },
+                    tracks: {
+                        count: {
+                            name: 'Tracks to display'
+                        },
+                        timeframe: {
+                            name: 'Default timeframe'
+                        }
+                    }
+                },
+                privacy: {
+                    name: 'Privacy',
+                    recent_listening: {
+                        name: 'Hide your recent listening history',
+                        bio: 'Keep your recent listens a secret o.O'
+                    },
+                    receiving_msgs: {
+                        name: 'Control who can interact with you',
+                        bio: 'This setting controls who can post shouts and message you privately.',
+                        settings: {
+                            everyone: {
+                                name: 'Everyone',
+                                bio: 'Everyone except who you have ignored'
+                            },
+                            neighbours: {
+                                name: 'Who you follow and neighbours',
+                                bio: 'Everyone who you have chosen to follow, along with your Last.fm neighbours'
+                            },
+                            follow: {
+                                name: 'Who you follow only',
+                                bio: 'Only users who you have chosen to follow'
+                            }
+                        }
+                    },
+                    disable_shoutbox: {
+                        name: 'Hide your shoutbox',
+                        bio: 'Your shoutbox will be hidden for you and anyone else.'
+                    }
+                },
+                wiki: {
+                    syntax: {
+                        name: 'Use fancy syntax when editing',
+                        links_to: 'Links to {link}'
+                    }
+                }
+            },
+            actions: {
+                import: {
+                    name: 'Import',
+                    modals: {
+                        initial: {
+                            name: 'Import settings from a previous install',
+                            alert: 'Anything you import will override your current settings, if you are importing settings from online ensure you trust the source.'
+                        },
+                        failed: {
+                            name: 'Import failed',
+                            alert: 'The settings you attempted to import failed to parse, no changes were made.'
+                        }
+                    }
+                },
+                export: {
+                    name: 'Export',
+                    modals: {
+                        initial: {
+                            name: 'Export your current settings',
+                            alert: 'Your current settings are in the textbox below ready for you to copy.'
+                        }
+                    }
+                },
+                reset: {
+                    name: 'Reset',
+                    modals: {
+                        initial: {
+                            name: 'Reset your settings to default',
+                            alert: 'Your settings will be <strong>reset to all defaults</strong> with no way to go back. Are you sure?',
+                            confirm: 'Yes, reset my settings',
+                            export: 'Export first'
+                        }
+                    }
+                }
+            }
+        },
+        setup: {
+            start: {
+                name: 'haiii :3 welcome to bleh!!',
+                thanks: 'Thank you for installing, {m}',
+                info: [
+                    'This is the first-time setup to help you get started with common tasks for new users, which include:',
+                    'Manage accessibility, such as reduced motion',
+                    'Configuring your accent colour',
+                    'Changing your interface theme',
+                    'Adjusting song corrections and tagging',
+                    'If you\'re already set, you can skip.'
+                ]
+            },
+            appearance: {
+                bio: 'Configure the colour of bleh from one of the available presets, or make your own colour combination!',
+                subtext: 'During seasonal events, the default colour changes automatically.'
+            }
+        },
+        gallery: {
+            tabs: {
+                overview: 'Photos',
+                bookmarks: 'Saved'
+            },
+            bookmarks: {
+                name: 'Saved',
+                bio: 'Gallery photos can be saved for future reference.',
+                no_data: 'no images saved (・・ )',
+                button: {
+                    image_is_bookmarked: {
+                        name: 'You have saved this image'
+                    },
+                    bookmark_this_image: {
+                        name: 'Save this image',
+                        bio: 'Save this image for later'
+                    },
+                    unbookmark_this_image: {
+                        name: 'Unsave this image',
+                        bio: 'Unsave this image'
+                    }
+                }
+            }
+        }
+    },
+    de: {
         auth_menu: {
             dev: 'Toggle dev mode',
             configure_bleh: 'Configure bleh',
@@ -6094,7 +6654,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
 
             let users = '';
             for (let user in lang_info[language].by)
-                users = `<a class="mention" href="${root}user/${lang_info[language].by[user]}" target="_blank">@${lang_info[language].by[user]}</a> `;
+                users = `${users}<a class="mention" href="${root}user/${lang_info[language].by[user]}" target="_blank">@${lang_info[language].by[user]}</a> `;
 
             lang_row.innerHTML = (`
             <div class="flag-container">
