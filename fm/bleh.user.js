@@ -1230,7 +1230,7 @@ let artist_corrections = {
     'shygirl': 'Shygirl',
     'billie eilish': 'Billie Eilish',
     //
-    'J.I.D | J.1.D': 'J.I.D',
+    'J.I.D | J.1.D': 'JID',
     'ZILLAKAMI | JPEGMAF1A + Z1LLAKAM1': 'ZILLAKAMI',
     'GOLDLINK | TWELVE\'LEN + GOLDL1NK': 'GoldLink',
     'Pharrell': 'Pharrell Williams'
