@@ -119,8 +119,6 @@ const trans = {
 
                 replace: '• scrobbling since '
             },
-            follow: 'Follow',
-            following: 'Following',
             edit: 'Edit profile',
             shortcut: {
                 add: 'Add as shortcut',
@@ -629,8 +627,8 @@ const trans = {
     de: {
         auth_menu: {
             dev: 'Toggle dev mode',
-            configure_bleh: 'Configure bleh',
-            library: 'Library',
+            configure_bleh: 'bleh einstellen',
+            library: 'Musiksammlung',
             shouts: 'Shouts'
         },
         music: {
@@ -645,18 +643,18 @@ const trans = {
             },
             from_the_album: 'From the album: {album}',
             listens: {
-                count_listens: '{c} listens',
-                loading_listens: 'listens',
-                other_listeners: '{c} others'
+                count_listens: '{c} scrobbels',
+                loading_listens: 'scrobbels',
+                other_listeners: '{c} hörer'
             },
             wiki: 'About'
         },
         statistics: {
             scrobbles: {
-                name: 'Your scrobbles'
+                name: 'Deine Scrobbels'
             },
             plays: {
-                name: 'plays'
+                name: 'scrobbels'
             }
         },
         profile: {
@@ -674,8 +672,6 @@ const trans = {
 
                 replace: '• scrobbling since '
             },
-            follow: 'Follow',
-            following: 'Following',
             edit: 'Edit profile',
             shortcut: {
                 add: 'Add as shortcut',
@@ -704,24 +700,24 @@ const trans = {
             update: 'bleh has updated to {v}, welcome aboard!'
         },
         settings: {
-            save: 'Save',
-            cancel: 'Cancel',
-            close: 'Close',
-            clear: 'Clear',
-            done: 'Done',
-            finish: 'Finish',
-            continue: 'Continue',
-            reset: 'Reset to default',
-            go: 'Go',
-            skip: 'Skip',
-            back: 'Back',
+            save: 'Speichern',
+            cancel: 'Abbrechen',
+            close: 'Schließen',
+            clear: 'Leeren',
+            done: 'Fertig',
+            finish: 'Beenden',
+            continue: 'Fortsetzen',
+            reset: 'Auf Werkseinstellung Zurücksetzen',
+            go: 'Fortfahren',
+            skip: 'Überspringen',
+            back: 'Zurück',
             reload: 'A setting you changed requires a page reload to take effect, click to reload.',
             new: 'New',
             examples: {
                 button: 'Example button'
             },
             home: {
-                name: 'Home',
+                name: 'Startseite',
                 brand: 'bleh',
                 version: 'Version {v}',
                 recommended: 'Recommended settings',
@@ -745,7 +741,7 @@ const trans = {
                 thanks: 'Welcome {m}, you are running bleh {v}.',
             },
             appearance: {
-                name: 'Appearance'
+                name: 'Außehen'
             },
             themes: {
                 name: 'Themes',
@@ -772,19 +768,19 @@ const trans = {
                 }
             },
             music: {
-                name: 'Music',
+                name: 'Musik',
                 bio: 'Configure your music-related settings for profiles, artists, albums, and tracks.',
                 profile_shortcut: {
                     name: 'Profile shortcut',
                     bio: 'Quickly access a user\'s plays on an artist, album, or track page.',
-                    placeholder: 'Profile',
+                    placeholder: 'Profil',
                     header: 'Enter username',
                     saved: 'Profile shortcut is valid',
                     failed: 'Profile does not exist or failed to load'
                 }
             },
             accessibility: {
-                name: 'Accessibility',
+                name: 'Zugänglichkeit',
                 shout_preview: 'some completely random text that doesn\'t mean <a href="https://cutensilly.org">anything at all</a>',
                 accessible_name_colours: {
                     name: 'Prefer accessible name colours',
@@ -800,7 +796,7 @@ const trans = {
                 }
             },
             customise: {
-                name: 'Customise',
+                name: 'Anpassen',
                 colours: {
                     name: 'Colours',
                     presets: 'Presets',
@@ -822,7 +818,7 @@ const trans = {
                     name: 'Enable high contrast mode'
                 },
                 seasonal: {
-                    name: 'Seasonal',
+                    name: 'Saisonal',
                     bio: 'During seasonal events, bleh can automatically change the default accent colour, add particles, and add overlays to various interface elements.',
                     option: {
                         name: 'Enable seasonal event system',
@@ -886,7 +882,7 @@ const trans = {
                 }
             },
             performance: {
-                name: 'Troubleshooting',
+                name: 'Fehlerbehebung',
                 bio: 'Running into noticeable issues in theme loading? Try out these settings.',
                 dev: {
                     name: 'Disable in-built theme loading',
@@ -920,7 +916,7 @@ const trans = {
                 }
             },
             profiles: {
-                name: 'Profiles',
+                name: 'Profile',
                 bio: 'Manage your personal data and data stored on other profiles.',
                 notes: {
                     name: 'Notes',
@@ -934,7 +930,7 @@ const trans = {
                 }
             },
             redirects: {
-                name: 'Redirects',
+                name: 'Weiterleitungen',
                 bio: 'Manage last.fm\'s (not) handy redirection system as best as possible.',
                 travis: {
                     name: 'No, I didn\'t mean Travi$ Scott',
@@ -947,7 +943,7 @@ const trans = {
                 }
             },
             corrections: {
-                name: 'Corrections',
+                name: 'Berichtigung',
                 bio: 'Manage bleh\'s in-built correction system for artist, album, and track titles.',
                 toggle: {
                     name: 'Enable the correction system'
@@ -984,7 +980,7 @@ const trans = {
                 }
             },
             language: {
-                name: 'Language',
+                name: 'Sprache',
                 bio: 'bleh aims to support alongside last.fm\'s native translation system, powered by community contributions. It\'s still early days but contributions are very appreciated!',
                 by: 'by {users}',
                 submit: {
@@ -1006,14 +1002,14 @@ const trans = {
             },
             inbuilt: {
                 profile: {
-                    name: 'Profile',
+                    name: 'Profil',
                     subtitle: {
                         name: 'Subtitle',
                         aka: 'aka.',
                         pronouns: 'pronouns'
                     },
                     pronoun_tip: 'Tip: If pronouns are placed first, "aka." will change to "pronouns".',
-                    country: 'Country',
+                    country: 'Land',
                     website: 'Website',
                     about: 'About',
                     toggle_preview: {
@@ -1067,7 +1063,7 @@ const trans = {
                     }
                 },
                 privacy: {
-                    name: 'Privacy',
+                    name: 'Datenschutz',
                     recent_listening: {
                         name: 'Hide your recent listening history',
                         bio: 'Keep your recent listens a secret o.O'
@@ -1126,7 +1122,7 @@ const trans = {
                     }
                 },
                 reset: {
-                    name: 'Reset',
+                    name: 'Zurücksetzen',
                     modals: {
                         initial: {
                             name: 'Reset your settings to default',
