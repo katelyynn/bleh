@@ -2188,6 +2188,10 @@ let profile_badges = {
         {
             type: 'cute',
             name: 'cute'
+        },
+        {
+            type: 'contributor',
+            name: 'bleh contributor'
         }
     ]
 };
