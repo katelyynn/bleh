@@ -4989,6 +4989,9 @@ better than the default selector '#app a' i suppose */
     order: 10;
     font-size: var(--font-size-sm);
 }
+[data-bleh--tag-type="(session"] {
+    text-transform: capitalize;
+}
 
 [data-bleh--show_guest_features="false"] {
     .feat {

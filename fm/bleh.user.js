@@ -1314,6 +1314,7 @@ let song_title_corrections = {
         'A Date w Karma (V1)': 'a date w karma (v1)',
         //
         'may it never falter': 'May It Never Falter',
+        'may it never falter (sessions)': 'May It Never Falter (Sessions)',
         'for god and country': 'For God and country',
         'count it up': 'Count It Up',
         'knock, draw, release': 'Knock, Draw, Release',
