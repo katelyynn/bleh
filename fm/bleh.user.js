@@ -661,25 +661,25 @@ const trans = {
             cannot_follow_user: 'You cannot follow this user.',
             on_ignore_list: 'You are on this user\'s ignore list.',
             friends: {
-                name: 'Friends'
+                name: 'Freunde'
             },
             display_name: {
                 aka: 'aka.',
-                pronouns: 'pronouns'
+                pronouns: 'pronomen'
             },
             created: {
-                name: 'created',
+                name: 'erstellt',
 
-                replace: '• scrobbling since '
+                replace: '• scrobbelt seit '
             },
             edit: 'Edit profile',
             shortcut: {
                 add: 'Add as shortcut',
                 remove: 'Your profiles are linked!'
             },
-            scrobbles: 'Scrobbles',
-            artists: 'Artists',
-            loved: 'Loved tracks',
+            scrobbles: 'Scrobbels',
+            artists: 'Künstler',
+            loved: 'Lieblingslieder',
             taste: 'Taste similarity',
             taste_meter: {
                 level: {
@@ -691,9 +691,9 @@ const trans = {
                     very_low: 'Very Low',
                     unknown: 'Unknown'
                 },
-                you_share_1: 'You share {artist}',
-                you_share_2: 'You share {artist1} and {artist2}',
-                you_share_3: 'You share {artist1}, {artist2}, and {artist3}'
+                you_share_1: 'Ihr hört {artist}',
+                you_share_2: 'Ihr hört {artist1} und {artist2}',
+                you_share_3: 'Ihr hört {artist1}, {artist2}, und {artist3}'
             }
         },
         messaging: {
@@ -735,31 +735,31 @@ const trans = {
                     bio: 'Re-enter setup'
                 },
                 colours: {
-                    name: 'Colours',
+                    name: 'Farbe',
                     bio: 'Pick your favourite!'
                 },
                 thanks: 'Welcome {m}, you are running bleh {v}.',
             },
             appearance: {
-                name: 'Außehen'
+                name: 'Aussehen'
             },
             themes: {
-                name: 'Themes',
+                name: 'Farbschema',
                 bio: 'Choose from light to midnight.',
                 dark: {
-                    name: 'Dark',
+                    name: 'Dunkel',
                     bio: 'The default flavour of bleh'
                 },
                 darker: {
-                    name: 'Darker',
+                    name: 'Dunkler',
                     bio: 'The in-between'
                 },
                 oled: {
-                    name: 'Midnight',
+                    name: 'Mitternacht',
                     bio: 'Ultra blackout'
                 },
                 light: {
-                    name: 'Light',
+                    name: 'Hell',
                     bio: 'Low saturation and bright'
                 },
                 classic: {
@@ -798,7 +798,7 @@ const trans = {
             customise: {
                 name: 'Anpassen',
                 colours: {
-                    name: 'Colours',
+                    name: 'Farbe',
                     presets: 'Presets',
                     manual: 'Manual',
                     custom: 'Create a custom colour',
@@ -975,7 +975,7 @@ const trans = {
                     action: 'Submit'
                 },
                 listing: {
-                    artists: 'Artists',
+                    artists: 'Künstler',
                     albums_tracks: 'Albums and tracks'
                 }
             },
@@ -1011,7 +1011,7 @@ const trans = {
                     pronoun_tip: 'Tip: If pronouns are placed first, "aka." will change to "pronouns".',
                     country: 'Land',
                     website: 'Website',
-                    about: 'About',
+                    about: 'Über mich',
                     toggle_preview: {
                         name: 'Toggle preview',
                         bio: 'Preview how your bio looks to others',
@@ -3522,7 +3522,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
         // pronouns?
         let pronouns = use_pronouns(value);
 
-        document.getElementById('header-title-display-name--pre').textContent = pronouns ? 'pronouns' : 'aka.';
+        document.getElementById('header-title-display-name--pre').textContent = pronouns ? trans[lang].profile.display_name.pronouns : trans[lang].profile.display_name.aka;
     }
 
 
@@ -4612,7 +4612,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
         if (count_bar_link.getAttribute('href').endsWith('DAYS'))
             return;
 
-        let count = clean_number(count_bar.querySelector('.chartlist-count-bar-value').textContent.replace(' scrobbles',''));
+        let count = clean_number(count_bar.querySelector('.chartlist-count-bar-value').textContent.trim().replace(' scrobbles',''));
 
         if (!count_bar.hasAttribute('data-kate-processed')) {
             count_bar.setAttribute('data-kate-processed','true');
