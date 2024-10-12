@@ -1376,6 +1376,60 @@ let song_title_corrections = {
         'Are you happy?': 'ARE YOU HAPPY?'
     }
 };
+let song_features = {
+    'glaive': {
+        'naturale': {
+            artists: ['glaive', 'ericdoa'],
+            album: 'then i\'ll be happy'
+        },
+        'mental anguish': {
+            artists: ['glaive', 'ericdoa'],
+            album: 'then i\'ll be happy'
+        },
+        'heather': {
+            artists: ['glaive', 'ericdoa'],
+            album: 'then i\'ll be happy'
+        },
+        'pretending': {
+            artists: ['glaive', 'ericdoa'],
+            album: 'then i\'ll be happy'
+        },
+        'physs': {
+            artists: ['glaive', 'ericdoa'],
+            album: 'then i\'ll be happy'
+        },
+        'handle me': {
+            artists: ['glaive', 'ericdoa'],
+            album: 'then i\'ll be happy'
+        },
+        'cloak n dagger': {
+            artists: ['glaive', 'ericdoa'],
+            album: 'then i\'ll be happy'
+        },
+        'fuck this town': {
+            artists: ['glaive', 'ericdoa'],
+            album: 'then i\'ll be happy'
+        }
+    }
+}
+let album_tracklists = {
+    'glaive': {
+        'then i\'ll be happy': {
+            type: 'replace',
+            artists: ['glaive', 'ericdoa'],
+            tracks: [
+                song_features['glaive']['naturale'],
+                song_features['glaive']['mental anguish'],
+                song_features['glaive']['heather'],
+                song_features['glaive']['pretending'],
+                song_features['glaive']['physs'],
+                song_features['glaive']['handle me'],
+                song_features['glaive']['cloak n dagger'],
+                song_features['glaive']['fuck this town']
+            ]
+        }
+    }
+}
 
 let ranks = {
     15: {
