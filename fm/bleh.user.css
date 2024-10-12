@@ -31,11 +31,13 @@ body {
             var(--lit-seasonal,
             1))));
 
+    [data-season="easter"],
     [data-bleh--season="easter"] & {
         --hue-seasonal: 155;
         --sat-seasonal: 1;
         --lit-seasonal: 1.15;
     }
+    [data-season="halloween"],
     [data-bleh--season="halloween"] & {
         --hue-seasonal: 14;
         --sat-seasonal: 1.6;
@@ -50,11 +52,13 @@ body {
         --icon-16-heart: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtaGVhcnQtY3JhY2siPjxwYXRoIGQ9Ik0xOSAxNGMxLjQ5LTEuNDYgMy0zLjIxIDMtNS41QTUuNSA1LjUgMCAwIDAgMTYuNSAzYy0xLjc2IDAtMyAuNS00LjUgMi0xLjUtMS41LTIuNzQtMi00LjUtMkE1LjUgNS41IDAgMCAwIDIgOC41YzAgMi4zIDEuNSA0LjA1IDMgNS41bDcgN1oiLz48cGF0aCBkPSJtMTIgMTMtMS0xIDItMi0zLTMgMi0yIi8+PC9zdmc+');
         --icon-16-profile: var(--icon-16-pumpkin);
     }
+    [data-season="pre_fall"],
     [data-bleh--season="pre_fall"] & {
         --hue-seasonal: 244;
         --sat-seasonal: 0.9;
         --lit-seasonal: 1.1;
     }
+    [data-season="fall"],
     [data-bleh--season="fall"] & {
         --hue-seasonal: 228;
         --sat-seasonal: 0.85;
@@ -62,6 +66,7 @@ body {
 
         --hue-pos: 150;
     }
+    [data-season="christmas"],
     [data-bleh--season="christmas"] & {
         --hue-seasonal: 204;
         --sat-seasonal: 0.85;
@@ -69,6 +74,7 @@ body {
 
         --hue-pos: 150;
     }
+    [data-season="new_years"],
     [data-bleh--season="new_years"] & {
         --hue-seasonal: 233;
         --sat-seasonal: 0.925;
@@ -242,7 +248,8 @@ input[type="range"],
 .badge,
 .track .bar .colourful,
 .setup-colour-behind,
-.action .icon
+.action .icon,
+[data-season]
 {
     --hue:  var(--hue-over,
             var(--hue-album,
@@ -15848,6 +15855,12 @@ button.bleh--gallery-bookmark-image-btn {
     }
 }
 
+[data-season]:not([data-season="none"]) {
+    --hue-over: var(--hue-seasonal);
+    --sat-over: var(--sat-seasonal);
+    --lit-over: var(--lit-seasonal);
+}
+
 .current-season-container {
     display: flex;
     gap: var(--card-padding);
@@ -16186,6 +16199,10 @@ button.bleh--gallery-bookmark-image-btn {
     display: flex;
     justify-content: center;
     align-items: center;
+
+    [data-bleh--theme="oled"] & {
+        border: var(--card-border);
+    }
 
     .user-top-avatar {
         --w: 80px;
