@@ -1136,6 +1136,7 @@ last.fm changes as of 2024-05-20 */
 
 
 /* show mobile buttons for notifications, inbox, and settings */
+.language-nav,
 .masthead-nav-wrap:not(:has(.site-auth--anon)) .visible-xs {
     display: flex !important;
     order: 1;
@@ -1250,6 +1251,49 @@ last.fm changes as of 2024-05-20 */
 
 .auth-avatar-notification-count-badge {
     display: var(--auth-badge, none);
+}
+
+
+.language-nav {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    height: 40px !important;
+    text-decoration: none !important;
+    padding: 0 calc(16px + 6px) 0 calc(20px) !important;
+
+    --font-size: 0;
+    --mask: var(--icon-16-arrow-down);
+    --left: none !important;
+    --right: 0;
+
+    span {
+        position: relative;
+        font-size: var(--font-size);
+        --left: calc(-1 * (20px)) !important;
+        --right: none !important;
+    }
+}
+
+[data-lang] {
+    &:before {
+        --mask: none;
+        --mask-size: 20px;
+        --margin-top: -10px;
+        background-color: unset !important;
+        background-image: var(--flag-url) !important;
+    }
+}
+
+[data-lang="en"] {
+    --flag-url: url('https://katelyynn.github.io/bleh/fm/flags/en.svg');
+}
+[data-lang="de"] {
+    --flag-url: url('https://katelyynn.github.io/bleh/fm/flags/de.svg');
+}
+[data-lang="pl"] {
+    --flag-url: url('https://katelyynn.github.io/bleh/fm/flags/pl.svg');
 }
 
 
@@ -2810,7 +2854,7 @@ button.navlist-more {
     gap: 10px;
 }
 
-.auth-link,
+.auth-link, .language-nav,
 .user-dashboard-pagination a, .user-dashboard-pagination span:not(.user-dashboard-controls-tooltip),
 .navlist-more, .secondary-nav-item-link, .masthead-nav-control {
     /* left padding for icon, otherwise just 12px 16px */
@@ -2874,6 +2918,7 @@ button.navlist-more {
     }
 
     /*&.masthead-nav-control--active,*/
+    &[aria-expanded="true"],
     &.secondary-nav-item-link.active,
     [data-bleh--gallery-tab="overview"] .secondary-nav-item--gallery-overview  &,
     [data-bleh--gallery-tab="bookmarks"] .secondary-nav-item--gallery-bookmarks &,
@@ -6201,6 +6246,10 @@ button,
 .obsession-history-play-all
 {
     --btn-left: calc(12px + 16px + 6px) !important;
+
+    &.lang-item {
+        --btn-left: calc(12px + 20px + 6px) !important;
+    }
 }
 .side-right .setting-item,
 .continue, .external,
@@ -6322,7 +6371,7 @@ button,
 .continue:before, .external:before,
 .badge:before,
 .btn-post-shout:before,
-.auth-link:before,
+.auth-link:before, .language-nav:before, .language-nav > span:before,
 .gallery-placeholder:before,
 .image-list-item-bookmarked:after, .image-list-item-preferred:after,
 .data-loading:before, .lazy-shoutbox.async-content-loading:before, .loading:not(.library-fetch, .library-date-picker):before,
@@ -6473,7 +6522,7 @@ span.header-new-gallery-inner a:before,
     right: var(--right, auto);
     top: var(--top, 50%) !important;
     background-repeat: no-repeat;
-    background-image: unset !important;
+    background-image: var(--flag-url, unset) !important;
     background-color: currentColor;
     border-radius: unset;
     mask-image: var(--mask);
@@ -8632,6 +8681,7 @@ text[style^="color: rgb(255, 172, 172)"] {
         transform: none !important;
     }
 
+    &[data-theme="language-menu"],
     &[data-theme="menu"] {
         padding: 5px !important;
         background: hsl(var(--b5)) !important;
@@ -8650,6 +8700,16 @@ text[style^="color: rgb(255, 172, 172)"] {
             background-image: var(--overlay-snow-min), linear-gradient(180deg, rgba(190,233,250,0.04) 0%, rgba(0,0,0,0) 100%) !important;
             background-repeat: repeat-x !important;
             background-position: unset !important;
+        }
+
+        &[data-theme="language-menu"] {
+            animation: dropdown calc(var(--trans-short) + 0.02s) var(--trans-function);
+            transform-origin: top;
+
+            &[data-state="hidden"] {
+                transform: scaleY(0.85);
+                opacity: 0;
+            }
         }
 
         &[data-state="hidden"] {

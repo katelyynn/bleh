@@ -2904,6 +2904,46 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                 }
             });
         }
+
+
+        // language
+        let selected_language = document.querySelector('.footer-language--active strong').textContent;
+        let language_options = document.querySelectorAll('.footer-language-form');
+
+        let language_menu = document.createElement('div');
+        language_menu.classList.add('language-menu');
+
+        language_options.forEach((language_option) => {
+            let button = language_option.querySelector('button');
+            button.classList.remove('mimic-link');
+            button.classList.add('dropdown-menu-clickable-item', 'lang-item');
+            button.setAttribute('data-lang', button.getAttribute('name'));
+
+            language_menu.appendChild(language_option);
+        });
+
+        let language_nav = document.createElement('a');
+        language_nav.classList.add('language-nav');
+        language_nav.innerHTML = (`
+            <span data-lang="${non_override_lang}">${selected_language}</span>
+        `);
+
+        tippy(language_nav, {
+            theme: 'language-menu',
+            content: (`
+                ${language_menu.innerHTML}
+            `),
+            allowHTML: true,
+            delay: [100, 50],
+            placement: 'bottom',
+            //trigger: 'click',
+            interactive: true
+        });
+
+        let inner = document.body.querySelector('.masthead-nav-wrap');
+        let auth_container = inner.querySelector('.site-auth');
+
+        inner.insertBefore(language_nav, auth_container);
     }
 
     // create blank settings
