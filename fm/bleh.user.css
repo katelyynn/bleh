@@ -2558,7 +2558,26 @@ elements, this is how we detect its missing */
         display: flex;
         align-items: center;
         gap: var(--card-gap);
-        padding: 7px 0;
+        padding: 7px 12px;
+
+        &.active {
+            position: relative;
+            background-color: hsla(var(--h4), 20%);
+            border-radius: var(--item-med-radius);
+
+            [data-bleh--theme="light"] & {
+                background-color: hsla(var(--h4), 10%);
+            }
+
+            /*&:before {
+                content: '';
+                inset: 0;
+                position: absolute;
+                border-radius: var(--item-med-radius);
+                display: block;
+                background-color: hsla(var(--h4), 20%);
+            }*/
+        }
 
         .flag-container {
             display: block;
@@ -2599,9 +2618,13 @@ elements, this is how we detect its missing */
             -webkit-box-orient: vertical;
         }
 
-        & + .language-row {
-            border-top: var(--card-border);
+        .badges {
+            width: 40px;
         }
+
+        /*& + .language-row {
+            border-top: var(--card-border);
+        }*/
     }
 }
 

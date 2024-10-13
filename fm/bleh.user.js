@@ -61,7 +61,8 @@ let lang_info = {
     de: {
         name: 'Deutsch',
         by: ['inozom', 'cutensilly'],
-        last_updated:  'latest'
+        last_updated:  'latest',
+        new: true
     },
     pl: {
         name: 'Polski',
@@ -813,11 +814,11 @@ const trans = {
                     default: 'Standardfarbe',
                     modals: {
                         custom_colour: {
-                            preface: 'Colours are controlled by three values: hue, saturation, and lightness. Try out the sliders to get a feel.',
-                            hue: 'Accent colour',
-                            sat: 'Saturation',
-                            lit: 'Lightness',
-                            seasonal_alert: 'The current season is overriding your accent colour, adjust sliders to disable.'
+                            preface: 'Farben werden durch drei Werte gesteuert: Farbton, Sättigung und Helligkeit. Probiere den Schieberegler aus, um ein Gefühl dafür zu bekommen.',
+                            hue: 'Akzentfarbe',
+                            sat: 'Sättigung',
+                            lit: 'Helligkeit',
+                            seasonal_alert: 'Die aktuelle Saison überschreibt deine Akzentfarbe. Passe den Schieberegler an, um sie zu deaktivieren.'
                         }
                     }
                 },
@@ -6740,6 +6741,9 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
             let lang_row = document.createElement('div');
             lang_row.classList.add('language-row');
 
+            if (non_override_lang == language)
+                lang_row.classList.add('active');
+
             let users = '';
             for (let user in lang_info[language].by)
                 users = `${users}<a class="mention" href="${root}user/${lang_info[language].by[user]}" target="_blank">@${lang_info[language].by[user]}</a> `;
@@ -6752,6 +6756,11 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                 <h5>${lang_info[language].name}</h5>
                 <p>${trans[lang].settings.language.by.replace('{users}', users)}</p>
             </div>
+            ${(lang_info[language].new ? (`
+            <div class="badges">
+                <div class="new-badge">${trans[lang].settings.new}</div>
+            </div>
+            `): '<div class="badges"></div>')}
             <div class="date">
                 <p>${lang_info[language].last_updated}</p>
             </div>
