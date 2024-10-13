@@ -826,7 +826,7 @@ const trans = {
                     },
                     marker: {
                         current: 'Die aktuelle Saison ist {season} für {time}',
-                        started: 'vor {time} angefangen',
+                        started: '{time} angefangen',
                         none: 'Derzeit gibt es keine aktive Saison.',
                         disabled: 'Saisons sind deaktiviert. Aktiviere diese, um die aktuelle Saison anzuzeigen.'
                     },
@@ -1573,6 +1573,26 @@ const trans = {
         }
     },
 }
+moment.updateLocale('de', {
+    relativeTime : {
+        future: 'in %s',
+        past:   'vor %s',
+        s  : 'ein paar Sekunden',
+        ss : '%d Sekunden',
+        m:  'eine Minute',
+        mm: '%d Minuten',
+        h:  'eine Stunde',
+        hh: '%d Stunden',
+        d:  'ein Tag',
+        dd: '%d Tagen',
+        w:  'eine Woche',
+        ww: '%d Wochen',
+        M:  'im Monat',
+        MM: '%d Monate',
+        y:  'ein Jahr',
+        yy: '%d Jahre'
+    }
+});
 
 function lookup_lang() {
     root = document.querySelector('.masthead-logo a').getAttribute('href');
@@ -1585,6 +1605,8 @@ function lookup_lang() {
         console.info('bleh - language fallback from', lang, 'to en (language is not listed as valid)', valid_langs);
         lang = 'en';
     }
+
+    moment.locale(lang);
 }
 
 // seasonal
@@ -6451,10 +6473,10 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
 
         if ((page == 'seasonal' || page == 'home') && settings.seasonal && stored_season.id != 'none') {
             tippy(document.getElementById('current_season'), {
-                content: new Date(stored_season.end.replace('y0', stored_season.year)).toLocaleString()
+                content: new Date(stored_season.end.replace('y0', stored_season.year)).toLocaleString(lang)
             });
             tippy(document.getElementById('current_season_start'), {
-                content: new Date(stored_season.start.replace('y0', stored_season.year)).toLocaleString()
+                content: new Date(stored_season.start.replace('y0', stored_season.year)).toLocaleString(lang)
             });
         }
     }
