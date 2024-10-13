@@ -6850,6 +6850,7 @@ on the bottom of a panel !! */
     top: -6px;
 }
 
+.lang-item.active,
 .bleh--configure-menu-item,
 .more-item--edit-old,
 [data-analytics-label="settings"]
@@ -6861,6 +6862,7 @@ on the bottom of a panel !! */
 {
     margin-top: 11px !important;
 }
+.lang-item.active:after,
 .more-item--submit-correction:after,
 .bleh--configure-menu-item:after,
 .more-item--edit-old:after,

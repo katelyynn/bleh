@@ -267,9 +267,16 @@ const trans = {
                 seasonal: {
                     name: 'Seasonal',
                     bio: 'During seasonal events, bleh can automatically change the default accent colour, add particles, and add overlays to various interface elements.',
+                    listing: {
+                        easter: 'Easter',
+                        halloween: 'Halloween',
+                        pre_fall: 'Pre-Fall',
+                        fall: 'Fall',
+                        christmas: 'Christmas',
+                        new_years: 'New Years'
+                    },
                     option: {
-                        name: 'Enable seasonal event system',
-                        bio: 'If you want to choose your own accent, head to the appearance tab - no need to disable seasons!'
+                        name: 'Enable seasonal event system'
                     },
                     marker: {
                         current: 'The current season is {season} for {time}.',
@@ -285,7 +292,7 @@ const trans = {
                         name: 'Display a reduced number of particles'
                     },
                     overlays: {
-                        name: 'Display card overlays',
+                        name: 'Display additional seasonal effects',
                         bio: 'During winter seasons this is used for ice effects, otherwise mainly just gradients.'
                     }
                 },
@@ -819,10 +826,17 @@ const trans = {
                 },
                 seasonal: {
                     name: 'Saisonal',
-                    bio: 'During seasonal events, bleh can automatically change the default accent colour, add particles, and add overlays to various interface elements.',
+                    bio: 'Während saisonaler Ereignisse kann bleh automatisch die Standardakzentfarbe ändern, Partikel hinzufügen und verschiedenen Schnittstellenelementen Overlays hinzufügen.',
+                    listing: {
+                        easter: 'Ostern',
+                        halloween: 'Halloween',
+                        pre_fall: 'Vorherbst',
+                        fall: 'Herbst',
+                        christmas: 'Weihnachten',
+                        new_years: 'Silvester'
+                    },
                     option: {
-                        name: 'Enable seasonal event system',
-                        bio: 'If you want to choose your own accent, head to the appearance tab - no need to disable seasons!'
+                        name: 'Saisonales Eventsystem aktivieren'
                     },
                     marker: {
                         current: 'Die aktuelle Saison ist {season} für {time}',
@@ -831,14 +845,14 @@ const trans = {
                         disabled: 'Saisons sind deaktiviert. Aktiviere diese, um die aktuelle Saison anzuzeigen.'
                     },
                     particles: {
-                        name: 'Display particles during select seasons',
-                        bio: 'During winter seasons you get snowflakes!'
+                        name: 'Partikel während bestimmter Jahreszeiten anzeigen',
+                        bio: 'Während der Wintersaison gibt es Schneeflocken!'
                     },
                     show_less_particles: {
                         name: 'Display a reduced number of particles'
                     },
                     overlays: {
-                        name: 'Display card overlays',
+                        name: 'Zusätzliche saisonale Effekte anzeigen',
                         bio: 'During winter seasons this is used for ice effects, otherwise mainly just gradients.'
                     }
                 },
@@ -2206,12 +2220,12 @@ let profile_badges = {
     },
     'inozom': [
         {
-            type: 'cute',
-            name: 'cute'
-        },
-        {
             type: 'contributor',
             name: 'bleh contributor'
+        },
+        {
+            type: 'cute',
+            name: 'cute'
         }
     ]
 };
@@ -2934,6 +2948,14 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
 
         let language_menu = document.createElement('div');
         language_menu.classList.add('language-menu');
+
+        let sel_button = document.createElement('button');
+        sel_button.classList.add('dropdown-menu-clickable-item', 'lang-item', 'active');
+        sel_button.setAttribute('data-lang', non_override_lang);
+        sel_button.style.setProperty('--flag-url', `url('https://katelyynn.github.io/bleh/fm/flags/${non_override_lang}.svg')`);
+        sel_button.textContent = selected_language;
+
+        language_menu.appendChild(sel_button);
 
         language_options.forEach((language_option) => {
             let button = language_option.querySelector('button');
@@ -5103,7 +5125,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                     <div class="current-season-container">
                         <div class="current-season" data-season="${stored_season.id}" id="current_season">
                             ${(stored_season.id != 'none')
-                            ? trans[lang].settings.customise.seasonal.marker.current.replace('{season}', stored_season.name).replace('{time}', moment(stored_season.end.replace('y0', stored_season.year)).to(stored_season.now, true))
+                            ? trans[lang].settings.customise.seasonal.marker.current.replace('{season}', trans[lang].settings.customise.seasonal.listing[stored_season.id]).replace('{time}', moment(stored_season.end.replace('y0', stored_season.year)).to(stored_season.now, true))
                             : (settings.seasonal) ? trans[lang].settings.customise.seasonal.marker.none : trans[lang].settings.customise.seasonal.marker.disabled}
                         </div>
                         <div class="current-season-started" id="current_season_start">
@@ -5817,7 +5839,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                         <div class="current-season-container">
                             <div class="current-season" data-season="${stored_season.id}" id="current_season">
                                 ${(stored_season.id != 'none')
-                                ? trans[lang].settings.customise.seasonal.marker.current.replace('{season}', stored_season.name).replace('{time}', moment(stored_season.end.replace('y0', stored_season.year)).to(stored_season.now, true))
+                                ? trans[lang].settings.customise.seasonal.marker.current.replace('{season}', trans[lang].settings.customise.seasonal.listing[stored_season.id]).replace('{time}', moment(stored_season.end.replace('y0', stored_season.year)).to(stored_season.now, true))
                                 : (settings.seasonal) ? trans[lang].settings.customise.seasonal.marker.none : trans[lang].settings.customise.seasonal.marker.disabled}
                             </div>
                             <div class="current-season-started" id="current_season_start">
@@ -5831,7 +5853,6 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                         <button class="btn reset" onclick="_reset_item('seasonal')">${trans[lang].settings.reset}</button>
                         <div class="heading">
                             <h5>${trans[lang].settings.customise.seasonal.option.name}</h5>
-                            <p>${trans[lang].settings.customise.seasonal.option.bio}</p>
                         </div>
                         <div class="toggle-wrap">
                             <button class="toggle" id="toggle-seasonal" onclick="_update_item('seasonal')" aria-checked="true">
@@ -6464,7 +6485,9 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
 
         if (page == 'themes') {
             tippy(document.body.querySelector('.swatch.default'), {
-                content: (stored_season.id != 'none') ? trans[lang].settings.customise.colours.default_with_season.replace('{season}', stored_season.name) : trans[lang].settings.customise.colours.default
+                content: (stored_season.id != 'none')
+                ? trans[lang].settings.customise.colours.default_with_season.replace('{season}', trans[lang].settings.customise.seasonal.listing[stored_season.id])
+                : trans[lang].settings.customise.colours.default
             });
             tippy(document.body.querySelector('.swatch.custom'), {
                 content: trans[lang].settings.customise.colours.custom
@@ -8850,7 +8873,9 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
         refresh_all();
 
         tippy(document.body.querySelector('.swatch.default'), {
-            content: (stored_season.id != 'none') ? trans[lang].settings.customise.colours.default_with_season.replace('{season}', stored_season.name) : trans[lang].settings.customise.colours.default
+            content: (stored_season.id != 'none')
+            ? trans[lang].settings.customise.colours.default_with_season.replace('{season}', trans[lang].settings.customise.seasonal.listing[stored_season.id])
+            : trans[lang].settings.customise.colours.default
         });
         tippy(document.body.querySelector('.swatch.custom'), {
             content: trans[lang].settings.customise.colours.custom
