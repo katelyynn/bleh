@@ -1542,8 +1542,6 @@ last.fm changes as of 2024-05-20 */
 /* this fixes places of the site (tracks, artist, albums watever that use a weird method of 2 col-mains, 2 col-sidebars as appose to profiles */
 /* -> could be simplified, idk if it affects other parts of the site tho */.row.buffer-4 > .col-main:first-child /* <- */, .row.buffer-4 > .col-main:nth-child(3) > :is(section, #shoutbox),
 .album-and-lyrics-row,
-/* this is for artists, appears to be targeting the bio box */ .header-new--artist + .container > .row/*:not(.buffer-4)*//*:has(:nth-child(2)) > .col-main:nth-child(1)*/ .col-main:first-child, /* there's 2 col-mains, the 2nd contains other cards */
-/* this is for albums */ .container > .row.buffer-reset\@sm > .col-main:nth-child(2),
 /* dont question it too far, refer to the above display: grid for more insight, this is jus applying the card styling */
 .shoutbox--with-header#shoutbox:not(#shoutbox > #shoutbox /* for shoutbox on gallery image */, section > #shoutbox /* events */),
 .header-featured-track,
@@ -1678,13 +1676,15 @@ body[class*="namespace--user_library_"] .col-sidebar, .library-header,
 
 .content-top-back-link {
     margin: unset !important;
-}
-.content-top-back-link a {
-    padding: unset;
-    color: hsl(var(--l3-c)) !important;
-}
-.content-top-back-link a:before {
-    display: none;
+
+    a {
+        padding: unset;
+        color: hsl(var(--l3-c)) !important;
+
+        &:before {
+            display: none;
+        }
+    }
 }
 
 .content-top-back-link + .content-top-header {
@@ -1720,9 +1720,10 @@ body[class*="namespace--user_library_"] .col-sidebar, .library-header,
 
 .page-content:has(> .section) + .full-bleed-ad-container + .page-content {
     padding-top: unset !important;
-}
-.page-content:has(> .section) + .full-bleed-ad-container + .page-content .col-sidebar {
-    top: unset !important;
+
+    .col-sidebar {
+        top: unset !important;
+    }
 }
 
 
