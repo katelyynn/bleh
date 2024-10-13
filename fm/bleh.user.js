@@ -2183,7 +2183,7 @@ let profile_badges = {
         },
         {
             type: 'translation',
-            name: 'translated bleh into polish'
+            name: 'translated bleh into Polski'
         },
         {
             type: 'contributor',
@@ -2222,6 +2222,10 @@ let profile_badges = {
         {
             type: 'contributor',
             name: 'bleh contributor'
+        },
+        {
+            type: 'translation',
+            name: 'translated bleh into Deutsch'
         },
         {
             type: 'cute',
