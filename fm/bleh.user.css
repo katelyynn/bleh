@@ -1286,16 +1286,6 @@ last.fm changes as of 2024-05-20 */
     }
 }
 
-[data-lang="en"] {
-    --flag-url: url('https://katelyynn.github.io/bleh/fm/flags/en.svg');
-}
-[data-lang="de"] {
-    --flag-url: url('https://katelyynn.github.io/bleh/fm/flags/de.svg');
-}
-[data-lang="pl"] {
-    --flag-url: url('https://katelyynn.github.io/bleh/fm/flags/pl.svg');
-}
-
 
 /*     NOTIFICATION DOT     */
 .auth-dropdown-menu .notification-count-badge,
@@ -1449,13 +1439,10 @@ last.fm changes as of 2024-05-20 */
 }
 
 
-#language-selector, .footer-timezone {
+.footer-timezone {
     padding-left: calc(var(--button-list-gap) + 16px + var(--button-list-gap)) !important;
     position: relative;
     --left: var(--button-list-gap) !important;
-}
-.footer #language-selector {
-    --mask: var(--icon-16-language);
 }
 .footer .footer-timezone {
     --mask: var(--icon-16-clock);
@@ -6411,7 +6398,7 @@ button,
 .secondary-nav-item-link:before,
 .navlist-more:before,
 /*     FOOTER     */
-#language-selector:before, .footer-timezone:before,
+.footer-timezone:before,
 /*     PLAYLINKS & MEDIA LINKS     */
 .resource-external-link:before, .play-this-track-playlink:before, .replace-playlink:before,
 .section-playlink:before, .inline-section-control:before,
@@ -15510,7 +15497,6 @@ button.bleh--gallery-bookmark-image-btn {
 }
 .tab-container,
 .footer-timezone,
-#language-selector,
 .view-buttons {
     display: flex;
     align-items: center;
@@ -15541,9 +15527,6 @@ button.bleh--gallery-bookmark-image-btn {
 
     .footer-language {
         display: flex;
-    }
-    &#language-selector {
-        margin-bottom: var(--button-list-gap);
     }
     &.footer-timezone {
         a {
@@ -15767,6 +15750,7 @@ button.bleh--gallery-bookmark-image-btn {
     --profile-header-avatar-size: 104px;
 }
 
+#language-selector,
 .video-preview-replace,
 .header-new-info-desktop {
     display: none;

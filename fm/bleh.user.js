@@ -2918,6 +2918,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
             button.classList.remove('mimic-link');
             button.classList.add('dropdown-menu-clickable-item', 'lang-item');
             button.setAttribute('data-lang', button.getAttribute('name'));
+            button.style.setProperty('--flag-url', `url('https://katelyynn.github.io/bleh/fm/flags/${button.getAttribute('name')}.svg')`);
 
             language_menu.appendChild(language_option);
         });
@@ -2925,7 +2926,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
         let language_nav = document.createElement('a');
         language_nav.classList.add('language-nav');
         language_nav.innerHTML = (`
-            <span data-lang="${non_override_lang}">${selected_language}</span>
+            <span data-lang="${non_override_lang}" style="--flag-url: url('https://katelyynn.github.io/bleh/fm/flags/${non_override_lang}.svg');">${selected_language}</span>
         `);
 
         tippy(language_nav, {
