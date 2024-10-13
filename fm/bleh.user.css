@@ -3807,7 +3807,7 @@ state is not active, which then falls back to primary button styling */
     }
 }
 .header-title-label-wrap .label:hover, .header-new-on-tour:hover {
-    max-width: 210px;
+    max-width: 220px;
     padding-right: 6px;
     background-color: hsla(var(--h4), 15%) !important;
 }
