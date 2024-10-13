@@ -2496,6 +2496,10 @@ elements, this is how we detect its missing */
     .artist-row {
         padding: 7px 0;
 
+        h5 {
+            text-align: center;
+        }
+
         /*&:not(:first-child) {
             border-top: var(--card-border);
         }*/
@@ -2524,6 +2528,7 @@ elements, this is how we detect its missing */
             }
 
             &.pre-transition h5 {
+                text-align: right;
                 color: hsl(var(--c3));
             }
         }

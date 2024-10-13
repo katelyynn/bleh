@@ -436,11 +436,12 @@ const trans = {
             },
             language: {
                 name: 'Language',
-                bio: 'bleh aims to support alongside last.fm\'s native translation system, powered by community contributions. It\'s still early days but contributions are very appreciated!',
+
+                supported: 'Supported by bleh',
                 by: 'by {users}',
                 submit: {
                     name: 'Are you fluent in another language?',
-                    bio: 'Translations are community-contributed and greatly appreciated for everyone.',
+                    bio: 'Translations are purely community-contributed.',
                     action: 'Submit translation'
                 }
             },
@@ -958,49 +959,49 @@ const trans = {
                 }
             },
             corrections: {
-                name: 'Berichtigung',
-                bio: 'Manage bleh\'s in-built correction system for artist, album, and track titles.',
+                name: 'Korrekturen',
+                bio: 'Verwalte das Korrektursystem von bleh für Künstler-, Album- und Titel.',
                 toggle: {
-                    name: 'Enable the correction system'
+                    name: 'Aktiviere das Korrektursystem'
                 },
                 view: {
-                    name: 'View current corrections',
+                    name: 'Aktuelle Korrekturen anzeigen',
                     bio: 'Lists all active in your install'
                 },
-                formatting: 'Smart music titles',
+                formatting: 'Smarte Musiktitel',
                 format_guest_features: {
-                    name: 'Format guest features and song tags',
-                    bio: 'Splits track and album titles into their individual tags such as guest features, versions, remixes.'
+                    name: 'Formatiere Features und Song-Tags',
+                    bio: 'Teilt Titel und Albentitel in einzelne Tags auf, beispielsweise Features, Versionen, Remixe.'
                 },
                 show_guest_features: {
-                    name: 'Display guest features in title and artist',
-                    bio: 'Turning off will remove from title and prefer artist field.'
+                    name: 'Features im Titel und Künstler anzeigen',
+                    bio: 'Durch deaktivieren werden sie von Titeln entfernt und das Künstlerfeld wird bevorzugt.'
                 },
                 stacked_chartlist_info: {
-                    name: 'Stack track name and title',
-                    bio: 'Both matches streaming services and increases max length of each.'
+                    name: 'Name und Titel stapeln',
+                    bio: 'Beide passen sich an den Streaming-Diensten an und erhöht die Länge dieser.'
                 },
                 show_remaster_tags: {
                     name: 'Show remaster tags',
                     bio: 'Nobody likes remasters (or the tags), if you\'d prefer to still listen but remove the annoyance hide them!'
                 },
                 submit: {
-                    name: 'Submit new correction',
+                    name: 'Neue Korrektur einreichen',
                     bio: 'Have a name that you feel is capitalised wrong?',
                     action: 'Submit'
                 },
                 listing: {
                     artists: 'Künstler',
-                    albums_tracks: 'Albums and tracks'
+                    albums_tracks: 'Alben und Titel'
                 }
             },
             language: {
                 name: 'Sprache',
-                bio: 'bleh aims to support alongside last.fm\'s native translation system, powered by community contributions. It\'s still early days but contributions are very appreciated!',
+                supported: 'Unterstützt von bleh',
                 by: 'von {users}',
                 submit: {
-                    name: 'Are you fluent in another language?',
-                    bio: 'Translations are community-contributed and greatly appreciated for everyone.',
+                    name: 'Sprichst du fließend eine andere Sprache?',
+                    bio: 'Übersetzungen werden ausschließlich von der Community beigesteuert.',
                     action: 'Übersetzung einreichen'
                 }
             },
@@ -1416,11 +1417,11 @@ const trans = {
             },
             language: {
                 name: 'Language',
-                bio: 'bleh aims to support alongside last.fm\'s native translation system, powered by community contributions. It\'s still early days but contributions are very appreciated!',
+                supported: 'Supported by bleh',
                 by: 'by {users}',
                 submit: {
                     name: 'Are you fluent in another language?',
-                    bio: 'Translations are community-contributed and greatly appreciated for everyone.',
+                    bio: 'Translations are purely community-contributed.',
                     action: 'Submit translation'
                 }
             },
@@ -5999,10 +6000,10 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
             return (`
                 <div class="bleh--panel">
                     <h3>${trans[lang].settings.language.name}</h3>
-                    <p>${trans[lang].settings.language.bio}</p>
                     ${(!valid_langs.includes(document.documentElement.getAttribute('lang'))) ? `
                     <div class="alert alert-error">Selected language is not currently supported in bleh, sorry for the inconvenience.</div>
                     ` : ''}
+                    <h4>${trans[lang].settings.language.supported}</h4>
                     <div class="languages" id="languages"></div>
                     <div class="sep"></div>
                     <div class="alert alert-warning">This page is still under construction! A wiki page dedicated to submitting a language is not available currently.</div>
@@ -6762,7 +6763,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
             </div>
             `): '<div class="badges"></div>')}
             <div class="date">
-                <p>${lang_info[language].last_updated}</p>
+                <p>${(lang_info[language].last_updated != 'latest') ? moment(lang_info[language].last_updated).fromNow() : lang_info[language].last_updated}</p>
             </div>
             `);
 
