@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         bleh
 // @namespace    http://last.fm/
-// @version      2024.1011
+// @version      2024.1015
 // @description  bleh!!! ^-^
 // @author       kate
 // @match        https://www.last.fm/*
@@ -18,7 +18,7 @@
 // ==/UserScript==
 
 let version = {
-    build: '2024.1011',
+    build: '2024.1015',
     sku: 'falter',
     feature_flags: {
         bleh_settings_tabs: {
@@ -4117,8 +4117,11 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
 
         profile_name = profile_name.textContent.trim();
 
+        let header_meta = base_header.querySelector('.header-metadata');
+        header_meta.classList.add('profile-header-metadata-legacy');
+
         // acquire info
-        let metadata = base_header.querySelectorAll('.header-metadata-display');
+        let metadata = header_meta.querySelectorAll('.header-metadata-display');
 
         let scrobbles = 0;
         let average = 0;
