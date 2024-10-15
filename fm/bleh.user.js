@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         bleh
 // @namespace    http://last.fm/
-// @version      2024.1011
+// @version      2024.1015
 // @description  bleh!!! ^-^
 // @author       kate
 // @match        https://www.last.fm/*
@@ -18,7 +18,7 @@
 // ==/UserScript==
 
 let version = {
-    build: '2024.1011',
+    build: '2024.1015',
     sku: 'falter',
     feature_flags: {
         bleh_settings_tabs: {
@@ -50,13 +50,19 @@ let non_override_lang;
 // WARN: fill this out if translating
 // lists all languages with valid bleh translations
 // any custom translations will not load if not listed here!!
-let valid_langs = ['en', 'pl'];
+let valid_langs = ['en', 'de', 'pl'];
 
 let lang_info = {
     en: {
         name: 'English',
         by: ['cutensilly'],
         last_updated: 'latest'
+    },
+    de: {
+        name: 'Deutsch',
+        by: ['inozom', 'cutensilly'],
+        last_updated:  'latest',
+        new: true
     },
     pl: {
         name: 'Polski',
@@ -89,7 +95,8 @@ const trans = {
                 loading_listens: 'listens',
                 other_listeners: '{c} others'
             },
-            wiki: 'About'
+            wiki: 'About',
+            refresh_tracks: 'Refresh tracks'
         },
         statistics: {
             scrobbles: {
@@ -100,7 +107,6 @@ const trans = {
             }
         },
         profile: {
-            cannot_follow_user: 'You cannot follow this user.',
             on_ignore_list: 'You are on this user\'s ignore list.',
             friends: {
                 name: 'Friends'
@@ -114,8 +120,6 @@ const trans = {
 
                 replace: '• scrobbling since '
             },
-            follow: 'Follow',
-            following: 'Following',
             edit: 'Edit profile',
             shortcut: {
                 add: 'Add as shortcut',
@@ -141,7 +145,7 @@ const trans = {
             }
         },
         messaging: {
-            update: 'bleh has updated to {v}, welcome aboard!'
+            update: 'bleh has updated to version {v}!'
         },
         settings: {
             save: 'Save',
@@ -182,7 +186,7 @@ const trans = {
                     name: 'Colours',
                     bio: 'Pick your favourite!'
                 },
-                thanks: 'Welcome {m}, you are running bleh {v}.',
+                thanks: 'Welcome {m}, you are running bleh version {v}.',
             },
             appearance: {
                 name: 'Appearance'
@@ -264,9 +268,16 @@ const trans = {
                 seasonal: {
                     name: 'Seasonal',
                     bio: 'During seasonal events, bleh can automatically change the default accent colour, add particles, and add overlays to various interface elements.',
+                    listing: {
+                        easter: 'Easter',
+                        halloween: 'Halloween',
+                        pre_fall: 'Pre-Fall',
+                        fall: 'Fall',
+                        christmas: 'Christmas',
+                        new_years: 'New Years'
+                    },
                     option: {
-                        name: 'Enable seasonal event system',
-                        bio: 'If you want to choose your own accent, head to the appearance tab - no need to disable seasons!'
+                        name: 'Enable seasonal event system'
                     },
                     marker: {
                         current: 'The current season is {season} for {time}.',
@@ -282,7 +293,7 @@ const trans = {
                         name: 'Display a reduced number of particles'
                     },
                     overlays: {
-                        name: 'Display card overlays',
+                        name: 'Display additional seasonal effects',
                         bio: 'During winter seasons this is used for ice effects, otherwise mainly just gradients.'
                     }
                 },
@@ -306,7 +317,7 @@ const trans = {
                 },
                 gendered_tags: {
                     name: 'Hide gendered tags',
-                    bio: 'By default, gendered tags are hidden in bleh due to their unorganised and impossible nature.'
+                    bio: 'Gender-specific tags are deemed redundant by default.'
                 },
                 rain: {
                     name: 'Let it rain!',
@@ -425,11 +436,12 @@ const trans = {
             },
             language: {
                 name: 'Language',
-                bio: 'bleh aims to support alongside last.fm\'s native translation system, powered by community contributions. It\'s still early days but contributions are very appreciated!',
+
+                supported: 'Supported by bleh',
                 by: 'by {users}',
                 submit: {
                     name: 'Are you fluent in another language?',
-                    bio: 'Translations are community-contributed and greatly appreciated for everyone.',
+                    bio: 'Translations are purely community-contributed.',
                     action: 'Submit translation'
                 }
             },
@@ -452,14 +464,14 @@ const trans = {
                         aka: 'aka.',
                         pronouns: 'pronouns'
                     },
-                    pronoun_tip: 'Tip: If pronouns are placed first, "aka." will change to "pronouns".',
+                    pronoun_tip: 'When pronouns are placed first, "aka." will change to "pronouns".',
                     country: 'Country',
                     website: 'Website',
                     about: 'About',
                     toggle_preview: {
                         name: 'Toggle preview',
                         bio: 'Preview how your bio looks to others',
-                        note: 'To non-bleh users, multiple lines display as spaces, and links, bold, italics will be plain text.'
+                        note: 'For non-bleh users, multiple lines display as spaces and links, bold, italics will be plain text.'
                     },
                     avatar: {
                         name: 'Edit avatar',
@@ -567,6 +579,564 @@ const trans = {
                 },
                 reset: {
                     name: 'Reset',
+                    modals: {
+                        initial: {
+                            name: 'Reset your settings to default',
+                            alert: 'Your settings will be <strong>reset to all defaults</strong> with no way to go back. Are you sure?',
+                            confirm: 'Yes, reset my settings',
+                            export: 'Export first'
+                        }
+                    }
+                }
+            }
+        },
+        setup: {
+            start: {
+                name: 'haiii :3 welcome to bleh!!',
+                thanks: 'Thank you for installing, {m}',
+                info: [
+                    'This is the first-time setup to help you get started with common tasks for new users, which include:',
+                    'Manage accessibility, such as reduced motion',
+                    'Configuring your accent colour',
+                    'Changing your interface theme',
+                    'Adjusting song corrections and tagging',
+                    'If you\'re already set, you can skip.'
+                ]
+            },
+            appearance: {
+                bio: 'Configure the colour of bleh from one of the available presets, or make your own colour combination!',
+                subtext: 'During seasonal events, the default colour changes automatically.'
+            }
+        },
+        gallery: {
+            tabs: {
+                overview: 'Photos',
+                bookmarks: 'Saved'
+            },
+            bookmarks: {
+                name: 'Saved',
+                bio: 'Gallery photos can be saved for future reference.',
+                no_data: 'no images saved (・・ )',
+                button: {
+                    image_is_bookmarked: {
+                        name: 'You have saved this image'
+                    },
+                    bookmark_this_image: {
+                        name: 'Save this image',
+                        bio: 'Save this image for later'
+                    },
+                    unbookmark_this_image: {
+                        name: 'Unsave this image',
+                        bio: 'Unsave this image'
+                    }
+                }
+            }
+        }
+    },
+    de: {
+        auth_menu: {
+            dev: 'Toggle dev mode',
+            configure_bleh: 'bleh einstellen',
+            library: 'Musiksammlung',
+            shouts: 'Shouts'
+        },
+        music: {
+            submit_lastfm_correction: 'Submit correction to Last.fm',
+            submit_bleh_correction: 'Submit correction to bleh',
+            search_variations: 'Search for variations of this title',
+            fetch_plays: {
+                name: 'Titelliste',
+                loading: 'Deine Wiedergaben auf diesem Album werden abgerufen',
+                fail: 'Du hast keine Scrobbel auf diesem Album',
+                open_as_track: 'Albumtitel als Titel öffnen'
+            },
+            from_the_album: 'Aus dem Album: {album}',
+            listens: {
+                count_listens: '{c} scrobbels',
+                loading_listens: 'scrobbels',
+                other_listeners: '{c} hörer'
+            },
+            wiki: 'Über',
+            refresh_tracks: 'Titel aktualisieren'
+        },
+        statistics: {
+            scrobbles: {
+                name: 'Deine Scrobbels'
+            },
+            plays: {
+                name: 'scrobbels'
+            }
+        },
+        profile: {
+            on_ignore_list: 'Du stehst auf der Ignorierliste dieses Benutzers.',
+            friends: {
+                name: 'Freunde'
+            },
+            display_name: {
+                aka: 'aka.',
+                pronouns: 'pronomen'
+            },
+            created: {
+                name: 'erstellt',
+
+                replace: '• scrobbelt seit '
+            },
+            edit: 'Profil bearbeiten',
+            shortcut: {
+                add: 'Als Verknüpfung hinzufügen',
+                remove: 'Deine Profile sind verlinkt!'
+            },
+            scrobbles: 'Scrobbels',
+            artists: 'Künstler',
+            loved: 'Lieblingslieder',
+            taste: 'Taste similarity',
+            taste_meter: {
+                level: {
+                    super: 'Super',
+                    very_high: 'Very High',
+                    high: 'High',
+                    medium: 'Medium',
+                    low: 'Low',
+                    very_low: 'Very Low',
+                    unknown: 'Unknown'
+                },
+                you_share_1: 'Ihr hört {artist}',
+                you_share_2: 'Ihr hört {artist1} und {artist2}',
+                you_share_3: 'Ihr hört {artist1}, {artist2}, und {artist3}'
+            }
+        },
+        messaging: {
+            update: 'bleh wurde auf Version {v} aktualisiert!'
+        },
+        settings: {
+            save: 'Speichern',
+            cancel: 'Abbrechen',
+            close: 'Schließen',
+            clear: 'Leeren',
+            done: 'Fertig',
+            finish: 'Beenden',
+            continue: 'Fortsetzen',
+            reset: 'Auf Werkseinstellung Zurücksetzen',
+            go: 'Fortfahren',
+            skip: 'Überspringen',
+            back: 'Zurück',
+            reload: 'Klicke zum Neuladen, um deine Einstellungen zu übernehmen.',
+            new: 'Neu',
+            examples: {
+                button: 'Beispiel-Taste'
+            },
+            home: {
+                name: 'Startseite',
+                brand: 'bleh',
+                version: 'Version {v}',
+                recommended: 'Empfohlene Einstellungen',
+                issues: {
+                    name: 'Probleme',
+                    bio: 'Bugs reporten'
+                },
+                update: {
+                    name: 'Aktualisierungen',
+                    css: 'Stil aktualisieren',
+                    bio: 'Jetzt prüfen'
+                },
+                setup: {
+                    name: 'Setup',
+                    bio: 'Re-enter setup'
+                },
+                colours: {
+                    name: 'Farbe',
+                    bio: 'Pick your favourite!'
+                },
+                thanks: 'Willkommen {m}, du verwendest bleh Version {v}.'
+            },
+            appearance: {
+                name: 'Aussehen'
+            },
+            themes: {
+                name: 'Farbschema',
+                bio: 'Choose from light to midnight.',
+                dark: {
+                    name: 'Dunkel',
+                    bio: 'The default flavour of bleh'
+                },
+                darker: {
+                    name: 'Dunkler',
+                    bio: 'The in-between'
+                },
+                oled: {
+                    name: 'Mitternacht',
+                    bio: 'Ultra blackout'
+                },
+                light: {
+                    name: 'Hell',
+                    bio: 'Low saturation and bright'
+                },
+                classic: {
+                    name: 'Classic',
+                    bio: 'Re-live early computing'
+                }
+            },
+            music: {
+                name: 'Musik',
+                bio: 'Konfiguriere deine musikbezogene Einstellungen für Profile, Künstler, Alben und Titel.',
+                profile_shortcut: {
+                    name: 'Profilverknüpfung',
+                    bio: 'Schnell auf die Wiedergaben eines Benutzers auf einer Künstler-, Album- oder Titelseite zugreifen.',
+                    placeholder: 'Profil',
+                    header: 'Benutzernamen eingeben',
+                    saved: 'Die Profilverknüpfung ist gültig',
+                    failed: 'Das Profil existiert nicht oder konnte nicht geladen werden.'
+                }
+            },
+            accessibility: {
+                name: 'Zugänglichkeit',
+                shout_preview: 'some completely random text that doesn\'t mean <a href="https://cutensilly.org">anything at all</a>',
+                accessible_name_colours: {
+                    name: 'Zugängliche Namensfarben bevorzugen',
+                    bio: 'Use the default header text colour over a accented text colour.'
+                },
+                underline_links: {
+                    name: 'Links immer unterstreichen',
+                    bio: 'Make links to interactables stand out.'
+                },
+                reduced_motion: {
+                    name: 'Animationen reduzieren',
+                    bio: 'Will in most cases either slowly fade or hard-cut, no scaling.'
+                }
+            },
+            customise: {
+                name: 'Anpassen',
+                colours: {
+                    name: 'Farbe',
+                    presets: 'Voreinstellungen',
+                    manual: 'Anleitung',
+                    custom: 'Erstelle eine eigene Farbe',
+                    default_with_season: 'Standardfarbe für {season}',
+                    default: 'Standardfarbe',
+                    modals: {
+                        custom_colour: {
+                            preface: 'Farben werden durch drei Werte gesteuert: Farbton, Sättigung und Helligkeit. Probiere den Schieberegler aus, um ein Gefühl dafür zu bekommen.',
+                            hue: 'Akzentfarbe',
+                            sat: 'Sättigung',
+                            lit: 'Helligkeit',
+                            seasonal_alert: 'Die aktuelle Saison überschreibt deine Akzentfarbe. Passe den Schieberegler an, um sie zu deaktivieren.'
+                        }
+                    }
+                },
+                high_contrast: {
+                    name: 'Enable high contrast mode'
+                },
+                seasonal: {
+                    name: 'Saisonal',
+                    bio: 'Während saisonaler Ereignisse kann bleh automatisch die Standardakzentfarbe ändern, Partikel hinzufügen und verschiedenen Schnittstellenelementen Overlays hinzufügen.',
+                    listing: {
+                        easter: 'Ostern',
+                        halloween: 'Halloween',
+                        pre_fall: 'Vorherbst',
+                        fall: 'Herbst',
+                        christmas: 'Weihnachten',
+                        new_years: 'Silvester'
+                    },
+                    option: {
+                        name: 'Saisonales Eventsystem aktivieren'
+                    },
+                    marker: {
+                        current: 'Die aktuelle Saison ist {season} für {time}',
+                        started: '{time} angefangen',
+                        none: 'Derzeit gibt es keine aktive Saison.',
+                        disabled: 'Saisons sind deaktiviert. Aktiviere diese, um die aktuelle Saison anzuzeigen.'
+                    },
+                    particles: {
+                        name: 'Partikel während bestimmter Jahreszeiten anzeigen',
+                        bio: 'Während der Wintersaison gibt es Schneeflocken!'
+                    },
+                    show_less_particles: {
+                        name: 'Display a reduced number of particles'
+                    },
+                    overlays: {
+                        name: 'Zusätzliche saisonale Effekte anzeigen',
+                        bio: 'During winter seasons this is used for ice effects, otherwise mainly just gradients.'
+                    }
+                },
+                artwork: {
+                    name: 'Cover'
+                },
+                hue_from_album: {
+                    name: 'Albumseiten automatisch färben',
+                    bio: 'Wählt die Primärfarbe eines Albumcovers aus, um die Seite zu bemalen.'
+                },
+                gloss: {
+                    name: 'Gloss overlay',
+                    bio: 'Apply flair to all cover arts.'
+                },
+                display: {
+                    name: 'Anzeigeeinstellungen'
+                },
+                colourful_counts: {
+                    name: 'Verwende einen Farbverlauf für die Allzeitdiagramme',
+                    bio: 'Weist eine Farbe aus dem Farbverlauf zu, basierend auf der insgesamten Anzahl der Scrobbels für einen Künstler.'
+                },
+                gendered_tags: {
+                    name: 'Geschlechtsspezifische Tags ausblenden',
+                    bio: 'Geschlechtsspezifische Tags sind normalerweise überflüssig.'
+                },
+                rain: {
+                    name: 'Let it rain!',
+                    bio: 'rain :3c (may have performance impacts !! also may look bad !!)'
+                },
+                show_your_progress: {
+                    name: 'Show your weekly progress',
+                    bio: 'too many numbers ~w~'
+                },
+                pretty_obsessions: {
+                    name: 'Pretty obsessions'
+                },
+                profile_header: {
+                    name: 'Profilhintergründe anzeigen',
+                    for_own: 'Auf meinem Profil',
+                    for_others: 'Auf anderen Profilen'
+                }
+            },
+            performance: {
+                name: 'Fehlerbehebung',
+                bio: 'Running into noticeable issues in theme loading? Try out these settings.',
+                dev: {
+                    name: 'Disable in-built theme loading',
+                    bio: 'This allows you to load the in-built theme via Stylus instead, which may be more performant.',
+                    modals: {
+                        prompt: {
+                            alert: 'Once you refresh the page, the in-built bleh theme will be disabled (unless you disable this option again).',
+                            stylus: 'If you do not already have the <strong>Stylus</strong> extension, choose your browser below:',
+                            browsers: {
+                                chrome: {
+                                    name: 'Chrome',
+                                    bio: 'for Chrome, Edge, Brave, Opera'
+                                },
+                                firefox: {
+                                    name: 'Firefox',
+                                    bio: 'for Firefox only'
+                                }
+                            }
+                        },
+                        continue: {
+                            next_step: 'Once you have the extension installed, hit "Install style" on the new tab that will open.'
+                        },
+                        finish: {
+                            alert: 'All done! From now on, styling will be handled via Stylus.'
+                        }
+                    }
+                },
+                bug: {
+                    name: 'Something wrong?',
+                    bio: 'Report a bug in the bleh repo to get it fixed.'
+                }
+            },
+            profiles: {
+                name: 'Profil',
+                bio: 'Manage your personal data and data stored on other profiles.',
+                notes: {
+                    name: 'Notes',
+                    header: 'Note',
+                    placeholder: 'Enter a local note for this user',
+                    edit: 'Edit note',
+                    delete: 'Remove note',
+                    edit_user: 'Edit {u}\'s note',
+                    delete_user: 'Remove {u}\'s note',
+                    view: 'View your profile notes'
+                }
+            },
+            redirects: {
+                name: 'Weiterleitungen',
+                bio: 'Manage last.fm\'s (not) handy redirection system as best as possible.',
+                travis: {
+                    name: 'No, I didn\'t mean Travi$ Scott',
+                    bio: 'Hides redirect messages from the top of pages.'
+                },
+                autocorrect: {
+                    name: 'Scrobble auto-correction',
+                    bio: 'By default, last.fm will \'auto-correct\' some of your scrobbles using this system. This will make your scrobbles appear as <i>Travis Scott</i> rather than <i>Travi$ Scott</i>, however the redirection system is not fully disabled.',
+                    action: 'Open Settings'
+                }
+            },
+            corrections: {
+                name: 'Korrekturen',
+                bio: 'Verwalte das Korrektursystem von bleh für Künstler-, Album- und Titel.',
+                toggle: {
+                    name: 'Aktiviere das Korrektursystem'
+                },
+                view: {
+                    name: 'Aktuelle Korrekturen anzeigen',
+                    bio: 'Lists all active in your install'
+                },
+                formatting: 'Smarte Musiktitel',
+                format_guest_features: {
+                    name: 'Formatiere Features und Song-Tags',
+                    bio: 'Teilt Titel und Albentitel in einzelne Tags auf, beispielsweise Features, Versionen, Remixe.'
+                },
+                show_guest_features: {
+                    name: 'Features im Titel und Künstler anzeigen',
+                    bio: 'Durch deaktivieren werden sie von Titeln entfernt und das Künstlerfeld wird bevorzugt.'
+                },
+                stacked_chartlist_info: {
+                    name: 'Name und Titel stapeln',
+                    bio: 'Beide passen sich an den Streaming-Diensten an und erhöht die Länge dieser.'
+                },
+                show_remaster_tags: {
+                    name: 'Remaster-Tags anzeigen',
+                    bio: 'Nobody likes remasters (or the tags), if you\'d prefer to still listen but remove the annoyance hide them!'
+                },
+                submit: {
+                    name: 'Neue Korrektur einreichen',
+                    bio: 'Have a name that you feel is capitalised wrong?',
+                    action: 'Submit'
+                },
+                listing: {
+                    artists: 'Künstler',
+                    albums_tracks: 'Alben und Titel'
+                }
+            },
+            language: {
+                name: 'Sprache',
+                supported: 'Unterstützt von bleh',
+                by: 'von {users}',
+                submit: {
+                    name: 'Sprichst du fließend eine andere Sprache?',
+                    bio: 'Übersetzungen werden ausschließlich von der Community beigesteuert.',
+                    action: 'Übersetzung einreichen'
+                }
+            },
+            text: {
+                name: 'Text',
+                shout_preview_md: 'some <strong>completely</strong> random!<br>text that doesn\'t mean <a href="https://cutensilly.org">anything at all</a>',
+                shout_preview: 'some completely random! text that doesn\'t mean anything at all',
+                markdown: {
+                    name: 'Markdown-Formatierung verwenden',
+                    bio: 'Aktiviert Zeilenumbrüche, Fettdruck, Kursivschrift und Links.',
+                    shouts: 'In Shouts',
+                    profile: 'In Profilbiografien'
+                }
+            },
+            inbuilt: {
+                profile: {
+                    name: 'Profil',
+                    subtitle: {
+                        name: 'Untertitel'
+                    },
+                    pronoun_tip: 'Wenn Pronomen an den Anfang gestellt werden, ändert sich „aka.“ in „Pronomen“.',
+                    country: 'Land',
+                    website: 'Website',
+                    about: 'Über mich',
+                    toggle_preview: {
+                        name: 'Vorschau umschalten',
+                        bio: 'Vorschau deiner biographie für andere',
+                        note: 'Für nicht bleh Benutzer, mehrere Zeilen werden als Leerzeichen und Links angezeigt, Fett- und Kursivschrift wird als einfacher Text angezeigt.'
+                    },
+                    avatar: {
+                        name: 'Profilbild bearbeiten',
+                        upload: 'Datei hochladen',
+                        delete: 'Profilbild löschen'
+                    }
+                },
+                charts: {
+                    name: 'Charts',
+                    recent: {
+                        count: {
+                            name: 'Tracks to display'
+                        },
+                        artwork: {
+                            name: 'Display album artwork'
+                        },
+                        realtime: {
+                            name: 'Update tracks in realtime',
+                            bio: 'Your recent tracks will refresh while you are on your profile.'
+                        }
+                    },
+                    artists: {
+                        timeframe: {
+                            name: 'Default timeframe'
+                        },
+                        style: {
+                            name: 'Chart style'
+                        }
+                    },
+                    albums: {
+                        timeframe: {
+                            name: 'Default timeframe'
+                        },
+                        style: {
+                            name: 'Chart style'
+                        }
+                    },
+                    tracks: {
+                        count: {
+                            name: 'Tracks to display'
+                        },
+                        timeframe: {
+                            name: 'Default timeframe'
+                        }
+                    }
+                },
+                privacy: {
+                    name: 'Datenschutz',
+                    recent_listening: {
+                        name: 'Hide your recent listening history',
+                        bio: 'Keep your recent listens a secret o.O'
+                    },
+                    receiving_msgs: {
+                        name: 'Control who can interact with you',
+                        bio: 'This setting controls who can post shouts and message you privately.',
+                        settings: {
+                            everyone: {
+                                name: 'Everyone',
+                                bio: 'Everyone except who you have ignored'
+                            },
+                            neighbours: {
+                                name: 'Who you follow and neighbours',
+                                bio: 'Everyone who you have chosen to follow, along with your Last.fm neighbours'
+                            },
+                            follow: {
+                                name: 'Who you follow only',
+                                bio: 'Only users who you have chosen to follow'
+                            }
+                        }
+                    },
+                    disable_shoutbox: {
+                        name: 'Hide your shoutbox',
+                        bio: 'Your shoutbox will be hidden for you and anyone else.'
+                    }
+                },
+                wiki: {
+                    syntax: {
+                        name: 'Use fancy syntax when editing',
+                        links_to: 'Links to {link}'
+                    }
+                }
+            },
+            actions: {
+                import: {
+                    name: 'Import',
+                    modals: {
+                        initial: {
+                            name: 'Import settings from a previous install',
+                            alert: 'Anything you import will override your current settings, if you are importing settings from online ensure you trust the source.'
+                        },
+                        failed: {
+                            name: 'Import failed',
+                            alert: 'The settings you attempted to import failed to parse, no changes were made.'
+                        }
+                    }
+                },
+                export: {
+                    name: 'Export',
+                    modals: {
+                        initial: {
+                            name: 'Export your current settings',
+                            alert: 'Your current settings are in the textbox below ready for you to copy.'
+                        }
+                    }
+                },
+                reset: {
+                    name: 'Zurücksetzen',
                     modals: {
                         initial: {
                             name: 'Reset your settings to default',
@@ -847,11 +1417,11 @@ const trans = {
             },
             language: {
                 name: 'Language',
-                bio: 'bleh aims to support alongside last.fm\'s native translation system, powered by community contributions. It\'s still early days but contributions are very appreciated!',
+                supported: 'Supported by bleh',
                 by: 'by {users}',
                 submit: {
                     name: 'Are you fluent in another language?',
-                    bio: 'Translations are community-contributed and greatly appreciated for everyone.',
+                    bio: 'Translations are purely community-contributed.',
                     action: 'Submit translation'
                 }
             },
@@ -874,7 +1444,7 @@ const trans = {
                         aka: 'aka.',
                         pronouns: 'zaimki'
                     },
-                    pronoun_tip: 'Wskazówka: Jeśli zaimki są umieszczone jako pierwsze, "aka." zmieni się na "zaimki".',
+                    pronoun_tip: 'Jeśli zaimki są umieszczone jako pierwsze, "aka." zmieni się na "zaimki".',
                     country: 'Kraj',
                     website: 'Strona internetowa',
                     about: 'O mnie',
@@ -1019,6 +1589,26 @@ const trans = {
         }
     },
 }
+moment.updateLocale('de', {
+    relativeTime : {
+        future: 'in %s',
+        past:   'vor %s',
+        s  : 'ein paar Sekunden',
+        ss : '%d Sekunden',
+        m:  'eine Minute',
+        mm: '%d Minuten',
+        h:  'eine Stunde',
+        hh: '%d Stunden',
+        d:  'ein Tag',
+        dd: '%d Tagen',
+        w:  'eine Woche',
+        ww: '%d Wochen',
+        M:  'im Monat',
+        MM: '%d Monate',
+        y:  'ein Jahr',
+        yy: '%d Jahre'
+    }
+});
 
 function lookup_lang() {
     root = document.querySelector('.masthead-logo a').getAttribute('href');
@@ -1031,6 +1621,8 @@ function lookup_lang() {
         console.info('bleh - language fallback from', lang, 'to en (language is not listed as valid)', valid_langs);
         lang = 'en';
     }
+
+    moment.locale(lang);
 }
 
 // seasonal
@@ -1597,7 +2189,7 @@ let profile_badges = {
         },
         {
             type: 'translation',
-            name: 'translated bleh into polish'
+            name: 'translated bleh into Polski'
         },
         {
             type: 'contributor',
@@ -1633,6 +2225,14 @@ let profile_badges = {
         name: ':3²'
     },
     'inozom': [
+        {
+            type: 'contributor',
+            name: 'bleh contributor'
+        },
+        {
+            type: 'translation',
+            name: 'translated bleh into Deutsch'
+        },
         {
             type: 'cute',
             name: 'cute'
@@ -2350,6 +2950,55 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                 }
             });
         }
+
+
+        // language
+        let selected_language = document.querySelector('.footer-language--active strong').textContent;
+        let language_options = document.querySelectorAll('.footer-language-form');
+
+        let language_menu = document.createElement('div');
+        language_menu.classList.add('language-menu');
+
+        let sel_button = document.createElement('button');
+        sel_button.classList.add('dropdown-menu-clickable-item', 'lang-item', 'active');
+        sel_button.setAttribute('data-lang', non_override_lang);
+        sel_button.style.setProperty('--flag-url', `url('https://katelyynn.github.io/bleh/fm/flags/${non_override_lang}.svg')`);
+        sel_button.textContent = selected_language;
+
+        language_menu.appendChild(sel_button);
+
+        language_options.forEach((language_option) => {
+            let button = language_option.querySelector('button');
+            button.classList.remove('mimic-link');
+            button.classList.add('dropdown-menu-clickable-item', 'lang-item');
+            button.setAttribute('data-lang', button.getAttribute('name'));
+            button.style.setProperty('--flag-url', `url('https://katelyynn.github.io/bleh/fm/flags/${button.getAttribute('name')}.svg')`);
+
+            language_menu.appendChild(language_option);
+        });
+
+        let language_nav = document.createElement('a');
+        language_nav.classList.add('language-nav');
+        language_nav.innerHTML = (`
+            <span data-lang="${non_override_lang}" style="--flag-url: url('https://katelyynn.github.io/bleh/fm/flags/${non_override_lang}.svg');">${selected_language}</span>
+        `);
+
+        tippy(language_nav, {
+            theme: 'language-menu',
+            content: (`
+                ${language_menu.innerHTML}
+            `),
+            allowHTML: true,
+            delay: [100, 50],
+            placement: 'bottom',
+            //trigger: 'click',
+            interactive: true
+        });
+
+        let inner = document.body.querySelector('.masthead-nav-wrap');
+        let auth_container = inner.querySelector('.site-auth');
+
+        inner.insertBefore(language_nav, auth_container);
     }
 
     // create blank settings
@@ -2970,7 +3619,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
         // pronouns?
         let pronouns = use_pronouns(value);
 
-        document.getElementById('header-title-display-name--pre').textContent = pronouns ? 'pronouns' : 'aka.';
+        document.getElementById('header-title-display-name--pre').textContent = pronouns ? trans[lang].profile.display_name.pronouns : trans[lang].profile.display_name.aka;
     }
 
 
@@ -3312,7 +3961,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                         // user is on their ignore list
                         let toggle_btn = document.createElement('button');
                         toggle_btn.classList.add('toggle-button','header-follower-btn','header-follower-btn--denied');
-                        toggle_btn.textContent = trans[lang].profile.cannot_follow_user;
+                        toggle_btn.textContent = trans[lang].profile.on_ignore_list;
 
                         tippy(toggle_btn, {
                             content: trans[lang].profile.on_ignore_list
@@ -3472,8 +4121,11 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
 
         profile_name = profile_name.textContent.trim();
 
+        let header_meta = base_header.querySelector('.header-metadata');
+        header_meta.classList.add('profile-header-metadata-legacy');
+
         // acquire info
-        let metadata = base_header.querySelectorAll('.header-metadata-display');
+        let metadata = header_meta.querySelectorAll('.header-metadata-display');
 
         let scrobbles = 0;
         let average = 0;
@@ -3688,7 +4340,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
         refresh_btn.setAttribute('onclick', '_refresh_tracks(this)');
 
         tippy(refresh_btn, {
-            content: 'Refresh tracks'
+            content: trans[lang].music.refresh_tracks
         });
 
         tracklist_panel.appendChild(refresh_btn);
@@ -4060,7 +4712,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
         if (count_bar_link.getAttribute('href').endsWith('DAYS'))
             return;
 
-        let count = clean_number(count_bar.querySelector('.chartlist-count-bar-value').textContent.replace(' scrobbles',''));
+        let count = clean_number(count_bar.querySelector('.chartlist-count-bar-value').textContent.trim().replace(' scrobbles',''));
 
         if (!count_bar.hasAttribute('data-kate-processed')) {
             count_bar.setAttribute('data-kate-processed','true');
@@ -4174,7 +4826,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                     let artist_name = artist.querySelector('.grid-items-item-main-text a');
                     let corrected_artist_name = correct_artist(artist_name.textContent);
                     artist_name.textContent = corrected_artist_name;
-                    artist_name.setAttribute('href', `/music/${corrected_artist_name}`);
+                    artist_name.setAttribute('href', `${root}music/${corrected_artist_name}`);
                     artist_name.setAttribute('title', corrected_artist_name);
                 }
             }
@@ -4486,7 +5138,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                     <div class="current-season-container">
                         <div class="current-season" data-season="${stored_season.id}" id="current_season">
                             ${(stored_season.id != 'none')
-                            ? trans[lang].settings.customise.seasonal.marker.current.replace('{season}', stored_season.name).replace('{time}', moment(stored_season.end.replace('y0', stored_season.year)).to(stored_season.now, true))
+                            ? trans[lang].settings.customise.seasonal.marker.current.replace('{season}', trans[lang].settings.customise.seasonal.listing[stored_season.id]).replace('{time}', moment(stored_season.end.replace('y0', stored_season.year)).to(stored_season.now, true))
                             : (settings.seasonal) ? trans[lang].settings.customise.seasonal.marker.none : trans[lang].settings.customise.seasonal.marker.disabled}
                         </div>
                         <div class="current-season-started" id="current_season_start">
@@ -5200,7 +5852,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                         <div class="current-season-container">
                             <div class="current-season" data-season="${stored_season.id}" id="current_season">
                                 ${(stored_season.id != 'none')
-                                ? trans[lang].settings.customise.seasonal.marker.current.replace('{season}', stored_season.name).replace('{time}', moment(stored_season.end.replace('y0', stored_season.year)).to(stored_season.now, true))
+                                ? trans[lang].settings.customise.seasonal.marker.current.replace('{season}', trans[lang].settings.customise.seasonal.listing[stored_season.id]).replace('{time}', moment(stored_season.end.replace('y0', stored_season.year)).to(stored_season.now, true))
                                 : (settings.seasonal) ? trans[lang].settings.customise.seasonal.marker.none : trans[lang].settings.customise.seasonal.marker.disabled}
                             </div>
                             <div class="current-season-started" id="current_season_start">
@@ -5214,7 +5866,6 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                         <button class="btn reset" onclick="_reset_item('seasonal')">${trans[lang].settings.reset}</button>
                         <div class="heading">
                             <h5>${trans[lang].settings.customise.seasonal.option.name}</h5>
-                            <p>${trans[lang].settings.customise.seasonal.option.bio}</p>
                         </div>
                         <div class="toggle-wrap">
                             <button class="toggle" id="toggle-seasonal" onclick="_update_item('seasonal')" aria-checked="true">
@@ -5356,10 +6007,10 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
             return (`
                 <div class="bleh--panel">
                     <h3>${trans[lang].settings.language.name}</h3>
-                    <p>${trans[lang].settings.language.bio}</p>
                     ${(!valid_langs.includes(document.documentElement.getAttribute('lang'))) ? `
                     <div class="alert alert-error">Selected language is not currently supported in bleh, sorry for the inconvenience.</div>
                     ` : ''}
+                    <h4>${trans[lang].settings.language.supported}</h4>
                     <div class="languages" id="languages"></div>
                     <div class="sep"></div>
                     <div class="alert alert-warning">This page is still under construction! A wiki page dedicated to submitting a language is not available currently.</div>
@@ -5729,7 +6380,6 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                         <button class="btn reset" onclick="_reset_item('show_remaster_tags')">${trans[lang].settings.reset}</button>
                         <div class="heading">
                             <h5>${trans[lang].settings.corrections.show_remaster_tags.name}</h5>
-                            <p>${trans[lang].settings.corrections.show_remaster_tags.bio}</p>
                         </div>
                         <div class="toggle-wrap">
                             <button class="toggle" id="toggle-show_remaster_tags" onclick="_update_item('show_remaster_tags')" aria-checked="true">
@@ -5847,7 +6497,9 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
 
         if (page == 'themes') {
             tippy(document.body.querySelector('.swatch.default'), {
-                content: (stored_season.id != 'none') ? trans[lang].settings.customise.colours.default_with_season.replace('{season}', stored_season.name) : trans[lang].settings.customise.colours.default
+                content: (stored_season.id != 'none')
+                ? trans[lang].settings.customise.colours.default_with_season.replace('{season}', trans[lang].settings.customise.seasonal.listing[stored_season.id])
+                : trans[lang].settings.customise.colours.default
             });
             tippy(document.body.querySelector('.swatch.custom'), {
                 content: trans[lang].settings.customise.colours.custom
@@ -5856,10 +6508,10 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
 
         if ((page == 'seasonal' || page == 'home') && settings.seasonal && stored_season.id != 'none') {
             tippy(document.getElementById('current_season'), {
-                content: new Date(stored_season.end.replace('y0', stored_season.year)).toLocaleString()
+                content: new Date(stored_season.end.replace('y0', stored_season.year)).toLocaleString(lang)
             });
             tippy(document.getElementById('current_season_start'), {
-                content: new Date(stored_season.start.replace('y0', stored_season.year)).toLocaleString()
+                content: new Date(stored_season.start.replace('y0', stored_season.year)).toLocaleString(lang)
             });
         }
     }
@@ -6096,9 +6748,12 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
             let lang_row = document.createElement('div');
             lang_row.classList.add('language-row');
 
+            if (non_override_lang == language)
+                lang_row.classList.add('active');
+
             let users = '';
             for (let user in lang_info[language].by)
-                users = `<a class="mention" href="${root}user/${lang_info[language].by[user]}" target="_blank">@${lang_info[language].by[user]}</a> `;
+                users = `${users}<a class="mention" href="${root}user/${lang_info[language].by[user]}" target="_blank">@${lang_info[language].by[user]}</a> `;
 
             lang_row.innerHTML = (`
             <div class="flag-container">
@@ -6108,8 +6763,13 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                 <h5>${lang_info[language].name}</h5>
                 <p>${trans[lang].settings.language.by.replace('{users}', users)}</p>
             </div>
+            ${(lang_info[language].new ? (`
+            <div class="badges">
+                <div class="new-badge">${trans[lang].settings.new}</div>
+            </div>
+            `): '<div class="badges"></div>')}
             <div class="date">
-                <p>${lang_info[language].last_updated}</p>
+                <p>${(lang_info[language].last_updated != 'latest') ? moment(lang_info[language].last_updated).fromNow() : lang_info[language].last_updated}</p>
             </div>
             `);
 
@@ -6898,7 +7558,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                     // if artist matches OR artist is blank
                     if (song_artist_element.textContent.replaceAll('+', ' ').trim() == track_artist || song_artist_element.textContent.trim() == '') {
                         // replaces with corrected artist if applicable
-                        song_artist_element.innerHTML = `<a href="/music/${sanitise(formatted_title[2])}" title="${formatted_title[2]}">${formatted_title[2]}</a>`;
+                        song_artist_element.innerHTML = `<a href="${root}music/${sanitise(formatted_title[2])}" title="${formatted_title[2]}">${formatted_title[2]}</a>`;
 
                         // append guests
                         let song_guests = formatted_title[3];
@@ -7017,7 +7677,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
 
                     let guest_element = document.createElement('a');
                     guest_element.classList.add('header-new-crumb');
-                    guest_element.setAttribute('href',`/music/${sanitise(song_guests[guest])}`);
+                    guest_element.setAttribute('href',`${root}music/${sanitise(song_guests[guest])}`);
                     guest_element.setAttribute('title',song_guests[guest]);
                     guest_element.textContent = song_guests[guest];
 
@@ -8233,7 +8893,9 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
         refresh_all();
 
         tippy(document.body.querySelector('.swatch.default'), {
-            content: (stored_season.id != 'none') ? trans[lang].settings.customise.colours.default_with_season.replace('{season}', stored_season.name) : trans[lang].settings.customise.colours.default
+            content: (stored_season.id != 'none')
+            ? trans[lang].settings.customise.colours.default_with_season.replace('{season}', trans[lang].settings.customise.seasonal.listing[stored_season.id])
+            : trans[lang].settings.customise.colours.default
         });
         tippy(document.body.querySelector('.swatch.custom'), {
             content: trans[lang].settings.customise.colours.custom

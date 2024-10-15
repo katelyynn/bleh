@@ -1126,6 +1126,7 @@ last.fm changes as of 2024-05-20 */
 
 
 /* show mobile buttons for notifications, inbox, and settings */
+.language-nav,
 .masthead-nav-wrap:not(:has(.site-auth--anon)) .visible-xs {
     display: flex !important;
     order: 1;
@@ -1240,6 +1241,39 @@ last.fm changes as of 2024-05-20 */
 
 .auth-avatar-notification-count-badge {
     display: var(--auth-badge, none);
+}
+
+
+.language-nav {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    height: 40px !important;
+    text-decoration: none !important;
+    padding: 0 calc(16px + 6px) 0 calc(20px) !important;
+
+    --font-size: 0;
+    --mask: var(--icon-16-arrow-down);
+    --left: none !important;
+    --right: 0;
+
+    span {
+        position: relative;
+        font-size: var(--font-size);
+        --left: calc(-1 * (20px)) !important;
+        --right: none !important;
+    }
+}
+
+[data-lang] {
+    &:before {
+        --mask: none;
+        --mask-size: 20px;
+        --margin-top: -10px;
+        background-color: unset !important;
+        background-image: var(--flag-url) !important;
+    }
 }
 
 
@@ -1395,13 +1429,10 @@ last.fm changes as of 2024-05-20 */
 }
 
 
-#language-selector, .footer-timezone {
+.footer-timezone {
     padding-left: calc(var(--button-list-gap) + 16px + var(--button-list-gap)) !important;
     position: relative;
     --left: var(--button-list-gap) !important;
-}
-.footer #language-selector {
-    --mask: var(--icon-16-language);
 }
 .footer .footer-timezone {
     --mask: var(--icon-16-clock);
@@ -1532,8 +1563,6 @@ last.fm changes as of 2024-05-20 */
 /* this fixes places of the site (tracks, artist, albums watever that use a weird method of 2 col-mains, 2 col-sidebars as appose to profiles */
 /* -> could be simplified, idk if it affects other parts of the site tho */.row.buffer-4 > .col-main:first-child /* <- */, .row.buffer-4 > .col-main:nth-child(3) > :is(section, #shoutbox),
 .album-and-lyrics-row,
-/* this is for artists, appears to be targeting the bio box */ .header-new--artist + .container > .row/*:not(.buffer-4)*//*:has(:nth-child(2)) > .col-main:nth-child(1)*/ .col-main:first-child, /* there's 2 col-mains, the 2nd contains other cards */
-/* this is for albums */ .container > .row.buffer-reset\@sm > .col-main:nth-child(2),
 /* dont question it too far, refer to the above display: grid for more insight, this is jus applying the card styling */
 .shoutbox--with-header#shoutbox:not(#shoutbox > #shoutbox /* for shoutbox on gallery image */, section > #shoutbox /* events */),
 .header-featured-track,
@@ -1668,13 +1697,15 @@ body[class*="namespace--user_library_"] .col-sidebar, .library-header,
 
 .content-top-back-link {
     margin: unset !important;
-}
-.content-top-back-link a {
-    padding: unset;
-    color: hsl(var(--l3-c)) !important;
-}
-.content-top-back-link a:before {
-    display: none;
+
+    a {
+        padding: unset;
+        color: hsl(var(--l3-c)) !important;
+
+        &:before {
+            display: none;
+        }
+    }
 }
 
 .content-top-back-link + .content-top-header {
@@ -1710,9 +1741,10 @@ body[class*="namespace--user_library_"] .col-sidebar, .library-header,
 
 .page-content:has(> .section) + .full-bleed-ad-container + .page-content {
     padding-top: unset !important;
-}
-.page-content:has(> .section) + .full-bleed-ad-container + .page-content .col-sidebar {
-    top: unset !important;
+
+    .col-sidebar {
+        top: unset !important;
+    }
 }
 
 
@@ -2454,6 +2486,10 @@ elements, this is how we detect its missing */
     .artist-row {
         padding: 7px 0;
 
+        h5 {
+            text-align: center;
+        }
+
         /*&:not(:first-child) {
             border-top: var(--card-border);
         }*/
@@ -2482,6 +2518,7 @@ elements, this is how we detect its missing */
             }
 
             &.pre-transition h5 {
+                text-align: right;
                 color: hsl(var(--c3));
             }
         }
@@ -2516,7 +2553,26 @@ elements, this is how we detect its missing */
         display: flex;
         align-items: center;
         gap: var(--card-gap);
-        padding: 7px 0;
+        padding: 7px 12px;
+
+        &.active {
+            position: relative;
+            background-color: hsla(var(--h4), 20%);
+            border-radius: var(--item-med-radius);
+
+            [data-bleh--theme="light"] & {
+                background-color: hsla(var(--h4), 10%);
+            }
+
+            /*&:before {
+                content: '';
+                inset: 0;
+                position: absolute;
+                border-radius: var(--item-med-radius);
+                display: block;
+                background-color: hsla(var(--h4), 20%);
+            }*/
+        }
 
         .flag-container {
             display: block;
@@ -2557,9 +2613,13 @@ elements, this is how we detect its missing */
             -webkit-box-orient: vertical;
         }
 
-        & + .language-row {
-            border-top: var(--card-border);
+        .badges {
+            width: 40px;
         }
+
+        /*& + .language-row {
+            border-top: var(--card-border);
+        }*/
     }
 }
 
@@ -2799,7 +2859,7 @@ button.navlist-more {
     gap: 10px;
 }
 
-.auth-link,
+.auth-link, .language-nav,
 .user-dashboard-pagination a, .user-dashboard-pagination span:not(.user-dashboard-controls-tooltip),
 .navlist-more, .secondary-nav-item-link, .masthead-nav-control {
     /* left padding for icon, otherwise just 12px 16px */
@@ -2863,6 +2923,7 @@ button.navlist-more {
     }
 
     /*&.masthead-nav-control--active,*/
+    &[aria-expanded="true"],
     &.secondary-nav-item-link.active,
     [data-bleh--gallery-tab="overview"] .secondary-nav-item--gallery-overview  &,
     [data-bleh--gallery-tab="bookmarks"] .secondary-nav-item--gallery-bookmarks &,
@@ -3764,7 +3825,7 @@ state is not active, which then falls back to primary button styling */
     }
 }
 .header-title-label-wrap .label:hover, .header-new-on-tour:hover {
-    max-width: 210px;
+    max-width: 220px;
     padding-right: 6px;
     background-color: hsla(var(--h4), 15%) !important;
 }
@@ -6190,6 +6251,10 @@ button,
 .obsession-history-play-all
 {
     --btn-left: calc(12px + 16px + 6px) !important;
+
+    &.lang-item {
+        --btn-left: calc(12px + 20px + 6px) !important;
+    }
 }
 .side-right .setting-item,
 .continue, .external,
@@ -6311,7 +6376,7 @@ button,
 .continue:before, .external:before,
 .badge:before,
 .btn-post-shout:before,
-.auth-link:before,
+.auth-link:before, .language-nav:before, .language-nav > span:before,
 .gallery-placeholder:before,
 .image-list-item-bookmarked:after, .image-list-item-preferred:after,
 .data-loading:before, .lazy-shoutbox.async-content-loading:before, .loading:not(.library-fetch, .library-date-picker):before,
@@ -6351,7 +6416,7 @@ button,
 .secondary-nav-item-link:before,
 .navlist-more:before,
 /*     FOOTER     */
-#language-selector:before, .footer-timezone:before,
+.footer-timezone:before,
 /*     PLAYLINKS & MEDIA LINKS     */
 .resource-external-link:before, .play-this-track-playlink:before, .replace-playlink:before,
 .section-playlink:before, .inline-section-control:before,
@@ -6462,7 +6527,7 @@ span.header-new-gallery-inner a:before,
     right: var(--right, auto);
     top: var(--top, 50%) !important;
     background-repeat: no-repeat;
-    background-image: unset !important;
+    background-image: var(--flag-url, unset) !important;
     background-color: currentColor;
     border-radius: unset;
     mask-image: var(--mask);
@@ -6803,6 +6868,7 @@ on the bottom of a panel !! */
     top: -6px;
 }
 
+.lang-item.active,
 .bleh--configure-menu-item,
 .more-item--edit-old,
 [data-analytics-label="settings"]
@@ -6814,6 +6880,7 @@ on the bottom of a panel !! */
 {
     margin-top: 11px !important;
 }
+.lang-item.active:after,
 .more-item--submit-correction:after,
 .bleh--configure-menu-item:after,
 .more-item--edit-old:after,
@@ -8621,6 +8688,7 @@ text[style^="color: rgb(255, 172, 172)"] {
         transform: none !important;
     }
 
+    &[data-theme="language-menu"],
     &[data-theme="menu"] {
         padding: 5px !important;
         background: hsl(var(--b5)) !important;
@@ -8639,6 +8707,16 @@ text[style^="color: rgb(255, 172, 172)"] {
             background-image: var(--overlay-snow-min), linear-gradient(180deg, rgba(190,233,250,0.04) 0%, rgba(0,0,0,0) 100%) !important;
             background-repeat: repeat-x !important;
             background-position: unset !important;
+        }
+
+        &[data-theme="language-menu"] {
+            animation: dropdown calc(var(--trans-short) + 0.02s) var(--trans-function);
+            transform-origin: top;
+
+            &[data-state="hidden"] {
+                transform: scaleY(0.85);
+                opacity: 0;
+            }
         }
 
         &[data-state="hidden"] {
@@ -15439,7 +15517,6 @@ button.bleh--gallery-bookmark-image-btn {
 }
 .tab-container,
 .footer-timezone,
-#language-selector,
 .view-buttons {
     display: flex;
     align-items: center;
@@ -15470,9 +15547,6 @@ button.bleh--gallery-bookmark-image-btn {
 
     .footer-language {
         display: flex;
-    }
-    &#language-selector {
-        margin-bottom: var(--button-list-gap);
     }
     &.footer-timezone {
         a {
@@ -15696,6 +15770,7 @@ button.bleh--gallery-bookmark-image-btn {
     --profile-header-avatar-size: 104px;
 }
 
+#language-selector,
 .video-preview-replace,
 .header-new-info-desktop {
     display: none;
@@ -16307,7 +16382,7 @@ h4 {
 
 
 
-.header-metadata {
+.profile-header-metadata-legacy {
     [data-ff--redesigned_profile_header="true"] & {
         display: none !important;
     }
