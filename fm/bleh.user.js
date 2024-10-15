@@ -317,7 +317,7 @@ const trans = {
                 },
                 gendered_tags: {
                     name: 'Hide gendered tags',
-                    bio: 'By default, gendered tags are hidden in bleh due to their unorganised and impossible nature.'
+                    bio: 'Gender-specific tags are deemed redundant by default.'
                 },
                 rain: {
                     name: 'Let it rain!',
@@ -792,15 +792,15 @@ const trans = {
                 name: 'Zugänglichkeit',
                 shout_preview: 'some completely random text that doesn\'t mean <a href="https://cutensilly.org">anything at all</a>',
                 accessible_name_colours: {
-                    name: 'Prefer accessible name colours',
+                    name: 'Zugängliche Namensfarben bevorzugen',
                     bio: 'Use the default header text colour over a accented text colour.'
                 },
                 underline_links: {
-                    name: 'Always underline links',
+                    name: 'Links immer unterstreichen',
                     bio: 'Make links to interactables stand out.'
                 },
                 reduced_motion: {
-                    name: 'Reduce animations around interfaces',
+                    name: 'Animationen reduzieren',
                     bio: 'Will in most cases either slowly fade or hard-cut, no scaling.'
                 }
             },
@@ -859,26 +859,26 @@ const trans = {
                     }
                 },
                 artwork: {
-                    name: 'Artwork'
+                    name: 'Cover'
                 },
                 hue_from_album: {
-                    name: 'Automatically colour album pages',
-                    bio: 'Picks the primary colour from an album cover to paint the page.'
+                    name: 'Albumseiten automatisch färben',
+                    bio: 'Wählt die Primärfarbe eines Albumcovers aus, um die Seite zu bemalen.'
                 },
                 gloss: {
                     name: 'Gloss overlay',
                     bio: 'Apply flair to all cover arts.'
                 },
                 display: {
-                    name: 'Display'
+                    name: 'Anzeigeeinstellungen'
                 },
                 colourful_counts: {
-                    name: 'Use a colour gradient for all-time charts',
-                    bio: 'Assigns a colour from a gradient based on your position in all-time artist scrobbles.'
+                    name: 'Verwende einen Farbverlauf für die Allzeitdiagramme',
+                    bio: 'Weist eine Farbe aus dem Farbverlauf zu, basierend auf der insgesamten Anzahl der Scrobbels für einen Künstler.'
                 },
                 gendered_tags: {
-                    name: 'Hide gendered tags',
-                    bio: 'By default, gendered tags are hidden in bleh due to their unorganised and impossible nature.'
+                    name: 'Geschlechtsspezifische Tags ausblenden',
+                    bio: 'Geschlechtsspezifische Tags sind normalerweise überflüssig.'
                 },
                 rain: {
                     name: 'Let it rain!',
@@ -892,9 +892,9 @@ const trans = {
                     name: 'Pretty obsessions'
                 },
                 profile_header: {
-                    name: 'Display profile backgrounds',
-                    for_own: 'On my profile',
-                    for_others: 'On other profiles'
+                    name: 'Profilhintergründe anzeigen',
+                    for_own: 'Auf meinem Profil',
+                    for_others: 'Auf anderen Profilen'
                 }
             },
             performance: {
@@ -932,7 +932,7 @@ const trans = {
                 }
             },
             profiles: {
-                name: 'Profile',
+                name: 'Profil',
                 bio: 'Manage your personal data and data stored on other profiles.',
                 notes: {
                     name: 'Notes',
@@ -982,7 +982,7 @@ const trans = {
                     bio: 'Beide passen sich an den Streaming-Diensten an und erhöht die Länge dieser.'
                 },
                 show_remaster_tags: {
-                    name: 'Show remaster tags',
+                    name: 'Remaster-Tags anzeigen',
                     bio: 'Nobody likes remasters (or the tags), if you\'d prefer to still listen but remove the annoyance hide them!'
                 },
                 submit: {
@@ -1010,10 +1010,10 @@ const trans = {
                 shout_preview_md: 'some <strong>completely</strong> random!<br>text that doesn\'t mean <a href="https://cutensilly.org">anything at all</a>',
                 shout_preview: 'some completely random! text that doesn\'t mean anything at all',
                 markdown: {
-                    name: 'Use markdown formatting',
-                    bio: 'Enables line-breaks, bold, italics, and links.',
-                    shouts: 'In shouts',
-                    profile: 'In profile bios'
+                    name: 'Markdown-Formatierung verwenden',
+                    bio: 'Aktiviert Zeilenumbrüche, Fettdruck, Kursivschrift und Links.',
+                    shouts: 'In Shouts',
+                    profile: 'In Profilbiografien'
                 }
             },
             inbuilt: {
@@ -6376,7 +6376,6 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                         <button class="btn reset" onclick="_reset_item('show_remaster_tags')">${trans[lang].settings.reset}</button>
                         <div class="heading">
                             <h5>${trans[lang].settings.corrections.show_remaster_tags.name}</h5>
-                            <p>${trans[lang].settings.corrections.show_remaster_tags.bio}</p>
                         </div>
                         <div class="toggle-wrap">
                             <button class="toggle" id="toggle-show_remaster_tags" onclick="_update_item('show_remaster_tags')" aria-checked="true">
