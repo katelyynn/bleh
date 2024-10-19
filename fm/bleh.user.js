@@ -1913,6 +1913,7 @@ let song_title_corrections = {
         'Shoreditch (Bsun N Thr6x Remix)': 'shoreditch (bsun n thr6x remix)',
         'Que Onda': 'que onda',
         'A Date w Karma (V1)': 'a date w karma (v1)',
+        'Minnesota is a place that exists (V2)': 'minnesota is a place that exists (v2)',
         //
         'may it never falter': 'May It Never Falter',
         'may it never falter (sessions)': 'May It Never Falter (Sessions)',
@@ -2729,8 +2730,10 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
         document.documentElement.appendChild(style_cache);
 
         console.info('bleh - loaded cached style');
-        setTimeout(function() {document.body.classList.add('bleh');}, 200);
-        theme_version = getComputedStyle(document.body).getPropertyValue('--version-build').replaceAll("'", ''); // remove quotations
+        setTimeout(function() {
+            document.body.classList.add('bleh');
+            theme_version = getComputedStyle(document.body).getPropertyValue('--version-build').replaceAll("'", ''); // remove quotations
+        }, 200);
     }
 
     function check_if_style_cache_is_valid() {
@@ -2742,7 +2745,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
             // in versions 2024.1019 and onwards, the css stores version itself
             // we can use this to compare if we should fetch a new one
             // as we don't want to fetch a new css while the js is out of date
-            if (theme_version != version.build) {
+            if (theme_version != version.build && theme_version != '') {
                 // script is either out of date, or more in date (not gonna happen)
                 console.info('bleh - attempted to fetch new style, however theme returned version', theme_version, 'meanwhile script is running', version.build, '- halted');
 
