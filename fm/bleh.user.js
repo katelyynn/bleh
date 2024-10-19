@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         bleh
 // @namespace    http://last.fm/
-// @version      2024.1015
+// @version      2024.1019
 // @description  bleh!!! ^-^
 // @author       kate
 // @match        https://www.last.fm/*
@@ -18,7 +18,7 @@
 // ==/UserScript==
 
 let version = {
-    build: '2024.1015',
+    build: '2024.1019',
     sku: 'falter',
     feature_flags: {
         bleh_settings_tabs: {
@@ -8343,10 +8343,11 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
         let split = url.split('/');
         let length = (split.length - 1);
 
+        // lets treat unicode properly
         if (is_album)
-            return desanitise(split[length - 1]);
+            return decodeURI(desanitise(split[length - 1]));
         else
-            return desanitise(split[length - 2]);
+            return decodeURI(desanitise(split[length - 2]));
     }
 
 
