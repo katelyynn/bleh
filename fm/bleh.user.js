@@ -2730,6 +2730,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
 
         console.info('bleh - loaded cached style');
         setTimeout(function() {document.body.classList.add('bleh');}, 200);
+        theme_version = getComputedStyle(document.body).getPropertyValue('--version-build').replaceAll("'", ''); // remove quotations
     }
 
     function check_if_style_cache_is_valid() {
@@ -2834,6 +2835,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
             console.info('bleh - style is cached until', api_expire);
 
             setTimeout(function() {document.body.classList.add('bleh');}, 200);
+            theme_version = getComputedStyle(document.body).getPropertyValue('--version-build').replaceAll("'", ''); // remove quotations
         }
 
         xhr.send();
@@ -5165,6 +5167,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
     }
 
     function render_setting_page(page) {
+        console.info(theme_version != version.build, theme_version, version.build, typeof(theme_version), typeof(version.build));
         if (page == 'home') {
             return (`
             <div class="bleh--panel">
