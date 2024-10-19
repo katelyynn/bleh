@@ -4103,6 +4103,9 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
     function patch_profile_obsession() {
         let header_featured_track = document.body.querySelector('.featured-item-details');
 
+        if (header_featured_track == null)
+            return;
+
         let name_elem = header_featured_track.querySelector('.featured-item-name');
         let artist_elem = header_featured_track.querySelector('.featured-item-artist');
 
