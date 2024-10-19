@@ -8058,6 +8058,8 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
     unsafeWindow._force_refresh_theme = function() {
         localStorage.removeItem('bleh_cached_style');
         localStorage.removeItem('bleh_cached_style_timeout');
+
+        window.setTimeout(invoke_reload, 400);
     }
 
 
