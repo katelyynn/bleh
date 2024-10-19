@@ -3366,9 +3366,9 @@ button.navlist-more {
     margin-right: auto;
     left: 0;
 
-    --mask: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+    /*--mask: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
     mask-image: var(--mask);
-    -webkit-mask-image: var(--mask);
+    -webkit-mask-image: var(--mask);*/
 }
 .header-new-background-image, .header-new-background-overlay {
     border-radius: var(--card-radius);
@@ -3382,7 +3382,7 @@ button.navlist-more {
     box-shadow: var(--card-shadow);
     position: relative;
 
-    background-image: linear-gradient(180deg, rgba(255,255,255,0) 0%, hsl(var(--b6)) 100%) !important;
+    /*background-image: linear-gradient(180deg, rgba(255,255,255,0) 0%, hsl(var(--b6)) 100%) !important;*/
 }
 .header-new-inner:before {
     position: absolute;
