@@ -8687,10 +8687,11 @@ text[style^="color: rgb(255, 172, 172)"] {
 .user-dashboard-controls-tooltip,
 .tooltip-dark,
 .user-dashboard-tooltip {
-    background: hsla(var(--b6), 70%);
+    background: hsla(var(--b6), 60%);
     backdrop-filter: blur(10px) saturate(160%);
+    border: var(--card-border);
     border-radius: 50px;
-    box-shadow: var(--menu-shadow);
+    box-shadow: var(--card-shadow);
     padding: 5px 14px;
     font-size: calc(var(--font-size) - 1px);
     font-weight: var(--font-weight);
@@ -15966,6 +15967,10 @@ button.bleh--gallery-bookmark-image-btn {
         position: relative;
         padding-left: calc(16px + 6px);
 
+        &[aria-describedby] {
+            cursor: pointer;
+        }
+
         --left: 0;
         --mask: var(--icon-16-x);
 
@@ -15995,6 +16000,10 @@ button.bleh--gallery-bookmark-image-btn {
     }
     .current-season-started {
         color: hsl(var(--c3));
+
+        &[aria-describedby] {
+            cursor: pointer;
+        }
     }
 }
 
