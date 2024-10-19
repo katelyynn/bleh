@@ -2567,7 +2567,8 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
 
     // this runs on page load only once!
     auth_link = document.querySelector('a.auth-link');
-    auth = auth_link.querySelector('img').getAttribute('alt');
+    if (auth_link != null)
+        auth = auth_link.querySelector('img').getAttribute('alt');
 
     console.info('loading bleh', version.build, 'with sku', version.sku);
 
@@ -2579,7 +2580,6 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
         load_settings();
         append_style();
         lookup_lang();
-        append_nav(document.body);
         patch_masthead(document.body);
         load_notifs();
 
@@ -2591,6 +2591,8 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
         // everything past this point requires authorisation
         if (auth == '')
             return;
+
+        append_nav();
 
         notify_if_new_update();
 
@@ -2805,7 +2807,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
         }
     }
 
-    function append_nav(element) {
+    function append_nav() {
         let auth_link = document.body.querySelector('.auth-link');
 
         if (auth_link.hasAttribute('data-bleh'))
@@ -2856,8 +2858,8 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
 
 
         let settings = JSON.parse(localStorage.getItem('bleh')) || create_settings_template();
-        let user_nav = element.querySelectorAll('.auth-dropdown-menu > li')[0];
-        let inbox_nav = element.querySelectorAll('.auth-dropdown-menu > li')[2];
+        let user_nav = document.body.querySelectorAll('.auth-dropdown-menu > li')[0];
+        let inbox_nav = document.body.querySelectorAll('.auth-dropdown-menu > li')[2];
 
         document.querySelector('.auth-dropdown-menu').style.setProperty('--url', `url(${my_avi.replace('avatar42s', 'avatar170s')})`);
 
