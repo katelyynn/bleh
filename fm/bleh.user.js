@@ -2760,6 +2760,9 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
         }
     }
 
+    unsafeWindow._prompt_for_update = function() {
+        prompt_for_update();
+    }
     function prompt_for_update() {
         // prompt the user
         create_window('bleh_update',trans[lang].settings.home.update.name,(`
@@ -2773,7 +2776,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                             <p>${trans[lang].settings.home.update.bio}</p>
                         </span>
                     </a>
-                    ${((!settings.dev && theme_version != version.build && theme_version != '') ? (`
+                    ${(!settings.dev ? (`
                     <button class="btn action" onclick="_force_refresh_theme()">
                         <div class="icon bleh--updates"></div>
                         <span class="text">
@@ -2796,6 +2799,9 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
             <div class="modal-footer">
                 <button class="btn" onclick="_ignore_update()">
                     ${trans[lang].settings.home.update.ignore}
+                </button>
+                <button class="btn primary continue" onclick="_invoke_reload()">
+                    ${trans[lang].settings.continue}
                 </button>
             </div>
         `));
@@ -2839,6 +2845,18 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
 
             setTimeout(function() {document.body.classList.add('bleh');}, 200);
             theme_version = getComputedStyle(document.body).getPropertyValue('--version-build').replaceAll("'", ''); // remove quotations
+
+
+            // in versions 2024.1019 and onwards, the css stores version itself
+            // we can use this to compare if we should fetch a new one
+            // as we don't want to fetch a new css while the js is out of date
+            if (theme_version != version.build && theme_version != '') {
+                // script is either out of date, or more in date (not gonna happen)
+                console.info('bleh - attempted to fetch new style, however theme returned version', theme_version, 'meanwhile script is running', version.build, '- halted');
+
+                prompt_for_update();
+                return;
+            }
         }
 
         xhr.send();
@@ -5183,7 +5201,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                 <h4>${trans[lang].settings.home.thanks
                 .replace('{m}', `<a class="mention" href="${root}user/${auth}">@${auth}</a>`)
                 .replace('{v}', `<span class="version-link" onclick="_change_settings_page('sku')">${version.build}.${version.sku}</span>`)}</h4>
-                ${(theme_version != version.build) ? `<div class="alert alert-update">${trans[lang].settings.home.update.notice}</div>` : ''}
+                ${(theme_version != version.build && theme_version != '') ? `<div class="alert alert-update">${trans[lang].settings.home.update.notice}</div>` : ''}
                 <div class="screen-row actions-only">
                     <div class="actions">
                         <a class="btn action" href="https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.js">
@@ -5193,7 +5211,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                                 <p>${trans[lang].settings.home.update.bio}</p>
                             </span>
                         </a>
-                        ${((!settings.dev && theme_version != version.build) ? (`
+                        ${((!settings.dev && theme_version != version.build && theme_version != '') ? (`
                         <button class="btn action" onclick="_force_refresh_theme()">
                             <div class="icon bleh--updates"></div>
                             <span class="text">
