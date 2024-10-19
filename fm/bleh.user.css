@@ -6385,6 +6385,7 @@ button,
 
 
 /*     ICON MASK     */
+.error-page h3:before,
 .requesting:before,
 .modal-processing:before,
 .side-right .setting-item:before, .action:before,
@@ -16449,6 +16450,50 @@ h4 {
         .actions {
             justify-content: center;
             width: 100%;
+        }
+    }
+}
+
+
+
+
+.has-error {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 160px 0 20px 0 !important;
+
+    .error-page {
+        background-color: hsl(var(--b5));
+        padding: var(--card-padding);
+        border: var(--card-border);
+        border-radius: var(--card-radius);
+        text-align: center;
+
+        h3 {
+            margin: unset;
+            color: hsl(var(--c1));
+            position: relative;
+
+            padding-top: 20px;
+            --top: 0;
+            --left: 50%;
+            --margin-left: -10px;
+            --mask: var(--icon-16-x);
+            --mask-size: 20px;
+
+            &:before {
+                color: hsl(var(--c3));
+            }
+        }
+
+        .button-footer {
+            margin-top: var(--card-gap);
+            padding-top: var(--card-gap);
+            border-top: var(--card-border);
+
+            display: flex;
+            gap: var(--card-gap);
         }
     }
 }

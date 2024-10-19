@@ -99,6 +99,12 @@ const trans = {
             wiki: 'About',
             refresh_tracks: 'Refresh tracks'
         },
+        error: {
+            name: 'This page is missing...',
+            go_back: 'Go back',
+            visit_profile: 'Visit profile',
+            try_again: 'Try again'
+        },
         statistics: {
             scrobbles: {
                 name: 'Your scrobbles'
@@ -2638,7 +2644,9 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
 
             patch_about_this_artist();
             patch_obsession_view();
-            patch_wiki_editor()
+            patch_wiki_editor();
+
+            error_page();
         }
 
         // last.fm is a single page application
@@ -2687,6 +2695,8 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                 patch_about_this_artist();
                 patch_obsession_view();
                 patch_wiki_editor();
+
+                error_page();
             }
         });
 
@@ -9727,5 +9737,39 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
 
             wiki_col.insertBefore(wiki_header, wiki_col.firstElementChild);
         }
+    }
+
+
+
+
+    function error_page() {
+        let page_content = document.body.querySelector('.page-content');
+
+        if (page_content == null)
+            return;
+
+        let error_marvin = page_content.querySelector('.error-page-marvin:not([data-bleh])');
+
+        if (error_marvin == null)
+            return;
+        error_marvin.setAttribute('data-bleh', 'true');
+
+
+        let back_link = page_content.querySelector('a');
+
+        page_content.classList.add('has-error');
+        page_content.innerHTML = (`
+            <div class="error-page">
+                <h3>${trans[lang].error.name}</h3>
+                <div class="button-footer">
+                    <a class="btn back" href="${back_link.getAttribute('href')}">
+                        ${trans[lang].error.go_back}
+                    </a>
+                    <a class="btn continue primary" href="${root}user/${auth}">
+                        ${trans[lang].error.visit_profile}
+                    </a>
+                </div>
+            </div>
+        `);
     }
 })();
