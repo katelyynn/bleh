@@ -13965,13 +13965,18 @@ input[type="range"]::-moz-range-progress {
 }
 
 
+.toggle-container {
+    cursor: pointer;
+}
 .toggle {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 56px !important;
-    height: 28px;
+    width: 48px !important;
+    height: 24px;
     position: relative;
+
+    --radius: 50px;
 
     .dot {
         position: absolute;
@@ -13981,7 +13986,7 @@ input[type="range"]::-moz-range-progress {
         border-radius: var(--item-med-radius);
         background: var(--col);
 
-        transition-property: left;
+        transition-property: left, background;
         transition-duration: var(--trans);
         transition-timing-function: var(--trans-function);
     }
@@ -13995,7 +14000,7 @@ input[type="range"]::-moz-range-progress {
         --shadow-hov: var(--interactable-outer), var(--interactable-active-outer);
 
         .dot {
-            left: calc(56px - 7px - 12px);
+            left: calc(48px - 7px - 12px);
         }
     }
 }

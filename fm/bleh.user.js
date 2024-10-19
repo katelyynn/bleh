@@ -5288,13 +5288,13 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                         </div>
                     </div>
                     ${(settings.feature_flags.high_contrast) ? (`
-                    <div class="toggle-container" id="container-high_contrast">
+                    <div class="toggle-container" id="container-high_contrast" onclick="_update_item('high_contrast')">
                         <button class="btn reset" onclick="_reset_item('high_contrast')">${trans[lang].settings.reset}</button>
                         <div class="heading">
                             <h5>${trans[lang].settings.customise.high_contrast.name}</h5>
                         </div>
                         <div class="toggle-wrap">
-                            <button class="toggle" id="toggle-high_contrast" onclick="_update_item('high_contrast')" aria-checked="true">
+                            <button class="toggle" id="toggle-high_contrast" aria-checked="true">
                                 <div class="dot"></div>
                             </button>
                         </div>
@@ -5697,14 +5697,14 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                             </div>
                         </div>
                     </div>
-                    <div class="toggle-container" id="container-colourful_counts">
+                    <div class="toggle-container" id="container-colourful_counts" onclick="_update_item('colourful_counts')">
                         <button class="btn reset" onclick="_reset_item('colourful_counts')">${trans[lang].settings.reset}</button>
                         <div class="heading">
                             <h5>${trans[lang].settings.customise.colourful_counts.name}</h5>
                             <p>${trans[lang].settings.customise.colourful_counts.bio}</p>
                         </div>
                         <div class="toggle-wrap">
-                            <button class="toggle" id="toggle-colourful_counts" onclick="_update_item('colourful_counts')" aria-checked="true">
+                            <button class="toggle" id="toggle-colourful_counts" aria-checked="true">
                                 <div class="dot"></div>
                             </button>
                         </div>
@@ -5772,76 +5772,76 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                             </ul>
                         </section>
                     </div>
-                    <div class="toggle-container" id="container-gendered_tags">
+                    <div class="toggle-container" id="container-gendered_tags" onclick="_update_item('gendered_tags')">
                         <button class="btn reset" onclick="_reset_item('gendered_tags')">${trans[lang].settings.reset}</button>
                         <div class="heading">
                             <h5>${trans[lang].settings.customise.gendered_tags.name}</h5>
                             <p>${trans[lang].settings.customise.gendered_tags.bio}</p>
                         </div>
                         <div class="toggle-wrap">
-                            <button class="toggle" id="toggle-gendered_tags" onclick="_update_item('gendered_tags')" aria-checked="true">
+                            <button class="toggle" id="toggle-gendered_tags" aria-checked="true">
                                 <div class="dot"></div>
                             </button>
                         </div>
                     </div>
                     <div class="sep"></div>
                     <h4>${trans[lang].settings.customise.profile_header.name}</h4>
-                    <div class="toggle-container" id="container-profile_header_own">
+                    <div class="toggle-container" id="container-profile_header_own" onclick="_update_item('profile_header_own')">
                         <button class="btn reset" onclick="_reset_item('profile_header_own')">${trans[lang].settings.reset}</button>
                         <div class="heading">
                             <h5>${trans[lang].settings.customise.profile_header.for_own}</h5>
                         </div>
                         <div class="toggle-wrap">
-                            <button class="toggle" id="toggle-profile_header_own" onclick="_update_item('profile_header_own')" aria-checked="false">
+                            <button class="toggle" id="toggle-profile_header_own" aria-checked="false">
                                 <div class="dot"></div>
                             </button>
                         </div>
                     </div>
-                    <div class="toggle-container" id="container-profile_header_others">
+                    <div class="toggle-container" id="container-profile_header_others" onclick="_update_item('profile_header_others')">
                         <button class="btn reset" onclick="_reset_item('profile_header_others')">${trans[lang].settings.reset}</button>
                         <div class="heading">
                             <h5>${trans[lang].settings.customise.profile_header.for_others}</h5>
                         </div>
                         <div class="toggle-wrap">
-                            <button class="toggle" id="toggle-profile_header_others" onclick="_update_item('profile_header_others')" aria-checked="false">
+                            <button class="toggle" id="toggle-profile_header_others" aria-checked="false">
                                 <div class="dot"></div>
                             </button>
                         </div>
                     </div>
                     <div class="sep"></div>
-                    <div class="toggle-container" id="container-show_your_progress">
+                    <div class="toggle-container" id="container-show_your_progress" onclick="_update_item('show_your_progress')">
                         <button class="btn reset" onclick="_reset_item('show_your_progress')">${trans[lang].settings.reset}</button>
                         <div class="heading">
                             <h5>${trans[lang].settings.customise.show_your_progress.name}</h5>
                             <p>${trans[lang].settings.customise.show_your_progress.bio}</p>
                         </div>
                         <div class="toggle-wrap">
-                            <button class="toggle" id="toggle-show_your_progress" onclick="_update_item('show_your_progress')" aria-checked="true">
+                            <button class="toggle" id="toggle-show_your_progress" aria-checked="true">
                                 <div class="dot"></div>
                             </button>
                         </div>
                     </div>
                     <div class="sep"></div>
-                    <div class="toggle-container" id="container-pretty_obsessions">
+                    <div class="toggle-container" id="container-pretty_obsessions" onclick="_update_item('pretty_obsessions')">
                         <button class="btn reset" onclick="_reset_item('pretty_obsessions')">${trans[lang].settings.reset}</button>
                         <div class="heading">
                             <h5>${trans[lang].settings.customise.pretty_obsessions.name}</h5>
                         </div>
                         <div class="toggle-wrap">
-                            <button class="toggle" id="toggle-pretty_obsessions" onclick="_update_item('pretty_obsessions')" aria-checked="true">
+                            <button class="toggle" id="toggle-pretty_obsessions" aria-checked="true">
                                 <div class="dot"></div>
                             </button>
                         </div>
                     </div>
                     <div class="sep"></div>
-                    <div class="toggle-container" id="container-rain">
+                    <div class="toggle-container" id="container-rain" onclick="_update_item('rain')">
                         <button class="btn reset" onclick="_reset_item('rain')">${trans[lang].settings.reset}</button>
                         <div class="heading">
                             <h5>${trans[lang].settings.customise.rain.name}</h5>
                             <p>${trans[lang].settings.customise.rain.bio}</p>
                         </div>
                         <div class="toggle-wrap">
-                            <button class="toggle" id="toggle-rain" onclick="_update_item('rain')" aria-checked="true">
+                            <button class="toggle" id="toggle-rain" aria-checked="true">
                                 <div class="dot"></div>
                             </button>
                         </div>
@@ -5867,38 +5867,38 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                             </div>
                         </div>
                     </div>
-                    <div class="toggle-container" id="container-seasonal">
+                    <div class="toggle-container" id="container-seasonal" onclick="_update_item('seasonal')">
                         <button class="btn reset" onclick="_reset_item('seasonal')">${trans[lang].settings.reset}</button>
                         <div class="heading">
                             <h5>${trans[lang].settings.customise.seasonal.option.name}</h5>
                         </div>
                         <div class="toggle-wrap">
-                            <button class="toggle" id="toggle-seasonal" onclick="_update_item('seasonal')" aria-checked="true">
+                            <button class="toggle" id="toggle-seasonal" aria-checked="true">
                                 <div class="dot"></div>
                             </button>
                         </div>
                     </div>
                     <div class="sep"></div>
-                    <div class="toggle-container hide-if-seasonal-disabled" id="container-seasonal_particles">
+                    <div class="toggle-container hide-if-seasonal-disabled" id="container-seasonal_particles" onclick="_update_item('seasonal_particles')">
                         <button class="btn reset" onclick="_reset_item('seasonal_particles')">${trans[lang].settings.reset}</button>
                         <div class="heading">
                             <h5>${trans[lang].settings.customise.seasonal.particles.name}</h5>
                             <p>${trans[lang].settings.customise.seasonal.particles.bio}</p>
                         </div>
                         <div class="toggle-wrap">
-                            <button class="toggle" id="toggle-seasonal_particles" onclick="_update_item('seasonal_particles')" aria-checked="true">
+                            <button class="toggle" id="toggle-seasonal_particles" aria-checked="true">
                                 <div class="dot"></div>
                             </button>
                         </div>
                     </div>
-                    <div class="toggle-container hide-if-seasonal-disabled" id="container-seasonal_overlays">
+                    <div class="toggle-container hide-if-seasonal-disabled" id="container-seasonal_overlays" onclick="_update_item('seasonal_overlays')">
                         <button class="btn reset" onclick="_reset_item('seasonal_overlays')">${trans[lang].settings.reset}</button>
                         <div class="heading">
                             <h5>${trans[lang].settings.customise.seasonal.overlays.name}</h5>
                             <p>${trans[lang].settings.customise.seasonal.overlays.bio}</p>
                         </div>
                         <div class="toggle-wrap">
-                            <button class="toggle" id="toggle-seasonal_overlays" onclick="_update_item('seasonal_overlays')" aria-checked="true">
+                            <button class="toggle" id="toggle-seasonal_overlays" aria-checked="true">
                                 <div class="dot"></div>
                             </button>
                         </div>
@@ -5919,14 +5919,14 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                             <button class="bleh--btn primary" onclick="_force_refresh_theme()">Refresh</button>
                         </div>
                     </div>
-                    <div class="toggle-container" id="container-dev">
+                    <div class="toggle-container" id="container-dev" onclick="_update_item('dev')">
                         <button class="btn reset" onclick="_reset_item('dev')">${trans[lang].settings.reset}</button>
                         <div class="heading">
                             <h5>${trans[lang].settings.performance.dev.name}</h5>
                             <p>${trans[lang].settings.performance.dev.bio}</p>
                         </div>
                         <div class="toggle-wrap">
-                            <button class="toggle" id="toggle-dev" onclick="_update_item('dev')" aria-checked="false">
+                            <button class="toggle" id="toggle-dev" aria-checked="false">
                                 <div class="dot"></div>
                             </button>
                         </div>
@@ -5974,14 +5974,14 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                             </div>
                         </div>
                     </div>
-                    <div class="toggle-container" id="container-travis">
+                    <div class="toggle-container" id="container-travis" onclick="_update_item('travis')">
                         <button class="btn reset" onclick="_reset_item('travis')">${trans[lang].settings.reset}</button>
                         <div class="heading">
                             <h5>${trans[lang].settings.redirects.travis.name}</h5>
                             <p>${trans[lang].settings.redirects.travis.bio}</p>
                         </div>
                         <div class="toggle-wrap">
-                            <button class="toggle" id="toggle-travis" onclick="_update_item('travis')" aria-checked="true">
+                            <button class="toggle" id="toggle-travis" aria-checked="true">
                                 <div class="dot"></div>
                             </button>
                         </div>
@@ -6034,14 +6034,14 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
             return (`
                 <div class="bleh--panel">
                     <h3>${trans[lang].settings.accessibility.name}</h3>
-                    <div class="toggle-container" id="container-reduced_motion">
+                    <div class="toggle-container" id="container-reduced_motion" onclick="_update_item('reduced_motion')">
                         <button class="btn reset" onclick="_reset_item('reduced_motion')">${trans[lang].settings.reset}</button>
                         <div class="heading">
                             <h5>${trans[lang].settings.accessibility.reduced_motion.name}</h5>
                             <p>${trans[lang].settings.accessibility.reduced_motion.bio}</p>
                         </div>
                         <div class="toggle-wrap">
-                            <button class="toggle" id="toggle-reduced_motion" onclick="_update_item('reduced_motion')" aria-checked="false">
+                            <button class="toggle" id="toggle-reduced_motion" aria-checked="false">
                                 <div class="dot"></div>
                             </button>
                         </div>
@@ -6064,50 +6064,50 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                             </div>
                         </div>
                     </div>
-                    <div class="toggle-container" id="container-accessible_name_colours">
+                    <div class="toggle-container" id="container-accessible_name_colours" onclick="_update_item('accessible_name_colours')">
                         <button class="btn reset" onclick="_reset_item('accessible_name_colours')">${trans[lang].settings.reset}</button>
                         <div class="heading">
                             <h5>${trans[lang].settings.accessibility.accessible_name_colours.name}</h5>
                             <p>${trans[lang].settings.accessibility.accessible_name_colours.bio}</p>
                         </div>
                         <div class="toggle-wrap">
-                            <button class="toggle" id="toggle-accessible_name_colours" onclick="_update_item('accessible_name_colours')" aria-checked="false">
+                            <button class="toggle" id="toggle-accessible_name_colours" aria-checked="false">
                                 <div class="dot"></div>
                             </button>
                         </div>
                     </div>
-                    <div class="toggle-container" id="container-underline_links">
+                    <div class="toggle-container" id="container-underline_links" onclick="_update_item('underline_links')">
                         <button class="btn reset" onclick="_reset_item('underline_links')">${trans[lang].settings.reset}</button>
                         <div class="heading">
                             <h5>${trans[lang].settings.accessibility.underline_links.name}</h5>
                             <p>${trans[lang].settings.accessibility.underline_links.bio}</p>
                         </div>
                         <div class="toggle-wrap">
-                            <button class="toggle" id="toggle-underline_links" onclick="_update_item('underline_links')" aria-checked="false">
+                            <button class="toggle" id="toggle-underline_links" aria-checked="false">
                                 <div class="dot"></div>
                             </button>
                         </div>
                     </div>
                     <div class="sep"></div>
                     <h4>${trans[lang].settings.customise.profile_header.name}</h4>
-                    <div class="toggle-container" id="container-profile_header_own">
+                    <div class="toggle-container" id="container-profile_header_own" onclick="_update_item('profile_header_own')">
                         <button class="btn reset" onclick="_reset_item('profile_header_own')">${trans[lang].settings.reset}</button>
                         <div class="heading">
                             <h5>${trans[lang].settings.customise.profile_header.for_own}</h5>
                         </div>
                         <div class="toggle-wrap">
-                            <button class="toggle" id="toggle-profile_header_own" onclick="_update_item('profile_header_own')" aria-checked="false">
+                            <button class="toggle" id="toggle-profile_header_own" aria-checked="false">
                                 <div class="dot"></div>
                             </button>
                         </div>
                     </div>
-                    <div class="toggle-container" id="container-profile_header_others">
+                    <div class="toggle-container" id="container-profile_header_others" onclick="_update_item('profile_header_others')">
                         <button class="btn reset" onclick="_reset_item('profile_header_others')">${trans[lang].settings.reset}</button>
                         <div class="heading">
                             <h5>${trans[lang].settings.customise.profile_header.for_others}</h5>
                         </div>
                         <div class="toggle-wrap">
-                            <button class="toggle" id="toggle-profile_header_others" onclick="_update_item('profile_header_others')" aria-checked="false">
+                            <button class="toggle" id="toggle-profile_header_others" aria-checked="false">
                                 <div class="dot"></div>
                             </button>
                         </div>
@@ -6141,24 +6141,24 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                     </div>
                     <h4>${trans[lang].settings.text.markdown.name}</h4>
                     <p>${trans[lang].settings.text.markdown.bio}</p>
-                    <div class="toggle-container" id="container-shout_markdown">
+                    <div class="toggle-container" id="container-shout_markdown" onclick="_update_item('shout_markdown')">
                         <button class="btn reset" onclick="_reset_item('shout_markdown')">${trans[lang].settings.reset}</button>
                         <div class="heading">
                             <h5>${trans[lang].settings.text.markdown.shouts}</h5>
                         </div>
                         <div class="toggle-wrap">
-                            <button class="toggle" id="toggle-shout_markdown" onclick="_update_item('shout_markdown')" aria-checked="false">
+                            <button class="toggle" id="toggle-shout_markdown" aria-checked="false">
                                 <div class="dot"></div>
                             </button>
                         </div>
                     </div>
-                    <div class="toggle-container" id="container-bio_markdown">
+                    <div class="toggle-container" id="container-bio_markdown" onclick="_update_item('bio_markdown')">
                         <button class="btn reset" onclick="_reset_item('bio_markdown')">${trans[lang].settings.reset}</button>
                         <div class="heading">
                             <h5>${trans[lang].settings.text.markdown.profile}</h5>
                         </div>
                         <div class="toggle-wrap">
-                            <button class="toggle" id="toggle-bio_markdown" onclick="_update_item('bio_markdown')" aria-checked="false">
+                            <button class="toggle" id="toggle-bio_markdown" aria-checked="false">
                                 <div class="dot"></div>
                             </button>
                         </div>
@@ -6240,14 +6240,14 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                             </div>
                         </div>
                     </div>
-                    <div class="toggle-container" id="container-stacked_chartlist_info">
+                    <div class="toggle-container" id="container-stacked_chartlist_info" onclick="_update_item('stacked_chartlist_info')">
                         <button class="btn reset" onclick="_reset_item('stacked_chartlist_info')">${trans[lang].settings.reset}</button>
                         <div class="heading">
                             <h5>${trans[lang].settings.corrections.stacked_chartlist_info.name}</h5>
                             <p>${trans[lang].settings.corrections.stacked_chartlist_info.bio}</p>
                         </div>
                         <div class="toggle-wrap">
-                            <button class="toggle" id="toggle-stacked_chartlist_info" onclick="_update_item('stacked_chartlist_info')" aria-checked="true">
+                            <button class="toggle" id="toggle-stacked_chartlist_info" aria-checked="true">
                                 <div class="dot"></div>
                             </button>
                         </div>
@@ -6304,13 +6304,13 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                             </button>
                         </div>
                     </div>
-                    <div class="toggle-container" id="container-corrections">
+                    <div class="toggle-container" id="container-corrections" onclick="_update_item('corrections')">
                         <button class="btn reset" onclick="_reset_item('corrections')">${trans[lang].settings.reset}</button>
                         <div class="heading">
                             <h5>${trans[lang].settings.corrections.toggle.name}</h5>
                         </div>
                         <div class="toggle-wrap">
-                            <button class="toggle" id="toggle-corrections" onclick="_update_item('corrections')" aria-checked="true">
+                            <button class="toggle" id="toggle-corrections" aria-checked="true">
                                 <div class="dot"></div>
                             </button>
                         </div>
@@ -6357,37 +6357,37 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                             </tbody>
                         </table>
                     </div>
-                    <div class="toggle-container" id="container-format_guest_features">
+                    <div class="toggle-container" id="container-format_guest_features" onclick="_update_item('format_guest_features')">
                         <button class="btn reset" onclick="_reset_item('format_guest_features')">${trans[lang].settings.reset}</button>
                         <div class="heading">
                             <h5>${trans[lang].settings.corrections.format_guest_features.name}</h5>
                             <p>${trans[lang].settings.corrections.format_guest_features.bio}</p>
                         </div>
                         <div class="toggle-wrap">
-                            <button class="toggle" id="toggle-format_guest_features" onclick="_update_item('format_guest_features')" aria-checked="true">
+                            <button class="toggle" id="toggle-format_guest_features" aria-checked="true">
                                 <div class="dot"></div>
                             </button>
                         </div>
                     </div>
-                    <div class="toggle-container hide-if-format-guest-disabled" id="container-show_guest_features">
+                    <div class="toggle-container hide-if-format-guest-disabled" id="container-show_guest_features" onclick="_update_item('show_guest_features')">
                         <button class="btn reset" onclick="_reset_item('show_guest_features')">${trans[lang].settings.reset}</button>
                         <div class="heading">
                             <h5>${trans[lang].settings.corrections.show_guest_features.name}</h5>
                             <p>${trans[lang].settings.corrections.show_guest_features.bio}</p>
                         </div>
                         <div class="toggle-wrap">
-                            <button class="toggle" id="toggle-show_guest_features" onclick="_update_item('show_guest_features')" aria-checked="true">
+                            <button class="toggle" id="toggle-show_guest_features" aria-checked="true">
                                 <div class="dot"></div>
                             </button>
                         </div>
                     </div>
-                    <div class="toggle-container hide-if-format-guest-disabled" id="container-show_remaster_tags">
+                    <div class="toggle-container hide-if-format-guest-disabled" id="container-show_remaster_tags" onclick="_update_item('show_remaster_tags')">
                         <button class="btn reset" onclick="_reset_item('show_remaster_tags')">${trans[lang].settings.reset}</button>
                         <div class="heading">
                             <h5>${trans[lang].settings.corrections.show_remaster_tags.name}</h5>
                         </div>
                         <div class="toggle-wrap">
-                            <button class="toggle" id="toggle-show_remaster_tags" onclick="_update_item('show_remaster_tags')" aria-checked="true">
+                            <button class="toggle" id="toggle-show_remaster_tags" aria-checked="true">
                                 <div class="dot"></div>
                             </button>
                         </div>
