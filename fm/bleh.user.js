@@ -2773,7 +2773,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                             <p>${trans[lang].settings.home.update.bio}</p>
                         </span>
                     </a>
-                    ${((!settings.dev && theme_version != version.build) ? (`
+                    ${((!settings.dev && theme_version != version.build && theme_version != '') ? (`
                     <button class="btn action" onclick="_force_refresh_theme()">
                         <div class="icon bleh--updates"></div>
                         <span class="text">
