@@ -43,6 +43,7 @@ let version = {
         }
     }
 }
+let theme_version = getComputedStyle(document.body).getPropertyValue('--version-build').replaceAll("'", ''); // remove quotations
 
 // loads your selected language in last.fm
 let lang;
@@ -176,7 +177,9 @@ const trans = {
                 update: {
                     name: 'Updates',
                     css: 'Update style',
-                    bio: 'Check now'
+                    bio: 'Check now',
+                    notice: 'bleh is out of date! - use the update buttons below',
+                    ignore: 'Ignore for 1 hour'
                 },
                 setup: {
                     name: 'Setup',
@@ -737,7 +740,9 @@ const trans = {
                 update: {
                     name: 'Aktualisierungen',
                     css: 'Stil aktualisieren',
-                    bio: 'Jetzt prüfen'
+                    bio: 'Jetzt prüfen',
+                    notice: 'bleh is out of date! - use the update buttons below',
+                    ignore: 'Ignore for 1 hour'
                 },
                 setup: {
                     name: 'Setup',
@@ -2578,8 +2583,8 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
         let performance_start = performance.now();
 
         load_settings();
-        append_style();
         lookup_lang();
+        append_style();
         patch_masthead(document.body);
         load_notifs();
 
@@ -2733,11 +2738,73 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
 
         // check if timeout has expired
         if (cached_style_timeout < current_time) {
+            // in versions 2024.1019 and onwards, the css stores version itself
+            // we can use this to compare if we should fetch a new one
+            // as we don't want to fetch a new css while the js is out of date
+            if (theme_version != version.build) {
+                // script is either out of date, or more in date (not gonna happen)
+                console.info('bleh - attempted to fetch new style, however theme returned version', theme_version, 'meanwhile script is running', version.build, '- halted');
+
+                prompt_for_update();
+                return;
+            }
+
             console.info('bleh - fetching new style, timeout has expired');
             fetch_new_style();
         } else {
             console.info('bleh - style timeout is still valid');
         }
+    }
+
+    function prompt_for_update() {
+        // prompt the user
+        create_window('bleh_update',trans[lang].settings.home.update.name,(`
+            <div class="alert alert-update">${trans[lang].settings.home.update.notice}</div>
+            <div class="screen-row actions-only">
+                <div class="actions">
+                    <a class="btn action" href="https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.js">
+                        <div class="icon bleh--updates"></div>
+                        <span class="text">
+                            <h5>${trans[lang].settings.home.update.name}</h5>
+                            <p>${trans[lang].settings.home.update.bio}</p>
+                        </span>
+                    </a>
+                    ${((!settings.dev && theme_version != version.build) ? (`
+                    <button class="btn action" onclick="_force_refresh_theme()">
+                        <div class="icon bleh--updates"></div>
+                        <span class="text">
+                            <h5>${trans[lang].settings.home.update.css}</h5>
+                            <p>${trans[lang].settings.home.update.bio}</p>
+                        </span>
+                    </button>
+                    `) : '')}
+                    ${(settings.dev ? (`
+                    <a class="btn action" href="https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.css">
+                        <div class="icon bleh--updates"></div>
+                        <span class="text">
+                            <h5>${trans[lang].settings.home.update.css}</h5>
+                            <p>${trans[lang].settings.home.update.bio}</p>
+                        </span>
+                    </a>
+                    `) : '')}
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" onclick="_ignore_update()">
+                    ${trans[lang].settings.home.update.ignore}
+                </button>
+            </div>
+        `));
+    }
+
+    unsafeWindow._ignore_update = function() {
+        kill_window('bleh_update');
+
+        // set expire date
+        let api_expire = new Date();
+        api_expire.setHours(api_expire.getHours() + 1);
+        localStorage.setItem('bleh_cached_style_timeout',api_expire);
+        console.info('bleh - style is cached until', api_expire);
     }
 
     function fetch_new_style(delete_old_style = false) {
@@ -5110,6 +5177,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                 <h4>${trans[lang].settings.home.thanks
                 .replace('{m}', `<a class="mention" href="${root}user/${auth}">@${auth}</a>`)
                 .replace('{v}', `<span class="version-link" onclick="_change_settings_page('sku')">${version.build}.${version.sku}</span>`)}</h4>
+                ${(theme_version != version.build) ? `<div class="alert alert-update">${trans[lang].settings.home.update.notice}</div>` : ''}
                 <div class="screen-row actions-only">
                     <div class="actions">
                         <a class="btn action" href="https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.js">
@@ -5119,6 +5187,15 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                                 <p>${trans[lang].settings.home.update.bio}</p>
                             </span>
                         </a>
+                        ${((!settings.dev && theme_version != version.build) ? (`
+                        <button class="btn action" onclick="_force_refresh_theme()">
+                            <div class="icon bleh--updates"></div>
+                            <span class="text">
+                                <h5>${trans[lang].settings.home.update.css}</h5>
+                                <p>${trans[lang].settings.home.update.bio}</p>
+                            </span>
+                        </button>
+                        `) : '')}
                         ${(settings.dev ? (`
                         <a class="btn action" href="https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.css">
                             <div class="icon bleh--updates"></div>

@@ -9651,6 +9651,12 @@ text[style^="color: rgb(0, 0, 0)"] {
 .event-status--cancelled:before {
     --mask: var(--icon-16-block);
 }
+.alert-update {
+    --mask: var(--icon-16-download);
+    --hue-over: var(--hue-pos);
+    --sat-over: 1;
+    --lit-over: 1;
+}
 
 .alert-info {
     [data-bleh--season="halloween"] & {
@@ -12776,6 +12782,7 @@ code, kbd, samp {
             padding-right: calc(16px + 16px + 6px) !important;
             gap: 12px;
             text-decoration: none;
+            text-align: left;
 
             position: relative;
             --show-icon: block;
@@ -12816,6 +12823,7 @@ code, kbd, samp {
 
             h5 {
                 font-weight: var(--font-weight-medium);
+                margin: unset;
             }
             p {
                 font-weight: var(--font-weight) !important;
@@ -16303,7 +16311,11 @@ button.bleh--gallery-bookmark-image-btn {
             box-shadow: var(--card-shadow);
 
             margin: 0 20px;
-            z-index: 10000000;
+            z-index: 5;
+
+            .modal-body & {
+                z-index: 10000000;
+            }
         }
     }
 }
@@ -16416,5 +16428,19 @@ h4 {
 .lastfm-bulk-edit-list {
     display: flex;
     flex-direction: column;
+}
+
+
+
+
+.modal-body {
+    .alert + .screen-row {
+        margin-top: var(--card-gap);
+
+        .actions {
+            justify-content: center;
+            width: 100%;
+        }
+    }
 }
 }
