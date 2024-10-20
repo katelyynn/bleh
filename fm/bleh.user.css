@@ -13027,6 +13027,7 @@ code, kbd, samp {
 
     .preview {
         display: flex;
+        width: 100%;
         flex: 1;
         max-height: 101px;
         background-color: hsl(var(--b6));
