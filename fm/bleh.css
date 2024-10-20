@@ -5,7 +5,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu+Sans:ital,wght@0,100..800;1,100..800&display=swap');
 
 body {
-    --version-build: '2024.1019';
+    --version-build: '2024.1020';
 
     --hue:  var(--hue-over,
             var(--hue-album,
@@ -13095,7 +13095,7 @@ code, kbd, samp {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
     gap: 4px;
-    height: 50px;
+    height: 100%;
 }
 
 .palette.options {
@@ -13364,49 +13364,50 @@ input[type="range"] {
     height: 32px;
     border-radius: var(--item-small-radius);
     overflow: hidden;
+}
 
-    &::-webkit-slider-runnable-track {
-        height: 22px;
-        background: hsl(var(--b4));
-        box-shadow: 0 0 0 1px hsla(var(--b3), 40%) inset, var(--interact-shadow);
-        border-radius: var(--item-small-radius);
+.slider-track {
+    display: flex;
+    background: hsla(var(--b6), 20%);
+    box-shadow: 0 0 0 1px var(--card-border-base) inset;
+    border-radius: var(--item-med-radius);
+    width: calc(100% - (30px + var(--card-gap))); /* 30px = value width */
+    height: 20px;
+    position: absolute;
+
+    pointer-events: none;
+
+    .slider-fill {
+        display: flex;
+        width: var(--percent);
+        background-color: hsl(var(--h3));
+        border-radius: var(--item-med-radius);
+        box-shadow: 0 0 0 1px hsla(var(--h2), 40%) inset;
     }
-    &::-moz-range-track {
-        height: 22px;
-        background: hsl(var(--b4));
-        box-shadow: 0 0 0 1px hsla(var(--b3), 40%) inset, var(--interact-shadow);
-        border-radius: var(--item-small-radius);
+
+    .slider-nub {
+        display: flex;
+        width: 12px;
+        background-color: hsl(var(--h4));
+        border: 2px solid hsl(var(--b5));
+        border-radius: var(--item-med-radius);
+        margin: -5px -5px;
     }
 
     #container-hue & {
-        &::-webkit-slider-runnable-track {
-            background: linear-gradient(to right,
-                hsl(0, var(--h3-sat), var(--h3-lit)) 0%,
-                hsl(60, var(--h3-sat), var(--h3-lit)) 16.67%,
-                hsl(120, var(--h3-sat), var(--h3-lit)) 33.33%,
-                hsl(180, var(--h3-sat), var(--h3-lit)) 50%,
-                hsl(240, var(--h3-sat), var(--h3-lit)) 66.67%,
-                hsl(300, var(--h3-sat), var(--h3-lit)) 83.33%,
-                hsl(360, var(--h3-sat), var(--h3-lit)) 100%
-            );
-        }
-        &::-moz-range-track {
-            background: linear-gradient(to right,
-                hsl(0, var(--h3-sat), var(--h3-lit)) 0%,
-                hsl(60, var(--h3-sat), var(--h3-lit)) 16.67%,
-                hsl(120, var(--h3-sat), var(--h3-lit)) 33.33%,
-                hsl(180, var(--h3-sat), var(--h3-lit)) 50%,
-                hsl(240, var(--h3-sat), var(--h3-lit)) 66.67%,
-                hsl(300, var(--h3-sat), var(--h3-lit)) 83.33%,
-                hsl(360, var(--h3-sat), var(--h3-lit)) 100%
-            );
-        }
+        box-shadow: unset;
+        background: linear-gradient(to right,
+            hsl(0, var(--h3-sat), var(--h3-lit)) 0%,
+            hsl(60, var(--h3-sat), var(--h3-lit)) 16.67%,
+            hsl(120, var(--h3-sat), var(--h3-lit)) 33.33%,
+            hsl(180, var(--h3-sat), var(--h3-lit)) 50%,
+            hsl(240, var(--h3-sat), var(--h3-lit)) 66.67%,
+            hsl(300, var(--h3-sat), var(--h3-lit)) 83.33%,
+            hsl(360, var(--h3-sat), var(--h3-lit)) 100%
+        );
 
-        &::-webkit-progress-value {
-            background: none;
-        }
-        &::-moz-range-progress {
-            background: none;
+        .slider-fill {
+            opacity: 0;
         }
     }
 }
@@ -13417,25 +13418,22 @@ input[type="range"]::-webkit-slider-thumb {
     /**/
     width: 8px;
     height: 28px;
-    background-color: hsl(var(--h2));
-    border-radius: var(--item-small-radius);
-    border: 2px solid hsl(var(--b5));
+    background-color: transparent;
 }
 input[type="range"]::-moz-range-thumb {
     width: 8px;
     height: 28px;
-    background-color: hsl(var(--h2));
-    border-radius: var(--item-small-radius);
-    border: 2px solid hsl(var(--b5));
+    background-color: transparent;
+    border: unset;
 }
 
 input[type="range"]::-webkit-progress-value {
-    background: hsl(var(--h3));
+    background: transparent;
     height: 22px;
     border-radius: var(--item-small-radius);
 }
 input[type="range"]::-moz-range-progress {
-    background: hsl(var(--h3));
+    background: transparent;
     height: 22px;
     border-radius: var(--item-small-radius);
 }

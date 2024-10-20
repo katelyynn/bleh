@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         bleh
 // @namespace    http://last.fm/
-// @version      2024.1019
+// @version      2024.1020
 // @description  bleh!!! ^-^
 // @author       kate
 // @match        https://www.last.fm/*
@@ -18,7 +18,7 @@
 // ==/UserScript==
 
 let version = {
-    build: '2024.1019',
+    build: '2024.1020',
     sku: 'falter',
     feature_flags: {
         bleh_settings_tabs: {
@@ -5855,6 +5855,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                             <p>${trans[lang].settings.customise.gloss.bio}</p>
                         </div>
                         <div class="slider">
+                            <div class="slider-track" id="slider-track-gloss"><div class="slider-fill"></div><div class="slider-nub"></div></div>
                             <input type="range" min="0" max="1" value="0" step="0.05" id="slider-gloss" oninput="_update_item('gloss', this.value)">
                             <p id="value-gloss">0</p>
                         </div>
@@ -6965,8 +6966,11 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
         if (settings_base[item].type == 'slider') {
             // text to show current slider value
             try {
+                let slider = document.getElementById(`slider-${item}`);
+
                 document.getElementById(`value-${item}`).textContent = `${settings[item]}${settings_base[item].unit}`;
-                document.getElementById(`slider-${item}`).value = settings[item];
+                slider.value = settings[item];
+                document.getElementById(`slider-track-${item}`).style.setProperty('--percent', `${(settings[item] / slider.getAttribute('max')) * 100}%`);
 
                 if (settings[item] != settings_base[item].value)
                     document.getElementById(`container-${item}`).classList.add('modified');
@@ -7231,6 +7235,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                 <h5>${trans[lang].settings.customise.colours.modals.custom_colour.hue}</h5>
             </div>
             <div class="slider">
+                <div class="slider-track" id="slider-track-hue"><div class="slider-fill"></div><div class="slider-nub"></div></div>
                 <input type="range" min="0" max="360" value="${settings.hue}" id="slider-hue" oninput="_update_item('hue', this.value)">
                 <p id="value-hue">${settings.hue}${settings_base.hue.unit}</p>
             </div>
@@ -7246,6 +7251,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                 <h5>${trans[lang].settings.customise.colours.modals.custom_colour.sat}</h5>
             </div>
             <div class="slider">
+                <div class="slider-track" id="slider-track-sat"><div class="slider-fill"></div><div class="slider-nub"></div></div>
                 <input type="range" min="0" max="1.5" value="${settings.sat}" step="0.025" id="slider-sat" oninput="_update_item('sat', this.value)">
                 <p id="value-sat">${settings.sat}${settings_base.sat.unit}</p>
             </div>
@@ -7261,6 +7267,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                 <h5>${trans[lang].settings.customise.colours.modals.custom_colour.lit}</h5>
             </div>
             <div class="slider">
+                <div class="slider-track" id="slider-track-lit"><div class="slider-fill"></div><div class="slider-nub"></div></div>
                 <input type="range" min="0" max="1.5" value="${settings.lit}" step="0.025" id="slider-lit" oninput="_update_item('lit', this.value)">
                 <p id="value-lit">${settings.lit}${settings_base.lit.unit}</p>
             </div>
