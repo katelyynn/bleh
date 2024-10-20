@@ -6734,7 +6734,7 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
             profile_note.setAttribute('id',`profile-note-row--${user}`);
             profile_note.innerHTML = (`
             <div class="name">
-                <h5>${user}</h5>
+                <h5><a class="mention" href="${root}user/${user}">@${user}</a></h5>
             </div>
             <div class="note-preview">
                 <p id="profile-note-row-preview--${user}">${profile_notes[user]}</p>
