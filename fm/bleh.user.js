@@ -166,6 +166,9 @@ const trans = {
             go: 'Go',
             skip: 'Skip',
             back: 'Back',
+            add: 'Add',
+            add_multiple: 'Add multiple',
+            remove: 'Remove',
             reload: 'A setting you changed requires a page reload to take effect, click to reload.',
             new: 'New',
             examples: {
@@ -343,6 +346,18 @@ const trans = {
                     name: 'Display profile backgrounds',
                     for_own: 'On my profile',
                     for_others: 'On other profiles'
+                }
+            },
+            privacy: {
+                name: 'Privacy',
+                blocked_users: {
+                    name: 'Blocked users',
+                    bio: 'Control who you want to see while browsing.'
+                },
+                muted_words: {
+                    name: 'Muted words',
+                    bio: 'Control what words you would prefer be hidden.',
+                    placeholder: 'Enter word (only one)'
                 }
             },
             performance: {
@@ -729,6 +744,9 @@ const trans = {
             go: 'Fortfahren',
             skip: 'Überspringen',
             back: 'Zurück',
+            add: 'Add',
+            add_multiple: 'Add multiple',
+            remove: 'Remove',
             reload: 'Klicke zum Neuladen, um deine Einstellungen zu übernehmen.',
             new: 'Neu',
             examples: {
@@ -5153,6 +5171,9 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                         </button>
                     </div>
                     <div class="btns sep">
+                        <button class="btn bleh--btn" data-bleh-page="privacy" onclick="_change_settings_page('privacy')">
+                            ${trans[lang].settings.privacy.name}
+                        </button>
                         <button class="btn bleh--btn" data-bleh-page="text" onclick="_change_settings_page('text')">
                             ${trans[lang].settings.text.name}
                         </button>
@@ -6508,6 +6529,67 @@ let setup_regex = new RegExp('^https://www\.last\.fm/[a-z]+/bleh/setup$');
                             <button class="toggle" id="toggle-show_remaster_tags" aria-checked="true">
                                 <div class="dot"></div>
                             </button>
+                        </div>
+                    </div>
+                </div>
+                `);
+        } else if (page == 'privacy') {
+            return (`
+                <div class="bleh--panel">
+                    <h3>${trans[lang].settings.privacy.name}</h3>
+                    <div class="inner-preview pad">
+                        <div class="shouts">
+                            <div class="shout">
+                                <div class="avatar-side">
+                                    <div class="shout-avatar-placeholder"></div>
+                                </div>
+                                <div class="info-side">
+                                    <div class="header">
+                                        <div class="shout-username"></div>
+                                        <div class="shout-time"></div>
+                                    </div>
+                                    <div class="shout-contents"></div>
+                                    <div class="shout-contents"></div>
+                                </div>
+                            </div>
+                            <div class="shout">
+                                <div class="avatar-side">
+                                    <div class="shout-avatar-placeholder"></div>
+                                </div>
+                                <div class="info-side">
+                                    <div class="header">
+                                        <div class="shout-username"></div>
+                                        <div class="shout-time"></div>
+                                    </div>
+                                    <div class="shout-contents"></div>
+                                    <div class="shout-contents"></div>
+                                </div>
+                            </div>
+                            <div class="shout">
+                                <div class="avatar-side">
+                                    <div class="shout-avatar-placeholder"></div>
+                                </div>
+                                <div class="info-side">
+                                    <div class="header">
+                                        <div class="shout-username"></div>
+                                        <div class="shout-time"></div>
+                                    </div>
+                                    <div class="shout-contents"></div>
+                                    <div class="shout-contents"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h4>${trans[lang].settings.privacy.muted_words.name}</h4>
+                    <p>${trans[lang].settings.privacy.muted_words.bio}</p>
+                    <div class="text-container" id="container-muted_words">
+                        <button class="btn reset" onclick="_reset_item('muted_words')">${trans[lang].settings.reset}</button>
+                        <div class="heading content-form">
+                            <div class="input-container">
+                                <input type="text" maxlength="100" id="text-muted_words" value="" placeholder="${trans[lang].settings.privacy.muted_words.placeholder}">
+                                <button class="bleh--btn primary add" onclick="_add_muted_word()">${trans[lang].settings.add}</button>
+                                <button class="bleh--btn add" onclick="_add_muted_words_multiple()">${trans[lang].settings.add_multiple}</button>
+                            </div>
                         </div>
                     </div>
                 </div>

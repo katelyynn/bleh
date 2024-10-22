@@ -6265,7 +6265,8 @@ button,
 .player-bar .player-bar-playback-options-external-link, .player-bar .player-bar-playback-options-settings, .player-bar .player-bar-playback-options-switch-device,
 .event-metadata + .event-metadata a,
 #manage_data .btn-primary,
-.obsession-history-play-all
+.obsession-history-play-all,
+.add
 {
     --btn-left: calc(12px + 16px + 6px) !important;
 
@@ -6391,7 +6392,7 @@ button,
 .side-right .setting-item:before, .action:before,
 .setup-icon:before, .setup-icon:after,
 .btn.back:before,
-.continue:before, .external:before,
+.continue:before, .external:before, .add:before,
 .badge:before,
 .btn-post-shout:before,
 .auth-link:before, .language-nav:before, .language-nav > span:before,
@@ -16108,6 +16109,10 @@ button.bleh--gallery-bookmark-image-btn {
     position: relative;
     --mask: var(--icon-16-external);
 }
+.add {
+    position: relative;
+    --mask: var(--icon-16-plus);
+}
 
 
 /* this allows tooltips */
@@ -16394,7 +16399,15 @@ button.bleh--gallery-bookmark-image-btn {
         .input-container {
             display: flex;
             gap: var(--button-list-gap);
+
+            #text-muted_words {
+                width: 300px;
+            }
         }
+    }
+
+    button {
+        flex-shrink: 0;
     }
 }
 
