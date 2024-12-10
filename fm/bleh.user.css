@@ -10990,6 +10990,7 @@ table.table tr:nth-child(2n) td {
     height: 100vh;
     margin-top: calc(-55px - var(--card-gap));
     display: flex;
+    flex-direction: column-reverse;
     gap: var(--card-gap);
     justify-content: center;
     align-items: center;
@@ -11019,6 +11020,7 @@ table.table tr:nth-child(2n) td {
 
     .obsession-extra {
         padding-left: 24px;
+        padding-right: 24px;
         position: relative;
         margin-top: calc(var(--card-gap) * 2);
 
@@ -11026,17 +11028,57 @@ table.table tr:nth-child(2n) td {
             content: '❝';
             font-size: 110px;
             line-height: 60px;
-            color: rgba(255, 255, 255, 15%);
+            color: rgba(255, 255, 255, 12%);
 
             position: absolute;
             left: 0;
             top: 0;
+        }
+        &:after {
+            content: '❞';
+            font-size: 110px;
+            line-height: 60px;
+            color: rgba(255, 255, 255, 4%);
+
+            position: absolute;
+            right: 0;
+            bottom: -44px;
         }
 
         .obsession-reason {
             font-size: 20px;
             z-index: 5;
             position: relative;
+        }
+    }
+
+    .obsession-hero-container {
+        flex: 1;
+    }
+
+    .obsession-details-wrap {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: var(--card-gap);
+
+        .obsession-details-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+
+            .obsession-details {
+                --size: 64px;
+                padding: calc(var(--size) + var(--item-list-gap)) 0 0 0;
+
+                .media-item {
+                    width: var(--size);
+                    height: var(--size);
+                    left: 50%;
+                    margin-left: calc(-1 * (var(--size) / 2));
+                }
+            }
         }
     }
 }
@@ -11080,23 +11122,41 @@ table.table tr:nth-child(2n) td {
 .obsession-meta-track {
     color: #fff;
     font-weight: var(--font-weight-medium);
-}
-.obsession-meta-artist-by {
-    display: none;
+    grid-area: top;
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-clamp: 1;
+    white-space: nowrap;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
 }
 .obsession-meta-artist {
     color: rgba(255,255,255, 0.7);
     font-size: 20px;
+    font-weight: var(--font-weight-medium);
+    grid-area: top2;
+    position: relative;
+    top: 2px;
 }
 
 .obsession-meta-scrobbles {
     opacity: unset;
     color: rgba(255,255,255, 0.5);
-    margin-top: var(--card-gap);
+    margin-top: unset;
+    grid-area: bottom;
 }
 .obsession-meta._buffer {
     margin-top: calc(var(--card-gap) * 2) !important;
     margin-bottom: var(--card-gap);
+    cursor: default;
+    display: grid;
+    gap: var(--button-list-gap) var(--item-list-gap);
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+    grid-template-areas:
+    "top top2"
+    "bottom bottom";
 }
 
 .obsession-details-wrap {
