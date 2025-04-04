@@ -5,7 +5,8 @@ export let settings_template = {
     gloss: 0,
     gendered_tags: true,
     show_extra_nav: true,
-
+    remove_method: "censor",
+    enable_moderation: false,
     accent_type: 'avatar',
     hue: 255,
     sat: 1,
@@ -531,7 +532,20 @@ export let settings_base = {
         unit: '',
         value: '',
         type: 'text'
-    }
+    },
+    enable_moderation: {
+        css: 'enable_moderation',
+        unit: '',
+        value: false,
+        values: [true, false],
+        type: 'toggle'
+    },
+    removal_method: {
+        css: 'removal_method',
+        unit: '',
+        value: 'censor',
+        type: 'options'
+    },
 };
 export let inbuilt_settings = {
     recent_artwork: {

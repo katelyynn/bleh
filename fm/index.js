@@ -19,15 +19,30 @@ const banner = `// ==UserScript==
 // @require      https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js
 // @require      https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js
 // @require      https://cdn.jsdelivr.net/npm/chartjs-adapter-moment@^1
-// ==/UserScript==`
+// ==/UserScript==`;
 
-esbuild.buildSync({
-    entryPoints: ["./src/main.js"],
-    bundle: true,
-    logLimit: 0,
-    outfile: "bleh.user.js",
-    minify: false,
-    banner: {
-        js: banner
+
+(async () => {
+    const buildOptions = {
+        entryPoints: ["./src/main.js"],
+        bundle: true,
+        logLimit: 0,
+        outfile: "bleh.user.js",
+        minify: false,
+        banner: {
+            js: banner
+        }
+    };
+    if (process.argv[2] == "dev") {
+        const context = await esbuild.context(buildOptions);
+        const serve = await context.serve()
+        await context.watch()
+
+        console.log("Serving on: ")
+        for(const host of serve.hosts) {
+            console.log(` \u001b[32mhttp://${host}:${serve.port}`)
+        }
+    } else {
+        await esbuild.build(buildOptions);
     }
-})
+})();

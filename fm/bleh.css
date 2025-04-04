@@ -13122,6 +13122,9 @@ h2.playlisting-create-option-title {
         &[data-bleh-page="performance"] {
             --mask: var(--icon-16-settings);
         }
+        &[data-bleh-page="moderation"] {
+            --mask: var(--icon-16-shield);
+        }
         &[data-bleh-page="profiles"] {
             --mask: var(--icon-16-user);
         }

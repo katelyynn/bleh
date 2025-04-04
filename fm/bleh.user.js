@@ -26,6 +26,8 @@
     gloss: 0,
     gendered_tags: true,
     show_extra_nav: true,
+    remove_method: "censor",
+    enable_moderation: false,
     accent_type: "avatar",
     hue: 255,
     sat: 1,
@@ -536,6 +538,19 @@
       unit: "",
       value: "",
       type: "text"
+    },
+    enable_moderation: {
+      css: "enable_moderation",
+      unit: "",
+      value: false,
+      values: [true, false],
+      type: "toggle"
+    },
+    removal_method: {
+      css: "removal_method",
+      unit: "",
+      value: "censor",
+      type: "options"
     }
   };
   var inbuilt_settings = {
@@ -1347,6 +1362,9 @@
     accessibility: {
       en: "Accessibility"
     },
+    moderation: {
+      en: "Moderation"
+    },
     troubleshooting: {
       en: "Advanced"
     },
@@ -2138,6 +2156,9 @@
             install: "Installing and updating",
             wiki: "Wiki editing"
           }
+        },
+        moderation: {
+          name: "Moderation"
         },
         performance: {
           name: "Troubleshooting",
@@ -8121,6 +8142,11 @@
                 </a>
             </li>
             <li class="navlist-item secondary-nav-item">
+                <a class="secondary-nav-item-link bleh--nav" data-bleh-page="moderation" onclick="_change_settings_page('moderation')">
+                    ${trans_legacy[lang].settings.moderation.name}
+                </a>
+            </li>
+            <li class="navlist-item secondary-nav-item">
                 <a class="secondary-nav-item-link bleh--nav" data-bleh-page="sku" onclick="_change_settings_page('sku')">
                     shhh...
                 </a>
@@ -9683,6 +9709,39 @@
                 </div>
             </div>
             `;
+    } else if (page_id == "moderation") {
+      register_skip_to([]);
+      return `
+            <div class="bleh--panel">
+                <h4 class="top-header">${trans_legacy[lang].settings.moderation.name}</h4>
+                <div class="toggle-container" id="container-enable_moderation" onclick="_update_item('enable_moderation')">
+                    <button class="btn reset" onclick="_reset_item('enable_moderation')">${tl(trans.reset)}</button>
+                    <div class="heading">
+                        <h5>Enable moderation (Word muting removal)</h5>
+                    </div>
+                    <div class="toggle-wrap">
+                        <button class="toggle" id="toggle-enable_moderation" aria-checked="true">
+                            <div class="dot"></div>
+                        </button>
+                    </div>
+                </div>
+                <div class="sep"></div>
+                <h4>Method</h4>
+                <div class="primary-selections">
+                  <div class="btn primary-selection" id="toggle-removal_method-remove" data-toggle="removal_method" data-toggle-value="remove" onclick="_update_item('removal_method', 'remove')">
+                        <h5>Remove words</h5>
+                        <p>This entierly, cleanly removes words from usernames / biographies and shouts.</p>
+                    </div>
+                    <div class="btn primary-selection" id="toggle-removal_method-censor" data-toggle="removal_method" data-toggle-value="censor" onclick="_update_item('removal_method', 'censor')">
+                        <h5>Censor words</h5>
+                        <p>Censors words, replaces "fuck" with "f***", etc.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bleh--panel">
+                <h4 class="top-header">Moderate where?</h4>
+            </div>
+            `;
     }
   }
   function register_skip_to(list = null) {
@@ -9750,7 +9809,7 @@
       show_theme_change_in_settings();
       display_colour_presets();
       refresh_all();
-    } else if (page_id == "customise" || page_id == "performance" || page_id == "accessibility" || page_id == "text" || page_id == "seasonal" || page_id == "music" || page_id == "activities") {
+    } else if (page_id == "moderation", page_id == "customise" || page_id == "performance" || page_id == "accessibility" || page_id == "text" || page_id == "seasonal" || page_id == "music" || page_id == "activities") {
       refresh_all();
     } else if (page_id == "profiles") {
       init_profile_notes();
