@@ -284,6 +284,9 @@ export const trans = {
     accessibility: {
         en: 'Accessibility'
     },
+    moderation: {
+        en: "Moderation"
+    },
     troubleshooting: {
         en: 'Advanced'
     },
@@ -1103,6 +1106,9 @@ export const trans_legacy = {
                     install: 'Installing and updating',
                     wiki: 'Wiki editing'
                 }
+            },
+            moderation: {
+                name: "Moderation"
             },
             performance: {
                 name: 'Troubleshooting',
