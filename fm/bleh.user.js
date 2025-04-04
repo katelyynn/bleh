@@ -1318,7 +1318,9 @@
       en: "Appearance"
     },
     themes: {
-      en: "Themes",
+      name: {
+        en: "Themes"
+      },
       light: {
         en: "Light"
       },
@@ -1330,6 +1332,25 @@
       },
       oled: {
         en: "Void"
+      }
+    },
+    colours: {
+      en: "Colours"
+    },
+    hue_from_album: {
+      name: {
+        en: "Colour album pages based on album art"
+      },
+      body: {
+        en: "Highlights the primary colour from the album art to replace your colour temporarily"
+      }
+    },
+    colourful_tracks: {
+      name: {
+        en: "Colour active track based on album art"
+      },
+      body: {
+        en: "Highlights the primary colour from the album art for the individual track"
       }
     },
     configure: {
@@ -1353,8 +1374,10 @@
       de: "Profil"
     },
     seasonal: {
-      en: "Seasonal",
-      de: "Saisonal"
+      name: {
+        en: "Seasonal",
+        de: "Saisonal"
+      }
     },
     text: {
       en: "Text"
@@ -1398,7 +1421,7 @@
     reset: {
       en: "Reset"
     },
-    whats_new: {
+    changelog: {
       en: "What's New?"
     },
     default: {
@@ -1466,6 +1489,25 @@
     },
     beta: {
       en: "Beta"
+    },
+    more: {
+      en: "More"
+    },
+    notifications: {
+      count: {
+        en: "{count} notifications"
+      },
+      none: {
+        en: "No new notifications"
+      }
+    },
+    inbox: {
+      count: {
+        en: "{count} messages"
+      },
+      none: {
+        en: "No new messages"
+      }
     }
   };
   var trans_legacy = {
@@ -8108,12 +8150,12 @@
             </li>
             <li class="navlist-item secondary-nav-item">
                 <a class="secondary-nav-item-link bleh--nav" data-bleh-page="customise" onclick="_change_settings_page('customise')">
-                    ${trans_legacy[lang].settings.layout.name}
+                    ${tl(trans.layout)}
                 </a>
             </li>
             <li class="navlist-item secondary-nav-item">
                 <a class="secondary-nav-item-link bleh--nav" data-bleh-page="music" onclick="_change_settings_page('music')">
-                    ${trans_legacy[lang].settings.music.name}
+                    ${tl(trans.music)}
                 </a>
             </li>
             <li class="navlist-item secondary-nav-item">
@@ -8123,7 +8165,7 @@
             </li>
             <li class="navlist-item secondary-nav-item">
                 <a class="secondary-nav-item-link bleh--nav" data-bleh-page="seasonal" data-season="${stored_season.id}" onclick="_change_settings_page('seasonal')">
-                    ${trans_legacy[lang].settings.customise.seasonal.name}
+                    ${tl(trans.seasonal.name)}
                 </a>
             </li>
             <li class="navlist-item secondary-nav-item">
@@ -8133,12 +8175,12 @@
             </li>
             <li class="navlist-item secondary-nav-item">
                 <a class="secondary-nav-item-link bleh--nav" data-bleh-page="accessibility" onclick="_change_settings_page('accessibility')">
-                    ${trans_legacy[lang].settings.accessibility.name}
+                    ${tl(trans.accessibility)}
                 </a>
             </li>
             <li class="navlist-item secondary-nav-item">
                 <a class="secondary-nav-item-link bleh--nav" data-bleh-page="performance" onclick="_change_settings_page('performance')">
-                    ${trans_legacy[lang].settings.performance.name}
+                    ${tl(trans.troubleshooting)}
                 </a>
             </li>
             <li class="navlist-item secondary-nav-item">
@@ -8164,16 +8206,16 @@
                     ${tl(trans.appearance)}
                 </button>
                 <button class="btn bleh--btn" data-bleh-page="customise" onclick="_change_settings_page('customise')">
-                    ${trans_legacy[lang].settings.layout.name}
+                    ${tl(trans.layout)}
                 </button>
                 <button class="btn bleh--btn" data-bleh-page="music" onclick="_change_settings_page('music')">
-                    ${trans_legacy[lang].settings.music.name}
+                    ${tl(trans.music)}
                 </button>
                 <button class="btn bleh--btn" data-bleh-page="accessibility" onclick="_change_settings_page('accessibility')">
-                    ${trans_legacy[lang].settings.accessibility.name}
+                    ${tl(trans.accessibility)}
                 </button>
                 <button class="btn bleh--btn" data-bleh-page="seasonal" data-season="${stored_season.id}" onclick="_change_settings_page('seasonal')">
-                    ${trans_legacy[lang].settings.customise.seasonal.name}
+                    ${tl(trans.seasonal.name)}
                 </button>
             </div>
             <div class="btns sep">
@@ -8186,10 +8228,10 @@
             </div>
             <div class="btns sep">
                 <button class="btn" data-bleh-action="import" onclick="_import_settings()">
-                    ${trans_legacy[lang].settings.actions.import.name}
+                    ${tl(trans.import)}
                 </button>
                 <button class="btn" data-bleh-action="export" onclick="_export_settings()">
-                    ${trans_legacy[lang].settings.actions.export.name}
+                    ${tl(trans.export)}
                 </button>
             </div>
             <div class="btns sep">
@@ -8197,10 +8239,10 @@
                     ${trans_legacy[lang].settings.profiles.name}
                 </button>
                 <button class="btn bleh--btn" data-bleh-page="performance" onclick="_change_settings_page('performance')">
-                    ${trans_legacy[lang].settings.performance.name}
+                    ${tl(trans.troubleshooting)}
                 </button>
                 <button class="btn" data-bleh-action="reset" onclick="_reset_settings()">
-                    ${trans_legacy[lang].settings.actions.reset.name}
+                    ${tl(trans.reset)}
                 </button>
             </div>
             ` : `
@@ -8210,20 +8252,20 @@
             ` : ""}
             ${ff("skip_to_setting") ? '<div class="btns sep">' : '<div class="btns">'}
                 <button class="btn" data-bleh-action="import" onclick="_import_settings()">
-                    ${trans_legacy[lang].settings.actions.import.name}
+                    ${tl(trans.import)}
                 </button>
                 <button class="btn" data-bleh-action="export" onclick="_export_settings()">
-                    ${trans_legacy[lang].settings.actions.export.name}
+                    ${tl(trans.export)}
                 </button>
                 <button class="btn" data-bleh-action="reset" onclick="_reset_settings()">
-                    ${trans_legacy[lang].settings.actions.reset.name}
+                    ${tl(trans.reset)}
                 </button>
             </div>
             `}
             ${settings.feature_flags.changelogs != false ? `
             <div class="btns">
                 <button class="btn bleh--btn primary" data-bleh-page="changelog" onclick="_query_changelog()">
-                    ${trans_legacy[lang].changelog.name}
+                    ${tl(trans.changelog)}
                 </button>
             </div>
             ` : ""}
@@ -8278,7 +8320,7 @@
                 </div>
             </div>
             <div class="sep"></div>
-            <h4>${trans_legacy[lang].settings.customise.seasonal.name}</h4>
+            <h4>${tl(trans.seasonal.name)}</h4>
             <div class="current-season-box no-margin" data-season="${stored_season.id}">
                 <div class="current-season-info">
                     <div class="bleh-icon bleh-seasonal-icon" data-season="${stored_season.id}"></div>
@@ -8307,7 +8349,7 @@
                 <div class="side-right full">
                     <button class="btn setting-item bleh--themes" onclick="_change_settings_page('themes')">
                         <div class="text">
-                            <h5>${trans_legacy[lang].settings.themes.name}</h5>
+                            <h5>${tl(trans.themes.name)}</h5>
                             <p>${trans_legacy[lang].settings.themes.bio}</p>
                         </div>
                     </button>
@@ -8359,11 +8401,11 @@
       register_skip_to([
         {
           id: "hue_from_album",
-          name: trans_legacy[lang].settings.customise.hue_from_album.name
+          name: tl(trans.hue_from_album.name)
         },
         {
           id: "colourful_tracks",
-          name: trans_legacy[lang].settings.customise.colourful_tracks.name
+          name: tl(trans.colourful_tracks.name)
         },
         {
           id: "colourful_counts",
@@ -8391,7 +8433,7 @@
       return `
             <div class="bleh--panel">
                 <h4 class="top-header">${tl(trans.appearance)}</h4>
-                <h4>${trans_legacy[lang].settings.themes.name}</h4>
+                <h4>${tl(trans.themes.name)}</h4>
                 <!--<h4>${trans_legacy[lang].settings.themes.dark.name}</h4>-->
                 <div class="setting-items full">
                     <div class="side-left full even-more">
@@ -8443,7 +8485,7 @@
                 </div>
                 ` : ""}
                 <div class="sep"></div>
-                <h4>${trans_legacy[lang].settings.customise.colours.name}</h4>
+                <h4>${tl(trans.colours)}</h4>
                 <div class="inner-preview pad">
                     <div class="palette">
                         <div class="swatch" style="--col: hsl(var(--l2-c))"></div>
@@ -8502,8 +8544,8 @@
                 <div class="toggle-container" id="container-hue_from_album" onclick="_update_item('hue_from_album')">
                     <button class="btn reset" onclick="_reset_item('hue_from_album')">${tl(trans.reset)}</button>
                     <div class="heading">
-                        <h5>${trans_legacy[lang].settings.customise.hue_from_album.name}</h5>
-                        <p>${trans_legacy[lang].settings.customise.hue_from_album.bio}</p>
+                        <h5>${tl(trans.hue_from_album.name)}</h5>
+                        <p>${tl(trans.hue_from_album.body)}</p>
                     </div>
                     <div class="toggle-wrap">
                         <button class="toggle" id="toggle-hue_from_album" aria-checked="true">
@@ -8514,8 +8556,8 @@
                 <div class="toggle-container" id="container-colourful_tracks" onclick="_update_item('colourful_tracks')">
                     <button class="btn reset" onclick="_reset_item('colourful_tracks')">${tl(trans.reset)}</button>
                     <div class="heading">
-                        <h5>${trans_legacy[lang].settings.customise.colourful_tracks.name}</h5>
-                        <p>${trans_legacy[lang].settings.customise.colourful_tracks.bio}</p>
+                        <h5>${tl(trans.colourful_tracks.name)}</h5>
+                        <p>${tl(trans.colourful_tracks.body)}</p>
                     </div>
                     <div class="toggle-wrap">
                         <button class="toggle" id="toggle-colourful_tracks" aria-checked="true">
@@ -8535,40 +8577,40 @@
                             <div class="cover"></div>
                             <div class="title"></div>
                             <div class="bar">
-                                <div class="fill not-colourful" style="width: 100%"></div>
-                                <div class="fill colourful" style="width: 100%; --hue: -16.888749999999998; --sat: 1.5; --lit: 0.875"></div>
+                                <div class="fill not-colourful-example" style="width: 100%"></div>
+                                <div class="fill colourful-example" style="width: 100%; --hue: -16.888749999999998; --sat: 1.5; --lit: 0.875"></div>
                             </div>
                         </div>
                         <div class="track">
                             <div class="cover"></div>
                             <div class="title"></div>
                             <div class="bar">
-                                <div class="fill not-colourful" style="width: 85%"></div>
-                                <div class="fill colourful" style="width: 85%; --hue: 0.21863999999999972; --sat: 1.399218; --lit: 0.891406"></div>
+                                <div class="fill not-colourful-example" style="width: 85%"></div>
+                                <div class="fill colourful-example" style="width: 85%; --hue: 0.21863999999999972; --sat: 1.399218; --lit: 0.891406"></div>
                             </div>
                         </div>
                         <div class="track">
                             <div class="cover"></div>
                             <div class="title"></div>
                             <div class="bar">
-                                <div class="fill not-colourful" style="width: 60%"></div>
-                                <div class="fill colourful" style="width: 60%; --hue: 18.77; --sat: 1.425; --lit: 0.9175833333333334"></div>
+                                <div class="fill not-colourful-example" style="width: 60%"></div>
+                                <div class="fill colourful-example" style="width: 60%; --hue: 18.77; --sat: 1.425; --lit: 0.9175833333333334"></div>
                             </div>
                         </div>
                         <div class="track">
                             <div class="cover"></div>
                             <div class="title"></div>
                             <div class="bar">
-                                <div class="fill not-colourful" style="width: 30%"></div>
-                                <div class="fill colourful" style="width: 30%; --hue: 50.769767441860466; --sat: 1.361813953488372; --lit: 0.943406976744186"></div>
+                                <div class="fill not-colourful-example" style="width: 30%"></div>
+                                <div class="fill colourful-example" style="width: 30%; --hue: 50.769767441860466; --sat: 1.361813953488372; --lit: 0.943406976744186"></div>
                             </div>
                         </div>
                         <div class="track">
                             <div class="cover"></div>
                             <div class="title"></div>
                             <div class="bar">
-                                <div class="fill not-colourful" style="width: 5%"></div>
-                                <div class="fill colourful" style="width: 5%; --hue: 92.42; --sat: 1.35; --lit: 0.925"></div>
+                                <div class="fill not-colourful-example" style="width: 5%"></div>
+                                <div class="fill colourful-example" style="width: 5%; --hue: 92.42; --sat: 1.35; --lit: 0.925"></div>
                             </div>
                         </div>
                     </div>
@@ -8604,7 +8646,7 @@
       ]);
       return `
             <div class="bleh--panel check-artist-hover">
-                <h4 class="top-header">${trans_legacy[lang].settings.layout.name}</h4>
+                <h4 class="top-header">${tl(trans.layout)}</h4>
                 <h4>${trans_legacy[lang].settings.layout.header}</h4>
                 <div class="inner-preview pad">
                     <div class="profile-mockup artist">
@@ -8861,7 +8903,7 @@
       register_skip_to([]);
       return `
             <div class="bleh--panel">
-                <h4 class="top-header">${trans_legacy[lang].settings.performance.name}</h4>
+                <h4 class="top-header">${tl(trans.troubleshooting)}</h4>
                 <p>${trans_legacy[lang].settings.performance.bio}</p>
                 <div class="toggle-container">
                     <div class="heading">
@@ -9144,7 +9186,7 @@
       register_skip_to([]);
       return `
             <div class="bleh--panel">
-                <h4 class="top-header">${trans_legacy[lang].settings.accessibility.name}</h4>
+                <h4 class="top-header">${tl(trans.accessibility)}</h4>
                 <div class="toggle-container" id="container-reduced_motion" onclick="_update_item('reduced_motion')">
                     <button class="btn reset" onclick="_reset_item('reduced_motion')">${tl(trans.reset)}</button>
                     <div class="heading">
@@ -9517,7 +9559,7 @@
                 </div>
             </div>
             <div class="bleh--panel">
-                <h4 class="top-header">${trans_legacy[lang].settings.music.name}</h4>
+                <h4 class="top-header">${tl(trans.music)}</h4>
                 <h4>${trans_legacy[lang].settings.music.header}</h4>
                 <div class="inner-preview pad">
                     <div class="tracks">
@@ -10271,6 +10313,7 @@
         if (type == "custom")
           swatch.textContent = tl(trans[colour.type]);
         if (colour.type == "seasonal") {
+          swatch.textContent = tl(trans.seasonal.name);
           if (stored_season.id == "none")
             return;
           tippy(swatch, {
@@ -10636,7 +10679,7 @@
             <textarea id="import_area"></textarea>
             <div class="modal-footer">
                 <button class="btn primary download" onclick="_confirm_import()">
-                    ${trans_legacy[lang].settings.actions.import.name}
+                    ${tl(trans.import)}
                 </button>
                 <button class="btn cancel" onclick="_dialog_rm({id: 'import_settings'})">
                     ${trans_legacy[lang].settings.cancel}
@@ -11736,26 +11779,28 @@
     }
     let notif_btn = document.body.querySelector('.masthead-nav-control[data-analytics-label="notifications"]');
     let notif_count = notif_btn.querySelector(".notification-count-badge");
-    if (notif_count != null) {
+    if (notif_count) {
+      notif_count = notif_count.textContent;
       tippy(notif_btn, {
-        content: `${notif_count.textContent} notifications`
+        content: tl(trans.notifications.count).replace("{count}", notif_count)
       });
-      notif_btn.setAttribute("data-count", notif_count.textContent);
+      notif_btn.setAttribute("data-count", notif_count);
     } else {
       tippy(notif_btn, {
-        content: "No new notifications"
+        content: tl(trans.notifications.none)
       });
     }
     let inbox_btn = document.body.querySelector('.masthead-nav-control[data-analytics-label="inbox"]');
     let inbox_count = inbox_btn.querySelector(".notification-count-badge");
-    if (inbox_count != null) {
+    if (inbox_count) {
+      inbox_count = inbox_count.textContent;
       tippy(inbox_btn, {
-        content: `${inbox_count.textContent} messages`
+        content: tl(trans.inbox.count).replace("{count}", inbox_count)
       });
-      inbox_btn.setAttribute("data-count", inbox_count.textContent);
+      inbox_btn.setAttribute("data-count", inbox_count);
     } else {
       tippy(inbox_btn, {
-        content: "No new messages"
+        content: tl(trans.inbox.none)
       });
     }
     let inbox_container = document.body.querySelector('.masthead-nav-item:has([data-analytics-label="inbox"])');
@@ -11807,10 +11852,10 @@
             </a>
             <div class="sep"></div>
             <a class="dropdown-menu-clickable-item" data-menu-item="library" href="${root}user/${auth.name}/library">
-                ${trans_legacy[lang].auth_menu.library}
+                ${tl(trans.library)}
             </a>
             <a class="dropdown-menu-clickable-item" data-menu-item="shouts" href="${root}user/${auth.name}/shoutbox">
-                ${trans_legacy[lang].auth_menu.shouts}
+                ${tl(trans.shouts)}
             </a>
             ${settings.auth_menu_obsessions ? `
             <a class="dropdown-menu-clickable-item" data-menu-item="obsessions" href="${root}user/${auth.name}/obsessions">
@@ -11819,8 +11864,8 @@
             ` : ""}
             <button class="dropdown-menu-clickable-item" data-menu-item="themes" onclick="toggle_theme()">
                 <span class="auth-dropdown-item-row">
-                    <span class="auth-dropdown-item-left">${trans_legacy[lang].settings.themes.name}</span>
-                    <span class="auth-dropdown-item-right" id="theme-value">${trans_legacy[lang].settings.themes[settings.theme].name}</span>
+                    <span class="auth-dropdown-item-left">${tl(trans.themes.name)}</span>
+                    <span class="auth-dropdown-item-right" id="theme-value">${tl(trans.themes[settings.theme])}</span>
                 </span>
             </button>
             ${ff("dev") ? `
@@ -11829,17 +11874,17 @@
             </button>
             ` : ""}
             <a class="dropdown-menu-clickable-item" data-menu-item="bleh" href="${root}bleh">
-                ${trans_legacy[lang].auth_menu.configure_bleh}
+                ${tl(trans.configure_bleh)}
             </a>
             <div class="sep"></div>
             <a class="dropdown-menu-clickable-item" data-menu-item="labs" href="${root}labs">
                 ${trans_legacy[lang].auth_menu.labs}
             </a>
             <a class="dropdown-menu-clickable-item" data-menu-item="bookmarks" href="${root}music/+bookmarks">
-                ${trans_legacy[lang].auth_menu.bookmarks}
+                ${tl(trans.bookmarks)}
             </a>
             <a class="dropdown-menu-clickable-item" data-menu-item="settings" href="${root}settings">
-                ${trans_legacy[lang].auth_menu.settings}
+                ${tl(trans.settings)}
             </a>
             <form>
                 <input type="hidden" name="csrfmiddlewaretoken" value="${token}">
@@ -11860,21 +11905,21 @@
           shortcut_item.setAttribute("href", `${root}user/${settings.profile_shortcut}`);
           shortcut_item.textContent = settings.profile_shortcut;
         }
-        instance.popper.querySelector("#theme-value").textContent = trans_legacy[lang].settings.themes[settings.theme].name;
+        instance.popper.querySelector("#theme-value").textContent = tl(trans.themes[settings.theme]);
         let theme_menu_item = tippy(instance.popper.querySelector('[data-menu-item="themes"]:not([aria-expanded])'), {
           theme: "menu",
           content: `
                     <button class="dropdown-menu-clickable-item theme-item-in-menu" data-bleh-theme="light" onclick="change_theme_from_menu('light')">
-                        ${trans_legacy[lang].settings.themes.light.name}
+                        ${tl(trans.themes.light)}
                     </button>
                     <button class="dropdown-menu-clickable-item theme-item-in-menu" data-bleh-theme="dark" onclick="change_theme_from_menu('dark')">
-                        ${trans_legacy[lang].settings.themes.dark.name}
+                        ${tl(trans.themes.dark)}
                     </button>
                     <button class="dropdown-menu-clickable-item theme-item-in-menu" data-bleh-theme="darker" onclick="change_theme_from_menu('darker')">
-                        ${trans_legacy[lang].settings.themes.darker.name}
+                        ${tl(trans.themes.darker)}
                     </button>
                     <button class="dropdown-menu-clickable-item theme-item-in-menu" data-bleh-theme="oled" onclick="change_theme_from_menu('oled')">
-                        ${trans_legacy[lang].settings.themes.oled.name}
+                        ${tl(trans.themes.oled)}
                     </button>
                 `,
           allowHTML: true,
@@ -14806,33 +14851,33 @@
         <ul class="navlist-items">
             <li class="navlist-item secondary-nav-item secondary-nav-item--home">
                 <a href="${root}music" class="secondary-nav-item-link ${page.subpage == "music" ? "secondary-nav-item-link--active" : ""}">
-                    Home
+                    ${tl(trans.home)}
                 </a>
             </li>
             <li class="navlist-item secondary-nav-item secondary-nav-item--recommendations">
                 <a href="${root}music/+recommended" class="secondary-nav-item-link ${page.type == "recommended" ? "secondary-nav-item-link--active" : ""}">
-                    Recommendations
+                    ${tl(trans.recommendations)}
                 </a>
             </li>
             <li class="navlist-item secondary-nav-item secondary-nav-item--releases">
                 <a href="${root}music/+releases/out-now" class="secondary-nav-item-link ${page.type == "releases" ? "secondary-nav-item-link--active" : ""}">
-                    Releases
+                    ${tl(trans.releases)}
                 </a>
             </li>
             <li class="navlist-item secondary-nav-item secondary-nav-item--bookmarks">
                 <a href="${root}music/+bookmarks" class="secondary-nav-item-link ${page.type == "bookmarks" ? "secondary-nav-item-link--active" : ""}">
-                    Bookmarks
+                    ${tl(trans.bookmarks)}
                 </a>
             </li>
             <li class="navlist-item secondary-nav-item secondary-nav-item--charts">
                 <a href="${root}charts" class="secondary-nav-item-link ${page.type == "charts" ? "secondary-nav-item-link--active" : ""}">
-                    Charts
+                    ${tl(trans.charts)}
                 </a>
             </li>
             <li class="fill"></li>
             <li class="navlist-item secondary-nav-item secondary-nav-item--settings">
                 <a href="${root}settings" class="secondary-nav-item-link ${page.type == "settings" ? "secondary-nav-item-link--active" : ""}">
-                    Settings
+                    ${tl(trans.settings)}
                 </a>
             </li>
             <li class="navlist-item secondary-nav-item secondary-nav-item--bleh">
@@ -14842,7 +14887,7 @@
             </li>
             <li class="navlist-item secondary-nav-item secondary-nav-item--more">
                 <a class="secondary-nav-item-link no-text">
-                    More
+                    ${tl(trans.more)}
                 </a>
             </li>
         </ul>

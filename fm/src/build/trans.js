@@ -137,7 +137,9 @@ export const trans = {
         en: 'Appearance'
     },
     themes: {
-        en: 'Themes',
+        name: {
+            en: 'Themes'
+        },
         light: {
             en: 'Light'
         },
@@ -149,6 +151,25 @@ export const trans = {
         },
         oled: {
             en: 'Void'
+        }
+    },
+    colours: {
+        en: 'Colours'
+    },
+    hue_from_album: {
+        name: {
+            en: 'Colour album pages based on album art'
+        },
+        body: {
+            en: 'Highlights the primary colour from the album art to replace your colour temporarily'
+        }
+    },
+    colourful_tracks: {
+        name: {
+            en: 'Colour active track based on album art'
+        },
+        body: {
+            en: 'Highlights the primary colour from the album art for the individual track'
         }
     },
     configure: {
@@ -172,8 +193,10 @@ export const trans = {
         de: 'Profil'
     },
     seasonal: {
-        en: 'Seasonal',
-        de: 'Saisonal'
+        name: {
+            en: 'Seasonal',
+            de: 'Saisonal'
+        }
     },
     text: {
         en: 'Text'
@@ -217,7 +240,7 @@ export const trans = {
     reset: {
         en: 'Reset'
     },
-    whats_new: {
+    changelog: {
         en: 'What\'s New?'
     },
     default: {
@@ -285,6 +308,25 @@ export const trans = {
     },
     beta: {
         en: 'Beta'
+    },
+    more: {
+        en: 'More'
+    },
+    notifications: {
+        count: {
+            en: '{count} notifications'
+        },
+        none: {
+            en: 'No new notifications'
+        }
+    },
+    inbox: {
+        count: {
+            en: '{count} messages'
+        },
+        none: {
+            en: 'No new messages'
+        }
     }
 }
 

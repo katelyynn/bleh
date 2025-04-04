@@ -14820,12 +14820,12 @@ input[type="range"]::-moz-range-progress {
     justify-content: space-evenly;
 }
 [data-bleh--colourful_counts="true"] {
-    .not-colourful {
+    .not-colourful-example {
         display: none !important;
     }
 }
 [data-bleh--colourful_counts="false"] {
-    .colourful {
+    .colourful-example {
         display: none !important;
     }
 }

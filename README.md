@@ -24,7 +24,7 @@ Script files can be found in `src`. `src/pages` are for the different pages foun
 
 ### Building the script
 
-To combine all the separate files into a Tampermonkey-compatible file, run the `node index.js` script and it will update the `bleh.user.js` file for use.
+To combine all the separate files into a Tampermonkey-compatible file, run the `node index.js` script and it will update the `bleh.user.js` file for use. If you want to work on this script, use `node index.js dev`, and then use the Violentmonkey extension to load it, and click "track external edits". It'll update automatically.
 
 ---
 

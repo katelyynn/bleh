@@ -57,33 +57,33 @@ export function bleh_home() {
         <ul class="navlist-items">
             <li class="navlist-item secondary-nav-item secondary-nav-item--home">
                 <a href="${root}music" class="secondary-nav-item-link ${(page.subpage == 'music') ? 'secondary-nav-item-link--active' : ''}">
-                    Home
+                    ${tl(trans.home)}
                 </a>
             </li>
             <li class="navlist-item secondary-nav-item secondary-nav-item--recommendations">
                 <a href="${root}music/+recommended" class="secondary-nav-item-link ${(page.type == 'recommended') ? 'secondary-nav-item-link--active' : ''}">
-                    Recommendations
+                    ${tl(trans.recommendations)}
                 </a>
             </li>
             <li class="navlist-item secondary-nav-item secondary-nav-item--releases">
                 <a href="${root}music/+releases/out-now" class="secondary-nav-item-link ${(page.type == 'releases') ? 'secondary-nav-item-link--active' : ''}">
-                    Releases
+                    ${tl(trans.releases)}
                 </a>
             </li>
             <li class="navlist-item secondary-nav-item secondary-nav-item--bookmarks">
                 <a href="${root}music/+bookmarks" class="secondary-nav-item-link ${(page.type == 'bookmarks') ? 'secondary-nav-item-link--active' : ''}">
-                    Bookmarks
+                    ${tl(trans.bookmarks)}
                 </a>
             </li>
             <li class="navlist-item secondary-nav-item secondary-nav-item--charts">
                 <a href="${root}charts" class="secondary-nav-item-link ${(page.type == 'charts') ? 'secondary-nav-item-link--active' : ''}">
-                    Charts
+                    ${tl(trans.charts)}
                 </a>
             </li>
             <li class="fill"></li>
             <li class="navlist-item secondary-nav-item secondary-nav-item--settings">
                 <a href="${root}settings" class="secondary-nav-item-link ${(page.type == 'settings') ? 'secondary-nav-item-link--active' : ''}">
-                    Settings
+                    ${tl(trans.settings)}
                 </a>
             </li>
             <li class="navlist-item secondary-nav-item secondary-nav-item--bleh">
@@ -93,7 +93,7 @@ export function bleh_home() {
             </li>
             <li class="navlist-item secondary-nav-item secondary-nav-item--more">
                 <a class="secondary-nav-item-link no-text">
-                    More
+                    ${tl(trans.more)}
                 </a>
             </li>
         </ul>
