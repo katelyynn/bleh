@@ -145,5 +145,5 @@ export function clean_message(message, type) {
             }
         }
     })
-    return `${type} ${action} (original ${message})`;
+    return action;
 }
