@@ -20524,7 +20524,11 @@ h4 {
 .generic-table-list {
     display: flex;
     flex-direction: column;
-    max-width: 400px;
+    max-width: 700px;
+
+    &.user-vertical-list {
+        max-width: 400px;
+    }
 
     &.list-is-exceeded {
         &[data-expanded="false"] {
@@ -20548,19 +20552,27 @@ h4 {
         display: flex;
         align-items: center;
         padding: 3px 12px;
+        gap: 12px;
         border-radius: var(--item-big-radius);
 
         transition-property: background;
         transition-duration: var(--trans);
         transition-timing-function: var(--trans-function);
 
-        &:hover {
+        &:nth-child(even) {
             background: hsl(var(--b4), 40%);
+        }
+
+        &:hover {
+            background: hsl(var(--b3), 40%);
             transition: none;
         }
 
         .text {
             flex: 1;
+        }
+        .text-2 {
+            color: hsl(var(--c3));
         }
         .actions {
             flex-shrink: 0;

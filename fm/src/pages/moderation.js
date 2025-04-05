@@ -1,15 +1,23 @@
 import { settings } from "../build/config";
 import { log } from "../build/log";
+import { page } from "../build/page";
+import { custom_select } from "../components/select";
+import { trans, tl } from "../build/trans";
 
 export const blocklists = new Map();
 unsafeWindow.blocklists = blocklists;
 
 export function bleh_moderation() {
+    let container = page.structure.main.querySelector('.block-list-selector');
+    let selector = container.querySelector('select');
+
+    custom_select(selector, container);
+
     reload();
 }
 
 export function load_moderation() {
-    if(localStorage.getItem("bleh_moderation") == null) {
+    if (localStorage.getItem("bleh_moderation") == null) {
         // TODO: use github raw once this is live
         localStorage.setItem("bleh_moderation", JSON.stringify([
             {
@@ -25,30 +33,30 @@ export function load_moderation() {
 
     const blocklist = JSON.parse(localStorage.getItem("bleh_moderation"))
     blocklist.forEach(async z => {
-        if(!blocklists.has(z.url)) {
+        if (!blocklists.has(z.url)) {
             let body;
-            
+
             try {
                 const req = await fetch(z.url);
                 body = await req.text();
                 log("successfully loaded " + z.url, "moderation")
-    
+
             } catch(e) {
                 console.error(e)
                 log("failed to load blocklist " + z.url, "moderation")
             }
-            
+
             let parsed;
-            if(z.type == "strings") {
+            if (z.type == "strings") {
                 parsed = body.split("\n");
-            } else if(z.type == "regex") {
+            } else if (z.type == "regex") {
                 parsed = body.split("\n").map(z => new RegExp(z));
             }
 
             blocklists.set(z.url, {
                 type: z.type,
                 blocklist: parsed
-            })
+            });
         }
     })
 }
@@ -58,20 +66,20 @@ function reload() {
     blocklistElement.innerHTML = "";
     const blocklist = JSON.parse(localStorage.getItem("bleh_moderation"));
     blocklist.forEach(async (z,i) => {
-        const elem = document.createElement("div")
-        elem.className = "language-row";
+        const elem = document.createElement('div');
+        elem.className = 'generic-table-list-entry';
         elem.innerHTML = `
-                <div class="name">
-          <h5>${z.url}</h5>
+        <div class="text">
+            <h5><a href="${z.url}" target="_blank">${z.url}</a></h5>
         </div>
-        <div class="badges">
-        <div class="new-badge">${z.type.substring(0,1).toUpperCase()+z.type.slice(1)}</div>
+        <div class="text-2">
+            <p>${z.type.substring(0,1).toUpperCase()+z.type.slice(1)}</p>
         </div>
-        <div class="date">
-          <button class="btn danger" onclick="_remove_block_index(${i})">Remove</button>
+        <div class="actions">
+            <button class="delete icon delete-user-button danger-subtle" onclick="_remove_block_index(${i})">${tl(trans.remove)}</button>
         </div>
-        `
-        blocklistElement.appendChild(elem)
+        `;
+        blocklistElement.appendChild(elem);
     })
     load_moderation();
 }
@@ -109,7 +117,7 @@ export function clean_message(message, type) {
     const censor_artist_names = settings.censor_artist_names;
     const censor_album_titles = settings.censor_album_titles;
     const censor_track_titles = settings.censor_track_titles;
-    
+
     if(type == "shout" && !moderate_shouts) return;
     else if(type == "bio" && !censor_bios) return;
     else if(type == "artist_name" && !censor_artist_names) return;

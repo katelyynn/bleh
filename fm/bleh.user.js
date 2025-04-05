@@ -8250,10 +8250,81 @@
     return Math.floor(Math.random() * (b - a + 1)) + a;
   }
 
+  // src/components/select.js
+  unsafeWindow._update_inbuilt_select = function(id, value) {
+    update_inbuilt_select(id, value);
+  };
+  function update_inbuilt_select(id, value) {
+    document.documentElement.setAttribute(`data-bleh--inbuilt-${id}`, value);
+  }
+  function custom_select(select, element_to_append) {
+    console.info(select);
+    let id = select.getAttribute("id");
+    let value = select.value;
+    let value_objects = select.querySelectorAll("option");
+    let menu_list = document.createElement("div");
+    value_objects.forEach((object) => {
+      let object_value = object.getAttribute("value");
+      let object_text = object.textContent;
+      let item = document.createElement("button");
+      item.classList.add("btn", "dropdown-menu-clickable-item", "select-item");
+      item.setAttribute("onclick", `_set_custom_select_value('${id}', '${object_value}')`);
+      item.setAttribute("data-value", object_value);
+      item.setAttribute("type", "button");
+      item.textContent = object_text;
+      menu_list.appendChild(item);
+    });
+    let button = document.createElement("button");
+    button.classList.add("select-button");
+    button.setAttribute("id", `select-${id}`);
+    button.setAttribute("type", "button");
+    button.textContent = menu_list.querySelector(`[data-value="${value}"]`).textContent;
+    let theme_menu_item = tippy(button, {
+      theme: "select-menu",
+      content: `
+            ${menu_list.innerHTML}
+        `,
+      allowHTML: true,
+      placement: "bottom",
+      interactive: true,
+      interactiveBorder: 10,
+      trigger: "click",
+      onShow(instance) {
+        update_custom_select(instance.popper, select.value);
+      }
+    });
+    element_to_append.appendChild(button);
+  }
+  unsafeWindow._set_custom_select_value = function(select_id, value) {
+    let select = document.getElementById(select_id);
+    select.value = value;
+    console.info(select, `#select-${select_id}`);
+    update_custom_select(document.getElementById(`select-${select_id}`)._tippy.popper, value, select_id);
+    document.documentElement.setAttribute(`data-bleh--inbuilt-${select_id}`, value);
+  };
+  function update_custom_select(element = document.body, value = "", select_id = "") {
+    let btns = element.querySelectorAll(".dropdown-menu-clickable-item");
+    btns.forEach((btn) => {
+      if (btn.getAttribute("data-value") != value) {
+        btn.classList.remove("active");
+      } else {
+        btn.classList.add("active");
+        let sel_button = document.body.querySelector(`#select-${select_id}`);
+        console.log(sel_button);
+        if (sel_button == null)
+          return;
+        sel_button.textContent = btn.textContent;
+      }
+    });
+  }
+
   // src/pages/moderation.js
   var blocklists = /* @__PURE__ */ new Map();
   unsafeWindow.blocklists = blocklists;
   function bleh_moderation() {
+    let container = page.structure.main.querySelector(".block-list-selector");
+    let selector = container.querySelector("select");
+    custom_select(selector, container);
     reload();
   }
   function load_moderation() {
@@ -8300,16 +8371,16 @@
     const blocklist = JSON.parse(localStorage.getItem("bleh_moderation"));
     blocklist.forEach(async (z, i) => {
       const elem = document.createElement("div");
-      elem.className = "language-row";
+      elem.className = "generic-table-list-entry";
       elem.innerHTML = `
-                <div class="name">
-          <h5>${z.url}</h5>
+        <div class="text">
+            <h5><a href="${z.url}" target="_blank">${z.url}</a></h5>
         </div>
-        <div class="badges">
-        <div class="new-badge">${z.type.substring(0, 1).toUpperCase() + z.type.slice(1)}</div>
+        <div class="text-2">
+            <p>${z.type.substring(0, 1).toUpperCase() + z.type.slice(1)}</p>
         </div>
-        <div class="date">
-          <button class="btn danger" onclick="_remove_block_index(${i})">Remove</button>
+        <div class="actions">
+            <button class="delete icon delete-user-button danger-subtle" onclick="_remove_block_index(${i})">${tl(trans.remove)}</button>
         </div>
         `;
       blocklistElement.appendChild(elem);
@@ -8400,7 +8471,7 @@
             </li>
             <li class="navlist-item secondary-nav-item">
                 <a class="secondary-nav-item-link bleh--nav" data-bleh-page="moderation" onclick="_change_settings_page('moderation')">
-                    ${trans_legacy[lang].settings.moderation.name}
+                    ${tl(trans.moderation)}
                 </a>
             </li>
             <li class="navlist-item secondary-nav-item">
@@ -9968,113 +10039,133 @@
             `;
     } else if (page_id == "moderation") {
       register_skip_to([]);
-      return `               
+      return `
             <div class="bleh--panel">
-              <h4 class="top-header">${trans_legacy[lang].settings.moderation.name}</h4>
-              <div class="toggle-container" id="container-enable_moderation" onclick="_update_item('enable_moderation')">
-            <button class="btn reset" onclick="_reset_item('enable_moderation')">${tl(trans.reset)}</button>
-            <div class="heading">
-              <h5>Enable moderation</h5>
-            </div>
-            <div class="toggle-wrap">
-              <button class="toggle" id="toggle-enable_moderation" aria-checked="true">
-                <div class="dot"></div>
-              </button>
-            </div>
-              </div>
-              <div class="sep"></div>
-              <h4>Method</h4>
-              <div class="primary-selections">
-            <div class="btn primary-selection" id="toggle-removal_method-remove" data-toggle="removal_method" data-toggle-value="remove" onclick="_update_item('removal_method', 'remove')">
-              <h5>Remove words</h5>
-              <p>This entirely, cleanly removes words from usernames / biographies and shouts.</p>
-            </div>
-            <div class="btn primary-selection" id="toggle-removal_method-censor" data-toggle="removal_method" data-toggle-value="censor" onclick="_update_item('removal_method', 'censor')">
-              <h5>Censor words</h5>
-              <p>Censors words, replaces "fuck" with "f***", etc.</p>
-            </div>
-              </div>
-            </div>
-            <div class="bleh--panel">
-              <h4 class="top-header">Block List Management</h4>
-              <p>Enter a URL pointing to a CORS-enabled block list.</p>
-              <div class="text-container" id="container-block_list">
-            <div class="heading content-form">
-              <div class="input-container">
-                <input type="url" id="block-list-input" placeholder="Enter block list URL (HTTP/HTTPS)">
-                <select id="block-list-type">
-                  <option value="strings">Strings (per line)</option>
-                  <option value="regex">Regex expressions</option>
-                </select>
-                <button class="btn primary save" onclick="_add_block()">Add</button>
-              </div>
-            </div>
-              </div>
-              <div class="languages" id="block-lists">
-              </div>
+                <h4>${tl(trans.moderation)}</h4>
+                <p>Decide the way hateful terms across the site are treated.</p>
+                <div class="user-top-panel">
+                    <div class="user-top-avatar user-top-avatar-side-left"><div class="bleh-icon"></div></div>
+                    <img class="user-top-avatar user-top-avatar-main" src="${auth.avatar.replace("avatar42s", "avatar300s")}" alt="${auth.name}">
+                    <div class="user-top-avatar user-top-avatar-side-right"><div class="bleh-icon"></div></div>
+                </div>
+                <div class="toggle-container" id="container-enable_moderation" onclick="_update_item('enable_moderation')">
+                    <button class="btn reset" onclick="_reset_item('enable_moderation')">${tl(trans.reset)}</button>
+                    <div class="heading">
+                        <h5>Enable moderation</h5>
+                    </div>
+                    <div class="toggle-wrap">
+                        <button class="toggle" id="toggle-enable_moderation" aria-checked="true">
+                            <div class="dot"></div>
+                        </button>
+                    </div>
+                </div>
+                <div class="sep"></div>
+                <h4>Method</h4>
+                <div class="primary-selections">
+                    <div class="btn primary-selection" id="toggle-removal_method-remove" data-toggle="removal_method" data-toggle-value="remove" onclick="_update_item('removal_method', 'remove')">
+                        <h5>Remove</h5>
+                        <p>Any matching words will be completely hidden.</p>
+                    </div>
+                    <div class="btn primary-selection" id="toggle-removal_method-censor" data-toggle="removal_method" data-toggle-value="censor" onclick="_update_item('removal_method', 'censor')">
+                        <h5>Censor</h5>
+                        <p>Any matching words will be replaced by hearts.</p>
+                    </div>
+                </div>
             </div>
             <div class="bleh--panel">
-              <h4 class="top-header">Moderate where?</h4>
-              <div class="toggle-container" id="container-moderate_shouts" onclick="_update_item('moderate_shouts')">
-            <button class="btn reset" onclick="_reset_item('moderate_shouts')">${tl(trans.reset)}</button>
-            <div class="heading">
-              <h5>Moderate shouts</h5>
-              <p>Applies moderation rules to user shouts.</p>
+                <h4>Manage block lists</h4>
+                <p>Enter a URL pointing to a CORS-enabled block list.</p>
+                <div class="text-container" id="container-block_list">
+                    <div class="heading content-form">
+                        <div class="input-container">
+                            <input type="url" id="block-list-input" placeholder="https://example.com">
+                            <div class="custom-selector block-list-selector">
+                                <select id="block-list-type">
+                                    <option value="strings">Strings (per line)</option>
+                                    <option value="regex">Regex expressions</option>
+                                </select>
+                            </div>
+                            <button class="btn-add primary" onclick="_add_block()">Add</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="generic-table-list" id="block-lists"></div>
             </div>
-            <div class="toggle-wrap">
-              <button class="toggle" id="toggle-moderate_shouts" aria-checked="true">
-                <div class="dot"></div>
-              </button>
-            </div>
-              </div>
-              <div class="toggle-container" id="container-censor_bios" onclick="_update_item('censor_bios')">
-            <button class="btn reset" onclick="_reset_item('censor_bios')">${tl(trans.reset)}</button>
-            <div class="heading">
-              <h5>Censor bios</h5>
-              <p>Applies moderation rules to user biographies.</p>
-            </div>
-            <div class="toggle-wrap">
-              <button class="toggle" id="toggle-censor_bios" aria-checked="true">
-                <div class="dot"></div>
-              </button>
-            </div>
-              </div>
-              <div class="toggle-container" id="container-censor_artist_names" onclick="_update_item('censor_artist_names')">
-            <button class="btn reset" onclick="_reset_item('censor_artist_names')">${tl(trans.reset)}</button>
-            <div class="heading">
-              <h5>Censor artist names</h5>
-              <p>Applies moderation rules to artist names.</p>
-            </div>
-            <div class="toggle-wrap">
-              <button class="toggle" id="toggle-censor_artist_names" aria-checked="false">
-                <div class="dot"></div>
-              </button>
-            </div>
-              </div>
-              <div class="toggle-container" id="container-censor_track_titles" onclick="_update_item('censor_track_titles')">
-            <button class="btn reset" onclick="_reset_item('censor_track_titles')">${tl(trans.reset)}</button>
-            <div class="heading">
-              <h5>Censor track titles</h5>
-              <p>Applies moderation rules to track titles.</p>
-            </div>
-            <div class="toggle-wrap">
-              <button class="toggle" id="toggle-censor_track_titles" aria-checked="false">
-                <div class="dot"></div>
-              </button>
-            </div>
-              </div>
-              <div class="toggle-container" id="container-censor_album_titles" onclick="_update_item('censor_album_titles')">
-            <button class="btn reset" onclick="_reset_item('censor_album_titles')">${tl(trans.reset)}</button>
-            <div class="heading">
-              <h5>Censor album titles</h5>
-              <p>Applies moderation rules to album titles.</p>
-            </div>
-            <div class="toggle-wrap">
-              <button class="toggle" id="toggle-censor_album_titles" aria-checked="false">
-                <div class="dot"></div>
-              </button>
-            </div>
-              </div>
+            <div class="bleh--panel">
+                <h4>Moderate where?</h4>
+                <h5>User-generated</h5>
+                <div class="toggle-container" id="container-moderate_shouts" onclick="_update_item('moderate_shouts')">
+                    <button class="btn reset" onclick="_reset_item('moderate_shouts')">${tl(trans.reset)}</button>
+                    <div class="icon">
+                        <div class="bleh-icon" style="--icon: var(--icon-16-shoutbox)"></div>
+                    </div>
+                    <div class="heading">
+                        <h5>Shouts</h5>
+                    </div>
+                    <div class="toggle-wrap">
+                        <button class="toggle" id="toggle-moderate_shouts" aria-checked="true">
+                            <div class="dot"></div>
+                        </button>
+                    </div>
+                </div>
+                <div class="toggle-container" id="container-censor_bios" onclick="_update_item('censor_bios')">
+                    <button class="btn reset" onclick="_reset_item('censor_bios')">${tl(trans.reset)}</button>
+                    <div class="icon">
+                        <div class="bleh-icon" style="--icon: var(--icon-16-user)"></div>
+                    </div>
+                    <div class="heading">
+                        <h5>Profile biographies</h5>
+                    </div>
+                    <div class="toggle-wrap">
+                        <button class="toggle" id="toggle-censor_bios" aria-checked="true">
+                            <div class="dot"></div>
+                        </button>
+                    </div>
+                </div>
+                <div class="sep"></div>
+                <h5>Music</h5>
+                <div class="toggle-container" id="container-censor_artist_names" onclick="_update_item('censor_artist_names')">
+                    <button class="btn reset" onclick="_reset_item('censor_artist_names')">${tl(trans.reset)}</button>
+                    <div class="icon">
+                        <div class="bleh-icon" style="--icon: var(--icon-16-artist)"></div>
+                    </div>
+                    <div class="heading">
+                        <h5>Artist names</h5>
+                    </div>
+                    <div class="toggle-wrap">
+                        <button class="toggle" id="toggle-censor_artist_names" aria-checked="false">
+                            <div class="dot"></div>
+                        </button>
+                    </div>
+                </div>
+                <div class="toggle-container" id="container-censor_album_titles" onclick="_update_item('censor_album_titles')">
+                    <button class="btn reset" onclick="_reset_item('censor_album_titles')">${tl(trans.reset)}</button>
+                    <div class="icon">
+                        <div class="bleh-icon" style="--icon: var(--icon-16-album)"></div>
+                    </div>
+                    <div class="heading">
+                        <h5>Album names</h5>
+                    </div>
+                    <div class="toggle-wrap">
+                        <button class="toggle" id="toggle-censor_album_titles" aria-checked="false">
+                            <div class="dot"></div>
+                        </button>
+                    </div>
+                </div>
+                <div class="toggle-container" id="container-censor_track_titles" onclick="_update_item('censor_track_titles')">
+                    <button class="btn reset" onclick="_reset_item('censor_track_titles')">${tl(trans.reset)}</button>
+                    <div class="icon">
+                        <div class="bleh-icon" style="--icon: var(--icon-16-track)"></div>
+                    </div>
+                    <div class="heading">
+                        <h5>Track names</h5>
+                    </div>
+                    <div class="toggle-wrap">
+                        <button class="toggle" id="toggle-censor_track_titles" aria-checked="false">
+                            <div class="dot"></div>
+                        </button>
+                    </div>
+                </div>
             </div>
             `;
     }
@@ -14221,74 +14312,6 @@
       new_panel.appendChild(chart_row);
     });
     page.structure.main.insertBefore(new_panel, page.structure.main.firstElementChild);
-  }
-
-  // src/components/select.js
-  unsafeWindow._update_inbuilt_select = function(id, value) {
-    update_inbuilt_select(id, value);
-  };
-  function update_inbuilt_select(id, value) {
-    document.documentElement.setAttribute(`data-bleh--inbuilt-${id}`, value);
-  }
-  function custom_select(select, element_to_append) {
-    console.info(select);
-    let id = select.getAttribute("id");
-    let value = select.value;
-    let value_objects = select.querySelectorAll("option");
-    let menu_list = document.createElement("div");
-    value_objects.forEach((object) => {
-      let object_value = object.getAttribute("value");
-      let object_text = object.textContent;
-      let item = document.createElement("button");
-      item.classList.add("btn", "dropdown-menu-clickable-item", "select-item");
-      item.setAttribute("onclick", `_set_custom_select_value('${id}', '${object_value}')`);
-      item.setAttribute("data-value", object_value);
-      item.setAttribute("type", "button");
-      item.textContent = object_text;
-      menu_list.appendChild(item);
-    });
-    let button = document.createElement("button");
-    button.classList.add("select-button");
-    button.setAttribute("id", `select-${id}`);
-    button.setAttribute("type", "button");
-    button.textContent = menu_list.querySelector(`[data-value="${value}"]`).textContent;
-    let theme_menu_item = tippy(button, {
-      theme: "select-menu",
-      content: `
-            ${menu_list.innerHTML}
-        `,
-      allowHTML: true,
-      placement: "bottom",
-      interactive: true,
-      interactiveBorder: 10,
-      trigger: "click",
-      onShow(instance) {
-        update_custom_select(instance.popper, select.value);
-      }
-    });
-    element_to_append.appendChild(button);
-  }
-  unsafeWindow._set_custom_select_value = function(select_id, value) {
-    let select = document.getElementById(select_id);
-    select.value = value;
-    console.info(select, `#select-${select_id}`);
-    update_custom_select(document.getElementById(`select-${select_id}`)._tippy.popper, value, select_id);
-    document.documentElement.setAttribute(`data-bleh--inbuilt-${select_id}`, value);
-  };
-  function update_custom_select(element = document.body, value = "", select_id = "") {
-    let btns = element.querySelectorAll(".dropdown-menu-clickable-item");
-    btns.forEach((btn) => {
-      if (btn.getAttribute("data-value") != value) {
-        btn.classList.remove("active");
-      } else {
-        btn.classList.add("active");
-        let sel_button = document.body.querySelector(`#select-${select_id}`);
-        console.log(sel_button);
-        if (sel_button == null)
-          return;
-        sel_button.textContent = btn.textContent;
-      }
-    });
   }
 
   // src/components/markdown.js
