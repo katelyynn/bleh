@@ -1734,7 +1734,6 @@ export function render_setting_page(page_id) {
                 <select id="block-list-type">
                   <option value="strings">Strings (per line)</option>
                   <option value="regex">Regex expressions</option>
-                  <option value="reddit">Reddit automod template</option>
                 </select>
                 <button class="btn primary save" onclick="_add_block()">Add</button>
               </div>
