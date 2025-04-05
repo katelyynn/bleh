@@ -24,6 +24,7 @@ import { bleh_gallery, bleh_gallery_upload_check, patch_gallery_page } from "./p
 import { bleh_glacier_library, bleh_glacier_library_bulk_edit } from "./pages/glacier";
 import { bleh_home, bleh_home_legacy } from "./pages/home";
 import { bleh_inbox } from "./pages/inbox";
+import { load_moderation } from "./pages/moderation";
 import { bleh_profiles } from "./pages/profile";
 import { bleh_search } from "./pages/search";
 import { bleh_tags } from "./pages/tag";
@@ -106,7 +107,8 @@ function bleh_main() {
     sponsors();
 
     append_nav();
-
+    load_moderation();
+    
     try {
         //throw new Error;
         main_flow();

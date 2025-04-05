@@ -7,7 +7,7 @@ export let settings_template = {
     show_extra_nav: true,
     removal_method: "censor",
     enable_moderation: false,
-    censor_shouts: true,
+    moderate_shouts: true,
     censor_bios: true,
     censor_artist_names: false,
     censor_track_titles: false,
@@ -551,15 +551,15 @@ export let settings_base = {
         value: 'censor',
         type: 'options'
     },
-    censor_shouts: {
-        css: 'censor_shouts',
+    moderate_shouts: {
+        css: 'moderate_shouts',
         unit: '',
         value: false,
         values: [true, false],
         type: 'toggle'
     },
     censor_bios: {
-        css: 'censor_shouts',
+        css: 'censor_bios',
         unit: '',
         value: false,
         values: [true, false],

@@ -28,7 +28,7 @@
     show_extra_nav: true,
     removal_method: "censor",
     enable_moderation: false,
-    censor_shouts: true,
+    moderate_shouts: true,
     censor_bios: true,
     censor_artist_names: false,
     censor_track_titles: false,
@@ -557,15 +557,15 @@
       value: "censor",
       type: "options"
     },
-    censor_shouts: {
-      css: "censor_shouts",
+    moderate_shouts: {
+      css: "moderate_shouts",
       unit: "",
       value: false,
       values: [true, false],
       type: "toggle"
     },
     censor_bios: {
-      css: "censor_shouts",
+      css: "censor_bios",
       unit: "",
       value: false,
       values: [true, false],
@@ -8251,8 +8251,12 @@
   }
 
   // src/pages/moderation.js
+  var blocklists = /* @__PURE__ */ new Map();
+  unsafeWindow.blocklists = blocklists;
   function bleh_moderation() {
-    alert("bleh_moderation");
+    reload();
+  }
+  function load_moderation() {
     if (localStorage.getItem("bleh_moderation") == null) {
       localStorage.setItem("bleh_moderation", JSON.stringify([
         {
@@ -8265,13 +8269,36 @@
         }
       ]));
     }
-    reload();
+    const blocklist = JSON.parse(localStorage.getItem("bleh_moderation"));
+    blocklist.forEach(async (z) => {
+      if (!blocklists.has(z.url)) {
+        let body;
+        try {
+          const req = await fetch(z.url);
+          body = await req.text();
+          log("successfully loaded " + z.url, "moderation");
+        } catch (e) {
+          console.error(e);
+          log("failed to load blocklist " + z.url, "moderation");
+        }
+        let parsed;
+        if (z.type == "strings") {
+          parsed = body.split("\n");
+        } else if (z.type == "regex") {
+          parsed = body.split("\n").map((z2) => new RegExp(z2));
+        }
+        blocklists.set(z.url, {
+          type: z.type,
+          blocklist: parsed
+        });
+      }
+    });
   }
   function reload() {
     const blocklistElement = document.getElementById("block-lists");
     blocklistElement.innerHTML = "";
     const blocklist = JSON.parse(localStorage.getItem("bleh_moderation"));
-    blocklist.forEach((z, i) => {
+    blocklist.forEach(async (z, i) => {
       const elem = document.createElement("div");
       elem.className = "language-row";
       elem.innerHTML = `
@@ -8287,11 +8314,13 @@
         `;
       blocklistElement.appendChild(elem);
     });
+    load_moderation();
   }
   unsafeWindow._remove_block_index = (i) => {
     const blocklist = JSON.parse(localStorage.getItem("bleh_moderation"));
-    blocklist.splice(i, 1);
+    const removed = blocklist.splice(i, 1)[0];
     localStorage.setItem("bleh_moderation", JSON.stringify(blocklist));
+    blocklists.delete(removed.url);
     reload();
   };
   unsafeWindow._add_block = () => {
@@ -9976,7 +10005,6 @@
                 <select id="block-list-type">
                   <option value="strings">Strings (per line)</option>
                   <option value="regex">Regex expressions</option>
-                  <option value="reddit">Reddit automod template</option>
                 </select>
                 <button class="btn primary save" onclick="_add_block()">Add</button>
               </div>
@@ -16066,10 +16094,10 @@
         page.structure.container.removeChild(page.structure.nav);
         page.structure.main.innerHTML = "";
         page.structure.side.innerHTML = "";
-        let alert2 = document.createElement("div");
-        alert2.classList.add("alert", "alert-info");
-        alert2.textContent = "This is a special bleh account used for managing sponsors.";
-        page.structure.container.appendChild(alert2);
+        let alert = document.createElement("div");
+        alert.classList.add("alert", "alert-info");
+        alert.textContent = "This is a special bleh account used for managing sponsors.";
+        page.structure.container.appendChild(alert);
       }
       let featured_track_panel = profile_header.querySelector(".header-featured-track");
       if (featured_track_panel != null)
@@ -17858,6 +17886,7 @@
     lotus();
     sponsors();
     append_nav();
+    load_moderation();
     try {
       main_flow();
       const observer = new MutationObserver((mutations) => {
