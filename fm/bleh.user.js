@@ -8250,6 +8250,66 @@
     return Math.floor(Math.random() * (b - a + 1)) + a;
   }
 
+  // src/pages/moderation.js
+  function bleh_moderation() {
+    alert("bleh_moderation");
+    if (localStorage.getItem("bleh_moderation") == null) {
+      localStorage.setItem("bleh_moderation", JSON.stringify([
+        {
+          url: "https://files.sad.ovh/public/bleh/b0_racist.txt",
+          type: "strings"
+        },
+        {
+          url: "https://files.sad.ovh/public/bleh/b4_sexual.txt",
+          type: "strings"
+        }
+      ]));
+    }
+    reload();
+  }
+  function reload() {
+    const blocklistElement = document.getElementById("block-lists");
+    blocklistElement.innerHTML = "";
+    const blocklist = JSON.parse(localStorage.getItem("bleh_moderation"));
+    blocklist.forEach((z, i) => {
+      const elem = document.createElement("div");
+      elem.className = "language-row";
+      elem.innerHTML = `
+                <div class="name">
+          <h5>${z.url}</h5>
+        </div>
+        <div class="badges">
+        <div class="new-badge">${z.type.substring(0, 1).toUpperCase() + z.type.slice(1)}</div>
+        </div>
+        <div class="date">
+          <button class="btn danger" onclick="_remove_block_index(${i})">Remove</button>
+        </div>
+        `;
+      blocklistElement.appendChild(elem);
+    });
+  }
+  unsafeWindow._remove_block_index = (i) => {
+    const blocklist = JSON.parse(localStorage.getItem("bleh_moderation"));
+    blocklist.splice(i, 1);
+    localStorage.setItem("bleh_moderation", JSON.stringify(blocklist));
+    reload();
+  };
+  unsafeWindow._add_block = () => {
+    const input = document.getElementById("block-list-input");
+    const type = document.getElementById("block-list-type");
+    if (!input.value.trim()) return;
+    try {
+      new URL(input.value.trim());
+    } catch (_) {
+      return;
+    }
+    const blocklist = JSON.parse(localStorage.getItem("bleh_moderation"));
+    blocklist.push({ url: input.value.trim(), type: type.value });
+    localStorage.setItem("bleh_moderation", JSON.stringify(blocklist));
+    reload();
+    input.value = "";
+  };
+
   // src/pages/bleh_config.js
   function bleh_settings() {
     page.type = "bleh_settings";
@@ -9918,29 +9978,11 @@
                   <option value="regex">Regex expressions</option>
                   <option value="reddit">Reddit automod template</option>
                 </select>
-                <button class="btn primary save" onclick="addBlockList()">Add</button>
+                <button class="btn primary save" onclick="_add_block()">Add</button>
               </div>
             </div>
               </div>
               <div class="languages" id="block-lists">
-            <div class="language-row">
-              <div class="name">
-                <h5>https://temporaryMR.eu</h5>
-              </div>
-              <div class="badges"></div>
-              <div class="date">
-                <button class="btn danger" onclick="_remove_block_index(0)">Remove</button>
-              </div>
-            </div>
-            <div class="language-row">
-              <div class="name">
-                <h5>https://iamthebleh_config.jssite.eu</h5>
-              </div>
-              <div class="badges"></div>
-              <div class="date">
-                <button class="btn danger" onclick="_remove_block_index(1)">Remove</button>
-              </div>
-            </div>
               </div>
             </div>
             <div class="bleh--panel">
@@ -10074,7 +10116,7 @@
       show_theme_change_in_settings();
       display_colour_presets();
       refresh_all();
-    } else if (page_id == "moderation" || page_id == "customise" || page_id == "performance" || page_id == "accessibility" || page_id == "text" || page_id == "seasonal" || page_id == "music" || page_id == "activities") {
+    } else if (page_id == "customise" || page_id == "performance" || page_id == "accessibility" || page_id == "text" || page_id == "seasonal" || page_id == "music" || page_id == "activities") {
       refresh_all();
     } else if (page_id == "profiles") {
       init_profile_notes();
@@ -10082,6 +10124,9 @@
       refresh_all();
     } else if (page_id == "sku") {
       bleh_sku_page();
+    } else if (page_id == "moderation") {
+      bleh_moderation();
+      refresh_all();
     }
     if (page_id == "text")
       prepare_language_page();
@@ -16021,10 +16066,10 @@
         page.structure.container.removeChild(page.structure.nav);
         page.structure.main.innerHTML = "";
         page.structure.side.innerHTML = "";
-        let alert = document.createElement("div");
-        alert.classList.add("alert", "alert-info");
-        alert.textContent = "This is a special bleh account used for managing sponsors.";
-        page.structure.container.appendChild(alert);
+        let alert2 = document.createElement("div");
+        alert2.classList.add("alert", "alert-info");
+        alert2.textContent = "This is a special bleh account used for managing sponsors.";
+        page.structure.container.appendChild(alert2);
       }
       let featured_track_panel = profile_header.querySelector(".header-featured-track");
       if (featured_track_panel != null)
