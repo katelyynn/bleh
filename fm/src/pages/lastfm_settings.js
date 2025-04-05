@@ -5,6 +5,7 @@ import { dialog_legacy, kill_window } from "../components/dialog";
 import { custom_select, update_inbuilt_select } from "../components/select";
 import { update_inbuilt_item } from "../config";
 import { ff } from "../sku";
+import { markdown } from "../components/markdown";
 
 // patch last.fm settings
 export function bleh_native_settings() {
@@ -440,8 +441,18 @@ function patch_settings_profile_panel(token, update_picture) {
 
     document.getElementById('update-profile').outerHTML = '';
 
+    let new_sidebar = document.createElement('section');
+    new_sidebar.classList.add('bleh--panel', 'about-me-preview');
+    new_sidebar.innerHTML = (`
+        <h4>${tl(trans.about_me_preview)}</h4>
+        <span class="bleh--about-me-preview" id="about_me_preview"></span>
+    `);
+
+    page.structure.side.appendChild(new_sidebar);
+
     update_picture.innerHTML = (`
         <h4>${trans_legacy[lang].settings.inbuilt.profile.name}</h4>
+        <div class="banner-preview"></div>
         <div class="profile-container">
             <div class="avatar-side">
                 <div class="avatar image-upload-preview" onclick="_open_avatar_changer('${token}')">
@@ -495,15 +506,10 @@ function patch_settings_profile_panel(token, update_picture) {
                             </div>
                             <div class="input about-me" data-bleh--show-preview="false" id="about_me">
                                 <textarea name="about_me" cols="40" rows="10" class="textarea--s" maxlength="500" id="id_about_me" oninput="_update_about_me_preview(this.value)" data-form-type="other">${form_about_me}</textarea>
-                                <span class="bleh--about-me-preview" id="about_me_preview"></span>
-                                <div class="tip">${trans_legacy[lang].settings.inbuilt.profile.banner_tip}</div>
-                                <div class="tip bleh--about-me-preview-only">${trans_legacy[lang].settings.inbuilt.profile.toggle_preview.note}</div>
+                                <div class="tip">${tl(trans.markdown_tip)}</div>
                             </div>
                         </div>
                         <div class="save-row">
-                            <span class="btn btn--has-icon btn--has-icon-left btn--toggle-about-me-preview" id="btn--toggle-about-me-preview" onclick="_toggle_about_me_preview()">
-                                ${trans_legacy[lang].settings.inbuilt.profile.toggle_preview.name}
-                            </span>
                             <div class="form-submit">
                                 <button type="submit" class="btn-primary save" data-form-type="action">
                                     ${trans_legacy[lang].settings.save}
@@ -628,32 +634,17 @@ unsafeWindow._update_about_me_preview = function(value) {
     update_about_me_preview(value);
 }
 function update_about_me_preview(value) {
-    let converter = new showdown.Converter({
-        emoji: true,
-        excludeTrailingPunctuationFromURLs: true,
-        headerLevelStart: 5,
-        noHeaderId: true,
-        openLinksInNewWindow: true,
-        requireSpaceBeforeHeadingText: true,
-        simpleLineBreaks: true,
-        simplifiedAutoLink: true,
-        strikethrough: true,
-        underline: true,
-        ghCodeBlocks: false,
-        smartIndentationFix: true
-    });
-    let parsed_body = converter.makeHtml(value
-    .replace(/([@])([a-zA-Z0-9_]+)/g, `[$1$2](${root}user/$2)`)
-    .replace(/\[artist\]([a-zA-Z0-9]+)\[\/artist\]/g, `[$1](${root}music/$1)`)
-    .replace(/\[album artist=([a-zA-Z0-9]+)\]([a-zA-Z0-9\s]+)\[\/album\]/g, `[$2](${root}music/$1/$2)`)
-    .replace(/\[track artist=([a-zA-Z0-9]+)\]([a-zA-Z0-9\s]+)\[\/track\]/g, `[$2](${root}music/$1/_/$2)`)
-    .replace(/https:\/\/open\.spotify\.com\/user\/([A-Za-z0-9]+)\?si=([A-Za-z0-9]+)/g, '[@$1](https://open.spotify.com/user/$1)')
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#039;'));
-    document.getElementById('about_me_preview').innerHTML = parsed_body;
+    let result = markdown(value);
+    let about_me = page.structure.side.querySelector('#about_me_preview');
+
+    about_me.innerHTML = result;
+
+    let banner = about_me.querySelector('img[alt="banner"]');
+    let banner_img = page.structure.main.querySelector('.banner-preview');
+    if (!banner)
+        banner_img.removeAttribute('style');
+    else
+        banner_img.style.setProperty('background-image', `url(${banner.getAttribute('src')})`);
 }
 
 

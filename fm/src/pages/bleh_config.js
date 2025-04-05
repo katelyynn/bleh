@@ -930,7 +930,7 @@ export function render_setting_page(page_id) {
                             <div class="header standalone title-container">
                                 <h1>${auth.name}</h1>
                                 ${(auth.pro) ? (`
-                                <span class="label user-status-subscriber">${trans_legacy[lang].badges['user-status-subscriber'].name}</span>
+                                <span class="label user-status-subscriber">${tl(trans.badges['user-status-subscriber'].name)}</span>
                                 `) : ''}
                             </div>
                         </div>
@@ -2536,7 +2536,7 @@ function init_profile_page() {
 
             let badge = document.createElement('span');
             badge.classList.add('label',`user-status--bleh-${this_badge.type}`,`user-status--bleh-user-${auth.name}`);
-            badge.textContent = (this_badge.name != null) ? this_badge.name : trans_legacy[lang].badges[this_badge.type].name;
+            badge.textContent = (this_badge.name != null) ? this_badge.name : tl(trans.badges[this_badge.type].name);
             profile_name_obj.appendChild(badge);
         } else {
             // multiple
@@ -2546,14 +2546,14 @@ function init_profile_page() {
 
                 let badge = document.createElement('span');
                 badge.classList.add('label',`user-status--bleh-${this_badge.type}`,`user-status--bleh-user-${auth.name}`);
-                badge.textContent = (this_badge.name != null) ? this_badge.name : trans_legacy[lang].badges[this_badge.type].name;
+                badge.textContent = (this_badge.name != null) ? this_badge.name : tl(trans.badges[this_badge.type].name);
                 profile_name_obj.appendChild(badge);
             }
         }
     } else {
         let badge = document.createElement('span');
         badge.classList.add('label','user-status--bleh-missing');
-        badge.textContent = trans_legacy[lang].badges.missing.name;
+        badge.textContent = tl(trans.badges.missing.name);
         profile_name_obj.appendChild(badge);
     }
 }

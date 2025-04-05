@@ -1195,7 +1195,7 @@ last.fm changes as of 2024-05-20 */
         --bg-atv: transparent !important;
         --shadow: none !important;
         --shadow-hov: none !important;
-        width: 40px !important;
+        width: 42px !important;
         height: 32px !important;
         opacity: 1 !important;
         top: 0;
@@ -1226,8 +1226,8 @@ last.fm changes as of 2024-05-20 */
     }
 
     /* refined home experience */
-    .navlist-items {
-        display: none;
+    & > .masthead-nav {
+        display: none !important;
     }
 
     .navlist-more-wrap {
@@ -2427,6 +2427,32 @@ spacing between is removed and aligned to tag icon */
                 }
             }
         }
+    }
+}
+.about-me-preview {
+    flex: unset !important;
+}
+
+.banner-preview {
+    width: 100%;
+    height: 180px;
+    background-size: cover;
+    background-position: 0 40%;
+    position: relative;
+
+    &:after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, hsla(var(--b5), 50%) 0%, hsl(var(--b5)) 100%);
+    }
+
+    border-top-left-radius: var(--card-radius);
+    border-top-right-radius: var(--card-radius);
+    margin-bottom: -100px;
+
+    &:not([style]) {
+        display: none;
     }
 }
 
@@ -8433,7 +8459,7 @@ that literally is 1 user from 2007 who hasnt even gotten a scrobble */
 }
 
 .gallery-image-buttons:not(.gallery-image-buttons-extra) :is(.gallery-image-report, .gallery-image-delete button) {
-    width: 40px !important;
+    width: 42px !important;
 }
 .gallery-image-report--reported {
     pointer-events: none;
@@ -13027,7 +13053,7 @@ h2.playlisting-create-option-title {
     --bg-atv: transparent !important;
     --shadow: none !important;
     --shadow-hov: none !important;
-    width: 40px;
+    width: 42px;
     --font-size: 0;
     opacity: unset !important;
 }
@@ -14832,10 +14858,10 @@ input[type="range"]::-moz-range-progress {
 
 
 .bleh--name-is-cute {
-    background-image: linear-gradient(90deg, hsl(var(--c1)) 0%, hsl(var(--l3-c)) 100%);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    font-family: var(--font-brand);
+    font-size: 32px;
+    line-height: 30px;
+    margin-top: -8px;
 
     [data-bleh--season="christmas"] & {
         --hue-seasonal: 352;
@@ -15287,6 +15313,7 @@ trying to list every song ever made by someone identifying as a female, which is
     /*padding: var(--card-gap);
     background-color: hsla(var(--b4), 40%);
     border-radius: var(--card-radius);*/
+    z-index: 2;
 
     .avatar-side {
         display: flex;
@@ -16039,7 +16066,7 @@ button.bleh--gallery-bookmark-image-btn {
 
             &.menu-btn {
                 --font-size: 0;
-                width: 40px;
+                width: 42px;
                 --mask: var(--icon-16-dots);
             }
         }

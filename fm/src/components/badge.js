@@ -26,7 +26,7 @@ export function load_badges(user, solo = false) {
     // now we run thru to add missing metadata
     badges.forEach((badge) => {
         if (!badge.name)
-            badge.name = trans_legacy[lang].badges[badge.type].name;
+            badge.name = tl(trans.badges[badge.type].name);
 
         if (badge.reason)
             return;

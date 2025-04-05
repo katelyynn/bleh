@@ -591,3 +591,106 @@ export let inbuilt_settings = {
         type: 'toggle'
     }
 }
+
+export let settings_store = {
+    theme: {
+        default: 'dark',
+        type: 'radio'
+    },
+    high_contrast: {
+        default: false
+    },
+    accent_type: {
+        default: 'colour',
+        type: 'radio'
+    },
+    hue: {
+        default: 255,
+        type: 'range'
+    },
+    sat: {
+        default: 1,
+        type: 'range'
+    },
+    sat_bg: {
+        default: 1,
+        type: 'range'
+    },
+    lit: {
+        default: 1,
+        type: 'range'
+    },
+    gloss: {
+        default: 0,
+        type: 'range'
+    },
+    gendered_tags: {
+        default: true
+    },
+    dev: {
+        default: false
+    },
+    api_key: {
+        default: '',
+        type: 'string'
+    },
+    profile_header_expand: {
+        default: true
+    },
+    accessible_name_colours: {
+        default: false
+    },
+    reduced_motion: {
+        default: false
+    },
+    underline_links: {
+        default: false
+    },
+    format_guest_features: {
+        default: true
+    },
+    show_guest_features: {
+        default: false
+    },
+    stacked_chartlist_info: {
+        default: true
+    },
+    show_remaster_tags: {
+        default: true
+    },
+    corrections: {
+        default: true
+    },
+    colourful_counts: {
+        default: true
+    },
+    colourful_tracks: {
+        default: true
+    },
+    feature_flags: {
+        default: {},
+        type: 'other'
+    },
+    show_your_progress: {
+        default: true
+    },
+    travis: {
+        default: false
+    },
+    list_view: {
+        default: 1,
+        type: 'radio'
+    },
+    chart_view: {
+        default: 'line',
+        type: 'radio'
+    },
+    chart_bar_axis: {
+        default: 'horizontal',
+        type: 'radio'
+    },
+    chart_insights_view: {
+        default: 'pie',
+        type: 'radio'
+    }
+}

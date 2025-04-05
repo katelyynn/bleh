@@ -30,6 +30,86 @@ export let lang_info = {
 }
 
 export const trans = {
+    badges: {
+        missing: {
+            name: {
+                en: 'No badges'
+            }
+        },
+        'user-status-subscriber': {
+            name: {
+                en: 'Last.fm Pro'
+            },
+            reason: {
+                en: 'Active Pro subscription'
+            }
+        },
+        'user-status-staff': {
+            name: {
+                en: 'Staff'
+            },
+            reason: {
+                en: 'Official member of Last.fm'
+            }
+        },
+        'user-status-mod': {
+            name: {
+                en: 'Mod'
+            },
+            reason: {
+                en: 'Official member of Last.fm'
+            }
+        },
+        'user-status-alum': {
+            name: {
+                en: 'Alum'
+            },
+            reason: {
+                en: 'Since the beginning'
+            }
+        },
+        'label--fade': {
+            reason: {
+                en: 'They follow you!'
+            }
+        },
+        contributor: {
+            name: {
+                en: 'Contributor'
+            },
+            reason: {
+                en: 'Has worked on bleh or bwaa'
+            }
+        },
+        translation: {
+            reason: {
+                en: 'Translations'
+            }
+        },
+        cat: {
+            name: {
+                en: 'it\s a kitty!!'
+            }
+        },
+        sponsor: {
+            name: {
+                en: 'Sponsor'
+            },
+            reason: {
+                en: 'thank you from kate <3'
+            }
+        },
+        cute: {
+            reason: {
+                en: 'Reserved'
+            }
+        },
+        reserved: {
+            reason: {
+                en: 'Reserved'
+            }
+        }
+    },
     home: {
         en: 'Home'
     },
@@ -327,6 +407,12 @@ export const trans = {
         none: {
             en: 'No new messages'
         }
+    },
+    about_me_preview: {
+        en: 'About Me (preview)'
+    },
+    markdown_tip: {
+        en: 'This textbox supports markdown such as line breaks, bold text, italics, underlines, and more. You can embed images using ![alt text](link). Beware that to non-bleh users it will not appear fancy.'
     }
 }
 

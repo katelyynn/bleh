@@ -5,7 +5,7 @@ import { log } from "../build/log"
 import { auth, page, recent_activity_list, root } from "../build/page"
 import { cute, sponsor_list } from "../build/sponsor"
 import { clean_number, sanitise } from "../build/tools"
-import { lang, trans_legacy } from "../build/trans"
+import { lang, trans_legacy, trans, tl } from "../build/trans"
 import { load_badges } from "../components/badge"
 import { dialog } from "../components/dialog"
 import { correct_artist, correct_item_by_artist } from "../components/lotus"
@@ -563,7 +563,7 @@ export function bleh_profiles() {
                 placement: 'bottom',
                 content: (`
                     <div class="badge-name">${badge.textContent}</div>
-                    <div class="badge-reason">${trans_legacy[lang].badges[badge.classList[1]].reason}</div>
+                    <div class="badge-reason">${tl(trans.badges[badge.classList[1]].reason)}</div>
                 `),
                 allowHTML: true
             });
@@ -588,7 +588,7 @@ export function bleh_profiles() {
                     placement: 'bottom',
                     content: (`
                         <div class="badge-name">${this_badge.name}</div>
-                        <div class="badge-reason">${trans_legacy[lang].badges[this_badge.reason].reason}</div>
+                        <div class="badge-reason">${tl(trans.badges[this_badge.reason].reason)}</div>
                     `),
                     allowHTML: true
                 });
