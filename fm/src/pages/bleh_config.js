@@ -67,6 +67,11 @@ export function bleh_settings() {
                 </a>
             </li>
             <li class="navlist-item secondary-nav-item">
+                <a class="secondary-nav-item-link bleh--nav" data-bleh-page="moderation" onclick="_change_settings_page('moderation')">
+                    ${tl(trans.moderation)}
+                </a>
+            </li>
+            <li class="navlist-item secondary-nav-item">
                 <a class="secondary-nav-item-link bleh--nav" data-bleh-page="text" onclick="_change_settings_page('text')">
                     ${trans_legacy[lang].settings.text.name}
                 </a>
@@ -79,11 +84,6 @@ export function bleh_settings() {
             <li class="navlist-item secondary-nav-item">
                 <a class="secondary-nav-item-link bleh--nav" data-bleh-page="performance" onclick="_change_settings_page('performance')">
                     ${tl(trans.troubleshooting)}
-                </a>
-            </li>
-            <li class="navlist-item secondary-nav-item">
-                <a class="secondary-nav-item-link bleh--nav" data-bleh-page="moderation" onclick="_change_settings_page('moderation')">
-                    ${tl(trans.moderation)}
                 </a>
             </li>
             <li class="navlist-item secondary-nav-item">
