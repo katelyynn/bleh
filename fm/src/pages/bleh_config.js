@@ -1809,7 +1809,7 @@ function change_settings_page(page_id, setting = null) {
         show_theme_change_in_settings();
         display_colour_presets();
         refresh_all();
-    } else if (page_id == "moderation", page_id == 'customise' || page_id == 'performance' || page_id == 'accessibility' || page_id == 'text' || page_id == 'seasonal' || page_id == 'music' || page_id == 'activities') {
+    } else if (page_id == "moderation" || page_id == 'customise' || page_id == 'performance' || page_id == 'accessibility' || page_id == 'text' || page_id == 'seasonal' || page_id == 'music' || page_id == 'activities') {
         refresh_all();
     } else if (page_id == 'profiles') {
         init_profile_notes();
