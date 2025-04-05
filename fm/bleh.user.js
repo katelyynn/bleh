@@ -26,8 +26,13 @@
     gloss: 0,
     gendered_tags: true,
     show_extra_nav: true,
-    remove_method: "censor",
+    removal_method: "censor",
     enable_moderation: false,
+    censor_shouts: true,
+    censor_bios: true,
+    censor_artist_names: false,
+    censor_track_titles: false,
+    censor_album_titles: false,
     accent_type: "avatar",
     hue: 255,
     sat: 1,
@@ -551,6 +556,41 @@
       unit: "",
       value: "censor",
       type: "options"
+    },
+    censor_shouts: {
+      css: "censor_shouts",
+      unit: "",
+      value: false,
+      values: [true, false],
+      type: "toggle"
+    },
+    censor_bios: {
+      css: "censor_shouts",
+      unit: "",
+      value: false,
+      values: [true, false],
+      type: "toggle"
+    },
+    censor_artist_names: {
+      css: "censor_artist_names",
+      unit: "",
+      value: false,
+      values: [true, false],
+      type: "toggle"
+    },
+    censor_track_titles: {
+      css: "censor_track_titles",
+      unit: "",
+      value: false,
+      values: [true, false],
+      type: "toggle"
+    },
+    censor_album_titles: {
+      css: "censor_album_titles",
+      unit: "",
+      value: false,
+      values: [true, false],
+      type: "toggle"
     }
   };
   var inbuilt_settings = {
@@ -9839,35 +9879,132 @@
             `;
     } else if (page_id == "moderation") {
       register_skip_to([]);
-      return `
+      return `               
             <div class="bleh--panel">
-                <h4 class="top-header">${trans_legacy[lang].settings.moderation.name}</h4>
-                <div class="toggle-container" id="container-enable_moderation" onclick="_update_item('enable_moderation')">
-                    <button class="btn reset" onclick="_reset_item('enable_moderation')">${tl(trans.reset)}</button>
-                    <div class="heading">
-                        <h5>Enable moderation (Word muting removal)</h5>
-                    </div>
-                    <div class="toggle-wrap">
-                        <button class="toggle" id="toggle-enable_moderation" aria-checked="true">
-                            <div class="dot"></div>
-                        </button>
-                    </div>
-                </div>
-                <div class="sep"></div>
-                <h4>Method</h4>
-                <div class="primary-selections">
-                  <div class="btn primary-selection" id="toggle-removal_method-remove" data-toggle="removal_method" data-toggle-value="remove" onclick="_update_item('removal_method', 'remove')">
-                        <h5>Remove words</h5>
-                        <p>This entierly, cleanly removes words from usernames / biographies and shouts.</p>
-                    </div>
-                    <div class="btn primary-selection" id="toggle-removal_method-censor" data-toggle="removal_method" data-toggle-value="censor" onclick="_update_item('removal_method', 'censor')">
-                        <h5>Censor words</h5>
-                        <p>Censors words, replaces "fuck" with "f***", etc.</p>
-                    </div>
-                </div>
+              <h4 class="top-header">${trans_legacy[lang].settings.moderation.name}</h4>
+              <div class="toggle-container" id="container-enable_moderation" onclick="_update_item('enable_moderation')">
+            <button class="btn reset" onclick="_reset_item('enable_moderation')">${tl(trans.reset)}</button>
+            <div class="heading">
+              <h5>Enable moderation</h5>
+            </div>
+            <div class="toggle-wrap">
+              <button class="toggle" id="toggle-enable_moderation" aria-checked="true">
+                <div class="dot"></div>
+              </button>
+            </div>
+              </div>
+              <div class="sep"></div>
+              <h4>Method</h4>
+              <div class="primary-selections">
+            <div class="btn primary-selection" id="toggle-removal_method-remove" data-toggle="removal_method" data-toggle-value="remove" onclick="_update_item('removal_method', 'remove')">
+              <h5>Remove words</h5>
+              <p>This entirely, cleanly removes words from usernames / biographies and shouts.</p>
+            </div>
+            <div class="btn primary-selection" id="toggle-removal_method-censor" data-toggle="removal_method" data-toggle-value="censor" onclick="_update_item('removal_method', 'censor')">
+              <h5>Censor words</h5>
+              <p>Censors words, replaces "fuck" with "f***", etc.</p>
+            </div>
+              </div>
             </div>
             <div class="bleh--panel">
-                <h4 class="top-header">Moderate where?</h4>
+              <h4 class="top-header">Block List Management</h4>
+              <p>Enter a URL pointing to a CORS-enabled block list.</p>
+              <div class="text-container" id="container-block_list">
+            <div class="heading content-form">
+              <div class="input-container">
+                <input type="url" id="block-list-input" placeholder="Enter block list URL (HTTP/HTTPS)">
+                <select id="block-list-type">
+                  <option value="strings">Strings (per line)</option>
+                  <option value="regex">Regex expressions</option>
+                  <option value="reddit">Reddit automod template</option>
+                </select>
+                <button class="btn primary save" onclick="addBlockList()">Add</button>
+              </div>
+            </div>
+              </div>
+              <div class="languages" id="block-lists">
+            <div class="language-row">
+              <div class="name">
+                <h5>https://temporaryMR.eu</h5>
+              </div>
+              <div class="badges"></div>
+              <div class="date">
+                <button class="btn danger" onclick="_remove_block_index(0)">Remove</button>
+              </div>
+            </div>
+            <div class="language-row">
+              <div class="name">
+                <h5>https://iamthebleh_config.jssite.eu</h5>
+              </div>
+              <div class="badges"></div>
+              <div class="date">
+                <button class="btn danger" onclick="_remove_block_index(1)">Remove</button>
+              </div>
+            </div>
+              </div>
+            </div>
+            <div class="bleh--panel">
+              <h4 class="top-header">Moderate where?</h4>
+              <div class="toggle-container" id="container-moderate_shouts" onclick="_update_item('moderate_shouts')">
+            <button class="btn reset" onclick="_reset_item('moderate_shouts')">${tl(trans.reset)}</button>
+            <div class="heading">
+              <h5>Moderate shouts</h5>
+              <p>Applies moderation rules to user shouts.</p>
+            </div>
+            <div class="toggle-wrap">
+              <button class="toggle" id="toggle-moderate_shouts" aria-checked="true">
+                <div class="dot"></div>
+              </button>
+            </div>
+              </div>
+              <div class="toggle-container" id="container-censor_bios" onclick="_update_item('censor_bios')">
+            <button class="btn reset" onclick="_reset_item('censor_bios')">${tl(trans.reset)}</button>
+            <div class="heading">
+              <h5>Censor bios</h5>
+              <p>Applies moderation rules to user biographies.</p>
+            </div>
+            <div class="toggle-wrap">
+              <button class="toggle" id="toggle-censor_bios" aria-checked="true">
+                <div class="dot"></div>
+              </button>
+            </div>
+              </div>
+              <div class="toggle-container" id="container-censor_artist_names" onclick="_update_item('censor_artist_names')">
+            <button class="btn reset" onclick="_reset_item('censor_artist_names')">${tl(trans.reset)}</button>
+            <div class="heading">
+              <h5>Censor artist names</h5>
+              <p>Applies moderation rules to artist names.</p>
+            </div>
+            <div class="toggle-wrap">
+              <button class="toggle" id="toggle-censor_artist_names" aria-checked="false">
+                <div class="dot"></div>
+              </button>
+            </div>
+              </div>
+              <div class="toggle-container" id="container-censor_track_titles" onclick="_update_item('censor_track_titles')">
+            <button class="btn reset" onclick="_reset_item('censor_track_titles')">${tl(trans.reset)}</button>
+            <div class="heading">
+              <h5>Censor track titles</h5>
+              <p>Applies moderation rules to track titles.</p>
+            </div>
+            <div class="toggle-wrap">
+              <button class="toggle" id="toggle-censor_track_titles" aria-checked="false">
+                <div class="dot"></div>
+              </button>
+            </div>
+              </div>
+              <div class="toggle-container" id="container-censor_album_titles" onclick="_update_item('censor_album_titles')">
+            <button class="btn reset" onclick="_reset_item('censor_album_titles')">${tl(trans.reset)}</button>
+            <div class="heading">
+              <h5>Censor album titles</h5>
+              <p>Applies moderation rules to album titles.</p>
+            </div>
+            <div class="toggle-wrap">
+              <button class="toggle" id="toggle-censor_album_titles" aria-checked="false">
+                <div class="dot"></div>
+              </button>
+            </div>
+              </div>
             </div>
             `;
     }

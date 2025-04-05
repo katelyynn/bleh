@@ -5,8 +5,13 @@ export let settings_template = {
     gloss: 0,
     gendered_tags: true,
     show_extra_nav: true,
-    remove_method: "censor",
+    removal_method: "censor",
     enable_moderation: false,
+    censor_shouts: true,
+    censor_bios: true,
+    censor_artist_names: false,
+    censor_track_titles: false,
+    censor_album_titles: false,
     accent_type: 'avatar',
     hue: 255,
     sat: 1,
@@ -546,6 +551,42 @@ export let settings_base = {
         value: 'censor',
         type: 'options'
     },
+    censor_shouts: {
+        css: 'censor_shouts',
+        unit: '',
+        value: false,
+        values: [true, false],
+        type: 'toggle'
+    },
+    censor_bios: {
+        css: 'censor_shouts',
+        unit: '',
+        value: false,
+        values: [true, false],
+        type: 'toggle'
+    },
+    censor_artist_names: {
+        css: 'censor_artist_names',
+        unit: '',
+        value: false,
+        values: [true, false],
+        type: 'toggle'
+    },
+    censor_track_titles: {
+        css: 'censor_track_titles',
+        unit: '',
+        value: false,
+        values: [true, false],
+        type: 'toggle'
+    },
+    censor_album_titles: {
+        css: 'censor_album_titles',
+        unit: '',
+        value: false,
+        values: [true, false],
+        type: 'toggle'
+    },
+
 };
 export let inbuilt_settings = {
     recent_artwork: {
