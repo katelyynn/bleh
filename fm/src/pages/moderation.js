@@ -40,7 +40,7 @@ export function load_moderation() {
             
             let parsed;
             if(z.type == "strings") {
-                parsed = body.split("\n");
+                parsed = body.split("\n").map(z => new RegExp(z, "ig"));
             } else if(z.type == "regex") {
                 parsed = body.split("\n").map(z => new RegExp(z));
             }
@@ -100,7 +100,7 @@ unsafeWindow._add_block = () => {
     reload();
     input.value = "";
 }
-
+unsafeWindow.clean_mesage = clean_message;
 export function clean_message(message, type) {
     if(!settings.enable_moderation) return;
     const removal_method = settings.removal_method; // remove / censor
@@ -109,37 +109,41 @@ export function clean_message(message, type) {
     const censor_artist_names = settings.censor_artist_names;
     const censor_album_titles = settings.censor_album_titles;
     const censor_track_titles = settings.censor_track_titles;
-    
     if(type == "shout" && !moderate_shouts) return;
-    else if(type == "bio" && !censor_bios) return;
-    else if(type == "artist_name" && !censor_artist_names) return;
-    else if(type == "album_title" && !censor_album_titles) return;
-    else if(type == "track_title" && !censor_track_titles) return;
-    else log("clean_message being called with incorrect type of" + type, "moderation")
-    let action = message.toLowerCase();
+    if(type == "bio" && !censor_bios) return;
+    if(type == "artist_name" && !censor_artist_names) return;
+    if(type == "album_title" && !censor_album_titles) return;
+    if(type == "track_title" && !censor_track_titles) return;
+
+    if(!["shout", "bio", "artist_name", "album_title", "track_title"].includes(type)) {
+        console.error(`clean_message called with an invalid type: ${type}`);
+        return;
+    }
+
+    let action = message;
 
     blocklists.forEach((v,k) => {
         if(v.type == "strings") {
-            v.blocklist.forEach(z => {
-                if(action.includes(z)) {
-                    if(removal_method == "remove") {
-                        action = action.replace(z, "");
-                    } else if(removal_method == "censor") {
-                        action = action.replace(z, "*".repeat(z.length));
-                    }
-                }
-            })
+            if(removal_method == "remove") {
+                v.blocklist.forEach(z => {
+                    action = action.replace(z, "");
+                })
+            } else if(removal_method == "censor") {
+                v.blocklist.forEach(z => {
+                    action = action.replace(z, "*".repeat(z.length));
+                })
+            }
         } else if(v.type == "regex") {
-            v.blocklist.forEach(z => {
-                if(z.test(action)) {
-                    if(removal_method == "remove") {
-                        action = action.replace(z, "");
-                    } else if(removal_method == "censor") {
-                        action = action.replace(z, "*".repeat(z.length));
-                    }
-                }
-            })
+            if(removal_method == "remove") {
+                v.blocklist.forEach(z => {
+                    action = action.replace(z, "");
+                })
+            } else if(removal_method == "censor") {
+                v.blocklist.forEach(z => {
+                    action = action.replace(z, "*".repeat(z.length));
+                })
+            }
         }
     })
-    return action;
+    return `${type} ${action} (original ${message})`;
 }

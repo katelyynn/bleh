@@ -7721,7 +7721,7 @@
       patch_avatar(new_listener.querySelector(".user-list-avatar"), name, "listener");
       let track_link = new_listener.querySelector(".user-list-about-me a");
       let artist = return_artist_from_track(track_link.getAttribute("href"), false);
-      let track = correct_item_by_artist(track_link.textContent.trim(), artist);
+      let track = correct_item_by_artist(track_link.textContent.trim(), artist, "track_title");
       track_link.textContent = track;
       new_container.appendChild(new_listener);
     });
@@ -8283,7 +8283,7 @@
         }
         let parsed;
         if (z.type == "strings") {
-          parsed = body.split("\n");
+          parsed = body.split("\n").map((z2) => new RegExp(z2, "ig"));
         } else if (z.type == "regex") {
           parsed = body.split("\n").map((z2) => new RegExp(z2));
         }
@@ -8338,6 +8338,50 @@
     reload();
     input.value = "";
   };
+  unsafeWindow.clean_mesage = clean_message;
+  function clean_message(message, type) {
+    if (!settings.enable_moderation) return;
+    const removal_method = settings.removal_method;
+    const moderate_shouts = settings.moderate_shouts;
+    const censor_bios = settings.censor_bios;
+    const censor_artist_names = settings.censor_artist_names;
+    const censor_album_titles = settings.censor_album_titles;
+    const censor_track_titles = settings.censor_track_titles;
+    if (type == "shout" && !moderate_shouts) return;
+    if (type == "bio" && !censor_bios) return;
+    if (type == "artist_name" && !censor_artist_names) return;
+    if (type == "album_title" && !censor_album_titles) return;
+    if (type == "track_title" && !censor_track_titles) return;
+    if (!["shout", "bio", "artist_name", "album_title", "track_title"].includes(type)) {
+      console.error(`clean_message called with an invalid type: ${type}`);
+      return;
+    }
+    let action = message;
+    blocklists.forEach((v, k) => {
+      if (v.type == "strings") {
+        if (removal_method == "remove") {
+          v.blocklist.forEach((z) => {
+            action = action.replace(z, "");
+          });
+        } else if (removal_method == "censor") {
+          v.blocklist.forEach((z) => {
+            action = action.replace(z, "*".repeat(z.length));
+          });
+        }
+      } else if (v.type == "regex") {
+        if (removal_method == "remove") {
+          v.blocklist.forEach((z) => {
+            action = action.replace(z, "");
+          });
+        } else if (removal_method == "censor") {
+          v.blocklist.forEach((z) => {
+            action = action.replace(z, "*".repeat(z.length));
+          });
+        }
+      }
+    });
+    return `${type} ${action} (original ${message})`;
+  }
 
   // src/pages/bleh_config.js
   function bleh_settings() {
@@ -11198,45 +11242,45 @@
       }
     });
   }
-  function correct_item_by_artist(item, artist) {
+  function correct_item_by_artist(item, artist, type = "album_title") {
     if (!settings.corrections)
-      return item;
+      return clean_message(item, type);
     artist = artist.toLowerCase();
     try {
       if (album_track_corrections.hasOwnProperty(artist)) {
         if (album_track_corrections[artist].hasOwnProperty(item)) {
           log(`corrected ${item} by ${artist} as ${album_track_corrections[artist][item]}`, "lotus");
-          return album_track_corrections[artist][item];
+          return clean_message(album_track_corrections[artist][item], "track_title");
         } else {
-          return item;
+          return clean_message(item, type);
         }
       } else {
-        return item;
+        return clean_message(item, type);
       }
     } catch (e) {
       log(`correcting ${item} by ${artist}`, "lotus");
       console.error(e);
-      return item;
+      return clean_message(item, type);
     }
   }
   function correct_artist(artist, broadcast = false) {
     if (!settings.corrections)
-      return artist;
+      return clean_message(artist, "artist_name");
     try {
       if (artist_corrections.hasOwnProperty(artist)) {
         log(`corrected ${artist} as ${artist_corrections[artist]}`, "lotus");
         if (broadcast)
           page.corrected = true;
-        return artist_corrections[artist];
+        return clean_message(artist_corrections[artist], "artist_name");
       } else {
         if (broadcast)
           page.corrected = false;
-        return artist;
+        return clean_message(artist, "artist_name");
       }
     } catch (e) {
       log(`correcting ${artist}`, "lotus");
       console.error(e);
-      return artist;
+      return clean_message(artist, "artist_name");
     }
   }
   function name_includes(original_title, original_artist) {
@@ -11379,7 +11423,7 @@
           for (let song_tag in song_tags) {
             song_tags_text = `${song_tags_text}<div class="feat" data-bleh--tag-type="${song_tags[song_tag].type}" data-bleh--tag-group="${song_tags[song_tag].group}">${song_tags[song_tag].text}</div>`;
           }
-          track_title.innerHTML = `<div class="title">${sanitise_text(song_title)}</div>${song_tags_text}`;
+          track_title.innerHTML = `<div class="title">${sanitise_text(clean_message(song_title, "track_title"))}</div>${song_tags_text}`;
           let song_artist_element = document.body.querySelector('span[itemprop="byArtist"]');
           let song_guests = formatted_title[3];
           page.sister_others = formatted_title[3];
@@ -11398,7 +11442,7 @@
     } else {
       if (!track_title.hasAttribute("data-kate-processed")) {
         track_title.setAttribute("data-kate-processed", "true");
-        let corrected_title = correct_item_by_artist(track_title.textContent, track_artist.textContent);
+        let corrected_title = correct_item_by_artist(track_title.textContent, track_artist.textContent, "track_title");
         log(`corrected ${track_title.textContent} by ${track_artist.textContent} as ${corrected_title}`, "lotus");
         if (corrected_title != track_title.textContent)
           page.corrected = true;
@@ -11417,7 +11461,7 @@
       let track = form.querySelector('[name="track"]').getAttribute("value");
       let artist = form.querySelector('[name="artist"]').getAttribute("value");
       artist = correct_artist(artist);
-      track = correct_item_by_artist(track, artist);
+      track = correct_item_by_artist(track, artist, "track_title");
       let btn = form.querySelector("button");
       btn.addEventListener("click", (event2) => {
         log("heard", "event", "info", event2);
@@ -11876,7 +11920,7 @@
           for (let song_tag in song_tags) {
             song_tags_text = `${song_tags_text}<div class="feat" data-bleh--tag-type="${song_tags[song_tag].type}" data-bleh--tag-group="${song_tags[song_tag].group}">${sanitise_text(song_tags[song_tag].text)}</div>`;
           }
-          track_title.innerHTML = `<div class="title">${sanitise_text(song_title)}</div>${song_tags_text}`;
+          track_title.innerHTML = `<div class="title">${clean_message(sanitise_text(song_title), "track_title")}</div>${song_tags_text}`;
           let song_artist_element = track.querySelector(".chartlist-artist");
           if (song_artist_element == null && !is_user) {
             song_artist_element = document.createElement("td");
@@ -11884,14 +11928,14 @@
             track.appendChild(song_artist_element);
           }
           if (song_artist_element.textContent.replaceAll("+", " ").trim() == track_artist || song_artist_element.textContent.trim() == "") {
-            song_artist_element.innerHTML = `<a href="${root}music/${sanitise(formatted_title[2])}" title="${sanitise_text(formatted_title[2])}">${sanitise_text(formatted_title[2])}</a>`;
+            song_artist_element.innerHTML = `<a href="${root}music/${sanitise(formatted_title[2])}" title="${sanitise_text(formatted_title[2])}">${sanitise_text(clean_message(formatted_title[2], "artist_name"))}</a>`;
             let song_guests = formatted_title[3];
             for (let guest in song_guests) {
               song_artist_element.innerHTML = `${song_artist_element.innerHTML},`;
               let guest_element = document.createElement("a");
               guest_element.setAttribute("href", `${root}music/${sanitise(song_guests[guest])}`);
               guest_element.setAttribute("title", song_guests[guest]);
-              guest_element.textContent = song_guests[guest];
+              guest_element.textContent = clean_message(song_guests[guest], "artist_name");
               song_artist_element.appendChild(guest_element);
             }
           }
@@ -11914,7 +11958,7 @@
                             </div>
                         </div>
                         <div class="info">
-                            <h5 class="title">${song_title}</h5>
+                            <h5 class="title">${clean_message(song_title, "track_title")}</h5>
                             <p class="artist">${song_artist_element.innerHTML}</p>
                             <div class="tags">${song_tags_text}</div>
                             ${!is_library_track_page ? is_album ? "" : `<p class="album">${image != null ? correct_item_by_artist(sanitise_text(image.getAttribute("alt")), track_artist) : page.name}</p>` : ""}
@@ -16349,7 +16393,7 @@
       about_me_sidebar.setAttribute("data-kate-processed", "true");
       if (settings.bio_markdown) {
         let about_me_text = about_me_sidebar.querySelector("p");
-        let result = bio_parse(about_me_text, true);
+        let result = bio_parse(clean_message(about_me_text.textContent, "bio"), true);
         about_me_text.innerHTML = result;
       }
       let buttons = document.createElement("div");
@@ -17057,7 +17101,7 @@
     form.innerHTML = "";
   }
   function bio_parse(text, cache = false) {
-    let result = markdown(text.textContent);
+    let result = markdown(text);
     let temp = document.createElement("div");
     temp.innerHTML = result;
     use_banner(temp, cache);
@@ -17099,7 +17143,7 @@
       let about_me_sidebar = doc.querySelector(".about-me-sidebar");
       if (about_me_sidebar) {
         let about_me_text = about_me_sidebar.querySelector("p");
-        let result = bio_parse(about_me_text, true);
+        let result = bio_parse(clean_message(about_me_text.textContent, "bio"), true);
       } else {
         save_banner_to_cache("none");
       }
@@ -17186,7 +17230,7 @@
     track_header.setAttribute("data-bwaa", "true");
     patch_header_title();
     page.sister = track_header.querySelector(".header-new-crumb span").textContent;
-    page.name = correct_item_by_artist(document.body.querySelector("[data-page-resource-name]").getAttribute("data-page-resource-name"), page.sister);
+    page.name = correct_item_by_artist(document.body.querySelector("[data-page-resource-name]").getAttribute("data-page-resource-name"), page.sister, "track_title");
     let is_subpage = track_header.classList.contains("header-new--subpage");
     if (auth.pro) {
       page.structure.container = document.body.querySelector(".page-content");
@@ -17457,7 +17501,7 @@
       ghCodeBlocks: false,
       smartIndentationFix: true
     });
-    let parsed_body = converter.makeHtml(shout.element.textContent.replace(/([@])([a-zA-Z0-9_]+)/g, `[$1$2](${root}user/$2)`).replace(/\[artist\]([a-zA-Z0-9]+)\[\/artist\]/g, `[$1](${root}music/$1)`).replace(/\[album artist=([a-zA-Z0-9]+)\]([a-zA-Z0-9\s]+)\[\/album\]/g, `[$2](${root}music/$1/$2)`).replace(/\[track artist=([a-zA-Z0-9]+)\]([a-zA-Z0-9\s]+)\[\/track\]/g, `[$2](${root}music/$1/_/$2)`).replace(/https:\/\/open\.spotify\.com\/user\/([A-Za-z0-9]+)\?si=([A-Za-z0-9]+)/g, "[@$1](https://open.spotify.com/user/$1)").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;"));
+    let parsed_body = converter.makeHtml(clean_message(shout.element.textContent, "shout").replace(/([@])([a-zA-Z0-9_]+)/g, `[$1$2](${root}user/$2)`).replace(/\[artist\]([a-zA-Z0-9]+)\[\/artist\]/g, `[$1](${root}music/$1)`).replace(/\[album artist=([a-zA-Z0-9]+)\]([a-zA-Z0-9\s]+)\[\/album\]/g, `[$2](${root}music/$1/$2)`).replace(/\[track artist=([a-zA-Z0-9]+)\]([a-zA-Z0-9\s]+)\[\/track\]/g, `[$2](${root}music/$1/_/$2)`).replace(/https:\/\/open\.spotify\.com\/user\/([A-Za-z0-9]+)\?si=([A-Za-z0-9]+)/g, "[@$1](https://open.spotify.com/user/$1)").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;"));
     shout.element.innerHTML = parsed_body;
     log(`parsed index ${index}`, "shout", "log");
     shout_parse_queue.splice(index, 1);

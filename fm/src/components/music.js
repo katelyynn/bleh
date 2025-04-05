@@ -833,7 +833,7 @@ export function bleh_top_listeners() {
 
         let track_link = new_listener.querySelector('.user-list-about-me a');
         let artist = return_artist_from_track(track_link.getAttribute('href'), false);
-        let track = correct_item_by_artist(track_link.textContent.trim(), artist);
+        let track = correct_item_by_artist(track_link.textContent.trim(), artist, "track_title");
         track_link.textContent = track;
 
         new_container.appendChild(new_listener);
