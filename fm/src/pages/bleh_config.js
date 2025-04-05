@@ -12,6 +12,7 @@ import { version } from "../main";
 import { update_page } from "../page";
 import { seasonal_timer_end, seasonal_timer_start } from "../seasonal";
 import { ff } from "../sku";
+import { bleh_moderation } from "./moderation";
 
 
 export function bleh_settings() {
@@ -1735,29 +1736,11 @@ export function render_setting_page(page_id) {
                   <option value="regex">Regex expressions</option>
                   <option value="reddit">Reddit automod template</option>
                 </select>
-                <button class="btn primary save" onclick="addBlockList()">Add</button>
+                <button class="btn primary save" onclick="_add_block()">Add</button>
               </div>
             </div>
               </div>
               <div class="languages" id="block-lists">
-            <div class="language-row">
-              <div class="name">
-                <h5>https://temporaryMR.eu</h5>
-              </div>
-              <div class="badges"></div>
-              <div class="date">
-                <button class="btn danger" onclick="_remove_block_index(0)">Remove</button>
-              </div>
-            </div>
-            <div class="language-row">
-              <div class="name">
-                <h5>https://iamthebleh_config.jssite.eu</h5>
-              </div>
-              <div class="badges"></div>
-              <div class="date">
-                <button class="btn danger" onclick="_remove_block_index(1)">Remove</button>
-              </div>
-            </div>
               </div>
             </div>
             <div class="bleh--panel">
@@ -1906,7 +1889,7 @@ function change_settings_page(page_id, setting = null) {
         show_theme_change_in_settings();
         display_colour_presets();
         refresh_all();
-    } else if (page_id == "moderation" || page_id == 'customise' || page_id == 'performance' || page_id == 'accessibility' || page_id == 'text' || page_id == 'seasonal' || page_id == 'music' || page_id == 'activities') {
+    } else if (page_id == 'customise' || page_id == 'performance' || page_id == 'accessibility' || page_id == 'text' || page_id == 'seasonal' || page_id == 'music' || page_id == 'activities') {
         refresh_all();
     } else if (page_id == 'profiles') {
         init_profile_notes();
@@ -1914,7 +1897,10 @@ function change_settings_page(page_id, setting = null) {
         refresh_all();
     } else if (page_id == 'sku') {
         bleh_sku_page();
-    }
+    } else if (page_id == "moderation") {
+        bleh_moderation();
+        refresh_all();
+    }  
 
     if (page_id == 'text')
         prepare_language_page();
