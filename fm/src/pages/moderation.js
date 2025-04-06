@@ -48,7 +48,7 @@ export function load_moderation() {
 
             let parsed;
             if (z.type == 'strings') {
-                parsed = body.split('\n');
+                parsed = body.split('\n').map(z => new RegExp(z, "ig"));
             } else if (z.type == 'regex') {
                 parsed = body.split('\n').map(z => new RegExp(z));
             }
@@ -141,27 +141,33 @@ export function clean_message(message, type) {
         return message;
     }
 
-    let action = message.toLowerCase();
+    let action = message;
 
     blocklists.forEach((list) => {
         if (list.type == 'strings') {
-            list.blocklist.forEach((word) => {
-                if (action.includes(word)) {
-                    if (removal_method == 'remove')
+            if (removal_method == 'remove') {
+                list.blocklist.forEach(word => {
+                    if(word.test(action))
                         action = action.replace(word, '');
-                    else if (removal_method == 'censor')
-                        action = action.replace(word, '♡'.repeat(word.length));
-                }
-            })
+                });
+            } else if(removal_method == "censor") {
+                list.blocklist.forEach(word => {
+                    if(word.test(action))
+                        action = action.replace(word, '♡'.repeat(word.toString().length - 4)); // 4 = //ig
+                })
+            }   
         } else if (list.type == 'regex') {
-            list.blocklist.forEach(regex => {
-                if (regex.test(action)) {
-                    if (removal_method == 'remove')
+            if (removal_method == 'remove') {
+                list.blocklist.forEach(regex => {
+                    if(regex.test(action))
                         action = action.replace(regex, '');
-                    else if (removal_method == 'censor')
+                });
+            } else if(removal_method == "censor") {
+                list.blocklist.forEach(regex => {
+                    if(regex.test(action))
                         action = action.replace(regex, '♡'.repeat(regex.length));
-                }
-            })
+                })
+            }   
         }
     });
 
