@@ -5,13 +5,6 @@ export let settings_template = {
     gloss: 0,
     gendered_tags: true,
     show_extra_nav: true,
-    removal_method: "censor",
-    enable_moderation: false,
-    moderate_shouts: true,
-    censor_bios: true,
-    censor_artist_names: false,
-    censor_track_titles: false,
-    censor_album_titles: false,
     accent_type: 'avatar',
     hue: 255,
     sat: 1,
@@ -88,7 +81,15 @@ export let settings_template = {
 
     log_show_all: false,
 
-    avatar_radius: 50
+    avatar_radius: 50,
+
+    removal_method: 'censor',
+    enable_moderation: false,
+    moderate_shouts: true,
+    moderate_bios: true,
+    moderate_artists: false,
+    moderate_albums: false,
+    moderate_tracks: false
 };
 export let settings_base = {
     theme: {
@@ -558,35 +559,34 @@ export let settings_base = {
         values: [true, false],
         type: 'toggle'
     },
-    censor_bios: {
-        css: 'censor_bios',
+    moderate_bios: {
+        css: 'moderate_bios',
         unit: '',
         value: false,
         values: [true, false],
         type: 'toggle'
     },
-    censor_artist_names: {
-        css: 'censor_artist_names',
+    moderate_artists: {
+        css: 'moderate_artists',
         unit: '',
         value: false,
         values: [true, false],
         type: 'toggle'
     },
-    censor_track_titles: {
-        css: 'censor_track_titles',
+    moderate_albums: {
+        css: 'moderate_albums',
         unit: '',
         value: false,
         values: [true, false],
         type: 'toggle'
     },
-    censor_album_titles: {
-        css: 'censor_album_titles',
+    moderate_tracks: {
+        css: 'moderate_tracks',
         unit: '',
         value: false,
         values: [true, false],
         type: 'toggle'
-    },
-
+    }
 };
 export let inbuilt_settings = {
     recent_artwork: {

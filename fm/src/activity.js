@@ -16,7 +16,7 @@ export function subscribe_to_events() {
         let artist = form.querySelector('[name="artist"]').getAttribute('value');
 
         artist = correct_artist(artist);
-        track = correct_item_by_artist(track, artist, "track_title");
+        track = correct_item_by_artist(track, artist, 'track');
 
         let btn = form.querySelector('button');
 
@@ -51,7 +51,7 @@ export function subscribe_to_events() {
         form.setAttribute('data-bleh-subscribed', 'true');
 
         let track = form.querySelector('[name="name"]').getAttribute('value');
-        let artist = form.querySelector('[name="artist_name"]').getAttribute('value');
+        let artist = form.querySelector('[name="artist"]').getAttribute('value');
 
         artist = correct_artist(artist);
         track = correct_item_by_artist(track, artist);

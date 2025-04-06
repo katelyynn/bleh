@@ -7815,7 +7815,7 @@ very, very, very dated - who looks up a song on ebay? */
     }
 }
 
-input:is([name^="track_name"], [name^="artist_name"], [name^="album_name"], [name^="album_artist_name"])
+input:is([name^="track_name"], [name^='artist'], [name^="album_name"], [name^="album_artist_name"])
 {
     letter-spacing: 1px !important;
 }

@@ -25,7 +25,7 @@ export function bleh_tracks() {
     patch_header_title();
 
     page.sister = track_header.querySelector('.header-new-crumb span').textContent;
-    page.name = correct_item_by_artist(document.body.querySelector('[data-page-resource-name]').getAttribute('data-page-resource-name'), page.sister, "track_title");
+    page.name = correct_item_by_artist(document.body.querySelector('[data-page-resource-name]').getAttribute('data-page-resource-name'), page.sister, 'track');
 
     let is_subpage = track_header.classList.contains('header-new--subpage');
 

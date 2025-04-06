@@ -176,7 +176,7 @@ export function patch_titles() {
                 }
 
                 // combine
-                track_title.innerHTML = `<div class="title">${clean_message(sanitise_text(song_title), "track_title")}</div>${song_tags_text}`;
+                track_title.innerHTML = `<div class="title">${clean_message(sanitise_text(song_title), 'track')}</div>${song_tags_text}`;
 
                 let song_artist_element = track.querySelector('.chartlist-artist');
                 if (song_artist_element == null && !is_user) {
@@ -188,7 +188,7 @@ export function patch_titles() {
                 // if artist matches OR artist is blank
                 if (song_artist_element.textContent.replaceAll('+', ' ').trim() == track_artist || song_artist_element.textContent.trim() == '') {
                     // replaces with corrected artist if applicable
-                    song_artist_element.innerHTML = `<a href="${root}music/${sanitise(formatted_title[2])}" title="${sanitise_text(formatted_title[2])}">${sanitise_text(clean_message(formatted_title[2], "artist_name"))}</a>`;
+                    song_artist_element.innerHTML = `<a href="${root}music/${sanitise(formatted_title[2])}" title="${sanitise_text(formatted_title[2])}">${sanitise_text(clean_message(formatted_title[2], 'artist'))}</a>`;
 
                     // append guests
                     let song_guests = formatted_title[3];
@@ -199,7 +199,7 @@ export function patch_titles() {
                         let guest_element = document.createElement('a');
                         guest_element.setAttribute('href', `${root}music/${sanitise(song_guests[guest])}`);
                         guest_element.setAttribute('title', song_guests[guest]);
-                        guest_element.textContent = clean_message(song_guests[guest], "artist_name");
+                        guest_element.textContent = clean_message(song_guests[guest], 'artist');
 
                         song_artist_element.appendChild(guest_element);
                     }
@@ -229,7 +229,7 @@ export function patch_titles() {
                             </div>
                         </div>
                         <div class="info">
-                            <h5 class="title">${clean_message(song_title, "track_title")}</h5>
+                            <h5 class="title">${clean_message(song_title, 'track')}</h5>
                             <p class="artist">${song_artist_element.innerHTML}</p>
                             <div class="tags">${song_tags_text}</div>
                             ${(!is_library_track_page) ? (is_album) ? '' : `<p class="album">${(image != null) ? correct_item_by_artist(sanitise_text(image.getAttribute('alt')), track_artist) : page.name}</p>` : ''}
