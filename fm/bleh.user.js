@@ -7721,7 +7721,7 @@
       patch_avatar(new_listener.querySelector(".user-list-avatar"), name, "listener");
       let track_link = new_listener.querySelector(".user-list-about-me a");
       let artist = return_artist_from_track(track_link.getAttribute("href"), false);
-      let track = correct_item_by_artist(track_link.textContent.trim(), artist);
+      let track = correct_item_by_artist(track_link.textContent.trim(), artist, "track_title");
       track_link.textContent = track;
       new_container.appendChild(new_listener);
     });
@@ -8250,166 +8250,6 @@
     return Math.floor(Math.random() * (b - a + 1)) + a;
   }
 
-  // src/components/select.js
-  unsafeWindow._update_inbuilt_select = function(id, value) {
-    update_inbuilt_select(id, value);
-  };
-  function update_inbuilt_select(id, value) {
-    document.documentElement.setAttribute(`data-bleh--inbuilt-${id}`, value);
-  }
-  function custom_select(select, element_to_append) {
-    console.info(select);
-    let id = select.getAttribute("id");
-    let value = select.value;
-    let value_objects = select.querySelectorAll("option");
-    let menu_list = document.createElement("div");
-    value_objects.forEach((object) => {
-      let object_value = object.getAttribute("value");
-      let object_text = object.textContent;
-      let item = document.createElement("button");
-      item.classList.add("btn", "dropdown-menu-clickable-item", "select-item");
-      item.setAttribute("onclick", `_set_custom_select_value('${id}', '${object_value}')`);
-      item.setAttribute("data-value", object_value);
-      item.setAttribute("type", "button");
-      item.textContent = object_text;
-      menu_list.appendChild(item);
-    });
-    let button = document.createElement("button");
-    button.classList.add("select-button");
-    button.setAttribute("id", `select-${id}`);
-    button.setAttribute("type", "button");
-    button.textContent = menu_list.querySelector(`[data-value="${value}"]`).textContent;
-    let theme_menu_item = tippy(button, {
-      theme: "select-menu",
-      content: `
-            ${menu_list.innerHTML}
-        `,
-      allowHTML: true,
-      placement: "bottom",
-      interactive: true,
-      interactiveBorder: 10,
-      trigger: "click",
-      onShow(instance) {
-        update_custom_select(instance.popper, select.value);
-      }
-    });
-    element_to_append.appendChild(button);
-  }
-  unsafeWindow._set_custom_select_value = function(select_id, value) {
-    let select = document.getElementById(select_id);
-    select.value = value;
-    console.info(select, `#select-${select_id}`);
-    update_custom_select(document.getElementById(`select-${select_id}`)._tippy.popper, value, select_id);
-    document.documentElement.setAttribute(`data-bleh--inbuilt-${select_id}`, value);
-  };
-  function update_custom_select(element = document.body, value = "", select_id = "") {
-    let btns = element.querySelectorAll(".dropdown-menu-clickable-item");
-    btns.forEach((btn) => {
-      if (btn.getAttribute("data-value") != value) {
-        btn.classList.remove("active");
-      } else {
-        btn.classList.add("active");
-        let sel_button = document.body.querySelector(`#select-${select_id}`);
-        console.log(sel_button);
-        if (sel_button == null)
-          return;
-        sel_button.textContent = btn.textContent;
-      }
-    });
-  }
-
-  // src/pages/moderation.js
-  var blocklists = /* @__PURE__ */ new Map();
-  unsafeWindow.blocklists = blocklists;
-  function bleh_moderation() {
-    let container = page.structure.main.querySelector(".block-list-selector");
-    let selector = container.querySelector("select");
-    custom_select(selector, container);
-    reload();
-  }
-  function load_moderation() {
-    if (localStorage.getItem("bleh_moderation") == null) {
-      localStorage.setItem("bleh_moderation", JSON.stringify([
-        {
-          url: "https://files.sad.ovh/public/bleh/b0_racist.txt",
-          type: "strings"
-        },
-        {
-          url: "https://files.sad.ovh/public/bleh/b4_sexual.txt",
-          type: "strings"
-        }
-      ]));
-    }
-    const blocklist = JSON.parse(localStorage.getItem("bleh_moderation"));
-    blocklist.forEach(async (z) => {
-      if (!blocklists.has(z.url)) {
-        let body;
-        try {
-          const req = await fetch(z.url);
-          body = await req.text();
-          log("successfully loaded " + z.url, "moderation");
-        } catch (e) {
-          console.error(e);
-          log("failed to load blocklist " + z.url, "moderation");
-        }
-        let parsed;
-        if (z.type == "strings") {
-          parsed = body.split("\n");
-        } else if (z.type == "regex") {
-          parsed = body.split("\n").map((z2) => new RegExp(z2));
-        }
-        blocklists.set(z.url, {
-          type: z.type,
-          blocklist: parsed
-        });
-      }
-    });
-  }
-  function reload() {
-    const blocklistElement = document.getElementById("block-lists");
-    blocklistElement.innerHTML = "";
-    const blocklist = JSON.parse(localStorage.getItem("bleh_moderation"));
-    blocklist.forEach(async (z, i) => {
-      const elem = document.createElement("div");
-      elem.className = "generic-table-list-entry";
-      elem.innerHTML = `
-        <div class="text">
-            <h5><a href="${z.url}" target="_blank">${z.url}</a></h5>
-        </div>
-        <div class="text-2">
-            <p>${z.type.substring(0, 1).toUpperCase() + z.type.slice(1)}</p>
-        </div>
-        <div class="actions">
-            <button class="delete icon delete-user-button danger-subtle" onclick="_remove_block_index(${i})">${tl(trans.remove)}</button>
-        </div>
-        `;
-      blocklistElement.appendChild(elem);
-    });
-    load_moderation();
-  }
-  unsafeWindow._remove_block_index = (i) => {
-    const blocklist = JSON.parse(localStorage.getItem("bleh_moderation"));
-    const removed = blocklist.splice(i, 1)[0];
-    localStorage.setItem("bleh_moderation", JSON.stringify(blocklist));
-    blocklists.delete(removed.url);
-    reload();
-  };
-  unsafeWindow._add_block = () => {
-    const input = document.getElementById("block-list-input");
-    const type = document.getElementById("block-list-type");
-    if (!input.value.trim()) return;
-    try {
-      new URL(input.value.trim());
-    } catch (_) {
-      return;
-    }
-    const blocklist = JSON.parse(localStorage.getItem("bleh_moderation"));
-    blocklist.push({ url: input.value.trim(), type: type.value });
-    localStorage.setItem("bleh_moderation", JSON.stringify(blocklist));
-    reload();
-    input.value = "";
-  };
-
   // src/pages/bleh_config.js
   function bleh_settings() {
     page.type = "bleh_settings";
@@ -8472,6 +8312,11 @@
             <li class="navlist-item secondary-nav-item">
                 <a class="secondary-nav-item-link bleh--nav" data-bleh-page="performance" onclick="_change_settings_page('performance')">
                     ${tl(trans.troubleshooting)}
+                </a>
+            </li>
+            <li class="navlist-item secondary-nav-item">
+                <a class="secondary-nav-item-link bleh--nav" data-bleh-page="moderation" onclick="_change_settings_page('moderation')">
+                    ${trans_legacy[lang].settings.moderation.name}
                 </a>
             </li>
             <li class="navlist-item secondary-nav-item">
@@ -10041,6 +9886,117 @@
       register_skip_to([]);
       return `
             <div class="bleh--panel">
+              <h4 class="top-header">${trans_legacy[lang].settings.moderation.name}</h4>
+              <div class="toggle-container" id="container-enable_moderation" onclick="_update_item('enable_moderation')">
+            <button class="btn reset" onclick="_reset_item('enable_moderation')">${tl(trans.reset)}</button>
+            <div class="heading">
+              <h5>Enable moderation</h5>
+            </div>
+            <div class="toggle-wrap">
+              <button class="toggle" id="toggle-enable_moderation" aria-checked="true">
+                <div class="dot"></div>
+              </button>
+            </div>
+              </div>
+              <div class="sep"></div>
+              <h4>Method</h4>
+              <div class="primary-selections">
+            <div class="btn primary-selection" id="toggle-removal_method-remove" data-toggle="removal_method" data-toggle-value="remove" onclick="_update_item('removal_method', 'remove')">
+              <h5>Remove words</h5>
+              <p>This entirely, cleanly removes words from usernames / biographies and shouts.</p>
+            </div>
+            <div class="btn primary-selection" id="toggle-removal_method-censor" data-toggle="removal_method" data-toggle-value="censor" onclick="_update_item('removal_method', 'censor')">
+              <h5>Censor words</h5>
+              <p>Censors words, replaces "fuck" with "f***", etc.</p>
+            </div>
+              </div>
+            </div>
+            <div class="bleh--panel">
+              <h4 class="top-header">Block List Management</h4>
+              <p>Enter a URL pointing to a CORS-enabled block list.</p>
+              <div class="text-container" id="container-block_list">
+            <div class="heading content-form">
+              <div class="input-container">
+                <input type="url" id="block-list-input" placeholder="Enter block list URL (HTTP/HTTPS)">
+                <select id="block-list-type">
+                  <option value="strings">Strings (per line)</option>
+                  <option value="regex">Regex expressions</option>
+                </select>
+                <button class="btn primary save" onclick="_add_block()">Add</button>
+              </div>
+            </div>
+              </div>
+              <div class="languages" id="block-lists">
+              </div>
+            </div>
+            <div class="bleh--panel">
+              <h4 class="top-header">Moderate where?</h4>
+              <div class="toggle-container" id="container-moderate_shouts" onclick="_update_item('moderate_shouts')">
+            <button class="btn reset" onclick="_reset_item('moderate_shouts')">${tl(trans.reset)}</button>
+            <div class="heading">
+              <h5>Moderate shouts</h5>
+              <p>Applies moderation rules to user shouts.</p>
+            </div>
+            <div class="toggle-wrap">
+              <button class="toggle" id="toggle-moderate_shouts" aria-checked="true">
+                <div class="dot"></div>
+              </button>
+            </div>
+              </div>
+              <div class="toggle-container" id="container-censor_bios" onclick="_update_item('censor_bios')">
+            <button class="btn reset" onclick="_reset_item('censor_bios')">${tl(trans.reset)}</button>
+            <div class="heading">
+              <h5>Censor bios</h5>
+              <p>Applies moderation rules to user biographies.</p>
+            </div>
+            <div class="toggle-wrap">
+              <button class="toggle" id="toggle-censor_bios" aria-checked="true">
+                <div class="dot"></div>
+              </button>
+            </div>
+              </div>
+              <div class="toggle-container" id="container-censor_artist_names" onclick="_update_item('censor_artist_names')">
+            <button class="btn reset" onclick="_reset_item('censor_artist_names')">${tl(trans.reset)}</button>
+            <div class="heading">
+              <h5>Censor artist names</h5>
+              <p>Applies moderation rules to artist names.</p>
+            </div>
+            <div class="toggle-wrap">
+              <button class="toggle" id="toggle-censor_artist_names" aria-checked="false">
+                <div class="dot"></div>
+              </button>
+            </div>
+              </div>
+              <div class="toggle-container" id="container-censor_track_titles" onclick="_update_item('censor_track_titles')">
+            <button class="btn reset" onclick="_reset_item('censor_track_titles')">${tl(trans.reset)}</button>
+            <div class="heading">
+              <h5>Censor track titles</h5>
+              <p>Applies moderation rules to track titles.</p>
+            </div>
+            <div class="toggle-wrap">
+              <button class="toggle" id="toggle-censor_track_titles" aria-checked="false">
+                <div class="dot"></div>
+              </button>
+            </div>
+              </div>
+              <div class="toggle-container" id="container-censor_album_titles" onclick="_update_item('censor_album_titles')">
+            <button class="btn reset" onclick="_reset_item('censor_album_titles')">${tl(trans.reset)}</button>
+            <div class="heading">
+              <h5>Censor album titles</h5>
+              <p>Applies moderation rules to album titles.</p>
+            </div>
+            <div class="toggle-wrap">
+              <button class="toggle" id="toggle-censor_album_titles" aria-checked="false">
+                <div class="dot"></div>
+              </button>
+            </div>
+              </div>
+            </div>
+            `;
+    } else if (page_id == "moderation") {
+      register_skip_to([]);
+      return `
+            <div class="bleh--panel">
                 <h4>${tl(trans.moderation)}</h4>
                 <p>Decide the way hateful terms across the site are treated.</p>
                 <div class="user-top-panel">
@@ -11289,45 +11245,45 @@
       }
     });
   }
-  function correct_item_by_artist(item, artist) {
+  function correct_item_by_artist(item, artist, type = "album_title") {
     if (!settings.corrections)
-      return item;
+      return clean_message(item, type);
     artist = artist.toLowerCase();
     try {
       if (album_track_corrections.hasOwnProperty(artist)) {
         if (album_track_corrections[artist].hasOwnProperty(item)) {
           log(`corrected ${item} by ${artist} as ${album_track_corrections[artist][item]}`, "lotus");
-          return album_track_corrections[artist][item];
+          return clean_message(album_track_corrections[artist][item], "track_title");
         } else {
-          return item;
+          return clean_message(item, type);
         }
       } else {
-        return item;
+        return clean_message(item, type);
       }
     } catch (e) {
       log(`correcting ${item} by ${artist}`, "lotus");
       console.error(e);
-      return item;
+      return clean_message(item, type);
     }
   }
   function correct_artist(artist, broadcast = false) {
     if (!settings.corrections)
-      return artist;
+      return clean_message(artist, "artist_name");
     try {
       if (artist_corrections.hasOwnProperty(artist)) {
         log(`corrected ${artist} as ${artist_corrections[artist]}`, "lotus");
         if (broadcast)
           page.corrected = true;
-        return artist_corrections[artist];
+        return clean_message(artist_corrections[artist], "artist_name");
       } else {
         if (broadcast)
           page.corrected = false;
-        return artist;
+        return clean_message(artist, "artist_name");
       }
     } catch (e) {
       log(`correcting ${artist}`, "lotus");
       console.error(e);
-      return artist;
+      return clean_message(artist, "artist_name");
     }
   }
   function name_includes(original_title, original_artist) {
@@ -11470,7 +11426,7 @@
           for (let song_tag in song_tags) {
             song_tags_text = `${song_tags_text}<div class="feat" data-bleh--tag-type="${song_tags[song_tag].type}" data-bleh--tag-group="${song_tags[song_tag].group}">${song_tags[song_tag].text}</div>`;
           }
-          track_title.innerHTML = `<div class="title">${sanitise_text(song_title)}</div>${song_tags_text}`;
+          track_title.innerHTML = `<div class="title">${sanitise_text(clean_message(song_title, "track_title"))}</div>${song_tags_text}`;
           let song_artist_element = document.body.querySelector('span[itemprop="byArtist"]');
           let song_guests = formatted_title[3];
           page.sister_others = formatted_title[3];
@@ -11489,7 +11445,7 @@
     } else {
       if (!track_title.hasAttribute("data-kate-processed")) {
         track_title.setAttribute("data-kate-processed", "true");
-        let corrected_title = correct_item_by_artist(track_title.textContent, track_artist.textContent);
+        let corrected_title = correct_item_by_artist(track_title.textContent, track_artist.textContent, "track_title");
         log(`corrected ${track_title.textContent} by ${track_artist.textContent} as ${corrected_title}`, "lotus");
         if (corrected_title != track_title.textContent)
           page.corrected = true;
@@ -11508,7 +11464,7 @@
       let track = form.querySelector('[name="track"]').getAttribute("value");
       let artist = form.querySelector('[name="artist"]').getAttribute("value");
       artist = correct_artist(artist);
-      track = correct_item_by_artist(track, artist);
+      track = correct_item_by_artist(track, artist, "track_title");
       let btn = form.querySelector("button");
       btn.addEventListener("click", (event2) => {
         log("heard", "event", "info", event2);
@@ -11967,7 +11923,7 @@
           for (let song_tag in song_tags) {
             song_tags_text = `${song_tags_text}<div class="feat" data-bleh--tag-type="${song_tags[song_tag].type}" data-bleh--tag-group="${song_tags[song_tag].group}">${sanitise_text(song_tags[song_tag].text)}</div>`;
           }
-          track_title.innerHTML = `<div class="title">${sanitise_text(song_title)}</div>${song_tags_text}`;
+          track_title.innerHTML = `<div class="title">${clean_message(sanitise_text(song_title), "track_title")}</div>${song_tags_text}`;
           let song_artist_element = track.querySelector(".chartlist-artist");
           if (song_artist_element == null && !is_user) {
             song_artist_element = document.createElement("td");
@@ -11975,14 +11931,14 @@
             track.appendChild(song_artist_element);
           }
           if (song_artist_element.textContent.replaceAll("+", " ").trim() == track_artist || song_artist_element.textContent.trim() == "") {
-            song_artist_element.innerHTML = `<a href="${root}music/${sanitise(formatted_title[2])}" title="${sanitise_text(formatted_title[2])}">${sanitise_text(formatted_title[2])}</a>`;
+            song_artist_element.innerHTML = `<a href="${root}music/${sanitise(formatted_title[2])}" title="${sanitise_text(formatted_title[2])}">${sanitise_text(clean_message(formatted_title[2], "artist_name"))}</a>`;
             let song_guests = formatted_title[3];
             for (let guest in song_guests) {
               song_artist_element.innerHTML = `${song_artist_element.innerHTML},`;
               let guest_element = document.createElement("a");
               guest_element.setAttribute("href", `${root}music/${sanitise(song_guests[guest])}`);
               guest_element.setAttribute("title", song_guests[guest]);
-              guest_element.textContent = song_guests[guest];
+              guest_element.textContent = clean_message(song_guests[guest], "artist_name");
               song_artist_element.appendChild(guest_element);
             }
           }
@@ -12005,7 +11961,7 @@
                             </div>
                         </div>
                         <div class="info">
-                            <h5 class="title">${song_title}</h5>
+                            <h5 class="title">${clean_message(song_title, "track_title")}</h5>
                             <p class="artist">${song_artist_element.innerHTML}</p>
                             <div class="tags">${song_tags_text}</div>
                             ${!is_library_track_page ? is_album ? "" : `<p class="album">${image != null ? correct_item_by_artist(sanitise_text(image.getAttribute("alt")), track_artist) : page.name}</p>` : ""}
@@ -16372,7 +16328,7 @@
       about_me_sidebar.setAttribute("data-kate-processed", "true");
       if (settings.bio_markdown) {
         let about_me_text = about_me_sidebar.querySelector("p");
-        let result = bio_parse(about_me_text, true);
+        let result = bio_parse(clean_message(about_me_text.textContent, "bio"), true);
         about_me_text.innerHTML = result;
       }
       let buttons = document.createElement("div");
@@ -17080,7 +17036,7 @@
     form.innerHTML = "";
   }
   function bio_parse(text, cache = false) {
-    let result = markdown(text.textContent);
+    let result = markdown(text);
     let temp = document.createElement("div");
     temp.innerHTML = result;
     use_banner(temp, cache);
@@ -17122,7 +17078,7 @@
       let about_me_sidebar = doc.querySelector(".about-me-sidebar");
       if (about_me_sidebar) {
         let about_me_text = about_me_sidebar.querySelector("p");
-        let result = bio_parse(about_me_text, true);
+        let result = bio_parse(clean_message(about_me_text.textContent, "bio"), true);
       } else {
         save_banner_to_cache("none");
       }
@@ -17209,7 +17165,7 @@
     track_header.setAttribute("data-bwaa", "true");
     patch_header_title();
     page.sister = track_header.querySelector(".header-new-crumb span").textContent;
-    page.name = correct_item_by_artist(document.body.querySelector("[data-page-resource-name]").getAttribute("data-page-resource-name"), page.sister);
+    page.name = correct_item_by_artist(document.body.querySelector("[data-page-resource-name]").getAttribute("data-page-resource-name"), page.sister, "track_title");
     let is_subpage = track_header.classList.contains("header-new--subpage");
     if (auth.pro) {
       page.structure.container = document.body.querySelector(".page-content");
@@ -17480,7 +17436,7 @@
       ghCodeBlocks: false,
       smartIndentationFix: true
     });
-    let parsed_body = converter.makeHtml(shout.element.textContent.replace(/([@])([a-zA-Z0-9_]+)/g, `[$1$2](${root}user/$2)`).replace(/\[artist\]([a-zA-Z0-9]+)\[\/artist\]/g, `[$1](${root}music/$1)`).replace(/\[album artist=([a-zA-Z0-9]+)\]([a-zA-Z0-9\s]+)\[\/album\]/g, `[$2](${root}music/$1/$2)`).replace(/\[track artist=([a-zA-Z0-9]+)\]([a-zA-Z0-9\s]+)\[\/track\]/g, `[$2](${root}music/$1/_/$2)`).replace(/https:\/\/open\.spotify\.com\/user\/([A-Za-z0-9]+)\?si=([A-Za-z0-9]+)/g, "[@$1](https://open.spotify.com/user/$1)").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;"));
+    let parsed_body = converter.makeHtml(clean_message(shout.element.textContent, "shout").replace(/([@])([a-zA-Z0-9_]+)/g, `[$1$2](${root}user/$2)`).replace(/\[artist\]([a-zA-Z0-9]+)\[\/artist\]/g, `[$1](${root}music/$1)`).replace(/\[album artist=([a-zA-Z0-9]+)\]([a-zA-Z0-9\s]+)\[\/album\]/g, `[$2](${root}music/$1/$2)`).replace(/\[track artist=([a-zA-Z0-9]+)\]([a-zA-Z0-9\s]+)\[\/track\]/g, `[$2](${root}music/$1/_/$2)`).replace(/https:\/\/open\.spotify\.com\/user\/([A-Za-z0-9]+)\?si=([A-Za-z0-9]+)/g, "[@$1](https://open.spotify.com/user/$1)").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;"));
     shout.element.innerHTML = parsed_body;
     log(`parsed index ${index}`, "shout", "log");
     shout_parse_queue.splice(index, 1);

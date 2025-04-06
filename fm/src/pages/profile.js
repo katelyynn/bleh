@@ -19,6 +19,7 @@ import { register_background, update_page } from "../page"
 import { ff } from "../sku"
 import { bleh_user_library } from "./glacier"
 import { use_pronouns } from "./lastfm_settings"
+import { clean_message } from "./moderation"
 import { patch_obsession_view } from "./obsession"
 
 export function bleh_profiles() {
@@ -645,7 +646,7 @@ export function bleh_profiles() {
         if (settings.bio_markdown) {
             // parse body
             let about_me_text = about_me_sidebar.querySelector('p');
-            let result = bio_parse(about_me_text, true);
+            let result = bio_parse(clean_message(about_me_text.textContent, "bio"), true);
             about_me_text.innerHTML = result;
         }
 
@@ -1534,7 +1535,7 @@ function profile_tracks() {
 }
 
 function bio_parse(text, cache = false) {
-    let result = markdown(text.textContent);
+    let result = markdown(text);
 
     let temp = document.createElement('div');
     temp.innerHTML = result;
@@ -1592,7 +1593,7 @@ function request_banner() {
         let about_me_sidebar = doc.querySelector('.about-me-sidebar');
         if (about_me_sidebar) {
             let about_me_text = about_me_sidebar.querySelector('p');
-            let result = bio_parse(about_me_text, true);
+            let result = bio_parse(clean_message(about_me_text.textContent, "bio"), true);
         } else {
             save_banner_to_cache('none');
         }

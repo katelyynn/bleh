@@ -4,6 +4,7 @@ import { log } from "./build/log";
 import { auth, page, root, shout_parse_queue } from "./build/page";
 import { lang, trans_legacy } from "./build/trans";
 import { deliver_notif, notify } from "./components/notify";
+import { clean_message } from "./pages/moderation";
 
 export function patch_shouts() {
     if (page.structure.main == null)
@@ -147,7 +148,7 @@ function parse_shout(index) {
         ghCodeBlocks: false,
         smartIndentationFix: true
     });
-    let parsed_body = converter.makeHtml(shout.element.textContent
+    let parsed_body = converter.makeHtml(clean_message(shout.element.textContent, "shout") // TODO: only works when markdown is enabled
     .replace(/([@])([a-zA-Z0-9_]+)/g, `[$1$2](${root}user/$2)`)
     .replace(/\[artist\]([a-zA-Z0-9]+)\[\/artist\]/g, `[$1](${root}music/$1)`)
     .replace(/\[album artist=([a-zA-Z0-9]+)\]([a-zA-Z0-9\s]+)\[\/album\]/g, `[$2](${root}music/$1/$2)`)

@@ -5,6 +5,7 @@ import { page, root } from "../build/page";
 import { return_artist_from_generic, sanitise, sanitise_text } from "../build/tools";
 import { lang, trans_legacy, trans, tl } from "../build/trans";
 import { prepare_corrections_page } from "../pages/bleh_config";
+import { clean_message } from "../pages/moderation";
 import { dialog } from "./dialog";
 import { notify } from "./notify";
 
@@ -198,26 +199,26 @@ export function correct_generic_combo_no_artist(parent) {
  * @param {string} artist artist name (is converted to lowercase)
  * @returns corrected title if applicable or original title
  */
-export function correct_item_by_artist(item, artist) {
+export function correct_item_by_artist(item, artist, type = "album_title") {
     if (!settings.corrections)
-        return item;
+        return clean_message(item, type);
     artist = artist.toLowerCase();
 
     try {
         if (album_track_corrections.hasOwnProperty(artist)) {
             if (album_track_corrections[artist].hasOwnProperty(item)) {
                 log(`corrected ${item} by ${artist} as ${album_track_corrections[artist][item]}`, 'lotus');
-                return album_track_corrections[artist][item];
+                return clean_message(album_track_corrections[artist][item], "track_title");
             } else {
-                return item;
+                return clean_message(item, type);
             }
         } else {
-            return item;
+            return clean_message(item, type);
         }
     } catch(e) {
         log(`correcting ${item} by ${artist}`, 'lotus');
         console.error(e);
-        return item;
+        return clean_message(item, type);
     }
 }
 /**
@@ -227,7 +228,7 @@ export function correct_item_by_artist(item, artist) {
  */
 export function correct_artist(artist, broadcast = false) {
     if (!settings.corrections)
-        return artist;
+        return clean_message(artist, "artist_name");
 
     try {
         if (artist_corrections.hasOwnProperty(artist)) {
@@ -235,17 +236,17 @@ export function correct_artist(artist, broadcast = false) {
             if (broadcast)
                 page.corrected = true;
 
-            return artist_corrections[artist];
+            return clean_message(artist_corrections[artist], "artist_name");
         } else {
             if (broadcast)
                 page.corrected = false;
 
-            return artist;
+            return clean_message(artist, "artist_name");
         }
     } catch(e) {
         log(`correcting ${artist}`, 'lotus');
         console.error(e);
-        return artist;
+        return clean_message(artist, "artist_name");
     }
 }
 
@@ -477,7 +478,7 @@ export function patch_header_title() {
             }
 
             // combine
-            track_title.innerHTML = `<div class="title">${sanitise_text(song_title)}</div>${song_tags_text}`;
+            track_title.innerHTML = `<div class="title">${sanitise_text(clean_message(song_title, "track_title"))}</div>${song_tags_text}`;
 
             let song_artist_element = document.body.querySelector('span[itemprop="byArtist"]');
             let song_guests = formatted_title[3];
@@ -500,7 +501,7 @@ export function patch_header_title() {
         if (!track_title.hasAttribute('data-kate-processed')) {
             track_title.setAttribute('data-kate-processed','true');
 
-            let corrected_title = correct_item_by_artist(track_title.textContent, track_artist.textContent);
+            let corrected_title = correct_item_by_artist(track_title.textContent, track_artist.textContent, "track_title");
             log(`corrected ${track_title.textContent} by ${track_artist.textContent} as ${corrected_title}`, 'lotus');
 
             if (corrected_title != track_title.textContent)

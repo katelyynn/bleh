@@ -733,5 +733,91 @@ export let settings_store = {
     chart_insights_view: {
         default: 'pie',
         type: 'radio'
+    },
+    shout_markdown: {
+        default: true
+    },
+    bio_markdown: {
+        default: true
+    },
+    hue_from_album: {
+        default: true
+    },
+    seasonal: {
+        default: true
+    },
+    seasonal_particles: {
+        default: true
+    },
+    seasonal_particles_reduced: {
+        default: false
+    },
+    seasonal_particles_fps: {
+        default: false
+    },
+    seasonal_overlays: {
+        default: true
+    },
+    profile_header_own: {
+        default: true
+    },
+    profile_header_others: {
+        default: true
+    },
+    profile_avi_background: {
+        default: false
+    },
+    profile_shortcut: {
+        default: '',
+        type: 'string'
+    },
+    font: {
+        css: 'custom_font',
+        default: '',
+        type: 'string'
+    },
+    font_weight: {
+        css: 'custom_font_weight',
+        default: 480,
+        min: 0,
+        max: 0,
+        step: 0,
+        type: 'range'
+    },
+    font_weight_medium: {
+        css: 'custom_font_weight_medium',
+        default: 650,
+        min: 0,
+        max: 0,
+        step: 0,
+        type: 'range'
+    },
+    font_weight_bold: {
+        css: 'custom_font_weight_bold',
+        default: 730,
+        min: 0,
+        max: 0,
+        step: 0,
+        type: 'range'
+    },
+    font_emoji: {
+        default: true
+    },
+    show_bulk_edit_album: {
+        default: false
+    },
+    grid_glow: {
+        default: true
+    },
+    auth_menu_obsessions: {
+        deault: false
+    },
+    default_avatar_action: {
+        default: 'expand',
+        type: 'radio'
+    },
+    quick_artist_button: {
+        default: 'gallery',
+        type: 'radio'
     }
 }

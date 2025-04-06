@@ -3,6 +3,7 @@ import { log } from "../build/log";
 import { page, root } from "../build/page";
 import { clamp_sat, return_artist_from_track, rgb_to_hsl, sanitise, sanitise_text } from "../build/tools";
 import { bleh_glacier_insights } from "../pages/glacier";
+import { clean_message } from "../pages/moderation";
 import { patch_artist_ranks_in_list_view } from "./colourful_counts";
 import { correct_artist, correct_item_by_artist, name_includes } from "./lotus";
 import { register_menu } from "./menu";
@@ -175,7 +176,7 @@ export function patch_titles() {
                 }
 
                 // combine
-                track_title.innerHTML = `<div class="title">${sanitise_text(song_title)}</div>${song_tags_text}`;
+                track_title.innerHTML = `<div class="title">${clean_message(sanitise_text(song_title), "track_title")}</div>${song_tags_text}`;
 
                 let song_artist_element = track.querySelector('.chartlist-artist');
                 if (song_artist_element == null && !is_user) {
@@ -187,7 +188,7 @@ export function patch_titles() {
                 // if artist matches OR artist is blank
                 if (song_artist_element.textContent.replaceAll('+', ' ').trim() == track_artist || song_artist_element.textContent.trim() == '') {
                     // replaces with corrected artist if applicable
-                    song_artist_element.innerHTML = `<a href="${root}music/${sanitise(formatted_title[2])}" title="${sanitise_text(formatted_title[2])}">${sanitise_text(formatted_title[2])}</a>`;
+                    song_artist_element.innerHTML = `<a href="${root}music/${sanitise(formatted_title[2])}" title="${sanitise_text(formatted_title[2])}">${sanitise_text(clean_message(formatted_title[2], "artist_name"))}</a>`;
 
                     // append guests
                     let song_guests = formatted_title[3];
@@ -198,7 +199,7 @@ export function patch_titles() {
                         let guest_element = document.createElement('a');
                         guest_element.setAttribute('href', `${root}music/${sanitise(song_guests[guest])}`);
                         guest_element.setAttribute('title', song_guests[guest]);
-                        guest_element.textContent = song_guests[guest];
+                        guest_element.textContent = clean_message(song_guests[guest], "artist_name");
 
                         song_artist_element.appendChild(guest_element);
                     }
@@ -228,7 +229,7 @@ export function patch_titles() {
                             </div>
                         </div>
                         <div class="info">
-                            <h5 class="title">${song_title}</h5>
+                            <h5 class="title">${clean_message(song_title, "track_title")}</h5>
                             <p class="artist">${song_artist_element.innerHTML}</p>
                             <div class="tags">${song_tags_text}</div>
                             ${(!is_library_track_page) ? (is_album) ? '' : `<p class="album">${(image != null) ? correct_item_by_artist(sanitise_text(image.getAttribute('alt')), track_artist) : page.name}</p>` : ''}
@@ -319,33 +320,35 @@ export function patch_titles() {
 
             if (!is_album && track.classList.contains('chartlist-row--now-scrobbling')) {
                 let image_wrap = track.querySelector('.chartlist-image');
-                let link = image_wrap.querySelector('.cover-art');
-                let image = link.querySelector('img');
+                if (image_wrap) {
+                    let link = image_wrap.querySelector('.cover-art');
+                    let image = link.querySelector('img');
 
-                if (!settings.album_text) {
-                    let alt = image.getAttribute('alt');
+                    if (!settings.album_text) {
+                        let alt = image.getAttribute('alt');
 
-                    let album_text = document.createElement('td');
-                    album_text.classList.add('chartlist-album', 'custom-album-text');
-                    album_text.innerHTML = (`
-                        <a href="${link.getAttribute('href')}">${alt}</a>
-                    `);
-                    track.appendChild(album_text);
+                        let album_text = document.createElement('td');
+                        album_text.classList.add('chartlist-album', 'custom-album-text');
+                        album_text.innerHTML = (`
+                            <a href="${link.getAttribute('href')}">${alt}</a>
+                        `);
+                        track.appendChild(album_text);
+                    }
+
+                    image.setAttribute('crossorigin', 'anonymous');
+                    try {
+                        image.addEventListener('load', function() {
+                            let thief = new ColorThief();
+                            let colour = thief.getColor(image);
+
+                            let hsl = rgb_to_hsl(colour[0], colour[1], colour[2]);
+
+                            track.style.setProperty('--hue-over', hsl.h);
+                            track.style.setProperty('--sat-over', clamp_sat((hsl.s / 100) * 3));
+                            track.style.setProperty('--lit-over', 1);
+                        });
+                    } catch(e) {}
                 }
-
-                image.setAttribute('crossorigin', 'anonymous');
-                try {
-                    image.addEventListener('load', function() {
-                        let thief = new ColorThief();
-                        let colour = thief.getColor(image);
-
-                        let hsl = rgb_to_hsl(colour[0], colour[1], colour[2]);
-
-                        track.style.setProperty('--hue-over', hsl.h);
-                        track.style.setProperty('--sat-over', clamp_sat((hsl.s / 100) * 3));
-                        track.style.setProperty('--lit-over', 1);
-                    });
-                } catch(e) {}
             }
         }));
     });
