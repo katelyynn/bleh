@@ -8327,19 +8327,17 @@
     custom_select(selector, container);
     reload();
   }
+  function reset_moderation() {
+    localStorage.setItem("bleh_moderation", JSON.stringify([
+      {
+        url: "https://raw.githubusercontent.com/LDNOOBW/List-of-Dirty-Naughty-Obscene-and-Otherwise-Bad-Words/refs/heads/master/en",
+        type: "strings"
+      }
+    ]));
+  }
   function load_moderation() {
-    if (localStorage.getItem("bleh_moderation") == null) {
-      localStorage.setItem("bleh_moderation", JSON.stringify([
-        {
-          url: "https://files.sad.ovh/public/bleh/b0_racist.txt",
-          type: "strings"
-        },
-        {
-          url: "https://files.sad.ovh/public/bleh/b4_sexual.txt",
-          type: "strings"
-        }
-      ]));
-    }
+    if (localStorage.getItem("bleh_moderation") == null)
+      reset_moderation();
     const blocklist = JSON.parse(localStorage.getItem("bleh_moderation"));
     blocklist.forEach(async (z) => {
       if (!blocklists.has(z.url)) {
@@ -8352,6 +8350,7 @@
           console.error(e);
           log("failed to load blocklist " + z.url, "moderation");
         }
+        body = body.trim();
         let parsed;
         if (z.type == "strings") {
           parsed = body.split("\n").map((z2) => new RegExp(z2, "ig"));
@@ -8362,12 +8361,13 @@
           type: z.type,
           blocklist: parsed
         });
+        console.info("blocklists", blocklists);
       }
     });
   }
   function reload() {
-    const blocklists2 = document.getElementById("block-lists");
-    blocklists2.innerHTML = "";
+    const blocklist_container = document.getElementById("block-lists");
+    blocklist_container.innerHTML = "";
     const blocklist = JSON.parse(localStorage.getItem("bleh_moderation"));
     blocklist.forEach(async (list, i) => {
       let entry = document.createElement("div");
@@ -8383,7 +8383,7 @@
                 <button class="delete icon delete-user-button danger-subtle" onclick="_remove_block_index(${i})">${tl(trans.remove)}</button>
             </div>
         `;
-      blocklists2.appendChild(entry);
+      blocklist_container.appendChild(entry);
     });
     load_moderation();
   }
@@ -8392,6 +8392,10 @@
     const removed = blocklist.splice(index, 1)[0];
     localStorage.setItem("bleh_moderation", JSON.stringify(blocklist));
     blocklists.delete(removed.url);
+    reload();
+  };
+  unsafeWindow._reset_moderation = () => {
+    reset_moderation();
     reload();
   };
   unsafeWindow._add_block = () => {
@@ -8434,8 +8438,10 @@
           });
         } else if (removal_method == "censor") {
           list.blocklist.forEach((word) => {
-            if (word.test(action))
+            if (word.test(action)) {
+              console.info("word", word.toString());
               action = action.replace(word, "\u2661".repeat(word.toString().length - 4));
+            }
           });
         }
       } else if (list.type == "regex") {
@@ -8452,6 +8458,7 @@
         }
       }
     });
+    log(`moderated as ${action}`, "moderation");
     return action;
   }
 
@@ -10131,6 +10138,7 @@
                                 </select>
                             </div>
                             <button class="btn-add primary" onclick="_add_block()">Add</button>
+                            <button class="btn icon delete" onclick="_reset_moderation()">Reset</button>
                         </div>
                     </div>
                 </div>

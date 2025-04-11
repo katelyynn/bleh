@@ -16,22 +16,20 @@ export function bleh_moderation() {
     reload();
 }
 
-export function load_moderation() {
-    if (localStorage.getItem('bleh_moderation') == null) {
-        // TODO: use github raw once this is live
-        localStorage.setItem('bleh_moderation', JSON.stringify([
-            {
-                url: 'https://files.sad.ovh/public/bleh/b0_racist.txt',
-                type: 'strings'
-            },
-            {
-                url: 'https://files.sad.ovh/public/bleh/b4_sexual.txt',
-                type: 'strings'
-            }
-        ]));
-    }
+export function reset_moderation() {
+    localStorage.setItem('bleh_moderation', JSON.stringify([
+        {
+            url: 'https://raw.githubusercontent.com/LDNOOBW/List-of-Dirty-Naughty-Obscene-and-Otherwise-Bad-Words/refs/heads/master/en',
+            type: 'strings'
+        }
+    ]));
+}
 
-    const blocklist = JSON.parse(localStorage.getItem('bleh_moderation'))
+export function load_moderation() {
+    if (localStorage.getItem('bleh_moderation') == null)
+        reset_moderation();
+
+    const blocklist = JSON.parse(localStorage.getItem('bleh_moderation'));
     blocklist.forEach(async z => {
         if (!blocklists.has(z.url)) {
             let body;
@@ -39,12 +37,13 @@ export function load_moderation() {
             try {
                 const req = await fetch(z.url);
                 body = await req.text();
-                log('successfully loaded ' + z.url, 'moderation')
-
+                log('successfully loaded ' + z.url, 'moderation');
             } catch(e) {
-                console.error(e)
-                log('failed to load blocklist ' + z.url, 'moderation')
+                console.error(e);
+                log('failed to load blocklist ' + z.url, 'moderation');
             }
+
+            body = body.trim();
 
             let parsed;
             if (z.type == 'strings') {
@@ -57,13 +56,15 @@ export function load_moderation() {
                 type: z.type,
                 blocklist: parsed
             });
+
+            console.info('blocklists', blocklists);
         }
-    })
+    });
 }
 
 function reload() {
-    const blocklists = document.getElementById('block-lists')
-    blocklists.innerHTML = '';
+    const blocklist_container = document.getElementById('block-lists')
+    blocklist_container.innerHTML = '';
 
     const blocklist = JSON.parse(localStorage.getItem('bleh_moderation'));
     blocklist.forEach(async (list, i) => {
@@ -81,7 +82,7 @@ function reload() {
             </div>
         `);
 
-        blocklists.appendChild(entry);
+        blocklist_container.appendChild(entry);
     });
 
     load_moderation();
@@ -95,6 +96,11 @@ unsafeWindow._remove_block_index = (index) => {
     localStorage.setItem('bleh_moderation', JSON.stringify(blocklist));
     blocklists.delete(removed.url);
 
+    reload();
+}
+
+unsafeWindow._reset_moderation = () => {
+    reset_moderation();
     reload();
 }
 
@@ -124,6 +130,7 @@ export function clean_message(message, type) {
     if (!settings.enable_moderation) return message;
 
     const removal_method = settings.removal_method; // remove / censor
+
     const moderate_shouts = settings.moderate_shouts
     const moderate_bios = settings.moderate_bios;
     const moderate_artists = settings.moderate_artists;
@@ -147,29 +154,32 @@ export function clean_message(message, type) {
         if (list.type == 'strings') {
             if (removal_method == 'remove') {
                 list.blocklist.forEach(word => {
-                    if(word.test(action))
+                    if (word.test(action))
                         action = action.replace(word, '');
                 });
-            } else if(removal_method == "censor") {
+            } else if (removal_method == 'censor') {
                 list.blocklist.forEach(word => {
-                    if(word.test(action))
+                    if (word.test(action)) {
+                        console.info('word', word.toString());
                         action = action.replace(word, '♡'.repeat(word.toString().length - 4)); // 4 = //ig
-                })
-            }   
+                    }
+                });
+            }
         } else if (list.type == 'regex') {
             if (removal_method == 'remove') {
                 list.blocklist.forEach(regex => {
-                    if(regex.test(action))
+                    if (regex.test(action))
                         action = action.replace(regex, '');
                 });
-            } else if(removal_method == "censor") {
+            } else if (removal_method == 'censor') {
                 list.blocklist.forEach(regex => {
-                    if(regex.test(action))
+                    if (regex.test(action))
                         action = action.replace(regex, '♡'.repeat(regex.length));
-                })
-            }   
+                });
+            }
         }
     });
 
+    log(`moderated as ${action}`, 'moderation');
     return action;
 }

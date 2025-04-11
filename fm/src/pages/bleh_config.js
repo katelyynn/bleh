@@ -12,7 +12,7 @@ import { version } from "../main";
 import { update_page } from "../page";
 import { seasonal_timer_end, seasonal_timer_start } from "../seasonal";
 import { ff } from "../sku";
-import { bleh_moderation } from "./moderation";
+import { bleh_moderation, reset_moderation } from "./moderation";
 
 
 export function bleh_settings() {
@@ -1744,6 +1744,7 @@ export function render_setting_page(page_id) {
                                 </select>
                             </div>
                             <button class="btn-add primary" onclick="_add_block()">Add</button>
+                            <button class="btn icon delete" onclick="_reset_moderation()">Reset</button>
                         </div>
                     </div>
                 </div>
