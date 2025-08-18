@@ -255,7 +255,8 @@ export let includes = {
         '- double disc', '(double disc', '[double disc',
         '- reissue', '(reissue', '[reissue',
         '(12 reg. tracks', // confessions madonna
-        '- special', '(special', '[special
+        '- special', '(special', '[special',
+        '- highlights from', '(highlights from', '[highlights from',
         //,
         '- 19', '- 20', '(19', '(20', '[19', '[20',
         '- 10th', '- 25th', '- 30th', '- 35th', '- 40th', '- 50th', '- 60th',
