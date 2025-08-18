@@ -176,7 +176,8 @@ export let includes = {
         '- short version', '(short version', '[short version',
         '- long version', '(long version', '[long version',
         '- full length', '(full length', '[full length',
-        '[over now' // billie eilish l'amour de ma vie
+        '[over now', // billie eilish l'amour de ma vie
+        '- the remix', '(the remix', '[the remix'
     ],
     mixes_numbers: [
         '(v1', '(v2', '(v3', '(v4', '(v5', '(v6', '(v7', '(v8', '(v9',
@@ -254,6 +255,7 @@ export let includes = {
         '- double disc', '(double disc', '[double disc',
         '- reissue', '(reissue', '[reissue',
         '(12 reg. tracks', // confessions madonna
+        '- special', '(special', '[special
         //,
         '- 19', '- 20', '(19', '(20', '[19', '[20',
         '- 10th', '- 25th', '- 30th', '- 35th', '- 40th', '- 50th', '- 60th',
