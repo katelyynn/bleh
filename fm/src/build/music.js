@@ -108,7 +108,7 @@ export let ranks = {
 
 export let includes = {
     guests: [
-        'feat.', 'featuring',
+        'feat.', 'featuring', '[feat.',
         '- with', '(with', '[with', 'w/ ',
         'ft.',
         'ref.',
@@ -129,7 +129,8 @@ export let includes = {
     ],
     remasters: [
         '- remaster', '(remaster', '[remaster',
-        '- remasterizado', '(remasterizado', '[remasterizado'
+        '- remasterizado', '(remasterizado', '[remasterizado',
+        ': high resolution remasters', '- high resolution remasters', '(high resolution remasters', ': the high resolution remasters', '- the high resolution remasters', '(the high resolution remasters' // Pink Floyd bootleg remaster boxsets
     ],
     mixes: [
         '- devonshire mix', '(devonshire mix',
@@ -177,7 +178,8 @@ export let includes = {
         '- long version', '(long version', '[long version',
         '- full length', '(full length', '[full length',
         '[over now', // billie eilish l'amour de ma vie
-        '- the remix', '(the remix', '[the remix'
+        '- the remix', '(the remix', '[the remix',
+        '(unfinished original recordings of de-loused in the comatorium', '[unfinished original recordings of de-loused in the comatorium', '- unfinished original recordings of de-loused in the comatorium' // landscape tantrums
     ],
     mixes_numbers: [
         '(v1', '(v2', '(v3', '(v4', '(v5', '(v6', '(v7', '(v8', '(v9',
