@@ -35,9 +35,9 @@
             {
                 "type": "plaster",
                 "icon": "data:image/svg+xml;base64,PHN2ZyAgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiAgd2lkdGg9IjI0IiAgaGVpZ2h0PSIyNCIgIHZpZXdCb3g9IjAgMCAyNCAyNCIgIGZpbGw9ImN1cnJlbnRDb2xvciIgIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1maWxsZWQgaWNvbi10YWJsZXItYmFuZGFnZSI+PHBhdGggc3Ryb2tlPSJub25lIiBkPSJNMCAwaDI0djI0SDB6IiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTIwLjIwNyAzLjc5M2E1Ljk1IDUuOTUgMCAwIDEgLjE3OSA4LjIyOGwtLjE3OSAuMTg2bC04IDhhNS45NSA1Ljk1IDAgMCAxIC04LjU5MyAtOC4yMjhsLjE3OSAtLjE4Nmw4IC04YTUuOTUgNS45NSAwIDAgMSA4LjQxNCAwem0tOC4yMDcgOS4yMDdhMSAxIDAgMCAwIC0xIDFsLjAwNyAuMTI3YTEgMSAwIDAgMCAxLjk5MyAtLjExN2wtLjAwNyAtLjEyN2ExIDEgMCAwIDAgLS45OTMgLS44ODN6bTIgLTJhMSAxIDAgMCAwIC0xIDFsLjAwNyAuMTI3YTEgMSAwIDAgMCAxLjk5MyAtLjExN2wtLjAwNyAtLjEyN2ExIDEgMCAwIDAgLS45OTMgLS44ODN6bS00IDBhMSAxIDAgMCAwIC0xIDFsLjAwNyAuMTI3YTEgMSAwIDAgMCAxLjk5MyAtLjExN2wtLjAwNyAtLjEyN2ExIDEgMCAwIDAgLS45OTMgLS44ODN6bTIgLTJhMSAxIDAgMCAwIC0xIDFsLjAwNyAuMTI3YTEgMSAwIDAgMCAxLjk5MyAtLjExN2wtLjAwNyAtLjEyN2ExIDEgMCAwIDAgLS45OTMgLS44ODN6IiAvPjwvc3ZnPg==",
-                "hue": 0,
-                "sat": 0,
-                "lit": 1.5
+                "hue": 348,
+                "sat": 1.5,
+                "lit": 0.9
             }
         ],
         "evangelicgirl": [
