@@ -259,7 +259,6 @@ export let includes = {
         '(12 reg. tracks', // confessions madonna
         '- special', '(special', '[special',
         '- highlights from', '(highlights from', '[highlights from',
-        '[special edition'
         //,
         '- 19', '- 20', '(19', '(20', '[19', '[20',
         '- 10th', '- 25th', '- 30th', '- 35th', '- 40th', '- 50th', '- 60th',
