@@ -2604,6 +2604,10 @@
         flex: 1;
     }
 
+    .footer-legal-item > a {
+        padding: 5px;
+    }
+
     .footer-legal-item,
     .footer-heading,
     .logo p {
