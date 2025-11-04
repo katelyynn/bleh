@@ -44114,6 +44114,7 @@
           render(tracklist_own, html`
                         ${tracklist}
                     `);
+          tracklist_own_loaded = true;
         });
       };
       let tracklist_view_panel;

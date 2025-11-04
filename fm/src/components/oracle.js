@@ -273,6 +273,8 @@ export function oracle_process() {
                     render(tracklist_own, html`
                         ${tracklist}
                     `);
+
+                    tracklist_own_loaded = true;
                 });
         }
     }
