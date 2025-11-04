@@ -13786,6 +13786,7 @@
         font-size: 22px;
     }
 
+    .listening-report-row__col,
     .listening-report-row {
         width: var(--cards-width) !important;
     }
