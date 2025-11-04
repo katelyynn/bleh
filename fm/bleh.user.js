@@ -50056,15 +50056,13 @@
                     ${setting({ id: "gendered_tags" })}
                 </div>
             </section>
-            ${!page.mobile ? html.node`
             <section class="bleh--panel">
                 <h4>${tl2(trans.navigation_items.name)}</h4>
                 <div class="setting-group">
                     ${setting({ id: "navigation_items", list: page.state.quick_access_items })}
-                    ${setting({ id: "navigation_language" })}
+                    ${!page.mobile ? setting({ id: "navigation_language" }) : ""}
                 </div>
             </section>
-            ` : ""}
             <section class="bleh--panel">
                 <h4>${tl2(trans.shouts)}</h4>
                 <div class="inner-preview pad flex">
