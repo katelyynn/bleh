@@ -28966,7 +28966,7 @@
       end: "y0-11-22T23:59:59{offset}",
       snowflakes: {
         state: true,
-        count: 40
+        count: 80
       }
     },
     {
