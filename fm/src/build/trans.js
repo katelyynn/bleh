@@ -3754,7 +3754,7 @@ export const trans = {
         pop: {
             en: 'Pop',
             sv: 'Poppande',
-            ru: 'Яркий' 
+            ru: 'Яркий'
         },
         glow: {
             en: 'Glow',
@@ -6627,7 +6627,7 @@ export const trans = {
         },
         body: {
             en: 'Create graphs from user libraries',
-            sv: 'Skapa diagram från användarbibliotek'
+            sv: 'Skapa diagram från användarbibliotek',
             ru: 'Создать графики из пользовательских библиотек'
         }
     },

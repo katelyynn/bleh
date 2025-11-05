@@ -58077,12 +58077,12 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     sv: {
       name: "Svenska",
       by: ["Lrexie"],
-      last_updated: "2025-09-30"
+      last_updated: "2025-11-05"
     },
     ru: {
       name: "\u0420\u0443\u0441\u0441\u043A\u0438\u0439",
       by: ["crawqxx"],
-      last_updated: "2025-10-27"
+      last_updated: "2025-11-05"
     }
   };
   var trans = {
@@ -58182,7 +58182,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       "user-status-alum": {
         name: {
           en: "Alum",
-          sv: "Alumn"
+          sv: "Alumn",
+          ru: "\u0412\u044B\u043F\u0443\u0441\u043A\u043D\u0438\u043A"
         },
         reason: {
           en: "Former member of Last.fm",
@@ -58288,7 +58289,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       "bubble-tea": {
         name: {
           en: "escoffier :3",
-          sv: "escoffier :3"
+          sv: "escoffier :3",
+          ru: "\u0435\u0441\u043A\u043E\u0444\u0444\u044C\u0435\u0440 :3"
         },
         reason: {
           en: "katelyn\u2019s wife ~",
@@ -58740,7 +58742,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       ru: "\u0421\u043A\u0440\u043E\u0431\u0431\u043B"
     },
     scrobble_value: {
-      en: "Scrobble {v}"
+      en: "Scrobble {v}",
+      ru: "\u0421\u043A\u0440\u043E\u0431\u0431\u043B\u0438\u0442\u044C {v}"
     },
     average: {
       // scrobble average
@@ -59250,7 +59253,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           ru: "\u041E\u0441\u0435\u043D\u044C"
         },
         fall: {
-          en: "Winter"
+          en: "Winter",
+          ru: "\u0417\u0438\u043C\u0430"
         },
         christmas: {
           en: "Christmas",
@@ -59270,7 +59274,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       notice: {
         en: "Open the live counter",
         pt: "Abrir o contador ao vivo",
-        sv: "\xD6ppna live-nedr\xE4kningen"
+        sv: "\xD6ppna live-nedr\xE4kningen",
+        ru: "\u041E\u0442\u043A\u0440\u044B\u0442\u044C \u0436\u0438\u0432\u043E\u0439 \u0441\u0447\u0435\u0442\u0447\u0438\u043A"
       },
       live: {
         en: "Counter is updating live",
@@ -59317,7 +59322,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     value_for_time: {
       // e.g. (Halloween) ends (in 3 days)
-      en: "{v} ends {time}"
+      en: "{v} ends {time}",
+      ru: "{v} \u0437\u0430\u043A\u043E\u043D\u0447\u0438\u0442\u0441\u044F {time}"
     },
     seasonal_timeline: {
       en: "Seasonal timeline",
@@ -59363,7 +59369,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       name: {
         en: "Display additional seasonal effects",
         pt: "Exibir efeitos sazonais adicionais",
-        sv: "Visa extra \xE5rstidseffekter"
+        sv: "Visa extra \xE5rstidseffekter",
+        ru: "\u041E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0442\u044C \u0434\u043E\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0435 \u0441\u0435\u0437\u043E\u043D\u043D\u044B\u0435 \u044D\u0444\u0444\u0435\u043A\u0442\u044B"
       },
       body: {
         en: "During winter seasons this applies a coat of ice to panels, otherwise mainly gradients",
@@ -59447,14 +59454,17 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       ru: "\u0420\u0435\u043B\u0438\u0437\u044B"
     },
     no_releases_found: {
-      en: "No releases found here"
+      en: "No releases found here",
+      ru: "\u0417\u0434\u0435\u0441\u044C \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D\u043E \u043D\u0438 \u043E\u0434\u043D\u043E\u0433\u043E \u0440\u0435\u043B\u0438\u0437\u0430"
     },
     tracklist_source: {
       name: {
-        en: "Preferred tracklist source"
+        en: "Preferred tracklist source",
+        ru: "\u041F\u0440\u0435\u0434\u043F\u043E\u0447\u0438\u0442\u0430\u0435\u043C\u044B\u0439 \u0438\u0441\u0442\u043E\u0447\u043D\u0438\u043A \u0442\u0440\u0435\u043A\u043B\u0438\u0441\u0442\u0430"
       },
       body: {
-        en: "Choose which service to display for album tracklists"
+        en: "Choose which service to display for album tracklists",
+        ru: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u0441\u0435\u0440\u0432\u0438\u0441, \u043A\u043E\u0442\u043E\u0440\u044B\u0439 \u0431\u0443\u0434\u0435\u0442 \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0442\u044C\u0441\u044F \u0434\u043B\u044F \u0442\u0440\u0435\u043A\u043B\u0438\u0441\u0442\u043E\u0432 \u0430\u043B\u044C\u0431\u043E\u043C\u043E\u0432"
       }
     },
     bookmarks: {
@@ -59623,7 +59633,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         major: {
           en: "Major release",
           pt: "Lan\xE7amento principal",
-          sv: "St\xF6rre utg\xE5va"
+          sv: "St\xF6rre utg\xE5va",
+          ru: "\u041A\u0440\u0443\u043F\u043D\u044B\u0439 \u0440\u0435\u043B\u0438\u0437"
         },
         minor: {
           en: "Minor release",
@@ -60880,7 +60891,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       ru: "\u041F\u043E\u043D\u0440\u0430\u0432\u0438\u043B\u043E\u0441\u044C"
     },
     love_track: {
-      en: "Love track"
+      en: "Love track",
+      ru: "\u041E\u0442\u043C\u0435\u0442\u0438\u0442\u044C \u0442\u0440\u0435\u043A \u043A\u0430\u043A \u043B\u044E\u0431\u0438\u043C\u044B\u0439"
     },
     loved: {
       // as in loved tracks, this can be seen
@@ -61128,49 +61140,71 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     track_layout: {
       name: {
-        en: "Track layout"
+        en: "Track layout",
+        sv: "L\xE5tlayout",
+        ru: "\u0420\u0430\u0441\u043F\u043E\u043B\u043E\u0436\u0435\u043D\u0438\u0435 \u0442\u0440\u0435\u043A\u0430"
       },
       body: {
-        en: "Choose which axis to display track information on"
+        en: "Choose which axis to display track information on",
+        sv: "V\xE4lj vilken axis att visa l\xE5tinformation p\xE5",
+        ru: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u043E\u0441\u044C, \u043D\u0430 \u043A\u043E\u0442\u043E\u0440\u043E\u0439 \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0442\u044C \u0438\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u044E \u043E \u0442\u0440\u0435\u043A\u0435"
       },
       column: {
-        en: "Place title and artist vertically"
+        en: "Place title and artist vertically",
+        sv: "Placera titel och artist lodr\xE4tt",
+        ru: "\u0420\u0430\u0437\u043C\u0435\u0441\u0442\u0438\u0442\u044C \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u0438 \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044F \u0432\u0435\u0440\u0442\u0438\u043A\u0430\u043B\u044C\u043D\u043E"
       },
       row: {
-        en: "Place title and artist horizontally"
+        en: "Place title and artist horizontally",
+        sv: "Placera titel och artist v\xE5gr\xE4tt",
+        ru: "\u0420\u0430\u0437\u043C\u0435\u0441\u0442\u0438\u0442\u044C \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u0438 \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044F \u0433\u043E\u0440\u0438\u0437\u043E\u043D\u0442\u0430\u043B\u044C\u043D\u043E"
       }
     },
     track_album_name_location: {
       name: {
-        en: "Album name location"
+        en: "Album name location",
+        sv: "Albumtitelsplats",
+        ru: "\u0420\u0430\u0441\u043F\u043E\u043B\u043E\u0436\u0435\u043D\u0438\u0435 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u044F \u0430\u043B\u044C\u0431\u043E\u043C\u0430"
       },
       body: {
-        en: "Choose which axis to display said album name on"
+        en: "Choose which axis to display said album name on",
+        sv: "V\xE4lj vilken axis att visa albumtitel p\xE5",
+        ru: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u043E\u0441\u044C, \u043D\u0430 \u043A\u043E\u0442\u043E\u0440\u043E\u0439 \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0442\u044C \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u0430\u043B\u044C\u0431\u043E\u043C\u0430"
       },
       column: {
-        en: "Place below title and artist"
+        en: "Place below title and artist",
+        sv: "Placera under l\xE5ttitel och artist",
+        ru: "\u0420\u0430\u0437\u043C\u0435\u0441\u0442\u0438\u0442\u044C \u043F\u043E\u0434 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435\u043C \u0438 \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u0435\u043C"
       },
       row: {
-        en: "Place to the side of title and artist"
+        en: "Place to the side of title and artist",
+        sv: "Placera bredvid l\xE5ttitel och artist",
+        ru: "\u0420\u0430\u0437\u043C\u0435\u0441\u0442\u0438\u0442\u044C \u0440\u044F\u0434\u043E\u043C \u0441 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435\u043C \u0438 \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u0435\u043C"
       }
     },
     expand_tracks: {
       name: {
-        en: "Show associated album for tracks"
+        en: "Show associated album for tracks",
+        sv: "Visa associerade album f\xF6r l\xE5tar",
+        ru: "\u041F\u043E\u043A\u0430\u0437\u044B\u0432\u0430\u0442\u044C \u0441\u0432\u044F\u0437\u0430\u043D\u043D\u044B\u0439 \u0430\u043B\u044C\u0431\u043E\u043C \u0434\u043B\u044F \u0442\u0440\u0435\u043A\u043E\u0432"
       },
       body: {
-        en: "Places the track\u2019s associated album name if there\u2019s room"
+        en: "Places the track\u2019s associated album name if there\u2019s room",
+        sv: "Placerar l\xE5tens associerade album om det finns plats",
+        ru: "\u041E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0435\u0442 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u0441\u0432\u044F\u0437\u0430\u043D\u043D\u043E\u0433\u043E \u0430\u043B\u044C\u0431\u043E\u043C\u0430 \u0442\u0440\u0435\u043A\u0430, \u0435\u0441\u043B\u0438 \u0435\u0441\u0442\u044C \u043C\u0435\u0441\u0442\u043E"
       }
     },
     expand_tracks_when_active: {
       en: "Only when actively scrobbling",
       de: "Nur w\xE4hrend des aktiven Scrobbelns",
-      sv: "Endast n\xE4r du skrobblar"
+      sv: "Endast n\xE4r du skrobblar",
+      ru: "\u0422\u043E\u043B\u044C\u043A\u043E \u043F\u0440\u0438 \u0430\u043A\u0442\u0438\u0432\u043D\u043E\u043C \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u0438\u043D\u0433\u0435"
     },
     expand_tracks_always: {
       en: "Always when possible",
       de: "Immer, wenn m\xF6glich",
-      sv: "Alltid, n\xE4r det \xE4r m\xF6jligt"
+      sv: "Alltid, n\xE4r det \xE4r m\xF6jligt",
+      ru: "\u0412\u0441\u0435\u0433\u0434\u0430, \u043A\u043E\u0433\u0434\u0430 \u0432\u043E\u0437\u043C\u043E\u0436\u043D\u043E"
     },
     show_remaster_tags: {
       en: "Show remaster tags",
@@ -61263,10 +61297,14 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     display_name: {
       name: {
-        en: "Display name"
+        en: "Display name",
+        sv: "Visningsnamn",
+        ru: "\u041E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0435\u043C\u043E\u0435 \u0438\u043C\u044F"
       },
       body: {
-        en: "Changes your name on your profile, with your real @username shown below"
+        en: "Changes your name on your profile, with your real @username shown below",
+        sv: "\xC4ndrar namnet p\xE5 din profil och l\xE4gger ditt riktiga @anv\xE4ndarnamn under\xE5t",
+        ru: "\u0418\u0437\u043C\u0435\u043D\u044F\u0435\u0442 \u0432\u0430\u0448\u0435 \u0438\u043C\u044F \u0432 \u043F\u0440\u043E\u0444\u0438\u043B\u0435, \u043F\u0440\u0438 \u044D\u0442\u043E\u043C \u0432\u0430\u0448 \u0440\u0435\u0430\u043B\u044C\u043D\u044B\u0439 @\u043D\u0438\u043A\u043D\u0435\u0439\u043C \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0435\u0442\u0441\u044F \u043D\u0438\u0436\u0435"
       }
     },
     subtitle: {
@@ -61411,6 +61449,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     redirected_from: {
       en: "Redirected from",
+      sv: "Omdirigerades fr\xE5n",
       ru: "\u041F\u0435\u0440\u0435\u043D\u0430\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u043E \u0441"
     },
     music_corrections: {
@@ -61736,7 +61775,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Font choice",
         de: "Schriftartauswahl",
         pt: "Escolha de fonte",
-        sv: "Typsnitts",
+        sv: "Typsnitt",
         ru: "\u0412\u044B\u0431\u043E\u0440 \u0448\u0440\u0438\u0444\u0442\u0430"
       },
       body: {
@@ -61749,14 +61788,22 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     font_style: {
       en: "Font style",
+      sv: "Typsnittsstil",
+      ru: "\u0421\u0442\u0438\u043B\u044C \u0448\u0440\u0438\u0444\u0442\u0430",
       solid: {
-        en: "Solid"
+        en: "Solid",
+        sv: "Fast",
+        ru: "\u0421\u043F\u043B\u043E\u0448\u043D\u043E\u0439"
       },
       pop: {
-        en: "Pop"
+        en: "Pop",
+        sv: "Poppande",
+        ru: "\u042F\u0440\u043A\u0438\u0439"
       },
       glow: {
-        en: "Glow"
+        en: "Glow",
+        sv: "Gl\xF6dande",
+        ru: "\u0421\u0432\u0435\u0447\u0435\u043D\u0438\u0435"
       }
     },
     font_weight: {
@@ -61830,7 +61877,12 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       // this text is common sample text used in english,
       // if there's something more fitting for your language,
       // then feel free to adjust it
-      en: "The quick brown fox jumps over the lazy dog \u{1F3F3}\uFE0F\u200D\u26A7\uFE0F"
+      //
+      // not sure by what was meant by "fitting for your language"
+      // but i used a sentence that has all letters on rus language, like an english example
+      en: "The quick brown fox jumps over the lazy dog \u{1F3F3}\uFE0F\u200D\u26A7\uFE0F",
+      sv: "Flygande b\xE4ckasiner s\xF6ka hwila p\xE5 mjuka tuvor qxz \u{1F3F3}\uFE0F\u200D\u26A7\uFE0F",
+      ru: "\u0421\u044A\u0435\u0448\u044C \u0435\u0449\u0451 \u044D\u0442\u0438\u0445 \u043C\u044F\u0433\u043A\u0438\u0445 \u0444\u0440\u0430\u043D\u0446\u0443\u0437\u0441\u043A\u0438\u0445 \u0431\u0443\u043B\u043E\u043A, \u0434\u0430 \u0432\u044B\u043F\u0435\u0439 \u0447\u0430\u044E \u{1F3F3}\uFE0F\u200D\u26A7\uFE0F"
     },
     enter_font_names: {
       en: "Enter installed font name(s), separated by commas",
@@ -62122,10 +62174,12 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     applications: {
       en: "Applications",
+      sv: "Applikationer",
       ru: "\u041F\u0440\u0438\u043B\u043E\u0436\u0435\u043D\u0438\u044F"
     },
     applications_intro: {
       en: "Connect your account to third-party services for a better scrobbling experience. Make sure you trust the services below.",
+      sv: "Anslut ditt konto till tredjepartstj\xE4nster f\xF6r b\xE4ttre skrobblingsupplevelse. Var s\xE4ker p\xE5 att du litar p\xE5 nedre tj\xE4nster",
       ru: "\u041F\u043E\u0434\u043A\u043B\u044E\u0447\u0438\u0442\u0435 \u0441\u0432\u043E\u0439 \u0430\u043A\u043A\u0430\u0443\u043D\u0442 \u043A \u0441\u0442\u043E\u0440\u043E\u043D\u043D\u0438\u043C \u0441\u0435\u0440\u0432\u0438\u0441\u0430\u043C \u0434\u043B\u044F \u043B\u0443\u0447\u0448\u0435\u0433\u043E \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u0438\u043D\u0433\u0430. \u0423\u0431\u0435\u0434\u0438\u0442\u0435\u0441\u044C, \u0447\u0442\u043E \u0432\u044B \u0434\u043E\u0432\u0435\u0440\u044F\u0435\u0442\u0435 \u0443\u043A\u0430\u0437\u0430\u043D\u043D\u044B\u043C \u043D\u0438\u0436\u0435 \u0441\u0435\u0440\u0432\u0438\u0441\u0430\u043C."
     },
     connect_app: {
@@ -62144,6 +62198,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     suggested: {
       en: "Suggested",
+      sv: "F\xF6reslaget",
       ru: "\u041F\u0440\u0435\u0434\u043B\u043E\u0436\u0435\u043D\u043D\u044B\u0435"
     },
     connected: {
@@ -62293,7 +62348,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     own_plays: {
       // tracklist source menu option that enables the thing below
-      en: "Own plays"
+      en: "Own plays",
+      sv: "Egna spelningar",
+      ru: "\u0421\u043E\u0431\u0441\u0442\u0432\u0435\u043D\u043D\u044B\u0435 \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u044F"
     },
     sourced_from_own_plays: {
       // tracklist from your own album plays
@@ -62639,10 +62696,14 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     display_name_styles: {
       name: {
-        en: "Show display name styles"
+        en: "Show display name styles",
+        sv: "Se visningsnamnsstiler",
+        ru: "\u041F\u043E\u043A\u0430\u0437\u044B\u0432\u0430\u0442\u044C \u0441\u0442\u0438\u043B\u0438 \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0435\u043C\u043E\u0433\u043E \u0438\u043C\u0435\u043D\u0438"
       },
       body: {
-        en: "Sponsors can choose a custom font and shadow style for their profile name"
+        en: "Sponsors can choose a custom font and shadow style for their profile name",
+        sv: "Sponsorer kan v\xE4lja valfri typsnitt och skugga f\xF6r deras profilnamn",
+        ru: "\u0421\u043F\u043E\u043D\u0441\u043E\u0440\u044B \u043C\u043E\u0433\u0443\u0442 \u0432\u044B\u0431\u0438\u0440\u0430\u0442\u044C \u0441\u043E\u0431\u0441\u0442\u0432\u0435\u043D\u043D\u044B\u0439 \u0448\u0440\u0438\u0444\u0442 \u0438 \u0441\u0442\u0438\u043B\u044C \u0442\u0435\u043D\u0438 \u0434\u043B\u044F \u0438\u043C\u0435\u043D\u0438 \u0432 \u0441\u0432\u043E\u0435\u043C \u043F\u0440\u043E\u0444\u0438\u043B\u0435"
       }
     },
     underline_links: {
@@ -62704,6 +62765,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     no_title: {
       en: "No title",
+      sv: "Ingen titel",
       ru: "\u0411\u0435\u0437 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u044F"
     },
     description: {
@@ -62714,6 +62776,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     no_description: {
       en: "No description",
+      sv: "Ingen beskrivning",
       ru: "\u0411\u0435\u0437 \u043E\u043F\u0438\u0441\u0430\u043D\u0438\u044F"
     },
     change_avatar: {
@@ -62854,7 +62917,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Redirected to bleh\u2019s built-in Collage feature",
       de: "Weiterleitung zur integrierten Collagenfunktion von bleh",
       pt: "Redirecionando ao recurso integrado de Colagem do bleh",
-      sv: "Omredigerad till blehs egna collagefunktion",
+      sv: "Omdirigerad till blehs egna collagefunktion",
       ru: "\u041F\u0435\u0440\u0435\u043D\u0430\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u043E \u043D\u0430 \u0432\u0441\u0442\u0440\u043E\u0435\u043D\u043D\u0443\u044E \u0444\u0443\u043D\u043A\u0446\u0438\u044E \u041A\u043E\u043B\u043B\u0430\u0436\u0430 bleh"
     },
     your_collage_is_ready: {
@@ -63719,13 +63782,16 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     profile_font: {
       name: {
-        en: "Profile name font"
+        en: "Profile name font",
+        ru: "\u0428\u0440\u0438\u0444\u0442 \u0438\u043C\u0435\u043D\u0438 \u043F\u0440\u043E\u0444\u0438\u043B\u044F"
       },
       body: {
-        en: "Customise the font family used for your username, only visible on your profile"
+        en: "Customise the font family used for your username, only visible on your profile",
+        ru: "\u041D\u0430\u0441\u0442\u0440\u043E\u0439\u0442\u0435 \u0441\u0435\u043C\u0435\u0439\u0441\u0442\u0432\u043E \u0448\u0440\u0438\u0444\u0442\u043E\u0432, \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0435\u043C\u043E\u0435 \u0434\u043B\u044F \u0432\u0430\u0448\u0435\u0433\u043E \u0438\u043C\u0435\u043D\u0438 \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F; \u043E\u043D\u043E \u0431\u0443\u0434\u0435\u0442 \u0432\u0438\u0434\u043D\u043E \u0442\u043E\u043B\u044C\u043A\u043E \u0432 \u0432\u0430\u0448\u0435\u043C \u043F\u0440\u043E\u0444\u0438\u043B\u0435"
       },
       reminder: {
-        en: "Changed your name font, don\u2019t forget to save!"
+        en: "Changed your name font, don\u2019t forget to save!",
+        ru: "\u0428\u0440\u0438\u0444\u0442 \u0438\u043C\u0435\u043D\u0438 \u0438\u0437\u043C\u0435\u043D\u0435\u043D, \u043D\u0435 \u0437\u0430\u0431\u0443\u0434\u044C\u0442\u0435 \u0441\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C!"
       }
     },
     none: {
@@ -63982,6 +64048,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     lyrics: {
       // lyrics
       en: "Lyrics",
+      sv: "Lyrics",
       ru: "\u0422\u0435\u043A\u0441\u0442\u044B \u043F\u0435\u0441\u0435\u043D",
       name: {
         // the game
@@ -64550,12 +64617,13 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     simulate_scroll: {
       name: {
         en: "Simulate horizontal scrolling",
-        sv: "Simulera v\xE5gr\xE4t skrollning"
+        sv: "Simulera v\xE5gr\xE4t skrollning",
+        ru: "\u0418\u043C\u0438\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u0433\u043E\u0440\u0438\u0437\u043E\u043D\u0442\u0430\u043B\u044C\u043D\u0443\u044E \u043F\u0440\u043E\u043A\u0440\u0443\u0442\u043A\u0443"
       },
       body: {
         en: "Only recommended for desktop devices",
         sv: "Rekommenderas endast f\xF6r desktop-enheter",
-        ru: "\u0418\u043C\u0438\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u0433\u043E\u0440\u0438\u0437\u043E\u043D\u0442\u0430\u043B\u044C\u043D\u0443\u044E \u043F\u0440\u043E\u043A\u0440\u0443\u0442\u043A\u0443"
+        ru: "\u0420\u0435\u043A\u043E\u043C\u0435\u043D\u0434\u0443\u0435\u0442\u0441\u044F \u0442\u043E\u043B\u044C\u043A\u043E \u0434\u043B\u044F \u043D\u0430\u0441\u0442\u043E\u043B\u044C\u043D\u044B\u0445 \u0443\u0441\u0442\u0440\u043E\u0439\u0441\u0442\u0432"
       }
     },
     credits: {
@@ -64564,31 +64632,47 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       ru: "\u041A\u0440\u0435\u0434\u0438\u0442\u044B"
     },
     view_credits: {
-      en: "View credits"
+      en: "View credits",
+      sv: "Visa erk\xE4nnanden",
+      ru: "\u041F\u043E\u0441\u043C\u043E\u0442\u0440\u0435\u0442\u044C \u043A\u0440\u0435\u0434\u0438\u0442\u044B"
     },
     credits_for_value: {
-      en: "Credits for {v}"
+      en: "Credits for {v}",
+      sv: "Erk\xE4nnanden f\xF6r {v}",
+      ru: "\u041A\u0440\u0435\u0434\u0438\u0442\u044B \u0434\u043B\u044F {v}"
     },
     branch: {
       name: {
-        en: "Choose branch"
+        en: "Choose branch",
+        sv: "V\xE4lj bransh",
+        ru: "\u0412\u044B\u0431\u0440\u0430\u0442\u044C \u0432\u0435\u0442\u043A\u0443"
       },
       body: {
-        en: "Default release branch is \u2018uwu\u2019, do not change unless you know what you\u2019re doing"
+        en: "Default release branch is \u2018uwu\u2019, do not change unless you know what you\u2019re doing",
+        sv: "Standardbranshen \xE4r \u2018uwu\u2019, \xE4ndra inte om du inte vet vad du g\xF6r",
+        ru: '\u0412\u0435\u0442\u043A\u0430 \u0432\u044B\u043F\u0443\u0441\u043A\u0430 \u043F\u043E \u0443\u043C\u043E\u043B\u0447\u0430\u043D\u0438\u044E - "uwu", \u043D\u0435 \u043C\u0435\u043D\u044F\u0439\u0442\u0435 \u0435\u0451, \u0435\u0441\u043B\u0438 \u0442\u043E\u0447\u043D\u043E \u043D\u0435 \u0437\u043D\u0430\u0435\u0442\u0435, \u0447\u0442\u043E \u0434\u0435\u043B\u0430\u0435\u0442\u0435'
       }
     },
     log_in: {
-      en: "Log in"
+      en: "Log in",
+      sv: "Logga in",
+      ru: "\u0412\u043E\u0439\u0442\u0438"
     },
     sign_up: {
-      en: "Sign up"
+      en: "Sign up",
+      sv: "Registrera",
+      ru: "\u0417\u0430\u0440\u0435\u0433\u0438\u0441\u0442\u0440\u0438\u0440\u043E\u0432\u0430\u0442\u044C\u0441\u044F"
     },
     plot: {
       name: {
-        en: "Plot"
+        en: "Plot",
+        sv: "Rita",
+        ru: "\u0413\u0440\u0430\u0444\u0438\u043A"
       },
       body: {
-        en: "Create graphs from user libraries"
+        en: "Create graphs from user libraries",
+        sv: "Skapa diagram fr\xE5n anv\xE4ndarbibliotek",
+        ru: "\u0421\u043E\u0437\u0434\u0430\u0442\u044C \u0433\u0440\u0430\u0444\u0438\u043A\u0438 \u0438\u0437 \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044C\u0441\u043A\u0438\u0445 \u0431\u0438\u0431\u043B\u0438\u043E\u0442\u0435\u043A"
       }
     },
     your_recent_30_days: {
