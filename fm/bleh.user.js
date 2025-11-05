@@ -51795,8 +51795,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       {
         id: "adaptive",
         name: tl2(trans.auto),
-        hide: !ff("adaptive_theme"),
-        new_release: true
+        hide: !ff("adaptive_theme")
       },
       {
         id: "glass",
@@ -65331,8 +65330,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     solarium: {
       default: true,
       title: trans.solarium.name,
-      body: trans.solarium.body,
-      new_release: true
+      body: trans.solarium.body
     },
     noise: {
       css: "noise-opacity",
@@ -65342,8 +65340,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       max: 1,
       step: 0.05,
       title: trans.noise.name,
-      body: trans.noise.body,
-      new_release: true
+      body: trans.noise.body
     },
     gloss: {
       css: "gloss",
@@ -65473,8 +65470,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     colourful_tracks_all: {
       default: false,
       type: "checkbox",
-      title: trans.colourful_all,
-      new_release: true
+      title: trans.colourful_all
     },
     feature_flags: {
       default: {},
@@ -65962,14 +65958,12 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       default: false,
       type: "checkbox",
       title: trans.romanise_jp,
-      new_release: true,
       incompatible: { format_guest_features: false, corrections: false }
     },
     romanise_ko: {
       default: false,
       type: "checkbox",
       title: trans.romanise_ko,
-      new_release: true,
       incompatible: { format_guest_features: false, corrections: false }
     },
     music_links: {
@@ -65988,7 +65982,6 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       type: "list",
       title: trans.music_links.name,
       body: trans.music_links.body,
-      new_release: true,
       predefined: true
     },
     inverse_compare: {

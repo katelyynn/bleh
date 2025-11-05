@@ -2899,8 +2899,7 @@ export function theme_bubbles(func = null) {
         {
             id: 'adaptive',
             name: tl(trans.auto),
-            hide: !ff('adaptive_theme'),
-            new_release: true
+            hide: !ff('adaptive_theme')
         },
         {
             id: 'glass',
