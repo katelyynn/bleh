@@ -55991,13 +55991,14 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       selected_index = index3;
       items_container.style.setProperty("--selected-index", index3);
       const album = albums[index3];
+      const formatted = name_includes(album.title, album.artist);
       render(item_details, html`
-            <a class="campfire-title" href="${root}music/${sanitise(album.artist)}/${sanitise(album.title)}" target="_blank">
-                ${album.corrected_title}
+            <a class="campfire-title smart-title" href="${root}music/${sanitise(album.artist)}/${sanitise(album.title)}" target="_blank">
+                ${settings.format_guest_features ? smart_title(formatted[0], formatted[1]) : album.corrected_title}
             </a>
-            <a class="campfire-artist" href="${root}music/${redirect()}${sanitise(album.artist)}" target="_blank">
-                ${album.corrected_artist}
-            </a>
+            <span class="campfire-artist">
+                ${settings.format_guest_features ? smart_artists(formatted[2], formatted[3]) : html.node`<a class="campfire-artist" href="${root}music/${redirect()}${sanitise(album.artist)}" target="_blank">${album.corrected_artist}</a>`}
+            </span>
             <div class="campfire-plays">
                 ${album.plays}
             </div>
