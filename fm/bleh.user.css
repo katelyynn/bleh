@@ -25769,6 +25769,16 @@
             &.play-this-track-playlink--disabled {
                 opacity: 0.65 !important;
             }
+
+            &[data-host-unknown="true"] {
+                &:before {
+                    mask-image: none !important;
+                    -webkit-mask-image: none !important;
+                    background-image: var(--favi) !important;
+                    background-size: 100% !important;
+                    border-radius: var(--item-small-radius) !important;
+                }
+            }
         }
     }
     .music-small-header {
