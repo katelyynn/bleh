@@ -328,7 +328,7 @@ function finish_update() {
     set_storage('bleh_update_required', 'false');
     set_storage('bleh_update_checked', new Date().toString());
 
-    fetch_new_style(false, true, true);
+    force_refresh_style();
 }
 
 export function force_refresh_style() {

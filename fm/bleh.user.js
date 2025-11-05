@@ -49012,7 +49012,7 @@
     });
     set_storage("bleh_update_required", "false");
     set_storage("bleh_update_checked", (/* @__PURE__ */ new Date()).toString());
-    fetch_new_style(false, true, true);
+    force_refresh_style();
   }
   function force_refresh_style() {
     localStorage.removeItem("bleh_cached_style");
