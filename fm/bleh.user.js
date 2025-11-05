@@ -55718,28 +55718,53 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     log(`hour ${hour} time ${time2}`, "time");
     let welcome;
     if (auth.name) {
+      let avatar2;
       welcome = html.node`
-            <div class="top-banner home-banner">
-                <div class="avatar">
-                    <img src=${auth.avatar.replace("/avatar42s/", "/avatar170s/")} alt=${tl2(trans.your_avatar)}>
-                    ${auth.sponsor ? html.node`
-                    <span class="avatar-status-dot user-status--bleh-sponsor"></span>
-                    ` : ""}
+            <section class="redesigned-header redesigned-profile-header no-background">
+                <div class="avatar-side">
+                    <div class="avatar" onclick=${() => {
+        expand_avatar(auth.avatar.replace("/avatar42s/", "/ar0/"));
+      }}>
+                        <img src=${auth.avatar.replace("/avatar42s/", "/avatar170s/")} alt=${tl2(trans.your_avatar)}>
+                    </div>
                 </div>
-                <h1>${{ html: tl2(trans[`good_${time2}_user`]).replace("{user}", `<a class="mention" href="${root}user/${auth.name}">@${auth.name}</a>`) }}</h1>
-            </div>
+                <div class="info-side has-main-info">
+                    <div class="main-info">
+                        <div class="greeting">
+                            ${tl2(trans[`good_${time2}_user`])}
+                        </div>
+                        <div class="title-container">
+                            <div class="header-title-label-wrap">
+                                <h1 class="header-title">
+                                    <a class="profile-name" data-font=${cache2.font} data-font-style=${cache2.font_style}>${cache2.username ? cache2.username : auth.name}</a>
+                                </h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         `;
     } else {
       welcome = html.node`
-            <div class="top-banner home-banner">
-                <div class="avatar">
-                    <img class="missing-avatar" alt=${tl2(trans.your_avatar)}>
-                    ${auth.sponsor ? html.node`
-                    <span class="avatar-status-dot user-status--bleh-sponsor"></span>
-                    ` : ""}
+            <section class="redesigned-header redesigned-profile-header no-background">
+                <div class="avatar-side">
+                    <div class="avatar">
+                        <img class="missing-avatar" alt=${tl2(trans.your_avatar)}>
+                    </div>
                 </div>
-                <h1>${tl2(trans.not_logged_in)}</h1>
-            </div>
+                <div class="info-side has-main-info">
+                    <div class="main-info">
+                        <div class="greeting">
+                            ${tl2(trans[`good_${time2}_user`])}
+                        </div>
+                        <div class="title-container">
+                            <div class="header-title-label-wrap">
+                                <h1>${tl2(trans.not_logged_in)}</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         `;
     }
     page.structure.container.insertBefore(welcome, page.structure.container.firstElementChild);
@@ -59447,32 +59472,32 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     // TODO(stel): is my capitalisation correct here at all lol ; yes cutie, well done <3
     good_morning_user: {
-      en: "Good morning, {user}",
-      de: "Guten Morgen, {user}",
-      pt: "Bom dia, {user}",
-      sv: "God morgon, {user}",
-      ru: "\u0414\u043E\u0431\u0440\u043E\u0435 \u0443\u0442\u0440\u043E, {user}"
+      en: "Good morning",
+      de: "Guten Morgen",
+      pt: "Bom dia",
+      sv: "God morgon",
+      ru: "\u0414\u043E\u0431\u0440\u043E\u0435 \u0443\u0442\u0440\u043E"
     },
     good_afternoon_user: {
-      en: "Good afternoon, {user}",
-      de: "Guten Nachmittag, {user}",
-      pt: "Boa tarde, {user}",
-      sv: "God eftermiddag, {user}",
-      ru: "\u0414\u043E\u0431\u0440\u044B\u0439 \u0434\u0435\u043D\u044C, {user}"
+      en: "Good afternoon",
+      de: "Guten Nachmittag",
+      pt: "Boa tarde",
+      sv: "God eftermiddag",
+      ru: "\u0414\u043E\u0431\u0440\u044B\u0439 \u0434\u0435\u043D\u044C"
     },
     good_evening_user: {
-      en: "Good evening, {user}",
-      de: "Guten Abend, {user}",
-      pt: "Boa noite, {user}",
-      sv: "God kv\xE4ll, {user}",
-      ru: "\u0414\u043E\u0431\u0440\u044B\u0439 \u0432\u0435\u0447\u0435\u0440, {user}"
+      en: "Good evening",
+      de: "Guten Abend",
+      pt: "Boa noite",
+      sv: "God kv\xE4ll",
+      ru: "\u0414\u043E\u0431\u0440\u044B\u0439 \u0432\u0435\u0447\u0435\u0440"
     },
     good_night_user: {
-      en: "Goodnight, {user}",
-      de: "Gute Nacht, {user}",
-      pt: "Boa noite, {user}",
-      sv: "God natt, {user}",
-      ru: "\u0421\u043F\u043E\u043A\u043E\u0439\u043D\u043E\u0439 \u043D\u043E\u0447\u0438, {user}"
+      en: "Goodnight",
+      de: "Gute Nacht",
+      pt: "Boa noite",
+      sv: "God natt",
+      ru: "\u0421\u043F\u043E\u043A\u043E\u0439\u043D\u043E\u0439 \u043D\u043E\u0447\u0438"
     },
     bleh_settings: {
       en: "bleh Settings",

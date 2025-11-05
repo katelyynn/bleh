@@ -1443,32 +1443,32 @@ export const trans = {
     },
     // TODO(stel): is my capitalisation correct here at all lol ; yes cutie, well done <3
     good_morning_user: {
-        en: 'Good morning, {user}',
-        de: 'Guten Morgen, {user}',
-        pt: 'Bom dia, {user}',
-        sv: 'God morgon, {user}',
-        ru: 'Доброе утро, {user}'
+        en: 'Good morning',
+        de: 'Guten Morgen',
+        pt: 'Bom dia',
+        sv: 'God morgon',
+        ru: 'Доброе утро'
     },
     good_afternoon_user: {
-        en: 'Good afternoon, {user}',
-        de: 'Guten Nachmittag, {user}',
-        pt: 'Boa tarde, {user}',
-        sv: 'God eftermiddag, {user}',
-        ru: 'Добрый день, {user}'
+        en: 'Good afternoon',
+        de: 'Guten Nachmittag',
+        pt: 'Boa tarde',
+        sv: 'God eftermiddag',
+        ru: 'Добрый день'
     },
     good_evening_user: {
-        en: 'Good evening, {user}',
-        de: 'Guten Abend, {user}',
-        pt: 'Boa noite, {user}',
-        sv: 'God kväll, {user}',
-        ru: 'Добрый вечер, {user}'
+        en: 'Good evening',
+        de: 'Guten Abend',
+        pt: 'Boa noite',
+        sv: 'God kväll',
+        ru: 'Добрый вечер'
     },
     good_night_user: {
-        en: 'Goodnight, {user}',
-        de: 'Gute Nacht, {user}',
-        pt: 'Boa noite, {user}',
-        sv: 'God natt, {user}',
-        ru: 'Спокойной ночи, {user}'
+        en: 'Goodnight',
+        de: 'Gute Nacht',
+        pt: 'Boa noite',
+        sv: 'God natt',
+        ru: 'Спокойной ночи'
     },
     bleh_settings: {
         en: 'bleh Settings',

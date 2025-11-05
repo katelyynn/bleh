@@ -19,6 +19,7 @@ import { correct_artist, correct_item_by_artist, name_includes, smart_artists, s
 import { romanise, sanitise } from "../build/tools.js";
 import { redirect } from "../components/music.js";
 import { settings } from "../build/config.js";
+import { expand_avatar } from "../avatar.js";
 
 export async function bleh_home() {
     page.structure.container = document.body.querySelector('.page-content');
@@ -66,28 +67,53 @@ export async function bleh_home() {
 
     let welcome;
     if (auth.name) {
+        let avatar;
         welcome = html.node`
-            <div class="top-banner home-banner">
-                <div class="avatar">
-                    <img src=${auth.avatar.replace('/avatar42s/', '/avatar170s/')} alt=${tl(trans.your_avatar)}>
-                    ${(auth.sponsor) ? html.node`
-                    <span class="avatar-status-dot user-status--bleh-sponsor"></span>
-                    ` : ''}
+            <section class="redesigned-header redesigned-profile-header no-background">
+                <div class="avatar-side">
+                    <div class="avatar" onclick=${() => {
+                        expand_avatar(auth.avatar.replace('/avatar42s/', '/ar0/'));
+                    }}>
+                        <img src=${auth.avatar.replace('/avatar42s/', '/avatar170s/')} alt=${tl(trans.your_avatar)}>
+                    </div>
                 </div>
-                <h1>${{html: tl(trans[`good_${time}_user`]).replace('{user}', `<a class="mention" href="${root}user/${auth.name}">@${auth.name}</a>`)}}</h1>
-            </div>
+                <div class="info-side has-main-info">
+                    <div class="main-info">
+                        <div class="greeting">
+                            ${tl(trans[`good_${time}_user`])}
+                        </div>
+                        <div class="title-container">
+                            <div class="header-title-label-wrap">
+                                <h1 class="header-title">
+                                    <a class="profile-name" data-font=${cache.font} data-font-style=${cache.font_style}>${cache.username ? cache.username : auth.name}</a>
+                                </h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         `;
     } else {
         welcome = html.node`
-            <div class="top-banner home-banner">
-                <div class="avatar">
-                    <img class="missing-avatar" alt=${tl(trans.your_avatar)}>
-                    ${(auth.sponsor) ? html.node`
-                    <span class="avatar-status-dot user-status--bleh-sponsor"></span>
-                    ` : ''}
+            <section class="redesigned-header redesigned-profile-header no-background">
+                <div class="avatar-side">
+                    <div class="avatar">
+                        <img class="missing-avatar" alt=${tl(trans.your_avatar)}>
+                    </div>
                 </div>
-                <h1>${tl(trans.not_logged_in)}</h1>
-            </div>
+                <div class="info-side has-main-info">
+                    <div class="main-info">
+                        <div class="greeting">
+                            ${tl(trans[`good_${time}_user`])}
+                        </div>
+                        <div class="title-container">
+                            <div class="header-title-label-wrap">
+                                <h1>${tl(trans.not_logged_in)}</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         `;
     }
 

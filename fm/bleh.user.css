@@ -29091,4 +29091,11 @@
             }
         }
     }
+
+    .greeting {
+        font-size: 16px;
+        line-height: 20px;
+        cursor: default;
+        font-weight: var(--font-weight-medium);
+    }
 }
