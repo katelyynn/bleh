@@ -38,7 +38,7 @@ export let lang_info = {
     sv: {
         name: 'Svenska',
         by: ['Lrexie'],
-        last_updated: '2025-09-30'
+        last_updated: '2025-11-05'
     },
     ru: {
         name: 'Русский',
@@ -3097,46 +3097,56 @@ export const trans = {
     track_layout: {
         name: {
             en: 'Track layout',
+            sv: 'Låtlayout',
             ru: 'Расположение трека'
         },
         body: {
             en: 'Choose which axis to display track information on',
+            sv: 'Välj vilken axis att visa låtinformation på',
             ru: 'Выберите ось, на которой отображать информацию о треке'
         },
         column: {
             en: 'Place title and artist vertically',
+            sv: 'Placera titel och artist lodrätt',
             ru: 'Разместить название и исполнителя вертикально'
         },
         row: {
             en: 'Place title and artist horizontally',
+            sv: 'Placera titel och artist vågrätt',
             ru: 'Разместить название и исполнителя горизонтально'
         }
     },
     track_album_name_location: {
         name: {
             en: 'Album name location',
+            sv: 'Albumtitelsplats',
             ru: 'Расположение названия альбома'
         },
         body: {
             en: 'Choose which axis to display said album name on',
+            sv: 'Välj vilken axis att visa albumtitel på',
             ru: 'Выберите ось, на которой отображать название альбома'
         },
         column: {
             en: 'Place below title and artist',
+            sv: 'Placera under låttitel och artist',
             ru: 'Разместить под названием и исполнителем'
         },
         row: {
             en: 'Place to the side of title and artist',
+            sv: 'Placera bredvid låttitel och artist',
             ru: 'Разместить рядом с названием и исполнителем'
         }
     },
     expand_tracks: {
         name: {
             en: 'Show associated album for tracks',
+            sv: 'Visa associerade album för låtar',
             ru: 'Показывать связанный альбом для треков'
         },
         body: {
             en: 'Places the track’s associated album name if there’s room',
+            sv: 'Placerar låtens associerade album om det finns plats',
             ru: 'Отображает название связанного альбома трека, если есть место'
         }
     },
@@ -3244,10 +3254,12 @@ export const trans = {
     display_name: {
         name: {
             en: 'Display name',
+            sv: 'Visningsnamn',
             ru: 'Отображаемое имя'
         },
         body: {
             en: 'Changes your name on your profile, with your real @username shown below',
+            sv: 'Ändrar namnet på din profil och lägger ditt riktiga @användarnamn underåt',
             ru: 'Изменяет ваше имя в профиле, при этом ваш реальный @никнейм отображается ниже'
         }
     },
@@ -3393,6 +3405,7 @@ export const trans = {
     },
     redirected_from: {
         en: 'Redirected from',
+        sv: 'Omdirigerades från',
         ru: 'Перенаправлено с'
     },
     music_corrections: {
@@ -3718,7 +3731,7 @@ export const trans = {
             en: 'Font choice',
             de: 'Schriftartauswahl',
             pt: 'Escolha de fonte',
-            sv: 'Typsnitts',
+            sv: 'Typsnitt',
             ru: 'Выбор шрифта'
         },
         body: {
@@ -3731,17 +3744,21 @@ export const trans = {
     },
     font_style: {
         en: 'Font style',
+        sv: 'Typsnittsstil',
         ru: 'Стиль шрифта',
         solid: {
             en: 'Solid',
+            sv: 'Fast',
             ru: 'Сплошной'
         },
         pop: {
             en: 'Pop',
+            sv: 'Poppande',
             ru: 'Яркий' 
         },
         glow: {
             en: 'Glow',
+            sv: 'Glödande',
             ru: 'Свечение'
         }
     },
@@ -3820,6 +3837,7 @@ export const trans = {
         // not sure by what was meant by "fitting for your language"
         // but i used a sentence that has all letters on rus language, like an english example
         en: 'The quick brown fox jumps over the lazy dog 🏳️‍⚧️',
+        sv: 'Flygande bäckasiner söka hwila på mjuka tuvor qxz 🏳️‍⚧️',
         ru: 'Съешь ещё этих мягких французских булок, да выпей чаю 🏳️‍⚧️'
     },
     enter_font_names: {
@@ -4112,10 +4130,12 @@ export const trans = {
     },
     applications: {
         en: 'Applications',
+        sv: 'Applikationer',
         ru: 'Приложения'
     },
     applications_intro: {
         en: 'Connect your account to third-party services for a better scrobbling experience. Make sure you trust the services below.',
+        sv: 'Anslut ditt konto till tredjepartstjänster för bättre skrobblingsupplevelse. Var säker på att du litar på nedre tjänster',
         ru: 'Подключите свой аккаунт к сторонним сервисам для лучшего скробблинга. Убедитесь, что вы доверяете указанным ниже сервисам.'
     },
     connect_app: {
@@ -4134,6 +4154,7 @@ export const trans = {
     },
     suggested: {
         en: 'Suggested',
+        sv: 'Föreslaget',
         ru: 'Предложенные'
     },
     connected: {
@@ -4284,6 +4305,7 @@ export const trans = {
     own_plays: {
         // tracklist source menu option that enables the thing below
         en: 'Own plays',
+        sv: 'Egna spelningar',
         ru: 'Собственные прослушивания'
     },
     sourced_from_own_plays: {
@@ -4631,10 +4653,12 @@ export const trans = {
     display_name_styles: {
         name: {
             en: 'Show display name styles',
+            sv: 'Se visningsnamnsstiler',
             ru: 'Показывать стили отображаемого имени'
         },
         body: {
             en: 'Sponsors can choose a custom font and shadow style for their profile name',
+            sv: 'Sponsorer kan välja valfri typsnitt och skugga för deras profilnamn',
             ru: 'Спонсоры могут выбирать собственный шрифт и стиль тени для имени в своем профиле'
         }
     },
@@ -4697,6 +4721,7 @@ export const trans = {
     },
     no_title: {
         en: 'No title',
+        sv: 'Ingen titel',
         ru: 'Без названия'
     },
     description: {
@@ -4707,6 +4732,7 @@ export const trans = {
     },
     no_description: {
         en: 'No description',
+        sv: 'Ingen beskrivning',
         ru: 'Без описания'
     },
     change_avatar: {
@@ -4847,7 +4873,7 @@ export const trans = {
         en: 'Redirected to bleh’s built-in Collage feature',
         de: 'Weiterleitung zur integrierten Collagenfunktion von bleh',
         pt: 'Redirecionando ao recurso integrado de Colagem do bleh',
-        sv: 'Omredigerad till blehs egna collagefunktion',
+        sv: 'Omdirigerad till blehs egna collagefunktion',
         ru: 'Перенаправлено на встроенную функцию Коллажа bleh'
     },
     your_collage_is_ready: {
@@ -5978,6 +6004,7 @@ export const trans = {
     lyrics: {
         // lyrics
         en: 'Lyrics',
+        sv: 'Lyrics',
         ru: 'Тексты песен',
         name: {
             // the game
@@ -6562,37 +6589,45 @@ export const trans = {
     },
     view_credits: {
         en: 'View credits',
+        sv: 'Visa erkännanden',
         ru: 'Посмотреть кредиты'
     },
     credits_for_value: {
         en: 'Credits for {v}',
+        sv: 'Erkännanden för {v}',
         ru: 'Кредиты для {v}'
     },
     branch: {
         name: {
             en: 'Choose branch',
+            sv: 'Välj bransh',
             ru: 'Выбрать ветку'
         },
         body: {
             en: 'Default release branch is ‘uwu’, do not change unless you know what you’re doing',
+            sv: 'Standardbranshen är ‘uwu’, ändra inte om du inte vet vad du gör',
             ru: 'Ветка выпуска по умолчанию - "uwu", не меняйте её, если точно не знаете, что делаете'
         }
     },
     log_in: {
         en: 'Log in',
+        sv: 'Logga in',
         ru: 'Войти'
     },
     sign_up: {
         en: 'Sign up',
+        sv: 'Registrera',
         ru: 'Зарегистрироваться'
     },
     plot: {
         name: {
             en: 'Plot',
+            sv: 'Rita',
             ru: 'График'
         },
         body: {
             en: 'Create graphs from user libraries',
+            sv: 'Skapa diagram från användarbibliotek'
             ru: 'Создать графики из пользовательских библиотек'
         }
     }
