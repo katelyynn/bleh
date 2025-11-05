@@ -85,7 +85,7 @@ export async function bleh_home() {
                         <div class="title-container">
                             <div class="header-title-label-wrap">
                                 <h1 class="header-title">
-                                    <a class="profile-name" data-font=${cache.font} data-font-style=${cache.font_style}>${cache.username ? cache.username : auth.name}</a>
+                                    <a class="profile-name" href="${root}user/${auth.name}" data-font=${cache.font} data-font-style=${cache.font_style}>${cache.username ? cache.username : auth.name}</a>
                                 </h1>
                             </div>
                         </div>
@@ -323,6 +323,9 @@ function campfire() {
 
     const container = html.node`
         <div class="campfire">
+            <div class="campfire-intro">
+                <h2 class="music-section-heading">${tl(trans.your_recent_30_days)}</h2>
+            </div>
             <div class="campfire-items" ref=${el => items_container = el} />
             <div class="campfire-details" ref=${el => item_details = el} />
             <div class="campfire-bg current" ref=${el => current_bg = el} />
@@ -382,7 +385,9 @@ function campfire() {
             render(items_container, html`
                 ${albums.map((album, index) => {
                     const elem = html.node`
-                        <div class="campfire-item" style="--index: ${index}">
+                        <div class="campfire-item" style="--index: ${index}" onclick=${() => {
+                            if (selected_index != index) set_index(index);
+                        }}>
                             <div class="campfire-item-cover">
                                 <img src=${album.image} alt=${album.corrected_title} />
                             </div>

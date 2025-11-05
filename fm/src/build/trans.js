@@ -6546,6 +6546,9 @@ export const trans = {
         body: {
             en: 'Create graphs from user libraries'
         }
+    },
+    your_recent_30_days: {
+        en: 'Your recent 30 days'
     }
 };
 

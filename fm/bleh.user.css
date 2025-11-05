@@ -28923,8 +28923,8 @@
 
     .campfire {
         --w: 380px;
-        --gap: 10px;
-        padding: 90px 0;
+        --gap: 5px;
+        padding: 60px 0;
         overflow: hidden;
 
         display: flex;
@@ -28938,6 +28938,18 @@
         border-top-right-radius: var(--card-radius);
 
         position: relative;
+
+        @media (max-width: 900px) {
+            --w: 340px;
+        }
+
+        @media (max-width: 760px) {
+            --w: 260px;
+        }
+
+        @media (max-width: 600px) {
+            --w: 230px;
+        }
 
         & > .campfire-bg {
             &.previous {
@@ -28987,6 +28999,8 @@
                     & > img {
                         width: 100%;
                         --mask-size: var(--cover-size-400);
+                        user-select: none;
+                        -webkit-user-drag: none;
                     }
 
                     &:before {
@@ -29021,12 +29035,18 @@
                     opacity: 0.6;
                     filter: blur(4px) brightness(60%);
                     transform: var(--offset) scale(0.8);
+
+                    cursor: pointer;
                 }
 
                 transition-property: transform, opacity, filter;
                 transition-duration: 0.5s;
                 transition-timing-function: var(--trans-function);
             }
+        }
+
+        & > .campfire-intro {
+            z-index: 11;
         }
 
         & > .campfire-details {

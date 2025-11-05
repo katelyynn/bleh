@@ -55736,7 +55736,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                         <div class="title-container">
                             <div class="header-title-label-wrap">
                                 <h1 class="header-title">
-                                    <a class="profile-name" data-font=${cache2.font} data-font-style=${cache2.font_style}>${cache2.username ? cache2.username : auth.name}</a>
+                                    <a class="profile-name" href="${root}user/${auth.name}" data-font=${cache2.font} data-font-style=${cache2.font_style}>${cache2.username ? cache2.username : auth.name}</a>
                                 </h1>
                             </div>
                         </div>
@@ -55951,6 +55951,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     let previous_bg;
     const container = html.node`
         <div class="campfire">
+            <div class="campfire-intro">
+                <h2 class="music-section-heading">${tl2(trans.your_recent_30_days)}</h2>
+            </div>
             <div class="campfire-items" ref=${(el) => items_container = el} />
             <div class="campfire-details" ref=${(el) => item_details = el} />
             <div class="campfire-bg current" ref=${(el) => current_bg = el} />
@@ -55996,7 +55999,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       render(items_container, html`
                 ${albums.map((album, index3) => {
         const elem = html.node`
-                        <div class="campfire-item" style="--index: ${index3}">
+                        <div class="campfire-item" style="--index: ${index3}" onclick=${() => {
+          if (selected_index != index3) set_index(index3);
+        }}>
                             <div class="campfire-item-cover">
                                 <img src=${album.image} alt=${album.corrected_title} />
                             </div>
@@ -64585,6 +64590,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       body: {
         en: "Create graphs from user libraries"
       }
+    },
+    your_recent_30_days: {
+      en: "Your recent 30 days"
     }
   };
   function tl2(key, replacements = {}) {
