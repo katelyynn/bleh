@@ -349,6 +349,11 @@
             "default": true,
             "name": "Unlock profile name fonts for sponsors",
             "date": "2025-10-31"
+        },
+        "campfire": {
+            "default": false,
+            "name": "New home experience",
+            "date": "2025-11-05"
         }
     }
 }

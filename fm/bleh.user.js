@@ -55832,69 +55832,73 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       });
     }
     if (page.subpage == "music" && auth.name) {
-      let toolbar = html.node`
-            <div class="toolbar">
-                <nav class="navlist secondary-nav navlist--more redesigned-navigation">
-                    <ul class="navlist-items">
-                        <li class="navlist-item secondary-nav-item">
-                            <a href="${root}user/${auth.name}" data-type="mention" class="secondary-nav-item-link">
-                                ${tl2(trans.profile)}
-                            </a>
-                        </li>
-                        <li class="navlist-item secondary-nav-item">
-                            <a href="${root}user/${auth.name}/library" data-type="library" class="secondary-nav-item-link">
-                                ${tl2(trans.library)}
-                            </a>
-                        </li>
-                        <li class="navlist-item secondary-nav-item">
-                            <a href="${root}user/${auth.name}/following" data-type="profile" class="secondary-nav-item-link">
-                                ${tl2(trans.friends)}
-                            </a>
-                        </li>
-                        <li class="navlist-item secondary-nav-item">
-                            <a href="${root}user/${auth.name}/shoutbox" data-type="shouts" class="secondary-nav-item-link">
-                                ${tl2(trans.shouts)}
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        `;
-      page.structure.row.insertBefore(toolbar, page.structure.content);
-      let track_list;
-      page.structure.row.insertBefore(html.node`
-            <div class="content override">
-                <div class="col-main" ref=${(el) => page.structure.main = el}>
-                    <section>
-                        <h2>${tl2(trans.recent_tracks)}</h2>
-                        <div class="recent-listening-container" ref=${(el) => track_list = el}>
-                            <div class="loading-data-container">
-                                <p class="loading-data-text">${tl2(trans.finding_your_tracks)}</p>
+      if (ff("campfire")) {
+        campfire();
+      } else {
+        let toolbar = html.node`
+                <div class="toolbar">
+                    <nav class="navlist secondary-nav navlist--more redesigned-navigation">
+                        <ul class="navlist-items">
+                            <li class="navlist-item secondary-nav-item">
+                                <a href="${root}user/${auth.name}" data-type="mention" class="secondary-nav-item-link">
+                                    ${tl2(trans.profile)}
+                                </a>
+                            </li>
+                            <li class="navlist-item secondary-nav-item">
+                                <a href="${root}user/${auth.name}/library" data-type="library" class="secondary-nav-item-link">
+                                    ${tl2(trans.library)}
+                                </a>
+                            </li>
+                            <li class="navlist-item secondary-nav-item">
+                                <a href="${root}user/${auth.name}/following" data-type="profile" class="secondary-nav-item-link">
+                                    ${tl2(trans.friends)}
+                                </a>
+                            </li>
+                            <li class="navlist-item secondary-nav-item">
+                                <a href="${root}user/${auth.name}/shoutbox" data-type="shouts" class="secondary-nav-item-link">
+                                    ${tl2(trans.shouts)}
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            `;
+        page.structure.row.insertBefore(toolbar, page.structure.content);
+        let track_list;
+        page.structure.row.insertBefore(html.node`
+                <div class="content override">
+                    <div class="col-main" ref=${(el) => page.structure.main = el}>
+                        <section>
+                            <h2>${tl2(trans.recent_tracks)}</h2>
+                            <div class="recent-listening-container" ref=${(el) => track_list = el}>
+                                <div class="loading-data-container">
+                                    <p class="loading-data-text">${tl2(trans.finding_your_tracks)}</p>
+                                </div>
                             </div>
-                        </div>
-                    </section>
+                        </section>
+                    </div>
+                    <div class="col-sidebar" ref=${(el) => page.structure.side = el}>
+                        <section>
+                            <h2>${tl2(trans.activity)}</h2>
+                            ${render_activity_list()}
+                            <div class="more-link">
+                                <a href="${root}bleh/profile?setting=activities">${tl2(trans.activity_settings)}</a>
+                            </div>
+                        </section>
+                    </div>
                 </div>
-                <div class="col-sidebar" ref=${(el) => page.structure.side = el}>
-                    <section>
-                        <h2>${tl2(trans.activity)}</h2>
-                        ${render_activity_list()}
-                        <div class="more-link">
-                            <a href="${root}bleh/profile?setting=activities">${tl2(trans.activity_settings)}</a>
-                        </div>
-                    </section>
-                </div>
-            </div>
-        `, page.structure.content);
-      fetch(`${root}user/${auth.name}/partial/recenttracks?ajax=1`).then(function(response) {
-        console.log("returned", response, response.text);
-        return response.text();
-      }).then(function(html3) {
-        let doc = new DOMParser().parseFromString(html3, "text/html");
-        console.log("DOC", doc);
-        let tracklist_panel = doc.querySelector(".chartlist");
-        if (tracklist_panel)
-          track_list.outerHTML = tracklist_panel.outerHTML;
-      });
+            `, page.structure.content);
+        fetch(`${root}user/${auth.name}/partial/recenttracks?ajax=1`).then(function(response) {
+          console.log("returned", response, response.text);
+          return response.text();
+        }).then(function(html3) {
+          let doc = new DOMParser().parseFromString(html3, "text/html");
+          console.log("DOC", doc);
+          let tracklist_panel = doc.querySelector(".chartlist");
+          if (tracklist_panel)
+            track_list.outerHTML = tracklist_panel.outerHTML;
+        });
+      }
     } else if (page.type == "releases") {
       let content2 = page.structure.main.querySelectorAll(":scope > *");
       let panel = html.node`
@@ -55911,6 +55915,94 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     if (!main_content) return;
     render(main_content, html``);
     window.location.href = `${root}music`;
+  }
+  function campfire() {
+    let selected_index = 0;
+    let max_index = 0;
+    let items_container;
+    let item_details;
+    let current_bg;
+    let previous_bg;
+    const container = html.node`
+        <div class="campfire">
+            <div class="campfire-items" ref=${(el) => items_container = el} />
+            <div class="campfire-details" ref=${(el) => item_details = el} />
+            <div class="campfire-bg current" ref=${(el) => current_bg = el} />
+            <div class="campfire-bg previous" ref=${(el) => previous_bg = el} />
+        </div>
+    `;
+    page.structure.row.insertBefore(container, page.structure.content);
+    let albums = [];
+    let album_elements = [];
+    fetch(`${root}user/${auth.name}/partial/albums?albums_date_preset=LAST_30_DAYS&ajax=1`).then(function(response) {
+      console.log("returned", response, response.text);
+      return response.text();
+    }).then(function(dom) {
+      let doc = new DOMParser().parseFromString(dom, "text/html");
+      console.log("DOC", doc);
+      const items = doc.querySelectorAll(".grid-items > .grid-items-item");
+      items.forEach((item) => {
+        const image = item.querySelector(".grid-items-cover-image-image img").src;
+        const title = item.querySelector(".grid-items-item-main-text a").textContent;
+        const artist = item.querySelector(".grid-items-item-aux-block").textContent;
+        const plays = item.querySelector(".grid-items-item-aux-text a:last-child").textContent.trim();
+        albums.push({
+          image,
+          title,
+          artist,
+          plays,
+          corrected_title: romanise(correct_item_by_artist(title, artist)),
+          corrected_artist: romanise(correct_artist(artist))
+        });
+      });
+      max_index = albums.length - 1;
+      render(items_container, html`
+                ${albums.map((album, index3) => {
+        const elem = html.node`
+                        <div class="campfire-item" style="--index: ${index3}">
+                            <div class="campfire-item-cover">
+                                <img src=${album.image} alt=${album.corrected_title} />
+                            </div>
+                        </div>
+                    `;
+        album_elements.push(elem);
+        return elem;
+      })}
+            `);
+      let timeout;
+      container.addEventListener("wheel", (e) => {
+        e.preventDefault();
+        if (timeout) return;
+        timeout = setTimeout(() => {
+          timeout = null;
+        }, 0.2);
+        const direction = Math.sign(e.deltaY);
+        if (direction == 0) return;
+        set_index(selected_index + direction);
+      }, { passive: false });
+      set_index(selected_index);
+    });
+    function set_index(index3) {
+      if (index3 > max_index) index3 = 0;
+      else if (index3 < 0) index3 = max_index;
+      album_elements.forEach((album2, album_index) => {
+        album2.setAttribute("aria-checked", album_index == index3);
+      });
+      selected_index = index3;
+      items_container.style.setProperty("--selected-index", index3);
+      const album = albums[index3];
+      render(item_details, html`
+            <a class="campfire-title" href="${root}music/${sanitise(album.artist)}/${sanitise(album.title)}" target="_blank">
+                ${album.corrected_title}
+            </a>
+            <a class="campfire-artist" href="${root}music/${redirect()}${sanitise(album.artist)}" target="_blank">
+                ${album.corrected_artist}
+            </a>
+            <div class="campfire-plays">
+                ${album.plays}
+            </div>
+        `);
+    }
   }
 
   // src/pages/event.js
@@ -66203,6 +66295,11 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         default: true,
         name: "Unlock profile name fonts for sponsors",
         date: "2025-10-31"
+      },
+      campfire: {
+        default: false,
+        name: "New home experience",
+        date: "2025-11-05"
       }
     }
   };
