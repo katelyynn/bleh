@@ -607,8 +607,8 @@ export let includes = {
         '(digital deluxe',
         '[digital deluxe',
         'd.l.x.', // https://www.last.fm/music/taylor+swift/1989+d.l.x.
-        'deluxe edition', // added edition to the end because 'deluxe' can have some false positives
-        'deluxe version', // same as above
+        ' deluxe edition', // added edition to the end because 'deluxe' can have some false positives
+        ' deluxe version', // same as above
         '- complete edition',
         '(complete edition',
         '[complete edition',
