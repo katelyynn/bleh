@@ -28435,6 +28435,8 @@
 
     [data-font="uni"] {
         --custom-font: 'UnifrakturCook', var(--font);
+        --custom-font-size-multiplier: 1.2;
+        --custom-font-align: -1px;
     }
     [data-font="lilita"] {
         --custom-font: 'Lilita One', var(--font);

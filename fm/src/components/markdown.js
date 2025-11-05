@@ -393,7 +393,8 @@ export function markdown(
         'music.youtube.com': 'YouTube Music',
         'facebook.com': 'Facebook',
         'www.discogs.com': 'Discogs',
-        'discogs.com': 'Discogs'
+        'discogs.com': 'Discogs',
+        'tidal.com': 'Tidal'
     };
 
     if (links.length > 0) {
