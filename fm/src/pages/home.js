@@ -288,6 +288,7 @@ export function bleh_home_legacy() {
 
 function campfire() {
     let selected_index = 0;
+    let previous_index = 0;
     let max_index = 0;
     let items_container;
     let item_details;
@@ -326,7 +327,7 @@ function campfire() {
                 const plays = item.querySelector('.grid-items-item-aux-text a:last-child').textContent.trim();
 
                 albums.push({
-                    image,
+                    image: image.replace('/avatar300s/', '/500x500/'),
                     title,
                     artist,
                     plays,
@@ -378,10 +379,13 @@ function campfire() {
             album.setAttribute('aria-checked', album_index == index);
         });
 
+        previous_index = selected_index;
         selected_index = index;
         items_container.style.setProperty('--selected-index', index);
 
         const album = albums[index];
+
+        current_bg.style.setProperty('background-image', `url(${album.image})`);
 
         const formatted = name_includes(album.title, album.artist);
 

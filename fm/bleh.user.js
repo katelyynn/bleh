@@ -55918,6 +55918,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
   }
   function campfire() {
     let selected_index = 0;
+    let previous_index = 0;
     let max_index = 0;
     let items_container;
     let item_details;
@@ -55947,7 +55948,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         const artist = item.querySelector(".grid-items-item-aux-block").textContent;
         const plays = item.querySelector(".grid-items-item-aux-text a:last-child").textContent.trim();
         albums.push({
-          image,
+          image: image.replace("/avatar300s/", "/500x500/"),
           title,
           artist,
           plays,
@@ -55988,9 +55989,11 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       album_elements.forEach((album2, album_index) => {
         album2.setAttribute("aria-checked", album_index == index3);
       });
+      previous_index = selected_index;
       selected_index = index3;
       items_container.style.setProperty("--selected-index", index3);
       const album = albums[index3];
+      current_bg.style.setProperty("background-image", `url(${album.image})`);
       const formatted = name_includes(album.title, album.artist);
       render(item_details, html`
             <a class="campfire-title smart-title" href="${root}music/${sanitise(album.artist)}/${sanitise(album.title)}" target="_blank">

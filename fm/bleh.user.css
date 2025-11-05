@@ -28963,12 +28963,26 @@
         }
 
         & > .campfire-bg {
-            display: none;
+            &.previous {
+                display: none;
+            }
+
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+
+            --mask: radial-gradient(at center, white, transparent);
+            mask-image: var(--mask);
+            -webkit-mask-image: var(--mask);
+            filter: blur(10px);
+            opacity: 0.3;
         }
 
         & > .campfire-items {
             position: relative;
             height: var(--w);
+            z-index: 10;
 
             & > .campfire-item {
                 display: flex;
@@ -29042,6 +29056,7 @@
             flex-direction: column;
             gap: 10px;
             text-align: center;
+            z-index: 10;
 
             & > .campfire-title {
                 font-size: 20px;
