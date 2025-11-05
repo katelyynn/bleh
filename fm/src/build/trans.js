@@ -43,7 +43,7 @@ export let lang_info = {
     ru: {
         name: 'Русский',
         by: ['crawqxx'],
-        last_updated: '2025-10-27'
+        last_updated: '2025-11-05'
     }
 };
 
@@ -144,7 +144,8 @@ export const trans = {
         'user-status-alum': {
             name: {
                 en: 'Alum',
-                sv: 'Alumn'
+                sv: 'Alumn',
+                ru: 'Выпускник'
             },
             reason: {
                 en: 'Former member of Last.fm',
@@ -250,7 +251,8 @@ export const trans = {
         'bubble-tea': {
             name: {
                 en: 'escoffier :3',
-                sv: 'escoffier :3'
+                sv: 'escoffier :3',
+                ru: 'ескоффьер :3'
             },
             reason: {
                 en: 'katelyn’s wife ~',
@@ -700,7 +702,8 @@ export const trans = {
         ru: 'Скроббл'
     },
     scrobble_value: {
-        en: 'Scrobble {v}'
+        en: 'Scrobble {v}',
+        ru: 'Скробблить {v}'
     },
     average: {
         // scrobble average
@@ -1206,7 +1209,8 @@ export const trans = {
                 ru: 'Осень'
             },
             fall: {
-                en: 'Winter'
+                en: 'Winter',
+                ru: 'Зима'
             },
             christmas: {
                 en: 'Christmas',
@@ -1226,7 +1230,8 @@ export const trans = {
         notice: {
             en: 'Open the live counter',
             pt: 'Abrir o contador ao vivo',
-            sv: 'Öppna live-nedräkningen'
+            sv: 'Öppna live-nedräkningen',
+            ru: 'Открыть живой счетчик'
         },
         live: {
             en: 'Counter is updating live',
@@ -1273,7 +1278,8 @@ export const trans = {
     },
     value_for_time: {
         // e.g. (Halloween) ends (in 3 days)
-        en: '{v} ends {time}'
+        en: '{v} ends {time}',
+        ru: '{v} закончится {time}'
     },
     seasonal_timeline: {
         en: 'Seasonal timeline',
@@ -1319,7 +1325,8 @@ export const trans = {
         name: {
             en: 'Display additional seasonal effects',
             pt: 'Exibir efeitos sazonais adicionais',
-            sv: 'Visa extra årstidseffekter'
+            sv: 'Visa extra årstidseffekter',
+            ru: 'Отображать дополнительные сезонные эффекты'
         },
         body: {
             en: 'During winter seasons this applies a coat of ice to panels, otherwise mainly gradients',
@@ -1403,14 +1410,17 @@ export const trans = {
         ru: 'Релизы'
     },
     no_releases_found: {
-        en: 'No releases found here'
+        en: 'No releases found here',
+        ru: 'Здесь не найдено ни одного релиза'
     },
     tracklist_source: {
         name: {
-            en: 'Preferred tracklist source'
+            en: 'Preferred tracklist source',
+            ru: 'Предпочитаемый источник треклиста'
         },
         body: {
-            en: 'Choose which service to display for album tracklists'
+            en: 'Choose which service to display for album tracklists',
+            ru: 'Выберите сервис, который будет отображаться для треклистов альбомов'
         }
     },
     bookmarks: {
@@ -1579,7 +1589,8 @@ export const trans = {
             major: {
                 en: 'Major release',
                 pt: 'Lançamento principal',
-                sv: 'Större utgåva'
+                sv: 'Större utgåva',
+                ru: 'Крупный релиз'
             },
             minor: {
                 en: 'Minor release',
@@ -2837,7 +2848,8 @@ export const trans = {
         ru: 'Понравилось'
     },
     love_track: {
-        en: 'Love track'
+        en: 'Love track',
+        ru: 'Отметить трек как любимый'
     },
     loved: {
         // as in loved tracks, this can be seen
@@ -3084,49 +3096,61 @@ export const trans = {
     },
     track_layout: {
         name: {
-            en: 'Track layout'
+            en: 'Track layout',
+            ru: 'Расположение трека'
         },
         body: {
-            en: 'Choose which axis to display track information on'
+            en: 'Choose which axis to display track information on',
+            ru: 'Выберите ось, на которой отображать информацию о треке'
         },
         column: {
-            en: 'Place title and artist vertically'
+            en: 'Place title and artist vertically',
+            ru: 'Разместить название и исполнителя вертикально'
         },
         row: {
-            en: 'Place title and artist horizontally'
+            en: 'Place title and artist horizontally',
+            ru: 'Разместить название и исполнителя горизонтально'
         }
     },
     track_album_name_location: {
         name: {
-            en: 'Album name location'
+            en: 'Album name location',
+            ru: 'Расположение названия альбома'
         },
         body: {
-            en: 'Choose which axis to display said album name on'
+            en: 'Choose which axis to display said album name on',
+            ru: 'Выберите ось, на которой отображать название альбома'
         },
         column: {
-            en: 'Place below title and artist'
+            en: 'Place below title and artist',
+            ru: 'Разместить под названием и исполнителем'
         },
         row: {
-            en: 'Place to the side of title and artist'
+            en: 'Place to the side of title and artist',
+            ru: 'Разместить рядом с названием и исполнителем'
         }
     },
     expand_tracks: {
         name: {
-            en: 'Show associated album for tracks'
+            en: 'Show associated album for tracks',
+            ru: 'Показывать связанный альбом для треков'
         },
         body: {
-            en: 'Places the track’s associated album name if there’s room'
+            en: 'Places the track’s associated album name if there’s room',
+            ru: 'Отображает название связанного альбома трека, если есть место'
         }
     },
     expand_tracks_when_active: {
         en: 'Only when actively scrobbling',
         de: 'Nur während des aktiven Scrobbelns',
-        sv: 'Endast när du skrobblar'
+        sv: 'Endast när du skrobblar',
+        ru: 'Только при активном скробблинге'
     },
     expand_tracks_always: {
         en: 'Always when possible',
         de: 'Immer, wenn möglich',
-        sv: 'Alltid, när det är möjligt'
+        sv: 'Alltid, när det är möjligt',
+        ru: 'Всегда, когда возможно'
     },
     show_remaster_tags: {
         en: 'Show remaster tags',
@@ -3219,10 +3243,12 @@ export const trans = {
     },
     display_name: {
         name: {
-            en: 'Display name'
+            en: 'Display name',
+            ru: 'Отображаемое имя'
         },
         body: {
-            en: 'Changes your name on your profile, with your real @username shown below'
+            en: 'Changes your name on your profile, with your real @username shown below',
+            ru: 'Изменяет ваше имя в профиле, при этом ваш реальный @никнейм отображается ниже'
         }
     },
     subtitle: {
@@ -3705,14 +3731,18 @@ export const trans = {
     },
     font_style: {
         en: 'Font style',
+        ru: 'Стиль шрифта',
         solid: {
-            en: 'Solid'
+            en: 'Solid',
+            ru: 'Сплошной'
         },
         pop: {
-            en: 'Pop'
+            en: 'Pop',
+            ru: 'Яркий' 
         },
         glow: {
-            en: 'Glow'
+            en: 'Glow',
+            ru: 'Свечение'
         }
     },
     font_weight: {
@@ -3786,7 +3816,11 @@ export const trans = {
         // this text is common sample text used in english,
         // if there's something more fitting for your language,
         // then feel free to adjust it
-        en: 'The quick brown fox jumps over the lazy dog 🏳️‍⚧️'
+        //
+        // not sure by what was meant by "fitting for your language"
+        // but i used a sentence that has all letters on rus language, like an english example
+        en: 'The quick brown fox jumps over the lazy dog 🏳️‍⚧️',
+        ru: 'Съешь ещё этих мягких французских булок, да выпей чаю 🏳️‍⚧️'
     },
     enter_font_names: {
         en: 'Enter installed font name(s), separated by commas',
@@ -4249,7 +4283,8 @@ export const trans = {
     },
     own_plays: {
         // tracklist source menu option that enables the thing below
-        en: 'Own plays'
+        en: 'Own plays',
+        ru: 'Собственные прослушивания'
     },
     sourced_from_own_plays: {
         // tracklist from your own album plays
@@ -4595,10 +4630,12 @@ export const trans = {
     },
     display_name_styles: {
         name: {
-            en: 'Show display name styles'
+            en: 'Show display name styles',
+            ru: 'Показывать стили отображаемого имени'
         },
         body: {
-            en: 'Sponsors can choose a custom font and shadow style for their profile name'
+            en: 'Sponsors can choose a custom font and shadow style for their profile name',
+            ru: 'Спонсоры могут выбирать собственный шрифт и стиль тени для имени в своем профиле'
         }
     },
     underline_links: {
@@ -5675,13 +5712,16 @@ export const trans = {
     },
     profile_font: {
         name: {
-            en: 'Profile name font'
+            en: 'Profile name font',
+            ru: 'Шрифт имени профиля'
         },
         body: {
-            en: 'Customise the font family used for your username, only visible on your profile'
+            en: 'Customise the font family used for your username, only visible on your profile',
+            ru: 'Настройте семейство шрифтов, используемое для вашего имени пользователя; оно будет видно только в вашем профиле'
         },
         reminder: {
-            en: 'Changed your name font, don’t forget to save!'
+            en: 'Changed your name font, don’t forget to save!',
+            ru: 'Шрифт имени изменен, не забудьте сохранить!'
         }
     },
     none: {
@@ -6506,12 +6546,13 @@ export const trans = {
     simulate_scroll: {
         name: {
             en: 'Simulate horizontal scrolling',
-            sv: 'Simulera vågrät skrollning'
+            sv: 'Simulera vågrät skrollning',
+            ru: 'Имитировать горизонтальную прокрутку'
         },
         body: {
             en: 'Only recommended for desktop devices',
             sv: 'Rekommenderas endast för desktop-enheter',
-            ru: 'Имитировать горизонтальную прокрутку'
+            ru: 'Рекомендуется только для настольных устройств'
         }
     },
     credits: {
@@ -6520,31 +6561,39 @@ export const trans = {
         ru: 'Кредиты'
     },
     view_credits: {
-        en: 'View credits'
+        en: 'View credits',
+        ru: 'Посмотреть кредиты'
     },
     credits_for_value: {
-        en: 'Credits for {v}'
+        en: 'Credits for {v}',
+        ru: 'Кредиты для {v}'
     },
     branch: {
         name: {
-            en: 'Choose branch'
+            en: 'Choose branch',
+            ru: 'Выбрать ветку'
         },
         body: {
-            en: 'Default release branch is ‘uwu’, do not change unless you know what you’re doing'
+            en: 'Default release branch is ‘uwu’, do not change unless you know what you’re doing',
+            ru: 'Ветка выпуска по умолчанию - "uwu", не меняйте её, если точно не знаете, что делаете'
         }
     },
     log_in: {
-        en: 'Log in'
+        en: 'Log in',
+        ru: 'Войти'
     },
     sign_up: {
-        en: 'Sign up'
+        en: 'Sign up',
+        ru: 'Зарегистрироваться'
     },
     plot: {
         name: {
-            en: 'Plot'
+            en: 'Plot',
+            ru: 'График'
         },
         body: {
-            en: 'Create graphs from user libraries'
+            en: 'Create graphs from user libraries',
+            ru: 'Создать графики из пользовательских библиотек'
         }
     }
 };
