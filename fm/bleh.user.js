@@ -55972,13 +55972,24 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         const title = item.querySelector(".grid-items-item-main-text a").textContent;
         const artist = item.querySelector(".grid-items-item-aux-block").textContent;
         const plays = item.querySelector(".grid-items-item-aux-text a:last-child").textContent.trim();
+        let corrected_title = romanise(correct_item_by_artist(title, artist));
+        let corrected_artist = romanise(correct_artist(artist));
+        let formatted_title = corrected_title;
+        let formatted_artist = corrected_artist;
+        if (settings.format_guest_features) {
+          const formatted = name_includes(title, artist);
+          formatted_title = smart_title(formatted[0], formatted[1]);
+          formatted_artist = smart_artists(formatted[2], formatted[3]);
+        }
         albums.push({
           image: image.replace("/avatar300s/", "/500x500/"),
           title,
           artist,
           plays,
-          corrected_title: romanise(correct_item_by_artist(title, artist)),
-          corrected_artist: romanise(correct_artist(artist))
+          formatted_title,
+          formatted_artist,
+          corrected_title,
+          corrected_artist
         });
       });
       max_index = albums.length - 1;
@@ -56001,7 +56012,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         if (timeout) return;
         timeout = setTimeout(() => {
           timeout = null;
-        }, 0.2);
+        }, 0.15);
         const direction = Math.sign(e.deltaY);
         if (direction == 0) return;
         set_index(selected_index + direction);
@@ -56019,13 +56030,12 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       items_container.style.setProperty("--selected-index", index3);
       const album = albums[index3];
       current_bg.style.setProperty("background-image", `url(${album.image})`);
-      const formatted = name_includes(album.title, album.artist);
       render(item_details, html`
             <a class="campfire-title smart-title" href="${root}music/${sanitise(album.artist)}/${sanitise(album.title)}" target="_blank">
-                ${settings.format_guest_features ? smart_title(formatted[0], formatted[1]) : album.corrected_title}
+                ${album.formatted_title}
             </a>
             <span class="campfire-artist">
-                ${settings.format_guest_features ? smart_artists(formatted[2], formatted[3]) : html.node`<a class="campfire-artist" href="${root}music/${redirect()}${sanitise(album.artist)}" target="_blank">${album.corrected_artist}</a>`}
+                ${settings.format_guest_features ? album.formatted_artist : html.node`<a class="campfire-artist" href="${root}music/${redirect()}${sanitise(album.artist)}" target="_blank">${album.corrected_artist}</a>`}
             </span>
             <div class="campfire-plays">
                 ${album.plays}

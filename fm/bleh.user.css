@@ -28923,7 +28923,7 @@
 
     .campfire {
         --w: 380px;
-        --gap: 40px;
+        --gap: 10px;
         padding: 90px 0;
         overflow: hidden;
 
@@ -28932,35 +28932,12 @@
         align-items: center;
         gap: 60px;
 
-        background: var(--card-blur-bg-alt) !important;
+        background: hsl(var(--b5)) !important;
         border-bottom: var(--toolbar-border);
         border-top-left-radius: var(--card-radius);
         border-top-right-radius: var(--card-radius);
 
         position: relative;
-
-        &:before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            display: block;
-            z-index: -1;
-            backdrop-filter: var(--card-blur);
-            -webkit-backdrop-filter: var(--card-blur);
-
-            border-top-left-radius: inherit;
-            border-top-right-radius: inherit;
-        }
-
-        [data-bleh--solarium="false"] & {
-            background: hsl(var(--b6), 40%) !important;
-
-            &:before {
-                background: hsl(var(--b6));
-                backdrop-filter: none;
-                -webkit-backdrop-filter: none;
-            }
-        }
 
         & > .campfire-bg {
             &.previous {
@@ -28975,8 +28952,8 @@
             --mask: radial-gradient(at center, white, transparent);
             mask-image: var(--mask);
             -webkit-mask-image: var(--mask);
-            filter: blur(10px);
-            opacity: 0.3;
+            filter: blur(8px);
+            opacity: 0.5;
         }
 
         & > .campfire-items {
@@ -29041,9 +29018,9 @@
                 }
 
                 &[aria-checked="false"] {
-                    opacity: 0.4;
-                    filter: blur(4px);
-                    transform: var(--offset) scale(0.9);
+                    opacity: 0.6;
+                    filter: blur(4px) brightness(60%);
+                    transform: var(--offset) scale(0.8);
                 }
 
                 transition-property: transform, opacity, filter;

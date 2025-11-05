@@ -352,13 +352,28 @@ function campfire() {
                 const artist = item.querySelector('.grid-items-item-aux-block').textContent;
                 const plays = item.querySelector('.grid-items-item-aux-text a:last-child').textContent.trim();
 
+                let corrected_title = romanise(correct_item_by_artist(title, artist));
+                let corrected_artist = romanise(correct_artist(artist));
+
+                let formatted_title = corrected_title;
+                let formatted_artist = corrected_artist;
+
+                if (settings.format_guest_features) {
+                    const formatted = name_includes(title, artist);
+
+                    formatted_title = smart_title(formatted[0], formatted[1]);
+                    formatted_artist = smart_artists(formatted[2], formatted[3]);
+                }
+
                 albums.push({
                     image: image.replace('/avatar300s/', '/500x500/'),
                     title,
                     artist,
                     plays,
-                    corrected_title: romanise(correct_item_by_artist(title, artist)),
-                    corrected_artist: romanise(correct_artist(artist))
+                    formatted_title,
+                    formatted_artist,
+                    corrected_title,
+                    corrected_artist
                 });
             });
 
@@ -387,7 +402,7 @@ function campfire() {
 
                 timeout = setTimeout(() => {
                     timeout = null;
-                }, 0.2);
+                }, 0.15);
 
                 const direction = Math.sign(e.deltaY);
                 if (direction == 0) return;
@@ -413,14 +428,12 @@ function campfire() {
 
         current_bg.style.setProperty('background-image', `url(${album.image})`);
 
-        const formatted = name_includes(album.title, album.artist);
-
         render(item_details, html`
             <a class="campfire-title smart-title" href="${root}music/${sanitise(album.artist)}/${sanitise(album.title)}" target="_blank">
-                ${settings.format_guest_features ? smart_title(formatted[0], formatted[1]) : album.corrected_title}
+                ${album.formatted_title}
             </a>
             <span class="campfire-artist">
-                ${settings.format_guest_features ? smart_artists(formatted[2], formatted[3]) : html.node`<a class="campfire-artist" href="${root}music/${redirect()}${sanitise(album.artist)}" target="_blank">${album.corrected_artist}</a>`}
+                ${settings.format_guest_features ? album.formatted_artist : html.node`<a class="campfire-artist" href="${root}music/${redirect()}${sanitise(album.artist)}" target="_blank">${album.corrected_artist}</a>`}
             </span>
             <div class="campfire-plays">
                 ${album.plays}
