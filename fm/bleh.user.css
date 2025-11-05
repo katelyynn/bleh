@@ -29002,6 +29002,7 @@
                     height: var(--w);
                     border-radius: var(--item-big-radius);
                     background: var(--avatar-generic-background);
+                    box-shadow: var(--menu-shadow);
                     overflow: hidden;
 
                     position: relative;
@@ -29054,9 +29055,9 @@
         & > .campfire-details {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 5px;
             text-align: center;
-            z-index: 10;
+            z-index: 11;
 
             & > .campfire-title {
                 font-size: 20px;
@@ -29069,7 +29070,7 @@
                 font-size: 16px;
                 line-height: 20px;
                 font-weight: var(--font-weight-medium);
-                margin-bottom: 5px;
+                margin-bottom: 10px;
 
                 display: flex;
                 justify-content: center;
