@@ -1,5 +1,5 @@
 {
-    "latest": "2025.1106",
+    "latest": "2025.1106.1",
     "sponsors": [
         "clairedoll", "kateshapedbox", "evangelicgirl",
         "astrablooms", "ItsProyal", "vwvwvwvwvwvwv", "Orofil",
@@ -8,7 +8,7 @@
         "Carbonzer", "chrysalisrot", "FenrirXXII",
         "saettbyeol", "lyeule", "sewagebipolar", "unstablerate",
         "noapop", "celebrating", "myraisounds", "riskyrizey",
-        "fourohclok"
+        "fourohclok", "liminalvespers", "HuxP", "K40M0J1"
     ],
     "sponsors_one_time": [
         "kateshapedbox",
@@ -17,7 +17,7 @@
         "Carbonzer", "FenrirXXII",
         "saettbyeol", "lyeule", "noapop",
         "celebrating", "riskyrizey",
-        "fourohclok"
+        "fourohclok", "K40M0J1"
     ],
     "sponsor_count_remove": 3,
     "sponsor_account": "kateshapedbox",
@@ -328,6 +328,35 @@
         "favewa": {
             "type": "translation",
             "reason": "Português"
+        },
+        "liminalvespers": [
+            {
+                "type": "sponsor"
+            },
+            {
+                "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWhvdXJnbGFzcy1pY29uIGx1Y2lkZS1ob3VyZ2xhc3MiPjxwYXRoIGQ9Ik01IDIyaDE0Ii8+PHBhdGggZD0iTTUgMmgxNCIvPjxwYXRoIGQ9Ik0xNyAyMnYtNC4xNzJhMiAyIDAgMCAwLS41ODYtMS40MTRMMTIgMTJsLTQuNDE0IDQuNDE0QTIgMiAwIDAgMCA3IDE3LjgyOFYyMiIvPjxwYXRoIGQ9Ik03IDJ2NC4xNzJhMiAyIDAgMCAwIC41ODYgMS40MTRMMTIgMTJsNC40MTQtNC40MTRBMiAyIDAgMCAwIDE3IDYuMTcyVjIiLz48L3N2Zz4=",
+                "reason": "sponsor",
+                "name": "threshold archivist",
+                "hue": 36,
+                "sat": 1.44,
+                "lit": 1.1
+            }
+        ],
+        "HuxP": [
+            {
+                "type": "sponsor"
+            },
+            {
+                "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLXBhdy1wcmludC1pY29uIGx1Y2lkZS1wYXctcHJpbnQiPjxjaXJjbGUgY3g9IjExIiBjeT0iNCIgcj0iMiIvPjxjaXJjbGUgY3g9IjE4IiBjeT0iOCIgcj0iMiIvPjxjaXJjbGUgY3g9IjIwIiBjeT0iMTYiIHI9IjIiLz48cGF0aCBkPSJNOSAxMGE1IDUgMCAwIDEgNSA1djMuNWEzLjUgMy41IDAgMCAxLTYuODQgMS4wNDVRNi41MiAxNy40OCA0LjQ2IDE2Ljg0QTMuNSAzLjUgMCAwIDEgNS41IDEwWiIvPjwvc3ZnPg==",
+                "reason": "sponsor",
+                "name": "式大元",
+                "hue": 235,
+                "sat": 1.15,
+                "lit": 1.01
+            }
+        ],
+        "K40M0J1": {
+            "type": "sponsor"
         }
     }
 }
