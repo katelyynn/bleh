@@ -38398,12 +38398,6 @@
                     <button type="submit" class="btn-primary save">
                         ${tl2(trans.save)}
                     </button>
-                    <a
-                        class="btn icon settings not-a-view-button"
-                        href="${root}bleh"
-                    >
-                        ${tl2(trans.settings)}
-                    </a>
                 </div>
             </div>
         `
@@ -38788,9 +38782,6 @@
                 <div class="sep" />
                 ${setting({ id: "format_guest_features" })}
                 ${setting({ id: "show_guest_features" })}
-                <div class="more-link">
-                    <a href="${root}bleh/music">${tl2(trans.settings)}</a>
-                </div>
                 <div class="settings-footer">
                     <button type="submit" class="btn-primary save">
                         ${tl2(trans.save)}

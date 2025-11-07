@@ -1416,12 +1416,6 @@ function profile_recents() {
                     <button type="submit" class="btn-primary save">
                         ${tl(trans.save)}
                     </button>
-                    <a
-                        class="btn icon settings not-a-view-button"
-                        href="${root}bleh"
-                    >
-                        ${tl(trans.settings)}
-                    </a>
                 </div>
             </div>
         `
@@ -1869,9 +1863,6 @@ function profile_tracks() {
                 <div class="sep" />
                 ${setting({ id: 'format_guest_features' })}
                 ${setting({ id: 'show_guest_features' })}
-                <div class="more-link">
-                    <a href="${root}bleh/music">${tl(trans.settings)}</a>
-                </div>
                 <div class="settings-footer">
                     <button type="submit" class="btn-primary save">
                         ${tl(trans.save)}

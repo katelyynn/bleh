@@ -166,7 +166,7 @@ export function sponsor_manage() {
                         <img src="${auth.avatar.replace('/avatar42s/', '/avatar170s/')}" alt="${tl(trans.your_avatar)}">
                         <span class="avatar-status-dot user-status--bleh-sponsor"></span>
                     </div>
-                    <h1>${tl(trans.you_are_a_sponsor)}</h1>
+                    <h1 class="colourful">${tl(trans.you_are_a_sponsor)}</h1>
                     <p>${tl(trans.sponsor_no_badge)}</p>
                 </div>
             `,
@@ -182,7 +182,7 @@ export function sponsor_manage() {
                         <img src="${auth.avatar.replace('/avatar42s/', '/avatar170s/')}" alt="${tl(trans.your_avatar)}">
                         <span class="avatar-status-dot user-status--bleh-sponsor"></span>
                     </div>
-                    <h1>${tl(trans.you_are_a_sponsor)}</h1>
+                    <h1 class="colourful">${tl(trans.you_are_a_sponsor)}</h1>
                     <p>${tl(trans.sponsor_get_badge)}</p>
                 </div>
                 <div class="modal-footer">
