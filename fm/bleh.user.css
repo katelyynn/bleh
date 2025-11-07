@@ -7990,13 +7990,14 @@
     }
 
     /* missing avatar */
+    .header-avatar-add,
     [src=""],
     .avatar > img:not([src]),
     .avatar--bleh-missing img,
     [src$="818148bf682d429dc215c1705eb27b98.png"] {
         content: var(--blank) !important;
         font-size: 0;
-        background-color: hsl(var(--c3));
+        background-color: hsl(var(--c3)) !important;
         --mask: var(--icon-16-user);
         mask-image: var(--mask);
         -webkit-mask-image: var(--mask);
@@ -29094,5 +29095,17 @@
         line-height: 20px;
         cursor: default;
         font-weight: var(--font-weight-medium);
+    }
+
+
+    .header-avatar-add {
+        width: 100%;
+        padding: unset;
+        border-radius: unset;
+        --mask: var(--icon-16-plus);
+
+        & > .header-avatar-add-label {
+            display: none;
+        }
     }
 }
