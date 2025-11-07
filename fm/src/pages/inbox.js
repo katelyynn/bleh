@@ -21,7 +21,7 @@ export async function bleh_inbox() {
         page.structure.row = page.structure.container.querySelector('.row');
         page.structure.main = page.structure.row.querySelector('.col-main');
         page.structure.side = page.structure.row.querySelector('.col-sidebar');
-    } catch(e) {
+    } catch (e) {
         log('unable to find elements', 'page structure');
     }
 
@@ -68,45 +68,20 @@ export async function bleh_inbox() {
         let notifications = page.structure.container.querySelector('.inbox-notifications');
         let pagination = page.structure.container.querySelector('.pagination');
 
-        let panel = document.createElement('section');
-        panel.classList.add('inbox-panel', 'notifications-panel');
-
-        if (form)
-            panel.appendChild(form);
-
-        if (notifications)
-            panel.appendChild(notifications);
-
-        if (pagination)
-            panel.appendChild(pagination);
-
-        page.structure.main.appendChild(panel);
-
+        page.structure.main.appendChild(html.node`
+            <section class="inbox-panel notifications-panel">
+                ${form}
+                ${notifications}
+                ${pagination}
+            </section>
+        `);
 
         if (!notifications) return;
 
         bleh_notification_list(notifications);
-
-        return;
-
-        let notif_links = notifications.querySelectorAll('.inbox-notifications__item-link');
-
-        notif_links.forEach((notification) => {
-            let link = notification.getAttribute('href');
-            if (link.endsWith('/obsessions/set') || link.endsWith('/listening-report/month')) return;
-
-            let avatar = notification.querySelector('.avatar');
-            let name = notification.querySelector('.inbox-notifications__item-description strong');
-            if (!name) return;
-
-            let name_text = sanitise(return_name_from_avatar(avatar.querySelector('img')));
-
-            let badge = patch_avatar(avatar, name_text);
-            name.classList.add('notification-user-name', `user-status--bleh-${badge.type}`, `user-status--bleh-user-${name_text}`);
-
-            if (notification.classList.contains('inbox-notifications__item--highlight'))
-                notification.classList.add('notification-user-name', `user-status--bleh-${badge.type}`, `user-status--bleh-user-${name_text}`);
-        });
+    } else if (page.subpage.endsWith('overview')) {
+        const header = page.structure.main.querySelector('.inbox-buttons');
+        const select_all = header.querySelector('.inbox-select-all');
     } else if (page.subpage == 'message_overview' || page.subpage == 'sent_message') {
         let inbox = page.structure.container.querySelector('.inbox-message-view');
         page.structure.main.appendChild(inbox);

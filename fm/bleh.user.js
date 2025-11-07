@@ -29622,12 +29622,6 @@
       return { type: pre_existing_badge.classList[1] };
     else return { type: "none" };
   }
-  function return_name_from_avatar(avatar2) {
-    if (!avatar2) return;
-    if (!avatar2.hasAttribute("alt")) return;
-    if (avatar2.getAttribute("alt") == tl2(trans.your_avatar)) return auth;
-    return avatar2.getAttribute("alt").replace(tl2(trans.avatar_for_user), "");
-  }
   unsafeWindow._expand_avatar = function(src) {
     expand_avatar(src);
   };
@@ -56320,31 +56314,18 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       let form = page.structure.container.querySelector("form");
       let notifications = page.structure.container.querySelector(".inbox-notifications");
       let pagination = page.structure.container.querySelector(".pagination");
-      let panel = document.createElement("section");
-      panel.classList.add("inbox-panel", "notifications-panel");
-      if (form)
-        panel.appendChild(form);
-      if (notifications)
-        panel.appendChild(notifications);
-      if (pagination)
-        panel.appendChild(pagination);
-      page.structure.main.appendChild(panel);
+      page.structure.main.appendChild(html.node`
+            <section class="inbox-panel notifications-panel">
+                ${form}
+                ${notifications}
+                ${pagination}
+            </section>
+        `);
       if (!notifications) return;
       bleh_notification_list(notifications);
-      return;
-      let notif_links = notifications.querySelectorAll(".inbox-notifications__item-link");
-      notif_links.forEach((notification) => {
-        let link = notification.getAttribute("href");
-        if (link.endsWith("/obsessions/set") || link.endsWith("/listening-report/month")) return;
-        let avatar2 = notification.querySelector(".avatar");
-        let name = notification.querySelector(".inbox-notifications__item-description strong");
-        if (!name) return;
-        let name_text = sanitise(return_name_from_avatar(avatar2.querySelector("img")));
-        let badge = patch_avatar(avatar2, name_text);
-        name.classList.add("notification-user-name", `user-status--bleh-${badge.type}`, `user-status--bleh-user-${name_text}`);
-        if (notification.classList.contains("inbox-notifications__item--highlight"))
-          notification.classList.add("notification-user-name", `user-status--bleh-${badge.type}`, `user-status--bleh-user-${name_text}`);
-      });
+    } else if (page.subpage.endsWith("overview")) {
+      const header = page.structure.main.querySelector(".inbox-buttons");
+      const select_all = header.querySelector(".inbox-select-all");
     } else if (page.subpage == "message_overview" || page.subpage == "sent_message") {
       let inbox = page.structure.container.querySelector(".inbox-message-view");
       page.structure.main.appendChild(inbox);
