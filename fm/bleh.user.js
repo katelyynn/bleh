@@ -56276,7 +56276,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
   }
 
   // src/pages/inbox.js
-  function bleh_inbox() {
+  async function bleh_inbox() {
     page.structure.container = document.body.querySelector(".page-content");
     try {
       page.structure.row = page.structure.container.querySelector(".row");
@@ -56289,6 +56289,33 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     checkup_page_structure(false, content_top);
     log("status is", "page", "info", page);
     update_page();
+    page.structure.container.insertBefore(html.node`
+        <section class="redesigned-header search-header no-background">
+            <div class="tag-side">
+                <div class="tag-icon inbox-icon"></div>
+            </div>
+            <div class="info-side">
+                <div class="sub-text">${tl2(trans.inbox)}</div>
+                <h1>${page.subpage == "notifications" ? tl2(trans.notifications) : tl2(trans.messages)}</h1>
+            </div>
+        </section>
+    `, page.structure.container.firstElementChild);
+    let cache2;
+    if (auth.name) {
+      cache2 = await load_profile_cache_externally(auth.name);
+      if (cache2.banner)
+        register_background(cache2.banner);
+      else if (auth.avatar && !auth.avatar.endsWith("818148bf682d429dc215c1705eb27b98.png"))
+        register_background(auth.avatar.replace("/avatar42s/", "/ar0/"));
+      else
+        register_background(null);
+    } else {
+      register_background(null);
+    }
+    const messages_tab = page.structure.nav.querySelector(".secondary-nav-item--overview");
+    messages_tab.classList.remove("secondary-nav-item--overview");
+    messages_tab.classList.add("secondary-nav-item--messages");
+    messages_tab.querySelector(":scope > a").textContent = tl2(trans.messages);
     if (page.subpage == "notifications") {
       let form = page.structure.container.querySelector("form");
       let notifications = page.structure.container.querySelector(".inbox-notifications");

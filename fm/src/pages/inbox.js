@@ -6,13 +6,16 @@
 
 import {patch_avatar, return_name_from_avatar} from "../avatar";
 import {log} from "../build/log";
-import {page} from "../build/page";
+import {auth, page} from "../build/page";
 import {sanitise} from "../build/tools";
 import {checkup_page_structure} from "../components/structure";
-import {update_page} from "../page";
+import {register_background, update_page} from "../page";
 import {bleh_notification_list} from "../components/notifications.js";
+import { tl, trans } from "../build/trans.js";
+import { html } from "lighterhtml";
+import { load_profile_cache_externally } from "./profile.js";
 
-export function bleh_inbox() {
+export async function bleh_inbox() {
     page.structure.container = document.body.querySelector('.page-content');
     try {
         page.structure.row = page.structure.container.querySelector('.row');
@@ -28,6 +31,36 @@ export function bleh_inbox() {
     checkup_page_structure(false, content_top);
     log('status is', 'page', 'info', page);
     update_page();
+
+    page.structure.container.insertBefore(html.node`
+        <section class="redesigned-header search-header no-background">
+            <div class="tag-side">
+                <div class="tag-icon inbox-icon"></div>
+            </div>
+            <div class="info-side">
+                <div class="sub-text">${tl(trans.inbox)}</div>
+                <h1>${page.subpage == 'notifications' ? tl(trans.notifications) : tl(trans.messages)}</h1>
+            </div>
+        </section>
+    `, page.structure.container.firstElementChild);
+
+    let cache;
+    if (auth.name) {
+        cache = await load_profile_cache_externally(auth.name);
+        if (cache.banner)
+            register_background(cache.banner);
+        else if (auth.avatar && !auth.avatar.endsWith('818148bf682d429dc215c1705eb27b98.png'))
+            register_background(auth.avatar.replace('/avatar42s/', '/ar0/'));
+        else
+            register_background(null);
+    } else {
+        register_background(null);
+    }
+
+    const messages_tab = page.structure.nav.querySelector('.secondary-nav-item--overview');
+    messages_tab.classList.remove('secondary-nav-item--overview');
+    messages_tab.classList.add('secondary-nav-item--messages');
+    messages_tab.querySelector(':scope > a').textContent = tl(trans.messages);
 
 
     if (page.subpage == 'notifications') {
