@@ -3838,7 +3838,7 @@
                 color: hsl(var(--c3));
                 font-size: 13px;
                 cursor: default;
-                width: 100px;
+                width: 130px;
                 display: flex;
                 justify-content: end;
 
@@ -25992,7 +25992,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 260px;
+            height: 180px;
         }
 
         .listen-item {

@@ -2053,7 +2053,7 @@ export function bleh_profile_chart_render(
                 }
             ]
         },
-        options: page.state.chart_library_line_options
+        options: page.state.chart_library_line_options_mini
     });
 
     scrobble_canvas_container.appendChild(scrobble_canvas);

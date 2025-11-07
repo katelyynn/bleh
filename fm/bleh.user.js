@@ -29305,7 +29305,7 @@
                         <img src="${auth.avatar.replace("/avatar42s/", "/avatar170s/")}" alt="${tl2(trans.your_avatar)}">
                         <span class="avatar-status-dot user-status--bleh-sponsor"></span>
                     </div>
-                    <h1>${tl2(trans.you_are_a_sponsor)}</h1>
+                    <h1 class="colourful">${tl2(trans.you_are_a_sponsor)}</h1>
                     <p>${tl2(trans.sponsor_no_badge)}</p>
                 </div>
             `,
@@ -29321,7 +29321,7 @@
                         <img src="${auth.avatar.replace("/avatar42s/", "/avatar170s/")}" alt="${tl2(trans.your_avatar)}">
                         <span class="avatar-status-dot user-status--bleh-sponsor"></span>
                     </div>
-                    <h1>${tl2(trans.you_are_a_sponsor)}</h1>
+                    <h1 class="colourful">${tl2(trans.you_are_a_sponsor)}</h1>
                     <p>${tl2(trans.sponsor_get_badge)}</p>
                 </div>
                 <div class="modal-footer">
@@ -38939,7 +38939,7 @@
           }
         ]
       },
-      options: page.state.chart_library_line_options
+      options: page.state.chart_library_line_options_mini
     });
     scrobble_canvas_container.appendChild(scrobble_canvas);
   }
@@ -42916,6 +42916,43 @@
           },
           suggestedMax: 10
         }
+      }
+    };
+    page.state.chart_library_line_options_mini = {
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          display: false
+        },
+        tooltip: {
+          backgroundColor: root_bg_col,
+          titleColor: text_primary_col,
+          bodyColor: text_primary_col,
+          multiKeyBackground: root_bg_col,
+          boxPadding: 6,
+          padding: 9,
+          cornerRadius: 9,
+          caretSize: 0
+        }
+      },
+      scales: {
+        x: {
+          display: false,
+          grid: {
+            color: axis_col,
+            display: false
+          }
+        },
+        y: {
+          display: false,
+          grid: {
+            display: false
+          },
+          suggestedMax: 10
+        }
+      },
+      onClick: (e, active, chart) => {
+        bleh_glacier_library_open_index(active[0].index);
       }
     };
     page.state.chart_library_pie_options = {
