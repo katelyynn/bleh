@@ -6281,6 +6281,10 @@
             & > .chartlist-image {
                 width: 56px;
                 height: 56px;
+
+                & > a > img {
+                    --mask-size: var(--cover-size-50);
+                }
             }
         }
 
