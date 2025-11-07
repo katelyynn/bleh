@@ -696,7 +696,8 @@ export let settings_store = {
     display_name_styles: {
         default: true,
         title: trans.display_name_styles.name,
-        body: trans.display_name_styles.body
+        body: trans.display_name_styles.body,
+        require_reload: true
     },
     reduced_motion: {
         default: false,

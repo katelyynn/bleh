@@ -28480,8 +28480,8 @@
     }
 
     [data-font-style="pop"] {
-        --custom-font-style-shadow: 0 4px 0 hsl(var(--h4));
-        --custom-font-style-shadow-mini: 0 3px 0 hsl(var(--h4));
+        --custom-font-style-shadow: 0 4px 0 hsl(var(--h3));
+        --custom-font-style-shadow-mini: 0 3px 0 hsl(var(--h3));
     }
     [data-font-style="glow"] {
         --custom-font-style-shadow: 0 0 20px hsl(var(--h4)), 0 0 20px hsl(var(--h4));

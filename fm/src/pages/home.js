@@ -67,7 +67,7 @@ export async function bleh_home() {
 
     let welcome;
     if (auth.name) {
-        let avatar;
+        let profile_name;
         welcome = html.node`
             <section class="redesigned-header redesigned-profile-header no-background">
                 <div class="avatar-side">
@@ -85,7 +85,7 @@ export async function bleh_home() {
                         <div class="title-container">
                             <div class="header-title-label-wrap">
                                 <h1 class="header-title">
-                                    <a class="profile-name" href="${root}user/${auth.name}" data-font=${cache.font} data-font-style=${cache.font_style}>${cache.username ? cache.username : auth.name}</a>
+                                    <a class="profile-name" href="${root}user/${auth.name}" ref=${el => profile_name = el}>${cache.username ? cache.username : auth.name}</a>
                                 </h1>
                             </div>
                         </div>
@@ -93,6 +93,11 @@ export async function bleh_home() {
                 </div>
             </section>
         `;
+
+        if (settings.display_name_styles) {
+            profile_name.setAttribute('data-font', cache.font);
+            profile_name.setAttribute('data-font-style', cache.font_style);
+        }
     } else {
         welcome = html.node`
             <section class="redesigned-header redesigned-profile-header no-background">

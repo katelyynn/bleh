@@ -55739,7 +55739,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     log(`hour ${hour} time ${time2}`, "time");
     let welcome;
     if (auth.name) {
-      let avatar2;
+      let profile_name;
       welcome = html.node`
             <section class="redesigned-header redesigned-profile-header no-background">
                 <div class="avatar-side">
@@ -55757,7 +55757,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                         <div class="title-container">
                             <div class="header-title-label-wrap">
                                 <h1 class="header-title">
-                                    <a class="profile-name" href="${root}user/${auth.name}" data-font=${cache2.font} data-font-style=${cache2.font_style}>${cache2.username ? cache2.username : auth.name}</a>
+                                    <a class="profile-name" href="${root}user/${auth.name}" ref=${(el) => profile_name = el}>${cache2.username ? cache2.username : auth.name}</a>
                                 </h1>
                             </div>
                         </div>
@@ -55765,6 +55765,10 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                 </div>
             </section>
         `;
+      if (settings.display_name_styles) {
+        profile_name.setAttribute("data-font", cache2.font);
+        profile_name.setAttribute("data-font-style", cache2.font_style);
+      }
     } else {
       welcome = html.node`
             <section class="redesigned-header redesigned-profile-header no-background">
@@ -65406,7 +65410,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     display_name_styles: {
       default: true,
       title: trans.display_name_styles.name,
-      body: trans.display_name_styles.body
+      body: trans.display_name_styles.body,
+      require_reload: true
     },
     reduced_motion: {
       default: false,
