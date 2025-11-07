@@ -14933,7 +14933,7 @@
         }
 
         & > img {
-            --mask-size: 40px;
+            --mask-size: var(--cover-size-50);
             position: static;
 
             transition-property: filter;
