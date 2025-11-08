@@ -37612,6 +37612,9 @@
       page.state.scrobbles = scrobbles;
       page.state.artists = artists;
       page.state.loved = loved;
+      const date = /* @__PURE__ */ new Date();
+      const year = date.getFullYear();
+      const month = date.getMonth() + 1;
       let scrobble_text;
       let listen_container = html.node`
             <section class="listen-panel listen-profile-panel">
@@ -37635,8 +37638,11 @@
                         <div class="loading-data-text">${tl2(trans.loading_count_days).replace("{c}", "90")}</div>
                     </div>
                 </div>
-                <div class="more-link">
-                    <a href="${root}user/${page.name}/library/artists?date_preset=LAST_90_DAYS&page=1">
+                <div class="bottom-card-links">
+                    <a class="this-month see-more left-icon" href="${root}user/${page.name}/library?from=${year}-${month}-01&rangetype=1month">
+                        ${tl2(trans.value_this_month, { v: 0 })}
+                    </a>
+                    <a class="see-more" href="${root}user/${page.name}/library/artists?date_preset=LAST_90_DAYS&page=1">
                         ${tl2(trans.explore_in_library)}
                     </a>
                 </div>
@@ -38833,50 +38839,44 @@
       bleh_profile_chart_render(panel, table);
       return;
     }
-    lazy(
-      panel,
-      () => {
-        fetch(
-          `${root}user/${page.name}/library/artists/chart?date_preset=LAST_90_DAYS&page=1&ajax=1`
-        ).then(function(response) {
-          console.log(
-            "glacier library returned",
-            response,
-            response.text,
-            response.status
+    lazy(panel, () => {
+      fetch(`${root}user/${page.name}/library/artists/chart?date_preset=LAST_90_DAYS&page=1&ajax=1`).then(function(response) {
+        console.log(
+          "glacier library returned",
+          response,
+          response.text,
+          response.status
+        );
+        if (response.status != 200) throw new Error();
+        return response.text();
+      }).then(function(html3) {
+        let doc = new DOMParser().parseFromString(
+          html3,
+          "text/html"
+        );
+        console.log(
+          "glacier library DOC",
+          doc,
+          doc.querySelector(".table")
+        );
+        log("received response", "glacier library");
+        table = doc.querySelector(".table");
+        if (table) {
+          panel.appendChild(table);
+          bleh_profile_chart_render(panel, table);
+        } else {
+          log("table is null?", "glacier library", "error");
+          console.info("glacier library", doc.body.innerHTML);
+          console.info(
+            "glacier library",
+            new DOMParser().parseFromString(
+              doc.body.innerHTML,
+              "text/html"
+            )
           );
-          if (response.status != 200) throw new Error();
-          return response.text();
-        }).then(function(html3) {
-          let doc = new DOMParser().parseFromString(
-            html3,
-            "text/html"
-          );
-          console.log(
-            "glacier library DOC",
-            doc,
-            doc.querySelector(".table")
-          );
-          log("received response", "glacier library");
-          table = doc.querySelector(".table");
-          if (table) {
-            panel.appendChild(table);
-            bleh_profile_chart_render(panel, table);
-          } else {
-            log("table is null?", "glacier library", "error");
-            console.info("glacier library", doc.body.innerHTML);
-            console.info(
-              "glacier library",
-              new DOMParser().parseFromString(
-                doc.body.innerHTML,
-                "text/html"
-              )
-            );
-          }
-        });
-      },
-      { threshold: 0.3, rootMargin: "0px" }
-    );
+        }
+      });
+    }, { threshold: 0.3, rootMargin: "0px" });
   }
   function bleh_profile_chart_render(panel = page.structure.side?.querySelector(".listen-profile-panel"), table = null) {
     if (!panel) return;
@@ -38897,6 +38897,7 @@
         `${root}user/${page.name}/library` + period.getAttribute("href")
       );
     });
+    panel.querySelector(".this-month").textContent = tl2(trans.value_this_month, { v: values[values.length - 1] });
     prep_chart_colours();
     let scrobble_canvas_container = panel.querySelector(
       ".scrobble-canvas-container"
@@ -64716,6 +64717,10 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     your_recent_30_days: {
       en: "Your recent 30 days"
+    },
+    value_this_month: {
+      // number of scrobbles
+      en: "{v} this month"
     }
   };
   function tl2(key, replacements = {}) {

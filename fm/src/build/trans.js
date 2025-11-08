@@ -6633,6 +6633,10 @@ export const trans = {
     },
     your_recent_30_days: {
         en: 'Your recent 30 days'
+    },
+    value_this_month: {
+        // number of scrobbles
+        en: '{v} this month'
     }
 };
 
