@@ -27973,6 +27973,10 @@
         & > .mini-arrow {
             --icon-size: 12px;
         }
+
+        & > p {
+            cursor: default;
+        }
     }
 
     .suggest-side {
