@@ -9,6 +9,8 @@ import tippy from 'tippy.js';
 import { tl, trans } from '../build/trans';
 import { ff } from '../sku';
 import { log } from '../build/log';
+import { copy } from '../build/tools';
+import { settings } from '../build/config';
 
 export function register_menu(element, menu) {
     element.setAttribute('data-has-bleh-menu', true);
@@ -39,7 +41,7 @@ export function register_menu(element, menu) {
 }
 
 export function page_menu() {
-    if (!ff('menus')) return;
+    if (!ff('menus') || !settings.menu_replacement) return;
 
     const menu = tippy(document.body, {
         theme: 'context-menu',
@@ -63,22 +65,74 @@ export function page_menu() {
         e.preventDefault();
 
         const elem = e.target;
+        const value = elem.value?.trim();
         const is_image = elem.tagName == 'IMG';
-        const has_link = elem.href;
+        const link = elem.href;
+        const unsafe_link = elem.getAttribute('data-unsafe-href');
+
+        const text = elem.textContent?.trim();
+        const valid_for_text = ['TEXTAREA', 'INPUT'].includes(elem.tagName);
+
+        log('requesting', 'menu', 'log', {
+            text, value, elem, tag: elem.tagName, is_image, link, unsafe_link, valid_for_text
+        });
 
         const contents = html.node`
             ${is_image ? html.node`
-                <button class="dropdown-menu-clickable-item" data-type="image" onclick=${() => {
-                    open(elem.src, '_blank');
+                ${unsafe_link ? html.node`
+                    <div class="button-combo">
+                        <a class="dropdown-menu-clickable-item" data-type="image" href=${elem.src} target="_blank">
+                            ${tl(trans.view_image)}
+                        </a>
+                        <div class="button-combo-sep" />
+                        ${() => {
+                            const btn = html.node`
+                                <a class="dropdown-menu-clickable-item chibi" data-type="continue" href=${unsafe_link} target="_blank">
+                                    ${tl(trans.view_image_unsafe)}
+                                </a>
+                            `;
+
+                            tippy(btn, {
+                                content: btn.textContent
+                            });
+
+                            return btn;
+                        }}
+                    </div>
+                ` : html.node`
+                    <a class="dropdown-menu-clickable-item" data-type="image" href=${image.src} target="_blank">
+                        ${tl(trans.view_image)}
+                    </a>
+                `}
+                <a class="dropdown-menu-clickable-item" data-type="copy" onclick=${() => {
+                    copy(unsafe_link ? unsafe_link : elem.src);
                 }}>
-                    ${tl(trans.view_image)}
-                </button>
-            ` :   ''}
-            ${has_link ? html.node`
-                <a class="dropdown-menu-clickable-item" data-type="link" href=${elem.href} target=${elem.target}>
-                    ${tl(trans.open)}
+                    ${tl(trans.copy_link)}
                 </a>
             ` :   ''}
+            ${link ? html.node`
+                <a class="dropdown-menu-clickable-item" data-type="link" href=${link} target=${elem.target}>
+                    ${tl(trans.open_link)}
+                </a>
+                <a class="dropdown-menu-clickable-item" data-type="copy" onclick=${() => {
+                    copy(link);
+                }}>
+                    ${tl(trans.copy_link)}
+                </a>
+            ` :   ''}
+            ${text && valid_for_text ? html.node`
+                <a class="dropdown-menu-clickable-item" data-type="copy" onclick=${() => {
+                    copy(text);
+                }}>
+                    ${tl(trans.copy_text)}
+                </a>
+            ` : value && valid_for_text ? html.node`
+                <a class="dropdown-menu-clickable-item" data-type="copy" onclick=${() => {
+                    copy(value);
+                }}>
+                    ${tl(trans.copy_text)}
+                </a>
+            ` : ''}
         `;
 
         if (

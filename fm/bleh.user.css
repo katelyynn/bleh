@@ -29127,4 +29127,8 @@
         --mask-colour: hsl(var(--c3), 80%);
         --mask: var(--icon-16-trend);
     }
+
+    [data-type="image"] {
+        --mask: var(--icon-16-gallery-vertical);
+    }
 }

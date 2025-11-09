@@ -1332,5 +1332,12 @@ export let settings_store = {
         body: trans.tracklist_source.body,
         new_release: true,
         incompatible: { oracle_beta: false }
+    },
+    menu_replacement: {
+        default: true,
+        title: trans.menu_replacement.name,
+        body: trans.menu_replacement.body,
+        new_release: true,
+        require_reload: true
     }
 };

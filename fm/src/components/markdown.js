@@ -462,8 +462,12 @@ export function markdown(
             try {
                 const url = new URL(image.src);
 
-                if (!proxy_free.includes(url.hostname)) image.src = `https://images.weserv.nl/?url=${encodeURIComponent(image.src)}&output=webp&n=-1`;
+                if (!proxy_free.includes(url.hostname)) {
+                    image.setAttribute('data-unsafe-href', encodeURI(image.src));
+                    image.src = `https://images.weserv.nl/?url=${encodeURIComponent(image.src)}&output=webp&n=-1`;
+                }
             } catch(e) {
+                image.setAttribute('data-unsafe-href', encodeURI(image.src));
                 image.src = `https://images.weserv.nl/?url=${encodeURIComponent(image.src)}&output=webp&n=-1`;
             }
 

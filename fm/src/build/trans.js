@@ -3053,6 +3053,15 @@ export const trans = {
         sv: 'Visa bild',
         ru: 'Просмотреть изображение'
     },
+    view_image_unsafe: {
+        en: 'View unsafe image'
+    },
+    open_link: {
+        en: 'Open link'
+    },
+    copy_text: {
+        en: 'Copy text'
+    },
     event_cancelled: {
         // obviously remove the emoji or replace it as
         // you see fit if desired
@@ -6637,6 +6646,14 @@ export const trans = {
     value_this_month: {
         // number of scrobbles
         en: '{v} this month'
+    },
+    menu_replacement: {
+        name: {
+            en: 'Replace native browser right-click menus'
+        },
+        body: {
+            en: 'Provide bleh context-specific actions when right-clicking'
+        }
     }
 };
 

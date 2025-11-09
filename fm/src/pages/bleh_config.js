@@ -942,6 +942,7 @@ export async function render_setting_page(page_id) {
                     })}
                     ${setting({ id: 'default_avatar_action' })}
                     ${setting({ id: 'simulate_scroll' })}
+                    ${ff('menus') ? setting({ id: 'menu_replacement' }) : ''}
                 </div>
                 <div class="inner-preview pad flex">
                     <section class="catalogue-tags">
