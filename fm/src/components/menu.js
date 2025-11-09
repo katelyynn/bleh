@@ -104,17 +104,17 @@ export function page_menu() {
                         ${tl(trans.view_image)}
                     </a>
                 `}
-                <a class="dropdown-menu-clickable-item" data-type="copy" onclick=${() => {
+                <a class="dropdown-menu-clickable-item" data-type="link" onclick=${() => {
                     copy(unsafe_link ? unsafe_link : elem.src);
                 }}>
                     ${tl(trans.copy_link)}
                 </a>
             ` :   ''}
             ${link ? html.node`
-                <a class="dropdown-menu-clickable-item" data-type="link" href=${link} target=${elem.target}>
+                <a class="dropdown-menu-clickable-item" data-type="web" href=${link} target=${elem.target}>
                     ${tl(trans.open_link)}
                 </a>
-                <a class="dropdown-menu-clickable-item" data-type="copy" onclick=${() => {
+                <a class="dropdown-menu-clickable-item" data-type="link" onclick=${() => {
                     copy(link);
                 }}>
                     ${tl(trans.copy_link)}

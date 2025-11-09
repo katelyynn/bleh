@@ -1140,7 +1140,7 @@ export function append_nav() {
             <button class="dropdown-menu-clickable-item" data-type="copy" onclick=${() => copy(auth.name)}>
                 ${tl(trans.copy_username)}
             </button>
-            <button class="dropdown-menu-clickable-item" data-type="copy" onclick=${() => copy(`https://www.last.fm${root}user/${auth.name}`)}>
+            <button class="dropdown-menu-clickable-item" data-type="link" onclick=${() => copy(`https://www.last.fm${root}user/${auth.name}`)}>
                 ${tl(trans.copy_link)}
             </button>
         `,
