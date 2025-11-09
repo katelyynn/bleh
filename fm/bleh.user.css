@@ -24620,21 +24620,22 @@
     .support-inner {
         padding: var(--card-padding) 0;
 
-        .avatar {
+        & > .avatar {
             width: 64px;
             height: 64px;
 
-            img {
+            & > img {
                 border-radius: var(--avatar-radius);
             }
 
-            .avatar-status-dot {
+            & > .avatar-status-dot {
                 width: 18px;
                 height: 18px;
             }
         }
 
-        h1 {
+        & > h1 {
+            color: hsl(var(--c1));
             font-size: 16px;
             line-height: 20px;
             font-weight: var(--font-weight-medium);
@@ -24642,16 +24643,25 @@
             margin: unset;
             cursor: default;
 
-            color: hsl(var(--l3-c));
-            --hue-over: 336;
-            --sat-over: 1.4;
-            --lit-over: 1.1;
+            &.colourful {
+                color: hsl(var(--l3-c));
+                --hue-over: 336;
+                --sat-over: 1.4;
+                --lit-over: 1.1;
+            }
         }
 
-        p {
+        & > p {
             max-width: 360px;
             text-align: center;
             cursor: default;
+        }
+
+        & > .badges {
+            display: flex;
+            flex-direction: row-reverse;
+            gap: 4px;
+            flex-wrap: wrap;
         }
     }
     .sponsor {

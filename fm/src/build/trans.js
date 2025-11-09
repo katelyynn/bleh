@@ -6654,6 +6654,9 @@ export const trans = {
         body: {
             en: 'Provide bleh context-specific actions when right-clicking'
         }
+    },
+    you_have_new_badges: {
+        en: 'You have new badges!'
     }
 };
 
