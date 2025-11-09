@@ -2000,7 +2000,7 @@ export function bleh_profile_chart_render(
         );
     });
 
-    panel.querySelector('.this-month').textContent = tl(trans.value_this_month, { v: values[values.length - 1] });
+    panel.querySelector('.this-month').textContent = tl(trans.value_this_month, { v: parseInt(values[values.length - 1]).toLocaleString(lang) });
 
     prep_chart_colours();
 

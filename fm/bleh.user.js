@@ -38952,7 +38952,7 @@
         `${root}user/${page.name}/library` + period.getAttribute("href")
       );
     });
-    panel.querySelector(".this-month").textContent = tl2(trans.value_this_month, { v: values[values.length - 1] });
+    panel.querySelector(".this-month").textContent = tl2(trans.value_this_month, { v: parseInt(values[values.length - 1]).toLocaleString(lang) });
     prep_chart_colours();
     let scrobble_canvas_container = panel.querySelector(
       ".scrobble-canvas-container"
