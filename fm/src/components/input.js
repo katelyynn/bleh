@@ -26,7 +26,8 @@ export function input({
     show_time = true,
     name,
     func,
-    func_esc
+    func_esc,
+    submit_on_character = false
 }) {
     if (type == 'date') {
         return calendar({
@@ -80,6 +81,10 @@ export function input({
             event.preventDefault();
 
             if (func_esc) func_esc(input_box.value);
+        } else if (submit_on_character) {
+            setTimeout(() => {
+                if (func) func(input_box.value);
+            }, 0);
         }
     });
 

@@ -30574,7 +30574,8 @@
     show_time = true,
     name,
     func,
-    func_esc
+    func_esc,
+    submit_on_character = false
   }) {
     if (type == "date") {
       return calendar({
@@ -30616,6 +30617,10 @@
       } else if (event3.keyCode == 27) {
         event3.preventDefault();
         if (func_esc) func_esc(input_box.value);
+      } else if (submit_on_character) {
+        setTimeout(() => {
+          if (func) func(input_box.value);
+        }, 0);
       }
     });
     container.submit = () => {
@@ -35603,7 +35608,8 @@
                 cancelable: true
               })
             );
-          }
+          },
+          submit_on_character: true
         })}
                             </div>
                         `;
@@ -52071,11 +52077,11 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       if (lotus_combined_artists_expire < current_time && !force) {
         lotus_request("combined_artists");
       } else if (force) {
-        lotus_request("combined_artists", true);
+        lotus_request("combined_artists", true, true);
       }
     }
   }
-  function lotus_request(type = "artist", send_notify = false) {
+  function lotus_request(type = "artist", send_notify = false, refresh_page = false) {
     let button = document.body.querySelector('[onclick="_lotus_check()"]');
     if (button != null) button.setAttribute("disabled", "");
     let xhr = new XMLHttpRequest();
@@ -52115,6 +52121,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       }
       set_storage(`lotus_${type}_expire`, api_expire);
       if (button != null) button.removeAttribute("disabled");
+      if (refresh_page && page.type == "bleh_settings") render_setting_page("playback");
     };
     xhr.send();
   }

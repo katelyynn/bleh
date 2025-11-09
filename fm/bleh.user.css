@@ -18461,6 +18461,12 @@
             }
         }
 
+        &:not(.v) {
+            & > .heading {
+                min-width: 150px;
+            }
+        }
+
         &[data-type="radio"],
         &[data-type="checkbox"],
         &[data-type="select"],

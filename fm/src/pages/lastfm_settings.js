@@ -618,7 +618,8 @@ function patch_settings_profile_panel(token, update_picture) {
                                                 cancelable: true
                                             })
                                         );
-                                    }
+                                    },
+                                    submit_on_character: true
                                 })}
                             </div>
                         `;
