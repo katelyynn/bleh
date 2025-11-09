@@ -1,5 +1,5 @@
 {
-    "latest": "2025.1106.1",
+    "latest": "2025.1109",
     "sponsors": [
         "clairedoll", "kateshapedbox", "evangelicgirl",
         "astrablooms", "ItsProyal", "vwvwvwvwvwvwv", "Orofil",
@@ -8,7 +8,8 @@
         "Carbonzer", "chrysalisrot", "FenrirXXII",
         "saettbyeol", "lyeule", "sewagebipolar", "unstablerate",
         "noapop", "celebrating", "myraisounds", "riskyrizey",
-        "fourohclok", "liminalvespers", "HuxP", "K40M0J1"
+        "fourohclok", "liminalvespers", "HuxP", "K40M0J1",
+        "goldenstuffed", "favewa"
     ],
     "sponsors_one_time": [
         "kateshapedbox",
@@ -17,7 +18,7 @@
         "Carbonzer", "FenrirXXII",
         "saettbyeol", "lyeule", "noapop",
         "celebrating", "riskyrizey",
-        "fourohclok", "K40M0J1"
+        "fourohclok", "K40M0J1", "goldenstuffed"
     ],
     "sponsor_count_remove": 3,
     "sponsor_account": "kateshapedbox",
@@ -325,10 +326,15 @@
             "type": "translation",
             "reason": "Русский"
         },
-        "favewa": {
-            "type": "translation",
-            "reason": "Português"
-        },
+        "favewa": [
+            {
+                "type": "translation",
+                "reason": "Português"
+            },
+            {
+                "type": "sponsor"
+            }
+        ],
         "liminalvespers": [
             {
                 "type": "sponsor"
@@ -356,6 +362,9 @@
             }
         ],
         "K40M0J1": {
+            "type": "sponsor"
+        },
+        "goldenstuffed": {
             "type": "sponsor"
         }
     }
