@@ -29550,13 +29550,51 @@
                         </a>
                         <div class="button-combo-sep" />
                         ${() => {
+        const url = new URL(unsafe_link);
+        const scheme = url.protocol;
+        const hostname = url.hostname;
+        const path = url.pathname + url.search + url.hash;
+        let dangerous = false;
+        if (!scheme || !scheme.startsWith("http")) dangerous = true;
         const btn = html.node`
-                                <a class="dropdown-menu-clickable-item chibi" data-type="continue" href=${unsafe_link} target="_blank">
+                                <button class="dropdown-menu-clickable-item chibi" data-type="continue" onclick=${() => {
+          if (settings.trusted_sites.includes(hostname)) {
+            open(unsafe_link, "_blank");
+            return;
+          }
+          external_url_prompt(unsafe_link, dangerous);
+        }}>
                                     ${tl2(trans.view_image_unsafe)}
-                                </a>
+                                </button>
                             `;
         tippy_esm_default(btn, {
-          content: btn.textContent
+          theme: "name-sister-combo",
+          content: html.node`
+                                    <span class="name">
+                                        <span class="link">
+                                            ${scheme != "https:" ? html.node`
+                                            <span class="scheme">
+                                                ${scheme}//
+                                            </span>
+                                            ` : ""}
+                                            ${hostname ? html.node`
+                                            <span class="hostname">
+                                                ${hostname}
+                                            </span>
+                                            ` : html.node`
+                                            <span class="hostname">
+                                                ${path}
+                                            </span>
+                                            `}
+                                            ${path != "/" && hostname ? html.node`
+                                            <span class="path">
+                                                ${path}
+                                            </span>
+                                            ` : ""}
+                                        </span>
+                                    </span>
+                                    <span class="sister">${tl2(trans.external)}</span>
+                                `
         });
         return btn;
       }}
