@@ -13161,11 +13161,6 @@
         }
     }
 
-    /* remove random leftovers tooltips from corner */
-    [data-tippy-root][style$="transform: translate(0px, 10px);"] {
-        display: none !important;
-    }
-
     .tippy-box,
     .tooltip-dark {
         background: hsla(var(--b8), var(--solarium-opacity, 80%));
