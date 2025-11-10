@@ -32089,7 +32089,8 @@
           const is_own_profile = user == auth.name;
           const can_edit = is_own_profile && !is_active && (!is_album ? !has_bar : true) && auth.pro;
           const can_delete = is_own_profile && !is_active && !has_bar && !is_album;
-          const timestamp = track.getAttribute("data-timestamp") || track_timestamp_contents.replace(/^[A-Za-z]+\s+/, "").replace(",", "").replace(/\s?(am|pm)$/i, "");
+          const can_copy_scrobble = !is_album && !has_bar && !is_active && ["user", "music"].includes(page.type);
+          const timestamp = track.getAttribute("data-timestamp") || track_timestamp_contents?.replace(/^[A-Za-z]+\s+/, "").replace(",", "").replace(/\s?(am|pm)$/i, "");
           let more_button = html.node`
                     <button class="track-more-button icon chibi" data-type="more" onclick=${() => {
             log("requested track in-built", "menu", "info", {
@@ -32306,7 +32307,7 @@
               }}
                                 ` : ""}
                             </div>
-                            ${!is_album ? html.node`
+                            ${can_copy_scrobble ? html.node`
                                 <button class="dropdown-menu-clickable-item" data-type="copy_scrobble" onclick=${() => {
                 submit_scrobble({
                   pre_track: track_title.getAttribute("data-name"),
@@ -32320,7 +32321,7 @@
                                 </button>
                             ` : ""}
                             <div class="sep" />
-                            ` : !is_album ? html.node`
+                            ` : can_copy_scrobble ? html.node`
                                 <button class="dropdown-menu-clickable-item" data-type="copy_scrobble" onclick=${() => {
                 submit_scrobble({
                   pre_track: track_title.getAttribute("data-name"),
