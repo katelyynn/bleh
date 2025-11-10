@@ -86,6 +86,7 @@ import { prepare_music } from './components/music.js';
 import { page_menu } from './components/menu.js';
 import { seasonal_colour_switch } from './components/settings.js';
 import florence from '@tealmiku/florence';
+import tippy, { hideAll } from 'tippy.js';
 
 export function bleh() {
     florence({
@@ -151,11 +152,12 @@ export function bleh() {
         on_subpage_change: () => {
             load_settings();
 
-            if (page.state.settings_reload) {
+            if (page.state.settings_reload)
                 page.state.settings_reload = false;
-            }
 
             if (page.structure.indicator) page_indicator();
+
+            hideAll();
         },
         on_error: handle_error
     });

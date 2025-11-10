@@ -18937,6 +18937,27 @@
   tippy.defaultProps = defaultProps;
   tippy.setDefaultProps = setDefaultProps;
   tippy.currentInput = currentInput;
+  var hideAll = function hideAll2(_temp) {
+    var _ref = _temp === void 0 ? {} : _temp, excludedReferenceOrInstance = _ref.exclude, duration = _ref.duration;
+    mountedInstances.forEach(function(instance) {
+      var isExcluded = false;
+      if (excludedReferenceOrInstance) {
+        isExcluded = isReferenceElement(excludedReferenceOrInstance) ? instance.reference === excludedReferenceOrInstance : instance.popper === excludedReferenceOrInstance.popper;
+      }
+      if (!isExcluded) {
+        var originalDuration = instance.props.duration;
+        instance.setProps({
+          duration
+        });
+        instance.hide();
+        if (!instance.state.isDestroyed) {
+          instance.setProps({
+            duration: originalDuration
+          });
+        }
+      }
+    });
+  };
   var applyStylesModifier = Object.assign({}, applyStyles_default, {
     effect: function effect4(_ref) {
       var state = _ref.state;
@@ -57753,10 +57774,10 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       on_page_change: load_page,
       on_subpage_change: () => {
         load_settings();
-        if (page.state.settings_reload) {
+        if (page.state.settings_reload)
           page.state.settings_reload = false;
-        }
         if (page.structure.indicator) page_indicator();
+        hideAll();
       },
       on_error: handle_error
     });
