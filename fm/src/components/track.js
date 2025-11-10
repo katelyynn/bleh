@@ -307,9 +307,21 @@ export function patch_titles(search = page.structure.main) {
             const image_wrap = track.querySelector('.chartlist-image');
             let link;
             let image;
+            let alt;
             if (image_wrap) {
                 link = image_wrap.querySelector('.cover-art');
                 image = link.querySelector('img');
+
+                alt = romanise(
+                    correct_item_by_artist(
+                        image.getAttribute('alt'),
+                        track_artist
+                    )
+                );
+
+                tippy(image_wrap, {
+                    content: alt
+                });
 
                 if (!is_album && has_bar) {
                     hoshino(
@@ -1028,13 +1040,6 @@ export function patch_titles(search = page.structure.main) {
 
             if (image_wrap) {
                 if (!is_album && show_album_text && !has_bar && !album_text) {
-                    let alt = romanise(
-                        correct_item_by_artist(
-                            image.getAttribute('alt'),
-                            track_artist
-                        )
-                    );
-
                     track_info.appendChild(html.node`
                         <td class="chartlist-album custom-album-text">
                             <a href="${link.getAttribute('href')}">${alt}</a>

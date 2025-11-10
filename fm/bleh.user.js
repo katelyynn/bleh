@@ -31655,9 +31655,19 @@
         const image_wrap = track.querySelector(".chartlist-image");
         let link;
         let image;
+        let alt;
         if (image_wrap) {
           link = image_wrap.querySelector(".cover-art");
           image = link.querySelector("img");
+          alt = romanise(
+            correct_item_by_artist(
+              image.getAttribute("alt"),
+              track_artist
+            )
+          );
+          tippy_esm_default(image_wrap, {
+            content: alt
+          });
           if (!is_album && has_bar) {
             hoshino(
               image,
@@ -32249,12 +32259,6 @@
         );
         if (image_wrap) {
           if (!is_album && show_album_text && !has_bar && !album_text) {
-            let alt = romanise(
-              correct_item_by_artist(
-                image.getAttribute("alt"),
-                track_artist
-              )
-            );
             track_info.appendChild(html.node`
                         <td class="chartlist-album custom-album-text">
                             <a href="${link.getAttribute("href")}">${alt}</a>
@@ -41931,16 +41935,8 @@
       appendTo: document.body,
       hideOnClick: "toggle",
       onClickOutside(instance, event3) {
-        console.info(
-          "modal click",
-          instance,
-          instance.popper,
-          instance.popper.querySelector('[aria-expanded="true"]'),
-          instance.popper.querySelectorAll(".date-input")
-        );
-        if (instance.popper.querySelector('[aria-expanded="true"]')) {
+        if (instance.popper.querySelector('[aria-expanded="true"]') || event3.target.classList.includes("dropdown-menu-clickable-item"))
           return;
-        }
         instance.hide();
       }
     });
