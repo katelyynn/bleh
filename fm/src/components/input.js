@@ -27,7 +27,8 @@ export function input({
     name,
     func,
     func_esc,
-    submit_on_character = false
+    submit_on_character = false,
+    value_in_iso = false
 }) {
     if (type == 'date') {
         return calendar({
@@ -36,7 +37,8 @@ export function input({
             max,
             disabled,
             show_time,
-            name
+            name,
+            value_in_iso
         });
     }
 

@@ -33,6 +33,7 @@ import { redirect } from './music.js';
 import tippy from 'tippy.js';
 import ColorThief from 'color-thief-browser';
 import { hoshino } from './hoshino.js';
+import { submit_scrobble } from './scrobble.js';
 
 export function patch_titles(search = page.structure.main) {
     if (page.subpage == 'tags_overview') return;
@@ -308,9 +309,12 @@ export function patch_titles(search = page.structure.main) {
             let link;
             let image;
             let alt;
+            let album_artist;
             if (image_wrap) {
                 link = image_wrap.querySelector('.cover-art');
                 image = link.querySelector('img');
+
+                if (link.href) album_artist = return_artist_from_track(link.href, true);
 
                 alt = romanise(
                     correct_item_by_artist(
@@ -682,9 +686,7 @@ export function patch_titles(search = page.structure.main) {
                         theme: 'context-menu',
                         content: html.node`
                             ${track.preview}
-                            ${
-                                can_edit ?
-                                    html.node`
+                            ${can_edit ? html.node`
                             <div class="button-combo">
                                 ${() => {
                                     if (is_album) {
@@ -718,9 +720,7 @@ export function patch_titles(search = page.structure.main) {
                                         </form>
                                     `;
                                 }}
-                                ${
-                                    bulk_edit_button ?
-                                        html.node`
+                                ${bulk_edit_button ? html.node`
                                     <div class="button-combo-sep" />
                                     ${() => {
                                         let button =
@@ -743,14 +743,36 @@ export function patch_titles(search = page.structure.main) {
 
                                         return button;
                                     }}
-                                `
-                                    :   ''
-                                }
+                                ` : ''}
                             </div>
+                            ${!is_album ? html.node`
+                                <button class="dropdown-menu-clickable-item" data-type="copy_scrobble" onclick=${() => {
+                                    submit_scrobble({
+                                        pre_track: track_title.getAttribute('data-name'),
+                                        pre_artist: track_artist,
+                                        pre_album: alt,
+                                        pre_album_artist: album_artist,
+                                        pre_timestamp: track.getAttribute('data-timestamp')
+                                    });
+                                }}>
+                                    ${tl(trans.copy)}
+                                </button>
+                            ` : ''}
                             <div class="sep" />
-                            `
-                                :   ''
-                            }
+                            ` : !is_album ? html.node`
+                                <button class="dropdown-menu-clickable-item" data-type="copy_scrobble" onclick=${() => {
+                                    submit_scrobble({
+                                        pre_track: track_title.getAttribute('data-name'),
+                                        pre_artist: track_artist,
+                                        pre_album: alt,
+                                        pre_album_artist: album_artist,
+                                        pre_timestamp: track.getAttribute('data-timestamp')
+                                    });
+                                }}>
+                                    ${tl(trans.copy)}
+                                </button>
+                                <div class="sep" />
+                            ` : ''}
                             ${() => {
                                 let container =
                                     track.querySelector('.chartlist-play');

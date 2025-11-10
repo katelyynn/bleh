@@ -17,23 +17,27 @@ export function calendar({
     max,
     disabled,
     show_time = true,
-    name
+    name,
+    value_in_iso = false
 }) {
     let date_button;
     let manual_button;
     let up_button;
     let down_button;
 
+    if (value_in_iso && value) value *= 1000;
+
     let now = new Date();
-    if (value != null) now = new Date(value);
 
     const min_date =
-        min != null ?
+        min ?
             new Date(min)
         :   new Date(now.getTime() - 14 * 24 * 60 * 60 * 1000);
     min_date.setHours(0, 0, 0, 0);
 
-    const max_date = max != null ? new Date(max) : new Date();
+    if (value) now = new Date(value);
+
+    const max_date = max ? new Date(max) : new Date();
     max_date.setHours(23, 59, 59, 999);
 
     let last_action;

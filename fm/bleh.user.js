@@ -30205,17 +30205,19 @@
     max: max2,
     disabled,
     show_time = true,
-    name
+    name,
+    value_in_iso = false
   }) {
     let date_button;
     let manual_button;
     let up_button;
     let down_button;
+    if (value_in_iso && value) value *= 1e3;
     let now2 = /* @__PURE__ */ new Date();
-    if (value != null) now2 = new Date(value);
-    const min_date = min2 != null ? new Date(min2) : new Date(now2.getTime() - 14 * 24 * 60 * 60 * 1e3);
+    const min_date = min2 ? new Date(min2) : new Date(now2.getTime() - 14 * 24 * 60 * 60 * 1e3);
     min_date.setHours(0, 0, 0, 0);
-    const max_date = max2 != null ? new Date(max2) : /* @__PURE__ */ new Date();
+    if (value) now2 = new Date(value);
+    const max_date = max2 ? new Date(max2) : /* @__PURE__ */ new Date();
     max_date.setHours(23, 59, 59, 999);
     let last_action;
     const state = {
@@ -30683,7 +30685,8 @@
     name,
     func,
     func_esc,
-    submit_on_character = false
+    submit_on_character = false,
+    value_in_iso = false
   }) {
     if (type == "date") {
       return calendar({
@@ -30692,7 +30695,8 @@
         max: max2,
         disabled,
         show_time,
-        name
+        name,
+        value_in_iso
       });
     }
     let input_box;
@@ -31467,6 +31471,254 @@
 
   // src/components/track.js
   var import_color_thief_browser2 = __toESM(require_color_thief_min(), 1);
+
+  // src/components/toggle.js
+  function toggle({
+    value = false,
+    type = "toggle",
+    name = "",
+    title = "",
+    body: body2 = "",
+    small = "",
+    disabled = false,
+    data: data2 = "",
+    func = null,
+    standalone = true
+  }) {
+    let checkbox;
+    let state;
+    let elem = html.node`
+        <div class="setting ${standalone ? "standalone" : ""}" data-type=${type} onclick=${() => {
+      if (disabled) return;
+      let current = checkbox.checked;
+      if (func) func(!current);
+      checkbox.checked = !current;
+      state.setAttribute("aria-checked", !current);
+    }}>
+            <div class="heading">
+                <h5>${title}</h5>
+                ${body2 != "" ? html.node`<p>${body2}</p>` : ""}
+                ${small != "" ? html.node`<small>${small}</small>` : ""}
+            </div>
+            ${type == "toggle" ? html.node`
+            <div class="toggle-wrap">
+                <input type="checkbox" ref=${(el) => checkbox = el} name=${name} value=${data2} checked=${value} />
+                <button class="toggle" ref=${(el) => state = el} aria-checked=${value}>
+                    <div class="dot" />
+                </button>
+            </div>
+            ` : html.node`
+            <div class="check">
+                <input type="checkbox" ref=${(el) => checkbox = el} name=${name} value=${data2} checked=${value} disabled=${disabled} />
+                <div class="box" ref=${(el) => state = el} aria-checked=${value} disabled=${disabled}>
+                    <div class="bleh-icon" />
+                </div>
+            </div>
+            `}
+        </div>
+    `;
+    elem.check = () => {
+      if (disabled) return;
+      if (func) func(true);
+      checkbox.checked = true;
+      state.setAttribute("aria-checked", true);
+    };
+    elem.uncheck = () => {
+      if (disabled) return;
+      if (func) func(false);
+      checkbox.checked = false;
+      state.setAttribute("aria-checked", false);
+    };
+    elem.checked = () => {
+      return checkbox.checked;
+    };
+    elem.disabled = (state2 = null) => {
+      if (state2 === null) return checkbox.getAttribute("disabled") || false;
+      if (state2 === true) checkbox.setAttribute("disabled", "true");
+      else checkbox.removeAttribute("disabled");
+      return state2;
+    };
+    return elem;
+  }
+
+  // src/components/scrobble.js
+  function submit_scrobble({
+    pre_track = "",
+    pre_album = "",
+    pre_artist = "",
+    pre_album_artist = "",
+    pre_timestamp = 0,
+    func,
+    can_api
+  } = {}) {
+    if (!can_api)
+      can_api = localStorage.getItem("bleh_auth") && localStorage.getItem("bleh_auth_valid") === "true";
+    if (!can_api) {
+      window.location.href = `${root}bleh/general`;
+      return;
+    }
+    const random = random_list[Math.floor(Math.random() * random_list.length)];
+    let track;
+    let album;
+    let artist;
+    let album_artist;
+    let use_current;
+    let date;
+    let create_scrobble;
+    let max_date = /* @__PURE__ */ new Date();
+    max_date.setDate(max_date.getDate() + 1);
+    const pre_existing_date = pre_timestamp > 0;
+    dialog({
+      id: "submit_scrobble",
+      title: tl2(trans.new_scrobble),
+      body: html.node`
+            <div class="new-scrobble-form">
+                <p class="generic-label">${tl2(trans.track)}</p>
+                ${track = input({
+        type: "text",
+        value: pre_track,
+        placeholder: tl2(trans.example, { v: random.track }),
+        warn_if_empty: true
+      })}
+                <p class="generic-label">${tl2(trans.album)}</p>
+                ${album = input({
+        type: "text",
+        value: pre_album,
+        placeholder: tl2(trans.example, { v: random.album })
+      })}
+                <p class="generic-label">${tl2(trans.artist)}</p>
+                ${artist = input({
+        type: "text",
+        value: pre_artist,
+        placeholder: tl2(trans.example, { v: random.artist }),
+        warn_if_empty: true
+      })}
+                <p class="generic-label">${tl2(trans.album_artist)}</p>
+                ${album_artist = input({
+        type: "text",
+        value: pre_album_artist,
+        placeholder: tl2(trans.example, { v: random.album_artist })
+      })}
+                <p class="generic-label">${tl2(trans.time)}</p>
+                <div class="toggle-and-time">
+                    ${use_current = toggle({
+        value: !pre_existing_date,
+        type: "checkbox",
+        title: tl2(trans.use_current_time),
+        func: (state) => {
+          date.disabled(state);
+        }
+      })}
+                    ${date = input({
+        type: "date",
+        value: pre_existing_date ? pre_timestamp : null,
+        max: `${max_date.getFullYear()}-${pad2(max_date.getMonth() + 1)}-${pad2(max_date.getDate())}`,
+        disabled: !pre_existing_date,
+        value_in_iso: true
+      })}
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="see-more cancel" onclick=${() => dialog_rm({ id: "submit_scrobble" })}>
+                    ${tl2(trans.cancel)}
+                </button>
+                <div class="fill" />
+                <button class="btn primary icon" data-type="add" ref=${(el) => create_scrobble = el} onclick=${async () => {
+        if (track.value() == "" || artist.value() == "") {
+          notify({
+            id: "submit_scrobble",
+            title: tl2(trans.new_scrobble),
+            body: tl2(trans.missing_fields),
+            type: "error"
+          });
+          return;
+        }
+        track.disabled(true);
+        album.disabled(true);
+        artist.disabled(true);
+        album_artist.disabled(true);
+        use_current.disabled(true);
+        date.disabled(true);
+        create_scrobble.disabled = true;
+        if (album.value() != "" && album_artist.value() == "")
+          album_artist.value(artist.value());
+        let params = {
+          sk: localStorage.getItem("bleh_auth"),
+          artist: artist.value(),
+          track: track.value(),
+          timestamp: Math.floor(date.value() / 1e3)
+        };
+        if (album.value() != "") params.album = album.value();
+        if (album_artist.value() != "")
+          params.albumArtist = album_artist.value();
+        const res = await fetch(
+          "https://jufufu.katelyn.moe/api/lastfm",
+          {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify({
+              method: "track.scrobble",
+              params
+            })
+          }
+        );
+        const json = await res.json();
+        log("received response", "submit scrobble", "info", {
+          result: json
+        });
+        function re_enable() {
+          track.disabled(false);
+          album.disabled(false);
+          artist.disabled(false);
+          album_artist.disabled(false);
+          use_current.disabled(false);
+          date.disabled(false);
+          create_scrobble.disabled = false;
+        }
+        if (json.error) {
+          log("error", "submit scrobble", "error");
+          notify({
+            id: "submit_scrobble",
+            title: tl2(trans.scrobble_failed),
+            body: json.message,
+            type: "error",
+            persist: true
+          });
+          re_enable();
+          return;
+        }
+        const error_code = json.scrobbles.scrobble.ignoredMessage.code;
+        if (error_code > 0) {
+          log("error", "submit scrobble", "error", {
+            error_code
+          });
+          notify({
+            id: "submit_scrobble",
+            title: tl2(trans.scrobble_failed),
+            body: tl2(trans.scrobble_error_codes[error_code]),
+            type: "error",
+            persist: true
+          });
+          re_enable();
+          return;
+        }
+        notify({
+          id: "submit_scrobble",
+          title: tl2(trans.new_scrobble),
+          body: params.track,
+          type: "success"
+        });
+        dialog_rm({ id: "submit_scrobble" });
+        if (func) func();
+      }}>
+                    ${tl2(trans.new)}
+                </button>
+            </div>
+        `
+    });
+  }
+
+  // src/components/track.js
   function patch_titles(search = page.structure.main) {
     if (page.subpage == "tags_overview") return;
     if (!search) {
@@ -31677,9 +31929,11 @@
         let link;
         let image;
         let alt;
+        let album_artist;
         if (image_wrap) {
           link = image_wrap.querySelector(".cover-art");
           image = link.querySelector("img");
+          if (link.href) album_artist = return_artist_from_track(link.href, true);
           alt = romanise(
             correct_item_by_artist(
               image.getAttribute("alt"),
@@ -32037,7 +32291,33 @@
               }}
                                 ` : ""}
                             </div>
+                            ${!is_album ? html.node`
+                                <button class="dropdown-menu-clickable-item" data-type="copy_scrobble" onclick=${() => {
+                submit_scrobble({
+                  pre_track: track_title.getAttribute("data-name"),
+                  pre_artist: track_artist,
+                  pre_album: alt,
+                  pre_album_artist: album_artist,
+                  pre_timestamp: track.getAttribute("data-timestamp")
+                });
+              }}>
+                                    ${tl2(trans.copy)}
+                                </button>
+                            ` : ""}
                             <div class="sep" />
+                            ` : !is_album ? html.node`
+                                <button class="dropdown-menu-clickable-item" data-type="copy_scrobble" onclick=${() => {
+                submit_scrobble({
+                  pre_track: track_title.getAttribute("data-name"),
+                  pre_artist: track_artist,
+                  pre_album: alt,
+                  pre_album_artist: album_artist,
+                  pre_timestamp: track.getAttribute("data-timestamp")
+                });
+              }}>
+                                    ${tl2(trans.copy)}
+                                </button>
+                                <div class="sep" />
                             ` : ""}
                             ${() => {
                 let container = track.querySelector(".chartlist-play");
@@ -35057,75 +35337,6 @@
   // src/pages/lastfm_settings.js
   var import_cropperjs = __toESM(require_cropper(), 1);
 
-  // src/components/toggle.js
-  function toggle({
-    value = false,
-    type = "toggle",
-    name = "",
-    title = "",
-    body: body2 = "",
-    small = "",
-    disabled = false,
-    data: data2 = "",
-    func = null,
-    standalone = true
-  }) {
-    let checkbox;
-    let state;
-    let elem = html.node`
-        <div class="setting ${standalone ? "standalone" : ""}" data-type=${type} onclick=${() => {
-      if (disabled) return;
-      let current = checkbox.checked;
-      if (func) func(!current);
-      checkbox.checked = !current;
-      state.setAttribute("aria-checked", !current);
-    }}>
-            <div class="heading">
-                <h5>${title}</h5>
-                ${body2 != "" ? html.node`<p>${body2}</p>` : ""}
-                ${small != "" ? html.node`<small>${small}</small>` : ""}
-            </div>
-            ${type == "toggle" ? html.node`
-            <div class="toggle-wrap">
-                <input type="checkbox" ref=${(el) => checkbox = el} name=${name} value=${data2} checked=${value} />
-                <button class="toggle" ref=${(el) => state = el} aria-checked=${value}>
-                    <div class="dot" />
-                </button>
-            </div>
-            ` : html.node`
-            <div class="check">
-                <input type="checkbox" ref=${(el) => checkbox = el} name=${name} value=${data2} checked=${value} disabled=${disabled} />
-                <div class="box" ref=${(el) => state = el} aria-checked=${value} disabled=${disabled}>
-                    <div class="bleh-icon" />
-                </div>
-            </div>
-            `}
-        </div>
-    `;
-    elem.check = () => {
-      if (disabled) return;
-      if (func) func(true);
-      checkbox.checked = true;
-      state.setAttribute("aria-checked", true);
-    };
-    elem.uncheck = () => {
-      if (disabled) return;
-      if (func) func(false);
-      checkbox.checked = false;
-      state.setAttribute("aria-checked", false);
-    };
-    elem.checked = () => {
-      return checkbox.checked;
-    };
-    elem.disabled = (state2 = null) => {
-      if (state2 === null) return checkbox.getAttribute("disabled") || false;
-      if (state2 === true) checkbox.setAttribute("disabled", "true");
-      else checkbox.removeAttribute("disabled");
-      return state2;
-    };
-    return elem;
-  }
-
   // src/components/radio_toggle.js
   function radio({ name, value, values = {} }) {
     let buttons = [];
@@ -37332,179 +37543,6 @@
     quote.after(related);
     let pages = obsession_container.querySelector(".obsession-pagination");
     if (pages) page.structure.container.appendChild(pages);
-  }
-
-  // src/components/scrobble.js
-  function submit_scrobble({
-    pre_track = "",
-    pre_album = "",
-    pre_artist = "",
-    pre_album_artist = "",
-    func,
-    can_api
-  } = {}) {
-    if (!can_api)
-      can_api = localStorage.getItem("bleh_auth") && localStorage.getItem("bleh_auth_valid") === "true";
-    if (!can_api) {
-      window.location.href = `${root}bleh/general`;
-      return;
-    }
-    const random = random_list[Math.floor(Math.random() * random_list.length)];
-    let track;
-    let album;
-    let artist;
-    let album_artist;
-    let use_current;
-    let date;
-    let create_scrobble;
-    let max_date = /* @__PURE__ */ new Date();
-    max_date.setDate(max_date.getDate() + 1);
-    dialog({
-      id: "submit_scrobble",
-      title: tl2(trans.new_scrobble),
-      body: html.node`
-            <div class="new-scrobble-form">
-                <p class="generic-label">${tl2(trans.track)}</p>
-                ${track = input({
-        type: "text",
-        value: pre_track,
-        placeholder: tl2(trans.example, { v: random.track }),
-        warn_if_empty: true
-      })}
-                <p class="generic-label">${tl2(trans.album)}</p>
-                ${album = input({
-        type: "text",
-        value: pre_album,
-        placeholder: tl2(trans.example, { v: random.album })
-      })}
-                <p class="generic-label">${tl2(trans.artist)}</p>
-                ${artist = input({
-        type: "text",
-        value: pre_artist,
-        placeholder: tl2(trans.example, { v: random.artist }),
-        warn_if_empty: true
-      })}
-                <p class="generic-label">${tl2(trans.album_artist)}</p>
-                ${album_artist = input({
-        type: "text",
-        value: pre_album_artist,
-        placeholder: tl2(trans.example, { v: random.album_artist })
-      })}
-                <p class="generic-label">${tl2(trans.time)}</p>
-                <div class="toggle-and-time">
-                    ${use_current = toggle({
-        value: true,
-        type: "checkbox",
-        title: tl2(trans.use_current_time),
-        func: (state) => {
-          date.disabled(state);
-        }
-      })}
-                    ${date = input({
-        type: "date",
-        max: `${max_date.getFullYear()}-${pad2(max_date.getMonth() + 1)}-${pad2(max_date.getDate())}`,
-        disabled: true
-      })}
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="see-more cancel" onclick=${() => dialog_rm({ id: "submit_scrobble" })}>
-                    ${tl2(trans.cancel)}
-                </button>
-                <div class="fill" />
-                <button class="btn primary icon" data-type="add" ref=${(el) => create_scrobble = el} onclick=${async () => {
-        if (track.value() == "" || artist.value() == "") {
-          notify({
-            id: "submit_scrobble",
-            title: tl2(trans.new_scrobble),
-            body: tl2(trans.missing_fields),
-            type: "error"
-          });
-          return;
-        }
-        track.disabled(true);
-        album.disabled(true);
-        artist.disabled(true);
-        album_artist.disabled(true);
-        use_current.disabled(true);
-        date.disabled(true);
-        create_scrobble.disabled = true;
-        if (album.value() != "" && album_artist.value() == "")
-          album_artist.value(artist.value());
-        let params = {
-          sk: localStorage.getItem("bleh_auth"),
-          artist: artist.value(),
-          track: track.value(),
-          timestamp: Math.floor(date.value() / 1e3)
-        };
-        if (album.value() != "") params.album = album.value();
-        if (album_artist.value() != "")
-          params.albumArtist = album_artist.value();
-        const res = await fetch(
-          "https://jufufu.katelyn.moe/api/lastfm",
-          {
-            method: "POST",
-            headers: { "content-type": "application/json" },
-            body: JSON.stringify({
-              method: "track.scrobble",
-              params
-            })
-          }
-        );
-        const json = await res.json();
-        log("received response", "submit scrobble", "info", {
-          result: json
-        });
-        function re_enable() {
-          track.disabled(false);
-          album.disabled(false);
-          artist.disabled(false);
-          album_artist.disabled(false);
-          use_current.disabled(false);
-          date.disabled(false);
-          create_scrobble.disabled = false;
-        }
-        if (json.error) {
-          log("error", "submit scrobble", "error");
-          notify({
-            id: "submit_scrobble",
-            title: tl2(trans.scrobble_failed),
-            body: json.message,
-            type: "error",
-            persist: true
-          });
-          re_enable();
-          return;
-        }
-        const error_code = json.scrobbles.scrobble.ignoredMessage.code;
-        if (error_code > 0) {
-          log("error", "submit scrobble", "error", {
-            error_code
-          });
-          notify({
-            id: "submit_scrobble",
-            title: tl2(trans.scrobble_failed),
-            body: tl2(trans.scrobble_error_codes[error_code]),
-            type: "error",
-            persist: true
-          });
-          re_enable();
-          return;
-        }
-        notify({
-          id: "submit_scrobble",
-          title: tl2(trans.new_scrobble),
-          body: params.track,
-          type: "success"
-        });
-        dialog_rm({ id: "submit_scrobble" });
-        if (func) func();
-      }}>
-                    ${tl2(trans.new)}
-                </button>
-            </div>
-        `
-    });
   }
 
   // src/pages/profile.js
