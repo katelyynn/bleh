@@ -66723,6 +66723,11 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         default: false,
         name: "New home experience",
         date: "2025-11-05"
+      },
+      non_pro_edit: {
+        default: false,
+        name: "Non-pro editing",
+        date: "2025-11-10"
       }
     }
   };

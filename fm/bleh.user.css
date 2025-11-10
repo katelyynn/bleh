@@ -128,6 +128,8 @@
         --icon-half: 9px;
         --icon-gap: 4px;
 
+        --modal-close-size: 26px;
+
         @media (max-width: 980px) {
             --button-sides: 9px;
             --button-verts: 7px;
@@ -11535,8 +11537,6 @@
             }
         }
 
-        --modal-close-size: 26px;
-
         .bleh-modal-title {
             display: flex;
             gap: var(--item-list-gap);
@@ -11567,12 +11567,8 @@
             --col: hsl(var(--c3));
             --mask-colour: currentColor;
             position: absolute;
-            top: calc(
-                var(--card-padding) - ((var(--modal-close-size) - 20px) / 2)
-            );
-            right: calc(
-                var(--card-padding) - ((var(--modal-close-size) - 20px) / 2)
-            );
+            top: calc(var(--card-padding) - ((var(--modal-close-size) - 20px) / 2));
+            right: calc(var(--card-padding) - ((var(--modal-close-size) - 20px) / 2));
             --icon-size: 16px;
             --left: calc((var(--modal-close-size) - var(--icon-size)) / 2);
             width: var(--modal-close-size);
@@ -11821,8 +11817,8 @@
     /* modal dialog v3 */
     .modal-actions {
         position: absolute;
-        top: 13px;
-        right: 13px;
+        top: calc(var(--card-padding) - ((var(--modal-close-size) - 20px) / 2));
+        right: calc(var(--card-padding) - ((var(--modal-close-size) - 20px) / 2));
     }
     .modal-actions .modal-buttons {
         width: fit-content;
@@ -11834,19 +11830,23 @@
     .modal-actions,
     .modal-actions .modal-buttons {
         display: flex;
-        height: 32px;
+        height: var(--modal-close-size);
         margin: unset;
     }
     .modal-action-button {
         --bg: transparent;
-        --bg-hov: hsl(var(--b3), 40%);
-        --bg-atv: hsl(var(--b3), 60%);
+        --bg-hov: hsl(var(--b4), 40%);
+        --bg-atv: hsl(var(--b4), 60%);
         --shadow: none;
-        --left: calc((32px - var(--icon-size)) / 2);
+        --col: hsl(var(--c3));
+        --mask-colour: currentColor;
+
+        --left: calc((var(--modal-close-size) - var(--icon-size)) / 2);
+        --icon-size: 16px;
         --font-size: 0;
 
-        width: 32px !important;
-        height: 32px !important;
+        width: var(--modal-close-size) !important;
+        height: var(--modal-close-size) !important;
         margin: unset !important;
 
         &.modal-download {
@@ -11885,7 +11885,7 @@
         font-weight: var(--font-weight-medium);
         letter-spacing: unset;
         text-align: left;
-        margin-right: 32px !important;
+        margin-right: calc(var(--modal-close-size) + 10px) !important;
 
         & + .modal-inner-content {
             margin: unset;
