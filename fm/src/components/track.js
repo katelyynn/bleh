@@ -505,6 +505,8 @@ export function patch_titles(search = page.structure.main) {
                     auth.pro;
                 const can_delete = is_own_profile && !is_active && !has_bar && !is_album;
 
+                const timestamp = track.getAttribute('data-timestamp') || track_timestamp_contents.replace(/^[A-Za-z]+\s+/, '').replace(',', '').replace(/\s?(am|pm)$/i, '');
+
                 let more_button = html.node`
                     <button class="track-more-button icon chibi" data-type="more" onclick=${() => {
                         log('requested track in-built', 'menu', 'info', {
@@ -752,7 +754,7 @@ export function patch_titles(search = page.structure.main) {
                                         pre_artist: track_artist,
                                         pre_album: alt,
                                         pre_album_artist: album_artist,
-                                        pre_timestamp: track.getAttribute('data-timestamp')
+                                        pre_timestamp: timestamp
                                     });
                                 }}>
                                     ${tl(trans.copy)}
@@ -766,7 +768,7 @@ export function patch_titles(search = page.structure.main) {
                                         pre_artist: track_artist,
                                         pre_album: alt,
                                         pre_album_artist: album_artist,
-                                        pre_timestamp: track.getAttribute('data-timestamp')
+                                        pre_timestamp: timestamp
                                     });
                                 }}>
                                     ${tl(trans.copy)}

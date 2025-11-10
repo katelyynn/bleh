@@ -35,7 +35,8 @@ export function calendar({
         :   new Date(now.getTime() - 14 * 24 * 60 * 60 * 1000);
     min_date.setHours(0, 0, 0, 0);
 
-    if (value && value >= min_date) now = new Date(value);
+    console.info('calendar', value, new Date(value), min_date);
+    if (value && new Date(value) >= min_date) now = new Date(value);
 
     const max_date = max ? new Date(max) : new Date();
     max_date.setHours(23, 59, 59, 999);
@@ -108,19 +109,24 @@ export function calendar({
         <div class="input-group">
             <div class="content-form input-container" data-type="date">
                 <input class="legacy-input" type="date" ref=${(el) => (legacy_date = el)} name=${name} value="${state.year}-${pad2(state.month)}-${pad2(state.day)}">
-                <div class="date-input modern-input" ref=${(el) => (date_display = el)} disabled=${disabled}>${format_date(state)}</div>
+                <div class="date-input modern-input" ref=${(el) => (date_display = el)}>${format_date(state)}</div>
             </div>
             ${
                 show_time ?
                     html.node`
             <div class="content-form input-container" data-type="time">
-                <input class="modern-input" type="time" step="1" ref=${(el) => (time_input = el)} disabled=${disabled} value="${pad2(state.hours)}:${pad2(state.mins)}:${pad2(state.secs)}">
+                <input class="modern-input" type="time" step="1" ref=${(el) => (time_input = el)} value="${pad2(state.hours)}:${pad2(state.mins)}:${pad2(state.secs)}">
             </div>
             `
                 :   ''
             }
         </div>
     `;
+
+    if (disabled) {
+        date_display.setAttribute('disabled', true);
+        time_input.disabled = true;
+    }
 
     if (time_input) {
         time_input.addEventListener('input', () => {
@@ -139,7 +145,7 @@ export function calendar({
         const pm = view.month === 1 ? 12 : view.month - 1;
         return (
             py > min_date.getFullYear() ||
-            (py === min_date.getFullYear() && pm >= min_date.getMonth() + 1)
+            (py == min_date.getFullYear() && pm >= min_date.getMonth() + 1)
         );
     }
 
@@ -148,7 +154,7 @@ export function calendar({
         const nm = view.month === 12 ? 1 : view.month + 1;
         return (
             ny < max_date.getFullYear() ||
-            (ny === max_date.getFullYear() && nm <= max_date.getMonth() + 1)
+            (ny == max_date.getFullYear() && nm <= max_date.getMonth() + 1)
         );
     }
 

@@ -30216,7 +30216,8 @@
     let now2 = /* @__PURE__ */ new Date();
     const min_date = min2 ? new Date(min2) : new Date(now2.getTime() - 14 * 24 * 60 * 60 * 1e3);
     min_date.setHours(0, 0, 0, 0);
-    if (value && value >= min_date) now2 = new Date(value);
+    console.info("calendar", value, new Date(value), min_date);
+    if (value && new Date(value) >= min_date) now2 = new Date(value);
     const max_date = max2 ? new Date(max2) : /* @__PURE__ */ new Date();
     max_date.setHours(23, 59, 59, 999);
     let last_action;
@@ -30279,15 +30280,19 @@
         <div class="input-group">
             <div class="content-form input-container" data-type="date">
                 <input class="legacy-input" type="date" ref=${(el) => legacy_date = el} name=${name} value="${state.year}-${pad2(state.month)}-${pad2(state.day)}">
-                <div class="date-input modern-input" ref=${(el) => date_display = el} disabled=${disabled}>${format_date(state)}</div>
+                <div class="date-input modern-input" ref=${(el) => date_display = el}>${format_date(state)}</div>
             </div>
             ${show_time ? html.node`
             <div class="content-form input-container" data-type="time">
-                <input class="modern-input" type="time" step="1" ref=${(el) => time_input = el} disabled=${disabled} value="${pad2(state.hours)}:${pad2(state.mins)}:${pad2(state.secs)}">
+                <input class="modern-input" type="time" step="1" ref=${(el) => time_input = el} value="${pad2(state.hours)}:${pad2(state.mins)}:${pad2(state.secs)}">
             </div>
             ` : ""}
         </div>
     `;
+    if (disabled) {
+      date_display.setAttribute("disabled", true);
+      time_input.disabled = true;
+    }
     if (time_input) {
       time_input.addEventListener("input", () => {
         const parts = time_input.value.split(":").map((n2) => parseInt(n2, 10));
@@ -30300,12 +30305,12 @@
     function can_prev() {
       const py = view.month === 1 ? view.year - 1 : view.year;
       const pm = view.month === 1 ? 12 : view.month - 1;
-      return py > min_date.getFullYear() || py === min_date.getFullYear() && pm >= min_date.getMonth() + 1;
+      return py > min_date.getFullYear() || py == min_date.getFullYear() && pm >= min_date.getMonth() + 1;
     }
     function can_next() {
       const ny = view.month === 12 ? view.year + 1 : view.year;
       const nm = view.month === 12 ? 1 : view.month + 1;
-      return ny < max_date.getFullYear() || ny === max_date.getFullYear() && nm <= max_date.getMonth() + 1;
+      return ny < max_date.getFullYear() || ny == max_date.getFullYear() && nm <= max_date.getMonth() + 1;
     }
     let tooltip = tippy_esm_default(date_display, {
       theme: "window",
@@ -31567,7 +31572,16 @@
     let create_scrobble;
     let max_date = /* @__PURE__ */ new Date();
     max_date.setDate(max_date.getDate() + 1);
-    const pre_existing_date = pre_timestamp > 0;
+    const pre_existing_date = pre_timestamp != 0;
+    log("requesting dialog", "submit scrobble", "info", {
+      pre_track,
+      pre_album,
+      pre_artist,
+      pre_album_artist,
+      pre_timestamp,
+      func,
+      can_api
+    });
     dialog({
       id: "submit_scrobble",
       title: tl2(trans.new_scrobble),
@@ -31614,7 +31628,7 @@
         value: pre_existing_date ? pre_timestamp : null,
         max: `${max_date.getFullYear()}-${pad2(max_date.getMonth() + 1)}-${pad2(max_date.getDate())}`,
         disabled: !pre_existing_date,
-        value_in_iso: true
+        value_in_iso: typeof pre_timestamp == "number"
       })}
                 </div>
             </div>
@@ -32075,6 +32089,7 @@
           const is_own_profile = user == auth.name;
           const can_edit = is_own_profile && !is_active && (!is_album ? !has_bar : true) && auth.pro;
           const can_delete = is_own_profile && !is_active && !has_bar && !is_album;
+          const timestamp = track.getAttribute("data-timestamp") || track_timestamp_contents.replace(/^[A-Za-z]+\s+/, "").replace(",", "").replace(/\s?(am|pm)$/i, "");
           let more_button = html.node`
                     <button class="track-more-button icon chibi" data-type="more" onclick=${() => {
             log("requested track in-built", "menu", "info", {
@@ -32298,7 +32313,7 @@
                   pre_artist: track_artist,
                   pre_album: alt,
                   pre_album_artist: album_artist,
-                  pre_timestamp: track.getAttribute("data-timestamp")
+                  pre_timestamp: timestamp
                 });
               }}>
                                     ${tl2(trans.copy)}
@@ -32312,7 +32327,7 @@
                   pre_artist: track_artist,
                   pre_album: alt,
                   pre_album_artist: album_artist,
-                  pre_timestamp: track.getAttribute("data-timestamp")
+                  pre_timestamp: timestamp
                 });
               }}>
                                     ${tl2(trans.copy)}
