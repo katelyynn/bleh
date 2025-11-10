@@ -30216,7 +30216,7 @@
     let now2 = /* @__PURE__ */ new Date();
     const min_date = min2 ? new Date(min2) : new Date(now2.getTime() - 14 * 24 * 60 * 60 * 1e3);
     min_date.setHours(0, 0, 0, 0);
-    if (value) now2 = new Date(value);
+    if (value && value >= min_date) now2 = new Date(value);
     const max_date = max2 ? new Date(max2) : /* @__PURE__ */ new Date();
     max_date.setHours(23, 59, 59, 999);
     let last_action;

@@ -35,7 +35,7 @@ export function calendar({
         :   new Date(now.getTime() - 14 * 24 * 60 * 60 * 1000);
     min_date.setHours(0, 0, 0, 0);
 
-    if (value) now = new Date(value);
+    if (value && value >= min_date) now = new Date(value);
 
     const max_date = max ? new Date(max) : new Date();
     max_date.setHours(23, 59, 59, 999);
