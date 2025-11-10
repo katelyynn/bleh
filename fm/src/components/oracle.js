@@ -915,22 +915,14 @@ export function oracle_process() {
                         ${disc.tracks.map((track) => {
                             let title = fix_title(track.title);
 
-                            const artist_lower = fix_title(
-                                track['artist-credit'][0].name
-                            ).toLowerCase();
+                            const artist_lower = fix_title(track['artist-credit'][0].name).toLowerCase();
                             const title_lower = title.toLowerCase();
 
                             const track_entry =
                                 (
-                                    oracle_tracks.hasOwnProperty(
-                                        artist_lower
-                                    ) &&
-                                    oracle_tracks[artist_lower].hasOwnProperty(
-                                        title_lower
-                                    )
-                                ) ?
-                                    oracle_tracks[artist_lower][title_lower]
-                                :   null;
+                                    oracle_tracks.hasOwnProperty(artist_lower) &&
+                                    oracle_tracks[artist_lower].hasOwnProperty(title_lower)
+                                ) ? oracle_tracks[artist_lower][title_lower] : null;
 
                             const total_s = Math.floor(track.length / 1000);
                             const m = Math.floor(total_s / 60);
@@ -991,13 +983,18 @@ export function oracle_process() {
                                         index == guests.length - 2 &&
                                         oracle_entry.final_guest_separator
                                     )
-                                        joinphrase =
-                                            oracle_entry.final_guest_separator;
+                                        joinphrase = oracle_entry.final_guest_separator;
 
                                     title += `${fix_title(artist.name)}${joinphrase}`;
                                 });
 
                                 title += ')';
+                            } else if (!oracle_entry.guests_in_title) {
+                                inherit_guests.push(...guests);
+
+                                log(`${track.position}: artists, changed due to disabled title injection`, 'oracle', 'log', {
+                                    inherit_guests
+                                });
                             }
 
                             log(`${track.position}: title`, 'oracle', 'log', {
