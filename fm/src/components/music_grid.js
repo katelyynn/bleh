@@ -305,9 +305,7 @@ export function music_grids(search = page.structure.main, use_colour = true) {
         const menu = tippy(grid, {
             theme: 'context-menu',
             content: html.node`
-                ${
-                    !is_album ?
-                        html.node`
+                ${!is_album ? html.node`
                 <div class="button-combo">
                     ${() => {
                         return html.node`
@@ -333,8 +331,7 @@ export function music_grids(search = page.structure.main, use_colour = true) {
                         return button;
                     }}
                 </div>
-                `
-                    :   html.node`
+                ` : html.node`
                 <div class="button-combo">
                     ${() => {
                         return html.node`
@@ -385,8 +382,7 @@ export function music_grids(search = page.structure.main, use_colour = true) {
                         return button;
                     }}
                 </div>
-                `
-                }
+                `}
                 <a class="dropdown-menu-clickable-item" data-type="gallery" href="${name.getAttribute('href')}/+images">
                     ${is_album ? tl(trans.artwork) : tl(trans.photos)}
                 </a>
@@ -421,7 +417,7 @@ export function music_grids(search = page.structure.main, use_colour = true) {
                 <button class="dropdown-menu-clickable-item" data-type="link" onclick=${() => {
                     copy(name.href);
                 }}>
-                    ${tl(trans.copy)}
+                    ${tl(trans.copy_link)}
                 </button>
             `,
             placement: 'right-start',

@@ -162,16 +162,7 @@ export function page_menu() {
                     </a>
                 ` : ''}
             ` :   ''}
-            ${link ? html.node`
-                <a class="dropdown-menu-clickable-item" data-type="web" href=${link} target=${elem.target}>
-                    ${tl(trans.open_link)}
-                </a>
-                <a class="dropdown-menu-clickable-item" data-type="link" onclick=${() => {
-                    copy(link);
-                }}>
-                    ${tl(trans.copy_link)}
-                </a>
-            ` :   ''}
+            ${link ? generic_link_menu(link) :   ''}
             ${text && valid_for_text ? html.node`
                 <a class="dropdown-menu-clickable-item" data-type="copy" onclick=${() => {
                     copy(text);
@@ -218,4 +209,17 @@ function show_menu(e) {
     if (target.closest('[data-has-bleh-menu]')) return false;
 
     return true;
+}
+
+export function generic_link_menu(link, copy_link = link) {
+    return html.node`
+        <a class="dropdown-menu-clickable-item" data-type="web" href=${link} target="_blank">
+            ${tl(trans.open_link)}
+        </a>
+        <a class="dropdown-menu-clickable-item" data-type="link" onclick=${() => {
+            copy(link);
+        }}>
+            ${tl(trans.copy_link)}
+        </a>
+    `;
 }

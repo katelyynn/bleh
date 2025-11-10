@@ -9510,7 +9510,7 @@
             .side {
                 position: relative;
                 padding: 0 var(--item-list-gap);
-                margin: 0 calc(-1 * var(--item-list-gap));
+                margin: 0 .stat;
                 width: 190px;
                 height: var(--page-height);
                 overflow: hidden;
@@ -28536,7 +28536,7 @@
         position: fixed;
         inset: 0;
         pointer-events: none;
-        padding: 100px var(--card-padding);
+        padding: 130px var(--card-padding);
         z-index: 100000000;
 
         display: flex;
@@ -28545,8 +28545,10 @@
         gap: 10px;
 
         .status-alert {
-            padding: 6px 16px;
-            background: hsl(var(--b4), var(--solarium-opacity, 40%));
+            padding: 10px 16px;
+            background: hsl(var(--b8), var(--solarium-opacity, 80%));
+            border: 1px solid var(--card-border-base);
+            box-shadow: var(--menu-shadow);
             backdrop-filter: var(--solarium);
             -webkit-backdrop-filter: var(--solarium);
             border-radius: var(--item-big-radius);
@@ -28573,14 +28575,15 @@
 
             opacity: 1;
 
-            animation: status 0.15s var(--trans-function);
-            transition-property: opacity, transform;
-            transition-duration: 0.15s;
+            animation: status 0.2s var(--trans-function);
+            transition-property: opacity, transform, filter;
+            transition-duration: 0.2s;
             transition-timing-function: var(--trans-function);
 
             &.hiding {
                 opacity: 0;
-                transform: scaleX(1.2);
+                transform: scale(1.1);
+                filter: blur(2px);
             }
         }
     }
@@ -28588,11 +28591,13 @@
     @keyframes status {
         from {
             opacity: 0;
-            transform: scaleX(1.2);
+            transform: scale(1.1);
+            filter: blur(2px);
         }
         to {
             opacity: 1;
-            transform: scaleX(1);
+            transform: scale(1);
+            filter: blur(0);
         }
     }
 

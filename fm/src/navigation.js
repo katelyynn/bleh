@@ -31,7 +31,7 @@ import {
     open_starred_friend_window
 } from './pages/profile.js';
 import { sponsor } from './sponsor.js';
-import { register_menu } from './components/menu.js';
+import { generic_link_menu, register_menu } from './components/menu.js';
 import { copy, romanise } from './build/tools.js';
 import { submit_scrobble } from './components/scrobble.js';
 import { match } from './components/dynamic_theming.js';
@@ -1140,9 +1140,8 @@ export function append_nav() {
             <button class="dropdown-menu-clickable-item" data-type="copy" onclick=${() => copy(auth.name)}>
                 ${tl(trans.copy_username)}
             </button>
-            <button class="dropdown-menu-clickable-item" data-type="link" onclick=${() => copy(`https://www.last.fm${root}user/${auth.name}`)}>
-                ${tl(trans.copy_link)}
-            </button>
+            <div class="sep" />
+            ${generic_link_menu(`${root}user/${auth.name}`, `https://www.last.fm${root}user/${auth.name}`)}
         `,
         placement: 'right-start',
         trigger: 'manual',

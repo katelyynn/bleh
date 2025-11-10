@@ -36,7 +36,7 @@ export function status({ title, body, type }) {
 
     setTimeout(() => {
         status_remove();
-    }, 2200);
+    }, 3000);
 
     page.structure.status.appendChild(alert);
 

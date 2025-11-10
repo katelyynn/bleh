@@ -27789,6 +27789,43 @@
     }
   }
 
+  // src/components/status.js
+  function load_status() {
+    if (!page.structure.status) {
+      let notification_host = html.node`
+            <div class="status-alerts" />
+        `;
+      page.structure.status = notification_host;
+      document.body.appendChild(notification_host);
+    }
+  }
+  function status({ title, body: body2, type }) {
+    let icon = "icon-16-info";
+    if (type == "error") {
+      icon = "icon-16-x";
+    }
+    const alert2 = html.node`
+        <div class="status-alert colourful colourful-bg" onclick=${() => status_remove()}>
+            <div class="status-icon">
+                <div class="bleh-icon" style="--icon: var(--${icon})" />
+            </div>
+            <div class="status-title">${title}</div>
+            ${body2 ? html.node`<div class="status-body">${body2}</div>` : ""}
+        </div>
+    `;
+    setTimeout(() => {
+      status_remove();
+    }, 3e3);
+    page.structure.status.appendChild(alert2);
+    return alert2;
+    function status_remove() {
+      alert2.classList.add("hiding");
+      setTimeout(() => {
+        alert2.remove();
+      }, 150);
+    }
+  }
+
   // src/build/tools.js
   function hex_to_hsl(hex2) {
     let result = new RegExp(/^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i).exec(
@@ -27921,10 +27958,9 @@
   function copy(text3) {
     navigator.clipboard.writeText(text3).then(() => {
       log("copied", "copy", "info", { text: text3 });
-      notify({
+      status({
         id: "copy",
-        title: tl2(trans.copied_to_clipboard),
-        icon: "icon-16-copy"
+        title: tl2(trans.copied_to_clipboard)
       });
     });
   }
@@ -29151,43 +29187,6 @@
       return version.feature_flags[flag].default;
   }
 
-  // src/components/status.js
-  function load_status() {
-    if (!page.structure.status) {
-      let notification_host = html.node`
-            <div class="status-alerts" />
-        `;
-      page.structure.status = notification_host;
-      document.body.appendChild(notification_host);
-    }
-  }
-  function status({ title, body: body2, type }) {
-    let icon = "icon-16-info";
-    if (type == "error") {
-      icon = "icon-16-x";
-    }
-    const alert2 = html.node`
-        <div class="status-alert colourful colourful-bg" onclick=${() => status_remove()}>
-            <div class="status-icon">
-                <div class="bleh-icon" style="--icon: var(--${icon})" />
-            </div>
-            <div class="status-title">${title}</div>
-            ${body2 ? html.node`<div class="status-body">${body2}</div>` : ""}
-        </div>
-    `;
-    setTimeout(() => {
-      status_remove();
-    }, 2200);
-    page.structure.status.appendChild(alert2);
-    return alert2;
-    function status_remove() {
-      alert2.classList.add("hiding");
-      setTimeout(() => {
-        alert2.remove();
-      }, 150);
-    }
-  }
-
   // src/sponsor.js
   function sponsors(force = false, func = null) {
     if (!ff("sponsor")) return;
@@ -29618,16 +29617,7 @@
                     </a>
                 ` : ""}
             ` : ""}
-            ${link ? html.node`
-                <a class="dropdown-menu-clickable-item" data-type="web" href=${link} target=${elem.target}>
-                    ${tl2(trans.open_link)}
-                </a>
-                <a class="dropdown-menu-clickable-item" data-type="link" onclick=${() => {
-        copy(link);
-      }}>
-                    ${tl2(trans.copy_link)}
-                </a>
-            ` : ""}
+            ${link ? generic_link_menu(link) : ""}
             ${text3 && valid_for_text ? html.node`
                 <a class="dropdown-menu-clickable-item" data-type="copy" onclick=${() => {
         copy(text3);
@@ -29665,6 +29655,18 @@
     console.info("menu target", target);
     if (target.closest("[data-has-bleh-menu]")) return false;
     return true;
+  }
+  function generic_link_menu(link, copy_link = link) {
+    return html.node`
+        <a class="dropdown-menu-clickable-item" data-type="web" href=${link} target="_blank">
+            ${tl2(trans.open_link)}
+        </a>
+        <a class="dropdown-menu-clickable-item" data-type="link" onclick=${() => {
+      copy(link);
+    }}>
+            ${tl2(trans.copy_link)}
+        </a>
+    `;
   }
 
   // src/avatar.js
@@ -31237,7 +31239,7 @@
                 <button class="dropdown-menu-clickable-item" data-type="link" onclick=${() => {
           copy(name.href);
         }}>
-                    ${tl2(trans.copy)}
+                    ${tl2(trans.copy_link)}
                 </button>
             `,
         placement: "right-start",
@@ -32134,7 +32136,7 @@
                             <button class="dropdown-menu-clickable-item" data-type="link" onclick=${() => {
                 copy(track_title.href);
               }}>
-                                ${tl2(trans.copy)}
+                                ${tl2(trans.copy_link)}
                             </button>
                             ${() => {
                 if (!is_own_profile || !can_delete) return;
@@ -54027,9 +54029,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
             <button class="dropdown-menu-clickable-item" data-type="copy" onclick=${() => copy(auth.name)}>
                 ${tl2(trans.copy_username)}
             </button>
-            <button class="dropdown-menu-clickable-item" data-type="link" onclick=${() => copy(`https://www.last.fm${root}user/${auth.name}`)}>
-                ${tl2(trans.copy_link)}
-            </button>
+            <div class="sep" />
+            ${generic_link_menu(`${root}user/${auth.name}`, `https://www.last.fm${root}user/${auth.name}`)}
         `,
       placement: "right-start",
       trigger: "manual",

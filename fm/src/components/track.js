@@ -898,7 +898,7 @@ export function patch_titles(search = page.structure.main) {
                             <button class="dropdown-menu-clickable-item" data-type="link" onclick=${() => {
                                 copy(track_title.href);
                             }}>
-                                ${tl(trans.copy)}
+                                ${tl(trans.copy_link)}
                             </button>
                             ${() => {
                                 if (!is_own_profile || !can_delete) return;
