@@ -9510,7 +9510,7 @@
             .side {
                 position: relative;
                 padding: 0 var(--item-list-gap);
-                margin: 0 .stat;
+                margin: 0 calc(-1 * var(--item-list-gap));
                 width: 190px;
                 height: var(--page-height);
                 overflow: hidden;
