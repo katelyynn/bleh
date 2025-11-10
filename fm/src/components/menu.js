@@ -74,6 +74,8 @@ export function page_menu() {
         const text = elem.textContent?.trim();
         const valid_for_text = ['TEXTAREA', 'INPUT'].includes(elem.tagName);
 
+        const alt = elem.alt?.trim;
+
         log('requesting', 'menu', 'log', {
             text, value, elem, tag: elem.tagName, is_image, link, unsafe_link, valid_for_text
         });
@@ -143,7 +145,7 @@ export function page_menu() {
                         }}
                     </div>
                 ` : html.node`
-                    <a class="dropdown-menu-clickable-item" data-type="image" href=${image.src} target="_blank">
+                    <a class="dropdown-menu-clickable-item" data-type="image" href=${elem.src} target="_blank">
                         ${tl(trans.view_image)}
                     </a>
                 `}
@@ -152,6 +154,13 @@ export function page_menu() {
                 }}>
                     ${tl(trans.copy_link)}
                 </a>
+                ${alt ? html.node`
+                    <a class="dropdown-menu-clickable-item" data-type="copy" onclick=${() => {
+                        copy(alt);
+                    }}>
+                        ${tl(trans.copy_text)}
+                    </a>
+                ` : ''}
             ` :   ''}
             ${link ? html.node`
                 <a class="dropdown-menu-clickable-item" data-type="web" href=${link} target=${elem.target}>

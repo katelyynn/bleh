@@ -3356,7 +3356,7 @@
         var isRadialGradient = function(background) {
           return background.type === 2;
         };
-        var image2 = {
+        var image = {
           name: "image",
           parse: function(context, value) {
             if (value.type === 22) {
@@ -3410,7 +3410,7 @@
             return tokens.filter(function(value) {
               return nonFunctionArgSeparator(value) && isSupportedImage(value);
             }).map(function(value) {
-              return image2.parse(context, value);
+              return image.parse(context, value);
             });
           }
         };
@@ -3749,7 +3749,7 @@
             if (token.type === 20 && token.value === "none") {
               return null;
             }
-            return image2.parse(context, token);
+            return image.parse(context, token);
           }
         };
         var listStylePosition = {
@@ -4719,7 +4719,7 @@
                 case "color":
                   return color$1.parse(context, parser.parseComponentValue());
                 case "image":
-                  return image2.parse(context, parser.parseComponentValue());
+                  return image.parse(context, parser.parseComponentValue());
                 case "length":
                   var length_1 = parser.parseComponentValue();
                   return isLength(length_1) ? length_1 : ZERO_LENGTH;
@@ -7787,10 +7787,10 @@
                 });
               });
             };
-            CanvasRenderer2.prototype.renderReplacedElement = function(container, curves, image3) {
-              var intrinsicWidth = image3.naturalWidth || container.intrinsicWidth;
-              var intrinsicHeight = image3.naturalHeight || container.intrinsicHeight;
-              if (image3 && intrinsicWidth > 0 && intrinsicHeight > 0) {
+            CanvasRenderer2.prototype.renderReplacedElement = function(container, curves, image2) {
+              var intrinsicWidth = image2.naturalWidth || container.intrinsicWidth;
+              var intrinsicHeight = image2.naturalHeight || container.intrinsicHeight;
+              if (image2 && intrinsicWidth > 0 && intrinsicHeight > 0) {
                 var box = contentBox(container);
                 var path = calculatePaddingBoxPath(curves);
                 this.path(path);
@@ -7859,13 +7859,13 @@
                     }
                   }
                 }
-                this.ctx.drawImage(image3, sx, sy, sw, sh, dx, dy, dw, dh);
+                this.ctx.drawImage(image2, sx, sy, sw, sh, dx, dy, dw, dh);
                 this.ctx.restore();
               }
             };
             CanvasRenderer2.prototype.renderNodeContent = function(paint) {
               return __awaiter(this, void 0, void 0, function() {
-                var container, curves, styles, _i, _a2, child, image3, image3, iframeRenderer, canvas, size, _b2, font, fontFamily2, fontSize2, baseline, bounds, x, textBounds, img, image3, url, font, bounds;
+                var container, curves, styles, _i, _a2, child, image2, image2, iframeRenderer, canvas, size, _b2, font, fontFamily2, fontSize2, baseline, bounds, x, textBounds, img, image2, url, font, bounds;
                 return __generator(this, function(_c) {
                   switch (_c.label) {
                     case 0:
@@ -7895,8 +7895,8 @@
                       _c.trys.push([5, 7, , 8]);
                       return [4, this.context.cache.match(container.src)];
                     case 6:
-                      image3 = _c.sent();
-                      this.renderReplacedElement(container, curves, image3);
+                      image2 = _c.sent();
+                      this.renderReplacedElement(container, curves, image2);
                       return [3, 8];
                     case 7:
                       _c.sent();
@@ -7912,8 +7912,8 @@
                       _c.trys.push([9, 11, , 12]);
                       return [4, this.context.cache.match(container.svg)];
                     case 10:
-                      image3 = _c.sent();
-                      this.renderReplacedElement(container, curves, image3);
+                      image2 = _c.sent();
+                      this.renderReplacedElement(container, curves, image2);
                       return [3, 12];
                     case 11:
                       _c.sent();
@@ -8005,15 +8005,15 @@
                       if (!(container.styles.listStyleImage !== null)) return [3, 19];
                       img = container.styles.listStyleImage;
                       if (!(img.type === 0)) return [3, 18];
-                      image3 = void 0;
+                      image2 = void 0;
                       url = img.url;
                       _c.label = 15;
                     case 15:
                       _c.trys.push([15, 17, , 18]);
                       return [4, this.context.cache.match(url)];
                     case 16:
-                      image3 = _c.sent();
-                      this.ctx.drawImage(image3, container.bounds.left - (image3.width + 10), container.bounds.top);
+                      image2 = _c.sent();
+                      this.ctx.drawImage(image2, container.bounds.left - (image2.width + 10), container.bounds.top);
                       return [3, 18];
                     case 17:
                       _c.sent();
@@ -8197,14 +8197,14 @@
               this.ctx.fill();
               this.ctx.translate(-offsetX, -offsetY);
             };
-            CanvasRenderer2.prototype.resizeImage = function(image3, width, height) {
+            CanvasRenderer2.prototype.resizeImage = function(image2, width, height) {
               var _a2;
               var ownerDocument = (_a2 = this.canvas.ownerDocument) !== null && _a2 !== void 0 ? _a2 : document;
               var canvas = ownerDocument.createElement("canvas");
               canvas.width = Math.max(1, width);
               canvas.height = Math.max(1, height);
               var ctx = canvas.getContext("2d");
-              ctx.drawImage(image3, 0, 0, image3.width, image3.height, 0, 0, width, height);
+              ctx.drawImage(image2, 0, 0, image2.width, image2.height, 0, 0, width, height);
               return canvas;
             };
             CanvasRenderer2.prototype.renderBackgroundImage = function(container) {
@@ -8215,34 +8215,34 @@
                     case 0:
                       index3 = container.styles.backgroundImage.length - 1;
                       _loop_1 = function(backgroundImage3) {
-                        var image3, url, imageWidth, imageHeight, _c, path, x, y, width, height, pattern, _d, path, x, y, width, height, _e, lineLength, x0, x1, y0, y1, canvas, ctx, gradient_1, pattern, _f, path, left2, top_1, width, height, position2, x, y, _g, rx, ry, radialGradient_1, midX, midY, f2, invF;
+                        var image2, url, imageWidth, imageHeight, _c, path, x, y, width, height, pattern, _d, path, x, y, width, height, _e, lineLength, x0, x1, y0, y1, canvas, ctx, gradient_1, pattern, _f, path, left2, top_1, width, height, position2, x, y, _g, rx, ry, radialGradient_1, midX, midY, f2, invF;
                         return __generator(this, function(_h) {
                           switch (_h.label) {
                             case 0:
                               if (!(backgroundImage3.type === 0)) return [3, 5];
-                              image3 = void 0;
+                              image2 = void 0;
                               url = backgroundImage3.url;
                               _h.label = 1;
                             case 1:
                               _h.trys.push([1, 3, , 4]);
                               return [4, this_1.context.cache.match(url)];
                             case 2:
-                              image3 = _h.sent();
+                              image2 = _h.sent();
                               return [3, 4];
                             case 3:
                               _h.sent();
                               this_1.context.logger.error("Error loading background-image ".concat(url));
                               return [3, 4];
                             case 4:
-                              if (image3) {
-                                imageWidth = isNaN(image3.width) || image3.width === 0 ? 1 : image3.width;
-                                imageHeight = isNaN(image3.height) || image3.height === 0 ? 1 : image3.height;
+                              if (image2) {
+                                imageWidth = isNaN(image2.width) || image2.width === 0 ? 1 : image2.width;
+                                imageHeight = isNaN(image2.height) || image2.height === 0 ? 1 : image2.height;
                                 _c = calculateBackgroundRendering(container, index3, [
                                   imageWidth,
                                   imageHeight,
                                   imageWidth / imageHeight
                                 ]), path = _c[0], x = _c[1], y = _c[2], width = _c[3], height = _c[4];
-                                pattern = this_1.ctx.createPattern(this_1.resizeImage(image3, width, height), "repeat");
+                                pattern = this_1.ctx.createPattern(this_1.resizeImage(image2, width, height), "repeat");
                                 this_1.renderRepeat(path, pattern, x, y);
                               }
                               return [3, 6];
@@ -9502,7 +9502,7 @@
             height: newHeight
           };
         }
-        function getSourceCanvas(image2, _ref6, _ref7, _ref8) {
+        function getSourceCanvas(image, _ref6, _ref7, _ref8) {
           var imageAspectRatio = _ref6.aspectRatio, imageNaturalWidth = _ref6.naturalWidth, imageNaturalHeight = _ref6.naturalHeight, _ref6$rotate = _ref6.rotate, rotate2 = _ref6$rotate === void 0 ? 0 : _ref6$rotate, _ref6$scaleX = _ref6.scaleX, scaleX = _ref6$scaleX === void 0 ? 1 : _ref6$scaleX, _ref6$scaleY = _ref6.scaleY, scaleY = _ref6$scaleY === void 0 ? 1 : _ref6$scaleY;
           var aspectRatio = _ref7.aspectRatio, naturalWidth = _ref7.naturalWidth, naturalHeight = _ref7.naturalHeight;
           var _ref8$fillColor = _ref8.fillColor, fillColor = _ref8$fillColor === void 0 ? "transparent" : _ref8$fillColor, _ref8$imageSmoothingE = _ref8.imageSmoothingEnabled, imageSmoothingEnabled = _ref8$imageSmoothingE === void 0 ? true : _ref8$imageSmoothingE, _ref8$imageSmoothingQ = _ref8.imageSmoothingQuality, imageSmoothingQuality = _ref8$imageSmoothingQ === void 0 ? "low" : _ref8$imageSmoothingQ, _ref8$maxWidth = _ref8.maxWidth, maxWidth = _ref8$maxWidth === void 0 ? Infinity : _ref8$maxWidth, _ref8$maxHeight = _ref8.maxHeight, maxHeight = _ref8$maxHeight === void 0 ? Infinity : _ref8$maxHeight, _ref8$minWidth = _ref8.minWidth, minWidth = _ref8$minWidth === void 0 ? 0 : _ref8$minWidth, _ref8$minHeight = _ref8.minHeight, minHeight = _ref8$minHeight === void 0 ? 0 : _ref8$minHeight;
@@ -9543,7 +9543,7 @@
           context.scale(scaleX, scaleY);
           context.imageSmoothingEnabled = imageSmoothingEnabled;
           context.imageSmoothingQuality = imageSmoothingQuality;
-          context.drawImage.apply(context, [image2].concat(_toConsumableArray(params.map(function(param) {
+          context.drawImage.apply(context, [image].concat(_toConsumableArray(params.map(function(param) {
             return Math.floor(normalizeDecimalNumber(param));
           }))));
           context.restore();
@@ -10000,14 +10000,14 @@
             var preview2 = this.options.preview;
             var url = crossOrigin ? this.crossOriginUrl : this.url;
             var alt = element.alt || "The image to preview";
-            var image2 = document.createElement("img");
+            var image = document.createElement("img");
             if (crossOrigin) {
-              image2.crossOrigin = crossOrigin;
+              image.crossOrigin = crossOrigin;
             }
-            image2.src = url;
-            image2.alt = alt;
-            this.viewBox.appendChild(image2);
-            this.viewBoxImage = image2;
+            image.src = url;
+            image.alt = alt;
+            this.viewBox.appendChild(image);
+            this.viewBoxImage = image;
             if (!preview2) {
               return;
             }
@@ -11426,25 +11426,25 @@
               }
               this.crossOrigin = crossOrigin;
               this.crossOriginUrl = crossOriginUrl;
-              var image2 = document.createElement("img");
+              var image = document.createElement("img");
               if (crossOrigin) {
-                image2.crossOrigin = crossOrigin;
+                image.crossOrigin = crossOrigin;
               }
-              image2.src = crossOriginUrl || url;
-              image2.alt = element.alt || "The image to crop";
-              this.image = image2;
-              image2.onload = this.start.bind(this);
-              image2.onerror = this.stop.bind(this);
-              addClass(image2, CLASS_HIDE);
-              element.parentNode.insertBefore(image2, element.nextSibling);
+              image.src = crossOriginUrl || url;
+              image.alt = element.alt || "The image to crop";
+              this.image = image;
+              image.onload = this.start.bind(this);
+              image.onerror = this.stop.bind(this);
+              addClass(image, CLASS_HIDE);
+              element.parentNode.insertBefore(image, element.nextSibling);
             }
           }, {
             key: "start",
             value: function start2() {
               var _this2 = this;
-              var image2 = this.image;
-              image2.onload = null;
-              image2.onerror = null;
+              var image = this.image;
+              image.onload = null;
+              image.onerror = null;
               this.sizing = true;
               var isIOSWebKit = WINDOW.navigator && /(?:iPad|iPhone|iPod).*?AppleWebKit/i.test(WINDOW.navigator.userAgent);
               var done = function done2(naturalWidth, naturalHeight) {
@@ -11458,8 +11458,8 @@
                 _this2.sized = true;
                 _this2.build();
               };
-              if (image2.naturalWidth && !isIOSWebKit) {
-                done(image2.naturalWidth, image2.naturalHeight);
+              if (image.naturalWidth && !isIOSWebKit) {
+                done(image.naturalWidth, image.naturalHeight);
                 return;
               }
               var sizingImage = document.createElement("img");
@@ -11471,7 +11471,7 @@
                   body2.removeChild(sizingImage);
                 }
               };
-              sizingImage.src = image2.src;
+              sizingImage.src = image.src;
               if (!isIOSWebKit) {
                 sizingImage.style.cssText = "left:0;max-height:none!important;max-width:none!important;min-height:0!important;min-width:0!important;opacity:0;position:absolute;top:0;z-index:-1;";
                 body2.appendChild(sizingImage);
@@ -11480,10 +11480,10 @@
           }, {
             key: "stop",
             value: function stop() {
-              var image2 = this.image;
-              image2.onload = null;
-              image2.onerror = null;
-              image2.parentNode.removeChild(image2);
+              var image = this.image;
+              image.onload = null;
+              image.onerror = null;
+              image.parentNode.removeChild(image);
               this.image = null;
             }
           }, {
@@ -11492,7 +11492,7 @@
               if (!this.sized || this.ready) {
                 return;
               }
-              var element = this.element, options = this.options, image2 = this.image;
+              var element = this.element, options = this.options, image = this.image;
               var container = element.parentNode;
               var template = document.createElement("div");
               template.innerHTML = TEMPLATE;
@@ -11508,10 +11508,10 @@
               this.cropBox = cropBox;
               this.viewBox = cropper2.querySelector(".".concat(NAMESPACE, "-view-box"));
               this.face = face;
-              canvas.appendChild(image2);
+              canvas.appendChild(image);
               addClass(element, CLASS_HIDDEN);
               container.insertBefore(cropper2, element.nextSibling);
-              removeClass(image2, CLASS_HIDE);
+              removeClass(image, CLASS_HIDE);
               this.initPreview();
               this.bind();
               options.initialAspectRatio = Math.max(0, options.initialAspectRatio) || NaN;
@@ -27971,43 +27971,43 @@
         new Error("url is not in valid hosts list: " + link.hostname)
       );
     return new Promise((resolve2, reject) => {
-      const image2 = html.node`
+      const image = html.node`
             <img crossorigin="anonymous" src=${url}>
         `;
-      console.info("image", image2);
-      image2.onload = () => {
+      console.info("image", image);
+      image.onload = () => {
         const canvas = html.node`
-                <canvas width=${image2.width} height=${image2.height} />
+                <canvas width=${image.width} height=${image.height} />
             `;
         console.info("image canvas", canvas);
         const ctx = canvas.getContext("2d");
-        ctx.drawImage(image2, 0, 0);
+        ctx.drawImage(image, 0, 0);
         resolve2(canvas.toDataURL("image/png"));
       };
-      image2.onerror = reject;
+      image.onerror = reject;
     });
   }
-  function control_gif_pause(image2, override = false) {
-    if (!image2) return;
-    let processed = image2.getAttribute("data-gif-pause");
+  function control_gif_pause(image, override = false) {
+    if (!image) return;
+    let processed = image.getAttribute("data-gif-pause");
     if (processed) return;
-    image2.setAttribute("data-gif-pause", "true");
+    image.setAttribute("data-gif-pause", "true");
     let setting2 = settings.static_gifs;
     if (override) setting2 = "never";
     if (setting2 == "always") return;
-    const original = image2.src;
+    const original = image.src;
     convert_gif_to_png(original).then((paused) => {
       if (setting2 == "never") {
-        image2.src = paused;
+        image.src = paused;
         return;
       }
-      image2.addEventListener("mouseenter", () => {
-        image2.src = original;
+      image.addEventListener("mouseenter", () => {
+        image.src = original;
       });
-      image2.addEventListener("mouseleave", () => {
-        image2.src = paused;
+      image.addEventListener("mouseleave", () => {
+        image.src = paused;
       });
-      image2.src = paused;
+      image.src = paused;
       log("processed url", "image", "log", { original, paused });
     }).catch((e) => {
       log("failed to process url", "image", "error", { original });
@@ -29531,6 +29531,7 @@
       const unsafe_link = elem.getAttribute("data-unsafe-href");
       const text3 = elem.textContent?.trim();
       const valid_for_text = ["TEXTAREA", "INPUT"].includes(elem.tagName);
+      const alt = elem.alt?.trim;
       log("requesting", "menu", "log", {
         text: text3,
         value,
@@ -29600,7 +29601,7 @@
       }}
                     </div>
                 ` : html.node`
-                    <a class="dropdown-menu-clickable-item" data-type="image" href=${image.src} target="_blank">
+                    <a class="dropdown-menu-clickable-item" data-type="image" href=${elem.src} target="_blank">
                         ${tl2(trans.view_image)}
                     </a>
                 `}
@@ -29609,6 +29610,13 @@
       }}>
                     ${tl2(trans.copy_link)}
                 </a>
+                ${alt ? html.node`
+                    <a class="dropdown-menu-clickable-item" data-type="copy" onclick=${() => {
+        copy(alt);
+      }}>
+                        ${tl2(trans.copy_text)}
+                    </a>
+                ` : ""}
             ` : ""}
             ${link ? html.node`
                 <a class="dropdown-menu-clickable-item" data-type="web" href=${link} target=${elem.target}>
@@ -30967,18 +30975,18 @@
         is_album = grid.querySelector(".grid-items-item-aux-block") != null;
       }
       let image_wrap = grid.querySelector(".grid-items-cover-image-image");
-      let image2 = image_wrap.querySelector("img");
+      let image = image_wrap.querySelector("img");
       if (grid.classList.contains("grid-items-item--big"))
-        image2.src = image2.src.replace("/avatar300s/", "/500x500/");
-      if (image2 && !image_wrap.classList.contains("grid-items-cover-default") && use_colour) {
+        image.src = image.src.replace("/avatar300s/", "/500x500/");
+      if (image && !image_wrap.classList.contains("grid-items-cover-default") && use_colour) {
         let grid_colour = document.createElement("div");
         grid_colour.classList.add("grid-item-colour-bg");
         image_wrap.appendChild(grid_colour);
-        image2.setAttribute("crossorigin", "anonymous");
+        image.setAttribute("crossorigin", "anonymous");
         try {
-          image2.addEventListener("load", function() {
+          image.addEventListener("load", function() {
             let thief = new import_color_thief_browser.default();
-            let colour2 = thief.getColor(image2);
+            let colour2 = thief.getColor(image);
             let hsl = rgb_to_hsl(colour2[0], colour2[1], colour2[2]);
             grid_colour.style.setProperty(
               "background",
@@ -31084,7 +31092,7 @@
           artist = grid.querySelector(".grid-items-item-aux-text");
         if (!artist) return;
         save_hoshino_artwork(
-          image2.src.replace("/500x500/", "/avatar300s/"),
+          image.src.replace("/500x500/", "/avatar300s/"),
           name.textContent.trim(),
           artist.textContent.trim()
         );
@@ -31221,7 +31229,7 @@
                 <div class="sep" />
                 <button class="dropdown-menu-clickable-item" data-type="expand" onclick=${() => {
           expand_avatar(
-            image2.src.replace("/avatar300s/", "/ar0/").replace("/500x500/", "ar0")
+            image.src.replace("/avatar300s/", "/ar0/").replace("/500x500/", "ar0")
           );
         }}>
                     ${tl2(trans.expand)}
@@ -31644,13 +31652,13 @@
         track.setAttribute("data-show-album-text", show_album_text);
         const image_wrap = track.querySelector(".chartlist-image");
         let link;
-        let image2;
+        let image;
         if (image_wrap) {
           link = image_wrap.querySelector(".cover-art");
-          image2 = link.querySelector("img");
+          image = link.querySelector("img");
           if (!is_album && has_bar) {
             hoshino(
-              image2,
+              image,
               track_title.getAttribute("data-name"),
               track_artist,
               link
@@ -31716,7 +31724,7 @@
                         <div class="track-preview">
                             <div class="image">
                                 <div class="inner-image">
-                                    ${image2 ? html.node`<img src=${image2.src} alt=${song_title}>` : html.node`<img class="missing-track" alt="">`}
+                                    ${image ? html.node`<img src=${image.src} alt=${song_title}>` : html.node`<img class="missing-track" alt="">`}
                                 </div>
                             </div>
                             <div class="info">
@@ -31729,12 +31737,12 @@
                                     `
             )}
                                 </div>
-                                ${is_album ? "" : html.node`<p class="album">${image2 && album_link ? correct_item_by_artist(
-              image2.getAttribute("alt"),
+                                ${is_album ? "" : html.node`<p class="album">${image && album_link ? correct_item_by_artist(
+              image.getAttribute("alt"),
               track_artist
             ) : album ? album.textContent : ""}</p>`}
                                 ${track_timestamp && track_timestamp_contents ? html.node`<p class="timestamp">${track_timestamp_contents}</p>` : ""}
-                                ${image2?.getAttribute("data-hoshino") ? html.node`
+                                ${image?.getAttribute("data-hoshino") ? html.node`
                                             <div class="hoshino-marker">
                                                 <div class="bleh-icon" />
                                             </div>
@@ -31932,8 +31940,8 @@
               );
             }
             let album_name = sanitise(
-              image2 ? correct_item_by_artist(
-                image2.getAttribute("alt"),
+              image ? correct_item_by_artist(
+                image.getAttribute("alt"),
                 track_artist
               ) : album ? album.textContent : ""
             );
@@ -32240,7 +32248,7 @@
           if (!is_album && show_album_text && !has_bar && !album_text) {
             let alt = romanise(
               correct_item_by_artist(
-                image2.getAttribute("alt"),
+                image.getAttribute("alt"),
                 track_artist
               )
             );
@@ -32253,11 +32261,11 @@
           if (!settings.colourful_tracks && !settings.colourful_tracks_all)
             return;
           if (!settings.colourful_tracks_all && !is_active) return;
-          image2.setAttribute("crossorigin", "anonymous");
+          image.setAttribute("crossorigin", "anonymous");
           try {
-            image2.addEventListener("load", function() {
+            image.addEventListener("load", function() {
               let thief = new import_color_thief_browser2.default();
-              let colour2 = thief.getColor(image2);
+              let colour2 = thief.getColor(image);
               let hsl = rgb_to_hsl(colour2[0], colour2[1], colour2[2]);
               let hue2 = hsl.h;
               let sat = clamp_sat2(hsl.s / 100 * 3);
@@ -33013,7 +33021,7 @@
       pixel_guess(user_albums[Math.floor(Math.random() * user_albums.length)]);
     }
     function pixel_guess({
-      image: image2,
+      image,
       name,
       sister,
       type,
@@ -33109,7 +33117,7 @@
         `);
       guess_input.focus();
       const canvas_image = new Image();
-      canvas_image.src = image2;
+      canvas_image.src = image;
       canvas_image.onload = () => {
         render_canvas();
       };
@@ -37022,9 +37030,9 @@
         const name = details.querySelector(".api-session-app-name");
         const desc = details.querySelector(".api-session-app-description");
         const status2 = details.querySelector(".api-session-status");
-        const image2 = details.querySelector(".api-session-app-image");
-        image2.classList = "";
-        const default_image = image2.src.endsWith(
+        const image = details.querySelector(".api-session-app-image");
+        image.classList = "";
+        const default_image = image.src.endsWith(
           "14d19fbdca555c1782176cd789e81af7.png"
         );
         render(
@@ -37035,7 +37043,7 @@
                             class="session-image"
                             data-default-image=${default_image}
                         >
-                            ${image2}
+                            ${image}
                         </div>
                         <div class="session-details">${name} ${desc}</div>
                         ${form}
@@ -42663,7 +42671,7 @@
     header_title = header_title.textContent.trim();
     let artist = legacy_header.querySelector(".text-colour-link");
     if (artist) artist = artist.textContent.trim();
-    let image2 = legacy_header.querySelector(".library-header-image img");
+    let image = legacy_header.querySelector(".library-header-image img");
     let link = `${root}music/${redirect()}${sanitise(header_title)}`;
     if (type == "album")
       link = `${root}music/${redirect()}${sanitise(artist)}/${sanitise(header_title)}`;
@@ -42680,7 +42688,7 @@
     let metadata = html.node`
         <div class="glacier-library-metadata">
             <div class="glacier-library-metadata-avatar">
-                ${image2}
+                ${image}
             </div>
             <div class="glacier-library-metadata-item">
                 <div class="sub-text">
@@ -43613,13 +43621,13 @@
         </div>
     `);
     if (bookmarked_images.hasOwnProperty(page.name)) {
-      bookmarked_images[page.name].forEach((image2) => {
+      bookmarked_images[page.name].forEach((image) => {
         let image_element = document.createElement("li");
         image_element.classList.add("image-list-item-wrapper");
-        image_element.setAttribute("data-image-id", image2);
+        image_element.setAttribute("data-image-id", image);
         image_element.innerHTML = `
-                <a class="image-list-item" href="${root}music/+noredirect/${page.name}/+images/${image2}">
-                    <img src="https://lastfm.freetls.fastly.net/i/u/avatar170s/${image2}" alt=${image2} loading="lazy">
+                <a class="image-list-item" href="${root}music/+noredirect/${page.name}/+images/${image}">
+                    <img src="https://lastfm.freetls.fastly.net/i/u/avatar170s/${image}" alt=${image} loading="lazy">
                 </a>
             `;
         page.structure.container.querySelector(".bookmarks-panel .image-list").appendChild(image_element);
@@ -43627,7 +43635,7 @@
           let menu = tippy_esm_default(image_element, {
             theme: "context-menu",
             content: html.node`
-                        <button class="dropdown-menu-clickable-item" onclick=${() => update_image_bookmark(image_element, image2, false)} data-menu-item="remove-bookmark" data-bleh--image-is-bookmarked="true">
+                        <button class="dropdown-menu-clickable-item" onclick=${() => update_image_bookmark(image_element, image, false)} data-menu-item="remove-bookmark" data-bleh--image-is-bookmarked="true">
                             ${tl2(trans.remove_save)}
                         </button>
                     `,
@@ -43697,9 +43705,9 @@
     if (is_bookmarked) {
       button.setAttribute("data-bleh--image-is-bookmarked", "false");
       let new_artist_bookmarks = [];
-      for (let image2 in bookmarked_images[page.name]) {
-        if (bookmarked_images[page.name][image2] != id) {
-          new_artist_bookmarks.push(bookmarked_images[page.name][image2]);
+      for (let image in bookmarked_images[page.name]) {
+        if (bookmarked_images[page.name][image] != id) {
+          new_artist_bookmarks.push(bookmarked_images[page.name][image]);
         }
       }
       bookmarked_images[page.name] = new_artist_bookmarks;
@@ -48401,9 +48409,9 @@
         allow_hue = false;
     }
     if (body2.nodeName != "#text") {
-      body2.querySelectorAll("img").forEach((image2) => {
+      body2.querySelectorAll("img").forEach((image) => {
         if (!line_breaks) {
-          image2.remove();
+          image.remove();
           return;
         }
         const proxy_free = [
@@ -48412,23 +48420,23 @@
           "media1.tenor.com"
         ];
         try {
-          const url = new URL(image2.src);
+          const url = new URL(image.src);
           if (!proxy_free.includes(url.hostname)) {
-            image2.setAttribute("data-unsafe-href", encodeURI(image2.src));
-            image2.src = `https://images.weserv.nl/?url=${encodeURIComponent(image2.src)}&output=webp&n=-1`;
+            image.setAttribute("data-unsafe-href", encodeURI(image.src));
+            image.src = `https://images.weserv.nl/?url=${encodeURIComponent(image.src)}&output=webp&n=-1`;
           }
         } catch (e) {
-          image2.setAttribute("data-unsafe-href", encodeURI(image2.src));
-          image2.src = `https://images.weserv.nl/?url=${encodeURIComponent(image2.src)}&output=webp&n=-1`;
+          image.setAttribute("data-unsafe-href", encodeURI(image.src));
+          image.src = `https://images.weserv.nl/?url=${encodeURIComponent(image.src)}&output=webp&n=-1`;
         }
-        image2.setAttribute("loading", "lazy");
-        let func = () => expand_avatar(image2.src, image2.alt);
-        if (in_dialog) func = () => open(image2.src);
+        image.setAttribute("loading", "lazy");
+        let func = () => expand_avatar(image.src, image.alt);
+        if (in_dialog) func = () => open(image.src);
         const container = html.node`
                 <div class="markdown-image" onclick=${func} />
             `;
-        image2.after(container);
-        container.appendChild(image2);
+        image.after(container);
+        container.appendChild(image);
       });
     }
     if (allow_hue) {
@@ -55772,13 +55780,13 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       let items = row.querySelectorAll(".globalchart-item");
       items.forEach((item, item_index) => {
         let list_item;
-        let image2 = item.querySelector(".globalchart-image img");
+        let image = item.querySelector(".globalchart-image img");
         let rank = item.querySelector(".globalchart-rank");
         let name = item.querySelector(".globalchart-name a");
         let link = name.getAttribute("href");
-        image2.setAttribute(
+        image.setAttribute(
           "src",
-          image2.getAttribute("src").replace("/avatar70s/", "/avatar300s/")
+          image.getAttribute("src").replace("/avatar70s/", "/avatar300s/")
         );
         if (index3 == 1) {
           name.textContent = correct_artist(name.textContent);
@@ -55791,7 +55799,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                             </h3>
                             <div class="media-item">
                                 <span class="music-bookmarks-albums-item-image cover-art">
-                                    ${image2}
+                                    ${image}
                                 </span>
                                 <div class="charts-list-rank-overlay-wrap">
                                     <div class="charts-list-rank-overlay">${rank.textContent}</div>
@@ -55822,7 +55830,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                             </p>
                             <div class="media-item">
                                 <span class="music-bookmarks-albums-item-image cover-art">
-                                    ${image2}
+                                    ${image}
                                 </span>
                                 <div class="charts-list-rank-overlay-wrap">
                                     <div class="charts-list-rank-overlay">${rank.textContent}</div>
@@ -56141,7 +56149,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       console.log("DOC", doc);
       const items = doc.querySelectorAll(".grid-items > .grid-items-item");
       items.forEach((item) => {
-        const image2 = item.querySelector(".grid-items-cover-image-image img").src;
+        const image = item.querySelector(".grid-items-cover-image-image img").src;
         const title = item.querySelector(".grid-items-item-main-text a").textContent;
         const artist = item.querySelector(".grid-items-item-aux-block").textContent;
         const plays = item.querySelector(".grid-items-item-aux-text a:last-child").textContent.trim();
@@ -56155,7 +56163,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           formatted_artist = smart_artists(formatted[2], formatted[3]);
         }
         albums.push({
-          image: image2.replace("/avatar300s/", "/500x500/"),
+          image: image.replace("/avatar300s/", "/500x500/"),
           title,
           artist,
           plays,
@@ -56574,11 +56582,11 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         let artist = artist_parent.querySelector("a");
         artist.textContent = correct_artist(artist.textContent);
         heading.textContent = correct_item_by_artist(heading.textContent, artist.textContent);
-        let image2 = result.querySelector(".album-result-image");
+        let image = result.querySelector(".album-result-image");
         let image_parent = document.createElement("span");
         image_parent.classList.add("avatar", "album-result-image");
-        image_parent.appendChild(image2);
-        image2.classList = [];
+        image_parent.appendChild(image);
+        image.classList = [];
         artist_parent.after(image_parent);
       });
     }
@@ -57979,8 +57987,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       }
       if (page.subpage == "image") {
         let images = page.structure.row.querySelectorAll(".gallery-image");
-        images.forEach((image2) => {
-          let star = image2.querySelector(
+        images.forEach((image) => {
+          let star = image.querySelector(
             ".gallery-image-preferred-container"
           );
           if (!star) return;
