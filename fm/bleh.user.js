@@ -50078,7 +50078,7 @@
                 <div class="chartlist-count-bar">
                     <a class="chartlist-count-bar-link">
                         <span class="chartlist-count-bar-slug" data-max-stat-value="${max2}" data-stat-value="${value}" style="width: ${max2 / max2 * 100}%" />
-                        <span class="chartlist-count-bar-value">${value.toLocaleString(lang)}</span>
+                        <span class="chartlist-count-bar-value">${value.toLocaleString(DateTime.DATE_MED)}</span>
                     </a>
                 </div>
             `;
@@ -51255,12 +51255,12 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       tippy_esm_default(document.getElementById("current_season"), {
         content: new Date(
           stored_season.end.replace("y0", stored_season.year).replace("{offset}", stored_season.offset)
-        ).toLocaleString(lang)
+        ).toLocaleString(DateTime.DATE_MED)
       });
       tippy_esm_default(document.getElementById("current_season_start"), {
         content: new Date(
           stored_season.start.replace("y0", stored_season.year).replace("{offset}", stored_season.offset)
-        ).toLocaleString(lang)
+        ).toLocaleString(DateTime.DATE_MED)
       });
       tippy_esm_default(document.getElementById("next_season_start"), {
         content: new Date(
@@ -51268,7 +51268,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
             "y0",
             stored_season.next_is_new_year ? stored_season.year + 1 : stored_season.year
           ).replace("{offset}", stored_season.offset)
-        ).toLocaleString(lang)
+        ).toLocaleString(DateTime.DATE_MED)
       });
     }
     if (setting2 != null) {
@@ -58263,6 +58263,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
   // src/build/trans.js
   var import_color_thief_browser3 = __toESM(require_color_thief_min(), 1);
   var lang = "en";
+  var lang_browser = "en";
   var lang_info = {
     en: {
       name: "English",
@@ -64997,6 +64998,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       }
     }
     lang = document.documentElement.getAttribute("lang");
+    lang_browser = navigator.language || navigator.userLanguage;
     Settings.defaultLocale = lang;
   }
 

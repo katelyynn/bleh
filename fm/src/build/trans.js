@@ -13,6 +13,7 @@ import { Settings } from 'luxon';
 
 // loads your selected language in last.fm
 export let lang = 'en';
+export let lang_browser = 'en';
 // hello my name is stel :3
 export let lang_info = {
     en: {
@@ -6769,6 +6770,7 @@ export function lookup_lang() {
         }
     }
     lang = document.documentElement.getAttribute('lang');
+    lang_browser = navigator.language || navigator.userLanguage;
 
     Settings.defaultLocale = lang;
 }
