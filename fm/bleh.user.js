@@ -31784,7 +31784,8 @@
             ":scope > .more-button-wrapper"
           );
           if (previous) previous.style.display = "none";
-          const is_own_profile = page.type == "user" && page.name == auth.name;
+          const user = ["user", "music"].includes(page.type) ? page.name : auth.name;
+          const is_own_profile = user == auth.name;
           const can_edit = is_own_profile && !is_active && (!is_album ? !has_bar : true) && auth.pro;
           const can_delete = is_own_profile && !is_active && !has_bar && !is_album;
           let more_button = html.node`
@@ -32030,7 +32031,7 @@
                                 <div class="button-combo-sep"/>
                                 ${() => {
                 let button = html.node`
-                                        <a class="dropdown-menu-clickable-item chibi" data-type="continue" href="${root}user/${page.name}/library${track_title.getAttribute("href")}">
+                                        <a class="dropdown-menu-clickable-item chibi" data-type="continue" href="${root}user/${user}/library${track_title.getAttribute("href")}">
                                             ${tl2(trans.explore_in_library)}
                                         </a>
                                     `;
@@ -32054,7 +32055,7 @@
                                 <div class="button-combo-sep"/>
                                 ${() => {
                 let button = html.node`
-                                        <a class="dropdown-menu-clickable-item chibi" data-type="continue" href="${root}user/${page.name}/library${album_link.getAttribute("href")}">
+                                        <a class="dropdown-menu-clickable-item chibi" data-type="continue" href="${root}user/${user}/library${album_link.getAttribute("href")}">
                                             ${tl2(trans.explore_in_library)}
                                         </a>
                                     `;
@@ -32077,7 +32078,7 @@
                                 <div class="button-combo-sep"/>
                                 ${() => {
                 let button = html.node`
-                                        <a class="dropdown-menu-clickable-item chibi" data-type="continue" href="${root}user/${page.name}/library${track_title.getAttribute("href")})}">
+                                        <a class="dropdown-menu-clickable-item chibi" data-type="continue" href="${root}user/${user}/library${track_title.getAttribute("href")})}">
                                             ${tl2(trans.explore_in_library)}
                                         </a>
                                     `;
@@ -32100,7 +32101,7 @@
                                 <div class="button-combo-sep"/>
                                 ${() => {
                 let button = html.node`
-                                        <a class="dropdown-menu-clickable-item chibi" data-type="continue" href="${root}user/${page.name}/library/music/${redirect()}${sanitise(track_artist)}">
+                                        <a class="dropdown-menu-clickable-item chibi" data-type="continue" href="${root}user/${user}/library/music/${redirect()}${sanitise(track_artist)}">
                                             ${tl2(trans.explore_in_library)}
                                         </a>
                                     `;
