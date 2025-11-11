@@ -74,7 +74,7 @@ export function page_menu() {
         const text = elem.textContent?.trim();
         const valid_for_text = ['TEXTAREA', 'INPUT'].includes(elem.tagName);
 
-        const alt = elem.alt?.trim;
+        const alt = elem.getAttribute('alt')?.trim();
 
         log('requesting', 'menu', 'log', {
             text, value, elem, tag: elem.tagName, is_image, link, unsafe_link, valid_for_text

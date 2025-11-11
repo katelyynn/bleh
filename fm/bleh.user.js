@@ -27981,7 +27981,8 @@
       log("copied", "copy", "info", { text: text3 });
       status({
         id: "copy",
-        title: tl2(trans.copied_to_clipboard)
+        title: tl2(trans.copied_to_clipboard),
+        body: text3
       });
     });
   }
@@ -29551,7 +29552,7 @@
       const unsafe_link = elem.getAttribute("data-unsafe-href");
       const text3 = elem.textContent?.trim();
       const valid_for_text = ["TEXTAREA", "INPUT"].includes(elem.tagName);
-      const alt = elem.alt?.trim;
+      const alt = elem.getAttribute("alt")?.trim();
       log("requesting", "menu", "log", {
         text: text3,
         value,
@@ -39058,6 +39059,11 @@
         allow_alignment: true
       })
     );
+    if (!temp.hasChildNodes()) {
+      render(temp, html`
+            <p class="subtle">${tl2(trans.no_about).replace("{u}", page.name)}</p>
+        `);
+    }
     return temp;
   }
   function bleh_profile_chart() {

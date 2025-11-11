@@ -1912,6 +1912,12 @@ function bio_parse(text, cache = true, take_effect = true) {
         })
     );
 
+    if (!temp.hasChildNodes()) {
+        render(temp, html`
+            <p class="subtle">${tl(trans.no_about).replace('{u}', page.name)}</p>
+        `);
+    }
+
     return temp;
 }
 

@@ -28570,6 +28570,12 @@
 
             .status-body {
                 color: hsl(var(--c2), 80%);
+                display: -webkit-box;
+                -webkit-line-clamp: 1;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                -webkit-box-orient: vertical;
+                max-width: 300px;
             }
 
             opacity: 1;

@@ -280,7 +280,8 @@ export function copy(text) {
         log('copied', 'copy', 'info', { text: text });
         status({
             id: 'copy',
-            title: tl(trans.copied_to_clipboard)
+            title: tl(trans.copied_to_clipboard),
+            body: text
         });
     });
 }
