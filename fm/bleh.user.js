@@ -58144,6 +58144,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       );
     }
     page.structure.notifications.setAttribute("data-auth-open", "false");
+    lookup_lang();
     set_season();
     seasonal_timer_end();
     bleh_footer();

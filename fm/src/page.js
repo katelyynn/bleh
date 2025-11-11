@@ -361,6 +361,8 @@ function load_page(main_content = null) {
 
     page.structure.notifications.setAttribute('data-auth-open', 'false');
 
+    lookup_lang();
+
     set_season();
     seasonal_timer_end();
 
