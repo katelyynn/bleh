@@ -307,16 +307,8 @@ function bleh_glacier_library_date() {
         hideOnClick: 'toggle',
 
         onClickOutside(instance, event) {
-            console.info(
-                'modal click',
-                instance,
-                instance.popper,
-                instance.popper.querySelector('[aria-expanded="true"]'),
-                instance.popper.querySelectorAll('.date-input')
-            );
-            if (instance.popper.querySelector('[aria-expanded="true"]')) {
+            if (instance.popper.querySelector('[aria-expanded="true"]') || event.target.classList.includes('dropdown-menu-clickable-item'))
                 return;
-            }
 
             instance.hide();
         }

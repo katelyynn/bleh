@@ -21,7 +21,7 @@ import {
     set_storage
 } from '../build/tools';
 import { tl, trans } from '../build/trans';
-import { prepare_corrections_page } from '../pages/bleh_config';
+import { prepare_corrections_page, render_setting_page } from '../pages/bleh_config';
 import { dialog, dialog_rm } from './dialog';
 import { html, render } from 'lighterhtml';
 import { redirect } from './music.js';
@@ -103,12 +103,12 @@ export function lotus(force = false) {
         if (lotus_combined_artists_expire < current_time && !force) {
             lotus_request('combined_artists');
         } else if (force) {
-            lotus_request('combined_artists', true);
+            lotus_request('combined_artists', true, true);
         }
     }
 }
 
-function lotus_request(type = 'artist', send_notify = false) {
+function lotus_request(type = 'artist', send_notify = false, refresh_page = false) {
     let button = document.body.querySelector('[onclick="_lotus_check()"]');
     if (button != null) button.setAttribute('disabled', '');
 
@@ -159,6 +159,8 @@ function lotus_request(type = 'artist', send_notify = false) {
         set_storage(`lotus_${type}_expire`, api_expire);
 
         if (button != null) button.removeAttribute('disabled');
+
+        if (refresh_page && page.type == 'bleh_settings') render_setting_page('playback');
     };
 
     xhr.send();

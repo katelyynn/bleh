@@ -19,7 +19,7 @@ import {
 import { stored_season } from '../build/seasonal';
 import { sponsor_list } from '../build/sponsor';
 import { clamp_sat, hex_to_hsl, set_storage, time } from '../build/tools';
-import { lang, lang_info, tl, trans } from '../build/trans';
+import { lang, lang_browser, lang_info, tl, trans } from '../build/trans';
 import { load_badges } from '../components/badge';
 import { dialog, dialog_rm } from '../components/dialog';
 import { markdown } from '../components/markdown';
@@ -793,7 +793,7 @@ export async function render_setting_page(page_id) {
                 <div class="chartlist-count-bar">
                     <a class="chartlist-count-bar-link">
                         <span class="chartlist-count-bar-slug" data-max-stat-value="${max}" data-stat-value="${value}" style="width: ${(max / max) * 100}%" />
-                        <span class="chartlist-count-bar-value">${value.toLocaleString(lang)}</span>
+                        <span class="chartlist-count-bar-value">${value.toLocaleString(DateTime.DATE_MED)}</span>
                     </a>
                 </div>
             `;
@@ -942,6 +942,7 @@ export async function render_setting_page(page_id) {
                     })}
                     ${setting({ id: 'default_avatar_action' })}
                     ${setting({ id: 'simulate_scroll' })}
+                    ${ff('menus') ? setting({ id: 'menu_replacement' }) : ''}
                 </div>
                 <div class="inner-preview pad flex">
                     <section class="catalogue-tags">
@@ -972,15 +973,13 @@ export async function render_setting_page(page_id) {
                     ${setting({ id: 'gendered_tags' })}
                 </div>
             </section>
-            ${!page.mobile ? html.node`
             <section class="bleh--panel">
                 <h4>${tl(trans.navigation_items.name)}</h4>
                 <div class="setting-group">
                     ${setting({ id: 'navigation_items', list: page.state.quick_access_items })}
-                    ${setting({ id: 'navigation_language' })}
+                    ${!page.mobile ? setting({ id: 'navigation_language' }) : ''}
                 </div>
             </section>
-            ` : ''}
             <section class="bleh--panel">
                 <h4>${tl(trans.shouts)}</h4>
                 <div class="inner-preview pad flex">
@@ -2058,14 +2057,14 @@ ${e
                 stored_season.end
                     .replace('y0', stored_season.year)
                     .replace('{offset}', stored_season.offset)
-            ).toLocaleString(lang)
+            ).toLocaleString(DateTime.DATE_MED)
         });
         tippy(document.getElementById('current_season_start'), {
             content: new Date(
                 stored_season.start
                     .replace('y0', stored_season.year)
                     .replace('{offset}', stored_season.offset)
-            ).toLocaleString(lang)
+            ).toLocaleString(DateTime.DATE_MED)
         });
         tippy(document.getElementById('next_season_start'), {
             content: new Date(
@@ -2077,7 +2076,7 @@ ${e
                             : stored_season.year
                     )
                     .replace('{offset}', stored_season.offset)
-            ).toLocaleString(lang)
+            ).toLocaleString(DateTime.DATE_MED)
         });
     }
 
@@ -2901,8 +2900,7 @@ export function theme_bubbles(func = null) {
         {
             id: 'adaptive',
             name: tl(trans.auto),
-            hide: !ff('adaptive_theme'),
-            new_release: true
+            hide: !ff('adaptive_theme')
         },
         {
             id: 'glass',

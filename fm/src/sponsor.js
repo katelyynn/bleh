@@ -13,6 +13,7 @@ import { dialog } from './components/dialog';
 import { ff } from './sku';
 import { status } from './components/status';
 import { set_storage } from './build/tools';
+import { create_badge, process_badge } from './components/badge';
 
 export function sponsors(force = false, func = null) {
     if (!ff('sponsor')) return;
@@ -32,9 +33,20 @@ export function sponsors(force = false, func = null) {
 
         if (sponsor_list) {
             auth.sponsor = sponsor_list.sponsors.includes(auth.name);
-            auth.sponsor_full = !sponsor_list.sponsors_one_time.includes(
-                auth.name
-            );
+            auth.sponsor_full = !sponsor_list.sponsors_one_time.includes(auth.name);
+
+            if (sponsor_list.badges?.[auth.name]) {
+                const old_badges = JSON.parse(localStorage.getItem('kat_sponsor_cache')) || {};
+
+                if (JSON.stringify(old_badges) != JSON.stringify(sponsor_list.badges[auth.name])) {
+                    set_storage('kat_sponsor_cache', JSON.stringify(sponsor_list.badges[auth.name]));
+                    new_badges(sponsor_list.badges[auth.name]);
+
+                    return;
+                }
+
+                set_storage('kat_sponsor_cache', JSON.stringify(sponsor_list.badges[auth.name]));
+            }
         }
 
         // is it valid?
@@ -80,8 +92,20 @@ function sponsor_request(notify = false, func = null) {
 
                 if (sponsor_list) {
                     auth.sponsor = sponsor_list.sponsors.includes(auth.name);
-                    auth.sponsor_full =
-                        !sponsor_list.sponsors_one_time.includes(auth.name);
+                    auth.sponsor_full = !sponsor_list.sponsors_one_time.includes(auth.name);
+
+                    if (sponsor_list.badges?.[auth.name]) {
+                        const old_badges = JSON.parse(localStorage.getItem('kat_sponsor_cache')) || {};
+
+                        if (JSON.stringify(old_badges) != JSON.stringify(sponsor_list.badges[auth.name])) {
+                            set_storage('kat_sponsor_cache', JSON.stringify(sponsor_list.badges[auth.name]));
+                            new_badges(sponsor_list.badges[auth.name]);
+
+                            return;
+                        }
+
+                        set_storage('kat_sponsor_cache', JSON.stringify(sponsor_list.badges[auth.name]));
+                    }
                 }
 
                 if (notify)
@@ -166,7 +190,7 @@ export function sponsor_manage() {
                         <img src="${auth.avatar.replace('/avatar42s/', '/avatar170s/')}" alt="${tl(trans.your_avatar)}">
                         <span class="avatar-status-dot user-status--bleh-sponsor"></span>
                     </div>
-                    <h1>${tl(trans.you_are_a_sponsor)}</h1>
+                    <h1 class="colourful">${tl(trans.you_are_a_sponsor)}</h1>
                     <p>${tl(trans.sponsor_no_badge)}</p>
                 </div>
             `,
@@ -182,7 +206,7 @@ export function sponsor_manage() {
                         <img src="${auth.avatar.replace('/avatar42s/', '/avatar170s/')}" alt="${tl(trans.your_avatar)}">
                         <span class="avatar-status-dot user-status--bleh-sponsor"></span>
                     </div>
-                    <h1>${tl(trans.you_are_a_sponsor)}</h1>
+                    <h1 class="colourful">${tl(trans.you_are_a_sponsor)}</h1>
                     <p>${tl(trans.sponsor_get_badge)}</p>
                 </div>
                 <div class="modal-footer">
@@ -218,4 +242,23 @@ export function bleh_sponsor_page() {
     page.subpage = '';
 
     sponsor();
+}
+
+export function new_badges(badges) {
+    dialog({
+        id: 'sponsor_new_badges',
+        title: tl(trans.sponsor),
+        body: html.node`
+            <div class="modal-vertical-inner support-inner">
+                <div class="avatar">
+                    <img src="${auth.avatar.replace('/avatar42s/', '/avatar170s/')}" alt="${tl(trans.your_avatar)}">
+                </div>
+                <h1>${tl(trans.you_have_new_badges)}</h1>
+                <div class="badges">
+                    ${badges.map(badge => create_badge(process_badge(badge, auth.name)))}
+                </div>
+            </div>
+        `,
+        type: 'sponsor'
+    });
 }

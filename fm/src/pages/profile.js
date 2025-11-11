@@ -408,6 +408,10 @@ export async function bleh_profiles() {
         page.state.artists = artists;
         page.state.loved = loved;
 
+        const date = new Date();
+        const year = date.getFullYear();
+        const month = date.getMonth() + 1;
+
         let scrobble_text;
         let listen_container = html.node`
             <section class="listen-panel listen-profile-panel">
@@ -425,30 +429,27 @@ export async function bleh_profiles() {
                         <p><a href="${root}user/${page.name}/loved">${loved.toLocaleString(lang)}</a></p>
                     </div>
                 </div>
-                ${
-                    scrobbles > 0 ?
-                        html.node`
+                ${scrobbles > 0 ? html.node`
                 <div class="scrobble-canvas-container mini">
                     <div class="loading-data-container">
                         <div class="loading-data-text">${tl(trans.loading_count_days).replace('{c}', '90')}</div>
                     </div>
                 </div>
-                <div class="more-link">
-                    <a href="${root}user/${page.name}/library/artists?date_preset=LAST_90_DAYS&page=1">
+                <div class="bottom-card-links">
+                    <a class="this-month see-more left-icon" href="${root}user/${page.name}/library?from=${year}-${month}-01&rangetype=1month">
+                        ${tl(trans.value_this_month, { v: 0 })}
+                    </a>
+                    <a class="see-more" href="${root}user/${page.name}/library/artists?date_preset=LAST_90_DAYS&page=1">
                         ${tl(trans.explore_in_library)}
                     </a>
                 </div>
-                `
-                    : auth.name ?
-                        html.node`
+                ` : auth.name ? html.node`
                 <div class="scrobble-canvas-container mini">
                     <div class="loading-data-container">
                         <div class="loading-data-text failed">${tl(trans.profile_does_not_have_enough_scrobbles)}</div>
                     </div>
                 </div>
-                `
-                    :   html.node``
-                }
+                ` : html.node``}
             </section>
         `;
 
@@ -1416,12 +1417,6 @@ function profile_recents() {
                     <button type="submit" class="btn-primary save">
                         ${tl(trans.save)}
                     </button>
-                    <a
-                        class="btn icon settings not-a-view-button"
-                        href="${root}bleh"
-                    >
-                        ${tl(trans.settings)}
-                    </a>
                 </div>
             </div>
         `
@@ -1869,9 +1864,6 @@ function profile_tracks() {
                 <div class="sep" />
                 ${setting({ id: 'format_guest_features' })}
                 ${setting({ id: 'show_guest_features' })}
-                <div class="more-link">
-                    <a href="${root}bleh/music">${tl(trans.settings)}</a>
-                </div>
                 <div class="settings-footer">
                     <button type="submit" class="btn-primary save">
                         ${tl(trans.save)}
@@ -1920,6 +1912,12 @@ function bio_parse(text, cache = true, take_effect = true) {
         })
     );
 
+    if (!temp.hasChildNodes()) {
+        render(temp, html`
+            <p class="subtle">${tl(trans.no_about).replace('{u}', page.name)}</p>
+        `);
+    }
+
     return temp;
 }
 
@@ -1932,57 +1930,51 @@ function bleh_profile_chart() {
         return;
     }
 
-    lazy(
-        panel,
-        () => {
-            fetch(
-                `${root}user/${page.name}/library/artists/chart?date_preset=LAST_90_DAYS&page=1&ajax=1`
-            )
-                .then(function (response) {
-                    console.log(
-                        'glacier library returned',
-                        response,
-                        response.text,
-                        response.status
+    lazy(panel, () => {
+        fetch(`${root}user/${page.name}/library/artists/chart?date_preset=LAST_90_DAYS&page=1&ajax=1`)
+            .then(function (response) {
+                console.log(
+                    'glacier library returned',
+                    response,
+                    response.text,
+                    response.status
+                );
+
+                if (response.status != 200) throw new Error();
+
+                return response.text();
+            })
+            .then(function (html) {
+                let doc = new DOMParser().parseFromString(
+                    html,
+                    'text/html'
+                );
+                console.log(
+                    'glacier library DOC',
+                    doc,
+                    doc.querySelector('.table')
+                );
+
+                log('received response', 'glacier library');
+
+                table = doc.querySelector('.table');
+
+                if (table) {
+                    panel.appendChild(table);
+                    bleh_profile_chart_render(panel, table);
+                } else {
+                    log('table is null?', 'glacier library', 'error');
+                    console.info('glacier library', doc.body.innerHTML);
+                    console.info(
+                        'glacier library',
+                        new DOMParser().parseFromString(
+                            doc.body.innerHTML,
+                            'text/html'
+                        )
                     );
-
-                    if (response.status != 200) throw new Error();
-
-                    return response.text();
-                })
-                .then(function (html) {
-                    let doc = new DOMParser().parseFromString(
-                        html,
-                        'text/html'
-                    );
-                    console.log(
-                        'glacier library DOC',
-                        doc,
-                        doc.querySelector('.table')
-                    );
-
-                    log('received response', 'glacier library');
-
-                    table = doc.querySelector('.table');
-
-                    if (table) {
-                        panel.appendChild(table);
-                        bleh_profile_chart_render(panel, table);
-                    } else {
-                        log('table is null?', 'glacier library', 'error');
-                        console.info('glacier library', doc.body.innerHTML);
-                        console.info(
-                            'glacier library',
-                            new DOMParser().parseFromString(
-                                doc.body.innerHTML,
-                                'text/html'
-                            )
-                        );
-                    }
-                });
-        },
-        { threshold: 0.3, rootMargin: '0px' }
-    );
+                }
+            });
+    }, { threshold: 0.3, rootMargin: '0px' });
 }
 
 export function bleh_profile_chart_render(
@@ -2013,6 +2005,8 @@ export function bleh_profile_chart_render(
             `${root}user/${page.name}/library` + period.getAttribute('href')
         );
     });
+
+    panel.querySelector('.this-month').textContent = tl(trans.value_this_month, { v: parseInt(values[values.length - 1]).toLocaleString(lang) });
 
     prep_chart_colours();
 
@@ -2053,7 +2047,7 @@ export function bleh_profile_chart_render(
                 }
             ]
         },
-        options: page.state.chart_library_line_options
+        options: page.state.chart_library_line_options_mini
     });
 
     scrobble_canvas_container.appendChild(scrobble_canvas);

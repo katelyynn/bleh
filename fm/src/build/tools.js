@@ -13,6 +13,7 @@ import { root } from './page.js';
 import * as wanakana from 'wanakana';
 import * as hangulRomanization from 'hangul-romanization';
 import { DateTime } from 'luxon';
+import { status } from '../components/status.js';
 
 // https://stackoverflow.com/questions/46432335/hex-to-hsl-convert-javascript
 /**
@@ -277,10 +278,10 @@ export function lazy(elem, func, options = {}) {
 export function copy(text) {
     navigator.clipboard.writeText(text).then(() => {
         log('copied', 'copy', 'info', { text: text });
-        notify({
+        status({
             id: 'copy',
             title: tl(trans.copied_to_clipboard),
-            icon: 'icon-16-copy'
+            body: text
         });
     });
 }

@@ -13,6 +13,7 @@ import { Settings } from 'luxon';
 
 // loads your selected language in last.fm
 export let lang = 'en';
+export let lang_browser = 'en';
 // hello my name is stel :3
 export let lang_info = {
     en: {
@@ -1453,32 +1454,32 @@ export const trans = {
     },
     // TODO(stel): is my capitalisation correct here at all lol ; yes cutie, well done <3
     good_morning_user: {
-        en: 'Good morning, {user}',
-        de: 'Guten Morgen, {user}',
-        pt: 'Bom dia, {user}',
-        sv: 'God morgon, {user}',
-        ru: 'Доброе утро, {user}'
+        en: 'Good morning',
+        de: 'Guten Morgen',
+        pt: 'Bom dia',
+        sv: 'God morgon',
+        ru: 'Доброе утро'
     },
     good_afternoon_user: {
-        en: 'Good afternoon, {user}',
-        de: 'Guten Nachmittag, {user}',
-        pt: 'Boa tarde, {user}',
-        sv: 'God eftermiddag, {user}',
-        ru: 'Добрый день, {user}'
+        en: 'Good afternoon',
+        de: 'Guten Nachmittag',
+        pt: 'Boa tarde',
+        sv: 'God eftermiddag',
+        ru: 'Добрый день'
     },
     good_evening_user: {
-        en: 'Good evening, {user}',
-        de: 'Guten Abend, {user}',
-        pt: 'Boa noite, {user}',
-        sv: 'God kväll, {user}',
-        ru: 'Добрый вечер, {user}'
+        en: 'Good evening',
+        de: 'Guten Abend',
+        pt: 'Boa noite',
+        sv: 'God kväll',
+        ru: 'Добрый вечер'
     },
     good_night_user: {
-        en: 'Goodnight, {user}',
-        de: 'Gute Nacht, {user}',
-        pt: 'Boa noite, {user}',
-        sv: 'God natt, {user}',
-        ru: 'Спокойной ночи, {user}'
+        en: 'Goodnight',
+        de: 'Gute Nacht',
+        pt: 'Boa noite',
+        sv: 'God natt',
+        ru: 'Спокойной ночи'
     },
     bleh_settings: {
         en: 'bleh Settings',
@@ -3053,6 +3054,15 @@ export const trans = {
         sv: 'Visa bild',
         ru: 'Просмотреть изображение'
     },
+    view_image_unsafe: {
+        en: 'View unsafe image'
+    },
+    open_link: {
+        en: 'Open link'
+    },
+    copy_text: {
+        en: 'Copy text'
+    },
     event_cancelled: {
         // obviously remove the emoji or replace it as
         // you see fit if desired
@@ -3754,7 +3764,7 @@ export const trans = {
         pop: {
             en: 'Pop',
             sv: 'Poppande',
-            ru: 'Яркий' 
+            ru: 'Яркий'
         },
         glow: {
             en: 'Glow',
@@ -6627,9 +6637,27 @@ export const trans = {
         },
         body: {
             en: 'Create graphs from user libraries',
-            sv: 'Skapa diagram från användarbibliotek'
+            sv: 'Skapa diagram från användarbibliotek',
             ru: 'Создать графики из пользовательских библиотек'
         }
+    },
+    your_recent_30_days: {
+        en: 'Your recent 30 days'
+    },
+    value_this_month: {
+        // number of scrobbles
+        en: '{v} this month'
+    },
+    menu_replacement: {
+        name: {
+            en: 'Replace native browser right-click menus'
+        },
+        body: {
+            en: 'Provide bleh context-specific actions when right-clicking'
+        }
+    },
+    you_have_new_badges: {
+        en: 'You have new badges!'
     }
 };
 
@@ -6742,6 +6770,7 @@ export function lookup_lang() {
         }
     }
     lang = document.documentElement.getAttribute('lang');
+    lang_browser = navigator.language || navigator.userLanguage;
 
     Settings.defaultLocale = lang;
 }

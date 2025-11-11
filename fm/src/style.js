@@ -32,6 +32,9 @@ export function append_style() {
         (split[length] == 'playback' && split[2] == 'listening-report') ||
         split[0] == 'labs'
     ) {
+        // this sometimes fixes last.fm just not appending classes and i dont know why
+        if (split[length] == 'playback' && split[2] == 'listening-report') document.body?.classList.add('playback-2024');
+
         log('disabled loading for special interface', 'style');
         return;
     }
@@ -325,7 +328,7 @@ function finish_update() {
     set_storage('bleh_update_required', 'false');
     set_storage('bleh_update_checked', new Date().toString());
 
-    fetch_new_style(false, true, true);
+    force_refresh_style();
 }
 
 export function force_refresh_style() {

@@ -393,7 +393,8 @@ export function markdown(
         'music.youtube.com': 'YouTube Music',
         'facebook.com': 'Facebook',
         'www.discogs.com': 'Discogs',
-        'discogs.com': 'Discogs'
+        'discogs.com': 'Discogs',
+        'tidal.com': 'Tidal'
     };
 
     if (links.length > 0) {
@@ -413,7 +414,7 @@ export function markdown(
                         }
 
                         return html.node`
-                            <a class="music-link social-link" href=${link.url} target="_blank" data-host=${link.host} data-path=${link.path}>
+                            <a class="music-link social-link" href=${link.url} target="_blank" data-host=${link.host} data-host-unknown=${!link_strings.hasOwnProperty(link.host)} data-path=${link.path} style="--favi: url(https://icons.duckduckgo.com/ip3/${link.host}.ico)">
                                 ${label}
                             </a>
                         `;
@@ -461,8 +462,12 @@ export function markdown(
             try {
                 const url = new URL(image.src);
 
-                if (!proxy_free.includes(url.hostname)) image.src = `https://images.weserv.nl/?url=${encodeURIComponent(image.src)}&output=webp&n=-1`;
+                if (!proxy_free.includes(url.hostname)) {
+                    image.setAttribute('data-unsafe-href', encodeURI(image.src));
+                    image.src = `https://images.weserv.nl/?url=${encodeURIComponent(image.src)}&output=webp&n=-1`;
+                }
             } catch(e) {
+                image.setAttribute('data-unsafe-href', encodeURI(image.src));
                 image.src = `https://images.weserv.nl/?url=${encodeURIComponent(image.src)}&output=webp&n=-1`;
             }
 

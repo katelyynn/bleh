@@ -19,6 +19,7 @@ export function submit_scrobble({
     pre_album = '',
     pre_artist = '',
     pre_album_artist = '',
+    pre_timestamp = 0,
     func,
     can_api
 } = {}) {
@@ -45,6 +46,18 @@ export function submit_scrobble({
 
     let max_date = new Date();
     max_date.setDate(max_date.getDate() + 1);
+
+    const pre_existing_date = pre_timestamp != 0;
+
+    log('requesting dialog', 'submit scrobble', 'info', {
+        pre_track,
+        pre_album,
+        pre_artist,
+        pre_album_artist,
+        pre_timestamp,
+        func,
+        can_api
+    });
 
     dialog({
         id: 'submit_scrobble',
@@ -80,7 +93,7 @@ export function submit_scrobble({
                 <p class="generic-label">${tl(trans.time)}</p>
                 <div class="toggle-and-time">
                     ${(use_current = toggle({
-                        value: true,
+                        value: !pre_existing_date,
                         type: 'checkbox',
                         title: tl(trans.use_current_time),
                         func: (state) => {
@@ -89,8 +102,10 @@ export function submit_scrobble({
                     }))}
                     ${(date = input({
                         type: 'date',
+                        value: pre_existing_date ? pre_timestamp : null,
                         max: `${max_date.getFullYear()}-${pad2(max_date.getMonth() + 1)}-${pad2(max_date.getDate())}`,
-                        disabled: true
+                        disabled: !pre_existing_date,
+                        value_in_iso: typeof pre_timestamp == 'number'
                     }))}
                 </div>
             </div>

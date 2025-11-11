@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         bleh
 // @namespace    https://last.fm/
-// @version      2025.1103.1
+// @version      2025.1111
 // @description  bleh!!! ^-^
 // @author       katelyn
 // @match        https://www.last.fm/*
@@ -18937,6 +18937,27 @@
   tippy.defaultProps = defaultProps;
   tippy.setDefaultProps = setDefaultProps;
   tippy.currentInput = currentInput;
+  var hideAll = function hideAll2(_temp) {
+    var _ref = _temp === void 0 ? {} : _temp, excludedReferenceOrInstance = _ref.exclude, duration = _ref.duration;
+    mountedInstances.forEach(function(instance) {
+      var isExcluded = false;
+      if (excludedReferenceOrInstance) {
+        isExcluded = isReferenceElement(excludedReferenceOrInstance) ? instance.reference === excludedReferenceOrInstance : instance.popper === excludedReferenceOrInstance.popper;
+      }
+      if (!isExcluded) {
+        var originalDuration = instance.props.duration;
+        instance.setProps({
+          duration
+        });
+        instance.hide();
+        if (!instance.state.isDestroyed) {
+          instance.setProps({
+            duration: originalDuration
+          });
+        }
+      }
+    });
+  };
   var applyStylesModifier = Object.assign({}, applyStyles_default, {
     effect: function effect4(_ref) {
       var state = _ref.state;
@@ -27789,6 +27810,43 @@
     }
   }
 
+  // src/components/status.js
+  function load_status() {
+    if (!page.structure.status) {
+      let notification_host = html.node`
+            <div class="status-alerts" />
+        `;
+      page.structure.status = notification_host;
+      document.body.appendChild(notification_host);
+    }
+  }
+  function status({ title, body: body2, type }) {
+    let icon = "icon-16-info";
+    if (type == "error") {
+      icon = "icon-16-x";
+    }
+    const alert2 = html.node`
+        <div class="status-alert colourful colourful-bg" onclick=${() => status_remove()}>
+            <div class="status-icon">
+                <div class="bleh-icon" style="--icon: var(--${icon})" />
+            </div>
+            <div class="status-title">${title}</div>
+            ${body2 ? html.node`<div class="status-body">${body2}</div>` : ""}
+        </div>
+    `;
+    setTimeout(() => {
+      status_remove();
+    }, 3e3);
+    page.structure.status.appendChild(alert2);
+    return alert2;
+    function status_remove() {
+      alert2.classList.add("hiding");
+      setTimeout(() => {
+        alert2.remove();
+      }, 150);
+    }
+  }
+
   // src/build/tools.js
   function hex_to_hsl(hex2) {
     let result = new RegExp(/^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i).exec(
@@ -27921,10 +27979,10 @@
   function copy(text3) {
     navigator.clipboard.writeText(text3).then(() => {
       log("copied", "copy", "info", { text: text3 });
-      notify({
+      status({
         id: "copy",
         title: tl2(trans.copied_to_clipboard),
-        icon: "icon-16-copy"
+        body: text3
       });
     });
   }
@@ -28675,9 +28733,9 @@
       "[digital deluxe",
       "d.l.x.",
       // https://www.last.fm/music/taylor+swift/1989+d.l.x.
-      "deluxe edition",
+      " deluxe edition",
       // added edition to the end because 'deluxe' can have some false positives
-      "deluxe version",
+      " deluxe version",
       // same as above
       "- complete edition",
       "(complete edition",
@@ -28966,7 +29024,7 @@
       end: "y0-11-22T23:59:59{offset}",
       snowflakes: {
         state: true,
-        count: 40
+        count: 80
       }
     },
     {
@@ -29151,43 +29209,6 @@
       return version.feature_flags[flag].default;
   }
 
-  // src/components/status.js
-  function load_status() {
-    if (!page.structure.status) {
-      let notification_host = html.node`
-            <div class="status-alerts" />
-        `;
-      page.structure.status = notification_host;
-      document.body.appendChild(notification_host);
-    }
-  }
-  function status({ title, body: body2, type }) {
-    let icon = "icon-16-info";
-    if (type == "error") {
-      icon = "icon-16-x";
-    }
-    const alert2 = html.node`
-        <div class="status-alert colourful colourful-bg" onclick=${() => status_remove()}>
-            <div class="status-icon">
-                <div class="bleh-icon" style="--icon: var(--${icon})" />
-            </div>
-            <div class="status-title">${title}</div>
-            ${body2 ? html.node`<div class="status-body">${body2}</div>` : ""}
-        </div>
-    `;
-    setTimeout(() => {
-      status_remove();
-    }, 2200);
-    page.structure.status.appendChild(alert2);
-    return alert2;
-    function status_remove() {
-      alert2.classList.add("hiding");
-      setTimeout(() => {
-        alert2.remove();
-      }, 150);
-    }
-  }
-
   // src/sponsor.js
   function sponsors(force = false, func = null) {
     if (!ff("sponsor")) return;
@@ -29202,9 +29223,16 @@
       Object.assign(sponsor_list, JSON.parse(sponsor_data));
       if (sponsor_list) {
         auth.sponsor = sponsor_list.sponsors.includes(auth.name);
-        auth.sponsor_full = !sponsor_list.sponsors_one_time.includes(
-          auth.name
-        );
+        auth.sponsor_full = !sponsor_list.sponsors_one_time.includes(auth.name);
+        if (sponsor_list.badges?.[auth.name]) {
+          const old_badges = JSON.parse(localStorage.getItem("kat_sponsor_cache")) || {};
+          if (JSON.stringify(old_badges) != JSON.stringify(sponsor_list.badges[auth.name])) {
+            set_storage("kat_sponsor_cache", JSON.stringify(sponsor_list.badges[auth.name]));
+            new_badges(sponsor_list.badges[auth.name]);
+            return;
+          }
+          set_storage("kat_sponsor_cache", JSON.stringify(sponsor_list.badges[auth.name]));
+        }
       }
       if (sponsor_expire < current_time && !force) {
         sponsor_request(false, func);
@@ -29236,6 +29264,15 @@
           if (sponsor_list) {
             auth.sponsor = sponsor_list.sponsors.includes(auth.name);
             auth.sponsor_full = !sponsor_list.sponsors_one_time.includes(auth.name);
+            if (sponsor_list.badges?.[auth.name]) {
+              const old_badges = JSON.parse(localStorage.getItem("kat_sponsor_cache")) || {};
+              if (JSON.stringify(old_badges) != JSON.stringify(sponsor_list.badges[auth.name])) {
+                set_storage("kat_sponsor_cache", JSON.stringify(sponsor_list.badges[auth.name]));
+                new_badges(sponsor_list.badges[auth.name]);
+                return;
+              }
+              set_storage("kat_sponsor_cache", JSON.stringify(sponsor_list.badges[auth.name]));
+            }
           }
           if (notify2)
             status({
@@ -29305,7 +29342,7 @@
                         <img src="${auth.avatar.replace("/avatar42s/", "/avatar170s/")}" alt="${tl2(trans.your_avatar)}">
                         <span class="avatar-status-dot user-status--bleh-sponsor"></span>
                     </div>
-                    <h1>${tl2(trans.you_are_a_sponsor)}</h1>
+                    <h1 class="colourful">${tl2(trans.you_are_a_sponsor)}</h1>
                     <p>${tl2(trans.sponsor_no_badge)}</p>
                 </div>
             `,
@@ -29321,7 +29358,7 @@
                         <img src="${auth.avatar.replace("/avatar42s/", "/avatar170s/")}" alt="${tl2(trans.your_avatar)}">
                         <span class="avatar-status-dot user-status--bleh-sponsor"></span>
                     </div>
-                    <h1>${tl2(trans.you_are_a_sponsor)}</h1>
+                    <h1 class="colourful">${tl2(trans.you_are_a_sponsor)}</h1>
                     <p>${tl2(trans.sponsor_get_badge)}</p>
                 </div>
                 <div class="modal-footer">
@@ -29351,6 +29388,24 @@
     page.subpage = "";
     sponsor();
   }
+  function new_badges(badges) {
+    dialog({
+      id: "sponsor_new_badges",
+      title: tl2(trans.sponsor),
+      body: html.node`
+            <div class="modal-vertical-inner support-inner">
+                <div class="avatar">
+                    <img src="${auth.avatar.replace("/avatar42s/", "/avatar170s/")}" alt="${tl2(trans.your_avatar)}">
+                </div>
+                <h1>${tl2(trans.you_have_new_badges)}</h1>
+                <div class="badges">
+                    ${badges.map((badge) => create_badge(process_badge(badge, auth.name)))}
+                </div>
+            </div>
+        `,
+      type: "sponsor"
+    });
+  }
 
   // src/components/badge.js
   function load_badges(user, solo = false) {
@@ -29374,28 +29429,32 @@
       else badges = sponsor_list.badges[user];
     }
     badges.forEach((badge) => {
-      badge.user = user;
-      if (!badge.name) {
-        if (trans.badges[badge.type]) {
-          badge.name = tl2(trans.badges[badge.type].name);
-        } else {
-          badge.name = tl2(trans.unavailable);
-          badge.reason = tl2(trans.requires_higher_bleh_version);
-        }
-      }
-      if (trans.badges[badge.type] && trans.badges[badge.type].reason)
-        badge.reason = tl2(trans.badges[badge.type].reason);
-      else if (badge.reason && trans.badges[badge.reason] && trans.badges[badge.reason].reason)
-        badge.reason = tl2(trans.badges[badge.reason].reason);
-      if (badge.reason) return;
-      if (badge.type == "sponsor" || badge.type == "contributor")
-        badge.reason = badge.type;
-      else if (badge.type == "cute" || badge.type == "queen")
-        badge.reason = tl2(trans.badges.cute.reason);
-      else badge.reason = tl2(trans.badges.reserved.reason);
+      badge = process_badge(badge, user);
     });
     log("final badge list", "sponsor", "info", badges);
     return badges;
+  }
+  function process_badge(badge, user) {
+    badge.user = user;
+    if (!badge.name) {
+      if (trans.badges[badge.type]) {
+        badge.name = tl2(trans.badges[badge.type].name);
+      } else {
+        badge.name = tl2(trans.unavailable);
+        badge.reason = tl2(trans.requires_higher_bleh_version);
+      }
+    }
+    if (trans.badges[badge.type] && trans.badges[badge.type].reason)
+      badge.reason = tl2(trans.badges[badge.type].reason);
+    else if (badge.reason && trans.badges[badge.reason] && trans.badges[badge.reason].reason)
+      badge.reason = tl2(trans.badges[badge.reason].reason);
+    if (badge.reason) return badge;
+    if (badge.type == "sponsor" || badge.type == "contributor")
+      badge.reason = badge.type;
+    else if (badge.type == "cute" || badge.type == "queen")
+      badge.reason = tl2(trans.badges.cute.reason);
+    else badge.reason = tl2(trans.badges.reserved.reason);
+    return badge;
   }
   function create_badge(badge = {
     type: "",
@@ -29408,6 +29467,7 @@
     user: "",
     inbuilt: false
   }, on_avatar = false, long = false, small = false) {
+    log("creating", "badge", "info", { badge, on_avatar, long, small });
     const classlist = on_avatar ? "avatar-status-dot" : "label no-hover";
     let elem = html.node`
         <span class=${classlist}>
@@ -29467,7 +29527,7 @@
     );
   }
   function page_menu() {
-    if (!ff("menus")) return;
+    if (!ff("menus") || !settings.menu_replacement) return;
     const menu = tippy_esm_default(document.body, {
       theme: "context-menu",
       placement: "right-start",
@@ -29486,19 +29546,111 @@
       if (!show_menu(e)) return;
       e.preventDefault();
       const elem = e.target;
+      const value = elem.value?.trim();
       const is_image = elem.tagName == "IMG";
-      const has_link = elem.href;
+      const link = elem.href;
+      const unsafe_link = elem.getAttribute("data-unsafe-href");
+      const text3 = elem.textContent?.trim();
+      const valid_for_text = ["TEXTAREA", "INPUT"].includes(elem.tagName);
+      const alt = elem.getAttribute("alt")?.trim();
+      log("requesting", "menu", "log", {
+        text: text3,
+        value,
+        elem,
+        tag: elem.tagName,
+        is_image,
+        link,
+        unsafe_link,
+        valid_for_text
+      });
       const contents = html.node`
             ${is_image ? html.node`
-                <button class="dropdown-menu-clickable-item" data-type="image" onclick=${() => {
-        open(elem.src, "_blank");
+                ${unsafe_link ? html.node`
+                    <div class="button-combo">
+                        <a class="dropdown-menu-clickable-item" data-type="image" href=${elem.src} target="_blank">
+                            ${tl2(trans.view_image)}
+                        </a>
+                        <div class="button-combo-sep" />
+                        ${() => {
+        const url = new URL(unsafe_link);
+        const scheme = url.protocol;
+        const hostname = url.hostname;
+        const path = url.pathname + url.search + url.hash;
+        let dangerous = false;
+        if (!scheme || !scheme.startsWith("http")) dangerous = true;
+        const btn = html.node`
+                                <button class="dropdown-menu-clickable-item chibi" data-type="continue" onclick=${() => {
+          if (settings.trusted_sites.includes(hostname)) {
+            open(unsafe_link, "_blank");
+            return;
+          }
+          external_url_prompt(unsafe_link, dangerous);
+        }}>
+                                    ${tl2(trans.view_image_unsafe)}
+                                </button>
+                            `;
+        tippy_esm_default(btn, {
+          theme: "name-sister-combo",
+          content: html.node`
+                                    <span class="name">
+                                        <span class="link">
+                                            ${scheme != "https:" ? html.node`
+                                            <span class="scheme">
+                                                ${scheme}//
+                                            </span>
+                                            ` : ""}
+                                            ${hostname ? html.node`
+                                            <span class="hostname">
+                                                ${hostname}
+                                            </span>
+                                            ` : html.node`
+                                            <span class="hostname">
+                                                ${path}
+                                            </span>
+                                            `}
+                                            ${path != "/" && hostname ? html.node`
+                                            <span class="path">
+                                                ${path}
+                                            </span>
+                                            ` : ""}
+                                        </span>
+                                    </span>
+                                    <span class="sister">${tl2(trans.external)}</span>
+                                `
+        });
+        return btn;
+      }}
+                    </div>
+                ` : html.node`
+                    <a class="dropdown-menu-clickable-item" data-type="image" href=${elem.src} target="_blank">
+                        ${tl2(trans.view_image)}
+                    </a>
+                `}
+                <a class="dropdown-menu-clickable-item" data-type="link" onclick=${() => {
+        copy(unsafe_link ? unsafe_link : elem.src);
       }}>
-                    ${tl2(trans.view_image)}
-                </button>
+                    ${tl2(trans.copy_link)}
+                </a>
+                ${alt ? html.node`
+                    <a class="dropdown-menu-clickable-item" data-type="copy" onclick=${() => {
+        copy(alt);
+      }}>
+                        ${tl2(trans.copy_text)}
+                    </a>
+                ` : ""}
             ` : ""}
-            ${has_link ? html.node`
-                <a class="dropdown-menu-clickable-item" data-type="link" href=${elem.href} target=${elem.target}>
-                    ${tl2(trans.open)}
+            ${link ? generic_link_menu(link) : ""}
+            ${text3 && valid_for_text ? html.node`
+                <a class="dropdown-menu-clickable-item" data-type="copy" onclick=${() => {
+        copy(text3);
+      }}>
+                    ${tl2(trans.copy_text)}
+                </a>
+            ` : value && valid_for_text ? html.node`
+                <a class="dropdown-menu-clickable-item" data-type="copy" onclick=${() => {
+        copy(value);
+      }}>
+                    ${tl2(trans.copy_text)}
                 </a>
             ` : ""}
         `;
@@ -29525,6 +29677,18 @@
     console.info("menu target", target);
     if (target.closest("[data-has-bleh-menu]")) return false;
     return true;
+  }
+  function generic_link_menu(link, copy_link = link) {
+    return html.node`
+        <a class="dropdown-menu-clickable-item" data-type="web" href=${link} target="_blank">
+            ${tl2(trans.open_link)}
+        </a>
+        <a class="dropdown-menu-clickable-item" data-type="link" onclick=${() => {
+      copy(link);
+    }}>
+            ${tl2(trans.copy_link)}
+        </a>
+    `;
   }
 
   // src/avatar.js
@@ -29621,12 +29785,6 @@
     else if (pre_existing_badge)
       return { type: pre_existing_badge.classList[1] };
     else return { type: "none" };
-  }
-  function return_name_from_avatar(avatar2) {
-    if (!avatar2) return;
-    if (!avatar2.hasAttribute("alt")) return;
-    if (avatar2.getAttribute("alt") == tl2(trans.your_avatar)) return auth;
-    return avatar2.getAttribute("alt").replace(tl2(trans.avatar_for_user), "");
   }
   unsafeWindow._expand_avatar = function(src) {
     expand_avatar(src);
@@ -30048,17 +30206,20 @@
     max: max2,
     disabled,
     show_time = true,
-    name
+    name,
+    value_in_iso = false
   }) {
     let date_button;
     let manual_button;
     let up_button;
     let down_button;
+    if (value_in_iso && value) value *= 1e3;
     let now2 = /* @__PURE__ */ new Date();
-    if (value != null) now2 = new Date(value);
-    const min_date = min2 != null ? new Date(min2) : new Date(now2.getTime() - 14 * 24 * 60 * 60 * 1e3);
+    const min_date = min2 ? new Date(min2) : new Date(now2.getTime() - 14 * 24 * 60 * 60 * 1e3);
     min_date.setHours(0, 0, 0, 0);
-    const max_date = max2 != null ? new Date(max2) : /* @__PURE__ */ new Date();
+    console.info("calendar", value, new Date(value), min_date);
+    if (value && new Date(value) >= min_date) now2 = new Date(value);
+    const max_date = max2 ? new Date(max2) : /* @__PURE__ */ new Date();
     max_date.setHours(23, 59, 59, 999);
     let last_action;
     const state = {
@@ -30120,15 +30281,19 @@
         <div class="input-group">
             <div class="content-form input-container" data-type="date">
                 <input class="legacy-input" type="date" ref=${(el) => legacy_date = el} name=${name} value="${state.year}-${pad2(state.month)}-${pad2(state.day)}">
-                <div class="date-input modern-input" ref=${(el) => date_display = el} disabled=${disabled}>${format_date(state)}</div>
+                <div class="date-input modern-input" ref=${(el) => date_display = el}>${format_date(state)}</div>
             </div>
             ${show_time ? html.node`
             <div class="content-form input-container" data-type="time">
-                <input class="modern-input" type="time" step="1" ref=${(el) => time_input = el} disabled=${disabled} value="${pad2(state.hours)}:${pad2(state.mins)}:${pad2(state.secs)}">
+                <input class="modern-input" type="time" step="1" ref=${(el) => time_input = el} value="${pad2(state.hours)}:${pad2(state.mins)}:${pad2(state.secs)}">
             </div>
             ` : ""}
         </div>
     `;
+    if (disabled) {
+      date_display.setAttribute("disabled", true);
+      time_input.disabled = true;
+    }
     if (time_input) {
       time_input.addEventListener("input", () => {
         const parts = time_input.value.split(":").map((n2) => parseInt(n2, 10));
@@ -30141,12 +30306,12 @@
     function can_prev() {
       const py = view.month === 1 ? view.year - 1 : view.year;
       const pm = view.month === 1 ? 12 : view.month - 1;
-      return py > min_date.getFullYear() || py === min_date.getFullYear() && pm >= min_date.getMonth() + 1;
+      return py > min_date.getFullYear() || py == min_date.getFullYear() && pm >= min_date.getMonth() + 1;
     }
     function can_next() {
       const ny = view.month === 12 ? view.year + 1 : view.year;
       const nm = view.month === 12 ? 1 : view.month + 1;
-      return ny < max_date.getFullYear() || ny === max_date.getFullYear() && nm <= max_date.getMonth() + 1;
+      return ny < max_date.getFullYear() || ny == max_date.getFullYear() && nm <= max_date.getMonth() + 1;
     }
     let tooltip = tippy_esm_default(date_display, {
       theme: "window",
@@ -30525,7 +30690,9 @@
     show_time = true,
     name,
     func,
-    func_esc
+    func_esc,
+    submit_on_character = false,
+    value_in_iso = false
   }) {
     if (type == "date") {
       return calendar({
@@ -30534,7 +30701,8 @@
         max: max2,
         disabled,
         show_time,
-        name
+        name,
+        value_in_iso
       });
     }
     let input_box;
@@ -30567,6 +30735,10 @@
       } else if (event3.keyCode == 27) {
         event3.preventDefault();
         if (func_esc) func_esc(input_box.value);
+      } else if (submit_on_character) {
+        setTimeout(() => {
+          if (func) func(input_box.value);
+        }, 0);
       }
     });
     container.submit = () => {
@@ -31098,7 +31270,7 @@
                 <button class="dropdown-menu-clickable-item" data-type="link" onclick=${() => {
           copy(name.href);
         }}>
-                    ${tl2(trans.copy)}
+                    ${tl2(trans.copy_link)}
                 </button>
             `,
         placement: "right-start",
@@ -31305,6 +31477,263 @@
 
   // src/components/track.js
   var import_color_thief_browser2 = __toESM(require_color_thief_min(), 1);
+
+  // src/components/toggle.js
+  function toggle({
+    value = false,
+    type = "toggle",
+    name = "",
+    title = "",
+    body: body2 = "",
+    small = "",
+    disabled = false,
+    data: data2 = "",
+    func = null,
+    standalone = true
+  }) {
+    let checkbox;
+    let state;
+    let elem = html.node`
+        <div class="setting ${standalone ? "standalone" : ""}" data-type=${type} onclick=${() => {
+      if (disabled) return;
+      let current = checkbox.checked;
+      if (func) func(!current);
+      checkbox.checked = !current;
+      state.setAttribute("aria-checked", !current);
+    }}>
+            <div class="heading">
+                <h5>${title}</h5>
+                ${body2 != "" ? html.node`<p>${body2}</p>` : ""}
+                ${small != "" ? html.node`<small>${small}</small>` : ""}
+            </div>
+            ${type == "toggle" ? html.node`
+            <div class="toggle-wrap">
+                <input type="checkbox" ref=${(el) => checkbox = el} name=${name} value=${data2} checked=${value} />
+                <button class="toggle" ref=${(el) => state = el} aria-checked=${value}>
+                    <div class="dot" />
+                </button>
+            </div>
+            ` : html.node`
+            <div class="check">
+                <input type="checkbox" ref=${(el) => checkbox = el} name=${name} value=${data2} checked=${value} disabled=${disabled} />
+                <div class="box" ref=${(el) => state = el} aria-checked=${value} disabled=${disabled}>
+                    <div class="bleh-icon" />
+                </div>
+            </div>
+            `}
+        </div>
+    `;
+    elem.check = () => {
+      if (disabled) return;
+      if (func) func(true);
+      checkbox.checked = true;
+      state.setAttribute("aria-checked", true);
+    };
+    elem.uncheck = () => {
+      if (disabled) return;
+      if (func) func(false);
+      checkbox.checked = false;
+      state.setAttribute("aria-checked", false);
+    };
+    elem.checked = () => {
+      return checkbox.checked;
+    };
+    elem.disabled = (state2 = null) => {
+      if (state2 === null) return checkbox.getAttribute("disabled") || false;
+      if (state2 === true) checkbox.setAttribute("disabled", "true");
+      else checkbox.removeAttribute("disabled");
+      return state2;
+    };
+    return elem;
+  }
+
+  // src/components/scrobble.js
+  function submit_scrobble({
+    pre_track = "",
+    pre_album = "",
+    pre_artist = "",
+    pre_album_artist = "",
+    pre_timestamp = 0,
+    func,
+    can_api
+  } = {}) {
+    if (!can_api)
+      can_api = localStorage.getItem("bleh_auth") && localStorage.getItem("bleh_auth_valid") === "true";
+    if (!can_api) {
+      window.location.href = `${root}bleh/general`;
+      return;
+    }
+    const random = random_list[Math.floor(Math.random() * random_list.length)];
+    let track;
+    let album;
+    let artist;
+    let album_artist;
+    let use_current;
+    let date;
+    let create_scrobble;
+    let max_date = /* @__PURE__ */ new Date();
+    max_date.setDate(max_date.getDate() + 1);
+    const pre_existing_date = pre_timestamp != 0;
+    log("requesting dialog", "submit scrobble", "info", {
+      pre_track,
+      pre_album,
+      pre_artist,
+      pre_album_artist,
+      pre_timestamp,
+      func,
+      can_api
+    });
+    dialog({
+      id: "submit_scrobble",
+      title: tl2(trans.new_scrobble),
+      body: html.node`
+            <div class="new-scrobble-form">
+                <p class="generic-label">${tl2(trans.track)}</p>
+                ${track = input({
+        type: "text",
+        value: pre_track,
+        placeholder: tl2(trans.example, { v: random.track }),
+        warn_if_empty: true
+      })}
+                <p class="generic-label">${tl2(trans.album)}</p>
+                ${album = input({
+        type: "text",
+        value: pre_album,
+        placeholder: tl2(trans.example, { v: random.album })
+      })}
+                <p class="generic-label">${tl2(trans.artist)}</p>
+                ${artist = input({
+        type: "text",
+        value: pre_artist,
+        placeholder: tl2(trans.example, { v: random.artist }),
+        warn_if_empty: true
+      })}
+                <p class="generic-label">${tl2(trans.album_artist)}</p>
+                ${album_artist = input({
+        type: "text",
+        value: pre_album_artist,
+        placeholder: tl2(trans.example, { v: random.album_artist })
+      })}
+                <p class="generic-label">${tl2(trans.time)}</p>
+                <div class="toggle-and-time">
+                    ${use_current = toggle({
+        value: !pre_existing_date,
+        type: "checkbox",
+        title: tl2(trans.use_current_time),
+        func: (state) => {
+          date.disabled(state);
+        }
+      })}
+                    ${date = input({
+        type: "date",
+        value: pre_existing_date ? pre_timestamp : null,
+        max: `${max_date.getFullYear()}-${pad2(max_date.getMonth() + 1)}-${pad2(max_date.getDate())}`,
+        disabled: !pre_existing_date,
+        value_in_iso: typeof pre_timestamp == "number"
+      })}
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="see-more cancel" onclick=${() => dialog_rm({ id: "submit_scrobble" })}>
+                    ${tl2(trans.cancel)}
+                </button>
+                <div class="fill" />
+                <button class="btn primary icon" data-type="add" ref=${(el) => create_scrobble = el} onclick=${async () => {
+        if (track.value() == "" || artist.value() == "") {
+          notify({
+            id: "submit_scrobble",
+            title: tl2(trans.new_scrobble),
+            body: tl2(trans.missing_fields),
+            type: "error"
+          });
+          return;
+        }
+        track.disabled(true);
+        album.disabled(true);
+        artist.disabled(true);
+        album_artist.disabled(true);
+        use_current.disabled(true);
+        date.disabled(true);
+        create_scrobble.disabled = true;
+        if (album.value() != "" && album_artist.value() == "")
+          album_artist.value(artist.value());
+        let params = {
+          sk: localStorage.getItem("bleh_auth"),
+          artist: artist.value(),
+          track: track.value(),
+          timestamp: Math.floor(date.value() / 1e3)
+        };
+        if (album.value() != "") params.album = album.value();
+        if (album_artist.value() != "")
+          params.albumArtist = album_artist.value();
+        const res = await fetch(
+          "https://jufufu.katelyn.moe/api/lastfm",
+          {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify({
+              method: "track.scrobble",
+              params
+            })
+          }
+        );
+        const json = await res.json();
+        log("received response", "submit scrobble", "info", {
+          result: json
+        });
+        function re_enable() {
+          track.disabled(false);
+          album.disabled(false);
+          artist.disabled(false);
+          album_artist.disabled(false);
+          use_current.disabled(false);
+          date.disabled(false);
+          create_scrobble.disabled = false;
+        }
+        if (json.error) {
+          log("error", "submit scrobble", "error");
+          notify({
+            id: "submit_scrobble",
+            title: tl2(trans.scrobble_failed),
+            body: json.message,
+            type: "error",
+            persist: true
+          });
+          re_enable();
+          return;
+        }
+        const error_code = json.scrobbles.scrobble.ignoredMessage.code;
+        if (error_code > 0) {
+          log("error", "submit scrobble", "error", {
+            error_code
+          });
+          notify({
+            id: "submit_scrobble",
+            title: tl2(trans.scrobble_failed),
+            body: tl2(trans.scrobble_error_codes[error_code]),
+            type: "error",
+            persist: true
+          });
+          re_enable();
+          return;
+        }
+        notify({
+          id: "submit_scrobble",
+          title: tl2(trans.new_scrobble),
+          body: params.track,
+          type: "success"
+        });
+        dialog_rm({ id: "submit_scrobble" });
+        if (func) func();
+      }}>
+                    ${tl2(trans.new)}
+                </button>
+            </div>
+        `
+    });
+  }
+
+  // src/components/track.js
   function patch_titles(search = page.structure.main) {
     if (page.subpage == "tags_overview") return;
     if (!search) {
@@ -31514,9 +31943,21 @@
         const image_wrap = track.querySelector(".chartlist-image");
         let link;
         let image;
+        let alt;
+        let album_artist;
         if (image_wrap) {
           link = image_wrap.querySelector(".cover-art");
           image = link.querySelector("img");
+          if (link.href) album_artist = return_artist_from_track(link.href, true);
+          alt = romanise(
+            correct_item_by_artist(
+              image.getAttribute("alt"),
+              track_artist
+            )
+          );
+          tippy_esm_default(image_wrap, {
+            content: alt
+          });
           if (!is_album && has_bar) {
             hoshino(
               image,
@@ -31645,9 +32086,12 @@
             ":scope > .more-button-wrapper"
           );
           if (previous) previous.style.display = "none";
-          const is_own_profile = page.type == "user" && page.name == auth.name;
-          const can_edit = is_own_profile && !is_active && (!is_album ? !has_bar : true) && auth.pro;
-          const can_delete = is_own_profile && !is_active && !has_bar && !is_album;
+          const user = ["user", "overview"].includes(page.type) ? page.name : auth.name;
+          const is_own_profile = user == auth.name;
+          const can_edit = is_own_profile && !is_active && (!is_album ? !has_bar : true) && auth.pro && ["user", "overview"].includes(page.type);
+          const can_delete = is_own_profile && !is_active && !has_bar && !is_album && ["user", "overview"].includes(page.type);
+          const can_copy_scrobble = !is_album && !has_bar && !is_active && ["user", "overview"].includes(page.type);
+          const timestamp = parseInt(track.getAttribute("data-timestamp")) || track_timestamp_contents?.replace(/^[A-Za-z]+\s+/, "").replace(",", "").replace(/\s?(am|pm)$/i, "");
           let more_button = html.node`
                     <button class="track-more-button icon chibi" data-type="more" onclick=${() => {
             log("requested track in-built", "menu", "info", {
@@ -31864,7 +32308,33 @@
               }}
                                 ` : ""}
                             </div>
+                            ${can_copy_scrobble ? html.node`
+                                <button class="dropdown-menu-clickable-item" data-type="copy_scrobble" onclick=${() => {
+                submit_scrobble({
+                  pre_track: track_title.getAttribute("data-name"),
+                  pre_artist: track_artist,
+                  pre_album: alt,
+                  pre_album_artist: album_artist,
+                  pre_timestamp: timestamp
+                });
+              }}>
+                                    ${tl2(trans.copy)}
+                                </button>
+                            ` : ""}
                             <div class="sep" />
+                            ` : can_copy_scrobble ? html.node`
+                                <button class="dropdown-menu-clickable-item" data-type="copy_scrobble" onclick=${() => {
+                submit_scrobble({
+                  pre_track: track_title.getAttribute("data-name"),
+                  pre_artist: track_artist,
+                  pre_album: alt,
+                  pre_album_artist: album_artist,
+                  pre_timestamp: timestamp
+                });
+              }}>
+                                    ${tl2(trans.copy)}
+                                </button>
+                                <div class="sep" />
                             ` : ""}
                             ${() => {
                 let container = track.querySelector(".chartlist-play");
@@ -31891,7 +32361,7 @@
                                 <div class="button-combo-sep"/>
                                 ${() => {
                 let button = html.node`
-                                        <a class="dropdown-menu-clickable-item chibi" data-type="continue" href="${root}user/${page.name}/library${track_title.getAttribute("href")}">
+                                        <a class="dropdown-menu-clickable-item chibi" data-type="continue" href="${root}user/${user}/library${track_title.getAttribute("href")}">
                                             ${tl2(trans.explore_in_library)}
                                         </a>
                                     `;
@@ -31915,7 +32385,7 @@
                                 <div class="button-combo-sep"/>
                                 ${() => {
                 let button = html.node`
-                                        <a class="dropdown-menu-clickable-item chibi" data-type="continue" href="${root}user/${page.name}/library${album_link.getAttribute("href")}">
+                                        <a class="dropdown-menu-clickable-item chibi" data-type="continue" href="${root}user/${user}/library${album_link.getAttribute("href")}">
                                             ${tl2(trans.explore_in_library)}
                                         </a>
                                     `;
@@ -31938,7 +32408,7 @@
                                 <div class="button-combo-sep"/>
                                 ${() => {
                 let button = html.node`
-                                        <a class="dropdown-menu-clickable-item chibi" data-type="continue" href="${root}user/${page.name}/library${track_title.getAttribute("href")})}">
+                                        <a class="dropdown-menu-clickable-item chibi" data-type="continue" href="${root}user/${user}/library${track_title.getAttribute("href")})}">
                                             ${tl2(trans.explore_in_library)}
                                         </a>
                                     `;
@@ -31961,7 +32431,7 @@
                                 <div class="button-combo-sep"/>
                                 ${() => {
                 let button = html.node`
-                                        <a class="dropdown-menu-clickable-item chibi" data-type="continue" href="${root}user/${page.name}/library/music/${redirect()}${sanitise(track_artist)}">
+                                        <a class="dropdown-menu-clickable-item chibi" data-type="continue" href="${root}user/${user}/library/music/${redirect()}${sanitise(track_artist)}">
                                             ${tl2(trans.explore_in_library)}
                                         </a>
                                     `;
@@ -31994,7 +32464,7 @@
                             <button class="dropdown-menu-clickable-item" data-type="link" onclick=${() => {
                 copy(track_title.href);
               }}>
-                                ${tl2(trans.copy)}
+                                ${tl2(trans.copy_link)}
                             </button>
                             ${() => {
                 if (!is_own_profile || !can_delete) return;
@@ -32107,12 +32577,6 @@
         );
         if (image_wrap) {
           if (!is_album && show_album_text && !has_bar && !album_text) {
-            let alt = romanise(
-              correct_item_by_artist(
-                image.getAttribute("alt"),
-                track_artist
-              )
-            );
             track_info.appendChild(html.node`
                         <td class="chartlist-album custom-album-text">
                             <a href="${link.getAttribute("href")}">${alt}</a>
@@ -34890,75 +35354,6 @@
   // src/pages/lastfm_settings.js
   var import_cropperjs = __toESM(require_cropper(), 1);
 
-  // src/components/toggle.js
-  function toggle({
-    value = false,
-    type = "toggle",
-    name = "",
-    title = "",
-    body: body2 = "",
-    small = "",
-    disabled = false,
-    data: data2 = "",
-    func = null,
-    standalone = true
-  }) {
-    let checkbox;
-    let state;
-    let elem = html.node`
-        <div class="setting ${standalone ? "standalone" : ""}" data-type=${type} onclick=${() => {
-      if (disabled) return;
-      let current = checkbox.checked;
-      if (func) func(!current);
-      checkbox.checked = !current;
-      state.setAttribute("aria-checked", !current);
-    }}>
-            <div class="heading">
-                <h5>${title}</h5>
-                ${body2 != "" ? html.node`<p>${body2}</p>` : ""}
-                ${small != "" ? html.node`<small>${small}</small>` : ""}
-            </div>
-            ${type == "toggle" ? html.node`
-            <div class="toggle-wrap">
-                <input type="checkbox" ref=${(el) => checkbox = el} name=${name} value=${data2} checked=${value} />
-                <button class="toggle" ref=${(el) => state = el} aria-checked=${value}>
-                    <div class="dot" />
-                </button>
-            </div>
-            ` : html.node`
-            <div class="check">
-                <input type="checkbox" ref=${(el) => checkbox = el} name=${name} value=${data2} checked=${value} disabled=${disabled} />
-                <div class="box" ref=${(el) => state = el} aria-checked=${value} disabled=${disabled}>
-                    <div class="bleh-icon" />
-                </div>
-            </div>
-            `}
-        </div>
-    `;
-    elem.check = () => {
-      if (disabled) return;
-      if (func) func(true);
-      checkbox.checked = true;
-      state.setAttribute("aria-checked", true);
-    };
-    elem.uncheck = () => {
-      if (disabled) return;
-      if (func) func(false);
-      checkbox.checked = false;
-      state.setAttribute("aria-checked", false);
-    };
-    elem.checked = () => {
-      return checkbox.checked;
-    };
-    elem.disabled = (state2 = null) => {
-      if (state2 === null) return checkbox.getAttribute("disabled") || false;
-      if (state2 === true) checkbox.setAttribute("disabled", "true");
-      else checkbox.removeAttribute("disabled");
-      return state2;
-    };
-    return elem;
-  }
-
   // src/components/radio_toggle.js
   function radio({ name, value, values = {} }) {
     let buttons = [];
@@ -35554,7 +35949,8 @@
                 cancelable: true
               })
             );
-          }
+          },
+          submit_on_character: true
         })}
                             </div>
                         `;
@@ -37166,179 +37562,6 @@
     if (pages) page.structure.container.appendChild(pages);
   }
 
-  // src/components/scrobble.js
-  function submit_scrobble({
-    pre_track = "",
-    pre_album = "",
-    pre_artist = "",
-    pre_album_artist = "",
-    func,
-    can_api
-  } = {}) {
-    if (!can_api)
-      can_api = localStorage.getItem("bleh_auth") && localStorage.getItem("bleh_auth_valid") === "true";
-    if (!can_api) {
-      window.location.href = `${root}bleh/general`;
-      return;
-    }
-    const random = random_list[Math.floor(Math.random() * random_list.length)];
-    let track;
-    let album;
-    let artist;
-    let album_artist;
-    let use_current;
-    let date;
-    let create_scrobble;
-    let max_date = /* @__PURE__ */ new Date();
-    max_date.setDate(max_date.getDate() + 1);
-    dialog({
-      id: "submit_scrobble",
-      title: tl2(trans.new_scrobble),
-      body: html.node`
-            <div class="new-scrobble-form">
-                <p class="generic-label">${tl2(trans.track)}</p>
-                ${track = input({
-        type: "text",
-        value: pre_track,
-        placeholder: tl2(trans.example, { v: random.track }),
-        warn_if_empty: true
-      })}
-                <p class="generic-label">${tl2(trans.album)}</p>
-                ${album = input({
-        type: "text",
-        value: pre_album,
-        placeholder: tl2(trans.example, { v: random.album })
-      })}
-                <p class="generic-label">${tl2(trans.artist)}</p>
-                ${artist = input({
-        type: "text",
-        value: pre_artist,
-        placeholder: tl2(trans.example, { v: random.artist }),
-        warn_if_empty: true
-      })}
-                <p class="generic-label">${tl2(trans.album_artist)}</p>
-                ${album_artist = input({
-        type: "text",
-        value: pre_album_artist,
-        placeholder: tl2(trans.example, { v: random.album_artist })
-      })}
-                <p class="generic-label">${tl2(trans.time)}</p>
-                <div class="toggle-and-time">
-                    ${use_current = toggle({
-        value: true,
-        type: "checkbox",
-        title: tl2(trans.use_current_time),
-        func: (state) => {
-          date.disabled(state);
-        }
-      })}
-                    ${date = input({
-        type: "date",
-        max: `${max_date.getFullYear()}-${pad2(max_date.getMonth() + 1)}-${pad2(max_date.getDate())}`,
-        disabled: true
-      })}
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="see-more cancel" onclick=${() => dialog_rm({ id: "submit_scrobble" })}>
-                    ${tl2(trans.cancel)}
-                </button>
-                <div class="fill" />
-                <button class="btn primary icon" data-type="add" ref=${(el) => create_scrobble = el} onclick=${async () => {
-        if (track.value() == "" || artist.value() == "") {
-          notify({
-            id: "submit_scrobble",
-            title: tl2(trans.new_scrobble),
-            body: tl2(trans.missing_fields),
-            type: "error"
-          });
-          return;
-        }
-        track.disabled(true);
-        album.disabled(true);
-        artist.disabled(true);
-        album_artist.disabled(true);
-        use_current.disabled(true);
-        date.disabled(true);
-        create_scrobble.disabled = true;
-        if (album.value() != "" && album_artist.value() == "")
-          album_artist.value(artist.value());
-        let params = {
-          sk: localStorage.getItem("bleh_auth"),
-          artist: artist.value(),
-          track: track.value(),
-          timestamp: Math.floor(date.value() / 1e3)
-        };
-        if (album.value() != "") params.album = album.value();
-        if (album_artist.value() != "")
-          params.albumArtist = album_artist.value();
-        const res = await fetch(
-          "https://jufufu.katelyn.moe/api/lastfm",
-          {
-            method: "POST",
-            headers: { "content-type": "application/json" },
-            body: JSON.stringify({
-              method: "track.scrobble",
-              params
-            })
-          }
-        );
-        const json = await res.json();
-        log("received response", "submit scrobble", "info", {
-          result: json
-        });
-        function re_enable() {
-          track.disabled(false);
-          album.disabled(false);
-          artist.disabled(false);
-          album_artist.disabled(false);
-          use_current.disabled(false);
-          date.disabled(false);
-          create_scrobble.disabled = false;
-        }
-        if (json.error) {
-          log("error", "submit scrobble", "error");
-          notify({
-            id: "submit_scrobble",
-            title: tl2(trans.scrobble_failed),
-            body: json.message,
-            type: "error",
-            persist: true
-          });
-          re_enable();
-          return;
-        }
-        const error_code = json.scrobbles.scrobble.ignoredMessage.code;
-        if (error_code > 0) {
-          log("error", "submit scrobble", "error", {
-            error_code
-          });
-          notify({
-            id: "submit_scrobble",
-            title: tl2(trans.scrobble_failed),
-            body: tl2(trans.scrobble_error_codes[error_code]),
-            type: "error",
-            persist: true
-          });
-          re_enable();
-          return;
-        }
-        notify({
-          id: "submit_scrobble",
-          title: tl2(trans.new_scrobble),
-          body: params.track,
-          type: "success"
-        });
-        dialog_rm({ id: "submit_scrobble" });
-        if (func) func();
-      }}>
-                    ${tl2(trans.new)}
-                </button>
-            </div>
-        `
-    });
-  }
-
   // src/pages/profile.js
   async function bleh_profiles() {
     if (page.subpage == "obsessions_obsession") {
@@ -37618,6 +37841,9 @@
       page.state.scrobbles = scrobbles;
       page.state.artists = artists;
       page.state.loved = loved;
+      const date = /* @__PURE__ */ new Date();
+      const year = date.getFullYear();
+      const month = date.getMonth() + 1;
       let scrobble_text;
       let listen_container = html.node`
             <section class="listen-panel listen-profile-panel">
@@ -37641,8 +37867,11 @@
                         <div class="loading-data-text">${tl2(trans.loading_count_days).replace("{c}", "90")}</div>
                     </div>
                 </div>
-                <div class="more-link">
-                    <a href="${root}user/${page.name}/library/artists?date_preset=LAST_90_DAYS&page=1">
+                <div class="bottom-card-links">
+                    <a class="this-month see-more left-icon" href="${root}user/${page.name}/library?from=${year}-${month}-01&rangetype=1month">
+                        ${tl2(trans.value_this_month, { v: 0 })}
+                    </a>
+                    <a class="see-more" href="${root}user/${page.name}/library/artists?date_preset=LAST_90_DAYS&page=1">
                         ${tl2(trans.explore_in_library)}
                     </a>
                 </div>
@@ -38404,12 +38633,6 @@
                     <button type="submit" class="btn-primary save">
                         ${tl2(trans.save)}
                     </button>
-                    <a
-                        class="btn icon settings not-a-view-button"
-                        href="${root}bleh"
-                    >
-                        ${tl2(trans.settings)}
-                    </a>
                 </div>
             </div>
         `
@@ -38794,9 +39017,6 @@
                 <div class="sep" />
                 ${setting({ id: "format_guest_features" })}
                 ${setting({ id: "show_guest_features" })}
-                <div class="more-link">
-                    <a href="${root}bleh/music">${tl2(trans.settings)}</a>
-                </div>
                 <div class="settings-footer">
                     <button type="submit" class="btn-primary save">
                         ${tl2(trans.save)}
@@ -38839,6 +39059,11 @@
         allow_alignment: true
       })
     );
+    if (!temp.hasChildNodes()) {
+      render(temp, html`
+            <p class="subtle">${tl2(trans.no_about).replace("{u}", page.name)}</p>
+        `);
+    }
     return temp;
   }
   function bleh_profile_chart() {
@@ -38848,50 +39073,44 @@
       bleh_profile_chart_render(panel, table);
       return;
     }
-    lazy(
-      panel,
-      () => {
-        fetch(
-          `${root}user/${page.name}/library/artists/chart?date_preset=LAST_90_DAYS&page=1&ajax=1`
-        ).then(function(response) {
-          console.log(
-            "glacier library returned",
-            response,
-            response.text,
-            response.status
+    lazy(panel, () => {
+      fetch(`${root}user/${page.name}/library/artists/chart?date_preset=LAST_90_DAYS&page=1&ajax=1`).then(function(response) {
+        console.log(
+          "glacier library returned",
+          response,
+          response.text,
+          response.status
+        );
+        if (response.status != 200) throw new Error();
+        return response.text();
+      }).then(function(html3) {
+        let doc = new DOMParser().parseFromString(
+          html3,
+          "text/html"
+        );
+        console.log(
+          "glacier library DOC",
+          doc,
+          doc.querySelector(".table")
+        );
+        log("received response", "glacier library");
+        table = doc.querySelector(".table");
+        if (table) {
+          panel.appendChild(table);
+          bleh_profile_chart_render(panel, table);
+        } else {
+          log("table is null?", "glacier library", "error");
+          console.info("glacier library", doc.body.innerHTML);
+          console.info(
+            "glacier library",
+            new DOMParser().parseFromString(
+              doc.body.innerHTML,
+              "text/html"
+            )
           );
-          if (response.status != 200) throw new Error();
-          return response.text();
-        }).then(function(html3) {
-          let doc = new DOMParser().parseFromString(
-            html3,
-            "text/html"
-          );
-          console.log(
-            "glacier library DOC",
-            doc,
-            doc.querySelector(".table")
-          );
-          log("received response", "glacier library");
-          table = doc.querySelector(".table");
-          if (table) {
-            panel.appendChild(table);
-            bleh_profile_chart_render(panel, table);
-          } else {
-            log("table is null?", "glacier library", "error");
-            console.info("glacier library", doc.body.innerHTML);
-            console.info(
-              "glacier library",
-              new DOMParser().parseFromString(
-                doc.body.innerHTML,
-                "text/html"
-              )
-            );
-          }
-        });
-      },
-      { threshold: 0.3, rootMargin: "0px" }
-    );
+        }
+      });
+    }, { threshold: 0.3, rootMargin: "0px" });
   }
   function bleh_profile_chart_render(panel = page.structure.side?.querySelector(".listen-profile-panel"), table = null) {
     if (!panel) return;
@@ -38912,6 +39131,7 @@
         `${root}user/${page.name}/library` + period.getAttribute("href")
       );
     });
+    panel.querySelector(".this-month").textContent = tl2(trans.value_this_month, { v: parseInt(values[values.length - 1]).toLocaleString(lang) });
     prep_chart_colours();
     let scrobble_canvas_container = panel.querySelector(
       ".scrobble-canvas-container"
@@ -38945,7 +39165,7 @@
           }
         ]
       },
-      options: page.state.chart_library_line_options
+      options: page.state.chart_library_line_options_mini
     });
     scrobble_canvas_container.appendChild(scrobble_canvas);
   }
@@ -41796,16 +42016,8 @@
       appendTo: document.body,
       hideOnClick: "toggle",
       onClickOutside(instance, event3) {
-        console.info(
-          "modal click",
-          instance,
-          instance.popper,
-          instance.popper.querySelector('[aria-expanded="true"]'),
-          instance.popper.querySelectorAll(".date-input")
-        );
-        if (instance.popper.querySelector('[aria-expanded="true"]')) {
+        if (instance.popper.querySelector('[aria-expanded="true"]') || event3.target.classList.includes("dropdown-menu-clickable-item"))
           return;
-        }
         instance.hide();
       }
     });
@@ -42922,6 +43134,43 @@
           },
           suggestedMax: 10
         }
+      }
+    };
+    page.state.chart_library_line_options_mini = {
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          display: false
+        },
+        tooltip: {
+          backgroundColor: root_bg_col,
+          titleColor: text_primary_col,
+          bodyColor: text_primary_col,
+          multiKeyBackground: root_bg_col,
+          boxPadding: 6,
+          padding: 9,
+          cornerRadius: 9,
+          caretSize: 0
+        }
+      },
+      scales: {
+        x: {
+          display: false,
+          grid: {
+            color: axis_col,
+            display: false
+          }
+        },
+        y: {
+          display: false,
+          grid: {
+            display: false
+          },
+          suggestedMax: 10
+        }
+      },
+      onClick: (e, active, chart) => {
+        bleh_glacier_library_open_index(active[0].index);
       }
     };
     page.state.chart_library_pie_options = {
@@ -44114,6 +44363,7 @@
           render(tracklist_own, html`
                         ${tracklist}
                     `);
+          tracklist_own_loaded = true;
         });
       };
       let tracklist_view_panel;
@@ -44638,15 +44888,9 @@
                     <tbody>
                         ${disc.tracks.map((track) => {
           let title = fix_title(track.title);
-          const artist_lower = fix_title(
-            track["artist-credit"][0].name
-          ).toLowerCase();
+          const artist_lower = fix_title(track["artist-credit"][0].name).toLowerCase();
           const title_lower = title.toLowerCase();
-          const track_entry = oracle_tracks.hasOwnProperty(
-            artist_lower
-          ) && oracle_tracks[artist_lower].hasOwnProperty(
-            title_lower
-          ) ? oracle_tracks[artist_lower][title_lower] : null;
+          const track_entry = oracle_tracks.hasOwnProperty(artist_lower) && oracle_tracks[artist_lower].hasOwnProperty(title_lower) ? oracle_tracks[artist_lower][title_lower] : null;
           const total_s = Math.floor(track.length / 1e3);
           const m = Math.floor(total_s / 60);
           const s2 = total_s % 60;
@@ -44692,6 +44936,11 @@
               title += `${fix_title(artist3.name)}${joinphrase}`;
             });
             title += ")";
+          } else if (!oracle_entry.guests_in_title) {
+            inherit_guests.push(...guests);
+            log(`${track.position}: artists, changed due to disabled title injection`, "oracle", "log", {
+              inherit_guests
+            });
           }
           log(`${track.position}: title`, "oracle", "log", {
             title
@@ -48200,7 +48449,8 @@
       "music.youtube.com": "YouTube Music",
       "facebook.com": "Facebook",
       "www.discogs.com": "Discogs",
-      "discogs.com": "Discogs"
+      "discogs.com": "Discogs",
+      "tidal.com": "Tidal"
     };
     if (links.length > 0) {
       body2.appendChild(html.node`
@@ -48217,7 +48467,7 @@
           label = link_strings[link.host];
         }
         return html.node`
-                            <a class="music-link social-link" href=${link.url} target="_blank" data-host=${link.host} data-path=${link.path}>
+                            <a class="music-link social-link" href=${link.url} target="_blank" data-host=${link.host} data-host-unknown=${!link_strings.hasOwnProperty(link.host)} data-path=${link.path} style="--favi: url(https://icons.duckduckgo.com/ip3/${link.host}.ico)">
                                 ${label}
                             </a>
                         `;
@@ -48250,8 +48500,12 @@
         ];
         try {
           const url = new URL(image.src);
-          if (!proxy_free.includes(url.hostname)) image.src = `https://images.weserv.nl/?url=${encodeURIComponent(image.src)}&output=webp&n=-1`;
+          if (!proxy_free.includes(url.hostname)) {
+            image.setAttribute("data-unsafe-href", encodeURI(image.src));
+            image.src = `https://images.weserv.nl/?url=${encodeURIComponent(image.src)}&output=webp&n=-1`;
+          }
         } catch (e) {
+          image.setAttribute("data-unsafe-href", encodeURI(image.src));
           image.src = `https://images.weserv.nl/?url=${encodeURIComponent(image.src)}&output=webp&n=-1`;
         }
         image.setAttribute("loading", "lazy");
@@ -48788,6 +49042,7 @@
     const split = window.location.pathname.replace(root, "").split("/");
     const length = split.length - 1;
     if (split[length] == "playback" && split[2] == "listening-report" || split[0] == "labs") {
+      if (split[length] == "playback" && split[2] == "listening-report") document.body?.classList.add("playback-2024");
       log("disabled loading for special interface", "style");
       return;
     }
@@ -49009,7 +49264,7 @@
     });
     set_storage("bleh_update_required", "false");
     set_storage("bleh_update_checked", (/* @__PURE__ */ new Date()).toString());
-    fetch_new_style(false, true, true);
+    force_refresh_style();
   }
   function force_refresh_style() {
     localStorage.removeItem("bleh_cached_style");
@@ -49883,7 +50138,7 @@
                 <div class="chartlist-count-bar">
                     <a class="chartlist-count-bar-link">
                         <span class="chartlist-count-bar-slug" data-max-stat-value="${max2}" data-stat-value="${value}" style="width: ${max2 / max2 * 100}%" />
-                        <span class="chartlist-count-bar-value">${value.toLocaleString(lang)}</span>
+                        <span class="chartlist-count-bar-value">${value.toLocaleString(DateTime.DATE_MED)}</span>
                     </a>
                 </div>
             `;
@@ -50025,6 +50280,7 @@
       })}
                     ${setting({ id: "default_avatar_action" })}
                     ${setting({ id: "simulate_scroll" })}
+                    ${ff("menus") ? setting({ id: "menu_replacement" }) : ""}
                 </div>
                 <div class="inner-preview pad flex">
                     <section class="catalogue-tags">
@@ -50055,15 +50311,13 @@
                     ${setting({ id: "gendered_tags" })}
                 </div>
             </section>
-            ${!page.mobile ? html.node`
             <section class="bleh--panel">
                 <h4>${tl2(trans.navigation_items.name)}</h4>
                 <div class="setting-group">
                     ${setting({ id: "navigation_items", list: page.state.quick_access_items })}
-                    ${setting({ id: "navigation_language" })}
+                    ${!page.mobile ? setting({ id: "navigation_language" }) : ""}
                 </div>
             </section>
-            ` : ""}
             <section class="bleh--panel">
                 <h4>${tl2(trans.shouts)}</h4>
                 <div class="inner-preview pad flex">
@@ -51061,12 +51315,12 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       tippy_esm_default(document.getElementById("current_season"), {
         content: new Date(
           stored_season.end.replace("y0", stored_season.year).replace("{offset}", stored_season.offset)
-        ).toLocaleString(lang)
+        ).toLocaleString(DateTime.DATE_MED)
       });
       tippy_esm_default(document.getElementById("current_season_start"), {
         content: new Date(
           stored_season.start.replace("y0", stored_season.year).replace("{offset}", stored_season.offset)
-        ).toLocaleString(lang)
+        ).toLocaleString(DateTime.DATE_MED)
       });
       tippy_esm_default(document.getElementById("next_season_start"), {
         content: new Date(
@@ -51074,7 +51328,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
             "y0",
             stored_season.next_is_new_year ? stored_season.year + 1 : stored_season.year
           ).replace("{offset}", stored_season.offset)
-        ).toLocaleString(lang)
+        ).toLocaleString(DateTime.DATE_MED)
       });
     }
     if (setting2 != null) {
@@ -51794,8 +52048,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       {
         id: "adaptive",
         name: tl2(trans.auto),
-        hide: !ff("adaptive_theme"),
-        new_release: true
+        hide: !ff("adaptive_theme")
       },
       {
         id: "glass",
@@ -51988,11 +52241,11 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       if (lotus_combined_artists_expire < current_time && !force) {
         lotus_request("combined_artists");
       } else if (force) {
-        lotus_request("combined_artists", true);
+        lotus_request("combined_artists", true, true);
       }
     }
   }
-  function lotus_request(type = "artist", send_notify = false) {
+  function lotus_request(type = "artist", send_notify = false, refresh_page = false) {
     let button = document.body.querySelector('[onclick="_lotus_check()"]');
     if (button != null) button.setAttribute("disabled", "");
     let xhr = new XMLHttpRequest();
@@ -52032,6 +52285,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       }
       set_storage(`lotus_${type}_expire`, api_expire);
       if (button != null) button.removeAttribute("disabled");
+      if (refresh_page && page.type == "bleh_settings") render_setting_page("playback");
     };
     xhr.send();
   }
@@ -53852,9 +54106,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
             <button class="dropdown-menu-clickable-item" data-type="copy" onclick=${() => copy(auth.name)}>
                 ${tl2(trans.copy_username)}
             </button>
-            <button class="dropdown-menu-clickable-item" data-type="link" onclick=${() => copy(`https://www.last.fm${root}user/${auth.name}`)}>
-                ${tl2(trans.copy_link)}
-            </button>
+            <div class="sep" />
+            ${generic_link_menu(`${root}user/${auth.name}`, `https://www.last.fm${root}user/${auth.name}`)}
         `,
       placement: "right-start",
       trigger: "manual",
@@ -55717,28 +55970,57 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     log(`hour ${hour} time ${time2}`, "time");
     let welcome;
     if (auth.name) {
+      let profile_name;
       welcome = html.node`
-            <div class="top-banner home-banner">
-                <div class="avatar">
-                    <img src=${auth.avatar.replace("/avatar42s/", "/avatar170s/")} alt=${tl2(trans.your_avatar)}>
-                    ${auth.sponsor ? html.node`
-                    <span class="avatar-status-dot user-status--bleh-sponsor"></span>
-                    ` : ""}
+            <section class="redesigned-header redesigned-profile-header no-background">
+                <div class="avatar-side">
+                    <div class="avatar" onclick=${() => {
+        expand_avatar(auth.avatar.replace("/avatar42s/", "/ar0/"));
+      }}>
+                        <img src=${auth.avatar.replace("/avatar42s/", "/avatar170s/")} alt=${tl2(trans.your_avatar)}>
+                    </div>
                 </div>
-                <h1>${{ html: tl2(trans[`good_${time2}_user`]).replace("{user}", `<a class="mention" href="${root}user/${auth.name}">@${auth.name}</a>`) }}</h1>
-            </div>
+                <div class="info-side has-main-info">
+                    <div class="main-info">
+                        <div class="greeting">
+                            ${tl2(trans[`good_${time2}_user`])}
+                        </div>
+                        <div class="title-container">
+                            <div class="header-title-label-wrap">
+                                <h1 class="header-title">
+                                    <a class="profile-name" href="${root}user/${auth.name}" ref=${(el) => profile_name = el}>${cache2.username ? cache2.username : auth.name}</a>
+                                </h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         `;
+      if (settings.display_name_styles) {
+        profile_name.setAttribute("data-font", cache2.font);
+        profile_name.setAttribute("data-font-style", cache2.font_style);
+      }
     } else {
       welcome = html.node`
-            <div class="top-banner home-banner">
-                <div class="avatar">
-                    <img class="missing-avatar" alt=${tl2(trans.your_avatar)}>
-                    ${auth.sponsor ? html.node`
-                    <span class="avatar-status-dot user-status--bleh-sponsor"></span>
-                    ` : ""}
+            <section class="redesigned-header redesigned-profile-header no-background">
+                <div class="avatar-side">
+                    <div class="avatar">
+                        <img class="missing-avatar" alt=${tl2(trans.your_avatar)}>
+                    </div>
                 </div>
-                <h1>${tl2(trans.not_logged_in)}</h1>
-            </div>
+                <div class="info-side has-main-info">
+                    <div class="main-info">
+                        <div class="greeting">
+                            ${tl2(trans[`good_${time2}_user`])}
+                        </div>
+                        <div class="title-container">
+                            <div class="header-title-label-wrap">
+                                <h1>${tl2(trans.not_logged_in)}</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         `;
     }
     page.structure.container.insertBefore(welcome, page.structure.container.firstElementChild);
@@ -55831,69 +56113,73 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       });
     }
     if (page.subpage == "music" && auth.name) {
-      let toolbar = html.node`
-            <div class="toolbar">
-                <nav class="navlist secondary-nav navlist--more redesigned-navigation">
-                    <ul class="navlist-items">
-                        <li class="navlist-item secondary-nav-item">
-                            <a href="${root}user/${auth.name}" data-type="mention" class="secondary-nav-item-link">
-                                ${tl2(trans.profile)}
-                            </a>
-                        </li>
-                        <li class="navlist-item secondary-nav-item">
-                            <a href="${root}user/${auth.name}/library" data-type="library" class="secondary-nav-item-link">
-                                ${tl2(trans.library)}
-                            </a>
-                        </li>
-                        <li class="navlist-item secondary-nav-item">
-                            <a href="${root}user/${auth.name}/following" data-type="profile" class="secondary-nav-item-link">
-                                ${tl2(trans.friends)}
-                            </a>
-                        </li>
-                        <li class="navlist-item secondary-nav-item">
-                            <a href="${root}user/${auth.name}/shoutbox" data-type="shouts" class="secondary-nav-item-link">
-                                ${tl2(trans.shouts)}
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        `;
-      page.structure.row.insertBefore(toolbar, page.structure.content);
-      let track_list;
-      page.structure.row.insertBefore(html.node`
-            <div class="content override">
-                <div class="col-main" ref=${(el) => page.structure.main = el}>
-                    <section>
-                        <h2>${tl2(trans.recent_tracks)}</h2>
-                        <div class="recent-listening-container" ref=${(el) => track_list = el}>
-                            <div class="loading-data-container">
-                                <p class="loading-data-text">${tl2(trans.finding_your_tracks)}</p>
+      if (ff("campfire")) {
+        campfire();
+      } else {
+        let toolbar = html.node`
+                <div class="toolbar">
+                    <nav class="navlist secondary-nav navlist--more redesigned-navigation">
+                        <ul class="navlist-items">
+                            <li class="navlist-item secondary-nav-item">
+                                <a href="${root}user/${auth.name}" data-type="mention" class="secondary-nav-item-link">
+                                    ${tl2(trans.profile)}
+                                </a>
+                            </li>
+                            <li class="navlist-item secondary-nav-item">
+                                <a href="${root}user/${auth.name}/library" data-type="library" class="secondary-nav-item-link">
+                                    ${tl2(trans.library)}
+                                </a>
+                            </li>
+                            <li class="navlist-item secondary-nav-item">
+                                <a href="${root}user/${auth.name}/following" data-type="profile" class="secondary-nav-item-link">
+                                    ${tl2(trans.friends)}
+                                </a>
+                            </li>
+                            <li class="navlist-item secondary-nav-item">
+                                <a href="${root}user/${auth.name}/shoutbox" data-type="shouts" class="secondary-nav-item-link">
+                                    ${tl2(trans.shouts)}
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            `;
+        page.structure.row.insertBefore(toolbar, page.structure.content);
+        let track_list;
+        page.structure.row.insertBefore(html.node`
+                <div class="content override">
+                    <div class="col-main" ref=${(el) => page.structure.main = el}>
+                        <section>
+                            <h2>${tl2(trans.recent_tracks)}</h2>
+                            <div class="recent-listening-container" ref=${(el) => track_list = el}>
+                                <div class="loading-data-container">
+                                    <p class="loading-data-text">${tl2(trans.finding_your_tracks)}</p>
+                                </div>
                             </div>
-                        </div>
-                    </section>
+                        </section>
+                    </div>
+                    <div class="col-sidebar" ref=${(el) => page.structure.side = el}>
+                        <section>
+                            <h2>${tl2(trans.activity)}</h2>
+                            ${render_activity_list()}
+                            <div class="more-link">
+                                <a href="${root}bleh/profile?setting=activities">${tl2(trans.activity_settings)}</a>
+                            </div>
+                        </section>
+                    </div>
                 </div>
-                <div class="col-sidebar" ref=${(el) => page.structure.side = el}>
-                    <section>
-                        <h2>${tl2(trans.activity)}</h2>
-                        ${render_activity_list()}
-                        <div class="more-link">
-                            <a href="${root}bleh/profile?setting=activities">${tl2(trans.activity_settings)}</a>
-                        </div>
-                    </section>
-                </div>
-            </div>
-        `, page.structure.content);
-      fetch(`${root}user/${auth.name}/partial/recenttracks?ajax=1`).then(function(response) {
-        console.log("returned", response, response.text);
-        return response.text();
-      }).then(function(html3) {
-        let doc = new DOMParser().parseFromString(html3, "text/html");
-        console.log("DOC", doc);
-        let tracklist_panel = doc.querySelector(".chartlist");
-        if (tracklist_panel)
-          track_list.outerHTML = tracklist_panel.outerHTML;
-      });
+            `, page.structure.content);
+        fetch(`${root}user/${auth.name}/partial/recenttracks?ajax=1`).then(function(response) {
+          console.log("returned", response, response.text);
+          return response.text();
+        }).then(function(html3) {
+          let doc = new DOMParser().parseFromString(html3, "text/html");
+          console.log("DOC", doc);
+          let tracklist_panel = doc.querySelector(".chartlist");
+          if (tracklist_panel)
+            track_list.outerHTML = tracklist_panel.outerHTML;
+        });
+      }
     } else if (page.type == "releases") {
       let content2 = page.structure.main.querySelectorAll(":scope > *");
       let panel = html.node`
@@ -55910,6 +56196,113 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     if (!main_content) return;
     render(main_content, html``);
     window.location.href = `${root}music`;
+  }
+  function campfire() {
+    let selected_index = 0;
+    let previous_index = 0;
+    let max_index = 0;
+    let items_container;
+    let item_details;
+    let current_bg;
+    let previous_bg;
+    const container = html.node`
+        <div class="campfire">
+            <div class="campfire-intro">
+                <h2 class="music-section-heading">${tl2(trans.your_recent_30_days)}</h2>
+            </div>
+            <div class="campfire-items" ref=${(el) => items_container = el} />
+            <div class="campfire-details" ref=${(el) => item_details = el} />
+            <div class="campfire-bg current" ref=${(el) => current_bg = el} />
+            <div class="campfire-bg previous" ref=${(el) => previous_bg = el} />
+        </div>
+    `;
+    page.structure.row.insertBefore(container, page.structure.content);
+    let albums = [];
+    let album_elements = [];
+    fetch(`${root}user/${auth.name}/partial/albums?albums_date_preset=LAST_30_DAYS&ajax=1`).then(function(response) {
+      console.log("returned", response, response.text);
+      return response.text();
+    }).then(function(dom) {
+      let doc = new DOMParser().parseFromString(dom, "text/html");
+      console.log("DOC", doc);
+      const items = doc.querySelectorAll(".grid-items > .grid-items-item");
+      items.forEach((item) => {
+        const image = item.querySelector(".grid-items-cover-image-image img").src;
+        const title = item.querySelector(".grid-items-item-main-text a").textContent;
+        const artist = item.querySelector(".grid-items-item-aux-block").textContent;
+        const plays = item.querySelector(".grid-items-item-aux-text a:last-child").textContent.trim();
+        let corrected_title = romanise(correct_item_by_artist(title, artist));
+        let corrected_artist = romanise(correct_artist(artist));
+        let formatted_title = corrected_title;
+        let formatted_artist = corrected_artist;
+        if (settings.format_guest_features) {
+          const formatted = name_includes(title, artist);
+          formatted_title = smart_title(formatted[0], formatted[1]);
+          formatted_artist = smart_artists(formatted[2], formatted[3]);
+        }
+        albums.push({
+          image: image.replace("/avatar300s/", "/500x500/"),
+          title,
+          artist,
+          plays,
+          formatted_title,
+          formatted_artist,
+          corrected_title,
+          corrected_artist
+        });
+      });
+      max_index = albums.length - 1;
+      render(items_container, html`
+                ${albums.map((album, index3) => {
+        const elem = html.node`
+                        <div class="campfire-item" style="--index: ${index3}" onclick=${() => {
+          if (selected_index != index3) set_index(index3);
+        }}>
+                            <div class="campfire-item-cover">
+                                <img src=${album.image} alt=${album.corrected_title} />
+                            </div>
+                        </div>
+                    `;
+        album_elements.push(elem);
+        return elem;
+      })}
+            `);
+      let timeout;
+      container.addEventListener("wheel", (e) => {
+        e.preventDefault();
+        if (timeout) return;
+        timeout = setTimeout(() => {
+          timeout = null;
+        }, 0.15);
+        const direction = Math.sign(e.deltaY);
+        if (direction == 0) return;
+        set_index(selected_index + direction);
+      }, { passive: false });
+      set_index(selected_index);
+    });
+    function set_index(index3) {
+      if (index3 > max_index) index3 = 0;
+      else if (index3 < 0) index3 = max_index;
+      album_elements.forEach((album2, album_index) => {
+        album2.setAttribute("aria-checked", album_index == index3);
+      });
+      previous_index = selected_index;
+      selected_index = index3;
+      items_container.style.setProperty("--selected-index", index3);
+      const album = albums[index3];
+      current_bg.style.setProperty("background-image", `url(${album.image})`);
+      render(item_details, html`
+            <a class="campfire-title smart-title" href="${root}music/${sanitise(album.artist)}/${sanitise(album.title)}" target="_blank">
+                ${album.formatted_title}
+            </a>
+            <span class="campfire-artist">
+                ${settings.format_guest_features ? album.formatted_artist : html.node`<a class="campfire-artist" href="${root}music/${redirect()}${sanitise(album.artist)}" target="_blank">${album.corrected_artist}</a>`}
+            </span>
+            <div class="campfire-plays">
+                ${album.plays}
+            </div>
+        `);
+    }
   }
 
   // src/pages/event.js
@@ -56140,7 +56533,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
   }
 
   // src/pages/inbox.js
-  function bleh_inbox() {
+  async function bleh_inbox() {
     page.structure.container = document.body.querySelector(".page-content");
     try {
       page.structure.row = page.structure.container.querySelector(".row");
@@ -56153,35 +56546,49 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     checkup_page_structure(false, content_top);
     log("status is", "page", "info", page);
     update_page();
+    page.structure.container.insertBefore(html.node`
+        <section class="redesigned-header search-header no-background">
+            <div class="tag-side">
+                <div class="tag-icon inbox-icon"></div>
+            </div>
+            <div class="info-side">
+                <div class="sub-text">${tl2(trans.inbox)}</div>
+                <h1>${page.subpage == "notifications" ? tl2(trans.notifications) : tl2(trans.messages)}</h1>
+            </div>
+        </section>
+    `, page.structure.container.firstElementChild);
+    let cache2;
+    if (auth.name) {
+      cache2 = await load_profile_cache_externally(auth.name);
+      if (cache2.banner)
+        register_background(cache2.banner);
+      else if (auth.avatar && !auth.avatar.endsWith("818148bf682d429dc215c1705eb27b98.png"))
+        register_background(auth.avatar.replace("/avatar42s/", "/ar0/"));
+      else
+        register_background(null);
+    } else {
+      register_background(null);
+    }
+    const messages_tab = page.structure.nav.querySelector(".secondary-nav-item--overview");
+    messages_tab.classList.remove("secondary-nav-item--overview");
+    messages_tab.classList.add("secondary-nav-item--messages");
+    messages_tab.querySelector(":scope > a").textContent = tl2(trans.messages);
     if (page.subpage == "notifications") {
       let form = page.structure.container.querySelector("form");
       let notifications = page.structure.container.querySelector(".inbox-notifications");
       let pagination = page.structure.container.querySelector(".pagination");
-      let panel = document.createElement("section");
-      panel.classList.add("inbox-panel", "notifications-panel");
-      if (form)
-        panel.appendChild(form);
-      if (notifications)
-        panel.appendChild(notifications);
-      if (pagination)
-        panel.appendChild(pagination);
-      page.structure.main.appendChild(panel);
+      page.structure.main.appendChild(html.node`
+            <section class="inbox-panel notifications-panel">
+                ${form}
+                ${notifications}
+                ${pagination}
+            </section>
+        `);
       if (!notifications) return;
       bleh_notification_list(notifications);
-      return;
-      let notif_links = notifications.querySelectorAll(".inbox-notifications__item-link");
-      notif_links.forEach((notification) => {
-        let link = notification.getAttribute("href");
-        if (link.endsWith("/obsessions/set") || link.endsWith("/listening-report/month")) return;
-        let avatar2 = notification.querySelector(".avatar");
-        let name = notification.querySelector(".inbox-notifications__item-description strong");
-        if (!name) return;
-        let name_text = sanitise(return_name_from_avatar(avatar2.querySelector("img")));
-        let badge = patch_avatar(avatar2, name_text);
-        name.classList.add("notification-user-name", `user-status--bleh-${badge.type}`, `user-status--bleh-user-${name_text}`);
-        if (notification.classList.contains("inbox-notifications__item--highlight"))
-          notification.classList.add("notification-user-name", `user-status--bleh-${badge.type}`, `user-status--bleh-user-${name_text}`);
-      });
+    } else if (page.subpage.endsWith("overview")) {
+      const header = page.structure.main.querySelector(".inbox-buttons");
+      const select_all = header.querySelector(".inbox-select-all");
     } else if (page.subpage == "message_overview" || page.subpage == "sent_message") {
       let inbox = page.structure.container.querySelector(".inbox-message-view");
       page.structure.main.appendChild(inbox);
@@ -57427,10 +57834,10 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       on_page_change: load_page,
       on_subpage_change: () => {
         load_settings();
-        if (page.state.settings_reload) {
+        if (page.state.settings_reload)
           page.state.settings_reload = false;
-        }
         if (page.structure.indicator) page_indicator();
+        hideAll();
       },
       on_error: handle_error
     });
@@ -57916,6 +58323,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
   // src/build/trans.js
   var import_color_thief_browser3 = __toESM(require_color_thief_min(), 1);
   var lang = "en";
+  var lang_browser = "en";
   var lang_info = {
     en: {
       name: "English",
@@ -57940,12 +58348,12 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     sv: {
       name: "Svenska",
       by: ["Lrexie"],
-      last_updated: "2025-09-30"
+      last_updated: "2025-11-05"
     },
     ru: {
       name: "\u0420\u0443\u0441\u0441\u043A\u0438\u0439",
       by: ["crawqxx"],
-      last_updated: "2025-10-27"
+      last_updated: "2025-11-05"
     }
   };
   var trans = {
@@ -58045,7 +58453,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       "user-status-alum": {
         name: {
           en: "Alum",
-          sv: "Alumn"
+          sv: "Alumn",
+          ru: "\u0412\u044B\u043F\u0443\u0441\u043A\u043D\u0438\u043A"
         },
         reason: {
           en: "Former member of Last.fm",
@@ -58151,7 +58560,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       "bubble-tea": {
         name: {
           en: "escoffier :3",
-          sv: "escoffier :3"
+          sv: "escoffier :3",
+          ru: "\u0435\u0441\u043A\u043E\u0444\u0444\u044C\u0435\u0440 :3"
         },
         reason: {
           en: "katelyn\u2019s wife ~",
@@ -58603,7 +59013,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       ru: "\u0421\u043A\u0440\u043E\u0431\u0431\u043B"
     },
     scrobble_value: {
-      en: "Scrobble {v}"
+      en: "Scrobble {v}",
+      ru: "\u0421\u043A\u0440\u043E\u0431\u0431\u043B\u0438\u0442\u044C {v}"
     },
     average: {
       // scrobble average
@@ -59113,7 +59524,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           ru: "\u041E\u0441\u0435\u043D\u044C"
         },
         fall: {
-          en: "Winter"
+          en: "Winter",
+          ru: "\u0417\u0438\u043C\u0430"
         },
         christmas: {
           en: "Christmas",
@@ -59133,7 +59545,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       notice: {
         en: "Open the live counter",
         pt: "Abrir o contador ao vivo",
-        sv: "\xD6ppna live-nedr\xE4kningen"
+        sv: "\xD6ppna live-nedr\xE4kningen",
+        ru: "\u041E\u0442\u043A\u0440\u044B\u0442\u044C \u0436\u0438\u0432\u043E\u0439 \u0441\u0447\u0435\u0442\u0447\u0438\u043A"
       },
       live: {
         en: "Counter is updating live",
@@ -59180,7 +59593,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     value_for_time: {
       // e.g. (Halloween) ends (in 3 days)
-      en: "{v} ends {time}"
+      en: "{v} ends {time}",
+      ru: "{v} \u0437\u0430\u043A\u043E\u043D\u0447\u0438\u0442\u0441\u044F {time}"
     },
     seasonal_timeline: {
       en: "Seasonal timeline",
@@ -59226,7 +59640,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       name: {
         en: "Display additional seasonal effects",
         pt: "Exibir efeitos sazonais adicionais",
-        sv: "Visa extra \xE5rstidseffekter"
+        sv: "Visa extra \xE5rstidseffekter",
+        ru: "\u041E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0442\u044C \u0434\u043E\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0435 \u0441\u0435\u0437\u043E\u043D\u043D\u044B\u0435 \u044D\u0444\u0444\u0435\u043A\u0442\u044B"
       },
       body: {
         en: "During winter seasons this applies a coat of ice to panels, otherwise mainly gradients",
@@ -59310,14 +59725,17 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       ru: "\u0420\u0435\u043B\u0438\u0437\u044B"
     },
     no_releases_found: {
-      en: "No releases found here"
+      en: "No releases found here",
+      ru: "\u0417\u0434\u0435\u0441\u044C \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D\u043E \u043D\u0438 \u043E\u0434\u043D\u043E\u0433\u043E \u0440\u0435\u043B\u0438\u0437\u0430"
     },
     tracklist_source: {
       name: {
-        en: "Preferred tracklist source"
+        en: "Preferred tracklist source",
+        ru: "\u041F\u0440\u0435\u0434\u043F\u043E\u0447\u0438\u0442\u0430\u0435\u043C\u044B\u0439 \u0438\u0441\u0442\u043E\u0447\u043D\u0438\u043A \u0442\u0440\u0435\u043A\u043B\u0438\u0441\u0442\u0430"
       },
       body: {
-        en: "Choose which service to display for album tracklists"
+        en: "Choose which service to display for album tracklists",
+        ru: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u0441\u0435\u0440\u0432\u0438\u0441, \u043A\u043E\u0442\u043E\u0440\u044B\u0439 \u0431\u0443\u0434\u0435\u0442 \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0442\u044C\u0441\u044F \u0434\u043B\u044F \u0442\u0440\u0435\u043A\u043B\u0438\u0441\u0442\u043E\u0432 \u0430\u043B\u044C\u0431\u043E\u043C\u043E\u0432"
       }
     },
     bookmarks: {
@@ -59350,32 +59768,32 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     // TODO(stel): is my capitalisation correct here at all lol ; yes cutie, well done <3
     good_morning_user: {
-      en: "Good morning, {user}",
-      de: "Guten Morgen, {user}",
-      pt: "Bom dia, {user}",
-      sv: "God morgon, {user}",
-      ru: "\u0414\u043E\u0431\u0440\u043E\u0435 \u0443\u0442\u0440\u043E, {user}"
+      en: "Good morning",
+      de: "Guten Morgen",
+      pt: "Bom dia",
+      sv: "God morgon",
+      ru: "\u0414\u043E\u0431\u0440\u043E\u0435 \u0443\u0442\u0440\u043E"
     },
     good_afternoon_user: {
-      en: "Good afternoon, {user}",
-      de: "Guten Nachmittag, {user}",
-      pt: "Boa tarde, {user}",
-      sv: "God eftermiddag, {user}",
-      ru: "\u0414\u043E\u0431\u0440\u044B\u0439 \u0434\u0435\u043D\u044C, {user}"
+      en: "Good afternoon",
+      de: "Guten Nachmittag",
+      pt: "Boa tarde",
+      sv: "God eftermiddag",
+      ru: "\u0414\u043E\u0431\u0440\u044B\u0439 \u0434\u0435\u043D\u044C"
     },
     good_evening_user: {
-      en: "Good evening, {user}",
-      de: "Guten Abend, {user}",
-      pt: "Boa noite, {user}",
-      sv: "God kv\xE4ll, {user}",
-      ru: "\u0414\u043E\u0431\u0440\u044B\u0439 \u0432\u0435\u0447\u0435\u0440, {user}"
+      en: "Good evening",
+      de: "Guten Abend",
+      pt: "Boa noite",
+      sv: "God kv\xE4ll",
+      ru: "\u0414\u043E\u0431\u0440\u044B\u0439 \u0432\u0435\u0447\u0435\u0440"
     },
     good_night_user: {
-      en: "Goodnight, {user}",
-      de: "Gute Nacht, {user}",
-      pt: "Boa noite, {user}",
-      sv: "God natt, {user}",
-      ru: "\u0421\u043F\u043E\u043A\u043E\u0439\u043D\u043E\u0439 \u043D\u043E\u0447\u0438, {user}"
+      en: "Goodnight",
+      de: "Gute Nacht",
+      pt: "Boa noite",
+      sv: "God natt",
+      ru: "\u0421\u043F\u043E\u043A\u043E\u0439\u043D\u043E\u0439 \u043D\u043E\u0447\u0438"
     },
     bleh_settings: {
       en: "bleh Settings",
@@ -59486,7 +59904,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         major: {
           en: "Major release",
           pt: "Lan\xE7amento principal",
-          sv: "St\xF6rre utg\xE5va"
+          sv: "St\xF6rre utg\xE5va",
+          ru: "\u041A\u0440\u0443\u043F\u043D\u044B\u0439 \u0440\u0435\u043B\u0438\u0437"
         },
         minor: {
           en: "Minor release",
@@ -60743,7 +61162,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       ru: "\u041F\u043E\u043D\u0440\u0430\u0432\u0438\u043B\u043E\u0441\u044C"
     },
     love_track: {
-      en: "Love track"
+      en: "Love track",
+      ru: "\u041E\u0442\u043C\u0435\u0442\u0438\u0442\u044C \u0442\u0440\u0435\u043A \u043A\u0430\u043A \u043B\u044E\u0431\u0438\u043C\u044B\u0439"
     },
     loved: {
       // as in loved tracks, this can be seen
@@ -60948,6 +61368,15 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       sv: "Visa bild",
       ru: "\u041F\u0440\u043E\u0441\u043C\u043E\u0442\u0440\u0435\u0442\u044C \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435"
     },
+    view_image_unsafe: {
+      en: "View unsafe image"
+    },
+    open_link: {
+      en: "Open link"
+    },
+    copy_text: {
+      en: "Copy text"
+    },
     event_cancelled: {
       // obviously remove the emoji or replace it as
       // you see fit if desired
@@ -60991,49 +61420,71 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     track_layout: {
       name: {
-        en: "Track layout"
+        en: "Track layout",
+        sv: "L\xE5tlayout",
+        ru: "\u0420\u0430\u0441\u043F\u043E\u043B\u043E\u0436\u0435\u043D\u0438\u0435 \u0442\u0440\u0435\u043A\u0430"
       },
       body: {
-        en: "Choose which axis to display track information on"
+        en: "Choose which axis to display track information on",
+        sv: "V\xE4lj vilken axis att visa l\xE5tinformation p\xE5",
+        ru: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u043E\u0441\u044C, \u043D\u0430 \u043A\u043E\u0442\u043E\u0440\u043E\u0439 \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0442\u044C \u0438\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u044E \u043E \u0442\u0440\u0435\u043A\u0435"
       },
       column: {
-        en: "Place title and artist vertically"
+        en: "Place title and artist vertically",
+        sv: "Placera titel och artist lodr\xE4tt",
+        ru: "\u0420\u0430\u0437\u043C\u0435\u0441\u0442\u0438\u0442\u044C \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u0438 \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044F \u0432\u0435\u0440\u0442\u0438\u043A\u0430\u043B\u044C\u043D\u043E"
       },
       row: {
-        en: "Place title and artist horizontally"
+        en: "Place title and artist horizontally",
+        sv: "Placera titel och artist v\xE5gr\xE4tt",
+        ru: "\u0420\u0430\u0437\u043C\u0435\u0441\u0442\u0438\u0442\u044C \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u0438 \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044F \u0433\u043E\u0440\u0438\u0437\u043E\u043D\u0442\u0430\u043B\u044C\u043D\u043E"
       }
     },
     track_album_name_location: {
       name: {
-        en: "Album name location"
+        en: "Album name location",
+        sv: "Albumtitelsplats",
+        ru: "\u0420\u0430\u0441\u043F\u043E\u043B\u043E\u0436\u0435\u043D\u0438\u0435 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u044F \u0430\u043B\u044C\u0431\u043E\u043C\u0430"
       },
       body: {
-        en: "Choose which axis to display said album name on"
+        en: "Choose which axis to display said album name on",
+        sv: "V\xE4lj vilken axis att visa albumtitel p\xE5",
+        ru: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u043E\u0441\u044C, \u043D\u0430 \u043A\u043E\u0442\u043E\u0440\u043E\u0439 \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0442\u044C \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u0430\u043B\u044C\u0431\u043E\u043C\u0430"
       },
       column: {
-        en: "Place below title and artist"
+        en: "Place below title and artist",
+        sv: "Placera under l\xE5ttitel och artist",
+        ru: "\u0420\u0430\u0437\u043C\u0435\u0441\u0442\u0438\u0442\u044C \u043F\u043E\u0434 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435\u043C \u0438 \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u0435\u043C"
       },
       row: {
-        en: "Place to the side of title and artist"
+        en: "Place to the side of title and artist",
+        sv: "Placera bredvid l\xE5ttitel och artist",
+        ru: "\u0420\u0430\u0437\u043C\u0435\u0441\u0442\u0438\u0442\u044C \u0440\u044F\u0434\u043E\u043C \u0441 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435\u043C \u0438 \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u0435\u043C"
       }
     },
     expand_tracks: {
       name: {
-        en: "Show associated album for tracks"
+        en: "Show associated album for tracks",
+        sv: "Visa associerade album f\xF6r l\xE5tar",
+        ru: "\u041F\u043E\u043A\u0430\u0437\u044B\u0432\u0430\u0442\u044C \u0441\u0432\u044F\u0437\u0430\u043D\u043D\u044B\u0439 \u0430\u043B\u044C\u0431\u043E\u043C \u0434\u043B\u044F \u0442\u0440\u0435\u043A\u043E\u0432"
       },
       body: {
-        en: "Places the track\u2019s associated album name if there\u2019s room"
+        en: "Places the track\u2019s associated album name if there\u2019s room",
+        sv: "Placerar l\xE5tens associerade album om det finns plats",
+        ru: "\u041E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0435\u0442 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u0441\u0432\u044F\u0437\u0430\u043D\u043D\u043E\u0433\u043E \u0430\u043B\u044C\u0431\u043E\u043C\u0430 \u0442\u0440\u0435\u043A\u0430, \u0435\u0441\u043B\u0438 \u0435\u0441\u0442\u044C \u043C\u0435\u0441\u0442\u043E"
       }
     },
     expand_tracks_when_active: {
       en: "Only when actively scrobbling",
       de: "Nur w\xE4hrend des aktiven Scrobbelns",
-      sv: "Endast n\xE4r du skrobblar"
+      sv: "Endast n\xE4r du skrobblar",
+      ru: "\u0422\u043E\u043B\u044C\u043A\u043E \u043F\u0440\u0438 \u0430\u043A\u0442\u0438\u0432\u043D\u043E\u043C \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u0438\u043D\u0433\u0435"
     },
     expand_tracks_always: {
       en: "Always when possible",
       de: "Immer, wenn m\xF6glich",
-      sv: "Alltid, n\xE4r det \xE4r m\xF6jligt"
+      sv: "Alltid, n\xE4r det \xE4r m\xF6jligt",
+      ru: "\u0412\u0441\u0435\u0433\u0434\u0430, \u043A\u043E\u0433\u0434\u0430 \u0432\u043E\u0437\u043C\u043E\u0436\u043D\u043E"
     },
     show_remaster_tags: {
       en: "Show remaster tags",
@@ -61126,10 +61577,14 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     display_name: {
       name: {
-        en: "Display name"
+        en: "Display name",
+        sv: "Visningsnamn",
+        ru: "\u041E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0435\u043C\u043E\u0435 \u0438\u043C\u044F"
       },
       body: {
-        en: "Changes your name on your profile, with your real @username shown below"
+        en: "Changes your name on your profile, with your real @username shown below",
+        sv: "\xC4ndrar namnet p\xE5 din profil och l\xE4gger ditt riktiga @anv\xE4ndarnamn under\xE5t",
+        ru: "\u0418\u0437\u043C\u0435\u043D\u044F\u0435\u0442 \u0432\u0430\u0448\u0435 \u0438\u043C\u044F \u0432 \u043F\u0440\u043E\u0444\u0438\u043B\u0435, \u043F\u0440\u0438 \u044D\u0442\u043E\u043C \u0432\u0430\u0448 \u0440\u0435\u0430\u043B\u044C\u043D\u044B\u0439 @\u043D\u0438\u043A\u043D\u0435\u0439\u043C \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0435\u0442\u0441\u044F \u043D\u0438\u0436\u0435"
       }
     },
     subtitle: {
@@ -61274,6 +61729,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     redirected_from: {
       en: "Redirected from",
+      sv: "Omdirigerades fr\xE5n",
       ru: "\u041F\u0435\u0440\u0435\u043D\u0430\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u043E \u0441"
     },
     music_corrections: {
@@ -61599,7 +62055,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Font choice",
         de: "Schriftartauswahl",
         pt: "Escolha de fonte",
-        sv: "Typsnitts",
+        sv: "Typsnitt",
         ru: "\u0412\u044B\u0431\u043E\u0440 \u0448\u0440\u0438\u0444\u0442\u0430"
       },
       body: {
@@ -61612,14 +62068,22 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     font_style: {
       en: "Font style",
+      sv: "Typsnittsstil",
+      ru: "\u0421\u0442\u0438\u043B\u044C \u0448\u0440\u0438\u0444\u0442\u0430",
       solid: {
-        en: "Solid"
+        en: "Solid",
+        sv: "Fast",
+        ru: "\u0421\u043F\u043B\u043E\u0448\u043D\u043E\u0439"
       },
       pop: {
-        en: "Pop"
+        en: "Pop",
+        sv: "Poppande",
+        ru: "\u042F\u0440\u043A\u0438\u0439"
       },
       glow: {
-        en: "Glow"
+        en: "Glow",
+        sv: "Gl\xF6dande",
+        ru: "\u0421\u0432\u0435\u0447\u0435\u043D\u0438\u0435"
       }
     },
     font_weight: {
@@ -61693,7 +62157,12 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       // this text is common sample text used in english,
       // if there's something more fitting for your language,
       // then feel free to adjust it
-      en: "The quick brown fox jumps over the lazy dog \u{1F3F3}\uFE0F\u200D\u26A7\uFE0F"
+      //
+      // not sure by what was meant by "fitting for your language"
+      // but i used a sentence that has all letters on rus language, like an english example
+      en: "The quick brown fox jumps over the lazy dog \u{1F3F3}\uFE0F\u200D\u26A7\uFE0F",
+      sv: "Flygande b\xE4ckasiner s\xF6ka hwila p\xE5 mjuka tuvor qxz \u{1F3F3}\uFE0F\u200D\u26A7\uFE0F",
+      ru: "\u0421\u044A\u0435\u0448\u044C \u0435\u0449\u0451 \u044D\u0442\u0438\u0445 \u043C\u044F\u0433\u043A\u0438\u0445 \u0444\u0440\u0430\u043D\u0446\u0443\u0437\u0441\u043A\u0438\u0445 \u0431\u0443\u043B\u043E\u043A, \u0434\u0430 \u0432\u044B\u043F\u0435\u0439 \u0447\u0430\u044E \u{1F3F3}\uFE0F\u200D\u26A7\uFE0F"
     },
     enter_font_names: {
       en: "Enter installed font name(s), separated by commas",
@@ -61985,10 +62454,12 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     applications: {
       en: "Applications",
+      sv: "Applikationer",
       ru: "\u041F\u0440\u0438\u043B\u043E\u0436\u0435\u043D\u0438\u044F"
     },
     applications_intro: {
       en: "Connect your account to third-party services for a better scrobbling experience. Make sure you trust the services below.",
+      sv: "Anslut ditt konto till tredjepartstj\xE4nster f\xF6r b\xE4ttre skrobblingsupplevelse. Var s\xE4ker p\xE5 att du litar p\xE5 nedre tj\xE4nster",
       ru: "\u041F\u043E\u0434\u043A\u043B\u044E\u0447\u0438\u0442\u0435 \u0441\u0432\u043E\u0439 \u0430\u043A\u043A\u0430\u0443\u043D\u0442 \u043A \u0441\u0442\u043E\u0440\u043E\u043D\u043D\u0438\u043C \u0441\u0435\u0440\u0432\u0438\u0441\u0430\u043C \u0434\u043B\u044F \u043B\u0443\u0447\u0448\u0435\u0433\u043E \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u0438\u043D\u0433\u0430. \u0423\u0431\u0435\u0434\u0438\u0442\u0435\u0441\u044C, \u0447\u0442\u043E \u0432\u044B \u0434\u043E\u0432\u0435\u0440\u044F\u0435\u0442\u0435 \u0443\u043A\u0430\u0437\u0430\u043D\u043D\u044B\u043C \u043D\u0438\u0436\u0435 \u0441\u0435\u0440\u0432\u0438\u0441\u0430\u043C."
     },
     connect_app: {
@@ -62007,6 +62478,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     suggested: {
       en: "Suggested",
+      sv: "F\xF6reslaget",
       ru: "\u041F\u0440\u0435\u0434\u043B\u043E\u0436\u0435\u043D\u043D\u044B\u0435"
     },
     connected: {
@@ -62156,7 +62628,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     own_plays: {
       // tracklist source menu option that enables the thing below
-      en: "Own plays"
+      en: "Own plays",
+      sv: "Egna spelningar",
+      ru: "\u0421\u043E\u0431\u0441\u0442\u0432\u0435\u043D\u043D\u044B\u0435 \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u044F"
     },
     sourced_from_own_plays: {
       // tracklist from your own album plays
@@ -62502,10 +62976,14 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     display_name_styles: {
       name: {
-        en: "Show display name styles"
+        en: "Show display name styles",
+        sv: "Se visningsnamnsstiler",
+        ru: "\u041F\u043E\u043A\u0430\u0437\u044B\u0432\u0430\u0442\u044C \u0441\u0442\u0438\u043B\u0438 \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0435\u043C\u043E\u0433\u043E \u0438\u043C\u0435\u043D\u0438"
       },
       body: {
-        en: "Sponsors can choose a custom font and shadow style for their profile name"
+        en: "Sponsors can choose a custom font and shadow style for their profile name",
+        sv: "Sponsorer kan v\xE4lja valfri typsnitt och skugga f\xF6r deras profilnamn",
+        ru: "\u0421\u043F\u043E\u043D\u0441\u043E\u0440\u044B \u043C\u043E\u0433\u0443\u0442 \u0432\u044B\u0431\u0438\u0440\u0430\u0442\u044C \u0441\u043E\u0431\u0441\u0442\u0432\u0435\u043D\u043D\u044B\u0439 \u0448\u0440\u0438\u0444\u0442 \u0438 \u0441\u0442\u0438\u043B\u044C \u0442\u0435\u043D\u0438 \u0434\u043B\u044F \u0438\u043C\u0435\u043D\u0438 \u0432 \u0441\u0432\u043E\u0435\u043C \u043F\u0440\u043E\u0444\u0438\u043B\u0435"
       }
     },
     underline_links: {
@@ -62567,6 +63045,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     no_title: {
       en: "No title",
+      sv: "Ingen titel",
       ru: "\u0411\u0435\u0437 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u044F"
     },
     description: {
@@ -62577,6 +63056,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     no_description: {
       en: "No description",
+      sv: "Ingen beskrivning",
       ru: "\u0411\u0435\u0437 \u043E\u043F\u0438\u0441\u0430\u043D\u0438\u044F"
     },
     change_avatar: {
@@ -62717,7 +63197,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Redirected to bleh\u2019s built-in Collage feature",
       de: "Weiterleitung zur integrierten Collagenfunktion von bleh",
       pt: "Redirecionando ao recurso integrado de Colagem do bleh",
-      sv: "Omredigerad till blehs egna collagefunktion",
+      sv: "Omdirigerad till blehs egna collagefunktion",
       ru: "\u041F\u0435\u0440\u0435\u043D\u0430\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u043E \u043D\u0430 \u0432\u0441\u0442\u0440\u043E\u0435\u043D\u043D\u0443\u044E \u0444\u0443\u043D\u043A\u0446\u0438\u044E \u041A\u043E\u043B\u043B\u0430\u0436\u0430 bleh"
     },
     your_collage_is_ready: {
@@ -63582,13 +64062,16 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     profile_font: {
       name: {
-        en: "Profile name font"
+        en: "Profile name font",
+        ru: "\u0428\u0440\u0438\u0444\u0442 \u0438\u043C\u0435\u043D\u0438 \u043F\u0440\u043E\u0444\u0438\u043B\u044F"
       },
       body: {
-        en: "Customise the font family used for your username, only visible on your profile"
+        en: "Customise the font family used for your username, only visible on your profile",
+        ru: "\u041D\u0430\u0441\u0442\u0440\u043E\u0439\u0442\u0435 \u0441\u0435\u043C\u0435\u0439\u0441\u0442\u0432\u043E \u0448\u0440\u0438\u0444\u0442\u043E\u0432, \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0435\u043C\u043E\u0435 \u0434\u043B\u044F \u0432\u0430\u0448\u0435\u0433\u043E \u0438\u043C\u0435\u043D\u0438 \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F; \u043E\u043D\u043E \u0431\u0443\u0434\u0435\u0442 \u0432\u0438\u0434\u043D\u043E \u0442\u043E\u043B\u044C\u043A\u043E \u0432 \u0432\u0430\u0448\u0435\u043C \u043F\u0440\u043E\u0444\u0438\u043B\u0435"
       },
       reminder: {
-        en: "Changed your name font, don\u2019t forget to save!"
+        en: "Changed your name font, don\u2019t forget to save!",
+        ru: "\u0428\u0440\u0438\u0444\u0442 \u0438\u043C\u0435\u043D\u0438 \u0438\u0437\u043C\u0435\u043D\u0435\u043D, \u043D\u0435 \u0437\u0430\u0431\u0443\u0434\u044C\u0442\u0435 \u0441\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C!"
       }
     },
     none: {
@@ -63845,6 +64328,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     lyrics: {
       // lyrics
       en: "Lyrics",
+      sv: "Lyrics",
       ru: "\u0422\u0435\u043A\u0441\u0442\u044B \u043F\u0435\u0441\u0435\u043D",
       name: {
         // the game
@@ -64413,12 +64897,13 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     simulate_scroll: {
       name: {
         en: "Simulate horizontal scrolling",
-        sv: "Simulera v\xE5gr\xE4t skrollning"
+        sv: "Simulera v\xE5gr\xE4t skrollning",
+        ru: "\u0418\u043C\u0438\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u0433\u043E\u0440\u0438\u0437\u043E\u043D\u0442\u0430\u043B\u044C\u043D\u0443\u044E \u043F\u0440\u043E\u043A\u0440\u0443\u0442\u043A\u0443"
       },
       body: {
         en: "Only recommended for desktop devices",
         sv: "Rekommenderas endast f\xF6r desktop-enheter",
-        ru: "\u0418\u043C\u0438\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u0433\u043E\u0440\u0438\u0437\u043E\u043D\u0442\u0430\u043B\u044C\u043D\u0443\u044E \u043F\u0440\u043E\u043A\u0440\u0443\u0442\u043A\u0443"
+        ru: "\u0420\u0435\u043A\u043E\u043C\u0435\u043D\u0434\u0443\u0435\u0442\u0441\u044F \u0442\u043E\u043B\u044C\u043A\u043E \u0434\u043B\u044F \u043D\u0430\u0441\u0442\u043E\u043B\u044C\u043D\u044B\u0445 \u0443\u0441\u0442\u0440\u043E\u0439\u0441\u0442\u0432"
       }
     },
     credits: {
@@ -64427,32 +64912,66 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       ru: "\u041A\u0440\u0435\u0434\u0438\u0442\u044B"
     },
     view_credits: {
-      en: "View credits"
+      en: "View credits",
+      sv: "Visa erk\xE4nnanden",
+      ru: "\u041F\u043E\u0441\u043C\u043E\u0442\u0440\u0435\u0442\u044C \u043A\u0440\u0435\u0434\u0438\u0442\u044B"
     },
     credits_for_value: {
-      en: "Credits for {v}"
+      en: "Credits for {v}",
+      sv: "Erk\xE4nnanden f\xF6r {v}",
+      ru: "\u041A\u0440\u0435\u0434\u0438\u0442\u044B \u0434\u043B\u044F {v}"
     },
     branch: {
       name: {
-        en: "Choose branch"
+        en: "Choose branch",
+        sv: "V\xE4lj bransh",
+        ru: "\u0412\u044B\u0431\u0440\u0430\u0442\u044C \u0432\u0435\u0442\u043A\u0443"
       },
       body: {
-        en: "Default release branch is \u2018uwu\u2019, do not change unless you know what you\u2019re doing"
+        en: "Default release branch is \u2018uwu\u2019, do not change unless you know what you\u2019re doing",
+        sv: "Standardbranshen \xE4r \u2018uwu\u2019, \xE4ndra inte om du inte vet vad du g\xF6r",
+        ru: '\u0412\u0435\u0442\u043A\u0430 \u0432\u044B\u043F\u0443\u0441\u043A\u0430 \u043F\u043E \u0443\u043C\u043E\u043B\u0447\u0430\u043D\u0438\u044E - "uwu", \u043D\u0435 \u043C\u0435\u043D\u044F\u0439\u0442\u0435 \u0435\u0451, \u0435\u0441\u043B\u0438 \u0442\u043E\u0447\u043D\u043E \u043D\u0435 \u0437\u043D\u0430\u0435\u0442\u0435, \u0447\u0442\u043E \u0434\u0435\u043B\u0430\u0435\u0442\u0435'
       }
     },
     log_in: {
-      en: "Log in"
+      en: "Log in",
+      sv: "Logga in",
+      ru: "\u0412\u043E\u0439\u0442\u0438"
     },
     sign_up: {
-      en: "Sign up"
+      en: "Sign up",
+      sv: "Registrera",
+      ru: "\u0417\u0430\u0440\u0435\u0433\u0438\u0441\u0442\u0440\u0438\u0440\u043E\u0432\u0430\u0442\u044C\u0441\u044F"
     },
     plot: {
       name: {
-        en: "Plot"
+        en: "Plot",
+        sv: "Rita",
+        ru: "\u0413\u0440\u0430\u0444\u0438\u043A"
       },
       body: {
-        en: "Create graphs from user libraries"
+        en: "Create graphs from user libraries",
+        sv: "Skapa diagram fr\xE5n anv\xE4ndarbibliotek",
+        ru: "\u0421\u043E\u0437\u0434\u0430\u0442\u044C \u0433\u0440\u0430\u0444\u0438\u043A\u0438 \u0438\u0437 \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044C\u0441\u043A\u0438\u0445 \u0431\u0438\u0431\u043B\u0438\u043E\u0442\u0435\u043A"
       }
+    },
+    your_recent_30_days: {
+      en: "Your recent 30 days"
+    },
+    value_this_month: {
+      // number of scrobbles
+      en: "{v} this month"
+    },
+    menu_replacement: {
+      name: {
+        en: "Replace native browser right-click menus"
+      },
+      body: {
+        en: "Provide bleh context-specific actions when right-clicking"
+      }
+    },
+    you_have_new_badges: {
+      en: "You have new badges!"
     }
   };
   function tl2(key, replacements = {}) {
@@ -64539,6 +65058,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       }
     }
     lang = document.documentElement.getAttribute("lang");
+    lang_browser = navigator.language || navigator.userLanguage;
     Settings.defaultLocale = lang;
   }
 
@@ -65107,8 +65627,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     solarium: {
       default: true,
       title: trans.solarium.name,
-      body: trans.solarium.body,
-      new_release: true
+      body: trans.solarium.body
     },
     noise: {
       css: "noise-opacity",
@@ -65118,8 +65637,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       max: 1,
       step: 0.05,
       title: trans.noise.name,
-      body: trans.noise.body,
-      new_release: true
+      body: trans.noise.body
     },
     gloss: {
       css: "gloss",
@@ -65149,7 +65667,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     display_name_styles: {
       default: true,
       title: trans.display_name_styles.name,
-      body: trans.display_name_styles.body
+      body: trans.display_name_styles.body,
+      require_reload: true
     },
     reduced_motion: {
       default: false,
@@ -65249,8 +65768,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     colourful_tracks_all: {
       default: false,
       type: "checkbox",
-      title: trans.colourful_all,
-      new_release: true
+      title: trans.colourful_all
     },
     feature_flags: {
       default: {},
@@ -65738,14 +66256,12 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       default: false,
       type: "checkbox",
       title: trans.romanise_jp,
-      new_release: true,
       incompatible: { format_guest_features: false, corrections: false }
     },
     romanise_ko: {
       default: false,
       type: "checkbox",
       title: trans.romanise_ko,
-      new_release: true,
       incompatible: { format_guest_features: false, corrections: false }
     },
     music_links: {
@@ -65764,7 +66280,6 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       type: "list",
       title: trans.music_links.name,
       body: trans.music_links.body,
-      new_release: true,
       predefined: true
     },
     inverse_compare: {
@@ -65788,21 +66303,22 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       body: trans.tracklist_source.body,
       new_release: true,
       incompatible: { oracle_beta: false }
+    },
+    menu_replacement: {
+      default: true,
+      title: trans.menu_replacement.name,
+      body: trans.menu_replacement.body,
+      new_release: true,
+      require_reload: true
     }
   };
 
   // src/build/log.js
   function log(text3, system, type = "info", append = {}) {
     if (!page.structure.logs) {
-      let logs = html.node`<div class="logs">
-            <div class="setting" data-type="toggle" id="container-log_show_all" onclick="_update_item('log_show_all')">
-                <div class="toggle-wrap">
-                    <button id="toggle-log_show_all">
-                        show all
-                    </button>
-                </div>
-            </div>
-        </div>`;
+      let logs = html.node`
+            <div class="logs" />
+        `;
       document.documentElement.appendChild(logs);
       page.structure.logs = logs;
     }
@@ -65859,8 +66375,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
   // src/build/build.json
   var build_default = {
     brand: "bleh",
-    build: "2025.1103.1",
-    sku: "parfait",
+    build: "2025.1111",
+    sku: "aurora",
     bio: "bleh!!! ^-^",
     author: "katelyn",
     url: "https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.js",
@@ -66208,6 +66724,16 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         default: true,
         name: "Unlock profile name fonts for sponsors",
         date: "2025-10-31"
+      },
+      campfire: {
+        default: false,
+        name: "New home experience",
+        date: "2025-11-05"
+      },
+      non_pro_edit: {
+        default: false,
+        name: "Non-pro editing",
+        date: "2025-11-10"
       }
     }
   };

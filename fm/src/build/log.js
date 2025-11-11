@@ -10,15 +10,9 @@ import {page} from "./page";
 
 export function log(text, system, type = 'info', append={}) {
     if (!page.structure.logs) {
-        let logs = html.node`<div class="logs">
-            <div class="setting" data-type="toggle" id="container-log_show_all" onclick="_update_item('log_show_all')">
-                <div class="toggle-wrap">
-                    <button id="toggle-log_show_all">
-                        show all
-                    </button>
-                </div>
-            </div>
-        </div>`
+        let logs = html.node`
+            <div class="logs" />
+        `;
 
         document.documentElement.appendChild(logs);
         page.structure.logs = logs;

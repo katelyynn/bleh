@@ -33,6 +33,7 @@ import { redirect } from './music.js';
 import tippy from 'tippy.js';
 import ColorThief from 'color-thief-browser';
 import { hoshino } from './hoshino.js';
+import { submit_scrobble } from './scrobble.js';
 
 export function patch_titles(search = page.structure.main) {
     if (page.subpage == 'tags_overview') return;
@@ -307,9 +308,24 @@ export function patch_titles(search = page.structure.main) {
             const image_wrap = track.querySelector('.chartlist-image');
             let link;
             let image;
+            let alt;
+            let album_artist;
             if (image_wrap) {
                 link = image_wrap.querySelector('.cover-art');
                 image = link.querySelector('img');
+
+                if (link.href) album_artist = return_artist_from_track(link.href, true);
+
+                alt = romanise(
+                    correct_item_by_artist(
+                        image.getAttribute('alt'),
+                        track_artist
+                    )
+                );
+
+                tippy(image_wrap, {
+                    content: alt
+                });
 
                 if (!is_album && has_bar) {
                     hoshino(
@@ -477,17 +493,17 @@ export function patch_titles(search = page.structure.main) {
                 );
                 if (previous) previous.style.display = 'none';
 
+                const user = ['user', 'overview'].includes(page.type) ? page.name : auth.name;
+
                 // then we need to decide for ourselves whether u can delete or obsess
                 // since we cant rely on the elements existing anymore
-                const is_own_profile =
-                    page.type == 'user' && page.name == auth.name;
-                const can_edit =
-                    is_own_profile &&
-                    !is_active &&
-                    (!is_album ? !has_bar : true) &&
-                    auth.pro;
-                const can_delete =
-                    is_own_profile && !is_active && !has_bar && !is_album;
+                const is_own_profile = user == auth.name;
+                const can_edit = is_own_profile && !is_active && (!is_album ? !has_bar : true) && auth.pro && ['user', 'overview'].includes(page.type);
+                const can_delete = is_own_profile && !is_active && !has_bar && !is_album && ['user', 'overview'].includes(page.type);
+
+                const can_copy_scrobble = !is_album && !has_bar && !is_active && ['user', 'overview'].includes(page.type);
+
+                const timestamp = parseInt(track.getAttribute('data-timestamp')) || track_timestamp_contents?.replace(/^[A-Za-z]+\s+/, '').replace(',', '').replace(/\s?(am|pm)$/i, '');
 
                 let more_button = html.node`
                     <button class="track-more-button icon chibi" data-type="more" onclick=${() => {
@@ -670,9 +686,7 @@ export function patch_titles(search = page.structure.main) {
                         theme: 'context-menu',
                         content: html.node`
                             ${track.preview}
-                            ${
-                                can_edit ?
-                                    html.node`
+                            ${can_edit ? html.node`
                             <div class="button-combo">
                                 ${() => {
                                     if (is_album) {
@@ -706,9 +720,7 @@ export function patch_titles(search = page.structure.main) {
                                         </form>
                                     `;
                                 }}
-                                ${
-                                    bulk_edit_button ?
-                                        html.node`
+                                ${bulk_edit_button ? html.node`
                                     <div class="button-combo-sep" />
                                     ${() => {
                                         let button =
@@ -731,14 +743,36 @@ export function patch_titles(search = page.structure.main) {
 
                                         return button;
                                     }}
-                                `
-                                    :   ''
-                                }
+                                ` : ''}
                             </div>
+                            ${can_copy_scrobble ? html.node`
+                                <button class="dropdown-menu-clickable-item" data-type="copy_scrobble" onclick=${() => {
+                                    submit_scrobble({
+                                        pre_track: track_title.getAttribute('data-name'),
+                                        pre_artist: track_artist,
+                                        pre_album: alt,
+                                        pre_album_artist: album_artist,
+                                        pre_timestamp: timestamp
+                                    });
+                                }}>
+                                    ${tl(trans.copy)}
+                                </button>
+                            ` : ''}
                             <div class="sep" />
-                            `
-                                :   ''
-                            }
+                            ` : can_copy_scrobble ? html.node`
+                                <button class="dropdown-menu-clickable-item" data-type="copy_scrobble" onclick=${() => {
+                                    submit_scrobble({
+                                        pre_track: track_title.getAttribute('data-name'),
+                                        pre_artist: track_artist,
+                                        pre_album: alt,
+                                        pre_album_artist: album_artist,
+                                        pre_timestamp: timestamp
+                                    });
+                                }}>
+                                    ${tl(trans.copy)}
+                                </button>
+                                <div class="sep" />
+                            ` : ''}
                             ${() => {
                                 let container =
                                     track.querySelector('.chartlist-play');
@@ -772,7 +806,7 @@ export function patch_titles(search = page.structure.main) {
                                 <div class="button-combo-sep"/>
                                 ${() => {
                                     let button = html.node`
-                                        <a class="dropdown-menu-clickable-item chibi" data-type="continue" href="${root}user/${page.name}/library${track_title.getAttribute('href')}">
+                                        <a class="dropdown-menu-clickable-item chibi" data-type="continue" href="${root}user/${user}/library${track_title.getAttribute('href')}">
                                             ${tl(trans.explore_in_library)}
                                         </a>
                                     `;
@@ -802,7 +836,7 @@ export function patch_titles(search = page.structure.main) {
                                 <div class="button-combo-sep"/>
                                 ${() => {
                                     let button = html.node`
-                                        <a class="dropdown-menu-clickable-item chibi" data-type="continue" href="${root}user/${page.name}/library${album_link.getAttribute('href')}">
+                                        <a class="dropdown-menu-clickable-item chibi" data-type="continue" href="${root}user/${user}/library${album_link.getAttribute('href')}">
                                             ${tl(trans.explore_in_library)}
                                         </a>
                                     `;
@@ -829,7 +863,7 @@ export function patch_titles(search = page.structure.main) {
                                 <div class="button-combo-sep"/>
                                 ${() => {
                                     let button = html.node`
-                                        <a class="dropdown-menu-clickable-item chibi" data-type="continue" href="${root}user/${page.name}/library${track_title.getAttribute('href')})}">
+                                        <a class="dropdown-menu-clickable-item chibi" data-type="continue" href="${root}user/${user}/library${track_title.getAttribute('href')})}">
                                             ${tl(trans.explore_in_library)}
                                         </a>
                                     `;
@@ -856,7 +890,7 @@ export function patch_titles(search = page.structure.main) {
                                 <div class="button-combo-sep"/>
                                 ${() => {
                                     let button = html.node`
-                                        <a class="dropdown-menu-clickable-item chibi" data-type="continue" href="${root}user/${page.name}/library/music/${redirect()}${sanitise(track_artist)}">
+                                        <a class="dropdown-menu-clickable-item chibi" data-type="continue" href="${root}user/${user}/library/music/${redirect()}${sanitise(track_artist)}">
                                             ${tl(trans.explore_in_library)}
                                         </a>
                                     `;
@@ -898,7 +932,7 @@ export function patch_titles(search = page.structure.main) {
                             <button class="dropdown-menu-clickable-item" data-type="link" onclick=${() => {
                                 copy(track_title.href);
                             }}>
-                                ${tl(trans.copy)}
+                                ${tl(trans.copy_link)}
                             </button>
                             ${() => {
                                 if (!is_own_profile || !can_delete) return;
@@ -1028,13 +1062,6 @@ export function patch_titles(search = page.structure.main) {
 
             if (image_wrap) {
                 if (!is_album && show_album_text && !has_bar && !album_text) {
-                    let alt = romanise(
-                        correct_item_by_artist(
-                            image.getAttribute('alt'),
-                            track_artist
-                        )
-                    );
-
                     track_info.appendChild(html.node`
                         <td class="chartlist-album custom-album-text">
                             <a href="${link.getAttribute('href')}">${alt}</a>

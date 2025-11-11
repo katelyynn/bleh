@@ -1,7 +1,7 @@
 {
     "brand": "bleh",
-    "build": "2025.1103.1",
-    "sku": "parfait",
+    "build": "2025.1111",
+    "sku": "aurora",
     "bio": "bleh!!! ^-^",
     "author": "katelyn",
     "url": "https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.js",
@@ -349,6 +349,16 @@
             "default": true,
             "name": "Unlock profile name fonts for sponsors",
             "date": "2025-10-31"
+        },
+        "campfire": {
+            "default": false,
+            "name": "New home experience",
+            "date": "2025-11-05"
+        },
+        "non_pro_edit": {
+            "default": false,
+            "name": "Non-pro editing",
+            "date": "2025-11-10"
         }
     }
 }

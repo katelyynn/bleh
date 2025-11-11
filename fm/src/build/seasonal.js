@@ -67,7 +67,7 @@ export let seasonal_events = [
 
         snowflakes: {
             state: true,
-            count: 40
+            count: 80
         }
     },
     {

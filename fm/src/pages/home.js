@@ -15,6 +15,11 @@ import {bleh_native_settings} from './lastfm_settings';
 import {html, render} from "lighterhtml";
 import {ff} from "../sku.js";
 import { load_profile_cache_externally } from './profile.js';
+import { correct_artist, correct_item_by_artist, name_includes, smart_artists, smart_title } from "../components/lotus.js";
+import { romanise, sanitise } from "../build/tools.js";
+import { redirect } from "../components/music.js";
+import { settings } from "../build/config.js";
+import { expand_avatar } from "../avatar.js";
 
 export async function bleh_home() {
     page.structure.container = document.body.querySelector('.page-content');
@@ -62,28 +67,58 @@ export async function bleh_home() {
 
     let welcome;
     if (auth.name) {
+        let profile_name;
         welcome = html.node`
-            <div class="top-banner home-banner">
-                <div class="avatar">
-                    <img src=${auth.avatar.replace('/avatar42s/', '/avatar170s/')} alt=${tl(trans.your_avatar)}>
-                    ${(auth.sponsor) ? html.node`
-                    <span class="avatar-status-dot user-status--bleh-sponsor"></span>
-                    ` : ''}
+            <section class="redesigned-header redesigned-profile-header no-background">
+                <div class="avatar-side">
+                    <div class="avatar" onclick=${() => {
+                        expand_avatar(auth.avatar.replace('/avatar42s/', '/ar0/'));
+                    }}>
+                        <img src=${auth.avatar.replace('/avatar42s/', '/avatar170s/')} alt=${tl(trans.your_avatar)}>
+                    </div>
                 </div>
-                <h1>${{html: tl(trans[`good_${time}_user`]).replace('{user}', `<a class="mention" href="${root}user/${auth.name}">@${auth.name}</a>`)}}</h1>
-            </div>
+                <div class="info-side has-main-info">
+                    <div class="main-info">
+                        <div class="greeting">
+                            ${tl(trans[`good_${time}_user`])}
+                        </div>
+                        <div class="title-container">
+                            <div class="header-title-label-wrap">
+                                <h1 class="header-title">
+                                    <a class="profile-name" href="${root}user/${auth.name}" ref=${el => profile_name = el}>${cache.username ? cache.username : auth.name}</a>
+                                </h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         `;
+
+        if (settings.display_name_styles) {
+            profile_name.setAttribute('data-font', cache.font);
+            profile_name.setAttribute('data-font-style', cache.font_style);
+        }
     } else {
         welcome = html.node`
-            <div class="top-banner home-banner">
-                <div class="avatar">
-                    <img class="missing-avatar" alt=${tl(trans.your_avatar)}>
-                    ${(auth.sponsor) ? html.node`
-                    <span class="avatar-status-dot user-status--bleh-sponsor"></span>
-                    ` : ''}
+            <section class="redesigned-header redesigned-profile-header no-background">
+                <div class="avatar-side">
+                    <div class="avatar">
+                        <img class="missing-avatar" alt=${tl(trans.your_avatar)}>
+                    </div>
                 </div>
-                <h1>${tl(trans.not_logged_in)}</h1>
-            </div>
+                <div class="info-side has-main-info">
+                    <div class="main-info">
+                        <div class="greeting">
+                            ${tl(trans[`good_${time}_user`])}
+                        </div>
+                        <div class="title-container">
+                            <div class="header-title-label-wrap">
+                                <h1>${tl(trans.not_logged_in)}</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         `;
     }
 
@@ -184,77 +219,81 @@ export async function bleh_home() {
     }
 
     if (page.subpage == 'music' && auth.name) {
-        let toolbar = html.node`
-            <div class="toolbar">
-                <nav class="navlist secondary-nav navlist--more redesigned-navigation">
-                    <ul class="navlist-items">
-                        <li class="navlist-item secondary-nav-item">
-                            <a href="${root}user/${auth.name}" data-type="mention" class="secondary-nav-item-link">
-                                ${tl(trans.profile)}
-                            </a>
-                        </li>
-                        <li class="navlist-item secondary-nav-item">
-                            <a href="${root}user/${auth.name}/library" data-type="library" class="secondary-nav-item-link">
-                                ${tl(trans.library)}
-                            </a>
-                        </li>
-                        <li class="navlist-item secondary-nav-item">
-                            <a href="${root}user/${auth.name}/following" data-type="profile" class="secondary-nav-item-link">
-                                ${tl(trans.friends)}
-                            </a>
-                        </li>
-                        <li class="navlist-item secondary-nav-item">
-                            <a href="${root}user/${auth.name}/shoutbox" data-type="shouts" class="secondary-nav-item-link">
-                                ${tl(trans.shouts)}
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        `;
+        if (ff('campfire')) {
+            campfire();
+        } else {
+            let toolbar = html.node`
+                <div class="toolbar">
+                    <nav class="navlist secondary-nav navlist--more redesigned-navigation">
+                        <ul class="navlist-items">
+                            <li class="navlist-item secondary-nav-item">
+                                <a href="${root}user/${auth.name}" data-type="mention" class="secondary-nav-item-link">
+                                    ${tl(trans.profile)}
+                                </a>
+                            </li>
+                            <li class="navlist-item secondary-nav-item">
+                                <a href="${root}user/${auth.name}/library" data-type="library" class="secondary-nav-item-link">
+                                    ${tl(trans.library)}
+                                </a>
+                            </li>
+                            <li class="navlist-item secondary-nav-item">
+                                <a href="${root}user/${auth.name}/following" data-type="profile" class="secondary-nav-item-link">
+                                    ${tl(trans.friends)}
+                                </a>
+                            </li>
+                            <li class="navlist-item secondary-nav-item">
+                                <a href="${root}user/${auth.name}/shoutbox" data-type="shouts" class="secondary-nav-item-link">
+                                    ${tl(trans.shouts)}
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            `;
 
-        page.structure.row.insertBefore(toolbar, page.structure.content);
+            page.structure.row.insertBefore(toolbar, page.structure.content);
 
-        let track_list;
-        page.structure.row.insertBefore(html.node`
-            <div class="content override">
-                <div class="col-main" ref=${el => page.structure.main = el}>
-                    <section>
-                        <h2>${tl(trans.recent_tracks)}</h2>
-                        <div class="recent-listening-container" ref=${el => track_list = el}>
-                            <div class="loading-data-container">
-                                <p class="loading-data-text">${tl(trans.finding_your_tracks)}</p>
+            let track_list;
+            page.structure.row.insertBefore(html.node`
+                <div class="content override">
+                    <div class="col-main" ref=${el => page.structure.main = el}>
+                        <section>
+                            <h2>${tl(trans.recent_tracks)}</h2>
+                            <div class="recent-listening-container" ref=${el => track_list = el}>
+                                <div class="loading-data-container">
+                                    <p class="loading-data-text">${tl(trans.finding_your_tracks)}</p>
+                                </div>
                             </div>
-                        </div>
-                    </section>
+                        </section>
+                    </div>
+                    <div class="col-sidebar" ref=${el => page.structure.side = el}>
+                        <section>
+                            <h2>${tl(trans.activity)}</h2>
+                            ${render_activity_list()}
+                            <div class="more-link">
+                                <a href="${root}bleh/profile?setting=activities">${tl(trans.activity_settings)}</a>
+                            </div>
+                        </section>
+                    </div>
                 </div>
-                <div class="col-sidebar" ref=${el => page.structure.side = el}>
-                    <section>
-                        <h2>${tl(trans.activity)}</h2>
-                        ${render_activity_list()}
-                        <div class="more-link">
-                            <a href="${root}bleh/profile?setting=activities">${tl(trans.activity_settings)}</a>
-                        </div>
-                    </section>
-                </div>
-            </div>
-        `, page.structure.content);
+            `, page.structure.content);
 
-        fetch(`${root}user/${auth.name}/partial/recenttracks?ajax=1`)
-        .then(function(response) {
-            console.log('returned', response, response.text);
+            fetch(`${root}user/${auth.name}/partial/recenttracks?ajax=1`)
+            .then(function(response) {
+                console.log('returned', response, response.text);
 
-            return response.text();
-        })
-        .then(function(html) {
-            let doc = new DOMParser().parseFromString(html, 'text/html');
-            console.log('DOC', doc);
+                return response.text();
+            })
+            .then(function(html) {
+                let doc = new DOMParser().parseFromString(html, 'text/html');
+                console.log('DOC', doc);
 
-            let tracklist_panel = doc.querySelector('.chartlist');
+                let tracklist_panel = doc.querySelector('.chartlist');
 
-            if (tracklist_panel)
-                track_list.outerHTML = tracklist_panel.outerHTML;
-        });
+                if (tracklist_panel)
+                    track_list.outerHTML = tracklist_panel.outerHTML;
+            });
+        }
     } else if (page.type == 'releases') {
         let content = page.structure.main.querySelectorAll(':scope > *');
         let panel = html.node`
@@ -276,4 +315,139 @@ export function bleh_home_legacy() {
     render(main_content, html``);
 
     window.location.href = `${root}music`;
+}
+
+function campfire() {
+    let selected_index = 0;
+    let previous_index = 0;
+    let max_index = 0;
+    let items_container;
+    let item_details;
+    let current_bg;
+    let previous_bg;
+
+    const container = html.node`
+        <div class="campfire">
+            <div class="campfire-intro">
+                <h2 class="music-section-heading">${tl(trans.your_recent_30_days)}</h2>
+            </div>
+            <div class="campfire-items" ref=${el => items_container = el} />
+            <div class="campfire-details" ref=${el => item_details = el} />
+            <div class="campfire-bg current" ref=${el => current_bg = el} />
+            <div class="campfire-bg previous" ref=${el => previous_bg = el} />
+        </div>
+    `;
+
+    page.structure.row.insertBefore(container, page.structure.content);
+
+    let albums = [];
+    let album_elements = [];
+
+    fetch(`${root}user/${auth.name}/partial/albums?albums_date_preset=LAST_30_DAYS&ajax=1`)
+        .then(function (response) {
+            console.log('returned', response, response.text);
+
+            return response.text();
+        })
+        .then(function (dom) {
+            let doc = new DOMParser().parseFromString(dom, 'text/html');
+            console.log('DOC', doc);
+
+            const items = doc.querySelectorAll('.grid-items > .grid-items-item');
+            items.forEach(item => {
+                const image = item.querySelector('.grid-items-cover-image-image img').src;
+                const title = item.querySelector('.grid-items-item-main-text a').textContent;
+                const artist = item.querySelector('.grid-items-item-aux-block').textContent;
+                const plays = item.querySelector('.grid-items-item-aux-text a:last-child').textContent.trim();
+
+                let corrected_title = romanise(correct_item_by_artist(title, artist));
+                let corrected_artist = romanise(correct_artist(artist));
+
+                let formatted_title = corrected_title;
+                let formatted_artist = corrected_artist;
+
+                if (settings.format_guest_features) {
+                    const formatted = name_includes(title, artist);
+
+                    formatted_title = smart_title(formatted[0], formatted[1]);
+                    formatted_artist = smart_artists(formatted[2], formatted[3]);
+                }
+
+                albums.push({
+                    image: image.replace('/avatar300s/', '/500x500/'),
+                    title,
+                    artist,
+                    plays,
+                    formatted_title,
+                    formatted_artist,
+                    corrected_title,
+                    corrected_artist
+                });
+            });
+
+            max_index = albums.length - 1;
+
+            render(items_container, html`
+                ${albums.map((album, index) => {
+                    const elem = html.node`
+                        <div class="campfire-item" style="--index: ${index}" onclick=${() => {
+                            if (selected_index != index) set_index(index);
+                        }}>
+                            <div class="campfire-item-cover">
+                                <img src=${album.image} alt=${album.corrected_title} />
+                            </div>
+                        </div>
+                    `;
+
+                    album_elements.push(elem);
+
+                    return elem;
+                })}
+            `);
+
+            let timeout;
+            container.addEventListener('wheel', e => {
+                e.preventDefault();
+                if (timeout) return;
+
+                timeout = setTimeout(() => {
+                    timeout = null;
+                }, 0.15);
+
+                const direction = Math.sign(e.deltaY);
+                if (direction == 0) return;
+                set_index(selected_index + direction);
+            }, { passive: false });
+
+            set_index(selected_index);
+        });
+
+    function set_index(index) {
+        if (index > max_index) index = 0;
+        else if (index < 0) index = max_index;
+
+        album_elements.forEach((album, album_index) => {
+            album.setAttribute('aria-checked', album_index == index);
+        });
+
+        previous_index = selected_index;
+        selected_index = index;
+        items_container.style.setProperty('--selected-index', index);
+
+        const album = albums[index];
+
+        current_bg.style.setProperty('background-image', `url(${album.image})`);
+
+        render(item_details, html`
+            <a class="campfire-title smart-title" href="${root}music/${sanitise(album.artist)}/${sanitise(album.title)}" target="_blank">
+                ${album.formatted_title}
+            </a>
+            <span class="campfire-artist">
+                ${settings.format_guest_features ? album.formatted_artist : html.node`<a class="campfire-artist" href="${root}music/${redirect()}${sanitise(album.artist)}" target="_blank">${album.corrected_artist}</a>`}
+            </span>
+            <div class="campfire-plays">
+                ${album.plays}
+            </div>
+        `);
+    }
 }

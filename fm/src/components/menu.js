@@ -9,6 +9,9 @@ import tippy from 'tippy.js';
 import { tl, trans } from '../build/trans';
 import { ff } from '../sku';
 import { log } from '../build/log';
+import { copy } from '../build/tools';
+import { settings } from '../build/config';
+import { external_url_prompt } from './markdown';
 
 export function register_menu(element, menu) {
     element.setAttribute('data-has-bleh-menu', true);
@@ -39,7 +42,7 @@ export function register_menu(element, menu) {
 }
 
 export function page_menu() {
-    if (!ff('menus')) return;
+    if (!ff('menus') || !settings.menu_replacement) return;
 
     const menu = tippy(document.body, {
         theme: 'context-menu',
@@ -63,22 +66,116 @@ export function page_menu() {
         e.preventDefault();
 
         const elem = e.target;
+        const value = elem.value?.trim();
         const is_image = elem.tagName == 'IMG';
-        const has_link = elem.href;
+        const link = elem.href;
+        const unsafe_link = elem.getAttribute('data-unsafe-href');
+
+        const text = elem.textContent?.trim();
+        const valid_for_text = ['TEXTAREA', 'INPUT'].includes(elem.tagName);
+
+        const alt = elem.getAttribute('alt')?.trim();
+
+        log('requesting', 'menu', 'log', {
+            text, value, elem, tag: elem.tagName, is_image, link, unsafe_link, valid_for_text
+        });
 
         const contents = html.node`
             ${is_image ? html.node`
-                <button class="dropdown-menu-clickable-item" data-type="image" onclick=${() => {
-                    open(elem.src, '_blank');
+                ${unsafe_link ? html.node`
+                    <div class="button-combo">
+                        <a class="dropdown-menu-clickable-item" data-type="image" href=${elem.src} target="_blank">
+                            ${tl(trans.view_image)}
+                        </a>
+                        <div class="button-combo-sep" />
+                        ${() => {
+                            const url = new URL(unsafe_link);
+                            const scheme = url.protocol;
+                            const hostname = url.hostname;
+                            const path = url.pathname + url.search + url.hash;
+
+                            let dangerous = false;
+
+                            if (!scheme || !scheme.startsWith('http')) dangerous = true;
+
+                            const btn = html.node`
+                                <button class="dropdown-menu-clickable-item chibi" data-type="continue" onclick=${() => {
+                                    if (settings.trusted_sites.includes(hostname)) {
+                                        open(unsafe_link, '_blank');
+                                        return;
+                                    }
+
+                                    external_url_prompt(unsafe_link, dangerous);
+                                }}>
+                                    ${tl(trans.view_image_unsafe)}
+                                </button>
+                            `;
+
+                            tippy(btn, {
+                                theme: 'name-sister-combo',
+                                content: html.node`
+                                    <span class="name">
+                                        <span class="link">
+                                            ${scheme != 'https:' ? html.node`
+                                            <span class="scheme">
+                                                ${scheme}//
+                                            </span>
+                                            ` : ''}
+                                            ${hostname ? html.node`
+                                            <span class="hostname">
+                                                ${hostname}
+                                            </span>
+                                            ` : html.node`
+                                            <span class="hostname">
+                                                ${path}
+                                            </span>
+                                            `}
+                                            ${path != '/' && hostname ? html.node`
+                                            <span class="path">
+                                                ${path}
+                                            </span>
+                                            ` : ''}
+                                        </span>
+                                    </span>
+                                    <span class="sister">${tl(trans.external)}</span>
+                                `
+                            });
+
+                            return btn;
+                        }}
+                    </div>
+                ` : html.node`
+                    <a class="dropdown-menu-clickable-item" data-type="image" href=${elem.src} target="_blank">
+                        ${tl(trans.view_image)}
+                    </a>
+                `}
+                <a class="dropdown-menu-clickable-item" data-type="link" onclick=${() => {
+                    copy(unsafe_link ? unsafe_link : elem.src);
                 }}>
-                    ${tl(trans.view_image)}
-                </button>
-            ` :   ''}
-            ${has_link ? html.node`
-                <a class="dropdown-menu-clickable-item" data-type="link" href=${elem.href} target=${elem.target}>
-                    ${tl(trans.open)}
+                    ${tl(trans.copy_link)}
                 </a>
+                ${alt ? html.node`
+                    <a class="dropdown-menu-clickable-item" data-type="copy" onclick=${() => {
+                        copy(alt);
+                    }}>
+                        ${tl(trans.copy_text)}
+                    </a>
+                ` : ''}
             ` :   ''}
+            ${link ? generic_link_menu(link) :   ''}
+            ${text && valid_for_text ? html.node`
+                <a class="dropdown-menu-clickable-item" data-type="copy" onclick=${() => {
+                    copy(text);
+                }}>
+                    ${tl(trans.copy_text)}
+                </a>
+            ` : value && valid_for_text ? html.node`
+                <a class="dropdown-menu-clickable-item" data-type="copy" onclick=${() => {
+                    copy(value);
+                }}>
+                    ${tl(trans.copy_text)}
+                </a>
+            ` : ''}
         `;
 
         if (
@@ -112,4 +209,17 @@ function show_menu(e) {
     if (target.closest('[data-has-bleh-menu]')) return false;
 
     return true;
+}
+
+export function generic_link_menu(link, copy_link = link) {
+    return html.node`
+        <a class="dropdown-menu-clickable-item" data-type="web" href=${link} target="_blank">
+            ${tl(trans.open_link)}
+        </a>
+        <a class="dropdown-menu-clickable-item" data-type="link" onclick=${() => {
+            copy(link);
+        }}>
+            ${tl(trans.copy_link)}
+        </a>
+    `;
 }
