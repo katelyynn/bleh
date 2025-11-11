@@ -738,6 +738,8 @@
                 1px
         );
 
+        --max-tooltip-width: 400px;
+
         --grid-default-height: 426px;
 
         --overview-bio-size: 440px;
@@ -759,6 +761,8 @@
             --card-shadow: unset;
 
             --header-avatar-size: 200px;
+
+            --max-tooltip-width: 100vw;
         }
 
         --item-small-radius: 5px;
@@ -2677,6 +2681,12 @@
 
                 position: relative;
 
+                @media (max-width: 980px) {
+                    border-radius: unset !important;
+                    border-left: none !important;
+                    border-right: none !important;
+                }
+
                 &:after {
                     content: "";
                     position: absolute;
@@ -2827,20 +2837,22 @@
                         }
                     }
 
-                    &:first-child {
+                    @media (min-width: 981px) {
+                        &:first-child {
+                            & > .col-main {
+                                border-top-left-radius: var(--card-radius);
+                            }
+                            & > .col-sidebar {
+                                border-top-right-radius: var(--card-radius);
+                            }
+                        }
+
                         & > .col-main {
-                            border-top-left-radius: var(--card-radius);
+                            border-bottom-left-radius: var(--card-radius);
                         }
                         & > .col-sidebar {
-                            border-top-right-radius: var(--card-radius);
+                            border-bottom-right-radius: var(--card-radius);
                         }
-                    }
-
-                    & > .col-main {
-                        border-bottom-left-radius: var(--card-radius);
-                    }
-                    & > .col-sidebar {
-                        border-bottom-right-radius: var(--card-radius);
                     }
                 }
             }
@@ -13182,7 +13194,7 @@
 
         text-align: center;
 
-        max-width: 400px !important;
+        max-width: var(--max-tooltip-width) !important;
 
         .tooltip-sub {
             font-size: 12px;
@@ -22711,7 +22723,7 @@
 
                     h2,
                     .sub-text,
-                    .title-container {
+                    .header-title-label-wrap {
                         justify-content: center;
                     }
 
