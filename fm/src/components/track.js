@@ -493,7 +493,7 @@ export function patch_titles(search = page.structure.main) {
                 );
                 if (previous) previous.style.display = 'none';
 
-                const user = ['user', 'music'].includes(page.type) ? page.name : auth.name;
+                const user = ['user', 'overview'].includes(page.type) ? page.name : auth.name;
 
                 // then we need to decide for ourselves whether u can delete or obsess
                 // since we cant rely on the elements existing anymore
@@ -505,9 +505,9 @@ export function patch_titles(search = page.structure.main) {
                     auth.pro;
                 const can_delete = is_own_profile && !is_active && !has_bar && !is_album;
 
-                const can_copy_scrobble = !is_album && !has_bar && !is_active && ['user', 'music'].includes(page.type);
+                const can_copy_scrobble = !is_album && !has_bar && !is_active && ['user', 'overview'].includes(page.type);
 
-                const timestamp = track.getAttribute('data-timestamp') || track_timestamp_contents?.replace(/^[A-Za-z]+\s+/, '').replace(',', '').replace(/\s?(am|pm)$/i, '');
+                const timestamp = parseInt(track.getAttribute('data-timestamp')) || track_timestamp_contents?.replace(/^[A-Za-z]+\s+/, '').replace(',', '').replace(/\s?(am|pm)$/i, '');
 
                 let more_button = html.node`
                     <button class="track-more-button icon chibi" data-type="more" onclick=${() => {
