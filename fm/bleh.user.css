@@ -21806,6 +21806,10 @@
                         flex: 1;
                     }
                 }
+
+                &:before {
+                    display: none;
+                }
             }
         }
     }
