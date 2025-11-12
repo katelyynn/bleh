@@ -50431,7 +50431,7 @@
                     <div class="bars" ref=${(el) => bars2 = el}>
                         ${() => {
         let max2 = 3e4;
-        for (let value = 1e3; value <= max2; value += 1e3) {
+        for (let value = 1e3; value <= max2; value += page.mobile ? 3e3 : 1e3) {
           bars2.appendChild(chartlist_bar2(value, max2));
         }
       }}
@@ -58359,28 +58359,18 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     if (page.structure.indicator) page_indicator();
   }
   function detect_mobile() {
-    if (window.innerWidth <= 600) {
+    if (window.innerWidth <= 980) {
       page.mobile = true;
-      let theme = document.createElement("meta");
-      theme.setAttribute("name", "theme-color");
-      theme.setAttribute("content", "#000000");
-      document.head.appendChild(theme);
+      document.head.appendChild(html.node`
+            <meta name="theme-color" content="#000000" />
+            <meta name="apple-mobile-web-app-capable" content="yes" />
+            <link rel="manifest" href="https://github.com/katelyynn/bleh/raw/uwu/fm/app.webmanifest" />
+        `);
       let icon = document.head.querySelector('[rel="apple-touch-icon"]');
       icon.setAttribute(
         "href",
         "https://github.com/katelyynn/bleh/raw/uwu/fm/app.png"
       );
-      let capable = document.createElement("meta");
-      capable.setAttribute("name", "apple-mobile-web-app-capable");
-      capable.setAttribute("content", "yes");
-      document.head.appendChild(capable);
-      let manifest = document.createElement("link");
-      manifest.setAttribute("rel", "manifest");
-      manifest.setAttribute(
-        "href",
-        "https://github.com/katelyynn/bleh/raw/uwu/fm/app.webmanifest"
-      );
-      document.head.appendChild(manifest);
     } else {
       page.mobile = false;
     }

@@ -922,7 +922,7 @@ export async function render_setting_page(page_id) {
                             for (
                                 let value = 1_000;
                                 value <= max;
-                                value += 1_000
+                                value += page.mobile ? 3_000 : 1_000
                             ) {
                                 bars.appendChild(chartlist_bar(value, max));
                             }
