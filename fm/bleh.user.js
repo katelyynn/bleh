@@ -44875,18 +44875,20 @@
           const type = release["release-group"]?.["primary-type"]?.toLowerCase();
           const digital = release.media?.[0]?.format == "Digital Media";
           const similar = similarity(release.title.toLowerCase());
-          let rank2 = 4;
-          if (type == "album") rank2 = 0;
-          else if (type == "ep") rank2 = 1;
-          else if (type == "single") rank2 = 3;
-          else rank2 = 2;
-          if (digital) rank2 -= 0.2;
-          const weight = 2 * (1 - similar);
-          return rank2 + weight;
+          let base = 0;
+          if (type == "album") base = 3;
+          else if (type == "ep") base = 2;
+          else if (type == "single") base = 1;
+          else base = 0.5;
+          if (digital) base += 0.2;
+          const weight = 2 * similar;
+          const rank2 = base + weight;
+          log(`ranked as ${rank2}`, "oracle", "info", { release });
+          return rank2;
         };
         const a_rank = rank(a);
         const b_rank = rank(b);
-        if (a_rank != b_rank) return a_rank - b_rank;
+        if (a_rank != b_rank) return b_rank - a_rank;
         const parse_date = (release) => {
           if (!release.date) return null;
           const date = new Date(release.date);
@@ -44911,6 +44913,10 @@
       log("filtered releases before picking", "oracle", "info", { filtered });
       let best = filtered.find(
         (release) => release.disambiguation?.toLowerCase() == "explicit"
+      );
+      if (best) return best;
+      best = filtered.find(
+        (release) => ["streaming", "bandcamp"].some((term) => release.disambiguation?.toLowerCase().includes(term))
       );
       if (best) return best;
       best = filtered.find((release) => !release.disambiguation);

@@ -643,27 +643,28 @@ export function oracle_process() {
             const rank = (release) => {
                 const type = release['release-group']?.['primary-type']?.toLowerCase();
                 const digital = release.media?.[0]?.format == 'Digital Media';
-
                 const similar = similarity(release.title.toLowerCase());
 
-                let rank = 4;
-                if (type == 'album') rank = 0;
-                else if (type == 'ep') rank = 1;
-                else if (type == 'single') rank = 3;
-                else rank = 2;
+                let base = 0;
+                if (type == 'album') base = 3;
+                else if (type == 'ep') base = 2;
+                else if (type == 'single') base = 1;
+                else base = 0.5;
 
-                if (digital) rank -= 0.2;
+                if (digital) base += 0.2;
 
-                const weight = 2 * (1 - similar);
+                const weight = 2 * similar;
+                const rank = base + weight;
 
                 // boost priority for digital media
-                return rank + weight;
+                log(`ranked as ${rank}`, 'oracle', 'info', { release });
+                return rank;
             };
 
             const a_rank = rank(a);
             const b_rank = rank(b);
 
-            if (a_rank != b_rank) return a_rank - b_rank;
+            if (a_rank != b_rank) return b_rank - a_rank;
 
             // parse dates
             const parse_date = (release) => {
@@ -703,6 +704,12 @@ export function oracle_process() {
         // prefer explicit
         let best = filtered.find(
             (release) => release.disambiguation?.toLowerCase() == 'explicit'
+        );
+        if (best) return best;
+
+        // then streaming/bandcamp
+        best = filtered.find(
+            (release) => ['streaming', 'bandcamp'].some(term => release.disambiguation?.toLowerCase().includes(term))
         );
         if (best) return best;
 
