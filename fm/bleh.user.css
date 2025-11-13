@@ -17707,7 +17707,7 @@
 
                 padding: 6px 8px 10px 8px;
 
-                background-image: var(--cards-overlay-image);
+                background-image: var(--cards-overlay-image-subtle);
                 background-repeat: repeat-x;
                 background-position: 0 0;
 
