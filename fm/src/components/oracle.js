@@ -117,25 +117,27 @@ export function oracle_process() {
         set_storage('bleh_oracle_cache', JSON.stringify(oracle_cache));
     }
 
-    page.structure.main.insertBefore(
-        html.node`
-            <section class="oracle-notice">
-                <div class="oracle" data-mobile=${page.mobile}>
-                    <p>
-                        <span class="bleh-icon" />
-                        <span>${{ html: tl(trans.oracle_notice).replace('oracle', '<i>oracle</i>') }}</span>
-                    </p>
-                    <button class="see-more left-icon" data-type="debug" onclick=${() => oracle_debug()}>
-                        ${tl(trans.debug)}
-                    </button>
-                    <a class="see-more" href="https://github.com/katelyynn/bleh/issues/new/choose" target="_blank">
-                        ${tl(trans.send_feedback)}
-                    </a>
-                </div>
-            </section>
-        `,
-        page.structure.main.firstChild
-    );
+    if (page.subpage == 'overview' || page.subpage == 'albums') {
+        page.structure.main.insertBefore(
+            html.node`
+                <section class="oracle-notice">
+                    <div class="oracle" data-mobile=${page.mobile}>
+                        <p>
+                            <span class="bleh-icon" />
+                            <span>${{ html: tl(trans.oracle_notice).replace('oracle', '<i>oracle</i>') }}</span>
+                        </p>
+                        <button class="see-more left-icon" data-type="debug" onclick=${() => oracle_debug()}>
+                            ${tl(trans.debug)}
+                        </button>
+                        <a class="see-more" href="https://github.com/katelyynn/bleh/issues/new/choose" target="_blank">
+                            ${tl(trans.send_feedback)}
+                        </a>
+                    </div>
+                </section>
+            `,
+            page.structure.main.firstChild
+        );
+    }
 
     const header = page.structure.container.querySelector('.redesigned-header');
     let releases_panel;
