@@ -506,20 +506,15 @@ function load_page(main_content = null) {
         }
 
         if (page.subpage == 'image') {
-            let images = page.structure.row.querySelectorAll('.gallery-image');
+            const images = page.structure.row.querySelectorAll('.gallery-image');
             images.forEach((image) => {
-                let star = image.querySelector(
-                    '.gallery-image-preferred-container'
-                );
+                const star = image.querySelector('.gallery-image-preferred-container');
                 if (!star) return;
 
-                render(
-                    star,
-                    html`
-                        <div class="bleh-icon" />
-                        ${tl(trans.starred)}
-                    `
-                );
+                render(star, html`
+                    <div class="bleh-icon" />
+                    ${tl(trans.starred)}
+                `);
             });
         }
 

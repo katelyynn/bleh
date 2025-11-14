@@ -11561,6 +11561,8 @@
             gap: var(--item-list-gap);
             cursor: default;
             margin-right: calc(var(--modal-close-size) + 10px);
+            z-index: 100;
+            position: relative;
 
             h1 {
                 margin: unset;
@@ -21316,17 +21318,20 @@
     .bleh-modal-body[data-allow-scroll="true"],
     .modal-inner-content.allow-scroll {
         max-height: 80vh;
-        padding: 0 var(--card-padding) var(--card-padding) var(--card-padding);
-        margin: 0 calc(-1 * var(--card-padding)) calc(-1 * var(--card-padding))
-            calc(-1 * var(--card-padding)) !important;
+        padding: calc(var(--card-padding) * 2) var(--card-padding) var(--card-padding) var(--card-padding);
+        margin: calc(-1 * (var(--card-padding) * 2)) calc(-1 * var(--card-padding)) calc(-1 * var(--card-padding)) calc(-1 * var(--card-padding)) !important;
         overflow-y: hidden;
 
-        border-radius: var(--item-bigmedradius);
+        border-radius: var(--item-big-radius);
 
         &:hover {
             overflow-y: auto;
             scrollbar-width: thin;
         }
+
+        --bg-mask: linear-gradient(0deg, white 96%, transparent);
+        mask-image: var(--bg-mask);
+        -webkit-mask-image: var(--bg-mask);
     }
 
     h5 {

@@ -456,7 +456,9 @@ export function markdown(
             const proxy_free = [
                 'count.getloli.com',
                 'i.imgur.com',
-                'media1.tenor.com'
+                'media1.tenor.com',
+                'katelyynn.github.io',
+                'i.pinimg.com'
             ];
 
             try {

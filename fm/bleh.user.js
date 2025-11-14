@@ -34803,7 +34803,6 @@
     let index3 = 0;
     for (let version4 in changelog) {
       if (version4 == "updated" || version4 == "latest") continue;
-      if (index3 > 10) continue;
       const version_item = html.node`
             <div class="changelog-version-item" data-changelog-type="${changelog[version4].type}" data-changelog-latest="${index3 == 0 ? "true" : "false"}" data-changelog-version="${version4}">
                 <div class="version-item-header">
@@ -48674,7 +48673,9 @@
         const proxy_free = [
           "count.getloli.com",
           "i.imgur.com",
-          "media1.tenor.com"
+          "media1.tenor.com",
+          "katelyynn.github.io",
+          "i.pinimg.com"
         ];
         try {
           const url = new URL(image.src);
@@ -58243,19 +58244,14 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         }
       }
       if (page.subpage == "image") {
-        let images = page.structure.row.querySelectorAll(".gallery-image");
+        const images = page.structure.row.querySelectorAll(".gallery-image");
         images.forEach((image) => {
-          let star = image.querySelector(
-            ".gallery-image-preferred-container"
-          );
+          const star = image.querySelector(".gallery-image-preferred-container");
           if (!star) return;
-          render(
-            star,
-            html`
-                        <div class="bleh-icon" />
-                        ${tl2(trans.starred)}
-                    `
-          );
+          render(star, html`
+                    <div class="bleh-icon" />
+                    ${tl2(trans.starred)}
+                `);
         });
       }
       if (["artist", "album", "track", "user", "tag", "events"].includes(page.type)) {
