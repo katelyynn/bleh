@@ -1836,6 +1836,7 @@ export async function render_setting_page(page_id) {
         render(page.structure.main, html`
             <section class="bleh--panel">
                 ${setting({id: 'translator_view', list: lang_info, func: translation_view})}
+                <h1>this isnt done itll look better</h1>
                 <div class="translation-view" ref=${el => translation_view_container = el} />
             </section>
         `);
