@@ -103,6 +103,11 @@ export function bleh_settings() {
         fill: {
             type: 'fill'
         },
+        translate: {
+            name: tl(trans.translate),
+            icon: 'language',
+            hide: !settings.translator
+        },
         performance: {
             name: tl(trans.troubleshooting),
             icon: 'advanced'
@@ -129,7 +134,7 @@ export function bleh_settings() {
 
                         return html.node`
                             <li class="navlist-item secondary-nav-item">
-                                <a class="secondary-nav-item-link bleh--nav" data-bleh-page=${id} data-type=${tab.icon} data-password=${tab.password} onclick=${() => change_settings_page(id)}>
+                                <a class="secondary-nav-item-link bleh--nav" data-bleh-page=${id} data-type=${tab.icon} data-password=${tab.password} data-should-hide=${tab.hide} data-hide=${tab != id} onclick=${() => change_settings_page(id)}>
                                     ${tab.label ? tab.label : tab.name}
                                 </a>
                             </li>
@@ -194,6 +199,8 @@ function page_loading() {
 }
 
 export async function render_setting_page(page_id) {
+    page_loading();
+
     if (page_id == 'general') {
         if (auth.pro === null) {
             setTimeout(() => {
@@ -529,6 +536,7 @@ export async function render_setting_page(page_id) {
                                 </a>
                             </div>
                         </div>
+                        ${setting({id: 'translator'})}
                     </div>
                 </section>
             `
@@ -1822,124 +1830,26 @@ export async function render_setting_page(page_id) {
                 </div>
             </div>
         `);
-    } else if (page_id == 'music') {
-        register_skip_to([
-            {
-                id: 'corrections',
-                name: tl(trans.correct_titles_with_lotus)
-            },
-            {
-                id: 'format_guest_features',
-                name: tl(trans.format_guest_features.name)
-            },
-            {
-                id: 'stacked_chartlist_info',
-                name: tl(trans.track_column_view)
-            },
-            {
-                id: 'colourful_counts',
-                name: tl(trans.colourful_counts.name)
-            },
-            {
-                id: 'travis',
-                name: tl(trans.redirect_messages.name)
-            },
-            {
-                id: 'gloss',
-                type: 'slider',
-                name: tl(trans.gloss.name)
-            },
-            {
-                id: 'grid_glow',
-                name: tl(trans.grid_glow.name)
-            },
-            {
-                id: 'gendered_tags',
-                name: tl(trans.gendered_tags.name)
-            }
-        ]);
+    } else if (page_id == 'translate') {
+        let translation_view_container;
 
-        render(
-            page.structure.main,
-            html`
-                <div class="bleh--panel">
-                    <h4 class="top-header">${tl(trans.music)}</h4>
-                    <h4>${tl(trans.tracklist)}</h4>
-                    <div class="inner-preview pad">
-                        <div class="tracks">
-                            <div class="track realtime">
-                                <div class="cover"></div>
-                                <div class="info">
-                                    <div class="title"></div>
-                                    <div class="artist"></div>
-                                    <div class="album"></div>
-                                </div>
-                                <div class="time"></div>
-                            </div>
-                            <div class="track">
-                                <div class="cover"></div>
-                                <div class="info">
-                                    <div class="title"></div>
-                                    <div class="artist"></div>
-                                    <div class="album"></div>
-                                </div>
-                                <div class="time"></div>
-                            </div>
-                            <div class="track">
-                                <div class="cover"></div>
-                                <div class="info">
-                                    <div class="title"></div>
-                                    <div class="artist"></div>
-                                    <div class="album"></div>
-                                </div>
-                                <div class="time"></div>
-                            </div>
-                            <div class="track">
-                                <div class="cover"></div>
-                                <div class="info">
-                                    <div class="title"></div>
-                                    <div class="artist"></div>
-                                    <div class="album"></div>
-                                </div>
-                                <div class="time"></div>
-                            </div>
-                            <div class="track">
-                                <div class="cover"></div>
-                                <div class="info">
-                                    <div class="title"></div>
-                                    <div class="artist"></div>
-                                    <div class="album"></div>
-                                </div>
-                                <div class="time"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="setting-group">
-                        ${setting({ id: 'stacked_chartlist_info' })}
-                        ${setting({ id: 'expand_tracks' })}
-                        ${setting({ id: 'glacier_library_graphs' })}
-                    </div>
-                    <div class="inner-preview pad">
-                        <div class="bars" ref=${(el) => (bars = el)}>
-                            ${() => {
-                    let max = 30_000;
+        render(page.structure.main, html`
+            <section class="bleh--panel">
+                ${setting({id: 'translator_view', list: lang_info, func: translation_view})}
+                <div class="translation-view" ref=${el => translation_view_container = el} />
+            </section>
+        `);
 
-                    for (
-                        let value = 1_000;
-                        value <= max;
-                        value += 1_000
-                    ) {
-                        bars.appendChild(chartlist_bar(value, max));
-                    }
-                }}
-                        </div>
-                    </div>
-                    <div class="setting-group">
-                        ${setting({ id: 'colourful_counts' })}
-                    </div>
-                </div>
-            `
-        );
+        function translation_view(lang) {
+            render(translation_view_container, html`
+                <strong>${lang} (${lang_info[lang].name})</strong>
+                <p>${lang_info[lang].percent}%</p>
+                <p>missing:</p>
+                <p>${{ html: lang_info[lang].missing_keys.join('<br>') }}</p>
+            `);
+        }
+
+        translation_view(settings.translator_view);
     }
 }
 
@@ -1991,27 +1901,18 @@ export function change_settings_page(page_id, setting = null) {
 
     page.structure.main.innerHTML = '';
 
-    if (ff('bleh_settings_tabs')) {
-        let btns = document.querySelectorAll('.bleh--nav');
-        btns.forEach((btn) => {
-            console.log(btn.getAttribute('data-bleh-page'), page_id);
-            if (btn.getAttribute('data-bleh-page') != page_id) {
-                btn.classList.remove('secondary-nav-item-link--active');
-            } else {
-                btn.classList.add('secondary-nav-item-link--active');
-            }
-        });
-    } else {
-        let btns = document.querySelectorAll('.bleh--btn');
-        btns.forEach((btn) => {
-            console.log(btn.getAttribute('data-bleh-page'), page_id);
-            if (btn.getAttribute('data-bleh-page') != page_id) {
-                btn.classList.remove('active');
-            } else {
-                btn.classList.add('active');
-            }
-        });
-    }
+    let btns = document.querySelectorAll('.bleh--nav');
+    btns.forEach((btn) => {
+        const id = btn.getAttribute('data-bleh-page');
+
+        btn.setAttribute('data-hide', page_id != id);
+
+        if (page_id != id) {
+            btn.classList.remove('secondary-nav-item-link--active');
+        } else {
+            btn.classList.add('secondary-nav-item-link--active');
+        }
+    });
 
     if (page_id == 'seasonal') seasonal_timer_start();
     else seasonal_timer_end();

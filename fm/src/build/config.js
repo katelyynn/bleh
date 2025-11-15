@@ -1277,10 +1277,6 @@ export let settings_store = {
         beta: true,
         new_release: true
     },
-    control_center: {
-        default: [],
-        type: 'list'
-    },
     romanise_jp: {
         default: false,
         type: 'checkbox',
@@ -1339,5 +1335,16 @@ export let settings_store = {
         body: trans.menu_replacement.body,
         new_release: true,
         require_reload: true
+    },
+    translator: {
+        default: false,
+        title: trans.translator.name,
+        body: trans.translator.body,
+        new_release: true,
+        require_reload: true
+    },
+    translator_view: {
+        default: 'en',
+        type: 'tabs'
     }
 };

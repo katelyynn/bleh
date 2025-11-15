@@ -8650,6 +8650,17 @@ export const trans = {
         es: '¡Tienes nuevos emblemas!',
         it: 'Hai dei nuovi distintivi!',
         pt: 'Você tem novas insígnias!'
+    },
+    translator: {
+        name: {
+            en: 'Show translator tools'
+        },
+        body: {
+            en: 'View expanded details on all languages for use when translating'
+        }
+    },
+    translate: {
+        en: 'Translate'
     }
 };
 

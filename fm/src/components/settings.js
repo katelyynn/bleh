@@ -43,8 +43,7 @@ export function setting({
             });
 
         const type = settings_store[id].type || 'toggle';
-        const title =
-            settings_store[id].title ? tl(settings_store[id].title) : id;
+        const title = settings_store[id].title ? tl(settings_store[id].title) : id;
         let body = settings_store[id].body ? tl(settings_store[id].body) : null;
         const icon = settings_store[id].icon;
 
@@ -603,13 +602,18 @@ export function setting({
 
             return elem;
         } else if (type == 'tabs') {
-            if (func) func(value);
-
             let buttons = [];
+
+            const values = settings_store[id].values || list;
+
+            if (!values)
+                return setting_fail(id, {
+                    message: 'Tabs type requires you to either define values in config or pass a list to instance.'
+                });
 
             const tabs = html.node`
                 <div class="view-buttons view-buttons-middle">
-                    ${Object.entries(settings_store[id].values).map(
+                    ${Object.entries(values).map(
                         ([key, val]) => {
                             const icon = val.icon || key;
 
@@ -626,7 +630,7 @@ export function setting({
 
                                 if (func) func(key);
                             }} aria-checked=${value == key}>
-                                ${tl(val.name)}
+                                ${typeof val.name == 'object' ? tl(val.name) : val.name}
                             </button>
                         `;
 

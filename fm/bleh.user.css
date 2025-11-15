@@ -4410,6 +4410,10 @@
                 bottom: 0 !important;
             }
         }
+
+        &[data-should-hide="true"][data-hide="true"] {
+            display: none;
+        }
     }
     .navlist-more {
         --font-size: 0;
@@ -10428,6 +10432,9 @@
     }
     [data-type="copy_scrobble"] {
         --mask: var(--icon-16-copy-scrobble);
+    }
+    [data-type="language"] {
+        --mask: var(--icon-16-language);
     }
 
     .listening-report-promos {
