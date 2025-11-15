@@ -11598,6 +11598,7 @@
             --left: calc((var(--modal-close-size) - var(--icon-size)) / 2);
             width: var(--modal-close-size);
             height: var(--modal-close-size);
+            z-index: 100;
         }
 
         .bleh-modal-body {
