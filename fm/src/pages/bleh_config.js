@@ -18,7 +18,7 @@ import {
 } from '../build/page';
 import { stored_season } from '../build/seasonal';
 import { sponsor_list } from '../build/sponsor';
-import { clamp_sat, hex_to_hsl, set_storage, time } from '../build/tools';
+import { clamp_sat, copy, hex_to_hsl, set_storage, time } from '../build/tools';
 import { get_trans_key, lang, lang_browser, lang_info, tl, trans } from '../build/trans';
 import { load_badges } from '../components/badge';
 import { dialog, dialog_rm } from '../components/dialog';
@@ -1850,7 +1850,9 @@ export async function render_setting_page(page_id) {
                 </div>
                 <div class="language-sub">
                     <div class="language-info colourful translated"><span class="bleh-icon" />${tl(trans.amount_translated, { c: language.translated })} (${language.percent}%)</div>
-                    <div class="language-info colourful missing"><span class="bleh-icon" />${tl(trans.missing_translated, { c: language.missing })}</div>
+                    <div class="language-info colourful missing" onclick=${() => {
+                        copy(language.missing_keys.map(key => `${key}: ${get_trans_key(key).en}`).join('\n'))
+                    }}><span class="bleh-icon" />${tl(trans.missing_translated, { c: language.missing })}</div>
                 </div>
                 <table class="responsive-table">
                     <thead>
@@ -1860,7 +1862,7 @@ export async function render_setting_page(page_id) {
                         </tr>
                     </thead>
                     <tbody>
-                        ${lang_info[lang].missing_keys.map(key => {
+                        ${language.missing_keys.map(key => {
                             const row = html.node`
                                 <tr>
                                     <td style="width: 35%"><code>${key}</code></td>

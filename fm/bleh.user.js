@@ -51314,7 +51314,9 @@
                 </div>
                 <div class="language-sub">
                     <div class="language-info colourful translated"><span class="bleh-icon" />${tl2(trans.amount_translated, { c: language.translated })} (${language.percent}%)</div>
-                    <div class="language-info colourful missing"><span class="bleh-icon" />${tl2(trans.missing_translated, { c: language.missing })}</div>
+                    <div class="language-info colourful missing" onclick=${() => {
+          copy(language.missing_keys.map((key) => `${key}: ${get_trans_key(key).en}`).join("\n"));
+        }}><span class="bleh-icon" />${tl2(trans.missing_translated, { c: language.missing })}</div>
                 </div>
                 <table class="responsive-table">
                     <thead>
@@ -51324,7 +51326,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        ${lang_info[lang2].missing_keys.map((key) => {
+                        ${language.missing_keys.map((key) => {
           const row = html.node`
                                 <tr>
                                     <td style="width: 35%"><code>${key}</code></td>
