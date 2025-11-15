@@ -53961,13 +53961,11 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       interactive: true,
       interactiveBorder: 10,
       trigger: "click",
-      onShow: async (instance) => {
+      onShow: (instance) => {
         page.structure.notifications.setAttribute("data-auth-open", "true");
         badges = load_badges(auth.name);
         let page_2;
         let side;
-        const cache2 = await load_profile_cache_externally(auth.name);
-        console.info("awaited", cache2);
         let status_container;
         const current = settings.navigation_items;
         let length = current.length;
@@ -53975,29 +53973,27 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         const show_language = settings.navigation_language == true ? 1 : 0;
         const height = (length + 3 + show_language) * 30;
         const themes_disabled = page.subpage.startsWith("listening-report") || page.state.settings_page == "visual";
+        let auth_header;
         instance.setContent(html.node`
                 <div class="auth-menu-v2" style="--page-height: ${height}px">
                     <div class="side primary">
-                        <div class="auth-menu-header">
+                        <div class="auth-menu-header" ref=${(el) => auth_header = el}>
                             <div class="avatar">
-                                <img src="${auth.avatar.replace("avatar42s", "avatar170s")}" alt="${auth.name}" />
+                                <img src=${auth.avatar.replace("avatar42s", "avatar170s")} alt=${auth.name} />
                             </div>
-                            ${cache2.banner ? html.node`
-                            <div class="bg" style="background-image: url(${cache2.banner})" />
-                            ` : !auth.avatar.endsWith("818148bf682d429dc215c1705eb27b98.png") ? html.node`
+                            ${!auth.avatar.endsWith("818148bf682d429dc215c1705eb27b98.png") ? html.node`
                             <div class="bg" style="background-image: url(${auth.avatar.replace("avatar42s", "avatar170s")})" />
                             ` : ""}
-                            <div class="name">${cache2.username ? cache2.username : `@${auth.name}`}</div>
-                            ${badges || auth.pro ? html.node`
+                            <div class="name">@${auth.name}</div>
+                            ${auth.pro ? html.node`
                                 <div class="badges">
-                                    ${badges ? badges.map((badge) => create_badge(badge)) : ""}
                                     ${auth.pro ? () => {
-          let el = html.node`
+          const elem = html.node`
                                             <span class="label user-status-subscriber no-hover">
                                                 ${tl2(trans.badges["user-status-subscriber"].name)}
                                             </span>
                                         `;
-          tippy_esm_default(el, {
+          tippy_esm_default(elem, {
             theme: "badge",
             placement: "bottom",
             content: html.node`
@@ -54005,7 +54001,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                                                 <div class="badge-reason">${tl2(trans.badges["user-status-subscriber"].reason)}</div>
                                             `
           });
-          return el;
+          return elem;
         } : ""}
                                 </div>
                             ` : ""}
@@ -54162,48 +54158,42 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                             ${show_language ? html.node`
                             <div class="button-combo">
                                 <button class="dropdown-menu-clickable-item" data-menu-item="language" onclick=${() => {
-          render(
-            page_2,
-            html`
-                                            <button
-                                                class="dropdown-menu-clickable-item"
-                                                data-type="back"
-                                                onclick=${() => {
-              side.setAttribute(
-                "data-page",
-                "1"
-              );
-            }}
-                                            >
-                                                ${tl2(trans.back)}
-                                            </button>
-                                            ${language_menu}
-                                        `
-          );
+          render(page_2, html`
+                                        <button
+                                            class="dropdown-menu-clickable-item"
+                                            data-type="back"
+                                            onclick=${() => {
+            side.setAttribute(
+              "data-page",
+              "1"
+            );
+          }}
+                                        >
+                                            ${tl2(trans.back)}
+                                        </button>
+                                        ${language_menu}
+                                    `);
           side.setAttribute("data-page", "2");
         }}>
                                     ${tl2(trans.language)}
                                 </button>
                                 <div class="button-combo-sep" />
                                 <button class="dropdown-menu-clickable-item chibi" data-type="continue" onclick=${() => {
-          render(
-            page_2,
-            html`
-                                            <button
-                                                class="dropdown-menu-clickable-item"
-                                                data-type="back"
-                                                onclick=${() => {
-              side.setAttribute(
-                "data-page",
-                "1"
-              );
-            }}
-                                            >
-                                                ${tl2(trans.back)}
-                                            </button>
-                                            ${language_menu}
-                                        `
-          );
+          render(page_2, html`
+                                        <button
+                                            class="dropdown-menu-clickable-item"
+                                            data-type="back"
+                                            onclick=${() => {
+            side.setAttribute(
+              "data-page",
+              "1"
+            );
+          }}
+                                        >
+                                            ${tl2(trans.back)}
+                                        </button>
+                                        ${language_menu}
+                                    `);
           side.setAttribute("data-page", "2");
         }}>
                                     ${tl2(trans.more)}
@@ -54246,6 +54236,41 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                 </div>
                 ` : ""}
             `);
+        load_profile_cache_externally(auth.name).then((cache2) => {
+          render(auth_header, html`
+                    <div class="avatar">
+                        <img src=${auth.avatar.replace("avatar42s", "avatar170s")} alt=${auth.name} />
+                    </div>
+                    ${cache2.banner ? html.node`
+                    <div class="bg" style="background-image: url(${cache2.banner})" />
+                    ` : !auth.avatar.endsWith("818148bf682d429dc215c1705eb27b98.png") ? html.node`
+                    <div class="bg" style="background-image: url(${auth.avatar.replace("avatar42s", "avatar170s")})" />
+                    ` : ""}
+                    <div class="name">${cache2.username ? cache2.username : `@${auth.name}`}</div>
+                    ${badges || auth.pro ? html.node`
+                        <div class="badges">
+                            ${badges ? badges.map((badge) => create_badge(badge)) : ""}
+                            ${auth.pro ? () => {
+            const elem = html.node`
+                                    <span class="label user-status-subscriber no-hover">
+                                        ${tl2(trans.badges["user-status-subscriber"].name)}
+                                    </span>
+                                `;
+            tippy_esm_default(elem, {
+              theme: "badge",
+              placement: "bottom",
+              content: html.node`
+                                        <div class="badge-name">${tl2(trans.badges["user-status-subscriber"].name)}</div>
+                                        <div class="badge-reason">${tl2(trans.badges["user-status-subscriber"].reason)}</div>
+                                    `
+            });
+            return elem;
+          } : ""}
+                        </div>
+                    ` : ""}
+                    <a class="link-block-cover-link" href="${root}user/${auth.name}" />
+                `);
+        });
         function render_status_container(status2) {
           if (!status2) return;
           render(
