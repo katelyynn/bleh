@@ -8661,6 +8661,13 @@ export const trans = {
     },
     translate: {
         en: 'Translate'
+    },
+    translation_key: {
+        // a key such as 'you_have_new_badges' above
+        en: 'Translation key'
+    },
+    original: {
+        en: 'Original'
     }
 };
 
@@ -8776,4 +8783,8 @@ export function lookup_lang() {
     lang_browser = navigator.language || navigator.userLanguage;
 
     Settings.defaultLocale = lang;
+}
+
+export function get_trans_key(key) {
+    return key.split('.').reduce((trans, key) => trans[key], trans);
 }

@@ -19,7 +19,7 @@ import {
 import { stored_season } from '../build/seasonal';
 import { sponsor_list } from '../build/sponsor';
 import { clamp_sat, hex_to_hsl, set_storage, time } from '../build/tools';
-import { lang, lang_browser, lang_info, tl, trans } from '../build/trans';
+import { get_trans_key, lang, lang_browser, lang_info, tl, trans } from '../build/trans';
 import { load_badges } from '../components/badge';
 import { dialog, dialog_rm } from '../components/dialog';
 import { markdown } from '../components/markdown';
@@ -1836,17 +1836,42 @@ export async function render_setting_page(page_id) {
         render(page.structure.main, html`
             <section class="bleh--panel">
                 ${setting({id: 'translator_view', list: lang_info, func: translation_view})}
-                <h1>this isnt done itll look better</h1>
                 <div class="translation-view" ref=${el => translation_view_container = el} />
             </section>
         `);
 
         function translation_view(lang) {
+            const language = lang_info[lang];
+
             render(translation_view_container, html`
-                <strong>${lang} (${lang_info[lang].name})</strong>
-                <p>${lang_info[lang].percent}%</p>
-                <p>missing:</p>
-                <p>${{ html: lang_info[lang].missing_keys.join('<br>') }}</p>
+                <div class="language-header">
+                    <span class="flag" style="background-image: url(https://katelyynn.github.io/bleh/fm/flags/${lang}.svg)" />
+                    <p>${language.name}</p>
+                </div>
+                <div class="language-sub">
+                    <div class="language-info colourful translated"><span class="bleh-icon" />${tl(trans.amount_translated, { c: language.translated })} (${language.percent}%)</div>
+                    <div class="language-info colourful missing"><span class="bleh-icon" />${tl(trans.missing_translated, { c: language.missing })}</div>
+                </div>
+                <table class="responsive-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 35%">${tl(trans.translation_key)}</th>
+                            <th>${tl(trans.original)}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${lang_info[lang].missing_keys.map(key => {
+                            const row = html.node`
+                                <tr>
+                                    <td style="width: 35%"><code>${key}</code></td>
+                                    <td>${get_trans_key(key).en}</td>
+                                </tr>
+                            `;
+
+                            return row;
+                        })}
+                    </tbody>
+                </table>
             `);
         }
 

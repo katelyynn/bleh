@@ -51306,18 +51306,41 @@
         `);
     } else if (page_id == "translate") {
       let translation_view = function(lang2) {
+        const language = lang_info[lang2];
         render(translation_view_container, html`
-                <strong>${lang2} (${lang_info[lang2].name})</strong>
-                <p>${lang_info[lang2].percent}%</p>
-                <p>missing:</p>
-                <p>${{ html: lang_info[lang2].missing_keys.join("<br>") }}</p>
+                <div class="language-header">
+                    <span class="flag" style="background-image: url(https://katelyynn.github.io/bleh/fm/flags/${lang2}.svg)" />
+                    <p>${language.name}</p>
+                </div>
+                <div class="language-sub">
+                    <div class="language-info colourful translated"><span class="bleh-icon" />${tl2(trans.amount_translated, { c: language.translated })} (${language.percent}%)</div>
+                    <div class="language-info colourful missing"><span class="bleh-icon" />${tl2(trans.missing_translated, { c: language.missing })}</div>
+                </div>
+                <table class="responsive-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 35%">${tl2(trans.translation_key)}</th>
+                            <th>${tl2(trans.original)}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${lang_info[lang2].missing_keys.map((key) => {
+          const row = html.node`
+                                <tr>
+                                    <td style="width: 35%"><code>${key}</code></td>
+                                    <td>${get_trans_key(key).en}</td>
+                                </tr>
+                            `;
+          return row;
+        })}
+                    </tbody>
+                </table>
             `);
       };
       let translation_view_container;
       render(page.structure.main, html`
             <section class="bleh--panel">
                 ${setting({ id: "translator_view", list: lang_info, func: translation_view })}
-                <h1>this isnt done itll look better</h1>
                 <div class="translation-view" ref=${(el) => translation_view_container = el} />
             </section>
         `);
@@ -67076,6 +67099,13 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     translate: {
       en: "Translate"
+    },
+    translation_key: {
+      // a key such as 'you_have_new_badges' above
+      en: "Translation key"
+    },
+    original: {
+      en: "Original"
     }
   };
   function tl2(key, replacements = {}) {
@@ -67164,6 +67194,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     lang = document.documentElement.getAttribute("lang");
     lang_browser = navigator.language || navigator.userLanguage;
     Settings.defaultLocale = lang;
+  }
+  function get_trans_key(key) {
+    return key.split(".").reduce((trans2, key2) => trans2[key2], trans);
   }
 
   // src/build/config.js
