@@ -5357,14 +5357,9 @@ export const trans = {
         en: 'Connect your account to third-party services for a better scrobbling experience. Make sure you trust the services below.',
         es: 'Conecta tu cuenta a servicios externos para una mejor experiencia al hacer scrobbling. Asegúrate de que confías en los servicios que hay debajo.',
         it: 'Connetti il tuo account a servizi di terze parti per una migliore esperienza di scrobbling. Assicurati di fidarti dei servizi che seguono.',
-<<<<<<< HEAD
-        sv: 'Anslut ditt konto till tredjepartstjänster för bättre skrobblingsupplevelse. Var säker på att du litar på nedre tjänster.',
-        ru: 'Подключите свой аккаунт к сторонним сервисам для лучшего скробблинга. Убедитесь, что вы доверяете указанным ниже сервисам.'
-=======
         sv: 'Anslut ditt konto till tredjepartstjänster för bättre skrobblingsupplevelse. Var säker på att du litar på nedre tjänster',
         ru: 'Подключите свой аккаунт к сторонним сервисам для лучшего скробблинга. Убедитесь, что вы доверяете указанным ниже сервисам.',
         pt: 'Conecte sua conta a serviços de terceiros para uma melhor experiência de scrobbling. Certifique-se de que você confia nos serviços abaixo.'
->>>>>>> origin/uwu
     },
     connect_app: {
         en: 'Connect {name}',
