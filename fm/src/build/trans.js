@@ -2707,7 +2707,7 @@ export const trans = {
         en: 'Only capitalisation changes are allowed',
         de: 'Nur Änderungen der Groß-/Kleinschreibung sind erlaubt',
         es: 'Solo se permiten cambios a la capitalización',
-        it: 'Sono consentiti solo i cambi relativi all\'uso delle maiuscole.',
+        it: 'Sono consentiti solo i cambi relativi all\'uso delle maiuscole',
         sv: 'Endast ändringar på kapitalisering är tillåtet',
         ru: 'Допускаются только изменения регистра'
     },
@@ -5283,7 +5283,7 @@ export const trans = {
         en: 'Connect your account to third-party services for a better scrobbling experience. Make sure you trust the services below.',
         es: 'Conecta tu cuenta a servicios externos para una mejor experiencia al hacer scrobbling. Asegúrate de que confías en los servicios que hay debajo.',
         it: 'Connetti il tuo account a servizi di terze parti per una migliore esperienza di scrobbling. Assicurati di fidarti dei servizi che seguono.',
-        sv: 'Anslut ditt konto till tredjepartstjänster för bättre skrobblingsupplevelse. Var säker på att du litar på nedre tjänster',
+        sv: 'Anslut ditt konto till tredjepartstjänster för bättre skrobblingsupplevelse. Var säker på att du litar på nedre tjänster.',
         ru: 'Подключите свой аккаунт к сторонним сервисам для лучшего скробблинга. Убедитесь, что вы доверяете указанным ниже сервисам.'
     },
     connect_app: {
@@ -6502,7 +6502,7 @@ export const trans = {
         en: 'You have style loading off! If you did this by accident, you can undo this',
         de: 'Du hast das Laden von Stylesheets deaktiviert! Wenn du das aus Versehen gemacht hast, kannst du es rückgängig machen',
         es: '¡Tienes el cargado de estilos desactivado! Si hiciste esto por accidente, puedes deshacerlo',
-        it: 'Hai il caricamento degli stili disattivato! Se lo hai fatto per sbaglio, lo puoi annullare.',
+        it: 'Hai il caricamento degli stili disattivato! Se lo hai fatto per sbaglio, lo puoi annullare',
         pt: 'Você desativou o carregamento de estilos! Se você fez isso acidentalmente, pode desfazer essa ação',
         sv: 'Du har stängt av att stiler laddas! Om du gjorde det av misstag så kan du återställa det',
         ru: 'У вас отключена загрузка стилей! Если вы сделали это случайно, вы можете отменить это'
@@ -7896,6 +7896,9 @@ export const trans = {
         ru: 'Last.fm не смог загрузить этот компонент'
     },
     last_scrobbled_replace: {
+        // dont translate this, its replaced
+        // literally word for word from the last.fm text
+        // for use in code
         en: '{u} last scrobbled…',
         de: '{u} scrobbelte zuletzt…',
         fr: '{u} a scrobblé pour la dernière fois...',
@@ -8265,7 +8268,7 @@ export const trans = {
             en: 'This setting should be turned off to ensure scrobbles are correctly stored for each artist.',
             de: 'Diese Einstellung sollte deaktiviert werden, um sicherzustellen, dass Scrobbles für jeden Künstler korrekt gespeichert werden.',
             pt: 'Esta configuração deve ser desativada para garantir que os scrobbles sejam armazenados corretamente para cada artista.',
-            it: 'Questa impostazione dovrebbe essere disattivata per assicurarsi che gli scrobbling siano correttamente memorizzati per ciascun artista',
+            it: 'Questa impostazione dovrebbe essere disattivata per assicurarsi che gli scrobbling siano correttamente memorizzati per ciascun artista.',
             es: 'Esta opción debería estar desactivada para garantizar que los scrobblings se almacenen correctamente para cada artista.',
             sv: 'Denna inställning ska stängas av för att vara säker på att dina skrobblingar är rätt för alla artister.',
             ru: 'Эту настройку следует отключить, чтобы гарантировать правильное сохранение скробблов для каждого исполнителя.'

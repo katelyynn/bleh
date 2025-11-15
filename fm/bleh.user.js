@@ -58530,6 +58530,11 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       by: ["soleilth"],
       last_updated: "2025-11-13"
     },
+    it: {
+      name: "Italiano",
+      by: ["cutotopo"],
+      last_updated: "2025-11-14"
+    },
     pl: {
       name: "Polski",
       by: ["iwas15with100k"],
@@ -58562,6 +58567,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "{page} on {brand} {build}.{sku}",
         de: "{page} auf {brand} {build}.{sku}",
         es: "{page} en {brand} {build}.{sku}",
+        it: "{page} su {brand} {build}.{sku}",
         pt: "{page} no {brand} {build}.{sku}",
         sv: "{page} p\xE5 {brand} {build}.{sku}",
         ru: "{page} \u0432 {brand} {build}.{sku}"
@@ -58570,6 +58576,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "{name} - {page} on {brand} {build}.{sku}",
         de: "{name} - {page} auf {brand} {build}.{sku}",
         es: "{name} - {page} en {brand} {build}.{sku}",
+        it: "{name} - {page} su {brand} {build}.{sku}",
         pt: "{name} - {page} no {brand} {build}.{sku}",
         sv: "{name} - {page} p\xE5 {brand} {build}.{sku}",
         ru: "{name} - {page} \u0432 {brand} {build}.{sku}"
@@ -58578,6 +58585,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "{name} by {sister} - {page} on {brand} {build}.{sku}",
         de: "{name} von {sister} - {page} auf {brand} {build}.{sku}",
         es: "{name} por {sister} - {page} en {brand} {build}.{sku}",
+        it: "{name} di {sister} - {page} su {brand} {build}.{sku}",
         pt: "{name} por {sister} - {page} no {brand} {build}.{sku}",
         sv: "{name} av {sister} - {page} p\xE5 {brand} {build}.{sku}",
         ru: "{name} \u043E\u0442 {sister} - {page} \u0432 {brand} {build}.{sku}"
@@ -58589,6 +58597,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           en: "No badges",
           de: "Keine Abzeichen",
           es: "Sin emblemas",
+          it: "Nessun distintivo",
           pt: "Sem emblemas",
           sv: "Inga emblem",
           ru: "\u041D\u0435\u0442\u0443 \u0437\u043D\u0430\u0447\u043A\u0430"
@@ -58597,6 +58606,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           en: "Become a sponsor to get a badge!",
           de: "Werde Sponsor, um ein Abzeichen zu erhalten!",
           es: "\xA1S\xE9 un patrocinador y consigue un emblema!",
+          it: "Diventa uno sponsor per ottenere un distintivo!",
           pt: "Se torne um apoiador para ganhar um emblema!",
           sv: "Bli en sponsor f\xF6r att f\xE5 ett emblem!",
           ru: "\u0421\u0442\u0430\u043D\u044C \u0441\u043F\u043E\u043D\u0441\u043E\u0440\u043E\u043C \u0434\u043B\u044F \u043F\u043E\u043B\u0443\u0447\u0435\u043D\u0438\u044F \u0437\u043D\u0430\u0447\u043A\u0430!"
@@ -58607,6 +58617,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           en: "Last.fm Pro",
           de: "Last.fm Pro",
           es: "Last.fm Pro",
+          it: "Last.fm Pro",
           pt: "Last.fm Pro",
           sv: "Last.fm Pro",
           ru: "Last.fm \u041F\u0440\u043E"
@@ -58615,6 +58626,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           en: "Active Pro subscription",
           de: "Aktives Pro-Abonnement",
           es: "Suscripci\xF3n Pro activa",
+          it: "Abbonamento Pro attivo",
           pt: "Plano Pro ativo",
           sv: "Aktiv Pro prenumeration",
           ru: "\u0410\u043A\u0442\u0438\u0432\u043D\u0430 \u041F\u0440\u043E \u043F\u043E\u0434\u043F\u0438\u0441\u043A\u0430"
@@ -58625,6 +58637,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           en: "Staff",
           de: "Mitarbeiter",
           es: "Personal",
+          it: "Personale",
           pt: "Equipe",
           sv: "Personal",
           ru: "\u0410\u0434\u043C\u0438\u043D\u0438\u0441\u0442\u0440\u0430\u0442\u043E\u0440\u044B"
@@ -58633,6 +58646,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           en: "Official member of Last.fm",
           de: "Ofizielles Mitglied von Last.fm",
           es: "Miembro oficial de Last.fm",
+          it: "Membro ufficiale di Last.fm",
           pt: "Membro oficial da Last.fm",
           sv: "Officiell medlem p\xE5 Last.fm",
           ru: "\u041E\u0444\u0444\u0438\u0446\u0438\u0430\u043B\u044C\u043D\u044B\u0439 \u0443\u0447\u0430\u0441\u0442\u043D\u0438\u043A Last.fm"
@@ -58643,6 +58657,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           en: "Mod",
           de: "Moderator",
           es: "Moderador",
+          it: "Moderatore",
           pt: "Moderador(a)",
           sv: "Moderator",
           ru: "\u041C\u043E\u0434\u0435\u0440\u0430\u0442\u043E\u0440"
@@ -58651,6 +58666,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           en: "Official member of Last.fm",
           de: "Ofizielles Mitglied von Last.fm",
           es: "Miembro oficial de Last.fm",
+          it: "Membro ufficiale di Last.fm",
           pt: "Membro oficial do Last.fm",
           sv: "Officiell medlem p\xE5 Last.fm",
           ru: "\u041E\u0444\u0444\u0438\u0446\u0438\u0430\u043B\u044C\u043D\u044B\u0439 \u0443\u0447\u0430\u0441\u0442\u043D\u0438\u043A Last.fm"
@@ -58667,6 +58683,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           en: "Former member of Last.fm",
           de: "Ehemaliger Mitarbeiter von Last.fm",
           es: "Antiguo miembro de Last.fm",
+          it: "Ex-membro dello staff di Last.fm",
           sv: "F\xF6re-detta medlem p\xE5 Last.fm",
           ru: "\u0411\u044B\u0432\u0448\u0438\u0439 \u0443\u0447\u0430\u0441\u0442\u043D\u0438\u043A Last.fm",
           pt: "Ex-membro da equipe do Last.fm"
@@ -58677,6 +58694,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           en: "They follow you!",
           de: "Diese Person folgt dir!",
           es: "\xA1Te sigue!",
+          it: "Ti segue!",
           pt: "Ele(a) te segue!",
           sv: "Denna medlem f\xF6ljer dig!",
           ru: "\u041E\u043D\u0438 \u043D\u0430 \u0432\u0430\u0441 \u043F\u043E\u0434\u043F\u0438\u0441\u0430\u043D\u044B!"
@@ -58687,6 +58705,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           en: "Contributor",
           de: "Mitwirkender",
           es: "Contribuidor",
+          it: "Contributore",
           pt: "Contribuidor(a)",
           sv: "Bidragsgivare",
           ru: "\u0423\u0447\u0430\u0441\u0442\u043D\u0438\u043A"
@@ -58695,6 +58714,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           en: "Has worked on bleh or bwaa",
           de: "Hat an bleh oder bwaa gearbeitet",
           es: "Ha contribuido a bleh o bwaa",
+          it: "Ha contribuito a bleh o bwaa",
           pt: "Contribuiu para o bleh ou bwaa",
           sv: "Har arbetat p\xE5 bleh eller bwaa",
           ru: "\u041F\u043E\u043C\u043E\u0433\u0430\u043B \u0440\u0430\u0437\u0440\u0430\u0431\u043E\u0442\u043A\u0435 bleh \u0438\u043B\u0438 bwaa"
@@ -58705,6 +58725,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           en: "Translations",
           de: "\xDCbersetzungen",
           es: "Traducciones",
+          it: "Traduzioni",
           pt: "Tradu\xE7\xF5es",
           sv: "\xD6vers\xE4ttningar",
           ru: "\u041F\u0435\u0440\u0435\u0432\u043E\u0434\u044B"
@@ -58715,6 +58736,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           en: "it\u2019s a kitty!!",
           de: "ein K\xE4tzchen!!!",
           es: "\xA1\xA1es un gatito!!",
+          it: "\xE8 un gattino!!!",
           pt: "\xE9 um(a) gatinho(a)!!",
           sv: "en kissekatt!!",
           ru: "\u044D\u0442\u043E \u043A\u043E\u0442\u0438\u043A\u043A!!!"
@@ -58725,6 +58747,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           en: "Sponsor",
           de: "Sponsor",
           es: "Patrocinador",
+          it: "Sponsor",
           pt: "Apoiador(a)",
           sv: "Sponsor",
           ru: "\u0421\u043F\u043E\u043D\u0441\u043E\u0440"
@@ -58733,6 +58756,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           en: "thank you from kate <3",
           de: "danke von kate <3",
           es: "Gracias de parte de kate <3",
+          it: "grazie da parte di kate <3",
           pt: "obrigad\xE3o da kate <3",
           sv: "tack ifr\xE5n kate <3",
           ru: "\u0441\u043F\u0430\u0441\u0438\u0431\u043E \u043E\u0442 \u043A\u0435\u0439\u0442 <3"
@@ -58743,6 +58767,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           en: "Reserved",
           de: "Exklusiv",
           es: "Reservado",
+          it: "Riservato",
           pt: "Reservado",
           sv: "Exklusiv",
           ru: "\u0417\u0430\u0440\u0435\u0437\u0435\u0440\u0432\u0438\u0440\u043E\u0432\u0430\u043D\u043D\u044B\u0439"
@@ -58753,6 +58778,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           en: "Reserved",
           de: "Exklusiv",
           es: "Reservado",
+          it: "Riservato",
           pt: "Reservado",
           sv: "Exklusiv",
           ru: "\u0417\u0430\u0440\u0435\u0437\u0435\u0440\u0432\u0438\u0440\u043E\u0432\u0430\u043D\u043D\u044B\u0439"
@@ -58763,6 +58789,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           en: "band-aid",
           de: "pflaster",
           es: "curita",
+          it: "cerotto",
           sv: "l\xE5ster",
           ru: "\u043F\u043B\u0430\u0441\u0442\u044B\u0440\u044C",
           pt: "atadura"
@@ -58771,6 +58798,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           en: "the sillyness caught up to me",
           de: "der unfug hat mich eingeholt",
           es: "la tontera me alcanz\xF3",
+          it: "la stupidit\xE0 mi ha preso",
           sv: "det roliga kom ikapp mig",
           ru: "\u043C\u0438\u043B\u043E\u0442\u0430 \u043D\u0430 \u043C\u0435\u043D\u044F \u043D\u0430\u043F\u0430\u043B\u0430",
           pt: "a bobeira me alcan\xE7ou"
@@ -58786,6 +58814,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         reason: {
           en: "katelyn\u2019s wife ~",
           es: "esposa de katelyn ~",
+          it: "moglie di katelyn ~",
           sv: "katelyn\u2019s fru ~",
           ru: "\u0436\u0435\u043D\u0430 \u043A\u0435\u0439\u0442\u043B\u0438\u043D ~"
         }
@@ -58795,6 +58824,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Requires higher bleh version",
       de: "Erfordert eine neuere bleh-Version",
       es: "Requiere una versi\xF3n m\xE1s reciente de bleh",
+      it: "Richiede una versione pi\xF9 recente di bleh",
       pt: "Requer a vers\xE3o mais recente do bleh",
       sv: "Beh\xF6ver en nyare version av bleh",
       ru: "\u0422\u0440\u0435\u0431\u0443\u0435\u0442\u0441\u044F \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u043D\u0430\u044F \u0432\u0435\u0440\u0441\u0438\u044F bleh"
@@ -58803,6 +58833,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Home",
       de: "Startseite",
       es: "Inicio",
+      it: "Pagina iniziale",
       pt: "In\xEDcio",
       sv: "Startsida",
       ru: "\u0414\u043E\u043C"
@@ -58811,6 +58842,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Library",
       de: "Bibliothek",
       es: "Colecci\xF3n",
+      it: "Libreria",
       ja: "\u30E9\u30A4\u30D6\u30E9\u30EA",
       pt: "Biblioteca",
       sv: "Bibliotek",
@@ -58820,6 +58852,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Playlists",
       de: "Playlists",
       es: "Playlists",
+      it: "Playlists",
       sv: "Spellistor",
       ru: "\u041F\u043B\u0435\u0439\u043B\u0438\u0441\u0442\u044B",
       pt: "Playlists"
@@ -58828,6 +58861,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Shouts",
       de: "Shouts",
       es: "Notas",
+      it: "Bacheca",
       pt: "Mensagens",
       ja: "\u30B7\u30E3\u30A6\u30C8",
       sv: "Hojtningar",
@@ -58839,6 +58873,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Send quickly with {kbd}",
       de: "Schnell senden mit {kbd}",
       es: "Publica r\xE1pidamente con {kbd}",
+      it: "Invia rapidamente con {kbd}",
       pt: "Enviar rapidamente com {kbd}",
       sv: "Skicka snabbt med {kbd}",
       ru: "\u0411\u044B\u0441\u0442\u0440\u0430\u044F \u043E\u0442\u043F\u0440\u0430\u0432\u043A\u0430 \u043F\u043E {kbd}"
@@ -58847,6 +58882,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "You cannot leave shouts here",
       de: "Du kannst hier keine Shouts hinterlassen",
       es: "No puedes poner notas aqu\xED",
+      it: "Non puoi lasciare note qui",
       sv: "Du kan inte hojta h\xE4r",
       ru: "\u0412\u044B \u043D\u0435 \u043C\u043E\u0436\u0435\u0442\u0435 \u043E\u0441\u0442\u0430\u0432\u043B\u044F\u0442\u044C \u0442\u0443\u0442 \u043E\u0442\u0437\u044B\u0432\u044B",
       pt: "Voc\xEA n\xE3o pode deixar coment\xE1rios aqui"
@@ -58855,6 +58891,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Failed to send",
       de: "Senden fehlgeschlagen",
       es: "Error al publicar",
+      it: "Invio non riuscito",
       pt: "Falha ao enviar",
       sv: "Gick inte att skicka",
       ru: "\u041D\u0435 \u0443\u0434\u0430\u043B\u043E\u0441\u044C \u043E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u044C"
@@ -58863,6 +58900,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Sent",
       de: "Gesendet",
       es: "Publicado",
+      it: "Inviato",
       pt: "Enviado",
       sv: "Skickat",
       ru: "\u041E\u0442\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u043E"
@@ -58870,6 +58908,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     single_shout: {
       en: "viewing a single shout",
       es: "viendo una sola nota",
+      it: "visualizzando una singola nota",
       pt: "visualizando uma mensagem",
       sv: "visar en enda hojtning",
       ru: "\u043F\u0440\u043E\u0441\u043C\u043E\u0442\u0440 \u0435\u0434\u0438\u043D\u0441\u0442\u0432\u0435\u043D\u043D\u043E\u0433\u043E \u043E\u0442\u0437\u044B\u0432\u0430"
@@ -58879,6 +58918,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "About",
       de: "\xDCber",
       es: "Sobre m\xED",
+      it: "Informazioni",
       pt: "Sobre",
       sv: "Om",
       ru: "\u041E \u0441\u0435\u0431\u0435"
@@ -58888,6 +58928,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "About (preview)",
       de: "\xDCber (Vorschau)",
       es: "Sobre m\xED (vista previa)",
+      it: "Informazioni (anteprima)",
       pt: "Sobre (pr\xE9via)",
       sv: "Om (f\xF6rhandsvisning)",
       ru: "\u041E \u0441\u0435\u0431\u0435 (\u043F\u0440\u0435\u0432\u044C\u044E)"
@@ -58897,6 +58938,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "{u} is keeping quiet",
       de: "{u} ist wohl etwas schweigsam",
       es: "{u} se est\xE1 quedando callado",
+      it: "{u} sta rimanendo in silenzio",
       pt: "{u} est\xE1 bem quietinho(a)",
       sv: "{u} h\xE5ller sig tyst",
       ru: "{u} \u043D\u0438\u0447\u0435\u0433\u043E \u043D\u0435 \u043D\u0430\u043F\u0438\u0441\u0430\u043B \u043E \u0441\u0435\u0431\u0435"
@@ -58905,6 +58947,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Edit wiki",
       de: "Wiki bearbeiten",
       es: "Editar wiki",
+      it: "Modifica wiki",
       pt: "Editar wiki",
       sv: "Redigera wiki",
       ru: "\u0420\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u0438\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u044E"
@@ -58913,6 +58956,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Read more",
       de: "Mehr anzeigen",
       es: "Leer m\xE1s",
+      it: "Leggi di pi\xF9",
       pt: "Ler mais",
       ja: "\u3082\u3063\u3068\u8AAD\u3080",
       sv: "L\xE4s mer",
@@ -58922,6 +58966,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Refresh",
       de: "Aktualisieren",
       es: "Recargar",
+      it: "Aggiorna",
       pt: "Atualizar",
       sv: "Ladda om",
       ru: "\u041F\u0435\u0440\u0435\u0437\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044C"
@@ -58930,6 +58975,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Refreshed",
       de: "Aktualisiert",
       es: "Recargado",
+      it: "Aggiornato",
       pt: "Atualizado",
       sv: "Laddats om",
       ru: "\u041F\u0435\u0440\u0435\u0437\u0430\u0433\u0440\u0443\u0436\u0435\u043D\u043E"
@@ -58938,6 +58984,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Refresh tracks",
       de: "Titel aktualisieren",
       es: "Recargar temas",
+      it: "Aggiorna brani",
       pt: "Atualizar faixas",
       sv: "Ladda om l\xE5tar",
       ru: "\u041F\u0435\u0440\u0435\u0437\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044C \u0442\u0440\u0435\u043A\u0438"
@@ -58946,6 +58993,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Unavailable",
       de: "Nicht verf\xFCgbar",
       es: "No disponible",
+      it: "Non disponibile",
       pt: "Indispon\xEDvel",
       sv: "Otillg\xE4nglig",
       ru: "\u041D\u0435\u0434\u043E\u0441\u0442\u0443\u043F\u043D\u043E"
@@ -58954,6 +59002,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Obsess",
       de: "Obsessen",
       es: "Obsesionar",
+      it: "Imposta passione",
+      // last.fm calls them 'passioni' in italian, so i will work with that from now on ~cuto
       pt: "Obsess\xE3o",
       sv: "Besatthet",
       ru: "\u0417\u0430\u0432\u0438\u0441\u0438\u043C\u043E\u0441\u0442\u044C"
@@ -58962,6 +59012,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "First to claim this obsession!",
       de: "Die erste Person, die sich diese Obsession f\xFCr sich beansprucht!",
       es: "\xA1Primero en establecer esta obsesi\xF3n!",
+      it: "Il primo ad avere questa passione!",
       pt: "Primeiro(a) a ter esta obsess\xE3o!",
       sv: "Den f\xF6rsta personen att bli besatt av denna!",
       ru: "\u041F\u0435\u0440\u0432\u044B\u0439 \u043A\u0442\u043E \u0438\u043C\u0435\u0435\u0442 \u044D\u0442\u0443 \u0437\u0430\u0432\u0438\u0441\u0438\u043C\u043E\u0441\u0442\u044C!"
@@ -58970,6 +59021,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Compare",
       de: "Vergleichen",
       es: "Comparar",
+      it: "Confronta",
       pt: "Comparar",
       sv: "J\xE4mf\xF6r",
       ru: "\u0421\u0440\u0430\u0432\u043D\u0438\u0442\u044C"
@@ -58978,6 +59030,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Compare plays",
       de: "Plays vergleichen",
       es: "Comparar reproducciones",
+      it: "Confronta riproduzioni",
       pt: "Comparar reprodu\xE7\xF5es",
       sv: "J\xE4mf\xF6r spelningar",
       ru: "\u0421\u0440\u0430\u0432\u043D\u0438\u0442\u044C \u0441\u044B\u0433\u0440\u0430\u043D\u043D\u043E\u0435"
@@ -58987,6 +59040,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Inverse comparison method",
         de: "Umgekehrte Vergleichsmethode",
         es: "Comparaci\xF3n inversa",
+        it: "Confronto inverso",
         sv: "Invertera j\xE4mf\xF6relse",
         ru: "\u041E\u0431\u0440\u0430\u0442\u043D\u044B\u0439 \u043C\u0435\u0442\u043E\u0434 \u0441\u0440\u0430\u0432\u043D\u0435\u043D\u0438\u044F",
         pt: "M\xE9todo de compara\xE7\xE3o inversa"
@@ -58995,6 +59049,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Show items you do not share instead",
         de: "Zeige stattdessen Objekte, die ihr nicht teilt",
         es: "Mostrar \xEDtems que no comparten en su lugar",
+        it: "Mostra gli elementi che non condividete",
         sv: "Visa ist\xE4llet objekt ni inte delar alls",
         ru: "\u0412\u043C\u0435\u0441\u0442\u043E \u044D\u0442\u043E\u0433\u043E \u043F\u043E\u043A\u0430\u0437\u0430\u0442\u044C \u043D\u0435\u0441\u043E\u0432\u043F\u0430\u0434\u0430\u044E\u0449\u0438\u0435 \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u044B",
         pt: "Em vez disso, mostre itens que voc\xEA n\xE3o compartilha"
@@ -59004,6 +59059,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "1 page",
       de: "1 Seite",
       es: "1 p\xE1gina",
+      it: "1 pagina",
       pt: "1 p\xE1gina",
       sv: "1 sida",
       ru: "1 \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u0430"
@@ -59012,6 +59068,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "{c} pages",
       de: "{c} Seiten",
       es: "{c} p\xE1ginas",
+      it: "{c} pagine",
       pt: "{c} p\xE1ginas",
       sv: "{c} sidor",
       ru: "{c} \u0441\u0442\u0440\u0430\u043D\u0438\u0446"
@@ -59021,6 +59078,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Gathering plays for {u} ({current_page}/{pages})",
       de: "Sammle Plays f\xFCr {u} ({current_page}/{pages})",
       es: "Recopilando reproducciones para {u} ({current_page}/{pages})",
+      it: "Raccogliendo le riproduzioni per {u} ({current_page}/{pages})",
       pt: "Reunindo reprodu\xE7\xF5es para {u} ({current_page}/{pages})",
       sv: "Samlar spelningar av {u} ({current_page}/{pages})",
       ru: "\u0421\u0431\u043E\u0440 \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u0439 \u0434\u043B\u044F {u} (\u0441\u0442\u0440\u0430\u043D\u0438\u0446\u0430 {current_page} \u0438\u0437 {pages})"
@@ -59029,6 +59087,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Nothing in common (\u0E51-\uFE4F-\u0E51)",
       de: "Nichts gemeinsam (\u0E51-\uFE4F-\u0E51)",
       es: "Nada en com\xFAn (\u0E51-\uFE4F-\u0E51)",
+      it: "Niente in comune (\u0E51-\uFE4F-\u0E51)",
       pt: "Nada em comum (\u0E51-\uFE4F-\u0E51)",
       sv: "Inget gemensamt (\u0E51-\uFE4F-\u0E51)",
       ru: "\u041D\u0438\u0447\u0435\u0433\u043E \u043E\u0431\u0449\u0435\u0433\u043E (\u0E51-\uFE4F-\u0E51)"
@@ -59038,6 +59097,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Others featured",
       de: "Andere gefeatured",
       es: "Otros incluidos",
+      it: "Altri partecipanti",
       pt: "Outros em destaque",
       sv: "G\xE4startister",
       ru: "\u0414\u0440\u0443\u0433\u0438\u0435 \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u0438"
@@ -59046,6 +59106,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Your scrobbles",
       de: "Deine Scrobbles",
       es: "Tus scrobblings",
+      it: "I tuoi scrobbling",
       pt: "Seus scrobbles",
       sv: "Dina skrobblingar",
       ru: "\u0412\u0430\u0448\u0438 \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u044B"
@@ -59055,6 +59116,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Play",
       de: "Abspielen",
       es: "Escuchar",
+      it: "Riproduci",
       sv: "Spela upp",
       ru: "\u0412\u043E\u0441\u043F\u0440\u043E\u0438\u0437\u0432\u0435\u0441\u0442\u0438",
       pt: "Reproduzir"
@@ -59064,6 +59126,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Plays",
       de: "Plays",
       es: "Reproducciones",
+      it: "Riproduzioni",
       pt: "Reprodu\xE7\xF5es",
       sv: "Spelningar",
       ru: "\u041F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u044F"
@@ -59072,6 +59135,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Try again",
       de: "Erneut versuchen",
       es: "Intenta de nuevo",
+      it: "Riprova",
       pt: "Tentar novamente",
       sv: "F\xF6rs\xF6k igen",
       ru: "\u041F\u043E\u0432\u0442\u043E\u0440\u0438\u0442\u044C"
@@ -59080,6 +59144,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Back",
       de: "Zur\xFCck",
       es: "Atr\xE1s",
+      it: "Indietro",
       pt: "Voltar",
       sv: "Tillbaks",
       ru: "\u041D\u0430\u0437\u0430\u0434"
@@ -59088,6 +59153,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Settings",
       de: "Einstellungen",
       es: "Configuraci\xF3n",
+      it: "Impostazioni",
       pt: "Configura\xE7\xF5es",
       ja: "\u8A2D\u5B9A",
       sv: "Inst\xE4llningar",
@@ -59097,6 +59163,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Ignored",
       de: "Ignoriert",
       es: "Ignorado",
+      it: "Ignorato",
       pt: "Ignorados",
       sv: "Ignorerad",
       ru: "\u0418\u0433\u043D\u043E\u0440\u0438\u0440\u0443\u0435\u0442\u0441\u044F"
@@ -59105,6 +59172,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Friends",
       de: "Freunde",
       es: "Amigos",
+      it: "Amici",
       pt: "Amigos",
       sv: "V\xE4nner",
       ru: "\u0414\u0440\u0443\u0437\u044C\u044F"
@@ -59113,6 +59181,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Keep up to date on what your friends are listening to",
       de: "Bleibe auf dem Laufenden, was deine Freunde h\xF6ren",
       es: "Mantente al d\xEDa de lo que escuchan tus amigos",
+      it: "Resta aggiornato su quello che i tuoi amici stanno ascoltando",
       pt: "Fique por dentro do que seus amigos est\xE3o ouvindo",
       sv: "H\xE5ll koll p\xE5 vad dina v\xE4nner lyssnar p\xE5",
       ru: "\u0421\u043B\u0435\u0434\u0438\u0442\u0435 \u0437\u0430 \u0442\u0435\u043C, \u0447\u0442\u043E \u0441\u043B\u0443\u0448\u0430\u044E\u0442 \u0432\u0430\u0448\u0438 \u0434\u0440\u0443\u0437\u044C\u044F"
@@ -59121,6 +59190,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Add friends",
       de: "Freunde hinzuf\xFCgen",
       es: "A\xF1adir amigos",
+      it: "Aggiungi amici",
       pt: "Adicionar amigos",
       sv: "L\xE4gg till v\xE4nner",
       ru: "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0434\u0440\u0443\u0437\u0435\u0439"
@@ -59130,6 +59200,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Starred friend",
         de: "Markierter Freund",
         es: "Amigo favorito",
+        it: "Amico preferito",
         pt: "Amigo(a) favorito(a)",
         sv: "Stj\xE4rnm\xE4rkt v\xE4n",
         ru: "\u0418\u0437\u0431\u0440\u0430\u043D\u043D\u044B\u0439 \u0434\u0440\u0443\u0433"
@@ -59138,6 +59209,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "View their scrobbles alongside yours at all times",
         de: "Sehe deren Scrobbles jederzeit neben deinen an",
         es: "Ve sus scrobblings junto a los tuyos en todo momento",
+        it: "Visualizza i loro scrobbling vicino i tuoi in ogni momento",
         pt: "Veja os scrobbles dele(a) junto aos seus o tempo todo",
         sv: "Se deras skrobblingar bredvid dina hela tiden",
         ru: "\u041F\u043E\u0441\u0442\u043E\u044F\u043D\u043D\u043E \u043F\u0440\u043E\u0441\u043C\u0430\u0442\u0440\u0438\u0432\u0430\u0442\u044C \u0438\u0445 \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u044F \u0440\u044F\u0434\u043E\u043C \u0441 \u0432\u0430\u0448\u0438\u043C\u0438"
@@ -59146,6 +59218,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Not seeing the options you\u2019re after? Fill out your friends list in the settings.",
         de: "Siehst du nicht die Optionen, die du suchst? F\xFClle deine Freundesliste in den Einstellungen aus.",
         es: "\xBFNo encuentras la opci\xF3n que necesitas? Llena tu lista de amigos en la configuraci\xF3n.",
+        it: "Non vedi le opzioni che cerchi? Imposta la tua lista amici nelle impostazioni.",
         pt: "N\xE3o est\xE1 encontrando as op\xE7\xF5es que voc\xEA quer? Preencha sua lista de amigos nas configura\xE7\xF5es.",
         sv: "Ser du inte inst\xE4llningar du letar efter? Fyll upp din v\xE4nlista i inst\xE4llningarna.",
         ru: "\u041D\u0435 \u0432\u0438\u0434\u0438\u0442\u0435 \u043D\u0443\u0436\u043D\u044B\u0445 \u043E\u043F\u0446\u0438\u0439? \u0417\u0430\u043F\u043E\u043B\u043D\u0438\u0442\u0435 \u0441\u0432\u043E\u0439 \u0441\u043F\u0438\u0441\u043E\u043A \u0434\u0440\u0443\u0437\u0435\u0439 \u0432 \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0430\u0445."
@@ -59155,6 +59228,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "\u2018Friends\u2019 is a bleh-exclusive feature that allows you to keep up to date on your friend\u2019s listening history, it is local and does not influence your following list.",
       de: "\u201EFreunde\u201C ist eine exklusive bleh-Funktion, mit der du auf dem Laufenden bleiben kannst, was deine Freunde h\xF6ren. Freunde werden lokal verwaltet und beeinflussen nicht deine Follower-Liste.",
       es: "\u2018Amigos\u2019 es una funci\xF3n exclusiva de bleh que te permite estar al d\xEDa con el historial de reproducciones de tus amigos. Es local y no influye en tu lista de seguidos.",
+      it: "\u2018Amici\u2019 \xE8 una funzione esclusiva di bleh che ti permette di restare aggiornato con la cronologia di ascolto dei tuoi amici, \xE8 locale e non influenza la tua lista dei seguiti.",
       pt: "\u2018Amigos\u2019 \xE9 um recurso exclusivo do bleh que permite voc\xEA acompanhar o hist\xF3rico de m\xFAsicas dos seus amigos. \xC9 um recurso local que n\xE3o influencia a sua lista de seguidores.",
       sv: "\u2019V\xE4nner\u2019 \xE4r en exklusiv del av bleh som till\xE5ter dig att h\xE5lla koll p\xE5 dina v\xE4nners lyssnarhistoria, det hanteras lokalt och r\xF6r inte din f\xF6ljarlista.",
       ru: "\xAB\u0414\u0440\u0443\u0437\u044C\u044F\xBB \u2014 \u044D\u0442\u043E \u044D\u043A\u0441\u043A\u043B\u044E\u0437\u0438\u0432\u043D\u0430\u044F \u0444\u0443\u043D\u043A\u0446\u0438\u044F bleh, \u043A\u043E\u0442\u043E\u0440\u0430\u044F \u043F\u043E\u0437\u0432\u043E\u043B\u044F\u0435\u0442 \u0432\u0430\u043C \u0441\u043B\u0435\u0434\u0438\u0442\u044C \u0437\u0430 \u0438\u0441\u0442\u043E\u0440\u0438\u0435\u0439 \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u0439 \u0432\u0430\u0448\u0438\u0445 \u0434\u0440\u0443\u0437\u0435\u0439. \u0421\u043F\u0438\u0441\u043E\u043A \u0443\u043F\u0440\u0430\u0432\u043B\u044F\u0435\u0442\u0441\u044F \u043B\u043E\u043A\u0430\u043B\u044C\u043D\u043E \u0438 \u043D\u0435 \u0432\u043B\u0438\u044F\u0435\u0442 \u043D\u0430 \u0432\u0430\u0448 \u0441\u043F\u0438\u0441\u043E\u043A \u043F\u043E\u0434\u043F\u0438\u0441\u043E\u043A."
@@ -59163,6 +59237,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Add as friend",
       de: "Als Freund hinzuf\xFCgen",
       es: "A\xF1adir como amigo",
+      it: "Aggiungi come amico",
       pt: "Adicionar como amigo",
       sv: "L\xE4gg till som v\xE4n",
       ru: "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u043A\u0430\u043A \u0434\u0440\u0443\u0433\u0430"
@@ -59172,6 +59247,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Remove friend",
         de: "Freund entfernen",
         es: "Eliminar amigo",
+        it: "Rimuovi amico",
         pt: "Desfazer amizade",
         sv: "Ta bort v\xE4n",
         ru: "\u0423\u0434\u0430\u043B\u0438\u0442\u044C \u0434\u0440\u0443\u0433\u0430"
@@ -59180,6 +59256,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Are you sure you want to remove {u} as a friend, you will stay following them - it\u2018s only local.",
         de: "Bist du sicher, dass du {u} als Freund entfernen m\xF6chtest? Du folgst der Person weiterhin - die Freundesliste wird lokal verwaltet.",
         es: "\xBFSeguro de que quieres eliminar a {u} como amigo? Seguir\xE1s sigui\xE9ndolo \u2014 es solo local.",
+        it: "Sei sicuro di voler rimuovere {u} come amico? Continuerai a seguirlo - \xE8 solamente locale.",
         pt: "Tem certeza de que quer remover {u} da sua lista de amigos? Voc\xEA continuar\xE1 o/a seguindo - \xE9 s\xF3 algo local.",
         sv: "\xC4r du s\xE4ker p\xE5 att du vill ta bort {u} som v\xE4n? Du f\xF6ljer dem fortfarande - v\xE4nlistan hanteras lokalt.",
         ru: "\u0412\u044B \u0443\u0432\u0435\u0440\u0435\u043D\u044B, \u0447\u0442\u043E \u0445\u043E\u0442\u0438\u0442\u0435 \u0443\u0434\u0430\u043B\u0438\u0442\u044C {u} \u0438\u0437 \u0434\u0440\u0443\u0437\u0435\u0439? \u0412\u044B \u043E\u0441\u0442\u0430\u043D\u0435\u0442\u0435\u0441\u044C \u043F\u043E\u0434\u043F\u0438\u0441\u0430\u043D\u044B \u043D\u0430 \u043D\u0435\u0433\u043E/\u043D\u0435\u0435 \u2014 \u044D\u0442\u043E \u043B\u043E\u043A\u0430\u043B\u044C\u043D\u044B\u0439 \u0441\u043F\u0438\u0441\u043E\u043A."
@@ -59189,6 +59266,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Added friend",
       de: "Freund hinzugef\xFCgt",
       es: "Amigo a\xF1adido",
+      it: "Amico aggiunto",
       pt: "Amigo(a) adicionado(a)",
       sv: "Lagt till som v\xE4n",
       ru: "\u0414\u0440\u0443\u0433 \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D"
@@ -59197,6 +59275,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Removed friend",
       de: "Freund entfernt",
       es: "Amigo eliminado",
+      it: "Amico rimosso",
       pt: "Amigo(a) removido(a)",
       sv: "Tagit bort v\xE4n",
       ru: "\u0414\u0440\u0443\u0433 \u0443\u0434\u0430\u043B\u0435\u043D"
@@ -59205,6 +59284,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Added star status",
       de: "Markiert",
       es: "Marcado como favorito",
+      it: "Impostato come preferito",
       pt: "Status de favorito adicionado",
       sv: "Stj\xE4rnm\xE4rkte",
       ru: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D \u0432 \u0438\u0437\u0431\u0440\u0430\u043D\u043D\u043E\u0435"
@@ -59213,6 +59293,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Star friend",
       de: "Freund markieren",
       es: "Marcar como favorito",
+      it: "Imposta come preferito",
       pt: "Favoritar amigo(a)",
       sv: "Stj\xE4rnm\xE4rk v\xE4n",
       ru: "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0434\u0440\u0443\u0433\u0430 \u0432 \u0438\u0437\u0431\u0440\u0430\u043D\u043D\u043E\u0435"
@@ -59221,6 +59302,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Removed star status",
       de: "Markierung entfernt",
       es: "Eliminado de favoritos",
+      it: "Rimosso dai preferiti",
       pt: "Status de favorito removido",
       sv: "Tog bort stj\xE4rnm\xE4rke",
       ru: "\u0423\u0434\u0430\u043B\u0435\u043D \u0438\u0437 \u0438\u0437\u0431\u0440\u0430\u043D\u043D\u043E\u0433\u043E"
@@ -59229,6 +59311,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Remove star status",
       de: "Markierung entfernen",
       es: "Eliminar de favoritos",
+      it: "Rimuovi dai preferiti",
       pt: "Remover estado de favorito",
       sv: "Ta bort stj\xE4rnm\xE4rke",
       ru: "\u0423\u0434\u0430\u043B\u0438\u0442\u044C \u0438\u0437 \u0438\u0437\u0431\u0440\u0430\u043D\u043D\u043E\u0433\u043E"
@@ -59237,6 +59320,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "aka.",
       de: "alias",
       es: "alias",
+      it: "alias",
       pt: "vulgo",
       sv: "ocks\xE5 k\xE4nd som",
       ru: "\u043E\u043D \u0436\u0435"
@@ -59245,6 +59329,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "pronouns",
       de: "pronomen",
       es: "pronombres",
+      it: "pronomi",
       pt: "pronomes",
       sv: "pronomen",
       ru: "\u043C\u0435\u0441\u0442\u043E\u0438\u043C\u0435\u043D\u0438\u044F"
@@ -59254,6 +59339,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "created",
       de: "erstellt",
       es: "creado",
+      it: "creato",
       pt: "criada",
       sv: "skapades",
       ru: "\u0441\u043E\u0437\u0434\u0430\u043D"
@@ -59263,6 +59349,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "scrobbling since ",
       de: "scrobbelt seit ",
       es: "scrobbling desde ",
+      it: "Esegue lo scrobbling dal ",
       pt: "em scrobble desde ",
       ja: "\u3088\u308Ascrobble",
       sv: "skrobblar sedan ",
@@ -59272,6 +59359,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Edit",
       de: "Bearbeiten",
       es: "Editar",
+      it: "Modifica",
       pt: "Editar",
       sv: "Redigera",
       ru: "\u0420\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C"
@@ -59281,6 +59369,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Bulk edit",
       de: "Mehrere bearbeiten",
       es: "Editar en masa",
+      it: "Modifica in massa",
       pt: "Edi\xE7\xE3o em massa",
       sv: "Bulkredigera",
       ru: "\u041C\u0430\u0441\u0441\u043E\u0432\u043E\u0435 \u0440\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435"
@@ -59289,6 +59378,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Scrobble",
       de: "Scrobble",
       es: "Hacer scrobbling",
+      it: "Scrobbling",
       pt: "Scrobble",
       sv: "Skrobbla",
       ru: "\u0421\u043A\u0440\u043E\u0431\u0431\u043B"
@@ -59303,6 +59393,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Average",
       de: "Durchschnitt",
       es: "Promedio",
+      it: "Media",
       pt: "M\xE9dia",
       sv: "Genomsnitt",
       ru: "\u0421\u0440\u0435\u0434\u043D\u0435\u0435"
@@ -59311,6 +59402,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Scrobbles",
       de: "Scrobbles",
       es: "Scrobblings",
+      it: "Scrobbling",
       pt: "Scrobbles",
       ja: "Scrobble",
       sv: "Skrobblingar",
@@ -59323,6 +59415,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "{c} plays",
       de: "{c} Scrobbles",
       es: "{c} scrobblings",
+      it: "{c} scrobbling",
       pt: "{c} scrobbles",
       sv: "{c} skrobblingar",
       ru: "{c} \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u0439"
@@ -59332,6 +59425,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "{c} scrobbles",
       de: "{c} Scrobbles",
       es: "{c} scrobblings",
+      it: "{c} scrobbling",
       pt: "{c} scrobbles",
       sv: "{c} skrobblingar",
       ru: "{c} \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u043E\u0432"
@@ -59342,6 +59436,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "listens",
       de: "Scrobbles",
       es: "scrobblings",
+      it: "scrobbling",
       pt: "scrobbles",
       sv: "skrobblingar",
       ru: "\u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u044F",
@@ -59349,6 +59444,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "{c} listens",
         de: "{c} Scrobbles",
         es: "{c] scrobblings",
+        it: "{c} scrobbling",
         pt: "{c} scrobbles",
         sv: "{c} skrobblingar",
         ru: "{c} \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u0439"
@@ -59359,6 +59455,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "New scrobble",
       de: "Neuer Scrobble",
       es: "Nuevo scrobbling",
+      it: "Nuovo scrobbling",
       pt: "Novo scrobble",
       sv: "Ny skrobbel",
       ru: "\u041D\u043E\u0432\u044B\u0439 \u0441\u043A\u0440\u043E\u0431\u0431\u043B"
@@ -59367,6 +59464,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Scrobble could not be sent",
       pt: "Scrobble n\xE3o p\xF4de ser enviado",
       es: "El scrobbling no pudo ser enviado",
+      it: "Non \xE8 stato possibile inviare lo scrobbling",
       de: "Scrobble konnte nicht gesendet werden",
       sv: "Skrobblingen kunde inte skickas",
       ru: "\u041D\u0435 \u0443\u0434\u0430\u043B\u043E\u0441\u044C \u043E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u044C \u0441\u043A\u0440\u043E\u0431\u0431\u043B"
@@ -59377,6 +59475,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Artist name was ignored",
         de: "K\xFCnstlername wurde ignoriert",
         es: "El nombre del artista fue ignorado",
+        it: "Il nome dell'artista \xE8 stato ignorato",
         pt: "O nome do(a) artista foi ignorado",
         sv: "Artistnamnet var ignorerad",
         ru: "\u0418\u043C\u044F \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044F \u043F\u0440\u043E\u0438\u0433\u043D\u043E\u0440\u0438\u0440\u043E\u0432\u0430\u043D\u043E"
@@ -59385,6 +59484,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Track name was ignored",
         de: "Titelname wurde ignoriert",
         es: "El nombre del tema fue ignorado",
+        it: "Il nome del brano \xE8 stato ignorato",
         pt: "O nome da faixa foi ignorado",
         sv: "L\xE5ttiteln var ignorerad",
         ru: "\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u0442\u0440\u0435\u043A\u0430 \u043F\u0440\u043E\u0438\u0433\u043D\u043E\u0440\u0438\u0440\u043E\u0432\u0430\u043D\u043E"
@@ -59393,6 +59493,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Timestamp is too old",
         de: "Zeitstempel ist zu alt",
         es: "La marca de tiempo es muy antigua",
+        it: "La data impostata \xE8 troppo indietro nel tempo",
         pt: "O timestamp \xE9 muito antigo",
         sv: "Tidsst\xE4mpeln \xE4r f\xF6r gammal",
         ru: "\u0412\u0440\u0435\u043C\u0435\u043D\u043D\u0430\u044F \u043C\u0435\u0442\u043A\u0430 \u0441\u043B\u0438\u0448\u043A\u043E\u043C \u0441\u0442\u0430\u0440\u0430\u044F"
@@ -59401,6 +59502,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Timestamp is too new",
         de: "Zeitstempel ist zu neu",
         es: "La marca de tiempo es muy nueva",
+        it: "La data impostata \xE8 troppo avanti nel tempo",
         pt: "O timestamp \xE9 muito novo",
         sv: "Tidsst\xE4mpeln \xE4r f\xF6r ny",
         ru: "\u0412\u0440\u0435\u043C\u0435\u043D\u043D\u0430\u044F \u043C\u0435\u0442\u043A\u0430 \u0441\u043B\u0438\u0448\u043A\u043E\u043C \u043D\u043E\u0432\u0430\u044F"
@@ -59408,6 +59510,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       5: {
         en: "Daily scrobble limit exceeded",
         es: "L\xEDmite diario de scrobblings excedido",
+        it: "Limite giornaliero di scrobbling superato",
         pt: "Limite di\xE1rio de scrobbles excedido",
         sv: "Max dagliga skrobblingar har n\xE5tts",
         ru: "\u041F\u0440\u0435\u0432\u044B\u0448\u0435\u043D \u0434\u043D\u0435\u0432\u043D\u043E\u0439 \u043B\u0438\u043C\u0438\u0442 \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u043E\u0432"
@@ -59417,6 +59520,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Artist",
       de: "K\xFCnstler",
       es: "Artista",
+      it: "Artista",
       pt: "Artista",
       sv: "Artist",
       ru: "\u0418\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C"
@@ -59425,6 +59529,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Artists",
       de: "K\xFCnstler",
       es: "Artistas",
+      it: "Artisti",
       pt: "Artistas",
       ja: "\u30A2\u30FC\u30C6\u30A3\u30B9\u30C8",
       sv: "Artister",
@@ -59434,6 +59539,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Multiple artists are grouped into this profile",
       de: "Mehrere K\xFCnstler sind auf diesem Profil gruppiert",
       es: "M\xFAltiples artistas est\xE1n agrupados en este perfil",
+      it: "Pi\xF9 artisti sono raggruppati in questo profilo",
       pt: "M\xFAltiplos artistas est\xE3o agrupados neste perfil",
       sv: "Flera artister delar denna profil",
       ru: "\u0412 \u044D\u0442\u043E\u043C \u043F\u0440\u043E\u0444\u0438\u043B\u0435 \u0441\u0433\u0440\u0443\u043F\u043F\u0438\u0440\u043E\u0432\u0430\u043D\u044B \u043D\u0435\u0441\u043A\u043E\u043B\u044C\u043A\u043E \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u0435\u0439"
@@ -59442,6 +59548,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Album",
       de: "Album",
       es: "\xC1lbum",
+      it: "Album",
       pt: "\xC1lbum",
       sv: "Album",
       ru: "\u0410\u043B\u044C\u0431\u043E\u043C"
@@ -59450,6 +59557,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Albums",
       de: "Alben",
       es: "\xC1lbumes",
+      it: "Album",
       pt: "\xC1lbuns",
       ja: "\u30A2\u30EB\u30D0\u30E0",
       sv: "Album",
@@ -59458,6 +59566,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     albums_and_tracks: {
       en: "Albums and tracks",
       es: "\xC1lbumes y temas",
+      it: "Album e brani",
       pt: "\xC1lbuns e faixas",
       sv: "Album och l\xE5tar",
       ru: "\u0410\u043B\u044C\u0431\u043E\u043C\u044B \u0438 \u0442\u0440\u0435\u043A\u0438"
@@ -59466,6 +59575,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Album Artist",
       de: "Albumk\xFCnstler",
       es: "Artista del \xE1lbum",
+      it: "Artista dell'album",
       pt: "Artista do \xE1lbum",
       sv: "Albumartist",
       ru: "\u0418\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C \u0430\u043B\u044C\u0431\u043E\u043C\u0430"
@@ -59474,6 +59584,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       // release type
       en: "Single",
       es: "Sencillo",
+      it: "Singolo",
       pt: "Single",
       sv: "Singel",
       ru: "\u0421\u0438\u043D\u0433\u043B"
@@ -59482,6 +59593,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Track",
       de: "Titel",
       es: "Tema",
+      it: "Brano",
       pt: "Faixa",
       sv: "L\xE5t",
       ru: "\u0422\u0440\u0435\u043A"
@@ -59490,6 +59602,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Tracks",
       de: "Titel",
       es: "Temas",
+      it: "Brani",
       pt: "Faixas",
       ja: "\u30C8\u30E9\u30C3\u30AF",
       sv: "L\xE5tar",
@@ -59499,6 +59612,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Appearance",
       de: "Erscheinungsbild",
       es: "Apariencia",
+      it: "Aspetto",
       pt: "Apar\xEAncia",
       sv: "Uts\xE9ende",
       ru: "\u0412\u043D\u0435\u0448\u043D\u0438\u0439 \u0432\u0438\u0434"
@@ -59507,6 +59621,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Visual",
       de: "Design",
       es: "Estilo",
+      it: "Visualizzazione",
       pt: "Visual",
       sv: "Visuellt",
       ru: "\u041E\u0444\u043E\u0440\u043C\u043B\u0435\u043D\u0438\u0435"
@@ -59515,6 +59630,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Theme",
       de: "Farbschema",
       es: "Tema",
+      it: "Tema",
       pt: "Tema",
       sv: "Tema",
       ru: "\u0422\u0435\u043C\u0430"
@@ -59524,6 +59640,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Day",
         de: "Tag",
         es: "D\xEDa",
+        it: "Giorno",
         pt: "Dia",
         sv: "Dag",
         ru: "\u0421\u0432\u0435\u0442\u043B\u0430\u044F"
@@ -59532,6 +59649,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "When your system reports light theme",
         de: "Wenn dein System ein helles Farbschema hat",
         es: "Cuando tu dispositivo indica el aspecto claro",
+        it: "Quando il tuo sistema indica il tema chiaro",
         pt: "Quando o seu sistema indica tema claro",
         sv: "N\xE4r ditt system rapporterar ett ljust tema",
         ru: "\u041A\u043E\u0433\u0434\u0430 \u0432 \u0441\u0438\u0441\u0442\u0435\u043C\u0435 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0435\u0442\u0441\u044F \u0441\u0432\u0435\u0442\u043B\u0430\u044F \u0442\u0435\u043C\u0430"
@@ -59542,6 +59660,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Night",
         de: "Nacht",
         es: "Noche",
+        it: "Notte",
         pt: "Noite",
         sv: "Natt",
         ru: "\u041D\u043E\u0447\u043D\u0430\u044F"
@@ -59550,6 +59669,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "When your system reports dark theme",
         de: "Wenn dein System ein dunkles Farbschema hat",
         es: "Cuando tu dispositivo indica el aspecto oscuro",
+        it: "Quando il tuo sistema indica il tema scuro",
         pt: "Quando o seu sistema indica tema escuro",
         sv: "N\xE4r ditt system rapporterar ett m\xF6rk tema",
         ru: "\u041A\u043E\u0433\u0434\u0430 \u0432 \u0441\u0438\u0441\u0442\u0435\u043C\u0435 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0435\u0442\u0441\u044F \u0442\u0435\u043C\u043D\u0430\u044F \u0442\u0435\u043C\u0430"
@@ -59559,6 +59679,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Choose which theme preference to apply based on your system theme.",
       de: "W\xE4hle dein bevorzugtes Farbschema basierend auf deinem Systemdesign.",
       es: "Elige el aspecto a escoger basado en el aspecto de tu dispositivo.",
+      it: "Seleziona quali impostazioni del tema applicare in base al tuo tema di sistema.",
       pt: "Escolha qual prefer\xEAncia de tema aplicar com base no tema do seu sistema.",
       sv: "V\xE4lj f\xF6redraget tema att till\xE4mpa utg\xE5ende fr\xE5n ditt systemtema.",
       ru: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u0442\u0435\u043C\u0443, \u043A\u043E\u0442\u043E\u0440\u0430\u044F \u0431\u0443\u0434\u0435\u0442 \u043F\u0440\u0438\u043C\u0435\u043D\u044F\u0442\u044C\u0441\u044F \u0432 \u0437\u0430\u0432\u0438\u0441\u0438\u043C\u043E\u0441\u0442\u0438 \u043E\u0442 \u0441\u0438\u0441\u0442\u0435\u043C\u043D\u043E\u0439 \u0442\u0435\u043C\u044B."
@@ -59568,6 +59689,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Themes",
         de: "Farbschema",
         es: "Aspectos",
+        it: "Temi",
         pt: "Temas",
         sv: "Teman",
         ru: "\u0422\u0435\u043C\u044B"
@@ -59576,6 +59698,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Light",
         de: "Hell",
         es: "Claro",
+        it: "Chiaro",
         pt: "Claro",
         sv: "Ljus",
         ru: "\u0421\u0432\u0435\u0442\u043B\u0430\u044F"
@@ -59584,6 +59707,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Ink",
         de: "Tinte",
         es: "Tinta",
+        it: "Inchiostro",
         pt: "Tinta",
         sv: "Bl\xE4ck",
         ru: "\u0427\u0435\u0440\u043D\u0438\u043B\u0430"
@@ -59592,6 +59716,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Ash",
         de: "Asche",
         es: "Ceniza",
+        it: "Cenere",
         pt: "Cinza",
         sv: "Aska",
         ru: "\u041F\u0435\u043F\u0435\u043B"
@@ -59601,6 +59726,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Dark",
         de: "Dunkel",
         es: "Oscuro",
+        it: "Scuro",
         pt: "Escuro",
         sv: "M\xF6rk",
         ru: "\u0422\u0435\u043C\u043D\u0430\u044F"
@@ -59609,6 +59735,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Void",
         de: "Nacht",
         es: "Vac\xEDo",
+        it: "Vuoto",
         pt: "Vazio",
         sv: "Tomhet",
         ru: "\u041F\u0443\u0441\u0442\u043E\u0442\u0430"
@@ -59618,6 +59745,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Colours",
       de: "Farben",
       es: "Colores",
+      it: "Colori",
       pt: "Cores",
       sv: "F\xE4rger",
       ru: "\u0426\u0432\u0435\u0442\u0430"
@@ -59626,6 +59754,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Adaptive",
       de: "Adaptiv",
       es: "Adaptativo",
+      it: "Adattivo",
       pt: "Adaptativo",
       sv: "Adaptiv",
       ru: "\u0410\u0434\u0430\u043F\u0442\u0438\u0432\u043D\u044B\u0439"
@@ -59635,6 +59764,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Your theme preference will be either {day} or {night}, based on your system. ",
       de: "Dein bevorzugtes Farbschema wird entweder {day} oder {night} sein, basierend auf deinem System. ",
       es: "El aspecto elegido ser\xE1 {day] o {night}, bas\xE1ndose en tu dispositivo. ",
+      it: "Il tuo tema selezionato sar\xE0 {day} o {night}, in base al tuo tema di sistema. ",
       pt: "Sua prefer\xEAncia de tema ser\xE1 {day} ou {night}, com base no seu sistema. ",
       sv: "Ditt f\xF6redragna tema blir antigen {day} eller {night}, beroende p\xE5 ditt system. ",
       ru: "\u041F\u0440\u0435\u0434\u043F\u043E\u0447\u0442\u0438\u0442\u0435\u043B\u044C\u043D\u0430\u044F \u0442\u0435\u043C\u0430 \u0431\u0443\u0434\u0435\u0442 {day} \u0438\u043B\u0438 {night} \u0432 \u0437\u0430\u0432\u0438\u0441\u0438\u043C\u043E\u0441\u0442\u0438 \u043E\u0442 \u043D\u0430\u0441\u0442\u0440\u043E\u0435\u043A \u0432\u0430\u0448\u0435\u0439 \u0441\u0438\u0441\u0442\u0435\u043C\u044B. "
@@ -59643,6 +59773,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Change schedule",
       de: "Zeitplan \xE4ndern",
       es: "Cambiar horario",
+      it: "Cambia orari",
       pt: "Alterar cronograma",
       sv: "\xC4ndra schema",
       ru: "\u0418\u0437\u043C\u0435\u043D\u0438\u0442\u044C \u0440\u0430\u0441\u043F\u0438\u0441\u0430\u043D\u0438\u0435"
@@ -59652,6 +59783,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Use a context-based accent colour when",
         de: "Kontextbasierte Akzentfarbe verwenden, wenn",
         es: "Usar un color de acento basado en contexto al",
+        it: "Usa un colore di accento basato sul contesto quando",
         pt: "Usar uma cor de destaque baseada no contexto quando",
         sv: "Anv\xE4nd kontextbaserad accentf\xE4rg n\xE4r",
         ru: "\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u044C \u043A\u043E\u043D\u0442\u0435\u043A\u0441\u0442\u043D\u044B\u0439 \u0430\u043A\u0446\u0435\u043D\u0442\u043D\u044B\u0439 \u0446\u0432\u0435\u0442, \u043A\u043E\u0433\u0434\u0430"
@@ -59660,6 +59792,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Temporarily override your selected accent to match album art",
         de: "\xDCberschreibe vor\xFCbergehend deine ausgew\xE4hlte Akzentfarbe, damit sie zum Albumcover passt",
         es: "Substituye temporalmente el color de acento seleccionado para combinar con la car\xE1tula del \xE1lbum",
+        it: "Sovrascrivi temporaneamente il tuo colore di accento selezionato per abbinarsi con la copertina dell'album",
         pt: "Substituir temporariamente sua cor de destaque selecionada para combinar com a arte do \xE1lbum",
         sv: "\xC4ndra tillf\xE4lligt din valda accentf\xE4rg f\xF6r att matcha albumkonsten",
         ru: "\u0412\u0440\u0435\u043C\u0435\u043D\u043D\u043E \u0437\u0430\u043C\u0435\u043D\u044F\u0442\u044C \u0432\u044B\u0431\u0440\u0430\u043D\u043D\u044B\u0439 \u0430\u043A\u0446\u0435\u043D\u0442\u043D\u044B\u0439 \u0446\u0432\u0435\u0442 \u043D\u0430 \u0446\u0432\u0435\u0442 \u043E\u0431\u043B\u043E\u0436\u043A\u0438 \u0430\u043B\u044C\u0431\u043E\u043C\u0430"
@@ -59670,6 +59803,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Browsing album pages",
       de: "Albumseiten angesehen werden",
       es: "Navegar la p\xE1gina de un \xE1lbum",
+      it: "Navigo tra le pagine degli album",
       pt: "Navegando pelas p\xE1ginas de \xE1lbuns",
       sv: "Du \xE4r p\xE5 albumsidor",
       ru: "\u041F\u0440\u043E\u0441\u043C\u0430\u0442\u0440\u0438\u0432\u0430\u044E\u0442\u0441\u044F \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u044B \u0430\u043B\u044C\u0431\u043E\u043C\u043E\u0432"
@@ -59679,6 +59813,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Actively scrobbling a track",
       de: "ein Titel aktiv gescrobbelt wird",
       es: "Hacer scrobbling a un tema",
+      it: "Sto facendo lo scrobbling di un brano",
       pt: "Scrobblando uma faixa ativamente",
       sv: "Aktivt skrobblar en l\xE5t",
       ru: "\u041F\u0440\u043E\u0438\u0441\u0445\u043E\u0434\u0438\u0442 \u0430\u043A\u0442\u0438\u0432\u043D\u044B\u0439 \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u0438\u043D\u0433 \u0442\u0440\u0435\u043A\u0430"
@@ -59688,6 +59823,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Viewing any track",
       de: "ein beliebiger Titel angesehen wird",
       es: "Ver cualquier tema",
+      it: "Sto visualizzando un brano",
       pt: "Visualizando qualquer faixa",
       sv: "Visar en l\xE5t",
       ru: "\u041F\u0440\u043E\u0441\u043C\u0430\u0442\u0440\u0438\u0432\u0430\u0435\u0442\u0441\u044F \u043B\u044E\u0431\u043E\u0439 \u0442\u0440\u0435\u043A"
@@ -59696,6 +59832,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Configure",
       de: "Konfigurieren",
       es: "Configurar",
+      it: "Configura",
       pt: "Configurar",
       sv: "Konfigurera",
       ru: "\u041D\u0430\u0441\u0442\u0440\u043E\u0438\u0442\u044C"
@@ -59704,6 +59841,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Links",
       de: "Links",
       es: "V\xEDnculos",
+      it: "Collegamenti",
       pt: "Links",
       sv: "L\xE4nkar",
       ru: "\u0421\u0441\u044B\u043B\u043A\u0438"
@@ -59712,6 +59850,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Event",
       de: "Event",
       es: "Evento",
+      it: "Evento",
       pt: "Evento",
       sv: "Evenemang",
       ru: "\u0421\u043E\u0431\u044B\u0442\u0438\u0435"
@@ -59720,6 +59859,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Events",
       de: "Events",
       es: "Eventos",
+      it: "Eventi",
       pt: "Eventos",
       ja: "\u30A4\u30D9\u30F3\u30C8",
       sv: "Evenemang",
@@ -59729,6 +59869,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Line-up",
       de: "Line-up",
       es: "Cartel",
+      it: "Programmazione",
       pt: "Programa\xE7\xE3o",
       sv: "Spelschema",
       ru: "\u0423\u0447\u0430\u0441\u0442\u043D\u0438\u043A\u0438"
@@ -59737,6 +59878,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Attendance",
       de: "Teilnahme",
       es: "Asistencia",
+      it: "Partecipazione",
       pt: "Comparecimento",
       sv: "N\xE4rvarande",
       ru: "\u041F\u043E\u0441\u0435\u0449\u0430\u0435\u043C\u043E\u0441\u0442\u044C"
@@ -59745,6 +59887,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Top Badge",
       de: "Top-Abzeichen",
       es: "Emblema superior",
+      it: "Distintivo superiore",
       pt: "Emblema superior",
       sv: "Toppemblem",
       ru: "\u0422\u043E\u043F \u0437\u043D\u0430\u0447\u043E\u043A"
@@ -59753,6 +59896,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "General",
       de: "Allgemein",
       es: "General",
+      it: "Generale",
       pt: "Geral",
       sv: "Generellt",
       ru: "\u041E\u0431\u0449\u0438\u0435"
@@ -59761,6 +59905,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Interface",
       de: "Oberfl\xE4che",
       es: "Interfaz",
+      it: "Interfaccia",
       pt: "Interface",
       sv: "Interface",
       ru: "\u0418\u043D\u0442\u0435\u0440\u0444\u0435\u0439\u0441"
@@ -59769,6 +59914,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Music",
       de: "Musik",
       es: "M\xFAsica",
+      it: "Musica",
       pt: "M\xFAsica",
       ja: "\u97F3\u697D",
       sv: "Musik",
@@ -59777,6 +59923,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     smart_music_titles: {
       en: "Smart music titles",
       es: "T\xEDtulos inteligentes de m\xFAsica",
+      it: "Titoli intelligenti per la musica",
       pt: "T\xEDtulos de m\xFAsicas inteligentes",
       sv: "Smarta musiktitlar",
       ru: "\u0423\u043C\u043D\u044B\u0435 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u044F \u0442\u0440\u0435\u043A\u043E\u0432"
@@ -59785,6 +59932,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Playback",
       de: "Wiedergabe",
       es: "Reproducci\xF3n",
+      it: "Riproduzione",
       pt: "Reprodu\xE7\xE3o",
       sv: "Uppspelning",
       ru: "\u0412\u043E\u0441\u043F\u0440\u043E\u0438\u0437\u0432\u0435\u0434\u0435\u043D\u0438\u0435"
@@ -59793,6 +59941,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Profile",
       de: "Profil",
       es: "Perfil",
+      it: "Profilo",
       pt: "Perfil",
       pl: "Profil",
       sv: "Profil",
@@ -59801,6 +59950,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     view_profile: {
       en: "View profile",
       de: "Profil anzeigen",
+      it: "Visualizza profilo",
       es: "Ver perfil",
       pt: "Ver perfil",
       sv: "Visa profil",
@@ -59810,6 +59960,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Edit profile",
       de: "Profil bearbeiten",
       es: "Editar perfil",
+      it: "Modifica profilo",
       pt: "Editar perfil",
       sv: "Redigera profil",
       ru: "\u0420\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u043F\u0440\u043E\u0444\u0438\u043B\u044C"
@@ -59818,6 +59969,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Current season",
       de: "Aktuelle Saison",
       es: "Temporada actual",
+      it: "Stagione corrente",
       pt: "Esta\xE7\xE3o atual",
       sv: "Nuvarande \xE5rstid",
       ru: "\u0422\u0435\u043A\u0443\u0449\u0438\u0439 \u0441\u0435\u0437\u043E\u043D"
@@ -59828,6 +59980,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Seasonal",
         de: "Saisonal",
         es: "Temporadas",
+        it: "Stagione",
         pt: "Esta\xE7\xF5es",
         sv: "\xC5rstider",
         ru: "\u0421\u0435\u0437\u043E\u043D\u044B"
@@ -59837,6 +59990,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           en: "None active",
           de: "Keine aktiv",
           es: "Ninguna activa",
+          it: "Nessuna attiva",
           pt: "Nenhuma ativa",
           sv: "Ingen aktiv",
           ru: "\u041D\u0435\u0442 \u0430\u043A\u0442\u0438\u0432\u043D\u044B\u0445"
@@ -59845,6 +59999,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           en: "Easter",
           de: "Ostern",
           es: "Pascua",
+          it: "Pasqua",
           pt: "P\xE1scoa",
           sv: "P\xE5sk",
           ru: "\u041F\u0430\u0441\u0445\u0430"
@@ -59853,6 +60008,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           en: "Pride",
           de: "Pride",
           es: "Orgullo",
+          it: "Pride",
           pt: "Orgulho",
           sv: "Pride",
           ru: "\u041F\u0440\u0430\u0439\u0434\u0430"
@@ -59861,6 +60017,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           en: "Halloween",
           de: "Halloween",
           es: "Halloween",
+          it: "Halloween",
           pt: "Dia das Bruxas",
           sv: "Halloween",
           ru: "\u0425\u044D\u043B\u043B\u043E\u0443\u0438\u043D"
@@ -59869,6 +60026,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           en: "Autumn",
           de: "Herbst",
           es: "Oto\xF1o",
+          it: "Autunno",
           pt: "Outono",
           sv: "H\xF6st",
           ru: "\u041E\u0441\u0435\u043D\u044C"
@@ -59876,12 +60034,14 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         fall: {
           en: "Winter",
           es: "Invierno",
+          it: "Inverno",
           ru: "\u0417\u0438\u043C\u0430"
         },
         christmas: {
           en: "Christmas",
           de: "Weihnachten",
           es: "Navidad",
+          it: "Natale",
           pt: "Natal",
           sv: "Jul",
           ru: "\u0420\u043E\u0436\u0434\u0435\u0441\u0442\u0432\u043E"
@@ -59890,6 +60050,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           en: "New Years",
           de: "Neujahr",
           es: "A\xF1o Nuevo",
+          it: "Anno nuovo",
           pt: "Ano Novo",
           sv: "Ny\xE5r",
           ru: "\u041D\u043E\u0432\u044B\u0439 \u0433\u043E\u0434"
@@ -59898,6 +60059,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       notice: {
         en: "Open the live counter",
         es: "Abre el contador en vivo",
+        it: "Apri il contatore in tempo reale",
         pt: "Abrir o contador ao vivo",
         sv: "\xD6ppna live-nedr\xE4kningen",
         ru: "\u041E\u0442\u043A\u0440\u044B\u0442\u044C \u0436\u0438\u0432\u043E\u0439 \u0441\u0447\u0435\u0442\u0447\u0438\u043A"
@@ -59905,6 +60067,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       live: {
         en: "Counter is updating live",
         es: "El contador est\xE1 siendo actualizado en tiempo real",
+        it: "Il contatore si sta aggiornando in tempo reale",
         pt: "O contador est\xE1 sendo atualizado em tempo real",
         sv: "Nedr\xE4kningen uppdateras live",
         ru: "\u041E\u0442\u043A\u0440\u044B\u0442\u044C \u0441\u0447\u0435\u0442\u0447\u0438\u043A \u0432 \u0440\u0435\u0430\u043B\u044C\u043D\u043E\u043C \u0432\u0440\u0435\u043C\u0435\u043D\u0438"
@@ -59915,6 +60078,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           // reference to https://open.spotify.com/track/7yogx3TwxGwSxO2QITsT2q
           en: "A Nonsense Christmas",
           es: "Una Navidad Sin Sentido",
+          it: "Un Natale senza senso",
           pt: "Um Natal Sem Sentido",
           sv: "A Nonsense Christmas",
           ru: "\u0411\u0435\u0441\u0441\u043C\u044B\u0441\u043B\u0435\u043D\u043D\u043E\u0435 \u0420\u043E\u0436\u0434\u0435\u0441\u0442\u0432\u043E"
@@ -59923,6 +60087,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           // reference to https://open.spotify.com/album/7EisdwWcodpmHxgpGVE5Pg
           en: "fruitcake",
           es: "pastel de fruta",
+          it: "torta di frutta",
           sv: "fruitcake",
           pt: "bolo de frutas",
           ru: "\u0444\u0440\u0443\u043A\u0442\u043E\u0432\u044B\u0439 \u043A\u0435\u043A\u0441"
@@ -59930,6 +60095,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         mistletoe: {
           en: "Mistletoe",
           es: "Mu\xE9rdago",
+          it: "Vischio",
           sv: "Mistel",
           pt: "Visco",
           ru: "\u041E\u043C\u0435\u043B\u0430"
@@ -59937,6 +60103,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         festival: {
           en: "Christmas Eve",
           es: "V\xEDspera de Navidad",
+          it: "Vigilia di Natale",
           sv: "Julafton",
           pt: "V\xE9spera de Natal",
           ru: "\u0421\u043E\u0447\u0435\u043B\u044C\u043D\u0438\u043A"
@@ -59947,6 +60114,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "New Season!",
       de: "Neue Jahreszeit!",
       es: "\xA1Nueva Temporada!",
+      it: "Nuova stagione!",
       pt: "Nova Esta\xE7\xE3o!",
       sv: "Ny \xE5rstid!",
       ru: "\u041D\u043E\u0432\u044B\u0439 \u0441\u0435\u0437\u043E\u043D!"
@@ -59957,12 +60125,14 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       // shouldn't the "in" and "days" be outside the parentheses? -soleil
       en: "{v} ends {time}",
       es: "{v} termina {time}",
+      it: "{v} termina {time}",
       ru: "{v} \u0437\u0430\u043A\u043E\u043D\u0447\u0438\u0442\u0441\u044F {time}"
     },
     seasonal_timeline: {
       en: "Seasonal timeline",
       de: "Saisonaler Zeitstrahl",
       es: "Calendario de temporada",
+      it: "Calendario delle stagioni",
       pt: "Linha do tempo sazonal",
       sv: "Tidslinje f\xF6r \xE5rstider",
       ru: "\u0421\u0435\u0437\u043E\u043D\u043D\u0430\u044F \u0448\u043A\u0430\u043B\u0430 \u0432\u0440\u0435\u043C\u0435\u043D\u0438"
@@ -59973,6 +60143,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Automatically adapt to seasonal events",
         de: "Automatisch an saisonale Events anpassen",
         es: "Adaptar autom\xE1ticamente a las temporadas",
+        it: "Adatta automaticamente alle stagioni",
         pt: "Adaptar automaticamente a eventos sazonais",
         sv: "Adaptera automatiskt f\xF6r \xE5rstider",
         ru: "\u0410\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u0435\u0441\u043A\u0438 \u0430\u0434\u0430\u043F\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C\u0441\u044F \u043A \u0441\u0435\u0437\u043E\u043D\u043D\u044B\u043C \u0441\u043E\u0431\u044B\u0442\u0438\u044F\u043C"
@@ -59981,6 +60152,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Adapts the default colour, iconset, and shows particles depending on the season",
         de: "Passt die Standardfarbe und das Iconset an und zeigt Partikel entsprechend der Jahreszeit an",
         es: "Adapta el color, los \xEDconos, y muestra part\xEDculas dependiendo de la temporada",
+        it: "Adatta il colore e le icone standard, e mostra delle particelle in base alla stagione",
         pt: "Adapta a cor padr\xE3o, \xEDcones e exibe part\xEDculas dependendo da sazonalidade",
         sv: "Adaptera f\xE4rg, ikoner, och visa partiklar beroende p\xE5 \xE5rstiden",
         ru: "\u0410\u0434\u0430\u043F\u0442\u0438\u0440\u0443\u0435\u0442 \u0446\u0432\u0435\u0442 \u043F\u043E \u0443\u043C\u043E\u043B\u0447\u0430\u043D\u0438\u044E, \u043D\u0430\u0431\u043E\u0440 \u0437\u043D\u0430\u0447\u043A\u043E\u0432 \u0438 \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0435\u0442 \u0447\u0430\u0441\u0442\u0438\u0446\u044B \u0432 \u0437\u0430\u0432\u0438\u0441\u0438\u043C\u043E\u0441\u0442\u0438 \u043E\u0442 \u0441\u0435\u0437\u043E\u043D\u0430"
@@ -59991,6 +60163,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Reduce quality of particles",
         de: "Partikelqualit\xE4t reduzieren",
         es: "Reducir calidad de las part\xEDculas",
+        it: "Riduci la qualit\xE0 delle particelle",
         pt: "Reduzir qualidade das part\xEDculas",
         sv: "S\xE4nk partiklarnas kvalitet",
         ru: "\u0421\u043D\u0438\u0437\u0438\u0442\u044C \u043A\u0430\u0447\u0435\u0441\u0442\u0432\u043E \u0447\u0430\u0441\u0442\u0438\u0446"
@@ -59999,6 +60172,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Snow particles use a drop-shadow glow for aesthetics with the added processing cost",
         de: "Schneepartikel verwenden f\xFCr die \xC4sthetik einen Glanzeffekt \u2013 erfordert zus\xE4tzliche Rechenleistung",
         es: "Las part\xEDculas de nieve usan un brillo de sombra paralela para mayor est\xE9tica, con costo adicional de procesamiento",
+        it: "Le particelle di neve brillano utilizzando un effetto ad ombra per un'estetica migliore, richiedendo pi\xF9 risorse",
         pt: "As part\xEDculas de neve usam um efeito de brilho com sombra projetada para est\xE9tica, com o custo adicional de processamento",
         sv: "Sn\xF6partiklarna anv\xE4nder en gl\xF6deffekt f\xF6r estetiska sj\xE4l, med lite extra datorbelastning",
         ru: "\u0421\u043D\u0435\u0436\u043D\u044B\u0435 \u0447\u0430\u0441\u0442\u0438\u0446\u044B \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u044E\u0442 \u044D\u0444\u0444\u0435\u043A\u0442 \u0441\u0432\u0435\u0447\u0435\u043D\u0438\u044F \u0434\u043B\u044F \u044D\u0441\u0442\u0435\u0442\u0438\u043A\u0438 \u0446\u0435\u043D\u043E\u0439 \u0434\u043E\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0445 \u0437\u0430\u0442\u0440\u0430\u0442 \u0440\u0435\u0441\u0443\u0440\u0441\u043E\u0432"
@@ -60008,6 +60182,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       name: {
         en: "Display additional seasonal effects",
         es: "Mostrar efectos de temporada adicionales",
+        it: "Mostra effetti stagionali aggiuntivi",
         pt: "Exibir efeitos sazonais adicionais",
         sv: "Visa extra \xE5rstidseffekter",
         ru: "\u041E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0442\u044C \u0434\u043E\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0435 \u0441\u0435\u0437\u043E\u043D\u043D\u044B\u0435 \u044D\u0444\u0444\u0435\u043A\u0442\u044B"
@@ -60015,6 +60190,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       body: {
         en: "During winter seasons this applies a coat of ice to panels, otherwise mainly gradients",
         es: "Durante las temporadas invernales, aplica una capa de hielo a los paneles, de lo contrario, aplica principalmente gradientes",
+        it: "Durante le stagioni invernali, applica un mantello di ghiacchi ai pannelli, altrimenti principalmente gradienti",
         pt: "Durante o inverno, isso aplica uma camada de gelo aos pain\xE9is; fora dessa \xE9poca, aplica principalmente gradientes",
         sv: "Under vinters\xE4songen l\xE4ggs ett lager is p\xE5 paneler, annars mest bildgradienter",
         ru: "\u041E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0442\u044C \u0434\u043E\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0435 \u0441\u0435\u0437\u043E\u043D\u043D\u044B\u0435 \u044D\u0444\u0444\u0435\u043A\u0442\u044B"
@@ -60024,6 +60200,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Seasonal events are ran in your timezone, which we calculated as {offset}",
       de: "Saisonale Events werden in deiner Zeitzone ausgef\xFChrt, die wir als {offset} berechnet haben",
       es: "Las temporadas son aplicadas en tu zona horaria, que calculamos como {offset}",
+      it: "Gli eventi stagionali sono attivati in base al tuo fuso orario, che abbiamo calcolato come {offset}",
       pt: "Eventos sazonais s\xE3o realizados em seu fuso hor\xE1rio, que calculamos como {offset}",
       sv: "\xC5rstidsevenemang h\xE5lls i din tidszon, som vi r\xE4knade ut vara {offset}",
       ru: "\u0421\u0435\u0437\u043E\u043D\u043D\u044B\u0435 \u0441\u043E\u0431\u044B\u0442\u0438\u044F \u043F\u0440\u043E\u0432\u043E\u0434\u044F\u0442\u0441\u044F \u043F\u043E \u0432\u0430\u0448\u0435\u043C\u0443 \u0447\u0430\u0441\u043E\u0432\u043E\u043C\u0443 \u043F\u043E\u044F\u0441\u0443, \u043A\u043E\u0442\u043E\u0440\u044B\u0439 \u043C\u044B \u043E\u043F\u0440\u0435\u0434\u0435\u043B\u0438\u043B\u0438 \u043A\u0430\u043A {offset}"
@@ -60033,6 +60210,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Calculated offset based on timezone",
       de: "Berechnete Verschiebung basierend auf der Zeitzone",
       es: "Diferencia calculada con base en tu zona horaria",
+      it: "Differenza calcolata in base al fuso orario",
       pt: "Offset calculado com base no fuso hor\xE1rio",
       sv: "F\xF6rskjutning kalkylerats fr\xE5n tidszon",
       ru: "\u0420\u0430\u0441\u0441\u0447\u0438\u0442\u0430\u043D\u043D\u043E\u0435 \u0441\u043C\u0435\u0449\u0435\u043D\u0438\u0435 \u043D\u0430 \u043E\u0441\u043D\u043E\u0432\u0435 \u0447\u0430\u0441\u043E\u0432\u043E\u0433\u043E \u043F\u043E\u044F\u0441\u0430"
@@ -60042,6 +60220,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       // start date: 1 day ago
       en: "Start date",
       es: "Fecha de inicio",
+      it: "Data di inizio",
       pt: "Data de in\xEDcio",
       sv: "Startdatum",
       ru: "\u0414\u0430\u0442\u0430 \u043D\u0430\u0447\u0430\u043B\u0430"
@@ -60051,6 +60230,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       // next season: in 3 days
       en: "Next season",
       es: "Pr\xF3xima temporada",
+      it: "Prossima stagione",
       pt: "Pr\xF3xima esta\xE7\xE3o",
       sv: "N\xE4sta \xE5rstid",
       ru: "\u0421\u043B\u0435\u0434\u0443\u044E\u0449\u0438\u0439 \u0441\u0435\u0437\u043E\u043D"
@@ -60060,6 +60240,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       // end date: in 2 days
       en: "End date",
       es: "Fecha de finalizaci\xF3n",
+      it: "Data di fine",
       pt: "Dia de t\xE9rmino",
       sv: "Slutdatum",
       ru: "\u0414\u0430\u0442\u0430 \u043E\u043A\u043E\u043D\u0447\u0430\u043D\u0438\u044F"
@@ -60068,6 +60249,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Text",
       de: "Text",
       es: "Texto",
+      it: "Testo",
       pt: "Texto",
       sv: "Text",
       ru: "\u0422\u0435\u043A\u0441\u0442"
@@ -60076,6 +60258,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Accessibility",
       de: "Barrierefreiheit",
       es: "Accesibilidad",
+      it: "Accessibilit\xE0",
       pt: "Acessibilidade",
       sv: "Tillg\xE4ngligthet",
       ru: "\u0414\u043E\u0441\u0442\u0443\u043F\u043D\u043E\u0441\u0442\u044C"
@@ -60084,6 +60267,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Advanced",
       de: "Fortgeschritten",
       es: "Avanzado",
+      it: "Avanzate",
       pt: "Avan\xE7ado",
       sv: "Advancerat",
       ru: "\u0414\u043E\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C\u043D\u043E"
@@ -60092,6 +60276,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Suggested",
       de: "Empfohlen",
       es: "Recomendado",
+      it: "Suggerimenti",
       pt: "Sugest\xF5es",
       sv: "F\xF6rslag",
       ru: "\u0420\u0435\u043A\u043E\u043C\u0435\u043D\u0434\u043E\u0432\u0430\u043D\u043D\u044B\u0435"
@@ -60100,6 +60285,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Releases",
       de: "Ver\xF6ffentlichungen",
       es: "Lanzamientos",
+      it: "Pubblicazioni",
       pt: "Lan\xE7amentos",
       sv: "Skivsl\xE4pp",
       ru: "\u0420\u0435\u043B\u0438\u0437\u044B"
@@ -60107,17 +60293,20 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     no_releases_found: {
       en: "No releases found here",
       es: "No se encontraron nuevos lanzamientos",
+      it: "Nessuna pubblicazione trovata",
       ru: "\u0417\u0434\u0435\u0441\u044C \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D\u043E \u043D\u0438 \u043E\u0434\u043D\u043E\u0433\u043E \u0440\u0435\u043B\u0438\u0437\u0430"
     },
     tracklist_source: {
       name: {
         en: "Preferred tracklist source",
         es: "Fuente preferida para la lista de temas",
+        it: "Fonte preferita per la lista dei brani",
         ru: "\u041F\u0440\u0435\u0434\u043F\u043E\u0447\u0438\u0442\u0430\u0435\u043C\u044B\u0439 \u0438\u0441\u0442\u043E\u0447\u043D\u0438\u043A \u0442\u0440\u0435\u043A\u043B\u0438\u0441\u0442\u0430"
       },
       body: {
         en: "Choose which service to display for album tracklists",
         es: "Elige cu\xE1l servicio mostrar para la lista de temas",
+        it: "Seleziona che servizio mostrare per la lista dei brani",
         ru: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u0441\u0435\u0440\u0432\u0438\u0441, \u043A\u043E\u0442\u043E\u0440\u044B\u0439 \u0431\u0443\u0434\u0435\u0442 \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0442\u044C\u0441\u044F \u0434\u043B\u044F \u0442\u0440\u0435\u043A\u043B\u0438\u0441\u0442\u043E\u0432 \u0430\u043B\u044C\u0431\u043E\u043C\u043E\u0432"
       }
     },
@@ -60125,6 +60314,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Bookmarks",
       de: "Lesezeichen",
       es: "Marcadores",
+      it: "Segnalibri",
       pt: "Marcadores",
       ja: "\u30D6\u30C3\u30AF\u30DE\u30FC\u30AF",
       sv: "Bokm\xE4rken",
@@ -60134,6 +60324,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Charts",
       de: "Charts",
       es: "Listas",
+      it: "Classifiche",
       pt: "Paradas",
       ja: "\u30C1\u30E3\u30FC\u30C8",
       sv: "Topplistor",
@@ -60142,6 +60333,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     view_the_charts: {
       en: "View the charts",
       es: "Ver las listas",
+      it: "Visualizza le classifiche",
       pt: "Ver as paradas",
       ru: "\u041F\u043E\u0441\u043C\u043E\u0442\u0440\u0435\u0442\u044C \u0447\u0430\u0440\u0442\u044B"
     },
@@ -60149,6 +60341,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Welcome back {user}!",
       de: "Willkommen z\xFCruck, {user}!",
       es: "\xA1Bienvenido, {user}!",
+      it: "Bentornato, {user}!",
       pt: "Bem-vindo(a) {user}!",
       sv: "V\xE4lkommen tillbaka, {user}!",
       ru: "\u0421 \u0432\u043E\u0437\u0432\u0440\u0430\u0449\u0435\u043D\u0438\u0435\u043C, {user}!"
@@ -60158,6 +60351,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Good morning",
       de: "Guten Morgen",
       es: "Buenos d\xEDas",
+      it: "Buongiorno",
       pt: "Bom dia",
       sv: "God morgon",
       ru: "\u0414\u043E\u0431\u0440\u043E\u0435 \u0443\u0442\u0440\u043E"
@@ -60166,6 +60360,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Good afternoon",
       de: "Guten Nachmittag",
       es: "Buenas tardes",
+      it: "Buon pomeriggio",
       pt: "Boa tarde",
       sv: "God eftermiddag",
       ru: "\u0414\u043E\u0431\u0440\u044B\u0439 \u0434\u0435\u043D\u044C"
@@ -60174,6 +60369,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Good evening",
       de: "Guten Abend",
       es: "Buenas noches",
+      it: "Buonasera",
       pt: "Boa noite",
       sv: "God kv\xE4ll",
       ru: "\u0414\u043E\u0431\u0440\u044B\u0439 \u0432\u0435\u0447\u0435\u0440"
@@ -60182,6 +60378,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Goodnight",
       de: "Gute Nacht",
       es: "Buenas noches",
+      it: "Buonanotte",
       pt: "Boa noite",
       sv: "God natt",
       ru: "\u0421\u043F\u043E\u043A\u043E\u0439\u043D\u043E\u0439 \u043D\u043E\u0447\u0438"
@@ -60190,6 +60387,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "bleh Settings",
       de: "bleh-Einstellungen",
       es: "Configuaci\xF3n de bleh",
+      it: "Impostazioni di bleh",
       pt: "Configura\xE7\xF5es do bleh",
       sv: "bleh-inst\xE4llningar",
       ru: "\u041D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438 bleh"
@@ -60198,6 +60396,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Setup",
       de: "Einrichtung",
       es: "Instalaci\xF3n",
+      it: "Installazione",
       pt: "Instala\xE7\xE3o",
       sv: "Installation",
       ru: "\u041D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0430"
@@ -60206,6 +60405,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Import",
       de: "Importieren",
       es: "Importar",
+      it: "Importa",
       pt: "Importar",
       pl: "Importuj",
       sv: "Importera",
@@ -60214,12 +60414,14 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     import_failed: {
       en: "Import failed",
       es: "Error al importar",
+      it: "Importazione non riuscita",
       pt: "Falha na importa\xE7\xE3o",
       sv: "Importering misslyckades",
       ru: "\u0421\u0431\u043E\u0439 \u0438\u043C\u043F\u043E\u0440\u0442\u0430",
       notice: {
         en: "The settings you attempted to import failed to parse, no changes were made.",
         es: "La configuraci\xF3n que intentaste importar fall\xF3 al procesarse, no se realizaron cambios.",
+        it: "Non \xE8 stato possibile processare le impostazioni che hai cercato di importare, non sono state effettuate modifiche.",
         pt: "As configura\xE7\xF5es que voc\xEA tentou importar n\xE3o puderam ser processadas; nenhuma altera\xE7\xE3o foi feita.",
         sv: "Inst\xE4llningarna du f\xF6rs\xF6kte importera kunde inte l\xE4sas, inga \xE4ndringar har gjorts.",
         ru: "\u041D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438, \u043A\u043E\u0442\u043E\u0440\u044B\u0435 \u0432\u044B \u043F\u044B\u0442\u0430\u043B\u0438\u0441\u044C \u0438\u043C\u043F\u043E\u0440\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C, \u043D\u0435 \u0443\u0434\u0430\u043B\u043E\u0441\u044C \u043E\u0431\u0440\u0430\u0431\u043E\u0442\u0430\u0442\u044C. \u0418\u0437\u043C\u0435\u043D\u0435\u043D\u0438\u044F \u043D\u0435 \u0431\u044B\u043B\u0438 \u0432\u043D\u0435\u0441\u0435\u043D\u044B."
@@ -60229,6 +60431,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Import settings",
       de: "Einstellungen importieren",
       es: "Importar configuraci\xF3n",
+      it: "Importa configurazione",
       pt: "Importar configura\xE7\xF5es",
       sv: "Importera inst\xE4llningar",
       ru: "\u0418\u043C\u043F\u043E\u0440\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438"
@@ -60237,6 +60440,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "This is a permanent action, beware of where you are copying from",
       de: "Dieser Vorgang ist unwiderruflich \u2013 sei vorsichtig, von wo du kopierst",
       es: "Esta es una acci\xF3n permanente, ten cuidado del lugar de donde copias",
+      it: "Questa \xE8 un'azione permanente, fai attenzione da dove stai copiando",
       pt: "Esta \xE9 uma a\xE7\xE3o permanente, cuidado com o lugar de onde voc\xEA est\xE1 copiando",
       sv: "Det h\xE4r \xE4r permanent, oberoende av vart du kopierar ifr\xE5n",
       ru: "\u042D\u0442\u043E \u0434\u0435\u0439\u0441\u0442\u0432\u0438\u0435 \u043D\u0435\u043E\u0431\u0440\u0430\u0442\u0438\u043C\u043E, \u0431\u0443\u0434\u044C\u0442\u0435 \u0432\u043D\u0438\u043C\u0430\u0442\u0435\u043B\u044C\u043D\u044B \u043A \u0438\u0441\u0442\u043E\u0447\u043D\u0438\u043A\u0443 \u043A\u043E\u043F\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u044F"
@@ -60245,6 +60449,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Export",
       de: "Exportieren",
       es: "Exportar",
+      it: "Esporta",
       pt: "Exportar",
       pl: "Eksportuj",
       sv: "Exportera",
@@ -60254,6 +60459,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Export settings",
       de: "Einstellungen exportieren",
       es: "Exportar configuraci\xF3n",
+      it: "Esporta configurazione",
       pt: "Exportar configura\xE7\xF5es",
       sv: "Exportera inst\xE4llningar",
       ru: "\u042D\u043A\u0441\u043F\u043E\u0440\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438"
@@ -60262,6 +60468,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Reset",
       de: "Zur\xFCcksetzen",
       es: "Restablecer",
+      it: "Ripristina",
       pt: "Restaurar",
       pl: "Resetuj",
       sv: "\xC5terst\xE4ll",
@@ -60271,6 +60478,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Reset settings to default",
       de: "Standardeinstellungen wiederherstellen",
       es: "Restablecer configuraci\xF3n predeterminada",
+      it: "Ripristina le impostazioni ai valori predefiniti",
       pt: "Restaurar as configura\xE7\xF5es para o padr\xE3o",
       sv: "\xC5terst\xE4ll alla inst\xE4llningar till det vanliga",
       ru: "\u0421\u0431\u0440\u043E\u0441\u0438\u0442\u044C \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438 \u0434\u043E \u0437\u043D\u0430\u0447\u0435\u043D\u0438\u0439 \u043F\u043E \u0443\u043C\u043E\u043B\u0447\u0430\u043D\u0438\u044E"
@@ -60279,6 +60487,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Your settings will be permanently reset, are you sure?",
       de: "Deine Einstellungen werden unwiderruflich zur\xFCckgesetzt, bist du sicher?",
       es: "Tu configuraci\xF3n ser\xE1 restablecida de forma permanente, \xBFest\xE1s seguro?",
+      it: "Le tue impostazioni saranno ripristinate permanentemente, ne sei sicuro?",
       pt: "Sua configura\xE7\xE3o vai ser permanentemente restaurada ao padr\xE3o, voc\xEA tem certeza?",
       sv: "\xC4r du s\xE4ker p\xE5 att du vill \xE5terst\xE4lla alla inst\xE4llningar? Det \xE4r permanent.",
       ru: "\u0412\u0430\u0448\u0438 \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438 \u0431\u0443\u0434\u0443\u0442 \u0431\u0435\u0437\u0432\u043E\u0437\u0432\u0440\u0430\u0442\u043D\u043E \u0441\u0431\u0440\u043E\u0448\u0435\u043D\u044B, \u0432\u044B \u0443\u0432\u0435\u0440\u0435\u043D\u044B?"
@@ -60287,6 +60496,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Reset item to default",
       de: "Element auf Standard zur\xFCcksetzen",
       es: "Restablecer \xEDtem por defecto",
+      it: "Opzione ripristinata alle impostazioni predefinite",
       pt: "Restaurar itens para o padr\xE3o",
       sv: "\xC5terst\xE4ll till standard",
       ru: "\u0421\u0431\u0440\u043E\u0441\u0438\u0442\u044C \u044D\u043B\u0435\u043C\u0435\u043D\u0442 \u0434\u043E \u0437\u043D\u0430\u0447\u0435\u043D\u0438\u044F \u043F\u043E \u0443\u043C\u043E\u043B\u0447\u0430\u043D\u0438\u044E"
@@ -60295,6 +60505,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Make a backup",
       de: "Backup erstellen",
       es: "Hacer un respaldo",
+      it: "Fai un backup",
       pt: "Fa\xE7a um backup",
       sv: "Skapa en backup",
       ru: "\u0421\u043E\u0437\u0434\u0430\u0442\u044C \u0440\u0435\u0437\u0435\u0440\u0432\u043D\u0443\u044E \u043A\u043E\u043F\u0438\u044E"
@@ -60303,6 +60514,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "News",
       de: "Neuigkeiten",
       es: "Noticias",
+      it: "Novit\xE0",
       pt: "Not\xEDcias",
       sv: "Nytt",
       ru: "\u041D\u043E\u0432\u043E\u0441\u0442\u0438",
@@ -60310,6 +60522,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         major: {
           en: "Major release",
           es: "Lanzamiento principal",
+          it: "Aggiornamento importante",
+          // should be 'maggiore' as literal translation of 'major', but it sounds awful so falling back to 'important' ~cuto
           pt: "Lan\xE7amento principal",
           sv: "St\xF6rre utg\xE5va",
           ru: "\u041A\u0440\u0443\u043F\u043D\u044B\u0439 \u0440\u0435\u043B\u0438\u0437"
@@ -60317,6 +60531,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         minor: {
           en: "Minor release",
           es: "Lanzamiento secundario",
+          it: "Aggiornamento secondario",
           sv: "Mindre utg\xE5va",
           pt: "Lan\xE7amento secundario",
           ru: "\u041C\u0435\u043B\u043A\u0438\u0439 \u0440\u0435\u043B\u0438\u0437"
@@ -60327,6 +60542,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "News from {user}",
       de: "Neuigkeiten von {user}",
       es: "Noticias de {user}",
+      it: "Novit\xE0 da {user}",
       pt: "Not\xEDcias de {user}",
       sv: "Nytt fr\xE5n {user}",
       ru: "\u041D\u043E\u0432\u043E\u0441\u0442\u0438 \u043E\u0442 {user}"
@@ -60335,6 +60551,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Default",
       de: "Standard",
       es: "Por defecto",
+      it: "Predefinito",
       pt: "Padr\xE3o",
       sv: "Standard",
       ru: "\u041F\u043E \u0443\u043C\u043E\u043B\u0447\u0430\u043D\u0438\u044E"
@@ -60343,6 +60560,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Avatar",
       de: "Profilbild",
       es: "Avatar",
+      it: "Foto profilo",
       pt: "Foto de perfil",
       sv: "Profilbild",
       ru: "\u0410\u0432\u0430\u0442\u0430\u0440"
@@ -60351,6 +60569,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Customise",
       de: "Anpassen",
       es: "Customizar",
+      it: "Personalizza",
       pt: "Customizar",
       sv: "Anpassa",
       ru: "\u041D\u0430\u0441\u0442\u0440\u043E\u0438\u0442\u044C"
@@ -60359,6 +60578,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Convert",
       de: "Umwandeln",
       es: "Convertir",
+      it: "Converti",
       pt: "Converter",
       sv: "Konvertera",
       ru: "\u041A\u043E\u043D\u0432\u0435\u0440\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C"
@@ -60367,6 +60587,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Convert colour",
       de: "Farbe umwandeln",
       es: "Convertir color",
+      it: "Converti colore",
       pt: "Converter cor",
       sv: "Konvertera f\xE4rg",
       ru: "\u041A\u043E\u043D\u0432\u0435\u0440\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u0446\u0432\u0435\u0442"
@@ -60375,6 +60596,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Fonts",
       de: "Schriftart",
       es: "Fuentes",
+      it: "Font",
       pt: "Fontes",
       sv: "Typsnitt",
       ru: "\u0428\u0440\u0438\u0444\u0442\u044B"
@@ -60383,6 +60605,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Accent colour",
       de: "Akzentfarbe",
       es: "Color de acento",
+      it: "Colore di accento",
       pt: "Cor de destaque",
       pl: "Kolor akcentu (hue)",
       sv: "Accentf\xE4rg",
@@ -60392,6 +60615,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Vibrancy",
       de: "S\xE4ttigung",
       es: "Intensidad",
+      it: "Vivacit\xE0",
       pt: "Vivacidade",
       pl: "Nasycenie (saturation)",
       sv: "F\xE4rgm\xE4ttnad",
@@ -60401,6 +60625,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Lightness",
       de: "Helligkeit",
       es: "Claridad",
+      it: "Luminosit\xE0",
       pt: "Claridade",
       pl: "Jasno\u015B\u0107 (lightness)",
       sv: "Ljushet",
@@ -60411,6 +60636,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Enable solarium glass effects",
         de: "Solarium-Glaseffekte aktivieren",
         es: "Activar efectos de vidrio de sol\xE1rium",
+        it: "Attiva effetti di vetro del solario",
         pt: "Ativar efeitos de vidro Solarium",
         sv: "Aktivera solariumsglaseffekter",
         ru: "\u0412\u043A\u043B\u044E\u0447\u0438\u0442\u044C \u044D\u0444\u0444\u0435\u043A\u0442 \u043C\u0430\u0442\u043E\u0432\u043E\u0433\u043E \u0441\u0442\u0435\u043A\u043B\u0430 Solarium"
@@ -60419,6 +60645,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Apply a see-through glassy material to many surfaces, which may degrade performance on some devices",
         de: "F\xFCgt vielen Oberfl\xE4chen ein durchsichtiges, glasartiges Material hinzu \u2013 kann die Leistung auf einigen Ger\xE4ten beeintr\xE4chtigen",
         es: "Aplica un material vidrioso y transl\xFAcido a varias superficies, que puede reducir el rendimiento en algunos dispositivos",
+        it: "Applica un materiale vetrato traslucido a molte superfici, che potrebbe degradare le prestazioni su alcuni dispositivi",
         pt: "Aplicar um material transl\xFAcido e vidrado a v\xE1rias superf\xEDcies, o que pode reduzir o desempenho em alguns dispositivos",
         sv: "L\xE4g till ett genomskinligt glasliknande material till m\xE5nga ytor, som kan degradera prestanda p\xE5 vissa enheter",
         ru: "\u041F\u0440\u0438\u043C\u0435\u043D\u044F\u0435\u0442 \u043F\u043E\u043B\u0443\u043F\u0440\u043E\u0437\u0440\u0430\u0447\u043D\u044B\u0439 \u0441\u0442\u0435\u043A\u043B\u044F\u043D\u043D\u044B\u0439 \u043C\u0430\u0442\u0435\u0440\u0438\u0430\u043B \u043A\u043E \u043C\u043D\u043E\u0433\u0438\u043C \u043F\u043E\u0432\u0435\u0440\u0445\u043D\u043E\u0441\u0442\u044F\u043C, \u0447\u0442\u043E \u043C\u043E\u0436\u0435\u0442 \u0441\u043D\u0438\u0437\u0438\u0442\u044C \u043F\u0440\u043E\u0438\u0437\u0432\u043E\u0434\u0438\u0442\u0435\u043B\u044C\u043D\u043E\u0441\u0442\u044C \u043D\u0430 \u043D\u0435\u043A\u043E\u0442\u043E\u0440\u044B\u0445 \u0443\u0441\u0442\u0440\u043E\u0439\u0441\u0442\u0432\u0430\u0445"
@@ -60428,6 +60655,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "This season has a custom default accent colour!",
       de: "Diese Saison hat eine benutzerdefinierte Akzentfarbe",
       es: "\xA1Esta temporada tiene un color de acento personalizado!",
+      it: "Questa stagione ha un colore di accento predefinito personalizzato!",
       pt: "Esta esta\xE7\xE3o tem uma cor de destaque personalizada!",
       sv: "Denna \xE5rstid har en anpassad f\xE4rg!",
       ru: "\u042D\u0442\u043E\u0442 \u0441\u0435\u0437\u043E\u043D \u0438\u043C\u0435\u0435\u0442 \u0441\u043E\u0431\u0441\u0442\u0432\u0435\u043D\u043D\u044B\u0439 \u0430\u043A\u0446\u0435\u043D\u0442\u043D\u044B\u0439 \u0446\u0432\u0435\u0442 \u043F\u043E \u0443\u043C\u043E\u043B\u0447\u0430\u043D\u0438\u044E!"
@@ -60437,6 +60665,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Card background vibrancy",
         de: "S\xE4ttigung des Kartenhintergrunds",
         es: "Intensidad del fondo de la tarjeta",
+        it: "Vivacit\xE0 dello sfondo delle carte",
         pt: "Vivacidade de fundo do cart\xE3o",
         sv: "Bakgrundsf\xE4rg",
         ru: "\u041D\u0430\u0441\u044B\u0449\u0435\u043D\u043D\u043E\u0441\u0442\u044C \u0444\u043E\u043D\u0430 \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0438"
@@ -60445,6 +60674,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Bring some colour into your world (or reduce it)",
         de: "Bringe etwas Farbe in deine Welt (oder reduziere sie)",
         es: "Trae un poco de color a tu mundo (o red\xFAcelo)",
+        it: "Porta un po' di colore nella tua vita (o riducilo)",
         pt: "Traz algumas cores ao mundo (ou diminui elas)",
         sv: "Skaffa lite f\xE4rg i din v\xE4rld (eller minska den)",
         ru: "\u0414\u043E\u0431\u0430\u0432\u044C\u0442\u0435 \u043A\u0440\u0430\u0441\u043E\u043A \u0432 \u0441\u0432\u043E\u0439 \u043C\u0438\u0440 (\u0438\u043B\u0438 \u0443\u043C\u0435\u043D\u044C\u0448\u0438\u0442\u0435 \u0438\u0445)"
@@ -60454,12 +60684,14 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       name: {
         en: "Noise overlay opacity",
         es: "Opacidad de la capa de ruido",
+        it: "Opacit\xE0 della sovrapposizione di rumore",
         sv: "Brus\xF6verl\xE4ggsopacitet",
         ru: "\u041D\u0435\u043F\u0440\u043E\u0437\u0440\u0430\u0447\u043D\u043E\u0441\u0442\u044C \u043D\u0430\u043B\u043E\u0436\u0435\u043D\u0438\u044F \u0448\u0443\u043C\u0430"
       },
       body: {
         en: "Apply a coat of subtle noise to add variation to solid backgrounds",
         es: "Aplica una capa de ruido para a\xF1adir variedad a los fondos s\xF3lidos",
+        it: "Applica un mantello di rumore leggero per aggiungere variet\xE0 agli sfondi solidi",
         sv: "Till\xE4mpa ett brus\xF6verl\xE4gg f\xF6r lite variation p\xE5 enf\xE4rgade bakgrunder",
         ru: "\u041D\u0430\u043B\u043E\u0436\u0438\u0442\u044C \u0442\u043E\u043D\u043A\u0438\u0439 \u0441\u043B\u043E\u0439 \u0448\u0443\u043C\u0430, \u0447\u0442\u043E\u0431\u044B \u0434\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0440\u0430\u0437\u043D\u043E\u043E\u0431\u0440\u0430\u0437\u0438\u044F \u043E\u0434\u043D\u043E\u0442\u043E\u043D\u043D\u044B\u043C \u0444\u043E\u043D\u0430\u043C"
       }
@@ -60468,6 +60700,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Save",
       de: "Speichern",
       es: "Guardar",
+      it: "Salva",
       pt: "Salvar",
       pl: "Zapisz",
       sv: "Spara",
@@ -60477,6 +60710,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Cancel",
       de: "Abbrechen",
       es: "Cancelar",
+      it: "Annulla",
       pt: "Cancelar",
       pl: "Anuluj",
       sv: "Avbryt",
@@ -60486,6 +60720,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Add",
       de: "Hinzuf\xFCgen",
       es: "A\xF1adir",
+      it: "Aggiungi",
       pt: "Adicionar",
       sv: "L\xE4gg till",
       ru: "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C"
@@ -60494,6 +60729,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Remove",
       de: "Entfernen",
       es: "Remover",
+      it: "Rimuovi",
       pt: "Remover",
       sv: "Radera",
       ru: "\u0423\u0434\u0430\u043B\u0438\u0442\u044C"
@@ -60502,6 +60738,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Clear",
       de: "L\xF6schen",
       es: "Limpiar",
+      it: "Cancella",
       pt: "Limpar",
       pl: "Wyczy\u015B\u0107",
       sv: "Rensa",
@@ -60511,6 +60748,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Close",
       de: "Schlie\xDFen",
       es: "Cerrar",
+      it: "Chiudi",
       pt: "Fechar",
       pl: "Zamknij",
       sv: "St\xE4ng",
@@ -60520,6 +60758,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Go",
       de: "Los",
       es: "Ir",
+      it: "Vai",
       pt: "Ir",
       sv: "G\xE5",
       ru: "\u041F\u0435\u0440\u0435\u0439\u0442\u0438"
@@ -60528,6 +60767,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Skip",
       de: "\xDCberspringen",
       es: "Omitir",
+      it: "Salta",
       pt: "Pular",
       sv: "Hoppa \xF6ver",
       ru: "\u041F\u0440\u043E\u043F\u0443\u0441\u0442\u0438\u0442\u044C"
@@ -60536,6 +60776,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Send",
       de: "Senden",
       es: "Publicar",
+      it: "Invia",
       pt: "Enviar",
       sv: "Skicka",
       ru: "\u041E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u044C"
@@ -60544,6 +60785,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Done",
       de: "Fertig",
       es: "Hecho",
+      it: "Fatto",
       pt: "Feito",
       pl: "Gotowe",
       sv: "F\xE4rdig",
@@ -60553,6 +60795,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Finish",
       de: "Beenden",
       es: "Terminar",
+      it: "Termina",
       pt: "Terminar",
       sv: "Klart",
       ru: "\u0417\u0430\u0432\u0435\u0440\u0448\u0438\u0442\u044C"
@@ -60561,6 +60804,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Continue",
       de: "Fortsetzen",
       es: "Continuar",
+      it: "Continua",
       pt: "Continuar",
       pl: "Kontynuuj",
       sv: "Forts\xE4tt",
@@ -60570,6 +60814,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Click for more options",
       de: "Klicke f\xFCr weitere Optionen",
       es: "Haz clic para m\xE1s opciones",
+      it: "Clicca per pi\xF9 opzioni",
       sv: "Tryck f\xF6r mer alternativ",
       ru: "\u041D\u0430\u0436\u043C\u0438\u0442\u0435, \u0447\u0442\u043E\u0431\u044B \u0443\u0432\u0438\u0434\u0435\u0442\u044C \u0431\u043E\u043B\u044C\u0448\u0435 \u043E\u043F\u0446\u0438\u0439"
     },
@@ -60577,6 +60822,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Right-click for more options",
       de: "Rechtsklick f\xFCr weitere Optionen",
       es: "Clic derecho para m\xE1s opciones",
+      it: "Tasto destro per pi\xF9 opzioni",
       pt: "Clique esquerdo para mais op\xE7\xF5es",
       sv: "H\xF6gerklicka f\xF6r mer alternativ",
       ru: "\u041D\u0430\u0436\u043C\u0438\u0442\u0435 \u043F\u0440\u0430\u0432\u043E\u0439 \u043A\u043D\u043E\u043F\u043A\u043E\u0439 \u043C\u044B\u0448\u0438 \u0434\u043B\u044F \u0434\u043E\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0445 \u043E\u043F\u0446\u0438\u0439"
@@ -60586,6 +60832,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Refresh pending",
         de: "Aktualisierung anstehend",
         es: "Recarga pendiente",
+        it: "Aggiornamento in attesa",
         pt: "Atualizar pend\xEAncias",
         sv: "F\xF6rv\xE4ntar omladdning",
         ru: "\u0422\u0440\u0435\u0431\u0443\u0435\u0442\u0441\u044F \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u0435"
@@ -60594,6 +60841,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "A setting you changed requires a page refresh",
         de: "Eine von dir ge\xE4nderte Einstellung erfordert eine Seitenaktualisierung, damit sie wirksam wird",
         es: "Una opci\xF3n que cambiaste requiere que recargues la p\xE1gina",
+        it: "Un'opzione che hai cambiato richiede un aggiornamento della pagina",
         pt: "Uma configura\xE7\xE3o que voc\xEA mudou exige uma atualiza\xE7\xE3o de p\xE1gina",
         sv: "En inst\xE4llning du \xE4ndrade p\xE5 beh\xF6ver at sidan laddas om",
         ru: "\u0418\u0437\u043C\u0435\u043D\u0451\u043D\u043D\u0430\u044F \u0432\u0430\u043C\u0438 \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0430 \u0442\u0440\u0435\u0431\u0443\u0435\u0442 \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u044F \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u044B"
@@ -60603,6 +60851,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "New",
       de: "Neu",
       es: "Nuevo",
+      it: "Nuovo",
       pt: "Nova",
       sv: "Ny",
       ru: "\u041D\u043E\u0432\u043E\u0435"
@@ -60611,6 +60860,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Beta",
       de: "Beta",
       es: "Beta",
+      it: "Beta",
       sv: "Beta",
       ru: "\u0411\u0435\u0442\u0430"
     },
@@ -60618,6 +60868,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "More",
       de: "Mehr",
       es: "M\xE1s",
+      it: "Altro",
       pt: "Mais",
       sv: "Mer",
       ru: "\u0415\u0449\u0435"
@@ -60626,6 +60877,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Inbox",
       de: "Posteingang",
       es: "Buz\xF3n",
+      it: "Posta in arrivo",
       pt: "Caixa de entrada",
       sv: "Brevl\xE5da",
       ru: "\u0412\u0445\u043E\u0434\u044F\u0449\u0438\u0435"
@@ -60634,6 +60886,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Notifications",
       de: "Benachrichtigungen",
       es: "Notificaciones",
+      it: "Notifiche",
       pt: "Notifica\xE7\xF5es",
       sv: "Notiser",
       ru: "\u0423\u0432\u0435\u0434\u043E\u043C\u043B\u0435\u043D\u0438\u044F"
@@ -60642,6 +60895,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Messages",
       de: "Nachrichten",
       es: "Mensajes",
+      it: "Messaggi",
       pt: "Mensagens",
       sv: "Meddelanden",
       ru: "\u0421\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u044F"
@@ -60650,6 +60904,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Preview",
       de: "Vorschau",
       es: "Vista previa",
+      it: "Anteprima",
       sv: "F\xF6rhandsvisning",
       ru: "\u041F\u0440\u0435\u0434\u043F\u0440\u043E\u0441\u043C\u043E\u0442\u0440"
     },
@@ -60658,6 +60913,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Find on",
       de: "Hier zu finden",
       es: "Encuentra en",
+      it: "Trova su",
       pt: "Encontre em",
       sv: "S\xF6k upp p\xE5",
       ru: "\u041D\u0430\u0439\u0442\u0438 \u043D\u0430"
@@ -60666,6 +60922,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Following",
       de: "Gefolgt",
       es: "Siguiendo",
+      it: "Following",
       pt: "Seguindo",
       sv: "F\xF6ljer",
       ru: "\u041F\u043E\u0434\u043F\u0438\u0441\u043A\u0438"
@@ -60674,6 +60931,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Followers",
       de: "Follower:innen",
       es: "Seguidores",
+      it: "Follower",
       pt: "Seguidores",
       sv: "F\xF6ljare",
       ru: "\u041F\u043E\u0434\u043F\u0438\u0441\u0447\u0438\u043A\u0438"
@@ -60682,6 +60940,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Neighbours",
       de: "Nachbarn",
       es: "Vecinos",
+      it: "Vicini",
       pt: "Vizinhos",
       sv: "Grannar",
       ru: "\u0421\u043E\u0441\u0435\u0434\u0438"
@@ -60690,6 +60949,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Website",
       de: "Webseite",
       es: "Sitio web",
+      it: "Sito web",
       sv: "Hemsida",
       ru: "\u0412\u0435\u0431\u0441\u0430\u0439\u0442"
     },
@@ -60697,6 +60957,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Overview",
       de: "\xDCbersicht",
       es: "General",
+      it: "Panoramica",
       pt: "Vis\xE3o geral",
       ja: "\u30C0\u30A4\u30B8\u30A7\u30B9\u30C8",
       sv: "\xD6versikt",
@@ -60706,6 +60967,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Photos",
       de: "Fotos",
       es: "Fotos",
+      it: "Foto",
       pt: "Fotos",
       ja: "\u5199\u771F",
       sv: "Foton",
@@ -60715,6 +60977,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Artwork",
       de: "Cover",
       es: "Car\xE1tula",
+      it: "Copertina",
       pt: "Arte de capa",
       sv: "Konst",
       ru: "\u041E\u0431\u043B\u043E\u0436\u043A\u0430"
@@ -60722,12 +60985,14 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     gallery_sum: {
       en: "This is the sum of votes for ordering",
       es: "Esta es la suma de votos para ordenar",
+      it: "Questa \xE8 la somma dei voti per l'ordinamento",
       sv: "Det h\xE4r \xE4r summan r\xF6ster f\xF6r bildordning",
       ru: "\u042D\u0442\u043E \u0441\u0443\u043C\u043C\u0430 \u0433\u043E\u043B\u043E\u0441\u043E\u0432 \u0434\u043B\u044F \u0441\u043E\u0440\u0442\u0438\u0440\u043E\u0432\u043A\u0438"
     },
     view_saved: {
       en: "View all saved photos",
       es: "Ver todas las fotos guardadas",
+      it: "Visualizza tutte le foto salvate",
       sv: "Visa alla sparade foton",
       ru: "\u041F\u043E\u0441\u043C\u043E\u0442\u0440\u0435\u0442\u044C \u0432\u0441\u0435 \u0441\u043E\u0445\u0440\u0430\u043D\u0435\u043D\u043D\u044B\u0435 \u0444\u043E\u0442\u043E\u0433\u0440\u0430\u0444\u0438\u0438"
     },
@@ -60735,6 +61000,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Drag-and-drop an image or click here",
       de: "Bild hierher ziehen oder hier klicken",
       es: "Arrastra una imagen o haz clic aqu\xED",
+      it: "Trascina e rilascia un'immagine, o clicca qui",
       sv: "Dra och sl\xE4pp en bild eller klicka h\xE4r",
       ru: "\u041F\u0435\u0440\u0435\u0442\u0430\u0449\u0438\u0442\u0435 \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435 \u0438\u043B\u0438 \u043D\u0430\u0436\u043C\u0438\u0442\u0435 \u0437\u0434\u0435\u0441\u044C"
     },
@@ -60742,6 +61008,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Similar Artists",
       de: "\xC4hnliche K\xFCnstler:innen",
       es: "Artistas similares",
+      it: "Artisti simili",
       pt: "Artistas similares",
       sv: "Liknande artister",
       ru: "\u041F\u043E\u0445\u043E\u0436\u0438\u0435 \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u0438"
@@ -60750,6 +61017,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Artists similar to {n}",
       de: "\xC4hnliche K\xFCnstler:innen wie {n}",
       es: "Artistas similares a {n}",
+      it: "Artisti simili a {n}",
       sv: "Liknande artister till {n}",
       ru: "\u0418\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u0438, \u043F\u043E\u0445\u043E\u0436\u0438\u0435 \u043D\u0430 {n}"
     },
@@ -60757,6 +61025,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Biography",
       de: "Biografie",
       es: "Biograf\xEDa",
+      it: "Biografia",
       pt: "Biografia",
       ja: "\u30D0\u30A4\u30AA\u30B0\u30E9\u30D5\u30A3\u30FC",
       sv: "Biografi",
@@ -60766,6 +61035,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Wiki",
       de: "Wiki",
       es: "Wiki",
+      it: "Wiki",
       sv: "Wiki",
       ru: "\u0418\u043D\u0444\u043E"
     },
@@ -60773,6 +61043,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Listeners",
       de: "H\xF6rer:innen",
       es: "Oyentes",
+      it: "Ascoltatori",
       pt: "Ouvintes",
       sv: "Lyssnare",
       ru: "\u0421\u043B\u0443\u0448\u0430\u0442\u0435\u043B\u0438"
@@ -60781,6 +61052,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Listeners You Know",
       de: "H\xF6rer:innen, die du kennst",
       es: "Oyentes que conoces",
+      it: "Ascoltatori che conosci",
       pt: "Ouvintes que voc\xEA conhece",
       sv: "Lyssnare du k\xE4nner",
       ru: "\u0417\u043D\u0430\u043A\u043E\u043C\u044B\u0435 \u0441\u043B\u0443\u0448\u0430\u0442\u0435\u043B\u0438"
@@ -60789,6 +61061,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "{c} listeners",
       de: "{c} H\xF6rer:innen",
       es: "{c} oyentes",
+      it: "{c} ascoltatori",
       pt: "{c} ouvintes",
       sv: "{c} lyssnare",
       ru: "{c} \u0441\u043B\u0443\u0448\u0430\u0442\u0435\u043B\u0435\u0439"
@@ -60797,6 +61070,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Tag",
       de: "Tag",
       es: "Tag",
+      it: "Tag",
       sv: "Tagg",
       ru: "\u0422\u0435\u0433"
     },
@@ -60804,6 +61078,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Tags",
       de: "Tags",
       es: "Tags",
+      it: "Tag",
       ja: "\u30BF\u30B0",
       sv: "Taggar",
       ru: "\u0422\u0435\u0433\u0438"
@@ -60813,6 +61088,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Reports",
       de: "Berichte",
       es: "Informes",
+      it: "Report",
       ja: "\u30EC\u30DD\u30FC\u30C8",
       pt: "Relat\xF3rio",
       sv: "Lyssningsrapport",
@@ -60824,6 +61100,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "artist",
       de: "K\xFCnstlers",
       es: "artista",
+      it: "artista",
       pt: "artista",
       sv: "artistnamnet",
       ru: "\u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C"
@@ -60834,6 +61111,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "album",
       de: "Albums",
       es: "\xE1lbum",
+      it: "album",
       pt: "\xE1lbum",
       sv: "albumtiteln",
       ru: "\u0430\u043B\u044C\u0431\u043E\u043C"
@@ -60844,6 +61122,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "track",
       de: "Titels",
       es: "tema",
+      it: "brano",
       pt: "faixa",
       sv: "l\xE5ten",
       ru: "\u0442\u0440\u0435\u043A"
@@ -60858,6 +61137,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "This {t} is being re-capitalised, is it correct?",
         de: "Die Gro\xDF-/Kleinschreibung dieses {t} wird korrigiert, ist das korrekt?",
         es: "La capitalizaci\xF3n de este {t} est\xE1 siendo modificada, \xBFes correcta?",
+        it: "L'uso delle maiuscole per questo {t} sta venendo modificato, \xE8 corretto?",
         pt: "{t} teve a capitaliza\xE7\xE3o ajustada, est\xE1 correto?",
         sv: "Nuvarande {t} har \xE4ndrad kapitalisering, st\xE4mmer det h\xE4r?",
         ru: "\u0412 \u044D\u0442\u043E\u043C {t} \u0438\u0441\u043F\u0440\u0430\u0432\u043B\u044F\u0435\u0442\u0441\u044F \u0440\u0435\u0433\u0438\u0441\u0442\u0440, \u044F\u0432\u043B\u044F\u0435\u0442\u0441\u044F \u043B\u0438 \u043E\u043D \u043F\u0440\u0430\u0432\u0438\u043B\u044C\u043D\u044B\u043C?"
@@ -60866,6 +61146,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Is this {t} capitalised correctly?",
         de: "Ist die Gro\xDF-/Kleinschreibung dieses {t} richtig?",
         es: "\xBFEst\xE1 este {t} capitalizado correctamente?",
+        it: "L'uso delle maiuscole per questo {t} \xE8 corretto?",
         pt: "Esse(a) {t} est\xE1 capitalizado(a) corretamente?",
         sv: "St\xE4mmer kapitaliseringen p\xE5 {t}?",
         ru: "\u041F\u0440\u0430\u0432\u0438\u043B\u044C\u043D\u043E \u043B\u0438 \u043D\u0430\u043F\u0438\u0441\u0430\u043D \u0440\u0435\u0433\u0438\u0441\u0442\u0440 \u044D\u0442\u043E\u0433\u043E {t}?"
@@ -60875,6 +61156,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Current",
       de: "Aktuell",
       es: "Actual",
+      it: "Attuale",
       sv: "Nuvarande",
       ru: "\u0422\u0435\u043A\u0443\u0449\u0438\u0439"
     },
@@ -60882,6 +61164,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "This is the original capitalisation present on Last.fm",
       de: "Dies ist die originale Gro\xDF-/Kleinschreibung auf Last.fm",
       es: "Esta es la capitalizaci\xF3n original presente en Last.fm",
+      it: "Questo \xE8 l'uso delle maiuscole originale presente su Last.fm",
       sv: "Det h\xE4r \xE4r den originella kapitaliseringen som finns p\xE5 Last.fm",
       ru: "\u042D\u0442\u043E \u0438\u0441\u0445\u043E\u0434\u043D\u044B\u0439 \u0440\u0435\u0433\u0438\u0441\u0442\u0440, \u043F\u0440\u0435\u0434\u043E\u0441\u0442\u0430\u0432\u043B\u0435\u043D\u043D\u044B\u0439 \u043D\u0430 Last.fm"
     },
@@ -60889,6 +61172,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Correction",
       de: "Korrektur",
       es: "Correcci\xF3n",
+      it: "Correzione",
       sv: "Korrigering",
       ru: "\u0418\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435"
     },
@@ -60896,6 +61180,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "This is the correct capitalisation, as decided by the artist",
       de: "Dies ist die korrekte Gro\xDF-/Kleinschreibung, wie sie vom K\xFCnstler festgelegt wurde",
       es: "Esta es la capitalizaci\xF3n correcta, decidida por el artista",
+      it: "Questo \xE8 l'uso delle maiuscole corretto, come deciso dall'artista",
       sv: "Det h\xE4r \xE4r r\xE4tt kapitalisering, som best\xE4md av artisten",
       ru: "\u042D\u0442\u043E \u043F\u0440\u0430\u0432\u0438\u043B\u044C\u043D\u044B\u0439 \u0440\u0435\u0433\u0438\u0441\u0442\u0440, \u043E\u043F\u0440\u0435\u0434\u0435\u043B\u0435\u043D\u043D\u044B\u0439 \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u0435\u043C"
     },
@@ -60903,6 +61188,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Sources",
       de: "Quellen",
       es: "Fuentes",
+      it: "Sorgenti",
       sv: "K\xE4llor",
       ru: "\u0418\u0441\u0442\u043E\u0447\u043D\u0438\u043A\u0438"
     },
@@ -60910,6 +61196,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Provide reputable sources where this capitalisation is present, excluding sites like Wikipedia, RYM, AOTY, and MusicBrainz",
       de: "Gebe seri\xF6se Quellen an, auf denen diese Schreibweise zu finden ist, ausgenommen sind Seiten wie Wikipedia, RYM, AOTY und MusicBrainz",
       es: "Proporciona fuentes fiables donde la capitalizaci\xF3n est\xE9 presente, excluyendo sitios como Wikipedia, RYM, AOTY y MusicBrainz",
+      it: "Fornisci sorgenti attendibili dove questo uso delle maiuscole \xE8 presente, esclusi siti come Wikipedia, RYM, AOTY o MusicBrainz",
       sv: "Visa p\xE5litliga k\xE4llor d\xE4r man kan se att denna kapitalisering st\xE4mmer, f\xF6rutom sidor som Wikipedia, RYM, AOTY och MusicBrainz",
       ru: "\u0423\u043A\u0430\u0436\u0438\u0442\u0435 \u0430\u0432\u0442\u043E\u0440\u0438\u0442\u0435\u0442\u043D\u044B\u0435 \u0438\u0441\u0442\u043E\u0447\u043D\u0438\u043A\u0438, \u0433\u0434\u0435 \u043F\u0440\u0438\u0441\u0443\u0442\u0441\u0442\u0432\u0443\u0435\u0442 \u044D\u0442\u043E\u0442 \u0440\u0435\u0433\u0438\u0441\u0442\u0440, \u0438\u0441\u043A\u043B\u044E\u0447\u0430\u044F \u0442\u0430\u043A\u0438\u0435 \u0441\u0430\u0439\u0442\u044B, \u043A\u0430\u043A Wikipedia, RYM, AOTY \u0438 MusicBrainz"
     },
@@ -60917,6 +61204,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Suggest",
       de: "Vorschlagen",
       es: "Sugerir",
+      it: "Suggerisci",
       sv: "F\xF6resl\xE5",
       ru: "\u041F\u0440\u0435\u0434\u043B\u043E\u0436\u0438\u0442\u044C"
     },
@@ -60924,6 +61212,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Only capitalisation changes are allowed",
       de: "Nur \xC4nderungen der Gro\xDF-/Kleinschreibung sind erlaubt",
       es: "Solo se permiten cambios a la capitalizaci\xF3n",
+      it: "Sono consentiti solo i cambi relativi all'uso delle maiuscole",
       sv: "Endast \xE4ndringar p\xE5 kapitalisering \xE4r till\xE5tet",
       ru: "\u0414\u043E\u043F\u0443\u0441\u043A\u0430\u044E\u0442\u0441\u044F \u0442\u043E\u043B\u044C\u043A\u043E \u0438\u0437\u043C\u0435\u043D\u0435\u043D\u0438\u044F \u0440\u0435\u0433\u0438\u0441\u0442\u0440\u0430"
     },
@@ -60932,6 +61221,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Suggest a correction",
       de: "Korrektur vorschlagen",
       es: "Sugiere una correcci\xF3n",
+      it: "Suggerisci una correzione",
       pt: "Sugira uma corre\xE7\xE3o",
       sv: "F\xF6resl\xE5 en \xE4ndring",
       ru: "\u041F\u0440\u0435\u0434\u043B\u043E\u0436\u0438\u0442\u044C \u0438\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435"
@@ -60940,6 +61230,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Recent Tracks",
       de: "K\xFCrzlich geh\xF6rt",
       es: "Temas recientes",
+      it: "Brani recenti",
       pt: "Faixas recentes",
       ja: "\u6700\u8FD1\u306E\u30C8\u30E9\u30C3\u30AF",
       sv: "Nyligen spelat",
@@ -60949,6 +61240,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Top Artists",
       de: "Top-K\xFCnstler:innen",
       es: "Artistas m\xE1s escuchados",
+      it: "Artisti pi\xF9 ascoltati",
       pt: "Top Artistas",
       ja: "\u30C8\u30C3\u30D7\u30A2\u30FC\u30C6\u30A3\u30B9\u30C8",
       sv: "Toppartister",
@@ -60958,6 +61250,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Top Albums",
       de: "Top-Alben",
       es: "\xC1lbumes m\xE1s escuchados",
+      it: "Album pi\xF9 ascoltati",
       pt: "Top \xC1lbuns",
       ja: "\u4EBA\u6C17\u30A2\u30EB\u30D0\u30E0",
       sv: "Toppalbum",
@@ -60967,6 +61260,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Top Tracks",
       de: "Top-Songs",
       es: "Tem\xE1s m\xE1s escuchados",
+      it: "Brani pi\xF9 ascoltati",
       pt: "Top Faixas",
       ja: "\u4EBA\u6C17\u30C8\u30E9\u30C3\u30AF",
       sv: "Toppl\xE5tar",
@@ -60976,6 +61270,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Top Track",
       de: "Top-Song",
       es: "Tema m\xE1s escuchado",
+      it: "Brano pi\xF9 ascoltato",
       pt: "Top Faixa",
       sv: "Toppl\xE5t",
       ru: "\u041B\u0443\u0447\u0448\u0438\u0439 \u0442\u0440\u0435\u043A"
@@ -60986,6 +61281,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "You are {c} compatible",
       de: "Ihr seid {c} kompatibel",
       es: "Eres {c} compatible",
+      it: "Siete compatibili al {c}",
       pt: "Voce \xE9 {c} compat\xEDvel",
       sv: "Du \xE4r {c} kompatibel",
       ru: "\u0412\u0430\u0448\u0430 \u0441\u043E\u0432\u043C\u0435\u0441\u0442\u0438\u043C\u043E\u0441\u0442\u044C {c}",
@@ -60993,6 +61289,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "{artist1}, {artist2}",
         de: "{artist1}, {artist2}",
         es: "{artist1}, {artist2}",
+        it: "{artist1}, {artist2}",
         pt: "{artist1}, {artist2}",
         sv: "{artist1}, {artist2}",
         ja: "{artist1}\u3001{artist2}",
@@ -61002,6 +61299,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "{artist1}, {artist2}, {artist3}",
         de: "{artist1}, {artist2}, {artist3}",
         es: "{artist1}, {artist2}, {artist3}",
+        it: "{artist1}, {artist2}, {artist3}",
         pt: "{artist1}, {artist2}, {artist3}",
         sv: "{artist1}, {artist2}, {artist3}",
         ja: "{artist1}\u3001{artist2}\u3001{artist3}",
@@ -61012,6 +61310,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Taste similarity",
       de: "Musikgeschmack-\xC4hnlichkeit",
       es: "Similitud de gustos",
+      it: "Similarit\xE0 dei gusti",
       pt: "Similaridade de gostos",
       sv: "Smaklikhet",
       ru: "\u0421\u0445\u043E\u0436\u0435\u0441\u0442\u044C \u0432\u043A\u0443\u0441\u043E\u0432"
@@ -61021,6 +61320,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Message",
       de: "Nachricht schreiben",
       es: "Mensaje",
+      it: "Invia messaggio",
       pt: "Mensagem",
       sv: "Meddela",
       ru: "\u0421\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u0435"
@@ -61029,6 +61329,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Join Discord",
       de: "Discord beitreten",
       es: "Unirse al Discord",
+      it: "Unisciti al Discord",
       sv: "G\xE5 med i Discord",
       ru: "\u041F\u0440\u0438\u0441\u043E\u0435\u0434\u0438\u043D\u0438\u0442\u044C\u0441\u044F \u043A Discord"
     },
@@ -61036,6 +61337,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Sponsor and badge details",
       de: "Sponsoren- und Abzeichendetails",
       es: "Detalles de patronicio y emblemas",
+      it: "Dettagli sponsorizzazione e distintivo",
       sv: "Sponsor och emblemdetaljer",
       ru: "\u0421\u0432\u0435\u0434\u0435\u043D\u0438\u044F \u043E \u0441\u043F\u043E\u043D\u0441\u043E\u0440\u0435 \u0438 \u0437\u043D\u0430\u0447\u043A\u0435"
     },
@@ -61043,6 +61345,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Sponsor and badge data version {v}",
       de: "Sponsoren- und Abzeichendaten-Version {v}",
       es: "Versi\xF3n de datos de patrocinio y emblemas",
+      it: "Versione dei dati di sponsor e distintivi {v}",
       pt: "Vers\xE3o da data de apoiador e emblemas",
       sv: "Sponsor-och-emblemdata, version {v}",
       ru: "\u0414\u0430\u043D\u043D\u044B\u0435 \u043E \u0441\u043F\u043E\u043D\u0441\u043E\u0440\u0430\u0445 \u0438 \u0437\u043D\u0430\u0447\u043A\u0430\u0445, \u0432\u0435\u0440\u0441\u0438\u044F {v}"
@@ -61051,6 +61354,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Become a sponsor",
       de: "Werde Sponsor",
       es: "S\xE9 un patrocinador",
+      it: "Diventa uno sponsor",
       pt: "Torne-se um apoiador",
       sv: "Bli en sponsor",
       ru: "\u0421\u0442\u0430\u0442\u044C \u0441\u043F\u043E\u043D\u0441\u043E\u0440\u043E\u043C"
@@ -61060,6 +61364,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Receive sponsor rewards",
       de: "Sponsorenpr\xE4mien erhalten",
       es: "Recibe recompensas de patrocinador",
+      it: "Ricevi ricompense da sponsor",
       pt: "Receba recompensas de apoiador",
       sv: "F\xE5 sponsorpriser",
       ru: "\u041F\u043E\u043B\u0443\u0447\u0438\u0442\u044C \u043D\u0430\u0433\u0440\u0430\u0434\u044B \u0441\u043F\u043E\u043D\u0441\u043E\u0440\u0430"
@@ -61068,6 +61373,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Want to support future development of bleh?",
       de: "M\xF6chtest du die zuk\xFCnftige Entwicklung von bleh unterst\xFCtzen?",
       es: "\xBFQuieres apoyar el desarrollo futuro de bleh?",
+      it: "Vuoi supportare il futuro sviluppo di bleh?",
       pt: "Quer apoiar o desenvolvimento futuro do bleh?",
       sv: "Vill du st\xF6dja blehs framtida utveckling?",
       ru: "\u0425\u043E\u0442\u0438\u0442\u0435 \u043F\u043E\u0434\u0434\u0435\u0440\u0436\u0430\u0442\u044C \u0431\u0443\u0434\u0443\u0449\u0443\u044E \u0440\u0430\u0437\u0440\u0430\u0431\u043E\u0442\u043A\u0443 bleh?"
@@ -61077,6 +61383,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Support future development",
       de: "Unterst\xFCtze die zuk\xFCnftige Entwicklung",
       es: "Apoyar el desarrollo futuro",
+      it: "Supporta lo sviluppo futuro",
       pt: "Apoie o desenvolvimento futuro",
       sv: "St\xF6d framtida utveckling",
       ru: "\u041F\u043E\u0434\u0434\u0435\u0440\u0436\u0430\u0442\u044C \u0431\u0443\u0434\u0443\u0449\u0443\u044E \u0440\u0430\u0437\u0440\u0430\u0431\u043E\u0442\u043A\u0443"
@@ -61085,6 +61392,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Receive a profile badge and a big thank you from katelyn <3",
       de: "Erhalte ein Abzeichen auf deinem Profil und ein gro\xDFes Dankesch\xF6n von katelyn f\xFCr deine Unterst\xFCtzung <3",
       es: "Recibe un emblema en tu perfil y unas grandes gracias de parte de katelyn <3",
+      it: "Ricevi un distintivo del profilo e un grande grazie da katelyn <3",
       pt: "Receba um emblema no seu perfil e um obrigad\xE3o da katelyn por apoiar <3",
       sv: "F\xE5 ett emblem p\xE5 din profil och ett stort tack fr\xE5n katelyn <3",
       ru: "\u041F\u043E\u043B\u0443\u0447\u0438\u0442\u0435 \u0437\u043D\u0430\u0447\u043E\u043A \u043F\u0440\u043E\u0444\u0438\u043B\u044F \u0438 \u0431\u043E\u043B\u044C\u0448\u0443\u044E \u0431\u043B\u0430\u0433\u043E\u0434\u0430\u0440\u043D\u043E\u0441\u0442\u044C \u043E\u0442 katelyn <3"
@@ -61093,6 +61401,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "You are a sponsor, thank you! :3",
       de: "Du bist ein Sponsor, danke sch\xF6n! :3",
       es: "Eres un patrocinador, \xA1gracias! :3",
+      it: "Sei uno sponsor, grazie! :3",
       pt: "Voc\xEA \xE9 um apoiador, muito obrigado! :3",
       sv: "Du \xE4r en sponsor, tack s\xE5 mycket! :3",
       ru: "\u0412\u044B \u044F\u0432\u043B\u044F\u0435\u0442\u0435\u0441\u044C \u0441\u043F\u043E\u043D\u0441\u043E\u0440\u043E\u043C, \u0441\u043F\u0430\u0441\u0438\u0431\u043E! :3"
@@ -61101,6 +61410,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "A monthly sponsorship grants you a custom badge of your choosing",
       de: "Mit einem monatlichen Sponsoring erh\xE4ltst du ein individuelles Abzeichen deiner Wahl",
       es: "Un patricinio mensual te otorga un emblema personalizado de tu elecci\xF3n",
+      it: "Una sponsorizzazione mensile ti permette di ottenere un distintivo personalizzato a tua scelta",
       pt: "Um apoio mensal lhe d\xE1 um emblema personalizado de sua escolha",
       sv: "Med ett m\xE5natligt sponsorskap f\xE5r du ett emblem du sj\xE4lv kan anpassa",
       ru: "\u0415\u0436\u0435\u043C\u0435\u0441\u044F\u0447\u043D\u043E\u0435 \u0441\u043F\u043E\u043D\u0441\u043E\u0440\u0441\u0442\u0432\u043E \u043F\u0440\u0435\u0434\u043E\u0441\u0442\u0430\u0432\u043B\u044F\u0435\u0442 \u0432\u0430\u043C \u043D\u0430 \u0432\u044B\u0431\u043E\u0440 \u043F\u0435\u0440\u0441\u043E\u043D\u0430\u043B\u0438\u0437\u0438\u0440\u043E\u0432\u0430\u043D\u043D\u044B\u0439 \u0437\u043D\u0430\u0447\u043E\u043A"
@@ -61109,6 +61419,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "A custom badge is only available with a monthly sponsorship.",
       de: "Ein individuelles Abzeichen ist nur mit einem monatlichen Sponsoring erh\xE4ltlich.",
       es: "Un emblema personalizado solo est\xE1 disponible con un patrocinio mensual.",
+      it: "Un distintivo personalizzato \xE8 disponibile solo con una sponsorizzazione mensile.",
       pt: "Um emblema personalizado s\xF3 est\xE1 dispon\xEDvel com um apoio mensal.",
       sv: "Ett eget anpassat emblem finns bara tillg\xE4ngligt med m\xE5natligt sponsorskap.",
       ru: "\u041F\u0435\u0440\u0441\u043E\u043D\u0430\u043B\u0438\u0437\u0438\u0440\u043E\u0432\u0430\u043D\u043D\u044B\u0439 \u0437\u043D\u0430\u0447\u043E\u043A \u0434\u043E\u0441\u0442\u0443\u043F\u0435\u043D \u0442\u043E\u043B\u044C\u043A\u043E \u043F\u0440\u0438 \u0435\u0436\u0435\u043C\u0435\u0441\u044F\u0447\u043D\u043E\u043C \u0441\u043F\u043E\u043D\u0441\u043E\u0440\u0441\u0442\u0432\u0435."
@@ -61117,6 +61428,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Manage sponsorship",
       de: "Sponsoring verwalten",
       es: "Gestionar patrocinio",
+      it: "Gestione sponsorizzazione",
       pt: "Gerenciar apoio",
       sv: "Sponsorskapsinst\xE4llningar",
       ru: "\u0423\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435 \u0441\u043F\u043E\u043D\u0441\u043E\u0440\u0441\u0442\u0432\u043E\u043C"
@@ -61125,6 +61437,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "View",
       de: "Ansehen",
       es: "Ver",
+      it: "Visualizza",
       pt: "Ver",
       sv: "Visa",
       ru: "\u041F\u0440\u043E\u0441\u043C\u043E\u0442\u0440\u0435\u0442\u044C"
@@ -61133,6 +61446,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Profile, {c} badges",
       de: "Profil, {c} Abzeichen",
       es: "Perfil, {c} emblemas",
+      it: "Profilo, {c} distintivi",
       pt: "Perfil, {c} emblemas",
       sv: "Profil, {c} emblem",
       ru: "\u041F\u0440\u043E\u0444\u0438\u043B\u044C, {c} \u0437\u043D\u0430\u0447\u043A\u043E\u0432"
@@ -61141,6 +61455,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Current version",
       de: "Aktuelle Version",
       es: "Versi\xF3n actual",
+      it: "Versione corrente",
       pt: "Vers\xE3o atual",
       sv: "Nuvarande version",
       ru: "\u0422\u0435\u043A\u0443\u0449\u0430\u044F \u0432\u0435\u0440\u0441\u0438\u044F"
@@ -61148,6 +61463,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     manage_data: {
       en: "Manage data",
       es: "Gestionar datos",
+      it: "Gestione dati",
       sv: "Hantera data",
       ru: "\u0423\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435 \u0434\u0430\u043D\u043D\u044B\u043C\u0438"
     },
@@ -61156,6 +61472,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Labs",
       de: "Labs",
       es: "Labs",
+      it: "Labs",
       sv: "Labs",
       ru: "\u041B\u0430\u0431\u043E\u0440\u0430\u0442\u043E\u0440\u0438\u044F"
     },
@@ -61163,6 +61480,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "This is a special bleh-managed profile to handle sponsors",
       de: "Dies ist ein bleh-verwaltetes Profil zur Verwaltung von Sponsoren",
       es: "Este es un perfil especial manejado por bleh para gestionar patrocinadores",
+      it: "Questo \xE8 un profilo speciale controllato da bleh per la gestione delle sponsorizzazioni",
       pt: "Este \xE9 um perfil especial gerenciado pelo bleh para lidar com apoiadores",
       sv: "Detta \xE4r en speciell profil fr\xE5n bleh f\xF6r att hantera sponsorskap",
       ru: "\u042D\u0442\u043E \u0441\u043F\u0435\u0446\u0438\u0430\u043B\u044C\u043D\u044B\u0439 \u043F\u0440\u043E\u0444\u0438\u043B\u044C, \u0443\u043F\u0440\u0430\u0432\u043B\u044F\u0435\u043C\u044B\u0439 bleh \u0434\u043B\u044F \u0440\u0430\u0431\u043E\u0442\u044B \u0441\u043E \u0441\u043F\u043E\u043D\u0441\u043E\u0440\u0430\u043C\u0438"
@@ -61171,6 +61489,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Sponsors only",
       de: "Nur f\xFCr Sponsoren",
       es: "Solo patrocinadores",
+      it: "Solo per gli sponsor",
       sv: "Endast sponsorer",
       ru: "\u0422\u043E\u043B\u044C\u043A\u043E \u0434\u043B\u044F \u0441\u043F\u043E\u043D\u0441\u043E\u0440\u043E\u0432"
     },
@@ -61179,6 +61498,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Downloaded {v}",
       de: "{v} wurde heruntergeladen",
       es: "{v} descargado",
+      it: "{v} scaricato",
       sv: "Laddat ned {v}",
       ru: "\u0417\u0430\u0433\u0440\u0443\u0436\u0435\u043D\u043E {v}"
     },
@@ -61186,6 +61506,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Loading",
       de: "Wird geladen",
       es: "Cargando",
+      it: "Caricamento",
       pt: "Carregando",
       sv: "Laddar",
       ru: "\u0417\u0430\u0433\u0440\u0443\u0437\u043A\u0430"
@@ -61194,6 +61515,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Collecting the last {c} days",
       de: "Sammeln der letzten {c} Tage",
       es: "Recopilando los \xFAltimos {c} d\xEDas",
+      it: "Raccogliendo gli ultimi {c} giorni",
       pt: "Coletando os \xFAltimos {c} dias",
       sv: "Samlar de senaste {c} dagarna",
       ru: "\u0421\u0431\u043E\u0440 \u0434\u0430\u043D\u043D\u044B\u0445 \u0437\u0430 \u043F\u043E\u0441\u043B\u0435\u0434\u043D\u0438\u0435 {c} \u0434\u043D\u0435\u0439"
@@ -61202,6 +61524,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Gathering plays",
       de: "Plays werden gesammelt",
       es: "Recopilando reproducciones",
+      it: "Raccogliendo le riproduzioni",
       pt: "Coletando reprodu\xE7\xF5es",
       sv: "Samlar spelningar",
       ru: "\u0421\u0431\u043E\u0440 \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u0439"
@@ -61212,6 +61535,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "(mutually)",
       de: "(gegenseitig)",
       es: "(mutualmente)",
+      it: "(a vicenda)",
       pt: "(mutualmente)",
       sv: "(varandra)",
       ru: "(\u0432\u0437\u0430\u0438\u043C\u043D\u043E)"
@@ -61220,6 +61544,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Language",
       de: "Sprache",
       es: "Idioma",
+      it: "Lingua",
       pt: "Idioma",
       sv: "Spr\xE5k",
       ru: "\u042F\u0437\u044B\u043A"
@@ -61230,6 +61555,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Symbol presets",
       de: "Symbolvoreinstellungen",
       es: "Colecci\xF3n de s\xEDmbolos",
+      it: "Raccolta di simboli",
       pt: "Predefini\xE7\xF5es de s\xEDmbolos",
       sv: "Symboler",
       ru: "\u041D\u0430\u0431\u043E\u0440\u044B \u0441\u0438\u043C\u0432\u043E\u043B\u043E\u0432"
@@ -61240,6 +61566,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Hyperlink guide",
       de: "Hyperlink-Leitfaden",
       es: "Gu\xEDa de hiperv\xEDnculo",
+      it: "Guida agli ipertesti",
       pt: "Guia de hiperlink",
       sv: "L\xE4nkguide",
       ru: "\u0420\u0443\u043A\u043E\u0432\u043E\u0434\u0441\u0442\u0432\u043E \u043F\u043E \u0433\u0438\u043F\u0435\u0440\u0441\u0441\u044B\u043B\u043A\u0430\u043C"
@@ -61249,6 +61576,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Links to {link}",
       de: "Verlinkt auf {link}",
       es: "Vincula a {link}",
+      it: "Collega a {link}",
       pt: "Links para {link}",
       sv: "L\xE4nkas till {link}",
       ru: "\u0421\u0441\u044B\u043B\u043A\u0438 \u043D\u0430 {link}"
@@ -61257,6 +61585,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Explore in library",
       de: "In der Bibliothek anzeigen",
       es: "Explorar en colecci\xF3n",
+      it: "Esplora nella libreria",
       pt: "Explorar na biblioteca",
       sv: "Utforska i bibliotek",
       ru: "\u0418\u0441\u0441\u043B\u0435\u0434\u043E\u0432\u0430\u0442\u044C \u0432 \u0431\u0438\u0431\u043B\u0438\u043E\u0442\u0435\u043A\u0435"
@@ -61266,6 +61595,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Add note",
       de: "Notiz hinzuf\xFCgen",
       es: "A\xF1adir anotaci\xF3n",
+      it: "Aggiungi una nota",
       pt: "Adicionar nota",
       sv: "L\xE4gg till anteckning",
       ru: "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0437\u0430\u043C\u0435\u0442\u043A\u0443"
@@ -61274,6 +61604,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Radio",
       de: "Radio",
       es: "Radio",
+      it: "Radio",
       pt: "R\xE1dio",
       sv: "Radio",
       ru: "\u0420\u0430\u0434\u0438\u043E"
@@ -61283,6 +61614,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Mix",
       de: "Mix",
       es: "Mix",
+      it: "Mix",
       sv: "Mix",
       ru: "\u041C\u0438\u043A\u0441"
     },
@@ -61291,6 +61623,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Recommended",
       de: "Empfohlen",
       es: "Recomendado",
+      it: "Suggerimenti",
       pt: "Recomenda\xE7\xF5es",
       sv: "Rekommenderad",
       ru: "\u0420\u0435\u043A\u043E\u043C\u0435\u043D\u0434\u043E\u0432\u0430\u043D\u043D\u043E\u0435"
@@ -61300,6 +61633,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Listening",
       de: "H\xF6rbericht",
       es: "Escuchando",
+      it: "Ascolto",
       pt: "Ouvindo",
       sv: "Lyssning",
       ru: "\u041F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u0435"
@@ -61308,6 +61642,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "You",
       de: "Du",
       es: "T\xFA",
+      it: "Tu",
       pt: "Voc\xEA",
       sv: "Du",
       ru: "\u0412\u044B"
@@ -61316,6 +61651,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Open",
       de: "\xD6ffnen",
       es: "Abrir",
+      it: "Apri",
       pt: "Abrir",
       sv: "\xD6ppen",
       ru: "\u041E\u0442\u043A\u0440\u044B\u0442\u044C"
@@ -61324,6 +61660,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Expand",
       de: "Erweitern",
       es: "Expandir",
+      it: "Espandi",
       pt: "Expandir",
       sv: "Expandera",
       ru: "\u0420\u0430\u0437\u0432\u0435\u0440\u043D\u0443\u0442\u044C"
@@ -61332,6 +61669,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Expand to full resolution",
       de: "Auf volle Aufl\xF6sung erweitern",
       es: "Expandir a resoluci\xF3n completa",
+      it: "Espandi a risoluzione completa",
       pt: "Expandir para resolu\xE7\xE3o total",
       sv: "Expandera till full uppl\xF6sning",
       ru: "\u0420\u0430\u0437\u0432\u0435\u0440\u043D\u0443\u0442\u044C \u0434\u043E \u043F\u043E\u043B\u043D\u043E\u0433\u043E \u0440\u0430\u0437\u0440\u0435\u0448\u0435\u043D\u0438\u044F"
@@ -61340,12 +61678,14 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       name: {
         en: "Default avatar action",
         es: "Acci\xF3n de avatar por defecto",
+        it: "Azione di default per gli avatar",
         sv: "Standard bildbet\xE9ende",
         ru: "\u0414\u0435\u0439\u0441\u0442\u0432\u0438\u0435 \u043F\u043E \u0443\u043C\u043E\u043B\u0447\u0430\u043D\u0438\u044E \u043F\u0440\u0438 \u043D\u0430\u0436\u0430\u0442\u0438\u0438 \u043D\u0430 \u0430\u0432\u0430\u0442\u0430\u0440"
       },
       body: {
         en: "Which action should be performed when you click an avatar",
         es: "Cu\xE1l acci\xF3n deber\xEDa realizarse cuando haces clic a un avatar",
+        it: "Quale azione dovrebbe essere effettuata quando fai click su un avatar?",
         sv: "Hur ska sidan bet\xE9 sig n\xE4r du trycker p\xE5 en profilbild",
         ru: "\u041A\u0430\u043A\u043E\u0435 \u0434\u0435\u0439\u0441\u0442\u0432\u0438\u0435 \u0434\u043E\u043B\u0436\u043D\u043E \u0431\u044B\u0442\u044C \u0432\u044B\u043F\u043E\u043B\u043D\u0435\u043D\u043E \u043F\u0440\u0438 \u043D\u0430\u0436\u0430\u0442\u0438\u0438 \u043D\u0430 \u0430\u0432\u0430\u0442\u0430\u0440"
       }
@@ -61354,6 +61694,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Share",
       de: "Teilen",
       es: "Compartir",
+      it: "Condividi",
       pt: "Compartilhar",
       sv: "Dela",
       ru: "\u041F\u043E\u0434\u0435\u043B\u0438\u0442\u044C\u0441\u044F"
@@ -61362,6 +61703,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Copy",
       de: "Kopieren",
       es: "Copiar",
+      it: "Copia",
       pt: "Copiar",
       sv: "Kopiera",
       ru: "\u041A\u043E\u043F\u0438\u0440\u043E\u0432\u0430\u0442\u044C"
@@ -61370,6 +61712,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Copy username",
       de: "Benutzername kopieren",
       es: "Copiar nombre de usuario",
+      it: "Copia username",
       sv: "Kopiera anv\xE4ndarnamn",
       ru: "\u0421\u043A\u043E\u043F\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u0438\u043C\u044F \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F"
     },
@@ -61377,6 +61720,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Copy link",
       de: "Link kopieren",
       es: "Copiar v\xEDnculo",
+      it: "Copia link",
       sv: "Kopiera l\xE4nk",
       ru: "\u0421\u043A\u043E\u043F\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u0441\u0441\u044B\u043B\u043A\u0443"
     },
@@ -61384,6 +61728,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Copied to clipboard",
       de: "In die Zwischenablage kopiert",
       es: "Copiado al portapapeles",
+      it: "Copiato negli appunti",
       pt: "Copiado para a \xE1rea de transfer\xEAncia",
       sv: "Kopierats till urklipp",
       ru: "\u0421\u043A\u043E\u043F\u0438\u0440\u043E\u0432\u0430\u043D\u043E \u0432 \u0431\u0443\u0444\u0435\u0440 \u043E\u0431\u043C\u0435\u043D\u0430"
@@ -61392,6 +61737,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Click to copy",
       de: "Klicken zum kopieren",
       es: "Clic para copiar",
+      it: "Clicca per copiare",
       pt: "Clique para copiar",
       sv: "Klicka f\xF6r att kopiera",
       ru: "\u041D\u0430\u0436\u043C\u0438\u0442\u0435, \u0447\u0442\u043E\u0431\u044B \u0441\u043A\u043E\u043F\u0438\u0440\u043E\u0432\u0430\u0442\u044C"
@@ -61400,6 +61746,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Track titles should be wrapped in quotation marks (\u201C \u201D)",
       de: "Songtitel sollten von Anf\xFChrungszeichen umgeben sein (\u201C \u201D)",
       es: "Los t\xEDtulos de temas deben estar colocados entre comillas (\u201C \u201D)",
+      it: "I nomi dei brani dovrebbero essere collocati tra virgolette (\u201C \u201D)",
       pt: "Os t\xEDtulos das faixas devem ser colocados entre aspas (\u201C \u201D)",
       sv: "L\xE5tnamn ska omges av citattecken (\u201C \u201D)",
       ru: "\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u044F \u0442\u0440\u0435\u043A\u043E\u0432 \u0434\u043E\u043B\u0436\u043D\u044B \u0431\u044B\u0442\u044C \u0437\u0430\u043A\u043B\u044E\u0447\u0435\u043D\u044B \u0432 \u043A\u0430\u0432\u044B\u0447\u043A\u0438 (\u201C \u201D)"
@@ -61408,6 +61755,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Album and artist names are left without quotes",
       de: "Namen von Alben und K\xFCnstler:innen werden ohne Anf\xFChrungszeichen geschrieben",
       es: "Los nombres de \xE1lbumes y artistas son dejados sin comillas",
+      it: "I nomi di album e artisti sono scritti senza virgolette",
       pt: "Os nomes dos \xE1lbuns e artistas n\xE3o devem ser colocados entre aspas",
       sv: "Album och artistnamn ska skrivas utan citattecken",
       ru: "\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u044F \u0430\u043B\u044C\u0431\u043E\u043C\u043E\u0432 \u0438 \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u0435\u0439 \u043F\u0438\u0448\u0443\u0442\u0441\u044F \u0431\u0435\u0437 \u043A\u0430\u0432\u044B\u0447\u0435\u043A"
@@ -61416,6 +61764,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Use \u2018 \u2019 for quotations from the artist or elsewhere",
       de: "Verwende \u2018 \u2019 f\xFCr Zitate des K\xFCnstlers oder aus anderen Quellen",
       es: "Usa \u2018 \u2019 para citas provenientes del artista u otro lugar",
+      it: "Usa \u2018 \u2019 per citazioni dall'artista o altre fonti",
       pt: "Use \u2018 \u2019 para cita\xE7\xF5es do artista ou de outras fontes",
       sv: "Anv\xE4nd \u2018 \u2019 f\xF6r citat fr\xE5n artisten eller fr\xE5n annanstans",
       ru: "\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0439\u0442\u0435 \u2018 \u2019 \u0434\u043B\u044F \u0446\u0438\u0442\u0430\u0442 \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044F \u0438\u043B\u0438 \u0438\u0437 \u0434\u0440\u0443\u0433\u0438\u0445 \u0438\u0441\u0442\u043E\u0447\u043D\u0438\u043A\u043E\u0432"
@@ -61424,6 +61773,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Activity",
       de: "Aktivit\xE4t",
       es: "Actividad",
+      it: "Attivit\xE0",
       pt: "Atividade",
       sv: "Aktivitet",
       ru: "\u0410\u043A\u0442\u0438\u0432\u043D\u043E\u0441\u0442\u044C",
@@ -61432,6 +61782,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           en: "Shout",
           de: "Shout hinterlassen",
           es: "Nota",
+          it: "Nota aggiunta",
           pt: "Enviou mensagem",
           sv: "Hojt",
           ru: "\u0421\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u0435"
@@ -61440,6 +61791,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           en: "Uploaded image",
           de: "Bild hochgeladen",
           es: "Imagen subida",
+          it: "Immagine caricata",
           pt: "Enviou imagem",
           sv: "Laddat upp bild",
           ru: "\u0417\u0430\u0433\u0440\u0443\u0436\u0435\u043D\u043E \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435"
@@ -61448,6 +61800,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           en: "Starred image",
           de: "Bild als Favorit markiert",
           es: "Imagen favorita",
+          it: "Immagine impostata come preferita",
           pt: "Favoritou imagem",
           sv: "Valt favoritbild",
           ru: "\u0418\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435 \u043E\u0442\u043C\u0435\u0447\u0435\u043D\u043E"
@@ -61456,6 +61809,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           en: "Obsessed",
           de: "Obsession festgelegt",
           es: "Obsesionado",
+          it: "Passione impostata",
           pt: "Obcecou",
           sv: "Besatthet",
           ru: "\u0417\u0430\u0432\u0438\u0441\u0438\u043C\u043E\u0441\u0442\u044C"
@@ -61464,6 +61818,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           en: "Removed obsession",
           de: "Obsession entfernt",
           es: "Obsesi\xF3n removida",
+          it: "Passione rimossa",
           pt: "Desobcecou",
           sv: "Tagit bort besatthet",
           ru: "\u0417\u0430\u0432\u0438\u0441\u0438\u043C\u043E\u0441\u0442\u044C \u0443\u0434\u0430\u043B\u0435\u043D\u0430"
@@ -61472,6 +61827,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           en: "Loved",
           de: "Zu Favoriten hinzugef\xFCgt",
           es: "Favorito",
+          it: "Preferito",
           pt: "Favoritou",
           sv: "\xC4lskade l\xE5t",
           ru: "\u041F\u043E\u043D\u0440\u0430\u0432\u0438\u043B\u043E\u0441\u044C"
@@ -61480,6 +61836,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           en: "Removed love",
           de: "Favorit entfernt",
           es: "Favorito removido",
+          it: "Preferito rimosso",
           pt: "Desfavoritou",
           sv: "Tog bort som \xE4lskad",
           ru: "\u0423\u0434\u0430\u043B\u0435\u043D\u043E \u0438\u0437 \u043F\u043E\u043D\u0440\u0430\u0432\u0438\u0432\u0448\u0438\u0445\u0441\u044F"
@@ -61488,6 +61845,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           en: "Installed bwaa",
           de: "bwaa wurde installiert",
           es: "bwaa instalado",
+          it: "bwaa installato",
           pt: "Instalou o bwaa",
           sv: "Installerade bwaa",
           ru: "\u0423\u0441\u0442\u0430\u043D\u043E\u0432\u043B\u0435\u043D bwaa"
@@ -61496,6 +61854,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           en: "Updated bwaa",
           de: "bwaa wurde aktualisiert",
           es: "bwaa actualizado",
+          it: "bwaa aggiornato",
           pt: "Atualizou o bwaa",
           sv: "Uppdaterade bwaa",
           ru: "\u041E\u0431\u043D\u043E\u0432\u043B\u0435\u043D bwaa"
@@ -61504,6 +61863,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           en: "Installed bleh",
           de: "bleh wurde installiert",
           es: "bleh instalado",
+          it: "bleh installato",
           pt: "Instalou o bleh",
           sv: "Installerade bleh",
           ru: "\u0423\u0441\u0442\u0430\u043D\u043E\u0432\u043B\u0435\u043D bleh"
@@ -61512,6 +61872,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           en: "Updated bleh",
           de: "bleh wurde aktualisiert",
           es: "bleh actualizado",
+          it: "bleh aggiornato",
           pt: "Atualizou o bleh",
           sv: "Uppdaterade bleh",
           ru: "\u041E\u0431\u043D\u043E\u0432\u043B\u0435\u043D bleh"
@@ -61520,6 +61881,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           en: "Bookmarked",
           de: "Lesezeichen hinzugef\xFCgt",
           es: "Marcado",
+          it: "Segnalibro aggiunto",
           pt: "Adicionou marca\xE7\xE3o",
           sv: "Bokm\xE4rkte",
           ru: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u043E \u0432 \u0437\u0430\u043A\u043B\u0430\u0434\u043A\u0438"
@@ -61528,6 +61890,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           en: "Removed bookmark",
           de: "Lesezeichen entfernt",
           es: "Marcador removido",
+          it: "Segnalibro rimosso",
           pt: "Removeu marca\xE7\xE3o",
           sv: "Tog bort bokm\xE4rke",
           ru: "\u0417\u0430\u043A\u043B\u0430\u0434\u043A\u0430 \u0443\u0434\u0430\u043B\u0435\u043D\u0430"
@@ -61536,6 +61899,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           en: "Edited",
           de: "Bearbeitet",
           es: "Editado",
+          it: "Modificato",
           pt: "Editou",
           sv: "Redigerade",
           ru: "\u041E\u0442\u0440\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u043D\u043E"
@@ -61546,6 +61910,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           en: "Comments and replies from you across the site",
           de: "Kommentare und Antworten von dir auf der gesamten Site",
           es: "Comentarios y respuestas de ti a trav\xE9s del sitio",
+          it: "Commenti e risposte da te in tutto il sito",
           pt: "Seus coment\xE1rios e respostas ao redor do site",
           sv: "Kommentarer och svar fr\xE5n dig \xF6ver hela sidan",
           ru: "\u0412\u0430\u0448\u0438 \u043A\u043E\u043C\u043C\u0435\u043D\u0442\u0430\u0440\u0438\u0438 \u0438 \u043E\u0442\u0432\u0435\u0442\u044B \u043D\u0430 \u0441\u0430\u0439\u0442\u0435"
@@ -61554,6 +61919,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           en: "Uploading images and starring for your layout",
           de: "Bilder hochladen und Sterne f\xFCr dein Layout vergeben",
           es: "Im\xE1genes subidas y favoritos para tu layout",
+          it: "Caricamento e selezione di immagini per il tuo layout",
+          // 'star'/'to star' sounds incredibly bad to me in this context, falling back to 'selection' here ~cuto
           pt: "Imagens enviadas e favoritos do seu layout",
           sv: "Uppladdning av bilder och v\xE4ljer favoritbilder",
           ru: "\u0417\u0430\u0433\u0440\u0443\u0437\u043A\u0430 \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0439 \u0438 \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u0438\u0435 \u0438\u0445 \u0432 \u0438\u0437\u0431\u0440\u0430\u043D\u043D\u043E\u0435 \u0434\u043B\u044F \u0432\u0430\u0448\u0435\u0433\u043E \u043C\u0430\u043A\u0435\u0442\u0430"
@@ -61562,6 +61929,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           en: "Tracks you have on loop",
           de: "Titel, die du auf Dauerschleife hast",
           es: "Temas que tienes en bucle",
+          it: "Brani che ascolti a ripetizione",
           pt: "Faixas que voc\xEA tem em loop",
           sv: "L\xE5tar du \xE4r besatt av",
           ru: "\u0422\u0440\u0435\u043A\u0438, \u043A\u043E\u0442\u043E\u0440\u044B\u0435 \u0432\u044B \u0441\u043B\u0443\u0448\u0430\u0435\u0442\u0435 \u043D\u0430 \u043F\u043E\u0432\u0442\u043E\u0440\u0435"
@@ -61570,6 +61938,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           en: "Tracks you love",
           de: "Deine Lieblingssongs",
           es: "Temas que amas",
+          it: "Brani che adori",
           pt: "Faixas que voc\xEA ama",
           sv: "L\xE5tar du \xE4lskar",
           ru: "\u0422\u0440\u0435\u043A\u0438, \u043A\u043E\u0442\u043E\u0440\u044B\u0435 \u0432\u0430\u043C \u043D\u0440\u0430\u0432\u044F\u0442\u0441\u044F"
@@ -61578,6 +61947,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           en: "Music you want to check out",
           de: "Musik, die du auschecken solltest",
           es: "M\xFAsica que quieres chequear",
+          it: "Musica che vuoi ascoltare",
           pt: "M\xFAsica que voc\xEA quer conferir",
           sv: "Musik du vill komma ih\xE5g till senare",
           ru: "\u041C\u0443\u0437\u044B\u043A\u0430, \u043A\u043E\u0442\u043E\u0440\u0443\u044E \u0432\u044B \u0445\u043E\u0442\u0438\u0442\u0435 \u043F\u043E\u0441\u043B\u0443\u0448\u0430\u0442\u044C"
@@ -61586,6 +61956,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           en: "Editing of any wiki",
           de: "Bearbeiten jeglicher Wikis",
           es: "Edici\xF3n a cualquier wiki",
+          it: "Modifica di qualsiasi wiki",
           pt: "Editando de qualquer wiki",
           sv: "Wikiredigering",
           ru: "\u0420\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435 \u043B\u044E\u0431\u043E\u0439 \u0432\u0438\u043A\u0438"
@@ -61594,6 +61965,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           en: "First installations and updating",
           de: "Erstinstallationen und Aktualisierungen",
           es: "Primeras instalaciones y actualizaciones",
+          it: "Prime installazioni ed aggiornamenti",
           pt: "Primeiras instala\xE7\xF5es e atualiza\xE7\xF5es",
           sv: "F\xF6rsta installationen och uppdateringar",
           ru: "\u041F\u0435\u0440\u0432\u044B\u0435 \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043A\u0438 \u0438 \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u044F"
@@ -61604,6 +61976,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Keep track of your most recent activity locally on your profile",
       de: "Verfolge deine letzten Aktivit\xE4ten lokal auf deinem Profil",
       es: "Mant\xE9n registro de tus actividades m\xE1s recientes localmente en tu perfil",
+      it: "Tieni traccia delle tue attivit\xE0 pi\xF9 recenti localmente sul tuo profilo",
       pt: "Acompanhe suas atividades mais recentes localmente em seu perfil",
       sv: "H\xE5ll koll p\xE5 dina senaste aktiviteter lokalt p\xE5 din profil",
       ru: "\u041E\u0442\u0441\u043B\u0435\u0436\u0438\u0432\u0430\u0439\u0442\u0435 \u0441\u0432\u043E\u044E \u043D\u0435\u0434\u0430\u0432\u043D\u044E\u044E \u0430\u043A\u0442\u0438\u0432\u043D\u043E\u0441\u0442\u044C \u043B\u043E\u043A\u0430\u043B\u044C\u043D\u043E \u0432 \u0441\u0432\u043E\u0435\u043C \u043F\u0440\u043E\u0444\u0438\u043B\u0435"
@@ -61613,6 +61986,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Track my activities",
         de: "Meine Aktivit\xE4ten tracken",
         es: "Registra mis actividades",
+        it: "Registra le mie attivit\xE0",
         pt: "Acompanhar minhas atividades",
         sv: "Sp\xE5ra mina aktiviteter",
         ru: "\u041E\u0442\u0441\u043B\u0435\u0436\u0438\u0432\u0430\u0442\u044C \u043C\u043E\u044E \u0430\u043A\u0442\u0438\u0432\u043D\u043E\u0441\u0442\u044C"
@@ -61621,6 +61995,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Activities will only be registered while enabled",
         de: "Aktivit\xE4ten werden nur getrackt, wenn du es aktivierst",
         es: "Las actividades solo ser\xE1n registradas cuando est\xE9 habilitado",
+        it: "Le attivit\xE0 saranno registrate solo quando abilitato",
         pt: "As atividades s\xF3 ser\xE3o registradas enquanto estiverem habilitadas",
         sv: "Aktiviteter l\xE4ggs bara till n\xE4r inst\xE4llningen \xE4r aktiverad",
         ru: "\u0410\u043A\u0442\u0438\u0432\u043D\u043E\u0441\u0442\u044C \u0431\u0443\u0434\u0435\u0442 \u0440\u0435\u0433\u0438\u0441\u0442\u0440\u0438\u0440\u043E\u0432\u0430\u0442\u044C\u0441\u044F \u0442\u043E\u043B\u044C\u043A\u043E \u043F\u0440\u0438 \u0432\u043A\u043B\u044E\u0447\u0435\u043D\u0438\u0438"
@@ -61630,6 +62005,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Clear history",
       de: "Verlauf l\xF6schen",
       es: "Limpiar historial",
+      it: "Cancella cronologia",
       pt: "Limpar hist\xF3rico",
       sv: "T\xF6m historia",
       ru: "\u041E\u0447\u0438\u0441\u0442\u0438\u0442\u044C \u0438\u0441\u0442\u043E\u0440\u0438\u044E"
@@ -61638,6 +62014,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Cleared your activity history",
       de: "Dein Aktivit\xE4tsverlauf wurde gel\xF6scht",
       es: "Historial de actividades limpiado",
+      it: "Cronologia delle attivit\xE0 cancellata",
       pt: "Hist\xF3rico de atividades limpo",
       sv: "T\xF6mde din aktivitetshistoria",
       ru: "\u0412\u0430\u0448\u0430 \u0438\u0441\u0442\u043E\u0440\u0438\u044F \u0430\u043A\u0442\u0438\u0432\u043D\u043E\u0441\u0442\u0438 \u043E\u0447\u0438\u0449\u0435\u043D\u0430"
@@ -61646,6 +62023,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Activity settings",
       de: "Aktivit\xE4tseinstellungen",
       es: "Configuraci\xF3n de actividad",
+      it: "Impostazioni delle attivit\xE0",
       pt: "Configura\xE7\xF5es de atividade",
       sv: "Redigera dina aktiviteter",
       ru: "\u041D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438 \u0430\u043A\u0442\u0438\u0432\u043D\u043E\u0441\u0442\u0438"
@@ -61654,6 +62032,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Installation",
       de: "Installation",
       es: "Instalaci\xF3n",
+      it: "Installazione",
       pt: "Instala\xE7\xE3o",
       sv: "Installation",
       ru: "\u0423\u0441\u0442\u0430\u043D\u043E\u0432\u043A\u0430"
@@ -61663,6 +62042,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Grid",
       de: "Raster",
       es: "Cuadr\xEDcula",
+      it: "Griglia",
       pt: "Grade",
       sv: "Bildruta",
       ru: "\u0421\u0435\u0442\u043A\u0430"
@@ -61672,6 +62052,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "List",
       de: "Liste",
       es: "Lista",
+      it: "Lista",
       pt: "Linha",
       sv: "Lista",
       ru: "\u0421\u043F\u0438\u0441\u043E\u043A"
@@ -61681,6 +62062,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Line",
       de: "Linien",
       es: "L\xEDnea",
+      it: "Linea",
       pt: "Lista",
       sv: "Linjediagram",
       ru: "\u041B\u0438\u043D\u0435\u0439\u043D\u044B\u0439"
@@ -61690,6 +62072,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Pie",
       de: "Kreis",
       es: "Pastel",
+      it: "Torta",
       pt: "Pizza",
       sv: "Cirkeldiagram",
       ru: "\u041A\u0440\u0443\u0433\u043E\u0432\u0430\u044F"
@@ -61699,6 +62082,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Bar",
       de: "Balken",
       es: "Barra",
+      it: "Barre",
       pt: "Coluna",
       sv: "Stapeldiagram",
       ru: "\u0421\u0442\u043E\u043B\u0431\u0447\u0430\u0442\u0430\u044F"
@@ -61707,6 +62091,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Horizontal",
       de: "Horizontal",
       es: "Horizontal",
+      it: "Orizzontale",
       sv: "V\xE5gr\xE4tt",
       ru: "\u0413\u043E\u0440\u0438\u0437\u043E\u043D\u0442\u0430\u043B\u044C\u043D\u044B\u0439"
     },
@@ -61714,6 +62099,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Vertical",
       de: "Vertikal",
       es: "Vertical",
+      it: "Verticale",
       sv: "Lodr\xE4tt",
       ru: "\u0412\u0435\u0440\u0442\u0438\u043A\u0430\u043B\u044C\u043D\u044B\u0439"
     },
@@ -61721,6 +62107,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "This year",
       de: "Dieses Jahr",
       es: "Este a\xF1o",
+      it: "Quest'anno",
       pt: "Este ano",
       sv: "Detta \xE5r",
       ru: "\u042D\u0442\u043E\u0442 \u0433\u043E\u0434"
@@ -61729,6 +62116,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Last year",
       de: "Letztes Jahr",
       es: "A\xF1o pasado",
+      it: "L'anno scorso",
       pt: "Ano passado",
       sv: "F\xF6rra \xE5ret",
       ru: "\u041F\u0440\u043E\u0448\u043B\u044B\u0439 \u0433\u043E\u0434"
@@ -61738,6 +62126,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Love",
       de: "Als Lieblingssong markieren",
       es: "Favorito",
+      it: "Preferito",
       pt: "Favoritas",
       sv: "\xC4lska",
       ru: "\u041F\u043E\u043D\u0440\u0430\u0432\u0438\u043B\u043E\u0441\u044C"
@@ -61745,6 +62134,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     love_track: {
       en: "Love track",
       es: "Marcar como favorito",
+      it: "Imposta come preferito",
       ru: "\u041E\u0442\u043C\u0435\u0442\u0438\u0442\u044C \u0442\u0440\u0435\u043A \u043A\u0430\u043A \u043B\u044E\u0431\u0438\u043C\u044B\u0439"
     },
     loved: {
@@ -61753,6 +62143,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Loved",
       de: "Lieblingssongs",
       es: "Favorito",
+      it: "Preferiti",
       pt: "Favoritadas",
       sv: "\xC4lskade l\xE5tar",
       ru: "\u041F\u043E\u043D\u0440\u0430\u0432\u0438\u0432\u0448\u0438\u0435\u0441\u044F"
@@ -61762,6 +62153,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Velocity",
       de: "Dynamik",
       es: "Velocity",
+      it: "Velocity",
       pt: "Rapidez",
       // velocity is often mistakenly translated to 'velocidade' in portuguese
       sv: "Velocitet",
@@ -61771,6 +62163,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Logout",
       de: "Abmelden",
       es: "Salir",
+      it: "Esci",
       pt: "Sair",
       ja: "\u30ED\u30B0\u30A2\u30A6\u30C8",
       sv: "Logga ut",
@@ -61781,6 +62174,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Tracklist",
       de: "Titelliste",
       es: "Lista de temas",
+      it: "Elenco dei brani",
       pt: "Lista de faixas",
       sv: "Spellista",
       ru: "\u0421\u043F\u0438\u0441\u043E\u043A \u0442\u0440\u0435\u043A\u043E\u0432"
@@ -61789,6 +62183,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Retrieved own plays as official tracklist is unavailable",
       de: "Eigene Plays abgerufen, da die offizielle Titelliste nicht verf\xFCgbar ist",
       es: "Reproducciones personales usadas, debido a que la lista de temas oficial no est\xE1 disponible",
+      it: "Il recupero dei propri ascolti come elenco ufficiale dei brani non \xE8 disponibile",
       pt: "Reprodu\xE7\xF5es pr\xF3prias recuperadas, pois a lista de faixas oficial n\xE3o est\xE1 dispon\xEDvel",
       sv: "H\xE4mtade dina spelningar f\xF6r en officiell spellista finns inte tillg\xE4nglig",
       ru: "\u041F\u043E\u043B\u0443\u0447\u0435\u043D\u044B \u0432\u0430\u0448\u0438 \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u044F, \u0442\u0430\u043A \u043A\u0430\u043A \u043E\u0444\u0438\u0446\u0438\u0430\u043B\u044C\u043D\u044B\u0439 \u0441\u043F\u0438\u0441\u043E\u043A \u0442\u0440\u0435\u043A\u043E\u0432 \u043D\u0435\u0434\u043E\u0441\u0442\u0443\u043F\u0435\u043D"
@@ -61797,6 +62192,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "From {album}",
       de: "Auf {album}",
       es: "De {album}",
+      it: "Da {album}",
       pt: "Do {album}",
       sv: "Fr\xE5n {album}",
       ru: "\u0421 {album}"
@@ -61806,6 +62202,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "{c} others",
       de: "{c} weitere",
       es: "{c} otros",
+      it: "{c} altri",
       pt: "{c} outros",
       sv: "{c} andra",
       ru: "{c} \u0434\u0440\u0443\u0433\u0438\u0445"
@@ -61814,6 +62211,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Collecting your album plays",
       de: "Sammeln deiner Albumwiedergaben",
       es: "Recopilando tus reproducciones de \xE1lbumes",
+      it: "Raccogliendo le tue riproduzioni di album",
       pt: "Coletando suas reprodu\xE7\xF5es de \xE1lbuns",
       sv: "Samlar ihop dina albumspelningar",
       ru: "\u0421\u0431\u043E\u0440 \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u0439 \u0432\u0430\u0448\u0438\u0445 \u0430\u043B\u044C\u0431\u043E\u043C\u043E\u0432"
@@ -61822,6 +62220,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "No plays could be found",
       de: "Es konnten keine Plays gefunden werden",
       es: "No se pudieron encontrar reproducciones",
+      it: "Non sono state trovate riproduzioni",
       pt: "Nenhuma reprodu\xE7\xE3o p\xF4de ser encontrada",
       sv: "Kunde inte hitta p\xE5 albumspelningar",
       ru: "\u041F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u044F \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D\u044B"
@@ -61830,6 +62229,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Open album title as track",
       de: "Albumtitel als Song \xF6ffnen",
       es: "Abrir t\xEDtulo del \xE1lbum como tema",
+      it: "Apri il titolo dell'album come brano",
       pt: "Abrir t\xEDtulo do \xE1lbum como faixa",
       sv: "\xD6ppna albumtitel som egen l\xE5t",
       ru: "\u041E\u0442\u043A\u0440\u044B\u0442\u044C \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u0430\u043B\u044C\u0431\u043E\u043C\u0430 \u043A\u0430\u043A \u0442\u0440\u0435\u043A"
@@ -61838,6 +62238,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Ignored",
       de: "Ignoriert",
       es: "Ignorado",
+      it: "Ignorato",
       pt: "Ignorados",
       sv: "Ignorerad",
       ru: "\u0418\u0433\u043D\u043E\u0440\u0438\u0440\u0443\u0435\u043C\u044B\u0435"
@@ -61846,6 +62247,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "{c} total",
       de: "{c} insgesamt",
       es: "{c} en total",
+      it: "{c} in totale",
       sv: "{c} totalt",
       ru: "{c} \u0432\u0441\u0435\u0433\u043E"
     },
@@ -61853,6 +62255,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Video removed by Last.fm",
       de: "Video von Last.fm entfernt",
       es: "Video eliminado por Last.fm",
+      it: "Video rimosso da Last.fm",
       pt: "V\xEDdeo removido pela Last.fm",
       sv: "Video borttagen av Last.fm",
       ru: "\u0412\u0438\u0434\u0435\u043E \u0443\u0434\u0430\u043B\u0435\u043D\u043E Last.fm"
@@ -61861,6 +62264,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "This page has been limited by Last.fm",
       de: "Diese Seite wurde von Last.fm eingeschr\xE4nkt",
       es: "Esta p\xE1gina ha sido limitada por Last.fm",
+      it: "Questa pagina \xE8 stata limitata da Last.fm",
       pt: "Esta p\xE1gina foi limitada pela Last.fm",
       sv: "Denna sida har begr\xE4nsats av Last.fm",
       ru: "\u042D\u0442\u0430 \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u0430 \u043E\u0433\u0440\u0430\u043D\u0438\u0447\u0435\u043D\u0430 Last.fm"
@@ -61872,6 +62276,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Results for",
       de: "Ergebnisse f\xFCr",
       es: "Resultados para",
+      it: "Risultati per",
       pt: "Resultados para",
       sv: "S\xF6kresultat f\xF6r",
       ru: "\u0420\u0435\u0437\u0443\u043B\u044C\u0442\u0430\u0442\u044B \u0434\u043B\u044F"
@@ -61880,6 +62285,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Create new event",
       de: "Neues Event hinzuf\xFCgen",
       es: "Crear nuevo evento",
+      it: "Crea nuovo evento",
       pt: "Criar novo evento",
       sv: "Skapa ett nytt evenemang",
       ru: "\u0421\u043E\u0437\u0434\u0430\u0442\u044C \u043D\u043E\u0432\u043E\u0435 \u0441\u043E\u0431\u044B\u0442\u0438\u0435"
@@ -61889,6 +62295,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Related to",
       de: "Verwandte Tags",
       es: "Relacionado a",
+      it: "Correlato a",
       pt: "Relacionado a",
       sv: "F\xF6rknippad med",
       ru: "\u0421\u0432\u044F\u0437\u0430\u043D\u043D\u044B\u0435 \u0441"
@@ -61897,6 +62304,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Personal tag",
       de: "Pers\xF6nliches Tag",
       es: "Tag personal",
+      it: "Tag personale",
       pt: "Marcador pessoal",
       sv: "Din tagg",
       ru: "\u041B\u0438\u0447\u043D\u044B\u0439 \u0442\u0435\u0433"
@@ -61905,6 +62313,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Your avatar",
       de: "Dein Profilbild",
       es: "Tu avatar",
+      it: "La tua foto profilo",
       pt: "Sua foto de perfil",
       sv: "Din profilbild",
       ru: "\u0412\u0430\u0448 \u0430\u0432\u0430\u0442\u0430\u0440"
@@ -61918,6 +62327,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Avatar for ",
       de: "Profilbild von ",
       es: "Avatar para ",
+      it: "Avatar di ",
       pt: "Foto de perfil de",
       sv: "Avatar f\xF6r ",
       ru: "\u0410\u0432\u0430\u0442\u0430\u0440 \u0434\u043B\u044F "
@@ -61926,6 +62336,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "by",
       de: "von",
       es: "por",
+      it: "di",
       pt: "por",
       sv: "av",
       ru: "\u043E\u0442"
@@ -61934,6 +62345,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "by {u}",
       de: "von {u}",
       es: "por {u}",
+      it: "di {u}",
       pt: "por {u}",
       sv: "av {u}",
       ru: "\u043E\u0442 {u}"
@@ -61943,6 +62355,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: " by {a}",
       de: " von {a}",
       es: " por {a}",
+      it: " di {a}",
       pt: " por {a}",
       sv: " av {a}",
       ru: " \u043E\u0442 {a}"
@@ -61951,6 +62364,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "{v} by {u}",
       de: "{v} von {u}",
       es: "{v} por {v}",
+      it: "{v} di {u}",
       pt: "{v} por {u}",
       ru: "{v} \u043E\u0442 {u}"
     },
@@ -61958,6 +62372,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "from {u}",
       de: "Von {u}",
       es: "de {u}",
+      it: "da {u}",
       pt: "de {u}",
       sv: "fr\xE5n {u}",
       ru: "\u043E\u0442 {u}"
@@ -61966,6 +62381,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Open in a new tab",
       de: "In neuem Tab \xF6ffnen",
       es: "Abrir en nueva pesta\xF1a",
+      it: "Apri in una nuova scheda",
       pt: "Abrir em nova aba",
       sv: "\xD6ppna i ny flik",
       ru: "\u041E\u0442\u043A\u0440\u044B\u0442\u044C \u0432 \u043D\u043E\u0432\u043E\u0439 \u0432\u043A\u043B\u0430\u0434\u043A\u0435"
@@ -61974,20 +62390,24 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "View image",
       pt: "Visualizar imagem",
       es: "Ver imagen",
+      it: "Visualizza immagine",
       sv: "Visa bild",
       ru: "\u041F\u0440\u043E\u0441\u043C\u043E\u0442\u0440\u0435\u0442\u044C \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435"
     },
     view_image_unsafe: {
       en: "View unsafe image",
-      es: "Ver imagen no segura"
+      es: "Ver imagen no segura",
+      it: "Mostra immagine non sicura"
     },
     open_link: {
       en: "Open link",
-      es: "Abrir v\xEDnculo"
+      es: "Abrir v\xEDnculo",
+      it: "Apri link"
     },
     copy_text: {
       en: "Copy text",
-      es: "Copiar texto"
+      es: "Copiar texto",
+      it: "Copia testo"
     },
     event_cancelled: {
       // obviously remove the emoji or replace it as
@@ -61997,6 +62417,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "This event has been cancelled (\u2565\uFE4F\u2565)",
       de: "Dieses Event wurde abgesagt (\u2565\uFE4F\u2565)",
       es: "Este evento ha sido cancelado (\u2565\uFE4F\u2565)",
+      it: "Questo evento \xE8 stato annullato (\u2565\uFE4F\u2565)",
       pt: "Este evento foi cancelado (\u2565\uFE4F\u2565)",
       sv: "Detta evenemang har avbrutits (\u2565\uFE4F\u2565)",
       ru: "\u042D\u0442\u043E \u0441\u043E\u0431\u044B\u0442\u0438\u0435 \u0431\u044B\u043B\u043E \u043E\u0442\u043C\u0435\u043D\u0435\u043D\u043E (\u2565\uFE4F\u2565)"
@@ -62006,6 +62427,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Smart credited artists and song tags",
         de: "Intelligente K\xFCnstler- und Song-Tags",
         es: "Tags inteligentes de artistas y temas",
+        it: "Tag intelligenti per artisti e brani",
         pt: "Tags inteligentes de artistas e m\xFAsicas",
         sv: "Smartformat f\xF6r g\xE4startister och l\xE5ttaggar",
         ru: "\u0423\u043C\u043D\u043E\u0435 \u0444\u043E\u0440\u043C\u0430\u0442\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435 \u043F\u0440\u0438\u0433\u043B\u0430\u0448\u0435\u043D\u043D\u044B\u0445 \u0430\u0440\u0442\u0438\u0441\u0442\u043E\u0432 \u0438 \u0442\u0435\u0433\u043E\u0432 \u043F\u0435\u0441\u0435\u043D"
@@ -62014,6 +62436,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Analyses album and track titles into their guests, versions, remixes, etc.",
         de: "Analysiert Album- und Songtitel hinsichtlich ihrer Versionen, Remixe usw.",
         es: "Analiza t\xEDtulos de \xE1lbumes y temas y separa sus colaboradores, versiones, remixes, etc.",
+        it: "Analizza i titoli di album e brani ed estrae artisti partecipanti, versioni, remix, ecc.",
         pt: "Analisa t\xEDtulos de \xE1lbuns e faixas e os separa em seus convidados, vers\xF5es, remixes etc.",
         sv: "Analyserar album och l\xE5ttitlar till g\xE4startister, olika versioner, remixar osv.",
         ru: "\u0410\u043D\u0430\u043B\u0438\u0437\u0438\u0440\u0443\u0435\u0442 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u044F \u0430\u043B\u044C\u0431\u043E\u043C\u043E\u0432 \u0438 \u0442\u0440\u0435\u043A\u043E\u0432 \u043D\u0430 \u043F\u0440\u0435\u0434\u043C\u0435\u0442 \u043F\u0440\u0438\u0433\u043B\u0430\u0448\u0435\u043D\u043D\u044B\u0445 \u0430\u0440\u0442\u0438\u0441\u0442\u043E\u0432, \u0432\u0435\u0440\u0441\u0438\u0439, \u0440\u0435\u043C\u0438\u043A\u0441\u043E\u0432 \u0438 \u0442.\u0434."
@@ -62024,6 +62447,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Duplicate credited artists in title",
         de: "Doppelte Nennung der K\xFCnstler:innen im Titel",
         es: "Duplicar artistas con cr\xE9ditos en el t\xEDtulo",
+        it: "Duplica gli artisti partecipanti nel titolo",
         pt: "Artistas creditados duplicados no t\xEDtulo",
         sv: "Duplicera artistnamn i l\xE5ttitel",
         ru: "\u0414\u0443\u0431\u043B\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u043F\u0440\u0438\u0433\u043B\u0430\u0448\u0435\u043D\u043D\u044B\u0445 \u0430\u0440\u0442\u0438\u0441\u0442\u043E\u0432 \u0432 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0438"
@@ -62032,6 +62456,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Otherwise guests are neatly placed next to the primary artist",
         de: "Ansonsten werden gefeaturete K\xFCnstler:innen neben dem/der Hauptk\xFCnstler:in platziert",
         es: "De lo contrario, los colaboradores son organizados limpiamente al lado del artista principal",
+        it: "Altrimenti gli artisti partecipanti sono disposti in modo pulito vicino all'artista principale",
         pt: "Caso contr\xE1rio os convidados s\xE3o organizados de forma elegante ao lado do artista principal",
         sv: "Annars placeras g\xE4startister fint bredvid huvudartisten",
         ru: "\u0412 \u043F\u0440\u043E\u0442\u0438\u0432\u043D\u043E\u043C \u0441\u043B\u0443\u0447\u0430\u0435 \u043F\u0440\u0438\u0433\u043B\u0430\u0448\u0435\u043D\u043D\u044B\u0435 \u0430\u0440\u0442\u0438\u0441\u0442\u044B \u0430\u043A\u043A\u0443\u0440\u0430\u0442\u043D\u043E \u0440\u0430\u0437\u043C\u0435\u0449\u0430\u044E\u0442\u0441\u044F \u0440\u044F\u0434\u043E\u043C \u0441 \u043E\u0441\u043D\u043E\u0432\u043D\u044B\u043C \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u0435\u043C"
@@ -62041,24 +62466,28 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       name: {
         en: "Track layout",
         es: "Dise\xF1o de tema",
+        it: "Layout dei brani",
         sv: "L\xE5tlayout",
         ru: "\u0420\u0430\u0441\u043F\u043E\u043B\u043E\u0436\u0435\u043D\u0438\u0435 \u0442\u0440\u0435\u043A\u0430"
       },
       body: {
         en: "Choose which axis to display track information on",
         es: "Elige en qu\xE9 eje mostrar la informaci\xF3n del tema",
+        it: "Seleziona su quale asse mostrare le informazioni dei brani",
         sv: "V\xE4lj vilken axis att visa l\xE5tinformation p\xE5",
         ru: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u043E\u0441\u044C, \u043D\u0430 \u043A\u043E\u0442\u043E\u0440\u043E\u0439 \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0442\u044C \u0438\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u044E \u043E \u0442\u0440\u0435\u043A\u0435"
       },
       column: {
         en: "Place title and artist vertically",
         es: "Colocar t\xEDtulo y artista verticalmente",
+        it: "Disponi titolo e artista verticalmente",
         sv: "Placera titel och artist lodr\xE4tt",
         ru: "\u0420\u0430\u0437\u043C\u0435\u0441\u0442\u0438\u0442\u044C \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u0438 \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044F \u0432\u0435\u0440\u0442\u0438\u043A\u0430\u043B\u044C\u043D\u043E"
       },
       row: {
         en: "Place title and artist horizontally",
         es: "Colocar t\xEDtulo y artista horizontalmente",
+        it: "Disponi titolo e artista orizzontalmente",
         sv: "Placera titel och artist v\xE5gr\xE4tt",
         ru: "\u0420\u0430\u0437\u043C\u0435\u0441\u0442\u0438\u0442\u044C \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u0438 \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044F \u0433\u043E\u0440\u0438\u0437\u043E\u043D\u0442\u0430\u043B\u044C\u043D\u043E"
       }
@@ -62067,24 +62496,28 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       name: {
         en: "Album name location",
         es: "Ubicaci\xF3n del nombre del \xE1lbum",
+        it: "Posizione del nome dell'album",
         sv: "Albumtitelsplats",
         ru: "\u0420\u0430\u0441\u043F\u043E\u043B\u043E\u0436\u0435\u043D\u0438\u0435 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u044F \u0430\u043B\u044C\u0431\u043E\u043C\u0430"
       },
       body: {
         en: "Choose which axis to display said album name on",
         es: "Elige en qu\xE9 eje mostrar el nombre del \xE1lbum",
+        it: "Seleziona su quale asse mostrare il nome dell'album",
         sv: "V\xE4lj vilken axis att visa albumtitel p\xE5",
         ru: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u043E\u0441\u044C, \u043D\u0430 \u043A\u043E\u0442\u043E\u0440\u043E\u0439 \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0442\u044C \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u0430\u043B\u044C\u0431\u043E\u043C\u0430"
       },
       column: {
         en: "Place below title and artist",
         es: "Colocar debajo del t\xEDtulo y artista",
+        it: "Disponi sotto titolo e artista",
         sv: "Placera under l\xE5ttitel och artist",
         ru: "\u0420\u0430\u0437\u043C\u0435\u0441\u0442\u0438\u0442\u044C \u043F\u043E\u0434 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435\u043C \u0438 \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u0435\u043C"
       },
       row: {
         en: "Place to the side of title and artist",
         es: "Colocar al lado del t\xEDtulo y artista",
+        it: "Disponi a fianco di titolo e artista",
         sv: "Placera bredvid l\xE5ttitel och artist",
         ru: "\u0420\u0430\u0437\u043C\u0435\u0441\u0442\u0438\u0442\u044C \u0440\u044F\u0434\u043E\u043C \u0441 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435\u043C \u0438 \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u0435\u043C"
       }
@@ -62093,12 +62526,14 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       name: {
         en: "Show associated album for tracks",
         es: "Mostrar \xE1lbum asociado al tema",
+        it: "Mostra album associato per i brani",
         sv: "Visa associerade album f\xF6r l\xE5tar",
         ru: "\u041F\u043E\u043A\u0430\u0437\u044B\u0432\u0430\u0442\u044C \u0441\u0432\u044F\u0437\u0430\u043D\u043D\u044B\u0439 \u0430\u043B\u044C\u0431\u043E\u043C \u0434\u043B\u044F \u0442\u0440\u0435\u043A\u043E\u0432"
       },
       body: {
         en: "Places the track\u2019s associated album name if there\u2019s room",
         es: "Coloca el nombre del \xE1lbum asociado al tema si hay espacio",
+        it: "Inserisce il nome dell'album associato ai brani se c'\xE8 spazio",
         sv: "Placerar l\xE5tens associerade album om det finns plats",
         ru: "\u041E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0435\u0442 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u0441\u0432\u044F\u0437\u0430\u043D\u043D\u043E\u0433\u043E \u0430\u043B\u044C\u0431\u043E\u043C\u0430 \u0442\u0440\u0435\u043A\u0430, \u0435\u0441\u043B\u0438 \u0435\u0441\u0442\u044C \u043C\u0435\u0441\u0442\u043E"
       }
@@ -62107,6 +62542,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Only when actively scrobbling",
       es: "Solo activo cuando se hace scrobbling",
       de: "Nur w\xE4hrend des aktiven Scrobbelns",
+      it: "Solo quando si sta effettuando lo scrobbling",
       sv: "Endast n\xE4r du skrobblar",
       ru: "\u0422\u043E\u043B\u044C\u043A\u043E \u043F\u0440\u0438 \u0430\u043A\u0442\u0438\u0432\u043D\u043E\u043C \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u0438\u043D\u0433\u0435"
     },
@@ -62114,6 +62550,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Always when possible",
       es: "Siempre cuando sea posible",
       de: "Immer, wenn m\xF6glich",
+      it: "Sempre quando possibile",
       sv: "Alltid, n\xE4r det \xE4r m\xF6jligt",
       ru: "\u0412\u0441\u0435\u0433\u0434\u0430, \u043A\u043E\u0433\u0434\u0430 \u0432\u043E\u0437\u043C\u043E\u0436\u043D\u043E"
     },
@@ -62121,6 +62558,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Show remaster tags",
       de: "Remaster-Tags anzeigen",
       es: "Mostrar tags de remasters",
+      it: "Mostra tag dei remaster",
       pt: "Mostrar as tags de remaster",
       sv: "Visa remaster-taggar",
       ru: "\u041F\u043E\u043A\u0430\u0437\u044B\u0432\u0430\u0442\u044C \u0442\u0435\u0433\u0438 \u0440\u0435\u043C\u0430\u0441\u0442\u0435\u0440\u0438\u043D\u0433\u0430"
@@ -62130,6 +62568,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Refresh tracks automatically",
         de: "Titel automatisch aktualisieren",
         es: "Recargar temas autom\xE1ticamente",
+        it: "Aggiorna brani automaticamente",
         pt: "Atualizar faixas automaticamente",
         sv: "Automatiskt uppdatera l\xE5tar",
         ru: "\u0410\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u0435\u0441\u043A\u0438 \u043E\u0431\u043D\u043E\u0432\u043B\u044F\u0442\u044C \u0442\u0440\u0435\u043A\u0438"
@@ -62138,6 +62577,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "View your listening history in realtime",
         de: "Sehe deinen H\xF6rverlauf in Echtzeit an",
         es: "Ve tu historial de reproducciones en tiempo real",
+        it: "Visualizza la tua cronologia di ascolto in tempo reale",
         pt: "Veja seu hist\xF3rico de scrobbles em tempo real",
         sv: "Visa din lyssningshistorik i realtid",
         ru: "\u041F\u0440\u043E\u0441\u043C\u043E\u0442\u0440 \u0438\u0441\u0442\u043E\u0440\u0438\u0438 \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u044F \u0432 \u0440\u0435\u0430\u043B\u044C\u043D\u043E\u043C \u0432\u0440\u0435\u043C\u0435\u043D\u0438"
@@ -62148,6 +62588,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Amount of tracks to display",
       de: "Anzahl der anzuzeigenden Titel",
       es: "Cantidad de temas para mostrar",
+      it: "Quantit\xE0 di brani da mostrare",
       pt: "Quantidade a ser exibida",
       sv: "M\xE4ngd att visa",
       ru: "\u041A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u043E \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0435\u043C\u044B\u0445 \u0442\u0440\u0435\u043A\u043E\u0432"
@@ -62156,6 +62597,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Accompany tracks with artwork",
       de: "Titel mit Albumcover anzeigen",
       es: "Acompa\xF1ar temas con la c\xE1ratula",
+      it: "Accompagna i brani con le copertine",
       pt: "Mostrar as faixas juntamente a capa",
       sv: "Visa skivomslag vid l\xE5t",
       ru: "\u0421\u043E\u043F\u0440\u043E\u0432\u043E\u0436\u0434\u0430\u0442\u044C \u0442\u0440\u0435\u043A\u0438 \u043E\u0431\u043B\u043E\u0436\u043A\u043E\u0439"
@@ -62164,6 +62606,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Default timeframe",
       de: "Standardzeitraum",
       es: "Duraci\xF3n predeterminada",
+      it: "Periodo di tempo predefinito",
       pt: "Per\xEDodo padr\xE3o",
       ja: "\u30C7\u30D5\u30A9\u30EB\u30C8\u671F\u9593",
       sv: "Standardtidsram",
@@ -62173,6 +62616,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Timeframe",
       de: "Zeitraum",
       es: "Duraci\xF3n",
+      it: "Durata",
       pt: "Per\xEDodo",
       sv: "Tidsram",
       ru: "\u041F\u0435\u0440\u0438\u043E\u0434"
@@ -62181,6 +62625,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Item type",
       de: "Objekttyp",
       es: "Tipo de \xEDtem",
+      it: "Tipo di oggetto",
       pt: "Tipo de item",
       sv: "Objekttyp",
       ru: "\u0422\u0438\u043F \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u0430"
@@ -62189,6 +62634,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Page count",
       de: "Seitenanzahl",
       es: "Total de p\xE1ginas",
+      it: "Numero di pagine",
       pt: "Total de p\xE1ginas",
       sv: "M\xE4ngd sidor",
       ru: "\u041A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u043E \u0441\u0442\u0440\u0430\u043D\u0438\u0446"
@@ -62197,6 +62643,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Chart style",
       de: "Diagrammstil",
       es: "Estilo de lista",
+      it: "Stile della vista",
       pt: "Estilo da tabela",
       ja: "\u30C1\u30E3\u30FC\u30C8\u30B9\u30BF\u30A4\u30EB",
       sv: "Liststil",
@@ -62206,6 +62653,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Chart size",
       de: "Diagrammgr\xF6\xDFe",
       es: "Tama\xF1o de lista",
+      it: "Dimensione della vista",
       pt: "Tamanho da tabela",
       sv: "Liststorlek",
       ru: "\u0420\u0430\u0437\u043C\u0435\u0440 \u0433\u0440\u0430\u0444\u0438\u043A\u0430"
@@ -62214,6 +62662,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Country",
       de: "Land",
       es: "Pa\xEDs",
+      it: "Paese",
       pt: "Pa\xEDs",
       sv: "Land",
       ru: "\u0421\u0442\u0440\u0430\u043D\u0430"
@@ -62222,12 +62671,14 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       name: {
         en: "Display name",
         es: "Nombre para mostrar",
+        it: "Nome visualizzato",
         sv: "Visningsnamn",
         ru: "\u041E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0435\u043C\u043E\u0435 \u0438\u043C\u044F"
       },
       body: {
         en: "Changes your name on your profile, with your real @username shown below",
         es: "Cambia tu nombre en tu perfil, con tu nombre de usuario mostrado debajo",
+        it: "Cambia il tuo nome sul tuo profilo, con il tuo @username visualizzato sotto",
         sv: "\xC4ndrar namnet p\xE5 din profil och l\xE4gger ditt riktiga @anv\xE4ndarnamn under\xE5t",
         ru: "\u0418\u0437\u043C\u0435\u043D\u044F\u0435\u0442 \u0432\u0430\u0448\u0435 \u0438\u043C\u044F \u0432 \u043F\u0440\u043E\u0444\u0438\u043B\u0435, \u043F\u0440\u0438 \u044D\u0442\u043E\u043C \u0432\u0430\u0448 \u0440\u0435\u0430\u043B\u044C\u043D\u044B\u0439 @\u043D\u0438\u043A\u043D\u0435\u0439\u043C \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0435\u0442\u0441\u044F \u043D\u0438\u0436\u0435"
       }
@@ -62236,6 +62687,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Subtitle",
       de: "Untertitel",
       es: "Subt\xEDtulo",
+      it: "Sottotitolo",
       pt: "Legenda",
       sv: "Undertext",
       ru: "\u041F\u043E\u0434\u0437\u0430\u0433\u043E\u043B\u043E\u0432\u043E\u043A"
@@ -62244,6 +62696,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Pronouns are specially supported if placed first",
       de: "Pronomen werden unterst\xFCtzt, wenn sie an erster Stelle stehen",
       es: "Los pronombres son especialmente compatibles si son colocados primero",
+      it: "I pronomi sono supportati specialmente se collocati per primi",
       pt: "Os pronomes s\xE3o especialmente apoiados se colocados primeiro",
       sv: "Pronomen har speciellt st\xF6d om det placeras f\xF6rst",
       ru: "\u041C\u0435\u0441\u0442\u043E\u0438\u043C\u0435\u043D\u0438\u044F \u043F\u043E\u0434\u0434\u0435\u0440\u0436\u0438\u0432\u0430\u044E\u0442\u0441\u044F, \u0435\u0441\u043B\u0438 \u043E\u043D\u0438 \u0440\u0430\u0441\u043F\u043E\u043B\u043E\u0436\u0435\u043D\u044B \u043F\u0435\u0440\u0432\u044B\u043C\u0438"
@@ -62252,6 +62705,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Block list",
       de: "Blockierliste",
       es: "Lista de bloqueados",
+      it: "Lista di utenti bloccati",
       pt: "Lista de bloqueados",
       sv: "Blocklista",
       ru: "\u0421\u043F\u0438\u0441\u043E\u043A \u0431\u043B\u043E\u043A\u0438\u0440\u043E\u0432\u043A\u0438"
@@ -62260,6 +62714,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "What happens with blocked users?",
       de: "Was passiert mit blockierten Benutzern?",
       es: "\xBFQu\xE9 pasa con los usuarios bloqueados?",
+      it: "Cosa succede agli utenti bloccati?",
       pt: "O que acontece com os usu\xE1rios bloqueados?",
       sv: "Vad h\xE4nder med blockerade anv\xE4ndare?",
       ru: "\u0427\u0442\u043E \u043F\u0440\u043E\u0438\u0441\u0445\u043E\u0434\u0438\u0442 \u0441 \u0437\u0430\u0431\u043B\u043E\u043A\u0438\u0440\u043E\u0432\u0430\u043D\u043D\u044B\u043C\u0438 \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F\u043C\u0438?"
@@ -62268,6 +62723,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "You have blocked {c} profiles",
       de: "Du hast {c} Benutzer blockiert",
       es: "Has bloqueado {c} perfiles",
+      it: "Hai bloccato {c} profili",
       pt: "Voc\xEA bloqueou {c} perfis",
       sv: "Du har blockerat {c} profiler",
       ru: "\u0412\u044B \u0437\u0430\u0431\u043B\u043E\u043A\u0438\u0440\u043E\u0432\u0430\u043B\u0438 {c} \u043F\u0440\u043E\u0444\u0438\u043B\u0435\u0439"
@@ -62276,6 +62732,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Enter username",
       de: "Benutzername eingeben",
       es: "Ingresa el nombre de usuario",
+      it: "Inserisci nome utente",
       pt: "Insira o nome de usu\xE1rio",
       sv: "Skriv anv\xE4ndarnamn",
       ru: "\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0438\u043C\u044F \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F"
@@ -62284,6 +62741,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Block",
       de: "Blockieren",
       es: "Bloquear",
+      it: "Blocca",
       pt: "Bloquear",
       sv: "Blockera",
       ru: "\u0417\u0430\u0431\u043B\u043E\u043A\u0438\u0440\u043E\u0432\u0430\u0442\u044C"
@@ -62292,6 +62750,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Blocked",
       de: "Blockiert",
       es: "Bloqueado",
+      it: "Bloccato",
       pt: "Bloqueado",
       sv: "Blockerad",
       ru: "\u0417\u0430\u0431\u043B\u043E\u043A\u0438\u0440\u043E\u0432\u0430\u043D\u043E"
@@ -62300,6 +62759,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Can leave shouts but not viewable to you",
       de: "Kann Shouts hinterlassen, diese sind aber nicht f\xFCr dich sichtbar",
       es: "Pueden dejar notas pero no son visibles para ti",
+      it: "Pu\xF2 lasciare note, ma non saranno visibili a te",
       pt: "Podem deixar mensagens, mas elas n\xE3o s\xE3o vis\xEDveis para voc\xEA",
       sv: "Hojtningar p\xE5 allm\xE4na profiler syns inte f\xF6r dig",
       ru: "\u041C\u043E\u0433\u0443\u0442 \u043E\u0441\u0442\u0430\u0432\u043B\u044F\u0442\u044C \u0441\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u044F, \u043D\u043E \u0432\u044B \u0438\u0445 \u043D\u0435 \u0443\u0432\u0438\u0434\u0438\u0442\u0435"
@@ -62308,6 +62768,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Cannot direct message you",
       de: "Kann dir keine Direktnachrichten senden",
       es: "No pueden mandarte mensajes directos",
+      it: "Non pu\xF2 inviarti messaggi privati",
       pt: "N\xE3o podem lhe enviar mensagens diretas",
       sv: "Kan inte skicka privat meddelande till dig",
       ru: "\u041D\u0435 \u043C\u043E\u0433\u0443\u0442 \u043E\u0442\u043F\u0440\u0430\u0432\u043B\u044F\u0442\u044C \u0432\u0430\u043C \u043B\u0438\u0447\u043D\u044B\u0435 \u0441\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u044F"
@@ -62316,6 +62777,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Cannot leave shouts or reply to you",
       de: "Kann keine Shouts hinterlassen oder dir antworten",
       es: "No pueden dejarte notas o responderte",
+      it: "Non pu\xF2 lasciare note o risponderti",
       pt: "N\xE3o podem deixar mensagens na sua caixa de mensagens ou lhe responder",
       sv: "Kan inte l\xE4mna hojtningar p\xE5 din profil eller svara p\xE5 dina hojtningar",
       ru: "\u041D\u0435 \u043C\u043E\u0433\u0443\u0442 \u043E\u0441\u0442\u0430\u0432\u043B\u044F\u0442\u044C \u0441\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u044F \u0438\u043B\u0438 \u043E\u0442\u0432\u0435\u0447\u0430\u0442\u044C \u0432\u0430\u043C"
@@ -62324,6 +62786,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "You cannot delete pre-existing shouts on your profile",
       de: "Bereits vorhandene Shouts auf deinem Profil werden nicht gel\xF6scht",
       es: "No puedes eliminar notas ya existentes en tu perfil",
+      it: "Non puoi eliminare note gi\xE0 esistenti sul tuo profilo",
       pt: "Voc\xEA n\xE3o pode deletar mensagens j\xE1 existentes em seu perfil",
       sv: "Du kan inte ta bort deras tidigare hojtningar fr\xE5n din profil",
       ru: "\u0412\u044B \u043D\u0435 \u043C\u043E\u0436\u0435\u0442\u0435 \u0443\u0434\u0430\u043B\u0438\u0442\u044C \u0440\u0430\u043D\u0435\u0435 \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u043E\u0432\u0430\u0432\u0448\u0438\u0435 \u0441\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u044F \u0432 \u0432\u0430\u0448\u0435\u043C \u043F\u0440\u043E\u0444\u0438\u043B\u0435"
@@ -62332,6 +62795,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "They can still view your profile",
       de: "Die Person kann weiterhin dein Profil ansehen",
       es: "Todav\xEDa pueden ver tu perfil",
+      it: "Possono ancora vedere il tuo profilo",
       pt: "Eles ainda podem ver seu perfil",
       sv: "Dem kan fortfarande se din profil",
       ru: "\u041E\u043D\u0438 \u043F\u043E-\u043F\u0440\u0435\u0436\u043D\u0435\u043C\u0443 \u043C\u043E\u0433\u0443\u0442 \u043F\u0440\u043E\u0441\u043C\u0430\u0442\u0440\u0438\u0432\u0430\u0442\u044C \u0432\u0430\u0448 \u043F\u0440\u043E\u0444\u0438\u043B\u044C"
@@ -62340,6 +62804,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Shared with others",
       de: "Mit anderen geteilt",
       es: "Compartido con otros",
+      it: "Condiviso con altri",
       pt: "Compartilhado com outros",
       sv: "Delades med andra",
       ru: "\u041F\u043E\u0434\u0435\u043B\u0438\u043B\u0438\u0441\u044C \u0441 \u0434\u0440\u0443\u0433\u0438\u043C\u0438"
@@ -62348,6 +62813,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "More from {user}",
       de: "Mehr von {user}",
       es: "M\xE1s de {user}",
+      it: "Altro da {user}",
       pt: "Mais de {user}",
       sv: "Mer fr\xE5n {user}",
       ru: "\u0411\u043E\u043B\u044C\u0448\u0435 \u043E\u0442 {user}"
@@ -62356,6 +62822,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Obsess",
       de: "Als Obsession festlegen",
       es: "Establecer como obsesi\xF3n",
+      it: "Imposta come passione",
       pt: "Definir como obsess\xE3o",
       sv: "St\xE4ll in som besatthet",
       ru: "\u0421\u0434\u0435\u043B\u0430\u0442\u044C \u0437\u0430\u0432\u0438\u0441\u0438\u043C\u043E\u0439"
@@ -62364,6 +62831,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Obsession",
       de: "Obsession",
       es: "Obsesi\xF3n",
+      it: "Passione",
       pt: "Obsess\xE3o",
       sv: "Aktuell besatthet",
       ru: "\u0417\u0430\u0432\u0438\u0441\u0438\u043C\u0430\u044F \u0438\u0434\u0435\u044F"
@@ -62372,6 +62840,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Obsessions",
       de: "Obsessionen",
       es: "Obsesiones",
+      it: "Passioni",
       pt: "Obsess\xF5es",
       sv: "Besattheter",
       ru: "\u0417\u0430\u0432\u0438\u0441\u0438\u043C\u044B\u0435 \u0438\u0434\u0435\u0438"
@@ -62380,6 +62849,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Finding your tracks",
       de: "Deine Titel werden gesucht",
       es: "Encontrando tus temas",
+      it: "Cercando i tuoi brani",
       pt: "Encontrando suas faixas",
       sv: "Hittar p\xE5 dinna l\xE5tar",
       ru: "\u041F\u043E\u0438\u0441\u043A \u0432\u0430\u0448\u0438\u0445 \u0442\u0440\u0435\u043A\u043E\u0432"
@@ -62388,6 +62858,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Check for updates",
       de: "Nach Updates suchen",
       es: "Comprobar si hay actualizaciones",
+      it: "Controlla aggiornamenti",
       pt: "Procurar atualiza\xE7\xF5es",
       sv: "Kolla efter uppdateringar",
       ru: "\u041F\u0440\u043E\u0432\u0435\u0440\u0438\u0442\u044C \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u044F"
@@ -62395,6 +62866,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     redirected_from: {
       en: "Redirected from",
       es: "Redireccionado de",
+      it: "Reindirizzato da",
       sv: "Omdirigerades fr\xE5n",
       ru: "\u041F\u0435\u0440\u0435\u043D\u0430\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u043E \u0441"
     },
@@ -62402,6 +62874,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Music corrections",
       de: "Musik-Korrekturen",
       es: "Correcciones de m\xFAsica",
+      it: "Correzioni della musica",
       pt: "Corre\xE7\xF5es de m\xFAsica",
       sv: "Musikredigeringar",
       ru: "\u041C\u0443\u0437\u044B\u043A\u0430\u043B\u044C\u043D\u044B\u0435 \u0438\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F"
@@ -62410,6 +62883,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Corrections loaded",
       de: "Korrekturen wurden geladen",
       es: "Correcciones cargadas",
+      it: "Correzioni caricate",
       sv: "Dina redigeringar har laddat",
       ru: "\u0418\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F \u0437\u0430\u0433\u0440\u0443\u0436\u0435\u043D\u044B"
     },
@@ -62417,6 +62891,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "{c1} artists, {c2} albums and tracks",
       de: "{c1} K\xFCnstler:innen, {c2} Alben und Titel",
       es: "{c1} artistas, {c2} \xE1lbumes y temas",
+      it: "{c1} artisti, {c2} album e brani",
       sv: "{c1} artister, {c2} album och l\xE5tar",
       ru: "{c1} \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u0435\u0439, {c2} \u0430\u043B\u044C\u0431\u043E\u043C\u043E\u0432 \u0438 \u0442\u0440\u0435\u043A\u043E\u0432"
     },
@@ -62427,6 +62902,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "{brand} version",
       de: "{brand}-Version",
       es: "{brand} versi\xF3n",
+      it: "versione di {brand}",
       pt: "{brand} vers\xE3o",
       sv: "{brand} version",
       ru: "{brand} \u0432\u0435\u0440\u0441\u0438\u0438"
@@ -62439,6 +62915,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "{brand} version {number}",
       de: "{brand}-Version {number}",
       es: "{brand} versi\xF3n {number}",
+      it: "{brand} versione {number}",
       pt: "{brand} vers\xE3o {number}",
       sv: "{brand} version {number}",
       ru: "{brand} \u0432\u0435\u0440\u0441\u0438\u0438 {number}"
@@ -62448,6 +62925,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Artist corrections",
         de: "K\xFCnstler:innen-Korrekturen",
         es: "Correcciones de artista",
+        it: "Correzioni degli artisti",
         sv: "Artistredigeringar",
         ru: "\u0418\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F \u0430\u0440\u0442\u0438\u0441\u0442\u043E\u0432"
       },
@@ -62455,6 +62933,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Album and track corrections",
         de: "Album- und Titel-Korrekturen",
         es: "Correcciones de \xE1lbum y tema",
+        it: "Correzioni di album e brani",
         sv: "Album och sp\xE5rredigeringar",
         ru: "\u0418\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F \u0430\u043B\u044C\u0431\u043E\u043C\u043E\u0432 \u0438 \u0442\u0440\u0435\u043A\u043E\u0432"
       },
@@ -62462,6 +62941,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Combined artist profiles",
         de: "Kombinierte K\xFCnstler:innen-Profile",
         es: "Perfiles de artista combinados",
+        it: "Profili combinati degli artisti",
         sv: "Kombinerade artistprofiler",
         ru: "\u041E\u0431\u044A\u0435\u0434\u0438\u043D\u0435\u043D\u043D\u044B\u0435 \u043F\u0440\u043E\u0444\u0438\u043B\u0438 \u0430\u0440\u0442\u0438\u0441\u0442\u043E\u0432"
       }
@@ -62471,6 +62951,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Correct titles with lotus",
         de: "Titel korrigieren mit lotus",
         es: "Corregir t\xEDtulos con lotus",
+        it: "Correggi titoli con lotus",
         pt: "Corrigir t\xEDtulos com lotus",
         sv: "Redigera titlar med lotus",
         ru: "\u0418\u0441\u043F\u0440\u0430\u0432\u0438\u0442\u044C \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u044F \u0441 \u043F\u043E\u043C\u043E\u0449\u044C\u044E lotus"
@@ -62479,6 +62960,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Re-capitalise artists, albums, and tracks based on community contributions",
         de: "Korrigiert die Schreibweise von K\xFCnstler:innen, Alben und Titeln basierend auf Community-Beitr\xE4gen",
         es: "Recapitaliza artista, \xE1lbumes y temas con base en contribuciones de la comunidad",
+        it: "Corregge l'uso delle maiuscole in artisti, album e brani in base alle contribuzioni della comunit\xE0",
         pt: "Recapitalize artistas, \xE1lbuns e faixas com base nas contribui\xE7\xF5es da comunidade",
         sv: "\xC4ndra kapitalisering p\xE5 artister, album, och l\xE5tar fr\xE5n gemenskapsbidrag",
         ru: "\u0418\u0437\u043C\u0435\u043D\u0438\u0442\u044C \u043D\u0430\u043F\u0438\u0441\u0430\u043D\u0438\u0435 \u0430\u0440\u0442\u0438\u0441\u0442\u043E\u0432, \u0430\u043B\u044C\u0431\u043E\u043C\u043E\u0432 \u0438 \u0442\u0440\u0435\u043A\u043E\u0432 \u043D\u0430 \u043E\u0441\u043D\u043E\u0432\u0435 \u0432\u043A\u043B\u0430\u0434\u0430 \u0441\u043E\u043E\u0431\u0449\u0435\u0441\u0442\u0432\u0430"
@@ -62489,6 +62971,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Avoid artist redirects when navigating",
         de: "Vermeide K\xFCnstler-Weiterleitungen beim Navigieren",
         es: "Evitar redirecciones de artistas al navegar",
+        it: "Evita i reindirizzamenti degli artisti durante la navigazione",
         pt: "Evitar redirecionamentos de artistas ao navegar",
         sv: "Undvik artistomdirigeringar n\xE4r du surfar",
         ru: "\u0418\u0437\u0431\u0435\u0433\u0430\u0442\u044C \u043F\u0435\u0440\u0435\u043D\u0430\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0439 \u0430\u0440\u0442\u0438\u0441\u0442\u043E\u0432 \u043F\u0440\u0438 \u043D\u0430\u0432\u0438\u0433\u0430\u0446\u0438\u0438"
@@ -62497,6 +62980,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Automatically adds +noredirect to artist links to avoid being sent to pages like Travi$ Scott",
         de: "F\xFCgt automatisch +noredirect zu K\xFCnstler-Links hinzu, um zu vermeiden, dass du zu Seiten wie \u201ETravi$ Scott\u201C weitergeleitet wirst",
         es: "A\xF1ade autom\xE1ticamente +noredirect a v\xEDnculos de artistas para evitar ser redireccionado a p\xE1ginas como Travi$ Scott",
+        it: "Aggiunge automaticamente +noredirect ai link degli artisti per evitare di essere inviato a pagine come Travi$ Scott",
         pt: "Adiciona automaticamente +noredirect em links de artistas para evitar ser redirecionado para p\xE1ginas como Travi$ Scott",
         sv: "L\xE4gger automatiskt +noredirect p\xE5 artistl\xE4nkar f\xF6r att undvika att bli skickad till sidor som t.ex. Travi$ Scott",
         ru: "\u0410\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u0435\u0441\u043A\u0438 \u0434\u043E\u0431\u0430\u0432\u043B\u044F\u0435\u0442 +noredirect \u043A \u0441\u0441\u044B\u043B\u043A\u0430\u043C \u0430\u0440\u0442\u0438\u0441\u0442\u043E\u0432, \u0447\u0442\u043E\u0431\u044B \u0438\u0437\u0431\u0435\u0436\u0430\u0442\u044C \u043F\u0435\u0440\u0435\u043D\u0430\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F \u043D\u0430 \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u044B \u0442\u0438\u043F\u0430 Travi$ Scott"
@@ -62506,6 +62990,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "View all",
       de: "Alle ansehen",
       es: "Ver todo",
+      it: "Visualizza tutto",
       pt: "Ver tudo",
       sv: "Visa alla",
       ru: "\u041F\u043E\u0441\u043C\u043E\u0442\u0440\u0435\u0442\u044C \u0432\u0441\u0435"
@@ -62514,6 +62999,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Help contribute",
       de: "Helfe mit",
       es: "Ayuda a contribuir",
+      it: "Aiuta a contribuire",
       pt: "Ajude a contribuir",
       sv: "Bidra",
       ru: "\u041F\u043E\u043C\u043E\u0447\u044C \u0432\u043D\u0435\u0441\u0442\u0438 \u0432\u043A\u043B\u0430\u0434"
@@ -62522,6 +63008,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Delete",
       de: "L\xF6schen",
       es: "Eliminar",
+      it: "Elimina",
       pt: "Deletar",
       sv: "Ta bort",
       ru: "\u0423\u0434\u0430\u043B\u0438\u0442\u044C"
@@ -62530,6 +63017,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Deleted",
       de: "Gel\xF6scht",
       es: "Eliminado",
+      it: "Eliminato",
       pt: "Deletado",
       sv: "Borttagen",
       ru: "\u0423\u0434\u0430\u043B\u0435\u043D\u043E"
@@ -62538,6 +63026,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Search",
       de: "Suchen",
       es: "Buscar",
+      it: "Cerca",
       pt: "Pesquisar",
       sv: "S\xF6k",
       ru: "\u041F\u043E\u0438\u0441\u043A"
@@ -62546,6 +63035,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Search guest appearances",
       de: "Suche nach Features",
       es: "Buscar apariciones especiales",
+      it: "Cerca partecipazioni come ospite",
       pt: "Pesquisar participa\xE7\xF5es especiais",
       sv: "S\xF6k g\xE4startister",
       ru: "\u041F\u043E\u0438\u0441\u043A \u0433\u043E\u0441\u0442\u0435\u0432\u044B\u0445 \u0443\u0447\u0430\u0441\u0442\u0438\u0439"
@@ -62555,6 +63045,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Anything you can imagine...",
       de: "Alles, was du dir vorstellen kannst ...",
       es: "Cualquier cosa que puedas imaginar...",
+      it: "Qualsiasi cosa tu possa immaginare...",
       pt: "Tudo que voc\xEA pode imaginar...",
       sv: "Vad som helst du kan f\xF6rest\xE4lla dig...",
       ru: "\u0412\u0441\u0435, \u0447\u0442\u043E \u0432\u044B \u043C\u043E\u0436\u0435\u0442\u0435 \u0441\u0435\u0431\u0435 \u043F\u0440\u0435\u0434\u0441\u0442\u0430\u0432\u0438\u0442\u044C..."
@@ -62564,6 +63055,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Supports Markdown",
       de: "Unterst\xFCtzt Markdown",
       es: "Compatible con Markdown",
+      it: "Supporta Markdown",
       pt: "Suporta o Markdown",
       sv: "St\xF6der Markdown",
       ru: "\u041F\u043E\u0434\u0434\u0435\u0440\u0436\u0438\u0432\u0430\u0435\u0442 Markdown",
@@ -62572,6 +63064,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           en: "Header",
           de: "\xDCberschrift",
           es: "Encabezado",
+          it: "Intestazione",
           sv: "Rubrik",
           ru: "\u0417\u0430\u0433\u043E\u043B\u043E\u0432\u043E\u043A"
         },
@@ -62579,6 +63072,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           en: "# hi!!",
           de: "# hallo!!",
           es: "# \xA1\xA1hola!!",
+          it: "# ciao!!",
           sv: "# hej!!",
           ru: "# \u043F\u0440\u0438\u0432\u0435\u0442!!"
         }
@@ -62588,6 +63082,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           en: "Bold",
           de: "Fett",
           es: "Negrita",
+          it: "Grassetto",
           pt: "Negrito",
           sv: "Fet text",
           ru: "\u041F\u043E\u043B\u0443\u0436\u0438\u0440\u043D\u044B\u0439"
@@ -62596,6 +63091,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           en: "**bold**",
           de: "**Fett**",
           es: "**negrita**",
+          it: "**grassetto**",
           pt: "**negrito**",
           sv: "**fet stil**",
           ru: "**\u043F\u043E\u043B\u0443\u0436\u0438\u0440\u043D\u044B\u0439**"
@@ -62606,6 +63102,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           en: "Italics",
           de: "Kursiv",
           es: "Cursiva",
+          it: "Corsivo",
           pt: "It\xE1lico",
           sv: "Kursiv",
           ru: "\u041A\u0443\u0440\u0441\u0438\u0432"
@@ -62614,6 +63111,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           en: "*slanted*",
           de: "*Kursiv*",
           es: "*inclinado*",
+          it: "*corsivo*",
           pt: "*inclinado*",
           sv: "*kursiv*",
           ru: "*\u043D\u0430\u043A\u043B\u043E\u043D\u043D\u044B\u0439*"
@@ -62624,6 +63122,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           en: "Bold italics",
           de: "Fett kursiv",
           es: "Negrita cursiva",
+          it: "Grassetto corsivo",
           pt: "Negrito it\xE1lico",
           sv: "Fet kursiv stil",
           ru: "\u041F\u043E\u043B\u0443\u0436\u0438\u0440\u043D\u044B\u0439 \u043A\u0443\u0440\u0441\u0438\u0432"
@@ -62632,6 +63131,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           en: "***slanted but bold***",
           de: "***Fett UND kursiv gleichzeitig!***",
           es: "**inclinado pero en negrita***",
+          it: "***corsivo, ma in grassetto***",
           pt: "***inclinado, mas em negrito***",
           sv: "***fet och kursiv samtidigt***",
           ru: "***\u043D\u0430\u043A\u043B\u043E\u043D\u043D\u044B\u0439, \u043D\u043E \u043F\u043E\u043B\u0443\u0436\u0438\u0440\u043D\u044B\u0439***"
@@ -62642,6 +63142,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           en: "Underlined",
           de: "Unterstrichen",
           es: "Subrayado",
+          it: "Sottolineato",
           pt: "Sublinhado",
           sv: "Understrykt",
           ru: "\u041F\u043E\u0434\u0447\u0435\u0440\u043A\u043D\u0443\u0442\u044B\u0439"
@@ -62650,6 +63151,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           en: "__underlined__",
           de: "__Unterstrichen__",
           es: "__subrayado__",
+          it: "__sottolineato__",
           pt: "__sublinhado__",
           sv: "__understrykt__",
           ru: "__\u043F\u043E\u0434\u0447\u0435\u0440\u043A\u043D\u0443\u0442\u044B\u0439__"
@@ -62661,6 +63163,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "{v} characters max",
       de: "Maximal {v} Zeichen",
       es: "m\xE1ximo {v} caracteres",
+      it: "massimo {v} caratteri",
       pt: "m\xE1ximo de {v} caracteres",
       sv: "max {v} tecken",
       ru: "\u041C\u0430\u043A\u0441\u0438\u043C\u0443\u043C {v} \u0441\u0438\u043C\u0432\u043E\u043B\u043E\u0432"
@@ -62670,6 +63173,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Profile shortcut",
         de: "Profilverkn\xFCpfung",
         es: "Atajo de perfil",
+        it: "Scorciatoia del profilo",
         pt: "Atalho de perfil",
         sv: "Profilgenv\xE4g",
         ru: "\u042F\u0440\u043B\u044B\u043A \u043F\u0440\u043E\u0444\u0438\u043B\u044F"
@@ -62678,6 +63182,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "View their scrobbles alongside yours at all times",
         de: "Sehe deren Scrobbles jederzeit neben deinen an",
         es: "Ve sus scrobblings junto a los tuyos en todo momento",
+        it: "Vedi i loro scrobbling vicino ai tuoi in qualsiasi momento",
         pt: "Veja os scrobbles dele(a) junto aos seus o tempo todo",
         sv: "Visa deras skrobblingar bredvid dina hela tiden",
         ru: "\u041F\u0440\u043E\u0441\u043C\u043E\u0442\u0440 \u0438\u0445 \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u043E\u0432 \u0440\u044F\u0434\u043E\u043C \u0441 \u0432\u0430\u0448\u0438\u043C\u0438 \u0432\u0441\u0435\u0433\u0434\u0430"
@@ -62686,6 +63191,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Linked with {u}",
         de: "Verlinkt mit {u}",
         es: "Vinculado con {u}",
+        it: "Collegato a {u}",
         pt: "Ligado com {u}",
         sv: "L\xE4nkad ihop med {u}",
         ru: "\u0421\u0432\u044F\u0437\u0430\u043D\u043E \u0441 {u}"
@@ -62694,6 +63200,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "You already have {u} as your shortcut, are you sure?",
         de: "Du hast bereits {u} als deinen Shortcut festgelegt, bist du sicher?",
         es: "Ya tienes {u} como tu atajo, \xBFest\xE1s seguro?",
+        it: "Hai gi\xE0 {u} come scorciatoia, sei sicuro?",
         pt: "Voc\xEA j\xE1 tem {u} como seu atalho, voc\xEA tem certeza?",
         sv: "Du har redan {u} som din genv\xE4g, \xE4r du s\xE4ker?",
         ru: "\u0423 \u0432\u0430\u0441 \u0443\u0436\u0435 \u0435\u0441\u0442\u044C {u} \u0432 \u043A\u0430\u0447\u0435\u0441\u0442\u0432\u0435 \u044F\u0440\u043B\u044B\u043A\u0430, \u0432\u044B \u0443\u0432\u0435\u0440\u0435\u043D\u044B?"
@@ -62703,6 +63210,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Failed to find profile",
       de: "Profil konnte nicht gefunden werden",
       es: "Error al buscar el perfil",
+      it: "Impossibile trovare il profilo",
       pt: "Falha ao achar perfil",
       sv: "Kunde ej hitta profilen",
       ru: "\u041D\u0435 \u0443\u0434\u0430\u043B\u043E\u0441\u044C \u043D\u0430\u0439\u0442\u0438 \u043F\u0440\u043E\u0444\u0438\u043B\u044C"
@@ -62711,6 +63219,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Replace",
       de: "Ersetzen",
       es: "Substituir",
+      it: "Sostituire",
       pt: "Substituir",
       sv: "Ers\xE4tt",
       ru: "\u0417\u0430\u043C\u0435\u043D\u0438\u0442\u044C"
@@ -62719,6 +63228,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "View others library",
       de: "Bibliothek des anderen ansehen",
       es: "Ver la colecci\xF3n de otros",
+      it: "Visualizza la libreria degli altri",
       pt: "Ver a biblioteca dos outros",
       sv: "Visa andra personers bibliotek",
       ru: "\u041F\u0440\u043E\u0441\u043C\u043E\u0442\u0440 \u0431\u0438\u0431\u043B\u0438\u043E\u0442\u0435\u043A\u0438 \u0434\u0440\u0443\u0433\u0438\u0445"
@@ -62728,6 +63238,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Profile avatar shape",
         de: "Form des Profilbildes",
         es: "Forma del avatar del perfil",
+        it: "Forma dell'immagine del profilo",
         pt: "Formato da imagem de perfil",
         sv: "Profilbildsform",
         ru: "\u0424\u043E\u0440\u043C\u0430 \u0430\u0432\u0430\u0442\u0430\u0440\u0430 \u043F\u0440\u043E\u0444\u0438\u043B\u044F"
@@ -62736,6 +63247,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Applies to all profiles, only visible to you",
         de: "Gilt f\xFCr alle Profile, nur f\xFCr dich sichtbar",
         es: "Aplica a todos los perfiles, solo visible para ti",
+        it: "Si applica a tutti i profili, \xE8 visibile solo a te",
         sv: "Till\xE4mpas p\xE5 alla profiler, syns bara f\xF6r dig",
         ru: "\u041F\u0440\u0438\u043C\u0435\u043D\u044F\u0435\u0442\u0441\u044F \u043A\u043E \u0432\u0441\u0435\u043C \u043F\u0440\u043E\u0444\u0438\u043B\u044F\u043C, \u0432\u0438\u0434\u043D\u043E \u0442\u043E\u043B\u044C\u043A\u043E \u0432\u0430\u043C"
       }
@@ -62745,6 +63257,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Notes",
       de: "Notizen",
       es: "Anotaciones",
+      it: "Note",
       pt: "Notas",
       sv: "Anteckningar",
       ru: "\u0417\u0430\u043C\u0435\u0442\u043A\u0438"
@@ -62754,6 +63267,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "No profiles here... (\uFF61\u2022\u0301\uFE3F\u2022\u0300\uFF61)",
       de: "Keine Profile hier... (\uFF61\u2022\u0301\uFE3F\u2022\u0300\uFF61)",
       es: "No hay perfiles aqu\xED... (\uFF61\u2022\u0301\uFE3F\u2022\u0300\uFF61)",
+      it: "Nessun profilo qui (\uFF61\u2022\u0301\uFE3F\u2022\u0300\uFF61)",
       pt: "Sem perfis aqui... (\uFF61\u2022\u0301\uFE3F\u2022\u0300\uFF61)",
       sv: "Inga profiler h\xE4r... (\uFF61\u2022\u0301\uFE3F\u2022\u0300\uFF61)",
       ru: "\u0417\u0434\u0435\u0441\u044C \u043D\u0435\u0442 \u043F\u0440\u043E\u0444\u0438\u043B\u0435\u0439... (\uFF61\u2022\u0301\uFE3F\u2022\u0300\uFF61)"
@@ -62763,6 +63277,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Font choice",
         de: "Schriftartauswahl",
         es: "Selecci\xF3n de fuente",
+        it: "Selezione del font",
         pt: "Escolha de fonte",
         sv: "Typsnitt",
         ru: "\u0412\u044B\u0431\u043E\u0440 \u0448\u0440\u0438\u0444\u0442\u0430"
@@ -62771,6 +63286,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Choose a custom selection of fonts that suit you",
         de: "Lege eine benutzerdefinierte Auswahl von Schriftarten fest, die zu dir passen",
         es: "Elige una selecci\xF3n personalizada de fuentes que te agrade",
+        it: "Definisci una selezione di font personalizzata adatta a te",
         pt: "Selecione uma fonte customizada que te agrada",
         sv: "V\xE4lj ett typsnitt som b\xE4st passar dig",
         ru: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044C\u0441\u043A\u0438\u0439 \u043D\u0430\u0431\u043E\u0440 \u0448\u0440\u0438\u0444\u0442\u043E\u0432, \u043A\u043E\u0442\u043E\u0440\u044B\u0439 \u0432\u0430\u043C \u043F\u043E\u0434\u0445\u043E\u0434\u0438\u0442"
@@ -62779,23 +63295,27 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     font_style: {
       en: "Font style",
       es: "Estilo de fuente",
+      it: "Stile del font",
       sv: "Typsnittsstil",
       ru: "\u0421\u0442\u0438\u043B\u044C \u0448\u0440\u0438\u0444\u0442\u0430",
       solid: {
         en: "Solid",
         es: "S\xF3lido",
+        it: "Solido",
         sv: "Fast",
         ru: "\u0421\u043F\u043B\u043E\u0448\u043D\u043E\u0439"
       },
       pop: {
         en: "Pop",
         es: "Pop",
+        it: "Pop",
         sv: "Poppande",
         ru: "\u042F\u0440\u043A\u0438\u0439"
       },
       glow: {
         en: "Glow",
         es: "Brillo",
+        it: "Brillante",
         sv: "Gl\xF6dande",
         ru: "\u0421\u0432\u0435\u0447\u0435\u043D\u0438\u0435"
       }
@@ -62805,6 +63325,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Font weight",
         de: "Schriftst\xE4rke",
         es: "Grueso de fuente",
+        it: "Spessore del font",
         pt: "Espessura da fonte",
         sv: "Typsnittsvikt",
         ru: "\u0422\u043E\u043B\u0449\u0438\u043D\u0430 \u0448\u0440\u0438\u0444\u0442\u0430"
@@ -62813,6 +63334,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Used for regular text paragraphs",
         de: "Wird f\xFCr normale Textabs\xE4tze verwendet",
         es: "Usado en p\xE1rrafos regulares de texto",
+        it: "Utilizzato per paragrafi regolari di testo",
         pt: "Usado para par\xE1grafos regulares de texto",
         sv: "Anv\xE4nds f\xF6r vanliga textstycke",
         ru: "\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0435\u0442\u0441\u044F \u0434\u043B\u044F \u043E\u0431\u044B\u0447\u043D\u044B\u0445 \u0442\u0435\u043A\u0441\u0442\u043E\u0432\u044B\u0445 \u0430\u0431\u0437\u0430\u0446\u0435\u0432"
@@ -62823,6 +63345,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Medium font weight",
         de: "Mittlere Schriftst\xE4rke",
         es: "Grueso de fuente mediano",
+        it: "Spessore del font medio",
         pt: "Espessura m\xE9dia de fonte",
         sv: "Mindre typsnittsvikt",
         ru: "\u0421\u0440\u0435\u0434\u043D\u044F\u044F \u0442\u043E\u043B\u0449\u0438\u043D\u0430 \u0448\u0440\u0438\u0444\u0442\u0430"
@@ -62831,6 +63354,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Used for button text and small headers",
         de: "Wird f\xFCr Schaltfl\xE4chentext und kleine \xDCberschriften verwendet",
         es: "Usado en texto de botones y encabezados peque\xF1os",
+        it: "Utilizzato per il testo dei pulsanti e per piccole intestazioni",
         pt: "Usada para texto de bot\xF5es e pequenos cabe\xE7alhos",
         sv: "Anv\xE4nds f\xF6r knappar och sm\xE5a rubriker",
         ru: "\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0435\u0442\u0441\u044F \u0434\u043B\u044F \u0442\u0435\u043A\u0441\u0442\u0430 \u043A\u043D\u043E\u043F\u043E\u043A \u0438 \u043D\u0435\u0431\u043E\u043B\u044C\u0448\u0438\u0445 \u0437\u0430\u0433\u043E\u043B\u043E\u0432\u043A\u043E\u0432"
@@ -62841,6 +63365,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Bold font weight",
         de: "Gro\xDFe Schriftst\xE4rke",
         es: "Grueso de fuente en negrita",
+        it: "Spessore del font in grassetto",
         pt: "Espessura da fonte em negrito",
         sv: "Fet typsnittsvikt",
         ru: "\u0416\u0438\u0440\u043D\u0430\u044F \u0442\u043E\u043B\u0449\u0438\u043D\u0430 \u0448\u0440\u0438\u0444\u0442\u0430"
@@ -62849,6 +63374,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Used for large headers",
         de: "Wird f\xFCr gro\xDFe \xDCberschriften verwendet",
         es: "Usado en encabezados grandes",
+        it: "Utilizzato per grandi intestazioni",
         pt: "Usado para cabe\xE7alhos grandes",
         sv: "Anv\xE4nds f\xF6r stora rubriker",
         ru: "\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0435\u0442\u0441\u044F \u0434\u043B\u044F \u0431\u043E\u043B\u044C\u0448\u0438\u0445 \u0437\u0430\u0433\u043E\u043B\u043E\u0432\u043A\u043E\u0432"
@@ -62859,6 +63385,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Emoji compatibility",
         de: "Emoji-Kompatibilit\xE4t",
         es: "Compatibilidad de emojis",
+        it: "Compatibilit\xE0 con le emoji",
         pt: "Compatibilidade de emojis",
         sv: "Emoji-kompatibilitet",
         ru: "\u0421\u043E\u0432\u043C\u0435\u0441\u0442\u0438\u043C\u043E\u0441\u0442\u044C \u0441 \u044D\u043C\u043E\u0434\u0437\u0438"
@@ -62867,6 +63394,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Required to render emoji properly before Windows 11",
         de: "Erforderlich, um Emojis vor Windows 11 richtig darzustellen",
         es: "Requerido para renderizar emojis correctamente antes de Windows 11",
+        it: "Richiesto per visualizzare correttamente le emoji prima di Windows 11",
         pt: "Necess\xE1rio para renderizar emojis corretamente antes do Windows 11",
         sv: "Kr\xE4vs f\xF6r att visa emojis korrekt innan Windows 11",
         ru: "\u0422\u0440\u0435\u0431\u0443\u0435\u0442\u0441\u044F \u0434\u043B\u044F \u043F\u0440\u0430\u0432\u0438\u043B\u044C\u043D\u043E\u0433\u043E \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u044F \u044D\u043C\u043E\u0434\u0437\u0438 \u0434\u043E Windows 11"
@@ -62891,6 +63419,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Enter installed font name(s), separated by commas",
       de: "Gebe die installierte Schriftart durch Kommas getrennt ein",
       es: "Ingresa los nombres de fuentes instaladas, separados por comas",
+      it: "Inserisci nomi di font installati, separati da virgole",
       pt: "Nomes das fontes instaladas, separados por v\xEDrgulas",
       sv: "Skriv installerade typsnittsnamn, separerade av kommatecken",
       ru: "\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435(\u044F) \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043B\u0435\u043D\u043D\u043E\u0433\u043E(\u044B\u0445) \u0448\u0440\u0438\u0444\u0442\u0430(\u043E\u0432), \u0440\u0430\u0437\u0434\u0435\u043B\u044F\u044F \u0437\u0430\u043F\u044F\u0442\u044B\u043C\u0438"
@@ -62899,6 +63428,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Change now",
       de: "Jetzt \xE4ndern",
       es: "Cambiar ahora",
+      it: "Cambia ora",
       pt: "Mudar agora",
       sv: "\xC4ndra nu",
       ru: "\u0418\u0437\u043C\u0435\u043D\u0438\u0442\u044C \u0441\u0435\u0439\u0447\u0430\u0441"
@@ -62907,6 +63437,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Profiles",
       de: "Profile",
       es: "Perfiles",
+      it: "Profili",
       pt: "Perfis",
       sv: "Profiler",
       ru: "\u041F\u0440\u043E\u0444\u0438\u043B\u0438"
@@ -62915,6 +63446,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Redirections",
       de: "Umleitungen",
       es: "Redirecciones",
+      it: "Reindirizzamenti",
       pt: "Redirecionamentos",
       sv: "Omdirigeringar",
       ru: "\u041F\u0435\u0440\u0435\u043D\u0430\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F"
@@ -62924,6 +63456,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Legacy scrobble redirection",
         de: "Legacy-Scrobble-Umleitung",
         es: "Redirecci\xF3n de scrobblings cl\xE1sica",
+        it: "Reindirizzamento legacy degli scrobbling",
         pt: "Redirecionamento de scrobble legado",
         sv: "Legacy skrobbelomdirigeringar",
         ru: "\u0423\u0441\u0442\u0430\u0440\u0435\u0432\u0448\u0435\u0435 \u043F\u0435\u0440\u0435\u043D\u0430\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435 \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u043E\u0432"
@@ -62932,6 +63465,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "By default, scrobbles will be corrected to faulty replacements that are a decade out of date. Disabling does not fully fix the system but keeps artist names in your library intact.",
         de: "Standardm\xE4\xDFig \u201Ekorrigiert\u201C Last.fm einige deiner Scrobbles automatisch und f\xFChrt (meist) fehlerhafte Weiterleitungen aus. Durch die Deaktivierung dieser Funktion wird das System zwar nicht vollst\xE4ndig repariert, die K\xFCnstlernamen in deiner Bibliothek bleiben jedoch erhalten.",
         es: "Por defecto, los scrobblings ser\xE1n sustituidos por correcciones err\xF3neas que est\xE1n desactualizadas desde hace una d\xE9cada. Desactivar esta opci\xF3n no soluciona completamente el sistema pero mantiene los nombres de artistas en tu colecci\xF3n intactos.",
+        it: "Per impostazione predefinita, gli scrobbling saranno corretti in base a sostituzioni erronee obsolete da un decennio. Disattivare questa opzione non risolve completamente i problemi ma mantiene intatti i nomi degli artisti nella tua libreria.",
         pt: 'Por padr\xE3o, a Last.fm ir\xE1 "corrigir automaticamente" alguns dos seus scrobbles para redirecionamentos (na maioria) defeituosos. Desativar essa op\xE7\xE3o n\xE3o corrige completamente o sistema, mas mant\xE9m os nomes dos artistas na sua biblioteca intactos.',
         sv: "Vanligtvis omdirigeras skrobblar till felers\xE4ttningar som \xE4r \xF6ver tio \xE5r gamla. Att avaktivera det fixar inte problemet totalt men artistnamn i ditt egna bibliotek visar r\xE4tt profil.",
         ru: "\u041F\u043E \u0443\u043C\u043E\u043B\u0447\u0430\u043D\u0438\u044E \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u044B \u0431\u0443\u0434\u0443\u0442 \u0438\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u044B \u043D\u0430 \u043D\u0435\u0438\u0441\u043F\u0440\u0430\u0432\u043D\u044B\u0435 \u0437\u0430\u043C\u0435\u043D\u044B, \u043A\u043E\u0442\u043E\u0440\u044B\u043C \u0443\u0436\u0435 \u0434\u0435\u0441\u044F\u0442\u044C \u043B\u0435\u0442. \u041E\u0442\u043A\u043B\u044E\u0447\u0435\u043D\u0438\u0435 \u043D\u0435 \u043F\u043E\u043B\u043D\u043E\u0441\u0442\u044C\u044E \u0438\u0441\u043F\u0440\u0430\u0432\u043B\u044F\u0435\u0442 \u0441\u0438\u0441\u0442\u0435\u043C\u0443, \u043D\u043E \u0441\u043E\u0445\u0440\u0430\u043D\u044F\u0435\u0442 \u0438\u043C\u0435\u043D\u0430 \u0430\u0440\u0442\u0438\u0441\u0442\u043E\u0432 \u0432 \u0432\u0430\u0448\u0435\u0439 \u0431\u0438\u0431\u043B\u0438\u043E\u0442\u0435\u043A\u0435 \u043D\u0435\u0442\u0440\u043E\u043D\u0443\u0442\u044B\u043C\u0438."
@@ -62942,6 +63476,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Remove page redirection notifications",
         de: "Benachrichtigungen zur Seitenumleitung deaktivieren",
         es: "Remover notificaciones de redirecci\xF3n de p\xE1gina",
+        it: "Rimuovi le notifiche di reindirizzamento tra le pagine",
         pt: "Remover notifica\xE7\xF5es de redirecionamento de p\xE1gina",
         sv: "Ta bort omdirigeringsnotifikationer",
         ru: "\u0423\u0434\u0430\u043B\u0438\u0442\u044C \u0443\u0432\u0435\u0434\u043E\u043C\u043B\u0435\u043D\u0438\u044F \u043E \u043F\u0435\u0440\u0435\u043D\u0430\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0438 \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u044B"
@@ -62950,6 +63485,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "These notifications can let you undo redirections Last.fm forced upon you, but can also be annoying",
         de: "Mit diesen Benachrichtigungen kannst du die von Last.fm erzwungenen Weiterleitungen r\xFCckg\xE4ngig machen, sie k\xF6nnen aber auch l\xE4stig sein",
         es: "Estas notificaciones te permiten deshacer redirecciones que Last.fm fuerza ante ti, pero pueden llegar a ser molestas",
+        it: "Queste notifiche possono permetterti di annullare dei reindirizzamenti che Last.fm ti ha imposto, ma possono anche essere fastidiose",
         pt: "Essas notifica\xE7\xF5es podem permitir que voc\xEA desfa\xE7a redirecionamentos que a Last.fm imp\xF4s a voc\xEA, mas tamb\xE9m podem ser irritantes",
         sv: "Dessa notiser l\xE5ter dig \xE5ngra omdirigeringar Last.fm tvingade p\xE5 dig, men dem kan ocks\xE5 vara st\xF6rande",
         ru: "\u042D\u0442\u0438 \u0443\u0432\u0435\u0434\u043E\u043C\u043B\u0435\u043D\u0438\u044F \u043C\u043E\u0433\u0443\u0442 \u043F\u043E\u0437\u0432\u043E\u043B\u0438\u0442\u044C \u0432\u0430\u043C \u043E\u0442\u043C\u0435\u043D\u0438\u0442\u044C \u043F\u0435\u0440\u0435\u043D\u0430\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F, \u043D\u0430\u0432\u044F\u0437\u0430\u043D\u043D\u044B\u0435 Last.fm, \u043D\u043E \u0442\u0430\u043A\u0436\u0435 \u043C\u043E\u0433\u0443\u0442 \u0431\u044B\u0442\u044C \u0440\u0430\u0437\u0434\u0440\u0430\u0436\u0430\u044E\u0449\u0438\u043C\u0438"
@@ -62960,6 +63496,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Rank-based colours for artist charts",
         de: "Rangbasierte Farben f\xFCr K\xFCnstlerdiagramme",
         es: "Colores basados en rankings para la lista de artistas",
+        it: "Colori basati sulla posizione nelle classifiche degli artisti",
         pt: "Cores baseadas em classifica\xE7\xE3o para paradas de artistas",
         sv: "Rangbaserade f\xE4rger f\xF6r artistlistor",
         ru: "\u0426\u0432\u0435\u0442\u0430 \u043D\u0430 \u043E\u0441\u043D\u043E\u0432\u0435 \u0440\u0430\u043D\u0433\u0430 \u0434\u043B\u044F \u0447\u0430\u0440\u0442\u043E\u0432 \u0430\u0440\u0442\u0438\u0441\u0442\u043E\u0432"
@@ -62968,6 +63505,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Assigns a colour based on an artist\u2019s all-time ranking in your library",
         de: "Weist eine Farbe basierend auf dem Allzeit-Ranking eines K\xFCnstlers in deiner Bibliothek zu",
         es: "Asigna colores basados en el ranking de artistas m\xE1s escuchados en tu colecci\xF3n",
+        it: "Assegna un colore basato sulla sua posizione nella classifica della tua libreria",
         pt: "Define uma cor pela coloca\xE7\xE3o do artista no ranking geral da sua biblioteca",
         sv: "Till\xE4mpar en f\xE4rg baserad p\xE5 en artists alltidsranking i ditt bibliotek",
         ru: "\u041D\u0430\u0437\u043D\u0430\u0447\u0430\u0435\u0442 \u0446\u0432\u0435\u0442 \u0432 \u0437\u0430\u0432\u0438\u0441\u0438\u043C\u043E\u0441\u0442\u0438 \u043E\u0442 \u043E\u0431\u0449\u0435\u0433\u043E \u0440\u0435\u0439\u0442\u0438\u043D\u0433\u0430 \u0430\u0440\u0442\u0438\u0441\u0442\u0430 \u0432 \u0432\u0430\u0448\u0435\u0439 \u0431\u0438\u0431\u043B\u0438\u043E\u0442\u0435\u043A\u0435"
@@ -62978,6 +63516,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Visualise scrobble graphs better",
         de: "Scrobble-Diagramme besser visualisieren",
         es: "Mejor visualizaci\xF3n para los gr\xE1ficos de scrobblings",
+        it: "Visualizza meglio i grafici degli scrobbling",
         pt: "Visualize melhor os gr\xE1ficos de scrobble",
         sv: "B\xE4ttre visualisera skrobbeldiagram",
         ru: "\u041B\u0443\u0447\u0448\u0435 \u0432\u0438\u0437\u0443\u0430\u043B\u0438\u0437\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u0433\u0440\u0430\u0444\u0438\u043A\u0438 \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u043E\u0432"
@@ -62986,6 +63525,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Choose between a tiny delay for a wide range of graph options or legacy Last.fm graphs",
         de: "W\xE4hle zwischen einer kleinen Verz\xF6gerung f\xFCr eine breitere Palette von Diagrammoptionen oder den \xE4lteren Last.fm-Diagrammen",
         es: "Elige entre un peque\xF1o retraso para un mayor rango de opciones de gr\xE1ficos o los gr\xE1ficos cl\xE1sicos de Last.fm",
+        it: "Seleziona tra un piccolo ritardo per una vasta selezione di opzioni per i grafici, o utilizza i grafici normali di Last.fm",
         pt: "Escolha entre um pequeno atraso para ter mais op\xE7\xF5es de gr\xE1ficos ou usar os gr\xE1ficos cl\xE1ssicos da Last.fm",
         sv: "V\xE4lj mellan en liten f\xF6rdr\xF6jning f\xF6r en stor m\xE4ngd olika diagramalternativ eller anv\xE4nd \xE4ldre Last.fm-diagram",
         ru: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u043C\u0435\u0436\u0434\u0443 \u043D\u0435\u0431\u043E\u043B\u044C\u0448\u043E\u0439 \u0437\u0430\u0434\u0435\u0440\u0436\u043A\u043E\u0439 \u0434\u043B\u044F \u0448\u0438\u0440\u043E\u043A\u043E\u0433\u043E \u0441\u043F\u0435\u043A\u0442\u0440\u0430 \u043E\u043F\u0446\u0438\u0439 \u0433\u0440\u0430\u0444\u0438\u043A\u0430 \u0438\u043B\u0438 \u0443\u0441\u0442\u0430\u0440\u0435\u0432\u0448\u0438\u043C\u0438 \u0433\u0440\u0430\u0444\u0438\u043A\u0430\u043C\u0438 Last.fm"
@@ -62996,6 +63536,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Hide gender-based tags",
         de: "Geschlechtsspezifische Tags ausblenden",
         es: "Ocultar tags basados en g\xE9nero",
+        it: "Nascondi i tag basati sul genere",
         pt: "Esconder tags baseadas em g\xEAnero",
         sv: "G\xF6m k\xF6nsbaserade taggar",
         ru: "\u0421\u043A\u0440\u044B\u0442\u044C \u0442\u0435\u0433\u0438, \u043E\u0441\u043D\u043E\u0432\u0430\u043D\u043D\u044B\u0435 \u043D\u0430 \u0433\u0435\u043D\u0434\u0435\u0440\u0435"
@@ -63004,6 +63545,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "These tags are often redundant and can never apply to the full range they\u2019re intending",
         de: "Diese Tags sind oft \xFCberfl\xFCssig und k\xF6nnen nie auf die gesamte Bandbreite angewendet werden, die sie beabsichtigen",
         es: "Estos tags son normalmente redundantes y nunca consiguen representar al completo el rango que intentan",
+        it: "Questi tag sono spesso ridondanti e non possono rappresentare tutto quello che intendono",
         pt: "Essas tags costumam ser redundantes e nunca conseguem representar totalmente tudo o que se prop\xF5em",
         sv: "Dessa taggar \xE4r ofta \xF6verfl\xF6diga och g\xE4ller inte alltid f\xF6r allt dem \xE4r t\xE4nkta att t\xE4cka",
         ru: "\u042D\u0442\u0438 \u0442\u0435\u0433\u0438 \u0447\u0430\u0441\u0442\u043E \u0438\u0437\u0431\u044B\u0442\u043E\u0447\u043D\u044B \u0438 \u043D\u0435 \u043C\u043E\u0433\u0443\u0442 \u0431\u044B\u0442\u044C \u043F\u0440\u0438\u043C\u0435\u043D\u0435\u043D\u044B \u043A\u043E \u0432\u0441\u0435\u043C\u0443 \u0434\u0438\u0430\u043F\u0430\u0437\u043E\u043D\u0443, \u043A\u043E\u0442\u043E\u0440\u044B\u0439 \u043E\u043D\u0438 \u043F\u043E\u0434\u0440\u0430\u0437\u0443\u043C\u0435\u0432\u0430\u044E\u0442"
@@ -63013,6 +63555,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Artwork and grids",
       de: "Albencover und Raster",
       es: "C\xE1ratulas y cuadr\xEDculas",
+      it: "Copertine e griglie",
       pt: "Capas e grades",
       sv: "Albumkonst och rutn\xE4t",
       ru: "\u041E\u0431\u043B\u043E\u0436\u043A\u0438 \u0438 \u0441\u0435\u0442\u043A\u0438"
@@ -63022,6 +63565,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Apply gloss to album covers",
         de: "Glanz auf Albumcover anwenden",
         es: "Aplicar brillo a las c\xE1ratulas",
+        it: "Applica lucentezza alle copertine degli album",
         pt: "Aplique relevo nas capas dos \xE1lbuns",
         sv: "L\xE4gg till ett sken p\xE5 albumkonst",
         ru: "\u041F\u0440\u0438\u043C\u0435\u043D\u0438\u0442\u044C \u0433\u043B\u044F\u043D\u0435\u0446 \u043A \u043E\u0431\u043B\u043E\u0436\u043A\u0430\u043C \u0430\u043B\u044C\u0431\u043E\u043C\u043E\u0432"
@@ -63030,6 +63574,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Add a layer of shine to album covers globally",
         de: "F\xFCgt allen Albumcovern einen Glanzeffekt hinzu",
         es: "A\xF1ade una capa de brillo a todas las c\xE1ratulas",
+        it: "Aggiungi un effetto lucente a tutte le copertine degli album",
         pt: "Adicione um toque de brilho em todas as capas de \xE1lbuns",
         sv: "L\xE4gger till ett glansigt lager p\xE5 all albumkonst",
         ru: "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0441\u043B\u043E\u0439 \u0431\u043B\u0435\u0441\u043A\u0430 \u043D\u0430 \u043E\u0431\u043B\u043E\u0436\u043A\u0438 \u0430\u043B\u044C\u0431\u043E\u043C\u043E\u0432 \u043F\u043E \u0432\u0441\u0435\u043C\u0443 \u0441\u0430\u0439\u0442\u0443"
@@ -63040,6 +63585,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Reflect colour below grid items",
         de: "Farbe unter Rasterobjekten reflektieren",
         es: "Reflejar color debajo de los \xEDtems en la cuadr\xEDcula",
+        it: "Rifletti il colore tra gli elementi della griglia",
         pt: "Refletir a cor abaixo dos itens da grade",
         sv: "Reflektera f\xE4rg under rutn\xE4tsobjekt",
         ru: "\u041E\u0442\u0440\u0430\u0436\u0430\u0442\u044C \u0446\u0432\u0435\u0442 \u043F\u043E\u0434 \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u0430\u043C\u0438 \u0441\u0435\u0442\u043A\u0438"
@@ -63048,6 +63594,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Applies a glow below grid items based on the primary colour",
         de: "F\xFCgt einen Glanzeffekt unter Rasterobjekten hinzu, der auf der Prim\xE4rfarbe basiert",
         es: "Aplica un brillo debajo de los \xEDtems en la cuadr\xEDcula con base en el color primario",
+        it: "Applica un effetto brillante sotto gli elementi della griglia basandosi sul colore principale",
         pt: "Aplica um brilho abaixo dos itens da grade com base na cor prim\xE1ria",
         sv: "L\xE4gger till f\xE4rg under rutn\xE4tsobjekt som \xE4r baserad p\xE5 den prim\xE4ra f\xE4rgen",
         ru: "\u041F\u0440\u0438\u043C\u0435\u043D\u044F\u0435\u0442 \u0441\u0432\u0435\u0447\u0435\u043D\u0438\u0435 \u043F\u043E\u0434 \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u0430\u043C\u0438 \u0441\u0435\u0442\u043A\u0438 \u043D\u0430 \u043E\u0441\u043D\u043E\u0432\u0435 \u043E\u0441\u043D\u043E\u0432\u043D\u043E\u0433\u043E \u0446\u0432\u0435\u0442\u0430"
@@ -63058,6 +63605,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Skip to",
       de: "Springe zu",
       es: "Saltar a",
+      it: "Salta a",
       pt: "Ir at\xE9",
       sv: "Hoppa till",
       ru: "\u041F\u0435\u0440\u0435\u0439\u0442\u0438 \u043A"
@@ -63066,6 +63614,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Information",
       de: "Information",
       es: "Informaci\xF3n",
+      it: "Informazioni",
       pt: "Informa\xE7\xE3o",
       sv: "Information",
       ru: "\u0418\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u044F"
@@ -63075,6 +63624,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Username",
         de: "Benutzername",
         es: "Nombre de usuario",
+        it: "Nome utente",
         pt: "Nome de usu\xE1rio",
         sv: "Anv\xE4ndarnamn",
         ru: "\u0418\u043C\u044F \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F"
@@ -63083,6 +63633,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "To change your username hit the button to send an email. Having problems? {a}contact support{/a}.",
         de: "Um deinen Benutzernamen zu \xE4ndern, klicke auf die Schaltfl\xE4che \u201EE-Mail senden\u201C. Gibt es Probleme? {a}Kontaktiere den Support{/a}.",
         es: "Para cambiar tu nombre de usuario, haz clic al bot\xF3n para enviar un correo electr\xF3nico. \xBFAlg\xFAn problema? {a}contacta a soporte{/a}.",
+        it: "Per cambiare il tuo nome utente, premi il pulsante per inviare una email. Ci sono problemi? {a}contatta il supporto{/a}",
         pt: "Para alterar seu nome de usu\xE1rio, clique no bot\xE3o para enviar um e-mail. Est\xE1 com problemas? {a}contact support{/a}.",
         sv: "F\xF6r att \xE4ndra ditt anv\xE4ndarnamn, tryck p\xE5 knappen f\xF6r att skicka mejl. Har du ett problem? {a}Kontakta support{/a}.",
         ru: "\u0427\u0442\u043E\u0431\u044B \u0438\u0437\u043C\u0435\u043D\u0438\u0442\u044C \u0438\u043C\u044F \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F, \u043D\u0430\u0436\u043C\u0438\u0442\u0435 \u043A\u043D\u043E\u043F\u043A\u0443 \u0434\u043B\u044F \u043E\u0442\u043F\u0440\u0430\u0432\u043A\u0438 \u044D\u043B\u0435\u043A\u0442\u0440\u043E\u043D\u043D\u043E\u0433\u043E \u043F\u0438\u0441\u044C\u043C\u0430. \u0412\u043E\u0437\u043D\u0438\u043A\u043B\u0438 \u043F\u0440\u043E\u0431\u043B\u0435\u043C\u044B? {a}\u0421\u0432\u044F\u0436\u0438\u0442\u0435\u0441\u044C \u0441\u043E \u0441\u043B\u0443\u0436\u0431\u043E\u0439 \u043F\u043E\u0434\u0434\u0435\u0440\u0436\u043A\u0438{/a}."
@@ -63092,6 +63643,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Email",
       de: "E-Mail",
       es: "Correo electr\xF3nico",
+      it: "Email",
       pt: "E-mail",
       sv: "Mejladress",
       ru: "\u042D\u043B\u0435\u043A\u0442\u0440\u043E\u043D\u043D\u0430\u044F \u043F\u043E\u0447\u0442\u0430"
@@ -63100,6 +63652,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Password",
       de: "Passwort",
       es: "Contrase\xF1a",
+      it: "Password",
       pt: "Senha",
       sv: "L\xF6senord",
       ru: "\u041F\u0430\u0440\u043E\u043B\u044C"
@@ -63108,6 +63661,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "New password",
       de: "Neues Passwort",
       es: "Nueva contrase\xF1a",
+      it: "Nuova password",
       pt: "Nova senha",
       sv: "Nytt l\xF6senord",
       ru: "\u041D\u043E\u0432\u044B\u0439 \u043F\u0430\u0440\u043E\u043B\u044C"
@@ -63116,6 +63670,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Confirm password",
       de: "Passwort best\xE4tigen",
       es: "Confirmar contrase\xF1a",
+      it: "Conferma password",
       pt: "Confirmar senha",
       sv: "Verifiera l\xF6senord",
       ru: "\u041F\u043E\u0434\u0442\u0432\u0435\u0440\u0434\u0438\u0442\u0435 \u043F\u0430\u0440\u043E\u043B\u044C"
@@ -63124,6 +63679,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Change",
       de: "\xC4ndern",
       es: "Cambiar",
+      it: "Cambia",
       pt: "Mudar",
       sv: "\xC4ndra",
       ru: "\u0418\u0437\u043C\u0435\u043D\u0438\u0442\u044C"
@@ -63133,6 +63689,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Marketing emails",
         de: "Marketing-E-Mails",
         es: "Correos electr\xF3nicos de marketing",
+        it: "E-mail di marketing",
         pt: "E-mails promocionais",
         sv: "Marknadsf\xF6ringsmejl",
         ru: "\u041C\u0430\u0440\u043A\u0435\u0442\u0438\u043D\u0433\u043E\u0432\u044B\u0435 \u0440\u0430\u0441\u0441\u044B\u043B\u043A\u0438"
@@ -63141,6 +63698,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Last.fm can optionally send promotional emails from time to time",
         de: "Last.fm kann optional gelegentlich Werbe-E-Mails senden",
         es: "Last.fm puede opcionalmente mandarte correos electr\xF3nicos promocionales de vez en cuando",
+        it: "Last.fm pu\xF2 opzionalmente inviare email promozionali ogni tanto",
         pt: "A Last.fm pode, opcionalmente, enviar e-mails promocionais de tempos em tempos",
         sv: "Last.fm kan valfritt skicka reklammejl d\xE5 och d\xE5",
         ru: "Last.fm \u043C\u043E\u0436\u0435\u0442 \u043F\u043E \u0436\u0435\u043B\u0430\u043D\u0438\u044E \u0432\u0440\u0435\u043C\u044F \u043E\u0442 \u0432\u0440\u0435\u043C\u0435\u043D\u0438 \u043E\u0442\u043F\u0440\u0430\u0432\u043B\u044F\u0442\u044C \u0440\u0435\u043A\u043B\u0430\u043C\u043D\u044B\u0435 \u044D\u043B\u0435\u043A\u0442\u0440\u043E\u043D\u043D\u044B\u0435 \u043F\u0438\u0441\u044C\u043C\u0430"
@@ -63150,6 +63708,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Email language",
       de: "E-Mail-Sprache",
       es: "Idioma de correos electr\xF3nicos",
+      it: "Lingua delle email",
       pt: "Idioma dos e-mails",
       sv: "Mejlspr\xE5k",
       ru: "\u042F\u0437\u044B\u043A \u044D\u043B\u0435\u043A\u0442\u0440\u043E\u043D\u043D\u044B\u0445 \u043F\u0438\u0441\u0435\u043C"
@@ -63158,6 +63717,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Communication",
       de: "Kommunikation",
       es: "Comunicaci\xF3n",
+      it: "Comunicazione",
       pt: "Comunica\xE7\xE3o",
       sv: "Kommunikation",
       ru: "\u041A\u043E\u043C\u043C\u0443\u043D\u0438\u043A\u0430\u0446\u0438\u044F"
@@ -63166,6 +63726,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Security",
       de: "Sicherheit",
       es: "Seguridad",
+      it: "Sicurezza",
       pt: "Seguran\xE7a",
       sv: "Sekretess",
       ru: "\u0411\u0435\u0437\u043E\u043F\u0430\u0441\u043D\u043E\u0441\u0442\u044C"
@@ -63174,6 +63735,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Logout on all devices",
       de: "Auf allen Ger\xE4ten abmelden",
       es: "Cerrar sesi\xF3n en todos los dispostivos",
+      it: "Disconnetti su tutti i dispositivi",
       pt: "Encerrar sess\xE3o em todos os dispositivos",
       sv: "Logga ut fr\xE5n alla enheter",
       ru: "\u0412\u044B\u0439\u0442\u0438 \u0438\u0437 \u0432\u0441\u0435\u0445 \u0443\u0441\u0442\u0440\u043E\u0439\u0441\u0442\u0432"
@@ -63183,6 +63745,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Delete account",
         de: "Konto l\xF6schen",
         es: "Eliminar cuenta",
+        it: "Elimina account",
         pt: "Deletar conta",
         sv: "Ta bort konto",
         ru: "\u0423\u0434\u0430\u043B\u0438\u0442\u044C \u0430\u043A\u043A\u0430\u0443\u043D\u0442"
@@ -63191,6 +63754,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Deletion will take 14 days to complete, after this time your account will either be deleted, anonymised, or put beyond use and cannot be recovered. Once deleted, your username will no longer be available.",
         de: "Die L\xF6schung dauert 14 Tage. Nach Ablauf dieser Frist wird dein Konto entweder gel\xF6scht, anonymisiert, oder unbrauchbar gemacht und kann nicht wiederhergestellt werden. Nach der L\xF6schung ist dein Benutzername nicht mehr verf\xFCgbar.",
         es: "La eliminaci\xF3n tardar\xE1 14 d\xEDas en completarse. Despu\xE9s de ese periodo, tu cuenta ser\xE1 eliminada, anonimizada, o se pondr\xE1 fuera de uso y no podr\xE1 recuperarse. Una vez eliminada, tu nombre de usuario ya no estar\xE1 disponible.",
+        it: "L'eliminazione impiegher\xE0 14 giorni per essere completata, dopo questo tempo il tuo account sar\xE0 cancellato, anonimizzato o reso inutilizzabile e non potr\xE0 essere recuperato. Una volta eliminato, il tuo username non sar\xE0 pi\xF9 disponibile.",
         pt: "A exclus\xE3o levar\xE1 14 dias para ser conclu\xEDda. Ap\xF3s esse per\xEDodo, sua conta ser\xE1 exclu\xEDda, anonimizada ou desativada, e n\xE3o poder\xE1 ser recuperada. Depois de exclu\xEDdo, seu nome de usu\xE1rio n\xE3o estar\xE1 mais dispon\xEDvel.",
         sv: "Det tar 14 dagar att ta bort ditt konto. Efter denna tid blir dit konto antingen borttaget, anonymiserad, eller g\xF6rs oanv\xE4ndbar och kan inte f\xE5s tillbaka. N\xE4r det \xE4r borttaget kan ditt anv\xE4ndarnamn inte bli anv\xE4nt igen.",
         ru: "\u0423\u0434\u0430\u043B\u0435\u043D\u0438\u0435 \u0437\u0430\u0439\u043C\u0435\u0442 14 \u0434\u043D\u0435\u0439. \u041F\u043E \u0438\u0441\u0442\u0435\u0447\u0435\u043D\u0438\u0438 \u044D\u0442\u043E\u0433\u043E \u0432\u0440\u0435\u043C\u0435\u043D\u0438 \u0432\u0430\u0448\u0430 \u0443\u0447\u0435\u0442\u043D\u0430\u044F \u0437\u0430\u043F\u0438\u0441\u044C \u0431\u0443\u0434\u0435\u0442 \u043B\u0438\u0431\u043E \u0443\u0434\u0430\u043B\u0435\u043D\u0430, \u043B\u0438\u0431\u043E \u0430\u043D\u043E\u043D\u0438\u043C\u0438\u0437\u0438\u0440\u043E\u0432\u0430\u043D\u0430, \u043B\u0438\u0431\u043E \u0432\u044B\u0432\u0435\u0434\u0435\u043D\u0430 \u0438\u0437 \u044D\u043A\u0441\u043F\u043B\u0443\u0430\u0442\u0430\u0446\u0438\u0438 \u0438 \u043D\u0435 \u043C\u043E\u0436\u0435\u0442 \u0431\u044B\u0442\u044C \u0432\u043E\u0441\u0441\u0442\u0430\u043D\u043E\u0432\u043B\u0435\u043D\u0430. \u041F\u043E\u0441\u043B\u0435 \u0443\u0434\u0430\u043B\u0435\u043D\u0438\u044F \u0432\u0430\u0448\u0435 \u0438\u043C\u044F \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F \u0431\u043E\u043B\u044C\u0448\u0435 \u043D\u0435 \u0431\u0443\u0434\u0435\u0442 \u0434\u043E\u0441\u0442\u0443\u043F\u043D\u043E."
@@ -63200,6 +63764,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Delete {u} permanently",
       de: "{u} dauerhaft l\xF6schen",
       es: "Eliminar {u} permanentemente",
+      it: "Elimina {u} permanentemente",
       pt: "Deletar {u} permanentemente",
       sv: "Ta bort {u} permanent",
       ru: "\u0423\u0434\u0430\u043B\u0438\u0442\u044C {u} \u043D\u0430\u0432\u0441\u0435\u0433\u0434\u0430"
@@ -63209,6 +63774,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Other",
       de: "Sonstiges",
       es: "Otro",
+      it: "Altro",
       pt: "Outro",
       sv: "Annat",
       ru: "\u0414\u0440\u0443\u0433\u043E\u0435"
@@ -63216,19 +63782,22 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     applications: {
       en: "Applications",
       es: "Aplicaciones",
+      it: "Applicazioni",
       sv: "Applikationer",
       ru: "\u041F\u0440\u0438\u043B\u043E\u0436\u0435\u043D\u0438\u044F"
     },
     applications_intro: {
       en: "Connect your account to third-party services for a better scrobbling experience. Make sure you trust the services below.",
       es: "Conecta tu cuenta a servicios externos para una mejor experiencia al hacer scrobbling. Aseg\xFArate de que conf\xEDas en los servicios que hay debajo.",
-      sv: "Anslut ditt konto till tredjepartstj\xE4nster f\xF6r b\xE4ttre skrobblingsupplevelse. Var s\xE4ker p\xE5 att du litar p\xE5 nedre tj\xE4nster",
+      it: "Connetti il tuo account a servizi di terze parti per una migliore esperienza di scrobbling. Assicurati di fidarti dei servizi che seguono.",
+      sv: "Anslut ditt konto till tredjepartstj\xE4nster f\xF6r b\xE4ttre skrobblingsupplevelse. Var s\xE4ker p\xE5 att du litar p\xE5 nedre tj\xE4nster.",
       ru: "\u041F\u043E\u0434\u043A\u043B\u044E\u0447\u0438\u0442\u0435 \u0441\u0432\u043E\u0439 \u0430\u043A\u043A\u0430\u0443\u043D\u0442 \u043A \u0441\u0442\u043E\u0440\u043E\u043D\u043D\u0438\u043C \u0441\u0435\u0440\u0432\u0438\u0441\u0430\u043C \u0434\u043B\u044F \u043B\u0443\u0447\u0448\u0435\u0433\u043E \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u0438\u043D\u0433\u0430. \u0423\u0431\u0435\u0434\u0438\u0442\u0435\u0441\u044C, \u0447\u0442\u043E \u0432\u044B \u0434\u043E\u0432\u0435\u0440\u044F\u0435\u0442\u0435 \u0443\u043A\u0430\u0437\u0430\u043D\u043D\u044B\u043C \u043D\u0438\u0436\u0435 \u0441\u0435\u0440\u0432\u0438\u0441\u0430\u043C."
     },
     connect_app: {
       en: "Connect {name}",
       de: "Verbinde {name}",
       es: "Conectar {name}",
+      it: "Connetti {name}",
       pt: "Conectar {name}",
       sv: "Anslut {name}",
       ru: "\u041F\u043E\u0434\u043A\u043B\u044E\u0447\u0438\u0442\u044C {name}"
@@ -63237,6 +63806,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Connect",
       de: "Verbinden",
       es: "Conectar",
+      it: "Connetti",
       pt: "Conectar",
       sv: "Anslut",
       ru: "\u041F\u043E\u0434\u043A\u043B\u044E\u0447\u0438\u0442\u044C"
@@ -63244,6 +63814,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     suggested: {
       en: "Suggested",
       es: "Sugerido",
+      it: "Suggerito",
       sv: "F\xF6reslaget",
       ru: "\u041F\u0440\u0435\u0434\u043B\u043E\u0436\u0435\u043D\u043D\u044B\u0435"
     },
@@ -63251,6 +63822,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Connected",
       de: "Verbunden",
       es: "Conectado",
+      it: "Connesso",
       pt: "Conectado",
       sv: "Anslutit",
       ru: "\u041F\u043E\u0434\u043A\u043B\u044E\u0447\u0435\u043D\u043E"
@@ -63259,6 +63831,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Not connected",
       de: "Nicht verbunden",
       es: "No conectado",
+      it: "Non connesso",
       pt: "N\xE3o conectado",
       sv: "Inte ansluten",
       ru: "\u041D\u0435 \u043F\u043E\u0434\u043A\u043B\u044E\u0447\u0435\u043D\u043E"
@@ -63268,6 +63841,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Unlock additional API features",
         de: "Schalte zus\xE4tzliche API-Funktionen frei",
         es: "Desbloquea funciones adicionales de API",
+        it: "Sblocca ulteriori funzionalit\xE0 dell'API",
         pt: "Desbloqueie recursos adicionais da API",
         sv: "L\xE5s upp flera API-funktioner",
         ru: "\u0420\u0430\u0437\u0431\u043B\u043E\u043A\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u0434\u043E\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0435 \u0444\u0443\u043D\u043A\u0446\u0438\u0438 API"
@@ -63276,6 +63850,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Link your account to allow API access such as scrobbling",
         de: "Verkn\xFCpfe dein Konto, um API-Zugriffe wie Scrobbling zu erm\xF6glichen",
         es: "Conecta tu cuenta para permitir el acceso a la API, como el scrobbling",
+        it: "Connetti il tuo account per attivare l'accesso all'API, ad esempio per lo scrobbling",
         pt: "Conecte sua conta para permitir o acesso \xE0 API, como o scrobbling",
         sv: "Koppla ditt konto f\xF6r att till\xE5ta API-\xE5tkomster, som att skrobbla",
         ru: "\u041F\u0440\u0438\u0432\u044F\u0436\u0438\u0442\u0435 \u0441\u0432\u043E\u0439 \u0430\u043A\u043A\u0430\u0443\u043D\u0442, \u0447\u0442\u043E\u0431\u044B \u0440\u0430\u0437\u0440\u0435\u0448\u0438\u0442\u044C \u0434\u043E\u0441\u0442\u0443\u043F \u043A API, \u043D\u0430\u043F\u0440\u0438\u043C\u0435\u0440, \u0434\u043B\u044F \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u0438\u043D\u0433\u0430"
@@ -63285,6 +63860,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "API status",
       de: "API-Status",
       es: "Estatus de API",
+      it: "Stato API",
       pt: "Status da API",
       sv: "API-status",
       ru: "\u0421\u0442\u0430\u0442\u0443\u0441 API"
@@ -63294,6 +63870,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "would like to use your account",
       de: "m\xF6chte sich mit deinem Konto verbinden",
       es: "quiere usar tu cuenta",
+      it: "vorrebbe utilizzare il tuo account",
       pt: "gostaria de usar sua conta",
       sv: "vill anv\xE4nda ditt konto",
       ru: "\u0445\u043E\u0447\u0435\u0442 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u044C \u0432\u0430\u0448 \u0430\u043A\u043A\u0430\u0443\u043D\u0442"
@@ -63302,6 +63879,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Logged in as {user}",
       de: "Angemeldet als {user}",
       es: "Conectado como {user}",
+      it: "Connesso come {user}",
       pt: "Conectado como {user}",
       sv: "Loggat in som {user}",
       ru: "\u0412\u044B \u0432\u043E\u0448\u043B\u0438 \u043A\u0430\u043A {user}"
@@ -63310,6 +63888,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Not logged in",
       de: "Nicht angemeldet",
       es: "No conectado",
+      it: "Non connesso",
       pt: "N\xE3o conectado",
       sv: "Inte inloggad",
       ru: "\u041D\u0435 \u0432 \u0441\u0438\u0441\u0442\u0435\u043C\u0435"
@@ -63320,6 +63899,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Make sure you trust this application",
       de: "Stelle sicher, dass du dieser Anwendung vertraust",
       es: "Aseg\xFArate de que conf\xEDas en esta aplicaci\xF3n",
+      it: "Assicurati di fidarti di questa applicazione",
       pt: "Certifique-se de que voc\xEA confia neste aplicativo",
       sv: "Var s\xE4ker p\xE5 att du litar denna applikation",
       ru: "\u0423\u0431\u0435\u0434\u0438\u0442\u0435\u0441\u044C, \u0447\u0442\u043E \u0432\u044B \u0434\u043E\u0432\u0435\u0440\u044F\u0435\u0442\u0435 \u044D\u0442\u043E\u043C\u0443 \u043F\u0440\u0438\u043B\u043E\u0436\u0435\u043D\u0438\u044E"
@@ -63329,6 +63909,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "has been connected",
       de: "wurde verbunden",
       es: "ha sido conectado",
+      it: "\xE8 stato connesso",
       pt: "foi conectado",
       sv: "har anslutits",
       ru: "\u0431\u044B\u043B\u043E \u043F\u043E\u0434\u043A\u043B\u044E\u0447\u0435\u043D\u043E"
@@ -63337,6 +63918,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "You can now close this tab",
       de: "Du kannst diesen Tab jetzt schlie\xDFen",
       es: "Puedes cerrar esta ventana",
+      it: "Puoi chiudere questa scheda",
       pt: "Voc\xEA pode fechar esta aba agora",
       sv: "Du kan nu st\xE4nga den h\xE4r fliken",
       ru: "\u0422\u0435\u043F\u0435\u0440\u044C \u0432\u044B \u043C\u043E\u0436\u0435\u0442\u0435 \u0437\u0430\u043A\u0440\u044B\u0442\u044C \u044D\u0442\u0443 \u0432\u043A\u043B\u0430\u0434\u043A\u0443"
@@ -63347,6 +63929,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Manage applications",
       de: "Anwendungen verwalten",
       es: "Gestionar aplicaciones",
+      it: "Gestisci applicazioni",
       pt: "Gerenciar aplica\xE7\xF5es",
       sv: "Hantera applikationer",
       ru: "\u0423\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435 \u043F\u0440\u0438\u043B\u043E\u0436\u0435\u043D\u0438\u044F\u043C\u0438"
@@ -63356,6 +63939,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Use fancy formatting on profiles",
         de: "Verwende sch\xF6nere Formatierungen f\xFCr Profile",
         es: "Usar formato elegante en los perfiles",
+        it: "Usa formattazione avanzata nei profili",
         pt: "Usar formata\xE7\xE3o estilosa nos perfis",
         sv: "Anv\xE4nd snygg formatering p\xE5 profiler",
         ru: "\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u044C \u0440\u0430\u0441\u0448\u0438\u0440\u0435\u043D\u043D\u043E\u0435 \u0444\u043E\u0440\u043C\u0430\u0442\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435 \u0432 \u043F\u0440\u043E\u0444\u0438\u043B\u044F\u0445"
@@ -63364,6 +63948,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Allows the use of line breaks, bold text, italics, and images in all \u201CAbout Me\u201D panels",
         de: "Erm\xF6glicht die Verwendung von Zeilenumbr\xFCchen, fettem Text, Kursivschrift und Bildern in allen \u201E\xDCber mich\u201C-Bereichen",
         es: 'Permite el uso de saltos de l\xEDnea, negrita, cursiva, e im\xE1genes en todos los paneles "Sobre m\xED"',
+        it: `Permette l'uso di interruzioni di linea, grassetto, corsivo e immagini in tutti i pannelli "Informazioni"`,
         pt: "Permite o uso de quebras de linha, texto em negrito, it\xE1lico e imagens em todos os pain\xE9is \u201CSobre mim\u201D",
         sv: "Till\xE5ter radbrytning, fet stil, kursiv stil, och bilder inom alla \u201COm mig\u201D-paneler",
         ru: "\u0420\u0430\u0437\u0440\u0435\u0448\u0430\u0435\u0442 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u043D\u0438\u0435 \u043F\u0435\u0440\u0435\u043D\u043E\u0441\u043E\u0432 \u0441\u0442\u0440\u043E\u043A, \u0436\u0438\u0440\u043D\u043E\u0433\u043E \u0442\u0435\u043A\u0441\u0442\u0430, \u043A\u0443\u0440\u0441\u0438\u0432\u0430 \u0438 \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0439 \u0432\u043E \u0432\u0441\u0435\u0445 \u043F\u0430\u043D\u0435\u043B\u044F\u0445 \xAB\u041E\u0431\u043E \u043C\u043D\u0435\xBB"
@@ -63374,6 +63959,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Use fancy formatting on shouts",
         de: "Verwende sch\xF6nere Formatierungen f\xFCr Shouts",
         es: "Usar formato elegante en las notas",
+        it: "Usa formattazione avanzata nelle note",
         pt: "Usar formata\xE7\xE3o estilosa nas caixas de mensagens",
         sv: "Anv\xE4nd snygg formatering p\xE5 hojtningar",
         ru: "\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u044C \u0440\u0430\u0441\u0448\u0438\u0440\u0435\u043D\u043D\u043E\u0435 \u0444\u043E\u0440\u043C\u0430\u0442\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435 \u0432 \u0448\u0430\u0443\u0442\u0430\u0445"
@@ -63382,6 +63968,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Allows the use of line breaks, bold text, italics, and images in all shouts",
         de: "Erm\xF6glicht die Verwendung von Zeilenumbr\xFCchen, fettem Text, Kursivschrift und Bildern in allen Shouts",
         es: "Permite el uso de saltos de l\xEDnea, negrita, cursiva, e im\xE1genes en todas las notas",
+        it: "Permette l'uso di interruzioni di linea, grassetto, corsivo e immagini in tutte le note",
         pt: "Permite o uso de quebras de linha, texto em negrito, it\xE1lico e imagens em todas as caixas de mensagens",
         sv: "Till\xE5ter radbrytning, fet stil, kursiv stil, och bilder inom alla hojtningar",
         ru: "\u0420\u0430\u0437\u0440\u0435\u0448\u0430\u0435\u0442 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u043D\u0438\u0435 \u043F\u0435\u0440\u0435\u043D\u043E\u0441\u043E\u0432 \u0441\u0442\u0440\u043E\u043A, \u0436\u0438\u0440\u043D\u043E\u0433\u043E \u0442\u0435\u043A\u0441\u0442\u0430, \u043A\u0443\u0440\u0441\u0438\u0432\u0430 \u0438 \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0439 \u0432\u043E \u0432\u0441\u0435\u0445 \u0448\u0430\u0443\u0442\u0430\u0445"
@@ -63390,6 +63977,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "hello! **hello!** *hello!*\n[here\u2019s a link](https://katelyn.moe) HAII @evangelicgirl",
         de: "hallo! **hallo!** *hallo!*\n[hier ist ein link](https://katelyn.moe) HALL\xD6CHEN @evangelicgirl",
         es: "\xA1hola! **\xA1hola!** *\xA1hola!*\n[aqu\xED hay un v\xEDnculo](https://katelyn.moe) HOLII @evangelicgirl",
+        it: "ciao! **ciao!** *ciao!*\n[questo \xE8 un link](https://katelyn.moe) CIAOO @evangelicgirl",
         pt: "oi! **ol\xE1!** *opa!*\n[aqui est\xE1 um link](https://katelyn.moe) OIEE @evangelicgirl",
         sv: "hej! **hej!** *hej!*\n[h\xE4r \xE4r en l\xE4nk](https://katelyn.moe) HEJJ @evangelicgirl",
         ru: "\u043F\u0440\u0438\u0432\u0435\u0442! **\u043F\u0440\u0438\u0432\u0435\u0442!** *\u043F\u0440\u0438\u0432\u0435\u0442!*\n[\u0432\u043E\u0442 \u0441\u0441\u044B\u043B\u043A\u0430](https://katelyn.moe) \u041F\u0420\u0418\u0412\u0415\u0422 @evangelicgirl"
@@ -63399,6 +63987,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Gathering your album plays",
       de: "Sammeln deiner Albumwiedergaben",
       es: "Recopilando tus reproducciones de \xE1lbumes",
+      it: "Raccogliendo le tue riproduzioni di album",
       pt: "Coletando suas reprodu\xE7\xF5es de \xE1lbuns",
       sv: "Samlar dina albumspelningar",
       ru: "\u0421\u043E\u0431\u0438\u0440\u0430\u0435\u043C \u0432\u0430\u0448\u0438 \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u044F \u0430\u043B\u044C\u0431\u043E\u043C\u043E\u0432"
@@ -63407,6 +63996,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "You do not have any plays",
       de: "Du hast keine Plays",
       es: "No tienes ninguna reproducci\xF3n",
+      it: "Non hai alcuna riproduzione",
       pt: "Voc\xEA n\xE3o tem nenhuma reprodu\xE7\xE3o",
       sv: "Du har inga spelningar",
       ru: "\u0423 \u0432\u0430\u0441 \u043D\u0435\u0442 \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u0439"
@@ -63415,6 +64005,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       // tracklist source menu option that enables the thing below
       en: "Own plays",
       es: "Reproducciones personales",
+      it: "Riproduzioni personali",
       sv: "Egna spelningar",
       ru: "\u0421\u043E\u0431\u0441\u0442\u0432\u0435\u043D\u043D\u044B\u0435 \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u044F"
     },
@@ -63423,6 +64014,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Sourced from your own plays as an official tracklist is unavailable",
       de: "Diese Liste basiert auf deinen eigenen Plays, da keine offizielle Titelliste verf\xFCgbar ist",
       es: "Extra\xEDdo de tus reproducciones personales, debido a que la lista de temas oficial no est\xE1 disponible",
+      it: "Estratto dalle tue riproduzioni, dato che non \xE8 disponibile un elenco dei brani ufficiale",
       pt: "Baseado nas suas pr\xF3prias reprodu\xE7\xF5es, pois a tracklist oficial n\xE3o est\xE1 dispon\xEDvel",
       sv: "H\xE4mtas fr\xE5n dina egna spelningar f\xF6r en officiell spellista finns inte",
       ru: "\u041F\u043E\u043B\u0443\u0447\u0435\u043D\u043E \u0438\u0437 \u0432\u0430\u0448\u0438\u0445 \u0441\u043E\u0431\u0441\u0442\u0432\u0435\u043D\u043D\u044B\u0445 \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u0439, \u0442\u0430\u043A \u043A\u0430\u043A \u043E\u0444\u0438\u0446\u0438\u0430\u043B\u044C\u043D\u044B\u0439 \u0442\u0440\u0435\u043A\u043B\u0438\u0441\u0442 \u043D\u0435\u0434\u043E\u0441\u0442\u0443\u043F\u0435\u043D"
@@ -63432,6 +64024,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Are you fluent in a supported language?",
         de: "Sprichst du eine der unterst\xFCtzten Sprachen flie\xDFend?",
         es: "\xBFEres fluido en un idioma compatible?",
+        it: "Sei fluente in un linguaggio supportato?",
         pt: "Voc\xEA \xE9 fluente em algum dos idiomas suportados?",
         sv: "Talar du ett spr\xE5k som st\xF6ds flytande?",
         ru: "\u0421\u0432\u043E\u0431\u043E\u0434\u043D\u043E \u043B\u0438 \u0432\u044B \u0433\u043E\u0432\u043E\u0440\u0438\u0442\u0435 \u043D\u0430 \u043E\u0434\u043D\u043E\u043C \u0438\u0437 \u043F\u043E\u0434\u0434\u0435\u0440\u0436\u0438\u0432\u0430\u0435\u043C\u044B\u0445 \u044F\u0437\u044B\u043A\u043E\u0432?"
@@ -63440,6 +64033,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Translations are powered by community contributions from wonderful people like you",
         de: "\xDCbersetzungen werden durch Beitr\xE4ge der Community von wunderbaren Menschen wie dir erm\xF6glicht",
         es: "Las traducciones son posibles gracias a contribuiciones de la comunidad por gente maravillosa como t\xFA",
+        it: "Le traduzioni sono basate sulle contribuzioni di persone fantastiche come te",
         pt: "As tradu\xE7\xF5es s\xE3o feitas gra\xE7as \xE0s contribui\xE7\xF5es da comunidade de pessoas incr\xEDveis como voc\xEA",
         sv: "\xD6vers\xE4ttningar drivs av bidrag fr\xE5n underbara folk som du",
         ru: "\u041F\u0435\u0440\u0435\u0432\u043E\u0434\u044B \u043E\u0431\u0435\u0441\u043F\u0435\u0447\u0438\u0432\u0430\u044E\u0442\u0441\u044F \u0432\u043A\u043B\u0430\u0434\u043E\u043C \u0441\u043E\u043E\u0431\u0449\u0435\u0441\u0442\u0432\u0430 \u043E\u0442 \u0437\u0430\u043C\u0435\u0447\u0430\u0442\u0435\u043B\u044C\u043D\u044B\u0445 \u043B\u044E\u0434\u0435\u0439, \u0442\u0430\u043A\u0438\u0445 \u043A\u0430\u043A \u0432\u044B"
@@ -63450,6 +64044,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Welcome to bleh, thank you for installing!<br>You can continue through this quick setup to get you started or skip right to your profile and figure it all out yourself <3",
       de: "Willkommen bei bleh, danke f\xFCr die Installation!<br>Du kannst diesen schnellen Einrichtungsassistenten durchlaufen, um loszulegen, oder direkt zu deinem Profil springen und alles selbst herausfinden <3",
       es: "\xA1Bienvenido a bleh, gracias por instalar!<br>Puedes continuar con la instalaci\xF3n para ayudarte a empezar o puedes saltar directamente a tu perfil y averiguar por ti mismo <3",
+      it: "Benvenuto in bleh, grazie per l'installazione!<br>Puoi continuare con questa veloce configurazione iniziale, oppure saltare direttamente al tuo profilo e scoprire tutto da solo <3",
       pt: "Bem-vindo ao bleh, obrigado por instalar!<br>Voc\xEA pode seguir este r\xE1pido guia de configura\xE7\xE3o para come\xE7ar, ou pular direto para seu perfil e descobrir tudo por conta pr\xF3pria <3",
       sv: "V\xE4lkommen till bleh, tack f\xF6r att du har installerat!<br>Du kan forts\xE4tta genom den h\xE4r snabba setupen f\xF6r att starta eller hoppa rakt till din profil och klura ut det helt sj\xE4lv <3",
       ru: "\u0414\u043E\u0431\u0440\u043E \u043F\u043E\u0436\u0430\u043B\u043E\u0432\u0430\u0442\u044C \u0432 bleh, \u0441\u043F\u0430\u0441\u0438\u0431\u043E \u0437\u0430 \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043A\u0443!<br>\u0412\u044B \u043C\u043E\u0436\u0435\u0442\u0435 \u043F\u0440\u043E\u0439\u0442\u0438 \u044D\u0442\u0443 \u0431\u044B\u0441\u0442\u0440\u0443\u044E \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0443, \u0447\u0442\u043E\u0431\u044B \u043D\u0430\u0447\u0430\u0442\u044C, \u0438\u043B\u0438 \u0441\u0440\u0430\u0437\u0443 \u043F\u0435\u0440\u0435\u0439\u0442\u0438 \u043A \u0441\u0432\u043E\u0435\u043C\u0443 \u043F\u0440\u043E\u0444\u0438\u043B\u044E \u0438 \u0440\u0430\u0437\u043E\u0431\u0440\u0430\u0442\u044C\u0441\u044F \u0432\u043E \u0432\u0441\u0435\u043C \u0441\u0430\u043C\u043E\u0441\u0442\u043E\u044F\u0442\u0435\u043B\u044C\u043D\u043E <3"
@@ -63458,6 +64053,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Next",
       de: "Weiter",
       es: "Siguiente",
+      it: "Prossimo",
       pt: "Pr\xF3ximo",
       sv: "N\xE4sta",
       ru: "\u0414\u0430\u043B\u0435\u0435"
@@ -63466,6 +64062,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Choose a theme that suits you best!",
       de: "W\xE4hle ein Farbschema, das am besten zu dir passt!",
       es: "\xA1Elige el aspecto que m\xE1s te guste!",
+      it: "Seleziona il tema che ti piace di pi\xF9!",
       pt: "Escolha o tema que mais combina com voc\xEA",
       sv: "V\xE4lj ett tema som passar dig b\xE4st!",
       ru: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u0442\u0435\u043C\u0443, \u043A\u043E\u0442\u043E\u0440\u0430\u044F \u043F\u043E\u0434\u0445\u043E\u0434\u0438\u0442 \u0432\u0430\u043C \u0431\u043E\u043B\u044C\u0448\u0435 \u0432\u0441\u0435\u0433\u043E!"
@@ -63474,6 +64071,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Before we continue, let\u2019s assess your accessibility settings.",
       de: "Lass uns kurz deine Barrierefreiheitseinstellungen \xFCberpr\xFCfen, bevor wir weitermachen.",
       es: "Antes de continuar, comprobemos tu configuraci\xF3n de accesibilidad.",
+      it: "Prima di continuare, valutiamo le tue impostazioni di accessibilit\xE0.",
       pt: "Antes de continuarmos, vamos acessar suas configura\xE7\xF5es de acessibilidade.",
       sv: "Innan vi forts\xE4tter ska vi kontrollera dina tillg\xE4nglighetsinst\xE4llningar.",
       ru: "\u041F\u0440\u0435\u0436\u0434\u0435 \u0447\u0435\u043C \u043F\u0440\u043E\u0434\u043E\u043B\u0436\u0438\u0442\u044C, \u0434\u0430\u0432\u0430\u0439\u0442\u0435 \u043E\u0446\u0435\u043D\u0438\u043C \u0432\u0430\u0448\u0438 \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438 \u0434\u043E\u0441\u0442\u0443\u043F\u043D\u043E\u0441\u0442\u0438."
@@ -63482,6 +64080,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Choose a colour you like or make your own favourite.",
       de: "W\xE4hle eine Farbe, die dir gef\xE4llt, oder lege deine eigene Lieblingsfarbe fest.",
       es: "Elige un color que te guste o haz tu propio favorito.",
+      it: "Seleziona un colore che ti piace o crea il tuo preferito.",
       pt: "Escolha uma cor que voc\xEA goste ou crie a sua favorita.",
       sv: "V\xE4lj en f\xE4rg du tycker om eller g\xF6r din egna favorit.",
       ru: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u0446\u0432\u0435\u0442, \u043A\u043E\u0442\u043E\u0440\u044B\u0439 \u0432\u0430\u043C \u043D\u0440\u0430\u0432\u0438\u0442\u0441\u044F, \u0438\u043B\u0438 \u0441\u043E\u0437\u0434\u0430\u0439\u0442\u0435 \u0441\u0432\u043E\u0439 \u043B\u044E\u0431\u0438\u043C\u044B\u0439."
@@ -63490,6 +64089,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "We offer a variety of options to help you manage your music library.",
       de: "Wir bieten eine Vielzahl von Optionen, um dir bei der Verwaltung deiner Musikbibliothek zu helfen.",
       es: "Ofrecemos una variedad de opciones para ayudarte a manejar tu colecci\xF3n de m\xFAsica.",
+      it: "Offriamo una variet\xE0 di opzioni per aiutarti a gestire la tua libreria musicale.",
       pt: "N\xF3s oferecemos uma variedade de op\xE7\xF5es para ajudar voc\xEA a gerenciar sua biblioteca musical.",
       sv: "Vi har massa olika inst\xE4llningar f\xF6r att hj\xE4lpa till att ordna ditt musikbibliotek.",
       ru: "\u041C\u044B \u043F\u0440\u0435\u0434\u043B\u0430\u0433\u0430\u0435\u043C \u043C\u043D\u043E\u0436\u0435\u0441\u0442\u0432\u043E \u043E\u043F\u0446\u0438\u0439, \u0447\u0442\u043E\u0431\u044B \u043F\u043E\u043C\u043E\u0447\u044C \u0432\u0430\u043C \u0443\u043F\u0440\u0430\u0432\u043B\u044F\u0442\u044C \u0432\u0430\u0448\u0435\u0439 \u043C\u0443\u0437\u044B\u043A\u0430\u043B\u044C\u043D\u043E\u0439 \u0431\u0438\u0431\u043B\u0438\u043E\u0442\u0435\u043A\u043E\u0439."
@@ -63498,6 +64098,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "That\u2019s all for now, to configure your bleh installation in the future head to {a}the settings{/a} in your menu!",
       de: "Das war\u2019s f\xFCrs Erste. Um deine bleh-Installation in Zukunft zu konfigurieren, gehe zu {a}den Einstellungen{/a} in deinem Men\xFC!",
       es: "\xA1Eso es todo por ahora, para modificar tu instalaci\xF3n de bleh en el futuro, ve a {a}la configuraci\xF3n{/a} en tu men\xFA!",
+      it: "\xC8 tutto per ora, per configurare la tua installazione di bleh in futuro vai alle {a}impostazioni{a} dal tuo menu!",
       pt: "Por enquanto isso \xE9 tudo, para configurar sua instala\xE7\xE3o do bleh futuramente, v\xE1 at\xE9 {a}nas configura\xE7\xF5es{/a} no seu menu!",
       sv: "Det var allt just nu, f\xF6r att konfigurera din bleh-installation i framtiden g\xE5 in p\xE5 {a}inst\xE4llningarna{/a} i menyn!",
       ru: "\u041D\u0430 \u044D\u0442\u043E\u043C \u043F\u043E\u043A\u0430 \u0432\u0441\u0435, \u0447\u0442\u043E\u0431\u044B \u043D\u0430\u0441\u0442\u0440\u043E\u0438\u0442\u044C \u0432\u0430\u0448\u0443 \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043A\u0443 bleh \u0432 \u0431\u0443\u0434\u0443\u0449\u0435\u043C, \u043F\u0435\u0440\u0435\u0439\u0434\u0438\u0442\u0435 \u0432 {a}\u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438{/a} \u0432 \u0432\u0430\u0448\u0435\u043C \u043C\u0435\u043D\u044E!"
@@ -63507,6 +64108,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Show particles during select seasons",
         de: "Partikel w\xE4hrend ausgew\xE4hlter Jahreszeiten anzeigen",
         es: "Mostrar part\xEDculas durante temporadas espec\xEDficas",
+        it: "Mostra particelle durante specifiche stagioni",
         pt: "Mostrar particulas durante esta\xE7\xF5es selecionadas",
         sv: "Visa partiklar under vissa \xE5rstider",
         ru: "\u041F\u043E\u043A\u0430\u0437\u044B\u0432\u0430\u0442\u044C \u0447\u0430\u0441\u0442\u0438\u0446\u044B \u0432 \u043E\u043F\u0440\u0435\u0434\u0435\u043B\u0435\u043D\u043D\u044B\u0435 \u0441\u0435\u0437\u043E\u043D\u044B"
@@ -63515,6 +64117,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "During colder seasons, watch pretty snowflakes fall \u22C6\u207A\u208A\u2745\u3002",
         de: "W\xE4hrend der k\xE4lteren Jahreszeiten kannst du h\xFCbsche Schneeflocken fallen sehen \u22C6\u207A\u208A\u2745\u3002",
         es: "Durante temporadas m\xE1s fr\xEDas, mira c\xF3mo caen lindos copos de nieve \u22C6\u207A\u208A\u2745\u3002",
+        it: "Durante le stagioni pi\xF9 fredde, guarda dei bellissimi fiocchi di neve cadere  \u22C6\u207A\u208A\u2745\u3002",
         pt: "Durante as sess\xF5es de inverno, veja flocos de neve bonitinhos caindo \u22C6\u207A\u208A\u2745\u3002",
         sv: "Under kyligare \xE5rstider, se vackra sn\xF6flingorna glida sakta ner \u22C6\u207A\u208A\u2745\u3002",
         ru: "\u0412 \u0445\u043E\u043B\u043E\u0434\u043D\u043E\u0435 \u0432\u0440\u0435\u043C\u044F \u0433\u043E\u0434\u0430 \u043D\u0430\u0431\u043B\u044E\u0434\u0430\u0439\u0442\u0435 \u0437\u0430 \u043F\u0430\u0434\u0430\u044E\u0449\u0438\u043C\u0438 \u043A\u0440\u0430\u0441\u0438\u0432\u044B\u043C\u0438 \u0441\u043D\u0435\u0436\u0438\u043D\u043A\u0430\u043C\u0438 \u22C6\u207A\u208A\u2745\u3002"
@@ -63524,6 +64127,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Show full particles",
       de: "Alle Partikel anzeigen",
       es: "Mostrar todas las part\xEDculas",
+      it: "Mostra tutte le particelle",
       pt: "Mostrar todas as part\xEDculas",
       sv: "Visa fulla partiklar",
       ru: "\u041F\u043E\u043A\u0430\u0437\u044B\u0432\u0430\u0442\u044C \u0432\u0441\u0435 \u0447\u0430\u0441\u0442\u0438\u0446\u044B"
@@ -63532,6 +64136,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Show less particles",
       de: "Weniger Partikel anzeigen",
       es: "Mostrar menos part\xEDculas",
+      it: "Mostra meno particelle",
       pt: "Mostrar menos part\xEDculas",
       sv: "Visa mindre partiklar",
       ru: "\u041F\u043E\u043A\u0430\u0437\u044B\u0432\u0430\u0442\u044C \u043C\u0435\u043D\u044C\u0448\u0435 \u0447\u0430\u0441\u0442\u0438\u0446"
@@ -63540,6 +64145,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Disable particles",
       de: "Partikel deaktivieren",
       es: "Desactivar part\xEDculas",
+      it: "Disattiva particelle",
       pt: "Desativar part\xEDculas",
       sv: "St\xE4ng av partiklar",
       ru: "\u041E\u0442\u043A\u043B\u044E\u0447\u0438\u0442\u044C \u0447\u0430\u0441\u0442\u0438\u0446\u044B"
@@ -63548,6 +64154,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Beware! Only change these settings if you know what you\u2019re doing",
       de: "Vorsicht! \xC4ndere diese Einstellungen nur, wenn du wei\xDFt, was du tust",
       es: "\xA1Cuidado! Cambia estas opciones solo si sabes lo que haces",
+      it: "Attenzione! Cambia queste impostazioni solo se sai cosa stai facendo",
       pt: "Cuidado! Apenas mude estas configura\xE7\xF5es se voc\xEA sabe o que voc\xEA est\xE1 fazendo",
       sv: "Var f\xF6rsiktig! \xC4ndra bara dessa inst\xE4llningar om du vet vad du g\xF6r",
       ru: "\u041E\u0441\u0442\u043E\u0440\u043E\u0436\u043D\u043E! \u041C\u0435\u043D\u044F\u0439\u0442\u0435 \u044D\u0442\u0438 \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438 \u0442\u043E\u043B\u044C\u043A\u043E \u0435\u0441\u043B\u0438 \u0432\u044B \u0437\u043D\u0430\u0435\u0442\u0435, \u0447\u0442\u043E \u0434\u0435\u043B\u0430\u0435\u0442\u0435"
@@ -63557,6 +64164,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Force re-download styles",
         de: "Erneutes Herunterladen von Stylesheets erzwingen",
         es: "Forzar redescarga de los estilos",
+        it: "Forza il re-download degli stili",
         pt: "For\xE7ar o re-download dos estilos",
         sv: "Tvinga omladdning av stiler",
         ru: "\u041F\u0440\u0438\u043D\u0443\u0434\u0438\u0442\u0435\u043B\u044C\u043D\u043E \u043F\u0435\u0440\u0435\u0437\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044C \u0441\u0442\u0438\u043B\u0438"
@@ -63565,6 +64173,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Deletes your current cache of the bleh stylesheet and retrieves the latest",
         de: "L\xF6scht deinen aktuellen Cache des bleh-Stylesheets und l\xE4dt die neueste Version herunter",
         es: "Elimina tu cache actual de la hoja de estilo de bleh y extrae la versi\xF3n m\xE1s reciente",
+        it: "Elimina la versione dello stylesheet di bleh nella tua cache e scarica la pi\xF9 recente",
         pt: "Exclui o cache atual da folha de estilo do bleh e recupera a vers\xE3o mais recente",
         sv: "Tar bort din nuvarande cache av bleh-stil och h\xE4mtar hem den senaste",
         ru: "\u0423\u0434\u0430\u043B\u044F\u0435\u0442 \u0432\u0430\u0448 \u0442\u0435\u043A\u0443\u0449\u0438\u0439 \u043A\u044D\u0448 \u0442\u0430\u0431\u043B\u0438\u0446\u044B \u0441\u0442\u0438\u043B\u0435\u0439 bleh \u0438 \u0437\u0430\u0433\u0440\u0443\u0436\u0430\u0435\u0442 \u043F\u043E\u0441\u043B\u0435\u0434\u043D\u044E\u044E \u0432\u0435\u0440\u0441\u0438\u044E"
@@ -63575,6 +64184,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "This page is intended for development",
         de: "Diese Seite ist f\xFCr die Entwicklung gedacht",
         es: "Esta p\xE1gina es usada para el desarrollo",
+        it: "Questa pagina \xE8 pensata per lo sviluppo",
         sv: "Denna sida \xE4r avsedd f\xF6r utveckling",
         ru: "\u042D\u0442\u0430 \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u0430 \u043F\u0440\u0435\u0434\u043D\u0430\u0437\u043D\u0430\u0447\u0435\u043D\u0430 \u0434\u043B\u044F \u0440\u0430\u0437\u0440\u0430\u0431\u043E\u0442\u043A\u0438"
       },
@@ -63582,6 +64192,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Be careful with options here (especially feature flags) as they can break your install.",
         de: "Sei vorsichtig mit diesen Einstellungen (besonders mit den Feature Flags), da sie deine Installation besch\xE4digen k\xF6nnen.",
         es: "Ten cuidado con las opciones aqu\xED (especialmente las feature flags) ya que pueden romper tu instalaci\xF3n.",
+        it: "Fai attenzione con le opzioni qui (specialmente i feature flag) perch\xE9 possono rompere la tua installazione.",
         pt: "Tenha cuidado com as op\xE7\xF5es aqui (especialmente com os flags de recursos), pois elas podem causar problemas na sua instala\xE7\xE3o.",
         sv: "Var f\xF6rsiktig med inst\xE4llningarna h\xE4r (speciellt funktionsflaggor) eftersom dom kan f\xF6rst\xF6ra din installation.",
         ru: "\u0411\u0443\u0434\u044C\u0442\u0435 \u043E\u0441\u0442\u043E\u0440\u043E\u0436\u043D\u044B \u0441 \u043E\u043F\u0446\u0438\u044F\u043C\u0438 \u0437\u0434\u0435\u0441\u044C (\u043E\u0441\u043E\u0431\u0435\u043D\u043D\u043E \u0441 \u0444\u043B\u0430\u0433\u0430\u043C\u0438 \u0444\u0443\u043D\u043A\u0446\u0438\u0439), \u0442\u0430\u043A \u043A\u0430\u043A \u043E\u043D\u0438 \u043C\u043E\u0433\u0443\u0442 \u043D\u0430\u0440\u0443\u0448\u0438\u0442\u044C \u0440\u0430\u0431\u043E\u0442\u0443 \u0432\u0430\u0448\u0435\u0439 \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043A\u0438."
@@ -63592,6 +64203,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Flags",
       de: "Flags",
       es: "Flags",
+      it: "Flags",
       sv: "Flaggor",
       ru: "\u0424\u043B\u0430\u0433\u0438"
     },
@@ -63600,6 +64212,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Manage feature flags",
       de: "Feature Flags verwalten",
       es: "Gestionar feature flags",
+      it: "Gestione feature flag",
       pt: "Gerenciar flags de recursos",
       sv: "Hantera funktionsflaggor",
       ru: "\u0423\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435 \u0444\u043B\u0430\u0433\u0430\u043C\u0438 \u0444\u0443\u043D\u043A\u0446\u0438\u0439"
@@ -63608,6 +64221,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Development",
       de: "Entwicklung",
       es: "Desarrollo",
+      it: "Sviluppo",
       pt: "Desenvolvimento",
       sv: "Utveckling",
       ru: "\u0420\u0430\u0437\u0440\u0430\u0431\u043E\u0442\u043A\u0430"
@@ -63616,6 +64230,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "This section requires a password to view",
       de: "Dieser Bereich ben\xF6tigt ein Passwort zum Ansehen",
       es: "Esta secci\xF3n requiere una contrase\xF1a para ver",
+      it: "Questa sezione richiede una password per accedere",
       pt: "Esta se\xE7\xE3o requer uma senha para ser visualizada",
       sv: "Denna avdelning beh\xF6ver ett l\xF6senord f\xF6r att se",
       ru: "\u0414\u043B\u044F \u043F\u0440\u043E\u0441\u043C\u043E\u0442\u0440\u0430 \u044D\u0442\u043E\u0433\u043E \u0440\u0430\u0437\u0434\u0435\u043B\u0430 \u0442\u0440\u0435\u0431\u0443\u0435\u0442\u0441\u044F \u043F\u0430\u0440\u043E\u043B\u044C"
@@ -63624,6 +64239,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Enter password",
       de: "Passwort eingeben",
       es: "Ingresar contrase\xF1a",
+      it: "Inserire password",
       pt: "Digite a senha",
       sv: "Skriv in l\xF6senord",
       ru: "\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u043F\u0430\u0440\u043E\u043B\u044C"
@@ -63632,6 +64248,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Unlocked",
       de: "Freigeschaltet",
       es: "Desbloqueado",
+      it: "Sbloccato",
       pt: "Desbloqueado",
       sv: "Uppl\xE5st",
       ru: "\u0420\u0430\u0437\u0431\u043B\u043E\u043A\u0438\u0440\u043E\u0432\u0430\u043D\u043E"
@@ -63640,6 +64257,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Privacy",
       de: "Datenschutz",
       es: "Privacidad",
+      it: "Privacy",
       pl: "Prywatno\u015B\u0107",
       pt: "Privacidade",
       sv: "Sekretess",
@@ -63650,6 +64268,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Hide your recent listening history",
         de: "Deine zuletzt geh\xF6rten Titel ausblenden",
         es: "Ocultar tu historial de reproducciones reciente",
+        it: "Nascondi la tua cronologia di ascolto recente",
         pt: "Ocultar seu hist\xF3rico de scrobbles recente",
         sv: "G\xF6m senaste lyssnarinformationen",
         ru: "\u0421\u043A\u0440\u044B\u0442\u044C \u0432\u0430\u0448\u0443 \u043D\u0435\u0434\u0430\u0432\u043D\u044E\u044E \u0438\u0441\u0442\u043E\u0440\u0438\u044E \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u0439"
@@ -63658,6 +64277,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Keeps your activity more private",
         de: "Gibt deiner Aktivit\xE4t mehr Privatsph\xE4re",
         es: "Mantiene tu actividad m\xE1s privada",
+        it: "Mantiene la tua attivit\xE0 pi\xF9 privata",
         pt: "Mant\xE9m sua atividade mais privada",
         sv: "H\xE5ller din aktivitet mer privat",
         ru: "\u0414\u0435\u043B\u0430\u0435\u0442 \u0432\u0430\u0448\u0443 \u0430\u043A\u0442\u0438\u0432\u043D\u043E\u0441\u0442\u044C \u0431\u043E\u043B\u0435\u0435 \u043F\u0440\u0438\u0432\u0430\u0442\u043D\u043E\u0439"
@@ -63667,6 +64287,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Allow messages from",
       de: "Erlaube Nachrichten von",
       es: "Permitir mensajes de",
+      it: "Consenti messaggi da",
       pt: "Permitir mensagens de",
       sv: "Till\xE5t meddelanden ifr\xE5n",
       ru: "\u0420\u0430\u0437\u0440\u0435\u0448\u0438\u0442\u044C \u0441\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u044F \u043E\u0442"
@@ -63675,6 +64296,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Everyone",
       de: "Jedem",
       es: "Cualquiera",
+      it: "Tutti",
       pt: "Todo mundo",
       sv: "Alla",
       ru: "\u0412\u0441\u0435"
@@ -63683,6 +64305,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Following and neighbours",
       de: "Nachbarn und Leuten, denen du folgst",
       es: "Siguiendo y vecinos",
+      it: "Persone che segui e vicini",
       pt: "Seguindo e vizinhos",
       sv: "F\xF6ljare och grannar",
       ru: "\u041F\u043E\u0434\u043F\u0438\u0441\u043A\u0438 \u0438 \u0441\u043E\u0441\u0435\u0434\u0438"
@@ -63692,6 +64315,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Close my shoutbox",
         de: "Meine Shoutbox schlie\xDFen",
         es: "Cerrar mis notas",
+        it: "Chiudi la mia bacheca",
         pt: "Fechar minha caixa de mensagens",
         sv: "St\xE4ng min hojtl\xE5da",
         ru: "\u0417\u0430\u043A\u0440\u044B\u0442\u044C \u043C\u043E\u044E shoutbox"
@@ -63700,6 +64324,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Removes visibility from everyone (including you)",
         de: "Blendet deine Shoutbox f\xFCr alle Beutzer aus (einschlie\xDFlich dir)",
         es: "Remueve la visiblidad para todos (incluy\xE9ndote a ti)",
+        it: "Rimuove la tua bacheca per tutti (incluso te)",
         pt: "Remove a visibilidade de todos (incluindo voc\xEA)",
         sv: "Ta bort synlighet fr\xE5n alla (inkl. dig)",
         ru: "\u0423\u0434\u0430\u043B\u044F\u0435\u0442 \u0432\u0438\u0434\u0438\u043C\u043E\u0441\u0442\u044C \u0434\u043B\u044F \u0432\u0441\u0435\u0445 (\u0432\u043A\u043B\u044E\u0447\u0430\u044F \u0432\u0430\u0441)"
@@ -63709,6 +64334,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Error",
       de: "Fehler",
       es: "Error",
+      it: "Errore",
       pt: "Erro",
       sv: "Error",
       ru: "\u041E\u0448\u0438\u0431\u043A\u0430"
@@ -63718,6 +64344,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "erm...",
       de: "\xE4hm...",
       es: "emm...",
+      it: "ehm...",
       pt: "puts...",
       sv: "ehm...",
       ru: "\u044D\u043C..."
@@ -63726,6 +64353,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Shortcut",
       de: "Verkn\xFCpfung",
       es: "Atajo",
+      it: "Scorciatoia",
       pt: "Atalho",
       sv: "Genomv\xE4g",
       ru: "\u042F\u0440\u043B\u044B\u043A"
@@ -63734,6 +64362,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Last {c} days",
       de: "Letzte {c} Tage",
       es: "\xDAltimos {c] d\xEDas",
+      it: "Ultimi {c} giorni",
       pt: "\xDAltimos {c} dias",
       ja: "\u904E\u53BB {c} \u65E5\u9593",
       sv: "Senaste {c} dagarna",
@@ -63743,6 +64372,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "All time",
       de: "Insgesamt",
       es: "Siempre",
+      it: "Sempre",
       pt: "Todo o per\xEDodo",
       ja: "\u3059\u3079\u3066\u306E\u671F\u9593",
       sv: "All tid",
@@ -63752,6 +64382,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Choose a timeframe above",
       de: "W\xE4hle oben einen Zeitraum",
       es: "Elige una duraci\xF3n arriba",
+      it: "Seleziona un intervallo sopra",
       pt: "Escolha um prazo acima",
       sv: "V\xE4lj en tidsram ovan",
       ru: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u0432\u0440\u0435\u043C\u0435\u043D\u043D\u043E\u0439 \u0438\u043D\u0442\u0435\u0440\u0432\u0430\u043B \u0432\u044B\u0448\u0435"
@@ -63760,6 +64391,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Failed",
       de: "Fehlgeschlagen",
       es: "Fallido",
+      it: "Fallito",
       pt: "Falhou",
       sv: "Misslyckades",
       ru: "\u041D\u0435 \u0443\u0434\u0430\u043B\u043E\u0441\u044C"
@@ -63768,6 +64400,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "There was a network error",
       de: "Netzwerkfehler",
       es: "Hubo un error de red",
+      it: "C'\xE8 stato un errore di rete",
       pt: "Ocorreu um erro de rede",
       sv: "Ett n\xE4tverksfel har intr\xE4ffat",
       ru: "\u041F\u0440\u043E\u0438\u0437\u043E\u0448\u043B\u0430 \u043E\u0448\u0438\u0431\u043A\u0430 \u0441\u0435\u0442\u0438"
@@ -63776,6 +64409,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Support",
       de: "Support",
       es: "Soporte",
+      it: "Supporto",
       pt: "Suporte",
       sv: "Support",
       ru: "\u041F\u043E\u0434\u0434\u0435\u0440\u0436\u043A\u0430"
@@ -63785,6 +64419,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "No plays in this range",
       de: "Keine Plays in diesem Zeitraum",
       es: "No hay reproducciones en este rango",
+      it: "Nessuna riproduzione in questo intervallo",
       sv: "Inga lyssningar under valda datumintervallet",
       ru: "\u041D\u0435\u0442 \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u0439 \u0432 \u044D\u0442\u043E\u043C \u0434\u0438\u0430\u043F\u0430\u0437\u043E\u043D\u0435"
     },
@@ -63793,6 +64428,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Prefer accessible name colours",
         de: "Bevorzuge gut lesbare Namensfarben",
         es: "Preferir colores de nombre accesibles",
+        it: "Preferisci nomi di colori accessibili",
         pt: "Preferir nomes de cores acess\xEDveis",
         sv: "F\xF6redra l\xE4ttl\xE4sta namnf\xE4rger",
         ru: "\u041F\u0440\u0435\u0434\u043F\u043E\u0447\u0438\u0442\u0430\u0442\u044C \u0434\u043E\u0441\u0442\u0443\u043F\u043D\u044B\u0435 \u0446\u0432\u0435\u0442\u0430 \u0438\u043C\u0435\u043D"
@@ -63801,6 +64437,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Replaces badge and link-coloured names with your theme\u2019s header colour",
         de: "Ersetzt Abzeichen- und Linkfarben mit der Kopfzeilenfarbe deines Farbschemas",
         es: "Reemplaza el color de los emblemas y v\xEDnculos con el color del encabezado de tu aspecto",
+        it: "Sostituisce i distintivi e i nomi colorati come link con il colore di intestazione del tuo tema",
         pt: "Substitui os nomes coloridos dos emblemas e links pela cor do cabe\xE7alho do seu tema",
         sv: "Ers\xE4tter emblem och l\xE4nkf\xE4rgade namn med ditt temas rubrikf\xE4rg",
         ru: "\u0417\u0430\u043C\u0435\u043D\u044F\u0435\u0442 \u0446\u0432\u0435\u0442\u0430 \u0438\u043C\u0435\u043D \u0437\u043D\u0430\u0447\u043A\u043E\u0432 \u0438 \u0441\u0441\u044B\u043B\u043E\u043A \u0446\u0432\u0435\u0442\u043E\u043C \u0437\u0430\u0433\u043E\u043B\u043E\u0432\u043A\u0430 \u0432\u0430\u0448\u0435\u0439 \u0442\u0435\u043C\u044B"
@@ -63810,12 +64447,14 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       name: {
         en: "Show display name styles",
         es: "Mostrar estilos de nombre a mostrar",
+        it: "Mostra gli stili del nome visualizzato",
         sv: "Se visningsnamnsstiler",
         ru: "\u041F\u043E\u043A\u0430\u0437\u044B\u0432\u0430\u0442\u044C \u0441\u0442\u0438\u043B\u0438 \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0435\u043C\u043E\u0433\u043E \u0438\u043C\u0435\u043D\u0438"
       },
       body: {
         en: "Sponsors can choose a custom font and shadow style for their profile name",
         es: "Los patrocinadores pueden elegir una fuente y estilo de sombra personalizados para su nombre de perfil",
+        it: "Gli sponsor possono scegliere un font e uno stile d'ombra personalizzato per il loro nome profilo",
         sv: "Sponsorer kan v\xE4lja valfri typsnitt och skugga f\xF6r deras profilnamn",
         ru: "\u0421\u043F\u043E\u043D\u0441\u043E\u0440\u044B \u043C\u043E\u0433\u0443\u0442 \u0432\u044B\u0431\u0438\u0440\u0430\u0442\u044C \u0441\u043E\u0431\u0441\u0442\u0432\u0435\u043D\u043D\u044B\u0439 \u0448\u0440\u0438\u0444\u0442 \u0438 \u0441\u0442\u0438\u043B\u044C \u0442\u0435\u043D\u0438 \u0434\u043B\u044F \u0438\u043C\u0435\u043D\u0438 \u0432 \u0441\u0432\u043E\u0435\u043C \u043F\u0440\u043E\u0444\u0438\u043B\u0435"
       }
@@ -63825,6 +64464,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Always underline links",
         de: "Links immer unterstreichen",
         es: "Siempre subrayar v\xEDnculos",
+        it: "Sottolinea sempre i link",
         pt: "Sempre sublinhe os links",
         sv: "Ha alltid understrykta l\xE4nkar",
         ru: "\u0412\u0441\u0435\u0433\u0434\u0430 \u043F\u043E\u0434\u0447\u0435\u0440\u043A\u0438\u0432\u0430\u0442\u044C \u0441\u0441\u044B\u043B\u043A\u0438"
@@ -63833,6 +64473,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Forces buttons, links, and other interactables to have an underline",
         de: "Erzwingt, dass Schaltfl\xE4chen, Links und andere interaktive Elemente unterstrichen sind",
         es: "Fuerza a que los botones, v\xEDnculos, y otros elementos interactivos tengan subrayado",
+        it: "Forza i bottoni, i link e altri elementi interattivi ad essere sottolineati",
         pt: "For\xE7a bot\xF5es, links e outros interativos a terem um sublinhado",
         sv: "Tvingar knappar, l\xE4nkar och andra interaktiva objekt att ha understrykt text",
         ru: "\u041F\u0440\u0438\u043D\u0443\u0436\u0434\u0430\u0435\u0442 \u043A\u043D\u043E\u043F\u043A\u0438, \u0441\u0441\u044B\u043B\u043A\u0438 \u0438 \u0434\u0440\u0443\u0433\u0438\u0435 \u0438\u043D\u0442\u0435\u0440\u0430\u043A\u0442\u0438\u0432\u043D\u044B\u0435 \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u044B \u0438\u043C\u0435\u0442\u044C \u043F\u043E\u0434\u0447\u0435\u0440\u043A\u0438\u0432\u0430\u043D\u0438\u0435"
@@ -63843,6 +64484,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Disable loading of styles",
         de: "Deaktiviere das Laden von Stylesheets",
         es: "Desactivar cargado de estilos",
+        it: "Disattiva il caricamento degli stili",
         pt: "Desative o carregamento de estilos",
         sv: "Avaktivera att ladda stilar",
         ru: "\u041E\u0442\u043A\u043B\u044E\u0447\u0438\u0442\u044C \u0437\u0430\u0433\u0440\u0443\u0437\u043A\u0443 \u0441\u0442\u0438\u043B\u0435\u0439"
@@ -63851,6 +64493,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Allows you to load the stylesheet yourself during development",
         de: "Erm\xF6glicht es dir, das Stylesheet w\xE4hrend der Entwicklung selbst zu laden",
         es: "Permite cargar una hoja de estilo propia durante el desarrollo",
+        it: "Permette di caricare lo stylesheet manualmente durante lo sviluppo",
         pt: "Permite que voc\xEA mesmo carregue a folha de estilo enquanto desenvolve",
         sv: "L\xE5ter dig ladda stilschemat sj\xE4lv under utveckling",
         ru: "\u041F\u043E\u0437\u0432\u043E\u043B\u044F\u0435\u0442 \u0432\u0430\u043C \u0441\u0430\u043C\u043E\u0441\u0442\u043E\u044F\u0442\u0435\u043B\u044C\u043D\u043E \u0437\u0430\u0433\u0440\u0443\u0436\u0430\u0442\u044C \u0442\u0430\u0431\u043B\u0438\u0446\u0443 \u0441\u0442\u0438\u043B\u0435\u0439 \u0432\u043E \u0432\u0440\u0435\u043C\u044F \u0440\u0430\u0437\u0440\u0430\u0431\u043E\u0442\u043A\u0438"
@@ -63860,6 +64503,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Upload",
       de: "Hochladen",
       es: "Subir",
+      it: "Carica",
       pt: "Enviar",
       sv: "Ladda upp",
       ru: "\u0417\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044C"
@@ -63868,6 +64512,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Upload image",
       de: "Bild hochladen",
       es: "Subir imagen",
+      it: "Carica immagine",
       sv: "Ladda upp bild",
       ru: "\u0417\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044C \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435"
     },
@@ -63875,6 +64520,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Image details",
       de: "Bildinformationen",
       es: "Detalles de imagen",
+      it: "Dettagli immagine",
       sv: "Bildinformation",
       ru: "\u0418\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u044F \u043E\u0431 \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0438"
     },
@@ -63882,12 +64528,14 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Title",
       de: "Titel",
       es: "T\xEDtulo",
+      it: "Titolo",
       sv: "Titel",
       ru: "\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u0435"
     },
     no_title: {
       en: "No title",
       es: "Sin t\xEDtulo",
+      it: "Senza titolo",
       sv: "Ingen titel",
       ru: "\u0411\u0435\u0437 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u044F"
     },
@@ -63895,12 +64543,14 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Description",
       de: "Beschreibung",
       es: "Descripci\xF3n",
+      it: "Descrizione",
       sv: "Beskrivning",
       ru: "\u041E\u043F\u0438\u0441\u0430\u043D\u0438\u0435"
     },
     no_description: {
       en: "No description",
       es: "Sin descripci\xF3n",
+      it: "Nessuna descrizione",
       sv: "Ingen beskrivning",
       ru: "\u0411\u0435\u0437 \u043E\u043F\u0438\u0441\u0430\u043D\u0438\u044F"
     },
@@ -63908,6 +64558,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Change avatar",
       de: "Profilbild \xE4ndern",
       es: "Cambiar avatar",
+      it: "Cambia foto profilo",
       pt: "Mudar foto de perfil",
       sv: "\xC4ndra profilbild",
       ru: "\u0421\u043C\u0435\u043D\u0438\u0442\u044C \u0430\u0432\u0430\u0442\u0430\u0440"
@@ -63916,6 +64567,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Crop avatar",
       de: "Profilbild zuschneiden",
       es: "Recortar avatar",
+      it: "Ritaglia foto profilo",
       pt: "Recortar avatar",
       sv: "Besk\xE4r profilbild",
       ru: "\u041E\u0431\u0440\u0435\u0437\u0430\u0442\u044C \u0430\u0432\u0430\u0442\u0430\u0440"
@@ -63924,6 +64576,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Use your scroll wheel to zoom in and out, click and drag to move the image.",
       de: "Verwende dein Mausrad, um rein- und rauszuzoomen. Klicke und ziehe, um das Bild zu verschieben.",
       es: "Usa la rueda del rat\xF3n para acercar o alejar, haz clic y arrastra para mover la imagen.",
+      it: "Usa la rotella del mouse per ingrandire o rimpicciolire, trascina e rilascia per muovere l'immagine.",
       pt: "Use a scroll do seu mouse para dar zoom in e zoom out, clicar e arrastar para mover a imagem.",
       sv: "Anv\xE4nd ditt scrollhjul f\xF6r att zooma in och ut, klicka och dra f\xF6r att flytta p\xE5 bilden.",
       ru: "\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0439\u0442\u0435 \u043A\u043E\u043B\u0435\u0441\u043E \u043F\u0440\u043E\u043A\u0440\u0443\u0442\u043A\u0438 \u0434\u043B\u044F \u043F\u0440\u0438\u0431\u043B\u0438\u0436\u0435\u043D\u0438\u044F \u0438 \u043E\u0442\u0434\u0430\u043B\u0435\u043D\u0438\u044F, \u043D\u0430\u0436\u043C\u0438\u0442\u0435 \u0438 \u043F\u0435\u0440\u0435\u0442\u0430\u0449\u0438\u0442\u0435, \u0447\u0442\u043E\u0431\u044B \u043F\u0435\u0440\u0435\u043C\u0435\u0441\u0442\u0438\u0442\u044C \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435."
@@ -63932,6 +64585,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Edit profile note",
       de: "Profilnotiz bearbeiten",
       es: "Editar anotaci\xF3n de perfil",
+      it: "Modifica nota del profilo",
       pt: "Editar recado de perfil",
       sv: "\xC4ndra profilanteckning",
       ru: "\u0420\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u0437\u0430\u043C\u0435\u0442\u043A\u0443 \u043F\u0440\u043E\u0444\u0438\u043B\u044F"
@@ -63940,6 +64594,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Update to {v}",
       de: "Auf {v} aktualisieren",
       es: "Actualizar a {v}",
+      it: "Aggiorna a {v}",
       pt: "Atualizar para {v}",
       sv: "Uppdatera till {v}",
       ru: "\u041E\u0431\u043D\u043E\u0432\u0438\u0442\u044C \u0434\u043E {v}"
@@ -63949,6 +64604,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "All",
       de: "Alle",
       es: "Todos",
+      it: "Tutte",
       pt: "Todos",
       sv: "Visa alla",
       ru: "\u0412\u0441\u0435"
@@ -63958,6 +64614,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Saved",
       de: "Gespeichert",
       es: "Guardado",
+      it: "Salvate",
       pt: "Salvo",
       sv: "Sparade",
       ru: "\u0421\u043E\u0445\u0440\u0430\u043D\u0435\u043D\u043D\u044B\u0435"
@@ -63965,6 +64622,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     remove_save: {
       en: "Remove save",
       es: "Remover guardado",
+      it: "Rimuovi salvataggio",
       sv: "Ta bort bokm\xE4rkning",
       ru: "\u0423\u0434\u0430\u043B\u0438\u0442\u044C \u0438\u0437 \u0441\u043E\u0445\u0440\u0430\u043D\u0435\u043D\u043D\u043E\u0433\u043E"
     },
@@ -63972,6 +64630,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "No photos saved",
       de: "Keine Bilder gespeichert",
       es: "No hay fotos guardadas",
+      it: "Nessuna immagine salvata",
       pt: "Nenhuma foto salva",
       sv: "Inga foton sparade",
       ru: "\u041D\u0435\u0442 \u0441\u043E\u0445\u0440\u0430\u043D\u0435\u043D\u043D\u044B\u0445 \u0444\u043E\u0442\u043E\u0433\u0440\u0430\u0444\u0438\u0439"
@@ -63983,6 +64642,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Going",
       de: "Zugesagt",
       es: "Ir\xE1n",
+      it: "Parteciper\xE0",
       pt: "Indo",
       sv: "Ska g\xE5 p\xE5",
       ru: "\u0418\u0434\u0443"
@@ -63994,6 +64654,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Interested",
       de: "Interessiert",
       es: "Interesados",
+      it: "Interessati",
       pt: "Interessado",
       sv: "Intresserad",
       ru: "\u0418\u043D\u0442\u0435\u0440\u0435\u0441\u0443\u044E\u0441\u044C"
@@ -64003,6 +64664,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Total",
       de: "Gesamt",
       es: "Total",
+      it: "Totale",
       sv: "Totalt",
       ru: "\u0412\u0441\u0435\u0433\u043E"
     },
@@ -64010,6 +64672,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "{v} failed to load",
       de: "{v} konnte nicht geladen werden",
       es: "{v} fall\xF3 al cargar",
+      it: "Non \xE8 stato possibile caricare {v}",
       pt: "{v} falhou ao carregar",
       sv: "{v} kunde inte laddas",
       ru: "{v} \u043D\u0435 \u0443\u0434\u0430\u043B\u043E\u0441\u044C \u0437\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044C"
@@ -64018,6 +64681,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Profile does not have enough scrobbles",
       de: "Profil hat nicht gen\xFCgend Scrobbles",
       es: "El perfil no tiene suficientes scrobblings",
+      it: "Il profilo non ha abbastanza scrobbling",
       pt: "O perfil n\xE3o tem scrobbles o suficiente",
       sv: "Profilen har inte tillr\xE4ckligt med skrobblingar",
       ru: "\u0423 \u043F\u0440\u043E\u0444\u0438\u043B\u044F \u043D\u0435\u0434\u043E\u0441\u0442\u0430\u0442\u043E\u0447\u043D\u043E \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u043E\u0432"
@@ -64026,6 +64690,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Requires extension \u2018{v}\u2019",
       de: "Ben\xF6tigt die Erweiterung \u201E{v}\u201C",
       es: "Requiere la extensi\xF3n \u2018{v}\u2019",
+      it: "Richiede l'estensione \u2018{v}\u2019",
       pt: "Requer extens\xE3o \u2018{v}\u2019",
       sv: "Beh\xF6ver till\xE4gget \u2018{v}\u2019",
       ru: "\u0422\u0440\u0435\u0431\u0443\u0435\u0442\u0441\u044F \u0440\u0430\u0441\u0448\u0438\u0440\u0435\u043D\u0438\u0435 \xAB{v}\xBB"
@@ -64034,6 +64699,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Incompatible with {v}",
       de: "Inkompatibel mit {v}",
       es: "Incompatible con {v}",
+      it: "Incompatibile con {v}",
       pt: "Incompat\xEDvel com {v}",
       sv: "Inkompatibelt med {v}",
       ru: "\u041D\u0435\u0441\u043E\u0432\u043C\u0435\u0441\u0442\u0438\u043C\u043E \u0441 {v}"
@@ -64042,6 +64708,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Incompatible with current settings",
       de: "Nicht mit den aktuellen Einstellungen kompatibel",
       es: "Incompatible con la configuraci\xF3n actual",
+      it: "Incompatibile con la configurazione corrente",
       sv: "Inkompatibelt med nuvarande inst\xE4llningar",
       ru: "\u041D\u0435\u0441\u043E\u0432\u043C\u0435\u0441\u0442\u0438\u043C\u043E \u0441 \u0442\u0435\u043A\u0443\u0449\u0438\u043C\u0438 \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0430\u043C\u0438"
     },
@@ -64049,6 +64716,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Last.fm Bulk Edit",
       de: "Last.fm-Massenbearbeitung",
       es: "Edici\xF3n en masa de Last.fm",
+      it: "Modifica di massa per Last.fm",
       pt: "Edi\xE7\xE3o em massa do Last.fm",
       sv: "Last.fm bulkredigering",
       ru: "\u041C\u0430\u0441\u0441\u043E\u0432\u043E\u0435 \u0440\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435 Last.fm"
@@ -64057,6 +64725,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Collage",
       de: "Collage",
       es: "Collage",
+      it: "Collage",
       pt: "Colagem",
       sv: "Collage",
       ru: "\u041A\u043E\u043B\u043B\u0430\u0436"
@@ -64065,6 +64734,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Redirected to bleh\u2019s built-in Collage feature",
       de: "Weiterleitung zur integrierten Collagenfunktion von bleh",
       es: "Redireccionado a la funci\xF3n integrada de Collages de bleh",
+      it: "Reindirizzamento alla funzione Collage integrata in bleh",
       pt: "Redirecionando ao recurso integrado de Colagem do bleh",
       sv: "Omdirigerad till blehs egna collagefunktion",
       ru: "\u041F\u0435\u0440\u0435\u043D\u0430\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u043E \u043D\u0430 \u0432\u0441\u0442\u0440\u043E\u0435\u043D\u043D\u0443\u044E \u0444\u0443\u043D\u043A\u0446\u0438\u044E \u041A\u043E\u043B\u043B\u0430\u0436\u0430 bleh"
@@ -64073,6 +64743,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Your collage is ready!",
       de: "Deine Collage ist fertig!",
       es: "\xA1Tu collage est\xE1 listo!",
+      it: "Il tuo collage \xE8 pronto!",
       pt: "Sua colagem est\xE1 pronta!",
       sv: "Ditt collage \xE4r redo",
       ru: "\u0412\u0430\u0448 \u043A\u043E\u043B\u043B\u0430\u0436 \u0433\u043E\u0442\u043E\u0432!"
@@ -64081,6 +64752,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "{name} failed",
       de: "{name} fehlgeschlagen",
       es: "{name} fall\xF3",
+      it: "{name} non riuscito",
       pt: "{name} falhou",
       sv: "{name} misslyckades",
       ru: "{name} \u043D\u0435 \u0443\u0434\u0430\u043B\u043E\u0441\u044C"
@@ -64091,6 +64763,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Select component",
       de: "Auswahlkomponente",
       es: "Seleccionar componente",
+      it: "Seleziona componente",
       pt: "Selecionar componente",
       sv: "V\xE4lj komponent",
       ru: "\u0412\u044B\u0431\u0440\u0430\u0442\u044C \u043A\u043E\u043C\u043F\u043E\u043D\u0435\u043D\u0442"
@@ -64099,6 +64772,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Only numbers are allowed here",
       de: "Nur Zahlen sind erlaubt",
       es: "Solo se permiten n\xFAmeros aqu\xED",
+      it: "Sono consentiti solo numeri qui",
       pt: "Apenas n\xFAmeros s\xE3o permitidos aqui",
       sv: "Endast nummer \xE4r till\xE5tna h\xE4r",
       ru: "\u0417\u0434\u0435\u0441\u044C \u0440\u0430\u0437\u0440\u0435\u0448\u0435\u043D\u044B \u0442\u043E\u043B\u044C\u043A\u043E \u0446\u0438\u0444\u0440\u044B"
@@ -64108,6 +64782,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Keep within the range",
       de: "Bleibe innerhalb des Zeichenlimits",
       es: "Mantente dentro del rango",
+      it: "Mantieniti all'interno dell'intervallo",
       pt: "Manter dentro do intervalo",
       sv: "H\xE5ll dig inom gr\xE4nsen",
       ru: "\u041E\u0441\u0442\u0430\u0432\u0430\u0439\u0442\u0435\u0441\u044C \u0432 \u043F\u0440\u0435\u0434\u0435\u043B\u0430\u0445 \u0434\u0438\u0430\u043F\u0430\u0437\u043E\u043D\u0430"
@@ -64117,6 +64792,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "This field is required",
       de: "Dieses Feld ist erforderlich",
       es: "Este campo es obligatorio",
+      it: "Questo campo \xE8 obbligatorio",
       pt: "Este campo \xE9 obrigat\xF3rio",
       sv: "F\xE4ltet kr\xE4vs",
       ru: "\u042D\u0442\u043E \u043F\u043E\u043B\u0435 \u043E\u0431\u044F\u0437\u0430\u0442\u0435\u043B\u044C\u043D\u043E"
@@ -64125,6 +64801,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Please don\u2019t clone yourself",
       de: "Bitte klone dich nicht selbst",
       es: "Por favor no te clones a ti mismo",
+      it: "Per favore non clonare te stesso",
       pt: "Por favor, n\xE3o se clone",
       sv: "Sn\xE4lla, klona inte dig sj\xE4lv",
       ru: "\u041F\u043E\u0436\u0430\u043B\u0443\u0439\u0441\u0442\u0430, \u043D\u0435 \u043A\u043B\u043E\u043D\u0438\u0440\u0443\u0439\u0442\u0435 \u0441\u0435\u0431\u044F"
@@ -64133,6 +64810,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Generate",
       de: "Generieren",
       es: "Generar",
+      it: "Genera",
       pt: "Gerar",
       sv: "Generera",
       ru: "\u0421\u043E\u0437\u0434\u0430\u0442\u044C"
@@ -64141,6 +64819,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Your settings are invalid",
       de: "Deine Einstellungen sind ung\xFCltig",
       es: "Tus opciones son inv\xE1lidas",
+      it: "Le tue impostazioni non sono valide",
       pt: "Suas configura\xE7\xF5es s\xE3o inv\xE1lidas",
       sv: "Dina inst\xE4llningar \xE4r ogiltiga",
       ru: "\u0412\u0430\u0448\u0438 \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438 \u043D\u0435\u0434\u0435\u0439\u0441\u0442\u0432\u0438\u0442\u0435\u043B\u044C\u043D\u044B"
@@ -64149,6 +64828,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Top {type}",
       de: "Top-{type}",
       es: "Top {type}",
+      it: "Top {type}",
       sv: "Topp{type}",
       ru: "\u0422\u043E\u043F-{type}"
     },
@@ -64156,6 +64836,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Download",
       de: "Herunterladen",
       es: "Descargar",
+      it: "Scarica",
       pt: "Baixar",
       sv: "Ladda ned",
       ru: "\u0421\u043A\u0430\u0447\u0430\u0442\u044C"
@@ -64164,6 +64845,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Downloaded",
       de: "Heruntergeladen",
       es: "Descargado",
+      it: "Scaricato",
       pt: "Baixado",
       sv: "Nedladdat",
       ru: "\u0421\u043A\u0430\u0447\u0430\u043D\u043E"
@@ -64172,6 +64854,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Are you sure?",
       de: "Bist du sicher?",
       es: "\xBFEst\xE1s seguro?",
+      it: "Sei sicuro?",
       pt: "Voc\xEA tem certeza?",
       sv: "\xC4r du s\xE4ker",
       ru: "\u0412\u044B \u0443\u0432\u0435\u0440\u0435\u043D\u044B?"
@@ -64180,6 +64863,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "This will require loading {c} pages",
       de: "Dies erfordert das Laden von {c} Seiten",
       es: "Esto requiere cargar {c} p\xE1ginas",
+      it: "Questo richieder\xE0 il caricamento di {c} pagine",
       pt: "Isso requer carregar {c} p\xE1ginas",
       sv: "Det h\xE4r kr\xE4ver att {c} sidor laddas",
       ru: "\u0414\u043B\u044F \u044D\u0442\u043E\u0433\u043E \u043F\u043E\u0442\u0440\u0435\u0431\u0443\u0435\u0442\u0441\u044F \u0437\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044C {c} \u0441\u0442\u0440\u0430\u043D\u0438\u0446"
@@ -64188,6 +64872,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "{user} Collage ({timeframe}, Top {type}, {size}) - {brand} {date}",
       de: "{user} Collage ({timeframe}, Top-{type}, {size}) - {brand} {date}",
       es: "{user} Collage ({timeframe}, Top {type}, {size}) - {brand} {date}",
+      it: "{user} Collage ({timeframe}, Top {type}, {size}) - {brand} {date}",
       pt: "{user} Colagem ({timeframe}, Top {type}, {size}) - {brand} {date}",
       sv: "{user} Collage ({timeframe}, Topp{type}, {size}) - {brand} {date}",
       ru: "{user} \u041A\u043E\u043B\u043B\u0430\u0436 ({timeframe}, \u0422\u043E\u043F {type}, {size}) - {brand} {date}"
@@ -64195,6 +64880,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     waiting_for_images: {
       en: "Waiting for images",
       es: "Esperando im\xE1genes",
+      it: "In attesa delle immagini",
       pt: "Aguardando imagens",
       sv: "V\xE4ntar p\xE5 bilder",
       ru: "\u041E\u0436\u0438\u0434\u0430\u043D\u0438\u0435 \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0439"
@@ -64204,6 +64890,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Collage title",
         de: "Collagentitel",
         es: "T\xEDtulo del collage",
+        it: "Titolo del collage",
         pt: "T\xEDtulo da colagem",
         sv: "Collagetitel",
         ru: "\u0417\u0430\u0433\u043E\u043B\u043E\u0432\u043E\u043A \u043A\u043E\u043B\u043B\u0430\u0436\u0430"
@@ -64212,6 +64899,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Include a subtle header showing your username and settings you used",
         de: "F\xFCgt eine dezente Kopfzeile hinzu, die deinen Benutzernamen und die von dir gew\xE4hlten Einstellungen anzeigt",
         es: "Incluye un encabezado sutil mostrando tu nombre de usuario y las opciones que usaste",
+        it: "Includi una piccola intestazione che mostra il tuo username e le impostazioni che hai usato",
         pt: "Inclua um cabe\xE7alho discreto mostrando seu nome de usu\xE1rio e as configura\xE7\xF5es que voc\xEA usou",
         sv: "L\xE4gger till en liten rubrik som visar ditt anv\xE4ndarnamn och dina inst\xE4llningar",
         ru: "\u0412\u043A\u043B\u044E\u0447\u0438\u0442\u0435 \u043D\u0435\u0431\u043E\u043B\u044C\u0448\u043E\u0439 \u0437\u0430\u0433\u043E\u043B\u043E\u0432\u043E\u043A \u0441 \u0432\u0430\u0448\u0438\u043C \u0438\u043C\u0435\u043D\u0435\u043C \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F \u0438 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u043D\u043D\u044B\u043C\u0438 \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0430\u043C\u0438"
@@ -64221,6 +64909,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Show names on grid items",
       de: "Namen auf Rasterobjekten anzeigen",
       es: "Mostrar nombres en los \xEDtems en la cuadr\xEDcula",
+      it: "Mostra i nomi sugli oggetti della griglia",
       pt: "Mostrar nomes nos itens da grade",
       sv: "Visa namn p\xE5 collageobjekt",
       ru: "\u041F\u043E\u043A\u0430\u0437\u044B\u0432\u0430\u0442\u044C \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u044F \u043D\u0430 \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u0430\u0445 \u0441\u0435\u0442\u043A\u0438"
@@ -64229,6 +64918,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Show plays on grid items",
       de: "Plays auf Rasterobjekten anzeigen",
       es: "Mostrar reproducciones en los \xEDtems en la cuadr\xEDcula",
+      it: "Mostra le riproduzioni sugli oggetti della griglia",
       pt: "Mostrar reprodu\xE7\xF5es nos itens da grade",
       sv: "Visa spelningar p\xE5 collageobjekt",
       ru: "\u041F\u043E\u043A\u0430\u0437\u044B\u0432\u0430\u0442\u044C \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u044F \u043D\u0430 \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u0430\u0445 \u0441\u0435\u0442\u043A\u0438"
@@ -64238,6 +64928,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Leave a gap between grid items",
         de: "Abstand zwischen Rasterobjekten",
         es: "Dejar un espacio entre los \xEDtems en la cuadr\xEDcula",
+        it: "Lascia uno spazio tra gli oggetti della griglia",
         pt: "Deixe um espa\xE7o entre os itens da grade",
         sv: "L\xE4mna rum mellan collageobjekt",
         ru: "\u041E\u0441\u0442\u0430\u0432\u0438\u0442\u044C \u043F\u0440\u043E\u043C\u0435\u0436\u0443\u0442\u043E\u043A \u043C\u0435\u0436\u0434\u0443 \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u0430\u043C\u0438 \u0441\u0435\u0442\u043A\u0438"
@@ -64246,6 +64937,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Includes outer and inner padding with round grid items",
         de: "F\xFCgt \xE4u\xDFere und innere Abst\xE4nde sowie abgerundete Rasterobjekte hinzu",
         es: "Incluye relleno exterior e interior en \xEDtems de cuadr\xEDcula redonda",
+        it: "Includi dello spazio interno ed esterno con gli oggetti della griglia ad angoli arrotondati",
         sv: "L\xE4gger till inre och yttre mellanrum med avrundade collageobjekt",
         ru: "\u0412\u043A\u043B\u044E\u0447\u0430\u0435\u0442 \u0432\u043D\u0435\u0448\u043D\u0438\u0435 \u0438 \u0432\u043D\u0443\u0442\u0440\u0435\u043D\u043D\u0438\u0435 \u043E\u0442\u0441\u0442\u0443\u043F\u044B \u0441 \u043A\u0440\u0443\u0433\u043B\u044B\u043C\u0438 \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u0430\u043C\u0438 \u0441\u0435\u0442\u043A\u0438"
       }
@@ -64255,6 +64947,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Center info on grid items",
         de: "Informationen auf Rasterobjekten zentrieren",
         es: "Centrar informaci\xF3n en los \xEDtems en la cuadr\xEDcula",
+        it: "Centra informazioni negli oggetti della griglia",
         sv: "Centrera informationen p\xE5 collageobjekt",
         ru: "\u0426\u0435\u043D\u0442\u0440\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u0438\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u044E \u043D\u0430 \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u0430\u0445 \u0441\u0435\u0442\u043A\u0438"
       },
@@ -64262,6 +64955,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Similar to the look of other collage solutions",
         de: "\xC4hnlicher Stil wie andere Collagenl\xF6sungen",
         es: "Similar al estilo visual de otros editores de collage",
+        it: "Simile all'aspetto di altre soluzioni per collage",
         sv: "Mer lik till hur andra collagegenererare g\xF6r det",
         ru: "\u041F\u043E\u0445\u043E\u0436\u0435 \u043D\u0430 \u0432\u043D\u0435\u0448\u043D\u0438\u0439 \u0432\u0438\u0434 \u0434\u0440\u0443\u0433\u0438\u0445 \u0440\u0435\u0448\u0435\u043D\u0438\u0439 \u0434\u043B\u044F \u043A\u043E\u043B\u043B\u0430\u0436\u0435\u0439"
       }
@@ -64270,6 +64964,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Organising plays",
       de: "Plays werden organisiert",
       es: "Organizando reproducciones",
+      it: "Organizzando le riproduzioni",
       pt: "Organizando reprodu\xE7\xF5es",
       sv: "Organisera spelningar",
       ru: "\u041E\u0440\u0433\u0430\u043D\u0438\u0437\u0430\u0446\u0438\u044F \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u0439"
@@ -64278,6 +64973,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Update now",
       de: "Jetzt aktualisieren",
       es: "Actualizar ahora",
+      it: "Aggiorna ora",
       pt: "Atualizar agora",
       sv: "Uppdatera nu",
       ru: "\u041E\u0431\u043D\u043E\u0432\u0438\u0442\u044C \u0441\u0435\u0439\u0447\u0430\u0441"
@@ -64286,6 +64982,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Ignore for now",
       de: "Vorerst ignorieren",
       es: "Ignorar por ahora",
+      it: "Ignora per ora",
       pt: "Ignore por agora",
       sv: "Ignorera just nu",
       ru: "\u0418\u0433\u043D\u043E\u0440\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u043F\u043E\u043A\u0430"
@@ -64294,6 +64991,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Update styles",
       de: "Stylesheets aktualisieren",
       es: "Actualizar estilos",
+      it: "Aggiorna stili",
       pt: "Atualizar estilos",
       sv: "Uppdatera stiler",
       ru: "\u041E\u0431\u043D\u043E\u0432\u0438\u0442\u044C \u0441\u0442\u0438\u043B\u0438"
@@ -64302,6 +65000,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Downloading styles",
       de: "Lade Stylesheets herunter",
       es: "Descargando estilos",
+      it: "Download degli stili",
       pt: "Baixando estilos",
       sv: "Laddar ner stiler",
       ru: "\u0417\u0430\u0433\u0440\u0443\u0437\u043A\u0430 \u0441\u0442\u0438\u043B\u0435\u0439"
@@ -64310,6 +65009,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "You have style loading off! If you did this by accident, you can undo this",
       de: "Du hast das Laden von Stylesheets deaktiviert! Wenn du das aus Versehen gemacht hast, kannst du es r\xFCckg\xE4ngig machen",
       es: "\xA1Tienes el cargado de estilos desactivado! Si hiciste esto por accidente, puedes deshacerlo",
+      it: "Hai il caricamento degli stili disattivato! Se lo hai fatto per sbaglio, lo puoi annullare",
       pt: "Voc\xEA desativou o carregamento de estilos! Se voc\xEA fez isso acidentalmente, pode desfazer essa a\xE7\xE3o",
       sv: "Du har st\xE4ngt av att stiler laddas! Om du gjorde det av misstag s\xE5 kan du \xE5terst\xE4lla det",
       ru: "\u0423 \u0432\u0430\u0441 \u043E\u0442\u043A\u043B\u044E\u0447\u0435\u043D\u0430 \u0437\u0430\u0433\u0440\u0443\u0437\u043A\u0430 \u0441\u0442\u0438\u043B\u0435\u0439! \u0415\u0441\u043B\u0438 \u0432\u044B \u0441\u0434\u0435\u043B\u0430\u043B\u0438 \u044D\u0442\u043E \u0441\u043B\u0443\u0447\u0430\u0439\u043D\u043E, \u0432\u044B \u043C\u043E\u0436\u0435\u0442\u0435 \u043E\u0442\u043C\u0435\u043D\u0438\u0442\u044C \u044D\u0442\u043E"
@@ -64318,6 +65018,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Re-enable style loading",
       de: "Stylesheets neu laden und aktivieren",
       es: "Reactivar cargado de estilos",
+      it: "Ri-abilita il caricamento degli stili",
       pt: "Reativar carregamento de estilos",
       sv: "\xC5teraktivera att stiler laddas",
       ru: "\u0412\u043A\u043B\u044E\u0447\u0438\u0442\u044C \u0437\u0430\u0433\u0440\u0443\u0437\u043A\u0443 \u0441\u0442\u0438\u043B\u0435\u0439"
@@ -64327,6 +65028,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "made with {h} by {u} and {c}contributors{/c}",
       de: "mit {h} gemacht von {u} und {c}mitwirkenden{/c}",
       es: "hecho con {h} por {u} y {c}contribuidores{/c}",
+      it: "creato con {h} da {u} e {c}contributori{/c}",
       pt: "feito com {h} por {u} e {c}contribuidores{/c}",
       sv: "skapad med {h} av {u} och {c}bidragsgivare{/c}",
       ru: "\u0441\u0434\u0435\u043B\u0430\u043D\u043E \u0441 {h} \u043E\u0442 {u} \u0438 {c}\u0443\u0447\u0430\u0441\u0442\u043D\u0438\u043A\u043E\u0432{/c}"
@@ -64336,6 +65038,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "love",
       de: "liebe",
       es: "amor",
+      it: "amore",
       pt: "amor",
       sv: "k\xE4rlek",
       ru: "\u043B\u044E\u0431\u043E\u0432\u044C\u044E"
@@ -64345,6 +65048,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "{l} translation by {u}",
       de: "Deutsche \xDCbersetzung von {u}",
       es: "{l} traducci\xF3n por {u}",
+      it: "traduzione in {l} di {u}",
       sv: "Svensk \xF6vers\xE4ttning av {u}",
       ru: "\u041F\u0435\u0440\u0435\u0432\u043E\u0434 {l} \u043E\u0442 {u}"
     },
@@ -64352,6 +65056,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "View source",
       de: "Quellcode ansehen",
       es: "Ver c\xF3digo fuente",
+      it: "Visualizza sorgente",
       pt: "Ver c\xF3digo",
       sv: "Visa k\xE4lla",
       ru: "\u041F\u043E\u0441\u043C\u043E\u0442\u0440\u0435\u0442\u044C \u0438\u0441\u0445\u043E\u0434\u043D\u044B\u0439 \u043A\u043E\u0434"
@@ -64360,6 +65065,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Report issue",
       de: "Problem melden",
       es: "Reportar problema",
+      it: "Segnala un problema",
       pt: "Relatar problema",
       sv: "Rapportera problem",
       ru: "\u0421\u043E\u043E\u0431\u0449\u0438\u0442\u044C \u043E \u043F\u0440\u043E\u0431\u043B\u0435\u043C\u0435"
@@ -64370,6 +65076,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Open your {v} settings",
       de: "\xD6ffne deine {v}-Einstellungen",
       es: "Abrir tu configuraci\xF3n de {v}",
+      it: "Apri le tue impostazioni di {v}",
       pt: "Abra suas op\xE7\xF5es de {v}",
       sv: "\xD6ppna dina {v}-inst\xE4llningar",
       ru: "\u041E\u0442\u043A\u0440\u044B\u0442\u044C \u0432\u0430\u0448\u0438 \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438 {v}"
@@ -64377,9 +65084,13 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     opens_your_value: {
       // DE: depending on the word in {v}, this might be "dein", "deine" or the inclusive "dein:e" ~Myrai
       // DEIN Profil, DEIN:E markierte Freund:in, DEINE Benachrichtigungen, DEINE Nachrichten, DEINE Minis, DEINE Profileinstellungen
+      //
+      // IT: what Myrai pointed out here also applies to us.
+      // we have for example I TUOI minis, I TUOI messaggi, LE TUE notifiche, IL TUO profilo // ~cuto
       en: "Open your {v}",
       de: "\xD6ffne dein {v}",
       es: "Abrir tu {v}",
+      it: "Apri il tuo {v}",
       pt: "Abra seu {v}",
       sv: "\xD6pnna dina {v}",
       ru: "\u041E\u0442\u043A\u0440\u044B\u0442\u044C \u0432\u0430\u0448\u0438 {v}"
@@ -64387,9 +65098,13 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     opens_the_value: {
       // DE: same here, depends on context ~Myrai
       // currently, it's all "die" – DIE Farbschemenauswahl, DIE Minis, DIE Neuigkeiten, DIE bleh-Einstellungen
+      //
+      // IT: same goes for us.
+      // we have for example IL selettore dei temi, LE impostazioni di bleh, LE novità // ~cuto
       en: "Open the {v}",
       de: "\xD6ffne die {v}",
       es: "Abrir el {v}",
+      it: "Apri il {v}",
       pt: "Abra o {v}",
       sv: "\xD6ppna {v}",
       ru: "\u041E\u0442\u043A\u0440\u044B\u0442\u044C {v}"
@@ -64398,6 +65113,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Theme picker",
       de: "Farbschemenauswahl",
       es: "Selector de aspectos",
+      it: "Selettore dei temi",
       pt: "Seletor de temas",
       sv: "Temav\xE4ljare",
       ru: "\u0412\u044B\u0431\u043E\u0440 \u0442\u0435\u043C\u044B"
@@ -64406,6 +65122,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Changes your theme",
       de: "\xC4ndert dein Farbschema",
       es: "Cambia tu aspecto",
+      it: "Cambia il tuo tema",
       pt: "Mude seu tema",
       sv: "\xC4ndrar ditt tema",
       ru: "\u0418\u0437\u043C\u0435\u043D\u044F\u0435\u0442 \u0432\u0430\u0448\u0443 \u0442\u0435\u043C\u0443"
@@ -64414,6 +65131,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "On this page",
       de: "Auf dieser Seite",
       es: "En esta p\xE1gina",
+      it: "Su questa pagina",
       pt: "Nessa p\xE1gina",
       sv: "P\xE5 denna sida",
       ru: "\u041D\u0430 \u044D\u0442\u043E\u0439 \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u0435"
@@ -64422,6 +65140,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Use current page as context",
       de: "Aktuelle Seite als Kontext verwenden",
       es: "Usar la p\xE1gina actual como contexto",
+      it: "Usa la pagina corrente come contesto",
       pt: "Usar a p\xE1gina atual como contexto",
       sv: "Anv\xE4nd aktuella sidan som referens",
       ru: "\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u044C \u0442\u0435\u043A\u0443\u0449\u0443\u044E \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u0443 \u043A\u0430\u043A \u043A\u043E\u043D\u0442\u0435\u043A\u0441\u0442"
@@ -64430,6 +65149,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Open the {v} for {t}",
       de: "\xD6ffne das {v} f\xFCr {t}",
       es: "Abrir el {v} para {t}",
+      it: "Apri il {v} per {t}",
       pt: "Abra a {v} para {t}",
       sv: "\xD6pnnar {v] f\xF6r {t}",
       ru: "\u041E\u0442\u043A\u0440\u044B\u0442\u044C {v} \u0434\u043B\u044F {t}"
@@ -64438,6 +65158,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Rabbit hole",
       de: "Quick Switcher",
       es: "Cambio r\xE1pido",
+      it: "Spostamento rapido",
       sv: "Genv\xE4gar",
       ru: "\u0411\u044B\u0441\u0442\u0440\u044B\u0439 \u043F\u0435\u0440\u0435\u043A\u043B\u044E\u0447\u0430\u0442\u0435\u043B\u044C"
     },
@@ -64446,6 +65167,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Enable the quick switcher",
         de: "Quick Switcher aktivieren",
         es: "Activar el cambio r\xE1pido",
+        it: "Attiva lo spostamento rapido",
         sv: "Aktivera snabbv\xE4xlare",
         ru: "\u0412\u043A\u043B\u044E\u0447\u0438\u0442\u044C \u0431\u044B\u0441\u0442\u0440\u044B\u0439 \u043F\u0435\u0440\u0435\u043A\u043B\u044E\u0447\u0430\u0442\u0435\u043B\u044C"
       },
@@ -64453,6 +65175,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Make full use of your keyboard to navigate exactly where you want to be",
         de: "Nutze deine Tastatur, um genau dorthin zu navigieren, wo du hinm\xF6chtest",
         es: "Aprovecha al completo tu teclado para navegar exactamente a donde quieres estar",
+        it: "Sfrutta la tua tastiera per navigare esattamente dove vuoi essere",
         sv: "G\xF6r full anv\xE4ndning av ditt tangentbord f\xF6r att navigera till precis vart du vill vara",
         ru: "\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0439\u0442\u0435 \u043A\u043B\u0430\u0432\u0438\u0430\u0442\u0443\u0440\u0443 \u0432 \u043F\u043E\u043B\u043D\u043E\u0439 \u043C\u0435\u0440\u0435, \u0447\u0442\u043E\u0431\u044B \u043F\u0435\u0440\u0435\u0439\u0442\u0438 \u0438\u043C\u0435\u043D\u043D\u043E \u0442\u0443\u0434\u0430, \u043A\u0443\u0434\u0430 \u0432\u0430\u043C \u043D\u0443\u0436\u043D\u043E"
       }
@@ -64461,6 +65184,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Change keybinds",
       de: "Tastenkombinationen \xE4ndern",
       es: "Cambiar atajos",
+      it: "Cambia associazione tasti",
       sv: "\xC4ndra tangentbordsgenv\xE4gar",
       ru: "\u0418\u0437\u043C\u0435\u043D\u0438\u0442\u044C \u0441\u043E\u0447\u0435\u0442\u0430\u043D\u0438\u044F \u043A\u043B\u0430\u0432\u0438\u0448"
     },
@@ -64468,14 +65192,18 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Quick switch to a page or action",
       de: "Schnell zu einer Seite oder Aktion wechseln",
       es: "Cambia r\xE1pido a una p\xE1gina o acci\xF3n",
+      it: "Spostamento rapido ad una pagina o azione",
       pt: "Alternar rapidamente para uma p\xE1gina ou a\xE7\xE3o",
       sv: "Hoppa snabbt till en sida eller annan \xE5tg\xE4rd",
       ru: "\u0411\u044B\u0441\u0442\u0440\u044B\u0439 \u043F\u0435\u0440\u0435\u0445\u043E\u0434 \u043A \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u0435 \u0438\u043B\u0438 \u0434\u0435\u0439\u0441\u0442\u0432\u0438\u044E"
     },
     rabbit_search: {
+      // IT: we may have a problem here since the preposition in front of a name may not be the same
+      // for example DELL'album, DELL'artista, DEL brano, DEL profilo, DEL tag // ~cuto
       en: "Enter {v} name",
       de: "Gebe den Namen des {v}s ein",
       es: "Ingresa el nombre del {v}",
+      it: "Inserisci il nome del {v}",
       sv: "Skriv {v}namn",
       ru: "\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 {v}"
     },
@@ -64483,6 +65211,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Compare your taste with {v}",
       de: "Vergleiche deinen Musikgeschmack mit {v}",
       es: "Compara tus gustos con {v}",
+      it: "Confronta i tuoi gusti con {v}",
       pt: "Compare o seu gosto com {v}",
       sv: "J\xE4mf\xF6r musiksmak med {v}",
       ru: "\u0421\u0440\u0430\u0432\u043D\u0438\u0442\u044C \u0432\u0430\u0448 \u0432\u043A\u0443\u0441 \u0441 {v}"
@@ -64491,6 +65220,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Select an option",
       de: "W\xE4hle eine Option",
       es: "Selecciona una opci\xF3n",
+      it: "Seleziona un'opzione",
       pt: "Selecione uma op\xE7\xE3o",
       sv: "V\xE4lj ett alternativ",
       ru: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u0432\u0430\u0440\u0438\u0430\u043D\u0442"
@@ -64499,6 +65229,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Nothing matches your search",
       de: "Es wurde nichts zu deiner Suche gefunden",
       es: "No hay resultados que coincidan con tu b\xFAsqueda",
+      it: "Nessun elemento corrisponde alla tua ricerca",
       pt: "Nada corresponde \xE0 sua pesquisa",
       sv: "Inga resultat matchar din s\xF6kning",
       ru: "\u041D\u0438\u0447\u0435\u0433\u043E \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D\u043E \u043F\u043E \u0432\u0430\u0448\u0435\u043C\u0443 \u0437\u0430\u043F\u0440\u043E\u0441\u0443"
@@ -64507,6 +65238,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Create a collage of your choosing",
       de: "Erstelle eine Collage deiner Wahl",
       es: "Crea un collage de tu elecci\xF3n",
+      it: "Crea un collage a tua scelta",
       pt: "Crie uma colagem de sua escolha",
       sv: "Skapa ett collage som du vill",
       ru: "\u0421\u043E\u0437\u0434\u0430\u0442\u044C \u043A\u043E\u043B\u043B\u0430\u0436 \u043D\u0430 \u0432\u0430\u0448 \u0432\u044B\u0431\u043E\u0440"
@@ -64515,6 +65247,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Search for music or a user",
       de: "Suche nach Musik oder einem Benutzer",
       es: "Busca m\xFAsica o un usuario",
+      it: "Cerca musica o un utente",
       pt: "Pesquise por m\xFAsica ou usu\xE1rio",
       sv: "S\xF6k musik eller en anv\xE4ndare",
       ru: "\u0418\u0441\u043A\u0430\u0442\u044C \u043C\u0443\u0437\u044B\u043A\u0443 \u0438\u043B\u0438 \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F"
@@ -64523,6 +65256,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Search for {v}",
       de: "Nach {v} suchen",
       es: "Buscar por {v}",
+      it: "Cerca per {v}",
       pt: "Pesquise por {v}",
       sv: "S\xF6k upp {v}",
       ru: "\u0418\u0441\u043A\u0430\u0442\u044C {v}"
@@ -64531,6 +65265,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Choose a search type",
       de: "W\xE4hle einen Suchtyp",
       es: "Elige un tipo de b\xFAsqueda",
+      it: "Seleziona un tipo di ricerca",
       pt: "Escolha um tipo de pesquisa",
       sv: "V\xE4lj s\xF6ktyp",
       ru: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u0442\u0438\u043F \u043F\u043E\u0438\u0441\u043A\u0430"
@@ -64539,6 +65274,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Finish your search",
       de: "Beende deine Suche",
       es: "Termina tu b\xFAsqueda",
+      it: "Termina la tua ricerca",
       pt: "Finalize sua pesquisa",
       sv: "Finalisera s\xF6kning",
       ru: "\u0417\u0430\u0432\u0435\u0440\u0448\u0438\u0442\u0435 \u043F\u043E\u0438\u0441\u043A"
@@ -64547,6 +65283,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "View {c} more",
       de: "{c} weitere anzeigen",
       es: "Ver {c} m\xE1s",
+      it: "Visualizza {c} altri",
       sv: "Visa {v} fler",
       ru: "\u041F\u043E\u0441\u043C\u043E\u0442\u0440\u0435\u0442\u044C \u0435\u0449\u0435 {c}"
     },
@@ -64554,6 +65291,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Saved to bookmarks",
       de: "Lesezeichen hinzugef\xFCgt",
       es: "Guardado en marcadores",
+      it: "Salvato nei segnalibri",
       pt: "Salvo nos marcadores",
       sv: "Sparad till dina bokm\xE4rken",
       ru: "\u0421\u043E\u0445\u0440\u0430\u043D\u0435\u043D\u043E \u0432 \u0437\u0430\u043A\u043B\u0430\u0434\u043A\u0438"
@@ -64562,6 +65300,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Find your bookmarks in your Home or {link}",
       de: "Finde deine Lesezeichen auf deiner Startseite oder {link}",
       es: "Encuentra tus marcadores en tu Inicio o {v\xEDnculo}",
+      it: "Trova i tuoi segnalibri nella tua Home o {link}",
       pt: "Encontre seus marcadores na sua p\xE1gina inicial ou em {link}",
       sv: "Hitta dina bokm\xE4rken p\xE5 startsidan eller {link}",
       ru: "\u041D\u0430\u0439\u0434\u0438\u0442\u0435 \u0432\u0430\u0448\u0438 \u0437\u0430\u043A\u043B\u0430\u0434\u043A\u0438 \u043D\u0430 \u0414\u043E\u043C\u0430\u0448\u043D\u0435\u0439 \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u0435 \u0438\u043B\u0438 {link}"
@@ -64571,6 +65310,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "go there now",
       de: "schaue sie dir direkt an",
       es: "ve ah\xED ahora",
+      it: "vai l\xEC ora",
       pt: "vai l\xE1 agora",
       sv: "g\xE5 dit nu",
       ru: "\u043F\u0435\u0440\u0435\u0439\u0442\u0438 \u0441\u0435\u0439\u0447\u0430\u0441"
@@ -64579,6 +65319,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Always remind me",
       de: "Erinnere mich immer",
       es: "Recordarme siempre",
+      it: "Ricordamelo sempre",
       sv: "P\xE5minn mig alltid",
       ru: "\u041D\u0430\u043F\u043E\u043C\u0438\u043D\u0430\u0442\u044C \u0432\u0441\u0435\u0433\u0434\u0430"
     },
@@ -64586,6 +65327,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Never",
       de: "Nie",
       es: "Nunca",
+      it: "Mai",
       sv: "Aldrig",
       ru: "\u041D\u0438\u043A\u043E\u0433\u0434\u0430"
     },
@@ -64593,6 +65335,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Edit scrobble",
       de: "Scrobble bearbeiten",
       es: "Editar scrobbling",
+      it: "Modifica scrobbling",
       pt: "Editar scrobble",
       sv: "Redigera skrobbel",
       ru: "\u0420\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u0441\u043A\u0440\u043E\u0431\u0431\u043B"
@@ -64601,6 +65344,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Edit scrobbles in bulk",
       de: "Mehrere Scrobbles bearbeiten",
       es: "Editar scrobblings en masa",
+      it: "Modifica scrobbling in massa",
       pt: "Editar scrobbles em massa",
       sv: "Massredigera skrobblingar",
       ru: "\u041C\u0430\u0441\u0441\u043E\u0432\u043E\u0435 \u0440\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435 \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u043E\u0432"
@@ -64609,6 +65353,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Timeline",
       de: "Zeitstrahl",
       es: "Cronolog\xEDa",
+      it: "Cronologia",
       sv: "Tidslinje",
       ru: "\u0425\u0440\u043E\u043D\u043E\u043B\u043E\u0433\u0438\u044F"
     },
@@ -64616,6 +65361,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "View latest",
       de: "Neueste anzeigen",
       es: "Ver m\xE1s recientes",
+      it: "Mostra i pi\xF9 recenti",
       sv: "Visa senaste",
       ru: "\u041F\u043E\u0441\u043C\u043E\u0442\u0440\u0435\u0442\u044C \u043F\u043E\u0441\u043B\u0435\u0434\u043D\u0438\u0435"
     },
@@ -64623,6 +65369,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Custom",
       de: "Benutzerdefiniert",
       es: "Personalizado",
+      it: "Personalizzato",
       sv: "Anpassad",
       ru: "\u041F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044C\u0441\u043A\u0438\u0439"
     },
@@ -64630,6 +65377,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Star",
       de: "Markieren",
       es: "Marcar como favorito",
+      it: "Imposta come preferito",
       sv: "Stj\xE4rna",
       ru: "\u041E\u0442\u043C\u0435\u0442\u0438\u0442\u044C \u0437\u0432\u0435\u0437\u0434\u043E\u0439"
     },
@@ -64637,6 +65385,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Starred",
       de: "Markiert",
       es: "Marcado como favorito",
+      it: "Impostato ocme preferito",
       sv: "Stj\xE4rnm\xE4rkt",
       ru: "\u041E\u0442\u043C\u0435\u0447\u0435\u043D\u043E \u0437\u0432\u0435\u0437\u0434\u043E\u0439"
     },
@@ -64644,6 +65393,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Report",
       de: "Melden",
       es: "Reportar",
+      it: "Segnala",
       pt: "Reportar",
       sv: "Anm\xE4l",
       ru: "\u041F\u043E\u0436\u0430\u043B\u043E\u0432\u0430\u0442\u044C\u0441\u044F"
@@ -64653,6 +65403,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Auto",
       de: "Automatisch",
       es: "Autom\xE1tico",
+      it: "Automatico",
       sv: "Automatiskt",
       ru: "\u0410\u0432\u0442\u043E"
     },
@@ -64660,6 +65411,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Glass",
       de: "Glas",
       es: "Vidrio",
+      it: "Vetro",
       sv: "Glas",
       ru: "\u0421\u0442\u0435\u043A\u043B\u043E"
     },
@@ -64667,6 +65419,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Prefer high contrast",
       de: "Hohen Kontrast bevorzugen",
       es: "Preferir alto contraste",
+      it: "Preferisci contrasto elevato",
       sv: "F\xF6redra h\xF6gkontrast",
       ru: "\u041F\u0440\u0435\u0434\u043F\u043E\u0447\u0438\u0442\u0430\u0442\u044C \u0432\u044B\u0441\u043E\u043A\u0443\u044E \u043A\u043E\u043D\u0442\u0440\u0430\u0441\u0442\u043D\u043E\u0441\u0442\u044C"
     },
@@ -64674,6 +65427,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "External",
       de: "Extern",
       es: "Externo",
+      it: "Esterno",
       sv: "Extern",
       ru: "\u0412\u043D\u0435\u0448\u043D\u0438\u0439"
     },
@@ -64681,6 +65435,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Watch",
       de: "Ansehen",
       es: "Ver",
+      it: "Guarda",
       sv: "Se",
       ru: "\u0421\u043C\u043E\u0442\u0440\u0435\u0442\u044C"
     },
@@ -64688,6 +65443,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Watch video",
       de: "Video ansehen",
       es: "Ver video",
+      it: "Guarda video",
       sv: "Se video",
       ru: "\u0421\u043C\u043E\u0442\u0440\u0435\u0442\u044C \u0432\u0438\u0434\u0435\u043E"
     },
@@ -64695,6 +65451,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Latest album",
       de: "Neuestes Album",
       es: "\xC1lbum m\xE1s reciente",
+      it: "Ultimo ablum",
       sv: "Senaste album",
       ru: "\u041F\u043E\u0441\u043B\u0435\u0434\u043D\u0438\u0439 \u0430\u043B\u044C\u0431\u043E\u043C"
     },
@@ -64702,6 +65459,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Popular now",
       de: "Zurzeit beliebt",
       es: "Popular ahora",
+      it: "Popolare ora",
       sv: "Popul\xE4r just nu",
       ru: "\u041F\u043E\u043F\u0443\u043B\u044F\u0440\u043D\u043E \u0441\u0435\u0439\u0447\u0430\u0441"
     },
@@ -64709,6 +65467,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "This album is missing key details, maybe you can help out?",
       de: "Diesem Album fehlen wichtige Details, vielleicht kannst du helfen?",
       es: "A este \xE1lbum le faltan detalles clave, \xBFquiz\xE1s puedes ayudar?",
+      it: "A questo album mancano dettagli chiave, forse puoi aiutare?",
       ru: "\u0412 \u044D\u0442\u043E\u043C \u0430\u043B\u044C\u0431\u043E\u043C\u0435 \u043E\u0442\u0441\u0443\u0442\u0441\u0442\u0432\u0443\u044E\u0442 \u043A\u043B\u044E\u0447\u0435\u0432\u044B\u0435 \u0434\u0435\u0442\u0430\u043B\u0438, \u043C\u043E\u0436\u0435\u0442, \u0432\u044B \u043C\u043E\u0436\u0435\u0442\u0435 \u043F\u043E\u043C\u043E\u0447\u044C?"
     },
     updates: {
@@ -64716,6 +65475,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Updates",
       de: "Updates",
       es: "Actualizaciones",
+      it: "Aggiornamenti",
       pt: "Atualiza\xE7\xF5es",
       sv: "Uppdateringar",
       ru: "\u041E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u044F"
@@ -64724,12 +65484,14 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Updated",
       de: "Aktualisiert",
       es: "Actualizado",
+      it: "Aggiornato",
       pt: "Atualizado",
       sv: "Uppdaterats",
       ru: "\u041E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u043E",
       notification: {
         en: "Updated to version {v}",
         es: "Actualizado a la versi\xF3n {v}",
+        it: "Aggiornato alla versione {v}",
         ru: "\u041E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u043E \u0434\u043E \u0432\u0435\u0440\u0441\u0438\u0438 {v}"
       }
     },
@@ -64737,6 +65499,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "You\u2019re up to date",
       de: "Du bist auf dem neuesten Stand",
       es: "Est\xE1s actualizado",
+      it: "Sei aggiornato",
       pt: "Voc\xEA est\xE1 atualizado",
       sv: "Du \xE4r p\xE5 den senaste versionen",
       ru: "\u0423 \u0432\u0430\u0441 \u043F\u043E\u0441\u043B\u0435\u0434\u043D\u044F\u044F \u0432\u0435\u0440\u0441\u0438\u044F"
@@ -64745,6 +65508,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Update available to install",
       de: "Ein Update ist bereit zur Installation",
       es: "Actualizaci\xF3n disponible para instalar",
+      it: "Aggiornamento disponibile per l'installazione",
       pt: "Atualiza\xE7\xE3o dispon\xEDvel para instalar",
       sv: "Ny uppdatering finns tillg\xE4nglig",
       ru: "\u0414\u043E\u0441\u0442\u0443\u043F\u043D\u043E \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u0435 \u0434\u043B\u044F \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043A\u0438"
@@ -64754,6 +65518,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Install now",
       de: "Jetzt installieren",
       es: "Instalar ahora",
+      it: "Installa ora",
       pt: "Instale agora",
       sv: "Installera nu",
       ru: "\u0423\u0441\u0442\u0430\u043D\u043E\u0432\u0438\u0442\u044C \u0441\u0435\u0439\u0447\u0430\u0441"
@@ -64762,6 +65527,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Check for updates",
       de: "Nach Updates suchen",
       es: "Comprobar si hay actualizaciones",
+      it: "Controlla aggiornamenti",
       pt: "Verificar atualiza\xE7\xF5es",
       sv: "Checka efter nya uppdateringar",
       ru: "\u041F\u0440\u043E\u0432\u0435\u0440\u0438\u0442\u044C \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u044F"
@@ -64770,6 +65536,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Check",
       de: "Pr\xFCfen",
       es: "Comprobar",
+      it: "Controlla",
       pt: "Verificar",
       sv: "Checka",
       ru: "\u041F\u0440\u043E\u0432\u0435\u0440\u0438\u0442\u044C"
@@ -64778,6 +65545,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Last checked {d}",
       de: "Zuletzt gepr\xFCft {d}",
       es: "\xDAltima comprobaci\xF3n {d}",
+      it: "Ultimo controllo {d}",
       pt: "\xDAltima verifica\xE7\xE3o {d}",
       sv: "Sist kollat {d}",
       ru: "\u041F\u043E\u0441\u043B\u0435\u0434\u043D\u044F\u044F \u043F\u0440\u043E\u0432\u0435\u0440\u043A\u0430 {d}"
@@ -64786,6 +65554,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Never checked",
       de: "Noch nicht gepr\xFCft",
       es: "Nunca comprobado",
+      it: "Mai controllato",
       pt: "Nunca verificado",
       sv: "Aldrig checkat",
       ru: "\u041D\u0438\u043A\u043E\u0433\u0434\u0430 \u043D\u0435 \u043F\u0440\u043E\u0432\u0435\u0440\u044F\u043B\u043E\u0441\u044C"
@@ -64795,6 +65564,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Get the latest updates as soon as they\u2019re available",
         de: "Erhalte die neuesten Updates, sobald sie verf\xFCgbar sind",
         es: "Recibe las actualizaciones m\xE1s recientes apenas est\xE9n disponibles",
+        it: "Ottieni gli ultimi aggiornamenti appena sono disponibili",
         pt: "Receba as \xFAltimas atualiza\xE7\xF5es assim que estiverem dispon\xEDveis",
         sv: "Skaffa senaste uppdateringarna direkt n\xE4r det finns tillg\xE4ngligt",
         ru: "\u041F\u043E\u043B\u0443\u0447\u0430\u0439\u0442\u0435 \u043F\u043E\u0441\u043B\u0435\u0434\u043D\u0438\u0435 \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u044F, \u043A\u0430\u043A \u0442\u043E\u043B\u044C\u043A\u043E \u043E\u043D\u0438 \u0441\u0442\u0430\u043D\u0443\u0442 \u0434\u043E\u0441\u0442\u0443\u043F\u043D\u044B"
@@ -64803,6 +65573,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Be among the first to get the latest fixes and improvements as they roll out",
         de: "Sei unter den Ersten, die die neuesten Fehlerbehebungen und Verbesserungen erhalten, sobald sie verf\xFCgbar sind",
         es: "S\xE9 entre los primeros que reciben los m\xE1s recientes arreglos y mejoras mientras van llegando",
+        it: "Sii tra i primi ad ottenere le ultime correzioni e miglioramenti appena vengono rilasciati",
         pt: "Seja um dos primeiros a receber as \xFAltimas corre\xE7\xF5es e melhorias assim que forem lan\xE7adas",
         sv: "Bli bland dem f\xF6rsta som f\xE5r de senaste fixarna och optimeringarna s\xE5 snart som dom kommit",
         ru: "\u0411\u0443\u0434\u044C\u0442\u0435 \u0432 \u0447\u0438\u0441\u043B\u0435 \u043F\u0435\u0440\u0432\u044B\u0445, \u043A\u0442\u043E \u043F\u043E\u043B\u0443\u0447\u0438\u0442 \u043F\u043E\u0441\u043B\u0435\u0434\u043D\u0438\u0435 \u0438\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F \u0438 \u0443\u043B\u0443\u0447\u0448\u0435\u043D\u0438\u044F \u043F\u043E \u043C\u0435\u0440\u0435 \u0438\u0445 \u0432\u044B\u043F\u0443\u0441\u043A\u0430"
@@ -64812,6 +65583,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Pause updates",
       de: "Updates pausieren",
       es: "Pausar actualizaciones",
+      it: "Sospendi aggiornamenti",
       pt: "Pausar atualiza\xE7\xF5es",
       sv: "Pausa uppdateringar",
       ru: "\u041F\u0440\u0438\u043E\u0441\u0442\u0430\u043D\u043E\u0432\u0438\u0442\u044C \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u044F"
@@ -64820,6 +65592,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Pause for 1 day",
       de: "F\xFCr einen Tag pausieren",
       es: "Pausar por 1 d\xEDa",
+      it: "Sospendi per 1 giorno",
       pt: "Pausar por 1 dia",
       sv: "Pausa i 1 dag",
       ru: "\u041F\u0440\u0438\u043E\u0441\u0442\u0430\u043D\u043E\u0432\u0438\u0442\u044C \u043D\u0430 1 \u0434\u0435\u043D\u044C"
@@ -64828,6 +65601,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Resume updates",
       de: "Updates fortsetzen",
       es: "Resumir actualizaciones",
+      it: "Riprendi aggiornamenti",
       pt: "Resumir atualiza\xE7\xF5es",
       sv: "\xC5teruppta uppdateringar",
       ru: "\u0412\u043E\u0437\u043E\u0431\u043D\u043E\u0432\u0438\u0442\u044C \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u044F"
@@ -64836,6 +65610,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Updates paused",
       de: "Updates pausiert",
       es: "Actualizaciones pausadas",
+      it: "Aggiornamenti sospesi",
       pt: "Atualiza\xE7\xF5es pausadas",
       sv: "Uppdateringar har pausats",
       ru: "\u041E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u044F \u043F\u0440\u0438\u043E\u0441\u0442\u0430\u043D\u043E\u0432\u043B\u0435\u043D\u044B"
@@ -64844,6 +65619,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Updates continue {d}",
       de: "Updates werden {d} fortgesetzt",
       es: "Las actualizaciones continuar\xE1n el {d}",
+      it: "Gli aggiornamenti riprenderanno il {d}",
       pt: "Atualiza\xE7\xF5es continuam {d}",
       sv: "Uppdateringar forts\xE4tter {d}",
       ru: "\u041E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u044F \u0432\u043E\u0437\u043E\u0431\u043D\u043E\u0432\u044F\u0442\u0441\u044F {d}"
@@ -64852,6 +65628,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Missing updates",
       de: "Fehlende Updates",
       es: "Actualizaciones faltantes",
+      it: "Aggiornamenti mancanti",
       pt: "Atualiza\xE7\xF5es em falta",
       sv: "Saknar uppdateringar",
       ru: "\u041F\u0440\u043E\u043F\u0443\u0449\u0435\u043D\u043D\u044B\u0435 \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u044F"
@@ -64860,6 +65637,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "You are running version {v}",
       de: "Du verwendest Version {v}",
       es: "Est\xE1s usando la versi\xF3n {v}",
+      it: "Stai eseguendo la versione {v}",
       pt: "Voc\xEA est\xE1 usando a vers\xE3o {v}",
       sv: "Du \xE4r p\xE5 version {v}",
       ru: "\u0412\u044B \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0435\u0442\u0435 \u0432\u0435\u0440\u0441\u0438\u044E {v}"
@@ -64868,6 +65646,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "You are installing version {v}",
       de: "Du installierst Version {v}",
       es: "Est\xE1s instalando la versi\xF3n {v}",
+      it: "Stai installando la versione {v}",
       pt: "Voc\xEA est\xE1 instalando a vers\xE3o {v}",
       sv: "Du har installerat version {v}",
       ru: "\u0412\u044B \u0443\u0441\u0442\u0430\u043D\u0430\u0432\u043B\u0438\u0432\u0430\u0435\u0442\u0435 \u0432\u0435\u0440\u0441\u0438\u044E {v}"
@@ -64876,6 +65655,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Checked for updates",
       de: "Updates wurden gesucht",
       es: "Se ha comprobado si hay actualizaciones",
+      it: "Controllato la disponibilit\xE0 di aggiornamenti",
       pt: "Verificou por atualiza\xE7\xF5es",
       sv: "Kolla efter uppdateringar",
       ru: "\u041F\u0440\u043E\u0432\u0435\u0440\u0435\u043D\u043E \u043D\u0430 \u043D\u0430\u043B\u0438\u0447\u0438\u0435 \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u0439"
@@ -64884,6 +65664,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Select all",
       de: "Alle ausw\xE4hlen",
       es: "Seleccionar todos",
+      it: "Seleziona tutto",
       sv: "Markera alla",
       ru: "\u0412\u044B\u0431\u0440\u0430\u0442\u044C \u0432\u0441\u0435"
     },
@@ -64891,6 +65672,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "De-select all",
       de: "Alle abw\xE4hlen",
       es: "Deseleccionar todos",
+      it: "Deseleziona tutto",
       sv: "Avmarkera alla",
       ru: "\u0421\u043D\u044F\u0442\u044C \u0432\u044B\u0431\u043E\u0440 \u0441\u043E \u0432\u0441\u0435\u0445"
     },
@@ -64898,6 +65680,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Use current time",
       de: "Aktuelle Zeit verwenden",
       es: "Usar hora actual",
+      it: "Usa l'ora attuale",
       sv: "Anv\xE4nd nuvarande tid",
       ru: "\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u044C \u0442\u0435\u043A\u0443\u0449\u0435\u0435 \u0432\u0440\u0435\u043C\u044F"
     },
@@ -64905,6 +65688,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Time",
       de: "Zeit",
       es: "Hora",
+      it: "Ora",
       sv: "Tid",
       ru: "\u0412\u0440\u0435\u043C\u044F"
     },
@@ -64912,6 +65696,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Missing required fields",
       de: "Fehlende erforderliche Felder",
       es: "Faltan campos obligatorios",
+      it: "Campi obbligatori mancanti",
       sv: "Saknar n\xF6dv\xE4ndiga f\xE4lt",
       ru: "\u041E\u0442\u0441\u0443\u0442\u0441\u0442\u0432\u0443\u044E\u0442 \u043E\u0431\u044F\u0437\u0430\u0442\u0435\u043B\u044C\u043D\u044B\u0435 \u043F\u043E\u043B\u044F"
     },
@@ -64919,6 +65704,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Requires API access in Settings",
       de: "Erfordert API-Zugang in den Einstellungen",
       es: "Requiere acceso a la API en Configuraci\xF3n",
+      it: "Richiede l'accesso API nelle impostazioni",
       sv: "Beh\xF6ver API-\xE5tkomst i inst\xE4llningar",
       ru: "\u0422\u0440\u0435\u0431\u0443\u0435\u0442\u0441\u044F \u0434\u043E\u0441\u0442\u0443\u043F \u043A API \u0432 \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0430\u0445"
     },
@@ -64926,6 +65712,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "No token provided",
       de: "Kein Token angegeben",
       es: "No se ha proporcionado ning\xFAn token",
+      it: "Nessun token fornito",
       sv: "Ingen token har angivits",
       ru: "\u0422\u043E\u043A\u0435\u043D \u043D\u0435 \u043F\u0440\u0435\u0434\u043E\u0441\u0442\u0430\u0432\u043B\u0435\u043D"
     },
@@ -64933,6 +65720,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "e.g. {v}",
       de: "z.B. {v}",
       es: "e.g. {v}",
+      it: "es. {v}",
       pt: "ex.: {v}",
       sv: "t.ex. {v}",
       ru: "\u043D\u0430\u043F\u0440. {v}"
@@ -64941,6 +65729,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "{i} is unavailable on {p}",
       de: "{i} ist auf {p} nicht verf\xFCgbar",
       es: "{i} no est\xE1 disponible en {p}",
+      it: "{i} non \xE8 disponibile su {p}",
       pt: "{i} est\xE1 ind\xEDsponivel no {p}",
       sv: "{i} \xE4r inte tillg\xE4nglig p\xE5 {p}",
       ru: "{i} \u043D\u0435\u0434\u043E\u0441\u0442\u0443\u043F\u0435\u043D \u043D\u0430 {p}"
@@ -64950,6 +65739,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Unknown",
         de: "Unbekannt",
         es: "Desconocido",
+        it: "Sconosciuto",
         pt: "Desconhecido",
         sv: "Ok\xE4nd",
         ru: "\u041D\u0435\u0438\u0437\u0432\u0435\u0441\u0442\u043D\u043E"
@@ -64960,6 +65750,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Reduce motion in animations",
         de: "Bewegung von Animationen reduzieren",
         es: "Reducir movimiento en animaciones",
+        it: "Riduci movimenti nelle animazioni",
         sv: "Minska animationr\xF6relse",
         ru: "\u0423\u043C\u0435\u043D\u044C\u0448\u0438\u0442\u044C \u0434\u0432\u0438\u0436\u0435\u043D\u0438\u0435 \u0432 \u0430\u043D\u0438\u043C\u0430\u0446\u0438\u044F\u0445"
       },
@@ -64967,6 +65758,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Decreases the intensity of animations, hover effects, and other moving parts",
         de: "Verringert die Intensit\xE4t von Animationen, Hover-Effekten und anderen beweglichen Komponenten",
         es: "Reduce la intensidad de las animaciones, efectos al pasar el cursor, y otras partes m\xF3viles",
+        it: "Riduce l'intensit\xE0 delle animazioni, degli effetti al passare del mouse e di altre parti in movimento",
         sv: "Minskar intensiteten av animationer, effekter vid hovring, och andra r\xF6rande delar",
         ru: "\u0423\u043C\u0435\u043D\u044C\u0448\u0430\u0435\u0442 \u0438\u043D\u0442\u0435\u043D\u0441\u0438\u0432\u043D\u043E\u0441\u0442\u044C \u0430\u043D\u0438\u043C\u0430\u0446\u0438\u0439, \u044D\u0444\u0444\u0435\u043A\u0442\u043E\u0432 \u043F\u0440\u0438 \u043D\u0430\u0432\u0435\u0434\u0435\u043D\u0438\u0438 \u0438 \u0434\u0440\u0443\u0433\u0438\u0445 \u0434\u0432\u0438\u0436\u0443\u0449\u0438\u0445\u0441\u044F \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u043E\u0432"
       }
@@ -64975,6 +65767,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Banners",
       de: "Banner",
       es: "Banner",
+      it: "Banner",
       sv: "Banner",
       ru: "\u0411\u0430\u043D\u043D\u0435\u0440\u044B"
     },
@@ -64982,6 +65775,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "View banners on",
       de: "Banner anzeigen auf",
       es: "Ver banners en",
+      it: "Mostra banner su",
       sv: "Visa banners p\xE5",
       ru: "\u041F\u043E\u043A\u0430\u0437\u044B\u0432\u0430\u0442\u044C \u0431\u0430\u043D\u043D\u0435\u0440\u044B \u043D\u0430"
     },
@@ -64989,6 +65783,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Own profile",
       de: "Meinem Profil",
       es: "Perfil personal",
+      it: "Il mio profilo",
       sv: "Din egen profil",
       ru: "\u0421\u043E\u0431\u0441\u0442\u0432\u0435\u043D\u043D\u043E\u043C \u043F\u0440\u043E\u0444\u0438\u043B\u0435"
     },
@@ -64996,6 +65791,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Other profiles",
       de: "Anderen Profilen",
       es: "Otros perfiles",
+      it: "Altri profili",
       sv: "Andra profiler",
       ru: "\u0414\u0440\u0443\u0433\u0438\u0445 \u043F\u0440\u043E\u0444\u0438\u043B\u044F\u0445"
     },
@@ -65004,6 +65800,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Prefer avatar image for profiles without a banner",
         de: "Bevorzuge Profilbild f\xFCr Profile ohne Banner",
         es: "Preferir imagen del avatar para perfiles sin un banner",
+        it: "Preferire l'immagine dell'immagine profilo per profili senza un banner",
         sv: "F\xF6redra profilbild f\xF6r profiler utan en banner",
         ru: "\u041F\u0440\u0435\u0434\u043F\u043E\u0447\u0438\u0442\u0430\u0442\u044C \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435 \u0430\u0432\u0430\u0442\u0430\u0440\u0430 \u0434\u043B\u044F \u043F\u0440\u043E\u0444\u0438\u043B\u0435\u0439 \u0431\u0435\u0437 \u0431\u0430\u043D\u043D\u0435\u0440\u0430"
       },
@@ -65011,6 +65808,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "All artist-based banner images will be replaced by the user\u2019s avatar",
         de: "Alle k\xFCnstlerbasierten Bannerbilder werden durch das Profilbild des Benutzers ersetzt",
         es: "Todos los banners con im\xE1genes de artistas ser\xE1n reemplazados por el avatar del usuario",
+        it: "Tutte le immagini banner basate sugli artisti saranno sostituite dall'immagine profilo dell'utente",
         sv: "Alla artistbaserade bannerbilder blir ers\xE4tt av anv\xE4ndarens profilbild",
         ru: "\u0412\u0441\u0435 \u0431\u0430\u043D\u043D\u0435\u0440\u044B \u043D\u0430 \u043E\u0441\u043D\u043E\u0432\u0435 \u0430\u0440\u0442\u0438\u0441\u0442\u043E\u0432 \u0431\u0443\u0434\u0443\u0442 \u0437\u0430\u043C\u0435\u043D\u0435\u043D\u044B \u0430\u0432\u0430\u0442\u0430\u0440\u043E\u043C \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F"
       }
@@ -65020,6 +65818,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Profile banner",
         de: "Profilbanner",
         es: "Banner de perfil",
+        it: "Banner del profilo",
         sv: "Profilbanner",
         ru: "\u0411\u0430\u043D\u043D\u0435\u0440 \u043F\u0440\u043E\u0444\u0438\u043B\u044F"
       },
@@ -65027,6 +65826,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Add your own custom banner image to your profile with [banner=url] in your bio",
         de: "F\xFCge deinem Profil ein eigenes Bannerbild hinzu, indem du deiner Biografie [banner=url] hinzuf\xFCgst",
         es: "A\xF1ade una imagen de banner personalizada a tu perfil con [banner=url] en tu biograf\xEDa",
+        it: "Aggiungi il tuo banner personalizzato al tuo profilo con [banner=url] nella tua biografia",
         sv: "L\xE4g till en egen banner till din profil genom att s\xE4tta [banner=url] i din biografi",
         ru: "\u0414\u043E\u0431\u0430\u0432\u044C\u0442\u0435 \u0441\u043E\u0431\u0441\u0442\u0432\u0435\u043D\u043D\u043E\u0435 \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435 \u0431\u0430\u043D\u043D\u0435\u0440\u0430 \u0432 \u0441\u0432\u043E\u0439 \u043F\u0440\u043E\u0444\u0438\u043B\u044C \u0441 \u043F\u043E\u043C\u043E\u0449\u044C\u044E [banner=url] \u0432 \u0432\u0430\u0448\u0435\u0439 \u0431\u0438\u043E\u0433\u0440\u0430\u0444\u0438\u0438"
       }
@@ -65036,6 +65836,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Profile accent",
         de: "Profilakzent",
         es: "Acento de perfil",
+        it: "Accento del profilo",
         sv: "Profilaccent",
         ru: "\u0410\u043A\u0446\u0435\u043D\u0442 \u043F\u0440\u043E\u0444\u0438\u043B\u044F"
       },
@@ -65043,6 +65844,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Add flair to your profile visible to all users regardless of personal accent",
         de: "F\xFCge deinem Profil einen Akzent hinzu, der f\xFCr alle Benutzer sichtbar ist, unabh\xE4ngig von deren pers\xF6nlichem Akzent",
         es: "A\xF1ade estilo a tu perfil visible para todos los usuarios, independientemente del acento personal",
+        it: "Aggiungi un accento al tuo profilo visibile a tutti gli utenti a prescindere dal loro accento personale",
         sv: "L\xE4gg till flair p\xE5 din profil som syns f\xF6r alla anv\xE4ndare oberoende p\xE5 egen accentf\xE4rg",
         ru: "\u0414\u043E\u0431\u0430\u0432\u044C\u0442\u0435 \u0438\u0437\u044E\u043C\u0438\u043D\u043A\u0443 \u0432 \u0441\u0432\u043E\u0439 \u043F\u0440\u043E\u0444\u0438\u043B\u044C, \u0432\u0438\u0434\u0438\u043C\u0443\u044E \u0432\u0441\u0435\u043C \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F\u043C \u043D\u0435\u0437\u0430\u0432\u0438\u0441\u0438\u043C\u043E \u043E\u0442 \u0438\u0445 \u043B\u0438\u0447\u043D\u043E\u0433\u043E \u0430\u043A\u0446\u0435\u043D\u0442\u0430"
       },
@@ -65050,6 +65852,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Changed your accent, don\u2019t forget to save!",
         de: "Du hast deinen Akzent ge\xE4ndert, vergiss\u2019 nicht zu speichern!",
         es: "Acento cambiado, \xA1no te olvides de guardar!",
+        it: "Hai cambiato l'accento, non dimenticarti di salvare!",
         sv: "\xC4ndrade din accentf\xE4rg, gl\xF6m inte att spara!",
         ru: "\u0412\u044B \u0438\u0437\u043C\u0435\u043D\u0438\u043B\u0438 \u0430\u043A\u0446\u0435\u043D\u0442, \u043D\u0435 \u0437\u0430\u0431\u0443\u0434\u044C\u0442\u0435 \u0441\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C!"
       }
@@ -65058,16 +65861,19 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       name: {
         en: "Profile name font",
         es: "Fuente del nombre de perfil",
+        it: "Font del nome del profilo",
         ru: "\u0428\u0440\u0438\u0444\u0442 \u0438\u043C\u0435\u043D\u0438 \u043F\u0440\u043E\u0444\u0438\u043B\u044F"
       },
       body: {
         en: "Customise the font family used for your username, only visible on your profile",
         es: "Customiza la familia tipogr\xE1fica usada en tu nombre de usuario, solo visible en tu perfil",
+        it: "Personalizza la famiglia di font utilizzata per il tuo nome utente, visibile solo sul tuo profilo",
         ru: "\u041D\u0430\u0441\u0442\u0440\u043E\u0439\u0442\u0435 \u0441\u0435\u043C\u0435\u0439\u0441\u0442\u0432\u043E \u0448\u0440\u0438\u0444\u0442\u043E\u0432, \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0435\u043C\u043E\u0435 \u0434\u043B\u044F \u0432\u0430\u0448\u0435\u0433\u043E \u0438\u043C\u0435\u043D\u0438 \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F; \u043E\u043D\u043E \u0431\u0443\u0434\u0435\u0442 \u0432\u0438\u0434\u043D\u043E \u0442\u043E\u043B\u044C\u043A\u043E \u0432 \u0432\u0430\u0448\u0435\u043C \u043F\u0440\u043E\u0444\u0438\u043B\u0435"
       },
       reminder: {
         en: "Changed your name font, don\u2019t forget to save!",
         es: "Fuente del nombre cambiada, \xA1no te olvides de guardar!",
+        it: "Hai cambiato il font del tuo nome, non dimenticarti di salvare!",
         ru: "\u0428\u0440\u0438\u0444\u0442 \u0438\u043C\u0435\u043D\u0438 \u0438\u0437\u043C\u0435\u043D\u0435\u043D, \u043D\u0435 \u0437\u0430\u0431\u0443\u0434\u044C\u0442\u0435 \u0441\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C!"
       }
     },
@@ -65075,6 +65881,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "None",
       de: "Keins",
       es: "Ninguno",
+      it: "Nessuno",
       sv: "Ingen",
       ru: "\u041D\u0435\u0442",
       banner: {
@@ -65082,6 +65889,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "None",
         de: "Keins",
         es: "Ninguno",
+        it: "Nessuno",
         sv: "Ingen",
         ru: "\u041D\u0435\u0442"
       },
@@ -65090,6 +65898,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "None",
         de: "Kein:e",
         es: "Ninguno",
+        it: "Nessuno",
         sv: "Ingen",
         ru: "\u041D\u0435\u0442"
       }
@@ -65099,6 +65908,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Current banner: {v}",
       de: "Aktuelles Banner: {v}",
       es: "Banner actual: {v}",
+      it: "Banner corrente: {v}",
       sv: "Nuvarande banner: {v}",
       ru: "\u0422\u0435\u043A\u0443\u0449\u0438\u0439 \u0431\u0430\u043D\u043D\u0435\u0440: {v}"
     },
@@ -65107,6 +65917,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Show your plays compared to last week",
         de: "Zeige deine Plays im Vergleich zur letzten Woche",
         es: "Mostrar tus reproducciones en comparaci\xF3n a la semana pasada",
+        it: "Mostra le tue riproduzioni rispetto alla settimana scorsa",
         sv: "Visa dina spelningar j\xE4mf\xF6rt med f\xF6rra veckan",
         ru: "\u041F\u043E\u043A\u0430\u0437\u0430\u0442\u044C \u0432\u0430\u0448\u0438 \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u044F \u043F\u043E \u0441\u0440\u0430\u0432\u043D\u0435\u043D\u0438\u044E \u0441 \u043F\u0440\u043E\u0448\u043B\u043E\u0439 \u043D\u0435\u0434\u0435\u043B\u0435\u0439"
       },
@@ -65114,6 +65925,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Compares your current progress to last week\u2019s average, requires Last.fm Pro",
         de: "Vergleicht deinen aktuellen Fortschritt mit dem Durchschnitt der letzten Woche, erfordert Last.fm Pro",
         es: "Compara tu progreso actual al promedio de la semana pasada, requiere Last.fm Pro",
+        it: "Compara il tuo progresso corrente rispetto alla media della settimana scorsa, richiede Last.fm Pro",
         sv: "J\xE4mf\xF6r denna veckans spelningar med f\xF6rra veckan, kr\xE4ver Last.fm Pro",
         ru: "\u0421\u0440\u0430\u0432\u043D\u0438\u0432\u0430\u0435\u0442 \u0432\u0430\u0448 \u0442\u0435\u043A\u0443\u0449\u0438\u0439 \u043F\u0440\u043E\u0433\u0440\u0435\u0441\u0441 \u0441\u043E \u0441\u0440\u0435\u0434\u043D\u0438\u043C \u043F\u043E\u043A\u0430\u0437\u0430\u0442\u0435\u043B\u0435\u043C \u043F\u0440\u043E\u0448\u043B\u043E\u0439 \u043D\u0435\u0434\u0435\u043B\u0438, \u0442\u0440\u0435\u0431\u0443\u0435\u0442\u0441\u044F Last.fm Pro"
       }
@@ -65122,6 +65934,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Manual",
       de: "Manuell",
       es: "Manual",
+      it: "Manuale",
       sv: "Manuellt",
       ru: "\u0412\u0440\u0443\u0447\u043D\u0443\u044E"
     },
@@ -65129,6 +65942,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Enter a date in the format YYYY-MM-DD",
       de: "Gebe ein Datum im Format JJJJ-MM-TT ein",
       es: "Ingresa una fecha en formato AAAA-MM-DD",
+      it: "Inserisci una data in formato YYYY-MM-DD",
       sv: "Skriv in ett datum med formatet YYYY-MM-DD",
       ru: "\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0434\u0430\u0442\u0443 \u0432 \u0444\u043E\u0440\u043C\u0430\u0442\u0435 \u0413\u0413\u0413\u0413-\u041C\u041C-\u0414\u0414"
     },
@@ -65136,6 +65950,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Minimum: {v}",
       de: "Minimum: {v}",
       es: "M\xEDnimo: {v}",
+      it: "Minimo: {v}",
       sv: "Minst: {v}",
       ru: "\u041C\u0438\u043D\u0438\u043C\u0443\u043C: {v}"
     },
@@ -65143,6 +65958,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Maximum: {v}",
       de: "Maximum: {v}",
       es: "M\xE1ximo: {v}",
+      it: "Massimo: {v}",
       sv: "Max: {v}",
       ru: "\u041C\u0430\u043A\u0441\u0438\u043C\u0443\u043C: {v}"
     },
@@ -65150,6 +65966,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Type a date manually",
       de: "Datum manuell eingeben",
       es: "Ingresa una fecha manualmente",
+      it: "Inserisci una data manualmente",
       sv: "Skriv in ett datum manuellt",
       ru: "\u0412\u0432\u0435\u0441\u0442\u0438 \u0434\u0430\u0442\u0443 \u0432\u0440\u0443\u0447\u043D\u0443\u044E"
     },
@@ -65157,6 +65974,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Red",
       de: "Rot",
       es: "Rojo",
+      it: "Rosso",
       pt: "Vermelho",
       sv: "R\xF6d",
       ru: "\u041A\u0440\u0430\u0441\u043D\u044B\u0439"
@@ -65165,6 +65983,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Orange",
       de: "Orange",
       es: "Naranja",
+      it: "Arancione",
       pt: "Laranja",
       ru: "\u041E\u0440\u0430\u043D\u0436\u0435\u0432\u044B\u0439"
     },
@@ -65172,6 +65991,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Yellow",
       de: "Gelb",
       es: "Amarillo",
+      it: "Giallo",
       pt: "Amarelo",
       sv: "Gul",
       ru: "\u0416\u0435\u043B\u0442\u044B\u0439"
@@ -65180,6 +66000,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Lime",
       de: "Limette",
       es: "Lima",
+      it: "Lime",
       pt: "Lima",
       ru: "\u0421\u0430\u043B\u0430\u0442\u043E\u0432\u044B\u0439"
     },
@@ -65187,6 +66008,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Green",
       de: "Gr\xFCn",
       es: "Verde",
+      it: "Verde",
       pt: "Verde",
       sv: "Gr\xF6n",
       ru: "\u0417\u0435\u043B\u0435\u043D\u044B\u0439"
@@ -65195,6 +66017,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Aqua",
       de: "T\xFCrkis",
       es: "Aqua",
+      it: "Turchese",
       pt: "\xC1gua",
       sv: "Turkos",
       ru: "\u0411\u0438\u0440\u044E\u0437\u043E\u0432\u044B\u0439"
@@ -65203,6 +66026,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Blue",
       de: "Blau",
       es: "Azul",
+      it: "Blu",
       pt: "Azul",
       sv: "Bl\xE5",
       ru: "\u0421\u0438\u043D\u0438\u0439"
@@ -65211,6 +66035,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Purple",
       de: "Lila",
       es: "Morado",
+      it: "Viola",
       pt: "Roxo",
       sv: "Lila",
       ru: "\u0424\u0438\u043E\u043B\u0435\u0442\u043E\u0432\u044B\u0439"
@@ -65219,6 +66044,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Pink",
       de: "Rosa",
       es: "Rosa",
+      it: "Rosa",
       pt: "Rosa",
       sv: "Rosa",
       ru: "\u0420\u043E\u0437\u043E\u0432\u044B\u0439"
@@ -65227,6 +66053,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Grey",
       de: "Grau",
       es: "Gris",
+      it: "Grigio",
       pt: "Cinza",
       sv: "Gr\xE5",
       ru: "\u0421\u0435\u0440\u044B\u0439"
@@ -65237,6 +66064,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Minis",
       de: "Minis",
       es: "Minis",
+      it: "Minis",
       sv: "Mini",
       ru: "\u041C\u0438\u043D\u0438"
     },
@@ -65244,6 +66072,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Play mini-games, puzzles, and interact with tools all powered by your listening history",
       de: "Spiele Minispiele, R\xE4tsel und interagiere mit Tools, die auf deinem H\xF6rverlauf basieren",
       es: "Juega minijuegos, puzzles, e interact\xFAa con herramientas que usan tu historial de reproducciones",
+      it: "Gioca a minigiochi, puzzle e interagisci con strumenti tutti basati sulla tua cronologia di riproduzione",
       sv: "Spela minispel, pussel, och interagera med verktyg som \xE4r helt baserad p\xE5 din lyssningshistorik",
       ru: "\u0418\u0433\u0440\u0430\u0439\u0442\u0435 \u0432 \u043C\u0438\u043D\u0438-\u0438\u0433\u0440\u044B, \u0440\u0435\u0448\u0430\u0439\u0442\u0435 \u0433\u043E\u043B\u043E\u0432\u043E\u043B\u043E\u043C\u043A\u0438 \u0438 \u0432\u0437\u0430\u0438\u043C\u043E\u0434\u0435\u0439\u0441\u0442\u0432\u0443\u0439\u0442\u0435 \u0441 \u0438\u043D\u0441\u0442\u0440\u0443\u043C\u0435\u043D\u0442\u0430\u043C\u0438, \u043E\u0441\u043D\u043E\u0432\u0430\u043D\u043D\u044B\u043C\u0438 \u043D\u0430 \u0432\u0430\u0448\u0435\u0439 \u0438\u0441\u0442\u043E\u0440\u0438\u0438 \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u0439"
     },
@@ -65251,6 +66080,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "No mini found for \u2018{v}\u2019",
       de: "Kein Mini f\xFCr \u201E{v}\u201C gefunden",
       es: "No se ha encontrado mini para {v}",
+      it: "Nessun mini trovato per \u2018{v}\u2019",
       sv: "Ingen mini hittad f\xF6r \u2018{v}\u2019",
       ru: "\u041C\u0438\u043D\u0438-\u0438\u0433\u0440\u0430 \u0434\u043B\u044F \xAB{v}\xBB \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D\u0430"
     },
@@ -65258,6 +66088,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       name: {
         en: "Pixel",
         es: "P\xEDxel",
+        it: "Pixel",
         sv: "Pixel",
         ru: "\u041F\u0438\u043A\u0441\u0435\u043B\u044C"
       },
@@ -65265,6 +66096,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Guess the album from its pixelated artwork and clues",
         de: "Errate das Album anhand des verpixelten Albumcovers und Hinweisen",
         es: "Averigua el \xE1lbum usando su c\xE1ratula pixelada y pistas",
+        it: "Indovina l'album dalla sua copertina pixellata e indizi",
         sv: "Gissa albumet fr\xE5n sin pixellerad konst och ledtr\xE5dar",
         ru: "\u0423\u0433\u0430\u0434\u0430\u0439\u0442\u0435 \u0430\u043B\u044C\u0431\u043E\u043C \u043F\u043E \u0435\u0433\u043E \u043F\u0438\u043A\u0441\u0435\u043B\u044C\u043D\u043E\u043C\u0443 \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u044E \u0438 \u043F\u043E\u0434\u0441\u043A\u0430\u0437\u043A\u0430\u043C"
       }
@@ -65274,6 +66106,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Rainbow",
         de: "Regenbogen",
         es: "Arco\xEDris",
+        it: "Arcobaleno",
         sv: "Rainbow",
         ru: "\u0420\u0430\u0434\u0443\u0433\u0430"
       },
@@ -65281,6 +66114,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Arrange your listening history into a swirl of colours",
         de: "Stelle deinen H\xF6rverlauf als Farbwirbel dar",
         es: "Organiza tu historial de reproducciones en un remolino de colores",
+        it: "Organizza la tua cronologia di riproduzione in un turbinio di colori",
         sv: "Ordna ihop din lyssningshistorik till en virvel av f\xE4rg",
         ru: "\u0420\u0430\u0437\u043B\u043E\u0436\u0438\u0442\u0435 \u0432\u0430\u0448\u0443 \u0438\u0441\u0442\u043E\u0440\u0438\u044E \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u0439 \u0432 \u0432\u0438\u0445\u0440\u0435 \u0446\u0432\u0435\u0442\u043E\u0432"
       }
@@ -65290,6 +66124,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Receipt",
         de: "Quittung",
         es: "Recibo",
+        it: "Scontrino",
         sv: "Kvitto",
         ru: "\u0427\u0435\u043A"
       },
@@ -65297,6 +66132,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Print out your top tracks as a receipt",
         de: "Drucke deine Top-Songs als Quittung aus",
         es: "Imprime tus temas m\xE1s escuchados como un recibo",
+        it: "Stampa le tue canzoni pi\xF9 ascoltate come uno scontrino",
         sv: "Skriv ut dina toppl\xE5tar som ett kvitto",
         ru: "\u0420\u0430\u0441\u043F\u0435\u0447\u0430\u0442\u0430\u0439\u0442\u0435 \u0432\u0430\u0448\u0438 \u043B\u0443\u0447\u0448\u0438\u0435 \u0442\u0440\u0435\u043A\u0438 \u0432 \u0432\u0438\u0434\u0435 \u0447\u0435\u043A\u0430"
       }
@@ -65305,6 +66141,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Generate a personalised image based on your listening history and options",
       de: "Erstelle ein personalisiertes Bild basierend auf deinem H\xF6rverlauf und deinen Einstellungen",
       es: "Genera una imagen personalizada basada en tu historial de reproducciones y opciones",
+      it: "Genera un'immagine personalizzata basata sulla tua cronologia di riproduzione e opzioni",
       sv: "Skapa en personlig bild baserad p\xE5 din lyssningshistoria och inst\xE4llningar",
       ru: "\u0421\u043E\u0437\u0434\u0430\u0442\u044C \u043F\u0435\u0440\u0441\u043E\u043D\u0430\u043B\u0438\u0437\u0438\u0440\u043E\u0432\u0430\u043D\u043D\u043E\u0435 \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435 \u043D\u0430 \u043E\u0441\u043D\u043E\u0432\u0435 \u0432\u0430\u0448\u0435\u0439 \u0438\u0441\u0442\u043E\u0440\u0438\u0438 \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u0439 \u0438 \u043D\u0430\u0441\u0442\u0440\u043E\u0435\u043A"
     },
@@ -65313,6 +66150,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "If you\u2019re looking for more, try out Last.fm\u2019s own {a}Labs feature{/a}",
       de: "Wenn du nach mehr suchst, probiere die {a}Labs-Funktion{/a} von Last.fm aus",
       es: "Si est\xE1s buscando m\xE1s, prueba algo similar en {a}Last.fm Labs{/a}",
+      it: "Se stai cercando di pi\xF9, prova la {a}funzione Labs{/a} di Last.fm",
       sv: "Om du letar efter lite mer, testa Last.fm\u2019s {a}egna Labs{/a}",
       ru: "\u0415\u0441\u043B\u0438 \u0432\u044B \u0438\u0449\u0435\u0442\u0435 \u0447\u0442\u043E-\u0442\u043E \u0435\u0449\u0435, \u043F\u043E\u043F\u0440\u043E\u0431\u0443\u0439\u0442\u0435 {a}\u0444\u0443\u043D\u043A\u0446\u0438\u044E Labs{/a} \u043E\u0442 Last.fm"
     },
@@ -65320,6 +66158,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Find your shared artists, albums, and tracks with another",
       de: "Finde heraus, welche gemeinsamen K\xFCnstler:innen, Alben und Tracks du mit jemand anderem teilst",
       es: "Encuentra artistas, \xE1lbumes, y temas compartidos con alguien m\xE1s",
+      it: "Trova gli artisti, album e brani che condividi con un altro utente",
       sv: "Hitta dina delade artister, album, och l\xE5tar med n\xE5n annan",
       ru: "\u041D\u0430\u0439\u0434\u0438\u0442\u0435 \u043E\u0431\u0449\u0438\u0445 \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u0435\u0439, \u0430\u043B\u044C\u0431\u043E\u043C\u044B \u0438 \u0442\u0440\u0435\u043A\u0438 \u0441 \u0434\u0440\u0443\u0433\u0438\u043C \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u0435\u043C"
     },
@@ -65327,6 +66166,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Enter a profile",
       de: "Profil eingeben",
       es: "Ingresa un perfil",
+      it: "Inserisci un profilo",
       sv: "Skriv in ett anv\xE4ndarnamn",
       ru: "\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u043F\u0440\u043E\u0444\u0438\u043B\u044C"
     },
@@ -65334,6 +66174,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Compare with",
       de: "Vergleichen mit",
       es: "Comparar con",
+      it: "Confronta con",
       sv: "J\xE4mf\xF6r",
       ru: "\u0421\u0440\u0430\u0432\u043D\u0438\u0442\u044C \u0441"
     },
@@ -65341,6 +66182,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "{v} Settings",
       de: "{v}-Einstellungen",
       es: "{v} Opciones",
+      it: "Impostazioni {v}",
       sv: "{v} Inst\xE4llningar",
       ru: "\u041D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438 {v}"
     },
@@ -65349,6 +66191,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "This page doesn\u2019t seem official",
         de: "Diese Seite scheint nicht offiziell zu sein",
         es: "Esta p\xE1gina no parece ser oficial",
+        it: "Questa pagina non sembra ufficiale",
         sv: "Denna sida ser inte ut att vara officiell",
         ru: "\u042D\u0442\u0430 \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u0430 \u043D\u0435 \u043A\u0430\u0436\u0435\u0442\u0441\u044F \u043E\u0444\u0438\u0446\u0438\u0430\u043B\u044C\u043D\u043E\u0439"
       },
@@ -65356,6 +66199,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Navigate to {v} instead",
         de: "Stattdessen zu {v} wechseln",
         es: "Navega a {v} en su lugar",
+        it: "Naviga a {v} piuttosto",
         sv: "Hoppa till {v} ist\xE4llet",
         ru: "\u041F\u0435\u0440\u0435\u0439\u0442\u0438 \u043A {v} \u0432\u043C\u0435\u0441\u0442\u043E \u044D\u0442\u043E\u0433\u043E"
       }
@@ -65364,6 +66208,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       // lyrics
       en: "Lyrics",
       es: "Letra",
+      it: "Testo",
       pt: "Letra",
       sv: "Lyrics",
       ru: "\u0422\u0435\u043A\u0441\u0442\u044B \u043F\u0435\u0441\u0435\u043D",
@@ -65371,6 +66216,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         // the game
         en: "Lyrics",
         es: "Letra",
+        it: "Testo",
         pt: "Letra",
         sv: "Lyrics",
         ru: "\u0422\u0435\u043A\u0441\u0442\u044B \u043F\u0435\u0441\u0435\u043D"
@@ -65379,6 +66225,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Guess the song from a random lyric",
         de: "Errate den Song anhand eines zuf\xE4lligen Songtextes",
         es: "Averigua el tema usando una letra aleatoria",
+        it: "Indovina la canzone da una riga casuale del testo",
         pt: "Adivinhe a m\xFAsica a partir de uma letra aleat\xF3ria",
         sv: "Gissa l\xE5ten fr\xE5n en slumpad l\xE5ttext",
         ru: "\u0423\u0433\u0430\u0434\u0430\u0439\u0442\u0435 \u043F\u0435\u0441\u043D\u044E \u043F\u043E \u0441\u043B\u0443\u0447\u0430\u0439\u043D\u043E\u0439 \u0441\u0442\u0440\u043E\u0447\u043A\u0435 \u0442\u0435\u043A\u0441\u0442\u0430"
@@ -65388,6 +66235,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Jumbled title",
       de: "Song-Durcheinander",
       es: "T\xEDtulo desordenado",
+      it: "Titolo distorto",
       pt: "T\xEDtulo embaralhado",
       sv: "Omr\xF6rd titel",
       ru: "\u041F\u0435\u0440\u0435\u043F\u0443\u0442\u0430\u043D\u043D\u043E\u0435 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435"
@@ -65396,6 +66244,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Re-jumble",
       de: "Neu mischen",
       es: "Volver a desordenar",
+      it: "Re-distorci titolo",
       pt: "Reembaralhar",
       sv: "R\xF6r om igen",
       ru: "\u041F\u0435\u0440\u0435\u043C\u0435\u0448\u0430\u0442\u044C \u0437\u0430\u043D\u043E\u0432\u043E"
@@ -65404,6 +66253,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Begin",
       de: "Start",
       es: "Empezar",
+      it: "Inizia",
       pt: "Come\xE7ar",
       sv: "B\xF6rja",
       ru: "\u041D\u0430\u0447\u0430\u0442\u044C"
@@ -65412,6 +66262,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Guess the album name with the pixelated cover, jumbled title, and hints!",
       de: "Errate den Albumtitel mit verpixeltem Cover, durcheinandergew\xFCrfeltem Titel und Hinweisen!",
       es: "\xA1Averigua el nombre del \xE1lbum usando la c\xE1ratula pixelada, t\xEDtulo desordenado, y pistas!",
+      it: "Indovina il nome dell'album con la cover pixellata, il titolo distorto, e indizi!",
       pt: "Adivinhe o nome do \xE1lbum com a capa pixelada, t\xEDtulo embaralhado e dicas!",
       sv: "Gissa albumtiteln med pixellerad konst, omr\xF6rd titel, och ledtr\xE5dar!",
       ru: "\u0423\u0433\u0430\u0434\u0430\u0439\u0442\u0435 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u0430\u043B\u044C\u0431\u043E\u043C\u0430 \u043F\u043E \u043F\u0438\u043A\u0441\u0435\u043B\u044C\u043D\u043E\u043C\u0443 \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u044E, \u043F\u0435\u0440\u0435\u043F\u0443\u0442\u0430\u043D\u043D\u043E\u043C\u0443 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u044E \u0438 \u043F\u043E\u0434\u0441\u043A\u0430\u0437\u043A\u0430\u043C!"
@@ -65420,6 +66271,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Add hint",
       de: "Gib\u2019 mir einen Tipp!",
       es: "Dar pista",
+      it: "Aggiungi indizio",
       pt: "Adicionar dica",
       sv: "L\xE4gg till ledtr\xE5d",
       ru: "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u043F\u043E\u0434\u0441\u043A\u0430\u0437\u043A\u0443"
@@ -65428,6 +66280,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Give up",
       de: "Aufgeben",
       es: "Rendirse",
+      it: "Arrenditi",
       pt: "Desistir",
       sv: "Ge upp",
       ru: "\u0421\u0434\u0430\u0442\u044C\u0441\u044F"
@@ -65436,6 +66289,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "You guessed correctly!",
       de: "Du hast richtig geraten!",
       es: "\xA1Lo has averiguado!",
+      it: "Hai indovinato!",
       pt: "Voc\xEA adivinhou corretamente!",
       sv: "Du gissade r\xE4tt!",
       ru: "\u0412\u044B \u0443\u0433\u0430\u0434\u0430\u043B\u0438 \u043F\u0440\u0430\u0432\u0438\u043B\u044C\u043D\u043E!"
@@ -65444,6 +66298,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Guess",
       de: "Raten",
       es: "Averiguar",
+      it: "Indovina",
       pt: "Adivinhar",
       sv: "Gissa",
       ru: "\u0423\u0433\u0430\u0434\u0430\u0442\u044C"
@@ -65452,6 +66307,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Enter a guess",
       de: "Gebe eine Vermutung ein",
       es: "Ingresa tu respuesta",
+      it: "Inserisci la tua risposta",
       pt: "Digite um palpite",
       sv: "Skriv in en gissning",
       ru: "\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0434\u043E\u0433\u0430\u0434\u043A\u0443"
@@ -65460,6 +66316,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Hints",
       de: "Tipps",
       es: "Pistas",
+      it: "Indizi",
       pt: "Dicas",
       sv: "Ledtr\xE5dar",
       ru: "\u041F\u043E\u0434\u0441\u043A\u0430\u0437\u043A\u0438",
@@ -65467,6 +66324,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "You have {v} plays on this album",
         de: "Du hast {v} mal einen Song von diesem Album geh\xF6rt",
         es: "Tienes {v} reproducciones a este \xE1lbum",
+        it: "Hai {v} riproduzioni di questo album",
         pt: "Voc\xEA tem {v} reprodu\xE7\xF5es neste \xE1lbum",
         sv: "Du har {v} lyssningar p\xE5 det h\xE4r albumet",
         ru: "\u0423 \u0432\u0430\u0441 {v} \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u0439 \u044D\u0442\u043E\u0433\u043E \u0430\u043B\u044C\u0431\u043E\u043C\u0430"
@@ -65475,6 +66333,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Album was released on {v}",
         de: "Das Album wurde am {v} ver\xF6ffentlicht",
         es: "El {\xE1lbum} fue lanzado en {v}",
+        it: "L'album \xE8 stato rilasciato il {v}",
         pt: "O \xE1lbum foi lan\xE7ado em {v}",
         sv: "Albumet sl\xE4pptes {v}",
         ru: "\u0410\u043B\u044C\u0431\u043E\u043C \u0431\u044B\u043B \u0432\u044B\u043F\u0443\u0449\u0435\u043D {v}"
@@ -65483,6 +66342,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "The artist is tagged with {v}",
         de: "Der/die K\xFCnstler:in ist mit {v} getaggt",
         es: "El artista tiene {v} como tags",
+        it: "L'artista \xE8 taggato come {v}",
         pt: "O artista foi marcado com {v}",
         sv: "Artisten har taggats som {v}",
         ru: "\u0418\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C \u043E\u0442\u043C\u0435\u0447\u0435\u043D \u0442\u0435\u0433\u043E\u043C {v}"
@@ -65491,6 +66351,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "The artist was born {v}",
         de: "Der/die K\xFCnstler:in wurde {v} geboren",
         es: "El artista naci\xF3 en {v}",
+        it: "L'artista \xE8 nato il {v}",
         pt: "O artista nasceu em {v}",
         sv: "Artisten var f\xF6dd {v}",
         ru: "\u0418\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C \u0440\u043E\u0434\u0438\u043B\u0441\u044F {v}"
@@ -65500,6 +66361,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "The album was {name} by {artist}",
       de: "Das Album war {name} von {artist}",
       es: "El \xE1lbum era {name} por {artist}",
+      it: "Il nome dell'album era {name} di {artist}",
       pt: "O \xE1lbum era {name} de {artist}",
       sv: "Albumet var {name} av {artist}",
       ru: "\u0410\u043B\u044C\u0431\u043E\u043C\u043E\u043C \u0431\u044B\u043B {name} \u043E\u0442 {artist}"
@@ -65508,6 +66370,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Time is up!",
       de: "Die Zeit ist um!",
       es: "\xA1Se acab\xF3 el tiempo!",
+      it: "Il tempo \xE8 scaduto",
       pt: "O tempo acabou!",
       sv: "Slut p\xE5 tid!",
       ru: "\u0412\u0440\u0435\u043C\u044F \u0432\u044B\u0448\u043B\u043E!"
@@ -65516,6 +66379,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Global",
       de: "Weltweit",
       es: "Global",
+      it: "Globali",
       pt: "Global",
       sv: "Globalt",
       ru: "\u0413\u043B\u043E\u0431\u0430\u043B\u044C\u043D\u044B\u0439"
@@ -65524,6 +66388,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Mutuals",
       de: "Mutuals",
       es: "Mutuales",
+      it: "Reciproci",
       pt: "Mutuais",
       sv: "\xD6msesidiga f\xF6ljare",
       ru: "\u0412\u0437\u0430\u0438\u043C\u043D\u044B\u0435 \u043F\u043E\u0434\u043F\u0438\u0441\u043A\u0438"
@@ -65538,6 +66403,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       ru: "Last.fm \u043D\u0435 \u0441\u043C\u043E\u0433 \u0437\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044C \u044D\u0442\u043E\u0442 \u043A\u043E\u043C\u043F\u043E\u043D\u0435\u043D\u0442"
     },
     last_scrobbled_replace: {
+      // dont translate this, its replaced
+      // literally word for word from the last.fm text
+      // for use in code
       en: "{u} last scrobbled\u2026",
       de: "{u} scrobbelte zuletzt\u2026",
       fr: "{u} a scrobbl\xE9 pour la derni\xE8re fois...",
@@ -65573,6 +66441,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "{u} commented",
       de: "{u} hat kommentiert",
       es: "{u} coment\xF3",
+      it: "{u} ha commentato",
       pt: "{u} comentou",
       sv: "{u} kommenterade",
       ru: "{u} \u043F\u0440\u043E\u043A\u043E\u043C\u043C\u0435\u043D\u0442\u0438\u0440\u043E\u0432\u0430\u043B(\u0430)"
@@ -65581,6 +66450,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "{u} and {c} others commented",
       de: "{u} und {c} andere haben kommentiert",
       es: "{u} y {c} otros comentaron",
+      it: "{u} e altri {c} hanno commentato",
       pt: "{u} e {c} outros comentaram",
       sv: "{u} och {c} andra kommenterade",
       ru: "{u} \u0438 \u0435\u0449\u0435 {c} \u043F\u0440\u043E\u043A\u043E\u043C\u043C\u0435\u043D\u0442\u0438\u0440\u043E\u0432\u0430\u043B\u0438"
@@ -65589,6 +66459,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "{u} replied",
       de: "{u} hat geantwortet",
       es: "{u} respondi\xF3",
+      it: "{u} ha risposto",
       pt: "{u} respondeu",
       sv: "{u} svarade",
       ru: "{u} \u043E\u0442\u0432\u0435\u0442\u0438\u043B(\u0430)"
@@ -65597,6 +66468,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "{u} and {c} others replied",
       de: "{u} und {c} andere haben geantwortet",
       es: "{u} y {c} otros respondieron",
+      it: "{u} e altri {c} hanno risposto",
       pt: "{u} e {c} outros responderam",
       sv: "{u} och {c} andra svarade",
       ru: "{u} \u0438 \u0435\u0449\u0435 {c} \u043E\u0442\u0432\u0435\u0442\u0438\u043B\u0438"
@@ -65605,6 +66477,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Your obsession has expired",
       de: "Deine Obsession ist ausgelaufen",
       es: "Tu obsesi\xF3n ha expirado",
+      it: "La tua passione \xE8 scaduta",
       pt: "Sua obsess\xE3o expirou",
       sv: "Din besatthet har tagit slut",
       ru: "\u0412\u0430\u0448\u0430 \u043E\u0434\u0435\u0440\u0436\u0438\u043C\u043E\u0441\u0442\u044C \u0438\u0441\u0442\u0435\u043A\u043B\u0430"
@@ -65613,6 +66486,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "View your {m} listening report",
       de: "Schaue deinen H\xF6rbericht an",
       es: "Ver tu informe de reproducci\xF3n de {m}",
+      it: "Visualizza il tuo rapporto di ascolto di {m}",
       pt: "Ver seu relat\xF3rio de reprodu\xE7\xE3o de {m}",
       sv: "Visa din lyssningsrapport f\xF6r {m}",
       ru: "\u041F\u043E\u0441\u043C\u043E\u0442\u0440\u0435\u0442\u044C \u0432\u0430\u0448 \u043E\u0442\u0447\u0435\u0442 \u043E \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u044F\u0445 \u0437\u0430 {m}"
@@ -65621,6 +66495,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "You have {c} mutual listeners",
       de: "Du hast {c} gemeinsame H\xF6rer",
       es: "Tienes {c} oyentes mutuales",
+      it: "Hai {c} ascoltatori in comune",
       pt: "Voc\xEA tem {c} ouvintes m\xFAtuos",
       sv: "Du har {c} \xF6msesidiga lyssnare",
       ru: "\u0423 \u0432\u0430\u0441 {c} \u0432\u0437\u0430\u0438\u043C\u043D\u044B\u0445 \u0441\u043B\u0443\u0448\u0430\u0442\u0435\u043B\u0435\u0439"
@@ -65629,6 +66504,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "You have no mutual listeners",
       de: "Du hast keine gemeinsamen H\xF6rer",
       es: "No tienes oyentes mutuales",
+      it: "Non hai ascoltatori in comune",
       pt: "Voc\xEA n\xE3o tem ouvintes m\xFAtuos",
       sv: "Du har inga \xF6msesidiga lyssnare",
       ru: "\u0423 \u0432\u0430\u0441 \u043D\u0435\u0442 \u0432\u0437\u0430\u0438\u043C\u043D\u044B\u0445 \u0441\u043B\u0443\u0448\u0430\u0442\u0435\u043B\u0435\u0439"
@@ -65637,6 +66513,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "This can be due to either simply lacking mutuals who listen or the page being subject to a broken redirect.",
       de: "Dies kann entweder an fehlenden Mutuals oder einer fehlerhaften Seitenweiterleitung liegen.",
       es: "Esto puede deberse a que simplemente no hay mutuales que escuchen o a que la p\xE1gina tiene una redirecci\xF3n defectuosa.",
+      it: "Questo potrebbe essere semplicemente a causa della mancanza di ascoltatori in comune o la pagina potrebbe essre sottoposta ad un reindirizzamento malfunzionante.",
       pt: "Isso pode ser devido a falta de mutuais que ou\xE7am ou a p\xE1gina estar sujeita a um redirecionamento quebrado.",
       sv: "Det kan inneb\xE4ra att du antingen inte har \xF6msesidiga f\xF6ljare som lyssnar eller att sidan har en gammal omdirigering.",
       ru: "\u042D\u0442\u043E \u043C\u043E\u0436\u0435\u0442 \u0431\u044B\u0442\u044C \u0441\u0432\u044F\u0437\u0430\u043D\u043E \u043B\u0438\u0431\u043E \u0441 \u043E\u0442\u0441\u0443\u0442\u0441\u0442\u0432\u0438\u0435\u043C \u0432\u0437\u0430\u0438\u043C\u043D\u044B\u0445 \u0441\u043B\u0443\u0448\u0430\u0442\u0435\u043B\u0435\u0439, \u043B\u0438\u0431\u043E \u0441 \u043D\u0435\u0438\u0441\u043F\u0440\u0430\u0432\u043D\u044B\u043C \u043F\u0435\u0440\u0435\u043D\u0430\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435\u043C \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u044B."
@@ -65646,6 +66523,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Quick access",
         de: "Schnellzugriff",
         es: "Acceso r\xE1pido",
+        it: "Accesso rapido",
         pt: "Acesso r\xE1pido",
         sv: "Snabb\xE5tkomst",
         ru: "\u0411\u044B\u0441\u0442\u0440\u044B\u0439 \u0434\u043E\u0441\u0442\u0443\u043F"
@@ -65654,6 +66532,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Arrange your navigation menu to suit your usage best",
         de: "Ordne dein Navigationsmen\xFC so an, dass es am besten zu deiner Nutzung passt",
         es: "Ordena tu men\xFA de navegaci\xF3n como m\xE1s te agrade",
+        it: "Riordina il tuo menu di navigazione per adattarlo meglio alle tue preferenze",
         pt: "Organize seu menu de navega\xE7\xE3o para melhor se adequar ao seu uso",
         sv: "Ordna din navigationsmeny f\xF6r att b\xE4st passa dig",
         ru: "\u041D\u0430\u0441\u0442\u0440\u043E\u0439\u0442\u0435 \u0432\u0430\u0448\u0435 \u043D\u0430\u0432\u0438\u0433\u0430\u0446\u0438\u043E\u043D\u043D\u043E\u0435 \u043C\u0435\u043D\u044E, \u0447\u0442\u043E\u0431\u044B \u043E\u043D\u043E \u043D\u0430\u0438\u043B\u0443\u0447\u0448\u0438\u043C \u043E\u0431\u0440\u0430\u0437\u043E\u043C \u0441\u043E\u043E\u0442\u0432\u0435\u0442\u0441\u0442\u0432\u043E\u0432\u0430\u043B\u043E \u0432\u0430\u0448\u0435\u043C\u0443 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u043D\u0438\u044E"
@@ -65663,6 +66542,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Edit quick access",
       de: "Schnellzugriff bearbeiten",
       es: "Editar acceso r\xE1pido",
+      it: "Modifica accesso rapido",
       pt: "Editar acesso r\xE1pido",
       sv: "Redigera snabb\xE5tkomst",
       ru: "\u0420\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u0431\u044B\u0441\u0442\u0440\u044B\u0439 \u0434\u043E\u0441\u0442\u0443\u043F"
@@ -65671,6 +66551,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Show option to change language",
       de: "Option zum \xC4ndern der Sprache anzeigen",
       es: "Mostrar opci\xF3n para cambiar idioma",
+      it: "Mostra opzione per cambiare lingua",
       pt: "Mostrar op\xE7\xE3o para mudar idioma",
       sv: "Visa alternativet att \xE4ndra spr\xE5k",
       ru: "\u041F\u043E\u043A\u0430\u0437\u0430\u0442\u044C \u043E\u043F\u0446\u0438\u044E \u0441\u043C\u0435\u043D\u044B \u044F\u0437\u044B\u043A\u0430"
@@ -65679,6 +66560,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Branding",
       es: "Logo",
       de: "Branding",
+      it: "Branding",
       sv: "Branding",
       ru: "\u0411\u0440\u0435\u043D\u0434\u0438\u043D\u0433"
     },
@@ -65687,6 +66569,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Branding type",
         de: "Branding-Art",
         es: "Tipo de logo",
+        it: "Tipo di logo",
         pt: "Tipo de branding",
         sv: "Brandingalternativ",
         ru: "\u0422\u0438\u043F \u0431\u0440\u0435\u043D\u0434\u0438\u043D\u0433\u0430"
@@ -65695,6 +66578,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Decide which branding source to use for the header",
         de: "W\xE4hle aus, welches Branding f\xFCr die Kopfzeile verwendet werden soll",
         es: "Elige cu\xE1l logo usar para el encabezado",
+        it: "Decidi quale sorgente di branding utilizzare per l'intestazione",
         pt: "Escolha qual logo usar para o cabe\xE7alho",
         sv: "V\xE4lj vilken sorts branding f\xF6r att anv\xE4nda p\xE5 sidhuvudet",
         ru: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435, \u043A\u0430\u043A\u043E\u0439 \u0438\u0441\u0442\u043E\u0447\u043D\u0438\u043A \u0431\u0440\u0435\u043D\u0434\u0438\u043D\u0433\u0430 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u044C \u0434\u043B\u044F \u0437\u0430\u0433\u043E\u043B\u043E\u0432\u043A\u0430"
@@ -65705,6 +66589,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Enable rainfall",
         de: "Regen aktivieren",
         es: "Activar lluvia",
+        it: "Attiva pioggia",
         pt: "Ativar chuva",
         sv: "Aktivera regn",
         ru: "\u0412\u043A\u043B\u044E\u0447\u0438\u0442\u044C \u044D\u0444\u0444\u0435\u043A\u0442 \u0434\u043E\u0436\u0434\u044F"
@@ -65713,6 +66598,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Immerse yourself in soothing visual rain",
         de: "Tauche in den beruhigenden visuellen Regen ein",
         es: "Deja que la relajante lluvia caiga ante ti",
+        it: "Immergiti in una pioggia visuale rilassante",
         pt: "Mergulhe em uma chuva visual relaxante",
         sv: "Omsluta dig sj\xE4lv i en lugnande regneffekt",
         ru: "\u041F\u043E\u0433\u0440\u0443\u0437\u0438\u0442\u0435\u0441\u044C \u0432 \u0443\u0441\u043F\u043E\u043A\u0430\u0438\u0432\u0430\u044E\u0449\u0438\u0439 \u0432\u0438\u0437\u0443\u0430\u043B\u044C\u043D\u044B\u0439 \u0434\u043E\u0436\u0434\u044C"
@@ -65722,6 +66608,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Images",
       de: "Bilder",
       es: "Im\xE1genes",
+      it: "Immagini",
       pt: "Imagens",
       sv: "Bilder",
       ru: "\u0418\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u044F"
@@ -65730,6 +66617,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Control animation of GIFs",
       de: "Steuere die Animation von GIFs",
       es: "Controlar animaci\xF3n de GIFs",
+      it: "Controlla l'animazione di GIF",
       pt: "Controlar anima\xE7\xE3o de GIFs",
       sv: "Kontrollera GIF-animation",
       ru: "\u0423\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435 \u0430\u043D\u0438\u043C\u0430\u0446\u0438\u0435\u0439 GIF"
@@ -65738,6 +66626,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Always animate",
       de: "Immer animieren",
       es: "Siempre animar",
+      it: "Anima sempre",
       pt: "Sempre animar",
       sv: "Animera alltid",
       ru: "\u0412\u0441\u0435\u0433\u0434\u0430 \u0430\u043D\u0438\u043C\u0438\u0440\u043E\u0432\u0430\u0442\u044C"
@@ -65746,6 +66635,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Only on hover",
       de: "Nur beim Hovern",
       es: "Solo al pasar el cursor",
+      it: "Solo al passaggio del mouse",
       pt: "Apenas ao passar o mouse",
       sv: "Endast under hovring",
       ru: "\u0422\u043E\u043B\u044C\u043A\u043E \u043F\u0440\u0438 \u043D\u0430\u0432\u0435\u0434\u0435\u043D\u0438\u0438"
@@ -65754,6 +66644,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Prevent animations in profile banners",
       de: "Deaktiviere Animationen in Profilbannern",
       es: "Prevenir animaciones en banners de perfil",
+      it: "Blocca animazioni nei banner del profilo",
       pt: "Impedir anima\xE7\xF5es em banners de perfil",
       sv: "St\xE4ng av animationer i profilbanners",
       ru: "\u041F\u0440\u0435\u0434\u043E\u0442\u0432\u0440\u0430\u0442\u0438\u0442\u044C \u0430\u043D\u0438\u043C\u0430\u0446\u0438\u044E \u0432 \u0431\u0430\u043D\u043D\u0435\u0440\u0430\u0445 \u043F\u0440\u043E\u0444\u0438\u043B\u044F"
@@ -65762,6 +66653,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Change zoom level",
       de: "Zoomlevel \xE4ndern",
       es: "Cambiar nivel de zoom",
+      it: "Cambia livello di zoom",
       pt: "Alterar n\xEDvel de zoom",
       sv: "\xC4ndra zoomniv\xE5",
       ru: "\u0418\u0437\u043C\u0435\u043D\u0438\u0442\u044C \u0443\u0440\u043E\u0432\u0435\u043D\u044C \u043C\u0430\u0441\u0448\u0442\u0430\u0431\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u044F"
@@ -65770,6 +66662,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "User avatars",
       de: "Benutzer-Profilbilder",
       es: "Avatars de usuario",
+      it: "Foto profilo degli utenti",
       pt: "Avatares de usu\xE1rio",
       sv: "Anv\xE4ndarprofilbilder",
       ru: "\u0410\u0432\u0430\u0442\u0430\u0440\u044B \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u0435\u0439"
@@ -65778,6 +66671,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Artists and albums",
       de: "K\xFCnstler:innen und Alben",
       es: "Artistas y \xE1lbumes",
+      it: "Artisti e album",
       pt: "Artistas e \xE1lbuns",
       sv: "Artister och album",
       ru: "\u0418\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u0438 \u0438 \u0430\u043B\u044C\u0431\u043E\u043C\u044B"
@@ -65786,6 +66680,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Apply to",
       de: "Anwenden auf",
       es: "Aplicar a",
+      it: "Applica a",
       pt: "Aplicar a",
       sv: "Till\xE4mpa till",
       ru: "\u041F\u0440\u0438\u043C\u0435\u043D\u0438\u0442\u044C \u043A"
@@ -65794,6 +66689,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Change images for",
       de: "Bilder \xE4ndern f\xFCr",
       es: "Cambiar im\xE1genes para",
+      it: "Cambia immagini per",
       pt: "Alterar imagens para",
       sv: "\xC4ndra bild f\xF6r",
       ru: "\u0418\u0437\u043C\u0435\u043D\u0438\u0442\u044C \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u044F \u0434\u043B\u044F"
@@ -65803,6 +66699,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Don\u2019t get lost",
         de: "Verirre dich nicht",
         es: "No te pierdas",
+        it: "Non perderti",
         pt: "N\xE3o se perca",
         sv: "G\xE5 inte vilse",
         ru: "\u041D\u0435 \u043F\u043E\u0442\u0435\u0440\u044F\u0439\u0442\u0435\u0441\u044C"
@@ -65811,6 +66708,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "This link is taking you to the following location",
         de: "Dieser Link f\xFChrt dich zu folgendem Ort",
         es: "Este link te est\xE1 llevando a la siguiente ubicaci\xF3n",
+        it: "Questo link ti sta portando nella seguente posizione",
         pt: "Este link est\xE1 te levando para o seguinte local",
         sv: "L\xE4nken tar dig till den h\xE4r platsen",
         ru: "\u042D\u0442\u0430 \u0441\u0441\u044B\u043B\u043A\u0430 \u0432\u0435\u0434\u0435\u0442 \u0432\u0430\u0441 \u0432 \u0441\u043B\u0435\u0434\u0443\u044E\u0449\u0435\u0435 \u043C\u0435\u0441\u0442\u043E\u043F\u043E\u043B\u043E\u0436\u0435\u043D\u0438\u0435"
@@ -65821,6 +66719,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Be careful",
         de: "Vorsicht",
         es: "Ten cuidado",
+        it: "Fai attenzione",
         pt: "Tenha cuidado",
         sv: "Var f\xF6rsiktig",
         ru: "\u0411\u0443\u0434\u044C\u0442\u0435 \u043E\u0441\u0442\u043E\u0440\u043E\u0436\u043D\u044B"
@@ -65829,6 +66728,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "This link can open an application on your device",
         de: "Dieser Link kann eine Anwendung auf deinem Ger\xE4t \xF6ffnen",
         es: "Este link puede abrir una aplicaci\xF3n en tu dispositivo",
+        it: "Questo link pu\xF2 aprire un'applicazione sul tuo dispositivo",
         pt: "Este link pode abrir um aplicativo no seu dispositivo",
         sv: "L\xE4nken kan \xF6ppna en applikation p\xE5 din enhet",
         ru: "\u042D\u0442\u0430 \u0441\u0441\u044B\u043B\u043A\u0430 \u043C\u043E\u0436\u0435\u0442 \u043E\u0442\u043A\u0440\u044B\u0442\u044C \u043F\u0440\u0438\u043B\u043E\u0436\u0435\u043D\u0438\u0435 \u043D\u0430 \u0432\u0430\u0448\u0435\u043C \u0443\u0441\u0442\u0440\u043E\u0439\u0441\u0442\u0432\u0435"
@@ -65838,6 +66738,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Trust {v} links in the future",
       de: "{v}-Links zuk\xFCnftig vertrauen",
       es: "Confiar en los v\xEDnculos de {v} en el futuro",
+      it: "Fidati dei link {v} in futuro",
       pt: "Confiar em links de {v} no futuro",
       sv: "Lita p\xE5 l\xE4nkar fr\xE5n {v} i framtiden",
       ru: "\u0414\u043E\u0432\u0435\u0440\u044F\u0442\u044C \u0441\u0441\u044B\u043B\u043A\u0430\u043C {v} \u0432 \u0431\u0443\u0434\u0443\u0449\u0435\u043C"
@@ -65847,6 +66748,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Visit",
       de: "Besuchen",
       es: "Visitar",
+      it: "Visita",
       pt: "Visitar",
       sv: "Bes\xF6k",
       ru: "\u041F\u043E\u0441\u0435\u0442\u0438\u0442\u044C"
@@ -65856,6 +66758,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Auto correct and redirect scrobbles",
         de: "Automatisches Korrigieren und Umleiten von Scrobbles",
         es: "Corregir y redireccionar autom\xE1ticamente los scrobblings",
+        it: "Correggi automaticamente e reindirizza gli scrobbling",
         pt: "Corrigir e redirecionar scrobbles automaticamente",
         sv: "Autokorrigering och omdirigering av skrobblingar",
         ru: "\u0410\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u0435\u0441\u043A\u0438 \u0438\u0441\u043F\u0440\u0430\u0432\u043B\u044F\u0442\u044C \u0438 \u043F\u0435\u0440\u0435\u043D\u0430\u043F\u0440\u0430\u0432\u043B\u044F\u0442\u044C \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u044B"
@@ -65864,6 +66767,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Changes artist names based on the legacy Last.fm redirect system pre-2015, causes many issues",
         de: "\xC4ndert K\xFCnstlernamen basierend auf dem Legacy-Last.fm-Umleitungssystem vor 2015, verursacht viele Probleme",
         es: "Cambia el nombre del artista basado en el sistema cl\xE1sico de redirecciones de Last.fm pre-2015, causa varios problemas",
+        it: "Cambia i nomi degli artisti utilizzando il sistema di reindirizzamento obsoleto di Last.fm pre-205, causa svariati problemi",
         sv: "\xC4ndrar artistnamn baserad p\xE5 Last.fms omdirigeringssystem fr\xE5n innan 2015, skapar m\xE5nga problem",
         ru: "\u0418\u0437\u043C\u0435\u043D\u044F\u0435\u0442 \u0438\u043C\u0435\u043D\u0430 \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u0435\u0439 \u043D\u0430 \u043E\u0441\u043D\u043E\u0432\u0435 \u0443\u0441\u0442\u0430\u0440\u0435\u0432\u0448\u0435\u0439 \u0441\u0438\u0441\u0442\u0435\u043C\u044B \u043F\u0435\u0440\u0435\u043D\u0430\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F Last.fm \u0434\u043E 2015 \u0433\u043E\u0434\u0430, \u0447\u0442\u043E \u0432\u044B\u0437\u044B\u0432\u0430\u0435\u0442 \u043C\u043D\u043E\u0433\u043E \u043F\u0440\u043E\u0431\u043B\u0435\u043C"
       },
@@ -65871,6 +66775,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "This setting should be turned off to ensure scrobbles are correctly stored for each artist.",
         de: "Diese Einstellung sollte deaktiviert werden, um sicherzustellen, dass Scrobbles f\xFCr jeden K\xFCnstler korrekt gespeichert werden.",
         pt: "Esta configura\xE7\xE3o deve ser desativada para garantir que os scrobbles sejam armazenados corretamente para cada artista.",
+        it: "Questa impostazione dovrebbe essere disattivata per assicurarsi che gli scrobbling siano correttamente memorizzati per ciascun artista.",
         es: "Esta opci\xF3n deber\xEDa estar desactivada para garantizar que los scrobblings se almacenen correctamente para cada artista.",
         sv: "Denna inst\xE4llning ska st\xE4ngas av f\xF6r att vara s\xE4ker p\xE5 att dina skrobblingar \xE4r r\xE4tt f\xF6r alla artister.",
         ru: "\u042D\u0442\u0443 \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0443 \u0441\u043B\u0435\u0434\u0443\u0435\u0442 \u043E\u0442\u043A\u043B\u044E\u0447\u0438\u0442\u044C, \u0447\u0442\u043E\u0431\u044B \u0433\u0430\u0440\u0430\u043D\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u043F\u0440\u0430\u0432\u0438\u043B\u044C\u043D\u043E\u0435 \u0441\u043E\u0445\u0440\u0430\u043D\u0435\u043D\u0438\u0435 \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u043E\u0432 \u0434\u043B\u044F \u043A\u0430\u0436\u0434\u043E\u0433\u043E \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044F."
@@ -65878,6 +66783,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       false: {
         en: "Do not apply corrections (recommended)",
         es: "No aplicar correcciones (recomendado)",
+        it: "Non applicare correzioni (consigliato)",
         pt: "N\xE3o aplicar corre\xE7\xF5es (recomendado)",
         sv: "Till\xE4mpa inte korrigeringar (rekommenderat)",
         ru: "\u041D\u0435 \u043F\u0440\u0438\u043C\u0435\u043D\u044F\u0442\u044C \u0438\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F (\u0440\u0435\u043A\u043E\u043C\u0435\u043D\u0434\u0443\u0435\u0442\u0441\u044F)"
@@ -65885,6 +66791,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       true: {
         en: "Auto correct my scrobbles (legacy)",
         es: "Corregir autom\xE1ticamente mis scrobblings (cl\xE1sico)",
+        it: "Correggi automaticamente i miei scrobbling (obsoleto)",
         sv: "Autokorrigera mina skrobblingar (gammal)",
         ru: "\u0410\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u0435\u0441\u043A\u0438 \u0438\u0441\u043F\u0440\u0430\u0432\u043B\u044F\u0442\u044C \u043C\u043E\u0438 \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u044B (\u0443\u0441\u0442\u0430\u0440\u0435\u0432\u0448\u0435\u0435)",
         pt: "Corrigir automaticamente meus scrobbles (legado)"
@@ -65894,6 +66801,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       name: {
         en: "Preferred playback source",
         es: "Fuente de reproducci\xF3n preferida",
+        it: "Sorgente di riproduzione preferita",
         pt: "Fonte de reprodu\xE7\xE3o preferida",
         sv: "F\xF6redragen uppspelningsk\xE4lla",
         ru: "\u041F\u0440\u0435\u0434\u043F\u043E\u0447\u0438\u0442\u0430\u0435\u043C\u044B\u0439 \u0438\u0441\u0442\u043E\u0447\u043D\u0438\u043A \u0432\u043E\u0441\u043F\u0440\u043E\u0438\u0437\u0432\u0435\u0434\u0435\u043D\u0438\u044F"
@@ -65901,6 +66809,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       body: {
         en: "Choose which service to use when interacting with playables across the site",
         es: "Elige cu\xE1l servicio usar al interactuar con elementos reproducibles a trav\xE9s del sitio",
+        it: "Seleziona quale servizio utilizzare all'interazione con elementi riproducibili in tutto il sito",
         sv: "V\xE4lj vilken service att anv\xE4nda n\xE4r du spelar upp l\xE5tar",
         ru: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435, \u043A\u0430\u043A\u043E\u0439 \u0441\u0435\u0440\u0432\u0438\u0441 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u044C \u043F\u0440\u0438 \u0432\u0437\u0430\u0438\u043C\u043E\u0434\u0435\u0439\u0441\u0442\u0432\u0438\u0438 \u0441 \u0432\u043E\u0441\u043F\u0440\u043E\u0438\u0437\u0432\u043E\u0434\u0438\u043C\u044B\u043C \u043A\u043E\u043D\u0442\u0435\u043D\u0442\u043E\u043C \u043D\u0430 \u0441\u0430\u0439\u0442\u0435",
         pt: "Escolha qual servi\xE7o usar ao interagir com elementos reproduz\xEDveis em todo o site"
@@ -65910,6 +66819,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Timezone",
       de: "Zeitzone",
       es: "Zona horaria",
+      it: "Fuso orario",
       sv: "Tidszon",
       ru: "\u0427\u0430\u0441\u043E\u0432\u043E\u0439 \u043F\u043E\u044F\u0441",
       pt: "Fuso hor\xE1rio"
@@ -65919,6 +66829,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Location",
         de: "Standort",
         es: "Ubicaci\xF3n",
+        it: "Posizione",
         sv: "Plats",
         ru: "\u041C\u0435\u0441\u0442\u043E\u043F\u043E\u043B\u043E\u0436\u0435\u043D\u0438\u0435",
         pt: "Localiza\xE7\xE3o"
@@ -65927,6 +66838,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Last.fm uses your location for event recommendations and local music data",
         de: "Last.fm verwendet deinen Standort f\xFCr Veranstaltungsempfehlungen und lokale Musikdaten",
         es: "Last.fm usa tu ubicaci\xF3n para recomendaciones de eventos y datos locales de m\xFAsica",
+        it: "Last.fm usa la tua posizione per raccomandare eventi e dati di musica locali",
         sv: "Last.fm anv\xE4nder din plats f\xF6r evenemangrekommendationer och lokal musikdata",
         ru: "Last.fm \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0435\u0442 \u0432\u0430\u0448\u0435 \u043C\u0435\u0441\u0442\u043E\u043F\u043E\u043B\u043E\u0436\u0435\u043D\u0438\u0435 \u0434\u043B\u044F \u0440\u0435\u043A\u043E\u043C\u0435\u043D\u0434\u0430\u0446\u0438\u0439 \u043C\u0435\u0440\u043E\u043F\u0440\u0438\u044F\u0442\u0438\u0439 \u0438 \u0434\u0430\u043D\u043D\u044B\u0445 \u043E \u043C\u0435\u0441\u0442\u043D\u043E\u0439 \u043C\u0443\u0437\u044B\u043A\u0435",
         pt: "Last.fm usa sua localiza\xE7\xE3o para recomenda\xE7\xF5es de eventos e dados locais de m\xFAsica"
@@ -65936,6 +66848,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Event search radius",
       de: "Suchradius f\xFCr Veranstaltungen",
       es: "Radio de b\xFAsqueda de eventos",
+      it: "Raggio di ricerca eventi",
       pt: "Raio de busca de eventos",
       sv: "S\xF6kradie f\xF6r evenemang",
       ru: "\u0420\u0430\u0434\u0438\u0443\u0441 \u043F\u043E\u0438\u0441\u043A\u0430 \u043C\u0435\u0440\u043E\u043F\u0440\u0438\u044F\u0442\u0438\u0439"
@@ -65944,6 +66857,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "You need to be logged in",
       de: "Du musst eingeloggt sein",
       es: "Necesitas iniciar sesi\xF3n",
+      it: "Devi aver effettuato l'accesso",
       pt: "Voc\xEA precisa estar logado",
       sv: "Du l\xE4r vara inloggad",
       ru: "\u0412\u0430\u043C \u043D\u0435\u043E\u0431\u0445\u043E\u0434\u0438\u043C\u043E \u0432\u043E\u0439\u0442\u0438 \u0432 \u0441\u0438\u0441\u0442\u0435\u043C\u0443"
@@ -65952,6 +66866,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "You are currently testing \u2018oracle\u2019, a redesigned album and track view",
       de: "Du testest gerade \u201Eoracle\u201C, eine neu gestaltete Album- und Titelseite",
       es: "Est\xE1s actualmente probando \u2018oracle\u2019, un estilo redise\xF1ado de \xE1lbumes y temas",
+      it: "Stai provando \u2018oracle\u2019, una vista di album e brani ridisegnata",
       pt: "Voc\xEA est\xE1 atualmente testando \u2018oracle\u2019, um estilo redesenhado de \xE1lbuns e faixas",
       sv: "Du testar just no \u2018oracle\u2019, ett omdesignat s\xE4tt att visa album och l\xE5tsidor",
       ru: "\u0412 \u043D\u0430\u0441\u0442\u043E\u044F\u0449\u0435\u0435 \u0432\u0440\u0435\u043C\u044F \u0432\u044B \u0442\u0435\u0441\u0442\u0438\u0440\u0443\u0435\u0442\u0435 \xABoracle\xBB, \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u043D\u044B\u0439 \u0432\u0438\u0434 \u0430\u043B\u044C\u0431\u043E\u043C\u043E\u0432 \u0438 \u0442\u0440\u0435\u043A\u043E\u0432"
@@ -65959,6 +66874,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     debug: {
       en: "Debug",
       es: "Debug",
+      it: "Debug",
       pt: "Debug",
       sv: "Debug",
       ru: "\u041E\u0442\u043B\u0430\u0434\u043A\u0430"
@@ -65967,6 +66883,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Send feedback",
       de: "Feedback senden",
       es: "Enviar feedback",
+      it: "Invia feedback",
       pt: "Enviar feedback",
       sv: "Skicka feedback",
       ru: "\u041E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u044C \u043E\u0442\u0437\u044B\u0432"
@@ -65975,6 +66892,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Experimental",
       de: "Experimentell",
       es: "Experimental",
+      it: "Sperimentale",
       pt: "Experimental",
       sv: "Experimentalt",
       ru: "\u042D\u043A\u0441\u043F\u0435\u0440\u0438\u043C\u0435\u043D\u0442\u0430\u043B\u044C\u043D\u043E"
@@ -65984,6 +66902,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Enable the experimental \u2018oracle\u2019 system",
         de: "Experimentelles \u201Eoracle\u201C-System aktivieren",
         es: "Activar el sistema experimental \u2018oracle\u2019",
+        it: "Attiva il sistema sperimentale \u2018oracle\u2019",
         pt: "Ativar o sistema experimental \u2018oracle\u2019",
         sv: "Aktivera det experimentella \u2018oracle\u2019-systemet",
         ru: "\u0412\u043A\u043B\u044E\u0447\u0438\u0442\u044C \u044D\u043A\u0441\u043F\u0435\u0440\u0438\u043C\u0435\u043D\u0442\u0430\u043B\u044C\u043D\u0443\u044E \u0441\u0438\u0441\u0442\u0435\u043C\u0443 \xABoracle\xBB"
@@ -65992,6 +66911,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "A redesigned album and track view sourcing data from MusicBrainz. May be released in the future or scrapped. Please send feedback from usage.",
         de: "Eine neu gestaltete Album- und Titelseite, die Daten von MusicBrainz bezieht. Kann in Zukunft ver\xF6ffentlicht oder verworfen werden. Bitte sende Feedback basierend auf deiner Nutzung.",
         es: "Un estilo redise\xF1ado de \xE1lbumes y temas usando datos provenientes de MusicBrainz. Puede ser lanzado en un futuro o ser descartado. Por favor env\xEDa feedback de uso.",
+        it: "Una vista per album e brani ridisegnata che attinge ai dati di MusicBrainz. Potrebbe essere rilasciata in futuro o scartata. Per favore inviate del feedback dall'utilizzo.",
         pt: "Um estilo redesenhado de \xE1lbuns e faixas que utiliza dados do MusicBrainz. Pode ser lan\xE7ado no futuro ou descartado. Por favor, envie feedback sobre o uso.",
         sv: "Omdesignade album och l\xE5tsidor med data fr\xE5n MusicBrainz. Kan sl\xE4ppas eller skr\xE4pas i framtiden. Skicka g\xE4rna feedback fr\xE5n anv\xE4ndning.",
         ru: "\u041E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u043D\u044B\u0439 \u0432\u0438\u0434 \u0430\u043B\u044C\u0431\u043E\u043C\u043E\u0432 \u0438 \u0442\u0440\u0435\u043A\u043E\u0432, \u043F\u043E\u043B\u0443\u0447\u0430\u044E\u0449\u0438\u0439 \u0434\u0430\u043D\u043D\u044B\u0435 \u0438\u0437 MusicBrainz. \u041C\u043E\u0436\u0435\u0442 \u0431\u044B\u0442\u044C \u0432\u044B\u043F\u0443\u0449\u0435\u043D \u0432 \u0431\u0443\u0434\u0443\u0449\u0435\u043C \u0438\u043B\u0438 \u043E\u0442\u043C\u0435\u043D\u0435\u043D. \u041F\u043E\u0436\u0430\u043B\u0443\u0439\u0441\u0442\u0430, \u043E\u0442\u043F\u0440\u0430\u0432\u043B\u044F\u0439\u0442\u0435 \u043E\u0442\u0437\u044B\u0432\u044B \u043E\u0431 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u043D\u0438\u0438."
@@ -66001,6 +66921,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Label",
       de: "Label",
       es: "Sello",
+      it: "Etichetta",
       pt: "Gravadora",
       sv: "Skivbolag",
       ru: "\u041B\u0435\u0439\u0431\u043B"
@@ -66009,6 +66930,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Explicit",
       de: "Anst\xF6\xDFig",
       es: "Expl\xEDcito",
+      it: "Esplicito",
       pt: "Expl\xEDcito",
       sv: "Explicit",
       ru: "\u041D\u0435\u0446\u0435\u043D\u0437\u0443\u0440\u043D\u044B\u0439"
@@ -66017,6 +66939,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Control center",
       de: "Kontrollzentrum",
       es: "Centro de control",
+      it: "Centro di controllo",
       pt: "Centro de controle",
       sv: "Kontrollcenter",
       ru: "\u0426\u0435\u043D\u0442\u0440 \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F"
@@ -66025,6 +66948,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Romanise music titles and artist names for",
       de: "Musiktitel und K\xFCnstlernamen romanisieren f\xFCr",
       es: "Romanizar t\xEDtulos de m\xFAsica y nombres de artistas para",
+      it: "Romanizza titoli di musica e nomi di artisti per",
       pt: "Romanizar t\xEDtulos de m\xFAsicas e nomes de artistas para",
       sv: "Romanisera l\xE5ttitlar och artistnamn f\xF6r",
       ru: "\u0420\u043E\u043C\u0430\u043D\u0438\u0437\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u044F \u0442\u0440\u0435\u043A\u043E\u0432 \u0438 \u0438\u043C\u0435\u043D\u0430 \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u0435\u0439 \u0434\u043B\u044F"
@@ -66033,6 +66957,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "\u65E5\u672C\u8A9E (Japanese)",
       de: "\u65E5\u672C\u8A9E (Japanisch)",
       es: "\u65E5\u672C\u8A9E (Japon\xE9s)",
+      it: "\u65E5\u672C\u8A9E (Giapponese)",
       pt: "\u65E5\u672C\u8A9E (Japon\xEAs)",
       sv: "\u65E5\u672C\u8A9E (Japanska)",
       ru: "\u65E5\u672C\u8A9E (\u042F\u043F\u043E\u043D\u0441\u043A\u0438\u0439)"
@@ -66041,6 +66966,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "\uD55C\uAD6D\uC5B4 (Korean)",
       de: "\uD55C\uAD6D\uC5B4 (Koreanisch)",
       es: "\uD55C\uAD6D\uC5B4 (Coreano)",
+      it: "\uD55C\uAD6D\uC5B4 (Coreano)",
       pt: "\uD55C\uAD6D\uC5B4 (Coreano)",
       sv: "\uD55C\uAD6D\uC5B4 (Koreanska)",
       ru: "\uD55C\uAD6D\uC5B4 (\u041A\u043E\u0440\u0435\u0439\u0441\u043A\u0438\u0439)"
@@ -66048,6 +66974,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     romanise_require: {
       en: "Romanisation requires either lotus corrections or smart song tags be enabled",
       es: "La romanizaci\xF3n requiere que las correcciones de lotus o los tags inteligentes de temas est\xE9n activos",
+      it: "La romanizzazione richiede che le correzioni lotus o i tag intelligenti per i brani siano attivati",
       pt: "A romaniza\xE7\xE3o requer que as corre\xE7\xF5es lotus ou as tags inteligentes de m\xFAsicas estejam ativas",
       sv: "Romanisation kr\xE4ver antingen att lotus eller smarta l\xE5ttaggar aktiveras",
       ru: "\u0414\u043B\u044F \u0440\u043E\u043C\u0430\u043D\u0438\u0437\u0430\u0446\u0438\u0438 \u0442\u0440\u0435\u0431\u0443\u0435\u0442\u0441\u044F \u0432\u043A\u043B\u044E\u0447\u0435\u043D\u0438\u0435 \u043B\u0438\u0431\u043E lotus corrections, \u043B\u0438\u0431\u043E \u0443\u043C\u043D\u044B\u0445 \u0442\u0435\u0433\u043E\u0432 \u043F\u0435\u0441\u0435\u043D"
@@ -66056,6 +66983,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Disc {n}",
       de: "Disc {n}",
       es: "Disco {n}",
+      it: "Disco {n}",
       pt: "Disco {n}",
       sv: "Skiva {n}",
       ru: "\u0414\u0438\u0441\u043A {n}"
@@ -66064,6 +66992,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Create playlist",
       de: "Playlist erstellen",
       es: "Crear playlist",
+      it: "Crea playlist",
       pt: "Criar playlist",
       sv: "Skapa spellista",
       ru: "\u0421\u043E\u0437\u0434\u0430\u0442\u044C \u043F\u043B\u0435\u0439\u043B\u0438\u0441\u0442"
@@ -66073,6 +67002,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Music linking",
         de: "Musikverlinkung",
         es: "V\xEDnculos de m\xFAsica",
+        it: "Link di musica",
         pt: "Links de m\xFAsica",
         sv: "Musikl\xE4nkar",
         ru: "\u041C\u0443\u0437\u044B\u043A\u0430\u043B\u044C\u043D\u044B\u0435 \u0441\u0441\u044B\u043B\u043A\u0438"
@@ -66081,6 +67011,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Choose which services to display for artists, albums, and tracks",
         de: "W\xE4hle aus, welche Dienste f\xFCr K\xFCnstler:innen, Alben und Songs angezeigt werden sollen",
         es: "Elige cu\xE1les servicios mostrar para los artistas, \xE1lbumes y temas",
+        it: "Seleziona quali servizi mostrare per artisti, album e brani",
         pt: "Escolha quais servi\xE7os exibir para artistas, \xE1lbuns e faixas",
         sv: "V\xE4lj vilka tj\xE4nster att visa f\xF6r artister, album, och l\xE5tar",
         ru: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435, \u043A\u0430\u043A\u0438\u0435 \u0441\u0435\u0440\u0432\u0438\u0441\u044B \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0442\u044C \u0434\u043B\u044F \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u0435\u0439, \u0430\u043B\u044C\u0431\u043E\u043C\u043E\u0432 \u0438 \u0442\u0440\u0435\u043A\u043E\u0432"
@@ -66090,6 +67021,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       // number of strings translated
       en: "{c} translated",
       es: "{c} traducidos",
+      it: "{c} tradotte",
       pt: "{c} traduzidos",
       sv: "{c} \xF6versatt",
       ru: "\u041F\u0435\u0440\u0435\u0432\u0435\u0434\u0435\u043D\u043E {c}"
@@ -66098,6 +67030,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       // number of strings missing
       en: "{c} missing",
       es: "{c} faltantes",
+      it: "{c} mancanti",
       pt: "{c} ausentes",
       sv: "{c} saknas",
       ru: "\u041E\u0442\u0441\u0443\u0442\u0441\u0442\u0432\u0443\u0435\u0442 {c}"
@@ -66106,6 +67039,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       name: {
         en: "Simulate horizontal scrolling",
         es: "Simular scrolling horizontal",
+        it: "Simula scorrimento orizzontale",
         pt: "Simular rolagem horizontal",
         sv: "Simulera v\xE5gr\xE4t skrollning",
         ru: "\u0418\u043C\u0438\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u0433\u043E\u0440\u0438\u0437\u043E\u043D\u0442\u0430\u043B\u044C\u043D\u0443\u044E \u043F\u0440\u043E\u043A\u0440\u0443\u0442\u043A\u0443"
@@ -66113,6 +67047,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       body: {
         en: "Only recommended for desktop devices",
         es: "Recomendado solo en dispositivos de escritorio",
+        it: "Raccomandato solo per dispositivi desktop",
         pt: "Recomendado apenas para computadores de mesa",
         sv: "Rekommenderas endast f\xF6r desktop-enheter",
         ru: "\u0420\u0435\u043A\u043E\u043C\u0435\u043D\u0434\u0443\u0435\u0442\u0441\u044F \u0442\u043E\u043B\u044C\u043A\u043E \u0434\u043B\u044F \u043D\u0430\u0441\u0442\u043E\u043B\u044C\u043D\u044B\u0445 \u0443\u0441\u0442\u0440\u043E\u0439\u0441\u0442\u0432"
@@ -66121,6 +67056,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     credits: {
       en: "Credits",
       es: "Cr\xE9ditos",
+      it: "Crediti",
       pt: "Cr\xE9ditos",
       sv: "Erk\xE4nnanden",
       ru: "\u041A\u0440\u0435\u0434\u0438\u0442\u044B"
@@ -66128,6 +67064,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     view_credits: {
       en: "View credits",
       es: "Ver cr\xE9ditos",
+      it: "Visualizza crediti",
       pt: "Ver cr\xE9ditos",
       sv: "Visa erk\xE4nnanden",
       ru: "\u041F\u043E\u0441\u043C\u043E\u0442\u0440\u0435\u0442\u044C \u043A\u0440\u0435\u0434\u0438\u0442\u044B"
@@ -66135,6 +67072,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     credits_for_value: {
       en: "Credits for {v}",
       es: "Cr\xE9ditos para {v}",
+      it: "Crediti per {v}",
       pt: "Cr\xE9ditos para {v}",
       sv: "Erk\xE4nnanden f\xF6r {v}",
       ru: "\u041A\u0440\u0435\u0434\u0438\u0442\u044B \u0434\u043B\u044F {v}"
@@ -66143,6 +67081,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       name: {
         en: "Choose branch",
         es: "Elige la rama",
+        it: "Seleziona branch",
+        // we are talking about git branches, leaving it as is to avoid creating confusion for people who will want to change this ~cuto
         pt: "Escolha o ramo",
         //saying "ramo" in portuguese is weird tbh, it looks like the most correct translation tho
         sv: "V\xE4lj bransh",
@@ -66151,6 +67091,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       body: {
         en: "Default release branch is \u2018uwu\u2019, do not change unless you know what you\u2019re doing",
         es: "La rama de lanzamiento actual es \u2018uwu\u2019, no la cambies a menos de que sepas lo que haces",
+        it: "Il branch release predefinito \xE8 \u2018uwu\u2019, non cambiare questo valore se non si sa cosa si sta facendo",
         sv: "Standardbranshen \xE4r \u2018uwu\u2019, \xE4ndra inte om du inte vet vad du g\xF6r",
         ru: '\u0412\u0435\u0442\u043A\u0430 \u0432\u044B\u043F\u0443\u0441\u043A\u0430 \u043F\u043E \u0443\u043C\u043E\u043B\u0447\u0430\u043D\u0438\u044E - "uwu", \u043D\u0435 \u043C\u0435\u043D\u044F\u0439\u0442\u0435 \u0435\u0451, \u0435\u0441\u043B\u0438 \u0442\u043E\u0447\u043D\u043E \u043D\u0435 \u0437\u043D\u0430\u0435\u0442\u0435, \u0447\u0442\u043E \u0434\u0435\u043B\u0430\u0435\u0442\u0435'
       }
@@ -66158,6 +67099,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     log_in: {
       en: "Log in",
       es: "Iniciar sesi\xF3n",
+      it: "Accedi",
       pt: "Iniciar Sess\xE3o",
       sv: "Logga in",
       ru: "\u0412\u043E\u0439\u0442\u0438"
@@ -66165,6 +67107,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     sign_up: {
       en: "Sign up",
       es: "Registrarse",
+      it: "Registrati",
       pt: "Registrar-se",
       sv: "Registrera",
       ru: "\u0417\u0430\u0440\u0435\u0433\u0438\u0441\u0442\u0440\u0438\u0440\u043E\u0432\u0430\u0442\u044C\u0441\u044F"
@@ -66173,12 +67116,14 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       name: {
         en: "Plot",
         es: "Plot",
+        it: "Grafico",
         sv: "Rita",
         ru: "\u0413\u0440\u0430\u0444\u0438\u043A"
       },
       body: {
         en: "Create graphs from user libraries",
         es: "Crea gr\xE1ficos con base en las colecciones de usuario",
+        it: "Crea grafici dalle librerie degli utenti",
         pt: "Crie gr\xE1ficos a partir de bibliotecas de usu\xE1rios",
         sv: "Skapa diagram fr\xE5n anv\xE4ndarbibliotek",
         ru: "\u0421\u043E\u0437\u0434\u0430\u0442\u044C \u0433\u0440\u0430\u0444\u0438\u043A\u0438 \u0438\u0437 \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044C\u0441\u043A\u0438\u0445 \u0431\u0438\u0431\u043B\u0438\u043E\u0442\u0435\u043A"
@@ -66187,27 +67132,32 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     your_recent_30_days: {
       en: "Your recent 30 days",
       es: "Tus \xFAltimos 30 d\xEDas",
+      it: "I tuoi ultimi 30 giorni",
       pt: "Seus \xFAltimos 30 dias"
     },
     value_this_month: {
       // number of scrobbles
       en: "{v} this month",
       es: "{v} este mes",
+      it: "{v} questo mese",
       pt: "{v} este m\xEAs"
     },
     menu_replacement: {
       name: {
         en: "Replace native browser right-click menus",
-        es: "Reemplazar men\xFAs de clic derecho nativos del navegador"
+        es: "Reemplazar men\xFAs de clic derecho nativos del navegador",
+        it: "Sostituisci i menu contestuali nativi del browser"
       },
       body: {
         en: "Provide bleh context-specific actions when right-clicking",
-        es: "Proporciona acciones espec\xEDficas de bleh al hacer clic derecho"
+        es: "Proporciona acciones espec\xEDficas de bleh al hacer clic derecho",
+        it: "Fornisci azioni specifiche a bleh nei menu contestuali"
       }
     },
     you_have_new_badges: {
       en: "You have new badges!",
       es: "\xA1Tienes nuevos emblemas!",
+      it: "Hai dei nuovi distintivi!",
       pt: "Voc\xEA tem novas ins\xEDgnias!"
     }
   };
