@@ -79,7 +79,7 @@ export const trans = {
         name_sister_type: {
             en: '{name} by {sister} - {page} on {brand} {build}.{sku}',
             de: '{name} von {sister} - {page} auf {brand} {build}.{sku}',
-            de: '{name} por {sister} - {page} en {brand} {build}.{sku}',
+            es: '{name} por {sister} - {page} en {brand} {build}.{sku}',
             pt: '{name} por {sister} - {page} no {brand} {build}.{sku}',
             sv: '{name} av {sister} - {page} på {brand} {build}.{sku}',
             ru: '{name} от {sister} - {page} в {brand} {build}.{sku}'
