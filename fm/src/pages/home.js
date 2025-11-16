@@ -493,8 +493,7 @@ function campfire_friend(friend) {
                     </div>
                     <strong ref=${el => user_name = el}>@${friend}</strong>
                 </div>
-                <div class="user-about track loading" ref=${el => track_info = el}>
-                    <div class="bleh-icon loading-spinner" />
+                <div class="user-about track" ref=${el => track_info = el}>
                     <p>${tl(trans.loading)}</p>
                 </div>
             </div>
@@ -508,7 +507,59 @@ function campfire_friend(friend) {
 
         if (cache.username)
             user_name.textContent = cache.username;
+
+        load_recent_tracks(friend).then(tracks => {
+            const item = tracks[0];
+
+            const sister = romanise(correct_artist(item.sister));
+            const name = romanise(correct_item_by_artist(item.name, item.sister));
+
+            if (item) {
+                render(cover_art, html`
+                    <img src=${item.avatar} alt=${name}>
+                `);
+
+                render(track_info, html`
+                    <a href="${root}music/${item.sister}/_/${item.name}">${name}</a>
+                `);
+            }
+        });
     });
 
     return elem;
+}
+
+export async function load_recent_tracks(name) {
+    return new Promise((resolve, reject) => {
+        fetch(`${root}user/${name}/partial/recenttracks?ajax=1`)
+            .then(function (response) {
+                console.log('returned', response, response.text);
+
+                return response.text();
+            })
+            .then(function (dom) {
+                let doc = new DOMParser().parseFromString(dom, 'text/html');
+                console.log('DOC', doc);
+
+                let tracks = [];
+                const track_list = doc.querySelectorAll('.chartlist-row');
+                if (track_list.length > 0) {
+                    track_list.forEach(track => {
+                        let item = {};
+
+                        item.avatar = track.querySelector('.chartlist-image img');
+                        if (item.avatar)
+                            item.avatar = item.avatar.src;
+
+                        item.name = track.querySelector('.chartlist-name a').textContent.trim();
+                        item.sister = track.querySelector('.chartlist-artist a').textContent.trim();
+
+                        tracks.push(item);
+                    });
+                }
+
+                resolve(tracks);
+            })
+            .catch(reject);
+    });
 }

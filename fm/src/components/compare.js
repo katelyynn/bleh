@@ -366,23 +366,14 @@ export function compare({ host, sidebar } = {}) {
                     tracks.forEach((track) => {
                         let item = {};
 
-                        item.avatar = track.querySelector(
-                            '.chartlist-image img'
-                        );
+                        item.avatar = track.querySelector('.chartlist-image img');
                         if (item.avatar)
                             item.avatar = item.avatar.getAttribute('src');
-                        item.name = track
-                            .querySelector('.chartlist-name a')
-                            .textContent.trim();
+
+                        item.name = track.querySelector('.chartlist-name a').textContent.trim();
                         if (type.value() != 'artists')
-                            item.sister = track
-                                .querySelector('.chartlist-artist a')
-                                .textContent.trim();
-                        item.plays = clean_number(
-                            track
-                                .querySelector('.chartlist-count-bar-slug')
-                                .getAttribute('data-stat-value')
-                        );
+                            item.sister = track.querySelector('.chartlist-artist a').textContent.trim();
+                        item.plays = clean_number(track.querySelector('.chartlist-count-bar-slug').getAttribute('data-stat-value'));
 
                         if (next_user) page.state.compare.you.push(item);
                         else page.state.compare.other.push(item);
