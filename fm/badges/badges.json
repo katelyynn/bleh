@@ -1,5 +1,5 @@
 {
-    "latest": "2025.1115",
+    "latest": "2025.1116",
     "sponsors": [
         "clairedoll", "kateshapedbox", "evangelicgirl",
         "astrablooms", "ItsProyal", "vwvwvwvwvwvwv", "Orofil",
@@ -9,7 +9,8 @@
         "saettbyeol", "lyeule", "sewagebipolar", "unstablerate",
         "noapop", "celebrating", "myraisounds", "riskyrizey",
         "fourohclok", "liminalvespers", "HuxP", "K40M0J1",
-        "goldenstuffed", "favewa", "kar1x", "nojonsko"
+        "goldenstuffed", "favewa", "kar1x", "nojonsko",
+        "urwq"
     ],
     "sponsors_one_time": [
         "kateshapedbox",
@@ -381,6 +382,31 @@
         },
         "nojonsko": {
             "type": "sponsor"
+        },
+        "urwq": [
+            {
+                "type": "translation",
+                "reason": "Português"
+            },
+            {
+                "type": "sponsor"
+            },
+            {
+                "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1vdXRsaW5lIGljb24tdGFibGVyLWZpc2gtYm9uZSI+PHBhdGggc3Ryb2tlPSJub25lIiBkPSJNMCAwaDI0djI0SDB6IiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTE2LjY5IDcuNDRhNi45NzMgNi45NzMgMCAwIDAgLTEuNjkgNC41NmE2Ljk3IDYuOTcgMCAwIDAgMS42OTkgNC41NzFjMS45MTQgLS42ODQgMy42OTEgLTIuMTgzIDUuMzAxIC00LjU2NWMtMS42MTMgLTIuMzg0IC0zLjM5NCAtMy44ODMgLTUuMzEyIC00LjU2NSIgLz48cGF0aCBkPSJNMiA5LjUwNGE0MC43MyA0MC43MyAwIDAgMCAyLjQyMiAyLjUwNGEzOS42NzkgMzkuNjc5IDAgMCAwIC0yLjQyMiAyLjQ5OCIgLz48cGF0aCBkPSJNMTggMTF2LjAxIiAvPjxwYXRoIGQ9Ik00LjQyMiAxMmgxMC41NzgiIC8+PHBhdGggZD0iTTcgMTB2NCIgLz48cGF0aCBkPSJNMTEgOHY4IiAvPjwvc3ZnPg==",
+                "reason": "sponsor",
+                "name": "no fish remaining",
+                "hue": 165,
+                "sat": 1.2,
+                "lit": 0.95
+            }
+        ],
+        "cutotopo": {
+            "type": "translation",
+            "reason": "Italiano"
+        },
+        "soleilth": {
+            "type": "translation",
+            "reason": "Español"
         }
     }
 }
