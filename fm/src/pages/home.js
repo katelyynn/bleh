@@ -492,7 +492,7 @@ function campfire_friend(friend) {
                     <div class="avatar" ref=${el => user_avatar = el}>
                         <div class="bleh-icon loading-spinner" />
                     </div>
-                    <strong ref=${el => user_name = el}>@${friend}</strong>
+                    <p ref=${el => user_name = el}>@${friend}</p>
                     <a class="link-block-cover-link" href="${root}user/${friend}" />
                 </div>
                 <div class="user-about track" ref=${el => track_info = el}>
@@ -527,6 +527,16 @@ function campfire_friend(friend) {
             }
 
             if (item) {
+                if (item.time) {
+                    render(user_name, html`
+                        ${{ html: tl(trans.user_listened_time, { u: `<strong>${cache.username ? cache.username : `@${friend}`}</strong>`, time: item.time }) }}
+                    `);
+                } else {
+                    render(user_name, html`
+                        ${{ html: tl(trans.user_is_listening_to, { u: `<strong>${cache.username ? cache.username : `@${friend}`}</strong>` }) }}
+                    `);
+                }
+
                 render(cover_art, html`
                     <img src=${item.avatar} alt=${name}>
                     <a class="link-block-cover-link" href="${root}music/${item.sister}/_/${item.name}" />
@@ -576,6 +586,8 @@ export async function load_recent_tracks(name) {
 
                         item.name = track.querySelector('.chartlist-name a').textContent.trim();
                         item.sister = track.querySelector('.chartlist-artist a').textContent.trim();
+
+                        item.time = track.querySelector('.chartlist-timestamp > span:not(.chartlist-now-scrobbling)')?.textContent.trim();
 
                         tracks.push(item);
                     });

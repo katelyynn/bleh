@@ -29333,7 +29333,6 @@
             flex-direction: column;
             gap: 4px;
             flex: 1;
-            font-weight: var(--font-weight-medium);
             overflow: hidden;
 
             & > .user-name {
@@ -29343,6 +29342,15 @@
                 --w: 18px;
                 cursor: default;
                 position: relative;
+
+                & > p {
+                    color: hsl(var(--c2), 80%);
+
+                    & > strong {
+                        color: hsl(var(--c2));
+                        font-weight: var(--font-weight-medium);
+                    }
+                }
 
                 & > .avatar {
                     width: var(--w);
@@ -29359,6 +29367,7 @@
                 gap: 4px;
                 color: hsl(var(--c2), 80%);
                 cursor: default;
+                font-weight: var(--font-weight-medium);
 
                 & > .bleh-icon {
                     --icon-size: 14px;

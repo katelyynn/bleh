@@ -56467,7 +56467,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                     <div class="avatar" ref=${(el) => user_avatar = el}>
                         <div class="bleh-icon loading-spinner" />
                     </div>
-                    <strong ref=${(el) => user_name = el}>@${friend}</strong>
+                    <p ref=${(el) => user_name = el}>@${friend}</p>
                     <a class="link-block-cover-link" href="${root}user/${friend}" />
                 </div>
                 <div class="user-about track" ref=${(el) => track_info = el}>
@@ -56495,6 +56495,15 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           name = romanise(correct_item_by_artist(item.name, item.sister));
         }
         if (item) {
+          if (item.time) {
+            render(user_name, html`
+                        ${{ html: tl2(trans.user_listened_time, { u: `<strong>${cache2.username ? cache2.username : `@${friend}`}</strong>`, time: item.time }) }}
+                    `);
+          } else {
+            render(user_name, html`
+                        ${{ html: tl2(trans.user_is_listening_to, { u: `<strong>${cache2.username ? cache2.username : `@${friend}`}</strong>` }) }}
+                    `);
+          }
           render(cover_art, html`
                     <img src=${item.avatar} alt=${name}>
                     <a class="link-block-cover-link" href="${root}music/${item.sister}/_/${item.name}" />
@@ -56533,6 +56542,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
               item.avatar = item.avatar.src;
             item.name = track.querySelector(".chartlist-name a").textContent.trim();
             item.sister = track.querySelector(".chartlist-artist a").textContent.trim();
+            item.time = track.querySelector(".chartlist-timestamp > span:not(.chartlist-now-scrobbling)")?.textContent.trim();
             tracks.push(item);
           });
         }
@@ -67385,6 +67395,16 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     original: {
       en: "Original"
+    },
+    user_is_listening_to: {
+      // (claire) is listening to
+      // (song name)
+      en: "{u} is listening to"
+    },
+    user_listened_time: {
+      // (claire) listened (5 hours ago)
+      // (song name)
+      en: "{u} listened {time}"
     }
   };
   function tl2(key, replacements = {}) {

@@ -8843,6 +8843,16 @@ export const trans = {
     },
     original: {
         en: 'Original'
+    },
+    user_is_listening_to: {
+        // (claire) is listening to
+        // (song name)
+        en: '{u} is listening to'
+    },
+    user_listened_time: {
+        // (claire) listened (5 hours ago)
+        // (song name)
+        en: '{u} listened {time}'
     }
 };
 
