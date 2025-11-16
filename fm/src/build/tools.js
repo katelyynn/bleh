@@ -458,3 +458,9 @@ export function set_storage(key, val) {
         });
     }
 }
+
+export function year_from_date(string) {
+    const match = string.match(/\b(\d{4})\b/);
+
+    return match ? match[1] : 0;
+}

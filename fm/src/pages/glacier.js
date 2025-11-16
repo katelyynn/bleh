@@ -8,7 +8,7 @@ import { html, render } from 'lighterhtml';
 import { settings } from '../build/config';
 import { log } from '../build/log';
 import { auth, page, root } from '../build/page';
-import { desanitise, sanitise, sanitise_text } from '../build/tools';
+import { desanitise, sanitise, sanitise_text, year_from_date } from '../build/tools';
 import { tl, trans } from '../build/trans';
 import { prep_chart_colours } from '../chart';
 import { correct_artist, correct_item_by_artist } from '../components/lotus';
@@ -19,6 +19,7 @@ import { setting } from '../components/settings.js';
 import { redirect } from '../components/music.js';
 import tippy from 'tippy.js';
 import { Chart } from '../main.js';
+import { load_profile_cache_externally } from './profile.js';
 
 export function bleh_user_library() {
     // date sidebar into its own panel
@@ -251,49 +252,33 @@ function bleh_glacier_library_date() {
 
     picker_content.setAttribute('data-glacier-library-date', 'true');
 
-    let picker_presets = picker_content.querySelectorAll(
-        '.date-range-picker-presets-wrap > .date-range-picker-presets'
-    );
-
-    // this year
     let params = new URLSearchParams(document.location.search);
     page.requested.from = params.get('from');
     page.requested.to = params.get('to');
     page.requested.rangetype = params.get('rangetype');
 
-    const current_year = new Date().getFullYear();
-    const previous_year = current_year - 1;
+    const picker_presets = picker_content.querySelectorAll('.date-range-picker-presets-wrap > .date-range-picker-presets');
+    load_profile_cache_externally(page.name).then(cache => {
+        if (!cache.created) return;
 
-    let selected;
+        const year = parseInt(year_from_date(cache.created));
+        const current_year = new Date().getFullYear();
 
-    if (
-        page.requested.from == `${current_year}-01-01` &&
-        (page.requested.to == `${current_year}-12-31` ||
-            page.requested.rangetype == 'year')
-    )
-        selected = 'this_year';
-    else if (
-        page.requested.from == `${previous_year}-01-01` &&
-        (page.requested.to == `${previous_year}-12-31` ||
-            page.requested.rangetype == 'year')
-    )
-        selected = 'last_year';
+        const years = Array.from({ length: current_year - year + 1 }, (_, i) => year + i);
 
-    picker_presets[0].appendChild(html.node`
-        <li class="date-range-picker-preset ${selected == 'last_year' ? 'date-range-picker-preset--selected' : ''}">
-            <a href="${window.location.href.replace(window.location.search, '')}?from=${previous_year}-01-01&rangetype=year">
-                ${previous_year}
-            </a>
-        </li>
-    `);
+        years.forEach((year, index) => {
+            const selected = page.requested.from == `${year}-01-01` && (page.requested.to == `${year}-12-31` || page.requested.rangetype == 'year');
+            const target = index % 2;
 
-    picker_presets[1].appendChild(html.node`
-        <li class="date-range-picker-preset ${selected == 'this_year' ? 'date-range-picker-preset--selected' : ''}">
-            <a href="${window.location.href.replace(window.location.search, '')}?from=${current_year}-01-01&rangetype=year">
-                ${current_year}
-            </a>
-        </li>
-    `);
+            picker_presets[target].appendChild(html.node`
+                <li class="date-range-picker-preset ${selected ? 'date-range-picker-preset--selected' : ''}">
+                    <a href="${window.location.href.replace(window.location.search, '')}?from=${year}-01-01&rangetype=year">
+                        ${year}
+                    </a>
+                </li>
+            `);
+        });
+    });
 
     picker_content.classList = 'date-range-picker-content-inner';
     const modal = tippy(date_btn, {

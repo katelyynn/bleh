@@ -28119,6 +28119,10 @@
       });
     }
   }
+  function year_from_date(string) {
+    const match3 = string.match(/\b(\d{4})\b/);
+    return match3 ? match3[1] : 0;
+  }
 
   // src/build/music.js
   var artist_corrections = {};
@@ -42150,34 +42154,28 @@
     );
     if (!picker_content) return;
     picker_content.setAttribute("data-glacier-library-date", "true");
-    let picker_presets = picker_content.querySelectorAll(
-      ".date-range-picker-presets-wrap > .date-range-picker-presets"
-    );
     let params = new URLSearchParams(document.location.search);
     page.requested.from = params.get("from");
     page.requested.to = params.get("to");
     page.requested.rangetype = params.get("rangetype");
-    const current_year = (/* @__PURE__ */ new Date()).getFullYear();
-    const previous_year = current_year - 1;
-    let selected;
-    if (page.requested.from == `${current_year}-01-01` && (page.requested.to == `${current_year}-12-31` || page.requested.rangetype == "year"))
-      selected = "this_year";
-    else if (page.requested.from == `${previous_year}-01-01` && (page.requested.to == `${previous_year}-12-31` || page.requested.rangetype == "year"))
-      selected = "last_year";
-    picker_presets[0].appendChild(html.node`
-        <li class="date-range-picker-preset ${selected == "last_year" ? "date-range-picker-preset--selected" : ""}">
-            <a href="${window.location.href.replace(window.location.search, "")}?from=${previous_year}-01-01&rangetype=year">
-                ${previous_year}
-            </a>
-        </li>
-    `);
-    picker_presets[1].appendChild(html.node`
-        <li class="date-range-picker-preset ${selected == "this_year" ? "date-range-picker-preset--selected" : ""}">
-            <a href="${window.location.href.replace(window.location.search, "")}?from=${current_year}-01-01&rangetype=year">
-                ${current_year}
-            </a>
-        </li>
-    `);
+    const picker_presets = picker_content.querySelectorAll(".date-range-picker-presets-wrap > .date-range-picker-presets");
+    load_profile_cache_externally(page.name).then((cache2) => {
+      if (!cache2.created) return;
+      const year = parseInt(year_from_date(cache2.created));
+      const current_year = (/* @__PURE__ */ new Date()).getFullYear();
+      const years = Array.from({ length: current_year - year + 1 }, (_, i) => year + i);
+      years.forEach((year2, index3) => {
+        const selected = page.requested.from == `${year2}-01-01` && (page.requested.to == `${year2}-12-31` || page.requested.rangetype == "year");
+        const target = index3 % 2;
+        picker_presets[target].appendChild(html.node`
+                <li class="date-range-picker-preset ${selected ? "date-range-picker-preset--selected" : ""}">
+                    <a href="${window.location.href.replace(window.location.search, "")}?from=${year2}-01-01&rangetype=year">
+                        ${year2}
+                    </a>
+                </li>
+            `);
+      });
+    });
     picker_content.classList = "date-range-picker-content-inner";
     const modal = tippy_esm_default(date_btn, {
       theme: "window",
