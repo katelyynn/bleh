@@ -52866,18 +52866,15 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       else
         involved_text = html.node`${involved_text}<a class="involved--${involved.type}" href="${involved_link}">${name}</a>`;
     });
-    render(
-      activity_item,
-      html`
-            <div class="type">
-                ${tl2(trans.activity.listing[activity.type])}
-                <div class="date">
-                    ${DateTime.fromISO(activity.date).toRelative()}
-                </div>
+    render(activity_item, html`
+        <div class="type">
+            ${tl2(trans.activity.listing[activity.type])}
+            <div class="date">
+                ${DateTime.fromISO(activity.date).toRelative()}
             </div>
-            <div class="name">${involved_text}</div>
-        `
-    );
+        </div>
+        <div class="name">${involved_text}</div>
+    `);
     if (tooltip_name)
       tippy_esm_default(activity_item.querySelector(".name a"), {
         theme: "name-sister-combo",
@@ -56471,6 +56468,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                         <div class="bleh-icon loading-spinner" />
                     </div>
                     <strong ref=${(el) => user_name = el}>@${friend}</strong>
+                    <a class="link-block-cover-link" href="${root}user/${friend}" />
                 </div>
                 <div class="user-about track" ref=${(el) => track_info = el}>
                     <p>${tl2(trans.loading)}</p>
@@ -56486,15 +56484,32 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         user_name.textContent = cache2.username;
       load_recent_tracks(friend).then((tracks) => {
         const item = tracks[0];
-        const sister = romanise(correct_artist(item.sister));
-        const name = romanise(correct_item_by_artist(item.name, item.sister));
+        let sister = item.sister;
+        let name = item.name;
+        if (settings.format_guest_features) {
+          const formatted = name_includes(name, sister);
+          name = html.node`${smart_title(formatted[0], formatted[1])}`;
+          sister = html.node`${smart_artists(formatted[2], formatted[3])}`;
+        } else if (settings.corrections) {
+          sister = romanise(correct_artist(item.sister));
+          name = romanise(correct_item_by_artist(item.name, item.sister));
+        }
         if (item) {
           render(cover_art, html`
                     <img src=${item.avatar} alt=${name}>
+                    <a class="link-block-cover-link" href="${root}music/${item.sister}/_/${item.name}" />
                 `);
-          render(track_info, html`
-                    <a href="${root}music/${item.sister}/_/${item.name}">${name}</a>
-                `);
+          const track_elem = html.node`
+                    <a class="involved--track" href="${root}music/${item.sister}/_/${item.name}">${name}</a>
+                `;
+          tippy_esm_default(track_elem, {
+            theme: "name-sister-combo",
+            content: html.node`
+                        <span class="name">${{ html: track_elem.innerHTML }}</span>
+                        <span class="sister">${sister}</span>
+                    `
+          });
+          render(track_info, track_elem);
         }
       });
     });

@@ -6859,6 +6859,7 @@
         gap: 2px 6px;
     }
 
+    .user-about > a,
     .smart-title,
     .source-album-name,
     .activity-item .name > a,
@@ -21416,40 +21417,6 @@
 
         .name {
             font-weight: var(--font-weight-medium);
-
-            .involved--track,
-            .involved--album,
-            .involved--artist,
-            .involved--tag,
-            .involved--user {
-                position: relative;
-                padding-left: calc(12px + 2px);
-                --left: 0;
-                --mask-size: 12px;
-                --margin-top: -6px;
-            }
-            .involved--track {
-                --mask: var(--icon-16-track);
-            }
-            .involved--album {
-                --mask: var(--icon-16-album);
-            }
-            .involved--artist {
-                --mask: var(--icon-16-artist);
-            }
-            .involved--tag {
-                --mask: var(--icon-16-tag);
-            }
-
-            .involved--user {
-                --mask: var(--icon-16-user);
-            }
-
-            .involved--track,
-            .involved--album {
-                display: flex;
-                gap: 6px;
-            }
         }
 
         .date {
@@ -29334,6 +29301,8 @@
         align-items: center;
         gap: 10px;
 
+        animation: activity 0.35s var(--trans-function);
+
         & > .user-avatar {
             --w: 48px;
             width: var(--w);
@@ -29343,6 +29312,7 @@
             background: var(--avatar-generic-background);
             border-radius: var(--avatar-radius);
             overflow: hidden;
+            position: relative;
 
             display: flex;
             justify-content: center;
@@ -29363,6 +29333,8 @@
             flex-direction: column;
             gap: 4px;
             flex: 1;
+            font-weight: var(--font-weight-medium);
+            overflow: hidden;
 
             & > .user-name {
                 display: flex;
@@ -29370,6 +29342,7 @@
                 gap: 6px;
                 --w: 18px;
                 cursor: default;
+                position: relative;
 
                 & > .avatar {
                     width: var(--w);
@@ -29398,5 +29371,44 @@
         color: hsl(var(--c3));
         --icon: var(--icon-16-spinner);
         animation: spinner 1.2s linear infinite;
+    }
+
+    .involved--track,
+    .involved--album,
+    .involved--artist,
+    .involved--tag,
+    .involved--user {
+        position: relative;
+        padding-left: calc(12px + 2px);
+        --left: 0;
+        --mask-size: 12px;
+        --margin-top: -6px;
+    }
+    .involved--track {
+        --mask: var(--icon-16-track);
+    }
+    .involved--album {
+        --mask: var(--icon-16-album);
+    }
+    .involved--artist {
+        --mask: var(--icon-16-artist);
+    }
+    .involved--tag {
+        --mask: var(--icon-16-tag);
+    }
+
+    .involved--user {
+        --mask: var(--icon-16-user);
+    }
+
+    .involved--track,
+    .involved--album {
+        display: flex;
+        gap: 6px;
+    }
+
+    .link-block-cover-link {
+        position: absolute;
+        inset: 0;
     }
 }
