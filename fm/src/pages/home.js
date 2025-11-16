@@ -337,8 +337,9 @@ function campfire() {
             <div class="campfire-bg previous" ref=${el => previous_bg = el} />
         </div>
     `;
-
     page.structure.row.insertBefore(container, page.structure.content);
+
+    campfire_extended(container);
 
     let albums = [];
     let album_elements = [];
@@ -450,4 +451,64 @@ function campfire() {
             </div>
         `);
     }
+}
+
+function campfire_extended(container) {
+    container.after(html.node`
+        <section class="campfire-extended">
+            <div class="content-panel content-main">
+
+            </div>
+            <div class="content-panel content-side">
+                <section class="friends-panel">
+                    <h2>Friends</h2>
+                    <div class="friends">
+                        ${settings.friends.length > 0 ? html.node`
+                            ${settings.friends.map(friend => campfire_friend(friend))}
+                        ` : html.node`
+
+                        `}
+                    </div>
+                </section>
+            </div>
+        </section>
+    `);
+}
+
+function campfire_friend(friend) {
+    let cover_art;
+    let track_info;
+    let user_avatar;
+    let user_name;
+
+    const elem = html.node`
+        <div class="user friend">
+            <div class="user-avatar cover-art" ref=${el => cover_art = el}>
+                <div class="bleh-icon loading-spinner" />
+            </div>
+            <div class="user-info">
+                <div class="user-name">
+                    <div class="avatar" ref=${el => user_avatar = el}>
+                        <div class="bleh-icon loading-spinner" />
+                    </div>
+                    <strong ref=${el => user_name = el}>@${friend}</strong>
+                </div>
+                <div class="user-about track loading" ref=${el => track_info = el}>
+                    <div class="bleh-icon loading-spinner" />
+                    <p>${tl(trans.loading)}</p>
+                </div>
+            </div>
+        </div>
+    `;
+
+    load_profile_cache_externally(friend).then(cache => {
+        render(user_avatar, html`
+            <img src=${cache.avatar} alt=${friend}>
+        `);
+
+        if (cache.username)
+            user_name.textContent = cache.username;
+    });
+
+    return elem;
 }

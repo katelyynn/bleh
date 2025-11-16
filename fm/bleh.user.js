@@ -56350,6 +56350,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         </div>
     `;
     page.structure.row.insertBefore(container, page.structure.content);
+    campfire_extended(container);
     let albums = [];
     let album_elements = [];
     fetch(`${root}user/${auth.name}/partial/albums?albums_date_preset=LAST_30_DAYS&ajax=1`).then(function(response) {
@@ -56436,6 +56437,60 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
             </div>
         `);
     }
+  }
+  function campfire_extended(container) {
+    container.after(html.node`
+        <section class="campfire-extended">
+            <div class="content-panel content-main">
+
+            </div>
+            <div class="content-panel content-side">
+                <section class="friends-panel">
+                    <h2>Friends</h2>
+                    <div class="friends">
+                        ${settings.friends.length > 0 ? html.node`
+                            ${settings.friends.map((friend) => campfire_friend(friend))}
+                        ` : html.node`
+
+                        `}
+                    </div>
+                </section>
+            </div>
+        </section>
+    `);
+  }
+  function campfire_friend(friend) {
+    let cover_art;
+    let track_info;
+    let user_avatar;
+    let user_name;
+    const elem = html.node`
+        <div class="user friend">
+            <div class="user-avatar cover-art" ref=${(el) => cover_art = el}>
+                <div class="bleh-icon loading-spinner" />
+            </div>
+            <div class="user-info">
+                <div class="user-name">
+                    <div class="avatar" ref=${(el) => user_avatar = el}>
+                        <div class="bleh-icon loading-spinner" />
+                    </div>
+                    <strong ref=${(el) => user_name = el}>@${friend}</strong>
+                </div>
+                <div class="user-about track loading" ref=${(el) => track_info = el}>
+                    <div class="bleh-icon loading-spinner" />
+                    <p>${tl2(trans.loading)}</p>
+                </div>
+            </div>
+        </div>
+    `;
+    load_profile_cache_externally(friend).then((cache2) => {
+      render(user_avatar, html`
+            <img src=${cache2.avatar} alt=${friend}>
+        `);
+      if (cache2.username)
+        user_name.textContent = cache2.username;
+    });
+    return elem;
   }
 
   // src/pages/event.js

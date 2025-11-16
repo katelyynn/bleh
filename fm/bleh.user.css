@@ -29296,4 +29296,107 @@
             }
         }
     }
+
+
+    .campfire-extended {
+        display: flex;
+        gap: 1px;
+        margin: unset;
+
+        & > .content-panel {
+            display: flex;
+            flex-direction: column;
+            gap: var(--card-padding);
+            padding: var(--card-padding) 0;
+
+            &.content-main {
+                width: var(--cards-main-width);
+            }
+            &.content-side {
+                width: var(--cards-sidebar-width);
+            }
+
+            & > section {
+                padding: 0 var(--card-padding);
+                margin: unset;
+            }
+        }
+    }
+
+    .friends {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .user {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        & > .user-avatar {
+            --w: 48px;
+            width: var(--w);
+            height: var(--w);
+            flex-shrink: 0;
+
+            background: var(--avatar-generic-background);
+            border-radius: var(--avatar-radius);
+            overflow: hidden;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            &.cover-art {
+                border-radius: var(--item-med-radius);
+            }
+
+            & > img {
+                width: var(--w);
+                height: var(--w);
+            }
+        }
+
+        & > .user-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            flex: 1;
+
+            & > .user-name {
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                --w: 18px;
+                cursor: default;
+
+                & > .avatar {
+                    width: var(--w);
+                    height: var(--w);
+                    background: var(--avatar-generic-background);
+                    border-radius: var(--avatar-radius);
+                    overflow: hidden;
+                }
+            }
+
+            & > .user-about {
+                display: flex;
+                align-items: center;
+                gap: 4px;
+                color: hsl(var(--c2), 80%);
+                cursor: default;
+
+                & > .bleh-icon {
+                    --icon-size: 14px;
+                }
+            }
+        }
+    }
+
+    .loading-spinner {
+        color: hsl(var(--c3));
+        --icon: var(--icon-16-spinner);
+        animation: spinner 1.2s linear infinite;
+    }
 }
