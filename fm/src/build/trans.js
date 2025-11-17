@@ -3241,6 +3241,12 @@ export const trans = {
         sv: 'Kopiera',
         ru: 'Копировать'
     },
+    copy_text: {
+        en: 'Copy text',
+        es: 'Copiar texto',
+        it: 'Copia testo',
+        pt: 'Copiar texto'
+    },
     copy_username: {
         en: 'Copy username',
         de: 'Benutzername kopieren',
@@ -3276,6 +3282,21 @@ export const trans = {
         pt: 'Clique para copiar',
         sv: 'Klicka för att kopiera',
         ru: 'Нажмите, чтобы скопировать'
+    },
+    paste: {
+        en: 'Paste'
+    },
+    paste_text: {
+        en: 'Paste text'
+    },
+    undo: {
+        en: 'Undo'
+    },
+    redo: {
+        en: 'Redo'
+    },
+    pasted_text: {
+        en: 'Pasted text'
     },
     wiki_standard_tracks: {
         en: 'Track titles should be wrapped in quotation marks (“ ”)',
@@ -3942,12 +3963,6 @@ export const trans = {
         es: 'Abrir vínculo',
         it: 'Apri link',
         pt: 'Abrir link'
-    },
-    copy_text: {
-        en: 'Copy text',
-        es: 'Copiar texto',
-        it: 'Copia testo',
-        pt: 'Copiar texto'
     },
     event_cancelled: {
         // obviously remove the emoji or replace it as

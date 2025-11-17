@@ -157,8 +157,8 @@
         }
         return char;
       }
-      function convert2(text3) {
-        return text3.split("").map(convertCharacter).join("");
+      function convert2(text4) {
+        return text4.split("").map(convertCharacter).join("");
       }
       exports.convert = convert2;
     }
@@ -5107,11 +5107,11 @@
           });
           var offset3 = 0;
           var prev = {};
-          var supports = textList.every(function(text3, i2) {
+          var supports = textList.every(function(text4, i2) {
             range.setStart(node, offset3);
-            range.setEnd(node, offset3 + text3.length);
+            range.setEnd(node, offset3 + text4.length);
             var rect = range.getBoundingClientRect();
-            offset3 += text3.length;
+            offset3 += text4.length;
             var boundAhead = rect.x > prev.x || rect.y > prev.y;
             prev = rect;
             if (i2 === 0) {
@@ -5250,8 +5250,8 @@
         var TextBounds = (
           /** @class */
           /* @__PURE__ */ function() {
-            function TextBounds2(text3, bounds) {
-              this.text = text3;
+            function TextBounds2(text4, bounds) {
+              this.text = text4;
               this.bounds = bounds;
             }
             return TextBounds2;
@@ -5261,29 +5261,29 @@
           var textList = breakText(value, styles);
           var textBounds = [];
           var offset3 = 0;
-          textList.forEach(function(text3) {
-            if (styles.textDecorationLine.length || text3.trim().length > 0) {
+          textList.forEach(function(text4) {
+            if (styles.textDecorationLine.length || text4.trim().length > 0) {
               if (FEATURES.SUPPORT_RANGE_BOUNDS) {
-                var clientRects = createRange(node, offset3, text3.length).getClientRects();
+                var clientRects = createRange(node, offset3, text4.length).getClientRects();
                 if (clientRects.length > 1) {
-                  var subSegments = segmentGraphemes(text3);
+                  var subSegments = segmentGraphemes(text4);
                   var subOffset_1 = 0;
                   subSegments.forEach(function(subSegment) {
                     textBounds.push(new TextBounds(subSegment, Bounds.fromDOMRectList(context, createRange(node, subOffset_1 + offset3, subSegment.length).getClientRects())));
                     subOffset_1 += subSegment.length;
                   });
                 } else {
-                  textBounds.push(new TextBounds(text3, Bounds.fromDOMRectList(context, clientRects)));
+                  textBounds.push(new TextBounds(text4, Bounds.fromDOMRectList(context, clientRects)));
                 }
               } else {
-                var replacementNode = node.splitText(text3.length);
-                textBounds.push(new TextBounds(text3, getWrapperBounds(context, node)));
+                var replacementNode = node.splitText(text4.length);
+                textBounds.push(new TextBounds(text4, getWrapperBounds(context, node)));
                 node = replacementNode;
               }
             } else if (!FEATURES.SUPPORT_RANGE_BOUNDS) {
-              node = node.splitText(text3.length);
+              node = node.splitText(text4.length);
             }
-            offset3 += text3.length;
+            offset3 += text4.length;
           });
           return textBounds;
         };
@@ -5381,16 +5381,16 @@
             return TextContainer2;
           }()
         );
-        var transform2 = function(text3, transform3) {
+        var transform2 = function(text4, transform3) {
           switch (transform3) {
             case 1:
-              return text3.toLowerCase();
+              return text4.toLowerCase();
             case 3:
-              return text3.replace(CAPITALIZE, capitalize);
+              return text4.replace(CAPITALIZE, capitalize);
             case 2:
-              return text3.toUpperCase();
+              return text4.toUpperCase();
             default:
-              return text3;
+              return text4;
           }
         };
         var CAPITALIZE = /(^|\s|:|-|\(|\))([a-z])/g;
@@ -6504,10 +6504,10 @@
                       var counterStates = _this.counters.getCounterValues(counter.value);
                       var counterType_1 = counterStyle && isIdentToken(counterStyle) ? listStyleType.parse(_this.context, counterStyle.value) : 3;
                       var separator = delim && delim.type === 0 ? delim.value : "";
-                      var text3 = counterStates.map(function(value2) {
+                      var text4 = counterStates.map(function(value2) {
                         return createCounterText(value2, counterType_1, false);
                       }).join(separator);
-                      anonymousReplacedElement.appendChild(document2.createTextNode(text3));
+                      anonymousReplacedElement.appendChild(document2.createTextNode(text4));
                     }
                   } else ;
                 } else if (token.type === 20) {
@@ -7688,21 +7688,21 @@
                 });
               });
             };
-            CanvasRenderer2.prototype.renderTextWithLetterSpacing = function(text3, letterSpacing2, baseline) {
+            CanvasRenderer2.prototype.renderTextWithLetterSpacing = function(text4, letterSpacing2, baseline) {
               var _this = this;
               if (letterSpacing2 === 0) {
                 if (navigator.userAgent.indexOf("Firefox") === -1) {
                   this.ctx.textBaseline = "ideographic";
-                  this.ctx.fillText(text3.text, text3.bounds.left, text3.bounds.top + text3.bounds.height);
+                  this.ctx.fillText(text4.text, text4.bounds.left, text4.bounds.top + text4.bounds.height);
                 } else {
-                  this.ctx.fillText(text3.text, text3.bounds.left, text3.bounds.top + baseline);
+                  this.ctx.fillText(text4.text, text4.bounds.left, text4.bounds.top + baseline);
                 }
               } else {
-                var letters = segmentGraphemes(text3.text);
+                var letters = segmentGraphemes(text4.text);
                 letters.reduce(function(left2, letter) {
-                  _this.ctx.fillText(letter, left2, text3.bounds.top + baseline);
+                  _this.ctx.fillText(letter, left2, text4.bounds.top + baseline);
                   return left2 + _this.ctx.measureText(letter).width;
-                }, text3.bounds.left);
+                }, text4.bounds.left);
               }
             };
             CanvasRenderer2.prototype.createFontStyle = function(styles) {
@@ -7717,7 +7717,7 @@
                 fontSize2
               ];
             };
-            CanvasRenderer2.prototype.renderTextNode = function(text3, styles) {
+            CanvasRenderer2.prototype.renderTextNode = function(text4, styles) {
               return __awaiter(this, void 0, void 0, function() {
                 var font, paintOrder2;
                 var _this = this;
@@ -7728,20 +7728,20 @@
                   this.ctx.textAlign = "left";
                   this.ctx.textBaseline = "alphabetic";
                   paintOrder2 = styles.paintOrder;
-                  text3.textBounds.forEach(function(text4) {
+                  text4.textBounds.forEach(function(text5) {
                     paintOrder2.forEach(function(paintOrderLayer) {
                       switch (paintOrderLayer) {
                         case 0:
                           _this.ctx.fillStyle = asString(styles.color);
-                          _this.renderTextWithLetterSpacing(text4, styles.letterSpacing, styles.fontSize.number);
+                          _this.renderTextWithLetterSpacing(text5, styles.letterSpacing, styles.fontSize.number);
                           var textShadows = styles.textShadow;
-                          if (textShadows.length && text4.text.trim().length) {
+                          if (textShadows.length && text5.text.trim().length) {
                             textShadows.slice(0).reverse().forEach(function(textShadow2) {
                               _this.ctx.shadowColor = asString(textShadow2.color);
                               _this.ctx.shadowOffsetX = textShadow2.offsetX.number * _this.options.scale;
                               _this.ctx.shadowOffsetY = textShadow2.offsetY.number * _this.options.scale;
                               _this.ctx.shadowBlur = textShadow2.blur.number;
-                              _this.renderTextWithLetterSpacing(text4, styles.letterSpacing, styles.fontSize.number);
+                              _this.renderTextWithLetterSpacing(text5, styles.letterSpacing, styles.fontSize.number);
                             });
                             _this.ctx.shadowColor = "";
                             _this.ctx.shadowOffsetX = 0;
@@ -7754,24 +7754,24 @@
                             styles.textDecorationLine.forEach(function(textDecorationLine2) {
                               switch (textDecorationLine2) {
                                 case 1:
-                                  _this.ctx.fillRect(text4.bounds.left, text4.bounds.top + text4.bounds.height - decorationLineHeight_1, text4.bounds.width, decorationLineHeight_1);
+                                  _this.ctx.fillRect(text5.bounds.left, text5.bounds.top + text5.bounds.height - decorationLineHeight_1, text5.bounds.width, decorationLineHeight_1);
                                   break;
                                 case 2:
-                                  _this.ctx.fillRect(text4.bounds.left, text4.bounds.top, text4.bounds.width, decorationLineHeight_1);
+                                  _this.ctx.fillRect(text5.bounds.left, text5.bounds.top, text5.bounds.width, decorationLineHeight_1);
                                   break;
                                 case 3:
-                                  _this.ctx.fillRect(text4.bounds.left, text4.bounds.top + (text4.bounds.height / 2 - decorationLineHeight_1 / 2), text4.bounds.width, decorationLineHeight_1);
+                                  _this.ctx.fillRect(text5.bounds.left, text5.bounds.top + (text5.bounds.height / 2 - decorationLineHeight_1 / 2), text5.bounds.width, decorationLineHeight_1);
                                   break;
                               }
                             });
                           }
                           break;
                         case 1:
-                          if (styles.webkitTextStrokeWidth && text4.text.trim().length) {
+                          if (styles.webkitTextStrokeWidth && text5.text.trim().length) {
                             _this.ctx.strokeStyle = asString(styles.webkitTextStrokeColor);
                             _this.ctx.lineWidth = styles.webkitTextStrokeWidth;
                             _this.ctx.lineJoin = !!window.chrome ? "miter" : "round";
-                            _this.ctx.strokeText(text4.text, text4.bounds.left, text4.bounds.top + text4.bounds.height);
+                            _this.ctx.strokeText(text5.text, text5.bounds.left, text5.bounds.top + text5.bounds.height);
                           }
                           _this.ctx.strokeStyle = "";
                           _this.ctx.lineWidth = 0;
@@ -12102,15 +12102,15 @@
           return "\xA8E" + charCodeToEscape + "E";
         }
         showdown2.helper.escapeCharactersCallback = escapeCharactersCallback;
-        showdown2.helper.escapeCharacters = function(text3, charsToEscape, afterBackslash) {
+        showdown2.helper.escapeCharacters = function(text4, charsToEscape, afterBackslash) {
           "use strict";
           var regexString = "([" + charsToEscape.replace(/([\[\]\\])/g, "\\$1") + "])";
           if (afterBackslash) {
             regexString = "\\\\" + regexString;
           }
           var regex = new RegExp(regexString, "g");
-          text3 = text3.replace(regex, escapeCharactersCallback);
-          return text3;
+          text4 = text4.replace(regex, escapeCharactersCallback);
+          return text4;
         };
         showdown2.helper.unescapeHTMLEntities = function(txt) {
           "use strict";
@@ -13553,28 +13553,28 @@
             }
             listeners[name].push(callback2);
           }
-          function rTrimInputText(text3) {
-            var rsp = text3.match(/^\s*/)[0].length, rgx = new RegExp("^\\s{0," + rsp + "}", "gm");
-            return text3.replace(rgx, "");
+          function rTrimInputText(text4) {
+            var rsp = text4.match(/^\s*/)[0].length, rgx = new RegExp("^\\s{0," + rsp + "}", "gm");
+            return text4.replace(rgx, "");
           }
-          this._dispatch = function dispatch(evtName, text3, options2, globals) {
+          this._dispatch = function dispatch(evtName, text4, options2, globals) {
             if (listeners.hasOwnProperty(evtName)) {
               for (var ei = 0; ei < listeners[evtName].length; ++ei) {
-                var nText = listeners[evtName][ei](evtName, text3, this, options2, globals);
+                var nText = listeners[evtName][ei](evtName, text4, this, options2, globals);
                 if (nText && typeof nText !== "undefined") {
-                  text3 = nText;
+                  text4 = nText;
                 }
               }
             }
-            return text3;
+            return text4;
           };
           this.listen = function(name, callback2) {
             listen(name, callback2);
             return this;
           };
-          this.makeHtml = function(text3) {
-            if (!text3) {
-              return text3;
+          this.makeHtml = function(text4) {
+            if (!text4) {
+              return text4;
             }
             var globals = {
               gHtmlBlocks: [],
@@ -13595,37 +13595,37 @@
                 format: ""
               }
             };
-            text3 = text3.replace(/¨/g, "\xA8T");
-            text3 = text3.replace(/\$/g, "\xA8D");
-            text3 = text3.replace(/\r\n/g, "\n");
-            text3 = text3.replace(/\r/g, "\n");
-            text3 = text3.replace(/\u00A0/g, "&nbsp;");
+            text4 = text4.replace(/¨/g, "\xA8T");
+            text4 = text4.replace(/\$/g, "\xA8D");
+            text4 = text4.replace(/\r\n/g, "\n");
+            text4 = text4.replace(/\r/g, "\n");
+            text4 = text4.replace(/\u00A0/g, "&nbsp;");
             if (options.smartIndentationFix) {
-              text3 = rTrimInputText(text3);
+              text4 = rTrimInputText(text4);
             }
-            text3 = "\n\n" + text3 + "\n\n";
-            text3 = showdown2.subParser("detab")(text3, options, globals);
-            text3 = text3.replace(/^[ \t]+$/mg, "");
+            text4 = "\n\n" + text4 + "\n\n";
+            text4 = showdown2.subParser("detab")(text4, options, globals);
+            text4 = text4.replace(/^[ \t]+$/mg, "");
             showdown2.helper.forEach(langExtensions, function(ext) {
-              text3 = showdown2.subParser("runExtension")(ext, text3, options, globals);
+              text4 = showdown2.subParser("runExtension")(ext, text4, options, globals);
             });
-            text3 = showdown2.subParser("metadata")(text3, options, globals);
-            text3 = showdown2.subParser("hashPreCodeTags")(text3, options, globals);
-            text3 = showdown2.subParser("githubCodeBlocks")(text3, options, globals);
-            text3 = showdown2.subParser("hashHTMLBlocks")(text3, options, globals);
-            text3 = showdown2.subParser("hashCodeTags")(text3, options, globals);
-            text3 = showdown2.subParser("stripLinkDefinitions")(text3, options, globals);
-            text3 = showdown2.subParser("blockGamut")(text3, options, globals);
-            text3 = showdown2.subParser("unhashHTMLSpans")(text3, options, globals);
-            text3 = showdown2.subParser("unescapeSpecialChars")(text3, options, globals);
-            text3 = text3.replace(/¨D/g, "$$");
-            text3 = text3.replace(/¨T/g, "\xA8");
-            text3 = showdown2.subParser("completeHTMLDocument")(text3, options, globals);
+            text4 = showdown2.subParser("metadata")(text4, options, globals);
+            text4 = showdown2.subParser("hashPreCodeTags")(text4, options, globals);
+            text4 = showdown2.subParser("githubCodeBlocks")(text4, options, globals);
+            text4 = showdown2.subParser("hashHTMLBlocks")(text4, options, globals);
+            text4 = showdown2.subParser("hashCodeTags")(text4, options, globals);
+            text4 = showdown2.subParser("stripLinkDefinitions")(text4, options, globals);
+            text4 = showdown2.subParser("blockGamut")(text4, options, globals);
+            text4 = showdown2.subParser("unhashHTMLSpans")(text4, options, globals);
+            text4 = showdown2.subParser("unescapeSpecialChars")(text4, options, globals);
+            text4 = text4.replace(/¨D/g, "$$");
+            text4 = text4.replace(/¨T/g, "\xA8");
+            text4 = showdown2.subParser("completeHTMLDocument")(text4, options, globals);
             showdown2.helper.forEach(outputModifiers, function(ext) {
-              text3 = showdown2.subParser("runExtension")(ext, text3, options, globals);
+              text4 = showdown2.subParser("runExtension")(ext, text4, options, globals);
             });
             metadata = globals.metadata;
-            return text3;
+            return text4;
           };
           this.makeMarkdown = this.makeMd = function(src, HTMLParser) {
             src = src.replace(/\r\n/g, "\n");
@@ -13767,9 +13767,9 @@
             metadata.raw = raw;
           };
         };
-        showdown2.subParser("anchors", function(text3, options, globals) {
+        showdown2.subParser("anchors", function(text4, options, globals) {
           "use strict";
-          text3 = globals.converter._dispatch("anchors.before", text3, options, globals);
+          text4 = globals.converter._dispatch("anchors.before", text4, options, globals);
           var writeAnchorTag = function(wholeMatch, linkText, linkId, url, m5, m6, title) {
             if (showdown2.helper.isUndefined(title)) {
               title = "";
@@ -13804,18 +13804,18 @@
             result += ">" + linkText + "</a>";
             return result;
           };
-          text3 = text3.replace(/\[((?:\[[^\]]*]|[^\[\]])*)] ?(?:\n *)?\[(.*?)]()()()()/g, writeAnchorTag);
-          text3 = text3.replace(
+          text4 = text4.replace(/\[((?:\[[^\]]*]|[^\[\]])*)] ?(?:\n *)?\[(.*?)]()()()()/g, writeAnchorTag);
+          text4 = text4.replace(
             /\[((?:\[[^\]]*]|[^\[\]])*)]()[ \t]*\([ \t]?<([^>]*)>(?:[ \t]*((["'])([^"]*?)\5))?[ \t]?\)/g,
             writeAnchorTag
           );
-          text3 = text3.replace(
+          text4 = text4.replace(
             /\[((?:\[[^\]]*]|[^\[\]])*)]()[ \t]*\([ \t]?<?([\S]+?(?:\([\S]*?\)[\S]*?)?)>?(?:[ \t]*((["'])([^"]*?)\5))?[ \t]?\)/g,
             writeAnchorTag
           );
-          text3 = text3.replace(/\[([^\[\]]+)]()()()()()/g, writeAnchorTag);
+          text4 = text4.replace(/\[([^\[\]]+)]()()()()()/g, writeAnchorTag);
           if (options.ghMentions) {
-            text3 = text3.replace(/(^|\s)(\\)?(@([a-z\d]+(?:[a-z\d.-]+?[a-z\d]+)*))/gmi, function(wm, st, escape, mentions, username2) {
+            text4 = text4.replace(/(^|\s)(\\)?(@([a-z\d]+(?:[a-z\d.-]+?[a-z\d]+)*))/gmi, function(wm, st, escape, mentions, username2) {
               if (escape === "\\") {
                 return st + mentions;
               }
@@ -13829,8 +13829,8 @@
               return st + '<a href="' + lnk + '"' + target + ">" + mentions + "</a>";
             });
           }
-          text3 = globals.converter._dispatch("anchors.after", text3, options, globals);
-          return text3;
+          text4 = globals.converter._dispatch("anchors.after", text4, options, globals);
+          return text4;
         });
         var simpleURLRegex = /([*~_]+|\b)(((https?|ftp|dict):\/\/|www\.)[^'">\s]+?\.[^'">\s]+?)()(\1)?(?=\s|$)(?!["<>])/gi, simpleURLRegex2 = /([*~_]+|\b)(((https?|ftp|dict):\/\/|www\.)[^'">\s]+\.[^'">\s]+?)([.!?,()\[\]])?(\1)?(?=\s|$)(?!["<>])/gi, delimUrlRegex = /()<(((https?|ftp|dict):\/\/|www\.)[^'">\s]+)()>()/gi, simpleMailRegex = /(^|\s)(?:mailto:)?([A-Za-z0-9!#$%&'*+-/=?^_`{|}~.]+@[-a-z0-9]+(\.[-a-z0-9]+)*\.[a-z]+)(?=$|\s)/gmi, delimMailRegex = /<()(?:mailto:)?([-.\w]+@[-a-z0-9]+(\.[-a-z0-9]+)*\.[a-z]+)>/gi, replaceLink = function(options) {
           "use strict";
@@ -13863,52 +13863,52 @@
             return b + '<a href="' + href + '">' + mail + "</a>";
           };
         };
-        showdown2.subParser("autoLinks", function(text3, options, globals) {
+        showdown2.subParser("autoLinks", function(text4, options, globals) {
           "use strict";
-          text3 = globals.converter._dispatch("autoLinks.before", text3, options, globals);
-          text3 = text3.replace(delimUrlRegex, replaceLink(options));
-          text3 = text3.replace(delimMailRegex, replaceMail(options, globals));
-          text3 = globals.converter._dispatch("autoLinks.after", text3, options, globals);
-          return text3;
+          text4 = globals.converter._dispatch("autoLinks.before", text4, options, globals);
+          text4 = text4.replace(delimUrlRegex, replaceLink(options));
+          text4 = text4.replace(delimMailRegex, replaceMail(options, globals));
+          text4 = globals.converter._dispatch("autoLinks.after", text4, options, globals);
+          return text4;
         });
-        showdown2.subParser("simplifiedAutoLinks", function(text3, options, globals) {
+        showdown2.subParser("simplifiedAutoLinks", function(text4, options, globals) {
           "use strict";
           if (!options.simplifiedAutoLink) {
-            return text3;
+            return text4;
           }
-          text3 = globals.converter._dispatch("simplifiedAutoLinks.before", text3, options, globals);
+          text4 = globals.converter._dispatch("simplifiedAutoLinks.before", text4, options, globals);
           if (options.excludeTrailingPunctuationFromURLs) {
-            text3 = text3.replace(simpleURLRegex2, replaceLink(options));
+            text4 = text4.replace(simpleURLRegex2, replaceLink(options));
           } else {
-            text3 = text3.replace(simpleURLRegex, replaceLink(options));
+            text4 = text4.replace(simpleURLRegex, replaceLink(options));
           }
-          text3 = text3.replace(simpleMailRegex, replaceMail(options, globals));
-          text3 = globals.converter._dispatch("simplifiedAutoLinks.after", text3, options, globals);
-          return text3;
+          text4 = text4.replace(simpleMailRegex, replaceMail(options, globals));
+          text4 = globals.converter._dispatch("simplifiedAutoLinks.after", text4, options, globals);
+          return text4;
         });
-        showdown2.subParser("blockGamut", function(text3, options, globals) {
+        showdown2.subParser("blockGamut", function(text4, options, globals) {
           "use strict";
-          text3 = globals.converter._dispatch("blockGamut.before", text3, options, globals);
-          text3 = showdown2.subParser("blockQuotes")(text3, options, globals);
-          text3 = showdown2.subParser("headers")(text3, options, globals);
-          text3 = showdown2.subParser("horizontalRule")(text3, options, globals);
-          text3 = showdown2.subParser("lists")(text3, options, globals);
-          text3 = showdown2.subParser("codeBlocks")(text3, options, globals);
-          text3 = showdown2.subParser("tables")(text3, options, globals);
-          text3 = showdown2.subParser("hashHTMLBlocks")(text3, options, globals);
-          text3 = showdown2.subParser("paragraphs")(text3, options, globals);
-          text3 = globals.converter._dispatch("blockGamut.after", text3, options, globals);
-          return text3;
+          text4 = globals.converter._dispatch("blockGamut.before", text4, options, globals);
+          text4 = showdown2.subParser("blockQuotes")(text4, options, globals);
+          text4 = showdown2.subParser("headers")(text4, options, globals);
+          text4 = showdown2.subParser("horizontalRule")(text4, options, globals);
+          text4 = showdown2.subParser("lists")(text4, options, globals);
+          text4 = showdown2.subParser("codeBlocks")(text4, options, globals);
+          text4 = showdown2.subParser("tables")(text4, options, globals);
+          text4 = showdown2.subParser("hashHTMLBlocks")(text4, options, globals);
+          text4 = showdown2.subParser("paragraphs")(text4, options, globals);
+          text4 = globals.converter._dispatch("blockGamut.after", text4, options, globals);
+          return text4;
         });
-        showdown2.subParser("blockQuotes", function(text3, options, globals) {
+        showdown2.subParser("blockQuotes", function(text4, options, globals) {
           "use strict";
-          text3 = globals.converter._dispatch("blockQuotes.before", text3, options, globals);
-          text3 = text3 + "\n\n";
+          text4 = globals.converter._dispatch("blockQuotes.before", text4, options, globals);
+          text4 = text4 + "\n\n";
           var rgx = /(^ {0,3}>[ \t]?.+\n(.+\n)*\n*)+/gm;
           if (options.splitAdjacentBlockquotes) {
             rgx = /^ {0,3}>[\s\S]*?(?:\n\n)/gm;
           }
-          text3 = text3.replace(rgx, function(bq) {
+          text4 = text4.replace(rgx, function(bq) {
             bq = bq.replace(/^[ \t]*>[ \t]?/gm, "");
             bq = bq.replace(/¨0/g, "");
             bq = bq.replace(/^[ \t]+$/gm, "");
@@ -13923,15 +13923,15 @@
             });
             return showdown2.subParser("hashBlock")("<blockquote>\n" + bq + "\n</blockquote>", options, globals);
           });
-          text3 = globals.converter._dispatch("blockQuotes.after", text3, options, globals);
-          return text3;
+          text4 = globals.converter._dispatch("blockQuotes.after", text4, options, globals);
+          return text4;
         });
-        showdown2.subParser("codeBlocks", function(text3, options, globals) {
+        showdown2.subParser("codeBlocks", function(text4, options, globals) {
           "use strict";
-          text3 = globals.converter._dispatch("codeBlocks.before", text3, options, globals);
-          text3 += "\xA80";
+          text4 = globals.converter._dispatch("codeBlocks.before", text4, options, globals);
+          text4 += "\xA80";
           var pattern = /(?:\n\n|^)((?:(?:[ ]{4}|\t).*\n+)+)(\n*[ ]{0,3}[^ \t\n]|(?=¨0))/g;
-          text3 = text3.replace(pattern, function(wholeMatch, m1, m2) {
+          text4 = text4.replace(pattern, function(wholeMatch, m1, m2) {
             var codeblock = m1, nextChar = m2, end2 = "\n";
             codeblock = showdown2.subParser("outdent")(codeblock, options, globals);
             codeblock = showdown2.subParser("encodeCode")(codeblock, options, globals);
@@ -13944,17 +13944,17 @@
             codeblock = "<pre><code>" + codeblock + end2 + "</code></pre>";
             return showdown2.subParser("hashBlock")(codeblock, options, globals) + nextChar;
           });
-          text3 = text3.replace(/¨0/, "");
-          text3 = globals.converter._dispatch("codeBlocks.after", text3, options, globals);
-          return text3;
+          text4 = text4.replace(/¨0/, "");
+          text4 = globals.converter._dispatch("codeBlocks.after", text4, options, globals);
+          return text4;
         });
-        showdown2.subParser("codeSpans", function(text3, options, globals) {
+        showdown2.subParser("codeSpans", function(text4, options, globals) {
           "use strict";
-          text3 = globals.converter._dispatch("codeSpans.before", text3, options, globals);
-          if (typeof text3 === "undefined") {
-            text3 = "";
+          text4 = globals.converter._dispatch("codeSpans.before", text4, options, globals);
+          if (typeof text4 === "undefined") {
+            text4 = "";
           }
-          text3 = text3.replace(
+          text4 = text4.replace(
             /(^|[^\\])(`+)([^\r]*?[^`])\2(?!`)/gm,
             function(wholeMatch, m1, m2, m3) {
               var c = m3;
@@ -13966,15 +13966,15 @@
               return c;
             }
           );
-          text3 = globals.converter._dispatch("codeSpans.after", text3, options, globals);
-          return text3;
+          text4 = globals.converter._dispatch("codeSpans.after", text4, options, globals);
+          return text4;
         });
-        showdown2.subParser("completeHTMLDocument", function(text3, options, globals) {
+        showdown2.subParser("completeHTMLDocument", function(text4, options, globals) {
           "use strict";
           if (!options.completeHTMLDocument) {
-            return text3;
+            return text4;
           }
-          text3 = globals.converter._dispatch("completeHTMLDocument.before", text3, options, globals);
+          text4 = globals.converter._dispatch("completeHTMLDocument.before", text4, options, globals);
           var doctype = "html", doctypeParsed = "<!DOCTYPE HTML>\n", title = "", charset = '<meta charset="utf-8">\n', lang2 = "", metadata = "";
           if (typeof globals.metadata.parsed.doctype !== "undefined") {
             doctypeParsed = "<!DOCTYPE " + globals.metadata.parsed.doctype + ">\n";
@@ -14008,99 +14008,99 @@
               }
             }
           }
-          text3 = doctypeParsed + "<html" + lang2 + ">\n<head>\n" + title + charset + metadata + "</head>\n<body>\n" + text3.trim() + "\n</body>\n</html>";
-          text3 = globals.converter._dispatch("completeHTMLDocument.after", text3, options, globals);
-          return text3;
+          text4 = doctypeParsed + "<html" + lang2 + ">\n<head>\n" + title + charset + metadata + "</head>\n<body>\n" + text4.trim() + "\n</body>\n</html>";
+          text4 = globals.converter._dispatch("completeHTMLDocument.after", text4, options, globals);
+          return text4;
         });
-        showdown2.subParser("detab", function(text3, options, globals) {
+        showdown2.subParser("detab", function(text4, options, globals) {
           "use strict";
-          text3 = globals.converter._dispatch("detab.before", text3, options, globals);
-          text3 = text3.replace(/\t(?=\t)/g, "    ");
-          text3 = text3.replace(/\t/g, "\xA8A\xA8B");
-          text3 = text3.replace(/¨B(.+?)¨A/g, function(wholeMatch, m1) {
+          text4 = globals.converter._dispatch("detab.before", text4, options, globals);
+          text4 = text4.replace(/\t(?=\t)/g, "    ");
+          text4 = text4.replace(/\t/g, "\xA8A\xA8B");
+          text4 = text4.replace(/¨B(.+?)¨A/g, function(wholeMatch, m1) {
             var leadingText = m1, numSpaces = 4 - leadingText.length % 4;
             for (var i = 0; i < numSpaces; i++) {
               leadingText += " ";
             }
             return leadingText;
           });
-          text3 = text3.replace(/¨A/g, "    ");
-          text3 = text3.replace(/¨B/g, "");
-          text3 = globals.converter._dispatch("detab.after", text3, options, globals);
-          return text3;
+          text4 = text4.replace(/¨A/g, "    ");
+          text4 = text4.replace(/¨B/g, "");
+          text4 = globals.converter._dispatch("detab.after", text4, options, globals);
+          return text4;
         });
-        showdown2.subParser("ellipsis", function(text3, options, globals) {
+        showdown2.subParser("ellipsis", function(text4, options, globals) {
           "use strict";
           if (!options.ellipsis) {
-            return text3;
+            return text4;
           }
-          text3 = globals.converter._dispatch("ellipsis.before", text3, options, globals);
-          text3 = text3.replace(/\.\.\./g, "\u2026");
-          text3 = globals.converter._dispatch("ellipsis.after", text3, options, globals);
-          return text3;
+          text4 = globals.converter._dispatch("ellipsis.before", text4, options, globals);
+          text4 = text4.replace(/\.\.\./g, "\u2026");
+          text4 = globals.converter._dispatch("ellipsis.after", text4, options, globals);
+          return text4;
         });
-        showdown2.subParser("emoji", function(text3, options, globals) {
+        showdown2.subParser("emoji", function(text4, options, globals) {
           "use strict";
           if (!options.emoji) {
-            return text3;
+            return text4;
           }
-          text3 = globals.converter._dispatch("emoji.before", text3, options, globals);
+          text4 = globals.converter._dispatch("emoji.before", text4, options, globals);
           var emojiRgx = /:([\S]+?):/g;
-          text3 = text3.replace(emojiRgx, function(wm, emojiCode) {
+          text4 = text4.replace(emojiRgx, function(wm, emojiCode) {
             if (showdown2.helper.emojis.hasOwnProperty(emojiCode)) {
               return showdown2.helper.emojis[emojiCode];
             }
             return wm;
           });
-          text3 = globals.converter._dispatch("emoji.after", text3, options, globals);
-          return text3;
+          text4 = globals.converter._dispatch("emoji.after", text4, options, globals);
+          return text4;
         });
-        showdown2.subParser("encodeAmpsAndAngles", function(text3, options, globals) {
+        showdown2.subParser("encodeAmpsAndAngles", function(text4, options, globals) {
           "use strict";
-          text3 = globals.converter._dispatch("encodeAmpsAndAngles.before", text3, options, globals);
-          text3 = text3.replace(/&(?!#?[xX]?(?:[0-9a-fA-F]+|\w+);)/g, "&amp;");
-          text3 = text3.replace(/<(?![a-z\/?$!])/gi, "&lt;");
-          text3 = text3.replace(/</g, "&lt;");
-          text3 = text3.replace(/>/g, "&gt;");
-          text3 = globals.converter._dispatch("encodeAmpsAndAngles.after", text3, options, globals);
-          return text3;
+          text4 = globals.converter._dispatch("encodeAmpsAndAngles.before", text4, options, globals);
+          text4 = text4.replace(/&(?!#?[xX]?(?:[0-9a-fA-F]+|\w+);)/g, "&amp;");
+          text4 = text4.replace(/<(?![a-z\/?$!])/gi, "&lt;");
+          text4 = text4.replace(/</g, "&lt;");
+          text4 = text4.replace(/>/g, "&gt;");
+          text4 = globals.converter._dispatch("encodeAmpsAndAngles.after", text4, options, globals);
+          return text4;
         });
-        showdown2.subParser("encodeBackslashEscapes", function(text3, options, globals) {
+        showdown2.subParser("encodeBackslashEscapes", function(text4, options, globals) {
           "use strict";
-          text3 = globals.converter._dispatch("encodeBackslashEscapes.before", text3, options, globals);
-          text3 = text3.replace(/\\(\\)/g, showdown2.helper.escapeCharactersCallback);
-          text3 = text3.replace(/\\([`*_{}\[\]()>#+.!~=|:-])/g, showdown2.helper.escapeCharactersCallback);
-          text3 = globals.converter._dispatch("encodeBackslashEscapes.after", text3, options, globals);
-          return text3;
+          text4 = globals.converter._dispatch("encodeBackslashEscapes.before", text4, options, globals);
+          text4 = text4.replace(/\\(\\)/g, showdown2.helper.escapeCharactersCallback);
+          text4 = text4.replace(/\\([`*_{}\[\]()>#+.!~=|:-])/g, showdown2.helper.escapeCharactersCallback);
+          text4 = globals.converter._dispatch("encodeBackslashEscapes.after", text4, options, globals);
+          return text4;
         });
-        showdown2.subParser("encodeCode", function(text3, options, globals) {
+        showdown2.subParser("encodeCode", function(text4, options, globals) {
           "use strict";
-          text3 = globals.converter._dispatch("encodeCode.before", text3, options, globals);
-          text3 = text3.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/([*_{}\[\]\\=~-])/g, showdown2.helper.escapeCharactersCallback);
-          text3 = globals.converter._dispatch("encodeCode.after", text3, options, globals);
-          return text3;
+          text4 = globals.converter._dispatch("encodeCode.before", text4, options, globals);
+          text4 = text4.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/([*_{}\[\]\\=~-])/g, showdown2.helper.escapeCharactersCallback);
+          text4 = globals.converter._dispatch("encodeCode.after", text4, options, globals);
+          return text4;
         });
-        showdown2.subParser("escapeSpecialCharsWithinTagAttributes", function(text3, options, globals) {
+        showdown2.subParser("escapeSpecialCharsWithinTagAttributes", function(text4, options, globals) {
           "use strict";
-          text3 = globals.converter._dispatch("escapeSpecialCharsWithinTagAttributes.before", text3, options, globals);
+          text4 = globals.converter._dispatch("escapeSpecialCharsWithinTagAttributes.before", text4, options, globals);
           var tags = /<\/?[a-z\d_:-]+(?:[\s]+[\s\S]+?)?>/gi, comments = /<!(--(?:(?:[^>-]|-[^>])(?:[^-]|-[^-])*)--)>/gi;
-          text3 = text3.replace(tags, function(wholeMatch) {
+          text4 = text4.replace(tags, function(wholeMatch) {
             return wholeMatch.replace(/(.)<\/?code>(?=.)/g, "$1`").replace(/([\\`*_~=|])/g, showdown2.helper.escapeCharactersCallback);
           });
-          text3 = text3.replace(comments, function(wholeMatch) {
+          text4 = text4.replace(comments, function(wholeMatch) {
             return wholeMatch.replace(/([\\`*_~=|])/g, showdown2.helper.escapeCharactersCallback);
           });
-          text3 = globals.converter._dispatch("escapeSpecialCharsWithinTagAttributes.after", text3, options, globals);
-          return text3;
+          text4 = globals.converter._dispatch("escapeSpecialCharsWithinTagAttributes.after", text4, options, globals);
+          return text4;
         });
-        showdown2.subParser("githubCodeBlocks", function(text3, options, globals) {
+        showdown2.subParser("githubCodeBlocks", function(text4, options, globals) {
           "use strict";
           if (!options.ghCodeBlocks) {
-            return text3;
+            return text4;
           }
-          text3 = globals.converter._dispatch("githubCodeBlocks.before", text3, options, globals);
-          text3 += "\xA80";
-          text3 = text3.replace(/(?:^|\n)(?: {0,3})(```+|~~~+)(?: *)([^\s`~]*)\n([\s\S]*?)\n(?: {0,3})\1/g, function(wholeMatch, delim, language, codeblock) {
+          text4 = globals.converter._dispatch("githubCodeBlocks.before", text4, options, globals);
+          text4 += "\xA80";
+          text4 = text4.replace(/(?:^|\n)(?: {0,3})(```+|~~~+)(?: *)([^\s`~]*)\n([\s\S]*?)\n(?: {0,3})\1/g, function(wholeMatch, delim, language, codeblock) {
             var end2 = options.omitExtraWLInCodeBlocks ? "" : "\n";
             codeblock = showdown2.subParser("encodeCode")(codeblock, options, globals);
             codeblock = showdown2.subParser("detab")(codeblock, options, globals);
@@ -14110,29 +14110,29 @@
             codeblock = showdown2.subParser("hashBlock")(codeblock, options, globals);
             return "\n\n\xA8G" + (globals.ghCodeBlocks.push({ text: wholeMatch, codeblock }) - 1) + "G\n\n";
           });
-          text3 = text3.replace(/¨0/, "");
-          return globals.converter._dispatch("githubCodeBlocks.after", text3, options, globals);
+          text4 = text4.replace(/¨0/, "");
+          return globals.converter._dispatch("githubCodeBlocks.after", text4, options, globals);
         });
-        showdown2.subParser("hashBlock", function(text3, options, globals) {
+        showdown2.subParser("hashBlock", function(text4, options, globals) {
           "use strict";
-          text3 = globals.converter._dispatch("hashBlock.before", text3, options, globals);
-          text3 = text3.replace(/(^\n+|\n+$)/g, "");
-          text3 = "\n\n\xA8K" + (globals.gHtmlBlocks.push(text3) - 1) + "K\n\n";
-          text3 = globals.converter._dispatch("hashBlock.after", text3, options, globals);
-          return text3;
+          text4 = globals.converter._dispatch("hashBlock.before", text4, options, globals);
+          text4 = text4.replace(/(^\n+|\n+$)/g, "");
+          text4 = "\n\n\xA8K" + (globals.gHtmlBlocks.push(text4) - 1) + "K\n\n";
+          text4 = globals.converter._dispatch("hashBlock.after", text4, options, globals);
+          return text4;
         });
-        showdown2.subParser("hashCodeTags", function(text3, options, globals) {
+        showdown2.subParser("hashCodeTags", function(text4, options, globals) {
           "use strict";
-          text3 = globals.converter._dispatch("hashCodeTags.before", text3, options, globals);
+          text4 = globals.converter._dispatch("hashCodeTags.before", text4, options, globals);
           var repFunc = function(wholeMatch, match3, left2, right2) {
             var codeblock = left2 + showdown2.subParser("encodeCode")(match3, options, globals) + right2;
             return "\xA8C" + (globals.gHtmlSpans.push(codeblock) - 1) + "C";
           };
-          text3 = showdown2.helper.replaceRecursiveRegExp(text3, repFunc, "<code\\b[^>]*>", "</code>", "gim");
-          text3 = globals.converter._dispatch("hashCodeTags.after", text3, options, globals);
-          return text3;
+          text4 = showdown2.helper.replaceRecursiveRegExp(text4, repFunc, "<code\\b[^>]*>", "</code>", "gim");
+          text4 = globals.converter._dispatch("hashCodeTags.after", text4, options, globals);
+          return text4;
         });
-        showdown2.subParser("hashElement", function(text3, options, globals) {
+        showdown2.subParser("hashElement", function(text4, options, globals) {
           "use strict";
           return function(wholeMatch, m1) {
             var blockText = m1;
@@ -14143,9 +14143,9 @@
             return blockText;
           };
         });
-        showdown2.subParser("hashHTMLBlocks", function(text3, options, globals) {
+        showdown2.subParser("hashHTMLBlocks", function(text4, options, globals) {
           "use strict";
-          text3 = globals.converter._dispatch("hashHTMLBlocks.before", text3, options, globals);
+          text4 = globals.converter._dispatch("hashHTMLBlocks.before", text4, options, globals);
           var blockTags = [
             "pre",
             "div",
@@ -14189,58 +14189,58 @@
             return "\n\n\xA8K" + (globals.gHtmlBlocks.push(txt) - 1) + "K\n\n";
           };
           if (options.backslashEscapesHTMLTags) {
-            text3 = text3.replace(/\\<(\/?[^>]+?)>/g, function(wm, inside) {
+            text4 = text4.replace(/\\<(\/?[^>]+?)>/g, function(wm, inside) {
               return "&lt;" + inside + "&gt;";
             });
           }
           for (var i = 0; i < blockTags.length; ++i) {
             var opTagPos, rgx1 = new RegExp("^ {0,3}(<" + blockTags[i] + "\\b[^>]*>)", "im"), patLeft = "<" + blockTags[i] + "\\b[^>]*>", patRight = "</" + blockTags[i] + ">";
-            while ((opTagPos = showdown2.helper.regexIndexOf(text3, rgx1)) !== -1) {
-              var subTexts = showdown2.helper.splitAtIndex(text3, opTagPos), newSubText1 = showdown2.helper.replaceRecursiveRegExp(subTexts[1], repFunc, patLeft, patRight, "im");
+            while ((opTagPos = showdown2.helper.regexIndexOf(text4, rgx1)) !== -1) {
+              var subTexts = showdown2.helper.splitAtIndex(text4, opTagPos), newSubText1 = showdown2.helper.replaceRecursiveRegExp(subTexts[1], repFunc, patLeft, patRight, "im");
               if (newSubText1 === subTexts[1]) {
                 break;
               }
-              text3 = subTexts[0].concat(newSubText1);
+              text4 = subTexts[0].concat(newSubText1);
             }
           }
-          text3 = text3.replace(
+          text4 = text4.replace(
             /(\n {0,3}(<(hr)\b([^<>])*?\/?>)[ \t]*(?=\n{2,}))/g,
-            showdown2.subParser("hashElement")(text3, options, globals)
+            showdown2.subParser("hashElement")(text4, options, globals)
           );
-          text3 = showdown2.helper.replaceRecursiveRegExp(text3, function(txt) {
+          text4 = showdown2.helper.replaceRecursiveRegExp(text4, function(txt) {
             return "\n\n\xA8K" + (globals.gHtmlBlocks.push(txt) - 1) + "K\n\n";
           }, "^ {0,3}<!--", "-->", "gm");
-          text3 = text3.replace(
+          text4 = text4.replace(
             /(?:\n\n)( {0,3}(?:<([?%])[^\r]*?\2>)[ \t]*(?=\n{2,}))/g,
-            showdown2.subParser("hashElement")(text3, options, globals)
+            showdown2.subParser("hashElement")(text4, options, globals)
           );
-          text3 = globals.converter._dispatch("hashHTMLBlocks.after", text3, options, globals);
-          return text3;
+          text4 = globals.converter._dispatch("hashHTMLBlocks.after", text4, options, globals);
+          return text4;
         });
-        showdown2.subParser("hashHTMLSpans", function(text3, options, globals) {
+        showdown2.subParser("hashHTMLSpans", function(text4, options, globals) {
           "use strict";
-          text3 = globals.converter._dispatch("hashHTMLSpans.before", text3, options, globals);
+          text4 = globals.converter._dispatch("hashHTMLSpans.before", text4, options, globals);
           function hashHTMLSpan(html3) {
             return "\xA8C" + (globals.gHtmlSpans.push(html3) - 1) + "C";
           }
-          text3 = text3.replace(/<[^>]+?\/>/gi, function(wm) {
+          text4 = text4.replace(/<[^>]+?\/>/gi, function(wm) {
             return hashHTMLSpan(wm);
           });
-          text3 = text3.replace(/<([^>]+?)>[\s\S]*?<\/\1>/g, function(wm) {
+          text4 = text4.replace(/<([^>]+?)>[\s\S]*?<\/\1>/g, function(wm) {
             return hashHTMLSpan(wm);
           });
-          text3 = text3.replace(/<([^>]+?)\s[^>]+?>[\s\S]*?<\/\1>/g, function(wm) {
+          text4 = text4.replace(/<([^>]+?)\s[^>]+?>[\s\S]*?<\/\1>/g, function(wm) {
             return hashHTMLSpan(wm);
           });
-          text3 = text3.replace(/<[^>]+?>/gi, function(wm) {
+          text4 = text4.replace(/<[^>]+?>/gi, function(wm) {
             return hashHTMLSpan(wm);
           });
-          text3 = globals.converter._dispatch("hashHTMLSpans.after", text3, options, globals);
-          return text3;
+          text4 = globals.converter._dispatch("hashHTMLSpans.after", text4, options, globals);
+          return text4;
         });
-        showdown2.subParser("unhashHTMLSpans", function(text3, options, globals) {
+        showdown2.subParser("unhashHTMLSpans", function(text4, options, globals) {
           "use strict";
-          text3 = globals.converter._dispatch("unhashHTMLSpans.before", text3, options, globals);
+          text4 = globals.converter._dispatch("unhashHTMLSpans.before", text4, options, globals);
           for (var i = 0; i < globals.gHtmlSpans.length; ++i) {
             var repText = globals.gHtmlSpans[i], limit = 0;
             while (/¨C(\d+)C/.test(repText)) {
@@ -14252,36 +14252,36 @@
               }
               ++limit;
             }
-            text3 = text3.replace("\xA8C" + i + "C", repText);
+            text4 = text4.replace("\xA8C" + i + "C", repText);
           }
-          text3 = globals.converter._dispatch("unhashHTMLSpans.after", text3, options, globals);
-          return text3;
+          text4 = globals.converter._dispatch("unhashHTMLSpans.after", text4, options, globals);
+          return text4;
         });
-        showdown2.subParser("hashPreCodeTags", function(text3, options, globals) {
+        showdown2.subParser("hashPreCodeTags", function(text4, options, globals) {
           "use strict";
-          text3 = globals.converter._dispatch("hashPreCodeTags.before", text3, options, globals);
+          text4 = globals.converter._dispatch("hashPreCodeTags.before", text4, options, globals);
           var repFunc = function(wholeMatch, match3, left2, right2) {
             var codeblock = left2 + showdown2.subParser("encodeCode")(match3, options, globals) + right2;
             return "\n\n\xA8G" + (globals.ghCodeBlocks.push({ text: wholeMatch, codeblock }) - 1) + "G\n\n";
           };
-          text3 = showdown2.helper.replaceRecursiveRegExp(text3, repFunc, "^ {0,3}<pre\\b[^>]*>\\s*<code\\b[^>]*>", "^ {0,3}</code>\\s*</pre>", "gim");
-          text3 = globals.converter._dispatch("hashPreCodeTags.after", text3, options, globals);
-          return text3;
+          text4 = showdown2.helper.replaceRecursiveRegExp(text4, repFunc, "^ {0,3}<pre\\b[^>]*>\\s*<code\\b[^>]*>", "^ {0,3}</code>\\s*</pre>", "gim");
+          text4 = globals.converter._dispatch("hashPreCodeTags.after", text4, options, globals);
+          return text4;
         });
-        showdown2.subParser("headers", function(text3, options, globals) {
+        showdown2.subParser("headers", function(text4, options, globals) {
           "use strict";
-          text3 = globals.converter._dispatch("headers.before", text3, options, globals);
+          text4 = globals.converter._dispatch("headers.before", text4, options, globals);
           var headerLevelStart = isNaN(parseInt(options.headerLevelStart)) ? 1 : parseInt(options.headerLevelStart), setextRegexH1 = options.smoothLivePreview ? /^(.+)[ \t]*\n={2,}[ \t]*\n+/gm : /^(.+)[ \t]*\n=+[ \t]*\n+/gm, setextRegexH2 = options.smoothLivePreview ? /^(.+)[ \t]*\n-{2,}[ \t]*\n+/gm : /^(.+)[ \t]*\n-+[ \t]*\n+/gm;
-          text3 = text3.replace(setextRegexH1, function(wholeMatch, m1) {
+          text4 = text4.replace(setextRegexH1, function(wholeMatch, m1) {
             var spanGamut = showdown2.subParser("spanGamut")(m1, options, globals), hID = options.noHeaderId ? "" : ' id="' + headerId(m1) + '"', hLevel = headerLevelStart, hashBlock = "<h" + hLevel + hID + ">" + spanGamut + "</h" + hLevel + ">";
             return showdown2.subParser("hashBlock")(hashBlock, options, globals);
           });
-          text3 = text3.replace(setextRegexH2, function(matchFound, m1) {
+          text4 = text4.replace(setextRegexH2, function(matchFound, m1) {
             var spanGamut = showdown2.subParser("spanGamut")(m1, options, globals), hID = options.noHeaderId ? "" : ' id="' + headerId(m1) + '"', hLevel = headerLevelStart + 1, hashBlock = "<h" + hLevel + hID + ">" + spanGamut + "</h" + hLevel + ">";
             return showdown2.subParser("hashBlock")(hashBlock, options, globals);
           });
           var atxStyle = options.requireSpaceBeforeHeadingText ? /^(#{1,6})[ \t]+(.+?)[ \t]*#*\n+/gm : /^(#{1,6})[ \t]*(.+?)[ \t]*#*\n+/gm;
-          text3 = text3.replace(atxStyle, function(wholeMatch, m1, m2) {
+          text4 = text4.replace(atxStyle, function(wholeMatch, m1, m2) {
             var hText = m2;
             if (options.customizedHeaderId) {
               hText = m2.replace(/\s?\{([^{]+?)}\s*$/, "");
@@ -14325,22 +14325,22 @@
             }
             return title;
           }
-          text3 = globals.converter._dispatch("headers.after", text3, options, globals);
-          return text3;
+          text4 = globals.converter._dispatch("headers.after", text4, options, globals);
+          return text4;
         });
-        showdown2.subParser("horizontalRule", function(text3, options, globals) {
+        showdown2.subParser("horizontalRule", function(text4, options, globals) {
           "use strict";
-          text3 = globals.converter._dispatch("horizontalRule.before", text3, options, globals);
+          text4 = globals.converter._dispatch("horizontalRule.before", text4, options, globals);
           var key = showdown2.subParser("hashBlock")("<hr />", options, globals);
-          text3 = text3.replace(/^ {0,2}( ?-){3,}[ \t]*$/gm, key);
-          text3 = text3.replace(/^ {0,2}( ?\*){3,}[ \t]*$/gm, key);
-          text3 = text3.replace(/^ {0,2}( ?_){3,}[ \t]*$/gm, key);
-          text3 = globals.converter._dispatch("horizontalRule.after", text3, options, globals);
-          return text3;
+          text4 = text4.replace(/^ {0,2}( ?-){3,}[ \t]*$/gm, key);
+          text4 = text4.replace(/^ {0,2}( ?\*){3,}[ \t]*$/gm, key);
+          text4 = text4.replace(/^ {0,2}( ?_){3,}[ \t]*$/gm, key);
+          text4 = globals.converter._dispatch("horizontalRule.after", text4, options, globals);
+          return text4;
         });
-        showdown2.subParser("images", function(text3, options, globals) {
+        showdown2.subParser("images", function(text4, options, globals) {
           "use strict";
-          text3 = globals.converter._dispatch("images.before", text3, options, globals);
+          text4 = globals.converter._dispatch("images.before", text4, options, globals);
           var inlineRegExp = /!\[([^\]]*?)][ \t]*()\([ \t]?<?([\S]+?(?:\([\S]*?\)[\S]*?)?)>?(?: =([*\d]+[A-Za-z%]{0,4})x([*\d]+[A-Za-z%]{0,4}))?[ \t]*(?:(["'])([^"]*?)\6)?[ \t]?\)/g, crazyRegExp = /!\[([^\]]*?)][ \t]*()\([ \t]?<([^>]*)>(?: =([*\d]+[A-Za-z%]{0,4})x([*\d]+[A-Za-z%]{0,4}))?[ \t]*(?:(?:(["'])([^"]*?)\6))?[ \t]?\)/g, base64RegExp = /!\[([^\]]*?)][ \t]*()\([ \t]?<?(data:.+?\/.+?;base64,[A-Za-z0-9+/=\n]+?)>?(?: =([*\d]+[A-Za-z%]{0,4})x([*\d]+[A-Za-z%]{0,4}))?[ \t]*(?:(["'])([^"]*?)\6)?[ \t]?\)/g, referenceRegExp = /!\[([^\]]*?)] ?(?:\n *)?\[([\s\S]*?)]()()()()()/g, refShortcutRegExp = /!\[([^\[\]]+)]()()()()()/g;
           function writeImageTagBase64(wholeMatch, altText, linkId, url, width, height, m5, title) {
             url = url.replace(/\s/g, "");
@@ -14388,66 +14388,66 @@
             result += " />";
             return result;
           }
-          text3 = text3.replace(referenceRegExp, writeImageTag);
-          text3 = text3.replace(base64RegExp, writeImageTagBase64);
-          text3 = text3.replace(crazyRegExp, writeImageTag);
-          text3 = text3.replace(inlineRegExp, writeImageTag);
-          text3 = text3.replace(refShortcutRegExp, writeImageTag);
-          text3 = globals.converter._dispatch("images.after", text3, options, globals);
-          return text3;
+          text4 = text4.replace(referenceRegExp, writeImageTag);
+          text4 = text4.replace(base64RegExp, writeImageTagBase64);
+          text4 = text4.replace(crazyRegExp, writeImageTag);
+          text4 = text4.replace(inlineRegExp, writeImageTag);
+          text4 = text4.replace(refShortcutRegExp, writeImageTag);
+          text4 = globals.converter._dispatch("images.after", text4, options, globals);
+          return text4;
         });
-        showdown2.subParser("italicsAndBold", function(text3, options, globals) {
+        showdown2.subParser("italicsAndBold", function(text4, options, globals) {
           "use strict";
-          text3 = globals.converter._dispatch("italicsAndBold.before", text3, options, globals);
+          text4 = globals.converter._dispatch("italicsAndBold.before", text4, options, globals);
           function parseInside(txt, left2, right2) {
             return left2 + txt + right2;
           }
           if (options.literalMidWordUnderscores) {
-            text3 = text3.replace(/\b___(\S[\s\S]*?)___\b/g, function(wm, txt) {
+            text4 = text4.replace(/\b___(\S[\s\S]*?)___\b/g, function(wm, txt) {
               return parseInside(txt, "<strong><em>", "</em></strong>");
             });
-            text3 = text3.replace(/\b__(\S[\s\S]*?)__\b/g, function(wm, txt) {
+            text4 = text4.replace(/\b__(\S[\s\S]*?)__\b/g, function(wm, txt) {
               return parseInside(txt, "<strong>", "</strong>");
             });
-            text3 = text3.replace(/\b_(\S[\s\S]*?)_\b/g, function(wm, txt) {
+            text4 = text4.replace(/\b_(\S[\s\S]*?)_\b/g, function(wm, txt) {
               return parseInside(txt, "<em>", "</em>");
             });
           } else {
-            text3 = text3.replace(/___(\S[\s\S]*?)___/g, function(wm, m) {
+            text4 = text4.replace(/___(\S[\s\S]*?)___/g, function(wm, m) {
               return /\S$/.test(m) ? parseInside(m, "<strong><em>", "</em></strong>") : wm;
             });
-            text3 = text3.replace(/__(\S[\s\S]*?)__/g, function(wm, m) {
+            text4 = text4.replace(/__(\S[\s\S]*?)__/g, function(wm, m) {
               return /\S$/.test(m) ? parseInside(m, "<strong>", "</strong>") : wm;
             });
-            text3 = text3.replace(/_([^\s_][\s\S]*?)_/g, function(wm, m) {
+            text4 = text4.replace(/_([^\s_][\s\S]*?)_/g, function(wm, m) {
               return /\S$/.test(m) ? parseInside(m, "<em>", "</em>") : wm;
             });
           }
           if (options.literalMidWordAsterisks) {
-            text3 = text3.replace(/([^*]|^)\B\*\*\*(\S[\s\S]*?)\*\*\*\B(?!\*)/g, function(wm, lead, txt) {
+            text4 = text4.replace(/([^*]|^)\B\*\*\*(\S[\s\S]*?)\*\*\*\B(?!\*)/g, function(wm, lead, txt) {
               return parseInside(txt, lead + "<strong><em>", "</em></strong>");
             });
-            text3 = text3.replace(/([^*]|^)\B\*\*(\S[\s\S]*?)\*\*\B(?!\*)/g, function(wm, lead, txt) {
+            text4 = text4.replace(/([^*]|^)\B\*\*(\S[\s\S]*?)\*\*\B(?!\*)/g, function(wm, lead, txt) {
               return parseInside(txt, lead + "<strong>", "</strong>");
             });
-            text3 = text3.replace(/([^*]|^)\B\*(\S[\s\S]*?)\*\B(?!\*)/g, function(wm, lead, txt) {
+            text4 = text4.replace(/([^*]|^)\B\*(\S[\s\S]*?)\*\B(?!\*)/g, function(wm, lead, txt) {
               return parseInside(txt, lead + "<em>", "</em>");
             });
           } else {
-            text3 = text3.replace(/\*\*\*(\S[\s\S]*?)\*\*\*/g, function(wm, m) {
+            text4 = text4.replace(/\*\*\*(\S[\s\S]*?)\*\*\*/g, function(wm, m) {
               return /\S$/.test(m) ? parseInside(m, "<strong><em>", "</em></strong>") : wm;
             });
-            text3 = text3.replace(/\*\*(\S[\s\S]*?)\*\*/g, function(wm, m) {
+            text4 = text4.replace(/\*\*(\S[\s\S]*?)\*\*/g, function(wm, m) {
               return /\S$/.test(m) ? parseInside(m, "<strong>", "</strong>") : wm;
             });
-            text3 = text3.replace(/\*([^\s*][\s\S]*?)\*/g, function(wm, m) {
+            text4 = text4.replace(/\*([^\s*][\s\S]*?)\*/g, function(wm, m) {
               return /\S$/.test(m) ? parseInside(m, "<em>", "</em>") : wm;
             });
           }
-          text3 = globals.converter._dispatch("italicsAndBold.after", text3, options, globals);
-          return text3;
+          text4 = globals.converter._dispatch("italicsAndBold.after", text4, options, globals);
+          return text4;
         });
-        showdown2.subParser("lists", function(text3, options, globals) {
+        showdown2.subParser("lists", function(text4, options, globals) {
           "use strict";
           function processListItems(listStr, trimTrailing) {
             globals.gListLevel++;
@@ -14528,10 +14528,10 @@
             }
             return result;
           }
-          text3 = globals.converter._dispatch("lists.before", text3, options, globals);
-          text3 += "\xA80";
+          text4 = globals.converter._dispatch("lists.before", text4, options, globals);
+          text4 += "\xA80";
           if (globals.gListLevel) {
-            text3 = text3.replace(
+            text4 = text4.replace(
               /^(( {0,3}([*+-]|\d+[.])[ \t]+)[^\r]+?(¨0|\n{2,}(?=\S)(?![ \t]*(?:[*+-]|\d+[.])[ \t]+)))/gm,
               function(wholeMatch, list, m2) {
                 var listType = m2.search(/[*+-]/g) > -1 ? "ul" : "ol";
@@ -14539,7 +14539,7 @@
               }
             );
           } else {
-            text3 = text3.replace(
+            text4 = text4.replace(
               /(\n\n|^\n?)(( {0,3}([*+-]|\d+[.])[ \t]+)[^\r]+?(¨0|\n{2,}(?=\S)(?![ \t]*(?:[*+-]|\d+[.])[ \t]+)))/gm,
               function(wholeMatch, m1, list, m3) {
                 var listType = m3.search(/[*+-]/g) > -1 ? "ul" : "ol";
@@ -14547,16 +14547,16 @@
               }
             );
           }
-          text3 = text3.replace(/¨0/, "");
-          text3 = globals.converter._dispatch("lists.after", text3, options, globals);
-          return text3;
+          text4 = text4.replace(/¨0/, "");
+          text4 = globals.converter._dispatch("lists.after", text4, options, globals);
+          return text4;
         });
-        showdown2.subParser("metadata", function(text3, options, globals) {
+        showdown2.subParser("metadata", function(text4, options, globals) {
           "use strict";
           if (!options.metadata) {
-            return text3;
+            return text4;
           }
-          text3 = globals.converter._dispatch("metadata.before", text3, options, globals);
+          text4 = globals.converter._dispatch("metadata.before", text4, options, globals);
           function parseMetadataContents(content2) {
             globals.metadata.raw = content2;
             content2 = content2.replace(/&/g, "&amp;").replace(/"/g, "&quot;");
@@ -14566,35 +14566,35 @@
               return "";
             });
           }
-          text3 = text3.replace(/^\s*«««+(\S*?)\n([\s\S]+?)\n»»»+\n/, function(wholematch, format, content2) {
+          text4 = text4.replace(/^\s*«««+(\S*?)\n([\s\S]+?)\n»»»+\n/, function(wholematch, format, content2) {
             parseMetadataContents(content2);
             return "\xA8M";
           });
-          text3 = text3.replace(/^\s*---+(\S*?)\n([\s\S]+?)\n---+\n/, function(wholematch, format, content2) {
+          text4 = text4.replace(/^\s*---+(\S*?)\n([\s\S]+?)\n---+\n/, function(wholematch, format, content2) {
             if (format) {
               globals.metadata.format = format;
             }
             parseMetadataContents(content2);
             return "\xA8M";
           });
-          text3 = text3.replace(/¨M/g, "");
-          text3 = globals.converter._dispatch("metadata.after", text3, options, globals);
-          return text3;
+          text4 = text4.replace(/¨M/g, "");
+          text4 = globals.converter._dispatch("metadata.after", text4, options, globals);
+          return text4;
         });
-        showdown2.subParser("outdent", function(text3, options, globals) {
+        showdown2.subParser("outdent", function(text4, options, globals) {
           "use strict";
-          text3 = globals.converter._dispatch("outdent.before", text3, options, globals);
-          text3 = text3.replace(/^(\t|[ ]{1,4})/gm, "\xA80");
-          text3 = text3.replace(/¨0/g, "");
-          text3 = globals.converter._dispatch("outdent.after", text3, options, globals);
-          return text3;
+          text4 = globals.converter._dispatch("outdent.before", text4, options, globals);
+          text4 = text4.replace(/^(\t|[ ]{1,4})/gm, "\xA80");
+          text4 = text4.replace(/¨0/g, "");
+          text4 = globals.converter._dispatch("outdent.after", text4, options, globals);
+          return text4;
         });
-        showdown2.subParser("paragraphs", function(text3, options, globals) {
+        showdown2.subParser("paragraphs", function(text4, options, globals) {
           "use strict";
-          text3 = globals.converter._dispatch("paragraphs.before", text3, options, globals);
-          text3 = text3.replace(/^\n+/g, "");
-          text3 = text3.replace(/\n+$/g, "");
-          var grafs = text3.split(/\n{2,}/g), grafsOut = [], end2 = grafs.length;
+          text4 = globals.converter._dispatch("paragraphs.before", text4, options, globals);
+          text4 = text4.replace(/^\n+/g, "");
+          text4 = text4.replace(/\n+$/g, "");
+          var grafs = text4.split(/\n{2,}/g), grafsOut = [], end2 = grafs.length;
           for (var i = 0; i < end2; i++) {
             var str = grafs[i];
             if (str.search(/¨(K|G)(\d+)\1/g) >= 0) {
@@ -14628,52 +14628,52 @@
             }
             grafsOut[i] = grafsOutIt;
           }
-          text3 = grafsOut.join("\n");
-          text3 = text3.replace(/^\n+/g, "");
-          text3 = text3.replace(/\n+$/g, "");
-          return globals.converter._dispatch("paragraphs.after", text3, options, globals);
+          text4 = grafsOut.join("\n");
+          text4 = text4.replace(/^\n+/g, "");
+          text4 = text4.replace(/\n+$/g, "");
+          return globals.converter._dispatch("paragraphs.after", text4, options, globals);
         });
-        showdown2.subParser("runExtension", function(ext, text3, options, globals) {
+        showdown2.subParser("runExtension", function(ext, text4, options, globals) {
           "use strict";
           if (ext.filter) {
-            text3 = ext.filter(text3, globals.converter, options);
+            text4 = ext.filter(text4, globals.converter, options);
           } else if (ext.regex) {
             var re = ext.regex;
             if (!(re instanceof RegExp)) {
               re = new RegExp(re, "g");
             }
-            text3 = text3.replace(re, ext.replace);
+            text4 = text4.replace(re, ext.replace);
           }
-          return text3;
+          return text4;
         });
-        showdown2.subParser("spanGamut", function(text3, options, globals) {
+        showdown2.subParser("spanGamut", function(text4, options, globals) {
           "use strict";
-          text3 = globals.converter._dispatch("spanGamut.before", text3, options, globals);
-          text3 = showdown2.subParser("codeSpans")(text3, options, globals);
-          text3 = showdown2.subParser("escapeSpecialCharsWithinTagAttributes")(text3, options, globals);
-          text3 = showdown2.subParser("encodeBackslashEscapes")(text3, options, globals);
-          text3 = showdown2.subParser("images")(text3, options, globals);
-          text3 = showdown2.subParser("anchors")(text3, options, globals);
-          text3 = showdown2.subParser("autoLinks")(text3, options, globals);
-          text3 = showdown2.subParser("simplifiedAutoLinks")(text3, options, globals);
-          text3 = showdown2.subParser("emoji")(text3, options, globals);
-          text3 = showdown2.subParser("underline")(text3, options, globals);
-          text3 = showdown2.subParser("italicsAndBold")(text3, options, globals);
-          text3 = showdown2.subParser("strikethrough")(text3, options, globals);
-          text3 = showdown2.subParser("ellipsis")(text3, options, globals);
-          text3 = showdown2.subParser("hashHTMLSpans")(text3, options, globals);
-          text3 = showdown2.subParser("encodeAmpsAndAngles")(text3, options, globals);
+          text4 = globals.converter._dispatch("spanGamut.before", text4, options, globals);
+          text4 = showdown2.subParser("codeSpans")(text4, options, globals);
+          text4 = showdown2.subParser("escapeSpecialCharsWithinTagAttributes")(text4, options, globals);
+          text4 = showdown2.subParser("encodeBackslashEscapes")(text4, options, globals);
+          text4 = showdown2.subParser("images")(text4, options, globals);
+          text4 = showdown2.subParser("anchors")(text4, options, globals);
+          text4 = showdown2.subParser("autoLinks")(text4, options, globals);
+          text4 = showdown2.subParser("simplifiedAutoLinks")(text4, options, globals);
+          text4 = showdown2.subParser("emoji")(text4, options, globals);
+          text4 = showdown2.subParser("underline")(text4, options, globals);
+          text4 = showdown2.subParser("italicsAndBold")(text4, options, globals);
+          text4 = showdown2.subParser("strikethrough")(text4, options, globals);
+          text4 = showdown2.subParser("ellipsis")(text4, options, globals);
+          text4 = showdown2.subParser("hashHTMLSpans")(text4, options, globals);
+          text4 = showdown2.subParser("encodeAmpsAndAngles")(text4, options, globals);
           if (options.simpleLineBreaks) {
-            if (!/\n\n¨K/.test(text3)) {
-              text3 = text3.replace(/\n+/g, "<br />\n");
+            if (!/\n\n¨K/.test(text4)) {
+              text4 = text4.replace(/\n+/g, "<br />\n");
             }
           } else {
-            text3 = text3.replace(/  +\n/g, "<br />\n");
+            text4 = text4.replace(/  +\n/g, "<br />\n");
           }
-          text3 = globals.converter._dispatch("spanGamut.after", text3, options, globals);
-          return text3;
+          text4 = globals.converter._dispatch("spanGamut.after", text4, options, globals);
+          return text4;
         });
-        showdown2.subParser("strikethrough", function(text3, options, globals) {
+        showdown2.subParser("strikethrough", function(text4, options, globals) {
           "use strict";
           function parseInside(txt) {
             if (options.simplifiedAutoLink) {
@@ -14682,21 +14682,21 @@
             return "<del>" + txt + "</del>";
           }
           if (options.strikethrough) {
-            text3 = globals.converter._dispatch("strikethrough.before", text3, options, globals);
-            text3 = text3.replace(/(?:~){2}([\s\S]+?)(?:~){2}/g, function(wm, txt) {
+            text4 = globals.converter._dispatch("strikethrough.before", text4, options, globals);
+            text4 = text4.replace(/(?:~){2}([\s\S]+?)(?:~){2}/g, function(wm, txt) {
               return parseInside(txt);
             });
-            text3 = globals.converter._dispatch("strikethrough.after", text3, options, globals);
+            text4 = globals.converter._dispatch("strikethrough.after", text4, options, globals);
           }
-          return text3;
+          return text4;
         });
-        showdown2.subParser("stripLinkDefinitions", function(text3, options, globals) {
+        showdown2.subParser("stripLinkDefinitions", function(text4, options, globals) {
           "use strict";
           var regex = /^ {0,3}\[([^\]]+)]:[ \t]*\n?[ \t]*<?([^>\s]+)>?(?: =([*\d]+[A-Za-z%]{0,4})x([*\d]+[A-Za-z%]{0,4}))?[ \t]*\n?[ \t]*(?:(\n*)["|'(](.+?)["|')][ \t]*)?(?:\n+|(?=¨0))/gm, base64Regex = /^ {0,3}\[([^\]]+)]:[ \t]*\n?[ \t]*<?(data:.+?\/.+?;base64,[A-Za-z0-9+/=\n]+?)>?(?: =([*\d]+[A-Za-z%]{0,4})x([*\d]+[A-Za-z%]{0,4}))?[ \t]*\n?[ \t]*(?:(\n*)["|'(](.+?)["|')][ \t]*)?(?:\n\n|(?=¨0)|(?=\n\[))/gm;
-          text3 += "\xA80";
+          text4 += "\xA80";
           var replaceFunc = function(wholeMatch, linkId, url, width, height, blankLines, title) {
             linkId = linkId.toLowerCase();
-            if (text3.toLowerCase().split(linkId).length - 1 < 2) {
+            if (text4.toLowerCase().split(linkId).length - 1 < 2) {
               return wholeMatch;
             }
             if (url.match(/^data:.+?\/.+?;base64,/)) {
@@ -14719,15 +14719,15 @@
             }
             return "";
           };
-          text3 = text3.replace(base64Regex, replaceFunc);
-          text3 = text3.replace(regex, replaceFunc);
-          text3 = text3.replace(/¨0/, "");
-          return text3;
+          text4 = text4.replace(base64Regex, replaceFunc);
+          text4 = text4.replace(regex, replaceFunc);
+          text4 = text4.replace(/¨0/, "");
+          return text4;
         });
-        showdown2.subParser("tables", function(text3, options, globals) {
+        showdown2.subParser("tables", function(text4, options, globals) {
           "use strict";
           if (!options.tables) {
-            return text3;
+            return text4;
           }
           var tableRgx = /^ {0,3}\|?.+\|.+\n {0,3}\|?[ \t]*:?[ \t]*(?:[-=]){2,}[ \t]*:?[ \t]*\|[ \t]*:?[ \t]*(?:[-=]){2,}[\s\S]+?(?:\n\n|¨0)/gm, singeColTblRgx = /^ {0,3}\|.+\|[ \t]*\n {0,3}\|[ \t]*:?[ \t]*(?:[-=]){2,}[ \t]*:?[ \t]*\|[ \t]*\n( {0,3}\|.+\|[ \t]*\n)*(?:\n|¨0)/gm;
           function parseStyles(sLine) {
@@ -14821,47 +14821,47 @@
             }
             return buildTable(headers, cells);
           }
-          text3 = globals.converter._dispatch("tables.before", text3, options, globals);
-          text3 = text3.replace(/\\(\|)/g, showdown2.helper.escapeCharactersCallback);
-          text3 = text3.replace(tableRgx, parseTable);
-          text3 = text3.replace(singeColTblRgx, parseTable);
-          text3 = globals.converter._dispatch("tables.after", text3, options, globals);
-          return text3;
+          text4 = globals.converter._dispatch("tables.before", text4, options, globals);
+          text4 = text4.replace(/\\(\|)/g, showdown2.helper.escapeCharactersCallback);
+          text4 = text4.replace(tableRgx, parseTable);
+          text4 = text4.replace(singeColTblRgx, parseTable);
+          text4 = globals.converter._dispatch("tables.after", text4, options, globals);
+          return text4;
         });
-        showdown2.subParser("underline", function(text3, options, globals) {
+        showdown2.subParser("underline", function(text4, options, globals) {
           "use strict";
           if (!options.underline) {
-            return text3;
+            return text4;
           }
-          text3 = globals.converter._dispatch("underline.before", text3, options, globals);
+          text4 = globals.converter._dispatch("underline.before", text4, options, globals);
           if (options.literalMidWordUnderscores) {
-            text3 = text3.replace(/\b___(\S[\s\S]*?)___\b/g, function(wm, txt) {
+            text4 = text4.replace(/\b___(\S[\s\S]*?)___\b/g, function(wm, txt) {
               return "<u>" + txt + "</u>";
             });
-            text3 = text3.replace(/\b__(\S[\s\S]*?)__\b/g, function(wm, txt) {
+            text4 = text4.replace(/\b__(\S[\s\S]*?)__\b/g, function(wm, txt) {
               return "<u>" + txt + "</u>";
             });
           } else {
-            text3 = text3.replace(/___(\S[\s\S]*?)___/g, function(wm, m) {
+            text4 = text4.replace(/___(\S[\s\S]*?)___/g, function(wm, m) {
               return /\S$/.test(m) ? "<u>" + m + "</u>" : wm;
             });
-            text3 = text3.replace(/__(\S[\s\S]*?)__/g, function(wm, m) {
+            text4 = text4.replace(/__(\S[\s\S]*?)__/g, function(wm, m) {
               return /\S$/.test(m) ? "<u>" + m + "</u>" : wm;
             });
           }
-          text3 = text3.replace(/(_)/g, showdown2.helper.escapeCharactersCallback);
-          text3 = globals.converter._dispatch("underline.after", text3, options, globals);
-          return text3;
+          text4 = text4.replace(/(_)/g, showdown2.helper.escapeCharactersCallback);
+          text4 = globals.converter._dispatch("underline.after", text4, options, globals);
+          return text4;
         });
-        showdown2.subParser("unescapeSpecialChars", function(text3, options, globals) {
+        showdown2.subParser("unescapeSpecialChars", function(text4, options, globals) {
           "use strict";
-          text3 = globals.converter._dispatch("unescapeSpecialChars.before", text3, options, globals);
-          text3 = text3.replace(/¨E(\d+)E/g, function(wholeMatch, m1) {
+          text4 = globals.converter._dispatch("unescapeSpecialChars.before", text4, options, globals);
+          text4 = text4.replace(/¨E(\d+)E/g, function(wholeMatch, m1) {
             var charCodeToReplace = parseInt(m1);
             return String.fromCharCode(charCodeToReplace);
           });
-          text3 = globals.converter._dispatch("unescapeSpecialChars.after", text3, options, globals);
-          return text3;
+          text4 = globals.converter._dispatch("unescapeSpecialChars.after", text4, options, globals);
+          return text4;
         });
         showdown2.subParser("makeMarkdown.blockquote", function(node, globals) {
           "use strict";
@@ -15934,7 +15934,7 @@
     };
   };
   var readOnly = /^(?:form|list)$/i;
-  var text = (node, text3) => node.ownerDocument.createTextNode(text3);
+  var text2 = (node, text4) => node.ownerDocument.createTextNode(text4);
   function Tagger(type) {
     this.type = type;
     return esm_default8(this);
@@ -16004,7 +16004,7 @@
               childNodes = esm_default5(
                 node.parentNode,
                 childNodes,
-                [text(node, value)],
+                [text2(node, value)],
                 diffable,
                 node
               );
@@ -23947,12 +23947,12 @@
      * @example Duration.fromISO('P5Y3M').toObject() //=> { years: 5, months: 3 }
      * @return {Duration}
      */
-    static fromISO(text3, opts) {
-      const [parsed2] = parseISODuration(text3);
+    static fromISO(text4, opts) {
+      const [parsed2] = parseISODuration(text4);
       if (parsed2) {
         return _Duration.fromObject(parsed2, opts);
       } else {
-        return _Duration.invalid("unparsable", `the input "${text3}" can't be parsed as ISO 8601`);
+        return _Duration.invalid("unparsable", `the input "${text4}" can't be parsed as ISO 8601`);
       }
     }
     /**
@@ -23971,12 +23971,12 @@
      * @example Duration.fromISOTime('T1100').toObject() //=> { hours: 11, minutes: 0, seconds: 0 }
      * @return {Duration}
      */
-    static fromISOTime(text3, opts) {
-      const [parsed2] = parseISOTimeOnly(text3);
+    static fromISOTime(text4, opts) {
+      const [parsed2] = parseISOTimeOnly(text4);
       if (parsed2) {
         return _Duration.fromObject(parsed2, opts);
       } else {
-        return _Duration.invalid("unparsable", `the input "${text3}" can't be parsed as ISO 8601`);
+        return _Duration.invalid("unparsable", `the input "${text4}" can't be parsed as ISO 8601`);
       }
     }
     /**
@@ -24608,8 +24608,8 @@
      * @see https://en.wikipedia.org/wiki/ISO_8601#Time_intervals
      * @return {Interval}
      */
-    static fromISO(text3, opts) {
-      const [s2, e] = (text3 || "").split("/", 2);
+    static fromISO(text4, opts) {
+      const [s2, e] = (text4 || "").split("/", 2);
       if (s2 && e) {
         let start2, startIsValid;
         try {
@@ -24640,7 +24640,7 @@
           }
         }
       }
-      return _Interval.invalid("unparsable", `the input "${text3}" can't be parsed as ISO 8601`);
+      return _Interval.invalid("unparsable", `the input "${text4}" can't be parsed as ISO 8601`);
     }
     /**
      * Check if an object is an Interval. Works across context boundaries
@@ -25809,7 +25809,7 @@
     }
     return { ts, o };
   }
-  function parseDataToDateTime(parsed2, parsedZone, opts, format, text3, specificOffset) {
+  function parseDataToDateTime(parsed2, parsedZone, opts, format, text4, specificOffset) {
     const { setZone, zone } = opts;
     if (parsed2 && Object.keys(parsed2).length !== 0 || parsedZone) {
       const interpretationZone = parsedZone || zone, inst = DateTime.fromObject(parsed2, {
@@ -25820,7 +25820,7 @@
       return setZone ? inst : inst.setZone(zone);
     } else {
       return DateTime.invalid(
-        new Invalid("unparsable", `the input "${text3}" can't be parsed as ${format}`)
+        new Invalid("unparsable", `the input "${text4}" can't be parsed as ${format}`)
       );
     }
   }
@@ -26334,9 +26334,9 @@
      * @example DateTime.fromISO('2016-W05-4')
      * @return {DateTime}
      */
-    static fromISO(text3, opts = {}) {
-      const [vals, parsedZone] = parseISODate(text3);
-      return parseDataToDateTime(vals, parsedZone, opts, "ISO 8601", text3);
+    static fromISO(text4, opts = {}) {
+      const [vals, parsedZone] = parseISODate(text4);
+      return parseDataToDateTime(vals, parsedZone, opts, "ISO 8601", text4);
     }
     /**
      * Create a DateTime from an RFC 2822 string
@@ -26353,9 +26353,9 @@
      * @example DateTime.fromRFC2822('25 Nov 2016 13:23 Z')
      * @return {DateTime}
      */
-    static fromRFC2822(text3, opts = {}) {
-      const [vals, parsedZone] = parseRFC2822Date(text3);
-      return parseDataToDateTime(vals, parsedZone, opts, "RFC 2822", text3);
+    static fromRFC2822(text4, opts = {}) {
+      const [vals, parsedZone] = parseRFC2822Date(text4);
+      return parseDataToDateTime(vals, parsedZone, opts, "RFC 2822", text4);
     }
     /**
      * Create a DateTime from an HTTP header date
@@ -26373,8 +26373,8 @@
      * @example DateTime.fromHTTP('Sun Nov  6 08:49:37 1994')
      * @return {DateTime}
      */
-    static fromHTTP(text3, opts = {}) {
-      const [vals, parsedZone] = parseHTTPDate(text3);
+    static fromHTTP(text4, opts = {}) {
+      const [vals, parsedZone] = parseHTTPDate(text4);
       return parseDataToDateTime(vals, parsedZone, opts, "HTTP", opts);
     }
     /**
@@ -26391,26 +26391,26 @@
      * @param {string} opts.outputCalendar - the output calendar to set on the resulting DateTime instance
      * @return {DateTime}
      */
-    static fromFormat(text3, fmt, opts = {}) {
-      if (isUndefined(text3) || isUndefined(fmt)) {
+    static fromFormat(text4, fmt, opts = {}) {
+      if (isUndefined(text4) || isUndefined(fmt)) {
         throw new InvalidArgumentError("fromFormat requires an input string and a format");
       }
       const { locale = null, numberingSystem = null } = opts, localeToUse = Locale.fromOpts({
         locale,
         numberingSystem,
         defaultToEN: true
-      }), [vals, parsedZone, specificOffset, invalid] = parseFromTokens(localeToUse, text3, fmt);
+      }), [vals, parsedZone, specificOffset, invalid] = parseFromTokens(localeToUse, text4, fmt);
       if (invalid) {
         return _DateTime.invalid(invalid);
       } else {
-        return parseDataToDateTime(vals, parsedZone, opts, `format ${fmt}`, text3, specificOffset);
+        return parseDataToDateTime(vals, parsedZone, opts, `format ${fmt}`, text4, specificOffset);
       }
     }
     /**
      * @deprecated use fromFormat instead
      */
-    static fromString(text3, fmt, opts = {}) {
-      return _DateTime.fromFormat(text3, fmt, opts);
+    static fromString(text4, fmt, opts = {}) {
+      return _DateTime.fromFormat(text4, fmt, opts);
     }
     /**
      * Create a DateTime from a SQL date, time, or datetime
@@ -26433,9 +26433,9 @@
      * @example DateTime.fromSQL('09:12:34.342')
      * @return {DateTime}
      */
-    static fromSQL(text3, opts = {}) {
-      const [vals, parsedZone] = parseSQL(text3);
-      return parseDataToDateTime(vals, parsedZone, opts, "SQL", text3);
+    static fromSQL(text4, opts = {}) {
+      const [vals, parsedZone] = parseSQL(text4);
+      return parseDataToDateTime(vals, parsedZone, opts, "SQL", text4);
     }
     /**
      * Create an invalid DateTime.
@@ -27566,19 +27566,19 @@
      * @param {Object} options - options taken by fromFormat()
      * @return {Object}
      */
-    static fromFormatExplain(text3, fmt, options = {}) {
+    static fromFormatExplain(text4, fmt, options = {}) {
       const { locale = null, numberingSystem = null } = options, localeToUse = Locale.fromOpts({
         locale,
         numberingSystem,
         defaultToEN: true
       });
-      return explainFromTokens(localeToUse, text3, fmt);
+      return explainFromTokens(localeToUse, text4, fmt);
     }
     /**
      * @deprecated use fromFormatExplain instead
      */
-    static fromStringExplain(text3, fmt, options = {}) {
-      return _DateTime.fromFormatExplain(text3, fmt, options);
+    static fromStringExplain(text4, fmt, options = {}) {
+      return _DateTime.fromFormatExplain(text4, fmt, options);
     }
     /**
      * Build a parser for `fmt` using the given locale. This parser can be passed
@@ -27610,8 +27610,8 @@
      * @param {Object} opts - options taken by fromFormat()
      * @returns {DateTime}
      */
-    static fromFormatParser(text3, formatParser, opts = {}) {
-      if (isUndefined(text3) || isUndefined(formatParser)) {
+    static fromFormatParser(text4, formatParser, opts = {}) {
+      if (isUndefined(text4) || isUndefined(formatParser)) {
         throw new InvalidArgumentError(
           "fromFormatParser requires an input string and a format parser"
         );
@@ -27626,7 +27626,7 @@
           `fromFormatParser called with a locale of ${localeToUse}, but the format parser was created for ${formatParser.locale}`
         );
       }
-      const { result, zone, specificOffset, invalidReason } = formatParser.explainFromTokens(text3);
+      const { result, zone, specificOffset, invalidReason } = formatParser.explainFromTokens(text4);
       if (invalidReason) {
         return _DateTime.invalid(invalidReason);
       } else {
@@ -27635,7 +27635,7 @@
           zone,
           opts,
           `format ${formatParser.format}`,
-          text3,
+          text4,
           specificOffset
         );
       }
@@ -27914,14 +27914,14 @@
     if (!string) return 0;
     return int2(string.replaceAll(",", "").replaceAll(".", ""));
   }
-  function sanitise(text3, method = "+") {
-    return encodeURIComponent(text3).replaceAll("%2B", "%252B").replaceAll("%20", method);
+  function sanitise(text4, method = "+") {
+    return encodeURIComponent(text4).replaceAll("%2B", "%252B").replaceAll("%20", method);
   }
-  function sanitise_text(text3) {
-    return text3.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+  function sanitise_text(text4) {
+    return text4.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
   }
-  function desanitise(text3, method = "+") {
-    return decodeURIComponent(text3.replaceAll(method, "%20")).replaceAll(
+  function desanitise(text4, method = "+") {
+    return decodeURIComponent(text4.replaceAll(method, "%20")).replaceAll(
       "%252B",
       "+"
     );
@@ -27976,15 +27976,57 @@
     );
     observer.observe(elem);
   }
-  function copy(text3) {
-    navigator.clipboard.writeText(text3).then(() => {
-      log("copied", "copy", "info", { text: text3 });
+  function copy(text4) {
+    if (text4.trim().length == 0) return;
+    navigator.clipboard.writeText(text4).then(() => {
+      log("copied", "copy", "info", { text: text4 });
       status({
         id: "copy",
         title: tl2(trans.copied_to_clipboard),
-        body: text3
+        body: text4
       });
     });
+  }
+  function undo() {
+    document.execCommand("undo");
+  }
+  function redo() {
+    document.execCommand("redo");
+  }
+  async function paste() {
+    try {
+      const text4 = await navigator.clipboard.readText();
+      const elem = document.activeElement;
+      if (!elem) return;
+      if (elem.isContentEditable) {
+        document.execCommand("insertText", false, text4);
+        log("pasted", "paste", "info", { text: text4 });
+        status({
+          id: "paste",
+          title: tl2(trans.pasted_text),
+          body: text4
+        });
+        return;
+      }
+      if (["INPUT", "TEXTAREA"].includes(elem.tagName)) {
+        const start2 = elem.selectionStart;
+        const end2 = elem.selectionEnd;
+        elem.setRangeText(text4, start2, end2, "end");
+        log("pasted", "paste", "info", { text: text4 });
+        status({
+          id: "paste",
+          title: tl2(trans.pasted_text),
+          body: text4
+        });
+      }
+    } catch (e) {
+      log("failed", "paste", "info", { text, e });
+      status({
+        id: "paste",
+        title: tl2(trans.failed),
+        body: e.message ? e.message : e
+      });
+    }
   }
   function download_with_progress(url, func) {
     return new Promise((resolve2, reject) => {
@@ -28080,15 +28122,15 @@
       return false;
     }
   }
-  function romanise(text3) {
-    if (/[\u30A0-\u30FF\u3040-\u309F]/.test(text3) && settings.romanise_jp)
-      return title_case(toRomaji(text3));
-    if (/[\uAC00-\uD7AF]/.test(text3) && settings.romanise_ko)
-      return title_case(hangulRomanization.convert(text3));
-    return text3;
+  function romanise(text4) {
+    if (/[\u30A0-\u30FF\u3040-\u309F]/.test(text4) && settings.romanise_jp)
+      return title_case(toRomaji(text4));
+    if (/[\uAC00-\uD7AF]/.test(text4) && settings.romanise_ko)
+      return title_case(hangulRomanization.convert(text4));
+    return text4;
   }
-  function title_case(text3) {
-    return text3.split(" ").map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
+  function title_case(text4) {
+    return text4.split(" ").map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
   }
   function int2(num) {
     return parseInt(num.replace(/\u00A0/g, ""));
@@ -29724,11 +29766,14 @@
       const is_image = elem.tagName == "IMG";
       const link = elem.href;
       const unsafe_link = elem.getAttribute("data-unsafe-href");
-      const text3 = elem.textContent?.trim();
+      const text4 = elem.textContent?.trim();
       const valid_for_text = ["TEXTAREA", "INPUT"].includes(elem.tagName);
       const alt = elem.getAttribute("alt")?.trim();
+      const start2 = elem.selectionStart;
+      const end2 = elem.selectionEnd;
+      const selected = elem.value?.substring(start2, end2);
       log("requesting", "menu", "log", {
-        text: text3,
+        text: text4,
         value,
         elem,
         tag: elem.tagName,
@@ -29814,17 +29859,31 @@
                 ` : ""}
             ` : ""}
             ${link ? generic_link_menu(link) : ""}
-            ${text3 && valid_for_text ? html.node`
-                <a class="dropdown-menu-clickable-item" data-type="copy" onclick=${() => {
-        copy(text3);
+            ${valid_for_text ? html.node`
+                <a class="dropdown-menu-clickable-item" data-type="undo" onclick=${() => {
+        undo();
       }}>
-                    ${tl2(trans.copy_text)}
+                    ${tl2(trans.undo)}
                 </a>
-            ` : value && valid_for_text ? html.node`
-                <a class="dropdown-menu-clickable-item" data-type="copy" onclick=${() => {
-        copy(value);
+                <a class="dropdown-menu-clickable-item" data-type="redo" onclick=${() => {
+        redo();
       }}>
-                    ${tl2(trans.copy_text)}
+                    ${tl2(trans.redo)}
+                </a>
+            ` : ""}
+            ${valid_for_text ? html.node`
+                <a class="dropdown-menu-clickable-item" data-type="copy" onclick=${() => {
+        if (selected) copy(selected);
+        else if (value) copy(value);
+      }}>
+                    ${tl2(trans.copy)}
+                </a>
+            ` : ""}
+            ${valid_for_text ? html.node`
+                <a class="dropdown-menu-clickable-item" data-type="paste" onclick=${() => {
+        paste();
+      }}>
+                    ${tl2(trans.paste)}
                 </a>
             ` : ""}
         `;
@@ -35084,7 +35143,7 @@
   function create_profile_top_item(parent, {
     name,
     link,
-    text: text3 = "",
+    text: text4 = "",
     type,
     new_release = false,
     updated = false,
@@ -35093,7 +35152,7 @@
     allow_html = false,
     tooltip_theme = ""
   }) {
-    log(`creating top item of ${name}, ${link}, ${text3}`, "profile");
+    log(`creating top item of ${name}, ${link}, ${text4}`, "profile");
     let side_action;
     if (action === "button") {
       side_action = html.node`
@@ -36245,9 +36304,9 @@
       page.structure.main.querySelector("#update-profile")
     );
     update_about();
-    function len(text3) {
-      return text3.length;
-      const normalised = text3.replace(/\r\n/g, "\n");
+    function len(text4) {
+      return text4.length;
+      const normalised = text4.replace(/\r\n/g, "\n");
       return new TextEncoder().encode(normalised).length;
     }
     function update_about() {
@@ -37340,9 +37399,9 @@
               dom,
               "text/html"
             );
-            const text3 = doc.querySelector("p");
-            if (!text3) return;
-            timezone_text.textContent = text3.textContent;
+            const text4 = doc.querySelector("p");
+            if (!text4) return;
+            timezone_text.textContent = text4.textContent;
           }).catch(
             (e) => log(
               "unable to get text",
@@ -39211,12 +39270,12 @@
       }
     });
   }
-  function bio_parse(text3, cache2 = true, take_effect = true) {
+  function bio_parse(text4, cache2 = true, take_effect = true) {
     let temp = document.createElement("div");
     temp.classList.add("markdown-body");
     render(
       temp,
-      markdown(text3.textContent, {
+      markdown(text4.textContent, {
         allow_headers: true,
         allow_banners: true,
         allow_icons: true,
@@ -39524,11 +39583,11 @@
         <div class="glacier-library-metadata" />
     `;
     values.forEach((value, index3) => {
-      let text3 = tl2(trans.going);
-      if (index3 == 1) text3 = tl2(trans.interested);
+      let text4 = tl2(trans.going);
+      if (index3 == 1) text4 = tl2(trans.interested);
       value_header.appendChild(html.node`
             <div class="glacier-library-metadata-item">
-                <div class="sub-text">${text3}</div>
+                <div class="sub-text">${text4}</div>
                 <div class="glacier-library-metadata-item-value">${value.textContent}</div>
             </div>
         `);
@@ -39951,7 +40010,7 @@
       });
       input_box.querySelector("input").focus();
     }
-    function rabbit_tip(text3) {
+    function rabbit_tip(text4) {
       render(
         tip,
         html`
@@ -39962,7 +40021,7 @@
             <kbd>Esc</kbd> ${tl2(trans.back)}
             `}
                 </div>
-                <div class="right">${text3}</div>
+                <div class="right">${text4}</div>
             `
       );
     }
@@ -40679,7 +40738,7 @@
   // src/components/settings.js
   function setting({
     id = "",
-    text: text3 = true,
+    text: text4 = true,
     focus = false,
     standalone = false,
     func,
@@ -40768,7 +40827,7 @@
                         <div class="bleh-icon" style="--icon: var(--${icon})" />
                     </div>
                     ` : ""}
-                    ${text3 ? html.node`
+                    ${text4 ? html.node`
                     <div class="heading">
                         <h5>${html_title}</h5>
                         ${body2 ? html.node`<p>${body2}</p>` : ""}
@@ -40851,7 +40910,7 @@
         let working_max = settings_store[id].max - settings_store[id].min;
         const elem = html.node`
                 <div class="setting v2 ${standalone ? "standalone" : ""} ${settings_store[id].vertical ? "v" : ""}" data-type="range" disabled=${disabled} data-hide=${hide_if_incompatible} ref=${(el) => option = el} data-modified=${value != settings_store[id].default}>
-                    ${text3 ? html.node`
+                    ${text4 ? html.node`
                     <div class="heading">
                         <h5>${html_title}<button class="reset" ref=${(el) => reset_btn = el} onclick=${() => reset_range()}>${tl2(trans.reset)}</button></h5>
                         ${body2 ? html.node`<p>${body2}</p>` : ""}
@@ -40933,7 +40992,7 @@
                         <div class="bleh-icon" style="--icon: var(--${icon})" />
                     </div>
                     ` : ""}
-                    ${text3 ? html.node`
+                    ${text4 ? html.node`
                     <div class="heading">
                         <h5>${html_title}<button class="reset" ref=${(el) => reset_btn = el} onclick=${() => reset_text(id, input2, submit, option, reset_btn, avatar2)}>${tl2(trans.reset)}</button></h5>
                         ${body2 ? html.node`<p>${body2}</p>` : ""}
@@ -41065,7 +41124,7 @@
                         <div class="bleh-icon" style="--icon: var(--${icon})" />
                     </div>
                     ` : ""}
-                    ${text3 ? html.node`
+                    ${text4 ? html.node`
                     <div class="heading">
                         <h5>${html_title}</h5>
                         ${body2 ? html.node`<p>${body2}</p>` : ""}
@@ -41175,7 +41234,7 @@
                         <div class="bleh-icon" style="--icon: var(--${icon})" />
                     </div>
                     ` : ""}
-                    ${text3 ? html.node`
+                    ${text4 ? html.node`
                     <div class="heading">
                         <h5>${html_title}<button class="reset" ref=${(el) => reset_btn = el} onclick=${() => reset_radio()}>${tl2(trans.reset)}</button></h5>
                         ${body2 ? html.node`<p>${body2}</p>` : ""}
@@ -41360,7 +41419,7 @@
                         <div class="bleh-icon" style="--icon: var(--${icon})" />
                     </div>
                     ` : ""}
-                    ${text3 ? html.node`
+                    ${text4 ? html.node`
                     <div class="heading">
                         <h5>${html_title}</h5>
                         ${body2 ? html.node`<p>${body2}</p>` : ""}
@@ -41416,7 +41475,7 @@
                         <div class="bleh-icon" style="--icon: var(--${icon})" />
                     </div>
                     ` : ""}
-                    ${text3 ? html.node`
+                    ${text4 ? html.node`
                     <div class="heading">
                         <h5>${html_title}<button class="reset" ref=${(el) => reset_btn = el} onclick=${() => reset_select()}>${tl2(trans.reset)}</button></h5>
                         ${body2 ? html.node`<p>${body2}</p>` : ""}
@@ -42294,21 +42353,21 @@
       glacier_meta.innerHTML = "";
     }
     metadata.forEach((meta, index3) => {
-      let text3 = meta.querySelector(".metadata-title");
+      let text4 = meta.querySelector(".metadata-title");
       let value = meta.querySelector(".metadata-display").textContent;
-      if (text3) {
-        text3 = text3.textContent;
+      if (text4) {
+        text4 = text4.textContent;
         if (page.subpage == "library_overview") {
-          if (index3 == 1) text3 = tl2(trans.average);
+          if (index3 == 1) text4 = tl2(trans.average);
         } else if (page.subpage == "library_artists") {
-          text3 = tl2(trans.artists);
+          text4 = tl2(trans.artists);
         } else if (page.subpage == "library_albums") {
-          text3 = tl2(trans.albums);
+          text4 = tl2(trans.albums);
         } else if (page.subpage == "library_tracks") {
-          text3 = tl2(trans.tracks);
+          text4 = tl2(trans.tracks);
         }
       } else {
-        text3 = tl2(trans.results_for);
+        text4 = tl2(trans.results_for);
         value = meta.querySelector(".metadata-display").textContent;
         let start2 = value.indexOf("\u201C") + 1;
         let end2 = value.indexOf("\u201D");
@@ -42316,7 +42375,7 @@
       }
       glacier_meta.appendChild(html.node`
             <div class="glacier-library-metadata-item">
-                <div class="sub-text">${text3}</div>
+                <div class="sub-text">${text4}</div>
                 <div class="glacier-library-metadata-item-value">${value}</div>
             </div>
         `);
@@ -43591,8 +43650,8 @@
     );
     star_buttons.forEach((star_button) => {
       star_button.removeAttribute("title");
-      let text3 = star_button.querySelector(".gallery-image-preferred-states");
-      text3.textContent = tl2(trans.star);
+      let text4 = star_button.querySelector(".gallery-image-preferred-states");
+      text4.textContent = tl2(trans.star);
     });
     let view_all_container = page.structure.main.querySelector(
       ".more-link-fullwidth-right-flush-top"
@@ -46215,10 +46274,10 @@
     }
     let interact_container = document.createElement("section");
     interact_container.classList.add("side-actions");
-    let text3 = document.body.querySelector(".header-new-title").textContent.replaceAll(" ", "+").replaceAll("&", "%26");
+    let text4 = document.body.querySelector(".header-new-title").textContent.replaceAll(" ", "+").replaceAll("&", "%26");
     let artist = document.body.querySelector(".header-new-crumb");
     if (artist != void 0)
-      text3 = `${text3}+${artist.textContent.replaceAll(" ", "+").replaceAll("&", "%26")}`;
+      text4 = `${text4}+${artist.textContent.replaceAll(" ", "+").replaceAll("&", "%26")}`;
     let header_actions = document.body.querySelector(".header-new-actions");
     interact_container.innerHTML = header_actions.innerHTML;
     let buttons = interact_container.querySelectorAll("button");
@@ -46918,20 +46977,20 @@
     let scrobbles = {};
     let metascore = {};
     metadata.forEach((item, index3) => {
-      let text3 = item.querySelector(".header-metadata-tnew-title").textContent.trim();
+      let text4 = item.querySelector(".header-metadata-tnew-title").textContent.trim();
       let value = item.querySelector(".header-metadata-tnew-display abbr");
       if (index3 == 0) {
-        listeners.text = text3;
+        listeners.text = text4;
         listeners.value = clean_number(value.getAttribute("title"));
         listeners.abbr = value.textContent.trim();
       } else if (index3 == 1) {
-        scrobbles.text = text3;
+        scrobbles.text = text4;
         scrobbles.value = clean_number(value.getAttribute("title"));
         scrobbles.abbr = value.textContent.trim();
       } else if (index3 == 2) {
         let link = item.querySelector("a");
         if (!link) return;
-        metascore.text = text3;
+        metascore.text = text4;
         metascore.abbr = value.textContent.trim();
         metascore.link = link.getAttribute("href");
       }
@@ -47484,7 +47543,7 @@
   var svgDisallowed = freeze2(["animate", "color-profile", "cursor", "discard", "font-face", "font-face-format", "font-face-name", "font-face-src", "font-face-uri", "foreignobject", "hatch", "hatchpath", "mesh", "meshgradient", "meshpatch", "meshrow", "missing-glyph", "script", "set", "solidcolor", "unknown", "use"]);
   var mathMl$1 = freeze2(["math", "menclose", "merror", "mfenced", "mfrac", "mglyph", "mi", "mlabeledtr", "mmultiscripts", "mn", "mo", "mover", "mpadded", "mphantom", "mroot", "mrow", "ms", "mspace", "msqrt", "mstyle", "msub", "msup", "msubsup", "mtable", "mtd", "mtext", "mtr", "munder", "munderover", "mprescripts"]);
   var mathMlDisallowed = freeze2(["maction", "maligngroup", "malignmark", "mlongdiv", "mscarries", "mscarry", "msgroup", "mstack", "msline", "msrow", "semantics", "annotation", "annotation-xml", "mprescripts", "none"]);
-  var text2 = freeze2(["#text"]);
+  var text3 = freeze2(["#text"]);
   var html2 = freeze2(["accept", "action", "align", "alt", "autocapitalize", "autocomplete", "autopictureinpicture", "autoplay", "background", "bgcolor", "border", "capture", "cellpadding", "cellspacing", "checked", "cite", "class", "clear", "color", "cols", "colspan", "controls", "controlslist", "coords", "crossorigin", "datetime", "decoding", "default", "dir", "disabled", "disablepictureinpicture", "disableremoteplayback", "download", "draggable", "enctype", "enterkeyhint", "face", "for", "headers", "height", "hidden", "high", "href", "hreflang", "id", "inputmode", "integrity", "ismap", "kind", "label", "lang", "list", "loading", "loop", "low", "max", "maxlength", "media", "method", "min", "minlength", "multiple", "muted", "name", "nonce", "noshade", "novalidate", "nowrap", "open", "optimum", "pattern", "placeholder", "playsinline", "popover", "popovertarget", "popovertargetaction", "poster", "preload", "pubdate", "radiogroup", "readonly", "rel", "required", "rev", "reversed", "role", "rows", "rowspan", "spellcheck", "scope", "selected", "shape", "size", "sizes", "span", "srclang", "start", "src", "srcset", "step", "style", "summary", "tabindex", "title", "translate", "type", "usemap", "valign", "value", "width", "wrap", "xmlns", "slot"]);
   var svg2 = freeze2(["accent-height", "accumulate", "additive", "alignment-baseline", "amplitude", "ascent", "attributename", "attributetype", "azimuth", "basefrequency", "baseline-shift", "begin", "bias", "by", "class", "clip", "clippathunits", "clip-path", "clip-rule", "color", "color-interpolation", "color-interpolation-filters", "color-profile", "color-rendering", "cx", "cy", "d", "dx", "dy", "diffuseconstant", "direction", "display", "divisor", "dur", "edgemode", "elevation", "end", "exponent", "fill", "fill-opacity", "fill-rule", "filter", "filterunits", "flood-color", "flood-opacity", "font-family", "font-size", "font-size-adjust", "font-stretch", "font-style", "font-variant", "font-weight", "fx", "fy", "g1", "g2", "glyph-name", "glyphref", "gradientunits", "gradienttransform", "height", "href", "id", "image-rendering", "in", "in2", "intercept", "k", "k1", "k2", "k3", "k4", "kerning", "keypoints", "keysplines", "keytimes", "lang", "lengthadjust", "letter-spacing", "kernelmatrix", "kernelunitlength", "lighting-color", "local", "marker-end", "marker-mid", "marker-start", "markerheight", "markerunits", "markerwidth", "maskcontentunits", "maskunits", "max", "mask", "media", "method", "mode", "min", "name", "numoctaves", "offset", "operator", "opacity", "order", "orient", "orientation", "origin", "overflow", "paint-order", "path", "pathlength", "patterncontentunits", "patterntransform", "patternunits", "points", "preservealpha", "preserveaspectratio", "primitiveunits", "r", "rx", "ry", "radius", "refx", "refy", "repeatcount", "repeatdur", "restart", "result", "rotate", "scale", "seed", "shape-rendering", "slope", "specularconstant", "specularexponent", "spreadmethod", "startoffset", "stddeviation", "stitchtiles", "stop-color", "stop-opacity", "stroke-dasharray", "stroke-dashoffset", "stroke-linecap", "stroke-linejoin", "stroke-miterlimit", "stroke-opacity", "stroke", "stroke-width", "style", "surfacescale", "systemlanguage", "tabindex", "tablevalues", "targetx", "targety", "transform", "transform-origin", "text-anchor", "text-decoration", "text-rendering", "textlength", "type", "u1", "u2", "unicode", "values", "viewbox", "visibility", "version", "vert-adv-y", "vert-origin-x", "vert-origin-y", "width", "word-spacing", "wrap", "writing-mode", "xchannelselector", "ychannelselector", "x", "x1", "x2", "xmlns", "y", "y1", "y2", "z", "zoomandpan"]);
   var mathMl = freeze2(["accent", "accentunder", "align", "bevelled", "close", "columnsalign", "columnlines", "columnspan", "denomalign", "depth", "dir", "display", "displaystyle", "encoding", "fence", "frame", "height", "href", "id", "largeop", "length", "linethickness", "lspace", "lquote", "mathbackground", "mathcolor", "mathsize", "mathvariant", "maxsize", "minsize", "movablelimits", "notation", "numalign", "open", "rowalign", "rowlines", "rowspacing", "rowspan", "rspace", "rquote", "scriptlevel", "scriptminsize", "scriptsizemultiplier", "selection", "separator", "separators", "stretchy", "subscriptshift", "supscriptshift", "symmetric", "voffset", "width", "xmlns"]);
@@ -47639,7 +47698,7 @@
       IS_ALLOWED_URI: IS_ALLOWED_URI$1
     } = EXPRESSIONS;
     let ALLOWED_TAGS = null;
-    const DEFAULT_ALLOWED_TAGS = addToSet({}, [...html$1, ...svg$1, ...svgFilters, ...mathMl$1, ...text2]);
+    const DEFAULT_ALLOWED_TAGS = addToSet({}, [...html$1, ...svg$1, ...svgFilters, ...mathMl$1, ...text3]);
     let ALLOWED_ATTR = null;
     const DEFAULT_ALLOWED_ATTR = addToSet({}, [...html2, ...svg2, ...mathMl, ...xml]);
     let CUSTOM_ELEMENT_HANDLING = Object.seal(create2(null, {
@@ -47764,7 +47823,7 @@
         RETURN_DOM = true;
       }
       if (USE_PROFILES) {
-        ALLOWED_TAGS = addToSet({}, text2);
+        ALLOWED_TAGS = addToSet({}, text3);
         ALLOWED_ATTR = [];
         if (USE_PROFILES.html === true) {
           addToSet(ALLOWED_TAGS, html$1);
@@ -48325,7 +48384,7 @@
   var purify = createDOMPurify();
 
   // src/components/markdown.js
-  function markdown(text3, {
+  function markdown(text4, {
     allow_headers = false,
     starting_header = 3,
     allow_links = true,
@@ -48342,7 +48401,7 @@
     allow_alignment = false,
     name = page.name
   } = {}) {
-    log("rendering", "markdown", "log", { text: text3 });
+    log("rendering", "markdown", "log", { text: text4 });
     let ALLOWED_TAGS = [
       "div",
       "p",
@@ -48404,10 +48463,10 @@
       {
         type: "lang",
         regex: /\[(center|left|right)]\s*([\s\S]*?)\s*\[\/\1]/g,
-        replace: (_, align, content2, offset3, text4) => {
+        replace: (_, align, content2, offset3, text5) => {
           let backticks = 0;
           for (let i = 0; i < offset3; i++)
-            if (text4[i] == "`") backticks++;
+            if (text5[i] == "`") backticks++;
           if (backticks % 2 == 1) return _;
           const inner = converter.makeHtml(content2.trim());
           const clean2 = purify.sanitize(inner, {
@@ -48577,7 +48636,7 @@
       ghCodeBlocks: false,
       smartIndentationFix: true
     });
-    const markdown2 = text3.replace(
+    const markdown2 = text4.replace(
       /\[artist\]([^[\]]+)\[\/artist\]/g,
       (match3, artist) => `[${artist}](${root}music/${redirect()}${encodeURIComponent(artist)})`
     ).replace(
@@ -48588,7 +48647,7 @@
       (match3, artist, track) => `[${track}](${root}music/${encodeURIComponent(artist)}/_/${encodeURIComponent(track)})`
     ).replace(
       /\[url=([^[\]]+)\]([^[\]]+)\[\/url\]/g,
-      (match3, url, text4) => `[${text4}](${encodeURI(url)})`
+      (match3, url, text5) => `[${text5}](${encodeURI(url)})`
     ).replace(
       /\[url\]([^[\]]+)\[\/url\]/g,
       (match3, url) => `[${url}](${encodeURI(url)})`
@@ -48654,8 +48713,8 @@
     if (body2.nodeName != "#text") patch_wiki_contents(body2);
     if (line_breaks && body2.nodeName != "#text") {
       local_restriction(body2);
-      body2.querySelectorAll("p").forEach((text4) => {
-        local_restriction(text4);
+      body2.querySelectorAll("p").forEach((text5) => {
+        local_restriction(text5);
       });
     }
     if (allow_hue) {
@@ -48851,7 +48910,7 @@
         `
     });
   }
-  function markdown_preview(text3, {
+  function markdown_preview(text4, {
     allow_headers = false,
     starting_header = 3,
     allow_links = true,
@@ -48879,7 +48938,7 @@
                     <a class="shout-user-avatar-link js-link-block-cover-link" href="${root}user/${auth.name}" tabindex="-1" />
                     <div class="shout-body">
                         <p class="markdown-body">
-                            ${markdown(text3, {
+                            ${markdown(text4, {
         allow_headers,
         starting_header,
         allow_links,
@@ -48899,9 +48958,9 @@
         `
     });
   }
-  function local_restriction(text3) {
-    if (text3.textContent.trim().startsWith("Due to local laws, we are temporarily"))
-      text3.classList.add("local-restriction");
+  function local_restriction(text4) {
+    if (text4.textContent.trim().startsWith("Due to local laws, we are temporarily"))
+      text4.classList.add("local-restriction");
   }
   function external_url_prompt(url, dangerous = false) {
     log(
@@ -49272,9 +49331,9 @@
           log("error fetching", "style", "error", { res });
           return;
         }
-        const text3 = res.responseText;
+        const text4 = res.responseText;
         const style = html.node`
-                <style>${text3}</style>
+                <style>${text4}</style>
             `;
         document.documentElement.appendChild(style);
         style.onload = () => {
@@ -49303,7 +49362,7 @@
         };
         const expire = /* @__PURE__ */ new Date();
         expire.setHours(expire.getHours() + 1);
-        localStorage.setItem("bleh_cached_style", text3);
+        localStorage.setItem("bleh_cached_style", text4);
         localStorage.setItem("bleh_cached_style_timeout", expire);
         log(`cached until ${expire}`, "style");
       },
@@ -49346,10 +49405,10 @@
     let url = `https://katelyynn.github.io/bleh/fm/src/build/build.json?${Date.now()}`;
     download_with_progress(url, (percent) => {
     }).then(async (blob) => {
-      const text3 = await blob.text();
+      const text4 = await blob.text();
       if (btn) btn.removeAttribute("disabled");
       try {
-        let data2 = JSON.parse(text3);
+        let data2 = JSON.parse(text4);
         console.log(data2);
         let update_required = update_comparison(version.build, data2.build);
         set_storage("bleh_update_required", update_required.toString());
@@ -49450,7 +49509,7 @@
   }
 
   // node_modules/@tealmiku/florence/dist/florence.js
-  function log2(text3, system, type = "info", append = {}) {
+  function log2(text4, system, type = "info", append = {}) {
     let system_colour;
     switch (system) {
       case "load":
@@ -49486,14 +49545,14 @@
     }
     if (Object.keys(append).length > 0)
       console[type](
-        `%c${system}%c ${text3}`,
+        `%c${system}%c ${text4}`,
         `background: ${system_colour}; display: block; width: fit-content; font-weight: bold; color: #000; padding: 0 4px; border-radius: 4px`,
         "color: unset",
         append
       );
     else
       console[type](
-        `%c${system}%c ${text3}`,
+        `%c${system}%c ${text4}`,
         `background: ${system_colour}; display: block; width: fit-content; font-weight: bold; color: #000; padding: 0 4px; border-radius: 4px`,
         "color: unset"
       );
@@ -49836,7 +49895,7 @@
                                 <p class="last-checked">${tl2(trans.never_checked)}</p>
                                 `}
                             </div>
-                            <button class="btn primary icon" data-type="update" ref=${(el) => update_btn = el} onclick=${() => update_check(true, update_btn, () => {
+                            <button class="btn icon" data-type="update" ref=${(el) => update_btn = el} onclick=${() => update_check(true, update_btn, () => {
           notify({
             id: "update",
             title: tl2(trans.updates),
@@ -49847,7 +49906,7 @@
         })}>${tl2(trans.check)}</button>
                         ` : html.node`
                             <div class="update-center-icon">
-                                <div class="update-container">
+                                <div class="update-container spin">
                                     <div class="bleh-icon" data-type="update" />
                                 </div>
                             </div>
@@ -51308,9 +51367,17 @@
                 </div>
                 <div class="language-sub">
                     <div class="language-info colourful translated"><span class="bleh-icon" />${tl2(trans.amount_translated, { c: language.translated })} (${language.percent}%)</div>
-                    <div class="language-info colourful missing" onclick=${() => {
-          copy(language.missing_keys.map((key) => `${key}: ${get_trans_key(key).en}`).join("\n"));
-        }}><span class="bleh-icon" />${tl2(trans.missing_translated, { c: language.missing })}</div>
+                    ${() => {
+          const btn = html.node`
+                            <div class="language-info colourful missing" onclick=${() => {
+            copy(language.missing_keys.map((key) => `${key}: ${get_trans_key(key).en}`).join("\n"));
+          }}><span class="bleh-icon" />${tl2(trans.missing_translated, { c: language.missing })}</div>
+                        `;
+          tippy_esm_default(btn, {
+            content: tl2(trans.click_to_copy)
+          });
+          return btn;
+        }}
                 </div>
                 <table class="responsive-table">
                     <thead>
@@ -51653,8 +51720,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         if (!ff(colour2.requires_flag)) return html.node``;
       }
       if (colour2.type == "avatar" && !auth.name) return html.node``;
-      let text3;
-      if (colour2.label) text3 = tl2(colour2.label);
+      let text4;
+      if (colour2.label) text4 = tl2(colour2.label);
       if (!colour2.type) colour2.type = "colour";
       if (!colour2.displays && colour2.sets) colour2.displays = colour2.sets;
       let blob;
@@ -51670,9 +51737,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                 <strong ref=${(el) => text_elem = el} />
             </button>
         `;
-      if (type == "custom" && !colour2.label) text3 = tl2(trans[colour2.type]);
+      if (type == "custom" && !colour2.label) text4 = tl2(trans[colour2.type]);
       if (colour2.type == "customise") {
-        text3 = tl2(trans.edit);
+        text4 = tl2(trans.edit);
         let colour3;
         tippy_esm_default(swatch, {
           theme: "window",
@@ -51723,11 +51790,11 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         blob.style.setProperty("--lit-over", colour2.displays.lit);
       }
       if (colour2.type == "default" && stored_season.id != "none") {
-        text3 = tl2(trans.seasonal.name);
+        text4 = tl2(trans.seasonal.name);
       }
-      text_elem.textContent = text3;
+      text_elem.textContent = text4;
       tippy_esm_default(swatch, {
-        content: text3
+        content: text4
       });
       return swatch;
     }
@@ -51834,14 +51901,14 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     }
   }
   function import_settings21() {
-    let text3;
+    let text4;
     const modal = dialog({
       id: "import_settings",
       title: tl2(trans.import_settings),
       body: html.node`
             <p class="big-modal-alert alert-danger">${tl2(trans.import_notice)}</p>
             <br>
-            <textarea class="modal-text" ref=${(el) => text3 = el} />
+            <textarea class="modal-text" ref=${(el) => text4 = el} />
             <div class="modal-footer">
                 <button class="see-more cancel" onclick="_dialog_rm({id: 'import_settings'})">
                     ${tl2(trans.cancel)}
@@ -51849,8 +51916,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                 <div class="fill"></div>
                 <button class="btn primary download" onclick=${() => {
         try {
-          const parsed2 = JSON.parse(text3.value);
-          set_storage("bleh", text3.value);
+          const parsed2 = JSON.parse(text4.value);
+          set_storage("bleh", text4.value);
           Object.assign(settings, parsed2);
           load_settings();
           dialog_rm({
@@ -53284,10 +53351,10 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                 />
             `
       );
-      function obtain_additional_info(text3, backup_text = null) {
-        const match3 = text3.match(/\d+/);
+      function obtain_additional_info(text4, backup_text = null) {
+        const match3 = text4.match(/\d+/);
         if (match3) others_included = parseInt(match3[0]);
-        if (text3.includes(tl2(trans.notification_replied_ctx)))
+        if (text4.includes(tl2(trans.notification_replied_ctx)))
           is_reply = true;
         else if (backup_text && backup_text.trim().includes(tl2(trans.notification_replied_ctx)))
           is_reply = true;
@@ -55044,8 +55111,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
               "artist-header-featured-items-item-wrap--video-thumbnail"
             );
             let type = item.getAttribute("itemprop");
-            let text3 = tl2(trans.latest_album);
-            if (type == "track") text3 = tl2(trans.popular_now);
+            let text4 = tl2(trans.latest_album);
+            if (type == "track") text4 = tl2(trans.popular_now);
             let header = item.querySelector(
               ".artist-header-featured-items-item-header"
             );
@@ -55087,7 +55154,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                                 <div class="featured-artist-item">
                                     <div class="sub-text normal" data-type=${type}>
                                         <span class="bleh-icon" style="--icon: var(--mask)" />
-                                        ${text3}
+                                        ${text4}
                                     </div>
                                     <div class="source-album js-link-block link-block" data-type=${type}>
                                         <div class="source-album-art">
@@ -56458,7 +56525,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     let user_avatar;
     let user_name;
     const elem = html.node`
-        <div class="user friend">
+        <div class="user friend" data-live="false">
             <div class="user-avatar cover-art" ref=${(el) => cover_art = el}>
                 <div class="bleh-icon loading-spinner" />
             </div>
@@ -56484,17 +56551,17 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         user_name.textContent = cache2.username;
       load_recent_tracks(friend).then((tracks) => {
         const item = tracks[0];
-        let sister = item.sister;
-        let name = item.name;
-        if (settings.format_guest_features) {
-          const formatted = name_includes(name, sister);
-          name = html.node`${smart_title(formatted[0], formatted[1])}`;
-          sister = html.node`${smart_artists(formatted[2], formatted[3])}`;
-        } else if (settings.corrections) {
-          sister = romanise(correct_artist(item.sister));
-          name = romanise(correct_item_by_artist(item.name, item.sister));
-        }
         if (item) {
+          let sister = item.sister;
+          let name = item.name;
+          if (settings.format_guest_features) {
+            const formatted = name_includes(name, sister);
+            name = html.node`${smart_title(formatted[0], formatted[1])}`;
+            sister = html.node`${smart_artists(formatted[2], formatted[3])}`;
+          } else if (settings.corrections) {
+            sister = romanise(correct_artist(item.sister));
+            name = romanise(correct_item_by_artist(item.name, item.sister));
+          }
           if (item.time) {
             render(user_name, html`
                         ${{ html: tl2(trans.user_listened_time, { u: `<strong>${cache2.username ? cache2.username : `@${friend}`}</strong>`, time: item.time }) }}
@@ -56503,6 +56570,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
             render(user_name, html`
                         ${{ html: tl2(trans.user_is_listening_to, { u: `<strong>${cache2.username ? cache2.username : `@${friend}`}</strong>` }) }}
                     `);
+            elem.setAttribute("data-live", true);
           }
           render(cover_art, html`
                     <img src=${item.avatar} alt=${name}>
@@ -57327,14 +57395,14 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     radios.forEach((radio2) => {
       let type = radio2.getAttribute("data-analytics-label");
       radio2.classList.add("radio-button");
-      let text3 = tl2(trans[type]);
+      let text4 = tl2(trans[type]);
       if (type == "tag")
-        text3 = page.name;
+        text4 = page.name;
       else if (type == "event")
-        text3 = tl2(trans.artists);
+        text4 = tl2(trans.artists);
       render(radio2, html`
             <h3 class="sub-text">${tl2(trans.radio)}</h3>
-            <h4>${text3}</h4>
+            <h4>${text4}</h4>
         `);
       radio2.removeAttribute("title");
     });
@@ -57636,7 +57704,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           let input_el = checkbox.querySelector("input");
           let value = input_el.checked;
           let name = input_el.getAttribute("name");
-          let text3 = checkbox.textContent.trim();
+          let text4 = checkbox.textContent.trim();
           let disabled = input_el.disabled;
           render(
             checkbox.parentElement,
@@ -57645,7 +57713,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
               value,
               type: "checkbox",
               name,
-              title: text3,
+              title: text4,
               disabled,
               data: input_el.value
             })}
@@ -57992,10 +58060,10 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
             notification.set(percent);
           }
         ).then(async (blob) => {
-          const text3 = await blob.text();
+          const text4 = await blob.text();
           notification.set_body("download complete");
           notification.set(100);
-          console.info(text3);
+          console.info(text4);
         });
       }}
                     >
@@ -61789,6 +61857,12 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       sv: "Kopiera",
       ru: "\u041A\u043E\u043F\u0438\u0440\u043E\u0432\u0430\u0442\u044C"
     },
+    copy_text: {
+      en: "Copy text",
+      es: "Copiar texto",
+      it: "Copia testo",
+      pt: "Copiar texto"
+    },
     copy_username: {
       en: "Copy username",
       de: "Benutzername kopieren",
@@ -61824,6 +61898,21 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Clique para copiar",
       sv: "Klicka f\xF6r att kopiera",
       ru: "\u041D\u0430\u0436\u043C\u0438\u0442\u0435, \u0447\u0442\u043E\u0431\u044B \u0441\u043A\u043E\u043F\u0438\u0440\u043E\u0432\u0430\u0442\u044C"
+    },
+    paste: {
+      en: "Paste"
+    },
+    paste_text: {
+      en: "Paste text"
+    },
+    undo: {
+      en: "Undo"
+    },
+    redo: {
+      en: "Redo"
+    },
+    pasted_text: {
+      en: "Pasted text"
     },
     wiki_standard_tracks: {
       en: "Track titles should be wrapped in quotation marks (\u201C \u201D)",
@@ -62492,12 +62581,6 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       es: "Abrir v\xEDnculo",
       it: "Apri link",
       pt: "Abrir link"
-    },
-    copy_text: {
-      en: "Copy text",
-      es: "Copiar texto",
-      it: "Copia testo",
-      pt: "Copiar texto"
     },
     event_cancelled: {
       // obviously remove the emoji or replace it as
@@ -68757,7 +68840,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
   };
 
   // src/build/log.js
-  function log(text3, system, type = "info", append = {}) {
+  function log(text4, system, type = "info", append = {}) {
     if (!page.structure.logs) {
       let logs = html.node`
             <div class="logs" />
@@ -68799,16 +68882,16 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         break;
     }
     if (Object.keys(append).length > 0)
-      console[type](`%c${system}%c ${text3}`, `background: ${system_colour}; display: block; width: fit-content; font-weight: bold; color: #000; padding: 0 4px; border-radius: 4px`, "color: unset", append);
+      console[type](`%c${system}%c ${text4}`, `background: ${system_colour}; display: block; width: fit-content; font-weight: bold; color: #000; padding: 0 4px; border-radius: 4px`, "color: unset", append);
     else
-      console[type](`%c${system}%c ${text3}`, `background: ${system_colour}; display: block; width: fit-content; font-weight: bold; color: #000; padding: 0 4px; border-radius: 4px`, "color: unset");
+      console[type](`%c${system}%c ${text4}`, `background: ${system_colour}; display: block; width: fit-content; font-weight: bold; color: #000; padding: 0 4px; border-radius: 4px`, "color: unset");
     if (settings && settings.feature_flags) {
       if (settings.feature_flags.developer == true) {
         page.structure.logs.appendChild(
           html.node`
             <div class="log" data-type=${type}>
                 <span class="system" style="color: ${system_colour}">${system}</span>
-                <span class="text">${text3}</span>
+                <span class="text">${text4}</span>
             </div>`
         );
       }
@@ -70954,9 +71037,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     ctx.fillRect(opts.left, opts.top, opts.width, opts.height);
     ctx.fillStyle = oldColor;
   }
-  function renderText(ctx, text3, x, y, font, opts = {}) {
-    const lines = isArray2(text3) ? text3 : [
-      text3
+  function renderText(ctx, text4, x, y, font, opts = {}) {
+    const lines = isArray2(text4) ? text4 : [
+      text4
     ];
     const stroke = opts.strokeWidth > 0 && opts.strokeColor !== "";
     let i, line;

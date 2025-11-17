@@ -483,7 +483,7 @@ function campfire_friend(friend) {
     let user_name;
 
     const elem = html.node`
-        <div class="user friend">
+        <div class="user friend" data-live="false">
             <div class="user-avatar cover-art" ref=${el => cover_art = el}>
                 <div class="bleh-icon loading-spinner" />
             </div>
@@ -513,20 +513,20 @@ function campfire_friend(friend) {
         load_recent_tracks(friend).then(tracks => {
             const item = tracks[0];
 
-            let sister = item.sister;
-            let name = item.name;
-
-            if (settings.format_guest_features) {
-                const formatted = name_includes(name, sister);
-
-                name = html.node`${smart_title(formatted[0], formatted[1])}`;
-                sister = html.node`${smart_artists(formatted[2], formatted[3])}`;
-            } else if (settings.corrections) {
-                sister = romanise(correct_artist(item.sister));
-                name = romanise(correct_item_by_artist(item.name, item.sister));
-            }
-
             if (item) {
+                let sister = item.sister;
+                let name = item.name;
+
+                if (settings.format_guest_features) {
+                    const formatted = name_includes(name, sister);
+
+                    name = html.node`${smart_title(formatted[0], formatted[1])}`;
+                    sister = html.node`${smart_artists(formatted[2], formatted[3])}`;
+                } else if (settings.corrections) {
+                    sister = romanise(correct_artist(item.sister));
+                    name = romanise(correct_item_by_artist(item.name, item.sister));
+                }
+
                 if (item.time) {
                     render(user_name, html`
                         ${{ html: tl(trans.user_listened_time, { u: `<strong>${cache.username ? cache.username : `@${friend}`}</strong>`, time: item.time }) }}
@@ -535,6 +535,8 @@ function campfire_friend(friend) {
                     render(user_name, html`
                         ${{ html: tl(trans.user_is_listening_to, { u: `<strong>${cache.username ? cache.username : `@${friend}`}</strong>` }) }}
                     `);
+
+                    elem.setAttribute('data-live', true);
                 }
 
                 render(cover_art, html`

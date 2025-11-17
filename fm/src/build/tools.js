@@ -276,14 +276,64 @@ export function lazy(elem, func, options = {}) {
  * @param {string} text
  */
 export function copy(text) {
+    if (text.trim().length == 0) return;
+
     navigator.clipboard.writeText(text).then(() => {
-        log('copied', 'copy', 'info', { text: text });
+        log('copied', 'copy', 'info', { text });
         status({
             id: 'copy',
             title: tl(trans.copied_to_clipboard),
             body: text
         });
     });
+}
+
+export function undo() {
+    document.execCommand('undo');
+}
+
+export function redo() {
+    document.execCommand('redo');
+}
+
+export async function paste() {
+    try {
+        const text = await navigator.clipboard.readText();
+        const elem = document.activeElement;
+
+        if (!elem) return;
+
+        if (elem.isContentEditable) {
+            document.execCommand('insertText', false, text);
+            log('pasted', 'paste', 'info', { text });
+            status({
+                id: 'paste',
+                title: tl(trans.pasted_text),
+                body: text
+            });
+            return;
+        }
+
+        if (['INPUT', 'TEXTAREA'].includes(elem.tagName)) {
+            const start = elem.selectionStart;
+            const end = elem.selectionEnd;
+
+            elem.setRangeText(text, start, end, 'end');
+            log('pasted', 'paste', 'info', { text });
+            status({
+                id: 'paste',
+                title: tl(trans.pasted_text),
+                body: text
+            });
+        }
+    } catch(e) {
+        log('failed', 'paste', 'info', { text, e });
+        status({
+            id: 'paste',
+            title: tl(trans.failed),
+            body: e.message ? e.message : e
+        });
+    }
 }
 
 export function download_with_progress(url, func) {

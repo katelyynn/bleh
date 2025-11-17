@@ -254,14 +254,11 @@ export async function render_setting_page(page_id) {
                                 <div class="update-container">
                                     <div class="bleh-icon" data-type="update" />
                                 </div>
-                                ${last_checked
-                                        ? html.node`
+                                ${last_checked ? html.node`
                                 <div class="check-circle colourful">
                                     <div class="bleh-icon" data-type="check-thick" />
                                 </div>
-                                `
-                                        : ''
-                                    }
+                                ` : ''}
                             </div>
                             <div class="update-center-details">
                                 ${last_checked
@@ -275,7 +272,7 @@ export async function render_setting_page(page_id) {
                                 `
                                     }
                             </div>
-                            <button class="btn primary icon" data-type="update" ref=${(el) => (update_btn = el)} onclick=${() => update_check(true, update_btn, () => {
+                            <button class="btn icon" data-type="update" ref=${(el) => (update_btn = el)} onclick=${() => update_check(true, update_btn, () => {
                                 notify({
                                     id: 'update',
                                     title: tl(trans.updates),
@@ -286,7 +283,7 @@ export async function render_setting_page(page_id) {
                             })}>${tl(trans.check)}</button>
                         ` : html.node`
                             <div class="update-center-icon">
-                                <div class="update-container">
+                                <div class="update-container spin">
                                     <div class="bleh-icon" data-type="update" />
                                 </div>
                             </div>
@@ -1850,9 +1847,19 @@ export async function render_setting_page(page_id) {
                 </div>
                 <div class="language-sub">
                     <div class="language-info colourful translated"><span class="bleh-icon" />${tl(trans.amount_translated, { c: language.translated })} (${language.percent}%)</div>
-                    <div class="language-info colourful missing" onclick=${() => {
-                        copy(language.missing_keys.map(key => `${key}: ${get_trans_key(key).en}`).join('\n'))
-                    }}><span class="bleh-icon" />${tl(trans.missing_translated, { c: language.missing })}</div>
+                    ${() => {
+                        const btn = html.node`
+                            <div class="language-info colourful missing" onclick=${() => {
+                                copy(language.missing_keys.map(key => `${key}: ${get_trans_key(key).en}`).join('\n'))
+                            }}><span class="bleh-icon" />${tl(trans.missing_translated, { c: language.missing })}</div>
+                        `;
+
+                        tippy(btn, {
+                            content: tl(trans.click_to_copy)
+                        });
+
+                        return btn;
+                    }}
                 </div>
                 <table class="responsive-table">
                     <thead>
