@@ -1,5 +1,5 @@
 {
-    "latest": "2025.1116",
+    "latest": "2025.1118",
     "sponsors": [
         "clairedoll", "kateshapedbox", "evangelicgirl",
         "astrablooms", "ItsProyal", "vwvwvwvwvwvwv", "Orofil",
@@ -10,7 +10,7 @@
         "noapop", "celebrating", "myraisounds", "riskyrizey",
         "fourohclok", "liminalvespers", "HuxP", "K40M0J1",
         "goldenstuffed", "favewa", "kar1x", "nojonsko",
-        "urwq"
+        "urwq", "driftpsalm"
     ],
     "sponsors_one_time": [
         "kateshapedbox",
@@ -407,6 +407,19 @@
         "soleilth": {
             "type": "translation",
             "reason": "Español"
-        }
+        },
+        "driftpsalm": [
+            {
+                "type": "sponsor"
+            },
+            {
+                "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1vdXRsaW5lIGljb24tdGFibGVyLWFkanVzdG1lbnRzIj48cGF0aCBzdHJva2U9Im5vbmUiIGQ9Ik0wIDBoMjR2MjRIMHoiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJNNCAxMGEyIDIgMCAxIDAgNCAwYTIgMiAwIDAgMCAtNCAwIiAvPjxwYXRoIGQ9Ik02IDR2NCIgLz48cGF0aCBkPSJNNiAxMnY4IiAvPjxwYXRoIGQ9Ik0xMCAxNmEyIDIgMCAxIDAgNCAwYTIgMiAwIDAgMCAtNCAwIiAvPjxwYXRoIGQ9Ik0xMiA0djEwIiAvPjxwYXRoIGQ9Ik0xMiAxOHYyIiAvPjxwYXRoIGQ9Ik0xNiA3YTIgMiAwIDEgMCA0IDBhMiAyIDAgMCAwIC00IDAiIC8+PHBhdGggZD0iTTE4IDR2MSIgLz48cGF0aCBkPSJNMTggOXYxMSIgLz48L3N2Zz4=",
+                "reason": "sponsor",
+                "name": "softstatic.wav",
+                "hue": 22,
+                "sat": 0.93,
+                "lit": 0.94
+            }
+        ]
     }
 }
