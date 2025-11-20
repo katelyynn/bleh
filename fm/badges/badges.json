@@ -1,5 +1,5 @@
 {
-    "latest": "2025.1118",
+    "latest": "2025.1120",
     "sponsors": [
         "clairedoll", "kateshapedbox", "evangelicgirl",
         "astrablooms", "ItsProyal", "vwvwvwvwvwvwv", "Orofil",
@@ -10,7 +10,7 @@
         "noapop", "celebrating", "myraisounds", "riskyrizey",
         "fourohclok", "liminalvespers", "HuxP", "K40M0J1",
         "goldenstuffed", "favewa", "kar1x", "nojonsko",
-        "urwq", "driftpsalm"
+        "urwq", "driftpsalm", "popcorniscrazy", "s0540a"
     ],
     "sponsors_one_time": [
         "kateshapedbox",
@@ -20,7 +20,7 @@
         "saettbyeol", "lyeule", "noapop",
         "celebrating", "riskyrizey",
         "fourohclok", "K40M0J1", "goldenstuffed",
-        "kar1x", "nojonsko"
+        "kar1x", "nojonsko", "s0540a"
     ],
     "sponsor_count_remove": 3,
     "sponsor_account": "kateshapedbox",
@@ -419,6 +419,30 @@
                 "hue": 22,
                 "sat": 0.93,
                 "lit": 0.94
+            }
+        ],
+        "s0540a": {
+            "type": "sponsor"
+        },
+        "popcorniscrazy": [
+            {
+                "type": "sponsor"
+            },
+            {
+                "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1vdXRsaW5lIGljb24tdGFibGVyLXNub3dmbGFrZSI+PHBhdGggc3Ryb2tlPSJub25lIiBkPSJNMCAwaDI0djI0SDB6IiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTEwIDRsMiAxbDIgLTEiIC8+PHBhdGggZD0iTTEyIDJ2Ni41bDMgMS43MiIgLz48cGF0aCBkPSJNMTcuOTI4IDYuMjY4bC4xMzQgMi4yMzJsMS44NjYgMS4yMzIiIC8+PHBhdGggZD0iTTIwLjY2IDdsLTUuNjI5IDMuMjVsLjAxIDMuNDU4IiAvPjxwYXRoIGQ9Ik0xOS45MjggMTQuMjY4bC0xLjg2NiAxLjIzMmwtLjEzNCAyLjIzMiIgLz48cGF0aCBkPSJNMjAuNjYgMTdsLTUuNjI5IC0zLjI1bC0yLjk5IDEuNzM4IiAvPjxwYXRoIGQ9Ik0xNCAyMGwtMiAtMWwtMiAxIiAvPjxwYXRoIGQ9Ik0xMiAyMnYtNi41bC0zIC0xLjcyIiAvPjxwYXRoIGQ9Ik02LjA3MiAxNy43MzJsLS4xMzQgLTIuMjMybC0xLjg2NiAtMS4yMzIiIC8+PHBhdGggZD0iTTMuMzQgMTdsNS42MjkgLTMuMjVsLS4wMSAtMy40NTgiIC8+PHBhdGggZD0iTTQuMDcyIDkuNzMybDEuODY2IC0xLjIzMmwuMTM0IC0yLjIzMiIgLz48cGF0aCBkPSJNMy4zNCA3bDUuNjI5IDMuMjVsMi45OSAtMS43MzgiIC8+PC9zdmc+",
+                "reason": "sponsor",
+                "name": "Snow Fairy",
+                "hue": 239,
+                "sat": 1.35,
+                "lit": 0.81
+            },
+            {
+                "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWRydW0taWNvbiBsdWNpZGUtZHJ1bSI+PHBhdGggZD0ibTIgMiA4IDgiLz48cGF0aCBkPSJtMjIgMi04IDgiLz48ZWxsaXBzZSBjeD0iMTIiIGN5PSI5IiByeD0iMTAiIHJ5PSI1Ii8+PHBhdGggZD0iTTcgMTMuNHY3LjkiLz48cGF0aCBkPSJNMTIgMTR2OCIvPjxwYXRoIGQ9Ik0xNyAxMy40djcuOSIvPjxwYXRoIGQ9Ik0yIDl2OGExMCA1IDAgMCAwIDIwIDBWOSIvPjwvc3ZnPg==",
+                "reason": "sponsor",
+                "name": "loves songs that have this shit in it… lowkey…",
+                "hue": 131,
+                "sat": 1.35,
+                "lit": 0.81
             }
         ]
     }
