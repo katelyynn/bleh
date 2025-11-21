@@ -60,11 +60,11 @@
                 "name": "cute"
             },
             {
-                "type": "bubble-tea",
-                "icon": "data:image/svg+xml;base64,PHN2ZyAgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiAgd2lkdGg9IjI0IiAgaGVpZ2h0PSIyNCIgIHZpZXdCb3g9IjAgMCAyNCAyNCIgIGZpbGw9Im5vbmUiICBzdHJva2U9ImN1cnJlbnRDb2xvciIgIHN0cm9rZS13aWR0aD0iMiIgIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgIHN0cm9rZS1saW5lam9pbj0icm91bmQiICBjbGFzcz0iaWNvbiBpY29uLXRhYmxlciBpY29ucy10YWJsZXItb3V0bGluZSBpY29uLXRhYmxlci1idWJibGUtdGVhIj48cGF0aCBzdHJva2U9Im5vbmUiIGQ9Ik0wIDBoMjR2MjRIMHoiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJNMTcuOTUgOWwtMS40NzggOC42OWMtLjI1IDEuNDYzIC0uMzc0IDIuMTk1IC0uOTM2IDIuNjMxYy0xLjIgLjkzMSAtNi4wMzkgLjg4IC03LjE3MiAwYy0uNTYyIC0uNDM2IC0uNjg3IC0xLjE2OCAtLjkzNiAtMi42MzJsLTEuNDc4IC04LjY4OSIgLz48cGF0aCBkPSJNNiA5bC41MTQgLTEuMjg2YTUuOTA4IDUuOTA4IDAgMCAxIDEwLjk3MiAwbC41MTQgMS4yODYiIC8+PHBhdGggZD0iTTUgOWgxNCIgLz48cGF0aCBkPSJNMTIgOWw0IC03IiAvPjxwYXRoIGQ9Ik0xMC4wMSAxNGguMDEiIC8+PHBhdGggZD0iTTExLjAyIDE4aC4wMSIgLz48cGF0aCBkPSJNMTMuMDIgMTZoLjAxIiAvPjwvc3ZnPg==",
+                "icon": data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1vdXRsaW5lIGljb24tdGFibGVyLWdyYXZlLTIiPjxwYXRoIHN0cm9rZT0ibm9uZSIgZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPjxwYXRoIGQ9Ik03IDE2LjE3di05LjE3YTMgMyAwIDAgMSAzIC0zaDRhMyAzIDAgMCAxIDMgM3Y5LjE3MSIgLz48cGF0aCBkPSJNMTIgN3Y1IiAvPjxwYXRoIGQ9Ik0xMCA5aDQiIC8+PHBhdGggZD0iTTUgMjF2LTJhMyAzIDAgMCAxIDMgLTNoOGEzIDMgMCAwIDEgMyAzdjJoLTE0eiIgLz48L3N2Zz4=",
+                "name": "zombie girl :3",
                 "hue": 2,
                 "sat": 1.5,
-                "lit": 1.15
+                "lit": 1.18
             }
         ],
         "bIeak": {
