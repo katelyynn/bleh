@@ -9668,6 +9668,11 @@
                         font-weight: var(--font-weight-medium);
 
                         z-index: 2;
+
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                        max-width: 170px;
                     }
                 }
 
