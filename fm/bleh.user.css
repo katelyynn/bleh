@@ -20846,8 +20846,6 @@
         width: 8px;
         height: 8px;
         margin-top: -8px;
-
-        box-shadow: var(--seasonal-particles-glow, 0 0 10px var(--snow-glow));
     }
 
     .icon {
@@ -28409,6 +28407,11 @@
         & > img {
             display: none !important;
         }
+    }
+
+    .profile-name {
+        text-decoration: none !important;
+        cursor: default !important;
     }
 
     .colour-tile {

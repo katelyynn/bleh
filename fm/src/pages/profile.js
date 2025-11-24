@@ -66,6 +66,7 @@ export async function bleh_profiles() {
 
     const profile_name = profile_header.querySelector('.header-title a');
     page.name = profile_name.textContent;
+    profile_name.removeAttribute('href');
 
     // are we on the overview page?
     let is_subpage = page.subpage != 'overview';
@@ -199,9 +200,6 @@ export async function bleh_profiles() {
 
     if (cache.username) {
         profile_name.textContent = cache.username;
-        tippy(profile_name, {
-            content: `@${page.name}`
-        });
 
         if (sub_wrap) {
             sub_wrap.insertBefore(html.node`

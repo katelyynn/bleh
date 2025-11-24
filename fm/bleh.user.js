@@ -31593,21 +31593,21 @@
         );
       if (func && bubble) func(selected);
       menu.setContent(html.node`
-        ${values.map((value) => {
+            ${values.map((value) => {
         if (value.value == null) {
           return html.node`
-                    <div class="select-header">
-                        ${value.text}
-                    </div>
-                `;
+                        <div class="select-header">
+                            ${value.text}
+                        </div>
+                    `;
         }
         return html.node`
-                <button class="btn dropdown-menu-clickable-item select-item" aria-checked=${selected == value.value} onclick=${() => set_select(value.value)}>
-                    ${value.text}
-                </button>
-            `;
+                    <button class="btn dropdown-menu-clickable-item select-item" aria-checked=${selected == value.value} onclick=${() => set_select(value.value)}>
+                        ${value.text}
+                    </button>
+                `;
       })}
-    `);
+        `);
     }
   }
   function select_prepare(element) {
@@ -32910,1989 +32910,6 @@
 
   // src/components/collage.js
   var import_html2canvas_pro = __toESM(require_html2canvas_pro(), 1);
-  function collage({ host, sidebar } = {}) {
-    if (!host || !sidebar) return;
-    let width;
-    let height;
-    let timeframe;
-    let type;
-    let settings_btn;
-    let submit;
-    let body2;
-    let value = 3;
-    let min2 = 1;
-    let max2 = 20;
-    let current_year = (/* @__PURE__ */ new Date()).getFullYear();
-    let previous_year = current_year - 1;
-    const default_type = page.requested.type || "albums";
-    const default_timeframe = page.requested.timeframe || "date_preset=LAST_7_DAYS";
-    if (page.requested.redirect) {
-      setTimeout(() => {
-        notify({
-          id: "collage_redirect",
-          title: tl2(trans.collage),
-          body: tl2(trans.collage_redirect),
-          icon: "icon-16-collage",
-          persist: true
-        });
-      }, 100);
-    }
-    let user;
-    render(host, html`
-        <div class="compare-header">
-            <div class="compare-users">
-                <div class="compare-user focus" ref=${(el) => user = el}>
-                    ${render_user(page.name, page.avatar, user, true)}
-                </div>
-            </div>
-            <div class="compare-selection">
-                <div class="input-group">
-                    ${width = input({
-      type: "number",
-      value,
-      placeholder: value,
-      min: min2,
-      max: max2
-    })}
-                    <div
-                        class="bleh-icon"
-                        style="--icon: var(--icon-16-x)"
-                    />
-                    ${height = input({
-      type: "number",
-      value,
-      placeholder: value,
-      min: min2,
-      max: max2
-    })}
-                </div>
-                ${type = select(
-      [
-        {
-          text: tl2(trans.item_type)
-        },
-        {
-          value: "artists",
-          text: html`<div
-                                    class="bleh-icon"
-                                    style="--icon: var(--icon-16-artist)"
-                                />
-                                ${tl2(trans.artists)}`
-        },
-        {
-          value: "albums",
-          text: html`<div
-                                    class="bleh-icon"
-                                    style="--icon: var(--icon-16-album)"
-                                />
-                                ${tl2(trans.albums)}`
-        },
-        {
-          value: "tracks",
-          text: html`<div
-                                    class="bleh-icon"
-                                    style="--icon: var(--icon-16-track)"
-                                />
-                                ${tl2(trans.tracks)}`
-        }
-      ],
-      default_type
-    )}
-                ${timeframe = select(
-      [
-        {
-          text: tl2(trans.timeframe)
-        },
-        {
-          value: "date_preset=LAST_7_DAYS",
-          text: tl2(trans.last_count_days).replace(
-            "{c}",
-            "7"
-          )
-        },
-        {
-          value: "date_preset=LAST_30_DAYS",
-          text: tl2(trans.last_count_days).replace(
-            "{c}",
-            "30"
-          )
-        },
-        {
-          value: "date_preset=LAST_90_DAYS",
-          text: tl2(trans.last_count_days).replace(
-            "{c}",
-            "90"
-          )
-        },
-        {
-          value: "date_preset=LAST_180_DAYS",
-          text: tl2(trans.last_count_days).replace(
-            "{c}",
-            "180"
-          )
-        },
-        {
-          value: "date_preset=LAST_365_DAYS",
-          text: tl2(trans.last_count_days).replace(
-            "{c}",
-            "365"
-          )
-        },
-        {
-          value: "date_preset=ALL",
-          text: tl2(trans.all_time)
-        },
-        {
-          value: `from=${current_year}-01-01&rangetype=year`,
-          text: current_year
-        },
-        {
-          value: `from=${previous_year}-01-01&rangetype=year`,
-          text: previous_year
-        }
-      ],
-      default_timeframe
-    )}
-                <button
-                    class="btn primary icon"
-                    data-type="collage"
-                    ref=${(el) => submit = el}
-                    onclick=${() => make_collage()}
-                >
-                    ${tl2(trans.generate)}
-                </button>
-            </div>
-        </div>
-        <div
-            class="compare-body"
-            data-filled="false"
-            ref=${(el) => body2 = el}
-        >
-            <div class="loading-data-container">
-                <div class="loading-data-text info">
-                    ${tl2(trans.choose_a_timeframe_above)}
-                </div>
-            </div>
-        </div>
-    `);
-    let setting_group;
-    let inputter2;
-    render(
-      sidebar,
-      html`
-            <h2>${tl2(trans.settings)}</h2>
-            <div class="setting-group" ref=${(el) => setting_group = el}>
-                <div class="setting v" data-type="text">
-                    <div class="heading">
-                        <h5>${tl2(trans.profile)}</h5>
-                    </div>
-                    <div class="input-container content-form">
-                        <input
-                            type="text"
-                            class="input"
-                            ref=${(el) => inputter2 = el}
-                            placeholder=${tl2(trans.enter_a_profile)}
-                            value=${page.requested.profile}
-                            onchange=${(e) => {
-        page.requested.profile = e.target.value;
-        page.name = page.requested.profile;
-        page.avatar = "";
-        if (page.name == auth.name)
-          page.avatar = auth.avatar;
-        render(
-          user,
-          html`
-                                        ${render_user(
-            page.name,
-            page.avatar,
-            user,
-            true
-          )}
-                                    `
-        );
-      }}
-                        />
-                        ${() => {
-        let btn = html.node`
-                            <button class="btn chibi icon" data-type="profile" onclick=${() => {
-          inputter2.value = auth.name;
-          inputter2.dispatchEvent(new Event("change"));
-        }}>${tl2(trans.profile)}</button>
-                        `;
-        tippy_esm_default(btn, {
-          content: tl2(trans.profile)
-        });
-        return btn;
-      }}
-                        ${() => {
-        let btn = html.node`
-                            <button class="btn chibi icon" data-type="starred_friend" data-is-shortcut=${settings.starred_friend != ""} onclick=${() => {
-          if (settings.starred_friend == "") return;
-          inputter2.value = settings.starred_friend;
-          inputter2.dispatchEvent(new Event("change"));
-        }}>${tl2(trans.starred_friend.name)}</button>
-                        `;
-        tippy_esm_default(btn, {
-          content: tl2(trans.starred_friend.name)
-        });
-        return btn;
-      }}
-                    </div>
-                </div>
-                ${setting({ id: "collage_title" })}
-                ${setting({ id: "collage_grid_gap" })}
-                ${setting({ id: "collage_centered" })}
-                ${setting({ id: "collage_grid_text" })}
-                ${setting({ id: "collage_grid_plays" })}
-            </div>
-        `
-    );
-    let collage_settings = setting_group.querySelectorAll(":scope > .setting");
-    function make_collage(bypass = false) {
-      if (width.value() == "" || height.value() == "" || parseInt(width.value()) < min2 || parseInt(width.value()) > max2 || parseInt(height.value()) < min2 || parseInt(height.value()) > max2) {
-        notify({
-          id: "collage_failed",
-          title: tl2(trans.name_failed).replace(
-            "{name}",
-            tl2(trans.collage)
-          ),
-          body: tl2(trans.your_settings_are_invalid),
-          type: "error"
-        });
-        return;
-      }
-      if (!auth.name) {
-        notify({
-          id: "collage_failed",
-          title: tl2(trans.name_failed).replace(
-            "{name}",
-            tl2(trans.collage)
-          ),
-          body: tl2(trans.you_need_to_be_logged_in),
-          type: "error"
-        });
-        return;
-      }
-      let per_page = 50;
-      let pages = Math.ceil(width.value() * height.value() / per_page);
-      if (pages > 4 && !bypass) {
-        let warn = notify({
-          id: "collage_warning",
-          title: tl2(trans.are_you_sure),
-          body: tl2(trans.this_will_require_loading_count_pages).replace(
-            "{c}",
-            pages
-          ),
-          type: "warning",
-          actions: [
-            {
-              type: "check",
-              action: () => {
-                notify_rm(warn);
-                make_collage(true);
-              },
-              text: tl2(trans.continue)
-            }
-          ],
-          persist: true
-        });
-        return;
-      }
-      type.querySelector("button").disabled = true;
-      timeframe.querySelector("button").disabled = true;
-      collage_settings.forEach((option) => {
-        option.setAttribute("disabled", true);
-      });
-      submit.disabled = true;
-      page.state.collage = [];
-      get_grid(1, pages);
-    }
-    function get_grid(current_page, pages) {
-      render(
-        body2,
-        html`
-                <div class="loading-data-container">
-                    <div class="loading-data-text">
-                        ${tl2(trans.gathering_plays_for_user_pages).replace("{u}", page.name).replace("{current_page}", current_page).replace("{pages}", pages)}
-                    </div>
-                </div>
-            `
-      );
-      fetch(
-        `${root}user/${page.name}/library/${type.value()}?format=list&${timeframe.value()}&page=${current_page}&ajax=1`
-      ).then(function(response) {
-        console.log("returned", response, response.text);
-        return response.text();
-      }).then(function(dom) {
-        let doc = new DOMParser().parseFromString(dom, "text/html");
-        console.log("DOC", doc);
-        let next_button = doc.querySelector(".pagination-next");
-        try {
-          let tracks = doc.querySelectorAll(".chartlist-row");
-          tracks.forEach((track) => {
-            let item = {};
-            item.avatar = track.querySelector(
-              ".chartlist-image img"
-            );
-            if (item.avatar)
-              item.avatar = item.avatar.getAttribute("src");
-            item.name = track.querySelector(".chartlist-name a").textContent.trim();
-            if (type.value() != "artists")
-              item.sister = track.querySelector(".chartlist-artist a").textContent.trim();
-            item.plays = clean_number(
-              track.querySelector(".chartlist-count-bar-slug").getAttribute("data-stat-value")
-            );
-            page.state.collage.push(item);
-          });
-        } catch (e) {
-          notify({
-            id: "collage_failed",
-            title: tl2(trans.name_failed).replace(
-              "{name}",
-              tl2(trans.collage)
-            ),
-            body: tl2(trans.there_was_a_network_error),
-            type: "error"
-          });
-          console.error(e);
-        }
-        if (next_button && current_page < pages) {
-          get_grid(current_page + 1, pages);
-        } else {
-          continue_collage();
-        }
-      });
-    }
-    async function continue_collage() {
-      log("gathered initial values", "collage", "info", page.state.collage);
-      if (page.state.collage.length == 0) {
-        render(
-          body2,
-          html`
-                    <div class="loading-data-container">
-                        <div class="loading-data-text failed">
-                            ${tl2(trans.no_plays_in_range)}
-                        </div>
-                    </div>
-                `
-        );
-        type.querySelector("button").disabled = false;
-        timeframe.querySelector("button").disabled = false;
-        collage_settings.forEach((option) => {
-          option.setAttribute("disabled", false);
-        });
-        submit.disabled = false;
-        return;
-      }
-      let grid = html.node`
-            <ol class="grid-items grid-items--numbered collage-grid" style="--width: ${width.value()}; --height: ${height.value()}" data-width=${width.value()} data-height=${height.value()} data-centered=${settings.collage_centered} />
-        `;
-      if (!settings.collage_grid_gap) {
-        grid.style.setProperty("--item-list-gap", "0px");
-        grid.style.setProperty("--item-med-radius", "0");
-      }
-      let total = width.value() * height.value() - 1;
-      grid.style.setProperty(
-        "--highest",
-        Math.max(+width.value(), +height.value()).toString()
-      );
-      page.state.collage.some((data2, index3) => {
-        if (index3 > total) return false;
-        let template;
-        if (type.value() == "artists") template = sanitise(data2.name);
-        else template = `${sanitise(data2.sister)}/${sanitise(data2.name)}`;
-        grid.appendChild(html.node`
-                <li class="compare-item grid-items-item">
-                    <div class="grid-items-cover-image">
-                        <div class="grid-items-cover-image-image ${data2.avatar.endsWith("/c6f59c1e5e7240a4c0d427abd71f3dbb.jpg") || data2.avatar.endsWith("/2a96cbd8b46e442fc41c2b86b821562f.jpg") ? "grid-items-cover-default" : ""}">
-                            <img src="${data2.avatar.replace("/avatar70s/", "/avatar300s/").replace("/64s/", "/avatar300s/")}" alt="${data2.name}" loading="lazy">
-                        </div>
-                        ${settings.collage_grid_text || settings.collage_grid_plays ? html.node`
-                        <div class="grid-items-item-details">
-                            ${settings.collage_grid_text ? html.node`
-                            <p class="grid-items-item-main-text">
-                                <a class="link-block-target" href="${root}music/${redirect()}${template}" title="${data2.name}">
-                                    ${data2.name}
-                                </a>
-                            </p>
-                            ` : ""}
-                            ${type.value() != "artists" ? html.node`
-                            <p class="grid-items-item-aux-text">
-                                ${settings.collage_grid_text ? html.node`
-                                <a class="grid-items-item-aux-block" href="${root}music/${redirect()}${data2.sister}">
-                                    ${data2.sister}
-                                </a>
-                                ${settings.collage_grid_plays ? html.node`
-                                <a class="grid-item-plays" href="${root}user/${page.name}/library/music/${redirect()}${template}?date_preset=${timeframe.value()}" target="_blank">
-                                    ${data2.plays.toLocaleString(lang)}
-                                </a>
-                                ` : ""}
-                                ` : settings.collage_grid_plays ? html.node`
-                                <a class="grid-item-plays" href="${root}user/${page.name}/library/music/${redirect()}${template}?date_preset=${timeframe.value()}" target="_blank">
-                                    ${tl2(trans.count_plays, { c: data2.plays.toLocaleString(lang) })}
-                                </a>
-                                ` : ""}
-                            </p>
-                            ` : html.node`
-                            ${settings.collage_grid_plays ? html.node`
-                            <p class="grid-items-item-aux-text">
-                                <a class="grid-item-plays" href="${root}user/${page.name}/library/music/${redirect()}${template}?date_preset=${timeframe.value()}" target="_blank">
-                                    ${tl2(trans.count_plays, { c: data2.plays.toLocaleString(lang) })}
-                                </a>
-                            </p>
-                            ` : ""}
-                            `}
-                        </div>
-                        ` : ""}
-                    </div>
-                </li>
-            `);
-      });
-      let collage_dom = html.node`
-            <div class="collage">
-                ${settings.collage_title ? html.node`
-                <div class="header">
-                    <div class="type" data-type=${type.value()}>
-                        <div class="bleh-icon" />
-                        <svg class="brand" xmlns="http://www.w3.org/2000/svg" viewBox="0.1 25.618 89.836 33.432" data-asc="1.16" width="89.836" height="33.432"><path d="M21.4 44.75q-.05.2-.17.37-.13.18-.23.38l.15 1.6q0 .35-.02.67-.03.33-.03.73-.05.2-.12.32-.08.13-.18.33.1.1.18.25.07.15.12.25.05.8-.3 1.5t-.45 1.55q-.4.2-.67.47-.28.28-.28.78-.2.25-.45.5t-.55.4q-.05.05-.25.15-.3.35-.62.67-.33.33-.73.58-.2.2-.32.47-.13.28-.33.53-.35.2-.72.35-.38.15-.68.3-.35.05-.5-.08-.15-.12-.35-.17-.2.05-.37.27-.18.23-.53.48-.05.05-.22.1-.18.05-.33.15-.2.05-.4.17-.2.13-.45.23-.5-.15-1-.28-.5-.12-1.05.08-.35-.1-.65-.23-.3-.12-.65-.12-.25 0-.7-.35-.2.1-.65.1-.25 0-.42-.23-.18-.22-.48-.12-.5-.15-.97-.38-.48-.22-.88-.42-.35-.15-.6-.43-.25-.27-.5-.52-.05-.1-.1-.18-.05-.07-.15-.17-.1-.4-.35-.7l-.5-.6q-.15-.55-.35-1-.05-.2-.22-.43-.18-.22-.28-.47-.05-.55-.22-1.03-.18-.47-.58-.82.05-.2.05-.35 0-.15.05-.35-.1-.35-.3-.85.1-.4.13-.88.02-.47.07-.97-.05-.3-.13-.63-.07-.32.08-.67V44.9Q0 43.75.3 42.7q.15-.4.05-.95 0-1 .03-2.03Q.4 38.7.3 37.7q-.05-.1 0-.15.1-.7.1-1.43v-1.47-.23q0-.12.05-.17.2-.35.22-.73.03-.37.03-.72.1-.4.07-.88-.02-.47.03-.97.2-.3.37-.68.18-.37.08-.77v-.2q.1-.1.1-.23 0-.12.05-.17.25-.55.35-1.13.1-.57.25-1.12.2-.3.4-.75.55-.15 1.1-.15.25 0 .5.02.25.03.45-.02.55-.1 1.13-.1.57 0 1.17.05.15.05.33.02.17-.02.32-.07.2 0 .38.05.17.05.32 0 .1 0 .18-.03.07-.02.12-.02.05.2.13.37.07.18.12.43-.15.8-.2 1.2-.05.4.03.77.07.38.17 1.18-.1.65-.2 1.27-.1.63.1 1.33-.15.85-.1 1.65 0 .65-.02 1.3-.03.65-.18 1.3.1.25-.07.42-.18.18-.28.43 0 .45-.1.92-.1.48-.2.98-.05.25-.08.55-.02.3-.12.6 0 .05.1.07.1.03.1.08.6-.25 1-.7.4-.45.65-1 .55-.15 1.05-.35.5-.2 1-.55.2.05.43.1.22.05.42 0 .25 0 .42.02.18.03.38.03.55 0 1 .15.45.15.95.3.55.2 1.1.42.55.23 1.1.38.45.05.8.6.1.2.28.4.17.2.42.35.4.2.7.55.3.35.6.75.1.1.5.3.25.55.6 1.17.35.63.4 1.33m-6.75 2.6q-.05-.1-.05-.2t-.1-.2q-.4-.3-.6-.8-.2-.5-.8-.4-.7.15-1.25-.05-.3-.1-.45-.1-.45.05-.87.1-.43.05-.83.1l-.2.1q-.1.05-.25.05-.35.35-.8.75-.45.4-.7.95-.05.65-.02 1 .02.35.17.85.05.05.1.17.05.13.1.23.25.15.33.45.07.3.32.45.1.1.18.22.07.13.12.23.05.7.5 1.15.1.05.18.07.07.03.12.08.4 0 .55-.15.3-.15.67-.23.38-.07.68-.27.3-.25.73-.25.42 0 .77-.2.05 0 .25-.1.25-.4.55-.73.3-.32.5-.77v-1.2q.05-.3.08-.65.02-.35.02-.65zm24.25 6.6q0 .45-.4.75-.4.4-.2.95.1.35.1.75v.8q-.05.1-.12.22-.08.13-.18.23-.2.1-.25.1-.4.05-.8.07-.4.03-.8.03H36q-.7-.2-1.37-.23-.68-.02-1.33-.12-.4-.1-.75-.1t-.7.1q-.5-.25-.97-.53-.48-.27-1.03-.52-.35-.55-.87-.93-.53-.37-.93-.92-.1-.25-.22-.5-.13-.25-.28-.45-.5-.75-.65-1.65 0-.35-.25-.6-.4-.75-.2-1.4.05-.1.03-.23-.03-.12.02-.17-.2-.25-.3-.4l-.2-.3q0-.35.05-.5l-.4-.5q.1-.55.18-1.13.07-.57.17-1.07l-.35-.5q0-.2.15-.33.15-.12.25-.32.2-.55.25-1.05.15-.6.15-1.15-.1-1.1 0-2.15.1-1.05.05-2.15.25-1.1.2-2.2-.05-1.1.15-2.15v-.25q-.15-.6 0-1.15.15-.55.35-1-.05-.1-.05-.25t-.1-.25q.1-.35.3-.58.2-.22.35-.42.1-.2.18-.43.07-.22.12-.42l.35-.35q.45-.1.95-.05.15.05.33.15.17.1.37.2.35.2.68.32.32.13.72.08.55.2 1.08.25.52.05 1.02 0h.2l.03.02q.02.03.07.03.25.05.45.25t.1.45q-.1.75-.12 1.5-.03.75-.13 1.5-.1.7-.2 1.42-.1.73-.25 1.43-.05 1.1-.17 2.17-.13 1.08-.13 2.13 0 .15.03.25.02.1.02.2-.25.5-.37 1-.13.5-.28 1.05-.1.4 0 .85.15.6.13 1.2-.03.6-.13 1.25v.3q.1.2.23.45.12.25.22.5-.05.15-.1.32-.05.18-.1.33.1.25.13.55.02.3.07.55.2.25.4.47.2.23.25.53 0 .1.1.25t.15.25q.1.25.33.4.22.15.42.25.35.05.65.15.3.1.65.2.2 0 .33-.03.12-.02.27-.02.1.05.28.1.17.05.32.1.05.05.1.12.05.08.1.13.1.4.55.85.25.2.48.42.22.23.32.53zm25.95-13.6q-.05.5-.07 1.02-.03.53-.13 1.03-.05.5-.05 1.07 0 .58-.2 1.18-.1.15-.25.32-.15.18-.3.43 0 .2.03.35.02.15.07.35-.1.25-.3.42-.2.18-.4.28-.5.15-.92.3-.43.15-.88.25-.7.1-1.45.02-.75-.07-1.5-.02-.65 0-1.37.02-.73.03-1.48.03h-2.8q-.2.15-.42.1-.23-.05-.43.05-.2-.1-.45-.03-.25.08-.5-.02-.2.05-.37.07-.18.03-.43.08-.2-.05-.35-.13-.15-.07-.35.08.1.15.23.32.12.18.17.43.15.2.25.4t.2.45q.1.2.15.42.05.23.1.43.25.25.55.5l.6.5q.25.05.53.1.27.05.52.1l.6.1q.3.05.65 0 .35-.1.65.02.3.13.65.18.45-.05.93-.1.47-.05.92-.1.2-.15.43-.28.22-.12.42-.27.65-.15 1.3.05.15.25.38.5.22.25.42.55.3.45.6.87.3.43.4.98.1.25.3.5.2.25.3.45.05.25-.02.45-.08.2-.13.45-.2.2-.5.35-.05 0-.1.1t-.15.15l-.6.4q-.3.2-.55.4-.7.6-1.45.6-.3 0-.45.05-.25.05-.5.2-.25.15-.55.25-.25 0-.5.07-.25.08-.5.13-.15 0-.35-.03-.2-.02-.4-.02-.45.05-.9-.05t-.9-.1l-.3-.1q-.15-.05-.3-.05-.85.05-1.6-.28-.75-.32-1.5-.67-.6-.15-.85-.55-.35-.4-.77-.68-.43-.27-.93-.47-.3-.1-.6-.28l-.65-.37q-.05-.2-.15-.4l-.2-.4q-.1-.15-.27-.3-.18-.15-.33-.3-.15-.15-.25-.35-.25-.85-.5-1.68-.25-.82-.65-1.62.05-.35.08-.73.02-.37-.08-.82-.05-.1-.05-.25v-.25q0-.25.03-.43.02-.17-.03-.32l-.1-.8q-.05-.4.05-.75l.2-.8q.1-.4.25-.85-.05-.1-.05-.3 0-.2-.05-.4l.2-1.1q.1-.55.25-1.05.15-.3.33-.58.17-.27.37-.57.35-.6.55-1.15.6-.3.73-.38.12-.07.22-.22t.65-.6q-.05-.15.25-.45.3-.3.2-.5.45-.85 1.3-1.35.3-.2.58-.43.27-.22.47-.42.25-.15.48-.13.22.03.42.03.15-.05.33-.08.17-.02.37-.07.1-.05.25-.1t.25-.15l.2-.1q.1-.05.2-.05.45-.05.85-.25.4-.2.75-.4.75.3 1.55.2.5-.05.98.05.47.1.87.25l.7-.2q.4.05.75.25l.7.4h.45q.05.05.1.07.05.03.1.08.55.5 1.05.92.5.43 1.05.88.75.5.95 1.2.2.3.35.45.6.5 1.05 1.35 0 .1.03.27.02.18.02.33-.05.25.1.5.15.25.2.55M58.5 42v-1.25q0-.25-.05-.3-.05-.15-.12-.3-.08-.15-.13-.2v-.85l-.15-.15q-.2 0-.5-.1-.1-.45-.25-.7-.15-.2-.4-.25-.25-.05-.55-.15-.65.2-1.4.35-.75.15-1.45.4-.35.05-.65.05-.3 0-.6.05-.5.2-.87.62-.38.43-.73.83-.2.25-.35.55-.15.3-.35.55-.05.05-.05.3.15.4.45.5.3.05.6.15.3.1.65.2.15-.05.28-.05.12 0 .27-.05.6-.25 1-.05.4.05.73 0 .32-.05.67-.1.3.15.63.2.32.05.62.15.65.2 1.25.2t1.2-.15q.25-.25.25-.45zm31.4 7.8q-.2.65-.12 1.27.07.63-.03 1.28-.05.35 0 .7t-.05.75q-.05.3-.02.62.02.33.02.63-.05.2-.05.5-.1.35-.12.67-.03.33-.13.73 0 .05-.02.12-.03.08-.03.18 0 .35-.4.35-.05-.05-.25-.05-.35-.15-.6-.05l-.5.2-.3.3q-.15.15-.3.35-.55.3-1.02.17-.48-.12-.98-.42-.3 0-.45.05h-.15q-.05-.05-.15-.05-.2-.15-.37-.3-.18-.15-.38-.3-.4-.4-.3-.8.05-.2.13-.38.07-.17.02-.37-.05-.25-.12-.5-.08-.25-.08-.5t.08-.5q.07-.25.12-.5-.1-.4-.3-.8-.2-.4-.3-.85-.05-.4-.12-.83-.08-.42-.08-.82-.05-.45-.07-.88-.03-.42-.03-.92-.1-.6-.5-.95-.35-.4-.6-.75t-.45-.8q-.25-.2-.65-.35l-.1-.2q-.05-.1-.15-.15-.05-.05-.05-.13 0-.07-.05-.12l-.3-.3q-.2-.1-.4 0t-.35.1q-.2.05-.35.05-.15 0-.4.05-.2.1-.32.22-.13.13-.38.23-.15.15-.35.22-.2.08-.4.18-.2.45-.05.85.1.5.13 1.05.02.55.12 1.1.05.5-.1 1.15 0 .15-.05.32-.05.18-.05.38.05.8-.1 1.57-.15.78-.4 1.58.05.5.1.97.05.48.1.98v1.05q0 .65-.7.75H74.6q-.5.05-.97.1-.48.05-.88.3-.2.05-.37.15-.18.1-.43.2l-.35.35q-.1 0-.22.02-.13.03-.23-.02-.5-.25-.95-.4-.5-.65-.6-1.4-.1-.75-.35-1.4.05-.3.13-.58.07-.27-.03-.52-.05-.15-.05-.55 0-.15.03-.28.02-.12-.03-.22-.15-.95.1-1.65.1-.45-.05-.95-.2-.9-.15-1.85.15-.8-.05-1.6-.15-.15 0-.4 0-.25.03-.53.02-.27.07-.47.05-.2.2-.33.15-.12.25-.22l.15-.9q.1-.15-.15-.5-.05-.1-.15-.03-.1.08-.2.13l-.05-.05q0-.55.03-1.03.02-.47-.03-.97-.05-.2 0-.35.05-.15.05-.35 0-.15-.05-.35-.05-.2-.05-.4v-.25q0-.15.05-.3l.1-.5q.05-.25.15-.55-.2-.4-.17-.85.02-.45-.08-.95-.05-.15.03-.35.07-.2.12-.45-.2-.45-.15-1.03.05-.57 0-1.12.1-.3.05-.58-.05-.27-.05-.57.05-.5 0-.95-.05-.45.05-.9.05-.15.03-.25-.03-.1-.03-.2-.1-.95.05-1.75.05-.15.05-.4v-.45q-.05-.2-.07-.35-.03-.15.02-.35.15-.3.13-.63-.03-.32.17-.62l.03-.05q.02-.05.02-.1l.1-.05q0-.05.15-.05.25-.1.48-.18.22-.07.47-.12l.3.2q.15.1.35.2h.8q.1-.1.2-.15.1-.05.15-.1l.5-.35q.2-.1.43-.13.22-.02.37.13.45.3.88.5.42.2.87.25.25.4.38.75.12.35.27.75.15.5.45 1.15 0 .25-.17.4-.18.15-.23.45 0 .1.03.3.02.2.07.45 0 .2-.05.4t0 .45q.1.8.05 1.6t-.15 1.55v.7q0 .5.25 1 .2.2.38.42.17.23.32.48.3.3.65.3.7 0 1.43.12.72.13 1.42.03.15-.05.25-.03.1.03.25.03.15.1.38.15.22.05.42.1.55.1.45.65l.05.02q.05.03.1.08.1-.05.2-.05t.15-.05q.65-.25 1.15.1.3.25.7.37.4.13.75.53.35.6.9 1.12.55.53 1.1 1.13.1.15.25.27.15.13.25.23.45.45.5.9.15.7.35 1.1.15.55.45 1.25v.5q.05.2.1.42.05.23.05.48l.1 1.2.1 1.2q0 .05.03.12.02.08-.03.18z" fill="#fff"/></svg>
-                        <strong>${timeframe.querySelector("button").textContent}</strong>
-                        <strong>${tl2(trans.top_type).replace("{type}", tl2(trans[type.value()]))}</strong>
-                        <strong>${width.value()}×${height.value()}</strong>
-                    </div>
-                    <div class="user">
-                        <div class="avatar">
-                            <img src="${page.avatar}" alt="${tl2(trans.avatar_for_user).replace("{u}", page.name)}">
-                        </div>
-                        <strong>${page.name}</strong>
-                    </div>
-                </div>
-                ` : ""}
-                ${grid}
-            </div>
-        `;
-      render(
-        body2,
-        html`
-                <div class="loading-data-container">
-                    <div class="loading-data-text">
-                        ${tl2(trans.waiting_for_images)}
-                    </div>
-                </div>
-                ${collage_dom}
-            `
-      );
-      music_grids(grid, false);
-      const default_size = 380;
-      const base = 6;
-      const highest = Math.max(+width.value(), +height.value());
-      const grid_item_size = Math.min(
-        default_size,
-        Math.floor(default_size * base / highest)
-      );
-      const grid_item_gap = settings.collage_grid_gap ? 6 : 0;
-      const padding = settings.collage_grid_gap ? 15 : 0;
-      const title_height = settings.collage_title ? 32 + 15 : 0;
-      const cv_width = padding * 2 + grid_item_size * width.value() + grid_item_gap * (width.value() - 1);
-      const cv_height = padding * 2 + title_height + grid_item_size * height.value() + grid_item_gap * (height.value() - 1);
-      const cv_scale = 1;
-      collage_dom.style.width = `${cv_width}px`;
-      collage_dom.style.height = `${cv_height}px`;
-      collage_dom.style.padding = `${padding}px`;
-      collage_dom.style.gap = `${padding}px`;
-      collage_dom.style.setProperty("--item-list-gap", `${grid_item_gap}px`);
-      collage_dom.style.setProperty(
-        "--grid-item-size",
-        `${grid_item_size}px`
-      );
-      let initial_canvas = html.node`
-            <canvas width=${cv_width * cv_scale} height=${cv_height * cv_scale} />
-        `;
-      (0, import_html2canvas_pro.default)(collage_dom, {
-        useCORS: true,
-        letterRendering: true,
-        canvas: initial_canvas,
-        scale: cv_scale,
-        onclone: (doc) => {
-          doc.querySelectorAll("*").forEach((el) => {
-            el.style.setProperty(
-              "font-family",
-              "Funnel Sans, Inter, Ubuntu Sans, Spline Sans, Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Sans TC, Lucida Grande, Verdana, Tahoma, -apple-system, BlinkMacSystemFont, sans-serif"
-            );
-          });
-        }
-      }).then((canvas) => {
-        canvas.toBlob((blob) => {
-          const blob_url = URL.createObjectURL(blob);
-          const date = /* @__PURE__ */ new Date();
-          const filename = tl2(trans.chart_template_filename).replace(
-            "{timeframe}",
-            timeframe.querySelector("button").textContent
-          ).replace("{user}", page.name).replace("{type}", tl2(trans[type.value()])).replace("{size}", `${width.value()}\xD7${height.value()}`).replace("{brand}", version.brand).replace(
-            "{date}",
-            `${date.getFullYear()}-${pad2(date.getMonth() + 1)}-${pad2(date.getDate())}`
-          );
-          render(
-            body2,
-            html`
-                        <div class="collage-finished">
-                            <strong>${tl2(trans.your_collage_is_ready)}</strong>
-                            <div class="button-group">
-                                <button
-                                    class="btn primary icon"
-                                    data-type="download"
-                                    onclick=${() => download(blob_url, filename)}
-                                >
-                                    ${tl2(trans.download)}
-                                </button>
-                                <button
-                                    class="btn open"
-                                    data-type="open"
-                                    onclick=${() => open(blob_url)}
-                                >
-                                    ${tl2(trans.open)}
-                                </button>
-                            </div>
-                        </div>
-                        ${canvas}
-                    `
-          );
-          type.querySelector("button").disabled = false;
-          timeframe.querySelector("button").disabled = false;
-          collage_settings.forEach((option) => {
-            option.setAttribute("disabled", false);
-          });
-          submit.disabled = false;
-        }, "image/png");
-      });
-    }
-  }
-
-  // src/components/pixel.js
-  function pixel({
-    host,
-    sidebar
-  } = {}) {
-    if (!host || !sidebar) return;
-    let user_albums = [];
-    render(sidebar, html`
-        <h2>${tl2(trans.settings)}</h2>
-        <div class="setting-group">
-            <div class="setting v" data-type="text">
-                <div class="heading">
-                    <h5>${tl2(trans.profile)}</h5>
-                </div>
-                <div class="input-container content-form">
-                    <input type="text" class="input" ref=${(el) => inputter = el} placeholder=${tl2(trans.enter_a_profile)} value=${page.requested.profile} onchange=${(e) => {
-      page.requested.profile = e.target.value;
-      page.name = page.requested.profile;
-    }}>
-                    ${() => {
-      let btn = html.node`
-                            <button class="btn chibi icon" data-type="profile" onclick=${() => {
-        inputter.value = auth.name;
-        inputter.dispatchEvent(new Event("change"));
-      }}>${tl2(trans.profile)}</button>
-                        `;
-      tippy_esm_default(btn, {
-        content: tl2(trans.profile)
-      });
-      return btn;
-    }}
-                    ${() => {
-      let btn = html.node`
-                            <button class="btn chibi icon" data-type="starred_friend" data-is-shortcut=${settings.starred_friend != ""} onclick=${() => {
-        if (settings.starred_friend == "") return;
-        inputter.value = settings.starred_friend;
-        inputter.dispatchEvent(new Event("change"));
-      }}>${tl2(trans.starred_friend.name)}</button>
-                        `;
-      tippy_esm_default(btn, {
-        content: tl2(trans.starred_friend.name)
-      });
-      return btn;
-    }}
-                </div>
-            </div>
-        </div>
-        <button class="primary icon jumbo" data-type="pixel" onclick=${() => pixel_prepare()}>
-            ${tl2(trans.reset)}
-        </button>
-    `);
-    pixel_home();
-    function pixel_home() {
-      render(host, html`
-            <div class="pixel-home">
-                <h1 class="pixel-logo">pixel</h1>
-                <div class="pixel-guess center">
-                    <button class="primary jumbo continue" onclick=${() => pixel_prepare()}>
-                        ${tl2(trans.begin)}
-                    </button>
-                </div>
-            </div>
-        `);
-    }
-    function pixel_prepare() {
-      user_albums = [];
-      render(host, html`
-            <div class="pixel-home">
-                <h1 class="pixel-logo">pixel</h1>
-                <div class="loading-data-container">
-                    <div class="loading-data-text">${tl2(trans.loading_album_plays)}</div>
-                </div>
-            </div>
-        `);
-      if (user_albums.length == 0) {
-        fetch(`http://ws.audioscrobbler.com/2.0/?method=user.gettopalbums&user=${page.name}&api_key=${api_key}&format=json&limit=500`).then((res) => {
-          if (!res.ok) {
-            notify({
-              id: "api-error",
-              type: "error",
-              title: tl2(trans.value_failed_to_load).replace("{v}", tl2(trans.albums)),
-              body: res.statusText
-            });
-            throw new Error();
-          }
-          return res.json();
-        }).then((data2) => {
-          const pre_parsed = data2.topalbums.album;
-          pre_parsed.forEach((album) => {
-            user_albums.push({
-              image: album.image[3]["#text"],
-              name: correct_item_by_artist(album.name, album.artist.name),
-              sister: correct_artist(album.artist.name),
-              type: "album",
-              plays: album.playcount
-            });
-          });
-          pixel_random();
-        }).catch((err) => {
-          return;
-        });
-      } else {
-        pixel_random();
-      }
-    }
-    function pixel_random() {
-      pixel_guess(user_albums[Math.floor(Math.random() * user_albums.length)]);
-    }
-    function pixel_guess({
-      image,
-      name,
-      sister,
-      type,
-      plays
-    } = {
-      image: "",
-      name: "Unknown Album",
-      sister: "Unknown Artist",
-      type: "album",
-      plays: 0
-    }) {
-      let guess_input;
-      const hints = [
-        "artist",
-        "country",
-        "date"
-      ];
-      const pixelations = [
-        0.02,
-        0.05,
-        0.1,
-        0.2,
-        0.3
-      ];
-      let pixelation = 0;
-      let hint = 0;
-      let canvas;
-      let timer;
-      let actions;
-      let guess_btn;
-      let interval;
-      let image_interval;
-      let title_elem;
-      let hints_container;
-      render(host, html``);
-      render(host, html`
-            <div class="pixel-artwork">
-                <canvas ref=${(el) => canvas = el} />
-            </div>
-            <div class="pixel-info">
-                <div class="pixel-album-name">
-                    <h1 ref=${(el) => title_elem = el}>${jumble_string(name)}</h1>
-                </div>
-            </div>
-            <div class="pixel-actions" ref=${(el) => actions = el}>
-                <button class="icon" data-type="add" onclick=${() => pixel_hint()}>
-                    ${tl2(trans.add_hint)}
-                </button>
-                <button class="icon" data-type="jumble" onclick=${() => {
-        title_elem.textContent = jumble_string(name);
-        guess_input.focus();
-      }}>
-                    ${tl2(trans.re_jumble)}
-                </button>
-                <button class="icon" data-type="minus" onclick=${() => pixel_give_up()}>
-                    ${tl2(trans.give_up)}
-                    ${keybind(["ESC"])}
-                </button>
-            </div>
-            <div class="pixel-time" ref=${(el) => timer = el} />
-            <div class="pixel-guess">
-                ${guess_input = input({
-        type: "text",
-        placeholder: tl2(trans.enter_a_guess),
-        func: (value) => {
-          pixel_make_a_guess(value);
-        },
-        func_esc: () => {
-          pixel_give_up();
-        }
-      })}
-                ${() => {
-        const btn = html.node`
-                        <button class="primary icon guess" data-type="send" ref=${(el) => guess_btn = el} onclick=${() => guess_input.submit()}>
-                            ${tl2(trans.guess)}
-                        </button>
-                    `;
-        tippy_esm_default(btn, {
-          content: btn.textContent
-        });
-        return btn;
-      }}
-            </div>
-            <div class="pixel-info">
-                <h2>${tl2(trans.hints)}</h2>
-                <div class="hints" ref=${(el) => hints_container = el}></div>
-            </div>
-        `);
-      render(hints_container, html`
-            sister: ${sister}<br>
-            type: ${type}<br>
-            plays: ${plays}
-        `);
-      guess_input.focus();
-      const canvas_image = new Image();
-      canvas_image.src = image;
-      canvas_image.onload = () => {
-        render_canvas();
-      };
-      render_timer();
-      function render_timer() {
-        const duration = 30 * 1e3;
-        const start2 = Date.now();
-        interval = setInterval(() => {
-          const elapsed = Date.now() - start2;
-          const remain = duration - elapsed;
-          if (remain <= 0) {
-            timer_end();
-            pixel_end();
-            return;
-          }
-          const s2 = Math.floor(remain / 1e3);
-          const ms = remain % 1e3;
-          render(timer, html`
-                    <span class="bleh-icon" />
-                    <span class="s">
-                        ${s2}
-                    </span>
-                `);
-        }, 10);
-      }
-      function timer_end(keep = false) {
-        clearInterval(interval);
-        if (keep) return;
-        render(timer, html`
-                <span class="bleh-icon" />
-                <span class="s">
-                    0
-                </span>
-            `);
-      }
-      function render_canvas(override = false) {
-        let value = pixelation;
-        if (!override) {
-          const max2 = pixelations.length - 1;
-          if (pixelation > max2) pixelation = max2;
-          value = pixelations[pixelation];
-        }
-        log(`drawing canvas image with pixelation ${value} (${pixelation})`, "pixel");
-        const ctx = canvas.getContext("2d");
-        canvas.width = canvas_image.width;
-        canvas.height = canvas_image.height;
-        const scaled_width = canvas_image.width * value;
-        const scaled_height = canvas_image.height * value;
-        ctx.drawImage(canvas_image, 0, 0, scaled_width, scaled_height);
-        ctx.imageSmoothingEnabled = false;
-        ctx.drawImage(canvas, 0, 0, scaled_width, scaled_height, 0, 0, canvas_image.width, canvas_image.height);
-      }
-      function pixel_make_a_guess(guess) {
-        if (clean_pixel_name(guess) == clean_pixel_name(name)) {
-          status({
-            title: tl2(trans.you_guessed_correctly)
-          });
-          timer_end(true);
-          pixel_end();
-        }
-      }
-      function clean_pixel_name(name2) {
-        return name2.toLowerCase().replace(/[‘’]/g, `'`).normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
-      }
-      function pixel_hint() {
-        guess_input.focus();
-        pixelation++;
-        render_canvas();
-      }
-      function pixel_give_up() {
-        timer_end();
-        pixel_end();
-      }
-      function pixel_end() {
-        title_elem.textContent = name;
-        guess_input.disabled(true);
-        guess_btn.disabled = true;
-        render(actions, html`
-                <button class="icon" data-type="pixel" onclick=${() => pixel_random()}>
-                    ${tl2(trans.continue)}
-                </button>
-            `);
-        let i = 0.1;
-        image_interval = setInterval(() => {
-          pixelation = i;
-          render_canvas(true);
-          i += 0.1;
-          if (i >= 1) clearInterval(image_interval);
-        }, 50);
-      }
-    }
-  }
-  function shuffle_array(arr) {
-    for (let i = arr.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [arr[i], arr[j]] = [arr[j], arr[i]];
-    }
-    return arr;
-  }
-  function jumble_string(input2) {
-    let output = input2.split(" ").map((word) => {
-      if (!word) return "";
-      const letters = word.split("");
-      return shuffle_array(letters).join("");
-    }).join(" ");
-    if (output == input2) return jumble_string(input2);
-    return output;
-  }
-
-  // src/components/plot.js
-  function plot({ host, sidebar } = {}) {
-    if (!host || !sidebar) return;
-    let timeframe;
-    let current_year = (/* @__PURE__ */ new Date()).getFullYear();
-    let previous_year = current_year - 1;
-    const default_timeframe = page.requested.timeframe || "date_preset=LAST_90_DAYS";
-    let users = [page.name];
-    let users_elem;
-    render(host, html`
-        <div class="compare-header">
-            <div class="compare-users for-plot" ref=${(el) => users_elem = el} />
-            <div class="compare-selection">
-                ${timeframe = select(
-      [
-        {
-          text: tl2(trans.timeframe)
-        },
-        {
-          value: "date_preset=LAST_7_DAYS",
-          text: tl2(trans.last_count_days).replace(
-            "{c}",
-            "7"
-          )
-        },
-        {
-          value: "date_preset=LAST_30_DAYS",
-          text: tl2(trans.last_count_days).replace(
-            "{c}",
-            "30"
-          )
-        },
-        {
-          value: "date_preset=LAST_90_DAYS",
-          text: tl2(trans.last_count_days).replace(
-            "{c}",
-            "90"
-          )
-        },
-        {
-          value: "date_preset=LAST_180_DAYS",
-          text: tl2(trans.last_count_days).replace(
-            "{c}",
-            "180"
-          )
-        },
-        {
-          value: "date_preset=LAST_365_DAYS",
-          text: tl2(trans.last_count_days).replace(
-            "{c}",
-            "365"
-          )
-        },
-        {
-          value: "date_preset=ALL",
-          text: tl2(trans.all_time)
-        },
-        {
-          value: `from=${current_year}-01-01&rangetype=year`,
-          text: current_year
-        },
-        {
-          value: `from=${previous_year}-01-01&rangetype=year`,
-          text: previous_year
-        }
-      ],
-      default_timeframe
-    )}
-            </div>
-        </div>
-        <div
-            class="compare-body"
-            data-filled="false"
-            ref=${(el) => body = el}
-        >
-            <div class="loading-data-container">
-                <div class="loading-data-text info">
-                    ${tl2(trans.choose_a_timeframe_above)}
-                </div>
-            </div>
-        </div>
-    `);
-    render_users();
-    function render_users() {
-      render(users_elem, html`
-            ${users.map((user) => html.node`
-                <button class="compare-user-btn" onclick=${() => {
-        users = users.filter((user_name) => user_name != user);
-        render_users();
-      }}>
-                    ${user_placeholder(user)}
-                    <div class="bleh-icon" data-type="minus" />
-                </button>
-            `)}
-            <button class="compare-user-btn add-user" onclick=${() => {
-        let input_box;
-        dialog({
-          id: "add_user",
-          title: tl2(trans.plot.name),
-          body: html.node`
-                        ${input_box = input({
-            focus: true,
-            func: complete_add,
-            warn_if_empty: true
-          })}
-                        <div class="modal-footer">
-                            <button class="see-more cancel" onclick=${() => dialog_rm({ id: "add_user" })}>
-                                ${tl2(trans.cancel)}
-                            </button>
-                            <div class="fill"></div>
-                            <button class="btn primary icon" data-type="add" onclick=${() => complete_add(input_box.value())}>
-                                ${tl2(trans.add)}
-                            </button>
-                        </div>
-                    `
-        });
-        setTimeout(() => {
-          input_box.focus();
-        }, 1);
-        function complete_add(val) {
-          if (val.length < 1 || users.includes(val)) return;
-          dialog_rm({ id: "add_user" });
-          users = [...users, val];
-          render_users();
-        }
-      }}>
-                <div class="bleh-icon" data-type="plus" />
-            </button>
-        `);
-    }
-    function user_placeholder(name, avatar2) {
-      if (name == auth.name) avatar2 = auth.avatar;
-      const elem = html.node`
-            <div class="compare-user" />
-        `;
-      render(elem, html`
-            ${render_user(name, avatar2, elem)}
-        `);
-      return elem;
-    }
-  }
-
-  // src/pages/minis.js
-  var valid_minis;
-  function bleh_minis(skip2 = false) {
-    if (!skip2) {
-      update_page();
-      page.structure.row.removeChild(page.structure.row.firstElementChild);
-      page.structure.row.removeChild(page.structure.row.firstElementChild);
-    }
-    let params = new URLSearchParams(document.location.search);
-    page.requested.profile = params.get("profile") || auth.name;
-    page.requested.secondary = params.get("secondary");
-    page.requested.redirect = params.get("redirect");
-    page.requested.type = params.get("type");
-    page.requested.timeframe = params.get("timeframe");
-    let path = window.location.pathname.split("/");
-    let mini = path[path.length - 1];
-    if (mini == "minis") mini = null;
-    valid_minis = {
-      collage: {
-        name: tl2(trans.collage),
-        body: tl2(trans.collage_description),
-        func: bleh_minis_collage,
-        by: ["clairedoll"]
-      },
-      compare: {
-        name: tl2(trans.compare),
-        body: tl2(trans.compare_description),
-        func: bleh_minis_compare,
-        by: ["clairedoll"]
-      },
-      plot: {
-        name: tl2(trans.plot.name),
-        body: tl2(trans.plot.body),
-        func: bleh_minis_plot,
-        by: ["clairedoll"],
-        new_release: true,
-        hide_if: !ff("unlock_minis")
-      },
-      pixel: {
-        name: tl2(trans.pixel?.name),
-        body: tl2(trans.pixel?.body),
-        func: bleh_minis_pixel,
-        hide_if: !ff("unlock_minis"),
-        by: ["clairedoll"]
-      },
-      lyrics: {
-        name: tl2(trans.lyrics?.name),
-        body: tl2(trans.lyrics?.body),
-        func: bleh_minis_lyrics,
-        hide_if: !ff("unlock_minis")
-      },
-      rainbow: {
-        name: tl2(trans.rainbow?.name),
-        body: tl2(trans.rainbow?.body),
-        func: bleh_minis_rainbow,
-        hide_if: !ff("unlock_minis")
-      },
-      receipt: {
-        name: tl2(trans.receipt?.name),
-        body: tl2(trans.receipt?.body),
-        func: bleh_minis_receipt,
-        hide_if: !ff("unlock_minis")
-      }
-    };
-    if (mini && (!valid_minis[mini] || valid_minis[mini].hide_if)) {
-      render(
-        page.structure.main,
-        html`
-                <section class="minis">
-                    ${return_to_minis()}
-                    <div class="loading-data-container">
-                        <div class="loading-data-text error">
-                            ${tl2(trans.no_mini_found).replace("{v}", mini)}
-                        </div>
-                    </div>
-                </section>
-            `
-      );
-      return;
-    }
-    render(page.structure.side, html``);
-    page.avatar = "";
-    page.name = page.requested.profile;
-    if (page.name == auth.name) page.avatar = auth.avatar;
-    if (mini) {
-      page.structure.container.setAttribute("data-mini", mini);
-      valid_minis[mini].func();
-      return;
-    }
-    render(
-      page.structure.main,
-      html`
-            <section class="minis">
-                <div class="minis-header main">
-                    <h2>${tl2(trans.minis)}</h2>
-                    <p>${tl2(trans.minis_description)}</p>
-                </div>
-                <div class="mini-list">
-                    ${Object.entries(valid_minis).map(([id, mini2]) => {
-        if (mini2.hide_if) return html.node``;
-        return html.node`
-                            <button class="mini" data-type=${id} data-mini=${id} onclick=${() => {
-          window.history.replaceState(
-            id,
-            "",
-            `${root}bleh/minis/${id}`
-          );
-          page.structure.container.setAttribute(
-            "data-mini",
-            id
-          );
-          render(page.structure.main, html``);
-          valid_minis[id].func();
-        }}>
-                                <div class="mini-icon colourful">
-                                    <div class="bleh-icon" />
-                                </div>
-                                <div class="mini-info">
-                                    <h5>${mini2.name}${mini2.new_release ? html.node`<div class="new-badge new">${tl2(trans.new)}</div>` : ""}</h5>
-                                    <p>${mini2.body}</p>
-                                </div>
-                                <div class="bleh-icon mini-arrow" style="--icon: var(--mask)" data-type="arrow-right" />
-                            </button>
-                        `;
-      })}
-                </div>
-                <p class="card-tip">
-                    ${{
-        html: tl2(trans.labs_cta).replace(
-          "{a}",
-          `<a class="see-more" href="${root}labs">`
-        ).replace("{/a}", "</a>")
-      }}
-                </p>
-            </section>
-        `
-    );
-  }
-  function return_to_minis(mini = "") {
-    return html.node`
-        <div class="minis-header">
-            <h2 class="previous" onclick=${() => {
-      window.history.replaceState(null, "", `${root}bleh/minis`);
-      bleh_minis(true);
-    }}>${tl2(trans.minis)}</h2>
-            <div class="bleh-icon mini-arrow" style="--icon: var(--mask)" data-type="arrow-right" />
-            <h2>${mini ? valid_minis[mini].name : tl2(trans.error)}</h2>
-        </div>
-    `;
-  }
-  function bleh_minis_collage() {
-    let content2;
-    let mini_settings;
-    render(
-      page.structure.main,
-      html`
-            <section class="minis">
-                ${return_to_minis("collage")}
-                <div class="minis-content" ref=${(el) => content2 = el} />
-            </section>
-        `
-    );
-    render(
-      page.structure.side,
-      html`
-            <section
-                class="current-mini-settings"
-                ref=${(el) => mini_settings = el}
-            />
-            <section class="mini-faq">
-                <p class="card-tip">
-                    ${tl2(trans.value_by_user, {
-        v: valid_minis.collage.name,
-        u: valid_minis.collage.by.join(",")
-      })}
-                </p>
-            </section>
-        `
-    );
-    collage({
-      host: content2,
-      sidebar: mini_settings
-    });
-  }
-  function bleh_minis_compare() {
-    let content2;
-    let mini_settings;
-    render(
-      page.structure.main,
-      html`
-            <section class="minis">
-                ${return_to_minis("compare")}
-                <div class="minis-content" ref=${(el) => content2 = el} />
-            </section>
-        `
-    );
-    render(
-      page.structure.side,
-      html`
-            <section
-                class="current-mini-settings"
-                ref=${(el) => mini_settings = el}
-            />
-            <section class="mini-faq">
-                <p class="card-tip">
-                    ${tl2(trans.value_by_user, {
-        v: valid_minis.compare.name,
-        u: valid_minis.compare.by.join(",")
-      })}
-                </p>
-            </section>
-        `
-    );
-    compare({
-      host: content2,
-      sidebar: mini_settings
-    });
-  }
-  function bleh_minis_plot() {
-    let content2;
-    let mini_settings;
-    render(
-      page.structure.main,
-      html`
-            <section class="minis">
-                ${return_to_minis("plot")}
-                <div class="minis-content" ref=${(el) => content2 = el} />
-            </section>
-        `
-    );
-    render(
-      page.structure.side,
-      html`
-            <section
-                class="current-mini-settings"
-                ref=${(el) => mini_settings = el}
-            />
-            <section class="mini-faq">
-                <p class="card-tip">
-                    ${tl2(trans.value_by_user, {
-        v: valid_minis.plot.name,
-        u: valid_minis.plot.by.join(",")
-      })}
-                </p>
-            </section>
-        `
-    );
-    plot({
-      host: content2,
-      sidebar: mini_settings
-    });
-  }
-  function bleh_minis_pixel() {
-    let content2;
-    let mini_settings;
-    render(
-      page.structure.main,
-      html`
-            <section class="minis">
-                ${return_to_minis("pixel")}
-                <div
-                    class="minis-content pixel-content"
-                    ref=${(el) => content2 = el}
-                />
-            </section>
-        `
-    );
-    render(
-      page.structure.side,
-      html`
-            <section
-                class="current-mini-settings"
-                ref=${(el) => mini_settings = el}
-            />
-            <section class="mini-faq">
-                <p class="card-tip">
-                    ${tl2(trans.value_by_user, {
-        v: valid_minis.pixel.name,
-        u: valid_minis.pixel.by.join(",")
-      })}
-                </p>
-            </section>
-        `
-    );
-    pixel({
-      host: content2,
-      sidebar: mini_settings
-    });
-  }
-  function bleh_minis_lyrics() {
-    render(
-      page.structure.main,
-      html` <section class="minis">${return_to_minis("lyrics")}</section> `
-    );
-  }
-  function bleh_minis_rainbow() {
-    render(
-      page.structure.main,
-      html` <section class="minis">${return_to_minis("rainbow")}</section> `
-    );
-  }
-  function bleh_minis_receipt() {
-    render(
-      page.structure.main,
-      html` <section class="minis">${return_to_minis("receipt")}</section> `
-    );
-  }
-  function render_user(name, avatar2, user, replace_page = false) {
-    if (avatar2 == "" && name != "") {
-      fetch(`${root}user/${name}/tags`).then(function(response) {
-        console.log("returned", response, response.text);
-        return response.text();
-      }).then(function(dom) {
-        let doc = new DOMParser().parseFromString(dom, "text/html");
-        console.log("DOC", doc);
-        try {
-          avatar2 = doc.querySelector(".header-avatar-inner-wrap img").getAttribute("src");
-          name = doc.querySelector(".header-title").textContent.trim();
-          if (replace_page) {
-            page.avatar = avatar2;
-            page.name = name;
-          }
-          if (!user)
-            user = page.structure.main.querySelector(
-              ".compare-user.focus"
-            );
-          render(user, render_user(name, avatar2, user, replace_page));
-        } catch (e) {
-          console.error(e);
-        }
-      });
-      return html`
-            <div class="avatar loading" />
-            <strong>${name}</strong>
-        `;
-    }
-    return html`
-        <div class="avatar">
-            <img
-                src=${avatar2}
-                alt=${tl2(trans.avatar_for_user).replace("{u}", name)}
-            />
-        </div>
-        <strong>${name}</strong>
-    `;
-  }
-
-  // src/components/compare.js
-  function compare({ host, sidebar } = {}) {
-    if (!host || !sidebar) return;
-    let pages;
-    let timeframe;
-    let type;
-    let submit;
-    let body2;
-    if (page.name == auth.name) {
-      page.name = "";
-      page.avatar = "";
-      page.requested.profile = "";
-    }
-    let current_year = (/* @__PURE__ */ new Date()).getFullYear();
-    let previous_year = current_year - 1;
-    const default_type = page.requested.type || "albums";
-    const default_timeframe = page.requested.timeframe || "date_preset=LAST_90_DAYS";
-    let user;
-    render(
-      host,
-      html`
-            <div class="compare-header">
-                <div class="compare-users">
-                    <div class="compare-user">
-                        <div class="avatar">
-                            <img
-                                src="${auth.avatar.replace(
-        "/avatar42s/",
-        "/avatar170s/"
-      )}"
-                                alt="${tl2(trans.your_avatar)}"
-                            />
-                        </div>
-                        <strong>${auth.name}</strong>
-                    </div>
-                    <div class="bleh-icon"></div>
-                    <div class="compare-user focus" ref=${(el) => user = el}>
-                        ${render_user(page.name, page.avatar, user, true)}
-                    </div>
-                </div>
-                <div class="compare-selection">
-                    ${pages = select(
-        [
-          {
-            text: tl2(trans.page_count)
-          },
-          {
-            value: "1",
-            text: 50
-          },
-          {
-            value: "2",
-            text: 100
-          },
-          {
-            value: "3",
-            text: 150
-          },
-          {
-            value: "4",
-            text: 200
-          },
-          {
-            value: "5",
-            text: 250
-          },
-          {
-            value: "6",
-            text: 300
-          }
-        ],
-        "3"
-      )}
-                    ${type = select(
-        [
-          {
-            text: tl2(trans.item_type)
-          },
-          {
-            value: "artists",
-            text: html`<div
-                                        class="bleh-icon"
-                                        style="--icon: var(--icon-16-artist)"
-                                    />
-                                    ${tl2(trans.artists)}`
-          },
-          {
-            value: "albums",
-            text: html`<div
-                                        class="bleh-icon"
-                                        style="--icon: var(--icon-16-album)"
-                                    />
-                                    ${tl2(trans.albums)}`
-          },
-          {
-            value: "tracks",
-            text: html`<div
-                                        class="bleh-icon"
-                                        style="--icon: var(--icon-16-track)"
-                                    />
-                                    ${tl2(trans.tracks)}`
-          }
-        ],
-        default_type
-      )}
-                    ${timeframe = select(
-        [
-          {
-            text: tl2(trans.timeframe)
-          },
-          {
-            value: "date_preset=LAST_7_DAYS",
-            text: tl2(trans.last_count_days).replace(
-              "{c}",
-              "7"
-            )
-          },
-          {
-            value: "date_preset=LAST_30_DAYS",
-            text: tl2(trans.last_count_days).replace(
-              "{c}",
-              "30"
-            )
-          },
-          {
-            value: "date_preset=LAST_90_DAYS",
-            text: tl2(trans.last_count_days).replace(
-              "{c}",
-              "90"
-            )
-          },
-          {
-            value: "date_preset=LAST_180_DAYS",
-            text: tl2(trans.last_count_days).replace(
-              "{c}",
-              "180"
-            )
-          },
-          {
-            value: "date_preset=LAST_365_DAYS",
-            text: tl2(trans.last_count_days).replace(
-              "{c}",
-              "365"
-            )
-          },
-          {
-            value: "date_preset=ALL",
-            text: tl2(trans.all_time)
-          },
-          {
-            value: `from=${current_year}-01-01&rangetype=year`,
-            text: current_year
-          },
-          {
-            value: `from=${previous_year}-01-01&rangetype=year`,
-            text: previous_year
-          }
-        ],
-        default_timeframe
-      )}
-                    <button
-                        class="btn icon primary compare"
-                        ref=${(el) => submit = el}
-                        onclick=${() => begin_comparing()}
-                    >
-                        ${tl2(trans.compare)}
-                    </button>
-                </div>
-            </div>
-            <div
-                class="compare-body"
-                data-filled="false"
-                ref=${(el) => body2 = el}
-            >
-                <div class="loading-data-container">
-                    <div class="loading-data-text info">
-                        ${tl2(trans.choose_a_timeframe_above)}
-                    </div>
-                </div>
-            </div>
-        `
-    );
-    let setting_group;
-    let input2;
-    render(
-      sidebar,
-      html`
-            <h2>${tl2(trans.settings)}</h2>
-            <div class="setting-group" ref=${(el) => setting_group = el}>
-                <div class="setting v" data-type="text">
-                    <div class="heading">
-                        <h5>${tl2(trans.compare_with)}</h5>
-                    </div>
-                    <div class="input-container content-form">
-                        <input
-                            type="text"
-                            class="input"
-                            ref=${(el) => inputter = el}
-                            placeholder=${tl2(trans.enter_a_profile)}
-                            value=${page.requested.profile}
-                            onchange=${(e) => {
-        page.requested.profile = e.target.value;
-        page.name = page.requested.profile;
-        page.avatar = "";
-        if (page.name == auth.name)
-          page.avatar = auth.avatar;
-        render(
-          user,
-          html`
-                                        ${render_user(
-            page.name,
-            page.avatar,
-            user,
-            true
-          )}
-                                    `
-        );
-      }}
-                        />
-                        ${() => {
-        let btn = html.node`
-                            <button class="btn chibi icon" data-type="starred_friend" data-is-shortcut=${settings.starred_friend != ""} onclick=${() => {
-          if (settings.starred_friend == "") return;
-          inputter.value = settings.starred_friend;
-          inputter.dispatchEvent(new Event("change"));
-        }}>${tl2(trans.starred_friend.name)}</button>
-                        `;
-        tippy_esm_default(btn, {
-          content: tl2(trans.starred_friend.name)
-        });
-        return btn;
-      }}
-                    </div>
-                </div>
-                ${ff("inverse_compare") ? html.node`
-                        ${setting({ id: "inverse_compare" })}
-                    ` : ""}
-            </div>
-        `
-    );
-    let compare_settings = setting_group.querySelectorAll(":scope > .setting");
-    function begin_comparing(bypass = false) {
-      if (page.name == "") return;
-      if (parseInt(pages.value()) > 3 && !bypass) {
-        let warn = notify({
-          id: "compare_warning",
-          title: tl2(trans.are_you_sure),
-          body: tl2(trans.this_will_require_loading_count_pages).replace(
-            "{c}",
-            parseInt(pages.value()) * 2
-          ),
-          type: "warning",
-          actions: [
-            {
-              type: "check",
-              action: () => {
-                notify_rm(warn);
-                begin_comparing(true);
-              },
-              text: tl2(trans.continue)
-            }
-          ],
-          persist: true
-        });
-        return;
-      }
-      if (!auth.name) {
-        notify({
-          id: "compare_failed",
-          title: tl2(trans.name_failed).replace(
-            "{name}",
-            tl2(trans.compare)
-          ),
-          body: tl2(trans.you_need_to_be_logged_in),
-          type: "error"
-        });
-        return;
-      }
-      pages.querySelector("button").disabled = true;
-      type.querySelector("button").disabled = true;
-      timeframe.querySelector("button").disabled = true;
-      compare_settings.forEach((option) => {
-        option.setAttribute("disabled", true);
-      });
-      submit.disabled = true;
-      page.state.compare = {
-        you: [],
-        other: [],
-        shared: []
-      };
-      get_grid(auth.name, 1, parseInt(pages.value()), page.name);
-    }
-    function get_grid(user2, current_page, page_count, next_user = null) {
-      render(
-        body2,
-        html`
-                <div class="loading-data-container">
-                    <div class="loading-data-text">
-                        ${tl2(trans.gathering_plays_for_user_pages).replace("{u}", user2).replace("{current_page}", current_page).replace("{pages}", page_count)}
-                    </div>
-                </div>
-            `
-      );
-      fetch(
-        `${root}user/${user2}/library/${type.value()}?format=list&${timeframe.value()}&page=${current_page}&ajax=1`
-      ).then(function(response) {
-        console.log("returned", response, response.text);
-        return response.text();
-      }).then(function(dom) {
-        let doc = new DOMParser().parseFromString(dom, "text/html");
-        console.log("DOC", doc);
-        let next_button = doc.querySelector(".pagination-next");
-        try {
-          let tracks = doc.querySelectorAll(".chartlist-row");
-          tracks.forEach((track) => {
-            let item = {};
-            item.avatar = track.querySelector(".chartlist-image img");
-            if (item.avatar)
-              item.avatar = item.avatar.getAttribute("src");
-            item.name = track.querySelector(".chartlist-name a").textContent.trim();
-            if (type.value() != "artists")
-              item.sister = track.querySelector(".chartlist-artist a").textContent.trim();
-            item.plays = clean_number(track.querySelector(".chartlist-count-bar-slug").getAttribute("data-stat-value"));
-            if (next_user) page.state.compare.you.push(item);
-            else page.state.compare.other.push(item);
-          });
-        } catch (e) {
-          notify({
-            id: "compare",
-            title: tl2(trans.failed),
-            body: tl2(trans.there_was_a_network_error),
-            type: "error"
-          });
-          console.error(e);
-        }
-        if (next_button && current_page < page_count) {
-          get_grid(user2, current_page + 1, page_count, next_user);
-        } else if (next_user) {
-          get_grid(next_user, 1, page_count);
-        } else {
-          pages.querySelector("button").disabled = false;
-          type.querySelector("button").disabled = false;
-          timeframe.querySelector("button").disabled = false;
-          compare_settings.forEach((option) => {
-            option.setAttribute("disabled", false);
-          });
-          submit.disabled = false;
-          continue_comparing();
-        }
-      });
-    }
-    function continue_comparing() {
-      log("gathered initial values", "compare", "info", page.state.compare);
-      page.state.compare.you.forEach((your_item) => {
-        let other_item;
-        if (type.value() == "albums")
-          other_item = page.state.compare.other.find(
-            (other) => your_item.name === other.name && your_item.sister === other.sister
-          );
-        else
-          other_item = page.state.compare.other.find(
-            (other) => your_item.name === other.name
-          );
-        if (other_item) {
-          page.state.compare.shared.push({
-            avatar: your_item.avatar,
-            name: your_item.name,
-            sister: your_item.sister ? your_item.sister : "",
-            plays: {
-              you: your_item.plays,
-              other: other_item.plays,
-              shared: your_item.plays + other_item.plays
-            }
-          });
-        }
-      });
-      page.state.compare.shared.sort(
-        (a, b) => b.plays.shared - a.plays.shared
-      );
-      log("gathered shared values", "compare", "info", page.state.compare);
-      body2.innerHTML = "";
-      if (page.state.compare.shared.length == 0) {
-        render(
-          body2,
-          html`
-                    <div class="loading-data-container">
-                        <div class="loading-data-text failed">
-                            ${tl2(trans.nothing_in_common)}
-                        </div>
-                    </div>
-                `
-        );
-        return;
-      }
-      if (type.value() != "tracks") {
-        let grid = document.createElement("ol");
-        grid.classList.add(
-          "grid-items",
-          "grid-items--numbered",
-          "compare-grid"
-        );
-        page.state.compare.shared.forEach((data2) => {
-          let template;
-          if (type.value() == "artists") template = sanitise(data2.name);
-          else
-            template = `${sanitise(data2.sister)}/${sanitise(data2.name)}`;
-          grid.appendChild(html.node`
-                    <li class="compare-item grid-items-item">
-                        <div class="grid-items-cover-image js-link-block link-block">
-                            <div class="grid-items-cover-image-image ${data2.avatar.endsWith("/c6f59c1e5e7240a4c0d427abd71f3dbb.jpg") || data2.avatar.endsWith("/2a96cbd8b46e442fc41c2b86b821562f.jpg") ? "grid-items-cover-default" : ""}">
-                                <img src="${data2.avatar.replace("/avatar70s/", "/avatar300s/").replace("/64s/", "/avatar300s/")}" alt="${data2.name}" loading="lazy">
-                            </div>
-                            <div class="grid-items-item-details">
-                                <p class="grid-items-item-main-text">
-                                    <a class="link-block-target" href="${root}music/${redirect()}${template}" title="${data2.name}">
-                                        ${data2.name}
-                                    </a>
-                                </p>
-                                ${type.value() == "albums" ? html.node`
-                                <p class="grid-items-item-aux-text">
-                                    <a class="grid-items-item-aux-block" href="${root}music/${redirect()}${data2.sister}">
-                                        ${data2.sister}
-                                    </a>
-                                </p>
-                                ` : ""}
-                                <p class="grid-items-item-aux-text">
-                                    <a class="grid-item-plays with-avatar" href="${root}user/${auth.name}/library/music/${redirect()}${template}?${timeframe.value()}" target="_blank">
-                                        <span class="avatar">
-                                            <img src="${auth.avatar}" alt="${tl2(trans.your_avatar)}">
-                                        </span>
-                                        ${data2.plays.you.toLocaleString(lang)}
-                                    </a>
-                                    <a class="grid-item-plays with-avatar" href="${root}user/${page.name}/library/music/${redirect()}${template}?${timeframe.value()}" target="_blank">
-                                        <span class="avatar">
-                                            <img src="${page.avatar}" alt="${tl2(trans.avatar_for_user).replace("{u}", page.name)}">
-                                        </span>
-                                        ${data2.plays.other.toLocaleString(lang)}
-                                    </a>
-                                </p>
-                            </div>
-                            <a class="js-link-block-cover-link link-block-cover-link" href="${root}music/${redirect()}${template}" tabindex="-1" aria-hidden="true"></a>
-                        </div>
-                    </li>
-                `);
-        });
-        render(body2, grid);
-        music_grids(grid);
-      } else {
-        let table = document.createElement("table");
-        table.classList.add(
-          "chartlist",
-          "chartlist--with-index",
-          "chartlist--with-index--length-2",
-          "chartlist--with-image",
-          "chartlist--with-artist",
-          "chartlist--with-bar",
-          "compare-chartlist"
-        );
-        let tbody = document.createElement("tbody");
-        table.appendChild(tbody);
-        let max2 = 0;
-        page.state.compare.shared.forEach((item) => {
-          if (item.plays.you > max2) max2 = item.plays.you;
-          if (item.plays.other > max2) max2 = item.plays.other;
-        });
-        page.state.compare.shared.forEach((data2, index3) => {
-          let template = `${sanitise(data2.sister)}/_/${sanitise(data2.name)}`;
-          tbody.appendChild(html.node`
-                    <tr class="chartlist-row chartlist-row--with-artist compare-item">
-                        <td class="chartlist-index">${index3 + 1}</td>
-                        <td class="chartlist-image">
-                            <a class="cover-art" href="${root}music/${redirect()}${template}">
-                                <img src="${data2.avatar}" alt="${data2.name}" loading="lazy">
-                            </a>
-                        </td>
-                        <td class="chartlist-name">
-                            <a href="${root}music/${redirect()}${template}" title="${data2.name}">
-                                ${data2.name}
-                            </a>
-                        </td>
-                        <td class="chartlist-artist">
-                            <a href="${root}music/${redirect()}${data2.sister}" title="${data2.sister}">
-                                ${data2.sister}
-                            </a>
-                        </td>
-                        <td class="chartlist-bar with-multiple">
-                            <span class="chartlist-count-bar">
-                                <a class="chartlist-count-bar-link" href="${root}user/${auth.name}/library/music/${redirect()}${template}?${timeframe.value()}" target="_blank">
-                                    <span class="chartlist-count-bar-slug" data-max-stat-value="${max2}" data-stat-value="${data2.plays.you}" style="width: ${data2.plays.you / max2 * 100}%;"></span>
-                                    <span class="chartlist-count-bar-value">${data2.plays.you}</span>
-                                </a>
-                                <span class="avatar">
-                                    <img src="${auth.avatar}" alt="${tl2(trans.your_avatar)}">
-                                </span>
-                            </span>
-                            <span class="chartlist-count-bar">
-                                <a class="chartlist-count-bar-link" href="${root}user/${page.name}/library/music/${redirect()}${template}?${timeframe.value()}" target="_blank">
-                                    <span class="chartlist-count-bar-slug" data-max-stat-value="${max2}" data-stat-value="${data2.plays.other}" style="width: ${data2.plays.other / max2 * 100}%;"></span>
-                                    <span class="chartlist-count-bar-value">${data2.plays.other}</span>
-                                </a>
-                                <span class="avatar">
-                                    <img src="${page.avatar}" alt="${tl2(trans.avatar_for_user).replace("{u}", page.name)}">
-                                </span>
-                            </span>
-                        </td>
-                    </tr>
-                `);
-        });
-        body2.appendChild(table);
-        patch_titles(body2);
-      }
-    }
-  }
-
-  // src/news.js
-  function news() {
-    let changelog = localStorage.getItem("bleh_changelog");
-    let changelog_expire = new Date(
-      localStorage.getItem("bleh_changelog_expire")
-    );
-    let current_time = /* @__PURE__ */ new Date();
-    if (!changelog) {
-      log("not cached, fetching", "changelog");
-      request_changelog();
-      dialog_rm({ id: "rabbit" });
-    } else {
-      if (changelog_expire < current_time) request_changelog();
-      else open_changelog(JSON.parse(changelog));
-    }
-  }
-  function request_changelog(open_after = true) {
-    let button = page.state.navigation_menu_news;
-    if (button) button.setAttribute("disabled", "");
-    let xhr = new XMLHttpRequest();
-    let url = `https://katelyynn.github.io/bleh/fm/changelog/changelog.json?${Math.random()}`;
-    xhr.open("GET", url, true);
-    xhr.onload = function() {
-      log(`responded with ${xhr.status}`, "changelog");
-      if (xhr.status != 200) {
-        log(
-          "request has been cancelled, will request again in 1h",
-          "changelog"
-        );
-        api_expire.setHours(api_expire.getHours() + 1);
-      }
-      let api_expire = /* @__PURE__ */ new Date();
-      if (xhr.status == 200) {
-        if (open_after) {
-          try {
-            open_changelog(JSON.parse(this.response));
-            set_storage("bleh_changelog", this.response);
-            api_expire.setHours(api_expire.getHours() + 2);
-            log(`cached until ${api_expire}`, "changelog");
-            set_storage("bleh_changelog_expire", api_expire);
-          } catch (e) {
-            deliver_notif(
-              "The changelog is currently unavailable due to errors, try again later.",
-              true
-            );
-            console.error(e);
-          }
-        }
-      }
-      if (button != null) button.removeAttribute("disabled");
-    };
-    xhr.send();
-  }
-  function open_changelog(changelog) {
-    const window2 = dialog({
-      id: "changelog",
-      title: tl2(trans.news_from_user).replace(
-        "{user}",
-        sponsor_list && sponsor_list.special ? sponsor_list.special[0] : "katelyn"
-      ),
-      body: html.node`
-            <div class="cta first sponsor colourful margin-bottom">
-                <strong>${tl2(trans.news_sponsor_cta)}</strong>
-                <a class="see-more" onclick="_sponsor(true)">${tl2(trans.sponsor)}</a>
-            </div>
-            <div class="changelog-list"></div>
-        `,
-      type: "changelog",
-      allow_scroll: true
-    });
-    const changelog_list = window2.querySelector(".changelog-list");
-    let index3 = 0;
-    for (let version4 in changelog) {
-      if (version4 == "updated" || version4 == "latest") continue;
-      const version_item = html.node`
-            <div class="changelog-version-item" data-changelog-type="${changelog[version4].type}" data-changelog-latest="${index3 == 0 ? "true" : "false"}" data-changelog-version="${version4}">
-                <div class="version-item-header">
-                    <div class="sub-text">
-                        <div class="breadcrumb">
-                            <div class="breadcrumb-origin">
-                                ${version4}
-                            </div>
-                            <div class="breadcrumb-name">
-                                ${tl2(trans.news.type[changelog[version4].type])}
-                            </div>
-                        </div>
-                    </div>
-                    <h3>${changelog[version4].name}</h3>
-                    ${version4 == "2025.0113" ? html.node`<h4 class="header-over">${changelog[version4].name}</h4>` : ""}
-                </div>
-                <div class="version-item-body markdown-body">
-                    ${markdown(changelog[version4].bio, {
-        allow_headers: true,
-        starting_header: 5,
-        in_dialog: true
-      })}
-                </div>
-            </div>
-        `;
-      if (changelog[version4].type == "major")
-        version_item.setAttribute("id", "latest_major_release");
-      changelog_list.appendChild(version_item);
-      index3++;
-    }
-  }
-  unsafeWindow._update_local_changelog_cache = function(json) {
-    set_storage("bleh_changelog", JSON.stringify(json));
-  };
 
   // src/components/profile_header.js
   function redesign_profile_header(is_own_profile, is_following) {
@@ -37797,6 +35814,7 @@
     if (!profile_header) return;
     const profile_name = profile_header.querySelector(".header-title a");
     page.name = profile_name.textContent;
+    profile_name.removeAttribute("href");
     let is_subpage = page.subpage != "overview";
     page.structure.container = document.body.querySelector(
       ".page-content:not(.profile-cards-container, .report-box-container .page-content)"
@@ -37891,9 +35909,6 @@
     if (cache2.aka) pronouns = use_pronouns(cache2.aka);
     if (cache2.username) {
       profile_name.textContent = cache2.username;
-      tippy_esm_default(profile_name, {
-        content: `@${page.name}`
-      });
       if (sub_wrap) {
         sub_wrap.insertBefore(html.node`
                 <span class="header-username">
@@ -39607,6 +37622,2012 @@
     page.structure.side.innerHTML = "";
     page.structure.side.appendChild(value_panel);
   }
+
+  // src/components/collage.js
+  function collage({ host, sidebar } = {}) {
+    if (!host || !sidebar) return;
+    let width;
+    let height;
+    let timeframe;
+    let type;
+    let settings_btn;
+    let submit;
+    let body2;
+    let value = 3;
+    let min2 = 1;
+    let max2 = 20;
+    let current_year = (/* @__PURE__ */ new Date()).getFullYear();
+    let previous_year = current_year - 1;
+    const default_type = page.requested.type || "albums";
+    let default_timeframe = page.requested.timeframe || "date_preset=LAST_7_DAYS";
+    if (page.requested.redirect) {
+      setTimeout(() => {
+        notify({
+          id: "collage_redirect",
+          title: tl2(trans.collage),
+          body: tl2(trans.collage_redirect),
+          icon: "icon-16-collage",
+          persist: true
+        });
+      }, 100);
+    }
+    let user;
+    render(host, html`
+        <div class="compare-header">
+            <div class="compare-users">
+                <div class="compare-user focus" ref=${(el) => user = el}>
+                    ${render_user(page.name, page.avatar, user, true)}
+                </div>
+            </div>
+            <div class="compare-selection">
+                <div class="input-group">
+                    ${width = input({
+      type: "number",
+      value,
+      placeholder: value,
+      min: min2,
+      max: max2
+    })}
+                    <div
+                        class="bleh-icon"
+                        style="--icon: var(--icon-16-x)"
+                    />
+                    ${height = input({
+      type: "number",
+      value,
+      placeholder: value,
+      min: min2,
+      max: max2
+    })}
+                </div>
+                ${type = select(
+      [
+        {
+          text: tl2(trans.item_type)
+        },
+        {
+          value: "artists",
+          text: html`<div
+                                    class="bleh-icon"
+                                    style="--icon: var(--icon-16-artist)"
+                                />
+                                ${tl2(trans.artists)}`
+        },
+        {
+          value: "albums",
+          text: html`<div
+                                    class="bleh-icon"
+                                    style="--icon: var(--icon-16-album)"
+                                />
+                                ${tl2(trans.albums)}`
+        },
+        {
+          value: "tracks",
+          text: html`<div
+                                    class="bleh-icon"
+                                    style="--icon: var(--icon-16-track)"
+                                />
+                                ${tl2(trans.tracks)}`
+        }
+      ],
+      default_type
+    )}
+                <div class="timeframe-container" ref=${(el) => timeframe_container = el} />
+                <button
+                    class="btn primary icon"
+                    data-type="collage"
+                    ref=${(el) => submit = el}
+                    onclick=${() => make_collage()}
+                >
+                    ${tl2(trans.generate)}
+                </button>
+            </div>
+        </div>
+        <div
+            class="compare-body"
+            data-filled="false"
+            ref=${(el) => body2 = el}
+        >
+            <div class="loading-data-container">
+                <div class="loading-data-text info">
+                    ${tl2(trans.choose_a_timeframe_above)}
+                </div>
+            </div>
+        </div>
+    `);
+    load_timeframe_selection(page.name);
+    function load_timeframe_selection(name) {
+      let options = [
+        {
+          text: tl2(trans.timeframe)
+        },
+        {
+          value: "date_preset=LAST_7_DAYS",
+          text: tl2(trans.last_count_days).replace(
+            "{c}",
+            "7"
+          )
+        },
+        {
+          value: "date_preset=LAST_30_DAYS",
+          text: tl2(trans.last_count_days).replace(
+            "{c}",
+            "30"
+          )
+        },
+        {
+          value: "date_preset=LAST_90_DAYS",
+          text: tl2(trans.last_count_days).replace(
+            "{c}",
+            "90"
+          )
+        },
+        {
+          value: "date_preset=LAST_180_DAYS",
+          text: tl2(trans.last_count_days).replace(
+            "{c}",
+            "180"
+          )
+        },
+        {
+          value: "date_preset=LAST_365_DAYS",
+          text: tl2(trans.last_count_days).replace(
+            "{c}",
+            "365"
+          )
+        }
+      ];
+      timeframe = select(
+        options,
+        default_timeframe,
+        "",
+        update_timeframe_selection
+      );
+      render(timeframe_container, timeframe);
+      load_profile_cache_externally(name).then((cache2) => {
+        if (cache2.created) {
+          const year = parseInt(year_from_date(cache2.created));
+          const current_year2 = (/* @__PURE__ */ new Date()).getFullYear();
+          const years = Array.from({ length: current_year2 - year + 1 }, (_, i) => year + i);
+          years.forEach((year2) => {
+            options.push({
+              value: `from=${year2}-01-01&rangetype=year`,
+              text: year2
+            });
+          });
+        }
+        timeframe = select(
+          options,
+          default_timeframe,
+          "",
+          update_timeframe_selection
+        );
+        render(timeframe_container, timeframe);
+      });
+    }
+    function update_timeframe_selection(value2) {
+      if (!value2.startsWith("date_preset=")) return;
+      default_timeframe = value2;
+    }
+    let setting_group;
+    let inputter2;
+    render(
+      sidebar,
+      html`
+            <h2>${tl2(trans.settings)}</h2>
+            <div class="setting-group" ref=${(el) => setting_group = el}>
+                <div class="setting v" data-type="text">
+                    <div class="heading">
+                        <h5>${tl2(trans.profile)}</h5>
+                    </div>
+                    <div class="input-container content-form">
+                        <input
+                            type="text"
+                            class="input"
+                            ref=${(el) => inputter2 = el}
+                            placeholder=${tl2(trans.enter_a_profile)}
+                            value=${page.requested.profile}
+                            onchange=${(e) => {
+        page.requested.profile = e.target.value;
+        page.name = page.requested.profile;
+        page.avatar = "";
+        if (page.name == auth.name)
+          page.avatar = auth.avatar;
+        load_timeframe_selection(page.name);
+        render(
+          user,
+          html`
+                                        ${render_user(
+            page.name,
+            page.avatar,
+            user,
+            true
+          )}
+                                    `
+        );
+      }}
+                        />
+                        ${() => {
+        let btn = html.node`
+                            <button class="btn chibi icon" data-type="profile" onclick=${() => {
+          inputter2.value = auth.name;
+          inputter2.dispatchEvent(new Event("change"));
+        }}>${tl2(trans.profile)}</button>
+                        `;
+        tippy_esm_default(btn, {
+          content: tl2(trans.profile)
+        });
+        return btn;
+      }}
+                        ${() => {
+        let btn = html.node`
+                            <button class="btn chibi icon" data-type="starred_friend" data-is-shortcut=${settings.starred_friend != ""} onclick=${() => {
+          if (settings.starred_friend == "") return;
+          inputter2.value = settings.starred_friend;
+          inputter2.dispatchEvent(new Event("change"));
+        }}>${tl2(trans.starred_friend.name)}</button>
+                        `;
+        tippy_esm_default(btn, {
+          content: tl2(trans.starred_friend.name)
+        });
+        return btn;
+      }}
+                    </div>
+                </div>
+                ${setting({ id: "collage_title" })}
+                ${setting({ id: "collage_grid_gap" })}
+                ${setting({ id: "collage_centered" })}
+                ${setting({ id: "collage_grid_text" })}
+                ${setting({ id: "collage_grid_plays" })}
+            </div>
+        `
+    );
+    let collage_settings = setting_group.querySelectorAll(":scope > .setting");
+    function make_collage(bypass = false) {
+      if (width.value() == "" || height.value() == "" || parseInt(width.value()) < min2 || parseInt(width.value()) > max2 || parseInt(height.value()) < min2 || parseInt(height.value()) > max2) {
+        notify({
+          id: "collage_failed",
+          title: tl2(trans.name_failed).replace(
+            "{name}",
+            tl2(trans.collage)
+          ),
+          body: tl2(trans.your_settings_are_invalid),
+          type: "error"
+        });
+        return;
+      }
+      if (!auth.name) {
+        notify({
+          id: "collage_failed",
+          title: tl2(trans.name_failed).replace(
+            "{name}",
+            tl2(trans.collage)
+          ),
+          body: tl2(trans.you_need_to_be_logged_in),
+          type: "error"
+        });
+        return;
+      }
+      let per_page = 50;
+      let pages = Math.ceil(width.value() * height.value() / per_page);
+      if (pages > 4 && !bypass) {
+        let warn = notify({
+          id: "collage_warning",
+          title: tl2(trans.are_you_sure),
+          body: tl2(trans.this_will_require_loading_count_pages).replace(
+            "{c}",
+            pages
+          ),
+          type: "warning",
+          actions: [
+            {
+              type: "check",
+              action: () => {
+                notify_rm(warn);
+                make_collage(true);
+              },
+              text: tl2(trans.continue)
+            }
+          ],
+          persist: true
+        });
+        return;
+      }
+      type.querySelector("button").disabled = true;
+      timeframe.querySelector("button").disabled = true;
+      collage_settings.forEach((option) => {
+        option.setAttribute("disabled", true);
+      });
+      submit.disabled = true;
+      page.state.collage = [];
+      get_grid(1, pages);
+    }
+    function get_grid(current_page, pages) {
+      render(
+        body2,
+        html`
+                <div class="loading-data-container">
+                    <div class="loading-data-text">
+                        ${tl2(trans.gathering_plays_for_user_pages).replace("{u}", page.name).replace("{current_page}", current_page).replace("{pages}", pages)}
+                    </div>
+                </div>
+            `
+      );
+      fetch(
+        `${root}user/${page.name}/library/${type.value()}?format=list&${timeframe.value()}&page=${current_page}&ajax=1`
+      ).then(function(response) {
+        console.log("returned", response, response.text);
+        return response.text();
+      }).then(function(dom) {
+        let doc = new DOMParser().parseFromString(dom, "text/html");
+        console.log("DOC", doc);
+        let next_button = doc.querySelector(".pagination-next");
+        try {
+          let tracks = doc.querySelectorAll(".chartlist-row");
+          tracks.forEach((track) => {
+            let item = {};
+            item.avatar = track.querySelector(
+              ".chartlist-image img"
+            );
+            if (item.avatar)
+              item.avatar = item.avatar.getAttribute("src");
+            item.name = track.querySelector(".chartlist-name a").textContent.trim();
+            if (type.value() != "artists")
+              item.sister = track.querySelector(".chartlist-artist a").textContent.trim();
+            item.plays = clean_number(
+              track.querySelector(".chartlist-count-bar-slug").getAttribute("data-stat-value")
+            );
+            page.state.collage.push(item);
+          });
+        } catch (e) {
+          notify({
+            id: "collage_failed",
+            title: tl2(trans.name_failed).replace(
+              "{name}",
+              tl2(trans.collage)
+            ),
+            body: tl2(trans.there_was_a_network_error),
+            type: "error"
+          });
+          console.error(e);
+        }
+        if (next_button && current_page < pages) {
+          get_grid(current_page + 1, pages);
+        } else {
+          continue_collage();
+        }
+      });
+    }
+    async function continue_collage() {
+      log("gathered initial values", "collage", "info", page.state.collage);
+      if (page.state.collage.length == 0) {
+        render(
+          body2,
+          html`
+                    <div class="loading-data-container">
+                        <div class="loading-data-text failed">
+                            ${tl2(trans.no_plays_in_range)}
+                        </div>
+                    </div>
+                `
+        );
+        type.querySelector("button").disabled = false;
+        timeframe.querySelector("button").disabled = false;
+        collage_settings.forEach((option) => {
+          option.setAttribute("disabled", false);
+        });
+        submit.disabled = false;
+        return;
+      }
+      let grid = html.node`
+            <ol class="grid-items grid-items--numbered collage-grid" style="--width: ${width.value()}; --height: ${height.value()}" data-width=${width.value()} data-height=${height.value()} data-centered=${settings.collage_centered} />
+        `;
+      if (!settings.collage_grid_gap) {
+        grid.style.setProperty("--item-list-gap", "0px");
+        grid.style.setProperty("--item-med-radius", "0");
+      }
+      let total = width.value() * height.value() - 1;
+      grid.style.setProperty(
+        "--highest",
+        Math.max(+width.value(), +height.value()).toString()
+      );
+      page.state.collage.some((data2, index3) => {
+        if (index3 > total) return false;
+        let template;
+        if (type.value() == "artists") template = sanitise(data2.name);
+        else template = `${sanitise(data2.sister)}/${sanitise(data2.name)}`;
+        grid.appendChild(html.node`
+                <li class="compare-item grid-items-item">
+                    <div class="grid-items-cover-image">
+                        <div class="grid-items-cover-image-image ${data2.avatar.endsWith("/c6f59c1e5e7240a4c0d427abd71f3dbb.jpg") || data2.avatar.endsWith("/2a96cbd8b46e442fc41c2b86b821562f.jpg") ? "grid-items-cover-default" : ""}">
+                            <img src="${data2.avatar.replace("/avatar70s/", "/avatar300s/").replace("/64s/", "/avatar300s/")}" alt="${data2.name}" loading="lazy">
+                        </div>
+                        ${settings.collage_grid_text || settings.collage_grid_plays ? html.node`
+                        <div class="grid-items-item-details">
+                            ${settings.collage_grid_text ? html.node`
+                            <p class="grid-items-item-main-text">
+                                <a class="link-block-target" href="${root}music/${redirect()}${template}" title="${data2.name}">
+                                    ${data2.name}
+                                </a>
+                            </p>
+                            ` : ""}
+                            ${type.value() != "artists" ? html.node`
+                            <p class="grid-items-item-aux-text">
+                                ${settings.collage_grid_text ? html.node`
+                                <a class="grid-items-item-aux-block" href="${root}music/${redirect()}${data2.sister}">
+                                    ${data2.sister}
+                                </a>
+                                ${settings.collage_grid_plays ? html.node`
+                                <a class="grid-item-plays" href="${root}user/${page.name}/library/music/${redirect()}${template}?date_preset=${timeframe.value()}" target="_blank">
+                                    ${data2.plays.toLocaleString(lang)}
+                                </a>
+                                ` : ""}
+                                ` : settings.collage_grid_plays ? html.node`
+                                <a class="grid-item-plays" href="${root}user/${page.name}/library/music/${redirect()}${template}?date_preset=${timeframe.value()}" target="_blank">
+                                    ${tl2(trans.count_plays, { c: data2.plays.toLocaleString(lang) })}
+                                </a>
+                                ` : ""}
+                            </p>
+                            ` : html.node`
+                            ${settings.collage_grid_plays ? html.node`
+                            <p class="grid-items-item-aux-text">
+                                <a class="grid-item-plays" href="${root}user/${page.name}/library/music/${redirect()}${template}?date_preset=${timeframe.value()}" target="_blank">
+                                    ${tl2(trans.count_plays, { c: data2.plays.toLocaleString(lang) })}
+                                </a>
+                            </p>
+                            ` : ""}
+                            `}
+                        </div>
+                        ` : ""}
+                    </div>
+                </li>
+            `);
+      });
+      let collage_dom = html.node`
+            <div class="collage">
+                ${settings.collage_title ? html.node`
+                <div class="header">
+                    <div class="type" data-type=${type.value()}>
+                        <div class="bleh-icon" />
+                        <svg class="brand" xmlns="http://www.w3.org/2000/svg" viewBox="0.1 25.618 89.836 33.432" data-asc="1.16" width="89.836" height="33.432"><path d="M21.4 44.75q-.05.2-.17.37-.13.18-.23.38l.15 1.6q0 .35-.02.67-.03.33-.03.73-.05.2-.12.32-.08.13-.18.33.1.1.18.25.07.15.12.25.05.8-.3 1.5t-.45 1.55q-.4.2-.67.47-.28.28-.28.78-.2.25-.45.5t-.55.4q-.05.05-.25.15-.3.35-.62.67-.33.33-.73.58-.2.2-.32.47-.13.28-.33.53-.35.2-.72.35-.38.15-.68.3-.35.05-.5-.08-.15-.12-.35-.17-.2.05-.37.27-.18.23-.53.48-.05.05-.22.1-.18.05-.33.15-.2.05-.4.17-.2.13-.45.23-.5-.15-1-.28-.5-.12-1.05.08-.35-.1-.65-.23-.3-.12-.65-.12-.25 0-.7-.35-.2.1-.65.1-.25 0-.42-.23-.18-.22-.48-.12-.5-.15-.97-.38-.48-.22-.88-.42-.35-.15-.6-.43-.25-.27-.5-.52-.05-.1-.1-.18-.05-.07-.15-.17-.1-.4-.35-.7l-.5-.6q-.15-.55-.35-1-.05-.2-.22-.43-.18-.22-.28-.47-.05-.55-.22-1.03-.18-.47-.58-.82.05-.2.05-.35 0-.15.05-.35-.1-.35-.3-.85.1-.4.13-.88.02-.47.07-.97-.05-.3-.13-.63-.07-.32.08-.67V44.9Q0 43.75.3 42.7q.15-.4.05-.95 0-1 .03-2.03Q.4 38.7.3 37.7q-.05-.1 0-.15.1-.7.1-1.43v-1.47-.23q0-.12.05-.17.2-.35.22-.73.03-.37.03-.72.1-.4.07-.88-.02-.47.03-.97.2-.3.37-.68.18-.37.08-.77v-.2q.1-.1.1-.23 0-.12.05-.17.25-.55.35-1.13.1-.57.25-1.12.2-.3.4-.75.55-.15 1.1-.15.25 0 .5.02.25.03.45-.02.55-.1 1.13-.1.57 0 1.17.05.15.05.33.02.17-.02.32-.07.2 0 .38.05.17.05.32 0 .1 0 .18-.03.07-.02.12-.02.05.2.13.37.07.18.12.43-.15.8-.2 1.2-.05.4.03.77.07.38.17 1.18-.1.65-.2 1.27-.1.63.1 1.33-.15.85-.1 1.65 0 .65-.02 1.3-.03.65-.18 1.3.1.25-.07.42-.18.18-.28.43 0 .45-.1.92-.1.48-.2.98-.05.25-.08.55-.02.3-.12.6 0 .05.1.07.1.03.1.08.6-.25 1-.7.4-.45.65-1 .55-.15 1.05-.35.5-.2 1-.55.2.05.43.1.22.05.42 0 .25 0 .42.02.18.03.38.03.55 0 1 .15.45.15.95.3.55.2 1.1.42.55.23 1.1.38.45.05.8.6.1.2.28.4.17.2.42.35.4.2.7.55.3.35.6.75.1.1.5.3.25.55.6 1.17.35.63.4 1.33m-6.75 2.6q-.05-.1-.05-.2t-.1-.2q-.4-.3-.6-.8-.2-.5-.8-.4-.7.15-1.25-.05-.3-.1-.45-.1-.45.05-.87.1-.43.05-.83.1l-.2.1q-.1.05-.25.05-.35.35-.8.75-.45.4-.7.95-.05.65-.02 1 .02.35.17.85.05.05.1.17.05.13.1.23.25.15.33.45.07.3.32.45.1.1.18.22.07.13.12.23.05.7.5 1.15.1.05.18.07.07.03.12.08.4 0 .55-.15.3-.15.67-.23.38-.07.68-.27.3-.25.73-.25.42 0 .77-.2.05 0 .25-.1.25-.4.55-.73.3-.32.5-.77v-1.2q.05-.3.08-.65.02-.35.02-.65zm24.25 6.6q0 .45-.4.75-.4.4-.2.95.1.35.1.75v.8q-.05.1-.12.22-.08.13-.18.23-.2.1-.25.1-.4.05-.8.07-.4.03-.8.03H36q-.7-.2-1.37-.23-.68-.02-1.33-.12-.4-.1-.75-.1t-.7.1q-.5-.25-.97-.53-.48-.27-1.03-.52-.35-.55-.87-.93-.53-.37-.93-.92-.1-.25-.22-.5-.13-.25-.28-.45-.5-.75-.65-1.65 0-.35-.25-.6-.4-.75-.2-1.4.05-.1.03-.23-.03-.12.02-.17-.2-.25-.3-.4l-.2-.3q0-.35.05-.5l-.4-.5q.1-.55.18-1.13.07-.57.17-1.07l-.35-.5q0-.2.15-.33.15-.12.25-.32.2-.55.25-1.05.15-.6.15-1.15-.1-1.1 0-2.15.1-1.05.05-2.15.25-1.1.2-2.2-.05-1.1.15-2.15v-.25q-.15-.6 0-1.15.15-.55.35-1-.05-.1-.05-.25t-.1-.25q.1-.35.3-.58.2-.22.35-.42.1-.2.18-.43.07-.22.12-.42l.35-.35q.45-.1.95-.05.15.05.33.15.17.1.37.2.35.2.68.32.32.13.72.08.55.2 1.08.25.52.05 1.02 0h.2l.03.02q.02.03.07.03.25.05.45.25t.1.45q-.1.75-.12 1.5-.03.75-.13 1.5-.1.7-.2 1.42-.1.73-.25 1.43-.05 1.1-.17 2.17-.13 1.08-.13 2.13 0 .15.03.25.02.1.02.2-.25.5-.37 1-.13.5-.28 1.05-.1.4 0 .85.15.6.13 1.2-.03.6-.13 1.25v.3q.1.2.23.45.12.25.22.5-.05.15-.1.32-.05.18-.1.33.1.25.13.55.02.3.07.55.2.25.4.47.2.23.25.53 0 .1.1.25t.15.25q.1.25.33.4.22.15.42.25.35.05.65.15.3.1.65.2.2 0 .33-.03.12-.02.27-.02.1.05.28.1.17.05.32.1.05.05.1.12.05.08.1.13.1.4.55.85.25.2.48.42.22.23.32.53zm25.95-13.6q-.05.5-.07 1.02-.03.53-.13 1.03-.05.5-.05 1.07 0 .58-.2 1.18-.1.15-.25.32-.15.18-.3.43 0 .2.03.35.02.15.07.35-.1.25-.3.42-.2.18-.4.28-.5.15-.92.3-.43.15-.88.25-.7.1-1.45.02-.75-.07-1.5-.02-.65 0-1.37.02-.73.03-1.48.03h-2.8q-.2.15-.42.1-.23-.05-.43.05-.2-.1-.45-.03-.25.08-.5-.02-.2.05-.37.07-.18.03-.43.08-.2-.05-.35-.13-.15-.07-.35.08.1.15.23.32.12.18.17.43.15.2.25.4t.2.45q.1.2.15.42.05.23.1.43.25.25.55.5l.6.5q.25.05.53.1.27.05.52.1l.6.1q.3.05.65 0 .35-.1.65.02.3.13.65.18.45-.05.93-.1.47-.05.92-.1.2-.15.43-.28.22-.12.42-.27.65-.15 1.3.05.15.25.38.5.22.25.42.55.3.45.6.87.3.43.4.98.1.25.3.5.2.25.3.45.05.25-.02.45-.08.2-.13.45-.2.2-.5.35-.05 0-.1.1t-.15.15l-.6.4q-.3.2-.55.4-.7.6-1.45.6-.3 0-.45.05-.25.05-.5.2-.25.15-.55.25-.25 0-.5.07-.25.08-.5.13-.15 0-.35-.03-.2-.02-.4-.02-.45.05-.9-.05t-.9-.1l-.3-.1q-.15-.05-.3-.05-.85.05-1.6-.28-.75-.32-1.5-.67-.6-.15-.85-.55-.35-.4-.77-.68-.43-.27-.93-.47-.3-.1-.6-.28l-.65-.37q-.05-.2-.15-.4l-.2-.4q-.1-.15-.27-.3-.18-.15-.33-.3-.15-.15-.25-.35-.25-.85-.5-1.68-.25-.82-.65-1.62.05-.35.08-.73.02-.37-.08-.82-.05-.1-.05-.25v-.25q0-.25.03-.43.02-.17-.03-.32l-.1-.8q-.05-.4.05-.75l.2-.8q.1-.4.25-.85-.05-.1-.05-.3 0-.2-.05-.4l.2-1.1q.1-.55.25-1.05.15-.3.33-.58.17-.27.37-.57.35-.6.55-1.15.6-.3.73-.38.12-.07.22-.22t.65-.6q-.05-.15.25-.45.3-.3.2-.5.45-.85 1.3-1.35.3-.2.58-.43.27-.22.47-.42.25-.15.48-.13.22.03.42.03.15-.05.33-.08.17-.02.37-.07.1-.05.25-.1t.25-.15l.2-.1q.1-.05.2-.05.45-.05.85-.25.4-.2.75-.4.75.3 1.55.2.5-.05.98.05.47.1.87.25l.7-.2q.4.05.75.25l.7.4h.45q.05.05.1.07.05.03.1.08.55.5 1.05.92.5.43 1.05.88.75.5.95 1.2.2.3.35.45.6.5 1.05 1.35 0 .1.03.27.02.18.02.33-.05.25.1.5.15.25.2.55M58.5 42v-1.25q0-.25-.05-.3-.05-.15-.12-.3-.08-.15-.13-.2v-.85l-.15-.15q-.2 0-.5-.1-.1-.45-.25-.7-.15-.2-.4-.25-.25-.05-.55-.15-.65.2-1.4.35-.75.15-1.45.4-.35.05-.65.05-.3 0-.6.05-.5.2-.87.62-.38.43-.73.83-.2.25-.35.55-.15.3-.35.55-.05.05-.05.3.15.4.45.5.3.05.6.15.3.1.65.2.15-.05.28-.05.12 0 .27-.05.6-.25 1-.05.4.05.73 0 .32-.05.67-.1.3.15.63.2.32.05.62.15.65.2 1.25.2t1.2-.15q.25-.25.25-.45zm31.4 7.8q-.2.65-.12 1.27.07.63-.03 1.28-.05.35 0 .7t-.05.75q-.05.3-.02.62.02.33.02.63-.05.2-.05.5-.1.35-.12.67-.03.33-.13.73 0 .05-.02.12-.03.08-.03.18 0 .35-.4.35-.05-.05-.25-.05-.35-.15-.6-.05l-.5.2-.3.3q-.15.15-.3.35-.55.3-1.02.17-.48-.12-.98-.42-.3 0-.45.05h-.15q-.05-.05-.15-.05-.2-.15-.37-.3-.18-.15-.38-.3-.4-.4-.3-.8.05-.2.13-.38.07-.17.02-.37-.05-.25-.12-.5-.08-.25-.08-.5t.08-.5q.07-.25.12-.5-.1-.4-.3-.8-.2-.4-.3-.85-.05-.4-.12-.83-.08-.42-.08-.82-.05-.45-.07-.88-.03-.42-.03-.92-.1-.6-.5-.95-.35-.4-.6-.75t-.45-.8q-.25-.2-.65-.35l-.1-.2q-.05-.1-.15-.15-.05-.05-.05-.13 0-.07-.05-.12l-.3-.3q-.2-.1-.4 0t-.35.1q-.2.05-.35.05-.15 0-.4.05-.2.1-.32.22-.13.13-.38.23-.15.15-.35.22-.2.08-.4.18-.2.45-.05.85.1.5.13 1.05.02.55.12 1.1.05.5-.1 1.15 0 .15-.05.32-.05.18-.05.38.05.8-.1 1.57-.15.78-.4 1.58.05.5.1.97.05.48.1.98v1.05q0 .65-.7.75H74.6q-.5.05-.97.1-.48.05-.88.3-.2.05-.37.15-.18.1-.43.2l-.35.35q-.1 0-.22.02-.13.03-.23-.02-.5-.25-.95-.4-.5-.65-.6-1.4-.1-.75-.35-1.4.05-.3.13-.58.07-.27-.03-.52-.05-.15-.05-.55 0-.15.03-.28.02-.12-.03-.22-.15-.95.1-1.65.1-.45-.05-.95-.2-.9-.15-1.85.15-.8-.05-1.6-.15-.15 0-.4 0-.25.03-.53.02-.27.07-.47.05-.2.2-.33.15-.12.25-.22l.15-.9q.1-.15-.15-.5-.05-.1-.15-.03-.1.08-.2.13l-.05-.05q0-.55.03-1.03.02-.47-.03-.97-.05-.2 0-.35.05-.15.05-.35 0-.15-.05-.35-.05-.2-.05-.4v-.25q0-.15.05-.3l.1-.5q.05-.25.15-.55-.2-.4-.17-.85.02-.45-.08-.95-.05-.15.03-.35.07-.2.12-.45-.2-.45-.15-1.03.05-.57 0-1.12.1-.3.05-.58-.05-.27-.05-.57.05-.5 0-.95-.05-.45.05-.9.05-.15.03-.25-.03-.1-.03-.2-.1-.95.05-1.75.05-.15.05-.4v-.45q-.05-.2-.07-.35-.03-.15.02-.35.15-.3.13-.63-.03-.32.17-.62l.03-.05q.02-.05.02-.1l.1-.05q0-.05.15-.05.25-.1.48-.18.22-.07.47-.12l.3.2q.15.1.35.2h.8q.1-.1.2-.15.1-.05.15-.1l.5-.35q.2-.1.43-.13.22-.02.37.13.45.3.88.5.42.2.87.25.25.4.38.75.12.35.27.75.15.5.45 1.15 0 .25-.17.4-.18.15-.23.45 0 .1.03.3.02.2.07.45 0 .2-.05.4t0 .45q.1.8.05 1.6t-.15 1.55v.7q0 .5.25 1 .2.2.38.42.17.23.32.48.3.3.65.3.7 0 1.43.12.72.13 1.42.03.15-.05.25-.03.1.03.25.03.15.1.38.15.22.05.42.1.55.1.45.65l.05.02q.05.03.1.08.1-.05.2-.05t.15-.05q.65-.25 1.15.1.3.25.7.37.4.13.75.53.35.6.9 1.12.55.53 1.1 1.13.1.15.25.27.15.13.25.23.45.45.5.9.15.7.35 1.1.15.55.45 1.25v.5q.05.2.1.42.05.23.05.48l.1 1.2.1 1.2q0 .05.03.12.02.08-.03.18z" fill="#fff"/></svg>
+                        <strong>${timeframe.querySelector("button").textContent}</strong>
+                        <strong>${tl2(trans.top_type).replace("{type}", tl2(trans[type.value()]))}</strong>
+                        <strong>${width.value()}×${height.value()}</strong>
+                    </div>
+                    <div class="user">
+                        <div class="avatar">
+                            <img src="${page.avatar}" alt="${tl2(trans.avatar_for_user).replace("{u}", page.name)}">
+                        </div>
+                        <strong>${page.name}</strong>
+                    </div>
+                </div>
+                ` : ""}
+                ${grid}
+            </div>
+        `;
+      render(
+        body2,
+        html`
+                <div class="loading-data-container">
+                    <div class="loading-data-text">
+                        ${tl2(trans.waiting_for_images)}
+                    </div>
+                </div>
+                ${collage_dom}
+            `
+      );
+      music_grids(grid, false);
+      const default_size = 380;
+      const base = 6;
+      const highest = Math.max(+width.value(), +height.value());
+      const grid_item_size = Math.min(
+        default_size,
+        Math.floor(default_size * base / highest)
+      );
+      const grid_item_gap = settings.collage_grid_gap ? 6 : 0;
+      const padding = settings.collage_grid_gap ? 15 : 0;
+      const title_height = settings.collage_title ? 32 + 15 : 0;
+      const cv_width = padding * 2 + grid_item_size * width.value() + grid_item_gap * (width.value() - 1);
+      const cv_height = padding * 2 + title_height + grid_item_size * height.value() + grid_item_gap * (height.value() - 1);
+      const cv_scale = 1;
+      collage_dom.style.width = `${cv_width}px`;
+      collage_dom.style.height = `${cv_height}px`;
+      collage_dom.style.padding = `${padding}px`;
+      collage_dom.style.gap = `${padding}px`;
+      collage_dom.style.setProperty("--item-list-gap", `${grid_item_gap}px`);
+      collage_dom.style.setProperty(
+        "--grid-item-size",
+        `${grid_item_size}px`
+      );
+      let initial_canvas = html.node`
+            <canvas width=${cv_width * cv_scale} height=${cv_height * cv_scale} />
+        `;
+      (0, import_html2canvas_pro.default)(collage_dom, {
+        useCORS: true,
+        letterRendering: true,
+        canvas: initial_canvas,
+        scale: cv_scale,
+        onclone: (doc) => {
+          doc.querySelectorAll("*").forEach((el) => {
+            el.style.setProperty(
+              "font-family",
+              "Funnel Sans, Inter, Ubuntu Sans, Spline Sans, Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Sans TC, Lucida Grande, Verdana, Tahoma, -apple-system, BlinkMacSystemFont, sans-serif"
+            );
+          });
+        }
+      }).then((canvas) => {
+        canvas.toBlob((blob) => {
+          const blob_url = URL.createObjectURL(blob);
+          const date = /* @__PURE__ */ new Date();
+          const filename = tl2(trans.chart_template_filename).replace(
+            "{timeframe}",
+            timeframe.querySelector("button").textContent
+          ).replace("{user}", page.name).replace("{type}", tl2(trans[type.value()])).replace("{size}", `${width.value()}\xD7${height.value()}`).replace("{brand}", version.brand).replace(
+            "{date}",
+            `${date.getFullYear()}-${pad2(date.getMonth() + 1)}-${pad2(date.getDate())}`
+          );
+          render(
+            body2,
+            html`
+                        <div class="collage-finished">
+                            <strong>${tl2(trans.your_collage_is_ready)}</strong>
+                            <div class="button-group">
+                                <button
+                                    class="btn primary icon"
+                                    data-type="download"
+                                    onclick=${() => download(blob_url, filename)}
+                                >
+                                    ${tl2(trans.download)}
+                                </button>
+                                <button
+                                    class="btn open"
+                                    data-type="open"
+                                    onclick=${() => open(blob_url)}
+                                >
+                                    ${tl2(trans.open)}
+                                </button>
+                            </div>
+                        </div>
+                        ${canvas}
+                    `
+          );
+          type.querySelector("button").disabled = false;
+          timeframe.querySelector("button").disabled = false;
+          collage_settings.forEach((option) => {
+            option.setAttribute("disabled", false);
+          });
+          submit.disabled = false;
+        }, "image/png");
+      });
+    }
+  }
+
+  // src/components/pixel.js
+  function pixel({
+    host,
+    sidebar
+  } = {}) {
+    if (!host || !sidebar) return;
+    let user_albums = [];
+    render(sidebar, html`
+        <h2>${tl2(trans.settings)}</h2>
+        <div class="setting-group">
+            <div class="setting v" data-type="text">
+                <div class="heading">
+                    <h5>${tl2(trans.profile)}</h5>
+                </div>
+                <div class="input-container content-form">
+                    <input type="text" class="input" ref=${(el) => inputter = el} placeholder=${tl2(trans.enter_a_profile)} value=${page.requested.profile} onchange=${(e) => {
+      page.requested.profile = e.target.value;
+      page.name = page.requested.profile;
+    }}>
+                    ${() => {
+      let btn = html.node`
+                            <button class="btn chibi icon" data-type="profile" onclick=${() => {
+        inputter.value = auth.name;
+        inputter.dispatchEvent(new Event("change"));
+      }}>${tl2(trans.profile)}</button>
+                        `;
+      tippy_esm_default(btn, {
+        content: tl2(trans.profile)
+      });
+      return btn;
+    }}
+                    ${() => {
+      let btn = html.node`
+                            <button class="btn chibi icon" data-type="starred_friend" data-is-shortcut=${settings.starred_friend != ""} onclick=${() => {
+        if (settings.starred_friend == "") return;
+        inputter.value = settings.starred_friend;
+        inputter.dispatchEvent(new Event("change"));
+      }}>${tl2(trans.starred_friend.name)}</button>
+                        `;
+      tippy_esm_default(btn, {
+        content: tl2(trans.starred_friend.name)
+      });
+      return btn;
+    }}
+                </div>
+            </div>
+        </div>
+        <button class="primary icon jumbo" data-type="pixel" onclick=${() => pixel_prepare()}>
+            ${tl2(trans.reset)}
+        </button>
+    `);
+    pixel_home();
+    function pixel_home() {
+      render(host, html`
+            <div class="pixel-home">
+                <h1 class="pixel-logo">pixel</h1>
+                <div class="pixel-guess center">
+                    <button class="primary jumbo continue" onclick=${() => pixel_prepare()}>
+                        ${tl2(trans.begin)}
+                    </button>
+                </div>
+            </div>
+        `);
+    }
+    function pixel_prepare() {
+      user_albums = [];
+      render(host, html`
+            <div class="pixel-home">
+                <h1 class="pixel-logo">pixel</h1>
+                <div class="loading-data-container">
+                    <div class="loading-data-text">${tl2(trans.loading_album_plays)}</div>
+                </div>
+            </div>
+        `);
+      if (user_albums.length == 0) {
+        fetch(`http://ws.audioscrobbler.com/2.0/?method=user.gettopalbums&user=${page.name}&api_key=${api_key}&format=json&limit=500`).then((res) => {
+          if (!res.ok) {
+            notify({
+              id: "api-error",
+              type: "error",
+              title: tl2(trans.value_failed_to_load).replace("{v}", tl2(trans.albums)),
+              body: res.statusText
+            });
+            throw new Error();
+          }
+          return res.json();
+        }).then((data2) => {
+          const pre_parsed = data2.topalbums.album;
+          pre_parsed.forEach((album) => {
+            user_albums.push({
+              image: album.image[3]["#text"],
+              name: correct_item_by_artist(album.name, album.artist.name),
+              sister: correct_artist(album.artist.name),
+              type: "album",
+              plays: album.playcount
+            });
+          });
+          pixel_random();
+        }).catch((err) => {
+          return;
+        });
+      } else {
+        pixel_random();
+      }
+    }
+    function pixel_random() {
+      pixel_guess(user_albums[Math.floor(Math.random() * user_albums.length)]);
+    }
+    function pixel_guess({
+      image,
+      name,
+      sister,
+      type,
+      plays
+    } = {
+      image: "",
+      name: "Unknown Album",
+      sister: "Unknown Artist",
+      type: "album",
+      plays: 0
+    }) {
+      let guess_input;
+      const hints = [
+        "artist",
+        "country",
+        "date"
+      ];
+      const pixelations = [
+        0.02,
+        0.05,
+        0.1,
+        0.2,
+        0.3
+      ];
+      let pixelation = 0;
+      let hint = 0;
+      let canvas;
+      let timer;
+      let actions;
+      let guess_btn;
+      let interval;
+      let image_interval;
+      let title_elem;
+      let hints_container;
+      render(host, html``);
+      render(host, html`
+            <div class="pixel-artwork">
+                <canvas ref=${(el) => canvas = el} />
+            </div>
+            <div class="pixel-info">
+                <div class="pixel-album-name">
+                    <h1 ref=${(el) => title_elem = el}>${jumble_string(name)}</h1>
+                </div>
+            </div>
+            <div class="pixel-actions" ref=${(el) => actions = el}>
+                <button class="icon" data-type="add" onclick=${() => pixel_hint()}>
+                    ${tl2(trans.add_hint)}
+                </button>
+                <button class="icon" data-type="jumble" onclick=${() => {
+        title_elem.textContent = jumble_string(name);
+        guess_input.focus();
+      }}>
+                    ${tl2(trans.re_jumble)}
+                </button>
+                <button class="icon" data-type="minus" onclick=${() => pixel_give_up()}>
+                    ${tl2(trans.give_up)}
+                    ${keybind(["ESC"])}
+                </button>
+            </div>
+            <div class="pixel-time" ref=${(el) => timer = el} />
+            <div class="pixel-guess">
+                ${guess_input = input({
+        type: "text",
+        placeholder: tl2(trans.enter_a_guess),
+        func: (value) => {
+          pixel_make_a_guess(value);
+        },
+        func_esc: () => {
+          pixel_give_up();
+        }
+      })}
+                ${() => {
+        const btn = html.node`
+                        <button class="primary icon guess" data-type="send" ref=${(el) => guess_btn = el} onclick=${() => guess_input.submit()}>
+                            ${tl2(trans.guess)}
+                        </button>
+                    `;
+        tippy_esm_default(btn, {
+          content: btn.textContent
+        });
+        return btn;
+      }}
+            </div>
+            <div class="pixel-info">
+                <h2>${tl2(trans.hints)}</h2>
+                <div class="hints" ref=${(el) => hints_container = el}></div>
+            </div>
+        `);
+      render(hints_container, html`
+            sister: ${sister}<br>
+            type: ${type}<br>
+            plays: ${plays}
+        `);
+      guess_input.focus();
+      const canvas_image = new Image();
+      canvas_image.src = image;
+      canvas_image.onload = () => {
+        render_canvas();
+      };
+      render_timer();
+      function render_timer() {
+        const duration = 30 * 1e3;
+        const start2 = Date.now();
+        interval = setInterval(() => {
+          const elapsed = Date.now() - start2;
+          const remain = duration - elapsed;
+          if (remain <= 0) {
+            timer_end();
+            pixel_end();
+            return;
+          }
+          const s2 = Math.floor(remain / 1e3);
+          const ms = remain % 1e3;
+          render(timer, html`
+                    <span class="bleh-icon" />
+                    <span class="s">
+                        ${s2}
+                    </span>
+                `);
+        }, 10);
+      }
+      function timer_end(keep = false) {
+        clearInterval(interval);
+        if (keep) return;
+        render(timer, html`
+                <span class="bleh-icon" />
+                <span class="s">
+                    0
+                </span>
+            `);
+      }
+      function render_canvas(override = false) {
+        let value = pixelation;
+        if (!override) {
+          const max2 = pixelations.length - 1;
+          if (pixelation > max2) pixelation = max2;
+          value = pixelations[pixelation];
+        }
+        log(`drawing canvas image with pixelation ${value} (${pixelation})`, "pixel");
+        const ctx = canvas.getContext("2d");
+        canvas.width = canvas_image.width;
+        canvas.height = canvas_image.height;
+        const scaled_width = canvas_image.width * value;
+        const scaled_height = canvas_image.height * value;
+        ctx.drawImage(canvas_image, 0, 0, scaled_width, scaled_height);
+        ctx.imageSmoothingEnabled = false;
+        ctx.drawImage(canvas, 0, 0, scaled_width, scaled_height, 0, 0, canvas_image.width, canvas_image.height);
+      }
+      function pixel_make_a_guess(guess) {
+        if (clean_pixel_name(guess) == clean_pixel_name(name)) {
+          status({
+            title: tl2(trans.you_guessed_correctly)
+          });
+          timer_end(true);
+          pixel_end();
+        }
+      }
+      function clean_pixel_name(name2) {
+        return name2.toLowerCase().replace(/[‘’]/g, `'`).normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
+      }
+      function pixel_hint() {
+        guess_input.focus();
+        pixelation++;
+        render_canvas();
+      }
+      function pixel_give_up() {
+        timer_end();
+        pixel_end();
+      }
+      function pixel_end() {
+        title_elem.textContent = name;
+        guess_input.disabled(true);
+        guess_btn.disabled = true;
+        render(actions, html`
+                <button class="icon" data-type="pixel" onclick=${() => pixel_random()}>
+                    ${tl2(trans.continue)}
+                </button>
+            `);
+        let i = 0.1;
+        image_interval = setInterval(() => {
+          pixelation = i;
+          render_canvas(true);
+          i += 0.1;
+          if (i >= 1) clearInterval(image_interval);
+        }, 50);
+      }
+    }
+  }
+  function shuffle_array(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }
+  function jumble_string(input2) {
+    let output = input2.split(" ").map((word) => {
+      if (!word) return "";
+      const letters = word.split("");
+      return shuffle_array(letters).join("");
+    }).join(" ");
+    if (output == input2) return jumble_string(input2);
+    return output;
+  }
+
+  // src/components/plot.js
+  function plot({ host, sidebar } = {}) {
+    if (!host || !sidebar) return;
+    let timeframe;
+    let current_year = (/* @__PURE__ */ new Date()).getFullYear();
+    let previous_year = current_year - 1;
+    const default_timeframe = page.requested.timeframe || "date_preset=LAST_90_DAYS";
+    let users = [page.name];
+    let users_elem;
+    render(host, html`
+        <div class="compare-header">
+            <div class="compare-users for-plot" ref=${(el) => users_elem = el} />
+            <div class="compare-selection">
+                ${timeframe = select(
+      [
+        {
+          text: tl2(trans.timeframe)
+        },
+        {
+          value: "date_preset=LAST_7_DAYS",
+          text: tl2(trans.last_count_days).replace(
+            "{c}",
+            "7"
+          )
+        },
+        {
+          value: "date_preset=LAST_30_DAYS",
+          text: tl2(trans.last_count_days).replace(
+            "{c}",
+            "30"
+          )
+        },
+        {
+          value: "date_preset=LAST_90_DAYS",
+          text: tl2(trans.last_count_days).replace(
+            "{c}",
+            "90"
+          )
+        },
+        {
+          value: "date_preset=LAST_180_DAYS",
+          text: tl2(trans.last_count_days).replace(
+            "{c}",
+            "180"
+          )
+        },
+        {
+          value: "date_preset=LAST_365_DAYS",
+          text: tl2(trans.last_count_days).replace(
+            "{c}",
+            "365"
+          )
+        },
+        {
+          value: "date_preset=ALL",
+          text: tl2(trans.all_time)
+        },
+        {
+          value: `from=${current_year}-01-01&rangetype=year`,
+          text: current_year
+        },
+        {
+          value: `from=${previous_year}-01-01&rangetype=year`,
+          text: previous_year
+        }
+      ],
+      default_timeframe
+    )}
+            </div>
+        </div>
+        <div
+            class="compare-body"
+            data-filled="false"
+            ref=${(el) => body = el}
+        >
+            <div class="loading-data-container">
+                <div class="loading-data-text info">
+                    ${tl2(trans.choose_a_timeframe_above)}
+                </div>
+            </div>
+        </div>
+    `);
+    render_users();
+    function render_users() {
+      render(users_elem, html`
+            ${users.map((user) => html.node`
+                <button class="compare-user-btn" onclick=${() => {
+        users = users.filter((user_name) => user_name != user);
+        render_users();
+      }}>
+                    ${user_placeholder(user)}
+                    <div class="bleh-icon" data-type="minus" />
+                </button>
+            `)}
+            <button class="compare-user-btn add-user" onclick=${() => {
+        let input_box;
+        dialog({
+          id: "add_user",
+          title: tl2(trans.plot.name),
+          body: html.node`
+                        ${input_box = input({
+            focus: true,
+            func: complete_add,
+            warn_if_empty: true
+          })}
+                        <div class="modal-footer">
+                            <button class="see-more cancel" onclick=${() => dialog_rm({ id: "add_user" })}>
+                                ${tl2(trans.cancel)}
+                            </button>
+                            <div class="fill"></div>
+                            <button class="btn primary icon" data-type="add" onclick=${() => complete_add(input_box.value())}>
+                                ${tl2(trans.add)}
+                            </button>
+                        </div>
+                    `
+        });
+        setTimeout(() => {
+          input_box.focus();
+        }, 1);
+        function complete_add(val) {
+          if (val.length < 1 || users.includes(val)) return;
+          dialog_rm({ id: "add_user" });
+          users = [...users, val];
+          render_users();
+        }
+      }}>
+                <div class="bleh-icon" data-type="plus" />
+            </button>
+        `);
+    }
+    function user_placeholder(name, avatar2) {
+      if (name == auth.name) avatar2 = auth.avatar;
+      const elem = html.node`
+            <div class="compare-user" />
+        `;
+      render(elem, html`
+            ${render_user(name, avatar2, elem)}
+        `);
+      return elem;
+    }
+  }
+
+  // src/pages/minis.js
+  var valid_minis;
+  function bleh_minis(skip2 = false) {
+    if (!skip2) {
+      update_page();
+      page.structure.row.removeChild(page.structure.row.firstElementChild);
+      page.structure.row.removeChild(page.structure.row.firstElementChild);
+    }
+    let params = new URLSearchParams(document.location.search);
+    page.requested.profile = params.get("profile") || auth.name;
+    page.requested.secondary = params.get("secondary");
+    page.requested.redirect = params.get("redirect");
+    page.requested.type = params.get("type");
+    page.requested.timeframe = params.get("timeframe");
+    let path = window.location.pathname.split("/");
+    let mini = path[path.length - 1];
+    if (mini == "minis") mini = null;
+    valid_minis = {
+      collage: {
+        name: tl2(trans.collage),
+        body: tl2(trans.collage_description),
+        func: bleh_minis_collage,
+        by: ["clairedoll"]
+      },
+      compare: {
+        name: tl2(trans.compare),
+        body: tl2(trans.compare_description),
+        func: bleh_minis_compare,
+        by: ["clairedoll"]
+      },
+      plot: {
+        name: tl2(trans.plot.name),
+        body: tl2(trans.plot.body),
+        func: bleh_minis_plot,
+        by: ["clairedoll"],
+        new_release: true,
+        hide_if: !ff("unlock_minis")
+      },
+      pixel: {
+        name: tl2(trans.pixel?.name),
+        body: tl2(trans.pixel?.body),
+        func: bleh_minis_pixel,
+        hide_if: !ff("unlock_minis"),
+        by: ["clairedoll"]
+      },
+      lyrics: {
+        name: tl2(trans.lyrics?.name),
+        body: tl2(trans.lyrics?.body),
+        func: bleh_minis_lyrics,
+        hide_if: !ff("unlock_minis")
+      },
+      rainbow: {
+        name: tl2(trans.rainbow?.name),
+        body: tl2(trans.rainbow?.body),
+        func: bleh_minis_rainbow,
+        hide_if: !ff("unlock_minis")
+      },
+      receipt: {
+        name: tl2(trans.receipt?.name),
+        body: tl2(trans.receipt?.body),
+        func: bleh_minis_receipt,
+        hide_if: !ff("unlock_minis")
+      }
+    };
+    if (mini && (!valid_minis[mini] || valid_minis[mini].hide_if)) {
+      render(
+        page.structure.main,
+        html`
+                <section class="minis">
+                    ${return_to_minis()}
+                    <div class="loading-data-container">
+                        <div class="loading-data-text error">
+                            ${tl2(trans.no_mini_found).replace("{v}", mini)}
+                        </div>
+                    </div>
+                </section>
+            `
+      );
+      return;
+    }
+    render(page.structure.side, html``);
+    page.avatar = "";
+    page.name = page.requested.profile;
+    if (page.name == auth.name) page.avatar = auth.avatar;
+    if (mini) {
+      page.structure.container.setAttribute("data-mini", mini);
+      valid_minis[mini].func();
+      return;
+    }
+    render(
+      page.structure.main,
+      html`
+            <section class="minis">
+                <div class="minis-header main">
+                    <h2>${tl2(trans.minis)}</h2>
+                    <p>${tl2(trans.minis_description)}</p>
+                </div>
+                <div class="mini-list">
+                    ${Object.entries(valid_minis).map(([id, mini2]) => {
+        if (mini2.hide_if) return html.node``;
+        return html.node`
+                            <button class="mini" data-type=${id} data-mini=${id} onclick=${() => {
+          window.history.replaceState(
+            id,
+            "",
+            `${root}bleh/minis/${id}`
+          );
+          page.structure.container.setAttribute(
+            "data-mini",
+            id
+          );
+          render(page.structure.main, html``);
+          valid_minis[id].func();
+        }}>
+                                <div class="mini-icon colourful">
+                                    <div class="bleh-icon" />
+                                </div>
+                                <div class="mini-info">
+                                    <h5>${mini2.name}${mini2.new_release ? html.node`<div class="new-badge new">${tl2(trans.new)}</div>` : ""}</h5>
+                                    <p>${mini2.body}</p>
+                                </div>
+                                <div class="bleh-icon mini-arrow" style="--icon: var(--mask)" data-type="arrow-right" />
+                            </button>
+                        `;
+      })}
+                </div>
+                <p class="card-tip">
+                    ${{
+        html: tl2(trans.labs_cta).replace(
+          "{a}",
+          `<a class="see-more" href="${root}labs">`
+        ).replace("{/a}", "</a>")
+      }}
+                </p>
+            </section>
+        `
+    );
+  }
+  function return_to_minis(mini = "") {
+    return html.node`
+        <div class="minis-header">
+            <h2 class="previous" onclick=${() => {
+      window.history.replaceState(null, "", `${root}bleh/minis`);
+      bleh_minis(true);
+    }}>${tl2(trans.minis)}</h2>
+            <div class="bleh-icon mini-arrow" style="--icon: var(--mask)" data-type="arrow-right" />
+            <h2>${mini ? valid_minis[mini].name : tl2(trans.error)}</h2>
+        </div>
+    `;
+  }
+  function bleh_minis_collage() {
+    let content2;
+    let mini_settings;
+    render(
+      page.structure.main,
+      html`
+            <section class="minis">
+                ${return_to_minis("collage")}
+                <div class="minis-content" ref=${(el) => content2 = el} />
+            </section>
+        `
+    );
+    render(
+      page.structure.side,
+      html`
+            <section
+                class="current-mini-settings"
+                ref=${(el) => mini_settings = el}
+            />
+            <section class="mini-faq">
+                <p class="card-tip">
+                    ${tl2(trans.value_by_user, {
+        v: valid_minis.collage.name,
+        u: valid_minis.collage.by.join(",")
+      })}
+                </p>
+            </section>
+        `
+    );
+    collage({
+      host: content2,
+      sidebar: mini_settings
+    });
+  }
+  function bleh_minis_compare() {
+    let content2;
+    let mini_settings;
+    render(
+      page.structure.main,
+      html`
+            <section class="minis">
+                ${return_to_minis("compare")}
+                <div class="minis-content" ref=${(el) => content2 = el} />
+            </section>
+        `
+    );
+    render(
+      page.structure.side,
+      html`
+            <section
+                class="current-mini-settings"
+                ref=${(el) => mini_settings = el}
+            />
+            <section class="mini-faq">
+                <p class="card-tip">
+                    ${tl2(trans.value_by_user, {
+        v: valid_minis.compare.name,
+        u: valid_minis.compare.by.join(",")
+      })}
+                </p>
+            </section>
+        `
+    );
+    compare({
+      host: content2,
+      sidebar: mini_settings
+    });
+  }
+  function bleh_minis_plot() {
+    let content2;
+    let mini_settings;
+    render(
+      page.structure.main,
+      html`
+            <section class="minis">
+                ${return_to_minis("plot")}
+                <div class="minis-content" ref=${(el) => content2 = el} />
+            </section>
+        `
+    );
+    render(
+      page.structure.side,
+      html`
+            <section
+                class="current-mini-settings"
+                ref=${(el) => mini_settings = el}
+            />
+            <section class="mini-faq">
+                <p class="card-tip">
+                    ${tl2(trans.value_by_user, {
+        v: valid_minis.plot.name,
+        u: valid_minis.plot.by.join(",")
+      })}
+                </p>
+            </section>
+        `
+    );
+    plot({
+      host: content2,
+      sidebar: mini_settings
+    });
+  }
+  function bleh_minis_pixel() {
+    let content2;
+    let mini_settings;
+    render(
+      page.structure.main,
+      html`
+            <section class="minis">
+                ${return_to_minis("pixel")}
+                <div
+                    class="minis-content pixel-content"
+                    ref=${(el) => content2 = el}
+                />
+            </section>
+        `
+    );
+    render(
+      page.structure.side,
+      html`
+            <section
+                class="current-mini-settings"
+                ref=${(el) => mini_settings = el}
+            />
+            <section class="mini-faq">
+                <p class="card-tip">
+                    ${tl2(trans.value_by_user, {
+        v: valid_minis.pixel.name,
+        u: valid_minis.pixel.by.join(",")
+      })}
+                </p>
+            </section>
+        `
+    );
+    pixel({
+      host: content2,
+      sidebar: mini_settings
+    });
+  }
+  function bleh_minis_lyrics() {
+    render(
+      page.structure.main,
+      html` <section class="minis">${return_to_minis("lyrics")}</section> `
+    );
+  }
+  function bleh_minis_rainbow() {
+    render(
+      page.structure.main,
+      html` <section class="minis">${return_to_minis("rainbow")}</section> `
+    );
+  }
+  function bleh_minis_receipt() {
+    render(
+      page.structure.main,
+      html` <section class="minis">${return_to_minis("receipt")}</section> `
+    );
+  }
+  function render_user(name, avatar2, user, replace_page = false) {
+    if (avatar2 == "" && name != "") {
+      fetch(`${root}user/${name}/tags`).then(function(response) {
+        console.log("returned", response, response.text);
+        return response.text();
+      }).then(function(dom) {
+        let doc = new DOMParser().parseFromString(dom, "text/html");
+        console.log("DOC", doc);
+        try {
+          avatar2 = doc.querySelector(".header-avatar-inner-wrap img").getAttribute("src");
+          name = doc.querySelector(".header-title").textContent.trim();
+          if (replace_page) {
+            page.avatar = avatar2;
+            page.name = name;
+          }
+          if (!user)
+            user = page.structure.main.querySelector(
+              ".compare-user.focus"
+            );
+          render(user, render_user(name, avatar2, user, replace_page));
+        } catch (e) {
+          console.error(e);
+        }
+      });
+      return html`
+            <div class="avatar loading" />
+            <strong>${name}</strong>
+        `;
+    }
+    return html`
+        <div class="avatar">
+            <img
+                src=${avatar2}
+                alt=${tl2(trans.avatar_for_user).replace("{u}", name)}
+            />
+        </div>
+        <strong>${name}</strong>
+    `;
+  }
+
+  // src/components/compare.js
+  function compare({ host, sidebar } = {}) {
+    if (!host || !sidebar) return;
+    let pages;
+    let timeframe;
+    let type;
+    let submit;
+    let body2;
+    if (page.name == auth.name) {
+      page.name = "";
+      page.avatar = "";
+      page.requested.profile = "";
+    }
+    let current_year = (/* @__PURE__ */ new Date()).getFullYear();
+    let previous_year = current_year - 1;
+    const default_type = page.requested.type || "albums";
+    const default_timeframe = page.requested.timeframe || "date_preset=LAST_90_DAYS";
+    let user;
+    render(
+      host,
+      html`
+            <div class="compare-header">
+                <div class="compare-users">
+                    <div class="compare-user">
+                        <div class="avatar">
+                            <img
+                                src="${auth.avatar.replace(
+        "/avatar42s/",
+        "/avatar170s/"
+      )}"
+                                alt="${tl2(trans.your_avatar)}"
+                            />
+                        </div>
+                        <strong>${auth.name}</strong>
+                    </div>
+                    <div class="bleh-icon"></div>
+                    <div class="compare-user focus" ref=${(el) => user = el}>
+                        ${render_user(page.name, page.avatar, user, true)}
+                    </div>
+                </div>
+                <div class="compare-selection">
+                    ${pages = select(
+        [
+          {
+            text: tl2(trans.page_count)
+          },
+          {
+            value: "1",
+            text: 50
+          },
+          {
+            value: "2",
+            text: 100
+          },
+          {
+            value: "3",
+            text: 150
+          },
+          {
+            value: "4",
+            text: 200
+          },
+          {
+            value: "5",
+            text: 250
+          },
+          {
+            value: "6",
+            text: 300
+          }
+        ],
+        "3"
+      )}
+                    ${type = select(
+        [
+          {
+            text: tl2(trans.item_type)
+          },
+          {
+            value: "artists",
+            text: html`<div
+                                        class="bleh-icon"
+                                        style="--icon: var(--icon-16-artist)"
+                                    />
+                                    ${tl2(trans.artists)}`
+          },
+          {
+            value: "albums",
+            text: html`<div
+                                        class="bleh-icon"
+                                        style="--icon: var(--icon-16-album)"
+                                    />
+                                    ${tl2(trans.albums)}`
+          },
+          {
+            value: "tracks",
+            text: html`<div
+                                        class="bleh-icon"
+                                        style="--icon: var(--icon-16-track)"
+                                    />
+                                    ${tl2(trans.tracks)}`
+          }
+        ],
+        default_type
+      )}
+                    ${timeframe = select(
+        [
+          {
+            text: tl2(trans.timeframe)
+          },
+          {
+            value: "date_preset=LAST_7_DAYS",
+            text: tl2(trans.last_count_days).replace(
+              "{c}",
+              "7"
+            )
+          },
+          {
+            value: "date_preset=LAST_30_DAYS",
+            text: tl2(trans.last_count_days).replace(
+              "{c}",
+              "30"
+            )
+          },
+          {
+            value: "date_preset=LAST_90_DAYS",
+            text: tl2(trans.last_count_days).replace(
+              "{c}",
+              "90"
+            )
+          },
+          {
+            value: "date_preset=LAST_180_DAYS",
+            text: tl2(trans.last_count_days).replace(
+              "{c}",
+              "180"
+            )
+          },
+          {
+            value: "date_preset=LAST_365_DAYS",
+            text: tl2(trans.last_count_days).replace(
+              "{c}",
+              "365"
+            )
+          },
+          {
+            value: "date_preset=ALL",
+            text: tl2(trans.all_time)
+          },
+          {
+            value: `from=${current_year}-01-01&rangetype=year`,
+            text: current_year
+          },
+          {
+            value: `from=${previous_year}-01-01&rangetype=year`,
+            text: previous_year
+          }
+        ],
+        default_timeframe
+      )}
+                    <button
+                        class="btn icon primary compare"
+                        ref=${(el) => submit = el}
+                        onclick=${() => begin_comparing()}
+                    >
+                        ${tl2(trans.compare)}
+                    </button>
+                </div>
+            </div>
+            <div
+                class="compare-body"
+                data-filled="false"
+                ref=${(el) => body2 = el}
+            >
+                <div class="loading-data-container">
+                    <div class="loading-data-text info">
+                        ${tl2(trans.choose_a_timeframe_above)}
+                    </div>
+                </div>
+            </div>
+        `
+    );
+    let setting_group;
+    let input2;
+    render(
+      sidebar,
+      html`
+            <h2>${tl2(trans.settings)}</h2>
+            <div class="setting-group" ref=${(el) => setting_group = el}>
+                <div class="setting v" data-type="text">
+                    <div class="heading">
+                        <h5>${tl2(trans.compare_with)}</h5>
+                    </div>
+                    <div class="input-container content-form">
+                        <input
+                            type="text"
+                            class="input"
+                            ref=${(el) => inputter = el}
+                            placeholder=${tl2(trans.enter_a_profile)}
+                            value=${page.requested.profile}
+                            onchange=${(e) => {
+        page.requested.profile = e.target.value;
+        page.name = page.requested.profile;
+        page.avatar = "";
+        if (page.name == auth.name)
+          page.avatar = auth.avatar;
+        render(
+          user,
+          html`
+                                        ${render_user(
+            page.name,
+            page.avatar,
+            user,
+            true
+          )}
+                                    `
+        );
+      }}
+                        />
+                        ${() => {
+        let btn = html.node`
+                            <button class="btn chibi icon" data-type="starred_friend" data-is-shortcut=${settings.starred_friend != ""} onclick=${() => {
+          if (settings.starred_friend == "") return;
+          inputter.value = settings.starred_friend;
+          inputter.dispatchEvent(new Event("change"));
+        }}>${tl2(trans.starred_friend.name)}</button>
+                        `;
+        tippy_esm_default(btn, {
+          content: tl2(trans.starred_friend.name)
+        });
+        return btn;
+      }}
+                    </div>
+                </div>
+                ${ff("inverse_compare") ? html.node`
+                        ${setting({ id: "inverse_compare" })}
+                    ` : ""}
+            </div>
+        `
+    );
+    let compare_settings = setting_group.querySelectorAll(":scope > .setting");
+    function begin_comparing(bypass = false) {
+      if (page.name == "") return;
+      if (parseInt(pages.value()) > 3 && !bypass) {
+        let warn = notify({
+          id: "compare_warning",
+          title: tl2(trans.are_you_sure),
+          body: tl2(trans.this_will_require_loading_count_pages).replace(
+            "{c}",
+            parseInt(pages.value()) * 2
+          ),
+          type: "warning",
+          actions: [
+            {
+              type: "check",
+              action: () => {
+                notify_rm(warn);
+                begin_comparing(true);
+              },
+              text: tl2(trans.continue)
+            }
+          ],
+          persist: true
+        });
+        return;
+      }
+      if (!auth.name) {
+        notify({
+          id: "compare_failed",
+          title: tl2(trans.name_failed).replace(
+            "{name}",
+            tl2(trans.compare)
+          ),
+          body: tl2(trans.you_need_to_be_logged_in),
+          type: "error"
+        });
+        return;
+      }
+      pages.querySelector("button").disabled = true;
+      type.querySelector("button").disabled = true;
+      timeframe.querySelector("button").disabled = true;
+      compare_settings.forEach((option) => {
+        option.setAttribute("disabled", true);
+      });
+      submit.disabled = true;
+      page.state.compare = {
+        you: [],
+        other: [],
+        shared: []
+      };
+      get_grid(auth.name, 1, parseInt(pages.value()), page.name);
+    }
+    function get_grid(user2, current_page, page_count, next_user = null) {
+      render(
+        body2,
+        html`
+                <div class="loading-data-container">
+                    <div class="loading-data-text">
+                        ${tl2(trans.gathering_plays_for_user_pages).replace("{u}", user2).replace("{current_page}", current_page).replace("{pages}", page_count)}
+                    </div>
+                </div>
+            `
+      );
+      fetch(
+        `${root}user/${user2}/library/${type.value()}?format=list&${timeframe.value()}&page=${current_page}&ajax=1`
+      ).then(function(response) {
+        console.log("returned", response, response.text);
+        return response.text();
+      }).then(function(dom) {
+        let doc = new DOMParser().parseFromString(dom, "text/html");
+        console.log("DOC", doc);
+        let next_button = doc.querySelector(".pagination-next");
+        try {
+          let tracks = doc.querySelectorAll(".chartlist-row");
+          tracks.forEach((track) => {
+            let item = {};
+            item.avatar = track.querySelector(".chartlist-image img");
+            if (item.avatar)
+              item.avatar = item.avatar.getAttribute("src");
+            item.name = track.querySelector(".chartlist-name a").textContent.trim();
+            if (type.value() != "artists")
+              item.sister = track.querySelector(".chartlist-artist a").textContent.trim();
+            item.plays = clean_number(track.querySelector(".chartlist-count-bar-slug").getAttribute("data-stat-value"));
+            if (next_user) page.state.compare.you.push(item);
+            else page.state.compare.other.push(item);
+          });
+        } catch (e) {
+          notify({
+            id: "compare",
+            title: tl2(trans.failed),
+            body: tl2(trans.there_was_a_network_error),
+            type: "error"
+          });
+          console.error(e);
+        }
+        if (next_button && current_page < page_count) {
+          get_grid(user2, current_page + 1, page_count, next_user);
+        } else if (next_user) {
+          get_grid(next_user, 1, page_count);
+        } else {
+          pages.querySelector("button").disabled = false;
+          type.querySelector("button").disabled = false;
+          timeframe.querySelector("button").disabled = false;
+          compare_settings.forEach((option) => {
+            option.setAttribute("disabled", false);
+          });
+          submit.disabled = false;
+          continue_comparing();
+        }
+      });
+    }
+    function continue_comparing() {
+      log("gathered initial values", "compare", "info", page.state.compare);
+      page.state.compare.you.forEach((your_item) => {
+        let other_item;
+        if (type.value() == "albums")
+          other_item = page.state.compare.other.find(
+            (other) => your_item.name === other.name && your_item.sister === other.sister
+          );
+        else
+          other_item = page.state.compare.other.find(
+            (other) => your_item.name === other.name
+          );
+        if (other_item) {
+          page.state.compare.shared.push({
+            avatar: your_item.avatar,
+            name: your_item.name,
+            sister: your_item.sister ? your_item.sister : "",
+            plays: {
+              you: your_item.plays,
+              other: other_item.plays,
+              shared: your_item.plays + other_item.plays
+            }
+          });
+        }
+      });
+      page.state.compare.shared.sort(
+        (a, b) => b.plays.shared - a.plays.shared
+      );
+      log("gathered shared values", "compare", "info", page.state.compare);
+      body2.innerHTML = "";
+      if (page.state.compare.shared.length == 0) {
+        render(
+          body2,
+          html`
+                    <div class="loading-data-container">
+                        <div class="loading-data-text failed">
+                            ${tl2(trans.nothing_in_common)}
+                        </div>
+                    </div>
+                `
+        );
+        return;
+      }
+      if (type.value() != "tracks") {
+        let grid = document.createElement("ol");
+        grid.classList.add(
+          "grid-items",
+          "grid-items--numbered",
+          "compare-grid"
+        );
+        page.state.compare.shared.forEach((data2) => {
+          let template;
+          if (type.value() == "artists") template = sanitise(data2.name);
+          else
+            template = `${sanitise(data2.sister)}/${sanitise(data2.name)}`;
+          grid.appendChild(html.node`
+                    <li class="compare-item grid-items-item">
+                        <div class="grid-items-cover-image js-link-block link-block">
+                            <div class="grid-items-cover-image-image ${data2.avatar.endsWith("/c6f59c1e5e7240a4c0d427abd71f3dbb.jpg") || data2.avatar.endsWith("/2a96cbd8b46e442fc41c2b86b821562f.jpg") ? "grid-items-cover-default" : ""}">
+                                <img src="${data2.avatar.replace("/avatar70s/", "/avatar300s/").replace("/64s/", "/avatar300s/")}" alt="${data2.name}" loading="lazy">
+                            </div>
+                            <div class="grid-items-item-details">
+                                <p class="grid-items-item-main-text">
+                                    <a class="link-block-target" href="${root}music/${redirect()}${template}" title="${data2.name}">
+                                        ${data2.name}
+                                    </a>
+                                </p>
+                                ${type.value() == "albums" ? html.node`
+                                <p class="grid-items-item-aux-text">
+                                    <a class="grid-items-item-aux-block" href="${root}music/${redirect()}${data2.sister}">
+                                        ${data2.sister}
+                                    </a>
+                                </p>
+                                ` : ""}
+                                <p class="grid-items-item-aux-text">
+                                    <a class="grid-item-plays with-avatar" href="${root}user/${auth.name}/library/music/${redirect()}${template}?${timeframe.value()}" target="_blank">
+                                        <span class="avatar">
+                                            <img src="${auth.avatar}" alt="${tl2(trans.your_avatar)}">
+                                        </span>
+                                        ${data2.plays.you.toLocaleString(lang)}
+                                    </a>
+                                    <a class="grid-item-plays with-avatar" href="${root}user/${page.name}/library/music/${redirect()}${template}?${timeframe.value()}" target="_blank">
+                                        <span class="avatar">
+                                            <img src="${page.avatar}" alt="${tl2(trans.avatar_for_user).replace("{u}", page.name)}">
+                                        </span>
+                                        ${data2.plays.other.toLocaleString(lang)}
+                                    </a>
+                                </p>
+                            </div>
+                            <a class="js-link-block-cover-link link-block-cover-link" href="${root}music/${redirect()}${template}" tabindex="-1" aria-hidden="true"></a>
+                        </div>
+                    </li>
+                `);
+        });
+        render(body2, grid);
+        music_grids(grid);
+      } else {
+        let table = document.createElement("table");
+        table.classList.add(
+          "chartlist",
+          "chartlist--with-index",
+          "chartlist--with-index--length-2",
+          "chartlist--with-image",
+          "chartlist--with-artist",
+          "chartlist--with-bar",
+          "compare-chartlist"
+        );
+        let tbody = document.createElement("tbody");
+        table.appendChild(tbody);
+        let max2 = 0;
+        page.state.compare.shared.forEach((item) => {
+          if (item.plays.you > max2) max2 = item.plays.you;
+          if (item.plays.other > max2) max2 = item.plays.other;
+        });
+        page.state.compare.shared.forEach((data2, index3) => {
+          let template = `${sanitise(data2.sister)}/_/${sanitise(data2.name)}`;
+          tbody.appendChild(html.node`
+                    <tr class="chartlist-row chartlist-row--with-artist compare-item">
+                        <td class="chartlist-index">${index3 + 1}</td>
+                        <td class="chartlist-image">
+                            <a class="cover-art" href="${root}music/${redirect()}${template}">
+                                <img src="${data2.avatar}" alt="${data2.name}" loading="lazy">
+                            </a>
+                        </td>
+                        <td class="chartlist-name">
+                            <a href="${root}music/${redirect()}${template}" title="${data2.name}">
+                                ${data2.name}
+                            </a>
+                        </td>
+                        <td class="chartlist-artist">
+                            <a href="${root}music/${redirect()}${data2.sister}" title="${data2.sister}">
+                                ${data2.sister}
+                            </a>
+                        </td>
+                        <td class="chartlist-bar with-multiple">
+                            <span class="chartlist-count-bar">
+                                <a class="chartlist-count-bar-link" href="${root}user/${auth.name}/library/music/${redirect()}${template}?${timeframe.value()}" target="_blank">
+                                    <span class="chartlist-count-bar-slug" data-max-stat-value="${max2}" data-stat-value="${data2.plays.you}" style="width: ${data2.plays.you / max2 * 100}%;"></span>
+                                    <span class="chartlist-count-bar-value">${data2.plays.you}</span>
+                                </a>
+                                <span class="avatar">
+                                    <img src="${auth.avatar}" alt="${tl2(trans.your_avatar)}">
+                                </span>
+                            </span>
+                            <span class="chartlist-count-bar">
+                                <a class="chartlist-count-bar-link" href="${root}user/${page.name}/library/music/${redirect()}${template}?${timeframe.value()}" target="_blank">
+                                    <span class="chartlist-count-bar-slug" data-max-stat-value="${max2}" data-stat-value="${data2.plays.other}" style="width: ${data2.plays.other / max2 * 100}%;"></span>
+                                    <span class="chartlist-count-bar-value">${data2.plays.other}</span>
+                                </a>
+                                <span class="avatar">
+                                    <img src="${page.avatar}" alt="${tl2(trans.avatar_for_user).replace("{u}", page.name)}">
+                                </span>
+                            </span>
+                        </td>
+                    </tr>
+                `);
+        });
+        body2.appendChild(table);
+        patch_titles(body2);
+      }
+    }
+  }
+
+  // src/news.js
+  function news() {
+    let changelog = localStorage.getItem("bleh_changelog");
+    let changelog_expire = new Date(
+      localStorage.getItem("bleh_changelog_expire")
+    );
+    let current_time = /* @__PURE__ */ new Date();
+    if (!changelog) {
+      log("not cached, fetching", "changelog");
+      request_changelog();
+      dialog_rm({ id: "rabbit" });
+    } else {
+      if (changelog_expire < current_time) request_changelog();
+      else open_changelog(JSON.parse(changelog));
+    }
+  }
+  function request_changelog(open_after = true) {
+    let button = page.state.navigation_menu_news;
+    if (button) button.setAttribute("disabled", "");
+    let xhr = new XMLHttpRequest();
+    let url = `https://katelyynn.github.io/bleh/fm/changelog/changelog.json?${Math.random()}`;
+    xhr.open("GET", url, true);
+    xhr.onload = function() {
+      log(`responded with ${xhr.status}`, "changelog");
+      if (xhr.status != 200) {
+        log(
+          "request has been cancelled, will request again in 1h",
+          "changelog"
+        );
+        api_expire.setHours(api_expire.getHours() + 1);
+      }
+      let api_expire = /* @__PURE__ */ new Date();
+      if (xhr.status == 200) {
+        if (open_after) {
+          try {
+            open_changelog(JSON.parse(this.response));
+            set_storage("bleh_changelog", this.response);
+            api_expire.setHours(api_expire.getHours() + 2);
+            log(`cached until ${api_expire}`, "changelog");
+            set_storage("bleh_changelog_expire", api_expire);
+          } catch (e) {
+            deliver_notif(
+              "The changelog is currently unavailable due to errors, try again later.",
+              true
+            );
+            console.error(e);
+          }
+        }
+      }
+      if (button != null) button.removeAttribute("disabled");
+    };
+    xhr.send();
+  }
+  function open_changelog(changelog) {
+    const window2 = dialog({
+      id: "changelog",
+      title: tl2(trans.news_from_user).replace(
+        "{user}",
+        sponsor_list && sponsor_list.special ? sponsor_list.special[0] : "katelyn"
+      ),
+      body: html.node`
+            <div class="cta first sponsor colourful margin-bottom">
+                <strong>${tl2(trans.news_sponsor_cta)}</strong>
+                <a class="see-more" onclick="_sponsor(true)">${tl2(trans.sponsor)}</a>
+            </div>
+            <div class="changelog-list"></div>
+        `,
+      type: "changelog",
+      allow_scroll: true
+    });
+    const changelog_list = window2.querySelector(".changelog-list");
+    let index3 = 0;
+    for (let version4 in changelog) {
+      if (version4 == "updated" || version4 == "latest") continue;
+      const version_item = html.node`
+            <div class="changelog-version-item" data-changelog-type="${changelog[version4].type}" data-changelog-latest="${index3 == 0 ? "true" : "false"}" data-changelog-version="${version4}">
+                <div class="version-item-header">
+                    <div class="sub-text">
+                        <div class="breadcrumb">
+                            <div class="breadcrumb-origin">
+                                ${version4}
+                            </div>
+                            <div class="breadcrumb-name">
+                                ${tl2(trans.news.type[changelog[version4].type])}
+                            </div>
+                        </div>
+                    </div>
+                    <h3>${changelog[version4].name}</h3>
+                    ${version4 == "2025.0113" ? html.node`<h4 class="header-over">${changelog[version4].name}</h4>` : ""}
+                </div>
+                <div class="version-item-body markdown-body">
+                    ${markdown(changelog[version4].bio, {
+        allow_headers: true,
+        starting_header: 5,
+        in_dialog: true
+      })}
+                </div>
+            </div>
+        `;
+      if (changelog[version4].type == "major")
+        version_item.setAttribute("id", "latest_major_release");
+      changelog_list.appendChild(version_item);
+      index3++;
+    }
+  }
+  unsafeWindow._update_local_changelog_cache = function(json) {
+    set_storage("bleh_changelog", JSON.stringify(json));
+  };
 
   // src/components/dynamic_theming.js
   function dynamic_theming() {
@@ -50964,7 +50985,6 @@
                     <h4>${tl2(trans.settings)}</h4>
                     <div class="setting-group">
                         ${setting({ id: "seasonal_particles" })}
-                        ${setting({ id: "seasonal_particles_fps" })}
                         ${setting({ id: "seasonal_overlays" })}
                     </div>
                 </div>
