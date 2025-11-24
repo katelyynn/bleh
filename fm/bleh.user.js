@@ -29443,11 +29443,11 @@
         if (sponsor_list.badges?.[auth.name]) {
           const old_badges = JSON.parse(localStorage.getItem("kat_sponsor_cache")) || {};
           if (JSON.stringify(old_badges) != JSON.stringify(sponsor_list.badges[auth.name])) {
+            console.info("sponsor initial", old_badges, sponsor_list.badges[auth.name]);
             set_storage("kat_sponsor_cache", JSON.stringify(sponsor_list.badges[auth.name]));
             new_badges(sponsor_list.badges[auth.name]);
             return;
           }
-          set_storage("kat_sponsor_cache", JSON.stringify(sponsor_list.badges[auth.name]));
         }
       }
       if (sponsor_expire < current_time && !force) {
@@ -29458,6 +29458,7 @@
     }
   }
   function sponsor_request(notify2 = false, func = null) {
+    log(`initiating request with notify ${notify2}`, "sponsor");
     let button = document.body.querySelector('[onclick="_sponsor_check()"]');
     if (button) button.setAttribute("disabled", "");
     let xhr = new XMLHttpRequest();
@@ -29483,19 +29484,15 @@
             if (sponsor_list.badges?.[auth.name]) {
               const old_badges = JSON.parse(localStorage.getItem("kat_sponsor_cache")) || {};
               if (JSON.stringify(old_badges) != JSON.stringify(sponsor_list.badges[auth.name])) {
+                console.info("sponsor request", old_badges, sponsor_list.badges[auth.name]);
                 set_storage("kat_sponsor_cache", JSON.stringify(sponsor_list.badges[auth.name]));
                 new_badges(sponsor_list.badges[auth.name]);
-                return;
               }
-              set_storage("kat_sponsor_cache", JSON.stringify(sponsor_list.badges[auth.name]));
             }
           }
           if (notify2)
             status({
-              title: tl2(trans.downloaded_value).replace(
-                "{v}",
-                tl2(trans.sponsor_details)
-              )
+              title: tl2(trans.downloaded_value, { v: tl2(trans.sponsor_details) })
             });
           set_storage("kat_sponsors", this.response);
           if (func) func();
@@ -68902,7 +68899,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
   var build_default = {
     brand: "bleh",
     build: "2025.1111",
-    sku: "neon",
+    sku: "layla",
     bio: "bleh!!! ^-^",
     author: "katelyn",
     url: "https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.js",
