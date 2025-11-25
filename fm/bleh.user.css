@@ -719,6 +719,10 @@
             --g4:
                 var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 25%), 75%;
 
+            --p3:
+                var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 50%),
+                calc(clamp(min(0.85), var(--lit), max(1.1)) * 90%);
+
             /* l2-c in dark modes, l4-c in light modes */
             --l2-c-theme-switch: var(--l3-c);
             --l3-c-theme-switch: var(--l3-c);
