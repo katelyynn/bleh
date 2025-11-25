@@ -33423,20 +33423,13 @@
           let content_top_nav = content_top.querySelector(".navlist");
           if (!content_top_nav && ff("beret"))
             content_top.style.setProperty("display", "none");
-          if (ff("short")) {
-            if (!content_top.style.hasOwnProperty("display"))
-              page.structure.row.insertBefore(
-                content_top,
-                page.structure.content
-              );
-            else page.structure.row.appendChild(content_top);
+          if (content_top.style.length > 0) {
+            page.structure.content.after(content_top);
           } else {
-            if (navlist) navlist.after(content_top);
-            else
-              page.structure.container.insertBefore(
-                content_top,
-                page.structure.container.firstElementChild
-              );
+            page.structure.row.insertBefore(
+              content_top,
+              page.structure.content
+            );
           }
         } else {
           let subpage_title = page.structure.main.querySelector(
