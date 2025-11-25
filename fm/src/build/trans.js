@@ -44,7 +44,7 @@ export let lang_info = {
     pt: {
         name: 'Português',
         by: ['ArthRMH', 'auwora', 'fr0r', 'urwq'],
-        last_updated: '2025-11-15'
+        last_updated: '2025-11-25'
     },
     sv: {
         name: 'Svenska',
