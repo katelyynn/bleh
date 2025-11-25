@@ -148,7 +148,7 @@ export async function bleh_profiles() {
         stock_badges.forEach((badge) => {
             if (badge.classList[1] == 'user-status-None') return;
 
-            badge.classList.add('expand');
+            if (!page.mobile) badge.classList.add('expand');
 
             tippy(badge, {
                 theme: 'badge',
@@ -165,7 +165,7 @@ export async function bleh_profiles() {
 
     if (badges) {
         badges.forEach((badge) => {
-            title_wrap.appendChild(create_badge(badge, false, true));
+            title_wrap.appendChild(create_badge(badge, false, !page.mobile));
         });
     }
 

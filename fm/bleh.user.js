@@ -10218,9 +10218,9 @@
             this.zoom(-delta * ratio, event3);
           },
           cropStart: function cropStart(event3) {
-            var buttons = event3.buttons, button = event3.button;
+            var buttons = event3.buttons, button2 = event3.button;
             if (this.disabled || (event3.type === "mousedown" || event3.type === "pointerdown" && event3.pointerType === "mouse") && // No primary button (Usually the left button)
-            (isNumber3(buttons) && buttons !== 1 || isNumber3(button) && button !== 0 || event3.ctrlKey)) {
+            (isNumber3(buttons) && buttons !== 1 || isNumber3(button2) && button2 !== 0 || event3.ctrlKey)) {
               return;
             }
             var options = this.options, pointers = this.pointers;
@@ -20376,13 +20376,13 @@
             ` : ""}
             <div class="notification-actions">
                 ${actions.length > 0 ? actions.map((action) => () => {
-      let button = html.node`
+      let button2 = html.node`
                         <button class="notification-action" data-type=${action.type} onclick=${action.action}>${action.text}</button>
                     `;
-      tippy_esm_default(button, {
+      tippy_esm_default(button2, {
         content: action.text
       });
-      return button;
+      return button2;
     }) : ""}
             </div>
         </div>
@@ -29459,8 +29459,8 @@
   }
   function sponsor_request(notify2 = false, func = null) {
     log(`initiating request with notify ${notify2}`, "sponsor");
-    let button = document.body.querySelector('[onclick="_sponsor_check()"]');
-    if (button) button.setAttribute("disabled", "");
+    let button2 = document.body.querySelector('[onclick="_sponsor_check()"]');
+    if (button2) button2.setAttribute("disabled", "");
     let xhr = new XMLHttpRequest();
     let url = `https://katelyynn.github.io/bleh/fm/badges/badges.json?${Math.random()}`;
     xhr.open("GET", url, true);
@@ -29501,7 +29501,7 @@
         log(`list cached until ${api_expire}`, "sponsor");
       }
       set_storage("kat_sponsors_expire", api_expire);
-      if (button != null) button.removeAttribute("disabled");
+      if (button2 != null) button2.removeAttribute("disabled");
     };
     xhr.send();
   }
@@ -31411,17 +31411,17 @@
         }}
                     <div class="button-combo-sep"/>
                     ${() => {
-          let button = html.node`
+          let button2 = html.node`
                             <a class="dropdown-menu-clickable-item chibi" data-type="continue" href="${root}user/${page.name}/library${name.getAttribute("href")}">
                                 ${tl2(trans.explore_in_library)}
                             </a>
                         `;
-          tippy_esm_default(button, {
+          tippy_esm_default(button2, {
             content: tl2(trans.explore_in_library),
             delay: [500, 0],
             appendTo: document.body
           });
-          return button;
+          return button2;
         }}
                 </div>
                 ` : html.node`
@@ -31435,17 +31435,17 @@
         }}
                     <div class="button-combo-sep"/>
                     ${() => {
-          let button = html.node`
+          let button2 = html.node`
                             <a class="dropdown-menu-clickable-item chibi" data-type="continue" href="${root}user/${page.name}/library${name.getAttribute("href")}">
                                 ${tl2(trans.explore_in_library)}
                             </a>
                         `;
-          tippy_esm_default(button, {
+          tippy_esm_default(button2, {
             content: tl2(trans.explore_in_library),
             delay: [500, 0],
             appendTo: document.body
           });
-          return button;
+          return button2;
         }}
                 </div>
                 <div class="button-combo">
@@ -31458,17 +31458,17 @@
         }}
                     <div class="button-combo-sep"/>
                     ${() => {
-          let button = html.node`
+          let button2 = html.node`
                             <a class="dropdown-menu-clickable-item chibi" data-type="continue" href="${root}user/${page.name}/library${artist.getAttribute("href")}">
                                 ${tl2(trans.explore_in_library)}
                             </a>
                         `;
-          tippy_esm_default(button, {
+          tippy_esm_default(button2, {
             content: tl2(trans.explore_in_library),
             delay: [500, 0],
             appendTo: document.body
           });
-          return button;
+          return button2;
         }}
                 </div>
                 `}
@@ -31529,7 +31529,7 @@
   }
   function select(values, initial = "", name = "", func = null, blend = false) {
     let select2;
-    let button;
+    let button2;
     if (!values || values.length == 0) return html.node`
         <div class="alert alert-error no-margin">
             ${tl2(trans.value_failed_to_load).replace("{v}", "Select")}
@@ -31548,10 +31548,10 @@
                     `;
     })}
             </select>
-            <button class="select-button ${blend ? "link-select blend-v2-btn" : ""}" type="button" ref=${(el) => button = el} />
+            <button class="select-button ${blend ? "link-select blend-v2-btn" : ""}" type="button" ref=${(el) => button2 = el} />
         </div>
     `;
-    let menu = tippy_esm_default(button, {
+    let menu = tippy_esm_default(button2, {
       theme: "select-menu",
       content: html.node``,
       placement: "bottom",
@@ -31581,7 +31581,7 @@
     function set_select(selected, bubble = true) {
       values.some((value) => {
         if (value.value == selected) {
-          render(button, html`${value.text}`);
+          render(button2, html`${value.text}`);
           return false;
         }
       });
@@ -31650,14 +31650,14 @@
       item.textContent = object_text;
       menu_list.appendChild(item);
     });
-    let button = document.createElement("button");
-    button.classList.add("select-button");
-    button.setAttribute("id", `select-${id}`);
-    button.setAttribute("type", "button");
-    button.textContent = menu_list.querySelector(
+    let button2 = document.createElement("button");
+    button2.classList.add("select-button");
+    button2.setAttribute("id", `select-${id}`);
+    button2.setAttribute("type", "button");
+    button2.textContent = menu_list.querySelector(
       `[data-value="${value}"]`
     ).textContent;
-    let theme_menu_item = tippy_esm_default(button, {
+    let theme_menu_item = tippy_esm_default(button2, {
       theme: "select-menu",
       content: html.node([menu_list.innerHTML]),
       placement: "bottom",
@@ -31668,7 +31668,7 @@
         update_custom_select(instance.popper, select2.value);
       }
     });
-    element_to_append.appendChild(button);
+    element_to_append.appendChild(button2);
   }
   unsafeWindow._set_custom_select_value = function(select_id, value) {
     let select2 = document.getElementById(select_id);
@@ -32520,21 +32520,21 @@
                                 ${bulk_edit_button ? html.node`
                                     <div class="button-combo-sep" />
                                     ${() => {
-                let button = track_legacy_menu.querySelector(
+                let button2 = track_legacy_menu.querySelector(
                   '[data-analytics-action="BulkEditScrobblesOpen"]'
                 );
-                button.classList = "dropdown-menu-clickable-item chibi";
-                button.textContent = tl2(
+                button2.classList = "dropdown-menu-clickable-item chibi";
+                button2.textContent = tl2(
                   trans.bulk_edit
                 );
-                button.setAttribute(
+                button2.setAttribute(
                   "data-type",
                   "bulk-edit"
                 );
-                tippy_esm_default(button, {
+                tippy_esm_default(button2, {
                   content: tl2(trans.bulk_edit)
                 });
-                return button;
+                return button2;
               }}
                                 ` : ""}
                             </div>
@@ -32569,15 +32569,15 @@
                             ${() => {
                 let container = track.querySelector(".chartlist-play");
                 if (!container) return;
-                let button = container.querySelector(
+                let button2 = container.querySelector(
                   ".chartlist-play-button"
                 );
-                if (!button) return;
-                button.classList = "dropdown-menu-clickable-item";
-                button.textContent = tl2(trans.play);
-                button.setAttribute("data-type", "play");
+                if (!button2) return;
+                button2.classList = "dropdown-menu-clickable-item";
+                button2.textContent = tl2(trans.play);
+                button2.setAttribute("data-type", "play");
                 track.removeChild(container);
-                return button;
+                return button2;
               }}
                             ${!is_album ? html.node`
                             <div class="button-combo">
@@ -32590,16 +32590,16 @@
               }}
                                 <div class="button-combo-sep"/>
                                 ${() => {
-                let button = html.node`
+                let button2 = html.node`
                                         <a class="dropdown-menu-clickable-item chibi" data-type="continue" href="${root}user/${user}/library${track_title.getAttribute("href")}">
                                             ${tl2(trans.explore_in_library)}
                                         </a>
                                     `;
-                tippy_esm_default(button, {
+                tippy_esm_default(button2, {
                   content: tl2(trans.explore_in_library),
                   delay: [500, 0]
                 });
-                return button;
+                return button2;
               }}
                             </div>
                             ` : ""}
@@ -32614,16 +32614,16 @@
               }}
                                 <div class="button-combo-sep"/>
                                 ${() => {
-                let button = html.node`
+                let button2 = html.node`
                                         <a class="dropdown-menu-clickable-item chibi" data-type="continue" href="${root}user/${user}/library${album_link.getAttribute("href")}">
                                             ${tl2(trans.explore_in_library)}
                                         </a>
                                     `;
-                tippy_esm_default(button, {
+                tippy_esm_default(button2, {
                   content: tl2(trans.explore_in_library),
                   delay: [500, 0]
                 });
-                return button;
+                return button2;
               }}
                             </div>
                             ` : is_album ? html.node`
@@ -32637,16 +32637,16 @@
               }}
                                 <div class="button-combo-sep"/>
                                 ${() => {
-                let button = html.node`
+                let button2 = html.node`
                                         <a class="dropdown-menu-clickable-item chibi" data-type="continue" href="${root}user/${user}/library${track_title.getAttribute("href")})}">
                                             ${tl2(trans.explore_in_library)}
                                         </a>
                                     `;
-                tippy_esm_default(button, {
+                tippy_esm_default(button2, {
                   content: tl2(trans.explore_in_library),
                   delay: [500, 0]
                 });
-                return button;
+                return button2;
               }}
                             </div>
                             ` : ""}
@@ -32660,16 +32660,16 @@
               }}
                                 <div class="button-combo-sep"/>
                                 ${() => {
-                let button = html.node`
+                let button2 = html.node`
                                         <a class="dropdown-menu-clickable-item chibi" data-type="continue" href="${root}user/${user}/library/music/${redirect()}${sanitise(track_artist)}">
                                             ${tl2(trans.explore_in_library)}
                                         </a>
                                     `;
-                tippy_esm_default(button, {
+                tippy_esm_default(button2, {
                   content: tl2(trans.explore_in_library),
                   delay: [500, 0]
                 });
-                return button;
+                return button2;
               }}
                             </div>
                             ${() => {
@@ -32698,7 +32698,7 @@
                             </button>
                             ${() => {
                 if (!is_own_profile || !can_delete) return;
-                let button = html.node`
+                let button2 = html.node`
                                     <button class="dropdown-menu-clickable-item more-item--delete" data-type="delete">
                                         ${tl2(trans.delete)}
                                     </button>
@@ -32759,7 +32759,7 @@
                                         <input type="hidden" name="artist_name" value=${track.getAttribute("data-artist-name")}>
                                         <input type="hidden" name="track_name" value=${track.getAttribute("data-track-name")}>
                                         <input type="hidden" name="timestamp" value=${track.getAttribute("data-timestamp")}>
-                                        ${button}
+                                        ${button2}
                                     </form>
                                 `;
               }}
@@ -33597,7 +33597,7 @@
         ${Object.entries(values).map(([key, val]) => {
       const icon = val.icon;
       let input2;
-      const button = html.node`
+      const button2 = html.node`
                 <div class="setting v2 standalone" data-type="radio" data-value=${key} onclick=${() => {
         update_radio(key);
       }}>
@@ -33616,8 +33616,8 @@
                 </div>
             `;
       input2.checked = value == key;
-      buttons.push(button);
-      return button;
+      buttons.push(button2);
+      return button2;
     })}
         </div>
     `;
@@ -33666,9 +33666,9 @@
       page.structure.main.appendChild(edits);
       page.structure.main.appendChild(merch);
       page.structure.main.appendChild(history);
-      let button = subscription.querySelector(".btn-primary");
-      if (button)
-        button.classList.add("subscription-button", "icon", "primary");
+      let button2 = subscription.querySelector(".btn-primary");
+      if (button2)
+        button2.classList.add("subscription-button", "icon", "primary");
       let more_link_wrap = edits.querySelector(".more-link");
       if (more_link_wrap) {
         more_link_wrap.classList = "";
@@ -34719,9 +34719,9 @@
     }
     function finish_saving_avatar() {
       page.state.avatar_changer.setAttribute("data-loading", "true");
-      page.state.avatar_changer.querySelectorAll(".bleh-modal-body button").forEach((button) => {
-        button.setAttribute("disabled", "true");
-        button.removeAttribute("onclick");
+      page.state.avatar_changer.querySelectorAll(".bleh-modal-body button").forEach((button2) => {
+        button2.setAttribute("disabled", "true");
+        button2.removeAttribute("onclick");
       });
     }
     function crop(file) {
@@ -34746,9 +34746,9 @@
                     <div class="fill"></div>
                     <button class="btn primary save" onclick=${() => {
           if (!cropper) return;
-          crop_dialog.querySelectorAll(".bleh-modal-body button").forEach((button) => {
-            button.setAttribute("disabled", "true");
-            button.removeAttribute("onclick");
+          crop_dialog.querySelectorAll(".bleh-modal-body button").forEach((button2) => {
+            button2.setAttribute("disabled", "true");
+            button2.removeAttribute("onclick");
           });
           const canvas = cropper.getCroppedCanvas();
           canvas.toBlob((blob) => {
@@ -34815,9 +34815,9 @@
     list.forEach((item, index3) => {
       let name = item.querySelector("td").textContent.trim();
       let form2 = item.querySelector("form");
-      let button = form2.querySelector("button");
-      button.classList.add("icon", "chibi", "danger-subtle");
-      button.setAttribute("data-type", "trash");
+      let button2 = form2.querySelector("button");
+      button2.classList.add("icon", "chibi", "danger-subtle");
+      button2.setAttribute("data-type", "trash");
       let entry = html.node`
             <div class="generic-table-list-entry user-vertical-list-item">
                 <div class="name">
@@ -35518,10 +35518,10 @@
       sessions.forEach((session) => {
         const details = session.querySelector(".api-session-details");
         const form = session.querySelector("form");
-        const button = form.querySelector("button");
-        button.classList.add("chibi");
-        tippy_esm_default(button, {
-          content: button.textContent
+        const button2 = form.querySelector("button");
+        button2.classList.add("chibi");
+        tippy_esm_default(button2, {
+          content: button2.textContent
         });
         const name = details.querySelector(".api-session-app-name");
         const desc = details.querySelector(".api-session-app-description");
@@ -35873,7 +35873,7 @@
       let stock_badges = title_wrap.querySelectorAll(".label");
       stock_badges.forEach((badge) => {
         if (badge.classList[1] == "user-status-None") return;
-        badge.classList.add("expand");
+        if (!page.mobile) badge.classList.add("expand");
         tippy_esm_default(badge, {
           theme: "badge",
           placement: "bottom",
@@ -35887,7 +35887,7 @@
     let badges = load_badges(page.name);
     if (badges) {
       badges.forEach((badge) => {
-        title_wrap.appendChild(create_badge(badge, false, true));
+        title_wrap.appendChild(create_badge(badge, false, !page.mobile));
       });
     }
     const badge_elements = Array.from(title_wrap.querySelectorAll(".label"));
@@ -36321,22 +36321,22 @@
           "obsession-buttons",
           "blend"
         );
-        buttons.forEach((button) => {
-          if (button.classList.contains("btn-sm")) {
-            button.classList = [];
-            button.classList.add("obsession-btn");
-            tippy_esm_default(button, {
-              content: button.textContent
+        buttons.forEach((button2) => {
+          if (button2.classList.contains("btn-sm")) {
+            button2.classList = [];
+            button2.classList.add("obsession-btn");
+            tippy_esm_default(button2, {
+              content: button2.textContent
             });
-            button.textContent = tl2(trans.obsess);
+            button2.textContent = tl2(trans.obsess);
           }
-          button.classList.add(
+          button2.classList.add(
             "btn",
             "view-item",
             "interact-item",
             "obsession-top-item"
           );
-          button_header.appendChild(button);
+          button_header.appendChild(button2);
         });
         wrap.appendChild(button_header);
         new_panel.appendChild(wrap);
@@ -36439,18 +36439,18 @@
           let button_header = html.node`
                     <div class="view-buttons playlist-home-buttons blend" />
                 `;
-          buttons.forEach((button) => {
-            if (button.getAttribute("data-analytics-action") == "create") {
-              button.classList.add("primary");
-              button.innerHTML = `${tl2(trans.new)} <div class="new-badge">${tl2(trans.beta)}</div>`;
+          buttons.forEach((button2) => {
+            if (button2.getAttribute("data-analytics-action") == "create") {
+              button2.classList.add("primary");
+              button2.innerHTML = `${tl2(trans.new)} <div class="new-badge">${tl2(trans.beta)}</div>`;
             }
-            button.classList.add(
+            button2.classList.add(
               "btn",
               "view-item",
               "interact-item",
               "playlist-home-top-item"
             );
-            button_header.appendChild(button);
+            button_header.appendChild(button2);
           });
           wrap.appendChild(button_header);
           new_panel.appendChild(wrap);
@@ -36594,10 +36594,10 @@
     render(page.structure.main, user_panel);
     refresh_all();
   }
-  function refresh_tracks(button, { quiet = false }) {
+  function refresh_tracks(button2, { quiet = false }) {
     let panel = page.structure.main.querySelector("#recent-tracks-section");
     panel.classList.remove("has-refreshed");
-    button.setAttribute("disabled", "");
+    button2.setAttribute("disabled", "");
     fetch(`${root}user/${page.name}/partial/recenttracks?ajax=1`).then(function(response) {
       console.log("returned", response, response.text);
       return response.text();
@@ -36605,7 +36605,7 @@
       let doc = new DOMParser().parseFromString(html3, "text/html");
       console.log("DOC", doc);
       let tracklist_panel = doc.querySelector(".chartlist");
-      button.removeAttribute("disabled");
+      button2.removeAttribute("disabled");
       if (!tracklist_panel) {
         if (!quiet) {
           status({
@@ -36697,10 +36697,10 @@
       );
     }
     if (form) {
-      let button = form.querySelector("button");
-      button.classList = "featured-item-manage";
-      button.setAttribute("data-type", "delete");
-      button.textContent = tl2(trans.remove);
+      let button2 = form.querySelector("button");
+      button2.classList = "featured-item-manage";
+      button2.setAttribute("data-type", "delete");
+      button2.textContent = tl2(trans.remove);
     }
     let panel = html.node`
         <section class="featured-item-panel">
@@ -39535,8 +39535,8 @@
     }
   }
   function request_changelog(open_after = true) {
-    let button = page.state.navigation_menu_news;
-    if (button) button.setAttribute("disabled", "");
+    let button2 = page.state.navigation_menu_news;
+    if (button2) button2.setAttribute("disabled", "");
     let xhr = new XMLHttpRequest();
     let url = `https://katelyynn.github.io/bleh/fm/changelog/changelog.json?${Math.random()}`;
     xhr.open("GET", url, true);
@@ -39567,7 +39567,7 @@
           }
         }
       }
-      if (button != null) button.removeAttribute("disabled");
+      if (button2 != null) button2.removeAttribute("disabled");
     };
     xhr.send();
   }
@@ -39967,7 +39967,7 @@
           rabbit_hole,
           html`
                     ${matches.length > 0 ? matches.map((item, index3) => () => {
-            let button = html.node`
+            let button2 = html.node`
                         <button class="dropdown-menu-clickable-item rabbit-hole-item" data-type=${item.type} onclick=${item.action} disabled=${item.disabled}>
                             <div class="info">
                                 <div class="text">${item.text}</div>
@@ -39976,12 +39976,12 @@
                         </button>
                     `;
             if (!item.disabled) {
-              button.addEventListener("mouseover", () => {
+              button2.addEventListener("mouseover", () => {
                 selected = index3;
                 rabbit_select(false, true);
               });
             }
-            return button;
+            return button2;
           }) : html.node`
                     <div class="loading-data-container">
                         <div class="loading-data-text failed">${tl2(trans.nothing_matches_your_search)}</div>
@@ -40006,22 +40006,22 @@
         return;
       }
       let buttons = rabbit_hole.querySelectorAll("button");
-      buttons.forEach((button, index3) => {
+      buttons.forEach((button2, index3) => {
         if (index3 == selected) {
-          button.setAttribute("aria-selected", "true");
+          button2.setAttribute("aria-selected", "true");
           if (!with_mouse) {
-            button.scrollIntoView({
+            button2.scrollIntoView({
               behavior: "smooth",
               block: "center"
             });
           }
           if (click) {
             input_box.querySelector("input").value = "";
-            button.click();
+            button2.click();
           }
           rabbit_tip(matches[index3].body);
         } else {
-          button.setAttribute("aria-selected", "false");
+          button2.setAttribute("aria-selected", "false");
         }
       });
       input_box.querySelector("input").focus();
@@ -41200,7 +41200,7 @@
                     ${Object.entries(values).map(
           ([key, val]) => {
             const icon2 = val.icon || key;
-            const button = html.node`
+            const button2 = html.node`
                             <button class="btn view-item" data-type=${icon2} data-value=${key} onclick=${() => {
               save_setting(id, key);
               buttons.forEach((btn) => {
@@ -41214,8 +41214,8 @@
                                 ${typeof val.name == "object" ? tl2(val.name) : val.name}
                             </button>
                         `;
-            buttons.push(button);
-            return button;
+            buttons.push(button2);
+            return button2;
           }
         )}
                 </div>
@@ -41280,7 +41280,7 @@
                         ${Object.entries(settings_store[id].values).map(
           ([key, val]) => {
             const icon2 = val.icon;
-            const button = html.node`
+            const button2 = html.node`
                                     <div class="setting v2 standalone" data-type="radio" data-value=${key} onclick=${() => {
               update_radio(key);
             }}>
@@ -41297,8 +41297,8 @@
                                         </div>
                                     </div>
                                 `;
-            buttons.push(button);
-            return button;
+            buttons.push(button2);
+            return button2;
           }
         )}
                     </div>
@@ -42213,12 +42213,12 @@
     }
   }
   function bleh_glacier_library_date() {
-    let button = page.structure.glacier.date_panel.querySelector(
+    let button2 = page.structure.glacier.date_panel.querySelector(
       ".date-range-picker-button.disclose-trigger:not([data-glacier-library-date])"
     );
-    if (!button) return;
-    button.setAttribute("data-glacier-library-date", "true");
-    console.info("button", button);
+    if (!button2) return;
+    button2.setAttribute("data-glacier-library-date", "true");
+    console.info("button", button2);
     let date_picker = page.structure.glacier.date_panel.querySelector(
       ".library-controls-datepicker"
     );
@@ -42227,7 +42227,7 @@
     );
     if (old_date_btn) old_date_btn.remove();
     let date_btn = html.node`
-        <button class="date-range-picker-button">${button.querySelector(".date-range-picker-button-inner").textContent}</button>
+        <button class="date-range-picker-button">${button2.querySelector(".date-range-picker-button-inner").textContent}</button>
     `;
     date_picker.appendChild(date_btn);
     let picker_content = page.structure.glacier.date_panel.querySelector(
@@ -43053,14 +43053,14 @@
     if (cta) {
       let wrappers = cta.querySelectorAll(":scope > *");
       wrappers.forEach((wrapper) => {
-        let button;
+        let button2;
         console.info("wrapper", wrapper);
         if (wrapper.classList[0] == "library-header-cta-item")
-          button = wrapper;
-        else button = wrapper.querySelector("button");
-        if (!button) button = wrapper.querySelector("span");
-        if (!button) return;
-        button.classList.add("btn", "view-item", "glacier-library-button");
+          button2 = wrapper;
+        else button2 = wrapper.querySelector("button");
+        if (!button2) button2 = wrapper.querySelector("span");
+        if (!button2) return;
+        button2.classList.add("btn", "view-item", "glacier-library-button");
         let tooltips = wrapper.querySelectorAll(
           ".user-library-controls-tooltip"
         );
@@ -43068,25 +43068,25 @@
           tooltip.parentElement.removeChild(tooltip);
         });
         view_buttons.appendChild(wrapper);
-        let action = button.getAttribute("data-analytics-action");
+        let action = button2.getAttribute("data-analytics-action");
         if (action) {
           if (action == "EditScrobbleOpen") {
-            button.textContent = tl2(trans.edit);
+            button2.textContent = tl2(trans.edit);
           } else if (action == "UnloveTrack" || action == "LoveTrack") {
             let listen_divider = document.createElement("div");
             listen_divider.classList.add("listen-divider");
             view_buttons.appendChild(listen_divider);
-            button = wrapper.querySelector("button:not(.btn)");
-            if (button)
-              button.classList.add(
+            button2 = wrapper.querySelector("button:not(.btn)");
+            if (button2)
+              button2.classList.add(
                 "btn",
                 "view-item",
                 "glacier-library-button"
               );
           }
         } else {
-          if (button.classList.contains("delete-icon")) {
-            button.textContent = tl2(trans.delete);
+          if (button2.classList.contains("delete-icon")) {
+            button2.textContent = tl2(trans.delete);
           }
         }
       });
@@ -44029,13 +44029,13 @@
     `;
     gallery_interactions.appendChild(save_btn);
   }
-  function update_image_bookmark(button, id) {
+  function update_image_bookmark(button2, id) {
     let bookmarked_images = JSON.parse(localStorage.getItem("bleh_bookmarked_images")) || {};
-    let is_bookmarked = button.getAttribute("data-bleh--image-is-bookmarked") == "true";
+    let is_bookmarked = button2.getAttribute("data-bleh--image-is-bookmarked") == "true";
     if (!bookmarked_images.hasOwnProperty(page.name))
       bookmarked_images[page.name] = [];
     if (is_bookmarked) {
-      button.setAttribute("data-bleh--image-is-bookmarked", "false");
+      button2.setAttribute("data-bleh--image-is-bookmarked", "false");
       let new_artist_bookmarks = [];
       for (let image in bookmarked_images[page.name]) {
         if (bookmarked_images[page.name][image] != id) {
@@ -44045,7 +44045,7 @@
       bookmarked_images[page.name] = new_artist_bookmarks;
       log(`image ${id} from ${page.name} removed from bookmarks`, "gallery");
     } else {
-      button.setAttribute("data-bleh--image-is-bookmarked", "true");
+      button2.setAttribute("data-bleh--image-is-bookmarked", "true");
       bookmarked_images[page.name].push(id);
       log(`image ${id} from ${page.name} added to bookmarks`, "gallery");
     }
@@ -44269,9 +44269,9 @@
       let bookmark_form = page.structure.side.querySelector(":scope > div");
       let view_all_panel = document.createElement("section");
       view_all_panel.classList.add("side-actions");
-      let button = bookmark_form.querySelector("button");
-      button.classList = "btn side-action";
-      button.setAttribute("data-type", "bookmark");
+      let button2 = bookmark_form.querySelector("button");
+      button2.classList = "btn side-action";
+      button2.setAttribute("data-type", "bookmark");
       view_all_panel.appendChild(bookmark_form);
       page.structure.side.appendChild(view_all_panel);
       let new_playlist = page.structure.side.querySelector("form");
@@ -46307,24 +46307,24 @@
     let header_actions = document.body.querySelector(".header-new-actions");
     interact_container.innerHTML = header_actions.innerHTML;
     let buttons = interact_container.querySelectorAll("button");
-    buttons.forEach((button) => {
-      if (button.classList[0] != "header-new-playlink")
-        button.classList.add("btn", "side-action");
-      else button.classList.add("dropdown-menu-clickable-item");
-      if (button.classList[0] == "header-new-more-button")
-        interact_container.removeChild(button.parentElement);
-      if (button.classList[1] == "header-new-love-button") {
-        button.setAttribute("data-type", "love");
-        button.appendChild(html.node`
+    buttons.forEach((button2) => {
+      if (button2.classList[0] != "header-new-playlink")
+        button2.classList.add("btn", "side-action");
+      else button2.classList.add("dropdown-menu-clickable-item");
+      if (button2.classList[0] == "header-new-more-button")
+        interact_container.removeChild(button2.parentElement);
+      if (button2.classList[1] == "header-new-love-button") {
+        button2.setAttribute("data-type", "love");
+        button2.appendChild(html.node`
                 <span>${tl2(trans.love_track)}</span>
             `);
       }
     });
     let links = interact_container.querySelectorAll("a");
-    links.forEach((button) => {
-      if (button.classList[0] != "header-new-playlink")
-        button.classList.add("btn", "side-action");
-      else button.classList.add("dropdown-menu-clickable-item");
+    links.forEach((button2) => {
+      if (button2.classList[0] != "header-new-playlink")
+        button2.classList.add("btn", "side-action");
+      else button2.classList.add("dropdown-menu-clickable-item");
     });
     let obsession_form = header_actions.querySelector(
       'form[action$="obsessions"]'
@@ -46863,7 +46863,7 @@
         </section>
     `);
   }
-  function create_listen_item(parent, { name, listens, link, avi, count = 0, button = false, katsune = false }, header_type) {
+  function create_listen_item(parent, { name, listens, link, avi, count = 0, button: button2 = false, katsune = false }, header_type) {
     if (!name) return;
     log(
       `creating listen item of ${name}, ${count}, ${listens}`,
@@ -46872,7 +46872,7 @@
       { avi, link }
     );
     let listen_item;
-    if (button) listen_item = html.node`<button />`;
+    if (button2) listen_item = html.node`<button />`;
     else listen_item = html.node`<a />`;
     listen_item.classList.add("btn", "listen-item");
     listen_item.setAttribute(
@@ -51449,12 +51449,12 @@
     let panel = page.structure.side.querySelector(".skip-to-list");
     panel.innerHTML = "";
     list.forEach((item) => {
-      let button = document.createElement("button");
-      button.classList.add("skip-to-item");
-      button.setAttribute("onclick", `_scroll_to_setting('${item.id}')`);
-      button.textContent = item.name;
-      if (item.type != null) button.setAttribute("data-type", item.type);
-      panel.appendChild(button);
+      let button2 = document.createElement("button");
+      button2.classList.add("skip-to-item");
+      button2.setAttribute("onclick", `_scroll_to_setting('${item.id}')`);
+      button2.textContent = item.name;
+      if (item.type != null) button2.setAttribute("data-type", item.type);
+      panel.appendChild(button2);
     });
   }
   unsafeWindow._scroll_to_setting = function(id) {
@@ -51563,10 +51563,10 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     update_flag_toggle(flag, container);
   };
   function update_flag_toggle(flag, container) {
-    let button = container.querySelector(".toggle");
-    if (!button) return;
+    let button2 = container.querySelector(".toggle");
+    if (!button2) return;
     let current_state = ff(flag);
-    button.setAttribute("aria-checked", !current_state);
+    button2.setAttribute("aria-checked", !current_state);
     settings.feature_flags[flag] = !current_state;
     document.documentElement.setAttribute(
       `data-ff--${flag}`,
@@ -52349,7 +52349,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     `;
     bubbles.re_render = () => {
       const adaptive = buttons.find(
-        (button) => button.getAttribute("data-theme-id") == "adaptive"
+        (button2) => button2.getAttribute("data-theme-id") == "adaptive"
       );
       const bubble = adaptive.querySelector(":scope > .bubble");
       render(
@@ -52388,14 +52388,14 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         }
         if (func) func(theme);
       }
-      buttons.forEach((button) => {
-        const type = button.getAttribute("data-theme-id");
+      buttons.forEach((button2) => {
+        const type = button2.getAttribute("data-theme-id");
         if (!settings.theme_schedule) {
-          button.setAttribute("aria-selected", settings.theme == type);
+          button2.setAttribute("aria-selected", settings.theme == type);
         } else if (type == "adaptive") {
-          button.setAttribute("aria-selected", true);
+          button2.setAttribute("aria-selected", true);
         } else {
-          button.setAttribute("aria-selected", false);
+          button2.setAttribute("aria-selected", false);
         }
       });
     }
@@ -52462,8 +52462,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     }
   }
   function lotus_request(type = "artist", send_notify = false, refresh_page = false) {
-    let button = document.body.querySelector('[onclick="_lotus_check()"]');
-    if (button != null) button.setAttribute("disabled", "");
+    let button2 = document.body.querySelector('[onclick="_lotus_check()"]');
+    if (button2 != null) button2.setAttribute("disabled", "");
     let xhr = new XMLHttpRequest();
     let url = `https://katelyynn.github.io/lotus/${type}.json?${Math.random()}`;
     xhr.open("GET", url, true);
@@ -52500,7 +52500,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         log(`${type} list cached until ${api_expire}`, "lotus");
       }
       set_storage(`lotus_${type}_expire`, api_expire);
-      if (button != null) button.removeAttribute("disabled");
+      if (button2 != null) button2.removeAttribute("disabled");
       if (refresh_page && page.type == "bleh_settings") render_setting_page("playback");
     };
     xhr.send();
@@ -53552,6 +53552,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       document.body.appendChild(style_warning);
       page.structure.style_warning = style_warning;
     }
+    const update_required = localStorage.getItem("bleh_update_required") || "false";
     page.state.quick_access_items = {
       home: {
         name: tl2(trans.home),
@@ -53901,8 +53902,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         </div>
     `;
     language_options.forEach((language_option) => {
-      const button = language_option.querySelector("button");
-      if (!button) {
+      const button2 = language_option.querySelector("button");
+      if (!button2) {
         log(
           "random last.fm error where this button is non existent",
           "language",
@@ -53916,15 +53917,15 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         );
         return;
       }
-      const key = button.getAttribute("name");
-      button.classList.remove("mimic-link");
-      button.classList.add(
+      const key = button2.getAttribute("name");
+      button2.classList.remove("mimic-link");
+      button2.classList.add(
         "dropdown-menu-clickable-item",
         "v2",
         "flex-button"
       );
       render(
-        button,
+        button2,
         html`
                 <div class="auth-dropdown-item-row">
                     <span class="auth-dropdown-item-left">
@@ -53932,7 +53933,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                             class="flag"
                             style="background-image: url(https://katelyynn.github.io/bleh/fm/flags/${key}.svg)"
                         />
-                        ${button.textContent}
+                        ${button2.textContent}
                     </span>
                     ${key in lang_info ? html.node`
                             <span class="auth-dropdown-item-right">
@@ -54043,38 +54044,38 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                         </div>
                         <div class="floating button-group">
                             ${() => {
-          let button;
+          let button2;
           let form2 = html.node`
                                     <form>
                                         <input type="hidden" name="csrfmiddlewaretoken" value="${token}">
-                                        <a class="dropdown-menu-clickable-item chibi" ref=${(el) => button = el} data-menu-item="logout" href="${root}logout">
+                                        <a class="dropdown-menu-clickable-item chibi" ref=${(el) => button2 = el} data-menu-item="logout" href="${root}logout">
                                             ${tl2(trans.logout)}
                                         </a>
                                     </form>
                                 `;
-          tippy_esm_default(button, {
+          tippy_esm_default(button2, {
             content: tl2(trans.logout)
           });
           return form2;
         }}
                             ${settings.starred_friend != "" ? () => {
-          let button = html.node`
+          let button2 = html.node`
                                     <a class="dropdown-menu-clickable-item chibi" data-type="starred_friend" data-is-shortcut="true" href="${root}user/${settings.starred_friend}">${settings.starred_friend}</a>
                                 `;
-          tippy_esm_default(button, {
+          tippy_esm_default(button2, {
             content: settings.starred_friend
           });
-          return button;
+          return button2;
         } : () => {
-          let button = html.node`
+          let button2 = html.node`
                                     <button class="dropdown-menu-clickable-item chibi" data-type="starred_friend" data-is-shortcut="false" onclick=${() => open_starred_friend_window()}>${tl2(trans.starred_friend.name)}</button>
                                 `;
-          tippy_esm_default(button, {
+          tippy_esm_default(button2, {
             content: tl2(
               trans.starred_friend.name
             )
           });
-          return button;
+          return button2;
         }}
                         </div>
                     </div>
@@ -54153,22 +54154,22 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                   match2();
                 }
                 buttons.forEach(
-                  (button) => {
-                    const type = button.getAttribute(
+                  (button2) => {
+                    const type = button2.getAttribute(
                       "data-bleh-theme"
                     );
                     if (!settings.theme_schedule) {
-                      button.setAttribute(
+                      button2.setAttribute(
                         "aria-selected",
                         settings.theme == type
                       );
                     } else if (type == "adaptive") {
-                      button.setAttribute(
+                      button2.setAttribute(
                         "aria-selected",
                         true
                       );
                     } else {
-                      button.setAttribute(
+                      button2.setAttribute(
                         "aria-selected",
                         false
                       );
@@ -54426,6 +54427,17 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         theme: "mobile",
         content: html.node`
                         <div class="window-menu-items">
+                            <form>
+                                <input type="hidden" name="csrfmiddlewaretoken" value="${token}">
+                                <a class="dropdown-menu-clickable-item" ref=${(el) => button = el} data-menu-item="logout" href="${root}logout">
+                                    ${tl2(trans.logout)}
+                                </a>
+                            </form>
+                            <button class="dropdown-menu-clickable-item" data-menu-item="news" onclick=${() => {
+          news();
+        }}>
+                                ${tl2(trans.news)}
+                            </button>
                             ${settings.navigation_items.map((val) => {
           let elem;
           const formal = page.state.quick_access_items[val];
@@ -54482,7 +54494,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       const btn = html.node`
                     <a class="btn mobile-control" aria-checked=${page.type == "inbox"} data-type="inbox">
                         ${tl2(trans.inbox)}
-                        ${inbox_count > 0 || notif_count > 0 ? html.node`<div class="notification-count-badge"></div>` : ""}
+                        ${count > 0 ? html.node`<div class="notification-count-badge"></div>` : ""}
                     </a>
                 `;
       tippy_esm_default(btn, {
@@ -54514,6 +54526,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     }}
             <a class="btn mobile-control" aria-checked=${page.type == "settings" || page.type == "bleh_settings"} data-menu-item="settings" href="${root}bleh">
                 ${tl2(trans.settings)}
+                ${update_required === "true" ? html.node`<div class="notification-count-badge"></div>` : ""}
             </a>
         </div>
     `);
@@ -56744,8 +56757,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       page.structure.side.appendChild(side_actions);
       let form = document.body.querySelector(".attendance-control");
       let buttons = form.querySelectorAll("button");
-      buttons.forEach((button) => {
-        button.classList.add("btn", "side-action");
+      buttons.forEach((button2) => {
+        button2.classList.add("btn", "side-action");
       });
       side_actions.appendChild(form);
       let main_panel = page.structure.main.querySelector(".event-summary-with-poster");
@@ -56874,11 +56887,11 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     let panel = page.structure.main.querySelector("section");
     filters.classList = "view-buttons";
     let buttons = filters.querySelectorAll(".events-filter > button");
-    buttons.forEach((button) => {
-      button.classList.add("btn", "view-item");
-      if (button.classList.contains("disclose-trigger")) {
-        button.classList.remove("disclose-trigger");
-        button.classList.add("select-button");
+    buttons.forEach((button2) => {
+      button2.classList.add("btn", "view-item");
+      if (button2.classList.contains("disclose-trigger")) {
+        button2.classList.remove("disclose-trigger");
+        button2.classList.add("select-button");
       }
     });
     panel.insertBefore(filters, panel.firstElementChild);
@@ -57182,8 +57195,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         );
         actions.forEach((action) => {
           let buttons2 = action.querySelectorAll("button, a");
-          buttons2.forEach((button) => {
-            button.classList.add("shout-action-button", "see-more");
+          buttons2.forEach((button2) => {
+            button2.classList.add("shout-action-button", "see-more");
           });
         });
         const form = shout.querySelector(".vote-button-toggle");
@@ -57198,12 +57211,12 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         unvote_button.addEventListener("click", (e) => vote_button());
         const menu = shout.querySelector(".shout-more-actions-menu");
         const buttons = menu.querySelectorAll("button");
-        buttons.forEach((button) => {
-          const type = button.classList[1];
+        buttons.forEach((button2) => {
+          const type = button2.classList[1];
           if (type == "more-item--delete") {
-            button.textContent = tl2(trans.delete);
+            button2.textContent = tl2(trans.delete);
           } else if (type == "more-item--report") {
-            button.textContent = tl2(trans.report);
+            button2.textContent = tl2(trans.report);
           }
         });
         menu.insertBefore(
@@ -57292,12 +57305,12 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
   }
   function shout_send(send_button) {
     if (!send_button) return;
-    let button = send_button.querySelector(".btn-post-shout");
-    if (!button) return;
-    button.classList.add("btn-send-shout-generic");
-    button.textContent = tl2(trans.send);
+    let button2 = send_button.querySelector(".btn-post-shout");
+    if (!button2) return;
+    button2.classList.add("btn-send-shout-generic");
+    button2.textContent = tl2(trans.send);
     if (page.mobile) return;
-    tippy_esm_default(button, {
+    tippy_esm_default(button2, {
       content: tl2(trans.send_quickly_with).replace(
         "{kbd}",
         keybind(["\u2318", "\u23CE"]).outerHTML

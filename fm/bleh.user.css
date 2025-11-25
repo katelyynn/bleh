@@ -768,7 +768,7 @@
             --cards-sidebar-width: 100vw;
             --card-shadow: unset;
 
-            --header-avatar-size: 200px;
+            --header-avatar-size: 120px;
 
             --max-tooltip-width: 100vw;
         }
@@ -2746,8 +2746,11 @@
                     background-position: 0 -60px !important;
                     opacity: 0.9;
 
-                    border-top-left-radius: var(--card-radius);
-                    border-top-right-radius: var(--card-radius);
+                    @media (min-width: 981px) {
+                        border-top-left-radius: var(--card-radius);
+                        border-top-right-radius: var(--card-radius);
+                    }
+
                     pointer-events: none;
 
                     /* fix for no-data-message overriding and stuff */
@@ -11595,6 +11598,11 @@
             .bleh-modal-subtitle {
                 color: hsl(var(--c3));
                 line-height: 20px;
+            }
+
+            @media (max-width: 980px) {
+                margin-left: calc(var(--modal-close-size) + 10px);
+                justify-content: center;
             }
         }
 
@@ -22772,6 +22780,9 @@
                 }*/
 
                 .info-side {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
                     flex: unset;
 
                     h2,
@@ -23225,9 +23236,14 @@
 
             .header-title-secondary {
                 margin-top: 4px !important;
+                flex-wrap: wrap;
 
                 @media (max-width: 980px) {
                     justify-content: center;
+
+                    & > .header-username {
+                        flex-basis: 100%;
+                    }
                 }
             }
 
@@ -27158,6 +27174,7 @@
 
         .forms {
             display: flex;
+            justify-content: center;
             gap: var(--card-gap);
         }
 
@@ -28492,6 +28509,10 @@
 
         width: calc(((var(--font-item-size) + var(--gap)) * 4) - var(--gap));
 
+        @media (max-width: 450px) {
+            width: calc(((var(--font-item-size) + var(--gap)) * 3) - var(--gap));
+        }
+
         & > .font-selection {
             height: 50px;
 
@@ -28529,6 +28550,10 @@
 
         .font-options + & {
             margin-top: var(--card-padding);
+        }
+
+        @media (max-width: 980px) {
+            text-align: center;
         }
     }
 
