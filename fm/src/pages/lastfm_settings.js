@@ -819,6 +819,7 @@ function patch_settings_profile_panel(token, update_picture) {
         );
 
         let accent_edit;
+        render(accent_setting, html``);
         render(accent_setting, html`
             <div class="heading">
                 <h5>${tl(trans.profile_accent.name)}<span class="new-badge sponsor-related">${tl(trans.sponsors_only)}</span></h5>
@@ -977,6 +978,7 @@ function patch_settings_profile_panel(token, update_picture) {
         if (font_setting) {
             let font_edit;
             let font_tile;
+            render(font_setting, html``);
             render(font_setting, html`
                 <div class="heading">
                     <h5>${tl(trans.profile_font.name)}<span class="new-badge sponsor-related">${tl(trans.sponsors_only)}</span><span class="new-badge new">${tl(trans.new)}</span></h5>

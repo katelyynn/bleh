@@ -17,7 +17,7 @@
     @import url('https://fonts.googleapis.com/css2?family=Balsamiq+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Cherry+Bomb+One&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Lilita+One&family=Rokkitt:ital,wght@0,100..900;1,100..900&family=Single+Day&family=UnifrakturCook:wght@700&display=swap');
 
     @font-face {
-        font-family: 'DinkieBitmap 9px';
+        font-family: 'Zpix';
         src: url('https://katelyynn.github.io/needy-streamer-overdose-font/fonts/DinkieBitmap9px.woff') format('woff');
         font-weight: 500;
         font-style: normal;
@@ -799,7 +799,7 @@
         --menu-shadow: 0 20px 52px 18px hsla(var(--b7), 0.4);
         --overlay-shadow: 0 4px 16px 3px hsla(var(--b7), 0.5);
         --menu-overlay-shadow: 0 -250px 10px 100px hsla(var(--b6), 70%);
-        --avatar-shadow: 3px 6px 15px 10px hsla(var(--b7), 0.05);
+        --avatar-shadow: 0 6px 15px 10px hsla(var(--b7), 0.05);
         --standout-shadow: 0 6px 20px 7px hsla(var(--b7), 0.2);
         --subtle-shadow: 0 6px 20px 2px hsla(var(--b7), 0.2);
 
@@ -902,7 +902,7 @@
 
             --card-border: inset 0 0 0 1px hsla(var(--b4), 0.7) !important;
             --overlay-shadow: var(--menu-shadow);
-            --standout-shadow: 3px 6px 20px 7px hsla(var(--b7), 0.06);
+            --standout-shadow: 0 6px 20px 7px hsla(var(--b7), 0.06);
             --subtle-shadow: 0 3px 13px hsla(var(--b7), 0.04);
 
             --interactable-outer: 0 3px 2px hsl(var(--b7), 3%);
@@ -28586,6 +28586,9 @@
         --custom-font: 'Google Sans Code', var(--font);
         --custom-font-size-multiplier: 0.85;
     }
+    [data-font="zpix"] {
+        --custom-font: 'Zpix', var(--font);
+    }
 
     [data-font-style="pop"] {
         --custom-font-style-shadow: 0 4px 0 hsl(var(--h3));
@@ -29483,7 +29486,7 @@
     }
 
     .overdose {
-        font-family: 'DinkieBitmap 9px';
+        font-family: 'Zpix';
         font-size: 20px;
         line-height: 20px;
         height: 20px;

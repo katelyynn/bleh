@@ -1840,6 +1840,7 @@ export function prepare_music() {
         balsamiq: 'Balsamiq Sans',
         crimson: 'Crimson Text',
         rokkitt: 'Rokkitt',
-        code: 'Google Sans Code'
+        code: 'Google Sans Code',
+        zpix: 'Zpix'
     };
 }
