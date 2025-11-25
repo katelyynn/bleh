@@ -5980,7 +5980,7 @@ export const trans = {
         de: 'Wähle oben einen Zeitraum',
         es: 'Elige una duración arriba',
         it: 'Seleziona un intervallo sopra',
-        pt: 'Escolha um prazo acima',
+        pt: 'Escolha um período acima',
         sv: 'Välj en tidsram ovan',
         ru: 'Выберите временной интервал выше'
     },
@@ -6664,7 +6664,7 @@ export const trans = {
         it: 'traduzione in {l} di {u}',
         sv: 'Svensk översättning av {u}',
         ru: 'Перевод {l} от {u}',
-        pt: 'Tradução {l} por {u}'
+        pt: 'Tradução em {l} por {u}'
     },
     view_source: {
         en: 'View source',
