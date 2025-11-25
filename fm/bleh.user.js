@@ -59598,7 +59598,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       count: {
         en: "{c} listens",
         de: "{c} Scrobbles",
-        es: "{c] scrobblings",
+        es: "{c} scrobblings",
         it: "{c} scrobbling",
         pt: "{c} scrobbles",
         sv: "{c} skrobblingar",

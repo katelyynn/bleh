@@ -944,7 +944,7 @@ export const trans = {
         count: {
             en: '{c} listens',
             de: '{c} Scrobbles',
-            es: '{c] scrobblings',
+            es: '{c} scrobblings',
             it: '{c} scrobbling',
             pt: '{c} scrobbles',
             sv: '{c} skrobblingar',
@@ -1262,7 +1262,7 @@ export const trans = {
         // the space on the end is intentional
         en: 'Your theme preference will be either {day} or {night}, based on your system. ',
         de: 'Dein bevorzugtes Farbschema wird entweder {day} oder {night} sein, basierend auf deinem System. ',
-        es: 'El aspecto elegido será {day] o {night}, basándose en tu dispositivo. ',
+        es: 'El aspecto elegido será {day} o {night}, basándose en tu dispositivo. ',
         it: 'Il tuo tema selezionato sarà {day} o {night}, in base al tuo tema di sistema. ',
         pt: 'Sua preferência de tema será {day} ou {night}, com base no seu sistema. ',
         sv: 'Ditt föredragna tema blir antigen {day} eller {night}, beroende på ditt system. ',
@@ -5958,7 +5958,7 @@ export const trans = {
     last_count_days: {
         en: 'Last {c} days',
         de: 'Letzte {c} Tage',
-        es: 'Últimos {c] días',
+        es: 'Últimos {c} días',
         it: 'Ultimi {c} giorni',
         pt: 'Últimos {c} dias',
         ja: '過去 {c} 日間',
