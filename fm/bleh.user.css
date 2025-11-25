@@ -28515,9 +28515,10 @@
     }
 
     .font-options-header {
-        font-size: 16px;
-        line-height: 20px;
+        font-size: var(--font-size);
+        line-height: var(--line-height);
         margin-bottom: 10px;
+        width: 100%;
 
         .font-options + & {
             margin-top: var(--card-padding);
@@ -28579,9 +28580,8 @@
     [data-font="cherry"] {
         --custom-font: 'Cherry Bomb One', var(--font);
         --custom-font-weight: 300 !important;
-        --custom-font-align: -4px;
-        --custom-font-align-mini: -1px;
-        --custom-font-size-multiplier: 1.12;
+        --custom-font-size-multiplier: 1.04;
+        --custom-font-align: -1px;
     }
     [data-font="rokkitt"] {
         --custom-font: 'Rokkitt', var(--font);
