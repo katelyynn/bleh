@@ -28505,7 +28505,6 @@
                 --bg: hsla(var(--h4), 20%);
                 --bg-hov: hsla(var(--h4), 30%);
                 --bg-atv: hsla(var(--h4), 40%);
-                --col: hsl(var(--l2-c-theme-switch));
                 --shadow: inset 0 0 0 1px hsl(var(--l3-c), 30%);
             }
 
@@ -28607,10 +28606,18 @@
         --stroke: hsl(var(--h3));
         --stroke-outer: hsl(var(--h4), 60%);
 
+        --size: 3px;
+        --size-n: calc(-1 * var(--size));
+
+        --size-m: 2px;
+        --size-mn: calc(-1 * var(--size-m));
+
         --custom-font-style-shadow:
-            0 3px 0 var(--stroke), 0 -3px 0 var(--stroke), 3px 0 0 var(--stroke), -3px 0 0 var(--stroke),
-            3px 3px 0 var(--stroke-outer), -3px -3px 0 var(--stroke-outer), -3px 3px 0 var(--stroke-outer), 3px -3px 0 var(--stroke-outer);
-        --custom-font-style-shadow-mini: 0 2px 0 hsl(var(--h3));
+            0 var(--size) 0 var(--stroke), 0 var(--size-n) 0 var(--stroke), var(--size) 0 0 var(--stroke), var(--size-n) 0 0 var(--stroke),
+            var(--size) var(--size) 0 var(--stroke-outer), var(--size-n) var(--size-n) 0 var(--stroke-outer), var(--size-n) var(--size) 0 var(--stroke-outer), var(--size) var(--size-n) 0 var(--stroke-outer);
+        --custom-font-style-shadow-mini:
+            0 var(--size-m) 0 var(--stroke), 0 var(--size-mn) 0 var(--stroke), var(--size-m) 0 0 var(--stroke), var(--size-mn) 0 0 var(--stroke),
+            var(--size-m) var(--size-m) 0 var(--stroke-outer), var(--size-mn) var(--size-mn) 0 var(--stroke-outer), var(--size-mn) var(--size-m) 0 var(--stroke-outer), var(--size-m) var(--size-mn) 0 var(--stroke-outer);
     }
     [data-font-style="glow"] {
         --custom-font-style-shadow: 0 0 20px hsl(var(--h4)), 0 0 20px hsl(var(--h4));
