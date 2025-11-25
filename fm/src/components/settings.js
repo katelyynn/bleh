@@ -1205,6 +1205,7 @@ export function save_setting(id, value) {
             `data-bleh--theme_type`,
             settings.theme_type
         );
+
         chart_reflow();
     }
 

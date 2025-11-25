@@ -1,5 +1,5 @@
 {
-    "2025.1124": {
+    "2025.1125": {
         "type": "minor",
         "force": false,
         "bio": "# Translations\n- __Español translation by @soleilth__\n- __Italiano translation by @cutotopo__\n- __Updated Português translation by @urwq__\n\n# Music\n- __Date selectors in your library and minis now show years from your account creation to the current year rather than only current and previous__\n\n# Seasonal\n- Fixed snow appearing on collages\n- Improved snow visuals in Light mode\n- Removed snow glow effects for default performance\n    - The option to disable it is now gone too\n\n# Profiles\n- Removed delay in opening menu caused by loading profile cache\n- Fixed text overflow if your custom display name was too long\n\n# oracle\n- Fixed the way some albums are loaded, notably Icedancer by Bladee\n\n# Other\n- Fixed languages not updating immediately\n- Fixed unintended gap on upload image page\n- Fixed some minor mobile inconsistencies\n- Fixed badges not saving to cache if you received a new badge",

@@ -51737,20 +51737,22 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         if (colour2.type == "default" && stored_season.id != "none" && exclusives[stored_season.id]) {
           swatch_group.appendChild(create_swatch(type, colour2));
           exclusives[stored_season.id].forEach((exclusive) => {
-            swatch_group.appendChild(create_swatch(type, exclusive));
+            swatch_group.appendChild(create_swatch(type, exclusive, true));
           });
           return;
         }
         swatch_group.appendChild(create_swatch(type, colour2));
       });
     }
-    function create_swatch(type, colour2) {
+    function create_swatch(type, colour2, exclusive = false) {
       if (colour2.requires_flag && version.feature_flags.hasOwnProperty(colour2.requires_flag)) {
         if (!ff(colour2.requires_flag)) return html.node``;
       }
       if (colour2.type == "avatar" && !auth.name) return html.node``;
       let text4;
+      let label;
       if (colour2.label) text4 = tl2(colour2.label);
+      if (exclusive) label = tl2(trans.seasonal.exclusive);
       if (!colour2.type) colour2.type = "colour";
       if (!colour2.displays && colour2.sets) colour2.displays = colour2.sets;
       let blob;
@@ -51822,9 +51824,19 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         text4 = tl2(trans.seasonal.name);
       }
       text_elem.textContent = text4;
-      tippy_esm_default(swatch, {
-        content: text4
-      });
+      if (!label) {
+        tippy_esm_default(swatch, {
+          content: text4
+        });
+      } else {
+        tippy_esm_default(swatch, {
+          theme: "generic",
+          content: html.node`
+                    <span>${text4}</span>
+                    <small>${label}</small>
+                `
+        });
+      }
       return swatch;
     }
   }
@@ -60252,6 +60264,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           pt: "V\xE9spera de Natal",
           ru: "\u0421\u043E\u0447\u0435\u043B\u044C\u043D\u0438\u043A"
         }
+      },
+      exclusive: {
+        en: "Limited time"
       }
     },
     new_season: {
@@ -68930,7 +68945,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
   // src/build/build.json
   var build_default = {
     brand: "bleh",
-    build: "2025.1111",
+    build: "2025.1125",
     sku: "layla",
     bio: "bleh!!! ^-^",
     author: "katelyn",

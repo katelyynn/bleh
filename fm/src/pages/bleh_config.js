@@ -2238,7 +2238,7 @@ export function display_colour_presets() {
                 swatch_group.appendChild(create_swatch(type, colour));
 
                 exclusives[stored_season.id].forEach(exclusive => {
-                    swatch_group.appendChild(create_swatch(type, exclusive));
+                    swatch_group.appendChild(create_swatch(type, exclusive, true));
                 });
 
                 return;
@@ -2248,7 +2248,7 @@ export function display_colour_presets() {
         });
     }
 
-    function create_swatch(type, colour) {
+    function create_swatch(type, colour, exclusive = false) {
         if (
             colour.requires_flag &&
             version.feature_flags.hasOwnProperty(colour.requires_flag)
@@ -2259,7 +2259,10 @@ export function display_colour_presets() {
         if (colour.type == 'avatar' && !auth.name) return html.node``;
 
         let text;
+        let label;
         if (colour.label) text = tl(colour.label);
+
+        if (exclusive) label = tl(trans.seasonal.exclusive);
 
         if (!colour.type) colour.type = 'colour';
 
@@ -2348,9 +2351,19 @@ export function display_colour_presets() {
 
         text_elem.textContent = text;
 
-        tippy(swatch, {
-            content: text
-        });
+        if (!label) {
+            tippy(swatch, {
+                content: text
+            });
+        } else {
+            tippy(swatch, {
+                theme: 'generic',
+                content: html.node`
+                    <span>${text}</span>
+                    <small>${label}</small>
+                `
+            });
+        }
 
         return swatch;
     }

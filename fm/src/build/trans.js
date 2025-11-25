@@ -1607,6 +1607,9 @@ export const trans = {
                 pt: 'Véspera de Natal',
                 ru: 'Сочельник'
             }
+        },
+        exclusive: {
+            en: 'Limited time'
         }
     },
     new_season: {
