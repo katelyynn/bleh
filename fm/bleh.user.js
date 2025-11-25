@@ -34573,7 +34573,7 @@
                                             </div>
                                             <h4 class="font-options-header">${tl2(trans.font_style)}</h4>
                                             <div class="font-options">
-                                                ${["solid", "pop", "glow"].map((style) => {
+                                                ${["solid", "pop", "out", "glow"].map((style) => {
               const elem = html.node`
                                                         <button class="font-selection font-style" data-font-style=${style} aria-checked=${style == font_style} onclick=${() => {
                 font_style = style;
@@ -63555,6 +63555,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         sv: "Poppande",
         ru: "\u042F\u0440\u043A\u0438\u0439",
         pt: "Pop"
+      },
+      out: {
+        en: "Outline"
       },
       glow: {
         en: "Glow",

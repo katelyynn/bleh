@@ -28461,13 +28461,15 @@
         padding: 20px 0 40px;
 
         color: hsl(var(--c1));
-        line-height: 34px;
+        line-height: 40px;
         font-weight: var(--custom-font-weight, var(--font-weight-bold));
         cursor: default;
         user-select: none;
 
         & > span {
-            font-size: calc(34px * var(--custom-font-size-multiplier, 1));
+            position: relative;
+            font-size: calc(26px * var(--custom-font-size-multiplier, 1));
+            top: var(--custom-font-align, 0) !important;
         }
 
         height: 94px;
@@ -28480,7 +28482,7 @@
 
         --font-item-size: 90px;
 
-        width: calc(((var(--font-item-size) + var(--item-list-gap)) * 3) - var(--item-list-gap));
+        width: calc(((var(--font-item-size) + var(--item-list-gap)) * 4) - var(--item-list-gap));
 
         & > .font-selection {
             height: 60px;
@@ -28503,8 +28505,8 @@
                 --bg: hsla(var(--h4), 20%);
                 --bg-hov: hsla(var(--h4), 30%);
                 --bg-atv: hsla(var(--h4), 40%);
-                --col: hsl(var(--l3-c));
-                --shadow: inset 0 0 0 1px hsl(var(--l3-c));
+                --col: hsl(var(--l2-c-theme-switch));
+                --shadow: inset 0 0 0 1px hsl(var(--l3-c), 30%);
             }
 
             &.font-style {
@@ -28519,7 +28521,7 @@
         margin-bottom: 10px;
 
         .font-options + & {
-            margin-top: var(--card-gap);
+            margin-top: var(--card-padding);
         }
     }
 
@@ -28558,6 +28560,7 @@
     [data-font="lilita"] {
         --custom-font: 'Lilita One', var(--font);
         --custom-font-weight: 300 !important;
+        --custom-font-align: 1px;
     }
     [data-font="single"] {
         --custom-font: 'Single Day', var(--font);
@@ -28566,6 +28569,8 @@
     }
     [data-font="crimson"] {
         --custom-font: 'Crimson Text', var(--font);
+        --custom-font-size-multiplier: 1.1;
+        --custom-font-align: 1px;
     }
     [data-font="balsamiq"] {
         --custom-font: 'Balsamiq Sans', var(--font);
@@ -28581,17 +28586,30 @@
     }
     [data-font="rokkitt"] {
         --custom-font: 'Rokkitt', var(--font);
+        --custom-font-size-multiplier: 1.15;
+        --custom-font-align: 3px;
     }
     [data-font="code"] {
         --custom-font: 'Google Sans Code', var(--font);
         --custom-font-size-multiplier: 0.85;
+        --custom-font-align: 1px;
     }
     [data-font="zpix"] {
         --custom-font: 'Zpix', var(--font);
+        --custom-font-size-multiplier: 0.95;
     }
 
     [data-font-style="pop"] {
-        --custom-font-style-shadow: 0 4px 0 hsl(var(--h3));
+        --custom-font-style-shadow: 0 3px 0 hsl(var(--h3));
+        --custom-font-style-shadow-mini: 0 2px 0 hsl(var(--h3));
+    }
+    [data-font-style="out"] {
+        --stroke: hsl(var(--h3));
+        --stroke-outer: hsl(var(--h4), 60%);
+
+        --custom-font-style-shadow:
+            0 3px 0 var(--stroke), 0 -3px 0 var(--stroke), 3px 0 0 var(--stroke), -3px 0 0 var(--stroke),
+            3px 3px 0 var(--stroke-outer), -3px -3px 0 var(--stroke-outer), -3px 3px 0 var(--stroke-outer), 3px -3px 0 var(--stroke-outer);
         --custom-font-style-shadow-mini: 0 2px 0 hsl(var(--h3));
     }
     [data-font-style="glow"] {

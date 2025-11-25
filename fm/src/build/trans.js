@@ -4894,6 +4894,9 @@ export const trans = {
             ru: 'Яркий',
             pt: 'Pop'
         },
+        out: {
+            en: 'Outline'
+        },
         glow: {
             en: 'Glow',
             es: 'Brillo',
