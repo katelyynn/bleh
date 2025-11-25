@@ -15323,20 +15323,26 @@
         }
     }
 
-    .responsive-table td,
-    .responsive-table th {
-        box-shadow: none;
-        border-bottom: 1px solid hsl(var(--b4));
-        padding: 7px 12px;
-        color: hsl(var(--c3));
-        font-weight: var(--font-weight);
-    }
+    .responsive-table {
+        tr {
+            box-shadow: unset;
+        }
 
-    .responsive-table td {
-        color: hsl(var(--c2));
-    }
-    .responsive-table tr:nth-child(2n) td {
-        background-color: hsla(var(--b4), 40%);
+        tr:nth-child(2n) td {
+            background-color: hsla(var(--b4), 40%);
+        }
+
+        td, th {
+            box-shadow: none;
+            border-bottom: 1px solid hsl(var(--b4));
+            padding: 7px 12px;
+            color: hsl(var(--c3));
+            font-weight: var(--font-weight);
+        }
+
+        td {
+            color: hsl(var(--c2));
+        }
     }
 
     /*     EDIT WIKI     */
