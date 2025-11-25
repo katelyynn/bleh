@@ -58711,7 +58711,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     pt: {
       name: "Portugu\xEAs",
       by: ["ArthRMH", "auwora", "fr0r", "urwq"],
-      last_updated: "2025-11-15"
+      last_updated: "2025-11-25"
     },
     sv: {
       name: "Svenska",
@@ -58845,7 +58845,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           en: "Alum",
           es: "Graduado",
           sv: "Alumn",
-          ru: "\u0412\u044B\u043F\u0443\u0441\u043A\u043D\u0438\u043A"
+          ru: "\u0412\u044B\u043F\u0443\u0441\u043A\u043D\u0438\u043A",
+          pt: "Formado"
         },
         reason: {
           en: "Former member of Last.fm",
@@ -59935,7 +59936,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       // the space on the end is intentional
       en: "Your theme preference will be either {day} or {night}, based on your system. ",
       de: "Dein bevorzugtes Farbschema wird entweder {day} oder {night} sein, basierend auf deinem System. ",
-      es: "El aspecto elegido ser\xE1 {day] o {night}, bas\xE1ndose en tu dispositivo. ",
+      es: "El aspecto elegido ser\xE1 {day} o {night}, bas\xE1ndose en tu dispositivo. ",
       it: "Il tuo tema selezionato sar\xE0 {day} o {night}, in base al tuo tema di sistema. ",
       pt: "Sua prefer\xEAncia de tema ser\xE1 {day} ou {night}, com base no seu sistema. ",
       sv: "Ditt f\xF6redragna tema blir antigen {day} eller {night}, beroende p\xE5 ditt system. ",
@@ -60283,7 +60284,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         }
       },
       exclusive: {
-        en: "Limited time"
+        en: "Limited time",
+        pt: "Tempo limitado"
       }
     },
     new_season: {
@@ -61961,19 +61963,24 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       ru: "\u041D\u0430\u0436\u043C\u0438\u0442\u0435, \u0447\u0442\u043E\u0431\u044B \u0441\u043A\u043E\u043F\u0438\u0440\u043E\u0432\u0430\u0442\u044C"
     },
     paste: {
-      en: "Paste"
+      en: "Paste",
+      pt: "Colar"
     },
     paste_text: {
-      en: "Paste text"
+      en: "Paste text",
+      pt: "Colar texto"
     },
     undo: {
-      en: "Undo"
+      en: "Undo",
+      pt: "Desfazer"
     },
     redo: {
-      en: "Redo"
+      en: "Redo",
+      pt: "Refazer"
     },
     pasted_text: {
-      en: "Pasted text"
+      en: "Pasted text",
+      pt: "Texto colado"
     },
     wiki_standard_tracks: {
       en: "Track titles should be wrapped in quotation marks (\u201C \u201D)",
@@ -64630,7 +64637,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     last_count_days: {
       en: "Last {c} days",
       de: "Letzte {c} Tage",
-      es: "\xDAltimos {c] d\xEDas",
+      es: "\xDAltimos {c} d\xEDas",
       it: "Ultimi {c} giorni",
       pt: "\xDAltimos {c} dias",
       ja: "\u904E\u53BB {c} \u65E5\u9593",
@@ -64652,7 +64659,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       de: "W\xE4hle oben einen Zeitraum",
       es: "Elige una duraci\xF3n arriba",
       it: "Seleziona un intervallo sopra",
-      pt: "Escolha um prazo acima",
+      pt: "Escolha um per\xEDodo acima",
       sv: "V\xE4lj en tidsram ovan",
       ru: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u0432\u0440\u0435\u043C\u0435\u043D\u043D\u043E\u0439 \u0438\u043D\u0442\u0435\u0440\u0432\u0430\u043B \u0432\u044B\u0448\u0435"
     },
@@ -65336,7 +65343,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "traduzione in {l} di {u}",
       sv: "Svensk \xF6vers\xE4ttning av {u}",
       ru: "\u041F\u0435\u0440\u0435\u0432\u043E\u0434 {l} \u043E\u0442 {u}",
-      pt: "Tradu\xE7\xE3o {l} por {u}"
+      pt: "Tradu\xE7\xE3o em {l} por {u}"
     },
     view_source: {
       en: "View source",
@@ -66437,7 +66444,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         it: "Pixel",
         sv: "Pixel",
         ru: "\u041F\u0438\u043A\u0441\u0435\u043B\u044C",
-        de: "Pixel"
+        de: "Pixel",
+        pt: "Pixel"
       },
       body: {
         en: "Guess the album from its pixelated artwork and clues",
@@ -67527,31 +67535,38 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     translator: {
       name: {
-        en: "Show translator tools"
+        en: "Show translator tools",
+        pt: "Mostrar ferramentas de tradu\xE7\xE3o"
       },
       body: {
-        en: "View expanded details on all languages for use when translating"
+        en: "View expanded details on all languages for use when translating",
+        pt: "Veja detalhes expandidos sobre todos os idiomas para uso ao traduzir"
       }
     },
     translate: {
-      en: "Translate"
+      en: "Translate",
+      pt: "Traduza"
     },
     translation_key: {
       // a key such as 'you_have_new_badges' above
-      en: "Translation key"
+      en: "Translation key",
+      pt: "Chave de tradu\xE7\xE3o"
     },
     original: {
-      en: "Original"
+      en: "Original",
+      pt: "Original"
     },
     user_is_listening_to: {
       // (claire) is listening to
       // (song name)
-      en: "{u} is listening to"
+      en: "{u} is listening to",
+      pt: "{u} est\xE1 ouvindo"
     },
     user_listened_time: {
       // (claire) listened (5 hours ago)
       // (song name)
-      en: "{u} listened {time}"
+      en: "{u} listened {time}",
+      pt: "{u} ouviu h\xE1 {time}"
     }
   };
   function tl2(key, replacements = {}) {
