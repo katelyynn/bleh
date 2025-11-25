@@ -11,7 +11,7 @@ import { setting } from './settings.js';
 import { input } from './input.js';
 import { auth, page, root } from '../build/page.js';
 import { notify, notify_rm } from './notify.js';
-import { clean_number, pad2, sanitise } from '../build/tools.js';
+import { clean_number, pad2, sanitise, year_from_date } from '../build/tools.js';
 import { log } from '../build/log.js';
 import { music_grids } from './music_grid.js';
 import { settings } from '../build/config.js';
@@ -21,6 +21,7 @@ import { render_user } from '../pages/minis.js';
 import { redirect } from './music.js';
 import tippy from 'tippy.js';
 import html2canvas from 'html2canvas-pro';
+import { load_profile_cache_externally } from '../pages/profile.js';
 
 export function collage({ host, sidebar } = {}) {
     if (!host || !sidebar) return;
@@ -43,7 +44,7 @@ export function collage({ host, sidebar } = {}) {
     let previous_year = current_year - 1;
 
     const default_type = page.requested.type || 'albums';
-    const default_timeframe = page.requested.timeframe || 'date_preset=LAST_7_DAYS';
+    let default_timeframe = page.requested.timeframe || 'date_preset=LAST_7_DAYS';
 
     if (page.requested.redirect) {
         setTimeout(() => {
@@ -118,61 +119,7 @@ export function collage({ host, sidebar } = {}) {
                     ],
                     default_type
                 ))}
-                ${(timeframe = select(
-                    [
-                        {
-                            text: tl(trans.timeframe)
-                        },
-                        {
-                            value: 'date_preset=LAST_7_DAYS',
-                            text: tl(trans.last_count_days).replace(
-                                '{c}',
-                                '7'
-                            )
-                        },
-                        {
-                            value: 'date_preset=LAST_30_DAYS',
-                            text: tl(trans.last_count_days).replace(
-                                '{c}',
-                                '30'
-                            )
-                        },
-                        {
-                            value: 'date_preset=LAST_90_DAYS',
-                            text: tl(trans.last_count_days).replace(
-                                '{c}',
-                                '90'
-                            )
-                        },
-                        {
-                            value: 'date_preset=LAST_180_DAYS',
-                            text: tl(trans.last_count_days).replace(
-                                '{c}',
-                                '180'
-                            )
-                        },
-                        {
-                            value: 'date_preset=LAST_365_DAYS',
-                            text: tl(trans.last_count_days).replace(
-                                '{c}',
-                                '365'
-                            )
-                        },
-                        {
-                            value: 'date_preset=ALL',
-                            text: tl(trans.all_time)
-                        },
-                        {
-                            value: `from=${current_year}-01-01&rangetype=year`,
-                            text: current_year
-                        },
-                        {
-                            value: `from=${previous_year}-01-01&rangetype=year`,
-                            text: previous_year
-                        }
-                    ],
-                    default_timeframe
-                ))}
+                <div class="timeframe-container" ref=${el => timeframe_container = el} />
                 <button
                     class="btn primary icon"
                     data-type="collage"
@@ -195,6 +142,91 @@ export function collage({ host, sidebar } = {}) {
             </div>
         </div>
     `);
+
+    load_timeframe_selection(page.name);
+
+    function load_timeframe_selection(name) {
+        let options = [
+            {
+                text: tl(trans.timeframe)
+            },
+            {
+                value: 'date_preset=LAST_7_DAYS',
+                text: tl(trans.last_count_days).replace(
+                    '{c}',
+                    '7'
+                )
+            },
+            {
+                value: 'date_preset=LAST_30_DAYS',
+                text: tl(trans.last_count_days).replace(
+                    '{c}',
+                    '30'
+                )
+            },
+            {
+                value: 'date_preset=LAST_90_DAYS',
+                text: tl(trans.last_count_days).replace(
+                    '{c}',
+                    '90'
+                )
+            },
+            {
+                value: 'date_preset=LAST_180_DAYS',
+                text: tl(trans.last_count_days).replace(
+                    '{c}',
+                    '180'
+                )
+            },
+            {
+                value: 'date_preset=LAST_365_DAYS',
+                text: tl(trans.last_count_days).replace(
+                    '{c}',
+                    '365'
+                )
+            }
+        ];
+
+        timeframe = select(
+            options,
+            default_timeframe,
+            '',
+            update_timeframe_selection
+        );
+
+        render(timeframe_container, timeframe);
+
+        load_profile_cache_externally(name).then(cache => {
+            if (cache.created) {
+                const year = parseInt(year_from_date(cache.created));
+                const current_year = new Date().getFullYear();
+
+                const years = Array.from({ length: current_year - year + 1 }, (_, i) => year + i);
+
+                years.forEach(year => {
+                    options.push({
+                        value: `from=${year}-01-01&rangetype=year`,
+                        text: year
+                    });
+                });
+            }
+
+            timeframe = select(
+                options,
+                default_timeframe,
+                '',
+                update_timeframe_selection
+            );
+
+            render(timeframe_container, timeframe);
+        });
+    }
+
+    function update_timeframe_selection(value) {
+        if (!value.startsWith('date_preset=')) return;
+
+        default_timeframe = value;
+    }
 
     let setting_group;
     let inputter;
@@ -221,6 +253,8 @@ export function collage({ host, sidebar } = {}) {
                                 page.avatar = '';
                                 if (page.name == auth.name)
                                     page.avatar = auth.avatar;
+
+                                load_timeframe_selection(page.name);
 
                                 render(
                                     user,

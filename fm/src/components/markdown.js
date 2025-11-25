@@ -30,7 +30,7 @@ export function markdown(
         line_breaks = true,
         allow_banners = false,
         in_dialog = false,
-        allow_icons = false,
+        allow_icons = true,
         allow_hue = false,
         allow_fonts = false,
         take_effect = false,
@@ -143,6 +143,13 @@ export function markdown(
             regex: /\[icon=([a-zA-Z-]+)\]/g,
             replace: (_, icon) => {
                 return `<span class="bleh-icon in-markdown" style="--icon: var(--icon-16-${icon})">A</span>`;
+            }
+        },
+        {
+            type: 'lang',
+            regex: /🙏\s*BLESS\s*🙏/gi,
+            replace: () => {
+                return `<span class="overdose"><span class="bless"></span><span>BLESS</span><span class="bless"></span></span>`;
             }
         }
     ];
@@ -456,7 +463,9 @@ export function markdown(
             const proxy_free = [
                 'count.getloli.com',
                 'i.imgur.com',
-                'media1.tenor.com'
+                'media1.tenor.com',
+                'katelyynn.github.io',
+                'i.pinimg.com'
             ];
 
             try {

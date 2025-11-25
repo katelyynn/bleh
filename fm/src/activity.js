@@ -119,18 +119,15 @@ export function render_activity(activity) {
             involved_text = html.node`${involved_text}<a class="involved--${involved.type}" href="${involved_link}">${name}</a>`;
     });
 
-    render(
-        activity_item,
-        html`
-            <div class="type">
-                ${tl(trans.activity.listing[activity.type])}
-                <div class="date">
-                    ${DateTime.fromISO(activity.date).toRelative()}
-                </div>
+    render(activity_item, html`
+        <div class="type">
+            ${tl(trans.activity.listing[activity.type])}
+            <div class="date">
+                ${DateTime.fromISO(activity.date).toRelative()}
             </div>
-            <div class="name">${involved_text}</div>
-        `
-    );
+        </div>
+        <div class="name">${involved_text}</div>
+    `);
 
     if (tooltip_name)
         tippy(activity_item.querySelector('.name a'), {

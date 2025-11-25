@@ -86,7 +86,7 @@ export const trans = {
         name_sister_type: {
             en: '{name} by {sister} - {page} on {brand} {build}.{sku}',
             de: '{name} von {sister} - {page} auf {brand} {build}.{sku}',
-            de: '{name} por {sister} - {page} en {brand} {build}.{sku}',
+            es: '{name} por {sister} - {page} en {brand} {build}.{sku}',
             it: '{name} di {sister} - {page} su {brand} {build}.{sku}',
             pt: '{name} por {sister} - {page} no {brand} {build}.{sku}',
             sv: '{name} av {sister} - {page} på {brand} {build}.{sku}',
@@ -1607,6 +1607,9 @@ export const trans = {
                 pt: 'Véspera de Natal',
                 ru: 'Сочельник'
             }
+        },
+        exclusive: {
+            en: 'Limited time'
         }
     },
     new_season: {
@@ -2735,7 +2738,7 @@ export const trans = {
         en: 'Only capitalisation changes are allowed',
         de: 'Nur Änderungen der Groß-/Kleinschreibung sind erlaubt',
         es: 'Solo se permiten cambios a la capitalización',
-        it: 'Sono consentiti solo i cambi relativi all\'uso delle maiuscole.',
+        it: 'Sono consentiti solo i cambi relativi all\'uso delle maiuscole',
         sv: 'Endast ändringar på kapitalisering är tillåtet',
         ru: 'Допускаются только изменения регистра',
         pt: 'Apenas mudanças de capitalização são permitidas'
@@ -3241,6 +3244,12 @@ export const trans = {
         sv: 'Kopiera',
         ru: 'Копировать'
     },
+    copy_text: {
+        en: 'Copy text',
+        es: 'Copiar texto',
+        it: 'Copia testo',
+        pt: 'Copiar texto'
+    },
     copy_username: {
         en: 'Copy username',
         de: 'Benutzername kopieren',
@@ -3276,6 +3285,21 @@ export const trans = {
         pt: 'Clique para copiar',
         sv: 'Klicka för att kopiera',
         ru: 'Нажмите, чтобы скопировать'
+    },
+    paste: {
+        en: 'Paste'
+    },
+    paste_text: {
+        en: 'Paste text'
+    },
+    undo: {
+        en: 'Undo'
+    },
+    redo: {
+        en: 'Redo'
+    },
+    pasted_text: {
+        en: 'Pasted text'
     },
     wiki_standard_tracks: {
         en: 'Track titles should be wrapped in quotation marks (“ ”)',
@@ -3942,12 +3966,6 @@ export const trans = {
         es: 'Abrir vínculo',
         it: 'Apri link',
         pt: 'Abrir link'
-    },
-    copy_text: {
-        en: 'Copy text',
-        es: 'Copiar texto',
-        it: 'Copia testo',
-        pt: 'Copiar texto'
     },
     event_cancelled: {
         // obviously remove the emoji or replace it as
@@ -6597,7 +6615,7 @@ export const trans = {
         en: 'You have style loading off! If you did this by accident, you can undo this',
         de: 'Du hast das Laden von Stylesheets deaktiviert! Wenn du das aus Versehen gemacht hast, kannst du es rückgängig machen',
         es: '¡Tienes el cargado de estilos desactivado! Si hiciste esto por accidente, puedes deshacerlo',
-        it: 'Hai il caricamento degli stili disattivato! Se lo hai fatto per sbaglio, lo puoi annullare.',
+        it: 'Hai il caricamento degli stili disattivato! Se lo hai fatto per sbaglio, lo puoi annullare',
         pt: 'Você desativou o carregamento de estilos! Se você fez isso acidentalmente, pode desfazer essa ação',
         sv: 'Du har stängt av att stiler laddas! Om du gjorde det av misstag så kan du återställa det',
         ru: 'У вас отключена загрузка стилей! Если вы сделали это случайно, вы можете отменить это'
@@ -6673,7 +6691,7 @@ export const trans = {
     opens_your_value: {
         // DE: depending on the word in {v}, this might be "dein", "deine" or the inclusive "dein:e" ~Myrai
         // DEIN Profil, DEIN:E markierte Freund:in, DEINE Benachrichtigungen, DEINE Nachrichten, DEINE Minis, DEINE Profileinstellungen
-        // 
+        //
         // IT: what Myrai pointed out here also applies to us.
         // we have for example I TUOI minis, I TUOI messaggi, LE TUE notifiche, IL TUO profilo // ~cuto
         en: 'Open your {v}',
@@ -6687,7 +6705,7 @@ export const trans = {
     opens_the_value: {
         // DE: same here, depends on context ~Myrai
         // currently, it's all "die" – DIE Farbschemenauswahl, DIE Minis, DIE Neuigkeiten, DIE bleh-Einstellungen
-        // 
+        //
         // IT: same goes for us.
         // we have for example IL selettore dei temi, LE impostazioni di bleh, LE novità // ~cuto
         en: 'Open the {v}',
@@ -8065,6 +8083,9 @@ export const trans = {
         ru: 'Last.fm не смог загрузить этот компонент'
     },
     last_scrobbled_replace: {
+        // dont translate this, its replaced
+        // literally word for word from the last.fm text
+        // for use in code
         en: '{u} last scrobbled…',
         de: '{u} scrobbelte zuletzt…',
         fr: '{u} a scrobblé pour la dernière fois...',
@@ -8436,7 +8457,7 @@ export const trans = {
             en: 'This setting should be turned off to ensure scrobbles are correctly stored for each artist.',
             de: 'Diese Einstellung sollte deaktiviert werden, um sicherzustellen, dass Scrobbles für jeden Künstler korrekt gespeichert werden.',
             pt: 'Esta configuração deve ser desativada para garantir que os scrobbles sejam armazenados corretamente para cada artista.',
-            it: 'Questa impostazione dovrebbe essere disattivata per assicurarsi che gli scrobbling siano correttamente memorizzati per ciascun artista',
+            it: 'Questa impostazione dovrebbe essere disattivata per assicurarsi che gli scrobbling siano correttamente memorizzati per ciascun artista.',
             es: 'Esta opción debería estar desactivada para garantizar que los scrobblings se almacenen correctamente para cada artista.',
             sv: 'Denna inställning ska stängas av för att vara säker på att dina skrobblingar är rätt för alla artister.',
             ru: 'Эту настройку следует отключить, чтобы гарантировать правильное сохранение скробблов для каждого исполнителя.'
@@ -8822,6 +8843,34 @@ export const trans = {
         es: '¡Tienes nuevos emblemas!',
         it: 'Hai dei nuovi distintivi!',
         pt: 'Você tem novas insígnias!'
+    },
+    translator: {
+        name: {
+            en: 'Show translator tools'
+        },
+        body: {
+            en: 'View expanded details on all languages for use when translating'
+        }
+    },
+    translate: {
+        en: 'Translate'
+    },
+    translation_key: {
+        // a key such as 'you_have_new_badges' above
+        en: 'Translation key'
+    },
+    original: {
+        en: 'Original'
+    },
+    user_is_listening_to: {
+        // (claire) is listening to
+        // (song name)
+        en: '{u} is listening to'
+    },
+    user_listened_time: {
+        // (claire) listened (5 hours ago)
+        // (song name)
+        en: '{u} listened {time}'
     }
 };
 
@@ -8937,4 +8986,8 @@ export function lookup_lang() {
     lang_browser = navigator.language || navigator.userLanguage;
 
     Settings.defaultLocale = lang;
+}
+
+export function get_trans_key(key) {
+    return key.split('.').reduce((trans, key) => trans[key], trans);
 }

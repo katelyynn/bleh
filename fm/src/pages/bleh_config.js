@@ -18,8 +18,8 @@ import {
 } from '../build/page';
 import { stored_season } from '../build/seasonal';
 import { sponsor_list } from '../build/sponsor';
-import { clamp_sat, hex_to_hsl, set_storage, time } from '../build/tools';
-import { lang, lang_browser, lang_info, tl, trans } from '../build/trans';
+import { clamp_sat, copy, hex_to_hsl, set_storage, time } from '../build/tools';
+import { get_trans_key, lang, lang_browser, lang_info, tl, trans } from '../build/trans';
 import { load_badges } from '../components/badge';
 import { dialog, dialog_rm } from '../components/dialog';
 import { markdown } from '../components/markdown';
@@ -103,6 +103,11 @@ export function bleh_settings() {
         fill: {
             type: 'fill'
         },
+        translate: {
+            name: tl(trans.translate),
+            icon: 'language',
+            hide: !settings.translator
+        },
         performance: {
             name: tl(trans.troubleshooting),
             icon: 'advanced'
@@ -129,7 +134,7 @@ export function bleh_settings() {
 
                         return html.node`
                             <li class="navlist-item secondary-nav-item">
-                                <a class="secondary-nav-item-link bleh--nav" data-bleh-page=${id} data-type=${tab.icon} data-password=${tab.password} onclick=${() => change_settings_page(id)}>
+                                <a class="secondary-nav-item-link bleh--nav" data-bleh-page=${id} data-type=${tab.icon} data-password=${tab.password} data-should-hide=${tab.hide} data-hide=${tab != id} onclick=${() => change_settings_page(id)}>
                                     ${tab.label ? tab.label : tab.name}
                                 </a>
                             </li>
@@ -194,6 +199,8 @@ function page_loading() {
 }
 
 export async function render_setting_page(page_id) {
+    page_loading();
+
     if (page_id == 'general') {
         if (auth.pro === null) {
             setTimeout(() => {
@@ -247,14 +254,11 @@ export async function render_setting_page(page_id) {
                                 <div class="update-container">
                                     <div class="bleh-icon" data-type="update" />
                                 </div>
-                                ${last_checked
-                                        ? html.node`
+                                ${last_checked ? html.node`
                                 <div class="check-circle colourful">
                                     <div class="bleh-icon" data-type="check-thick" />
                                 </div>
-                                `
-                                        : ''
-                                    }
+                                ` : ''}
                             </div>
                             <div class="update-center-details">
                                 ${last_checked
@@ -268,7 +272,7 @@ export async function render_setting_page(page_id) {
                                 `
                                     }
                             </div>
-                            <button class="btn primary icon" data-type="update" ref=${(el) => (update_btn = el)} onclick=${() => update_check(true, update_btn, () => {
+                            <button class="btn icon" data-type="update" ref=${(el) => (update_btn = el)} onclick=${() => update_check(true, update_btn, () => {
                                 notify({
                                     id: 'update',
                                     title: tl(trans.updates),
@@ -279,7 +283,7 @@ export async function render_setting_page(page_id) {
                             })}>${tl(trans.check)}</button>
                         ` : html.node`
                             <div class="update-center-icon">
-                                <div class="update-container">
+                                <div class="update-container spin">
                                     <div class="bleh-icon" data-type="update" />
                                 </div>
                             </div>
@@ -529,6 +533,7 @@ export async function render_setting_page(page_id) {
                                 </a>
                             </div>
                         </div>
+                        ${setting({id: 'translator'})}
                     </div>
                 </section>
             `
@@ -922,7 +927,7 @@ export async function render_setting_page(page_id) {
                             for (
                                 let value = 1_000;
                                 value <= max;
-                                value += 1_000
+                                value += page.mobile ? 3_000 : 1_000
                             ) {
                                 bars.appendChild(chartlist_bar(value, max));
                             }
@@ -1412,7 +1417,6 @@ export async function render_setting_page(page_id) {
                     <h4>${tl(trans.settings)}</h4>
                     <div class="setting-group">
                         ${setting({ id: 'seasonal_particles' })}
-                        ${setting({ id: 'seasonal_particles_fps' })}
                         ${setting({ id: 'seasonal_overlays' })}
                     </div>
                 </div>
@@ -1822,124 +1826,64 @@ export async function render_setting_page(page_id) {
                 </div>
             </div>
         `);
-    } else if (page_id == 'music') {
-        register_skip_to([
-            {
-                id: 'corrections',
-                name: tl(trans.correct_titles_with_lotus)
-            },
-            {
-                id: 'format_guest_features',
-                name: tl(trans.format_guest_features.name)
-            },
-            {
-                id: 'stacked_chartlist_info',
-                name: tl(trans.track_column_view)
-            },
-            {
-                id: 'colourful_counts',
-                name: tl(trans.colourful_counts.name)
-            },
-            {
-                id: 'travis',
-                name: tl(trans.redirect_messages.name)
-            },
-            {
-                id: 'gloss',
-                type: 'slider',
-                name: tl(trans.gloss.name)
-            },
-            {
-                id: 'grid_glow',
-                name: tl(trans.grid_glow.name)
-            },
-            {
-                id: 'gendered_tags',
-                name: tl(trans.gendered_tags.name)
-            }
-        ]);
+    } else if (page_id == 'translate') {
+        let translation_view_container;
 
-        render(
-            page.structure.main,
-            html`
-                <div class="bleh--panel">
-                    <h4 class="top-header">${tl(trans.music)}</h4>
-                    <h4>${tl(trans.tracklist)}</h4>
-                    <div class="inner-preview pad">
-                        <div class="tracks">
-                            <div class="track realtime">
-                                <div class="cover"></div>
-                                <div class="info">
-                                    <div class="title"></div>
-                                    <div class="artist"></div>
-                                    <div class="album"></div>
-                                </div>
-                                <div class="time"></div>
-                            </div>
-                            <div class="track">
-                                <div class="cover"></div>
-                                <div class="info">
-                                    <div class="title"></div>
-                                    <div class="artist"></div>
-                                    <div class="album"></div>
-                                </div>
-                                <div class="time"></div>
-                            </div>
-                            <div class="track">
-                                <div class="cover"></div>
-                                <div class="info">
-                                    <div class="title"></div>
-                                    <div class="artist"></div>
-                                    <div class="album"></div>
-                                </div>
-                                <div class="time"></div>
-                            </div>
-                            <div class="track">
-                                <div class="cover"></div>
-                                <div class="info">
-                                    <div class="title"></div>
-                                    <div class="artist"></div>
-                                    <div class="album"></div>
-                                </div>
-                                <div class="time"></div>
-                            </div>
-                            <div class="track">
-                                <div class="cover"></div>
-                                <div class="info">
-                                    <div class="title"></div>
-                                    <div class="artist"></div>
-                                    <div class="album"></div>
-                                </div>
-                                <div class="time"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="setting-group">
-                        ${setting({ id: 'stacked_chartlist_info' })}
-                        ${setting({ id: 'expand_tracks' })}
-                        ${setting({ id: 'glacier_library_graphs' })}
-                    </div>
-                    <div class="inner-preview pad">
-                        <div class="bars" ref=${(el) => (bars = el)}>
-                            ${() => {
-                    let max = 30_000;
+        render(page.structure.main, html`
+            <section class="bleh--panel">
+                ${setting({id: 'translator_view', list: lang_info, func: translation_view})}
+                <div class="translation-view" ref=${el => translation_view_container = el} />
+            </section>
+        `);
 
-                    for (
-                        let value = 1_000;
-                        value <= max;
-                        value += 1_000
-                    ) {
-                        bars.appendChild(chartlist_bar(value, max));
-                    }
-                }}
-                        </div>
-                    </div>
-                    <div class="setting-group">
-                        ${setting({ id: 'colourful_counts' })}
-                    </div>
+        function translation_view(lang) {
+            const language = lang_info[lang];
+
+            render(translation_view_container, html`
+                <div class="language-header">
+                    <span class="flag" style="background-image: url(https://katelyynn.github.io/bleh/fm/flags/${lang}.svg)" />
+                    <p>${language.name}</p>
                 </div>
-            `
-        );
+                <div class="language-sub">
+                    <div class="language-info colourful translated"><span class="bleh-icon" />${tl(trans.amount_translated, { c: language.translated })} (${language.percent}%)</div>
+                    ${() => {
+                        const btn = html.node`
+                            <div class="language-info colourful missing" onclick=${() => {
+                                copy(language.missing_keys.map(key => `${key}: ${get_trans_key(key).en}`).join('\n'))
+                            }}><span class="bleh-icon" />${tl(trans.missing_translated, { c: language.missing })}</div>
+                        `;
+
+                        tippy(btn, {
+                            content: tl(trans.click_to_copy)
+                        });
+
+                        return btn;
+                    }}
+                </div>
+                <table class="responsive-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 35%">${tl(trans.translation_key)}</th>
+                            <th>${tl(trans.original)}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${language.missing_keys.map(key => {
+                            const row = html.node`
+                                <tr>
+                                    <td style="width: 35%"><code>${key}</code></td>
+                                    <td>${get_trans_key(key).en}</td>
+                                </tr>
+                            `;
+
+                            return row;
+                        })}
+                    </tbody>
+                </table>
+            `);
+        }
+
+        translation_view(settings.translator_view);
     }
 }
 
@@ -1991,27 +1935,18 @@ export function change_settings_page(page_id, setting = null) {
 
     page.structure.main.innerHTML = '';
 
-    if (ff('bleh_settings_tabs')) {
-        let btns = document.querySelectorAll('.bleh--nav');
-        btns.forEach((btn) => {
-            console.log(btn.getAttribute('data-bleh-page'), page_id);
-            if (btn.getAttribute('data-bleh-page') != page_id) {
-                btn.classList.remove('secondary-nav-item-link--active');
-            } else {
-                btn.classList.add('secondary-nav-item-link--active');
-            }
-        });
-    } else {
-        let btns = document.querySelectorAll('.bleh--btn');
-        btns.forEach((btn) => {
-            console.log(btn.getAttribute('data-bleh-page'), page_id);
-            if (btn.getAttribute('data-bleh-page') != page_id) {
-                btn.classList.remove('active');
-            } else {
-                btn.classList.add('active');
-            }
-        });
-    }
+    let btns = document.querySelectorAll('.bleh--nav');
+    btns.forEach((btn) => {
+        const id = btn.getAttribute('data-bleh-page');
+
+        btn.setAttribute('data-hide', page_id != id);
+
+        if (page_id != id) {
+            btn.classList.remove('secondary-nav-item-link--active');
+        } else {
+            btn.classList.add('secondary-nav-item-link--active');
+        }
+    });
 
     if (page_id == 'seasonal') seasonal_timer_start();
     else seasonal_timer_end();
@@ -2303,7 +2238,7 @@ export function display_colour_presets() {
                 swatch_group.appendChild(create_swatch(type, colour));
 
                 exclusives[stored_season.id].forEach(exclusive => {
-                    swatch_group.appendChild(create_swatch(type, exclusive));
+                    swatch_group.appendChild(create_swatch(type, exclusive, true));
                 });
 
                 return;
@@ -2313,7 +2248,7 @@ export function display_colour_presets() {
         });
     }
 
-    function create_swatch(type, colour) {
+    function create_swatch(type, colour, exclusive = false) {
         if (
             colour.requires_flag &&
             version.feature_flags.hasOwnProperty(colour.requires_flag)
@@ -2324,7 +2259,10 @@ export function display_colour_presets() {
         if (colour.type == 'avatar' && !auth.name) return html.node``;
 
         let text;
+        let label;
         if (colour.label) text = tl(colour.label);
+
+        if (exclusive) label = tl(trans.seasonal.exclusive);
 
         if (!colour.type) colour.type = 'colour';
 
@@ -2413,9 +2351,19 @@ export function display_colour_presets() {
 
         text_elem.textContent = text;
 
-        tippy(swatch, {
-            content: text
-        });
+        if (!label) {
+            tippy(swatch, {
+                content: text
+            });
+        } else {
+            tippy(swatch, {
+                theme: 'generic',
+                content: html.node`
+                    <span>${text}</span>
+                    <small>${label}</small>
+                `
+            });
+        }
 
         return swatch;
     }

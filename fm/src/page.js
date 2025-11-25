@@ -361,6 +361,8 @@ function load_page(main_content = null) {
 
     page.structure.notifications.setAttribute('data-auth-open', 'false');
 
+    lookup_lang();
+
     set_season();
     seasonal_timer_end();
 
@@ -504,20 +506,15 @@ function load_page(main_content = null) {
         }
 
         if (page.subpage == 'image') {
-            let images = page.structure.row.querySelectorAll('.gallery-image');
+            const images = page.structure.row.querySelectorAll('.gallery-image');
             images.forEach((image) => {
-                let star = image.querySelector(
-                    '.gallery-image-preferred-container'
-                );
+                const star = image.querySelector('.gallery-image-preferred-container');
                 if (!star) return;
 
-                render(
-                    star,
-                    html`
-                        <div class="bleh-icon" />
-                        ${tl(trans.starred)}
-                    `
-                );
+                render(star, html`
+                    <div class="bleh-icon" />
+                    ${tl(trans.starred)}
+                `);
             });
         }
 
@@ -671,32 +668,20 @@ function page_title() {
 }
 
 function detect_mobile() {
-    if (window.innerWidth <= 600) {
+    if (window.innerWidth <= 980) {
         page.mobile = true;
 
-        let theme = document.createElement('meta');
-        theme.setAttribute('name', 'theme-color');
-        theme.setAttribute('content', '#000000');
-        document.head.appendChild(theme);
+        document.head.appendChild(html.node`
+            <meta name="theme-color" content="#000000" />
+            <meta name="apple-mobile-web-app-capable" content="yes" />
+            <link rel="manifest" href="https://github.com/katelyynn/bleh/raw/uwu/fm/app.webmanifest" />
+        `);
 
         let icon = document.head.querySelector('[rel="apple-touch-icon"]');
         icon.setAttribute(
             'href',
             'https://github.com/katelyynn/bleh/raw/uwu/fm/app.png'
         );
-
-        let capable = document.createElement('meta');
-        capable.setAttribute('name', 'apple-mobile-web-app-capable');
-        capable.setAttribute('content', 'yes');
-        document.head.appendChild(capable);
-
-        let manifest = document.createElement('link');
-        manifest.setAttribute('rel', 'manifest');
-        manifest.setAttribute(
-            'href',
-            'https://github.com/katelyynn/bleh/raw/uwu/fm/app.webmanifest'
-        );
-        document.head.appendChild(manifest);
     } else {
         page.mobile = false;
     }

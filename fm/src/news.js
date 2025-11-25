@@ -107,7 +107,7 @@ function open_changelog(changelog) {
     for (let version in changelog) {
         if (version == 'updated' || version == 'latest') continue;
 
-        if (index > 10) continue;
+        //if (index > 10) continue;
 
         const version_item = html.node`
             <div class="changelog-version-item" data-changelog-type="${changelog[version].type}" data-changelog-latest="${index == 0 ? 'true' : 'false'}" data-changelog-version="${version}">

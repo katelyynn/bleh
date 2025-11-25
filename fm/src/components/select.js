@@ -98,22 +98,22 @@ export function select(values, initial = '', name = '', func = null, blend = fal
         if (func && bubble) func(selected);
 
         menu.setContent(html.node`
-        ${values.map((value) => {
-            if (value.value == null) {
-                return html.node`
-                    <div class="select-header">
-                        ${value.text}
-                    </div>
-                `;
-            }
+            ${values.map((value) => {
+                if (value.value == null) {
+                    return html.node`
+                        <div class="select-header">
+                            ${value.text}
+                        </div>
+                    `;
+                }
 
-            return html.node`
-                <button class="btn dropdown-menu-clickable-item select-item" aria-checked=${selected == value.value} onclick=${() => set_select(value.value)}>
-                    ${value.text}
-                </button>
-            `;
-        })}
-    `);
+                return html.node`
+                    <button class="btn dropdown-menu-clickable-item select-item" aria-checked=${selected == value.value} onclick=${() => set_select(value.value)}>
+                        ${value.text}
+                    </button>
+                `;
+            })}
+        `);
     }
 }
 

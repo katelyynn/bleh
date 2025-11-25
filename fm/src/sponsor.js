@@ -39,13 +39,12 @@ export function sponsors(force = false, func = null) {
                 const old_badges = JSON.parse(localStorage.getItem('kat_sponsor_cache')) || {};
 
                 if (JSON.stringify(old_badges) != JSON.stringify(sponsor_list.badges[auth.name])) {
+                    console.info('sponsor initial', old_badges, sponsor_list.badges[auth.name]);
                     set_storage('kat_sponsor_cache', JSON.stringify(sponsor_list.badges[auth.name]));
                     new_badges(sponsor_list.badges[auth.name]);
 
                     return;
                 }
-
-                set_storage('kat_sponsor_cache', JSON.stringify(sponsor_list.badges[auth.name]));
             }
         }
 
@@ -59,6 +58,8 @@ export function sponsors(force = false, func = null) {
 }
 
 function sponsor_request(notify = false, func = null) {
+    log(`initiating request with notify ${notify}`, 'sponsor');
+
     let button = document.body.querySelector('[onclick="_sponsor_check()"]');
     if (button) button.setAttribute('disabled', '');
 
@@ -81,12 +82,7 @@ function sponsor_request(notify = false, func = null) {
         }
 
         if (xhr.status == 200) {
-            if (
-                sponsor_list.latest != 0.0 ||
-                (sponsor_list &&
-                    parseFloat(JSON.parse(this.response).latest) >=
-                        parseFloat(sponsor_list.latest))
-            ) {
+            if (sponsor_list.latest != 0.0 || (sponsor_list && parseFloat(JSON.parse(this.response).latest) >= parseFloat(sponsor_list.latest))) {
                 for (const member in sponsor_list) delete sponsor_list[member];
                 Object.assign(sponsor_list, JSON.parse(this.response));
 
@@ -98,22 +94,16 @@ function sponsor_request(notify = false, func = null) {
                         const old_badges = JSON.parse(localStorage.getItem('kat_sponsor_cache')) || {};
 
                         if (JSON.stringify(old_badges) != JSON.stringify(sponsor_list.badges[auth.name])) {
+                            console.info('sponsor request', old_badges, sponsor_list.badges[auth.name]);
                             set_storage('kat_sponsor_cache', JSON.stringify(sponsor_list.badges[auth.name]));
                             new_badges(sponsor_list.badges[auth.name]);
-
-                            return;
                         }
-
-                        set_storage('kat_sponsor_cache', JSON.stringify(sponsor_list.badges[auth.name]));
                     }
                 }
 
                 if (notify)
                     status({
-                        title: tl(trans.downloaded_value).replace(
-                            '{v}',
-                            tl(trans.sponsor_details)
-                        )
+                        title: tl(trans.downloaded_value, { v: tl(trans.sponsor_details) })
                     });
 
                 // save to cache for next page load

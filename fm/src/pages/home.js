@@ -20,6 +20,7 @@ import { romanise, sanitise } from "../build/tools.js";
 import { redirect } from "../components/music.js";
 import { settings } from "../build/config.js";
 import { expand_avatar } from "../avatar.js";
+import tippy from "tippy.js";
 
 export async function bleh_home() {
     page.structure.container = document.body.querySelector('.page-content');
@@ -337,8 +338,9 @@ function campfire() {
             <div class="campfire-bg previous" ref=${el => previous_bg = el} />
         </div>
     `;
-
     page.structure.row.insertBefore(container, page.structure.content);
+
+    campfire_extended(container);
 
     let albums = [];
     let album_elements = [];
@@ -450,4 +452,151 @@ function campfire() {
             </div>
         `);
     }
+}
+
+function campfire_extended(container) {
+    container.after(html.node`
+        <section class="campfire-extended">
+            <div class="content-panel content-main">
+
+            </div>
+            <div class="content-panel content-side">
+                <section class="friends-panel">
+                    <h2>Friends</h2>
+                    <div class="friends">
+                        ${settings.friends.length > 0 ? html.node`
+                            ${settings.friends.map(friend => campfire_friend(friend))}
+                        ` : html.node`
+
+                        `}
+                    </div>
+                </section>
+            </div>
+        </section>
+    `);
+}
+
+function campfire_friend(friend) {
+    let cover_art;
+    let track_info;
+    let user_avatar;
+    let user_name;
+
+    const elem = html.node`
+        <div class="user friend" data-live="false">
+            <div class="user-avatar cover-art" ref=${el => cover_art = el}>
+                <div class="bleh-icon loading-spinner" />
+            </div>
+            <div class="user-info">
+                <div class="user-name">
+                    <div class="avatar" ref=${el => user_avatar = el}>
+                        <div class="bleh-icon loading-spinner" />
+                    </div>
+                    <p ref=${el => user_name = el}>@${friend}</p>
+                    <a class="link-block-cover-link" href="${root}user/${friend}" />
+                </div>
+                <div class="user-about track" ref=${el => track_info = el}>
+                    <p>${tl(trans.loading)}</p>
+                </div>
+            </div>
+        </div>
+    `;
+
+    load_profile_cache_externally(friend).then(cache => {
+        render(user_avatar, html`
+            <img src=${cache.avatar} alt=${friend}>
+        `);
+
+        if (cache.username)
+            user_name.textContent = cache.username;
+
+        load_recent_tracks(friend).then(tracks => {
+            const item = tracks[0];
+
+            if (item) {
+                let sister = item.sister;
+                let name = item.name;
+
+                if (settings.format_guest_features) {
+                    const formatted = name_includes(name, sister);
+
+                    name = html.node`${smart_title(formatted[0], formatted[1])}`;
+                    sister = html.node`${smart_artists(formatted[2], formatted[3])}`;
+                } else if (settings.corrections) {
+                    sister = romanise(correct_artist(item.sister));
+                    name = romanise(correct_item_by_artist(item.name, item.sister));
+                }
+
+                if (item.time) {
+                    render(user_name, html`
+                        ${{ html: tl(trans.user_listened_time, { u: `<strong>${cache.username ? cache.username : `@${friend}`}</strong>`, time: item.time }) }}
+                    `);
+                } else {
+                    render(user_name, html`
+                        ${{ html: tl(trans.user_is_listening_to, { u: `<strong>${cache.username ? cache.username : `@${friend}`}</strong>` }) }}
+                    `);
+
+                    elem.setAttribute('data-live', true);
+                }
+
+                render(cover_art, html`
+                    <img src=${item.avatar} alt=${name}>
+                    <a class="link-block-cover-link" href="${root}music/${item.sister}/_/${item.name}" />
+                `);
+
+                const track_elem = html.node`
+                    <a class="involved--track" href="${root}music/${item.sister}/_/${item.name}">${name}</a>
+                `;
+
+                tippy(track_elem, {
+                    theme: 'name-sister-combo',
+                    content: html.node`
+                        <span class="name">${{ html: track_elem.innerHTML }}</span>
+                        <span class="sister">${sister}</span>
+                    `
+                });
+
+                render(track_info, track_elem);
+            }
+        });
+    });
+
+    return elem;
+}
+
+export async function load_recent_tracks(name) {
+    return new Promise((resolve, reject) => {
+        fetch(`${root}user/${name}/partial/recenttracks?ajax=1`)
+            .then(function (response) {
+                console.log('returned', response, response.text);
+
+                return response.text();
+            })
+            .then(function (dom) {
+                let doc = new DOMParser().parseFromString(dom, 'text/html');
+                console.log('DOC', doc);
+
+                let tracks = [];
+                const track_list = doc.querySelectorAll('.chartlist-row');
+                if (track_list.length > 0) {
+                    track_list.forEach(track => {
+                        let item = {};
+
+                        item.avatar = track.querySelector('.chartlist-image img');
+                        if (item.avatar)
+                            item.avatar = item.avatar.src;
+
+                        item.name = track.querySelector('.chartlist-name a').textContent.trim();
+                        item.sister = track.querySelector('.chartlist-artist a').textContent.trim();
+
+                        item.time = track.querySelector('.chartlist-timestamp > span:not(.chartlist-now-scrobbling)')?.textContent.trim();
+
+                        tracks.push(item);
+                    });
+                }
+
+                resolve(tracks);
+            })
+            .catch(reject);
+    });
 }

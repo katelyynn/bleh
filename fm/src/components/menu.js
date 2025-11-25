@@ -9,7 +9,7 @@ import tippy from 'tippy.js';
 import { tl, trans } from '../build/trans';
 import { ff } from '../sku';
 import { log } from '../build/log';
-import { copy } from '../build/tools';
+import { copy, paste, redo, undo } from '../build/tools';
 import { settings } from '../build/config';
 import { external_url_prompt } from './markdown';
 
@@ -75,6 +75,10 @@ export function page_menu() {
         const valid_for_text = ['TEXTAREA', 'INPUT'].includes(elem.tagName);
 
         const alt = elem.getAttribute('alt')?.trim();
+
+        const start = elem.selectionStart;
+        const end = elem.selectionEnd;
+        const selected = elem.value?.substring(start, end);
 
         log('requesting', 'menu', 'log', {
             text, value, elem, tag: elem.tagName, is_image, link, unsafe_link, valid_for_text
@@ -163,17 +167,31 @@ export function page_menu() {
                 ` : ''}
             ` :   ''}
             ${link ? generic_link_menu(link) :   ''}
-            ${text && valid_for_text ? html.node`
-                <a class="dropdown-menu-clickable-item" data-type="copy" onclick=${() => {
-                    copy(text);
+            ${valid_for_text ? html.node`
+                <a class="dropdown-menu-clickable-item" data-type="undo" onclick=${() => {
+                    undo();
                 }}>
-                    ${tl(trans.copy_text)}
+                    ${tl(trans.undo)}
                 </a>
-            ` : value && valid_for_text ? html.node`
-                <a class="dropdown-menu-clickable-item" data-type="copy" onclick=${() => {
-                    copy(value);
+                <a class="dropdown-menu-clickable-item" data-type="redo" onclick=${() => {
+                    redo();
                 }}>
-                    ${tl(trans.copy_text)}
+                    ${tl(trans.redo)}
+                </a>
+            ` : ''}
+            ${valid_for_text ? html.node`
+                <a class="dropdown-menu-clickable-item" data-type="copy" onclick=${() => {
+                    if (selected) copy(selected);
+                    else if (value) copy(value);
+                }}>
+                    ${tl(trans.copy)}
+                </a>
+            ` : ''}
+            ${valid_for_text ? html.node`
+                <a class="dropdown-menu-clickable-item" data-type="paste" onclick=${() => {
+                    paste();
+                }}>
+                    ${tl(trans.paste)}
                 </a>
             ` : ''}
         `;
