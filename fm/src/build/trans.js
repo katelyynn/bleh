@@ -8863,7 +8863,8 @@ export const trans = {
         }
     },
     translate: {
-        en: 'Translate'
+        en: 'Translate',
+        pt: 'Traduza'
     },
     translation_key: {
         // a key such as 'you_have_new_badges' above
@@ -8884,7 +8885,7 @@ export const trans = {
         // (claire) listened (5 hours ago)
         // (song name)
         en: '{u} listened {time}',
-        pt: '{u} ouviu {time}'
+        pt: '{u} ouviu há {time}'
     }
 };
 
