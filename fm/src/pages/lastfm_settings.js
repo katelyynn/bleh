@@ -1046,7 +1046,8 @@ function patch_settings_profile_panel(token, update_picture) {
                                                     `;
 
                                                     tippy(elem, {
-                                                        content: family
+                                                        content: family,
+                                                        delay: [500, 0]
                                                     });
 
                                                     font_buttons.push(elem);

@@ -34565,7 +34565,8 @@
                                                         </button>
                                                     `;
               tippy_esm_default(elem, {
-                content: family
+                content: family,
+                delay: [500, 0]
               });
               font_buttons.push(elem);
               return elem;

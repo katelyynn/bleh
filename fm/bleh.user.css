@@ -28476,25 +28476,27 @@
     }
 
     .font-options {
+        --gap: 6px;
+
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(var(--font-item-size), 1fr));
-        gap: var(--item-list-gap);
+        gap: var(--gap);
 
         --font-item-size: 90px;
 
-        width: calc(((var(--font-item-size) + var(--item-list-gap)) * 4) - var(--item-list-gap));
+        width: calc(((var(--font-item-size) + var(--gap)) * 4) - var(--gap));
 
         & > .font-selection {
-            height: 60px;
+            height: 50px;
 
-            --bg: transparent;
-            --bg-hov: hsl(var(--b4), 40%);
-            --bg-atv: hsl(var(--b4), 60%);
-            --shadow: inset 0 0 0 1px var(--card-border-base);
+            --bg: hsl(var(--b4), 40%);
+            --bg-hov: hsl(var(--b4), 60%);
+            --bg-atv: hsl(var(--b4), 80%);
+            --shadow: unset;
 
             --font-weight: var(--custom-font-weight, var(--font-weight-bold));
             --col: hsl(var(--c2));
-            --font-size: 26px;
+            --font-size: 24px;
 
             & > span {
                 font-family: var(--custom-font, var(--font)) !important;
@@ -28503,9 +28505,8 @@
 
             &[aria-checked="true"] {
                 --bg: hsla(var(--h4), 20%);
-                --bg-hov: hsla(var(--h4), 30%);
-                --bg-atv: hsla(var(--h4), 40%);
-                --shadow: inset 0 0 0 1px hsl(var(--l3-c), 30%);
+                --bg-hov: hsla(var(--h4), 25%);
+                --bg-atv: hsla(var(--h4), 35%);
             }
 
             &.font-style {
