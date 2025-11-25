@@ -16,6 +16,14 @@
     @import url('https://fonts.googleapis.com/css2?family=Funnel+Sans:ital,wght@0,300..800;1,300..800&display=swap');
     @import url('https://fonts.googleapis.com/css2?family=Balsamiq+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Cherry+Bomb+One&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Lilita+One&family=Rokkitt:ital,wght@0,100..900;1,100..900&family=Single+Day&family=UnifrakturCook:wght@700&display=swap');
 
+    @font-face {
+        font-family: 'DinkieBitmap 9px';
+        src: url('https://katelyynn.github.io/needy-streamer-overdose-font/fonts/DinkieBitmap9px.woff') format('woff');
+        font-weight: 500;
+        font-style: normal;
+        font-display: swap;
+    }
+
     body {
         --version-build: "2025.1111";
 
@@ -29457,5 +29465,26 @@
     .link-block-cover-link:not(.source-album) {
         position: absolute;
         inset: 0;
+    }
+
+    .overdose {
+        font-family: 'DinkieBitmap 9px';
+        font-size: 20px;
+        line-height: 20px;
+        height: 20px;
+        display: inline-block;
+
+        & > span:not(.bless) {
+            position: relative;
+            bottom: 4px;
+        }
+    }
+    .bless {
+        background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAMAAAC67D+PAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAVUExURUVDVeGmOf/aiG1ZNVu04lJ85wAAAIMxq3cAAAAHdFJOU////////wAaSwNGAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAOUlEQVQYV2XMQQrAQAhD0TQ13v/I/UoXA4MBn4uobmnCJg/z068vynB8UjI1z5uqcKYKZiuBK5z+AEXyAU0XNzPRAAAAAElFTkSuQmCC');
+        width: 20px;
+        height: 20px;
+        display: inline-block;
+        background-size: 100%;
+        image-rendering: pixelated;
     }
 }
