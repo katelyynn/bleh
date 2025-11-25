@@ -517,6 +517,15 @@
             var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 60%),
             calc(clamp(min(0.5), var(--lit), max(1.5)) * 15%);
 
+        --s3:
+            var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 50%),
+            calc(clamp(min(0.5), var(--lit), max(1)) * 63%);
+        --s4:
+            var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 55%),
+            calc(clamp(min(0.5), var(--lit), max(1.1)) * 56%);
+
+        --p3: var(--s3);
+
         /* l2-c in dark modes, l4-c in light modes */
         --l2-c-theme-switch: var(--l2-c);
         --l3-c-theme-switch: var(--l3-c);
@@ -636,6 +645,10 @@
                 calc(clamp(min(0.8), var(--lit), max(1.5)) * 76%);
             --g4:
                 var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 70%), 92%;
+
+            --p3:
+                var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 50%),
+                calc(clamp(min(0.85), var(--lit), max(1.1)) * 90%);
 
             /* l2-c in dark modes, l4-c in light modes */
             --l2-c-theme-switch: var(--l3-c);
@@ -28577,10 +28590,15 @@
     }
 
     [data-font-style]:not([data-font-style="solid"]) {
+        color: var(--custom-font-colour, inherit);
         text-shadow: var(--custom-font-style-shadow);
 
         &.preview-style {
             text-shadow: var(--custom-font-style-shadow-mini);
+        }
+
+        &.profile-name {
+            color: var(--custom-font-colour, inherit);
         }
     }
 
@@ -28631,12 +28649,13 @@
     }
 
     [data-font-style="pop"] {
-        --custom-font-style-shadow: 0 3px 0 hsl(var(--h3));
-        --custom-font-style-shadow-mini: 0 2px 0 hsl(var(--h3));
+        --custom-font-style-shadow: 0 3px 0 hsl(var(--p3));
+        --custom-font-style-shadow-mini: 0 2px 0 hsl(var(--p3));
     }
     [data-font-style="out"] {
-        --stroke: hsl(var(--h3));
-        --stroke-outer: hsl(var(--h4), 60%);
+        --custom-font-colour: #fff;
+        --stroke: hsl(var(--s3));
+        --stroke-outer: hsl(var(--s4), 60%);
 
         --size: 3px;
         --size-n: calc(-1 * var(--size));
