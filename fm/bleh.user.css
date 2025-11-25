@@ -28499,7 +28499,7 @@
             }
 
             &.font-style {
-                --font-size: 18px;
+                --font-size: 16px;
             }
         }
     }
@@ -28512,6 +28512,12 @@
         .font-options + & {
             margin-top: var(--card-gap);
         }
+    }
+
+    .font-name-options {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
     [data-font]:not([data-font="none"], [data-font="undefined"]) {
@@ -28574,7 +28580,7 @@
 
     [data-font-style="pop"] {
         --custom-font-style-shadow: 0 4px 0 hsl(var(--h3));
-        --custom-font-style-shadow-mini: 0 3px 0 hsl(var(--h3));
+        --custom-font-style-shadow-mini: 0 2px 0 hsl(var(--h3));
     }
     [data-font-style="glow"] {
         --custom-font-style-shadow: 0 0 20px hsl(var(--h4)), 0 0 20px hsl(var(--h4));

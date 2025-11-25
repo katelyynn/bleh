@@ -1210,13 +1210,23 @@ export function save_setting(id, value) {
 
     // if using a seasonal default,
     // do not apply the colour
-    if (
-        settings_store[id] &&
-        value == settings_store[id].default &&
-        ['hue', 'sat', 'lit'].includes(id)
-    ) {
+    if (['hue', 'sat', 'lit'].includes(id)) {
+        if (
+            settings.hue == settings_store.hue.default &&
+            settings.sat == settings_store.sat.default &&
+            settings.lit == settings_store.lit.default
+        ) {
+            document.body.style.removeProperty(`--${settings_store.hue.css}`);
+            document.body.style.removeProperty(`--${settings_store.sat.css}`);
+            document.body.style.removeProperty(`--${settings_store.lit.css}`);
+        } else {
+            document.body.style.setProperty(`--${settings_store.hue.css}`, settings.hue);
+            document.body.style.setProperty(`--${settings_store.sat.css}`, settings.sat);
+            document.body.style.setProperty(`--${settings_store.lit.css}`, settings.lit);
+        }
+    } else if (settings_store[id] && settings_store[id] == settings_store[id].default) {
         document.body.style.removeProperty(`--${settings_store[id].css}`);
-    } else if (settings_store[id].css) {
+    } else if (settings_store[id] && settings_store[id].css) {
         document.body.style.setProperty(
             `--${settings_store[id].css}`,
             `${value}${settings_store[id].suffix || ''}`

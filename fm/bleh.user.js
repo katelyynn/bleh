@@ -34545,12 +34545,13 @@
                                         <div class="font-name-preview">
                                             <span data-font=${font_name} data-font-style=${font_style} ref=${(el) => font_preview = el}>${cache3.username ? cache3.username : auth.name}</span>
                                         </div>
-                                        <h4 class="font-options-header">${tl2(trans.font.name)}</h4>
-                                        <div class="font-options">
-                                            ${Object.entries(page.state.fonts).map(([font, family]) => {
+                                        <div class="font-name-options">
+                                            <h4 class="font-options-header">${tl2(trans.font.name)}</h4>
+                                            <div class="font-options">
+                                                ${Object.entries(page.state.fonts).map(([font, family]) => {
               if (family == "") family = tl2(trans.none);
               const elem = html.node`
-                                                    <button class="font-selection" data-font=${font} aria-checked=${font == font_name} onclick=${() => {
+                                                        <button class="font-selection" data-font=${font} aria-checked=${font == font_name} onclick=${() => {
                 font_name = font;
                 font_preview.setAttribute("data-font", font);
                 font_tile.setAttribute("data-font", font);
@@ -34558,21 +34559,21 @@
                   btn.setAttribute("aria-checked", btn.getAttribute("data-font") == font);
                 });
               }}>
-                                                        <span data-font=${font}>Aa</span>
-                                                    </button>
-                                                `;
+                                                            <span data-font=${font}>Aa</span>
+                                                        </button>
+                                                    `;
               tippy_esm_default(elem, {
                 content: family
               });
               font_buttons.push(elem);
               return elem;
             })}
-                                        </div>
-                                        <h4 class="font-options-header">${tl2(trans.font_style)}</h4>
-                                        <div class="font-options">
-                                            ${["solid", "pop", "glow"].map((style) => {
+                                            </div>
+                                            <h4 class="font-options-header">${tl2(trans.font_style)}</h4>
+                                            <div class="font-options">
+                                                ${["solid", "pop", "glow"].map((style) => {
               const elem = html.node`
-                                                    <button class="font-selection font-style" data-font-style=${style} aria-checked=${style == font_style} onclick=${() => {
+                                                        <button class="font-selection font-style" data-font-style=${style} aria-checked=${style == font_style} onclick=${() => {
                 font_style = style;
                 font_preview.setAttribute("data-font-style", style);
                 font_tile.setAttribute("data-font-style", style);
@@ -34580,12 +34581,13 @@
                   btn.setAttribute("aria-checked", btn.getAttribute("data-font-style") == style);
                 });
               }}>
-                                                        <span class="preview-style" data-font-style=${style}>${tl2(trans.font_style[style])}</span>
-                                                    </button>
-                                                `;
+                                                            <span class="preview-style" data-font-style=${style}>${tl2(trans.font_style[style])}</span>
+                                                        </button>
+                                                    `;
               font_style_buttons.push(elem);
               return elem;
             })}
+                                            </div>
                                         </div>
                                         <div class="modal-footer">
                                             <button class="see-more cancel" onclick=${() => dialog_rm({ id: "profile_font" })}>
@@ -41646,9 +41648,19 @@
       );
       chart_reflow();
     }
-    if (settings_store[id] && value == settings_store[id].default && ["hue", "sat", "lit"].includes(id)) {
+    if (["hue", "sat", "lit"].includes(id)) {
+      if (settings.hue == settings_store.hue.default && settings.sat == settings_store.sat.default && settings.lit == settings_store.lit.default) {
+        document.body.style.removeProperty(`--${settings_store.hue.css}`);
+        document.body.style.removeProperty(`--${settings_store.sat.css}`);
+        document.body.style.removeProperty(`--${settings_store.lit.css}`);
+      } else {
+        document.body.style.setProperty(`--${settings_store.hue.css}`, settings.hue);
+        document.body.style.setProperty(`--${settings_store.sat.css}`, settings.sat);
+        document.body.style.setProperty(`--${settings_store.lit.css}`, settings.lit);
+      }
+    } else if (settings_store[id] && settings_store[id] == settings_store[id].default) {
       document.body.style.removeProperty(`--${settings_store[id].css}`);
-    } else if (settings_store[id].css) {
+    } else if (settings_store[id] && settings_store[id].css) {
       document.body.style.setProperty(
         `--${settings_store[id].css}`,
         `${value}${settings_store[id].suffix || ""}`
