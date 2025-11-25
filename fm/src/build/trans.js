@@ -44,7 +44,7 @@ export let lang_info = {
     pt: {
         name: 'Português',
         by: ['ArthRMH', 'auwora', 'fr0r', 'urwq'],
-        last_updated: '2025-11-15'
+        last_updated: '2025-11-25'
     },
     sv: {
         name: 'Svenska',
@@ -179,7 +179,8 @@ export const trans = {
                 en: 'Alum',
                 es: 'Graduado',
                 sv: 'Alumn',
-                ru: 'Выпускник'
+                ru: 'Выпускник',
+                pt: 'Formado'
             },
             reason: {
                 en: 'Former member of Last.fm',
@@ -1609,7 +1610,8 @@ export const trans = {
             }
         },
         exclusive: {
-            en: 'Limited time'
+            en: 'Limited time',
+            pt: 'Tempo limitado'
         }
     },
     new_season: {
@@ -3287,19 +3289,24 @@ export const trans = {
         ru: 'Нажмите, чтобы скопировать'
     },
     paste: {
-        en: 'Paste'
+        en: 'Paste',
+        pt: 'Colar'
     },
     paste_text: {
-        en: 'Paste text'
+        en: 'Paste text',
+        pt: 'Colar texto'
     },
     undo: {
-        en: 'Undo'
+        en: 'Undo',
+        pt: 'Desfazer'
     },
     redo: {
-        en: 'Redo'
+        en: 'Redo',
+        pt: 'Refazer'
     },
     pasted_text: {
-        en: 'Pasted text'
+        en: 'Pasted text',
+        pt: 'Texto colado'
     },
     wiki_standard_tracks: {
         en: 'Track titles should be wrapped in quotation marks (“ ”)',
@@ -7757,7 +7764,8 @@ export const trans = {
             it: 'Pixel',
             sv: 'Pixel',
             ru: 'Пиксель',
-            de: 'Pixel'
+            de: 'Pixel',
+            pt: 'Pixel'
         },
         body: {
             en: 'Guess the album from its pixelated artwork and clues',
@@ -8846,31 +8854,38 @@ export const trans = {
     },
     translator: {
         name: {
-            en: 'Show translator tools'
+            en: 'Show translator tools',
+            pt: 'Mostrar ferramentas de tradução'
         },
         body: {
-            en: 'View expanded details on all languages for use when translating'
+            en: 'View expanded details on all languages for use when translating',
+            pt: 'Veja detalhes expandidos sobre todos os idiomas para uso ao traduzir'
         }
     },
     translate: {
-        en: 'Translate'
+        en: 'Translate',
+        pt: 'Traduza'
     },
     translation_key: {
         // a key such as 'you_have_new_badges' above
-        en: 'Translation key'
+        en: 'Translation key',
+        pt: 'Chave de tradução'
     },
     original: {
-        en: 'Original'
+        en: 'Original',
+        pt: 'Original'
     },
     user_is_listening_to: {
         // (claire) is listening to
         // (song name)
-        en: '{u} is listening to'
+        en: '{u} is listening to',
+        pt: '{u} está ouvindo'
     },
     user_listened_time: {
         // (claire) listened (5 hours ago)
         // (song name)
-        en: '{u} listened {time}'
+        en: '{u} listened {time}',
+        pt: '{u} ouviu há {time}'
     }
 };
 
