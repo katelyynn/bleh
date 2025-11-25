@@ -49490,7 +49490,7 @@
   }
   function start_update() {
     open(
-      `https://github.com/katelyynn/bleh/raw/${settings.branch ? settings.branch : "uwu"}/fm/bleh.user.js`
+      `https://github.com/katelyynn/bleh/refs/heads/${settings.branch ? settings.branch : "uwu"}/fm/bleh.user.js`
     );
     dialog({
       id: "bleh_update",

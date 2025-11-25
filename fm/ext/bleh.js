@@ -5182,7 +5182,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
                     </div>
                 </div>
             </div>
-        `,dismiss:!1,type:"update",replace_if_possible:!0})}function QI(){wt({id:"bleh_update"})}function Mh(){open(`https://github.com/katelyynn/bleh/raw/${T.branch?T.branch:"uwu"}/fm/bleh.user.js`),st({id:"bleh_update",title:u(c.update_to_version).replace("{v}",localStorage.getItem("bleh_update_to")||"unknown"),body:_.node`
+        `,dismiss:!1,type:"update",replace_if_possible:!0})}function QI(){wt({id:"bleh_update"})}function Mh(){open(`https://github.com/katelyynn/bleh/refs/heads/${T.branch?T.branch:"uwu"}/fm/bleh.user.js`),st({id:"bleh_update",title:u(c.update_to_version).replace("{v}",localStorage.getItem("bleh_update_to")||"unknown"),body:_.node`
             <div class="forms">
                 <div class="form">
                     <div class="form-group proceed">
