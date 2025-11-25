@@ -4621,10 +4621,6 @@
     .secondary-nav-item-link[href*="events/2"] {
         padding-left: var(--button-sides) !important;
     }
-    .secondary-nav-item-link[href*="events/1"],
-    .secondary-nav-item-link[href*="events/2"] {
-        display: none !important;
-    }
 
     .has-tab-num {
         position: relative;
