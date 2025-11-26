@@ -294,7 +294,7 @@ function bleh_glacier_library_date() {
         hideOnClick: 'toggle',
 
         onClickOutside(instance, event) {
-            if (instance.popper.querySelector('[aria-expanded="true"]') || event.target.classList.includes('dropdown-menu-clickable-item'))
+            if (instance.popper.querySelector('[aria-expanded="true"]') || event.target.classList.contains('dropdown-menu-clickable-item'))
                 return;
 
             instance.hide();

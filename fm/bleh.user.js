@@ -42243,7 +42243,7 @@
       appendTo: document.body,
       hideOnClick: "toggle",
       onClickOutside(instance, event3) {
-        if (instance.popper.querySelector('[aria-expanded="true"]') || event3.target.classList.includes("dropdown-menu-clickable-item"))
+        if (instance.popper.querySelector('[aria-expanded="true"]') || event3.target.classList.contains("dropdown-menu-clickable-item"))
           return;
         instance.hide();
       }
