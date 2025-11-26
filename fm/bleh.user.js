@@ -48597,7 +48597,7 @@
     const mentions = () => [
       {
         type: "lang",
-        regex: /(?<=^|[\s([{.,])@([a-zA-Z0-9_]+?)(?=$|[^a-zA-Z0-9_]|__)/g,
+        regex: /(?<=^|[\s([{.,])@([a-z0-9_]+?)(?!@)(?=$|[^a-z0-9_]|__)/gi,
         replace: (_, username2) => {
           return `<a class="mention" href="${root}user/${username2}" target="_blank">@${username2}</a>`;
         }
