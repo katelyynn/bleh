@@ -29512,34 +29512,7 @@
     sponsor(replace);
   };
   function sponsor(replace = false) {
-    dialog({
-      id: "sponsor",
-      title: tl2(trans.support_future_development),
-      body: html.node`
-            <div class="modal-vertical-inner support-inner">
-                <div class="avatar">
-                    <img src="${auth.avatar.replace("/avatar42s/", "/avatar170s/")}" alt="${tl2(trans.your_avatar)}">
-                    <span class="avatar-status-dot user-status--bleh-sponsor"></span>
-                </div>
-                <h1 class="colourful">${tl2(trans.support_future_development)}</h1>
-                <p>${html.node([
-        tl2(trans.why_sponsor).replace(
-          "katelyn",
-          sponsor_list && sponsor_list.special ? `<a class="mention" href="${root}user/${sponsor_list.special[0]}">@${sponsor_list.special[0]}</a>` : "katelyn"
-        )
-      ])}</p>
-            </div>
-            <div class="modal-footer">
-                <div class="fill"></div>
-                <a class="btn primary sponsor" href="${sponsor_list.sponsor_link}" target="_blank">
-                    ${tl2(trans.sponsor)}
-                </a>
-                <div class="fill"></div>
-            </div>
-        `,
-      type: "sponsor",
-      replace_if_possible: replace
-    });
+    open("https://katelyn.moe/sponsor");
   }
   unsafeWindow._sponsor_manage = function() {
     sponsor_manage();
