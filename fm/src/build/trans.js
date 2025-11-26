@@ -8889,6 +8889,14 @@ export const trans = {
         // (song name)
         en: '{u} listened {time}',
         pt: '{u} ouviu há {time}'
+    },
+    now_notice: {
+        name: {
+            en: 'This page is not properly supported in bleh, but..'
+        },
+        body: {
+            en: 'If you are a Last.fm Pro subscriber, you can view your current active track in your profile menu at all times'
+        }
     }
 };
 

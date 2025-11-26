@@ -33,7 +33,7 @@ import {
 } from './components/lotus';
 import { music_grids } from './components/music_grid';
 import { nag_bar } from './components/nag_bar';
-import { load_notifications } from './components/notify';
+import { load_notifications, notify } from './components/notify';
 import { patch_titles } from './components/track';
 import { load_settings } from './config';
 import { theme_version, version } from './main';
@@ -159,7 +159,24 @@ export function bleh() {
 
             hideAll();
         },
-        on_error: handle_error
+        on_error: handle_error,
+        on_dedicated_page: (type) => {
+            if (type == 'now') {
+                if (page.state.notified_now) return;
+
+                page.state.notified_now = true;
+
+                load_notifications();
+
+                notify({
+                    id: 'now',
+                    title: tl(trans.now_notice.name),
+                    body: tl(trans.now_notice.body),
+                    type: 'info',
+                    persist: true
+                });
+            }
+        }
     });
 }
 

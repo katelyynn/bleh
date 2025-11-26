@@ -49568,7 +49568,7 @@
         "color: unset"
       );
   }
-  var version2 = "2025.1019";
+  var version2 = "2025.1126.2";
   var last_page_type = {
     state: void 0
   };
@@ -49582,7 +49582,8 @@
     on_mutation,
     on_page_change,
     on_subpage_change,
-    on_error
+    on_error,
+    on_dedicated_page
   }) {
     log2("starting florence", "load", "info", {
       page: page2,
@@ -49591,7 +49592,8 @@
       on_mutation,
       on_page_change,
       on_subpage_change,
-      on_error
+      on_error,
+      on_dedicated_page
     });
     let head_observer = new MutationObserver(() => {
       if (document.head) {
@@ -49614,6 +49616,11 @@
         pre_observer.disconnect();
       } else if (document.body && (document.body.querySelector(":scope > .container") || document.body.classList.contains("namespace--user_now"))) {
         document.body.classList.add("florence-loaded");
+        if (document.body.querySelector(":scope > .container")) {
+          on_dedicated_page("503");
+        } else if (document.body.classList.contains("namespace--user_now")) {
+          on_dedicated_page("now");
+        }
       }
     });
     pre_observer.observe(document.documentElement, {
@@ -49663,18 +49670,13 @@
       if (page2.state.error) return;
       if (on_mutation) on_mutation();
       let performance_end = performance.now();
-      log2(
-        `finished in ${(performance_end - performance_start) / 1e3} seconds`,
-        "loop"
-      );
+      log2(`finished in ${(performance_end - performance_start) / 1e3} seconds`, "loop");
     }
     function assign_page() {
       document.documentElement.classList.add("florence-supports-loading");
       if (!page2.structure.wrapper)
         page2.structure.wrapper = document.body.querySelector(".main-content");
-      let main_content = page2.structure.wrapper.querySelector(
-        ":scope > :last-child:not([data-florence])"
-      );
+      let main_content = page2.structure.wrapper.querySelector(":scope > :last-child:not([data-florence])");
       if (main_content) {
         assign_page_type();
         if (on_page_change) on_page_change(main_content);
@@ -58189,7 +58191,21 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         if (page.structure.indicator) page_indicator();
         hideAll();
       },
-      on_error: handle_error
+      on_error: handle_error,
+      on_dedicated_page: (type) => {
+        if (type == "now") {
+          if (page.state.notified_now) return;
+          page.state.notified_now = true;
+          load_notifications();
+          notify({
+            id: "now",
+            title: tl2(trans.now_notice.name),
+            body: tl2(trans.now_notice.body),
+            type: "info",
+            persist: true
+          });
+        }
+      }
     });
   }
   function solarium() {
@@ -67545,6 +67561,14 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       // (song name)
       en: "{u} listened {time}",
       pt: "{u} ouviu h\xE1 {time}"
+    },
+    now_notice: {
+      name: {
+        en: "This page is not properly supported in bleh, but.."
+      },
+      body: {
+        en: "If you are a Last.fm Pro subscriber, you can view your current active track in your profile menu at all times"
+      }
     }
   };
   function tl2(key, replacements = {}) {
