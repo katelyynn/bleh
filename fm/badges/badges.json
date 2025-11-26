@@ -1,5 +1,5 @@
 {
-    "latest": "2025.1121",
+    "latest": "2025.1126",
     "sponsors": [
         "clairedoll", "kateshapedbox", "evangelicgirl",
         "astrablooms", "ItsProyal", "vwvwvwvwvwvwv", "Orofil",
@@ -10,7 +10,8 @@
         "noapop", "celebrating", "myraisounds", "riskyrizey",
         "fourohclok", "liminalvespers", "HuxP", "K40M0J1",
         "goldenstuffed", "favewa", "kar1x", "nojonsko",
-        "urwq", "driftpsalm", "popcorniscrazy", "s0540a"
+        "urwq", "driftpsalm", "popcorniscrazy", "s0540a",
+        "dylandotat"
     ],
     "sponsors_one_time": [
         "kateshapedbox",
@@ -444,6 +445,19 @@
                 "hue": 131,
                 "sat": 1.35,
                 "lit": 0.81
+            }
+        ],
+        "dylandotat": [
+            {
+                "type": "sponsor"
+            },
+            {
+                "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLXBhaW50YnJ1c2gtaWNvbiBsdWNpZGUtcGFpbnRicnVzaCI+PHBhdGggZD0ibTE0LjYyMiAxNy44OTctMTAuNjgtMi45MTMiLz48cGF0aCBkPSJNMTguMzc2IDIuNjIyYTEgMSAwIDEgMSAzLjAwMiAzLjAwMkwxNy4zNiA5LjY0M2EuNS41IDAgMCAwIDAgLjcwN2wuOTQ0Ljk0NGEyLjQxIDIuNDEgMCAwIDEgMCAzLjQwOGwtLjk0NC45NDRhLjUuNSAwIDAgMS0uNzA3IDBMOC4zNTQgNy4zNDhhLjUuNSAwIDAgMSAwLS43MDdsLjk0NC0uOTQ0YTIuNDEgMi40MSAwIDAgMSAzLjQwOCAwbC45NDQuOTQ0YS41LjUgMCAwIDAgLjcwNyAweiIvPjxwYXRoIGQ9Ik05IDhjLTEuODA0IDIuNzEtMy45NyAzLjQ2LTYuNTgzIDMuOTQ4YS41MDcuNTA3IDAgMCAwLS4zMDIuODE5bDcuMzIgOC44ODNhMSAxIDAgMCAwIDEuMTg1LjIwNEMxMi43MzUgMjAuNDA1IDE2IDE2Ljc5MiAxNiAxNSIvPjwvc3ZnPg==",
+                "reason": "sponsor",
+                "name": "Orange Fan",
+                "hue": 24,
+                "sat": 2,
+                "lit": 1
             }
         ]
     }
