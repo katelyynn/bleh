@@ -1033,7 +1033,8 @@
         --icon-16-dropdown: var(--icon-16-arrow-down);
         --icon-16-music-list: var(--icon-16-playlist);
         --icon-16-radio: url("data:image/svg+xml;base64,PHN2ZyAgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiAgd2lkdGg9IjI0IiAgaGVpZ2h0PSIyNCIgIHZpZXdCb3g9IjAgMCAyNCAyNCIgIGZpbGw9Im5vbmUiICBzdHJva2U9ImN1cnJlbnRDb2xvciIgIHN0cm9rZS13aWR0aD0iMiIgIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgIHN0cm9rZS1saW5lam9pbj0icm91bmQiICBjbGFzcz0iaWNvbiBpY29uLXRhYmxlciBpY29ucy10YWJsZXItb3V0bGluZSBpY29uLXRhYmxlci1hY2Nlc3MtcG9pbnQiPjxwYXRoIHN0cm9rZT0ibm9uZSIgZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPjxwYXRoIGQ9Ik0xMiAxMmwwIC4wMSIgLz48cGF0aCBkPSJNMTQuODI4IDkuMTcyYTQgNCAwIDAgMSAwIDUuNjU2IiAvPjxwYXRoIGQ9Ik0xNy42NTcgNi4zNDNhOCA4IDAgMCAxIDAgMTEuMzE0IiAvPjxwYXRoIGQ9Ik05LjE2OCAxNC44MjhhNCA0IDAgMCAxIDAgLTUuNjU2IiAvPjxwYXRoIGQ9Ik02LjMzNyAxNy42NTdhOCA4IDAgMCAxIDAgLTExLjMxNCIgLz48L3N2Zz4=");
-        --icon-16-edit: url("data:image/svg+xml;base64,PHN2ZyAgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiAgd2lkdGg9IjI0IiAgaGVpZ2h0PSIyNCIgIHZpZXdCb3g9IjAgMCAyNCAyNCIgIGZpbGw9Im5vbmUiICBzdHJva2U9ImN1cnJlbnRDb2xvciIgIHN0cm9rZS13aWR0aD0iMiIgIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgIHN0cm9rZS1saW5lam9pbj0icm91bmQiICBjbGFzcz0iaWNvbiBpY29uLXRhYmxlciBpY29ucy10YWJsZXItb3V0bGluZSBpY29uLXRhYmxlci1wZW5jaWwiPjxwYXRoIHN0cm9rZT0ibm9uZSIgZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPjxwYXRoIGQ9Ik00IDIwaDRsMTAuNSAtMTAuNWEyLjgyOCAyLjgyOCAwIDEgMCAtNCAtNGwtMTAuNSAxMC41djQiIC8+PHBhdGggZD0iTTEzLjUgNi41bDQgNCIgLz48L3N2Zz4=");
+        --icon-16-edit: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1vdXRsaW5lIGljb24tdGFibGVyLWVkaXQiPjxwYXRoIHN0cm9rZT0ibm9uZSIgZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPjxwYXRoIGQ9Ik03IDdoLTFhMiAyIDAgMCAwIC0yIDJ2OWEyIDIgMCAwIDAgMiAyaDlhMiAyIDAgMCAwIDIgLTJ2LTEiIC8+PHBhdGggZD0iTTIwLjM4NSA2LjU4NWEyLjEgMi4xIDAgMCAwIC0yLjk3IC0yLjk3bC04LjQxNSA4LjM4NXYzaDNsOC4zODUgLTguNDE1eiIgLz48cGF0aCBkPSJNMTYgNWwzIDMiIC8+PC9zdmc+");
+        --icon-16-edit-mini: url("data:image/svg+xml;base64,PHN2ZyAgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiAgd2lkdGg9IjI0IiAgaGVpZ2h0PSIyNCIgIHZpZXdCb3g9IjAgMCAyNCAyNCIgIGZpbGw9Im5vbmUiICBzdHJva2U9ImN1cnJlbnRDb2xvciIgIHN0cm9rZS13aWR0aD0iMiIgIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgIHN0cm9rZS1saW5lam9pbj0icm91bmQiICBjbGFzcz0iaWNvbiBpY29uLXRhYmxlciBpY29ucy10YWJsZXItb3V0bGluZSBpY29uLXRhYmxlci1wZW5jaWwiPjxwYXRoIHN0cm9rZT0ibm9uZSIgZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPjxwYXRoIGQ9Ik00IDIwaDRsMTAuNSAtMTAuNWEyLjgyOCAyLjgyOCAwIDEgMCAtNCAtNGwtMTAuNSAxMC41djQiIC8+PHBhdGggZD0iTTEzLjUgNi41bDQgNCIgLz48L3N2Zz4=");
         --icon-16-edit-bulk: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjI1IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLXNxdWFyZS1zdGFjay1pY29uIGx1Y2lkZS1zcXVhcmUtc3RhY2siPjxwYXRoIGQ9Ik00IDEwYy0xLjEgMC0yLS45LTItMlY0YzAtMS4xLjktMiAyLTJoNGMxLjEgMCAyIC45IDIgMiIvPjxwYXRoIGQ9Ik0xMCAxNmMtMS4xIDAtMi0uOS0yLTJ2LTRjMC0xLjEuOS0yIDItMmg0YzEuMSAwIDIgLjkgMiAyIi8+PHJlY3Qgd2lkdGg9IjgiIGhlaWdodD0iOCIgeD0iMTQiIHk9IjE0IiByeD0iMiIvPjwvc3ZnPg==");
         --icon-16-track: url("data:image/svg+xml;base64,PHN2ZyAgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiAgd2lkdGg9IjI0IiAgaGVpZ2h0PSIyNCIgIHZpZXdCb3g9IjAgMCAyNCAyNCIgIGZpbGw9Im5vbmUiICBzdHJva2U9ImN1cnJlbnRDb2xvciIgIHN0cm9rZS13aWR0aD0iMiIgIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgIHN0cm9rZS1saW5lam9pbj0icm91bmQiICBjbGFzcz0iaWNvbiBpY29uLXRhYmxlciBpY29ucy10YWJsZXItb3V0bGluZSBpY29uLXRhYmxlci1tdXNpYyI+PHBhdGggc3Ryb2tlPSJub25lIiBkPSJNMCAwaDI0djI0SDB6IiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTMgMTdhMyAzIDAgMSAwIDYgMGEzIDMgMCAwIDAgLTYgMCIgLz48cGF0aCBkPSJNMTMgMTdhMyAzIDAgMSAwIDYgMGEzIDMgMCAwIDAgLTYgMCIgLz48cGF0aCBkPSJNOSAxN3YtMTNoMTB2MTMiIC8+PHBhdGggZD0iTTkgOGgxMCIgLz48L3N2Zz4=");
         --icon-16-album: url("data:image/svg+xml;base64,PHN2ZyAgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiAgd2lkdGg9IjI0IiAgaGVpZ2h0PSIyNCIgIHZpZXdCb3g9IjAgMCAyNCAyNCIgIGZpbGw9ImN1cnJlbnRDb2xvciIgIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1maWxsZWQgaWNvbi10YWJsZXItZGlzYyI+PHBhdGggc3Ryb2tlPSJub25lIiBkPSJNMCAwaDI0djI0SDB6IiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTE3IDMuMzRhMTAgMTAgMCAxIDEgLTE1IDguNjZsLjAwNSAtLjMyNGExMCAxMCAwIDAgMSAxNC45OTUgLTguMzM2bTAgNy42NmExIDEgMCAwIDAgLTEgMWE0IDQgMCAwIDEgLTQgNGExIDEgMCAwIDAgMCAyYTYgNiAwIDAgMCA2IC02YTEgMSAwIDAgMCAtMSAtMW0tNSAtMWEyIDIgMCAwIDAgLTEuOTk1IDEuODVsLS4wMDUgLjE1YTIgMiAwIDEgMCAyIC0ybTAgLTRhNiA2IDAgMCAwIC02IDZhMSAxIDAgMCAwIDIgMGE0IDQgMCAwIDEgNCAtNGExIDEgMCAwIDAgMCAtMiIgLz48L3N2Zz4=");
@@ -5712,6 +5713,8 @@
             grid-template-rows: repeat(var(--height), var(--grid-item-size));
             grid-template-areas: unset;
 
+            gap: var(--item-list-gap, 6px);
+
             --cards-overlay-image-subtlest: none;
 
             .grid-items-item {
@@ -9332,11 +9335,7 @@
                 --shadow-hov: none !important;
                 --col: hsl(var(--c2)) !important;
                 --radius: var(--button-radius);
-                --padding: 7px var(--button-sides) 7px
-                    calc(
-                        var(--button-sides-icon) + var(--icon-size) +
-                            var(--icon-gap)
-                    ) !important;
+                --padding: 7px var(--button-sides) 7px calc(var(--button-sides-icon) + var(--icon-size) + 6px) !important;
                 margin: 0 !important;
                 min-height: 36px !important;
 
@@ -10254,6 +10253,10 @@
     }
     [data-type="edit"] {
         --mask: var(--icon-16-edit);
+
+        &.blend-v2-btn {
+            --mask: var(--icon-16-edit-mini);
+        }
     }
     [data-type="bulk-edit"] {
         --mask: var(--icon-16-edit-bulk);
@@ -21427,7 +21430,7 @@
         text-decoration: var(--force-underline, none) !important;
 
         position: relative;
-        padding-left: calc(var(--icon-size) + var(--icon-gap));
+        padding-left: calc(var(--icon-size) + 6px);
         --left: 0;
 
         &:before {
@@ -21947,7 +21950,7 @@
         }
 
         .wiki-edit-small {
-            --mask: var(--icon-16-edit);
+            --mask: var(--icon-16-edit-mini);
         }
         .read-more {
             --mask: var(--icon-16-arrow-right);
