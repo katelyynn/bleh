@@ -174,8 +174,10 @@ export function bleh_settings() {
         ` : ''}
         <div class="bleh--panel">
             <p class="card-tip">
-                ${version.brand} ${version.build}.${version.sku}
-                <i>(florence ${florence_version})</i>
+                ${version.brand} ${version.build} ‘${version.sku}’
+            </p>
+            <p class="card-tip">
+                florence ${florence_version}
             </p>
         </div>
     `);

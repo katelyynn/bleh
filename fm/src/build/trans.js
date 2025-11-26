@@ -8784,7 +8784,7 @@ export const trans = {
             es: 'La rama de lanzamiento actual es ‘uwu’, no la cambies a menos de que sepas lo que haces',
             it: 'Il branch release predefinito è ‘uwu’, non cambiare questo valore se non si sa cosa si sta facendo',
             sv: 'Standardbranshen är ‘uwu’, ändra inte om du inte vet vad du gör',
-            ru: 'Ветка выпуска по умолчанию - "uwu", не меняйте её, если точно не знаете, что делаете',
+            ru: 'Ветка выпуска по умолчанию - ‘uwu’, не меняйте её, если точно не знаете, что делаете',
             pt: 'A branch de lançamento padrão é ‘uwu’, não altere a menos que você saiba o que está fazendo'
         }
     },

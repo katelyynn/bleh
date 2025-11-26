@@ -46527,7 +46527,7 @@
                     </a>
                 ` : ""}
                 ${settings.music_links.includes("qobuz") ? html.node`
-                    <a class="music-link play-this-track-playlink--qobuz" href="https://www.qobuz.com/search/tracks/${sanitise(page.sister, " ")}%20${sanitise(page.name, " ")}" target="_blank">
+                    <a class="music-link play-this-track-playlink--qobuz" href="https://www.qobuz.com/gb-en/search/tracks/${sanitise(page.name, " ")}?ssf[s]=main_catalog&ssf[f][an]=${sanitise(page.sister, " ")}" target="_blank">
                         Qobuz
                     </a>
                 ` : ""}
@@ -46611,10 +46611,7 @@
                     ${settings.music_links.includes("qobuz") ? html.node`
                             <a
                                 class="music-link play-this-track-playlink--qobuz"
-                                href="https://www.qobuz.com/search/albums/${sanitise(
-            page.sister,
-            " "
-          )}%20${sanitise(page.name, " ")}"
+                                href="https://www.qobuz.com/gb-en/search/albums/${sanitise(page.name, " ")}?ssf[s]=main_catalog&ssf[f][an]=${sanitise(page.sister, " ")}"
                                 target="_blank"
                             >
                                 Qobuz
@@ -46733,7 +46730,7 @@
                     ${settings.music_links.includes("qobuz") ? html.node`
                             <a
                                 class="music-link play-this-track-playlink--qobuz"
-                                href="https://www.qobuz.com/search/artists/${sanitise(
+                                href="https://www.qobuz.com/gb-en/search/artists/${sanitise(
             page.name,
             " "
           )}"
@@ -49826,8 +49823,10 @@
         ` : ""}
         <div class="bleh--panel">
             <p class="card-tip">
-                ${version.brand} ${version.build}.${version.sku}
-                <i>(florence ${version2})</i>
+                ${version.brand} ${version.build} ‘${version.sku}’
+            </p>
+            <p class="card-tip">
+                florence ${version2}
             </p>
         </div>
     `);
@@ -67456,7 +67455,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         es: "La rama de lanzamiento actual es \u2018uwu\u2019, no la cambies a menos de que sepas lo que haces",
         it: "Il branch release predefinito \xE8 \u2018uwu\u2019, non cambiare questo valore se non si sa cosa si sta facendo",
         sv: "Standardbranshen \xE4r \u2018uwu\u2019, \xE4ndra inte om du inte vet vad du g\xF6r",
-        ru: '\u0412\u0435\u0442\u043A\u0430 \u0432\u044B\u043F\u0443\u0441\u043A\u0430 \u043F\u043E \u0443\u043C\u043E\u043B\u0447\u0430\u043D\u0438\u044E - "uwu", \u043D\u0435 \u043C\u0435\u043D\u044F\u0439\u0442\u0435 \u0435\u0451, \u0435\u0441\u043B\u0438 \u0442\u043E\u0447\u043D\u043E \u043D\u0435 \u0437\u043D\u0430\u0435\u0442\u0435, \u0447\u0442\u043E \u0434\u0435\u043B\u0430\u0435\u0442\u0435',
+        ru: "\u0412\u0435\u0442\u043A\u0430 \u0432\u044B\u043F\u0443\u0441\u043A\u0430 \u043F\u043E \u0443\u043C\u043E\u043B\u0447\u0430\u043D\u0438\u044E - \u2018uwu\u2019, \u043D\u0435 \u043C\u0435\u043D\u044F\u0439\u0442\u0435 \u0435\u0451, \u0435\u0441\u043B\u0438 \u0442\u043E\u0447\u043D\u043E \u043D\u0435 \u0437\u043D\u0430\u0435\u0442\u0435, \u0447\u0442\u043E \u0434\u0435\u043B\u0430\u0435\u0442\u0435",
         pt: "A branch de lan\xE7amento padr\xE3o \xE9 \u2018uwu\u2019, n\xE3o altere a menos que voc\xEA saiba o que est\xE1 fazendo"
       }
     },
