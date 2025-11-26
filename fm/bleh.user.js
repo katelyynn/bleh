@@ -49612,7 +49612,7 @@
       if (document.body && document.body.querySelector(".adaptive-skin-container") && document.body.querySelector(".footer")) {
         main2();
         pre_observer.disconnect();
-      } else if (document.body && document.body.querySelector(":scope > .container")) {
+      } else if (document.body && (document.body.querySelector(":scope > .container") || document.body.classList.contains("namespace--user_now"))) {
         document.body.classList.add("florence-loaded");
       }
     });
