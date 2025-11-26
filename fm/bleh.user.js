@@ -30941,7 +30941,7 @@
       } else if (submit_on_character) {
         setTimeout(() => {
           if (func) func(input_box.value);
-        }, 0);
+        }, 1);
       }
     });
     container.submit = () => {
