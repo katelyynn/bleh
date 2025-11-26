@@ -1417,6 +1417,7 @@ export async function render_setting_page(page_id) {
                     <h4>${tl(trans.settings)}</h4>
                     <div class="setting-group">
                         ${setting({ id: 'seasonal_particles' })}
+                        ${setting({ id: 'seasonal_particles_fps' })}
                         ${setting({ id: 'seasonal_overlays' })}
                     </div>
                 </div>

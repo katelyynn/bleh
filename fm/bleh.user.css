@@ -20870,10 +20870,9 @@
     }
 
     /*     SNOW     */
-    #snowflakes {
+    .snow-container {
         position: fixed;
-        left: 0px;
-        top: 0px;
+        inset: 0;
         z-index: 900;
         user-select: none;
         pointer-events: none;
@@ -20885,7 +20884,7 @@
     }
 
     .snow {
-        position: fixed;
+        position: absolute;
         background-color: var(--snow);
         user-select: none;
         z-index: 1000;
@@ -20894,6 +20893,23 @@
         width: 8px;
         height: 8px;
         margin-top: -8px;
+
+        will-change: transform, opacity;
+
+        animation-name: snow-fall;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+
+        box-shadow: var(--seasonal-particles-glow, 0 0 15px var(--snow-glow));
+    }
+
+    @keyframes snow-fall {
+        from {
+            transform: translate(var(--x), -10px) scale(var(--s));
+        }
+        to {
+            transform: translate(var(--x-end), 105vh) scale(var(--s));
+        }
     }
 
     .icon {

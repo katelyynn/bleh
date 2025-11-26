@@ -49251,26 +49251,28 @@
     return `${hours}:${minutes}:${seconds}`;
   }
   function prep_snow() {
-    let prev_container = document.getElementById("snowflakes");
-    if (prev_container != null) return;
-    document.documentElement.appendChild(html.node`
-        <div class="snow-container" id="snowflakes">
-            <span class="snow snowflake"></span>
-        </div>`);
+    if (page.state.snow) return;
+    page.state.snow = html.node`
+        <div class="snow-container" />
+    `;
+    document.documentElement.appendChild(page.state.snow);
   }
   function begin_snowflakes(enabled, count) {
     if (!enabled) return;
-    let dynamic_css = "";
-    var snow_html = "";
-    for (let i = 1; i < count; i++) {
-      snow_html += '<i class="snow"></i>';
-      let rndX = snow_rand(0, 1e6) * 1e-4, rndO = snow_rand(-1e5, 1e5) * 1e-4, rndT = (snow_rand(3, 8) * 10).toFixed(2), rndS = (snow_rand(0, 1e4) * 1e-4).toFixed(2);
-      dynamic_css += ".snow:nth-child(" + i + "){opacity:" + (snow_rand(1, 1e4) * 1e-4).toFixed(2) + ";transform:translate(" + rndX.toFixed(2) + "vw,-10px) scale(" + rndS + ");animation:fall-" + i + " " + snow_rand(10, 30) + "s -" + snow_rand(0, 30) + "s linear infinite}@keyframes fall-" + i + "{" + rndT + "%{transform:translate(" + (rndX + rndO).toFixed(2) + "vw," + rndT + "vh) scale(" + rndS + ")}to{transform:translate(" + (rndX + rndO / 2).toFixed(2) + "vw, 105vh) scale(" + rndS + ")}}";
-    }
-    document.getElementById("snowflakes").innerHTML = "<style>" + dynamic_css + "</style>" + snow_html;
-  }
-  function snow_rand(a, b) {
-    return Math.floor(Math.random() * (b - a + 1)) + a;
+    const flakes = Array.from({ length: count }, () => {
+      const x = (Math.random() * 100).toFixed(2);
+      const drift = (Math.random() * 20 - 10).toFixed(2);
+      const scale = (Math.random() * 1.1 + 0.3).toFixed(2);
+      const duration = (Math.random() * 60 + 10).toFixed(2);
+      const delay = (Math.random() * -30).toFixed(2);
+      const opacity = (Math.random() * 0.7 + 0.3).toFixed(2);
+      return { x, drift, scale, duration, delay, opacity };
+    });
+    render(page.state.snow, html`
+        ${flakes.map((flake) => html.node`
+            <div class="snow" style="--x: ${flake.x}vw; --x-end: calc(${flake.x}vw + ${flake.drift}vw); --s: ${flake.scale}; animation-duration: ${flake.duration}s; animation-delay: ${flake.delay}s; opacity: ${flake.opacity}" />
+        `)}
+    `);
   }
 
   // node_modules/cropperjs/dist/cropper.min.css
@@ -50974,6 +50976,7 @@
                     <h4>${tl2(trans.settings)}</h4>
                     <div class="setting-group">
                         ${setting({ id: "seasonal_particles" })}
+                        ${setting({ id: "seasonal_particles_fps" })}
                         ${setting({ id: "seasonal_overlays" })}
                     </div>
                 </div>

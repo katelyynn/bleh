@@ -16,7 +16,7 @@ import { set_storage } from './build/tools';
 import { tl, trans } from './build/trans';
 import { load_chart_colours } from './chart';
 import { notify } from './components/notify';
-import { html } from 'lighterhtml';
+import { html, render } from 'lighterhtml';
 import { DateTime, Duration } from 'luxon';
 
 export function set_season() {
@@ -320,75 +320,32 @@ function countdown_to(time_until) {
 }
 
 function prep_snow() {
-    let prev_container = document.getElementById('snowflakes');
-    if (prev_container != null) return;
+    if (page.state.snow) return;
 
-    document.documentElement.appendChild(html.node`
-        <div class="snow-container" id="snowflakes">
-            <span class="snow snowflake"></span>
-        </div>`);
+    page.state.snow = html.node`
+        <div class="snow-container" />
+    `;
+    document.documentElement.appendChild(page.state.snow);
 }
 
-// based on https://app.embed.im/snow.js
+// loosely based on https://app.embed.im/snow.js
 function begin_snowflakes(enabled, count) {
     if (!enabled) return;
 
-    let dynamic_css = '';
-    var snow_html = '';
+    const flakes = Array.from({ length: count }, () => {
+        const x = (Math.random() * 100).toFixed(2);
+        const drift = (Math.random() * 20 - 10).toFixed(2);
+        const scale = (Math.random() * 1.1 + 0.3).toFixed(2);
+        const duration = (Math.random() * 60 + 10).toFixed(2);
+        const delay = (Math.random() * -30).toFixed(2);
+        const opacity = (Math.random() * 0.7 + 0.3).toFixed(2);
 
-    for (let i = 1; i < count; i++) {
-        snow_html += '<i class="snow"></i>';
-        let rndX = snow_rand(0, 1000000) * 0.0001,
-            rndO = snow_rand(-100000, 100000) * 0.0001,
-            rndT = (snow_rand(3, 8) * 10).toFixed(2),
-            rndS = (snow_rand(0, 10000) * 0.0001).toFixed(2);
-        dynamic_css +=
-            '.snow:nth-child(' +
-            i +
-            '){' +
-            'opacity:' +
-            (snow_rand(1, 10000) * 0.0001).toFixed(2) +
-            ';' +
-            'transform:translate(' +
-            rndX.toFixed(2) +
-            'vw,-10px) scale(' +
-            rndS +
-            ');' +
-            'animation:fall-' +
-            i +
-            ' ' +
-            snow_rand(10, 30) +
-            's -' +
-            snow_rand(0, 30) +
-            's linear infinite' +
-            '}' +
-            '@keyframes fall-' +
-            i +
-            '{' +
-            rndT +
-            '%{' +
-            'transform:translate(' +
-            (rndX + rndO).toFixed(2) +
-            'vw,' +
-            rndT +
-            'vh) scale(' +
-            rndS +
-            ')' +
-            '}' +
-            'to{' +
-            'transform:translate(' +
-            (rndX + rndO / 2).toFixed(2) +
-            'vw, 105vh) scale(' +
-            rndS +
-            ')' +
-            '}' +
-            '}';
-    }
+        return { x, drift, scale, duration, delay, opacity };
+    });
 
-    document.getElementById('snowflakes').innerHTML =
-        '<style>' + dynamic_css + '</style>' + snow_html;
-}
-
-function snow_rand(a, b) {
-    return Math.floor(Math.random() * (b - a + 1)) + a;
+    render(page.state.snow, html`
+        ${flakes.map(flake => html.node`
+            <div class="snow" style="--x: ${flake.x}vw; --x-end: calc(${flake.x}vw + ${flake.drift}vw); --s: ${flake.scale}; animation-duration: ${flake.duration}s; animation-delay: ${flake.delay}s; opacity: ${flake.opacity}" />
+        `)}
+    `);
 }
