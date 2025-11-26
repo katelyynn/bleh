@@ -8248,6 +8248,7 @@
     .radio-cont > .radio,
     .blend-v2-btn,
     .notification,
+    .user-now-empty-state-button,
     .inbox-item {
         --bg: var(--cards-overlay-image-subtlest, none), hsl(var(--b3));
         --bg-hov:
@@ -8426,7 +8427,8 @@
                 .primary,
                 .btn-subscribe,
                 .share-link,
-                .view-item[aria-checked="true"]
+                .view-item[aria-checked="true"],
+                .user-now-empty-state-button
             ):not([data-has-file]) {
             --bg:
                 var(--cards-overlay-image-subtlest, none), hsl(var(--h3)) !important;
@@ -20191,7 +20193,7 @@
 
             overflow: hidden;
 
-            background: hsl(var(--b5));
+            background: hsl(var(--b5), var(--solarium-opacity, var(--menu-opacity)));
             box-shadow: var(--card-shadow);
             padding: 12px var(--button-sides);
             border: 1px solid var(--card-border-base);
@@ -20201,6 +20203,9 @@
                 hsl(var(--c2)),
                 hsl(var(--c3)) 50%
             );
+
+            backdrop-filter: var(--solarium);
+            -webkit-backdrop-filter: var(--solarium);
 
             display: flex;
             gap: var(--card-gap);
@@ -20273,6 +20278,7 @@
             }
             .notification-body {
                 cursor: default;
+                max-width: 400px;
             }
 
             &.fade-out {
@@ -29603,5 +29609,9 @@
         display: inline-block;
         background-size: 100%;
         image-rendering: pixelated;
+    }
+
+    .user-now-empty-state-message {
+        color: hsl(var(--c2));
     }
 }
