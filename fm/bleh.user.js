@@ -42223,7 +42223,9 @@
         const target = index3 % 2;
         picker_presets[target].appendChild(html.node`
                 <li class="date-range-picker-preset ${selected ? "date-range-picker-preset--selected" : ""}">
-                    <a href="${window.location.href.replace(window.location.search, "")}?from=${year2}-01-01&rangetype=year">
+                    <a href="${window.location.href.replace(window.location.search, "")}?from=${year2}-01-01&rangetype=year" onclick=${() => {
+          modal.hide();
+        }}>
                         ${year2}
                     </a>
                 </li>
