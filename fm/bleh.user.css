@@ -111,9 +111,9 @@
         --sat-fav: 1.5;
         --lit-fav: 1;
 
-        --hue-orange: 20;
-        --sat-orange: 1.3;
-        --lit-orange: 1;
+        --hue-orange: 33;
+        --sat-orange: 1.4;
+        --lit-orange: 0.98;
 
         --hue-pro: 174;
 
@@ -16195,15 +16195,12 @@
                 var(--primary-shadow),
                 0 3px 12px hsl(var(--h4), 32%),
                 var(--interactable-outer) !important;
-            padding: 1px 0 0 !important;
-            font-size: 13px !important;
+            padding: 0 0 1px !important;
+            font-size: 12px !important;
 
             border-top-left-radius: var(--calendar-radius);
             border-top-right-radius: var(--calendar-radius);
-
-            --hue-over: 0;
-            --sat-over: 1.2;
-            --lit-over: 0.9;
+            font-weight: var(--font-weight-bold) !important;
         }
 
         &.calendar-icon-day,
@@ -16263,6 +16260,7 @@
         right: 0 !important;
 
         background: hsl(var(--h3)) !important;
+        box-shadow: var(--primary-shadow), 0 3px 12px hsl(var(--h4), 32%) !important;
         color: hsl(var(--b7)) !important;
         --mask: var(--icon-16-check);
         --left: 50% !important;
@@ -16271,6 +16269,7 @@
         --margin-left: calc(-1 * (var(--mask-size) / 2)) !important;
         --margin-top: calc(-1 * (var(--mask-size) / 2)) !important;
         --w: 16px;
+        border-radius: 8px;
 
         width: var(--w) !important;
         height: var(--w) !important;
