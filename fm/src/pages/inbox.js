@@ -80,6 +80,9 @@ export async function bleh_inbox() {
 
         bleh_notification_list(notifications);
     } else if (page.subpage.endsWith('overview')) {
+        let inbox = page.structure.container.querySelector('.inbox');
+        page.structure.main.appendChild(inbox);
+
         const header = page.structure.main.querySelector('.inbox-buttons');
         const select_all = header.querySelector('.inbox-select-all');
     } else if (page.subpage == 'message_overview' || page.subpage == 'sent_message') {

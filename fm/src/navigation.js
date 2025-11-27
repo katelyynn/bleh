@@ -52,8 +52,7 @@ export function patch_masthead() {
 export function update_masthead(
     masthead_logo = document.body.querySelector('.masthead-logo')
 ) {
-    const update_required =
-        localStorage.getItem('bleh_update_required') || 'false';
+    const update_required = localStorage.getItem('bleh_update_required') || 'false';
 
     let home_link;
 
@@ -216,6 +215,8 @@ export function append_nav() {
         document.body.appendChild(style_warning);
         page.structure.style_warning = style_warning;
     }
+
+    const update_required = localStorage.getItem('bleh_update_required') || 'false';
 
     page.state.quick_access_items = {
         home: {
@@ -1252,6 +1253,17 @@ export function append_nav() {
                     theme: 'mobile',
                     content: html.node`
                         <div class="window-menu-items">
+                            <form>
+                                <input type="hidden" name="csrfmiddlewaretoken" value="${token}">
+                                <a class="dropdown-menu-clickable-item" ref=${(el) => (button = el)} data-menu-item="logout" href="${root}logout">
+                                    ${tl(trans.logout)}
+                                </a>
+                            </form>
+                            <button class="dropdown-menu-clickable-item" data-menu-item="news" onclick=${() => {
+                                news();
+                            }}>
+                                ${tl(trans.news)}
+                            </button>
                             ${settings.navigation_items.map((val) => {
                                 let elem;
 
@@ -1321,7 +1333,7 @@ export function append_nav() {
                 const btn = html.node`
                     <a class="btn mobile-control" aria-checked=${page.type == 'inbox'} data-type="inbox">
                         ${tl(trans.inbox)}
-                        ${inbox_count > 0 || notif_count > 0 ? html.node`<div class="notification-count-badge"></div>` : ''}
+                        ${count > 0 ? html.node`<div class="notification-count-badge"></div>` : ''}
                     </a>
                 `;
 
@@ -1358,6 +1370,7 @@ export function append_nav() {
             }}
             <a class="btn mobile-control" aria-checked=${page.type == 'settings' || page.type == 'bleh_settings'} data-menu-item="settings" href="${root}bleh">
                 ${tl(trans.settings)}
+                ${update_required === 'true' ? html.node`<div class="notification-count-badge"></div>` : ''}
             </a>
         </div>
     `);

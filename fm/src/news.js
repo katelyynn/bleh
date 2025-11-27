@@ -6,12 +6,13 @@
 
 import { html } from 'lighterhtml';
 import { log } from './build/log';
-import { page } from './build/page';
+import { page, root } from './build/page';
 import { tl, trans } from './build/trans';
 import { dialog, dialog_rm } from './components/dialog';
 import { sponsor_list } from './build/sponsor.js';
 import { markdown } from './components/markdown.js';
 import { set_storage } from './build/tools.js';
+import { sponsor } from './sponsor.js';
 
 export function news() {
     let changelog = localStorage.getItem('bleh_changelog');
@@ -82,26 +83,26 @@ export function request_changelog(open_after = true) {
 }
 
 function open_changelog(changelog) {
+    const sponsor_name = sponsor_list && sponsor_list.special ? sponsor_list.special[0] : 'clairedoll';
+    let changelog_list;
+
     const window = dialog({
         id: 'changelog',
-        title: tl(trans.news_from_user).replace(
-            '{user}',
-            sponsor_list && sponsor_list.special ?
-                sponsor_list.special[0]
-            :   'katelyn'
-        ),
+        title: {
+            html: tl(trans.news_from_user, {
+                user: `<a class="mention" href="${root}user/${sponsor_name}">@${sponsor_name}</a>`
+            })
+        },
         body: html.node`
             <div class="cta first sponsor colourful margin-bottom">
                 <strong>${tl(trans.news_sponsor_cta)}</strong>
-                <a class="see-more" onclick="_sponsor(true)">${tl(trans.sponsor)}</a>
+                <a class="see-more" onclick=${() => sponsor(true)}>${tl(trans.sponsor)}</a>
             </div>
-            <div class="changelog-list"></div>
+            <div class="changelog-list" ref=${el => changelog_list = el}></div>
         `,
         type: 'changelog',
         allow_scroll: true
     });
-
-    const changelog_list = window.querySelector('.changelog-list');
 
     let index = 0;
     for (let version in changelog) {

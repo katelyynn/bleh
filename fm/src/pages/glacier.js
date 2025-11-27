@@ -272,7 +272,9 @@ function bleh_glacier_library_date() {
 
             picker_presets[target].appendChild(html.node`
                 <li class="date-range-picker-preset ${selected ? 'date-range-picker-preset--selected' : ''}">
-                    <a href="${window.location.href.replace(window.location.search, '')}?from=${year}-01-01&rangetype=year">
+                    <a href="${window.location.href.replace(window.location.search, '')}?from=${year}-01-01&rangetype=year" onclick=${() => {
+                        modal.hide();
+                    }}>
                         ${year}
                     </a>
                 </li>
@@ -292,7 +294,7 @@ function bleh_glacier_library_date() {
         hideOnClick: 'toggle',
 
         onClickOutside(instance, event) {
-            if (instance.popper.querySelector('[aria-expanded="true"]') || event.target.classList.includes('dropdown-menu-clickable-item'))
+            if (instance.popper.querySelector('[aria-expanded="true"]') || event.target.classList.contains('dropdown-menu-clickable-item'))
                 return;
 
             instance.hide();

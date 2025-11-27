@@ -174,8 +174,10 @@ export function bleh_settings() {
         ` : ''}
         <div class="bleh--panel">
             <p class="card-tip">
-                ${version.brand} ${version.build}.${version.sku}
-                <i>(florence ${florence_version})</i>
+                ${version.brand} ${version.build} ‘${version.sku}’
+            </p>
+            <p class="card-tip">
+                florence ${florence_version}
             </p>
         </div>
     `);
@@ -1417,6 +1419,7 @@ export async function render_setting_page(page_id) {
                     <h4>${tl(trans.settings)}</h4>
                     <div class="setting-group">
                         ${setting({ id: 'seasonal_particles' })}
+                        ${setting({ id: 'seasonal_particles_fps' })}
                         ${setting({ id: 'seasonal_overlays' })}
                     </div>
                 </div>

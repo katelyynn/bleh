@@ -776,7 +776,7 @@ export async function show_your_scrobbles() {
                 ${
                     settings.music_links.includes('qobuz') ?
                         html.node`
-                    <a class="music-link play-this-track-playlink--qobuz" href="https://www.qobuz.com/search/tracks/${sanitise(page.sister, ' ')}%20${sanitise(page.name, ' ')}" target="_blank">
+                    <a class="music-link play-this-track-playlink--qobuz" href="https://www.qobuz.com/gb-en/search/tracks/${sanitise(page.name, ' ')}?ssf[s]=main_catalog&ssf[f][an]=${sanitise(page.sister, ' ')}" target="_blank">
                         Qobuz
                     </a>
                 `
@@ -875,10 +875,7 @@ export async function show_your_scrobbles() {
                         html.node`
                             <a
                                 class="music-link play-this-track-playlink--qobuz"
-                                href="https://www.qobuz.com/search/albums/${sanitise(
-                                    page.sister,
-                                    ' '
-                                )}%20${sanitise(page.name, ' ')}"
+                                href="https://www.qobuz.com/gb-en/search/albums/${sanitise(page.name, ' ')}?ssf[s]=main_catalog&ssf[f][an]=${sanitise(page.sister, ' ')}"
                                 target="_blank"
                             >
                                 Qobuz
@@ -1017,7 +1014,7 @@ export async function show_your_scrobbles() {
                         html.node`
                             <a
                                 class="music-link play-this-track-playlink--qobuz"
-                                href="https://www.qobuz.com/search/artists/${sanitise(
+                                href="https://www.qobuz.com/gb-en/search/artists/${sanitise(
                                     page.name,
                                     ' '
                                 )}"
@@ -1840,6 +1837,7 @@ export function prepare_music() {
         balsamiq: 'Balsamiq Sans',
         crimson: 'Crimson Text',
         rokkitt: 'Rokkitt',
-        code: 'Google Sans Code'
+        code: 'Google Sans Code',
+        zpix: 'Zpix'
     };
 }

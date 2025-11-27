@@ -4901,6 +4901,9 @@ export const trans = {
             ru: 'Яркий',
             pt: 'Pop'
         },
+        out: {
+            en: 'Outline'
+        },
         glow: {
             en: 'Glow',
             es: 'Brillo',
@@ -8781,7 +8784,7 @@ export const trans = {
             es: 'La rama de lanzamiento actual es ‘uwu’, no la cambies a menos de que sepas lo que haces',
             it: 'Il branch release predefinito è ‘uwu’, non cambiare questo valore se non si sa cosa si sta facendo',
             sv: 'Standardbranshen är ‘uwu’, ändra inte om du inte vet vad du gör',
-            ru: 'Ветка выпуска по умолчанию - "uwu", не меняйте её, если точно не знаете, что делаете',
+            ru: 'Ветка выпуска по умолчанию - ‘uwu’, не меняйте её, если точно не знаете, что делаете',
             pt: 'A branch de lançamento padrão é ‘uwu’, não altere a menos que você saiba o que está fazendo'
         }
     },
@@ -8886,6 +8889,14 @@ export const trans = {
         // (song name)
         en: '{u} listened {time}',
         pt: '{u} ouviu há {time}'
+    },
+    now_notice: {
+        name: {
+            en: 'This page is not properly supported in bleh, but..'
+        },
+        body: {
+            en: 'If you are a Last.fm Pro subscriber, you can view your current active track in your profile menu at all times'
+        }
     }
 };
 

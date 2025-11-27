@@ -1,4 +1,10 @@
 {
+    "2025.1127": {
+        "type": "minor",
+        "force": false,
+        "bio": "hello everyuri :3 this is a small release to keep everyone cosy before the final major winter update next month~\n\n# i18n\n- __Updated Português translation by @ArthRMH__\n- __Updated Español translation by @soleilth__\n\n# Seasonal\n- __Re-built snow particles from the ground up__\n    - Improved performance, density, appearance and more – no more melting macbooks (experienced myself)\n- Returned setting to disable snow glow as it’s now a default again\n\n# Sponsors\n- __Introduced new ‘Zpix’ font family as a display name option__\n    - Kangel\n- __Re-aligned font options to match sizing and positioning more closely__\n- __Introduced ‘Outline’ font style__\n- Updated styling of font selection dialog\n- Improved font styling in light themes\n- Redirected sponsor dialog to my website\n- Fixed display name input being out of sync with saving\n\n# Profiles\n- __Fixed library date dialog being stubborn on not closing__\n- Event listing on profiles now shows whether they’re going or interested on the right-side\n- Fixed event tabs disappearing\n- Added a subtle hover animation on artist and album grids\n    - This is of course controlled by reduced motion\n\n# Other\n- Fixed user mentions having trailing underscores in changelogs\n- Fixed collages having broken gaps\n- Fixed styling of responsive tables under certain conditions\n- Fixed notification badges in mobile controls\n- Bumped *florence* dependency to fix ‘now playing’ profile pages being blank\n    - These pages are still not supported properly, the information can be found in your auth menu anyway\n- Fixed Qobuz links leading to a 404\n    - The search is probably not perfect, but that’s kind of a Qobuz limitation\n- The news dialog (this one) now links to my profile again\n- Fixed missing error message if a gallery upload fails\n- Fixed inbox pages missing a panel\n- Fixed updater URL taking forever to update it’s cache",
+        "name": "layla fixes to keep you cosy"
+    },
     "2025.1125": {
         "type": "minor",
         "force": false,
