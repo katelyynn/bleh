@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           bleh (dev)
 @namespace      github.com/katelyynn/bleh
-@version        2025.1127
+@version        2025.1220
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.css
@@ -25,7 +25,7 @@
     }
 
     body {
-        --version-build: "2025.1127";
+        --version-build: "2025.1220";
 
         --font:
             var(--custom_font, ""), Funnel Sans, Inter, Ubuntu Sans, Spline Sans,
