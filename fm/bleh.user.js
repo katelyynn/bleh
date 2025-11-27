@@ -49264,11 +49264,11 @@
     if (!enabled) return;
     const flakes = Array.from({ length: count }, () => {
       const x = (Math.random() * 100).toFixed(2);
-      const drift = (Math.random() * 20 - 10).toFixed(2);
+      const drift = (Math.random() * 30 - 10).toFixed(2);
       const scale = (Math.random() * 1.05 + 0.2).toFixed(2);
-      const duration = (Math.random() * 60 + 10).toFixed(2);
+      const duration = (Math.random() * 59 + 12).toFixed(2);
       const delay = (Math.random() * -30).toFixed(2);
-      const opacity = (Math.random() * 0.7 + 0.3).toFixed(2);
+      const opacity = (Math.random() * 0.7 + 0.2).toFixed(2);
       return { x, drift, scale, duration, delay, opacity };
     });
     render(page.state.snow, html`
