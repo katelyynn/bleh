@@ -5803,7 +5803,7 @@
         transition-duration: 0.3s;
         transition-timing-function: var(--trans-function-ani);
 
-        animation: var(--motion, grid 0.4`s var(--trans-function-ani)) !important;
+        animation: var(--motion, grid 0.4s var(--trans-function-ani)) !important;
         animation-delay: var(--delay, 0s) !important;
         animation-fill-mode: backwards !important;
 
@@ -5812,7 +5812,7 @@
         --font-weight-bold: var(--custom_font_weight_bold, 730);
 
         &:active {
-            transform: scale(0.98);
+            transform: translateY(var(--motion, -2px)) scale(0.98);
         }
 
         .link-block-cover-link {
