@@ -22550,6 +22550,10 @@
 
                 filter: brightness(80%);
             }
+
+            br + & {
+                margin-top: 5px;
+            }
         }
 
         li {
