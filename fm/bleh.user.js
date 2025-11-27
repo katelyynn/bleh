@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         bleh
 // @namespace    https://last.fm/
-// @version      2025.1125
+// @version      2025.1127
 // @description  bleh!!! ^-^
 // @author       katelyn
 // @match        https://www.last.fm/*
@@ -68987,7 +68987,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
   // src/build/build.json
   var build_default = {
     brand: "bleh",
-    build: "2025.1125",
+    build: "2025.1127",
     sku: "layla",
     bio: "bleh!!! ^-^",
     author: "katelyn",
