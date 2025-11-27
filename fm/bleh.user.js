@@ -49471,9 +49471,7 @@
     });
   }
   function start_update() {
-    open(
-      `https://github.com/katelyynn/bleh/raw/refs/heads/uwu/fm/bleh.user.js?${Math.random()}`
-    );
+    open(`https://github.com/katelyynn/bleh/raw/refs/heads/uwu/fm/bleh.user.js?${Math.random()}`);
     dialog({
       id: "bleh_update",
       title: tl2(trans.update_to_version).replace(
