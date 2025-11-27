@@ -365,6 +365,7 @@ export function bleh_gallery_upload() {
 
     const title = form.querySelector('[name="title"]');
     const description = form.querySelector('[name="description"]');
+    const alert = form.querySelector('.alert');
 
     const file_input = form.querySelector('input[type="file"]');
 
@@ -379,6 +380,7 @@ export function bleh_gallery_upload() {
     const panel = html.node`
         <section class="gallery-upload-panel bleh--panel">
             <h4>${tl(trans.image_details)}</h4>
+            ${alert}
             <form method="post" action=${form.getAttribute('action')} enctype=${form.getAttribute('enctype')}>
                 ${token}
                 <div style="display: none">
