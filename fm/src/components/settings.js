@@ -407,7 +407,7 @@ export function setting({
                         :   ''
                     }
                     <div class="input-container content-form in-settings can-submit" data-has-error="false" ref=${(el) => (input_container = el)}>
-                        <input type="text" maxlength=${max} value=${value} style="--max: ${max}px" ref=${(el) => (input = el)} placeholder=${placeholder} />
+                        <input type="text" maxlength=${max} value=${value} style="--max: ${max}px; --min: ${min}px" ref=${(el) => (input = el)} placeholder=${placeholder} />
                         <button class="btn chibi icon submit" ref=${(el) => (submit = el)} onclick=${() => update_text(id, input, submit, option, input.value, reset_btn, avatar)}>${tl(trans.save)}</button>
                     </div>
                 </div>

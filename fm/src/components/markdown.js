@@ -61,7 +61,8 @@ export function markdown(
         'h2',
         'h3',
         'h4',
-        'h5'
+        'h5',
+        'hr'
     ];
     let ALLOWED_ATTR = [
         'href',
@@ -543,8 +544,19 @@ export function markdown(
         const status_cafe_host = body.querySelector('.status-cafe-host');
 
         render(status_cafe_host, html`
-            <div class="alert alert-info">
-                ${tl(trans.loading_status, { u: status_cafe_user })}
+            <div class="status-cafe">
+                <div class="status-cafe-top">
+                    <span class="status-cafe-author">${tl(trans.author_on_status_cafe, { u: status_cafe_user })}</span>
+                    <span class="status-cafe-time">...</span>
+                </div>
+                <div class="status-cafe-content is-loading">
+                    <span class="status-cafe-emoji">
+                        <span class="status-cafe-loading-spinner">
+                            <span class="bleh-icon" />
+                        </span>
+                    </span>
+                    <span class="status-cafe-text">${tl(trans.loading_status, { u: status_cafe_user })}</span>
+                </div>
             </div>
         `);
 

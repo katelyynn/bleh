@@ -8902,10 +8902,10 @@ export const trans = {
         en: '{u} on status.cafe'
     },
     status_cafe_too_many_requests: {
-        en: 'Temporarily paused loading status.cafe results ~w~'
+        en: 'paused loading temporarily @w@'
     },
     loading_status: {
-        en: 'i wonder what {u} is up to...'
+        en: 'loading status'
     }
 };
 

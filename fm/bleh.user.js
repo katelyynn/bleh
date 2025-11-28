@@ -41026,7 +41026,7 @@
                     </div>
                     ` : ""}
                     <div class="input-container content-form in-settings can-submit" data-has-error="false" ref=${(el) => input_container = el}>
-                        <input type="text" maxlength=${max2} value=${value} style="--max: ${max2}px" ref=${(el) => input2 = el} placeholder=${placeholder} />
+                        <input type="text" maxlength=${max2} value=${value} style="--max: ${max2}px; --min: ${min2}px" ref=${(el) => input2 = el} placeholder=${placeholder} />
                         <button class="btn chibi icon submit" ref=${(el) => submit = el} onclick=${() => update_text(id, input2, submit, option, input2.value, reset_btn, avatar2)}>${tl2(trans.save)}</button>
                     </div>
                 </div>
@@ -48403,8 +48403,17 @@
       return await fetch_status_api(username2);
     } else {
       return html.node`
-            <div class="alert alert-error">
-                ${tl2(trans.status_cafe_too_many_requests)}
+            <div class="status-cafe">
+                <div class="status-cafe-top">
+                    <span class="status-cafe-author">${tl2(trans.author_on_status_cafe, { u: username2 })}</span>
+                    <span class="status-cafe-time">...</span>
+                </div>
+                <div class="status-cafe-content is-loading">
+                    <span class="status-cafe-emoji">
+                        <span class="bleh-icon" />
+                    </span>
+                    <span class="status-cafe-text">${tl2(trans.status_cafe_too_many_requests)}</span>
+                </div>
             </div>
         `;
     }
@@ -48412,7 +48421,7 @@
   async function fetch_status_api(username2) {
     log(`fetching for ${username2}`, "status.cafe");
     const new_date = /* @__PURE__ */ new Date();
-    new_date.setSeconds(new_date.getSeconds() + 1.5);
+    new_date.setSeconds(new_date.getSeconds() + 3);
     set_storage("next_status_cafe_fetch", new_date.toString());
     return fetch(`https://status.cafe/users/${username2}/status.json`).then((res) => {
       if (!res.ok) {
@@ -48432,7 +48441,7 @@
       const status_link = `https://status.cafe/users/${username2}`;
       const { trusted, dangerous } = can_trust_link(status_link);
       return html.node`
-                <div class="status-cafe" onclick=${() => {
+                <div class="status-cafe has-hover" onclick=${() => {
         if (trusted) {
           open(status_link);
           return;
@@ -48447,17 +48456,22 @@
                         <span class="status-cafe-emoji">${data2.face}</span>
                         <span class="status-cafe-text">${data2.content}</span>
                     </div>
-                    <div class="status-cafe-time">
-
-                    </div>
                 </div>
             `;
     }).catch((e) => {
       log(`error processing for ${username2}`, "status.cafe", "error", { e });
       return html.node`
-                <div class="alert alert-error">
-                    ${tl2(trans.value_failed_to_load).replace("{v}", "status.cafe")}
-                    ${e && e.message ? html`<br />${e.message}` : ""}
+                <div class="status-cafe">
+                    <div class="status-cafe-top">
+                        <span class="status-cafe-author">${tl2(trans.author_on_status_cafe, { u: username2 })}</span>
+                        <span class="status-cafe-time">...</span>
+                    </div>
+                    <div class="status-cafe-content">
+                        <span class="status-cafe-emoji">
+                            <span class="bleh-icon" />
+                        </span>
+                        <span class="status-cafe-text">${e && e.message ? html`<br />${e.message}` : ""}</span>
+                    </div>
                 </div>
             `;
     });
@@ -48499,7 +48513,8 @@
       "h2",
       "h3",
       "h4",
-      "h5"
+      "h5",
+      "hr"
     ];
     let ALLOWED_ATTR = [
       "href",
@@ -48879,8 +48894,19 @@
     if (status_cafe_user) {
       const status_cafe_host = body2.querySelector(".status-cafe-host");
       render(status_cafe_host, html`
-            <div class="alert alert-info">
-                ${tl2(trans.loading_status, { u: status_cafe_user })}
+            <div class="status-cafe">
+                <div class="status-cafe-top">
+                    <span class="status-cafe-author">${tl2(trans.author_on_status_cafe, { u: status_cafe_user })}</span>
+                    <span class="status-cafe-time">...</span>
+                </div>
+                <div class="status-cafe-content is-loading">
+                    <span class="status-cafe-emoji">
+                        <span class="status-cafe-loading-spinner">
+                            <span class="bleh-icon" />
+                        </span>
+                    </span>
+                    <span class="status-cafe-text">${tl2(trans.loading_status, { u: status_cafe_user })}</span>
+                </div>
             </div>
         `);
       fetch_status(status_cafe_user).then((status_cafe) => {
@@ -67676,10 +67702,10 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "{u} on status.cafe"
     },
     status_cafe_too_many_requests: {
-      en: "Temporarily paused loading status.cafe results ~w~"
+      en: "paused loading temporarily @w@"
     },
     loading_status: {
-      en: "i wonder what {u} is up to..."
+      en: "loading status"
     }
   };
   function tl2(key, replacements = {}) {

@@ -19043,8 +19043,8 @@
             }
 
             input {
-                width: calc(var(--max) * 6);
-                min-width: 60px;
+                width: calc((var(--max) * 2px) + var(--button-height));
+                min-width: 240px;
                 max-width: 380px;
 
                 @media (max-width: 980px) {
@@ -22581,6 +22581,15 @@
             p {
                 margin: unset;
             }
+        }
+
+        hr {
+            display: flex;
+            width: 100%;
+            height: 1px;
+            background: var(--card-border-base);
+            border: none;
+            margin: var(--card-gap) 0;
         }
 
         &.version-item-body {
@@ -29686,14 +29695,59 @@
 
         .status-cafe-content {
             display: flex;
-            gap: 6px;
+            gap: 4px;
 
             .status-cafe-emoji {
                 display: flex;
+                justify-content: center;
                 align-items: center;
                 max-height: 18px;
-                font-size: 10px;
+                font-size: 11px;
+                --icon-size: 14px;
+                width: 14px;
+
+                .status-cafe-loading-spinner {
+                    display: flex;
+                    align-items: center;
+                    --icon: var(--icon-16-spinner);
+                    animation: spinner 1s linear infinite;
+                }
+
+                & > .bleh-icon {
+                    --icon: var(--icon-16-x);
+                }
             }
+
+            &.is-loading {
+                color: hsl(var(--c2), 80%);
+            }
+        }
+
+        translate: 0 0;
+
+        &.has-hover {
+            transition-property: transform;
+            transition-duration: 0.3s;
+            transition-timing-function: var(--trans-function-ani);
+
+            &:hover {
+                transform: translateY(-1px);
+            }
+        }
+
+        animation: status_cafe 0.5s var(--trans-function-ani);
+    }
+
+    @keyframes status_cafe {
+        from {
+            translate: 0 2px;
+            scale: 0.99;
+            opacity: 0;
+        }
+        to {
+            translate: 0 0;
+            scale: 1;
+            opacity: 1;
         }
     }
 }

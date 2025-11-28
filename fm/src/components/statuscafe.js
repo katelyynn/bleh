@@ -19,8 +19,17 @@ export async function fetch_status(username) {
         return await fetch_status_api(username);
     } else {
         return html.node`
-            <div class="alert alert-error">
-                ${tl(trans.status_cafe_too_many_requests)}
+            <div class="status-cafe">
+                <div class="status-cafe-top">
+                    <span class="status-cafe-author">${tl(trans.author_on_status_cafe, { u: username })}</span>
+                    <span class="status-cafe-time">...</span>
+                </div>
+                <div class="status-cafe-content is-loading">
+                    <span class="status-cafe-emoji">
+                        <span class="bleh-icon" />
+                    </span>
+                    <span class="status-cafe-text">${tl(trans.status_cafe_too_many_requests)}</span>
+                </div>
             </div>
         `;
     }
@@ -30,7 +39,7 @@ async function fetch_status_api(username) {
     log(`fetching for ${username}`, 'status.cafe');
 
     const new_date = new Date();
-    new_date.setSeconds(new_date.getSeconds() + 1.5);
+    new_date.setSeconds(new_date.getSeconds() + 3);
     set_storage('next_status_cafe_fetch', new_date.toString());
 
     return fetch(`https://status.cafe/users/${username}/status.json`)
@@ -57,7 +66,7 @@ async function fetch_status_api(username) {
             const { trusted, dangerous } = can_trust_link(status_link);
 
             return html.node`
-                <div class="status-cafe" onclick=${() => {
+                <div class="status-cafe has-hover" onclick=${() => {
                     if (trusted) {
                         open(status_link);
                         return;
@@ -73,18 +82,23 @@ async function fetch_status_api(username) {
                         <span class="status-cafe-emoji">${data.face}</span>
                         <span class="status-cafe-text">${data.content}</span>
                     </div>
-                    <div class="status-cafe-time">
-
-                    </div>
                 </div>
             `;
         })
         .catch(e => {
             log(`error processing for ${username}`, 'status.cafe', 'error', { e });
             return html.node`
-                <div class="alert alert-error">
-                    ${tl(trans.value_failed_to_load).replace('{v}', 'status.cafe')}
-                    ${e && e.message ? html`<br />${e.message}` : ''}
+                <div class="status-cafe">
+                    <div class="status-cafe-top">
+                        <span class="status-cafe-author">${tl(trans.author_on_status_cafe, { u: username })}</span>
+                        <span class="status-cafe-time">...</span>
+                    </div>
+                    <div class="status-cafe-content">
+                        <span class="status-cafe-emoji">
+                            <span class="bleh-icon" />
+                        </span>
+                        <span class="status-cafe-text">${e && e.message ? html`<br />${e.message}` : ''}</span>
+                    </div>
                 </div>
             `;
         });
