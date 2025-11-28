@@ -29,7 +29,7 @@ export let lang_info = {
     es: {
         name: 'Español',
         by: ['soleilth'],
-        last_updated: '2025-11-13'
+        last_updated: '2025-11-27'
     },
     it: {
         name: "Italiano",
