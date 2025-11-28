@@ -34080,7 +34080,23 @@
     let form_country = document.getElementById("id_country");
     let form_about_me = document.getElementById("id_about_me").textContent;
     let chars;
-    let about;
+    const about = html.node`
+        <textarea
+            name="about_me"
+            placeholder=${tl2(
+      trans.anything_you_can_imagine
+    )}
+            cols="40"
+            rows="10"
+            class="textarea--s"
+            maxlength=${bio_max_length}
+            id="id_about_me"
+            oninput=${() => update_about()}
+            data-form-type="other"
+        >
+            ${form_about_me}
+        </textarea>
+    `;
     let preview;
     const markdown_settings = {
       allow_headers: true,
@@ -34104,191 +34120,211 @@
     `);
     let profile_cache = JSON.parse(localStorage.getItem("bleh_profile_cache")) || {};
     let cache2 = profile_cache[auth.name];
-    render(
-      update_picture,
-      html`
-            <h4>${tl2(trans.profile)}</h4>
-            <form
-                class="dont-move"
-                action="${root}settings#update-profile"
-                name="profile-form"
-                data-form-type="identity"
-                method="post"
-            >
+    render(update_picture, html`
+        <h4>${tl2(trans.profile)}</h4>
+        <form
+            class="dont-move"
+            action="${root}settings#update-profile"
+            name="profile-form"
+            data-form-type="identity"
+            method="post"
+        >
+            <input
+                type="hidden"
+                name="csrfmiddlewaretoken"
+                value="${token}"
+            />
+            <div class="setting-group">
+                <div class="setting" data-type="info">
+                    <div class="heading">
+                        <h5>${tl2(trans.avatar)}</h5>
+                    </div>
+                    <div class="info">
+                        <div class="avatar image-uploader" onclick=${() => avatar(token)}>
+                            <img
+                                src=${avatar_url}
+                                alt=${tl2(trans.your_avatar)}
+                                loading="lazy"
+                            />
+                            <div class="avatar-overlay" />
+                        </div>
+                    </div>
+                </div>
+                ${() => {
+      const username_regex = /\[name=([^\]]+)\]/;
+      const elem = html.node`
+                        <div class="setting" data-type="text" disabled=${!auth.sponsor}>
+                            <div class="heading">
+                                <h5>${tl2(trans.display_name.name)}<span class="new-badge sponsor-related">${tl2(trans.sponsors_only)}</span></h5>
+                                <p>${tl2(trans.display_name.body)}</p>
+                            </div>
+                            ${input({
+        value: cache2.username,
+        placeholder: auth.name,
+        func: (val) => {
+          const match3 = about.value.match(username_regex);
+          const new_name = `[name=${val}]`;
+          if (match3) {
+            about.value = about.value.replace(username_regex, new_name);
+          } else {
+            const trimmed = about.value.trimEnd();
+            if (trimmed.length == 0) {
+              about.value = new_name;
+            } else {
+              about.value = trimmed + "\n\n" + new_name;
+            }
+          }
+          about.dispatchEvent(
+            new InputEvent("input", {
+              bubbles: true,
+              cancelable: true
+            })
+          );
+        },
+        submit_on_character: true
+      })}
+                        </div>
+                    `;
+      return elem;
+    }}
+                ${ff("profile_fonts") ? html.node`
+                <div
+                    class="setting"
+                    data-type="info"
+                    disabled=${!auth.sponsor}
+                    ref=${(el) => font_setting = el}
+                />
+                ` : ""}
+                <div class="setting" data-type="text">
+                    <div class="heading">
+                        <h5>${tl2(trans.subtitle)}</h5>
+                        <p>${tl2(trans.pronoun_tip)}</p>
+                    </div>
+                    <div class="input-container content-form">
+                        <input
+                            type="text"
+                            name="full_name"
+                            value=${form_display_name}
+                            maxlength="36"
+                            id="id_full_name"
+                            data-form-type="other"
+                        />
+                    </div>
+                </div>
+                <div class="setting" data-type="text">
+                    <div class="heading">
+                        <h5>${tl2(trans.website)}</h5>
+                    </div>
+                    <div class="input-container content-form">
+                        <input
+                            type="url"
+                            name="homepage"
+                            value=${form_website}
+                            id="id_homepage"
+                            data-form-type="website"
+                        />
+                    </div>
+                </div>
+                ${() => {
+      const status_regex = /\[status=([^\]]+)\]/;
+      const match3 = about.value.match(status_regex);
+      const pre_existing = match3 ? match3[1] : "";
+      const elem = html.node`
+                        <div class="setting" data-type="text">
+                            <div class="heading">
+                                <h5><a href="https://status.cafe" target="_blank">status.cafe</a><span class="new-badge new">${tl2(trans.new)}</span></h5>
+                                <p>${tl2(trans.status_cafe.body)}</p>
+                            </div>
+                            ${input({
+        value: pre_existing,
+        func: (val) => {
+          const match4 = about.value.match(status_regex);
+          const new_status = `[status=${val}]`;
+          if (match4) {
+            about.value = about.value.replace(status_regex, new_status);
+          } else {
+            const trimmed = about.value.trimEnd();
+            if (trimmed.length == 0) {
+              about.value = new_status;
+            } else {
+              about.value = trimmed + "\n\n" + new_status;
+            }
+          }
+          about.dispatchEvent(
+            new InputEvent("input", {
+              bubbles: true,
+              cancelable: true
+            })
+          );
+        },
+        submit_on_character: true
+      })}
+                        </div>
+                    `;
+      return elem;
+    }}
+                <div class="setting" data-type="select">
+                    <div class="heading">
+                        <h5>${tl2(trans.country)}</h5>
+                    </div>
+                    <div class="select-wrap custom-selector">
+                        ${select(
+      select_prepare(form_country),
+      form_country.value,
+      "country"
+    )}
+                    </div>
+                </div>
+                <div
+                    class="setting"
+                    data-type="info"
+                    ref=${(el) => banner_setting = el}
+                />
+                <div
+                    class="setting"
+                    data-type="info"
+                    disabled=${!auth.sponsor}
+                    ref=${(el) => accent_setting = el}
+                />
+                <div class="setting" data-type="text">
+                    <div class="heading">
+                        <h5>${tl2(trans.about)}</h5>
+                        <p class="tip markdown-enabled" onclick=${() => {
+      markdown_prompt(markdown_settings);
+    }}>
+                            ${tl2(trans.supports_markdown)}
+                        </p>
+                        <p class="tip characters" ref=${(el) => chars = el}>
+                            ${tl2(
+      trans.value_characters_max,
+      { v: bio_max_length }
+    )}
+                        </p>
+                    </div>
+                    <div class="input-container content-form textarea">
+                        ${about}
+                    </div>
+                </div>
+            </div>
+            <div class="settings-footer end">
+                <button
+                    type="submit"
+                    class="btn-primary save"
+                    data-form-type="action"
+                >
+                    ${tl2(trans.save)}
+                </button>
                 <input
                     type="hidden"
-                    name="csrfmiddlewaretoken"
-                    value="${token}"
+                    value="profile"
+                    name="submit"
                 />
-                <div class="setting-group">
-                    <div class="setting" data-type="info">
-                        <div class="heading">
-                            <h5>${tl2(trans.avatar)}</h5>
-                        </div>
-                        <div class="info">
-                            <div class="avatar image-uploader" onclick=${() => avatar(token)}>
-                                <img
-                                    src=${avatar_url}
-                                    alt=${tl2(trans.your_avatar)}
-                                    loading="lazy"
-                                />
-                                <div class="avatar-overlay" />
-                            </div>
-                        </div>
-                    </div>
-                    ${() => {
-        const username_regex = /\[name=([^\]]+)\]/;
-        const elem = html.node`
-                            <div class="setting" data-type="text" disabled=${!auth.sponsor}>
-                                <div class="heading">
-                                    <h5>${tl2(trans.display_name.name)}<span class="new-badge sponsor-related">${tl2(trans.sponsors_only)}</span><span class="new-badge new">${tl2(trans.new)}</span></h5>
-                                    <p>${tl2(trans.display_name.body)}</p>
-                                </div>
-                                ${input({
-          value: cache2.username,
-          placeholder: auth.name,
-          func: (val) => {
-            const match3 = about.value.match(username_regex);
-            const new_name = `[name=${val}]`;
-            if (match3) {
-              about.value = about.value.replace(username_regex, new_name);
-            } else {
-              const trimmed = about.value.trimEnd();
-              if (trimmed.length == 0) {
-                about.value = new_name;
-              } else {
-                about.value = trimmed + "\n\n" + new_name;
-              }
-            }
-            about.dispatchEvent(
-              new InputEvent("input", {
-                bubbles: true,
-                cancelable: true
-              })
-            );
-          },
-          submit_on_character: true
-        })}
-                            </div>
-                        `;
-        return elem;
-      }}
-                    ${ff("profile_fonts") ? html.node`
-                    <div
-                        class="setting"
-                        data-type="info"
-                        disabled=${!auth.sponsor}
-                        ref=${(el) => font_setting = el}
-                    />
-                    ` : ""}
-                    <div class="setting" data-type="text">
-                        <div class="heading">
-                            <h5>${tl2(trans.subtitle)}</h5>
-                            <p>${tl2(trans.pronoun_tip)}</p>
-                        </div>
-                        <div class="input-container content-form">
-                            <input
-                                type="text"
-                                name="full_name"
-                                value=${form_display_name}
-                                maxlength="36"
-                                id="id_full_name"
-                                data-form-type="other"
-                            />
-                        </div>
-                    </div>
-                    <div class="setting" data-type="text">
-                        <div class="heading">
-                            <h5>${tl2(trans.website)}</h5>
-                        </div>
-                        <div class="input-container content-form">
-                            <input
-                                type="url"
-                                name="homepage"
-                                value=${form_website}
-                                id="id_homepage"
-                                data-form-type="website"
-                            />
-                        </div>
-                    </div>
-                    <div class="setting" data-type="select">
-                        <div class="heading">
-                            <h5>${tl2(trans.country)}</h5>
-                        </div>
-                        <div class="select-wrap custom-selector">
-                            ${select(
-        select_prepare(form_country),
-        form_country.value,
-        "country"
-      )}
-                        </div>
-                    </div>
-                    <div
-                        class="setting"
-                        data-type="info"
-                        ref=${(el) => banner_setting = el}
-                    />
-                    <div
-                        class="setting"
-                        data-type="info"
-                        disabled=${!auth.sponsor}
-                        ref=${(el) => accent_setting = el}
-                    />
-                    <div class="setting" data-type="text">
-                        <div class="heading">
-                            <h5>${tl2(trans.about)}</h5>
-                            <p class="tip markdown-enabled" onclick=${() => {
-        markdown_prompt(markdown_settings);
-      }}>
-                                ${tl2(trans.supports_markdown)}
-                            </p>
-                            <p class="tip characters" ref=${(el) => chars = el}>
-                                ${tl2(
-        trans.value_characters_max,
-        { v: bio_max_length }
-      )}
-                            </p>
-                        </div>
-                        <div class="input-container content-form textarea">
-                            <textarea
-                                name="about_me"
-                                placeholder=${tl2(
-        trans.anything_you_can_imagine
-      )}
-                                cols="40"
-                                rows="10"
-                                class="textarea--s"
-                                maxlength=${bio_max_length}
-                                id="id_about_me"
-                                oninput=${() => update_about()}
-                                ref=${(el) => about = el}
-                                data-form-type="other"
-                            >
-                                ${form_about_me}
-                            </textarea>
-                        </div>
-                    </div>
-                </div>
-                <div class="settings-footer end">
-                    <button
-                        type="submit"
-                        class="btn-primary save"
-                        data-form-type="action"
-                    >
-                        ${tl2(trans.save)}
-                    </button>
-                    <input
-                        type="hidden"
-                        value="profile"
-                        name="submit"
-                    />
-                </div>
-            </form>
-            <div class="setting-group">
-                ${setting({ id: "avatar_radius" })}
             </div>
-        `
-    );
+        </form>
+        <div class="setting-group">
+            ${setting({ id: "avatar_radius" })}
+        </div>
+    `);
     page.structure.main.removeChild(
       page.structure.main.querySelector("#update-profile")
     );
@@ -48421,7 +48457,7 @@
   async function fetch_status_api(username2) {
     log(`fetching for ${username2}`, "status.cafe");
     const new_date = /* @__PURE__ */ new Date();
-    new_date.setSeconds(new_date.getSeconds() + 3);
+    new_date.setSeconds(new_date.getSeconds() + 2.3);
     set_storage("next_status_cafe_fetch", new_date.toString());
     return fetch(`https://status.cafe/users/${username2}/status.json`).then((res) => {
       if (!res.ok) {
@@ -48466,11 +48502,11 @@
                         <span class="status-cafe-author">${tl2(trans.author_on_status_cafe, { u: username2 })}</span>
                         <span class="status-cafe-time">...</span>
                     </div>
-                    <div class="status-cafe-content">
+                    <div class="status-cafe-content is-loading">
                         <span class="status-cafe-emoji">
                             <span class="bleh-icon" />
                         </span>
-                        <span class="status-cafe-text">${e && e.message ? html`<br />${e.message}` : ""}</span>
+                        <span class="status-cafe-text">${e && e.message ? e.message : ""}</span>
                     </div>
                 </div>
             `;
@@ -48504,7 +48540,6 @@
       "u",
       "strong",
       "a",
-      "br",
       "code",
       "pre",
       "img",
@@ -48513,8 +48548,7 @@
       "h2",
       "h3",
       "h4",
-      "h5",
-      "hr"
+      "h5"
     ];
     let ALLOWED_ATTR = [
       "href",
@@ -48530,6 +48564,12 @@
     ];
     if (allow_lists) {
       ALLOWED_TAGS.push("ul", "ol", "li");
+    }
+    if (line_breaks) {
+      ALLOWED_TAGS.push("br");
+    }
+    if (allow_alignment) {
+      ALLOWED_TAGS.push("hr");
     }
     let hue2;
     let sat;
@@ -48989,6 +49029,11 @@
       {
         name: "Right-alignment",
         string: "[right]text[/right]",
+        hide_if: !allow_alignment
+      },
+      {
+        name: "Divider line",
+        string: "---",
         hide_if: !allow_alignment
       }
     ];
@@ -67699,6 +67744,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       }
     },
     author_on_status_cafe: {
+      // status.cafe
       en: "{u} on status.cafe"
     },
     status_cafe_too_many_requests: {
@@ -67706,6 +67752,12 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     loading_status: {
       en: "loading status"
+    },
+    status_cafe: {
+      // status.cafe
+      body: {
+        en: "Embed your current status onto your profile, can be moved around freely by editing your about me"
+      }
     }
   };
   function tl2(key, replacements = {}) {

@@ -18557,6 +18557,12 @@
                 margin: unset;
                 cursor: default;
 
+                & > a {
+                    &:not(:hover) {
+                        color: inherit;
+                    }
+                }
+
                 & > .reset {
                     margin-left: 2px !important;
                     --mask: var(--icon-16-reset);
@@ -29736,6 +29742,8 @@
         }
 
         animation: status_cafe 0.5s var(--trans-function-ani);
+        animation-delay: 0.1s;
+        animation-fill-mode: backwards;
     }
 
     @keyframes status_cafe {

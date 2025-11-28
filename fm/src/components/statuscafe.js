@@ -39,7 +39,7 @@ async function fetch_status_api(username) {
     log(`fetching for ${username}`, 'status.cafe');
 
     const new_date = new Date();
-    new_date.setSeconds(new_date.getSeconds() + 3);
+    new_date.setSeconds(new_date.getSeconds() + 2.3);
     set_storage('next_status_cafe_fetch', new_date.toString());
 
     return fetch(`https://status.cafe/users/${username}/status.json`)
@@ -93,11 +93,11 @@ async function fetch_status_api(username) {
                         <span class="status-cafe-author">${tl(trans.author_on_status_cafe, { u: username })}</span>
                         <span class="status-cafe-time">...</span>
                     </div>
-                    <div class="status-cafe-content">
+                    <div class="status-cafe-content is-loading">
                         <span class="status-cafe-emoji">
                             <span class="bleh-icon" />
                         </span>
-                        <span class="status-cafe-text">${e && e.message ? html`<br />${e.message}` : ''}</span>
+                        <span class="status-cafe-text">${e && e.message ? e.message : ''}</span>
                     </div>
                 </div>
             `;

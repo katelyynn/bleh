@@ -52,7 +52,6 @@ export function markdown(
         'u',
         'strong',
         'a',
-        'br',
         'code',
         'pre',
         'img',
@@ -61,8 +60,7 @@ export function markdown(
         'h2',
         'h3',
         'h4',
-        'h5',
-        'hr'
+        'h5'
     ];
     let ALLOWED_ATTR = [
         'href',
@@ -79,6 +77,14 @@ export function markdown(
 
     if (allow_lists) {
         ALLOWED_TAGS.push('ul', 'ol', 'li');
+    }
+
+    if (line_breaks) {
+        ALLOWED_TAGS.push('br');
+    }
+
+    if (allow_alignment) {
+        ALLOWED_TAGS.push('hr');
     }
 
     let hue;
@@ -644,6 +650,11 @@ export function markdown_prompt({
         {
             name: 'Right-alignment',
             string: '[right]text[/right]',
+            hide_if: !allow_alignment
+        },
+        {
+            name: 'Divider line',
+            string: '---',
             hide_if: !allow_alignment
         }
     ];

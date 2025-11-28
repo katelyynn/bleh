@@ -8899,6 +8899,7 @@ export const trans = {
         }
     },
     author_on_status_cafe: {
+        // status.cafe
         en: '{u} on status.cafe'
     },
     status_cafe_too_many_requests: {
@@ -8906,6 +8907,12 @@ export const trans = {
     },
     loading_status: {
         en: 'loading status'
+    },
+    status_cafe: {
+        // status.cafe
+        body: {
+            en: 'Embed your current status onto your profile, can be moved around freely by editing your about me'
+        }
     }
 };
 
