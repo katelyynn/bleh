@@ -385,7 +385,7 @@ export const trans = {
     cant_shout: {
         en: 'You cannot leave shouts here',
         de: 'Du kannst hier keine Shouts hinterlassen',
-        es: 'No puedes poner notas aquí',
+        es: 'No puedes dejar notas aquí',
         it: 'Non puoi lasciare note qui',
         sv: 'Du kan inte hojta här',
         ru: 'Вы не можете оставлять тут отзывы',
@@ -441,7 +441,7 @@ export const trans = {
         // username
         en: '{u} is keeping quiet',
         de: '{u} ist wohl etwas schweigsam',
-        es: '{u} se está quedando callado',
+        es: '{u} está guardando silencio',
         it: '{u} sta rimanendo in silenzio',
         pt: '{u} está bem quietinho(a)',
         sv: '{u} håller sig tyst',
@@ -748,7 +748,7 @@ export const trans = {
         name: {
             en: 'Remove friend',
             de: 'Freund entfernen',
-            es: 'Eliminar amigo',
+            es: 'Remover amigo',
             it: 'Rimuovi amico',
             pt: 'Desfazer amizade',
             sv: 'Ta bort vän',
@@ -757,7 +757,7 @@ export const trans = {
         body: {
             en: 'Are you sure you want to remove {u} as a friend, you will stay following them - it‘s only local.',
             de: 'Bist du sicher, dass du {u} als Freund entfernen möchtest? Du folgst der Person weiterhin - die Freundesliste wird lokal verwaltet.',
-            es: '¿Seguro de que quieres eliminar a {u} como amigo? Seguirás siguiéndolo — es solo local.',
+            es: '¿Seguro de que quieres remover a {u} de amigos? Seguirás siguiéndolo — es solo local.',
             it: 'Sei sicuro di voler rimuovere {u} come amico? Continuerai a seguirlo - è solamente locale.',
             pt: 'Tem certeza de que quer remover {u} da sua lista de amigos? Você continuará o/a seguindo - é só algo local.',
             sv: 'Är du säker på att du vill ta bort {u} som vän? Du följer dem fortfarande - vänlistan hanteras lokalt.',
@@ -776,7 +776,7 @@ export const trans = {
     removed_friend: {
         en: 'Removed friend',
         de: 'Freund entfernt',
-        es: 'Amigo eliminado',
+        es: 'Amigo removido',
         it: 'Amico rimosso',
         pt: 'Amigo(a) removido(a)',
         sv: 'Tagit bort vän',
@@ -803,7 +803,7 @@ export const trans = {
     removed_star: {
         en: 'Removed star status',
         de: 'Markierung entfernt',
-        es: 'Eliminado de favoritos',
+        es: 'Removido de favoritos',
         it: 'Rimosso dai preferiti',
         pt: 'Status de favorito removido',
         sv: 'Tog bort stjärnmärke',
@@ -812,7 +812,7 @@ export const trans = {
     remove_as_star_friend: {
         en: 'Remove star status',
         de: 'Markierung entfernen',
-        es: 'Eliminar de favoritos',
+        es: 'Remover de favoritos',
         it: 'Rimuovi dai preferiti',
         pt: 'Remover estado de favorito',
         sv: 'Ta bort stjärnmärke',
@@ -1129,7 +1129,7 @@ export const trans = {
     theme: {
         en: 'Theme',
         de: 'Farbschema',
-        es: 'Tema',
+        es: 'Aspecto',
         it: 'Tema',
         pt: 'Tema',
         sv: 'Tema',
@@ -1558,7 +1558,7 @@ export const trans = {
         },
         notice: {
             en: 'Open the live counter',
-            es: 'Abre el contador en vivo',
+            es: 'Abrir el contador en vivo',
             it: 'Apri il contatore in tempo reale',
             pt: 'Abrir o contador ao vivo',
             sv: 'Öppna live-nedräkningen',
@@ -1611,6 +1611,7 @@ export const trans = {
         },
         exclusive: {
             en: 'Limited time',
+            es: 'Tiempo limitado',
             pt: 'Tempo limitado'
         }
     },
@@ -1625,8 +1626,6 @@ export const trans = {
     },
     value_for_time: {
         // e.g. (Halloween) ends (in 3 days)
-        //
-        // shouldn't the "in" and "days" be outside the parentheses? -soleil
         en: '{v} ends {time}',
         es: '{v} termina {time}',
         it: '{v} termina {time}',
@@ -1694,7 +1693,7 @@ export const trans = {
         },
         body: {
             en: 'During winter seasons this applies a coat of ice to panels, otherwise mainly gradients',
-            es: 'Durante las temporadas invernales, aplica una capa de hielo a los paneles, de lo contrario, aplica principalmente gradientes',
+            es: 'Durante temporadas invernales, aplica una capa de hielo a los paneles, de lo contrario, aplica principalmente gradientes',
             it: 'Durante le stagioni invernali, applica un mantello di ghiacchi ai pannelli, altrimenti principalmente gradienti',
             pt: 'Durante o inverno, isso aplica uma camada de gelo aos painéis; fora dessa época, aplica principalmente gradientes',
             sv: 'Under vintersäsongen läggs ett lager is på paneler, annars mest bildgradienter',
@@ -3290,22 +3289,27 @@ export const trans = {
     },
     paste: {
         en: 'Paste',
+        es: 'Pegar',
         pt: 'Colar'
     },
     paste_text: {
         en: 'Paste text',
+        es: 'Pegar texto',
         pt: 'Colar texto'
     },
     undo: {
         en: 'Undo',
+        es: 'Deshacer',
         pt: 'Desfazer'
     },
     redo: {
         en: 'Redo',
+        es: 'Rehacer',
         pt: 'Refazer'
     },
     pasted_text: {
         en: 'Pasted text',
+        es: 'Texto pegado',
         pt: 'Texto colado'
     },
     wiki_standard_tracks: {
@@ -3710,7 +3714,7 @@ export const trans = {
         // in the native last.fm ui
         en: 'Loved',
         de: 'Lieblingssongs',
-        es: 'Favorito',
+        es: 'Favoritos',
         it: 'Preferiti',
         pt: 'Favoritadas',
         sv: 'Älskade låtar',
@@ -3822,7 +3826,7 @@ export const trans = {
     video_removed: {
         en: 'Video removed by Last.fm',
         de: 'Video von Last.fm entfernt',
-        es: 'Video eliminado por Last.fm',
+        es: 'Video removido por Last.fm',
         it: 'Video rimosso da Last.fm',
         pt: 'Vídeo removido pela Last.fm',
         sv: 'Video borttagen av Last.fm',
@@ -5761,7 +5765,7 @@ export const trans = {
         name: {
             en: 'Force re-download styles',
             de: 'Erneutes Herunterladen von Stylesheets erzwingen',
-            es: 'Forzar redescarga de los estilos',
+            es: 'Forzar redescarga de estilos',
             it: 'Forza il re-download degli stili',
             pt: 'Forçar o re-download dos estilos',
             sv: 'Tvinga omladdning av stiler',
@@ -6663,7 +6667,7 @@ export const trans = {
         // lowercase in design
         en: '{l} translation by {u}',
         de: 'Deutsche Übersetzung von {u}',
-        es: '{l} traducción por {u}',
+        es: 'Traducción al {l} por {u}',
         it: 'traduzione in {l} di {u}',
         sv: 'Svensk översättning av {u}',
         ru: 'Перевод {l} от {u}',
@@ -8773,7 +8777,7 @@ export const trans = {
     branch: {
         name: {
             en: 'Choose branch',
-            es: 'Elige la rama',
+            es: 'Elegir rama',
             it: 'Seleziona branch', // we are talking about git branches, leaving it as is to avoid creating confusion for people who will want to change this ~cuto
             pt: 'Escolha a branch',
             sv: 'Välj bransh',
@@ -8858,44 +8862,53 @@ export const trans = {
     translator: {
         name: {
             en: 'Show translator tools',
+            es: 'Mostrar herramientas de traducción',
             pt: 'Mostrar ferramentas de tradução'
         },
         body: {
             en: 'View expanded details on all languages for use when translating',
+            es: 'Ve detalles ampliados de todos los idiomas para usar al traducir',
             pt: 'Veja detalhes expandidos sobre todos os idiomas para uso ao traduzir'
         }
     },
     translate: {
         en: 'Translate',
+        es: 'Traducir',
         pt: 'Traduza'
     },
     translation_key: {
         // a key such as 'you_have_new_badges' above
         en: 'Translation key',
+        es: 'Clave de traducción',
         pt: 'Chave de tradução'
     },
     original: {
         en: 'Original',
+        es: 'Original',
         pt: 'Original'
     },
     user_is_listening_to: {
         // (claire) is listening to
         // (song name)
         en: '{u} is listening to',
+        es: '{u} está escuchando',
         pt: '{u} está ouvindo'
     },
     user_listened_time: {
         // (claire) listened (5 hours ago)
         // (song name)
         en: '{u} listened {time}',
+        es: '{u} escuchó {time} a',
         pt: '{u} ouviu há {time}'
     },
     now_notice: {
         name: {
-            en: 'This page is not properly supported in bleh, but..'
+            en: 'This page is not properly supported in bleh, but..',
+            es: 'Esta página no es compatible con bleh, pero... '
         },
         body: {
-            en: 'If you are a Last.fm Pro subscriber, you can view your current active track in your profile menu at all times'
+            en: 'If you are a Last.fm Pro subscriber, you can view your current active track in your profile menu at all times',
+            es: 'Si eres un suscriptor de Last.fm Pro, puedes ver tu tema activo actual en el menú de tu perfil en cualquier momento'
         }
     }
 };
