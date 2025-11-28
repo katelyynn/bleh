@@ -1,0 +1,91 @@
+//
+// bleh, an extension for the music site Last.fm
+// Copyright (c) 2025 katelyn and contributors
+// Licensed under GPLv3
+//
+
+import { html } from "lighterhtml";
+import { log } from "../build/log";
+import { set_storage } from "../build/tools";
+import { tl, trans } from "../build/trans";
+import { external_url_prompt } from "./markdown";
+import { can_trust_link } from "../pages/wiki";
+
+export async function fetch_status(username) {
+    const current = new Date();
+    const next_fetch = new Date(localStorage.getItem('next_status_cafe_fetch')) || current;
+
+    if (current >= next_fetch) {
+        return await fetch_status_api(username);
+    } else {
+        return html.node`
+            <div class="alert alert-error">
+                ${tl(trans.status_cafe_too_many_requests)}
+            </div>
+        `;
+    }
+}
+
+async function fetch_status_api(username) {
+    log(`fetching for ${username}`, 'status.cafe');
+
+    const new_date = new Date();
+    new_date.setSeconds(new_date.getSeconds() + 1.5);
+    set_storage('next_status_cafe_fetch', new_date.toString());
+
+    return fetch(`https://status.cafe/users/${username}/status.json`)
+        .then(res => {
+            if (!res.ok) {
+                log(`error fetching for ${username}`, 'status.cafe', 'error', { res });
+                return {
+                    author: username,
+                    content: 'status.cafe is unavailable right now..',
+                    face: '',
+                    timeAgo: ''
+                };
+            }
+
+            return res.json();
+        })
+        .then(data => {
+            if (data.face == null) data.face = '';
+            if (data.content == null) data.content = '...';
+            if (data.timeAgo == null) data.timeAgo = '...';
+
+            const status_link = `https://status.cafe/users/${username}`;
+
+            const { trusted, dangerous } = can_trust_link(status_link);
+
+            return html.node`
+                <div class="status-cafe" onclick=${() => {
+                    if (trusted) {
+                        open(status_link);
+                        return;
+                    }
+
+                    external_url_prompt(status_link);
+                }}>
+                    <div class="status-cafe-top">
+                        <span class="status-cafe-author">${tl(trans.author_on_status_cafe, { u: username })}</span>
+                        <span class="status-cafe-time">${data.timeAgo}</span>
+                    </div>
+                    <div class="status-cafe-content">
+                        <span class="status-cafe-emoji">${data.face}</span>
+                        <span class="status-cafe-text">${data.content}</span>
+                    </div>
+                    <div class="status-cafe-time">
+
+                    </div>
+                </div>
+            `;
+        })
+        .catch(e => {
+            log(`error processing for ${username}`, 'status.cafe', 'error', { e });
+            return html.node`
+                <div class="alert alert-error">
+                    ${tl(trans.value_failed_to_load).replace('{v}', 'status.cafe')}
+                    ${e && e.message ? html`<br />${e.message}` : ''}
+                </div>
+            `;
+        });
+}

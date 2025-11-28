@@ -5,7 +5,7 @@
 //
 
 import { auth, page, root } from '../build/page';
-import { html } from 'lighterhtml';
+import { html, render } from 'lighterhtml';
 import { patch_wiki_contents } from '../pages/wiki.js';
 import { redirect } from './music.js';
 import showdown from 'showdown';
@@ -20,6 +20,7 @@ import { toggle } from './toggle.js';
 import { save_setting } from './settings.js';
 import { load_chart_colours } from '../chart.js';
 import { sponsor_list } from '../build/sponsor.js';
+import { fetch_status } from './statuscafe.js';
 
 export function markdown(
     text,
@@ -84,6 +85,8 @@ export function markdown(
     let lit;
 
     let links = [];
+
+    let status_cafe_user;
 
     const banner = () => [
         {
@@ -216,6 +219,18 @@ export function markdown(
         }
     ];
 
+    // display a status from status.cafe
+    const status = () => [
+        {
+            type: 'lang',
+            regex: /\[status=([^\]]+)\]/g,
+            replace: (_, user) => {
+                status_cafe_user = user;
+                return '<div class="status-cafe-host"></div>';
+            }
+        }
+    ];
+
     // retrieves social links if a user supplies them
     const social_links = () => [
         {
@@ -307,7 +322,7 @@ export function markdown(
     if (line_breaks) extensions.push(blockquotes());
     if (allow_banners) extensions.push(banner());
     if (allow_icons) extensions.push(icons());
-    if (allow_hue) extensions.push(accent(), display_name());
+    if (allow_hue) extensions.push(accent(), display_name(), status());
     if (allow_fonts) extensions.push(font());
     if (allow_socials) extensions.push(social_links());
     if (!allow_headers) extensions.push(header_minify());
@@ -522,6 +537,20 @@ export function markdown(
 
             log('cleared custom accent settings', 'profile', 'log');
         }
+    }
+
+    if (status_cafe_user) {
+        const status_cafe_host = body.querySelector('.status-cafe-host');
+
+        render(status_cafe_host, html`
+            <div class="alert alert-info">
+                ${tl(trans.loading_status, { u: status_cafe_user })}
+            </div>
+        `);
+
+        fetch_status(status_cafe_user).then(status_cafe => {
+            render(status_cafe_host, status_cafe);
+        });
     }
 
     if (cache && will_cache) {

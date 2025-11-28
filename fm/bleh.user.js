@@ -30317,6 +30317,15 @@
         patch_wiki_contents(wiki_block);
     }
   }
+  function can_trust_link(href) {
+    const url = new URL(href);
+    const scheme = url.protocol;
+    const hostname = url.hostname;
+    let dangerous = false;
+    if (!scheme || !scheme.startsWith("http")) dangerous = true;
+    if (settings.trusted_sites.includes(hostname)) return { trusted: true, dangerous };
+    return { trusted: false, dangerous };
+  }
   function patch_wiki_contents(wiki_block) {
     let links = wiki_block.querySelectorAll("a");
     links.forEach((link) => {
@@ -48386,6 +48395,74 @@
   }
   var purify = createDOMPurify();
 
+  // src/components/statuscafe.js
+  async function fetch_status(username2) {
+    const current = /* @__PURE__ */ new Date();
+    const next_fetch = new Date(localStorage.getItem("next_status_cafe_fetch")) || current;
+    if (current >= next_fetch) {
+      return await fetch_status_api(username2);
+    } else {
+      return html.node`
+            <div class="alert alert-error">
+                ${tl2(trans.status_cafe_too_many_requests)}
+            </div>
+        `;
+    }
+  }
+  async function fetch_status_api(username2) {
+    log(`fetching for ${username2}`, "status.cafe");
+    const new_date = /* @__PURE__ */ new Date();
+    new_date.setSeconds(new_date.getSeconds() + 1.5);
+    set_storage("next_status_cafe_fetch", new_date.toString());
+    return fetch(`https://status.cafe/users/${username2}/status.json`).then((res) => {
+      if (!res.ok) {
+        log(`error fetching for ${username2}`, "status.cafe", "error", { res });
+        return {
+          author: username2,
+          content: "status.cafe is unavailable right now..",
+          face: "",
+          timeAgo: ""
+        };
+      }
+      return res.json();
+    }).then((data2) => {
+      if (data2.face == null) data2.face = "";
+      if (data2.content == null) data2.content = "...";
+      if (data2.timeAgo == null) data2.timeAgo = "...";
+      const status_link = `https://status.cafe/users/${username2}`;
+      const { trusted, dangerous } = can_trust_link(status_link);
+      return html.node`
+                <div class="status-cafe" onclick=${() => {
+        if (trusted) {
+          open(status_link);
+          return;
+        }
+        external_url_prompt(status_link);
+      }}>
+                    <div class="status-cafe-top">
+                        <span class="status-cafe-author">${tl2(trans.author_on_status_cafe, { u: username2 })}</span>
+                        <span class="status-cafe-time">${data2.timeAgo}</span>
+                    </div>
+                    <div class="status-cafe-content">
+                        <span class="status-cafe-emoji">${data2.face}</span>
+                        <span class="status-cafe-text">${data2.content}</span>
+                    </div>
+                    <div class="status-cafe-time">
+
+                    </div>
+                </div>
+            `;
+    }).catch((e) => {
+      log(`error processing for ${username2}`, "status.cafe", "error", { e });
+      return html.node`
+                <div class="alert alert-error">
+                    ${tl2(trans.value_failed_to_load).replace("{v}", "status.cafe")}
+                    ${e && e.message ? html`<br />${e.message}` : ""}
+                </div>
+            `;
+    });
+  }
+
   // src/components/markdown.js
   function markdown(text4, {
     allow_headers = false,
@@ -48443,6 +48520,7 @@
     let sat;
     let lit;
     let links = [];
+    let status_cafe_user;
     const banner = () => [
       {
         type: "lang",
@@ -48546,6 +48624,16 @@
         }
       }
     ];
+    const status2 = () => [
+      {
+        type: "lang",
+        regex: /\[status=([^\]]+)\]/g,
+        replace: (_, user) => {
+          status_cafe_user = user;
+          return '<div class="status-cafe-host"></div>';
+        }
+      }
+    ];
     const social_links = () => [
       {
         type: "lang",
@@ -48619,7 +48707,7 @@
     if (line_breaks) extensions.push(blockquotes());
     if (allow_banners) extensions.push(banner());
     if (allow_icons) extensions.push(icons());
-    if (allow_hue) extensions.push(accent(), display_name());
+    if (allow_hue) extensions.push(accent(), display_name(), status2());
     if (allow_fonts) extensions.push(font());
     if (allow_socials) extensions.push(social_links());
     if (!allow_headers) extensions.push(header_minify());
@@ -48787,6 +48875,17 @@
         if (cache2.lit) delete cache2.lit;
         log("cleared custom accent settings", "profile", "log");
       }
+    }
+    if (status_cafe_user) {
+      const status_cafe_host = body2.querySelector(".status-cafe-host");
+      render(status_cafe_host, html`
+            <div class="alert alert-info">
+                ${tl2(trans.loading_status, { u: status_cafe_user })}
+            </div>
+        `);
+      fetch_status(status_cafe_user).then((status_cafe) => {
+        render(status_cafe_host, status_cafe);
+      });
     }
     if (cache2 && will_cache) {
       log("finalised cache from markdown parsing", "markdown", "info", {
@@ -67572,6 +67671,15 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       body: {
         en: "If you are a Last.fm Pro subscriber, you can view your current active track in your profile menu at all times"
       }
+    },
+    author_on_status_cafe: {
+      en: "{u} on status.cafe"
+    },
+    status_cafe_too_many_requests: {
+      en: "Temporarily paused loading status.cafe results ~w~"
+    },
+    loading_status: {
+      en: "i wonder what {u} is up to..."
     }
   };
   function tl2(key, replacements = {}) {

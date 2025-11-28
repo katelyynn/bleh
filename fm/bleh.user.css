@@ -29662,4 +29662,38 @@
     .user-now-empty-state-message {
         color: hsl(var(--c2));
     }
+
+
+    .status-cafe {
+        display: flex;
+        flex-direction: column;
+        cursor: pointer;
+
+        .status-cafe-top {
+            display: flex;
+            font-size: 13px;
+            color: hsl(var(--c3));
+
+            .status-cafe-author {
+                flex: 1;
+                flex-shrink: 1;
+            }
+
+            .status-cafe-time {
+                flex-shrink: 0;
+            }
+        }
+
+        .status-cafe-content {
+            display: flex;
+            gap: 6px;
+
+            .status-cafe-emoji {
+                display: flex;
+                align-items: center;
+                max-height: 18px;
+                font-size: 10px;
+            }
+        }
+    }
 }
