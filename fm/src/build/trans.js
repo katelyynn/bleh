@@ -887,7 +887,7 @@ export const trans = {
     },
     scrobble_value: {
         en: 'Scrobble {v}',
-        es: 'Hacer {v} scrobblings',
+        es: 'Hacer scrobbling al {v}',
         ru: 'Скробблить {v}',
         pt: 'Scrobble {v}',
     },
