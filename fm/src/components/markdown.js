@@ -232,7 +232,7 @@ export function markdown(
             type: 'lang',
             regex: /\[status=([^\]]+)\]/g,
             replace: (_, user) => {
-                status_cafe_user = user;
+                status_cafe_user = encodeURIComponent(user);
                 return '<div class="status-cafe-host"></div>';
             }
         }
