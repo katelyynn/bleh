@@ -513,6 +513,9 @@ function patch_settings_profile_panel(token, update_picture) {
         dialog_rm({ id });
     }
 
+    const update_profile = page.structure.main.querySelector('#update-profile');
+    const alert = update_profile.querySelector('.alert');
+
     let form_display_name = document.getElementById('id_full_name').value;
     let form_website = document.getElementById('id_homepage').value;
     let form_country = document.getElementById('id_country');
@@ -566,6 +569,7 @@ function patch_settings_profile_panel(token, update_picture) {
 
     render(update_picture, html`
         <h4>${tl(trans.profile)}</h4>
+        ${alert}
         <form
             class="dont-move"
             action="${root}settings#update-profile"
@@ -1394,6 +1398,8 @@ function bleh_communication_panel(token) {
     let panel = page.structure.main.querySelector('#ignorelist');
     panel.classList.add('bleh--panel');
 
+    const alert = panel.querySelector('.alert');
+
     let list = panel.querySelectorAll('.ignore-list tr');
 
     let new_list = document.createElement('div');
@@ -1485,6 +1491,7 @@ function bleh_communication_panel(token) {
                     <div class="bleh-icon"></div>
                 </div>
             </div>
+            ${alert}
             <div class="setting" data-type="text">
                 <div class="heading">
                     <h5>${tl(trans.profile)}</h5>

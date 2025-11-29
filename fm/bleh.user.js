@@ -34075,6 +34075,8 @@
       const id = page.state.avatar_changer.getAttribute("data-modal-id");
       dialog_rm({ id });
     }
+    const update_profile = page.structure.main.querySelector("#update-profile");
+    const alert2 = update_profile.querySelector(".alert");
     let form_display_name = document.getElementById("id_full_name").value;
     let form_website = document.getElementById("id_homepage").value;
     let form_country = document.getElementById("id_country");
@@ -34122,6 +34124,7 @@
     let cache2 = profile_cache[auth.name];
     render(update_picture, html`
         <h4>${tl2(trans.profile)}</h4>
+        ${alert2}
         <form
             class="dont-move"
             action="${root}settings#update-profile"
@@ -34820,6 +34823,7 @@
     let profile_notes = JSON.parse(localStorage.getItem("bleh_profile_notes")) || {};
     let panel = page.structure.main.querySelector("#ignorelist");
     panel.classList.add("bleh--panel");
+    const alert2 = panel.querySelector(".alert");
     let list = panel.querySelectorAll(".ignore-list tr");
     let new_list = document.createElement("div");
     new_list.classList.add(
@@ -34890,6 +34894,7 @@
                     <div class="bleh-icon"></div>
                 </div>
             </div>
+            ${alert2}
             <div class="setting" data-type="text">
                 <div class="heading">
                     <h5>${tl2(trans.profile)}</h5>
@@ -49432,10 +49437,10 @@
   }
   function begin_snowflakes(enabled, count) {
     if (!enabled) return;
-    const flakes = Array.from({ length: count }, () => {
+    const flakes = Array.from({ length: count * 1.2 }, () => {
       const x = (Math.random() * 100).toFixed(2);
       const drift = (Math.random() * 30 - 10).toFixed(2);
-      const scale = (Math.random() * 1.05 + 0.2).toFixed(2);
+      const scale = (Math.random() * 0.9 + 0.2).toFixed(2);
       const duration = (Math.random() * 59 + 12).toFixed(2);
       const delay = (Math.random() * -30).toFixed(2);
       const opacity = (Math.random() * 0.7 + 0.2).toFixed(2);

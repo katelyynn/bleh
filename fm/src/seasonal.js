@@ -332,10 +332,10 @@ function prep_snow() {
 function begin_snowflakes(enabled, count) {
     if (!enabled) return;
 
-    const flakes = Array.from({ length: count }, () => {
+    const flakes = Array.from({ length: count * 1.2 }, () => {
         const x = (Math.random() * 100).toFixed(2);
         const drift = (Math.random() * 30 - 10).toFixed(2);
-        const scale = (Math.random() * 1.05 + 0.2).toFixed(2);
+        const scale = (Math.random() * 0.9 + 0.2).toFixed(2);
         const duration = (Math.random() * 59 + 12).toFixed(2);
         const delay = (Math.random() * -30).toFixed(2);
         const opacity = (Math.random() * 0.7 + 0.2).toFixed(2);
