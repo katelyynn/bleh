@@ -2111,11 +2111,21 @@ export function open_starred_friend_window() {
         title: tl(trans.friends),
         body: html.node`
             <div class="setting-group">
-                ${(starred = setting({ id: 'starred_friend', list: select_prepare_list([{ value: '', text: tl(trans.none) }, ...settings.friends]) }))}
+                ${friends = setting({
+                    id: 'friends',
+                    list: settings.friends,
+                    func: (val) => {
+                        if (!val.includes(settings.starred_friend))
+                            save_setting('starred_friend', '');
+
+                        checkup_friend_cache(val);
+
+                        starred.update(select_prepare_list([{ value: '', text: tl(trans.none) }, ...val]));
+                    }
+                })}
+                ${starred = setting({ id: 'starred_friend', list: select_prepare_list([{ value: '', text: tl(trans.none) }, ...settings.friends]) })}
             </div>
-            <div class="alert alert-info">
-                ${tl(trans.starred_friend.notice)}
-            </div>
+            <p class="card-tip">${tl(trans.friend_difference)}</p>
         `
     });
 }

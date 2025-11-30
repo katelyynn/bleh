@@ -561,6 +561,8 @@
             hsl(var(--h4), 5%)
         );
 
+        --glow: hsl(var(--h3), 40%);
+
         .theme-preview[data-bleh--theme="oled"],
         [data-bleh--theme="oled"] &:not(.theme-preview) {
             --c1:
@@ -629,9 +631,7 @@
                 calc(clamp(min(0.7), var(--lit), max(1.1)) * 36%);
             --l3-c-sat: calc(clamp(min(0), var(--sat), max(1.5)) * 50%);
             --l3-c-lit: calc(clamp(min(0.5), var(--lit), max(1.1)) * 40%);
-            --l4-c:
-                var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 60%),
-                calc(clamp(min(0.7), var(--lit), max(1.1)) * 26%);
+            --l4-c: var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 60%), calc(clamp(min(0.7), var(--lit), max(1.1)) * 26%);
 
             --h3:
                 var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 50%),
@@ -677,6 +677,8 @@
                 transparent 20%,
                 hsl(var(--h4), 15%)
             );
+
+            --glow: hsl(var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 80%), calc(clamp(min(0.7), var(--lit), max(1.1)) * 30%), 20%);
         }
         .theme-preview[data-bleh--theme="ink"],
         [data-bleh--theme="ink"]
@@ -750,6 +752,8 @@
                 transparent 20%,
                 hsl(var(--h4), 15%)
             );
+
+            --glow: hsl(var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 80%), calc(clamp(min(0.7), var(--lit), max(1.1)) * 30%), 20%);
         }
     }
 
@@ -16195,7 +16199,7 @@
                 var(--primary-shadow),
                 0 3px 12px hsl(var(--h4), 32%),
                 var(--interactable-outer) !important;
-            padding: 0 0 1px !important;
+            padding: 0 !important;
             font-size: 12px !important;
 
             border-top-left-radius: var(--calendar-radius);
@@ -18055,7 +18059,7 @@
             content: '';
             position: absolute;
             inset: calc(-1 * var(--inset));
-            border: 2px solid hsl(var(--h3), 40%);
+            border: 2px solid var(--glow);
             border-radius: calc(var(--item-med-radius) + var(--inset));
 
             scale: 0.95;
@@ -19080,7 +19084,7 @@
             }
 
             input {
-                width: calc((var(--max) * 2px) + var(--button-height));
+                width: calc((var(--max) * 4) + var(--button-height));
                 min-width: 240px;
                 max-width: 380px;
 

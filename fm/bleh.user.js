@@ -37474,11 +37474,19 @@
       title: tl2(trans.friends),
       body: html.node`
             <div class="setting-group">
+                ${friends = setting({
+        id: "friends",
+        list: settings.friends,
+        func: (val) => {
+          if (!val.includes(settings.starred_friend))
+            save_setting("starred_friend", "");
+          checkup_friend_cache(val);
+          starred.update(select_prepare_list([{ value: "", text: tl2(trans.none) }, ...val]));
+        }
+      })}
                 ${starred = setting({ id: "starred_friend", list: select_prepare_list([{ value: "", text: tl2(trans.none) }, ...settings.friends]) })}
             </div>
-            <div class="alert alert-info">
-                ${tl2(trans.starred_friend.notice)}
-            </div>
+            <p class="card-tip">${tl2(trans.friend_difference)}</p>
         `
     });
   }
@@ -41486,7 +41494,13 @@
         render_list_items(value);
         return elem;
       } else if (type == "select") {
-        let update_select = function(val) {
+        let render_select = function(use_list = list, use_value = value) {
+          render(select_hook, html`
+                    ${menu = select(use_list, use_value, "", (val) => {
+            update_select(val);
+          })}
+                `);
+        }, update_select = function(val) {
           if (!elem) return;
           save_setting(id, val);
           elem.setAttribute(
@@ -41507,9 +41521,9 @@
         if (func) func(value);
         let reset_btn;
         let menu;
-        if (list.length === 0) disabled = true;
-        let elem;
-        elem = html.node`
+        if (list.length == 0) disabled = true;
+        let select_hook;
+        let elem = html.node`
                 <div class="setting v2" data-type="options" disabled=${disabled} data-hide=${hide_if_incompatible} data-modified=${value != settings_store[id].default}>
                     ${icon ? html.node`
                     <div class="icon">
@@ -41542,11 +41556,14 @@
                     </div>
                     ` : ""}
                     ${setting_incompatible_block(settings_store[id].incompatible)}
-                    ${menu = select(list, value, "", (val) => {
-          update_select(val);
-        })}
+                    <div class="select-hook" ref=${(el) => select_hook = el} />
                 </div>
             `;
+        render_select();
+        elem.update = (new_list) => {
+          const new_value = settings[id];
+          render_select(new_list, new_value);
+        };
         elem.compat = () => {
           if (!incompatible_with) return;
           elem.setAttribute("disabled", "false");
@@ -51302,7 +51319,7 @@
       }
       register_skip_to([]);
       const cache2 = await load_profile_cache_externally(auth.name);
-      let friends;
+      let friends2;
       let starred2;
       console.info("friends", settings.friends, settings);
       render(
@@ -51378,14 +51395,14 @@
             <section class="bleh--panel">
                 <h4>${tl2(trans.friends)}</h4>
                 <div class="setting-group">
-                    ${friends = setting({
+                    ${friends2 = setting({
           id: "friends",
           list: settings.friends,
           func: (val) => {
             if (!val.includes(settings.starred_friend))
               save_setting("starred_friend", "");
             checkup_friend_cache(val);
-            render_setting_page("profile");
+            starred2.update(select_prepare_list([{ value: "", text: tl2(trans.none) }, ...val]));
           }
         })}
                     ${starred2 = setting({ id: "starred_friend", list: select_prepare_list([{ value: "", text: tl2(trans.none) }, ...settings.friends]) })}
@@ -55575,7 +55592,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
             `
       );
     }
-    const friends = settings.friends.filter(
+    const friends2 = settings.friends.filter(
       (friend) => friend != settings.starred_friend
     );
     page.structure.side.appendChild(html.node`
@@ -55591,7 +55608,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                 </span>
             </a>
             ` : ""}
-            ${friends.map(
+            ${friends2.map(
       (friend) => html.node`
             <a class="btn side-action" data-type="profile" href="${root}user/${friend}/library/music/${redirect()}${sanitise(page.name)}">
                 ${friend}

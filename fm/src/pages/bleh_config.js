@@ -1651,7 +1651,7 @@ export async function render_setting_page(page_id) {
             <section class="bleh--panel">
                 <h4>${tl(trans.friends)}</h4>
                 <div class="setting-group">
-                    ${(friends = setting({
+                    ${friends = setting({
                         id: 'friends',
                         list: settings.friends,
                         func: (val) => {
@@ -1660,10 +1660,10 @@ export async function render_setting_page(page_id) {
 
                             checkup_friend_cache(val);
 
-                            render_setting_page('profile');
+                            starred.update(select_prepare_list([{ value: '', text: tl(trans.none) }, ...val]));
                         }
-                    }))}
-                    ${(starred = setting({ id: 'starred_friend', list: select_prepare_list([{ value: '', text: tl(trans.none) }, ...settings.friends]) }))}
+                    })}
+                    ${starred = setting({ id: 'starred_friend', list: select_prepare_list([{ value: '', text: tl(trans.none) }, ...settings.friends]) })}
                 </div>
                 <p class="card-tip">${tl(trans.friend_difference)}</p>
             </section>

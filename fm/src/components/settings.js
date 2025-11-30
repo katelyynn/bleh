@@ -788,25 +788,17 @@ export function setting({
 
             const elem = html.node`
                 <div class="setting v2" data-type="list">
-                    ${
-                        icon ?
-                            html.node`
+                    ${icon ? html.node`
                     <div class="icon">
                         <div class="bleh-icon" style="--icon: var(--${icon})" />
                     </div>
-                    `
-                        :   ''
-                    }
-                    ${
-                        text ?
-                            html.node`
+                    ` : ''}
+                    ${text ? html.node`
                     <div class="heading">
                         <h5>${html_title}</h5>
                         ${body ? html.node`<p>${body}</p>` : ''}
                     </div>
-                    `
-                        :   ''
-                    }
+                    ` : ''}
                     <div class="setting-lists" ref=${(el) => (lists = el)} />
                 </div>
             `;
@@ -972,10 +964,11 @@ export function setting({
 
             let menu;
 
-            if (list.length === 0) disabled = true;
+            if (list.length == 0) disabled = true;
 
-            let elem;
-            elem = html.node`
+            let select_hook;
+
+            let elem = html.node`
                 <div class="setting v2" data-type="options" disabled=${disabled} data-hide=${hide_if_incompatible} data-modified=${value != settings_store[id].default}>
                     ${
                         icon ?
@@ -1020,11 +1013,25 @@ export function setting({
                         :   ''
                     }
                     ${setting_incompatible_block(settings_store[id].incompatible)}
-                    ${(menu = select(list, value, '', (val) => {
-                        update_select(val);
-                    }))}
+                    <div class="select-hook" ref=${el => select_hook = el} />
                 </div>
             `;
+
+            render_select();
+
+            function render_select(use_list = list, use_value = value) {
+                render(select_hook, html`
+                    ${menu = select(use_list, use_value, '', (val) => {
+                        update_select(val);
+                    })}
+                `);
+            }
+
+            elem.update = (new_list) => {
+                const new_value = settings[id];
+
+                render_select(new_list, new_value);
+            }
 
             elem.compat = () => {
                 if (!incompatible_with) return;
