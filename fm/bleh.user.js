@@ -41389,49 +41389,46 @@
                                 </button>
                             `;
             })}
-                        ${!settings_store[id].predefined ? html.node`
-                            <button class="setting-list-item current" onclick=${() => {
+                        ${!settings_store[id].predefined ? () => {
+              const button2 = html.node`
+                                <button class="setting-list-item current">
+                                    <div class="info">
+                                        ${tl2(trans.add)}
+                                    </div>
+                                    <div class="bleh-icon indicator" data-type="add" />
+                                </button>
+                            `;
               let input_box;
-              dialog({
-                id: `add_to_list_${id}`,
-                title,
-                body: html.node`
-                                        ${input_box = input({
+              const tooltip = tippy_esm_default(button2, {
+                theme: "window",
+                content: html.node`
+                                    ${input_box = input({
                   focus: true,
                   func: complete_add,
                   warn_if_matches_auth: settings_store[id].warn_if_matches_auth,
                   warn_if_empty: true
                 })}
-                                        <div class="modal-footer">
-                                            <button class="see-more cancel" onclick=${() => dialog_rm({ id: `add_to_list_${id}` })}>
-                                                ${tl2(trans.cancel)}
-                                            </button>
-                                            <div class="fill"></div>
-                                            <button class="btn primary icon" data-type="add" onclick=${() => complete_add(input_box.value())}>
-                                                ${tl2(trans.add)}
-                                            </button>
-                                        </div>
-                                    `
+                                `,
+                placement: "bottom",
+                interactive: true,
+                interactiveBorder: 10,
+                trigger: "click",
+                appendTo: document.body,
+                onShow() {
+                  input_box.focus();
+                }
               });
-              setTimeout(() => {
-                input_box.focus();
-              }, 1);
               function complete_add(val) {
                 if (val == auth.name || val.length < 1)
                   return;
-                dialog_rm({ id: `add_to_list_${id}` });
+                tooltip.destroy();
                 const new_list = [...current, val];
                 save_setting(id, new_list);
                 render_list_items(new_list);
                 if (func) func(new_list);
               }
-            }}>
-                                <div class="info">
-                                    ${tl2(trans.add)}
-                                </div>
-                                <div class="bleh-icon indicator" data-type="add" />
-                            </button>
-                        ` : ""}
+              return button2;
+            } : ""}
                         ${settings_store[id].predefined ? html.node`
                         ${Object.entries(available).map(([val, formal]) => {
               return html.node`

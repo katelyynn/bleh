@@ -865,59 +865,54 @@ export function setting({
                                 </button>
                             `;
                         })}
-                        ${!settings_store[id].predefined ?
-                            html.node`
-                            <button class="setting-list-item current" onclick=${() => {
-                                let input_box;
+                        ${!settings_store[id].predefined ? () => {
+                            const button = html.node`
+                                <button class="setting-list-item current">
+                                    <div class="info">
+                                        ${tl(trans.add)}
+                                    </div>
+                                    <div class="bleh-icon indicator" data-type="add" />
+                                </button>
+                            `;
 
-                                dialog({
-                                    id: `add_to_list_${id}`,
-                                    title,
-                                    body: html.node`
-                                        ${(input_box = input({
-                                            focus: true,
-                                            func: complete_add,
-                                            warn_if_matches_auth:
-                                                settings_store[id]
-                                                    .warn_if_matches_auth,
-                                            warn_if_empty: true
-                                        }))}
-                                        <div class="modal-footer">
-                                            <button class="see-more cancel" onclick=${() => dialog_rm({ id: `add_to_list_${id}` })}>
-                                                ${tl(trans.cancel)}
-                                            </button>
-                                            <div class="fill"></div>
-                                            <button class="btn primary icon" data-type="add" onclick=${() => complete_add(input_box.value())}>
-                                                ${tl(trans.add)}
-                                            </button>
-                                        </div>
-                                    `
-                                });
+                            let input_box;
 
-                                setTimeout(() => {
+                            const tooltip = tippy(button, {
+                                theme: 'window',
+                                content: html.node`
+                                    ${input_box = input({
+                                        focus: true,
+                                        func: complete_add,
+                                        warn_if_matches_auth: settings_store[id].warn_if_matches_auth,
+                                        warn_if_empty: true
+                                    })}
+                                `,
+                                placement: 'bottom',
+                                interactive: true,
+                                interactiveBorder: 10,
+                                trigger: 'click',
+                                appendTo: document.body,
+
+                                onShow() {
                                     input_box.focus();
-                                }, 1);
-
-                                function complete_add(val) {
-                                    if (val == auth.name || val.length < 1)
-                                        return;
-
-                                    dialog_rm({ id: `add_to_list_${id}` });
-
-                                    const new_list = [...current, val];
-                                    save_setting(id, new_list);
-                                    render_list_items(new_list);
-
-                                    if (func) func(new_list);
                                 }
-                            }}>
-                                <div class="info">
-                                    ${tl(trans.add)}
-                                </div>
-                                <div class="bleh-icon indicator" data-type="add" />
-                            </button>
-                        `
-                        :   ''}
+                            });
+
+                            function complete_add(val) {
+                                if (val == auth.name || val.length < 1)
+                                    return;
+
+                                tooltip.destroy();
+
+                                const new_list = [...current, val];
+                                save_setting(id, new_list);
+                                render_list_items(new_list);
+
+                                if (func) func(new_list);
+                            }
+
+                            return button;
+                        } : ''}
                         ${settings_store[id].predefined ?
                             html.node`
                         ${Object.entries(available).map(([val, formal]) => {

@@ -2298,37 +2298,34 @@ export function display_colour_presets() {
                 content: html.node`
                     <div class="dialog-settings">
                         <div class="setting-group blend">
-                            ${ff('colour_based_on_hex')
-                        ? html.node`
+                            ${ff('colour_based_on_hex') ? html.node`
                             <div class="setting" data-type="text">
                                 <div class="heading">
                                     <h5>${tl(trans.convert_from_hex)}</h5>
                                 </div>
                                 <div class="input-container content-form">
                                     ${(colour = input({
-                            type: 'colour',
-                            value: '#999999',
-                            maxlength: 7,
-                            warn_if_empty: true
-                        }))}
+                                        type: 'colour',
+                                        value: '#999999',
+                                        maxlength: 7,
+                                        warn_if_empty: true
+                                    }))}
                                     <button class="btn primary icon convert" onclick=${() => {
-                                const value = colour.value();
-                                const hsl = hex_to_hsl(value);
+                                        const value = colour.value();
+                                        const hsl = hex_to_hsl(value);
 
-                                hue_range.set(hsl.h);
-                                sat_range.set(
-                                    clamp_sat((hsl.s / 100) * 3)
-                                );
-                                lit_range.set(hsl.l / 100 + 0.35);
-                            }}>${tl(trans.convert)}</button>
+                                        hue_range.set(hsl.h);
+                                        sat_range.set(
+                                            clamp_sat((hsl.s / 100) * 3)
+                                        );
+                                        lit_range.set(hsl.l / 100 + 0.35);
+                                    }}>${tl(trans.convert)}</button>
                                 </div>
                             </div>
-                            `
-                        : ''
-                    }
-                            ${(hue_range = setting({ id: 'hue', func: update_colour_swatches }))}
-                            ${(sat_range = setting({ id: 'sat', func: update_colour_swatches }))}
-                            ${(lit_range = setting({ id: 'lit', func: update_colour_swatches }))}
+                            ` : ''}
+                            ${hue_range = setting({ id: 'hue', func: update_colour_swatches })}
+                            ${sat_range = setting({ id: 'sat', func: update_colour_swatches })}
+                            ${lit_range = setting({ id: 'lit', func: update_colour_swatches })}
                         </div>
                     </div>
                 `,
