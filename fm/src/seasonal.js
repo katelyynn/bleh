@@ -134,11 +134,10 @@ export function set_season() {
                 let snowflakes_enabled = true;
                 let snowflakes_count = season.snowflakes.count;
 
-                if (
-                    settings.seasonal_particles == 'less' &&
-                    snowflakes_count > 10
-                )
-                    snowflakes_count = snowflakes_count * 0.45;
+                if (settings.seasonal_particles == 'less' && snowflakes_count > 10)
+                    snowflakes_count *= 0.45;
+
+                if (page.mobile && snowflakes_count > 10) snowflakes_count *= 0.5;
 
                 begin_snowflakes(snowflakes_enabled, snowflakes_count);
             }
@@ -332,7 +331,7 @@ function prep_snow() {
 function begin_snowflakes(enabled, count) {
     if (!enabled) return;
 
-    const flakes = Array.from({ length: count * 1.2 }, () => {
+    const flakes = Array.from({ length: count * 1.3 }, () => {
         const x = (Math.random() * 100).toFixed(2);
         const drift = (Math.random() * 30 - 10).toFixed(2);
         const scale = (Math.random() * 0.9 + 0.2).toFixed(2);

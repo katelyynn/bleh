@@ -135,6 +135,9 @@ export function bleh() {
 
             checkup_friend_cache();
 
+            detect_mobile();
+            page.platform = detect_platform();
+
             // load seasonal data
             set_season();
 
@@ -380,6 +383,9 @@ function load_page(main_content = null) {
 
     lookup_lang();
 
+    detect_mobile();
+    page.platform = detect_platform();
+
     set_season();
     seasonal_timer_end();
 
@@ -400,9 +406,6 @@ function load_page(main_content = null) {
     }
 
     prepare_music();
-
-    detect_mobile();
-    page.platform = detect_platform();
 
     if (
         window.location.pathname.startsWith(setup_url.replace('{root}', root))

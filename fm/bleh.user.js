@@ -49317,7 +49317,8 @@
           let snowflakes_enabled = true;
           let snowflakes_count = season.snowflakes.count;
           if (settings.seasonal_particles == "less" && snowflakes_count > 10)
-            snowflakes_count = snowflakes_count * 0.45;
+            snowflakes_count *= 0.45;
+          if (page.mobile && snowflakes_count > 10) snowflakes_count *= 0.5;
           begin_snowflakes(snowflakes_enabled, snowflakes_count);
         }
         if (last_season_seen != "" && last_season_seen != season.id) {
@@ -49451,7 +49452,7 @@
   }
   function begin_snowflakes(enabled, count) {
     if (!enabled) return;
-    const flakes = Array.from({ length: count * 1.2 }, () => {
+    const flakes = Array.from({ length: count * 1.3 }, () => {
       const x = (Math.random() * 100).toFixed(2);
       const drift = (Math.random() * 30 - 10).toFixed(2);
       const scale = (Math.random() * 0.9 + 0.2).toFixed(2);
@@ -58366,6 +58367,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         load_notifications();
         load_status();
         checkup_friend_cache();
+        detect_mobile();
+        page.platform = detect_platform();
         set_season();
         start_rain();
         load_activities();
@@ -58533,6 +58536,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     }
     page.structure.notifications.setAttribute("data-auth-open", "false");
     lookup_lang();
+    detect_mobile();
+    page.platform = detect_platform();
     set_season();
     seasonal_timer_end();
     bleh_footer();
@@ -58547,8 +58552,6 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       else masthead.classList.remove("scrolled");
     }
     prepare_music();
-    detect_mobile();
-    page.platform = detect_platform();
     if (window.location.pathname.startsWith(setup_url.replace("{root}", root))) {
       bleh_setup();
     } else if (window.location.pathname.startsWith(sponsor_url.replace("{root}", root))) {
