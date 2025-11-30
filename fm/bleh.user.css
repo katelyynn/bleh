@@ -13941,9 +13941,17 @@
     .listening-report-top-item-container,
     .listening-report-row--3-wide .listening-report-row__col {
         width: calc((var(--cards-width) / 3) - 5.5px) !important;
+
+        @media (max-width: 980px) {
+            width: unset !important;
+        }
     }
     .listening-report-row--2-wide .listening-report-row__col {
         width: calc((var(--cards-width) / 2) - 5px) !important;
+
+        @media (max-width: 980px) {
+            width: unset !important;
+        }
     }
 
     .report-box-container
