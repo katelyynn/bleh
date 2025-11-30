@@ -204,7 +204,7 @@ export async function render_setting_page(page_id) {
     page_loading();
 
     if (page_id == 'general') {
-        if (auth.pro === null) {
+        if (auth.pro == null) {
             setTimeout(() => {
                 render_setting_page('general');
             }, 10);
@@ -404,7 +404,7 @@ export async function render_setting_page(page_id) {
                             <div class="setting" data-type="action">
                                 <div class="heading">
                                     <h5>${tl(trans.news_sponsor_cta)}</h5>
-                                    <p>${tl(trans.api.body)}</p>
+                                    <p>${tl(trans.sponsor_get_badge)}</p>
                                 </div>
                                 <div class="toggle-wrap">
                                     <button class="btn primary icon sponsor" data-type="sponsor" onclick=${() => sponsor()}>
