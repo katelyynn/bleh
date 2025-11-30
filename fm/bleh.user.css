@@ -8260,7 +8260,8 @@
     .blend-v2-btn,
     .notification,
     .user-now-empty-state-button,
-    .inbox-item {
+    .inbox-item,
+   .report-dropdown-button {
         --bg: var(--cards-overlay-image-subtlest, none), hsl(var(--b3));
         --bg-hov:
             var(--cards-overlay-image-subtlest, none),
@@ -8761,6 +8762,7 @@
     }
 
     /*     ICON MASK     */
+    .report-dropdown-button:before,
     .attendance-badge:before,
     .track-explicit:before,
     .lfmmaf-missing-artwork-button:before,
@@ -8854,7 +8856,7 @@
     :is(.shout-body, .about-me-sidebar, .bleh--about-me-preview, .user-list-about-me) > p a:before,
     /*     DROPDOWNS     */
     .dropdown-menu-clickable-item:not(.v2):before, .auth-dropdown-menu-item:before,
-    .dropdown-menu-list-button::after, .dropdown-menu-clickable-button:not(.link-select)::after, .dropdown-menu-clickable-button-js-only::after, .display-options-clickable-button:after,
+    .dropdown-menu-list-button::after, .dropdown-menu-clickable-button:not(.link-select, .report-dropdown-button)::after, .dropdown-menu-clickable-button-js-only::after, .display-options-clickable-button:after,
     /*     PAGINATION     */
     .pagination-previous a:before, .pagination-next a:before,
     /*     MORE LINK >     */
@@ -9132,7 +9134,7 @@
 
     .display-options-clickable-button,
     .dropdown-menu-list-button,
-    .dropdown-menu-clickable-button,
+    .dropdown-menu-clickable-button:not(.report-dropdown-button),
     .dropdown-menu-clickable-button-js-only {
         --mask: var(--icon-16-dropdown);
 
@@ -13866,19 +13868,46 @@
     }
 
     .report-dropdown-button {
-        --bg: hsla(var(--b7), 5%);
-        --bg-hov: hsla(var(--b7), 15%);
-        --bg-atv: hsla(var(--b7), 25%);
+        --bg: hsla(var(--b7), 20%);
+        --bg-hov: hsla(var(--b7), 40%);
+        --bg-atv: hsla(var(--b7), 60%);
         --shadow: none;
-        --btn-right: var(--button-sides) !important;
-        width: 32px;
 
-        &:after {
-            --left: var(--icon-half) !important;
-            --mask: var(--icon-16-dots);
+        --btn-left: var(--button-sides) !important;
+        --btn-right: var(--button-sides) !important;
+        --font-size: 0 !important;
+        --mask-colour: #fff !important;
+        width: var(--button-height) !important;
+        height: var(--button-height) !important;
+
+        --mask: var(--icon-16-dots);
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &:before {
+            --left: calc(
+                (var(--button-height) - var(--icon-size)) / 2
+            ) !important;
+            --right: none !important;
         }
 
-        img {
+        &[id$="colors-button"] {
+            --b7: var(--b4);
+            --show-icon: none;
+
+            top: 16px;
+            right: 0;
+        }
+
+        & > img {
+            margin: unset !important;
+            width: var(--icon-size) !important;
+            height: var(--icon-size) !important;
+        }
+
+        &:not([id$="colors-button"]) > img {
             display: none;
         }
     }
