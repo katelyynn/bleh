@@ -17966,6 +17966,8 @@
         margin: 0 -4px !important;
         --radius: 0;
 
+        transform: none !important;
+
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -18023,6 +18025,12 @@
                 pointer-events: none;
             }
         }
+
+        &:active {
+            & > .swatch {
+                scale: 0.95;
+            }
+        }
     }
     .palette .swatch:not(.dropdown-menu-clickable-item, .album-cover) {
         background: hsl(var(--h3));
@@ -18070,6 +18078,10 @@
                 box-shadow: var(--group-shadow);
             }
         }
+
+        transition-property: scale;
+        transition-duration: 0.2s;
+        transition-timing-function: var(--trans-function-ani);
 
         &:after {
             --inset: 4px;
