@@ -10039,9 +10039,11 @@
             transition-duration: 0.1s;
         }
 
+        &:not([disabled]):focus,
         &:not([disabled]):active {
             background: var(--bg-atv) !important;
             transform: scale(0.98);
+            text-decoration: none !important;
         }
 
         width: fit-content;
@@ -29488,6 +29490,8 @@
     }
 
     .this-month {
+        --bg-hov: hsl(var(--b4), 40%) !important;
+        --bg-atv: hsl(var(--b4), 60%) !important;
         color: hsl(var(--c3));
         --mask-colour: hsl(var(--c3), 80%);
         --mask: var(--icon-16-trend);
