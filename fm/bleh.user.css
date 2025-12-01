@@ -127,7 +127,7 @@
         --hue-brand-twt: 202;
 
         --trans-short: 0.2s;
-        --trans: 0.1s;
+        --trans: 0.2s;
         --trans-function: cubic-bezier(0.095, 0.410, 0.055, 0.960);
         --trans-function-ani: cubic-bezier(0.205, 0.060, 0.050, 0.965);
 
@@ -9990,8 +9990,8 @@
         display: inline-flex;
         background: var(--bg) !important;
         --bg: transparent;
-        --bg-hov: hsl(var(--h4), 5%);
-        --bg-atv: hsl(var(--h4), 10%);
+        --bg-hov: hsl(var(--h4), 10%);
+        --bg-atv: hsl(var(--h4), 20%);
         --padding: var(--see-more-pad-v) var(--see-more-pad);
         --radius: var(--item-med-radius);
         border-radius: var(--radius) !important;
@@ -10039,7 +10039,10 @@
             transition-duration: 0.1s;
         }
 
-        &:not([disabled]):focus,
+        &:not([disabled]):focus {
+            text-decoration: none !important;
+        }
+
         &:not([disabled]):active {
             background: var(--bg-atv) !important;
             transform: scale(0.98);
@@ -18410,8 +18413,8 @@
                     box-shadow,
                     backdrop-filter,
                     -webkit-backdrop-filter;
-                transition-duration: var(--trans);
-                transition-timing-function: var(--trans-function);
+                transition-duration: 0.4s;
+                transition-timing-function: var(--trans-function-ani);
             }
 
             &[data-id="hue"] {
