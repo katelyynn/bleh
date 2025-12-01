@@ -515,8 +515,8 @@
         --h3-lit: calc(clamp(min(0.5), var(--lit), max(1.5)) * 70%);
         --h4: var(--l4-c);
         --f4:
-            var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 35%),
-            calc(clamp(min(0.8), var(--lit), max(1.5)) * 32%);
+            var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 40%),
+            calc(clamp(min(0.8), var(--lit), max(1.5)) * 42%);
         --k4: var(--f4);
         --g4:
             var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 60%),
@@ -4961,9 +4961,9 @@
         max-width: unset;
         transition-delay: 0s !important;
 
-        --bg: hsl(var(--f4), 20%);
-        --bg-hov: hsl(var(--f4), 40%);
-        box-shadow: 0px 0px 10px 0px hsl(var(--l3-c), 8%) inset !important;
+        --bg: hsl(var(--f4), 30%);
+        --bg-hov: hsl(var(--f4), 50%);
+        box-shadow: 0 3px 15px 1px hsl(var(--h4), 20%), 0px 0px 10px 0px hsl(var(--l3-c), 8%) inset !important;
         background-color: var(--bg) !important;
         border-radius: var(--item-big-radius) !important;
         cursor: pointer;
