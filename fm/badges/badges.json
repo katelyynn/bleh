@@ -1,5 +1,5 @@
 {
-    "latest": "2025.1126",
+    "latest": "2025.1201",
     "sponsors": [
         "clairedoll", "kateshapedbox", "evangelicgirl",
         "astrablooms", "ItsProyal", "vwvwvwvwvwvwv", "Orofil",
@@ -9,7 +9,7 @@
         "saettbyeol", "lyeule", "sewagebipolar", "unstablerate",
         "noapop", "celebrating", "myraisounds", "riskyrizey",
         "fourohclok", "liminalvespers", "HuxP", "K40M0J1",
-        "goldenstuffed", "favewa", "kar1x", "nojonsko",
+        "goldenstuffed", "ferrea", "kar1x", "nojonsko",
         "urwq", "driftpsalm", "popcorniscrazy", "s0540a",
         "dylandotat"
     ],
@@ -330,7 +330,7 @@
             "type": "translation",
             "reason": "Русский"
         },
-        "favewa": [
+        "ferrea": [
             {
                 "type": "translation",
                 "reason": "Português"
