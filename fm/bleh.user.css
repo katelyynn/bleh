@@ -9984,13 +9984,17 @@
     .more-link > a,
     #events-section > p > a,
     .see-more {
+        --see-more-pad-v: 3px;
+        --see-more-pad: 6px;
+
         display: inline-flex;
         background: var(--bg) !important;
         --bg: transparent;
-        --bg-hov: transparent;
-        --bg-atv: transparent;
-        --padding: 0;
-        --radius: 0;
+        --bg-hov: hsl(var(--h4), 5%);
+        --bg-atv: hsl(var(--h4), 10%);
+        --padding: var(--see-more-pad-v) var(--see-more-pad);
+        --radius: var(--item-med-radius);
+        border-radius: var(--radius) !important;
         --shadow: none;
         --col: hsl(var(--l3-c));
         --mask-colour: color-mix(
@@ -10003,7 +10007,7 @@
         --mask-size: 12px;
         --margin-top: calc(-1 * var(--mask-size) / 2);
         --left: none;
-        --right: 0;
+        --right: var(--see-more-pad);
         --show-icon: block !important;
         cursor: pointer;
 
@@ -10019,22 +10023,24 @@
             );
         }
 
-        margin: unset !important;
-        padding: unset !important;
-        padding-right: calc(var(--mask-size) + 4px) !important;
+        margin: calc(-1 * var(--see-more-pad-v)) calc(-1 * var(--see-more-pad)) !important;
+        padding: var(--see-more-pad-v) var(--see-more-pad) !important;
+        padding-right: calc(var(--see-more-pad) + var(--mask-size) + 4px) !important;
 
         transition-property: transform, color;
         transition-duration: var(--trans);
         transition-timing-function: var(--trans-function);
 
         &:not([disabled]):hover {
-            text-decoration: underline !important;
+            background: var(--bg-hov) !important;
+            text-decoration: none !important;
 
             transition-property: transform;
             transition-duration: 0.1s;
         }
 
         &:not([disabled]):active {
+            background: var(--bg-atv) !important;
             transform: scale(0.98);
         }
 
@@ -10058,10 +10064,10 @@
     .update-check,
     .obsession-delete-button,
     a.inline-add-icon {
-        --left: 0;
+        --left: var(--see-more-pad);
         --right: none;
-        padding-right: unset !important;
-        padding-left: calc(var(--mask-size) + 4px) !important;
+        padding-right: var(--see-more-pad) !important;
+        padding-left: calc(var(--see-more-pad) + var(--mask-size) + 4px) !important;
 
         &:before {
             mask-image: var(
@@ -21659,6 +21665,12 @@
             transition-duration: var(--trans) !important;
             transition-timing-function: var(--trans-function) !important;
             color: hsl(var(--c3));
+        }
+
+        &.blend-v2-btn {
+            &:after {
+                --right: var(--see-more-pad) !important;
+            }
         }
 
         &:active {
