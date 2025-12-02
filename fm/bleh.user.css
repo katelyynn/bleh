@@ -243,7 +243,7 @@
         --toolbar-border: 1px solid hsl(var(--b4), 75%);
         --subtle-border: 1px solid hsl(var(--b4), 55%);
 
-        --card-blur-bg: hsl(var(--b5), var(--solarium-opacity, 72%));
+        --card-blur-bg: hsl(var(--b5), var(--solarium-opacity, 70%));
         --card-blur-bg-alt: hsl(var(--b5), var(--solarium-opacity, 35%));
 
         --nav-filter-shadow: drop-shadow(0 0 8px hsl(var(--b6)));
@@ -271,6 +271,9 @@
 
             --menu-item-hov: hsla(var(--b4), 60%);
             --menu-item-atv: hsla(var(--b4), 80%);
+
+            --card-blur-bg: hsl(var(--b5), var(--solarium-opacity, 50%));
+            --card-blur-bg-alt: hsl(var(--b5), var(--solarium-opacity, 35%));
         }
         .theme-preview[data-bleh--theme="oled"],
         [data-bleh--theme="oled"] &:not(.theme-preview) {
@@ -313,7 +316,7 @@
             --toolbar-border: 1px solid hsl(var(--b4), 45%);
             --subtle-border: 1px solid hsl(var(--b4), 35%);
 
-            --card-blur-bg: hsl(var(--b5), var(--solarium-opacity, 70%));
+            --card-blur-bg: hsl(var(--b5), var(--solarium-opacity, 30%));
             --card-blur-bg-alt: hsl(var(--b5), var(--solarium-opacity, 40%));
         }
         .theme-preview[data-bleh--theme="light"],
@@ -361,7 +364,7 @@
             --toolbar-border: 1px solid hsl(var(--b4), 85%);
             --subtle-border: 1px solid hsl(var(--b4), 65%);
 
-            --card-blur-bg: hsl(var(--b5), var(--solarium-opacity, 52%));
+            --card-blur-bg: hsl(var(--b5), var(--solarium-opacity, 32%));
             --card-blur-bg-alt: hsl(var(--b5), var(--solarium-opacity, 22%));
 
             --menu-item-hov: hsla(var(--b4), 60%);
@@ -424,6 +427,9 @@
 
             --nav-filter-shadow: drop-shadow(0 0 4px hsl(var(--b5))) drop-shadow(0 0 12px hsl(var(--b5)));
             --header-filter-shadow: drop-shadow(0 0 6px hsl(var(--b5)));
+
+            --card-blur-bg: hsl(var(--b5), var(--solarium-opacity, 32%));
+            --card-blur-bg-alt: hsl(var(--b5), var(--solarium-opacity, 22%));
         }
     }
 
@@ -859,7 +865,7 @@
         --cover-size-300: 96px;
         --cover-size-400: 180px;
 
-        --blur-saturate: 320%;
+        --blur-saturate: 240%;
         --blur-brightness: 0.7;
         --blur-contrast: 1;
 
@@ -4279,7 +4285,7 @@
             position: absolute;
             inset: 0 0 -1px 0;
             display: block;
-            background: hsl(var(--b5), 80%);
+            background: hsl(var(--b5), 64%);
             backdrop-filter: var(--solarium);
             -webkit-backdrop-filter: var(--solarium);
             border-top-left-radius: inherit;
