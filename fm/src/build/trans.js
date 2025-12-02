@@ -8898,9 +8898,8 @@ export const trans = {
             en: 'If you are a Last.fm Pro subscriber, you can view your current active track in your profile menu at all times'
         }
     },
-    author_on_status_cafe: {
-        // status.cafe
-        en: '{u} on status.cafe'
+    current_status: {
+        en: 'Current status'
     },
     status_cafe_too_many_requests: {
         en: 'paused loading temporarily @w@'

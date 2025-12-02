@@ -48460,7 +48460,7 @@
       return html.node`
             <div class="status-cafe">
                 <div class="status-cafe-top">
-                    <span class="status-cafe-author">${tl2(trans.author_on_status_cafe, { u: username2 })}</span>
+                    <span class="status-cafe-author">${tl2(trans.current_status)}</span>
                     <span class="status-cafe-time">...</span>
                 </div>
                 <div class="status-cafe-content is-loading">
@@ -48504,7 +48504,7 @@
         external_url_prompt(status_link);
       }}>
                     <div class="status-cafe-top">
-                        <span class="status-cafe-author">${tl2(trans.author_on_status_cafe, { u: username2 })}</span>
+                        <span class="status-cafe-author">${tl2(trans.current_status)}</span>
                         <span class="status-cafe-time">${data2.timeAgo}</span>
                     </div>
                     <div class="status-cafe-content">
@@ -48518,7 +48518,7 @@
       return html.node`
                 <div class="status-cafe">
                     <div class="status-cafe-top">
-                        <span class="status-cafe-author">${tl2(trans.author_on_status_cafe, { u: username2 })}</span>
+                        <span class="status-cafe-author">${tl2(trans.current_status)}</span>
                         <span class="status-cafe-time">...</span>
                     </div>
                     <div class="status-cafe-content is-loading">
@@ -48955,7 +48955,7 @@
       render(status_cafe_host, html`
             <div class="status-cafe">
                 <div class="status-cafe-top">
-                    <span class="status-cafe-author">${tl2(trans.author_on_status_cafe, { u: status_cafe_user })}</span>
+                    <span class="status-cafe-author">${tl2(trans.current_status)}</span>
                     <span class="status-cafe-time">...</span>
                 </div>
                 <div class="status-cafe-content is-loading">
@@ -49318,7 +49318,7 @@
           let snowflakes_count = season.snowflakes.count;
           if (settings.seasonal_particles == "less" && snowflakes_count > 10)
             snowflakes_count *= 0.45;
-          if (page.mobile && snowflakes_count > 10) snowflakes_count *= 0.5;
+          if (page.mobile && snowflakes_count > 10) snowflakes_count *= 0.7;
           begin_snowflakes(snowflakes_enabled, snowflakes_count);
         }
         if (last_season_seen != "" && last_season_seen != season.id) {
@@ -49452,18 +49452,19 @@
   }
   function begin_snowflakes(enabled, count) {
     if (!enabled) return;
-    const flakes = Array.from({ length: count * 1.3 }, () => {
-      const x = (Math.random() * 100).toFixed(2);
-      const drift = (Math.random() * 30 - 10).toFixed(2);
-      const scale = (Math.random() * 0.9 + 0.2).toFixed(2);
-      const duration = (Math.random() * 59 + 12).toFixed(2);
-      const delay = (Math.random() * -30).toFixed(2);
-      const opacity = (Math.random() * 0.7 + 0.2).toFixed(2);
-      return { x, drift, scale, duration, delay, opacity };
+    const flakes = Array.from({ length: count }, () => {
+      const x = (Math.random() * 100).toFixed(1);
+      const drift = (Math.random() * 30 - 10).toFixed(1);
+      const scale = (Math.random() * 0.9 + 0.3).toFixed(1);
+      const size = 8 * scale;
+      const duration = (Math.random() * 59 + 12).toFixed(1);
+      const delay = (Math.random() * -30).toFixed(1);
+      const opacity = (Math.random() * 0.7 + 0.2).toFixed(1);
+      return { x, drift, scale, size, duration, delay, opacity };
     });
     render(page.state.snow, html`
         ${flakes.map((flake) => html.node`
-            <div class="snow" style="--x: ${flake.x}vw; --x-end: calc(${flake.x}vw + ${flake.drift}vw); --s: ${flake.scale}; animation-duration: ${flake.duration}s; animation-delay: ${flake.delay}s; opacity: ${flake.opacity}" />
+            <div class="snow" style="width: ${flake.size}px; height: ${flake.size}px; --x: ${flake.x}vw; --x-end: calc(${flake.x}vw + ${flake.drift}vw); --s: ${flake.scale}; animation-duration: ${flake.duration}s; animation-delay: ${flake.delay}s; opacity: ${flake.opacity}" />
         `)}
     `);
   }
@@ -67765,9 +67766,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "If you are a Last.fm Pro subscriber, you can view your current active track in your profile menu at all times"
       }
     },
-    author_on_status_cafe: {
-      // status.cafe
-      en: "{u} on status.cafe"
+    current_status: {
+      en: "Current status"
     },
     status_cafe_too_many_requests: {
       en: "paused loading temporarily @w@"

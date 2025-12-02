@@ -7581,7 +7581,7 @@
     .shout-action-button {
         height: fit-content !important;
 
-        &:not(:hover, :focus-visible, .vote-button--voted) {
+        &:not(:hover, :focus-visible, .vote-button--voted, .shout-reply--open) {
             --col: hsl(var(--c3));
             --mask-colour: hsl(var(--c3), 80%);
         }
@@ -10058,6 +10058,10 @@
     .shout-reply {
         --mask: var(--icon-16-reply);
         --mask-size: 14px;
+
+        &.shout-reply--open {
+            --bg: var(--bg-atv);
+        }
     }
 
     .expand-down,
@@ -20961,6 +20965,7 @@
         width: 100%;
         height: 100%;
         overflow: hidden;
+        contain: strict;
     }
 
     .snow {
@@ -20984,10 +20989,10 @@
 
     @keyframes snow-fall {
         from {
-            transform: translate(var(--x), -10px) scale(var(--s));
+            transform: translate(var(--x), -10px);
         }
         to {
-            transform: translate(var(--x-end), 105vh) scale(var(--s));
+            transform: translate(var(--x-end), 105vh);
         }
     }
 

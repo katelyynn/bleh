@@ -137,7 +137,7 @@ export function set_season() {
                 if (settings.seasonal_particles == 'less' && snowflakes_count > 10)
                     snowflakes_count *= 0.45;
 
-                if (page.mobile && snowflakes_count > 10) snowflakes_count *= 0.5;
+                if (page.mobile && snowflakes_count > 10) snowflakes_count *= 0.7;
 
                 begin_snowflakes(snowflakes_enabled, snowflakes_count);
             }
@@ -331,20 +331,21 @@ function prep_snow() {
 function begin_snowflakes(enabled, count) {
     if (!enabled) return;
 
-    const flakes = Array.from({ length: count * 1.3 }, () => {
-        const x = (Math.random() * 100).toFixed(2);
-        const drift = (Math.random() * 30 - 10).toFixed(2);
-        const scale = (Math.random() * 0.9 + 0.2).toFixed(2);
-        const duration = (Math.random() * 59 + 12).toFixed(2);
-        const delay = (Math.random() * -30).toFixed(2);
-        const opacity = (Math.random() * 0.7 + 0.2).toFixed(2);
+    const flakes = Array.from({ length: count }, () => {
+        const x = (Math.random() * 100).toFixed(1);
+        const drift = (Math.random() * 30 - 10).toFixed(1);
+        const scale = (Math.random() * 0.9 + 0.3).toFixed(1);
+        const size = 8 * scale;
+        const duration = (Math.random() * 59 + 12).toFixed(1);
+        const delay = (Math.random() * -30).toFixed(1);
+        const opacity = (Math.random() * 0.7 + 0.2).toFixed(1);
 
-        return { x, drift, scale, duration, delay, opacity };
+        return { x, drift, scale, size, duration, delay, opacity };
     });
 
     render(page.state.snow, html`
         ${flakes.map(flake => html.node`
-            <div class="snow" style="--x: ${flake.x}vw; --x-end: calc(${flake.x}vw + ${flake.drift}vw); --s: ${flake.scale}; animation-duration: ${flake.duration}s; animation-delay: ${flake.delay}s; opacity: ${flake.opacity}" />
+            <div class="snow" style="width: ${flake.size}px; height: ${flake.size}px; --x: ${flake.x}vw; --x-end: calc(${flake.x}vw + ${flake.drift}vw); --s: ${flake.scale}; animation-duration: ${flake.duration}s; animation-delay: ${flake.delay}s; opacity: ${flake.opacity}" />
         `)}
     `);
 }

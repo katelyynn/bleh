@@ -552,7 +552,7 @@ export function markdown(
         render(status_cafe_host, html`
             <div class="status-cafe">
                 <div class="status-cafe-top">
-                    <span class="status-cafe-author">${tl(trans.author_on_status_cafe, { u: status_cafe_user })}</span>
+                    <span class="status-cafe-author">${tl(trans.current_status)}</span>
                     <span class="status-cafe-time">...</span>
                 </div>
                 <div class="status-cafe-content is-loading">
