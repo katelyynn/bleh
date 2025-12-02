@@ -435,54 +435,45 @@
 
     /* text */
     body,
-    .tasteometer-compat-colour, .auth-dropdown-menu-item,
+    .tasteometer-compat-colour,
     .gallery-image-preferred-button,
     button,
     .gallery-image-preferred-states,
-    body:after,
     .user-dashboard-legend-item::before, stop,
     .alert, .event-status, .big-modal-alert,
     .chartlist-row--now-scrobbling,
     a,
-    .user-dashboard-layout, .listening-report-brick-head, .listening-report-top-item-heading,
     #current-subscription,
     .events-list-item-date-icon, .calendar-icon,
     .async-content-error-message,
-    .avatar-status-dot, .label, .shout-user-avatar:before, .user-status-None,
-    .masthead-nav-control,
+    .avatar-status-dot, .label, .user-status-None,
     .chartlist-count-bar, .chartlist-count-bar-value,
-    .primary-selection,
     .nag-bar--alert,
     .form-row-help-text,
     .chartlist-loved,
     .theme-preview, .theme-preview[data-bleh--theme="dark"],
     .badge,
-    .setup-colour-behind,
     [data-season],
     .small-alert,
     .lotus, .sponsor-related,
-    .pro-badge, .vote-number,
-    .staff-profile .header-title, .staff-shout,
+    .vote-number,
     .changelog-version-item,
     u,
     .grid-items-item.grid-items-item-has-colour,
     .toggle /* for toggles that arent buttons */,
     .bleh-icon,
-    .user-top-panel,
     .weeklychart-change,
     .new-badge,
     .error-info,
-    .to-consider > li,
     .inbox-message-view .inbox-message-sender-avatar,
     .colourful,
-    .redesigned-header[data-bleh--theme="dark"],
     .events-list-item-attendees,
     .side-action,
     .tip[data-exceeded="true"],
     .heart,
     .gallery-image-preferred-container,
     .events-list-item-date-icon-month, .calendar-icon-month,
-   .attendance-badge {
+    .attendance-badge {
         --hue: var(
             --hue-over,
             var(--hue-album, var(--hue-user, var(--hue-seasonal, 255)))
@@ -3658,20 +3649,6 @@
     }
 
     /*     MANAGE OBSESSION     */
-    .profile-header-set-obsession {
-        position: relative;
-        inset: unset !important;
-        --mask: var(--icon-16-obsession);
-
-        .header & {
-            display: none;
-        }
-
-        [action$="/obsessions/remove"] > & {
-            --mask: var(--icon-16-obsession-remove);
-        }
-    }
-
     .featured-item-art .image-overlay-playlink-link {
         display: none;
     }
@@ -3683,11 +3660,10 @@
 
     /* move the sidebar to fit */
     .about-me-header,
-    .about-me-sidebar p {
+    .markdown-body p {
         overflow-y: hidden;
-    }
-    .about-me-sidebar p {
-        max-width: 358px;
+        overflow-x: hidden;
+        word-break: break-word;
     }
 
     /*     ADD NOTE     */
@@ -8216,7 +8192,7 @@
     .btn-primary,
     .shout-action-button,
     .content-form select,
-    .dropdown-menu-clickable-item, .auth-dropdown-menu-item, .navlist-hidden-list a, .display-options-clickable-item,
+    .dropdown-menu-clickable-item, .navlist-hidden-list a, .display-options-clickable-item,
     .inbox-compose-button,
     .inbox-table .inbox-message,
     .header-new-playlink,
@@ -8270,7 +8246,7 @@
     .notification,
     .user-now-empty-state-button,
     .inbox-item,
-   .report-dropdown-button {
+    .report-dropdown-button {
         --bg: var(--cards-overlay-image-subtlest, none), hsl(var(--b3));
         --bg-hov:
             var(--cards-overlay-image-subtlest, none),
@@ -8412,13 +8388,6 @@
             gap: 6px;
         }
 
-        /* breaks bleh settings */
-        /*[data-bleh--theme_type="light"] & {
-            --bg: hsla(var(--b4), 70%);
-            --bg-hov: hsla(var(--b4), 50%);
-            --bg-atv: hsla(var(--b4), 30%);
-        }*/
-
         /*     LOADING     */
         /*&.btn--loading {
             background-image: unset;
@@ -8499,14 +8468,6 @@
                 color: inherit;
                 opacity: 0.6;
             }
-        }
-
-        /*     OUTLINE     */
-        &:is(.profile-header-set-obsession) {
-            --bg: transparent;
-            --bg-hov: hsla(var(--b4), 60%);
-            --bg-atv: hsla(var(--b4), 80%);
-            --shadow: inset 0 0 0 2px hsl(var(--c2), 20%);
         }
 
         /*     COVER LINK     */
@@ -8655,7 +8616,7 @@
     .btn.back,
     .view-item:not(.video-item, .listen-item, .profile-top-item--taste, .interact-item, .profile-top-item--shortcut, .profile-top-item--follow, .profile-top-item--message, .profile-top-item--edit_profile, .dropdown-menu-clickable-button),
     .btn--has-icon-left,
-    .dropdown-menu-clickable-item:not(.v2), .auth-dropdown-menu-item,
+    .dropdown-menu-clickable-item:not(.v2),
     .header-new-playlink,
     .btn-add, /*form[action*="+images/upload"] .btn-primary[type="submit"],*/ .btn-file,
     .header-message-user,
@@ -8663,7 +8624,6 @@
     .gallery-previous .arrow,
     .section-playlink,
     .image-upload-remove,
-    .profile-header-set-obsession,
     .back-button, .delete-button,
     #manage_data .btn-primary,
     .obsession-history-play-all,
@@ -8864,7 +8824,7 @@
     .primary-selection:not(.no-icon):after,
     :is(.shout-body, .about-me-sidebar, .bleh--about-me-preview, .user-list-about-me) > p a:before,
     /*     DROPDOWNS     */
-    .dropdown-menu-clickable-item:not(.v2):before, .auth-dropdown-menu-item:before,
+    .dropdown-menu-clickable-item:not(.v2):before,
     .dropdown-menu-list-button::after, .dropdown-menu-clickable-button:not(.link-select, .report-dropdown-button)::after, .dropdown-menu-clickable-button-js-only::after, .display-options-clickable-button:after,
     /*     PAGINATION     */
     .pagination-previous a:before, .pagination-next a:before,
@@ -10574,7 +10534,6 @@
     }
     .dropdown-menu-item-dark,
     .dropdown-menu-clickable-item,
-    .auth-dropdown-menu-item,
     .navlist-hidden-list a,
     .display-options-clickable-item,
     .library-search-results li,
@@ -10688,15 +10647,8 @@
         display: none !important;
     }
 
-    .auth-dropdown-menu-item strong {
-        font-weight: inherit !important;
-    }
     .auth-dropdown-item-secondary {
         display: none;
-    }
-
-    .auth-dropdown-menu-item:after {
-        display: none !important;
     }
 
     li:first-child .more-item--delete {
@@ -15201,14 +15153,6 @@
     }
     table.table tr:nth-child(2n) td {
         background-color: hsla(var(--b4), 40%);
-    }
-
-    #id_about_me,
-    .bleh--about-me-preview {
-        width: 358px;
-    }
-    #id_about_me {
-        height: 230px;
     }
 
     /*     OBSESSIONS     */
@@ -19804,17 +19748,7 @@
         --left: 0;
         --mask-size: 14px;
     }
-    .mention,
-    :is(
-            .shout-body,
-            .about-me-sidebar,
-            .bleh--about-me-preview,
-            .wiki-content,
-            .markdown-body,
-            .user-list-about-me
-        )
-        > p
-        a[href*="/user/"]:not([href^="https"], [href*="/library/music/"]) {
+    .mention {
         padding: 0 4px;
         background-color: hsl(var(--k4), 20%);
         border-radius: var(--item-small-radius);
@@ -20748,7 +20682,6 @@
                 .love-button--loved,
                 [data-toggle-button-current-state="loved"] > form > .btn,
                 [data-toggle-button-current-state="bookmarked"] > form > .btn,
-                .btn-primary.profile-header-set-obsession,
                 [data-analytics-action="UnfollowUser"],
                 [data-is-shortcut="true"],
                 .attendance-btn--turn-off
@@ -22568,7 +22501,14 @@
         }
     }
 
+    .about-me-sidebar > .markdown-body,
+    .bleh--about-me-preview {
+        width: 360px;
+    }
+
     .markdown-body {
+        display: block;
+
         /* match default last.fm */
         .text-center,
         .text-left,
