@@ -36814,86 +36814,85 @@
       recent_realtime: form.querySelector("#id_auto_refresh_recent_tracks").checked
     };
     form.classList = "";
-    render(
-      form,
-      html`
-            <input
-                type="hidden"
-                name="csrfmiddlewaretoken"
-                value="${page.token}"
-            />
-            <div class="setting-group blend">
-                <div class="setting" data-type="select">
-                    <div class="heading">
-                        <h5>${tl2(trans.amount_to_display)}</h5>
-                    </div>
-                    ${select(
-        select_prepare(count),
-        count.value,
-        "chart_length_recent_tracks"
-      )}
+    render(form, html`
+        <input
+            type="hidden"
+            name="csrfmiddlewaretoken"
+            value="${page.token}"
+        />
+        <div class="setting-group blend">
+            <div class="setting" data-type="select">
+                <div class="heading">
+                    <h5>${tl2(trans.amount_to_display)}</h5>
                 </div>
-                <div
-                    class="setting"
-                    data-type="toggle"
-                    id="container-recent_artwork"
-                    onclick="_update_inbuilt_item('recent_artwork')"
-                >
-                    <div class="heading">
-                        <h5>${tl2(trans.recent_artwork)}</h5>
-                    </div>
-                    <div class="toggle-wrap">
-                        <input
-                            class="companion-checkbox"
-                            type="checkbox"
-                            name="show_recent_tracks_artwork"
-                            id="inbuilt-companion-checkbox-recent_artwork"
-                        />
-                        <span
-                            class="btn toggle"
-                            id="toggle-recent_artwork"
-                            aria-checked="false"
-                        >
-                            <div class="dot"></div>
-                        </span>
-                    </div>
+                ${select(
+      select_prepare(count),
+      count.value,
+      "chart_length_recent_tracks"
+    )}
+            </div>
+            <div
+                class="setting"
+                data-type="toggle"
+                id="container-recent_artwork"
+                onclick="_update_inbuilt_item('recent_artwork')"
+            >
+                <div class="heading">
+                    <h5>${tl2(trans.recent_artwork)}</h5>
                 </div>
-                <div
-                    class="setting"
-                    data-type="toggle"
-                    id="container-recent_realtime"
-                    onclick="_update_inbuilt_item('recent_realtime')"
-                >
-                    <div class="heading">
-                        <h5>${tl2(trans.recent_realtime.name)}</h5>
-                        <p>${tl2(trans.recent_realtime.body)}</p>
-                    </div>
-                    <div class="toggle-wrap">
-                        <input
-                            class="companion-checkbox"
-                            type="checkbox"
-                            name="auto_refresh_recent_tracks"
-                            id="inbuilt-companion-checkbox-recent_realtime"
-                        />
-                        <span
-                            class="btn toggle"
-                            id="toggle-recent_realtime"
-                            aria-checked="false"
-                            type="button"
-                        >
-                            <div class="dot"></div>
-                        </span>
-                    </div>
-                </div>
-                ${setting({ id: "format_guest_features" })}
-                <div class="settings-footer">
-                    <button type="submit" class="btn-primary save">
-                        ${tl2(trans.save)}
-                    </button>
+                <div class="toggle-wrap">
+                    <input
+                        class="companion-checkbox"
+                        type="checkbox"
+                        name="show_recent_tracks_artwork"
+                        id="inbuilt-companion-checkbox-recent_artwork"
+                    />
+                    <span
+                        class="btn toggle"
+                        id="toggle-recent_artwork"
+                        aria-checked="false"
+                    >
+                        <div class="dot"></div>
+                    </span>
                 </div>
             </div>
-        `
-    );
+            <div
+                class="setting"
+                data-type="toggle"
+                id="container-recent_realtime"
+                onclick="_update_inbuilt_item('recent_realtime')"
+            >
+                <div class="heading">
+                    <h5>${tl2(trans.recent_realtime.name)}</h5>
+                    <p>${tl2(trans.recent_realtime.body)}</p>
+                </div>
+                <div class="toggle-wrap">
+                    <input
+                        class="companion-checkbox"
+                        type="checkbox"
+                        name="auto_refresh_recent_tracks"
+                        id="inbuilt-companion-checkbox-recent_realtime"
+                    />
+                    <span
+                        class="btn toggle"
+                        id="toggle-recent_realtime"
+                        aria-checked="false"
+                        type="button"
+                    >
+                        <div class="dot"></div>
+                    </span>
+                </div>
+            </div>
+            ${setting({ id: "format_guest_features" })}
+            <div class="settings-footer">
+                <button type="submit" class="btn-primary save" onclick=${() => {
+      tooltip.hide();
+    }}>
+                    ${tl2(trans.save)}
+                </button>
+            </div>
+        </div>
+    `);
     for (let setting2 in original_chart_settings) {
       update_inbuilt_item(
         setting2,
@@ -36914,9 +36913,8 @@
       appendTo: document.body,
       hideOnClick: "toggle",
       onClickOutside(instance) {
-        if (instance.popper.querySelector('[aria-expanded="true"]')) {
+        if (instance.popper.querySelector('[aria-expanded="true"]'))
           return;
-        }
         instance.hide();
       }
     });
@@ -36979,6 +36977,7 @@
     let chartlist_length = form.querySelector(
       '[name="artists_chartlist_length"]'
     );
+    let tooltip;
     form.classList = "";
     render(
       form,
@@ -37030,14 +37029,16 @@
       )}
                 </div>
                 <div class="settings-footer">
-                    <button type="submit" class="btn-primary save">
+                    <button type="submit" class="btn-primary save" onclick=${() => {
+        tooltip.hide();
+      }}>
                         ${tl2(trans.save)}
                     </button>
                 </div>
             </div>
         `
     );
-    tippy_esm_default(settings_btn, {
+    tooltip = tippy_esm_default(settings_btn, {
       theme: "window",
       content: form,
       placement: "bottom",
@@ -37111,6 +37112,7 @@
     let chartlist_length = form.querySelector(
       '[name="albums_chartlist_length"]'
     );
+    let tooltip;
     form.classList = "";
     render(
       form,
@@ -37162,14 +37164,16 @@
       )}
                 </div>
                 <div class="settings-footer">
-                    <button type="submit" class="btn-primary save">
+                    <button type="submit" class="btn-primary save" onclick=${() => {
+        tooltip.hide();
+      }}>
                         ${tl2(trans.save)}
                     </button>
                 </div>
             </div>
         `
     );
-    tippy_esm_default(settings_btn, {
+    tooltip = tippy_esm_default(settings_btn, {
       theme: "window",
       content: form,
       placement: "bottom",
@@ -37241,6 +37245,7 @@
     let chartlist_length = form.querySelector(
       '[name="chart_length_top_tracks"]'
     );
+    let tooltip;
     form.classList = "";
     render(
       form,
@@ -37275,14 +37280,16 @@
                 ${setting({ id: "format_guest_features" })}
                 ${setting({ id: "show_guest_features" })}
                 <div class="settings-footer">
-                    <button type="submit" class="btn-primary save">
+                    <button type="submit" class="btn-primary save" onclick=${() => {
+        tooltip.hide();
+      }}>
                         ${tl2(trans.save)}
                     </button>
                 </div>
             </div>
         `
     );
-    tippy_esm_default(settings_btn, {
+    tooltip = tippy_esm_default(settings_btn, {
       theme: "window",
       content: form,
       placement: "bottom",
