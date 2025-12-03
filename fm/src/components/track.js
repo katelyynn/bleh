@@ -273,16 +273,16 @@ export function patch_titles(search = page.structure.main) {
             // menu
             let track_legacy_menu = track.querySelector('.chartlist-more-menu');
 
-            let track_timestamp = track.querySelector(
-                '.chartlist-timestamp span'
-            );
+            let track_timestamp = track.querySelector('.chartlist-timestamp span');
             let track_timestamp_contents;
             if (track_timestamp && !is_active) {
-                track_timestamp_contents =
-                    track_timestamp.getAttribute('title');
+                track_timestamp_contents = track_timestamp.getAttribute('title');
+
+                if (!track_timestamp_contents) track_timestamp_contents = track_timestamp.getAttribute('data-title');
 
                 if (track_timestamp_contents) {
-                    track_timestamp.setAttribute('title', '');
+                    track_timestamp.removeAttribute('title');
+                    track_timestamp.setAttribute('data-title', track_timestamp_contents);
 
                     tippy(track_timestamp, {
                         content: track_timestamp_contents
