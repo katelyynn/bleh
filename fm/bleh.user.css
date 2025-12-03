@@ -11216,7 +11216,7 @@
         }
     }
     .content-form textarea {
-        height: unset;
+        height: unset !important;
     }
 
     .modal-text {
@@ -19753,6 +19753,7 @@
         --mask-size: 14px;
     }
     .mention {
+        font-weight: var(--font-weight-medium);
         padding: 0 4px;
         background-color: hsl(var(--k4), 20%);
         border-radius: var(--item-small-radius);
@@ -29794,6 +29795,21 @@
             translate: 0 0;
             scale: 1;
             opacity: 1;
+        }
+    }
+
+
+    /* custom timestamp */
+    t {
+        transition-property: color, font-weight;
+        transition-duration: var(--trans);
+        transition-timing-function: var(--trans-function);
+
+        cursor: default;
+
+        &:hover {
+            color: hsl(var(--l3-c));
+            font-weight: var(--font-weight-medium);
         }
     }
 }

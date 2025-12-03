@@ -21,6 +21,8 @@ import { save_setting } from './settings.js';
 import { load_chart_colours } from '../chart.js';
 import { sponsor_list } from '../build/sponsor.js';
 import { fetch_status } from './statuscafe.js';
+import tippy from 'tippy.js';
+import { DateTime } from 'luxon';
 
 export function markdown(
     text,
@@ -60,7 +62,8 @@ export function markdown(
         'h2',
         'h3',
         'h4',
-        'h5'
+        'h5',
+        't'
     ];
     let ALLOWED_ATTR = [
         'href',
@@ -72,7 +75,8 @@ export function markdown(
         'style',
         'data-hue',
         'data-sat',
-        'data-lit'
+        'data-lit',
+        'data-flag'
     ];
 
     if (allow_lists) {
@@ -238,6 +242,16 @@ export function markdown(
         }
     ];
 
+    const timestamp = () => [
+        {
+            type: 'lang',
+            regex: /<t:(\d{9,})(?::([FfDdTtR]))?>/g,
+            replace: (_, time, flag) => {
+                return `<t data-flag="${flag || 'F'}">${time}</t>`;
+            }
+        }
+    ];
+
     // retrieves social links if a user supplies them
     const social_links = () => [
         {
@@ -333,7 +347,7 @@ export function markdown(
     if (allow_fonts) extensions.push(font());
     if (allow_socials) extensions.push(social_links());
     if (!allow_headers) extensions.push(header_minify());
-    extensions.push(mentions());
+    extensions.push(mentions(), timestamp());
 
     let profile_cache;
 
@@ -570,6 +584,51 @@ export function markdown(
             render(status_cafe_host, status_cafe);
         });
     }
+
+    body.querySelectorAll('t').forEach(timestamp => {
+        const time = timestamp.textContent;
+        const flag = timestamp.getAttribute('data-flag');
+
+        const date = DateTime.fromSeconds(parseInt(time));
+
+        let text = '';
+
+        if (flag == 'F') {
+            text = tl(trans.date_at_time, {
+                d: date.toLocaleString(DateTime.DATE_HUGE),
+                t: date.toLocaleString(DateTime.TIME_SIMPLE)
+            });
+        } else if (flag == 'f') {
+            text = tl(trans.date_at_time, {
+                d: date.toLocaleString(DateTime.DATE_FULL),
+                t: date.toLocaleString(DateTime.TIME_SIMPLE)
+            });
+        } else if (flag == 'D') {
+            text = date.toLocaleString(DateTime.DATE_FULL);
+        } else if (flag == 'd') {
+            text = date.toLocaleString(DateTime.DATE_SHORT);
+        } else if (flag == 't') {
+            text = date.toLocaleString(DateTime.TIME_SIMPLE);
+        } else if (flag == 'T') {
+            text = date.toLocaleString(DateTime.TIME_WITH_SECONDS);
+        } else if (flag == 'R') {
+            text = date.toRelative();
+        }
+
+        const new_timestamp = html.node`
+            <t>${text}</t>
+        `;
+
+        tippy(new_timestamp, {
+            theme: 'generic',
+            content: html.node`
+                <span>${date.toLocaleString(DateTime.DATE_FULL)}</span>
+                <small>${date.toLocaleString(DateTime.TIME_SIMPLE)}</small>
+            `
+        });
+
+        timestamp.replaceWith(new_timestamp);
+    });
 
     if (cache && will_cache) {
         log('finalised cache from markdown parsing', 'markdown', 'info', {

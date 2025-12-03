@@ -8912,6 +8912,10 @@ export const trans = {
         body: {
             en: 'Embed your current status onto your profile, can be moved around freely by editing your about me'
         }
+    },
+    date_at_time: {
+        // date is automatically translated with luxon
+        en: '{d} at {t}'
     }
 };
 
@@ -9026,7 +9030,11 @@ export function lookup_lang() {
     lang = document.documentElement.getAttribute('lang');
     lang_browser = navigator.language || navigator.userLanguage;
 
-    Settings.defaultLocale = lang;
+    if (['en'].includes(lang)) {
+        Settings.defaultLocale = lang_browser;
+    } else {
+        Settings.defaultLocale = lang;
+    }
 }
 
 export function get_trans_key(key) {

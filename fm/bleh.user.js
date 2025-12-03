@@ -31957,9 +31957,7 @@
       );
       return;
     }
-    const tracklists = search.querySelectorAll(
-      ".chartlist:not(.chartlist__placeholder)"
-    );
+    const tracklists = search.querySelectorAll(".chartlist:not(.chartlist__placeholder)");
     let insights = {
       artist: {
         display: false,
@@ -32125,9 +32123,7 @@
               insights.track.highest.value = value;
           }
         }
-        const is_active = track.classList.contains(
-          "chartlist-row--now-scrobbling"
-        );
+        const is_active = track.classList.contains("chartlist-row--now-scrobbling");
         const has_bar = track.querySelector(":scope > .chartlist-bar");
         let track_legacy_menu = track.querySelector(".chartlist-more-menu");
         let track_timestamp = track.querySelector(".chartlist-timestamp span");
@@ -48567,7 +48563,8 @@
       "h2",
       "h3",
       "h4",
-      "h5"
+      "h5",
+      "t"
     ];
     let ALLOWED_ATTR = [
       "href",
@@ -48579,7 +48576,8 @@
       "style",
       "data-hue",
       "data-sat",
-      "data-lit"
+      "data-lit",
+      "data-flag"
     ];
     if (allow_lists) {
       ALLOWED_TAGS.push("ul", "ol", "li");
@@ -48708,6 +48706,15 @@
         }
       }
     ];
+    const timestamp = () => [
+      {
+        type: "lang",
+        regex: /<t:(\d{9,})(?::([FfDdTtR]))?>/g,
+        replace: (_, time2, flag) => {
+          return `<t data-flag="${flag || "F"}">${time2}</t>`;
+        }
+      }
+    ];
     const social_links = () => [
       {
         type: "lang",
@@ -48785,7 +48792,7 @@
     if (allow_fonts) extensions.push(font());
     if (allow_socials) extensions.push(social_links());
     if (!allow_headers) extensions.push(header_minify());
-    extensions.push(mentions());
+    extensions.push(mentions(), timestamp());
     let profile_cache;
     const will_cache = cache2 === true;
     log(`prepare new cache is ${will_cache}`, "markdown", "log", { cache: cache2 });
@@ -48972,6 +48979,44 @@
         render(status_cafe_host, status_cafe);
       });
     }
+    body2.querySelectorAll("t").forEach((timestamp2) => {
+      const time2 = timestamp2.textContent;
+      const flag = timestamp2.getAttribute("data-flag");
+      const date = DateTime.fromSeconds(parseInt(time2));
+      let text5 = "";
+      if (flag == "F") {
+        text5 = tl2(trans.date_at_time, {
+          d: date.toLocaleString(DateTime.DATE_HUGE),
+          t: date.toLocaleString(DateTime.TIME_SIMPLE)
+        });
+      } else if (flag == "f") {
+        text5 = tl2(trans.date_at_time, {
+          d: date.toLocaleString(DateTime.DATE_FULL),
+          t: date.toLocaleString(DateTime.TIME_SIMPLE)
+        });
+      } else if (flag == "D") {
+        text5 = date.toLocaleString(DateTime.DATE_FULL);
+      } else if (flag == "d") {
+        text5 = date.toLocaleString(DateTime.DATE_SHORT);
+      } else if (flag == "t") {
+        text5 = date.toLocaleString(DateTime.TIME_SIMPLE);
+      } else if (flag == "T") {
+        text5 = date.toLocaleString(DateTime.TIME_WITH_SECONDS);
+      } else if (flag == "R") {
+        text5 = date.toRelative();
+      }
+      const new_timestamp = html.node`
+            <t>${text5}</t>
+        `;
+      tippy_esm_default(new_timestamp, {
+        theme: "generic",
+        content: html.node`
+                <span>${date.toLocaleString(DateTime.DATE_FULL)}</span>
+                <small>${date.toLocaleString(DateTime.TIME_SIMPLE)}</small>
+            `
+      });
+      timestamp2.replaceWith(new_timestamp);
+    });
     if (cache2 && will_cache) {
       log("finalised cache from markdown parsing", "markdown", "info", {
         cache: cache2
@@ -67780,6 +67825,10 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       body: {
         en: "Embed your current status onto your profile, can be moved around freely by editing your about me"
       }
+    },
+    date_at_time: {
+      // date is automatically translated with luxon
+      en: "{d} at {t}"
     }
   };
   function tl2(key, replacements = {}) {
@@ -67867,7 +67916,11 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     }
     lang = document.documentElement.getAttribute("lang");
     lang_browser = navigator.language || navigator.userLanguage;
-    Settings.defaultLocale = lang;
+    if (["en"].includes(lang)) {
+      Settings.defaultLocale = lang_browser;
+    } else {
+      Settings.defaultLocale = lang;
+    }
   }
   function get_trans_key(key) {
     return key.split(".").reduce((trans2, key2) => trans2[key2], trans);

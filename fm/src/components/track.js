@@ -48,9 +48,7 @@ export function patch_titles(search = page.structure.main) {
         return;
     }
 
-    const tracklists = search.querySelectorAll(
-        '.chartlist:not(.chartlist__placeholder)'
-    );
+    const tracklists = search.querySelectorAll('.chartlist:not(.chartlist__placeholder)');
 
     let insights = {
         artist: {
@@ -265,9 +263,7 @@ export function patch_titles(search = page.structure.main) {
                 }
             }
 
-            const is_active = track.classList.contains(
-                'chartlist-row--now-scrobbling'
-            );
+            const is_active = track.classList.contains('chartlist-row--now-scrobbling');
             const has_bar = track.querySelector(':scope > .chartlist-bar');
 
             // menu
