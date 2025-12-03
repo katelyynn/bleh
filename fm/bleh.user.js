@@ -49535,12 +49535,12 @@
   }
   function begin_snowflakes(enabled, count) {
     if (!enabled) return;
-    const flakes = Array.from({ length: count }, () => {
+    const flakes = Array.from({ length: count * 0.7 }, () => {
       const x = (Math.random() * 100).toFixed(1);
-      const drift = (Math.random() * 30 - 10).toFixed(1);
-      const scale = (Math.random() * 0.9 + 0.3).toFixed(1);
+      const drift = (Math.random() * 40 - 10).toFixed(1);
+      const scale = (Math.random() * 0.9 + 0.4).toFixed(1);
       const size = 8 * scale;
-      const duration = (Math.random() * 59 + 12).toFixed(1);
+      const duration = (Math.random() * 64 + 20).toFixed(1);
       const delay = (Math.random() * -30).toFixed(1);
       const opacity = (Math.random() * 0.7 + 0.2).toFixed(1);
       return { x, drift, scale, size, duration, delay, opacity };
