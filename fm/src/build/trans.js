@@ -2538,6 +2538,11 @@ export const trans = {
         pt: 'Artistas similares a {n}',
         ru: 'Исполнители, похожие на {n}'
     },
+    more_like_name: {
+        // more artists like kitagawa
+        // more albums like etc.
+        en: 'More like {n}'
+    },
     biography: {
         en: 'Biography',
         de: 'Biografie',

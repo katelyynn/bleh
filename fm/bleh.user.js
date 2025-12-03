@@ -44450,13 +44450,7 @@
       bleh_music_page_charts();
       bleh_about_artist();
       bleh_tags_mini();
-      let similar_tracks = page.structure.main.querySelector(
-        ".track-similar-tracks"
-      );
-      if (similar_tracks) {
-        let similar_panel = similar_tracks.parentElement;
-        similar_panel.classList.add("similar-panel");
-      }
+      similar_items();
     } else {
       let btn_add = page.structure.side.querySelector(".add-button");
       if (btn_add != null)
@@ -47461,6 +47455,43 @@
       code: "Google Sans Code",
       zpix: "Zpix"
     };
+  }
+  function similar_items() {
+    const artists = page.type == "artist" ? page.structure.main.querySelector(".catalogue-overview-similar-artists-full-width")?.parentElement : page.structure.main.querySelector(".catalogue-overview-similar-artists")?.parentElement;
+    if (artists) {
+      artists.classList = "artists-like";
+      const controls = artists.querySelector(".section-controls");
+      const station = controls.querySelector(".stationlink");
+      station.classList = "left-icon blend-v2-btn play-radio";
+      controls.replaceWith(html.node`
+            <div class="top-container">
+                <h2>${tl2(trans.more_like_name, { n: page.type == "artist" ? romanise(correct_artist(page.name)) : romanise(correct_artist(page.sister)) })}</h2>
+                <div class="view-buttons blend blend-v2">
+                    ${station}
+                </div>
+            </div>
+        `);
+    }
+    const albums = page.structure.main.querySelector(".similar-albums")?.parentElement;
+    if (albums) {
+      albums.classList = "albums-like";
+      const head = albums.querySelector("h3");
+      head.textContent = tl2(trans.more_like_name, { n: romanise(correct_item_by_artist(page.name, page.sister)) });
+    }
+    const tracks = page.structure.main.querySelector(".track-similar-tracks")?.parentElement;
+    if (tracks) {
+      tracks.classList = "tracks-like";
+      const head = tracks.querySelector("h3");
+      head.textContent = tl2(trans.more_like_name, { n: romanise(correct_item_by_artist(page.name, page.sister)) });
+    }
+    if (!artists && !tracks && !albums) return;
+    page.structure.main.appendChild(html.node`
+        <section class="music-like">
+            ${albums}
+            ${tracks}
+            ${artists}
+        </section>
+    `);
   }
 
   // src/components/markdown.js
@@ -55009,11 +55040,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       album_missing_a_tracklist();
       bleh_about_artist();
       bleh_tags_mini();
-      let similar_albums = page.structure.main.querySelector(".similar-albums");
-      if (similar_albums) {
-        let similar_panel = similar_albums.parentElement;
-        similar_panel.classList.add("similar-panel");
-      }
+      similar_items();
     } else {
       let btn_add = page.structure.side.querySelector(".add-button");
       if (btn_add) btn_add.setAttribute("data-page-subpage", page.subpage);
@@ -55301,6 +55328,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       show_your_scrobbles();
       bleh_music_page_charts();
       bleh_tags_mini();
+      similar_items();
       let top_tracks = page.structure.main.querySelector("#top-tracks");
       if (top_tracks) {
         let settings_btn;
@@ -61447,6 +61475,11 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       sv: "Liknande artister till {n}",
       pt: "Artistas similares a {n}",
       ru: "\u0418\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u0438, \u043F\u043E\u0445\u043E\u0436\u0438\u0435 \u043D\u0430 {n}"
+    },
+    more_like_name: {
+      // more artists like kitagawa
+      // more albums like etc.
+      en: "More like {n}"
     },
     biography: {
       en: "Biography",

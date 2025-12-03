@@ -13,7 +13,8 @@ import { patch_header_title } from '../components/lotus';
 import { register_menu } from '../components/menu';
 import {
     bleh_music_page_charts,
-    show_your_scrobbles
+    show_your_scrobbles,
+    similar_items
 } from '../components/music';
 import { checkup_page_structure } from '../components/structure';
 import { register_background, update_page } from '../page';
@@ -163,13 +164,7 @@ export function bleh_tracks() {
 
         bleh_tags_mini();
 
-        let similar_tracks = page.structure.main.querySelector(
-            '.track-similar-tracks'
-        );
-        if (similar_tracks) {
-            let similar_panel = similar_tracks.parentElement;
-            similar_panel.classList.add('similar-panel');
-        }
+        similar_items();
     } else {
         let btn_add = page.structure.side.querySelector('.add-button');
         if (btn_add != null)

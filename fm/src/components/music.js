@@ -17,6 +17,7 @@ import { create_divider } from '../pages/gallery';
 import { ff } from '../sku';
 import { parse_scrobbles_as_rank } from './colourful_counts';
 import {
+    correct_artist,
     correct_item_by_artist,
     create_correction,
     name_includes,
@@ -1840,4 +1841,51 @@ export function prepare_music() {
         code: 'Google Sans Code',
         zpix: 'Zpix'
     };
+}
+
+export function similar_items() {
+    const artists = page.type == 'artist' ? page.structure.main.querySelector('.catalogue-overview-similar-artists-full-width')?.parentElement : page.structure.main.querySelector('.catalogue-overview-similar-artists')?.parentElement;
+
+    if (artists) {
+        artists.classList = 'artists-like';
+        const controls = artists.querySelector('.section-controls');
+        const station = controls.querySelector('.stationlink');
+
+        station.classList = 'left-icon blend-v2-btn play-radio';
+
+        controls.replaceWith(html.node`
+            <div class="top-container">
+                <h2>${tl(trans.more_like_name, { n: page.type == 'artist' ? romanise(correct_artist(page.name)) : romanise(correct_artist(page.sister)) })}</h2>
+                <div class="view-buttons blend blend-v2">
+                    ${station}
+                </div>
+            </div>
+        `);
+    }
+
+    const albums = page.structure.main.querySelector('.similar-albums')?.parentElement;
+
+    if (albums) {
+        albums.classList = 'albums-like';
+        const head = albums.querySelector('h3');
+        head.textContent = tl(trans.more_like_name, { n: romanise(correct_item_by_artist(page.name, page.sister)) });
+    }
+
+    const tracks = page.structure.main.querySelector('.track-similar-tracks')?.parentElement;
+
+    if (tracks) {
+        tracks.classList = 'tracks-like';
+        const head = tracks.querySelector('h3');
+        head.textContent = tl(trans.more_like_name, { n: romanise(correct_item_by_artist(page.name, page.sister)) });
+    }
+
+    if (!artists && !tracks && !albums) return;
+
+    page.structure.main.appendChild(html.node`
+        <section class="music-like">
+            ${albums}
+            ${tracks}
+            ${artists}
+        </section>
+    `);
 }

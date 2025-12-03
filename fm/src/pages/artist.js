@@ -23,7 +23,8 @@ import {
     bleh_top_listeners,
     convert_top_listener,
     redirect,
-    show_your_scrobbles
+    show_your_scrobbles,
+    similar_items
 } from '../components/music';
 import { checkup_page_structure } from '../components/structure';
 import { register_background, update_page } from '../page';
@@ -218,6 +219,8 @@ export function bleh_artists() {
         bleh_music_page_charts();
 
         bleh_tags_mini();
+
+        similar_items();
 
         let top_tracks = page.structure.main.querySelector('#top-tracks');
         if (top_tracks) {
