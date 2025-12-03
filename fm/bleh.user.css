@@ -784,7 +784,7 @@
             --overview-bio-size: 530px;
             --header-avatar-size: 180px;
 
-            --grid-default-height: 527px;
+            --grid-default-height: 478px;
         }
 
         @media (max-width: 980px) {
