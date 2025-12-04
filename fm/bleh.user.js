@@ -53530,6 +53530,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           desc_split[1],
           context.sister
         );
+        patch_avatar(avatar2, involved[0]);
       } else if (href.endsWith("/listening-report/month")) {
         type = "listening-report";
         involved.push(strongs[0].textContent);
@@ -53544,6 +53545,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         }
         context.type = "profile";
         context.name = split[1];
+        patch_avatar(avatar2, split[1]);
       } else if (href.startsWith(`${root}user/`)) {
         context.type = "profile";
         context.name = split[1];
@@ -53559,6 +53561,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           }
           involved.push(strong.textContent);
         });
+        patch_avatar(avatar2, involved[0]);
       } else if (href.startsWith(`${root}music/`)) {
         if (split[2].startsWith("+")) {
           context.type = "artist";
@@ -53588,6 +53591,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           }
           involved.push(strong.textContent);
         });
+        patch_avatar(avatar2, involved[0]);
       } else if (href.startsWith(`${root}tag/`)) {
         context.type = "tag";
         context.name = split[1];
@@ -53601,9 +53605,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           }
           involved.push(strong.textContent);
         });
+        patch_avatar(avatar2, involved[0]);
       }
-      console.info(split, context, type, involved);
-      patch_avatar(avatar2, involved[0]);
       render(
         notification,
         html`
@@ -57282,17 +57285,6 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         `);
       if (!notifications) return;
       bleh_notification_list(notifications);
-    } else if (page.subpage.endsWith("overview")) {
-      let inbox = page.structure.container.querySelector(".inbox");
-      page.structure.main.appendChild(inbox);
-      if (alert2) inbox.appendChild(alert2);
-      const header = page.structure.main.querySelector(".inbox-buttons");
-      const select_all = header.querySelector(".inbox-select-all");
-      const delete_btn = header.querySelector(".inbox-delete-button");
-      const table = inbox.querySelector(".inbox-table");
-      if (!table) return;
-      table.classList = "inbox-table-legacy";
-      bleh_message_list(table.querySelector("tbody"), false, delete_btn);
     } else if (page.subpage == "message_overview" || page.subpage == "sent_message") {
       let inbox = page.structure.container.querySelector(".inbox-message-view");
       page.structure.main.appendChild(inbox);
@@ -57306,10 +57298,20 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       let name_text = sanitise(sender_name.textContent.trim());
       let badge = patch_avatar(avatar2, name_text);
       sender_panel.classList.add(`user-status--bleh-${badge.type}`, `user-status--bleh-user-${name_text}`);
+    } else if (page.subpage.endsWith("overview")) {
+      let inbox = page.structure.container.querySelector(".inbox");
+      page.structure.main.appendChild(inbox);
+      if (alert2) inbox.appendChild(alert2);
+      const header = page.structure.main.querySelector(".inbox-buttons");
+      const select_all = header.querySelector(".inbox-select-all");
+      const delete_btn = header.querySelector(".inbox-delete-button");
+      const table = inbox.querySelector(".inbox-table");
+      if (!table) return;
+      table.classList = "inbox-table-legacy";
+      bleh_message_list(table.querySelector("tbody"), false, delete_btn);
     } else if (page.subpage == "compose") {
       let inbox = page.structure.container.querySelector(".inbox-compose-view");
       page.structure.main.appendChild(inbox);
-      if (alert2) inbox.appendChild(alert2);
     } else {
       let inbox = page.structure.container.querySelector(".inbox");
       page.structure.main.appendChild(inbox);

@@ -67,6 +67,8 @@ export function bleh_notification_list(list, mini = false) {
                 desc_split[1],
                 context.sister
             );
+
+            patch_avatar(avatar, involved[0]);
         } else if (href.endsWith('/listening-report/month')) {
             type = 'listening-report';
             involved.push(strongs[0].textContent);
@@ -78,14 +80,15 @@ export function bleh_notification_list(list, mini = false) {
             // remove the staff badge lol
             let label = avatar.querySelector('.avatar-status-dot');
             if (auth.pro) {
-                label.classList =
-                    'avatar-status-dot avatar-status-dot--subscriber';
+                label.classList = 'avatar-status-dot avatar-status-dot--subscriber';
             } else {
                 label.remove();
             }
 
             context.type = 'profile';
             context.name = split[1];
+
+            patch_avatar(avatar, split[1]);
         } else if (href.startsWith(`${root}user/`)) {
             context.type = 'profile';
             context.name = split[1];
@@ -104,6 +107,8 @@ export function bleh_notification_list(list, mini = false) {
 
                 involved.push(strong.textContent);
             });
+
+            patch_avatar(avatar, involved[0]);
         } else if (href.startsWith(`${root}music/`)) {
             if (split[2].startsWith('+')) {
                 // subpage
@@ -137,6 +142,8 @@ export function bleh_notification_list(list, mini = false) {
 
                 involved.push(strong.textContent);
             });
+
+            patch_avatar(avatar, involved[0]);
         } else if (href.startsWith(`${root}tag/`)) {
             context.type = 'tag';
             context.name = split[1];
@@ -153,11 +160,9 @@ export function bleh_notification_list(list, mini = false) {
 
                 involved.push(strong.textContent);
             });
+
+            patch_avatar(avatar, involved[0]);
         }
-
-        console.info(split, context, type, involved);
-
-        patch_avatar(avatar, involved[0]);
 
         render(
             notification,

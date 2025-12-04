@@ -26466,8 +26466,8 @@
 
         --show-icon: none;
 
-        font-size: var(--font-size);
-        line-height: var(--line-height);
+        font-size: var(--font-size) !important;
+        line-height: var(--line-height) !important;
         font-weight: var(--font-weight-medium);
 
         &.cta {

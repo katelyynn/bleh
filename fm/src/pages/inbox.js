@@ -83,24 +83,6 @@ export async function bleh_inbox() {
         if (!notifications) return;
 
         bleh_notification_list(notifications);
-    } else if (page.subpage.endsWith('overview')) {
-        let inbox = page.structure.container.querySelector('.inbox');
-        page.structure.main.appendChild(inbox);
-
-        if (alert) inbox.appendChild(alert);
-
-        const header = page.structure.main.querySelector('.inbox-buttons');
-        const select_all = header.querySelector('.inbox-select-all');
-
-        const delete_btn = header.querySelector('.inbox-delete-button');
-
-        const table = inbox.querySelector('.inbox-table');
-
-        if (!table) return;
-
-        table.classList = 'inbox-table-legacy';
-
-        bleh_message_list(table.querySelector('tbody'), false, delete_btn);
     } else if (page.subpage == 'message_overview' || page.subpage == 'sent_message') {
         let inbox = page.structure.container.querySelector('.inbox-message-view');
         page.structure.main.appendChild(inbox);
@@ -120,11 +102,27 @@ export async function bleh_inbox() {
         let badge = patch_avatar(avatar, name_text);
 
         sender_panel.classList.add(`user-status--bleh-${badge.type}`, `user-status--bleh-user-${name_text}`);
-    } else if (page.subpage == 'compose') {
-        let inbox = page.structure.container.querySelector('.inbox-compose-view');
+    } else if (page.subpage.endsWith('overview')) {
+        let inbox = page.structure.container.querySelector('.inbox');
         page.structure.main.appendChild(inbox);
 
         if (alert) inbox.appendChild(alert);
+
+        const header = page.structure.main.querySelector('.inbox-buttons');
+        const select_all = header.querySelector('.inbox-select-all');
+
+        const delete_btn = header.querySelector('.inbox-delete-button');
+
+        const table = inbox.querySelector('.inbox-table');
+
+        if (!table) return;
+
+        table.classList = 'inbox-table-legacy';
+
+        bleh_message_list(table.querySelector('tbody'), false, delete_btn);
+    } else if (page.subpage == 'compose') {
+        let inbox = page.structure.container.querySelector('.inbox-compose-view');
+        page.structure.main.appendChild(inbox);
     } else {
         let inbox = page.structure.container.querySelector('.inbox');
         page.structure.main.appendChild(inbox);
