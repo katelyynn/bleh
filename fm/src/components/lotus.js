@@ -747,7 +747,7 @@ export function create_correction(
                 <div class="fill" />
                 <button class="btn primary continue" onclick=${() => {
                     open(
-                        `https://github.com/katelyynn/lotus/issues/new?template=${template}&title=${sanitise(title, ' ')}&current=${sanitise(current, ' ')}&correction=${sanitise(correction.value(), ' ')}&link=${link}&sources=${sanitise(sources.value(), ' ')}`
+                        `https://github.com/katelyynn/lotus/issues/new?template=${template}&title=${sanitise(title, ' ')}&current=${sanitise(current, ' ')}&correction=${sanitise(correction.value(), ' ')}&link=${encodeURIComponent(link)}&sources=${sanitise(sources.value(), ' ')}`
                     );
                 }}>
                     ${tl(trans.suggest)}
