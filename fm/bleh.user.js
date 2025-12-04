@@ -4312,7 +4312,7 @@
         var contains2 = function(bit, value) {
           return (bit & value) !== 0;
         };
-        var content2 = {
+        var content = {
           name: "content",
           initialValue: "none",
           type: 1,
@@ -4681,7 +4681,7 @@
           /** @class */
           /* @__PURE__ */ function() {
             function CSSParsedPseudoDeclaration2(context, declaration) {
-              this.content = parse4(context, content2, declaration.content);
+              this.content = parse4(context, content, declaration.content);
               this.quotes = parse4(context, quotes, declaration.quotes);
             }
             return CSSParsedPseudoDeclaration2;
@@ -13668,7 +13668,7 @@
               var pres = doc2.querySelectorAll("pre"), presPH = [];
               for (var i2 = 0; i2 < pres.length; ++i2) {
                 if (pres[i2].childElementCount === 1 && pres[i2].firstChild.tagName.toLowerCase() === "code") {
-                  var content2 = pres[i2].firstChild.innerHTML.trim(), language = pres[i2].firstChild.getAttribute("data-language") || "";
+                  var content = pres[i2].firstChild.innerHTML.trim(), language = pres[i2].firstChild.getAttribute("data-language") || "";
                   if (language === "") {
                     var classes = pres[i2].firstChild.className.split(" ");
                     for (var c = 0; c < classes.length; ++c) {
@@ -13679,8 +13679,8 @@
                       }
                     }
                   }
-                  content2 = showdown2.helper.unescapeHTMLEntities(content2);
-                  presPH.push(content2);
+                  content = showdown2.helper.unescapeHTMLEntities(content);
+                  presPH.push(content);
                   pres[i2].outerHTML = '<precode language="' + language + '" precodenum="' + i2.toString() + '"></precode>';
                 } else {
                   presPH.push(pres[i2].innerHTML);
@@ -14557,24 +14557,24 @@
             return text4;
           }
           text4 = globals.converter._dispatch("metadata.before", text4, options, globals);
-          function parseMetadataContents(content2) {
-            globals.metadata.raw = content2;
-            content2 = content2.replace(/&/g, "&amp;").replace(/"/g, "&quot;");
-            content2 = content2.replace(/\n {4}/g, " ");
-            content2.replace(/^([\S ]+): +([\s\S]+?)$/gm, function(wm, key, value) {
+          function parseMetadataContents(content) {
+            globals.metadata.raw = content;
+            content = content.replace(/&/g, "&amp;").replace(/"/g, "&quot;");
+            content = content.replace(/\n {4}/g, " ");
+            content.replace(/^([\S ]+): +([\s\S]+?)$/gm, function(wm, key, value) {
               globals.metadata.parsed[key] = value;
               return "";
             });
           }
-          text4 = text4.replace(/^\s*«««+(\S*?)\n([\s\S]+?)\n»»»+\n/, function(wholematch, format, content2) {
-            parseMetadataContents(content2);
+          text4 = text4.replace(/^\s*«««+(\S*?)\n([\s\S]+?)\n»»»+\n/, function(wholematch, format, content) {
+            parseMetadataContents(content);
             return "\xA8M";
           });
-          text4 = text4.replace(/^\s*---+(\S*?)\n([\s\S]+?)\n---+\n/, function(wholematch, format, content2) {
+          text4 = text4.replace(/^\s*---+(\S*?)\n([\s\S]+?)\n---+\n/, function(wholematch, format, content) {
             if (format) {
               globals.metadata.format = format;
             }
-            parseMetadataContents(content2);
+            parseMetadataContents(content);
             return "\xA8M";
           });
           text4 = text4.replace(/¨M/g, "");
@@ -15288,8 +15288,8 @@
   var UID = "-" + Math.random().toFixed(6) + "%";
   var UID_IE = false;
   try {
-    if (!function(template, content2, tabindex) {
-      return content2 in template && (template.innerHTML = "<p " + tabindex + '="' + UID + '"></p>', template[content2].childNodes[0].getAttribute(tabindex) == UID);
+    if (!function(template, content, tabindex) {
+      return content in template && (template.innerHTML = "<p " + tabindex + '="' + UID + '"></p>', template[content].childNodes[0].getAttribute(tabindex) == UID);
     }(document.createElement("template"), "content", "tabindex")) {
       UID = "_dt: " + UID.slice(1, -1) + ";";
       UID_IE = true;
@@ -15386,7 +15386,7 @@
       template.innerHTML = html3;
       return template.content;
     } : function(html3) {
-      var content2 = create3(FRAGMENT);
+      var content = create3(FRAGMENT);
       var template = create3(TEMPLATE);
       var childNodes = null;
       if (/^[^\S]*?<(col(?:group)?|t(?:head|body|foot|r|d|h))/i.test(html3)) {
@@ -15397,8 +15397,8 @@
         template.innerHTML = html3;
         childNodes = template.childNodes;
       }
-      append(content2, childNodes);
-      return content2;
+      append(content, childNodes);
+      return content;
     };
     return function createContent2(markup, type) {
       return (type === "svg" ? createSVG : createHTML)(markup);
@@ -15412,11 +15412,11 @@
       return element === FRAGMENT ? document2.createDocumentFragment() : document2.createElementNS("http://www.w3.org/1999/xhtml", element);
     }
     function createSVG(svg3) {
-      var content2 = create3(FRAGMENT);
+      var content = create3(FRAGMENT);
       var template = create3("div");
       template.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg">' + svg3 + "</svg>";
-      append(content2, template.firstChild.childNodes);
-      return content2;
+      append(content, template.firstChild.childNodes);
+      return content;
     }
   }(document);
   var esm_default4 = createContent;
@@ -15493,8 +15493,8 @@
     var fragment = document2.createDocumentFragment();
     fragment[appendChild](document2[createTextNode]("g"));
     fragment[appendChild](document2[createTextNode](""));
-    var content2 = native ? document2[importNode2](fragment, true) : fragment[cloneNode](true);
-    return content2.childNodes.length < 2 ? function importNode3(node, deep) {
+    var content = native ? document2[importNode2](fragment, true) : fragment[cloneNode](true);
+    return content.childNodes.length < 2 ? function importNode3(node, deep) {
       var clone6 = node[cloneNode]();
       for (var childNodes = node.childNodes || [], length = childNodes.length, i = 0; deep && i < length; i++) {
         clone6[appendChild](importNode3(childNodes[i], deep));
@@ -15672,20 +15672,20 @@
     var transform2 = options.transform;
     if (transform2)
       markup = transform2(markup);
-    var content2 = esm_default4(markup, options.type);
-    cleanContent(content2);
+    var content = esm_default4(markup, options.type);
+    cleanContent(content);
     var holes = [];
-    parse(content2, holes, template.slice(0), []);
+    parse(content, holes, template.slice(0), []);
     return {
-      content: content2,
-      updates: function(content3) {
+      content,
+      updates: function(content2) {
         var updates = [];
         var len = holes.length;
         var i = 0;
         var off = 0;
         while (i < len) {
           var info = holes[i++];
-          var node = find(content3, info.path);
+          var node = find(content2, info.path);
           switch (info.type) {
             case "any":
               updates.push({ fn: options.any(node, []), sparse: false });
@@ -15730,7 +15730,7 @@
             } else
               update.fn(arguments[i2++]);
           }
-          return content3;
+          return content2;
         };
       }
     };
@@ -18097,15 +18097,15 @@
     }
     return arrow2;
   }
-  function setContent(content2, props) {
+  function setContent(content, props) {
     if (isElement2(props.content)) {
-      dangerouslySetInnerHTML(content2, "");
-      content2.appendChild(props.content);
+      dangerouslySetInnerHTML(content, "");
+      content.appendChild(props.content);
     } else if (typeof props.content !== "function") {
       if (props.allowHTML) {
-        dangerouslySetInnerHTML(content2, props.content);
+        dangerouslySetInnerHTML(content, props.content);
       } else {
-        content2.textContent = props.content;
+        content.textContent = props.content;
       }
     }
   }
@@ -18131,15 +18131,15 @@
     box.className = BOX_CLASS;
     box.setAttribute("data-state", "hidden");
     box.setAttribute("tabindex", "-1");
-    var content2 = div();
-    content2.className = CONTENT_CLASS;
-    content2.setAttribute("data-state", "hidden");
-    setContent(content2, instance.props);
+    var content = div();
+    content.className = CONTENT_CLASS;
+    content.setAttribute("data-state", "hidden");
+    setContent(content, instance.props);
     popper2.appendChild(box);
-    box.appendChild(content2);
+    box.appendChild(content);
     onUpdate(instance.props, instance.props);
     function onUpdate(prevProps, nextProps) {
-      var _getChildren = getChildren(popper2), box2 = _getChildren.box, content3 = _getChildren.content, arrow2 = _getChildren.arrow;
+      var _getChildren = getChildren(popper2), box2 = _getChildren.box, content2 = _getChildren.content, arrow2 = _getChildren.arrow;
       if (nextProps.theme) {
         box2.setAttribute("data-theme", nextProps.theme);
       } else {
@@ -18162,7 +18162,7 @@
         box2.removeAttribute("role");
       }
       if (prevProps.content !== nextProps.content || prevProps.allowHTML !== nextProps.allowHTML) {
-        setContent(content3, instance.props);
+        setContent(content2, instance.props);
       }
       if (nextProps.arrow) {
         if (!arrow2) {
@@ -18754,9 +18754,9 @@
       }
       invokeHook("onAfterUpdate", [instance, partialProps]);
     }
-    function setContent2(content2) {
+    function setContent2(content) {
       instance.setProps({
-        content: content2
+        content
       });
     }
     function show() {
@@ -18788,8 +18788,8 @@
         popper2.style.transition = "none";
       }
       if (getIsDefaultRenderFn()) {
-        var _getDefaultTemplateCh2 = getDefaultTemplateChildren(), box = _getDefaultTemplateCh2.box, content2 = _getDefaultTemplateCh2.content;
-        setTransitionDuration([box, content2], 0);
+        var _getDefaultTemplateCh2 = getDefaultTemplateChildren(), box = _getDefaultTemplateCh2.box, content = _getDefaultTemplateCh2.content;
+        setTransitionDuration([box, content], 0);
       }
       onFirstUpdate = function onFirstUpdate2() {
         var _instance$popperInsta2;
@@ -18844,10 +18844,10 @@
       removeDocumentPress();
       handleStyles(true);
       if (getIsDefaultRenderFn()) {
-        var _getDefaultTemplateCh4 = getDefaultTemplateChildren(), box = _getDefaultTemplateCh4.box, content2 = _getDefaultTemplateCh4.content;
+        var _getDefaultTemplateCh4 = getDefaultTemplateChildren(), box = _getDefaultTemplateCh4.box, content = _getDefaultTemplateCh4.content;
         if (instance.props.animation) {
-          setTransitionDuration([box, content2], duration);
-          setVisibilityState([box, content2], "hidden");
+          setTransitionDuration([box, content], duration);
+          setVisibilityState([box, content], "hidden");
         }
       }
       handleAriaContentAttribute();
@@ -38843,14 +38843,14 @@
     `;
   }
   function bleh_minis_collage() {
-    let content2;
+    let content;
     let mini_settings;
     render(
       page.structure.main,
       html`
             <section class="minis">
                 ${return_to_minis("collage")}
-                <div class="minis-content" ref=${(el) => content2 = el} />
+                <div class="minis-content" ref=${(el) => content = el} />
             </section>
         `
     );
@@ -38872,19 +38872,19 @@
         `
     );
     collage({
-      host: content2,
+      host: content,
       sidebar: mini_settings
     });
   }
   function bleh_minis_compare() {
-    let content2;
+    let content;
     let mini_settings;
     render(
       page.structure.main,
       html`
             <section class="minis">
                 ${return_to_minis("compare")}
-                <div class="minis-content" ref=${(el) => content2 = el} />
+                <div class="minis-content" ref=${(el) => content = el} />
             </section>
         `
     );
@@ -38906,19 +38906,19 @@
         `
     );
     compare({
-      host: content2,
+      host: content,
       sidebar: mini_settings
     });
   }
   function bleh_minis_plot() {
-    let content2;
+    let content;
     let mini_settings;
     render(
       page.structure.main,
       html`
             <section class="minis">
                 ${return_to_minis("plot")}
-                <div class="minis-content" ref=${(el) => content2 = el} />
+                <div class="minis-content" ref=${(el) => content = el} />
             </section>
         `
     );
@@ -38940,12 +38940,12 @@
         `
     );
     plot({
-      host: content2,
+      host: content,
       sidebar: mini_settings
     });
   }
   function bleh_minis_pixel() {
-    let content2;
+    let content;
     let mini_settings;
     render(
       page.structure.main,
@@ -38954,7 +38954,7 @@
                 ${return_to_minis("pixel")}
                 <div
                     class="minis-content pixel-content"
-                    ref=${(el) => content2 = el}
+                    ref=${(el) => content = el}
                 />
             </section>
         `
@@ -38977,7 +38977,7 @@
         `
     );
     pixel({
-      host: content2,
+      host: content,
       sidebar: mini_settings
     });
   }
@@ -48140,7 +48140,7 @@
       });
     }
     const _sanitizeElements = function _sanitizeElements2(currentNode) {
-      let content2 = null;
+      let content = null;
       _executeHooks(hooks.beforeSanitizeElements, currentNode, null);
       if (_isClobbered(currentNode)) {
         _forceRemove(currentNode);
@@ -48196,15 +48196,15 @@
         return true;
       }
       if (SAFE_FOR_TEMPLATES && currentNode.nodeType === NODE_TYPE.text) {
-        content2 = currentNode.textContent;
+        content = currentNode.textContent;
         arrayForEach([MUSTACHE_EXPR2, ERB_EXPR2, TMPLIT_EXPR2], (expr) => {
-          content2 = stringReplace(content2, expr, " ");
+          content = stringReplace(content, expr, " ");
         });
-        if (currentNode.textContent !== content2) {
+        if (currentNode.textContent !== content) {
           arrayPush(DOMPurify.removed, {
             element: currentNode.cloneNode()
           });
-          currentNode.textContent = content2;
+          currentNode.textContent = content;
         }
       }
       _executeHooks(hooks.afterSanitizeElements, currentNode, null);
@@ -48655,12 +48655,12 @@
       {
         type: "lang",
         regex: /\[(center|left|right)]\s*([\s\S]*?)\s*\[\/\1]/g,
-        replace: (_, align, content2, offset3, text5) => {
+        replace: (_, align, content, offset3, text5) => {
           let backticks = 0;
           for (let i = 0; i < offset3; i++)
             if (text5[i] == "`") backticks++;
           if (backticks % 2 == 1) return _;
-          const inner = converter.makeHtml(content2.trim());
+          const inner = converter.makeHtml(content.trim());
           const clean2 = purify.sanitize(inner, {
             ALLOWED_TAGS,
             ALLOWED_ATTR
@@ -48758,8 +48758,8 @@
       {
         type: "lang",
         regex: /\[links\]([\s\S]*?)\[\/links\]/g,
-        replace: (_, content2) => {
-          const lines = content2.trim().split(/\n+/);
+        replace: (_, content) => {
+          const lines = content.trim().split(/\n+/);
           lines.forEach((line) => {
             line = line.trim();
             if (!line) return;
@@ -53663,6 +53663,88 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     });
   }
 
+  // src/components/messages.js
+  function bleh_message_list(list, mini = false, delete_btn = null) {
+    list.classList = "notification-list";
+    if (mini) list.classList.add("mini");
+    const sent_to = page.subpage == "sent_overview";
+    const messages = list.querySelectorAll(".inbox-message");
+    messages.forEach((message, index3) => {
+      if (mini && index3 > 4) message.style.display = "none";
+      const link = message.querySelector(".inbox-message-preview > a");
+      const href = link.getAttribute("href");
+      const active = message.classList.contains("inbox-message--unviewed");
+      message.classList = "notification message";
+      if (active) message.classList.add("active");
+      if (mini) message.classList.add("mini");
+      const avatar2 = message.querySelector(".avatar");
+      avatar2.classList = "avatar";
+      const id = message.querySelector("input").value;
+      const author = message.querySelector(".inbox-message-sender-name").textContent.trim();
+      const time2 = message.querySelector(".inbox-message-timestamp");
+      const subject = message.querySelector(".inbox-message-subject > span").textContent.trim();
+      const content = message.querySelector(".inbox-message-message > span").textContent.trim();
+      patch_avatar(avatar2, author);
+      render(message, html`
+            ${!mini ? html.node`
+                <div class="message-checkbox">
+                    ${toggle({
+        type: "checkbox",
+        name: "message_id",
+        id,
+        data: id,
+        func: (val) => {
+          if (val) {
+            delete_btn.removeAttribute("disabled");
+          } else {
+            delete_btn.setAttribute("disabled", "true");
+          }
+        }
+      })}
+                </div>
+            ` : ""}
+            <div class="notification-avatar">${avatar2}</div>
+            <div
+                class="bleh-icon"
+                data-type="message"
+                style="--icon: var(--mask)"
+            />
+            <div class="notification-content not-main">
+                ${sent_to ? html.node`
+                    <div class="notification-context">
+                        <span class="notification-type">
+                            ${tl2(trans.you_sent_to)}
+                        </span>
+                    </div>
+                ` : ""}
+                <div class="notification-title">
+                    ${author}
+                </div>
+                ${!sent_to ? html.node`
+                    <div class="notification-context">
+                        <span class="notification-type">
+                            ${tl2(trans.sent_to_you)}
+                        </span>
+                    </div>
+                ` : ""}
+            </div>
+            <div class="message-content">
+                <div class="message-subject">
+                    ${subject}
+                </div>
+                <div class="message-summary">
+                    ${content}
+                </div>
+            </div>
+            <div class="notification-time">${time2}</div>
+            <a
+                class="link-block-cover-link"
+                href=${href}
+            />
+        `);
+    });
+  }
+
   // src/navigation.js
   function patch_masthead() {
     let masthead_logo = document.body.querySelector(".masthead-logo");
@@ -54080,22 +54162,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     }
     function render_messages(messages) {
       if (settings.inbox_view != "messages") return;
+      bleh_message_list(messages, true);
       render(
         page.state.inbox_content,
-        html`
-                <div class="mini-notifications">
-                    <div class="alert alert-danger">
-                        This is a work in progress, sorry! >_<
-                    </div>
-                    <p class="more-link">
-                        <a href="${root}inbox">${tl2(trans.read_more)}</a>
-                    </p>
-                </div>
-            `
-      );
-      return;
-      render(
-        content,
         html`
                 <div class="mini-notifications">
                     ${messages}
@@ -54108,11 +54177,11 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     }
     function render_inbox() {
       const view = settings.inbox_view;
-      let content2 = page.state.inbox_content;
-      log(`rendering view ${view}`, "navigation", "info", { content: content2 });
-      if (!content2) return;
+      let content = page.state.inbox_content;
+      log(`rendering view ${view}`, "navigation", "info", { content });
+      if (!content) return;
       render(
-        content2,
+        content,
         html`
                 <div class="mini-notifications content-loading">
                     <div class="loading-data-container">
@@ -54876,7 +54945,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       const dom = await res.text();
       const parser = new DOMParser();
       const doc = parser.parseFromString(dom, "text/html");
-      const list = doc.querySelector(".inbox-table");
+      const list = doc.querySelector(".inbox-table tbody");
       let next = /* @__PURE__ */ new Date();
       next.setMinutes(next.getMinutes() + 2);
       page.messages.next_fetch = next;
@@ -56685,11 +56754,11 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         });
       }
     } else if (page.type == "releases") {
-      let content2 = page.structure.main.querySelectorAll(":scope > *");
+      let content = page.structure.main.querySelectorAll(":scope > *");
       let panel = html.node`
             <section class="releases-panel" />
         `;
-      content2.forEach((element) => {
+      content.forEach((element) => {
         panel.appendChild(element);
       });
       render(page.structure.main, panel);
@@ -57155,88 +57224,6 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
             </a>
         </section>
     `;
-  }
-
-  // src/components/messages.js
-  function bleh_message_list(list, mini = false, delete_btn = null) {
-    list.classList = "notification-list";
-    if (mini) list.classList.add("mini");
-    const sent_to = page.subpage == "sent_overview";
-    const messages = list.querySelectorAll(".inbox-message");
-    messages.forEach((message, index3) => {
-      if (mini && index3 > 4) message.style.display = "none";
-      const link = message.querySelector(".inbox-message-preview > a");
-      const href = link.getAttribute("href");
-      const active = message.classList.contains("inbox-message--unviewed");
-      message.classList = "notification message";
-      if (active) message.classList.add("active");
-      if (mini) message.classList.add("mini");
-      const avatar2 = message.querySelector(".avatar");
-      avatar2.classList = "avatar";
-      const id = message.querySelector("input").value;
-      const author = message.querySelector(".inbox-message-sender-name").textContent.trim();
-      const time2 = message.querySelector(".inbox-message-timestamp");
-      const subject = message.querySelector(".inbox-message-subject > span").textContent.trim();
-      const content2 = message.querySelector(".inbox-message-message > span").textContent.trim();
-      patch_avatar(avatar2, author);
-      render(message, html`
-            ${!mini ? html.node`
-                <div class="message-checkbox">
-                    ${toggle({
-        type: "checkbox",
-        name: "message_id",
-        id,
-        data: id,
-        func: (val) => {
-          if (val) {
-            delete_btn.removeAttribute("disabled");
-          } else {
-            delete_btn.setAttribute("disabled", "true");
-          }
-        }
-      })}
-                </div>
-            ` : ""}
-            <div class="notification-avatar">${avatar2}</div>
-            <div
-                class="bleh-icon"
-                data-type="message"
-                style="--icon: var(--mask)"
-            />
-            <div class="notification-content not-main">
-                ${sent_to ? html.node`
-                    <div class="notification-context">
-                        <span class="notification-type">
-                            ${tl2(trans.you_sent_to)}
-                        </span>
-                    </div>
-                ` : ""}
-                <div class="notification-title">
-                    ${author}
-                </div>
-                ${!sent_to ? html.node`
-                    <div class="notification-context">
-                        <span class="notification-type">
-                            ${tl2(trans.sent_to_you)}
-                        </span>
-                    </div>
-                ` : ""}
-            </div>
-            <div class="message-content">
-                <div class="message-subject">
-                    ${subject}
-                </div>
-                <div class="message-summary">
-                    ${content2}
-                </div>
-            </div>
-            <div class="notification-time">${time2}</div>
-            <a
-                class="link-block-cover-link"
-                href=${href}
-            />
-        `);
-    });
   }
 
   // src/pages/inbox.js

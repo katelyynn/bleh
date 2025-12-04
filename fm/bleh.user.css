@@ -12272,6 +12272,10 @@
                 .notification-time {
                     display: none;
                 }
+
+                .notification-content.not-main {
+                    width: 100px;
+                }
             }
 
             & > .bleh-icon {

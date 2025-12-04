@@ -37,6 +37,7 @@ import { submit_scrobble } from './components/scrobble.js';
 import { match } from './components/dynamic_theming.js';
 import { DateTime } from 'luxon';
 import { input } from './components/input.js';
+import { bleh_message_list } from './components/messages.js';
 
 export function patch_masthead() {
     let masthead_logo = document.body.querySelector('.masthead-logo');
@@ -542,24 +543,10 @@ export function append_nav() {
     function render_messages(messages) {
         if (settings.inbox_view != 'messages') return;
 
+        bleh_message_list(messages, true);
+
         render(
             page.state.inbox_content,
-            html`
-                <div class="mini-notifications">
-                    <div class="alert alert-danger">
-                        This is a work in progress, sorry! >_<
-                    </div>
-                    <p class="more-link">
-                        <a href="${root}inbox">${tl(trans.read_more)}</a>
-                    </p>
-                </div>
-            `
-        );
-
-        return;
-
-        render(
-            content,
             html`
                 <div class="mini-notifications">
                     ${messages}
@@ -1496,7 +1483,7 @@ export async function fetch_messages() {
         const parser = new DOMParser();
         const doc = parser.parseFromString(dom, 'text/html');
 
-        const list = doc.querySelector('.inbox-table');
+        const list = doc.querySelector('.inbox-table tbody');
 
         let next = new Date();
         next.setMinutes(next.getMinutes() + 2);
