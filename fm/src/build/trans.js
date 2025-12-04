@@ -8929,6 +8929,14 @@ export const trans = {
     sent_to_you: {
         // messages in your inbox
         en: 'Sent to you'
+    },
+    shoutbox_placeholder: {
+        // u: username
+        // v: album/artist/track
+        en: '{u}, share your thoughts on {v}...'
+    },
+    shoutbox_placeholder_user: {
+        en: '{u}, leave a shout for {v}...'
     }
 };
 

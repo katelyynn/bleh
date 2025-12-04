@@ -57580,9 +57580,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     });
     if (settings.shout_markdown && shout_parse_queue.length > 0)
       parse_shout_queue();
-    const shout_forms = document.querySelectorAll(
-      ".shout-form:not([data-kate-processed])"
-    );
+    const shout_forms = document.querySelectorAll(".shout-form:not([data-kate-processed])");
     shout_forms.forEach((shout_form) => {
       shout_form.setAttribute("data-kate-processed", "true");
       let shout_avatar = shout_form.querySelector(".shout-user-avatar");
@@ -57592,6 +57590,20 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       const help_text = shout_form.querySelector(".form-row-help-text");
       help_text.classList.add("dual-tip");
       const textarea = shout_form.querySelector("textarea");
+      const placeholder = textarea.placeholder;
+      if (placeholder.includes(auth.name)) {
+        if (page.type == "user") {
+          textarea.placeholder = tl2(trans.shoutbox_placeholder_user, {
+            u: auth.name,
+            v: page.name
+          });
+        } else {
+          textarea.placeholder = tl2(trans.shoutbox_placeholder, {
+            u: auth.name,
+            v: page.type == "artist" ? romanise(correct_artist(page.name)) : ["album", "track"].includes(page.type) ? romanise(correct_item_by_artist(page.name, page.sister)) : page.name
+          });
+        }
+      }
       let chars;
       let preview;
       render(
@@ -67958,6 +67970,14 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     sent_to_you: {
       // messages in your inbox
       en: "Sent to you"
+    },
+    shoutbox_placeholder: {
+      // u: username
+      // v: album/artist/track
+      en: "{u}, share your thoughts on {v}..."
+    },
+    shoutbox_placeholder_user: {
+      en: "{u}, leave a shout for {v}..."
     }
   };
   function tl2(key, replacements = {}) {

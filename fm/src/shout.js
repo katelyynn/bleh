@@ -17,9 +17,10 @@ import {
     markdown_preview,
     markdown_prompt
 } from './components/markdown.js';
-import { copy } from './build/tools.js';
+import { copy, romanise } from './build/tools.js';
 import tippy from 'tippy.js';
 import { keybind } from './components/rabbit.js';
+import { correct_artist, correct_item_by_artist } from './components/lotus.js';
 
 export function patch_shouts() {
     if (!page.structure.main) return;
@@ -166,9 +167,7 @@ export function patch_shouts() {
         parse_shout_queue();
 
     // enter a shout field
-    const shout_forms = document.querySelectorAll(
-        '.shout-form:not([data-kate-processed])'
-    );
+    const shout_forms = document.querySelectorAll('.shout-form:not([data-kate-processed])');
     shout_forms.forEach((shout_form) => {
         shout_form.setAttribute('data-kate-processed', 'true');
         let shout_avatar = shout_form.querySelector('.shout-user-avatar');
@@ -182,6 +181,21 @@ export function patch_shouts() {
         help_text.classList.add('dual-tip');
 
         const textarea = shout_form.querySelector('textarea');
+
+        const placeholder = textarea.placeholder;
+        if (placeholder.includes(auth.name)) {
+            if (page.type == 'user') {
+                textarea.placeholder = tl(trans.shoutbox_placeholder_user, {
+                    u: auth.name,
+                    v: page.name
+                });
+            } else {
+                textarea.placeholder = tl(trans.shoutbox_placeholder, {
+                    u: auth.name,
+                    v: page.type == 'artist' ? romanise(correct_artist(page.name)) : ['album', 'track'].includes(page.type) ? romanise(correct_item_by_artist(page.name, page.sister)) : page.name
+                });
+            }
+        }
 
         let chars;
         let preview;
