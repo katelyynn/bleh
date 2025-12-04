@@ -31701,7 +31701,8 @@
     disabled = false,
     data: data2 = "",
     func = null,
-    standalone = true
+    standalone = true,
+    id = ""
   }) {
     let checkbox;
     let state;
@@ -31720,14 +31721,14 @@
             </div>
             ${type == "toggle" ? html.node`
             <div class="toggle-wrap">
-                <input type="checkbox" ref=${(el) => checkbox = el} name=${name} value=${data2} checked=${value} />
+                <input type="checkbox" ref=${(el) => checkbox = el} id=${id} name=${name} value=${data2} checked=${value} />
                 <button class="toggle" ref=${(el) => state = el} aria-checked=${value}>
                     <div class="dot" />
                 </button>
             </div>
             ` : html.node`
             <div class="check">
-                <input type="checkbox" ref=${(el) => checkbox = el} name=${name} value=${data2} checked=${value} disabled=${disabled} />
+                <input type="checkbox" ref=${(el) => checkbox = el} id=${id} name=${name} value=${data2} checked=${value} disabled=${disabled} />
                 <div class="box" ref=${(el) => state = el} aria-checked=${value} disabled=${disabled}>
                     <div class="bleh-icon" />
                 </div>
@@ -57156,6 +57157,88 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     `;
   }
 
+  // src/components/messages.js
+  function bleh_message_list(list, mini = false, delete_btn = null) {
+    list.classList = "notification-list";
+    if (mini) list.classList.add("mini");
+    const sent_to = page.subpage == "sent_overview";
+    const messages = list.querySelectorAll(".inbox-message");
+    messages.forEach((message, index3) => {
+      if (mini && index3 > 4) message.style.display = "none";
+      const link = message.querySelector(".inbox-message-preview > a");
+      const href = link.getAttribute("href");
+      const active = message.classList.contains("inbox-message--unviewed");
+      message.classList = "notification message";
+      if (active) message.classList.add("active");
+      if (mini) message.classList.add("mini");
+      const avatar2 = message.querySelector(".avatar");
+      avatar2.classList = "avatar";
+      const id = message.querySelector("input").value;
+      const author = message.querySelector(".inbox-message-sender-name").textContent.trim();
+      const time2 = message.querySelector(".inbox-message-timestamp");
+      const subject = message.querySelector(".inbox-message-subject > span").textContent.trim();
+      const content2 = message.querySelector(".inbox-message-message > span").textContent.trim();
+      patch_avatar(avatar2, author);
+      render(message, html`
+            ${!mini ? html.node`
+                <div class="message-checkbox">
+                    ${toggle({
+        type: "checkbox",
+        name: "message_id",
+        id,
+        data: id,
+        func: (val) => {
+          if (val) {
+            delete_btn.removeAttribute("disabled");
+          } else {
+            delete_btn.setAttribute("disabled", "true");
+          }
+        }
+      })}
+                </div>
+            ` : ""}
+            <div class="notification-avatar">${avatar2}</div>
+            <div
+                class="bleh-icon"
+                data-type="message"
+                style="--icon: var(--mask)"
+            />
+            <div class="notification-content not-main">
+                ${sent_to ? html.node`
+                    <div class="notification-context">
+                        <span class="notification-type">
+                            ${tl2(trans.you_sent_to)}
+                        </span>
+                    </div>
+                ` : ""}
+                <div class="notification-title">
+                    ${author}
+                </div>
+                ${!sent_to ? html.node`
+                    <div class="notification-context">
+                        <span class="notification-type">
+                            ${tl2(trans.sent_to_you)}
+                        </span>
+                    </div>
+                ` : ""}
+            </div>
+            <div class="message-content">
+                <div class="message-subject">
+                    ${subject}
+                </div>
+                <div class="message-summary">
+                    ${content2}
+                </div>
+            </div>
+            <div class="notification-time">${time2}</div>
+            <a
+                class="link-block-cover-link"
+                href=${href}
+            />
+        `);
+    });
+  }
+
   // src/pages/inbox.js
   async function bleh_inbox() {
     page.structure.container = document.body.querySelector(".page-content");
@@ -57167,6 +57250,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       log("unable to find elements", "page structure");
     }
     let content_top = document.body.querySelector(".content-top");
+    const alert2 = document.body.querySelector(".alert");
     checkup_page_structure(false, content_top);
     log("status is", "page", "info", page);
     update_page();
@@ -57203,6 +57287,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       let pagination = page.structure.container.querySelector(".pagination");
       page.structure.main.appendChild(html.node`
             <section class="inbox-panel notifications-panel">
+                ${alert2}
                 ${form}
                 ${notifications}
                 ${pagination}
@@ -57213,11 +57298,18 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     } else if (page.subpage.endsWith("overview")) {
       let inbox = page.structure.container.querySelector(".inbox");
       page.structure.main.appendChild(inbox);
+      if (alert2) inbox.appendChild(alert2);
       const header = page.structure.main.querySelector(".inbox-buttons");
       const select_all = header.querySelector(".inbox-select-all");
+      const delete_btn = header.querySelector(".inbox-delete-button");
+      const table = inbox.querySelector(".inbox-table");
+      if (!table) return;
+      table.classList = "inbox-table-legacy";
+      bleh_message_list(table.querySelector("tbody"), false, delete_btn);
     } else if (page.subpage == "message_overview" || page.subpage == "sent_message") {
       let inbox = page.structure.container.querySelector(".inbox-message-view");
       page.structure.main.appendChild(inbox);
+      if (alert2) inbox.appendChild(alert2);
       let sender_panel = inbox.querySelector(".inbox-message-sender-avatar");
       let sender_name = inbox.querySelector(".inbox-message-sender-name");
       let sender_time = inbox.querySelector(".inbox-message-timestamp");
@@ -57230,9 +57322,11 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     } else if (page.subpage == "compose") {
       let inbox = page.structure.container.querySelector(".inbox-compose-view");
       page.structure.main.appendChild(inbox);
+      if (alert2) inbox.appendChild(alert2);
     } else {
       let inbox = page.structure.container.querySelector(".inbox");
       page.structure.main.appendChild(inbox);
+      if (alert2) inbox.appendChild(alert2);
     }
   }
 
@@ -67869,6 +67963,14 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     date_at_time: {
       // date is automatically translated with luxon
       en: "{d} at {t}"
+    },
+    you_sent_to: {
+      // messages in your inbox
+      en: "You sent to"
+    },
+    sent_to_you: {
+      // messages in your inbox
+      en: "Sent to you"
     }
   };
   function tl2(key, replacements = {}) {

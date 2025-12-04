@@ -14,6 +14,7 @@ import {bleh_notification_list} from "../components/notifications.js";
 import { tl, trans } from "../build/trans.js";
 import { html } from "lighterhtml";
 import { load_profile_cache_externally } from "./profile.js";
+import { bleh_message_list } from "../components/messages.js";
 
 export async function bleh_inbox() {
     page.structure.container = document.body.querySelector('.page-content');
@@ -26,6 +27,8 @@ export async function bleh_inbox() {
     }
 
     let content_top = document.body.querySelector('.content-top');
+
+    const alert = document.body.querySelector('.alert');
 
 
     checkup_page_structure(false, content_top);
@@ -70,6 +73,7 @@ export async function bleh_inbox() {
 
         page.structure.main.appendChild(html.node`
             <section class="inbox-panel notifications-panel">
+                ${alert}
                 ${form}
                 ${notifications}
                 ${pagination}
@@ -83,11 +87,25 @@ export async function bleh_inbox() {
         let inbox = page.structure.container.querySelector('.inbox');
         page.structure.main.appendChild(inbox);
 
+        if (alert) inbox.appendChild(alert);
+
         const header = page.structure.main.querySelector('.inbox-buttons');
         const select_all = header.querySelector('.inbox-select-all');
+
+        const delete_btn = header.querySelector('.inbox-delete-button');
+
+        const table = inbox.querySelector('.inbox-table');
+
+        if (!table) return;
+
+        table.classList = 'inbox-table-legacy';
+
+        bleh_message_list(table.querySelector('tbody'), false, delete_btn);
     } else if (page.subpage == 'message_overview' || page.subpage == 'sent_message') {
         let inbox = page.structure.container.querySelector('.inbox-message-view');
         page.structure.main.appendChild(inbox);
+
+        if (alert) inbox.appendChild(alert);
 
 
         let sender_panel = inbox.querySelector('.inbox-message-sender-avatar');
@@ -105,8 +123,12 @@ export async function bleh_inbox() {
     } else if (page.subpage == 'compose') {
         let inbox = page.structure.container.querySelector('.inbox-compose-view');
         page.structure.main.appendChild(inbox);
+
+        if (alert) inbox.appendChild(alert);
     } else {
         let inbox = page.structure.container.querySelector('.inbox');
         page.structure.main.appendChild(inbox);
+
+        if (alert) inbox.appendChild(alert);
     }
 }

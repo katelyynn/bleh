@@ -1,0 +1,106 @@
+//
+// bleh, an extension for the music site Last.fm
+// Copyright (c) 2025 katelyn and contributors
+// Licensed under GPLv3
+//
+
+import { auth, page, root } from '../build/page.js';
+import { desanitise } from '../build/tools.js';
+import { correct_artist, correct_item_by_artist } from './lotus.js';
+import { html, render } from 'lighterhtml';
+import { tl, trans } from '../build/trans.js';
+import { patch_avatar } from '../avatar.js';
+import { toggle } from './toggle.js';
+
+export function bleh_message_list(list, mini = false, delete_btn = null) {
+    list.classList = 'notification-list';
+
+    if (mini) list.classList.add('mini');
+
+    const sent_to = page.subpage == 'sent_overview';
+
+    const messages = list.querySelectorAll('.inbox-message');
+    messages.forEach((message, index) => {
+        if (mini && index > 4) message.style.display = 'none';
+
+        const link = message.querySelector('.inbox-message-preview > a');
+        const href = link.getAttribute('href');
+
+        const active = message.classList.contains('inbox-message--unviewed');
+
+        message.classList = 'notification message';
+        if (active) message.classList.add('active');
+        if (mini) message.classList.add('mini');
+
+        const avatar = message.querySelector('.avatar');
+        avatar.classList = 'avatar';
+
+        const id = message.querySelector('input').value;
+
+        const author = message.querySelector('.inbox-message-sender-name').textContent.trim();
+        const time = message.querySelector('.inbox-message-timestamp');
+
+        const subject = message.querySelector('.inbox-message-subject > span').textContent.trim();
+        const content = message.querySelector('.inbox-message-message > span').textContent.trim();
+
+        patch_avatar(avatar, author);
+
+        render(message, html`
+            ${!mini ? html.node`
+                <div class="message-checkbox">
+                    ${toggle({
+                        type: 'checkbox',
+                        name: 'message_id',
+                        id,
+                        data: id,
+                        func: (val) => {
+                            if (val) {
+                                delete_btn.removeAttribute('disabled');
+                            } else {
+                                delete_btn.setAttribute('disabled', 'true');
+                            }
+                        }
+                    })}
+                </div>
+            ` : ''}
+            <div class="notification-avatar">${avatar}</div>
+            <div
+                class="bleh-icon"
+                data-type="message"
+                style="--icon: var(--mask)"
+            />
+            <div class="notification-content not-main">
+                ${sent_to ? html.node`
+                    <div class="notification-context">
+                        <span class="notification-type">
+                            ${tl(trans.you_sent_to)}
+                        </span>
+                    </div>
+                ` : ''}
+                <div class="notification-title">
+                    ${author}
+                </div>
+                ${!sent_to ? html.node`
+                    <div class="notification-context">
+                        <span class="notification-type">
+                            ${tl(trans.sent_to_you)}
+                        </span>
+                    </div>
+                ` : ''}
+            </div>
+            <div class="message-content">
+                <div class="message-subject">
+                    ${subject}
+                </div>
+                <div class="message-summary">
+                    ${content}
+                </div>
+            </div>
+            <div class="notification-time">${time}</div>
+            <a
+                class="link-block-cover-link"
+                href=${href}
+            />
+        `);
+    });
+}

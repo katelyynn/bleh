@@ -12215,6 +12215,10 @@
             align-items: center;
         }
     }
+    .inbox-table-legacy {
+        display: flex;
+        flex-direction: column;
+    }
     .notification-list {
         display: flex;
         flex-direction: column;
@@ -12231,6 +12235,16 @@
             & > .link-block-cover-link {
                 position: absolute;
                 inset: 0;
+            }
+
+            & > .message-checkbox {
+                z-index: 3;
+
+                & > .setting {
+                    & > .heading {
+                        display: none;
+                    }
+                }
             }
 
             --bg: hsl(var(--b4), 40%);
@@ -12260,6 +12274,10 @@
                 }
             }
 
+            & > .bleh-icon {
+                flex-shrink: 0;
+            }
+
             &.active {
                 --bg: hsla(var(--h4), 35%);
                 --bg-hov: hsla(var(--h4), 45%);
@@ -12277,6 +12295,7 @@
 
             .notification-avatar {
                 z-index: 10;
+                flex-shrink: 0;
 
                 & > .avatar {
                     background: var(--avatar-generic-background);
@@ -12300,8 +12319,16 @@
             }
 
             .notification-content {
-                flex: 1;
                 min-width: 0;
+                flex-shrink: 0;
+
+                &:not(.not-main) {
+                    flex: 1;
+                }
+
+                &.not-main {
+                    width: 200px;
+                }
 
                 .notification-title {
                     flex: 1 1 auto;
@@ -12348,10 +12375,31 @@
                 }
             }
 
+            .message-content {
+                flex: 1;
+                min-width: 0;
+
+                .message-subject {
+                    color: hsl(var(--c3));
+                }
+
+                .message-subject,
+                .message-summary {
+                    display: -webkit-box;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    line-clamp: 1;
+                    -webkit-line-clamp: 1;
+                    -webkit-box-orient: vertical;
+                }
+            }
+
             .notification-time {
                 color: hsl(var(--c3));
                 font-weight: var(--font-weight);
                 font-size: 13px;
+
+                flex-shrink: 0;
             }
         }
     }
@@ -12389,52 +12437,6 @@
         --lit-over: 1;
     }
 
-    .inbox-message {
-        display: inline-block;
-    }
-    .inbox-message-view .inbox-message-sender-avatar {
-        padding: unset !important;
-        width: fit-content;
-    }
-    .inbox-message-sender-avatar a {
-        --show-icon: none;
-        position: relative !important;
-    }
-
-    .inbox .inbox-table {
-        box-shadow: unset;
-    }
-    .inbox-table tbody {
-        display: flex !important;
-        flex-direction: column;
-        gap: var(--button-list-gap);
-    }
-
-    .inbox-table .inbox-message {
-        --bg: hsl(var(--b6));
-        --bg-hov: hsla(var(--b6), 80%);
-        --bg-atv: hsla(var(--b6), 60%);
-        --shadow: none;
-        --shadow-hov: none;
-        display: flex !important;
-        gap: var(--card-gap);
-        margin-bottom: unset;
-    }
-    .inbox-table .inbox-message.inbox-message--unviewed {
-        --bg: hsla(var(--l4), 10%);
-        --bg-hov: hsla(var(--l4), 20%);
-        --bg-atv: hsla(var(--l4), 30%);
-    }
-
-    .inbox .inbox-table td,
-    .inbox .inbox-table th {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        padding: unset !important;
-        box-shadow: unset;
-        margin: unset !important;
-    }
     .inbox-message-status,
     .inbox-message-status:after {
         display: none !important;
@@ -12442,41 +12444,6 @@
 
     .inbox-message-select {
         width: 14px !important;
-    }
-
-    .inbox td p {
-        min-height: unset;
-    }
-    .inbox a {
-        text-decoration: var(--force-underline, none) !important;
-    }
-    .inbox-table .inbox-message-timestamp,
-    .inbox-table .inbox-message-preview {
-        font-weight: var(--font-weight);
-    }
-    .inbox-table .inbox-message-timestamp {
-        font-size: 12px !important;
-        line-height: 16px !important;
-        color: hsl(var(--c3)) !important;
-    }
-    .inbox .inbox-message-subject {
-        font-weight: var(--font-weight-medium);
-        color: hsl(var(--c3));
-        --hidden-msg: "Message contents hidden, hover to reveal.";
-    }
-
-    .inbox-table .inbox-message-info {
-        font-size: 0;
-        line-height: 0;
-    }
-    .inbox-table .inbox-message-info > * {
-        font-size: var(--font-size);
-        line-height: var(--line-height);
-    }
-
-    [action="/inbox/sent"] .inbox-message-sender-name:before {
-        content: "Sent to ";
-        color: hsl(var(--c3));
     }
 
     .inbox-message-view .inbox-message {

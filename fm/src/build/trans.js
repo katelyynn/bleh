@@ -8921,6 +8921,14 @@ export const trans = {
     date_at_time: {
         // date is automatically translated with luxon
         en: '{d} at {t}'
+    },
+    you_sent_to: {
+        // messages in your inbox
+        en: 'You sent to'
+    },
+    sent_to_you: {
+        // messages in your inbox
+        en: 'Sent to you'
     }
 };
 
