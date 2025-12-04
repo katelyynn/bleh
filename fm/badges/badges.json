@@ -1,5 +1,5 @@
 {
-    "latest": "2025.1201",
+    "latest": "2025.1204",
     "sponsors": [
         "clairedoll", "kateshapedbox", "evangelicgirl",
         "astrablooms", "ItsProyal", "vwvwvwvwvwvwv", "Orofil",
@@ -11,7 +11,7 @@
         "fourohclok", "liminalvespers", "HuxP", "K40M0J1",
         "goldenstuffed", "ferrea", "kar1x", "nojonsko",
         "urwq", "driftpsalm", "popcorniscrazy", "s0540a",
-        "dylandotat"
+        "dylandotat", "Angel0Lust", "liminelle"
     ],
     "sponsors_one_time": [
         "kateshapedbox",
@@ -21,7 +21,8 @@
         "saettbyeol", "lyeule", "noapop",
         "celebrating", "riskyrizey",
         "fourohclok", "K40M0J1", "goldenstuffed",
-        "kar1x", "nojonsko", "s0540a"
+        "kar1x", "nojonsko", "s0540a",
+        "Angel0Lust"
     ],
     "sponsor_count_remove": 3,
     "sponsor_account": "kateshapedbox",
@@ -458,6 +459,22 @@
                 "hue": 24,
                 "sat": 2,
                 "lit": 1
+            }
+        ],
+        "Angel0Lust": {
+            "type": "sponsor"
+        },
+        "liminelle": [
+            {
+                "type": "sponsor"
+            },
+            {
+                "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLXdhdmVzLWljb24gbHVjaWRlLXdhdmVzIj48cGF0aCBkPSJNMiA2Yy42LjUgMS4yIDEgMi41IDFDNyA3IDcgNSA5LjUgNWMyLjYgMCAyLjQgMiA1IDIgMi41IDAgMi41LTIgNS0yIDEuMyAwIDEuOS41IDIuNSAxIi8+PHBhdGggZD0iTTIgMTJjLjYuNSAxLjIgMSAyLjUgMSAyLjUgMCAyLjUtMiA1LTIgMi42IDAgMi40IDIgNSAyIDIuNSAwIDIuNS0yIDUtMiAxLjMgMCAxLjkuNSAyLjUgMSIvPjxwYXRoIGQ9Ik0yIDE4Yy42LjUgMS4yIDEgMi41IDEgMi41IDAgMi41LTIgNS0yIDIuNiAwIDIuNCAyIDUgMiAyLjUgMCAyLjUtMiA1LTIgMS4zIDAgMS45LjUgMi41IDEiLz48L3N2Zz4=",
+                "reason": "sponsor",
+                "name": "liminal signal",
+                "hue": 250,
+                "sat": 1.5,
+                "lit": 1.12
             }
         ]
     }
