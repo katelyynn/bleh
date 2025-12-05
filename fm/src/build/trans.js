@@ -2226,7 +2226,8 @@ export const trans = {
                 it: 'Aggiornamento importante', // should be 'maggiore' as literal translation of 'major', but it sounds awful so falling back to 'important' ~cuto
                 pt: 'Lançamento principal',
                 sv: 'Större utgåva',
-                ru: 'Крупный релиз'
+                ru: 'Крупный релиз',
+                pl: 'Głowne wydanie'
             },
             minor: {
                 en: 'Minor release',
@@ -2234,7 +2235,8 @@ export const trans = {
                 it: 'Aggiornamento secondario',
                 sv: 'Mindre utgåva',
                 pt: 'Lançamento secundario',
-                ru: 'Мелкий релиз'
+                ru: 'Мелкий релиз',
+                pl: 'Mała aktualizacja'
             }
         }
     },
@@ -2245,7 +2247,8 @@ export const trans = {
         it: 'Novità da {user}',
         pt: 'Notícias de {user}',
         sv: 'Nytt från {user}',
-        ru: 'Новости от {user}'
+        ru: 'Новости от {user}',
+        pl: 'Aktualności od {user}'
     },
     default: {
         en: 'Default',
@@ -2263,7 +2266,8 @@ export const trans = {
         it: 'Foto profilo',
         pt: 'Foto de perfil',
         sv: 'Profilbild',
-        ru: 'Аватар'
+        ru: 'Аватар',
+        pl: 'Awatar'
     },
     customise: {
         en: 'Customise',
