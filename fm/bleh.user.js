@@ -59061,7 +59061,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     es: {
       name: "Espa\xF1ol",
       by: ["soleilth"],
-      last_updated: "2025-11-13"
+      last_updated: "2025-11-27"
     },
     it: {
       name: "Italiano",
@@ -59417,7 +59417,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     cant_shout: {
       en: "You cannot leave shouts here",
       de: "Du kannst hier keine Shouts hinterlassen",
-      es: "No puedes poner notas aqu\xED",
+      es: "No puedes dejar notas aqu\xED",
       it: "Non puoi lasciare note qui",
       sv: "Du kan inte hojta h\xE4r",
       ru: "\u0412\u044B \u043D\u0435 \u043C\u043E\u0436\u0435\u0442\u0435 \u043E\u0441\u0442\u0430\u0432\u043B\u044F\u0442\u044C \u0442\u0443\u0442 \u043E\u0442\u0437\u044B\u0432\u044B",
@@ -59474,7 +59474,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       // username
       en: "{u} is keeping quiet",
       de: "{u} ist wohl etwas schweigsam",
-      es: "{u} se est\xE1 quedando callado",
+      es: "{u} est\xE1 guardando silencio",
       it: "{u} sta rimanendo in silenzio",
       pt: "{u} est\xE1 bem quietinho(a)",
       sv: "{u} h\xE5ller sig tyst",
@@ -59783,7 +59783,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       name: {
         en: "Remove friend",
         de: "Freund entfernen",
-        es: "Eliminar amigo",
+        es: "Remover amigo",
         it: "Rimuovi amico",
         pt: "Desfazer amizade",
         sv: "Ta bort v\xE4n",
@@ -59792,7 +59792,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       body: {
         en: "Are you sure you want to remove {u} as a friend, you will stay following them - it\u2018s only local.",
         de: "Bist du sicher, dass du {u} als Freund entfernen m\xF6chtest? Du folgst der Person weiterhin - die Freundesliste wird lokal verwaltet.",
-        es: "\xBFSeguro de que quieres eliminar a {u} como amigo? Seguir\xE1s sigui\xE9ndolo \u2014 es solo local.",
+        es: "\xBFSeguro de que quieres remover a {u} de amigos? Seguir\xE1s sigui\xE9ndolo \u2014 es solo local.",
         it: "Sei sicuro di voler rimuovere {u} come amico? Continuerai a seguirlo - \xE8 solamente locale.",
         pt: "Tem certeza de que quer remover {u} da sua lista de amigos? Voc\xEA continuar\xE1 o/a seguindo - \xE9 s\xF3 algo local.",
         sv: "\xC4r du s\xE4ker p\xE5 att du vill ta bort {u} som v\xE4n? Du f\xF6ljer dem fortfarande - v\xE4nlistan hanteras lokalt.",
@@ -59811,7 +59811,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     removed_friend: {
       en: "Removed friend",
       de: "Freund entfernt",
-      es: "Amigo eliminado",
+      es: "Amigo removido",
       it: "Amico rimosso",
       pt: "Amigo(a) removido(a)",
       sv: "Tagit bort v\xE4n",
@@ -59838,7 +59838,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     removed_star: {
       en: "Removed star status",
       de: "Markierung entfernt",
-      es: "Eliminado de favoritos",
+      es: "Removido de favoritos",
       it: "Rimosso dai preferiti",
       pt: "Status de favorito removido",
       sv: "Tog bort stj\xE4rnm\xE4rke",
@@ -59847,7 +59847,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     remove_as_star_friend: {
       en: "Remove star status",
       de: "Markierung entfernen",
-      es: "Eliminar de favoritos",
+      es: "Remover de favoritos",
       it: "Rimuovi dai preferiti",
       pt: "Remover estado de favorito",
       sv: "Ta bort stj\xE4rnm\xE4rke",
@@ -59922,7 +59922,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     scrobble_value: {
       en: "Scrobble {v}",
-      es: "Hacer {v} scrobblings",
+      es: "Hacer scrobbling al {v}",
       ru: "\u0421\u043A\u0440\u043E\u0431\u0431\u043B\u0438\u0442\u044C {v}",
       pt: "Scrobble {v}"
     },
@@ -60167,7 +60167,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     theme: {
       en: "Theme",
       de: "Farbschema",
-      es: "Tema",
+      es: "Aspecto",
       it: "Tema",
       pt: "Tema",
       sv: "Tema",
@@ -60597,7 +60597,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       },
       notice: {
         en: "Open the live counter",
-        es: "Abre el contador en vivo",
+        es: "Abrir el contador en vivo",
         it: "Apri il contatore in tempo reale",
         pt: "Abrir o contador ao vivo",
         sv: "\xD6ppna live-nedr\xE4kningen",
@@ -60650,6 +60650,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       },
       exclusive: {
         en: "Limited time",
+        es: "Tiempo limitado",
         pt: "Tempo limitado"
       }
     },
@@ -60664,8 +60665,6 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     value_for_time: {
       // e.g. (Halloween) ends (in 3 days)
-      //
-      // shouldn't the "in" and "days" be outside the parentheses? -soleil
       en: "{v} ends {time}",
       es: "{v} termina {time}",
       it: "{v} termina {time}",
@@ -60733,7 +60732,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       },
       body: {
         en: "During winter seasons this applies a coat of ice to panels, otherwise mainly gradients",
-        es: "Durante las temporadas invernales, aplica una capa de hielo a los paneles, de lo contrario, aplica principalmente gradientes",
+        es: "Durante temporadas invernales, aplica una capa de hielo a los paneles, de lo contrario, aplica principalmente gradientes",
         it: "Durante le stagioni invernali, applica un mantello di ghiacchi ai pannelli, altrimenti principalmente gradienti",
         pt: "Durante o inverno, isso aplica uma camada de gelo aos pain\xE9is; fora dessa \xE9poca, aplica principalmente gradientes",
         sv: "Under vinters\xE4songen l\xE4ggs ett lager is p\xE5 paneler, annars mest bildgradienter",
@@ -62334,22 +62333,27 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     paste: {
       en: "Paste",
+      es: "Pegar",
       pt: "Colar"
     },
     paste_text: {
       en: "Paste text",
+      es: "Pegar texto",
       pt: "Colar texto"
     },
     undo: {
       en: "Undo",
+      es: "Deshacer",
       pt: "Desfazer"
     },
     redo: {
       en: "Redo",
+      es: "Rehacer",
       pt: "Refazer"
     },
     pasted_text: {
       en: "Pasted text",
+      es: "Texto pegado",
       pt: "Texto colado"
     },
     wiki_standard_tracks: {
@@ -62755,7 +62759,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       // in the native last.fm ui
       en: "Loved",
       de: "Lieblingssongs",
-      es: "Favorito",
+      es: "Favoritos",
       it: "Preferiti",
       pt: "Favoritadas",
       sv: "\xC4lskade l\xE5tar",
@@ -62868,7 +62872,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     video_removed: {
       en: "Video removed by Last.fm",
       de: "Video von Last.fm entfernt",
-      es: "Video eliminado por Last.fm",
+      es: "Video removido por Last.fm",
       it: "Video rimosso da Last.fm",
       pt: "V\xEDdeo removido pela Last.fm",
       sv: "Video borttagen av Last.fm",
@@ -64807,7 +64811,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       name: {
         en: "Force re-download styles",
         de: "Erneutes Herunterladen von Stylesheets erzwingen",
-        es: "Forzar redescarga de los estilos",
+        es: "Forzar redescarga de estilos",
         it: "Forza il re-download degli stili",
         pt: "For\xE7ar o re-download dos estilos",
         sv: "Tvinga omladdning av stiler",
@@ -65709,7 +65713,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       // lowercase in design
       en: "{l} translation by {u}",
       de: "Deutsche \xDCbersetzung von {u}",
-      es: "{l} traducci\xF3n por {u}",
+      es: "Traducci\xF3n al {l} por {u}",
       it: "traduzione in {l} di {u}",
       sv: "Svensk \xF6vers\xE4ttning av {u}",
       ru: "\u041F\u0435\u0440\u0435\u0432\u043E\u0434 {l} \u043E\u0442 {u}",
@@ -67820,7 +67824,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     branch: {
       name: {
         en: "Choose branch",
-        es: "Elige la rama",
+        es: "Elegir rama",
         it: "Seleziona branch",
         // we are talking about git branches, leaving it as is to avoid creating confusion for people who will want to change this ~cuto
         pt: "Escolha a branch",
@@ -67906,44 +67910,53 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     translator: {
       name: {
         en: "Show translator tools",
+        es: "Mostrar herramientas de traducci\xF3n",
         pt: "Mostrar ferramentas de tradu\xE7\xE3o"
       },
       body: {
         en: "View expanded details on all languages for use when translating",
+        es: "Ve detalles ampliados de todos los idiomas para usar al traducir",
         pt: "Veja detalhes expandidos sobre todos os idiomas para uso ao traduzir"
       }
     },
     translate: {
       en: "Translate",
+      es: "Traducir",
       pt: "Traduza"
     },
     translation_key: {
       // a key such as 'you_have_new_badges' above
       en: "Translation key",
+      es: "Clave de traducci\xF3n",
       pt: "Chave de tradu\xE7\xE3o"
     },
     original: {
       en: "Original",
+      es: "Original",
       pt: "Original"
     },
     user_is_listening_to: {
       // (claire) is listening to
       // (song name)
       en: "{u} is listening to",
+      es: "{u} est\xE1 escuchando",
       pt: "{u} est\xE1 ouvindo"
     },
     user_listened_time: {
       // (claire) listened (5 hours ago)
       // (song name)
       en: "{u} listened {time}",
+      es: "{u} escuch\xF3 {time} a",
       pt: "{u} ouviu h\xE1 {time}"
     },
     now_notice: {
       name: {
-        en: "This page is not properly supported in bleh, but.."
+        en: "This page is not properly supported in bleh, but..",
+        es: "Esta p\xE1gina no es compatible con bleh, pero... "
       },
       body: {
-        en: "If you are a Last.fm Pro subscriber, you can view your current active track in your profile menu at all times"
+        en: "If you are a Last.fm Pro subscriber, you can view your current active track in your profile menu at all times",
+        es: "Si eres un suscriptor de Last.fm Pro, puedes ver tu tema activo actual en el men\xFA de tu perfil en cualquier momento"
       }
     },
     current_status: {
