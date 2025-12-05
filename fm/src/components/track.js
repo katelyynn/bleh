@@ -668,6 +668,8 @@ export function patch_titles(search = page.structure.main) {
                         );
                     }
 
+                    console.info('more button', bulk_edit_button);
+
                     let album_name = sanitise(
                         image ?
                             correct_item_by_artist(
@@ -683,78 +685,78 @@ export function patch_titles(search = page.structure.main) {
                         content: html.node`
                             ${track.preview}
                             ${can_edit ? html.node`
-                            <div class="button-combo">
-                                ${() => {
-                                    if (is_album) {
+                                <div class="button-combo">
+                                    ${() => {
+                                        if (is_album) {
+                                            return html.node`
+                                                <form style="margin: 0" method="POST" action=${track.getAttribute('data-action')} data-edit-scrobble="">
+                                                    <input type="hidden" name="csrfmiddlewaretoken" value=${page.token}>
+                                                    <input type="hidden" name="album_name" value=${track.getAttribute('data-album-name')}>
+                                                    <input type="hidden" name="album_artist_name" value=${track.getAttribute('data-album-artist-name')}>
+                                                    <input type="hidden" name="album_image" value=${track.getAttribute('data-album-image')}>
+                                                    <input type="hidden" name="album_name_original" value=${track.getAttribute('data-album-name-original')}>
+                                                    <input type="hidden" name="album_artist_name_original" value=${track.getAttribute('data-album-artist-name-original')}>
+                                                    <input type="hidden" name="count" value=${track.getAttribute('data-count')}>
+                                                    <button class="dropdown-menu-clickable-item" data-type="edit">
+                                                        ${tl(trans.edit)}
+                                                    </button>
+                                                </form>
+                                            `;
+                                        }
+
                                         return html.node`
                                             <form style="margin: 0" method="POST" action=${track.getAttribute('data-action')} data-edit-scrobble="">
                                                 <input type="hidden" name="csrfmiddlewaretoken" value=${page.token}>
+                                                <input type="hidden" name="artist_name" value=${track.getAttribute('data-artist-name')}>
+                                                <input type="hidden" name="track_name" value=${track.getAttribute('data-track-name')}>
                                                 <input type="hidden" name="album_name" value=${track.getAttribute('data-album-name')}>
                                                 <input type="hidden" name="album_artist_name" value=${track.getAttribute('data-album-artist-name')}>
-                                                <input type="hidden" name="album_image" value=${track.getAttribute('data-album-image')}>
-                                                <input type="hidden" name="album_name_original" value=${track.getAttribute('data-album-name-original')}>
-                                                <input type="hidden" name="album_artist_name_original" value=${track.getAttribute('data-album-artist-name-original')}>
-                                                <input type="hidden" name="count" value=${track.getAttribute('data-count')}>
+                                                <input type="hidden" name="timestamp" value=${track.getAttribute('data-timestamp')}>
                                                 <button class="dropdown-menu-clickable-item" data-type="edit">
                                                     ${tl(trans.edit)}
                                                 </button>
                                             </form>
                                         `;
-                                    }
-
-                                    return html.node`
-                                        <form style="margin: 0" method="POST" action=${track.getAttribute('data-action')} data-edit-scrobble="">
-                                            <input type="hidden" name="csrfmiddlewaretoken" value=${page.token}>
-                                            <input type="hidden" name="artist_name" value=${track.getAttribute('data-artist-name')}>
-                                            <input type="hidden" name="track_name" value=${track.getAttribute('data-track-name')}>
-                                            <input type="hidden" name="album_name" value=${track.getAttribute('data-album-name')}>
-                                            <input type="hidden" name="album_artist_name" value=${track.getAttribute('data-album-artist-name')}>
-                                            <input type="hidden" name="timestamp" value=${track.getAttribute('data-timestamp')}>
-                                            <button class="dropdown-menu-clickable-item" data-type="edit">
-                                                ${tl(trans.edit)}
-                                            </button>
-                                        </form>
-                                    `;
-                                }}
-                                ${bulk_edit_button ? html.node`
-                                    <div class="button-combo-sep" />
-                                    ${() => {
-                                        let button =
-                                            track_legacy_menu.querySelector(
-                                                '[data-analytics-action="BulkEditScrobblesOpen"]'
-                                            );
-                                        button.classList =
-                                            'dropdown-menu-clickable-item chibi';
-                                        button.textContent = tl(
-                                            trans.bulk_edit
-                                        );
-                                        button.setAttribute(
-                                            'data-type',
-                                            'bulk-edit'
-                                        );
-
-                                        tippy(button, {
-                                            content: tl(trans.bulk_edit)
-                                        });
-
-                                        return button;
                                     }}
+                                    ${bulk_edit_button ? html.node`
+                                        <div class="button-combo-sep" />
+                                        ${() => {
+                                            let button =
+                                                track_legacy_menu.querySelector(
+                                                    '[data-analytics-action="BulkEditScrobblesOpen"]'
+                                                ).cloneNode();
+                                            button.classList =
+                                                'dropdown-menu-clickable-item chibi';
+                                            button.textContent = tl(
+                                                trans.bulk_edit
+                                            );
+                                            button.setAttribute(
+                                                'data-type',
+                                                'bulk-edit'
+                                            );
+
+                                            tippy(button, {
+                                                content: tl(trans.bulk_edit)
+                                            });
+
+                                            return button;
+                                        }}
+                                    ` : ''}
+                                </div>
+                                ${can_copy_scrobble ? html.node`
+                                    <button class="dropdown-menu-clickable-item" data-type="copy_scrobble" onclick=${() => {
+                                        submit_scrobble({
+                                            pre_track: track_title.getAttribute('data-name'),
+                                            pre_artist: track_artist,
+                                            pre_album: alt,
+                                            pre_album_artist: album_artist,
+                                            pre_timestamp: timestamp
+                                        });
+                                    }}>
+                                        ${tl(trans.copy)}
+                                    </button>
                                 ` : ''}
-                            </div>
-                            ${can_copy_scrobble ? html.node`
-                                <button class="dropdown-menu-clickable-item" data-type="copy_scrobble" onclick=${() => {
-                                    submit_scrobble({
-                                        pre_track: track_title.getAttribute('data-name'),
-                                        pre_artist: track_artist,
-                                        pre_album: alt,
-                                        pre_album_artist: album_artist,
-                                        pre_timestamp: timestamp
-                                    });
-                                }}>
-                                    ${tl(trans.copy)}
-                                </button>
-                            ` : ''}
-                            <div class="sep" />
+                                <div class="sep" />
                             ` : can_copy_scrobble ? html.node`
                                 <button class="dropdown-menu-clickable-item" data-type="copy_scrobble" onclick=${() => {
                                     submit_scrobble({
@@ -767,6 +769,23 @@ export function patch_titles(search = page.structure.main) {
                                 }}>
                                     ${tl(trans.copy)}
                                 </button>
+                                <div class="sep" />
+                            ` : bulk_edit_button ? html.node`
+                                ${() => {
+                                    let button =
+                                        track_legacy_menu.querySelector(
+                                            '[data-analytics-action="BulkEditScrobblesOpen"]'
+                                        );
+                                    button.textContent = tl(
+                                        trans.bulk_edit
+                                    );
+                                    button.setAttribute(
+                                        'data-type',
+                                        'bulk-edit'
+                                    );
+
+                                    return button;
+                                }}
                                 <div class="sep" />
                             ` : ''}
                             ${() => {
