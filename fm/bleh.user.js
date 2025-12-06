@@ -49370,7 +49370,7 @@
       func_select: on_selection,
       submit_on_character: true
     });
-    const editor = textarea.editor;
+    const editor = textarea.editor();
     function on_selection(editor2, val, has_selection = true) {
       let sel_start;
       let sel_end;
@@ -49481,15 +49481,20 @@
                     ${group.map((item) => {
       const button2 = html.node`
                             <button class="markdown-action" data-type=${item.type} aria-checked="false" onclick=${() => {
-        if (!item.end && item.start) item.end = item.start;
+        if (item.end == null && item.start != null) item.end = item.start;
         const val = textarea.value();
-        if (item.start && item.end) {
+        if (item.start != null && item.end != null) {
           const sel_start = editor.selectionStart;
           const sel_end = editor.selectionEnd;
           const selected = val.slice(sel_start, sel_end);
           let replacement;
           if (selected.startsWith(item.start) && selected.startsWith(item.end)) {
-            replacement = selected.slice(item.start.length, -1 * item.end.length);
+            let replace_end = -1 * item.end.length;
+            if (replace_end != -0) {
+              replacement = selected.slice(item.start.length, replace_end);
+            } else {
+              replacement = selected.slice(item.start.length);
+            }
           } else {
             replacement = `${item.start}${selected}${item.end}`;
           }
