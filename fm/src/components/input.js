@@ -27,6 +27,8 @@ export function input({
     name,
     func,
     func_esc,
+    func_select,
+    func_mouseup,
     submit_on_character = false,
     value_in_iso = false,
     cols,
@@ -90,6 +92,14 @@ export function input({
                 if (func) func(input_box.value);
             }, 1);
         }
+    });
+
+    input_box.addEventListener('select', () => {
+        if (func_select) func_select(input_box, input_box.value);
+    });
+
+    input_box.addEventListener('mouseup', () => {
+        if (func_mouseup) func_mouseup(input_box, input_box.value);
     });
 
     container.submit = () => {

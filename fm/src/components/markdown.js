@@ -941,8 +941,37 @@ export function markdown_field(value, name, cols, rows, placeholder) {
         name,
         cols,
         rows,
-        placeholder
+        placeholder,
+        func: () => {
+            on_selection(null, null, false);
+        },
+        func_mouseup: () => {
+            on_selection(null, null, false);
+        },
+        func_select: on_selection,
+        submit_on_character: true
     });
+
+    function on_selection(editor, val, has_selection = true) {
+        let sel_start;
+        let sel_end;
+        let selected = '';
+
+        if (has_selection) {
+            sel_start = editor.selectionStart;
+            sel_end = editor.selectionEnd;
+
+            selected = val.slice(sel_start, sel_end);
+        }
+
+        const is_bold = selected.startsWith('**') && selected.endsWith('**');
+
+        action_lookup.header.setAttribute('aria-checked', selected.startsWith('# '));
+        action_lookup.bold.setAttribute('aria-checked', is_bold);
+        action_lookup.italic.setAttribute('aria-checked', !is_bold && selected.startsWith('*') && selected.endsWith('*'));
+    }
+
+    const action_lookup = [];
 
     const action_list = [
         [
@@ -1025,6 +1054,8 @@ export function markdown_field(value, name, cols, rows, placeholder) {
                                 ${item.name}
                             </button>
                         `;
+
+                        action_lookup[item.type] = button;
 
                         tippy(button, {
                             content: item.name

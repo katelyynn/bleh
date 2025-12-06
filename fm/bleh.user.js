@@ -30903,6 +30903,8 @@
     name,
     func,
     func_esc,
+    func_select,
+    func_mouseup,
     submit_on_character = false,
     value_in_iso = false,
     cols,
@@ -30954,6 +30956,12 @@
           if (func) func(input_box.value);
         }, 1);
       }
+    });
+    input_box.addEventListener("select", () => {
+      if (func_select) func_select(input_box, input_box.value);
+    });
+    input_box.addEventListener("mouseup", () => {
+      if (func_mouseup) func_mouseup(input_box, input_box.value);
     });
     container.submit = () => {
       if (func) func(input_box.value);
@@ -49343,8 +49351,31 @@
       name,
       cols,
       rows,
-      placeholder
+      placeholder,
+      func: () => {
+        on_selection(null, null, false);
+      },
+      func_mouseup: () => {
+        on_selection(null, null, false);
+      },
+      func_select: on_selection,
+      submit_on_character: true
     });
+    function on_selection(editor, val, has_selection = true) {
+      let sel_start;
+      let sel_end;
+      let selected = "";
+      if (has_selection) {
+        sel_start = editor.selectionStart;
+        sel_end = editor.selectionEnd;
+        selected = val.slice(sel_start, sel_end);
+      }
+      const is_bold = selected.startsWith("**") && selected.endsWith("**");
+      action_lookup.header.setAttribute("aria-checked", selected.startsWith("# "));
+      action_lookup.bold.setAttribute("aria-checked", is_bold);
+      action_lookup.italic.setAttribute("aria-checked", !is_bold && selected.startsWith("*") && selected.endsWith("*"));
+    }
+    const action_lookup = [];
     const action_list = [
       [
         {
@@ -49425,6 +49456,7 @@
                                 ${item.name}
                             </button>
                         `;
+      action_lookup[item.type] = button2;
       tippy_esm_default(button2, {
         content: item.name
       });
