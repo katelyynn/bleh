@@ -14,6 +14,7 @@ import { download_with_progress } from '../build/tools.js';
 import { status } from '../components/status.js';
 import { dialog } from '../components/dialog.js';
 import { setting } from '../components/settings.js';
+import { markdown_field } from '../components/markdown.js';
 
 export function mualani() {
     page.structure.container = document.body.querySelector('.page-content');
@@ -146,6 +147,10 @@ export function mualani() {
                 <button class="continue" onclick=${() => dialog_loop()}>
                     Open dialog loop
                 </button>
+            </section>
+            <section class="flexy">
+                <h2>Markdown</h2>
+                ${markdown_field()}
             </section>
         `
     );

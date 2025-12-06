@@ -23,6 +23,7 @@ import { sponsor_list } from '../build/sponsor.js';
 import { fetch_status } from './statuscafe.js';
 import tippy from 'tippy.js';
 import { DateTime } from 'luxon';
+import { input } from './input.js';
 
 export function markdown(
     text,
@@ -931,4 +932,118 @@ export function external_url_prompt(url, dangerous = false) {
             </div>
         `
     });
+}
+
+export function markdown_field(value, name, cols, rows, placeholder) {
+    const textarea = input({
+        type: 'textarea',
+        value,
+        name,
+        cols,
+        rows,
+        placeholder
+    });
+
+    const action_list = [
+        [
+            {
+                type: 'header',
+                name: 'Header'
+            },
+            {
+                type: 'bold',
+                name: 'Bold'
+            },
+            {
+                type: 'italic',
+                name: 'Italics'
+            },
+            {
+                type: 'strike',
+                name: 'Strikethrough'
+            },
+            {
+                type: 'underline',
+                name: 'Underline'
+            }
+        ],
+        [
+            {
+                type: 'link',
+                name: 'Link'
+            },
+            {
+                type: 'mention',
+                name: 'Mention'
+            },
+            {
+                type: 'quote',
+                name: 'Quote'
+            },
+            {
+                type: 'code',
+                name: 'Code'
+            },
+            {
+                type: 'image',
+                name: 'Image'
+            }
+        ],
+        [
+            {
+                type: 'ul',
+                name: 'List'
+            },
+            {
+                type: 'ol',
+                name: 'Numbered list'
+            }
+        ],
+        [
+            {
+                type: 'align-left',
+                name: 'Left align'
+            },
+            {
+                type: 'align-center',
+                name: 'Center align'
+            },
+            {
+                type: 'align-right',
+                name: 'Right align'
+            }
+        ]
+    ];
+
+    const actions = html.node`
+        <div class="markdown-actions">
+            ${action_list.map((group, index) => html.node`
+                <div class="group">
+                    ${group.map(item => {
+                        const button = html.node`
+                            <button class="markdown-action" data-type=${item.type} aria-checked="false">
+                                ${item.name}
+                            </button>
+                        `;
+
+                        tippy(button, {
+                            content: item.name
+                        });
+
+                        return button;
+                    })}
+                </div>
+                ${index < action_list.length - 1 ? html.node`
+                    <div class="group-sep" />
+                ` : ''}
+            `)}
+        </div>
+    `;
+
+    return html.node`
+        <div class="markdown-field">
+            ${actions}
+            ${textarea}
+        </div>
+    `;
 }

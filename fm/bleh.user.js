@@ -30904,7 +30904,9 @@
     func,
     func_esc,
     submit_on_character = false,
-    value_in_iso = false
+    value_in_iso = false,
+    cols,
+    rows
   }) {
     if (type == "date") {
       return calendar({
@@ -30924,7 +30926,7 @@
         <div class="content-form input-container colourful" data-type=${type} data-has-error="false">
             ${type == "colour" ? html.node`<span class="colour-block" ref=${(el) => colour_block = el} />` : ""}
             ${type == "textarea" ? html.node`
-                <textarea class="modern-input" disabled=${disabled} autofocus=${focus} value=${value} placeholder=${placeholder} min=${min2} max=${max2} maxlength=${maxlength} ref=${(el) => input_box = el} />
+                <textarea class="modern-input" disabled=${disabled} autofocus=${focus} value=${value} placeholder=${placeholder} min=${min2} max=${max2} maxlength=${maxlength} cols=${cols} rows=${rows} ref=${(el) => input_box = el} />
             ` : html.node`
                 <input class="modern-input" name=${name} disabled=${disabled} autofocus=${focus} type=${type} value=${value} placeholder=${placeholder} min=${min2} max=${max2} maxlength=${maxlength} ref=${(el) => input_box = el} />
             `}
@@ -49334,6 +49336,114 @@
         `
     });
   }
+  function markdown_field(value, name, cols, rows, placeholder) {
+    const textarea = input({
+      type: "textarea",
+      value,
+      name,
+      cols,
+      rows,
+      placeholder
+    });
+    const action_list = [
+      [
+        {
+          type: "header",
+          name: "Header"
+        },
+        {
+          type: "bold",
+          name: "Bold"
+        },
+        {
+          type: "italic",
+          name: "Italics"
+        },
+        {
+          type: "strike",
+          name: "Strikethrough"
+        },
+        {
+          type: "underline",
+          name: "Underline"
+        }
+      ],
+      [
+        {
+          type: "link",
+          name: "Link"
+        },
+        {
+          type: "mention",
+          name: "Mention"
+        },
+        {
+          type: "quote",
+          name: "Quote"
+        },
+        {
+          type: "code",
+          name: "Code"
+        },
+        {
+          type: "image",
+          name: "Image"
+        }
+      ],
+      [
+        {
+          type: "ul",
+          name: "List"
+        },
+        {
+          type: "ol",
+          name: "Numbered list"
+        }
+      ],
+      [
+        {
+          type: "align-left",
+          name: "Left align"
+        },
+        {
+          type: "align-center",
+          name: "Center align"
+        },
+        {
+          type: "align-right",
+          name: "Right align"
+        }
+      ]
+    ];
+    const actions = html.node`
+        <div class="markdown-actions">
+            ${action_list.map((group, index3) => html.node`
+                <div class="group">
+                    ${group.map((item) => {
+      const button2 = html.node`
+                            <button class="markdown-action" data-type=${item.type} aria-checked="false">
+                                ${item.name}
+                            </button>
+                        `;
+      tippy_esm_default(button2, {
+        content: item.name
+      });
+      return button2;
+    })}
+                </div>
+                ${index3 < action_list.length - 1 ? html.node`
+                    <div class="group-sep" />
+                ` : ""}
+            `)}
+        </div>
+    `;
+    return html.node`
+        <div class="markdown-field">
+            ${actions}
+            ${textarea}
+        </div>
+    `;
+  }
 
   // src/seasonal.js
   function set_season() {
@@ -58511,6 +58621,10 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                 <button class="continue" onclick=${() => dialog_loop()}>
                     Open dialog loop
                 </button>
+            </section>
+            <section class="flexy">
+                <h2>Markdown</h2>
+                ${markdown_field()}
             </section>
         `
     );
