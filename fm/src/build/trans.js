@@ -38,8 +38,8 @@ export let lang_info = {
     },
     pl: {
         name: 'Polski',
-        by: ['iwas15with100k', 'zaktusii'],
-        last_updated: '2025-12-05'
+        by: ['zaktusii', 'iwas15with100k'],
+        last_updated: '2025-12-06'
     },
     pt: {
         name: 'Português',
@@ -768,7 +768,7 @@ export const trans = {
             pt: 'Amigo(a) favorito(a)',
             sv: 'Stjärnmärkt vän',
             ru: 'Избранный друг',
-            pl: 'Znajomi oznaczeni gwiazdą'
+            pl: 'Znajomi oznaczeni jako ulubieni'
         },
         body: {
             en: 'View their scrobbles alongside yours at all times',
@@ -861,7 +861,7 @@ export const trans = {
         pt: 'Status de favorito adicionado',
         sv: 'Stjärnmärkte',
         ru: 'Добавлен в избранное',
-        pl: 'Dodano status gwiazdy'
+        pl: 'Dodano do ulubionych'
     },
     add_as_starred_friend: {
         en: 'Star friend',
@@ -871,7 +871,7 @@ export const trans = {
         pt: 'Favoritar amigo(a)',
         sv: 'Stjärnmärk vän',
         ru: 'Добавить друга в избранное',
-        pl: 'Oznacz znajomego gwiazdą'
+        pl: 'Oznacz znajomego jako ulubieni'
     },
     removed_star: {
         en: 'Removed star status',
@@ -881,7 +881,7 @@ export const trans = {
         pt: 'Status de favorito removido',
         sv: 'Tog bort stjärnmärke',
         ru: 'Удален из избранного',
-        pl: 'Usunięto status gwiazdy'
+        pl: 'Usunięto z ulubionych'
     },
     remove_as_star_friend: {
         en: 'Remove star status',
@@ -891,7 +891,7 @@ export const trans = {
         pt: 'Remover estado de favorito',
         sv: 'Ta bort stjärnmärke',
         ru: 'Удалить из избранного',
-        pl: 'Usuń gwiazdę'
+        pl: 'Usuń z ulubionych'
     },
     aka: {
         en: 'aka.',
@@ -2276,7 +2276,8 @@ export const trans = {
         it: 'Personalizza',
         pt: 'Customizar',
         sv: 'Anpassa',
-        ru: 'Настроить'
+        ru: 'Настроить',
+        pl: 'Dostosuj'
     },
     convert: {
         en: 'Convert',
@@ -2285,7 +2286,8 @@ export const trans = {
         it: 'Converti',
         pt: 'Converter',
         sv: 'Konvertera',
-        ru: 'Конвертировать'
+        ru: 'Конвертировать',
+        pl: 'Konwertuj'
     },
     convert_from_hex: {
         en: 'Convert colour',
@@ -2294,7 +2296,8 @@ export const trans = {
         it: 'Converti colore',
         pt: 'Converter cor',
         sv: 'Konvertera färg',
-        ru: 'Конвертировать цвет'
+        ru: 'Конвертировать цвет',
+        pl: 'Konwertuj kolor'
     },
     fonts: {
         en: 'Fonts',
@@ -2303,7 +2306,8 @@ export const trans = {
         it: 'Font',
         pt: 'Fontes',
         sv: 'Typsnitt',
-        ru: 'Шрифты'
+        ru: 'Шрифты',
+        pl: 'Czcionki'
     },
     hue: {
         en: 'Accent colour',
@@ -2343,7 +2347,8 @@ export const trans = {
             it: 'Attiva effetti di vetro del solario',
             pt: 'Ativar efeitos de vidro Solarium',
             sv: 'Aktivera solariumsglaseffekter',
-            ru: 'Включить эффект матового стекла Solarium'
+            ru: 'Включить эффект матового стекла Solarium',
+            pl: 'Włącz efekty szkła solarnego'
         },
         body: {
             en: 'Apply a see-through glassy material to many surfaces, which may degrade performance on some devices',
@@ -2352,7 +2357,8 @@ export const trans = {
             it: 'Applica un materiale vetrato traslucido a molte superfici, che potrebbe degradare le prestazioni su alcuni dispositivi',
             pt: 'Aplicar um material translúcido e vidrado a várias superfícies, o que pode reduzir o desempenho em alguns dispositivos',
             sv: 'Läg till ett genomskinligt glasliknande material till många ytor, som kan degradera prestanda på vissa enheter',
-            ru: 'Применяет полупрозрачный стеклянный материал ко многим поверхностям, что может снизить производительность на некоторых устройствах'
+            ru: 'Применяет полупрозрачный стеклянный материал ко многим поверхностям, что может снизить производительность на некоторых устройствах',
+            pl: 'Włącz przezroczyste szkło na wielu powierzchniach, które może mieć wpływ na wydajność na niektórych urządzeniach'
         }
     },
     seasonal_warning: {
@@ -2362,7 +2368,8 @@ export const trans = {
         it: 'Questa stagione ha un colore di accento predefinito personalizzato!',
         pt: 'Esta estação tem uma cor de destaque personalizada!',
         sv: 'Denna årstid har en anpassad färg!',
-        ru: 'Этот сезон имеет собственный акцентный цвет по умолчанию!'
+        ru: 'Этот сезон имеет собственный акцентный цвет по умолчанию!',
+        pl: 'Ten sezon ma własne podstawowe kolory akcentu!'
     },
     card_background_saturation: {
         name: {
@@ -2372,7 +2379,8 @@ export const trans = {
             it: 'Vivacità dello sfondo delle carte',
             pt: 'Vivacidade de fundo do cartão',
             sv: 'Bakgrundsfärg',
-            ru: 'Насыщенность фона карточки'
+            ru: 'Насыщенность фона карточки',
+            pl: 'Nasycenie tła kart'
         },
         body: {
             en: 'Bring some colour into your world (or reduce it)',
@@ -2381,7 +2389,8 @@ export const trans = {
             it: 'Porta un po\' di colore nella tua vita (o riducilo)',
             pt: 'Traz algumas cores ao mundo (ou diminui elas)',
             sv: 'Skaffa lite färg i din värld (eller minska den)',
-            ru: 'Добавьте красок в свой мир (или уменьшите их)'
+            ru: 'Добавьте красок в свой мир (или уменьшите их)',
+            pl: 'Doadaj troche koloru do swojego świata (albo się go pozbądź)'
         }
     },
     noise: {
@@ -2391,7 +2400,8 @@ export const trans = {
             it: 'Opacità della sovrapposizione di rumore',
             sv: 'Brusöverläggsopacitet',
             ru: 'Непрозрачность наложения шума',
-            pt: 'Opacidade da sobreposição de ruído'
+            pt: 'Opacidade da sobreposição de ruído',
+            pl: "Nakrycie nakładki szumu"
         },
         body: {
             en: 'Apply a coat of subtle noise to add variation to solid backgrounds',
@@ -2399,7 +2409,8 @@ export const trans = {
             it: 'Applica un mantello di rumore leggero per aggiungere varietà agli sfondi solidi',
             sv: 'Tillämpa ett brusöverlägg för lite variation på enfärgade bakgrunder',
             ru: 'Наложить тонкий слой шума, чтобы добавить разнообразия однотонным фонам',
-            pt: 'Aplica uma camada de ruído sutil para adicionar variação a fundos sólidos'
+            pt: 'Aplica uma camada de ruído sutil para adicionar variação a fundos sólidos',
+            pl: 'Dodaj troche szumum żeby otrzymać nasycenie na statycznych tłach'
         }
     },
     save: {
@@ -2429,7 +2440,8 @@ export const trans = {
         it: 'Aggiungi',
         pt: 'Adicionar',
         sv: 'Lägg till',
-        ru: 'Добавить'
+        ru: 'Добавить',
+        pl: 'Dodaj'
     },
     remove: {
         en: 'Remove',
@@ -2438,7 +2450,8 @@ export const trans = {
         it: 'Rimuovi',
         pt: 'Remover',
         sv: 'Radera',
-        ru: 'Удалить'
+        ru: 'Удалить',
+        pl: 'Usuń'
     },
     clear: {
         en: 'Clear',
@@ -2467,7 +2480,8 @@ export const trans = {
         it: 'Vai',
         pt: 'Ir',
         sv: 'Gå',
-        ru: 'Перейти'
+        ru: 'Перейти',
+        pl: 'Idź'
     },
     skip: {
         en: 'Skip',
@@ -2476,7 +2490,8 @@ export const trans = {
         it: 'Salta',
         pt: 'Pular',
         sv: 'Hoppa över',
-        ru: 'Пропустить'
+        ru: 'Пропустить',
+        pl: 'Pomiń'
     },
     send: {
         en: 'Send',
@@ -2485,7 +2500,8 @@ export const trans = {
         it: 'Invia',
         pt: 'Enviar',
         sv: 'Skicka',
-        ru: 'Отправить'
+        ru: 'Отправить',
+        pl: 'Wyśli'
     },
     done: {
         en: 'Done',
@@ -2504,7 +2520,8 @@ export const trans = {
         it: 'Termina',
         pt: 'Terminar',
         sv: 'Klart',
-        ru: 'Завершить'
+        ru: 'Завершить',
+        pl: 'Zakończ'
     },
     continue: {
         en: 'Continue',
@@ -2523,7 +2540,8 @@ export const trans = {
         it: 'Clicca per più opzioni',
         sv: 'Tryck för mer alternativ',
         ru: 'Нажмите, чтобы увидеть больше опций',
-        pt: 'Clique para mais opções'
+        pt: 'Clique para mais opções',
+        pl: 'Kliknij żeby zobaczyć więcej opcji'
     },
     right_click_for_more_options: {
         en: 'Right-click for more options',
@@ -2532,7 +2550,8 @@ export const trans = {
         it: 'Tasto destro per più opzioni',
         pt: 'Clique esquerdo para mais opções',
         sv: 'Högerklicka för mer alternativ',
-        ru: 'Нажмите правой кнопкой мыши для дополнительных опций'
+        ru: 'Нажмите правой кнопкой мыши для дополнительных опций',
+        pl: 'Naciśnij prawy przycisk myszy aby zobaczyć więcej opcji'
     },
     refresh_pending: {
         name: {
@@ -2542,7 +2561,8 @@ export const trans = {
             it: 'Aggiornamento in attesa',
             pt: 'Atualizar pendências',
             sv: 'Förväntar omladdning',
-            ru: 'Требуется обновление'
+            ru: 'Требуется обновление',
+            pl: 'Oczekuje na odświeżenie'
         },
         body: {
             en: 'A setting you changed requires a page refresh',
@@ -2551,7 +2571,8 @@ export const trans = {
             it: 'Un\'opzione che hai cambiato richiede un aggiornamento della pagina',
             pt: 'Uma configuração que você mudou exige uma atualização de página',
             sv: 'En inställning du ändrade på behöver at sidan laddas om',
-            ru: 'Изменённая вами настройка требует обновления страницы'
+            ru: 'Изменённая вами настройка требует обновления страницы',
+            pl: 'Jedno z ustawień które zmieniliście wymaga odświeżenia strony'
         }
     },
     new: {
@@ -2561,7 +2582,8 @@ export const trans = {
         it: 'Nuovo',
         pt: 'Nova',
         sv: 'Ny',
-        ru: 'Новое'
+        ru: 'Новое',
+        pl: "Nowe"
     },
     beta: {
         en: 'Beta',
@@ -2570,7 +2592,8 @@ export const trans = {
         it: 'Beta',
         sv: 'Beta',
         ru: 'Бета',
-        pt: 'Beta'
+        pt: 'Beta',
+        pl: 'Beta'
     },
     more: {
         en: 'More',
@@ -2579,7 +2602,8 @@ export const trans = {
         it: 'Altro',
         pt: 'Mais',
         sv: 'Mer',
-        ru: 'Еще'
+        ru: 'Еще',
+        pl: 'Więcej'
     },
     inbox: {
         en: 'Inbox',
@@ -2588,7 +2612,8 @@ export const trans = {
         it: 'Posta in arrivo',
         pt: 'Caixa de entrada',
         sv: 'Brevlåda',
-        ru: 'Входящие'
+        ru: 'Входящие',
+        pl: 'Poczta'
     },
     notifications: {
         en: 'Notifications',
@@ -2597,7 +2622,8 @@ export const trans = {
         it: 'Notifiche',
         pt: 'Notificações',
         sv: 'Notiser',
-        ru: 'Уведомления'
+        ru: 'Уведомления',
+        pl: 'Powiadomienia'
     },
     messages: {
         en: 'Messages',
@@ -2606,7 +2632,8 @@ export const trans = {
         it: 'Messaggi',
         pt: 'Mensagens',
         sv: 'Meddelanden',
-        ru: 'Сообщения'
+        ru: 'Сообщения',
+        pl: 'Wiadomości'
     },
     preview: {
         en: 'Preview',
@@ -2615,7 +2642,8 @@ export const trans = {
         it: 'Anteprima',
         sv: 'Förhandsvisning',
         ru: 'Предпросмотр',
-        pt: 'Pré-visualização'
+        pt: 'Pré-visualização',
+        pl: 'Podgląd'
     },
     find_on: {
         // music services to find an artist/album/track on
@@ -2625,7 +2653,8 @@ export const trans = {
         it: 'Trova su',
         pt: 'Encontre em',
         sv: 'Sök upp på',
-        ru: 'Найти на'
+        ru: 'Найти на',
+        pl: 'Dostępne na'
     },
     following: {
         en: 'Following',
@@ -2634,7 +2663,8 @@ export const trans = {
         it: 'Following',
         pt: 'Seguindo',
         sv: 'Följer',
-        ru: 'Подписки'
+        ru: 'Подписки',
+        pl: 'Obserwuje'
     },
     followers: {
         en: 'Followers',
@@ -2643,7 +2673,8 @@ export const trans = {
         it: 'Follower',
         pt: 'Seguidores',
         sv: 'Följare',
-        ru: 'Подписчики'
+        ru: 'Подписчики',
+        pl: 'Obserwujący'
     },
     neighbours: {
         en: 'Neighbours',
@@ -2652,7 +2683,8 @@ export const trans = {
         it: 'Vicini',
         pt: 'Vizinhos',
         sv: 'Grannar',
-        ru: 'Соседи'
+        ru: 'Соседи',
+        pl: 'Sąsiedzi'
     },
     website: {
         en: 'Website',
@@ -2661,7 +2693,8 @@ export const trans = {
         it: 'Sito web',
         sv: 'Hemsida',
         ru: 'Вебсайт',
-        pt: 'Website'
+        pt: 'Website',
+        pl: 'Strona'
     },
     overview: {
         en: 'Overview',
@@ -2671,7 +2704,8 @@ export const trans = {
         pt: 'Visão geral',
         ja: 'ダイジェスト',
         sv: 'Översikt',
-        ru: 'Обзор'
+        ru: 'Обзор',
+        pl: 'Przegląd'
     },
     photos: {
         en: 'Photos',
@@ -2681,7 +2715,8 @@ export const trans = {
         pt: 'Fotos',
         ja: '写真',
         sv: 'Foton',
-        ru: 'Фотографии'
+        ru: 'Фотографии',
+        pl: 'Zdjęcia'
     },
     artwork: {
         en: 'Artwork',
@@ -2690,7 +2725,8 @@ export const trans = {
         it: 'Copertina',
         pt: 'Arte de capa',
         sv: 'Konst',
-        ru: 'Обложка'
+        ru: 'Обложка',
+        pl: 'Okładka'
     },
     gallery_sum: {
         en: 'This is the sum of votes for ordering',
@@ -2698,7 +2734,8 @@ export const trans = {
         it: 'Questa è la somma dei voti per l\'ordinamento',
         sv: 'Det här är summan röster för bildordning',
         ru: 'Это сумма голосов для сортировки',
-        pt: 'Esta é a soma dos votos para ordenação'
+        pt: 'Esta é a soma dos votos para ordenação',
+        pl: 'Suma głosów za zamówieniem'
     },
     view_saved: {
         en: 'View all saved photos',
@@ -2706,7 +2743,8 @@ export const trans = {
         it: 'Visualizza tutte le foto salvate',
         sv: 'Visa alla sparade foton',
         ru: 'Посмотреть все сохраненные фотографии',
-        pt: 'Veja todas as fotos salvas'
+        pt: 'Veja todas as fotos salvas',
+        pl: 'Pokaż wszystkie zapisane zdjęcia'
     },
     dropzone: {
         en: 'Drag-and-drop an image or click here',
@@ -2715,7 +2753,8 @@ export const trans = {
         it: 'Trascina e rilascia un\'immagine, o clicca qui',
         sv: 'Dra och släpp en bild eller klicka här',
         ru: 'Перетащите изображение или нажмите здесь',
-        pt: 'Arraste e solte uma imagem ou clique aqui'
+        pt: 'Arraste e solte uma imagem ou clique aqui',
+        pl: 'Przeciągnij i upuść zdjęcie lub kliknij tutaj'
     },
     similar_artists: {
         en: 'Similar Artists',
@@ -2724,7 +2763,8 @@ export const trans = {
         it: 'Artisti simili',
         pt: 'Artistas similares',
         sv: 'Liknande artister',
-        ru: 'Похожие исполнители'
+        ru: 'Похожие исполнители',
+        pl: 'Podobni artyści'
     },
     artists_similar_to_name: {
         en: 'Artists similar to {n}',
@@ -2733,7 +2773,8 @@ export const trans = {
         it: 'Artisti simili a {n}',
         sv: 'Liknande artister till {n}',
         pt: 'Artistas similares a {n}',
-        ru: 'Исполнители, похожие на {n}'
+        ru: 'Исполнители, похожие на {n}',
+        pl: 'Artyści podobni do {n}'
     },
     biography: {
         en: 'Biography',
@@ -2743,7 +2784,8 @@ export const trans = {
         pt: 'Biografia',
         ja: 'バイオグラフィー',
         sv: 'Biografi',
-        ru: 'Биография'
+        ru: 'Биография',
+        pl: 'Biografia'
     },
     wiki: {
         en: 'Wiki',
@@ -2752,7 +2794,8 @@ export const trans = {
         it: 'Wiki',
         sv: 'Wiki',
         ru: 'Инфо',
-        pt: 'Wiki'
+        pt: 'Wiki',
+        pl: 'Wiki'
     },
     listeners: {
         en: 'Listeners',
@@ -2761,7 +2804,8 @@ export const trans = {
         it: 'Ascoltatori',
         pt: 'Ouvintes',
         sv: 'Lyssnare',
-        ru: 'Слушатели'
+        ru: 'Слушатели',
+        pl: 'Słuchacze'
     },
     listeners_you_know: {
         en: 'Listeners You Know',
@@ -2770,7 +2814,8 @@ export const trans = {
         it: 'Ascoltatori che conosci',
         pt: 'Ouvintes que você conhece',
         sv: 'Lyssnare du känner',
-        ru: 'Знакомые слушатели'
+        ru: 'Знакомые слушатели',
+        pl: 'Słuchacze których znasz'
     },
     count_listeners: {
         en: '{c} listeners',
@@ -2779,7 +2824,8 @@ export const trans = {
         it: '{c} ascoltatori',
         pt: '{c} ouvintes',
         sv: '{c} lyssnare',
-        ru: '{c} слушателей'
+        ru: '{c} слушателей',
+        pl: '{c} słuchaczy'
     },
     tag: {
         en: 'Tag',
@@ -2788,7 +2834,8 @@ export const trans = {
         it: 'Tag',
         sv: 'Tagg',
         ru: 'Тег',
-        pt: 'Tag'
+        pt: 'Tag',
+        pl: 'Etykieta'
     },
     tags: {
         en: 'Tags',
@@ -2798,7 +2845,8 @@ export const trans = {
         ja: 'タグ',
         sv: 'Taggar',
         ru: 'Теги',
-        pt: 'Tags'
+        pt: 'Tags',
+        pl: 'Etykiety'
     },
     reports: {
         // last.fm listening reports
@@ -2809,7 +2857,8 @@ export const trans = {
         ja: 'レポート',
         pt: 'Relatório',
         sv: 'Lyssningsrapport',
-        ru: 'Отчеты'
+        ru: 'Отчеты',
+        pl: 'Reporty'
     },
     artist_lower: {
         // used inside a sentence not on its own,
@@ -2820,7 +2869,8 @@ export const trans = {
         it: 'artista',
         pt: 'artista',
         sv: 'artistnamnet',
-        ru: 'исполнитель'
+        ru: 'исполнитель',
+        pl: 'artysta'
     },
     album_lower: {
         // used inside a sentence not on its own,
@@ -2831,7 +2881,8 @@ export const trans = {
         it: 'album',
         pt: 'álbum',
         sv: 'albumtiteln',
-        ru: 'альбом'
+        ru: 'альбом',
+        pl: 'album'
     },
     track_lower: {
         // used inside a sentence not on its own,
@@ -2842,7 +2893,8 @@ export const trans = {
         it: 'brano',
         pt: 'faixa',
         sv: 'låten',
-        ru: 'трек'
+        ru: 'трек',
+        pl: 'utwór'
     },
     lotus_cta: {
         // {t} is replaced by one of the 3 above
@@ -2858,7 +2910,8 @@ export const trans = {
             it: 'L\'uso delle maiuscole per questo {t} sta venendo modificato, è corretto?',
             pt: '{t} teve a capitalização ajustada, está correto?',
             sv: 'Nuvarande {t} har ändrad kapitalisering, stämmer det här?',
-            ru: 'В этом {t} исправляется регистр, является ли он правильным?'
+            ru: 'В этом {t} исправляется регистр, является ли он правильным?',
+            pl: '{t} został innaczej skapitalizowany, czy tak jest poprawnie?'
         },
         false: {
             en: 'Is this {t} capitalised correctly?',
@@ -2867,7 +2920,8 @@ export const trans = {
             it: 'L\'uso delle maiuscole per questo {t} è corretto?',
             pt: 'Esse(a) {t} está capitalizado(a) corretamente?',
             sv: 'Stämmer kapitaliseringen på {t}?',
-            ru: 'Правильно ли написан регистр этого {t}?'
+            ru: 'Правильно ли написан регистр этого {t}?',
+            pl: 'Czy {t} jest poprawnie skapitalizowany?'
         }
     },
     current: {
@@ -2877,7 +2931,8 @@ export const trans = {
         it: 'Attuale',
         sv: 'Nuvarande',
         ru: 'Текущий',
-        pt: 'Atual'
+        pt: 'Atual',
+        pl: 'Aktualny'
     },
     current_tip: {
         en: 'This is the original capitalisation present on Last.fm',
@@ -2886,7 +2941,8 @@ export const trans = {
         it: 'Questo è l\'uso delle maiuscole originale presente su Last.fm',
         sv: 'Det här är den originella kapitaliseringen som finns på Last.fm',
         ru: 'Это исходный регистр, предоставленный на Last.fm',
-        pt: 'Esta é a capitalização original presente no Last.fm'
+        pt: 'Esta é a capitalização original presente no Last.fm',
+        pl: 'To jest orginalna kapitalizacja z Last.fm'
     },
     correction: {
         en: 'Correction',
@@ -2895,7 +2951,8 @@ export const trans = {
         it: 'Correzione',
         pt: 'Correção',
         sv: 'Korrigering',
-        ru: 'Исправление'
+        ru: 'Исправление',
+        pl: 'Poprawa'
     },
     correction_tip: {
         en: 'This is the correct capitalisation, as decided by the artist',
@@ -2904,7 +2961,8 @@ export const trans = {
         it: 'Questo è l\'uso delle maiuscole corretto, come deciso dall\'artista',
         sv: 'Det här är rätt kapitalisering, som bestämd av artisten',
         ru: 'Это правильный регистр, определенный исполнителем',
-        pt: 'Esta é a capitalização correta, conforme decidido pelo artista'
+        pt: 'Esta é a capitalização correta, conforme decidido pelo artista',
+        pl: 'To jest poprawna kapitalizacja, według artysty'
     },
     sources: {
         en: 'Sources',
@@ -2913,7 +2971,8 @@ export const trans = {
         it: 'Sorgenti',
         sv: 'Källor',
         ru: 'Источники',
-        pt: 'Fontes'
+        pt: 'Fontes',
+        pl: 'Źródła'
     },
     sources_tip: {
         en: 'Provide reputable sources where this capitalisation is present, excluding sites like Wikipedia, RYM, AOTY, and MusicBrainz',
@@ -2922,7 +2981,8 @@ export const trans = {
         it: 'Fornisci sorgenti attendibili dove questo uso delle maiuscole è presente, esclusi siti come Wikipedia, RYM, AOTY o MusicBrainz',
         sv: 'Visa pålitliga källor där man kan se att denna kapitalisering stämmer, förutom sidor som Wikipedia, RYM, AOTY och MusicBrainz',
         ru: 'Укажите авторитетные источники, где присутствует этот регистр, исключая такие сайты, как Wikipedia, RYM, AOTY и MusicBrainz',
-        pt: 'Forneça fontes confiáveis onde esta capitalização está presente, excluindo sites como Wikipedia, RYM, AOTY e MusicBrainz'
+        pt: 'Forneça fontes confiáveis onde esta capitalização está presente, excluindo sites como Wikipedia, RYM, AOTY e MusicBrainz',
+        pl: 'Podaj zaufane źródło gdzie tak jest podana kapitalizacja, poza stronami jak Wikipedia, RYM, AOTY i MusicBrainz'
     },
     suggest: {
         en: 'Suggest',
@@ -2931,7 +2991,8 @@ export const trans = {
         it: 'Suggerisci',
         sv: 'Föreslå',
         ru: 'Предложить',
-        pt: 'Sugerir'
+        pt: 'Sugerir',
+        pl: 'Zasugeruj'
     },
     please_match_the_format: {
         en: 'Only capitalisation changes are allowed',
@@ -2940,7 +3001,8 @@ export const trans = {
         it: 'Sono consentiti solo i cambi relativi all\'uso delle maiuscole',
         sv: 'Endast ändringar på kapitalisering är tillåtet',
         ru: 'Допускаются только изменения регистра',
-        pt: 'Apenas mudanças de capitalização são permitidas'
+        pt: 'Apenas mudanças de capitalização são permitidas',
+        pl: 'Tylko zmiany kapitalizacji są dozwolone'
     },
     suggest_correction: {
         // suggest a correction for the above system
@@ -2950,7 +3012,8 @@ export const trans = {
         it: 'Suggerisci una correzione',
         pt: 'Sugira uma correção',
         sv: 'Föreslå en ändring',
-        ru: 'Предложить исправление'
+        ru: 'Предложить исправление',
+        pl: 'Zasugeruj poprawe'
     },
     recent_tracks: {
         en: 'Recent Tracks',
@@ -2960,7 +3023,8 @@ export const trans = {
         pt: 'Faixas recentes',
         ja: '最近のトラック',
         sv: 'Nyligen spelat',
-        ru: 'Недавние треки'
+        ru: 'Недавние треки',
+        pl: 'Ostatnie utwory'
     },
     top_artists: {
         en: 'Top Artists',
@@ -2970,7 +3034,8 @@ export const trans = {
         pt: 'Top Artistas',
         ja: 'トップアーティスト',
         sv: 'Toppartister',
-        ru: 'Лучшие исполнители'
+        ru: 'Лучшие исполнители',
+        pl: 'Najpopularniejsi wykonawcy'
     },
     top_albums: {
         en: 'Top Albums',
@@ -2980,7 +3045,8 @@ export const trans = {
         pt: 'Top Álbuns',
         ja: '人気アルバム',
         sv: 'Toppalbum',
-        ru: 'Лучшие альбомы'
+        ru: 'Лучшие альбомы',
+        pl: 'Najpopularniejsze albumy'
     },
     top_tracks: {
         en: 'Top Tracks',
@@ -2990,7 +3056,8 @@ export const trans = {
         pt: 'Top Faixas',
         ja: '人気トラック',
         sv: 'Topplåtar',
-        ru: 'Лучшие треки'
+        ru: 'Лучшие треки',
+        pl: 'Najpopularniejsze utwory'
     },
     top_track: {
         en: 'Top Track',
@@ -2999,7 +3066,8 @@ export const trans = {
         it: 'Brano più ascoltato',
         pt: 'Top Faixa',
         sv: 'Topplåt',
-        ru: 'Лучший трек'
+        ru: 'Лучший трек',
+        pl: 'Najpopularniejszy utwór'
     },
     you_share_count_with: {
         // as in your musical taste % between you and someone else
@@ -3011,6 +3079,7 @@ export const trans = {
         pt: 'Voce é {c} compatível',
         sv: 'Du är {c} kompatibel',
         ru: 'Ваша совместимость {c}',
+        pl: 'Jesteście kompatybilni w {c}',
         two: {
             en: '{artist1}, {artist2}',
             de: '{artist1}, {artist2}',
@@ -3019,7 +3088,8 @@ export const trans = {
             pt: '{artist1}, {artist2}',
             sv: '{artist1}, {artist2}',
             ja: '{artist1}、{artist2}',
-            ru: '{artist1}, {artist2}'
+            ru: '{artist1}, {artist2}',
+            pl: '{artist1}, {artist2}',
         },
         three: {
             en: '{artist1}, {artist2}, {artist3}',
@@ -3029,7 +3099,8 @@ export const trans = {
             pt: '{artist1}, {artist2}, {artist3}',
             sv: '{artist1}, {artist2}, {artist3}',
             ja: '{artist1}、{artist2}、{artist3}',
-            ru: '{artist1}, {artist2}, {artist3}'
+            ru: '{artist1}, {artist2}, {artist3}',
+            pl: '{artist1}, {artist2}, {artist3}',
         }
     },
     taste_similarity: {
@@ -3039,7 +3110,8 @@ export const trans = {
         it: 'Similarità dei gusti',
         pt: 'Similaridade de gostos',
         sv: 'Smaklikhet',
-        ru: 'Схожесть вкусов'
+        ru: 'Схожесть вкусов',
+        pl: 'Podobieństwo gustu'
     },
     message: {
         // as in a direct message
@@ -3049,7 +3121,8 @@ export const trans = {
         it: 'Invia messaggio',
         pt: 'Mensagem',
         sv: 'Meddela',
-        ru: 'Сообщение'
+        ru: 'Сообщение',
+        pl: 'Wiadomość'
     },
     join_discord: {
         en: 'Join Discord',
@@ -3058,7 +3131,8 @@ export const trans = {
         it: 'Unisciti al Discord',
         sv: 'Gå med i Discord',
         ru: 'Присоединиться к Discord',
-        pt: 'Junte-se ao Discord'
+        pt: 'Junte-se ao Discord',
+        pl: 'Dołącz na Discord'
     },
     sponsor_details: {
         en: 'Sponsor and badge details',
@@ -3067,7 +3141,8 @@ export const trans = {
         it: 'Dettagli sponsorizzazione e distintivo',
         sv: 'Sponsor och emblemdetaljer',
         ru: 'Сведения о спонсоре и значке',
-        pt: 'Detalhes do apoiador e do emblema'
+        pt: 'Detalhes do apoiador e do emblema',
+        pl: 'Detale sponsora i odznaki'
     },
     sponsor_data: {
         en: 'Sponsor and badge data version {v}',
@@ -3076,7 +3151,8 @@ export const trans = {
         it: 'Versione dei dati di sponsor e distintivi {v}',
         pt: 'Versão da data de apoiador e emblemas',
         sv: 'Sponsor-och-emblemdata, version {v}',
-        ru: 'Данные о спонсорах и значках, версия {v}'
+        ru: 'Данные о спонсорах и значках, версия {v}',
+        pl: 'Dane sponsora i odznaki, wersja {v}'
     },
     sponsor: {
         en: 'Become a sponsor',
@@ -3085,7 +3161,8 @@ export const trans = {
         it: 'Diventa uno sponsor',
         pt: 'Torne-se um apoiador',
         sv: 'Bli en sponsor',
-        ru: 'Стать спонсором'
+        ru: 'Стать спонсором',
+        pl: 'Zostań sponsorem'
     },
     message_sponsor: {
         // rewards meaning a badge for example
@@ -3095,7 +3172,8 @@ export const trans = {
         it: 'Ricevi ricompense da sponsor',
         pt: 'Receba recompensas de apoiador',
         sv: 'Få sponsorpriser',
-        ru: 'Получить награды спонсора'
+        ru: 'Получить награды спонсора',
+        pl: 'Otrzymaj nagrody za sponsora'
     },
     news_sponsor_cta: {
         en: 'Want to support future development of bleh?',
@@ -3104,7 +3182,8 @@ export const trans = {
         it: 'Vuoi supportare il futuro sviluppo di bleh?',
         pt: 'Quer apoiar o desenvolvimento futuro do bleh?',
         sv: 'Vill du stödja blehs framtida utveckling?',
-        ru: 'Хотите поддержать будущую разработку bleh?'
+        ru: 'Хотите поддержать будущую разработку bleh?',
+        pl: 'Czy chcesz wesprzeć przyszły rozwój bleh?'
     },
     support_future_development: {
         // in the context of sponsoring
@@ -3114,7 +3193,8 @@ export const trans = {
         it: 'Supporta lo sviluppo futuro',
         pt: 'Apoie o desenvolvimento futuro',
         sv: 'Stöd framtida utveckling',
-        ru: 'Поддержать будущую разработку'
+        ru: 'Поддержать будущую разработку',
+        pl: 'Wesprzyj przyszły rozwój'
     },
     why_sponsor: {
         en: 'Receive a profile badge and a big thank you from katelyn <3',
@@ -3123,7 +3203,8 @@ export const trans = {
         it: 'Ricevi un distintivo del profilo e un grande grazie da katelyn <3',
         pt: 'Receba um emblema no seu perfil e um obrigadão da katelyn por apoiar <3',
         sv: 'Få ett emblem på din profil och ett stort tack från katelyn <3',
-        ru: 'Получите значок профиля и большую благодарность от katelyn <3'
+        ru: 'Получите значок профиля и большую благодарность от katelyn <3',
+        pl: 'Otrzymasz odznake na profile oraz wielkie podziękowanie od katelyn <3'
     },
     you_are_a_sponsor: {
         en: 'You are a sponsor, thank you! :3',
@@ -3132,7 +3213,8 @@ export const trans = {
         it: 'Sei uno sponsor, grazie! :3',
         pt: 'Você é um apoiador, muito obrigado! :3',
         sv: 'Du är en sponsor, tack så mycket! :3',
-        ru: 'Вы являетесь спонсором, спасибо! :3'
+        ru: 'Вы являетесь спонсором, спасибо! :3',
+        pl: 'Jesteś sponsorem, dzięki wielkie! :3'
     },
     sponsor_get_badge: {
         en: 'A monthly sponsorship grants you a custom badge of your choosing',
@@ -3141,7 +3223,8 @@ export const trans = {
         it: 'Una sponsorizzazione mensile ti permette di ottenere un distintivo personalizzato a tua scelta',
         pt: 'Um apoio mensal lhe dá um emblema personalizado de sua escolha',
         sv: 'Med ett månatligt sponsorskap får du ett emblem du själv kan anpassa',
-        ru: 'Ежемесячное спонсорство предоставляет вам на выбор персонализированный значок'
+        ru: 'Ежемесячное спонсорство предоставляет вам на выбор персонализированный значок',
+        pl: 'Miesięczne wsparcie daje ci własną odznakę do wyboru'
     },
     sponsor_no_badge: {
         en: 'A custom badge is only available with a monthly sponsorship.',
@@ -3150,7 +3233,8 @@ export const trans = {
         it: 'Un distintivo personalizzato è disponibile solo con una sponsorizzazione mensile.',
         pt: 'Um emblema personalizado só está disponível com um apoio mensal.',
         sv: 'Ett eget anpassat emblem finns bara tillgängligt med månatligt sponsorskap.',
-        ru: 'Персонализированный значок доступен только при ежемесячном спонсорстве.'
+        ru: 'Персонализированный значок доступен только при ежемесячном спонсорстве.',
+        pl: 'Własna odznaka wymaga mieśięcznego wsparcia.'
     },
     manage_sponsor: {
         en: 'Manage sponsorship',
@@ -3159,7 +3243,8 @@ export const trans = {
         it: 'Gestione sponsorizzazione',
         pt: 'Gerenciar apoio',
         sv: 'Sponsorskapsinställningar',
-        ru: 'Управление спонсорством'
+        ru: 'Управление спонсорством',
+        pl: 'Zarządzaj sponsorem'
     },
     view: {
         en: 'View',
@@ -3168,7 +3253,8 @@ export const trans = {
         it: 'Visualizza',
         pt: 'Ver',
         sv: 'Visa',
-        ru: 'Просмотреть'
+        ru: 'Просмотреть',
+        pl: 'Pokaż'
     },
     profile_and_badges: {
         en: 'Profile, {c} badges',
@@ -3177,7 +3263,8 @@ export const trans = {
         it: 'Profilo, {c} distintivi',
         pt: 'Perfil, {c} emblemas',
         sv: 'Profil, {c} emblem',
-        ru: 'Профиль, {c} значков'
+        ru: 'Профиль, {c} значков',
+        pl: 'Profil, {c} odznak'
     },
     current_version: {
         en: 'Current version',
@@ -3186,7 +3273,8 @@ export const trans = {
         it: 'Versione corrente',
         pt: 'Versão atual',
         sv: 'Nuvarande version',
-        ru: 'Текущая версия'
+        ru: 'Текущая версия',
+        pl: 'Aktualna wersja'
     },
     manage_data: {
         en: 'Manage data',
@@ -3194,7 +3282,8 @@ export const trans = {
         it: 'Gestione dati',
         sv: 'Hantera data',
         ru: 'Управление данными',
-        pt: 'Gerenciar dados'
+        pt: 'Gerenciar dados',
+        pl: 'Zarządzaj danymi'
     },
     labs: {
         // labs by last.fm
@@ -3204,7 +3293,8 @@ export const trans = {
         it: 'Labs',
         sv: 'Labs',
         ru: 'Лаборатория',
-        pt: 'Labs'
+        pt: 'Labs',
+        pl: 'Laboratorium'
     },
     sponsor_info: {
         en: 'This is a special bleh-managed profile to handle sponsors',
@@ -3213,7 +3303,8 @@ export const trans = {
         it: 'Questo è un profilo speciale controllato da bleh per la gestione delle sponsorizzazioni',
         pt: 'Este é um perfil especial gerenciado pelo bleh para lidar com apoiadores',
         sv: 'Detta är en speciell profil från bleh för att hantera sponsorskap',
-        ru: 'Это специальный профиль, управляемый bleh для работы со спонсорами'
+        ru: 'Это специальный профиль, управляемый bleh для работы со спонсорами',
+        pl: 'Ten specjalny profil zarządzany przez bleh służy to ogarniania sponsorów'
     },
     sponsors_only: {
         en: 'Sponsors only',
@@ -3222,7 +3313,8 @@ export const trans = {
         it: 'Solo per gli sponsor',
         sv: 'Endast sponsorer',
         ru: 'Только для спонсоров',
-        pt: 'Apenas para apoiadores'
+        pt: 'Apenas para apoiadores',
+        pl: 'Tylko dla sponsorów'
     },
     downloaded_value: {
         // filename
@@ -3232,7 +3324,8 @@ export const trans = {
         it: '{v} scaricato',
         sv: 'Laddat ned {v}',
         ru: 'Загружено {v}',
-        pt: '{v} baixado'
+        pt: '{v} baixado',
+        pl: 'Pobrano {v}'
     },
     loading: {
         en: 'Loading',
@@ -3241,7 +3334,8 @@ export const trans = {
         it: 'Caricamento',
         pt: 'Carregando',
         sv: 'Laddar',
-        ru: 'Загрузка'
+        ru: 'Загрузка',
+        pl: 'Ładuję'
     },
     loading_count_days: {
         en: 'Collecting the last {c} days',
@@ -3250,7 +3344,8 @@ export const trans = {
         it: 'Raccogliendo gli ultimi {c} giorni',
         pt: 'Coletando os últimos {c} dias',
         sv: 'Samlar de senaste {c} dagarna',
-        ru: 'Сбор данных за последние {c} дней'
+        ru: 'Сбор данных за последние {c} дней',
+        pl: 'Ładowanie ostatnich {c} dni'
     },
     gathering_plays: {
         en: 'Gathering plays',
@@ -3259,7 +3354,8 @@ export const trans = {
         it: 'Raccogliendo le riproduzioni',
         pt: 'Coletando reproduções',
         sv: 'Samlar spelningar',
-        ru: 'Сбор прослушиваний'
+        ru: 'Сбор прослушиваний',
+        pl: 'Zbieranie odtworzeń'
     },
     following_mutuals: {
         // this is appended after the following button text if mutuals
@@ -3270,7 +3366,8 @@ export const trans = {
         it: '(a vicenda)',
         pt: '(mutualmente)',
         sv: '(varandra)',
-        ru: '(взаимно)'
+        ru: '(взаимно)',
+        pl: '(nawzajem)'
     },
     language: {
         en: 'Language',
@@ -3279,7 +3376,8 @@ export const trans = {
         it: 'Lingua',
         pt: 'Idioma',
         sv: 'Språk',
-        ru: 'Язык'
+        ru: 'Язык',
+        pl: 'Język'
     },
     symbol_presets: {
         // as in a selection of characters (symbols, text) that can
@@ -3290,7 +3388,8 @@ export const trans = {
         it: 'Raccolta di simboli',
         pt: 'Predefinições de símbolos',
         sv: 'Symboler',
-        ru: 'Наборы символов'
+        ru: 'Наборы символов',
+        pl: 'Dostępne symbole'
     },
     fancy_syntax: {
         // hyperlink as in a link to a website or something,
@@ -3301,7 +3400,8 @@ export const trans = {
         it: 'Guida agli ipertesti',
         pt: 'Guia de hiperlink',
         sv: 'Länkguide',
-        ru: 'Руководство по гиперссылкам'
+        ru: 'Руководство по гиперссылкам',
+        pl: 'Poradnik do hiperłączy'
     },
     links_to: {
         // used in wiki editing, {this example} links to {link}
@@ -3311,7 +3411,8 @@ export const trans = {
         it: 'Collega a {link}',
         pt: 'Links para {link}',
         sv: 'Länkas till {link}',
-        ru: 'Ссылки на {link}'
+        ru: 'Ссылки на {link}',
+        pl: 'Łączy do {link}'
     },
     explore_in_library: {
         en: 'Explore in library',
@@ -3320,7 +3421,8 @@ export const trans = {
         it: 'Esplora nella libreria',
         pt: 'Explorar na biblioteca',
         sv: 'Utforska i bibliotek',
-        ru: 'Исследовать в библиотеке'
+        ru: 'Исследовать в библиотеке',
+        pl: 'Eksploruj w bibliotece'
     },
     add_note: {
         // as in a profile note
@@ -3330,7 +3432,8 @@ export const trans = {
         it: 'Aggiungi una nota',
         pt: 'Adicionar nota',
         sv: 'Lägg till anteckning',
-        ru: 'Добавить заметку'
+        ru: 'Добавить заметку',
+        pl: 'Dodaj notatkę'
     },
     radio: {
         en: 'Radio',
@@ -3339,7 +3442,8 @@ export const trans = {
         it: 'Radio',
         pt: 'Rádio',
         sv: 'Radio',
-        ru: 'Радио'
+        ru: 'Радио',
+        pl: 'Radio'
     },
     mix: {
         // as in a playlist mix of music
@@ -3349,7 +3453,8 @@ export const trans = {
         it: 'Mix',
         sv: 'Mix',
         ru: 'Микс',
-        pt: 'Mix'
+        pt: 'Mix',
+        pl: 'Miks'
     },
     recommended: {
         // recommended music
@@ -3359,7 +3464,8 @@ export const trans = {
         it: 'Suggerimenti',
         pt: 'Recomendações',
         sv: 'Rekommenderad',
-        ru: 'Рекомендованное'
+        ru: 'Рекомендованное',
+        pl: 'Polecane'
     },
     listening: {
         // used as the card header for radios and listening reports
@@ -3378,7 +3484,8 @@ export const trans = {
         it: 'Tu',
         pt: 'Você',
         sv: 'Du',
-        ru: 'Вы'
+        ru: 'Вы',
+        pl: 'Ty'
     },
     open: {
         en: 'Open',
@@ -3387,7 +3494,8 @@ export const trans = {
         it: 'Apri',
         pt: 'Abrir',
         sv: 'Öppen',
-        ru: 'Открыть'
+        ru: 'Открыть',
+        pl: 'Otwarte'
     },
     expand: {
         en: 'Expand',
@@ -3396,7 +3504,8 @@ export const trans = {
         it: 'Espandi',
         pt: 'Expandir',
         sv: 'Expandera',
-        ru: 'Развернуть'
+        ru: 'Развернуть',
+        pl: 'Rozwiń'
     },
     expand_to_full_resolution: {
         en: 'Expand to full resolution',
@@ -3405,7 +3514,8 @@ export const trans = {
         it: 'Espandi a risoluzione completa',
         pt: 'Expandir para resolução total',
         sv: 'Expandera till full upplösning',
-        ru: 'Развернуть до полного разрешения'
+        ru: 'Развернуть до полного разрешения',
+        pl: 'Rozwiń do pełnej rozdzielczości'
     },
     default_avatar_action: {
         name: {
@@ -3414,7 +3524,8 @@ export const trans = {
             it: 'Azione di default per gli avatar',
             sv: 'Standard bildbetéende',
             ru: 'Действие по умолчанию при нажатии на аватар',
-            pt: 'Ação padrão do avatar'
+            pt: 'Ação padrão do avatar',
+            pl: 'Podstawowa akcja awatarów'
         },
         body: {
             en: 'Which action should be performed when you click an avatar',
@@ -3422,7 +3533,8 @@ export const trans = {
             it: 'Quale azione dovrebbe essere effettuata quando fai click su un avatar?',
             sv: 'Hur ska sidan beté sig när du trycker på en profilbild',
             ru: 'Какое действие должно быть выполнено при нажатии на аватар',
-            pt: 'Qual ação deveria ser realizada quando você clica em um avatar'
+            pt: 'Qual ação deveria ser realizada quando você clica em um avatar',
+            pl: 'Co powinno się wydarzyć jak klikniecie na awatar'
         }
     },
     share: {
@@ -3432,7 +3544,8 @@ export const trans = {
         it: 'Condividi',
         pt: 'Compartilhar',
         sv: 'Dela',
-        ru: 'Поделиться'
+        ru: 'Поделиться',
+        pl: 'Udostępni'
     },
     copy: {
         en: 'Copy',
@@ -3441,13 +3554,15 @@ export const trans = {
         it: 'Copia',
         pt: 'Copiar',
         sv: 'Kopiera',
-        ru: 'Копировать'
+        ru: 'Копировать',
+        pl: 'Kopiuj'
     },
     copy_text: {
         en: 'Copy text',
         es: 'Copiar texto',
         it: 'Copia testo',
-        pt: 'Copiar texto'
+        pt: 'Copiar texto',
+        pl: 'Kopiuj tekst'
     },
     copy_username: {
         en: 'Copy username',
@@ -3456,7 +3571,8 @@ export const trans = {
         it: 'Copia username',
         sv: 'Kopiera användarnamn',
         ru: 'Скопировать имя пользователя',
-        pt: 'Copiar nome de usuário'
+        pt: 'Copiar nome de usuário',
+        pl: 'Kopiuj nazwę użytkownika'
     },
     copy_link: {
         en: 'Copy link',
@@ -3465,7 +3581,8 @@ export const trans = {
         it: 'Copia link',
         sv: 'Kopiera länk',
         ru: 'Скопировать ссылку',
-        pt: 'Copiar link'
+        pt: 'Copiar link',
+        pl: 'Kopiuj link'
     },
     copied_to_clipboard: {
         en: 'Copied to clipboard',
@@ -3474,7 +3591,8 @@ export const trans = {
         it: 'Copiato negli appunti',
         pt: 'Copiado para a área de transferência',
         sv: 'Kopierats till urklipp',
-        ru: 'Скопировано в буфер обмена'
+        ru: 'Скопировано в буфер обмена',
+        pl: 'Skopiowano do schowka'
     },
     click_to_copy: {
         en: 'Click to copy',
@@ -3483,32 +3601,38 @@ export const trans = {
         it: 'Clicca per copiare',
         pt: 'Clique para copiar',
         sv: 'Klicka för att kopiera',
-        ru: 'Нажмите, чтобы скопировать'
+        ru: 'Нажмите, чтобы скопировать',
+        pl: 'Kliknij aby skopiować'
     },
     paste: {
         en: 'Paste',
         es: 'Pegar',
-        pt: 'Colar'
+        pt: 'Colar',
+        pl: 'Wklej'
     },
     paste_text: {
         en: 'Paste text',
         es: 'Pegar texto',
-        pt: 'Colar texto'
+        pt: 'Colar texto',
+        pl: 'Wklej tekst'
     },
     undo: {
         en: 'Undo',
         es: 'Deshacer',
-        pt: 'Desfazer'
+        pt: 'Desfazer',
+        pl: 'Cofnij'
     },
     redo: {
         en: 'Redo',
         es: 'Rehacer',
-        pt: 'Refazer'
+        pt: 'Refazer',
+        pl: 'Powtórz'
     },
     pasted_text: {
         en: 'Pasted text',
         es: 'Texto pegado',
-        pt: 'Texto colado'
+        pt: 'Texto colado',
+        pl: 'Wklejono tekst'
     },
     wiki_standard_tracks: {
         en: 'Track titles should be wrapped in quotation marks (“ ”)',
@@ -3517,7 +3641,8 @@ export const trans = {
         it: 'I nomi dei brani dovrebbero essere collocati tra virgolette (“ ”)',
         pt: 'Os títulos das faixas devem ser colocados entre aspas (“ ”)',
         sv: 'Låtnamn ska omges av citattecken (“ ”)',
-        ru: 'Названия треков должны быть заключены в кавычки (“ ”)'
+        ru: 'Названия треков должны быть заключены в кавычки (“ ”)',
+        pl: 'Tytuły utworów powinny być oznaczone cudzysłowiem (“ ”)'
     },
     wiki_standard_artists: {
         en: 'Album and artist names are left without quotes',
@@ -3526,7 +3651,8 @@ export const trans = {
         it: 'I nomi di album e artisti sono scritti senza virgolette',
         pt: 'Os nomes dos álbuns e artistas não devem ser colocados entre aspas',
         sv: 'Album och artistnamn ska skrivas utan citattecken',
-        ru: 'Названия альбомов и исполнителей пишутся без кавычек'
+        ru: 'Названия альбомов и исполнителей пишутся без кавычек',
+        pl: 'Nie dawaj do cytatu nazw albumów oraz imion artystów'
     },
     wiki_standard_quotations: {
         en: 'Use ‘ ’ for quotations from the artist or elsewhere',
@@ -3535,7 +3661,8 @@ export const trans = {
         it: 'Usa ‘ ’ per citazioni dall\'artista o altre fonti',
         pt: 'Use ‘ ’ para citações do artista ou de outras fontes',
         sv: 'Använd ‘ ’ för citat från artisten eller från annanstans',
-        ru: 'Используйте ‘ ’ для цитат исполнителя или из других источников'
+        ru: 'Используйте ‘ ’ для цитат исполнителя или из других источников',
+        pl: 'Użyj ‘ ’ do cytatów artystów lub z innych źródeł'
     },
     activity: {
         en: 'Activity',
@@ -3545,6 +3672,7 @@ export const trans = {
         pt: 'Atividade',
         sv: 'Aktivitet',
         ru: 'Активность',
+        pl: 'Aktywność',
         listing: {
             shout: {
                 en: 'Shout',
@@ -3553,7 +3681,8 @@ export const trans = {
                 it: 'Nota aggiunta',
                 pt: 'Enviou mensagem',
                 sv: 'Hojt',
-                ru: 'Сообщение'
+                ru: 'Сообщение',
+                pl: 'Wiadomość'
             },
             image_upload: {
                 en: 'Uploaded image',
@@ -3562,7 +3691,8 @@ export const trans = {
                 it: 'Immagine caricata',
                 pt: 'Enviou imagem',
                 sv: 'Laddat upp bild',
-                ru: 'Загружено изображение'
+                ru: 'Загружено изображение',
+                pl: 'Opublikowano zdjęcie'
             },
             image_star: {
                 en: 'Starred image',
@@ -3571,7 +3701,8 @@ export const trans = {
                 it: 'Immagine impostata come preferita',
                 pt: 'Favoritou imagem',
                 sv: 'Valt favoritbild',
-                ru: 'Изображение отмечено'
+                ru: 'Изображение отмечено',
+                pl: 'Ulubione zdjęcie'
             },
             obsess: {
                 en: 'Obsessed',
@@ -3580,7 +3711,8 @@ export const trans = {
                 it: 'Passione impostata',
                 pt: 'Obcecou',
                 sv: 'Besatthet',
-                ru: 'Зависимость'
+                ru: 'Зависимость',
+                pl: 'Obsesja'
             },
             unobsess: {
                 en: 'Removed obsession',
@@ -3589,7 +3721,8 @@ export const trans = {
                 it: 'Passione rimossa',
                 pt: 'Desobcecou',
                 sv: 'Tagit bort besatthet',
-                ru: 'Зависимость удалена'
+                ru: 'Зависимость удалена',
+                pl: 'Usunięto obsesję'
             },
             love: {
                 en: 'Loved',
@@ -3598,7 +3731,8 @@ export const trans = {
                 it: 'Preferito',
                 pt: 'Favoritou',
                 sv: 'Älskade låt',
-                ru: 'Понравилось'
+                ru: 'Понравилось',
+                pl: 'Ulubione'
             },
             unlove: {
                 en: 'Removed love',
@@ -3607,7 +3741,8 @@ export const trans = {
                 it: 'Preferito rimosso',
                 pt: 'Desfavoritou',
                 sv: 'Tog bort som älskad',
-                ru: 'Удалено из понравившихся'
+                ru: 'Удалено из понравившихся',
+                pl: 'Usuń z ulubionych'
             },
             install_bwaa: {
                 en: 'Installed bwaa',
@@ -3616,7 +3751,8 @@ export const trans = {
                 it: 'bwaa installato',
                 pt: 'Instalou o bwaa',
                 sv: 'Installerade bwaa',
-                ru: 'Установлен bwaa'
+                ru: 'Установлен bwaa',
+                pl: 'Pomyślnie zainstalowano bwaa'
             },
             update_bwaa: {
                 en: 'Updated bwaa',
@@ -3625,7 +3761,8 @@ export const trans = {
                 it: 'bwaa aggiornato',
                 pt: 'Atualizou o bwaa',
                 sv: 'Uppdaterade bwaa',
-                ru: 'Обновлен bwaa'
+                ru: 'Обновлен bwaa',
+                pl: 'Pomyślnie zaktualizowano bwaa'
             },
             install_bleh: {
                 en: 'Installed bleh',
@@ -3634,7 +3771,8 @@ export const trans = {
                 it: 'bleh installato',
                 pt: 'Instalou o bleh',
                 sv: 'Installerade bleh',
-                ru: 'Установлен bleh'
+                ru: 'Установлен bleh',
+                pl: 'Pomyślnie zainstalowano bleh'
             },
             update_bleh: {
                 en: 'Updated bleh',
@@ -3643,7 +3781,8 @@ export const trans = {
                 it: 'bleh aggiornato',
                 pt: 'Atualizou o bleh',
                 sv: 'Uppdaterade bleh',
-                ru: 'Обновлен bleh'
+                ru: 'Обновлен bleh',
+                pl: 'Pomyślnie zaktualizowano bleh'
             },
             bookmark: {
                 en: 'Bookmarked',
@@ -3652,7 +3791,8 @@ export const trans = {
                 it: 'Segnalibro aggiunto',
                 pt: 'Adicionou marcação',
                 sv: 'Bokmärkte',
-                ru: 'Добавлено в закладки'
+                ru: 'Добавлено в закладки',
+                pl: 'Dodano do zakładek'
             },
             unbookmark: {
                 en: 'Removed bookmark',
@@ -3661,7 +3801,8 @@ export const trans = {
                 it: 'Segnalibro rimosso',
                 pt: 'Removeu marcação',
                 sv: 'Tog bort bokmärke',
-                ru: 'Закладка удалена'
+                ru: 'Закладка удалена',
+                pl: 'Usunięto z zakładek'
             },
             wiki: {
                 en: 'Edited',
@@ -3670,7 +3811,8 @@ export const trans = {
                 it: 'Modificato',
                 pt: 'Editou',
                 sv: 'Redigerade',
-                ru: 'Отредактировано'
+                ru: 'Отредактировано',
+                pl: 'Edytowane'
             }
         },
         types: {
@@ -3681,7 +3823,8 @@ export const trans = {
                 it: 'Commenti e risposte da te in tutto il sito',
                 pt: 'Seus comentários e respostas ao redor do site',
                 sv: 'Kommentarer och svar från dig över hela sidan',
-                ru: 'Ваши комментарии и ответы на сайте'
+                ru: 'Ваши комментарии и ответы на сайте',
+                pl: 'Twoje wszystkie komentarze i odpowiedzi ze strony'
             },
             image: {
                 en: 'Uploading images and starring for your layout',
@@ -3699,7 +3842,8 @@ export const trans = {
                 it: 'Brani che ascolti a ripetizione',
                 pt: 'Faixas que você tem em loop',
                 sv: 'Låtar du är besatt av',
-                ru: 'Треки, которые вы слушаете на повторе'
+                ru: 'Треки, которые вы слушаете на повторе',
+                pl: 'Utwory których ciągle słuchasz'
             },
             love: {
                 en: 'Tracks you love',
@@ -3708,7 +3852,8 @@ export const trans = {
                 it: 'Brani che adori',
                 pt: 'Faixas que você ama',
                 sv: 'Låtar du älskar',
-                ru: 'Треки, которые вам нравятся'
+                ru: 'Треки, которые вам нравятся',
+                pl: 'Twoje ukochane utwory'
             },
             bookmark: {
                 en: 'Music you want to check out',
@@ -3717,7 +3862,8 @@ export const trans = {
                 it: 'Musica che vuoi ascoltare',
                 pt: 'Música que você quer conferir',
                 sv: 'Musik du vill komma ihåg till senare',
-                ru: 'Музыка, которую вы хотите послушать'
+                ru: 'Музыка, которую вы хотите послушать',
+                pl: 'Muzyka którą masz w planach posłuchać'
             },
             wiki: {
                 en: 'Editing of any wiki',
@@ -3726,7 +3872,8 @@ export const trans = {
                 it: 'Modifica di qualsiasi wiki',
                 pt: 'Editando de qualquer wiki',
                 sv: 'Wikiredigering',
-                ru: 'Редактирование любой вики'
+                ru: 'Редактирование любой вики',
+                pl: 'Edytowanie jakiejkolwiek wiki'
             },
             install: {
                 en: 'First installations and updating',
@@ -3735,7 +3882,8 @@ export const trans = {
                 it: 'Prime installazioni ed aggiornamenti',
                 pt: 'Primeiras instalações e atualizações',
                 sv: 'Första installationen och uppdateringar',
-                ru: 'Первые установки и обновления'
+                ru: 'Первые установки и обновления',
+                pl: 'Pierwsza instalacja i aktualizacja'
             }
         }
     },
@@ -3746,7 +3894,8 @@ export const trans = {
         it: 'Tieni traccia delle tue attività più recenti localmente sul tuo profilo',
         pt: 'Acompanhe suas atividades mais recentes localmente em seu perfil',
         sv: 'Håll koll på dina senaste aktiviteter lokalt på din profil',
-        ru: 'Отслеживайте свою недавнюю активность локально в своем профиле'
+        ru: 'Отслеживайте свою недавнюю активность локально в своем профиле',
+        pl: 'Śledź większość swoich ostatnich aktywności lokalnie na swoim profilu '
     },
     activity_tracking: {
         name: {
@@ -3756,7 +3905,8 @@ export const trans = {
             it: 'Registra le mie attività',
             pt: 'Acompanhar minhas atividades',
             sv: 'Spåra mina aktiviteter',
-            ru: 'Отслеживать мою активность'
+            ru: 'Отслеживать мою активность',
+            pl: 'Śledź moje aktywności'
         },
         body: {
             en: 'Activities will only be registered while enabled',
@@ -3765,7 +3915,8 @@ export const trans = {
             it: 'Le attività saranno registrate solo quando abilitato',
             pt: 'As atividades só serão registradas enquanto estiverem habilitadas',
             sv: 'Aktiviteter läggs bara till när inställningen är aktiverad',
-            ru: 'Активность будет регистрироваться только при включении'
+            ru: 'Активность будет регистрироваться только при включении',
+            pl: 'Aktywności będą rejestrowane tylko kiedy są włączone'
         }
     },
     clear_history: {
@@ -3775,7 +3926,8 @@ export const trans = {
         it: 'Cancella cronologia',
         pt: 'Limpar histórico',
         sv: 'Töm historia',
-        ru: 'Очистить историю'
+        ru: 'Очистить историю',
+        pl: 'Wyczyść historię'
     },
     cleared_activity_history: {
         en: 'Cleared your activity history',
@@ -3784,7 +3936,8 @@ export const trans = {
         it: 'Cronologia delle attività cancellata',
         pt: 'Histórico de atividades limpo',
         sv: 'Tömde din aktivitetshistoria',
-        ru: 'Ваша история активности очищена'
+        ru: 'Ваша история активности очищена',
+        pl: 'Wyczyszczono historię twoich aktywności'
     },
     activity_settings: {
         en: 'Activity settings',
@@ -3793,7 +3946,8 @@ export const trans = {
         it: 'Impostazioni delle attività',
         pt: 'Configurações de atividade',
         sv: 'Redigera dina aktiviteter',
-        ru: 'Настройки активности'
+        ru: 'Настройки активности',
+        pl: 'Ustawienia aktywności'
     },
     installation: {
         en: 'Installation',
@@ -3802,7 +3956,8 @@ export const trans = {
         it: 'Installazione',
         pt: 'Instalação',
         sv: 'Installation',
-        ru: 'Установка'
+        ru: 'Установка',
+        pl: 'Instalacja'
     },
     grid: {
         // as in the view mode
@@ -3812,7 +3967,8 @@ export const trans = {
         it: 'Griglia',
         pt: 'Grade',
         sv: 'Bildruta',
-        ru: 'Сетка'
+        ru: 'Сетка',
+        pl: 'Siatka'
     },
     list: {
         // as in the view mode
@@ -3822,7 +3978,8 @@ export const trans = {
         it: 'Lista',
         pt: 'Linha',
         sv: 'Lista',
-        ru: 'Список'
+        ru: 'Список',
+        pl: 'Lista'
     },
     line: {
         // as in the type of chart (a line graph)
@@ -3832,7 +3989,8 @@ export const trans = {
         it: 'Linea',
         pt: 'Lista',
         sv: 'Linjediagram',
-        ru: 'Линейный'
+        ru: 'Линейный',
+        pl: 'Liniowy'
     },
     pie: {
         // as in the type of chart (a pie chart)
@@ -3842,7 +4000,8 @@ export const trans = {
         it: 'Torta',
         pt: 'Pizza',
         sv: 'Cirkeldiagram',
-        ru: 'Круговая'
+        ru: 'Круговая',
+        pl: 'Kołowy'
     },
     bar: {
         // as in the type of chart (a bar chart)
@@ -3852,7 +4011,8 @@ export const trans = {
         it: 'Barre',
         pt: 'Coluna',
         sv: 'Stapeldiagram',
-        ru: 'Столбчатая'
+        ru: 'Столбчатая',
+        pl: 'Słupkowy'
     },
     horizontal: {
         en: 'Horizontal',
@@ -3861,7 +4021,8 @@ export const trans = {
         it: 'Orizzontale',
         sv: 'Vågrätt',
         ru: 'Горизонтальный',
-        pt: 'Horizontal'
+        pt: 'Horizontal',
+        pl: 'Poziomy'
     },
     vertical: {
         en: 'Vertical',
@@ -3870,7 +4031,8 @@ export const trans = {
         it: 'Verticale',
         sv: 'Lodrätt',
         ru: 'Вертикальный',
-        pt: 'Vertical'
+        pt: 'Vertical',
+        pl: 'Pionowy'
     },
     this_year: {
         en: 'This year',
@@ -3879,7 +4041,8 @@ export const trans = {
         it: 'Quest\'anno',
         pt: 'Este ano',
         sv: 'Detta år',
-        ru: 'Этот год'
+        ru: 'Этот год',
+        pl: 'Ten rok'
     },
     last_year: {
         en: 'Last year',
@@ -3888,7 +4051,8 @@ export const trans = {
         it: 'L\'anno scorso',
         pt: 'Ano passado',
         sv: 'Förra året',
-        ru: 'Прошлый год'
+        ru: 'Прошлый год',
+        pl: 'W tamtym roku'
     },
     love: {
         // as in loving tracks as a concept
@@ -3898,14 +4062,16 @@ export const trans = {
         it: 'Preferito',
         pt: 'Favoritas',
         sv: 'Älska',
-        ru: 'Понравилось'
+        ru: 'Понравилось',
+        pl: 'Polub'
     },
     love_track: {
         en: 'Love track',
         es: 'Marcar como favorito',
         it: 'Imposta come preferito',
         ru: 'Отметить трек как любимый',
-        pt: 'Marcar como favorito'
+        pt: 'Marcar como favorito',
+        pl: 'Polub utwór'
     },
     loved: {
         // as in loved tracks, this can be seen
@@ -3916,7 +4082,8 @@ export const trans = {
         it: 'Preferiti',
         pt: 'Favoritadas',
         sv: 'Älskade låtar',
-        ru: 'Понравившиеся'
+        ru: 'Понравившиеся',
+        pl: 'Ulubione'
     },
     velocity: {
         // as in the last.fm labs 'Velocity' tool
@@ -3926,7 +4093,8 @@ export const trans = {
         it: 'Velocity',
         pt: 'Rapidez', // velocity is often mistakenly translated to 'velocidade' in portuguese
         sv: 'Velocitet',
-        ru: 'Скорость'
+        ru: 'Скорость',
+        pl: 'Prędkość'
     },
     logout: {
         en: 'Logout',
@@ -3936,7 +4104,8 @@ export const trans = {
         pt: 'Sair',
         ja: 'ログアウト',
         sv: 'Logga ut',
-        ru: 'Выйти'
+        ru: 'Выйти',
+        pl: 'Wyloguj'
     },
     tracklist: {
         // please copy from native last.fm ui
@@ -3946,7 +4115,8 @@ export const trans = {
         it: 'Elenco dei brani',
         pt: 'Lista de faixas',
         sv: 'Spellista',
-        ru: 'Список треков'
+        ru: 'Список треков',
+        pl: 'Lista utworów'
     },
     tracklist_from_plays_info: {
         en: 'Retrieved own plays as official tracklist is unavailable',
@@ -3955,7 +4125,8 @@ export const trans = {
         it: 'Il recupero dei propri ascolti come elenco ufficiale dei brani non è disponibile',
         pt: 'Reproduções próprias recuperadas, pois a lista de faixas oficial não está disponível',
         sv: 'Hämtade dina spelningar för en officiell spellista finns inte tillgänglig',
-        ru: 'Получены ваши прослушивания, так как официальный список треков недоступен'
+        ru: 'Получены ваши прослушивания, так как официальный список треков недоступен',
+        pl: 'Otrzymano własne odtworzenia ponieważ oficjalna lista utworów jest niedostępna'
     },
     from_the_album: {
         en: 'From {album}',
@@ -3964,7 +4135,8 @@ export const trans = {
         it: 'Da {album}',
         pt: 'Do {album}',
         sv: 'Från {album}',
-        ru: 'С {album}'
+        ru: 'С {album}',
+        pl: 'Z {album}'
     },
     others_count: {
         // the amount of other users
@@ -3974,7 +4146,8 @@ export const trans = {
         it: '{c} altri',
         pt: '{c} outros',
         sv: '{c} andra',
-        ru: '{c} других'
+        ru: '{c} других',
+        pl: '{c} innych'
     },
     loading_album_plays: {
         en: 'Collecting your album plays',
@@ -3983,7 +4156,8 @@ export const trans = {
         it: 'Raccogliendo le tue riproduzioni di album',
         pt: 'Coletando suas reproduções de álbuns',
         sv: 'Samlar ihop dina albumspelningar',
-        ru: 'Сбор прослушиваний ваших альбомов'
+        ru: 'Сбор прослушиваний ваших альбомов',
+        pl: 'Zbieranie twoich odtworzeń albumu'
     },
     fail_album_plays: {
         en: 'No plays could be found',
@@ -3992,7 +4166,8 @@ export const trans = {
         it: 'Non sono state trovate riproduzioni',
         pt: 'Nenhuma reprodução pôde ser encontrada',
         sv: 'Kunde inte hitta på albumspelningar',
-        ru: 'Прослушивания не найдены'
+        ru: 'Прослушивания не найдены',
+        pl: 'Nie znaleziono żadnych odtworzeń'
     },
     open_album_as_track: {
         en: 'Open album title as track',
@@ -4001,7 +4176,8 @@ export const trans = {
         it: 'Apri il titolo dell\'album come brano',
         pt: 'Abrir título do álbum como faixa',
         sv: 'Öppna albumtitel som egen låt',
-        ru: 'Открыть название альбома как трек'
+        ru: 'Открыть название альбома как трек',
+        pl: 'Otwórz tytuł albumu jako utwór'
     },
     ignored: {
         en: 'Ignored',
@@ -4010,7 +4186,8 @@ export const trans = {
         it: 'Ignorato',
         pt: 'Ignorados',
         sv: 'Ignorerad',
-        ru: 'Игнорируемые'
+        ru: 'Игнорируемые',
+        pl: 'Ignorowany'
     },
     count_total: {
         en: '{c} total',
@@ -4019,7 +4196,8 @@ export const trans = {
         it: '{c} in totale',
         sv: '{c} totalt',
         ru: '{c} всего',
-        pt: '{c} no total'
+        pt: '{c} no total',
+        pl: '{c} łącznie'
     },
     video_removed: {
         en: 'Video removed by Last.fm',
@@ -4028,7 +4206,8 @@ export const trans = {
         it: 'Video rimosso da Last.fm',
         pt: 'Vídeo removido pela Last.fm',
         sv: 'Video borttagen av Last.fm',
-        ru: 'Видео удалено Last.fm'
+        ru: 'Видео удалено Last.fm',
+        pl: 'Wideo usunięte przez Last.fm'
     },
     blocked_page: {
         en: 'This page has been limited by Last.fm',
@@ -4037,7 +4216,8 @@ export const trans = {
         it: 'Questa pagina è stata limitata da Last.fm',
         pt: 'Esta página foi limitada pela Last.fm',
         sv: 'Denna sida har begränsats av Last.fm',
-        ru: 'Эта страница ограничена Last.fm'
+        ru: 'Эта страница ограничена Last.fm',
+        pl: 'Ta strona została ograniczona przez Last.fm'
     },
     results_for: {
         // used as a header above the actual search e.g.
@@ -4049,7 +4229,8 @@ export const trans = {
         it: 'Risultati per',
         pt: 'Resultados para',
         sv: 'Sökresultat för',
-        ru: 'Результаты для'
+        ru: 'Результаты для',
+        pl: 'Wyniki dla'
     },
     create_new_event: {
         en: 'Create new event',
@@ -4058,7 +4239,8 @@ export const trans = {
         it: 'Crea nuovo evento',
         pt: 'Criar novo evento',
         sv: 'Skapa ett nytt evenemang',
-        ru: 'Создать новое событие'
+        ru: 'Создать новое событие',
+        pl: 'Utwórz nowe wydarzenie'
     },
     related_to: {
         // used for similar tags
@@ -4068,7 +4250,8 @@ export const trans = {
         it: 'Correlato a',
         pt: 'Relacionado a',
         sv: 'Förknippad med',
-        ru: 'Связанные с'
+        ru: 'Связанные с',
+        pl: 'Podobne do'
     },
     personal_tag: {
         en: 'Personal tag',
@@ -4077,7 +4260,8 @@ export const trans = {
         it: 'Tag personale',
         pt: 'Marcador pessoal',
         sv: 'Din tagg',
-        ru: 'Личный тег'
+        ru: 'Личный тег',
+        pl: 'Etykiety personalne'
     },
     your_avatar: {
         en: 'Your avatar',
@@ -4086,7 +4270,8 @@ export const trans = {
         it: 'La tua foto profilo',
         pt: 'Sua foto de perfil',
         sv: 'Din profilbild',
-        ru: 'Ваш аватар'
+        ru: 'Ваш аватар',
+        pl: 'Twój awatar'
     },
     avatar_for_user: {
         // this is used to replace the text and extract the
@@ -4100,7 +4285,8 @@ export const trans = {
         it: 'Avatar di ',
         pt: 'Foto de perfil de',
         sv: 'Avatar för ',
-        ru: 'Аватар для '
+        ru: 'Аватар для ',
+        pl: 'Awatar dla '
     },
     by: {
         en: 'by',
@@ -4109,7 +4295,8 @@ export const trans = {
         it: 'di',
         pt: 'por',
         sv: 'av',
-        ru: 'от'
+        ru: 'от',
+        pl: 'od'
     },
     by_user: {
         en: 'by {u}',
@@ -4118,7 +4305,8 @@ export const trans = {
         it: 'di {u}',
         pt: 'por {u}',
         sv: 'av {u}',
-        ru: 'от {u}'
+        ru: 'от {u}',
+        pl: 'od {u}'
     },
     by_artist: {
         // {name} by {artist} - hence the space in english
