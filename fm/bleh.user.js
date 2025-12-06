@@ -30963,6 +30963,12 @@
     input_box.addEventListener("mouseup", () => {
       if (func_mouseup) func_mouseup(input_box, input_box.value);
     });
+    input_box.addEventListener("blur", () => {
+      if (func_mouseup) func_mouseup(input_box, input_box.value);
+    });
+    container.editor = () => {
+      return input_box;
+    };
     container.submit = () => {
       if (func) func(input_box.value);
     };
@@ -30981,6 +30987,9 @@
       if (state === true) input_box.setAttribute("disabled", "true");
       else input_box.removeAttribute("disabled");
       return state;
+    };
+    container.range = (start2, end2) => {
+      input_box.setSelectionRange(start2, end2);
     };
     return container;
     function update_input(skip_most = false) {
@@ -49361,13 +49370,14 @@
       func_select: on_selection,
       submit_on_character: true
     });
-    function on_selection(editor, val, has_selection = true) {
+    const editor = textarea.editor;
+    function on_selection(editor2, val, has_selection = true) {
       let sel_start;
       let sel_end;
       let selected = "";
       if (has_selection) {
-        sel_start = editor.selectionStart;
-        sel_end = editor.selectionEnd;
+        sel_start = editor2.selectionStart;
+        sel_end = editor2.selectionEnd;
         selected = val.slice(sel_start, sel_end);
       }
       const is_bold = selected.startsWith("**") && selected.endsWith("**");
@@ -49380,23 +49390,29 @@
       [
         {
           type: "header",
-          name: "Header"
+          name: "Header",
+          start: "# ",
+          end: ""
         },
         {
           type: "bold",
-          name: "Bold"
+          name: "Bold",
+          start: "**"
         },
         {
           type: "italic",
-          name: "Italics"
+          name: "Italics",
+          start: "*"
         },
         {
           type: "strike",
-          name: "Strikethrough"
+          name: "Strikethrough",
+          start: "~~"
         },
         {
           type: "underline",
-          name: "Underline"
+          name: "Underline",
+          start: "__"
         }
       ],
       [
@@ -49410,11 +49426,15 @@
         },
         {
           type: "quote",
-          name: "Quote"
+          name: "Quote",
+          start: "> ",
+          end: ""
         },
         {
           type: "code",
-          name: "Code"
+          name: "Code",
+          start: "`",
+          end: "`"
         },
         {
           type: "image",
@@ -49424,7 +49444,9 @@
       [
         {
           type: "ul",
-          name: "List"
+          name: "List",
+          start: "- ",
+          end: ""
         },
         {
           type: "ol",
@@ -49434,15 +49456,21 @@
       [
         {
           type: "align-left",
-          name: "Left align"
+          name: "Left align",
+          start: "[left]",
+          end: "[/left]"
         },
         {
           type: "align-center",
-          name: "Center align"
+          name: "Center align",
+          start: "[center]",
+          end: "[/center]"
         },
         {
           type: "align-right",
-          name: "Right align"
+          name: "Right align",
+          start: "[right]",
+          end: "[/right]"
         }
       ]
     ];
@@ -49452,7 +49480,32 @@
                 <div class="group">
                     ${group.map((item) => {
       const button2 = html.node`
-                            <button class="markdown-action" data-type=${item.type} aria-checked="false">
+                            <button class="markdown-action" data-type=${item.type} aria-checked="false" onclick=${() => {
+        if (!item.end && item.start) item.end = item.start;
+        const val = textarea.value();
+        if (item.start && item.end) {
+          const sel_start = editor.selectionStart;
+          const sel_end = editor.selectionEnd;
+          const selected = val.slice(sel_start, sel_end);
+          let replacement;
+          if (selected.startsWith(item.start) && selected.startsWith(item.end)) {
+            replacement = selected.slice(item.start.length, -1 * item.end.length);
+          } else {
+            replacement = `${item.start}${selected}${item.end}`;
+          }
+          textarea.value(val.slice(0, sel_start) + replacement + val.slice(sel_end));
+          textarea.focus();
+          textarea.range(sel_start, sel_start + replacement.length);
+          log("action", "markdown", "info", {
+            sel_start,
+            sel_end,
+            selected,
+            val,
+            item,
+            replacement
+          });
+        }
+      }}>
                                 ${item.name}
                             </button>
                         `;

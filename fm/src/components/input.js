@@ -102,6 +102,14 @@ export function input({
         if (func_mouseup) func_mouseup(input_box, input_box.value);
     });
 
+    input_box.addEventListener('blur', () => {
+        if (func_mouseup) func_mouseup(input_box, input_box.value);
+    });
+
+    container.editor = () => {
+        return input_box;
+    };
+
     container.submit = () => {
         if (func) func(input_box.value);
     };
@@ -126,6 +134,10 @@ export function input({
         else input_box.removeAttribute('disabled');
 
         return state;
+    };
+
+    container.range = (start, end) => {
+        input_box.setSelectionRange(start, end);
     };
 
     return container;
