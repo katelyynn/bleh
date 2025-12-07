@@ -1134,7 +1134,7 @@ export function markdown_field(func, options, value, name, cols, rows, placehold
                                     <p class="generic-label">${tl(trans.link)}</p>
                                     ${link = input({
                                         type: 'text',
-                                        placeholder: tl(trans.example, { v: 'https://' }),
+                                        placeholder: tl(trans.example, { v: 'https://link.to/an_image_here' }),
                                         func: () => {
                                             submit_link();
                                         },

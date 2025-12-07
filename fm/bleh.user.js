@@ -49368,7 +49368,7 @@
                                     <p class="generic-label">${tl2(trans.link)}</p>
                                     ${link = input({
                   type: "text",
-                  placeholder: tl2(trans.example, { v: "https://" }),
+                  placeholder: tl2(trans.example, { v: "https://link.to/an_image_here" }),
                   func: () => {
                     submit_link();
                   },
