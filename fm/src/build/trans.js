@@ -1749,6 +1749,12 @@ export const trans = {
         sv: 'Slutdatum',
         ru: 'Дата окончания'
     },
+    link: {
+        en: 'Link'
+    },
+    create_link: {
+        en: 'Create link'
+    },
     text: {
         en: 'Text',
         de: 'Text',
@@ -6172,6 +6178,12 @@ export const trans = {
         ru: 'Без описания',
         pt: 'Sem descrição'
     },
+    image: {
+        en: 'Image'
+    },
+    attach_image: {
+        en: 'Attach image'
+    },
     change_avatar: {
         en: 'Change avatar',
         de: 'Profilbild ändern',
@@ -8950,6 +8962,44 @@ export const trans = {
     },
     shoutbox_placeholder_user: {
         en: '{u}, leave a shout for {v}...'
+    },
+    mention_user: {
+        en: 'Mention user'
+    },
+    quote: {
+        en: 'Quote'
+    },
+    code_block: {
+        // block that surrounds code text:
+        // `this is code`
+        en: 'Code block'
+    },
+    numbered_list: {
+        en: 'Numbered list'
+    },
+    left_align: {
+        en: 'Left align'
+    },
+    center_align: {
+        en: 'Center align'
+    },
+    right_align: {
+        en: 'Right align'
+    },
+    header: {
+        en: 'Header'
+    },
+    bold: {
+        en: 'Bold'
+    },
+    italic: {
+        en: 'Italic'
+    },
+    strikethrough: {
+        en: 'Strikethrough'
+    },
+    underline: {
+        en: 'Underline'
     }
 };
 

@@ -49245,55 +49245,55 @@
       [
         {
           type: "header",
-          name: "Header",
+          name: tl2(trans.header),
           start: "# ",
           end: "",
           hide: !options.allow_headers
         },
         {
           type: "bold",
-          name: "Bold",
+          name: tl2(trans.bold),
           start: "**"
         },
         {
           type: "italic",
-          name: "Italics",
+          name: tl2(trans.italic),
           start: "*"
         },
         {
           type: "strike",
-          name: "Strikethrough",
+          name: tl2(trans.strikethrough),
           start: "~~"
         },
         {
           type: "underline",
-          name: "Underline",
+          name: tl2(trans.underline),
           start: "__"
         }
       ],
       [
         {
           type: "link",
-          name: "Link",
+          name: tl2(trans.link),
           func: () => {
             return new Promise((resolve2) => {
               let link;
               let alt;
               dialog({
                 id: "link",
-                title: "Create link",
+                title: tl2(trans.create_link),
                 body: html.node`
                                 <div class="new-scrobble-form">
-                                    <p class="generic-label">Link</p>
+                                    <p class="generic-label">${tl2(trans.link)}</p>
                                     ${link = input({
                   type: "text",
-                  placeholder: tl2(trans.example, { v: "https://" }),
+                  placeholder: tl2(trans.example, { v: "https://katelyn.moe" }),
                   func: () => {
                     submit_link();
                   },
                   focus: true
                 })}
-                                    <p class="generic-label">Text</p>
+                                    <p class="generic-label">${tl2(trans.text)}</p>
                                     ${alt = input({
                   type: "text",
                   func: () => {
@@ -49336,36 +49336,36 @@
         },
         {
           type: "mention",
-          name: "Mention",
+          name: tl2(trans.mention_user),
           start: "@",
           end: ""
         },
         {
           type: "quote",
-          name: "Quote",
+          name: tl2(trans.quote),
           start: "> ",
           end: "",
           hide: true
         },
         {
           type: "code",
-          name: "Code",
+          name: tl2(trans.code_block),
           start: "`",
           end: "`"
         },
         {
           type: "image",
-          name: "Image",
+          name: tl2(trans.image),
           func: () => {
             return new Promise((resolve2) => {
               let link;
               let alt;
               dialog({
                 id: "link",
-                title: "Create image",
+                title: tl2(trans.attach_image),
                 body: html.node`
                                 <div class="new-scrobble-form">
-                                    <p class="generic-label">Link</p>
+                                    <p class="generic-label">${tl2(trans.link)}</p>
                                     ${link = input({
                   type: "text",
                   placeholder: tl2(trans.example, { v: "https://" }),
@@ -49374,7 +49374,7 @@
                   },
                   focus: true
                 })}
-                                    <p class="generic-label">Text</p>
+                                    <p class="generic-label">${tl2(trans.text)}</p>
                                     ${alt = input({
                   type: "text",
                   func: () => {
@@ -49419,14 +49419,14 @@
       [
         {
           type: "ul",
-          name: "List",
+          name: tl2(trans.list),
           start: "- ",
           end: "",
           hide: !options.allow_lists
         },
         {
           type: "ol",
-          name: "Numbered list",
+          name: tl2(trans.numbered_list),
           start: "1. ",
           end: "",
           hide: !options.allow_lists
@@ -49435,21 +49435,21 @@
       [
         {
           type: "align-left",
-          name: "Left align",
+          name: tl2(trans.left_align),
           start: "[left]",
           end: "[/left]",
           hide: !options.allow_alignment
         },
         {
           type: "align-center",
-          name: "Center align",
+          name: tl2(trans.center_align),
           start: "[center]",
           end: "[/center]",
           hide: !options.allow_alignment
         },
         {
           type: "align-right",
-          name: "Right align",
+          name: tl2(trans.right_align),
           start: "[right]",
           end: "[/right]",
           hide: !options.allow_alignment
@@ -61030,6 +61030,12 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       sv: "Slutdatum",
       ru: "\u0414\u0430\u0442\u0430 \u043E\u043A\u043E\u043D\u0447\u0430\u043D\u0438\u044F"
     },
+    link: {
+      en: "Link"
+    },
+    create_link: {
+      en: "Create link"
+    },
     text: {
       en: "Text",
       de: "Text",
@@ -65455,6 +65461,12 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       ru: "\u0411\u0435\u0437 \u043E\u043F\u0438\u0441\u0430\u043D\u0438\u044F",
       pt: "Sem descri\xE7\xE3o"
     },
+    image: {
+      en: "Image"
+    },
+    attach_image: {
+      en: "Attach image"
+    },
     change_avatar: {
       en: "Change avatar",
       de: "Profilbild \xE4ndern",
@@ -68235,6 +68247,44 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     shoutbox_placeholder_user: {
       en: "{u}, leave a shout for {v}..."
+    },
+    mention_user: {
+      en: "Mention user"
+    },
+    quote: {
+      en: "Quote"
+    },
+    code_block: {
+      // block that surrounds code text:
+      // `this is code`
+      en: "Code block"
+    },
+    numbered_list: {
+      en: "Numbered list"
+    },
+    left_align: {
+      en: "Left align"
+    },
+    center_align: {
+      en: "Center align"
+    },
+    right_align: {
+      en: "Right align"
+    },
+    header: {
+      en: "Header"
+    },
+    bold: {
+      en: "Bold"
+    },
+    italic: {
+      en: "Italic"
+    },
+    strikethrough: {
+      en: "Strikethrough"
+    },
+    underline: {
+      en: "Underline"
     }
   };
   function tl2(key, replacements = {}) {

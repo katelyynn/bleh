@@ -1003,36 +1003,36 @@ export function markdown_field(func, options, value, name, cols, rows, placehold
         [
             {
                 type: 'header',
-                name: 'Header',
+                name: tl(trans.header),
                 start: '# ',
                 end: '',
                 hide: !options.allow_headers
             },
             {
                 type: 'bold',
-                name: 'Bold',
+                name: tl(trans.bold),
                 start: '**'
             },
             {
                 type: 'italic',
-                name: 'Italics',
+                name: tl(trans.italic),
                 start: '*'
             },
             {
                 type: 'strike',
-                name: 'Strikethrough',
+                name: tl(trans.strikethrough),
                 start: '~~'
             },
             {
                 type: 'underline',
-                name: 'Underline',
+                name: tl(trans.underline),
                 start: '__'
             }
         ],
         [
             {
                 type: 'link',
-                name: 'Link',
+                name: tl(trans.link),
                 func: () => {
                     return new Promise(resolve => {
                         let link;
@@ -1040,19 +1040,19 @@ export function markdown_field(func, options, value, name, cols, rows, placehold
 
                         dialog({
                             id: 'link',
-                            title: 'Create link',
+                            title: tl(trans.create_link),
                             body: html.node`
                                 <div class="new-scrobble-form">
-                                    <p class="generic-label">Link</p>
+                                    <p class="generic-label">${tl(trans.link)}</p>
                                     ${link = input({
                                         type: 'text',
-                                        placeholder: tl(trans.example, { v: 'https://' }),
+                                        placeholder: tl(trans.example, { v: 'https://katelyn.moe' }),
                                         func: () => {
                                             submit_link();
                                         },
                                         focus: true
                                     })}
-                                    <p class="generic-label">Text</p>
+                                    <p class="generic-label">${tl(trans.text)}</p>
                                     ${alt = input({
                                         type: 'text',
                                         func: () => {
@@ -1101,26 +1101,26 @@ export function markdown_field(func, options, value, name, cols, rows, placehold
             },
             {
                 type: 'mention',
-                name: 'Mention',
+                name: tl(trans.mention_user),
                 start: '@',
                 end: ''
             },
             {
                 type: 'quote',
-                name: 'Quote',
+                name: tl(trans.quote),
                 start: '> ',
                 end: '',
                 hide: true
             },
             {
                 type: 'code',
-                name: 'Code',
+                name: tl(trans.code_block),
                 start: '`',
                 end: '`'
             },
             {
                 type: 'image',
-                name: 'Image',
+                name: tl(trans.image),
                 func: () => {
                     return new Promise(resolve => {
                         let link;
@@ -1128,10 +1128,10 @@ export function markdown_field(func, options, value, name, cols, rows, placehold
 
                         dialog({
                             id: 'link',
-                            title: 'Create image',
+                            title: tl(trans.attach_image),
                             body: html.node`
                                 <div class="new-scrobble-form">
-                                    <p class="generic-label">Link</p>
+                                    <p class="generic-label">${tl(trans.link)}</p>
                                     ${link = input({
                                         type: 'text',
                                         placeholder: tl(trans.example, { v: 'https://' }),
@@ -1140,7 +1140,7 @@ export function markdown_field(func, options, value, name, cols, rows, placehold
                                         },
                                         focus: true
                                     })}
-                                    <p class="generic-label">Text</p>
+                                    <p class="generic-label">${tl(trans.text)}</p>
                                     ${alt = input({
                                         type: 'text',
                                         func: () => {
@@ -1191,14 +1191,14 @@ export function markdown_field(func, options, value, name, cols, rows, placehold
         [
             {
                 type: 'ul',
-                name: 'List',
+                name: tl(trans.list),
                 start: '- ',
                 end: '',
                 hide: !options.allow_lists
             },
             {
                 type: 'ol',
-                name: 'Numbered list',
+                name: tl(trans.numbered_list),
                 start: '1. ',
                 end: '',
                 hide: !options.allow_lists
@@ -1207,21 +1207,21 @@ export function markdown_field(func, options, value, name, cols, rows, placehold
         [
             {
                 type: 'align-left',
-                name: 'Left align',
+                name: tl(trans.left_align),
                 start: '[left]',
                 end: '[/left]',
                 hide: !options.allow_alignment
             },
             {
                 type: 'align-center',
-                name: 'Center align',
+                name: tl(trans.center_align),
                 start: '[center]',
                 end: '[/center]',
                 hide: !options.allow_alignment
             },
             {
                 type: 'align-right',
-                name: 'Right align',
+                name: tl(trans.right_align),
                 start: '[right]',
                 end: '[/right]',
                 hide: !options.allow_alignment
