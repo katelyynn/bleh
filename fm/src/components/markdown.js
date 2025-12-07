@@ -1256,6 +1256,8 @@ export function markdown_field(func, options, value, name, cols, rows, placehold
                                             textarea.range(sel_start, sel_start + replacement.length);
 
                                             if (func) func(textarea.value());
+
+                                            render_overlay();
                                         });
 
                                         return;
@@ -1285,6 +1287,8 @@ export function markdown_field(func, options, value, name, cols, rows, placehold
                                         textarea.range(sel_start, sel_start + replacement.length);
 
                                         if (func) func(textarea.value());
+
+                                        render_overlay();
 
                                         log('action', 'markdown', 'info', {
                                             sel_start,

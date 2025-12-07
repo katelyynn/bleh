@@ -49477,6 +49477,7 @@
               textarea.focus();
               textarea.range(sel_start, sel_start + replacement.length);
               if (func) func(textarea.value());
+              render_overlay();
             });
             return;
           }
@@ -49498,6 +49499,7 @@
             textarea.focus();
             textarea.range(sel_start, sel_start + replacement.length);
             if (func) func(textarea.value());
+            render_overlay();
             log("action", "markdown", "info", {
               sel_start,
               sel_end,
