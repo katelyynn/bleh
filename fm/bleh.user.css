@@ -19746,12 +19746,6 @@
         img {
             max-width: 100%;
         }
-
-        del {
-            font-size: 13px;
-            color: hsl(var(--c3));
-            text-decoration: none;
-        }
     }
     :is(
             .shout-body,
@@ -22564,6 +22558,12 @@
                 border-radius: var(--item-big-radius);
                 background: hsl(var(--l3-c));
             }
+        }
+
+        del {
+            font-size: 13px;
+            color: hsl(var(--c3));
+            text-decoration: none;
         }
 
         .text-center {
