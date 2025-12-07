@@ -49421,7 +49421,63 @@
       [
         {
           type: "link",
-          name: "Link"
+          name: "Link",
+          func: () => {
+            return new Promise((resolve2) => {
+              let link;
+              let alt;
+              dialog({
+                id: "link",
+                title: "Create link",
+                body: html.node`
+                                <div class="new-scrobble-form">
+                                    <p class="generic-label">Link</p>
+                                    ${link = input({
+                  type: "text",
+                  placeholder: tl2(trans.example, { v: "https://" }),
+                  func: () => {
+                    submit_link();
+                  }
+                })}
+                                    <p class="generic-label">Text</p>
+                                    ${alt = input({
+                  type: "text",
+                  func: () => {
+                    submit_link();
+                  }
+                })}
+                                </div>
+                                <div class="modal-footer">
+                                <button class="see-more cancel" onclick=${() => {
+                  dialog_rm({ id: "link" });
+                  resolve2(null);
+                }}>
+                                    ${tl2(trans.cancel)}
+                                </button>
+                                <div class="fill" />
+                                <button class="btn primary continue" onclick=${() => {
+                  submit_link();
+                }}>
+                                    ${tl2(trans.finish)}
+                                </button>
+                                </div>
+                            `
+              });
+              function submit_link() {
+                let alt_text = alt.value();
+                let link_text = link.value();
+                if (!link_text) return;
+                dialog_rm({ id: "link" });
+                let output;
+                if (alt_text != link_text && alt_text) {
+                  output = `[${alt_text}](${link_text})`;
+                } else {
+                  output = link_text;
+                }
+                resolve2(output);
+              }
+            });
+          }
         },
         {
           type: "mention",
@@ -49455,7 +49511,9 @@
         },
         {
           type: "ol",
-          name: "Numbered list"
+          name: "Numbered list",
+          start: "1. ",
+          end: ""
         }
       ],
       [
@@ -49486,11 +49544,20 @@
                     ${group.map((item) => {
       const button2 = html.node`
                             <button class="markdown-action" data-type=${item.type} aria-checked="false" onclick=${() => {
-        if (item.end == null && item.start != null) item.end = item.start;
+        const sel_start = editor.selectionStart;
+        const sel_end = editor.selectionEnd;
         const val = textarea.value();
+        if (item.func) {
+          item.func().then((replacement) => {
+            if (!replacement) return;
+            textarea.value(val.slice(0, sel_start) + replacement + val.slice(sel_end));
+            textarea.focus();
+            textarea.range(sel_start, sel_start + replacement.length);
+          });
+          return;
+        }
+        if (item.end == null && item.start != null) item.end = item.start;
         if (item.start != null && item.end != null) {
-          const sel_start = editor.selectionStart;
-          const sel_end = editor.selectionEnd;
           const selected = val.slice(sel_start, sel_end);
           let replacement;
           if (selected.startsWith(item.start) && selected.endsWith(item.end)) {
