@@ -7672,10 +7672,6 @@
             overflow: hidden;
             text-overflow: ellipsis;
 
-            em {
-                color: hsla(var(--c2), 70%);
-            }
-
             img {
                 width: unset;
                 max-height: 320px;
