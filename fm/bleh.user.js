@@ -49221,7 +49221,8 @@
       func_select: on_selection,
       submit_on_character: true,
       required: true,
-      maxlength
+      maxlength,
+      focus: mini
     });
     const editor = textarea.editor();
     function on_selection(editor2, val, has_selection = true) {

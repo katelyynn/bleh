@@ -970,7 +970,8 @@ export function markdown_field(func, options, value, name, cols, rows, placehold
         func_select: on_selection,
         submit_on_character: true,
         required: true,
-        maxlength
+        maxlength,
+        focus: mini
     });
 
     const editor = textarea.editor();
