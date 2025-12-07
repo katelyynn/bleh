@@ -936,7 +936,7 @@ export function external_url_prompt(url, dangerous = false) {
     });
 }
 
-export function markdown_field(func, options, value, name, cols, rows, placeholder) {
+export function markdown_field(func, options, value, name, cols, rows, placeholder, maxlength, mini = false) {
     options = {
         allow_headers: false,
         starting_header: 3,
@@ -968,7 +968,9 @@ export function markdown_field(func, options, value, name, cols, rows, placehold
             on_selection(null, null, false);
         },
         func_select: on_selection,
-        submit_on_character: true
+        submit_on_character: true,
+        required: true,
+        maxlength
     });
 
     const editor = textarea.editor();
@@ -1325,7 +1327,7 @@ export function markdown_field(func, options, value, name, cols, rows, placehold
     `;
 
     const field = html.node`
-        <div class="markdown-field">
+        <div class="markdown-field ${mini ? 'mini' : ''}">
             ${actions}
             ${textarea}
         </div>

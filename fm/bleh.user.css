@@ -18710,7 +18710,7 @@
         &[data-type="text"]:not(.v) {
             & > .heading {
                 min-height: var(--button-height);
-                max-height: 62px;
+                max-height: 40px;
                 justify-content: center;
             }
         }
@@ -29867,10 +29867,17 @@
 
         & > .content-form {
             width: 100% !important;
+            margin: unset !important;
         }
 
         textarea {
             height: 250px !important;
+        }
+
+        &.mini {
+            textarea {
+                height: 70px !important;
+            }
         }
     }
     .markdown-actions {

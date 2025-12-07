@@ -721,11 +721,6 @@ function patch_settings_profile_panel(token, update_picture) {
                 <div class="setting" data-type="text">
                     <div class="heading">
                         <h5>${tl(trans.about)}</h5>
-                        <p class="tip markdown-enabled" onclick=${() => {
-                            markdown_prompt(markdown_settings);
-                        }}>
-                            ${tl(trans.supports_markdown)}
-                        </p>
                         <p class="tip characters" ref=${(el) => (chars = el)}>
                             ${tl(
                                 trans.value_characters_max,

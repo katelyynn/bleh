@@ -14,6 +14,7 @@ import { html, render } from 'lighterhtml';
 import { setting } from './components/settings.js';
 import {
     markdown,
+    markdown_field,
     markdown_preview,
     markdown_prompt
 } from './components/markdown.js';
@@ -180,57 +181,44 @@ export function patch_shouts() {
         const help_text = shout_form.querySelector('.form-row-help-text');
         help_text.classList.add('dual-tip');
 
-        const textarea = shout_form.querySelector('textarea');
+        const legacy_textarea = shout_form.querySelector('textarea');
 
-        const placeholder = textarea.placeholder;
+        let placeholder = legacy_textarea.placeholder;
         if (placeholder.includes(auth.name)) {
             if (page.type == 'user') {
-                textarea.placeholder = tl(trans.shoutbox_placeholder_user, {
+                placeholder = tl(trans.shoutbox_placeholder_user, {
                     u: auth.name,
                     v: page.name
                 });
             } else {
-                textarea.placeholder = tl(trans.shoutbox_placeholder, {
+                placeholder = tl(trans.shoutbox_placeholder, {
                     u: auth.name,
                     v: page.type == 'artist' ? romanise(correct_artist(page.name)) : ['album', 'track'].includes(page.type) ? romanise(correct_item_by_artist(page.name, page.sister)) : page.name
                 });
             }
         }
 
+        const textarea = markdown_field((val) => {
+            chars.textContent = tl(trans.value_characters_max, {
+                v: `${val.length}/1000`
+            });
+            chars.setAttribute('data-exceeded', val.length >= 1000);
+
+            preview.setAttribute('disabled', val.length <= 0);
+        }, {}, '', 'body', null, null, placeholder, legacy_textarea.maxLength, true);
+
+        legacy_textarea.replaceWith(textarea);
+
         let chars;
         let preview;
-        render(
-            help_text,
-            html`
-                <div
-                    class="tip markdown-enabled"
-                    onclick=${() => markdown_prompt()}
-                >
-                    ${tl(trans.supports_markdown)}
-                </div>
-                <div
-                    class="tip preview"
-                    onclick=${() => markdown_preview(textarea.value)}
-                    ref=${(el) => (preview = el)}
-                    disabled="true"
-                >
-                    ${tl(trans.preview)}
-                </div>
-                <div class="tip characters" ref=${(el) => (chars = el)}>
-                    ${tl(trans.value_characters_max, { v: '0/1000' })}
-                </div>
-            `
-        );
-
-        textarea.addEventListener('input', () => {
-            const value = textarea.value;
-            chars.textContent = tl(trans.value_characters_max, {
-                v: `${value.length}/1000`
-            });
-            chars.setAttribute('data-exceeded', value.length >= 1000);
-
-            preview.setAttribute('disabled', value.length <= 0);
-        });
+        render(help_text, html`
+            <div class="tip preview" onclick=${() => markdown_preview(textarea.value())} ref=${(el) => (preview = el)} disabled="true">
+                ${tl(trans.preview)}
+            </div>
+            <div class="tip characters" ref=${(el) => (chars = el)}>
+                ${tl(trans.value_characters_max, { v: '0/1000' })}
+            </div>
+        `);
 
         shout_form.addEventListener('keydown', (e) => {
             // CTRL + ENTER
@@ -257,6 +245,7 @@ function shout_send(send_button) {
 
     button.classList.add('btn-send-shout-generic');
     button.textContent = tl(trans.send);
+    button.removeAttribute('disabled');
 
     if (page.mobile) return;
 

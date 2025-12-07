@@ -30908,7 +30908,8 @@
     submit_on_character = false,
     value_in_iso = false,
     cols,
-    rows
+    rows,
+    required = false
   }) {
     if (type == "date") {
       return calendar({
@@ -30928,9 +30929,9 @@
         <div class="content-form input-container colourful ${type == "textarea" ? "textarea" : ""}" data-type=${type} data-has-error="false">
             ${type == "colour" ? html.node`<span class="colour-block" ref=${(el) => colour_block = el} />` : ""}
             ${type == "textarea" ? html.node`
-                <textarea class="modern-input" name=${name} disabled=${disabled} autofocus=${focus} value=${value} placeholder=${placeholder} min=${min2} max=${max2} maxlength=${maxlength} cols=${cols} rows=${rows} ref=${(el) => input_box = el} />
+                <textarea class="modern-input" name=${name} disabled=${disabled} autofocus=${focus} value=${value} placeholder=${placeholder} min=${min2} max=${max2} maxlength=${maxlength} cols=${cols} rows=${rows} required=${required} ref=${(el) => input_box = el} />
             ` : html.node`
-                <input class="modern-input" name=${name} disabled=${disabled} autofocus=${focus} type=${type} value=${value} placeholder=${placeholder} min=${min2} max=${max2} maxlength=${maxlength} ref=${(el) => input_box = el} />
+                <input class="modern-input" name=${name} disabled=${disabled} autofocus=${focus} type=${type} value=${value} placeholder=${placeholder} min=${min2} max=${max2} maxlength=${maxlength} required=${required} ref=${(el) => input_box = el} />
             `}
         </div>
     `;
@@ -34302,11 +34303,6 @@
                 <div class="setting" data-type="text">
                     <div class="heading">
                         <h5>${tl2(trans.about)}</h5>
-                        <p class="tip markdown-enabled" onclick=${() => {
-      markdown_prompt(markdown_settings);
-    }}>
-                            ${tl2(trans.supports_markdown)}
-                        </p>
                         <p class="tip characters" ref=${(el) => chars = el}>
                             ${tl2(
       trans.value_characters_max,
@@ -49067,135 +49063,6 @@
     }
     return body2;
   }
-  function markdown_prompt({
-    allow_headers = false,
-    starting_header = 3,
-    allow_links = true,
-    line_breaks = true,
-    allow_banners = false,
-    allow_icons = false,
-    allow_hue = false,
-    allow_socials = false,
-    allow_lists = true,
-    allow_alignment = false
-  } = {}) {
-    if (!line_breaks) allow_alignment = false;
-    const examples = [
-      {
-        name: tl2(trans.supports_markdown.header.name),
-        string: tl2(trans.supports_markdown.header.string),
-        hide_if: !allow_headers
-      },
-      {
-        name: tl2(trans.supports_markdown.bold.name),
-        string: tl2(trans.supports_markdown.bold.string)
-      },
-      {
-        name: tl2(trans.supports_markdown.italics.name),
-        string: tl2(trans.supports_markdown.italics.string)
-      },
-      {
-        name: tl2(trans.supports_markdown.bold_italics.name),
-        string: tl2(trans.supports_markdown.bold_italics.string)
-      },
-      {
-        name: tl2(trans.supports_markdown.underlined.name),
-        string: tl2(trans.supports_markdown.underlined.string)
-      },
-      {
-        name: "Fancy link",
-        string: "[example >~<](https://katelyn.moe)",
-        hide_if: !allow_links
-      },
-      {
-        name: "Simple link",
-        string: `https://last.fm${root}user/${auth.name}`,
-        hide_if: !allow_links
-      },
-      {
-        name: "Mentioned user",
-        string: `@${auth.name}`
-      },
-      {
-        name: "Image",
-        string: `![alt text](${auth.avatar})`,
-        string_display: "![alt text](image url here)",
-        hide_if: !line_breaks
-      },
-      {
-        name: "Left-alignment",
-        string: "[left]text[/left]",
-        hide_if: !allow_alignment
-      },
-      {
-        name: "Center-alignment",
-        string: "[center]text[/center]",
-        hide_if: !allow_alignment
-      },
-      {
-        name: "Right-alignment",
-        string: "[right]text[/right]",
-        hide_if: !allow_alignment
-      },
-      {
-        name: "Divider line",
-        string: "---",
-        hide_if: !allow_alignment
-      }
-    ];
-    dialog({
-      id: "markdown",
-      title: tl2(trans.supports_markdown),
-      body: html.node`
-            <p>You can write fancy text here using Markdown, which lets you make your words pretty with simple shortcuts.</p>
-            <table class="fancy-table">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>How</th>
-                        <th>Result</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    ${examples.map((example) => {
-        if (example.hide_if) return html.node``;
-        return html.node`
-                            <tr>
-                                <td>${example.name}</td>
-                                <td class="subtle">${example.string_display ? example.string_display : example.string}</td>
-                                ${example.explain ? html.node`
-                                    <td>
-                                        <div class="icon-combo">
-                                            <div class="bleh-icon" data-type="info" style="--icon: var(--mask)" />
-                                            ${example.explain}
-                                        </div>
-                                    </td>
-                                ` : html.node`
-                                    <td class="markdown-body">${markdown(
-          example.string,
-          {
-            allow_headers,
-            starting_header,
-            allow_links,
-            line_breaks,
-            allow_banners,
-            allow_icons,
-            allow_hue,
-            allow_socials,
-            allow_lists,
-            allow_alignment,
-            in_dialog: true
-          }
-        )}</td>
-                                `}
-                            </tr>
-                        `;
-      })}
-                </tbody>
-            </table>
-        `
-    });
-  }
   function markdown_preview(text4, {
     allow_headers = false,
     starting_header = 3,
@@ -49321,7 +49188,7 @@
         `
     });
   }
-  function markdown_field(func, options, value, name, cols, rows, placeholder) {
+  function markdown_field(func, options, value, name, cols, rows, placeholder, maxlength, mini = false) {
     options = {
       allow_headers: false,
       starting_header: 3,
@@ -49352,7 +49219,9 @@
         on_selection(null, null, false);
       },
       func_select: on_selection,
-      submit_on_character: true
+      submit_on_character: true,
+      required: true,
+      maxlength
     });
     const editor = textarea.editor();
     function on_selection(editor2, val, has_selection = true) {
@@ -49664,7 +49533,7 @@
         </div>
     `;
     const field = html.node`
-        <div class="markdown-field">
+        <div class="markdown-field ${mini ? "mini" : ""}">
             ${actions}
             ${textarea}
         </div>
@@ -57949,53 +57818,39 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       shout_send(send_button);
       const help_text = shout_form.querySelector(".form-row-help-text");
       help_text.classList.add("dual-tip");
-      const textarea = shout_form.querySelector("textarea");
-      const placeholder = textarea.placeholder;
+      const legacy_textarea = shout_form.querySelector("textarea");
+      let placeholder = legacy_textarea.placeholder;
       if (placeholder.includes(auth.name)) {
         if (page.type == "user") {
-          textarea.placeholder = tl2(trans.shoutbox_placeholder_user, {
+          placeholder = tl2(trans.shoutbox_placeholder_user, {
             u: auth.name,
             v: page.name
           });
         } else {
-          textarea.placeholder = tl2(trans.shoutbox_placeholder, {
+          placeholder = tl2(trans.shoutbox_placeholder, {
             u: auth.name,
             v: page.type == "artist" ? romanise(correct_artist(page.name)) : ["album", "track"].includes(page.type) ? romanise(correct_item_by_artist(page.name, page.sister)) : page.name
           });
         }
       }
+      const textarea = markdown_field((val) => {
+        chars.textContent = tl2(trans.value_characters_max, {
+          v: `${val.length}/1000`
+        });
+        chars.setAttribute("data-exceeded", val.length >= 1e3);
+        preview.setAttribute("disabled", val.length <= 0);
+      }, {}, "", "body", null, null, placeholder, legacy_textarea.maxLength, true);
+      legacy_textarea.replaceWith(textarea);
       let chars;
       let preview;
-      render(
-        help_text,
-        html`
-                <div
-                    class="tip markdown-enabled"
-                    onclick=${() => markdown_prompt()}
-                >
-                    ${tl2(trans.supports_markdown)}
-                </div>
-                <div
-                    class="tip preview"
-                    onclick=${() => markdown_preview(textarea.value)}
-                    ref=${(el) => preview = el}
-                    disabled="true"
-                >
-                    ${tl2(trans.preview)}
-                </div>
-                <div class="tip characters" ref=${(el) => chars = el}>
-                    ${tl2(trans.value_characters_max, { v: "0/1000" })}
-                </div>
-            `
-      );
-      textarea.addEventListener("input", () => {
-        const value = textarea.value;
-        chars.textContent = tl2(trans.value_characters_max, {
-          v: `${value.length}/1000`
-        });
-        chars.setAttribute("data-exceeded", value.length >= 1e3);
-        preview.setAttribute("disabled", value.length <= 0);
-      });
+      render(help_text, html`
+            <div class="tip preview" onclick=${() => markdown_preview(textarea.value())} ref=${(el) => preview = el} disabled="true">
+                ${tl2(trans.preview)}
+            </div>
+            <div class="tip characters" ref=${(el) => chars = el}>
+                ${tl2(trans.value_characters_max, { v: "0/1000" })}
+            </div>
+        `);
       shout_form.addEventListener("keydown", (e) => {
         if (e.ctrlKey && e.keyCode == 13) {
           e.preventDefault();
@@ -58016,6 +57871,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     if (!button2) return;
     button2.classList.add("btn-send-shout-generic");
     button2.textContent = tl2(trans.send);
+    button2.removeAttribute("disabled");
     if (page.mobile) return;
     tippy_esm_default(button2, {
       content: tl2(trans.send_quickly_with).replace(

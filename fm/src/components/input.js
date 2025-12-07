@@ -32,7 +32,8 @@ export function input({
     submit_on_character = false,
     value_in_iso = false,
     cols,
-    rows
+    rows,
+    required = false
 }) {
     if (type == 'date') {
         return calendar({
@@ -57,10 +58,10 @@ export function input({
             ${
                 type == 'textarea' ?
                     html.node`
-                <textarea class="modern-input" name=${name} disabled=${disabled} autofocus=${focus} value=${value} placeholder=${placeholder} min=${min} max=${max} maxlength=${maxlength} cols=${cols} rows=${rows} ref=${(el) => (input_box = el)} />
+                <textarea class="modern-input" name=${name} disabled=${disabled} autofocus=${focus} value=${value} placeholder=${placeholder} min=${min} max=${max} maxlength=${maxlength} cols=${cols} rows=${rows} required=${required} ref=${(el) => (input_box = el)} />
             `
                 :   html.node`
-                <input class="modern-input" name=${name} disabled=${disabled} autofocus=${focus} type=${type} value=${value} placeholder=${placeholder} min=${min} max=${max} maxlength=${maxlength} ref=${(el) => (input_box = el)} />
+                <input class="modern-input" name=${name} disabled=${disabled} autofocus=${focus} type=${type} value=${value} placeholder=${placeholder} min=${min} max=${max} maxlength=${maxlength} required=${required} ref=${(el) => (input_box = el)} />
             `
             }
         </div>
