@@ -137,7 +137,7 @@ export function set_season() {
                 if (settings.seasonal_particles == 'less' && snowflakes_count > 10)
                     snowflakes_count *= 0.45;
 
-                if (page.mobile && snowflakes_count > 10) snowflakes_count *= 0.7;
+                if (page.mobile && snowflakes_count > 10) snowflakes_count *= 0.5;
 
                 begin_snowflakes(snowflakes_enabled, snowflakes_count);
             }
