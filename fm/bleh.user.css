@@ -29884,6 +29884,10 @@
             width: 2px;
             height: 10px;
             background: var(--card-border-base);
+
+            &:last-child {
+                display: none;
+            }
         }
     }
     .markdown-action {

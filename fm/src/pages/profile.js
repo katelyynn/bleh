@@ -1916,7 +1916,8 @@ function bio_parse(text, cache = true, take_effect = true) {
             cache,
             take_effect,
             allow_socials: true,
-            allow_alignment: true
+            allow_alignment: true,
+            allow_lists: true
         })
     );
 

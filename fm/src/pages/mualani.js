@@ -49,7 +49,8 @@ export function mualani() {
         allow_hue: true,
         allow_fonts: true,
         allow_socials: true,
-        allow_alignment: true
+        allow_alignment: true,
+        allow_lists: true
     };
 
     render(
@@ -160,12 +161,20 @@ export function mualani() {
                 </button>
             </section>
             <section class="flexy">
-                <h2>Markdown</h2>
+                <h2>Markdown (with bio settings)</h2>
                 ${markdown_field((val) => {
                     render(md_body, markdown(val, md_options));
                 }, md_options)}
                 <div class="sep" />
                 <div class="markdown-body" ref=${el => md_body = el} />
+            </section>
+            <section class="flexy">
+                <h2>Markdown (with defaults)</h2>
+                ${markdown_field((val) => {
+                    render(md_body_default, markdown(val));
+                })}
+                <div class="sep" />
+                <div class="markdown-body" ref=${el => md_body_default = el} />
             </section>
         `
     );

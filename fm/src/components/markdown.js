@@ -40,7 +40,7 @@ export function markdown(
         take_effect = false,
         cache = false,
         allow_socials = false,
-        allow_lists = true,
+        allow_lists = false,
         allow_alignment = false,
         name = page.name
     } = {}
@@ -375,7 +375,8 @@ export function markdown(
         strikethrough: true,
         underline: true,
         ghCodeBlocks: false,
-        smartIndentationFix: true
+        smartIndentationFix: true,
+        ellipsis: false
     });
     const markdown = text
         .replace(
@@ -935,7 +936,23 @@ export function external_url_prompt(url, dangerous = false) {
     });
 }
 
-export function markdown_field(func, options = {}, value, name, cols, rows, placeholder) {
+export function markdown_field(func, options, value, name, cols, rows, placeholder) {
+    options = {
+        allow_headers: false,
+        starting_header: 3,
+        allow_links: true,
+        line_breaks: true,
+        allow_banners: false,
+        in_dialog: false,
+        allow_icons: true,
+        allow_hue: false,
+        allow_fonts: false,
+        allow_socials: false,
+        allow_lists: false,
+        allow_alignment: false,
+        ...options
+    };
+
     const textarea = input({
         type: 'textarea',
         value,
@@ -986,7 +1003,8 @@ export function markdown_field(func, options = {}, value, name, cols, rows, plac
                 type: 'header',
                 name: 'Header',
                 start: '# ',
-                end: ''
+                end: '',
+                hide: !options.allow_headers
             },
             {
                 type: 'bold',
@@ -1075,7 +1093,8 @@ export function markdown_field(func, options = {}, value, name, cols, rows, plac
                             resolve(output);
                         }
                     });
-                }
+                },
+                hide: !options.allow_links
             },
             {
                 type: 'mention',
@@ -1160,7 +1179,8 @@ export function markdown_field(func, options = {}, value, name, cols, rows, plac
                             resolve(output);
                         }
                     });
-                }
+                },
+                hide: !options.allow_links
             }
         ],
         [
@@ -1168,13 +1188,15 @@ export function markdown_field(func, options = {}, value, name, cols, rows, plac
                 type: 'ul',
                 name: 'List',
                 start: '- ',
-                end: ''
+                end: '',
+                hide: !options.allow_lists
             },
             {
                 type: 'ol',
                 name: 'Numbered list',
                 start: '1. ',
-                end: ''
+                end: '',
+                hide: !options.allow_lists
             }
         ],
         [
@@ -1182,103 +1204,117 @@ export function markdown_field(func, options = {}, value, name, cols, rows, plac
                 type: 'align-left',
                 name: 'Left align',
                 start: '[left]',
-                end: '[/left]'
+                end: '[/left]',
+                hide: !options.allow_alignment
             },
             {
                 type: 'align-center',
                 name: 'Center align',
                 start: '[center]',
-                end: '[/center]'
+                end: '[/center]',
+                hide: !options.allow_alignment
             },
             {
                 type: 'align-right',
                 name: 'Right align',
                 start: '[right]',
-                end: '[/right]'
+                end: '[/right]',
+                hide: !options.allow_alignment
             }
         ]
     ];
 
     const actions = html.node`
         <div class="markdown-actions">
-            ${action_list.map((group, index) => html.node`
-                <div class="group">
-                    ${group.map(item => {
-                        const button = html.node`
-                            <button class="markdown-action" data-type=${item.type} aria-checked="false" onclick=${() => {
-                                const sel_start = editor.selectionStart;
-                                const sel_end = editor.selectionEnd;
+            ${action_list.map((group, index) => {
+                const elem = html.node`
+                    <div class="group">
+                        ${group.map(item => {
+                            if (item.hide) return html.node``;
 
-                                const val = textarea.value();
+                            const button = html.node`
+                                <button class="markdown-action" data-type=${item.type} aria-checked="false" onclick=${() => {
+                                    const sel_start = editor.selectionStart;
+                                    const sel_end = editor.selectionEnd;
 
-                                if (item.func) {
-                                    item.func().then(replacement => {
-                                        if (!replacement) return;
+                                    const val = textarea.value();
+
+                                    if (item.func) {
+                                        item.func().then(replacement => {
+                                            if (!replacement) return;
+
+                                            textarea.value(val.slice(0, sel_start) + replacement + val.slice(sel_end));
+
+                                            textarea.focus();
+                                            textarea.range(sel_start, sel_start + replacement.length);
+                                        });
+
+                                        return;
+                                    }
+
+                                    if (item.end == null && item.start != null) item.end = item.start;
+
+                                    if (item.start != null && item.end != null) {
+                                        const selected = val.slice(sel_start, sel_end);
+                                        let replacement;
+
+                                        if (selected.startsWith(item.start) && selected.endsWith(item.end)) {
+                                            let replace_end = -1 * item.end.length;
+
+                                            if (replace_end != 0) {
+                                                replacement = selected.slice(item.start.length, replace_end);
+                                            } else {
+                                                replacement = selected.slice(item.start.length);
+                                            }
+                                        } else {
+                                            replacement = `${item.start}${selected}${item.end}`;
+                                        }
 
                                         textarea.value(val.slice(0, sel_start) + replacement + val.slice(sel_end));
 
                                         textarea.focus();
                                         textarea.range(sel_start, sel_start + replacement.length);
-                                    });
 
-                                    return;
-                                }
-
-                                if (item.end == null && item.start != null) item.end = item.start;
-
-                                if (item.start != null && item.end != null) {
-                                    const selected = val.slice(sel_start, sel_end);
-                                    let replacement;
-
-                                    if (selected.startsWith(item.start) && selected.endsWith(item.end)) {
-                                        let replace_end = -1 * item.end.length;
-
-                                        if (replace_end != 0) {
-                                            replacement = selected.slice(item.start.length, replace_end);
-                                        } else {
-                                            replacement = selected.slice(item.start.length);
-                                        }
-                                    } else {
-                                        replacement = `${item.start}${selected}${item.end}`;
+                                        log('action', 'markdown', 'info', {
+                                            sel_start,
+                                            sel_end,
+                                            selected,
+                                            val,
+                                            item,
+                                            replacement
+                                        });
                                     }
+                                }}>
+                                    ${item.name}
+                                </button>
+                            `;
 
-                                    textarea.value(val.slice(0, sel_start) + replacement + val.slice(sel_end));
+                            action_lookup[item.type] = {
+                                button,
+                                start: item.start,
+                                end: item.end
+                            };
+                            console.info('markdown added to lookup', action_lookup, action_lookup[item.type]);
 
-                                    textarea.focus();
-                                    textarea.range(sel_start, sel_start + replacement.length);
+                            tippy(button, {
+                                content: item.name
+                            });
 
-                                    log('action', 'markdown', 'info', {
-                                        sel_start,
-                                        sel_end,
-                                        selected,
-                                        val,
-                                        item,
-                                        replacement
-                                    });
-                                }
-                            }}>
-                                ${item.name}
-                            </button>
-                        `;
+                            return button;
+                        })}
+                    </div>
+                `;
 
-                        action_lookup[item.type] = {
-                            button,
-                            start: item.start,
-                            end: item.end
-                        };
-                        console.info('markdown added to lookup', action_lookup, action_lookup[item.type]);
+                if (elem.childElementCount == 0)
+                    return html.node``;
 
-                        tippy(button, {
-                            content: item.name
-                        });
-
-                        return button;
-                    })}
-                </div>
-                ${index < action_list.length - 1 ? html.node`
-                    <div class="group-sep" />
-                ` : ''}
-            `)}
+                return html.node`
+                    ${elem}
+                    ${index < action_list.length - 1 ? html.node`
+                        <div class="group-sep" />
+                    ` : ''}
+                `;
+            })}
         </div>
     `;
 

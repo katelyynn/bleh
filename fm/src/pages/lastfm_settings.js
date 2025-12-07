@@ -550,7 +550,8 @@ function patch_settings_profile_panel(token, update_picture) {
         cache: true,
         take_effect: false,
         allow_socials: true,
-        allow_alignment: true
+        allow_alignment: true,
+        allow_lists: true
     };
 
     let banner_setting;
