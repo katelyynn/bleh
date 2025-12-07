@@ -1372,7 +1372,7 @@ export function markdown_field(func, options, value, name, cols, rows, placehold
         val = val.replace(/\[([a-z]+)=([^\]]+)\]/gi, (match, tag, val) => {
             if (!['status', 'name', 'font', 'accent', 'banner'].includes(tag)) return match;
 
-            if (!allow_hue && tag == 'accent') return match;
+            if (!options.allow_hue && tag == 'accent') return match;
 
             if (tag == 'accent') {
                 const split = val.split(',');
@@ -1387,13 +1387,13 @@ export function markdown_field(func, options, value, name, cols, rows, placehold
         });
 
         val = val.replace(/!\[([^\]]*)\]\(([^)]+)\)/gi, (match, label, url) => {
-            if (!allow_links) return match;
+            if (!options.allow_links) return match;
 
             return `<span class="md-link">![<span class="md-label">${label}</span>](<span class="md-url">${url}</span>)</span>`;
         });
 
         val = val.replace(/\[([^\]]+)\]\(([^)]+)\)/gi, (match, label, url) => {
-            if (!allow_links) return match;
+            if (!options.allow_links) return match;
 
             return `<span class="md-link">[<span class="md-label">${label}</span>](<span class="md-url">${url}</span>)</span>`;
         });

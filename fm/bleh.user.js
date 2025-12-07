@@ -48568,12 +48568,12 @@
   function markdown(text4, {
     allow_headers = false,
     starting_header = 3,
-    allow_links: allow_links2 = true,
+    allow_links = true,
     line_breaks = true,
     allow_banners = false,
     in_dialog = false,
     allow_icons = true,
-    allow_hue: allow_hue2 = false,
+    allow_hue = false,
     allow_fonts = false,
     take_effect = false,
     cache: cache2 = false,
@@ -48825,7 +48825,7 @@
     if (line_breaks) extensions.push(blockquotes());
     if (allow_banners) extensions.push(banner());
     if (allow_icons) extensions.push(icons());
-    if (allow_hue2) extensions.push(accent(), display_name(), status2());
+    if (allow_hue) extensions.push(accent(), display_name(), status2());
     if (allow_fonts) extensions.push(font());
     if (allow_socials) extensions.push(social_links());
     if (!allow_headers) extensions.push(header_minify());
@@ -48833,7 +48833,7 @@
     let profile_cache;
     const will_cache = cache2 === true;
     log(`prepare new cache is ${will_cache}`, "markdown", "log", { cache: cache2 });
-    if ((allow_banners || allow_hue2) && will_cache) {
+    if ((allow_banners || allow_hue) && will_cache) {
       profile_cache = JSON.parse(localStorage.getItem("bleh_profile_cache")) || {};
       cache2 = profile_cache[name] || {};
     }
@@ -48846,7 +48846,7 @@
       openLinksInNewWindow: true,
       requireSpaceBeforeHeadingText: true,
       simpleLineBreaks: line_breaks,
-      simplifiedAutoLink: allow_links2,
+      simplifiedAutoLink: allow_links,
       strikethrough: true,
       underline: true,
       ghCodeBlocks: false,
@@ -48934,9 +48934,9 @@
         local_restriction(text5);
       });
     }
-    if (allow_hue2) {
+    if (allow_hue) {
       if (!sponsor_list || sponsor_list && !sponsor_list.sponsors.includes(name))
-        allow_hue2 = false;
+        allow_hue = false;
     }
     if (body2.nodeName != "#text") {
       body2.querySelectorAll("img").forEach((image) => {
@@ -48971,7 +48971,7 @@
         container.appendChild(image);
       });
     }
-    if (allow_hue2) {
+    if (allow_hue) {
       console.info(hue2, sat, lit);
       if (hue2 !== void 0 && sat !== void 0 && lit !== void 0) {
         if (take_effect) {
@@ -49066,11 +49066,11 @@
   function markdown_preview(text4, {
     allow_headers = false,
     starting_header = 3,
-    allow_links: allow_links2 = true,
+    allow_links = true,
     line_breaks = true,
     allow_banners = false,
     allow_icons = false,
-    allow_hue: allow_hue2 = false,
+    allow_hue = false,
     allow_socials = false,
     allow_lists = true,
     allow_alignment = false
@@ -49094,11 +49094,11 @@
                             ${markdown(text4, {
         allow_headers,
         starting_header,
-        allow_links: allow_links2,
+        allow_links,
         line_breaks,
         allow_banners,
         allow_icons,
-        allow_hue: allow_hue2,
+        allow_hue,
         allow_socials,
         allow_lists,
         allow_alignment,
@@ -49567,7 +49567,7 @@
       });
       val = val.replace(/\[([a-z]+)=([^\]]+)\]/gi, (match3, tag, val2) => {
         if (!["status", "name", "font", "accent", "banner"].includes(tag)) return match3;
-        if (!allow_hue && tag == "accent") return match3;
+        if (!options.allow_hue && tag == "accent") return match3;
         if (tag == "accent") {
           const split = val2.split(",");
           if (split.length == 3 && parseFloat(split[0]) >= 0 && parseFloat(split[1]) >= 0 && parseFloat(split[2]) >= 0) {
@@ -49579,11 +49579,11 @@
         return `<span class="md-tag">[${tag}=<span class="md-val">${val2}</span>]</span>`;
       });
       val = val.replace(/!\[([^\]]*)\]\(([^)]+)\)/gi, (match3, label, url) => {
-        if (!allow_links) return match3;
+        if (!options.allow_links) return match3;
         return `<span class="md-link">![<span class="md-label">${label}</span>](<span class="md-url">${url}</span>)</span>`;
       });
       val = val.replace(/\[([^\]]+)\]\(([^)]+)\)/gi, (match3, label, url) => {
-        if (!allow_links) return match3;
+        if (!options.allow_links) return match3;
         return `<span class="md-link">[<span class="md-label">${label}</span>](<span class="md-url">${url}</span>)</span>`;
       });
       render(overlay, html`
