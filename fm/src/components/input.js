@@ -52,12 +52,12 @@ export function input({
     let colour_block;
 
     let container = html.node`
-        <div class="content-form input-container colourful" data-type=${type} data-has-error="false">
+        <div class="content-form input-container colourful ${type == 'textarea' ? 'textarea' : ''}" data-type=${type} data-has-error="false">
             ${type == 'colour' ? html.node`<span class="colour-block" ref=${(el) => (colour_block = el)} />` : ''}
             ${
                 type == 'textarea' ?
                     html.node`
-                <textarea class="modern-input" disabled=${disabled} autofocus=${focus} value=${value} placeholder=${placeholder} min=${min} max=${max} maxlength=${maxlength} cols=${cols} rows=${rows} ref=${(el) => (input_box = el)} />
+                <textarea class="modern-input" name=${name} disabled=${disabled} autofocus=${focus} value=${value} placeholder=${placeholder} min=${min} max=${max} maxlength=${maxlength} cols=${cols} rows=${rows} ref=${(el) => (input_box = el)} />
             `
                 :   html.node`
                 <input class="modern-input" name=${name} disabled=${disabled} autofocus=${focus} type=${type} value=${value} placeholder=${placeholder} min=${min} max=${max} maxlength=${maxlength} ref=${(el) => (input_box = el)} />
@@ -65,6 +65,12 @@ export function input({
             }
         </div>
     `;
+
+    if (focus) {
+        setTimeout(() => {
+            input_box.focus();
+        }, 1);
+    }
 
     error_tooltip = tippy(input_box, {
         theme: 'error',

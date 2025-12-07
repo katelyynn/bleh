@@ -30925,15 +30925,20 @@
     let error_tooltip;
     let colour_block;
     let container = html.node`
-        <div class="content-form input-container colourful" data-type=${type} data-has-error="false">
+        <div class="content-form input-container colourful ${type == "textarea" ? "textarea" : ""}" data-type=${type} data-has-error="false">
             ${type == "colour" ? html.node`<span class="colour-block" ref=${(el) => colour_block = el} />` : ""}
             ${type == "textarea" ? html.node`
-                <textarea class="modern-input" disabled=${disabled} autofocus=${focus} value=${value} placeholder=${placeholder} min=${min2} max=${max2} maxlength=${maxlength} cols=${cols} rows=${rows} ref=${(el) => input_box = el} />
+                <textarea class="modern-input" name=${name} disabled=${disabled} autofocus=${focus} value=${value} placeholder=${placeholder} min=${min2} max=${max2} maxlength=${maxlength} cols=${cols} rows=${rows} ref=${(el) => input_box = el} />
             ` : html.node`
                 <input class="modern-input" name=${name} disabled=${disabled} autofocus=${focus} type=${type} value=${value} placeholder=${placeholder} min=${min2} max=${max2} maxlength=${maxlength} ref=${(el) => input_box = el} />
             `}
         </div>
     `;
+    if (focus) {
+      setTimeout(() => {
+        input_box.focus();
+      }, 1);
+    }
     error_tooltip = tippy_esm_default(input_box, {
       theme: "error",
       placement: "top",
@@ -34113,25 +34118,6 @@
     let form_website = document.getElementById("id_homepage").value;
     let form_country = document.getElementById("id_country");
     let form_about_me = document.getElementById("id_about_me").textContent;
-    let chars;
-    const about = html.node`
-        <textarea
-            name="about_me"
-            placeholder=${tl2(
-      trans.anything_you_can_imagine
-    )}
-            cols="40"
-            rows="10"
-            class="textarea--s"
-            maxlength=${bio_max_length}
-            id="id_about_me"
-            oninput=${() => update_about()}
-            data-form-type="other"
-        >
-            ${form_about_me}
-        </textarea>
-    `;
-    let preview;
     const markdown_settings = {
       allow_headers: true,
       allow_banners: true,
@@ -34144,6 +34130,9 @@
       allow_alignment: true,
       allow_lists: true
     };
+    let chars;
+    const about = markdown_field(update_about, markdown_settings, form_about_me, "about_me", 40, 10, tl2(trans.anything_you_can_imagine));
+    let preview;
     let banner_setting;
     let accent_setting;
     let font_setting;
@@ -34198,24 +34187,18 @@
         value: cache2.username,
         placeholder: auth.name,
         func: (val) => {
-          const match3 = about.value.match(username_regex);
+          const match3 = about.value().match(username_regex);
           const new_name = `[name=${val}]`;
           if (match3) {
-            about.value = about.value.replace(username_regex, new_name);
+            about.value(about.value().replace(username_regex, new_name));
           } else {
-            const trimmed = about.value.trimEnd();
+            const trimmed = about.value().trimEnd();
             if (trimmed.length == 0) {
-              about.value = new_name;
+              about.value(new_name);
             } else {
-              about.value = trimmed + "\n\n" + new_name;
+              about.value(trimmed + "\n\n" + new_name);
             }
           }
-          about.dispatchEvent(
-            new InputEvent("input", {
-              bubbles: true,
-              cancelable: true
-            })
-          );
         },
         submit_on_character: true
       })}
@@ -34263,7 +34246,7 @@
                 </div>
                 ${() => {
       const status_regex = /\[status=([^\]]+)\]/;
-      const match3 = about.value.match(status_regex);
+      const match3 = about.value().match(status_regex);
       const pre_existing = match3 ? match3[1] : "";
       const elem = html.node`
                         <div class="setting" data-type="text">
@@ -34274,24 +34257,18 @@
                             ${input({
         value: pre_existing,
         func: (val) => {
-          const match4 = about.value.match(status_regex);
+          const match4 = about.value().match(status_regex);
           const new_status = `[status=${val}]`;
           if (match4) {
-            about.value = about.value.replace(status_regex, new_status);
+            about.value(about.value().replace(status_regex, new_status));
           } else {
-            const trimmed = about.value.trimEnd();
+            const trimmed = about.value().trimEnd();
             if (trimmed.length == 0) {
-              about.value = new_status;
+              about.value(new_status);
             } else {
-              about.value = trimmed + "\n\n" + new_status;
+              about.value(trimmed + "\n\n" + new_status);
             }
           }
-          about.dispatchEvent(
-            new InputEvent("input", {
-              bubbles: true,
-              cancelable: true
-            })
-          );
         },
         submit_on_character: true
       })}
@@ -34337,7 +34314,7 @@
     )}
                         </p>
                     </div>
-                    <div class="input-container content-form textarea">
+                    <div class="${!ff("cosplay") ? "input-container content-form textarea" : "limitless"}">
                         ${about}
                     </div>
                 </div>
@@ -34370,9 +34347,8 @@
       const normalised = text4.replace(/\r\n/g, "\n");
       return new TextEncoder().encode(normalised).length;
     }
-    function update_about() {
+    function update_about(value = about.value()) {
       log("re-rendering", "about", "log");
-      const value = about.value;
       const length = len(value);
       chars.textContent = tl2(trans.value_characters_max, {
         v: `${length}/${bio_max_length}`
@@ -34413,7 +34389,7 @@
       const font_regex = /\[font=([^\]]+)\]/;
       console.info(
         "cache update",
-        about.value,
+        about.value(),
         cache3.hue,
         cache3.sat,
         cache3.lit
@@ -34442,7 +34418,7 @@
         settings_store.profile_hue.default = settings.hue;
         settings_store.profile_sat.default = settings.sat;
         settings_store.profile_lit.default = settings.lit;
-        const match3 = about.value.match(accent_regex);
+        const match3 = about.value().match(accent_regex);
         if (match3) {
           save_setting(
             "profile_hue",
@@ -34509,24 +34485,18 @@
                                         <button class="btn primary continue" onclick=${() => {
             const new_accent = `[accent=${settings.profile_hue},${settings.profile_sat},${settings.profile_lit}]`;
             if (match3) {
-              about.value = about.value.replace(
+              about.value(about.value().replace(
                 accent_regex,
                 new_accent
-              );
+              ));
             } else {
-              const trimmed = about.value.trimEnd();
+              const trimmed = about.value().trimEnd();
               if (trimmed.length == 0) {
-                about.value = new_accent;
+                about.value(new_accent);
               } else {
-                about.value = trimmed + "\n\n" + new_accent;
+                about.value(trimmed + "\n\n" + new_accent);
               }
             }
-            about.dispatchEvent(
-              new InputEvent("input", {
-                bubbles: true,
-                cancelable: true
-              })
-            );
             dialog_rm({ id: "profile_accent" });
             status({
               title: tl2(
@@ -34574,7 +34544,7 @@
                             ref=${(el) => font_edit = el}
                             type="button"
                             onclick=${() => {
-          const match3 = about.value.match(font_regex);
+          const match3 = about.value().match(font_regex);
           if (match3) {
             save_setting(
               "profile_hue",
@@ -34654,24 +34624,18 @@
                                             <button class="btn primary continue" onclick=${() => {
               const new_font = `[font=${font_name}${font_style != "solid" ? `,${font_style}` : ""}]`;
               if (match3) {
-                about.value = about.value.replace(
+                about.value(about.value().replace(
                   font_regex,
                   new_font
-                );
+                ));
               } else {
-                const trimmed = about.value.trimEnd();
+                const trimmed = about.value().trimEnd();
                 if (trimmed.length == 0) {
-                  about.value = new_font;
+                  about.value(new_font);
                 } else {
-                  about.value = trimmed + "\n\n" + new_font;
+                  about.value(trimmed + "\n\n" + new_font);
                 }
               }
-              about.dispatchEvent(
-                new InputEvent("input", {
-                  bubbles: true,
-                  cancelable: true
-                })
-              );
               dialog_rm({ id: "profile_font" });
               status({
                 title: tl2(
@@ -49382,6 +49346,7 @@
       placeholder,
       func: () => {
         on_selection(null, null, false);
+        if (func) func(textarea.value());
       },
       func_mouseup: () => {
         on_selection(null, null, false);
@@ -49404,7 +49369,6 @@
         if (item.end == null && item.start != null) item.end = item.start;
         item.button.setAttribute("aria-checked", selected.startsWith(item.start) && selected.endsWith(item.end));
       });
-      if (func) func(textarea.value());
     }
     const action_lookup = {};
     const action_list = [
@@ -49456,7 +49420,8 @@
                   placeholder: tl2(trans.example, { v: "https://" }),
                   func: () => {
                     submit_link();
-                  }
+                  },
+                  focus: true
                 })}
                                     <p class="generic-label">Text</p>
                                     ${alt = input({
@@ -49536,7 +49501,8 @@
                   placeholder: tl2(trans.example, { v: "https://" }),
                   func: () => {
                     submit_link();
-                  }
+                  },
+                  focus: true
                 })}
                                     <p class="generic-label">Text</p>
                                     ${alt = input({
@@ -49628,7 +49594,7 @@
                         ${group.map((item) => {
         if (item.hide) return html.node``;
         const button2 = html.node`
-                                <button class="markdown-action" data-type=${item.type} aria-checked="false" onclick=${() => {
+                                <button class="markdown-action" data-type=${item.type} aria-checked="false" type="button" onclick=${() => {
           const sel_start = editor.selectionStart;
           const sel_end = editor.selectionEnd;
           const val = textarea.value();
@@ -49638,6 +49604,7 @@
               textarea.value(val.slice(0, sel_start) + replacement + val.slice(sel_end));
               textarea.focus();
               textarea.range(sel_start, sel_start + replacement.length);
+              if (func) func(textarea.value());
             });
             return;
           }
@@ -49658,6 +49625,7 @@
             textarea.value(val.slice(0, sel_start) + replacement + val.slice(sel_end));
             textarea.focus();
             textarea.range(sel_start, sel_start + replacement.length);
+            if (func) func(textarea.value());
             log("action", "markdown", "info", {
               sel_start,
               sel_end,
@@ -49701,6 +49669,11 @@
             ${textarea}
         </div>
     `;
+    field.value = (val) => {
+      if (!val) return textarea.value();
+      textarea.value(val);
+      if (func) func(val);
+    };
     return field;
   }
 

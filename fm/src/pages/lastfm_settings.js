@@ -16,7 +16,7 @@ import {
 } from '../components/select';
 import { update_inbuilt_item } from '../config';
 import { ff } from '../sku';
-import { markdown, markdown_prompt } from '../components/markdown';
+import { markdown, markdown_field, markdown_prompt } from '../components/markdown';
 import { html, render } from 'lighterhtml';
 import tippy from 'tippy.js';
 import Cropper from 'cropperjs';
@@ -521,26 +521,6 @@ function patch_settings_profile_panel(token, update_picture) {
     let form_country = document.getElementById('id_country');
     let form_about_me = document.getElementById('id_about_me').textContent;
 
-    let chars;
-    const about = html.node`
-        <textarea
-            name="about_me"
-            placeholder=${tl(
-                trans.anything_you_can_imagine
-            )}
-            cols="40"
-            rows="10"
-            class="textarea--s"
-            maxlength=${bio_max_length}
-            id="id_about_me"
-            oninput=${() => update_about()}
-            data-form-type="other"
-        >
-            ${form_about_me}
-        </textarea>
-    `;
-    let preview;
-
     const markdown_settings = {
         allow_headers: true,
         allow_banners: true,
@@ -553,6 +533,10 @@ function patch_settings_profile_panel(token, update_picture) {
         allow_alignment: true,
         allow_lists: true
     };
+
+    let chars;
+    const about = markdown_field(update_about, markdown_settings, form_about_me, 'about_me', 40, 10, tl(trans.anything_you_can_imagine));
+    let preview;
 
     let banner_setting;
     let accent_setting;
@@ -612,31 +596,21 @@ function patch_settings_profile_panel(token, update_picture) {
                                 value: cache.username,
                                 placeholder: auth.name,
                                 func: (val) => {
-                                    const match = about.value.match(username_regex);
+                                    const match = about.value().match(username_regex);
 
                                     const new_name = `[name=${val}]`;
 
                                     if (match) {
-                                        about.value = about.value.replace(username_regex, new_name);
+                                        about.value(about.value().replace(username_regex, new_name));
                                     } else {
-                                        const trimmed = about.value.trimEnd();
+                                        const trimmed = about.value().trimEnd();
 
                                         if (trimmed.length == 0) {
-                                            about.value = new_name;
+                                            about.value(new_name);
                                         } else {
-                                            about.value =
-                                                trimmed +
-                                                '\n\n' +
-                                                new_name;
+                                            about.value(trimmed + '\n\n' + new_name);
                                         }
                                     }
-
-                                    about.dispatchEvent(
-                                        new InputEvent('input', {
-                                            bubbles: true,
-                                            cancelable: true
-                                        })
-                                    );
                                 },
                                 submit_on_character: true
                             })}
@@ -685,7 +659,7 @@ function patch_settings_profile_panel(token, update_picture) {
                 </div>
                 ${() => {
                     const status_regex = /\[status=([^\]]+)\]/;
-                    const match = about.value.match(status_regex);
+                    const match = about.value().match(status_regex);
 
                     const pre_existing = match ? match[1] : '';
 
@@ -698,31 +672,21 @@ function patch_settings_profile_panel(token, update_picture) {
                             ${input({
                                 value: pre_existing,
                                 func: (val) => {
-                                    const match = about.value.match(status_regex);
+                                    const match = about.value().match(status_regex);
 
                                     const new_status = `[status=${val}]`;
 
                                     if (match) {
-                                        about.value = about.value.replace(status_regex, new_status);
+                                        about.value(about.value().replace(status_regex, new_status));
                                     } else {
-                                        const trimmed = about.value.trimEnd();
+                                        const trimmed = about.value().trimEnd();
 
                                         if (trimmed.length == 0) {
-                                            about.value = new_status;
+                                            about.value(new_status);
                                         } else {
-                                            about.value =
-                                                trimmed +
-                                                '\n\n' +
-                                                new_status;
+                                            about.value(trimmed + '\n\n' + new_status);
                                         }
                                     }
-
-                                    about.dispatchEvent(
-                                        new InputEvent('input', {
-                                            bubbles: true,
-                                            cancelable: true
-                                        })
-                                    );
                                 },
                                 submit_on_character: true
                             })}
@@ -769,7 +733,7 @@ function patch_settings_profile_panel(token, update_picture) {
                             )}
                         </p>
                     </div>
-                    <div class="input-container content-form textarea">
+                    <div class="${!ff('cosplay') ? 'input-container content-form textarea' : 'limitless'}">
                         ${about}
                     </div>
                 </div>
@@ -810,10 +774,9 @@ function patch_settings_profile_panel(token, update_picture) {
         return new TextEncoder().encode(normalised).length;
     }
 
-    function update_about() {
+    function update_about(value = about.value()) {
         log('re-rendering', 'about', 'log');
 
-        const value = about.value;
         const length = len(value);
         chars.textContent = tl(trans.value_characters_max, {
             v: `${length}/${bio_max_length}`
@@ -863,7 +826,7 @@ function patch_settings_profile_panel(token, update_picture) {
 
         console.info(
             'cache update',
-            about.value,
+            about.value(),
             cache.hue,
             cache.sat,
             cache.lit
@@ -895,7 +858,7 @@ function patch_settings_profile_panel(token, update_picture) {
                             settings_store.profile_sat.default = settings.sat;
                             settings_store.profile_lit.default = settings.lit;
 
-                            const match = about.value.match(accent_regex);
+                            const match = about.value().match(accent_regex);
 
                             if (match) {
                                 save_setting(
@@ -971,29 +934,19 @@ function patch_settings_profile_panel(token, update_picture) {
                                             const new_accent = `[accent=${settings.profile_hue},${settings.profile_sat},${settings.profile_lit}]`;
 
                                             if (match) {
-                                                about.value = about.value.replace(
+                                                about.value(about.value().replace(
                                                     accent_regex,
                                                     new_accent
-                                                );
+                                                ));
                                             } else {
-                                                const trimmed = about.value.trimEnd();
+                                                const trimmed = about.value().trimEnd();
 
                                                 if (trimmed.length == 0) {
-                                                    about.value = new_accent;
+                                                    about.value(new_accent);
                                                 } else {
-                                                    about.value =
-                                                        trimmed +
-                                                        '\n\n' +
-                                                        new_accent;
+                                                    about.value(trimmed + '\n\n' + new_accent);
                                                 }
                                             }
-
-                                            about.dispatchEvent(
-                                                new InputEvent('input', {
-                                                    bubbles: true,
-                                                    cancelable: true
-                                                })
-                                            );
 
                                             dialog_rm({ id: 'profile_accent' });
                                             status({
@@ -1045,7 +998,7 @@ function patch_settings_profile_panel(token, update_picture) {
                             ref=${(el) => (font_edit = el)}
                             type="button"
                             onclick=${() => {
-                                const match = about.value.match(font_regex);
+                                const match = about.value().match(font_regex);
 
                                 if (match) {
                                     save_setting(
@@ -1136,29 +1089,19 @@ function patch_settings_profile_panel(token, update_picture) {
                                                 const new_font = `[font=${font_name}${font_style != 'solid' ? `,${font_style}` : ''}]`;
 
                                                 if (match) {
-                                                    about.value = about.value.replace(
+                                                    about.value(about.value().replace(
                                                         font_regex,
                                                         new_font
-                                                    );
+                                                    ));
                                                 } else {
-                                                    const trimmed = about.value.trimEnd();
+                                                    const trimmed = about.value().trimEnd();
 
                                                     if (trimmed.length == 0) {
-                                                        about.value = new_font;
+                                                        about.value(new_font);
                                                     } else {
-                                                        about.value =
-                                                            trimmed +
-                                                            '\n\n' +
-                                                            new_font;
+                                                        about.value(trimmed + '\n\n' + new_font);
                                                     }
                                                 }
-
-                                                about.dispatchEvent(
-                                                    new InputEvent('input', {
-                                                        bubbles: true,
-                                                        cancelable: true
-                                                    })
-                                                );
 
                                                 dialog_rm({ id: 'profile_font' });
                                                 status({

@@ -962,6 +962,7 @@ export function markdown_field(func, options, value, name, cols, rows, placehold
         placeholder,
         func: () => {
             on_selection(null, null, false);
+            if (func) func(textarea.value());
         },
         func_mouseup: () => {
             on_selection(null, null, false);
@@ -991,8 +992,6 @@ export function markdown_field(func, options, value, name, cols, rows, placehold
 
             item.button.setAttribute('aria-checked', selected.startsWith(item.start) && selected.endsWith(item.end));
         });
-
-        if (func) func(textarea.value());
     }
 
     const action_lookup = {};
@@ -1047,7 +1046,8 @@ export function markdown_field(func, options, value, name, cols, rows, placehold
                                         placeholder: tl(trans.example, { v: 'https://' }),
                                         func: () => {
                                             submit_link();
-                                        }
+                                        },
+                                        focus: true
                                     })}
                                     <p class="generic-label">Text</p>
                                     ${alt = input({
@@ -1134,7 +1134,8 @@ export function markdown_field(func, options, value, name, cols, rows, placehold
                                         placeholder: tl(trans.example, { v: 'https://' }),
                                         func: () => {
                                             submit_link();
-                                        }
+                                        },
+                                        focus: true
                                     })}
                                     <p class="generic-label">Text</p>
                                     ${alt = input({
@@ -1234,7 +1235,7 @@ export function markdown_field(func, options, value, name, cols, rows, placehold
                             if (item.hide) return html.node``;
 
                             const button = html.node`
-                                <button class="markdown-action" data-type=${item.type} aria-checked="false" onclick=${() => {
+                                <button class="markdown-action" data-type=${item.type} aria-checked="false" type="button" onclick=${() => {
                                     const sel_start = editor.selectionStart;
                                     const sel_end = editor.selectionEnd;
 
@@ -1248,6 +1249,8 @@ export function markdown_field(func, options, value, name, cols, rows, placehold
 
                                             textarea.focus();
                                             textarea.range(sel_start, sel_start + replacement.length);
+
+                                            if (func) func(textarea.value());
                                         });
 
                                         return;
@@ -1275,6 +1278,8 @@ export function markdown_field(func, options, value, name, cols, rows, placehold
 
                                         textarea.focus();
                                         textarea.range(sel_start, sel_start + replacement.length);
+
+                                        if (func) func(textarea.value());
 
                                         log('action', 'markdown', 'info', {
                                             sel_start,
@@ -1325,6 +1330,13 @@ export function markdown_field(func, options, value, name, cols, rows, placehold
             ${textarea}
         </div>
     `;
+
+    field.value = (val) => {
+        if (!val) return textarea.value();
+
+        textarea.value(val);
+        if (func) func(val);
+    }
 
     return field;
 }

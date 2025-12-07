@@ -29865,8 +29865,12 @@
         flex-direction: column;
         gap: var(--item-list-gap);
 
+        & > .content-form {
+            width: 100% !important;
+        }
+
         textarea {
-            height: 200px !important;
+            height: 250px !important;
         }
     }
     .markdown-actions {
