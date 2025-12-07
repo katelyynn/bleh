@@ -378,13 +378,9 @@ export function parse_shout_queue() {
 
     const shout = shout_parse_queue.shift();
 
-    const parsed = html.node`
-        <div class="markdown-body">
-            ${markdown(shout.element.textContent)}
-        </div>
-    `;
+    const parsed = markdown(shout.element.textContent);
 
-    shout.element.replaceWith(parsed);
+    shout.element.classList.add('markdown-body');
     render(shout.element, html.node`${parsed}`);
 
     log('parsed one shout', 'shout', 'log');

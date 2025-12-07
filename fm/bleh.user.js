@@ -58033,12 +58033,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
   function parse_shout_queue() {
     if (shout_parse_queue.length == 0) return;
     const shout = shout_parse_queue.shift();
-    const parsed2 = html.node`
-        <div class="markdown-body">
-            ${markdown(shout.element.textContent)}
-        </div>
-    `;
-    shout.element.replaceWith(parsed2);
+    const parsed2 = markdown(shout.element.textContent);
+    shout.element.classList.add("markdown-body");
     render(shout.element, html.node`${parsed2}`);
     log("parsed one shout", "shout", "log");
     if (shout_parse_queue.length > 0) setTimeout(parse_shout_queue, 50);
