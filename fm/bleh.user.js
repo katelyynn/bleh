@@ -49381,9 +49381,7 @@
         sel_end = editor2.selectionEnd;
         selected = val.slice(sel_start, sel_end);
       }
-      console.info("markdown action lookup", action_lookup);
       Object.values(action_lookup).forEach((item) => {
-        console.info("markdown lookup", item, selected);
         if (item.start == null && item.end == null) return;
         if (item.end == null && item.start != null) item.end = item.start;
         item.button.setAttribute("aria-checked", selected.startsWith(item.start) && selected.startsWith(item.end));
@@ -49497,7 +49495,7 @@
           let replacement;
           if (selected.startsWith(item.start) && selected.startsWith(item.end)) {
             let replace_end = -1 * item.end.length;
-            if (Object.is(replace_end, -0)) {
+            if (replace_end != 0) {
               replacement = selected.slice(item.start.length, replace_end);
             } else {
               replacement = selected.slice(item.start.length);
