@@ -29904,8 +29904,7 @@
             transition-duration: var(--trans);
             transition-timing-function: var(--trans-function);
 
-            &[aria-expanded="true"],
-            &:focus-visible:not([readonly]) {
+            &:focus-within {
                 --focus-outline: none !important;
                 --shadow: var(--focused-input-shadow) !important;
             }
@@ -29931,7 +29930,6 @@
                 background-color: var(--bg-hov) !important;
                 transition: none !important;
             }
-            &[aria-expanded="true"],
             &:active {
                 background-color: var(--bg-atv) !important;
             }
