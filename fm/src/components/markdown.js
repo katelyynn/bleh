@@ -1355,8 +1355,31 @@ export function markdown_field(func, options, value, name, cols, rows, placehold
     }
 
     function render_overlay(val = textarea.value()) {
+        val = val.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+        val = val.replace(/\[(left|center|right|links)\]/gi, text => {
+            return `<span class="md-tag-wrap">${text}</span>`;
+        });
+        val = val.replace(/\[\/(left|center|right|links)\]/gi, text => {
+            return `<span class="md-tag-wrap">${text}</span>`;
+        });
+
+        val = val.replace(/\[([a-z]+)=([^\]]+)\]/gi, (match, tag, val) => {
+            if (!['status', 'name', 'font', 'accent', 'banner'].includes(tag)) return match;
+
+            return `<span class="md-tag">[${tag}=<span class="md-val">${val}</span>]</span>`;
+        });
+
+        val = val.replace(/!\[([^\]]*)\]\(([^)]+)\)/gi, (match, label, url) => {
+            return `<span class="md-link">![<span class="md-label">${label}</span>](<span class="md-url">${url}</span>)</span>`;
+        });
+
+        val = val.replace(/\[([^\]]+)\]\(([^)]+)\)/gi, (match, label, url) => {
+            return `<span class="md-link">[<span class="md-label">${label}</span>](<span class="md-url">${url}</span>)</span>`;
+        });
+
         render(overlay, html`
-            ${val}
+            ${{ html: val }}
         `);
     }
 

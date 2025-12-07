@@ -49555,8 +49555,25 @@
       render_overlay(val);
     };
     function render_overlay(val = textarea.value()) {
+      val = val.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+      val = val.replace(/\[(left|center|right|links)\]/gi, (text4) => {
+        return `<span class="md-tag-wrap">${text4}</span>`;
+      });
+      val = val.replace(/\[\/(left|center|right|links)\]/gi, (text4) => {
+        return `<span class="md-tag-wrap">${text4}</span>`;
+      });
+      val = val.replace(/\[([a-z]+)=([^\]]+)\]/gi, (match3, tag, val2) => {
+        if (!["status", "name", "font", "accent", "banner"].includes(tag)) return match3;
+        return `<span class="md-tag">[${tag}=<span class="md-val">${val2}</span>]</span>`;
+      });
+      val = val.replace(/!\[([^\]]*)\]\(([^)]+)\)/gi, (match3, label, url) => {
+        return `<span class="md-link">![<span class="md-label">${label}</span>](<span class="md-url">${url}</span>)</span>`;
+      });
+      val = val.replace(/\[([^\]]+)\]\(([^)]+)\)/gi, (match3, label, url) => {
+        return `<span class="md-link">[<span class="md-label">${label}</span>](<span class="md-url">${url}</span>)</span>`;
+      });
       render(overlay, html`
-            ${val}
+            ${{ html: val }}
         `);
     }
     return field;

@@ -30013,4 +30013,22 @@
             --mask-colour: hsl(var(--l3-c));
         }
     }
+
+    .md-tag-wrap {
+        color: hsl(var(--c3), 50%);
+    }
+    .md-link,
+    .md-tag {
+        color: hsl(var(--c3));
+    }
+    .md-val {
+        color: hsl(var(--c2));
+    }
+
+    .md-label {
+        color: hsl(var(--l2-c-theme-switch));
+    }
+    .md-url {
+        color: hsl(var(--l3-c));
+    }
 }
