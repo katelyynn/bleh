@@ -49560,14 +49560,17 @@
     function render_overlay(val = textarea.value()) {
       val = val.replace(/</g, "&lt;").replace(/>/g, "&gt;");
       val = val.replace(/\[(left|center|right|links)\]/gi, (text4) => {
+        if (!options.allow_alignment) return text4;
         return `<span class="md-tag-wrap">${text4}</span>`;
       });
       val = val.replace(/\[\/(left|center|right|links)\]/gi, (text4) => {
+        if (!options.allow_alignment) return text4;
         return `<span class="md-tag-wrap">${text4}</span>`;
       });
       val = val.replace(/\[([a-z]+)=([^\]]+)\]/gi, (match3, tag, val2) => {
         if (!["status", "name", "font", "accent", "banner"].includes(tag)) return match3;
         if (!options.allow_hue && tag == "accent") return match3;
+        if (!options.allow_alignment) return match3;
         if (tag == "accent") {
           const split = val2.split(",");
           if (split.length == 3 && parseFloat(split[0]) >= 0 && parseFloat(split[1]) >= 0 && parseFloat(split[2]) >= 0) {

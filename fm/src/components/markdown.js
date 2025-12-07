@@ -1363,9 +1363,13 @@ export function markdown_field(func, options, value, name, cols, rows, placehold
         val = val.replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
         val = val.replace(/\[(left|center|right|links)\]/gi, text => {
+            if (!options.allow_alignment) return text;
+
             return `<span class="md-tag-wrap">${text}</span>`;
         });
         val = val.replace(/\[\/(left|center|right|links)\]/gi, text => {
+            if (!options.allow_alignment) return text;
+
             return `<span class="md-tag-wrap">${text}</span>`;
         });
 
@@ -1373,6 +1377,8 @@ export function markdown_field(func, options, value, name, cols, rows, placehold
             if (!['status', 'name', 'font', 'accent', 'banner'].includes(tag)) return match;
 
             if (!options.allow_hue && tag == 'accent') return match;
+
+            if (!options.allow_alignment) return match;
 
             if (tag == 'accent') {
                 const split = val.split(',');
