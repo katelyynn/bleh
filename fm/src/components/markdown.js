@@ -972,7 +972,7 @@ export function markdown_field(func, options = {}, value, name, cols, rows, plac
 
             if (item.end == null && item.start != null) item.end = item.start;
 
-            item.button.setAttribute('aria-checked', selected.startsWith(item.start) && selected.startsWith(item.end));
+            item.button.setAttribute('aria-checked', selected.startsWith(item.start) && selected.endsWith(item.end));
         });
 
         if (func) func(textarea.value());
@@ -1089,7 +1089,7 @@ export function markdown_field(func, options = {}, value, name, cols, rows, plac
                                     const selected = val.slice(sel_start, sel_end);
                                     let replacement;
 
-                                    if (selected.startsWith(item.start) && selected.startsWith(item.end)) {
+                                    if (selected.startsWith(item.start) && selected.endsWith(item.end)) {
                                         let replace_end = -1 * item.end.length;
 
                                         if (replace_end != 0) {
