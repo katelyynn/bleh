@@ -1106,7 +1106,8 @@ export function markdown_field(func, options, value, name, cols, rows, placehold
                 type: 'quote',
                 name: 'Quote',
                 start: '> ',
-                end: ''
+                end: '',
+                hide: true
             },
             {
                 type: 'code',
