@@ -48638,7 +48638,8 @@
       "h3",
       "h4",
       "h5",
-      "t"
+      "t",
+      "del"
     ];
     let ALLOWED_ATTR = [
       "href",
@@ -49353,7 +49354,7 @@
         `
     });
   }
-  function markdown_field(value, name, cols, rows, placeholder) {
+  function markdown_field(func, options = {}, value, name, cols, rows, placeholder) {
     const textarea = input({
       type: "textarea",
       value,
@@ -49380,12 +49381,16 @@
         sel_end = editor2.selectionEnd;
         selected = val.slice(sel_start, sel_end);
       }
-      const is_bold = selected.startsWith("**") && selected.endsWith("**");
-      action_lookup.header.setAttribute("aria-checked", selected.startsWith("# "));
-      action_lookup.bold.setAttribute("aria-checked", is_bold);
-      action_lookup.italic.setAttribute("aria-checked", !is_bold && selected.startsWith("*") && selected.endsWith("*"));
+      console.info("markdown action lookup", action_lookup);
+      Object.values(action_lookup).forEach((item) => {
+        console.info("markdown lookup", item, selected);
+        if (item.start == null && item.end == null) return;
+        if (item.end == null && item.start != null) item.end = item.start;
+        item.button.setAttribute("aria-checked", selected.startsWith(item.start) && selected.startsWith(item.end));
+      });
+      if (func) func(textarea.value());
     }
-    const action_lookup = [];
+    const action_lookup = {};
     const action_list = [
       [
         {
@@ -49422,7 +49427,9 @@
         },
         {
           type: "mention",
-          name: "Mention"
+          name: "Mention",
+          start: "@",
+          end: ""
         },
         {
           type: "quote",
@@ -49490,7 +49497,7 @@
           let replacement;
           if (selected.startsWith(item.start) && selected.startsWith(item.end)) {
             let replace_end = -1 * item.end.length;
-            if (replace_end != -0) {
+            if (Object.is(replace_end, -0)) {
               replacement = selected.slice(item.start.length, replace_end);
             } else {
               replacement = selected.slice(item.start.length);
@@ -49514,7 +49521,12 @@
                                 ${item.name}
                             </button>
                         `;
-      action_lookup[item.type] = button2;
+      action_lookup[item.type] = {
+        button: button2,
+        start: item.start,
+        end: item.end
+      };
+      console.info("markdown added to lookup", action_lookup, action_lookup[item.type]);
       tippy_esm_default(button2, {
         content: item.name
       });
@@ -49527,12 +49539,13 @@
             `)}
         </div>
     `;
-    return html.node`
+    const field = html.node`
         <div class="markdown-field">
             ${actions}
             ${textarea}
         </div>
     `;
+    return field;
   }
 
   // src/seasonal.js
@@ -58611,6 +58624,16 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     update_page();
     page.structure.row.removeChild(page.structure.row.firstElementChild);
     page.structure.row.removeChild(page.structure.row.firstElementChild);
+    let md_body;
+    let md_options = {
+      allow_headers: true,
+      allow_banners: true,
+      allow_icons: true,
+      allow_hue: true,
+      allow_fonts: true,
+      allow_socials: true,
+      allow_alignment: true
+    };
     render(
       page.structure.main,
       html`
@@ -58714,7 +58737,11 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
             </section>
             <section class="flexy">
                 <h2>Markdown</h2>
-                ${markdown_field()}
+                ${markdown_field((val) => {
+        render(md_body, markdown(val, md_options));
+      }, md_options)}
+                <div class="sep" />
+                <div class="markdown-body" ref=${(el) => md_body = el} />
             </section>
         `
     );

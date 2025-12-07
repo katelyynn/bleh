@@ -14,7 +14,7 @@ import { download_with_progress } from '../build/tools.js';
 import { status } from '../components/status.js';
 import { dialog } from '../components/dialog.js';
 import { setting } from '../components/settings.js';
-import { markdown_field } from '../components/markdown.js';
+import { markdown, markdown_field } from '../components/markdown.js';
 
 export function mualani() {
     page.structure.container = document.body.querySelector('.page-content');
@@ -40,6 +40,17 @@ export function mualani() {
     // remove error stuff cus we control this page
     page.structure.row.removeChild(page.structure.row.firstElementChild);
     page.structure.row.removeChild(page.structure.row.firstElementChild);
+
+    let md_body;
+    let md_options = {
+        allow_headers: true,
+        allow_banners: true,
+        allow_icons: true,
+        allow_hue: true,
+        allow_fonts: true,
+        allow_socials: true,
+        allow_alignment: true
+    };
 
     render(
         page.structure.main,
@@ -150,7 +161,11 @@ export function mualani() {
             </section>
             <section class="flexy">
                 <h2>Markdown</h2>
-                ${markdown_field()}
+                ${markdown_field((val) => {
+                    render(md_body, markdown(val, md_options));
+                }, md_options)}
+                <div class="sep" />
+                <div class="markdown-body" ref=${el => md_body = el} />
             </section>
         `
     );

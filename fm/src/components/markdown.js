@@ -64,7 +64,8 @@ export function markdown(
         'h3',
         'h4',
         'h5',
-        't'
+        't',
+        'del'
     ];
     let ALLOWED_ATTR = [
         'href',
@@ -934,7 +935,7 @@ export function external_url_prompt(url, dangerous = false) {
     });
 }
 
-export function markdown_field(value, name, cols, rows, placeholder) {
+export function markdown_field(func, options = {}, value, name, cols, rows, placeholder) {
     const textarea = input({
         type: 'textarea',
         value,
@@ -966,14 +967,21 @@ export function markdown_field(value, name, cols, rows, placeholder) {
             selected = val.slice(sel_start, sel_end);
         }
 
-        const is_bold = selected.startsWith('**') && selected.endsWith('**');
+        console.info('markdown action lookup', action_lookup);
+        Object.values(action_lookup).forEach(item => {
+            console.info('markdown lookup', item, selected);
 
-        action_lookup.header.setAttribute('aria-checked', selected.startsWith('# '));
-        action_lookup.bold.setAttribute('aria-checked', is_bold);
-        action_lookup.italic.setAttribute('aria-checked', !is_bold && selected.startsWith('*') && selected.endsWith('*'));
+            if (item.start == null && item.end == null) return;
+
+            if (item.end == null && item.start != null) item.end = item.start;
+
+            item.button.setAttribute('aria-checked', selected.startsWith(item.start) && selected.startsWith(item.end));
+        });
+
+        if (func) func(textarea.value());
     }
 
-    const action_lookup = [];
+    const action_lookup = {};
 
     const action_list = [
         [
@@ -1011,7 +1019,9 @@ export function markdown_field(value, name, cols, rows, placeholder) {
             },
             {
                 type: 'mention',
-                name: 'Mention'
+                name: 'Mention',
+                start: '@',
+                end: ''
             },
             {
                 type: 'quote',
@@ -1085,7 +1095,7 @@ export function markdown_field(value, name, cols, rows, placeholder) {
                                     if (selected.startsWith(item.start) && selected.startsWith(item.end)) {
                                         let replace_end = -1 * item.end.length;
 
-                                        if (replace_end != -0) {
+                                        if (Object.is(replace_end, -0)) {
                                             replacement = selected.slice(item.start.length, replace_end);
                                         } else {
                                             replacement = selected.slice(item.start.length);
@@ -1113,7 +1123,12 @@ export function markdown_field(value, name, cols, rows, placeholder) {
                             </button>
                         `;
 
-                        action_lookup[item.type] = button;
+                        action_lookup[item.type] = {
+                            button,
+                            start: item.start,
+                            end: item.end
+                        };
+                        console.info('markdown added to lookup', action_lookup, action_lookup[item.type]);
 
                         tippy(button, {
                             content: item.name
@@ -1129,10 +1144,12 @@ export function markdown_field(value, name, cols, rows, placeholder) {
         </div>
     `;
 
-    return html.node`
+    const field = html.node`
         <div class="markdown-field">
             ${actions}
             ${textarea}
         </div>
     `;
+
+    return field;
 }
