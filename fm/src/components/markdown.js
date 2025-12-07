@@ -1097,7 +1097,70 @@ export function markdown_field(func, options = {}, value, name, cols, rows, plac
             },
             {
                 type: 'image',
-                name: 'Image'
+                name: 'Image',
+                func: () => {
+                    return new Promise(resolve => {
+                        let link;
+                        let alt;
+
+                        dialog({
+                            id: 'link',
+                            title: 'Create image',
+                            body: html.node`
+                                <div class="new-scrobble-form">
+                                    <p class="generic-label">Link</p>
+                                    ${link = input({
+                                        type: 'text',
+                                        placeholder: tl(trans.example, { v: 'https://' }),
+                                        func: () => {
+                                            submit_link();
+                                        }
+                                    })}
+                                    <p class="generic-label">Text</p>
+                                    ${alt = input({
+                                        type: 'text',
+                                        func: () => {
+                                            submit_link();
+                                        }
+                                    })}
+                                </div>
+                                <div class="modal-footer">
+                                <button class="see-more cancel" onclick=${() => {
+                                    dialog_rm({ id: 'link' });
+                                    resolve(null);
+                                }}>
+                                    ${tl(trans.cancel)}
+                                </button>
+                                <div class="fill" />
+                                <button class="btn primary continue" onclick=${() => {
+                                    submit_link();
+                                }}>
+                                    ${tl(trans.finish)}
+                                </button>
+                                </div>
+                            `
+                        });
+
+                        function submit_link() {
+                            let alt_text = alt.value();
+                            let link_text = link.value();
+
+                            if (!link_text) return;
+
+                            dialog_rm({ id: 'link' });
+
+                            let output;
+
+                            if (alt_text != link_text && alt_text) {
+                                output = `![${alt_text}](${link_text})`;
+                            } else {
+                                output = `![](${link_text})`;
+                            }
+
+                            resolve(output);
+                        }
+                    });
+                }
             }
         ],
         [
