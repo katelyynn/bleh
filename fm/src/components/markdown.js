@@ -963,6 +963,7 @@ export function markdown_field(func, options, value, name, cols, rows, placehold
         func: () => {
             on_selection(null, null, false);
             if (func) func(textarea.value());
+            render_overlay();
         },
         func_mouseup: () => {
             on_selection(null, null, false);
@@ -973,6 +974,7 @@ export function markdown_field(func, options, value, name, cols, rows, placehold
         maxlength,
         focus: mini
     });
+    let overlay;
 
     const editor = textarea.editor();
 
@@ -1330,15 +1332,32 @@ export function markdown_field(func, options, value, name, cols, rows, placehold
     const field = html.node`
         <div class="markdown-field ${mini ? 'mini' : ''}">
             ${actions}
-            ${textarea}
+            <div class="markdown-field-text">
+                <div class="markdown-field-overlay" ref=${el => overlay = el} />
+                ${textarea}
+            </div>
         </div>
     `;
+
+    render_overlay();
+
+    editor.addEventListener('scroll', () => {
+        overlay.scrollTop = editor.scrollTop;
+    });
 
     field.value = (val) => {
         if (!val) return textarea.value();
 
         textarea.value(val);
         if (func) func(val);
+
+        render_overlay(val);
+    }
+
+    function render_overlay(val = textarea.value()) {
+        render(overlay, html`
+            ${val}
+        `);
     }
 
     return field;

@@ -29881,11 +29881,6 @@
         flex-direction: column;
         gap: var(--item-list-gap);
 
-        & > .content-form {
-            width: 100% !important;
-            margin: unset !important;
-        }
-
         textarea {
             height: 250px !important;
         }
@@ -29893,6 +29888,80 @@
         &.mini {
             textarea {
                 height: 70px !important;
+            }
+        }
+
+        .markdown-field-text {
+            --bg: hsl(var(--b6), 60%);
+            --bg-hov: hsl(var(--b6), 90%);
+            --bg-atv: hsl(var(--b6), 90%);
+            --shadow: var(--input-shadow) !important;
+
+            background-color: var(--bg) !important;
+            box-shadow: var(--shadow, var(--interact-shadow)) !important;
+            transition-property:
+                background-color, transform, box-shadow, color, border;
+            transition-duration: var(--trans);
+            transition-timing-function: var(--trans-function);
+
+            &[aria-expanded="true"],
+            &:focus-visible:not([readonly]) {
+                --focus-outline: none !important;
+                --shadow: var(--focused-input-shadow) !important;
+            }
+
+            [data-bleh--theme="oled"] &,
+            [data-bleh--theme_type="light"] & {
+                --bg: hsl(var(--b5));
+                --bg-hov: hsl(var(--b4), 20%);
+                --bg-atv: hsl(var(--b4), 20%);
+            }
+
+            &[disabled]:not([disabled="false"]),
+            &[readonly] {
+                --bg-hov: var(--bg) !important;
+                --bg-atv: var(--bg) !important;
+                --focus-outline: none !important;
+                pointer-events: none;
+                --col: hsl(var(--c3));
+            }
+
+            &:hover,
+            &:focus-visible {
+                background-color: var(--bg-hov) !important;
+                transition: none !important;
+            }
+            &[aria-expanded="true"],
+            &:active {
+                background-color: var(--bg-atv) !important;
+            }
+
+            position: relative;
+            border-radius: var(--button-radius);
+
+            .markdown-field-overlay {
+                position: absolute;
+                inset: 0;
+                pointer-events: none;
+
+                white-space: pre-wrap;
+                word-wrap: break-word;
+                overflow: hidden;
+                padding: var(--button-verts) var(--button-sides);
+            }
+
+            & > .content-form {
+                width: 100% !important;
+                margin: unset !important;
+
+                & > textarea {
+                    background: unset !important;
+                    box-shadow: none !important;
+                    color: transparent !important;
+                    caret-color: hsl(var(--c2));
+
+                    z-index: 10;
+                }
             }
         }
     }
