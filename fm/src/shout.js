@@ -374,13 +374,17 @@ export function shout_header(shout_controls) {
 }
 
 export function parse_shout_queue() {
-    if (shout_parse_queue.length === 0) return;
+    if (shout_parse_queue.length == 0) return;
 
     const shout = shout_parse_queue.shift();
 
-    const parsed = markdown(shout.element.textContent);
+    const parsed = html.node`
+        <div class="markdown-body">
+            ${markdown(shout.element.textContent)}
+        </div>
+    `;
 
-    shout.element.classList.add('markdown-body');
+    shout.element.replaceWith(parsed);
     render(shout.element, html.node`${parsed}`);
 
     log('parsed one shout', 'shout', 'log');
