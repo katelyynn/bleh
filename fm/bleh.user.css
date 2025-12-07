@@ -30023,6 +30023,12 @@
     }
     .md-val {
         color: hsl(var(--c2));
+
+        &.md-accent {
+            background: hsl(var(--h3));
+            color: hsl(var(--b7));
+            border-radius: var(--item-small-radius);
+        }
     }
 
     .md-label {

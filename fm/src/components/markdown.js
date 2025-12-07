@@ -1105,7 +1105,8 @@ export function markdown_field(func, options, value, name, cols, rows, placehold
                 type: 'mention',
                 name: tl(trans.mention_user),
                 start: '@',
-                end: ''
+                end: '',
+                hide: true
             },
             {
                 type: 'quote',
@@ -1370,6 +1371,15 @@ export function markdown_field(func, options, value, name, cols, rows, placehold
 
         val = val.replace(/\[([a-z]+)=([^\]]+)\]/gi, (match, tag, val) => {
             if (!['status', 'name', 'font', 'accent', 'banner'].includes(tag)) return match;
+
+            if (tag == 'accent') {
+                const split = val.split(',');
+                if (split.length == 3 && parseFloat(split[0]) >= 0 && parseFloat(split[1]) >= 0 && parseFloat(split[2]) >= 0) {
+                    return `<span class="md-tag">[${tag}=<span class="md-val md-accent colourful" style="--hue-over: ${parseFloat(split[0])}; --sat-over: ${parseFloat(split[1])}; --lit-over: ${parseFloat(split[2])}">${val}</span>]</span>`;
+                } else {
+                    return match;
+                }
+            }
 
             return `<span class="md-tag">[${tag}=<span class="md-val">${val}</span>]</span>`;
         });
