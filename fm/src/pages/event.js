@@ -62,27 +62,15 @@ export function bleh_events() {
     page.name = event_header.querySelector('.header-title').textContent.trim();
     page.sister = event_header.querySelector('.header-title').textContent.trim();
 
-
-    let event_description = event_header.querySelector('.header-title-secondary');
-    if (settings.corrections) {
-        let links = event_description.querySelectorAll('a');
-        links.forEach((link) => {
-            link.textContent = correct_artist(link.textContent);
-        });
-    }
-
     let redesigned_event_header = document.createElement('section');
     redesigned_event_header.classList.add('redesigned-header', 'redesigned-event-header', 'no-background');
     redesigned_event_header.innerHTML = (`
-        <div class="calendar-side">
-            <div class="calendar">
-                ${event_header.querySelector('.calendar-icon').innerHTML}
-            </div>
+        <div class="tag-side">
+            <div class="tag-icon event-icon"></div>
         </div>
         <div class="info-side">
             <div class="sub-text">${tl(trans.event)}</div>
             <h1>${page.name}</h1>
-            <p class="sub-info">${event_description.innerHTML}</p>
         </div>
     `);
 
@@ -93,7 +81,7 @@ export function bleh_events() {
         register_background(null);
 
     page.structure.container.insertBefore(redesigned_event_header, page.structure.container.firstElementChild);
-    document.body.querySelector('.header').classList.add('legacy-header');
+    event_header.classList.add('legacy-header');
 
 
     if (!is_subpage) {

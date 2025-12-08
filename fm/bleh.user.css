@@ -16642,9 +16642,11 @@
         margin: unset !important;
         width: unset;
 
-        --bg: hsla(var(--b4), 40%);
-        --bg-hov: hsla(var(--b4), 60%);
-        --bg-atv: hsla(var(--b4), 80%);
+        --bg: transparent;
+        --bg-hov: transparent;
+        --bg-atv: transparent;
+        --padding: 0;
+        --radius: 0;
         --shadow: none;
 
         .attendee-summary-user-link {
@@ -16653,6 +16655,10 @@
 
         .attendee-summary-user-avatar {
             border-radius: var(--avatar-radius);
+
+            &:after {
+                display: none;
+            }
         }
     }
 
@@ -16662,7 +16668,7 @@
         font-weight: var(--font-weight-medium);
         color: hsl(var(--l3-c));
         /* 32px is the avatar size */
-        padding-left: calc(32px + var(--chartlist-inner-gap));
+        padding-left: calc(32px + 10px);
     }
     .attendee-summary-user-link {
         position: static !important;
