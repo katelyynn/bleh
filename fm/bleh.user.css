@@ -8005,8 +8005,10 @@
 
     .shout-more-replies-after,
     .shout-more-replies-before {
-        --col: hsl(var(--c3)) !important;
-        --mask-colour: currentColor !important;
+        &:not(:hover, :focus) {
+            --col: hsl(var(--c3)) !important;
+            --mask-colour: currentColor !important;
+        }
     }
 
     .avatar-status-dot {
