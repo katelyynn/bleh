@@ -36265,10 +36265,8 @@
         bleh_user_library();
       } else if (page.subpage == "events") {
         convert_to_toolbar();
-        const no_events = page.structure.main.querySelector(
-          ":scope > .no-events"
-        );
-        if (!no_events) bleh_profile_events();
+        const no_events = page.structure.main.querySelector(":scope > .no-events");
+        bleh_profile_events(no_events);
       } else if (page.subpage.startsWith("listening-report")) {
         page.structure.content_top.classList.add(
           "listening-report-navlist"
@@ -37598,7 +37596,7 @@
     cache2.aka = display_name.textContent.trim();
     cache2.created = scrobble_since.textContent.trim();
   }
-  function bleh_profile_events() {
+  function bleh_profile_events(no_events) {
     const selected_tab = page.structure.toolbar?.querySelector(
       ".secondary-nav-item-link--active"
     );
