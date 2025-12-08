@@ -110,7 +110,10 @@ export function bleh_events() {
         let side_actions = document.createElement('section');
         side_actions.classList.add('side-actions');
 
-        page.structure.side.appendChild(side_actions);
+        if (!page.mobile)
+            page.structure.side.appendChild(side_actions);
+        else
+            page.structure.main.appendChild(side_actions);
 
         let form = document.body.querySelector('.attendance-control');
         let buttons = form.querySelectorAll('button');

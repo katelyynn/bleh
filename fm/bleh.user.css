@@ -5455,6 +5455,11 @@
             & > .primary {
                 grid-column: span 2;
             }
+
+            @media (max-width: 980px) {
+                display: flex;
+                flex-direction: column;
+            }
         }
         .wiki-column {
             width: 100%;

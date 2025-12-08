@@ -57420,7 +57420,10 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       });
       let side_actions = document.createElement("section");
       side_actions.classList.add("side-actions");
-      page.structure.side.appendChild(side_actions);
+      if (!page.mobile)
+        page.structure.side.appendChild(side_actions);
+      else
+        page.structure.main.appendChild(side_actions);
       let form = document.body.querySelector(".attendance-control");
       let buttons = form.querySelectorAll("button");
       buttons.forEach((button2) => {
