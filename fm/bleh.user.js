@@ -56842,7 +56842,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                         <div class="title-container">
                             <div class="header-title-label-wrap">
                                 <h1 class="header-title">
-                                    <a class="profile-name" href="${root}user/${auth.name}" ref=${(el) => profile_name = el}>${cache2.username ? cache2.username : auth.name}</a>
+                                    <a class="profile-name" ref=${(el) => profile_name = el}>${cache2.username ? cache2.username : auth.name}</a>
                                 </h1>
                             </div>
                         </div>
