@@ -978,6 +978,8 @@ export function markdown_field(func, options, value, name, cols, rows, placehold
 
     const editor = textarea.editor();
 
+    let is_bold_selected;
+
     function on_selection(editor, val, has_selection = true) {
         let sel_start;
         let sel_end;
@@ -995,7 +997,12 @@ export function markdown_field(func, options, value, name, cols, rows, placehold
 
             if (item.end == null && item.start != null) item.end = item.start;
 
-            item.button.setAttribute('aria-checked', selected.startsWith(item.start) && selected.endsWith(item.end));
+            let is_selected = selected.startsWith(item.start) && selected.endsWith(item.end) && selected.length >= item.start.length + item.end.length;
+            if (item.type == 'bold') is_bold_selected = is_selected;
+
+            if (item.type == 'italic' && is_bold_selected) is_selected = false;
+
+            item.button.setAttribute('aria-checked', is_selected);
         });
     }
 
@@ -1306,6 +1313,7 @@ export function markdown_field(func, options, value, name, cols, rows, placehold
                             `;
 
                             action_lookup[item.type] = {
+                                type: item.type,
                                 button,
                                 start: item.start,
                                 end: item.end

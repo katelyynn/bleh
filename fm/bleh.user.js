@@ -49287,6 +49287,7 @@
     });
     let overlay;
     const editor = textarea.editor();
+    let is_bold_selected;
     function on_selection(editor2, val, has_selection = true) {
       let sel_start;
       let sel_end;
@@ -49299,7 +49300,10 @@
       Object.values(action_lookup).forEach((item) => {
         if (item.start == null && item.end == null) return;
         if (item.end == null && item.start != null) item.end = item.start;
-        item.button.setAttribute("aria-checked", selected.startsWith(item.start) && selected.endsWith(item.end));
+        let is_selected = selected.startsWith(item.start) && selected.endsWith(item.end) && selected.length >= item.start.length + item.end.length;
+        if (item.type == "bold") is_bold_selected = is_selected;
+        if (item.type == "italic" && is_bold_selected) is_selected = false;
+        item.button.setAttribute("aria-checked", is_selected);
       });
     }
     const action_lookup = {};
@@ -49575,6 +49579,7 @@
                                 </button>
                             `;
         action_lookup[item.type] = {
+          type: item.type,
           button: button2,
           start: item.start,
           end: item.end
