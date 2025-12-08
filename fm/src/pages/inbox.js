@@ -15,6 +15,7 @@ import { tl, trans } from "../build/trans.js";
 import { html } from "lighterhtml";
 import { load_profile_cache_externally } from "./profile.js";
 import { bleh_message_list } from "../components/messages.js";
+import { toggle } from "../components/toggle.js";
 
 export async function bleh_inbox() {
     page.structure.container = document.body.querySelector('.page-content');
@@ -119,7 +120,24 @@ export async function bleh_inbox() {
 
         table.classList = 'inbox-table-legacy';
 
-        bleh_message_list(table.querySelector('tbody'), false, delete_btn);
+        const checkboxes = [];
+
+        bleh_message_list(table.querySelector('tbody'), false, delete_btn, checkboxes);
+
+        select_all.replaceWith(toggle({
+            type: 'checkbox',
+            func: (val) => {
+                if (val) {
+                    checkboxes.forEach(checkbox => {
+                        if (!checkbox.checked()) checkbox.checked(true);
+                    });
+                } else {
+                    checkboxes.forEach(checkbox => {
+                        if (checkbox.checked()) checkbox.checked(false);
+                    });
+                }
+            }
+        }));
     } else if (page.subpage == 'compose') {
         let inbox = page.structure.container.querySelector('.inbox-compose-view');
         page.structure.main.appendChild(inbox);

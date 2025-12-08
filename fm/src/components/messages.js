@@ -12,7 +12,7 @@ import { tl, trans } from '../build/trans.js';
 import { patch_avatar } from '../avatar.js';
 import { toggle } from './toggle.js';
 
-export function bleh_message_list(list, mini = false, delete_btn = null) {
+export function bleh_message_list(list, mini = false, delete_btn = null, checkboxes = []) {
     list.classList = 'notification-list';
 
     if (mini) list.classList.add('mini');
@@ -47,10 +47,12 @@ export function bleh_message_list(list, mini = false, delete_btn = null) {
 
         patch_avatar(avatar, author);
 
+        let checkbox;
+
         render(message, html`
             ${!mini ? html.node`
                 <div class="message-checkbox">
-                    ${toggle({
+                    ${checkbox = toggle({
                         type: 'checkbox',
                         name: 'message_id',
                         id,
@@ -112,5 +114,7 @@ export function bleh_message_list(list, mini = false, delete_btn = null) {
                 href=${href}
             />
         `);
+
+        checkboxes.push(checkbox);
     });
 }

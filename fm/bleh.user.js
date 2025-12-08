@@ -31773,8 +31773,10 @@
       checkbox.checked = false;
       state.setAttribute("aria-checked", false);
     };
-    elem.checked = () => {
-      return checkbox.checked;
+    elem.checked = (val) => {
+      if (val == null) return checkbox.checked;
+      if (val) elem.check();
+      else elem.uncheck();
     };
     elem.disabled = (state2 = null) => {
       if (state2 === null) return checkbox.getAttribute("disabled") || false;
@@ -54009,7 +54011,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
   }
 
   // src/components/messages.js
-  function bleh_message_list(list, mini = false, delete_btn = null) {
+  function bleh_message_list(list, mini = false, delete_btn = null, checkboxes = []) {
     list.classList = "notification-list";
     if (mini) list.classList.add("mini");
     const sent_to = page.subpage == "sent_overview";
@@ -54031,10 +54033,11 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       const subject = message.querySelector(".inbox-message-subject > span").textContent.trim();
       const content = message.querySelector(".inbox-message-message > span").textContent.trim();
       patch_avatar(avatar2, author);
+      let checkbox;
       render(message, html`
             ${!mini ? html.node`
                 <div class="message-checkbox">
-                    ${toggle({
+                    ${checkbox = toggle({
         type: "checkbox",
         name: "message_id",
         id,
@@ -54094,6 +54097,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                 href=${href}
             />
         `);
+      checkboxes.push(checkbox);
     });
   }
 
@@ -57657,7 +57661,22 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       const table = inbox.querySelector(".inbox-table");
       if (!table) return;
       table.classList = "inbox-table-legacy";
-      bleh_message_list(table.querySelector("tbody"), false, delete_btn);
+      const checkboxes = [];
+      bleh_message_list(table.querySelector("tbody"), false, delete_btn, checkboxes);
+      select_all.replaceWith(toggle({
+        type: "checkbox",
+        func: (val) => {
+          if (val) {
+            checkboxes.forEach((checkbox) => {
+              if (!checkbox.checked()) checkbox.checked(true);
+            });
+          } else {
+            checkboxes.forEach((checkbox) => {
+              if (checkbox.checked()) checkbox.checked(false);
+            });
+          }
+        }
+      }));
     } else if (page.subpage == "compose") {
       let inbox = page.structure.container.querySelector(".inbox-compose-view");
       page.structure.main.appendChild(inbox);

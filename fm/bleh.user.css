@@ -12295,6 +12295,7 @@
             }
 
             & > .message-checkbox {
+                width: 16px;
                 z-index: 3;
 
                 & > .setting {
@@ -12487,9 +12488,27 @@
         padding-left: 12px;
         padding-bottom: var(--card-gap);
 
+        display: flex;
+        align-items: center;
+        gap: 12px;
+
+        position: relative;
+
+        & > .setting {
+            width: 16px;
+
+            & > .heading {
+                display: none;
+            }
+        }
+
         .inbox-compose-button {
             position: relative;
             --mask: var(--icon-16-compose);
+
+            position: absolute;
+            top: 0;
+            right: 0;
         }
     }
 
