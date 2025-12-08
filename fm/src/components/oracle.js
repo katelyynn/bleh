@@ -153,7 +153,7 @@ export function oracle_process() {
     if (page.type == 'track' && page.subpage == 'overview') {
         releases_panel = html.node`
             <section class="oracle-releases">
-                <h3 class="text-18">${tl(trans.releases)}</h3>
+                <h3 class="text-18">${tl(trans.albums)}</h3>
                 <div class="source-albums">
                     <div class="source-album oracle-loading">
                         <div class="source-album-art">
@@ -183,6 +183,34 @@ export function oracle_process() {
             </section>
         `;
         info_panel.after(releases_panel);
+    } else if (page.type == 'track' && page.subpage == 'albums') {
+        const no_data = page.structure.main.querySelector('.no-data-message');
+        if (no_data) no_data.remove();
+
+        const explainer = page.structure.main.querySelector(':scope > p');
+        if (explainer) explainer.remove();
+
+        releases_panel = html.node`
+            <section class="oracle-releases-full">
+                <h3 class="text-18">${tl(trans.albums)}</h3>
+                <div class="resource-list--release-list">
+                    <div class="resource-list--release-list-item-wrap">
+                        <div class="resource-list--release-list-item oracle-loading">
+                            <h3 class="resource-list--release-list-item-name oracle-loading" />
+                            <p class="resource-list--release-list-item-artist oracle-loading" />
+                            <p class="resource-list--release-list-item-aux-text resource-list--release-list-item-listeners oracle-stats oracle-loading" />
+                            <p class="resource-list--release-list-item-aux-text oracle-loading" />
+                            <div class="media-item">
+                                <span class="resource-list--release-list-item-image cover-art oracle-loading">
+                                    <img class="empty">
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        `;
+        page.structure.main.appendChild(releases_panel);
     } else if (page.type == 'album' && page.subpage == 'overview') {
         let tracklist_view_panel;
         tracklist_panel = html.node`
@@ -1058,7 +1086,7 @@ export function oracle_process() {
                     releases_panel,
                     html`
                         <h3 class="text-18">
-                            ${tl(trans.releases)}<span class="new-badge beta"
+                            ${tl(trans.albums)}<span class="new-badge beta"
                                 >${tl(trans.beta)}</span
                             >
                         </h3>
@@ -1280,161 +1308,187 @@ export function oracle_process() {
 
             const allow_overflow = false;
 
+            if (page.subpage == 'overview') releases = releases.slice(0, 1);
+
             let source_albums;
             if (releases_panel) {
-                render(
-                    releases_panel,
-                    html`
-                        <h3 class="text-18">
-                            ${tl(trans.releases)}<span class="new-badge beta"
-                                >${tl(trans.beta)}</span
-                            >
-                        </h3>
-                        <div class="source-albums-container">
-                            <div class="source-albums">
-                                ${releases.map((release, index) => {
-                                    if (index > 1) return html.node``;
+                render(releases_panel, html`
+                    <h3 class="text-18">
+                        ${tl(trans.albums)}<span class="new-badge beta"
+                            >${tl(trans.beta)}</span
+                        >
+                    </h3>
+                    <div class="${page.subpage == 'overview' ? 'source-albums-container' : 'resource-list-container'}">
+                        <div class="${page.subpage == 'overview' ? 'source-albums' : 'resource-list--release-list'}">
+                            ${releases.map((release, index) => {
+                                log('release', 'oracle', 'log', {
+                                    release
+                                });
+                                let title = release.title;
+                                const artist = fix_title(
+                                    oracle_aliases(
+                                        release['artist-credit']?.[0] ||
+                                            recording['artist-credit'][0],
+                                        page.sister
+                                    )
+                                );
 
-                                    log('release', 'oracle', 'log', {
-                                        release
-                                    });
-                                    let title = release.title;
-                                    const artist = fix_title(
-                                        oracle_aliases(
-                                            release['artist-credit']?.[0] ||
-                                                recording['artist-credit'][0],
-                                            page.sister
-                                        )
+                                const types = {
+                                    album: tl(trans.album),
+                                    single: tl(trans.single),
+                                    ep: 'EP',
+                                    other: tl(trans.other)
+                                };
+
+                                let type =
+                                    release['release-group'][
+                                        'primary-type'
+                                    ];
+                                if (type && type.toLowerCase() in types)
+                                    type = types[type.toLowerCase()];
+
+                                // is there a matching last.fm entry available atm?
+                                const match = lastfm_releases.find(
+                                    (r) =>
+                                        r.title == title &&
+                                        r.artist == artist
+                                );
+
+                                let plays = 0;
+                                let artwork;
+                                if (match) {
+                                    plays = match.plays;
+                                    artwork = match.artwork;
+                                }
+
+                                let artwork_container;
+                                let stats;
+
+                                let title_elem;
+                                let artist_elem;
+                                if (settings.format_guest_features) {
+                                    const formatted = name_includes(
+                                        title,
+                                        artist
                                     );
 
-                                    const types = {
-                                        album: tl(trans.album),
-                                        single: tl(trans.single),
-                                        ep: 'EP',
-                                        other: tl(trans.other)
-                                    };
-
-                                    let type =
-                                        release['release-group'][
-                                            'primary-type'
-                                        ];
-                                    if (type && type.toLowerCase() in types)
-                                        type = types[type.toLowerCase()];
-
-                                    // is there a matching last.fm entry available atm?
-                                    const match = lastfm_releases.find(
-                                        (r) =>
-                                            r.title == title &&
-                                            r.artist == artist
-                                    );
-
-                                    let plays = 0;
-                                    let artwork;
-                                    if (match) {
-                                        plays = match.plays;
-                                        artwork = match.artwork;
-                                    }
-
-                                    let artwork_container;
-                                    let stats;
-
-                                    let title_elem;
-                                    let artist_elem;
-                                    if (settings.format_guest_features) {
-                                        const formatted = name_includes(
+                                    title_elem = html.node`<a class="smart-title">${smart_title(formatted[0], formatted[1])}</a>`;
+                                    artist_elem = html.node`${smart_artists(formatted[2], formatted[3])}`;
+                                } else {
+                                    title_elem = romanise(
+                                        correct_item_by_artist(
                                             title,
                                             artist
-                                        );
+                                        )
+                                    );
+                                    artist_elem = romanise(
+                                        correct_artist(artist)
+                                    );
+                                }
 
-                                        title_elem = html.node`<a class="smart-title">${smart_title(formatted[0], formatted[1])}</a>`;
-                                        artist_elem = html.node`${smart_artists(formatted[2], formatted[3])}`;
-                                    } else {
-                                        title_elem = romanise(
-                                            correct_item_by_artist(
-                                                title,
-                                                artist
-                                            )
-                                        );
-                                        artist_elem = romanise(
-                                            correct_artist(artist)
-                                        );
-                                    }
+                                let elem;
 
-                                    const elem = html.node`
+                                if (page.subpage == 'overview') {
+                                    elem = html.node`
                                         <div class="source-album js-link-block link-block-cover-link">
-                                            <div class="source-album-art" ref=${(el) => (artwork_container = el)}>
-                                                ${
-                                                    artwork ?
-                                                        html.node`
-                                                            <span class="cover-art">
-                                                                <img src=${artwork} alt=${title}>
-                                                            </span>
-                                                        `
-                                                    :   html.node`
-                                                        <span class="cover-art">
-                                                            <img class="missing-album" />
-                                                        </span>
-                                                    `
-                                                }
+                                            <div class="source-album-art" ref=${el => artwork_container = el}>
+                                                ${artwork ? html.node`
+                                                    <span class="cover-art">
+                                                        <img src=${artwork} alt=${title}>
+                                                    </span>
+                                                ` : html.node`
+                                                    <span class="cover-art">
+                                                        <img class="missing-album" />
+                                                    </span>
+                                                `}
                                             </div>
                                             <div class="source-album-details" data-kate-processed="true">
                                                 <h4 class="source-album-name">${title_elem}</h4>
                                                 <p class="source-album-artist">${artist_elem}</p>
                                                 <p class="source-album-stats oracle-stats" ref=${(el) => (stats = el)}>
                                                     ${type}
-                                                    ${
-                                                        match ?
-                                                            html.node`
-                                                                <span class="plays">
-                                                                    <span class="bleh-icon" />
-                                                                    ${plays.toLocaleString(lang)}
-                                                                </span>
-                                                            `
-                                                        :   ''
-                                                    }
+                                                    ${match ? html.node`
+                                                        <span class="plays">
+                                                            <span class="bleh-icon" />
+                                                            ${plays.toLocaleString(lang)}
+                                                        </span>
+                                                    ` : ''}
                                                 </p>
                                                 <a class="js-link-block-cover-link link-block-cover-link" href="${root}music/${sanitise(artist)}/${sanitise(title)}" tabindex="-1" aria-hidden="true" />
                                             </div>
                                         </div>
                                     `;
+                                } else {
+                                    elem = html.node`
+                                        <div class="resource-list--release-list-item-wrap">
+                                            <div class="resource-list--release-list-item js-link-block">
+                                                <h3 class="resource-list--release-list-item-name">${title_elem}</h3>
+                                                <p class="resource-list--release-list-item-artist">${artist_elem}</p>
+                                                <p class="resource-list--release-list-item-aux-text resource-list--release-list-item-listeners oracle-stats" ref=${(el) => (stats = el)}>
+                                                    ${type}
+                                                    ${match ? html.node`
+                                                        <span class="plays">
+                                                            <span class="bleh-icon" />
+                                                            ${plays.toLocaleString(lang)}
+                                                        </span>
+                                                    ` : ''}
+                                                </p>
+                                                <p class="resource-list--release-list-item-aux-text">
+                                                    year, track count
+                                                </p>
+                                                <div class="media-item" ref=${el => artwork_container = el}>
+                                                    ${artwork ? html.node`
+                                                        <span class="resource-list--release-list-item-image cover-art">
+                                                            <img src=${artwork} alt=${title}>
+                                                        </span>
+                                                    ` : html.node`
+                                                        <span class="resource-list--release-list-item-image cover-art">
+                                                            <img class="missing-album" />
+                                                        </span>
+                                                    `}
+                                                </div>
+                                                <a class="js-link-block-cover-link link-block-cover-link" href="${root}music/${sanitise(artist)}/${sanitise(title)}" tabindex="-1" aria-hidden="true" />
+                                            </div>
+                                        </div>
+                                    `;
+                                }
 
-                                    if (index == 0) {
-                                        cache.track.name = title;
-                                        cache.track.sister = artist;
-                                        cache.track.link = `${root}music/${sanitise(artist)}/${sanitise(title)}`;
+                                if (index == 0) {
+                                    cache.track.name = title;
+                                    cache.track.sister = artist;
+                                    cache.track.link = `${root}music/${sanitise(artist)}/${sanitise(title)}`;
 
-                                        if (artwork) {
-                                            create_avatar(
-                                                page.state.avatar_side,
-                                                artwork,
-                                                page.state.avatar_side_override
-                                            );
-
-                                            save_hoshino_artwork(
-                                                artwork,
-                                                title,
-                                                artist,
-                                                plays
-                                            );
-                                        }
-                                    }
-
-                                    if (!artwork && index < 2)
-                                        load_cover_art(
-                                            artwork_container,
-                                            title,
-                                            artist,
-                                            stats,
-                                            type,
-                                            index
+                                    if (artwork) {
+                                        create_avatar(
+                                            page.state.avatar_side,
+                                            artwork,
+                                            page.state.avatar_side_override
                                         );
 
-                                    return elem;
-                                })}
-                            </div>
+                                        save_hoshino_artwork(
+                                            artwork,
+                                            title,
+                                            artist,
+                                            plays
+                                        );
+                                    }
+                                }
+
+                                if (!artwork && index < 2)
+                                    load_cover_art(
+                                        artwork_container,
+                                        title,
+                                        artist,
+                                        stats,
+                                        type,
+                                        index
+                                    );
+
+                                return elem;
+                            })}
                         </div>
-                    `
-                );
+                    </div>
+                `);
                 oracle_save_cache('track', false);
             }
 
@@ -1451,7 +1505,7 @@ export function oracle_process() {
             if (releases_panel) {
                 render(releases_panel, html`
                     <h3 class="text-18">
-                        ${tl(trans.releases)}<span class="new-badge beta"
+                        ${tl(trans.albums)}<span class="new-badge beta"
                             >${tl(trans.beta)}</span
                         >
                     </h3>
