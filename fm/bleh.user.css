@@ -12339,6 +12339,7 @@
                 flex-shrink: 0;
             }
 
+            &[aria-checked="true"],
             &.active {
                 --bg: hsla(var(--h4), 35%);
                 --bg-hov: hsla(var(--h4), 45%);

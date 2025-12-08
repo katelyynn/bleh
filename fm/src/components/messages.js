@@ -19,6 +19,8 @@ export function bleh_message_list(list, mini = false, delete_btn = null) {
 
     const sent_to = page.subpage == 'sent_overview';
 
+    let selected_messages = [];
+
     const messages = list.querySelectorAll('.inbox-message');
     messages.forEach((message, index) => {
         if (mini && index > 4) message.style.display = 'none';
@@ -54,7 +56,15 @@ export function bleh_message_list(list, mini = false, delete_btn = null) {
                         id,
                         data: id,
                         func: (val) => {
+                            message.setAttribute('aria-checked', val);
+
                             if (val) {
+                                selected_messages.push(message);
+                            } else {
+                                selected_messages = selected_messages.filter(selected_msg => selected_msg != message);
+                            }
+
+                            if (selected_messages.length > 0) {
                                 delete_btn.removeAttribute('disabled');
                             } else {
                                 delete_btn.setAttribute('disabled', 'true');

@@ -54013,6 +54013,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     list.classList = "notification-list";
     if (mini) list.classList.add("mini");
     const sent_to = page.subpage == "sent_overview";
+    let selected_messages = [];
     const messages = list.querySelectorAll(".inbox-message");
     messages.forEach((message, index3) => {
       if (mini && index3 > 4) message.style.display = "none";
@@ -54039,7 +54040,13 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         id,
         data: id,
         func: (val) => {
+          message.setAttribute("aria-checked", val);
           if (val) {
+            selected_messages.push(message);
+          } else {
+            selected_messages = selected_messages.filter((selected_msg) => selected_msg != message);
+          }
+          if (selected_messages.length > 0) {
             delete_btn.removeAttribute("disabled");
           } else {
             delete_btn.setAttribute("disabled", "true");
