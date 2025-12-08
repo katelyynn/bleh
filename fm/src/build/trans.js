@@ -9012,6 +9012,9 @@ export const trans = {
     },
     show_on_map: {
         en: 'Show on map'
+    },
+    added_by: {
+        en: 'Added by {u}'
     }
 };
 

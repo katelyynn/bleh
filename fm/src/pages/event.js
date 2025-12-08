@@ -215,6 +215,14 @@ export function bleh_events() {
         `;
         main_panel.replaceWith(new_panel);
 
+        if (added_by) {
+            page.structure.side.appendChild(html.node`
+                <section>
+                    <p class="card-tip">${{ html: tl(trans.added_by, { u: `<a class="mention" href="${root}user/${added_by}">@${added_by}</a>` }) }}</p>
+                </section>
+            `);
+        }
+
 
 
 

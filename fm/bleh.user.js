@@ -57512,6 +57512,13 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
             </section>
         `;
       main_panel.replaceWith(new_panel);
+      if (added_by) {
+        page.structure.side.appendChild(html.node`
+                <section>
+                    <p class="card-tip">${{ html: tl2(trans.added_by, { u: `<a class="mention" href="${root}user/${added_by}">@${added_by}</a>` }) }}</p>
+                </section>
+            `);
+      }
       let edit_button = main_panel.querySelector(".event-metadata + .event-metadata a");
       if (edit_button) {
         let sep = document.createElement("div");
@@ -68510,6 +68517,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     show_on_map: {
       en: "Show on map"
+    },
+    added_by: {
+      en: "Added by {u}"
     }
   };
   function tl2(key, replacements = {}) {
