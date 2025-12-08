@@ -39644,6 +39644,7 @@
                 </div>
                 <div class="version-item-body markdown-body">
                     ${markdown(changelog[version4].bio, {
+        allow_lists: true,
         allow_headers: true,
         starting_header: 5,
         in_dialog: true
