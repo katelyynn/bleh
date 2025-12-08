@@ -57464,8 +57464,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                             <dt class="catalogue-metadata-heading">${tl2(trans.located)}</dt>
                             <dd class="catalogue-metadata-description address">
                                 <strong>${address.head}</strong>
-                                <p>${address.street}, ${address.locality}</p>
-                                <p>${address.postal}, ${address.country}</p>
+                                <p>${address.street ? `${address.street}, ` : ""}${address.locality}</p>
+                                <p>${address.postal ? `${address.postal}, ` : ""}${address.country}</p>
                             </dd>
                         </div>
                         <div class="metadata-group">

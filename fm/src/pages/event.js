@@ -165,8 +165,8 @@ export function bleh_events() {
                             <dt class="catalogue-metadata-heading">${tl(trans.located)}</dt>
                             <dd class="catalogue-metadata-description address">
                                 <strong>${address.head}</strong>
-                                <p>${address.street}, ${address.locality}</p>
-                                <p>${address.postal}, ${address.country}</p>
+                                <p>${address.street ? `${address.street}, ` : ''}${address.locality}</p>
+                                <p>${address.postal ? `${address.postal}, ` : ''}${address.country}</p>
                             </dd>
                         </div>
                         <div class="metadata-group">
