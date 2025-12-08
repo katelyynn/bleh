@@ -5321,7 +5321,7 @@
         font-size: 16px;
         line-height: 20px;
         font-weight: var(--font-weight-medium);
-        margin-top: 2px;
+        cursor: default;
 
         .cta-link {
             margin: unset;
@@ -5330,6 +5330,23 @@
 
         &#factbox-more-members {
             margin-top: unset;
+        }
+
+        &.address {
+            & > strong {
+                margin-bottom: 4px;
+            }
+
+            & > p {
+                font-size: var(--font-size);
+                line-height: var(--line-height);
+                font-weight: var(--font-weight);
+                color: hsl(var(--c2), 80%);
+            }
+        }
+
+        & > p {
+            margin: unset;
         }
     }
 
@@ -5361,6 +5378,16 @@
             right: calc(-1 * var(--card-padding));
             top: 0;
             bottom: 0;
+        }
+
+        &.full-w {
+            &:before, &:after {
+                display: none;
+            }
+
+            .metadata-column {
+                width: unset;
+            }
         }
 
         .metadata-column,
@@ -5423,6 +5450,10 @@
 
             .metadata-group {
                 min-width: 170px;
+            }
+
+            & > .primary {
+                grid-column: span 2;
             }
         }
         .wiki-column {
@@ -16630,7 +16661,7 @@
     .attendee-summary-users {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-        gap: var(--item-list-gap);
+        gap: var(--card-gap) 6px;
         margin: unset;
 
         &:before,
@@ -16650,7 +16681,12 @@
         --shadow: none;
 
         .attendee-summary-user-link {
+            color: hsl(var(--l3-c));
             text-decoration: var(--force-underline, none) !important;
+
+            &:before {
+                content: '@';
+            }
         }
 
         .attendee-summary-user-avatar {
@@ -16666,9 +16702,10 @@
         display: flex;
         align-items: center;
         font-weight: var(--font-weight-medium);
-        color: hsl(var(--l3-c));
         /* 32px is the avatar size */
         padding-left: calc(32px + 10px);
+
+        --mask-size: var(--cover-size-32);
     }
     .attendee-summary-user-link {
         position: static !important;

@@ -184,7 +184,10 @@ export function patch_shouts() {
         const legacy_textarea = shout_form.querySelector('textarea');
 
         let placeholder = legacy_textarea.placeholder;
-        if (placeholder.includes(auth.name)) {
+
+        const is_reply = placeholder.includes(auth.name);
+
+        if (!is_reply) {
             if (page.type == 'user') {
                 placeholder = tl(trans.shoutbox_placeholder_user, {
                     u: auth.name,
@@ -205,7 +208,7 @@ export function patch_shouts() {
             chars.setAttribute('data-exceeded', val.length >= 1000);
 
             preview.setAttribute('disabled', val.length <= 0);
-        }, {}, '', 'body', null, null, placeholder, legacy_textarea.maxLength, true);
+        }, {}, '', 'body', null, null, placeholder, legacy_textarea.maxLength, true, !is_reply);
 
         legacy_textarea.replaceWith(textarea);
 

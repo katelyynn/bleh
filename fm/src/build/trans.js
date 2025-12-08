@@ -9000,6 +9000,18 @@ export const trans = {
     },
     underline: {
         en: 'Underline'
+    },
+    located: {
+        en: 'Located'
+    },
+    date: {
+        en: 'Date'
+    },
+    contact: {
+        en: 'Contact'
+    },
+    show_on_map: {
+        en: 'Show on map'
     }
 };
 

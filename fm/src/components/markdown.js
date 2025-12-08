@@ -936,7 +936,7 @@ export function external_url_prompt(url, dangerous = false) {
     });
 }
 
-export function markdown_field(func, options, value, name, cols, rows, placeholder, maxlength, mini = false) {
+export function markdown_field(func, options, value, name, cols, rows, placeholder, maxlength, mini = false, autofocus = false) {
     options = {
         allow_headers: false,
         starting_header: 3,
@@ -972,7 +972,7 @@ export function markdown_field(func, options, value, name, cols, rows, placehold
         submit_on_character: true,
         required: true,
         maxlength,
-        focus: mini
+        focus: autofocus
     });
     let overlay;
 

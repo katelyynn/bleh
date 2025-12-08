@@ -49250,7 +49250,7 @@
         `
     });
   }
-  function markdown_field(func, options, value, name, cols, rows, placeholder, maxlength, mini = false) {
+  function markdown_field(func, options, value, name, cols, rows, placeholder, maxlength, mini = false, autofocus = false) {
     options = {
       allow_headers: false,
       starting_header: 3,
@@ -49285,7 +49285,7 @@
       submit_on_character: true,
       required: true,
       maxlength,
-      focus: mini
+      focus: autofocus
     });
     let overlay;
     const editor = textarea.editor();
@@ -57432,6 +57432,86 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       let main_panel = page.structure.main.querySelector(".event-summary-with-poster");
       if (!main_panel)
         main_panel = page.structure.main.querySelector(".event-details");
+      if (main_panel.parentElement != page.structure.main) main_panel.parentElement.replaceWith(main_panel);
+      const date = main_panel.querySelector('[itemprop="startDate"]');
+      const details = main_panel.querySelectorAll('[itemprop="location"] > p');
+      let address;
+      let tel;
+      let web;
+      let maps;
+      details.forEach((detail) => {
+        const type = detail.classList?.[0]?.replace("event-detail-", "") || "";
+        if (type == "address") {
+          address = {
+            head: detail.querySelector('[itemprop="name"]')?.textContent,
+            street: detail.querySelector('[itemprop="streetAddress"]')?.textContent,
+            locality: detail.querySelector('[itemprop="addressLocality"]')?.textContent,
+            postal: detail.querySelector('[itemprop="postalCode"]')?.textContent,
+            country: detail.querySelector('[itemprop="addressCountry"]')?.textContent
+          };
+        } else if (type == "tel") {
+          tel = detail.querySelector('[itemprop="telephone"]').textContent;
+        } else if (type == "web") {
+          web = detail.querySelector("a").href;
+        } else {
+          maps = detail.querySelector("a").href;
+        }
+      });
+      const added_by = main_panel.querySelector(".event-metadata a")?.textContent;
+      const new_panel = html.node`
+            <section class="events-panel">
+                <div class="metadata-and-wiki-row full-w">
+                    <div class="metadata-column">
+                        <div class="metadata-group primary">
+                            <dt class="catalogue-metadata-heading">${tl2(trans.located)}</dt>
+                            <dd class="catalogue-metadata-description address">
+                                <strong>${address.head}</strong>
+                                <p>${address.street}, ${address.locality}</p>
+                                <p>${address.postal}, ${address.country}</p>
+                            </dd>
+                        </div>
+                        <div class="metadata-group">
+                            <dt class="catalogue-metadata-heading">${tl2(trans.date)}</dt>
+                            <dd class="catalogue-metadata-description address">
+                                ${() => {
+        const date_object = DateTime.fromISO(date.getAttribute("content"));
+        const values = date.querySelectorAll("strong");
+        let hour;
+        if (values.length > 1) {
+          hour = values[1];
+        }
+        const elem = html.node`
+                                        <strong>${date_object.toLocaleString(DateTime.DATE_FULL)}</strong>
+                                        ${hour ? html.node`<p>${hour.textContent}</p>` : ""}
+                                    `;
+        return elem;
+      }}
+                            </dd>
+                        </div>
+                        ${tel ? html.node`
+                            <div class="metadata-group">
+                                <dt class="catalogue-metadata-heading">${tl2(trans.contact)}</dt>
+                                <dd class="catalogue-metadata-description">${tel}</dd>
+                            </div>
+                        ` : ""}
+                    </div>
+                </div>
+                <div class="metadata-row">
+                    <div class="metadata-group">
+                        <div class="sub-text music-small-header">${tl2(trans.find_on)}</div>
+                        <div class="music-links">
+                            <a class="resource-external-link resource-external-link--homepage music-link" href=${web} target="_blank">
+                                ${tl2(trans.website)}
+                            </a>
+                            <a class="music-link" data-host="maps.google.com" data-host-unknown="true" href=${maps} target="_blank" style="--favi: url(https://icons.duckduckgo.com/ip3/maps.google.com.ico)">
+                                ${tl2(trans.show_on_map)}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        `;
+      main_panel.replaceWith(new_panel);
       let edit_button = main_panel.querySelector(".event-metadata + .event-metadata a");
       if (edit_button) {
         let sep = document.createElement("div");
@@ -57456,8 +57536,10 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       let users = page.structure.main.querySelectorAll(".attendee-summary-user-inner-wrap");
       users.forEach((user) => {
         let avatar2 = user.querySelector(".attendee-summary-user-avatar");
-        let name = user.querySelector(".attendee-summary-user-link").textContent;
-        patch_avatar(avatar2, name, "event");
+        let name = user.querySelector(".attendee-summary-user-link");
+        let badge = patch_avatar(avatar2, name.textContent, "event");
+        if (badge)
+          style_name_from_badge(name, badge);
       });
       let cancelled = page.structure.main.querySelector(".event-status--cancelled");
       if (cancelled) {
@@ -57951,7 +58033,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       help_text.classList.add("dual-tip");
       const legacy_textarea = shout_form.querySelector("textarea");
       let placeholder = legacy_textarea.placeholder;
-      if (placeholder.includes(auth.name)) {
+      const is_reply = placeholder.includes(auth.name);
+      if (!is_reply) {
         if (page.type == "user") {
           placeholder = tl2(trans.shoutbox_placeholder_user, {
             u: auth.name,
@@ -57970,7 +58053,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         });
         chars.setAttribute("data-exceeded", val.length >= 1e3);
         preview.setAttribute("disabled", val.length <= 0);
-      }, {}, "", "body", null, null, placeholder, legacy_textarea.maxLength, true);
+      }, {}, "", "body", null, null, placeholder, legacy_textarea.maxLength, true, !is_reply);
       legacy_textarea.replaceWith(textarea);
       let chars;
       let preview;
@@ -68415,6 +68498,18 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     underline: {
       en: "Underline"
+    },
+    located: {
+      en: "Located"
+    },
+    date: {
+      en: "Date"
+    },
+    contact: {
+      en: "Contact"
+    },
+    show_on_map: {
+      en: "Show on map"
     }
   };
   function tl2(key, replacements = {}) {
