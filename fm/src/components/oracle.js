@@ -1308,7 +1308,7 @@ export function oracle_process() {
 
             const allow_overflow = false;
 
-            if (page.subpage == 'overview') releases = releases.slice(0, 1);
+            if (page.subpage == 'overview') releases = releases.slice(0, 2);
 
             let source_albums;
             if (releases_panel) {
