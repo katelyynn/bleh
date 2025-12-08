@@ -383,7 +383,7 @@ export function bleh_gallery_upload() {
             ${alert}
             <form method="post" action=${form.getAttribute('action')} enctype=${form.getAttribute('enctype')}>
                 ${token}
-                <div style="display: none">
+                <div class="hidden-file-input">
                     ${file_input}
                 </div>
                 <div class="setting-group">

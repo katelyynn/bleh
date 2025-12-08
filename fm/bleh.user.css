@@ -30047,4 +30047,14 @@
     .md-url {
         color: hsl(var(--l3-c));
     }
+
+
+    /* we can't use display: none as 'Last.fm Artwork Upload Helper' uses offsetParent, which doesnt find hidden elements - weird choice */
+    .hidden-file-input {
+        visibility: hidden;
+        position: absolute;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+    }
 }
