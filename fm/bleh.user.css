@@ -23300,7 +23300,7 @@
 
         .tag-side {
             display: flex;
-            width: fit-content;
+            width: 56px;
             flex-shrink: 0;
 
             .tag-icon {
