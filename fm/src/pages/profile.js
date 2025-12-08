@@ -1995,6 +1995,8 @@ export function bleh_profile_chart_render(
 
     let entries = table.querySelectorAll('tbody tr');
 
+    if (entries.length == 0) return;
+
     let labels = [];
     let links = [];
     let values = [];

@@ -37379,6 +37379,7 @@
     if (!table) table = panel.querySelector("table");
     if (!table) return;
     let entries2 = table.querySelectorAll("tbody tr");
+    if (entries2.length == 0) return;
     let labels = [];
     let links = [];
     let values = [];
