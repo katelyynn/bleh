@@ -1,5 +1,5 @@
 {
-    "latest": "2025.1207",
+    "latest": "2025.1208",
     "sponsors": [
         "clairedoll", "kateshapedbox", "evangelicgirl",
         "astrablooms", "ItsProyal", "vwvwvwvwvwvwv", "Orofil",
@@ -11,7 +11,8 @@
         "fourohclok", "liminalvespers", "HuxP", "K40M0J1",
         "goldenstuffed", "ferrea", "kar1x", "nojonsko",
         "urwq", "driftpsalm", "popcorniscrazy", "s0540a",
-        "dylandotat", "Angel0Lust", "liminelle"
+        "dylandotat", "Angel0Lust", "liminelle", "quikwise",
+        "BosozokuGF", "tainaronian"
     ],
     "sponsors_one_time": [
         "kateshapedbox",
@@ -22,7 +23,7 @@
         "celebrating", "riskyrizey",
         "fourohclok", "K40M0J1", "goldenstuffed",
         "kar1x", "nojonsko", "s0540a",
-        "Angel0Lust"
+        "Angel0Lust", "tainaronian"
     ],
     "sponsor_count_remove": 3,
     "sponsor_account": "kateshapedbox",
@@ -484,6 +485,35 @@
                 "sat": 1.5,
                 "lit": 1.12
             }
-        ]
+        ],
+        "quikwise": [
+            {
+                "type": "sponsor"
+            },
+            {
+                "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1vdXRsaW5lIGljb24tdGFibGVyLWxhbmd1YWdlLWhpcmFnYW5hIj48cGF0aCBzdHJva2U9Im5vbmUiIGQ9Ik0wIDBoMjR2MjRIMHoiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJNNCA1aDciIC8+PHBhdGggZD0iTTcgNGMwIDQuODQ2IDAgNyAuNSA4IiAvPjxwYXRoIGQ9Ik0xMCA4LjVjMCAyLjI4NiAtMiA0LjUgLTMuNSA0LjVzLTIuNSAtMS4xMzUgLTIuNSAtMmMwIC0yIDEgLTMgMyAtM3M1IC41NyA1IDIuODU3YzAgMS41MjQgLS42NjcgMi41NzEgLTIgMy4xNDMiIC8+PHBhdGggZD0iTTEyIDIwbDQgLTlsNCA5IiAvPjxwYXRoIGQ9Ik0xOS4xIDE4aC02LjIiIC8+PC9zdmc+",
+                "reason": "sponsor",
+                "name": "音速",
+                "hue": 197,
+                "sat": 1.5,
+                "lit": 1.08
+            }
+        ],
+        "BosozokuGF": [
+            {
+                "type": "sponsor"
+            },
+            {
+                "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1vdXRsaW5lIGljb24tdGFibGVyLWNwdSI+PHBhdGggc3Ryb2tlPSJub25lIiBkPSJNMCAwaDI0djI0SDB6IiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTUgNW0wIDFhMSAxIDAgMCAxIDEgLTFoMTJhMSAxIDAgMCAxIDEgMXYxMmExIDEgMCAwIDEgLTEgMWgtMTJhMSAxIDAgMCAxIC0xIC0xeiIgLz48cGF0aCBkPSJNOSA5aDZ2NmgtNnoiIC8+PHBhdGggZD0iTTMgMTBoMiIgLz48cGF0aCBkPSJNMyAxNGgyIiAvPjxwYXRoIGQ9Ik0xMCAzdjIiIC8+PHBhdGggZD0iTTE0IDN2MiIgLz48cGF0aCBkPSJNMjEgMTBoLTIiIC8+PHBhdGggZD0iTTIxIDE0aC0yIiAvPjxwYXRoIGQ9Ik0xNCAyMXYtMiIgLz48cGF0aCBkPSJNMTAgMjF2LTIiIC8+PC9zdmc+",
+                "reason": "sponsor",
+                "name": "blast-processed",
+                "hue": 297,
+                "sat": 1.66,
+                "lit": 0.8
+            }
+        ],
+        "tainaronian": {
+            "type": "sponsor"
+        }
     }
 }
