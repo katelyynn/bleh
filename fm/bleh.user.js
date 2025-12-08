@@ -57498,12 +57498,16 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                     <div class="metadata-group">
                         <div class="sub-text music-small-header">${tl2(trans.find_on)}</div>
                         <div class="music-links">
-                            <a class="resource-external-link resource-external-link--homepage music-link" href=${web} target="_blank">
-                                ${tl2(trans.website)}
-                            </a>
-                            <a class="music-link" data-host="maps.google.com" data-host-unknown="true" href=${maps} target="_blank" style="--favi: url(https://icons.duckduckgo.com/ip3/maps.google.com.ico)">
-                                ${tl2(trans.show_on_map)}
-                            </a>
+                            ${web ? html.node`
+                                <a class="resource-external-link resource-external-link--homepage music-link" href=${web} target="_blank">
+                                    ${tl2(trans.website)}
+                                </a>
+                            ` : ""}
+                            ${maps ? html.node`
+                                <a class="music-link" data-host="maps.google.com" data-host-unknown="true" href=${maps} target="_blank" style="--favi: url(https://icons.duckduckgo.com/ip3/maps.google.com.ico)">
+                                    ${tl2(trans.show_on_map)}
+                                </a>
+                            ` : ""}
                         </div>
                     </div>
                 </div>
