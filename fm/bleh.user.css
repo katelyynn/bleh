@@ -22620,16 +22620,17 @@
         .text-left,
         .text-right {
             & + p {
-                margin-top: var(--card-gap);
+                margin-top: var(--card-gap) !important;
             }
         }
 
+        h1, h2, h3, h4, h5,
         .text-center,
         .text-left,
         .text-right,
         blockquote,
         p {
-            margin: var(--card-gap) 0;
+            margin: var(--card-gap) 0 !important;
         }
 
         blockquote {
@@ -22808,10 +22809,10 @@
         }
 
         :first-child {
-            margin-top: unset;
+            margin-top: unset !important;
         }
         :last-child {
-            margin-bottom: unset;
+            margin-bottom: unset !important;
         }
     }
 
