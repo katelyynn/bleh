@@ -1819,7 +1819,7 @@ export const trans = {
             pt: 'Adapta a cor padrão, ícones e exibe partículas dependendo da sazonalidade',
             sv: 'Adaptera färg, ikoner, och visa partiklar beroende på årstiden',
             ru: 'Адаптирует цвет по умолчанию, набор значков и отображает частицы в зависимости от сезона',
-            pl: 'Adaptuje podstawowy kolor, ikony, oraz pokazuje efekty zależne od sezonu'
+            pl: 'Adaptuje domyślny kolor, ikony, oraz pokazuje efekty zależne od sezonu'
         }
     },
     seasonal_particles_fps: {
@@ -1841,7 +1841,7 @@ export const trans = {
             pt: 'As partículas de neve usam um efeito de brilho com sombra projetada para estética, com o custo adicional de processamento',
             sv: 'Snöpartiklarna använder en glödeffekt för estetiska själ, med lite extra datorbelastning',
             ru: 'Снежные частицы используют эффект свечения для эстетики ценой дополнительных затрат ресурсов',
-            pl: 'Płatki śniegu używają podświetlonych cieni dla estetyki - większe zużycie zasobów'
+            pl: 'Płatki śniegu używają podświetlonych cieni dla estetyki - co powoduje większe zużycie zasobów'
         }
     },
     seasonal_overlays: {
@@ -2369,7 +2369,7 @@ export const trans = {
         pt: 'Esta estação tem uma cor de destaque personalizada!',
         sv: 'Denna årstid har en anpassad färg!',
         ru: 'Этот сезон имеет собственный акцентный цвет по умолчанию!',
-        pl: 'Ten sezon ma własne podstawowe kolory akcentu!'
+        pl: 'Ten sezon ma własne domyślne kolory akcentu!'
     },
     card_background_saturation: {
         name: {
@@ -2835,7 +2835,7 @@ export const trans = {
         sv: 'Tagg',
         ru: 'Тег',
         pt: 'Tag',
-        pl: 'Etykieta'
+        pl: 'Tag'
     },
     tags: {
         en: 'Tags',
@@ -2846,7 +2846,7 @@ export const trans = {
         sv: 'Taggar',
         ru: 'Теги',
         pt: 'Tags',
-        pl: 'Etykiety'
+        pl: 'Tagi'
     },
     reports: {
         // last.fm listening reports
@@ -3833,7 +3833,8 @@ export const trans = {
                 it: 'Caricamento e selezione di immagini per il tuo layout', // 'star'/'to star' sounds incredibly bad to me in this context, falling back to 'selection' here ~cuto
                 pt: 'Imagens enviadas e favoritos do seu layout',
                 sv: 'Uppladdning av bilder och väljer favoritbilder',
-                ru: 'Загрузка изображений и добавление их в избранное для вашего макета'
+                ru: 'Загрузка изображений и добавление их в избранное для вашего макета',
+                pl: 'Przesyłanie zdjęć i polubienie do twojego układu'
             },
             obsess: {
                 en: 'Tracks you have on loop',
@@ -4261,7 +4262,7 @@ export const trans = {
         pt: 'Marcador pessoal',
         sv: 'Din tagg',
         ru: 'Личный тег',
-        pl: 'Etykiety personalne'
+        pl: 'Tagi personalne'
     },
     your_avatar: {
         en: 'Your avatar',
@@ -4316,7 +4317,8 @@ export const trans = {
         it: ' di {a}',
         pt: ' por {a}',
         sv: ' av {a}',
-        ru: ' от {a}'
+        ru: ' от {a}',
+        pl: ' od {a}'
     },
     value_by_user: {
         en: '{v} by {u}',
@@ -4324,7 +4326,8 @@ export const trans = {
         es: '{v} por {v}',
         it: '{v} di {u}',
         pt: '{v} por {u}',
-        ru: '{v} от {u}'
+        ru: '{v} от {u}',
+        pl: '{v} od {u}'
     },
     from_user: {
         en: 'from {u}',
@@ -4333,7 +4336,8 @@ export const trans = {
         it: 'da {u}',
         pt: 'de {u}',
         sv: 'från {u}',
-        ru: 'от {u}'
+        ru: 'от {u}',
+        pl: 'od {u}'
     },
     open_new_tab: {
         en: 'Open in a new tab',
@@ -4342,7 +4346,8 @@ export const trans = {
         it: 'Apri in una nuova scheda',
         pt: 'Abrir em nova aba',
         sv: 'Öppna i ny flik',
-        ru: 'Открыть в новой вкладке'
+        ru: 'Открыть в новой вкладке',
+        pl: 'Otwórz w nowej karcie'
     },
     view_image: {
         en: 'View image',
@@ -4350,19 +4355,22 @@ export const trans = {
         es: 'Ver imagen',
         it: 'Visualizza immagine',
         sv: 'Visa bild',
-        ru: 'Просмотреть изображение'
+        ru: 'Просмотреть изображение',
+        pl: 'Wyświetl zdjęcie'
     },
     view_image_unsafe: {
         en: 'View unsafe image',
         es: 'Ver imagen no segura',
         it: 'Mostra immagine non sicura',
         pt: 'Visualizar imagem não segura',
+        pl: 'Wyświetl nieodpowiednie zdjęcie'
     },
     open_link: {
         en: 'Open link',
         es: 'Abrir vínculo',
         it: 'Apri link',
-        pt: 'Abrir link'
+        pt: 'Abrir link',
+        pl: 'Otwórz link'
     },
     event_cancelled: {
         // obviously remove the emoji or replace it as
@@ -4375,7 +4383,8 @@ export const trans = {
         it: 'Questo evento è stato annullato (╥﹏╥)',
         pt: 'Este evento foi cancelado (╥﹏╥)',
         sv: 'Detta evenemang har avbrutits (╥﹏╥)',
-        ru: 'Это событие было отменено (╥﹏╥)'
+        ru: 'Это событие было отменено (╥﹏╥)',
+        pl: 'To wydarzenie zostało odwołane (╥﹏╥)'
     },
     format_guest_features: {
         name: {
@@ -4385,7 +4394,8 @@ export const trans = {
             it: 'Tag intelligenti per artisti e brani',
             pt: 'Tags inteligentes de artistas e músicas',
             sv: 'Smartformat för gästartister och låttaggar',
-            ru: 'Умное форматирование приглашенных артистов и тегов песен'
+            ru: 'Умное форматирование приглашенных артистов и тегов песен',
+            pl: 'Inteligentnie podani autorzy i tagi utworów'
         },
         body: {
             en: 'Analyses album and track titles into their guests, versions, remixes, etc.',
@@ -4394,7 +4404,8 @@ export const trans = {
             it: 'Analizza i titoli di album e brani ed estrae artisti partecipanti, versioni, remix, ecc.',
             pt: 'Analisa títulos de álbuns e faixas e os separa em seus convidados, versões, remixes etc.',
             sv: 'Analyserar album och låttitlar till gästartister, olika versioner, remixar osv.',
-            ru: 'Анализирует названия альбомов и треков на предмет приглашенных артистов, версий, ремиксов и т.д.'
+            ru: 'Анализирует названия альбомов и треков на предмет приглашенных артистов, версий, ремиксов и т.д.',
+            pl: 'Analizuje tytuły albumów i utworów dzieląc je na artystów z udziałem, wersje, remiksy, itp.'
         }
     },
     show_guest_features: {
@@ -4405,7 +4416,8 @@ export const trans = {
             it: 'Duplica gli artisti partecipanti nel titolo',
             pt: 'Artistas creditados duplicados no título',
             sv: 'Duplicera artistnamn i låttitel',
-            ru: 'Дублировать приглашенных артистов в названии'
+            ru: 'Дублировать приглашенных артистов в названии',
+            pl: 'Duplikuj podanych autorów w tytule'
         },
         body: {
             en: 'Otherwise guests are neatly placed next to the primary artist',
@@ -4414,7 +4426,8 @@ export const trans = {
             it: 'Altrimenti gli artisti partecipanti sono disposti in modo pulito vicino all\'artista principale',
             pt: 'Caso contrário os convidados são organizados de forma elegante ao lado do artista principal',
             sv: 'Annars placeras gästartister fint bredvid huvudartisten',
-            ru: 'В противном случае приглашенные артисты аккуратно размещаются рядом с основным исполнителем'
+            ru: 'В противном случае приглашенные артисты аккуратно размещаются рядом с основным исполнителем',
+            pl: 'W przeciwnym razie artyści z udziałem zo zgrabnie ułożeni obok głównego artysty'
         }
     },
     track_layout: {
@@ -4424,7 +4437,8 @@ export const trans = {
             it: 'Layout dei brani',
             sv: 'Låtlayout',
             ru: 'Расположение трека',
-            pt: 'Layout da faixa'
+            pt: 'Layout da faixa',
+            pl: 'Układ utworu'
         },
         body: {
             en: 'Choose which axis to display track information on',
@@ -4432,7 +4446,8 @@ export const trans = {
             it: 'Seleziona su quale asse mostrare le informazioni dei brani',
             sv: 'Välj vilken axis att visa låtinformation på',
             ru: 'Выберите ось, на которой отображать информацию о треке',
-            pt: 'Escolha em qual eixo exibir as informações da faixa'
+            pt: 'Escolha em qual eixo exibir as informações da faixa',
+            pl: 'Wybierz na której osi wyświetlać informacje o utworach'
         },
         column: {
             en: 'Place title and artist vertically',
@@ -4440,7 +4455,8 @@ export const trans = {
             it: 'Disponi titolo e artista verticalmente',
             sv: 'Placera titel och artist lodrätt',
             ru: 'Разместить название и исполнителя вертикально',
-            pt: 'Colocar título e artista verticalmente'
+            pt: 'Colocar título e artista verticalmente',
+            pl: 'Ułóż tytuł i artystę pionowo'
         },
         row: {
             en: 'Place title and artist horizontally',
@@ -4448,7 +4464,8 @@ export const trans = {
             it: 'Disponi titolo e artista orizzontalmente',
             sv: 'Placera titel och artist vågrätt',
             ru: 'Разместить название и исполнителя горизонтально',
-            pt: 'Colocar título e artista horizontalmente'
+            pt: 'Colocar título e artista horizontalmente',
+            pl: 'Ułóż tytuł i artystę poziomo' 
         }
     },
     track_album_name_location: {
@@ -4458,7 +4475,8 @@ export const trans = {
             it: 'Posizione del nome dell\'album',
             sv: 'Albumtitelsplats',
             ru: 'Расположение названия альбома',
-            pt: 'Localização do nome do álbum'
+            pt: 'Localização do nome do álbum',
+            pl: 'Lokacja nazwy albumu'
         },
         body: {
             en: 'Choose which axis to display said album name on',
@@ -4466,7 +4484,8 @@ export const trans = {
             it: 'Seleziona su quale asse mostrare il nome dell\'album',
             sv: 'Välj vilken axis att visa albumtitel på',
             ru: 'Выберите ось, на которой отображать название альбома',
-            pt: 'Escolha em qual eixo exibir o nome do álbum'
+            pt: 'Escolha em qual eixo exibir o nome do álbum',
+            pl: 'Wybierz na której osi wyświetlać nazwę albumu'
         },
         column: {
             en: 'Place below title and artist',
@@ -4474,7 +4493,8 @@ export const trans = {
             it: 'Disponi sotto titolo e artista',
             sv: 'Placera under låttitel och artist',
             ru: 'Разместить под названием и исполнителем',
-            pt: 'Colocar abaixo do título e artista'
+            pt: 'Colocar abaixo do título e artista',
+            pl: 'Podaj poniżej tytuł i artystę'
         },
         row: {
             en: 'Place to the side of title and artist',
@@ -4482,7 +4502,8 @@ export const trans = {
             it: 'Disponi a fianco di titolo e artista',
             sv: 'Placera bredvid låttitel och artist',
             ru: 'Разместить рядом с названием и исполнителем',
-            pt: 'Colocar ao lado do título e artista'
+            pt: 'Colocar ao lado do título e artista',
+            pl: 'Umieść obok tytułu i artysty'
         }
     },
     expand_tracks: {
@@ -4492,7 +4513,8 @@ export const trans = {
             it: 'Mostra album associato per i brani',
             sv: 'Visa associerade album för låtar',
             ru: 'Показывать связанный альбом для треков',
-            pt: 'Mostrar álbum associado para faixas'
+            pt: 'Mostrar álbum associado para faixas',
+            pl: 'Pokaż powiązane albumy dla utworów'
         },
         body: {
             en: 'Places the track’s associated album name if there’s room',
@@ -4500,7 +4522,8 @@ export const trans = {
             it: 'Inserisce il nome dell\'album associato ai brani se c\'è spazio',
             sv: 'Placerar låtens associerade album om det finns plats',
             ru: 'Отображает название связанного альбома трека, если есть место',
-            pt: 'Coloca o nome do álbum associado à faixa, se houver espaço'
+            pt: 'Coloca o nome do álbum associado à faixa, se houver espaço',
+            pl: 'Umieszcza nazwę powiązanego albumu jeśli jest na to miejsce'
         }
     },
     expand_tracks_when_active: {
@@ -4510,7 +4533,8 @@ export const trans = {
         it: 'Solo quando si sta effettuando lo scrobbling',
         sv: 'Endast när du skrobblar',
         ru: 'Только при активном скробблинге',
-        pt: 'Apenas quando estiver ativamente scrobblando'
+        pt: 'Apenas quando estiver ativamente scrobblando',
+        pl: 'Tylko gdy aktualnie scrobbluje'
     },
     expand_tracks_always: {
         en: 'Always when possible',
@@ -4519,7 +4543,8 @@ export const trans = {
         it: 'Sempre quando possibile',
         sv: 'Alltid, när det är möjligt',
         ru: 'Всегда, когда возможно',
-        pt: 'Sempre que possível'
+        pt: 'Sempre que possível',
+        pl: 'Zawsze kiedy możliwe'
     },
     show_remaster_tags: {
         en: 'Show remaster tags',
@@ -4528,7 +4553,8 @@ export const trans = {
         it: 'Mostra tag dei remaster',
         pt: 'Mostrar as tags de remaster',
         sv: 'Visa remaster-taggar',
-        ru: 'Показывать теги ремастеринга'
+        ru: 'Показывать теги ремастеринга',
+        pl: 'Pokaż tagi remasteru'
     },
     recent_realtime: {
         name: {
@@ -4538,7 +4564,8 @@ export const trans = {
             it: 'Aggiorna brani automaticamente',
             pt: 'Atualizar faixas automaticamente',
             sv: 'Automatiskt uppdatera låtar',
-            ru: 'Автоматически обновлять треки'
+            ru: 'Автоматически обновлять треки',
+            pl: 'Odświeżaj utwory automatycznie'
         },
         body: {
             en: 'View your listening history in realtime',
@@ -4547,7 +4574,8 @@ export const trans = {
             it: 'Visualizza la tua cronologia di ascolto in tempo reale',
             pt: 'Veja seu histórico de scrobbles em tempo real',
             sv: 'Visa din lyssningshistorik i realtid',
-            ru: 'Просмотр истории прослушивания в реальном времени'
+            ru: 'Просмотр истории прослушивания в реальном времени',
+            pl: 'Zobacz swoją historię słuchania w prawdziwym czasie'
         }
     },
     amount_to_display: {
@@ -4558,7 +4586,8 @@ export const trans = {
         it: 'Quantità di brani da mostrare',
         pt: 'Quantidade a ser exibida',
         sv: 'Mängd att visa',
-        ru: 'Количество отображаемых треков'
+        ru: 'Количество отображаемых треков',
+        pl: 'Ile wyświetlać utworów'
     },
     recent_artwork: {
         en: 'Accompany tracks with artwork',
@@ -4567,7 +4596,8 @@ export const trans = {
         it: 'Accompagna i brani con le copertine',
         pt: 'Mostrar as faixas juntamente a capa',
         sv: 'Visa skivomslag vid låt',
-        ru: 'Сопровождать треки обложкой'
+        ru: 'Сопровождать треки обложкой',
+        pl: 'Pokazuj utwory wraz z okładką'
     },
     default_timeframe: {
         en: 'Default timeframe',
@@ -4577,7 +4607,8 @@ export const trans = {
         pt: 'Período padrão',
         ja: 'デフォルト期間',
         sv: 'Standardtidsram',
-        ru: 'Период по умолчанию'
+        ru: 'Период по умолчанию',
+        pl: 'Domyślna rama czasowa'
     },
     timeframe: {
         en: 'Timeframe',
@@ -4586,7 +4617,8 @@ export const trans = {
         it: 'Durata',
         pt: "Período",
         sv: 'Tidsram',
-        ru: 'Период'
+        ru: 'Период',
+        pl: 'Rama czasowa'
     },
     item_type: {
         en: 'Item type',
@@ -4595,7 +4627,8 @@ export const trans = {
         it: 'Tipo di oggetto',
         pt: "Tipo de item",
         sv: 'Objekttyp',
-        ru: 'Тип элемента'
+        ru: 'Тип элемента',
+        pl: 'Typy przedmiotu'
     },
     page_count: {
         en: 'Page count',
@@ -4604,7 +4637,8 @@ export const trans = {
         it: 'Numero di pagine',
         pt: "Total de páginas",
         sv: 'Mängd sidor',
-        ru: 'Количество страниц'
+        ru: 'Количество страниц',
+        pl: 'Ilość stron'
     },
     chart_style: {
         en: 'Chart style',
@@ -4614,7 +4648,8 @@ export const trans = {
         pt: 'Estilo da tabela',
         ja: 'チャートスタイル',
         sv: 'Liststil',
-        ru: 'Стиль графика'
+        ru: 'Стиль графика',
+        pl: 'Styl wykresu'
     },
     chart_size: {
         en: 'Chart size',
@@ -4623,7 +4658,8 @@ export const trans = {
         it: 'Dimensione della vista',
         pt: 'Tamanho da tabela',
         sv: 'Liststorlek',
-        ru: 'Размер графика'
+        ru: 'Размер графика',
+        pl: 'Wielkość wykresu'
     },
     country: {
         en: 'Country',
@@ -4632,7 +4668,8 @@ export const trans = {
         it: 'Paese',
         pt: 'País',
         sv: 'Land',
-        ru: 'Страна'
+        ru: 'Страна',
+        pl: 'Kraj'
     },
     display_name: {
         name: {
@@ -4641,7 +4678,8 @@ export const trans = {
             it: 'Nome visualizzato',
             sv: 'Visningsnamn',
             ru: 'Отображаемое имя',
-            pt: 'Nome de exibição'
+            pt: 'Nome de exibição',
+            pl: 'Wyświetlana nazwa'
         },
         body: {
             en: 'Changes your name on your profile, with your real @username shown below',
@@ -4649,7 +4687,8 @@ export const trans = {
             it: 'Cambia il tuo nome sul tuo profilo, con il tuo @username visualizzato sotto',
             sv: 'Ändrar namnet på din profil och lägger ditt riktiga @användarnamn underåt',
             ru: 'Изменяет ваше имя в профиле, при этом ваш реальный @никнейм отображается ниже',
-            pt: 'Altera seu nome em seu perfil, com seu @nome de usuário real mostrado abaixo'
+            pt: 'Altera seu nome em seu perfil, com seu @nome de usuário real mostrado abaixo',
+            pl: 'Zmienia twoją nazwę na profilu, na twoją nazwę użytkownika widoczną poniżej'
         }
     },
     subtitle: {
@@ -4659,7 +4698,8 @@ export const trans = {
         it: 'Sottotitolo',
         pt: 'Legenda',
         sv: 'Undertext',
-        ru: 'Подзаголовок'
+        ru: 'Подзаголовок',
+        pl: 'Podtytuł'
     },
     pronoun_tip: {
         en: 'Pronouns are specially supported if placed first',
@@ -4668,7 +4708,8 @@ export const trans = {
         it: 'I pronomi sono supportati specialmente se collocati per primi',
         pt: 'Os pronomes são especialmente apoiados se colocados primeiro',
         sv: 'Pronomen har speciellt stöd om det placeras först',
-        ru: 'Местоимения поддерживаются, если они расположены первыми'
+        ru: 'Местоимения поддерживаются, если они расположены первыми',
+        pl: 'Zaimki działają najlepiej gdy są zapisane pierwsze'
     },
     block_list: {
         en: 'Block list',
@@ -4677,7 +4718,8 @@ export const trans = {
         it: 'Lista di utenti bloccati',
         pt: 'Lista de bloqueados',
         sv: 'Blocklista',
-        ru: 'Список блокировки'
+        ru: 'Список блокировки',
+        pl: 'Lista zablokowanych'
     },
     when_blocked: {
         en: 'What happens with blocked users?',
@@ -4686,7 +4728,8 @@ export const trans = {
         it: 'Cosa succede agli utenti bloccati?',
         pt: 'O que acontece com os usuários bloqueados?',
         sv: 'Vad händer med blockerade användare?',
-        ru: 'Что происходит с заблокированными пользователями?'
+        ru: 'Что происходит с заблокированными пользователями?',
+        pl: 'Co się dzieje z zablokowanymi użytkownikami?'
     },
     blocked_count: {
         en: 'You have blocked {c} profiles',
@@ -4695,7 +4738,8 @@ export const trans = {
         it: 'Hai bloccato {c} profili',
         pt: 'Você bloqueou {c} perfis',
         sv: 'Du har blockerat {c} profiler',
-        ru: 'Вы заблокировали {c} профилей'
+        ru: 'Вы заблокировали {c} профилей',
+        pl: 'Zablokowaliście {c} profili'
     },
     enter_username: {
         en: 'Enter username',
@@ -4704,7 +4748,8 @@ export const trans = {
         it: 'Inserisci nome utente',
         pt: 'Insira o nome de usuário',
         sv: 'Skriv användarnamn',
-        ru: 'Введите имя пользователя'
+        ru: 'Введите имя пользователя',
+        pl: 'Podaj nazwę użytkownika'
     },
     block: {
         en: 'Block',
@@ -4713,7 +4758,8 @@ export const trans = {
         it: 'Blocca',
         pt: 'Bloquear',
         sv: 'Blockera',
-        ru: 'Заблокировать'
+        ru: 'Заблокировать',
+        pl: 'Zablokuj'
     },
     blocked: {
         en: 'Blocked',
@@ -4722,7 +4768,8 @@ export const trans = {
         it: 'Bloccato',
         pt: 'Bloqueado',
         sv: 'Blockerad',
-        ru: 'Заблокировано'
+        ru: 'Заблокировано',
+        pl: 'Zablokowani'
     },
     blocked_user_public: {
         en: 'Can leave shouts but not viewable to you',
@@ -4731,7 +4778,8 @@ export const trans = {
         it: 'Può lasciare note, ma non saranno visibili a te',
         pt: 'Podem deixar mensagens, mas elas não são visíveis para você',
         sv: 'Hojtningar på allmäna profiler syns inte för dig',
-        ru: 'Могут оставлять сообщения, но вы их не увидите'
+        ru: 'Могут оставлять сообщения, но вы их не увидите',
+        pl: 'Mogą zostawiać wiadomości ale będą dla ciebie niewidoczne'
     },
     blocked_user_message: {
         en: 'Cannot direct message you',
@@ -4740,7 +4788,8 @@ export const trans = {
         it: 'Non può inviarti messaggi privati',
         pt: 'Não podem lhe enviar mensagens diretas',
         sv: 'Kan inte skicka privat meddelande till dig',
-        ru: 'Не могут отправлять вам личные сообщения'
+        ru: 'Не могут отправлять вам личные сообщения',
+        pl: 'Nie mogą bezpośrednio wysyłać ci wiadomości'
     },
     blocked_user_new_shouts: {
         en: 'Cannot leave shouts or reply to you',
@@ -4749,7 +4798,8 @@ export const trans = {
         it: 'Non può lasciare note o risponderti',
         pt: 'Não podem deixar mensagens na sua caixa de mensagens ou lhe responder',
         sv: 'Kan inte lämna hojtningar på din profil eller svara på dina hojtningar',
-        ru: 'Не могут оставлять сообщения или отвечать вам'
+        ru: 'Не могут оставлять сообщения или отвечать вам',
+        pl: 'Nie mogą zostawić wiadomości albo tobie opowiedzieć'
     },
     blocked_user_old_shouts: {
         en: 'You cannot delete pre-existing shouts on your profile',
@@ -4758,7 +4808,8 @@ export const trans = {
         it: 'Non puoi eliminare note già esistenti sul tuo profilo',
         pt: 'Você não pode deletar mensagens já existentes em seu perfil',
         sv: 'Du kan inte ta bort deras tidigare hojtningar från din profil',
-        ru: 'Вы не можете удалить ранее существовавшие сообщения в вашем профиле'
+        ru: 'Вы не можете удалить ранее существовавшие сообщения в вашем профиле',
+        pl: 'Nie możesz usunąc już istniejących wiadomości z twojego profilu'
     },
     blocked_user_view_profile: {
         en: 'They can still view your profile',
@@ -4767,7 +4818,8 @@ export const trans = {
         it: 'Possono ancora vedere il tuo profilo',
         pt: 'Eles ainda podem ver seu perfil',
         sv: 'Dem kan fortfarande se din profil',
-        ru: 'Они по-прежнему могут просматривать ваш профиль'
+        ru: 'Они по-прежнему могут просматривать ваш профиль',
+        pl: 'Dalej będą mogli oglądać twój profil'
     },
     shared_with_others: {
         en: 'Shared with others',
@@ -4776,7 +4828,8 @@ export const trans = {
         it: 'Condiviso con altri',
         pt: 'Compartilhado com outros',
         sv: 'Delades med andra',
-        ru: 'Поделились с другими'
+        ru: 'Поделились с другими',
+        pl: 'Udostępnione dla innych'
     },
     others_from_profile: {
         en: 'More from {user}',
@@ -4785,7 +4838,8 @@ export const trans = {
         it: 'Altro da {user}',
         pt: 'Mais de {user}',
         sv: 'Mer från {user}',
-        ru: 'Больше от {user}'
+        ru: 'Больше от {user}',
+        pl: 'Więcej od {user}'
     },
     obsess: {
         en: 'Obsess',
@@ -4794,7 +4848,8 @@ export const trans = {
         it: 'Imposta come passione',
         pt: 'Definir como obsessão',
         sv: 'Ställ in som besatthet',
-        ru: 'Сделать зависимой'
+        ru: 'Сделать зависимой',
+        pl: 'Daj jako obsesję'
     },
     obsession: {
         en: 'Obsession',
@@ -4803,7 +4858,8 @@ export const trans = {
         it: 'Passione',
         pt: 'Obsessão',
         sv: 'Aktuell besatthet',
-        ru: 'Зависимая идея'
+        ru: 'Зависимая идея',
+        pl: 'Obsesja'
     },
     obsessions: {
         en: 'Obsessions',
@@ -4812,7 +4868,8 @@ export const trans = {
         it: 'Passioni',
         pt: 'Obsessões',
         sv: 'Besattheter',
-        ru: 'Зависимые идеи'
+        ru: 'Зависимые идеи',
+        pl: 'Obsesje'
     },
     finding_your_tracks: {
         en: 'Finding your tracks',
@@ -4821,7 +4878,8 @@ export const trans = {
         it: 'Cercando i tuoi brani',
         pt: 'Encontrando suas faixas',
         sv: 'Hittar på dinna låtar',
-        ru: 'Поиск ваших треков'
+        ru: 'Поиск ваших треков',
+        pl: 'Szukanie twoich utworów'
     },
     update_check: {
         en: 'Check for updates',
@@ -4830,7 +4888,8 @@ export const trans = {
         it: 'Controlla aggiornamenti',
         pt: 'Procurar atualizações',
         sv: 'Kolla efter uppdateringar',
-        ru: 'Проверить обновления'
+        ru: 'Проверить обновления',
+        pl: 'Sprawdź dostępne aktualizację'
     },
     redirected_from: {
         en: 'Redirected from',
@@ -4838,7 +4897,8 @@ export const trans = {
         it: 'Reindirizzato da',
         sv: 'Omdirigerades från',
         ru: 'Перенаправлено с',
-        pt: 'Redirecionado de'
+        pt: 'Redirecionado de',
+        pl: 'Przekierowano z'
     },
     music_corrections: {
         en: 'Music corrections',
@@ -4847,7 +4907,8 @@ export const trans = {
         it: 'Correzioni della musica',
         pt: 'Correções de música',
         sv: 'Musikredigeringar',
-        ru: 'Музыкальные исправления'
+        ru: 'Музыкальные исправления',
+        pl: 'Korekty muzyczne'
     },
     corrections_loaded: {
         en: 'Corrections loaded',
@@ -4856,7 +4917,8 @@ export const trans = {
         it: 'Correzioni caricate',
         sv: 'Dina redigeringar har laddat',
         ru: 'Исправления загружены',
-        pt: 'Correções carregadas'
+        pt: 'Correções carregadas',
+        pl: 'Wczytano korekty'
     },
     corrections_loaded_value: {
         en: '{c1} artists, {c2} albums and tracks',
@@ -4865,7 +4927,8 @@ export const trans = {
         it: '{c1} artisti, {c2} album e brani',
         sv: '{c1} artister, {c2} album och låtar',
         ru: '{c1} исполнителей, {c2} альбомов и треков',
-        pt: '{c1} artistas, {c2} álbuns e faixas'
+        pt: '{c1} artistas, {c2} álbuns e faixas',
+        pl: '{c1} artystów, {c2} ablumów i utworów'
     },
     brand_version: {
         // used for the lotus header where:
@@ -4877,7 +4940,8 @@ export const trans = {
         it: 'versione di {brand}',
         pt: '{brand} versão',
         sv: '{brand} version',
-        ru: '{brand} версии'
+        ru: '{brand} версии',
+        pl: '{brand} wersja'
     },
     brand_version_number: {
         // used for the lotus header where:
@@ -4890,7 +4954,8 @@ export const trans = {
         it: '{brand} versione {number}',
         pt: '{brand} versão {number}',
         sv: '{brand} version {number}',
-        ru: '{brand} версии {number}'
+        ru: '{brand} версии {number}',
+        pl: '{brand} wersja {number}'
     },
     lotus: {
         artist: {
@@ -4900,7 +4965,8 @@ export const trans = {
             it: 'Correzioni degli artisti',
             sv: 'Artistredigeringar',
             ru: 'Исправления артистов',
-            pt: 'Correções de artista'
+            pt: 'Correções de artista',
+            pl: 'Korekty artystów'
         },
         album_track: {
             en: 'Album and track corrections',
@@ -4909,7 +4975,8 @@ export const trans = {
             it: 'Correzioni di album e brani',
             sv: 'Album och spårredigeringar',
             ru: 'Исправления альбомов и треков',
-            pt: 'Correções de álbuns e faixas'
+            pt: 'Correções de álbuns e faixas',
+            pl: 'Korekty alumów i utworów'
         },
         combined_artists: {
             en: 'Combined artist profiles',
@@ -4918,7 +4985,8 @@ export const trans = {
             it: 'Profili combinati degli artisti',
             sv: 'Kombinerade artistprofiler',
             ru: 'Объединенные профили артистов',
-            pt: 'Perfis de artista combinados'
+            pt: 'Perfis de artista combinados',
+            pl: 'Połączone profile artystów'
         }
     },
     correct_titles_with_lotus: {
@@ -4929,7 +4997,8 @@ export const trans = {
             it: 'Correggi titoli con lotus',
             pt: 'Corrigir títulos com lotus',
             sv: 'Redigera titlar med lotus',
-            ru: 'Исправить названия с помощью lotus'
+            ru: 'Исправить названия с помощью lotus',
+            pl: 'Skorektuj tytułu za pomocą lotus'
         },
         body: {
             en: 'Re-capitalise artists, albums, and tracks based on community contributions',
@@ -4938,7 +5007,8 @@ export const trans = {
             it: 'Corregge l\'uso delle maiuscole in artisti, album e brani in base alle contribuzioni della comunità',
             pt: 'Recapitalize artistas, álbuns e faixas com base nas contribuições da comunidade',
             sv: 'Ändra kapitalisering på artister, album, och låtar från gemenskapsbidrag',
-            ru: 'Изменить написание артистов, альбомов и треков на основе вклада сообщества'
+            ru: 'Изменить написание артистов, альбомов и треков на основе вклада сообщества',
+            pl: 'Rekapitalizuj artystów, albumy i utwory bazując na społeczności'
         }
     },
     prefer_no_redirect: {
@@ -4949,7 +5019,8 @@ export const trans = {
             it: 'Evita i reindirizzamenti degli artisti durante la navigazione',
             pt: 'Evitar redirecionamentos de artistas ao navegar',
             sv: 'Undvik artistomdirigeringar när du surfar',
-            ru: 'Избегать перенаправлений артистов при навигации'
+            ru: 'Избегать перенаправлений артистов при навигации',
+            pl: 'Unikaj przekierowywania artystów podczas nawigacji'
         },
         body: {
             en: 'Automatically adds +noredirect to artist links to avoid being sent to pages like Travi$ Scott',
@@ -4958,7 +5029,8 @@ export const trans = {
             it: 'Aggiunge automaticamente +noredirect ai link degli artisti per evitare di essere inviato a pagine come Travi$ Scott',
             pt: 'Adiciona automaticamente +noredirect em links de artistas para evitar ser redirecionado para páginas como Travi$ Scott',
             sv: 'Lägger automatiskt +noredirect på artistlänkar för att undvika att bli skickad till sidor som t.ex. Travi$ Scott',
-            ru: 'Автоматически добавляет +noredirect к ссылкам артистов, чтобы избежать перенаправления на страницы типа Travi$ Scott'
+            ru: 'Автоматически добавляет +noredirect к ссылкам артистов, чтобы избежать перенаправления на страницы типа Travi$ Scott',
+            pl: 'Automatycznie dodaje +noredirect do linków artystów żeby nie odsyłać do stron takich jak Travi$ Scott'
         }
     },
     view_all: {
@@ -4968,7 +5040,8 @@ export const trans = {
         it: 'Visualizza tutto',
         pt: 'Ver tudo',
         sv: 'Visa alla',
-        ru: 'Посмотреть все'
+        ru: 'Посмотреть все',
+        pl: 'Pokaż wszystkie'
     },
     help_contribute: {
         en: 'Help contribute',
@@ -4977,7 +5050,8 @@ export const trans = {
         it: 'Aiuta a contribuire',
         pt: 'Ajude a contribuir',
         sv: 'Bidra',
-        ru: 'Помочь внести вклад'
+        ru: 'Помочь внести вклад',
+        pl: 'Pomóż nam'
     },
     delete: {
         en: 'Delete',
@@ -5023,7 +5097,8 @@ export const trans = {
         it: 'Qualsiasi cosa tu possa immaginare...',
         pt: 'Tudo que você pode imaginar...',
         sv: 'Vad som helst du kan föreställa dig...',
-        ru: 'Все, что вы можете себе представить...'
+        ru: 'Все, что вы можете себе представить...',
+        pl: 'Cokolwiek chcesz, czegokolwiek pragniesz...'
     },
     supports_markdown: {
         // markdown: https://www.markdownguide.org/cheat-sheet/
@@ -5049,7 +5124,8 @@ export const trans = {
                 es: '# ¡¡hola!!',
                 it: '# ciao!!',
                 sv: '# hej!!',
-                ru: '# привет!!'
+                ru: '# привет!!',
+                pl: '# hejo!!'
             }
         },
         bold: {
