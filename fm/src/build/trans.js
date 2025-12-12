@@ -39,7 +39,7 @@ export let lang_info = {
     pl: {
         name: 'Polski',
         by: ['zaktusii', 'iwas15with100k'],
-        last_updated: '2025-12-06'
+        last_updated: '2025-12-12'
     },
     pt: {
         name: 'Português',
@@ -1068,7 +1068,7 @@ export const trans = {
             pt: 'O nome do(a) artista foi ignorado',
             sv: 'Artistnamnet var ignorerad',
             ru: 'Имя исполнителя проигнорировано',
-            pl: 'Nazwa artysty zignorowana'
+            pl: 'Imie artysty zignorowane'
         },
         2: {
             en: 'Track name was ignored',
@@ -5109,6 +5109,7 @@ export const trans = {
         pt: 'Suporta o Markdown',
         sv: 'Stöder Markdown',
         ru: 'Поддерживает Markdown',
+        pl: 'Wspiera Markdown',
         header: {
             name: {
                 en: 'Header',
@@ -5116,7 +5117,8 @@ export const trans = {
                 es: 'Encabezado',
                 it: 'Intestazione',
                 sv: 'Rubrik',
-                ru: 'Заголовок'
+                ru: 'Заголовок',
+                pl: 'Nagłówek'
             },
             string: {
                 en: '# hi!!',
@@ -5136,7 +5138,8 @@ export const trans = {
                 it: 'Grassetto',
                 pt: 'Negrito',
                 sv: 'Fet text',
-                ru: 'Полужирный'
+                ru: 'Полужирный',
+                pl: 'Pogrubienie'
             },
             string: {
                 en: '**bold**',
@@ -5145,7 +5148,8 @@ export const trans = {
                 it: '**grassetto**',
                 pt: '**negrito**',
                 sv: '**fet stil**',
-                ru: '**полужирный**'
+                ru: '**полужирный**',
+                pl: '**pogrubiony**'
             }
         },
         italics: {
@@ -5156,7 +5160,8 @@ export const trans = {
                 it: 'Corsivo',
                 pt: 'Itálico',
                 sv: 'Kursiv',
-                ru: 'Курсив'
+                ru: 'Курсив',
+                pl: 'Kursywa'
             },
             string: {
                 en: '*slanted*',
@@ -5165,7 +5170,8 @@ export const trans = {
                 it: '*corsivo*',
                 pt: '*inclinado*',
                 sv: '*kursiv*',
-                ru: '*наклонный*'
+                ru: '*наклонный*',
+                pl: '*pochylony*'
             }
         },
         bold_italics: {
@@ -5176,7 +5182,8 @@ export const trans = {
                 it: 'Grassetto corsivo',
                 pt: 'Negrito itálico',
                 sv: 'Fet kursiv stil',
-                ru: 'Полужирный курсив'
+                ru: 'Полужирный курсив',
+                pl: 'Pogrubiona kursywa'
             },
             string: {
                 en: '***slanted but bold***',
@@ -5185,7 +5192,8 @@ export const trans = {
                 it: '***corsivo, ma in grassetto***',
                 pt: '***inclinado, mas em negrito***',
                 sv: '***fet och kursiv samtidigt***',
-                ru: '***наклонный, но полужирный***'
+                ru: '***наклонный, но полужирный***',
+                pl: '***pogrubiony i pochylony***'
             }
         },
         underlined: {
@@ -5196,7 +5204,8 @@ export const trans = {
                 it: 'Sottolineato',
                 pt: 'Sublinhado',
                 sv: 'Understrykt',
-                ru: 'Подчеркнутый'
+                ru: 'Подчеркнутый',
+                pl: 'Podkreśl'
             },
             string: {
                 en: '__underlined__',
@@ -5205,7 +5214,8 @@ export const trans = {
                 it: '__sottolineato__',
                 pt: '__sublinhado__',
                 sv: '__understrykt__',
-                ru: '__подчеркнутый__'
+                ru: '__подчеркнутый__',
+                pl: '__podkreślony__'
             }
         }
     },
@@ -5217,7 +5227,8 @@ export const trans = {
         it: 'massimo {v} caratteri',
         pt: 'máximo de {v} caracteres',
         sv: 'max {v} tecken',
-        ru: 'Максимум {v} символов'
+        ru: 'Максимум {v} символов',
+        pl: 'maksymalnie {v} znaków'
     },
     profile_shortcut: {
         name: {
@@ -5227,7 +5238,8 @@ export const trans = {
             it: 'Scorciatoia del profilo',
             pt: 'Atalho de perfil',
             sv: 'Profilgenväg',
-            ru: 'Ярлык профиля'
+            ru: 'Ярлык профиля',
+            pl: 'Skrót do profilu'
         },
         body: {
             en: 'View their scrobbles alongside yours at all times',
@@ -5236,7 +5248,8 @@ export const trans = {
             it: 'Vedi i loro scrobbling vicino ai tuoi in qualsiasi momento',
             pt: 'Veja os scrobbles dele(a) junto aos seus o tempo todo',
             sv: 'Visa deras skrobblingar bredvid dina hela tiden',
-            ru: 'Просмотр их скробблов рядом с вашими всегда'
+            ru: 'Просмотр их скробблов рядом с вашими всегда',
+            pl: 'Zawsze wyświetlaj ich scrobble łącznie z twoimi'
         },
         linked: {
             en: 'Linked with {u}',
@@ -5245,7 +5258,8 @@ export const trans = {
             it: 'Collegato a {u}',
             pt: 'Ligado com {u}',
             sv: 'Länkad ihop med {u}',
-            ru: 'Связано с {u}'
+            ru: 'Связано с {u}',
+            pl: 'Połączeni z {u}'
         },
         notice: {
             en: 'You already have {u} as your shortcut, are you sure?',
@@ -5254,7 +5268,8 @@ export const trans = {
             it: 'Hai già {u} come scorciatoia, sei sicuro?',
             pt: 'Você já tem {u} como seu atalho, você tem certeza?',
             sv: 'Du har redan {u} som din genväg, är du säker?',
-            ru: 'У вас уже есть {u} в качестве ярлыка, вы уверены?'
+            ru: 'У вас уже есть {u} в качестве ярлыка, вы уверены?',
+            pl: 'Masz już ustawiony profil {u} jako skrót, czy napewno chesz to zrobić?'
         }
     },
     failed_to_find_profile: {
@@ -5264,7 +5279,8 @@ export const trans = {
         it: 'Impossibile trovare il profilo',
         pt: 'Falha ao achar perfil',
         sv: 'Kunde ej hitta profilen',
-        ru: 'Не удалось найти профиль'
+        ru: 'Не удалось найти профиль',
+        pl: 'Nieudało się wczytać profilu'
     },
     replace: {
         en: 'Replace',
@@ -5273,7 +5289,8 @@ export const trans = {
         it: 'Sostituire',
         pt: 'Substituir',
         sv: 'Ersätt',
-        ru: 'Заменить'
+        ru: 'Заменить',
+        pl: 'Zamień'
     },
     view_others_library: {
         en: 'View others library',
@@ -5282,7 +5299,8 @@ export const trans = {
         it: 'Visualizza la libreria degli altri',
         pt: 'Ver a biblioteca dos outros',
         sv: 'Visa andra personers bibliotek',
-        ru: 'Просмотр библиотеки других'
+        ru: 'Просмотр библиотеки других',
+        pl: 'Pokaż bibliotekę innych'
     },
     avatar_radius: {
         name: {
@@ -5292,7 +5310,8 @@ export const trans = {
             it: 'Forma dell\'immagine del profilo',
             pt: 'Formato da imagem de perfil',
             sv: 'Profilbildsform',
-            ru: 'Форма аватара профиля'
+            ru: 'Форма аватара профиля',
+            pl: 'Kształt awataru profilu'
         },
         body: {
             en: 'Applies to all profiles, only visible to you',
@@ -5301,7 +5320,8 @@ export const trans = {
             it: 'Si applica a tutti i profili, è visibile solo a te',
             sv: 'Tillämpas på alla profiler, syns bara för dig',
             ru: 'Применяется ко всем профилям, видно только вам',
-            pt: 'Aplica-se a todos os perfis, visível apenas para você'
+            pt: 'Aplica-se a todos os perfis, visível apenas para você',
+            pl: 'Dotyczy wszystkich profili, widoczne tylko dla ciebie'
         }
     },
     notes: {
@@ -5312,7 +5332,8 @@ export const trans = {
         it: 'Note',
         pt: 'Notas',
         sv: 'Anteckningar',
-        ru: 'Заметки'
+        ru: 'Заметки',
+        pl: 'Notatki'
     },
     no_notes: {
         // no profiles in your notes list
@@ -5322,7 +5343,8 @@ export const trans = {
         it: 'Nessun profilo qui (｡•́︿•̀｡)',
         pt: 'Sem perfis aqui... (｡•́︿•̀｡)',
         sv: 'Inga profiler här... (｡•́︿•̀｡)',
-        ru: 'Здесь нет профилей... (｡•́︿•̀｡)'
+        ru: 'Здесь нет профилей... (｡•́︿•̀｡)',
+        pl: 'A profili brak... (｡•́︿•̀｡)'
     },
     font: {
         name: {
@@ -5332,7 +5354,8 @@ export const trans = {
             it: 'Selezione del font',
             pt: 'Escolha de fonte',
             sv: 'Typsnitt',
-            ru: 'Выбор шрифта'
+            ru: 'Выбор шрифта',
+            pl: 'Wybór czcionki'
         },
         body: {
             en: 'Choose a custom selection of fonts that suit you',
@@ -5341,7 +5364,8 @@ export const trans = {
             it: 'Definisci una selezione di font personalizzata adatta a te',
             pt: 'Selecione uma fonte customizada que te agrada',
             sv: 'Välj ett typsnitt som bäst passar dig',
-            ru: 'Выберите пользовательский набор шрифтов, который вам подходит'
+            ru: 'Выберите пользовательский набор шрифтов, который вам подходит',
+            pl: 'Wybierz własne czcionki które ci pasują'
         }
     },
     font_style: {
@@ -5351,13 +5375,15 @@ export const trans = {
         sv: 'Typsnittsstil',
         ru: 'Стиль шрифта',
         pt: 'Estilo da fonte',
+        pl: 'Styl czcionki',
         solid: {
             en: 'Solid',
             es: 'Sólido',
             it: 'Solido',
             sv: 'Fast',
             ru: 'Сплошной',
-            pt: 'Sólido'
+            pt: 'Sólido',
+            pl: 'Solidna'
         },
         pop: {
             en: 'Pop',
@@ -5365,7 +5391,8 @@ export const trans = {
             it: 'Pop',
             sv: 'Poppande',
             ru: 'Яркий',
-            pt: 'Pop'
+            pt: 'Pop',
+            pl: 'Pop'
         },
         out: {
             en: 'Outline'
@@ -5376,7 +5403,8 @@ export const trans = {
             it: 'Brillante',
             sv: 'Glödande',
             ru: 'Свечение',
-            pt: 'Brilhante'
+            pt: 'Brilhante',
+            pl: 'Rozbłysk'
         }
     },
     font_weight: {
@@ -5387,7 +5415,8 @@ export const trans = {
             it: 'Spessore del font',
             pt: 'Espessura da fonte',
             sv: 'Typsnittsvikt',
-            ru: 'Толщина шрифта'
+            ru: 'Толщина шрифта',
+            pl: 'Wielkość czcionki'
         },
         body: {
             en: 'Used for regular text paragraphs',
@@ -5396,7 +5425,8 @@ export const trans = {
             it: 'Utilizzato per paragrafi regolari di testo',
             pt: 'Usado para parágrafos regulares de texto',
             sv: 'Används för vanliga textstycke',
-            ru: 'Используется для обычных текстовых абзацев'
+            ru: 'Используется для обычных текстовых абзацев',
+            pl: 'Używany do regularnych akapitów'
         }
     },
     font_weight_medium: {
@@ -5407,7 +5437,8 @@ export const trans = {
             it: 'Spessore del font medio',
             pt: 'Espessura média de fonte',
             sv: 'Mindre typsnittsvikt',
-            ru: 'Средняя толщина шрифта'
+            ru: 'Средняя толщина шрифта',
+            pl: 'Średnia wielkość czcionki'
         },
         body: {
             en: 'Used for button text and small headers',
@@ -5416,7 +5447,8 @@ export const trans = {
             it: 'Utilizzato per il testo dei pulsanti e per piccole intestazioni',
             pt: 'Usada para texto de botões e pequenos cabeçalhos',
             sv: 'Används för knappar och småa rubriker',
-            ru: 'Используется для текста кнопок и небольших заголовков'
+            ru: 'Используется для текста кнопок и небольших заголовков',
+            pl: 'Używany do tekstów na przyciskach i małych nagłóweków'
         }
     },
     font_weight_bold: {
@@ -5427,7 +5459,8 @@ export const trans = {
             it: 'Spessore del font in grassetto',
             pt: 'Espessura da fonte em negrito',
             sv: 'Fet typsnittsvikt',
-            ru: 'Жирная толщина шрифта'
+            ru: 'Жирная толщина шрифта',
+            pl: 'Wielkość grubej czcionki'
         },
         body: {
             en: 'Used for large headers',
@@ -5436,7 +5469,8 @@ export const trans = {
             it: 'Utilizzato per grandi intestazioni',
             pt: 'Usado para cabeçalhos grandes',
             sv: 'Används för stora rubriker',
-            ru: 'Используется для больших заголовков'
+            ru: 'Используется для больших заголовков',
+            pl: 'Używany do wielkich nagłówków'
         }
     },
     font_emoji: {
@@ -5447,7 +5481,8 @@ export const trans = {
             it: 'Compatibilità con le emoji',
             pt: 'Compatibilidade de emojis',
             sv: 'Emoji-kompatibilitet',
-            ru: 'Совместимость с эмодзи'
+            ru: 'Совместимость с эмодзи',
+            pl: 'Kompatybilność emoji'
         },
         body: {
             en: 'Required to render emoji properly before Windows 11',
@@ -5456,7 +5491,8 @@ export const trans = {
             it: 'Richiesto per visualizzare correttamente le emoji prima di Windows 11',
             pt: 'Necessário para renderizar emojis corretamente antes do Windows 11',
             sv: 'Krävs för att visa emojis korrekt innan Windows 11',
-            ru: 'Требуется для правильного отображения эмодзи до Windows 11'
+            ru: 'Требуется для правильного отображения эмодзи до Windows 11',
+            pl: 'Wymagane do poprawnego renderowania emoji przed Windows 11'
         }
     },
     font_example: {
@@ -5474,6 +5510,7 @@ export const trans = {
         sv: 'Flygande bäckasiner söka hwila på mjuka tuvor qxz 🏳️‍⚧️',
         ru: 'Съешь ещё этих мягких французских булок, да выпей чаю 🏳️‍⚧️',
         pt: 'A rápida raposa marrom pula sobre o cão preguiçoso 🏳️‍⚧️',
+        pl: 'O, mógłże sęp chlań wyjść furtką bździn?!... 🏳️‍⚧️'
     },
     enter_font_names: {
         en: 'Enter installed font name(s), separated by commas',
@@ -5482,7 +5519,8 @@ export const trans = {
         it: 'Inserisci nomi di font installati, separati da virgole',
         pt: 'Nomes das fontes instaladas, separados por vírgulas',
         sv: 'Skriv installerade typsnittsnamn, separerade av kommatecken',
-        ru: 'Введите название(я) установленного(ых) шрифта(ов), разделяя запятыми'
+        ru: 'Введите название(я) установленного(ых) шрифта(ов), разделяя запятыми',
+        pl: 'Podaj nazwę(-wy) zainstalowanej(-nych) czcionki(-nek), oddzielone przecinkiem'
     },
     change_now: {
         en: 'Change now',
@@ -5491,7 +5529,8 @@ export const trans = {
         it: 'Cambia ora',
         pt: 'Mudar agora',
         sv: 'Ändra nu',
-        ru: 'Изменить сейчас'
+        ru: 'Изменить сейчас',
+        pl: 'Zmień teraz'
     },
     profiles: {
         en: 'Profiles',
@@ -5500,7 +5539,8 @@ export const trans = {
         it: 'Profili',
         pt: 'Perfis',
         sv: 'Profiler',
-        ru: 'Профили'
+        ru: 'Профили',
+        pl: 'Profile'
     },
     redirections: {
         en: 'Redirections',
@@ -5509,7 +5549,8 @@ export const trans = {
         it: 'Reindirizzamenti',
         pt: 'Redirecionamentos',
         sv: 'Omdirigeringar',
-        ru: 'Перенаправления'
+        ru: 'Перенаправления',
+        pl: 'Przekierowania'
     },
     legacy_redirects: {
         name: {
@@ -5519,7 +5560,8 @@ export const trans = {
             it: 'Reindirizzamento legacy degli scrobbling',
             pt: 'Redirecionamento de scrobble legado',
             sv: 'Legacy skrobbelomdirigeringar',
-            ru: 'Устаревшее перенаправление скробблов'
+            ru: 'Устаревшее перенаправление скробблов',
+            pl: 'Tradycyjne przekierowania scrobbli',
         },
         body: {
             en: 'By default, scrobbles will be corrected to faulty replacements that are a decade out of date. Disabling does not fully fix the system but keeps artist names in your library intact.',
@@ -5528,7 +5570,8 @@ export const trans = {
             it: 'Per impostazione predefinita, gli scrobbling saranno corretti in base a sostituzioni erronee obsolete da un decennio. Disattivare questa opzione non risolve completamente i problemi ma mantiene intatti i nomi degli artisti nella tua libreria.',
             pt: 'Por padrão, a Last.fm irá "corrigir automaticamente" alguns dos seus scrobbles para redirecionamentos (na maioria) defeituosos. Desativar essa opção não corrige completamente o sistema, mas mantém os nomes dos artistas na sua biblioteca intactos.',
             sv: 'Vanligtvis omdirigeras skrobblar till felersättningar som är över tio år gamla. Att avaktivera det fixar inte problemet totalt men artistnamn i ditt egna bibliotek visar rätt profil.',
-            ru: 'По умолчанию скробблы будут исправлены на неисправные замены, которым уже десять лет. Отключение не полностью исправляет систему, но сохраняет имена артистов в вашей библиотеке нетронутыми.'
+            ru: 'По умолчанию скробблы будут исправлены на неисправные замены, которым уже десять лет. Отключение не полностью исправляет систему, но сохраняет имена артистов в вашей библиотеке нетронутыми.',
+            pl: 'Domyślnie, scrobble będą poprawiane na błędne zamiennik jeśli są dekadę za stare. Wyłączanie tego nie do końca naprawia ten system ale zostawia imiona artystów bez zmian.'
         }
     },
     redirect_messages: {
@@ -5539,7 +5582,8 @@ export const trans = {
             it: 'Rimuovi le notifiche di reindirizzamento tra le pagine',
             pt: 'Remover notificações de redirecionamento de página',
             sv: 'Ta bort omdirigeringsnotifikationer',
-            ru: 'Удалить уведомления о перенаправлении страницы'
+            ru: 'Удалить уведомления о перенаправлении страницы',
+            pl: 'Usuń powiadomienia o przekierowaniu stron'
         },
         body: {
             en: 'These notifications can let you undo redirections Last.fm forced upon you, but can also be annoying',
@@ -5548,7 +5592,8 @@ export const trans = {
             it: 'Queste notifiche possono permetterti di annullare dei reindirizzamenti che Last.fm ti ha imposto, ma possono anche essere fastidiose',
             pt: 'Essas notificações podem permitir que você desfaça redirecionamentos que a Last.fm impôs a você, mas também podem ser irritantes',
             sv: 'Dessa notiser låter dig ångra omdirigeringar Last.fm tvingade på dig, men dem kan också vara störande',
-            ru: 'Эти уведомления могут позволить вам отменить перенаправления, навязанные Last.fm, но также могут быть раздражающими'
+            ru: 'Эти уведомления могут позволить вам отменить перенаправления, навязанные Last.fm, но также могут быть раздражающими',
+            pl: 'Te powiadomienia pozwalają ci cofać z przekierowywań od Last.fm, ale mogą również być irytujące'
         }
     },
     colourful_counts: {
@@ -5559,7 +5604,8 @@ export const trans = {
             it: 'Colori basati sulla posizione nelle classifiche degli artisti',
             pt: 'Cores baseadas em classificação para paradas de artistas',
             sv: 'Rangbaserade färger för artistlistor',
-            ru: 'Цвета на основе ранга для чартов артистов'
+            ru: 'Цвета на основе ранга для чартов артистов',
+            pl: 'Kolory bazowane na rankingach do wykresów artystów'
         },
         body: {
             en: 'Assigns a colour based on an artist’s all-time ranking in your library',
@@ -5568,7 +5614,8 @@ export const trans = {
             it: 'Assegna un colore basato sulla sua posizione nella classifica della tua libreria',
             pt: 'Define uma cor pela colocação do artista no ranking geral da sua biblioteca',
             sv: 'Tillämpar en färg baserad på en artists alltidsranking i ditt bibliotek',
-            ru: 'Назначает цвет в зависимости от общего рейтинга артиста в вашей библиотеке'
+            ru: 'Назначает цвет в зависимости от общего рейтинга артиста в вашей библиотеке',
+            pl: 'Przypisuje kolor bazowany na rankingu artysty w całym zakresie czasowym w twojej bibliotece'
         }
     },
     glacier_graphs: {
@@ -5579,7 +5626,8 @@ export const trans = {
             it: 'Visualizza meglio i grafici degli scrobbling',
             pt: 'Visualize melhor os gráficos de scrobble',
             sv: 'Bättre visualisera skrobbeldiagram',
-            ru: 'Лучше визуализировать графики скробблов'
+            ru: 'Лучше визуализировать графики скробблов',
+            pl: 'Lepiej wizualizuj wykresy scrobbli'
         },
         body: {
             en: 'Choose between a tiny delay for a wide range of graph options or legacy Last.fm graphs',
@@ -5588,7 +5636,8 @@ export const trans = {
             it: 'Seleziona tra un piccolo ritardo per una vasta selezione di opzioni per i grafici, o utilizza i grafici normali di Last.fm',
             pt: 'Escolha entre um pequeno atraso para ter mais opções de gráficos ou usar os gráficos clássicos da Last.fm',
             sv: 'Välj mellan en liten fördröjning för en stor mängd olika diagramalternativ eller använd äldre Last.fm-diagram',
-            ru: 'Выберите между небольшой задержкой для широкого спектра опций графика или устаревшими графиками Last.fm'
+            ru: 'Выберите между небольшой задержкой для широкого спектра опций графика или устаревшими графиками Last.fm',
+            pl: 'Wybierz pomiędzy małym opóźnieniem w zamian za większy wybór wykresów lub używaj tradycyjnych wykresów z Last.fm'
         }
     },
     gendered_tags: {
@@ -5599,7 +5648,8 @@ export const trans = {
             it: 'Nascondi i tag basati sul genere',
             pt: 'Esconder tags baseadas em gênero',
             sv: 'Göm könsbaserade taggar',
-            ru: 'Скрыть теги, основанные на гендере'
+            ru: 'Скрыть теги, основанные на гендере',
+            pl: 'Ukryj tagi bazowane na płci'
         },
         body: {
             en: 'These tags are often redundant and can never apply to the full range they’re intending',
