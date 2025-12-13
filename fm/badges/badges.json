@@ -515,9 +515,17 @@
         "tainaronian": {
             "type": "sponsor"
         },
-        "BosozokuGF": [
+        "NozomiBear": [
             {
                 "type": "sponsor"
+            },
+            {
+                "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1vdXRsaW5lIGljb24tdGFibGVyLWFwcGxlIj48cGF0aCBzdHJva2U9Im5vbmUiIGQ9Ik0wIDBoMjR2MjRIMHoiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJNNCAxMS4zMTljMCAzLjEwMiAuNDQ0IDUuMzE5IDIuMjIyIDcuOTc4YzEuMzUxIDEuNzk3IDMuMTU2IDIuMjQ3IDUuMDggLjk4OGMuNDI2IC0uMjY4IC45NyAtLjI2OCAxLjM5NyAwYzEuOTIzIDEuMjYgMy43MjggLjgwOSA1LjA3OSAtLjk4OGMxLjc3OCAtMi42NiAyLjIyMiAtNC44NzYgMi4yMjIgLTcuOTc3YzAgLTIuNjYxIC0xLjk5IC01LjMyIC00LjQ0NCAtNS4zMmMtMS4yNjcgMCAtMi40MSAuNjkzIC0zLjIyIDEuNDRhLjUgLjUgMCAwIDEgLS42NzIgMGMtLjgwOSAtLjc0NiAtMS45NTMgLTEuNDQgLTMuMjIgLTEuNDRjLTIuNDU0IDAgLTQuNDQ0IDIuNjYgLTQuNDQ0IDUuMzE5IiAvPjxwYXRoIGQ9Ik03IDEyYzAgLTEuNDcgLjQ1NCAtMi4zNCAxLjUgLTMiIC8+PHBhdGggZD0iTTEyIDdjMCAtMS4yIC44NjcgLTQgMyAtNCIgLz48L3N2Zz4=",
+                "reason": "sponsor",
+                "name": "pipsqueak :3",
+                "hue": 343,
+                "sat": 1.05,
+                "lit": 0.9
             },
             {
                 "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWNhdC1pY29uIGx1Y2lkZS1jYXQiPjxwYXRoIGQ9Ik0xMiA1Yy42NyAwIDEuMzUuMDkgMiAuMjYgMS43OC0yIDUuMDMtMi44NCA2LjQyLTIuMjYgMS40LjU4LS40MiA3LS40MiA3IC41NyAxLjA3IDEgMi4yNCAxIDMuNDRDMjEgMTcuOSAxNi45NyAyMSAxMiAyMXMtOS0zLTktNy41NmMwLTEuMjUuNS0yLjQgMS0zLjQ0IDAgMC0xLjg5LTYuNDItLjUtNyAxLjM5LS41OCA0LjcyLjIzIDYuNSAyLjIzQTkuMDQgOS4wNCAwIDAgMSAxMiA1WiIvPjxwYXRoIGQ9Ik04IDE0di41Ii8+PHBhdGggZD0iTTE2IDE0di41Ii8+PHBhdGggZD0iTTExLjI1IDE2LjI1aDEuNUwxMiAxN2wtLjc1LS43NVoiLz48L3N2Zz4=",
