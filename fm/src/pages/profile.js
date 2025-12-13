@@ -298,12 +298,9 @@ export async function bleh_profiles() {
     profile_header.classList.add('legacy-header');
 
     // make avatar clickable
-    if (!new_account) {
-        const src = avatar_img.src;
-        page.avatar = src;
-
+    if (avatar_img) {
         avatar.addEventListener('click', () => {
-            expand_avatar(src.replace('/avatar170s/', '/ar0/'));
+            expand_avatar(avatar_img.src.replace('/avatar300s/', '/ar0/'));
         });
     }
 

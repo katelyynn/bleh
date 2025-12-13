@@ -36014,11 +36014,9 @@
       page.structure.container.firstElementChild
     );
     profile_header.classList.add("legacy-header");
-    if (!new_account) {
-      const src = avatar_img.src;
-      page.avatar = src;
+    if (avatar_img) {
       avatar2.addEventListener("click", () => {
-        expand_avatar(src.replace("/avatar170s/", "/ar0/"));
+        expand_avatar(avatar_img.src.replace("/avatar300s/", "/ar0/"));
       });
     }
     control_gif_pause(avatar_img);
