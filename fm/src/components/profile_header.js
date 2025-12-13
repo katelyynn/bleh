@@ -267,25 +267,27 @@ export function redesign_profile_header(is_own_profile, is_following) {
         });
 
         if (taste_artists.length > 1) {
+            const other_avi = page.avatar.replace('/avatar300s/', '/avatar42s/');
+
             tippy(taste_wrap, {
                 theme: 'context-menu',
                 content: html.node`
                     <h4 class="menu-header">${tl(trans.compare_plays)}</h4>
                     <a class="dropdown-menu-clickable-item" href="${root}user/${page.name}/library/music/${redirect()}${sanitise(taste_artists[0])}" data-menu-item="shared-artist">
-                        <img class="view-item-avatar" src="${page.avatar}" alt="${page.name}">${taste_artists[0]}
+                        <img class="view-item-avatar" src=${other_avi} alt="${page.name}">${taste_artists[0]}
                     </a>
                     <a class="dropdown-menu-clickable-item" href="${root}user/${auth.name}/library/music/${redirect()}${sanitise(taste_artists[0])}" data-menu-item="shared-artist">
-                        <img class="view-item-avatar" src="${auth.avatar}" alt="${auth.name}">${taste_artists[0]}
+                        <img class="view-item-avatar" src=${auth.avatar} alt="${auth.name}">${taste_artists[0]}
                     </a>
                     ${
                         taste_artists.length >= 2 ?
                             html.node`
                     <div class="sep"></div>
                     <a class="dropdown-menu-clickable-item" href="${root}user/${page.name}/library/music/${redirect()}${sanitise(taste_artists[1])}" data-menu-item="shared-artist">
-                        <img class="view-item-avatar" src="${page.avatar}" alt="${page.name}">${taste_artists[1]}
+                        <img class="view-item-avatar" src=${other_avi} alt="${page.name}">${taste_artists[1]}
                     </a>
                     <a class="dropdown-menu-clickable-item" href="${root}user/${auth.name}/library/music/${redirect()}${sanitise(taste_artists[1])}" data-menu-item="shared-artist">
-                        <img class="view-item-avatar" src="${auth.avatar}" alt="${auth.name}">${taste_artists[1]}
+                        <img class="view-item-avatar" src=${auth.avatar} alt="${auth.name}">${taste_artists[1]}
                     </a>
                     `
                         :   ''
@@ -295,10 +297,10 @@ export function redesign_profile_header(is_own_profile, is_following) {
                             html.node`
                     <div class="sep"></div>
                     <a class="dropdown-menu-clickable-item" href="${root}user/${page.name}/library/music/${redirect()}${sanitise(taste_artists[2])}" data-menu-item="shared-artist">
-                        <img class="view-item-avatar" src="${page.avatar}" alt="${page.name}">${taste_artists[2]}
+                        <img class="view-item-avatar" src=${other_avi} alt="${page.name}">${taste_artists[2]}
                     </a>
                     <a class="dropdown-menu-clickable-item" href="${root}user/${auth.name}/library/music/${redirect()}${sanitise(taste_artists[2])}" data-menu-item="shared-artist">
-                        <img class="view-item-avatar" src="${auth.avatar}" alt="${auth.name}">${taste_artists[2]}
+                        <img class="view-item-avatar" src=${auth.avatar} alt="${auth.name}">${taste_artists[2]}
                     </a>
                     `
                         :   ''

@@ -260,6 +260,7 @@ export async function bleh_profiles() {
     if (avatar_img) {
         avatar_img.src = avatar_img.src.replace('/avatar170s/', '/avatar300s/');
         cache.avatar = avatar_img.src;
+        page.avatar = avatar_img.src;
     }
 
     if (page.name == auth.name && !settings.profile_header_own) {
