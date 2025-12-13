@@ -1300,7 +1300,7 @@
                 --cards-overlay-image-subtle: var(--overlay-ice-subtle);
                 --cards-overlay-image-subtlest: var(--overlay-ice-subtlest);
                 --cards-overlay-image-spikes: var(--overlay-ice-spikes);
-                --cards-overlay-height: 200px;
+                --cards-overlay-height: 110px;
             }
             &[data-bleh--season="christmas"] {
                 --cards-overlay: linear-gradient(
@@ -1317,7 +1317,7 @@
                 --cards-overlay-image-subtle: var(--overlay-ice-subtle);
                 --cards-overlay-image-subtlest: var(--overlay-ice-subtlest);
                 --cards-overlay-image-spikes: var(--overlay-ice-spikes);
-                --cards-overlay-height: 200px;
+                --cards-overlay-height: 150px;
             }
             &[data-bleh--season="new_years"] {
                 --cards-overlay: linear-gradient(
@@ -1334,7 +1334,7 @@
                 --cards-overlay-image-subtle: var(--overlay-ice-subtle);
                 --cards-overlay-image-subtlest: var(--overlay-ice-subtlest);
                 --cards-overlay-image-spikes: var(--overlay-ice-spikes);
-                --cards-overlay-height: 200px;
+                --cards-overlay-height: 150px;
             }
         }
 
@@ -2782,10 +2782,7 @@
                     max-height: 100%;
                     display: var(--cards-overlay-display);
 
-                    background-image: var(
-                        --cards-overlay-image,
-                        unset
-                    ), var(--cards-overlay) !important;
+                    background-image: var(--cards-overlay-image, unset), var(--cards-overlay) !important;
                     background-size: 100px;
                     background-repeat: repeat-x !important;
                     background-position: 0 -60px !important;
@@ -18599,7 +18596,7 @@
             flex-direction: column;
         }
 
-        & > * {
+        & > div {
             opacity: var(--opacity, unset);
             pointer-events: var(--events, auto);
             cursor: var(--cursor, unset);
@@ -27317,33 +27314,6 @@
                     background: url("data:image/svg+xml;base64,PHN2ZyAgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiAgd2lkdGg9IjI0IiAgaGVpZ2h0PSIyNCIgIHZpZXdCb3g9IjAgMCAyNCAyNCIgIGZpbGw9IiNmZmZmZmYiICBjbGFzcz0iaWNvbiBpY29uLXRhYmxlciBpY29ucy10YWJsZXItZmlsbGVkIGljb24tdGFibGVyLXBsYXllci1wbGF5Ij48cGF0aCBzdHJva2U9Im5vbmUiIGQ9Ik0wIDBoMjR2MjRIMHoiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJNNiA0djE2YTEgMSAwIDAgMCAxLjUyNCAuODUybDEzIC04YTEgMSAwIDAgMCAwIC0xLjcwNGwtMTMgLThhMSAxIDAgMCAwIC0xLjUyNCAuODUyeiIgLz48L3N2Zz4=") !important;
                     background-size: 100% !important;
                     opacity: 0.8 !important;
-                }
-
-                &[data-scale-down="2"] {
-                    * {
-                        --font-size: 12px;
-                        --line-height: 16px;
-                    }
-
-                    .grid-items-item-details {
-                        padding: 4px;
-                    }
-                    .grid-item-plays:before {
-                        --top: 1px;
-                    }
-                }
-                &[data-scale-down="1"] {
-                    * {
-                        --font-size: 14px;
-                        --line-height: 18px;
-                    }
-
-                    .grid-items-item-details {
-                        padding: 8px;
-                    }
-                    .grid-item-plays:before {
-                        --top: 2px;
-                    }
                 }
             }
 
