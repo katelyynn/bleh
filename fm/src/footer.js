@@ -33,7 +33,7 @@ export function bleh_footer() {
                             u: `<a href="${root}user/${kate}">${kate}</a>`,
                             c: '<a href="https://github.com/katelyynn/bleh/graphs/contributors" target="_blank">',
                             '/c': '</a>',
-                            h: `<span class="bleh-icon heart sponsor-related">${tl(trans.love_lower)}</span>`
+                            h: `<span class="bleh-icon heart sponsor-related colourful">${tl(trans.love_lower)}</span>`
                         })
                     }}
                 </p>

@@ -1094,7 +1094,7 @@ export function patch_titles(search = page.structure.main) {
 
                 image.setAttribute('crossorigin', 'anonymous');
                 try {
-                    image.addEventListener('load', function () {
+                    image.addEventListener('load', () => {
                         let thief = new ColorThief();
                         let colour = thief.getColor(image);
 
@@ -1107,6 +1107,8 @@ export function patch_titles(search = page.structure.main) {
                         const to_colour = track.querySelectorAll(
                             '.chartlist-count-bar, .chartlist-loved'
                         );
+
+                        track.classList.add('colourful');
 
                         if (is_active) {
                             track.style.setProperty('--hue-over', hue);

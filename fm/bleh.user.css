@@ -439,9 +439,8 @@
     .gallery-image-preferred-button,
     button,
     .gallery-image-preferred-states,
-    .user-dashboard-legend-item::before, stop,
+    stop,
     .alert, .event-status, .big-modal-alert,
-    .chartlist-row--now-scrobbling,
     a,
     #current-subscription,
     .events-list-item-date-icon, .calendar-icon,
@@ -468,24 +467,13 @@
     .inbox-message-view .inbox-message-sender-avatar,
     .colourful,
     .events-list-item-attendees,
-    .side-action,
     .tip[data-exceeded="true"],
-    .heart,
     .gallery-image-preferred-container,
     .events-list-item-date-icon-month, .calendar-icon-month,
     .attendance-badge {
-        --hue: var(
-            --hue-over,
-            var(--hue-album, var(--hue-user, var(--hue-seasonal, 255)))
-        );
-        --sat: var(
-            --sat-over,
-            var(--sat-album, var(--sat-user, var(--sat-seasonal, 1)))
-        );
-        --lit: var(
-            --lit-over,
-            var(--lit-album, var(--lit-user, var(--lit-seasonal, 1)))
-        );
+        --hue: var(--hue-over, var(--hue-album, var(--hue-user, var(--hue-seasonal, 255))));
+        --sat: var(--sat-over, var(--sat-album, var(--sat-user, var(--sat-seasonal, 1))));
+        --lit: var(--lit-over, var(--lit-album, var(--lit-user, var(--lit-seasonal, 1))));
 
         --c1: var(--hue), calc(clamp(min(0), var(--sat), max(1)) * 40%), 100%;
         --c2: var(--hue), calc(clamp(min(0), var(--sat), max(1)) * 30%), 87%;
@@ -19959,90 +19947,6 @@
             [href^="/tag/nonbinary+vocalist"]
         ) {
         display: none;
-    }
-
-    /* ! hateful content that last.fm wont block */
-    [data-bleh--hide_hateful="true"]
-        .shout--bleh-redacted[data-bleh--shout-expanded="false"] {
-        .shout-user-avatar,
-        .shout-user,
-        .shout-user-avatar-link,
-        .shout-permalink,
-        .shout-body,
-        .shout-action {
-            display: none;
-        }
-        .shout-actions {
-            position: absolute;
-            right: 0;
-            top: -9px;
-        }
-    }
-    [data-bleh--hide_hateful="false"]
-        .shout--bleh-redacted[data-bleh--shout-expanded="false"],
-    .shout--bleh-redacted[data-bleh--shout-expanded="true"] {
-        > p {
-            display: none;
-        }
-        .shout-user {
-            margin-top: unset !important;
-        }
-    }
-
-    /* on profile */
-    .content--bleh-redacted {
-        header,
-        footer,
-        .adaptive-skin-container {
-            display: none !important;
-        }
-    }
-
-    .bleh--redacted-message {
-        width: var(--cards-width);
-        position: absolute;
-        top: calc(40px + (var(--card-gap) * 2));
-        left: calc((100% - var(--cards-width)) / 2);
-        padding: var(--card-padding);
-        background-color: hsla(var(--h4), 20%);
-        border-radius: 16px;
-
-        --hue-over: var(--hue-neg);
-        --sat-over: 1;
-        --lit-over: 1;
-
-        display: flex;
-        align-items: center;
-
-        .text {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            gap: 6px;
-
-            h5 {
-                color: hsl(var(--c1));
-                font-weight: var(--font-weight-bold);
-            }
-            p {
-                color: hsl(var(--l3-c));
-            }
-        }
-        .actions {
-            display: flex;
-            align-items: center;
-            gap: var(--button-list-gap);
-
-            .secondary {
-                --bg: transparent;
-                --bg-hov: hsla(var(--h3), 20%);
-                --bg-atv: hsla(var(--h3), 20%);
-                --shadow: none;
-                --shadow-hov: none;
-                --col: hsla(var(--l3-c), 40%);
-            }
-        }
     }
 
     .shout-form {

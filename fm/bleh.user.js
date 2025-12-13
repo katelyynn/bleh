@@ -32840,7 +32840,7 @@
           if (!settings.colourful_tracks_all && !is_active) return;
           image.setAttribute("crossorigin", "anonymous");
           try {
-            image.addEventListener("load", function() {
+            image.addEventListener("load", () => {
               let thief = new import_color_thief_browser2.default();
               let colour2 = thief.getColor(image);
               let hsl = rgb_to_hsl(colour2[0], colour2[1], colour2[2]);
@@ -32850,6 +32850,7 @@
               const to_colour = track.querySelectorAll(
                 ".chartlist-count-bar, .chartlist-loved"
               );
+              track.classList.add("colourful");
               if (is_active) {
                 track.style.setProperty("--hue-over", hue2);
                 track.style.setProperty("--sat-over", sat);
@@ -58418,7 +58419,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           u: `<a href="${root}user/${kate}">${kate}</a>`,
           c: '<a href="https://github.com/katelyynn/bleh/graphs/contributors" target="_blank">',
           "/c": "</a>",
-          h: `<span class="bleh-icon heart sponsor-related">${tl2(trans.love_lower)}</span>`
+          h: `<span class="bleh-icon heart sponsor-related colourful">${tl2(trans.love_lower)}</span>`
         })
       }}
                 </p>
