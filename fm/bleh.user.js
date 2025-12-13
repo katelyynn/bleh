@@ -35918,8 +35918,6 @@
     if (!avatar2) {
       avatar2 = profile_header.querySelector(".header-avatar-add");
       new_account = true;
-    } else {
-      avatar2.src = avatar2.src.replace("/avatar170s/", "/avatar300s/");
     }
     if (sponsor_list && sponsor_list.special && sponsor_list.special.includes(page.name)) {
       title_wrap.querySelector(".header-title a").classList.add("bleh--name-is-cute");
@@ -35981,7 +35979,10 @@
         </section>
     `;
     const avatar_img = avatar2.querySelector(":scope > img");
-    if (avatar_img) cache2.avatar = avatar_img.src;
+    if (avatar_img) {
+      avatar_img.src = avatar_img.src.replace("/avatar170s/", "/avatar300s/");
+      cache2.avatar = avatar_img.src;
+    }
     if (page.name == auth.name && !settings.profile_header_own) {
       register_background(null, "hidden");
     } else if (page.name != auth.name && !settings.profile_header_others) {

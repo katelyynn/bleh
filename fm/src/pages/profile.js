@@ -182,8 +182,6 @@ export async function bleh_profiles() {
     if (!avatar) {
         avatar = profile_header.querySelector('.header-avatar-add');
         new_account = true;
-    } else {
-        avatar.src = avatar.src.replace('/avatar170s/', '/avatar300s/');
     }
 
     // me :3
@@ -259,7 +257,10 @@ export async function bleh_profiles() {
 
     const avatar_img = avatar.querySelector(':scope > img');
 
-    if (avatar_img) cache.avatar = avatar_img.src;
+    if (avatar_img) {
+        avatar_img.src = avatar_img.src.replace('/avatar170s/', '/avatar300s/');
+        cache.avatar = avatar_img.src;
+    }
 
     if (page.name == auth.name && !settings.profile_header_own) {
         register_background(null, 'hidden');
