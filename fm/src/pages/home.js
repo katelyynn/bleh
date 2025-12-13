@@ -75,7 +75,7 @@ export async function bleh_home() {
                     <div class="avatar" onclick=${() => {
                         expand_avatar(auth.avatar.replace('/avatar42s/', '/ar0/'));
                     }}>
-                        <img src=${auth.avatar.replace('/avatar42s/', '/avatar170s/')} alt=${tl(trans.your_avatar)}>
+                        <img src=${auth.avatar.replace('/avatar42s/', '/avatar300s/')} alt=${tl(trans.your_avatar)}>
                     </div>
                 </div>
                 <div class="info-side has-main-info">

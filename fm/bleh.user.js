@@ -35918,6 +35918,8 @@
     if (!avatar2) {
       avatar2 = profile_header.querySelector(".header-avatar-add");
       new_account = true;
+    } else {
+      avatar2.src = avatar2.src.replace("/avatar170s/", "/avatar300s/");
     }
     if (sponsor_list && sponsor_list.special && sponsor_list.special.includes(page.name)) {
       title_wrap.querySelector(".header-title a").classList.add("bleh--name-is-cute");
@@ -56906,7 +56908,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                     <div class="avatar" onclick=${() => {
         expand_avatar(auth.avatar.replace("/avatar42s/", "/ar0/"));
       }}>
-                        <img src=${auth.avatar.replace("/avatar42s/", "/avatar170s/")} alt=${tl2(trans.your_avatar)}>
+                        <img src=${auth.avatar.replace("/avatar42s/", "/avatar300s/")} alt=${tl2(trans.your_avatar)}>
                     </div>
                 </div>
                 <div class="info-side has-main-info">

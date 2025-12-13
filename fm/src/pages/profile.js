@@ -182,6 +182,8 @@ export async function bleh_profiles() {
     if (!avatar) {
         avatar = profile_header.querySelector('.header-avatar-add');
         new_account = true;
+    } else {
+        avatar.src = avatar.src.replace('/avatar170s/', '/avatar300s/');
     }
 
     // me :3

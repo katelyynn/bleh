@@ -23048,9 +23048,7 @@
 
                 .avatar-side {
                     --mask-size: var(--cover-size-200) !important;
-                    --avatar-size: calc(
-                        var(--header-avatar-size) - 20px
-                    ) !important;
+                    --avatar-size: var(--header-avatar-size) !important;
                     cursor: pointer;
                 }
             }
