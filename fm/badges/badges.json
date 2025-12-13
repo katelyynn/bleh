@@ -1,5 +1,5 @@
 {
-    "latest": "2025.1212",
+    "latest": "2025.1213",
     "sponsors": [
         "clairedoll", "kateshapedbox", "evangelicgirl",
         "astrablooms", "ItsProyal", "vwvwvwvwvwvwv", "Orofil",
@@ -12,7 +12,7 @@
         "goldenstuffed", "satisfeita", "kar1x", "nojonsko",
         "urwq", "driftpsalm", "popcorniscrazy", "s0540a",
         "dylandotat", "Angel0Lust", "liminelle", "quikwise",
-        "BosozokuGF", "tainaronian"
+        "BosozokuGF", "tainaronian", "NozomiBear"
     ],
     "sponsors_one_time": [
         "kateshapedbox",
@@ -514,6 +514,19 @@
         ],
         "tainaronian": {
             "type": "sponsor"
-        }
+        },
+        "BosozokuGF": [
+            {
+                "type": "sponsor"
+            },
+            {
+                "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWNhdC1pY29uIGx1Y2lkZS1jYXQiPjxwYXRoIGQ9Ik0xMiA1Yy42NyAwIDEuMzUuMDkgMiAuMjYgMS43OC0yIDUuMDMtMi44NCA2LjQyLTIuMjYgMS40LjU4LS40MiA3LS40MiA3IC41NyAxLjA3IDEgMi4yNCAxIDMuNDRDMjEgMTcuOSAxNi45NyAyMSAxMiAyMXMtOS0zLTktNy41NmMwLTEuMjUuNS0yLjQgMS0zLjQ0IDAgMC0xLjg5LTYuNDItLjUtNyAxLjM5LS41OCA0LjcyLjIzIDYuNSAyLjIzQTkuMDQgOS4wNCAwIDAgMSAxMiA1WiIvPjxwYXRoIGQ9Ik04IDE0di41Ii8+PHBhdGggZD0iTTE2IDE0di41Ii8+PHBhdGggZD0iTTExLjI1IDE2LjI1aDEuNUwxMiAxN2wtLjc1LS43NVoiLz48L3N2Zz4=",
+                "reason": "sponsor",
+                "name": "hello kitty ฅ^•ﻌ•^ฅ !!",
+                "hue": 268,
+                "sat": 0.63,
+                "lit": 0.92
+            }
+        ]
     }
 }
