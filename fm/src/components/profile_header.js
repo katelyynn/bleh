@@ -152,14 +152,6 @@ export function redesign_profile_header(is_own_profile, is_following) {
                 });
             }
         }
-
-        if (page.structure.container.querySelector('.user-status-staff')) {
-            create_profile_top_item(profile_header, {
-                name: page.name,
-                type: 'support',
-                link: 'https://support.last.fm'
-            });
-        }
     } else {
         // edit
         create_profile_top_item(profile_header, {

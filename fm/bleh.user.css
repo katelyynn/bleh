@@ -3598,8 +3598,7 @@
             [data-ff--short="true"] & {
                 padding: unset !important;
                 margin: 0 var(--card-padding) !important;
-
-                order: -20;
+                order: -10;
             }
         }
 
@@ -5533,6 +5532,7 @@
 
     /*     SCROBBLE PROGRESS     */
     .tab-container {
+        width: 100% !important;
         justify-content: center;
         height: fit-content;
 
