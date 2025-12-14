@@ -9015,6 +9015,9 @@ export const trans = {
     },
     added_by: {
         en: 'Added by {u}'
+    },
+    notice: {
+        en: 'Notice'
     }
 };
 

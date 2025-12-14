@@ -58981,6 +58981,58 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
   function load_dismissed() {
   }
 
+  // src/components/notices.js
+  function notices() {
+    const res = localStorage.getItem("bleh_notices");
+    const expire = Number(localStorage.getItem("bleh_notices_expire"));
+    const now2 = Date.now();
+    if (!res || now2 >= expire) {
+      fetch_notices();
+      return;
+    }
+    let parse4;
+    try {
+      parse4 = JSON.parse(res);
+    } catch (e) {
+      fetch_notices();
+      return;
+    }
+    load_notices(parse4);
+  }
+  function fetch_notices() {
+    fetch(`https://katelyynn.github.io/bleh/dynamic/notices.json?${Math.random()}`).then((res) => {
+      if (!res.ok)
+        throw new Error();
+      return res.json();
+    }).then((res) => {
+      set_storage("bleh_notices", JSON.stringify(res));
+      set_storage("bleh_notices_expire", Date.now() + 60 * 60 * 1e3);
+      load_notices(res);
+    }).catch((e) => {
+      set_storage("bleh_notices_expire", Date.now() + 30 * 60 * 1e3);
+    });
+  }
+  function load_notices(res) {
+    document.body.appendChild(html.node`
+        <div class="bleh-notices">
+            ${res.map((notice) => {
+      const date = DateTime.fromISO(notice.date);
+      return html.node`
+                    <div class="bleh-notice colourful">
+                        <div class="notice-header" data-type=${notice.type}>
+                            <span>${tl2(trans.notice)}</span>
+                            <span>${date.toRelative()}</span>
+                        </div>
+                        <div class="notice-content">
+                            ${notice.message}
+                        </div>
+                    </div>
+                `;
+    })}
+        </div>
+    `);
+  }
+
   // src/page.js
   function bleh() {
     florence({
@@ -59004,6 +59056,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         load_dialogs();
         register_rabbit();
         lookup_lang();
+        notices();
         theme_version.state = getComputedStyle(document.body).getPropertyValue("--version-build").replaceAll("'", "").replaceAll('"', "");
         update_check(false, null, update_masthead);
         patch_masthead();
@@ -68525,6 +68578,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     added_by: {
       en: "Added by {u}"
+    },
+    notice: {
+      en: "Notice"
     }
   };
   function tl2(key, replacements = {}) {

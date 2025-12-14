@@ -87,6 +87,7 @@ import { page_menu } from './components/menu.js';
 import { seasonal_colour_switch } from './components/settings.js';
 import florence from '@tealmiku/florence';
 import tippy, { hideAll } from 'tippy.js';
+import { notices } from './components/notices.js';
 
 export function bleh() {
     florence({
@@ -121,6 +122,8 @@ export function bleh() {
             register_rabbit();
 
             lookup_lang();
+
+            notices();
 
             theme_version.state = getComputedStyle(document.body)
                 .getPropertyValue('--version-build')
