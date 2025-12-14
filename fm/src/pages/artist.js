@@ -119,20 +119,22 @@ export function bleh_artists() {
                     <a class="bleh--avatar-clickable-link"></a>
                     ` : html.node`<img class="missing-artist">`}
                 </div>
-                <div class="info-side">
-                    ${page.multi ? html.node`
-                    <div class="sub-text">
-                        ${tl(trans.artists)}
-                        <div class="info-tip" ref=${(el) => (multi_info_box = el)}>
-                            <div class="bleh-icon bleh-info-icon"></div>
+                <div class="info-side has-main-info">
+                    <div class="main-info">
+                        ${page.multi ? html.node`
+                        <div class="sub-text">
+                            ${tl(trans.artists)}
+                            <div class="info-tip" ref=${(el) => (multi_info_box = el)}>
+                                <div class="bleh-icon bleh-info-icon"></div>
+                            </div>
                         </div>
-                    </div>
-                    ` : html.node`
-                    <div class="sub-text">${tl(trans.artist)}</div>
-                    `}
-                    <div class="title-container" data-multi=${page.multi}>
-                        ${title}
-                        ${position}
+                        ` : html.node`
+                        <div class="sub-text">${tl(trans.artist)}</div>
+                        `}
+                        <div class="title-container" data-multi=${page.multi}>
+                            ${title}
+                            ${position}
+                        </div>
                     </div>
                     ${on_tour ? html.node`
                     <div class="badges">
