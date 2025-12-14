@@ -6269,6 +6269,8 @@
     .more-link-fullwidth-right-flush-top,
     .more-link-with-action {
         margin-top: var(--card-gap) !important;
+        margin-bottom: unset !important;
+        box-shadow: unset;
         height: fit-content;
         text-align: right;
     }
@@ -14305,13 +14307,6 @@
         margin-top: unset !important;
     }
 
-    :is(.artist-top-albums-item, .resource-list--release-list-item)
-        a[data-kate="true"] {
-        display: flex;
-        gap: 0 7px;
-        width: fit-content;
-        flex-wrap: wrap;
-    }
     :is(.artist-top-albums-item, .resource-list--release-list-item) a .feat {
         color: hsl(var(--c3));
     }
@@ -25780,6 +25775,11 @@
         &.resource-list--release-list,
         &.artist-top-albums {
             gap: var(--card-padding) var(--item-list-gap);
+        }
+
+        @media (max-width: 980px) {
+            display: flex !important;
+            flex-direction: column;
         }
 
         .music-recommended-artists-artist,
