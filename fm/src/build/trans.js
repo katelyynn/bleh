@@ -3001,6 +3001,9 @@ export const trans = {
         sv: 'Nuvarande version',
         ru: 'Текущая версия'
     },
+    updating_to_version: {
+        en: 'Updating to version'
+    },
     manage_data: {
         en: 'Manage data',
         es: 'Gestionar datos',

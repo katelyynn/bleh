@@ -27745,72 +27745,51 @@
         padding: 6px;
     }
 
-    .update-center-header {
-        display: flex;
-        align-items: center;
-        gap: var(--card-gap);
+    .update-center-icon {
+        position: relative;
 
-        .update-center-icon {
-            position: relative;
-
-            & > .update-container {
-                &.spin {
-                    animation: staggered_spinner 3s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
-                }
-
-                & > .bleh-icon {
-                    background: conic-gradient(
-                        from 270deg,
-                        hsl(var(--l2-c)),
-                        hsl(var(--l4-c))
-                    );
-                    --icon-size: 52px;
-                    --icon: var(--mask);
-                }
+        & > .update-container {
+            &.spin {
+                animation: staggered_spinner 3s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
             }
 
-            .check-circle {
-                background: hsl(var(--h3), var(--solarium-opacity, 40%));
-                box-shadow: 0px 0px 9px 0px hsl(var(--l2-c), 60%) inset;
-                color: hsl(var(--b7));
-                outline: 6px solid hsl(var(--b5));
-                border-radius: 50px;
-                position: absolute;
-                bottom: 0;
-                right: 0;
-
-                backdrop-filter: var(--solarium);
-                -webkit-backdrop-filter: var(--solarium);
-
-                padding: 4px;
-
-                & > .bleh-icon {
-                    --icon-size: 14px;
-                    --icon: var(--mask);
-                }
-
-                --hue-over: var(--hue-pos);
-                --sat-over: 1;
-                --lit-over: 1;
-
-                &.paused {
-                    --hue-over: 25;
-                }
+            & > .bleh-icon {
+                background: conic-gradient(
+                    from 270deg,
+                    hsl(var(--l2-c)),
+                    hsl(var(--l4-c))
+                );
+                --icon-size: 40px;
+                --icon: var(--mask);
             }
         }
 
-        .update-center-details {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-            flex: 1;
+        .check-circle {
+            background: hsl(var(--h3), var(--solarium-opacity, 40%));
+            box-shadow: 0px 0px 9px 0px hsl(var(--l2-c), 60%) inset;
+            color: hsl(var(--b7));
+            outline: 4px solid hsl(var(--b5));
+            border-radius: 50px;
+            position: absolute;
+            bottom: 0;
+            right: 0;
 
-            & > h2 {
-                margin: unset !important;
+            backdrop-filter: var(--solarium);
+            -webkit-backdrop-filter: var(--solarium);
+
+            padding: 3px;
+
+            & > .bleh-icon {
+                --icon-size: 10px;
+                --icon: var(--mask);
             }
 
-            & > p {
-                cursor: default;
+            --hue-over: var(--hue-pos);
+            --sat-over: 1;
+            --lit-over: 1;
+
+            &.paused {
+                --hue-over: 25;
             }
         }
     }

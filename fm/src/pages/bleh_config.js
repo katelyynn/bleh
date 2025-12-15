@@ -236,86 +236,104 @@ export async function render_setting_page(page_id) {
 
         render(page.structure.main, html`
                 <section class="bleh--panel">
-                    <div class="update-center-header">
-                        ${paused === 'true' ? html.node`
-                            <div class="update-center-icon">
-                                <div class="update-container">
-                                    <div class="bleh-icon" data-type="update" />
+                    <h4>${tl(trans.updates)}</h4>
+                    <div class="setting-group">
+                        <div class="setting" data-type="action">
+                            ${paused === 'true' ? html.node`
+                                <div class="setting-v2-icon update-center-icon">
+                                    <div class="update-container">
+                                        <div class="bleh-icon" data-type="update" />
+                                    </div>
+                                    <div class="check-circle paused colourful">
+                                        <div class="bleh-icon" data-type="paused" />
+                                    </div>
                                 </div>
-                                <div class="check-circle paused colourful">
-                                    <div class="bleh-icon" data-type="paused" />
+                                <div class="heading">
+                                    <h5>${tl(trans.updates_paused)}</h5>
+                                    <p class="last-checked">${tl(trans.paused_until_date).replace('{d}', DateTime.fromJSDate(new Date(paused_until)).toRelative())}</p>
                                 </div>
-                            </div>
-                            <div class="update-center-details">
-                                <h2>${tl(trans.updates_paused)}</h2>
-                                <p class="last-checked">${tl(trans.paused_until_date).replace('{d}', DateTime.fromJSDate(new Date(paused_until)).toRelative())}</p>
-                            </div>
-                            <button class="btn primary icon" data-type="update" ref=${(el) => (update_btn = el)} disabled>${tl(trans.check)}</button>
-                        ` : update_required === 'false' ? html.node`
-                            <div class="update-center-icon">
-                                <div class="update-container">
-                                    <div class="bleh-icon" data-type="update" />
+                                <div class="toggle-wrap">
+                                    <button class="btn primary icon" data-type="update" ref=${(el) => (update_btn = el)} disabled>${tl(trans.check)}</button>
                                 </div>
-                                ${last_checked ? html.node`
-                                <div class="check-circle colourful">
-                                    <div class="bleh-icon" data-type="check-thick" />
+                            ` : update_required === 'false' ? html.node`
+                                <div class="setting-v2-icon update-center-icon">
+                                    <div class="update-container">
+                                        <div class="bleh-icon" data-type="update" />
+                                    </div>
+                                    ${last_checked ? html.node`
+                                    <div class="check-circle colourful">
+                                        <div class="bleh-icon" data-type="check-thick" />
+                                    </div>
+                                    ` : ''}
                                 </div>
-                                ` : ''}
-                            </div>
-                            <div class="update-center-details">
-                                ${last_checked
-                                        ? html.node`
-                                <h2>${tl(trans.you_are_up_to_date)}</h2>
-                                <p class="last-checked">${tl(trans.last_checked_date).replace('{d}', DateTime.fromJSDate(new Date(last_checked)).toRelative())}</p>
-                                `
-                                        : html.node`
-                                <h2>${tl(trans.missing_updates)}</h2>
-                                <p class="last-checked">${tl(trans.never_checked)}</p>
-                                `
-                                    }
-                            </div>
-                            <button class="btn icon" data-type="update" ref=${(el) => (update_btn = el)} onclick=${() => update_check(true, update_btn, () => {
-                                notify({
-                                    id: 'update',
-                                    title: tl(trans.updates),
-                                    body: tl(trans.checked_for_updates),
-                                    icon: 'icon-16-update'
-                                });
-                                render_setting_page('general');
-                            })}>${tl(trans.check)}</button>
-                        ` : html.node`
-                            <div class="update-center-icon">
-                                <div class="update-container spin">
-                                    <div class="bleh-icon" data-type="update" />
+                                <div class="heading">
+                                    ${last_checked ? html.node`
+                                        <h5>${tl(trans.you_are_up_to_date)}</h5>
+                                        <p class="last-checked">${tl(trans.last_checked_date).replace('{d}', DateTime.fromJSDate(new Date(last_checked)).toRelative())}</p>
+                                    ` : html.node`
+                                        <h5>${tl(trans.missing_updates)}</h5>
+                                        <p class="last-checked">${tl(trans.never_checked)}</p>
+                                    `}
                                 </div>
-                            </div>
-                            <div class="update-center-details">
-                                <h2>${tl(trans.update_available_to_install)}</h2>
-                                ${last_checked ? html.node`
-                                    <p class="last-checked">${tl(trans.last_checked_date, { d: DateTime.fromJSDate(new Date(last_checked)).toRelative() })}</p>
-                                ` : html.node`
-                                    <p class="last-checked">${tl(trans.never_checked)}</p>
-                                `}
-                            </div>
-                            <div class="button-group">
-                                <button class="btn icon" data-type="update" ref=${(el) => (update_btn = el)} onclick=${() => update_check(true, update_btn, () => {
-                                    notify({
-                                        id: 'update',
-                                        title: tl(trans.updates),
-                                        body: tl(trans.checked_for_updates),
-                                        icon: 'icon-16-update'
-                                    });
-                                    render_setting_page('general');
-                                })}>${tl(trans.check)}</button>
-                                <button class="btn primary icon" data-type="update" ref=${(el) => (update_btn = el)} onclick=${() => start_update()}>${tl(trans.install_now)}</button>
-                            </div>
-                        `}
+                                <div class="toggle-wrap">
+                                    <button class="btn icon" data-type="update" ref=${(el) => (update_btn = el)} onclick=${() => update_check(true, update_btn, () => {
+                                        notify({
+                                            id: 'update',
+                                            title: tl(trans.updates),
+                                            body: tl(trans.checked_for_updates),
+                                            icon: 'icon-16-update'
+                                        });
+                                        render_setting_page('general');
+                                    })}>${tl(trans.check)}</button>
+                                </div>
+                            ` : html.node`
+                                <div class="setting-v2-icon update-center-icon">
+                                    <div class="update-container spin">
+                                        <div class="bleh-icon" data-type="update" />
+                                    </div>
+                                </div>
+                                <div class="heading">
+                                    <h5>${tl(trans.update_available_to_install)}</h5>
+                                    ${last_checked ? html.node`
+                                        <p class="last-checked">${tl(trans.last_checked_date, { d: DateTime.fromJSDate(new Date(last_checked)).toRelative() })}</p>
+                                    ` : html.node`
+                                        <p class="last-checked">${tl(trans.never_checked)}</p>
+                                    `}
+                                </div>
+                                <div class="toggle-wrap">
+                                    <div class="button-group">
+                                        <button class="btn icon" data-type="update" ref=${(el) => (update_btn = el)} onclick=${() => update_check(true, update_btn, () => {
+                                            notify({
+                                                id: 'update',
+                                                title: tl(trans.updates),
+                                                body: tl(trans.checked_for_updates),
+                                                icon: 'icon-16-update'
+                                            });
+                                            render_setting_page('general');
+                                        })}>${tl(trans.check)}</button>
+                                        <button class="btn primary icon" data-type="update" ref=${(el) => (update_btn = el)} onclick=${() => start_update()}>${tl(trans.install_now)}</button>
+                                    </div>
+                                </div>
+                            `}
+                        </div>
+                        <div class="setting" data-type="info">
+                            ${last_checked && paused === 'false' && update_required === 'true' ? html.node`
+                                <div class="heading">
+                                    <h5>${tl(trans.updating_to_version)}</h5>
+                                </div>
+                                <div class="info">
+                                    <p>${version_to_install}</p>
+                                </div>
+                            ` : html.node`
+                                <div class="heading">
+                                    <h5>${tl(trans.current_version)}</h5>
+                                </div>
+                                <div class="info">
+                                    <p>${version.build}</p>
+                                </div>
+                            `}
+                        </div>
                     </div>
-                    ${last_checked && paused === 'false' && update_required === 'true' ? html.node`
-                        <div class="alert alert-info">${tl(trans.you_are_installing_version, { v: version_to_install })}</div>
-                    ` : html.node`
-                        <div class="alert alert-info">${tl(trans.you_are_running_version, { v: version.build })}</div>
-                    `}
                 </section>
                 <section class="bleh--panel">
                     <h4>${tl(trans.profile)}</h4>
