@@ -59620,7 +59620,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     pt: {
       name: "Portugu\xEAs",
-      by: ["ArthRMH", "auwora", "fr0r", "urwq"],
+      by: ["ArthRMH", "satisfeita", "fr0r", "urwq"],
       last_updated: "2025-11-25"
     },
     sv: {
