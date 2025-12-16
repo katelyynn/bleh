@@ -351,9 +351,14 @@ export function append_nav() {
     if (auth_link.hasAttribute('data-bleh')) return;
     auth_link.setAttribute('data-bleh', 'true');
 
-    auth_link.appendChild(html.node`
+    const name = html.node`
         <p>${auth.name}</p>
-    `);
+    `;
+    auth_link.appendChild(name);
+
+    load_profile_cache_externally(auth.name).then(cache => {
+        if (cache.username) name.textContent = cache.username;
+    });
 
     let badges = load_badges(auth.name, true);
 

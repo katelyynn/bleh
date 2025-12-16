@@ -27741,10 +27741,6 @@
         }
     }
 
-    [data-theme="theme-preview"] {
-        padding: 6px;
-    }
-
     .update-center-icon {
         position: relative;
 
@@ -27831,7 +27827,7 @@
         }
     }
 
-    .calendar:not(.calendar-side > .calendar) {
+    .calendar {
         display: flex;
         flex-direction: column;
         gap: 10px;

@@ -54383,9 +54383,13 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     }
     if (auth_link2.hasAttribute("data-bleh")) return;
     auth_link2.setAttribute("data-bleh", "true");
-    auth_link2.appendChild(html.node`
+    const name = html.node`
         <p>${auth.name}</p>
-    `);
+    `;
+    auth_link2.appendChild(name);
+    load_profile_cache_externally(auth.name).then((cache2) => {
+      if (cache2.username) name.textContent = cache2.username;
+    });
     let badges = load_badges(auth.name, true);
     if (badges) {
       auth_link2.appendChild(create_badge(badges[0], false, false, true));
