@@ -53,8 +53,8 @@ export let lang_info = {
     },
     ru: {
         name: 'Русский',
-        by: ['crawqxx'],
-        last_updated: '2025-11-05'
+        by: ['crawqxx', 'techplayz32'],
+        last_updated: '2025-12-16'
     }
 };
 
