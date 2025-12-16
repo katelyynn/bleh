@@ -1,5 +1,5 @@
 {
-    "latest": "2025.1213",
+    "latest": "2025.1216",
     "sponsors": [
         "clairedoll", "kateshapedbox", "evangelicgirl",
         "astrablooms", "ItsProyal", "vwvwvwvwvwvwv", "Orofil",
@@ -39,12 +39,12 @@
                 "name": "cute"
             },
             {
-                "type": "plaster",
-                "name": "oracle",
-                "icon": "data:image/svg+xml;base64,PHN2ZyAgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiAgd2lkdGg9IjI0IiAgaGVpZ2h0PSIyNCIgIHZpZXdCb3g9IjAgMCAyNCAyNCIgIGZpbGw9ImN1cnJlbnRDb2xvciIgIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1maWxsZWQgaWNvbi10YWJsZXItaGVhZHBob25lcyI+PHBhdGggc3Ryb2tlPSJub25lIiBkPSJNMCAwaDI0djI0SDB6IiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTIxIDE4YTMgMyAwIDAgMSAtMi44MjQgMi45OTVsLS4xNzYgLjAwNWgtMWEzIDMgMCAwIDEgLTIuOTk1IC0yLjgyNGwtLjAwNSAtLjE3NnYtM2EzIDMgMCAwIDEgMi44MjQgLTIuOTk1bC4xNzYgLS4wMDVoMWMuMzUxIDAgLjY4OCAuMDYgMSAuMTcxdi0uMTcxYTcgNyAwIDAgMCAtMTMuOTk2IC0uMjRsLS4wMDQgLjI0di4xN2MuMjUgLS4wODggLjUxNiAtLjE0NCAuNzkxIC0uMTYzbC4yMDkgLS4wMDdoMWEzIDMgMCAwIDEgMi45OTUgMi44MjRsLjAwNSAuMTc2djNhMyAzIDAgMCAxIC0yLjgyNCAyLjk5NWwtLjE3NiAuMDA1aC0xYTMgMyAwIDAgMSAtMi45OTUgLTIuODI0bC0uMDA1IC0uMTc2di02YTkgOSAwIDAgMSAxNy45OTYgLS4yNjVsLjAwNCAuMjY1djZ6IiAvPjwvc3ZnPg==",
-                "hue": 349,
-                "sat": 1.5,
-                "lit": 0.95
+                "name": "healer girl~",
+                "reason": "in service to my darling",
+                "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJjdXJyZW50Q29sb3IiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1maWxsZWQgaWNvbi10YWJsZXItbnVyc2UiPjxwYXRoIHN0cm9rZT0ibm9uZSIgZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPjxwYXRoIGQ9Ik0xMi4wMDIgNGMyLjg2NiAwIDYuNyAxLjM2NSA5LjUzMiAzLjE1NWExIDEgMCAwIDEgLjQ1IDEuMDI0bC0yIDExYTEgMSAwIDAgMSAtLjk4NCAuODIxaC0xNGExIDEgMCAwIDEgLS45ODQgLS44MjFsLTIgLTExYTEgMSAwIDAgMSAuNDUgLTEuMDI0YzIuODM0IC0xLjc5MiA2LjcyNCAtMy4xNiA5LjUzNiAtMy4xNTVtLS4wMDIgNWExIDEgMCAwIDAgLTEgMXYxaC0xYTEgMSAwIDAgMCAtLjk5MyAuODgzbC0uMDA3IC4xMTdhMSAxIDAgMCAwIDEgMWgxdjFhMSAxIDAgMCAwIC44ODMgLjk5M2wuMTE3IC4wMDdhMSAxIDAgMCAwIDEgLTF2LTFoMWExIDEgMCAwIDAgLjk5MyAtLjg4M2wuMDA3IC0uMTE3YTEgMSAwIDAgMCAtMSAtMWgtMXYtMWExIDEgMCAwIDAgLS44ODMgLS45OTN6IiAvPjwvc3ZnPg==",
+                "hue": 230,
+                "sat": 0.62,
+                "lit": 1.04
             }
         ],
         "evangelicgirl": [
