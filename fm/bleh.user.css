@@ -755,10 +755,10 @@
 
         --cards-main-width: 902px;
         --cards-sidebar-width: 400px;
-        --cards-width: calc(
-            1px + var(--cards-main-width) + 1px + var(--cards-sidebar-width) +
-                1px
-        );
+        --content-width: calc(var(--cards-main-width) + 1px + var(--cards-sidebar-width));
+        --cards-width: calc(1px + var(--content-width) + 1px);
+
+        --tabbed-width: calc(var(--content-width) - (var(--card-padding) * 2));
 
         --max-tooltip-width: 400px;
 
@@ -3418,13 +3418,6 @@
 
             .bleh--nav-wrap .navlist,
             .redesigned-navigation {
-                margin-left: calc(
-                    var(--card-padding) - var(--button-sides)
-                ) !important;
-                margin-right: calc(
-                    var(--card-padding) - var(--button-sides)
-                ) !important;
-
                 @media (max-width: 980px) {
                     width: var(--cards-width) !important;
                     padding: unset !important;
@@ -3481,47 +3474,14 @@
                 order: -1;
             }
 
-            & > .redesigned-navigation ~ .navlist[aria-label],
-            & > .bleh-settings-navigation {
-                background: hsl(var(--b5));
-                margin: unset !important;
-                padding-top: var(--card-gap);
-
-                width: var(--cards-width);
-
-                display: flex;
-                justify-content: center;
-
-                .navlist-items {
-                    width: calc(var(--cards-width) - (var(--button-sides) * 2));
-                    max-width: calc(
-                        var(--cards-width) - (var(--button-sides) * 2)
-                    );
-                }
-
-                &:after {
-                    left: var(--card-padding);
-                    right: var(--card-padding);
-                }
-            }
-
-            &
-                > .redesigned-navigation:not(
-                    .redesigned-navigation ~ [aria-label],
-                    .bleh-settings-navigation
-                ) {
-                margin: unset !important;
-                width: var(--cards-width) !important;
+            & > .redesigned-navigation {
                 padding-bottom: 0;
+                width: var(--cards-width) !important;
+                padding-left: calc(1px + var(--card-padding) - var(--button-sides-icon));
 
-                display: flex;
-                justify-content: center;
-
-                .navlist-items {
-                    width: calc(var(--cards-width) - (var(--button-sides) * 2));
-                    max-width: calc(
-                        var(--cards-width) - (var(--button-sides) * 2)
-                    );
+                & > .navlist-items {
+                    width: calc(var(--tabbed-width) + var(--button-sides-icon) + var(--button-sides));
+                    max-width: calc(var(--tabbed-width) + var(--button-sides-icon) + var(--button-sides));
                 }
 
                 &:after {
@@ -3926,17 +3886,11 @@
         }
     }
 
-    .content-top .secondary-nav,
-    .bleh--nav-wrap .navlist,
-    .secondary-nav,
-    .user-dashboard-controls .secondary-nav {
+    .secondary-nav {
         box-shadow: unset;
         padding-bottom: 1px;
-        margin: 0 calc(var(--card-padding) - var(--button-sides)) !important;
-        width: calc(
-            var(--cards-width) -
-                ((var(--card-padding) - var(--button-sides)) * 2)
-        );
+        margin: unset !important;
+        width: unset !important;
 
         position: relative;
 
@@ -4245,7 +4199,7 @@
 
     .toolbar {
         position: relative;
-        padding: var(--card-gap) 0;
+        padding: 10px 0;
         background: var(--toolbar-bg);
         border-bottom: var(--toolbar-border);
 
@@ -4279,23 +4233,28 @@
 
     .library-controls > .secondary-nav,
     .toolbar > .secondary-nav {
-        [data-ff--mualani="true"] & {
-            --button-verts: 6px;
-            --button-sides: 12px;
-            --icon-gap: 2px;
-            margin: unset !important;
+        --button-verts: 6px;
+        margin: unset !important;
+        padding-bottom: unset !important;
+        padding-left: calc(var(--card-padding) - var(--button-sides-icon));
 
-            &:before,
-            &:after {
-                display: none !important;
-            }
+        --button-sides: 9px;
+        --button-sides-icon: calc(var(--button-sides) - 2px);
+
+        &:before,
+        &:after {
+            display: none !important;
+        }
+
+        & > .navlist-items {
+            width: calc(var(--tabbed-width) + var(--button-sides-icon) + var(--button-sides));
+            max-width: calc(var(--tabbed-width) + var(--button-sides-icon) + var(--button-sides));
         }
     }
     .navlist-more,
     .secondary-nav-item-link {
         /* left padding for icon, otherwise just 12px 16px */
-        --padding: 14px var(--button-sides) 14px
-            calc(var(--button-sides-icon) + var(--icon-size) + var(--icon-gap)) !important;
+        --padding: 14px var(--button-sides) 14px calc(var(--button-sides-icon) + var(--icon-size) + var(--icon-gap)) !important;
         --bg: transparent !important;
         --bg-hov: transparent !important;
         --bg-atv: transparent !important;
@@ -4334,7 +4293,7 @@
             content: "";
             position: absolute;
             bottom: -2px !important;
-            left: var(--button-sides) !important;
+            left: var(--button-sides-icon) !important;
             right: var(--button-sides) !important;
             border-radius: var(--item-big-radius) !important;
             opacity: 0.6;
@@ -4365,25 +4324,12 @@
             }
         }
 
-        [data-ff--mualani="true"]
-            :is(.toolbar > .navlist, .library-controls > .navlist)
-            & {
+        :is(.toolbar > .navlist, .library-controls > .navlist) & {
             --bg-hov: hsl(var(--b4), 40%) !important;
             --bg-atv: hsl(var(--b4), 60%) !important;
-            --padding: calc(
-                    var(--button-verts) + var(--icon-size) + var(--icon-gap)
-                )
-                var(--button-sides) var(--button-verts) !important;
-            padding: var(--padding) !important;
-            --left: 50%;
-            --margin-left: calc(-1 * (var(--icon-size) / 2));
-            --top: var(--button-verts);
-            --margin-top: 0;
+            --padding: var(--button-verts) var(--button-sides) var(--button-verts) calc(var(--button-sides-icon) + var(--icon-size) + var(--icon-gap)) !important;
             filter: none !important;
 
-            --font-size: 13px;
-            justify-content: center;
-            text-align: center;
             transform: none !important;
             transform-origin: center !important;
             /*min-width: 65px !important;*/
@@ -18525,7 +18471,6 @@
         &:not(.blend) {
             background: hsl(var(--b6), 20%);
             border-radius: var(--item-big-radius);
-            border: 1px solid transparent;
             box-shadow: var(--group-shadow);
             width: 100%;
 
