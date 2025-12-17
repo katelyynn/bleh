@@ -2791,7 +2791,6 @@
                 }
 
                 &.listening-report {
-                    margin-bottom: 60px;
                     padding-bottom: unset !important;
                     border-bottom: unset !important;
 
@@ -3927,13 +3926,13 @@
     .library-search {
         margin-top: unset !important;
         margin-bottom: unset !important;
-        position: absolute;
+        position: relative;
         top: 0;
         right: var(--card-padding);
         width: calc(var(--cards-sidebar-width) - (var(--card-padding) * 2));
         z-index: 100;
 
-        height: 82px;
+        height: unset;
         display: flex;
         align-items: center;
 
@@ -3968,7 +3967,7 @@
         --padding: 12px var(--button-sides) 12px
             calc(var(--button-sides-icon) + var(--icon-size) + var(--icon-gap)) !important;
         --col: hsl(var(--c2)) !important;
-        height: 32px;
+        height: var(--button-height);
     }
     .library-search-form .library-search-submit::before {
         --mask: var(--icon-16-search);
@@ -3989,7 +3988,7 @@
     .library-search-results {
         position: absolute !important;
         width: 360px !important;
-        top: 82px !important;
+        top: calc(var(--button-height) + 10px) !important;
         min-height: 100px;
         font: inherit;
 
@@ -13672,7 +13671,6 @@
 
     /*     PLAYBACK 2023-2024 / LISTENING REPORT V3     */
     .report-box-container--overview {
-        margin-top: -30px;
         width: 100vw;
 
         .col-sm-12 {
