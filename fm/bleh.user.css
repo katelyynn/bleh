@@ -4584,23 +4584,10 @@
     }
 
     .has-tab-num {
-        position: relative;
         --show-icon: none !important;
 
         & > .tab-num {
-            position: absolute;
-            width: var(--icon-size);
-            height: var(--icon-size);
-
-            opacity: 0.7;
-            left: var(--left);
-            margin-left: var(--margin-left);
-            top: var(--top);
-            margin-top: var(--margin-top);
-
-            font-family: "Bitcount Grid Single", var(--font);
-            font-weight: 400;
-            transform: scaleY(1.4);
+            display: none;
         }
     }
 
