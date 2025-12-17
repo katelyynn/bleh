@@ -105,7 +105,7 @@ export const trans = {
                 it: 'Nessun distintivo',
                 pt: 'Sem emblemas',
                 sv: 'Inga emblem',
-                ru: 'Нету значка', 
+                ru: 'Нету значка',
                 pl: 'Brak odznak'
             },
             reason: {
@@ -4487,7 +4487,7 @@ export const trans = {
             sv: 'Placera titel och artist vågrätt',
             ru: 'Разместить название и исполнителя горизонтально',
             pt: 'Colocar título e artista horizontalmente',
-            pl: 'Ułóż tytuł i artystę poziomo' 
+            pl: 'Ułóż tytuł i artystę poziomo'
         }
     },
     track_album_name_location: {
@@ -9459,7 +9459,7 @@ export const trans = {
         body: {
             en: 'If you are a Last.fm Pro subscriber, you can view your current active track in your profile menu at all times',
             es: 'Si eres un suscriptor de Last.fm Pro, puedes ver tu tema activo actual en el menú de tu perfil en cualquier momento',
-            ru: 'Если вы являетесь подписчиком Last.fm Pro, вы можете в любое время просматривать текущий активный трек в меню своего профиля.'
+            ru: 'Если вы являетесь подписчиком Last.fm Pro, вы можете в любое время просматривать текущий активный трек в меню своего профиля'
         }
     },
     current_status: {
