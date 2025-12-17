@@ -1064,7 +1064,7 @@ export const trans = {
             en: 'Artist name was ignored',
             de: 'Künstlername wurde ignoriert',
             es: 'El nombre del artista fue ignorado',
-            it: 'Il nome dell\'artista è stato ignorato',
+            it: 'Il nome dell’artista è stato ignorato',
             pt: 'O nome do(a) artista foi ignorado',
             sv: 'Artistnamnet var ignorerad',
             ru: 'Имя исполнителя проигнорировано',
@@ -1175,7 +1175,7 @@ export const trans = {
         en: 'Album Artist',
         de: 'Albumkünstler',
         es: 'Artista del álbum',
-        it: 'Artista dell\'album',
+        it: 'Artista dell’album',
         pt: 'Artista do álbum',
         sv: 'Albumartist',
         ru: 'Исполнитель альбома',
@@ -1387,7 +1387,7 @@ export const trans = {
         pt: 'Sua preferência de tema será {day} ou {night}, com base no seu sistema. ',
         sv: 'Ditt föredragna tema blir antigen {day} eller {night}, beroende på ditt system. ',
         ru: 'Предпочтительная тема будет {day} или {night} в зависимости от настроек вашей системы. ',
-        pl: 'Twój motyw ustawi się jako {day} albo {night}, bazując na ustawieniach twojego systemu.'
+        pl: 'Twój motyw ustawi się jako {day} albo {night}, bazując na ustawieniach twojego systemu. '
     },
     change_schedule: {
         en: 'Change schedule',
@@ -1414,7 +1414,7 @@ export const trans = {
             en: 'Temporarily override your selected accent to match album art',
             de: 'Überschreibe vorübergehend deine ausgewählte Akzentfarbe, damit sie zum Albumcover passt',
             es: 'Substituye temporalmente el color de acento seleccionado para combinar con la carátula del álbum',
-            it: 'Sovrascrivi temporaneamente il tuo colore di accento selezionato per abbinarsi con la copertina dell\'album',
+            it: 'Sovrascrivi temporaneamente il tuo colore di accento selezionato per abbinarsi con la copertina dell’album',
             pt: 'Substituir temporariamente sua cor de destaque selecionada para combinar com a arte do álbum',
             sv: 'Ändra tillfälligt din valda accentfärg för att matcha albumkonsten',
             ru: 'Временно заменять выбранный акцентный цвет на цвет обложки альбома',
@@ -1838,7 +1838,7 @@ export const trans = {
             en: 'Snow particles use a drop-shadow glow for aesthetics with the added processing cost',
             de: 'Schneepartikel verwenden für die Ästhetik einen Glanzeffekt – erfordert zusätzliche Rechenleistung',
             es: 'Las partículas de nieve usan un brillo de sombra paralela para mayor estética, con costo adicional de procesamiento',
-            it: 'Le particelle di neve brillano utilizzando un effetto ad ombra per un\'estetica migliore, richiedendo più risorse',
+            it: 'Le particelle di neve brillano utilizzando un effetto ad ombra per un’estetica migliore, richiedendo più risorse',
             pt: 'As partículas de neve usam um efeito de brilho com sombra projetada para estética, com o custo adicional de processamento',
             sv: 'Snöpartiklarna använder en glödeffekt för estetiska själ, med lite extra datorbelastning',
             ru: 'Снежные частицы используют эффект свечения для эстетики ценой дополнительных затрат ресурсов',
@@ -2141,7 +2141,7 @@ export const trans = {
         en: 'This is a permanent action, beware of where you are copying from',
         de: 'Dieser Vorgang ist unwiderruflich – sei vorsichtig, von wo du kopierst',
         es: 'Esta es una acción permanente, ten cuidado del lugar de donde copias',
-        it: 'Questa è un\'azione permanente, fai attenzione da dove stai copiando',
+        it: 'Questa è un’azione permanente, fai attenzione da dove stai copiando',
         pt: 'Esta é uma ação permanente, cuidado com o lugar de onde você está copiando',
         sv: 'Det här är permanent, oberoende av vart du kopierar ifrån',
         ru: 'Это действие необратимо, будьте внимательны к источнику копирования',
@@ -2393,7 +2393,7 @@ export const trans = {
             en: 'Bring some colour into your world (or reduce it)',
             de: 'Bringe etwas Farbe in deine Welt (oder reduziere sie)',
             es: 'Trae un poco de color a tu mundo (o redúcelo)',
-            it: 'Porta un po\' di colore nella tua vita (o riducilo)',
+            it: 'Porta un po’ di colore nella tua vita (o riducilo)',
             pt: 'Traz algumas cores ao mundo (ou diminui elas)',
             sv: 'Skaffa lite färg i din värld (eller minska den)',
             ru: 'Добавьте красок в свой мир (или уменьшите их)',
@@ -2575,7 +2575,7 @@ export const trans = {
             en: 'A setting you changed requires a page refresh',
             de: 'Eine von dir geänderte Einstellung erfordert eine Seitenaktualisierung, damit sie wirksam wird',
             es: 'Una opción que cambiaste requiere que recargues la página',
-            it: 'Un\'opzione che hai cambiato richiede un aggiornamento della pagina',
+            it: 'Un’opzione che hai cambiato richiede un aggiornamento della pagina',
             pt: 'Uma configuração que você mudou exige uma atualização de página',
             sv: 'En inställning du ändrade på behöver at sidan laddas om',
             ru: 'Изменённая вами настройка требует обновления страницы',
@@ -2738,7 +2738,7 @@ export const trans = {
     gallery_sum: {
         en: 'This is the sum of votes for ordering',
         es: 'Esta es la suma de votos para ordenar',
-        it: 'Questa è la somma dei voti per l\'ordinamento',
+        it: 'Questa è la somma dei voti per l’ordinamento',
         sv: 'Det här är summan röster för bildordning',
         ru: 'Это сумма голосов для сортировки',
         pt: 'Esta é a soma dos votos para ordenação',
@@ -2757,7 +2757,7 @@ export const trans = {
         en: 'Drag-and-drop an image or click here',
         de: 'Bild hierher ziehen oder hier klicken',
         es: 'Arrastra una imagen o haz clic aquí',
-        it: 'Trascina e rilascia un\'immagine, o clicca qui',
+        it: 'Trascina e rilascia un’immagine, o clicca qui',
         sv: 'Dra och släpp en bild eller klicka här',
         ru: 'Перетащите изображение или нажмите здесь',
         pt: 'Arraste e solte uma imagem ou clique aqui',
@@ -2919,7 +2919,7 @@ export const trans = {
             en: 'This {t} is being re-capitalised, is it correct?',
             de: 'Die Groß-/Kleinschreibung dieses {t} wird korrigiert, ist das korrekt?',
             es: 'La capitalización de este {t} está siendo modificada, ¿es correcta?',
-            it: 'L\'uso delle maiuscole per questo {t} sta venendo modificato, è corretto?',
+            it: 'L’uso delle maiuscole per questo {t} sta venendo modificato, è corretto?',
             pt: '{t} teve a capitalização ajustada, está correto?',
             sv: 'Nuvarande {t} har ändrad kapitalisering, stämmer det här?',
             ru: 'В этом {t} исправляется регистр, является ли он правильным?',
@@ -2929,7 +2929,7 @@ export const trans = {
             en: 'Is this {t} capitalised correctly?',
             de: 'Ist die Groß-/Kleinschreibung dieses {t} richtig?',
             es: '¿Está este {t} capitalizado correctamente?',
-            it: 'L\'uso delle maiuscole per questo {t} è corretto?',
+            it: 'L’uso delle maiuscole per questo {t} è corretto?',
             pt: 'Esse(a) {t} está capitalizado(a) corretamente?',
             sv: 'Stämmer kapitaliseringen på {t}?',
             ru: 'Правильно ли написан регистр этого {t}?',
@@ -2950,7 +2950,7 @@ export const trans = {
         en: 'This is the original capitalisation present on Last.fm',
         de: 'Dies ist die originale Groß-/Kleinschreibung auf Last.fm',
         es: 'Esta es la capitalización original presente en Last.fm',
-        it: 'Questo è l\'uso delle maiuscole originale presente su Last.fm',
+        it: 'Questo è l’uso delle maiuscole originale presente su Last.fm',
         sv: 'Det här är den originella kapitaliseringen som finns på Last.fm',
         ru: 'Это исходный регистр, предоставленный на Last.fm',
         pt: 'Esta é a capitalização original presente no Last.fm',
@@ -2970,7 +2970,7 @@ export const trans = {
         en: 'This is the correct capitalisation, as decided by the artist',
         de: 'Dies ist die korrekte Groß-/Kleinschreibung, wie sie vom Künstler festgelegt wurde',
         es: 'Esta es la capitalización correcta, decidida por el artista',
-        it: 'Questo è l\'uso delle maiuscole corretto, come deciso dall\'artista',
+        it: 'Questo è l’uso delle maiuscole corretto, come deciso dall’artista',
         sv: 'Det här är rätt kapitalisering, som bestämd av artisten',
         ru: 'Это правильный регистр, определенный исполнителем',
         pt: 'Esta é a capitalização correta, conforme decidido pelo artista',
@@ -3010,7 +3010,7 @@ export const trans = {
         en: 'Only capitalisation changes are allowed',
         de: 'Nur Änderungen der Groß-/Kleinschreibung sind erlaubt',
         es: 'Solo se permiten cambios a la capitalización',
-        it: 'Sono consentiti solo i cambi relativi all\'uso delle maiuscole',
+        it: 'Sono consentiti solo i cambi relativi all’uso delle maiuscole',
         sv: 'Endast ändringar på kapitalisering är tillåtet',
         ru: 'Допускаются только изменения регистра',
         pt: 'Apenas mudanças de capitalização são permitidas',
@@ -3678,7 +3678,7 @@ export const trans = {
         en: 'Use ‘ ’ for quotations from the artist or elsewhere',
         de: 'Verwende ‘ ’ für Zitate des Künstlers oder aus anderen Quellen',
         es: 'Usa ‘ ’ para citas provenientes del artista u otro lugar',
-        it: 'Usa ‘ ’ per citazioni dall\'artista o altre fonti',
+        it: 'Usa ‘ ’ per citazioni dall’artista o altre fonti',
         pt: 'Use ‘ ’ para citações do artista ou de outras fontes',
         sv: 'Använd ‘ ’ för citat från artisten eller från annanstans',
         ru: 'Используйте ‘ ’ для цитат исполнителя или из других источников',
@@ -4059,7 +4059,7 @@ export const trans = {
         en: 'This year',
         de: 'Dieses Jahr',
         es: 'Este año',
-        it: 'Quest\'anno',
+        it: 'Quest’anno',
         pt: 'Este ano',
         sv: 'Detta år',
         ru: 'Этот год',
@@ -4069,7 +4069,7 @@ export const trans = {
         en: 'Last year',
         de: 'Letztes Jahr',
         es: 'Año pasado',
-        it: 'L\'anno scorso',
+        it: 'L’anno scorso',
         pt: 'Ano passado',
         sv: 'Förra året',
         ru: 'Прошлый год',
@@ -4194,7 +4194,7 @@ export const trans = {
         en: 'Open album title as track',
         de: 'Albumtitel als Song öffnen',
         es: 'Abrir título del álbum como tema',
-        it: 'Apri il titolo dell\'album come brano',
+        it: 'Apri il titolo dell’album come brano',
         pt: 'Abrir título do álbum como faixa',
         sv: 'Öppna albumtitel som egen låt',
         ru: 'Открыть название альбома как трек',
@@ -4304,7 +4304,7 @@ export const trans = {
         de: 'Profilbild von ',
         es: 'Avatar para ',
         it: 'Avatar di ',
-        pt: 'Foto de perfil de',
+        pt: 'Foto de perfil de ',
         sv: 'Avatar för ',
         ru: 'Аватар для ',
         pl: 'Awatar dla '
@@ -4445,7 +4445,7 @@ export const trans = {
             en: 'Otherwise guests are neatly placed next to the primary artist',
             de: 'Ansonsten werden gefeaturete Künstler:innen neben dem/der Hauptkünstler:in platziert',
             es: 'De lo contrario, los colaboradores son organizados limpiamente al lado del artista principal',
-            it: 'Altrimenti gli artisti partecipanti sono disposti in modo pulito vicino all\'artista principale',
+            it: 'Altrimenti gli artisti partecipanti sono disposti in modo pulito vicino all’artista principale',
             pt: 'Caso contrário os convidados são organizados de forma elegante ao lado do artista principal',
             sv: 'Annars placeras gästartister fint bredvid huvudartisten',
             ru: 'В противном случае приглашенные артисты аккуратно размещаются рядом с основным исполнителем',
@@ -4494,7 +4494,7 @@ export const trans = {
         name: {
             en: 'Album name location',
             es: 'Ubicación del nombre del álbum',
-            it: 'Posizione del nome dell\'album',
+            it: 'Posizione del nome dell’album',
             sv: 'Albumtitelsplats',
             ru: 'Расположение названия альбома',
             pt: 'Localização do nome do álbum',
@@ -4503,7 +4503,7 @@ export const trans = {
         body: {
             en: 'Choose which axis to display said album name on',
             es: 'Elige en qué eje mostrar el nombre del álbum',
-            it: 'Seleziona su quale asse mostrare il nome dell\'album',
+            it: 'Seleziona su quale asse mostrare il nome dell’album',
             sv: 'Välj vilken axis att visa albumtitel på',
             ru: 'Выберите ось, на которой отображать название альбома',
             pt: 'Escolha em qual eixo exibir o nome do álbum',
@@ -4541,7 +4541,7 @@ export const trans = {
         body: {
             en: 'Places the track’s associated album name if there’s room',
             es: 'Coloca el nombre del álbum asociado al tema si hay espacio',
-            it: 'Inserisce il nome dell\'album associato ai brani se c\'è spazio',
+            it: 'Inserisce il nome dell’album associato ai brani se c’è spazio',
             sv: 'Placerar låtens associerade album om det finns plats',
             ru: 'Отображает название связанного альбома трека, если есть место',
             pt: 'Coloca o nome do álbum associado à faixa, se houver espaço',
@@ -5026,7 +5026,7 @@ export const trans = {
             en: 'Re-capitalise artists, albums, and tracks based on community contributions',
             de: 'Korrigiert die Schreibweise von Künstler:innen, Alben und Titeln basierend auf Community-Beiträgen',
             es: 'Recapitaliza artista, álbumes y temas con base en contribuciones de la comunidad',
-            it: 'Corregge l\'uso delle maiuscole in artisti, album e brani in base alle contribuzioni della comunità',
+            it: 'Corregge l’uso delle maiuscole in artisti, album e brani in base alle contribuzioni della comunità',
             pt: 'Recapitalize artistas, álbuns e faixas com base nas contribuições da comunidade',
             sv: 'Ändra kapitalisering på artister, album, och låtar från gemenskapsbidrag',
             ru: 'Изменить написание артистов, альбомов и треков на основе вклада сообщества',
@@ -5329,7 +5329,7 @@ export const trans = {
             en: 'Profile avatar shape',
             de: 'Form des Profilbildes',
             es: 'Forma del avatar del perfil',
-            it: 'Forma dell\'immagine del profilo',
+            it: 'Forma dell’immagine del profilo',
             pt: 'Formato da imagem de perfil',
             sv: 'Profilbildsform',
             ru: 'Форма аватара профиля',
@@ -5886,7 +5886,7 @@ export const trans = {
             en: 'Deletion will take 14 days to complete, after this time your account will either be deleted, anonymised, or put beyond use and cannot be recovered. Once deleted, your username will no longer be available.',
             de: 'Die Löschung dauert 14 Tage. Nach Ablauf dieser Frist wird dein Konto entweder gelöscht, anonymisiert, oder unbrauchbar gemacht und kann nicht wiederhergestellt werden. Nach der Löschung ist dein Benutzername nicht mehr verfügbar.',
             es: 'La eliminación tardará 14 días en completarse. Después de ese periodo, tu cuenta será eliminada, anonimizada, o se pondrá fuera de uso y no podrá recuperarse. Una vez eliminada, tu nombre de usuario ya no estará disponible.',
-            it: 'L\'eliminazione impiegherà 14 giorni per essere completata, dopo questo tempo il tuo account sarà cancellato, anonimizzato o reso inutilizzabile e non potrà essere recuperato. Una volta eliminato, il tuo username non sarà più disponibile.',
+            it: 'L’eliminazione impiegherà 14 giorni per essere completata, dopo questo tempo il tuo account sarà cancellato, anonimizzato o reso inutilizzabile e non potrà essere recuperato. Una volta eliminato, il tuo username non sarà più disponibile.',
             pt: 'A exclusão levará 14 dias para ser concluída. Após esse período, sua conta será excluída, anonimizada ou desativada, e não poderá ser recuperada. Depois de excluído, seu nome de usuário não estará mais disponível.',
             sv: 'Det tar 14 dagar att ta bort ditt konto. Efter denna tid blir dit konto antingen borttaget, anonymiserad, eller görs oanvändbar och kan inte fås tillbaka. När det är borttaget kan ditt användarnamn inte bli använt igen.',
             ru: 'Удаление займет 14 дней. По истечении этого времени ваша учетная запись будет либо удалена, либо анонимизирована, либо выведена из эксплуатации и не может быть восстановлена. После удаления ваше имя пользователя больше не будет доступно.'
@@ -5923,7 +5923,7 @@ export const trans = {
         en: 'Connect your account to third-party services for a better scrobbling experience. Make sure you trust the services below.',
         es: 'Conecta tu cuenta a servicios externos para una mejor experiencia al hacer scrobbling. Asegúrate de que confías en los servicios que hay debajo.',
         it: 'Connetti il tuo account a servizi di terze parti per una migliore esperienza di scrobbling. Assicurati di fidarti dei servizi che seguono.',
-        sv: 'Anslut ditt konto till tredjepartstjänster för bättre skrobblingsupplevelse. Var säker på att du litar på nedre tjänster',
+        sv: 'Anslut ditt konto till tredjepartstjänster för bättre skrobblingsupplevelse. Var säker på att du litar på nedre tjänster.',
         ru: 'Подключите свой аккаунт к сторонним сервисам для лучшего скробблинга. Убедитесь, что вы доверяете указанным ниже сервисам.',
         pt: 'Conecte sua conta a serviços de terceiros para uma melhor experiência de scrobbling. Certifique-se de que você confia nos serviços abaixo.'
     },
@@ -5976,7 +5976,7 @@ export const trans = {
             en: 'Unlock additional API features',
             de: 'Schalte zusätzliche API-Funktionen frei',
             es: 'Desbloquea funciones adicionales de API',
-            it: 'Sblocca ulteriori funzionalità dell\'API',
+            it: 'Sblocca ulteriori funzionalità dell’API',
             pt: 'Desbloqueie recursos adicionais da API',
             sv: 'Lås upp flera API-funktioner',
             ru: 'Разблокировать дополнительные функции API'
@@ -5985,7 +5985,7 @@ export const trans = {
             en: 'Link your account to allow API access such as scrobbling',
             de: 'Verknüpfe dein Konto, um API-Zugriffe wie Scrobbling zu ermöglichen',
             es: 'Conecta tu cuenta para permitir el acceso a la API, como el scrobbling',
-            it: 'Connetti il tuo account per attivare l\'accesso all\'API, ad esempio per lo scrobbling',
+            it: 'Connetti il tuo account per attivare l’accesso all’API, ad esempio per lo scrobbling',
             pt: 'Conecte sua conta para permitir o acesso à API, como o scrobbling',
             sv: 'Koppla ditt konto för att tillåta API-åtkomster, som att skrobbla',
             ru: 'Привяжите свой аккаунт, чтобы разрешить доступ к API, например, для скробблинга'
@@ -6083,7 +6083,7 @@ export const trans = {
             en: 'Allows the use of line breaks, bold text, italics, and images in all “About Me” panels',
             de: 'Ermöglicht die Verwendung von Zeilenumbrüchen, fettem Text, Kursivschrift und Bildern in allen „Über mich“-Bereichen',
             es: 'Permite el uso de saltos de línea, negrita, cursiva, e imágenes en todos los paneles "Sobre mí"',
-            it: 'Permette l\'uso di interruzioni di linea, grassetto, corsivo e immagini in tutti i pannelli "Informazioni"',
+            it: 'Permette l’uso di interruzioni di linea, grassetto, corsivo e immagini in tutti i pannelli "Informazioni"',
             pt: 'Permite o uso de quebras de linha, texto em negrito, itálico e imagens em todos os painéis “Sobre mim”',
             sv: 'Tillåter radbrytning, fet stil, kursiv stil, och bilder inom alla “Om mig”-paneler',
             ru: 'Разрешает использование переносов строк, жирного текста, курсива и изображений во всех панелях «Обо мне»'
@@ -6103,7 +6103,7 @@ export const trans = {
             en: 'Allows the use of line breaks, bold text, italics, and images in all shouts',
             de: 'Ermöglicht die Verwendung von Zeilenumbrüchen, fettem Text, Kursivschrift und Bildern in allen Shouts',
             es: 'Permite el uso de saltos de línea, negrita, cursiva, e imágenes en todas las notas',
-            it: 'Permette l\'uso di interruzioni di linea, grassetto, corsivo e immagini in tutte le note',
+            it: 'Permette l’uso di interruzioni di linea, grassetto, corsivo e immagini in tutte le note',
             pt: 'Permite o uso de quebras de linha, texto em negrito, itálico e imagens em todas as caixas de mensagens',
             sv: 'Tillåter radbrytning, fet stil, kursiv stil, och bilder inom alla hojtningar',
             ru: 'Разрешает использование переносов строк, жирного текста, курсива и изображений во всех шаутах'
@@ -6180,7 +6180,7 @@ export const trans = {
         en: 'Welcome to bleh, thank you for installing!<br>You can continue through this quick setup to get you started or skip right to your profile and figure it all out yourself <3',
         de: 'Willkommen bei bleh, danke für die Installation!<br>Du kannst diesen schnellen Einrichtungsassistenten durchlaufen, um loszulegen, oder direkt zu deinem Profil springen und alles selbst herausfinden <3',
         es: '¡Bienvenido a bleh, gracias por instalar!<br>Puedes continuar con la instalación para ayudarte a empezar o puedes saltar directamente a tu perfil y averiguar por ti mismo <3',
-        it: 'Benvenuto in bleh, grazie per l\'installazione!<br>Puoi continuare con questa veloce configurazione iniziale, oppure saltare direttamente al tuo profilo e scoprire tutto da solo <3',
+        it: 'Benvenuto in bleh, grazie per l’installazione!<br>Puoi continuare con questa veloce configurazione iniziale, oppure saltare direttamente al tuo profilo e scoprire tutto da solo <3',
         pt: 'Bem-vindo ao bleh, obrigado por instalar!<br>Você pode seguir este rápido guia de configuração para começar, ou pular direto para seu perfil e descobrir tudo por conta própria <3',
         sv: 'Välkommen till bleh, tack för att du har installerat!<br>Du kan fortsätta genom den här snabba setupen för att starta eller hoppa rakt till din profil och klura ut det helt själv <3',
         ru: 'Добро пожаловать в bleh, спасибо за установку!<br>Вы можете пройти эту быструю настройку, чтобы начать, или сразу перейти к своему профилю и разобраться во всем самостоятельно <3'
@@ -6538,7 +6538,7 @@ export const trans = {
         en: 'There was a network error',
         de: 'Netzwerkfehler',
         es: 'Hubo un error de red',
-        it: 'C\'è stato un errore di rete',
+        it: 'C’è stato un errore di rete',
         pt: 'Ocorreu um erro de rede',
         sv: 'Ett nätverksfel har inträffat',
         ru: 'Произошла ошибка сети'
@@ -6594,7 +6594,7 @@ export const trans = {
         body: {
             en: 'Sponsors can choose a custom font and shadow style for their profile name',
             es: 'Los patrocinadores pueden elegir una fuente y estilo de sombra personalizados para su nombre de perfil',
-            it: 'Gli sponsor possono scegliere un font e uno stile d\'ombra personalizzato per il loro nome profilo',
+            it: 'Gli sponsor possono scegliere un font e uno stile d’ombra personalizzato per il loro nome profilo',
             sv: 'Sponsorer kan välja valfri typsnitt och skugga för deras profilnamn',
             ru: 'Спонсоры могут выбирать собственный шрифт и стиль тени для имени в своем профиле',
             pt: 'Patrocinadores podem escolher uma fonte personalizada e estilo de sombra para o nome do perfil deles'
@@ -6729,7 +6729,7 @@ export const trans = {
         en: 'Use your scroll wheel to zoom in and out, click and drag to move the image.',
         de: 'Verwende dein Mausrad, um rein- und rauszuzoomen. Klicke und ziehe, um das Bild zu verschieben.',
         es: 'Usa la rueda del ratón para acercar o alejar, haz clic y arrastra para mover la imagen.',
-        it: 'Usa la rotella del mouse per ingrandire o rimpicciolire, trascina e rilascia per muovere l\'immagine.',
+        it: 'Usa la rotella del mouse per ingrandire o rimpicciolire, trascina e rilascia per muovere l’immagine.',
         pt: 'Use a scroll do seu mouse para dar zoom in e zoom out, clicar e arrastar para mover a imagem.',
         sv: 'Använd ditt scrollhjul för att zooma in och ut, klicka och dra för att flytta på bilden.',
         ru: 'Используйте колесо прокрутки для приближения и отдаления, нажмите и перетащите, чтобы переместить изображение.'
@@ -6845,7 +6845,7 @@ export const trans = {
         en: 'Requires extension ‘{v}’',
         de: 'Benötigt die Erweiterung „{v}“',
         es: 'Requiere la extensión ‘{v}’',
-        it: 'Richiede l\'estensione ‘{v}’',
+        it: 'Richiede l’estensione ‘{v}’',
         pt: 'Requer extensão ‘{v}’',
         sv: 'Behöver tillägget ‘{v}’',
         ru: 'Требуется расширение «{v}»'
@@ -6938,7 +6938,7 @@ export const trans = {
         en: 'Keep within the range',
         de: 'Bleibe innerhalb des Zeichenlimits',
         es: 'Mantente dentro del rango',
-        it: 'Mantieniti all\'interno dell\'intervallo',
+        it: 'Mantieniti all’interno dell’intervallo',
         pt: 'Manter dentro do intervalo',
         sv: 'Håll dig inom gränsen',
         ru: 'Оставайтесь в пределах диапазона'
@@ -7114,7 +7114,7 @@ export const trans = {
             en: 'Similar to the look of other collage solutions',
             de: 'Ähnlicher Stil wie andere Collagenlösungen',
             es: 'Similar al estilo visual de otros editores de collage',
-            it: 'Simile all\'aspetto di altre soluzioni per collage',
+            it: 'Simile all’aspetto di altre soluzioni per collage',
             sv: 'Mer lik till hur andra collagegenererare gör det',
             ru: 'Похоже на внешний вид других решений для коллажей',
             pt: 'Semelhante à aparência de outras soluções de colagem'
@@ -7386,7 +7386,7 @@ export const trans = {
         en: 'Select an option',
         de: 'Wähle eine Option',
         es: 'Selecciona una opción',
-        it: 'Seleziona un\'opzione',
+        it: 'Seleziona un’opzione',
         pt: 'Selecione uma opção',
         sv: 'Välj ett alternativ',
         ru: 'Выберите вариант'
@@ -7691,7 +7691,7 @@ export const trans = {
         en: 'Update available to install',
         de: 'Ein Update ist bereit zur Installation',
         es: 'Actualización disponible para instalar',
-        it: 'Aggiornamento disponibile per l\'installazione',
+        it: 'Aggiornamento disponibile per l’installazione',
         pt: 'Atualização disponível para instalar',
         sv: 'Ny uppdatering finns tillgänglig',
         ru: 'Доступно обновление для установки'
@@ -7865,7 +7865,7 @@ export const trans = {
         en: 'Use current time',
         de: 'Aktuelle Zeit verwenden',
         es: 'Usar hora actual',
-        it: 'Usa l\'ora attuale',
+        it: 'Usa l’ora attuale',
         sv: 'Använd nuvarande tid',
         ru: 'Использовать текущее время',
         pt: 'Usar hora atual'
@@ -7892,7 +7892,7 @@ export const trans = {
         en: 'Requires API access in Settings',
         de: 'Erfordert API-Zugang in den Einstellungen',
         es: 'Requiere acceso a la API en Configuración',
-        it: 'Richiede l\'accesso API nelle impostazioni',
+        it: 'Richiede l’accesso API nelle impostazioni',
         sv: 'Behöver API-åtkomst i inställningar',
         ru: 'Требуется доступ к API в настройках',
         pt: 'Requer acesso à API nas Configurações'
@@ -7949,7 +7949,7 @@ export const trans = {
             en: 'Decreases the intensity of animations, hover effects, and other moving parts',
             de: 'Verringert die Intensität von Animationen, Hover-Effekten und anderen beweglichen Komponenten',
             es: 'Reduce la intensidad de las animaciones, efectos al pasar el cursor, y otras partes móviles',
-            it: 'Riduce l\'intensità delle animazioni, degli effetti al passare del mouse e di altre parti in movimento',
+            it: 'Riduce l’intensità delle animazioni, degli effetti al passare del mouse e di altre parti in movimento',
             sv: 'Minskar intensiteten av animationer, effekter vid hovring, och andra rörande delar',
             ru: 'Уменьшает интенсивность анимаций, эффектов при наведении и других движущихся элементов',
             pt: 'Diminui a intensidade das animações, efeitos de hover e outras partes móveis'
@@ -7996,7 +7996,7 @@ export const trans = {
             en: 'Prefer avatar image for profiles without a banner',
             de: 'Bevorzuge Profilbild für Profile ohne Banner',
             es: 'Preferir imagen del avatar para perfiles sin un banner',
-            it: 'Preferire l\'immagine dell\'immagine profilo per profili senza un banner',
+            it: 'Preferire l’immagine dell’immagine profilo per profili senza un banner',
             sv: 'Föredra profilbild för profiler utan en banner',
             ru: 'Предпочитать изображение аватара для профилей без баннера',
             pt: 'Preferir imagem do avatar para perfis sem banner'
@@ -8005,7 +8005,7 @@ export const trans = {
             en: 'All artist-based banner images will be replaced by the user’s avatar',
             de: 'Alle künstlerbasierten Bannerbilder werden durch das Profilbild des Benutzers ersetzt',
             es: 'Todos los banners con imágenes de artistas serán reemplazados por el avatar del usuario',
-            it: 'Tutte le immagini banner basate sugli artisti saranno sostituite dall\'immagine profilo dell\'utente',
+            it: 'Tutte le immagini banner basate sugli artisti saranno sostituite dall’immagine profilo dell’utente',
             sv: 'Alla artistbaserade bannerbilder blir ersätt av användarens profilbild',
             ru: 'Все баннеры на основе артистов будут заменены аватаром пользователя',
             pt: 'Todas as imagens de banner baseadas em artistas serão substituídas pelo avatar do usuário'
@@ -8054,7 +8054,7 @@ export const trans = {
             en: 'Changed your accent, don’t forget to save!',
             de: 'Du hast deinen Akzent geändert, vergiss’ nicht zu speichern!',
             es: 'Acento cambiado, ¡no te olvides de guardar!',
-            it: 'Hai cambiato l\'accento, non dimenticarti di salvare!',
+            it: 'Hai cambiato l’accento, non dimenticarti di salvare!',
             sv: 'Ändrade din accentfärg, glöm inte att spara!',
             ru: 'Вы изменили акцент, не забудьте сохранить!',
             pt: 'Toque de cor alterado, não se esqueça de salvar!'
@@ -8318,7 +8318,7 @@ export const trans = {
             en: 'Guess the album from its pixelated artwork and clues',
             de: 'Errate das Album anhand des verpixelten Albumcovers und Hinweisen',
             es: 'Averigua el álbum usando su cáratula pixelada y pistas',
-            it: 'Indovina l\'album dalla sua copertina pixellata e indizi',
+            it: 'Indovina l’album dalla sua copertina pixellata e indizi',
             sv: 'Gissa albumet från sin pixellerad konst och ledtrådar',
             ru: 'Угадайте альбом по его пиксельному изображению и подсказкам',
             pt: 'Adivinhe o álbum a partir de sua arte pixelada e pistas'
@@ -8368,7 +8368,7 @@ export const trans = {
         en: 'Generate a personalised image based on your listening history and options',
         de: 'Erstelle ein personalisiertes Bild basierend auf deinem Hörverlauf und deinen Einstellungen',
         es: 'Genera una imagen personalizada basada en tu historial de reproducciones y opciones',
-        it: 'Genera un\'immagine personalizzata basata sulla tua cronologia di riproduzione e opzioni',
+        it: 'Genera un’immagine personalizzata basata sulla tua cronologia di riproduzione e opzioni',
         sv: 'Skapa en personlig bild baserad på din lyssningshistoria och inställningar',
         ru: 'Создать персонализированное изображение на основе вашей истории прослушиваний и настроек',
         pt: 'Gere uma imagem personalizada com base no seu histórico de reprodução e opções'
@@ -8497,7 +8497,7 @@ export const trans = {
         en: 'Guess the album name with the pixelated cover, jumbled title, and hints!',
         de: 'Errate den Albumtitel mit verpixeltem Cover, durcheinandergewürfeltem Titel und Hinweisen!',
         es: '¡Averigua el nombre del álbum usando la cáratula pixelada, título desordenado, y pistas!',
-        it: 'Indovina il nome dell\'album con la cover pixellata, il titolo distorto, e indizi!',
+        it: 'Indovina il nome dell’album con la cover pixellata, il titolo distorto, e indizi!',
         pt: 'Adivinhe o nome do álbum com a capa pixelada, título embaralhado e dicas!',
         sv: 'Gissa albumtiteln med pixellerad konst, omrörd titel, och ledtrådar!',
         ru: 'Угадайте название альбома по пиксельному изображению, перепутанному названию и подсказкам!'
@@ -8568,7 +8568,7 @@ export const trans = {
             en: 'Album was released on {v}',
             de: 'Das Album wurde am {v} veröffentlicht',
             es: 'El {álbum} fue lanzado en {v}',
-            it: 'L\'album è stato rilasciato il {v}',
+            it: 'L’album è stato rilasciato il {v}',
             pt: 'O álbum foi lançado em {v}',
             sv: 'Albumet släpptes {v}',
             ru: 'Альбом был выпущен {v}'
@@ -8577,7 +8577,7 @@ export const trans = {
             en: 'The artist is tagged with {v}',
             de: 'Der/die Künstler:in ist mit {v} getaggt',
             es: 'El artista tiene {v} como tags',
-            it: 'L\'artista è taggato come {v}',
+            it: 'L’artista è taggato come {v}',
             pt: 'O artista foi marcado com {v}',
             sv: 'Artisten har taggats som {v}',
             ru: 'Исполнитель отмечен тегом {v}'
@@ -8586,7 +8586,7 @@ export const trans = {
             en: 'The artist was born {v}',
             de: 'Der/die Künstler:in wurde {v} geboren',
             es: 'El artista nació en {v}',
-            it: 'L\'artista è nato il {v}',
+            it: 'L’artista è nato il {v}',
             pt: 'O artista nasceu em {v}',
             sv: 'Artisten var född {v}',
             ru: 'Исполнитель родился {v}'
@@ -8596,7 +8596,7 @@ export const trans = {
         en: 'The album was {name} by {artist}',
         de: 'Das Album war {name} von {artist}',
         es: 'El álbum era {name} por {artist}',
-        it: 'Il nome dell\'album era {name} di {artist}',
+        it: 'Il nome dell’album era {name} di {artist}',
         pt: 'O álbum era {name} de {artist}',
         sv: 'Albumet var {name} av {artist}',
         ru: 'Альбомом был {name} от {artist}'
@@ -8658,7 +8658,7 @@ export const trans = {
         // notifications can include text with valuable info such as:
         // and 7 others replied to your shout on
         // this is searching for the word "replied"
-        // dont re-translate this, as its copied from last.fm
+        // >> dont re-translate this, as its copied from last.fm
         en: 'replied',
         de: 'hat geantwortet',
         fr: 'a répondu',
@@ -8814,7 +8814,7 @@ export const trans = {
             en: 'Decide which branding source to use for the header',
             de: 'Wähle aus, welches Branding für die Kopfzeile verwendet werden soll',
             es: 'Elige cuál logo usar para el encabezado',
-            it: 'Decidi quale sorgente di branding utilizzare per l\'intestazione',
+            it: 'Decidi quale sorgente di branding utilizzare per l’intestazione',
             pt: 'Escolha qual logo usar para o cabeçalho',
             sv: 'Välj vilken sorts branding för att använda på sidhuvudet',
             ru: 'Выберите, какой источник брендинга использовать для заголовка'
@@ -8853,7 +8853,7 @@ export const trans = {
         en: 'Control animation of GIFs',
         de: 'Steuere die Animation von GIFs',
         es: 'Controlar animación de GIFs',
-        it: 'Controlla l\'animazione di GIF',
+        it: 'Controlla l’animazione di GIF',
         pt: 'Controlar animação de GIFs',
         sv: 'Kontrollera GIF-animation',
         ru: 'Управление анимацией GIF'
@@ -8964,7 +8964,7 @@ export const trans = {
             en: 'This link can open an application on your device',
             de: 'Dieser Link kann eine Anwendung auf deinem Gerät öffnen',
             es: 'Este link puede abrir una aplicación en tu dispositivo',
-            it: 'Questo link può aprire un\'applicazione sul tuo dispositivo',
+            it: 'Questo link può aprire un’applicazione sul tuo dispositivo',
             pt: 'Este link pode abrir um aplicativo no seu dispositivo',
             sv: 'Länken kan öppna en applikation på din enhet',
             ru: 'Эта ссылка может открыть приложение на вашем устройстве'
@@ -9046,7 +9046,7 @@ export const trans = {
         body: {
             en: 'Choose which service to use when interacting with playables across the site',
             es: 'Elige cuál servicio usar al interactuar con elementos reproducibles a través del sitio',
-            it: 'Seleziona quale servizio utilizzare all\'interazione con elementi riproducibili in tutto il sito',
+            it: 'Seleziona quale servizio utilizzare all’interazione con elementi riproducibili in tutto il sito',
             sv: 'Välj vilken service att använda när du spelar upp låtar',
             ru: 'Выберите, какой сервис использовать при взаимодействии с воспроизводимым контентом на сайте',
             pt: 'Escolha qual serviço usar ao interagir com elementos reproduzíveis em todo o site'
@@ -9094,7 +9094,7 @@ export const trans = {
         en: 'You need to be logged in',
         de: 'Du musst eingeloggt sein',
         es: 'Necesitas iniciar sesión',
-        it: 'Devi aver effettuato l\'accesso',
+        it: 'Devi aver effettuato l’accesso',
         pt: 'Você precisa estar logado',
         sv: 'Du lär vara inloggad',
         ru: 'Вам необходимо войти в систему'
@@ -9148,7 +9148,7 @@ export const trans = {
             en: 'A redesigned album and track view sourcing data from MusicBrainz. May be released in the future or scrapped. Please send feedback from usage.',
             de: 'Eine neu gestaltete Album- und Titelseite, die Daten von MusicBrainz bezieht. Kann in Zukunft veröffentlicht oder verworfen werden. Bitte sende Feedback basierend auf deiner Nutzung.',
             es: 'Un estilo rediseñado de álbumes y temas usando datos provenientes de MusicBrainz. Puede ser lanzado en un futuro o ser descartado. Por favor envía feedback de uso.',
-            it: 'Una vista per album e brani ridisegnata che attinge ai dati di MusicBrainz. Potrebbe essere rilasciata in futuro o scartata. Per favore inviate del feedback dall\'utilizzo.',
+            it: 'Una vista per album e brani ridisegnata che attinge ai dati di MusicBrainz. Potrebbe essere rilasciata in futuro o scartata. Per favore inviate del feedback dall’utilizzo.',
             pt: 'Um estilo redesenhado de álbuns e faixas que utiliza dados do MusicBrainz. Pode ser lançado no futuro ou descartado. Por favor, envie feedback sobre o uso.',
             sv: 'Omdesignade album och låtsidor med data från MusicBrainz. Kan släppas eller skräpas i framtiden. Skicka gärna feedback från användning.',
             ru: 'Обновленный вид альбомов и треков, получающий данные из MusicBrainz. Может быть выпущен в будущем или отменен. Пожалуйста, отправляйте отзывы об использовании.'
@@ -9315,6 +9315,7 @@ export const trans = {
         ru: 'Кредиты для {v}'
     },
     branch: {
+        // as in git branches
         name: {
             en: 'Choose branch',
             es: 'Elegir rama',
@@ -9453,7 +9454,7 @@ export const trans = {
     now_notice: {
         name: {
             en: 'This page is not properly supported in bleh, but..',
-            es: 'Esta página no es compatible con bleh, pero... ',
+            es: 'Esta página no es compatible con bleh, pero...',
             ru: 'Это страница не поддерживается в bleh, но...'
         },
         body: {

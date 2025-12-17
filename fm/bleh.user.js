@@ -60668,7 +60668,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Artist name was ignored",
         de: "K\xFCnstlername wurde ignoriert",
         es: "El nombre del artista fue ignorado",
-        it: "Il nome dell'artista \xE8 stato ignorato",
+        it: "Il nome dell\u2019artista \xE8 stato ignorato",
         pt: "O nome do(a) artista foi ignorado",
         sv: "Artistnamnet var ignorerad",
         ru: "\u0418\u043C\u044F \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044F \u043F\u0440\u043E\u0438\u0433\u043D\u043E\u0440\u0438\u0440\u043E\u0432\u0430\u043D\u043E",
@@ -60779,7 +60779,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Album Artist",
       de: "Albumk\xFCnstler",
       es: "Artista del \xE1lbum",
-      it: "Artista dell'album",
+      it: "Artista dell\u2019album",
       pt: "Artista do \xE1lbum",
       sv: "Albumartist",
       ru: "\u0418\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C \u0430\u043B\u044C\u0431\u043E\u043C\u0430",
@@ -60992,7 +60992,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Sua prefer\xEAncia de tema ser\xE1 {day} ou {night}, com base no seu sistema. ",
       sv: "Ditt f\xF6redragna tema blir antigen {day} eller {night}, beroende p\xE5 ditt system. ",
       ru: "\u041F\u0440\u0435\u0434\u043F\u043E\u0447\u0442\u0438\u0442\u0435\u043B\u044C\u043D\u0430\u044F \u0442\u0435\u043C\u0430 \u0431\u0443\u0434\u0435\u0442 {day} \u0438\u043B\u0438 {night} \u0432 \u0437\u0430\u0432\u0438\u0441\u0438\u043C\u043E\u0441\u0442\u0438 \u043E\u0442 \u043D\u0430\u0441\u0442\u0440\u043E\u0435\u043A \u0432\u0430\u0448\u0435\u0439 \u0441\u0438\u0441\u0442\u0435\u043C\u044B. ",
-      pl: "Tw\xF3j motyw ustawi si\u0119 jako {day} albo {night}, bazuj\u0105c na ustawieniach twojego systemu."
+      pl: "Tw\xF3j motyw ustawi si\u0119 jako {day} albo {night}, bazuj\u0105c na ustawieniach twojego systemu. "
     },
     change_schedule: {
       en: "Change schedule",
@@ -61019,7 +61019,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Temporarily override your selected accent to match album art",
         de: "\xDCberschreibe vor\xFCbergehend deine ausgew\xE4hlte Akzentfarbe, damit sie zum Albumcover passt",
         es: "Substituye temporalmente el color de acento seleccionado para combinar con la car\xE1tula del \xE1lbum",
-        it: "Sovrascrivi temporaneamente il tuo colore di accento selezionato per abbinarsi con la copertina dell'album",
+        it: "Sovrascrivi temporaneamente il tuo colore di accento selezionato per abbinarsi con la copertina dell\u2019album",
         pt: "Substituir temporariamente sua cor de destaque selecionada para combinar com a arte do \xE1lbum",
         sv: "\xC4ndra tillf\xE4lligt din valda accentf\xE4rg f\xF6r att matcha albumkonsten",
         ru: "\u0412\u0440\u0435\u043C\u0435\u043D\u043D\u043E \u0437\u0430\u043C\u0435\u043D\u044F\u0442\u044C \u0432\u044B\u0431\u0440\u0430\u043D\u043D\u044B\u0439 \u0430\u043A\u0446\u0435\u043D\u0442\u043D\u044B\u0439 \u0446\u0432\u0435\u0442 \u043D\u0430 \u0446\u0432\u0435\u0442 \u043E\u0431\u043B\u043E\u0436\u043A\u0438 \u0430\u043B\u044C\u0431\u043E\u043C\u0430",
@@ -61443,7 +61443,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Snow particles use a drop-shadow glow for aesthetics with the added processing cost",
         de: "Schneepartikel verwenden f\xFCr die \xC4sthetik einen Glanzeffekt \u2013 erfordert zus\xE4tzliche Rechenleistung",
         es: "Las part\xEDculas de nieve usan un brillo de sombra paralela para mayor est\xE9tica, con costo adicional de procesamiento",
-        it: "Le particelle di neve brillano utilizzando un effetto ad ombra per un'estetica migliore, richiedendo pi\xF9 risorse",
+        it: "Le particelle di neve brillano utilizzando un effetto ad ombra per un\u2019estetica migliore, richiedendo pi\xF9 risorse",
         pt: "As part\xEDculas de neve usam um efeito de brilho com sombra projetada para est\xE9tica, com o custo adicional de processamento",
         sv: "Sn\xF6partiklarna anv\xE4nder en gl\xF6deffekt f\xF6r estetiska sj\xE4l, med lite extra datorbelastning",
         ru: "\u0421\u043D\u0435\u0436\u043D\u044B\u0435 \u0447\u0430\u0441\u0442\u0438\u0446\u044B \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u044E\u0442 \u044D\u0444\u0444\u0435\u043A\u0442 \u0441\u0432\u0435\u0447\u0435\u043D\u0438\u044F \u0434\u043B\u044F \u044D\u0441\u0442\u0435\u0442\u0438\u043A\u0438 \u0446\u0435\u043D\u043E\u0439 \u0434\u043E\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0445 \u0437\u0430\u0442\u0440\u0430\u0442 \u0440\u0435\u0441\u0443\u0440\u0441\u043E\u0432",
@@ -61746,7 +61746,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "This is a permanent action, beware of where you are copying from",
       de: "Dieser Vorgang ist unwiderruflich \u2013 sei vorsichtig, von wo du kopierst",
       es: "Esta es una acci\xF3n permanente, ten cuidado del lugar de donde copias",
-      it: "Questa \xE8 un'azione permanente, fai attenzione da dove stai copiando",
+      it: "Questa \xE8 un\u2019azione permanente, fai attenzione da dove stai copiando",
       pt: "Esta \xE9 uma a\xE7\xE3o permanente, cuidado com o lugar de onde voc\xEA est\xE1 copiando",
       sv: "Det h\xE4r \xE4r permanent, oberoende av vart du kopierar ifr\xE5n",
       ru: "\u042D\u0442\u043E \u0434\u0435\u0439\u0441\u0442\u0432\u0438\u0435 \u043D\u0435\u043E\u0431\u0440\u0430\u0442\u0438\u043C\u043E, \u0431\u0443\u0434\u044C\u0442\u0435 \u0432\u043D\u0438\u043C\u0430\u0442\u0435\u043B\u044C\u043D\u044B \u043A \u0438\u0441\u0442\u043E\u0447\u043D\u0438\u043A\u0443 \u043A\u043E\u043F\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u044F",
@@ -61999,7 +61999,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Bring some colour into your world (or reduce it)",
         de: "Bringe etwas Farbe in deine Welt (oder reduziere sie)",
         es: "Trae un poco de color a tu mundo (o red\xFAcelo)",
-        it: "Porta un po' di colore nella tua vita (o riducilo)",
+        it: "Porta un po\u2019 di colore nella tua vita (o riducilo)",
         pt: "Traz algumas cores ao mundo (ou diminui elas)",
         sv: "Skaffa lite f\xE4rg i din v\xE4rld (eller minska den)",
         ru: "\u0414\u043E\u0431\u0430\u0432\u044C\u0442\u0435 \u043A\u0440\u0430\u0441\u043E\u043A \u0432 \u0441\u0432\u043E\u0439 \u043C\u0438\u0440 (\u0438\u043B\u0438 \u0443\u043C\u0435\u043D\u044C\u0448\u0438\u0442\u0435 \u0438\u0445)",
@@ -62181,7 +62181,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "A setting you changed requires a page refresh",
         de: "Eine von dir ge\xE4nderte Einstellung erfordert eine Seitenaktualisierung, damit sie wirksam wird",
         es: "Una opci\xF3n que cambiaste requiere que recargues la p\xE1gina",
-        it: "Un'opzione che hai cambiato richiede un aggiornamento della pagina",
+        it: "Un\u2019opzione che hai cambiato richiede un aggiornamento della pagina",
         pt: "Uma configura\xE7\xE3o que voc\xEA mudou exige uma atualiza\xE7\xE3o de p\xE1gina",
         sv: "En inst\xE4llning du \xE4ndrade p\xE5 beh\xF6ver at sidan laddas om",
         ru: "\u0418\u0437\u043C\u0435\u043D\u0451\u043D\u043D\u0430\u044F \u0432\u0430\u043C\u0438 \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0430 \u0442\u0440\u0435\u0431\u0443\u0435\u0442 \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u044F \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u044B",
@@ -62344,7 +62344,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     gallery_sum: {
       en: "This is the sum of votes for ordering",
       es: "Esta es la suma de votos para ordenar",
-      it: "Questa \xE8 la somma dei voti per l'ordinamento",
+      it: "Questa \xE8 la somma dei voti per l\u2019ordinamento",
       sv: "Det h\xE4r \xE4r summan r\xF6ster f\xF6r bildordning",
       ru: "\u042D\u0442\u043E \u0441\u0443\u043C\u043C\u0430 \u0433\u043E\u043B\u043E\u0441\u043E\u0432 \u0434\u043B\u044F \u0441\u043E\u0440\u0442\u0438\u0440\u043E\u0432\u043A\u0438",
       pt: "Esta \xE9 a soma dos votos para ordena\xE7\xE3o",
@@ -62363,7 +62363,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Drag-and-drop an image or click here",
       de: "Bild hierher ziehen oder hier klicken",
       es: "Arrastra una imagen o haz clic aqu\xED",
-      it: "Trascina e rilascia un'immagine, o clicca qui",
+      it: "Trascina e rilascia un\u2019immagine, o clicca qui",
       sv: "Dra och sl\xE4pp en bild eller klicka h\xE4r",
       ru: "\u041F\u0435\u0440\u0435\u0442\u0430\u0449\u0438\u0442\u0435 \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435 \u0438\u043B\u0438 \u043D\u0430\u0436\u043C\u0438\u0442\u0435 \u0437\u0434\u0435\u0441\u044C",
       pt: "Arraste e solte uma imagem ou clique aqui",
@@ -62524,7 +62524,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "This {t} is being re-capitalised, is it correct?",
         de: "Die Gro\xDF-/Kleinschreibung dieses {t} wird korrigiert, ist das korrekt?",
         es: "La capitalizaci\xF3n de este {t} est\xE1 siendo modificada, \xBFes correcta?",
-        it: "L'uso delle maiuscole per questo {t} sta venendo modificato, \xE8 corretto?",
+        it: "L\u2019uso delle maiuscole per questo {t} sta venendo modificato, \xE8 corretto?",
         pt: "{t} teve a capitaliza\xE7\xE3o ajustada, est\xE1 correto?",
         sv: "Nuvarande {t} har \xE4ndrad kapitalisering, st\xE4mmer det h\xE4r?",
         ru: "\u0412 \u044D\u0442\u043E\u043C {t} \u0438\u0441\u043F\u0440\u0430\u0432\u043B\u044F\u0435\u0442\u0441\u044F \u0440\u0435\u0433\u0438\u0441\u0442\u0440, \u044F\u0432\u043B\u044F\u0435\u0442\u0441\u044F \u043B\u0438 \u043E\u043D \u043F\u0440\u0430\u0432\u0438\u043B\u044C\u043D\u044B\u043C?",
@@ -62534,7 +62534,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Is this {t} capitalised correctly?",
         de: "Ist die Gro\xDF-/Kleinschreibung dieses {t} richtig?",
         es: "\xBFEst\xE1 este {t} capitalizado correctamente?",
-        it: "L'uso delle maiuscole per questo {t} \xE8 corretto?",
+        it: "L\u2019uso delle maiuscole per questo {t} \xE8 corretto?",
         pt: "Esse(a) {t} est\xE1 capitalizado(a) corretamente?",
         sv: "St\xE4mmer kapitaliseringen p\xE5 {t}?",
         ru: "\u041F\u0440\u0430\u0432\u0438\u043B\u044C\u043D\u043E \u043B\u0438 \u043D\u0430\u043F\u0438\u0441\u0430\u043D \u0440\u0435\u0433\u0438\u0441\u0442\u0440 \u044D\u0442\u043E\u0433\u043E {t}?",
@@ -62555,7 +62555,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "This is the original capitalisation present on Last.fm",
       de: "Dies ist die originale Gro\xDF-/Kleinschreibung auf Last.fm",
       es: "Esta es la capitalizaci\xF3n original presente en Last.fm",
-      it: "Questo \xE8 l'uso delle maiuscole originale presente su Last.fm",
+      it: "Questo \xE8 l\u2019uso delle maiuscole originale presente su Last.fm",
       sv: "Det h\xE4r \xE4r den originella kapitaliseringen som finns p\xE5 Last.fm",
       ru: "\u042D\u0442\u043E \u0438\u0441\u0445\u043E\u0434\u043D\u044B\u0439 \u0440\u0435\u0433\u0438\u0441\u0442\u0440, \u043F\u0440\u0435\u0434\u043E\u0441\u0442\u0430\u0432\u043B\u0435\u043D\u043D\u044B\u0439 \u043D\u0430 Last.fm",
       pt: "Esta \xE9 a capitaliza\xE7\xE3o original presente no Last.fm",
@@ -62575,7 +62575,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "This is the correct capitalisation, as decided by the artist",
       de: "Dies ist die korrekte Gro\xDF-/Kleinschreibung, wie sie vom K\xFCnstler festgelegt wurde",
       es: "Esta es la capitalizaci\xF3n correcta, decidida por el artista",
-      it: "Questo \xE8 l'uso delle maiuscole corretto, come deciso dall'artista",
+      it: "Questo \xE8 l\u2019uso delle maiuscole corretto, come deciso dall\u2019artista",
       sv: "Det h\xE4r \xE4r r\xE4tt kapitalisering, som best\xE4md av artisten",
       ru: "\u042D\u0442\u043E \u043F\u0440\u0430\u0432\u0438\u043B\u044C\u043D\u044B\u0439 \u0440\u0435\u0433\u0438\u0441\u0442\u0440, \u043E\u043F\u0440\u0435\u0434\u0435\u043B\u0435\u043D\u043D\u044B\u0439 \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u0435\u043C",
       pt: "Esta \xE9 a capitaliza\xE7\xE3o correta, conforme decidido pelo artista",
@@ -62615,7 +62615,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Only capitalisation changes are allowed",
       de: "Nur \xC4nderungen der Gro\xDF-/Kleinschreibung sind erlaubt",
       es: "Solo se permiten cambios a la capitalizaci\xF3n",
-      it: "Sono consentiti solo i cambi relativi all'uso delle maiuscole",
+      it: "Sono consentiti solo i cambi relativi all\u2019uso delle maiuscole",
       sv: "Endast \xE4ndringar p\xE5 kapitalisering \xE4r till\xE5tet",
       ru: "\u0414\u043E\u043F\u0443\u0441\u043A\u0430\u044E\u0442\u0441\u044F \u0442\u043E\u043B\u044C\u043A\u043E \u0438\u0437\u043C\u0435\u043D\u0435\u043D\u0438\u044F \u0440\u0435\u0433\u0438\u0441\u0442\u0440\u0430",
       pt: "Apenas mudan\xE7as de capitaliza\xE7\xE3o s\xE3o permitidas",
@@ -63283,7 +63283,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Use \u2018 \u2019 for quotations from the artist or elsewhere",
       de: "Verwende \u2018 \u2019 f\xFCr Zitate des K\xFCnstlers oder aus anderen Quellen",
       es: "Usa \u2018 \u2019 para citas provenientes del artista u otro lugar",
-      it: "Usa \u2018 \u2019 per citazioni dall'artista o altre fonti",
+      it: "Usa \u2018 \u2019 per citazioni dall\u2019artista o altre fonti",
       pt: "Use \u2018 \u2019 para cita\xE7\xF5es do artista ou de outras fontes",
       sv: "Anv\xE4nd \u2018 \u2019 f\xF6r citat fr\xE5n artisten eller fr\xE5n annanstans",
       ru: "\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0439\u0442\u0435 \u2018 \u2019 \u0434\u043B\u044F \u0446\u0438\u0442\u0430\u0442 \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044F \u0438\u043B\u0438 \u0438\u0437 \u0434\u0440\u0443\u0433\u0438\u0445 \u0438\u0441\u0442\u043E\u0447\u043D\u0438\u043A\u043E\u0432",
@@ -63665,7 +63665,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "This year",
       de: "Dieses Jahr",
       es: "Este a\xF1o",
-      it: "Quest'anno",
+      it: "Quest\u2019anno",
       pt: "Este ano",
       sv: "Detta \xE5r",
       ru: "\u042D\u0442\u043E\u0442 \u0433\u043E\u0434",
@@ -63675,7 +63675,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Last year",
       de: "Letztes Jahr",
       es: "A\xF1o pasado",
-      it: "L'anno scorso",
+      it: "L\u2019anno scorso",
       pt: "Ano passado",
       sv: "F\xF6rra \xE5ret",
       ru: "\u041F\u0440\u043E\u0448\u043B\u044B\u0439 \u0433\u043E\u0434",
@@ -63801,7 +63801,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Open album title as track",
       de: "Albumtitel als Song \xF6ffnen",
       es: "Abrir t\xEDtulo del \xE1lbum como tema",
-      it: "Apri il titolo dell'album come brano",
+      it: "Apri il titolo dell\u2019album come brano",
       pt: "Abrir t\xEDtulo do \xE1lbum como faixa",
       sv: "\xD6ppna albumtitel som egen l\xE5t",
       ru: "\u041E\u0442\u043A\u0440\u044B\u0442\u044C \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u0430\u043B\u044C\u0431\u043E\u043C\u0430 \u043A\u0430\u043A \u0442\u0440\u0435\u043A",
@@ -63911,7 +63911,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       de: "Profilbild von ",
       es: "Avatar para ",
       it: "Avatar di ",
-      pt: "Foto de perfil de",
+      pt: "Foto de perfil de ",
       sv: "Avatar f\xF6r ",
       ru: "\u0410\u0432\u0430\u0442\u0430\u0440 \u0434\u043B\u044F ",
       pl: "Awatar dla "
@@ -64052,7 +64052,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Otherwise guests are neatly placed next to the primary artist",
         de: "Ansonsten werden gefeaturete K\xFCnstler:innen neben dem/der Hauptk\xFCnstler:in platziert",
         es: "De lo contrario, los colaboradores son organizados limpiamente al lado del artista principal",
-        it: "Altrimenti gli artisti partecipanti sono disposti in modo pulito vicino all'artista principale",
+        it: "Altrimenti gli artisti partecipanti sono disposti in modo pulito vicino all\u2019artista principale",
         pt: "Caso contr\xE1rio os convidados s\xE3o organizados de forma elegante ao lado do artista principal",
         sv: "Annars placeras g\xE4startister fint bredvid huvudartisten",
         ru: "\u0412 \u043F\u0440\u043E\u0442\u0438\u0432\u043D\u043E\u043C \u0441\u043B\u0443\u0447\u0430\u0435 \u043F\u0440\u0438\u0433\u043B\u0430\u0448\u0435\u043D\u043D\u044B\u0435 \u0430\u0440\u0442\u0438\u0441\u0442\u044B \u0430\u043A\u043A\u0443\u0440\u0430\u0442\u043D\u043E \u0440\u0430\u0437\u043C\u0435\u0449\u0430\u044E\u0442\u0441\u044F \u0440\u044F\u0434\u043E\u043C \u0441 \u043E\u0441\u043D\u043E\u0432\u043D\u044B\u043C \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u0435\u043C",
@@ -64101,7 +64101,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       name: {
         en: "Album name location",
         es: "Ubicaci\xF3n del nombre del \xE1lbum",
-        it: "Posizione del nome dell'album",
+        it: "Posizione del nome dell\u2019album",
         sv: "Albumtitelsplats",
         ru: "\u0420\u0430\u0441\u043F\u043E\u043B\u043E\u0436\u0435\u043D\u0438\u0435 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u044F \u0430\u043B\u044C\u0431\u043E\u043C\u0430",
         pt: "Localiza\xE7\xE3o do nome do \xE1lbum",
@@ -64110,7 +64110,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       body: {
         en: "Choose which axis to display said album name on",
         es: "Elige en qu\xE9 eje mostrar el nombre del \xE1lbum",
-        it: "Seleziona su quale asse mostrare il nome dell'album",
+        it: "Seleziona su quale asse mostrare il nome dell\u2019album",
         sv: "V\xE4lj vilken axis att visa albumtitel p\xE5",
         ru: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u043E\u0441\u044C, \u043D\u0430 \u043A\u043E\u0442\u043E\u0440\u043E\u0439 \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0442\u044C \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u0430\u043B\u044C\u0431\u043E\u043C\u0430",
         pt: "Escolha em qual eixo exibir o nome do \xE1lbum",
@@ -64148,7 +64148,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       body: {
         en: "Places the track\u2019s associated album name if there\u2019s room",
         es: "Coloca el nombre del \xE1lbum asociado al tema si hay espacio",
-        it: "Inserisce il nome dell'album associato ai brani se c'\xE8 spazio",
+        it: "Inserisce il nome dell\u2019album associato ai brani se c\u2019\xE8 spazio",
         sv: "Placerar l\xE5tens associerade album om det finns plats",
         ru: "\u041E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0435\u0442 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u0441\u0432\u044F\u0437\u0430\u043D\u043D\u043E\u0433\u043E \u0430\u043B\u044C\u0431\u043E\u043C\u0430 \u0442\u0440\u0435\u043A\u0430, \u0435\u0441\u043B\u0438 \u0435\u0441\u0442\u044C \u043C\u0435\u0441\u0442\u043E",
         pt: "Coloca o nome do \xE1lbum associado \xE0 faixa, se houver espa\xE7o",
@@ -64633,7 +64633,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Re-capitalise artists, albums, and tracks based on community contributions",
         de: "Korrigiert die Schreibweise von K\xFCnstler:innen, Alben und Titeln basierend auf Community-Beitr\xE4gen",
         es: "Recapitaliza artista, \xE1lbumes y temas con base en contribuciones de la comunidad",
-        it: "Corregge l'uso delle maiuscole in artisti, album e brani in base alle contribuzioni della comunit\xE0",
+        it: "Corregge l\u2019uso delle maiuscole in artisti, album e brani in base alle contribuzioni della comunit\xE0",
         pt: "Recapitalize artistas, \xE1lbuns e faixas com base nas contribui\xE7\xF5es da comunidade",
         sv: "\xC4ndra kapitalisering p\xE5 artister, album, och l\xE5tar fr\xE5n gemenskapsbidrag",
         ru: "\u0418\u0437\u043C\u0435\u043D\u0438\u0442\u044C \u043D\u0430\u043F\u0438\u0441\u0430\u043D\u0438\u0435 \u0430\u0440\u0442\u0438\u0441\u0442\u043E\u0432, \u0430\u043B\u044C\u0431\u043E\u043C\u043E\u0432 \u0438 \u0442\u0440\u0435\u043A\u043E\u0432 \u043D\u0430 \u043E\u0441\u043D\u043E\u0432\u0435 \u0432\u043A\u043B\u0430\u0434\u0430 \u0441\u043E\u043E\u0431\u0449\u0435\u0441\u0442\u0432\u0430",
@@ -64936,7 +64936,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Profile avatar shape",
         de: "Form des Profilbildes",
         es: "Forma del avatar del perfil",
-        it: "Forma dell'immagine del profilo",
+        it: "Forma dell\u2019immagine del profilo",
         pt: "Formato da imagem de perfil",
         sv: "Profilbildsform",
         ru: "\u0424\u043E\u0440\u043C\u0430 \u0430\u0432\u0430\u0442\u0430\u0440\u0430 \u043F\u0440\u043E\u0444\u0438\u043B\u044F",
@@ -65493,7 +65493,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Deletion will take 14 days to complete, after this time your account will either be deleted, anonymised, or put beyond use and cannot be recovered. Once deleted, your username will no longer be available.",
         de: "Die L\xF6schung dauert 14 Tage. Nach Ablauf dieser Frist wird dein Konto entweder gel\xF6scht, anonymisiert, oder unbrauchbar gemacht und kann nicht wiederhergestellt werden. Nach der L\xF6schung ist dein Benutzername nicht mehr verf\xFCgbar.",
         es: "La eliminaci\xF3n tardar\xE1 14 d\xEDas en completarse. Despu\xE9s de ese periodo, tu cuenta ser\xE1 eliminada, anonimizada, o se pondr\xE1 fuera de uso y no podr\xE1 recuperarse. Una vez eliminada, tu nombre de usuario ya no estar\xE1 disponible.",
-        it: "L'eliminazione impiegher\xE0 14 giorni per essere completata, dopo questo tempo il tuo account sar\xE0 cancellato, anonimizzato o reso inutilizzabile e non potr\xE0 essere recuperato. Una volta eliminato, il tuo username non sar\xE0 pi\xF9 disponibile.",
+        it: "L\u2019eliminazione impiegher\xE0 14 giorni per essere completata, dopo questo tempo il tuo account sar\xE0 cancellato, anonimizzato o reso inutilizzabile e non potr\xE0 essere recuperato. Una volta eliminato, il tuo username non sar\xE0 pi\xF9 disponibile.",
         pt: "A exclus\xE3o levar\xE1 14 dias para ser conclu\xEDda. Ap\xF3s esse per\xEDodo, sua conta ser\xE1 exclu\xEDda, anonimizada ou desativada, e n\xE3o poder\xE1 ser recuperada. Depois de exclu\xEDdo, seu nome de usu\xE1rio n\xE3o estar\xE1 mais dispon\xEDvel.",
         sv: "Det tar 14 dagar att ta bort ditt konto. Efter denna tid blir dit konto antingen borttaget, anonymiserad, eller g\xF6rs oanv\xE4ndbar och kan inte f\xE5s tillbaka. N\xE4r det \xE4r borttaget kan ditt anv\xE4ndarnamn inte bli anv\xE4nt igen.",
         ru: "\u0423\u0434\u0430\u043B\u0435\u043D\u0438\u0435 \u0437\u0430\u0439\u043C\u0435\u0442 14 \u0434\u043D\u0435\u0439. \u041F\u043E \u0438\u0441\u0442\u0435\u0447\u0435\u043D\u0438\u0438 \u044D\u0442\u043E\u0433\u043E \u0432\u0440\u0435\u043C\u0435\u043D\u0438 \u0432\u0430\u0448\u0430 \u0443\u0447\u0435\u0442\u043D\u0430\u044F \u0437\u0430\u043F\u0438\u0441\u044C \u0431\u0443\u0434\u0435\u0442 \u043B\u0438\u0431\u043E \u0443\u0434\u0430\u043B\u0435\u043D\u0430, \u043B\u0438\u0431\u043E \u0430\u043D\u043E\u043D\u0438\u043C\u0438\u0437\u0438\u0440\u043E\u0432\u0430\u043D\u0430, \u043B\u0438\u0431\u043E \u0432\u044B\u0432\u0435\u0434\u0435\u043D\u0430 \u0438\u0437 \u044D\u043A\u0441\u043F\u043B\u0443\u0430\u0442\u0430\u0446\u0438\u0438 \u0438 \u043D\u0435 \u043C\u043E\u0436\u0435\u0442 \u0431\u044B\u0442\u044C \u0432\u043E\u0441\u0441\u0442\u0430\u043D\u043E\u0432\u043B\u0435\u043D\u0430. \u041F\u043E\u0441\u043B\u0435 \u0443\u0434\u0430\u043B\u0435\u043D\u0438\u044F \u0432\u0430\u0448\u0435 \u0438\u043C\u044F \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F \u0431\u043E\u043B\u044C\u0448\u0435 \u043D\u0435 \u0431\u0443\u0434\u0435\u0442 \u0434\u043E\u0441\u0442\u0443\u043F\u043D\u043E."
@@ -65530,7 +65530,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Connect your account to third-party services for a better scrobbling experience. Make sure you trust the services below.",
       es: "Conecta tu cuenta a servicios externos para una mejor experiencia al hacer scrobbling. Aseg\xFArate de que conf\xEDas en los servicios que hay debajo.",
       it: "Connetti il tuo account a servizi di terze parti per una migliore esperienza di scrobbling. Assicurati di fidarti dei servizi che seguono.",
-      sv: "Anslut ditt konto till tredjepartstj\xE4nster f\xF6r b\xE4ttre skrobblingsupplevelse. Var s\xE4ker p\xE5 att du litar p\xE5 nedre tj\xE4nster",
+      sv: "Anslut ditt konto till tredjepartstj\xE4nster f\xF6r b\xE4ttre skrobblingsupplevelse. Var s\xE4ker p\xE5 att du litar p\xE5 nedre tj\xE4nster.",
       ru: "\u041F\u043E\u0434\u043A\u043B\u044E\u0447\u0438\u0442\u0435 \u0441\u0432\u043E\u0439 \u0430\u043A\u043A\u0430\u0443\u043D\u0442 \u043A \u0441\u0442\u043E\u0440\u043E\u043D\u043D\u0438\u043C \u0441\u0435\u0440\u0432\u0438\u0441\u0430\u043C \u0434\u043B\u044F \u043B\u0443\u0447\u0448\u0435\u0433\u043E \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u0438\u043D\u0433\u0430. \u0423\u0431\u0435\u0434\u0438\u0442\u0435\u0441\u044C, \u0447\u0442\u043E \u0432\u044B \u0434\u043E\u0432\u0435\u0440\u044F\u0435\u0442\u0435 \u0443\u043A\u0430\u0437\u0430\u043D\u043D\u044B\u043C \u043D\u0438\u0436\u0435 \u0441\u0435\u0440\u0432\u0438\u0441\u0430\u043C.",
       pt: "Conecte sua conta a servi\xE7os de terceiros para uma melhor experi\xEAncia de scrobbling. Certifique-se de que voc\xEA confia nos servi\xE7os abaixo."
     },
@@ -65583,7 +65583,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Unlock additional API features",
         de: "Schalte zus\xE4tzliche API-Funktionen frei",
         es: "Desbloquea funciones adicionales de API",
-        it: "Sblocca ulteriori funzionalit\xE0 dell'API",
+        it: "Sblocca ulteriori funzionalit\xE0 dell\u2019API",
         pt: "Desbloqueie recursos adicionais da API",
         sv: "L\xE5s upp flera API-funktioner",
         ru: "\u0420\u0430\u0437\u0431\u043B\u043E\u043A\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u0434\u043E\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0435 \u0444\u0443\u043D\u043A\u0446\u0438\u0438 API"
@@ -65592,7 +65592,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Link your account to allow API access such as scrobbling",
         de: "Verkn\xFCpfe dein Konto, um API-Zugriffe wie Scrobbling zu erm\xF6glichen",
         es: "Conecta tu cuenta para permitir el acceso a la API, como el scrobbling",
-        it: "Connetti il tuo account per attivare l'accesso all'API, ad esempio per lo scrobbling",
+        it: "Connetti il tuo account per attivare l\u2019accesso all\u2019API, ad esempio per lo scrobbling",
         pt: "Conecte sua conta para permitir o acesso \xE0 API, como o scrobbling",
         sv: "Koppla ditt konto f\xF6r att till\xE5ta API-\xE5tkomster, som att skrobbla",
         ru: "\u041F\u0440\u0438\u0432\u044F\u0436\u0438\u0442\u0435 \u0441\u0432\u043E\u0439 \u0430\u043A\u043A\u0430\u0443\u043D\u0442, \u0447\u0442\u043E\u0431\u044B \u0440\u0430\u0437\u0440\u0435\u0448\u0438\u0442\u044C \u0434\u043E\u0441\u0442\u0443\u043F \u043A API, \u043D\u0430\u043F\u0440\u0438\u043C\u0435\u0440, \u0434\u043B\u044F \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u0438\u043D\u0433\u0430"
@@ -65690,7 +65690,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Allows the use of line breaks, bold text, italics, and images in all \u201CAbout Me\u201D panels",
         de: "Erm\xF6glicht die Verwendung von Zeilenumbr\xFCchen, fettem Text, Kursivschrift und Bildern in allen \u201E\xDCber mich\u201C-Bereichen",
         es: 'Permite el uso de saltos de l\xEDnea, negrita, cursiva, e im\xE1genes en todos los paneles "Sobre m\xED"',
-        it: `Permette l'uso di interruzioni di linea, grassetto, corsivo e immagini in tutti i pannelli "Informazioni"`,
+        it: 'Permette l\u2019uso di interruzioni di linea, grassetto, corsivo e immagini in tutti i pannelli "Informazioni"',
         pt: "Permite o uso de quebras de linha, texto em negrito, it\xE1lico e imagens em todos os pain\xE9is \u201CSobre mim\u201D",
         sv: "Till\xE5ter radbrytning, fet stil, kursiv stil, och bilder inom alla \u201COm mig\u201D-paneler",
         ru: "\u0420\u0430\u0437\u0440\u0435\u0448\u0430\u0435\u0442 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u043D\u0438\u0435 \u043F\u0435\u0440\u0435\u043D\u043E\u0441\u043E\u0432 \u0441\u0442\u0440\u043E\u043A, \u0436\u0438\u0440\u043D\u043E\u0433\u043E \u0442\u0435\u043A\u0441\u0442\u0430, \u043A\u0443\u0440\u0441\u0438\u0432\u0430 \u0438 \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0439 \u0432\u043E \u0432\u0441\u0435\u0445 \u043F\u0430\u043D\u0435\u043B\u044F\u0445 \xAB\u041E\u0431\u043E \u043C\u043D\u0435\xBB"
@@ -65710,7 +65710,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Allows the use of line breaks, bold text, italics, and images in all shouts",
         de: "Erm\xF6glicht die Verwendung von Zeilenumbr\xFCchen, fettem Text, Kursivschrift und Bildern in allen Shouts",
         es: "Permite el uso de saltos de l\xEDnea, negrita, cursiva, e im\xE1genes en todas las notas",
-        it: "Permette l'uso di interruzioni di linea, grassetto, corsivo e immagini in tutte le note",
+        it: "Permette l\u2019uso di interruzioni di linea, grassetto, corsivo e immagini in tutte le note",
         pt: "Permite o uso de quebras de linha, texto em negrito, it\xE1lico e imagens em todas as caixas de mensagens",
         sv: "Till\xE5ter radbrytning, fet stil, kursiv stil, och bilder inom alla hojtningar",
         ru: "\u0420\u0430\u0437\u0440\u0435\u0448\u0430\u0435\u0442 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u043D\u0438\u0435 \u043F\u0435\u0440\u0435\u043D\u043E\u0441\u043E\u0432 \u0441\u0442\u0440\u043E\u043A, \u0436\u0438\u0440\u043D\u043E\u0433\u043E \u0442\u0435\u043A\u0441\u0442\u0430, \u043A\u0443\u0440\u0441\u0438\u0432\u0430 \u0438 \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0439 \u0432\u043E \u0432\u0441\u0435\u0445 \u0448\u0430\u0443\u0442\u0430\u0445"
@@ -65787,7 +65787,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Welcome to bleh, thank you for installing!<br>You can continue through this quick setup to get you started or skip right to your profile and figure it all out yourself <3",
       de: "Willkommen bei bleh, danke f\xFCr die Installation!<br>Du kannst diesen schnellen Einrichtungsassistenten durchlaufen, um loszulegen, oder direkt zu deinem Profil springen und alles selbst herausfinden <3",
       es: "\xA1Bienvenido a bleh, gracias por instalar!<br>Puedes continuar con la instalaci\xF3n para ayudarte a empezar o puedes saltar directamente a tu perfil y averiguar por ti mismo <3",
-      it: "Benvenuto in bleh, grazie per l'installazione!<br>Puoi continuare con questa veloce configurazione iniziale, oppure saltare direttamente al tuo profilo e scoprire tutto da solo <3",
+      it: "Benvenuto in bleh, grazie per l\u2019installazione!<br>Puoi continuare con questa veloce configurazione iniziale, oppure saltare direttamente al tuo profilo e scoprire tutto da solo <3",
       pt: "Bem-vindo ao bleh, obrigado por instalar!<br>Voc\xEA pode seguir este r\xE1pido guia de configura\xE7\xE3o para come\xE7ar, ou pular direto para seu perfil e descobrir tudo por conta pr\xF3pria <3",
       sv: "V\xE4lkommen till bleh, tack f\xF6r att du har installerat!<br>Du kan forts\xE4tta genom den h\xE4r snabba setupen f\xF6r att starta eller hoppa rakt till din profil och klura ut det helt sj\xE4lv <3",
       ru: "\u0414\u043E\u0431\u0440\u043E \u043F\u043E\u0436\u0430\u043B\u043E\u0432\u0430\u0442\u044C \u0432 bleh, \u0441\u043F\u0430\u0441\u0438\u0431\u043E \u0437\u0430 \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043A\u0443!<br>\u0412\u044B \u043C\u043E\u0436\u0435\u0442\u0435 \u043F\u0440\u043E\u0439\u0442\u0438 \u044D\u0442\u0443 \u0431\u044B\u0441\u0442\u0440\u0443\u044E \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0443, \u0447\u0442\u043E\u0431\u044B \u043D\u0430\u0447\u0430\u0442\u044C, \u0438\u043B\u0438 \u0441\u0440\u0430\u0437\u0443 \u043F\u0435\u0440\u0435\u0439\u0442\u0438 \u043A \u0441\u0432\u043E\u0435\u043C\u0443 \u043F\u0440\u043E\u0444\u0438\u043B\u044E \u0438 \u0440\u0430\u0437\u043E\u0431\u0440\u0430\u0442\u044C\u0441\u044F \u0432\u043E \u0432\u0441\u0435\u043C \u0441\u0430\u043C\u043E\u0441\u0442\u043E\u044F\u0442\u0435\u043B\u044C\u043D\u043E <3"
@@ -66145,7 +66145,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "There was a network error",
       de: "Netzwerkfehler",
       es: "Hubo un error de red",
-      it: "C'\xE8 stato un errore di rete",
+      it: "C\u2019\xE8 stato un errore di rete",
       pt: "Ocorreu um erro de rede",
       sv: "Ett n\xE4tverksfel har intr\xE4ffat",
       ru: "\u041F\u0440\u043E\u0438\u0437\u043E\u0448\u043B\u0430 \u043E\u0448\u0438\u0431\u043A\u0430 \u0441\u0435\u0442\u0438"
@@ -66201,7 +66201,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       body: {
         en: "Sponsors can choose a custom font and shadow style for their profile name",
         es: "Los patrocinadores pueden elegir una fuente y estilo de sombra personalizados para su nombre de perfil",
-        it: "Gli sponsor possono scegliere un font e uno stile d'ombra personalizzato per il loro nome profilo",
+        it: "Gli sponsor possono scegliere un font e uno stile d\u2019ombra personalizzato per il loro nome profilo",
         sv: "Sponsorer kan v\xE4lja valfri typsnitt och skugga f\xF6r deras profilnamn",
         ru: "\u0421\u043F\u043E\u043D\u0441\u043E\u0440\u044B \u043C\u043E\u0433\u0443\u0442 \u0432\u044B\u0431\u0438\u0440\u0430\u0442\u044C \u0441\u043E\u0431\u0441\u0442\u0432\u0435\u043D\u043D\u044B\u0439 \u0448\u0440\u0438\u0444\u0442 \u0438 \u0441\u0442\u0438\u043B\u044C \u0442\u0435\u043D\u0438 \u0434\u043B\u044F \u0438\u043C\u0435\u043D\u0438 \u0432 \u0441\u0432\u043E\u0435\u043C \u043F\u0440\u043E\u0444\u0438\u043B\u0435",
         pt: "Patrocinadores podem escolher uma fonte personalizada e estilo de sombra para o nome do perfil deles"
@@ -66336,7 +66336,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Use your scroll wheel to zoom in and out, click and drag to move the image.",
       de: "Verwende dein Mausrad, um rein- und rauszuzoomen. Klicke und ziehe, um das Bild zu verschieben.",
       es: "Usa la rueda del rat\xF3n para acercar o alejar, haz clic y arrastra para mover la imagen.",
-      it: "Usa la rotella del mouse per ingrandire o rimpicciolire, trascina e rilascia per muovere l'immagine.",
+      it: "Usa la rotella del mouse per ingrandire o rimpicciolire, trascina e rilascia per muovere l\u2019immagine.",
       pt: "Use a scroll do seu mouse para dar zoom in e zoom out, clicar e arrastar para mover a imagem.",
       sv: "Anv\xE4nd ditt scrollhjul f\xF6r att zooma in och ut, klicka och dra f\xF6r att flytta p\xE5 bilden.",
       ru: "\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0439\u0442\u0435 \u043A\u043E\u043B\u0435\u0441\u043E \u043F\u0440\u043E\u043A\u0440\u0443\u0442\u043A\u0438 \u0434\u043B\u044F \u043F\u0440\u0438\u0431\u043B\u0438\u0436\u0435\u043D\u0438\u044F \u0438 \u043E\u0442\u0434\u0430\u043B\u0435\u043D\u0438\u044F, \u043D\u0430\u0436\u043C\u0438\u0442\u0435 \u0438 \u043F\u0435\u0440\u0435\u0442\u0430\u0449\u0438\u0442\u0435, \u0447\u0442\u043E\u0431\u044B \u043F\u0435\u0440\u0435\u043C\u0435\u0441\u0442\u0438\u0442\u044C \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435."
@@ -66452,7 +66452,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Requires extension \u2018{v}\u2019",
       de: "Ben\xF6tigt die Erweiterung \u201E{v}\u201C",
       es: "Requiere la extensi\xF3n \u2018{v}\u2019",
-      it: "Richiede l'estensione \u2018{v}\u2019",
+      it: "Richiede l\u2019estensione \u2018{v}\u2019",
       pt: "Requer extens\xE3o \u2018{v}\u2019",
       sv: "Beh\xF6ver till\xE4gget \u2018{v}\u2019",
       ru: "\u0422\u0440\u0435\u0431\u0443\u0435\u0442\u0441\u044F \u0440\u0430\u0441\u0448\u0438\u0440\u0435\u043D\u0438\u0435 \xAB{v}\xBB"
@@ -66545,7 +66545,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Keep within the range",
       de: "Bleibe innerhalb des Zeichenlimits",
       es: "Mantente dentro del rango",
-      it: "Mantieniti all'interno dell'intervallo",
+      it: "Mantieniti all\u2019interno dell\u2019intervallo",
       pt: "Manter dentro do intervalo",
       sv: "H\xE5ll dig inom gr\xE4nsen",
       ru: "\u041E\u0441\u0442\u0430\u0432\u0430\u0439\u0442\u0435\u0441\u044C \u0432 \u043F\u0440\u0435\u0434\u0435\u043B\u0430\u0445 \u0434\u0438\u0430\u043F\u0430\u0437\u043E\u043D\u0430"
@@ -66721,7 +66721,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Similar to the look of other collage solutions",
         de: "\xC4hnlicher Stil wie andere Collagenl\xF6sungen",
         es: "Similar al estilo visual de otros editores de collage",
-        it: "Simile all'aspetto di altre soluzioni per collage",
+        it: "Simile all\u2019aspetto di altre soluzioni per collage",
         sv: "Mer lik till hur andra collagegenererare g\xF6r det",
         ru: "\u041F\u043E\u0445\u043E\u0436\u0435 \u043D\u0430 \u0432\u043D\u0435\u0448\u043D\u0438\u0439 \u0432\u0438\u0434 \u0434\u0440\u0443\u0433\u0438\u0445 \u0440\u0435\u0448\u0435\u043D\u0438\u0439 \u0434\u043B\u044F \u043A\u043E\u043B\u043B\u0430\u0436\u0435\u0439",
         pt: "Semelhante \xE0 apar\xEAncia de outras solu\xE7\xF5es de colagem"
@@ -66993,7 +66993,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Select an option",
       de: "W\xE4hle eine Option",
       es: "Selecciona una opci\xF3n",
-      it: "Seleziona un'opzione",
+      it: "Seleziona un\u2019opzione",
       pt: "Selecione uma op\xE7\xE3o",
       sv: "V\xE4lj ett alternativ",
       ru: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u0432\u0430\u0440\u0438\u0430\u043D\u0442"
@@ -67298,7 +67298,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Update available to install",
       de: "Ein Update ist bereit zur Installation",
       es: "Actualizaci\xF3n disponible para instalar",
-      it: "Aggiornamento disponibile per l'installazione",
+      it: "Aggiornamento disponibile per l\u2019installazione",
       pt: "Atualiza\xE7\xE3o dispon\xEDvel para instalar",
       sv: "Ny uppdatering finns tillg\xE4nglig",
       ru: "\u0414\u043E\u0441\u0442\u0443\u043F\u043D\u043E \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u0435 \u0434\u043B\u044F \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043A\u0438"
@@ -67472,7 +67472,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Use current time",
       de: "Aktuelle Zeit verwenden",
       es: "Usar hora actual",
-      it: "Usa l'ora attuale",
+      it: "Usa l\u2019ora attuale",
       sv: "Anv\xE4nd nuvarande tid",
       ru: "\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u044C \u0442\u0435\u043A\u0443\u0449\u0435\u0435 \u0432\u0440\u0435\u043C\u044F",
       pt: "Usar hora atual"
@@ -67499,7 +67499,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Requires API access in Settings",
       de: "Erfordert API-Zugang in den Einstellungen",
       es: "Requiere acceso a la API en Configuraci\xF3n",
-      it: "Richiede l'accesso API nelle impostazioni",
+      it: "Richiede l\u2019accesso API nelle impostazioni",
       sv: "Beh\xF6ver API-\xE5tkomst i inst\xE4llningar",
       ru: "\u0422\u0440\u0435\u0431\u0443\u0435\u0442\u0441\u044F \u0434\u043E\u0441\u0442\u0443\u043F \u043A API \u0432 \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0430\u0445",
       pt: "Requer acesso \xE0 API nas Configura\xE7\xF5es"
@@ -67556,7 +67556,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Decreases the intensity of animations, hover effects, and other moving parts",
         de: "Verringert die Intensit\xE4t von Animationen, Hover-Effekten und anderen beweglichen Komponenten",
         es: "Reduce la intensidad de las animaciones, efectos al pasar el cursor, y otras partes m\xF3viles",
-        it: "Riduce l'intensit\xE0 delle animazioni, degli effetti al passare del mouse e di altre parti in movimento",
+        it: "Riduce l\u2019intensit\xE0 delle animazioni, degli effetti al passare del mouse e di altre parti in movimento",
         sv: "Minskar intensiteten av animationer, effekter vid hovring, och andra r\xF6rande delar",
         ru: "\u0423\u043C\u0435\u043D\u044C\u0448\u0430\u0435\u0442 \u0438\u043D\u0442\u0435\u043D\u0441\u0438\u0432\u043D\u043E\u0441\u0442\u044C \u0430\u043D\u0438\u043C\u0430\u0446\u0438\u0439, \u044D\u0444\u0444\u0435\u043A\u0442\u043E\u0432 \u043F\u0440\u0438 \u043D\u0430\u0432\u0435\u0434\u0435\u043D\u0438\u0438 \u0438 \u0434\u0440\u0443\u0433\u0438\u0445 \u0434\u0432\u0438\u0436\u0443\u0449\u0438\u0445\u0441\u044F \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u043E\u0432",
         pt: "Diminui a intensidade das anima\xE7\xF5es, efeitos de hover e outras partes m\xF3veis"
@@ -67603,7 +67603,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Prefer avatar image for profiles without a banner",
         de: "Bevorzuge Profilbild f\xFCr Profile ohne Banner",
         es: "Preferir imagen del avatar para perfiles sin un banner",
-        it: "Preferire l'immagine dell'immagine profilo per profili senza un banner",
+        it: "Preferire l\u2019immagine dell\u2019immagine profilo per profili senza un banner",
         sv: "F\xF6redra profilbild f\xF6r profiler utan en banner",
         ru: "\u041F\u0440\u0435\u0434\u043F\u043E\u0447\u0438\u0442\u0430\u0442\u044C \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435 \u0430\u0432\u0430\u0442\u0430\u0440\u0430 \u0434\u043B\u044F \u043F\u0440\u043E\u0444\u0438\u043B\u0435\u0439 \u0431\u0435\u0437 \u0431\u0430\u043D\u043D\u0435\u0440\u0430",
         pt: "Preferir imagem do avatar para perfis sem banner"
@@ -67612,7 +67612,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "All artist-based banner images will be replaced by the user\u2019s avatar",
         de: "Alle k\xFCnstlerbasierten Bannerbilder werden durch das Profilbild des Benutzers ersetzt",
         es: "Todos los banners con im\xE1genes de artistas ser\xE1n reemplazados por el avatar del usuario",
-        it: "Tutte le immagini banner basate sugli artisti saranno sostituite dall'immagine profilo dell'utente",
+        it: "Tutte le immagini banner basate sugli artisti saranno sostituite dall\u2019immagine profilo dell\u2019utente",
         sv: "Alla artistbaserade bannerbilder blir ers\xE4tt av anv\xE4ndarens profilbild",
         ru: "\u0412\u0441\u0435 \u0431\u0430\u043D\u043D\u0435\u0440\u044B \u043D\u0430 \u043E\u0441\u043D\u043E\u0432\u0435 \u0430\u0440\u0442\u0438\u0441\u0442\u043E\u0432 \u0431\u0443\u0434\u0443\u0442 \u0437\u0430\u043C\u0435\u043D\u0435\u043D\u044B \u0430\u0432\u0430\u0442\u0430\u0440\u043E\u043C \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F",
         pt: "Todas as imagens de banner baseadas em artistas ser\xE3o substitu\xEDdas pelo avatar do usu\xE1rio"
@@ -67662,7 +67662,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Changed your accent, don\u2019t forget to save!",
         de: "Du hast deinen Akzent ge\xE4ndert, vergiss\u2019 nicht zu speichern!",
         es: "Acento cambiado, \xA1no te olvides de guardar!",
-        it: "Hai cambiato l'accento, non dimenticarti di salvare!",
+        it: "Hai cambiato l\u2019accento, non dimenticarti di salvare!",
         sv: "\xC4ndrade din accentf\xE4rg, gl\xF6m inte att spara!",
         ru: "\u0412\u044B \u0438\u0437\u043C\u0435\u043D\u0438\u043B\u0438 \u0430\u043A\u0446\u0435\u043D\u0442, \u043D\u0435 \u0437\u0430\u0431\u0443\u0434\u044C\u0442\u0435 \u0441\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C!",
         pt: "Toque de cor alterado, n\xE3o se esque\xE7a de salvar!"
@@ -67926,7 +67926,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Guess the album from its pixelated artwork and clues",
         de: "Errate das Album anhand des verpixelten Albumcovers und Hinweisen",
         es: "Averigua el \xE1lbum usando su c\xE1ratula pixelada y pistas",
-        it: "Indovina l'album dalla sua copertina pixellata e indizi",
+        it: "Indovina l\u2019album dalla sua copertina pixellata e indizi",
         sv: "Gissa albumet fr\xE5n sin pixellerad konst och ledtr\xE5dar",
         ru: "\u0423\u0433\u0430\u0434\u0430\u0439\u0442\u0435 \u0430\u043B\u044C\u0431\u043E\u043C \u043F\u043E \u0435\u0433\u043E \u043F\u0438\u043A\u0441\u0435\u043B\u044C\u043D\u043E\u043C\u0443 \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u044E \u0438 \u043F\u043E\u0434\u0441\u043A\u0430\u0437\u043A\u0430\u043C",
         pt: "Adivinhe o \xE1lbum a partir de sua arte pixelada e pistas"
@@ -67976,7 +67976,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Generate a personalised image based on your listening history and options",
       de: "Erstelle ein personalisiertes Bild basierend auf deinem H\xF6rverlauf und deinen Einstellungen",
       es: "Genera una imagen personalizada basada en tu historial de reproducciones y opciones",
-      it: "Genera un'immagine personalizzata basata sulla tua cronologia di riproduzione e opzioni",
+      it: "Genera un\u2019immagine personalizzata basata sulla tua cronologia di riproduzione e opzioni",
       sv: "Skapa en personlig bild baserad p\xE5 din lyssningshistoria och inst\xE4llningar",
       ru: "\u0421\u043E\u0437\u0434\u0430\u0442\u044C \u043F\u0435\u0440\u0441\u043E\u043D\u0430\u043B\u0438\u0437\u0438\u0440\u043E\u0432\u0430\u043D\u043D\u043E\u0435 \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435 \u043D\u0430 \u043E\u0441\u043D\u043E\u0432\u0435 \u0432\u0430\u0448\u0435\u0439 \u0438\u0441\u0442\u043E\u0440\u0438\u0438 \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u0439 \u0438 \u043D\u0430\u0441\u0442\u0440\u043E\u0435\u043A",
       pt: "Gere uma imagem personalizada com base no seu hist\xF3rico de reprodu\xE7\xE3o e op\xE7\xF5es"
@@ -68105,7 +68105,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Guess the album name with the pixelated cover, jumbled title, and hints!",
       de: "Errate den Albumtitel mit verpixeltem Cover, durcheinandergew\xFCrfeltem Titel und Hinweisen!",
       es: "\xA1Averigua el nombre del \xE1lbum usando la c\xE1ratula pixelada, t\xEDtulo desordenado, y pistas!",
-      it: "Indovina il nome dell'album con la cover pixellata, il titolo distorto, e indizi!",
+      it: "Indovina il nome dell\u2019album con la cover pixellata, il titolo distorto, e indizi!",
       pt: "Adivinhe o nome do \xE1lbum com a capa pixelada, t\xEDtulo embaralhado e dicas!",
       sv: "Gissa albumtiteln med pixellerad konst, omr\xF6rd titel, och ledtr\xE5dar!",
       ru: "\u0423\u0433\u0430\u0434\u0430\u0439\u0442\u0435 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u0430\u043B\u044C\u0431\u043E\u043C\u0430 \u043F\u043E \u043F\u0438\u043A\u0441\u0435\u043B\u044C\u043D\u043E\u043C\u0443 \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u044E, \u043F\u0435\u0440\u0435\u043F\u0443\u0442\u0430\u043D\u043D\u043E\u043C\u0443 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u044E \u0438 \u043F\u043E\u0434\u0441\u043A\u0430\u0437\u043A\u0430\u043C!"
@@ -68176,7 +68176,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Album was released on {v}",
         de: "Das Album wurde am {v} ver\xF6ffentlicht",
         es: "El {\xE1lbum} fue lanzado en {v}",
-        it: "L'album \xE8 stato rilasciato il {v}",
+        it: "L\u2019album \xE8 stato rilasciato il {v}",
         pt: "O \xE1lbum foi lan\xE7ado em {v}",
         sv: "Albumet sl\xE4pptes {v}",
         ru: "\u0410\u043B\u044C\u0431\u043E\u043C \u0431\u044B\u043B \u0432\u044B\u043F\u0443\u0449\u0435\u043D {v}"
@@ -68185,7 +68185,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "The artist is tagged with {v}",
         de: "Der/die K\xFCnstler:in ist mit {v} getaggt",
         es: "El artista tiene {v} como tags",
-        it: "L'artista \xE8 taggato come {v}",
+        it: "L\u2019artista \xE8 taggato come {v}",
         pt: "O artista foi marcado com {v}",
         sv: "Artisten har taggats som {v}",
         ru: "\u0418\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C \u043E\u0442\u043C\u0435\u0447\u0435\u043D \u0442\u0435\u0433\u043E\u043C {v}"
@@ -68194,7 +68194,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "The artist was born {v}",
         de: "Der/die K\xFCnstler:in wurde {v} geboren",
         es: "El artista naci\xF3 en {v}",
-        it: "L'artista \xE8 nato il {v}",
+        it: "L\u2019artista \xE8 nato il {v}",
         pt: "O artista nasceu em {v}",
         sv: "Artisten var f\xF6dd {v}",
         ru: "\u0418\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C \u0440\u043E\u0434\u0438\u043B\u0441\u044F {v}"
@@ -68204,7 +68204,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "The album was {name} by {artist}",
       de: "Das Album war {name} von {artist}",
       es: "El \xE1lbum era {name} por {artist}",
-      it: "Il nome dell'album era {name} di {artist}",
+      it: "Il nome dell\u2019album era {name} di {artist}",
       pt: "O \xE1lbum era {name} de {artist}",
       sv: "Albumet var {name} av {artist}",
       ru: "\u0410\u043B\u044C\u0431\u043E\u043C\u043E\u043C \u0431\u044B\u043B {name} \u043E\u0442 {artist}"
@@ -68266,7 +68266,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       // notifications can include text with valuable info such as:
       // and 7 others replied to your shout on
       // this is searching for the word "replied"
-      // dont re-translate this, as its copied from last.fm
+      // >> dont re-translate this, as its copied from last.fm
       en: "replied",
       de: "hat geantwortet",
       fr: "a r\xE9pondu",
@@ -68422,7 +68422,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Decide which branding source to use for the header",
         de: "W\xE4hle aus, welches Branding f\xFCr die Kopfzeile verwendet werden soll",
         es: "Elige cu\xE1l logo usar para el encabezado",
-        it: "Decidi quale sorgente di branding utilizzare per l'intestazione",
+        it: "Decidi quale sorgente di branding utilizzare per l\u2019intestazione",
         pt: "Escolha qual logo usar para o cabe\xE7alho",
         sv: "V\xE4lj vilken sorts branding f\xF6r att anv\xE4nda p\xE5 sidhuvudet",
         ru: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435, \u043A\u0430\u043A\u043E\u0439 \u0438\u0441\u0442\u043E\u0447\u043D\u0438\u043A \u0431\u0440\u0435\u043D\u0434\u0438\u043D\u0433\u0430 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u044C \u0434\u043B\u044F \u0437\u0430\u0433\u043E\u043B\u043E\u0432\u043A\u0430"
@@ -68461,7 +68461,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Control animation of GIFs",
       de: "Steuere die Animation von GIFs",
       es: "Controlar animaci\xF3n de GIFs",
-      it: "Controlla l'animazione di GIF",
+      it: "Controlla l\u2019animazione di GIF",
       pt: "Controlar anima\xE7\xE3o de GIFs",
       sv: "Kontrollera GIF-animation",
       ru: "\u0423\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435 \u0430\u043D\u0438\u043C\u0430\u0446\u0438\u0435\u0439 GIF"
@@ -68572,7 +68572,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "This link can open an application on your device",
         de: "Dieser Link kann eine Anwendung auf deinem Ger\xE4t \xF6ffnen",
         es: "Este link puede abrir una aplicaci\xF3n en tu dispositivo",
-        it: "Questo link pu\xF2 aprire un'applicazione sul tuo dispositivo",
+        it: "Questo link pu\xF2 aprire un\u2019applicazione sul tuo dispositivo",
         pt: "Este link pode abrir um aplicativo no seu dispositivo",
         sv: "L\xE4nken kan \xF6ppna en applikation p\xE5 din enhet",
         ru: "\u042D\u0442\u0430 \u0441\u0441\u044B\u043B\u043A\u0430 \u043C\u043E\u0436\u0435\u0442 \u043E\u0442\u043A\u0440\u044B\u0442\u044C \u043F\u0440\u0438\u043B\u043E\u0436\u0435\u043D\u0438\u0435 \u043D\u0430 \u0432\u0430\u0448\u0435\u043C \u0443\u0441\u0442\u0440\u043E\u0439\u0441\u0442\u0432\u0435"
@@ -68654,7 +68654,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       body: {
         en: "Choose which service to use when interacting with playables across the site",
         es: "Elige cu\xE1l servicio usar al interactuar con elementos reproducibles a trav\xE9s del sitio",
-        it: "Seleziona quale servizio utilizzare all'interazione con elementi riproducibili in tutto il sito",
+        it: "Seleziona quale servizio utilizzare all\u2019interazione con elementi riproducibili in tutto il sito",
         sv: "V\xE4lj vilken service att anv\xE4nda n\xE4r du spelar upp l\xE5tar",
         ru: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435, \u043A\u0430\u043A\u043E\u0439 \u0441\u0435\u0440\u0432\u0438\u0441 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u044C \u043F\u0440\u0438 \u0432\u0437\u0430\u0438\u043C\u043E\u0434\u0435\u0439\u0441\u0442\u0432\u0438\u0438 \u0441 \u0432\u043E\u0441\u043F\u0440\u043E\u0438\u0437\u0432\u043E\u0434\u0438\u043C\u044B\u043C \u043A\u043E\u043D\u0442\u0435\u043D\u0442\u043E\u043C \u043D\u0430 \u0441\u0430\u0439\u0442\u0435",
         pt: "Escolha qual servi\xE7o usar ao interagir com elementos reproduz\xEDveis em todo o site"
@@ -68702,7 +68702,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "You need to be logged in",
       de: "Du musst eingeloggt sein",
       es: "Necesitas iniciar sesi\xF3n",
-      it: "Devi aver effettuato l'accesso",
+      it: "Devi aver effettuato l\u2019accesso",
       pt: "Voc\xEA precisa estar logado",
       sv: "Du l\xE4r vara inloggad",
       ru: "\u0412\u0430\u043C \u043D\u0435\u043E\u0431\u0445\u043E\u0434\u0438\u043C\u043E \u0432\u043E\u0439\u0442\u0438 \u0432 \u0441\u0438\u0441\u0442\u0435\u043C\u0443"
@@ -68756,7 +68756,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "A redesigned album and track view sourcing data from MusicBrainz. May be released in the future or scrapped. Please send feedback from usage.",
         de: "Eine neu gestaltete Album- und Titelseite, die Daten von MusicBrainz bezieht. Kann in Zukunft ver\xF6ffentlicht oder verworfen werden. Bitte sende Feedback basierend auf deiner Nutzung.",
         es: "Un estilo redise\xF1ado de \xE1lbumes y temas usando datos provenientes de MusicBrainz. Puede ser lanzado en un futuro o ser descartado. Por favor env\xEDa feedback de uso.",
-        it: "Una vista per album e brani ridisegnata che attinge ai dati di MusicBrainz. Potrebbe essere rilasciata in futuro o scartata. Per favore inviate del feedback dall'utilizzo.",
+        it: "Una vista per album e brani ridisegnata che attinge ai dati di MusicBrainz. Potrebbe essere rilasciata in futuro o scartata. Per favore inviate del feedback dall\u2019utilizzo.",
         pt: "Um estilo redesenhado de \xE1lbuns e faixas que utiliza dados do MusicBrainz. Pode ser lan\xE7ado no futuro ou descartado. Por favor, envie feedback sobre o uso.",
         sv: "Omdesignade album och l\xE5tsidor med data fr\xE5n MusicBrainz. Kan sl\xE4ppas eller skr\xE4pas i framtiden. Skicka g\xE4rna feedback fr\xE5n anv\xE4ndning.",
         ru: "\u041E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u043D\u044B\u0439 \u0432\u0438\u0434 \u0430\u043B\u044C\u0431\u043E\u043C\u043E\u0432 \u0438 \u0442\u0440\u0435\u043A\u043E\u0432, \u043F\u043E\u043B\u0443\u0447\u0430\u044E\u0449\u0438\u0439 \u0434\u0430\u043D\u043D\u044B\u0435 \u0438\u0437 MusicBrainz. \u041C\u043E\u0436\u0435\u0442 \u0431\u044B\u0442\u044C \u0432\u044B\u043F\u0443\u0449\u0435\u043D \u0432 \u0431\u0443\u0434\u0443\u0449\u0435\u043C \u0438\u043B\u0438 \u043E\u0442\u043C\u0435\u043D\u0435\u043D. \u041F\u043E\u0436\u0430\u043B\u0443\u0439\u0441\u0442\u0430, \u043E\u0442\u043F\u0440\u0430\u0432\u043B\u044F\u0439\u0442\u0435 \u043E\u0442\u0437\u044B\u0432\u044B \u043E\u0431 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u043D\u0438\u0438."
@@ -68923,6 +68923,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       ru: "\u041A\u0440\u0435\u0434\u0438\u0442\u044B \u0434\u043B\u044F {v}"
     },
     branch: {
+      // as in git branches
       name: {
         en: "Choose branch",
         es: "Elegir rama",
@@ -69062,7 +69063,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     now_notice: {
       name: {
         en: "This page is not properly supported in bleh, but..",
-        es: "Esta p\xE1gina no es compatible con bleh, pero... ",
+        es: "Esta p\xE1gina no es compatible con bleh, pero...",
         ru: "\u042D\u0442\u043E \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u0430 \u043D\u0435 \u043F\u043E\u0434\u0434\u0435\u0440\u0436\u0438\u0432\u0430\u0435\u0442\u0441\u044F \u0432 bleh, \u043D\u043E..."
       },
       body: {
