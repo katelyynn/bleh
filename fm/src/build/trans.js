@@ -53,8 +53,8 @@ export let lang_info = {
     },
     ru: {
         name: 'Русский',
-        by: ['crawqxx'],
-        last_updated: '2025-11-05'
+        by: ['crawqxx', 'techplayz32'],
+        last_updated: '2025-12-16'
     }
 };
 
@@ -1612,7 +1612,8 @@ export const trans = {
         exclusive: {
             en: 'Limited time',
             es: 'Tiempo limitado',
-            pt: 'Tempo limitado'
+            pt: 'Tempo limitado',
+            ru: 'Ограниченное время'
         }
     },
     new_season: {
@@ -3249,7 +3250,8 @@ export const trans = {
         en: 'Copy text',
         es: 'Copiar texto',
         it: 'Copia testo',
-        pt: 'Copiar texto'
+        pt: 'Copiar texto',
+        ru: 'Скопировать текст'
     },
     copy_username: {
         en: 'Copy username',
@@ -3290,7 +3292,8 @@ export const trans = {
     paste: {
         en: 'Paste',
         es: 'Pegar',
-        pt: 'Colar'
+        pt: 'Colar',
+        ru: 'Вставить'
     },
     paste_text: {
         en: 'Paste text',
@@ -3300,17 +3303,20 @@ export const trans = {
     undo: {
         en: 'Undo',
         es: 'Deshacer',
-        pt: 'Desfazer'
+        pt: 'Desfazer',
+        ru: 'Отменить'
     },
     redo: {
         en: 'Redo',
         es: 'Rehacer',
-        pt: 'Refazer'
+        pt: 'Refazer',
+        ru: 'Повторить'
     },
     pasted_text: {
         en: 'Pasted text',
         es: 'Texto pegado',
-        pt: 'Texto colado'
+        pt: 'Texto colado',
+        ru: 'Вставленный текст'
     },
     wiki_standard_tracks: {
         en: 'Track titles should be wrapped in quotation marks (“ ”)',
@@ -3971,12 +3977,14 @@ export const trans = {
         es: 'Ver imagen no segura',
         it: 'Mostra immagine non sicura',
         pt: 'Visualizar imagem não segura',
+        ru: 'Просмотреть небезопасное изображение'
     },
     open_link: {
         en: 'Open link',
         es: 'Abrir vínculo',
         it: 'Apri link',
-        pt: 'Abrir link'
+        pt: 'Abrir link',
+        ru: 'Открыть ссылку'
     },
     event_cancelled: {
         // obviously remove the emoji or replace it as
@@ -8830,14 +8838,16 @@ export const trans = {
         en: 'Your recent 30 days',
         es: 'Tus últimos 30 días',
         it: 'I tuoi ultimi 30 giorni',
-        pt: 'Seus últimos 30 dias'
+        pt: 'Seus últimos 30 dias',
+        ru: 'Ваши последние 30 дней'
     },
     value_this_month: {
         // number of scrobbles
         en: '{v} this month',
         es: '{v} este mes',
         it: '{v} questo mese',
-        pt: '{v} este mês'
+        pt: '{v} este mês',
+        ru: '{v} этот месяц'
     },
     menu_replacement: {
         name: {
@@ -8845,6 +8855,7 @@ export const trans = {
             es: 'Reemplazar menús de clic derecho nativos del navegador',
             it: 'Sostituisci i menu contestuali nativi del browser',
             pt: 'Substituir menus de clique direito nativos do navegador',
+            ru: 'Заменить встроенные меню правой кнопки мыши браузера'
         },
         body: {
             en: 'Provide bleh context-specific actions when right-clicking',
@@ -8857,13 +8868,15 @@ export const trans = {
         en: 'You have new badges!',
         es: '¡Tienes nuevos emblemas!',
         it: 'Hai dei nuovi distintivi!',
-        pt: 'Você tem novas insígnias!'
+        pt: 'Você tem novas insígnias!',
+        ru: 'У вас есть новые значки!'
     },
     translator: {
         name: {
             en: 'Show translator tools',
             es: 'Mostrar herramientas de traducción',
-            pt: 'Mostrar ferramentas de tradução'
+            pt: 'Mostrar ferramentas de tradução',
+            ru: 'Показать инструменты переводчика'
         },
         body: {
             en: 'View expanded details on all languages for use when translating',
@@ -8874,7 +8887,8 @@ export const trans = {
     translate: {
         en: 'Translate',
         es: 'Traducir',
-        pt: 'Traduza'
+        pt: 'Traduza',
+        ru: 'Перевести'
     },
     translation_key: {
         // a key such as 'you_have_new_badges' above
@@ -8885,30 +8899,35 @@ export const trans = {
     original: {
         en: 'Original',
         es: 'Original',
-        pt: 'Original'
+        pt: 'Original',
+        ru: 'Оригинал'
     },
     user_is_listening_to: {
         // (claire) is listening to
         // (song name)
         en: '{u} is listening to',
         es: '{u} está escuchando',
-        pt: '{u} está ouvindo'
+        pt: '{u} está ouvindo',
+        ru: '{u} слушает'
     },
     user_listened_time: {
         // (claire) listened (5 hours ago)
         // (song name)
         en: '{u} listened {time}',
         es: '{u} escuchó {time} a',
-        pt: '{u} ouviu há {time}'
+        pt: '{u} ouviu há {time}',
+        ru: '{u} послушал {time}'
     },
     now_notice: {
         name: {
             en: 'This page is not properly supported in bleh, but..',
-            es: 'Esta página no es compatible con bleh, pero... '
+            es: 'Esta página no es compatible con bleh, pero... ',
+            ru: 'Это страница не поддерживается в bleh, но...'
         },
         body: {
             en: 'If you are a Last.fm Pro subscriber, you can view your current active track in your profile menu at all times',
-            es: 'Si eres un suscriptor de Last.fm Pro, puedes ver tu tema activo actual en el menú de tu perfil en cualquier momento'
+            es: 'Si eres un suscriptor de Last.fm Pro, puedes ver tu tema activo actual en el menú de tu perfil en cualquier momento',
+            ru: 'Если вы являетесь подписчиком Last.fm Pro, вы можете в любое время просматривать текущий активный трек в меню своего профиля.'
         }
     }
 };
