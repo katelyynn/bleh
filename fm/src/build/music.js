@@ -163,7 +163,10 @@ export let includes = {
         '[pa version',
         '- u.s. pa version',
         '(u.s. pa version',
-        '[u.s. pa version'
+        '[u.s. pa version',
+        '- main',
+        '(main',
+        '[main'
     ],
     remasters: [
         '- remaster',
@@ -632,7 +635,22 @@ export let includes = {
         '[anime',
         '- game edit',
         '(game edit',
-        '[game edit'
+        '[game edit',
+        '- tvd mix',
+        '(tvd mix',
+        '[tvd mix',
+        '- dance club remix',
+        '(dance club remix',
+        '[dance club remix',
+        '- flying lotus remix',
+        '(flying lotus remix',
+        '[flying lotus remix',
+        '- sports bar remix',
+        '(sports bar remix',
+        '[sports bar remix',
+        '- rough mix',
+        '(rough mix',
+        '[rough mix'
     ],
     mixes_numbers: [
         '(v1',
@@ -975,7 +993,10 @@ export let includes = {
         '(including',
         '- poem',
         '(poem',
-        '[poem'
+        '[poem',
+        '- hidden',
+        '(hidden',
+        '[hidden'
     ],
     form: ['(clean', '[clean', '(explicit', '[explicit', '(spotify)', '🅴']
 };
