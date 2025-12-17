@@ -3416,26 +3416,6 @@
                 }
             }
 
-            .bleh--nav-wrap .navlist,
-            .redesigned-navigation {
-                @media (max-width: 980px) {
-                    width: var(--cards-width) !important;
-                    padding: unset !important;
-                    margin-left: unset !important;
-                    margin-right: unset !important;
-
-                    .navlist-items {
-                        overflow-x: auto !important;
-                        overflow-y: hidden !important;
-                        margin-bottom: 0 !important;
-                    }
-                }
-
-                .navlist-items {
-                    margin: unset;
-                }
-            }
-
             & > .redesigned-content-top:not(.listening-report-navlist) {
                 margin-top: unset !important;
 
