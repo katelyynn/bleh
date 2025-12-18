@@ -1,5 +1,5 @@
 {
-    "latest": "2025.1216",
+    "latest": "2025.1218",
     "sponsors": [
         "clairedoll", "kateshapedbox", "evangelicgirl",
         "astrablooms", "ItsProyal", "vwvwvwvwvwvwv", "Orofil",
@@ -12,7 +12,7 @@
         "goldenstuffed", "satisfeita", "kar1x", "nojonsko",
         "urwq", "driftpsalm", "popcorniscrazy", "s0540a",
         "dylandotat", "Angel0Lust", "liminelle", "quikwise",
-        "BosozokuGF", "tainaronian", "NozomiBear"
+        "BosozokuGF", "tainaronian", "NozomiBear", "nin0dev"
     ],
     "sponsors_one_time": [
         "kateshapedbox",
@@ -535,6 +535,9 @@
                 "sat": 0.63,
                 "lit": 0.92
             }
-        ]
+        ],
+        "nin0dev": {
+            "type": "sponsor"
+        }
     }
 }
