@@ -33060,13 +33060,27 @@
       create_profile_top_item(profile_header, {
         name: page.name,
         type: "edit",
+        text: tl2(trans.edit_profile),
         link: `${root}settings`
+      });
+      create_profile_top_item(profile_header, {
+        name: page.name,
+        type: "collage",
+        link: `${root}bleh/minis/collage`,
+        text: tl2(trans.create_collage)
+      });
+      create_profile_top_item(profile_header, {
+        name: page.name,
+        type: "obsession",
+        text: tl2(trans.set_obsession),
+        link: `${root}user/${page.name}/obsessions/set`
       });
       if (ff("minis")) {
         create_profile_top_item(profile_header, {
           name: page.name,
           type: "minis",
-          link: `${root}bleh/minis`
+          link: `${root}bleh/minis`,
+          text: tl2(trans.explore_minis)
         });
       } else {
         create_profile_top_item(profile_header, {
@@ -33077,21 +33091,7 @@
                     <strong>${tl2(trans.labs_by_last)}</strong>
                     <p>${tl2(trans.labs_by_last.tagline)}</p>
                 `,
-          tooltip_style: "stack",
-          allow_html: true
-        });
-      }
-      create_profile_top_item(profile_header, {
-        name: page.name,
-        type: "obsession",
-        link: `${root}user/${page.name}/obsessions/set`
-      });
-      if (ff("charts")) {
-        create_profile_top_item(profile_header, {
-          name: page.name,
-          type: "collage",
-          link: `${root}bleh/minis/collage`,
-          text: tl2(trans.collage)
+          tooltip_style: "stack"
         });
       }
     }
@@ -33231,7 +33231,7 @@
                 data-type=${type}
                 onclick=${link}
             >
-                ${tl2(trans[type])}
+                ${text4 || tl2(trans[type])}
                 ${new_release ? html.node`<div class="new-badge">${tl2(trans.new)}</div>` : ""}
                 ${updated ? html.node`<div class="new-badge">${tl2(trans.updated)}</div>` : ""}
             </button>
@@ -33243,7 +33243,7 @@
                 data-type=${type}
                 href=${link}
             >
-                ${tl2(trans[type])}
+                ${text4 || tl2(trans[type])}
                 ${new_release ? html.node`<div class="new-badge">${tl2(trans.new)}</div>` : ""}
                 ${updated ? html.node`<div class="new-badge">${tl2(trans.updated)}</div>` : ""}
             </a>
@@ -46450,9 +46450,10 @@
         interact_container.removeChild(button2.parentElement);
       if (button2.classList[1] == "header-new-love-button") {
         button2.setAttribute("data-type", "love");
-        button2.appendChild(html.node`
-                <span>${tl2(trans.love_track)}</span>
-            `);
+        button2.textContent = tl2(trans.love_track);
+      } else if (button2.classList[1] == "header-new-bookmark-button") {
+        button2.setAttribute("data-type", "bookmark");
+        button2.textContent = tl2(trans.bookmark_item, { v: tl2(trans[`${page.type}_lower`]) });
       }
     });
     let links = interact_container.querySelectorAll("a");
@@ -46468,7 +46469,7 @@
       let obsession_btn = obsession_form.querySelector("button");
       obsession_btn.classList = "btn side-action";
       obsession_btn.setAttribute("data-type", "obsession");
-      obsession_btn.textContent = tl2(trans.obsession);
+      obsession_btn.textContent = tl2(trans.set_obsession);
       interact_container.appendChild(obsession_form);
     }
     if (ff("submit_scrobble")) {
@@ -53673,6 +53674,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           let action = btn.getAttribute("data-analytics-action");
           if (btn.getAttribute("data-type") == "love") {
             btn.textContent = tl2(trans.love_track);
+          } else if (btn.getAttribute("data-type") == "bookmark") {
+            btn.textContent = tl2(trans.bookmark_item, { v: tl2(trans[`${page.type}_lower`]) });
           }
           register_activity(
             action == "LoveTrack" ? "love" : "unlove",
@@ -60155,7 +60158,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       ru: "\u041D\u0435\u0434\u043E\u0441\u0442\u0443\u043F\u043D\u043E",
       pl: "Niedost\u0119pne"
     },
-    set_obsession: {
+    obsess: {
       en: "Obsess",
       de: "Obsessen",
       es: "Obsesionar",
@@ -60165,6 +60168,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       sv: "Besatthet",
       ru: "\u0417\u0430\u0432\u0438\u0441\u0438\u043C\u043E\u0441\u0442\u044C",
       pl: "Ustaw obsesj\u0119"
+    },
+    set_obsession: {
+      en: "Set obsession"
     },
     obsession_first: {
       en: "First to claim this obsession!",
@@ -61627,6 +61633,10 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       sv: "Bokm\xE4rken",
       ru: "\u0417\u0430\u043A\u043B\u0430\u0434\u043A\u0438",
       pl: "Zak\u0142adki"
+    },
+    bookmark_item: {
+      // bookmark track/artist/album
+      en: "Bookmark {v}"
     },
     charts: {
       en: "Charts",
@@ -67019,6 +67029,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       sv: "Inga resultat matchar din s\xF6kning",
       ru: "\u041D\u0438\u0447\u0435\u0433\u043E \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D\u043E \u043F\u043E \u0432\u0430\u0448\u0435\u043C\u0443 \u0437\u0430\u043F\u0440\u043E\u0441\u0443"
     },
+    create_collage: {
+      en: "Create collage"
+    },
     create_a_collage: {
       en: "Create a collage of your choosing",
       de: "Erstelle eine Collage deiner Wahl",
@@ -67905,6 +67918,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       sv: "Mini",
       ru: "\u041C\u0438\u043D\u0438",
       pt: "Minis"
+    },
+    explore_minis: {
+      en: "Explore minis"
     },
     minis_description: {
       en: "Play mini-games, puzzles, and interact with tools all powered by your listening history",

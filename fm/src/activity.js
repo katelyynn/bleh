@@ -171,6 +171,8 @@ export function subscribe_to_events() {
 
                 if (btn.getAttribute('data-type') == 'love') {
                     btn.textContent = tl(trans.love_track);
+                } else if (btn.getAttribute('data-type') == 'bookmark') {
+                    btn.textContent = tl(trans.bookmark_item, { v: tl(trans[`${page.type}_lower`]) });
                 }
 
                 register_activity(

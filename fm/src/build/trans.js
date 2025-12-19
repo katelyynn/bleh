@@ -544,7 +544,7 @@ export const trans = {
         ru: 'Недоступно',
         pl: 'Niedostępne'
     },
-    set_obsession: {
+    obsess: {
         en: 'Obsess',
         de: 'Obsessen',
         es: 'Obsesionar',
@@ -553,6 +553,9 @@ export const trans = {
         sv: 'Besatthet',
         ru: 'Зависимость',
         pl: 'Ustaw obsesję'
+    },
+    set_obsession: {
+        en: 'Set obsession'
     },
     obsession_first: {
         en: 'First to claim this obsession!',
@@ -2010,6 +2013,10 @@ export const trans = {
         sv: 'Bokmärken',
         ru: 'Закладки',
         pl: 'Zakładki'
+    },
+    bookmark_item: {
+        // bookmark track/artist/album
+        en: 'Bookmark {v}'
     },
     charts: {
         en: 'Charts',
@@ -7400,6 +7407,9 @@ export const trans = {
         sv: 'Inga resultat matchar din sökning',
         ru: 'Ничего не найдено по вашему запросу'
     },
+    create_collage: {
+        en: 'Create collage'
+    },
     create_a_collage: {
         en: 'Create a collage of your choosing',
         de: 'Erstelle eine Collage deiner Wahl',
@@ -8285,6 +8295,9 @@ export const trans = {
         sv: 'Mini',
         ru: 'Мини',
         pt: 'Minis'
+    },
+    explore_minis: {
+        en: 'Explore minis'
     },
     minis_description: {
         en: 'Play mini-games, puzzles, and interact with tools all powered by your listening history',

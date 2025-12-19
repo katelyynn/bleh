@@ -454,9 +454,10 @@ export async function show_your_scrobbles() {
 
         if (button.classList[1] == 'header-new-love-button') {
             button.setAttribute('data-type', 'love');
-            button.appendChild(html.node`
-                <span>${tl(trans.love_track)}</span>
-            `);
+            button.textContent = tl(trans.love_track);
+        } else if (button.classList[1] == 'header-new-bookmark-button') {
+            button.setAttribute('data-type', 'bookmark');
+            button.textContent = tl(trans.bookmark_item, { v: tl(trans[`${page.type}_lower`]) });
         }
     });
     let links = interact_container.querySelectorAll('a');
@@ -474,7 +475,7 @@ export async function show_your_scrobbles() {
         let obsession_btn = obsession_form.querySelector('button');
         obsession_btn.classList = 'btn side-action';
         obsession_btn.setAttribute('data-type', 'obsession');
-        obsession_btn.textContent = tl(trans.obsession);
+        obsession_btn.textContent = tl(trans.set_obsession);
 
         interact_container.appendChild(obsession_form);
     }

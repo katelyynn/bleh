@@ -157,13 +157,28 @@ export function redesign_profile_header(is_own_profile, is_following) {
         create_profile_top_item(profile_header, {
             name: page.name,
             type: 'edit',
+            text: tl(trans.edit_profile),
             link: `${root}settings`
         });
+        create_profile_top_item(profile_header, {
+            name: page.name,
+            type: 'collage',
+            link: `${root}bleh/minis/collage`,
+            text: tl(trans.create_collage)
+        });
+        create_profile_top_item(profile_header, {
+            name: page.name,
+            type: 'obsession',
+            text: tl(trans.set_obsession),
+            link: `${root}user/${page.name}/obsessions/set`
+        });
+
         if (ff('minis')) {
             create_profile_top_item(profile_header, {
                 name: page.name,
                 type: 'minis',
-                link: `${root}bleh/minis`
+                link: `${root}bleh/minis`,
+                text: tl(trans.explore_minis)
             });
         } else {
             create_profile_top_item(profile_header, {
@@ -174,22 +189,7 @@ export function redesign_profile_header(is_own_profile, is_following) {
                     <strong>${tl(trans.labs_by_last)}</strong>
                     <p>${tl(trans.labs_by_last.tagline)}</p>
                 `,
-                tooltip_style: 'stack',
-                allow_html: true
-            });
-        }
-        create_profile_top_item(profile_header, {
-            name: page.name,
-            type: 'obsession',
-            link: `${root}user/${page.name}/obsessions/set`
-        });
-
-        if (ff('charts')) {
-            create_profile_top_item(profile_header, {
-                name: page.name,
-                type: 'collage',
-                link: `${root}bleh/minis/collage`,
-                text: tl(trans.collage)
+                tooltip_style: 'stack'
             });
         }
     }
@@ -348,7 +348,7 @@ export function create_profile_top_item(
                 data-type=${type}
                 onclick=${link}
             >
-                ${tl(trans[type])}
+                ${text || tl(trans[type])}
                 ${new_release ? html.node`<div class="new-badge">${tl(trans.new)}</div>` : ''}
                 ${updated ? html.node`<div class="new-badge">${tl(trans.updated)}</div>` : ''}
             </button>
@@ -360,7 +360,7 @@ export function create_profile_top_item(
                 data-type=${type}
                 href=${link}
             >
-                ${tl(trans[type])}
+                ${text || tl(trans[type])}
                 ${new_release ? html.node`<div class="new-badge">${tl(trans.new)}</div>` : ''}
                 ${updated ? html.node`<div class="new-badge">${tl(trans.updated)}</div>` : ''}
             </a>
