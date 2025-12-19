@@ -266,37 +266,47 @@ export function redesign_profile_header(is_own_profile, is_following) {
                 content: html.node`
                     <h4 class="menu-header">${tl(trans.compare_plays)}</h4>
                     <a class="dropdown-menu-clickable-item" href="${root}user/${page.name}/library/music/${redirect()}${sanitise(taste_artists[0])}" data-menu-item="shared-artist">
-                        <img class="view-item-avatar" src=${other_avi} alt="${page.name}">${taste_artists[0]}
+                        <span class="menu-avatar">
+                            <img src=${other_avi} alt=${page.name}>
+                        </span>
+                        ${taste_artists[0]}
                     </a>
                     <a class="dropdown-menu-clickable-item" href="${root}user/${auth.name}/library/music/${redirect()}${sanitise(taste_artists[0])}" data-menu-item="shared-artist">
-                        <img class="view-item-avatar" src=${auth.avatar} alt="${auth.name}">${taste_artists[0]}
+                        <span class="menu-avatar">
+                            <img src=${auth.avatar} alt=${auth.name}>
+                        </span>
+                        ${taste_artists[0]}
                     </a>
-                    ${
-                        taste_artists.length >= 2 ?
-                            html.node`
+                    ${taste_artists.length >= 2 ? html.node`
                     <div class="sep"></div>
                     <a class="dropdown-menu-clickable-item" href="${root}user/${page.name}/library/music/${redirect()}${sanitise(taste_artists[1])}" data-menu-item="shared-artist">
-                        <img class="view-item-avatar" src=${other_avi} alt="${page.name}">${taste_artists[1]}
+                        <span class="menu-avatar">
+                            <img src=${other_avi} alt=${page.name}>
+                        </span>
+                        ${taste_artists[1]}
                     </a>
                     <a class="dropdown-menu-clickable-item" href="${root}user/${auth.name}/library/music/${redirect()}${sanitise(taste_artists[1])}" data-menu-item="shared-artist">
-                        <img class="view-item-avatar" src=${auth.avatar} alt="${auth.name}">${taste_artists[1]}
+                        <span class="menu-avatar">
+                            <img src=${auth.avatar} alt=${auth.name}>
+                        </span>
+                        ${taste_artists[1]}
                     </a>
-                    `
-                        :   ''
-                    }
-                    ${
-                        taste_artists.length >= 3 ?
-                            html.node`
+                    ` : ''}
+                    ${taste_artists.length >= 3 ? html.node`
                     <div class="sep"></div>
                     <a class="dropdown-menu-clickable-item" href="${root}user/${page.name}/library/music/${redirect()}${sanitise(taste_artists[2])}" data-menu-item="shared-artist">
-                        <img class="view-item-avatar" src=${other_avi} alt="${page.name}">${taste_artists[2]}
+                        <span class="menu-avatar">
+                            <img src=${other_avi} alt=${page.name}>
+                        </span>
+                        ${taste_artists[2]}
                     </a>
                     <a class="dropdown-menu-clickable-item" href="${root}user/${auth.name}/library/music/${redirect()}${sanitise(taste_artists[2])}" data-menu-item="shared-artist">
-                        <img class="view-item-avatar" src=${auth.avatar} alt="${auth.name}">${taste_artists[2]}
+                        <span class="menu-avatar">
+                            <img src=${auth.avatar} alt=${auth.name}>
+                        </span>
+                        ${taste_artists[2]}
                     </a>
-                    `
-                        :   ''
-                    }
+                    ` : ''}
                     <div class="sep"></div>
                     <a class="dropdown-menu-clickable-item" data-type="compare" href="${root}bleh/minis/compare?profile=${page.name}">${tl(trans.compare)}</a>
                 `,
