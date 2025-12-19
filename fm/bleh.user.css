@@ -10336,9 +10336,11 @@
         --mask: var(--icon-16-play);
     }
     .header-new-love-button {
-        font-size: 0 !important;
+        & > .toggle-button--text {
+            display: none;
+        }
 
-        span {
+        & > span {
             font-size: var(--font-size) !important;
             order: -1;
         }

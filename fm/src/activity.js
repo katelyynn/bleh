@@ -170,13 +170,7 @@ export function subscribe_to_events() {
                 let action = btn.getAttribute('data-analytics-action');
 
                 if (btn.getAttribute('data-type') == 'love') {
-                    setTimeout(() => {
-                        if (!btn.querySelector('span')) {
-                            btn.appendChild(html.node`
-                                <span>${tl(trans.love_track)}</span>
-                            `);
-                        }
-                    }, 1);
+                    btn.textContent = tl(trans.love_track);
                 }
 
                 register_activity(

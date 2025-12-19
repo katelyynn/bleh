@@ -53672,13 +53672,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           log("heard", "event", "info", event3);
           let action = btn.getAttribute("data-analytics-action");
           if (btn.getAttribute("data-type") == "love") {
-            setTimeout(() => {
-              if (!btn.querySelector("span")) {
-                btn.appendChild(html.node`
-                                <span>${tl2(trans.love_track)}</span>
-                            `);
-              }
-            }, 1);
+            btn.textContent = tl2(trans.love_track);
           }
           register_activity(
             action == "LoveTrack" ? "love" : "unlove",
