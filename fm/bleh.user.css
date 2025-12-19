@@ -29,9 +29,9 @@
 
         --font:
             var(--custom_font, ""), Funnel Sans, Inter, Ubuntu Sans, Spline Sans,
-            Roboto, Segoe UI Symbol, Apple Symbols, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Sans TC,
+            Roboto, Apple Color Emoji, var(--font_emoji_name, ""), Segoe UI Symbol, Apple Symbols, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Sans TC,
             Lucida Grande, Verdana, -apple-system, BlinkMacSystemFont,
-            sans-serif, Apple Color Emoji, var(--font_emoji_name, "");
+            sans-serif;
         --font-code:
             Google Sans Code, JetBrains Mono, Roboto Mono, monospace,
             var(--font);
