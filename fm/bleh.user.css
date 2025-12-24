@@ -10804,7 +10804,7 @@
     }
 
     /*     DANGEROUS     */
-    .dropdown-menu-clickable-item[data-is-shortcut="true"]:not(.no-colour),
+    .dropdown-menu-clickable-item[data-starred="true"]:not(.no-colour),
     .dropdown-menu-clickable-item.sponsor,
     .dropdown-menu-clickable-item.update,
     .dropdown-menu-clickable-item.swatch,
@@ -10841,7 +10841,7 @@
             .swatch,
             .dropdown-menu-clickable-item.sponsor,
             .dropdown-menu-clickable-item.update,
-            .dropdown-menu-clickable-item[data-is-shortcut="true"],
+            .dropdown-menu-clickable-item[data-starred="true"],
             .dropdown-menu-clickable-item.accent
         ) {
             --hue-over: var(--hue-neg);

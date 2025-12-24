@@ -822,7 +822,7 @@ export function append_nav() {
                                 settings.starred_friend != '' ?
                                     () => {
                                         let button = html.node`
-                                    <a class="dropdown-menu-clickable-item chibi" data-type="starred_friend" data-is-shortcut="true" href="${root}user/${settings.starred_friend}">${settings.starred_friend}</a>
+                                    <a class="dropdown-menu-clickable-item chibi" data-type="starred_friend" data-starred="true" href="${root}user/${settings.starred_friend}">${settings.starred_friend}</a>
                                 `;
 
                                         tippy(button, {
