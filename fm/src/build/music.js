@@ -650,7 +650,8 @@ export let includes = {
         '[sports bar remix',
         '- rough mix',
         '(rough mix',
-        '[rough mix'
+        '[rough mix',
+        '(holiday ' // illit holiday party/night
     ],
     mixes_numbers: [
         '(v1',

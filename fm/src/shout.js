@@ -15,8 +15,7 @@ import { setting } from './components/settings.js';
 import {
     markdown,
     markdown_field,
-    markdown_preview,
-    markdown_prompt
+    markdown_preview
 } from './components/markdown.js';
 import { copy, romanise } from './build/tools.js';
 import tippy from 'tippy.js';
@@ -25,6 +24,8 @@ import { correct_artist, correct_item_by_artist } from './components/lotus.js';
 
 export function patch_shouts() {
     if (!page.structure.main) return;
+
+    const use_md = settings.shout_markdown;
 
     let shout_controls = page.structure.main.querySelector(
         '.shoutbox-controls-wrapper:not([data-shouts])'
@@ -207,7 +208,7 @@ export function patch_shouts() {
             });
             chars.setAttribute('data-exceeded', val.length >= 1000);
 
-            preview.setAttribute('disabled', val.length <= 0);
+            if (use_md) preview.setAttribute('disabled', val.length <= 0);
         }, {}, '', 'body', null, null, placeholder, legacy_textarea.maxLength, true, !is_reply);
 
         legacy_textarea.replaceWith(textarea);
@@ -215,9 +216,11 @@ export function patch_shouts() {
         let chars;
         let preview;
         render(help_text, html`
-            <div class="tip preview" onclick=${() => markdown_preview(textarea.value())} ref=${(el) => (preview = el)} disabled="true">
-                ${tl(trans.preview)}
-            </div>
+            ${use_md ? html.node`
+                <div class="tip preview" onclick=${() => markdown_preview(textarea.value())} ref=${(el) => (preview = el)} disabled="true">
+                    ${tl(trans.preview)}
+                </div>
+            ` : ''}
             <div class="tip characters" ref=${(el) => (chars = el)}>
                 ${tl(trans.value_characters_max, { v: '0/1000' })}
             </div>

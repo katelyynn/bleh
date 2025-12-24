@@ -937,6 +937,8 @@ export function external_url_prompt(url, dangerous = false) {
 }
 
 export function markdown_field(func, options, value, name, cols, rows, placeholder, maxlength, mini = false, autofocus = false) {
+    const use_md = mini ? settings.shout_markdown : settings.bio_markdown;
+
     options = {
         allow_headers: false,
         starting_header: 3,
@@ -1344,7 +1346,7 @@ export function markdown_field(func, options, value, name, cols, rows, placehold
 
     const field = html.node`
         <div class="markdown-field ${mini ? 'mini' : ''}">
-            ${actions}
+            ${use_md ? actions : ''}
             <div class="markdown-field-text">
                 <div class="markdown-field-overlay" ref=${el => overlay = el} />
                 ${textarea}
@@ -1370,47 +1372,49 @@ export function markdown_field(func, options, value, name, cols, rows, placehold
     function render_overlay(val = textarea.value()) {
         val = val.replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
-        val = val.replace(/\[(left|center|right|links)\]/gi, text => {
-            if (!options.allow_alignment) return text;
+        if (use_md) {
+            val = val.replace(/\[(left|center|right|links)\]/gi, text => {
+                if (!options.allow_alignment) return text;
 
-            return `<span class="md-tag-wrap">${text}</span>`;
-        });
-        val = val.replace(/\[\/(left|center|right|links)\]/gi, text => {
-            if (!options.allow_alignment) return text;
+                return `<span class="md-tag-wrap">${text}</span>`;
+            });
+            val = val.replace(/\[\/(left|center|right|links)\]/gi, text => {
+                if (!options.allow_alignment) return text;
 
-            return `<span class="md-tag-wrap">${text}</span>`;
-        });
+                return `<span class="md-tag-wrap">${text}</span>`;
+            });
 
-        val = val.replace(/\[([a-z]+)=([^\]]+)\]/gi, (match, tag, val) => {
-            if (!['status', 'name', 'font', 'accent', 'banner'].includes(tag)) return match;
+            val = val.replace(/\[([a-z]+)=([^\]]+)\]/gi, (match, tag, val) => {
+                if (!['status', 'name', 'font', 'accent', 'banner'].includes(tag)) return match;
 
-            if (!options.allow_hue && tag == 'accent') return match;
+                if (!options.allow_hue && tag == 'accent') return match;
 
-            if (!options.allow_alignment) return match;
+                if (!options.allow_alignment) return match;
 
-            if (tag == 'accent') {
-                const split = val.split(',');
-                if (split.length == 3 && parseFloat(split[0]) >= 0 && parseFloat(split[1]) >= 0 && parseFloat(split[2]) >= 0) {
-                    return `<span class="md-tag">[${tag}=<span class="md-val md-accent colourful" style="--hue-over: ${parseFloat(split[0])}; --sat-over: ${parseFloat(split[1])}; --lit-over: ${parseFloat(split[2])}">${val}</span>]</span>`;
-                } else {
-                    return match;
+                if (tag == 'accent') {
+                    const split = val.split(',');
+                    if (split.length == 3 && parseFloat(split[0]) >= 0 && parseFloat(split[1]) >= 0 && parseFloat(split[2]) >= 0) {
+                        return `<span class="md-tag">[${tag}=<span class="md-val md-accent colourful" style="--hue-over: ${parseFloat(split[0])}; --sat-over: ${parseFloat(split[1])}; --lit-over: ${parseFloat(split[2])}">${val}</span>]</span>`;
+                    } else {
+                        return match;
+                    }
                 }
-            }
 
-            return `<span class="md-tag">[${tag}=<span class="md-val">${val}</span>]</span>`;
-        });
+                return `<span class="md-tag">[${tag}=<span class="md-val">${val}</span>]</span>`;
+            });
 
-        val = val.replace(/!\[([^\]]*)\]\(([^)]+)\)/gi, (match, label, url) => {
-            if (!options.allow_links) return match;
+            val = val.replace(/!\[([^\]]*)\]\(([^)]+)\)/gi, (match, label, url) => {
+                if (!options.allow_links) return match;
 
-            return `<span class="md-link">![<span class="md-label">${label}</span>](<span class="md-url">${url}</span>)</span>`;
-        });
+                return `<span class="md-link">![<span class="md-label">${label}</span>](<span class="md-url">${url}</span>)</span>`;
+            });
 
-        val = val.replace(/\[([^\]]+)\]\(([^)]+)\)/gi, (match, label, url) => {
-            if (!options.allow_links) return match;
+            val = val.replace(/\[([^\]]+)\]\(([^)]+)\)/gi, (match, label, url) => {
+                if (!options.allow_links) return match;
 
-            return `<span class="md-link">[<span class="md-label">${label}</span>](<span class="md-url">${url}</span>)</span>`;
-        });
+                return `<span class="md-link">[<span class="md-label">${label}</span>](<span class="md-url">${url}</span>)</span>`;
+            });
+        }
 
         render(overlay, html`
             ${{ html: val }}

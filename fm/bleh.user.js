@@ -28823,7 +28823,9 @@
       "[sports bar remix",
       "- rough mix",
       "(rough mix",
-      "[rough mix"
+      "[rough mix",
+      "(holiday "
+      // illit holiday party/night
     ],
     mixes_numbers: [
       "(v1",
@@ -49287,6 +49289,7 @@
     });
   }
   function markdown_field(func, options, value, name, cols, rows, placeholder, maxlength, mini = false, autofocus = false) {
+    const use_md = mini ? settings.shout_markdown : settings.bio_markdown;
     options = {
       allow_headers: false,
       starting_header: 3,
@@ -49643,7 +49646,7 @@
     `;
     const field = html.node`
         <div class="markdown-field ${mini ? "mini" : ""}">
-            ${actions}
+            ${use_md ? actions : ""}
             <div class="markdown-field-text">
                 <div class="markdown-field-overlay" ref=${(el) => overlay = el} />
                 ${textarea}
@@ -49662,36 +49665,38 @@
     };
     function render_overlay(val = textarea.value()) {
       val = val.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-      val = val.replace(/\[(left|center|right|links)\]/gi, (text4) => {
-        if (!options.allow_alignment) return text4;
-        return `<span class="md-tag-wrap">${text4}</span>`;
-      });
-      val = val.replace(/\[\/(left|center|right|links)\]/gi, (text4) => {
-        if (!options.allow_alignment) return text4;
-        return `<span class="md-tag-wrap">${text4}</span>`;
-      });
-      val = val.replace(/\[([a-z]+)=([^\]]+)\]/gi, (match3, tag, val2) => {
-        if (!["status", "name", "font", "accent", "banner"].includes(tag)) return match3;
-        if (!options.allow_hue && tag == "accent") return match3;
-        if (!options.allow_alignment) return match3;
-        if (tag == "accent") {
-          const split = val2.split(",");
-          if (split.length == 3 && parseFloat(split[0]) >= 0 && parseFloat(split[1]) >= 0 && parseFloat(split[2]) >= 0) {
-            return `<span class="md-tag">[${tag}=<span class="md-val md-accent colourful" style="--hue-over: ${parseFloat(split[0])}; --sat-over: ${parseFloat(split[1])}; --lit-over: ${parseFloat(split[2])}">${val2}</span>]</span>`;
-          } else {
-            return match3;
+      if (use_md) {
+        val = val.replace(/\[(left|center|right|links)\]/gi, (text4) => {
+          if (!options.allow_alignment) return text4;
+          return `<span class="md-tag-wrap">${text4}</span>`;
+        });
+        val = val.replace(/\[\/(left|center|right|links)\]/gi, (text4) => {
+          if (!options.allow_alignment) return text4;
+          return `<span class="md-tag-wrap">${text4}</span>`;
+        });
+        val = val.replace(/\[([a-z]+)=([^\]]+)\]/gi, (match3, tag, val2) => {
+          if (!["status", "name", "font", "accent", "banner"].includes(tag)) return match3;
+          if (!options.allow_hue && tag == "accent") return match3;
+          if (!options.allow_alignment) return match3;
+          if (tag == "accent") {
+            const split = val2.split(",");
+            if (split.length == 3 && parseFloat(split[0]) >= 0 && parseFloat(split[1]) >= 0 && parseFloat(split[2]) >= 0) {
+              return `<span class="md-tag">[${tag}=<span class="md-val md-accent colourful" style="--hue-over: ${parseFloat(split[0])}; --sat-over: ${parseFloat(split[1])}; --lit-over: ${parseFloat(split[2])}">${val2}</span>]</span>`;
+            } else {
+              return match3;
+            }
           }
-        }
-        return `<span class="md-tag">[${tag}=<span class="md-val">${val2}</span>]</span>`;
-      });
-      val = val.replace(/!\[([^\]]*)\]\(([^)]+)\)/gi, (match3, label, url) => {
-        if (!options.allow_links) return match3;
-        return `<span class="md-link">![<span class="md-label">${label}</span>](<span class="md-url">${url}</span>)</span>`;
-      });
-      val = val.replace(/\[([^\]]+)\]\(([^)]+)\)/gi, (match3, label, url) => {
-        if (!options.allow_links) return match3;
-        return `<span class="md-link">[<span class="md-label">${label}</span>](<span class="md-url">${url}</span>)</span>`;
-      });
+          return `<span class="md-tag">[${tag}=<span class="md-val">${val2}</span>]</span>`;
+        });
+        val = val.replace(/!\[([^\]]*)\]\(([^)]+)\)/gi, (match3, label, url) => {
+          if (!options.allow_links) return match3;
+          return `<span class="md-link">![<span class="md-label">${label}</span>](<span class="md-url">${url}</span>)</span>`;
+        });
+        val = val.replace(/\[([^\]]+)\]\(([^)]+)\)/gi, (match3, label, url) => {
+          if (!options.allow_links) return match3;
+          return `<span class="md-link">[<span class="md-label">${label}</span>](<span class="md-url">${url}</span>)</span>`;
+        });
+      }
       render(overlay, html`
             ${{ html: val }}
         `);
@@ -57987,6 +57992,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
   // src/shout.js
   function patch_shouts() {
     if (!page.structure.main) return;
+    const use_md = settings.shout_markdown;
     let shout_controls = page.structure.main.querySelector(
       ".shoutbox-controls-wrapper:not([data-shouts])"
     );
@@ -58123,15 +58129,17 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           v: `${val.length}/1000`
         });
         chars.setAttribute("data-exceeded", val.length >= 1e3);
-        preview.setAttribute("disabled", val.length <= 0);
+        if (use_md) preview.setAttribute("disabled", val.length <= 0);
       }, {}, "", "body", null, null, placeholder, legacy_textarea.maxLength, true, !is_reply);
       legacy_textarea.replaceWith(textarea);
       let chars;
       let preview;
       render(help_text, html`
-            <div class="tip preview" onclick=${() => markdown_preview(textarea.value())} ref=${(el) => preview = el} disabled="true">
-                ${tl2(trans.preview)}
-            </div>
+            ${use_md ? html.node`
+                <div class="tip preview" onclick=${() => markdown_preview(textarea.value())} ref=${(el) => preview = el} disabled="true">
+                    ${tl2(trans.preview)}
+                </div>
+            ` : ""}
             <div class="tip characters" ref=${(el) => chars = el}>
                 ${tl2(trans.value_characters_max, { v: "0/1000" })}
             </div>
