@@ -1106,6 +1106,20 @@ export async function show_your_scrobbles() {
                 ${tags}
             </div>
         `);
+
+        const add = tags.querySelector('.tags-add');
+        if (add) {
+            tippy(add, {
+                content: tl(trans.add)
+            });
+        }
+
+        const all = tags.querySelector('.tags-view-all');
+        if (all) {
+            tippy(all, {
+                content: tl(trans.view_all)
+            });
+        }
     }
 
     // no album info

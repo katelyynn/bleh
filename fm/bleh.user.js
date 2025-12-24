@@ -46961,6 +46961,18 @@
                 ${tags}
             </div>
         `);
+      const add = tags.querySelector(".tags-add");
+      if (add) {
+        tippy_esm_default(add, {
+          content: tl2(trans.add)
+        });
+      }
+      const all = tags.querySelector(".tags-view-all");
+      if (all) {
+        tippy_esm_default(all, {
+          content: tl2(trans.view_all)
+        });
+      }
     }
     const no_info = col_main.querySelector(
       ":scope > .section-with-separator.buffer-4"
