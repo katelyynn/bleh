@@ -50222,7 +50222,7 @@
         "color: unset"
       );
   }
-  var version2 = "2025.1126.2";
+  var version2 = "2025.1019";
   var last_page_type = {
     state: void 0
   };
@@ -50236,8 +50236,7 @@
     on_mutation,
     on_page_change,
     on_subpage_change,
-    on_error,
-    on_dedicated_page
+    on_error
   }) {
     log2("starting florence", "load", "info", {
       page: page2,
@@ -50246,8 +50245,7 @@
       on_mutation,
       on_page_change,
       on_subpage_change,
-      on_error,
-      on_dedicated_page
+      on_error
     });
     let head_observer = new MutationObserver(() => {
       if (document.head) {
@@ -50268,13 +50266,8 @@
       if (document.body && document.body.querySelector(".adaptive-skin-container") && document.body.querySelector(".footer")) {
         main2();
         pre_observer.disconnect();
-      } else if (document.body && (document.body.querySelector(":scope > .container") || document.body.classList.contains("namespace--user_now"))) {
+      } else if (document.body && document.body.querySelector(":scope > .container")) {
         document.body.classList.add("florence-loaded");
-        if (document.body.querySelector(":scope > .container")) {
-          on_dedicated_page("503");
-        } else if (document.body.classList.contains("namespace--user_now")) {
-          on_dedicated_page("now");
-        }
       }
     });
     pre_observer.observe(document.documentElement, {
@@ -50324,13 +50317,18 @@
       if (page2.state.error) return;
       if (on_mutation) on_mutation();
       let performance_end = performance.now();
-      log2(`finished in ${(performance_end - performance_start) / 1e3} seconds`, "loop");
+      log2(
+        `finished in ${(performance_end - performance_start) / 1e3} seconds`,
+        "loop"
+      );
     }
     function assign_page() {
       document.documentElement.classList.add("florence-supports-loading");
       if (!page2.structure.wrapper)
         page2.structure.wrapper = document.body.querySelector(".main-content");
-      let main_content = page2.structure.wrapper.querySelector(":scope > :last-child:not([data-florence])");
+      let main_content = page2.structure.wrapper.querySelector(
+        ":scope > :last-child:not([data-florence])"
+      );
       if (main_content) {
         assign_page_type();
         if (on_page_change) on_page_change(main_content);
@@ -60170,7 +60168,14 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pl: "Ustaw obsesj\u0119"
     },
     set_obsession: {
-      en: "Set obsession"
+      en: "Set obsession",
+      de: "Als Obsession festlegen",
+      es: "Establecer como obsesi\xF3n",
+      it: "Imposta come passione",
+      pt: "Definir como obsess\xE3o",
+      sv: "St\xE4ll in som besatthet",
+      ru: "\u0421\u0434\u0435\u043B\u0430\u0442\u044C \u0437\u0430\u0432\u0438\u0441\u0438\u043C\u043E\u0439",
+      pl: "Daj jako obsesj\u0119"
     },
     obsession_first: {
       en: "First to claim this obsession!",
@@ -64491,16 +64496,6 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       sv: "Mer fr\xE5n {user}",
       ru: "\u0411\u043E\u043B\u044C\u0448\u0435 \u043E\u0442 {user}",
       pl: "Wi\u0119cej od {user}"
-    },
-    obsess: {
-      en: "Obsess",
-      de: "Als Obsession festlegen",
-      es: "Establecer como obsesi\xF3n",
-      it: "Imposta come passione",
-      pt: "Definir como obsess\xE3o",
-      sv: "St\xE4ll in som besatthet",
-      ru: "\u0421\u0434\u0435\u043B\u0430\u0442\u044C \u0437\u0430\u0432\u0438\u0441\u0438\u043C\u043E\u0439",
-      pl: "Daj jako obsesj\u0119"
     },
     obsession: {
       en: "Obsession",

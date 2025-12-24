@@ -555,7 +555,14 @@ export const trans = {
         pl: 'Ustaw obsesję'
     },
     set_obsession: {
-        en: 'Set obsession'
+        en: 'Set obsession',
+        de: 'Als Obsession festlegen',
+        es: 'Establecer como obsesión',
+        it: 'Imposta come passione',
+        pt: 'Definir como obsessão',
+        sv: 'Ställ in som besatthet',
+        ru: 'Сделать зависимой',
+        pl: 'Daj jako obsesję'
     },
     obsession_first: {
         en: 'First to claim this obsession!',
@@ -4869,16 +4876,6 @@ export const trans = {
         sv: 'Mer från {user}',
         ru: 'Больше от {user}',
         pl: 'Więcej od {user}'
-    },
-    obsess: {
-        en: 'Obsess',
-        de: 'Als Obsession festlegen',
-        es: 'Establecer como obsesión',
-        it: 'Imposta come passione',
-        pt: 'Definir como obsessão',
-        sv: 'Ställ in som besatthet',
-        ru: 'Сделать зависимой',
-        pl: 'Daj jako obsesję'
     },
     obsession: {
         en: 'Obsession',
