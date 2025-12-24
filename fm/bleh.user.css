@@ -10246,7 +10246,7 @@
         --mask: var(--icon-16-plus);
 
         &.rabbit-hole-item,
-        &[data-is-shortcut="true"] {
+        &[data-starred="true"] {
             --mask: var(--icon-16-starred-friend);
 
             &:not(.rabbit-hole-item, .no-colour) {
@@ -10392,7 +10392,11 @@
         --mask: var(--icon-16-users);
 
         &[data-friends="false"] {
-            --mask: var(--icon-16-plus);
+            &.side-action {
+                --mask: var(--icon-16-plus);
+            }
+
+            --mask: var(--icon-16-user-plus);
         }
         &[data-starred="true"] {
             --mask: var(--icon-16-starred-friend);

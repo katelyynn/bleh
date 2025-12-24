@@ -37920,7 +37920,7 @@
       }}
                         ${() => {
         let btn = html.node`
-                            <button class="btn chibi icon" data-type="starred_friend" data-is-shortcut=${settings.starred_friend != ""} onclick=${() => {
+                            <button class="btn chibi icon" data-type="starred_friend" data-starred=${settings.starred_friend != ""} onclick=${() => {
           if (settings.starred_friend == "") return;
           inputter2.value = settings.starred_friend;
           inputter2.dispatchEvent(new Event("change"));
@@ -39286,7 +39286,7 @@
                         />
                         ${() => {
         let btn = html.node`
-                            <button class="btn chibi icon" data-type="starred_friend" data-is-shortcut=${settings.starred_friend != ""} onclick=${() => {
+                            <button class="btn chibi icon" data-type="starred_friend" data-starred=${settings.starred_friend != ""} onclick=${() => {
           if (settings.starred_friend == "") return;
           inputter.value = settings.starred_friend;
           inputter.dispatchEvent(new Event("change"));

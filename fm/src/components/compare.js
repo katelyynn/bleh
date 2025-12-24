@@ -250,7 +250,7 @@ export function compare({ host, sidebar } = {}) {
                         />
                         ${() => {
                             let btn = html.node`
-                            <button class="btn chibi icon" data-type="starred_friend" data-is-shortcut=${settings.starred_friend != ''} onclick=${() => {
+                            <button class="btn chibi icon" data-type="starred_friend" data-starred=${settings.starred_friend != ''} onclick=${() => {
                                 if (settings.starred_friend == '') return;
 
                                 inputter.value = settings.starred_friend;
