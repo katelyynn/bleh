@@ -833,7 +833,7 @@ export const trans = {
             pl: 'Usuń znajomego'
         },
         body: {
-            en: 'Are you sure you want to remove {u} as a friend, you will stay following them - it‘s only local.',
+            en: 'Continue removing {u} as a friend? You will stay following them as it’s only local.',
             de: 'Bist du sicher, dass du {u} als Freund entfernen möchtest? Du folgst der Person weiterhin - die Freundesliste wird lokal verwaltet.',
             es: '¿Seguro de que quieres remover a {u} de amigos? Seguirás siguiéndolo — es solo local.',
             it: 'Sei sicuro di voler rimuovere {u} come amico? Continuerai a seguirlo - è solamente locale.',
@@ -3149,6 +3149,9 @@ export const trans = {
         sv: 'Meddela',
         ru: 'Сообщение',
         pl: 'Wiadomość'
+    },
+    send_message: {
+        en: 'Send message'
     },
     join_discord: {
         en: 'Join Discord',

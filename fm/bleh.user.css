@@ -9276,7 +9276,7 @@
                 --shadow-hov: none !important;
                 --col: hsl(var(--c2)) !important;
                 --radius: var(--button-radius);
-                --padding: 7px var(--button-sides) 7px calc(var(--button-sides-icon) + var(--icon-size) + 6px) !important;
+                --padding: 7px var(--button-sides) 7px calc(var(--button-sides-icon) + var(--icon-size) + 6px);
                 margin: 0 !important;
                 min-height: 36px !important;
 
@@ -10392,7 +10392,7 @@
         --mask: var(--icon-16-users);
 
         &[data-friends="false"] {
-            --mask: var(--icon-16-user-plus);
+            --mask: var(--icon-16-plus);
         }
         &[data-starred="true"] {
             --mask: var(--icon-16-starred-friend);
@@ -11646,6 +11646,10 @@
 
             & > .sep {
                 margin: var(--card-gap) 0;
+            }
+
+            & > p {
+                max-width: 430px;
             }
         }
 
@@ -20901,8 +20905,8 @@
     .block,
     .danger {
         --hue-over: var(--hue-neg);
-        --sat-over: 1;
-        --lit-over: 1;
+        --sat-over: var(--sat-neg);
+        --lit-over: var(--lit-neg);
 
         &:not(.primary, .btn-primary) {
             --col: hsl(var(--l3-c));
@@ -29940,6 +29944,23 @@
         & > img {
             width: 100%;
             height: 100%;
+        }
+    }
+
+
+    .follow-combo {
+        gap: calc((var(--button-sides) * 2) + 2px) !important;
+    }
+
+    .side-action[data-type="friends"] {
+        --font-size: 0;
+        width: 36px !important;
+        flex: unset !important;
+        --padding: 7px var(--button-sides) !important;
+
+        &:after {
+            --left: 50% !important;
+            --margin-left: calc(-1 * (var(--icon-size) / 2)) !important;
         }
     }
 }

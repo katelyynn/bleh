@@ -65,9 +65,7 @@ export function redesign_profile_header(is_own_profile, is_following) {
         auth.name
     ) {
         // follow
-        let follow_wrap = document.body.querySelector(
-            '.header-avatar .class > div'
-        );
+        let follow_wrap = document.body.querySelector('.header-avatar .class > div');
 
         if (follow_wrap) {
             let follow_btn = follow_wrap.querySelector('button');
@@ -78,31 +76,20 @@ export function redesign_profile_header(is_own_profile, is_following) {
 
             if (is_following) follow_btn.setAttribute('data-followed', 'true');
 
-            let mutual_text = document.createElement('i');
-            mutual_text.textContent = tl(trans.following_mutuals);
-            follow_btn.appendChild(mutual_text);
+            follow_btn.appendChild(html.node`
+                <i>${tl(trans.following_mutuals)}</i>
+            `);
 
-            if (!katsune)
-                tippy(follow_btn, {
-                    content: follow_btn.textContent
-                });
+            follow_btn.parentElement.classList.add('follow-combo');
 
-            follow_btn.addEventListener('click', () => {
-                window.setTimeout(() => {
-                    follow_btn._tippy.setContent(follow_btn.textContent);
-                }, 50);
-            });
+            friends_button(follow_btn.parentElement);
         } else {
             // ignore list
-            let follow_placeholder = document.createElement('button');
-            follow_placeholder.classList.add('btn', 'side-action');
-            follow_placeholder.setAttribute('data-type', 'follow');
-            follow_placeholder.textContent = tl(trans.blocked);
-
-            follow_placeholder.setAttribute('disabled', 'true');
-            follow_placeholder.setAttribute('data-ignored', 'true');
-
-            profile_header.appendChild(follow_placeholder);
+            profile_header.appendChild(html.node`
+                <button class="btn side-action" data-type="follow" disabled="true" data-ignored="true">
+                    ${tl(trans.blocked)}
+                </button>
+            `);
         }
     }
 
@@ -111,12 +98,11 @@ export function redesign_profile_header(is_own_profile, is_following) {
         let msg_button = document.body.querySelector('.header-message-user');
         if (msg_button) {
             if (page.name != sponsor_list.sponsor_account) {
-                friends_button(profile_header);
-
                 create_profile_top_item(profile_header, {
                     name: page.name,
                     type: 'message',
-                    link: msg_button.getAttribute('href')
+                    link: msg_button.getAttribute('href'),
+                    text: tl(trans.send_message)
                 });
 
                 if (page.name == sponsor_list.special[0]) {
@@ -148,7 +134,8 @@ export function redesign_profile_header(is_own_profile, is_following) {
                 create_profile_top_item(profile_header, {
                     name: page.name,
                     type: 'compare',
-                    link: `${root}bleh/minis/compare?profile=${page.name}`
+                    link: `${root}bleh/minis/compare?profile=${page.name}`,
+                    text: tl(trans.compare_plays)
                 });
             }
         }
@@ -372,8 +359,6 @@ export function create_profile_top_item(
 }
 
 function friends_button(parent) {
-    return;
-
     let friend_state = settings.friends.includes(page.name);
     let star_state = settings.starred_friend == page.name;
 
@@ -383,13 +368,13 @@ function friends_button(parent) {
     }
 
     const elem = html.node`
-        <button class="btn side-action" data-type="friends" onclick=${() => {
+        <button class="btn side-action" data-type="friends" type="button" onclick=${() => {
             if (friend_state) {
                 dialog({
                     id: 'remove_friend',
                     title: tl(trans.remove_friend.name),
                     body: html.node`
-                        <p>${tl(trans.remove_friend.body).replace('{u}', page.name)}</p>
+                        <p>${{ html: tl(trans.remove_friend.body, { u: `<strong>${page.name}</strong>` }) }}</p>
                         <div class="modal-footer">
                             <button class="see-more cancel" onclick=${() => dialog_rm({ id: 'remove_friend' })}>
                                 ${tl(trans.cancel)}
@@ -453,6 +438,7 @@ function friends_button(parent) {
         interactive: true,
         interactiveBorder: 10,
         offset: [0, 0],
+        appendTo: document.body,
 
         onShow(instance) {
             instance.popper.addEventListener('click', (event) => {

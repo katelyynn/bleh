@@ -32984,9 +32984,7 @@
         <section class="side-actions" />
     `;
     if (!is_own_profile && page.name != sponsor_list.sponsor_account && auth.name) {
-      let follow_wrap = document.body.querySelector(
-        ".header-avatar .class > div"
-      );
+      let follow_wrap = document.body.querySelector(".header-avatar .class > div");
       if (follow_wrap) {
         let follow_btn = follow_wrap.querySelector("button");
         follow_btn.classList.add("btn", "side-action");
@@ -32994,37 +32992,28 @@
         follow_btn.setAttribute("data-type", "follow");
         profile_header.appendChild(follow_wrap);
         if (is_following) follow_btn.setAttribute("data-followed", "true");
-        let mutual_text = document.createElement("i");
-        mutual_text.textContent = tl2(trans.following_mutuals);
-        follow_btn.appendChild(mutual_text);
-        if (!katsune)
-          tippy_esm_default(follow_btn, {
-            content: follow_btn.textContent
-          });
-        follow_btn.addEventListener("click", () => {
-          window.setTimeout(() => {
-            follow_btn._tippy.setContent(follow_btn.textContent);
-          }, 50);
-        });
+        follow_btn.appendChild(html.node`
+                <i>${tl2(trans.following_mutuals)}</i>
+            `);
+        follow_btn.parentElement.classList.add("follow-combo");
+        friends_button(follow_btn.parentElement);
       } else {
-        let follow_placeholder = document.createElement("button");
-        follow_placeholder.classList.add("btn", "side-action");
-        follow_placeholder.setAttribute("data-type", "follow");
-        follow_placeholder.textContent = tl2(trans.blocked);
-        follow_placeholder.setAttribute("disabled", "true");
-        follow_placeholder.setAttribute("data-ignored", "true");
-        profile_header.appendChild(follow_placeholder);
+        profile_header.appendChild(html.node`
+                <button class="btn side-action" data-type="follow" disabled="true" data-ignored="true">
+                    ${tl2(trans.blocked)}
+                </button>
+            `);
       }
     }
     if (!is_own_profile) {
       let msg_button = document.body.querySelector(".header-message-user");
       if (msg_button) {
         if (page.name != sponsor_list.sponsor_account) {
-          friends_button(profile_header);
           create_profile_top_item(profile_header, {
             name: page.name,
             type: "message",
-            link: msg_button.getAttribute("href")
+            link: msg_button.getAttribute("href"),
+            text: tl2(trans.send_message)
           });
           if (page.name == sponsor_list.special[0]) {
             create_profile_top_item(profile_header, {
@@ -33054,7 +33043,8 @@
           create_profile_top_item(profile_header, {
             name: page.name,
             type: "compare",
-            link: `${root}bleh/minis/compare?profile=${page.name}`
+            link: `${root}bleh/minis/compare?profile=${page.name}`,
+            text: tl2(trans.compare_plays)
           });
         }
       }
@@ -33255,7 +33245,6 @@
     return side_action;
   }
   function friends_button(parent) {
-    return;
     let friend_state = settings.friends.includes(page.name);
     let star_state = settings.starred_friend == page.name;
     if (!friend_state && star_state) {
@@ -33263,13 +33252,13 @@
       save_setting("starred_friend", "");
     }
     const elem = html.node`
-        <button class="btn side-action" data-type="friends" onclick=${() => {
+        <button class="btn side-action" data-type="friends" type="button" onclick=${() => {
       if (friend_state) {
         dialog({
           id: "remove_friend",
           title: tl2(trans.remove_friend.name),
           body: html.node`
-                        <p>${tl2(trans.remove_friend.body).replace("{u}", page.name)}</p>
+                        <p>${{ html: tl2(trans.remove_friend.body, { u: `<strong>${page.name}</strong>` }) }}</p>
                         <div class="modal-footer">
                             <button class="see-more cancel" onclick=${() => dialog_rm({ id: "remove_friend" })}>
                                 ${tl2(trans.cancel)}
@@ -33324,6 +33313,7 @@
       interactive: true,
       interactiveBorder: 10,
       offset: [0, 0],
+      appendTo: document.body,
       onShow(instance) {
         instance.popper.addEventListener("click", (event3) => {
           instance.hide();
@@ -60455,7 +60445,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         pl: "Usu\u0144 znajomego"
       },
       body: {
-        en: "Are you sure you want to remove {u} as a friend, you will stay following them - it\u2018s only local.",
+        en: "Continue removing {u} as a friend? You will stay following them as it\u2019s only local.",
         de: "Bist du sicher, dass du {u} als Freund entfernen m\xF6chtest? Du folgst der Person weiterhin - die Freundesliste wird lokal verwaltet.",
         es: "\xBFSeguro de que quieres remover a {u} de amigos? Seguir\xE1s sigui\xE9ndolo \u2014 es solo local.",
         it: "Sei sicuro di voler rimuovere {u} come amico? Continuerai a seguirlo - \xE8 solamente locale.",
@@ -62775,6 +62765,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       sv: "Meddela",
       ru: "\u0421\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u0435",
       pl: "Wiadomo\u015B\u0107"
+    },
+    send_message: {
+      en: "Send message"
     },
     join_discord: {
       en: "Join Discord",
