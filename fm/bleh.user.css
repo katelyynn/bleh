@@ -9330,7 +9330,7 @@
             [data-toggle-button-current-state="loved"] > form > &,
             [data-toggle-button-current-state="bookmarked"] > form > &,
             &[data-is-shortcut="true"],
-            [data-toggle-button-current-state="followed"] > form > & {
+            [data-toggle-button-current-state="followed"] > form > &[data-type="follow"] {
                 --col: hsl(var(--l3-c));
                 --mask-colour: color-mix(
                     in hsl,
