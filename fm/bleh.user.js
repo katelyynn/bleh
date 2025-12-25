@@ -35929,14 +35929,29 @@
     if (ff("badges")) {
       let stock_badges = title_wrap.querySelectorAll(".label");
       stock_badges.forEach((badge) => {
-        if (badge.classList[1] == "user-status-None") return;
+        const type = badge.classList[1];
+        if (type == "user-status-None") {
+          badge.remove();
+          return;
+        }
         if (!page.mobile) badge.classList.add("expand");
+        if (type == "label--fade") {
+          page.structure.side.insertBefore(html.node`
+                    <section class="follow-notice-wrap oracle-notice">
+                        <div class="follow-notice">
+                            ${tl2(trans.user_follows_you, { u: page.name })}
+                        </div>
+                    </section>
+                `, page.structure.side.firstElementChild);
+          badge.remove();
+          return;
+        }
         tippy_esm_default(badge, {
           theme: "badge",
           placement: "bottom",
           content: html.node`
                     <div class="badge-name">${badge.textContent}</div>
-                    <div class="badge-reason">${tl2(trans.badges[badge.classList[1]].reason)}</div>
+                    <div class="badge-reason">${tl2(trans.badges[type].reason)}</div>
                 `
         });
       });
@@ -63325,6 +63340,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       sv: "Anv\xE4nd \u2018 \u2019 f\xF6r citat fr\xE5n artisten eller fr\xE5n annanstans",
       ru: "\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0439\u0442\u0435 \u2018 \u2019 \u0434\u043B\u044F \u0446\u0438\u0442\u0430\u0442 \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044F \u0438\u043B\u0438 \u0438\u0437 \u0434\u0440\u0443\u0433\u0438\u0445 \u0438\u0441\u0442\u043E\u0447\u043D\u0438\u043A\u043E\u0432",
       pl: "U\u017Cyj \u2018 \u2019 do cytat\xF3w artyst\xF3w lub z innych \u017Ar\xF3de\u0142"
+    },
+    user_follows_you: {
+      en: "{u} follows you!"
     },
     activity: {
       en: "Activity",

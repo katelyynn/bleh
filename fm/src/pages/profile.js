@@ -148,16 +148,34 @@ export async function bleh_profiles() {
     if (ff('badges')) {
         let stock_badges = title_wrap.querySelectorAll('.label');
         stock_badges.forEach((badge) => {
-            if (badge.classList[1] == 'user-status-None') return;
+            const type = badge.classList[1];
+
+            if (type == 'user-status-None') {
+                badge.remove();
+                return;
+            }
 
             if (!page.mobile) badge.classList.add('expand');
+
+            if (type == 'label--fade') {
+                page.structure.side.insertBefore(html.node`
+                    <section class="follow-notice-wrap oracle-notice">
+                        <div class="follow-notice">
+                            ${tl(trans.user_follows_you, { u: page.name })}
+                        </div>
+                    </section>
+                `, page.structure.side.firstElementChild);
+
+                badge.remove();
+                return;
+            }
 
             tippy(badge, {
                 theme: 'badge',
                 placement: 'bottom',
                 content: html.node`
                     <div class="badge-name">${badge.textContent}</div>
-                    <div class="badge-reason">${tl(trans.badges[badge.classList[1]].reason)}</div>
+                    <div class="badge-reason">${tl(trans.badges[type].reason)}</div>
                 `
             });
         });

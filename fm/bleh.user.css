@@ -30031,4 +30031,46 @@
     .report-dropdown-menu > .dropdown-menu-clickable-item {
         --mask: var(--icon-16-library);
     }
+
+
+    .follow-notice-wrap {
+        margin-bottom: calc(-1 * var(--card-padding));
+        order: -30;
+    }
+    .follow-notice {
+        display: flex;
+        justify-content: center;
+        gap: var(--card-gap);
+        cursor: default;
+
+        font-weight: var(--font-weight-medium);
+        color: hsl(var(--l3-c));
+
+        background: linear-gradient(180deg, hsl(var(--k4), 45%), transparent);
+        padding: var(--card-padding);
+        margin: calc(-1 * var(--card-padding)) calc(-1 * var(--card-padding)) 0
+            calc(-1 * var(--card-padding));
+        border-top-right-radius: var(--card-radius);
+
+        &[data-mobile="true"] {
+            background: hsl(var(--k4), 20%);
+            padding: var(--card-gap);
+            margin: 0 0 var(--card-gap) 0;
+            border-radius: var(--item-big-radius);
+        }
+
+        animation-name: follow_notice;
+        animation-duration: 2s;
+        animation-timing-function: var(--trans-function-ani);
+        animation-iteration-count: infinite;
+    }
+
+    @keyframes follow_notice {
+        from, to {
+            color: hsl(var(--l3-c));
+        }
+        50% {
+            color: color-mix(in hsl, hsl(var(--l2-c)) 70%, hsl(var(--l3-c)));
+        }
+    }
 }
