@@ -1071,6 +1071,13 @@ export function patch_titles(search = page.structure.main) {
                 );
             }
 
+            const love = track.querySelector('.chartlist-love-button');
+            if (love) {
+                tippy(love, {
+                    content: tl(trans.love_track)
+                });
+            }
+
             let album_text = track.querySelector(
                 '.chartlist-album.custom-album-text'
             );

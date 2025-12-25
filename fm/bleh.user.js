@@ -32847,6 +32847,12 @@
             track_title.getAttribute("data-name")
           );
         }
+        const love = track.querySelector(".chartlist-love-button");
+        if (love) {
+          tippy_esm_default(love, {
+            content: tl2(trans.love_track)
+          });
+        }
         let album_text = track.querySelector(
           ".chartlist-album.custom-album-text"
         );
