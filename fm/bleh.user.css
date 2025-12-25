@@ -762,7 +762,7 @@
 
         --max-tooltip-width: 400px;
 
-        --grid-default-height: 426px;
+        --grid-default-height: calc((var(--cards-main-width) - (var(--card-padding) * 2)) / 4px);
 
         --overview-bio-size: 440px;
         --header-avatar-size: 150px;
@@ -771,8 +771,6 @@
             --cards-main-width: 1002px;
             --overview-bio-size: 530px;
             --header-avatar-size: 180px;
-
-            --grid-default-height: 478px;
         }
 
         @media (max-width: 980px) {
@@ -12879,6 +12877,8 @@
         --bg-atv: transparent;
         --shadow: none;
 
+        overflow: hidden;
+
         &:not(.featured-item) {
             min-width: 430px !important;
         }
@@ -12932,6 +12932,7 @@
         }
         .source-album-details {
             flex: 1;
+            overflow: hidden;
 
             .source-album-name {
                 font-weight: var(--font-weight-medium) !important;
