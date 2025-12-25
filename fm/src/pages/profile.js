@@ -145,6 +145,7 @@ export async function bleh_profiles() {
     // badges
     log(`querying badges for ${page.name}`, 'profile');
 
+    page.state.follows_user = false;
     if (ff('badges')) {
         let stock_badges = title_wrap.querySelectorAll('.label');
         stock_badges.forEach((badge) => {
@@ -158,6 +159,7 @@ export async function bleh_profiles() {
             if (!page.mobile) badge.classList.add('expand');
 
             if (type == 'label--fade') {
+                page.state.follows_user = true;
                 page.structure.side.insertBefore(html.node`
                     <section class="follow-notice-wrap oracle-notice">
                         <div class="follow-notice">
@@ -343,8 +345,7 @@ export async function bleh_profiles() {
     if (loved_tab) loved_tab.textContent = tl(trans.loved);
 
     if (!is_subpage) {
-        let is_following =
-            page.structure.container.querySelector('.label.user-follow');
+        let is_following = page.state.follows_user;
 
         //
 
