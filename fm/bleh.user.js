@@ -27976,7 +27976,7 @@
     );
     observer.observe(elem);
   }
-  function copy(text4) {
+  function copy(text4, silent = false) {
     if (text4.trim().length == 0) return;
     navigator.clipboard.writeText(text4).then(() => {
       log("copied", "copy", "info", { text: text4 });
@@ -27993,19 +27993,21 @@
   function redo() {
     document.execCommand("redo");
   }
-  async function paste() {
+  async function paste(elem = null, silent = false) {
     try {
       const text4 = await navigator.clipboard.readText();
-      const elem = document.activeElement;
-      if (!elem) return;
+      if (!elem) elem = document.activeElement;
+      if (!elem) return log("no element", "paste", "error");
       if (elem.isContentEditable) {
         document.execCommand("insertText", false, text4);
         log("pasted", "paste", "info", { text: text4 });
-        status({
-          id: "paste",
-          title: tl2(trans.pasted_text),
-          body: text4
-        });
+        if (!silent) {
+          status({
+            id: "paste",
+            title: tl2(trans.pasted_text),
+            body: text4
+          });
+        }
         return;
       }
       if (["INPUT", "TEXTAREA"].includes(elem.tagName)) {
@@ -28013,19 +28015,23 @@
         const end2 = elem.selectionEnd;
         elem.setRangeText(text4, start2, end2, "end");
         log("pasted", "paste", "info", { text: text4 });
-        status({
-          id: "paste",
-          title: tl2(trans.pasted_text),
-          body: text4
-        });
+        if (!silent) {
+          status({
+            id: "paste",
+            title: tl2(trans.pasted_text),
+            body: text4
+          });
+        }
       }
     } catch (e) {
       log("failed", "paste", "info", { text, e });
-      status({
-        id: "paste",
-        title: tl2(trans.failed),
-        body: e.message ? e.message : e
-      });
+      if (!silent) {
+        status({
+          id: "paste",
+          title: tl2(trans.failed),
+          body: e.message ? e.message : e
+        });
+      }
     }
   }
   function download_with_progress(url, func) {
@@ -29865,16 +29871,19 @@
                 </a>
             ` : ""}
             ${valid_for_text ? html.node`
+                <a class="dropdown-menu-clickable-item" data-type="cut" onclick=${() => {
+        document.execCommand("cut");
+      }}>
+                    ${tl2(trans.cut)}
+                </a>
                 <a class="dropdown-menu-clickable-item" data-type="copy" onclick=${() => {
-        if (selected) copy(selected);
-        else if (value) copy(value);
+        if (selected) copy(selected, true);
+        else if (value) copy(value, true);
       }}>
                     ${tl2(trans.copy)}
                 </a>
-            ` : ""}
-            ${valid_for_text ? html.node`
                 <a class="dropdown-menu-clickable-item" data-type="paste" onclick=${() => {
-        paste();
+        paste(elem, true);
       }}>
                     ${tl2(trans.paste)}
                 </a>
@@ -41741,6 +41750,7 @@
   }
   function compile_settings() {
     let clone6 = structuredClone(settings);
+    settings_store.feature_flags.default = {};
     for (let setting2 in clone6) {
       if (settings_store[setting2] && JSON.stringify(clone6[setting2]) == JSON.stringify(settings_store[setting2].default) && setting2 != "version") {
         log(
@@ -63248,6 +63258,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       sv: "Klicka f\xF6r att kopiera",
       ru: "\u041D\u0430\u0436\u043C\u0438\u0442\u0435, \u0447\u0442\u043E\u0431\u044B \u0441\u043A\u043E\u043F\u0438\u0440\u043E\u0432\u0430\u0442\u044C",
       pl: "Kliknij aby skopiowa\u0107"
+    },
+    cut: {
+      en: "Cut"
     },
     paste: {
       en: "Paste",

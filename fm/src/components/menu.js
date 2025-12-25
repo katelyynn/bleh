@@ -180,16 +180,19 @@ export function page_menu() {
                 </a>
             ` : ''}
             ${valid_for_text ? html.node`
+                <a class="dropdown-menu-clickable-item" data-type="cut" onclick=${() => {
+                    document.execCommand('cut');
+                }}>
+                    ${tl(trans.cut)}
+                </a>
                 <a class="dropdown-menu-clickable-item" data-type="copy" onclick=${() => {
-                    if (selected) copy(selected);
-                    else if (value) copy(value);
+                    if (selected) copy(selected, true);
+                    else if (value) copy(value, true);
                 }}>
                     ${tl(trans.copy)}
                 </a>
-            ` : ''}
-            ${valid_for_text ? html.node`
                 <a class="dropdown-menu-clickable-item" data-type="paste" onclick=${() => {
-                    paste();
+                    paste(elem, true);
                 }}>
                     ${tl(trans.paste)}
                 </a>

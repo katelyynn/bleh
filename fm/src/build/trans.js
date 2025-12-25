@@ -3637,6 +3637,9 @@ export const trans = {
         ru: 'Нажмите, чтобы скопировать',
         pl: 'Kliknij aby skopiować'
     },
+    cut: {
+        en: 'Cut'
+    },
     paste: {
         en: 'Paste',
         es: 'Pegar',
