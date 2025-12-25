@@ -24,7 +24,9 @@ import { dialog } from '../components/dialog';
 import {
     correct_artist,
     correct_item_by_artist,
-    name_includes
+    name_includes,
+    smart_artists,
+    smart_title
 } from '../components/lotus';
 import { markdown } from '../components/markdown';
 import { notify } from '../components/notify';
@@ -1163,39 +1165,14 @@ function bleh_featured_profile_track(object) {
         }
 
         // combine
-        render(
-            name_elem,
-            html.node`
-            <div class="title">${romanise(song_title.trim())}</div>
-            ${song_tags.map(
-                (tag) => html.node`
-                <div class="feat" data-bleh--tag-type="${tag.type}" data-bleh--tag-group="${tag.group}">${romanise(tag.text)}</div>
-            `
-            )}
-        `
-        );
+        name_elem.classList.add('smart-title');
+        render(name_elem, smart_title(song_title, song_tags));
 
         artist_elem_full = html.node`
             <div class="source-album-artist">
-                <a href="${root}music/${redirect()}${sanitise(formatted_title[2])}">${romanise(formatted_title[2])}</a>
+                ${smart_artists(formatted_title[2], formatted_title[3])}
             </div>
         `;
-
-        // append guests
-        let song_guests = formatted_title[3];
-        for (let guest in song_guests) {
-            // &
-            artist_elem_full.innerHTML = `${artist_elem_full.innerHTML},`;
-
-            let guest_element = document.createElement('a');
-            guest_element.setAttribute(
-                'href',
-                `${root}music/${redirect()}${sanitise(song_guests[guest])}`
-            );
-            guest_element.textContent = romanise(song_guests[guest]);
-
-            artist_elem_full.appendChild(guest_element);
-        }
     } else if (settings.corrections) {
         name_elem.textContent = romanise(
             correct_item_by_artist(
@@ -1235,7 +1212,7 @@ function bleh_featured_profile_track(object) {
                 `
                 }
             </div>
-            <div class="source-album js-link-block link-block">
+            <div class="source-album js-link-block link-block featured-item">
                 <div class="source-album-art small">
                     ${img}
                 </div>

@@ -446,7 +446,7 @@ function friends_button(parent) {
             });
 
             instance.setContent(html.node`
-                <button class="dropdown-menu-clickable-item" data-type="starred_friend" data-is-shortcut=${star_state} onclick=${() => {
+                <button class="dropdown-menu-clickable-item" data-type="starred_friend" data-starred="true" onclick=${() => {
                     if (star_state) {
                         star_state = false;
                         save_setting('starred_friend', '');

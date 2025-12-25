@@ -12879,7 +12879,9 @@
         --bg-atv: transparent;
         --shadow: none;
 
-        min-width: 430px !important;
+        &:not(.featured-item) {
+            min-width: 430px !important;
+        }
 
         .link-block-cover-link {
             height: unset;
