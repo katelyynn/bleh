@@ -32786,9 +32786,7 @@
                       notify({
                         id: "delete",
                         title: tl2(trans.deleted),
-                        body: track_title.getAttribute(
-                          "data-name"
-                        ),
+                        body: track_title.getAttribute("data-name"),
                         icon: "icon-16-trash",
                         type: "error"
                       });
