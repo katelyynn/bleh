@@ -1256,7 +1256,7 @@ export let settings_store = {
     friends: {
         default: [],
         type: 'list',
-        title: trans.friends,
+        title: trans.close_friends,
         body: trans.friends_setting,
         warn_if_matches_auth: true
     },

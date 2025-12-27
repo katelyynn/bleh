@@ -33284,7 +33284,7 @@
               (item) => item != page.name
             );
             save_setting("friends", new_list);
-            save_setting("starred_friend", "");
+            if (page.name == settings.starred_friend) save_setting("starred_friend", "");
             dialog_rm({ id: "remove_friend" });
             update_visual();
             notify({
@@ -33373,7 +33373,7 @@
       if (star_state) {
         elem.textContent = tl2(trans.starred_friend.name);
       } else if (friend_state) {
-        elem.textContent = tl2(trans.friends);
+        elem.textContent = tl2(trans.close_friends);
       } else {
         elem.textContent = tl2(trans.add_as_friend);
       }
@@ -37519,7 +37519,7 @@
   function open_starred_friend_window() {
     dialog({
       id: "starred_friend",
-      title: tl2(trans.friends),
+      title: tl2(trans.close_friends),
       body: html.node`
             <div class="setting-group">
                 ${friends = setting({
@@ -51901,7 +51901,7 @@
                 </section>
                 ${ff("friends") ? html.node`
             <section class="bleh--panel">
-                <h4>${tl2(trans.friends)}</h4>
+                <h4>${tl2(trans.close_friends)}</h4>
                 <div class="setting-group">
                     ${friends2 = setting({
           id: "friends",
@@ -60378,6 +60378,10 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       ru: "\u0418\u0433\u043D\u043E\u0440\u0438\u0440\u0443\u0435\u0442\u0441\u044F",
       pl: "Ignorowani"
     },
+    close_friends: {
+      en: "Close friends",
+      de: "Engen Freunde"
+    },
     friends: {
       en: "Friends",
       de: "Freunde",
@@ -60399,14 +60403,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pl: "Sprawd\u017A czego s\u0142uchaj\u0105 twoi znajomi"
     },
     add_friends: {
-      en: "Add friends",
-      de: "Freunde hinzuf\xFCgen",
-      es: "A\xF1adir amigos",
-      it: "Aggiungi amici",
-      pt: "Adicionar amigos",
-      sv: "L\xE4gg till v\xE4nner",
-      ru: "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0434\u0440\u0443\u0437\u0435\u0439",
-      pl: "Dodaj znajomych"
+      en: "Add close friends",
+      de: "Engen Freunde hinzuf\xFCgen"
     },
     starred_friend: {
       name: {
@@ -60454,56 +60452,25 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "bleh-only"
     },
     add_as_friend: {
-      en: "Add as friend",
-      de: "Als Freund hinzuf\xFCgen",
-      es: "A\xF1adir como amigo",
-      it: "Aggiungi come amico",
-      pt: "Adicionar como amigo",
-      sv: "L\xE4gg till som v\xE4n",
-      ru: "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u043A\u0430\u043A \u0434\u0440\u0443\u0433\u0430",
-      pl: "Dodaj jako znajomego"
+      en: "Add as close friend",
+      de: "Als engen Freund hinzuf\xFCgen"
     },
     remove_friend: {
       name: {
-        en: "Remove friend",
-        de: "Freund entfernen",
-        es: "Remover amigo",
-        it: "Rimuovi amico",
-        pt: "Desfazer amizade",
-        sv: "Ta bort v\xE4n",
-        ru: "\u0423\u0434\u0430\u043B\u0438\u0442\u044C \u0434\u0440\u0443\u0433\u0430",
-        pl: "Usu\u0144 znajomego"
+        en: "Remove close friend",
+        de: "Engen Freund entfernen"
       },
       body: {
-        en: "Continue removing {u} as a friend? You will stay following them as it\u2019s only local.",
-        de: "Bist du sicher, dass du {u} als Freund entfernen m\xF6chtest? Du folgst der Person weiterhin - die Freundesliste wird lokal verwaltet.",
-        es: "\xBFSeguro de que quieres remover a {u} de amigos? Seguir\xE1s sigui\xE9ndolo \u2014 es solo local.",
-        it: "Sei sicuro di voler rimuovere {u} come amico? Continuerai a seguirlo - \xE8 solamente locale.",
-        pt: "Tem certeza de que quer remover {u} da sua lista de amigos? Voc\xEA continuar\xE1 o/a seguindo - \xE9 s\xF3 algo local.",
-        sv: "\xC4r du s\xE4ker p\xE5 att du vill ta bort {u} som v\xE4n? Du f\xF6ljer dem fortfarande - v\xE4nlistan hanteras lokalt.",
-        ru: "\u0412\u044B \u0443\u0432\u0435\u0440\u0435\u043D\u044B, \u0447\u0442\u043E \u0445\u043E\u0442\u0438\u0442\u0435 \u0443\u0434\u0430\u043B\u0438\u0442\u044C {u} \u0438\u0437 \u0434\u0440\u0443\u0437\u0435\u0439? \u0412\u044B \u043E\u0441\u0442\u0430\u043D\u0435\u0442\u0435\u0441\u044C \u043F\u043E\u0434\u043F\u0438\u0441\u0430\u043D\u044B \u043D\u0430 \u043D\u0435\u0433\u043E/\u043D\u0435\u0435 \u2014 \u044D\u0442\u043E \u043B\u043E\u043A\u0430\u043B\u044C\u043D\u044B\u0439 \u0441\u043F\u0438\u0441\u043E\u043A.",
-        pl: "Czy napewno chesz usun\u0105\u0107 {u} z listy znajomych?, b\u0119dziesz dalej ich obserwowa\u0107 - to jest tylko lokalnie"
+        en: "Continue removing {u} as a close friend? (bleh-only)"
       }
     },
     added_as_friend: {
-      en: "Added friend",
-      de: "Freund hinzugef\xFCgt",
-      es: "Amigo a\xF1adido",
-      it: "Amico aggiunto",
-      pt: "Amigo(a) adicionado(a)",
-      sv: "Lagt till som v\xE4n",
-      ru: "\u0414\u0440\u0443\u0433 \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D",
-      pl: "Dodano znajomego"
+      en: "Added close friend",
+      de: "Engen Freund hinzugef\xFCgt"
     },
     removed_friend: {
-      en: "Removed friend",
-      de: "Freund entfernt",
-      es: "Amigo removido",
-      it: "Amico rimosso",
-      pt: "Amigo(a) removido(a)",
-      sv: "Tagit bort v\xE4n",
-      ru: "\u0414\u0440\u0443\u0433 \u0443\u0434\u0430\u043B\u0435\u043D",
-      pl: "Usuni\u0119to znajomego"
+      en: "Removed close friend",
+      de: "Engen Freund entfernt"
     },
     added_star: {
       en: "Added star status",
@@ -70484,7 +70451,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     friends: {
       default: [],
       type: "list",
-      title: trans.friends,
+      title: trans.close_friends,
       body: trans.friends_setting,
       warn_if_matches_auth: true
     },

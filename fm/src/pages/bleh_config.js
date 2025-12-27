@@ -1667,7 +1667,7 @@ export async function render_setting_page(page_id) {
                 ${ff('friends')
                     ? html.node`
             <section class="bleh--panel">
-                <h4>${tl(trans.friends)}</h4>
+                <h4>${tl(trans.close_friends)}</h4>
                 <div class="setting-group">
                     ${friends = setting({
                         id: 'friends',

@@ -389,7 +389,7 @@ function friends_button(parent) {
                                 );
 
                                 save_setting('friends', new_list);
-                                save_setting('starred_friend', '');
+                                if (page.name == settings.starred_friend) save_setting('starred_friend', '');
 
                                 dialog_rm({ id: 'remove_friend' });
                                 update_visual();
@@ -493,7 +493,7 @@ function friends_button(parent) {
         if (star_state) {
             elem.textContent = tl(trans.starred_friend.name);
         } else if (friend_state) {
-            elem.textContent = tl(trans.friends);
+            elem.textContent = tl(trans.close_friends);
         } else {
             elem.textContent = tl(trans.add_as_friend);
         }

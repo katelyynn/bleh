@@ -2116,7 +2116,7 @@ export async function checkup_friend_cache(list = settings.friends) {
 export function open_starred_friend_window() {
     dialog({
         id: 'starred_friend',
-        title: tl(trans.friends),
+        title: tl(trans.close_friends),
         body: html.node`
             <div class="setting-group">
                 ${friends = setting({
