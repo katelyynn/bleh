@@ -33265,7 +33265,7 @@
       save_setting("starred_friend", "");
     }
     const elem = html.node`
-        <button class="btn side-action" data-type="friends" type="button" onclick=${() => {
+        <button class="btn side-action" data-type="close_friends" type="button" onclick=${() => {
       if (friend_state) {
         dialog({
           id: "remove_friend",

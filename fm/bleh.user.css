@@ -10395,6 +10395,9 @@
         --mask: var(--icon-16-page);
     }
     [data-type="friends"] {
+        --mask: var(--icon-16-users);
+    }
+    [data-type="close_friends"] {
         --mask: var(--icon-16-close-friend);
 
         &[data-friends="false"] {
@@ -30023,7 +30026,7 @@
         gap: calc((var(--button-sides) * 2) + 2px) !important;
     }
 
-    .side-action[data-type="friends"] {
+    .side-action[data-type="close_friends"] {
         --font-size: 0;
         width: var(--side-action-height) !important;
         flex: unset !important;
