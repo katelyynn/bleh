@@ -811,6 +811,9 @@ export const trans = {
         ru: '«Друзья» — это эксклюзивная функция bleh, которая позволяет вам следить за историей прослушиваний ваших друзей. Список управляется локально и не влияет на ваш список подписок.',
         pl: '‘Znajomi’ to funkcja ekskluzywna do bleh która pozwala na sprawdzenie historii słuchania twoich znajomych, działa lokalnie czyli nie wypływa na twoją liste kont które obserwujesz.'
     },
+    friend_difference_min: {
+        en: 'bleh-only'
+    },
     add_as_friend: {
         en: 'Add as friend',
         de: 'Als Freund hinzufügen',

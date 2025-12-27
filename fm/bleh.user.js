@@ -33315,8 +33315,12 @@
       }
     }} />
     `;
-    tippy_esm_default(elem, {
-      content: tl2(trans.friend_difference)
+    const tip = tippy_esm_default(elem, {
+      theme: "stack",
+      content: html.node`
+            <span></span>
+            <div class="hint">${tl2(trans.friend_difference_min)}</div>
+        `
     });
     const menu = tippy_esm_default(elem, {
       theme: "context-menu",
@@ -33373,6 +33377,10 @@
       } else {
         elem.textContent = tl2(trans.add_as_friend);
       }
+      tip.setContent(html.node`
+            <span>${elem.textContent} (${tl2(trans.friend_difference_min)})</span>
+            <div class="hint">${tl2(trans.right_click_for_more_options)}</div>
+        `);
     }
     parent.appendChild(elem);
   }
@@ -52151,15 +52159,11 @@
     window.history.pushState(page_id, "", `${root}bleh/${page_id}`);
     page.state.settings_page = page_id;
     page.structure.main.innerHTML = "";
-    let btns = document.querySelectorAll(".bleh--nav");
+    let btns = page.structure.container.querySelectorAll(".bleh--nav");
     btns.forEach((btn) => {
       const id = btn.getAttribute("data-bleh-page");
       btn.setAttribute("data-hide", page_id != id);
-      if (page_id != id) {
-        btn.classList.remove("secondary-nav-item-link--active");
-      } else {
-        btn.classList.add("secondary-nav-item-link--active");
-      }
+      btn.classList.toggle("secondary-nav-item-link--active", page_id == id);
     });
     if (page_id == "seasonal") seasonal_timer_start();
     else seasonal_timer_end();
@@ -60445,6 +60449,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       sv: "\u2019V\xE4nner\u2019 \xE4r en exklusiv del av bleh som till\xE5ter dig att h\xE5lla koll p\xE5 dina v\xE4nners lyssnarhistoria, det hanteras lokalt och r\xF6r inte din f\xF6ljarlista.",
       ru: "\xAB\u0414\u0440\u0443\u0437\u044C\u044F\xBB \u2014 \u044D\u0442\u043E \u044D\u043A\u0441\u043A\u043B\u044E\u0437\u0438\u0432\u043D\u0430\u044F \u0444\u0443\u043D\u043A\u0446\u0438\u044F bleh, \u043A\u043E\u0442\u043E\u0440\u0430\u044F \u043F\u043E\u0437\u0432\u043E\u043B\u044F\u0435\u0442 \u0432\u0430\u043C \u0441\u043B\u0435\u0434\u0438\u0442\u044C \u0437\u0430 \u0438\u0441\u0442\u043E\u0440\u0438\u0435\u0439 \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u0439 \u0432\u0430\u0448\u0438\u0445 \u0434\u0440\u0443\u0437\u0435\u0439. \u0421\u043F\u0438\u0441\u043E\u043A \u0443\u043F\u0440\u0430\u0432\u043B\u044F\u0435\u0442\u0441\u044F \u043B\u043E\u043A\u0430\u043B\u044C\u043D\u043E \u0438 \u043D\u0435 \u0432\u043B\u0438\u044F\u0435\u0442 \u043D\u0430 \u0432\u0430\u0448 \u0441\u043F\u0438\u0441\u043E\u043A \u043F\u043E\u0434\u043F\u0438\u0441\u043E\u043A.",
       pl: "\u2018Znajomi\u2019 to funkcja ekskluzywna do bleh kt\xF3ra pozwala na sprawdzenie historii s\u0142uchania twoich znajomych, dzia\u0142a lokalnie czyli nie wyp\u0142ywa na twoj\u0105 liste kont kt\xF3re obserwujesz."
+    },
+    friend_difference_min: {
+      en: "bleh-only"
     },
     add_as_friend: {
       en: "Add as friend",

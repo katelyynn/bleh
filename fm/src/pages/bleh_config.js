@@ -1956,17 +1956,13 @@ export function change_settings_page(page_id, setting = null) {
 
     page.structure.main.innerHTML = '';
 
-    let btns = document.querySelectorAll('.bleh--nav');
+    let btns = page.structure.container.querySelectorAll('.bleh--nav');
     btns.forEach((btn) => {
         const id = btn.getAttribute('data-bleh-page');
 
         btn.setAttribute('data-hide', page_id != id);
 
-        if (page_id != id) {
-            btn.classList.remove('secondary-nav-item-link--active');
-        } else {
-            btn.classList.add('secondary-nav-item-link--active');
-        }
+        btn.classList.toggle('secondary-nav-item-link--active', page_id == id);
     });
 
     if (page_id == 'seasonal') seasonal_timer_start();

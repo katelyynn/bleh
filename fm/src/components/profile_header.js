@@ -426,8 +426,12 @@ function friends_button(parent) {
         }} />
     `;
 
-    tippy(elem, {
-        content: tl(trans.friend_difference)
+    const tip = tippy(elem, {
+        theme: 'stack',
+        content: html.node`
+            <span></span>
+            <div class="hint">${tl(trans.friend_difference_min)}</div>
+        `
     });
 
     const menu = tippy(elem, {
@@ -493,6 +497,11 @@ function friends_button(parent) {
         } else {
             elem.textContent = tl(trans.add_as_friend);
         }
+
+        tip.setContent(html.node`
+            <span>${elem.textContent} (${tl(trans.friend_difference_min)})</span>
+            <div class="hint">${tl(trans.right_click_for_more_options)}</div>
+        `);
     }
 
     parent.appendChild(elem);
