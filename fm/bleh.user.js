@@ -35946,13 +35946,15 @@
         if (!page.mobile) badge.classList.add("expand");
         if (type == "label--fade") {
           page.state.follows_user = true;
-          page.structure.side.insertBefore(html.node`
-                    <section class="follow-notice-wrap oracle-notice">
-                        <div class="follow-notice">
-                            ${tl2(trans.user_follows_you, { u: page.name })}
-                        </div>
-                    </section>
-                `, page.structure.side.firstElementChild);
+          if (page.subpage == "overview") {
+            page.structure.side.insertBefore(html.node`
+                        <section class="follow-notice-wrap oracle-notice">
+                            <div class="follow-notice">
+                                ${tl2(trans.user_follows_you, { u: page.name })}
+                            </div>
+                        </section>
+                    `, page.structure.side.firstElementChild);
+          }
           badge.remove();
           return;
         }
