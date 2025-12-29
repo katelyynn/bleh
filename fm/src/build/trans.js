@@ -985,6 +985,7 @@ export const trans = {
     },
     account_scrobbling_since_replace: {
         // copy this from last.fm 1:1 (including the space at the end if there)
+        // dont change this please
         en: 'scrobbling since ',
         de: 'scrobbelt seit ',
         es: 'scrobbling desde ',
@@ -994,7 +995,7 @@ export const trans = {
         sv: 'skrobblar sedan ',
         ru: 'скробблинг с ',
         pl: 'scrobluje od',
-        zh: '记录 Scrobble 自'
+        zh: '音乐记录始于 '
     },
     edit: {
         en: 'Edit',

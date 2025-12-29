@@ -60626,6 +60626,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     account_scrobbling_since_replace: {
       // copy this from last.fm 1:1 (including the space at the end if there)
+      // dont change this please
       en: "scrobbling since ",
       de: "scrobbelt seit ",
       es: "scrobbling desde ",
@@ -60635,7 +60636,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       sv: "skrobblar sedan ",
       ru: "\u0441\u043A\u0440\u043E\u0431\u0431\u043B\u0438\u043D\u0433 \u0441 ",
       pl: "scrobluje od",
-      zh: "\u8BB0\u5F55 Scrobble \u81EA"
+      zh: "\u97F3\u4E50\u8BB0\u5F55\u59CB\u4E8E "
     },
     edit: {
       en: "Edit",
