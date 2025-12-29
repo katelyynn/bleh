@@ -832,20 +832,8 @@ export const trans = {
         zh: '时刻关注好友的听歌动态'
     },
     add_friends: {
-<<<<<<< HEAD
         en: 'Add close friends',
         de: 'Engen Freunde hinzufügen'
-=======
-        en: 'Add friends',
-        de: 'Freunde hinzufügen',
-        es: 'Añadir amigos',
-        it: 'Aggiungi amici',
-        pt: 'Adicionar amigos',
-        sv: 'Lägg till vänner',
-        ru: 'Добавить друзей',
-        pl: 'Dodaj znajomych',
-        zh: '添加好友'
->>>>>>> origin/uwu
     },
     starred_friend: {
         name: {
@@ -897,7 +885,6 @@ export const trans = {
         en: 'bleh-only'
     },
     add_as_friend: {
-<<<<<<< HEAD
         en: 'Add as close friend',
         de: 'Als engen Freund hinzufügen'
     },
@@ -917,63 +904,6 @@ export const trans = {
     removed_friend: {
         en: 'Removed close friend',
         de: 'Engen Freund entfernt'
-=======
-        en: 'Add as friend',
-        de: 'Als Freund hinzufügen',
-        es: 'Añadir como amigo',
-        it: 'Aggiungi come amico',
-        pt: 'Adicionar como amigo',
-        sv: 'Lägg till som vän',
-        ru: 'Добавить как друга',
-        pl: 'Dodaj jako znajomego',
-        zh: '添加为好友'
-    },
-    remove_friend: {
-        name: {
-            en: 'Remove friend',
-            de: 'Freund entfernen',
-            es: 'Remover amigo',
-            it: 'Rimuovi amico',
-            pt: 'Desfazer amizade',
-            sv: 'Ta bort vän',
-            ru: 'Удалить друга',
-            pl: 'Usuń znajomego',
-            zh: '删除好友'
-        },
-        body: {
-            en: 'Are you sure you want to remove {u} as a friend, you will stay following them - it‘s only local.',
-            de: 'Bist du sicher, dass du {u} als Freund entfernen möchtest? Du folgst der Person weiterhin - die Freundesliste wird lokal verwaltet.',
-            es: '¿Seguro de que quieres remover a {u} de amigos? Seguirás siguiéndolo — es solo local.',
-            it: 'Sei sicuro di voler rimuovere {u} come amico? Continuerai a seguirlo - è solamente locale.',
-            pt: 'Tem certeza de que quer remover {u} da sua lista de amigos? Você continuará o/a seguindo - é só algo local.',
-            sv: 'Är du säker på att du vill ta bort {u} som vän? Du följer dem fortfarande - vänlistan hanteras lokalt.',
-            ru: 'Вы уверены, что хотите удалить {u} из друзей? Вы останетесь подписаны на него/нее — это локальный список.',
-            pl: 'Czy napewno chesz usunąć {u} z listy znajomych?, będziesz dalej ich obserwować - to jest tylko lokalnie',
-            zh: '确定要将 {u} 从好友中移除吗？你仍会继续关注他们 —— 这仅是本地列表的操作。'
-        }
-    },
-    added_as_friend: {
-        en: 'Added friend',
-        de: 'Freund hinzugefügt',
-        es: 'Amigo añadido',
-        it: 'Amico aggiunto',
-        pt: 'Amigo(a) adicionado(a)',
-        sv: 'Lagt till som vän',
-        ru: 'Друг добавлен',
-        pl: 'Dodano znajomego',
-        zh: '已添加好友'
-    },
-    removed_friend: {
-        en: 'Removed friend',
-        de: 'Freund entfernt',
-        es: 'Amigo removido',
-        it: 'Amico rimosso',
-        pt: 'Amigo(a) removido(a)',
-        sv: 'Tagit bort vän',
-        ru: 'Друг удален',
-        pl: 'Usunięto znajomego',
-        zh: '已移除好友'
->>>>>>> origin/uwu
     },
     added_star: {
         en: 'Added star status',

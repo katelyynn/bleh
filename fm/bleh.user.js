@@ -59693,6 +59693,11 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       name: "\u0420\u0443\u0441\u0441\u043A\u0438\u0439",
       by: ["crawqxx", "techplayz32"],
       last_updated: "2025-12-16"
+    },
+    zh: {
+      name: "\u7B80\u4F53\u4E2D\u6587",
+      by: ["Dnzzk2"],
+      last_updated: "2025-12-29"
     }
   };
   var trans = {
@@ -59710,7 +59715,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         pt: "{page} no {brand} {build}.{sku}",
         sv: "{page} p\xE5 {brand} {build}.{sku}",
         ru: "{page} \u0432 {brand} {build}.{sku}",
-        pl: "{page} na {brand} {build}.{sku}"
+        pl: "{page} na {brand} {build}.{sku}",
+        zh: "{page} - {brand} {build}.{sku}"
       },
       name_type: {
         en: "{name} - {page} on {brand} {build}.{sku}",
@@ -59720,7 +59726,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         pt: "{name} - {page} no {brand} {build}.{sku}",
         sv: "{name} - {page} p\xE5 {brand} {build}.{sku}",
         ru: "{name} - {page} \u0432 {brand} {build}.{sku}",
-        pl: "{name} - {page} na {brand} {build}.{sku}"
+        pl: "{name} - {page} na {brand} {build}.{sku}",
+        zh: "{name} - {page} - {brand} {build}.{sku}"
       },
       name_sister_type: {
         en: "{name} by {sister} - {page} on {brand} {build}.{sku}",
@@ -59730,7 +59737,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         pt: "{name} por {sister} - {page} no {brand} {build}.{sku}",
         sv: "{name} av {sister} - {page} p\xE5 {brand} {build}.{sku}",
         ru: "{name} \u043E\u0442 {sister} - {page} \u0432 {brand} {build}.{sku}",
-        pl: "{name} od {sister} - {page} na {brand} {build}.{sku}"
+        pl: "{name} od {sister} - {page} na {brand} {build}.{sku}",
+        zh: "{name} \u7684 {sister} - {page} - {brand} {build}.{sku}"
       }
     },
     badges: {
@@ -59743,7 +59751,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           pt: "Sem emblemas",
           sv: "Inga emblem",
           ru: "\u041D\u0435\u0442\u0443 \u0437\u043D\u0430\u0447\u043A\u0430",
-          pl: "Brak odznak"
+          pl: "Brak odznak",
+          zh: "\u6682\u65E0\u5FBD\u7AE0"
         },
         reason: {
           en: "Become a sponsor to get a badge!",
@@ -59753,7 +59762,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           pt: "Se torne um apoiador para ganhar um emblema!",
           sv: "Bli en sponsor f\xF6r att f\xE5 ett emblem!",
           ru: "\u0421\u0442\u0430\u043D\u044C \u0441\u043F\u043E\u043D\u0441\u043E\u0440\u043E\u043C \u0434\u043B\u044F \u043F\u043E\u043B\u0443\u0447\u0435\u043D\u0438\u044F \u0437\u043D\u0430\u0447\u043A\u0430!",
-          pl: "Zosta\u0144 sponosrem \u017Ceby otrzyma\u0107 t\u0119 odznak\u0119!"
+          pl: "Zosta\u0144 sponosrem \u017Ceby otrzyma\u0107 t\u0119 odznak\u0119!",
+          zh: "\u6210\u4E3A\u8D5E\u52A9\u8005\u4EE5\u83B7\u5F97\u5FBD\u7AE0\uFF01"
         }
       },
       "user-status-subscriber": {
@@ -59765,7 +59775,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           pt: "Last.fm Pro",
           sv: "Last.fm Pro",
           ru: "Last.fm \u041F\u0440\u043E",
-          pl: "Last.fm Pro"
+          pl: "Last.fm Pro",
+          zh: "Last.fm Pro"
         },
         reason: {
           en: "Active Pro subscription",
@@ -59775,7 +59786,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           pt: "Plano Pro ativo",
           sv: "Aktiv Pro prenumeration",
           ru: "\u0410\u043A\u0442\u0438\u0432\u043D\u0430 \u041F\u0440\u043E \u043F\u043E\u0434\u043F\u0438\u0441\u043A\u0430",
-          pl: "Aktywna subskrypcja Pro"
+          pl: "Aktywna subskrypcja Pro",
+          zh: "\u6709\u6548\u7684 Pro \u8BA2\u9605"
         }
       },
       "user-status-staff": {
@@ -59787,7 +59799,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           pt: "Equipe",
           sv: "Personal",
           ru: "\u0410\u0434\u043C\u0438\u043D\u0438\u0441\u0442\u0440\u0430\u0442\u043E\u0440\u044B",
-          pl: "Personel"
+          pl: "Personel",
+          zh: "\u5B98\u65B9\u5458\u5DE5"
         },
         reason: {
           en: "Official member of Last.fm",
@@ -59797,7 +59810,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           pt: "Membro oficial da Last.fm",
           sv: "Officiell medlem p\xE5 Last.fm",
           ru: "\u041E\u0444\u0444\u0438\u0446\u0438\u0430\u043B\u044C\u043D\u044B\u0439 \u0443\u0447\u0430\u0441\u0442\u043D\u0438\u043A Last.fm",
-          pl: "Oficjalny cz\u0142onek Last.fm "
+          pl: "Oficjalny cz\u0142onek Last.fm",
+          zh: "Last.fm \u5B98\u65B9\u6210\u5458"
         }
       },
       "user-status-mod": {
@@ -59809,7 +59823,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           pt: "Moderador(a)",
           sv: "Moderator",
           ru: "\u041C\u043E\u0434\u0435\u0440\u0430\u0442\u043E\u0440",
-          pl: "Moderator"
+          pl: "Moderator",
+          zh: "\u7248\u4E3B"
         },
         reason: {
           en: "Official member of Last.fm",
@@ -59819,7 +59834,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           pt: "Membro oficial do Last.fm",
           sv: "Officiell medlem p\xE5 Last.fm",
           ru: "\u041E\u0444\u0444\u0438\u0446\u0438\u0430\u043B\u044C\u043D\u044B\u0439 \u0443\u0447\u0430\u0441\u0442\u043D\u0438\u043A Last.fm",
-          pl: "Oficjalny cz\u0142onek Last.fm "
+          pl: "Oficjalny cz\u0142onek Last.fm",
+          zh: "Last.fm \u5B98\u65B9\u6210\u5458"
         }
       },
       "user-status-alum": {
@@ -59828,7 +59844,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           es: "Graduado",
           sv: "Alumn",
           ru: "\u0412\u044B\u043F\u0443\u0441\u043A\u043D\u0438\u043A",
-          pt: "Formado"
+          pt: "Formado",
+          zh: "\u5F80\u5C4A\u6210\u5458"
         },
         reason: {
           en: "Former member of Last.fm",
@@ -59838,7 +59855,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           sv: "F\xF6re-detta medlem p\xE5 Last.fm",
           ru: "\u0411\u044B\u0432\u0448\u0438\u0439 \u0443\u0447\u0430\u0441\u0442\u043D\u0438\u043A Last.fm",
           pt: "Ex-membro da equipe do Last.fm",
-          pl: "By\u0142y cz\u0142onek Last.fm"
+          pl: "By\u0142y cz\u0142onek Last.fm",
+          zh: "\u66FE\u4EFB Last.fm \u5B98\u65B9\u6210\u5458"
         }
       },
       "label--fade": {
@@ -59850,7 +59868,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           pt: "Ele(a) te segue!",
           sv: "Denna medlem f\xF6ljer dig!",
           ru: "\u041E\u043D\u0438 \u043D\u0430 \u0432\u0430\u0441 \u043F\u043E\u0434\u043F\u0438\u0441\u0430\u043D\u044B!",
-          pl: "Obserwuje ci\u0119!"
+          pl: "Obserwuje ci\u0119!",
+          zh: "\u5173\u6CE8\u4E86\u4F60\uFF01"
         }
       },
       contributor: {
@@ -59862,7 +59881,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           pt: "Contribuidor(a)",
           sv: "Bidragsgivare",
           ru: "\u0423\u0447\u0430\u0441\u0442\u043D\u0438\u043A",
-          pl: "Kontrybutor"
+          pl: "Kontrybutor",
+          zh: "\u8D21\u732E\u8005"
         },
         reason: {
           en: "Has worked on bleh or bwaa",
@@ -59872,7 +59892,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           pt: "Contribuiu para o bleh ou bwaa",
           sv: "Har arbetat p\xE5 bleh eller bwaa",
           ru: "\u041F\u043E\u043C\u043E\u0433\u0430\u043B \u0440\u0430\u0437\u0440\u0430\u0431\u043E\u0442\u043A\u0435 bleh \u0438\u043B\u0438 bwaa",
-          pl: "Pracowali nad bleh lub bwaa"
+          pl: "Pracowali nad bleh lub bwaa",
+          zh: "\u66FE\u53C2\u4E0E bleh \u6216 bwaa \u7684\u5F00\u53D1\u5DE5\u4F5C"
         }
       },
       translation: {
@@ -59884,7 +59905,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           pt: "Tradu\xE7\xF5es",
           sv: "\xD6vers\xE4ttningar",
           ru: "\u041F\u0435\u0440\u0435\u0432\u043E\u0434\u044B",
-          pl: "T\u0142umaczenia"
+          pl: "T\u0142umaczenia",
+          zh: "\u7FFB\u8BD1"
         }
       },
       cat: {
@@ -59896,7 +59918,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           pt: "\xE9 um(a) gatinho(a)!!",
           sv: "en kissekatt!!",
           ru: "\u044D\u0442\u043E \u043A\u043E\u0442\u0438\u043A\u043A!!!",
-          pl: "Kotek!"
+          pl: "Kotek!",
+          zh: "\u662F\u4E00\u53EA\u5C0F\u732B\u54AA\uFF01\uFF01"
         }
       },
       sponsor: {
@@ -59908,7 +59931,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           pt: "Apoiador(a)",
           sv: "Sponsor",
           ru: "\u0421\u043F\u043E\u043D\u0441\u043E\u0440",
-          pl: "Sponsor"
+          pl: "Sponsor",
+          zh: "\u8D5E\u52A9\u8005"
         },
         reason: {
           en: "thank you from kate <3",
@@ -59918,7 +59942,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           pt: "obrigad\xE3o da kate <3",
           sv: "tack ifr\xE5n kate <3",
           ru: "\u0441\u043F\u0430\u0441\u0438\u0431\u043E \u043E\u0442 \u043A\u0435\u0439\u0442 <3",
-          pl: "Podzi\u0119kowania od kate <3"
+          pl: "Podzi\u0119kowania od kate <3",
+          zh: "\u6765\u81EA kate \u7684\u611F\u8C22 <3"
         }
       },
       cute: {
@@ -59953,7 +59978,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           sv: "l\xE5ster",
           ru: "\u043F\u043B\u0430\u0441\u0442\u044B\u0440\u044C",
           pt: "atadura",
-          pl: "plaster"
+          pl: "plaster",
+          zh: "\u521B\u53EF\u8D34"
         },
         reason: {
           en: "the sillyness caught up to me",
@@ -59962,7 +59988,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           it: "la stupidit\xE0 mi ha preso",
           sv: "det roliga kom ikapp mig",
           ru: "\u043C\u0438\u043B\u043E\u0442\u0430 \u043D\u0430 \u043C\u0435\u043D\u044F \u043D\u0430\u043F\u0430\u043B\u0430",
-          pt: "a bobeira me alcan\xE7ou"
+          pt: "a bobeira me alcan\xE7ou",
+          zh: "\u7531\u4E8E\u64CD\u4F5C\u8FC7\u4E8E\u5446\u840C\u2026\u2026"
         }
       },
       "bubble-tea": {
@@ -59972,7 +59999,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           sv: "escoffier :3",
           ru: "\u0435\u0441\u043A\u043E\u0444\u0444\u044C\u0435\u0440 :3",
           pt: "escoffier :3",
-          pl: "escoffier :3"
+          pl: "escoffier :3",
+          zh: "escoffier :3"
         },
         reason: {
           en: "katelyn\u2019s wife ~",
@@ -59981,7 +60009,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           it: "moglie di katelyn ~",
           sv: "katelyn\u2019s fru ~",
           ru: "\u0436\u0435\u043D\u0430 \u043A\u0435\u0439\u0442\u043B\u0438\u043D ~",
-          pl: "\u017Cona katelyn ~"
+          pl: "\u017Cona katelyn ~",
+          zh: "katelyn \u7684\u59BB\u5B50 ~"
         }
       }
     },
@@ -59993,7 +60022,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Requer a vers\xE3o mais recente do bleh",
       sv: "Beh\xF6ver en nyare version av bleh",
       ru: "\u0422\u0440\u0435\u0431\u0443\u0435\u0442\u0441\u044F \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u043D\u0430\u044F \u0432\u0435\u0440\u0441\u0438\u044F bleh",
-      pl: "Wymaga nowszej wersji bleh"
+      pl: "Wymaga nowszej wersji bleh",
+      zh: "\u9700\u8981\u66F4\u65B0\u7248\u672C\u7684 bleh"
     },
     home: {
       en: "Home",
@@ -60003,7 +60033,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "In\xEDcio",
       sv: "Startsida",
       ru: "\u0414\u043E\u043C",
-      pl: "Dom"
+      pl: "Dom",
+      zh: "\u6982\u89C8"
     },
     library: {
       en: "Library",
@@ -60014,7 +60045,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Biblioteca",
       sv: "Bibliotek",
       ru: "\u0411\u0438\u0431\u043B\u0438\u043E\u0442\u0435\u043A\u0430",
-      pl: "Biblioteka"
+      pl: "Biblioteka",
+      zh: "\u97F3\u4E50\u5E93"
     },
     playlists: {
       en: "Playlists",
@@ -60024,7 +60056,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       sv: "Spellistor",
       ru: "\u041F\u043B\u0435\u0439\u043B\u0438\u0441\u0442\u044B",
       pt: "Playlists",
-      pl: "Playlista"
+      pl: "Playlista",
+      zh: "\u64AD\u653E\u5217\u8868"
     },
     shouts: {
       en: "Shouts",
@@ -60036,7 +60069,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       sv: "Hojtningar",
       ru: "\u041E\u0442\u0437\u044B\u0432\u044B",
       // i'm not really sure with this one, it's like either comments or shouts, but trnaslated directly as "shouts", but "comments" could be mroe cleare here -- craw
-      pl: "Wiadomo\u015Bci"
+      pl: "Wiadomo\u015Bci",
+      zh: "\u7559\u8A00"
     },
     send_quickly_with: {
       // send a shout quickly with (keyboard shortcut)
@@ -60047,7 +60081,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Enviar rapidamente com {kbd}",
       sv: "Skicka snabbt med {kbd}",
       ru: "\u0411\u044B\u0441\u0442\u0440\u0430\u044F \u043E\u0442\u043F\u0440\u0430\u0432\u043A\u0430 \u043F\u043E {kbd}",
-      pl: "Wy\u015Bli szybko u\u017Cywaj\u0105c {kbd}"
+      pl: "Wy\u015Bli szybko u\u017Cywaj\u0105c {kbd}",
+      zh: "\u4F7F\u7528 {kbd} \u5FEB\u901F\u53D1\u9001"
     },
     cant_shout: {
       en: "You cannot leave shouts here",
@@ -60057,7 +60092,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       sv: "Du kan inte hojta h\xE4r",
       ru: "\u0412\u044B \u043D\u0435 \u043C\u043E\u0436\u0435\u0442\u0435 \u043E\u0441\u0442\u0430\u0432\u043B\u044F\u0442\u044C \u0442\u0443\u0442 \u043E\u0442\u0437\u044B\u0432\u044B",
       pt: "Voc\xEA n\xE3o pode deixar coment\xE1rios aqui",
-      pl: "Nie mo\u017Cesz zostawia\u0107 tu wiadomo\u015Bci"
+      pl: "Nie mo\u017Cesz zostawia\u0107 tu wiadomo\u015Bci",
+      zh: "\u5728\u8FD9\u91CC\u65E0\u6CD5\u7559\u8A00\u54E6"
     },
     failed_to_send: {
       en: "Failed to send",
@@ -60067,7 +60103,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Falha ao enviar",
       sv: "Gick inte att skicka",
       ru: "\u041D\u0435 \u0443\u0434\u0430\u043B\u043E\u0441\u044C \u043E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u044C",
-      pl: "B\u0142\u0105d wysy\u0142ania"
+      pl: "B\u0142\u0105d wysy\u0142ania",
+      zh: "\u53D1\u9001\u5931\u8D25"
     },
     sent: {
       en: "Sent",
@@ -60077,7 +60114,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Enviado",
       sv: "Skickat",
       ru: "\u041E\u0442\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u043E",
-      pl: "Wy\u015Bli"
+      pl: "Wy\u015Bli",
+      zh: "\u5DF2\u53D1\u9001"
     },
     single_shout: {
       en: "viewing a single shout",
@@ -60086,7 +60124,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "visualizando uma mensagem",
       sv: "visar en enda hojtning",
       ru: "\u043F\u0440\u043E\u0441\u043C\u043E\u0442\u0440 \u0435\u0434\u0438\u043D\u0441\u0442\u0432\u0435\u043D\u043D\u043E\u0433\u043E \u043E\u0442\u0437\u044B\u0432\u0430",
-      pl: "wy\u015Bwiatlanie jednej wiadomo\u015Bci"
+      pl: "wy\u015Bwiatlanie jednej wiadomo\u015Bci",
+      zh: "\u6B63\u5728\u67E5\u770B\u5355\u6761\u7559\u8A00"
     },
     about: {
       // about me panel
@@ -60097,7 +60136,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Sobre mim",
       sv: "Om",
       ru: "\u041E \u0441\u0435\u0431\u0435",
-      pl: "O mnie"
+      pl: "O mnie",
+      zh: "\u5173\u4E8E\u6211"
     },
     about_me_preview: {
       // About Me
@@ -60109,7 +60149,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       //"Sobre mim" is just more natural in that context
       sv: "Om (f\xF6rhandsvisning)",
       ru: "\u041E \u0441\u0435\u0431\u0435 (\u043F\u0440\u0435\u0432\u044C\u044E)",
-      pl: "O mnie (podgl\u0105d)"
+      pl: "O mnie (podgl\u0105d)",
+      zh: "\u5173\u4E8E\u6211 (\u9884\u89C8)"
     },
     no_about: {
       // username
@@ -60120,7 +60161,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "{u} est\xE1 bem quietinho(a)",
       sv: "{u} h\xE5ller sig tyst",
       ru: "{u} \u043D\u0438\u0447\u0435\u0433\u043E \u043D\u0435 \u043D\u0430\u043F\u0438\u0441\u0430\u043B \u043E \u0441\u0435\u0431\u0435",
-      pl: "{u} siedzi cicho"
+      pl: "{u} siedzi cicho",
+      zh: "{u} \u8FD8\u5728\u4FDD\u6301\u795E\u79D8"
     },
     edit_wiki: {
       en: "Edit wiki",
@@ -60130,7 +60172,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Editar wiki",
       sv: "Redigera wiki",
       ru: "\u0420\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u0438\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u044E",
-      pl: "Edytuj wiki"
+      pl: "Edytuj wiki",
+      zh: "\u7F16\u8F91 wiki"
     },
     read_more: {
       en: "Read more",
@@ -60141,7 +60184,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       ja: "\u3082\u3063\u3068\u8AAD\u3080",
       sv: "L\xE4s mer",
       ru: "\u0427\u0438\u0442\u0430\u0442\u044C \u0431\u043E\u043B\u0435\u0435",
-      pl: "Czytaj wi\u0119cej"
+      pl: "Czytaj wi\u0119cej",
+      zh: "\u9605\u8BFB\u66F4\u591A"
     },
     refresh: {
       en: "Refresh",
@@ -60151,7 +60195,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Atualizar",
       sv: "Ladda om",
       ru: "\u041F\u0435\u0440\u0435\u0437\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044C",
-      pl: "Od\u015Bwie\u017C"
+      pl: "Od\u015Bwie\u017C",
+      zh: "\u5237\u65B0"
     },
     refreshed: {
       en: "Refreshed",
@@ -60161,7 +60206,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Atualizado",
       sv: "Laddats om",
       ru: "\u041F\u0435\u0440\u0435\u0437\u0430\u0433\u0440\u0443\u0436\u0435\u043D\u043E",
-      pl: "Od\u015Bwie\u017Cono"
+      pl: "Od\u015Bwie\u017Cono",
+      zh: "\u5DF2\u5237\u65B0"
     },
     refresh_tracks: {
       en: "Refresh tracks",
@@ -60171,7 +60217,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Atualizar faixas",
       sv: "Ladda om l\xE5tar",
       ru: "\u041F\u0435\u0440\u0435\u0437\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044C \u0442\u0440\u0435\u043A\u0438",
-      pl: "Od\u015Bwie\u017C utwory"
+      pl: "Od\u015Bwie\u017C utwory",
+      zh: "\u5237\u65B0\u66F2\u76EE"
     },
     unavailable: {
       en: "Unavailable",
@@ -60181,7 +60228,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Indispon\xEDvel",
       sv: "Otillg\xE4nglig",
       ru: "\u041D\u0435\u0434\u043E\u0441\u0442\u0443\u043F\u043D\u043E",
-      pl: "Niedost\u0119pne"
+      pl: "Niedost\u0119pne",
+      zh: "\u4E0D\u53EF\u7528"
     },
     obsess: {
       en: "Obsess",
@@ -60192,7 +60240,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Obsess\xE3o",
       sv: "Besatthet",
       ru: "\u0417\u0430\u0432\u0438\u0441\u0438\u043C\u043E\u0441\u0442\u044C",
-      pl: "Ustaw obsesj\u0119"
+      pl: "Ustaw obsesj\u0119",
+      zh: "\u8BBE\u4E3A\u70ED\u64AD\u5355\u66F2"
     },
     set_obsession: {
       en: "Set obsession",
@@ -60212,7 +60261,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Primeiro(a) a ter esta obsess\xE3o!",
       sv: "Den f\xF6rsta personen att bli besatt av denna!",
       ru: "\u041F\u0435\u0440\u0432\u044B\u0439 \u043A\u0442\u043E \u0438\u043C\u0435\u0435\u0442 \u044D\u0442\u0443 \u0437\u0430\u0432\u0438\u0441\u0438\u043C\u043E\u0441\u0442\u044C!",
-      pl: "Pierwsi do ustawienia tej obsesji!"
+      pl: "Pierwsi do ustawienia tej obsesji!",
+      zh: "\u4F60\u662F\u9996\u4F4D\u5C06\u6B64\u8BBE\u4E3A\u70ED\u64AD\u5355\u66F2\u7684\u4EBA\uFF01"
     },
     compare: {
       en: "Compare",
@@ -60222,7 +60272,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Comparar",
       sv: "J\xE4mf\xF6r",
       ru: "\u0421\u0440\u0430\u0432\u043D\u0438\u0442\u044C",
-      pl: "Por\xF3wnaj"
+      pl: "Por\xF3wnaj",
+      zh: "\u6BD4\u8F83"
     },
     compare_plays: {
       en: "Compare plays",
@@ -60232,7 +60283,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Comparar reprodu\xE7\xF5es",
       sv: "J\xE4mf\xF6r spelningar",
       ru: "\u0421\u0440\u0430\u0432\u043D\u0438\u0442\u044C \u0441\u044B\u0433\u0440\u0430\u043D\u043D\u043E\u0435",
-      pl: "Por\xF3wnaj odtworzenia"
+      pl: "Por\xF3wnaj odtworzenia",
+      zh: "\u6BD4\u8F83\u64AD\u653E\u6B21\u6570"
     },
     inverse_compare: {
       name: {
@@ -60243,7 +60295,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         sv: "Invertera j\xE4mf\xF6relse",
         ru: "\u041E\u0431\u0440\u0430\u0442\u043D\u044B\u0439 \u043C\u0435\u0442\u043E\u0434 \u0441\u0440\u0430\u0432\u043D\u0435\u043D\u0438\u044F",
         pt: "M\xE9todo de compara\xE7\xE3o inversa",
-        pl: "Odwr\xF3\u0107 metod\u0119 por\xF3wnania"
+        pl: "Odwr\xF3\u0107 metod\u0119 por\xF3wnania",
+        zh: "\u53CD\u5411\u6BD4\u8F83"
       },
       body: {
         en: "Show items you do not share instead",
@@ -60252,7 +60305,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         it: "Mostra gli elementi che non condividete",
         sv: "Visa ist\xE4llet objekt ni inte delar alls",
         ru: "\u0412\u043C\u0435\u0441\u0442\u043E \u044D\u0442\u043E\u0433\u043E \u043F\u043E\u043A\u0430\u0437\u0430\u0442\u044C \u043D\u0435\u0441\u043E\u0432\u043F\u0430\u0434\u0430\u044E\u0449\u0438\u0435 \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u044B",
-        pt: "Em vez disso, mostre itens que voc\xEA n\xE3o compartilha"
+        pt: "Em vez disso, mostre itens que voc\xEA n\xE3o compartilha",
+        zh: "\u6539\u4E3A\u663E\u793A\u53CC\u65B9\u672A\u5171\u6709\u7684\u9879\u76EE"
       }
     },
     one_page: {
@@ -60263,7 +60317,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "1 p\xE1gina",
       sv: "1 sida",
       ru: "1 \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u0430",
-      pl: "1 strona"
+      pl: "1 strona",
+      zh: "1 \u9875"
     },
     count_pages: {
       en: "{c} pages",
@@ -60274,7 +60329,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       sv: "{c} sidor",
       ru: "{c} \u0441\u0442\u0440\u0430\u043D\u0438\u0446",
       // can't have the exact here due to russian have "3 страницы" and "5 страниц"
-      pl: "{c} stron"
+      pl: "{c} stron",
+      zh: "{c} \u9875"
     },
     gathering_plays_for_user_pages: {
       en: "Gathering plays for {u} ({current_page}/{pages})",
@@ -60284,7 +60340,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Reunindo reprodu\xE7\xF5es para {u} ({current_page}/{pages})",
       sv: "Samlar spelningar av {u} ({current_page}/{pages})",
       ru: "\u0421\u0431\u043E\u0440 \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u0439 \u0434\u043B\u044F {u} (\u0441\u0442\u0440\u0430\u043D\u0438\u0446\u0430 {current_page} \u0438\u0437 {pages})",
-      pl: "Zbieranie odtworze\u0144 dla {u} ({curremt_page}/{pages})"
+      pl: "Zbieranie odtworze\u0144 dla {u} ({curremt_page}/{pages})",
+      zh: "\u6B63\u5728\u83B7\u53D6 {u} \u7684\u64AD\u653E\u8BB0\u5F55 ({current_page}/{pages})"
     },
     nothing_in_common: {
       en: "Nothing in common (\u0E51-\uFE4F-\u0E51)",
@@ -60294,7 +60351,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Nada em comum (\u0E51-\uFE4F-\u0E51)",
       sv: "Inget gemensamt (\u0E51-\uFE4F-\u0E51)",
       ru: "\u041D\u0438\u0447\u0435\u0433\u043E \u043E\u0431\u0449\u0435\u0433\u043E (\u0E51-\uFE4F-\u0E51)",
-      pl: "Nic wsp\xF3lnego (\u0E51-\uFE4F-\u0E51)"
+      pl: "Nic wsp\xF3lnego (\u0E51-\uFE4F-\u0E51)",
+      zh: "\u6CA1\u6709\u5171\u540C\u70B9 (\u0E51-\uFE4F-\u0E51)"
     },
     others_featured: {
       // guest features on a song or album
@@ -60305,7 +60363,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Outros em destaque",
       sv: "G\xE4startister",
       ru: "\u0414\u0440\u0443\u0433\u0438\u0435 \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u0438",
-      pl: "Inni z udzia\u0142em"
+      pl: "Inni z udzia\u0142em",
+      zh: "\u5176\u4ED6\u5BA2\u4E32\u827A\u672F\u5BB6"
     },
     your_scrobbles: {
       en: "Your scrobbles",
@@ -60315,7 +60374,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Seus scrobbles",
       sv: "Dina skrobblingar",
       ru: "\u0412\u0430\u0448\u0438 \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u044B",
-      pl: "Twoje scrobble"
+      pl: "Twoje scrobble",
+      zh: "\u4F60\u7684 Scrobble"
     },
     play: {
       // play a song
@@ -60326,7 +60386,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       sv: "Spela upp",
       ru: "\u0412\u043E\u0441\u043F\u0440\u043E\u0438\u0437\u0432\u0435\u0441\u0442\u0438",
       pt: "Reproduzir",
-      pl: "Odtw\xF3rz"
+      pl: "Odtw\xF3rz",
+      zh: "\u64AD\u653E"
     },
     plays: {
       // your play count on a song or album or whatever
@@ -60337,7 +60398,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Reprodu\xE7\xF5es",
       sv: "Spelningar",
       ru: "\u041F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u044F",
-      pl: "Ods\u0142uchania"
+      pl: "Ods\u0142uchania",
+      zh: "\u64AD\u653E\u6B21\u6570"
     },
     try_again: {
       en: "Try again",
@@ -60347,7 +60409,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Tentar novamente",
       sv: "F\xF6rs\xF6k igen",
       ru: "\u041F\u043E\u0432\u0442\u043E\u0440\u0438\u0442\u044C",
-      pl: "Spr\xF3buj ponownie"
+      pl: "Spr\xF3buj ponownie",
+      zh: "\u91CD\u8BD5"
     },
     back: {
       en: "Back",
@@ -60357,7 +60420,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Voltar",
       sv: "Tillbaks",
       ru: "\u041D\u0430\u0437\u0430\u0434",
-      pl: "Cofnij"
+      pl: "Cofnij",
+      zh: "\u8FD4\u56DE"
     },
     settings: {
       en: "Settings",
@@ -60368,7 +60432,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       ja: "\u8A2D\u5B9A",
       sv: "Inst\xE4llningar",
       ru: "\u041D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438",
-      pl: "Ustawienia"
+      pl: "Ustawienia",
+      zh: "\u8BBE\u7F6E"
     },
     on_ignore_list: {
       en: "Ignored",
@@ -60378,7 +60443,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Ignorados",
       sv: "Ignorerad",
       ru: "\u0418\u0433\u043D\u043E\u0440\u0438\u0440\u0443\u0435\u0442\u0441\u044F",
-      pl: "Ignorowani"
+      pl: "Ignorowani",
+      zh: "\u5DF2\u5FFD\u7565"
     },
     close_friends: {
       en: "Close friends",
@@ -60392,7 +60458,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Amigos",
       sv: "V\xE4nner",
       ru: "\u0414\u0440\u0443\u0437\u044C\u044F",
-      pl: "Znajomi"
+      pl: "Znajomi",
+      zh: "\u597D\u53CB"
     },
     friends_setting: {
       en: "Keep up to date on what your friends are listening to",
@@ -60402,7 +60469,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Fique por dentro do que seus amigos est\xE3o ouvindo",
       sv: "H\xE5ll koll p\xE5 vad dina v\xE4nner lyssnar p\xE5",
       ru: "\u0421\u043B\u0435\u0434\u0438\u0442\u0435 \u0437\u0430 \u0442\u0435\u043C, \u0447\u0442\u043E \u0441\u043B\u0443\u0448\u0430\u044E\u0442 \u0432\u0430\u0448\u0438 \u0434\u0440\u0443\u0437\u044C\u044F",
-      pl: "Sprawd\u017A czego s\u0142uchaj\u0105 twoi znajomi"
+      pl: "Sprawd\u017A czego s\u0142uchaj\u0105 twoi znajomi",
+      zh: "\u65F6\u523B\u5173\u6CE8\u597D\u53CB\u7684\u542C\u6B4C\u52A8\u6001"
     },
     add_friends: {
       en: "Add close friends",
@@ -60417,7 +60485,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         pt: "Amigo(a) favorito(a)",
         sv: "Stj\xE4rnm\xE4rkt v\xE4n",
         ru: "\u0418\u0437\u0431\u0440\u0430\u043D\u043D\u044B\u0439 \u0434\u0440\u0443\u0433",
-        pl: "Znajomi oznaczeni jako ulubieni"
+        pl: "Znajomi oznaczeni jako ulubieni",
+        zh: "\u661F\u6807\u597D\u53CB"
       },
       body: {
         en: "View their scrobbles alongside yours at all times",
@@ -60427,7 +60496,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         pt: "Veja os scrobbles dele(a) junto aos seus o tempo todo",
         sv: "Se deras skrobblingar bredvid dina hela tiden",
         ru: "\u041F\u043E\u0441\u0442\u043E\u044F\u043D\u043D\u043E \u043F\u0440\u043E\u0441\u043C\u0430\u0442\u0440\u0438\u0432\u0430\u0442\u044C \u0438\u0445 \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u044F \u0440\u044F\u0434\u043E\u043C \u0441 \u0432\u0430\u0448\u0438\u043C\u0438",
-        pl: "Zawsze wy\u015Bwietlaj ich scrobble \u0142\u0105cznie z twoimi"
+        pl: "Zawsze wy\u015Bwietlaj ich scrobble \u0142\u0105cznie z twoimi",
+        zh: "\u968F\u65F6\u968F\u5730\u5C06\u4ED6\u4EEC\u7684 Scrobble \u8BB0\u5F55\u4E0E\u4F60\u7684\u8BB0\u5F55\u5E76\u5217\u663E\u793A"
       },
       notice: {
         en: "Not seeing the options you\u2019re after? Fill out your friends list in the settings.",
@@ -60437,7 +60507,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         pt: "N\xE3o est\xE1 encontrando as op\xE7\xF5es que voc\xEA quer? Preencha sua lista de amigos nas configura\xE7\xF5es.",
         sv: "Ser du inte inst\xE4llningar du letar efter? Fyll upp din v\xE4nlista i inst\xE4llningarna.",
         ru: "\u041D\u0435 \u0432\u0438\u0434\u0438\u0442\u0435 \u043D\u0443\u0436\u043D\u044B\u0445 \u043E\u043F\u0446\u0438\u0439? \u0417\u0430\u043F\u043E\u043B\u043D\u0438\u0442\u0435 \u0441\u0432\u043E\u0439 \u0441\u043F\u0438\u0441\u043E\u043A \u0434\u0440\u0443\u0437\u0435\u0439 \u0432 \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0430\u0445.",
-        pl: "Nie ma czego szukasz? Wype\u0142ni swoj\u0105 liste znajomych w ustawieniach."
+        pl: "Nie ma czego szukasz? Wype\u0142ni swoj\u0105 liste znajomych w ustawieniach.",
+        zh: "\u6CA1\u627E\u5230\u60F3\u8981\u7684\u9009\u9879\uFF1F\u8BF7\u5728\u8BBE\u7F6E\u4E2D\u5B8C\u5584\u4F60\u7684\u597D\u53CB\u5217\u8868\u3002"
       }
     },
     friend_difference: {
@@ -60448,7 +60519,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "\u2018Amigos\u2019 \xE9 um recurso exclusivo do bleh que permite voc\xEA acompanhar o hist\xF3rico de m\xFAsicas dos seus amigos. \xC9 um recurso local que n\xE3o influencia a sua lista de seguidores.",
       sv: "\u2019V\xE4nner\u2019 \xE4r en exklusiv del av bleh som till\xE5ter dig att h\xE5lla koll p\xE5 dina v\xE4nners lyssnarhistoria, det hanteras lokalt och r\xF6r inte din f\xF6ljarlista.",
       ru: "\xAB\u0414\u0440\u0443\u0437\u044C\u044F\xBB \u2014 \u044D\u0442\u043E \u044D\u043A\u0441\u043A\u043B\u044E\u0437\u0438\u0432\u043D\u0430\u044F \u0444\u0443\u043D\u043A\u0446\u0438\u044F bleh, \u043A\u043E\u0442\u043E\u0440\u0430\u044F \u043F\u043E\u0437\u0432\u043E\u043B\u044F\u0435\u0442 \u0432\u0430\u043C \u0441\u043B\u0435\u0434\u0438\u0442\u044C \u0437\u0430 \u0438\u0441\u0442\u043E\u0440\u0438\u0435\u0439 \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u0439 \u0432\u0430\u0448\u0438\u0445 \u0434\u0440\u0443\u0437\u0435\u0439. \u0421\u043F\u0438\u0441\u043E\u043A \u0443\u043F\u0440\u0430\u0432\u043B\u044F\u0435\u0442\u0441\u044F \u043B\u043E\u043A\u0430\u043B\u044C\u043D\u043E \u0438 \u043D\u0435 \u0432\u043B\u0438\u044F\u0435\u0442 \u043D\u0430 \u0432\u0430\u0448 \u0441\u043F\u0438\u0441\u043E\u043A \u043F\u043E\u0434\u043F\u0438\u0441\u043E\u043A.",
-      pl: "\u2018Znajomi\u2019 to funkcja ekskluzywna do bleh kt\xF3ra pozwala na sprawdzenie historii s\u0142uchania twoich znajomych, dzia\u0142a lokalnie czyli nie wyp\u0142ywa na twoj\u0105 liste kont kt\xF3re obserwujesz."
+      pl: "\u2018Znajomi\u2019 to funkcja ekskluzywna do bleh kt\xF3ra pozwala na sprawdzenie historii s\u0142uchania twoich znajomych, dzia\u0142a lokalnie czyli nie wyp\u0142ywa na twoj\u0105 liste kont kt\xF3re obserwujesz.",
+      zh: "\u201C\u597D\u53CB\u201D\u662F bleh \u63D2\u4EF6\u7684\u4E13\u5C5E\u529F\u80FD\uFF0C\u8BA9\u4F60\u53EF\u4EE5\u5B9E\u65F6\u4E86\u89E3\u597D\u53CB\u7684\u542C\u6B4C\u5386\u53F2\u3002\u8BE5\u529F\u80FD\u4EC5\u5728\u672C\u5730\u751F\u6548\uFF0C\u4E0D\u4F1A\u5F71\u54CD\u4F60\u5728 Last.fm \u5B98\u7F51\u7684\u5173\u6CE8\u5217\u8868\u3002"
     },
     friend_difference_min: {
       en: "bleh-only"
@@ -60482,7 +60554,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Status de favorito adicionado",
       sv: "Stj\xE4rnm\xE4rkte",
       ru: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D \u0432 \u0438\u0437\u0431\u0440\u0430\u043D\u043D\u043E\u0435",
-      pl: "Dodano do ulubionych"
+      pl: "Dodano do ulubionych",
+      zh: "\u5DF2\u8BBE\u4E3A\u661F\u6807"
     },
     add_as_starred_friend: {
       en: "Star friend",
@@ -60492,7 +60565,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Favoritar amigo(a)",
       sv: "Stj\xE4rnm\xE4rk v\xE4n",
       ru: "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0434\u0440\u0443\u0433\u0430 \u0432 \u0438\u0437\u0431\u0440\u0430\u043D\u043D\u043E\u0435",
-      pl: "Oznacz znajomego jako ulubieni"
+      pl: "Oznacz znajomego jako ulubieni",
+      zh: "\u661F\u6807\u597D\u53CB"
     },
     removed_star: {
       en: "Removed star status",
@@ -60502,7 +60576,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Status de favorito removido",
       sv: "Tog bort stj\xE4rnm\xE4rke",
       ru: "\u0423\u0434\u0430\u043B\u0435\u043D \u0438\u0437 \u0438\u0437\u0431\u0440\u0430\u043D\u043D\u043E\u0433\u043E",
-      pl: "Usuni\u0119to z ulubionych"
+      pl: "Usuni\u0119to z ulubionych",
+      zh: "\u5DF2\u53D6\u6D88\u661F\u6807"
     },
     remove_as_star_friend: {
       en: "Remove star status",
@@ -60512,7 +60587,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Remover estado de favorito",
       sv: "Ta bort stj\xE4rnm\xE4rke",
       ru: "\u0423\u0434\u0430\u043B\u0438\u0442\u044C \u0438\u0437 \u0438\u0437\u0431\u0440\u0430\u043D\u043D\u043E\u0433\u043E",
-      pl: "Usu\u0144 z ulubionych"
+      pl: "Usu\u0144 z ulubionych",
+      zh: "\u53D6\u6D88\u661F\u6807"
     },
     aka: {
       en: "aka.",
@@ -60522,7 +60598,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "vulgo",
       sv: "ocks\xE5 k\xE4nd som",
       ru: "\u043E\u043D \u0436\u0435",
-      pl: "znani r\xF3wnie\u017C jako"
+      pl: "znani r\xF3wnie\u017C jako",
+      zh: "\u53C8\u540D"
     },
     account_pronouns: {
       en: "pronouns",
@@ -60532,7 +60609,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "pronomes",
       sv: "pronomen",
       ru: "\u043C\u0435\u0441\u0442\u043E\u0438\u043C\u0435\u043D\u0438\u044F",
-      pl: "zaimki"
+      pl: "zaimki",
+      zh: "\u4EE3\u8BCD"
     },
     account_created: {
       // dont translate to "scrobbling since", instead just "created"
@@ -60543,7 +60621,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "criada",
       sv: "skapades",
       ru: "\u0441\u043E\u0437\u0434\u0430\u043D",
-      pl: "utworzono"
+      pl: "utworzono",
+      zh: "\u521B\u5EFA\u4E8E"
     },
     account_scrobbling_since_replace: {
       // copy this from last.fm 1:1 (including the space at the end if there)
@@ -60555,7 +60634,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       ja: "\u3088\u308Ascrobble",
       sv: "skrobblar sedan ",
       ru: "\u0441\u043A\u0440\u043E\u0431\u0431\u043B\u0438\u043D\u0433 \u0441 ",
-      pl: "scrobluje od"
+      pl: "scrobluje od",
+      zh: "\u8BB0\u5F55 Scrobble \u81EA"
     },
     edit: {
       en: "Edit",
@@ -60565,7 +60645,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Editar",
       sv: "Redigera",
       ru: "\u0420\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C",
-      pl: "Edytuj"
+      pl: "Edytuj",
+      zh: "\u7F16\u8F91"
     },
     bulk_edit: {
       // as in the last.fm "Bulk Edit" open-source extension
@@ -60576,7 +60657,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Edi\xE7\xE3o em massa",
       sv: "Bulkredigera",
       ru: "\u041C\u0430\u0441\u0441\u043E\u0432\u043E\u0435 \u0440\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435",
-      pl: "Edytuj masowo"
+      pl: "Edytuj masowo",
+      zh: "\u6279\u91CF\u7F16\u8F91"
     },
     scrobble: {
       en: "Scrobble",
@@ -60586,14 +60668,16 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Scrobble",
       sv: "Skrobbla",
       ru: "\u0421\u043A\u0440\u043E\u0431\u0431\u043B",
-      pl: "Scrobble"
+      pl: "Scrobble",
+      zh: "Scrobble"
     },
     scrobble_value: {
       en: "Scrobble {v}",
       es: "Hacer scrobbling al {v}",
       ru: "\u0421\u043A\u0440\u043E\u0431\u0431\u043B\u0438\u0442\u044C {v}",
       pt: "Scrobble {v}",
-      pl: "Scrobble {v}"
+      pl: "Scrobble {v}",
+      zh: "Scrobble {v}"
     },
     average: {
       // scrobble average
@@ -60604,7 +60688,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "M\xE9dia",
       sv: "Genomsnitt",
       ru: "\u0421\u0440\u0435\u0434\u043D\u0435\u0435",
-      pl: "\u015Arednio"
+      pl: "\u015Arednio",
+      zh: "\u5E73\u5747"
     },
     scrobbles: {
       en: "Scrobbles",
@@ -60615,7 +60700,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       ja: "Scrobble",
       sv: "Skrobblingar",
       ru: "\u041F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u044F",
-      pl: "Scrobble"
+      pl: "Scrobble",
+      zh: "Scrobble"
     },
     count_plays: {
       // e.g. 20 plays in a music grid
@@ -60629,7 +60715,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       sv: "{c} skrobblingar",
       ru: "{c} \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u0439",
       // problem with rus. language using different versions of same word for different number -- craw
-      pl: "{c} odtworze\u0144"
+      pl: "{c} odtworze\u0144",
+      zh: "{c} \u6B21\u64AD\u653E"
     },
     count_scrobbles: {
       en: "{c} scrobbles",
@@ -60640,7 +60727,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       sv: "{c} skrobblingar",
       ru: "{c} \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u043E\u0432",
       // same here -- craw
-      pl: "{c} scrobbli"
+      pl: "{c} scrobbli",
+      zh: "{c} \u6B21 Scrobble"
     },
     listens: {
       // base on native last.fm ui
@@ -60651,6 +60739,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "scrobbles",
       sv: "skrobblingar",
       ru: "\u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u044F",
+      zh: "\u64AD\u653E\u8BB0\u5F55",
       count: {
         en: "{c} listens",
         de: "{c} Scrobbles",
@@ -60658,8 +60747,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         it: "{c} scrobbling",
         pt: "{c} scrobbles",
         sv: "{c} skrobblingar",
-        ru: "{c} \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u0439"
+        ru: "{c} \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u0439",
         // and here -- craw
+        zh: "{c} \u6B21\u64AD\u653E"
       }
     },
     new_scrobble: {
@@ -60670,7 +60760,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Novo scrobble",
       sv: "Ny skrobbel",
       ru: "\u041D\u043E\u0432\u044B\u0439 \u0441\u043A\u0440\u043E\u0431\u0431\u043B",
-      pl: "Nowe scrobble"
+      pl: "Nowe scrobble",
+      zh: "\u65B0 Scrobble"
     },
     scrobble_failed: {
       en: "Scrobble could not be sent",
@@ -60680,7 +60771,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       de: "Scrobble konnte nicht gesendet werden",
       sv: "Skrobblingen kunde inte skickas",
       ru: "\u041D\u0435 \u0443\u0434\u0430\u043B\u043E\u0441\u044C \u043E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u044C \u0441\u043A\u0440\u043E\u0431\u0431\u043B",
-      pl: "Nie uda\u0142o si\u0119 wys\u0142a\u0107 scrobbla"
+      pl: "Nie uda\u0142o si\u0119 wys\u0142a\u0107 scrobbla",
+      zh: "\u65E0\u6CD5\u53D1\u9001 Scrobble"
     },
     scrobble_error_codes: {
       // https://www.last.fm/api/show/track.scrobble
@@ -60692,7 +60784,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         pt: "O nome do(a) artista foi ignorado",
         sv: "Artistnamnet var ignorerad",
         ru: "\u0418\u043C\u044F \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044F \u043F\u0440\u043E\u0438\u0433\u043D\u043E\u0440\u0438\u0440\u043E\u0432\u0430\u043D\u043E",
-        pl: "Imie artysty zignorowane"
+        pl: "Imie artysty zignorowane",
+        zh: "\u827A\u672F\u5BB6\u540D\u79F0\u88AB\u5FFD\u7565"
       },
       2: {
         en: "Track name was ignored",
@@ -60702,7 +60795,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         pt: "O nome da faixa foi ignorado",
         sv: "L\xE5ttiteln var ignorerad",
         ru: "\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u0442\u0440\u0435\u043A\u0430 \u043F\u0440\u043E\u0438\u0433\u043D\u043E\u0440\u0438\u0440\u043E\u0432\u0430\u043D\u043E",
-        pl: "Tytu\u0142 utworu zignorowany"
+        pl: "Tytu\u0142 utworu zignorowany",
+        zh: "\u5355\u66F2\u540D\u79F0\u88AB\u5FFD\u7565"
       },
       3: {
         en: "Timestamp is too old",
@@ -60712,7 +60806,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         pt: "O timestamp \xE9 muito antigo",
         sv: "Tidsst\xE4mpeln \xE4r f\xF6r gammal",
         ru: "\u0412\u0440\u0435\u043C\u0435\u043D\u043D\u0430\u044F \u043C\u0435\u0442\u043A\u0430 \u0441\u043B\u0438\u0448\u043A\u043E\u043C \u0441\u0442\u0430\u0440\u0430\u044F",
-        pl: "Timestamp jest za stary"
+        pl: "Timestamp jest za stary",
+        zh: "\u65F6\u95F4\u6233\u8FC7\u65E9"
       },
       4: {
         en: "Timestamp is too new",
@@ -60722,7 +60817,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         pt: "O timestamp \xE9 muito novo",
         sv: "Tidsst\xE4mpeln \xE4r f\xF6r ny",
         ru: "\u0412\u0440\u0435\u043C\u0435\u043D\u043D\u0430\u044F \u043C\u0435\u0442\u043A\u0430 \u0441\u043B\u0438\u0448\u043A\u043E\u043C \u043D\u043E\u0432\u0430\u044F",
-        pl: "Timestamp jest zbyt nowy"
+        pl: "Timestamp jest zbyt nowy",
+        zh: "\u65F6\u95F4\u6233\u8FC7\u665A"
       },
       5: {
         en: "Daily scrobble limit exceeded",
@@ -60731,7 +60827,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         pt: "Limite di\xE1rio de scrobbles excedido",
         sv: "Max dagliga skrobblingar har n\xE5tts",
         ru: "\u041F\u0440\u0435\u0432\u044B\u0448\u0435\u043D \u0434\u043D\u0435\u0432\u043D\u043E\u0439 \u043B\u0438\u043C\u0438\u0442 \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u043E\u0432",
-        pl: "Przekroczono dzienny limit scrobbli"
+        pl: "Przekroczono dzienny limit scrobbli",
+        zh: "\u5DF2\u8D85\u51FA\u6BCF\u65E5 Scrobble \u4E0A\u9650"
       }
     },
     artist: {
@@ -60742,7 +60839,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Artista",
       sv: "Artist",
       ru: "\u0418\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C",
-      pl: "Artysta"
+      pl: "Artysta",
+      zh: "\u827A\u672F\u5BB6"
     },
     artists: {
       en: "Artists",
@@ -60753,7 +60851,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       ja: "\u30A2\u30FC\u30C6\u30A3\u30B9\u30C8",
       sv: "Artister",
       ru: "\u0418\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u0438",
-      pl: "Arty\u015Bci"
+      pl: "Arty\u015Bci",
+      zh: "\u827A\u672F\u5BB6"
     },
     artists_tooltip: {
       en: "Multiple artists are grouped into this profile",
@@ -60763,7 +60862,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "M\xFAltiplos artistas est\xE3o agrupados neste perfil",
       sv: "Flera artister delar denna profil",
       ru: "\u0412 \u044D\u0442\u043E\u043C \u043F\u0440\u043E\u0444\u0438\u043B\u0435 \u0441\u0433\u0440\u0443\u043F\u043F\u0438\u0440\u043E\u0432\u0430\u043D\u044B \u043D\u0435\u0441\u043A\u043E\u043B\u044C\u043A\u043E \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u0435\u0439",
-      pl: "Paru artyst\xF3w ugrupowano na ten profil"
+      pl: "Paru artyst\xF3w ugrupowano na ten profil",
+      zh: "\u8BE5\u8D44\u6599\u9875\u6C47\u603B\u4E86\u591A\u4F4D\u827A\u672F\u5BB6\u7684\u4FE1\u606F"
     },
     album: {
       en: "Album",
@@ -60773,7 +60873,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "\xC1lbum",
       sv: "Album",
       ru: "\u0410\u043B\u044C\u0431\u043E\u043C",
-      pl: "Album"
+      pl: "Album",
+      zh: "\u4E13\u8F91"
     },
     albums: {
       en: "Albums",
@@ -60784,7 +60885,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       ja: "\u30A2\u30EB\u30D0\u30E0",
       sv: "Album",
       ru: "\u0410\u043B\u044C\u0431\u043E\u043C\u044B",
-      pl: "Albumy"
+      pl: "Albumy",
+      zh: "\u4E13\u8F91"
     },
     albums_and_tracks: {
       en: "Albums and tracks",
@@ -60793,7 +60895,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "\xC1lbuns e faixas",
       sv: "Album och l\xE5tar",
       ru: "\u0410\u043B\u044C\u0431\u043E\u043C\u044B \u0438 \u0442\u0440\u0435\u043A\u0438",
-      pl: "Albumy i utwory"
+      pl: "Albumy i utwory",
+      zh: "\u4E13\u8F91\u4E0E\u5355\u66F2"
     },
     album_artist: {
       en: "Album Artist",
@@ -60803,7 +60906,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Artista do \xE1lbum",
       sv: "Albumartist",
       ru: "\u0418\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C \u0430\u043B\u044C\u0431\u043E\u043C\u0430",
-      pl: "Arty\u015Bci albumu"
+      pl: "Arty\u015Bci albumu",
+      zh: "\u4E13\u8F91\u827A\u672F\u5BB6"
     },
     single: {
       // release type
@@ -60823,7 +60927,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Faixa",
       sv: "L\xE5t",
       ru: "\u0422\u0440\u0435\u043A",
-      pl: "Utw\xF3r"
+      pl: "Utw\xF3r",
+      zh: "\u5355\u66F2"
     },
     tracks: {
       en: "Tracks",
@@ -60834,7 +60939,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       ja: "\u30C8\u30E9\u30C3\u30AF",
       sv: "L\xE5tar",
       ru: "\u0422\u0440\u0435\u043A\u0438",
-      pl: "Utwory"
+      pl: "Utwory",
+      zh: "\u5355\u66F2"
     },
     appearance: {
       en: "Appearance",
@@ -60844,7 +60950,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Apar\xEAncia",
       sv: "Uts\xE9ende",
       ru: "\u0412\u043D\u0435\u0448\u043D\u0438\u0439 \u0432\u0438\u0434",
-      pl: "Wygl\u0105d"
+      pl: "Wygl\u0105d",
+      zh: "\u5916\u89C2"
     },
     visual: {
       en: "Visual",
@@ -60854,7 +60961,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Visual",
       sv: "Visuellt",
       ru: "\u041E\u0444\u043E\u0440\u043C\u043B\u0435\u043D\u0438\u0435",
-      pl: "Wizualizacja"
+      pl: "Wizualizacja",
+      zh: "\u89C6\u89C9"
     },
     theme: {
       en: "Theme",
@@ -60864,7 +60972,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Tema",
       sv: "Tema",
       ru: "\u0422\u0435\u043C\u0430",
-      pl: "Motyw"
+      pl: "Motyw",
+      zh: "\u4E3B\u9898"
     },
     theme_day: {
       name: {
@@ -60875,7 +60984,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         pt: "Dia",
         sv: "Dag",
         ru: "\u0421\u0432\u0435\u0442\u043B\u0430\u044F",
-        pl: "Dzie\u0144"
+        pl: "Dzie\u0144",
+        zh: "\u6D45\u8272\u6A21\u5F0F"
       },
       body: {
         en: "When your system reports light theme",
@@ -60885,7 +60995,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         pt: "Quando o seu sistema indica tema claro",
         sv: "N\xE4r ditt system rapporterar ett ljust tema",
         ru: "\u041A\u043E\u0433\u0434\u0430 \u0432 \u0441\u0438\u0441\u0442\u0435\u043C\u0435 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0435\u0442\u0441\u044F \u0441\u0432\u0435\u0442\u043B\u0430\u044F \u0442\u0435\u043C\u0430",
-        pl: "Jak w systemie jest wybrany jasny motyw"
+        pl: "Jak w systemie jest wybrany jasny motyw",
+        zh: "\u5F53\u7CFB\u7EDF\u5904\u4E8E\u6D45\u8272\u4E3B\u9898\u65F6\u5E94\u7528"
       }
     },
     theme_night: {
@@ -60897,7 +61008,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         pt: "Noite",
         sv: "Natt",
         ru: "\u041D\u043E\u0447\u043D\u0430\u044F",
-        pl: "Noc"
+        pl: "Noc",
+        zh: "\u6DF1\u8272\u6A21\u5F0F"
       },
       body: {
         en: "When your system reports dark theme",
@@ -60907,7 +61019,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         pt: "Quando o seu sistema indica tema escuro",
         sv: "N\xE4r ditt system rapporterar ett m\xF6rk tema",
         ru: "\u041A\u043E\u0433\u0434\u0430 \u0432 \u0441\u0438\u0441\u0442\u0435\u043C\u0435 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0435\u0442\u0441\u044F \u0442\u0435\u043C\u043D\u0430\u044F \u0442\u0435\u043C\u0430",
-        pl: "Jak w systemie jest wybran ciemny motyw"
+        pl: "Jak w systemie jest wybran ciemny motyw",
+        zh: "\u5F53\u7CFB\u7EDF\u5904\u4E8E\u6DF1\u8272\u4E3B\u9898\u65F6\u5E94\u7528"
       }
     },
     theme_schedule: {
@@ -60918,7 +61031,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Escolha qual prefer\xEAncia de tema aplicar com base no tema do seu sistema.",
       sv: "V\xE4lj f\xF6redraget tema att till\xE4mpa utg\xE5ende fr\xE5n ditt systemtema.",
       ru: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u0442\u0435\u043C\u0443, \u043A\u043E\u0442\u043E\u0440\u0430\u044F \u0431\u0443\u0434\u0435\u0442 \u043F\u0440\u0438\u043C\u0435\u043D\u044F\u0442\u044C\u0441\u044F \u0432 \u0437\u0430\u0432\u0438\u0441\u0438\u043C\u043E\u0441\u0442\u0438 \u043E\u0442 \u0441\u0438\u0441\u0442\u0435\u043C\u043D\u043E\u0439 \u0442\u0435\u043C\u044B.",
-      pl: "Wybierz jaki motyw ustawi\u0107 bazuj\u0105c na motywie systemu"
+      pl: "Wybierz jaki motyw ustawi\u0107 bazuj\u0105c na motywie systemu",
+      zh: "\u6839\u636E\u7CFB\u7EDF\u4E3B\u9898\u504F\u597D\u9009\u62E9\u8981\u5E94\u7528\u7684\u4E3B\u9898\u3002"
     },
     themes: {
       name: {
@@ -60929,7 +61043,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         pt: "Temas",
         sv: "Teman",
         ru: "\u0422\u0435\u043C\u044B",
-        pl: "Motywy"
+        pl: "Motywy",
+        zh: "\u4E3B\u9898"
       },
       light: {
         en: "Light",
@@ -60939,7 +61054,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         pt: "Claro",
         sv: "Ljus",
         ru: "\u0421\u0432\u0435\u0442\u043B\u0430\u044F",
-        pl: "Jasny"
+        pl: "Jasny",
+        zh: "\u6D45\u8272"
       },
       ink: {
         en: "Ink",
@@ -60949,7 +61065,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         pt: "Tinta",
         sv: "Bl\xE4ck",
         ru: "\u0427\u0435\u0440\u043D\u0438\u043B\u0430",
-        pl: "Tusz"
+        pl: "Tusz",
+        zh: "\u58A8\u8272"
       },
       dark: {
         en: "Ash",
@@ -60960,7 +61077,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         sv: "Aska",
         ru: "\u041F\u0435\u043F\u0435\u043B",
         // straight translate of word "ash" -- craw
-        pl: "Kurz"
+        pl: "Kurz",
+        zh: "\u70DF\u7070"
       },
       darker: {
         en: "Dark",
@@ -60970,7 +61088,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         pt: "Escuro",
         sv: "M\xF6rk",
         ru: "\u0422\u0435\u043C\u043D\u0430\u044F",
-        pl: "Ciemny"
+        pl: "Ciemny",
+        zh: "\u6DF1\u8272"
       },
       oled: {
         en: "Void",
@@ -60980,7 +61099,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         pt: "Vazio",
         sv: "Tomhet",
         ru: "\u041F\u0443\u0441\u0442\u043E\u0442\u0430",
-        pl: "Pr\xF3\u017Cny"
+        pl: "Pr\xF3\u017Cny",
+        zh: "\u865A\u7A7A"
       }
     },
     colours: {
@@ -60991,7 +61111,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Cores",
       sv: "F\xE4rger",
       ru: "\u0426\u0432\u0435\u0442\u0430",
-      pl: "Kolory"
+      pl: "Kolory",
+      zh: "\u989C\u8272"
     },
     adaptive: {
       en: "Adaptive",
@@ -61001,7 +61122,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Adaptativo",
       sv: "Adaptiv",
       ru: "\u0410\u0434\u0430\u043F\u0442\u0438\u0432\u043D\u044B\u0439",
-      pl: "Adaptacyjny"
+      pl: "Adaptacyjny",
+      zh: "\u81EA\u9002\u5E94"
     },
     adaptive_tip: {
       // the space on the end is intentional
@@ -61012,7 +61134,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Sua prefer\xEAncia de tema ser\xE1 {day} ou {night}, com base no seu sistema. ",
       sv: "Ditt f\xF6redragna tema blir antigen {day} eller {night}, beroende p\xE5 ditt system. ",
       ru: "\u041F\u0440\u0435\u0434\u043F\u043E\u0447\u0442\u0438\u0442\u0435\u043B\u044C\u043D\u0430\u044F \u0442\u0435\u043C\u0430 \u0431\u0443\u0434\u0435\u0442 {day} \u0438\u043B\u0438 {night} \u0432 \u0437\u0430\u0432\u0438\u0441\u0438\u043C\u043E\u0441\u0442\u0438 \u043E\u0442 \u043D\u0430\u0441\u0442\u0440\u043E\u0435\u043A \u0432\u0430\u0448\u0435\u0439 \u0441\u0438\u0441\u0442\u0435\u043C\u044B. ",
-      pl: "Tw\xF3j motyw ustawi si\u0119 jako {day} albo {night}, bazuj\u0105c na ustawieniach twojego systemu. "
+      pl: "Tw\xF3j motyw ustawi si\u0119 jako {day} albo {night}, bazuj\u0105c na ustawieniach twojego systemu.",
+      zh: "\u5C06\u6839\u636E\u7CFB\u7EDF\u8BBE\u7F6E\uFF0C\u4E3A\u60A8\u5E94\u7528 {day} \u6216 {night}\u3002"
     },
     change_schedule: {
       en: "Change schedule",
@@ -61022,7 +61145,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Alterar cronograma",
       sv: "\xC4ndra schema",
       ru: "\u0418\u0437\u043C\u0435\u043D\u0438\u0442\u044C \u0440\u0430\u0441\u043F\u0438\u0441\u0430\u043D\u0438\u0435",
-      pl: "Zmie\u0144 harmonogram"
+      pl: "Zmie\u0144 harmonogram",
+      zh: "\u66F4\u6539\u8BA1\u5212"
     },
     change_my_colour_when: {
       name: {
@@ -61033,7 +61157,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         pt: "Usar uma cor de destaque baseada no contexto quando",
         sv: "Anv\xE4nd kontextbaserad accentf\xE4rg n\xE4r",
         ru: "\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u044C \u043A\u043E\u043D\u0442\u0435\u043A\u0441\u0442\u043D\u044B\u0439 \u0430\u043A\u0446\u0435\u043D\u0442\u043D\u044B\u0439 \u0446\u0432\u0435\u0442, \u043A\u043E\u0433\u0434\u0430",
-        pl: "U\u017Cywaj akcentu bazuj\u0105cego na kontek\u015Bcie kiedy"
+        pl: "U\u017Cywaj akcentu bazuj\u0105cego na kontek\u015Bcie kiedy",
+        zh: "\u5728\u4EE5\u4E0B\u60C5\u51B5\u4F7F\u7528\u81EA\u9002\u5E94\u5F3A\u8C03\u8272"
       },
       body: {
         en: "Temporarily override your selected accent to match album art",
@@ -61043,7 +61168,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         pt: "Substituir temporariamente sua cor de destaque selecionada para combinar com a arte do \xE1lbum",
         sv: "\xC4ndra tillf\xE4lligt din valda accentf\xE4rg f\xF6r att matcha albumkonsten",
         ru: "\u0412\u0440\u0435\u043C\u0435\u043D\u043D\u043E \u0437\u0430\u043C\u0435\u043D\u044F\u0442\u044C \u0432\u044B\u0431\u0440\u0430\u043D\u043D\u044B\u0439 \u0430\u043A\u0446\u0435\u043D\u0442\u043D\u044B\u0439 \u0446\u0432\u0435\u0442 \u043D\u0430 \u0446\u0432\u0435\u0442 \u043E\u0431\u043B\u043E\u0436\u043A\u0438 \u0430\u043B\u044C\u0431\u043E\u043C\u0430",
-        pl: "Tymczasowo nadpisz tw\xF3j wybrany akcent \u017Ceby dopasowa\u0107 do ok\u0142adki albumu"
+        pl: "Tymczasowo nadpisz tw\xF3j wybrany akcent \u017Ceby dopasowa\u0107 do ok\u0142adki albumu",
+        zh: "\u6839\u636E\u4E13\u8F91\u5C01\u9762\u8272\u5F69\u6682\u65F6\u66FF\u6362\u5F53\u524D\u5F3A\u8C03\u8272"
       }
     },
     hue_from_album: {
@@ -61055,7 +61181,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Navegando pelas p\xE1ginas de \xE1lbuns",
       sv: "Du \xE4r p\xE5 albumsidor",
       ru: "\u041F\u0440\u043E\u0441\u043C\u0430\u0442\u0440\u0438\u0432\u0430\u044E\u0442\u0441\u044F \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u044B \u0430\u043B\u044C\u0431\u043E\u043C\u043E\u0432",
-      pl: "Przegl\u0105dania album\xF3w"
+      pl: "Przegl\u0105dania album\xF3w",
+      zh: "\u6D4F\u89C8\u4E13\u8F91\u9875\u9762\u65F6"
     },
     colourful_active: {
       // a sub-option for change_my_colour_when
@@ -61066,7 +61193,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Scrobblando uma faixa ativamente",
       sv: "Aktivt skrobblar en l\xE5t",
       ru: "\u041F\u0440\u043E\u0438\u0441\u0445\u043E\u0434\u0438\u0442 \u0430\u043A\u0442\u0438\u0432\u043D\u044B\u0439 \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u0438\u043D\u0433 \u0442\u0440\u0435\u043A\u0430",
-      pl: "Aktualnie scrobbluje utw\xF3r"
+      pl: "Aktualnie scrobbluje utw\xF3r",
+      zh: "\u6B63\u5728 Scrobble \u5355\u66F2\u65F6"
     },
     colourful_all: {
       // a sub-option for change_my_colour_when
@@ -61077,7 +61205,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Visualizando qualquer faixa",
       sv: "Visar en l\xE5t",
       ru: "\u041F\u0440\u043E\u0441\u043C\u0430\u0442\u0440\u0438\u0432\u0430\u0435\u0442\u0441\u044F \u043B\u044E\u0431\u043E\u0439 \u0442\u0440\u0435\u043A",
-      pl: "Ogl\u0105dania utworu"
+      pl: "Ogl\u0105dania utworu",
+      zh: "\u67E5\u770B\u4EFB\u4F55\u5355\u66F2\u65F6"
     },
     configure: {
       en: "Configure",
@@ -61087,7 +61216,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Configurar",
       sv: "Konfigurera",
       ru: "\u041D\u0430\u0441\u0442\u0440\u043E\u0438\u0442\u044C",
-      pl: "Konfiguruj"
+      pl: "Konfiguruj",
+      zh: "\u914D\u7F6E"
     },
     links: {
       en: "Links",
@@ -61097,7 +61227,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Links",
       sv: "L\xE4nkar",
       ru: "\u0421\u0441\u044B\u043B\u043A\u0438",
-      pl: "Linki"
+      pl: "Linki",
+      zh: "\u94FE\u63A5"
     },
     event: {
       en: "Event",
@@ -61107,7 +61238,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Evento",
       sv: "Evenemang",
       ru: "\u0421\u043E\u0431\u044B\u0442\u0438\u0435",
-      pl: "Wydarzenie"
+      pl: "Wydarzenie",
+      zh: "\u6D3B\u52A8"
     },
     events: {
       en: "Events",
@@ -61118,7 +61250,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       ja: "\u30A4\u30D9\u30F3\u30C8",
       sv: "Evenemang",
       ru: "\u0421\u043E\u0431\u044B\u0442\u0438\u044F",
-      pl: "Wydarzenia"
+      pl: "Wydarzenia",
+      zh: "\u6D3B\u52A8"
     },
     lineup: {
       en: "Line-up",
@@ -61128,7 +61261,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Programa\xE7\xE3o",
       sv: "Spelschema",
       ru: "\u0423\u0447\u0430\u0441\u0442\u043D\u0438\u043A\u0438",
-      pl: "Line-up "
+      pl: "Line-up",
+      zh: "\u6F14\u51FA\u9635\u5BB9"
+      // 或许可以是阵容
     },
     attendance: {
       en: "Attendance",
@@ -61138,7 +61273,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Comparecimento",
       sv: "N\xE4rvarande",
       ru: "\u041F\u043E\u0441\u0435\u0449\u0430\u0435\u043C\u043E\u0441\u0442\u044C",
-      pl: "Udzia\u0142"
+      pl: "Udzia\u0142",
+      zh: "\u53C2\u4E0E\u60C5\u51B5"
     },
     top_badge: {
       en: "Top Badge",
@@ -61148,7 +61284,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Emblema superior",
       sv: "Toppemblem",
       ru: "\u0422\u043E\u043F \u0437\u043D\u0430\u0447\u043E\u043A",
-      pl: "Najlepsza odznaka"
+      pl: "Najlepsza odznaka",
+      zh: "\u81F3\u81FB\u5FBD\u7AE0"
     },
     general: {
       en: "General",
@@ -61157,7 +61294,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Generale",
       pt: "Geral",
       sv: "Generellt",
-      ru: "\u041E\u0431\u0449\u0438\u0435"
+      ru: "\u041E\u0431\u0449\u0438\u0435",
+      zh: "\u5E38\u89C4"
     },
     interface: {
       en: "Interface",
@@ -61167,7 +61305,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Interface",
       sv: "Interface",
       ru: "\u0418\u043D\u0442\u0435\u0440\u0444\u0435\u0439\u0441",
-      pl: "Interfejs"
+      pl: "Interfejs",
+      zh: "\u754C\u9762"
     },
     music: {
       en: "Music",
@@ -61178,7 +61317,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       ja: "\u97F3\u697D",
       sv: "Musik",
       ru: "\u041C\u0443\u0437\u044B\u043A\u0430",
-      pl: "Muzyka"
+      pl: "Muzyka",
+      zh: "\u97F3\u4E50"
     },
     smart_music_titles: {
       en: "Smart music titles",
@@ -61187,7 +61327,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "T\xEDtulos de m\xFAsicas inteligentes",
       sv: "Smarta musiktitlar",
       ru: "\u0423\u043C\u043D\u044B\u0435 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u044F \u0442\u0440\u0435\u043A\u043E\u0432",
-      pl: "Inteligente tytu\u0142y utwor\xF3w"
+      pl: "Inteligente tytu\u0142y utwor\xF3w",
+      zh: "\u667A\u80FD\u97F3\u4E50\u6807\u9898"
     },
     playback: {
       en: "Playback",
@@ -61196,7 +61337,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Riproduzione",
       pt: "Reprodu\xE7\xE3o",
       sv: "Uppspelning",
-      ru: "\u0412\u043E\u0441\u043F\u0440\u043E\u0438\u0437\u0432\u0435\u0434\u0435\u043D\u0438\u0435"
+      ru: "\u0412\u043E\u0441\u043F\u0440\u043E\u0438\u0437\u0432\u0435\u0434\u0435\u043D\u0438\u0435",
+      zh: "\u64AD\u653E"
     },
     profile: {
       en: "Profile",
@@ -61206,7 +61348,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Perfil",
       pl: "Profil",
       sv: "Profil",
-      ru: "\u041F\u0440\u043E\u0444\u0438\u043B\u044C"
+      ru: "\u041F\u0440\u043E\u0444\u0438\u043B\u044C",
+      zh: "\u4E2A\u4EBA\u8D44\u6599"
     },
     view_profile: {
       en: "View profile",
@@ -61216,7 +61359,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Ver perfil",
       sv: "Visa profil",
       ru: "\u041F\u043E\u0441\u043C\u043E\u0442\u0440\u0435\u0442\u044C \u043F\u0440\u043E\u0444\u0438\u043B\u044C",
-      pl: "Poka\u017C profil"
+      pl: "Poka\u017C profil",
+      zh: "\u67E5\u770B\u4E2A\u4EBA\u8D44\u6599"
     },
     edit_profile: {
       en: "Edit profile",
@@ -61226,7 +61370,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Editar perfil",
       sv: "Redigera profil",
       ru: "\u0420\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u043F\u0440\u043E\u0444\u0438\u043B\u044C",
-      pl: "Edytuj profil"
+      pl: "Edytuj profil",
+      zh: "\u7F16\u8F91\u4E2A\u4EBA\u8D44\u6599"
     },
     current_season: {
       en: "Current season",
@@ -61236,7 +61381,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Esta\xE7\xE3o atual",
       sv: "Nuvarande \xE5rstid",
       ru: "\u0422\u0435\u043A\u0443\u0449\u0438\u0439 \u0441\u0435\u0437\u043E\u043D",
-      pl: "Aktualny sezon"
+      pl: "Aktualny sezon",
+      zh: "\u5F53\u524D\u5B63\u8282"
     },
     seasonal: {
       name: {
@@ -61248,7 +61394,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         pt: "Esta\xE7\xF5es",
         sv: "\xC5rstider",
         ru: "\u0421\u0435\u0437\u043E\u043D\u044B",
-        pl: "Sezonowe"
+        pl: "Sezonowe",
+        zh: "\u5B63\u8282\u6027"
       },
       listing: {
         none: {
@@ -61259,7 +61406,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           pt: "Nenhuma ativa",
           sv: "Ingen aktiv",
           ru: "\u041D\u0435\u0442 \u0430\u043A\u0442\u0438\u0432\u043D\u044B\u0445",
-          pl: "Nieaktywne"
+          pl: "Nieaktywne",
+          zh: "\u65E0\u6D3B\u52A8"
         },
         easter: {
           en: "Easter",
@@ -61269,7 +61417,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           pt: "P\xE1scoa",
           sv: "P\xE5sk",
           ru: "\u041F\u0430\u0441\u0445\u0430",
-          pl: "Wielkanoc"
+          pl: "Wielkanoc",
+          zh: "\u590D\u6D3B\u8282"
         },
         pride: {
           en: "Pride",
@@ -61279,7 +61428,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           pt: "Orgulho",
           sv: "Pride",
           ru: "\u041F\u0440\u0430\u0439\u0434\u0430",
-          pl: "Duma"
+          pl: "Duma",
+          zh: "\u81EA\u8C6A\u6708"
         },
         halloween: {
           en: "Halloween",
@@ -61289,7 +61439,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           pt: "Dia das Bruxas",
           sv: "Halloween",
           ru: "\u0425\u044D\u043B\u043B\u043E\u0443\u0438\u043D",
-          pl: "Halloween"
+          pl: "Halloween",
+          zh: "\u4E07\u5723\u8282"
         },
         pre_fall: {
           en: "Autumn",
@@ -61299,7 +61450,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           pt: "Outono",
           sv: "H\xF6st",
           ru: "\u041E\u0441\u0435\u043D\u044C",
-          pl: "Jesie\u0144"
+          pl: "Jesie\u0144",
+          zh: "\u79CB\u5B63"
         },
         fall: {
           en: "Winter",
@@ -61307,7 +61459,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           it: "Inverno",
           ru: "\u0417\u0438\u043C\u0430",
           pt: "Inverno",
-          pl: "Zima"
+          pl: "Zima",
+          zh: "\u51AC\u5B63"
         },
         christmas: {
           en: "Christmas",
@@ -61317,7 +61470,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           pt: "Natal",
           sv: "Jul",
           ru: "\u0420\u043E\u0436\u0434\u0435\u0441\u0442\u0432\u043E",
-          pl: "\u015Awi\u0119ta"
+          pl: "\u015Awi\u0119ta",
+          zh: "\u5723\u8BDE\u8282"
         },
         new_years: {
           en: "New Years",
@@ -61327,7 +61481,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           pt: "Ano Novo",
           sv: "Ny\xE5r",
           ru: "\u041D\u043E\u0432\u044B\u0439 \u0433\u043E\u0434",
-          pl: "Sylwester"
+          pl: "Sylwester",
+          zh: "\u65B0\u5E74"
         }
       },
       notice: {
@@ -61337,7 +61492,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         pt: "Abrir o contador ao vivo",
         sv: "\xD6ppna live-nedr\xE4kningen",
         ru: "\u041E\u0442\u043A\u0440\u044B\u0442\u044C \u0436\u0438\u0432\u043E\u0439 \u0441\u0447\u0435\u0442\u0447\u0438\u043A",
-        pl: "Otw\xF3rz licznik aktualizaj\u0105cy si\u0119 na \u017Cywo"
+        pl: "Otw\xF3rz licznik aktualizaj\u0105cy si\u0119 na \u017Cywo",
+        zh: "\u6253\u5F00\u5B9E\u65F6\u8BA1\u6570\u5668"
       },
       live: {
         en: "Counter is updating live",
@@ -61346,7 +61502,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         pt: "O contador est\xE1 sendo atualizado em tempo real",
         sv: "Nedr\xE4kningen uppdateras live",
         ru: "\u041E\u0442\u043A\u0440\u044B\u0442\u044C \u0441\u0447\u0435\u0442\u0447\u0438\u043A \u0432 \u0440\u0435\u0430\u043B\u044C\u043D\u043E\u043C \u0432\u0440\u0435\u043C\u0435\u043D\u0438",
-        pl: "Licznik aktualizuje si\u0119 na \u017Cywo"
+        pl: "Licznik aktualizuje si\u0119 na \u017Cywo",
+        zh: "\u5B9E\u65F6\u66F4\u65B0\u4E2D"
       },
       presets: {
         // these are seasonal exclusive colour presets
