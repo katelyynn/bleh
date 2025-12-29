@@ -60635,7 +60635,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       ja: "\u3088\u308Ascrobble",
       sv: "skrobblar sedan ",
       ru: "\u0441\u043A\u0440\u043E\u0431\u0431\u043B\u0438\u043D\u0433 \u0441 ",
-      pl: "scrobluje od",
+      pl: "scrobbluje od ",
       zh: "\u97F3\u4E50\u8BB0\u5F55\u59CB\u4E8E "
     },
     edit: {

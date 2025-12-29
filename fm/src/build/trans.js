@@ -994,7 +994,7 @@ export const trans = {
         ja: 'よりscrobble',
         sv: 'skrobblar sedan ',
         ru: 'скробблинг с ',
-        pl: 'scrobluje od',
+        pl: 'scrobbluje od ',
         zh: '音乐记录始于 '
     },
     edit: {
