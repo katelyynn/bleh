@@ -50254,7 +50254,7 @@
         "color: unset"
       );
   }
-  var version2 = "2025.1019";
+  var version2 = "2025.1126.2";
   var last_page_type = {
     state: void 0
   };
@@ -50268,7 +50268,8 @@
     on_mutation,
     on_page_change,
     on_subpage_change,
-    on_error
+    on_error,
+    on_dedicated_page
   }) {
     log2("starting florence", "load", "info", {
       page: page2,
@@ -50277,7 +50278,8 @@
       on_mutation,
       on_page_change,
       on_subpage_change,
-      on_error
+      on_error,
+      on_dedicated_page
     });
     let head_observer = new MutationObserver(() => {
       if (document.head) {
@@ -50298,8 +50300,13 @@
       if (document.body && document.body.querySelector(".adaptive-skin-container") && document.body.querySelector(".footer")) {
         main2();
         pre_observer.disconnect();
-      } else if (document.body && document.body.querySelector(":scope > .container")) {
+      } else if (document.body && (document.body.querySelector(":scope > .container") || document.body.classList.contains("namespace--user_now"))) {
         document.body.classList.add("florence-loaded");
+        if (document.body.querySelector(":scope > .container")) {
+          on_dedicated_page("503");
+        } else if (document.body.classList.contains("namespace--user_now")) {
+          on_dedicated_page("now");
+        }
       }
     });
     pre_observer.observe(document.documentElement, {
@@ -50349,18 +50356,13 @@
       if (page2.state.error) return;
       if (on_mutation) on_mutation();
       let performance_end = performance.now();
-      log2(
-        `finished in ${(performance_end - performance_start) / 1e3} seconds`,
-        "loop"
-      );
+      log2(`finished in ${(performance_end - performance_start) / 1e3} seconds`, "loop");
     }
     function assign_page() {
       document.documentElement.classList.add("florence-supports-loading");
       if (!page2.structure.wrapper)
         page2.structure.wrapper = document.body.querySelector(".main-content");
-      let main_content = page2.structure.wrapper.querySelector(
-        ":scope > :last-child:not([data-florence])"
-      );
+      let main_content = page2.structure.wrapper.querySelector(":scope > :last-child:not([data-florence])");
       if (main_content) {
         assign_page_type();
         if (on_page_change) on_page_change(main_content);

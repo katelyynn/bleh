@@ -132,6 +132,7 @@
         --trans-function-ani: cubic-bezier(0.205, 0.060, 0.050, 0.965);
 
         --ina: var(--motion, ina 0.4s var(--trans-function-ani));
+        --blur-in: var(--motion, blur_in 0.4s var(--trans-function-ani));
 
         --button-sides: 9px;
         --button-sides-icon: calc(var(--button-sides) - 2px);
@@ -10784,6 +10785,25 @@
         }
         &[data-season="new_years"] {
             --mask: var(--icon-16-new-years);
+        }
+    }
+
+    [data-label="bleh"] {
+        &[data-live="true"] {
+            animation: var(--blur-in);
+        }
+    }
+
+    @keyframes blur_in {
+        from, to {
+            scale: 1;
+            filter: blur(0);
+            opacity: 1 !important;
+        }
+        60% {
+            scale: 1.05;
+            filter: blur(4px);
+            opacity: 0 !important;
         }
     }
 
