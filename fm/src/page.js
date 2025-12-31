@@ -88,6 +88,7 @@ import { seasonal_colour_switch } from './components/settings.js';
 import florence from '@tealmiku/florence';
 import tippy, { hideAll } from 'tippy.js';
 import { notices } from './components/notices.js';
+import { tag_page } from './components/tags.js';
 
 export function bleh() {
     florence({
@@ -360,6 +361,12 @@ function main_flow() {
 
             bg.style.setProperty('background', cover);
         });
+    }
+
+    if (['artist', 'album', 'track'].includes(page.type)) {
+        if (page.subpage == 'tags_overview') {
+            tag_page();
+        }
     }
 
     shout_messages();

@@ -59125,6 +59125,22 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     `);
   }
 
+  // src/components/tags.js
+  function tag_page() {
+    if (!page.structure.main) return;
+    const tags = page.structure.main.querySelectorAll(".big-tags-item:not([data-tagged])");
+    tags.forEach((tag) => {
+      tag.setAttribute("data-tagged", true);
+      const ctx = tag.querySelector(".big-tags-item-context");
+      if (ctx) {
+        const links = ctx.querySelectorAll("a");
+        links.forEach((link) => {
+          link.textContent = romanise(correct_artist(link.textContent));
+        });
+      }
+    });
+  }
+
   // src/page.js
   function bleh() {
     florence({
@@ -59308,6 +59324,11 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         let cover = style.substring(cover_substr);
         bg.style.setProperty("background", cover);
       });
+    }
+    if (["artist", "album", "track"].includes(page.type)) {
+      if (page.subpage == "tags_overview") {
+        tag_page();
+      }
     }
     shout_messages();
     subscribe_to_events();
