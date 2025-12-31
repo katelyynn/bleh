@@ -433,12 +433,12 @@ export function append_nav() {
 
     // configure bleh
     let bleh_container = html.node`
-            <li class="masthead-nav-item">
-                <a class="masthead-nav-control chibi" href="${root}bleh${stored_season.id != 'none' ? '/seasonal' : ''}" data-label="bleh" data-season="${stored_season.id}" data-season-active="${stored_season.id != 'none' ? 'true' : 'false'}">
-                    ${stored_season.id == 'none' ? tl(trans.bleh_settings) : DateTime.fromISO(stored_season.end.replace('y0', stored_season.year).replace('{offset}', stored_season.offset)).toRelative(DateTime.fromISO(stored_season.now))}
-                </a>
-            </li>
-        `;
+        <li class="masthead-nav-item">
+            <a class="masthead-nav-control chibi" href="${root}bleh${stored_season.id != 'none' ? '/seasonal' : ''}" data-label="bleh" data-season="${stored_season.id}" data-season-active="${stored_season.id != 'none' ? 'true' : 'false'}" data-live="false">
+                ${stored_season.id == 'none' ? tl(trans.bleh_settings) : DateTime.fromISO(stored_season.end.replace('y0', stored_season.year).replace('{offset}', stored_season.offset)).toRelative(DateTime.fromISO(stored_season.now))}
+            </a>
+        </li>
+    `;
     if (stored_season.id == 'none') {
         tippy(bleh_container, {
             content: tl(trans.bleh_settings)
@@ -447,9 +447,9 @@ export function append_nav() {
         page.header.season_tooltip = tippy(bleh_container, {
             theme: 'seasonal-swatch',
             content: html.node`
-                    <span class="season-colour-name colourful" data-season=${stored_season.id}>${tl(trans.seasonal.listing[stored_season.id])}</span>
-                    <span class="season-exclusive">${tl(trans.seasonal.notice)}</span>
-                `
+                <span class="season-colour-name colourful" data-season=${stored_season.id}>${tl(trans.seasonal.listing[stored_season.id])}</span>
+                <span class="season-exclusive">${tl(trans.seasonal.notice)}</span>
+            `
         });
     }
     links.appendChild(bleh_container);

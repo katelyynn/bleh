@@ -49879,7 +49879,8 @@
         <span class="season-colour-name colourful" data-season=${stored_season.id}>${tl2(trans.seasonal.listing[stored_season.id])}</span>
         <span class="season-exclusive">${tl2(trans.seasonal.live)}</span>
     `);
-    page.header.season.classList.add("live");
+    page.header.season.setAttribute("data-live", true);
+    page.header.season.classList.remove("chibi");
   }
   function seasonal_timer_end() {
     if (stored_season.new_years_eve) return;
@@ -49892,7 +49893,8 @@
         <span class="season-colour-name colourful" data-season=${stored_season.id}>${tl2(trans.seasonal.listing[stored_season.id])}</span>
         <span class="season-exclusive">${tl2(trans.seasonal.notice)}</span>
     `);
-    page.header.season.classList.remove("live");
+    page.header.season.setAttribute("data-live", false);
+    page.header.season.classList.add("chibi");
   }
   function update_season_nav() {
     if (!page.header.season) return;
@@ -49907,6 +49909,8 @@
         next = stored_season.next_start.replace("y0", stored_season.year + 1).replace("{offset}", stored_season.offset);
       let time_until = new Date(next) - /* @__PURE__ */ new Date();
       page.header.season.textContent = countdown_to(time_until);
+      page.header.season.setAttribute("data-live", true);
+      page.header.season.classList.remove("chibi");
       page.header.season_tooltip.setContent(html.node`
             <span class="season-colour-name">${tl2(trans.seasonal.listing[stored_season.id])}</span>
             <span class="season-exclusive">${tl2(trans.seasonal.live)}</span>
@@ -54499,12 +54503,12 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     });
     links.appendChild(more_button);
     let bleh_container = html.node`
-            <li class="masthead-nav-item">
-                <a class="masthead-nav-control chibi" href="${root}bleh${stored_season.id != "none" ? "/seasonal" : ""}" data-label="bleh" data-season="${stored_season.id}" data-season-active="${stored_season.id != "none" ? "true" : "false"}">
-                    ${stored_season.id == "none" ? tl2(trans.bleh_settings) : DateTime.fromISO(stored_season.end.replace("y0", stored_season.year).replace("{offset}", stored_season.offset)).toRelative(DateTime.fromISO(stored_season.now))}
-                </a>
-            </li>
-        `;
+        <li class="masthead-nav-item">
+            <a class="masthead-nav-control chibi" href="${root}bleh${stored_season.id != "none" ? "/seasonal" : ""}" data-label="bleh" data-season="${stored_season.id}" data-season-active="${stored_season.id != "none" ? "true" : "false"}" data-live="false">
+                ${stored_season.id == "none" ? tl2(trans.bleh_settings) : DateTime.fromISO(stored_season.end.replace("y0", stored_season.year).replace("{offset}", stored_season.offset)).toRelative(DateTime.fromISO(stored_season.now))}
+            </a>
+        </li>
+    `;
     if (stored_season.id == "none") {
       tippy_esm_default(bleh_container, {
         content: tl2(trans.bleh_settings)
@@ -54513,9 +54517,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       page.header.season_tooltip = tippy_esm_default(bleh_container, {
         theme: "seasonal-swatch",
         content: html.node`
-                    <span class="season-colour-name colourful" data-season=${stored_season.id}>${tl2(trans.seasonal.listing[stored_season.id])}</span>
-                    <span class="season-exclusive">${tl2(trans.seasonal.notice)}</span>
-                `
+                <span class="season-colour-name colourful" data-season=${stored_season.id}>${tl2(trans.seasonal.listing[stored_season.id])}</span>
+                <span class="season-exclusive">${tl2(trans.seasonal.notice)}</span>
+            `
       });
     }
     links.appendChild(bleh_container);

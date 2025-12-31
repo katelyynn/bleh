@@ -236,7 +236,8 @@ export function seasonal_timer_start(bypass = false) {
         <span class="season-exclusive">${tl(trans.seasonal.live)}</span>
     `);
 
-    page.header.season.classList.add('live');
+    page.header.season.setAttribute('data-live', true);
+    page.header.season.classList.remove('chibi');
 }
 export function seasonal_timer_end() {
     if (stored_season.new_years_eve) return;
@@ -254,7 +255,8 @@ export function seasonal_timer_end() {
         <span class="season-exclusive">${tl(trans.seasonal.notice)}</span>
     `);
 
-    page.header.season.classList.remove('live');
+    page.header.season.setAttribute('data-live', false);
+    page.header.season.classList.add('chibi');
 }
 
 function update_season_nav() {
@@ -280,6 +282,8 @@ function update_season_nav() {
         let time_until = new Date(next) - new Date();
 
         page.header.season.textContent = countdown_to(time_until);
+        page.header.season.setAttribute('data-live', true);
+        page.header.season.classList.remove('chibi');
 
         page.header.season_tooltip.setContent(html.node`
             <span class="season-colour-name">${tl(trans.seasonal.listing[stored_season.id])}</span>
