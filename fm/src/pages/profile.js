@@ -1073,30 +1073,21 @@ function patch_profile_following() {
         `);
     }
 
-    // view-related buttons
-    let view_buttons = document.createElement('div');
-    view_buttons.classList.add('view-buttons-wrapper');
-    view_buttons.innerHTML = `
-        <div class="view-buttons">
-            <button class="btn view-item" id="toggle-list_view-1" data-toggle="list_view" data-toggle-value="1" onclick="_update_item('list_view', 1)">
-                ${tl(trans.grid)}
-            </button>
-            <button class="btn view-item" id="toggle-list_view-0" data-toggle="list_view" data-toggle-value="0" onclick="_update_item('list_view', 0)">
-                ${tl(trans.list)}
-            </button>
-        </div>
-    `;
+    const no_data = page.structure.main.querySelector('.no-data-message');
+    const pagination = page.structure.main.querySelector('.pagination');
+    const user_list = page.structure.main.querySelector('.user-list');
+    user_list.setAttribute('data-list-view', settings.list_view);
 
-    const user_panel = html.node`
+    render(page.structure.main, html.node`
         <section class="users">
-            ${view_buttons}
-            ${html.node([page.structure.main.innerHTML])}
+            ${setting({ id: 'list_view', func: (val) => {
+                user_list.setAttribute('data-list-view', val);
+            } })}
+            ${no_data}
+            ${user_list}
+            ${pagination}
         </section>
-    `;
-
-    render(page.structure.main, user_panel);
-
-    refresh_all();
+    `);
 }
 
 function refresh_tracks(button, { quiet = false }) {

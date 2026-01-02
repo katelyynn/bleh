@@ -14786,13 +14786,13 @@
             display: none;
         }
 
-        [data-bleh--list_view="0"] & {
+        &[data-list-view="list"] {
             .user-list-item {
                 border-bottom: 1px solid var(--card-border-base);
             }
         }
 
-        [data-bleh--list_view="1"] & {
+        &[data-list-view="grid"] {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
             gap: var(--item-list-gap);
@@ -14878,16 +14878,18 @@
                 }
             }
         }
+
+        &[data-list-view="cards"] {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: var(--item-list-gap);
+        }
     }
 
     .user-list-inner-wrap {
         display: flex !important;
         align-items: center;
         gap: var(--card-gap);
-
-        > * {
-            transition: all var(--trans) var(--trans-function);
-        }
     }
 
     .user-list-item:not(.listener-list-item):not(:has(.label.user-follow)) {

@@ -814,8 +814,20 @@ export let settings_store = {
         body: trans.redirect_messages.body
     },
     list_view: {
-        default: 1,
-        type: 'radio'
+        default: 'cards',
+        type: 'radio',
+        type: 'tabs',
+        values: {
+            cards: {
+                name: trans.cards
+            },
+            grid: {
+                name: trans.grid
+            },
+            list: {
+                name: trans.list
+            }
+        }
     },
     chart_view: {
         default: 'line',

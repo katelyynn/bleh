@@ -69,6 +69,14 @@ export function load_settings(skip = false) {
             settings.font_weight_bold = settings_store.font_weight_bold.default;
     }
 
+    if (Number.isInteger(settings.list_view)) {
+        if (settings.list_view == 0) {
+            settings.list_view = 'list';
+        } else {
+            settings.list_view = 'cards';
+        }
+    }
+
     if (settings.profile_shortcut) {
         settings.friends = [settings.profile_shortcut];
         settings.starred_friend = settings.profile_shortcut;

@@ -36657,26 +36657,20 @@
             <div class="new-badge count-badge">${count}</div>
         `);
     }
-    let view_buttons = document.createElement("div");
-    view_buttons.classList.add("view-buttons-wrapper");
-    view_buttons.innerHTML = `
-        <div class="view-buttons">
-            <button class="btn view-item" id="toggle-list_view-1" data-toggle="list_view" data-toggle-value="1" onclick="_update_item('list_view', 1)">
-                ${tl2(trans.grid)}
-            </button>
-            <button class="btn view-item" id="toggle-list_view-0" data-toggle="list_view" data-toggle-value="0" onclick="_update_item('list_view', 0)">
-                ${tl2(trans.list)}
-            </button>
-        </div>
-    `;
-    const user_panel = html.node`
+    const no_data = page.structure.main.querySelector(".no-data-message");
+    const pagination = page.structure.main.querySelector(".pagination");
+    const user_list = page.structure.main.querySelector(".user-list");
+    user_list.setAttribute("data-list-view", settings.list_view);
+    render(page.structure.main, html.node`
         <section class="users">
-            ${view_buttons}
-            ${html.node([page.structure.main.innerHTML])}
+            ${setting({ id: "list_view", func: (val) => {
+      user_list.setAttribute("data-list-view", val);
+    } })}
+            ${no_data}
+            ${user_list}
+            ${pagination}
         </section>
-    `;
-    render(page.structure.main, user_panel);
-    refresh_all();
+    `);
   }
   function refresh_tracks(button2, { quiet = false }) {
     let panel = page.structure.main.querySelector("#recent-tracks-section");
@@ -41828,6 +41822,13 @@
         settings.font_weight_medium = settings_store.font_weight_medium.default;
       if (settings.font_weight_bold == 730 || settings.font_weight_bold == 760 || settings.font_weight_bold == 680)
         settings.font_weight_bold = settings_store.font_weight_bold.default;
+    }
+    if (Number.isInteger(settings.list_view)) {
+      if (settings.list_view == 0) {
+        settings.list_view = "list";
+      } else {
+        settings.list_view = "cards";
+      }
     }
     if (settings.profile_shortcut) {
       settings.friends = [settings.profile_shortcut];
@@ -50254,7 +50255,7 @@
         "color: unset"
       );
   }
-  var version2 = "2025.1126.2";
+  var version2 = "2025.1019";
   var last_page_type = {
     state: void 0
   };
@@ -50268,8 +50269,7 @@
     on_mutation,
     on_page_change,
     on_subpage_change,
-    on_error,
-    on_dedicated_page
+    on_error
   }) {
     log2("starting florence", "load", "info", {
       page: page2,
@@ -50278,8 +50278,7 @@
       on_mutation,
       on_page_change,
       on_subpage_change,
-      on_error,
-      on_dedicated_page
+      on_error
     });
     let head_observer = new MutationObserver(() => {
       if (document.head) {
@@ -50300,13 +50299,8 @@
       if (document.body && document.body.querySelector(".adaptive-skin-container") && document.body.querySelector(".footer")) {
         main2();
         pre_observer.disconnect();
-      } else if (document.body && (document.body.querySelector(":scope > .container") || document.body.classList.contains("namespace--user_now"))) {
+      } else if (document.body && document.body.querySelector(":scope > .container")) {
         document.body.classList.add("florence-loaded");
-        if (document.body.querySelector(":scope > .container")) {
-          on_dedicated_page("503");
-        } else if (document.body.classList.contains("namespace--user_now")) {
-          on_dedicated_page("now");
-        }
       }
     });
     pre_observer.observe(document.documentElement, {
@@ -50356,13 +50350,18 @@
       if (page2.state.error) return;
       if (on_mutation) on_mutation();
       let performance_end = performance.now();
-      log2(`finished in ${(performance_end - performance_start) / 1e3} seconds`, "loop");
+      log2(
+        `finished in ${(performance_end - performance_start) / 1e3} seconds`,
+        "loop"
+      );
     }
     function assign_page() {
       document.documentElement.classList.add("florence-supports-loading");
       if (!page2.structure.wrapper)
         page2.structure.wrapper = document.body.querySelector(".main-content");
-      let main_content = page2.structure.wrapper.querySelector(":scope > :last-child:not([data-florence])");
+      let main_content = page2.structure.wrapper.querySelector(
+        ":scope > :last-child:not([data-florence])"
+      );
       if (main_content) {
         assign_page_type();
         if (on_page_change) on_page_change(main_content);
@@ -70196,8 +70195,20 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       body: trans.redirect_messages.body
     },
     list_view: {
-      default: 1,
-      type: "radio"
+      default: "cards",
+      type: "radio",
+      type: "tabs",
+      values: {
+        cards: {
+          name: trans.cards
+        },
+        grid: {
+          name: trans.grid
+        },
+        list: {
+          name: trans.list
+        }
+      }
     },
     chart_view: {
       default: "line",
