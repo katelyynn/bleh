@@ -152,38 +152,27 @@ export function collage({ host, sidebar } = {}) {
             },
             {
                 value: 'date_preset=LAST_7_DAYS',
-                text: tl(trans.last_count_days).replace(
-                    '{c}',
-                    '7'
-                )
+                text: tl(trans.last_count_days, { c: '7' })
             },
             {
                 value: 'date_preset=LAST_30_DAYS',
-                text: tl(trans.last_count_days).replace(
-                    '{c}',
-                    '30'
-                )
+                text: tl(trans.last_count_days, { c: '30' })
             },
             {
                 value: 'date_preset=LAST_90_DAYS',
-                text: tl(trans.last_count_days).replace(
-                    '{c}',
-                    '90'
-                )
+                text: tl(trans.last_count_days, { c: '90' })
             },
             {
                 value: 'date_preset=LAST_180_DAYS',
-                text: tl(trans.last_count_days).replace(
-                    '{c}',
-                    '180'
-                )
+                text: tl(trans.last_count_days, { c: '180' })
             },
             {
                 value: 'date_preset=LAST_365_DAYS',
-                text: tl(trans.last_count_days).replace(
-                    '{c}',
-                    '365'
-                )
+                text: tl(trans.last_count_days, { c: '365' })
+            },
+            {
+                value: 'date_preset=ALL',
+                text: tl(trans.all_time)
             }
         ];
 
