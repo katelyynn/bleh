@@ -7046,8 +7046,8 @@
         position: relative;
         --left: calc((var(--button-height) - var(--icon-size)) / 2);
         --mask: var(--icon-16-heart);
-        --col: hsl(var(--l3-c));
-        --mask-colour: currentColor;
+        --col: hsl(var(--l3-c)) !important;
+        --mask-colour: var(--col) !important;
         color: var(--col);
 
         display: flex !important;
@@ -7061,11 +7061,10 @@
         font-size: var(--font-size) !important;
     }
     [data-toggle-button-current-state="loved"] .chartlist-love-button {
-        --mask: var(--icon-16-heart-solid);
+        --mask: var(--icon-16-heart-solid) !important;
     }
 
-    [data-toggle-button-current-state="unloved"]
-        button.chartlist-love-button:not(:hover) {
+    [data-toggle-button-current-state="unloved"] .chartlist-love-button:not(:hover) {
         --col: hsl(var(--c3), 40%) !important;
     }
     /*[data-toggle-button-current-state="loved"] .chartlist-love-button:after,
@@ -7525,21 +7524,8 @@
     }
 
     .shout-more-actions {
-        --bg: transparent;
-        --bg-hov: transparent;
-        --bg-atv: transparent;
-        --shadow: none;
-        --padding: 0;
-        position: relative;
-        margin-right: unset !important;
         --mask: var(--icon-16-settings);
-        --mask-size: 14px;
-        width: var(--mask-size);
-        height: 18px;
-        --show-icon: block;
-        --left: 0;
-        --col: hsl(var(--c3));
-        --mask-colour: currentColor;
+        width: 24px !important;
     }
 
     .shout-action-button {
@@ -8210,7 +8196,8 @@
     .inbox-item,
     .report-dropdown-button,
     .see-more, .music-bookmarks-artists-item-toggle, .music-bookmarks-albums-item-toggle, .music-bookmarks-tags-item-toggle,
-    .modal-action-button
+    .modal-action-button,
+    .js-shout-reply-cancel
     {
         --bg: var(--cards-overlay-image-subtlest, none), hsl(var(--b3));
         --bg-hov:
@@ -9990,6 +9977,11 @@
                 var(--icon-16-plus, var(--icon-16-placeholder))
             );
         }
+    }
+
+    .shout-more-actions {
+        padding-left: var(--see-more-pad) !important;
+        padding-right: var(--see-more-pad) !important;
     }
 
     .shout-reply {
@@ -27274,11 +27266,49 @@
         padding: var(--card-padding);
         margin: calc(-1 * var(--card-padding));
 
-        canvas {
-            max-width: 100% !important;
-            max-height: 900px !important;
-            border-radius: var(--item-med-radius);
-            box-shadow: var(--interact-shadow);
+        .collage-canvas {
+            position: relative;
+
+            canvas {
+                max-width: 100% !important;
+                max-height: 900px !important;
+                border-radius: var(--item-med-radius);
+                box-shadow: var(--interact-shadow);
+
+                transition-property: opacity;
+                transition-duration: 0.3s;
+                transition-timing-function: var(--trans-function-ani);
+            }
+
+            .collage-canvas-actions {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: var(--button-list-gap);
+                position: absolute;
+                inset: 0;
+
+                opacity: 0;
+                scale: 0.95;
+
+                transition-property: opacity, scale;
+                transition-duration: 0.3s;
+                transition-timing-function: var(--trans-function-ani);
+            }
+
+            width: fit-content;
+            margin: 0 auto;
+
+            &:hover {
+                canvas {
+                    opacity: 0.3;
+                }
+
+                .collage-canvas-actions {
+                    opacity: 1;
+                    scale: 1;
+                }
+            }
         }
 
         .collage-finished {

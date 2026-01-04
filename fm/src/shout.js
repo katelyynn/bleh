@@ -82,15 +82,16 @@ export function patch_shouts() {
                 shout_timestamp.removeAttribute('title');
             }
 
-            let actions = shout.querySelectorAll(
-                '.shout-actions .shout-action'
-            );
+            let actions = shout.querySelectorAll('.shout-actions .shout-action');
             actions.forEach((action) => {
                 let buttons = action.querySelectorAll('button, a');
                 buttons.forEach((button) => {
                     button.classList.add('shout-action-button', 'see-more');
                 });
             });
+
+            const more_button = shout.querySelector('.shout-more-actions');
+            if (more_button) more_button.classList.add('see-more', 'shout-action-button');
 
             // detect vote status
             const form = shout.querySelector('.vote-button-toggle');

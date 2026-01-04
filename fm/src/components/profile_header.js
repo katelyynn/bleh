@@ -22,6 +22,8 @@ import { dialog, dialog_rm } from './dialog.js';
 import { save_setting } from './settings.js';
 
 export function redesign_profile_header(is_own_profile, is_following) {
+    if (!auth.name) return;
+
     let base_header = document.body.querySelector('.header-info-secondary');
     if (!base_header) return;
 
@@ -53,8 +55,6 @@ export function redesign_profile_header(is_own_profile, is_following) {
     }
 
     // create new
-    let about_me = page.structure.container.querySelector('.about-me-sidebar');
-
     let profile_header = html.node`
         <section class="side-actions" />
     `;

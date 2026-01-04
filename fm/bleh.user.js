@@ -32856,6 +32856,7 @@
         }
         const love = track.querySelector(".chartlist-love-button");
         if (love) {
+          love.classList.add("btn");
           tippy_esm_default(love, {
             content: tl2(trans.love_track)
           });
@@ -32972,6 +32973,7 @@
 
   // src/components/profile_header.js
   function redesign_profile_header(is_own_profile, is_following) {
+    if (!auth.name) return;
     let base_header = document.body.querySelector(".header-info-secondary");
     if (!base_header) return;
     let katsune = ff("katsune");
@@ -32992,7 +32994,6 @@
         if (taste_percentage == "99%") taste_percentage = "100%";
       }
     }
-    let about_me = page.structure.container.querySelector(".about-me-sidebar");
     let profile_header = html.node`
         <section class="side-actions" />
     `;
@@ -38256,9 +38257,9 @@
           render(
             body2,
             html`
-                        <div class="collage-finished">
-                            <strong>${tl2(trans.your_collage_is_ready)}</strong>
-                            <div class="button-group">
+                        <div class="collage-canvas">
+                            ${canvas}
+                            <div class="collage-canvas-actions">
                                 <button
                                     class="btn primary icon"
                                     data-type="download"
@@ -38275,7 +38276,6 @@
                                 </button>
                             </div>
                         </div>
-                        ${canvas}
                     `
           );
           type.querySelector("button").disabled = false;
@@ -58103,15 +58103,15 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           });
           shout_timestamp.removeAttribute("title");
         }
-        let actions = shout.querySelectorAll(
-          ".shout-actions .shout-action"
-        );
+        let actions = shout.querySelectorAll(".shout-actions .shout-action");
         actions.forEach((action) => {
           let buttons2 = action.querySelectorAll("button, a");
           buttons2.forEach((button2) => {
             button2.classList.add("shout-action-button", "see-more");
           });
         });
+        const more_button = shout.querySelector(".shout-more-actions");
+        if (more_button) more_button.classList.add("see-more", "shout-action-button");
         const form = shout.querySelector(".vote-button-toggle");
         const voted_button = form.querySelector(".vote-button--voted");
         const unvote_button = form.querySelector(

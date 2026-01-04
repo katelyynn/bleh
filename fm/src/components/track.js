@@ -1071,6 +1071,7 @@ export function patch_titles(search = page.structure.main) {
 
             const love = track.querySelector('.chartlist-love-button');
             if (love) {
+                love.classList.add('btn');
                 tippy(love, {
                     content: tl(trans.love_track)
                 });

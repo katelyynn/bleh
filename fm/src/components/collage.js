@@ -686,9 +686,9 @@ export function collage({ host, sidebar } = {}) {
                 render(
                     body,
                     html`
-                        <div class="collage-finished">
-                            <strong>${tl(trans.your_collage_is_ready)}</strong>
-                            <div class="button-group">
+                        <div class="collage-canvas">
+                            ${canvas}
+                            <div class="collage-canvas-actions">
                                 <button
                                     class="btn primary icon"
                                     data-type="download"
@@ -706,7 +706,6 @@ export function collage({ host, sidebar } = {}) {
                                 </button>
                             </div>
                         </div>
-                        ${canvas}
                     `
                 );
 
