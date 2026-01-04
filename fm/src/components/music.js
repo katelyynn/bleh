@@ -388,9 +388,7 @@ export async function show_your_scrobbles() {
     if (!katsune)
         col_main.insertBefore(top_container, col_main.firstElementChild);
     else
-        page.structure.container
-            .querySelector('.bleh-background')
-            .after(top_container);
+        page.structure.container.insertBefore(top_container, page.structure.container.firstElementChild);
 
     // other listeners
     if (page.type == 'artist') {

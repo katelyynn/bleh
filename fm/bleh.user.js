@@ -30594,17 +30594,17 @@
     });
     register_menu(date_display, menu);
     function render_popup() {
-      let inner;
+      let inner2;
       if (view.level === "year") {
-        inner = render_year_view();
+        inner2 = render_year_view();
       } else if (view.level === "month") {
-        inner = render_month_view();
+        inner2 = render_month_view();
       } else if (view.level === "manual") {
-        inner = render_manual_view();
+        inner2 = render_manual_view();
       } else {
-        inner = render_day_view();
+        inner2 = render_day_view();
       }
-      tooltip.setContent(html.node`<div class="calendar">${inner}</div>`);
+      tooltip.setContent(html.node`<div class="calendar">${inner2}</div>`);
       if (date_button) tippy_esm_default(date_button, { content: tl2(trans.change_zoom) });
       if (manual_button)
         tippy_esm_default(manual_button, { content: manual_button.textContent });
@@ -46410,7 +46410,7 @@
     if (!katsune)
       col_main.insertBefore(top_container, col_main.firstElementChild);
     else
-      page.structure.container.querySelector(".bleh-background").after(top_container);
+      page.structure.container.insertBefore(top_container, page.structure.container.firstElementChild);
     if (page.type == "artist") {
       let other_container = col_main.querySelector(
         ".personal-stats-item--listeners"
@@ -48771,8 +48771,8 @@
           for (let i = 0; i < offset3; i++)
             if (text5[i] == "`") backticks++;
           if (backticks % 2 == 1) return _;
-          const inner = converter.makeHtml(content.trim());
-          const clean2 = purify.sanitize(inner, {
+          const inner2 = converter.makeHtml(content.trim());
+          const clean2 = purify.sanitize(inner2, {
             ALLOWED_TAGS,
             ALLOWED_ATTR
           });
@@ -54380,12 +54380,12 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       }
     };
     const masthead = document.body.querySelector(".masthead");
-    const inner = masthead.querySelector(".masthead-inner-wrap");
-    const navs = inner.querySelector(".masthead-nav-wrap");
-    const search = inner.querySelector(".masthead-search-form");
+    const inner2 = masthead.querySelector(".masthead-inner-wrap");
+    const navs = inner2.querySelector(".masthead-nav-wrap");
+    const search = inner2.querySelector(".masthead-search-form");
     const form = search.querySelector(".masthead-search-field");
     form.placeholder = tl2(trans.search);
-    inner.insertBefore(
+    inner2.insertBefore(
       html.node`
         <div class="masthead-search-wrap">
             ${search}
@@ -59622,12 +59622,13 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
   async function register_background(url, origin = null) {
     if (url && url.endsWith("c6f59c1e5e7240a4c0d427abd71f3dbb.jpg")) url = "";
     log(`requested register of ${url} from ${origin}`, "background", "log");
-    let background = page.structure.container.querySelector(":scope > .bleh-background");
+    let background = page.structure.background;
     if (!background) {
       background = html.node`
             <div class="bleh-background katsune-bleh-background" />
         `;
-      page.structure.container.insertBefore(background, page.structure.container.firstElementChild);
+      document.body.appendChild(background);
+      page.structure.background = background;
     }
     background.setAttribute("data-page-type", page.type);
     background.setAttribute("data-page-subpage", page.subpage);
@@ -59650,6 +59651,39 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       }
     }
     log(`registered ${url} from ${origin}`, "background");
+    register_banner(url, origin);
+    return background;
+  }
+  function register_banner(url, origin = null) {
+    let background = page.structure.banner;
+    if (!background) {
+      background = html.node`
+            <div class="page-banner" />
+        `;
+      document.body.appendChild(background);
+      page.structure.banner = background;
+    }
+    background.setAttribute("data-page-type", page.type);
+    background.setAttribute("data-page-subpage", page.subpage);
+    background.setAttribute("data-background-origin", origin);
+    background.setAttribute("data-background-coloured", settings.hue_from_album);
+    render(background, html`
+        <span class="background-inner" ref=${(el) => inner = el} />
+    `);
+    if (url) {
+      if (url == "accent") {
+        inner.setAttribute("data-accent-based", true);
+      } else {
+        inner.style.setProperty("background-image", `url(${url})`);
+      }
+    }
+    if (page.type == "user") {
+      if (page.name == auth.name) {
+        background.setAttribute("data-page-user-is-self", "true");
+      } else {
+        background.setAttribute("data-page-user-is-self", "false");
+      }
+    }
     return background;
   }
   function favi() {
@@ -80692,13 +80726,13 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
   function drawBorder(ctx, element, offset3, spacing, circular) {
     const { fullCircles, startAngle, circumference, options } = element;
     const { borderWidth, borderJoinStyle, borderDash, borderDashOffset, borderRadius } = options;
-    const inner = options.borderAlign === "inner";
+    const inner2 = options.borderAlign === "inner";
     if (!borderWidth) {
       return;
     }
     ctx.setLineDash(borderDash || []);
     ctx.lineDashOffset = borderDashOffset;
-    if (inner) {
+    if (inner2) {
       ctx.lineWidth = borderWidth * 2;
       ctx.lineJoin = borderJoinStyle || "round";
     } else {
@@ -80715,7 +80749,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         endAngle = startAngle + (circumference % TAU || TAU);
       }
     }
-    if (inner) {
+    if (inner2) {
       clipArc(ctx, element, endAngle);
     }
     if (options.selfJoin && endAngle - startAngle >= PI && borderRadius === 0 && borderJoinStyle !== "miter") {
@@ -81347,19 +81381,19 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     }
     draw(ctx) {
       const { inflateAmount, options: { borderColor, backgroundColor } } = this;
-      const { inner, outer: outer2 } = boundingRects(this);
+      const { inner: inner2, outer: outer2 } = boundingRects(this);
       const addRectPath = hasRadius(outer2.radius) ? addRoundedRectPath : addNormalRectPath;
       ctx.save();
-      if (outer2.w !== inner.w || outer2.h !== inner.h) {
+      if (outer2.w !== inner2.w || outer2.h !== inner2.h) {
         ctx.beginPath();
-        addRectPath(ctx, inflateRect(outer2, inflateAmount, inner));
+        addRectPath(ctx, inflateRect(outer2, inflateAmount, inner2));
         ctx.clip();
-        addRectPath(ctx, inflateRect(inner, -inflateAmount, outer2));
+        addRectPath(ctx, inflateRect(inner2, -inflateAmount, outer2));
         ctx.fillStyle = borderColor;
         ctx.fill("evenodd");
       }
       ctx.beginPath();
-      addRectPath(ctx, inflateRect(inner, inflateAmount));
+      addRectPath(ctx, inflateRect(inner2, inflateAmount));
       ctx.fillStyle = backgroundColor;
       ctx.fill();
       ctx.restore();

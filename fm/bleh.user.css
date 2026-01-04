@@ -152,6 +152,7 @@
         }
 
         --banner-height: 280px;
+        --banner-offset: 240px;
 
         [data-ff--short="true"] > & {
             --banner-height: 800px;
@@ -768,7 +769,7 @@
         --grid-default-height: calc((var(--cards-main-width) - (var(--card-padding) * 2)) / 4px);
 
         --overview-bio-size: 440px;
-        --header-avatar-size: 150px;
+        --header-avatar-size: 180px;
 
         @media (min-width: 2000px) {
             --cards-main-width: 1002px;
@@ -22900,8 +22901,8 @@
         }
 
         [data-ff--katsune="true"] &:not(.about-artist-panel) {
-            margin: -20px -40px !important;
-            padding: var(--card-gap) calc(var(--card-gap) + var(--card-padding)) !important;
+            margin: 30px -40px var(--card-padding) !important;
+            padding: 0 calc(var(--card-gap) + var(--card-padding)) !important;
             align-items: center;
             gap: calc(var(--card-gap) + var(--card-padding));
 
@@ -22944,9 +22945,6 @@
                 }
             }
 
-            &:not(.no-top-margin) {
-                margin: calc(-1 * (var(--banner-height) - 130px)) 0 0 0 !important;
-            }
             &.no-top-margin {
                 padding-left: 40px !important;
                 padding-right: 40px !important;
@@ -22973,10 +22971,6 @@
                 position: relative;
 
                 &:not(.no-top-margin) {
-                    margin-top: calc(
-                        -1 * (var(--banner-height) - 150px) - 78px
-                    ) !important;
-
                     .avatar-side {
                         --avatar-size: var(--header-avatar-size) !important;
                         margin: unset;
@@ -23050,46 +23044,10 @@
             }
 
             &.redesigned-profile-header {
-                margin-top: calc(
-                    -1 * (var(--banner-height) - 150px) - 78px
-                ) !important;
-
                 .avatar-side {
                     --mask-size: var(--cover-size-200) !important;
                     --avatar-size: var(--header-avatar-size) !important;
                     cursor: pointer;
-                }
-            }
-
-            .expand-side {
-                .header-expand-button {
-                    --font-size: 0;
-                    --padding: 7px !important;
-                    min-width: 32px !important;
-                    height: 32px !important;
-
-                    --bg: transparent;
-                    --bg-hov: hsl(var(--b5), 60%);
-                    --bg-atv: hsl(var(--b5), 80%);
-                    --shadow: none;
-
-                    --mask: var(--icon-16-arrow-up);
-                    --left: 50%;
-                    --margin-left: calc(-1 * var(--icon-half));
-
-                    &:before {
-                        transition-property: transform !important;
-                        transition-duration: 0.2s !important;
-                        transition-timing-function: var(
-                            --trans-function
-                        ) !important;
-                    }
-
-                    &[aria-expanded="false"] {
-                        &:before {
-                            transform: scaleY(-1) !important;
-                        }
-                    }
                 }
             }
 
@@ -23485,15 +23443,54 @@
         }
     }
 
+    .page-banner {
+        position: absolute;
+        inset: 0 0 0 50%;
+        z-index: -4;
+
+        --w: calc(var(--cards-width) + (var(--card-padding) * 8));
+
+        height: calc(52px + var(--banner-offset) + 30px);
+        width: var(--w);
+        margin-left: calc(-1 * (var(--w) / 2));
+
+        border-bottom-left-radius: var(--card-radius);
+        border-bottom-right-radius: var(--card-radius);
+
+        overflow: hidden;
+
+        --mask: linear-gradient(0deg, transparent 0%, white 100%);
+        mask-image: var(--mask);
+        -webkit-mask-image: var(--mask);
+
+        &:not([data-page-type="user"]) {
+            display: none;
+        }
+
+        .background-inner {
+            position: absolute;
+            inset: 0;
+            background-position: center;
+            background-size: cover;
+
+            --mask: linear-gradient(90deg, transparent 0%, white 40%, white 60%, transparent 100%);
+            mask-image: var(--mask);
+            -webkit-mask-image: var(--mask);
+        }
+    }
+
     .bleh-background {
         position: absolute;
         inset: 0;
-        z-index: -3;
-        background-position: 0 var(--profile-header-background-offset);
+        z-index: -5;
+        background-position: center 40%;
         background-size: cover;
-        filter: blur(30px) saturate(145%);
 
-        height: var(--profile-header-background-height);
+        height: var(--banner-height);
+
+        &[data-accent-based] {
+            background-color: hsl(var(--h3));
+        }
 
         &:after {
             content: "";
@@ -23507,55 +23504,8 @@
         }
 
         &.katsune-bleh-background {
-            position: relative;
-            order: -10;
-
-            margin-top: calc(-1 * (20px + 32px));
-            margin-left: calc(
-                -1 *
-                    ((100vw - (var(--cards-width) + (var(--card-gap) * 2))) / 2)
-            );
-            margin-right: calc(
-                -1 *
-                    ((100vw - (var(--cards-width) + (var(--card-gap) * 2))) / 2)
-            );
-
-            [data-ff--beret="true"] & {
-                margin-left: unset;
-                margin-right: unset;
-                width: 100%;
-            }
-
-            @media (max-width: 980px) {
-                margin-left: unset;
-                margin-right: unset;
-            }
-
-            filter: none;
-            height: var(--banner-height);
-            background-color: hsl(var(--b6));
-            background-position: center 40%;
-
-            transition-property: opacity;
-            transition-duration: var(--trans);
-            transition-timing-function: var(--trans-function);
-
-            &[data-accent-based] {
-                background-color: hsl(var(--h3));
-            }
-
-            /*&:before {
-                content: '';
-                position: absolute;
-                inset: 0;
-                background: linear-gradient(90deg, hsl(var(--b6)) 0%, transparent 3%, transparent 97%, hsl(var(--b6)) 100%);
-            }*/
             &:after {
-                background: linear-gradient(
-                    180deg,
-                    transparent 0%,
-                    hsl(var(--b6)) 100%
-                ) !important;
+                background: linear-gradient(180deg, transparent 0%, hsl(var(--b6)) 100%) !important;
             }
 
             .katsune-bleh-background-border {
@@ -23592,8 +23542,8 @@
                 height: 450px;
             }
 
-            &[data-background-origin="artist"] {
-                opacity: 0.7;
+            &[data-page-type="user"] {
+                opacity: 0.2;
             }
         }
 

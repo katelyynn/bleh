@@ -786,14 +786,15 @@ export async function register_background(url, origin = null) {
     if (url && url.endsWith('c6f59c1e5e7240a4c0d427abd71f3dbb.jpg')) url = '';
 
     log(`requested register of ${url} from ${origin}`, 'background', 'log');
-    let background = page.structure.container.querySelector(':scope > .bleh-background');
+    let background = page.structure.background;
 
     if (!background) {
         background = html.node`
             <div class="bleh-background katsune-bleh-background" />
         `;
 
-        page.structure.container.insertBefore(background, page.structure.container.firstElementChild);
+        document.body.appendChild(background);
+        page.structure.background = background;
     }
 
     /*
@@ -831,6 +832,47 @@ export async function register_background(url, origin = null) {
     }
 
     log(`registered ${url} from ${origin}`, 'background');
+
+    register_banner(url, origin);
+
+    return background;
+}
+
+export function register_banner(url, origin = null) {
+    let background = page.structure.banner;
+
+    if (!background) {
+        background = html.node`
+            <div class="page-banner" />
+        `;
+        document.body.appendChild(background);
+        page.structure.banner = background;
+    }
+
+    background.setAttribute('data-page-type', page.type);
+    background.setAttribute('data-page-subpage', page.subpage);
+    background.setAttribute('data-background-origin', origin);
+    background.setAttribute('data-background-coloured', settings.hue_from_album);
+
+    render(background, html`
+        <span class="background-inner" ref=${el => inner = el} />
+    `);
+
+    if (url) {
+        if (url == 'accent') {
+            inner.setAttribute('data-accent-based', true);
+        } else {
+            inner.style.setProperty('background-image', `url(${url})`);
+        }
+    }
+
+    if (page.type == 'user') {
+        if (page.name == auth.name) {
+            background.setAttribute('data-page-user-is-self', 'true');
+        } else {
+            background.setAttribute('data-page-user-is-self', 'false');
+        }
+    }
 
     return background;
 }
