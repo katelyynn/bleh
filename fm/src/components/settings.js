@@ -160,7 +160,7 @@ export function setting({
                     }
                     ${setting_incompatible_block(settings_store[id].incompatible)}
                     <div class="toggle-wrap">
-                        <button class="toggle" ref=${(el) => (toggle = el)} aria-checked=${value}>
+                        <button class="btn toggle" ref=${(el) => (toggle = el)} aria-checked=${value}>
                             <div class="dot"></div>
                         </button>
                     </div>
@@ -180,7 +180,7 @@ export function setting({
                 toggle.setAttribute('aria-checked', !val);
 
                 save_setting(id, !val);
-                if (func) func(val);
+                if (func) func(!val);
             }
 
             elem.compat = () => {
@@ -231,7 +231,7 @@ export function setting({
                         text ?
                             html.node`
                     <div class="heading">
-                        <h5>${html_title}<button class="reset" ref=${(el) => (reset_btn = el)} onclick=${() => reset_range()}>${tl(trans.reset)}</button></h5>
+                        <h5>${html_title}<button class="btn reset" ref=${(el) => (reset_btn = el)} onclick=${() => reset_range()}>${tl(trans.reset)}</button></h5>
                         ${body ? html.node`<p>${body}</p>` : ''}
                     </div>
                     `
@@ -365,7 +365,7 @@ export function setting({
                         text ?
                             html.node`
                     <div class="heading">
-                        <h5>${html_title}<button class="reset" ref=${(el) => (reset_btn = el)} onclick=${() => reset_text(id, input, submit, option, reset_btn, avatar)}>${tl(trans.reset)}</button></h5>
+                        <h5>${html_title}<button class="btn reset" ref=${(el) => (reset_btn = el)} onclick=${() => reset_text(id, input, submit, option, reset_btn, avatar)}>${tl(trans.reset)}</button></h5>
                         ${body ? html.node`<p>${body}</p>` : ''}
                     </div>
                     `
@@ -662,7 +662,7 @@ export function setting({
                         text ?
                             html.node`
                     <div class="heading">
-                        <h5>${html_title}<button class="reset" ref=${(el) => (reset_btn = el)} onclick=${() => reset_radio()}>${tl(trans.reset)}</button></h5>
+                        <h5>${html_title}<button class="btn reset" ref=${(el) => (reset_btn = el)} onclick=${() => reset_radio()}>${tl(trans.reset)}</button></h5>
                         ${body ? html.node`<p>${body}</p>` : ''}
                     </div>
                     `
@@ -978,7 +978,7 @@ export function setting({
                         text ?
                             html.node`
                     <div class="heading">
-                        <h5>${html_title}<button class="reset" ref=${(el) => (reset_btn = el)} onclick=${() => reset_select()}>${tl(trans.reset)}</button></h5>
+                        <h5>${html_title}<button class="btn reset" ref=${(el) => (reset_btn = el)} onclick=${() => reset_select()}>${tl(trans.reset)}</button></h5>
                         ${body ? html.node`<p>${body}</p>` : ''}
                     </div>
                     `

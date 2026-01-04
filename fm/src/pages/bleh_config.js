@@ -1837,7 +1837,7 @@ export async function render_setting_page(page_id) {
                                 </div>
                                 <div class="toggle-wrap">
                                     <input type="checkbox" ref=${(el) => (checkbox = el)} value=${value} checked=${value} />
-                                    <button class="toggle" aria-checked=${value} ref=${(el) => (state = el)}>
+                                    <button class="btn toggle" aria-checked=${value} ref=${(el) => (state = el)}>
                                         <div class="dot" />
                                     </button>
                                 </div>

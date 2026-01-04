@@ -43,7 +43,7 @@ export function toggle({
                     html.node`
             <div class="toggle-wrap">
                 <input type="checkbox" ref=${(el) => (checkbox = el)} id=${id} name=${name} value=${data} checked=${value} />
-                <button class="toggle" ref=${(el) => (state = el)} aria-checked=${value}>
+                <button class="btn toggle" ref=${(el) => (state = el)} aria-checked=${value}>
                     <div class="dot" />
                 </button>
             </div>

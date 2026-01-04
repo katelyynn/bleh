@@ -207,7 +207,7 @@ export function dialog_extender() {
 
                 disclaimer.after(html.node`
                     <div class="button-group">
-                        <button class="flex-button" onclick=${() => {
+                        <button class="btn flex-button" onclick=${() => {
                             checks.forEach((check) => {
                                 check.check();
                             });
@@ -215,7 +215,7 @@ export function dialog_extender() {
                             <div class="bleh-icon" data-type="select-all" style="--icon: var(--mask)" />
                             ${tl(trans.select_all)}
                         </button>
-                        <button class="flex-button" onclick=${() => {
+                        <button class="btn flex-button" onclick=${() => {
                             checks.forEach((check) => {
                                 check.uncheck();
                             });

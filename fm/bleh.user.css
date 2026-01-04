@@ -8149,23 +8149,22 @@
     }
 
     /*     BUTTON     */
-    .btn,
-    button,
+    .btn, .chibi,
     .btn-primary,
     .shout-action-button,
     .content-form select,
-    .dropdown-menu-clickable-item, .navlist-hidden-list a, .display-options-clickable-item,
+    .dropdown-menu-clickable-item, .navlist-hidden-list a, .display-options-clickable-item, .select-button,
+    .dropdown-menu-clickable-button,
     .inbox-compose-button,
     .inbox-table .inbox-message,
     .header-new-playlink,
     .btn-add, .btn-file,
     .header-message-user,
     .panel-settings-button,
-    .pagination-next a, .pagination-previous a, .pagination-page a, .pagination-page span,
+    .pagination-next > a, .pagination-previous > a, .pagination-page > :is(a, span),
     .video-preview-upload-cta, .album-artwork-upload-cta,
     .gallery-image-report--reported,
     .listening-report-library-link, .listening-report-promo,
-    .user-dashboard-pagination-previous-link, .user-dashboard-pagination-next-link,
     #ot-sdk-btn,
     .footer-links a, .footer-timezone strong,
     .library-search-results li,
@@ -8173,7 +8172,7 @@
     .shout-more-replies-after, .shout-more-replies-before,
     .coloured-cta,
     .gallery-image-preferred-off,
-    .arrow:not(.scroll-button .arrow),
+    .arrow:not(.scroll-button .arrow, .hidden-xs),
     .date-range-picker-preset a,
     .library-top .library-view-button,
     .content-top-back-link, .content-top-back-link + .content-top-header,
@@ -8208,7 +8207,10 @@
     .notification,
     .user-now-empty-state-button,
     .inbox-item,
-    .report-dropdown-button {
+    .report-dropdown-button,
+    .see-more, .music-bookmarks-artists-item-toggle, .music-bookmarks-albums-item-toggle, .music-bookmarks-tags-item-toggle,
+    .modal-action-button
+    {
         --bg: var(--cards-overlay-image-subtlest, none), hsl(var(--b3));
         --bg-hov:
             var(--cards-overlay-image-subtlest, none),
@@ -8309,32 +8311,6 @@
             background-position: unset !important;
         }
 
-        &.mainstream-score--artist,
-        &.report-box-highlight--content,
-        .listening-report-secondary-top-item &,
-        .top-new-item-title &,
-        &.mimic-link:not(
-                [type],
-                .dropdown-menu-clickable-item,
-                .btn,
-                [value],
-                form button
-            ) {
-            --bg: transparent;
-            --bg-hov: transparent;
-            --bg-atv: transparent;
-            --shadow: none;
-            --padding: 0;
-            width: unset;
-            font: inherit !important;
-            font-weight: 500 !important;
-            color: inherit !important;
-            transform: unset !important;
-        }
-        .listening-report-secondary-top-item & {
-            width: 100%;
-        }
-
         kbd,
         .new-badge {
             margin-left: 6px;
@@ -8380,7 +8356,7 @@
                 .share-link,
                 .view-item[aria-checked="true"],
                 .user-now-empty-state-button
-            ):not([data-has-file]) {
+            ):not([data-has-file], .see-more) {
             --bg:
                 var(--cards-overlay-image-subtlest, none), hsl(var(--h3)) !important;
             --bg-hov:
@@ -8607,7 +8583,6 @@
     .source-album,
     .language-nav,
     .out-now-btn,
-    .show-more a,
     .icon-r {
         --btn-right: calc(
             var(--button-sides-icon) + var(--icon-size) + var(--icon-gap)
@@ -8692,6 +8667,7 @@
     }
 
     /*     ICON MASK     */
+    .show-more > a:before,
     .markdown-action:before,
     .report-dropdown-button:before,
     .attendance-badge:before,
@@ -8730,7 +8706,6 @@
     .gallery-image-preferred-states:before, .gallery-image-votes:before,
     .user-list-follower-btn:before,
     .to-consider li:before,
-    .show-more a:before,
     .toggle .dot:before, .icon:before, .icon-r:before,
     .chartlist-now-scrobbling:before,
     [data-link-type]:before,
@@ -8846,7 +8821,7 @@
     /*     GALLERY     */
     .gallery-image-delete button:before, .gallery-image-report:before,
     .btn-add:before, .btn-file:before,
-    .arrow:not(.scroll-button .arrow):before,
+    .arrow:not(.scroll-button .arrow, .hidden-xs):before,
     .header-new-gallery--link .header-new-gallery-inner:before,
     .image-upload-remove:before,
     /*     PLAYLISTS     */
@@ -8857,8 +8832,6 @@
     /*     PLAYER BAR     */
     .player-bar-btn:before,
     .dropdown-menu-item-dark:before,
-    /*     LISTENING REPORTS     */
-    .report-headline-share:before, .user-dashboard-pagination-previous-link:before, .user-dashboard-pagination-next-link:before,
     /*     UPLOAD CTA     */
     .video-preview-upload-cta .cta-link:before, .gallery-preview-cta .cta-link:before, .album-artwork-upload-cta .cta-link:before,
     .shout-more-actions:before,
@@ -8913,7 +8886,6 @@
         transition-duration: var(--trans) !important;
         transition-timing-function: var(--trans-function) !important;
     }
-    .show-more a:before,
     .out-now-btn:before,
     .select-button:not(.link-select):after,
     .external:before,
@@ -9896,6 +9868,7 @@
         }
     }
 
+    .show-more > a,
     .shout-action-button,
     .blend-v2-btn,
     .js-disclose-close.btn-cancel,
@@ -12680,7 +12653,7 @@
         min-height: 200px;
     }
 
-    .arrow:not(.scroll-button .arrow) {
+    .arrow:not(.scroll-button .arrow, .hidden-xs) {
         width: fit-content !important;
         height: 32px !important;
         margin-top: -16px !important;
@@ -13728,6 +13701,7 @@
         margin-bottom: 6px;
     }
 
+    .listening-report-modal,
     .share-button-row,
     .user-dashboard-tooltip,
     .top-item-modal,
@@ -13828,15 +13802,6 @@
         img {
             display: none;
         }
-    }
-    .user-dashboard-pagination-previous-link,
-    .user-dashboard-pagination-next-link {
-        --left: var(--icon-half);
-        --mask: var(--icon-16-arrow-left);
-        transform: unset !important;
-    }
-    .user-dashboard-pagination-next-link {
-        --mask: var(--icon-16-arrow-right);
     }
 
     .report-box-container {
@@ -13965,6 +13930,10 @@
 
     .report-box-container .listening-report-brick-inner {
         margin: unset;
+    }
+
+    .community-entry__avatar {
+        border-radius: var(--avatar-radius);
     }
 
     /*     NAG BAR     */
@@ -17655,10 +17624,6 @@
         flex-direction: column;
         gap: var(--card-gap);
         flex: unset;
-
-        .btn {
-            width: fit-content;
-        }
 
         h1 {
             font-size: 24px;
@@ -25116,11 +25081,8 @@
         display: flex;
         justify-content: center;
         margin-top: var(--card-gap);
-        padding-top: var(--card-gap);
-        border-top: 1px solid var(--card-border-base);
 
         & > a {
-            position: relative;
             --mask: var(--icon-16-arrow-down);
         }
     }
@@ -26790,7 +26752,7 @@
     }
 
     .content.cards-view {
-        margin-top: -240px;
+        margin-top: 100px;
 
         & > .col-main {
             min-width: unset;
@@ -26807,13 +26769,8 @@
         }
     }
     [data-page-type="bleh_setup"] {
-        .row {
-            background: hsl(var(--b6)) !important;
-        }
-
         .col-main {
             .setup {
-                margin-top: -100px !important;
                 margin-bottom: 600px !important;
             }
         }
@@ -26906,7 +26863,7 @@
             width: 100%;
             max-height: 900px;
 
-            transition-property: opacity, max-height, transform;
+            transition-property: opacity, max-height, transform, filter;
             transition-duration: 0.2s;
             transition-timing-function: var(--trans-function);
 
@@ -26956,7 +26913,7 @@
         }
 
         &[data-page="themes"] {
-            width: 680px;
+            width: 780px;
         }
         &[data-page="music"] {
             width: 570px;
@@ -26972,6 +26929,7 @@
                 opacity: 0;
                 max-height: 200px;
                 transform: scaleY(0.8);
+                filter: blur(20px);
             }
         }
 
@@ -26991,6 +26949,7 @@
                 opacity: none !important;
                 transition: none !important;
                 transform: none !important;
+                filter: none !important;
             }
         }
     }

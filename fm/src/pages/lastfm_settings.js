@@ -1059,7 +1059,7 @@ function patch_settings_profile_panel(token, update_picture) {
                                                     if (family == '') family = tl(trans.none);
 
                                                     const elem = html.node`
-                                                        <button class="font-selection" data-font=${font} aria-checked=${font == font_name} onclick=${() => {
+                                                        <button class="btn font-selection" data-font=${font} aria-checked=${font == font_name} onclick=${() => {
                                                             font_name = font;
 
                                                             font_preview.setAttribute('data-font', font);
@@ -1085,7 +1085,7 @@ function patch_settings_profile_panel(token, update_picture) {
                                             <div class="font-options">
                                                 ${['solid', 'pop', 'out', 'glow'].map(style => {
                                                     const elem = html.node`
-                                                        <button class="font-selection font-style" data-font-style=${style} aria-checked=${style == font_style} onclick=${() => {
+                                                        <button class="btn font-selection font-style" data-font-style=${style} aria-checked=${style == font_style} onclick=${() => {
                                                             font_style = style;
 
                                                             font_preview.setAttribute('data-font-style', style);
@@ -1491,7 +1491,7 @@ function bleh_communication_panel(token) {
                                 value="ignorelist"
                             />
                             <button
-                                class="bleh--btn primary icon block"
+                                class="btn primary icon block"
                                 type="submit"
                             >
                                 ${tl(trans.block)}

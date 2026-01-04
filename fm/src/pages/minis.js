@@ -128,7 +128,7 @@ export function bleh_minis(skip = false) {
                         if (mini.hide_if) return html.node``;
 
                         return html.node`
-                            <button class="mini" data-type=${id} data-mini=${id} onclick=${() => {
+                            <button class="btn mini" data-type=${id} data-mini=${id} onclick=${() => {
                                 window.history.replaceState(
                                     id,
                                     '',

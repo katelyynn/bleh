@@ -297,7 +297,13 @@ function setup_accessibility() {
                 <p>${tl(trans.accessibility_explain)}</p>
                 <div class="settings">
                     <div class="setting-group">
-                        ${setting({ id: 'reduced_motion' })}
+                        ${setting({ id: 'reduced_motion', func: (val) => {
+                            if (val) {
+                                page.state.trans = 0;
+                            } else {
+                                page.state.trans = 200;
+                            }
+                        } })}
                         ${setting({ id: 'underline_links' })}
                     </div>
                 </div>

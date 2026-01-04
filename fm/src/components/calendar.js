@@ -223,17 +223,17 @@ export function calendar({
     function render_day_view() {
         return html.node`
             <div class="calendar-header">
-                <button class="month-year" type="button" ref=${(el) => (date_button = el)} onclick=${on_month_year_click} disabled=${!can_nav_month_view()}>
+                <button class="btn month-year" type="button" ref=${(el) => (date_button = el)} onclick=${on_month_year_click} disabled=${!can_nav_month_view()}>
                     ${months[view.month - 1]} ${view.year}
                 </button>
                 <div class="fill" />
-                <button class="chibi icon" data-type="manual" ref=${(el) => (manual_button = el)} type="button" onclick=${() => {
+                <button class="btn chibi icon" data-type="manual" ref=${(el) => (manual_button = el)} type="button" onclick=${() => {
                     view.level = 'manual';
                     render_popup();
                 }}>
                     ${tl(trans.manual)}
                 </button>
-                <button class="chibi icon" data-type="up" ref=${(el) => (up_button = el)} disabled=${!can_prev()} type="button" onclick=${() => {
+                <button class="btn chibi icon" data-type="up" ref=${(el) => (up_button = el)} disabled=${!can_prev()} type="button" onclick=${() => {
                     if (!can_prev()) return;
 
                     view.month--;
@@ -248,7 +248,7 @@ export function calendar({
                 }}>
                     ${tl(trans.back)}
                 </button>
-                <button class="chibi icon" data-type="down" ref=${(el) => (down_button = el)} disabled=${!can_next()} type="button" onclick=${() => {
+                <button class="btn chibi icon" data-type="down" ref=${(el) => (down_button = el)} disabled=${!can_next()} type="button" onclick=${() => {
                     if (!can_next()) return;
 
                     view.month++;
@@ -270,9 +270,9 @@ export function calendar({
             <div class="days" data-last-action=${last_action}>
                 ${days(view.year, view.month).map((cell) =>
                     cell.type == 'empty' ?
-                        html.node`<button class="day empty" type="button" disabled />`
+                        html.node`<button class="btn day empty" type="button" disabled />`
                     :   html.node`
-                            <button class="day" type="button" aria-selected=${cell.day == state.day && cell.date >= min_date && cell.date <= max_date && cell.month == view.month ? 'true' : 'false'} disabled=${cell.date < min_date || cell.date > max_date} onclick=${() => {
+                            <button class="btn day" type="button" aria-selected=${cell.day == state.day && cell.date >= min_date && cell.date <= max_date && cell.month == view.month ? 'true' : 'false'} disabled=${cell.date < min_date || cell.date > max_date} onclick=${() => {
                                 state.day = cell.day;
                                 state.year = view.year;
                                 state.month = view.month;
@@ -293,17 +293,17 @@ export function calendar({
 
         return html.node`
             <div class="calendar-header">
-                <button class="month-year" type="button" ref=${(el) => (date_button = el)} onclick=${on_month_year_click} disabled=${!can_nav_year_view()}>
+                <button class="btn month-year" type="button" ref=${(el) => (date_button = el)} onclick=${on_month_year_click} disabled=${!can_nav_year_view()}>
                     ${view.year}
                 </button>
                 <div class="fill" />
-                <button class="chibi icon" data-type="manual" ref=${(el) => (manual_button = el)} type="button" onclick=${() => {
+                <button class="btn chibi icon" data-type="manual" ref=${(el) => (manual_button = el)} type="button" onclick=${() => {
                     view.level = 'manual';
                     render_popup();
                 }}>
                     ${tl(trans.manual)}
                 </button>
-                <button class="chibi icon" data-type="up" ref=${(el) => (up_button = el)} type="button" disabled=${view.year <= min_year} onclick=${() => {
+                <button class="btn chibi icon" data-type="up" ref=${(el) => (up_button = el)} type="button" disabled=${view.year <= min_year} onclick=${() => {
                     if (view.year < min_year) return;
 
                     view.year--;
@@ -313,7 +313,7 @@ export function calendar({
                 }}>
                     ${tl(trans.back)}
                 </button>
-                <button class="chibi icon" data-type="down" ref=${(el) => (down_button = el)} type="button" disabled=${view.year >= max_year} onclick=${() => {
+                <button class="btn chibi icon" data-type="down" ref=${(el) => (down_button = el)} type="button" disabled=${view.year >= max_year} onclick=${() => {
                     if (view.year > max_year) return;
 
                     view.year++;
@@ -337,7 +337,7 @@ export function calendar({
                         999
                     );
                     return html.node`
-                        <button class="month" aria-selected=${view.year === state.year && i + 1 === state.month} disabled=${month_end < min_date || month_start > max_date} onclick=${() => {
+                        <button class="btn month" aria-selected=${view.year === state.year && i + 1 === state.month} disabled=${month_end < min_date || month_start > max_date} onclick=${() => {
                             view.month = i + 1;
                             view.level = 'day';
 
@@ -360,17 +360,17 @@ export function calendar({
         const decade_start = Math.floor(view.year / 10) * 10;
         return html.node`
             <div class="calendar-header">
-                <button class="month-year" ref=${(el) => (date_button = el)} onclick=${on_month_year_click}>
+                <button class="btn month-year" ref=${(el) => (date_button = el)} onclick=${on_month_year_click}>
                     ${decade_start} – ${decade_start + 9}
                 </button>
                 <div class="fill" />
-                <button class="chibi icon" data-type="manual" ref=${(el) => (manual_button = el)} type="button" onclick=${() => {
+                <button class="btn chibi icon" data-type="manual" ref=${(el) => (manual_button = el)} type="button" onclick=${() => {
                     view.level = 'manual';
                     render_popup();
                 }}>
                     ${tl(trans.manual)}
                 </button>
-                <button class="chibi icon" data-type="up" ref=${(el) => (up_button = el)} disabled=${decade_start - 10 < min_year} onclick=${() => {
+                <button class="btn chibi icon" data-type="up" ref=${(el) => (up_button = el)} disabled=${decade_start - 10 < min_year} onclick=${() => {
                     if (decade_start - 10 < min_year) return;
 
                     view.year -= 10;
@@ -378,7 +378,7 @@ export function calendar({
                 }}>
                     ${tl(trans.back)}
                 </button>
-                <button class="chibi icon" data-type="down" ref=${(el) => (down_button = el)} disabled=${decade_start + 10 > max_year} onclick=${() => {
+                <button class="btn chibi icon" data-type="down" ref=${(el) => (down_button = el)} disabled=${decade_start + 10 > max_year} onclick=${() => {
                     if (decade_start + 10 > max_year) return;
 
                     view.year += 10;
@@ -391,7 +391,7 @@ export function calendar({
                 ${Array.from({ length: 10 }, (_, i) => decade_start + i).map(
                     (yr) => {
                         return html.node`
-                        <button class="year" aria-selected=${yr === state.year} disabled=${yr < min_date.getFullYear() || yr > max_date.getFullYear()} onclick=${() => {
+                        <button class="btn year" aria-selected=${yr === state.year} disabled=${yr < min_date.getFullYear() || yr > max_date.getFullYear()} onclick=${() => {
                             view.year = yr;
                             view.level = 'month';
                             render_popup();
@@ -426,17 +426,17 @@ export function calendar({
 
         let elem = html.node`
             <div class="calendar-header">
-                <button class="month-year" ref=${(el) => (date_button = el)} onclick=${on_month_year_click}>
+                <button class="btn month-year" ref=${(el) => (date_button = el)} onclick=${on_month_year_click}>
                     ${tl(trans.manual)}
                 </button>
                 <div class="fill" />
-                <button class="chibi icon" data-type="manual" ref=${(el) => (manual_button = el)} type="button" disabled>
+                <button class="btn chibi icon" data-type="manual" ref=${(el) => (manual_button = el)} type="button" disabled>
                     ${tl(trans.manual)}
                 </button>
-                <button class="chibi icon" data-type="up" ref=${(el) => (up_button = el)} disabled>
+                <button class="btn chibi icon" data-type="up" ref=${(el) => (up_button = el)} disabled>
                     ${tl(trans.back)}
                 </button>
-                <button class="chibi icon" data-type="down" ref=${(el) => (down_button = el)} disabled>
+                <button class="btn chibi icon" data-type="down" ref=${(el) => (down_button = el)} disabled>
                     ${tl(trans.next)}
                 </button>
             </div>

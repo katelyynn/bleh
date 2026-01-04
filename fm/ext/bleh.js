@@ -746,7 +746,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
             ${e=="toggle"?y.node`
             <div class="toggle-wrap">
                 <input type="checkbox" ref=${C=>v=C} id=${h} name=${r} value=${l} checked=${t} />
-                <button class="toggle" ref=${C=>w=C} aria-checked=${t}>
+                <button class="btn toggle" ref=${C=>w=C} aria-checked=${t}>
                     <div class="dot" />
                 </button>
             </div>
@@ -972,18 +972,18 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
                     class="share-input"
                     ref=${r=>e=r}
                 />
-                <button 
+                <button
                     class="btn primary icon copy"
                     onclick=${()=>{e.select(),document.execCommand("copy"),dt({title:u(c.copied_to_clipboard),icon:"icon-16-copy"})}}
                 >${u(c.copy)}</button>
             </div>
             <div class="share-links">
-                <a 
+                <a
                     href=${`https://twitter.com/intent/tweet?url=${encodeURIComponent(t)}`}
                     target="_blank"
                     class="share-link share-link-twitter"
                 >Twitter</a>
-                <a 
+                <a
                     href=${`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(t)}`}
                     target="_blank"
                     class="share-link share-link-facebook"
@@ -3615,7 +3615,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
                     `:""}
                     ${Vl(Fe[t].incompatible)}
                     <div class="toggle-wrap">
-                        <button class="toggle" ref=${b=>$=b} aria-checked=${n}>
+                        <button class="btn toggle" ref=${b=>$=b} aria-checked=${n}>
                             <div class="dot"></div>
                         </button>
                     </div>
@@ -6551,7 +6551,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
                                 </div>
                                 <div class="toggle-wrap">
                                     <input type="checkbox" ref=${n=>i=n} value=${a} checked=${a} />
-                                    <button class="toggle" aria-checked=${a} ref=${n=>s=n}>
+                                    <button class="btn toggle" aria-checked=${a} ref=${n=>s=n}>
                                         <div class="dot" />
                                     </button>
                                 </div>

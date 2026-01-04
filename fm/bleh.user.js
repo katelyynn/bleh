@@ -30615,17 +30615,17 @@
     function render_day_view() {
       return html.node`
             <div class="calendar-header">
-                <button class="month-year" type="button" ref=${(el) => date_button = el} onclick=${on_month_year_click} disabled=${!can_nav_month_view()}>
+                <button class="btn month-year" type="button" ref=${(el) => date_button = el} onclick=${on_month_year_click} disabled=${!can_nav_month_view()}>
                     ${months2[view.month - 1]} ${view.year}
                 </button>
                 <div class="fill" />
-                <button class="chibi icon" data-type="manual" ref=${(el) => manual_button = el} type="button" onclick=${() => {
+                <button class="btn chibi icon" data-type="manual" ref=${(el) => manual_button = el} type="button" onclick=${() => {
         view.level = "manual";
         render_popup();
       }}>
                     ${tl2(trans.manual)}
                 </button>
-                <button class="chibi icon" data-type="up" ref=${(el) => up_button = el} disabled=${!can_prev()} type="button" onclick=${() => {
+                <button class="btn chibi icon" data-type="up" ref=${(el) => up_button = el} disabled=${!can_prev()} type="button" onclick=${() => {
         if (!can_prev()) return;
         view.month--;
         if (view.month < 1) {
@@ -30637,7 +30637,7 @@
       }}>
                     ${tl2(trans.back)}
                 </button>
-                <button class="chibi icon" data-type="down" ref=${(el) => down_button = el} disabled=${!can_next()} type="button" onclick=${() => {
+                <button class="btn chibi icon" data-type="down" ref=${(el) => down_button = el} disabled=${!can_next()} type="button" onclick=${() => {
         if (!can_next()) return;
         view.month++;
         if (view.month > 12) {
@@ -30655,8 +30655,8 @@
             </div>
             <div class="days" data-last-action=${last_action}>
                 ${days(view.year, view.month).map(
-        (cell) => cell.type == "empty" ? html.node`<button class="day empty" type="button" disabled />` : html.node`
-                            <button class="day" type="button" aria-selected=${cell.day == state.day && cell.date >= min_date && cell.date <= max_date && cell.month == view.month ? "true" : "false"} disabled=${cell.date < min_date || cell.date > max_date} onclick=${() => {
+        (cell) => cell.type == "empty" ? html.node`<button class="btn day empty" type="button" disabled />` : html.node`
+                            <button class="btn day" type="button" aria-selected=${cell.day == state.day && cell.date >= min_date && cell.date <= max_date && cell.month == view.month ? "true" : "false"} disabled=${cell.date < min_date || cell.date > max_date} onclick=${() => {
           state.day = cell.day;
           state.year = view.year;
           state.month = view.month;
@@ -30675,17 +30675,17 @@
       const max_year = max_date.getFullYear();
       return html.node`
             <div class="calendar-header">
-                <button class="month-year" type="button" ref=${(el) => date_button = el} onclick=${on_month_year_click} disabled=${!can_nav_year_view()}>
+                <button class="btn month-year" type="button" ref=${(el) => date_button = el} onclick=${on_month_year_click} disabled=${!can_nav_year_view()}>
                     ${view.year}
                 </button>
                 <div class="fill" />
-                <button class="chibi icon" data-type="manual" ref=${(el) => manual_button = el} type="button" onclick=${() => {
+                <button class="btn chibi icon" data-type="manual" ref=${(el) => manual_button = el} type="button" onclick=${() => {
         view.level = "manual";
         render_popup();
       }}>
                     ${tl2(trans.manual)}
                 </button>
-                <button class="chibi icon" data-type="up" ref=${(el) => up_button = el} type="button" disabled=${view.year <= min_year} onclick=${() => {
+                <button class="btn chibi icon" data-type="up" ref=${(el) => up_button = el} type="button" disabled=${view.year <= min_year} onclick=${() => {
         if (view.year < min_year) return;
         view.year--;
         last_action = "prev";
@@ -30693,7 +30693,7 @@
       }}>
                     ${tl2(trans.back)}
                 </button>
-                <button class="chibi icon" data-type="down" ref=${(el) => down_button = el} type="button" disabled=${view.year >= max_year} onclick=${() => {
+                <button class="btn chibi icon" data-type="down" ref=${(el) => down_button = el} type="button" disabled=${view.year >= max_year} onclick=${() => {
         if (view.year > max_year) return;
         view.year++;
         last_action = "next";
@@ -30715,7 +30715,7 @@
           999
         );
         return html.node`
-                        <button class="month" aria-selected=${view.year === state.year && i + 1 === state.month} disabled=${month_end < min_date || month_start > max_date} onclick=${() => {
+                        <button class="btn month" aria-selected=${view.year === state.year && i + 1 === state.month} disabled=${month_end < min_date || month_start > max_date} onclick=${() => {
           view.month = i + 1;
           view.level = "day";
           last_action = "";
@@ -30736,24 +30736,24 @@
       const decade_start = Math.floor(view.year / 10) * 10;
       return html.node`
             <div class="calendar-header">
-                <button class="month-year" ref=${(el) => date_button = el} onclick=${on_month_year_click}>
+                <button class="btn month-year" ref=${(el) => date_button = el} onclick=${on_month_year_click}>
                     ${decade_start} – ${decade_start + 9}
                 </button>
                 <div class="fill" />
-                <button class="chibi icon" data-type="manual" ref=${(el) => manual_button = el} type="button" onclick=${() => {
+                <button class="btn chibi icon" data-type="manual" ref=${(el) => manual_button = el} type="button" onclick=${() => {
         view.level = "manual";
         render_popup();
       }}>
                     ${tl2(trans.manual)}
                 </button>
-                <button class="chibi icon" data-type="up" ref=${(el) => up_button = el} disabled=${decade_start - 10 < min_year} onclick=${() => {
+                <button class="btn chibi icon" data-type="up" ref=${(el) => up_button = el} disabled=${decade_start - 10 < min_year} onclick=${() => {
         if (decade_start - 10 < min_year) return;
         view.year -= 10;
         render_popup();
       }}>
                     ${tl2(trans.back)}
                 </button>
-                <button class="chibi icon" data-type="down" ref=${(el) => down_button = el} disabled=${decade_start + 10 > max_year} onclick=${() => {
+                <button class="btn chibi icon" data-type="down" ref=${(el) => down_button = el} disabled=${decade_start + 10 > max_year} onclick=${() => {
         if (decade_start + 10 > max_year) return;
         view.year += 10;
         render_popup();
@@ -30765,7 +30765,7 @@
                 ${Array.from({ length: 10 }, (_, i) => decade_start + i).map(
         (yr) => {
           return html.node`
-                        <button class="year" aria-selected=${yr === state.year} disabled=${yr < min_date.getFullYear() || yr > max_date.getFullYear()} onclick=${() => {
+                        <button class="btn year" aria-selected=${yr === state.year} disabled=${yr < min_date.getFullYear() || yr > max_date.getFullYear()} onclick=${() => {
             view.year = yr;
             view.level = "month";
             render_popup();
@@ -30793,17 +30793,17 @@
       let manual_date;
       let elem = html.node`
             <div class="calendar-header">
-                <button class="month-year" ref=${(el) => date_button = el} onclick=${on_month_year_click}>
+                <button class="btn month-year" ref=${(el) => date_button = el} onclick=${on_month_year_click}>
                     ${tl2(trans.manual)}
                 </button>
                 <div class="fill" />
-                <button class="chibi icon" data-type="manual" ref=${(el) => manual_button = el} type="button" disabled>
+                <button class="btn chibi icon" data-type="manual" ref=${(el) => manual_button = el} type="button" disabled>
                     ${tl2(trans.manual)}
                 </button>
-                <button class="chibi icon" data-type="up" ref=${(el) => up_button = el} disabled>
+                <button class="btn chibi icon" data-type="up" ref=${(el) => up_button = el} disabled>
                     ${tl2(trans.back)}
                 </button>
-                <button class="chibi icon" data-type="down" ref=${(el) => down_button = el} disabled>
+                <button class="btn chibi icon" data-type="down" ref=${(el) => down_button = el} disabled>
                     ${tl2(trans.next)}
                 </button>
             </div>
@@ -31779,7 +31779,7 @@
             ${type == "toggle" ? html.node`
             <div class="toggle-wrap">
                 <input type="checkbox" ref=${(el) => checkbox = el} id=${id} name=${name} value=${data2} checked=${value} />
-                <button class="toggle" ref=${(el) => state = el} aria-checked=${value}>
+                <button class="btn toggle" ref=${(el) => state = el} aria-checked=${value}>
                     <div class="dot" />
                 </button>
             </div>
@@ -34649,7 +34649,7 @@
                                                 ${Object.entries(page.state.fonts).map(([font, family]) => {
               if (family == "") family = tl2(trans.none);
               const elem = html.node`
-                                                        <button class="font-selection" data-font=${font} aria-checked=${font == font_name} onclick=${() => {
+                                                        <button class="btn font-selection" data-font=${font} aria-checked=${font == font_name} onclick=${() => {
                 font_name = font;
                 font_preview.setAttribute("data-font", font);
                 font_tile.setAttribute("data-font", font);
@@ -34672,7 +34672,7 @@
                                             <div class="font-options">
                                                 ${["solid", "pop", "out", "glow"].map((style) => {
               const elem = html.node`
-                                                        <button class="font-selection font-style" data-font-style=${style} aria-checked=${style == font_style} onclick=${() => {
+                                                        <button class="btn font-selection font-style" data-font-style=${style} aria-checked=${style == font_style} onclick=${() => {
                 font_style = style;
                 font_preview.setAttribute("data-font-style", style);
                 font_tile.setAttribute("data-font-style", style);
@@ -34996,7 +34996,7 @@
                                 value="ignorelist"
                             />
                             <button
-                                class="bleh--btn primary icon block"
+                                class="btn primary icon block"
                                 type="submit"
                             >
                                 ${tl2(trans.block)}
@@ -38847,7 +38847,7 @@
                     ${Object.entries(valid_minis).map(([id, mini2]) => {
         if (mini2.hide_if) return html.node``;
         return html.node`
-                            <button class="mini" data-type=${id} data-mini=${id} onclick=${() => {
+                            <button class="btn mini" data-type=${id} data-mini=${id} onclick=${() => {
           window.history.replaceState(
             id,
             "",
@@ -40925,7 +40925,7 @@
           let val = settings[id];
           toggle2.setAttribute("aria-checked", !val);
           save_setting(id, !val);
-          if (func) func(val);
+          if (func) func(!val);
         };
         let toggle2;
         const elem = html.node`
@@ -40962,7 +40962,7 @@
                     ` : ""}
                     ${setting_incompatible_block(settings_store[id].incompatible)}
                     <div class="toggle-wrap">
-                        <button class="toggle" ref=${(el) => toggle2 = el} aria-checked=${value}>
+                        <button class="btn toggle" ref=${(el) => toggle2 = el} aria-checked=${value}>
                             <div class="dot"></div>
                         </button>
                     </div>
@@ -41020,7 +41020,7 @@
                 <div class="setting v2 ${standalone ? "standalone" : ""} ${settings_store[id].vertical ? "v" : ""}" data-type="range" disabled=${disabled} data-hide=${hide_if_incompatible} ref=${(el) => option = el} data-modified=${value != settings_store[id].default}>
                     ${text4 ? html.node`
                     <div class="heading">
-                        <h5>${html_title}<button class="reset" ref=${(el) => reset_btn = el} onclick=${() => reset_range()}>${tl2(trans.reset)}</button></h5>
+                        <h5>${html_title}<button class="btn reset" ref=${(el) => reset_btn = el} onclick=${() => reset_range()}>${tl2(trans.reset)}</button></h5>
                         ${body2 ? html.node`<p>${body2}</p>` : ""}
                     </div>
                     ` : ""}
@@ -41102,7 +41102,7 @@
                     ` : ""}
                     ${text4 ? html.node`
                     <div class="heading">
-                        <h5>${html_title}<button class="reset" ref=${(el) => reset_btn = el} onclick=${() => reset_text(id, input2, submit, option, reset_btn, avatar2)}>${tl2(trans.reset)}</button></h5>
+                        <h5>${html_title}<button class="btn reset" ref=${(el) => reset_btn = el} onclick=${() => reset_text(id, input2, submit, option, reset_btn, avatar2)}>${tl2(trans.reset)}</button></h5>
                         ${body2 ? html.node`<p>${body2}</p>` : ""}
                     </div>
                     ` : ""}
@@ -41344,7 +41344,7 @@
                     ` : ""}
                     ${text4 ? html.node`
                     <div class="heading">
-                        <h5>${html_title}<button class="reset" ref=${(el) => reset_btn = el} onclick=${() => reset_radio()}>${tl2(trans.reset)}</button></h5>
+                        <h5>${html_title}<button class="btn reset" ref=${(el) => reset_btn = el} onclick=${() => reset_radio()}>${tl2(trans.reset)}</button></h5>
                         ${body2 ? html.node`<p>${body2}</p>` : ""}
                     </div>
                     ` : ""}
@@ -41588,7 +41588,7 @@
                     ` : ""}
                     ${text4 ? html.node`
                     <div class="heading">
-                        <h5>${html_title}<button class="reset" ref=${(el) => reset_btn = el} onclick=${() => reset_select()}>${tl2(trans.reset)}</button></h5>
+                        <h5>${html_title}<button class="btn reset" ref=${(el) => reset_btn = el} onclick=${() => reset_select()}>${tl2(trans.reset)}</button></h5>
                         ${body2 ? html.node`<p>${body2}</p>` : ""}
                     </div>
                     ` : ""}
@@ -49610,7 +49610,7 @@
                         ${group.map((item) => {
         if (item.hide) return html.node``;
         const button2 = html.node`
-                                <button class="markdown-action" data-type=${item.type} aria-checked="false" type="button" onclick=${() => {
+                                <button class="btn markdown-action" data-type=${item.type} aria-checked="false" type="button" onclick=${() => {
           const sel_start = editor.selectionStart;
           const sel_end = editor.selectionEnd;
           const val = textarea.value();
@@ -52084,7 +52084,7 @@
                                 </div>
                                 <div class="toggle-wrap">
                                     <input type="checkbox" ref=${(el) => checkbox = el} value=${value} checked=${value} />
-                                    <button class="toggle" aria-checked=${value} ref=${(el) => state = el}>
+                                    <button class="btn toggle" aria-checked=${value} ref=${(el) => state = el}>
                                         <div class="dot" />
                                     </button>
                                 </div>
@@ -56479,7 +56479,13 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                 <p>${tl2(trans.accessibility_explain)}</p>
                 <div class="settings">
                     <div class="setting-group">
-                        ${setting({ id: "reduced_motion" })}
+                        ${setting({ id: "reduced_motion", func: (val) => {
+          if (val) {
+            page.state.trans = 0;
+          } else {
+            page.state.trans = 200;
+          }
+        } })}
                         ${setting({ id: "underline_links" })}
                     </div>
                 </div>
@@ -58727,7 +58733,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           let disclaimer = body2.querySelector(".form-disclaimer");
           disclaimer.after(html.node`
                     <div class="button-group">
-                        <button class="flex-button" onclick=${() => {
+                        <button class="btn flex-button" onclick=${() => {
             checks.forEach((check) => {
               check.check();
             });
@@ -58735,7 +58741,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                             <div class="bleh-icon" data-type="select-all" style="--icon: var(--mask)" />
                             ${tl2(trans.select_all)}
                         </button>
-                        <button class="flex-button" onclick=${() => {
+                        <button class="btn flex-button" onclick=${() => {
             checks.forEach((check) => {
               check.uncheck();
             });
