@@ -34771,7 +34771,7 @@
                 <form action="${root}settings/avatar/delete" method="post">
                     <input type="hidden" name="csrfmiddlewaretoken" value=${page.token}>
                     <div class="form-group delete-avatar">
-                        <button class="mimic-link image-upload-remove" type="submit" value="delete-avatar" name="delete-avatar">${tl2(trans.delete)}</button>
+                        <button class="btn image-upload-remove" type="submit" value="delete-avatar" name="delete-avatar">${tl2(trans.delete)}</button>
                     </div>
                 </form>
             </div>
@@ -58508,6 +58508,17 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           })
         );
       }
+      const is_followed = user.querySelector(".user-follow");
+      user.setAttribute("data-is-followed", is_followed != null);
+      const follow = user.querySelector(".toggle-button");
+      if (follow) {
+        follow.classList.add("btn");
+      }
+      const img = avatar2.querySelector("img");
+      user.appendChild(html.node`
+            <div class="user-background" style="background-image: url(${img.src.replace("/avatar70s/", "/avatar300s/")})" />
+        `);
+      img.src = img.src.replace("/avatar70s/", "/avatar170s/");
     });
   }
 
@@ -63866,6 +63877,10 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       sv: "Installation",
       ru: "\u0423\u0441\u0442\u0430\u043D\u043E\u0432\u043A\u0430",
       pl: "Instalacja"
+    },
+    cards: {
+      // as in the view mode
+      en: "Cards"
     },
     grid: {
       // as in the view mode

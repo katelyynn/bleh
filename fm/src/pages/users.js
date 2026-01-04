@@ -4,7 +4,7 @@
 // Licensed under GPLv3
 //
 
-import { render } from 'lighterhtml';
+import { html, render } from 'lighterhtml';
 import { page } from '../build/page';
 import { markdown } from '../components/markdown';
 import { patch_avatar, style_name_from_badge } from '../avatar.js';
@@ -42,5 +42,19 @@ export function bleh_users() {
                 })
             );
         }
+
+        const is_followed = user.querySelector('.user-follow');
+        user.setAttribute('data-is-followed', is_followed != null);
+
+        const follow = user.querySelector('.toggle-button');
+        if (follow) {
+            follow.classList.add('btn');
+        }
+
+        const img = avatar.querySelector('img');
+        user.appendChild(html.node`
+            <div class="user-background" style="background-image: url(${img.src.replace('/avatar70s/', '/avatar300s/')})" />
+        `);
+        img.src = img.src.replace('/avatar70s/', '/avatar170s/');
     });
 }

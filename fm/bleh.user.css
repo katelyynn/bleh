@@ -143,6 +143,8 @@
         --icon-half: 9px;
         --icon-gap: 4px;
 
+        --follow-button-size: 36px;
+
         --modal-close-size: 26px;
 
         @media (max-width: 980px) {
@@ -286,7 +288,7 @@
             --b3: 0, 0%, 11%;
 
             /* card border */
-            --b4: 0, 0%, 21%;
+            --b4: 0, 0%, 19%;
 
             /* card */
             --b5: 0, 0%, 0%;
@@ -5134,7 +5136,6 @@
 
         &:before {
             background-color: currentColor !important;
-            --left: calc((32px - var(--icon-size)) / 2) !important;
         }
 
         [data-toggle-button-current-state="followed"] & {
@@ -10308,6 +10309,15 @@
     [data-type="gallery-saved"] {
         --mask: var(--icon-16-bookmark);
     }
+    [data-type="cards"] {
+        --mask: var(--icon-16-layout-manage);
+    }
+    [data-type="grid"] {
+        --mask: var(--icon-16-grid);
+    }
+    [data-type="list"] {
+        --mask: var(--icon-16-list);
+    }
     [data-type="minus"] {
         --mask: var(--icon-16-minus);
     }
@@ -14768,16 +14778,75 @@
     .user-list {
         display: flex;
         flex-direction: column;
-        margin: 0 calc(-1 * var(--item-list-gap)) !important;
+        margin: unset;
 
         &:before,
         &:after {
             display: none;
         }
 
+        .user-follow {
+            width: calc(18px + 2px);
+            height: calc(18px + 2px);
+            padding: 1px !important;
+            background-color: hsl(var(--b5)) !important;
+            border-radius: 50px !important;
+
+            min-width: unset;
+
+            --margin-top: -9px;
+            --left: 1px;
+        }
+
+        .user-list-inner-wrap {
+            &:before,
+            &:after {
+                display: none;
+            }
+        }
+
+        .user-background {
+            display: none;
+        }
+
+        .user-list-item {
+            --follow-button-bg-hov: hsl(var(--b4), 40%);
+            --follow-button-bg-atv: hsl(var(--b4), 60%);
+            --follow-button-col: hsl(var(--c3));
+            --follow-button-filter: none;
+
+            &:not(:hover, :focus-within) {
+                --follow-button-opacity: 0.3;
+            }
+        }
+
+        .user-list-follower-btn {
+            --bg: transparent;
+            --bg-hov: var(--follow-button-bg-hov);
+            --bg-atv: var(--follow-button-bg-atv);
+            --shadow: none;
+            --shadow-hov: none;
+            --col: var(--follow-button-col);
+            --button-height: var(--follow-button-size);
+            --left: 50%;
+            --margin-left: calc(-1 * (var(--icon-size) / 2));
+            --radius: 50%;
+
+            width: var(--button-height) !important;
+            height: var(--button-height) !important;
+            --filter: var(--follow-button-filter);
+
+            opacity: var(--follow-button-opacity, 1);
+        }
+
         &[data-list-view="list"] {
             .user-list-item {
                 border-bottom: 1px solid var(--card-border-base);
+
+                &[data-is-followed="true"],
+                &[data-position="1"] {
+                    background: linear-gradient(90deg, hsla(var(--h4), 20%) 0%, transparent 28%);
+                }
             }
         }
 
@@ -14785,6 +14854,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
             gap: var(--item-list-gap);
+            margin: 0 calc(-1 * var(--item-list-gap));
 
             @media (max-width: 980px) {
                 grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -14794,8 +14864,12 @@
                 padding: var(--item-list-gap);
                 border-radius: var(--item-big-radius);
 
+                &[data-is-followed="true"],
                 &[data-position="1"] {
                     background: hsla(var(--h4), 15%);
+                    --follow-button-bg-hov: hsl(var(--h3), 10%);
+                    --follow-button-bg-atv: hsl(var(--h3), 20%);
+                    --follow-button-col: hsl(var(--l3-c));
                 }
             }
 
@@ -14806,6 +14880,7 @@
                 margin: unset;
                 height: 56px;
                 padding-left: calc(56px + 10px);
+                padding-right: calc(var(--follow-button-size) + 10px);
                 position: relative;
 
                 .user-list-avatar {
@@ -14830,7 +14905,7 @@
                 .top-listeners-track,
                 .user-list-description {
                     overflow: visible;
-                    padding-right: calc(32px + 10px);
+                    padding-right: unset;
                     flex-direction: column;
                     gap: 0;
                 }
@@ -14840,38 +14915,158 @@
                     bottom: calc(56px - 18px);
                     left: calc(56px - 18px);
                     z-index: 12;
-                    width: calc(18px + 2px);
-                    height: calc(18px + 2px);
-                    padding: 1px !important;
-                    background-color: hsl(var(--b5)) !important;
-                    border-radius: 50px !important;
-
-                    min-width: unset;
-
-                    --margin-top: -9px;
-                    --left: 1px;
-
-                    .user-list-item:has(&) {
-                        background: hsla(var(--h4), 15%);
-                    }
                 }
 
                 .user-list-follower-btn {
                     top: 50%;
-                    margin-top: -16px;
-                    --bg: hsla(var(--b4), 0%);
-                    --bg-hov: hsla(var(--b4), 40%);
-                    --bg-atv: hsla(var(--b4), 60%);
-                    --shadow: none;
-                    --shadow-hov: none;
+                    margin-top: calc(-1 * (var(--button-height) / 2));
                 }
             }
         }
 
         &[data-list-view="cards"] {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             gap: var(--item-list-gap);
+
+            .user-list-item {
+                width: unset;
+                padding: 40px var(--item-list-gap);
+                border-radius: var(--item-big-radius);
+                height: 270px;
+                overflow: hidden;
+
+                --follow-button-filter: var(--card-blur);
+
+                .user-background {
+                    position: absolute;
+                    inset: 0;
+                    display: block;
+                    z-index: 0;
+                    border-radius: var(--item-big-radius);
+                    background-size: cover;
+                    background-position: center;
+
+                    --mask: linear-gradient(0deg, transparent, white);
+                    mask-image: var(--mask);
+                    -webkit-mask-image: var(--mask);
+
+                    opacity: 0.2;
+                    filter: blur(2px);
+                    scale: 1.1;
+
+                    transition-property: scale, opacity, blur;
+                    transition-duration: 0.4s;
+                    transition-timing-function: var(--trans-function-ani);
+                }
+
+                &:hover {
+                    .user-background {
+                        scale: 1.2;
+                        opacity: 0.6;
+                        filter: blur(0);
+                    }
+
+                    .user-list-avatar, .user-follow {
+                        scale: 0.9;
+                        opacity: 0;
+                    }
+
+                    .user-list-name, .user-list-description {
+                        translate: 0 34px !important;
+                    }
+                }
+
+                background-color: hsl(var(--b4), 40%);
+
+                &[data-is-followed="true"],
+                &[data-position="1"] {
+                    background-color: hsla(var(--h4), 15%);
+                    --follow-button-bg-hov: hsl(var(--h3), 10%);
+                    --follow-button-bg-atv: hsl(var(--h3), 20%);
+                    --follow-button-col: hsl(var(--l3-c));
+                }
+
+                .user-list-inner-wrap {
+                    flex-direction: column;
+                    height: unset;
+                    text-align: center;
+                    padding: calc(var(--w) + var(--g)) 0 0 0;
+                    margin: unset;
+                    --w: 72px;
+                    --g: 10px;
+                    z-index: 1;
+                    gap: 4px;
+
+                    .user-list-avatar {
+                        width: var(--w);
+                        height: var(--w);
+
+                        left: 50%;
+                        margin-left: calc(-1 * (var(--w) / 2));
+
+                        transition-property: scale, opacity;
+                        transition-duration: 0.4s;
+                        transition-timing-function: var(--trans-function-ani);
+                    }
+
+                    .user-follow {
+                        position: absolute;
+                        top: 0;
+                        right: 50%;
+                        margin-right: calc((-1 * var(--w)) + 25px);
+
+                        transition-property: scale, opacity;
+                        transition-duration: 0.4s;
+                        transition-timing-function: var(--trans-function-ani);
+                    }
+
+                    .user-list-name {
+                        translate: 0;
+                        transition-property: translate;
+                        transition-duration: 0.4s;
+                        transition-timing-function: var(--trans-function-ani);
+                        filter: var(--header-filter-shadow) !important;
+                    }
+
+                    .user-list-description {
+                        flex-direction: column;
+                        padding: unset;
+                        align-items: center;
+                        gap: 0;
+                        max-width: 100%;
+                        height: 72px;
+
+                        translate: 0;
+                        transition-property: translate;
+                        transition-duration: 0.4s;
+                        transition-timing-function: var(--trans-function-ani);
+                        filter: var(--header-filter-shadow) !important;
+
+                        & > p {
+                            max-width: 100%;
+                            overflow: hidden;
+
+                            text-overflow: ellipsis;
+                            -webkit-box-orient: vertical;
+                            display: -webkit-box;
+                            -webkit-line-clamp: 3;
+                            white-space: wrap;
+
+                            /* i have to override last.fm's :first-child thing :( */
+                            p {
+                                white-space: wrap;
+                            }
+                        }
+                    }
+
+                    .user-list-follower-btn {
+                        top: calc(-1 * (40px - var(--item-list-gap)));
+                        right: 0;
+                        margin-top: unset;
+                    }
+                }
+            }
         }
     }
 
@@ -14881,7 +15076,7 @@
         gap: var(--card-gap);
     }
 
-    .user-list-item:not(.listener-list-item):not(:has(.label.user-follow)) {
+    .user-list-item[data-followed="false"]:not(.listener-list-item) {
         .user-list-name {
             margin-left: calc(16px + var(--card-gap));
         }
@@ -14905,14 +15100,6 @@
         --mask: var(--icon-16-followers);
         --left: 0;
         color: hsl(var(--c3)) !important;
-
-        .user-list-item:has(&) {
-            background: linear-gradient(
-                90deg,
-                hsla(var(--h4), 20%) 0%,
-                transparent 28%
-            );
-        }
     }
 
     .user-list-avatar {
@@ -14929,14 +15116,6 @@
         top: 0;
         left: unset;
         right: 0;
-    }
-    .user-list-item:not(:hover)
-        [data-toggle-button-current-state="followed"]
-        .user-list-follower-btn {
-        --bg: transparent !important;
-        --col: hsl(var(--b3));
-        --shadow: none !important;
-        --shadow-hov: none !important;
     }
     /*.user-list-item:hover .user-list-follower-btn {
         transition-property: none !important;
@@ -20727,14 +20906,6 @@
                         margin-left: -12px;
                         border-left: 1px solid hsl(var(--b5));
                     }
-                }
-
-                &[data-toggle-value="1"] {
-                    --mask: var(--icon-16-grid);
-                }
-
-                &[data-toggle-value="0"] {
-                    --mask: var(--icon-16-list);
                 }
 
                 &.dropdown-menu-clickable-button {
@@ -29329,7 +29500,7 @@
     .this-month {
         --bg-hov: hsl(var(--b4), 40%) !important;
         --bg-atv: hsl(var(--b4), 60%) !important;
-        color: hsl(var(--c3));
+        --col: hsl(var(--c3));
         --mask-colour: hsl(var(--c3), 80%);
         --mask: var(--icon-16-trend);
     }

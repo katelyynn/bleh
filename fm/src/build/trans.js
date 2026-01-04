@@ -4136,6 +4136,10 @@ export const trans = {
         ru: 'Установка',
         pl: 'Instalacja'
     },
+    cards: {
+        // as in the view mode
+        en: 'Cards'
+    },
     grid: {
         // as in the view mode
         en: 'Grid',
