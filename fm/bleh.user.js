@@ -36368,9 +36368,7 @@
         );
         page.structure.row.classList.add("listening-report");
         convert_to_toolbar();
-        let report_box_container = document.body.querySelector(
-          ".report-box-container--overview"
-        );
+        const report_box_container = document.body.querySelector(".report-box-container--overview");
         if (report_box_container) {
           document.documentElement.setAttribute(
             "data-bleh--theme",
@@ -36382,7 +36380,7 @@
           );
           page.structure.row.after(report_box_container);
         } else {
-          let dashboard = page.structure.container.querySelector(".user-dashboard");
+          const dashboard = page.structure.container.querySelector(".user-dashboard");
           if (dashboard) {
             dialog({
               id: "listening_report_v2",

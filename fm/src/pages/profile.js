@@ -646,10 +646,9 @@ export async function bleh_profiles() {
 
             convert_to_toolbar();
 
-            let report_box_container = document.body.querySelector(
-                '.report-box-container--overview'
-            );
+            const report_box_container = document.body.querySelector('.report-box-container--overview');
             if (report_box_container) {
+                // v3+ (2023)
                 document.documentElement.setAttribute(
                     'data-bleh--theme',
                     'oled'
@@ -661,8 +660,7 @@ export async function bleh_profiles() {
 
                 page.structure.row.after(report_box_container);
             } else {
-                let dashboard =
-                    page.structure.container.querySelector('.user-dashboard');
+                const dashboard = page.structure.container.querySelector('.user-dashboard');
                 if (dashboard) {
                     // v2
                     dialog({
