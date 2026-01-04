@@ -35575,8 +35575,8 @@
     );
     const website = page.structure.main.querySelector("#website");
     website.remove();
-    const playback2 = page.structure.main.querySelector("#playback");
-    playback2.remove();
+    const playback = page.structure.main.querySelector("#playback");
+    playback.remove();
   }
   function bleh_applications() {
     let session_types = page.structure.main.querySelectorAll(".api-sessions");
@@ -49991,7 +49991,7 @@
     let cached_style = localStorage.getItem("bleh_cached_style") || "";
     const split = window.location.pathname.replace(root, "").split("/");
     const length = split.length - 1;
-    if (split[length] == "playback" && split[2] == "listening-report" || split[0] == "labs") {
+    if (split[0] == "labs") {
       log("disabled loading for special interface", "style");
       return;
     }
@@ -59200,7 +59200,6 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       },
       on_body_load: () => {
         favi();
-        playback();
         auth_link.state = document.querySelector("a.auth-link");
         if (auth_link.state)
           auth.name = auth_link.state.querySelector("img").getAttribute("alt");
@@ -59756,13 +59755,6 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function() {
       favicon.href = window.matchMedia("(prefers-color-scheme: dark)").matches ? dark : light;
     });
-  }
-  function playback() {
-    const split = window.location.pathname.replace(root, "").split("/");
-    const length = split.length - 1;
-    if (split[length] == "playback" && split[2] == "listening-report") {
-      document.body.classList.add(`playback-${split[length - 1]}`, "florence-loaded");
-    }
   }
 
   // src/build/trans.js
