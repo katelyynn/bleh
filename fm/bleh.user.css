@@ -15020,8 +15020,6 @@
                         transition-property: scale, opacity;
                         transition-duration: 0.4s;
                         transition-timing-function: var(--trans-function-ani);
-
-                        z-index: 3;
                     }
 
                     .user-follow {

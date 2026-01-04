@@ -35575,8 +35575,8 @@
     );
     const website = page.structure.main.querySelector("#website");
     website.remove();
-    const playback = page.structure.main.querySelector("#playback");
-    playback.remove();
+    const playback2 = page.structure.main.querySelector("#playback");
+    playback2.remove();
   }
   function bleh_applications() {
     let session_types = page.structure.main.querySelectorAll(".api-sessions");
@@ -49992,7 +49992,6 @@
     const split = window.location.pathname.replace(root, "").split("/");
     const length = split.length - 1;
     if (split[length] == "playback" && split[2] == "listening-report" || split[0] == "labs") {
-      if (split[length] == "playback" && split[2] == "listening-report") document.body?.classList.add("playback-2024");
       log("disabled loading for special interface", "style");
       return;
     }
@@ -50269,7 +50268,7 @@
         "color: unset"
       );
   }
-  var version2 = "2025.1126.2";
+  var version2 = "2026.0104.2";
   var last_page_type = {
     state: void 0
   };
@@ -50286,6 +50285,7 @@
     on_error,
     on_dedicated_page
   }) {
+    let abort_loading = false;
     log2("starting florence", "load", "info", {
       page: page2,
       on_head_load,
@@ -50298,6 +50298,13 @@
     });
     let head_observer = new MutationObserver(() => {
       if (document.head) {
+        const split = window.location.pathname.split("/");
+        const length = split.length - 1;
+        if (split[length] == "playback" && split[length - 3] == "listening-report") {
+          head_observer.disconnect();
+          abort_loading = true;
+          return;
+        }
         document.documentElement.classList.add("florence-supports-loading");
         if (on_head_load) on_head_load();
         head_observer.disconnect();
@@ -50307,6 +50314,10 @@
       childList: true
     });
     let pre_observer = new MutationObserver((mutations) => {
+      if (abort_loading) {
+        pre_observer.disconnect();
+        return;
+      }
       log2("pre", "load", "info", { mutations });
       if (document.body) {
         log2(`${JSON.stringify(document.body.classList)}`, "load");
@@ -59189,6 +59200,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       },
       on_body_load: () => {
         favi();
+        playback();
         auth_link.state = document.querySelector("a.auth-link");
         if (auth_link.state)
           auth.name = auth_link.state.querySelector("img").getAttribute("alt");
@@ -59744,6 +59756,13 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function() {
       favicon.href = window.matchMedia("(prefers-color-scheme: dark)").matches ? dark : light;
     });
+  }
+  function playback() {
+    const split = window.location.pathname.replace(root, "").split("/");
+    const length = split.length - 1;
+    if (split[length] == "playback" && split[2] == "listening-report") {
+      document.body.classList.add(`playback-${split[length - 1]}`, "florence-loaded");
+    }
   }
 
   // src/build/trans.js

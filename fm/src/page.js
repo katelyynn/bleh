@@ -101,6 +101,7 @@ export function bleh() {
         },
         on_body_load: () => {
             favi();
+            playback();
 
             auth_link.state = document.querySelector('a.auth-link');
             if (auth_link.state)
@@ -901,4 +902,14 @@ function favi() {
                     dark
                 :   light;
         });
+}
+
+function playback() {
+    const split = window.location.pathname.replace(root, '').split('/');
+    const length = split.length - 1;
+
+    // this sometimes fixes last.fm just not appending classes and i dont know why
+    if (split[length] == 'playback' && split[2] == 'listening-report') {
+        document.body.classList.add(`playback-${split[length - 1]}`, 'florence-loaded');
+    }
 }
