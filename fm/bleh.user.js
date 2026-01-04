@@ -34460,9 +34460,6 @@
         let hue_range;
         let sat_range;
         let lit_range;
-        settings_store.profile_hue.default = settings.hue;
-        settings_store.profile_sat.default = settings.sat;
-        settings_store.profile_lit.default = settings.lit;
         const match3 = about.value().match(accent_regex);
         if (match3) {
           save_setting(
@@ -34527,7 +34524,36 @@
                                             ${tl2(trans.back)}
                                         </button>
                                         <div class="fill"></div>
-                                        <button class="btn primary continue" onclick=${() => {
+                                        <div class="button-group">
+                                            ${() => {
+            const btn = html.node`
+                                                    <button class="btn icon select-button" data-type="copy">
+                                                        ${tl2(trans.copy)}
+                                                    </button>
+                                                `;
+            tippy_esm_default(btn, {
+              theme: "context-menu",
+              content: html.node`
+                                                        <button class="dropdown-menu-clickable-item" data-type="profile" onclick=${() => {
+                hue_range.set(settings.hue);
+                sat_range.set(settings.sat);
+                lit_range.set(settings.lit);
+              }}>${tl2(trans.apply_global_accent)}</button>
+                                                        <button class="dropdown-menu-clickable-item" data-type="global" onclick=${() => {
+                save_setting("hue", settings.profile_hue);
+                save_setting("sat", settings.profile_sat);
+                save_setting("lit", settings.profile_lit);
+              }}>${tl2(trans.apply_profile_accent)}</button>
+                                                    `,
+              trigger: "click",
+              placement: "bottom",
+              interactive: true,
+              interactiveBorder: 10,
+              offset: [0, 0]
+            });
+            return btn;
+          }}
+                                            <button class="btn primary continue" onclick=${() => {
             const new_accent = `[accent=${settings.profile_hue},${settings.profile_sat},${settings.profile_lit}]`;
             if (match3) {
               about.value(about.value().replace(
@@ -34549,8 +34575,9 @@
               )
             });
           }}>
-                                            ${tl2(trans.change)}
-                                        </button>
+                                                ${tl2(trans.change)}
+                                            </button>
+                                        </div>
                                     </div>
                                 `
         });
@@ -50244,7 +50271,7 @@
         "color: unset"
       );
   }
-  var version2 = "2025.1019";
+  var version2 = "2025.1126.2";
   var last_page_type = {
     state: void 0
   };
@@ -50258,7 +50285,8 @@
     on_mutation,
     on_page_change,
     on_subpage_change,
-    on_error
+    on_error,
+    on_dedicated_page
   }) {
     log2("starting florence", "load", "info", {
       page: page2,
@@ -50267,7 +50295,8 @@
       on_mutation,
       on_page_change,
       on_subpage_change,
-      on_error
+      on_error,
+      on_dedicated_page
     });
     let head_observer = new MutationObserver(() => {
       if (document.head) {
@@ -50288,8 +50317,13 @@
       if (document.body && document.body.querySelector(".adaptive-skin-container") && document.body.querySelector(".footer")) {
         main2();
         pre_observer.disconnect();
-      } else if (document.body && document.body.querySelector(":scope > .container")) {
+      } else if (document.body && (document.body.querySelector(":scope > .container") || document.body.classList.contains("namespace--user_now"))) {
         document.body.classList.add("florence-loaded");
+        if (document.body.querySelector(":scope > .container")) {
+          on_dedicated_page("503");
+        } else if (document.body.classList.contains("namespace--user_now")) {
+          on_dedicated_page("now");
+        }
       }
     });
     pre_observer.observe(document.documentElement, {
@@ -50339,18 +50373,13 @@
       if (page2.state.error) return;
       if (on_mutation) on_mutation();
       let performance_end = performance.now();
-      log2(
-        `finished in ${(performance_end - performance_start) / 1e3} seconds`,
-        "loop"
-      );
+      log2(`finished in ${(performance_end - performance_start) / 1e3} seconds`, "loop");
     }
     function assign_page() {
       document.documentElement.classList.add("florence-supports-loading");
       if (!page2.structure.wrapper)
         page2.structure.wrapper = document.body.querySelector(".main-content");
-      let main_content = page2.structure.wrapper.querySelector(
-        ":scope > :last-child:not([data-florence])"
-      );
+      let main_content = page2.structure.wrapper.querySelector(":scope > :last-child:not([data-florence])");
       if (main_content) {
         assign_page_type();
         if (on_page_change) on_page_change(main_content);
@@ -62182,6 +62211,12 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pl: "Jasno\u015B\u0107 (lightness)",
       sv: "Ljushet",
       ru: "\u042F\u0440\u043A\u043E\u0441\u0442\u044C"
+    },
+    apply_profile_accent: {
+      en: "Use profile accent globally"
+    },
+    apply_global_accent: {
+      en: "Copy current accent to profile"
     },
     solarium: {
       name: {

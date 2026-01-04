@@ -2487,6 +2487,12 @@ export const trans = {
         sv: 'Ljushet',
         ru: 'Яркость'
     },
+    apply_profile_accent: {
+        en: 'Use profile accent globally'
+    },
+    apply_global_accent: {
+        en: 'Copy current accent to profile'
+    },
     solarium: {
         name: {
             en: 'Enable solarium glass effects',

@@ -849,10 +849,6 @@ function patch_settings_profile_panel(token, update_picture) {
                             let sat_range;
                             let lit_range;
 
-                            settings_store.profile_hue.default = settings.hue;
-                            settings_store.profile_sat.default = settings.sat;
-                            settings_store.profile_lit.default = settings.lit;
-
                             const match = about.value().match(accent_regex);
 
                             if (match) {
@@ -925,33 +921,65 @@ function patch_settings_profile_panel(token, update_picture) {
                                             ${tl(trans.back)}
                                         </button>
                                         <div class="fill"></div>
-                                        <button class="btn primary continue" onclick=${() => {
-                                            const new_accent = `[accent=${settings.profile_hue},${settings.profile_sat},${settings.profile_lit}]`;
+                                        <div class="button-group">
+                                            ${() => {
+                                                const btn = html.node`
+                                                    <button class="btn icon select-button" data-type="copy">
+                                                        ${tl(trans.copy)}
+                                                    </button>
+                                                `;
 
-                                            if (match) {
-                                                about.value(about.value().replace(
-                                                    accent_regex,
-                                                    new_accent
-                                                ));
-                                            } else {
-                                                const trimmed = about.value().trimEnd();
+                                                tippy(btn, {
+                                                    theme: 'context-menu',
+                                                    content: html.node`
+                                                        <button class="dropdown-menu-clickable-item" data-type="profile" onclick=${() => {
+                                                            hue_range.set(settings.hue);
+                                                            sat_range.set(settings.sat);
+                                                            lit_range.set(settings.lit);
+                                                        }}>${tl(trans.apply_global_accent)}</button>
+                                                        <button class="dropdown-menu-clickable-item" data-type="global" onclick=${() => {
+                                                            save_setting('hue', settings.profile_hue);
+                                                            save_setting('sat', settings.profile_sat);
+                                                            save_setting('lit', settings.profile_lit);
+                                                        }}>${tl(trans.apply_profile_accent)}</button>
+                                                    `,
+                                                    trigger: 'click',
+                                                    placement: 'bottom',
+                                                    interactive: true,
+                                                    interactiveBorder: 10,
+                                                    offset: [0, 0]
+                                                });
 
-                                                if (trimmed.length == 0) {
-                                                    about.value(new_accent);
+                                                return btn;
+                                            }}
+                                            <button class="btn primary continue" onclick=${() => {
+                                                const new_accent = `[accent=${settings.profile_hue},${settings.profile_sat},${settings.profile_lit}]`;
+
+                                                if (match) {
+                                                    about.value(about.value().replace(
+                                                        accent_regex,
+                                                        new_accent
+                                                    ));
                                                 } else {
-                                                    about.value(trimmed + '\n\n' + new_accent);
-                                                }
-                                            }
+                                                    const trimmed = about.value().trimEnd();
 
-                                            dialog_rm({ id: 'profile_accent' });
-                                            status({
-                                                title: tl(
-                                                    trans.profile_accent.reminder
-                                                )
-                                            });
-                                        }}>
-                                            ${tl(trans.change)}
-                                        </button>
+                                                    if (trimmed.length == 0) {
+                                                        about.value(new_accent);
+                                                    } else {
+                                                        about.value(trimmed + '\n\n' + new_accent);
+                                                    }
+                                                }
+
+                                                dialog_rm({ id: 'profile_accent' });
+                                                status({
+                                                    title: tl(
+                                                        trans.profile_accent.reminder
+                                                    )
+                                                });
+                                            }}>
+                                                ${tl(trans.change)}
+                                            </button>
+                                        </div>
                                     </div>
                                 `
                                     });
