@@ -28830,8 +28830,11 @@
       "- rough mix",
       "(rough mix",
       "[rough mix",
-      "(holiday "
+      "(holiday ",
       // illit holiday party/night
+      "- mr. dupri no rap radio mix",
+      "(mr. dupri no rap radio mix",
+      "[mr. dupri no rap radio mix"
     ],
     mixes_numbers: [
       "(v1",
@@ -29160,6 +29163,8 @@
       "(tenth anniversary",
       "(fifth anniversary",
       ": the tenth anniversary",
+      ": 25th anniversary expanded edition",
+      ": 30th anniversary edition",
       "the tenth anniversary",
       // lady gaga born this way
       "- twenty years edition",
