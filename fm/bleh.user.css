@@ -368,7 +368,7 @@
             --toolbar-border: 1px solid hsl(var(--b4), 85%);
             --subtle-border: 1px solid hsl(var(--b4), 65%);
 
-            --card-blur-bg: hsl(var(--b5), var(--solarium-opacity, 32%));
+            --card-blur-bg: hsl(var(--b5), var(--solarium-opacity, 50%));
             --card-blur-bg-alt: hsl(var(--b5), var(--solarium-opacity, 22%));
 
             --menu-item-hov: hsla(var(--b4), 60%);
@@ -905,7 +905,7 @@
             --menu-shadow: 0 4px 40px hsla(var(--b7), 0.07);
 
             --blur-saturate: 130%;
-            --blur-brightness: 1.2;
+            --blur-brightness: 1;
             --blur-contrast: 1;
         }
 
