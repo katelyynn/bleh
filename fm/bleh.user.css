@@ -14929,6 +14929,10 @@
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             gap: var(--item-list-gap);
 
+            @media (max-width: 439px) {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+
             .user-list-item {
                 width: unset;
                 padding: 40px var(--item-list-gap);
@@ -14998,9 +15002,17 @@
                     z-index: 1;
                     gap: 4px;
 
+                    .link-block-cover-link {
+                        display: block;
+                        width: unset;
+                        height: unset;
+                        inset: -50px calc(-1 * var(--item-list-gap));
+                    }
+
                     .user-list-avatar {
                         width: var(--w);
                         height: var(--w);
+                        --mask-size: var(--cover-size-100);
 
                         left: 50%;
                         margin-left: calc(-1 * (var(--w) / 2));
@@ -15008,6 +15020,8 @@
                         transition-property: scale, opacity;
                         transition-duration: 0.4s;
                         transition-timing-function: var(--trans-function-ani);
+
+                        z-index: 3;
                     }
 
                     .user-follow {
@@ -15043,6 +15057,8 @@
                         transition-timing-function: var(--trans-function-ani);
                         filter: var(--header-filter-shadow) !important;
 
+                        z-index: 3;
+
                         & > p {
                             max-width: 100%;
                             overflow: hidden;
@@ -15064,6 +15080,8 @@
                         top: calc(-1 * (40px - var(--item-list-gap)));
                         right: 0;
                         margin-top: unset;
+
+                        z-index: 3;
                     }
                 }
             }

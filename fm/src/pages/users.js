@@ -52,9 +52,11 @@ export function bleh_users() {
         }
 
         const img = avatar.querySelector('img');
-        user.appendChild(html.node`
-            <div class="user-background" style="background-image: url(${img.src.replace('/avatar70s/', '/avatar300s/')})" />
-        `);
+        if (!img.src.endsWith('818148bf682d429dc215c1705eb27b98.png')) {
+            user.appendChild(html.node`
+                <div class="user-background" style="background-image: url(${img.src.replace('/avatar70s/', '/avatar300s/')})" />
+            `);
+        }
         img.src = img.src.replace('/avatar70s/', '/avatar170s/');
     });
 }
