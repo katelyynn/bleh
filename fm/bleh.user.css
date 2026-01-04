@@ -561,7 +561,7 @@
                 var(--hue), calc(clamp(min(0), var(--sat), max(1)) * 30%), 100%;
             --c2:
                 var(--hue), calc(clamp(min(0), var(--sat), max(1)) * 20%), 84%;
-            --c3: var(--hue), calc(clamp(min(0), var(--sat), max(1)) * 6%), 50%;
+            --c3: var(--hue), calc(clamp(min(0), var(--sat), max(1)) * 4%), 50%;
 
             --l3: var(--hue), calc(var(--sat) * 50%), calc(var(--lit) * 75%);
             --l4: var(--hue), calc(var(--sat) * 60%), calc(var(--lit) * 45%);
@@ -21351,11 +21351,6 @@
     }
 
     .container.has-error {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 240px 0 20px 0 !important;
-
         .error-page {
             background-color: hsl(var(--b5));
             padding: var(--card-padding);
@@ -22889,6 +22884,10 @@
             padding: 0 calc(var(--card-gap) + var(--card-padding)) !important;
             align-items: center;
             gap: calc(var(--card-gap) + var(--card-padding));
+
+            &.no-top-margin {
+                margin: 0 -40px !important;
+            }
 
             [data-ff--beret="true"] & {
                 width: var(--cards-width);
@@ -26753,6 +26752,7 @@
 
     .content.cards-view {
         margin-top: 100px;
+        margin-bottom: 600px !important;
 
         & > .col-main {
             min-width: unset;
@@ -26766,25 +26766,6 @@
         .col-main {
             display: flex !important;
             align-items: center;
-        }
-    }
-    [data-page-type="bleh_setup"] {
-        .col-main {
-            .setup {
-                margin-bottom: 600px !important;
-            }
-        }
-    }
-    .has-error {
-        & > .row {
-            background: hsl(var(--b6)) !important;
-        }
-
-        .col-main {
-            & > .error {
-                margin-top: 60px !important;
-                margin-bottom: 150px !important;
-            }
         }
     }
     .api-connector {
@@ -30067,6 +30048,27 @@
         }
         30% {
             scale: 1.03 1;
+        }
+    }
+
+
+    @media (max-width: 980px) {
+        .connector-footer,
+        .settings-footer,
+        .modal-footer,
+        .setup-footer {
+            flex-direction: column;
+            align-items: stretch !important;
+            gap: 10px;
+            text-align: center;
+
+            & > form {
+                display: flex;
+
+                & > button {
+                    flex: 1;
+                }
+            }
         }
     }
 }

@@ -29,26 +29,28 @@ export function bleh_error() {
     page_content.classList.add('has-error');
     render(page_content, html`
         <div class="row">
-            <div class="col-main">
-                <section class="error-panel sour">
-                    <div class="info">
-                        <h1>${tl(trans.erm)}</h1>
-                        <div class="subtle">${error_content.textContent}</div>
-                    </div>
-                    <div class="error-content">
-                        ${reason}
-                    </div>
-                    <div class="subtle">${window.location.pathname}</div>
-                    <div class="error-footer">
-                        <a class="see-more cancel" href="${back_link.getAttribute('href')}">
-                            ${tl(trans.back)}
-                        </a>
-                        <a class="btn primary continue" href="${root}user/${auth.name}">
-                            ${tl(trans.profile)}
-                        </a>
-                    </div>
-                </section>
-            </div>
+            <main class="content cards-view">
+                <div class="col-main">
+                    <section class="error-panel sour">
+                        <div class="info">
+                            <h1>${tl(trans.erm)}</h1>
+                            <div class="subtle">${error_content.textContent}</div>
+                        </div>
+                        <div class="error-content">
+                            ${reason}
+                        </div>
+                        <div class="subtle">${window.location.pathname}</div>
+                        <div class="error-footer">
+                            <a class="see-more cancel" href="${back_link.getAttribute('href')}">
+                                ${tl(trans.back)}
+                            </a>
+                            <a class="btn primary continue" href="${root}user/${auth.name}">
+                                ${tl(trans.profile)}
+                            </a>
+                        </div>
+                    </section>
+                </div>
+            </main>
         </div>
     `);
 }

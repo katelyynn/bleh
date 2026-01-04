@@ -56793,26 +56793,28 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     page_content.classList.add("has-error");
     render(page_content, html`
         <div class="row">
-            <div class="col-main">
-                <section class="error-panel sour">
-                    <div class="info">
-                        <h1>${tl2(trans.erm)}</h1>
-                        <div class="subtle">${error_content.textContent}</div>
-                    </div>
-                    <div class="error-content">
-                        ${reason}
-                    </div>
-                    <div class="subtle">${window.location.pathname}</div>
-                    <div class="error-footer">
-                        <a class="see-more cancel" href="${back_link.getAttribute("href")}">
-                            ${tl2(trans.back)}
-                        </a>
-                        <a class="btn primary continue" href="${root}user/${auth.name}">
-                            ${tl2(trans.profile)}
-                        </a>
-                    </div>
-                </section>
-            </div>
+            <main class="content cards-view">
+                <div class="col-main">
+                    <section class="error-panel sour">
+                        <div class="info">
+                            <h1>${tl2(trans.erm)}</h1>
+                            <div class="subtle">${error_content.textContent}</div>
+                        </div>
+                        <div class="error-content">
+                            ${reason}
+                        </div>
+                        <div class="subtle">${window.location.pathname}</div>
+                        <div class="error-footer">
+                            <a class="see-more cancel" href="${back_link.getAttribute("href")}">
+                                ${tl2(trans.back)}
+                            </a>
+                            <a class="btn primary continue" href="${root}user/${auth.name}">
+                                ${tl2(trans.profile)}
+                            </a>
+                        </div>
+                    </section>
+                </div>
+            </main>
         </div>
     `);
   }
