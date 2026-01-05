@@ -8141,7 +8141,7 @@
     .shout-action-button,
     .content-form select,
     .dropdown-menu-clickable-item, .navlist-hidden-list a, .display-options-clickable-item, .select-button,
-    .dropdown-menu-clickable-button,
+    .dropdown-menu-clickable-button, .dropdown-menu-clickable-button-js-only,
     .inbox-compose-button,
     .inbox-table .inbox-message,
     .header-new-playlink,
