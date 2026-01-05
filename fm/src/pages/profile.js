@@ -659,6 +659,27 @@ export async function bleh_profiles() {
                 );
 
                 page.structure.row.after(report_box_container);
+
+                // 2025
+                const share_row = document.body.querySelector('.share-button-row');
+                if (share_row) {
+                    const title = document.body.querySelector('.report-headline-title').textContent.trim();
+
+                    const items = document.body.querySelectorAll('.listening-report-top-item-wrap');
+                    items.forEach(item => {
+                        const type = item.querySelector('.listening-report-top-item').getAttribute('id').replace('listening-report-top-item-', '');
+
+                        const buttons = item.querySelector('.top-item-buttons');
+                        const album_grid = buttons.querySelector('.album-grid-button');
+                        if (album_grid) album_grid.remove();
+
+                        buttons.insertBefore(html.node`
+                            <a class="btn album-grid-button icon" data-type="collage" href="${root}bleh/minis/collage?type=${type}s&timeframe=from=${title}-01-01%26rangetype=year" target="_blank">
+                                ${tl(trans.collage)} (bleh)
+                            </a>
+                        `, buttons.firstElementChild);
+                    });
+                }
             } else {
                 const dashboard = page.structure.container.querySelector('.user-dashboard');
                 if (dashboard) {

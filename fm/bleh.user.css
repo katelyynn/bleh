@@ -13845,30 +13845,36 @@
         }
     }
 
+    .album-grid-button,
     .report-dropdown-button {
         --bg: hsla(var(--b7), 20%);
         --bg-hov: hsla(var(--b7), 40%);
         --bg-atv: hsla(var(--b7), 60%);
         --shadow: none;
 
-        --btn-left: var(--button-sides) !important;
-        --btn-right: var(--button-sides) !important;
-        --font-size: 0 !important;
+        --col: #fff !important;
         --mask-colour: #fff !important;
-        width: var(--button-height) !important;
-        height: var(--button-height) !important;
-
-        --mask: var(--icon-16-dots);
 
         display: flex;
         justify-content: center;
         align-items: center;
 
-        &:before {
-            --left: calc(
-                (var(--button-height) - var(--icon-size)) / 2
-            ) !important;
-            --right: none !important;
+        &.report-dropdown-button {
+            width: var(--button-height) !important;
+            height: var(--button-height) !important;
+            --font-size: 0 !important;
+
+            --btn-left: var(--button-sides) !important;
+            --btn-right: var(--button-sides) !important;
+
+            --mask: var(--icon-16-dots);
+
+            &:before {
+                --left: calc(
+                    (var(--button-height) - var(--icon-size)) / 2
+                ) !important;
+                --right: none !important;
+            }
         }
 
         &[id$="colors-button"] {
@@ -23072,7 +23078,7 @@
         }
 
         [data-ff--katsune="true"] &:not(.about-artist-panel) {
-            margin: 30px -40px var(--card-padding) !important;
+            margin: 40px -40px var(--card-padding) !important;
             padding: 0 calc(var(--card-gap) + var(--card-padding)) !important;
             align-items: center;
             gap: calc(var(--card-gap) + var(--card-padding));

@@ -80,6 +80,8 @@ export function select(values, initial = '', name = '', func = null, blend = fal
     return container;
 
     function set_select(selected, bubble = true) {
+        render(button, html`${tl(trans.unavailable)}`);
+
         values.some((value) => {
             if (value.value == selected) {
                 render(button, html`${value.text}`);
