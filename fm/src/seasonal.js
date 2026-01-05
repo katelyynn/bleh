@@ -237,7 +237,7 @@ export function seasonal_timer_start(bypass = false) {
     `);
 
     page.header.season.setAttribute('data-live', true);
-    page.header.season.classList.remove('chibi');
+    page.header.season.classList.toggle('chibi', !stored_season.new_years_eve);
 }
 export function seasonal_timer_end() {
     if (stored_season.new_years_eve) return;
@@ -256,13 +256,14 @@ export function seasonal_timer_end() {
     `);
 
     page.header.season.setAttribute('data-live', false);
-    page.header.season.classList.add('chibi');
+    page.header.season.classList.toggle('chibi', !stored_season.new_years_eve);
 }
 
 function update_season_nav() {
     if (!page.header.season) return;
 
     page.header.season.setAttribute('data-season', stored_season.id);
+    page.header.season.classList.toggle('chibi', !stored_season.new_years_eve);
 
     if (!stored_season.new_years_eve) {
         page.header.season.textContent = DateTime.fromISO(
@@ -283,7 +284,6 @@ function update_season_nav() {
 
         page.header.season.textContent = countdown_to(time_until);
         page.header.season.setAttribute('data-live', true);
-        page.header.season.classList.remove('chibi');
 
         page.header.season_tooltip.setContent(html.node`
             <span class="season-colour-name">${tl(trans.seasonal.listing[stored_season.id])}</span>

@@ -20377,7 +20377,7 @@
             <div class="notification-actions">
                 ${actions.length > 0 ? actions.map((action) => () => {
       let button2 = html.node`
-                        <button class="notification-action" data-type=${action.type} onclick=${action.action}>${action.text}</button>
+                        <button class="btn notification-action" data-type=${action.type} onclick=${action.action}>${action.text}</button>
                     `;
       tippy_esm_default(button2, {
         content: action.text
@@ -35832,7 +35832,9 @@
     let manage = obsession_container.querySelector("form");
     if (manage) {
       quote.appendChild(manage);
-      quote.querySelector("button").textContent = tl2(trans.delete);
+      const trash = quote.querySelector("button");
+      trash.classList.add("btn");
+      trash.textContent = tl2(trans.delete);
     }
     page.structure.main.insertBefore(
       quote,
@@ -49904,7 +49906,7 @@
         <span class="season-exclusive">${tl2(trans.seasonal.live)}</span>
     `);
     page.header.season.setAttribute("data-live", true);
-    page.header.season.classList.remove("chibi");
+    page.header.season.classList.toggle("chibi", !stored_season.new_years_eve);
   }
   function seasonal_timer_end() {
     if (stored_season.new_years_eve) return;
@@ -49918,11 +49920,12 @@
         <span class="season-exclusive">${tl2(trans.seasonal.notice)}</span>
     `);
     page.header.season.setAttribute("data-live", false);
-    page.header.season.classList.add("chibi");
+    page.header.season.classList.toggle("chibi", !stored_season.new_years_eve);
   }
   function update_season_nav() {
     if (!page.header.season) return;
     page.header.season.setAttribute("data-season", stored_season.id);
+    page.header.season.classList.toggle("chibi", !stored_season.new_years_eve);
     if (!stored_season.new_years_eve) {
       page.header.season.textContent = DateTime.fromISO(
         stored_season.end.replace("y0", stored_season.year).replace("{offset}", stored_season.offset)
@@ -49934,7 +49937,6 @@
       let time_until = new Date(next) - /* @__PURE__ */ new Date();
       page.header.season.textContent = countdown_to(time_until);
       page.header.season.setAttribute("data-live", true);
-      page.header.season.classList.remove("chibi");
       page.header.season_tooltip.setContent(html.node`
             <span class="season-colour-name">${tl2(trans.seasonal.listing[stored_season.id])}</span>
             <span class="season-exclusive">${tl2(trans.seasonal.live)}</span>
@@ -54483,7 +54485,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     if (auth_link2.hasAttribute("data-bleh")) return;
     auth_link2.setAttribute("data-bleh", "true");
     const name = html.node`
-        <p>${auth.name}</p>
+        <p class="auth-link-name">${auth.name}</p>
     `;
     auth_link2.appendChild(name);
     load_profile_cache_externally(auth.name).then((cache2) => {
@@ -54541,7 +54543,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     links.appendChild(more_button);
     let bleh_container = html.node`
         <li class="masthead-nav-item">
-            <a class="masthead-nav-control chibi" href="${root}bleh${stored_season.id != "none" ? "/seasonal" : ""}" data-label="bleh" data-season="${stored_season.id}" data-season-active="${stored_season.id != "none" ? "true" : "false"}" data-live="false">
+            <a class="masthead-nav-control ${stored_season.new_years_eve ? "" : "chibi"}" href="${root}bleh${stored_season.id != "none" ? "/seasonal" : ""}" data-label="bleh" data-season="${stored_season.id}" data-season-active="${stored_season.id != "none" ? "true" : "false"}" data-live="false">
                 ${stored_season.id == "none" ? tl2(trans.bleh_settings) : DateTime.fromISO(stored_season.end.replace("y0", stored_season.year).replace("{offset}", stored_season.offset)).toRelative(DateTime.fromISO(stored_season.now))}
             </a>
         </li>
@@ -70905,7 +70907,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
   // src/build/build.json
   var build_default = {
     brand: "bleh",
-    build: "2025.1220",
+    build: "2026.0105",
     sku: "shunguang",
     bio: "bleh!!! ^-^",
     author: "katelyn",

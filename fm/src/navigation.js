@@ -352,7 +352,7 @@ export function append_nav() {
     auth_link.setAttribute('data-bleh', 'true');
 
     const name = html.node`
-        <p>${auth.name}</p>
+        <p class="auth-link-name">${auth.name}</p>
     `;
     auth_link.appendChild(name);
 
@@ -434,7 +434,7 @@ export function append_nav() {
     // configure bleh
     let bleh_container = html.node`
         <li class="masthead-nav-item">
-            <a class="masthead-nav-control chibi" href="${root}bleh${stored_season.id != 'none' ? '/seasonal' : ''}" data-label="bleh" data-season="${stored_season.id}" data-season-active="${stored_season.id != 'none' ? 'true' : 'false'}" data-live="false">
+            <a class="masthead-nav-control ${stored_season.new_years_eve ? '' : 'chibi'}" href="${root}bleh${stored_season.id != 'none' ? '/seasonal' : ''}" data-label="bleh" data-season="${stored_season.id}" data-season-active="${stored_season.id != 'none' ? 'true' : 'false'}" data-live="false">
                 ${stored_season.id == 'none' ? tl(trans.bleh_settings) : DateTime.fromISO(stored_season.end.replace('y0', stored_season.year).replace('{offset}', stored_season.offset)).toRelative(DateTime.fromISO(stored_season.now))}
             </a>
         </li>

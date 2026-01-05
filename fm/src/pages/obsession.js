@@ -255,7 +255,10 @@ export function bleh_obsession() {
     let manage = obsession_container.querySelector('form');
     if (manage) {
         quote.appendChild(manage);
-        quote.querySelector('button').textContent = tl(trans.delete);
+
+        const trash = quote.querySelector('button');
+        trash.classList.add('btn');
+        trash.textContent = tl(trans.delete);
     }
 
     page.structure.main.insertBefore(

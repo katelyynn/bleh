@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           bleh (dev)
 @namespace      github.com/katelyynn/bleh
-@version        2025.1220
+@version        2026.0105
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.css
@@ -25,7 +25,7 @@
     }
 
     body {
-        --version-build: "2025.1220";
+        --version-build: "2026.0105";
 
         --font:
             var(--custom_font, ""), Funnel Sans, Inter, Ubuntu Sans, Spline Sans,
@@ -1635,7 +1635,7 @@
             left: 0;
             top: 0;
             right: 0;
-            height: calc(20px + 32px + 30px);
+            height: calc(20px + 30px);
             z-index: 10;
 
             /*background: hsl(var(--b6), 60%);
@@ -1645,7 +1645,7 @@
             mask-image: var(--mask);
             -webkit-mask-image: var(--mask);*/
 
-            background: linear-gradient(180deg, hsl(var(--b6)), transparent);
+            background: linear-gradient(180deg, hsl(var(--b6), 80%), transparent);
 
             pointer-events: none;
 
@@ -1970,6 +1970,21 @@
                     display: none;
                 }
             }
+        }
+    }
+
+    .masthead-search-field,
+    .bleh--version,
+    .masthead-nav-control
+    {
+        &:not(:hover, :focus-visible, [aria-expanded="true"]) {
+            filter: var(--header-filter-shadow);
+        }
+    }
+
+    .auth-link:not(:hover, :focus-visible, [aria-expanded="true"]) {
+        .auth-link-name {
+            filter: var(--header-filter-shadow);
         }
     }
 
@@ -10766,21 +10781,17 @@
         }
     }
 
-    [data-label="bleh"] {
-        &[data-live="true"] {
-            animation: var(--blur-in);
-        }
-    }
-
     @keyframes blur_in {
         from, to {
             scale: 1;
-            filter: blur(0);
+            filter: blur(0) !important;
+            -webkit-filter: blur(0) !important;
             opacity: 1 !important;
         }
         60% {
             scale: 1.05;
-            filter: blur(4px);
+            filter: blur(4px) !important;
+            -webkit-filter: blur(0) !important;
             opacity: 0 !important;
         }
     }
@@ -15841,7 +15852,7 @@
         }
 
         .obsession-video-container {
-            margin: -300px auto 0;
+            margin: 0 auto;
             border-radius: var(--item-big-radius);
             box-shadow: var(--subtle-shadow);
             overflow: hidden;
@@ -15940,10 +15951,12 @@
     }
     .obsession-pagination {
         position: absolute;
-        inset: 0;
+        inset: 0 0 0 50%;
         pointer-events: none;
         top: 68px;
         max-height: 638px;
+        width: var(--cards-width);
+        margin-left: calc(-1 * (var(--cards-width) / 2));
 
         @media (max-width: 980px) {
             top: 0;
@@ -23187,7 +23200,7 @@
                     justify-content: center;
                     text-align: center;
                     /*margin: -630px 0 0 0 !important;*/
-                    margin: -580px 0 300px 0 !important;
+                    margin: 60px 0 !important;
 
                     .avatar-side {
                         --avatar-size: 110px !important;
@@ -23622,7 +23635,7 @@
 
         overflow: hidden;
 
-        --mask: linear-gradient(0deg, transparent 0%, white 100%);
+        --mask: linear-gradient(0deg, transparent 0%, white 70%);
         mask-image: var(--mask);
         -webkit-mask-image: var(--mask);
 
@@ -23646,8 +23659,13 @@
         background-size: cover;
 
         filter: blur(20px);
-        opacity: 0.2;
+        -webkit-filter: blur(20px);
+        opacity: 0.4;
         height: var(--banner-height);
+
+        --mask: linear-gradient(90deg, white 0%, white 20%, transparent 35%, transparent 65%, white 80%, white 100%);
+        mask-image: var(--mask);
+        -webkit-mask-image: var(--mask);
 
         &[data-accent-based] {
             background-color: hsl(var(--h3));
