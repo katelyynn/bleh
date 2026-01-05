@@ -13727,17 +13727,10 @@
         --font-weight-medium: 700 !important;
     }
 
-    .listening-report-top-item {
-        --bg: transparent;
-        --bg-hov: transparent;
-        --bg-atv: transparent;
-        --shadow: none;
-        --padding: 0;
-        --radius: 0;
-        height: 400px !important;
-        font: inherit !important;
-        color: inherit !important;
-        transform: unset !important;
+    .report-summary {
+        font-family: Barlow !important;
+        --font-weight: 400 !important;
+        --font-weight-medium: 700 !important;
     }
 
     .listening-report-row--category h2 {
