@@ -12102,7 +12102,6 @@
     .gallery-image-vote-buttons {
         flex-grow: unset;
         display: flex;
-        gap: var(--button-list-gap);
         width: fit-content;
     }
     .gallery-image-vote-buttons:before,
@@ -20789,7 +20788,7 @@
         & > form {
             display: flex;
             align-items: center;
-            gap: var(--button-list-gap);
+            gap: inherit;
         }
 
         &.listen-container {
@@ -20941,7 +20940,8 @@
             .listen-divider {
                 display: block;
                 width: 1px;
-                height: 16px;
+                height: 10px;
+                margin: 0 2px;
                 background: var(--card-border-base);
 
                 & + .listen-divider {

@@ -43720,6 +43720,10 @@
       image_details.querySelector("[data-image-url]").appendChild(description);
     }
     let buttons = image_details.querySelector(".gallery-image-buttons");
+    buttons.querySelectorAll("button").forEach((btn) => {
+      btn.classList.add("btn");
+      btn.removeAttribute("title");
+    });
     let button_container = document.createElement("div");
     button_container.classList.add("button-container-wrapper");
     button_container.appendChild(buttons);
@@ -43753,7 +43757,7 @@
     button_container.appendChild(buttons_extra);
     image_details.appendChild(button_container);
     let open_button = html.node`
-        <button class="image-open-button" onclick=${() => expand_gallery_image()}>
+        <button class="btn image-open-button" onclick=${() => expand_gallery_image()}>
             ${tl2(trans.expand)}
         </button>
     `;
@@ -43762,18 +43766,22 @@
     });
     buttons_extra.appendChild(open_button);
     let share_button = html.node`
-        <button class="image-share-button" onclick=${() => share(window.location.href)}>
+        <button class="btn image-share-button" onclick=${() => share(window.location.href)}>
             ${tl2(trans.share)}
         </button>
     `;
     buttons_extra.appendChild(share_button);
     share_button.after(create_divider());
     let delete_button = image_details.querySelector(".gallery-image-delete");
-    if (delete_button) buttons_extra.appendChild(delete_button);
+    if (delete_button) {
+      delete_button.querySelector("button").classList = "btn";
+      buttons_extra.appendChild(delete_button);
+    }
     let report_button = image_details.querySelector(
       ".gallery-image-report-form"
     );
     let report_text = report_button.querySelector("button");
+    report_text.classList.add("btn");
     tippy_esm_default(report_text, {
       content: report_text.textContent
     });
@@ -43783,6 +43791,7 @@
       ".gallery-image-preferred-button :is(button, a)"
     );
     star_buttons.forEach((star_button) => {
+      star_button.classList.add("btn");
       star_button.removeAttribute("title");
       let text4 = star_button.querySelector(".gallery-image-preferred-states");
       text4.textContent = tl2(trans.star);
@@ -44133,7 +44142,7 @@
       }
     }
     const save_btn = html.node`
-        <button class="bleh--gallery-bookmark-image-btn btn--has-icon" data-bleh--image-is-bookmarked=${image_is_bookmarked} onclick=${() => update_image_bookmark(save_btn, focused_image_id)}>
+        <button class="btn bleh--gallery-bookmark-image-btn btn--has-icon" data-bleh--image-is-bookmarked=${image_is_bookmarked} onclick=${() => update_image_bookmark(save_btn, focused_image_id)}>
             ${tl2(trans.save)}
         </button>
     `;

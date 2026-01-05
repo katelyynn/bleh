@@ -126,6 +126,11 @@ export function bleh_gallery() {
 
     let buttons = image_details.querySelector('.gallery-image-buttons');
 
+    buttons.querySelectorAll('button').forEach(btn => {
+        btn.classList.add('btn');
+        btn.removeAttribute('title');
+    });
+
     // button container, to split into two
     let button_container = document.createElement('div');
     button_container.classList.add('button-container-wrapper');
@@ -183,7 +188,7 @@ export function bleh_gallery() {
 
     // open in a new tab button
     let open_button = html.node`
-        <button class="image-open-button" onclick=${() => expand_gallery_image()}>
+        <button class="btn image-open-button" onclick=${() => expand_gallery_image()}>
             ${tl(trans.expand)}
         </button>
     `;
@@ -195,7 +200,7 @@ export function bleh_gallery() {
 
     // share button
     let share_button = html.node`
-        <button class="image-share-button" onclick=${() => share(window.location.href)}>
+        <button class="btn image-share-button" onclick=${() => share(window.location.href)}>
             ${tl(trans.share)}
         </button>
     `;
@@ -205,13 +210,17 @@ export function bleh_gallery() {
 
     // delete
     let delete_button = image_details.querySelector('.gallery-image-delete');
-    if (delete_button) buttons_extra.appendChild(delete_button);
+    if (delete_button) {
+        delete_button.querySelector('button').classList = 'btn';
+        buttons_extra.appendChild(delete_button);
+    }
 
     // report
     let report_button = image_details.querySelector(
         '.gallery-image-report-form'
     );
     let report_text = report_button.querySelector('button');
+    report_text.classList.add('btn');
     tippy(report_text, {
         content: report_text.textContent
     });
@@ -224,6 +233,7 @@ export function bleh_gallery() {
         '.gallery-image-preferred-button :is(button, a)'
     );
     star_buttons.forEach((star_button) => {
+        star_button.classList.add('btn');
         star_button.removeAttribute('title');
         let text = star_button.querySelector('.gallery-image-preferred-states');
 
@@ -709,7 +719,7 @@ function patch_gallery_focused_image(
 
     // append a bookmark button
     const save_btn = html.node`
-        <button class="bleh--gallery-bookmark-image-btn btn--has-icon" data-bleh--image-is-bookmarked=${image_is_bookmarked} onclick=${() => update_image_bookmark(save_btn, focused_image_id)}>
+        <button class="btn bleh--gallery-bookmark-image-btn btn--has-icon" data-bleh--image-is-bookmarked=${image_is_bookmarked} onclick=${() => update_image_bookmark(save_btn, focused_image_id)}>
             ${tl(trans.save)}
         </button>
     `;
