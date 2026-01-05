@@ -13737,37 +13737,6 @@
         margin: unset !important;
     }
 
-    .listening-report-daily-scrobbles-day {
-        --bg: hsl(var(--h3));
-        --bg-hov: var(--bg);
-        --bg-sat: var(--bg);
-        --radius: 0;
-
-        --hue-over: 224;
-        --sat-over: 0.85;
-        --lit-over: 1;
-
-        &.listening-report-daily-scrobbles-day--colour-0 {
-            --lit-over: 0.8;
-            opacity: 0.1;
-        }
-        &.listening-report-daily-scrobbles-day--colour-1 {
-            --lit-over: 0.85;
-            opacity: 0.25;
-        }
-        &.listening-report-daily-scrobbles-day--colour-2 {
-            --lit-over: 0.9;
-            opacity: 0.5;
-        }
-        &.listening-report-daily-scrobbles-day--colour-3 {
-            --lit-over: 0.95;
-            opacity: 0.65;
-        }
-        &.listening-report-daily-scrobbles-day--colour-4 {
-            opacity: 0.85;
-        }
-    }
-
     /* new - 2024/12 */
     .mainstream-score--artist {
         font-weight: var(--font-weight);
