@@ -35,6 +35,12 @@ export function bleh_users() {
         if (name) name.textContent = `@${name.textContent}`;
 
         if (md) {
+            // this removes fancy markdown components
+            md.textContent = md.textContent.replace(/(?<!\!)\[[^\]]*\]/g, '');
+
+            // this removes incomplete image snippets
+            if (md.textContent.startsWith('![') && md.textContent.endsWith('…')) md.textContent = '…';
+
             render(
                 md,
                 markdown(md.textContent, {

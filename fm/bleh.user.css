@@ -13900,6 +13900,9 @@
     .listening-report-row {
         width: var(--cards-width) !important;
     }
+    .container--full-width > .listening-report-row__col {
+        margin: 0 auto;
+    }
     .listening-report-top-item-container,
     .listening-report-row--3-wide .listening-report-row__col {
         width: calc((var(--cards-width) / 3) - 5.5px) !important;

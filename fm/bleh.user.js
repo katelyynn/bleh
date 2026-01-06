@@ -58528,6 +58528,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       log("patching", "user", "info", { user, name: name?.textContent, md });
       if (name) name.textContent = `@${name.textContent}`;
       if (md) {
+        md.textContent = md.textContent.replace(/(?<!\!)\[[^\]]*\]/g, "");
+        if (md.textContent.startsWith("![") && md.textContent.endsWith("\u2026")) md.textContent = "\u2026";
         render(
           md,
           markdown(md.textContent, {
