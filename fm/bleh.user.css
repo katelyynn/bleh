@@ -15593,22 +15593,32 @@
         box-shadow: unset;
     }
 
-    .wiki-history-table thead {
-        display: none;
-    }
+    .wiki-history-table {
+        --gap: 10px;
 
-    .wiki-history-table tbody {
-        display: flex;
-        flex-direction: column;
+        & > thead {
+            display: none;
+        }
+        & > tbody {
+            display: flex;
+            flex-direction: column;
+            gap: var(--gap);
+        }
     }
     .wiki-history-entry {
         --bg: transparent;
         --bg-hov: transparent;
         --bg-atv: transparent;
         --shadow: none;
+        --padding: var(--gap) 0 0;
         border-top: 1px solid var(--card-border-base) !important;
         --radius: 0;
         transform: none !important;
+
+        &:first-child {
+            --padding: 0;
+            border-top: none !important;
+        }
 
         .wiki-history-revision {
             padding: unset;
