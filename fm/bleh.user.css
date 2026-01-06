@@ -8228,7 +8228,8 @@
     .see-more, .music-bookmarks-artists-item-toggle, .music-bookmarks-albums-item-toggle, .music-bookmarks-tags-item-toggle,
     .modal-action-button,
     .js-shout-reply-cancel,
-    .more-items
+    .more-items,
+    .modal-close-button, .modal-action-button
     {
         --bg: var(--cards-overlay-image-subtlest, none), hsl(var(--b3));
         --bg-hov:
