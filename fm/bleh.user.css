@@ -12875,6 +12875,7 @@
 
         --padding: var(--see-more-pad-v) var(--see-more-pad);
         margin: calc(-1 * var(--see-more-pad-v)) 0 !important;
+        --force-font-weight: var(--font-weight-medium);
     }
     .pagination-page[aria-current] > span {
         cursor: default;
