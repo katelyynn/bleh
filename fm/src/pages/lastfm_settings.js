@@ -1698,11 +1698,14 @@ function bleh_accounts() {
         captcha: page.structure.main.querySelector('.lfm-recaptcha')
     };
 
+    const alert = update_profile.querySelector('.alert');
+
     render(
         page.structure.main,
         html`
             <section class="bleh--panel">
                 <h4>${tl(trans.information)}</h4>
+                ${alert}
                 <div class="setting-group">
                     <form
                         action="${root}settings/change-username/send-email"

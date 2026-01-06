@@ -34169,8 +34169,8 @@
       const id = page.state.avatar_changer.getAttribute("data-modal-id");
       dialog_rm({ id });
     }
-    const update_profile = page.structure.main.querySelector("#update-profile");
-    const alert2 = update_profile.querySelector(".alert");
+    const update_profile2 = page.structure.main.querySelector("#update-profile");
+    const alert2 = update_profile2.querySelector(".alert");
     let form_display_name = document.getElementById("id_full_name").value;
     let form_website = document.getElementById("id_homepage").value;
     let form_country = document.getElementById("id_country");
@@ -35197,11 +35197,13 @@
       email: page.structure.main.querySelector('[name="email"]').value,
       captcha: page.structure.main.querySelector(".lfm-recaptcha")
     };
+    const alert2 = update_profile.querySelector(".alert");
     render(
       page.structure.main,
       html`
             <section class="bleh--panel">
                 <h4>${tl2(trans.information)}</h4>
+                ${alert2}
                 <div class="setting-group">
                     <form
                         action="${root}settings/change-username/send-email"
