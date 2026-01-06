@@ -5089,18 +5089,18 @@
     .label.user-status--bleh-contributor {
         --mask: var(--icon-contributor);
 
-        --hue: 20;
-        --sat: 1.52;
-        --lit: 1;
+        --hue-over: 24;
+        --sat-over: 1.1;
+        --lit-over: 1.2;
     }
 
     .user-status--bleh-translation,
     .label.user-status--bleh-translation {
         --mask: var(--icon-translation);
 
-        --hue: 143;
-        --sat: 1.26;
-        --lit: 0.94;
+        --hue-over: 143;
+        --sat-over: 1.15;
+        --lit-over: 0.94;
     }
 
     .user-status--bleh-missing {

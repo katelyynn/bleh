@@ -59749,6 +59749,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     background.setAttribute("data-page-subpage", page.subpage);
     background.setAttribute("data-background-origin", origin);
     background.setAttribute("data-background-coloured", settings.hue_from_album);
+    render(background, html``);
     render(background, html`
         <span class="background-inner" ref=${(el) => inner = el} />
     `);

@@ -854,6 +854,7 @@ export function register_banner(url, origin = null) {
     background.setAttribute('data-background-origin', origin);
     background.setAttribute('data-background-coloured', settings.hue_from_album);
 
+    render(background, html``);
     render(background, html`
         <span class="background-inner" ref=${el => inner = el} />
     `);
