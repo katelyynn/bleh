@@ -8212,7 +8212,8 @@
     .report-dropdown-button,
     .see-more, .music-bookmarks-artists-item-toggle, .music-bookmarks-albums-item-toggle, .music-bookmarks-tags-item-toggle,
     .modal-action-button,
-    .js-shout-reply-cancel
+    .js-shout-reply-cancel,
+    .more-items
     {
         --bg: var(--cards-overlay-image-subtlest, none), hsl(var(--b3));
         --bg-hov:
@@ -12094,17 +12095,17 @@
     }
 
     /*     VOTING     */
-    .gallery-image-vote-up-on/*, .gallery-image-vote-up-off*/, .vote-button--voted {
+    .gallery-image-vote-up-on, .gallery-image-vote-up-off, .vote-button--voted {
         --hue-over: var(--hue-pos) !important;
         --sat-over: var(--sat-pos) !important;
         --lit-over: var(--lit-pos) !important;
     }
-    .gallery-image-vote-down-on/*, .gallery-image-vote-down-off*/ {
+    .gallery-image-vote-down-on, .gallery-image-vote-down-off {
         --hue-over: var(--hue-neg) !important;
         --sat-over: var(--sat-neg) !important;
         --lit-over: var(--lit-neg) !important;
     }
-    .gallery-image-preferred-on/*, .gallery-image-preferred-off*/ {
+    .gallery-image-preferred-on, .gallery-image-preferred-off {
         --hue-over: var(--hue-fav) !important;
         --sat-over: var(--sat-fav) !important;
         --lit-over: var(--lit-fav) !important;
