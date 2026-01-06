@@ -22156,7 +22156,10 @@
             gap: var(--icon-gap);
         }
 
-        & > a:not(:hover) {
+        /* see .this-month */
+        & > .see-more {
+            --bg-hov: hsl(var(--b4), 40%) !important;
+            --bg-atv: hsl(var(--b4), 60%) !important;
             --col: hsl(var(--c3));
             --mask-colour: hsl(var(--c3), 80%);
         }
