@@ -1095,11 +1095,13 @@ function patch_profile_following() {
     const no_data = page.structure.main.querySelector('.no-data-message');
     const pagination = page.structure.main.querySelector('.pagination');
 
-    const no_data_neighbours = page.structure.main.querySelector(':scope > p');
+    let no_data_neighbours = page.structure.main.querySelector(':scope > p');
     if (no_data_neighbours) no_data_neighbours.classList.add('no-data-message');
 
     const user_list = page.structure.main.querySelector('.user-list');
     user_list?.setAttribute('data-list-view', settings.list_view);
+
+    if (user_list) no_data_neighbours = null;
 
     render(page.structure.main, html.node`
         <section class="users">
@@ -1107,7 +1109,7 @@ function patch_profile_following() {
                 user_list?.setAttribute('data-list-view', val);
             } }) : ''}
             ${no_data}
-            ${!user_list ? no_data_neighbours : ''}
+            ${no_data_neighbours}
             ${user_list}
             ${pagination}
         </section>
