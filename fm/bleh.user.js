@@ -43797,13 +43797,13 @@
       buttons_extra.appendChild(delete_button);
     }
     const report_form = image_details.querySelector(".gallery-image-report-form");
-    const report = report_button.querySelector("button");
+    const report = report_form.querySelector("button");
     report.classList.add("btn");
     tippy_esm_default(report, {
       content: report.textContent
     });
     report.textContent = tl2(trans.report);
-    const reported = report_button.querySelector(".gallery-image-report--reported");
+    const reported = report_form.querySelector(".gallery-image-report--reported");
     reported.classList.add("btn");
     buttons_extra.appendChild(report_form);
     let star_buttons = image_details.querySelectorAll(".gallery-image-preferred-button :is(button, a)");
