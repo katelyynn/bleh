@@ -39,7 +39,7 @@ export function bleh_users() {
             md.textContent = md.textContent.replace(/(?<!\!)\[[^\]]*\]/g, '');
 
             // this removes incomplete image snippets
-            if (md.textContent.startsWith('![') && md.textContent.endsWith('…')) md.textContent = '…';
+            md.textContent = md.textContent.replace(/^!\[[\s\S]*?…$/gm, '…');
 
             render(
                 md,
