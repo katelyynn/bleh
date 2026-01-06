@@ -51,7 +51,7 @@ import { save_setting, setting } from '../components/settings.js';
 import { submit_scrobble } from '../components/scrobble.js';
 import { redirect } from '../components/music.js';
 import tippy from 'tippy.js';
-import { Chart } from '../main.js';
+import { Chart, version } from '../main.js';
 import { expand_avatar } from '../avatar.js';
 import { status } from '../components/status.js';
 import { hoshino } from '../components/hoshino.js';
@@ -665,6 +665,10 @@ export async function bleh_profiles() {
                 if (share_row) {
                     const title = document.body.querySelector('.report-headline-title').textContent.trim();
 
+                    const split = window.location.pathname.split('/');
+                    const len = split.length - 1;
+                    const year = split[len] == 'year';
+
                     const items = document.body.querySelectorAll('.listening-report-top-item-wrap');
                     items.forEach(item => {
                         const type = item.querySelector('.listening-report-top-item').getAttribute('id').replace('listening-report-top-item-', '');
@@ -673,11 +677,13 @@ export async function bleh_profiles() {
                         const album_grid = buttons.querySelector('.album-grid-button');
                         if (album_grid) album_grid.remove();
 
-                        buttons.insertBefore(html.node`
-                            <a class="btn album-grid-button icon" data-type="collage" href="${root}bleh/minis/collage?type=${type}s&timeframe=from=${title}-01-01%26rangetype=year" target="_blank">
-                                ${tl(trans.collage)} (bleh)
-                            </a>
-                        `, buttons.firstElementChild);
+                        if (year) {
+                            buttons.insertBefore(html.node`
+                                <a class="btn album-grid-button icon" data-type="collage" href="${root}bleh/minis/collage?type=${type}s&timeframe=from=${title}-01-01%26rangetype=year" target="_blank">
+                                    ${tl(trans.collage)} (${version.brand})
+                                </a>
+                            `, buttons.firstElementChild);
+                        }
                     });
                 }
             } else {

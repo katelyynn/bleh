@@ -36391,17 +36391,22 @@
           const share_row = document.body.querySelector(".share-button-row");
           if (share_row) {
             const title = document.body.querySelector(".report-headline-title").textContent.trim();
+            const split = window.location.pathname.split("/");
+            const len = split.length - 1;
+            const year = split[len] == "year";
             const items = document.body.querySelectorAll(".listening-report-top-item-wrap");
             items.forEach((item) => {
               const type = item.querySelector(".listening-report-top-item").getAttribute("id").replace("listening-report-top-item-", "");
               const buttons = item.querySelector(".top-item-buttons");
               const album_grid = buttons.querySelector(".album-grid-button");
               if (album_grid) album_grid.remove();
-              buttons.insertBefore(html.node`
-                            <a class="btn album-grid-button icon" data-type="collage" href="${root}bleh/minis/collage?type=${type}s&timeframe=from=${title}-01-01%26rangetype=year" target="_blank">
-                                ${tl2(trans.collage)} (bleh)
-                            </a>
-                        `, buttons.firstElementChild);
+              if (year) {
+                buttons.insertBefore(html.node`
+                                <a class="btn album-grid-button icon" data-type="collage" href="${root}bleh/minis/collage?type=${type}s&timeframe=from=${title}-01-01%26rangetype=year" target="_blank">
+                                    ${tl2(trans.collage)} (${version.brand})
+                                </a>
+                            `, buttons.firstElementChild);
+              }
             });
           }
         } else {

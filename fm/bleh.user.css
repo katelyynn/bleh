@@ -13828,6 +13828,7 @@
         --bg-hov: hsla(var(--b7), 40%);
         --bg-atv: hsla(var(--b7), 60%);
         --shadow: none;
+        --filter: var(--card-blur);
 
         --col: #fff !important;
         --mask-colour: #fff !important;
