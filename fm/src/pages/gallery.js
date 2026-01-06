@@ -216,26 +216,27 @@ export function bleh_gallery() {
     }
 
     // report
-    let report_button = image_details.querySelector(
-        '.gallery-image-report-form'
-    );
-    let report_text = report_button.querySelector('button');
-    report_text.classList.add('btn');
-    tippy(report_text, {
-        content: report_text.textContent
-    });
-    report_text.textContent = tl(trans.report);
+    const report_form = image_details.querySelector('.gallery-image-report-form');
 
-    buttons_extra.appendChild(report_button);
+    const report = report_button.querySelector('button');
+    report.classList.add('btn');
+    tippy(report, {
+        content: report.textContent
+    });
+    report.textContent = tl(trans.report);
+
+    const reported = report_button.querySelector('.gallery-image-report--reported');
+    reported.classList.add('btn');
+
+    buttons_extra.appendChild(report_form);
 
     // star
-    let star_buttons = image_details.querySelectorAll(
-        '.gallery-image-preferred-button :is(button, a)'
-    );
-    star_buttons.forEach((star_button) => {
+    let star_buttons = image_details.querySelectorAll('.gallery-image-preferred-button :is(button, a)');
+    star_buttons.forEach(star_button => {
         star_button.classList.add('btn');
         star_button.removeAttribute('title');
-        let text = star_button.querySelector('.gallery-image-preferred-states');
+
+        const text = star_button.querySelector('.gallery-image-preferred-states');
 
         /*tippy(star_button, {
             content: star_button.textContent

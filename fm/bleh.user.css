@@ -8152,7 +8152,7 @@
 
     /*     BUTTON     */
     .btn, .chibi,
-    .btn-primary,
+    .btn-primary, .btn-cancel,
     .shout-action-button,
     .content-form select,
     .dropdown-menu-clickable-item, .navlist-hidden-list a, .display-options-clickable-item, .select-button,
@@ -8350,16 +8350,16 @@
 
         /*     PRIMARY     */
         &:is(
-                .danger,
-                .btn-primary:is([type="submit"], .js-close),
-                .inbox-delete-button:not([disabled]),
-                #manage_data .btn-primary,
-                .primary,
-                .btn-subscribe,
-                .share-link,
-                .view-item[aria-checked="true"],
-                .user-now-empty-state-button
-            ):not([data-has-file], .see-more) {
+            .danger,
+            .btn-primary:is([type="submit"], .js-close),
+            .inbox-delete-button:not([disabled]),
+            #manage_data .btn-primary,
+            .primary,
+            .btn-subscribe,
+            .share-link,
+            .view-item[aria-checked="true"],
+            .user-now-empty-state-button
+        ):not([data-has-file], .see-more) {
             --bg:
                 var(--cards-overlay-image-subtlest, none), hsl(var(--h3)) !important;
             --bg-hov:
@@ -12095,19 +12095,19 @@
 
     /*     VOTING     */
     .gallery-image-vote-up-on/*, .gallery-image-vote-up-off*/, .vote-button--voted {
-        --hue-over: var(--hue-pos);
-        --sat-over: var(--sat-pos);
-        --lit-over: var(--lit-pos);
+        --hue-over: var(--hue-pos) !important;
+        --sat-over: var(--sat-pos) !important;
+        --lit-over: var(--lit-pos) !important;
     }
     .gallery-image-vote-down-on/*, .gallery-image-vote-down-off*/ {
-        --hue-over: var(--hue-neg);
-        --sat-over: 1;
-        --lit-over: 1;
+        --hue-over: var(--hue-neg) !important;
+        --sat-over: var(--sat-neg) !important;
+        --lit-over: var(--lit-neg) !important;
     }
     .gallery-image-preferred-on/*, .gallery-image-preferred-off*/ {
-        --hue-over: var(--hue-fav);
-        --sat-over: var(--sat-fav);
-        --lit-over: var(--lit-fav);
+        --hue-over: var(--hue-fav) !important;
+        --sat-over: var(--sat-fav) !important;
+        --lit-over: var(--lit-fav) !important;
     }
 
     .gallery-image-vote-buttons {
@@ -20830,7 +20830,12 @@
                 [data-toggle-button-current-state="bookmarked"] > form > .btn,
                 [data-analytics-action="UnfollowUser"],
                 [data-is-shortcut="true"],
-                .attendance-btn--turn-off
+                .attendance-btn--turn-off,
+                .gallery-image-preferred-on,
+                [data-bleh--image-is-bookmarked="true"],
+                .gallery-image-vote-up-on,
+                .gallery-image-vote-down-on,
+                .gallery-image-report--reported
             ) {
                 --bg: transparent;
                 --bg-hov: var(--view-buttons-hov);
@@ -22030,18 +22035,11 @@
                         background: var(--mask-colour, currentColor) !important;
                     }
                 }
-                .gallery-image-preferred-button :is(button, a) {
-                    --hue-over: var(--hue-fav);
-                    --sat-over: var(--sat-fav);
-                    --lit-over: var(--lit-fav);
-                }
                 [value="up"] {
                     --col: hsl(var(--c2));
-                    --hue-over: var(--hue-pos);
                 }
                 [value="down"] {
                     --col: hsl(var(--c2));
-                    --hue-over: var(--hue-neg);
                 }
                 .gallery-image-delete button,
                 .gallery-image-report {

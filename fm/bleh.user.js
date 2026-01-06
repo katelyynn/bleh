@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         bleh
 // @namespace    https://last.fm/
-// @version      2025.1220
+// @version      2026.0105
 // @description  bleh!!! ^-^
 // @author       katelyn
 // @match        https://www.last.fm/*
@@ -42352,7 +42352,7 @@
     );
     if (old_date_btn) old_date_btn.remove();
     let date_btn = html.node`
-        <button class="date-range-picker-button">${button2.querySelector(".date-range-picker-button-inner").textContent}</button>
+        <button class="btn date-range-picker-button">${button2.querySelector(".date-range-picker-button-inner").textContent}</button>
     `;
     date_picker.appendChild(date_btn);
     let picker_content = page.structure.glacier.date_panel.querySelector(
@@ -43796,23 +43796,21 @@
       delete_button.querySelector("button").classList = "btn";
       buttons_extra.appendChild(delete_button);
     }
-    let report_button = image_details.querySelector(
-      ".gallery-image-report-form"
-    );
-    let report_text = report_button.querySelector("button");
-    report_text.classList.add("btn");
-    tippy_esm_default(report_text, {
-      content: report_text.textContent
+    const report_form = image_details.querySelector(".gallery-image-report-form");
+    const report = report_button.querySelector("button");
+    report.classList.add("btn");
+    tippy_esm_default(report, {
+      content: report.textContent
     });
-    report_text.textContent = tl2(trans.report);
-    buttons_extra.appendChild(report_button);
-    let star_buttons = image_details.querySelectorAll(
-      ".gallery-image-preferred-button :is(button, a)"
-    );
+    report.textContent = tl2(trans.report);
+    const reported = report_button.querySelector(".gallery-image-report--reported");
+    reported.classList.add("btn");
+    buttons_extra.appendChild(report_form);
+    let star_buttons = image_details.querySelectorAll(".gallery-image-preferred-button :is(button, a)");
     star_buttons.forEach((star_button) => {
       star_button.classList.add("btn");
       star_button.removeAttribute("title");
-      let text4 = star_button.querySelector(".gallery-image-preferred-states");
+      const text4 = star_button.querySelector(".gallery-image-preferred-states");
       text4.textContent = tl2(trans.star);
     });
     let view_all_container = page.structure.main.querySelector(

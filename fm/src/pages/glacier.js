@@ -241,7 +241,7 @@ function bleh_glacier_library_date() {
     if (old_date_btn) old_date_btn.remove();
 
     let date_btn = html.node`
-        <button class="date-range-picker-button">${button.querySelector('.date-range-picker-button-inner').textContent}</button>
+        <button class="btn date-range-picker-button">${button.querySelector('.date-range-picker-button-inner').textContent}</button>
     `;
     date_picker.appendChild(date_btn);
 
