@@ -30061,8 +30061,8 @@
     }
     .markdown-action {
         --bg: transparent;
-        --bg-hov: hsl(var(--b3), 40%);
-        --bg-atv: hsl(var(--b3), 60%);
+        --bg-hov: hsl(var(--b4), 40%);
+        --bg-atv: hsl(var(--b4), 60%);
         --shadow: none;
 
         width: var(--button-height);
