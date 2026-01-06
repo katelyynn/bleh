@@ -775,7 +775,7 @@ export function append_nav() {
                             ${!auth.avatar.endsWith('818148bf682d429dc215c1705eb27b98.png') ? html.node`
                             <div class="bg" style="background-image: url(${auth.avatar.replace('avatar42s', 'avatar170s')})" />
                             ` : ''}
-                            <div class="name">@${auth.name}</div>
+                            <div class="name"><span class="at">@</span>${auth.name}</div>
                             ${auth.pro ? html.node`
                                 <div class="badges">
                                     ${auth.pro ? () => {

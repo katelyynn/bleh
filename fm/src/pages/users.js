@@ -32,7 +32,8 @@ export function bleh_users() {
 
         log('patching', 'user', 'info', { user, name: name?.textContent, md });
 
-        if (name) name.textContent = `@${name.textContent}`;
+        if (name)
+            name.insertBefore(html.node`<span class="at">@</span>`, name.firstChild);
 
         if (md) {
             // this removes fancy markdown components

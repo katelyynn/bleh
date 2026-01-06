@@ -36032,7 +36032,7 @@
       if (sub_wrap) {
         sub_wrap.insertBefore(html.node`
                 <span class="header-username">
-                    <a href="${root}user/${page.name}">@${page.name}</a>
+                    <a href="${root}user/${page.name}"><span class="at">@</span>${page.name}</a>
                 </span>
             `, sub_wrap.firstElementChild);
       }
@@ -36051,7 +36051,7 @@
                         <p class="header-title-secondary">
                             ${cache2.username ? html.node`
                             <span class="header-username">
-                                <a href="${root}user/${page.name}">@${page.name}</a>
+                                <a href="${root}user/${page.name}"><span class="at">@</span>${page.name}</a>
                             </span>
                             ` : ""}
                             ${cache2.aka ? html.node`
@@ -54830,7 +54830,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                             ${!auth.avatar.endsWith("818148bf682d429dc215c1705eb27b98.png") ? html.node`
                             <div class="bg" style="background-image: url(${auth.avatar.replace("avatar42s", "avatar170s")})" />
                             ` : ""}
-                            <div class="name">@${auth.name}</div>
+                            <div class="name"><span class="at">@</span>${auth.name}</div>
                             ${auth.pro ? html.node`
                                 <div class="badges">
                                     ${auth.pro ? () => {
@@ -58528,7 +58528,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       });
       const md = user.querySelector(".user-list-about-me");
       log("patching", "user", "info", { user, name: name?.textContent, md });
-      if (name) name.textContent = `@${name.textContent}`;
+      if (name)
+        name.insertBefore(html.node`<span class="at">@</span>`, name.firstChild);
       if (md) {
         md.textContent = md.textContent.replace(/(?<!\!)\[[^\]]*\]/g, "");
         md.textContent = md.textContent.replace(/^!\[[\s\S]*?…$/gm, "\u2026");

@@ -229,7 +229,7 @@ export async function bleh_profiles() {
         if (sub_wrap) {
             sub_wrap.insertBefore(html.node`
                 <span class="header-username">
-                    <a href="${root}user/${page.name}">@${page.name}</a>
+                    <a href="${root}user/${page.name}"><span class="at">@</span>${page.name}</a>
                 </span>
             `, sub_wrap.firstElementChild);
         }
@@ -249,7 +249,7 @@ export async function bleh_profiles() {
                         <p class="header-title-secondary">
                             ${cache.username ? html.node`
                             <span class="header-username">
-                                <a href="${root}user/${page.name}">@${page.name}</a>
+                                <a href="${root}user/${page.name}"><span class="at">@</span>${page.name}</a>
                             </span>
                             ` : ''}
                             ${cache.aka ? html.node`

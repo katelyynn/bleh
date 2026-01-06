@@ -147,6 +147,9 @@
 
         --modal-close-size: 26px;
 
+        --at-opacity: 0.6;
+        --tag-opacity: 0.6;
+
         @media (max-width: 980px) {
             --button-sides: 9px;
             --button-verts: 7px;
@@ -16791,6 +16794,7 @@
 
             &:before {
                 content: '@';
+                opacity: var(--at-opacity);
             }
         }
 
@@ -16801,6 +16805,10 @@
                 display: none;
             }
         }
+    }
+
+    .at {
+        opacity: var(--at-opacity);
     }
 
     .attendee-summary-user-inner-wrap {
@@ -26299,7 +26307,7 @@
     .tag > a {
         &:before {
             content: '#' !important;
-            opacity: 0.6;
+            opacity: var(--tag-opacity);
         }
     }
 
