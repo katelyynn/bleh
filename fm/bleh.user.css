@@ -22157,7 +22157,7 @@
         }
 
         & > a:not(:hover) {
-            color: hsl(var(--c3));
+            --col: hsl(var(--c3));
             --mask-colour: hsl(var(--c3), 80%);
         }
 
