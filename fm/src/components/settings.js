@@ -840,7 +840,7 @@ export function setting({
                     html`
                         ${current.map((val) => {
                             return html.node`
-                                <button class="setting-list-item current" data-host=${list[val]?.host} onclick=${() => {
+                                <button class="btn setting-list-item current" data-host=${list[val]?.host} onclick=${() => {
                                     const new_list = current.filter(
                                         (item) => item != val
                                     );
@@ -867,7 +867,7 @@ export function setting({
                         })}
                         ${!settings_store[id].predefined ? () => {
                             const button = html.node`
-                                <button class="setting-list-item current">
+                                <button class="btn setting-list-item current">
                                     <div class="info">
                                         ${tl(trans.add)}
                                     </div>
@@ -917,7 +917,7 @@ export function setting({
                             html.node`
                         ${Object.entries(available).map(([val, formal]) => {
                             return html.node`
-                                <button class="setting-list-item" data-host=${formal.host} onclick=${() => {
+                                <button class="btn setting-list-item" data-host=${formal.host} onclick=${() => {
                                     const new_list = [...current, val];
 
                                     save_setting(id, new_list);

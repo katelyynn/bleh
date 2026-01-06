@@ -4284,6 +4284,8 @@
         align-items: center;
         transform-origin: bottom !important;
 
+        --icon-16-placeholder: var(--icon-16-dot);
+
         .new-badge {
             margin-left: 6px;
         }
@@ -4343,6 +4345,19 @@
 
             &:active {
                 transform: scale(0.98) !important;
+            }
+        }
+
+        &.secondary-nav-item-link--disabled {
+            opacity: 0.65 !important;
+            --col: hsl(var(--c3)) !important;
+            --mask-colour: hsl(var(--c3)) !important;
+            transform: unset !important;
+            --bg-hov: var(--bg) !important;
+            --bg-atv: var(--bg) !important;
+
+            &:after {
+                display: none !important;
             }
         }
 

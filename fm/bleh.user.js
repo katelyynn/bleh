@@ -41448,7 +41448,7 @@
             html`
                         ${current.map((val) => {
               return html.node`
-                                <button class="setting-list-item current" data-host=${list[val]?.host} onclick=${() => {
+                                <button class="btn setting-list-item current" data-host=${list[val]?.host} onclick=${() => {
                 const new_list = current.filter(
                   (item) => item != val
                 );
@@ -41469,7 +41469,7 @@
             })}
                         ${!settings_store[id].predefined ? () => {
               const button2 = html.node`
-                                <button class="setting-list-item current">
+                                <button class="btn setting-list-item current">
                                     <div class="info">
                                         ${tl2(trans.add)}
                                     </div>
@@ -41510,7 +41510,7 @@
                         ${settings_store[id].predefined ? html.node`
                         ${Object.entries(available).map(([val, formal]) => {
               return html.node`
-                                <button class="setting-list-item" data-host=${formal.host} onclick=${() => {
+                                <button class="btn setting-list-item" data-host=${formal.host} onclick=${() => {
                 const new_list = [...current, val];
                 save_setting(id, new_list);
                 render_list_items(new_list);
