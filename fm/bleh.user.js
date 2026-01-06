@@ -36719,7 +36719,7 @@
       user_list?.setAttribute("data-list-view", val);
     } }) : ""}
             ${no_data}
-            ${no_data_neighbours}
+            ${!user_list ? no_data_neighbours : ""}
             ${user_list}
             ${pagination}
         </section>
@@ -58508,7 +58508,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
   // src/pages/users.js
   function bleh_users() {
     const users = page.structure.main?.querySelectorAll(".user-list-item:not(.user-list-item-mobile-ad)");
-    users.forEach((user) => {
+    users.forEach((user, index3) => {
+      user.style.setProperty("--delay", index3 * 0.04 + "s");
       let avatar2 = user.querySelector(".user-list-avatar");
       let name = user.querySelector(".user-list-link");
       const badge = patch_avatar(avatar2, name.textContent, "follow");

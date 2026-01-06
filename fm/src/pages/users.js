@@ -14,7 +14,9 @@ import { log } from '../build/log.js';
 export function bleh_users() {
     const users = page.structure.main?.querySelectorAll('.user-list-item:not(.user-list-item-mobile-ad)');
 
-    users.forEach(user => {
+    users.forEach((user, index) => {
+        user.style.setProperty('--delay', index * 0.04 + 's');
+
         let avatar = user.querySelector('.user-list-avatar');
         let name = user.querySelector('.user-list-link');
 

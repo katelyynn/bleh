@@ -1107,7 +1107,7 @@ function patch_profile_following() {
                 user_list?.setAttribute('data-list-view', val);
             } }) : ''}
             ${no_data}
-            ${no_data_neighbours}
+            ${!user_list ? no_data_neighbours : ''}
             ${user_list}
             ${pagination}
         </section>

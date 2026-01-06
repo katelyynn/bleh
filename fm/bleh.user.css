@@ -14801,6 +14801,10 @@
             &:not(:hover, :focus-within) {
                 --follow-button-opacity: 0.3;
             }
+
+            animation: var(--motion, chartlist 0.4s var(--trans-function-ani)) !important;
+            animation-delay: var(--delay, 0s) !important;
+            animation-fill-mode: backwards !important;
         }
 
         .user-list-follower-btn {
