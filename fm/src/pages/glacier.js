@@ -1035,10 +1035,7 @@ export function bleh_glacier_date_graph_generate() {
     prep_chart_colours();
 
     let new_run = false;
-    let scrobble_canvas_container =
-        page.structure.glacier.date_panel.querySelector(
-            '.scrobble-canvas-container'
-        );
+    let scrobble_canvas_container = page.structure.glacier.date_panel.querySelector('.scrobble-canvas-container');
     if (scrobble_canvas_container == null) {
         scrobble_canvas_container = document.createElement('div');
         scrobble_canvas_container.classList.add('scrobble-canvas-container');
@@ -1049,6 +1046,8 @@ export function bleh_glacier_date_graph_generate() {
 
     let scrobble_canvas = document.createElement('canvas');
     scrobble_canvas.classList.add('scrobble-canvas');
+
+    scrobble_canvas_container.setAttribute('data-view', settings.chart_view);
 
     Chart.defaults.color = page.state.chart_colours.text_col;
     Chart.defaults.font.family = page.state.chart_colours.font;

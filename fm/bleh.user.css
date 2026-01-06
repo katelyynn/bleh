@@ -11049,13 +11049,21 @@
         }
 
         .scrobble-canvas-container {
-            height: 260px;
+            height: 300px;
             margin-top: var(--card-gap);
             position: relative;
 
             &:before {
                 opacity: 0;
             }
+
+            &[data-view="bar"] {
+                height: 360px;
+            }
+
+            transition-property: height;
+            transition-duration: 0.4s;
+            transition-timing-function: var(--trans-function-ani);
         }
 
         .scrobble-canvas-container:before,
