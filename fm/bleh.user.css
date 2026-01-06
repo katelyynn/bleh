@@ -9911,7 +9911,8 @@
             hsl(var(--l3-c)),
             hsl(var(--l4-c)) 30%
         );
-        font-weight: var(--font-weight-medium);
+        --force-font-weight: var(--font-weight-medium);
+        font-weight: var(--force-font-weight);
         position: relative;
         --mask-size: 12px;
         --margin-top: calc(-1 * var(--mask-size) / 2);
@@ -14258,7 +14259,7 @@
     }
 
     .wiki-block-inner-2 {
-        line-height: var(--line-height);
+        line-height: 20px;
     }
     .wiki-block-cta {
         color: hsl(var(--c2), 80%);
