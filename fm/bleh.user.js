@@ -36715,9 +36715,9 @@
     user_list?.setAttribute("data-list-view", settings.list_view);
     render(page.structure.main, html.node`
         <section class="users">
-            ${setting({ id: "list_view", func: (val) => {
+            ${!no_data && !no_data_neighbours ? setting({ id: "list_view", func: (val) => {
       user_list?.setAttribute("data-list-view", val);
-    } })}
+    } }) : ""}
             ${no_data}
             ${no_data_neighbours}
             ${user_list}
