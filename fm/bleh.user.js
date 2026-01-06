@@ -40869,7 +40869,8 @@
     focus = false,
     standalone = false,
     func,
-    list
+    list,
+    center = true
   }) {
     try {
       let value = settings[id];
@@ -41306,32 +41307,33 @@
           return setting_fail(id, {
             message: "Tabs type requires you to either define values in config or pass a list to instance."
           });
-        const tabs = html.node`
-                <div class="view-buttons view-buttons-middle">
-                    ${Object.entries(values).map(
-          ([key, val]) => {
-            const icon2 = val.icon || key;
-            const button2 = html.node`
-                            <button class="btn view-item" data-type=${icon2} data-value=${key} onclick=${() => {
-              save_setting(id, key);
-              buttons.forEach((btn) => {
-                btn.setAttribute(
-                  "aria-checked",
-                  btn.getAttribute("data-value") == key
-                );
-              });
-              if (func) func(key);
-            }} aria-checked=${value == key}>
-                                ${typeof val.name == "object" ? tl2(val.name) : val.name}
-                            </button>
-                        `;
-            buttons.push(button2);
-            return button2;
-          }
-        )}
+        const inner2 = html.node`
+                ${Object.entries(values).map(([key, val]) => {
+          const icon2 = val.icon || key;
+          const button2 = html.node`
+                        <button class="btn view-item" data-type=${icon2} data-value=${key} onclick=${() => {
+            save_setting(id, key);
+            buttons.forEach((btn) => {
+              btn.setAttribute(
+                "aria-checked",
+                btn.getAttribute("data-value") == key
+              );
+            });
+            if (func) func(key);
+          }} aria-checked=${value == key}>
+                            ${typeof val.name == "object" ? tl2(val.name) : val.name}
+                        </button>
+                    `;
+          buttons.push(button2);
+          return button2;
+        })}
+            `;
+        if (standalone) return inner2;
+        return html.node`
+                <div class="view-buttons ${center ? "view-buttons-middle" : ""}">
+                    ${inner2}
                 </div>
             `;
-        return tabs;
       } else if (type == "radio") {
         let update_radio = function(val) {
           save_setting(id, val);
@@ -42246,39 +42248,14 @@
     }
     if (!ff("glacier_library")) return;
     if (settings.glacier_library_graphs && date_items.length > 0) {
-      let chart_view_selector = document.createElement("div");
-      chart_view_selector.classList.add(
-        "view-buttons",
-        "chart-view-selector",
-        "view-buttons-middle"
-      );
-      chart_view_selector.innerHTML = `
-            <button class="btn view-item" id="toggle-chart_view-line" data-toggle="chart_view" data-toggle-value="line" onclick="_update_item('chart_view', 'line')">
-                ${tl2(trans.line)}
-            </button>
-            <button class="btn view-item" id="toggle-chart_view-pie" data-toggle="chart_view" data-toggle-value="pie" onclick="_update_item('chart_view', 'pie')">
-                ${tl2(trans.pie)}
-            </button>
-            <button class="btn view-item" id="toggle-chart_view-bar" data-toggle="chart_view" data-toggle-value="bar" onclick="_update_item('chart_view', 'bar')">
-                ${tl2(trans.bar)}
-            </button>
-        `;
-      page.structure.glacier.selector.after(chart_view_selector);
-      let chart_axis_selector = document.createElement("div");
-      chart_axis_selector.classList.add(
-        "view-buttons",
-        "chart-axis-selector",
-        "view-buttons-middle"
-      );
-      chart_axis_selector.innerHTML = `
-            <button class="btn view-item" id="toggle-chart_bar_axis-horizontal" data-toggle="chart_bar_axis" data-toggle-value="horizontal" onclick="_update_item('chart_bar_axis', 'horizontal')">
-                ${tl2(trans.horizontal)}
-            </button>
-            <button class="btn view-item" id="toggle-chart_bar_axis-vertical" data-toggle="chart_bar_axis" data-toggle-value="vertical" onclick="_update_item('chart_bar_axis', 'vertical')">
-                ${tl2(trans.vertical)}
-            </button>
-        `;
-      chart_view_selector.after(chart_axis_selector);
+      page.structure.glacier.selector.after(html.node`
+            <div class="view-buttons chart-view-selector view-buttons-middle">
+                ${setting({ id: "chart_view", standalone: true, func: bleh_glacier_date_graph_generate })}
+            </div>
+            <div class="view-buttons chart-axis-selector view-buttons-middle">
+                ${setting({ id: "chart_bar_axis", standalone: true, func: bleh_glacier_date_graph_generate })}
+            </div>
+        `);
       refresh_all(page.structure.glacier.date_panel);
     }
     if (date_items.length > 0) bleh_glacier_library_date();
@@ -70314,7 +70291,6 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     list_view: {
       default: "cards",
-      type: "radio",
       type: "tabs",
       values: {
         cards: {
@@ -70330,11 +70306,30 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     chart_view: {
       default: "line",
-      type: "radio"
+      type: "tabs",
+      values: {
+        line: {
+          name: trans.line
+        },
+        pie: {
+          name: trans.pie
+        },
+        bar: {
+          name: trans.bar
+        }
+      }
     },
     chart_bar_axis: {
       default: "horizontal",
-      type: "radio"
+      type: "tabs",
+      values: {
+        horizontal: {
+          name: trans.horizontal
+        },
+        vertical: {
+          name: trans.vertical
+        }
+      }
     },
     chart_insights_view: {
       default: "pie",

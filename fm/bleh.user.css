@@ -11000,33 +11000,29 @@
 
         .chart-view-selector {
             margin: var(--card-gap) auto !important;
-
-            .view-item {
-                &[data-toggle-value="line"] {
-                    --mask: var(--icon-16-chart-line);
-                }
-                &[data-toggle-value="pie"] {
-                    --mask: var(--icon-16-chart-pie);
-                }
-                &[data-toggle-value="bar"] {
-                    --mask: var(--icon-16-chart-bar);
-                }
-            }
         }
         .chart-axis-selector {
             display: var(--hide-if-not-bar, flex);
             margin: calc(-1 * (var(--card-gap) - 5px)) auto 0 !important;
-
-            .view-item {
-                &[data-toggle-value="horizontal"] {
-                    --mask: var(--icon-16-chart-axis-x);
-                }
-                &[data-toggle-value="vertical"] {
-                    --mask: var(--icon-16-chart-axis-y);
-                }
-            }
         }
     }
+
+    [data-type="line"] {
+        --mask: var(--icon-16-chart-line);
+    }
+    [data-type="pie"] {
+        --mask: var(--icon-16-chart-pie);
+    }
+    [data-type="bar"] {
+        --mask: var(--icon-16-chart-bar);
+    }
+    [data-type="horizontal"] {
+        --mask: var(--icon-16-chart-axis-x);
+    }
+    [data-type="vertical"] {
+        --mask: var(--icon-16-chart-axis-y);
+    }
+
     .date-panel {
         min-height: 335px;
 

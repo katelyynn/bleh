@@ -815,7 +815,6 @@ export let settings_store = {
     },
     list_view: {
         default: 'cards',
-        type: 'radio',
         type: 'tabs',
         values: {
             cards: {
@@ -831,11 +830,30 @@ export let settings_store = {
     },
     chart_view: {
         default: 'line',
-        type: 'radio'
+        type: 'tabs',
+        values: {
+            line: {
+                name: trans.line
+            },
+            pie: {
+                name: trans.pie
+            },
+            bar: {
+                name: trans.bar
+            }
+        }
     },
     chart_bar_axis: {
         default: 'horizontal',
-        type: 'radio'
+        type: 'tabs',
+        values: {
+            horizontal: {
+                name: trans.horizontal
+            },
+            vertical: {
+                name: trans.vertical
+            }
+        }
     },
     chart_insights_view: {
         default: 'pie',

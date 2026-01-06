@@ -105,42 +105,14 @@ export function bleh_user_library() {
     if (!ff('glacier_library')) return;
 
     if (settings.glacier_library_graphs && date_items.length > 0) {
-        let chart_view_selector = document.createElement('div');
-        chart_view_selector.classList.add(
-            'view-buttons',
-            'chart-view-selector',
-            'view-buttons-middle'
-        );
-        chart_view_selector.innerHTML = `
-            <button class="btn view-item" id="toggle-chart_view-line" data-toggle="chart_view" data-toggle-value="line" onclick="_update_item('chart_view', 'line')">
-                ${tl(trans.line)}
-            </button>
-            <button class="btn view-item" id="toggle-chart_view-pie" data-toggle="chart_view" data-toggle-value="pie" onclick="_update_item('chart_view', 'pie')">
-                ${tl(trans.pie)}
-            </button>
-            <button class="btn view-item" id="toggle-chart_view-bar" data-toggle="chart_view" data-toggle-value="bar" onclick="_update_item('chart_view', 'bar')">
-                ${tl(trans.bar)}
-            </button>
-        `;
-
-        page.structure.glacier.selector.after(chart_view_selector);
-
-        let chart_axis_selector = document.createElement('div');
-        chart_axis_selector.classList.add(
-            'view-buttons',
-            'chart-axis-selector',
-            'view-buttons-middle'
-        );
-        chart_axis_selector.innerHTML = `
-            <button class="btn view-item" id="toggle-chart_bar_axis-horizontal" data-toggle="chart_bar_axis" data-toggle-value="horizontal" onclick="_update_item('chart_bar_axis', 'horizontal')">
-                ${tl(trans.horizontal)}
-            </button>
-            <button class="btn view-item" id="toggle-chart_bar_axis-vertical" data-toggle="chart_bar_axis" data-toggle-value="vertical" onclick="_update_item('chart_bar_axis', 'vertical')">
-                ${tl(trans.vertical)}
-            </button>
-        `;
-
-        chart_view_selector.after(chart_axis_selector);
+        page.structure.glacier.selector.after(html.node`
+            <div class="view-buttons chart-view-selector view-buttons-middle">
+                ${setting({ id: 'chart_view', standalone: true, func: bleh_glacier_date_graph_generate })}
+            </div>
+            <div class="view-buttons chart-axis-selector view-buttons-middle">
+                ${setting({ id: 'chart_bar_axis', standalone: true, func: bleh_glacier_date_graph_generate })}
+            </div>
+        `);
 
         refresh_all(page.structure.glacier.date_panel);
     }

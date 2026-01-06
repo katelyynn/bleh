@@ -28,7 +28,8 @@ export function setting({
     focus = false,
     standalone = false,
     func,
-    list
+    list,
+    center = true
 }) {
     try {
         let value = settings[id];
@@ -611,37 +612,39 @@ export function setting({
                     message: 'Tabs type requires you to either define values in config or pass a list to instance.'
                 });
 
-            const tabs = html.node`
-                <div class="view-buttons view-buttons-middle">
-                    ${Object.entries(values).map(
-                        ([key, val]) => {
-                            const icon = val.icon || key;
+            const inner = html.node`
+                ${Object.entries(values).map(([key, val]) => {
+                    const icon = val.icon || key;
 
-                            const button = html.node`
-                            <button class="btn view-item" data-type=${icon} data-value=${key} onclick=${() => {
-                                save_setting(id, key);
+                    const button = html.node`
+                        <button class="btn view-item" data-type=${icon} data-value=${key} onclick=${() => {
+                            save_setting(id, key);
 
-                                buttons.forEach((btn) => {
-                                    btn.setAttribute(
-                                        'aria-checked',
-                                        btn.getAttribute('data-value') == key
-                                    );
-                                });
+                            buttons.forEach((btn) => {
+                                btn.setAttribute(
+                                    'aria-checked',
+                                    btn.getAttribute('data-value') == key
+                                );
+                            });
 
-                                if (func) func(key);
-                            }} aria-checked=${value == key}>
-                                ${typeof val.name == 'object' ? tl(val.name) : val.name}
-                            </button>
-                        `;
+                            if (func) func(key);
+                        }} aria-checked=${value == key}>
+                            ${typeof val.name == 'object' ? tl(val.name) : val.name}
+                        </button>
+                    `;
 
-                            buttons.push(button);
-                            return button;
-                        }
-                    )}
-                </div>
+                    buttons.push(button);
+                    return button;
+                })}
             `;
 
-            return tabs;
+            if (standalone) return inner;
+
+            return html.node`
+                <div class="view-buttons ${center ? 'view-buttons-middle' : ''}">
+                    ${inner}
+                </div>
+            `;
         } else if (type == 'radio') {
             let buttons = [];
 
