@@ -58102,7 +58102,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         let shout_name = shout.querySelector(".shout-user a");
         if (!shout_name) return;
         let shout_name_text = shout_name.textContent;
-        shout_name.textContent = `@${shout_name_text}`;
+        shout_name.insertBefore(html.node`<span class="at">@</span>`, shout_name.firstChild);
         let shout_avatar = shout.querySelector(".shout-user-avatar");
         let badge = patch_avatar(shout_avatar, shout_name_text, "shout");
         if (badge) {
