@@ -23095,10 +23095,6 @@
             align-items: center;
             gap: calc(var(--card-gap) + var(--card-padding));
 
-            &.search-header, &.tag-header, &.event-header {
-                gap: var(--card-padding);
-            }
-
             &.no-top-margin {
                 margin: 0 -40px !important;
             }
@@ -23351,6 +23347,7 @@
             width: 28px;
             flex-shrink: 0;
             filter: var(--header-filter-shadow);
+            margin-right: calc(-1 * var(--card-gap));
 
             .tag-icon {
                 display: flex;
