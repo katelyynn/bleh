@@ -34615,7 +34615,7 @@
         render(font_setting, html``);
         render(font_setting, html`
                 <div class="heading">
-                    <h5>${tl2(trans.profile_font.name)}<span class="new-badge sponsor-related">${tl2(trans.sponsors_only)}</span><span class="new-badge new">${tl2(trans.new)}</span></h5>
+                    <h5>${tl2(trans.profile_font.name)}<span class="new-badge sponsor-related">${tl2(trans.sponsors_only)}</span></h5>
                     <p>${tl2(trans.profile_font.body)}</p>
                 </div>
                 <div class="info">

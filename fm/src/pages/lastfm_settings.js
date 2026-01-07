@@ -1017,7 +1017,7 @@ function patch_settings_profile_panel(token, update_picture) {
             render(font_setting, html``);
             render(font_setting, html`
                 <div class="heading">
-                    <h5>${tl(trans.profile_font.name)}<span class="new-badge sponsor-related">${tl(trans.sponsors_only)}</span><span class="new-badge new">${tl(trans.new)}</span></h5>
+                    <h5>${tl(trans.profile_font.name)}<span class="new-badge sponsor-related">${tl(trans.sponsors_only)}</span></h5>
                     <p>${tl(trans.profile_font.body)}</p>
                 </div>
                 <div class="info">
