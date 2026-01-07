@@ -23095,6 +23095,10 @@
             align-items: center;
             gap: calc(var(--card-gap) + var(--card-padding));
 
+            &.search-header, &.tag-header, &.event-header {
+                gap: var(--card-padding);
+            }
+
             &.no-top-margin {
                 margin: 0 -40px !important;
             }
@@ -23344,25 +23348,19 @@
 
         .tag-side {
             display: flex;
-            width: 56px;
+            width: 28px;
             flex-shrink: 0;
+            filter: var(--header-filter-shadow);
 
             .tag-icon {
                 display: flex;
-                width: 56px;
+                width: 28px;
                 aspect-ratio: 1 / 1;
                 cursor: default;
 
                 justify-content: center;
                 align-items: center;
                 flex-direction: column;
-
-                background: var(--card-blur-bg);
-                border-radius: var(--item-big-radius);
-                box-shadow: var(--card-border), var(--card-shadow);
-
-                backdrop-filter: var(--solarium);
-                -webkit-backdrop-filter: var(--solarium);
 
                 position: relative;
                 --left: 50%;
@@ -23371,12 +23369,6 @@
                 --margin-top: calc(-1 * (var(--mask-size) / 2));
                 --mask: var(--icon-tag);
                 color: hsl(var(--c3));
-
-                background-image: var(--cards-overlay-image-subtle);
-                background-repeat: repeat-x;
-                background-position: unset;
-
-                margin-right: calc(-1 * var(--card-gap)) !important;
 
                 &.cog-icon {
                     --mask: var(--icon-16-settings);
