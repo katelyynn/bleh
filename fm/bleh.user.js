@@ -34300,38 +34300,6 @@
                         />
                     </div>
                 </div>
-                ${() => {
-      const status_regex = /\[status=([^\]]+)\]/;
-      const match3 = about.value().match(status_regex);
-      const pre_existing = match3 ? match3[1] : "";
-      const elem = html.node`
-                        <div class="setting" data-type="text">
-                            <div class="heading">
-                                <h5><a href="https://status.cafe" target="_blank">status.cafe</a><span class="new-badge new">${tl2(trans.new)}</span></h5>
-                                <p>${tl2(trans.status_cafe.body)}</p>
-                            </div>
-                            ${input({
-        value: pre_existing,
-        func: (val) => {
-          const match4 = about.value().match(status_regex);
-          const new_status = `[status=${val}]`;
-          if (match4) {
-            about.value(about.value().replace(status_regex, new_status));
-          } else {
-            const trimmed = about.value().trimEnd();
-            if (trimmed.length == 0) {
-              about.value(new_status);
-            } else {
-              about.value(trimmed + "\n\n" + new_status);
-            }
-          }
-        },
-        submit_on_character: true
-      })}
-                        </div>
-                    `;
-      return elem;
-    }}
                 <div class="setting" data-type="select">
                     <div class="heading">
                         <h5>${tl2(trans.country)}</h5>
@@ -34388,6 +34356,38 @@
                     disabled=${!auth.sponsor}
                     ref=${(el) => accent_setting = el}
                 />
+                ${() => {
+      const status_regex = /\[status=([^\]]+)\]/;
+      const match3 = about.value().match(status_regex);
+      const pre_existing = match3 ? match3[1] : "";
+      const elem = html.node`
+                        <div class="setting" data-type="text">
+                            <div class="heading">
+                                <h5><a href="https://status.cafe" target="_blank">status.cafe</a><span class="new-badge new">${tl2(trans.new)}</span></h5>
+                                <p>${tl2(trans.status_cafe.body)}</p>
+                            </div>
+                            ${input({
+        value: pre_existing,
+        func: (val) => {
+          const match4 = about.value().match(status_regex);
+          const new_status = `[status=${val}]`;
+          if (match4) {
+            about.value(about.value().replace(status_regex, new_status));
+          } else {
+            const trimmed = about.value().trimEnd();
+            if (trimmed.length == 0) {
+              about.value(new_status);
+            } else {
+              about.value(trimmed + "\n\n" + new_status);
+            }
+          }
+        },
+        submit_on_character: true
+      })}
+                        </div>
+                    `;
+      return elem;
+    }}
                 <div class="setting" data-type="text">
                     <div class="heading">
                         <h5>${tl2(trans.about)}</h5>

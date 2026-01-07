@@ -656,44 +656,6 @@ function patch_settings_profile_panel(token, update_picture) {
                         />
                     </div>
                 </div>
-                ${() => {
-                    const status_regex = /\[status=([^\]]+)\]/;
-                    const match = about.value().match(status_regex);
-
-                    const pre_existing = match ? match[1] : '';
-
-                    const elem = html.node`
-                        <div class="setting" data-type="text">
-                            <div class="heading">
-                                <h5><a href="https://status.cafe" target="_blank">status.cafe</a><span class="new-badge new">${tl(trans.new)}</span></h5>
-                                <p>${tl(trans.status_cafe.body)}</p>
-                            </div>
-                            ${input({
-                                value: pre_existing,
-                                func: (val) => {
-                                    const match = about.value().match(status_regex);
-
-                                    const new_status = `[status=${val}]`;
-
-                                    if (match) {
-                                        about.value(about.value().replace(status_regex, new_status));
-                                    } else {
-                                        const trimmed = about.value().trimEnd();
-
-                                        if (trimmed.length == 0) {
-                                            about.value(new_status);
-                                        } else {
-                                            about.value(trimmed + '\n\n' + new_status);
-                                        }
-                                    }
-                                },
-                                submit_on_character: true
-                            })}
-                        </div>
-                    `;
-
-                    return elem;
-                }}
                 <div class="setting" data-type="select">
                     <div class="heading">
                         <h5>${tl(trans.country)}</h5>
@@ -758,6 +720,44 @@ function patch_settings_profile_panel(token, update_picture) {
                     disabled=${!auth.sponsor}
                     ref=${(el) => (accent_setting = el)}
                 />
+                ${() => {
+                    const status_regex = /\[status=([^\]]+)\]/;
+                    const match = about.value().match(status_regex);
+
+                    const pre_existing = match ? match[1] : '';
+
+                    const elem = html.node`
+                        <div class="setting" data-type="text">
+                            <div class="heading">
+                                <h5><a href="https://status.cafe" target="_blank">status.cafe</a><span class="new-badge new">${tl(trans.new)}</span></h5>
+                                <p>${tl(trans.status_cafe.body)}</p>
+                            </div>
+                            ${input({
+                                value: pre_existing,
+                                func: (val) => {
+                                    const match = about.value().match(status_regex);
+
+                                    const new_status = `[status=${val}]`;
+
+                                    if (match) {
+                                        about.value(about.value().replace(status_regex, new_status));
+                                    } else {
+                                        const trimmed = about.value().trimEnd();
+
+                                        if (trimmed.length == 0) {
+                                            about.value(new_status);
+                                        } else {
+                                            about.value(trimmed + '\n\n' + new_status);
+                                        }
+                                    }
+                                },
+                                submit_on_character: true
+                            })}
+                        </div>
+                    `;
+
+                    return elem;
+                }}
                 <div class="setting" data-type="text">
                     <div class="heading">
                         <h5>${tl(trans.about)}</h5>
