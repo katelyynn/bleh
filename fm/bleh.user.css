@@ -19012,10 +19012,10 @@
             gap: var(--item-list-gap);
         }
 
-        & > .banner-image {
-            width: 200px;
-            height: 90px;
-            background-position: center var(--profile-header-background-offset);
+        .banner-image {
+            width: 240px;
+            height: 55px;
+            background-position: center;
             background-size: cover;
             border-radius: var(--item-big-radius);
         }

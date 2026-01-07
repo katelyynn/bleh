@@ -34190,7 +34190,6 @@
     let chars;
     const about = markdown_field(update_about, markdown_settings, form_about_me, "about_me", 40, 10, tl2(trans.anything_you_can_imagine));
     let preview;
-    let banner_setting;
     let accent_setting;
     let font_setting;
     render(page.structure.side, html`
@@ -34345,11 +34344,44 @@
     )}
                     </div>
                 </div>
-                <div
-                    class="setting"
-                    data-type="info"
-                    ref=${(el) => banner_setting = el}
-                />
+                ${() => {
+      const banner_regex = /\[banner=([^\]]+)\]/;
+      const match3 = about.value().match(banner_regex);
+      const pre_existing = match3 ? match3[1] : "";
+      let preview2;
+      const elem = html.node`
+                        <div class="setting" data-type="text">
+                            <div class="heading">
+                                <h5>${tl2(trans.profile_banner.name)}</h5>
+                                <p>${tl2(trans.profile_banner.body)}</p>
+                            </div>
+                            <div class="info v">
+                                ${input({
+        value: pre_existing,
+        func: (val) => {
+          const match4 = about.value().match(banner_regex);
+          const new_banner = `[banner=${val}]`;
+          if (match4) {
+            about.value(about.value().replace(banner_regex, new_banner));
+          } else {
+            const trimmed = about.value().trimEnd();
+            if (trimmed.length == 0) {
+              about.value(new_banner);
+            } else {
+              about.value(trimmed + "\n\n" + new_banner);
+            }
+          }
+          preview2.style.setProperty("background-image", `url(${val})`);
+        },
+        submit_on_character: true
+      })}
+                                <div class="banner-image" ref=${(el) => preview2 = el} />
+                            </div>
+                        </div>
+                    `;
+      preview2.style.setProperty("background-image", `url(${pre_existing})`);
+      return elem;
+    }}
                 <div
                     class="setting"
                     data-type="info"
@@ -34410,33 +34442,6 @@
       let profile_cache2 = JSON.parse(localStorage.getItem("bleh_profile_cache")) || {};
       let cache3 = profile_cache2[auth.name];
       console.info("cache", cache3);
-      render(
-        banner_setting,
-        html`
-                <div class="heading">
-                    <h5>${tl2(trans.profile_banner.name)}</h5>
-                    <p>${tl2(trans.profile_banner.body)}</p>
-                    ${cache3.banner_orig ? html.node`
-                        <p>${tl2(trans.current_banner_value).replace("{v}", cache3.banner_orig)}</p>
-                    ` : ""}
-                </div>
-                ${() => {
-          if (!cache3.banner_orig)
-            return html.node`
-                        <div class="info">
-                            <p>${tl2(trans.none)}</p>
-                        </div>
-                    `;
-          let banner_image = html.node`
-                        <div class="banner-image" style="background-image: url(${cache3.banner})" />
-                    `;
-          tippy_esm_default(banner_image, {
-            content: cache3.banner_orig
-          });
-          return banner_image;
-        }}
-            `
-      );
       const accent_regex = /\[accent=([0-9]{1,3}),([0-9]*\.?[0-9]+),([0-9]*\.?[0-9]+)\]/;
       const font_regex = /\[font=([^\]]+)\]/;
       console.info(
@@ -67954,13 +67959,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         pt: "Banner do perfil"
       },
       body: {
-        en: "Add your own custom banner image to your profile with [banner=url] in your bio",
-        de: "F\xFCge deinem Profil ein eigenes Bannerbild hinzu, indem du deiner Biografie [banner=url] hinzuf\xFCgst",
-        es: "A\xF1ade una imagen de banner personalizada a tu perfil con [banner=url] en tu biograf\xEDa",
-        it: "Aggiungi il tuo banner personalizzato al tuo profilo con [banner=url] nella tua biografia",
-        sv: "L\xE4g till en egen banner till din profil genom att s\xE4tta [banner=url] i din biografi",
-        ru: "\u0414\u043E\u0431\u0430\u0432\u044C\u0442\u0435 \u0441\u043E\u0431\u0441\u0442\u0432\u0435\u043D\u043D\u043E\u0435 \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435 \u0431\u0430\u043D\u043D\u0435\u0440\u0430 \u0432 \u0441\u0432\u043E\u0439 \u043F\u0440\u043E\u0444\u0438\u043B\u044C \u0441 \u043F\u043E\u043C\u043E\u0449\u044C\u044E [banner=url] \u0432 \u0432\u0430\u0448\u0435\u0439 \u0431\u0438\u043E\u0433\u0440\u0430\u0444\u0438\u0438",
-        pt: "Adicione seu pr\xF3prio banner personalizado ao seu perfil com [banner=url] em sua biografia"
+        en: "Showcase an image of your choosing across your profile"
       }
     },
     profile_accent: {

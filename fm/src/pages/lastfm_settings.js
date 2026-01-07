@@ -538,7 +538,6 @@ function patch_settings_profile_panel(token, update_picture) {
     const about = markdown_field(update_about, markdown_settings, form_about_me, 'about_me', 40, 10, tl(trans.anything_you_can_imagine));
     let preview;
 
-    let banner_setting;
     let accent_setting;
     let font_setting;
 
@@ -707,11 +706,52 @@ function patch_settings_profile_panel(token, update_picture) {
                         )}
                     </div>
                 </div>
-                <div
-                    class="setting"
-                    data-type="info"
-                    ref=${(el) => (banner_setting = el)}
-                />
+                ${() => {
+                    const banner_regex = /\[banner=([^\]]+)\]/;
+                    const match = about.value().match(banner_regex);
+
+                    const pre_existing = match ? match[1] : '';
+                    let preview;
+
+                    const elem = html.node`
+                        <div class="setting" data-type="text">
+                            <div class="heading">
+                                <h5>${tl(trans.profile_banner.name)}</h5>
+                                <p>${tl(trans.profile_banner.body)}</p>
+                            </div>
+                            <div class="info v">
+                                ${input({
+                                    value: pre_existing,
+                                    func: (val) => {
+                                        const match = about.value().match(banner_regex);
+
+                                        const new_banner = `[banner=${val}]`;
+
+                                        if (match) {
+                                            about.value(about.value().replace(banner_regex, new_banner));
+                                        } else {
+                                            const trimmed = about.value().trimEnd();
+
+                                            if (trimmed.length == 0) {
+                                                about.value(new_banner);
+                                            } else {
+                                                about.value(trimmed + '\n\n' + new_banner);
+                                            }
+                                        }
+
+                                        preview.style.setProperty('background-image', `url(${val})`);
+                                    },
+                                    submit_on_character: true
+                                })}
+                                <div class="banner-image" ref=${el => preview = el} />
+                            </div>
+                        </div>
+                    `;
+
+                    preview.style.setProperty('background-image', `url(${pre_existing})`);
+
+                    return elem;
+                }}
                 <div
                     class="setting"
                     data-type="info"
@@ -784,37 +824,6 @@ function patch_settings_profile_panel(token, update_picture) {
         let cache = profile_cache[auth.name];
 
         console.info('cache', cache);
-
-        render(
-            banner_setting,
-            html`
-                <div class="heading">
-                    <h5>${tl(trans.profile_banner.name)}</h5>
-                    <p>${tl(trans.profile_banner.body)}</p>
-                    ${cache.banner_orig ? html.node`
-                        <p>${tl(trans.current_banner_value).replace('{v}', cache.banner_orig)}</p>
-                    ` : ''}
-                </div>
-                ${() => {
-                    if (!cache.banner_orig)
-                        return html.node`
-                        <div class="info">
-                            <p>${tl(trans.none)}</p>
-                        </div>
-                    `;
-
-                    let banner_image = html.node`
-                        <div class="banner-image" style="background-image: url(${cache.banner})" />
-                    `;
-
-                    tippy(banner_image, {
-                        content: cache.banner_orig
-                    });
-
-                    return banner_image;
-                }}
-            `
-        );
 
         const accent_regex = /\[accent=([0-9]{1,3}),([0-9]*\.?[0-9]+),([0-9]*\.?[0-9]+)\]/;
         const font_regex = /\[font=([^\]]+)\]/;

@@ -8175,13 +8175,7 @@ export const trans = {
             pt: 'Banner do perfil'
         },
         body: {
-            en: 'Add your own custom banner image to your profile with [banner=url] in your bio',
-            de: 'Füge deinem Profil ein eigenes Bannerbild hinzu, indem du deiner Biografie [banner=url] hinzufügst',
-            es: 'Añade una imagen de banner personalizada a tu perfil con [banner=url] en tu biografía',
-            it: 'Aggiungi il tuo banner personalizzato al tuo profilo con [banner=url] nella tua biografia',
-            sv: 'Läg till en egen banner till din profil genom att sätta [banner=url] i din biografi',
-            ru: 'Добавьте собственное изображение баннера в свой профиль с помощью [banner=url] в вашей биографии',
-            pt: 'Adicione seu próprio banner personalizado ao seu perfil com [banner=url] em sua biografia'
+            en: 'Showcase an image of your choosing across your profile'
         }
     },
     profile_accent: {
