@@ -912,6 +912,7 @@ export function append_nav() {
                                                         <span><span class="at">@</span>${friend}</span>
                                                     </a>
                                                     `)}
+                                                    <div class="sep" />
                                                     <button class="dropdown-menu-clickable-item" data-type="edit" onclick=${() => {
                                                         open_starred_friend_window();
                                                         instance.hide();

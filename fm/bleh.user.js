@@ -54960,6 +54960,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                                                         <span><span class="at">@</span>${friend}</span>
                                                     </a>
                                                     `)}
+                                                    <div class="sep" />
                                                     <button class="dropdown-menu-clickable-item" data-type="edit" onclick=${() => {
                 open_starred_friend_window();
                 instance.hide();
