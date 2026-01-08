@@ -1,5 +1,5 @@
 //
-// bleh, an extension for the music site last.fm
+// bleh, an extension for the music site Last.fm
 // Copyright (c) 2025 katelyn and contributors
 // Licensed under GPLv3
 //
@@ -11,7 +11,7 @@ import { clamp_lit, clamp_sat, rgb_to_hsl } from './tools';
 import ColorThief from 'color-thief-browser';
 import { Settings } from 'luxon';
 
-// loads your selected language in last.fm
+// loads your selected language in Last.fm
 export let lang = 'en';
 export let lang_browser = 'en';
 // hello my name is stel :3
@@ -131,15 +131,15 @@ export const trans = {
         },
         'user-status-subscriber': {
             name: {
-                en: 'last.fm Pro',
-                de: 'last.fm Pro',
-                es: 'last.fm Pro',
-                it: 'last.fm Pro',
-                pt: 'last.fm Pro',
-                sv: 'last.fm Pro',
-                ru: 'last.fm Про',
-                pl: 'last.fm Pro',
-                zh: 'last.fm Pro'
+                en: 'Last.fm Pro',
+                de: 'Last.fm Pro',
+                es: 'Last.fm Pro',
+                it: 'Last.fm Pro',
+                pt: 'Last.fm Pro',
+                sv: 'Last.fm Pro',
+                ru: 'Last.fm Про',
+                pl: 'Last.fm Pro',
+                zh: 'Last.fm Pro'
             },
             reason: {
                 en: 'Active Pro subscription',
@@ -166,15 +166,15 @@ export const trans = {
                 zh: '官方员工'
             },
             reason: {
-                en: 'Official member of last.fm',
-                de: 'Ofizielles Mitglied von last.fm',
-                es: 'Miembro oficial de last.fm',
-                it: 'Membro ufficiale di last.fm',
-                pt: 'Membro oficial da last.fm',
-                sv: 'Officiell medlem på last.fm',
-                ru: 'Оффициальный участник last.fm',
-                pl: 'Oficjalny członek last.fm',
-                zh: 'last.fm 官方成员'
+                en: 'Official member of Last.fm',
+                de: 'Ofizielles Mitglied von Last.fm',
+                es: 'Miembro oficial de Last.fm',
+                it: 'Membro ufficiale di Last.fm',
+                pt: 'Membro oficial da Last.fm',
+                sv: 'Officiell medlem på Last.fm',
+                ru: 'Оффициальный участник Last.fm',
+                pl: 'Oficjalny członek Last.fm',
+                zh: 'Last.fm 官方成员'
             }
         },
         'user-status-mod': {
@@ -190,15 +190,15 @@ export const trans = {
                 zh: '版主'
             },
             reason: {
-                en: 'Official member of last.fm',
-                de: 'Ofizielles Mitglied von last.fm',
-                es: 'Miembro oficial de last.fm',
-                it: 'Membro ufficiale di last.fm',
-                pt: 'Membro oficial do last.fm',
-                sv: 'Officiell medlem på last.fm',
-                ru: 'Оффициальный участник last.fm',
-                pl: 'Oficjalny członek last.fm',
-                zh: 'last.fm 官方成员'
+                en: 'Official member of Last.fm',
+                de: 'Ofizielles Mitglied von Last.fm',
+                es: 'Miembro oficial de Last.fm',
+                it: 'Membro ufficiale di Last.fm',
+                pt: 'Membro oficial do Last.fm',
+                sv: 'Officiell medlem på Last.fm',
+                ru: 'Оффициальный участник Last.fm',
+                pl: 'Oficjalny członek Last.fm',
+                zh: 'Last.fm 官方成员'
             }
         },
         'user-status-alum': {
@@ -212,15 +212,15 @@ export const trans = {
                 zh: '往届成员'
             },
             reason: {
-                en: 'Former member of last.fm',
-                de: 'Ehemalige:r Mitarbeiter:in von last.fm',
-                es: 'Antiguo miembro de last.fm',
-                it: 'Ex-membro dello staff di last.fm',
-                sv: 'Före-detta medlem på last.fm',
-                ru: 'Бывший участник last.fm',
-                pt: 'Ex-membro da equipe do last.fm',
-                pl: 'Były członek last.fm',
-                zh: '曾任 last.fm 官方成员'
+                en: 'Former member of Last.fm',
+                de: 'Ehemalige:r Mitarbeiter:in von Last.fm',
+                es: 'Antiguo miembro de Last.fm',
+                it: 'Ex-membro dello staff di Last.fm',
+                sv: 'Före-detta medlem på Last.fm',
+                ru: 'Бывший участник Last.fm',
+                pt: 'Ex-membro da equipe do Last.fm',
+                pl: 'Były członek Last.fm',
+                zh: '曾任 Last.fm 官方成员'
             }
         },
         'label--fade': {
@@ -600,7 +600,7 @@ export const trans = {
         en: 'Obsess',
         de: 'Obsessen',
         es: 'Obsesionar',
-        it: 'Imposta passione', // last.fm calls them 'passioni' in italian, so i will work with that from now on ~cuto
+        it: 'Imposta passione', // Last.fm calls them 'passioni' in italian, so i will work with that from now on ~cuto
         pt: 'Obsessão',
         sv: 'Besatthet',
         ru: 'Зависимость',
@@ -876,7 +876,7 @@ export const trans = {
         sv: '’Vänner’ är en exklusiv del av bleh som tillåter dig att hålla koll på dina vänners lyssnarhistoria, det hanteras lokalt och rör inte din följarlista.',
         ru: '«Друзья» — это эксклюзивная функция bleh, которая позволяет вам следить за историей прослушиваний ваших друзей. Список управляется локально и не влияет на ваш список подписок.',
         pl: '‘Znajomi’ to funkcja ekskluzywna do bleh która pozwala na sprawdzenie historii słuchania twoich znajomych, działa lokalnie czyli nie wypływa na twoją liste kont które obserwujesz.',
-        zh: '“好友”是 bleh 插件的专属功能，让你可以实时了解好友的听歌历史。该功能仅在本地生效，不会影响你在 last.fm 官网的关注列表。'
+        zh: '“好友”是 bleh 插件的专属功能，让你可以实时了解好友的听歌历史。该功能仅在本地生效，不会影响你在 Last.fm 官网的关注列表。'
     },
     add_as_friend: {
         en: 'Add as friend',
@@ -1014,7 +1014,7 @@ export const trans = {
         zh: '创建于'
     },
     account_scrobbling_since_replace: {
-        // copy this from last.fm 1:1 (including the space at the end if there)
+        // copy this from Last.fm 1:1 (including the space at the end if there)
         en: 'scrobbling since ',
         de: 'scrobbelt seit ',
         es: 'scrobbling desde ',
@@ -1038,7 +1038,7 @@ export const trans = {
         zh: '编辑'
     },
     bulk_edit: {
-        // as in the last.fm "Bulk Edit" open-source extension
+        // as in the Last.fm "Bulk Edit" open-source extension
         en: 'Bulk edit',
         de: 'Mehrere bearbeiten',
         es: 'Editar en masa',
@@ -1119,7 +1119,7 @@ export const trans = {
         zh: '{c} 次 Scrobble'
     },
     listens: {
-        // base on native last.fm ui
+        // base on native Last.fm ui
         en: 'listens',
         de: 'Scrobbles',
         es: 'scrobblings',
@@ -1162,7 +1162,7 @@ export const trans = {
         zh: '无法发送 Scrobble'
     },
     scrobble_error_codes: {
-        // https://www.last.fm/api/show/track.scrobble
+        // https://www.Last.fm/api/show/track.scrobble
         1: {
             en: 'Artist name was ignored',
             de: 'Künstlername wurde ignoriert',
@@ -3045,7 +3045,7 @@ export const trans = {
         pl: 'Tagi'
     },
     reports: {
-        // last.fm listening reports
+        // Last.fm listening reports
         en: 'Reports',
         de: 'Berichte',
         es: 'Informes',
@@ -3131,14 +3131,14 @@ export const trans = {
         pl: 'Aktualny'
     },
     current_tip: {
-        en: 'This is the original capitalisation present on last.fm',
-        de: 'Dies ist die originale Groß-/Kleinschreibung auf last.fm',
-        es: 'Esta es la capitalización original presente en last.fm',
-        it: 'Questo è l\'uso delle maiuscole originale presente su last.fm',
-        sv: 'Det här är den originella kapitaliseringen som finns på last.fm',
-        ru: 'Это исходный регистр, предоставленный на last.fm',
-        pt: 'Esta é a capitalização original presente no last.fm',
-        pl: 'To jest orginalna kapitalizacja z last.fm'
+        en: 'This is the original capitalisation present on Last.fm',
+        de: 'Dies ist die originale Groß-/Kleinschreibung auf Last.fm',
+        es: 'Esta es la capitalización original presente en Last.fm',
+        it: 'Questo è l\'uso delle maiuscole originale presente su Last.fm',
+        sv: 'Det här är den originella kapitaliseringen som finns på Last.fm',
+        ru: 'Это исходный регистр, предоставленный на Last.fm',
+        pt: 'Esta é a capitalização original presente no Last.fm',
+        pl: 'To jest orginalna kapitalizacja z Last.fm'
     },
     correction: {
         en: 'Correction',
@@ -3483,7 +3483,7 @@ export const trans = {
         pl: 'Zarządzaj danymi'
     },
     labs: {
-        // labs by last.fm
+        // labs by Last.fm
         en: 'Labs',
         de: 'Labs',
         es: 'Labs',
@@ -4287,7 +4287,7 @@ export const trans = {
     },
     loved: {
         // as in loved tracks, this can be seen
-        // in the native last.fm ui
+        // in the native Last.fm ui
         en: 'Loved',
         de: 'Lieblingssongs',
         es: 'Favoritos',
@@ -4298,7 +4298,7 @@ export const trans = {
         pl: 'Ulubione'
     },
     velocity: {
-        // as in the last.fm labs 'Velocity' tool
+        // as in the Last.fm labs 'Velocity' tool
         en: 'Velocity',
         de: 'Dynamik',
         es: 'Velocity',
@@ -4320,7 +4320,7 @@ export const trans = {
         pl: 'Wyloguj'
     },
     tracklist: {
-        // please copy from native last.fm ui
+        // please copy from native Last.fm ui
         en: 'Tracklist',
         de: 'Titelliste',
         es: 'Lista de temas',
@@ -4412,24 +4412,24 @@ export const trans = {
         pl: '{c} łącznie'
     },
     video_removed: {
-        en: 'Video removed by last.fm',
-        de: 'Video von last.fm entfernt',
-        es: 'Video removido por last.fm',
-        it: 'Video rimosso da last.fm',
-        pt: 'Vídeo removido pela last.fm',
-        sv: 'Video borttagen av last.fm',
-        ru: 'Видео удалено last.fm',
-        pl: 'Wideo usunięte przez last.fm'
+        en: 'Video removed by Last.fm',
+        de: 'Video von Last.fm entfernt',
+        es: 'Video removido por Last.fm',
+        it: 'Video rimosso da Last.fm',
+        pt: 'Vídeo removido pela Last.fm',
+        sv: 'Video borttagen av Last.fm',
+        ru: 'Видео удалено Last.fm',
+        pl: 'Wideo usunięte przez Last.fm'
     },
     blocked_page: {
-        en: 'This page has been limited by last.fm',
-        de: 'Diese Seite wurde von last.fm eingeschränkt',
-        es: 'Esta página ha sido limitada por last.fm',
-        it: 'Questa pagina è stata limitata da last.fm',
-        pt: 'Esta página foi limitada pela last.fm',
-        sv: 'Denna sida har begränsats av last.fm',
-        ru: 'Эта страница ограничена last.fm',
-        pl: 'Ta strona została ograniczona przez last.fm'
+        en: 'This page has been limited by Last.fm',
+        de: 'Diese Seite wurde von Last.fm eingeschränkt',
+        es: 'Esta página ha sido limitada por Last.fm',
+        it: 'Questa pagina è stata limitata da Last.fm',
+        pt: 'Esta página foi limitada pela Last.fm',
+        sv: 'Denna sida har begränsats av Last.fm',
+        ru: 'Эта страница ограничена Last.fm',
+        pl: 'Ta strona została ograniczona przez Last.fm'
     },
     results_for: {
         // used as a header above the actual search e.g.
@@ -4489,7 +4489,7 @@ export const trans = {
         // this is used to replace the text and extract the
         // username, so make this text everything BUT where
         // the username goes (including spaces)
-        // you can find this text in the last.fm ui as every
+        // you can find this text in the Last.fm ui as every
         // avatar's (except your own) alt text
         en: 'Avatar for ',
         de: 'Profilbild von ',
@@ -5803,10 +5803,10 @@ export const trans = {
         },
         body: {
             en: 'By default, scrobbles will be corrected to faulty replacements that are a decade out of date. Disabling does not fully fix the system but keeps artist names in your library intact.',
-            de: 'Standardmäßig „korrigiert“ last.fm einige deiner Scrobbles automatisch und führt (meist) fehlerhafte Weiterleitungen aus. Durch die Deaktivierung dieser Funktion wird das System zwar nicht vollständig repariert, die Künstlernamen in deiner Bibliothek bleiben jedoch erhalten.',
+            de: 'Standardmäßig „korrigiert“ Last.fm einige deiner Scrobbles automatisch und führt (meist) fehlerhafte Weiterleitungen aus. Durch die Deaktivierung dieser Funktion wird das System zwar nicht vollständig repariert, die Künstlernamen in deiner Bibliothek bleiben jedoch erhalten.',
             es: 'Por defecto, los scrobblings serán sustituidos por correcciones erróneas que están desactualizadas desde hace una década. Desactivar esta opción no soluciona completamente el sistema pero mantiene los nombres de artistas en tu colección intactos.',
             it: 'Per impostazione predefinita, gli scrobbling saranno corretti in base a sostituzioni erronee obsolete da un decennio. Disattivare questa opzione non risolve completamente i problemi ma mantiene intatti i nomi degli artisti nella tua libreria.',
-            pt: 'Por padrão, a last.fm irá "corrigir automaticamente" alguns dos seus scrobbles para redirecionamentos (na maioria) defeituosos. Desativar essa opção não corrige completamente o sistema, mas mantém os nomes dos artistas na sua biblioteca intactos.',
+            pt: 'Por padrão, a Last.fm irá "corrigir automaticamente" alguns dos seus scrobbles para redirecionamentos (na maioria) defeituosos. Desativar essa opção não corrige completamente o sistema, mas mantém os nomes dos artistas na sua biblioteca intactos.',
             sv: 'Vanligtvis omdirigeras skrobblar till felersättningar som är över tio år gamla. Att avaktivera det fixar inte problemet totalt men artistnamn i ditt egna bibliotek visar rätt profil.',
             ru: 'По умолчанию скробблы будут исправлены на неисправные замены, которым уже десять лет. Отключение не полностью исправляет систему, но сохраняет имена артистов в вашей библиотеке нетронутыми.',
             pl: 'Domyślnie, scrobble będą poprawiane na błędne zamiennik jeśli są dekadę za stare. Wyłączanie tego nie do końca naprawia ten system ale zostawia imiona artystów bez zmian.'
@@ -5824,14 +5824,14 @@ export const trans = {
             pl: 'Usuń powiadomienia o przekierowaniu stron'
         },
         body: {
-            en: 'These notifications can let you undo redirections last.fm forced upon you, but can also be annoying',
-            de: 'Mit diesen Benachrichtigungen kannst du die von last.fm erzwungenen Weiterleitungen rückgängig machen, sie können aber auch lästig sein',
-            es: 'Estas notificaciones te permiten deshacer redirecciones que last.fm fuerza ante ti, pero pueden llegar a ser molestas',
-            it: 'Queste notifiche possono permetterti di annullare dei reindirizzamenti che last.fm ti ha imposto, ma possono anche essere fastidiose',
-            pt: 'Essas notificações podem permitir que você desfaça redirecionamentos que a last.fm impôs a você, mas também podem ser irritantes',
-            sv: 'Dessa notiser låter dig ångra omdirigeringar last.fm tvingade på dig, men dem kan också vara störande',
-            ru: 'Эти уведомления могут позволить вам отменить перенаправления, навязанные last.fm, но также могут быть раздражающими',
-            pl: 'Te powiadomienia pozwalają ci cofać z przekierowywań od last.fm, ale mogą również być irytujące'
+            en: 'These notifications can let you undo redirections Last.fm forced upon you, but can also be annoying',
+            de: 'Mit diesen Benachrichtigungen kannst du die von Last.fm erzwungenen Weiterleitungen rückgängig machen, sie können aber auch lästig sein',
+            es: 'Estas notificaciones te permiten deshacer redirecciones que Last.fm fuerza ante ti, pero pueden llegar a ser molestas',
+            it: 'Queste notifiche possono permetterti di annullare dei reindirizzamenti che Last.fm ti ha imposto, ma possono anche essere fastidiose',
+            pt: 'Essas notificações podem permitir que você desfaça redirecionamentos que a Last.fm impôs a você, mas também podem ser irritantes',
+            sv: 'Dessa notiser låter dig ångra omdirigeringar Last.fm tvingade på dig, men dem kan också vara störande',
+            ru: 'Эти уведомления могут позволить вам отменить перенаправления, навязанные Last.fm, но также могут быть раздражающими',
+            pl: 'Te powiadomienia pozwalają ci cofać z przekierowywań od Last.fm, ale mogą również być irytujące'
         }
     },
     colourful_counts: {
@@ -5868,14 +5868,14 @@ export const trans = {
             pl: 'Lepiej wizualizuj wykresy scrobbli'
         },
         body: {
-            en: 'Choose between a tiny delay for a wide range of graph options or legacy last.fm graphs',
-            de: 'Wähle zwischen einer kleinen Verzögerung für eine breitere Palette von Diagrammoptionen oder den älteren last.fm-Diagrammen',
-            es: 'Elige entre un pequeño retraso para un mayor rango de opciones de gráficos o los gráficos clásicos de last.fm',
-            it: 'Seleziona tra un piccolo ritardo per una vasta selezione di opzioni per i grafici, o utilizza i grafici normali di last.fm',
-            pt: 'Escolha entre um pequeno atraso para ter mais opções de gráficos ou usar os gráficos clássicos da last.fm',
-            sv: 'Välj mellan en liten fördröjning för en stor mängd olika diagramalternativ eller använd äldre last.fm-diagram',
-            ru: 'Выберите между небольшой задержкой для широкого спектра опций графика или устаревшими графиками last.fm',
-            pl: 'Wybierz pomiędzy małym opóźnieniem w zamian za większy wybór wykresów lub używaj tradycyjnych wykresów z last.fm'
+            en: 'Choose between a tiny delay for a wide range of graph options or legacy Last.fm graphs',
+            de: 'Wähle zwischen einer kleinen Verzögerung für eine breitere Palette von Diagrammoptionen oder den älteren Last.fm-Diagrammen',
+            es: 'Elige entre un pequeño retraso para un mayor rango de opciones de gráficos o los gráficos clásicos de Last.fm',
+            it: 'Seleziona tra un piccolo ritardo per una vasta selezione di opzioni per i grafici, o utilizza i grafici normali di Last.fm',
+            pt: 'Escolha entre um pequeno atraso para ter mais opções de gráficos ou usar os gráficos clássicos da Last.fm',
+            sv: 'Välj mellan en liten fördröjning för en stor mängd olika diagramalternativ eller använd äldre Last.fm-diagram',
+            ru: 'Выберите между небольшой задержкой для широкого спектра опций графика или устаревшими графиками Last.fm',
+            pl: 'Wybierz pomiędzy małym opóźnieniem w zamian za większy wybór wykresów lub używaj tradycyjnych wykresów z Last.fm'
         }
     },
     gendered_tags: {
@@ -6043,13 +6043,13 @@ export const trans = {
             ru: 'Маркетинговые рассылки'
         },
         body: {
-            en: 'last.fm can optionally send promotional emails from time to time',
-            de: 'last.fm kann optional gelegentlich Werbe-E-Mails senden',
-            es: 'last.fm puede opcionalmente mandarte correos electrónicos promocionales de vez en cuando',
-            it: 'last.fm può opzionalmente inviare email promozionali ogni tanto',
-            pt: 'A last.fm pode, opcionalmente, enviar e-mails promocionais de tempos em tempos',
-            sv: 'last.fm kan valfritt skicka reklammejl då och då',
-            ru: 'last.fm может по желанию время от времени отправлять рекламные электронные письма'
+            en: 'Last.fm can optionally send promotional emails from time to time',
+            de: 'Last.fm kann optional gelegentlich Werbe-E-Mails senden',
+            es: 'Last.fm puede opcionalmente mandarte correos electrónicos promocionales de vez en cuando',
+            it: 'Last.fm può opzionalmente inviare email promozionali ogni tanto',
+            pt: 'A Last.fm pode, opcionalmente, enviar e-mails promocionais de tempos em tempos',
+            sv: 'Last.fm kan valfritt skicka reklammejl då och då',
+            ru: 'Last.fm может по желанию время от времени отправлять рекламные электронные письма'
         }
     },
     email_language: {
@@ -6249,7 +6249,7 @@ export const trans = {
     },
     ensure_you_trust: {
         // API applications
-        // last.fm/settings/applications
+        // Last.fm/settings/applications
         en: 'Make sure you trust this application',
         de: 'Stelle sicher, dass du dieser Anwendung vertraust',
         es: 'Asegúrate de que confías en esta aplicación',
@@ -6279,7 +6279,7 @@ export const trans = {
     },
     manage_applications: {
         // API applications
-        // last.fm/settings/applications
+        // Last.fm/settings/applications
         en: 'Manage applications',
         de: 'Anwendungen verwalten',
         es: 'Gestionar aplicaciones',
@@ -7011,7 +7011,7 @@ export const trans = {
     going: {
         // going as in attending an event
         //
-        // last.fm official spanish translation uses plural version of word when there's more than one person going -soleil
+        // Last.fm official spanish translation uses plural version of word when there's more than one person going -soleil
         en: 'Going',
         de: 'Zugesagt',
         es: 'Irán',
@@ -7088,13 +7088,13 @@ export const trans = {
         pt: 'Incompatível com as configurações atuais'
     },
     bulk_edit_extension: {
-        en: 'last.fm Bulk Edit',
-        de: 'last.fm-Massenbearbeitung',
-        es: 'Edición en masa de last.fm',
-        it: 'Modifica di massa per last.fm',
-        pt: 'Edição em massa do last.fm',
-        sv: 'last.fm bulkredigering',
-        ru: 'Массовое редактирование last.fm'
+        en: 'Last.fm Bulk Edit',
+        de: 'Last.fm-Massenbearbeitung',
+        es: 'Edición en masa de Last.fm',
+        it: 'Modifica di massa per Last.fm',
+        pt: 'Edição em massa do Last.fm',
+        sv: 'Last.fm bulkredigering',
+        ru: 'Массовое редактирование Last.fm'
     },
     collage: {
         en: 'Collage',
@@ -8356,13 +8356,13 @@ export const trans = {
             pt: 'Mostre suas reproduções em comparação com a semana passada'
         },
         body: {
-            en: 'Compares your current progress to last week’s average, requires last.fm Pro',
-            de: 'Vergleicht deinen aktuellen Fortschritt mit dem Durchschnitt der letzten Woche, erfordert last.fm Pro',
-            es: 'Compara tu progreso actual al promedio de la semana pasada, requiere last.fm Pro',
-            it: 'Compara il tuo progresso corrente rispetto alla media della settimana scorsa, richiede last.fm Pro',
-            sv: 'Jämför denna veckans spelningar med förra veckan, kräver last.fm Pro',
-            ru: 'Сравнивает ваш текущий прогресс со средним показателем прошлой недели, требуется last.fm Pro',
-            pt: 'Compara seu progresso atual com a média da semana passada, requer last.fm Pro'
+            en: 'Compares your current progress to last week’s average, requires Last.fm Pro',
+            de: 'Vergleicht deinen aktuellen Fortschritt mit dem Durchschnitt der letzten Woche, erfordert Last.fm Pro',
+            es: 'Compara tu progreso actual al promedio de la semana pasada, requiere Last.fm Pro',
+            it: 'Compara il tuo progresso corrente rispetto alla media della settimana scorsa, richiede Last.fm Pro',
+            sv: 'Jämför denna veckans spelningar med förra veckan, kräver Last.fm Pro',
+            ru: 'Сравнивает ваш текущий прогресс со средним показателем прошлой недели, требуется Last.fm Pro',
+            pt: 'Compara seu progresso atual com a média da semana passada, requer Last.fm Pro'
         }
     },
     manual: {
@@ -8598,13 +8598,13 @@ export const trans = {
     },
     labs_cta: {
         // a period on the end looks weird cus of the link
-        en: 'If you’re looking for more, try out last.fm’s own {a}Labs feature{/a}',
-        de: 'Wenn du nach mehr suchst, probiere die {a}Labs-Funktion{/a} von last.fm aus',
-        es: 'Si estás buscando más, prueba algo similar en {a}last.fm Labs{/a}',
-        it: 'Se stai cercando di più, prova la {a}funzione Labs{/a} di last.fm',
-        sv: 'Om du letar efter lite mer, testa last.fm’s {a}egna Labs{/a}',
-        ru: 'Если вы ищете что-то еще, попробуйте {a}функцию Labs{/a} от last.fm',
-        pt: 'Se você está procurando mais, experimente a {a}função Labs{/a} do last.fm'
+        en: 'If you’re looking for more, try out Last.fm’s own {a}Labs feature{/a}',
+        de: 'Wenn du nach mehr suchst, probiere die {a}Labs-Funktion{/a} von Last.fm aus',
+        es: 'Si estás buscando más, prueba algo similar en {a}Last.fm Labs{/a}',
+        it: 'Se stai cercando di più, prova la {a}funzione Labs{/a} di Last.fm',
+        sv: 'Om du letar efter lite mer, testa Last.fm’s {a}egna Labs{/a}',
+        ru: 'Если вы ищете что-то еще, попробуйте {a}функцию Labs{/a} от Last.fm',
+        pt: 'Se você está procurando mais, experimente a {a}função Labs{/a} do Last.fm'
     },
     compare_description: {
         en: 'Find your shared artists, albums, and tracks with another',
@@ -8854,17 +8854,17 @@ export const trans = {
         ru: 'Взаимные подписки'
     },
     missing_component: {
-        // cases when last.fm simply doesn't provide a tasteometer or other things
-        en: 'last.fm failed to load this component',
-        de: 'last.fm konnte diese Komponente nicht laden',
-        es: 'last.fm falló al cargar este componente',
-        pt: 'last.fm falhou ao carregar este componente',
-        sv: 'last.fm kunde inte ladda denna komponent',
-        ru: 'last.fm не смог загрузить этот компонент'
+        // cases when Last.fm simply doesn't provide a tasteometer or other things
+        en: 'Last.fm failed to load this component',
+        de: 'Last.fm konnte diese Komponente nicht laden',
+        es: 'Last.fm falló al cargar este componente',
+        pt: 'Last.fm falhou ao carregar este componente',
+        sv: 'Last.fm kunde inte ladda denna komponent',
+        ru: 'Last.fm не смог загрузить этот компонент'
     },
     last_scrobbled_replace: {
         // dont translate this, its replaced
-        // literally word for word from the last.fm text
+        // literally word for word from the Last.fm text
         // for use in code
         en: '{u} last scrobbled…',
         de: '{u} scrobbelte zuletzt…',
@@ -8883,7 +8883,7 @@ export const trans = {
         // notifications can include text with valuable info such as:
         // and 7 others replied to your shout on
         // this is searching for the word "replied"
-        // dont re-translate this, as its copied from last.fm
+        // dont re-translate this, as its copied from Last.fm
         en: 'replied',
         de: 'hat geantwortet',
         fr: 'a répondu',
@@ -9225,13 +9225,13 @@ export const trans = {
             ru: 'Автоматически исправлять и перенаправлять скробблы'
         },
         body: {
-            en: 'Changes artist names based on the legacy last.fm redirect system pre-2015, causes many issues',
-            de: 'Ändert Künstlernamen basierend auf dem Legacy-last.fm-Umleitungssystem vor 2015, verursacht viele Probleme',
-            es: 'Cambia el nombre del artista basado en el sistema clásico de redirecciones de last.fm pre-2015, causa varios problemas',
-            it: 'Cambia i nomi degli artisti utilizzando il sistema di reindirizzamento obsoleto di last.fm pre-205, causa svariati problemi',
-            sv: 'Ändrar artistnamn baserad på last.fms omdirigeringssystem från innan 2015, skapar många problem',
-            ru: 'Изменяет имена исполнителей на основе устаревшей системы перенаправления last.fm до 2015 года, что вызывает много проблем',
-            pt: 'Altera os nomes dos artistas com base no sistema legado de redirecionamento do last.fm pré-2015, causando muitos problemas'
+            en: 'Changes artist names based on the legacy Last.fm redirect system pre-2015, causes many issues',
+            de: 'Ändert Künstlernamen basierend auf dem Legacy-Last.fm-Umleitungssystem vor 2015, verursacht viele Probleme',
+            es: 'Cambia el nombre del artista basado en el sistema clásico de redirecciones de Last.fm pre-2015, causa varios problemas',
+            it: 'Cambia i nomi degli artisti utilizzando il sistema di reindirizzamento obsoleto di Last.fm pre-205, causa svariati problemi',
+            sv: 'Ändrar artistnamn baserad på Last.fms omdirigeringssystem från innan 2015, skapar många problem',
+            ru: 'Изменяет имена исполнителей на основе устаревшей системы перенаправления Last.fm до 2015 года, что вызывает много проблем',
+            pt: 'Altera os nomes dos artistas com base no sistema legado de redirecionamento do Last.fm pré-2015, causando muitos problemas'
         },
         warning: {
             en: 'This setting should be turned off to ensure scrobbles are correctly stored for each artist.',
@@ -9301,13 +9301,13 @@ export const trans = {
             pt: 'Localização'
         },
         body: {
-            en: 'last.fm uses your location for event recommendations and local music data',
-            de: 'last.fm verwendet deinen Standort für Veranstaltungsempfehlungen und lokale Musikdaten',
-            es: 'last.fm usa tu ubicación para recomendaciones de eventos y datos locales de música',
-            it: 'last.fm usa la tua posizione per raccomandare eventi e dati di musica locali',
-            sv: 'last.fm använder din plats för evenemangrekommendationer och lokal musikdata',
-            ru: 'last.fm использует ваше местоположение для рекомендаций мероприятий и данных о местной музыке',
-            pt: 'last.fm usa sua localização para recomendações de eventos e dados locais de música'
+            en: 'Last.fm uses your location for event recommendations and local music data',
+            de: 'Last.fm verwendet deinen Standort für Veranstaltungsempfehlungen und lokale Musikdaten',
+            es: 'Last.fm usa tu ubicación para recomendaciones de eventos y datos locales de música',
+            it: 'Last.fm usa la tua posizione per raccomandare eventi e dati di musica locali',
+            sv: 'Last.fm använder din plats för evenemangrekommendationer och lokal musikdata',
+            ru: 'Last.fm использует ваше местоположение для рекомендаций мероприятий и данных о местной музыке',
+            pt: 'Last.fm usa sua localização para recomendações de eventos e dados locais de música'
         }
     },
     event_radius: {
@@ -9714,10 +9714,10 @@ export const trans = {
             ru: 'Это страница не поддерживается в bleh, но...'
         },
         body: {
-            en: 'If you are a last.fm Pro subscriber, you can view your current active track in your profile menu at all times',
-            de: 'Wenn du ein last.fm Pro-Abonnent bist, kannst du deinen aktuell aktiven Titel jederzeit in deinem Profilmenü ansehen',
-            es: 'Si eres un suscriptor de last.fm Pro, puedes ver tu tema activo actual en el menú de tu perfil en cualquier momento',
-            ru: 'Если вы являетесь подписчиком last.fm Pro, вы можете в любое время просматривать текущий активный трек в меню своего профиля.'
+            en: 'If you are a Last.fm Pro subscriber, you can view your current active track in your profile menu at all times',
+            de: 'Wenn du ein Last.fm Pro-Abonnent bist, kannst du deinen aktuell aktiven Titel jederzeit in deinem Profilmenü ansehen',
+            es: 'Si eres un suscriptor de Last.fm Pro, puedes ver tu tema activo actual en el menú de tu perfil en cualquier momento',
+            ru: 'Если вы являетесь подписчиком Last.fm Pro, вы можете в любое время просматривать текущий активный трек в меню своего профиля.'
         }
     }
 };
