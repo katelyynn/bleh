@@ -1,5 +1,5 @@
 //
-// bleh, an extension for the music site Last.fm
+// bleh, an extension for the music site last.fm
 // Copyright (c) 2025 katelyn and contributors
 // Licensed under GPLv3
 //
@@ -24,7 +24,7 @@ export let lang_info = {
     de: {
         name: 'Deutsch',
         by: ['evangelicgirl', 'myraisounds', 'clairedoll'],
-        last_updated: '2025-10-01'
+        last_updated: '2026-01-08'
     },
     es: {
         name: 'Español',
@@ -131,15 +131,15 @@ export const trans = {
         },
         'user-status-subscriber': {
             name: {
-                en: 'Last.fm Pro',
-                de: 'Last.fm Pro',
-                es: 'Last.fm Pro',
-                it: 'Last.fm Pro',
-                pt: 'Last.fm Pro',
-                sv: 'Last.fm Pro',
-                ru: 'Last.fm Про',
-                pl: 'Last.fm Pro',
-                zh: 'Last.fm Pro'
+                en: 'last.fm Pro',
+                de: 'last.fm Pro',
+                es: 'last.fm Pro',
+                it: 'last.fm Pro',
+                pt: 'last.fm Pro',
+                sv: 'last.fm Pro',
+                ru: 'last.fm Про',
+                pl: 'last.fm Pro',
+                zh: 'last.fm Pro'
             },
             reason: {
                 en: 'Active Pro subscription',
@@ -166,15 +166,15 @@ export const trans = {
                 zh: '官方员工'
             },
             reason: {
-                en: 'Official member of Last.fm',
-                de: 'Ofizielles Mitglied von Last.fm',
-                es: 'Miembro oficial de Last.fm',
-                it: 'Membro ufficiale di Last.fm',
-                pt: 'Membro oficial da Last.fm',
-                sv: 'Officiell medlem på Last.fm',
-                ru: 'Оффициальный участник Last.fm',
-                pl: 'Oficjalny członek Last.fm',
-                zh: 'Last.fm 官方成员'
+                en: 'Official member of last.fm',
+                de: 'Ofizielles Mitglied von last.fm',
+                es: 'Miembro oficial de last.fm',
+                it: 'Membro ufficiale di last.fm',
+                pt: 'Membro oficial da last.fm',
+                sv: 'Officiell medlem på last.fm',
+                ru: 'Оффициальный участник last.fm',
+                pl: 'Oficjalny członek last.fm',
+                zh: 'last.fm 官方成员'
             }
         },
         'user-status-mod': {
@@ -190,20 +190,21 @@ export const trans = {
                 zh: '版主'
             },
             reason: {
-                en: 'Official member of Last.fm',
-                de: 'Ofizielles Mitglied von Last.fm',
-                es: 'Miembro oficial de Last.fm',
-                it: 'Membro ufficiale di Last.fm',
-                pt: 'Membro oficial do Last.fm',
-                sv: 'Officiell medlem på Last.fm',
-                ru: 'Оффициальный участник Last.fm',
-                pl: 'Oficjalny członek Last.fm',
-                zh: 'Last.fm 官方成员'
+                en: 'Official member of last.fm',
+                de: 'Ofizielles Mitglied von last.fm',
+                es: 'Miembro oficial de last.fm',
+                it: 'Membro ufficiale di last.fm',
+                pt: 'Membro oficial do last.fm',
+                sv: 'Officiell medlem på last.fm',
+                ru: 'Оффициальный участник last.fm',
+                pl: 'Oficjalny członek last.fm',
+                zh: 'last.fm 官方成员'
             }
         },
         'user-status-alum': {
             name: {
                 en: 'Alum',
+                de: 'Absolvent',
                 es: 'Graduado',
                 sv: 'Alumn',
                 ru: 'Выпускник',
@@ -211,15 +212,15 @@ export const trans = {
                 zh: '往届成员'
             },
             reason: {
-                en: 'Former member of Last.fm',
-                de: 'Ehemaliger Mitarbeiter von Last.fm',
-                es: 'Antiguo miembro de Last.fm',
-                it: 'Ex-membro dello staff di Last.fm',
-                sv: 'Före-detta medlem på Last.fm',
-                ru: 'Бывший участник Last.fm',
-                pt: 'Ex-membro da equipe do Last.fm',
-                pl: 'Były członek Last.fm',
-                zh: '曾任 Last.fm 官方成员'
+                en: 'Former member of last.fm',
+                de: 'Ehemalige:r Mitarbeiter:in von last.fm',
+                es: 'Antiguo miembro de last.fm',
+                it: 'Ex-membro dello staff di last.fm',
+                sv: 'Före-detta medlem på last.fm',
+                ru: 'Бывший участник last.fm',
+                pt: 'Ex-membro da equipe do last.fm',
+                pl: 'Były członek last.fm',
+                zh: '曾任 last.fm 官方成员'
             }
         },
         'label--fade': {
@@ -358,6 +359,7 @@ export const trans = {
         'bubble-tea': {
             name: {
                 en: 'escoffier :3',
+                de: 'escoffier :3',
                 es: 'escoffier :3',
                 sv: 'escoffier :3',
                 ru: 'ескоффьер :3',
@@ -367,6 +369,7 @@ export const trans = {
             },
             reason: {
                 en: 'katelyn’s wife ~',
+                de: 'katelyns frau ~',
                 es: 'esposa de katelyn ~',
                 pt: 'esposa de katelyn ~',
                 it: 'moglie di katelyn ~',
@@ -481,6 +484,7 @@ export const trans = {
     },
     single_shout: {
         en: 'viewing a single shout',
+        de: 'ein einzelner Shout wird angezeigt',
         es: 'viendo una sola nota',
         it: 'visualizzando una singola nota',
         pt: 'visualizando uma mensagem',
@@ -872,7 +876,7 @@ export const trans = {
         sv: '’Vänner’ är en exklusiv del av bleh som tillåter dig att hålla koll på dina vänners lyssnarhistoria, det hanteras lokalt och rör inte din följarlista.',
         ru: '«Друзья» — это эксклюзивная функция bleh, которая позволяет вам следить за историей прослушиваний ваших друзей. Список управляется локально и не влияет на ваш список подписок.',
         pl: '‘Znajomi’ to funkcja ekskluzywna do bleh która pozwala na sprawdzenie historii słuchania twoich znajomych, działa lokalnie czyli nie wypływa na twoją liste kont które obserwujesz.',
-        zh: '“好友”是 bleh 插件的专属功能，让你可以实时了解好友的听歌历史。该功能仅在本地生效，不会影响你在 Last.fm 官网的关注列表。'
+        zh: '“好友”是 bleh 插件的专属功能，让你可以实时了解好友的听歌历史。该功能仅在本地生效，不会影响你在 last.fm 官网的关注列表。'
     },
     add_as_friend: {
         en: 'Add as friend',
@@ -1058,6 +1062,7 @@ export const trans = {
     },
     scrobble_value: {
         en: 'Scrobble {v}',
+        de: '{v} scrobbeln',
         es: 'Hacer scrobbling al {v}',
         ru: 'Скробблить {v}',
         pt: 'Scrobble {v}',
@@ -1204,6 +1209,7 @@ export const trans = {
         },
         5: {
             en: 'Daily scrobble limit exceeded',
+            de: 'Tägliches Scrobble-Limit überschritten',
             es: 'Límite diario de scrobblings excedido',
             it: 'Limite giornaliero di scrobbling superato',
             pt: 'Limite diário de scrobbles excedido',
@@ -1238,7 +1244,7 @@ export const trans = {
     },
     artists_tooltip: {
         en: 'Multiple artists are grouped into this profile',
-        de: 'Mehrere Künstler sind auf diesem Profil gruppiert',
+        de: 'Mehrere Künstler:innen sind unter diesem Profil gruppiert',
         es: 'Múltiples artistas están agrupados en este perfil',
         it: 'Più artisti sono raggruppati in questo profilo',
         pt: 'Múltiplos artistas estão agrupados neste perfil',
@@ -1272,6 +1278,7 @@ export const trans = {
     },
     albums_and_tracks: {
         en: 'Albums and tracks',
+        de: 'Alben und Titel',
         es: 'Álbumes y temas',
         it: 'Album e brani',
         pt: 'Álbuns e faixas',
@@ -1294,6 +1301,7 @@ export const trans = {
     single: {
         // release type
         en: 'Single',
+        de: 'Single',
         es: 'Sencillo',
         it: 'Singolo',
         pt: 'Single',
@@ -1702,6 +1710,7 @@ export const trans = {
     },
     smart_music_titles: {
         en: 'Smart music titles',
+        de: 'Intelligente Musiktitel',
         es: 'Títulos inteligentes de música',
         it: 'Titoli intelligenti per la musica',
         pt: 'Títulos de músicas inteligentes',
@@ -1835,6 +1844,7 @@ export const trans = {
             },
             fall: {
                 en: 'Winter',
+                de: 'Winter',
                 es: 'Invierno',
                 it: 'Inverno',
                 ru: 'Зима',
@@ -1867,6 +1877,7 @@ export const trans = {
         },
         notice: {
             en: 'Open the live counter',
+            de: 'Live-Zähler öffnen',
             es: 'Abrir el contador en vivo',
             it: 'Apri il contatore in tempo reale',
             pt: 'Abrir o contador ao vivo',
@@ -1877,6 +1888,7 @@ export const trans = {
         },
         live: {
             en: 'Counter is updating live',
+            de: 'Zähler wird live aktualisiert',
             es: 'El contador está siendo actualizado en tiempo real',
             it: 'Il contatore si sta aggiornando in tempo reale',
             pt: 'O contador está sendo atualizado em tempo real',
@@ -1890,6 +1902,7 @@ export const trans = {
             nonsense: {
                 // reference to https://open.spotify.com/track/7yogx3TwxGwSxO2QITsT2q
                 en: 'A Nonsense Christmas',
+                de: 'Ein sinnloses Weihnachten',
                 es: 'Una Navidad Sin Sentido',
                 it: 'Un Natale senza senso',
                 pt: 'Um Natal Sem Sentido',
@@ -1900,6 +1913,7 @@ export const trans = {
             fruitcake: {
                 // reference to https://open.spotify.com/album/7EisdwWcodpmHxgpGVE5Pg
                 en: 'fruitcake',
+                de: 'Stollen',
                 es: 'pastel de fruta',
                 it: 'torta di frutta',
                 sv: 'fruitcake',
@@ -1909,6 +1923,7 @@ export const trans = {
             },
             mistletoe: {
                 en: 'Mistletoe',
+                de: 'Mistelzweig',
                 es: 'Muérdago',
                 it: 'Vischio',
                 sv: 'Mistel',
@@ -1917,6 +1932,7 @@ export const trans = {
             },
             festival: {
                 en: 'Christmas Eve',
+                de: 'Heiligabend',
                 es: 'Víspera de Navidad',
                 it: 'Vigilia di Natale',
                 sv: 'Julafton',
@@ -1927,6 +1943,7 @@ export const trans = {
         },
         exclusive: {
             en: 'Limited time',
+            de: 'Nur für kurze Zeit',
             es: 'Tiempo limitado',
             pt: 'Tempo limitado',
             pl: 'Tymczasowe',
@@ -1946,6 +1963,7 @@ export const trans = {
     value_for_time: {
         // e.g. (Halloween) ends (in 3 days)
         en: '{v} ends {time}',
+        de: '{v} endet {time}',
         es: '{v} termina {time}',
         it: '{v} termina {time}',
         ru: '{v} закончится {time}',
@@ -2010,6 +2028,7 @@ export const trans = {
     seasonal_overlays: {
         name: {
             en: 'Display additional seasonal effects',
+            de: 'Zusätzliche saisonale Effekte anzeigen',
             es: 'Mostrar efectos de temporada adicionales',
             it: 'Mostra effetti stagionali aggiuntivi',
             pt: 'Exibir efeitos sazonais adicionais',
@@ -2019,6 +2038,7 @@ export const trans = {
         },
         body: {
             en: 'During winter seasons this applies a coat of ice to panels, otherwise mainly gradients',
+            de: 'Während der Wintersaisons wird eine Eisschicht auf die Panels angewendet, ansonsten hauptsächlich Farbverläufe',
             es: 'Durante temporadas invernales, aplica una capa de hielo a los paneles, de lo contrario, aplica principalmente gradientes',
             it: 'Durante le stagioni invernali, applica un mantello di ghiacchi ai pannelli, altrimenti principalmente gradienti',
             pt: 'Durante o inverno, isso aplica uma camada de gelo aos painéis; fora dessa época, aplica principalmente gradientes',
@@ -2051,6 +2071,7 @@ export const trans = {
         // season start date
         // start date: 1 day ago
         en: 'Start date',
+        de: 'Startdatum',
         es: 'Fecha de inicio',
         it: 'Data di inizio',
         pt: 'Data de início',
@@ -2062,6 +2083,7 @@ export const trans = {
         // season next date
         // next season: in 3 days
         en: 'Next season',
+        de: 'Nächste Saison',
         es: 'Próxima temporada',
         it: 'Prossima stagione',
         pt: 'Próxima estação',
@@ -2073,6 +2095,7 @@ export const trans = {
         // season end date
         // end date: in 2 days
         en: 'End date',
+        de: 'Enddatum',
         es: 'Fecha de finalización',
         it: 'Data di fine',
         pt: 'Dia de término',
@@ -2132,6 +2155,7 @@ export const trans = {
     },
     no_releases_found: {
         en: 'No releases found here',
+        de: 'Keine Veröffentlichungen gefunden',
         es: 'No se encontraron nuevos lanzamientos',
         it: 'Nessuna pubblicazione trovata',
         ru: 'Здесь не найдено ни одного релиза',
@@ -2141,6 +2165,7 @@ export const trans = {
     tracklist_source: {
         name: {
             en: 'Preferred tracklist source',
+            de: 'Bevorzugte Quelle für die Titelliste',
             es: 'Fuente preferida para la lista de temas',
             it: 'Fonte preferita per la lista dei brani',
             ru: 'Предпочитаемый источник треклиста',
@@ -2149,6 +2174,7 @@ export const trans = {
         },
         body: {
             en: 'Choose which service to display for album tracklists',
+            de: 'Wähle aus, von welchem Dienst die Titellisten von Alben angezeigt werden sollen',
             es: 'Elige cuál servicio mostrar para la lista de temas',
             it: 'Seleziona che servizio mostrare per la lista dei brani',
             ru: 'Выберите сервис, который будет отображаться для треклистов альбомов',
@@ -2179,6 +2205,7 @@ export const trans = {
     },
     view_the_charts: {
         en: 'View the charts',
+        de: 'Charts ansehen',
         es: 'Ver las listas',
         it: 'Visualizza le classifiche',
         pt: 'Ver as paradas',
@@ -2267,6 +2294,7 @@ export const trans = {
     },
     import_failed: {
         en: 'Import failed',
+        de: 'Import fehlgeschlagen',
         es: 'Error al importar',
         it: 'Importazione non riuscita',
         pt: 'Falha na importação',
@@ -2275,6 +2303,7 @@ export const trans = {
         pl: 'Błąd importowania',
         notice: {
             en: 'The settings you attempted to import failed to parse, no changes were made.',
+            de: 'Die Einstellungen, die du versucht hast, zu importieren, konnten nicht verarbeitet werden. Es wurden keine Änderungen vorgenommen.',
             es: 'La configuración que intentaste importar falló al procesarse, no se realizaron cambios.',
             it: 'Non è stato possibile processare le impostazioni che hai cercato di importare, non sono state effettuate modifiche.',
             pt: 'As configurações que você tentou importar não puderam ser processadas; nenhuma alteração foi feita.',
@@ -2559,6 +2588,7 @@ export const trans = {
     noise: {
         name: {
             en: 'Noise overlay opacity',
+            de: 'Deckkraft des Körnungseffekts',
             es: 'Opacidad de la capa de ruido',
             it: 'Opacità della sovrapposizione di rumore',
             sv: 'Brusöverläggsopacitet',
@@ -2568,6 +2598,7 @@ export const trans = {
         },
         body: {
             en: 'Apply a coat of subtle noise to add variation to solid backgrounds',
+            de: 'Fügt eine feine Körnung hinzu, um einfarbigen Hintergründen mehr Variation zu verleihen',
             es: 'Aplica una capa de ruido para añadir variedad a los fondos sólidos',
             it: 'Applica un mantello di rumore leggero per aggiungere varietà agli sfondi solidi',
             sv: 'Tillämpa ett brusöverlägg för lite variation på enfärgade bakgrunder',
@@ -2893,6 +2924,7 @@ export const trans = {
     },
     gallery_sum: {
         en: 'This is the sum of votes for ordering',
+        de: 'Dies ist die Summe der Stimmen für die Reihenfolge',
         es: 'Esta es la suma de votos para ordenar',
         it: 'Questa è la somma dei voti per l\'ordinamento',
         sv: 'Det här är summan röster för bildordning',
@@ -2902,6 +2934,7 @@ export const trans = {
     },
     view_saved: {
         en: 'View all saved photos',
+        de: 'Alle gespeicherten Fotos ansehen',
         es: 'Ver todas las fotos guardadas',
         it: 'Visualizza tutte le foto salvate',
         sv: 'Visa alla sparade foton',
@@ -3098,14 +3131,14 @@ export const trans = {
         pl: 'Aktualny'
     },
     current_tip: {
-        en: 'This is the original capitalisation present on Last.fm',
-        de: 'Dies ist die originale Groß-/Kleinschreibung auf Last.fm',
-        es: 'Esta es la capitalización original presente en Last.fm',
-        it: 'Questo è l\'uso delle maiuscole originale presente su Last.fm',
-        sv: 'Det här är den originella kapitaliseringen som finns på Last.fm',
-        ru: 'Это исходный регистр, предоставленный на Last.fm',
-        pt: 'Esta é a capitalização original presente no Last.fm',
-        pl: 'To jest orginalna kapitalizacja z Last.fm'
+        en: 'This is the original capitalisation present on last.fm',
+        de: 'Dies ist die originale Groß-/Kleinschreibung auf last.fm',
+        es: 'Esta es la capitalización original presente en last.fm',
+        it: 'Questo è l\'uso delle maiuscole originale presente su last.fm',
+        sv: 'Det här är den originella kapitaliseringen som finns på last.fm',
+        ru: 'Это исходный регистр, предоставленный на last.fm',
+        pt: 'Esta é a capitalização original presente no last.fm',
+        pl: 'To jest orginalna kapitalizacja z last.fm'
     },
     correction: {
         en: 'Correction',
@@ -3119,7 +3152,7 @@ export const trans = {
     },
     correction_tip: {
         en: 'This is the correct capitalisation, as decided by the artist',
-        de: 'Dies ist die korrekte Groß-/Kleinschreibung, wie sie vom Künstler festgelegt wurde',
+        de: 'Dies ist die korrekte Groß-/Kleinschreibung, wie sie von den Künstler:innen festgelegt wurde',
         es: 'Esta es la capitalización correcta, decidida por el artista',
         it: 'Questo è l\'uso delle maiuscole corretto, come deciso dall\'artista',
         sv: 'Det här är rätt kapitalisering, som bestämd av artisten',
@@ -3441,6 +3474,7 @@ export const trans = {
     },
     manage_data: {
         en: 'Manage data',
+        de: 'Daten verwalten',
         es: 'Gestionar datos',
         it: 'Gestione dati',
         sv: 'Hantera data',
@@ -3683,6 +3717,7 @@ export const trans = {
     default_avatar_action: {
         name: {
             en: 'Default avatar action',
+            de: 'Standardverhalten von Profilbildern',
             es: 'Acción de avatar por defecto',
             it: 'Azione di default per gli avatar',
             sv: 'Standard bildbetéende',
@@ -3692,6 +3727,7 @@ export const trans = {
         },
         body: {
             en: 'Which action should be performed when you click an avatar',
+            de: 'Welche Aktion ausgeführt werden soll, wenn du auf ein Profilbild klickst',
             es: 'Cuál acción debería realizarse cuando haces clic a un avatar',
             it: 'Quale azione dovrebbe essere effettuata quando fai click su un avatar?',
             sv: 'Hur ska sidan beté sig när du trycker på en profilbild',
@@ -3722,6 +3758,7 @@ export const trans = {
     },
     copy_text: {
         en: 'Copy text',
+        de: 'Text kopieren',
         es: 'Copiar texto',
         it: 'Copia testo',
         pt: 'Copiar texto',
@@ -3770,6 +3807,7 @@ export const trans = {
     },
     paste: {
         en: 'Paste',
+        de: 'Einfügen',
         es: 'Pegar',
         pt: 'Colar',
         pl: 'Wklej',
@@ -3777,12 +3815,14 @@ export const trans = {
     },
     paste_text: {
         en: 'Paste text',
+        de: 'Text einfügen',
         es: 'Pegar texto',
         pt: 'Colar texto',
         pl: 'Wklej tekst'
     },
     undo: {
         en: 'Undo',
+        de: 'Rückgängig',
         es: 'Deshacer',
         pt: 'Desfazer',
         pl: 'Cofnij',
@@ -3790,6 +3830,7 @@ export const trans = {
     },
     redo: {
         en: 'Redo',
+        de: 'Wiederholen',
         es: 'Rehacer',
         pt: 'Refazer',
         pl: 'Powtórz',
@@ -3797,6 +3838,7 @@ export const trans = {
     },
     pasted_text: {
         en: 'Pasted text',
+        de: 'Eingefügter Text',
         es: 'Texto pegado',
         pt: 'Texto colado',
         pl: 'Wklejono tekst',
@@ -4226,7 +4268,7 @@ export const trans = {
     love: {
         // as in loving tracks as a concept
         en: 'Love',
-        de: 'Als Lieblingssong markieren',
+        de: 'Markieren',
         es: 'Favorito',
         it: 'Preferito',
         pt: 'Favoritas',
@@ -4236,6 +4278,7 @@ export const trans = {
     },
     love_track: {
         en: 'Love track',
+        de: 'Als Lieblingssong markieren',
         es: 'Marcar como favorito',
         it: 'Imposta come preferito',
         ru: 'Отметить трек как любимый',
@@ -4369,24 +4412,24 @@ export const trans = {
         pl: '{c} łącznie'
     },
     video_removed: {
-        en: 'Video removed by Last.fm',
-        de: 'Video von Last.fm entfernt',
-        es: 'Video removido por Last.fm',
-        it: 'Video rimosso da Last.fm',
-        pt: 'Vídeo removido pela Last.fm',
-        sv: 'Video borttagen av Last.fm',
-        ru: 'Видео удалено Last.fm',
-        pl: 'Wideo usunięte przez Last.fm'
+        en: 'Video removed by last.fm',
+        de: 'Video von last.fm entfernt',
+        es: 'Video removido por last.fm',
+        it: 'Video rimosso da last.fm',
+        pt: 'Vídeo removido pela last.fm',
+        sv: 'Video borttagen av last.fm',
+        ru: 'Видео удалено last.fm',
+        pl: 'Wideo usunięte przez last.fm'
     },
     blocked_page: {
-        en: 'This page has been limited by Last.fm',
-        de: 'Diese Seite wurde von Last.fm eingeschränkt',
-        es: 'Esta página ha sido limitada por Last.fm',
-        it: 'Questa pagina è stata limitata da Last.fm',
-        pt: 'Esta página foi limitada pela Last.fm',
-        sv: 'Denna sida har begränsats av Last.fm',
-        ru: 'Эта страница ограничена Last.fm',
-        pl: 'Ta strona została ograniczona przez Last.fm'
+        en: 'This page has been limited by last.fm',
+        de: 'Diese Seite wurde von last.fm eingeschränkt',
+        es: 'Esta página ha sido limitada por last.fm',
+        it: 'Questa pagina è stata limitata da last.fm',
+        pt: 'Esta página foi limitada pela last.fm',
+        sv: 'Denna sida har begränsats av last.fm',
+        ru: 'Эта страница ограничена last.fm',
+        pl: 'Ta strona została ograniczona przez last.fm'
     },
     results_for: {
         // used as a header above the actual search e.g.
@@ -4519,6 +4562,7 @@ export const trans = {
     },
     view_image: {
         en: 'View image',
+        de: 'Bild ansehen',
         pt: "Visualizar imagem",
         es: 'Ver imagen',
         it: 'Visualizza immagine',
@@ -4528,6 +4572,7 @@ export const trans = {
     },
     view_image_unsafe: {
         en: 'View unsafe image',
+        de: 'Unangemessenes Bild ansehen',
         es: 'Ver imagen no segura',
         it: 'Mostra immagine non sicura',
         pt: 'Visualizar imagem não segura',
@@ -4536,6 +4581,7 @@ export const trans = {
     },
     open_link: {
         en: 'Open link',
+        de: 'Link öffnen',
         es: 'Abrir vínculo',
         it: 'Apri link',
         pt: 'Abrir link',
@@ -4547,6 +4593,7 @@ export const trans = {
         // you see fit if desired
         //
         // why would you remove him, he's just a little guy -soleil
+        // never remove him, he's precious and loved. –myrai
         en: 'This event has been cancelled (╥﹏╥)',
         de: 'Dieses Event wurde abgesagt (╥﹏╥)',
         es: 'Este evento ha sido cancelado (╥﹏╥)',
@@ -4603,6 +4650,7 @@ export const trans = {
     track_layout: {
         name: {
             en: 'Track layout',
+            de: 'Titellayout',
             es: 'Diseño de tema',
             it: 'Layout dei brani',
             sv: 'Låtlayout',
@@ -4612,6 +4660,7 @@ export const trans = {
         },
         body: {
             en: 'Choose which axis to display track information on',
+            de: 'Wähle, auf welcher Achse Titelinformationen angezeigt werden sollen',
             es: 'Elige en qué eje mostrar la información del tema',
             it: 'Seleziona su quale asse mostrare le informazioni dei brani',
             sv: 'Välj vilken axis att visa låtinformation på',
@@ -4621,6 +4670,7 @@ export const trans = {
         },
         column: {
             en: 'Place title and artist vertically',
+            de: 'Titel und Künstler:in vertikal anordnen',
             es: 'Colocar título y artista verticalmente',
             it: 'Disponi titolo e artista verticalmente',
             sv: 'Placera titel och artist lodrätt',
@@ -4630,6 +4680,7 @@ export const trans = {
         },
         row: {
             en: 'Place title and artist horizontally',
+            de: 'Titel und Künstler:in horizontal anordnen',
             es: 'Colocar título y artista horizontalmente',
             it: 'Disponi titolo e artista orizzontalmente',
             sv: 'Placera titel och artist vågrätt',
@@ -4641,6 +4692,7 @@ export const trans = {
     track_album_name_location: {
         name: {
             en: 'Album name location',
+            de: 'Position des Albumtitels',
             es: 'Ubicación del nombre del álbum',
             it: 'Posizione del nome dell\'album',
             sv: 'Albumtitelsplats',
@@ -4650,6 +4702,7 @@ export const trans = {
         },
         body: {
             en: 'Choose which axis to display said album name on',
+            de: 'Wähle, auf welcher Achse der Albumtitel angezeigt werden soll',
             es: 'Elige en qué eje mostrar el nombre del álbum',
             it: 'Seleziona su quale asse mostrare il nome dell\'album',
             sv: 'Välj vilken axis att visa albumtitel på',
@@ -4659,6 +4712,7 @@ export const trans = {
         },
         column: {
             en: 'Place below title and artist',
+            de: 'Unter Titel und Künstler:in anordnen',
             es: 'Colocar debajo del título y artista',
             it: 'Disponi sotto titolo e artista',
             sv: 'Placera under låttitel och artist',
@@ -4668,6 +4722,7 @@ export const trans = {
         },
         row: {
             en: 'Place to the side of title and artist',
+            de: 'Neben Titel und Künstler:in anordnen',
             es: 'Colocar al lado del título y artista',
             it: 'Disponi a fianco di titolo e artista',
             sv: 'Placera bredvid låttitel och artist',
@@ -4679,6 +4734,7 @@ export const trans = {
     expand_tracks: {
         name: {
             en: 'Show associated album for tracks',
+            de: 'Zugehöriges Album für Titel anzeigen',
             es: 'Mostrar álbum asociado al tema',
             it: 'Mostra album associato per i brani',
             sv: 'Visa associerade album för låtar',
@@ -4688,6 +4744,7 @@ export const trans = {
         },
         body: {
             en: 'Places the track’s associated album name if there’s room',
+            de: 'Zeigt den Namen des zugehörigen Albums des Titels an, wenn genug Platz vorhanden ist',
             es: 'Coloca el nombre del álbum asociado al tema si hay espacio',
             it: 'Inserisce il nome dell\'album associato ai brani se c\'è spazio',
             sv: 'Placerar låtens associerade album om det finns plats',
@@ -4698,6 +4755,7 @@ export const trans = {
     },
     expand_tracks_when_active: {
         en: 'Only when actively scrobbling',
+        de: 'Nur beim aktiven Scrobbeln',
         es: 'Solo activo cuando se hace scrobbling',
         de: 'Nur während des aktiven Scrobbelns',
         it: 'Solo quando si sta effettuando lo scrobbling',
@@ -4708,6 +4766,7 @@ export const trans = {
     },
     expand_tracks_always: {
         en: 'Always when possible',
+        de: 'Immer, wenn möglich',
         es: 'Siempre cuando sea posible',
         de: 'Immer, wenn möglich',
         it: 'Sempre quando possibile',
@@ -4844,6 +4903,7 @@ export const trans = {
     display_name: {
         name: {
             en: 'Display name',
+            de: 'Anzeigename',
             es: 'Nombre para mostrar',
             it: 'Nome visualizzato',
             sv: 'Visningsnamn',
@@ -4853,6 +4913,7 @@ export const trans = {
         },
         body: {
             en: 'Changes your name on your profile, with your real @username shown below',
+            de: 'Ändert deinen Namen in deinem Profil, mit deinem echten @Benutzernamen darunter',
             es: 'Cambia tu nombre en tu perfil, con tu nombre de usuario mostrado debajo',
             it: 'Cambia il tuo nome sul tuo profilo, con il tuo @username visualizzato sotto',
             sv: 'Ändrar namnet på din profil och lägger ditt riktiga @användarnamn underåt',
@@ -5063,6 +5124,7 @@ export const trans = {
     },
     redirected_from: {
         en: 'Redirected from',
+        de: 'Weitergeleitet von',
         es: 'Redireccionado de',
         it: 'Reindirizzato da',
         sv: 'Omdirigerades från',
@@ -5540,6 +5602,7 @@ export const trans = {
     },
     font_style: {
         en: 'Font style',
+        de: 'Schriftstil',
         es: 'Estilo de fuente',
         it: 'Stile del font',
         sv: 'Typsnittsstil',
@@ -5548,6 +5611,7 @@ export const trans = {
         pl: 'Styl czcionki',
         solid: {
             en: 'Solid',
+            de: 'Fest',
             es: 'Sólido',
             it: 'Solido',
             sv: 'Fast',
@@ -5557,6 +5621,7 @@ export const trans = {
         },
         pop: {
             en: 'Pop',
+            de: 'Pop',
             es: 'Pop',
             it: 'Pop',
             sv: 'Poppande',
@@ -5565,10 +5630,12 @@ export const trans = {
             pl: 'Pop'
         },
         out: {
-            en: 'Outline'
+            en: 'Outline',
+            de: 'Umriss'
         },
         glow: {
             en: 'Glow',
+            de: 'Leuchten',
             es: 'Brillo',
             it: 'Brillante',
             sv: 'Glödande',
@@ -5676,6 +5743,7 @@ export const trans = {
         // not sure by what was meant by "fitting for your language"
         // but i used a sentence that has all letters on rus language, like an english example
         en: 'The quick brown fox jumps over the lazy dog 🏳️‍⚧️',
+        de: 'Franz jagt im komplett verwahrlosten Taxi quer durch Bayern 🏳️‍⚧️',
         es: 'El veloz murciélago hindú comía feliz cardillo y kiwi. La cigüeña tocaba el saxofón detrás del palenque de paja. 🏳️‍⚧️',
         sv: 'Flygande bäckasiner söka hwila på mjuka tuvor qxz 🏳️‍⚧️',
         ru: 'Съешь ещё этих мягких французских булок, да выпей чаю 🏳️‍⚧️',
@@ -5735,10 +5803,10 @@ export const trans = {
         },
         body: {
             en: 'By default, scrobbles will be corrected to faulty replacements that are a decade out of date. Disabling does not fully fix the system but keeps artist names in your library intact.',
-            de: 'Standardmäßig „korrigiert“ Last.fm einige deiner Scrobbles automatisch und führt (meist) fehlerhafte Weiterleitungen aus. Durch die Deaktivierung dieser Funktion wird das System zwar nicht vollständig repariert, die Künstlernamen in deiner Bibliothek bleiben jedoch erhalten.',
+            de: 'Standardmäßig „korrigiert“ last.fm einige deiner Scrobbles automatisch und führt (meist) fehlerhafte Weiterleitungen aus. Durch die Deaktivierung dieser Funktion wird das System zwar nicht vollständig repariert, die Künstlernamen in deiner Bibliothek bleiben jedoch erhalten.',
             es: 'Por defecto, los scrobblings serán sustituidos por correcciones erróneas que están desactualizadas desde hace una década. Desactivar esta opción no soluciona completamente el sistema pero mantiene los nombres de artistas en tu colección intactos.',
             it: 'Per impostazione predefinita, gli scrobbling saranno corretti in base a sostituzioni erronee obsolete da un decennio. Disattivare questa opzione non risolve completamente i problemi ma mantiene intatti i nomi degli artisti nella tua libreria.',
-            pt: 'Por padrão, a Last.fm irá "corrigir automaticamente" alguns dos seus scrobbles para redirecionamentos (na maioria) defeituosos. Desativar essa opção não corrige completamente o sistema, mas mantém os nomes dos artistas na sua biblioteca intactos.',
+            pt: 'Por padrão, a last.fm irá "corrigir automaticamente" alguns dos seus scrobbles para redirecionamentos (na maioria) defeituosos. Desativar essa opção não corrige completamente o sistema, mas mantém os nomes dos artistas na sua biblioteca intactos.',
             sv: 'Vanligtvis omdirigeras skrobblar till felersättningar som är över tio år gamla. Att avaktivera det fixar inte problemet totalt men artistnamn i ditt egna bibliotek visar rätt profil.',
             ru: 'По умолчанию скробблы будут исправлены на неисправные замены, которым уже десять лет. Отключение не полностью исправляет систему, но сохраняет имена артистов в вашей библиотеке нетронутыми.',
             pl: 'Domyślnie, scrobble będą poprawiane na błędne zamiennik jeśli są dekadę za stare. Wyłączanie tego nie do końca naprawia ten system ale zostawia imiona artystów bez zmian.'
@@ -5756,14 +5824,14 @@ export const trans = {
             pl: 'Usuń powiadomienia o przekierowaniu stron'
         },
         body: {
-            en: 'These notifications can let you undo redirections Last.fm forced upon you, but can also be annoying',
-            de: 'Mit diesen Benachrichtigungen kannst du die von Last.fm erzwungenen Weiterleitungen rückgängig machen, sie können aber auch lästig sein',
-            es: 'Estas notificaciones te permiten deshacer redirecciones que Last.fm fuerza ante ti, pero pueden llegar a ser molestas',
-            it: 'Queste notifiche possono permetterti di annullare dei reindirizzamenti che Last.fm ti ha imposto, ma possono anche essere fastidiose',
-            pt: 'Essas notificações podem permitir que você desfaça redirecionamentos que a Last.fm impôs a você, mas também podem ser irritantes',
-            sv: 'Dessa notiser låter dig ångra omdirigeringar Last.fm tvingade på dig, men dem kan också vara störande',
-            ru: 'Эти уведомления могут позволить вам отменить перенаправления, навязанные Last.fm, но также могут быть раздражающими',
-            pl: 'Te powiadomienia pozwalają ci cofać z przekierowywań od Last.fm, ale mogą również być irytujące'
+            en: 'These notifications can let you undo redirections last.fm forced upon you, but can also be annoying',
+            de: 'Mit diesen Benachrichtigungen kannst du die von last.fm erzwungenen Weiterleitungen rückgängig machen, sie können aber auch lästig sein',
+            es: 'Estas notificaciones te permiten deshacer redirecciones que last.fm fuerza ante ti, pero pueden llegar a ser molestas',
+            it: 'Queste notifiche possono permetterti di annullare dei reindirizzamenti che last.fm ti ha imposto, ma possono anche essere fastidiose',
+            pt: 'Essas notificações podem permitir que você desfaça redirecionamentos que a last.fm impôs a você, mas também podem ser irritantes',
+            sv: 'Dessa notiser låter dig ångra omdirigeringar last.fm tvingade på dig, men dem kan också vara störande',
+            ru: 'Эти уведомления могут позволить вам отменить перенаправления, навязанные last.fm, но также могут быть раздражающими',
+            pl: 'Te powiadomienia pozwalają ci cofać z przekierowywań od last.fm, ale mogą również być irytujące'
         }
     },
     colourful_counts: {
@@ -5800,14 +5868,14 @@ export const trans = {
             pl: 'Lepiej wizualizuj wykresy scrobbli'
         },
         body: {
-            en: 'Choose between a tiny delay for a wide range of graph options or legacy Last.fm graphs',
-            de: 'Wähle zwischen einer kleinen Verzögerung für eine breitere Palette von Diagrammoptionen oder den älteren Last.fm-Diagrammen',
-            es: 'Elige entre un pequeño retraso para un mayor rango de opciones de gráficos o los gráficos clásicos de Last.fm',
-            it: 'Seleziona tra un piccolo ritardo per una vasta selezione di opzioni per i grafici, o utilizza i grafici normali di Last.fm',
-            pt: 'Escolha entre um pequeno atraso para ter mais opções de gráficos ou usar os gráficos clássicos da Last.fm',
-            sv: 'Välj mellan en liten fördröjning för en stor mängd olika diagramalternativ eller använd äldre Last.fm-diagram',
-            ru: 'Выберите между небольшой задержкой для широкого спектра опций графика или устаревшими графиками Last.fm',
-            pl: 'Wybierz pomiędzy małym opóźnieniem w zamian za większy wybór wykresów lub używaj tradycyjnych wykresów z Last.fm'
+            en: 'Choose between a tiny delay for a wide range of graph options or legacy last.fm graphs',
+            de: 'Wähle zwischen einer kleinen Verzögerung für eine breitere Palette von Diagrammoptionen oder den älteren last.fm-Diagrammen',
+            es: 'Elige entre un pequeño retraso para un mayor rango de opciones de gráficos o los gráficos clásicos de last.fm',
+            it: 'Seleziona tra un piccolo ritardo per una vasta selezione di opzioni per i grafici, o utilizza i grafici normali di last.fm',
+            pt: 'Escolha entre um pequeno atraso para ter mais opções de gráficos ou usar os gráficos clássicos da last.fm',
+            sv: 'Välj mellan en liten fördröjning för en stor mängd olika diagramalternativ eller använd äldre last.fm-diagram',
+            ru: 'Выберите между небольшой задержкой для широкого спектра опций графика или устаревшими графиками last.fm',
+            pl: 'Wybierz pomiędzy małym opóźnieniem w zamian za większy wybór wykresów lub używaj tradycyjnych wykresów z last.fm'
         }
     },
     gendered_tags: {
@@ -5975,13 +6043,13 @@ export const trans = {
             ru: 'Маркетинговые рассылки'
         },
         body: {
-            en: 'Last.fm can optionally send promotional emails from time to time',
-            de: 'Last.fm kann optional gelegentlich Werbe-E-Mails senden',
-            es: 'Last.fm puede opcionalmente mandarte correos electrónicos promocionales de vez en cuando',
-            it: 'Last.fm può opzionalmente inviare email promozionali ogni tanto',
-            pt: 'A Last.fm pode, opcionalmente, enviar e-mails promocionais de tempos em tempos',
-            sv: 'Last.fm kan valfritt skicka reklammejl då och då',
-            ru: 'Last.fm может по желанию время от времени отправлять рекламные электронные письма'
+            en: 'last.fm can optionally send promotional emails from time to time',
+            de: 'last.fm kann optional gelegentlich Werbe-E-Mails senden',
+            es: 'last.fm puede opcionalmente mandarte correos electrónicos promocionales de vez en cuando',
+            it: 'last.fm può opzionalmente inviare email promozionali ogni tanto',
+            pt: 'A last.fm pode, opcionalmente, enviar e-mails promocionais de tempos em tempos',
+            sv: 'last.fm kan valfritt skicka reklammejl då och då',
+            ru: 'last.fm может по желанию время от времени отправлять рекламные электронные письма'
         }
     },
     email_language: {
@@ -6061,6 +6129,7 @@ export const trans = {
     },
     applications: {
         en: 'Applications',
+        de: 'Anwendungen',
         es: 'Aplicaciones',
         it: 'Applicazioni',
         sv: 'Applikationer',
@@ -6069,6 +6138,7 @@ export const trans = {
     },
     applications_intro: {
         en: 'Connect your account to third-party services for a better scrobbling experience. Make sure you trust the services below.',
+        de: 'Verbinde dein Konto mit Drittanbieterdiensten für ein besseres Scrobbling-Erlebnis. Stelle sicher, dass du den unten aufgeführten Diensten vertraust.',
         es: 'Conecta tu cuenta a servicios externos para una mejor experiencia al hacer scrobbling. Asegúrate de que confías en los servicios que hay debajo.',
         it: 'Connetti il tuo account a servizi di terze parti per una migliore esperienza di scrobbling. Assicurati di fidarti dei servizi che seguono.',
         sv: 'Anslut ditt konto till tredjepartstjänster för bättre skrobblingsupplevelse. Var säker på att du litar på nedre tjänster',
@@ -6095,6 +6165,7 @@ export const trans = {
     },
     suggested: {
         en: 'Suggested',
+        de: 'Vorgeschlagen',
         es: 'Sugerido',
         it: 'Suggerito',
         sv: 'Föreslaget',
@@ -6287,6 +6358,7 @@ export const trans = {
     own_plays: {
         // tracklist source menu option that enables the thing below
         en: 'Own plays',
+        de: 'Eigene Plays',
         es: 'Reproducciones personales',
         it: 'Riproduzioni personali',
         sv: 'Egna spelningar',
@@ -6733,6 +6805,7 @@ export const trans = {
     display_name_styles: {
         name: {
             en: 'Show display name styles',
+            de: 'Zeige Anzeigenamen-Stile',
             es: 'Mostrar estilos de nombre a mostrar',
             it: 'Mostra gli stili del nome visualizzato',
             sv: 'Se visningsnamnsstiler',
@@ -6741,6 +6814,7 @@ export const trans = {
         },
         body: {
             en: 'Sponsors can choose a custom font and shadow style for their profile name',
+            de: 'Sponsoren können eine benutzerdefinierte Schriftart und einen Schattenstil für ihren Profilnamen wählen',
             es: 'Los patrocinadores pueden elegir una fuente y estilo de sombra personalizados para su nombre de perfil',
             it: 'Gli sponsor possono scegliere un font e uno stile d\'ombra personalizzato per il loro nome profilo',
             sv: 'Sponsorer kan välja valfri typsnitt och skugga för deras profilnamn',
@@ -6826,6 +6900,7 @@ export const trans = {
     },
     no_title: {
         en: 'No title',
+        de: 'Kein Titel',
         es: 'Sin título',
         it: 'Senza titolo',
         sv: 'Ingen titel',
@@ -6843,6 +6918,7 @@ export const trans = {
     },
     no_description: {
         en: 'No description',
+        de: 'Keine Beschreibung',
         es: 'Sin descripción',
         it: 'Nessuna descrizione',
         sv: 'Ingen beskrivning',
@@ -6907,7 +6983,7 @@ export const trans = {
     saved: {
         // saved/bookmarked photos
         en: 'Saved',
-        de: 'Gespeichert',
+        de: 'Markiert',
         es: 'Guardado',
         it: 'Salvate',
         pt: 'Salvo',
@@ -6916,6 +6992,7 @@ export const trans = {
     },
     remove_save: {
         en: 'Remove save',
+        de: 'Markierung entfernen',
         es: 'Remover guardado',
         it: 'Rimuovi salvataggio',
         sv: 'Ta bort bokmärkning',
@@ -6924,7 +7001,7 @@ export const trans = {
     },
     no_images_saved: {
         en: 'No photos saved',
-        de: 'Keine Bilder gespeichert',
+        de: 'Keine Bilder markiert',
         es: 'No hay fotos guardadas',
         it: 'Nessuna immagine salvata',
         pt: 'Nenhuma foto salva',
@@ -7011,13 +7088,13 @@ export const trans = {
         pt: 'Incompatível com as configurações atuais'
     },
     bulk_edit_extension: {
-        en: 'Last.fm Bulk Edit',
-        de: 'Last.fm-Massenbearbeitung',
-        es: 'Edición en masa de Last.fm',
-        it: 'Modifica di massa per Last.fm',
-        pt: 'Edição em massa do Last.fm',
-        sv: 'Last.fm bulkredigering',
-        ru: 'Массовое редактирование Last.fm'
+        en: 'last.fm Bulk Edit',
+        de: 'last.fm-Massenbearbeitung',
+        es: 'Edición en masa de last.fm',
+        it: 'Modifica di massa per last.fm',
+        pt: 'Edição em massa do last.fm',
+        sv: 'last.fm bulkredigering',
+        ru: 'Массовое редактирование last.fm'
     },
     collage: {
         en: 'Collage',
@@ -7178,6 +7255,7 @@ export const trans = {
     },
     waiting_for_images: {
         en: 'Waiting for images',
+        de: 'Warte auf Bilder',
         es: 'Esperando imágenes',
         it: 'In attesa delle immagini',
         pt: 'Aguardando imagens',
@@ -8205,6 +8283,7 @@ export const trans = {
     profile_font: {
         name: {
             en: 'Profile name font',
+            de: 'Schriftart des Profilnamens',
             es: 'Fuente del nombre de perfil',
             it: 'Font del nome del profilo',
             ru: 'Шрифт имени профиля',
@@ -8212,6 +8291,7 @@ export const trans = {
         },
         body: {
             en: 'Customise the font family used for your username, only visible on your profile',
+            de: 'Passe die Schriftart an, die für deinen Benutzernamen verwendet wird. Nur sichtbar auf deinem Profil',
             es: 'Customiza la familia tipográfica usada en tu nombre de usuario, solo visible en tu perfil',
             it: 'Personalizza la famiglia di font utilizzata per il tuo nome utente, visibile solo sul tuo profilo',
             ru: 'Настройте семейство шрифтов, используемое для вашего имени пользователя; оно будет видно только в вашем профиле',
@@ -8219,6 +8299,7 @@ export const trans = {
         },
         reminder: {
             en: 'Changed your name font, don’t forget to save!',
+            de: 'Du hast die Schriftart deines Namens geändert, vergiss’ nicht zu speichern!',
             es: 'Fuente del nombre cambiada, ¡no te olvides de guardar!',
             it: 'Hai cambiato il font del tuo nome, non dimenticarti di salvare!',
             ru: 'Шрифт имени изменен, не забудьте сохранить!',
@@ -8275,13 +8356,13 @@ export const trans = {
             pt: 'Mostre suas reproduções em comparação com a semana passada'
         },
         body: {
-            en: 'Compares your current progress to last week’s average, requires Last.fm Pro',
-            de: 'Vergleicht deinen aktuellen Fortschritt mit dem Durchschnitt der letzten Woche, erfordert Last.fm Pro',
-            es: 'Compara tu progreso actual al promedio de la semana pasada, requiere Last.fm Pro',
-            it: 'Compara il tuo progresso corrente rispetto alla media della settimana scorsa, richiede Last.fm Pro',
-            sv: 'Jämför denna veckans spelningar med förra veckan, kräver Last.fm Pro',
-            ru: 'Сравнивает ваш текущий прогресс со средним показателем прошлой недели, требуется Last.fm Pro',
-            pt: 'Compara seu progresso atual com a média da semana passada, requer Last.fm Pro'
+            en: 'Compares your current progress to last week’s average, requires last.fm Pro',
+            de: 'Vergleicht deinen aktuellen Fortschritt mit dem Durchschnitt der letzten Woche, erfordert last.fm Pro',
+            es: 'Compara tu progreso actual al promedio de la semana pasada, requiere last.fm Pro',
+            it: 'Compara il tuo progresso corrente rispetto alla media della settimana scorsa, richiede last.fm Pro',
+            sv: 'Jämför denna veckans spelningar med förra veckan, kräver last.fm Pro',
+            ru: 'Сравнивает ваш текущий прогресс со средним показателем прошлой недели, требуется last.fm Pro',
+            pt: 'Compara seu progresso atual com a média da semana passada, requer last.fm Pro'
         }
     },
     manual: {
@@ -8517,13 +8598,13 @@ export const trans = {
     },
     labs_cta: {
         // a period on the end looks weird cus of the link
-        en: 'If you’re looking for more, try out Last.fm’s own {a}Labs feature{/a}',
-        de: 'Wenn du nach mehr suchst, probiere die {a}Labs-Funktion{/a} von Last.fm aus',
-        es: 'Si estás buscando más, prueba algo similar en {a}Last.fm Labs{/a}',
-        it: 'Se stai cercando di più, prova la {a}funzione Labs{/a} di Last.fm',
-        sv: 'Om du letar efter lite mer, testa Last.fm’s {a}egna Labs{/a}',
-        ru: 'Если вы ищете что-то еще, попробуйте {a}функцию Labs{/a} от Last.fm',
-        pt: 'Se você está procurando mais, experimente a {a}função Labs{/a} do Last.fm'
+        en: 'If you’re looking for more, try out last.fm’s own {a}Labs feature{/a}',
+        de: 'Wenn du nach mehr suchst, probiere die {a}Labs-Funktion{/a} von last.fm aus',
+        es: 'Si estás buscando más, prueba algo similar en {a}last.fm Labs{/a}',
+        it: 'Se stai cercando di più, prova la {a}funzione Labs{/a} di last.fm',
+        sv: 'Om du letar efter lite mer, testa last.fm’s {a}egna Labs{/a}',
+        ru: 'Если вы ищете что-то еще, попробуйте {a}функцию Labs{/a} от last.fm',
+        pt: 'Se você está procurando mais, experimente a {a}função Labs{/a} do last.fm'
     },
     compare_description: {
         en: 'Find your shared artists, albums, and tracks with another',
@@ -8584,6 +8665,7 @@ export const trans = {
     lyrics: {
         // lyrics
         en: 'Lyrics',
+        de: 'Songtext',
         es: 'Letra',
         it: 'Testo',
         pt: 'Letra',
@@ -8592,6 +8674,7 @@ export const trans = {
         name: {
             // the game
             en: 'Lyrics',
+            de: 'Songtexte',
             es: 'Letra',
             it: 'Testo',
             pt: 'Letra',
@@ -8772,12 +8855,12 @@ export const trans = {
     },
     missing_component: {
         // cases when last.fm simply doesn't provide a tasteometer or other things
-        en: 'Last.fm failed to load this component',
-        de: 'Last.fm konnte diese Komponente nicht laden',
-        es: 'Last.fm falló al cargar este componente',
-        pt: 'Last.fm falhou ao carregar este componente',
-        sv: 'Last.fm kunde inte ladda denna komponent',
-        ru: 'Last.fm не смог загрузить этот компонент'
+        en: 'last.fm failed to load this component',
+        de: 'last.fm konnte diese Komponente nicht laden',
+        es: 'last.fm falló al cargar este componente',
+        pt: 'last.fm falhou ao carregar este componente',
+        sv: 'last.fm kunde inte ladda denna komponent',
+        ru: 'last.fm не смог загрузить этот компонент'
     },
     last_scrobbled_replace: {
         // dont translate this, its replaced
@@ -9142,17 +9225,17 @@ export const trans = {
             ru: 'Автоматически исправлять и перенаправлять скробблы'
         },
         body: {
-            en: 'Changes artist names based on the legacy Last.fm redirect system pre-2015, causes many issues',
-            de: 'Ändert Künstlernamen basierend auf dem Legacy-Last.fm-Umleitungssystem vor 2015, verursacht viele Probleme',
-            es: 'Cambia el nombre del artista basado en el sistema clásico de redirecciones de Last.fm pre-2015, causa varios problemas',
-            it: 'Cambia i nomi degli artisti utilizzando il sistema di reindirizzamento obsoleto di Last.fm pre-205, causa svariati problemi',
-            sv: 'Ändrar artistnamn baserad på Last.fms omdirigeringssystem från innan 2015, skapar många problem',
-            ru: 'Изменяет имена исполнителей на основе устаревшей системы перенаправления Last.fm до 2015 года, что вызывает много проблем',
-            pt: 'Altera os nomes dos artistas com base no sistema legado de redirecionamento do Last.fm pré-2015, causando muitos problemas'
+            en: 'Changes artist names based on the legacy last.fm redirect system pre-2015, causes many issues',
+            de: 'Ändert Künstlernamen basierend auf dem Legacy-last.fm-Umleitungssystem vor 2015, verursacht viele Probleme',
+            es: 'Cambia el nombre del artista basado en el sistema clásico de redirecciones de last.fm pre-2015, causa varios problemas',
+            it: 'Cambia i nomi degli artisti utilizzando il sistema di reindirizzamento obsoleto di last.fm pre-205, causa svariati problemi',
+            sv: 'Ändrar artistnamn baserad på last.fms omdirigeringssystem från innan 2015, skapar många problem',
+            ru: 'Изменяет имена исполнителей на основе устаревшей системы перенаправления last.fm до 2015 года, что вызывает много проблем',
+            pt: 'Altera os nomes dos artistas com base no sistema legado de redirecionamento do last.fm pré-2015, causando muitos problemas'
         },
         warning: {
             en: 'This setting should be turned off to ensure scrobbles are correctly stored for each artist.',
-            de: 'Diese Einstellung sollte deaktiviert werden, um sicherzustellen, dass Scrobbles für jeden Künstler korrekt gespeichert werden.',
+            de: 'Diese Einstellung sollte deaktiviert werden, um sicherzustellen, dass Scrobbles für jeden Künstler/jede Künstlerin korrekt gespeichert werden.',
             pt: 'Esta configuração deve ser desativada para garantir que os scrobbles sejam armazenados corretamente para cada artista.',
             it: 'Questa impostazione dovrebbe essere disattivata per assicurarsi che gli scrobbling siano correttamente memorizzati per ciascun artista.',
             es: 'Esta opción debería estar desactivada para garantizar que los scrobblings se almacenen correctamente para cada artista.',
@@ -9161,6 +9244,7 @@ export const trans = {
         },
         false: {
             en: 'Do not apply corrections (recommended)',
+            de: 'Keine Korrekturen anwenden (empfohlen)',
             es: 'No aplicar correcciones (recomendado)',
             it: 'Non applicare correzioni (consigliato)',
             pt: 'Não aplicar correções (recomendado)',
@@ -9169,6 +9253,7 @@ export const trans = {
         },
         true: {
             en: 'Auto correct my scrobbles (legacy)',
+            de: 'Meine Scrobbles automatisch korrigieren (veraltet)',
             es: 'Corregir automáticamente mis scrobblings (clásico)',
             it: 'Correggi automaticamente i miei scrobbling (obsoleto)',
             sv: 'Autokorrigera mina skrobblingar (gammal)',
@@ -9179,6 +9264,7 @@ export const trans = {
     preferred_affiliate: {
         name: {
             en: 'Preferred playback source',
+            de: 'Bevorzugte Wiedergabequelle',
             es: 'Fuente de reproducción preferida',
             it: 'Sorgente di riproduzione preferita',
             pt: 'Fonte de reprodução preferida',
@@ -9187,6 +9273,7 @@ export const trans = {
         },
         body: {
             en: 'Choose which service to use when interacting with playables across the site',
+            de: 'Wähle aus, welchen Dienst du beim Interagieren mit abspielbaren Inhalten auf der gesamten Seite verwenden möchtest',
             es: 'Elige cuál servicio usar al interactuar con elementos reproducibles a través del sitio',
             it: 'Seleziona quale servizio utilizzare all\'interazione con elementi riproducibili in tutto il sito',
             sv: 'Välj vilken service att använda när du spelar upp låtar',
@@ -9214,13 +9301,13 @@ export const trans = {
             pt: 'Localização'
         },
         body: {
-            en: 'Last.fm uses your location for event recommendations and local music data',
-            de: 'Last.fm verwendet deinen Standort für Veranstaltungsempfehlungen und lokale Musikdaten',
-            es: 'Last.fm usa tu ubicación para recomendaciones de eventos y datos locales de música',
-            it: 'Last.fm usa la tua posizione per raccomandare eventi e dati di musica locali',
-            sv: 'Last.fm använder din plats för evenemangrekommendationer och lokal musikdata',
-            ru: 'Last.fm использует ваше местоположение для рекомендаций мероприятий и данных о местной музыке',
-            pt: 'Last.fm usa sua localização para recomendações de eventos e dados locais de música'
+            en: 'last.fm uses your location for event recommendations and local music data',
+            de: 'last.fm verwendet deinen Standort für Veranstaltungsempfehlungen und lokale Musikdaten',
+            es: 'last.fm usa tu ubicación para recomendaciones de eventos y datos locales de música',
+            it: 'last.fm usa la tua posizione per raccomandare eventi e dati di musica locali',
+            sv: 'last.fm använder din plats för evenemangrekommendationer och lokal musikdata',
+            ru: 'last.fm использует ваше местоположение для рекомендаций мероприятий и данных о местной музыке',
+            pt: 'last.fm usa sua localização para recomendações de eventos e dados locais de música'
         }
     },
     event_radius: {
@@ -9252,6 +9339,7 @@ export const trans = {
     },
     debug: {
         en: 'Debug',
+        de: 'Debug',
         es: 'Debug',
         it: 'Debug',
         pt: 'Debug',
@@ -9352,6 +9440,7 @@ export const trans = {
     },
     romanise_require: {
         en: 'Romanisation requires either lotus corrections or smart song tags be enabled',
+        de: 'Die Romanisierung erfordert, dass entweder lotus-Korrekturen oder intelligente Song-Tags aktiviert sind',
         es: 'La romanización requiere que las correcciones de lotus o los tags inteligentes de temas estén activos',
         it: 'La romanizzazione richiede che le correzioni lotus o i tag intelligenti per i brani siano attivati',
         pt: 'A romanização requer que as correções lotus ou as tags inteligentes de músicas estejam ativas',
@@ -9399,6 +9488,7 @@ export const trans = {
     amount_translated: {
         // number of strings translated
         en: '{c} translated',
+        de: '{c} übersetzt',
         es: '{c} traducidos',
         it: '{c} tradotte',
         pt: '{c} traduzidos',
@@ -9408,6 +9498,7 @@ export const trans = {
     missing_translated: {
         // number of strings missing
         en: '{c} missing',
+        de: '{c} fehlen',
         es: '{c} faltantes',
         it: '{c} mancanti',
         pt: '{c} ausentes',
@@ -9417,6 +9508,7 @@ export const trans = {
     simulate_scroll: {
         name: {
             en: 'Simulate horizontal scrolling',
+            de: 'Horizontales Scrollen simulieren',
             es: 'Simular scrolling horizontal',
             it: 'Simula scorrimento orizzontale',
             pt: 'Simular rolagem horizontal',
@@ -9425,6 +9517,7 @@ export const trans = {
         },
         body: {
             en: 'Only recommended for desktop devices',
+            de: 'Nur für Desktop-Geräte empfohlen',
             es: 'Recomendado solo en dispositivos de escritorio',
             it: 'Raccomandato solo per dispositivi desktop',
             pt: 'Recomendado apenas para computadores de mesa',
@@ -9434,6 +9527,7 @@ export const trans = {
     },
     credits: {
         en: 'Credits',
+        de: 'Credits',
         es: 'Créditos',
         it: 'Crediti',
         pt: 'Créditos',
@@ -9442,6 +9536,7 @@ export const trans = {
     },
     view_credits: {
         en: 'View credits',
+        de: 'Credits ansehen',
         es: 'Ver créditos',
         it: 'Visualizza crediti',
         pt: 'Ver créditos',
@@ -9450,6 +9545,7 @@ export const trans = {
     },
     credits_for_value: {
         en: 'Credits for {v}',
+        de: 'Credits für {v}',
         es: 'Créditos para {v}',
         it: 'Crediti per {v}',
         pt: 'Créditos para {v}',
@@ -9459,6 +9555,7 @@ export const trans = {
     branch: {
         name: {
             en: 'Choose branch',
+            de: 'Branch wählen',
             es: 'Elegir rama',
             it: 'Seleziona branch', // we are talking about git branches, leaving it as is to avoid creating confusion for people who will want to change this ~cuto
             pt: 'Escolha a branch',
@@ -9467,6 +9564,7 @@ export const trans = {
         },
         body: {
             en: 'Default release branch is ‘uwu’, do not change unless you know what you’re doing',
+            de: 'Der Standard-Release-Branch ist „uwu“, ändere ihn nicht, wenn du nicht weißt, was du tust',
             es: 'La rama de lanzamiento actual es ‘uwu’, no la cambies a menos de que sepas lo que haces',
             it: 'Il branch release predefinito è ‘uwu’, non cambiare questo valore se non si sa cosa si sta facendo',
             sv: 'Standardbranshen är ‘uwu’, ändra inte om du inte vet vad du gör',
@@ -9476,6 +9574,7 @@ export const trans = {
     },
     log_in: {
         en: 'Log in',
+        de: 'Einloggen',
         es: 'Iniciar sesión',
         it: 'Accedi',
         pt: 'Iniciar Sessão',
@@ -9484,6 +9583,7 @@ export const trans = {
     },
     sign_up: {
         en: 'Sign up',
+        de: 'Registrieren',
         es: 'Registrarse',
         it: 'Registrati',
         pt: 'Registrar-se',
@@ -9493,6 +9593,7 @@ export const trans = {
     plot: {
         name: {
             en: 'Plot',
+            de: 'Diagramm',
             es: 'Plot',
             it: 'Grafico',
             sv: 'Rita',
@@ -9501,6 +9602,7 @@ export const trans = {
         },
         body: {
             en: 'Create graphs from user libraries',
+            de: 'Erstelle Diagramme aus Benutzerbibliotheken',
             es: 'Crea gráficos con base en las colecciones de usuario',
             it: 'Crea grafici dalle librerie degli utenti',
             pt: 'Crie gráficos a partir de bibliotecas de usuários',
@@ -9510,6 +9612,7 @@ export const trans = {
     },
     your_recent_30_days: {
         en: 'Your recent 30 days',
+        de: 'Deine letzten 30 Tage',
         es: 'Tus últimos 30 días',
         it: 'I tuoi ultimi 30 giorni',
         pt: 'Seus últimos 30 dias',
@@ -9518,6 +9621,7 @@ export const trans = {
     value_this_month: {
         // number of scrobbles
         en: '{v} this month',
+        de: '{v} diesen Monat',
         es: '{v} este mes',
         it: '{v} questo mese',
         pt: '{v} este mês',
@@ -9526,6 +9630,7 @@ export const trans = {
     menu_replacement: {
         name: {
             en: 'Replace native browser right-click menus',
+            de: 'Native Rechtsklick-Menüs des Browsers ersetzen',
             es: 'Reemplazar menús de clic derecho nativos del navegador',
             it: 'Sostituisci i menu contestuali nativi del browser',
             pt: 'Substituir menus de clique direito nativos do navegador',
@@ -9533,6 +9638,7 @@ export const trans = {
         },
         body: {
             en: 'Provide bleh context-specific actions when right-clicking',
+            de: 'bleh-kontextspezifische Aktionen beim Rechtsklick anzeigen',
             es: 'Proporciona acciones específicas de bleh al hacer clic derecho',
             it: 'Fornisci azioni specifiche a bleh nei menu contestuali',
             pt: 'Fornecer ações específicas do bleh ao clicar com o botão direito'
@@ -9540,6 +9646,7 @@ export const trans = {
     },
     you_have_new_badges: {
         en: 'You have new badges!',
+        de: 'Du hast neue Abzeichen!',
         es: '¡Tienes nuevos emblemas!',
         it: 'Hai dei nuovi distintivi!',
         pt: 'Você tem novas insígnias!',
@@ -9548,18 +9655,21 @@ export const trans = {
     translator: {
         name: {
             en: 'Show translator tools',
+            de: 'Übersetzer-Werkzeuge anzeigen',
             es: 'Mostrar herramientas de traducción',
             pt: 'Mostrar ferramentas de tradução',
             ru: 'Показать инструменты переводчика'
         },
         body: {
             en: 'View expanded details on all languages for use when translating',
+            de: 'Erweiterte Details zu allen Sprachen ansehen, die bei der Übersetzung verwendet werden können',
             es: 'Ve detalles ampliados de todos los idiomas para usar al traducir',
             pt: 'Veja detalhes expandidos sobre todos os idiomas para uso ao traduzir'
         }
     },
     translate: {
         en: 'Translate',
+        de: 'Übersetzen',
         es: 'Traducir',
         pt: 'Traduza',
         ru: 'Перевести'
@@ -9567,11 +9677,13 @@ export const trans = {
     translation_key: {
         // a key such as 'you_have_new_badges' above
         en: 'Translation key',
+        de: 'Übersetzungsschlüssel',
         es: 'Clave de traducción',
         pt: 'Chave de tradução'
     },
     original: {
         en: 'Original',
+        de: 'Original',
         es: 'Original',
         pt: 'Original',
         ru: 'Оригинал'
@@ -9580,6 +9692,7 @@ export const trans = {
         // (claire) is listening to
         // (song name)
         en: '{u} is listening to',
+        de: '{u} hört gerade',
         es: '{u} está escuchando',
         pt: '{u} está ouvindo',
         ru: '{u} слушает'
@@ -9588,6 +9701,7 @@ export const trans = {
         // (claire) listened (5 hours ago)
         // (song name)
         en: '{u} listened {time}',
+        de: '{u} hörte {time}',
         es: '{u} escuchó {time} a',
         pt: '{u} ouviu há {time}',
         ru: '{u} послушал {time}'
@@ -9595,13 +9709,15 @@ export const trans = {
     now_notice: {
         name: {
             en: 'This page is not properly supported in bleh, but..',
+            de: 'Diese Seite wird in bleh nicht richtig unterstützt, aber...',
             es: 'Esta página no es compatible con bleh, pero... ',
             ru: 'Это страница не поддерживается в bleh, но...'
         },
         body: {
-            en: 'If you are a Last.fm Pro subscriber, you can view your current active track in your profile menu at all times',
-            es: 'Si eres un suscriptor de Last.fm Pro, puedes ver tu tema activo actual en el menú de tu perfil en cualquier momento',
-            ru: 'Если вы являетесь подписчиком Last.fm Pro, вы можете в любое время просматривать текущий активный трек в меню своего профиля.'
+            en: 'If you are a last.fm Pro subscriber, you can view your current active track in your profile menu at all times',
+            de: 'Wenn du ein last.fm Pro-Abonnent bist, kannst du deinen aktuell aktiven Titel jederzeit in deinem Profilmenü ansehen',
+            es: 'Si eres un suscriptor de last.fm Pro, puedes ver tu tema activo actual en el menú de tu perfil en cualquier momento',
+            ru: 'Если вы являетесь подписчиком last.fm Pro, вы можете в любое время просматривать текущий активный трек в меню своего профиля.'
         }
     }
 };
