@@ -243,7 +243,7 @@ export function append_nav() {
         obsessions: {
             name: tl(trans.obsessions),
             icon: 'obsessions',
-            url: `${root}user/${auth.name}/obsessionss`
+            url: `${root}user/${auth.name}/obsessions`
         },
         bookmarks: {
             name: tl(trans.bookmarks),
