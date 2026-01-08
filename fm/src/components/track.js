@@ -128,9 +128,7 @@ export function patch_titles(search = page.structure.main) {
                 <div class="kate-placeholder" />
             `);
 
-            let track_title = track.querySelector(
-                '.chartlist-name a:not(.offset-section-anchor)'
-            );
+            let track_title = track.querySelector('.chartlist-name a:not(.offset-section-anchor)');
             if (!track_title) return;
 
             if (track_title.hasAttribute('title')) {
@@ -190,6 +188,10 @@ export function patch_titles(search = page.structure.main) {
 
                 if (settings.colourful_counts)
                     patch_artist_ranks_in_list_view(track);
+
+                render(track_title, html`
+                    <span><span class="at">@</span>${track_title.textContent}</span>
+                `);
 
                 log('finished user stuff, returning', 'tracks', 'log');
                 return;
