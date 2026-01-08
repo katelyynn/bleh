@@ -54411,7 +54411,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       obsessions: {
         name: tl2(trans.obsessions),
         icon: "obsessions",
-        url: `${root}user/${auth.name}/obsessionss`
+        url: `${root}user/${auth.name}/obsessions`
       },
       bookmarks: {
         name: tl2(trans.bookmarks),
@@ -59837,7 +59837,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     de: {
       name: "Deutsch",
       by: ["evangelicgirl", "myraisounds", "clairedoll"],
-      last_updated: "2025-10-01"
+      last_updated: "2026-01-08"
     },
     es: {
       name: "Espa\xF1ol",
@@ -60016,6 +60016,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       "user-status-alum": {
         name: {
           en: "Alum",
+          de: "Absolvent",
           es: "Graduado",
           sv: "Alumn",
           ru: "\u0412\u044B\u043F\u0443\u0441\u043A\u043D\u0438\u043A",
@@ -60024,7 +60025,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         },
         reason: {
           en: "Former member of Last.fm",
-          de: "Ehemaliger Mitarbeiter von Last.fm",
+          de: "Ehemalige:r Mitarbeiter:in von Last.fm",
           es: "Antiguo miembro de Last.fm",
           it: "Ex-membro dello staff di Last.fm",
           sv: "F\xF6re-detta medlem p\xE5 Last.fm",
@@ -60170,6 +60171,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       "bubble-tea": {
         name: {
           en: "escoffier :3",
+          de: "escoffier :3",
           es: "escoffier :3",
           sv: "escoffier :3",
           ru: "\u0435\u0441\u043A\u043E\u0444\u0444\u044C\u0435\u0440 :3",
@@ -60179,6 +60181,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         },
         reason: {
           en: "katelyn\u2019s wife ~",
+          de: "katelyns frau ~",
           es: "esposa de katelyn ~",
           pt: "esposa de katelyn ~",
           it: "moglie di katelyn ~",
@@ -60294,6 +60297,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     single_shout: {
       en: "viewing a single shout",
+      de: "ein einzelner Shout wird angezeigt",
       es: "viendo una sola nota",
       it: "visualizzando una singola nota",
       pt: "visualizando uma mensagem",
@@ -60411,7 +60415,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       de: "Obsessen",
       es: "Obsesionar",
       it: "Imposta passione",
-      // last.fm calls them 'passioni' in italian, so i will work with that from now on ~cuto
+      // Last.fm calls them 'passioni' in italian, so i will work with that from now on ~cuto
       pt: "Obsess\xE3o",
       sv: "Besatthet",
       ru: "\u0417\u0430\u0432\u0438\u0441\u0438\u043C\u043E\u0441\u0442\u044C",
@@ -60828,7 +60832,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       zh: "\u7F16\u8F91"
     },
     bulk_edit: {
-      // as in the last.fm "Bulk Edit" open-source extension
+      // as in the Last.fm "Bulk Edit" open-source extension
       en: "Bulk edit",
       de: "Mehrere bearbeiten",
       es: "Editar en masa",
@@ -60852,6 +60856,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     scrobble_value: {
       en: "Scrobble {v}",
+      de: "{v} scrobbeln",
       es: "Hacer scrobbling al {v}",
       ru: "\u0421\u043A\u0440\u043E\u0431\u0431\u043B\u0438\u0442\u044C {v}",
       pt: "Scrobble {v}",
@@ -60910,7 +60915,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       zh: "{c} \u6B21 Scrobble"
     },
     listens: {
-      // base on native last.fm ui
+      // base on native Last.fm ui
       en: "listens",
       de: "Scrobbles",
       es: "scrobblings",
@@ -60954,7 +60959,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       zh: "\u65E0\u6CD5\u53D1\u9001 Scrobble"
     },
     scrobble_error_codes: {
-      // https://www.last.fm/api/show/track.scrobble
+      // https://www.Last.fm/api/show/track.scrobble
       1: {
         en: "Artist name was ignored",
         de: "K\xFCnstlername wurde ignoriert",
@@ -61001,6 +61006,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       },
       5: {
         en: "Daily scrobble limit exceeded",
+        de: "T\xE4gliches Scrobble-Limit \xFCberschritten",
         es: "L\xEDmite diario de scrobblings excedido",
         it: "Limite giornaliero di scrobbling superato",
         pt: "Limite di\xE1rio de scrobbles excedido",
@@ -61035,7 +61041,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     artists_tooltip: {
       en: "Multiple artists are grouped into this profile",
-      de: "Mehrere K\xFCnstler sind auf diesem Profil gruppiert",
+      de: "Mehrere K\xFCnstler:innen sind unter diesem Profil gruppiert",
       es: "M\xFAltiples artistas est\xE1n agrupados en este perfil",
       it: "Pi\xF9 artisti sono raggruppati in questo profilo",
       pt: "M\xFAltiplos artistas est\xE3o agrupados neste perfil",
@@ -61069,6 +61075,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     albums_and_tracks: {
       en: "Albums and tracks",
+      de: "Alben und Titel",
       es: "\xC1lbumes y temas",
       it: "Album e brani",
       pt: "\xC1lbuns e faixas",
@@ -61091,6 +61098,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     single: {
       // release type
       en: "Single",
+      de: "Single",
       es: "Sencillo",
       it: "Singolo",
       pt: "Single",
@@ -61501,6 +61509,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     smart_music_titles: {
       en: "Smart music titles",
+      de: "Intelligente Musiktitel",
       es: "T\xEDtulos inteligentes de m\xFAsica",
       it: "Titoli intelligenti per la musica",
       pt: "T\xEDtulos de m\xFAsicas inteligentes",
@@ -61634,6 +61643,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         },
         fall: {
           en: "Winter",
+          de: "Winter",
           es: "Invierno",
           it: "Inverno",
           ru: "\u0417\u0438\u043C\u0430",
@@ -61666,6 +61676,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       },
       notice: {
         en: "Open the live counter",
+        de: "Live-Z\xE4hler \xF6ffnen",
         es: "Abrir el contador en vivo",
         it: "Apri il contatore in tempo reale",
         pt: "Abrir o contador ao vivo",
@@ -61676,6 +61687,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       },
       live: {
         en: "Counter is updating live",
+        de: "Z\xE4hler wird live aktualisiert",
         es: "El contador est\xE1 siendo actualizado en tiempo real",
         it: "Il contatore si sta aggiornando in tempo reale",
         pt: "O contador est\xE1 sendo atualizado em tempo real",
@@ -61689,6 +61701,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         nonsense: {
           // reference to https://open.spotify.com/track/7yogx3TwxGwSxO2QITsT2q
           en: "A Nonsense Christmas",
+          de: "Ein sinnloses Weihnachten",
           es: "Una Navidad Sin Sentido",
           it: "Un Natale senza senso",
           pt: "Um Natal Sem Sentido",
@@ -61699,6 +61712,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         fruitcake: {
           // reference to https://open.spotify.com/album/7EisdwWcodpmHxgpGVE5Pg
           en: "fruitcake",
+          de: "Stollen",
           es: "pastel de fruta",
           it: "torta di frutta",
           sv: "fruitcake",
@@ -61708,6 +61722,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         },
         mistletoe: {
           en: "Mistletoe",
+          de: "Mistelzweig",
           es: "Mu\xE9rdago",
           it: "Vischio",
           sv: "Mistel",
@@ -61716,6 +61731,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         },
         festival: {
           en: "Christmas Eve",
+          de: "Heiligabend",
           es: "V\xEDspera de Navidad",
           it: "Vigilia di Natale",
           sv: "Julafton",
@@ -61726,6 +61742,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       },
       exclusive: {
         en: "Limited time",
+        de: "Nur f\xFCr kurze Zeit",
         es: "Tiempo limitado",
         pt: "Tempo limitado",
         pl: "Tymczasowe",
@@ -61745,6 +61762,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     value_for_time: {
       // e.g. (Halloween) ends (in 3 days)
       en: "{v} ends {time}",
+      de: "{v} endet {time}",
       es: "{v} termina {time}",
       it: "{v} termina {time}",
       ru: "{v} \u0437\u0430\u043A\u043E\u043D\u0447\u0438\u0442\u0441\u044F {time}",
@@ -61809,6 +61827,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     seasonal_overlays: {
       name: {
         en: "Display additional seasonal effects",
+        de: "Zus\xE4tzliche saisonale Effekte anzeigen",
         es: "Mostrar efectos de temporada adicionales",
         it: "Mostra effetti stagionali aggiuntivi",
         pt: "Exibir efeitos sazonais adicionais",
@@ -61818,6 +61837,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       },
       body: {
         en: "During winter seasons this applies a coat of ice to panels, otherwise mainly gradients",
+        de: "W\xE4hrend der Wintersaisons wird eine Eisschicht auf die Panels angewendet, ansonsten haupts\xE4chlich Farbverl\xE4ufe",
         es: "Durante temporadas invernales, aplica una capa de hielo a los paneles, de lo contrario, aplica principalmente gradientes",
         it: "Durante le stagioni invernali, applica un mantello di ghiacchi ai pannelli, altrimenti principalmente gradienti",
         pt: "Durante o inverno, isso aplica uma camada de gelo aos pain\xE9is; fora dessa \xE9poca, aplica principalmente gradientes",
@@ -61850,6 +61870,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       // season start date
       // start date: 1 day ago
       en: "Start date",
+      de: "Startdatum",
       es: "Fecha de inicio",
       it: "Data di inizio",
       pt: "Data de in\xEDcio",
@@ -61861,6 +61882,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       // season next date
       // next season: in 3 days
       en: "Next season",
+      de: "N\xE4chste Saison",
       es: "Pr\xF3xima temporada",
       it: "Prossima stagione",
       pt: "Pr\xF3xima esta\xE7\xE3o",
@@ -61872,6 +61894,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       // season end date
       // end date: in 2 days
       en: "End date",
+      de: "Enddatum",
       es: "Fecha de finalizaci\xF3n",
       it: "Data di fine",
       pt: "Dia de t\xE9rmino",
@@ -61937,6 +61960,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     no_releases_found: {
       en: "No releases found here",
+      de: "Keine Ver\xF6ffentlichungen gefunden",
       es: "No se encontraron nuevos lanzamientos",
       it: "Nessuna pubblicazione trovata",
       ru: "\u0417\u0434\u0435\u0441\u044C \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D\u043E \u043D\u0438 \u043E\u0434\u043D\u043E\u0433\u043E \u0440\u0435\u043B\u0438\u0437\u0430",
@@ -61946,6 +61970,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     tracklist_source: {
       name: {
         en: "Preferred tracklist source",
+        de: "Bevorzugte Quelle f\xFCr die Titelliste",
         es: "Fuente preferida para la lista de temas",
         it: "Fonte preferita per la lista dei brani",
         ru: "\u041F\u0440\u0435\u0434\u043F\u043E\u0447\u0438\u0442\u0430\u0435\u043C\u044B\u0439 \u0438\u0441\u0442\u043E\u0447\u043D\u0438\u043A \u0442\u0440\u0435\u043A\u043B\u0438\u0441\u0442\u0430",
@@ -61954,6 +61979,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       },
       body: {
         en: "Choose which service to display for album tracklists",
+        de: "W\xE4hle aus, von welchem Dienst die Titellisten von Alben angezeigt werden sollen",
         es: "Elige cu\xE1l servicio mostrar para la lista de temas",
         it: "Seleziona che servizio mostrare per la lista dei brani",
         ru: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u0441\u0435\u0440\u0432\u0438\u0441, \u043A\u043E\u0442\u043E\u0440\u044B\u0439 \u0431\u0443\u0434\u0435\u0442 \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0442\u044C\u0441\u044F \u0434\u043B\u044F \u0442\u0440\u0435\u043A\u043B\u0438\u0441\u0442\u043E\u0432 \u0430\u043B\u044C\u0431\u043E\u043C\u043E\u0432",
@@ -61988,6 +62014,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     view_the_charts: {
       en: "View the charts",
+      de: "Charts ansehen",
       es: "Ver las listas",
       it: "Visualizza le classifiche",
       pt: "Ver as paradas",
@@ -62076,6 +62103,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     import_failed: {
       en: "Import failed",
+      de: "Import fehlgeschlagen",
       es: "Error al importar",
       it: "Importazione non riuscita",
       pt: "Falha na importa\xE7\xE3o",
@@ -62084,6 +62112,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pl: "B\u0142\u0105d importowania",
       notice: {
         en: "The settings you attempted to import failed to parse, no changes were made.",
+        de: "Die Einstellungen, die du versucht hast, zu importieren, konnten nicht verarbeitet werden. Es wurden keine \xC4nderungen vorgenommen.",
         es: "La configuraci\xF3n que intentaste importar fall\xF3 al procesarse, no se realizaron cambios.",
         it: "Non \xE8 stato possibile processare le impostazioni che hai cercato di importare, non sono state effettuate modifiche.",
         pt: "As configura\xE7\xF5es que voc\xEA tentou importar n\xE3o puderam ser processadas; nenhuma altera\xE7\xE3o foi feita.",
@@ -62375,6 +62404,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     noise: {
       name: {
         en: "Noise overlay opacity",
+        de: "Deckkraft des K\xF6rnungseffekts",
         es: "Opacidad de la capa de ruido",
         it: "Opacit\xE0 della sovrapposizione di rumore",
         sv: "Brus\xF6verl\xE4ggsopacitet",
@@ -62384,6 +62414,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       },
       body: {
         en: "Apply a coat of subtle noise to add variation to solid backgrounds",
+        de: "F\xFCgt eine feine K\xF6rnung hinzu, um einfarbigen Hintergr\xFCnden mehr Variation zu verleihen",
         es: "Aplica una capa de ruido para a\xF1adir variedad a los fondos s\xF3lidos",
         it: "Applica un mantello di rumore leggero per aggiungere variet\xE0 agli sfondi solidi",
         sv: "Till\xE4mpa ett brus\xF6verl\xE4gg f\xF6r lite variation p\xE5 enf\xE4rgade bakgrunder",
@@ -62709,6 +62740,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     gallery_sum: {
       en: "This is the sum of votes for ordering",
+      de: "Dies ist die Summe der Stimmen f\xFCr die Reihenfolge",
       es: "Esta es la suma de votos para ordenar",
       it: "Questa \xE8 la somma dei voti per l\u2019ordinamento",
       sv: "Det h\xE4r \xE4r summan r\xF6ster f\xF6r bildordning",
@@ -62718,6 +62750,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     view_saved: {
       en: "View all saved photos",
+      de: "Alle gespeicherten Fotos ansehen",
       es: "Ver todas las fotos guardadas",
       it: "Visualizza tutte le foto salvate",
       sv: "Visa alla sparade foton",
@@ -62833,7 +62866,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pl: "Tagi"
     },
     reports: {
-      // last.fm listening reports
+      // Last.fm listening reports
       en: "Reports",
       de: "Berichte",
       es: "Informes",
@@ -62939,7 +62972,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     correction_tip: {
       en: "This is the correct capitalisation, as decided by the artist",
-      de: "Dies ist die korrekte Gro\xDF-/Kleinschreibung, wie sie vom K\xFCnstler festgelegt wurde",
+      de: "Dies ist die korrekte Gro\xDF-/Kleinschreibung, wie sie von den K\xFCnstler:innen festgelegt wurde",
       es: "Esta es la capitalizaci\xF3n correcta, decidida por el artista",
       it: "Questo \xE8 l\u2019uso delle maiuscole corretto, come deciso dall\u2019artista",
       sv: "Det h\xE4r \xE4r r\xE4tt kapitalisering, som best\xE4md av artisten",
@@ -63267,6 +63300,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     manage_data: {
       en: "Manage data",
+      de: "Daten verwalten",
       es: "Gestionar datos",
       it: "Gestione dati",
       sv: "Hantera data",
@@ -63275,7 +63309,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pl: "Zarz\u0105dzaj danymi"
     },
     labs: {
-      // labs by last.fm
+      // labs by Last.fm
       en: "Labs",
       de: "Labs",
       es: "Labs",
@@ -63509,6 +63543,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     default_avatar_action: {
       name: {
         en: "Default avatar action",
+        de: "Standardverhalten von Profilbildern",
         es: "Acci\xF3n de avatar por defecto",
         it: "Azione di default per gli avatar",
         sv: "Standard bildbet\xE9ende",
@@ -63518,6 +63553,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       },
       body: {
         en: "Which action should be performed when you click an avatar",
+        de: "Welche Aktion ausgef\xFChrt werden soll, wenn du auf ein Profilbild klickst",
         es: "Cu\xE1l acci\xF3n deber\xEDa realizarse cuando haces clic a un avatar",
         it: "Quale azione dovrebbe essere effettuata quando fai click su un avatar?",
         sv: "Hur ska sidan bet\xE9 sig n\xE4r du trycker p\xE5 en profilbild",
@@ -63548,6 +63584,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     copy_text: {
       en: "Copy text",
+      de: "Text kopieren",
       es: "Copiar texto",
       it: "Copia testo",
       pt: "Copiar texto",
@@ -63599,6 +63636,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     paste: {
       en: "Paste",
+      de: "Einf\xFCgen",
       es: "Pegar",
       pt: "Colar",
       pl: "Wklej",
@@ -63606,12 +63644,14 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     paste_text: {
       en: "Paste text",
+      de: "Text einf\xFCgen",
       es: "Pegar texto",
       pt: "Colar texto",
       pl: "Wklej tekst"
     },
     undo: {
       en: "Undo",
+      de: "R\xFCckg\xE4ngig",
       es: "Deshacer",
       pt: "Desfazer",
       pl: "Cofnij",
@@ -63619,6 +63659,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     redo: {
       en: "Redo",
+      de: "Wiederholen",
       es: "Rehacer",
       pt: "Refazer",
       pl: "Powt\xF3rz",
@@ -63626,6 +63667,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     pasted_text: {
       en: "Pasted text",
+      de: "Eingef\xFCgter Text",
       es: "Texto pegado",
       pt: "Texto colado",
       pl: "Wklejono tekst",
@@ -64063,7 +64105,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     love: {
       // as in loving tracks as a concept
       en: "Love",
-      de: "Als Lieblingssong markieren",
+      de: "Markieren",
       es: "Favorito",
       it: "Preferito",
       pt: "Favoritas",
@@ -64073,6 +64115,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     love_track: {
       en: "Love track",
+      de: "Als Lieblingssong markieren",
       es: "Marcar como favorito",
       it: "Imposta come preferito",
       ru: "\u041E\u0442\u043C\u0435\u0442\u0438\u0442\u044C \u0442\u0440\u0435\u043A \u043A\u0430\u043A \u043B\u044E\u0431\u0438\u043C\u044B\u0439",
@@ -64081,7 +64124,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     loved: {
       // as in loved tracks, this can be seen
-      // in the native last.fm ui
+      // in the native Last.fm ui
       en: "Loved",
       de: "Lieblingssongs",
       es: "Favoritos",
@@ -64092,7 +64135,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pl: "Ulubione"
     },
     velocity: {
-      // as in the last.fm labs 'Velocity' tool
+      // as in the Last.fm labs 'Velocity' tool
       en: "Velocity",
       de: "Dynamik",
       es: "Velocity",
@@ -64115,7 +64158,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pl: "Wyloguj"
     },
     tracklist: {
-      // please copy from native last.fm ui
+      // please copy from native Last.fm ui
       en: "Tracklist",
       de: "Titelliste",
       es: "Lista de temas",
@@ -64284,7 +64327,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       // this is used to replace the text and extract the
       // username, so make this text everything BUT where
       // the username goes (including spaces)
-      // you can find this text in the last.fm ui as every
+      // you can find this text in the Last.fm ui as every
       // avatar's (except your own) alt text
       en: "Avatar for ",
       de: "Profilbild von ",
@@ -64357,6 +64400,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     view_image: {
       en: "View image",
+      de: "Bild ansehen",
       pt: "Visualizar imagem",
       es: "Ver imagen",
       it: "Visualizza immagine",
@@ -64366,6 +64410,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     view_image_unsafe: {
       en: "View unsafe image",
+      de: "Unangemessenes Bild ansehen",
       es: "Ver imagen no segura",
       it: "Mostra immagine non sicura",
       pt: "Visualizar imagem n\xE3o segura",
@@ -64374,6 +64419,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     open_link: {
       en: "Open link",
+      de: "Link \xF6ffnen",
       es: "Abrir v\xEDnculo",
       it: "Apri link",
       pt: "Abrir link",
@@ -64385,6 +64431,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       // you see fit if desired
       //
       // why would you remove him, he's just a little guy -soleil
+      // never remove him, he's precious and loved. –myrai
       en: "This event has been cancelled (\u2565\uFE4F\u2565)",
       de: "Dieses Event wurde abgesagt (\u2565\uFE4F\u2565)",
       es: "Este evento ha sido cancelado (\u2565\uFE4F\u2565)",
@@ -64441,6 +64488,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     track_layout: {
       name: {
         en: "Track layout",
+        de: "Titellayout",
         es: "Dise\xF1o de tema",
         it: "Layout dei brani",
         sv: "L\xE5tlayout",
@@ -64450,6 +64498,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       },
       body: {
         en: "Choose which axis to display track information on",
+        de: "W\xE4hle, auf welcher Achse Titelinformationen angezeigt werden sollen",
         es: "Elige en qu\xE9 eje mostrar la informaci\xF3n del tema",
         it: "Seleziona su quale asse mostrare le informazioni dei brani",
         sv: "V\xE4lj vilken axis att visa l\xE5tinformation p\xE5",
@@ -64459,6 +64508,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       },
       column: {
         en: "Place title and artist vertically",
+        de: "Titel und K\xFCnstler:in vertikal anordnen",
         es: "Colocar t\xEDtulo y artista verticalmente",
         it: "Disponi titolo e artista verticalmente",
         sv: "Placera titel och artist lodr\xE4tt",
@@ -64468,6 +64518,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       },
       row: {
         en: "Place title and artist horizontally",
+        de: "Titel und K\xFCnstler:in horizontal anordnen",
         es: "Colocar t\xEDtulo y artista horizontalmente",
         it: "Disponi titolo e artista orizzontalmente",
         sv: "Placera titel och artist v\xE5gr\xE4tt",
@@ -64479,6 +64530,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     track_album_name_location: {
       name: {
         en: "Album name location",
+        de: "Position des Albumtitels",
         es: "Ubicaci\xF3n del nombre del \xE1lbum",
         it: "Posizione del nome dell\u2019album",
         sv: "Albumtitelsplats",
@@ -64488,6 +64540,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       },
       body: {
         en: "Choose which axis to display said album name on",
+        de: "W\xE4hle, auf welcher Achse der Albumtitel angezeigt werden soll",
         es: "Elige en qu\xE9 eje mostrar el nombre del \xE1lbum",
         it: "Seleziona su quale asse mostrare il nome dell\u2019album",
         sv: "V\xE4lj vilken axis att visa albumtitel p\xE5",
@@ -64497,6 +64550,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       },
       column: {
         en: "Place below title and artist",
+        de: "Unter Titel und K\xFCnstler:in anordnen",
         es: "Colocar debajo del t\xEDtulo y artista",
         it: "Disponi sotto titolo e artista",
         sv: "Placera under l\xE5ttitel och artist",
@@ -64506,6 +64560,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       },
       row: {
         en: "Place to the side of title and artist",
+        de: "Neben Titel und K\xFCnstler:in anordnen",
         es: "Colocar al lado del t\xEDtulo y artista",
         it: "Disponi a fianco di titolo e artista",
         sv: "Placera bredvid l\xE5ttitel och artist",
@@ -64517,6 +64572,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     expand_tracks: {
       name: {
         en: "Show associated album for tracks",
+        de: "Zugeh\xF6riges Album f\xFCr Titel anzeigen",
         es: "Mostrar \xE1lbum asociado al tema",
         it: "Mostra album associato per i brani",
         sv: "Visa associerade album f\xF6r l\xE5tar",
@@ -64526,6 +64582,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       },
       body: {
         en: "Places the track\u2019s associated album name if there\u2019s room",
+        de: "Zeigt den Namen des zugeh\xF6rigen Albums des Titels an, wenn genug Platz vorhanden ist",
         es: "Coloca el nombre del \xE1lbum asociado al tema si hay espacio",
         it: "Inserisce il nome dell\u2019album associato ai brani se c\u2019\xE8 spazio",
         sv: "Placerar l\xE5tens associerade album om det finns plats",
@@ -64536,8 +64593,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     expand_tracks_when_active: {
       en: "Only when actively scrobbling",
+      de: "Nur beim aktiven Scrobbeln",
       es: "Solo activo cuando se hace scrobbling",
-      de: "Nur w\xE4hrend des aktiven Scrobbelns",
       it: "Solo quando si sta effettuando lo scrobbling",
       sv: "Endast n\xE4r du skrobblar",
       ru: "\u0422\u043E\u043B\u044C\u043A\u043E \u043F\u0440\u0438 \u0430\u043A\u0442\u0438\u0432\u043D\u043E\u043C \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u0438\u043D\u0433\u0435",
@@ -64546,8 +64603,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     expand_tracks_always: {
       en: "Always when possible",
-      es: "Siempre cuando sea posible",
       de: "Immer, wenn m\xF6glich",
+      es: "Siempre cuando sea posible",
       it: "Sempre quando possibile",
       sv: "Alltid, n\xE4r det \xE4r m\xF6jligt",
       ru: "\u0412\u0441\u0435\u0433\u0434\u0430, \u043A\u043E\u0433\u0434\u0430 \u0432\u043E\u0437\u043C\u043E\u0436\u043D\u043E",
@@ -64682,6 +64739,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     display_name: {
       name: {
         en: "Display name",
+        de: "Anzeigename",
         es: "Nombre para mostrar",
         it: "Nome visualizzato",
         sv: "Visningsnamn",
@@ -64691,6 +64749,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       },
       body: {
         en: "Changes your name on your profile, with your real @username shown below",
+        de: "\xC4ndert deinen Namen in deinem Profil, mit deinem echten @Benutzernamen darunter",
         es: "Cambia tu nombre en tu perfil, con tu nombre de usuario mostrado debajo",
         it: "Cambia il tuo nome sul tuo profilo, con il tuo @username visualizzato sotto",
         sv: "\xC4ndrar namnet p\xE5 din profil och l\xE4gger ditt riktiga @anv\xE4ndarnamn under\xE5t",
@@ -64891,6 +64950,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     redirected_from: {
       en: "Redirected from",
+      de: "Weitergeleitet von",
       es: "Redireccionado de",
       it: "Reindirizzato da",
       sv: "Omdirigerades fr\xE5n",
@@ -65368,6 +65428,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     font_style: {
       en: "Font style",
+      de: "Schriftstil",
       es: "Estilo de fuente",
       it: "Stile del font",
       sv: "Typsnittsstil",
@@ -65376,6 +65437,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pl: "Styl czcionki",
       solid: {
         en: "Solid",
+        de: "Fest",
         es: "S\xF3lido",
         it: "Solido",
         sv: "Fast",
@@ -65385,6 +65447,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       },
       pop: {
         en: "Pop",
+        de: "Pop",
         es: "Pop",
         it: "Pop",
         sv: "Poppande",
@@ -65393,10 +65456,12 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         pl: "Pop"
       },
       out: {
-        en: "Outline"
+        en: "Outline",
+        de: "Umriss"
       },
       glow: {
         en: "Glow",
+        de: "Leuchten",
         es: "Brillo",
         it: "Brillante",
         sv: "Gl\xF6dande",
@@ -65504,6 +65569,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       // not sure by what was meant by "fitting for your language"
       // but i used a sentence that has all letters on rus language, like an english example
       en: "The quick brown fox jumps over the lazy dog \u{1F3F3}\uFE0F\u200D\u26A7\uFE0F",
+      de: "Franz jagt im komplett verwahrlosten Taxi quer durch Bayern \u{1F3F3}\uFE0F\u200D\u26A7\uFE0F",
       es: "El veloz murci\xE9lago hind\xFA com\xEDa feliz cardillo y kiwi. La cig\xFCe\xF1a tocaba el saxof\xF3n detr\xE1s del palenque de paja. \u{1F3F3}\uFE0F\u200D\u26A7\uFE0F",
       sv: "Flygande b\xE4ckasiner s\xF6ka hwila p\xE5 mjuka tuvor qxz \u{1F3F3}\uFE0F\u200D\u26A7\uFE0F",
       ru: "\u0421\u044A\u0435\u0448\u044C \u0435\u0449\u0451 \u044D\u0442\u0438\u0445 \u043C\u044F\u0433\u043A\u0438\u0445 \u0444\u0440\u0430\u043D\u0446\u0443\u0437\u0441\u043A\u0438\u0445 \u0431\u0443\u043B\u043E\u043A, \u0434\u0430 \u0432\u044B\u043F\u0435\u0439 \u0447\u0430\u044E \u{1F3F3}\uFE0F\u200D\u26A7\uFE0F",
@@ -65889,6 +65955,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     applications: {
       en: "Applications",
+      de: "Anwendungen",
       es: "Aplicaciones",
       it: "Applicazioni",
       sv: "Applikationer",
@@ -65897,6 +65964,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     applications_intro: {
       en: "Connect your account to third-party services for a better scrobbling experience. Make sure you trust the services below.",
+      de: "Verbinde dein Konto mit Drittanbieterdiensten f\xFCr ein besseres Scrobbling-Erlebnis. Stelle sicher, dass du den unten aufgef\xFChrten Diensten vertraust.",
       es: "Conecta tu cuenta a servicios externos para una mejor experiencia al hacer scrobbling. Aseg\xFArate de que conf\xEDas en los servicios que hay debajo.",
       it: "Connetti il tuo account a servizi di terze parti per una migliore esperienza di scrobbling. Assicurati di fidarti dei servizi che seguono.",
       sv: "Anslut ditt konto till tredjepartstj\xE4nster f\xF6r b\xE4ttre skrobblingsupplevelse. Var s\xE4ker p\xE5 att du litar p\xE5 nedre tj\xE4nster.",
@@ -65923,6 +65991,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     suggested: {
       en: "Suggested",
+      de: "Vorgeschlagen",
       es: "Sugerido",
       it: "Suggerito",
       sv: "F\xF6reslaget",
@@ -66006,7 +66075,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     ensure_you_trust: {
       // API applications
-      // last.fm/settings/applications
+      // Last.fm/settings/applications
       en: "Make sure you trust this application",
       de: "Stelle sicher, dass du dieser Anwendung vertraust",
       es: "Aseg\xFArate de que conf\xEDas en esta aplicaci\xF3n",
@@ -66036,7 +66105,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     manage_applications: {
       // API applications
-      // last.fm/settings/applications
+      // Last.fm/settings/applications
       en: "Manage applications",
       de: "Anwendungen verwalten",
       es: "Gestionar aplicaciones",
@@ -66115,6 +66184,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     own_plays: {
       // tracklist source menu option that enables the thing below
       en: "Own plays",
+      de: "Eigene Plays",
       es: "Reproducciones personales",
       it: "Riproduzioni personali",
       sv: "Egna spelningar",
@@ -66561,6 +66631,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     display_name_styles: {
       name: {
         en: "Show display name styles",
+        de: "Zeige Anzeigenamen-Stile",
         es: "Mostrar estilos de nombre a mostrar",
         it: "Mostra gli stili del nome visualizzato",
         sv: "Se visningsnamnsstiler",
@@ -66569,6 +66640,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       },
       body: {
         en: "Sponsors can choose a custom font and shadow style for their profile name",
+        de: "Sponsoren k\xF6nnen eine benutzerdefinierte Schriftart und einen Schattenstil f\xFCr ihren Profilnamen w\xE4hlen",
         es: "Los patrocinadores pueden elegir una fuente y estilo de sombra personalizados para su nombre de perfil",
         it: "Gli sponsor possono scegliere un font e uno stile d\u2019ombra personalizzato per il loro nome profilo",
         sv: "Sponsorer kan v\xE4lja valfri typsnitt och skugga f\xF6r deras profilnamn",
@@ -66654,6 +66726,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     no_title: {
       en: "No title",
+      de: "Kein Titel",
       es: "Sin t\xEDtulo",
       it: "Senza titolo",
       sv: "Ingen titel",
@@ -66671,6 +66744,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     no_description: {
       en: "No description",
+      de: "Keine Beschreibung",
       es: "Sin descripci\xF3n",
       it: "Nessuna descrizione",
       sv: "Ingen beskrivning",
@@ -66741,7 +66815,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     saved: {
       // saved/bookmarked photos
       en: "Saved",
-      de: "Gespeichert",
+      de: "Markiert",
       es: "Guardado",
       it: "Salvate",
       pt: "Salvo",
@@ -66750,6 +66824,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     remove_save: {
       en: "Remove save",
+      de: "Markierung entfernen",
       es: "Remover guardado",
       it: "Rimuovi salvataggio",
       sv: "Ta bort bokm\xE4rkning",
@@ -66758,7 +66833,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     no_images_saved: {
       en: "No photos saved",
-      de: "Keine Bilder gespeichert",
+      de: "Keine Bilder markiert",
       es: "No hay fotos guardadas",
       it: "Nessuna immagine salvata",
       pt: "Nenhuma foto salva",
@@ -66768,7 +66843,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     going: {
       // going as in attending an event
       //
-      // last.fm official spanish translation uses plural version of word when there's more than one person going -soleil
+      // Last.fm official spanish translation uses plural version of word when there's more than one person going -soleil
       en: "Going",
       de: "Zugesagt",
       es: "Ir\xE1n",
@@ -67012,6 +67087,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     waiting_for_images: {
       en: "Waiting for images",
+      de: "Warte auf Bilder",
       es: "Esperando im\xE1genes",
       it: "In attesa delle immagini",
       pt: "Aguardando imagens",
@@ -68037,6 +68113,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     profile_font: {
       name: {
         en: "Profile name font",
+        de: "Schriftart des Profilnamens",
         es: "Fuente del nombre de perfil",
         it: "Font del nome del profilo",
         ru: "\u0428\u0440\u0438\u0444\u0442 \u0438\u043C\u0435\u043D\u0438 \u043F\u0440\u043E\u0444\u0438\u043B\u044F",
@@ -68044,6 +68121,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       },
       body: {
         en: "Customise the font family used for your username, only visible on your profile",
+        de: "Passe die Schriftart an, die f\xFCr deinen Benutzernamen verwendet wird. Nur sichtbar auf deinem Profil",
         es: "Customiza la familia tipogr\xE1fica usada en tu nombre de usuario, solo visible en tu perfil",
         it: "Personalizza la famiglia di font utilizzata per il tuo nome utente, visibile solo sul tuo profilo",
         ru: "\u041D\u0430\u0441\u0442\u0440\u043E\u0439\u0442\u0435 \u0441\u0435\u043C\u0435\u0439\u0441\u0442\u0432\u043E \u0448\u0440\u0438\u0444\u0442\u043E\u0432, \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0435\u043C\u043E\u0435 \u0434\u043B\u044F \u0432\u0430\u0448\u0435\u0433\u043E \u0438\u043C\u0435\u043D\u0438 \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F; \u043E\u043D\u043E \u0431\u0443\u0434\u0435\u0442 \u0432\u0438\u0434\u043D\u043E \u0442\u043E\u043B\u044C\u043A\u043E \u0432 \u0432\u0430\u0448\u0435\u043C \u043F\u0440\u043E\u0444\u0438\u043B\u0435",
@@ -68051,6 +68129,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       },
       reminder: {
         en: "Changed your name font, don\u2019t forget to save!",
+        de: "Du hast die Schriftart deines Namens ge\xE4ndert, vergiss\u2019 nicht zu speichern!",
         es: "Fuente del nombre cambiada, \xA1no te olvides de guardar!",
         it: "Hai cambiato il font del tuo nome, non dimenticarti di salvare!",
         ru: "\u0428\u0440\u0438\u0444\u0442 \u0438\u043C\u0435\u043D\u0438 \u0438\u0437\u043C\u0435\u043D\u0435\u043D, \u043D\u0435 \u0437\u0430\u0431\u0443\u0434\u044C\u0442\u0435 \u0441\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C!",
@@ -68419,6 +68498,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     lyrics: {
       // lyrics
       en: "Lyrics",
+      de: "Songtext",
       es: "Letra",
       it: "Testo",
       pt: "Letra",
@@ -68427,6 +68507,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       name: {
         // the game
         en: "Lyrics",
+        de: "Songtexte",
         es: "Letra",
         it: "Testo",
         pt: "Letra",
@@ -68606,7 +68687,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       ru: "\u0412\u0437\u0430\u0438\u043C\u043D\u044B\u0435 \u043F\u043E\u0434\u043F\u0438\u0441\u043A\u0438"
     },
     missing_component: {
-      // cases when last.fm simply doesn't provide a tasteometer or other things
+      // cases when Last.fm simply doesn't provide a tasteometer or other things
       en: "Last.fm failed to load this component",
       de: "Last.fm konnte diese Komponente nicht laden",
       es: "Last.fm fall\xF3 al cargar este componente",
@@ -68616,7 +68697,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     last_scrobbled_replace: {
       // dont translate this, its replaced
-      // literally word for word from the last.fm text
+      // literally word for word from the Last.fm text
       // for use in code
       en: "{u} last scrobbled\u2026",
       de: "{u} scrobbelte zuletzt\u2026",
@@ -68987,7 +69068,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       },
       warning: {
         en: "This setting should be turned off to ensure scrobbles are correctly stored for each artist.",
-        de: "Diese Einstellung sollte deaktiviert werden, um sicherzustellen, dass Scrobbles f\xFCr jeden K\xFCnstler korrekt gespeichert werden.",
+        de: "Diese Einstellung sollte deaktiviert werden, um sicherzustellen, dass Scrobbles f\xFCr jeden K\xFCnstler/jede K\xFCnstlerin korrekt gespeichert werden.",
         pt: "Esta configura\xE7\xE3o deve ser desativada para garantir que os scrobbles sejam armazenados corretamente para cada artista.",
         it: "Questa impostazione dovrebbe essere disattivata per assicurarsi che gli scrobbling siano correttamente memorizzati per ciascun artista.",
         es: "Esta opci\xF3n deber\xEDa estar desactivada para garantizar que los scrobblings se almacenen correctamente para cada artista.",
@@ -68996,6 +69077,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       },
       false: {
         en: "Do not apply corrections (recommended)",
+        de: "Keine Korrekturen anwenden (empfohlen)",
         es: "No aplicar correcciones (recomendado)",
         it: "Non applicare correzioni (consigliato)",
         pt: "N\xE3o aplicar corre\xE7\xF5es (recomendado)",
@@ -69004,6 +69086,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       },
       true: {
         en: "Auto correct my scrobbles (legacy)",
+        de: "Meine Scrobbles automatisch korrigieren (veraltet)",
         es: "Corregir autom\xE1ticamente mis scrobblings (cl\xE1sico)",
         it: "Correggi automaticamente i miei scrobbling (obsoleto)",
         sv: "Autokorrigera mina skrobblingar (gammal)",
@@ -69014,6 +69097,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     preferred_affiliate: {
       name: {
         en: "Preferred playback source",
+        de: "Bevorzugte Wiedergabequelle",
         es: "Fuente de reproducci\xF3n preferida",
         it: "Sorgente di riproduzione preferita",
         pt: "Fonte de reprodu\xE7\xE3o preferida",
@@ -69022,6 +69106,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       },
       body: {
         en: "Choose which service to use when interacting with playables across the site",
+        de: "W\xE4hle aus, welchen Dienst du beim Interagieren mit abspielbaren Inhalten auf der gesamten Seite verwenden m\xF6chtest",
         es: "Elige cu\xE1l servicio usar al interactuar con elementos reproducibles a trav\xE9s del sitio",
         it: "Seleziona quale servizio utilizzare all\u2019interazione con elementi riproducibili in tutto il sito",
         sv: "V\xE4lj vilken service att anv\xE4nda n\xE4r du spelar upp l\xE5tar",
@@ -69087,6 +69172,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     debug: {
       en: "Debug",
+      de: "Debug",
       es: "Debug",
       it: "Debug",
       pt: "Debug",
@@ -69187,6 +69273,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     romanise_require: {
       en: "Romanisation requires either lotus corrections or smart song tags be enabled",
+      de: "Die Romanisierung erfordert, dass entweder lotus-Korrekturen oder intelligente Song-Tags aktiviert sind",
       es: "La romanizaci\xF3n requiere que las correcciones de lotus o los tags inteligentes de temas est\xE9n activos",
       it: "La romanizzazione richiede che le correzioni lotus o i tag intelligenti per i brani siano attivati",
       pt: "A romaniza\xE7\xE3o requer que as corre\xE7\xF5es lotus ou as tags inteligentes de m\xFAsicas estejam ativas",
@@ -69234,6 +69321,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     amount_translated: {
       // number of strings translated
       en: "{c} translated",
+      de: "{c} \xFCbersetzt",
       es: "{c} traducidos",
       it: "{c} tradotte",
       pt: "{c} traduzidos",
@@ -69243,6 +69331,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     missing_translated: {
       // number of strings missing
       en: "{c} missing",
+      de: "{c} fehlen",
       es: "{c} faltantes",
       it: "{c} mancanti",
       pt: "{c} ausentes",
@@ -69252,6 +69341,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     simulate_scroll: {
       name: {
         en: "Simulate horizontal scrolling",
+        de: "Horizontales Scrollen simulieren",
         es: "Simular scrolling horizontal",
         it: "Simula scorrimento orizzontale",
         pt: "Simular rolagem horizontal",
@@ -69260,6 +69350,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       },
       body: {
         en: "Only recommended for desktop devices",
+        de: "Nur f\xFCr Desktop-Ger\xE4te empfohlen",
         es: "Recomendado solo en dispositivos de escritorio",
         it: "Raccomandato solo per dispositivi desktop",
         pt: "Recomendado apenas para computadores de mesa",
@@ -69269,6 +69360,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     credits: {
       en: "Credits",
+      de: "Credits",
       es: "Cr\xE9ditos",
       it: "Crediti",
       pt: "Cr\xE9ditos",
@@ -69277,6 +69369,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     view_credits: {
       en: "View credits",
+      de: "Credits ansehen",
       es: "Ver cr\xE9ditos",
       it: "Visualizza crediti",
       pt: "Ver cr\xE9ditos",
@@ -69285,6 +69378,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     credits_for_value: {
       en: "Credits for {v}",
+      de: "Credits f\xFCr {v}",
       es: "Cr\xE9ditos para {v}",
       it: "Crediti per {v}",
       pt: "Cr\xE9ditos para {v}",
@@ -69295,6 +69389,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       // as in git branches
       name: {
         en: "Choose branch",
+        de: "Branch w\xE4hlen",
         es: "Elegir rama",
         it: "Seleziona branch",
         // we are talking about git branches, leaving it as is to avoid creating confusion for people who will want to change this ~cuto
@@ -69304,6 +69399,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       },
       body: {
         en: "Default release branch is \u2018uwu\u2019, do not change unless you know what you\u2019re doing",
+        de: "Der Standard-Release-Branch ist \u201Euwu\u201C, \xE4ndere ihn nicht, wenn du nicht wei\xDFt, was du tust",
         es: "La rama de lanzamiento actual es \u2018uwu\u2019, no la cambies a menos de que sepas lo que haces",
         it: "Il branch release predefinito \xE8 \u2018uwu\u2019, non cambiare questo valore se non si sa cosa si sta facendo",
         sv: "Standardbranshen \xE4r \u2018uwu\u2019, \xE4ndra inte om du inte vet vad du g\xF6r",
@@ -69313,6 +69409,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     log_in: {
       en: "Log in",
+      de: "Einloggen",
       es: "Iniciar sesi\xF3n",
       it: "Accedi",
       pt: "Iniciar Sess\xE3o",
@@ -69321,6 +69418,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     sign_up: {
       en: "Sign up",
+      de: "Registrieren",
       es: "Registrarse",
       it: "Registrati",
       pt: "Registrar-se",
@@ -69330,6 +69428,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     plot: {
       name: {
         en: "Plot",
+        de: "Diagramm",
         es: "Plot",
         it: "Grafico",
         sv: "Rita",
@@ -69338,6 +69437,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       },
       body: {
         en: "Create graphs from user libraries",
+        de: "Erstelle Diagramme aus Benutzerbibliotheken",
         es: "Crea gr\xE1ficos con base en las colecciones de usuario",
         it: "Crea grafici dalle librerie degli utenti",
         pt: "Crie gr\xE1ficos a partir de bibliotecas de usu\xE1rios",
@@ -69347,6 +69447,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     your_recent_30_days: {
       en: "Your recent 30 days",
+      de: "Deine letzten 30 Tage",
       es: "Tus \xFAltimos 30 d\xEDas",
       it: "I tuoi ultimi 30 giorni",
       pt: "Seus \xFAltimos 30 dias",
@@ -69355,6 +69456,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     value_this_month: {
       // number of scrobbles
       en: "{v} this month",
+      de: "{v} diesen Monat",
       es: "{v} este mes",
       it: "{v} questo mese",
       pt: "{v} este m\xEAs",
@@ -69371,6 +69473,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     menu_replacement: {
       name: {
         en: "Replace native browser right-click menus",
+        de: "Native Rechtsklick-Men\xFCs des Browsers ersetzen",
         es: "Reemplazar men\xFAs de clic derecho nativos del navegador",
         it: "Sostituisci i menu contestuali nativi del browser",
         pt: "Substituir menus de clique direito nativos do navegador",
@@ -69378,6 +69481,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       },
       body: {
         en: "Provide bleh context-specific actions when right-clicking",
+        de: "bleh-kontextspezifische Aktionen beim Rechtsklick anzeigen",
         es: "Proporciona acciones espec\xEDficas de bleh al hacer clic derecho",
         it: "Fornisci azioni specifiche a bleh nei menu contestuali",
         pt: "Fornecer a\xE7\xF5es espec\xEDficas do bleh ao clicar com o bot\xE3o direito"
@@ -69385,6 +69489,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     you_have_new_badges: {
       en: "You have new badges!",
+      de: "Du hast neue Abzeichen!",
       es: "\xA1Tienes nuevos emblemas!",
       it: "Hai dei nuovi distintivi!",
       pt: "Voc\xEA tem novas ins\xEDgnias!",
@@ -69393,18 +69498,21 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     translator: {
       name: {
         en: "Show translator tools",
+        de: "\xDCbersetzer-Werkzeuge anzeigen",
         es: "Mostrar herramientas de traducci\xF3n",
         pt: "Mostrar ferramentas de tradu\xE7\xE3o",
         ru: "\u041F\u043E\u043A\u0430\u0437\u0430\u0442\u044C \u0438\u043D\u0441\u0442\u0440\u0443\u043C\u0435\u043D\u0442\u044B \u043F\u0435\u0440\u0435\u0432\u043E\u0434\u0447\u0438\u043A\u0430"
       },
       body: {
         en: "View expanded details on all languages for use when translating",
+        de: "Erweiterte Details zu allen Sprachen ansehen, die bei der \xDCbersetzung verwendet werden k\xF6nnen",
         es: "Ve detalles ampliados de todos los idiomas para usar al traducir",
         pt: "Veja detalhes expandidos sobre todos os idiomas para uso ao traduzir"
       }
     },
     translate: {
       en: "Translate",
+      de: "\xDCbersetzen",
       es: "Traducir",
       pt: "Traduza",
       ru: "\u041F\u0435\u0440\u0435\u0432\u0435\u0441\u0442\u0438"
@@ -69412,11 +69520,13 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     translation_key: {
       // a key such as 'you_have_new_badges' above
       en: "Translation key",
+      de: "\xDCbersetzungsschl\xFCssel",
       es: "Clave de traducci\xF3n",
       pt: "Chave de tradu\xE7\xE3o"
     },
     original: {
       en: "Original",
+      de: "Original",
       es: "Original",
       pt: "Original",
       ru: "\u041E\u0440\u0438\u0433\u0438\u043D\u0430\u043B"
@@ -69425,6 +69535,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       // (claire) is listening to
       // (song name)
       en: "{u} is listening to",
+      de: "{u} h\xF6rt gerade",
       es: "{u} est\xE1 escuchando",
       pt: "{u} est\xE1 ouvindo",
       ru: "{u} \u0441\u043B\u0443\u0448\u0430\u0435\u0442"
@@ -69433,6 +69544,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       // (claire) listened (5 hours ago)
       // (song name)
       en: "{u} listened {time}",
+      de: "{u} h\xF6rte {time}",
       es: "{u} escuch\xF3 {time} a",
       pt: "{u} ouviu h\xE1 {time}",
       ru: "{u} \u043F\u043E\u0441\u043B\u0443\u0448\u0430\u043B {time}"
@@ -69441,10 +69553,12 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       name: {
         en: "This page is not properly supported in bleh, but..",
         es: "Esta p\xE1gina no es compatible con bleh, pero...",
+        de: "Diese Seite wird in bleh nicht richtig unterst\xFCtzt, aber...",
         ru: "\u042D\u0442\u043E \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u0430 \u043D\u0435 \u043F\u043E\u0434\u0434\u0435\u0440\u0436\u0438\u0432\u0430\u0435\u0442\u0441\u044F \u0432 bleh, \u043D\u043E..."
       },
       body: {
         en: "If you are a Last.fm Pro subscriber, you can view your current active track in your profile menu at all times",
+        de: "Wenn du ein Last.fm Pro-Abonnent bist, kannst du deinen aktuell aktiven Titel jederzeit in deinem Profilmen\xFC ansehen",
         es: "Si eres un suscriptor de Last.fm Pro, puedes ver tu tema activo actual en el men\xFA de tu perfil en cualquier momento",
         ru: "\u0415\u0441\u043B\u0438 \u0432\u044B \u044F\u0432\u043B\u044F\u0435\u0442\u0435\u0441\u044C \u043F\u043E\u0434\u043F\u0438\u0441\u0447\u0438\u043A\u043E\u043C Last.fm Pro, \u0432\u044B \u043C\u043E\u0436\u0435\u0442\u0435 \u0432 \u043B\u044E\u0431\u043E\u0435 \u0432\u0440\u0435\u043C\u044F \u043F\u0440\u043E\u0441\u043C\u0430\u0442\u0440\u0438\u0432\u0430\u0442\u044C \u0442\u0435\u043A\u0443\u0449\u0438\u0439 \u0430\u043A\u0442\u0438\u0432\u043D\u044B\u0439 \u0442\u0440\u0435\u043A \u0432 \u043C\u0435\u043D\u044E \u0441\u0432\u043E\u0435\u0433\u043E \u043F\u0440\u043E\u0444\u0438\u043B\u044F"
       }
