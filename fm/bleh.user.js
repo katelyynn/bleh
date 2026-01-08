@@ -37578,7 +37578,7 @@
       });
     }
   }
-  function open_starred_friend_window() {
+  function open_starred_friend_window(friend_func = null) {
     dialog({
       id: "starred_friend",
       title: tl2(trans.close_friends),
@@ -37592,9 +37592,12 @@
             save_setting("starred_friend", "");
           checkup_friend_cache(val);
           starred.update(select_prepare_list([{ value: "", text: tl2(trans.none) }, ...val]));
+          if (friend_func) friend_func();
         }
       })}
-                ${starred = setting({ id: "starred_friend", list: select_prepare_list([{ value: "", text: tl2(trans.none) }, ...settings.friends]) })}
+                ${starred = setting({ id: "starred_friend", list: select_prepare_list([{ value: "", text: tl2(trans.none) }, ...settings.friends]), func: () => {
+        if (friend_func) friend_func();
+      } })}
             </div>
             <p class="card-tip">${tl2(trans.friend_difference)}</p>
         `
@@ -56233,11 +56236,14 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
             `
       );
     }
-    const friends2 = settings.friends.filter(
-      (friend) => friend != settings.starred_friend
-    );
-    page.structure.side.appendChild(html.node`
-        <section class="side-actions">
+    const friends_panel = html.node`
+        <section class="side-actions" />
+    `;
+    render_friends();
+    page.structure.side.appendChild(friends_panel);
+    function render_friends() {
+      const friends2 = settings.friends.filter((friend) => friend != settings.starred_friend);
+      render(friends_panel, html`
             <a class="btn side-action" data-type="profile" href="${root}user/${auth.name}/library/music/${redirect()}${sanitise(page.name)}">
                 ${auth.name}
             </a>
@@ -56249,22 +56255,22 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                 </span>
             </a>
             ` : ""}
-            ${friends2.map(
-      (friend) => html.node`
+            ${friends2.map((friend) => html.node`
             <a class="btn side-action" data-type="profile" href="${root}user/${friend}/library/music/${redirect()}${sanitise(page.name)}">
                 ${friend}
             </a>
-            `
-    )}
-            <a class="btn side-action" data-type="add" href="${root}bleh/profile">
-                ${tl2(trans.add_friends)}
-            </a>
+            `)}
+            <button class="btn side-action" data-type="edit" onclick=${() => open_starred_friend_window(() => {
+        render_friends();
+      })}>
+                ${tl2(trans.edit_close_friends)}
+            </button>
             <div class="sep" />
             <button class="btn side-action" data-type="add" onclick=${() => other_listener(sanitise(page.name))}>
                 ${tl2(trans.custom)}
             </button>
-        </section>
-    `);
+        `);
+    }
   }
 
   // src/pages/bleh_setup.js
@@ -60611,6 +60617,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     add_friends: {
       en: "Add close friends",
       de: "Engen Freunde hinzuf\xFCgen"
+    },
+    edit_close_friends: {
+      en: "Edit close friends"
     },
     starred_friend: {
       name: {

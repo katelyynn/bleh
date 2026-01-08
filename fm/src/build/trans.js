@@ -835,6 +835,9 @@ export const trans = {
         en: 'Add close friends',
         de: 'Engen Freunde hinzufügen'
     },
+    edit_close_friends: {
+        en: 'Edit close friends'
+    },
     starred_friend: {
         name: {
             en: 'Starred friend',

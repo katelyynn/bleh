@@ -2139,7 +2139,7 @@ export async function checkup_friend_cache(list = settings.friends) {
     }
 }
 
-export function open_starred_friend_window() {
+export function open_starred_friend_window(friend_func = null) {
     dialog({
         id: 'starred_friend',
         title: tl(trans.close_friends),
@@ -2155,9 +2155,13 @@ export function open_starred_friend_window() {
                         checkup_friend_cache(val);
 
                         starred.update(select_prepare_list([{ value: '', text: tl(trans.none) }, ...val]));
+
+                        if (friend_func) friend_func();
                     }
                 })}
-                ${starred = setting({ id: 'starred_friend', list: select_prepare_list([{ value: '', text: tl(trans.none) }, ...settings.friends]) })}
+                ${starred = setting({ id: 'starred_friend', list: select_prepare_list([{ value: '', text: tl(trans.none) }, ...settings.friends]), func: () => {
+                    if (friend_func) friend_func();
+                } })}
             </div>
             <p class="card-tip">${tl(trans.friend_difference)}</p>
         `

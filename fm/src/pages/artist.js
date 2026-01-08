@@ -37,6 +37,7 @@ import { expand_avatar } from '../avatar.js';
 import { other_listener } from '../components/profile_shortcut.js';
 import { setting } from '../components/settings.js';
 import tippy from 'tippy.js';
+import { open_starred_friend_window } from './profile.js';
 
 export function bleh_artists() {
     let artist_header = document.body.querySelector('.header-new--artist');
@@ -639,42 +640,44 @@ function bleh_listeners() {
         );
     }
 
-    const friends = settings.friends.filter(
-        (friend) => friend != settings.starred_friend
-    );
-
     // i could just render away the ad here but courtesy
-    page.structure.side.appendChild(html.node`
-        <section class="side-actions">
+    const friends_panel = html.node`
+        <section class="side-actions" />
+    `;
+
+    render_friends();
+
+    page.structure.side.appendChild(friends_panel);
+
+    function render_friends() {
+        const friends = settings.friends.filter(friend => friend != settings.starred_friend);
+
+        render(friends_panel, html`
             <a class="btn side-action" data-type="profile" href="${root}user/${auth.name}/library/music/${redirect()}${sanitise(page.name)}">
                 ${auth.name}
             </a>
-            ${
-                settings.starred_friend != '' ?
-                    html.node`
+            ${settings.starred_friend != '' ? html.node`
             <a class="btn side-action" data-type="profile" href="${root}user/${settings.starred_friend}/library/music/${redirect()}${sanitise(page.name)}">
                 ${settings.starred_friend}
                 <span class="star-icon colourful">
                     <span class="bleh-icon" />
                 </span>
             </a>
-            `
-                :   ''
-            }
-            ${friends.map(
-                (friend) => html.node`
+            ` : ''}
+            ${friends.map(friend => html.node`
             <a class="btn side-action" data-type="profile" href="${root}user/${friend}/library/music/${redirect()}${sanitise(page.name)}">
                 ${friend}
             </a>
-            `
-            )}
-            <a class="btn side-action" data-type="add" href="${root}bleh/profile">
-                ${tl(trans.add_friends)}
-            </a>
+            `)}
+            <button class="btn side-action" data-type="edit" onclick=${() => open_starred_friend_window(() => {
+                render_friends();
+            })}>
+                ${tl(trans.edit_close_friends)}
+            </button>
             <div class="sep" />
             <button class="btn side-action" data-type="add" onclick=${() => other_listener(sanitise(page.name))}>
                 ${tl(trans.custom)}
             </button>
-        </section>
-    `);
+        `);
+    }
 }
