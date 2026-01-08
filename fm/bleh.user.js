@@ -56245,11 +56245,11 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       const friends2 = settings.friends.filter((friend) => friend != settings.starred_friend);
       render(friends_panel, html`
             <a class="btn side-action" data-type="profile" href="${root}user/${auth.name}/library/music/${redirect()}${sanitise(page.name)}">
-                ${auth.name}
+                <span><span class="at">@</span>${auth.name}</span>
             </a>
             ${settings.starred_friend != "" ? html.node`
             <a class="btn side-action" data-type="profile" href="${root}user/${settings.starred_friend}/library/music/${redirect()}${sanitise(page.name)}">
-                ${settings.starred_friend}
+                <span><span class="at">@</span>${settings.starred_friend}</span>
                 <span class="star-icon colourful">
                     <span class="bleh-icon" />
                 </span>
@@ -56257,7 +56257,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
             ` : ""}
             ${friends2.map((friend) => html.node`
             <a class="btn side-action" data-type="profile" href="${root}user/${friend}/library/music/${redirect()}${sanitise(page.name)}">
-                ${friend}
+                <span><span class="at">@</span>${friend}</span>
             </a>
             `)}
             <button class="btn side-action" data-type="edit" onclick=${() => open_starred_friend_window(() => {
