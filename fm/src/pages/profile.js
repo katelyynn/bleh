@@ -2038,7 +2038,14 @@ export function bleh_profile_chart_render(
         );
     });
 
-    panel.querySelector('.this-month').textContent = tl(trans.value_this_month, { v: parseInt(values[values.length - 1]).toLocaleString(lang) });
+    const last_month = parseInt(values[values.length - 2]);
+    const this_month = parseInt(values[values.length - 1]);
+    const diff = this_month - last_month;
+
+    render(panel.querySelector('.this-month'), html`
+        ${tl(trans.value_this_month, { v: this_month.toLocaleString(lang) })}
+        <span class="diff">(${tl(trans[diff > 0 ? 'value_more' : 'value_less'], { v: diff > 0 ? diff.toLocaleString(lang) : Math.abs(diff).toLocaleString(lang) })})</span>
+    `);
 
     prep_chart_colours();
 

@@ -9535,6 +9535,14 @@ export const trans = {
         pt: '{v} este mês',
         ru: '{v} этот месяц'
     },
+    value_less: {
+        // 50 less than last month
+        en: '{v} less'
+    },
+    value_more: {
+        // 50 more than last month
+        en: '{v} more'
+    },
     menu_replacement: {
         name: {
             en: 'Replace native browser right-click menus',

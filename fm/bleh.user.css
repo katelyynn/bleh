@@ -1386,6 +1386,10 @@
             --grid-colour-shadow-override: none;
         }
 
+        &[data-bleh--accessible_name_colours="true"] > body {
+            --name-colour: hsl(var(--c1));
+        }
+
         &[data-bleh--season="halloween"] {
             --icon-16-profile: url("data:image/svg+xml;base64,PHN2ZyAgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiAgd2lkdGg9IjI0IiAgaGVpZ2h0PSIyNCIgIHZpZXdCb3g9IjAgMCAyNCAyNCIgIGZpbGw9Im5vbmUiICBzdHJva2U9ImN1cnJlbnRDb2xvciIgIHN0cm9rZS13aWR0aD0iMiIgIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgIHN0cm9rZS1saW5lam9pbj0icm91bmQiICBjbGFzcz0iaWNvbiBpY29uLXRhYmxlciBpY29ucy10YWJsZXItb3V0bGluZSBpY29uLXRhYmxlci1za3VsbCI+PHBhdGggc3Ryb2tlPSJub25lIiBkPSJNMCAwaDI0djI0SDB6IiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTEyIDRjNC40MTggMCA4IDMuMzU4IDggNy41YzAgMS45MDEgLS43NTUgMy42MzcgLTIgNC45NmwwIDIuNTRhMSAxIDAgMCAxIC0xIDFoLTEwYTEgMSAwIDAgMSAtMSAtMXYtMi41NGMtMS4yNDUgLTEuMzIyIC0yIC0zLjA1OCAtMiAtNC45NmMwIC00LjE0MiAzLjU4MiAtNy41IDggLTcuNXoiIC8+PHBhdGggZD0iTTEwIDE3djMiIC8+PHBhdGggZD0iTTE0IDE3djMiIC8+PHBhdGggZD0iTTkgMTFtLTEgMGExIDEgMCAxIDAgMiAwYTEgMSAwIDEgMCAtMiAwIiAvPjxwYXRoIGQ9Ik0xNSAxMW0tMSAwYTEgMSAwIDEgMCAyIDBhMSAxIDAgMSAwIC0yIDAiIC8+PC9zdmc+");
             --icon-16-notifications: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1vdXRsaW5lIGljb24tdGFibGVyLXNrdWxsIj48cGF0aCBzdHJva2U9Im5vbmUiIGQ9Ik0wIDBoMjR2MjRIMHoiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJNMTIgNGM0LjQxOCAwIDggMy4zNTggOCA3LjVjMCAxLjkwMSAtLjc1NSAzLjYzNyAtMiA0Ljk2bDAgMi41NGExIDEgMCAwIDEgLTEgMWgtMTBhMSAxIDAgMCAxIC0xIC0xdi0yLjU0Yy0xLjI0NSAtMS4zMjIgLTIgLTMuMDU4IC0yIC00Ljk2YzAgLTQuMTQyIDMuNTgyIC03LjUgOCAtNy41eiIgLz48cGF0aCBkPSJNMTAgMTd2MyIgLz48cGF0aCBkPSJNMTQgMTd2MyIgLz48cGF0aCBkPSJNOSAxMW0tMSAwYTEgMSAwIDEgMCAyIDBhMSAxIDAgMSAwIC0yIDAiIC8+PHBhdGggZD0iTTE1IDExbS0xIDBhMSAxIDAgMSAwIDIgMGExIDEgMCAxIDAgLTIgMCIgLz48L3N2Zz4=");
@@ -1415,10 +1419,6 @@
         &[data-ff--verified="true"] {
             --icon-16-sponsor: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJjdXJyZW50Q29sb3IiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1maWxsZWQgaWNvbi10YWJsZXItcm9zZXR0ZS1kaXNjb3VudC1jaGVjayI+PHBhdGggc3Ryb2tlPSJub25lIiBkPSJNMCAwaDI0djI0SDB6IiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTEyLjAxIDIuMDExYTMuMiAzLjIgMCAwIDEgMi4xMTMgLjc5N2wuMTU0IC4xNDVsLjY5OCAuNjk4YTEuMiAxLjIgMCAwIDAgLjcxIC4zNDFsLjEzNSAuMDA4aDFhMy4yIDMuMiAwIDAgMSAzLjE5NSAzLjAxOGwuMDA1IC4xODJ2MWMwIC4yNyAuMDkyIC41MzMgLjI1OCAuNzQzbC4wOSAuMWwuNjk3IC42OThhMy4yIDMuMiAwIDAgMSAuMTQ3IDQuMzgybC0uMTQ1IC4xNTRsLS42OTggLjY5OGExLjIgMS4yIDAgMCAwIC0uMzQxIC43MWwtLjAwOCAuMTM1djFhMy4yIDMuMiAwIDAgMSAtMy4wMTggMy4xOTVsLS4xODIgLjAwNWgtMWExLjIgMS4yIDAgMCAwIC0uNzQzIC4yNThsLS4xIC4wOWwtLjY5OCAuNjk3YTMuMiAzLjIgMCAwIDEgLTQuMzgyIC4xNDdsLS4xNTQgLS4xNDVsLS42OTggLS42OThhMS4yIDEuMiAwIDAgMCAtLjcxIC0uMzQxbC0uMTM1IC0uMDA4aC0xYTMuMiAzLjIgMCAwIDEgLTMuMTk1IC0zLjAxOGwtLjAwNSAtLjE4MnYtMWExLjIgMS4yIDAgMCAwIC0uMjU4IC0uNzQzbC0uMDkgLS4xbC0uNjk3IC0uNjk4YTMuMiAzLjIgMCAwIDEgLS4xNDcgLTQuMzgybC4xNDUgLS4xNTRsLjY5OCAtLjY5OGExLjIgMS4yIDAgMCAwIC4zNDEgLS43MWwuMDA4IC0uMTM1di0xbC4wMDUgLS4xODJhMy4yIDMuMiAwIDAgMSAzLjAxMyAtMy4wMTNsLjE4MiAtLjAwNWgxYTEuMiAxLjIgMCAwIDAgLjc0MyAtLjI1OGwuMSAtLjA5bC42OTggLS42OTdhMy4yIDMuMiAwIDAgMSAyLjI2OSAtLjk0NHptMy42OTcgNy4yODJhMSAxIDAgMCAwIC0xLjQxNCAwbC0zLjI5MyAzLjI5MmwtMS4yOTMgLTEuMjkybC0uMDk0IC0uMDgzYTEgMSAwIDAgMCAtMS4zMiAxLjQ5N2wyIDJsLjA5NCAuMDgzYTEgMSAwIDAgMCAxLjMyIC0uMDgzbDQgLTRsLjA4MyAtLjA5NGExIDEgMCAwIDAgLS4wODMgLTEuMzJ6IiAvPjwvc3ZnPg==') !important;
         }
-    }
-
-    [data-bleh--accessible_name_colours="true"] body {
-        --name-colour: hsl(var(--c1));
     }
 
     /*     BASIC STYLES     */
@@ -15107,7 +15107,7 @@
     }
 
     .user-list-name > a {
-        color: hsl(var(--l3-c)) !important;
+        color: inherit !important;
     }
     .user-list-inner-wrap > .label {
         order: -1;
@@ -28312,6 +28312,11 @@
         &.copyright {
             order: 1;
         }
+
+        .setting-group + & {
+            margin-top: -10px;
+            padding: 0 12px;
+        }
     }
 
     .minis-header {
@@ -29574,6 +29579,11 @@
         --col: hsl(var(--c3));
         --mask-colour: hsl(var(--c3), 80%);
         --mask: var(--icon-16-trend);
+    }
+    .diff {
+        margin-left: 4px;
+        font-size: 13px;
+        opacity: 0.7;
     }
 
     [data-type="image"] {

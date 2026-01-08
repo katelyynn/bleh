@@ -37503,7 +37503,13 @@
         `${root}user/${page.name}/library` + period.getAttribute("href")
       );
     });
-    panel.querySelector(".this-month").textContent = tl2(trans.value_this_month, { v: parseInt(values[values.length - 1]).toLocaleString(lang) });
+    const last_month = parseInt(values[values.length - 2]);
+    const this_month = parseInt(values[values.length - 1]);
+    const diff = this_month - last_month;
+    render(panel.querySelector(".this-month"), html`
+        ${tl2(trans.value_this_month, { v: this_month.toLocaleString(lang) })}
+        <span class="diff">(${tl2(trans[diff > 0 ? "value_more" : "value_less"], { v: diff > 0 ? diff.toLocaleString(lang) : Math.abs(diff).toLocaleString(lang) })})</span>
+    `);
     prep_chart_colours();
     let scrobble_canvas_container = panel.querySelector(
       ".scrobble-canvas-container"
@@ -69327,6 +69333,14 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "{v} questo mese",
       pt: "{v} este m\xEAs",
       ru: "{v} \u044D\u0442\u043E\u0442 \u043C\u0435\u0441\u044F\u0446"
+    },
+    value_less: {
+      // 50 less than last month
+      en: "{v} less"
+    },
+    value_more: {
+      // 50 more than last month
+      en: "{v} more"
     },
     menu_replacement: {
       name: {
