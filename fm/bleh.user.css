@@ -10584,6 +10584,10 @@
 
         --icon-size: 16px;
 
+        display: flex;
+        align-items: center;
+        gap: 4px;
+
         &[aria-checked="true"],
         &[aria-selected="true"],
         .date-range-picker-preset--selected > &,
@@ -28314,8 +28318,12 @@
         }
 
         .setting-group + & {
-            margin-top: -10px;
+            margin-top: 5px;
             padding: 0 12px;
+        }
+
+        .bleh--panel > .setting-group + & {
+            margin-top: -10px;
         }
     }
 

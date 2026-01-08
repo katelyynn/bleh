@@ -54446,8 +54446,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       scrobble: {
         name: tl2(trans.scrobble),
         icon: "add",
-        action: () => submit_scrobble(),
-        new_release: true
+        action: () => submit_scrobble()
       }
     };
     const masthead = document.body.querySelector(".masthead");
@@ -54921,23 +54920,59 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           if (val == "notifications") count2 = notif_count;
           else if (val == "messages") count2 = inbox_count;
           if (count2) {
-            render(
-              elem,
-              html`
-                                            <div class="auth-dropdown-item-row">
-                                                <span
-                                                    class="auth-dropdown-item-left"
-                                                >
-                                                    ${formal.name}
-                                                </span>
-                                                <span
-                                                    class="auth-dropdown-item-right"
-                                                >
-                                                    ${count2}
-                                                </span>
-                                            </div>
-                                        `
-            );
+            render(elem, html`
+                                        <div class="auth-dropdown-item-row">
+                                            <span class="auth-dropdown-item-left">
+                                                ${formal.name}
+                                            </span>
+                                            <span class="auth-dropdown-item-right">
+                                                ${count2}
+                                            </span>
+                                        </div>
+                                    `);
+          }
+          if (val == "friends") {
+            elem = html.node`
+                                        <div class="button-combo">
+                                            <a class="dropdown-menu-clickable-item" data-type=${formal.icon} href=${formal.url}>
+                                                ${formal.name}
+                                            </a>
+                                            <div class="button-combo-sep" />
+                                            <button class="dropdown-menu-clickable-item chibi" data-type="continue" onclick=${() => {
+              const friends2 = settings.friends.filter((friend) => friend != settings.starred_friend);
+              render(page_2, html``);
+              render(page_2, html`
+                                                    <button class="dropdown-menu-clickable-item" data-type="back" onclick=${() => {
+                side.setAttribute("data-page", "1");
+              }}>
+                                                        ${tl2(trans.back)}
+                                                    </button>
+                                                    ${settings.starred_friend ? html.node`
+                                                    <a class="dropdown-menu-clickable-item" data-type="profile" href="${root}user/${settings.starred_friend}">
+                                                        <span><span class="at">@</span>${settings.starred_friend}</span>
+                                                        <span class="star-icon colourful">
+                                                            <span class="bleh-icon" />
+                                                        </span>
+                                                    </a>
+                                                    ` : ""}
+                                                    ${friends2.map((friend) => html.node`
+                                                    <a class="dropdown-menu-clickable-item" data-type="profile" href="${root}user/${friend}">
+                                                        <span><span class="at">@</span>${friend}</span>
+                                                    </a>
+                                                    `)}
+                                                    <button class="dropdown-menu-clickable-item" data-type="edit" onclick=${() => {
+                open_starred_friend_window();
+                instance.hide();
+              }}>
+                                                        ${tl2(trans.edit_close_friends)}
+                                                    </button>
+                                                `);
+              side.setAttribute("data-page", "2");
+            }}>
+                                                ${tl2(trans.more)}
+                                            </button>
+                                        </div>
+                                    `;
           }
           return elem;
         })}
@@ -54949,67 +54984,57 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                                 <button class="dropdown-menu-clickable-item chibi" data-type="continue" disabled=${themes_disabled} onclick=${() => {
           let buttons = [];
           render(page_2, html``);
-          render(
-            page_2,
-            html`
-                                            <button
-                                                class="dropdown-menu-clickable-item"
-                                                data-type="back"
-                                                onclick=${() => {
-              side.setAttribute(
-                "data-page",
-                "1"
-              );
-            }}
-                                            >
-                                                ${tl2(trans.back)}
-                                            </button>
-                                            ${themes.map((theme) => {
-              if (theme.hide)
-                return html.node``;
-              if (!theme.formal)
-                theme.formal = theme.id;
-              const btn = html.node`
+          render(page_2, html`
+                                        <button class="dropdown-menu-clickable-item" data-type="back" onclick=${() => {
+            side.setAttribute("data-page", "1");
+          }}>
+                                            ${tl2(trans.back)}
+                                        </button>
+                                        ${themes.map((theme) => {
+            if (theme.hide)
+              return html.node``;
+            if (!theme.formal)
+              theme.formal = theme.id;
+            const btn = html.node`
                                                 <button class="dropdown-menu-clickable-item theme-item-in-menu" aria-selected=${!settings.theme_schedule ? settings.theme == theme.id : theme.id == "adaptive"} data-bleh-theme=${theme.id} data-type="theme_${theme.formal}" onclick="${() => {
-                if (theme.id != "adaptive") {
-                  save_setting("theme_schedule", false);
-                  save_setting("theme", theme.id);
-                } else {
-                  save_setting("theme_schedule", true);
-                  match2();
-                }
-                buttons.forEach(
-                  (button2) => {
-                    const type = button2.getAttribute(
-                      "data-bleh-theme"
+              if (theme.id != "adaptive") {
+                save_setting("theme_schedule", false);
+                save_setting("theme", theme.id);
+              } else {
+                save_setting("theme_schedule", true);
+                match2();
+              }
+              buttons.forEach(
+                (button2) => {
+                  const type = button2.getAttribute(
+                    "data-bleh-theme"
+                  );
+                  if (!settings.theme_schedule) {
+                    button2.setAttribute(
+                      "aria-selected",
+                      settings.theme == type
                     );
-                    if (!settings.theme_schedule) {
-                      button2.setAttribute(
-                        "aria-selected",
-                        settings.theme == type
-                      );
-                    } else if (type == "adaptive") {
-                      button2.setAttribute(
-                        "aria-selected",
-                        true
-                      );
-                    } else {
-                      button2.setAttribute(
-                        "aria-selected",
-                        false
-                      );
-                    }
+                  } else if (type == "adaptive") {
+                    button2.setAttribute(
+                      "aria-selected",
+                      true
+                    );
+                  } else {
+                    button2.setAttribute(
+                      "aria-selected",
+                      false
+                    );
                   }
-                );
-              }}">
+                }
+              );
+            }}">
                                                     ${theme.name}
                                                 </button>
                                             `;
-              buttons.push(btn);
-              return btn;
-            })}
-                                        `
-          );
+            buttons.push(btn);
+            return btn;
+          })}
+                                    `);
           side.setAttribute("data-page", "2");
         }}>
                                     ${tl2(trans.more)}

@@ -278,8 +278,7 @@ export function append_nav() {
         scrobble: {
             name: tl(trans.scrobble),
             icon: 'add',
-            action: () => submit_scrobble(),
-            new_release: true
+            action: () => submit_scrobble()
         }
     };
 
@@ -871,23 +870,61 @@ export function append_nav() {
                                 else if (val == 'messages') count = inbox_count;
 
                                 if (count) {
-                                    render(
-                                        elem,
-                                        html`
-                                            <div class="auth-dropdown-item-row">
-                                                <span
-                                                    class="auth-dropdown-item-left"
-                                                >
-                                                    ${formal.name}
-                                                </span>
-                                                <span
-                                                    class="auth-dropdown-item-right"
-                                                >
-                                                    ${count}
-                                                </span>
-                                            </div>
-                                        `
-                                    );
+                                    render(elem, html`
+                                        <div class="auth-dropdown-item-row">
+                                            <span class="auth-dropdown-item-left">
+                                                ${formal.name}
+                                            </span>
+                                            <span class="auth-dropdown-item-right">
+                                                ${count}
+                                            </span>
+                                        </div>
+                                    `);
+                                }
+
+                                if (val == 'friends') {
+                                    elem = html.node`
+                                        <div class="button-combo">
+                                            <a class="dropdown-menu-clickable-item" data-type=${formal.icon} href=${formal.url}>
+                                                ${formal.name}
+                                            </a>
+                                            <div class="button-combo-sep" />
+                                            <button class="dropdown-menu-clickable-item chibi" data-type="continue" onclick=${() => {
+                                                const friends = settings.friends.filter(friend => friend != settings.starred_friend);
+
+                                                render(page_2, html``); // fix crash
+                                                render(page_2, html`
+                                                    <button class="dropdown-menu-clickable-item" data-type="back" onclick=${() => {
+                                                        side.setAttribute('data-page', '1');
+                                                    }}>
+                                                        ${tl(trans.back)}
+                                                    </button>
+                                                    ${settings.starred_friend ? html.node`
+                                                    <a class="dropdown-menu-clickable-item" data-type="profile" href="${root}user/${settings.starred_friend}">
+                                                        <span><span class="at">@</span>${settings.starred_friend}</span>
+                                                        <span class="star-icon colourful">
+                                                            <span class="bleh-icon" />
+                                                        </span>
+                                                    </a>
+                                                    ` : ''}
+                                                    ${friends.map(friend => html.node`
+                                                    <a class="dropdown-menu-clickable-item" data-type="profile" href="${root}user/${friend}">
+                                                        <span><span class="at">@</span>${friend}</span>
+                                                    </a>
+                                                    `)}
+                                                    <button class="dropdown-menu-clickable-item" data-type="edit" onclick=${() => {
+                                                        open_starred_friend_window();
+                                                        instance.hide();
+                                                    }}>
+                                                        ${tl(trans.edit_close_friends)}
+                                                    </button>
+                                                `);
+                                                side.setAttribute('data-page', '2');
+                                            }}>
+                                                ${tl(trans.more)}
+                                            </button>
+                                        </div>
+                                    `;
                                 }
 
                                 return elem;
@@ -901,33 +938,22 @@ export function append_nav() {
                                     let buttons = [];
 
                                     render(page_2, html``); // fix crash
-                                    render(
-                                        page_2,
-                                        html`
-                                            <button
-                                                class="dropdown-menu-clickable-item"
-                                                data-type="back"
-                                                onclick=${() => {
-                                                    side.setAttribute(
-                                                        'data-page',
-                                                        '1'
-                                                    );
-                                                }}
-                                            >
-                                                ${tl(trans.back)}
-                                            </button>
-                                            ${themes.map((theme) => {
-                                                if (theme.hide)
-                                                    return html.node``;
+                                    render(page_2, html`
+                                        <button class="dropdown-menu-clickable-item" data-type="back" onclick=${() => {
+                                            side.setAttribute('data-page', '1');
+                                        }}>
+                                            ${tl(trans.back)}
+                                        </button>
+                                        ${themes.map((theme) => {
+                                            if (theme.hide)
+                                                return html.node``;
 
-                                                if (!theme.formal)
-                                                    theme.formal = theme.id;
+                                            if (!theme.formal)
+                                                theme.formal = theme.id;
 
-                                                const btn = html.node`
+                                            const btn = html.node`
                                                 <button class="dropdown-menu-clickable-item theme-item-in-menu" aria-selected=${!settings.theme_schedule ? settings.theme == theme.id : theme.id == 'adaptive'} data-bleh-theme=${theme.id} data-type="theme_${theme.formal}" onclick="${() => {
-                                                    if (
-                                                        theme.id != 'adaptive'
-                                                    ) {
+                                                    if (theme.id != 'adaptive') {
                                                         save_setting('theme_schedule', false);
                                                         save_setting('theme', theme.id);
                                                     } else {
@@ -971,11 +997,10 @@ export function append_nav() {
                                                 </button>
                                             `;
 
-                                                buttons.push(btn);
-                                                return btn;
-                                            })}
-                                        `
-                                    );
+                                            buttons.push(btn);
+                                            return btn;
+                                        })}
+                                    `);
                                     side.setAttribute('data-page', '2');
                                 }}>
                                     ${tl(trans.more)}
