@@ -3275,8 +3275,6 @@
     .video-actions {
         gap: var(--card-gap) !important;
         margin: var(--card-gap) 0 0 0 !important;
-        padding-bottom: var(--card-gap);
-        border-bottom: 1px solid var(--card-border-base);
     }
 
     /* remove lastfm box shadow */
