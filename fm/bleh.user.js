@@ -44326,8 +44326,8 @@
             <div class="about-artist-panel">
                 <div class="avatar-side">
                     ${avatar2 ? html.node`
-                    <img src=${avatar2.getAttribute("src")}>
-                    <a onclick=${() => expand_avatar(avatar2.getAttribute("src").replace("/300x300/", "/ar0/"))} class="bleh--avatar-clickable-link"></a>
+                    <img src=${avatar2.src.replace("/300x300/", "/500x500/")}>
+                    <a onclick=${() => expand_avatar(avatar2.src.replace("/300x300/", "/ar0/"))} class="bleh--avatar-clickable-link"></a>
                 ` : html.node`
                     <img class="missing-artist">
                 `}

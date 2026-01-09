@@ -35,8 +35,8 @@ export function bleh_about_artist() {
                 <div class="avatar-side">
                     ${avatar ?
                         html.node`
-                    <img src=${avatar.getAttribute('src')}>
-                    <a onclick=${() => expand_avatar(avatar.getAttribute('src').replace('/300x300/', '/ar0/'))} class="bleh--avatar-clickable-link"></a>
+                    <img src=${avatar.src.replace('/300x300/', '/500x500/')}>
+                    <a onclick=${() => expand_avatar(avatar.src.replace('/300x300/', '/ar0/'))} class="bleh--avatar-clickable-link"></a>
                 `
                     :   html.node`
                     <img class="missing-artist">

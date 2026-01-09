@@ -23021,28 +23021,24 @@
         &.about-artist-panel {
             flex-direction: column;
             margin: unset !important;
-            padding-top: calc(var(--card-padding) + 150px);
+            padding-top: calc(var(--card-padding) + 200px);
 
             .avatar-side {
                 position: absolute;
                 top: 0;
-                left: 10px;
-                right: 10px;
+                left: 0;
+                right: 0;
                 width: unset !important;
-                height: 250px;
+                height: 350px;
                 box-shadow: unset;
                 transform: unset !important;
-                border-radius: var(--item-big-radius) !important;
+                border-radius: unset !important;
 
                 &:before {
                     display: none !important;
                 }
 
-                --mask: linear-gradient(
-                    0deg,
-                    transparent 0%,
-                    rgb(0, 0, 0) 100%
-                );
+                --mask: linear-gradient(0deg, transparent 0%, #000 50%, transparent 100%);
                 mask-image: var(--mask);
                 -webkit-mask-image: var(--mask);
                 opacity: 0.2;
