@@ -56378,12 +56378,18 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     setTimeout(function() {
       page.structure.setup.setAttribute("data-animating", "false");
       render(page.structure.setup_content, html`
-            <p>${{ html: tl2(trans.welcome_to_bleh) }}</p>
+            <p>${{ html: tl2(trans.welcome_to_bleh, { b: version.brand }) }}</p>
         `);
       render(page.structure.setup_footer, html`
+            ${auth.name ? html.node`
             <a class="see-more cancel" href="${root}user/${auth.name}">
                 ${tl2(trans.skip)}
             </a>
+            ` : html.node`
+            <a class="see-more cancel" href="${root}dashboard">
+                ${tl2(trans.skip)}
+            </a>
+            `}
             <div class="fill"></div>
             <button class="btn primary continue" onclick=${() => setup_accessibility()}>
                 ${tl2(trans.next)}
@@ -56757,50 +56763,31 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
   function setup_end() {
     page.structure.setup.setAttribute("data-page", "end");
     page.structure.setup.setAttribute("data-animating", "true");
-    setTimeout(function() {
+    setTimeout(() => {
       page.structure.setup.setAttribute("data-animating", "false");
-      render(
-        page.structure.setup_content,
-        html`
-                <p>
-                    ${{
-          html: tl2(trans.setup_end).replace("{a}", `<a href="${root}bleh">`).replace("{/a}", "</a>")
-        }}
-                </p>
-                <div class="mini-list">
-                    <a
-                        class="btn mini"
-                        href="https://discord.gg/${discord}"
-                        target="_blank"
-                    >
-                        <div class="mini-icon colourful" data-type="discord">
-                            <div class="bleh-icon" />
-                        </div>
-                        <div class="mini-info">
-                            <h5>${tl2(trans.join_discord)}</h5>
-                        </div>
-                        <div
-                            class="bleh-icon mini-arrow"
-                            style="--icon: var(--mask)"
-                            data-type="arrow-right"
-                        ></div>
-                    </a>
-                    <button class="btn mini" onclick=${() => sponsor()}>
-                        <div class="mini-icon colourful" data-type="sponsor">
-                            <div class="bleh-icon" />
-                        </div>
-                        <div class="mini-info">
-                            <h5>${tl2(trans.sponsor)}</h5>
-                        </div>
-                        <div
-                            class="bleh-icon mini-arrow"
-                            style="--icon: var(--mask)"
-                            data-type="arrow-right"
-                        ></div>
-                    </button>
-                </div>
-            `
-      );
+      render(page.structure.setup_content, html`
+            <p>${{ html: tl2(trans.setup_end, { a: `<a href="${root}bleh">`, "/a": "</a>", b: version.brand }) }}</p>
+            <div class="mini-list">
+                <a class="btn mini" href="https://discord.gg/${discord}" target="_blank">
+                    <div class="mini-icon colourful" data-type="discord">
+                        <div class="bleh-icon" />
+                    </div>
+                    <div class="mini-info">
+                        <h5>${tl2(trans.join_discord)}</h5>
+                    </div>
+                    <div class="bleh-icon mini-arrow" style="--icon: var(--mask)" data-type="arrow-right" />
+                </a>
+                <button class="btn mini" onclick=${() => sponsor()}>
+                    <div class="mini-icon colourful" data-type="sponsor">
+                        <div class="bleh-icon" />
+                    </div>
+                    <div class="mini-info">
+                        <h5>${tl2(trans.sponsor)}</h5>
+                    </div>
+                    <div class="bleh-icon mini-arrow" style="--icon: var(--mask)" data-type="arrow-right" />
+                </button>
+            </div>
+        `);
       if (auth.name) {
         render(page.structure.setup_footer, html`
                 <button class="see-more cancel" onclick=${() => setup_layout()}>
@@ -66223,13 +66210,13 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     welcome_to_bleh: {
       // <br> is a line break
-      en: "Welcome to bleh, thank you for installing!<br>You can continue through this quick setup to get you started or skip right to your profile and figure it all out yourself <3",
-      de: "Willkommen bei bleh, danke f\xFCr die Installation!<br>Du kannst diesen schnellen Einrichtungsassistenten durchlaufen, um loszulegen, oder direkt zu deinem Profil springen und alles selbst herausfinden <3",
-      es: "\xA1Bienvenido a bleh, gracias por instalar!<br>Puedes continuar con la instalaci\xF3n para ayudarte a empezar o puedes saltar directamente a tu perfil y averiguar por ti mismo <3",
-      it: "Benvenuto in bleh, grazie per l\u2019installazione!<br>Puoi continuare con questa veloce configurazione iniziale, oppure saltare direttamente al tuo profilo e scoprire tutto da solo <3",
-      pt: "Bem-vindo ao bleh, obrigado por instalar!<br>Voc\xEA pode seguir este r\xE1pido guia de configura\xE7\xE3o para come\xE7ar, ou pular direto para seu perfil e descobrir tudo por conta pr\xF3pria <3",
-      sv: "V\xE4lkommen till bleh, tack f\xF6r att du har installerat!<br>Du kan forts\xE4tta genom den h\xE4r snabba setupen f\xF6r att starta eller hoppa rakt till din profil och klura ut det helt sj\xE4lv <3",
-      ru: "\u0414\u043E\u0431\u0440\u043E \u043F\u043E\u0436\u0430\u043B\u043E\u0432\u0430\u0442\u044C \u0432 bleh, \u0441\u043F\u0430\u0441\u0438\u0431\u043E \u0437\u0430 \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043A\u0443!<br>\u0412\u044B \u043C\u043E\u0436\u0435\u0442\u0435 \u043F\u0440\u043E\u0439\u0442\u0438 \u044D\u0442\u0443 \u0431\u044B\u0441\u0442\u0440\u0443\u044E \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0443, \u0447\u0442\u043E\u0431\u044B \u043D\u0430\u0447\u0430\u0442\u044C, \u0438\u043B\u0438 \u0441\u0440\u0430\u0437\u0443 \u043F\u0435\u0440\u0435\u0439\u0442\u0438 \u043A \u0441\u0432\u043E\u0435\u043C\u0443 \u043F\u0440\u043E\u0444\u0438\u043B\u044E \u0438 \u0440\u0430\u0437\u043E\u0431\u0440\u0430\u0442\u044C\u0441\u044F \u0432\u043E \u0432\u0441\u0435\u043C \u0441\u0430\u043C\u043E\u0441\u0442\u043E\u044F\u0442\u0435\u043B\u044C\u043D\u043E <3"
+      en: "Welcome to {b}, thank you for installing!<br>You can continue through this quick setup to get you started or skip right to your profile and figure it all out yourself <3",
+      de: "Willkommen bei {b}, danke f\xFCr die Installation!<br>Du kannst diesen schnellen Einrichtungsassistenten durchlaufen, um loszulegen, oder direkt zu deinem Profil springen und alles selbst herausfinden <3",
+      es: "\xA1Bienvenido a {b}, gracias por instalar!<br>Puedes continuar con la instalaci\xF3n para ayudarte a empezar o puedes saltar directamente a tu perfil y averiguar por ti mismo <3",
+      it: "Benvenuto in {b}, grazie per l\u2019installazione!<br>Puoi continuare con questa veloce configurazione iniziale, oppure saltare direttamente al tuo profilo e scoprire tutto da solo <3",
+      pt: "Bem-vindo ao {b}, obrigado por instalar!<br>Voc\xEA pode seguir este r\xE1pido guia de configura\xE7\xE3o para come\xE7ar, ou pular direto para seu perfil e descobrir tudo por conta pr\xF3pria <3",
+      sv: "V\xE4lkommen till {b}, tack f\xF6r att du har installerat!<br>Du kan forts\xE4tta genom den h\xE4r snabba setupen f\xF6r att starta eller hoppa rakt till din profil och klura ut det helt sj\xE4lv <3",
+      ru: "\u0414\u043E\u0431\u0440\u043E \u043F\u043E\u0436\u0430\u043B\u043E\u0432\u0430\u0442\u044C \u0432 {b}, \u0441\u043F\u0430\u0441\u0438\u0431\u043E \u0437\u0430 \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043A\u0443!<br>\u0412\u044B \u043C\u043E\u0436\u0435\u0442\u0435 \u043F\u0440\u043E\u0439\u0442\u0438 \u044D\u0442\u0443 \u0431\u044B\u0441\u0442\u0440\u0443\u044E \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0443, \u0447\u0442\u043E\u0431\u044B \u043D\u0430\u0447\u0430\u0442\u044C, \u0438\u043B\u0438 \u0441\u0440\u0430\u0437\u0443 \u043F\u0435\u0440\u0435\u0439\u0442\u0438 \u043A \u0441\u0432\u043E\u0435\u043C\u0443 \u043F\u0440\u043E\u0444\u0438\u043B\u044E \u0438 \u0440\u0430\u0437\u043E\u0431\u0440\u0430\u0442\u044C\u0441\u044F \u0432\u043E \u0432\u0441\u0435\u043C \u0441\u0430\u043C\u043E\u0441\u0442\u043E\u044F\u0442\u0435\u043B\u044C\u043D\u043E <3"
     },
     next: {
       en: "Next",
@@ -66277,13 +66264,13 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       ru: "\u041C\u044B \u043F\u0440\u0435\u0434\u043B\u0430\u0433\u0430\u0435\u043C \u043C\u043D\u043E\u0436\u0435\u0441\u0442\u0432\u043E \u043E\u043F\u0446\u0438\u0439, \u0447\u0442\u043E\u0431\u044B \u043F\u043E\u043C\u043E\u0447\u044C \u0432\u0430\u043C \u0443\u043F\u0440\u0430\u0432\u043B\u044F\u0442\u044C \u0432\u0430\u0448\u0435\u0439 \u043C\u0443\u0437\u044B\u043A\u0430\u043B\u044C\u043D\u043E\u0439 \u0431\u0438\u0431\u043B\u0438\u043E\u0442\u0435\u043A\u043E\u0439."
     },
     setup_end: {
-      en: "That\u2019s all for now, to configure your bleh installation in the future head to {a}the settings{/a} in your menu!",
-      de: "Das war\u2019s f\xFCrs Erste. Um deine bleh-Installation in Zukunft zu konfigurieren, gehe zu {a}den Einstellungen{/a} in deinem Men\xFC!",
-      es: "\xA1Eso es todo por ahora, para modificar tu instalaci\xF3n de bleh en el futuro, ve a {a}la configuraci\xF3n{/a} en tu men\xFA!",
-      it: "\xC8 tutto per ora, per configurare la tua installazione di bleh in futuro vai alle {a}impostazioni{a} dal tuo menu!",
-      pt: "Por enquanto isso \xE9 tudo, para configurar sua instala\xE7\xE3o do bleh futuramente, v\xE1 at\xE9 {a}nas configura\xE7\xF5es{/a} no seu menu!",
-      sv: "Det var allt just nu, f\xF6r att konfigurera din bleh-installation i framtiden g\xE5 in p\xE5 {a}inst\xE4llningarna{/a} i menyn!",
-      ru: "\u041D\u0430 \u044D\u0442\u043E\u043C \u043F\u043E\u043A\u0430 \u0432\u0441\u0435, \u0447\u0442\u043E\u0431\u044B \u043D\u0430\u0441\u0442\u0440\u043E\u0438\u0442\u044C \u0432\u0430\u0448\u0443 \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043A\u0443 bleh \u0432 \u0431\u0443\u0434\u0443\u0449\u0435\u043C, \u043F\u0435\u0440\u0435\u0439\u0434\u0438\u0442\u0435 \u0432 {a}\u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438{/a} \u0432 \u0432\u0430\u0448\u0435\u043C \u043C\u0435\u043D\u044E!"
+      en: "That\u2019s all for now, to configure your {b} installation in the future head to {a}the settings{/a} in your menu!",
+      de: "Das war\u2019s f\xFCrs Erste. Um deine {b}-Installation in Zukunft zu konfigurieren, gehe zu {a}den Einstellungen{/a} in deinem Men\xFC!",
+      es: "\xA1Eso es todo por ahora, para modificar tu instalaci\xF3n de {b} en el futuro, ve a {a}la configuraci\xF3n{/a} en tu men\xFA!",
+      it: "\xC8 tutto per ora, per configurare la tua installazione di {b} in futuro vai alle {a}impostazioni{a} dal tuo menu!",
+      pt: "Por enquanto isso \xE9 tudo, para configurar sua instala\xE7\xE3o do {b} futuramente, v\xE1 at\xE9 {a}nas configura\xE7\xF5es{/a} no seu menu!",
+      sv: "Det var allt just nu, f\xF6r att konfigurera din {b}-installation i framtiden g\xE5 in p\xE5 {a}inst\xE4llningarna{/a} i menyn!",
+      ru: "\u041D\u0430 \u044D\u0442\u043E\u043C \u043F\u043E\u043A\u0430 \u0432\u0441\u0435, \u0447\u0442\u043E\u0431\u044B \u043D\u0430\u0441\u0442\u0440\u043E\u0438\u0442\u044C \u0432\u0430\u0448\u0443 \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043A\u0443 {b} \u0432 \u0431\u0443\u0434\u0443\u0449\u0435\u043C, \u043F\u0435\u0440\u0435\u0439\u0434\u0438\u0442\u0435 \u0432 {a}\u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438{/a} \u0432 \u0432\u0430\u0448\u0435\u043C \u043C\u0435\u043D\u044E!"
     },
     seasonal_particles: {
       name: {

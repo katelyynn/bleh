@@ -111,12 +111,18 @@ function bleh_setup_start() {
     setTimeout(function () {
         page.structure.setup.setAttribute('data-animating', 'false');
         render(page.structure.setup_content, html`
-            <p>${{ html: tl(trans.welcome_to_bleh) }}</p>
+            <p>${{ html: tl(trans.welcome_to_bleh, { b: version.brand }) }}</p>
         `);
         render(page.structure.setup_footer, html`
+            ${auth.name ? html.node`
             <a class="see-more cancel" href="${root}user/${auth.name}">
                 ${tl(trans.skip)}
             </a>
+            ` : html.node`
+            <a class="see-more cancel" href="${root}dashboard">
+                ${tl(trans.skip)}
+            </a>
+            `}
             <div class="fill"></div>
             <button class="btn primary continue" onclick=${() => setup_accessibility()}>
                 ${tl(trans.next)}
@@ -512,52 +518,31 @@ function setup_layout() {
 function setup_end() {
     page.structure.setup.setAttribute('data-page', 'end');
     page.structure.setup.setAttribute('data-animating', 'true');
-    setTimeout(function () {
+    setTimeout(() => {
         page.structure.setup.setAttribute('data-animating', 'false');
-        render(
-            page.structure.setup_content,
-            html`
-                <p>
-                    ${{
-                        html: tl(trans.setup_end)
-                            .replace('{a}', `<a href="${root}bleh">`)
-                            .replace('{/a}', '</a>')
-                    }}
-                </p>
-                <div class="mini-list">
-                    <a
-                        class="btn mini"
-                        href="https://discord.gg/${discord}"
-                        target="_blank"
-                    >
-                        <div class="mini-icon colourful" data-type="discord">
-                            <div class="bleh-icon" />
-                        </div>
-                        <div class="mini-info">
-                            <h5>${tl(trans.join_discord)}</h5>
-                        </div>
-                        <div
-                            class="bleh-icon mini-arrow"
-                            style="--icon: var(--mask)"
-                            data-type="arrow-right"
-                        ></div>
-                    </a>
-                    <button class="btn mini" onclick=${() => sponsor()}>
-                        <div class="mini-icon colourful" data-type="sponsor">
-                            <div class="bleh-icon" />
-                        </div>
-                        <div class="mini-info">
-                            <h5>${tl(trans.sponsor)}</h5>
-                        </div>
-                        <div
-                            class="bleh-icon mini-arrow"
-                            style="--icon: var(--mask)"
-                            data-type="arrow-right"
-                        ></div>
-                    </button>
-                </div>
-            `
-        );
+        render(page.structure.setup_content,html`
+            <p>${{html: tl(trans.setup_end, { a: `<a href="${root}bleh">`, '/a': '</a>', b: version.brand }) }}</p>
+            <div class="mini-list">
+                <a class="btn mini" href="https://discord.gg/${discord}" target="_blank">
+                    <div class="mini-icon colourful" data-type="discord">
+                        <div class="bleh-icon" />
+                    </div>
+                    <div class="mini-info">
+                        <h5>${tl(trans.join_discord)}</h5>
+                    </div>
+                    <div class="bleh-icon mini-arrow" style="--icon: var(--mask)" data-type="arrow-right" />
+                </a>
+                <button class="btn mini" onclick=${() => sponsor()}>
+                    <div class="mini-icon colourful" data-type="sponsor">
+                        <div class="bleh-icon" />
+                    </div>
+                    <div class="mini-info">
+                        <h5>${tl(trans.sponsor)}</h5>
+                    </div>
+                    <div class="bleh-icon mini-arrow" style="--icon: var(--mask)" data-type="arrow-right" />
+                </button>
+            </div>
+        `);
 
         if (auth.name) {
             render(page.structure.setup_footer, html`

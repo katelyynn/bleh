@@ -6400,13 +6400,13 @@ export const trans = {
     },
     welcome_to_bleh: {
         // <br> is a line break
-        en: 'Welcome to bleh, thank you for installing!<br>You can continue through this quick setup to get you started or skip right to your profile and figure it all out yourself <3',
-        de: 'Willkommen bei bleh, danke für die Installation!<br>Du kannst diesen schnellen Einrichtungsassistenten durchlaufen, um loszulegen, oder direkt zu deinem Profil springen und alles selbst herausfinden <3',
-        es: '¡Bienvenido a bleh, gracias por instalar!<br>Puedes continuar con la instalación para ayudarte a empezar o puedes saltar directamente a tu perfil y averiguar por ti mismo <3',
-        it: 'Benvenuto in bleh, grazie per l’installazione!<br>Puoi continuare con questa veloce configurazione iniziale, oppure saltare direttamente al tuo profilo e scoprire tutto da solo <3',
-        pt: 'Bem-vindo ao bleh, obrigado por instalar!<br>Você pode seguir este rápido guia de configuração para começar, ou pular direto para seu perfil e descobrir tudo por conta própria <3',
-        sv: 'Välkommen till bleh, tack för att du har installerat!<br>Du kan fortsätta genom den här snabba setupen för att starta eller hoppa rakt till din profil och klura ut det helt själv <3',
-        ru: 'Добро пожаловать в bleh, спасибо за установку!<br>Вы можете пройти эту быструю настройку, чтобы начать, или сразу перейти к своему профилю и разобраться во всем самостоятельно <3'
+        en: 'Welcome to {b}, thank you for installing!<br>You can continue through this quick setup to get you started or skip right to your profile and figure it all out yourself <3',
+        de: 'Willkommen bei {b}, danke für die Installation!<br>Du kannst diesen schnellen Einrichtungsassistenten durchlaufen, um loszulegen, oder direkt zu deinem Profil springen und alles selbst herausfinden <3',
+        es: '¡Bienvenido a {b}, gracias por instalar!<br>Puedes continuar con la instalación para ayudarte a empezar o puedes saltar directamente a tu perfil y averiguar por ti mismo <3',
+        it: 'Benvenuto in {b}, grazie per l’installazione!<br>Puoi continuare con questa veloce configurazione iniziale, oppure saltare direttamente al tuo profilo e scoprire tutto da solo <3',
+        pt: 'Bem-vindo ao {b}, obrigado por instalar!<br>Você pode seguir este rápido guia de configuração para começar, ou pular direto para seu perfil e descobrir tudo por conta própria <3',
+        sv: 'Välkommen till {b}, tack för att du har installerat!<br>Du kan fortsätta genom den här snabba setupen för att starta eller hoppa rakt till din profil och klura ut det helt själv <3',
+        ru: 'Добро пожаловать в {b}, спасибо за установку!<br>Вы можете пройти эту быструю настройку, чтобы начать, или сразу перейти к своему профилю и разобраться во всем самостоятельно <3'
     },
     next: {
         en: 'Next',
@@ -6454,13 +6454,13 @@ export const trans = {
         ru: 'Мы предлагаем множество опций, чтобы помочь вам управлять вашей музыкальной библиотекой.'
     },
     setup_end: {
-        en: 'That’s all for now, to configure your bleh installation in the future head to {a}the settings{/a} in your menu!',
-        de: 'Das war’s fürs Erste. Um deine bleh-Installation in Zukunft zu konfigurieren, gehe zu {a}den Einstellungen{/a} in deinem Menü!',
-        es: '¡Eso es todo por ahora, para modificar tu instalación de bleh en el futuro, ve a {a}la configuración{/a} en tu menú!',
-        it: 'È tutto per ora, per configurare la tua installazione di bleh in futuro vai alle {a}impostazioni{a} dal tuo menu!',
-        pt: 'Por enquanto isso é tudo, para configurar sua instalação do bleh futuramente, vá até {a}nas configurações{/a} no seu menu!',
-        sv: 'Det var allt just nu, för att konfigurera din bleh-installation i framtiden gå in på {a}inställningarna{/a} i menyn!',
-        ru: 'На этом пока все, чтобы настроить вашу установку bleh в будущем, перейдите в {a}настройки{/a} в вашем меню!'
+        en: 'That’s all for now, to configure your {b} installation in the future head to {a}the settings{/a} in your menu!',
+        de: 'Das war’s fürs Erste. Um deine {b}-Installation in Zukunft zu konfigurieren, gehe zu {a}den Einstellungen{/a} in deinem Menü!',
+        es: '¡Eso es todo por ahora, para modificar tu instalación de {b} en el futuro, ve a {a}la configuración{/a} en tu menú!',
+        it: 'È tutto per ora, per configurare la tua installazione di {b} in futuro vai alle {a}impostazioni{a} dal tuo menu!',
+        pt: 'Por enquanto isso é tudo, para configurar sua instalação do {b} futuramente, vá até {a}nas configurações{/a} no seu menu!',
+        sv: 'Det var allt just nu, för att konfigurera din {b}-installation i framtiden gå in på {a}inställningarna{/a} i menyn!',
+        ru: 'На этом пока все, чтобы настроить вашу установку {b} в будущем, перейдите в {a}настройки{/a} в вашем меню!'
     },
     seasonal_particles: {
         name: {
