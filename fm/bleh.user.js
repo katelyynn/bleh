@@ -31571,7 +31571,7 @@
   function update_inbuilt_select(id, value) {
     document.documentElement.setAttribute(`data-bleh--inbuilt-${id}`, value);
   }
-  function select(values, initial = "", name = "", func = null, blend = false) {
+  function select(values, initial = "", name = "", func = null, blend = false, title_func = null, hide2 = false) {
     let select2;
     let button2;
     if (!values || values.length == 0) return html.node`
@@ -31592,7 +31592,7 @@
                     `;
     })}
             </select>
-            <button class="select-button ${blend ? "link-select blend-v2-btn" : ""}" type="button" ref=${(el) => button2 = el} />
+            <button class="select-button ${blend ? "link-select blend-v2-btn" : ""}" data-hide=${hide2} type="button" ref=${(el) => button2 = el} />
         </div>
     `;
     let menu = tippy_esm_default(button2, {
@@ -31626,7 +31626,11 @@
       render(button2, html`${tl2(trans.unavailable)}`);
       values.some((value) => {
         if (value.value == selected) {
-          render(button2, html`${value.text}`);
+          if (!title_func) {
+            render(button2, html`${value.text}`);
+          } else {
+            render(button2, title_func(value));
+          }
           return false;
         }
       });
@@ -31636,7 +31640,10 @@
           `data-bleh--inbuilt-id_${name}`,
           selected
         );
-      if (func && bubble) func(selected);
+      if (func && bubble) {
+        func(selected);
+        menu.hide();
+      }
       menu.setContent(html.node`
             ${values.map((value) => {
         if (value.value == null) {
@@ -31670,6 +31677,12 @@
       if (typeof item === "string") return { value: item, text: item, icon };
       return item;
     });
+  }
+  function select_prepare_convert_from_setting(list) {
+    return Object.entries(list).map(([key, val]) => ({
+      value: key,
+      text: val.name
+    }));
   }
   function custom_select(select2, element_to_append) {
     console.info(select2);
@@ -52142,10 +52155,6 @@
       let translation_view = function(lang2) {
         const language = lang_info[lang2];
         render(translation_view_container, html`
-                <div class="language-header">
-                    <span class="flag" style="background-image: url(https://katelyynn.github.io/bleh/fm/flags/${lang2}.svg)" />
-                    <p>${language.name}</p>
-                </div>
                 <div class="language-sub">
                     <div class="language-info colourful translated"><span class="bleh-icon" />${tl2(trans.amount_translated, { c: language.translated })} (${language.percent}%)</div>
                     ${() => {
@@ -52184,7 +52193,12 @@
       let translation_view_container;
       render(page.structure.main, html`
             <section class="bleh--panel">
-                ${setting({ id: "translator_view", list: lang_info, func: translation_view })}
+                ${select(select_prepare_convert_from_setting(lang_info), settings.translator_view, "", translation_view, false, (val) => html.node`
+                    <span class="language-header">
+                        <span class="flag" style="background-image: url(https://katelyynn.github.io/bleh/fm/flags/${val.value}.svg)" />
+                        <p>${val.text}</p>
+                    </span>
+                `, true)}
                 <div class="translation-view" ref=${(el) => translation_view_container = el} />
             </section>
         `);
@@ -71024,7 +71038,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     translator_view: {
       default: "en",
-      type: "tabs"
+      type: "select"
     }
   };
 

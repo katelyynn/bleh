@@ -21839,6 +21839,17 @@
                 }
             }
         }
+
+        &[data-hide="true"] {
+            --bg: transparent;
+            --bg-hov: transparent;
+            --bg-atv: transparent;
+            --button-verts: 0px;
+            --button-sides: 0px;
+            --button-sides-icon: 0;
+            --radius: 0;
+            --shadow: none;
+        }
     }
     .select-item {
         display: flex;

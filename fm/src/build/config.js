@@ -1375,6 +1375,6 @@ export let settings_store = {
     },
     translator_view: {
         default: 'en',
-        type: 'tabs'
+        type: 'select'
     }
 };

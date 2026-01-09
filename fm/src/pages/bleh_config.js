@@ -44,7 +44,7 @@ import {
     checkup_friend_cache,
     load_profile_cache_externally
 } from './profile.js';
-import { select_prepare_list } from '../components/select.js';
+import { select, select_prepare_convert_from_setting, select_prepare_list } from '../components/select.js';
 import { match } from '../components/dynamic_theming.js';
 import { manage_oracle_data, oracle_data } from '../components/oracle.js';
 import { render_activity } from '../activity.js';
@@ -1852,7 +1852,12 @@ export async function render_setting_page(page_id) {
 
         render(page.structure.main, html`
             <section class="bleh--panel">
-                ${setting({id: 'translator_view', list: lang_info, func: translation_view})}
+                ${select(select_prepare_convert_from_setting(lang_info), settings.translator_view, '', translation_view, false, (val) => html.node`
+                    <span class="language-header">
+                        <span class="flag" style="background-image: url(https://katelyynn.github.io/bleh/fm/flags/${val.value}.svg)" />
+                        <p>${val.text}</p>
+                    </span>
+                `, true)}
                 <div class="translation-view" ref=${el => translation_view_container = el} />
             </section>
         `);
@@ -1861,10 +1866,6 @@ export async function render_setting_page(page_id) {
             const language = lang_info[lang];
 
             render(translation_view_container, html`
-                <div class="language-header">
-                    <span class="flag" style="background-image: url(https://katelyynn.github.io/bleh/fm/flags/${lang}.svg)" />
-                    <p>${language.name}</p>
-                </div>
                 <div class="language-sub">
                     <div class="language-info colourful translated"><span class="bleh-icon" />${tl(trans.amount_translated, { c: language.translated })} (${language.percent}%)</div>
                     ${() => {

@@ -15,7 +15,7 @@ export function update_inbuilt_select(id, value) {
     document.documentElement.setAttribute(`data-bleh--inbuilt-${id}`, value);
 }
 
-export function select(values, initial = '', name = '', func = null, blend = false) {
+export function select(values, initial = '', name = '', func = null, blend = false, title_func = null, hide = false) {
     let select;
     let button;
 
@@ -40,7 +40,7 @@ export function select(values, initial = '', name = '', func = null, blend = fal
                     `;
                 })}
             </select>
-            <button class="select-button ${blend ? 'link-select blend-v2-btn' : ''}" type="button" ref=${(el) => (button = el)} />
+            <button class="select-button ${blend ? 'link-select blend-v2-btn' : ''}" data-hide=${hide} type="button" ref=${(el) => (button = el)} />
         </div>
     `;
 
@@ -84,7 +84,12 @@ export function select(values, initial = '', name = '', func = null, blend = fal
 
         values.some((value) => {
             if (value.value == selected) {
-                render(button, html`${value.text}`);
+                if (!title_func) {
+                    render(button, html`${value.text}`);
+                } else {
+                    render(button, title_func(value));
+                }
+
                 return false;
             }
         });
@@ -97,7 +102,10 @@ export function select(values, initial = '', name = '', func = null, blend = fal
                 selected
             );
 
-        if (func && bubble) func(selected);
+        if (func && bubble) {
+            func(selected);
+            menu.hide();
+        }
 
         menu.setContent(html.node`
             ${values.map((value) => {
@@ -138,6 +146,13 @@ export function select_prepare_list(list, icon = null) {
 
         return item;
     });
+}
+
+export function select_prepare_convert_from_setting(list) {
+    return Object.entries(list).map(([key, val]) => ({
+        value: key,
+        text: val.name
+    }));
 }
 
 function select_fail(e = null) {
