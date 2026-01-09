@@ -858,7 +858,10 @@ export function append_nav() {
                                 if (formal.url)
                                     elem = html.node`<a href=${formal.url} />`;
                                 else
-                                    elem = html.node`<button onclick=${formal.action} />`;
+                                    elem = html.node`<button onclick=${() => {
+                                        formal.action();
+                                        instance.hide();
+                                    }} />`;
 
                                 elem.classList = 'dropdown-menu-clickable-item';
                                 elem.setAttribute('data-type', formal.icon);

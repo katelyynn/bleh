@@ -54912,7 +54912,10 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           if (formal.url)
             elem = html.node`<a href=${formal.url} />`;
           else
-            elem = html.node`<button onclick=${formal.action} />`;
+            elem = html.node`<button onclick=${() => {
+              formal.action();
+              instance.hide();
+            }} />`;
           elem.classList = "dropdown-menu-clickable-item";
           elem.setAttribute("data-type", formal.icon);
           elem.textContent = formal.name;
