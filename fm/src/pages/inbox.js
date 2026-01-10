@@ -113,6 +113,7 @@ export async function bleh_inbox() {
         const select_all = header.querySelector('.inbox-select-all');
 
         const delete_btn = header.querySelector('.inbox-delete-button');
+        delete_btn?.classList.add('btn');
 
         const table = inbox.querySelector('.inbox-table');
 

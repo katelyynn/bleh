@@ -570,6 +570,7 @@ function patch_settings_profile_panel(token, update_picture) {
                 <div class="setting" data-type="info">
                     <div class="heading">
                         <h5>${tl(trans.avatar)}</h5>
+                        <p>${tl(trans.avatar_desc)}</p>
                     </div>
                     <div class="info">
                         <div class="avatar image-uploader" onclick=${() => avatar(token)}>

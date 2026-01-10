@@ -2449,6 +2449,10 @@ export const trans = {
         ru: 'Аватар',
         pl: 'Awatar'
     },
+    avatar_desc: {
+        // shown as a description when setting your avatar
+        en: 'Present yourself site-wide in your style'
+    },
     customise: {
         en: 'Customise',
         de: 'Anpassen',

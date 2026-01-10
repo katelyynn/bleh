@@ -34233,6 +34233,7 @@
                 <div class="setting" data-type="info">
                     <div class="heading">
                         <h5>${tl2(trans.avatar)}</h5>
+                        <p>${tl2(trans.avatar_desc)}</p>
                     </div>
                     <div class="info">
                         <div class="avatar image-uploader" onclick=${() => avatar(token)}>
@@ -57931,6 +57932,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       const header = page.structure.main.querySelector(".inbox-buttons");
       const select_all = header.querySelector(".inbox-select-all");
       const delete_btn = header.querySelector(".inbox-delete-button");
+      delete_btn?.classList.add("btn");
       const table = inbox.querySelector(".inbox-table");
       if (!table) return;
       table.classList = "inbox-table-legacy";
@@ -62274,6 +62276,10 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       sv: "Profilbild",
       ru: "\u0410\u0432\u0430\u0442\u0430\u0440",
       pl: "Awatar"
+    },
+    avatar_desc: {
+      // shown as a description when setting your avatar
+      en: "Present yourself site-wide in your style"
     },
     customise: {
       en: "Customise",
