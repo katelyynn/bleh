@@ -1571,7 +1571,7 @@
     }
 
     .main-content {
-        padding-top: calc(5px + 32px) !important;
+        padding-top: calc(5px + var(--button-height)) !important;
 
         /* overflow on library page for some rsn 2024-11-10 */
         overflow-x: hidden;
@@ -1619,7 +1619,7 @@
         right: 0;
         top: 0 !important;
         background: transparent !important;
-        height: calc(20px + 32px) !important; /* macOS */
+        height: calc(20px + var(--button-height)) !important; /* macOS */
         display: flex !important;
         justify-content: center;
         align-items: center;
@@ -1640,7 +1640,7 @@
             left: 0;
             top: 0;
             right: 0;
-            height: calc(20px + 30px);
+            height: calc(20px + var(--button-height));
             z-index: 10;
 
             /*background: hsl(var(--b6), 60%);
@@ -1650,11 +1650,22 @@
             mask-image: var(--mask);
             -webkit-mask-image: var(--mask);*/
 
-            background: linear-gradient(180deg, hsl(var(--b6), 80%), transparent);
+            background: linear-gradient(180deg, hsl(var(--b6)), transparent);
+
+            opacity: 0.7;
 
             pointer-events: none;
 
-            transition: opacity 0.3s;
+            transition-property: height, opacity;
+            transition-duration: 0.4s;
+            transition-timing-function: var(--trans-function-ani);
+        }
+
+        &:hover {
+            &:before {
+                opacity: 1;
+                height: calc(20px + var(--button-height) + 20px);
+            }
         }
 
         &:after {
@@ -1663,7 +1674,7 @@
             left: 0;
             top: 0;
             right: 0;
-            height: calc(20px + 32px);
+            height: calc(20px + 30px);
             z-index: 20;
             background:
                 var(--cards-overlay-image, none),
@@ -1978,7 +1989,7 @@
         }
     }
 
-    .masthead-search-field,
+    .masthead-search-form,
     .bleh--version,
     .masthead-nav-control
     {
@@ -2026,7 +2037,7 @@
     }
 
     .masthead-nav-item {
-        height: 32px !important;
+        height: var(--button-height) !important;
     }
     .masthead-nav-control:before {
         opacity: 1 !important;
@@ -2252,7 +2263,7 @@
         display: flex;
         align-items: center;
         gap: 6px;
-        height: 32px !important;
+        height: var(--button-height) !important;
         text-decoration: var(--force-underline, none) !important;
         --mask: var(--icon-16-arrow-down) !important;
 
@@ -11202,8 +11213,7 @@
         box-shadow: var(--shadow, var(--interact-shadow)) !important;
         border: unset !important;
         height: var(--button-height);
-        transition-property:
-            background-color, transform, box-shadow, color, border;
+        transition-property: background-color, transform, box-shadow, color, border, filter;
         transition-duration: var(--trans);
         transition-timing-function: var(--trans-function);
 
