@@ -2529,6 +2529,9 @@ export const trans = {
     apply_global_accent: {
         en: 'Copy current accent to profile'
     },
+    this_will_replace_your_global_accent: {
+        en: 'This will replace your global accent (the one in use right now)'
+    },
     solarium: {
         name: {
             en: 'Enable solarium glass effects',

@@ -34567,9 +34567,25 @@
                 lit_range.set(settings.lit);
               }}>${tl2(trans.apply_global_accent)}</button>
                                                         <button class="dropdown-menu-clickable-item" data-type="global" onclick=${() => {
-                save_setting("hue", settings.profile_hue);
-                save_setting("sat", settings.profile_sat);
-                save_setting("lit", settings.profile_lit);
+                const warn = notify({
+                  id: "confirm_accent",
+                  title: tl2(trans.are_you_sure),
+                  body: tl2(trans.this_will_replace_your_global_accent),
+                  type: "warning",
+                  actions: [
+                    {
+                      type: "check",
+                      action: () => {
+                        notify_rm(warn);
+                        save_setting("hue", settings.profile_hue);
+                        save_setting("sat", settings.profile_sat);
+                        save_setting("lit", settings.profile_lit);
+                      },
+                      text: tl2(trans.continue)
+                    }
+                  ],
+                  persist: true
+                });
               }}>${tl2(trans.apply_profile_accent)}</button>
                                                     `,
               trigger: "click",
@@ -62356,6 +62372,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     apply_global_accent: {
       en: "Copy current accent to profile"
+    },
+    this_will_replace_your_global_accent: {
+      en: "This will replace your global accent (the one in use right now)"
     },
     solarium: {
       name: {

@@ -28,6 +28,7 @@ import { log } from '../build/log';
 import { toggle } from '../components/toggle';
 import { status } from '../components/status';
 import { radio, radio_convert } from '../components/radio_toggle';
+import { notify, notify_rm } from '../components/notify';
 
 let cropper;
 
@@ -947,9 +948,26 @@ function patch_settings_profile_panel(token, update_picture) {
                                                             lit_range.set(settings.lit);
                                                         }}>${tl(trans.apply_global_accent)}</button>
                                                         <button class="dropdown-menu-clickable-item" data-type="global" onclick=${() => {
-                                                            save_setting('hue', settings.profile_hue);
-                                                            save_setting('sat', settings.profile_sat);
-                                                            save_setting('lit', settings.profile_lit);
+                                                            const warn = notify({
+                                                                id: 'confirm_accent',
+                                                                title: tl(trans.are_you_sure),
+                                                                body: tl(trans.this_will_replace_your_global_accent),
+                                                                type: 'warning',
+                                                                actions: [
+                                                                    {
+                                                                        type: 'check',
+                                                                        action: () => {
+                                                                            notify_rm(warn);
+
+                                                                            save_setting('hue', settings.profile_hue);
+                                                                            save_setting('sat', settings.profile_sat);
+                                                                            save_setting('lit', settings.profile_lit);
+                                                                        },
+                                                                        text: tl(trans.continue)
+                                                                    }
+                                                                ],
+                                                                persist: true
+                                                            })
                                                         }}>${tl(trans.apply_profile_accent)}</button>
                                                     `,
                                                     trigger: 'click',
