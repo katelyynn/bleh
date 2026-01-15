@@ -497,8 +497,7 @@ function patch_settings_charts_panel(token) {
 }
 
 function patch_settings_profile_panel(token, update_picture) {
-    // some testing, probably not accurate
-    const bio_max_length = 485;
+    const bio_max_length = 500;
 
     update_picture.classList.add('bleh--panel');
 
@@ -802,7 +801,7 @@ function patch_settings_profile_panel(token, update_picture) {
     update_about();
 
     function len(text) {
-        return text.length;
+        return text.replace(/\n/g, '\r\n').length;
 
         // utf-8 or something i dont know
         const normalised = text.replace(/\r\n/g, '\n');

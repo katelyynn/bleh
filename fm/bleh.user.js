@@ -34174,7 +34174,7 @@
     });
   }
   function patch_settings_profile_panel(token, update_picture) {
-    const bio_max_length = 485;
+    const bio_max_length = 500;
     update_picture.classList.add("bleh--panel");
     const upload_form = update_picture.querySelector(".avatar-upload-form");
     const avatar_url = update_picture.querySelector(".image-upload-preview img").getAttribute("src");
@@ -34442,7 +34442,7 @@
     );
     update_about();
     function len(text4) {
-      return text4.length;
+      return text4.replace(/\n/g, "\r\n").length;
       const normalised = text4.replace(/\r\n/g, "\n");
       return new TextEncoder().encode(normalised).length;
     }

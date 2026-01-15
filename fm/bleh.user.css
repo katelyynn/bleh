@@ -241,7 +241,7 @@
             inset 0 -1px 0 0 hsl(var(--b3), 70%),
             inset 0 1px 2px hsl(var(--b7), 0.2);
         --focused-input-shadow:
-            inset 0 -1px 0 0 hsl(var(--h3), 50%),
+            inset 0 -3px 10px 1px hsl(var(--h3), 16%),
             inset 0 -1px 0 0 hsl(var(--b3), 70%),
             inset 0 1px 2px hsl(var(--b7), 0.2);
         --group-shadow:
@@ -310,7 +310,7 @@
                 inset 0 -1px 0 0 hsl(var(--b3)),
                 inset 0 1px 2px 1px hsl(var(--b3), 0.4);
             --focused-input-shadow:
-                inset 0 -1px 0 0 hsl(var(--h3), 50%),
+                inset 0 -3px 10px 1px hsl(var(--h3), 16%),
                 inset 0 -1px 0 0 hsl(var(--b3)),
                 inset 0 1px 2px 1px hsl(var(--b3), 0.4);
             --group-shadow:
@@ -358,7 +358,7 @@
                 inset 0 -1px 0 0 var(--card-border-base),
                 inset 0 1px 3px hsl(var(--b7), 0.1);
             --focused-input-shadow:
-                inset 0 -1px 0 0 hsl(var(--h3), 80%),
+                inset 0 -3px 10px 1px hsl(var(--h3), 30%),
                 inset 0 -1px 0 0 var(--card-border-base),
                 inset 0 1px 3px hsl(var(--b7), 0.1);
             --group-shadow:
@@ -419,7 +419,7 @@
                 inset 0 -1px 0 0 var(--card-border-base),
                 inset 0 1px 3px hsl(var(--b7), 0.1);
             --focused-input-shadow:
-                inset 0 -1px 0 0 hsl(var(--h3), 80%),
+                inset 0 -3px 10px 1px hsl(var(--h3), 30%),
                 inset 0 -1px 0 0 var(--card-border-base),
                 inset 0 1px 3px hsl(var(--b7), 0.1);
             --group-shadow:
@@ -14683,8 +14683,8 @@
     }
     .alert-success {
         --hue-over: var(--hue-pos);
-        --sat-over: 1;
-        --lit-over: 1;
+        --sat-over: var(--sat-pos);
+        --lit-over: var(--lit-pos);
 
         &:before,
         &:after {
@@ -14697,8 +14697,8 @@
     .alert-update {
         --mask: var(--icon-16-download);
         --hue-over: var(--hue-pos);
-        --sat-over: 1;
-        --lit-over: 1;
+        --sat-over: var(--sat-pos);
+        --lit-over: var(--lit-pos);
     }
 
     .alert-info {
@@ -14728,8 +14728,8 @@
     .async-content-error-message,
     .event-status--cancelled {
         --hue-over: var(--hue-neg);
-        --sat-over: 1;
-        --lit-over: 1;
+        --sat-over: var(--sat-neg);
+        --lit-over: var(--lit-neg);
     }
 
     /*     FOLLOWS/FOLLOWERS     */
@@ -19035,7 +19035,7 @@
 
         .banner-image {
             width: 240px;
-            height: 55px;
+            height: 59px;
             background-position: center;
             background-size: cover;
             border-radius: var(--item-big-radius);
@@ -20207,7 +20207,7 @@
         cursor: default;
 
         &[data-exceeded="true"] {
-            color: hsl(var(--l3-c));
+            color: hsl(var(--l3-c)) !important;
             --hue-over: var(--hue-neg);
             --sat-over: 1;
             --lit-over: 1;
@@ -23118,7 +23118,7 @@
         }
 
         [data-ff--katsune="true"] &:not(.about-artist-panel) {
-            margin: 40px -40px var(--card-padding) !important;
+            margin: 40px -40px 30px !important;
             padding: 0 calc(var(--card-gap) + var(--card-padding)) !important;
             align-items: center;
             gap: calc(var(--card-gap) + var(--card-padding));
@@ -23659,7 +23659,7 @@
         z-index: -4;
 
         --w: calc(var(--cards-width) + (var(--card-padding) * 8));
-        --h: 300px;
+        --h: 346px;
 
         height: calc(52px + var(--banner-offset) + 30px + (var(--h) * 2));
         width: var(--w);
@@ -24989,8 +24989,9 @@
 
     .external-warn-input {
         padding: 12px 24px;
-        background: hsl(var(--b4), 40%);
+        background: hsl(var(--b6), 60%);
         border-radius: var(--item-med-radius);
+        box-shadow: var(--input-shadow);
 
         font-size: 16px;
         line-height: 20px;
