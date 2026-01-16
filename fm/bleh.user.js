@@ -423,7 +423,7 @@
             step((generator = generator.apply(thisArg, _arguments || [])).next());
           });
         }
-        function __generator(thisArg, body2) {
+        function __generator(thisArg, body) {
           var _ = { label: 0, sent: function() {
             if (t[0] & 1) throw t[1];
             return t[1];
@@ -481,7 +481,7 @@
                   _.trys.pop();
                   continue;
               }
-              op = body2.call(thisArg, _);
+              op = body.call(thisArg, _);
             } catch (e2) {
               op = [6, e2];
               y = 0;
@@ -534,13 +534,13 @@
           return Bounds.fromClientRect(context, node.getBoundingClientRect());
         };
         var parseDocumentSize = function(document2) {
-          var body2 = document2.body;
+          var body = document2.body;
           var documentElement = document2.documentElement;
-          if (!body2 || !documentElement) {
+          if (!body || !documentElement) {
             throw new Error("Unable to get document size");
           }
-          var width = Math.max(Math.max(body2.scrollWidth, documentElement.scrollWidth), Math.max(body2.offsetWidth, documentElement.offsetWidth), Math.max(body2.clientWidth, documentElement.clientWidth));
-          var height = Math.max(Math.max(body2.scrollHeight, documentElement.scrollHeight), Math.max(body2.offsetHeight, documentElement.offsetHeight), Math.max(body2.clientHeight, documentElement.clientHeight));
+          var width = Math.max(Math.max(body.scrollWidth, documentElement.scrollWidth), Math.max(body.offsetWidth, documentElement.offsetWidth), Math.max(body.clientWidth, documentElement.clientWidth));
+          var height = Math.max(Math.max(body.scrollHeight, documentElement.scrollHeight), Math.max(body.offsetHeight, documentElement.offsetHeight), Math.max(body.clientHeight, documentElement.clientHeight));
           return new Bounds(0, 0, width, height);
         };
         var toCodePoints$1 = function(str) {
@@ -6649,15 +6649,15 @@
         var PSEUDO_HIDE_ELEMENT_CLASS_BEFORE = "___html2canvas___pseudoelement_before";
         var PSEUDO_HIDE_ELEMENT_CLASS_AFTER = "___html2canvas___pseudoelement_after";
         var PSEUDO_HIDE_ELEMENT_STYLE = '{\n    content: "" !important;\n    display: none !important;\n}';
-        var createPseudoHideStyles = function(body2) {
-          createStyles(body2, ".".concat(PSEUDO_HIDE_ELEMENT_CLASS_BEFORE).concat(PSEUDO_BEFORE).concat(PSEUDO_HIDE_ELEMENT_STYLE, "\n         .").concat(PSEUDO_HIDE_ELEMENT_CLASS_AFTER).concat(PSEUDO_AFTER).concat(PSEUDO_HIDE_ELEMENT_STYLE));
+        var createPseudoHideStyles = function(body) {
+          createStyles(body, ".".concat(PSEUDO_HIDE_ELEMENT_CLASS_BEFORE).concat(PSEUDO_BEFORE).concat(PSEUDO_HIDE_ELEMENT_STYLE, "\n         .").concat(PSEUDO_HIDE_ELEMENT_CLASS_AFTER).concat(PSEUDO_AFTER).concat(PSEUDO_HIDE_ELEMENT_STYLE));
         };
-        var createStyles = function(body2, styles) {
-          var document2 = body2.ownerDocument;
+        var createStyles = function(body, styles) {
+          var document2 = body.ownerDocument;
           if (document2) {
             var style = document2.createElement("style");
             style.textContent = styles;
-            body2.appendChild(style);
+            body.appendChild(style);
           }
         };
         var addBase = function(targetELement, referenceDocument) {
@@ -7535,14 +7535,14 @@
               var container = this._document.createElement("div");
               var img = this._document.createElement("img");
               var span = this._document.createElement("span");
-              var body2 = this._document.body;
+              var body = this._document.body;
               container.style.visibility = "hidden";
               container.style.fontFamily = fontFamily2;
               container.style.fontSize = fontSize2;
               container.style.margin = "0";
               container.style.padding = "0";
               container.style.whiteSpace = "nowrap";
-              body2.appendChild(container);
+              body.appendChild(container);
               img.src = SMALL_IMAGE;
               img.width = 1;
               img.height = 1;
@@ -7562,7 +7562,7 @@
               container.style.lineHeight = "normal";
               img.style.verticalAlign = "super";
               var middle = img.offsetTop - container.offsetTop + 2;
-              body2.removeChild(container);
+              body.removeChild(container);
               return { baseline, middle };
             };
             FontMetrics2.prototype.getMetrics = function(fontFamily2, fontSize2) {
@@ -11463,18 +11463,18 @@
                 return;
               }
               var sizingImage = document.createElement("img");
-              var body2 = document.body || document.documentElement;
+              var body = document.body || document.documentElement;
               this.sizingImage = sizingImage;
               sizingImage.onload = function() {
                 done(sizingImage.width, sizingImage.height);
                 if (!isIOSWebKit) {
-                  body2.removeChild(sizingImage);
+                  body.removeChild(sizingImage);
                 }
               };
               sizingImage.src = image.src;
               if (!isIOSWebKit) {
                 sizingImage.style.cssText = "left:0;max-height:none!important;max-width:none!important;min-height:0!important;min-width:0!important;opacity:0;position:absolute;top:0;z-index:-1;";
-                body2.appendChild(sizingImage);
+                body.appendChild(sizingImage);
               }
             }
           }, {
@@ -16865,13 +16865,13 @@
     var _element$ownerDocumen;
     var html3 = getDocumentElement(element);
     var winScroll = getWindowScroll(element);
-    var body2 = (_element$ownerDocumen = element.ownerDocument) == null ? void 0 : _element$ownerDocumen.body;
-    var width = max(html3.scrollWidth, html3.clientWidth, body2 ? body2.scrollWidth : 0, body2 ? body2.clientWidth : 0);
-    var height = max(html3.scrollHeight, html3.clientHeight, body2 ? body2.scrollHeight : 0, body2 ? body2.clientHeight : 0);
+    var body = (_element$ownerDocumen = element.ownerDocument) == null ? void 0 : _element$ownerDocumen.body;
+    var width = max(html3.scrollWidth, html3.clientWidth, body ? body.scrollWidth : 0, body ? body.clientWidth : 0);
+    var height = max(html3.scrollHeight, html3.clientHeight, body ? body.scrollHeight : 0, body ? body.clientHeight : 0);
     var x = -winScroll.scrollLeft + getWindowScrollBarX(element);
     var y = -winScroll.scrollTop;
-    if (getComputedStyle2(body2 || html3).direction === "rtl") {
-      x += max(html3.clientWidth, body2 ? body2.clientWidth : 0) - width;
+    if (getComputedStyle2(body || html3).direction === "rtl") {
+      x += max(html3.clientWidth, body ? body.clientWidth : 0) - width;
     }
     return {
       width,
@@ -20310,7 +20310,7 @@
   function notify({
     id,
     title,
-    body: body2,
+    body,
     icon,
     classname,
     actions = [],
@@ -20323,7 +20323,7 @@
     log(`creating ${title}`, "notification", "info", {
       id,
       title,
-      body: body2,
+      body,
       icon,
       classname,
       persist,
@@ -20367,8 +20367,8 @@
         >
             <div class="notification-information" ref=${(el) => information = el}>
                 <div class="notification-title">${title}</div>
-                ${body2 ? html.node`
-                <div class="notification-body">${body2}</div>
+                ${body ? html.node`
+                <div class="notification-body">${body}</div>
                 ` : ""}
             </div>
             ${!persist ? html.node`
@@ -20394,11 +20394,11 @@
     notif.set = (value) => {
       bar.style.setProperty("width", `${value}%`);
     };
-    notif.set_body = (body3) => {
+    notif.set_body = (body2) => {
       render(information, html`
             <div class="notification-title">${title}</div>
-            ${body3 ? html.node`
-            <div class="notification-body">${body3}</div>
+            ${body2 ? html.node`
+            <div class="notification-body">${body2}</div>
             ` : ""}
         `);
     };
@@ -27820,7 +27820,7 @@
       document.body.appendChild(notification_host);
     }
   }
-  function status({ title, body: body2, type }) {
+  function status({ title, body, type }) {
     let icon = "icon-16-info";
     if (type == "error") {
       icon = "icon-16-x";
@@ -27831,7 +27831,7 @@
                 <div class="bleh-icon" style="--icon: var(--${icon})" />
             </div>
             <div class="status-title">${title}</div>
-            ${body2 ? html.node`<div class="status-body">${body2}</div>` : ""}
+            ${body ? html.node`<div class="status-body">${body}</div>` : ""}
         </div>
     `;
     setTimeout(() => {
@@ -29311,7 +29311,7 @@
     id = "",
     title,
     subtitle,
-    body: body2 = html.node``,
+    body = html.node``,
     dismiss = true,
     type = "",
     has_overlays = true,
@@ -29327,7 +29327,7 @@
       id,
       title,
       subtitle,
-      body: body2,
+      body,
       dismiss,
       type,
       has_overlays,
@@ -29390,7 +29390,7 @@
     let modal_body = document.createElement("div");
     modal_body.classList.add("bleh-modal-body");
     modal_body.setAttribute("data-allow-scroll", allow_scroll);
-    modal_body.appendChild(body2);
+    modal_body.appendChild(body);
     modal.appendChild(modal_body);
     dialogs[id] = {
       instance: modal
@@ -31772,7 +31772,7 @@
     type = "toggle",
     name = "",
     title = "",
-    body: body2 = "",
+    body = "",
     small = "",
     disabled = false,
     data: data2 = "",
@@ -31792,7 +31792,7 @@
     }}>
             <div class="heading">
                 <h5>${title}</h5>
-                ${body2 != "" ? html.node`<p>${body2}</p>` : ""}
+                ${body != "" ? html.node`<p>${body}</p>` : ""}
                 ${small != "" ? html.node`<small>${small}</small>` : ""}
             </div>
             ${type == "toggle" ? html.node`
@@ -35929,8 +35929,8 @@
       let header = document.createElement("h2");
       header.textContent = tl2(trans.shared_with_others);
       related.appendChild(header);
-      let users = shared_users.querySelectorAll(".avatar");
-      users.forEach((user) => {
+      let users2 = shared_users.querySelectorAll(".avatar");
+      users2.forEach((user) => {
         let name = user.querySelector("img").getAttribute("alt");
         patch_avatar(user, name);
       });
@@ -37811,7 +37811,7 @@
     let type;
     let settings_btn;
     let submit;
-    let body2;
+    let body;
     let value = 3;
     let min2 = 1;
     let max2 = 20;
@@ -37905,7 +37905,7 @@
         <div
             class="compare-body"
             data-filled="false"
-            ref=${(el) => body2 = el}
+            ref=${(el) => body = el}
         >
             <div class="loading-data-container">
                 <div class="loading-data-text info">
@@ -38112,7 +38112,7 @@
     }
     function get_grid(current_page, pages) {
       render(
-        body2,
+        body,
         html`
                 <div class="loading-data-container">
                     <div class="loading-data-text">
@@ -38170,7 +38170,7 @@
       log("gathered initial values", "collage", "info", page.state.collage);
       if (page.state.collage.length == 0) {
         render(
-          body2,
+          body,
           html`
                     <div class="loading-data-container">
                         <div class="loading-data-text failed">
@@ -38274,7 +38274,7 @@
             </div>
         `;
       render(
-        body2,
+        body,
         html`
                 <div class="loading-data-container">
                     <div class="loading-data-text">
@@ -38335,7 +38335,7 @@
             `${date.getFullYear()}-${pad2(date.getMonth() + 1)}-${pad2(date.getDate())}`
           );
           render(
-            body2,
+            body,
             html`
                         <div class="collage-canvas">
                             ${canvas}
@@ -38687,73 +38687,12 @@
   // src/components/plot.js
   function plot({ host, sidebar } = {}) {
     if (!host || !sidebar) return;
-    let timeframe;
+    let data_points = [];
     let current_year = (/* @__PURE__ */ new Date()).getFullYear();
     let previous_year = current_year - 1;
-    const default_timeframe = page.requested.timeframe || "date_preset=LAST_90_DAYS";
-    let users = [page.name];
-    let users_elem;
+    let body;
+    let timeframe;
     render(host, html`
-        <div class="compare-header">
-            <div class="compare-users for-plot" ref=${(el) => users_elem = el} />
-            <div class="compare-selection">
-                ${timeframe = select(
-      [
-        {
-          text: tl2(trans.timeframe)
-        },
-        {
-          value: "date_preset=LAST_7_DAYS",
-          text: tl2(trans.last_count_days).replace(
-            "{c}",
-            "7"
-          )
-        },
-        {
-          value: "date_preset=LAST_30_DAYS",
-          text: tl2(trans.last_count_days).replace(
-            "{c}",
-            "30"
-          )
-        },
-        {
-          value: "date_preset=LAST_90_DAYS",
-          text: tl2(trans.last_count_days).replace(
-            "{c}",
-            "90"
-          )
-        },
-        {
-          value: "date_preset=LAST_180_DAYS",
-          text: tl2(trans.last_count_days).replace(
-            "{c}",
-            "180"
-          )
-        },
-        {
-          value: "date_preset=LAST_365_DAYS",
-          text: tl2(trans.last_count_days).replace(
-            "{c}",
-            "365"
-          )
-        },
-        {
-          value: "date_preset=ALL",
-          text: tl2(trans.all_time)
-        },
-        {
-          value: `from=${current_year}-01-01&rangetype=year`,
-          text: current_year
-        },
-        {
-          value: `from=${previous_year}-01-01&rangetype=year`,
-          text: previous_year
-        }
-      ],
-      default_timeframe
-    )}
-            </div>
-        </div>
         <div
             class="compare-body"
             data-filled="false"
@@ -38766,7 +38705,6 @@
             </div>
         </div>
     `);
-    render_users();
     function render_users() {
       render(users_elem, html`
             ${users.map((user) => html.node`
@@ -38823,6 +38761,8 @@
             ${render_user(name, avatar2, elem)}
         `);
       return elem;
+    }
+    function fetch_data_set(user, media = null) {
     }
   }
 
@@ -39180,7 +39120,7 @@
     let timeframe;
     let type;
     let submit;
-    let body2;
+    let body;
     if (page.name == auth.name) {
       page.name = "";
       page.avatar = "";
@@ -39345,7 +39285,7 @@
             <div
                 class="compare-body"
                 data-filled="false"
-                ref=${(el) => body2 = el}
+                ref=${(el) => body = el}
             >
                 <div class="loading-data-container">
                     <div class="loading-data-text info">
@@ -39467,7 +39407,7 @@
     }
     function get_grid(user2, current_page, page_count, next_user = null) {
       render(
-        body2,
+        body,
         html`
                 <div class="loading-data-container">
                     <div class="loading-data-text">
@@ -39553,10 +39493,10 @@
         (a, b) => b.plays.shared - a.plays.shared
       );
       log("gathered shared values", "compare", "info", page.state.compare);
-      body2.innerHTML = "";
+      body.innerHTML = "";
       if (page.state.compare.shared.length == 0) {
         render(
-          body2,
+          body,
           html`
                     <div class="loading-data-container">
                         <div class="loading-data-text failed">
@@ -39618,7 +39558,7 @@
                     </li>
                 `);
         });
-        render(body2, grid);
+        render(body, grid);
         music_grids(grid);
       } else {
         let table = document.createElement("table");
@@ -39681,8 +39621,8 @@
                     </tr>
                 `);
         });
-        body2.appendChild(table);
-        patch_titles(body2);
+        body.appendChild(table);
+        patch_titles(body);
       }
     }
   }
@@ -40945,7 +40885,7 @@
         });
       const type = settings_store[id].type || "toggle";
       const title = settings_store[id].title ? tl2(settings_store[id].title) : id;
-      let body2 = settings_store[id].body ? tl2(settings_store[id].body) : null;
+      let body = settings_store[id].body ? tl2(settings_store[id].body) : null;
       const icon = settings_store[id].icon;
       if (![
         "toggle",
@@ -40962,8 +40902,8 @@
         });
       const incompatible_with = settings_store[id].incompatible;
       const hide_if_incompatible = settings_store[id].hide_if_incompatible || false;
-      if (!body2 && settings_store[id].keybind)
-        body2 = keybind(settings_store[id].keybind);
+      if (!body && settings_store[id].keybind)
+        body = keybind(settings_store[id].keybind);
       let disabled = false;
       let disabled_reason = "";
       if (settings_store[id].platforms && !settings_store[id].platforms.includes(page.platform)) {
@@ -41019,7 +40959,7 @@
                     ${text4 ? html.node`
                     <div class="heading">
                         <h5>${html_title}</h5>
-                        ${body2 ? html.node`<p>${body2}</p>` : ""}
+                        ${body ? html.node`<p>${body}</p>` : ""}
                     </div>
                     ` : ""}
                     ${settings_store[id].extensions ? html.node`
@@ -41102,7 +41042,7 @@
                     ${text4 ? html.node`
                     <div class="heading">
                         <h5>${html_title}<button class="btn reset" ref=${(el) => reset_btn = el} onclick=${() => reset_range()}>${tl2(trans.reset)}</button></h5>
-                        ${body2 ? html.node`<p>${body2}</p>` : ""}
+                        ${body ? html.node`<p>${body}</p>` : ""}
                     </div>
                     ` : ""}
                     ${settings_store[id].extensions ? html.node`
@@ -41184,7 +41124,7 @@
                     ${text4 ? html.node`
                     <div class="heading">
                         <h5>${html_title}<button class="btn reset" ref=${(el) => reset_btn = el} onclick=${() => reset_text(id, input2, submit, option, reset_btn, avatar2)}>${tl2(trans.reset)}</button></h5>
-                        ${body2 ? html.node`<p>${body2}</p>` : ""}
+                        ${body ? html.node`<p>${body}</p>` : ""}
                     </div>
                     ` : ""}
                     ${settings_store[id].extensions ? html.node`
@@ -41316,7 +41256,7 @@
                     ${text4 ? html.node`
                     <div class="heading">
                         <h5>${html_title}</h5>
-                        ${body2 ? html.node`<p>${body2}</p>` : ""}
+                        ${body ? html.node`<p>${body}</p>` : ""}
                     </div>
                     ` : ""}
                     ${settings_store[id].extensions ? html.node`
@@ -41427,7 +41367,7 @@
                     ${text4 ? html.node`
                     <div class="heading">
                         <h5>${html_title}<button class="btn reset" ref=${(el) => reset_btn = el} onclick=${() => reset_radio()}>${tl2(trans.reset)}</button></h5>
-                        ${body2 ? html.node`<p>${body2}</p>` : ""}
+                        ${body ? html.node`<p>${body}</p>` : ""}
                     </div>
                     ` : ""}
                     ${settings_store[id].extensions ? html.node`
@@ -41609,7 +41549,7 @@
                     ${text4 ? html.node`
                     <div class="heading">
                         <h5>${html_title}</h5>
-                        ${body2 ? html.node`<p>${body2}</p>` : ""}
+                        ${body ? html.node`<p>${body}</p>` : ""}
                     </div>
                     ` : ""}
                     <div class="setting-lists" ref=${(el) => lists = el} />
@@ -41671,7 +41611,7 @@
                     ${text4 ? html.node`
                     <div class="heading">
                         <h5>${html_title}<button class="btn reset" ref=${(el) => reset_btn = el} onclick=${() => reset_select()}>${tl2(trans.reset)}</button></h5>
-                        ${body2 ? html.node`<p>${body2}</p>` : ""}
+                        ${body ? html.node`<p>${body}</p>` : ""}
                     </div>
                     ` : ""}
                     ${settings_store[id].extensions ? html.node`
@@ -48308,14 +48248,14 @@
         } catch (_) {
         }
       }
-      const body2 = doc.body || doc.documentElement;
+      const body = doc.body || doc.documentElement;
       if (dirty && leadingWhitespace) {
-        body2.insertBefore(document2.createTextNode(leadingWhitespace), body2.childNodes[0] || null);
+        body.insertBefore(document2.createTextNode(leadingWhitespace), body.childNodes[0] || null);
       }
       if (NAMESPACE === HTML_NAMESPACE) {
         return getElementsByTagName.call(doc, WHOLE_DOCUMENT ? "html" : "body")[0];
       }
-      return WHOLE_DOCUMENT ? doc.documentElement : body2;
+      return WHOLE_DOCUMENT ? doc.documentElement : body;
     };
     const _createNodeIterator = function _createNodeIterator2(root2) {
       return createNodeIterator.call(
@@ -48549,7 +48489,7 @@
     };
     DOMPurify.sanitize = function(dirty) {
       let cfg = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {};
-      let body2 = null;
+      let body = null;
       let importedNode = null;
       let currentNode = null;
       let returnNode = null;
@@ -48585,29 +48525,29 @@
           }
         }
       } else if (dirty instanceof Node2) {
-        body2 = _initDocument("<!---->");
-        importedNode = body2.ownerDocument.importNode(dirty, true);
+        body = _initDocument("<!---->");
+        importedNode = body.ownerDocument.importNode(dirty, true);
         if (importedNode.nodeType === NODE_TYPE.element && importedNode.nodeName === "BODY") {
-          body2 = importedNode;
+          body = importedNode;
         } else if (importedNode.nodeName === "HTML") {
-          body2 = importedNode;
+          body = importedNode;
         } else {
-          body2.appendChild(importedNode);
+          body.appendChild(importedNode);
         }
       } else {
         if (!RETURN_DOM && !SAFE_FOR_TEMPLATES && !WHOLE_DOCUMENT && // eslint-disable-next-line unicorn/prefer-includes
         dirty.indexOf("<") === -1) {
           return trustedTypesPolicy && RETURN_TRUSTED_TYPE ? trustedTypesPolicy.createHTML(dirty) : dirty;
         }
-        body2 = _initDocument(dirty);
-        if (!body2) {
+        body = _initDocument(dirty);
+        if (!body) {
           return RETURN_DOM ? null : RETURN_TRUSTED_TYPE ? emptyHTML : "";
         }
       }
-      if (body2 && FORCE_BODY) {
-        _forceRemove(body2.firstChild);
+      if (body && FORCE_BODY) {
+        _forceRemove(body.firstChild);
       }
-      const nodeIterator = _createNodeIterator(IN_PLACE ? dirty : body2);
+      const nodeIterator = _createNodeIterator(IN_PLACE ? dirty : body);
       while (currentNode = nodeIterator.nextNode()) {
         _sanitizeElements(currentNode);
         _sanitizeAttributes(currentNode);
@@ -48620,21 +48560,21 @@
       }
       if (RETURN_DOM) {
         if (RETURN_DOM_FRAGMENT) {
-          returnNode = createDocumentFragment.call(body2.ownerDocument);
-          while (body2.firstChild) {
-            returnNode.appendChild(body2.firstChild);
+          returnNode = createDocumentFragment.call(body.ownerDocument);
+          while (body.firstChild) {
+            returnNode.appendChild(body.firstChild);
           }
         } else {
-          returnNode = body2;
+          returnNode = body;
         }
         if (ALLOWED_ATTR.shadowroot || ALLOWED_ATTR.shadowrootmode) {
           returnNode = importNode2.call(originalDocument, returnNode, true);
         }
         return returnNode;
       }
-      let serializedHTML = WHOLE_DOCUMENT ? body2.outerHTML : body2.innerHTML;
-      if (WHOLE_DOCUMENT && ALLOWED_TAGS["!doctype"] && body2.ownerDocument && body2.ownerDocument.doctype && body2.ownerDocument.doctype.name && regExpTest(DOCTYPE_NAME, body2.ownerDocument.doctype.name)) {
-        serializedHTML = "<!DOCTYPE " + body2.ownerDocument.doctype.name + ">\n" + serializedHTML;
+      let serializedHTML = WHOLE_DOCUMENT ? body.outerHTML : body.innerHTML;
+      if (WHOLE_DOCUMENT && ALLOWED_TAGS["!doctype"] && body.ownerDocument && body.ownerDocument.doctype && body.ownerDocument.doctype.name && regExpTest(DOCTYPE_NAME, body.ownerDocument.doctype.name)) {
+        serializedHTML = "<!DOCTYPE " + body.ownerDocument.doctype.name + ">\n" + serializedHTML;
       }
       if (SAFE_FOR_TEMPLATES) {
         arrayForEach([MUSTACHE_EXPR2, ERB_EXPR2, TMPLIT_EXPR2], (expr) => {
@@ -49075,8 +49015,8 @@
       ALLOWED_TAGS,
       ALLOWED_ATTR
     });
-    const body2 = html.node([parsed2]);
-    log("rendered", "markdown", "info", { body: body2 });
+    const body = html.node([parsed2]);
+    log("rendered", "markdown", "info", { body });
     const link_strings = {
       "open.spotify.com": "Spotify",
       "spotify.com": "Spotify",
@@ -49105,7 +49045,7 @@
       "tidal.com": "Tidal"
     };
     if (links.length > 0) {
-      body2.appendChild(html.node`
+      body.appendChild(html.node`
             <div class="social-links-container">
                 <div class="sub-text music-small-header">
                     ${tl2(trans.links)}
@@ -49128,10 +49068,10 @@
             </div>
         `);
     }
-    if (body2.nodeName != "#text") patch_wiki_contents(body2);
-    if (line_breaks && body2.nodeName != "#text") {
-      local_restriction(body2);
-      body2.querySelectorAll("p").forEach((text5) => {
+    if (body.nodeName != "#text") patch_wiki_contents(body);
+    if (line_breaks && body.nodeName != "#text") {
+      local_restriction(body);
+      body.querySelectorAll("p").forEach((text5) => {
         local_restriction(text5);
       });
     }
@@ -49139,8 +49079,8 @@
       if (!sponsor_list || sponsor_list && !sponsor_list.sponsors.includes(name))
         allow_hue = false;
     }
-    if (body2.nodeName != "#text") {
-      body2.querySelectorAll("img").forEach((image) => {
+    if (body.nodeName != "#text") {
+      body.querySelectorAll("img").forEach((image) => {
         if (!line_breaks) {
           image.remove();
           return;
@@ -49197,7 +49137,7 @@
       }
     }
     if (status_cafe_user) {
-      const status_cafe_host = body2.querySelector(".status-cafe-host");
+      const status_cafe_host = body.querySelector(".status-cafe-host");
       render(status_cafe_host, html`
             <div class="status-cafe">
                 <div class="status-cafe-top">
@@ -49218,7 +49158,7 @@
         render(status_cafe_host, status_cafe);
       });
     }
-    body2.querySelectorAll("t").forEach((timestamp2) => {
+    body.querySelectorAll("t").forEach((timestamp2) => {
       const time2 = timestamp2.textContent;
       const flag = timestamp2.getAttribute("data-flag");
       const date = DateTime.fromSeconds(parseInt(time2));
@@ -49262,7 +49202,7 @@
       });
       save_profile_cache(cache2, profile_cache, name);
     }
-    return body2;
+    return body;
   }
   function markdown_preview(text4, {
     allow_headers = false,
@@ -57751,8 +57691,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         side_actions.appendChild(sep2);
         side_actions.appendChild(poster_panel);
       }
-      let users = page.structure.main.querySelectorAll(".attendee-summary-user-inner-wrap");
-      users.forEach((user) => {
+      let users2 = page.structure.main.querySelectorAll(".attendee-summary-user-inner-wrap");
+      users2.forEach((user) => {
         let avatar2 = user.querySelector(".attendee-summary-user-avatar");
         let name = user.querySelector(".attendee-summary-user-link");
         let badge = patch_avatar(avatar2, name.textContent, "event");
@@ -57791,8 +57731,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
             `;
         render(page.structure.main, user_panel);
         refresh_all();
-        let users = page.structure.main.querySelectorAll(".user-list-inner-wrap");
-        users.forEach((user) => {
+        let users2 = page.structure.main.querySelectorAll(".user-list-inner-wrap");
+        users2.forEach((user) => {
           let avatar2 = user.querySelector(".user-list-avatar");
           let name = user.querySelector(".user-list-link").textContent;
           let badge = patch_avatar(avatar2, name, "follow");
@@ -58580,8 +58520,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
 
   // src/pages/users.js
   function bleh_users() {
-    const users = page.structure.main?.querySelectorAll(".user-list-item:not(.user-list-item-mobile-ad)");
-    users.forEach((user, index3) => {
+    const users2 = page.structure.main?.querySelectorAll(".user-list-item:not(.user-list-item-mobile-ad)");
+    users2.forEach((user, index3) => {
       user.style.setProperty("--delay", index3 * 0.04 + "s");
       let avatar2 = user.querySelector(".user-list-avatar");
       let name = user.querySelector(".user-list-link");
@@ -58701,9 +58641,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       );
       if (!modal_dialog) return;
       modal_dialog.setAttribute("data-dialog-extender", "true");
-      let body2 = modal_dialog.querySelector(".modal-body");
-      let title = body2.querySelector(".modal-title");
-      let contents = body2.querySelector(":scope > div");
+      let body = modal_dialog.querySelector(".modal-body");
+      let title = body.querySelector(".modal-title");
+      let contents = body.querySelector(":scope > div");
       let form = contents.querySelector("form");
       if (!form) return;
       let dismiss = modal_dialog.querySelector(".modal-dismiss");
@@ -58766,14 +58706,14 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                     </form>
                 `
         );
-      } else if (body2.classList.contains("automatic-edit-modal-body-v2")) {
+      } else if (body.classList.contains("automatic-edit-modal-body-v2")) {
         let bulk_edit_active = false;
-        let edit_all = body2.querySelector('[name="edit_all"]');
+        let edit_all = body.querySelector('[name="edit_all"]');
         if (edit_all && edit_all.disabled) bulk_edit_active = true;
         if (!bulk_edit_active) title.textContent = tl2(trans.edit_scrobble);
         else title.textContent = tl2(trans.edit_scrobbles_in_bulk);
         modal_dialog.classList.add("automatic-edit-modal");
-        let checkboxes = body2.querySelectorAll(".checkbox");
+        let checkboxes = body.querySelectorAll(".checkbox");
         checkboxes.forEach((checkbox) => {
           let input_el = checkbox.querySelector("input");
           let value = input_el.checked;
@@ -58794,15 +58734,15 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                     `
           );
         });
-        let original_fields = body2.querySelectorAll(
+        let original_fields = body.querySelectorAll(
           ".edit-scrobble-label--originally"
         );
         original_fields.forEach((field) => {
           field.textContent = field.textContent.trim().replace(/"([^"]*)"/g, "\u2018$1\u2019");
         });
-        let submit = body2.querySelector(".form-group--submit");
+        let submit = body.querySelector(".form-group--submit");
         submit.classList = "modal-footer";
-        let delete_form = body2.querySelector(".edit-scrobble-form-delete");
+        let delete_form = body.querySelector(".edit-scrobble-form-delete");
         let delete_btn;
         if (delete_form)
           delete_btn = delete_form.querySelector(".btn-delete");
@@ -58836,15 +58776,15 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                     </div>
                 `
         );
-      } else if (body2.querySelector(".lastfm-bulk-edit-list")) {
+      } else if (body.querySelector(".lastfm-bulk-edit-list")) {
         let checks;
-        let controls = body2.querySelector(
+        let controls = body.querySelector(
           ".lastfm-bulk-edit-form-group-controls"
         );
         if (controls) {
           let parent = controls.parentElement;
           parent.parentElement.removeChild(parent);
-          let disclaimer = body2.querySelector(".form-disclaimer");
+          let disclaimer = body.querySelector(".form-disclaimer");
           disclaimer.after(html.node`
                     <div class="button-group">
                         <button class="btn flex-button" onclick=${() => {
@@ -58866,7 +58806,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                     </div>
                 `);
         }
-        let list = body2.querySelector(".lastfm-bulk-edit-list");
+        let list = body.querySelector(".lastfm-bulk-edit-list");
         let checkboxes = list.querySelectorAll(".checkbox");
         checkboxes.forEach((checkbox) => {
           let input_el = checkbox.querySelector("input");
@@ -58898,7 +58838,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           );
         });
         checks = list.querySelectorAll(".setting");
-        let footer = body2.querySelector(".form-group--submit");
+        let footer = body.querySelector(".form-group--submit");
         footer.classList = "modal-footer";
         render(
           footer,
@@ -83477,18 +83417,18 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
   }
   function getTooltipSize(tooltip, options) {
     const ctx = tooltip.chart.ctx;
-    const { body: body2, footer, title } = tooltip;
+    const { body, footer, title } = tooltip;
     const { boxWidth, boxHeight } = options;
     const bodyFont = toFont(options.bodyFont);
     const titleFont = toFont(options.titleFont);
     const footerFont = toFont(options.footerFont);
     const titleLineCount = title.length;
     const footerLineCount = footer.length;
-    const bodyLineItemCount = body2.length;
+    const bodyLineItemCount = body.length;
     const padding = toPadding(options.padding);
     let height = padding.height;
     let width = 0;
-    let combinedBodyLength = body2.reduce((count, bodyItem) => count + bodyItem.before.length + bodyItem.lines.length + bodyItem.after.length, 0);
+    let combinedBodyLength = body.reduce((count, bodyItem) => count + bodyItem.before.length + bodyItem.lines.length + bodyItem.after.length, 0);
     combinedBodyLength += tooltip.beforeBody.length + tooltip.afterBody.length;
     if (titleLineCount) {
       height += titleLineCount * titleFont.lineHeight + (titleLineCount - 1) * options.titleSpacing + options.titleMarginBottom;
@@ -83510,7 +83450,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     ctx.font = bodyFont.string;
     each(tooltip.beforeBody.concat(tooltip.afterBody), maxLineWidth);
     widthPadding = options.displayColors ? boxWidth + 2 + options.boxPadding : 0;
-    each(body2, (bodyItem) => {
+    each(body, (bodyItem) => {
       each(bodyItem.before, maxLineWidth);
       each(bodyItem.lines, maxLineWidth);
       each(bodyItem.after, maxLineWidth);
@@ -84018,7 +83958,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       ctx.fillStyle = this.labelTextColors[i];
     }
     drawBody(pt, ctx, options) {
-      const { body: body2 } = this;
+      const { body } = this;
       const { bodySpacing, bodyAlign, displayColors, boxHeight, boxWidth, boxPadding } = options;
       const bodyFont = toFont(options.bodyFont);
       let bodyLineHeight = bodyFont.lineHeight;
@@ -84037,8 +83977,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       ctx.fillStyle = options.bodyColor;
       each(this.beforeBody, fillLineOfText);
       xLinePadding = displayColors && bodyAlignForCalculation !== "right" ? bodyAlign === "center" ? boxWidth / 2 + boxPadding : boxWidth + 2 + boxPadding : 0;
-      for (i = 0, ilen = body2.length; i < ilen; ++i) {
-        bodyItem = body2[i];
+      for (i = 0, ilen = body.length; i < ilen; ++i) {
+        bodyItem = body[i];
         textColor = this.labelTextColors[i];
         ctx.fillStyle = textColor;
         each(bodyItem.before, fillLineOfText);

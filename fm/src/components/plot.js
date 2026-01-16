@@ -9,80 +9,19 @@ import { input } from "./input";
 export function plot({ host, sidebar } = {}) {
     if (!host || !sidebar) return;
 
-    let timeframe;
+    let data_points = [];
 
     let current_year = new Date().getFullYear();
     let previous_year = current_year - 1;
 
-    const default_timeframe = page.requested.timeframe || 'date_preset=LAST_90_DAYS';
+    let body;
+    let timeframe;
 
-    let users = [page.name];
-    let users_elem;
     render(host, html`
-        <div class="compare-header">
-            <div class="compare-users for-plot" ref=${el => users_elem = el} />
-            <div class="compare-selection">
-                ${(timeframe = select(
-                    [
-                        {
-                            text: tl(trans.timeframe)
-                        },
-                        {
-                            value: 'date_preset=LAST_7_DAYS',
-                            text: tl(trans.last_count_days).replace(
-                                '{c}',
-                                '7'
-                            )
-                        },
-                        {
-                            value: 'date_preset=LAST_30_DAYS',
-                            text: tl(trans.last_count_days).replace(
-                                '{c}',
-                                '30'
-                            )
-                        },
-                        {
-                            value: 'date_preset=LAST_90_DAYS',
-                            text: tl(trans.last_count_days).replace(
-                                '{c}',
-                                '90'
-                            )
-                        },
-                        {
-                            value: 'date_preset=LAST_180_DAYS',
-                            text: tl(trans.last_count_days).replace(
-                                '{c}',
-                                '180'
-                            )
-                        },
-                        {
-                            value: 'date_preset=LAST_365_DAYS',
-                            text: tl(trans.last_count_days).replace(
-                                '{c}',
-                                '365'
-                            )
-                        },
-                        {
-                            value: 'date_preset=ALL',
-                            text: tl(trans.all_time)
-                        },
-                        {
-                            value: `from=${current_year}-01-01&rangetype=year`,
-                            text: current_year
-                        },
-                        {
-                            value: `from=${previous_year}-01-01&rangetype=year`,
-                            text: previous_year
-                        }
-                    ],
-                    default_timeframe
-                ))}
-            </div>
-        </div>
         <div
             class="compare-body"
             data-filled="false"
-            ref=${(el) => (body = el)}
+            ref=${el => body = el}
         >
             <div class="loading-data-container">
                 <div class="loading-data-text info">
@@ -91,8 +30,6 @@ export function plot({ host, sidebar } = {}) {
             </div>
         </div>
     `);
-
-    render_users();
 
     function render_users() {
         render(users_elem, html`
@@ -159,5 +96,9 @@ export function plot({ host, sidebar } = {}) {
         `);
 
         return elem;
+    }
+
+    function fetch_data_set(user, media = null) {
+        
     }
 }
