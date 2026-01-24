@@ -33000,6 +33000,7 @@
     let taste = "";
     let taste_percentage = "";
     let taste_artists = [];
+    let taste_formal = "NONE";
     if (!is_own_profile && page.name != sponsor_list.sponsor_account) {
       let taste_meter = base_header.querySelector(".tasteometer");
       if (taste_meter) {
@@ -33007,9 +33008,10 @@
         let artists = taste_meter.querySelectorAll("a");
         artists.forEach((artist) => {
           taste_artists.push(
-            correct_artist(artist.getAttribute("title"))
+            romanise(correct_artist(artist.getAttribute("title")))
           );
         });
+        taste_formal = taste_meter.querySelector("span.tasteometer-compat-colour")?.textContent;
         taste_percentage = taste_meter.querySelector(".tasteometer-viz").getAttribute("title");
         if (taste_percentage == "99%") taste_percentage = "100%";
       }
@@ -33158,8 +33160,8 @@
       ])}</h3>
                         <p>
                             ${taste_artists.length == 1 ? taste_artists[0] : ""}
-                            ${taste_artists.length == 2 ? tl2(trans.you_share_count_with.two).replace("{artist1}", taste_artists[0]).replace("{artist2}", taste_artists[1]) : ""}
-                            ${taste_artists.length == 3 ? tl2(trans.you_share_count_with.three).replace("{artist1}", taste_artists[0]).replace("{artist2}", taste_artists[1]).replace("{artist3}", taste_artists[2]) : ""}
+                            ${taste_artists.length == 2 ? tl2(trans.you_share_count_with.two, { artist1: taste_artists[0], artist2: taste_artists[1] }) : ""}
+                            ${taste_artists.length == 3 ? tl2(trans.you_share_count_with.three, { artist1: taste_artists[0], artist2: taste_artists[1], artist3: taste_artists[2] }) : ""}
                         </p>
                     </div>
                 </div>
@@ -33224,6 +33226,15 @@
                     ` : ""}
                     <div class="sep"></div>
                     <a class="dropdown-menu-clickable-item" data-type="compare" href="${root}bleh/minis/compare?profile=${page.name}">${tl2(trans.compare)}</a>
+                    <button class="dropdown-menu-clickable-item" data-type="copy" onclick=${() => {
+            copy(tl2(trans.generic_lastfm_compatibility_message, {
+              u: page.name,
+              r: taste_formal,
+              a: taste_artists.join(tl2(trans.comma))
+            }));
+          }}>
+                        ${tl2(trans.copy)}
+                    </button>
                 `,
           trigger: "click",
           placement: "bottom",
@@ -59841,6 +59852,13 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     }
   };
   var trans = {
+    comma: {
+      // yes this is just a comma
+      // yes the space on the end is intentional and should be
+      // there if the language puts spaces in lists
+      en: ", ",
+      ja: "\u3001"
+    },
     page_templates: {
       // these are used for browser tab titles
       // {page} is something like "Home" or "Profile"
@@ -63100,6 +63118,10 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       sv: "Smaklikhet",
       ru: "\u0421\u0445\u043E\u0436\u0435\u0441\u0442\u044C \u0432\u043A\u0443\u0441\u043E\u0432",
       pl: "Podobie\u0144stwo gustu"
+    },
+    generic_lastfm_compatibility_message: {
+      // based on the default message last.fm shows
+      en: "Your compatibility with {u} is {r}.\nYou both listen to {a}."
     },
     message: {
       // as in a direct message

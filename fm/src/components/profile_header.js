@@ -8,7 +8,7 @@ import { settings } from '../build/config';
 import { log } from '../build/log';
 import { auth, page, root } from '../build/page';
 import { sponsor_list } from '../build/sponsor';
-import { sanitise } from '../build/tools';
+import { copy, romanise, sanitise } from '../build/tools';
 import { tl, trans } from '../build/trans';
 import { ff } from '../sku';
 import { correct_artist } from './lotus';
@@ -33,6 +33,7 @@ export function redesign_profile_header(is_own_profile, is_following) {
     let taste = '';
     let taste_percentage = '';
     let taste_artists = [];
+    let taste_formal = 'NONE';
 
     if (!is_own_profile && page.name != sponsor_list.sponsor_account) {
         let taste_meter = base_header.querySelector('.tasteometer');
@@ -43,9 +44,11 @@ export function redesign_profile_header(is_own_profile, is_following) {
             let artists = taste_meter.querySelectorAll('a');
             artists.forEach((artist) => {
                 taste_artists.push(
-                    correct_artist(artist.getAttribute('title'))
+                    romanise(correct_artist(artist.getAttribute('title')))
                 );
             });
+
+            taste_formal = taste_meter.querySelector('span.tasteometer-compat-colour')?.textContent;
 
             taste_percentage = taste_meter
                 .querySelector('.tasteometer-viz')
@@ -227,8 +230,8 @@ export function redesign_profile_header(is_own_profile, is_following) {
                         ])}</h3>
                         <p>
                             ${taste_artists.length == 1 ? taste_artists[0] : ''}
-                            ${taste_artists.length == 2 ? tl(trans.you_share_count_with.two).replace('{artist1}', taste_artists[0]).replace('{artist2}', taste_artists[1]) : ''}
-                            ${taste_artists.length == 3 ? tl(trans.you_share_count_with.three).replace('{artist1}', taste_artists[0]).replace('{artist2}', taste_artists[1]).replace('{artist3}', taste_artists[2]) : ''}
+                            ${taste_artists.length == 2 ? tl(trans.you_share_count_with.two, { artist1: taste_artists[0], artist2: taste_artists[1] }) : ''}
+                            ${taste_artists.length == 3 ? tl(trans.you_share_count_with.three, { artist1: taste_artists[0], artist2: taste_artists[1], artist3: taste_artists[2] }) : ''}
                         </p>
                     </div>
                 </div>
@@ -296,6 +299,15 @@ export function redesign_profile_header(is_own_profile, is_following) {
                     ` : ''}
                     <div class="sep"></div>
                     <a class="dropdown-menu-clickable-item" data-type="compare" href="${root}bleh/minis/compare?profile=${page.name}">${tl(trans.compare)}</a>
+                    <button class="dropdown-menu-clickable-item" data-type="copy" onclick=${() => {
+                        copy(tl(trans.generic_lastfm_compatibility_message, {
+                            u: page.name,
+                            r: taste_formal,
+                            a: taste_artists.join(tl(trans.comma))
+                        }));
+                    }}>
+                        ${tl(trans.copy)}
+                    </button>
                 `,
                 trigger: 'click',
                 placement: 'bottom',

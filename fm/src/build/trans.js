@@ -64,6 +64,13 @@ export let lang_info = {
 };
 
 export const trans = {
+    comma: {
+        // yes this is just a comma
+        // yes the space on the end is intentional and should be
+        // there if the language puts spaces in lists
+        en: ', ',
+        ja: '、'
+    },
     page_templates: {
         // these are used for browser tab titles
         // {page} is something like "Home" or "Profile"
@@ -3314,6 +3321,10 @@ export const trans = {
         sv: 'Smaklikhet',
         ru: 'Схожесть вкусов',
         pl: 'Podobieństwo gustu'
+    },
+    generic_lastfm_compatibility_message: {
+        // based on the default message last.fm shows
+        en: 'Your compatibility with {u} is {r}.\nYou both listen to {a}.'
     },
     message: {
         // as in a direct message
