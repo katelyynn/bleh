@@ -235,6 +235,9 @@ export function redesign_profile_header(is_own_profile, is_following) {
                         </p>
                     </div>
                 </div>
+                <div class="taste-hover-icon">
+                    <div class="bleh-icon" />
+                </div>
             </div>
         `;
 
@@ -245,7 +248,8 @@ export function redesign_profile_header(is_own_profile, is_following) {
                     ${tl(trans.taste_similarity)}
                 </span>
                 <div class="hint">${tl(trans.click_for_more_options)}</div>
-            `
+            `,
+            delay: [700, 0]
         });
 
         if (taste_artists.length > 1) {
@@ -254,7 +258,9 @@ export function redesign_profile_header(is_own_profile, is_following) {
             tippy(taste_wrap, {
                 theme: 'context-menu',
                 content: html.node`
-                    <h4 class="menu-header">${tl(trans.compare_plays)}</h4>
+                    <div class="taste-menu-header colourful" data-taste=${taste}>
+                        ${taste_formal}
+                    </div>
                     <a class="dropdown-menu-clickable-item" href="${root}user/${page.name}/library/music/${redirect()}${sanitise(taste_artists[0])}" data-menu-item="shared-artist">
                         <span class="menu-avatar">
                             <img src=${other_avi} alt=${page.name}>
@@ -312,8 +318,7 @@ export function redesign_profile_header(is_own_profile, is_following) {
                 trigger: 'click',
                 placement: 'bottom',
                 interactive: true,
-                interactiveBorder: 10,
-                offset: [0, 0]
+                interactiveBorder: 10
             });
         }
 

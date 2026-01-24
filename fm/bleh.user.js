@@ -33165,6 +33165,9 @@
                         </p>
                     </div>
                 </div>
+                <div class="taste-hover-icon">
+                    <div class="bleh-icon" />
+                </div>
             </div>
         `;
       tippy_esm_default(taste_wrap, {
@@ -33174,14 +33177,17 @@
                     ${tl2(trans.taste_similarity)}
                 </span>
                 <div class="hint">${tl2(trans.click_for_more_options)}</div>
-            `
+            `,
+        delay: [700, 0]
       });
       if (taste_artists.length > 1) {
         const other_avi = page.avatar.replace("/avatar300s/", "/avatar42s/");
         tippy_esm_default(taste_wrap, {
           theme: "context-menu",
           content: html.node`
-                    <h4 class="menu-header">${tl2(trans.compare_plays)}</h4>
+                    <div class="taste-menu-header colourful" data-taste=${taste}>
+                        ${taste_formal}
+                    </div>
                     <a class="dropdown-menu-clickable-item" href="${root}user/${page.name}/library/music/${redirect()}${sanitise(taste_artists[0])}" data-menu-item="shared-artist">
                         <span class="menu-avatar">
                             <img src=${other_avi} alt=${page.name}>
@@ -33239,8 +33245,7 @@
           trigger: "click",
           placement: "bottom",
           interactive: true,
-          interactiveBorder: 10,
-          offset: [0, 0]
+          interactiveBorder: 10
         });
       }
       const row = listen_container.querySelector(".listener-row");

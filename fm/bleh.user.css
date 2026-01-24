@@ -26445,11 +26445,15 @@
         }
 
         .listen-item {
-            margin-bottom: var(--card-padding);
-            border-radius: unset !important;
+            --bg: transparent !important;
+            --bg-hov: hsla(var(--b4), 40%) !important;
+            --bg-atv: hsla(var(--b4), 60%) !important;
+            --radius: var(--button-radius) !important;
+            --padding: 6px var(--button-sides) 6px calc(var(--button-sides) + var(--icon-size) + 10px) !important;
+            margin: -6px calc(-1 * var(--button-sides)) calc(var(--card-padding) - 6px) !important;
 
             align-items: unset;
-            flex-direction: column;
+            flex-direction: row;
             gap: var(--item-list-gap);
 
             position: relative;
@@ -26457,7 +26461,7 @@
             &:before {
                 --mask: var(--icon-16-taste-1);
                 --show-icon: block !important;
-                --left: 0;
+                --left: var(--button-sides);
                 --margin-left: none;
                 animation: none;
             }
@@ -26466,17 +26470,16 @@
                 position: absolute;
                 top: 50%;
                 margin-top: calc(-1 * var(--icon-half));
-                left: 0;
+                left: var(--button-sides);
 
                 --mask-colour: hsl(var(--l3-c));
                 filter: drop-shadow(0 0 15px hsl(var(--h4), 80%));
             }
 
-            --padding: 0 0 0 calc(var(--icon-size) + 10px) !important;
-
             .span {
                 display: flex;
                 align-items: center;
+                flex: 1;
 
                 & > img {
                     display: none;
@@ -26507,6 +26510,30 @@
                     border-radius: 50px;
                     background-color: hsl(var(--h3));
                     box-shadow: 0 2px 3px 0 hsl(var(--h4), 25%);
+                }
+            }
+
+            .taste-hover-icon {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                --icon: var(--icon-16-arrow-right);
+                --mask-colour: hsl(var(--c3));
+                flex-shrink: 0;
+
+                opacity: 0;
+                translate: 3px 0;
+
+                transition-property: opacity, translate;
+                transition-duration: 0.3s;
+                transition-timing-function: var(--trans-function-ani);
+            }
+
+            &[aria-expanded="true"],
+            &:hover {
+                .taste-hover-icon {
+                    opacity: 1;
+                    translate: 0 0;
                 }
             }
         }
@@ -30377,5 +30404,18 @@
                 }
             }
         }
+    }
+
+
+    .taste-menu-header {
+        color: hsl(var(--l3-c));
+        font-weight: var(--font-weight-medium);
+        padding: 9px;
+        cursor: default;
+        text-align: center;
+
+        background: linear-gradient(180deg, hsl(var(--h4), 20%), transparent);
+        margin: -4px;
+        border-radius: calc(var(--button-radius) + 2px);
     }
 }
