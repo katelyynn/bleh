@@ -2186,7 +2186,7 @@ export async function load_profile_cache_externally(name = page.name) {
 
     if (cache) {
         if (cache.hue || cache.sat || cache.lit) {
-            if (!sponsor_list || (sponsor_list && !sponsor_list.sponsors.includes(name))) {
+            if (!sponsor_list || (sponsor_list && sponsor_list.sponsors && !sponsor_list.sponsors.includes(name))) {
                 delete cache.hue;
                 delete cache.sat;
                 delete cache.lit;
