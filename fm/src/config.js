@@ -69,6 +69,10 @@ export function load_settings(skip = false) {
             settings.font_weight_bold = settings_store.font_weight_bold.default;
     }
 
+    if (settings.version < 2026.0201) {
+        if (settings.noise == 0.5) settings.noise = settings_store.noise.default;
+    }
+
     if (Number.isInteger(settings.list_view)) {
         if (settings.list_view == 0) {
             settings.list_view = 'list';

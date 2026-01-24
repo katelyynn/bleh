@@ -41859,6 +41859,9 @@
       if (settings.font_weight_bold == 730 || settings.font_weight_bold == 760 || settings.font_weight_bold == 680)
         settings.font_weight_bold = settings_store.font_weight_bold.default;
     }
+    if (settings.version < 2026.0201) {
+      if (settings.noise == 0.5) settings.noise = settings_store.noise.default;
+    }
     if (Number.isInteger(settings.list_view)) {
       if (settings.list_view == 0) {
         settings.list_view = "list";
@@ -70288,7 +70291,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     noise: {
       css: "noise-opacity",
-      default: 0.5,
+      default: 0.35,
       type: "range",
       min: 0,
       max: 1,

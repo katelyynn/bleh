@@ -660,7 +660,7 @@ export let settings_store = {
     },
     noise: {
         css: 'noise-opacity',
-        default: 0.5,
+        default: 0.35,
         type: 'range',
         min: 0,
         max: 1,
