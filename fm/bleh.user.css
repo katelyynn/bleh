@@ -4870,7 +4870,7 @@
         .sub-text-label {
             display: flex;
             align-items: center;
-            color: hsl(var(--c2), 70%);
+            color: hsl(var(--c2), 80%);
             --mask-colour: currentColor;
 
             .sub-text-label-sr {
