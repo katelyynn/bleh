@@ -35955,19 +35955,19 @@
 
   // src/components/pronouns.js
   function find_pronouns(string) {
-    const regex = /\b[a-z]{1,6}\s*\/\s*[a-z]{1,6}(?:\s*\/\s*[a-z]{1,6})?\b/i;
-    const start2 = string.match(new RegExp(`^(${regex.source})\\s*(.*)`, "i"));
+    const regex = /\b[a-z]{1,4}\s*\/\s*[a-z]{1,4}(?:\s*\/\s*[a-z]{1,4})?\b/i;
+    const start2 = string.match(new RegExp(`^(${regex.source})\\s*(.*)$`, "i"));
     if (start2) {
       return {
         pronouns: start2[1].trim(),
         text: fix_up_string(start2[2].trim() || null)
       };
     }
-    const end2 = string.match(new RegExp(`^(.*)\\s+(${regex.source})`, "i"));
+    const end2 = string.match(new RegExp(`^(.*)\\s+(${regex.source})$`, "i"));
     if (end2) {
       return {
-        pronouns: end2[1].trim(),
-        text: fix_up_string(end2[2].trim() || null)
+        pronouns: end2[2].trim(),
+        text: fix_up_string(end2[1].trim() || null)
       };
     }
     return {
@@ -35977,7 +35977,7 @@
   }
   function fix_up_string(string) {
     if (!string) return null;
-    return string.replace(/^[,\-–—.;:|]+\s*/, "").replace(/\s*[,\-–—.;:|]+$/, "").trim();
+    return string.replace(/^[,\-–—.;:|•]+\s*/, "").replace(/\s*[,\-–—.;:|•]+$/, "").trim();
   }
 
   // src/pages/profile.js
@@ -37759,7 +37759,7 @@
                 </dl>
             `);
       }
-      if (result.text) {
+      if (result.text && result.text != page.name) {
         parent.appendChild(html.node`
                 <dl class="sub-text-pair">
                     ${sub_text_label("aka", tl2(trans.aka))}
