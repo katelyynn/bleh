@@ -261,7 +261,7 @@
         --card-blur-bg: hsl(var(--b5), var(--solarium-opacity, 70%));
         --card-blur-bg-alt: hsl(var(--b5), var(--solarium-opacity, 35%));
 
-        --nav-filter-shadow: drop-shadow(0 0 3px hsl(var(--b6))) drop-shadow(0 0 5px hsl(var(--b6), 90%));
+        --nav-filter-shadow: drop-shadow(0 0 4px hsl(var(--b6))) drop-shadow(0 0 10px hsl(var(--b6), 90%));
         --header-filter-shadow: drop-shadow(0 0 3px hsl(var(--b6))) drop-shadow(0 0 10px hsl(var(--b6)));
 
         --menu-item-hov: hsla(var(--b4), 40%);
