@@ -1,10 +1,10 @@
 {
-    "latest": "2025.1229",
+    "latest": "2026.0124",
     "sponsors": [
         "clairedoll", "kateshapedbox", "evangelicgirl",
         "astrablooms", "ItsProyal", "vwvwvwvwvwvwv", "Orofil",
         "EliteHimself", "iwas15with100k", "keepsweet", "fucksophie",
-        "softmancy", "carbon1k", "uix-uix", "scidal",
+        "softmancy", "carbon1k", "mousey-toy", "scidal",
         "Carbonzer", "chrysalisrot", "FenrirXXII",
         "saettbyeol", "lyeule", "sewagebipolar", "unstablerate",
         "noapop", "celebrating", "myraisounds", "riskyrizey",
@@ -12,18 +12,19 @@
         "goldenstuffed", "satisfeita", "kar1x", "nojonsko",
         "urwq", "driftpsalm", "popcorniscrazy", "s0540a",
         "dylandotat", "Angel0Lust", "liminelle", "quikwise",
-        "BosozokuGF", "tainaronian", "NozomiBear", "nin0dev"
+        "BosozokuGF", "tainaronian", "NozomiBear", "nin0dev",
+        "milkdrinker3000", "wiichicken", "duskwitch"
     ],
     "sponsors_one_time": [
         "kateshapedbox",
         "vwvwvwvwvwvwv", "EliteHimself", "fucksophie",
-        "carbon1k", "uix-uix", "scidal",
+        "carbon1k", "mousey-toy", "scidal",
         "Carbonzer", "FenrirXXII",
         "saettbyeol", "lyeule", "noapop",
         "celebrating", "riskyrizey",
         "fourohclok", "K40M0J1", "goldenstuffed",
         "kar1x", "nojonsko", "s0540a",
-        "Angel0Lust", "tainaronian"
+        "Angel0Lust", "tainaronian", "wiichicken"
     ],
     "sponsor_count_remove": 3,
     "sponsor_account": "kateshapedbox",
@@ -39,12 +40,12 @@
                 "name": "cute"
             },
             {
-                "name": "healer girl~",
+                "name": " ִֶָ۶ৎ˖ִ ˚",
                 "reason": "in service to my darling",
-                "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJjdXJyZW50Q29sb3IiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1maWxsZWQgaWNvbi10YWJsZXItbnVyc2UiPjxwYXRoIHN0cm9rZT0ibm9uZSIgZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPjxwYXRoIGQ9Ik0xMi4wMDIgNGMyLjg2NiAwIDYuNyAxLjM2NSA5LjUzMiAzLjE1NWExIDEgMCAwIDEgLjQ1IDEuMDI0bC0yIDExYTEgMSAwIDAgMSAtLjk4NCAuODIxaC0xNGExIDEgMCAwIDEgLS45ODQgLS44MjFsLTIgLTExYTEgMSAwIDAgMSAuNDUgLTEuMDI0YzIuODM0IC0xLjc5MiA2LjcyNCAtMy4xNiA5LjUzNiAtMy4xNTVtLS4wMDIgNWExIDEgMCAwIDAgLTEgMXYxaC0xYTEgMSAwIDAgMCAtLjk5MyAuODgzbC0uMDA3IC4xMTdhMSAxIDAgMCAwIDEgMWgxdjFhMSAxIDAgMCAwIC44ODMgLjk5M2wuMTE3IC4wMDdhMSAxIDAgMCAwIDEgLTF2LTFoMWExIDEgMCAwIDAgLjk5MyAtLjg4M2wuMDA3IC0uMTE3YTEgMSAwIDAgMCAtMSAtMWgtMXYtMWExIDEgMCAwIDAgLS44ODMgLS45OTN6IiAvPjwvc3ZnPg==",
-                "hue": 230,
-                "sat": 0.62,
-                "lit": 1.04
+                "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1vdXRsaW5lIGljb24tdGFibGVyLW1pbmltaXplIj48cGF0aCBzdHJva2U9Im5vbmUiIGQ9Ik0wIDBoMjR2MjRIMHoiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJNMTUgMTl2LTJhMiAyIDAgMCAxIDIgLTJoMiIgLz48cGF0aCBkPSJNMTUgNXYyYTIgMiAwIDAgMCAyIDJoMiIgLz48cGF0aCBkPSJNNSAxNWgyYTIgMiAwIDAgMSAyIDJ2MiIgLz48cGF0aCBkPSJNNSA5aDJhMiAyIDAgMCAwIDIgLTJ2LTIiIC8+PC9zdmc+",
+                "hue": 352,
+                "sat": 2,
+                "lit": 0.96
             }
         ],
         "evangelicgirl": [
@@ -300,9 +301,16 @@
                 "lit": 1.02
             }
         ],
-        "unstablerate": {
-            "type": "sponsor"
-        },
+        "unstablerate": [
+            {
+                "type": "sponsor"
+            },
+            {
+                "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJjdXJyZW50Q29sb3IiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1maWxsZWQgaWNvbi10YWJsZXItcGF3Ij48cGF0aCBzdHJva2U9Im5vbmUiIGQ9Ik0wIDBoMjR2MjRIMHoiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJNMTIgMTBjLTEuMzIgMCAtMS45ODMgLjQyMSAtMi45MzEgMS45MjRsLS4yNDQgLjM5OGwtLjM5NSAuNjg4YTUwLjg5IDUwLjg5IDAgMCAwIC0uMTQxIC4yNTRjLS4yNCAuNDM0IC0uNTcxIC43NTMgLTEuMTM5IDEuMTQybC0uNTUgLjM2NWMtLjk0IC42MjcgLTEuNDMyIDEuMTE4IC0xLjcwNyAxLjk1NWMtLjEyNCAuMzM4IC0uMTk2IC44NTMgLS4xOTMgMS4yOGMwIDEuNjg3IDEuMTk4IDIuOTk0IDIuOCAyLjk5NGwuMjQyIC0uMDA2Yy4xMTkgLS4wMDYgLjIzNCAtLjAxNyAuMzU0IC0uMDM0bC4yNDggLS4wNDNsLjEzMiAtLjAyOGwuMjkxIC0uMDczbC4xNjIgLS4wNDVsLjU3IC0uMTdsLjc2MyAtLjI0M2wuNDU1IC0uMTM2Yy41MyAtLjE1IC45NCAtLjIyMiAxLjI4MyAtLjIyMmMuMzQ0IDAgLjc1MyAuMDczIDEuMjgzIC4yMjJsLjQ1NSAuMTM2bC43NjQgLjI0MmwuNTY5IC4xNzFsLjMxMiAuMDg0Yy4wOTcgLjAyNCAuMTg3IC4wNDUgLjI3MyAuMDYybC4yNDggLjA0M2MuMTIgLjAxNyAuMjM1IC4wMjggLjM1NCAuMDM0bC4yNDIgLjAwNmMxLjYwMiAwIDIuOCAtMS4zMDcgMi44IC0zYzAgLS40MjcgLS4wNzMgLS45MzkgLS4yMDcgLTEuMzA2Yy0uMjM2IC0uNzI0IC0uNjc3IC0xLjIyMyAtMS40OCAtMS44M2wtLjI1NyAtLjE5bC0uNTI4IC0uMzhjLS42NDIgLS40NyAtMS4wMDMgLS44MjYgLTEuMjUzIC0xLjI3OGwtLjI3IC0uNDg1bC0uMjUyIC0uNDMyYy0xLjAxMSAtMS42OTYgLTEuNjE4IC0yLjA5OSAtMy4wNTMgLTIuMDk5eiIgLz48cGF0aCBkPSJNMTkuNzggN2gtLjAzYy0xLjIxOSAuMDIgLTIuMzUgMS4wNjYgLTIuOTA4IDIuNTA0Yy0uNjkgMS43NzUgLS4zNDggMy43MiAxLjA3NSA0LjMzM2MuMjU2IC4xMDkgLjUyNyAuMTYzIC44MDEgLjE2M2MxLjIzMSAwIDIuMzggLTEuMDUzIDIuOTQzIC0yLjUwNGMuNjg2IC0xLjc3NCAuMzQgLTMuNzIgLTEuMDc2IC00LjMzMmEyLjA1IDIuMDUgMCAwIDAgLS44MDQgLS4xNjR6IiAvPjxwYXRoIGQ9Ik05LjAyNSAzYy0uMTEyIDAgLS4xODUgLjAwMiAtLjI3IC4wMTVsLS4wOTMgLjAxNmMtMS41MzIgLjIwNiAtMi4zOTcgMS45ODkgLTIuMTA4IDMuODU1Yy4yNzIgMS43MjUgMS40NjIgMy4xMTQgMi45MiAzLjExNGwuMTg3IC0uMDA1YTEuMjYgMS4yNiAwIDAgMCAuMDg0IC0uMDFsLjA5MiAtLjAxNmMxLjUzMyAtLjIwNiAyLjM5NyAtMS45ODkgMi4xMDggLTMuODU1Yy0uMjcgLTEuNzI3IC0xLjQ2IC0zLjExNCAtMi45MiAtMy4xMTR6IiAvPjxwYXRoIGQ9Ik0xNC45NzIgM2MtMS40NTkgMCAtMi42NDcgMS4zODggLTIuOTE2IDMuMTEzYy0uMjkgMS44NjcgLjU3NCAzLjY1IDIuMTc0IDMuODY3Yy4xMDMgLjAxMyAuMiAuMDIgLjI5NiAuMDJjMS4zOSAwIDIuNTQzIC0xLjI2NSAyLjg3NyAtMi44ODNsLjA0MSAtLjIzYy4yOSAtMS44NjcgLS41NzQgLTMuNjUgLTIuMTc0IC0zLjg2N2EyLjE1NCAyLjE1NCAwIDAgMCAtLjI5OCAtLjAyeiIgLz48cGF0aCBkPSJNNC4yMTcgN2MtLjI3NCAwIC0uNTQ0IC4wNTQgLS43OTcgLjE2MWMtMS40MjYgLjYxNSAtMS43NjcgMi41NjIgLTEuMDc4IDQuMzM1Yy41NjMgMS40NTEgMS43MSAyLjUwNCAyLjk0MSAyLjUwNGMuMjc0IDAgLjU0NCAtLjA1NCAuNzk3IC0uMTYxYzEuNDI2IC0uNjE1IDEuNzY3IC0yLjU2MiAxLjA3OCAtNC4zMzVjLS41NjMgLTEuNDUxIC0xLjcxIC0yLjUwNCAtMi45NDEgLTIuNTA0eiIgLz48L3N2Zz4=",
+                "reason": "sponsor",
+                "name": "puppy"
+            }
+        ],
         "Lrexie": {
             "type": "translation",
             "reason": "Svenska"
@@ -542,6 +550,29 @@
         "Dnzzk2": {
             "type": "translation",
             "reason": "简体中文"
+        },
+        "milkdrinker3000": {
+            "type": "sponsor"
+        },
+        "wiichicken": {
+            "type": "sponsor"
+        },
+        "duskwitch": [
+            {
+                "type": "sponsor"
+            },
+            {
+                "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1vdXRsaW5lIGljb24tdGFibGVyLW1hcCI+PHBhdGggc3Ryb2tlPSJub25lIiBkPSJNMCAwaDI0djI0SDB6IiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTMgN2w2IC0zbDYgM2w2IC0zdjEzbC02IDNsLTYgLTNsLTYgM3YtMTMiIC8+PHBhdGggZD0iTTkgNHYxMyIgLz48cGF0aCBkPSJNMTUgN3YxMyIgLz48L3N2Zz4=",
+                "reason": "sponsor",
+                "name": "Twilight Cartographer",
+                "hue": 217,
+                "sat": 0.87,
+                "lit": 0.86
+            }
+        ],
+        "humansongs": {
+            "type": "translation",
+            "reason": "日本語"
         }
     }
 }
