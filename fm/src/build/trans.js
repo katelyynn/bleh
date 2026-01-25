@@ -1030,7 +1030,7 @@ export const trans = {
     },
     account_scrobbling_since_replace: {
         // copy this from last.fm 1:1 (including the space at the end if there)
-        // dont change this please
+        // !!!!!!!!! dont change this please
         en: 'scrobbling since ',
         de: 'scrobbelt seit ',
         es: 'scrobbling desde ',
@@ -1041,8 +1041,6 @@ export const trans = {
         ru: 'скробблинг с ',
         pl: 'scrobbluje od ',
         zh: '音乐记录始于 '
-        pl: 'scrobluje od',
-        zh: '记录 Scrobble 自 '
     },
     edit: {
         en: 'Edit',
@@ -1670,7 +1668,7 @@ export const trans = {
         sv: 'Spelschema',
         ru: 'Участники',
         pl: 'Line-up',
-        zh: '阵容' 
+        zh: '阵容'
     },
     attendance: {
         en: 'Attendance',
@@ -4379,7 +4377,6 @@ export const trans = {
         de: 'Dieses Jahr',
         es: 'Este año',
         it: 'Quest’anno',
-        it: 'Quest\'anno',
         ja: '今年',
         pt: 'Este ano',
         sv: 'Detta år',
@@ -4391,7 +4388,6 @@ export const trans = {
         de: 'Letztes Jahr',
         es: 'Año pasado',
         it: 'L’anno scorso',
-        it: 'L\'anno scorso',
         ja: '去年',
         pt: 'Ano passado',
         sv: 'Förra året',
