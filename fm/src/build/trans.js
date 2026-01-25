@@ -1006,27 +1006,19 @@ export const trans = {
         zh: '又名'
     },
     account_pronouns: {
-        en: 'pronouns',
-        de: 'pronomen',
-        es: 'pronombres',
-        it: 'pronomi',
-        pt: 'pronomes',
-        sv: 'pronomen',
+        en: 'Pronouns',
+        de: 'Pronomen',
+        es: 'Pronombres',
+        it: 'Pronomi',
+        pt: 'Pronomes',
+        sv: 'Pronomen',
         ru: 'местоимения',
         pl: 'zaimki',
         zh: '代词'
     },
-    account_created: {
-        // dont translate to "scrobbling since", instead just "created"
-        en: 'created',
-        de: 'erstellt',
-        es: 'creado',
-        it: 'creato',
-        pt: 'criada',
-        sv: 'skapades',
-        ru: 'создан',
-        pl: 'utworzono',
-        zh: '创建于'
+    account_creation: {
+        // dont translate to "scrobbling since"
+        en: 'Account creation date'
     },
     account_scrobbling_since_replace: {
         // copy this from last.fm 1:1 (including the space at the end if there)

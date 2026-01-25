@@ -34800,12 +34800,6 @@
       }
     }
   }
-  function use_pronouns(value) {
-    value = value.replaceAll(" ", "");
-    if (value.startsWith("she/") || value.startsWith("he/") || value.startsWith("they/") || value.startsWith("it/") || value.startsWith("xe/") || value.startsWith("any/"))
-      return true;
-    return false;
-  }
   function avatar(token = "") {
     if (!token) token = page.token;
     else page.token = token;
@@ -35959,6 +35953,29 @@
     if (pages) page.structure.container.appendChild(pages);
   }
 
+  // src/components/pronouns.js
+  function find_pronouns(string) {
+    const regex = /\b[a-z]{1,6}\s*\/\s*[a-z]{1,6}(?:\s*\/\s*[a-z]{1,6})?\b/i;
+    const start2 = string.match(new RegExp(`^(${regex.source})\\s*(.*)`, "i"));
+    if (start2) {
+      return {
+        pronouns: start2[1].trim(),
+        text: start2[2].trim() || null
+      };
+    }
+    const end2 = string.match(new RegExp(`^(.*)\\s+(${regex.source})`, "i"));
+    if (end2) {
+      return {
+        pronouns: end2[1].trim(),
+        text: end2[2].trim() || null
+      };
+    }
+    return {
+      pronouns: null,
+      text: string
+    };
+  }
+
   // src/pages/profile.js
   async function bleh_profiles() {
     if (page.subpage == "obsessions_obsession") {
@@ -36079,17 +36096,8 @@
     if (sponsor_list && sponsor_list.special && sponsor_list.special.includes(page.name)) {
       title_wrap.querySelector(".header-title a").classList.add("bleh--name-is-cute");
     }
-    let pronouns;
-    if (cache2.aka) pronouns = use_pronouns(cache2.aka);
     if (cache2.username) {
       profile_name.textContent = cache2.username;
-      if (sub_wrap) {
-        sub_wrap.insertBefore(html.node`
-                <span class="header-username">
-                    <a href="${root}user/${page.name}"><span class="at">@</span>${page.name}</a>
-                </span>
-            `, sub_wrap.firstElementChild);
-      }
     }
     let expander;
     let redesigned_profile_header = html.node`
@@ -36101,29 +36109,13 @@
                 <div class="main-info">
                     <div class="sub-text">${tl2(trans.profile)}</div>
                     <div class="title-container">${title_wrap}</div>
-                    ${sub_wrap ? sub_wrap : cache2.aka || cache2.created ? html.node`
-                        <p class="header-title-secondary">
-                            ${cache2.username ? html.node`
-                            <span class="header-username">
-                                <a href="${root}user/${page.name}"><span class="at">@</span>${page.name}</a>
-                            </span>
-                            ` : ""}
-                            ${cache2.aka ? html.node`
-                            <span class="header-title-secondary--pre">
-                                ${pronouns ? tl2(trans.account_pronouns) : tl2(trans.aka)}
-                            </span>
-                            <span class="header-title-display-name">
-                                ${cache2.aka}
-                            </span>
-                            ` : ""}
-                            <span class="header-title-secondary--pre">
-                                ${tl2(trans.account_created)}
-                            </span>
-                            <span class="header-scrobble-since">
-                                ${cache2.created}
-                            </span>
-                        </p>
-                    ` : ""}
+                    ${sub_wrap ? sub_wrap : cache2.username || cache2.aka || cache2.created ? () => {
+      const elem = html.node`
+                            <p class="header-title-secondary" />
+                        `;
+      render_sub_text(elem, cache2.aka, cache2.created, cache2.username);
+      return elem;
+    } : ""}
                 </div>
                 ${badge_elements.length > 0 ? html.node`
                 <div class="badges">
@@ -37736,32 +37728,62 @@
     });
   }
   function parse_sub_text(profile_sub_text, name = page.name, cache2) {
-    const display_name = profile_sub_text.querySelector(
-      ".header-title-display-name"
-    );
-    const scrobble_since = profile_sub_text.querySelector(
-      ".header-scrobble-since"
-    );
+    const display_name = profile_sub_text.querySelector(".header-title-display-name");
+    const scrobble_since = profile_sub_text.querySelector(".header-scrobble-since");
     scrobble_since.textContent = scrobble_since.textContent.slice(2).replace(tl2(trans.account_scrobbling_since_replace), "");
-    const pronouns = use_pronouns(display_name.textContent);
-    profile_sub_text.insertBefore(
-      html.node`
-        <span class="header-title-secondary--pre">
-            ${pronouns ? tl2(trans.account_pronouns) : tl2(trans.aka)}
-        </span>
-    `,
-      display_name
-    );
-    profile_sub_text.insertBefore(
-      html.node`
-        <span class="header-title-secondary--pre">
-            ${tl2(trans.account_created)}
-        </span>
-    `,
-      scrobble_since
-    );
     cache2.aka = display_name.textContent.trim();
     cache2.created = scrobble_since.textContent.trim();
+    render_sub_text(profile_sub_text, cache2.aka, cache2.created, cache2.username);
+  }
+  function render_sub_text(parent, aka, created, display_name) {
+    render(parent, html``);
+    if (display_name) {
+      parent.appendChild(html.node`
+            <dl class="sub-text-pair">
+                ${sub_text_label("username", tl2(trans.username.name))}
+                <dd class="sub-text-item not-text">${page.name}</dd>
+            </dl>
+        `);
+    }
+    if (aka) {
+      const result = find_pronouns(aka);
+      if (result.pronouns) {
+        parent.appendChild(html.node`
+                <dl class="sub-text-pair">
+                    ${sub_text_label("pronouns", tl2(trans.account_pronouns))}
+                    <dd class="sub-text-item">${result.pronouns}</dd>
+                </dl>
+            `);
+      }
+      if (result.text) {
+        parent.appendChild(html.node`
+                <dl class="sub-text-pair">
+                    ${sub_text_label("aka", tl2(trans.aka))}
+                    <dd class="sub-text-item">${result.text}</dd>
+                </dl>
+            `);
+      }
+    }
+    if (created) {
+      parent.appendChild(html.node`
+            <dl class="sub-text-pair">
+                ${sub_text_label("created", tl2(trans.account_creation))}
+                <dd class="sub-text-item not-text">${created}</dd>
+            </dl>
+        `);
+    }
+  }
+  function sub_text_label(type, text4) {
+    const elem = html.node`
+        <dt class="sub-text-label" data-type=${type}>
+            <span class="bleh-icon" style="--icon: var(--mask)" />
+            <span class="sub-text-label-sr">${text4}</span>
+        </dt>
+    `;
+    tippy_esm_default(elem, {
+      content: text4
+    });
+    return elem;
   }
   function bleh_profile_events(no_events) {
     const selected_tab = page.structure.toolbar?.querySelector(
@@ -60810,27 +60832,19 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       zh: "\u53C8\u540D"
     },
     account_pronouns: {
-      en: "pronouns",
-      de: "pronomen",
-      es: "pronombres",
-      it: "pronomi",
-      pt: "pronomes",
-      sv: "pronomen",
+      en: "Pronouns",
+      de: "Pronomen",
+      es: "Pronombres",
+      it: "Pronomi",
+      pt: "Pronomes",
+      sv: "Pronomen",
       ru: "\u043C\u0435\u0441\u0442\u043E\u0438\u043C\u0435\u043D\u0438\u044F",
       pl: "zaimki",
       zh: "\u4EE3\u8BCD"
     },
-    account_created: {
-      // dont translate to "scrobbling since", instead just "created"
-      en: "created",
-      de: "erstellt",
-      es: "creado",
-      it: "creato",
-      pt: "criada",
-      sv: "skapades",
-      ru: "\u0441\u043E\u0437\u0434\u0430\u043D",
-      pl: "utworzono",
-      zh: "\u521B\u5EFA\u4E8E"
+    account_creation: {
+      // dont translate to "scrobbling since"
+      en: "Account creation date"
     },
     account_scrobbling_since_replace: {
       // copy this from last.fm 1:1 (including the space at the end if there)

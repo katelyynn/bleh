@@ -55,6 +55,7 @@ import { Chart, version } from '../main.js';
 import { expand_avatar } from '../avatar.js';
 import { status } from '../components/status.js';
 import { hoshino } from '../components/hoshino.js';
+import { find_pronouns } from '../components/pronouns.js';
 
 export async function bleh_profiles() {
     // the obsessions page is a user subpage but works very differently
@@ -220,19 +221,8 @@ export async function bleh_profiles() {
             .classList.add('bleh--name-is-cute');
     }
 
-    let pronouns;
-    if (cache.aka) pronouns = use_pronouns(cache.aka);
-
     if (cache.username) {
         profile_name.textContent = cache.username;
-
-        if (sub_wrap) {
-            sub_wrap.insertBefore(html.node`
-                <span class="header-username">
-                    <a href="${root}user/${page.name}"><span class="at">@</span>${page.name}</a>
-                </span>
-            `, sub_wrap.firstElementChild);
-        }
     }
 
     let expander;
@@ -245,29 +235,15 @@ export async function bleh_profiles() {
                 <div class="main-info">
                     <div class="sub-text">${tl(trans.profile)}</div>
                     <div class="title-container">${title_wrap}</div>
-                    ${sub_wrap ? sub_wrap : cache.aka || cache.created ? html.node`
-                        <p class="header-title-secondary">
-                            ${cache.username ? html.node`
-                            <span class="header-username">
-                                <a href="${root}user/${page.name}"><span class="at">@</span>${page.name}</a>
-                            </span>
-                            ` : ''}
-                            ${cache.aka ? html.node`
-                            <span class="header-title-secondary--pre">
-                                ${pronouns ? tl(trans.account_pronouns) : tl(trans.aka)}
-                            </span>
-                            <span class="header-title-display-name">
-                                ${cache.aka}
-                            </span>
-                            ` : ''}
-                            <span class="header-title-secondary--pre">
-                                ${tl(trans.account_created)}
-                            </span>
-                            <span class="header-scrobble-since">
-                                ${cache.created}
-                            </span>
-                        </p>
-                    ` : ''}
+                    ${sub_wrap ? sub_wrap : cache.username || cache.aka || cache.created ? () => {
+                        const elem = html.node`
+                            <p class="header-title-secondary" />
+                        `;
+
+                        render_sub_text(elem, cache.aka, cache.created, cache.username);
+
+                        return elem;
+                    } : ''}
                 </div>
                 ${badge_elements.length > 0 ? html.node`
                 <div class="badges">
@@ -2293,39 +2269,76 @@ function request_profile_cache(
 }
 
 function parse_sub_text(profile_sub_text, name = page.name, cache) {
-    const display_name = profile_sub_text.querySelector(
-        '.header-title-display-name'
-    );
-    const scrobble_since = profile_sub_text.querySelector(
-        '.header-scrobble-since'
-    );
+    const display_name = profile_sub_text.querySelector('.header-title-display-name');
+    const scrobble_since = profile_sub_text.querySelector('.header-scrobble-since');
+
     scrobble_since.textContent = scrobble_since.textContent
         .slice(2)
         .replace(tl(trans.account_scrobbling_since_replace), '');
 
-    // pronouns?
-    const pronouns = use_pronouns(display_name.textContent);
-
-    profile_sub_text.insertBefore(
-        html.node`
-        <span class="header-title-secondary--pre">
-            ${pronouns ? tl(trans.account_pronouns) : tl(trans.aka)}
-        </span>
-    `,
-        display_name
-    );
-
-    profile_sub_text.insertBefore(
-        html.node`
-        <span class="header-title-secondary--pre">
-            ${tl(trans.account_created)}
-        </span>
-    `,
-        scrobble_since
-    );
-
     cache.aka = display_name.textContent.trim();
     cache.created = scrobble_since.textContent.trim();
+
+    render_sub_text(profile_sub_text, cache.aka, cache.created, cache.username);
+}
+
+function render_sub_text(parent, aka, created, display_name) {
+    render(parent, html``);
+
+    if (display_name) {
+        parent.appendChild(html.node`
+            <dl class="sub-text-pair">
+                ${sub_text_label('username', tl(trans.username.name))}
+                <dd class="sub-text-item not-text">${page.name}</dd>
+            </dl>
+        `);
+    }
+
+    if (aka) {
+        const result = find_pronouns(aka);
+
+        if (result.pronouns) {
+            parent.appendChild(html.node`
+                <dl class="sub-text-pair">
+                    ${sub_text_label('pronouns', tl(trans.account_pronouns))}
+                    <dd class="sub-text-item">${result.pronouns}</dd>
+                </dl>
+            `);
+        }
+
+        if (result.text) {
+            parent.appendChild(html.node`
+                <dl class="sub-text-pair">
+                    ${sub_text_label('aka', tl(trans.aka))}
+                    <dd class="sub-text-item">${result.text}</dd>
+                </dl>
+            `);
+        }
+    }
+
+    if (created) {
+        parent.appendChild(html.node`
+            <dl class="sub-text-pair">
+                ${sub_text_label('created', tl(trans.account_creation))}
+                <dd class="sub-text-item not-text">${created}</dd>
+            </dl>
+        `);
+    }
+}
+
+function sub_text_label(type, text) {
+    const elem = html.node`
+        <dt class="sub-text-label" data-type=${type}>
+            <span class="bleh-icon" style="--icon: var(--mask)" />
+            <span class="sub-text-label-sr">${text}</span>
+        </dt>
+    `;
+
+    tippy(elem, {
+        content: text
+    });
+
+    return elem;
 }
 
 function bleh_profile_events(no_events) {
