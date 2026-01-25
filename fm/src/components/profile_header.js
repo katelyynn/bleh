@@ -241,17 +241,6 @@ export function redesign_profile_header(is_own_profile, is_following) {
             </div>
         `;
 
-        tippy(taste_wrap, {
-            theme: 'stack',
-            content: html.node`
-                <span>
-                    ${tl(trans.taste_similarity)}
-                </span>
-                <div class="hint">${tl(trans.click_for_more_options)}</div>
-            `,
-            delay: [700, 0]
-        });
-
         if (taste_artists.length > 1) {
             const other_avi = page.avatar.replace('/avatar300s/', '/avatar42s/');
 

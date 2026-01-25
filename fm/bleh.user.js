@@ -33182,16 +33182,6 @@
                 </div>
             </div>
         `;
-      tippy_esm_default(taste_wrap, {
-        theme: "stack",
-        content: html.node`
-                <span>
-                    ${tl2(trans.taste_similarity)}
-                </span>
-                <div class="hint">${tl2(trans.click_for_more_options)}</div>
-            `,
-        delay: [700, 0]
-      });
       if (taste_artists.length > 1) {
         const other_avi = page.avatar.replace("/avatar300s/", "/avatar42s/");
         tippy_esm_default(taste_wrap, {
