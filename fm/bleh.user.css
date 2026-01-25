@@ -9581,6 +9581,30 @@
                 gap: var(--item-list-gap);
                 overflow: unset;
 
+                & > .auth-bg-container > .bg {
+                    z-index: 0;
+                    position: absolute;
+                    inset: calc(-1 * var(--item-list-gap)) 0;
+                    pointer-events: none;
+                    opacity: 0.13;
+
+                    background-size: cover;
+                    background-position: center;
+
+                    &:after {
+                        content: "";
+                        position: absolute;
+                        inset: 0;
+                        background: linear-gradient(
+                            180deg,
+                            hsl(var(--b6)) 0%,
+                            transparent 10%,
+                            transparent 90%,
+                            hsl(var(--b6)) 100%
+                        );
+                    }
+                }
+
                 .auth-menu-header {
                     display: flex;
                     flex-direction: column;
@@ -9624,41 +9648,6 @@
                         transition-timing-function: var(--trans-function);
 
                         z-index: 2;
-                    }
-
-                    & > .bg {
-                        z-index: 0;
-                        position: absolute;
-                        inset: calc(-1 * var(--item-list-gap));
-                        width: 190px;
-                        height: 244px;
-                        pointer-events: none;
-                        opacity: 0.13;
-
-                        background-size: cover;
-                        background-position: center;
-
-                        &:before {
-                            content: "";
-                            position: absolute;
-                            inset: 0;
-                            background: linear-gradient(
-                                90deg,
-                                transparent 70%,
-                                hsl(var(--b6))
-                            );
-                        }
-
-                        &:after {
-                            content: "";
-                            position: absolute;
-                            inset: 0;
-                            background: linear-gradient(
-                                180deg,
-                                transparent 70%,
-                                hsl(var(--b6))
-                            );
-                        }
                     }
 
                     & > .name {

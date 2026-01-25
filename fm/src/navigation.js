@@ -763,17 +763,20 @@ export function append_nav() {
                 page.state.settings_page == 'visual';
 
             let auth_header;
+            let auth_bg;
 
             instance.setContent(html.node`
                 <div class="auth-menu-v2" style="--page-height: ${height}px">
                     <div class="side primary">
+                        <div class="auth-bg-container" ref=${el => auth_bg = el}>
+                            ${!auth.avatar.endsWith('818148bf682d429dc215c1705eb27b98.png') ? html.node`
+                            <div class="bg" style="background-image: url(${auth.avatar.replace('avatar42s', 'avatar170s')})" />
+                            ` : ''}
+                        </div>
                         <div class="auth-menu-header" ref=${el => auth_header = el}>
                             <div class="avatar">
                                 <img src=${auth.avatar.replace('avatar42s', 'avatar170s')} alt=${auth.name} />
                             </div>
-                            ${!auth.avatar.endsWith('818148bf682d429dc215c1705eb27b98.png') ? html.node`
-                            <div class="bg" style="background-image: url(${auth.avatar.replace('avatar42s', 'avatar170s')})" />
-                            ` : ''}
                             <div class="name"><span class="at">@</span>${auth.name}</div>
                             ${auth.pro ? html.node`
                                 <div class="badges">
@@ -1097,15 +1100,17 @@ export function append_nav() {
             `);
 
             load_profile_cache_externally(auth.name).then(cache => {
-                render(auth_header, html`
-                    <div class="avatar">
-                        <img src=${auth.avatar.replace('avatar42s', 'avatar170s')} alt=${auth.name} />
-                    </div>
+                render(auth_bg, html`
                     ${cache.banner ? html.node`
                     <div class="bg" style="background-image: url(${cache.banner})" />
                     ` : !auth.avatar.endsWith('818148bf682d429dc215c1705eb27b98.png') ? html.node`
                     <div class="bg" style="background-image: url(${auth.avatar.replace('avatar42s', 'avatar170s')})" />
                     ` : ''}
+                `);
+                render(auth_header, html`
+                    <div class="avatar">
+                        <img src=${auth.avatar.replace('avatar42s', 'avatar170s')} alt=${auth.name} />
+                    </div>
                     <div class="name">${cache.username ? cache.username : `@${auth.name}`}</div>
                     ${badges || auth.pro ? html.node`
                         <div class="badges">
