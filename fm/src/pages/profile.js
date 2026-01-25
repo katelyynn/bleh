@@ -162,16 +162,6 @@ export async function bleh_profiles() {
             if (type == 'label--fade') {
                 page.state.follows_user = true;
 
-                if (page.subpage == 'overview') {
-                    page.structure.side.insertBefore(html.node`
-                        <section class="follow-notice-wrap oracle-notice">
-                            <div class="follow-notice">
-                                ${tl(trans.user_follows_you, { u: page.name })}
-                            </div>
-                        </section>
-                    `, page.structure.side.firstElementChild);
-                }
-
                 badge.remove();
                 return;
             }
@@ -235,16 +225,16 @@ export async function bleh_profiles() {
                 <div class="main-info">
                     <div class="sub-text">${tl(trans.profile)}</div>
                     <div class="title-container">${title_wrap}</div>
-                    ${sub_wrap ? sub_wrap : cache.username || cache.aka || cache.created ? () => {
-                        const elem = html.node`
-                            <p class="header-title-secondary" />
-                        `;
-
-                        render_sub_text(elem, cache.aka, cache.created, cache.username);
-
-                        return elem;
-                    } : ''}
                 </div>
+                ${sub_wrap ? sub_wrap : cache.username || cache.aka || cache.created ? () => {
+                    const elem = html.node`
+                        <p class="header-title-secondary" />
+                    `;
+
+                    render_sub_text(elem, cache.aka, cache.created, cache.username);
+
+                    return elem;
+                } : ''}
                 ${badge_elements.length > 0 ? html.node`
                 <div class="badges">
                     ${badge_elements.map(badge => html.node`
@@ -2321,6 +2311,15 @@ function render_sub_text(parent, aka, created, display_name) {
             <dl class="sub-text-pair">
                 ${sub_text_label('created', tl(trans.account_creation))}
                 <dd class="sub-text-item not-text">${created}</dd>
+            </dl>
+        `);
+    }
+
+    if (page.state.follows_user) {
+        parent.appendChild(html.node`
+            <dl class="sub-text-pair">
+                ${sub_text_label('follow', tl(trans.following))}
+                <dd class="sub-text-item not-text">${tl(trans.follows_you)}</dd>
             </dl>
         `);
     }

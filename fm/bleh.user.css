@@ -262,7 +262,7 @@
         --card-blur-bg-alt: hsl(var(--b5), var(--solarium-opacity, 35%));
 
         --nav-filter-shadow: drop-shadow(0 0 5px hsl(var(--b6), 90%));
-        --header-filter-shadow: drop-shadow(0 0 5px hsl(var(--b6), 90%));
+        --header-filter-shadow: drop-shadow(0 0 3px hsl(var(--b6))) drop-shadow(0 0 10px hsl(var(--b6)));
 
         --menu-item-hov: hsla(var(--b4), 40%);
         --menu-item-atv: hsla(var(--b4), 60%);
@@ -394,7 +394,7 @@
             --menu-item-hov: hsla(var(--b4), 60%);
             --menu-item-atv: hsla(var(--b4), 80%);
 
-            --nav-filter-shadow: drop-shadow(0 0 4px hsl(var(--b5))) drop-shadow(0 0 12px hsl(var(--b5)));
+            --nav-filter-shadow: drop-shadow(0 0 2px hsl(var(--b5))) drop-shadow(0 0 4px hsl(var(--b5))) drop-shadow(0 0 8px hsl(var(--b5)));
             --header-filter-shadow: drop-shadow(0 0 6px hsl(var(--b5)));
         }
         .theme-preview[data-bleh--theme="ink"],
@@ -23557,15 +23557,12 @@
                     font-size: inherit;
                     line-height: inherit;
                 }
-
-                [data-bleh--theme_type="light"] & {
-                    text-shadow: 0 0 20px hsl(var(--b5));
-                }
             }
 
             .header-title-secondary {
                 margin-top: 4px !important;
                 flex-wrap: wrap;
+                filter: var(--nav-filter-shadow);
 
                 @media (max-width: 980px) {
                     justify-content: center;

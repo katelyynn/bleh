@@ -3986,6 +3986,9 @@ export const trans = {
         ru: 'Используйте ‘ ’ для цитат исполнителя или из других источников',
         pl: 'Użyj ‘ ’ do cytatów artystów lub z innych źródeł'
     },
+    follows_you: {
+        en: 'Follows you!'
+    },
     user_follows_you: {
         en: '{u} follows you!'
     },

@@ -36059,15 +36059,6 @@
         if (!page.mobile) badge.classList.add("expand");
         if (type == "label--fade") {
           page.state.follows_user = true;
-          if (page.subpage == "overview") {
-            page.structure.side.insertBefore(html.node`
-                        <section class="follow-notice-wrap oracle-notice">
-                            <div class="follow-notice">
-                                ${tl2(trans.user_follows_you, { u: page.name })}
-                            </div>
-                        </section>
-                    `, page.structure.side.firstElementChild);
-          }
           badge.remove();
           return;
         }
@@ -36113,14 +36104,14 @@
                 <div class="main-info">
                     <div class="sub-text">${tl2(trans.profile)}</div>
                     <div class="title-container">${title_wrap}</div>
-                    ${sub_wrap ? sub_wrap : cache2.username || cache2.aka || cache2.created ? () => {
+                </div>
+                ${sub_wrap ? sub_wrap : cache2.username || cache2.aka || cache2.created ? () => {
       const elem = html.node`
-                            <p class="header-title-secondary" />
-                        `;
+                        <p class="header-title-secondary" />
+                    `;
       render_sub_text(elem, cache2.aka, cache2.created, cache2.username);
       return elem;
     } : ""}
-                </div>
                 ${badge_elements.length > 0 ? html.node`
                 <div class="badges">
                     ${badge_elements.map((badge) => html.node`
@@ -37773,6 +37764,14 @@
             <dl class="sub-text-pair">
                 ${sub_text_label("created", tl2(trans.account_creation))}
                 <dd class="sub-text-item not-text">${created}</dd>
+            </dl>
+        `);
+    }
+    if (page.state.follows_user) {
+      parent.appendChild(html.node`
+            <dl class="sub-text-pair">
+                ${sub_text_label("follow", tl2(trans.following))}
+                <dd class="sub-text-item not-text">${tl2(trans.follows_you)}</dd>
             </dl>
         `);
     }
@@ -63820,6 +63819,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       sv: "Anv\xE4nd \u2018 \u2019 f\xF6r citat fr\xE5n artisten eller fr\xE5n annanstans",
       ru: "\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0439\u0442\u0435 \u2018 \u2019 \u0434\u043B\u044F \u0446\u0438\u0442\u0430\u0442 \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044F \u0438\u043B\u0438 \u0438\u0437 \u0434\u0440\u0443\u0433\u0438\u0445 \u0438\u0441\u0442\u043E\u0447\u043D\u0438\u043A\u043E\u0432",
       pl: "U\u017Cyj \u2018 \u2019 do cytat\xF3w artyst\xF3w lub z innych \u017Ar\xF3de\u0142"
+    },
+    follows_you: {
+      en: "Follows you!"
     },
     user_follows_you: {
       en: "{u} follows you!"
