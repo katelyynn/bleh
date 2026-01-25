@@ -240,7 +240,7 @@
 
         --normal-shadow:
             inset 0 1px 0 0 hsl(var(--b2), 80%),
-            inset 0 -30px 6px -20px hsl(var(--b2), 40%);
+            inset 0 -30px 6px -30px hsl(var(--b2), 40%);
         --input-shadow:
             inset 0 -1px 0 0 hsl(var(--b3), 70%),
             inset 0 1px 2px hsl(var(--b7), 0.2);
@@ -563,8 +563,8 @@
         --avatar-generic-background: hsl(var(--b4));
 
         --primary-shadow:
-            inset 0 1px 0 0 hsl(var(--h2), 80%),
-            inset 0 -30px 10px -20px hsla(var(--h2), 55%);
+            inset 0 1px 0 0 hsl(var(--h2), 70%),
+            inset 0 -30px 6px -30px hsla(var(--h2), 55%);
         --bar-shadow: inset 0 1px 0 0 hsla(var(--h3), 25%);
 
         --shout-vote-indicator: linear-gradient(
@@ -890,29 +890,35 @@
         --rain: 0, 0%, 100%;
 
         --bright: brightness(190%);
+        --dark: brightness(60%) contrast(120%);
 
         --solarium: var(--card-blur) url(#solarium);
         --solarium-bright: var(--card-blur) var(--bright) url(#solarium);
+        --solarium-dark: var(--card-blur) var(--dark) url(#solarium);
         --card-blur: blur(6px) saturate(var(--blur-saturate)) brightness(var(--blur-brightness)) contrast(1);
 
         @supports (-moz-appearance: none) {
             --solarium: var(--card-blur);
             --solarium-bright: var(--card-blur) var(--bright);
+            --solarium-dark: var(--card-blur) var(--dark);
         }
 
         @supports (-webkit-text-size-adjust: none) and (font: -apple-system-body) {
             --solarium: var(--card-blur);
             --solarium-bright: var(--card-blur) var(--bright);
+            --solarium-dark: var(--card-blur) var(--dark);
         }
 
         @supports (not (-webkit-text-size-adjust: none)) and (font: -apple-system-body) {
             --solarium: var(--card-blur);
             --solarium-bright: var(--card-blur) var(--bright);
+            --solarium-dark: var(--card-blur) var(--dark);
         }
 
         [data-bleh--solarium="false"] > & {
             --solarium: none !important;
             --solarium-bright: none !important;
+            --solarium-dark: none !important;
             --solarium-opacity: 1;
             --solarium-display: none;
         }
@@ -1762,6 +1768,9 @@
                 height: unset;
                 transition: none;
                 z-index: 0;
+
+                translate: none !important;
+                opacity: 1 !important;
             }
 
             .mobile-controls {
@@ -5182,6 +5191,9 @@
 
         --sat-over: 0;
         --lit-over: 1;
+
+        backdrop-filter: var(--solarium-dark);
+        -webkit-backdrop-filter: var(--solarium-dark);
     }
     .header-new-on-tour {
         --mask: var(--icon-tour);
@@ -8085,6 +8097,7 @@
     [src=""],
     .avatar > img:not([src]),
     .avatar--bleh-missing img,
+    [src^="/static/images/icons/default_user_v4"],
     [src$="818148bf682d429dc215c1705eb27b98.png"] {
         content: var(--blank) !important;
         font-size: 0;
@@ -8262,7 +8275,7 @@
     .user-now-empty-state-button,
     .inbox-item,
     .report-dropdown-button,
-    .see-more, .music-bookmarks-artists-item-toggle, .music-bookmarks-albums-item-toggle, .music-bookmarks-tags-item-toggle,
+    .see-more, .music-bookmarks-artists-item-toggle, .music-bookmarks-albums-item-toggle, .music-bookmarks-tags-item-toggle, .playlisting-playlists-item-toggle,
     .modal-action-button,
     .js-shout-reply-cancel,
     .more-items,
@@ -13974,6 +13987,10 @@
 
     .community-entry__avatar {
         border-radius: var(--avatar-radius);
+
+        &:after {
+            display: none;
+        }
     }
 
     /*     NAG BAR     */
@@ -14819,8 +14836,9 @@
             width: calc(18px + 2px);
             height: calc(18px + 2px);
             padding: 1px !important;
-            background-color: hsl(var(--b5)) !important;
             border-radius: 50px !important;
+
+            background-color: hsl(var(--b6), calc(var(--solarium-opacity) * 80%)) !important;
 
             min-width: unset;
 
@@ -15146,7 +15164,6 @@
         font-size: 0;
         padding: 0;
         position: relative;
-        background: unset !important;
         --mask: var(--icon-16-followers);
         --left: 0;
         color: hsl(var(--c3)) !important;
@@ -23677,6 +23694,15 @@
         border-bottom-right-radius: var(--card-radius);
 
         overflow: hidden;
+
+        @media (max-width: 980px) {
+            --w: var(--cards-width);
+            opacity: 0.8;
+
+            .background-inner {
+                --mask: none !important;
+            }
+        }
 
         --mask: linear-gradient(0deg, transparent 0%, white 70%);
         mask-image: var(--mask);

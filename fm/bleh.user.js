@@ -30064,11 +30064,9 @@
                 </div>
                 <div class="modal-footer">
                     <div class="fill"></div>
-                    <div class="button-group">
-                        <a class="btn primary open" href=${src} target="_blank">
-                            ${tl2(trans.open_new_tab)}
-                        </a>
-                    </div>
+                    <a class="btn primary open" href=${src} target="_blank">
+                        ${tl2(trans.open_new_tab)}
+                    </a>
                     <div class="fill"></div>
                 </div>
             </div>
