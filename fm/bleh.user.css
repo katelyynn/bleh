@@ -4883,6 +4883,10 @@
             align-items: center;
             gap: var(--icon-gap);
             margin: unset;
+
+            &.sub-text-follow {
+                font-weight: var(--font-weight-medium);
+            }
         }
     }
 

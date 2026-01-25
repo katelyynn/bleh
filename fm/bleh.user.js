@@ -37769,7 +37769,7 @@
     }
     if (page.state.follows_user) {
       parent.appendChild(html.node`
-            <dl class="sub-text-pair">
+            <dl class="sub-text-pair sub-text-follow">
                 ${sub_text_label("follow", tl2(trans.following))}
                 <dd class="sub-text-item not-text">${tl2(trans.follows_you)}</dd>
             </dl>

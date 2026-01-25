@@ -2317,7 +2317,7 @@ function render_sub_text(parent, aka, created, display_name) {
 
     if (page.state.follows_user) {
         parent.appendChild(html.node`
-            <dl class="sub-text-pair">
+            <dl class="sub-text-pair sub-text-follow">
                 ${sub_text_label('follow', tl(trans.following))}
                 <dd class="sub-text-item not-text">${tl(trans.follows_you)}</dd>
             </dl>
