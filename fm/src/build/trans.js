@@ -106,7 +106,7 @@ export const trans = {
             sv: '{name} av {sister} - {page} på {brand} {build}.{sku}',
             ru: '{name} от {sister} - {page} в {brand} {build}.{sku}',
             pl: '{name} od {sister} - {page} na {brand} {build}.{sku}',
-            zh: '{name} 的 {sister} - {page} - {brand} {build}.{sku}'
+            zh: '{name} - {sister} - {page} - {brand} {build}.{sku}'
         }
     },
     badges: {
@@ -171,7 +171,7 @@ export const trans = {
                 sv: 'Personal',
                 ru: 'Администраторы',
                 pl: 'Personel',
-                zh: '官方员工'
+                zh: '官方成员'
             },
             reason: {
                 en: 'Official member of Last.fm',
@@ -331,6 +331,7 @@ export const trans = {
                 pt: 'Reservado',
                 sv: 'Exklusiv',
                 ru: 'Зарезервированный',
+                zh: '专属'
             }
         },
         reserved: {
@@ -343,6 +344,7 @@ export const trans = {
                 sv: 'Exklusiv',
                 ru: 'Зарезервированный',
                 pl: 'Zarezerwowany',
+                zh: '专属'
             }
         },
         plaster: {
@@ -401,7 +403,7 @@ export const trans = {
         sv: 'Behöver en nyare version av bleh',
         ru: 'Требуется обновленная версия bleh',
         pl: 'Wymaga nowszej wersji bleh',
-        zh: '需要更新版本的 bleh'
+        zh: '需要更高版本的 bleh'
     },
     home: {
         en: 'Home',
@@ -473,7 +475,7 @@ export const trans = {
         ru: 'Вы не можете оставлять тут отзывы',
         pt: 'Você não pode deixar comentários aqui',
         pl: 'Nie możesz zostawiać tu wiadomości',
-        zh: '在这里无法留言哦'
+        zh: '此处无法留言哦'
     },
     failed_to_send: {
         en: 'Failed to send',
@@ -648,7 +650,7 @@ export const trans = {
         sv: 'Jämför',
         ru: 'Сравнить',
         pl: 'Porównaj',
-        zh: '比较'
+        zh: '对比'
     },
     compare_plays: {
         en: 'Compare plays',
@@ -659,7 +661,7 @@ export const trans = {
         sv: 'Jämför spelningar',
         ru: 'Сравнить сыгранное',
         pl: 'Porównaj odtworzenia',
-        zh: '比较播放次数'
+        zh: '收听对比'
     },
     inverse_compare: {
         name: {
@@ -671,7 +673,7 @@ export const trans = {
             ru: 'Обратный метод сравнения',
             pt: 'Método de comparação inversa',
             pl: 'Odwróć metodę porównania',
-            zh: '反向比较'
+            zh: '差异对比模式'
         },
         body: {
             en: 'Show items you do not share instead',
@@ -726,7 +728,7 @@ export const trans = {
         sv: 'Inget gemensamt (๑-﹏-๑)',
         ru: 'Ничего общего (๑-﹏-๑)',
         pl: 'Nic wspólnego (๑-﹏-๑)',
-        zh: '没有共同点 (๑-﹏-๑)'
+        zh: '暂无共同点 (๑-﹏-๑)'
     },
     others_featured: {
         // guest features on a song or album
@@ -749,7 +751,7 @@ export const trans = {
         sv: 'Dina skrobblingar',
         ru: 'Ваши скробблы',
         pl: 'Twoje scrobble',
-        zh: '你的 Scrobble'
+        zh: '你的 Scrobble 记录'
     },
     play: {
         // play a song
@@ -840,7 +842,7 @@ export const trans = {
         sv: 'Håll koll på vad dina vänner lyssnar på',
         ru: 'Следите за тем, что слушают ваши друзья',
         pl: 'Sprawdź czego słuchają twoi znajomi',
-        zh: '时刻关注好友的听歌动态'
+        zh: '实时关注好友的收听动态'
     },
     add_friends: {
         en: 'Add friends',
@@ -863,7 +865,7 @@ export const trans = {
             sv: 'Stjärnmärkt vän',
             ru: 'Избранный друг',
             pl: 'Znajomi oznaczeni jako ulubieni',
-            zh: '星标好友'
+            zh: '特别关注'
         },
         body: {
             en: 'View their scrobbles alongside yours at all times',
@@ -874,7 +876,7 @@ export const trans = {
             sv: 'Se deras skrobblingar bredvid dina hela tiden',
             ru: 'Постоянно просматривать их прослушивания рядом с вашими',
             pl: 'Zawsze wyświetlaj ich scrobble łącznie z twoimi',
-            zh: '随时随地将他们的 Scrobble 记录与你的记录并列显示'
+            zh: '随时将他们的 Scrobble 记录与你的并列显示'
         },
         notice: {
             en: 'Not seeing the options you’re after? Fill out your friends list in the settings.',
@@ -885,7 +887,7 @@ export const trans = {
             sv: 'Ser du inte inställningar du letar efter? Fyll upp din vänlista i inställningarna.',
             ru: 'Не видите нужных опций? Заполните свой список друзей в настройках.',
             pl: 'Nie ma czego szukasz? Wypełni swoją liste znajomych w ustawieniach.',
-            zh: '没找到想要的选项？请在设置中完善你的好友列表。'
+            zh: '没有看到想要的选项？请在设置中完善你的好友列表。'
         }
     },
     friend_difference: {
@@ -897,7 +899,7 @@ export const trans = {
         sv: '’Vänner’ är en exklusiv del av bleh som tillåter dig att hålla koll på dina vänners lyssnarhistoria, det hanteras lokalt och rör inte din följarlista.',
         ru: '«Друзья» — это эксклюзивная функция bleh, которая позволяет вам следить за историей прослушиваний ваших друзей. Список управляется локально и не влияет на ваш список подписок.',
         pl: '‘Znajomi’ to funkcja ekskluzywna do bleh która pozwala na sprawdzenie historii słuchania twoich znajomych, działa lokalnie czyli nie wypływa na twoją liste kont które obserwujesz.',
-        zh: '“好友”是 bleh 插件的专属功能，让你可以实时了解好友的听歌历史。该功能仅在本地生效，不会影响你在 Last.fm 官网的关注列表。'
+        zh: '「好友」是 bleh 插件的专属功能，让你可以实时了解好友的收听历史。此列表仅存储于本地，不会同步至 Last.fm 官网的关注列表。'
     },
     add_as_friend: {
         en: 'Add as friend',
@@ -931,7 +933,7 @@ export const trans = {
             sv: 'Är du säker på att du vill ta bort {u} som vän? Du följer dem fortfarande - vänlistan hanteras lokalt.',
             ru: 'Вы уверены, что хотите удалить {u} из друзей? Вы останетесь подписаны на него/нее — это локальный список.',
             pl: 'Czy napewno chesz usunąć {u} z listy znajomych?, będziesz dalej ich obserwować - to jest tylko lokalnie',
-            zh: '确定要将 {u} 从好友中移除吗？你仍会继续关注他们 —— 这仅是本地列表的操作。'
+            zh: '确定要将 {u} 从好友中移除吗？你仍会继续关注他们 —— 此操作仅影响本地列表。'
         }
     },
     added_as_friend: {
@@ -965,7 +967,7 @@ export const trans = {
         sv: 'Stjärnmärkte',
         ru: 'Добавлен в избранное',
         pl: 'Dodano do ulubionych',
-        zh: '已设为星标'
+        zh: '已设为特别关注'
     },
     add_as_starred_friend: {
         en: 'Star friend',
@@ -976,7 +978,7 @@ export const trans = {
         sv: 'Stjärnmärk vän',
         ru: 'Добавить друга в избранное',
         pl: 'Oznacz znajomego jako ulubieni',
-        zh: '星标好友'
+        zh: '设为特别关注'
     },
     removed_star: {
         en: 'Removed star status',
@@ -987,7 +989,7 @@ export const trans = {
         sv: 'Tog bort stjärnmärke',
         ru: 'Удален из избранного',
         pl: 'Usunięto z ulubionych',
-        zh: '已取消星标'
+        zh: '已取消特别关注'
     },
     remove_as_star_friend: {
         en: 'Remove star status',
@@ -998,7 +1000,7 @@ export const trans = {
         sv: 'Ta bort stjärnmärke',
         ru: 'Удалить из избранного',
         pl: 'Usuń z ulubionych',
-        zh: '取消星标'
+        zh: '取消特别关注'
     },
     aka: {
         en: 'aka.',
@@ -1045,7 +1047,7 @@ export const trans = {
         sv: 'skrobblar sedan ',
         ru: 'скробблинг с ',
         pl: 'scrobluje od',
-        zh: '记录 Scrobble 自'
+        zh: '记录 Scrobble 自 '
     },
     edit: {
         en: 'Edit',
@@ -1148,7 +1150,7 @@ export const trans = {
         pt: 'scrobbles',
         sv: 'skrobblingar',
         ru: 'прослушивания',
-        zh: '播放记录',
+        zh: '音乐记录',
         count: {
             en: '{c} listens',
             de: '{c} Scrobbles',
@@ -1169,7 +1171,7 @@ export const trans = {
         sv: 'Ny skrobbel',
         ru: 'Новый скроббл',
         pl: 'Nowe scrobble',
-        zh: '新 Scrobble'
+        zh: '新建 Scrobble'
     },
     scrobble_failed: {
         en: 'Scrobble could not be sent',
@@ -1328,7 +1330,8 @@ export const trans = {
         pt: 'Single',
         sv: 'Singel',
         ru: 'Сингл',
-        pl: 'Singiel'
+        pl: 'Singiel',
+        zh: '单曲'
     },
     track: {
         en: 'Track',
@@ -1579,7 +1582,7 @@ export const trans = {
             sv: 'Ändra tillfälligt din valda accentfärg för att matcha albumkonsten',
             ru: 'Временно заменять выбранный акцентный цвет на цвет обложки альбома',
             pl: 'Tymczasowo nadpisz twój wybrany akcent żeby dopasować do okładki albumu',
-            zh: '根据专辑封面色彩暂时替换当前强调色'
+            zh: '根据专辑封面色彩临时替换你选择的强调色'
         }
     },
     hue_from_album: {
@@ -1672,7 +1675,7 @@ export const trans = {
         sv: 'Spelschema',
         ru: 'Участники',
         pl: 'Line-up',
-        zh: '演出阵容' // 或许可以是阵容
+        zh: '阵容' 
     },
     attendance: {
         en: 'Attendance',
@@ -1704,7 +1707,7 @@ export const trans = {
         pt: 'Geral',
         sv: 'Generellt',
         ru: 'Общие',
-        zh: '常规'
+        zh: '通用'
     },
     interface: {
         en: 'Interface',
@@ -1792,7 +1795,7 @@ export const trans = {
         sv: 'Nuvarande årstid',
         ru: 'Текущий сезон',
         pl: 'Aktualny sezon',
-        zh: '当前季节'
+        zh: '当前时令'
     },
     seasonal: {
         name: {
@@ -1805,7 +1808,7 @@ export const trans = {
             sv: 'Årstider',
             ru: 'Сезоны',
             pl: 'Sezonowe',
-            zh: '季节性'
+            zh: '时令'
         },
         listing: {
             none: {
@@ -1839,7 +1842,7 @@ export const trans = {
                 sv: 'Pride',
                 ru: 'Прайда',
                 pl: 'Duma',
-                zh: '自豪月'
+                zh: '彩虹月'
             },
             halloween: {
                 en: 'Halloween',
@@ -1905,7 +1908,6 @@ export const trans = {
             sv: 'Öppna live-nedräkningen',
             ru: 'Открыть живой счетчик',
             pl: 'Otwórz licznik aktualizający się na żywo',
-            zh: '打开实时计数器'
         },
         live: {
             en: 'Counter is updating live',
@@ -1916,7 +1918,6 @@ export const trans = {
             sv: 'Nedräkningen uppdateras live',
             ru: 'Открыть счетчик в реальном времени',
             pl: 'Licznik aktualizuje się na żywo',
-            zh: '实时更新中'
         },
         presets: {
             // these are seasonal exclusive colour presets
@@ -1929,7 +1930,8 @@ export const trans = {
                 pt: 'Um Natal Sem Sentido',
                 sv: 'A Nonsense Christmas',
                 ru: 'Бессмысленное Рождество',
-                pl: 'Bezsensowne Święta'
+                pl: 'Bezsensowne Święta',
+                zh: '胡闹圣诞'
             },
             fruitcake: {
                 // reference to https://open.spotify.com/album/7EisdwWcodpmHxgpGVE5Pg
@@ -1941,6 +1943,7 @@ export const trans = {
                 pt: 'bolo de frutas',
                 ru: 'фруктовый кекс',
                 pl: 'fruitcake',
+                zh: '水果蛋糕'
             },
             mistletoe: {
                 en: 'Mistletoe',
@@ -1950,6 +1953,7 @@ export const trans = {
                 sv: 'Mistel',
                 pt: 'Visco',
                 ru: 'Омела',
+                zh: '槲寄生'
             },
             festival: {
                 en: 'Christmas Eve',
@@ -1959,7 +1963,8 @@ export const trans = {
                 sv: 'Julafton',
                 pt: 'Véspera de Natal',
                 ru: 'Сочельник',
-                pl: 'Wigilia'
+                pl: 'Wigilia',
+                zh: '平安夜'
             }
         },
         exclusive: {
@@ -1968,7 +1973,8 @@ export const trans = {
             es: 'Tiempo limitado',
             pt: 'Tempo limitado',
             pl: 'Tymczasowe',
-            ru: 'Ограниченное время'
+            ru: 'Ограниченное время',
+            zh: '限时'
         }
     },
     new_season: {
@@ -1979,7 +1985,8 @@ export const trans = {
         pt: 'Nova Estação!',
         sv: 'Ny årstid!',
         ru: 'Новый сезон!',
-        pl: 'Nowy sezon!'
+        pl: 'Nowy sezon!',
+        zh: '新时令开启！'
     },
     value_for_time: {
         // e.g. (Halloween) ends (in 3 days)
@@ -1989,7 +1996,8 @@ export const trans = {
         it: '{v} termina {time}',
         ru: '{v} закончится {time}',
         pt: '{v} termina {time}',
-        pl: '{v} kończ się za {time}'
+        pl: '{v} kończ się za {time}',
+        zh: '{v} 将于 {time} 后结束'
     },
     seasonal_timeline: {
         en: 'Seasonal timeline',
@@ -1999,7 +2007,8 @@ export const trans = {
         pt: 'Linha do tempo sazonal',
         sv: 'Tidslinje för årstider',
         ru: 'Сезонная шкала времени',
-        pl: 'Przebieg sezonu'
+        pl: 'Przebieg sezonu',
+        zh: '时令时间轴'
     },
     enable_seasons: {
         // translate to seasons if it reads better
@@ -2011,7 +2020,8 @@ export const trans = {
             pt: 'Adaptar automaticamente a eventos sazonais',
             sv: 'Adaptera automatiskt för årstider',
             ru: 'Автоматически адаптироваться к сезонным событиям',
-            pl: 'Automatycznie adaptuj do wydarzeń sezonowych'
+            pl: 'Automatycznie adaptuj do wydarzeń sezonowych',
+            zh: '自动适配时令活动'
         },
         body: {
             en: 'Adapts the default colour, iconset, and shows particles depending on the season',
@@ -2021,7 +2031,8 @@ export const trans = {
             pt: 'Adapta a cor padrão, ícones e exibe partículas dependendo da sazonalidade',
             sv: 'Adaptera färg, ikoner, och visa partiklar beroende på årstiden',
             ru: 'Адаптирует цвет по умолчанию, набор значков и отображает частицы в зависимости от сезона',
-            pl: 'Adaptuje domyślny kolor, ikony, oraz pokazuje efekty zależne od sezonu'
+            pl: 'Adaptuje domyślny kolor, ikony, oraz pokazuje efekty zależne od sezonu',
+            zh: '根据当前时令或节日，自动调整默认颜色、图标集并显示粒子动态效果'
         }
     },
     seasonal_particles_fps: {
@@ -2033,7 +2044,8 @@ export const trans = {
             pt: 'Reduzir qualidade das partículas',
             sv: 'Sänk partiklarnas kvalitet',
             ru: 'Снизить качество частиц',
-            pl: 'Zmniejsz jakość efektów'
+            pl: 'Zmniejsz jakość efektów',
+            zh: '降低粒子质量'
         },
         body: {
             en: 'Snow particles use a drop-shadow glow for aesthetics with the added processing cost',
@@ -2043,7 +2055,8 @@ export const trans = {
             pt: 'As partículas de neve usam um efeito de brilho com sombra projetada para estética, com o custo adicional de processamento',
             sv: 'Snöpartiklarna använder en glödeffekt för estetiska själ, med lite extra datorbelastning',
             ru: 'Снежные частицы используют эффект свечения для эстетики ценой дополнительных затрат ресурсов',
-            pl: 'Płatki śniegu używają podświetlonych cieni dla estetyki - co powoduje większe zużycie zasobów'
+            pl: 'Płatki śniegu używają podświetlonych cieni dla estetyki - co powoduje większe zużycie zasobów',
+            zh: '雪花粒子使用了阴影发光效果以提升视觉美感，但这会增加额外的性能开销'
         }
     },
     seasonal_overlays: {
@@ -2055,7 +2068,8 @@ export const trans = {
             pt: 'Exibir efeitos sazonais adicionais',
             sv: 'Visa extra årstidseffekter',
             ru: 'Отображать дополнительные сезонные эффекты',
-            pl: "Pokaż dodatkowe efekty sezonowe"
+            pl: "Pokaż dodatkowe efekty sezonowe",
+            zh: '显示额外的时令特效'
         },
         body: {
             en: 'During winter seasons this applies a coat of ice to panels, otherwise mainly gradients',
@@ -2065,7 +2079,8 @@ export const trans = {
             pt: 'Durante o inverno, isso aplica uma camada de gelo aos painéis; fora dessa época, aplica principalmente gradientes',
             sv: 'Under vintersäsongen läggs ett lager is på paneler, annars mest bildgradienter',
             ru: 'Отображать дополнительные сезонные эффекты',
-            pl: 'Podczas sezonu zimowego dodaje lód do paneli, w większości gradienty '
+            pl: 'Podczas sezonu zimowego dodaje lód do paneli, w większości gradienty ',
+            zh: '冬季时会为界面披上一层冰霜质感，其他时令则主要以色彩渐变呈现'
         }
     },
     seasonal_offset: {
@@ -2076,7 +2091,8 @@ export const trans = {
         pt: 'Eventos sazonais são realizados em seu fuso horário, que calculamos como {offset}',
         sv: 'Årstidsevenemang hålls i din tidszon, som vi räknade ut vara {offset}',
         ru: 'Сезонные события проводятся по вашему часовому поясу, который мы определили как {offset}',
-        pl: 'Sezonowe wydarzenia odbywają się w twojej strefie czasowej, którą liczymy jako {offset}'
+        pl: 'Sezonowe wydarzenia odbywają się w twojej strefie czasowej, którą liczymy jako {offset}',
+        zh: '时令活动将根据您所在的本地时区运行，我们测算的偏移量为 {offset}'
     },
     calculated_offset: {
         // timezone offset
@@ -2087,6 +2103,7 @@ export const trans = {
         pt: 'Offset calculado com base no fuso horário',
         sv: 'Förskjutning kalkylerats från tidszon',
         ru: 'Рассчитанное смещение на основе часового пояса',
+        zh: '根据时区测算的偏移量'
     },
     started: {
         // season start date
@@ -2098,7 +2115,8 @@ export const trans = {
         pt: 'Data de início',
         sv: 'Startdatum',
         ru: 'Дата начала',
-        pl: 'Data rozpoczęcia'
+        pl: 'Data rozpoczęcia',
+        zh: '开始日期'
     },
     next_in: {
         // season next date
@@ -2110,7 +2128,8 @@ export const trans = {
         pt: 'Próxima estação',
         sv: 'Nästa årstid',
         ru: 'Следующий сезон',
-        pl: 'Następny sezon'
+        pl: 'Następny sezon',
+        zh: '下个时令'
     },
     ends_in: {
         // season end date
@@ -2122,7 +2141,8 @@ export const trans = {
         pt: 'Dia de término',
         sv: 'Slutdatum',
         ru: 'Дата окончания',
-        pl: 'Kończy się'
+        pl: 'Kończy się',
+        zh: '结束日期'
     },
     text: {
         en: 'Text',
@@ -2132,7 +2152,8 @@ export const trans = {
         pt: 'Texto',
         sv: 'Text',
         ru: 'Текст',
-        pl: 'Tekst'
+        pl: 'Tekst',
+        zh: '文本'
     },
     accessibility: {
         en: 'Accessibility',
@@ -2142,7 +2163,8 @@ export const trans = {
         pt: 'Acessibilidade',
         sv: 'Tillgängligthet',
         ru: 'Доступность',
-        pl: 'Dostępność'
+        pl: 'Dostępność',
+        zh: '辅助功能'
     },
     troubleshooting: {
         en: 'Advanced',
@@ -2152,7 +2174,8 @@ export const trans = {
         pt: 'Avançado',
         sv: 'Advancerat',
         ru: 'Дополнительно',
-        pl: 'Zaawansowane'
+        pl: 'Zaawansowane',
+        zh: '高级'
     },
     recommendations: {
         en: 'Suggested',
@@ -2162,7 +2185,8 @@ export const trans = {
         pt: 'Sugestões',
         sv: 'Förslag',
         ru: 'Рекомендованные',
-        pl: 'Polecane'
+        pl: 'Polecane',
+        zh: '推荐'
     },
     releases: {
         en: 'Releases',
@@ -2172,7 +2196,8 @@ export const trans = {
         pt: 'Lançamentos',
         sv: 'Skivsläpp',
         ru: 'Релизы',
-        pl: 'Polecane'
+        pl: 'Polecane',
+        zh: '发行'
     },
     no_releases_found: {
         en: 'No releases found here',
@@ -2181,7 +2206,8 @@ export const trans = {
         it: 'Nessuna pubblicazione trovata',
         ru: 'Здесь не найдено ни одного релиза',
         pt: 'Nenhum lançamento encontrado aqui',
-        pl: 'Nie znaleziono tutaj żadnych wydań'
+        pl: 'Nie znaleziono tutaj żadnych wydań',
+        zh: '未发现相关发行内容'
     },
     tracklist_source: {
         name: {
@@ -2191,7 +2217,8 @@ export const trans = {
             it: 'Fonte preferita per la lista dei brani',
             ru: 'Предпочитаемый источник треклиста',
             pt: 'Fonte preferida da lista de faixas',
-            pl: 'Preferowane źródło listy utworów'
+            pl: 'Preferowane źródło listy utworów',
+            zh: '首选曲目列表来源'
         },
         body: {
             en: 'Choose which service to display for album tracklists',
@@ -2200,7 +2227,8 @@ export const trans = {
             it: 'Seleziona che servizio mostrare per la lista dei brani',
             ru: 'Выберите сервис, который будет отображаться для треклистов альбомов',
             pt: 'Escolha qual serviço exibir para as listas de faixas dos álbuns',
-            pl: 'Wybierz z jakiego serwisu wyświetlać listy utworów albumów'
+            pl: 'Wybierz z jakiego serwisu wyświetlać listy utworów albumów',
+            zh: '选择用于显示专辑曲目列表的数据源'
         }
     },
     bookmarks: {
@@ -2212,7 +2240,8 @@ export const trans = {
         ja: 'ブックマーク',
         sv: 'Bokmärken',
         ru: 'Закладки',
-        pl: 'Zakładki'
+        pl: 'Zakładki',
+        zh: '收藏'
     },
     charts: {
         en: 'Charts',
@@ -2222,7 +2251,8 @@ export const trans = {
         pt: 'Paradas',
         ja: 'チャート',
         sv: 'Topplistor',
-        ru: 'Чарты'
+        ru: 'Чарты',
+        zh: '榜单'
     },
     view_the_charts: {
         en: 'View the charts',
@@ -2230,7 +2260,8 @@ export const trans = {
         es: 'Ver las listas',
         it: 'Visualizza le classifiche',
         pt: 'Ver as paradas',
-        ru: 'Посмотреть чарты'
+        ru: 'Посмотреть чарты',
+        zh: '查看榜单'
     },
     welcome_back_user: {
         en: 'Welcome back {user}!',
@@ -2240,7 +2271,8 @@ export const trans = {
         pt: 'Bem-vindo(a) {user}!',
         sv: 'Välkommen tillbaka, {user}!',
         ru: 'С возвращением, {user}!',
-        pl: 'Witaj ponownie {user}!'
+        pl: 'Witaj ponownie {user}!',
+        zh: '欢迎回来，{user}！'
     },
     // TODO(stel): is my capitalisation correct here at all lol ; yes cutie, well done <3
     good_morning_user: {
@@ -2251,7 +2283,8 @@ export const trans = {
         pt: 'Bom dia',
         sv: 'God morgon',
         ru: 'Доброе утро',
-        pl: 'Dzień dobry'
+        pl: 'Dzień dobry',
+        zh: '上午好'
     },
     good_afternoon_user: {
         en: 'Good afternoon',
@@ -2261,7 +2294,8 @@ export const trans = {
         pt: 'Boa tarde',
         sv: 'God eftermiddag',
         ru: 'Добрый день',
-        pl: 'Dzień dobry'
+        pl: 'Dzień dobry',
+        zh: '下午好'
     },
     good_evening_user: {
         en: 'Good evening',
@@ -2271,7 +2305,8 @@ export const trans = {
         pt: 'Boa noite',
         sv: 'God kväll',
         ru: 'Добрый вечер',
-        pl: 'Dobry wieczór'
+        pl: 'Dobry wieczór',
+        zh: '晚上好'
     },
     good_night_user: {
         en: 'Goodnight',
@@ -2281,7 +2316,8 @@ export const trans = {
         pt: 'Boa noite',
         sv: 'God natt',
         ru: 'Спокойной ночи',
-        pl: 'Dobranoc'
+        pl: 'Dobranoc',
+        zh: '晚安'
     },
     bleh_settings: {
         en: 'bleh Settings',
@@ -2291,7 +2327,8 @@ export const trans = {
         pt: 'Configurações do bleh',
         sv: 'bleh-inställningar',
         ru: 'Настройки bleh',
-        pl: 'Ustawienia bleh'
+        pl: 'Ustawienia bleh',
+        zh: 'bleh 设置'
     },
     bleh_setup: {
         en: 'Setup',
@@ -2301,7 +2338,8 @@ export const trans = {
         pt: 'Instalação',
         sv: 'Installation',
         ru: 'Настройка',
-        pl: 'Instalacja'
+        pl: 'Instalacja',
+        zh: '初始化'
     },
     import: {
         en: 'Import',
@@ -2311,7 +2349,8 @@ export const trans = {
         pt: 'Importar',
         pl: 'Importuj',
         sv: 'Importera',
-        ru: 'Импорт'
+        ru: 'Импорт',
+        zh: '导入'
     },
     import_failed: {
         en: 'Import failed',
@@ -2322,6 +2361,7 @@ export const trans = {
         sv: 'Importering misslyckades',
         ru: 'Сбой импорта',
         pl: 'Błąd importowania',
+        zh: '导入失败',
         notice: {
             en: 'The settings you attempted to import failed to parse, no changes were made.',
             de: 'Die Einstellungen, die du versucht hast, zu importieren, konnten nicht verarbeitet werden. Es wurden keine Änderungen vorgenommen.',
@@ -2330,7 +2370,8 @@ export const trans = {
             pt: 'As configurações que você tentou importar não puderam ser processadas; nenhuma alteração foi feita.',
             sv: 'Inställningarna du försökte importera kunde inte läsas, inga ändringar har gjorts.',
             ru: 'Настройки, которые вы пытались импортировать, не удалось обработать. Изменения не были внесены.',
-            pl: 'Nie udało się przenieść twoich ustawień, nie doszło do żadnych zmian.'
+            pl: 'Nie udało się przenieść twoich ustawień, nie doszło do żadnych zmian.',
+            zh: '您尝试导入的设置无法解析，未进行任何更改。'
         }
     },
     import_settings: {
@@ -2341,7 +2382,8 @@ export const trans = {
         pt: 'Importar configurações',
         sv: 'Importera inställningar',
         ru: 'Импортировать настройки',
-        pl: 'Importuj ustawienia'
+        pl: 'Importuj ustawienia',
+        zh: '导入设置'
     },
     import_notice: {
         en: 'This is a permanent action, beware of where you are copying from',
@@ -2351,7 +2393,8 @@ export const trans = {
         pt: 'Esta é uma ação permanente, cuidado com o lugar de onde você está copiando',
         sv: 'Det här är permanent, oberoende av vart du kopierar ifrån',
         ru: 'Это действие необратимо, будьте внимательны к источнику копирования',
-        pl: 'Importowanie jest permanentne, uważaj skąd kopiujesz.'
+        pl: 'Importowanie jest permanentne, uważaj skąd kopiujesz.',
+        zh: '此操作不可逆，请确保数据来源可靠。'
     },
     export: {
         en: 'Export',
@@ -2362,6 +2405,7 @@ export const trans = {
         pl: 'Eksportuj',
         sv: 'Exportera',
         ru: 'Экспорт',
+        zh: '导出'
     },
     export_settings: {
         en: 'Export settings',
@@ -2371,7 +2415,8 @@ export const trans = {
         pt: 'Exportar configurações',
         sv: 'Exportera inställningar',
         ru: 'Экспортировать настройки',
-        pl: 'Eksportuj ustawienia'
+        pl: 'Eksportuj ustawienia',
+        zh: '导出设置'
     },
     reset: {
         en: 'Reset',
@@ -2381,7 +2426,8 @@ export const trans = {
         pt: 'Restaurar',
         pl: 'Resetuj',
         sv: 'Återställ',
-        ru: 'Сбросить'
+        ru: 'Сбросить',
+        zh: '重置'
     },
     reset_settings: {
         en: 'Reset settings to default',
@@ -2391,7 +2437,8 @@ export const trans = {
         pt: 'Restaurar as configurações para o padrão',
         sv: 'Återställ alla inställningar till det vanliga',
         ru: 'Сбросить настройки до значений по умолчанию',
-        pl: 'Resetuj ustawienia'
+        pl: 'Resetuj ustawienia',
+        zh: '恢复默认设置'
     },
     reset_notice: {
         en: 'Your settings will be permanently reset, are you sure?',
@@ -2401,7 +2448,8 @@ export const trans = {
         pt: 'Sua configuração vai ser permanentemente restaurada ao padrão, você tem certeza?',
         sv: 'Är du säker på att du vill återställa alla inställningar? Det är permanent.',
         ru: 'Ваши настройки будут безвозвратно сброшены, вы уверены?',
-        pl: 'Twoje ustawienia zostaną permanentnie usunięte, czy napewno chcesz je zresetować?'
+        pl: 'Twoje ustawienia zostaną permanentnie usunięte, czy napewno chcesz je zresetować?',
+        zh: '设置将被永久重置且不可撤销，确定要继续吗？'
     },
     reset_item_to_default: {
         en: 'Reset item to default',
@@ -2411,7 +2459,8 @@ export const trans = {
         pt: 'Restaurar itens para o padrão',
         sv: 'Återställ till standard',
         ru: 'Сбросить элемент до значения по умолчанию',
-        pl: 'Zresetuj przedmioty do ustawień fabrycznych'
+        pl: 'Zresetuj przedmioty do ustawień fabrycznych',
+        zh: '将此项重置为默认'
     },
     make_a_backup: {
         en: 'Make a backup',
@@ -2421,7 +2470,8 @@ export const trans = {
         pt: 'Faça um backup',
         sv: 'Skapa en backup',
         ru: 'Создать резервную копию',
-        pl: 'Utwórz backup'
+        pl: 'Utwórz backup',
+        zh: '创建备份'
     },
     news: {
         en: 'News',
@@ -2432,6 +2482,7 @@ export const trans = {
         sv: 'Nytt',
         ru: 'Новости',
         pl: 'Aktualności',
+        zh: '更新日志', // 不太确定
         type: {
             major: {
                 en: 'Major release',
@@ -2440,7 +2491,8 @@ export const trans = {
                 pt: 'Lançamento principal',
                 sv: 'Större utgåva',
                 ru: 'Крупный релиз',
-                pl: 'Głowne wydanie'
+                pl: 'Głowne wydanie',
+                zh: '重大更新'
             },
             minor: {
                 en: 'Minor release',
@@ -2449,7 +2501,8 @@ export const trans = {
                 sv: 'Mindre utgåva',
                 pt: 'Lançamento secundario',
                 ru: 'Мелкий релиз',
-                pl: 'Mała aktualizacja'
+                pl: 'Mała aktualizacja',
+                zh: '小幅迭代'
             }
         }
     },
@@ -2461,7 +2514,8 @@ export const trans = {
         pt: 'Notícias de {user}',
         sv: 'Nytt från {user}',
         ru: 'Новости от {user}',
-        pl: 'Aktualności od {user}'
+        pl: 'Aktualności od {user}',
+        zh: '来自 {user} 的消息'
     },
     default: {
         en: 'Default',
@@ -2470,7 +2524,8 @@ export const trans = {
         it: 'Predefinito',
         pt: 'Padrão',
         sv: 'Standard',
-        ru: 'По умолчанию'
+        ru: 'По умолчанию',
+        zh: '默认'
     },
     avatar: {
         en: 'Avatar',
@@ -2480,7 +2535,8 @@ export const trans = {
         pt: 'Foto de perfil',
         sv: 'Profilbild',
         ru: 'Аватар',
-        pl: 'Awatar'
+        pl: 'Awatar',
+        zh: '头像'
     },
     customise: {
         en: 'Customise',
@@ -2490,7 +2546,8 @@ export const trans = {
         pt: 'Customizar',
         sv: 'Anpassa',
         ru: 'Настроить',
-        pl: 'Dostosuj'
+        pl: 'Dostosuj',
+        zh: '自定义'
     },
     convert: {
         en: 'Convert',
@@ -2500,7 +2557,8 @@ export const trans = {
         pt: 'Converter',
         sv: 'Konvertera',
         ru: 'Конвертировать',
-        pl: 'Konwertuj'
+        pl: 'Konwertuj',
+        zh: '转换'
     },
     convert_from_hex: {
         en: 'Convert colour',
@@ -2510,7 +2568,8 @@ export const trans = {
         pt: 'Converter cor',
         sv: 'Konvertera färg',
         ru: 'Конвертировать цвет',
-        pl: 'Konwertuj kolor'
+        pl: 'Konwertuj kolor',
+        zh: '颜色转换'
     },
     fonts: {
         en: 'Fonts',
@@ -2520,7 +2579,8 @@ export const trans = {
         pt: 'Fontes',
         sv: 'Typsnitt',
         ru: 'Шрифты',
-        pl: 'Czcionki'
+        pl: 'Czcionki',
+        zh: '字体'
     },
     hue: {
         en: 'Accent colour',
@@ -2530,7 +2590,8 @@ export const trans = {
         pt: 'Cor de destaque',
         pl: 'Kolor akcentu (hue)',
         sv: 'Accentfärg',
-        ru: 'Основной цвет'
+        ru: 'Основной цвет',
+        zh: '强调色'
     },
     sat: {
         en: 'Vibrancy',
@@ -2540,7 +2601,8 @@ export const trans = {
         pt: 'Vivacidade',
         pl: 'Nasycenie (saturation)',
         sv: 'Färgmättnad',
-        ru: 'Насыщенность'
+        ru: 'Насыщенность',
+        zh: '鲜艳度'
     },
     lit: {
         en: 'Lightness',
@@ -2550,7 +2612,8 @@ export const trans = {
         pt: 'Claridade',
         pl: 'Jasność (lightness)',
         sv: 'Ljushet',
-        ru: 'Яркость'
+        ru: 'Яркость',
+        zh: '亮度'
     },
     solarium: {
         name: {
@@ -2561,7 +2624,8 @@ export const trans = {
             pt: 'Ativar efeitos de vidro Solarium',
             sv: 'Aktivera solariumsglaseffekter',
             ru: 'Включить эффект матового стекла Solarium',
-            pl: 'Włącz efekty szkła solarnego'
+            pl: 'Włącz efekty szkła solarnego',
+            zh: '开启毛玻璃特效'
         },
         body: {
             en: 'Apply a see-through glassy material to many surfaces, which may degrade performance on some devices',
@@ -2571,7 +2635,8 @@ export const trans = {
             pt: 'Aplicar um material translúcido e vidrado a várias superfícies, o que pode reduzir o desempenho em alguns dispositivos',
             sv: 'Läg till ett genomskinligt glasliknande material till många ytor, som kan degradera prestanda på vissa enheter',
             ru: 'Применяет полупрозрачный стеклянный материал ко многим поверхностям, что может снизить производительность на некоторых устройствах',
-            pl: 'Włącz przezroczyste szkło na wielu powierzchniach, które może mieć wpływ na wydajność na niektórych urządzeniach'
+            pl: 'Włącz przezroczyste szkło na wielu powierzchniach, które może mieć wpływ na wydajność na niektórych urządzeniach',
+            zh: '为多个界面层级披上一层半透明玻璃质感。这能提升视觉深度，但在部分设备上可能会增加性能开销'
         }
     },
     seasonal_warning: {
