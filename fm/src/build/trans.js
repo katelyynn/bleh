@@ -69,6 +69,14 @@ export const trans = {
         // yes the space on the end is intentional and should be
         // there if the language puts spaces in lists
         en: ', ',
+        de: ', ',
+        es: ', ',
+        it: ', ',
+        pt: ', ',
+        sv: ', ',
+        ru: ', ',
+        pl: ', ',
+        zh: ', ',
         ja: '、'
     },
     page_templates: {

@@ -59876,6 +59876,14 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       // yes the space on the end is intentional and should be
       // there if the language puts spaces in lists
       en: ", ",
+      de: ", ",
+      es: ", ",
+      it: ", ",
+      pt: ", ",
+      sv: ", ",
+      ru: ", ",
+      pl: ", ",
+      zh: ", ",
       ja: "\u3001"
     },
     page_templates: {
@@ -70976,8 +70984,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       default: false,
       title: trans.oracle_beta.name,
       body: trans.oracle_beta.body,
-      beta: true,
-      new_release: true
+      beta: true
     },
     romanise_jp: {
       default: false,
@@ -71028,7 +71035,6 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       type: "select",
       title: trans.tracklist_source.name,
       body: trans.tracklist_source.body,
-      new_release: true,
       incompatible: { oracle_beta: false }
     },
     menu_replacement: {
@@ -71042,7 +71048,6 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       default: false,
       title: trans.translator.name,
       body: trans.translator.body,
-      new_release: true,
       require_reload: true
     },
     translator_view: {

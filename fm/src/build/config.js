@@ -1304,8 +1304,7 @@ export let settings_store = {
         default: false,
         title: trans.oracle_beta.name,
         body: trans.oracle_beta.body,
-        beta: true,
-        new_release: true
+        beta: true
     },
     romanise_jp: {
         default: false,
@@ -1356,7 +1355,6 @@ export let settings_store = {
         type: 'select',
         title: trans.tracklist_source.name,
         body: trans.tracklist_source.body,
-        new_release: true,
         incompatible: { oracle_beta: false }
     },
     menu_replacement: {
@@ -1370,7 +1368,6 @@ export let settings_store = {
         default: false,
         title: trans.translator.name,
         body: trans.translator.body,
-        new_release: true,
         require_reload: true
     },
     translator_view: {

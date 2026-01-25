@@ -232,7 +232,11 @@
         --card-border-base: hsl(var(--b3), 0.7);
         --card-border-base-highlight: hsl(var(--b2), 0.55);
 
-        --separator: linear-gradient(90deg, transparent, var(--card-border-base), transparent);
+        --separator: linear-gradient(90deg, transparent, var(--separator-base), transparent);
+        --separator-base: var(--card-border-base);
+
+        --textarea: hsl(var(--b6), 60%);
+        --textarea-hov: hsl(var(--b6), 90%);
 
         --normal-shadow:
             inset 0 1px 0 0 hsl(var(--b2), 80%),
@@ -262,6 +266,8 @@
 
         --menu-item-hov: hsla(var(--b4), 40%);
         --menu-item-atv: hsla(var(--b4), 60%);
+
+        --setting-hover: hsl(var(--b4), 20%);
 
         .theme-preview[data-bleh--theme="darker"],
         [data-bleh--theme="darker"] &:not(.theme-preview) {
@@ -303,8 +309,10 @@
             --b8: 0, 0%, 7%;
             --b7: 0, 0%, 0%;
 
-            --card-border-base: hsl(var(--b3), 0.95);
-            --card-border-base-highlight: hsl(var(--b2), 0.8);
+            --separator-base: hsl(var(--b2), 0.7);
+
+            --card-border-base: hsl(var(--b3), 0.7);
+            --card-border-base-highlight: hsl(var(--b2), 0.6);
 
             --input-shadow:
                 inset 0 -1px 0 0 hsl(var(--b3)),
@@ -314,8 +322,8 @@
                 inset 0 -1px 0 0 hsl(var(--b3)),
                 inset 0 1px 2px 1px hsl(var(--b3), 0.4);
             --group-shadow:
-                inset 0 1px 0 0 hsl(var(--b2), 0.65),
-                inset 0 0 0 1px hsl(var(--b3), 0.9);
+                inset 0 1px 0 0 hsl(var(--b2), 0.5),
+                inset 0 0 0 1px hsl(var(--b3), 0.6);
 
             --sidebar-bg: color-mix(in hsl, hsl(var(--b4)) 22%, hsl(var(--b5)));
             --sidebar-border: color-mix(
@@ -329,6 +337,11 @@
 
             --card-blur-bg: hsl(var(--b5), var(--solarium-opacity, 30%));
             --card-blur-bg-alt: hsl(var(--b5), var(--solarium-opacity, 40%));
+
+            --setting-hover: hsl(var(--b4), 30%);
+
+            --textarea: hsl(var(--b4), 25%);
+            --textarea-hov: hsl(var(--b4), 35%);
         }
         .theme-preview[data-bleh--theme="light"],
         [data-bleh--theme="light"] &:not(.theme-preview) {
@@ -953,7 +966,7 @@
 
             --card-border: inset 0 0 0 1px hsla(var(--b4), 0.8);
 
-            --modal-bg: hsl(var(--b3), 0.35);
+            --modal-bg: hsl(var(--b2), 0.5);
 
             --menu-bg: var(--b5);
             --menu-opacity: 80%;
@@ -11219,9 +11232,9 @@
         transition-timing-function: var(--trans-function);
 
         &:not(select) {
-            --bg: hsl(var(--b6), 60%);
-            --bg-hov: hsl(var(--b6), 90%);
-            --bg-atv: hsl(var(--b6), 90%);
+            --bg: var(--textarea);
+            --bg-hov: var(--textarea-hov);
+            --bg-atv: var(--textarea-hov);
             --shadow: var(--input-shadow) !important;
             outline: none !important;
 
@@ -11229,13 +11242,6 @@
             &:focus-visible:not([readonly]) {
                 --focus-outline: none !important;
                 --shadow: var(--focused-input-shadow) !important;
-            }
-
-            [data-bleh--theme="oled"] &,
-            [data-bleh--theme_type="light"] & {
-                --bg: hsl(var(--b5));
-                --bg-hov: hsl(var(--b4), 20%);
-                --bg-atv: hsl(var(--b4), 20%);
             }
 
             &[disabled]:not([disabled="false"]),
@@ -13545,7 +13551,7 @@
                     padding: var(--card-gap) 0;
                     margin: 0 0 calc(-1 * var(--card-gap)) 0;
                     gap: var(--button-list-gap);
-                    border-top: 1px solid var(--card-border-base);
+                    border-top: 1px solid var(--separator-base);
                 }
 
                 .more-link {
@@ -14867,7 +14873,7 @@
 
         &[data-list-view="list"] {
             .user-list-item {
-                border-bottom: 1px solid var(--card-border-base);
+                border-bottom: 1px solid var(--separator-base);
 
                 &[data-is-followed="true"],
                 &[data-position="1"] {
@@ -15644,7 +15650,7 @@
         --bg-atv: transparent;
         --shadow: none;
         --padding: var(--gap) 0 0;
-        border-top: 1px solid var(--card-border-base) !important;
+        border-top: 1px solid var(--separator-base) !important;
         --radius: 0;
         transform: none !important;
 
@@ -16043,8 +16049,7 @@
     .section-intro {
         display: flex;
         flex-direction: column;
-        padding-bottom: var(--card-gap);
-        border-bottom: 1px solid var(--card-border-base);
+        padding-bottom: var(--card-padding);
 
         & > h3 {
             color: hsl(var(--c1));
@@ -16073,7 +16078,7 @@
 
             padding: var(--card-gap);
             border-radius: var(--item-big-radius);
-            border: 1px solid var(--card-border-base);
+            border: 1px solid var(--separator-base);
 
             .session-header {
                 display: flex;
@@ -16132,7 +16137,7 @@
                 }
             }
             .session-footer {
-                border-top: 1px solid var(--card-border-base);
+                border-top: 1px solid var(--separator-base);
                 padding-top: var(--item-list-gap);
 
                 .api-session-app-last-used,
@@ -17190,7 +17195,7 @@
         --bg-hov: hsl(var(--b4), 40%);
         --bg-atv: hsl(var(--b4), 60%);
         --col: hsl(var(--c2));
-        --shadow: inset 0 0 0 1px var(--card-border-base);
+        --shadow: inset 0 0 0 1px var(--separator-base);
         --padding: 15px 20px;
 
         display: flex;
@@ -18848,7 +18853,7 @@
                 [disabled="true"],
                 .standalone
             ):hover {
-            background: hsl(var(--b4), 20%);
+            background: var(--setting-hover);
             transition: none;
         }
 
@@ -28671,6 +28676,7 @@
 
             &:not(.current) {
                 --col: hsl(var(--c3));
+                --mask-colour: hsl(var(--c3), 80%);
             }
 
             --bg: transparent;
@@ -30064,9 +30070,9 @@
         }
 
         .markdown-field-text {
-            --bg: hsl(var(--b6), 60%);
-            --bg-hov: hsl(var(--b6), 90%);
-            --bg-atv: hsl(var(--b6), 90%);
+            --bg: var(--textarea);
+            --bg-hov: var(--textarea-hov);
+            --bg-atv: var(--textarea-hov);
             --shadow: var(--input-shadow) !important;
 
             background-color: var(--bg) !important;
@@ -30079,13 +30085,6 @@
             &:focus-within {
                 --focus-outline: none !important;
                 --shadow: var(--focused-input-shadow) !important;
-            }
-
-            [data-bleh--theme="oled"] &,
-            [data-bleh--theme_type="light"] & {
-                --bg: hsl(var(--b5));
-                --bg-hov: hsl(var(--b4), 20%);
-                --bg-atv: hsl(var(--b4), 20%);
             }
 
             &[disabled]:not([disabled="false"]),
