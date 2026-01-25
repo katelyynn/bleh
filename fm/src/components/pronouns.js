@@ -5,7 +5,7 @@ export function find_pronouns(string) {
     if (start) {
         return {
             pronouns: start[1].trim(),
-            text: start[2].trim() || null
+            text: fix_up_string(start[2].trim() || null)
         };
     }
 
@@ -13,7 +13,7 @@ export function find_pronouns(string) {
     if (end) {
         return {
             pronouns: end[1].trim(),
-            text: end[2].trim() || null
+            text: fix_up_string(end[2].trim() || null)
         };
     }
 
@@ -21,4 +21,10 @@ export function find_pronouns(string) {
         pronouns: null,
         text: string
     };
+}
+
+function fix_up_string(string) {
+    if (!string) return null;
+
+    return string.replace(/^[,\-–—.;:]+\s*/, '').replace(/\s*[,\-–—.;:]+$/, '').trim();
 }

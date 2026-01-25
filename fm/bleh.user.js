@@ -35960,20 +35960,24 @@
     if (start2) {
       return {
         pronouns: start2[1].trim(),
-        text: start2[2].trim() || null
+        text: fix_up_string(start2[2].trim() || null)
       };
     }
     const end2 = string.match(new RegExp(`^(.*)\\s+(${regex.source})`, "i"));
     if (end2) {
       return {
         pronouns: end2[1].trim(),
-        text: end2[2].trim() || null
+        text: fix_up_string(end2[2].trim() || null)
       };
     }
     return {
       pronouns: null,
       text: string
     };
+  }
+  function fix_up_string(string) {
+    if (!string) return null;
+    return string.replace(/^[,\-–—.;:]+\s*/, "").replace(/\s*[,\-–—.;:]+$/, "").trim();
   }
 
   // src/pages/profile.js
