@@ -569,6 +569,10 @@
                 "sat": 0.87,
                 "lit": 0.86
             }
-        ]
+        ],
+        "humansongs": {
+            "type": "translation",
+            "reason": "日本語"
+        }
     }
 }
