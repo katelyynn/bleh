@@ -409,9 +409,7 @@ function load_page(main_content = null) {
     detect_scroll();
 
     function detect_scroll() {
-        return;
-
-        if (scroll > 30) masthead.classList.add('scrolled');
+        if (window.scrollY > 10) masthead.classList.add('scrolled');
         else masthead.classList.remove('scrolled');
     }
 

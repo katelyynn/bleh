@@ -16762,10 +16762,10 @@
   };
   function effect3(_ref) {
     var state = _ref.state, instance = _ref.instance, options = _ref.options;
-    var _options$scroll = options.scroll, scroll2 = _options$scroll === void 0 ? true : _options$scroll, _options$resize = options.resize, resize = _options$resize === void 0 ? true : _options$resize;
+    var _options$scroll = options.scroll, scroll = _options$scroll === void 0 ? true : _options$scroll, _options$resize = options.resize, resize = _options$resize === void 0 ? true : _options$resize;
     var window2 = getWindow(state.elements.popper);
     var scrollParents = [].concat(state.scrollParents.reference, state.scrollParents.popper);
-    if (scroll2) {
+    if (scroll) {
       scrollParents.forEach(function(scrollParent) {
         scrollParent.addEventListener("scroll", instance.update, passive);
       });
@@ -16774,7 +16774,7 @@
       window2.addEventListener("resize", instance.update, passive);
     }
     return function() {
-      if (scroll2) {
+      if (scroll) {
         scrollParents.forEach(function(scrollParent) {
           scrollParent.removeEventListener("scroll", instance.update, passive);
         });
@@ -17440,7 +17440,7 @@
     var offsetParentIsScaled = isHTMLElement(offsetParent) && isElementScaled(offsetParent);
     var documentElement = getDocumentElement(offsetParent);
     var rect = getBoundingClientRect(elementOrVirtualElement, offsetParentIsScaled, isFixed);
-    var scroll2 = {
+    var scroll = {
       scrollLeft: 0,
       scrollTop: 0
     };
@@ -17451,7 +17451,7 @@
     if (isOffsetParentAnElement || !isOffsetParentAnElement && !isFixed) {
       if (getNodeName(offsetParent) !== "body" || // https://github.com/popperjs/popper-core/issues/1078
       isScrollParent(documentElement)) {
-        scroll2 = getNodeScroll(offsetParent);
+        scroll = getNodeScroll(offsetParent);
       }
       if (isHTMLElement(offsetParent)) {
         offsets = getBoundingClientRect(offsetParent, true);
@@ -17462,8 +17462,8 @@
       }
     }
     return {
-      x: rect.left + scroll2.scrollLeft - offsets.x,
-      y: rect.top + scroll2.scrollTop - offsets.y,
+      x: rect.left + scroll.scrollLeft - offsets.x,
+      y: rect.top + scroll.scrollTop - offsets.y,
       width: rect.width,
       height: rect.height
     };
@@ -54458,7 +54458,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     const navs = inner2.querySelector(".masthead-nav-wrap");
     const search = inner2.querySelector(".masthead-search-form");
     const form = search.querySelector(".masthead-search-field");
-    form.placeholder = tl2(trans.search);
+    form.placeholder = tl2(trans.search_for_anything);
     inner2.insertBefore(
       html.node`
         <div class="masthead-search-wrap">
@@ -59464,8 +59464,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     });
     detect_scroll();
     function detect_scroll() {
-      return;
-      if (scroll > 30) masthead.classList.add("scrolled");
+      if (window.scrollY > 10) masthead.classList.add("scrolled");
       else masthead.classList.remove("scrolled");
     }
     prepare_music();
@@ -65248,6 +65247,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Pesquisar",
       sv: "S\xF6k",
       ru: "\u041F\u043E\u0438\u0441\u043A"
+    },
+    search_for_anything: {
+      en: "Search for anything"
     },
     search_guest: {
       en: "Search guest appearances",

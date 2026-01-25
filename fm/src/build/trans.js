@@ -5430,6 +5430,9 @@ export const trans = {
         sv: 'Sök',
         ru: 'Поиск'
     },
+    search_for_anything: {
+        en: 'Search for anything'
+    },
     search_guest: {
         en: 'Search guest appearances',
         de: 'Suche nach Features',

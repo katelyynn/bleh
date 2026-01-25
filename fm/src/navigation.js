@@ -289,7 +289,7 @@ export function append_nav() {
 
     const search = inner.querySelector('.masthead-search-form');
     const form = search.querySelector('.masthead-search-field');
-    form.placeholder = tl(trans.search);
+    form.placeholder = tl(trans.search_for_anything);
     inner.insertBefore(
         html.node`
         <div class="masthead-search-wrap">

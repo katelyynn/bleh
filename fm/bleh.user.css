@@ -261,8 +261,8 @@
         --card-blur-bg: hsl(var(--b5), var(--solarium-opacity, 70%));
         --card-blur-bg-alt: hsl(var(--b5), var(--solarium-opacity, 35%));
 
-        --nav-filter-shadow: drop-shadow(0 0 8px hsl(var(--b6)));
-        --header-filter-shadow: drop-shadow(0 0 5px hsl(var(--b6)));
+        --nav-filter-shadow: drop-shadow(0 0 5px hsl(var(--b6), 90%));
+        --header-filter-shadow: drop-shadow(0 0 5px hsl(var(--b6), 90%));
 
         --menu-item-hov: hsla(var(--b4), 40%);
         --menu-item-atv: hsla(var(--b4), 60%);
@@ -1665,19 +1665,26 @@
 
             background: linear-gradient(180deg, hsl(var(--b6)), transparent);
 
-            opacity: 0.7;
+            opacity: 0;
+            translate: 0 -4px;
 
             pointer-events: none;
 
-            transition-property: height, opacity;
-            transition-duration: 0.4s;
+            transition-property: translate, opacity;
+            transition-duration: 0.3s;
             transition-timing-function: var(--trans-function-ani);
         }
 
+        &.scrolled,
         &:hover {
             &:before {
+                opacity: 0.7;
+                translate: 0 0;
+            }
+
+            & > .masthead-inner-wrap > .masthead-search-wrap {
+                translate: 0 0;
                 opacity: 1;
-                height: calc(20px + var(--button-height) + 20px);
             }
         }
 
@@ -2002,18 +2009,19 @@
         }
     }
 
+    .bleh-logo,
     .inbox-item,
     .masthead-search-form,
     .bleh--version,
     .masthead-nav-control
     {
-        &:not(:hover, :focus-visible, [aria-expanded="true"]) {
+        &:not(:hover, :focus-visible, :focus-within, [aria-expanded="true"]) {
             filter: var(--header-filter-shadow);
         }
     }
 
     .auth-link:not(:hover, :focus-visible, [aria-expanded="true"]) {
-        .auth-link-name {
+        .auth-link-name, & > .label {
             filter: var(--header-filter-shadow);
         }
     }
@@ -2115,8 +2123,7 @@
             text-align: center;
 
             &::placeholder {
-                color: hsl(var(--c3)) !important;
-                font-weight: var(--font-weight-medium);
+                color: hsl(var(--c2), 60%) !important;
             }
         }
 
@@ -2137,6 +2144,12 @@
 
     .masthead-search-wrap {
         flex: 1;
+        opacity: 0;
+        translate: 0 -4px;
+
+        transition-property: translate, opacity;
+        transition-duration: 0.3s;
+        transition-timing-function: var(--trans-function-ani);
     }
 
     .inbox-item {
