@@ -46225,53 +46225,53 @@
         tabs.appendChild(html.node`
                 <ul class="navlist-items">
                     <li class="navlist-item secondary-nav-item secondary-nav-item--overview">
-                        <a class="secondary-nav-item-link secondary-nav-item-link--active" href="${window.location.href}">
+                        <a class="secondary-nav-item-link secondary-nav-item-link--active" href="${window.location.pathname}">
                             ${tl2(trans.home)}
                         </a>
                     </li>
                     <li class="navlist-item secondary-nav-item secondary-nav-item--tracks">
-                        <a class="secondary-nav-item-link" href="${window.location.href}/+tracks">
+                        <a class="secondary-nav-item-link" href="${window.location.pathname}/+tracks">
                             ${tl2(trans.tracks)}
                         </a>
                     </li>
                     <li class="navlist-item secondary-nav-item secondary-nav-item--albums">
-                        <a class="secondary-nav-item-link" href="${window.location.href}/+albums">
+                        <a class="secondary-nav-item-link" href="${window.location.pathname}/+albums">
                             ${tl2(trans.albums)}
                         </a>
                     </li>
                     ${!page_is_blocked ? html.node`
                     <li class="navlist-item secondary-nav-item secondary-nav-item--images">
-                        <a class="secondary-nav-item-link" href="${window.location.href}/+images">
+                        <a class="secondary-nav-item-link" href="${window.location.pathname}/+images">
                             ${tl2(trans.photos)}
                         </a>
                     </li>
                     <li class="navlist-item secondary-nav-item secondary-nav-item--similar">
-                        <a class="secondary-nav-item-link" href="${window.location.href}/+similar">
+                        <a class="secondary-nav-item-link" href="${window.location.pathname}/+similar">
                             ${tl2(trans.similar_artists)}
                         </a>
                     </li>
                     <li class="navlist-item secondary-nav-item secondary-nav-item--wiki">
-                        <a class="secondary-nav-item-link" href="${window.location.href}/+wiki">
+                        <a class="secondary-nav-item-link" href="${window.location.pathname}/+wiki">
                             ${tl2(trans.biography)}
                         </a>
                     </li>
                     <li class="navlist-item secondary-nav-item secondary-nav-item--listeners">
-                        <a class="secondary-nav-item-link" href="${window.location.href}/+listeners">
+                        <a class="secondary-nav-item-link" href="${window.location.pathname}/+listeners">
                             ${tl2(trans.listeners)}
                         </a>
                     </li>
                     <li class="navlist-item secondary-nav-item secondary-nav-item--shoutbox">
-                        <a class="secondary-nav-item-link" href="${window.location.href}/+shoutbox">
+                        <a class="secondary-nav-item-link" href="${window.location.pathname}/+shoutbox">
                             ${tl2(trans.shouts)}
                         </a>
                     </li>
                     <li class="navlist-item secondary-nav-item secondary-nav-item--events">
-                        <a class="secondary-nav-item-link" href="${window.location.href}/+events">
+                        <a class="secondary-nav-item-link" href="${window.location.pathname}/+events">
                             ${tl2(trans.events)}
                         </a>
                     </li>
                     <li class="navlist-item secondary-nav-item secondary-nav-item--tags">
-                        <a class="secondary-nav-item-link" href="${window.location.href}/+tags">
+                        <a class="secondary-nav-item-link" href="${window.location.pathname}/+tags">
                             ${tl2(trans.tags)}
                         </a>
                     </li>
@@ -46282,28 +46282,28 @@
         tabs.appendChild(html.node`
                 <ul class="navlist-items">
                     <li class="navlist-item secondary-nav-item secondary-nav-item--overview">
-                        <a class="secondary-nav-item-link secondary-nav-item-link--active" href="${window.location.href}">
+                        <a class="secondary-nav-item-link secondary-nav-item-link--active" href="${window.location.pathname}">
                             ${tl2(trans.home)}
                         </a>
                     </li>
                     ${!page_is_blocked ? html.node`
                     <li class="navlist-item secondary-nav-item secondary-nav-item--wiki">
-                        <a class="secondary-nav-item-link" href="${window.location.href}/+wiki">
+                        <a class="secondary-nav-item-link" href="${window.location.pathname}/+wiki">
                             ${tl2(trans.wiki)}
                         </a>
                     </li>
                     <li class="navlist-item secondary-nav-item secondary-nav-item--images">
-                        <a class="secondary-nav-item-link" href="${window.location.href}/+images">
+                        <a class="secondary-nav-item-link" href="${window.location.pathname}/+images">
                             ${tl2(trans.artwork)}
                         </a>
                     </li>
                     <li class="navlist-item secondary-nav-item secondary-nav-item--shoutbox">
-                        <a class="secondary-nav-item-link" href="${window.location.href}/+shoutbox">
+                        <a class="secondary-nav-item-link" href="${window.location.pathname}/+shoutbox">
                             ${tl2(trans.shouts)}
                         </a>
                     </li>
                     <li class="navlist-item secondary-nav-item secondary-nav-item--tags">
-                        <a class="secondary-nav-item-link" href="${window.location.href}/+tags">
+                        <a class="secondary-nav-item-link" href="${window.location.pathname}/+tags">
                             ${tl2(trans.tags)}
                         </a>
                     </li>
@@ -46314,28 +46314,28 @@
         tabs.appendChild(html.node`
                 <ul class="navlist-items">
                     <li class="navlist-item secondary-nav-item secondary-nav-item--overview">
-                        <a class="secondary-nav-item-link secondary-nav-item-link--active" href="${window.location.href}">
+                        <a class="secondary-nav-item-link secondary-nav-item-link--active" href="${window.location.pathname}">
                             ${tl2(trans.home)}
                         </a>
                     </li>
                     <li class="navlist-item secondary-nav-item secondary-nav-item--albums">
-                        <a class="secondary-nav-item-link" href="${window.location.href}/+albums">
+                        <a class="secondary-nav-item-link" href="${window.location.pathname}/+albums">
                             ${tl2(trans.albums)}
                         </a>
                     </li>
                     ${!page_is_blocked ? html.node`
                     <li class="navlist-item secondary-nav-item secondary-nav-item--wiki">
-                        <a class="secondary-nav-item-link" href="${window.location.href}/+wiki">
+                        <a class="secondary-nav-item-link" href="${window.location.pathname}/+wiki">
                             ${tl2(trans.wiki)}
                         </a>
                     </li>
                     <li class="navlist-item secondary-nav-item secondary-nav-item--shoutbox">
-                        <a class="secondary-nav-item-link" href="${window.location.href}/+shoutbox">
+                        <a class="secondary-nav-item-link" href="${window.location.pathname}/+shoutbox">
                             ${tl2(trans.shouts)}
                         </a>
                     </li>
                     <li class="navlist-item secondary-nav-item secondary-nav-item--tags">
-                        <a class="secondary-nav-item-link" href="${window.location.href}/+tags">
+                        <a class="secondary-nav-item-link" href="${window.location.pathname}/+tags">
                             ${tl2(trans.tags)}
                         </a>
                     </li>
@@ -46370,7 +46370,7 @@
     listen_container.classList.add("listen-container");
     const no_auth_callout = page.structure.main.querySelector(".catalogue-callout");
     if (no_auth_callout) no_auth_callout.remove();
-    let page_url = window.location.href;
+    let page_url = window.location.pathname;
     let page_url_split = page_url.split("/");
     let page_url_length = page_url_split.length - 1;
     let scrobble_page = page_url_split[page_url_length];
@@ -47202,7 +47202,7 @@
       );
       listen_item.setAttribute(
         "href",
-        `${window.location.href}/+listeners/you-know`
+        `${window.location.pathname}/+listeners/you-know`
       );
     }
     if (settings.colourful_counts && listens > -1 && header_type == "artist") {
