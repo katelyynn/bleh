@@ -1,5 +1,5 @@
 {
-    "latest": "2026.0124",
+    "latest": "2026.0126",
     "sponsors": [
         "clairedoll", "kateshapedbox", "evangelicgirl",
         "astrablooms", "ItsProyal", "vwvwvwvwvwvwv", "Orofil",
@@ -13,7 +13,8 @@
         "urwq", "driftpsalm", "popcorniscrazy", "s0540a",
         "dylandotat", "Angel0Lust", "liminelle", "quikwise",
         "BosozokuGF", "tainaronian", "NozomiBear", "nin0dev",
-        "milkdrinker3000", "wiichicken", "duskwitch"
+        "milkdrinker3000", "wiichicken", "duskwitch", "rgoracz",
+        "thomasb2k"
     ],
     "sponsors_one_time": [
         "kateshapedbox",
@@ -24,7 +25,8 @@
         "celebrating", "riskyrizey",
         "fourohclok", "K40M0J1", "goldenstuffed",
         "kar1x", "nojonsko", "s0540a",
-        "Angel0Lust", "tainaronian", "wiichicken"
+        "Angel0Lust", "tainaronian", "wiichicken",
+        "rgoracz"
     ],
     "sponsor_count_remove": 3,
     "sponsor_account": "kateshapedbox",
@@ -308,7 +310,10 @@
             {
                 "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJjdXJyZW50Q29sb3IiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1maWxsZWQgaWNvbi10YWJsZXItcGF3Ij48cGF0aCBzdHJva2U9Im5vbmUiIGQ9Ik0wIDBoMjR2MjRIMHoiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJNMTIgMTBjLTEuMzIgMCAtMS45ODMgLjQyMSAtMi45MzEgMS45MjRsLS4yNDQgLjM5OGwtLjM5NSAuNjg4YTUwLjg5IDUwLjg5IDAgMCAwIC0uMTQxIC4yNTRjLS4yNCAuNDM0IC0uNTcxIC43NTMgLTEuMTM5IDEuMTQybC0uNTUgLjM2NWMtLjk0IC42MjcgLTEuNDMyIDEuMTE4IC0xLjcwNyAxLjk1NWMtLjEyNCAuMzM4IC0uMTk2IC44NTMgLS4xOTMgMS4yOGMwIDEuNjg3IDEuMTk4IDIuOTk0IDIuOCAyLjk5NGwuMjQyIC0uMDA2Yy4xMTkgLS4wMDYgLjIzNCAtLjAxNyAuMzU0IC0uMDM0bC4yNDggLS4wNDNsLjEzMiAtLjAyOGwuMjkxIC0uMDczbC4xNjIgLS4wNDVsLjU3IC0uMTdsLjc2MyAtLjI0M2wuNDU1IC0uMTM2Yy41MyAtLjE1IC45NCAtLjIyMiAxLjI4MyAtLjIyMmMuMzQ0IDAgLjc1MyAuMDczIDEuMjgzIC4yMjJsLjQ1NSAuMTM2bC43NjQgLjI0MmwuNTY5IC4xNzFsLjMxMiAuMDg0Yy4wOTcgLjAyNCAuMTg3IC4wNDUgLjI3MyAuMDYybC4yNDggLjA0M2MuMTIgLjAxNyAuMjM1IC4wMjggLjM1NCAuMDM0bC4yNDIgLjAwNmMxLjYwMiAwIDIuOCAtMS4zMDcgMi44IC0zYzAgLS40MjcgLS4wNzMgLS45MzkgLS4yMDcgLTEuMzA2Yy0uMjM2IC0uNzI0IC0uNjc3IC0xLjIyMyAtMS40OCAtMS44M2wtLjI1NyAtLjE5bC0uNTI4IC0uMzhjLS42NDIgLS40NyAtMS4wMDMgLS44MjYgLTEuMjUzIC0xLjI3OGwtLjI3IC0uNDg1bC0uMjUyIC0uNDMyYy0xLjAxMSAtMS42OTYgLTEuNjE4IC0yLjA5OSAtMy4wNTMgLTIuMDk5eiIgLz48cGF0aCBkPSJNMTkuNzggN2gtLjAzYy0xLjIxOSAuMDIgLTIuMzUgMS4wNjYgLTIuOTA4IDIuNTA0Yy0uNjkgMS43NzUgLS4zNDggMy43MiAxLjA3NSA0LjMzM2MuMjU2IC4xMDkgLjUyNyAuMTYzIC44MDEgLjE2M2MxLjIzMSAwIDIuMzggLTEuMDUzIDIuOTQzIC0yLjUwNGMuNjg2IC0xLjc3NCAuMzQgLTMuNzIgLTEuMDc2IC00LjMzMmEyLjA1IDIuMDUgMCAwIDAgLS44MDQgLS4xNjR6IiAvPjxwYXRoIGQ9Ik05LjAyNSAzYy0uMTEyIDAgLS4xODUgLjAwMiAtLjI3IC4wMTVsLS4wOTMgLjAxNmMtMS41MzIgLjIwNiAtMi4zOTcgMS45ODkgLTIuMTA4IDMuODU1Yy4yNzIgMS43MjUgMS40NjIgMy4xMTQgMi45MiAzLjExNGwuMTg3IC0uMDA1YTEuMjYgMS4yNiAwIDAgMCAuMDg0IC0uMDFsLjA5MiAtLjAxNmMxLjUzMyAtLjIwNiAyLjM5NyAtMS45ODkgMi4xMDggLTMuODU1Yy0uMjcgLTEuNzI3IC0xLjQ2IC0zLjExNCAtMi45MiAtMy4xMTR6IiAvPjxwYXRoIGQ9Ik0xNC45NzIgM2MtMS40NTkgMCAtMi42NDcgMS4zODggLTIuOTE2IDMuMTEzYy0uMjkgMS44NjcgLjU3NCAzLjY1IDIuMTc0IDMuODY3Yy4xMDMgLjAxMyAuMiAuMDIgLjI5NiAuMDJjMS4zOSAwIDIuNTQzIC0xLjI2NSAyLjg3NyAtMi44ODNsLjA0MSAtLjIzYy4yOSAtMS44NjcgLS41NzQgLTMuNjUgLTIuMTc0IC0zLjg2N2EyLjE1NCAyLjE1NCAwIDAgMCAtLjI5OCAtLjAyeiIgLz48cGF0aCBkPSJNNC4yMTcgN2MtLjI3NCAwIC0uNTQ0IC4wNTQgLS43OTcgLjE2MWMtMS40MjYgLjYxNSAtMS43NjcgMi41NjIgLTEuMDc4IDQuMzM1Yy41NjMgMS40NTEgMS43MSAyLjUwNCAyLjk0MSAyLjUwNGMuMjc0IDAgLjU0NCAtLjA1NCAuNzk3IC0uMTYxYzEuNDI2IC0uNjE1IDEuNzY3IC0yLjU2MiAxLjA3OCAtNC4zMzVjLS41NjMgLTEuNDUxIC0xLjcxIC0yLjUwNCAtMi45NDEgLTIuNTA0eiIgLz48L3N2Zz4=",
                 "reason": "sponsor",
-                "name": "puppy"
+                "name": "puppy",
+                "hue": 333,
+                "sat": 1,
+                "lit": 1
             }
         ],
         "Lrexie": {
@@ -573,6 +578,12 @@
         "humansongs": {
             "type": "translation",
             "reason": "日本語"
+        },
+        "rgoracz": {
+            "type": "sponsor"
+        },
+        "thomasb2k": {
+            "type": "sponsor"
         }
     }
 }
