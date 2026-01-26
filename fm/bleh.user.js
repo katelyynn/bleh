@@ -35977,7 +35977,7 @@
   }
   function fix_up_string(string) {
     if (!string) return null;
-    return string.replace(/^[,\-–—.;:|•]+\s*/, "").replace(/\s*[,\-–—.;:|•]+$/, "").trim();
+    return string.replace(/^[,\-–—.;:|•·]+\s*/, "").replace(/\s*[,\-–—.;:|•·]+$/, "").trim();
   }
 
   // src/pages/profile.js
