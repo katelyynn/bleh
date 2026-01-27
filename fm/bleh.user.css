@@ -8276,7 +8276,8 @@
     .modal-action-button,
     .js-shout-reply-cancel,
     .more-items,
-    .modal-close-button, .modal-action-button
+    .modal-close-button, .modal-action-button,
+    .tab-container > li > button
     {
         --bg: var(--cards-overlay-image-subtlest, none), hsl(var(--b3));
         --bg-hov:
