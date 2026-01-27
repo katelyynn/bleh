@@ -2028,12 +2028,12 @@
     .bleh--version,
     .masthead-nav-control
     {
-        &:not(:hover, :focus-visible, :focus-within, [aria-expanded="true"]) {
+        &:not(:hover, :focus, :focus-visible, :focus-within, [aria-expanded="true"]) {
             filter: var(--header-filter-shadow);
         }
     }
 
-    .auth-link:not(:hover, :focus-visible, [aria-expanded="true"]) {
+    .auth-link:not(:hover, :focus, :focus-visible, [aria-expanded="true"]) {
         .auth-link-name, & > .label {
             filter: var(--header-filter-shadow);
         }
@@ -29095,6 +29095,10 @@
                 opacity: 0;
                 transform: scale(1.1);
                 filter: blur(2px);
+            }
+
+            &:not(:last-child) {
+                display: none;
             }
         }
     }
