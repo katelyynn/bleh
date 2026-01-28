@@ -2299,7 +2299,7 @@ function render_sub_text(parent, aka, created, display_name) {
         if (result.text && result.text != page.name) {
             parent.appendChild(html.node`
                 <dl class="sub-text-pair">
-                    ${sub_text_label('aka', tl(trans.aka))}
+                    ${sub_text_label('aka', tl(trans.profile_title))}
                     <dd class="sub-text-item">${result.text}</dd>
                 </dl>
             `);

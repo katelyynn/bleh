@@ -34305,7 +34305,7 @@
                 ` : ""}
                 <div class="setting" data-type="text">
                     <div class="heading">
-                        <h5>${tl2(trans.subtitle)}</h5>
+                        <h5>${tl2(trans.profile_title)}</h5>
                         <p>${tl2(trans.pronoun_tip)}</p>
                     </div>
                     <div class="input-container content-form">
@@ -37753,7 +37753,7 @@
       if (result.text && result.text != page.name) {
         parent.appendChild(html.node`
                 <dl class="sub-text-pair">
-                    ${sub_text_label("aka", tl2(trans.aka))}
+                    ${sub_text_label("aka", tl2(trans.profile_title))}
                     <dd class="sub-text-item">${result.text}</dd>
                 </dl>
             `);
@@ -64891,15 +64891,11 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       ru: "\u041F\u043E\u0434\u0437\u0430\u0433\u043E\u043B\u043E\u0432\u043E\u043A",
       pl: "Podtytu\u0142"
     },
+    profile_title: {
+      en: "Profile title"
+    },
     pronoun_tip: {
-      en: "Pronouns are specially supported if placed first",
-      de: "Pronomen werden unterst\xFCtzt, wenn sie an erster Stelle stehen",
-      es: "Los pronombres son especialmente compatibles si son colocados primero",
-      it: "I pronomi sono supportati specialmente se collocati per primi",
-      pt: "Os pronomes s\xE3o especialmente apoiados se colocados primeiro",
-      sv: "Pronomen har speciellt st\xF6d om det placeras f\xF6rst",
-      ru: "\u041C\u0435\u0441\u0442\u043E\u0438\u043C\u0435\u043D\u0438\u044F \u043F\u043E\u0434\u0434\u0435\u0440\u0436\u0438\u0432\u0430\u044E\u0442\u0441\u044F, \u0435\u0441\u043B\u0438 \u043E\u043D\u0438 \u0440\u0430\u0441\u043F\u043E\u043B\u043E\u0436\u0435\u043D\u044B \u043F\u0435\u0440\u0432\u044B\u043C\u0438",
-      pl: "Zaimki dzia\u0142aj\u0105 najlepiej gdy s\u0105 zapisane pierwsze"
+      en: "Include pronouns at the start or end of your title to separate them visually"
     },
     block_list: {
       en: "Block list",

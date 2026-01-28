@@ -8361,8 +8361,9 @@
         &:is(.gallery-next, .gallery-previous):hover .arrow,
         &:hover {
             background: var(--bg-hov) !important;
-            transition-property: padding, transform !important;
-            transition-duration: 0.1s !important;
+            transition-property: padding, transform, filter !important;
+            transition-duration: var(--trans) !important;
+            transition-timing-function: var(--trans-function) !important;
             --transition-property: opacity, left;
             /*box-shadow: var(--shadow-hov) !important;*/
 

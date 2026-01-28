@@ -629,7 +629,7 @@ function patch_settings_profile_panel(token, update_picture) {
                 ` : ''}
                 <div class="setting" data-type="text">
                     <div class="heading">
-                        <h5>${tl(trans.subtitle)}</h5>
+                        <h5>${tl(trans.profile_title)}</h5>
                         <p>${tl(trans.pronoun_tip)}</p>
                     </div>
                     <div class="input-container content-form">

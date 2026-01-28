@@ -5055,15 +5055,11 @@ export const trans = {
         ru: 'Подзаголовок',
         pl: 'Podtytuł'
     },
+    profile_title: {
+        en: 'Profile title'
+    },
     pronoun_tip: {
-        en: 'Pronouns are specially supported if placed first',
-        de: 'Pronomen werden unterstützt, wenn sie an erster Stelle stehen',
-        es: 'Los pronombres son especialmente compatibles si son colocados primero',
-        it: 'I pronomi sono supportati specialmente se collocati per primi',
-        pt: 'Os pronomes são especialmente apoiados se colocados primeiro',
-        sv: 'Pronomen har speciellt stöd om det placeras först',
-        ru: 'Местоимения поддерживаются, если они расположены первыми',
-        pl: 'Zaimki działają najlepiej gdy są zapisane pierwsze'
+        en: 'Include pronouns at the start or end of your title to separate them visually'
     },
     block_list: {
         en: 'Block list',
