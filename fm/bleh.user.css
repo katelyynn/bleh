@@ -238,6 +238,9 @@
         --textarea: hsl(var(--b6), 60%);
         --textarea-hov: hsl(var(--b6), 90%);
 
+        --banner-overlay: transparent;
+        --banner-mix: none;
+
         --normal-shadow:
             inset 0 1px 0 0 hsl(var(--b2), 80%),
             inset 0 -30px 6px -30px hsl(var(--b2), 40%);
@@ -388,14 +391,17 @@
             --toolbar-border: 1px solid hsl(var(--b4), 85%);
             --subtle-border: 1px solid hsl(var(--b4), 65%);
 
-            --card-blur-bg: hsl(var(--b5), var(--solarium-opacity, 50%));
+            --card-blur-bg: hsl(var(--b5), var(--solarium-opacity, 65%));
             --card-blur-bg-alt: hsl(var(--b5), var(--solarium-opacity, 22%));
 
             --menu-item-hov: hsla(var(--b4), 60%);
             --menu-item-atv: hsla(var(--b4), 80%);
 
-            --nav-filter-shadow: drop-shadow(0 0 2px hsl(var(--b5))) drop-shadow(0 0 4px hsl(var(--b5))) drop-shadow(0 0 8px hsl(var(--b5)));
-            --header-filter-shadow: drop-shadow(0 0 6px hsl(var(--b5)));
+            --nav-filter-shadow: drop-shadow(0 0 2px hsl(var(--b5)));
+            --header-filter-shadow: drop-shadow(0 0 10px hsl(var(--b5)));
+
+            --banner-overlay: hsl(var(--b5), 20%);
+            --banner-mix: lighten;
         }
         .theme-preview[data-bleh--theme="ink"],
         [data-bleh--theme="ink"] &:not(.theme-preview) {
@@ -449,11 +455,14 @@
             --toolbar-border: 1px solid hsl(var(--b4), 50%);
             --subtle-border: 1px solid hsl(var(--b4), 65%);
 
-            --nav-filter-shadow: drop-shadow(0 0 4px hsl(var(--b5))) drop-shadow(0 0 12px hsl(var(--b5)));
-            --header-filter-shadow: drop-shadow(0 0 6px hsl(var(--b5)));
+            --nav-filter-shadow: drop-shadow(0 0 2px hsl(var(--b5)));
+            --header-filter-shadow: drop-shadow(0 0 10px hsl(var(--b5)));
 
-            --card-blur-bg: hsl(var(--b5), var(--solarium-opacity, 32%));
+            --card-blur-bg: hsl(var(--b5), var(--solarium-opacity, 72%));
             --card-blur-bg-alt: hsl(var(--b5), var(--solarium-opacity, 22%));
+
+            --banner-overlay: hsl(var(--b5), 20%);
+            --banner-mix: lighten;
         }
     }
 
@@ -575,6 +584,9 @@
 
         --glow: hsl(var(--h3), 40%);
 
+        --badge: hsl(var(--f4), 30%);
+        --badge-hov: hsl(var(--f4), 50%);
+
         .theme-preview[data-bleh--theme="oled"],
         [data-bleh--theme="oled"] &:not(.theme-preview) {
             --c1:
@@ -655,8 +667,8 @@
                 var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 60%),
                 calc(clamp(min(0.7), var(--lit), max(1.1)) * 73%);
             --f4:
-                var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 55%),
-                calc(clamp(min(0.8), var(--lit), max(1.5)) * 72%);
+                var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 60%),
+                calc(clamp(min(0.8), var(--lit), max(1.5)) * 80%);
             --k4:
                 var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 42%),
                 calc(clamp(min(0.8), var(--lit), max(1.5)) * 76%);
@@ -671,6 +683,9 @@
             --l2-c-theme-switch: var(--l3-c);
             --l3-c-theme-switch: var(--l3-c);
             --h3-theme-switch: var(--h4);
+
+            --badge: hsl(var(--f4), 55%);
+            --badge-hov: hsl(var(--f4), 65%);
 
             --grid-colour-shadow: var(
                 --grid-colour-shadow-override,
@@ -730,8 +745,8 @@
                 var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 30%),
                 calc(clamp(min(0.7), var(--lit), max(1.1)) * 55%);
             --f4:
-                var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 35%),
-                calc(clamp(min(0.8), var(--lit), max(1.5)) * 50%);
+                var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 30%),
+                calc(clamp(min(0.8), var(--lit), max(1.5)) * 60%);
             --k4:
                 var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 45%),
                 calc(clamp(min(0.8), var(--lit), max(1.5)) * 60%);
@@ -766,6 +781,9 @@
             );
 
             --glow: hsl(var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 80%), calc(clamp(min(0.7), var(--lit), max(1.1)) * 30%), 20%);
+
+            --badge: hsl(var(--f4), 55%);
+            --badge-hov: hsl(var(--f4), 65%);
         }
     }
 
@@ -931,14 +949,14 @@
             --menu-shadow: 0 4px 40px hsla(var(--b7), 0.07);
 
             --blur-saturate: 130%;
-            --blur-brightness: 1;
+            --blur-brightness: 1.2;
             --blur-contrast: 1;
         }
 
         &[data-bleh--theme="ink"],
         [data-bleh--theme="ink"] > & {
             --blur-saturate: 160%;
-            --blur-brightness: 1;
+            --blur-brightness: 1.2;
             --menu-shadow: 0 4px 40px hsla(var(--b7), 0.2);
         }
 
@@ -4941,8 +4959,8 @@
         max-width: unset;
         transition-delay: 0s !important;
 
-        --bg: hsl(var(--f4), 30%);
-        --bg-hov: hsl(var(--f4), 50%);
+        --bg: var(--badge);
+        --bg-hov: var(--badge-hov);
         box-shadow: 0 3px 15px 1px hsl(var(--h4), 20%), 0px 0px 10px 0px hsl(var(--l3-c), 8%) inset !important;
         background-color: var(--bg) !important;
         border-radius: var(--item-big-radius) !important;
@@ -23713,6 +23731,14 @@
             --mask: linear-gradient(90deg, transparent 0%, white 40%, white 60%, transparent 100%);
             mask-image: var(--mask);
             -webkit-mask-image: var(--mask);
+
+            &:before {
+                content: '';
+                position: absolute;
+                inset: 0;
+                background: var(--banner-overlay);
+                mix-blend-mode: var(--banner-mix);
+            }
         }
     }
 
