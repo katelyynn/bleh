@@ -272,6 +272,8 @@
 
         --setting-hover: hsl(var(--b4), 20%);
 
+        --setting-group: hsl(var(--b6), 20%);
+
         .theme-preview[data-bleh--theme="darker"],
         [data-bleh--theme="darker"] &:not(.theme-preview) {
             /* any additional highlights */
@@ -402,6 +404,8 @@
 
             --banner-overlay: hsl(var(--b5), 20%);
             --banner-mix: lighten;
+
+            --setting-group: hsl(var(--b6), 30%);
         }
         .theme-preview[data-bleh--theme="ink"],
         [data-bleh--theme="ink"] &:not(.theme-preview) {
@@ -18798,7 +18802,7 @@
         text-align: left;
 
         &:not(.blend) {
-            background: hsl(var(--b6), 20%);
+            background: var(--setting-group);
             border-radius: var(--item-big-radius);
             box-shadow: var(--group-shadow);
             width: 100%;
