@@ -51,6 +51,7 @@ import { render_activity } from '../activity.js';
 import { DateTime } from 'luxon';
 import { sponsor, sponsor_manage, sponsors } from '../sponsor.js';
 import { version as florence_version } from '@tealmiku/florence';
+import { update_branding_type } from '../navigation.js';
 
 export function bleh_settings() {
     page.name = auth.name;
@@ -450,7 +451,7 @@ export async function render_setting_page(page_id) {
                     <section class="bleh--panel">
                         <h4>${tl(trans.branding)}</h4>
                         <div class="setting-group">
-                            ${setting({ id: 'branding_type' })}
+                            ${setting({ id: 'branding_type', func: update_branding_type })}
                         </div>
                     </section>
                 ` : ''}

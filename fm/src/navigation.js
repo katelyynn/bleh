@@ -50,6 +50,18 @@ export function patch_masthead() {
     }
 }
 
+export function update_branding_type(state = settings.branding_type) {
+    if (state == 'bleh') {
+        render(page.state.home_link, html`
+            <div class="home-logo bleh-logo">${version.brand}</div>
+        `);
+    } else if (state == 'lastfm') {
+        render(page.state.home_link, html`
+            <div class="home-logo lastfm-logo">Last.fm</div>
+        `);
+    }
+}
+
 export function update_masthead(
     masthead_logo = document.body.querySelector('.masthead-logo')
 ) {
@@ -60,17 +72,18 @@ export function update_masthead(
     render(masthead_logo, html``);
     render(masthead_logo, html`
         <a class="hidden-link" style="display: none !important" href="/">Last.fm</a>
-        <a class="navigation-item home-link" href="${root}music" ref=${el => home_link = el}>
-            <div class="home-logo bleh-logo">${version.brand}</div>
-            <div class="home-logo lastfm-logo">Last.fm</div>
-        </a>
+        <a class="navigation-item home-link" href="${root}music" ref=${el => home_link = el} />
     `);
+
+    page.state.home_link = home_link;
+
+    update_branding_type();
 
     const head_menu = tippy(home_link, {
         theme: 'window',
         content: html.node`
             <div class="setting-group blend">
-                ${setting({ id: 'branding_type' })}
+                ${setting({ id: 'branding_type', func: update_branding_type })}
             </div>
         `,
         placement: 'right-start',

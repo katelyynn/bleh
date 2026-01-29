@@ -2033,37 +2033,6 @@
         }
     }
 
-    html {
-        &[data-bleh--branding_type="bleh"] {
-            &
-                > body
-                > .main-content
-                > div
-                > .masthead
-                > .masthead-inner-wrap
-                > .masthead-logo
-                > .home-link {
-                & > .lastfm-logo {
-                    display: none;
-                }
-            }
-        }
-        &[data-bleh--branding_type="lastfm"] {
-            &
-                > body
-                > .main-content
-                > div
-                > .masthead
-                > .masthead-inner-wrap
-                > .masthead-logo
-                > .home-link {
-                & > .bleh-logo {
-                    display: none;
-                }
-            }
-        }
-    }
-
     .bleh-logo,
     .inbox-item,
     .masthead-search-form,
