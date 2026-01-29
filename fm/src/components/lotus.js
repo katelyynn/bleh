@@ -410,7 +410,7 @@ export function name_includes(
                 const match = lower_title.match(pattern);
                 index = match ? match.index : -1;
             } else {
-                index = lower_title.indexOf(pattern.toLowerCase);
+                index = lower_title.indexOf(pattern.toLowerCase());
             }
 
             return {

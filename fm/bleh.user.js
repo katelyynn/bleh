@@ -53435,7 +53435,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         const match3 = lower_title.match(pattern);
         index3 = match3 ? match3.index : -1;
       } else {
-        index3 = lower_title.indexOf(pattern.toLowerCase);
+        index3 = lower_title.indexOf(pattern.toLowerCase());
       }
       return {
         group,
