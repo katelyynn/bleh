@@ -115,8 +115,8 @@ export let includes = {
         /\sfeat\s/i,
         /\sfeat\./i,
         /\sfeaturing\s/i,
-        /[-\(\[]feat/i,
-        /[-\(\[]with /i,
+        /(?:-\s?|\(|\[)feat/i,
+        /(?:-\s?|\(|\[)with /i,
         /w\/\s/i,
         /ft\./i,
         /ref\./i,
@@ -124,26 +124,26 @@ export let includes = {
         /\(re:/i // re this is why paramore
     ],
     versions: [
-        /[-\(\[]taylor/i,
+        /(?:-\s?|\(|\[)taylor/i,
         /[-\(]spotify singles/i,
         /\(\+/i,
-        /[-\(\[]versão/i,
-        /[-\(\[]without dialogue/i,
-        /[-\(\[]no dialogue/i,
-        /[-\(\[]pop version/i,
-        /[-\(\[]rock version/i,
-        /[-\(\[]pop mix/i,
-        /[-\(\[]emo version/i,
-        /[-\(\[]version/i,
+        /(?:-\s?|\(|\[)versão/i,
+        /(?:-\s?|\(|\[)without dialogue/i,
+        /(?:-\s?|\(|\[)no dialogue/i,
+        /(?:-\s?|\(|\[)pop version/i,
+        /(?:-\s?|\(|\[)rock version/i,
+        /(?:-\s?|\(|\[)pop mix/i,
+        /(?:-\s?|\(|\[)emo version/i,
+        /(?:-\s?|\(|\[)version/i,
         /\(s\.a\.d\. version/i,
         '- s.a.d.',
         /[-\(]vocoded/i,
-        /[-\(\[]pa version/i,
-        /[-\(\[]u\.s\. pa version/i,
-        /[-\(\[]main/i
+        /(?:-\s?|\(|\[)pa version/i,
+        /(?:-\s?|\(|\[)u\.s\. pa version/i,
+        /(?:-\s?|\(|\[)main/i
     ],
     remasters: [
-        /[-\(\[]remaster/i,
+        /(?:-\s?|\(|\[)remaster/i,
         /:\s?high resolution remasters/i,
         /[-\(]high resolution remasters/i,
         /:\s?the high resolution remasters/i,
@@ -153,9 +153,9 @@ export let includes = {
     mixes: [
         /[-\(]devonshire mix/i,
         'mike dean master',
-        /[-\(\[]remix/i,
+        /(?:-\s?|\(|\[)remix/i,
         '-reloaded-', // deco*27
-        /[-\(\[]reloaded/i,
+        /(?:-\s?|\(|\[)reloaded/i,
         /\(best friend remix/i, // deco*27
         /[-\(]live/i,
         /:\s?the live/i,
@@ -163,30 +163,30 @@ export let includes = {
         /[-\(]the live/i,
         /[-\(]online live/i,
         /\sonline live/i,
-        /[-\(\[]ao vivo/i,
-        /[-\(\[]en vivo/i,
-        /[-\(\[]multishow ao vivo/i,
-        /[-\(\[]demo/i,
-        /[-\(\[]early demo/i,
-        /[-\(\[]early version/i,
+        /(?:-\s?|\(|\[)ao vivo/i,
+        /(?:-\s?|\(|\[)en vivo/i,
+        /(?:-\s?|\(|\[)multishow ao vivo/i,
+        /(?:-\s?|\(|\[)demo/i,
+        /(?:-\s?|\(|\[)early demo/i,
+        /(?:-\s?|\(|\[)early version/i,
         /[-\(]rehearsal/i,
-        /[-\(\[]sample clearance/i,
+        /(?:-\s?|\(|\[)sample clearance/i,
         /[-\(]home demo/i,
         /[-\(]solo acoustic/i,
-        /[-\(\[]acoustic/i,
-        /[-\(\[]piano ver/i,
+        /(?:-\s?|\(|\[)acoustic/i,
+        /(?:-\s?|\(|\[)piano ver/i,
         /:\s?self-serenade/i,
         /[-\(]self-serenade/i,
-        /[-\(\[]alt/i,
-        /[-\(\[]chopped/i,
+        /(?:-\s?|\(|\[)alt/i,
+        /(?:-\s?|\(|\[)chopped/i,
         '(kate',
         '(asmr',
         '(agressive',
         '(aggressive',
         'brazilian phonk', // lol
-        /[-\(\[]sped up/i,
-        /[-\(\[]slow/i,
-        /[-\(\[]nightcore/i,
+        /(?:-\s?|\(|\[)sped up/i,
+        /(?:-\s?|\(|\[)slow/i,
+        /(?:-\s?|\(|\[)nightcore/i,
         'a. g. cook remix',
         '- charli xcx & a.g. cook remix',
         '- rina sawayama & clarence clarity remix',
@@ -239,7 +239,7 @@ export let includes = {
             // edits
             'tv size|cut ver|short version|short edit|long version|' +
             'full length|non-stop|old timey|' +
-            'club edit|' +
+            'club edit|rain|' +
             // special
             'the witch collection|dancing witch version|lonely witch version|' +
             'moonlit witch version|cabin in candlelight version|' +
@@ -288,9 +288,9 @@ export let includes = {
         /[\(\[]12"/i, // 12 inch versions, mixes of songs
         /[\(\[][""]new[""] mix/i,
         '[over now', // billie eilish l'amour de ma vie
-        /[-\(\[]unfinished original recordings of de-loused in the comatorium/i, // landscape tantrums
+        /(?:-\s?|\(|\[)unfinished original recordings of de-loused in the comatorium/i, // landscape tantrums
         '(holiday ', // illit holiday party/night
-        /[-\(\[]mr\. dupri no rap radio mix/i
+        /(?:-\s?|\(|\[)mr\. dupri no rap radio mix/i
     ],
     mixes_numbers: [
         /[\(\[]v[1-9]/i,
@@ -298,52 +298,55 @@ export let includes = {
         /[-\(]mix\s/i
     ],
     stems: [
-        /[-\(\[]\s*(?:a\s*cappella|acapella|accapella)/i,
-        /[-\(\[]instrumental/i,
-        /[-\(\[]karaoke/i,
-        /[-\(\[]session/i,
-        /[-\(\[]studio session/i,
-        /[-\(\[]smart session/i,
+        /(?:-\s?|\(|\[)\s*(?:a\s*cappella|acapella|accapella)/i,
+        /(?:-\s?|\(|\[)instrumental/i,
+        /(?:-\s?|\(|\[)karaoke/i,
+        /(?:-\s?|\(|\[)session/i,
+        /(?:-\s?|\(|\[)studio session/i,
+        /(?:-\s?|\(|\[)smart session/i,
         /[-\(]boombox/i,
         /[-\(]mtv unplugged/i,
         /[-\(]unplugged/i,
         '-unplugged', // no space intentionally, soma saito tracks
         /[-\(]acústico/i,
         /[-\(]ácustico/i,
-        /[-\(\[]acústico/i,
+        /(?:-\s?|\(|\[)acústico/i,
         /[-\(:]the long pond studio/i,
-        /[-\(\[]recorded at/i,
-        /[-\(\[]recorded live at/i,
+        /(?:-\s?|\(|\[)recorded at/i,
+        /(?:-\s?|\(|\[)recorded live at/i,
         /:\s?sad girl autumn version/i,
-        /[-\(\[]sad girl autumn/i
+        /(?:-\s?|\(|\[)sad girl autumn/i
     ],
     bonus: [
-        /[-\(\[]intro/i,
-        /[-\(\[]outro/i,
+        /(?:-\s?|\(|\[)intro/i,
+        /(?:-\s?|\(|\[)outro/i,
         'dean outro',
-        /[-\(\[]interlude/i,
-        /[-\(\[]bonus/i,
+        /(?:-\s?|\(|\[)intermission/i,
+        /(?:-\s?|\(|\[)interlude/i,
+        /(?:-\s?|\(|\[)bonus/i,
+        '(whitearmor interlude',
+        '(ripsquadd outro',
         'the bonus tracks', // beyonce i am sasha fierce
         /[-:\(]secret track/i, // track added for clarity
-        /[-\(\[]edit/i,
-        /[-\(\[]from/i,
+        /(?:-\s?|\(|\[)edit/i,
+        /(?:-\s?|\(|\[)from/i,
         /[-\(]music from/i,
         /[-\(]theme from/i,
         /[-\(]skit/i,
-        /[-\(\[]original/i,
-        /[-\(\[]deluxe/i,
-        /[-\(\[]digital deluxe/i,
+        /(?:-\s?|\(|\[)original/i,
+        /(?:-\s?|\(|\[)deluxe/i,
+        /(?:-\s?|\(|\[)digital deluxe/i,
         'd.l.x.', // https://www.last.fm/music/taylor+swift/1989+d.l.x.
         /\s(?:super\s)?deluxe (?:edition|version)/i,
         /(?:super\s)?deluxe (?:edition|version)$/i,
-        /[-\(\[]complete edition/i,
+        /(?:-\s?|\(|\[)complete edition/i,
         /[-:\(\[]edi[cç][ãi]o/i,
         /[-\(]edicion/i,
         /[-\(]edición/i,
-        /[-\(\[]extended/i,
+        /(?:-\s?|\(|\[)extended/i,
         /[-\(]the extended edition/i, // denzel
-        /[-\(\[]expanded/i,
-        /[-\(\[]anniversary/i,
+        /(?:-\s?|\(|\[)expanded/i,
+        /(?:-\s?|\(|\[)anniversary/i,
         /[-\(]b-side/i,
         /[-\(]c-side/i,
         /[-\(]lp/i,
@@ -353,59 +356,59 @@ export let includes = {
         /[-\(]rough single/i, // bedtime stories untold chapter
         /[-\(]mixtape/i,
         /[-\(]box set/i,
-        /[-\(\[]spilled/i, // olivia rodrigo
-        /[-\(\[]slightly deluxe/i, // ariana grande
+        /(?:-\s?|\(|\[)spilled/i, // olivia rodrigo
+        /(?:-\s?|\(|\[)slightly deluxe/i, // ariana grande
         /[-:\(\[]self-titled deluxe/i, // paramore
         /[-:\(\[]the anthology/i,
-        /[-\(\[]3am edition/i,
-        /[-\(\[](?:the )?til dawn edition/i,
-        /[-\(\[](?:the )?late night edition/i,
-        /[-\(\[]big machine radio release special/i,
+        /(?:-\s?|\(|\[)3am edition/i,
+        /(?:-\s?|\(|\[)(?:the )?til dawn edition/i,
+        /(?:-\s?|\(|\[)(?:the )?late night edition/i,
+        /(?:-\s?|\(|\[)big machine radio release special/i,
         /[-:\(\[]platinum/i,
         /:\s?the platinum/i,
         /platinum (?:edition|version)/i, // added edition/version as 'platinum' can have false positives
-        /[-\(\[]international/i, // taylor swift
+        /(?:-\s?|\(|\[)international/i, // taylor swift
         "(int'l", // think i escaped this character correctly?
-        /[-\(\[]uk deluxe/i,
-        /[-\(\[]magic city edition/i,
-        /[-\(\[]japan (?:edition|version)/i, // added edition/version for safety
-        /[-\(\[]australian version/i,
-        /[-\(\[]after school - deluxe/i, // melanie martinez
-        /[-\(\[]revised/i,
+        /(?:-\s?|\(|\[)uk deluxe/i,
+        /(?:-\s?|\(|\[)magic city edition/i,
+        /(?:-\s?|\(|\[)japan (?:edition|version)/i, // added edition/version for safety
+        /(?:-\s?|\(|\[)australian version/i,
+        /(?:-\s?|\(|\[)after school - deluxe/i, // melanie martinez
+        /(?:-\s?|\(|\[)revised/i,
         /[-:\(\[]the complete/i,
-        /[-\(\[](?:the )?moonlight/i, // dua lipa
-        /[-\(\[]tour/i,
+        /(?:-\s?|\(|\[)(?:the )?moonlight/i, // dua lipa
+        /(?:-\s?|\(|\[)tour/i,
         'music from and inspired by', // on the end of black panther the album
-        /[-\(\[]music inspired/i,
-        /[-\(\[]featured in/i,
-        /[-\(\[]best weekend ever edition/i,
-        /[-\(\[]double disc/i,
-        /[-\(\[]re-?issue/i,
+        /(?:-\s?|\(|\[)music inspired/i,
+        /(?:-\s?|\(|\[)featured in/i,
+        /(?:-\s?|\(|\[)best weekend ever edition/i,
+        /(?:-\s?|\(|\[)double disc/i,
+        /(?:-\s?|\(|\[)re-?issue/i,
         /\(12 reg\. tracks/i, // confessions madonna
-        /[-\(\[]special/i,
-        /[-\(\[]limited/i,
-        /[-\(\[]store exclusive/i,
-        /[-\(\[]highlights from/i,
+        /(?:-\s?|\(|\[)special/i,
+        /(?:-\s?|\(|\[)limited/i,
+        /(?:-\s?|\(|\[)store exclusive/i,
+        /(?:-\s?|\(|\[)highlights from/i,
         /[-:\(]track by track/i,
-        /[-\(\[]disc\s/i,
+        /(?:-\s?|\(|\[)disc\s/i,
         //
-        /[-\(\[](?:19|20)\d{2}/i,
+        /(?:-\s?|\(|\[)(?:19|20)\d{2}/i,
         /[-\(（](?:1st|2nd|3rd|4th|5th|10th|20th|25th|30th|35th|40th|50th|60th)/i,
         /(?:tenth|fifth|5th|10th|20th|25th)\s+anniversary/i,
         /[-\(]tenth anniversary/i,
         /:\s?(?:the tenth anniversary|25th anniversary expanded edition|30th anniversary edition)/i,
         'the tenth anniversary', // lady gaga born this way
-        /[-\(\[]twenty years edition/i,
+        /(?:-\s?|\(|\[)twenty years edition/i,
         /[-\(](?:10|20|25|30|35|40|50|60)\s+year/i,
-        /[-\(\[]transition/i,
-        /[-\(\[]reprise/i,
+        /(?:-\s?|\(|\[)transition/i,
+        /(?:-\s?|\(|\[)reprise/i,
         /\(director/i,
         "(soma saito's",
         "- soma saito's",
-        /[-\(\[]so punk on the internet ver/i, // taylor swift showgirl variants :(
+        /(?:-\s?|\(|\[)so punk on the internet ver/i, // taylor swift showgirl variants :(
         /[-\(]including/i,
-        /[-\(\[]poem/i,
-        /[-\(\[]hidden/i
+        /(?:-\s?|\(|\[)poem/i,
+        /(?:-\s?|\(|\[)hidden/i
     ],
     form: [/[\(\[]clean/i, /[\(\[]explicit/i, '(spotify)', '🅴']
 };
