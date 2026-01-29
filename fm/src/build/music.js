@@ -115,8 +115,8 @@ export let includes = {
         /\sfeat\s/i,
         /\sfeat\./i,
         /\sfeaturing\s/i,
-        /(?:-\s?|\(|\[)feat/i,
-        /(?:-\s?|\(|\[)with /i,
+        /(?:-\s?|\(|\[|\{)feat/i,
+        /(?:-\s?|\(|\[|\{)with /i,
         /w\/\s/i,
         /ft\./i,
         /ref\./i,
@@ -293,7 +293,7 @@ export let includes = {
         /(?:-\s?|\(|\[)mr\. dupri no rap radio mix/i
     ],
     mixes_numbers: [
-        /[\(\[]v[1-9]/i,
+        /[\(\[\{]v[1-9]/i,
         /[-\(]mixed/i,
         /[-\(]mix\s/i
     ],
