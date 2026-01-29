@@ -1647,6 +1647,30 @@
         outline: var(--focus-outline, 2px solid hsl(var(--l3-c))) !important;
     }
 
+
+    .avatar {
+        background: var(--avatar-generic-background);
+        border-radius: var(--avatar-radius);
+        aspect-ratio: 1 / 1;
+
+        & > img {
+            border-radius: inherit !important;
+            font-size: 0 !important;
+        }
+
+        &:after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            padding: unset !important;
+            box-shadow: unset !important;
+            border-radius: inherit;
+            display: none;
+        }
+    }
+
+
     /*     HEADER     */
     /* 2024-11-06 onwards this top-bar is completely redundant */
     .top-bar {
@@ -2206,7 +2230,7 @@
 
     .counter {
         font: 0 / 0 auto;
-        background: hsl(var(--h3));
+        background: hsl(var(--l3-c));
         outline: 2px solid hsl(var(--b6));
         box-shadow: 0 0 30px 8px hsl(var(--h4));
         color: var(--b7);
@@ -2422,11 +2446,6 @@
         min-width: 18px;
         height: 18px;
         padding: 0 4px;
-
-        [data-bleh--theme_type="light"] & {
-            background-color: hsl(var(--h4));
-            box-shadow: 0px 0 60px 20px hsla(var(--h4), 45%) !important;
-        }
     }
     .masthead-nav .masthead-nav-item .notification-count-badge {
         animation: bubble 0.9s var(--trans-function);
@@ -6251,10 +6270,6 @@
                 height: 16px;
                 background: var(--avatar-generic-background);
                 border-radius: var(--avatar-radius);
-
-                &:after {
-                    display: none !important;
-                }
             }
         }
     }
@@ -7079,18 +7094,12 @@
 
         & > .avatar {
             font-size: 0 !important;
-            aspect-ratio: 1 / 1;
 
             &:after {
-                content: "";
-                position: absolute;
-                inset: 0;
+                display: block;
                 background-image: var(--gloss-image) !important;
                 background-size: 100% !important;
                 opacity: var(--gloss, 0);
-                pointer-events: none;
-                padding: unset !important;
-                box-shadow: unset !important;
             }
         }
 
@@ -7331,9 +7340,7 @@
                 right: calc(-18px - 14px);
                 width: 18px;
                 height: 18px;
-                background: var(--avatar-generic-background);
                 --mask-size: 18px;
-                border-radius: var(--avatar-radius);
             }
 
             &:last-child {
@@ -7784,10 +7791,6 @@
         }*/
     }
 
-    .avatar img {
-        border-radius: inherit;
-    }
-
     .shout-user-avatar,
     .shout-user-avatar-link {
         width: var(--shout-avatar-size);
@@ -7800,17 +7803,6 @@
     .shout-user-avatar {
         top: 2px !important;
         z-index: 20;
-
-        .avatar {
-            /*background: var(--avatar-generic-background); support for transparent avatars */
-            border-radius: var(--avatar-radius);
-            aspect-ratio: 1 / 1;
-
-            /* weird inner box shadow */
-            &:after {
-                display: none;
-            }
-        }
     }
     .avatar-can-hoverbox {
         cursor: pointer;
@@ -8130,11 +8122,6 @@
         -webkit-mask-repeat: no-repeat;
         mask-position: center;
         -webkit-mask-position: center;
-
-        /* support for transparent avatars */
-        :is(.shout-user-avatar, .avatar):has(&) {
-            background: var(--avatar-generic-background);
-        }
     }
     /* missing album */
     .missing-album,
@@ -9675,7 +9662,6 @@
                     & > .avatar {
                         width: 64px;
                         height: 64px;
-                        border-radius: var(--avatar-radius);
 
                         transition-property: transform;
                         transition-duration: var(--trans);
@@ -12383,13 +12369,6 @@
                 --bg-atv: hsla(var(--h4), 55%);
                 --shadow: 0 10px 50px 5px hsla(var(--h4), 35%);
                 z-index: 20;
-
-                [data-bleh--theme_type="light"] & {
-                    --bg: hsla(var(--h4), 35%);
-                    --bg-hov: hsla(var(--h4), 50%);
-                    --bg-atv: hsla(var(--h4), 65%);
-                    --shadow: 0 10px 50px 5px hsla(var(--h4), 35%);
-                }
             }
 
             .notification-avatar {
@@ -12397,8 +12376,7 @@
                 flex-shrink: 0;
 
                 & > .avatar {
-                    background: var(--avatar-generic-background);
-                    border-radius: var(--avatar-radius);
+                    background: hsl(var(--b5));
                     width: 42px;
                     height: 42px;
 
@@ -12409,10 +12387,6 @@
                     & > .avatar-status-dot {
                         width: var(--mask-size);
                         height: var(--mask-size);
-                    }
-
-                    &:after {
-                        display: none;
                     }
                 }
             }
@@ -14784,7 +14758,7 @@
         margin-top: unset;
     }
 
-    .inbox-message-sender-avatar .avatar,
+    .inbox-message-sender-avatar > .avatar,
     .listeners-section-item-image,
     .top-listeners-item-image,
     .user-list-avatar {
@@ -15876,7 +15850,6 @@
                         width: 20px;
                         height: 20px;
                         margin: -1px 0;
-                        border-radius: var(--avatar-radius);
 
                         .avatar-status-dot {
                             display: none;
@@ -15977,11 +15950,8 @@
                     }
                 }
 
-                .fellow-obsessor-avatar .avatar {
-                    background: var(--avatar-generic-background);
-                    border-radius: var(--avatar-radius);
+                .fellow-obsessor-avatar > .avatar {
                     box-shadow: var(--interact-shadow);
-                    aspect-ratio: 1 / 1;
                     z-index: 0;
                     --mask-size: var(--cover-size-100);
 
@@ -15989,10 +15959,6 @@
                         width: 24px;
                         height: 24px;
                         --mask-size: 24px;
-                    }
-
-                    &:after {
-                        display: none;
                     }
                 }
             }
@@ -16557,10 +16523,6 @@
                 width: 100%;
                 height: 100%;
                 border-radius: var(--item-big-radius);
-
-                &:after {
-                    display: none;
-                }
             }
         }
 
@@ -16992,7 +16954,7 @@
         font-weight: 700;
         margin-top: 60px;
         margin-bottom: -30px;
-        background: linear-gradient(180deg, hsla(var(--h3), 40%), transparent);
+        background: linear-gradient(180deg, hsla(var(--l3-c), 40%), transparent);
         -webkit-background-clip: text;
         background-clip: text;
         -webkit-text-fill-color: transparent;
@@ -17023,7 +16985,7 @@
         border-top: 1px solid hsl(var(--b4));
         margin-bottom: unset;
     }
-    .translation b {
+    .translation > b {
         font-weight: var(--font-weight);
         color: hsl(var(--c3));
     }
@@ -17159,10 +17121,6 @@
         .avatar,
         .cover-art {
             overflow: unset;
-
-            img {
-                border-radius: inherit;
-            }
         }
 
         &:hover {
@@ -23132,10 +23090,6 @@
             & > .avatar {
                 & > img {
                     z-index: 10;
-
-                    &:after {
-                        pointer-events: none;
-                    }
                 }
             }
         }
@@ -24218,24 +24172,15 @@
                     height: var(--image-size);
 
                     & > .avatar {
-                        background: var(--avatar-generic-background);
                         border-radius: var(--item-med-radius);
                         box-shadow: var(--interact-shadow);
-                        aspect-ratio: 1 / 1;
                         --mask-size: var(--cover-size-200);
 
                         &:after {
-                            content: "" !important;
-                            display: block !important;
-                            position: absolute;
-                            inset: 0;
+                            display: block;
                             background-image: var(--gloss-image) !important;
                             background-size: 100% !important;
                             opacity: var(--gloss);
-                            pointer-events: none;
-                            padding: unset !important;
-                            box-shadow: unset !important;
-                            border-radius: inherit;
                         }
                     }
                 }
@@ -24542,10 +24487,6 @@
                 width: 36px;
                 height: 36px;
                 border-radius: var(--item-med-radius);
-
-                img {
-                    border-radius: inherit;
-                }
             }
         }
 
@@ -25653,87 +25594,6 @@
         }
     }
 
-    .top-banner {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-
-        padding: 30px calc(var(--card-padding) * 6);
-
-        @media (max-width: 980px) {
-            padding: 30px var(--card-padding);
-            text-align: center;
-        }
-
-        margin-top: calc(-1 * (var(--banner-height) - 75px));
-
-        .sponsor-message {
-            color: hsl(var(--l3-c));
-            text-shadow: 0 0 20px hsl(var(--l4-c));
-            /* filter: drop-shadow(0 0 20px hsl(var(--l4-c))); */
-            font-weight: var(--font-weight-medium);
-            --hue-over: 342;
-            --sat-over: 1.7;
-            --lit-over: 0.9;
-
-            display: flex;
-            align-items: center;
-            gap: 6px;
-
-            margin-bottom: 10px;
-
-            .bleh-icon-container {
-                filter: drop-shadow(0 0 13px hsl(var(--l4-c)));
-            }
-        }
-
-        & > .avatar {
-            width: 84px;
-            height: 84px;
-            border-radius: var(--avatar-radius);
-            box-shadow: var(--interact-shadow);
-            --mask-size: var(--cover-size-100);
-            position: relative;
-
-            margin-bottom: var(--card-padding);
-
-            &:after {
-                content: "";
-                position: absolute;
-                inset: 0;
-                border-radius: var(--avatar-radius);
-                background: radial-gradient(
-                    transparent 40%,
-                    hsl(var(--h4), 50%)
-                );
-
-                display: none;
-            }
-
-            & > .avatar-status-dot {
-                width: 22px;
-                height: 22px;
-                --mask-size: 22px;
-            }
-        }
-
-        & > h1 {
-            font-size: 24px;
-            line-height: 30px;
-            font-weight: var(--font-weight-bold);
-            letter-spacing: unset;
-            margin: unset;
-            cursor: default;
-            color: hsl(var(--c1));
-
-            & > .mention {
-                backdrop-filter: var(--solarium);
-                -webkit-backdrop-filter: var(--solarium);
-            }
-        }
-    }
-
     .track-preview {
         max-width: 500px !important;
         display: flex;
@@ -25844,8 +25704,7 @@
             }
         }
 
-        padding: calc(var(--button-sides) - 4px) 0
-            calc(var(--button-sides) + 2px);
+        padding: calc(var(--button-sides) - 4px) 0 calc(var(--button-sides) + 2px);
         border-bottom: 1px solid var(--card-border-base);
         margin: 2px var(--button-sides) 6px;
 
@@ -26323,10 +26182,9 @@
         /* todo: work on this better, it only occurs if
         user tags are too long next to global tags */
         flex-wrap: wrap;
-
-        .avatar {
-            display: none;
-        }
+    }
+    .tags-user-avatar {
+        display: none !important;
     }
 
     .music-featured-artist-tags .tag,
@@ -26955,10 +26813,6 @@
                                 width: var(--size);
                                 height: var(--size);
                                 border-radius: var(--item-med-radius);
-
-                                &:after {
-                                    display: none;
-                                }
                             }
 
                             .music-featured-tag-item-name {
@@ -27122,7 +26976,6 @@
         .avatar {
             width: 80px;
             height: 80px;
-            border-radius: var(--avatar-radius);
             box-shadow: var(--interact-shadow);
             --mask-size: var(--cover-size-100);
         }
@@ -27191,7 +27044,6 @@
         .avatar {
             width: 80px;
             height: 80px;
-            border-radius: var(--avatar-radius);
             box-shadow: var(--interact-shadow);
             --mask-size: var(--cover-size-100);
         }
@@ -27288,7 +27140,6 @@
         .avatar {
             width: 80px;
             height: 80px;
-            border-radius: var(--avatar-radius);
             box-shadow: var(--interact-shadow);
             --mask-size: var(--cover-size-100);
         }
@@ -27398,8 +27249,6 @@
             & > .avatar {
                 width: var(--button-height);
                 height: var(--button-height);
-                background: var(--avatar-generic-background);
-                border-radius: var(--avatar-radius);
                 --mask-size: 18px;
 
                 &:after {
@@ -27557,8 +27406,6 @@
                     .avatar {
                         width: 32px;
                         height: 32px;
-                        background: var(--avatar-generic-background);
-                        border-radius: var(--avatar-radius);
                         --mask-size: 18px;
                     }
                 }
@@ -29893,8 +29740,6 @@
                 & > .avatar {
                     width: var(--w);
                     height: var(--w);
-                    background: var(--avatar-generic-background);
-                    border-radius: var(--avatar-radius);
                     overflow: hidden;
                 }
             }
