@@ -112,19 +112,16 @@ export let ranks = {
 
 export let includes = {
     guests: [
-        'feat ',
-        'feat.',
-        'featuring',
-        '- feat',
-        '[feat.',
-        '- with',
-        '(with',
-        '[with',
-        'w/ ',
-        'ft.',
-        'ref.',
-        '(hosted by',
-        '(re:' // re this is why paramore
+        /\sfeat\s/i,
+        /\sfeat\./i,
+        /\sfeaturing\s/i,
+        /[-\(\[]feat/i,
+        /[-\(\[]with /i,
+        /w\/\s/i,
+        /ft\./i,
+        /ref\./i,
+        /\(hosted by/i,
+        /\(re:/i // re this is why paramore
     ],
     versions: [
         '(taylor',

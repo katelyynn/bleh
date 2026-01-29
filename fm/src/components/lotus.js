@@ -30,17 +30,25 @@ import { input } from './input.js';
 
 const flat_patterns = [];
 
-Object.entries(includes).forEach(([group, pats]) => {
-    pats.forEach((pat) => {
+Object.entries(includes).forEach(([group, patterns]) => {
+    patterns.forEach((pattern) => {
         flat_patterns.push({
             group,
-            pat: pat.toLowerCase()
+            pattern,
+            regex: pattern instanceof RegExp
         });
     });
 });
 
 // prefer longest patterns first
-flat_patterns.sort((a, b) => b.pat.length - a.pat.length);
+flat_patterns.sort((a, b) => {
+    const a_length = a.regex ? a.pattern.source.length : a.pattern.length;
+    const b_length = b.regex ? b.pattern.source.length : b.pattern.length;
+
+    return b_length - a_length;
+});
+
+log('finalised flat patterns', 'lotus', 'info', { flat_patterns });
 
 export function lotus(force = false) {
     if (!settings.corrections) return;
@@ -392,23 +400,38 @@ export function name_includes(
     }
 
     const lower_title = formatted_title.toLowerCase();
-    // find all tag‐matches (idx ≥ 1), with special remaster logic
+    // find all tag‐matches (index ≥ 1), with special remaster logic
     // due to Nirvana nonsense such as 20th Anniversary Remaster etc.
     const matches = flat_patterns
-        .map(({ group, pat }) => ({
-            group,
-            pat,
-            idx: lower_title.indexOf(pat)
-        }))
-        .filter((m) => {
-            if (m.idx < 1) return false;
+        .map(({ group, pattern, regex }) => {
+            let index = -1;
+
+            if (regex) {
+                const match = lower_title.match(pattern);
+                index = match ? match.index : -1;
+            } else {
+                index = lower_title.indexOf(pattern.toLowerCase);
+            }
+
+            return {
+                group,
+                pattern,
+                regex,
+                index
+            };
+        })
+        .filter((match) => {
+            if (match.index < 1) return false;
+
             return !(
-                m.group === 'remasters' &&
+                match.group === 'remasters' &&
                 !lower_title.includes(' remaster') &&
                 !lower_title.includes('(remaster')
             );
         })
-        .sort((a, b) => a.idx - b.idx);
+        .sort((a, b) => a.index - b.index);
+
+    log('found tag matches', 'lotus', 'info', { lower_title, matches });
 
     // apply any artist corrections
     if (
@@ -423,17 +446,17 @@ export function name_includes(
     let extras = [];
     if (matches.length > 0) {
         cleaned_title = formatted_title
-            .slice(0, matches[0].idx)
+            .slice(0, matches[0].index)
             .trim()
             .replace(/[\(\[\{]+$/, '')
             .trim();
 
         // extract each tag block
         extras = matches.map((match, i) => {
-            const start = match.idx;
+            const start = match.index;
             const end =
                 i + 1 < matches.length ?
-                    matches[i + 1].idx
+                    matches[i + 1].index
                 :   formatted_title.length;
             const tag_text = formatted_title
                 .slice(start, end)

@@ -28276,19 +28276,16 @@
   };
   var includes = {
     guests: [
-      "feat ",
-      "feat.",
-      "featuring",
-      "- feat",
-      "[feat.",
-      "- with",
-      "(with",
-      "[with",
-      "w/ ",
-      "ft.",
-      "ref.",
-      "(hosted by",
-      "(re:"
+      /\sfeat\s/i,
+      /\sfeat\./i,
+      /\sfeaturing\s/i,
+      /[-\(\[]feat/i,
+      /[-\(\[]with /i,
+      /w\/\s/i,
+      /ft\./i,
+      /ref\./i,
+      /\(hosted by/i,
+      /\(re:/i
       // re this is why paramore
     ],
     versions: [
@@ -53164,15 +53161,21 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
 
   // src/components/lotus.js
   var flat_patterns = [];
-  Object.entries(includes).forEach(([group, pats]) => {
-    pats.forEach((pat) => {
+  Object.entries(includes).forEach(([group, patterns]) => {
+    patterns.forEach((pattern) => {
       flat_patterns.push({
         group,
-        pat: pat.toLowerCase()
+        pattern,
+        regex: pattern instanceof RegExp
       });
     });
   });
-  flat_patterns.sort((a, b) => b.pat.length - a.pat.length);
+  flat_patterns.sort((a, b) => {
+    const a_length = a.regex ? a.pattern.source.length : a.pattern.length;
+    const b_length = b.regex ? b.pattern.source.length : b.pattern.length;
+    return b_length - a_length;
+  });
+  log("finalised flat patterns", "lotus", "info", { flat_patterns });
   function lotus(force = false) {
     if (!settings.corrections) return;
     let lotus_artist = localStorage.getItem("lotus_artist");
@@ -53426,24 +53429,35 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       }
     }
     const lower_title = formatted_title.toLowerCase();
-    const matches = flat_patterns.map(({ group, pat }) => ({
-      group,
-      pat,
-      idx: lower_title.indexOf(pat)
-    })).filter((m) => {
-      if (m.idx < 1) return false;
-      return !(m.group === "remasters" && !lower_title.includes(" remaster") && !lower_title.includes("(remaster"));
-    }).sort((a, b) => a.idx - b.idx);
+    const matches = flat_patterns.map(({ group, pattern, regex }) => {
+      let index3 = -1;
+      if (regex) {
+        const match3 = lower_title.match(pattern);
+        index3 = match3 ? match3.index : -1;
+      } else {
+        index3 = lower_title.indexOf(pattern.toLowerCase);
+      }
+      return {
+        group,
+        pattern,
+        regex,
+        index: index3
+      };
+    }).filter((match3) => {
+      if (match3.index < 1) return false;
+      return !(match3.group === "remasters" && !lower_title.includes(" remaster") && !lower_title.includes("(remaster"));
+    }).sort((a, b) => a.index - b.index);
+    log("found tag matches", "lotus", "info", { lower_title, matches });
     if (artist_corrections.hasOwnProperty(original_artist) && settings.corrections) {
       original_artist = correct_artist(artist_corrections[original_artist]);
     }
     let cleaned_title = formatted_title;
     let extras = [];
     if (matches.length > 0) {
-      cleaned_title = formatted_title.slice(0, matches[0].idx).trim().replace(/[\(\[\{]+$/, "").trim();
+      cleaned_title = formatted_title.slice(0, matches[0].index).trim().replace(/[\(\[\{]+$/, "").trim();
       extras = matches.map((match3, i) => {
-        const start2 = match3.idx;
-        const end2 = i + 1 < matches.length ? matches[i + 1].idx : formatted_title.length;
+        const start2 = match3.index;
+        const end2 = i + 1 < matches.length ? matches[i + 1].index : formatted_title.length;
         const tag_text = formatted_title.slice(start2, end2).replace(/^[\(\[\{\)\]\}\-\:\s]+|[\(\[\{\)\]\}\-\:\s]+$/g, "").trim();
         return {
           group: match3.group,
