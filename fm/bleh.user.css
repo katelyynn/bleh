@@ -274,6 +274,8 @@
 
         --setting-group: hsl(var(--b6), 20%);
 
+        --lastfm-logo-filter: saturate(0%) contrast(0%) brightness(200%);
+
         .theme-preview[data-bleh--theme="darker"],
         [data-bleh--theme="darker"] &:not(.theme-preview) {
             /* any additional highlights */
@@ -406,6 +408,8 @@
             --banner-mix: lighten;
 
             --setting-group: hsl(var(--b6), 30%);
+
+            --lastfm-logo-filter: none;
         }
         .theme-preview[data-bleh--theme="ink"],
         [data-bleh--theme="ink"] &:not(.theme-preview) {
@@ -467,6 +471,8 @@
 
             --banner-overlay: hsl(var(--b5), 20%);
             --banner-mix: lighten;
+
+            --lastfm-logo-filter: none;
         }
     }
 
@@ -591,6 +597,13 @@
         --badge: hsl(var(--f4), 30%);
         --badge-hov: hsl(var(--f4), 50%);
 
+        --g-red: hsl(8, 62%, 80%);
+        --g-orange: hsl(24, 86%, 80%);
+        --g-yellow: hsl(44, 100%, 80%);
+        --g-green: hsl(163, 100%, 80%);
+        --g-blue: hsl(199, 79%, 80%);
+        --g-indigo: hsl(254, 46%, 80%);
+
         .theme-preview[data-bleh--theme="oled"],
         [data-bleh--theme="oled"] &:not(.theme-preview) {
             --c1:
@@ -710,6 +723,13 @@
             );
 
             --glow: hsl(var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 80%), calc(clamp(min(0.7), var(--lit), max(1.1)) * 30%), 20%);
+
+            --g-red: hsl(8, 42%, 50%);
+            --g-orange: hsl(24, 66%, 50%);
+            --g-yellow: hsl(44, 80%, 50%);
+            --g-green: hsl(163, 50%, 50%);
+            --g-blue: hsl(199, 69%, 50%);
+            --g-indigo: hsl(254, 26%, 50%);
         }
         .theme-preview[data-bleh--theme="ink"],
         [data-bleh--theme="ink"]
@@ -1677,10 +1697,6 @@
         display: none !important;
     }
 
-    .top-bar + .main-content .header-background {
-        margin-top: -60px;
-    }
-
     /* a lot of these have to be !important due to new
     last.fm changes as of 2024-05-20 */
     .masthead {
@@ -1918,12 +1934,12 @@
             display: none;
         }
     }
+
     .masthead-logo {
         position: relative !important;
         left: unset !important;
         flex: unset !important;
         margin-left: unset !important;
-        /*opacity: 0.7;*/
         height: unset;
         background: unset;
         font: inherit;
@@ -1934,84 +1950,21 @@
         gap: var(--button-list-gap);
         width: fit-content !important;
 
-        & > a {
+        .navigation-item {
             flex-shrink: 1;
             position: static;
-
-            &:first-child {
-                display: none !important;
-            }
-        }
-
-        & > .home-link > .lastfm-logo {
-            background-image: url("https://www.last.fm/static/images/logo_static.png");
-            background-position: 0 50%;
-            background-repeat: no-repeat;
-            background-size: contain;
-            aspect-ratio: 9 / 4;
-            height: 28px;
-            font: 0 / 0 auto;
-
-            [data-bleh--theme_type="dark"] & {
-                filter: saturate(0%) contrast(0%) brightness(200%);
-            }
-        }
-
-        & > .home-link > .bleh-logo {
-            font-size: 28px;
-            line-height: 28px;
-            margin-top: -7px;
-            font-family: var(--font-brand);
-            font-weight: 900;
-            color: hsl(var(--c1));
-
-            text-shadow: 0 2px 4px hsl(var(--k4));
-
-            [data-bleh--season="pride"] & {
-                /* this isnt using https://cesque.com/gaydient/ but shoutout,
-                based on https://codepen.io/charliewilco/pen/BzrJzE */
-                --g-red: hsl(8, 62%, 80%);
-                --g-orange: hsl(24, 86%, 80%);
-                --g-yellow: hsl(44, 100%, 80%);
-                --g-green: hsl(163, 100%, 80%);
-                --g-blue: hsl(199, 79%, 80%);
-                --g-indigo: hsl(254, 46%, 80%);
-                background-image: linear-gradient(
-                    90deg,
-                    var(--g-red) 16.6666%,
-                    var(--g-orange) 33.333%,
-                    var(--g-yellow) 50%,
-                    var(--g-green) 66.6666%,
-                    var(--g-blue) 83.3333%,
-                    var(--g-indigo) 100%
-                );
-
-                [data-bleh--theme_type="light"] & {
-                    --g-red: hsl(8, 42%, 50%);
-                    --g-orange: hsl(24, 66%, 50%);
-                    --g-yellow: hsl(44, 80%, 50%);
-                    --g-green: hsl(163, 50%, 50%);
-                    --g-blue: hsl(199, 69%, 50%);
-                    --g-indigo: hsl(254, 26%, 50%);
-                }
-
-                background-clip: text;
-                -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;
-                text-shadow: unset;
-            }
-        }
-
-        & > a:not(.bleh--version) {
-            width: unset;
-            height: unset;
 
             &:before {
                 display: none;
             }
         }
 
-        .bleh--version {
+        .home-link {
+            width: unset;
+            height: unset;
+        }
+
+        .home-version {
             width: fit-content;
             height: fit-content;
             color: hsl(var(--c3));
@@ -2034,6 +1987,49 @@
                     );
                 }
             }
+        }
+    }
+
+    .lastfm-logo {
+        background-image: url("https://www.last.fm/static/images/logo_static.png");
+        background-position: 0 50%;
+        background-repeat: no-repeat;
+        background-size: contain;
+        aspect-ratio: 9 / 4;
+        height: 28px;
+        font: 0 / 0 auto;
+
+        filter: var(--lastfm-logo-filter, none);
+    }
+
+    .bleh-logo {
+        font-size: 28px;
+        line-height: 28px;
+        margin-top: -7px;
+        font-family: var(--font-brand);
+        font-weight: 900;
+        color: hsl(var(--c1));
+
+        text-shadow: 0 2px 4px hsl(var(--k4));
+
+        [data-bleh--season="pride"] & {
+            /* this isnt using https://cesque.com/gaydient/ but shoutout,
+            based on https://codepen.io/charliewilco/pen/BzrJzE */
+
+            background-image: linear-gradient(
+                90deg,
+                var(--g-red) 16.6666%,
+                var(--g-orange) 33.333%,
+                var(--g-yellow) 50%,
+                var(--g-green) 66.6666%,
+                var(--g-blue) 83.3333%,
+                var(--g-indigo) 100%
+            );
+
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: unset;
         }
     }
 

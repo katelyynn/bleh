@@ -53633,20 +53633,13 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     const update_required = localStorage.getItem("bleh_update_required") || "false";
     let home_link;
     render(masthead_logo, html``);
-    render(
-      masthead_logo,
-      html`
-            <a href="/">Last.fm</a>
-            <a
-                class="home-link"
-                href="${root}music"
-                ref=${(el) => home_link = el}
-            >
-                <div class="bleh-logo">${version.brand}</div>
-                <div class="lastfm-logo">Last.fm</div>
-            </a>
-        `
-    );
+    render(masthead_logo, html`
+        <a class="hidden-link" style="display: none !important" href="/">Last.fm</a>
+        <a class="navigation-item home-link" href="${root}music" ref=${(el) => home_link = el}>
+            <div class="home-logo bleh-logo">${version.brand}</div>
+            <div class="home-logo lastfm-logo">Last.fm</div>
+        </a>
+    `);
     const head_menu = tippy_esm_default(home_link, {
       theme: "window",
       content: html.node`
@@ -53669,21 +53662,21 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     let link;
     if (update_required === "false") {
       link = html.node`
-            <a class="bleh--version" href="${root}bleh">
+            <a class="navigation-item home-version" href="${root}bleh">
                 ${version.build}
                 <div class="new-badge sku spacing">
                     ${version.sku}
                     ${settings.dev ? html.node`
-                    <span class="bleh-icon-container">
-                        <span class="bleh-icon" data-type="dev" style="--icon: var(--mask)"/>
-                    </span>
+                        <span class="bleh-icon-container">
+                            <span class="bleh-icon" data-type="dev" style="--icon: var(--mask)"/>
+                        </span>
                     ` : ""}
                 </div>
             </a>
         `;
     } else {
       link = html.node`
-            <a class="bleh--version" onclick=${() => prompt_for_update()}>
+            <a class="navigation-item home-version" onclick=${() => prompt_for_update()}>
                 <div class="update-container">
                     <div class="bleh-icon" style="--icon: var(--icon-16-update)" />
                 </div>
@@ -53691,9 +53684,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                 <div class="new-badge sku spacing">
                     ${version.sku}
                     ${settings.dev ? html.node`
-                    <span class="bleh-icon-container">
-                        <span class="bleh-icon" data-type="dev" style="--icon: var(--mask)"/>
-                    </span>
+                        <span class="bleh-icon-container">
+                            <span class="bleh-icon" data-type="dev" style="--icon: var(--mask)"/>
+                        </span>
                     ` : ""}
                 </div>
             </a>
