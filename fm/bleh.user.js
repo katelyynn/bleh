@@ -32509,12 +32509,9 @@
                     <img class="view-item-avatar" src=${auth.avatar} alt=${auth.name}>
                     <img class="view-item-avatar" src=${page.avatar} alt=${page.name}>
                     <div class="info">
-                        <h3>${html.node([
-        tl2(trans.you_share_count_with).replace(
-          "{c}",
-          `<span class="colourful" data-taste=${taste}>${taste_percentage}</span>`
-        )
-      ])}</h3>
+                        <h3>
+                            ${{ html: tl2(trans.you_share_count_with, { c: `<span class="colourful" data-taste=${taste}>${taste_percentage}</span>` }) }}
+                        </h3>
                         <p>
                             ${taste_artists.length == 1 ? taste_artists[0] : ""}
                             ${taste_artists.length == 2 ? tl2(trans.you_share_count_with.two, { artist1: taste_artists[0], artist2: taste_artists[1] }) : ""}
@@ -32527,76 +32524,129 @@
                 </div>
             </div>
         `;
+      const other_avi = page.avatar.replace("/avatar300s/", "/avatar42s/");
+      let taste_menu;
       if (taste_artists.length > 1) {
-        const other_avi = page.avatar.replace("/avatar300s/", "/avatar42s/");
-        tippy_esm_default(taste_wrap, {
-          theme: "context-menu",
-          content: html.node`
-                    <div class="taste-menu-header colourful" data-taste=${taste}>
-                        ${taste_formal}
-                    </div>
-                    <a class="dropdown-menu-clickable-item" href="${root}user/${page.name}/library/music/${redirect()}${sanitise(taste_artists[0])}" data-menu-item="shared-artist">
-                        <span class="menu-avatar">
-                            <img src=${other_avi} alt=${page.name}>
-                        </span>
-                        ${taste_artists[0]}
-                    </a>
-                    <a class="dropdown-menu-clickable-item" href="${root}user/${auth.name}/library/music/${redirect()}${sanitise(taste_artists[0])}" data-menu-item="shared-artist">
-                        <span class="menu-avatar">
-                            <img src=${auth.avatar} alt=${auth.name}>
-                        </span>
-                        ${taste_artists[0]}
-                    </a>
-                    ${taste_artists.length >= 2 ? html.node`
-                    <div class="sep"></div>
-                    <a class="dropdown-menu-clickable-item" href="${root}user/${page.name}/library/music/${redirect()}${sanitise(taste_artists[1])}" data-menu-item="shared-artist">
-                        <span class="menu-avatar">
-                            <img src=${other_avi} alt=${page.name}>
-                        </span>
-                        ${taste_artists[1]}
-                    </a>
-                    <a class="dropdown-menu-clickable-item" href="${root}user/${auth.name}/library/music/${redirect()}${sanitise(taste_artists[1])}" data-menu-item="shared-artist">
-                        <span class="menu-avatar">
-                            <img src=${auth.avatar} alt=${auth.name}>
-                        </span>
-                        ${taste_artists[1]}
-                    </a>
-                    ` : ""}
-                    ${taste_artists.length >= 3 ? html.node`
-                    <div class="sep"></div>
-                    <a class="dropdown-menu-clickable-item" href="${root}user/${page.name}/library/music/${redirect()}${sanitise(taste_artists[2])}" data-menu-item="shared-artist">
-                        <span class="menu-avatar">
-                            <img src=${other_avi} alt=${page.name}>
-                        </span>
-                        ${taste_artists[2]}
-                    </a>
-                    <a class="dropdown-menu-clickable-item" href="${root}user/${auth.name}/library/music/${redirect()}${sanitise(taste_artists[2])}" data-menu-item="shared-artist">
-                        <span class="menu-avatar">
-                            <img src=${auth.avatar} alt=${auth.name}>
-                        </span>
-                        ${taste_artists[2]}
-                    </a>
-                    ` : ""}
-                    <div class="sep"></div>
-                    <a class="dropdown-menu-clickable-item" data-type="compare" href="${root}bleh/minis/compare?profile=${page.name}">${tl2(trans.compare)}</a>
-                    <button class="dropdown-menu-clickable-item" data-type="copy" onclick=${() => {
-            copy(tl2(trans.generic_lastfm_compatibility_message, {
-              u: page.name,
-              r: taste_formal,
-              a: taste_artists.join(tl2(trans.comma))
-            }));
-          }}>
-                        ${tl2(trans.copy)}
-                    </button>
-                `,
-          trigger: "click",
-          placement: "bottom",
-          interactive: true,
-          interactiveBorder: 10
-        });
+        taste_menu = html.node`
+                <div class="taste-menu-header colourful" data-taste=${taste}>
+                    ${taste_formal}
+                </div>
+                <a class="dropdown-menu-clickable-item" href="${root}user/${page.name}/library/music/${redirect()}${sanitise(taste_artists[0])}" data-menu-item="shared-artist">
+                    <span class="menu-avatar">
+                        <img src=${other_avi} alt=${page.name}>
+                    </span>
+                    ${taste_artists[0]}
+                </a>
+                <a class="dropdown-menu-clickable-item" href="${root}user/${auth.name}/library/music/${redirect()}${sanitise(taste_artists[0])}" data-menu-item="shared-artist">
+                    <span class="menu-avatar">
+                        <img src=${auth.avatar} alt=${auth.name}>
+                    </span>
+                    ${taste_artists[0]}
+                </a>
+                ${taste_artists.length >= 2 ? html.node`
+                <div class="sep"></div>
+                <a class="dropdown-menu-clickable-item" href="${root}user/${page.name}/library/music/${redirect()}${sanitise(taste_artists[1])}" data-menu-item="shared-artist">
+                    <span class="menu-avatar">
+                        <img src=${other_avi} alt=${page.name}>
+                    </span>
+                    ${taste_artists[1]}
+                </a>
+                <a class="dropdown-menu-clickable-item" href="${root}user/${auth.name}/library/music/${redirect()}${sanitise(taste_artists[1])}" data-menu-item="shared-artist">
+                    <span class="menu-avatar">
+                        <img src=${auth.avatar} alt=${auth.name}>
+                    </span>
+                    ${taste_artists[1]}
+                </a>
+                ` : ""}
+                ${taste_artists.length >= 3 ? html.node`
+                <div class="sep"></div>
+                <a class="dropdown-menu-clickable-item" href="${root}user/${page.name}/library/music/${redirect()}${sanitise(taste_artists[2])}" data-menu-item="shared-artist">
+                    <span class="menu-avatar">
+                        <img src=${other_avi} alt=${page.name}>
+                    </span>
+                    ${taste_artists[2]}
+                </a>
+                <a class="dropdown-menu-clickable-item" href="${root}user/${auth.name}/library/music/${redirect()}${sanitise(taste_artists[2])}" data-menu-item="shared-artist">
+                    <span class="menu-avatar">
+                        <img src=${auth.avatar} alt=${auth.name}>
+                    </span>
+                    ${taste_artists[2]}
+                </a>
+                ` : ""}
+                <div class="sep"></div>
+                <a class="dropdown-menu-clickable-item" data-type="compare" href="${root}bleh/minis/compare?profile=${page.name}">${tl2(trans.compare)}</a>
+                <button class="dropdown-menu-clickable-item" data-type="copy" onclick=${() => {
+          copy(tl2(trans.generic_lastfm_compatibility_message, {
+            u: page.name,
+            r: taste_formal,
+            a: taste_artists.join(tl2(trans.comma))
+          }));
+        }}>
+                    ${tl2(trans.copy)}
+                </button>
+            `;
       }
       const row = listen_container.querySelector(".listener-row");
       row.after(taste_wrap);
+      const february = true;
+      if (ff("sandrone") && february && settings.friends.includes(page.name) && ["super", "very_high", "high"].includes(taste)) {
+        taste_wrap.classList.add("valentine");
+        render(taste_wrap, html`
+                <div class="valentine-pics">
+                    <div class="taste-avatar avatar">
+                        <img src=${auth.avatar.replace("/avatar42s/", "/avatar300s/")} alt=${auth.name}>
+                    </div>
+                    <div class="taste-icon colourful valentine" data-taste=${taste}>
+                        <div class="bleh-icon" />
+                    </div>
+                    <div class="taste-avatar avatar">
+                        <img src=${page.avatar} alt=${page.name}>
+                    </div>
+                </div>
+                <div class="span">
+                    <div class="info">
+                        <h3>
+                            ${{ html: tl2(trans.you_are_a_value_match, { u: page.name, v: `<span class="colourful" data-taste=${taste}>${taste_formal}</span>` }) }}
+                        </h3>
+                        <p>
+                            ${taste_artists.length == 1 ? taste_artists[0] : ""}
+                            ${taste_artists.length == 2 ? tl2(trans.you_share_count_with.two, { artist1: taste_artists[0], artist2: taste_artists[1] }) : ""}
+                            ${taste_artists.length == 3 ? tl2(trans.you_share_count_with.three, { artist1: taste_artists[0], artist2: taste_artists[1], artist3: taste_artists[2] }) : ""}
+                        </p>
+                    </div>
+                </div>
+            `);
+        let details_btn;
+        taste_wrap.after(html.node`
+                <div class="valentines">
+                    <button class="btn icon select-button" data-type="details" ref=${(el) => details_btn = el}>${tl2(trans.view_details)}</button>
+                    <button class="btn icon primary colourful" data-taste=${taste} data-type="valentine" onclick=${() => {
+          open(`${root}inbox/compose?to=${page.name}&subject=${encodeURIComponent(tl2(trans.valentine, { u: page.name }))}`);
+        }}>${tl2(trans.send_valentine)}</button>
+                </div>
+            `);
+        if (taste_artists.length > 1) {
+          tippy_esm_default(details_btn, {
+            theme: "context-menu",
+            content: taste_menu,
+            trigger: "click",
+            placement: "bottom",
+            interactive: true,
+            interactiveBorder: 10
+          });
+        }
+      } else {
+        if (taste_artists.length > 1) {
+          tippy_esm_default(taste_wrap, {
+            theme: "context-menu",
+            content: taste_menu,
+            trigger: "click",
+            placement: "bottom",
+            interactive: true,
+            interactiveBorder: 10
+          });
+        }
+      }
     }
   }
   function create_profile_top_item(parent, {
@@ -62686,6 +62736,12 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         pl: "{artist1}, {artist2}, {artist3}"
       }
     },
+    you_are_a_value_match: {
+      // valentines easter egg
+      // u: username
+      // v: Super / Low / Very Low etc.
+      en: "You and {u} are a {v} match"
+    },
     taste_similarity: {
       en: "Taste similarity",
       de: "Musikgeschmack-\xC4hnlichkeit",
@@ -69234,6 +69290,20 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     notice: {
       en: "Notice"
+    },
+    send_valentine: {
+      // valentines easter egg
+      // sends a message to the user
+      en: "Let them know"
+    },
+    valentine: {
+      // valentines easter egg
+      // is used as the subject line of the message
+      // u: username
+      en: "to the one i love most, {u} \u2661"
+    },
+    view_details: {
+      en: "View details"
     }
   };
   function tl2(key, replacements = {}) {

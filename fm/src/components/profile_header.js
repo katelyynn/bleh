@@ -12,7 +12,7 @@ import { copy, romanise, sanitise } from '../build/tools';
 import { tl, trans } from '../build/trans';
 import { ff } from '../sku';
 import { correct_artist } from './lotus';
-import { html } from 'lighterhtml';
+import { html, render } from 'lighterhtml';
 import { sponsor } from '../sponsor.js';
 import { redirect } from './music.js';
 import tippy from 'tippy.js';
@@ -219,12 +219,9 @@ export function redesign_profile_header(is_own_profile, is_following) {
                     <img class="view-item-avatar" src=${auth.avatar} alt=${auth.name}>
                     <img class="view-item-avatar" src=${page.avatar} alt=${page.name}>
                     <div class="info">
-                        <h3>${html.node([
-                            tl(trans.you_share_count_with).replace(
-                                '{c}',
-                                `<span class="colourful" data-taste=${taste}>${taste_percentage}</span>`
-                            )
-                        ])}</h3>
+                        <h3>
+                            ${{html: tl(trans.you_share_count_with, { c: `<span class="colourful" data-taste=${taste}>${taste_percentage}</span>` })}}
+                        </h3>
                         <p>
                             ${taste_artists.length == 1 ? taste_artists[0] : ''}
                             ${taste_artists.length == 2 ? tl(trans.you_share_count_with.two, { artist1: taste_artists[0], artist2: taste_artists[1] }) : ''}
@@ -238,78 +235,137 @@ export function redesign_profile_header(is_own_profile, is_following) {
             </div>
         `;
 
-        if (taste_artists.length > 1) {
-            const other_avi = page.avatar.replace('/avatar300s/', '/avatar42s/');
+        const other_avi = page.avatar.replace('/avatar300s/', '/avatar42s/');
+        let taste_menu;
 
-            tippy(taste_wrap, {
-                theme: 'context-menu',
-                content: html.node`
-                    <div class="taste-menu-header colourful" data-taste=${taste}>
-                        ${taste_formal}
-                    </div>
-                    <a class="dropdown-menu-clickable-item" href="${root}user/${page.name}/library/music/${redirect()}${sanitise(taste_artists[0])}" data-menu-item="shared-artist">
-                        <span class="menu-avatar">
-                            <img src=${other_avi} alt=${page.name}>
-                        </span>
-                        ${taste_artists[0]}
-                    </a>
-                    <a class="dropdown-menu-clickable-item" href="${root}user/${auth.name}/library/music/${redirect()}${sanitise(taste_artists[0])}" data-menu-item="shared-artist">
-                        <span class="menu-avatar">
-                            <img src=${auth.avatar} alt=${auth.name}>
-                        </span>
-                        ${taste_artists[0]}
-                    </a>
-                    ${taste_artists.length >= 2 ? html.node`
-                    <div class="sep"></div>
-                    <a class="dropdown-menu-clickable-item" href="${root}user/${page.name}/library/music/${redirect()}${sanitise(taste_artists[1])}" data-menu-item="shared-artist">
-                        <span class="menu-avatar">
-                            <img src=${other_avi} alt=${page.name}>
-                        </span>
-                        ${taste_artists[1]}
-                    </a>
-                    <a class="dropdown-menu-clickable-item" href="${root}user/${auth.name}/library/music/${redirect()}${sanitise(taste_artists[1])}" data-menu-item="shared-artist">
-                        <span class="menu-avatar">
-                            <img src=${auth.avatar} alt=${auth.name}>
-                        </span>
-                        ${taste_artists[1]}
-                    </a>
-                    ` : ''}
-                    ${taste_artists.length >= 3 ? html.node`
-                    <div class="sep"></div>
-                    <a class="dropdown-menu-clickable-item" href="${root}user/${page.name}/library/music/${redirect()}${sanitise(taste_artists[2])}" data-menu-item="shared-artist">
-                        <span class="menu-avatar">
-                            <img src=${other_avi} alt=${page.name}>
-                        </span>
-                        ${taste_artists[2]}
-                    </a>
-                    <a class="dropdown-menu-clickable-item" href="${root}user/${auth.name}/library/music/${redirect()}${sanitise(taste_artists[2])}" data-menu-item="shared-artist">
-                        <span class="menu-avatar">
-                            <img src=${auth.avatar} alt=${auth.name}>
-                        </span>
-                        ${taste_artists[2]}
-                    </a>
-                    ` : ''}
-                    <div class="sep"></div>
-                    <a class="dropdown-menu-clickable-item" data-type="compare" href="${root}bleh/minis/compare?profile=${page.name}">${tl(trans.compare)}</a>
-                    <button class="dropdown-menu-clickable-item" data-type="copy" onclick=${() => {
-                        copy(tl(trans.generic_lastfm_compatibility_message, {
-                            u: page.name,
-                            r: taste_formal,
-                            a: taste_artists.join(tl(trans.comma))
-                        }));
-                    }}>
-                        ${tl(trans.copy)}
-                    </button>
-                `,
-                trigger: 'click',
-                placement: 'bottom',
-                interactive: true,
-                interactiveBorder: 10
-            });
+        if (taste_artists.length > 1) {
+            taste_menu = html.node`
+                <div class="taste-menu-header colourful" data-taste=${taste}>
+                    ${taste_formal}
+                </div>
+                <a class="dropdown-menu-clickable-item" href="${root}user/${page.name}/library/music/${redirect()}${sanitise(taste_artists[0])}" data-menu-item="shared-artist">
+                    <span class="menu-avatar">
+                        <img src=${other_avi} alt=${page.name}>
+                    </span>
+                    ${taste_artists[0]}
+                </a>
+                <a class="dropdown-menu-clickable-item" href="${root}user/${auth.name}/library/music/${redirect()}${sanitise(taste_artists[0])}" data-menu-item="shared-artist">
+                    <span class="menu-avatar">
+                        <img src=${auth.avatar} alt=${auth.name}>
+                    </span>
+                    ${taste_artists[0]}
+                </a>
+                ${taste_artists.length >= 2 ? html.node`
+                <div class="sep"></div>
+                <a class="dropdown-menu-clickable-item" href="${root}user/${page.name}/library/music/${redirect()}${sanitise(taste_artists[1])}" data-menu-item="shared-artist">
+                    <span class="menu-avatar">
+                        <img src=${other_avi} alt=${page.name}>
+                    </span>
+                    ${taste_artists[1]}
+                </a>
+                <a class="dropdown-menu-clickable-item" href="${root}user/${auth.name}/library/music/${redirect()}${sanitise(taste_artists[1])}" data-menu-item="shared-artist">
+                    <span class="menu-avatar">
+                        <img src=${auth.avatar} alt=${auth.name}>
+                    </span>
+                    ${taste_artists[1]}
+                </a>
+                ` : ''}
+                ${taste_artists.length >= 3 ? html.node`
+                <div class="sep"></div>
+                <a class="dropdown-menu-clickable-item" href="${root}user/${page.name}/library/music/${redirect()}${sanitise(taste_artists[2])}" data-menu-item="shared-artist">
+                    <span class="menu-avatar">
+                        <img src=${other_avi} alt=${page.name}>
+                    </span>
+                    ${taste_artists[2]}
+                </a>
+                <a class="dropdown-menu-clickable-item" href="${root}user/${auth.name}/library/music/${redirect()}${sanitise(taste_artists[2])}" data-menu-item="shared-artist">
+                    <span class="menu-avatar">
+                        <img src=${auth.avatar} alt=${auth.name}>
+                    </span>
+                    ${taste_artists[2]}
+                </a>
+                ` : ''}
+                <div class="sep"></div>
+                <a class="dropdown-menu-clickable-item" data-type="compare" href="${root}bleh/minis/compare?profile=${page.name}">${tl(trans.compare)}</a>
+                <button class="dropdown-menu-clickable-item" data-type="copy" onclick=${() => {
+                    copy(tl(trans.generic_lastfm_compatibility_message, {
+                        u: page.name,
+                        r: taste_formal,
+                        a: taste_artists.join(tl(trans.comma))
+                    }));
+                }}>
+                    ${tl(trans.copy)}
+                </button>
+            `;
         }
 
         const row = listen_container.querySelector('.listener-row');
         row.after(taste_wrap);
+
+        const february = true;
+
+        if (ff('sandrone') && february && settings.friends.includes(page.name) && ['super', 'very_high', 'high'].includes(taste)) {
+            taste_wrap.classList.add('valentine');
+
+            render(taste_wrap, html`
+                <div class="valentine-pics">
+                    <div class="taste-avatar avatar">
+                        <img src=${auth.avatar.replace('/avatar42s/', '/avatar300s/')} alt=${auth.name}>
+                    </div>
+                    <div class="taste-icon colourful valentine" data-taste=${taste}>
+                        <div class="bleh-icon" />
+                    </div>
+                    <div class="taste-avatar avatar">
+                        <img src=${page.avatar} alt=${page.name}>
+                    </div>
+                </div>
+                <div class="span">
+                    <div class="info">
+                        <h3>
+                            ${{html: tl(trans.you_are_a_value_match, { u: page.name, v: `<span class="colourful" data-taste=${taste}>${taste_formal}</span>` })}}
+                        </h3>
+                        <p>
+                            ${taste_artists.length == 1 ? taste_artists[0] : ''}
+                            ${taste_artists.length == 2 ? tl(trans.you_share_count_with.two, { artist1: taste_artists[0], artist2: taste_artists[1] }) : ''}
+                            ${taste_artists.length == 3 ? tl(trans.you_share_count_with.three, { artist1: taste_artists[0], artist2: taste_artists[1], artist3: taste_artists[2] }) : ''}
+                        </p>
+                    </div>
+                </div>
+            `);
+
+            let details_btn;
+
+            taste_wrap.after(html.node`
+                <div class="valentines">
+                    <button class="btn icon select-button" data-type="details" ref=${el => details_btn = el}>${tl(trans.view_details)}</button>
+                    <button class="btn icon primary colourful" data-taste=${taste} data-type="valentine" onclick=${() => {
+                        open(`${root}inbox/compose?to=${page.name}&subject=${encodeURIComponent(tl(trans.valentine, { u: page.name }))}`)
+                    }}>${tl(trans.send_valentine)}</button>
+                </div>
+            `);
+
+            if (taste_artists.length > 1) {
+                tippy(details_btn, {
+                    theme: 'context-menu',
+                    content: taste_menu,
+                    trigger: 'click',
+                    placement: 'bottom',
+                    interactive: true,
+                    interactiveBorder: 10
+                });
+            }
+        } else {
+            if (taste_artists.length > 1) {
+                tippy(taste_wrap, {
+                    theme: 'context-menu',
+                    content: taste_menu,
+                    trigger: 'click',
+                    placement: 'bottom',
+                    interactive: true,
+                    interactiveBorder: 10
+                });
+            }
+        }
     }
 }
 

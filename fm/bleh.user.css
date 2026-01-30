@@ -609,6 +609,8 @@
         --g-blue: hsl(199, 79%, 80%);
         --g-indigo: hsl(254, 46%, 80%);
 
+        --taste-glow: drop-shadow(0 0 15px hsl(var(--h4)));
+
         .theme-preview[data-bleh--theme="oled"],
         [data-bleh--theme="oled"] &:not(.theme-preview) {
             --c1:
@@ -740,6 +742,8 @@
             --g-green: hsl(163, 50%, 50%);
             --g-blue: hsl(199, 69%, 50%);
             --g-indigo: hsl(254, 26%, 50%);
+
+            --taste-glow: drop-shadow(0 0 15px hsl(var(--h3)));
         }
         .theme-preview[data-bleh--theme="ink"],
         [data-bleh--theme="ink"]
@@ -1180,6 +1184,7 @@
         --icon-16-trend: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1vdXRsaW5lIGljb24tdGFibGVyLXRyZW5kaW5nLXVwIj48cGF0aCBzdHJva2U9Im5vbmUiIGQ9Ik0wIDBoMjR2MjRIMHoiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJNMyAxN2w2IC02bDQgNGw4IC04IiAvPjxwYXRoIGQ9Ik0xNCA3bDcgMGwwIDciIC8+PC9zdmc+");
         --icon-16-heart: url("data:image/svg+xml;base64,PHN2ZyAgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiAgd2lkdGg9IjI0IiAgaGVpZ2h0PSIyNCIgIHZpZXdCb3g9IjAgMCAyNCAyNCIgIGZpbGw9Im5vbmUiICBzdHJva2U9ImN1cnJlbnRDb2xvciIgIHN0cm9rZS13aWR0aD0iMiIgIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgIHN0cm9rZS1saW5lam9pbj0icm91bmQiICBjbGFzcz0iaWNvbiBpY29uLXRhYmxlciBpY29ucy10YWJsZXItb3V0bGluZSBpY29uLXRhYmxlci1oZWFydCI+PHBhdGggc3Ryb2tlPSJub25lIiBkPSJNMCAwaDI0djI0SDB6IiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTE5LjUgMTIuNTcybC03LjUgNy40MjhsLTcuNSAtNy40MjhhNSA1IDAgMSAxIDcuNSAtNi41NjZhNSA1IDAgMSAxIDcuNSA2LjU3MiIgLz48L3N2Zz4=");
         --icon-16-heart-solid: url("data:image/svg+xml;base64,PHN2ZyAgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiAgd2lkdGg9IjI0IiAgaGVpZ2h0PSIyNCIgIHZpZXdCb3g9IjAgMCAyNCAyNCIgIGZpbGw9ImN1cnJlbnRDb2xvciIgIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1maWxsZWQgaWNvbi10YWJsZXItaGVhcnQiPjxwYXRoIHN0cm9rZT0ibm9uZSIgZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPjxwYXRoIGQ9Ik02Ljk3OSAzLjA3NGE2IDYgMCAwIDEgNC45ODggMS40MjVsLjAzNyAuMDMzbC4wMzQgLS4wM2E2IDYgMCAwIDEgNC43MzMgLTEuNDRsLjI0NiAuMDM2YTYgNiAwIDAgMSAzLjM2NCAxMC4wMDhsLS4xOCAuMTg1bC0uMDQ4IC4wNDFsLTcuNDUgNy4zNzlhMSAxIDAgMCAxIC0xLjMxMyAuMDgybC0uMDk0IC0uMDgybC03LjQ5MyAtNy40MjJhNiA2IDAgMCAxIDMuMTc2IC0xMC4yMTV6IiAvPjwvc3ZnPg==");
+        --icon-16-valentine: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1vdXRsaW5lIGljb24tdGFibGVyLW1haWwtaGVhcnQiPjxwYXRoIHN0cm9rZT0ibm9uZSIgZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPjxwYXRoIGQ9Ik0xMC41IDE5aC01LjVhMiAyIDAgMCAxIC0yIC0ydi0xMGEyIDIgMCAwIDEgMiAtMmgxNGEyIDIgMCAwIDEgMiAydjQiIC8+PHBhdGggZD0iTTMgN2w5IDZsMi45ODMgLTEuOTg5bDYuMDE3IC00LjAxMSIgLz48cGF0aCBkPSJNMTggMjJsMy4zNSAtMy4yODRhMi4xNDMgMi4xNDMgMCAwIDAgLjAwNSAtMy4wNzFhMi4yNDIgMi4yNDIgMCAwIDAgLTMuMTI5IC0uMDA2bC0uMjI0IC4yMmwtLjIyMyAtLjIyYTIuMjQyIDIuMjQyIDAgMCAwIC0zLjEyOCAtLjAwNmEyLjE0MyAyLjE0MyAwIDAgMCAtLjAwNiAzLjA3MWwzLjM1NSAzLjI5NiIgLz48L3N2Zz4=");
         --icon-16-support: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjI1IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWhlYXJ0LXBsdXMtaWNvbiBsdWNpZGUtaGVhcnQtcGx1cyI+PHBhdGggZD0iTTEzLjUgMTkuNSAxMiAyMWwtNy03Yy0xLjUtMS40NS0zLTMuMi0zLTUuNUE1LjUgNS41IDAgMCAxIDcuNSAzYzEuNzYgMCAzIC41IDQuNSAyIDEuNS0xLjUgMi43NC0yIDQuNS0yYTUuNSA1LjUgMCAwIDEgNS40MDIgNi41Ii8+PHBhdGggZD0iTTE1IDE1aDYiLz48cGF0aCBkPSJNMTggMTJ2NiIvPjwvc3ZnPg==");
         --icon-16-sponsor-rewards: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1vdXRsaW5lIGljb24tdGFibGVyLXNob3BwaW5nLWJhZyI+PHBhdGggc3Ryb2tlPSJub25lIiBkPSJNMCAwaDI0djI0SDB6IiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTYuMzMxIDhoMTEuMzM5YTIgMiAwIDAgMSAxLjk3NyAyLjMwNGwtMS4yNTUgOC4xNTJhMyAzIDAgMCAxIC0yLjk2NiAyLjU0NGgtNi44NTJhMyAzIDAgMCAxIC0yLjk2NSAtMi41NDRsLTEuMjU1IC04LjE1MmEyIDIgMCAwIDEgMS45NzcgLTIuMzA0eiIgLz48cGF0aCBkPSJNOSAxMXYtNWEzIDMgMCAwIDEgNiAwdjUiIC8+PC9zdmc+");
         --icon-16-home: url("data:image/svg+xml;base64,PHN2ZyAgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiAgd2lkdGg9IjI0IiAgaGVpZ2h0PSIyNCIgIHZpZXdCb3g9IjAgMCAyNCAyNCIgIGZpbGw9Im5vbmUiICBzdHJva2U9ImN1cnJlbnRDb2xvciIgIHN0cm9rZS13aWR0aD0iMiIgIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgIHN0cm9rZS1saW5lam9pbj0icm91bmQiICBjbGFzcz0iaWNvbiBpY29uLXRhYmxlciBpY29ucy10YWJsZXItb3V0bGluZSBpY29uLXRhYmxlci1zbWFydC1ob21lIj48cGF0aCBzdHJva2U9Im5vbmUiIGQ9Ik0wIDBoMjR2MjRIMHoiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJNMTkgOC43MWwtNS4zMzMgLTQuMTQ4YTIuNjY2IDIuNjY2IDAgMCAwIC0zLjI3NCAwbC01LjMzNCA0LjE0OGEyLjY2NSAyLjY2NSAwIDAgMCAtMS4wMjkgMi4xMDV2Ny4yYTIgMiAwIDAgMCAyIDJoMTJhMiAyIDAgMCAwIDIgLTJ2LTcuMmMwIC0uODIzIC0uMzggLTEuNiAtMS4wMyAtMi4xMDUiIC8+PHBhdGggZD0iTTE2IDE1Yy0yLjIxIDEuMzMzIC01Ljc5MiAxLjMzMyAtOCAwIiAvPjwvc3ZnPg==");
@@ -5512,6 +5517,10 @@
         --sat-over: 1.4;
         --lit-over: 0.95;
         --icon: url("data:image/svg+xml;base64,PHN2ZyAgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiAgd2lkdGg9IjI0IiAgaGVpZ2h0PSIyNCIgIHZpZXdCb3g9IjAgMCAyNCAyNCIgIGZpbGw9ImN1cnJlbnRDb2xvciIgIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1maWxsZWQgaWNvbi10YWJsZXItY2lyY2xlLXBlcmNlbnRhZ2UiPjxwYXRoIHN0cm9rZT0ibm9uZSIgZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPjxwYXRoIGQ9Ik0xMiAyYzUuNTIzIDAgMTAgNC40NzcgMTAgMTBhMTAgMTAgMCAwIDEgLTIwIDBsLjAwNCAtLjI4Yy4xNDggLTUuMzkzIDQuNTY2IC05LjcyIDkuOTk2IC05LjcybTMgMTIuMTJhMSAxIDAgMCAwIC0xIDF2LjAxNWExIDEgMCAwIDAgMiAwdi0uMDE1YTEgMSAwIDAgMCAtMSAtMW0uNzA3IC01Ljc1MmExIDEgMCAwIDAgLTEuNDE0IDBsLTYgNmExIDEgMCAwIDAgMS40MTQgMS40MTRsNiAtNmExIDEgMCAwIDAgMCAtMS40MTRtLTYuNzA3IC0uMjYzYTEgMSAwIDAgMCAtMSAxdi4wMTVhMSAxIDAgMSAwIDIgMHYtLjAxNWExIDEgMCAwIDAgLTEgLTEiIC8+PC9zdmc+");
+
+        &.valentine {
+            --icon: var(--icon-16-heart-solid);
+        }
     }
     [data-taste="very_high"] {
         --hue-over: 18;
@@ -26420,14 +26429,49 @@
                 animation: none;
             }
 
-            & > .taste-icon {
+            .taste-icon {
                 position: absolute;
                 top: 50%;
                 margin-top: calc(-1 * var(--icon-half));
                 left: var(--button-sides);
 
-                --mask-colour: hsl(var(--l3-c));
-                filter: drop-shadow(0 0 15px hsl(var(--h4), 80%));
+                --mask-colour: currentColor;
+
+                color: hsl(var(--l3-c));
+                filter: var(--taste-glow);
+            }
+
+            &.valentine {
+                --padding: 10px var(--button-sides) !important;
+                margin: 0 calc(-1 * var(--button-sides)) !important;
+
+                align-items: center;
+                flex-direction: column;
+
+                .valentine-pics {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 12px;
+
+                    .taste-avatar {
+                        width: 48px;
+                    }
+
+                    & > .taste-icon {
+                        position: static;
+                        --icon-size: 24px;
+                        margin: unset;
+
+                        animation: valentine 3s var(--trans-function-ani) infinite;
+                    }
+                }
+
+                .span {
+                    text-align: center;
+                }
+
+                pointer-events: none;
             }
 
             .span {
@@ -26491,7 +26535,33 @@
                 }
             }
         }
+
+        .valentines {
+            display: flex;
+            justify-content: center;
+            gap: var(--button-list-gap);
+            margin-bottom: var(--card-padding);
+        }
     }
+
+    @keyframes valentine {
+        from, to {
+            color: hsl(var(--l3-c));
+            scale: 1;
+        }
+        40% {
+            color: color-mix(in hsl, hsl(var(--l2-c)) 40%, hsl(var(--l3-c)));
+            scale: 1.1;
+        }
+    }
+
+    [data-type="details"] {
+        --mask: var(--icon-16-info);
+    }
+    [data-type="valentine"] {
+        --mask: var(--icon-16-valentine);
+    }
+
     .listen-item {
         display: flex;
         align-items: center;

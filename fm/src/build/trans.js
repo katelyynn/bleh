@@ -3398,6 +3398,12 @@ export const trans = {
             pl: '{artist1}, {artist2}, {artist3}',
         }
     },
+    you_are_a_value_match: {
+        // valentines easter egg
+        // u: username
+        // v: Super / Low / Very Low etc.
+        en: 'You and {u} are a {v} match'
+    },
     taste_similarity: {
         en: 'Taste similarity',
         de: 'Musikgeschmack-Ähnlichkeit',
@@ -9942,6 +9948,20 @@ export const trans = {
     },
     notice: {
         en: 'Notice'
+    },
+    send_valentine: {
+        // valentines easter egg
+        // sends a message to the user
+        en: 'Let them know'
+    },
+    valentine: {
+        // valentines easter egg
+        // is used as the subject line of the message
+        // u: username
+        en: 'to the one i love most, {u} ♡'
+    },
+    view_details: {
+        en: 'View details'
     }
 };
 
