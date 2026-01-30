@@ -194,9 +194,11 @@ export async function bleh_profiles() {
         profile_name.setAttribute('data-font', cache.font);
         profile_name.setAttribute('data-font-style', cache.font_style);
 
-        setTimeout(() => {
-            queue_popup('profile_name_style', profile_name, 'bottom');
-        }, 0);
+        if (cache.font || cache.font_style) {
+            setTimeout(() => {
+                queue_popup('profile_name_style', profile_name, 'bottom');
+            }, 0);
+        }
     }
 
     // new account
@@ -949,36 +951,42 @@ function create_profile_note_panel(username, has_note) {
 
     about_me_sidebar.after(html.node`
         <section class="bleh--panel bleh--profile-note-panel">
-            <h2>${tl(trans.notes)}</h2>
+            <div class="top-container">
+                <h2>${tl(trans.notes)}</h2>
+                <div class="view-buttons blend blend-v2">
+                    <button class="see-more left-icon blend-v2-btn" data-type="delete" onclick=${() => {
+                        let notes =
+                            JSON.parse(
+                                localStorage.getItem('bleh_profile_notes')
+                            ) || {};
+                        delete notes[page.name];
+
+                        note.value = '';
+                        set_storage('bleh_profile_notes', JSON.stringify(notes));
+                        status({
+                            id: 'note',
+                            title: tl(trans.cleared_note_for_user, { u: page.name })
+                        });
+                    }}>${tl(trans.clear)}</button>
+                    <button class="see-more left-icon blend-v2-btn" data-type="save" onclick=${() => {
+                        let notes =
+                            JSON.parse(
+                                localStorage.getItem('bleh_profile_notes')
+                            ) || {};
+
+                        notes[page.name] = note.value;
+
+                        set_storage('bleh_profile_notes', JSON.stringify(notes));
+                        status({
+                            id: 'note',
+                            title: tl(trans.saved_note_for_user, { u: page.name }),
+                            body: note.value
+                        });
+                    }}>${tl(trans.save)}</button>
+                </div>
+            </div>
             <div class="content-form">
                 <textarea id="bleh--profile-note" placeholder=${tl(trans.anything_you_can_imagine)} ref=${(el) => (note = el)}>${has_note ?? has_note}</textarea>
-            </div>
-            <div class="actions">
-                <button class="see-more cancel" onclick=${() => {
-                    let notes =
-                        JSON.parse(
-                            localStorage.getItem('bleh_profile_notes')
-                        ) || {};
-                    delete notes[page.name];
-
-                    note.value = '';
-                    set_storage('bleh_profile_notes', JSON.stringify(notes));
-                }}>${tl(trans.clear)}</button>
-                <button class="btn primary icon" data-type="save" onclick=${() => {
-                    let notes =
-                        JSON.parse(
-                            localStorage.getItem('bleh_profile_notes')
-                        ) || {};
-
-                    notes[page.name] = note.value
-                        .replace(/&/g, '&amp;')
-                        .replace(/</g, '&lt;')
-                        .replace(/>/g, '&gt;')
-                        .replace(/"/g, '&quot;')
-                        .replace(/'/g, '&#039;');
-
-                    set_storage('bleh_profile_notes', JSON.stringify(notes));
-                }}>${tl(trans.save)}</button>
             </div>
         </section>
     `);

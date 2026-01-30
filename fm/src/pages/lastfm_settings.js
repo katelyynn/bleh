@@ -1407,13 +1407,16 @@ function bleh_communication_panel(token) {
     let exceed_amount = 10;
     let amount = 0;
 
-    list.forEach((item, index) => {
+    Array.from(list).reverse().forEach((item, index) => {
         let name = item.querySelector('td').textContent.trim();
         let form = item.querySelector('form');
         let button = form.querySelector('button');
 
-        button.classList.add('icon', 'chibi', 'danger-subtle');
-        button.setAttribute('data-type', 'trash');
+        button.classList.add('btn', 'icon', 'chibi', 'danger-subtle', 'list-action');
+        button.setAttribute('data-type', 'x');
+        tippy(button, {
+            content: tl(trans.remove)
+        });
 
         let entry = html.node`
             <div class="generic-table-list-entry user-vertical-list-item">
@@ -1421,13 +1424,9 @@ function bleh_communication_panel(token) {
                     <a class="mention" href="${root}user/${name}" target="_blank">@${name}</a>
                 </div>
                 <div class="text preview">
-                    ${
-                        profile_notes.hasOwnProperty(name) ?
-                            html.node`
+                    ${profile_notes.hasOwnProperty(name) ? html.node`
                         <p id="profile-note-row-preview--${name}">${{ html: profile_notes[name] }}</p>
-                    `
-                        :   ''
-                    }
+                    ` : ''}
                 </div>
                 <div class="actions">
                     ${form}
@@ -1468,84 +1467,83 @@ function bleh_communication_panel(token) {
             .querySelector('[name="csrfmiddlewaretoken"]')
             .getAttribute('value');
 
-    render(
-        panel,
-        html`
-            <h4>${tl(trans.block_list)}</h4>
-            <div class="user-top-panel">
-                <div class="user-top-avatar user-top-avatar-side-left">
-                    <div class="bleh-icon"></div>
-                </div>
-                <img
-                    class="user-top-avatar user-top-avatar-main"
-                    src=${auth.avatar.replace('avatar42s', 'avatar300s')}
-                    alt=${auth.name}
-                />
-                <div class="user-top-avatar user-top-avatar-side-right">
-                    <div class="bleh-icon"></div>
-                </div>
+    render(panel, html`
+        <h4>${tl(trans.block_list)}</h4>
+        <div class="user-top-panel">
+            <div class="user-top-avatar user-top-avatar-side-left">
+                <div class="bleh-icon"></div>
             </div>
-            ${alert}
-            <div class="setting" data-type="text">
-                <div class="heading">
-                    <h5>${tl(trans.profile)}</h5>
-                    <form
-                        action="${root}settings/privacy#ignorelist"
-                        name="ignorelist"
-                        method="post"
-                    >
+            <img
+                class="user-top-avatar user-top-avatar-main"
+                src=${auth.avatar.replace('avatar42s', 'avatar300s')}
+                alt=${auth.name}
+            />
+            <div class="user-top-avatar user-top-avatar-side-right">
+                <div class="bleh-icon"></div>
+            </div>
+        </div>
+        ${alert}
+        <div class="setting" data-type="text">
+            <div class="heading">
+                <h5>${tl(trans.profile)}</h5>
+                <form
+                    action="${root}settings/privacy#ignorelist"
+                    name="ignorelist"
+                    method="post"
+                >
+                    <input
+                        type="hidden"
+                        name="csrfmiddlewaretoken"
+                        value=${page.token}
+                    />
+                    <div class="input-container">
+                        <input
+                            type="text"
+                            maxlength="80"
+                            id="id_user"
+                            name="user"
+                            placeholder=${tl(trans.enter_username)}
+                        />
                         <input
                             type="hidden"
-                            name="csrfmiddlewaretoken"
-                            value=${page.token}
+                            name="listaction"
+                            value="add"
                         />
-                        <div class="input-container">
-                            <input
-                                type="text"
-                                maxlength="80"
-                                id="id_user"
-                                name="user"
-                                placeholder=${tl(trans.enter_username)}
-                            />
-                            <input
-                                type="hidden"
-                                name="listaction"
-                                value="add"
-                            />
-                            <input
-                                type="hidden"
-                                name="submit"
-                                value="ignorelist"
-                            />
-                            <button
-                                class="btn primary icon block"
-                                type="submit"
-                            >
-                                ${tl(trans.block)}
-                            </button>
-                        </div>
-                    </form>
-                </div>
+                        <input
+                            type="hidden"
+                            name="submit"
+                            value="ignorelist"
+                        />
+                        <button
+                            class="btn primary icon block"
+                            type="submit"
+                        >
+                            ${tl(trans.block)}
+                        </button>
+                    </div>
+                </form>
             </div>
-            <div class="alert alert-info">
-                ${tl(trans.blocked_count).replace('{c}', amount)}
-            </div>
+        </div>
+        <div class="alert alert-info">
+            ${tl(trans.blocked_count, { c: amount })}
+        </div>
+        <div class="setting-group">
             ${new_list}
-            <div class="sep" />
-            <h5>${tl(trans.when_blocked)}</h5>
-            <div class="to-consider">
-                <ul class="to-consider-good">
-                    <li>${tl(trans.blocked_user_public)}</li>
-                    <li>${tl(trans.blocked_user_message)}</li>
-                    <li>${tl(trans.blocked_user_new_shouts)}</li>
-                </ul>
-                <ul class="to-consider-bad">
-                    <li>${tl(trans.blocked_user_old_shouts)}</li>
-                    <li>${tl(trans.blocked_user_view_profile)}</li>
-                </ul>
-            </div>
-        `
-    );
+        </div>
+        <div class="sep" />
+        <h5>${tl(trans.when_blocked)}</h5>
+        <div class="to-consider">
+            <ul class="to-consider-good">
+                <li>${tl(trans.blocked_user_public)}</li>
+                <li>${tl(trans.blocked_user_message)}</li>
+                <li>${tl(trans.blocked_user_new_shouts)}</li>
+            </ul>
+            <ul class="to-consider-bad">
+                <li>${tl(trans.blocked_user_old_shouts)}</li>
+                <li>${tl(trans.blocked_user_view_profile)}</li>
+            </ul>
+        </div>
+    `);
 }
 
 function patch_settings_privacy_panel(token, privacy_panel) {

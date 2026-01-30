@@ -2400,15 +2400,35 @@ function init_profile_notes() {
                     <a class="mention" href="${root}user/${user}">@${user}</a>
                 </div>
                 <div class="text preview">
-                    <p id="profile-note-row-preview--${user}">${{ html: profile_notes[user] }}</p>
+                    <p id="profile-note-row-preview--${user}">${profile_notes[user]}</p>
                 </div>
                 <div class="actions">
-                    <button class="icon chibi edit" onclick=${() => edit_profile_note(user)}>
-                        ${tl(trans.delete)}
-                    </button>
-                    <button class="icon chibi delete danger-subtle" onclick=${() => delete_profile_note(user)}>
-                        ${tl(trans.delete)}
-                    </button>
+                    ${() => {
+                        const btn = html.node`
+                            <button class="btn icon chibi list-action" data-type="edit" onclick=${() => edit_profile_note(user)}>
+                                ${tl(trans.edit)}
+                            </button>
+                        `;
+
+                        tippy(btn, {
+                            content: btn.textContent
+                        });
+
+                        return btn;
+                    }}
+                    ${() => {
+                        const btn = html.node`
+                            <button class="btn icon chibi danger-subtle list-action" data-type="delete" onclick=${() => delete_profile_note(user)}>
+                                ${tl(trans.delete)}
+                            </button>
+                        `;
+
+                        tippy(btn, {
+                            content: btn.textContent
+                        });
+
+                        return btn;
+                    }}
                 </div>
             </div>
         `);

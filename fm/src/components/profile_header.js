@@ -20,6 +20,8 @@ import { register_menu } from './menu.js';
 import { notify } from './notify.js';
 import { dialog, dialog_rm } from './dialog.js';
 import { save_setting } from './settings.js';
+import { manage_user } from './manage_user.js';
+import { queue_popup } from './popup.js';
 
 export function redesign_profile_header(is_own_profile, is_following) {
     if (!auth.name) return;
@@ -181,6 +183,12 @@ export function redesign_profile_header(is_own_profile, is_following) {
             });
         }
     }
+
+    const manage = create_profile_top_item(profile_header, {
+        name: page.name,
+        type: 'manage'
+    });
+    manage_user(manage);
 
     if (!page.mobile)
         page.structure.side.insertBefore(
@@ -578,4 +586,8 @@ function friends_button(parent) {
     }
 
     parent.appendChild(elem);
+
+    setTimeout(() => {
+        queue_popup('close_friends', elem);
+    }, 0);
 }

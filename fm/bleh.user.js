@@ -32350,6 +32350,147 @@
   // src/components/collage.js
   var import_html2canvas_pro = __toESM(require_html2canvas_pro(), 1);
 
+  // src/components/manage_user.js
+  function manage_user(button2) {
+    const can_block = ff("can_block_in_menu");
+    const can_report = ff("can_report_in_menu");
+    const can_block_or_report = (can_block || can_report) && page.name != auth.name;
+    tippy_esm_default(button2, {
+      theme: "context-menu",
+      content: html.node`
+            <button class="dropdown-menu-clickable-item" data-type="copy" onclick=${() => {
+        copy(page.name);
+      }}>
+                ${tl2(trans.copy_username)}
+            </button>
+            <button class="dropdown-menu-clickable-item" data-type="share" onclick=${() => {
+        share(window.location.href);
+      }}>
+                ${tl2(trans.share)}
+            </button>
+            ${can_block_or_report ? html.node`
+                <div class="sep" />
+                ${can_report ? html.node`
+                <button class="dropdown-menu-clickable-item more-item--report" data-type="block" onclick=${() => {
+        block_user(page.name);
+      }}>
+                    ${tl2(trans.block)}
+                </button>
+                ` : ""}
+                ${can_report ? html.node`
+                <button class="dropdown-menu-clickable-item more-item--report" data-type="report" onclick=${() => {
+        report_user(page.name);
+      }}>
+                    <div class="auth-dropdown-item-row">
+                        <span class="auth-dropdown-item-left">
+                            ${tl2(trans.report)}
+                        </span>
+                        <span class="auth-dropdown-item-right">
+                            <div class="bleh-icon external" />
+                        </span>
+                    </div>
+                </button>
+                ` : ""}
+            ` : ""}
+        `,
+      trigger: "click",
+      placement: "bottom",
+      interactive: true,
+      interactiveBorder: 10,
+      onMount(instance) {
+        instance.popper.addEventListener("click", (event3) => {
+          instance.hide();
+        });
+      }
+    });
+  }
+  function block_user(user = page.name) {
+  }
+  function report_user(user = page.name) {
+  }
+
+  // src/components/popup.js
+  var popup_queue = [];
+  function queue_popup(key, host, prefer = "top") {
+    if (!host || !host.offsetParent) {
+      log(`skipped adding ${key} as the host is not accessible (probably intentional)`, "popup", "info", { key, host });
+      return;
+    }
+    if (settings.popups_seen.includes(key)) {
+      log(`skipped adding ${key} as popup has previously been dismissed`, "popup", "info", { key, host });
+      return;
+    }
+    popup_queue.push({ key, host, prefer });
+    check_queue();
+  }
+  function clear_popup_queue() {
+    popup_queue = [];
+  }
+  function check_queue() {
+    const first = popup_queue[0];
+    if (!first) return;
+    if (first.visible) return;
+    popup(first);
+  }
+  function popup(instance) {
+    const key = instance.key;
+    const host = instance.host;
+    const prefer = instance.prefer;
+    const title = tl2(trans[`popup_${key}`]?.title);
+    const body = tl2(trans[`popup_${key}`]?.body);
+    if ([title, body].includes(translation_fallback)) {
+      log(`popup_${key} not found in translations`, "popup", "error", { title, body, key, host });
+      notify({
+        id: "popup_not_found",
+        title: tl2(trans.value_failed_to_load, { v: `${key} (popup)` }),
+        body: `Missing title and/or body for translation key popup_${key}`,
+        type: "error"
+      });
+      popup_queue = popup_queue.filter((i) => i.key != key);
+      check_queue();
+      return;
+    }
+    log(`registered for ${key}`, "popup", "info", { title, body, key, host });
+    instance.visible = true;
+    const tooltip = tippy_esm_default(host, {
+      theme: "popup",
+      content: html.node`
+            <div class="popup-content">
+                <small class="popup-sub">${tl2(trans.tip)}</small>
+                <strong class="popup-title">${title}</strong>
+                <p class="popup-body">${body}</p>
+            </div>
+            <div class="popup-action">
+                <button class="see-more" onclick=${() => {
+        popup_queue = popup_queue.filter((i) => i.key != key);
+        tooltip.hide();
+        settings.popups_seen.push(key);
+        save_setting("popups_seen", settings.popups_seen);
+        setTimeout(() => {
+          tooltip.destroy();
+        }, 500);
+        check_queue();
+      }}>
+                    ${tl2(trans.got_it)}
+                </button>
+            </div>
+        `,
+      interactive: true,
+      hideOnClick: false,
+      appendTo: document.body,
+      aria: {
+        expanded: false
+      },
+      trigger: "manual",
+      zIndex: 998,
+      placement: prefer
+    });
+    tooltip.show();
+    host.scrollIntoView({
+      block: "center"
+    });
+  }
+
   // src/components/profile_header.js
   function redesign_profile_header(is_own_profile, is_following) {
     if (!auth.name) return;
@@ -32481,6 +32622,11 @@
         });
       }
     }
+    const manage = create_profile_top_item(profile_header, {
+      name: page.name,
+      type: "manage"
+    });
+    manage_user(manage);
     if (!page.mobile)
       page.structure.side.insertBefore(
         profile_header,
@@ -32830,6 +32976,9 @@
         `);
     }
     parent.appendChild(elem);
+    setTimeout(() => {
+      queue_popup("close_friends", elem);
+    }, 0);
   }
 
   // src/components/structure.js
@@ -34366,12 +34515,15 @@
     let exceeded = false;
     let exceed_amount = 10;
     let amount = 0;
-    list.forEach((item, index3) => {
+    Array.from(list).reverse().forEach((item, index3) => {
       let name = item.querySelector("td").textContent.trim();
       let form2 = item.querySelector("form");
       let button2 = form2.querySelector("button");
-      button2.classList.add("icon", "chibi", "danger-subtle");
-      button2.setAttribute("data-type", "trash");
+      button2.classList.add("btn", "icon", "chibi", "danger-subtle", "list-action");
+      button2.setAttribute("data-type", "x");
+      tippy_esm_default(button2, {
+        content: tl2(trans.remove)
+      });
       let entry = html.node`
             <div class="generic-table-list-entry user-vertical-list-item">
                 <div class="name">
@@ -34409,84 +34561,83 @@
     let form = page.structure.main.querySelector('[name="ignorelist"]');
     if (page.token == "")
       page.token = form.querySelector('[name="csrfmiddlewaretoken"]').getAttribute("value");
-    render(
-      panel,
-      html`
-            <h4>${tl2(trans.block_list)}</h4>
-            <div class="user-top-panel">
-                <div class="user-top-avatar user-top-avatar-side-left">
-                    <div class="bleh-icon"></div>
-                </div>
-                <img
-                    class="user-top-avatar user-top-avatar-main"
-                    src=${auth.avatar.replace("avatar42s", "avatar300s")}
-                    alt=${auth.name}
-                />
-                <div class="user-top-avatar user-top-avatar-side-right">
-                    <div class="bleh-icon"></div>
-                </div>
+    render(panel, html`
+        <h4>${tl2(trans.block_list)}</h4>
+        <div class="user-top-panel">
+            <div class="user-top-avatar user-top-avatar-side-left">
+                <div class="bleh-icon"></div>
             </div>
-            ${alert2}
-            <div class="setting" data-type="text">
-                <div class="heading">
-                    <h5>${tl2(trans.profile)}</h5>
-                    <form
-                        action="${root}settings/privacy#ignorelist"
-                        name="ignorelist"
-                        method="post"
-                    >
+            <img
+                class="user-top-avatar user-top-avatar-main"
+                src=${auth.avatar.replace("avatar42s", "avatar300s")}
+                alt=${auth.name}
+            />
+            <div class="user-top-avatar user-top-avatar-side-right">
+                <div class="bleh-icon"></div>
+            </div>
+        </div>
+        ${alert2}
+        <div class="setting" data-type="text">
+            <div class="heading">
+                <h5>${tl2(trans.profile)}</h5>
+                <form
+                    action="${root}settings/privacy#ignorelist"
+                    name="ignorelist"
+                    method="post"
+                >
+                    <input
+                        type="hidden"
+                        name="csrfmiddlewaretoken"
+                        value=${page.token}
+                    />
+                    <div class="input-container">
+                        <input
+                            type="text"
+                            maxlength="80"
+                            id="id_user"
+                            name="user"
+                            placeholder=${tl2(trans.enter_username)}
+                        />
                         <input
                             type="hidden"
-                            name="csrfmiddlewaretoken"
-                            value=${page.token}
+                            name="listaction"
+                            value="add"
                         />
-                        <div class="input-container">
-                            <input
-                                type="text"
-                                maxlength="80"
-                                id="id_user"
-                                name="user"
-                                placeholder=${tl2(trans.enter_username)}
-                            />
-                            <input
-                                type="hidden"
-                                name="listaction"
-                                value="add"
-                            />
-                            <input
-                                type="hidden"
-                                name="submit"
-                                value="ignorelist"
-                            />
-                            <button
-                                class="btn primary icon block"
-                                type="submit"
-                            >
-                                ${tl2(trans.block)}
-                            </button>
-                        </div>
-                    </form>
-                </div>
+                        <input
+                            type="hidden"
+                            name="submit"
+                            value="ignorelist"
+                        />
+                        <button
+                            class="btn primary icon block"
+                            type="submit"
+                        >
+                            ${tl2(trans.block)}
+                        </button>
+                    </div>
+                </form>
             </div>
-            <div class="alert alert-info">
-                ${tl2(trans.blocked_count).replace("{c}", amount)}
-            </div>
+        </div>
+        <div class="alert alert-info">
+            ${tl2(trans.blocked_count, { c: amount })}
+        </div>
+        <div class="setting-group">
             ${new_list}
-            <div class="sep" />
-            <h5>${tl2(trans.when_blocked)}</h5>
-            <div class="to-consider">
-                <ul class="to-consider-good">
-                    <li>${tl2(trans.blocked_user_public)}</li>
-                    <li>${tl2(trans.blocked_user_message)}</li>
-                    <li>${tl2(trans.blocked_user_new_shouts)}</li>
-                </ul>
-                <ul class="to-consider-bad">
-                    <li>${tl2(trans.blocked_user_old_shouts)}</li>
-                    <li>${tl2(trans.blocked_user_view_profile)}</li>
-                </ul>
-            </div>
-        `
-    );
+        </div>
+        <div class="sep" />
+        <h5>${tl2(trans.when_blocked)}</h5>
+        <div class="to-consider">
+            <ul class="to-consider-good">
+                <li>${tl2(trans.blocked_user_public)}</li>
+                <li>${tl2(trans.blocked_user_message)}</li>
+                <li>${tl2(trans.blocked_user_new_shouts)}</li>
+            </ul>
+            <ul class="to-consider-bad">
+                <li>${tl2(trans.blocked_user_old_shouts)}</li>
+                <li>${tl2(trans.blocked_user_view_profile)}</li>
+            </ul>
+        </div>
+    `);
   }
   function patch_settings_privacy_panel(token, privacy_panel) {
     privacy_panel.classList.add("bleh--panel");
@@ -35388,88 +35539,6 @@
     return string.replace(/^[,\-–—.;:|•·]+\s*/, "").replace(/\s*[,\-–—.;:|•·]+$/, "").trim();
   }
 
-  // src/components/popup.js
-  var popup_queue = [];
-  function queue_popup(key, host, prefer = "top") {
-    if (!host || !host.offsetParent) {
-      log(`skipped adding ${key} as the host is not accessible (probably intentional)`, "popup", "info", { key, host });
-      return;
-    }
-    if (settings.popups_seen.includes(key)) {
-      log(`skipped adding ${key} as popup has previously been dismissed`, "popup", "info", { key, host });
-      return;
-    }
-    popup_queue.push({ key, host, prefer });
-    check_queue();
-  }
-  function clear_popup_queue() {
-    popup_queue = [];
-  }
-  function check_queue() {
-    const first = popup_queue[0];
-    if (!first) return;
-    if (first.visible) return;
-    popup(first);
-  }
-  function popup(instance) {
-    const key = instance.key;
-    const host = instance.host;
-    const prefer = instance.prefer;
-    const title = tl2(trans[`popup_${key}`]?.title);
-    const body = tl2(trans[`popup_${key}`]?.body);
-    if ([title, body].includes(translation_fallback)) {
-      log(`popup_${key} not found in translations`, "popup", "error", { title, body, key, host });
-      notify({
-        id: "popup_not_found",
-        title: tl2(trans.value_failed_to_load, { v: `${key} (popup)` }),
-        body: `Missing title and/or body for translation key popup_${key}`,
-        type: "error"
-      });
-      popup_queue = popup_queue.filter((i) => i.key != key);
-      check_queue();
-      return;
-    }
-    log(`registered for ${key}`, "popup", "info", { title, body, key, host });
-    instance.visible = true;
-    const tooltip = tippy_esm_default(host, {
-      theme: "popup",
-      content: html.node`
-            <div class="popup-content">
-                <small class="popup-sub">${tl2(trans.tip)}</small>
-                <strong class="popup-title">${title}</strong>
-                <p class="popup-body">${body}</p>
-            </div>
-            <div class="popup-action">
-                <button class="see-more" onclick=${() => {
-        popup_queue = popup_queue.filter((i) => i.key != key);
-        tooltip.hide();
-        settings.popups_seen.push(key);
-        save_setting("popups_seen", settings.popups_seen);
-        setTimeout(() => {
-          tooltip.destroy();
-        }, 500);
-        check_queue();
-      }}>
-                    ${tl2(trans.got_it)}
-                </button>
-            </div>
-        `,
-      interactive: true,
-      hideOnClick: false,
-      appendTo: document.body,
-      aria: {
-        expanded: false
-      },
-      trigger: "manual",
-      zIndex: 998,
-      placement: prefer
-    });
-    tooltip.show();
-    host.scrollIntoView({
-      block: "center"
-    });
-  }
-
   // src/pages/profile.js
   async function bleh_profiles() {
     if (page.subpage == "obsessions_obsession") {
@@ -35573,9 +35642,11 @@
     if (ff("profile_fonts") && settings.display_name_styles) {
       profile_name.setAttribute("data-font", cache2.font);
       profile_name.setAttribute("data-font-style", cache2.font_style);
-      setTimeout(() => {
-        queue_popup("profile_name_style", profile_name, "bottom");
-      }, 0);
+      if (cache2.font || cache2.font_style) {
+        setTimeout(() => {
+          queue_popup("profile_name_style", profile_name, "bottom");
+        }, 0);
+      }
     }
     if (!avatar2) {
       avatar2 = profile_header.querySelector(".header-avatar-add");
@@ -36164,26 +36235,37 @@
     let note;
     about_me_sidebar.after(html.node`
         <section class="bleh--panel bleh--profile-note-panel">
-            <h2>${tl2(trans.notes)}</h2>
-            <div class="content-form">
-                <textarea id="bleh--profile-note" placeholder=${tl2(trans.anything_you_can_imagine)} ref=${(el) => note = el}>${has_note ?? has_note}</textarea>
-            </div>
-            <div class="actions">
-                <button class="see-more cancel" onclick=${() => {
+            <div class="top-container">
+                <h2>${tl2(trans.notes)}</h2>
+                <div class="view-buttons blend blend-v2">
+                    <button class="see-more left-icon blend-v2-btn" data-type="delete" onclick=${() => {
       let notes = JSON.parse(
         localStorage.getItem("bleh_profile_notes")
       ) || {};
       delete notes[page.name];
       note.value = "";
       set_storage("bleh_profile_notes", JSON.stringify(notes));
+      status({
+        id: "note",
+        title: tl2(trans.cleared_note_for_user, { u: page.name })
+      });
     }}>${tl2(trans.clear)}</button>
-                <button class="btn primary icon" data-type="save" onclick=${() => {
+                    <button class="see-more left-icon blend-v2-btn" data-type="save" onclick=${() => {
       let notes = JSON.parse(
         localStorage.getItem("bleh_profile_notes")
       ) || {};
-      notes[page.name] = note.value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+      notes[page.name] = note.value;
       set_storage("bleh_profile_notes", JSON.stringify(notes));
+      status({
+        id: "note",
+        title: tl2(trans.saved_note_for_user, { u: page.name }),
+        body: note.value
+      });
     }}>${tl2(trans.save)}</button>
+                </div>
+            </div>
+            <div class="content-form">
+                <textarea id="bleh--profile-note" placeholder=${tl2(trans.anything_you_can_imagine)} ref=${(el) => note = el}>${has_note ?? has_note}</textarea>
             </div>
         </section>
     `);
@@ -53641,15 +53723,31 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                     <a class="mention" href="${root}user/${user}">@${user}</a>
                 </div>
                 <div class="text preview">
-                    <p id="profile-note-row-preview--${user}">${{ html: profile_notes[user] }}</p>
+                    <p id="profile-note-row-preview--${user}">${profile_notes[user]}</p>
                 </div>
                 <div class="actions">
-                    <button class="icon chibi edit" onclick=${() => edit_profile_note(user)}>
-                        ${tl2(trans.delete)}
-                    </button>
-                    <button class="icon chibi delete danger-subtle" onclick=${() => delete_profile_note(user)}>
-                        ${tl2(trans.delete)}
-                    </button>
+                    ${() => {
+        const btn = html.node`
+                            <button class="btn icon chibi list-action" data-type="edit" onclick=${() => edit_profile_note(user)}>
+                                ${tl2(trans.edit)}
+                            </button>
+                        `;
+        tippy_esm_default(btn, {
+          content: btn.textContent
+        });
+        return btn;
+      }}
+                    ${() => {
+        const btn = html.node`
+                            <button class="btn icon chibi danger-subtle list-action" data-type="delete" onclick=${() => delete_profile_note(user)}>
+                                ${tl2(trans.delete)}
+                            </button>
+                        `;
+        tippy_esm_default(btn, {
+          content: btn.textContent
+        });
+        return btn;
+      }}
                 </div>
             </div>
         `);
@@ -65161,6 +65259,15 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       ru: "\u0417\u0434\u0435\u0441\u044C \u043D\u0435\u0442 \u043F\u0440\u043E\u0444\u0438\u043B\u0435\u0439... (\uFF61\u2022\u0301\uFE3F\u2022\u0300\uFF61)",
       pl: "A profili brak... (\uFF61\u2022\u0301\uFE3F\u2022\u0300\uFF61)"
     },
+    saved_note_for_user: {
+      en: "Saved note for {u}"
+    },
+    cleared_note_for_user: {
+      en: "Cleared note for {u}"
+    },
+    manage: {
+      en: "Manage"
+    },
     font: {
       name: {
         en: "Font choice",
@@ -71309,6 +71416,16 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         default: true,
         name: "Enable a february exclusive feature",
         date: "2026-01-29"
+      },
+      can_block_in_menu: {
+        default: false,
+        name: "Can block user from menu",
+        date: "2026-01-30"
+      },
+      can_report_in_menu: {
+        default: true,
+        name: "Can report user from menu",
+        date: "2026-01-30"
       }
     }
   };

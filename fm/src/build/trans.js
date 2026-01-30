@@ -5700,6 +5700,15 @@ export const trans = {
         ru: 'Здесь нет профилей... (｡•́︿•̀｡)',
         pl: 'A profili brak... (｡•́︿•̀｡)'
     },
+    saved_note_for_user: {
+        en: 'Saved note for {u}'
+    },
+    cleared_note_for_user: {
+        en: 'Cleared note for {u}'
+    },
+    manage: {
+        en: 'Manage'
+    },
     font: {
         name: {
             en: 'Font choice',
