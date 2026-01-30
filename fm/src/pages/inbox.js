@@ -178,7 +178,7 @@ export async function bleh_inbox() {
                 <a class="inbox-message-sender-name" href="${root}user/${auth.name}">${auth.name}</a>
             </div>
             <div class="message-content">
-                <h2 class="text-18">Send a reply</h2>
+                <h2 class="text-18">${tl(trans.send_a_reply)}</h2>
                 <form method="post" action=${form.getAttribute('action')}>
                     ${token}
                     <div class="setting-group">

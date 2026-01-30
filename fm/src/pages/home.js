@@ -126,8 +126,6 @@ export async function bleh_home() {
 
     page.structure.container.insertBefore(welcome, page.structure.container.firstElementChild);
 
-    let native_settings;
-
     let nav;
     if (auth.name) {
         nav = html.node`
@@ -166,7 +164,7 @@ export async function bleh_home() {
                     </li>
                     ` : ''}
                     <li class="fill"></li>
-                    <li class="navlist-item secondary-nav-item secondary-nav-item--settings" ref=${el => native_settings = el}>
+                    <li class="navlist-item secondary-nav-item secondary-nav-item--settings">
                         <a href="${root}settings" class="secondary-nav-item-link ${(page.type == 'settings') ? 'secondary-nav-item-link--active' : ''}">
                             ${tl(trans.settings)}
                         </a>
@@ -207,8 +205,6 @@ export async function bleh_home() {
     page.structure.nav = nav;
     welcome.after(nav);
     checkup_nav();
-
-    if (native_settings) queue_popup('native_settings', native_settings);
 
     if (page.type == 'charts')
         bleh_charts();

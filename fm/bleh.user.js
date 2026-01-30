@@ -56668,7 +56668,6 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         `;
     }
     page.structure.container.insertBefore(welcome, page.structure.container.firstElementChild);
-    let native_settings;
     let nav;
     if (auth.name) {
       nav = html.node`
@@ -56707,7 +56706,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                     </li>
                     ` : ""}
                     <li class="fill"></li>
-                    <li class="navlist-item secondary-nav-item secondary-nav-item--settings" ref=${(el) => native_settings = el}>
+                    <li class="navlist-item secondary-nav-item secondary-nav-item--settings">
                         <a href="${root}settings" class="secondary-nav-item-link ${page.type == "settings" ? "secondary-nav-item-link--active" : ""}">
                             ${tl2(trans.settings)}
                         </a>
@@ -56747,7 +56746,6 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     page.structure.nav = nav;
     welcome.after(nav);
     checkup_nav();
-    if (native_settings) queue_popup("native_settings", native_settings);
     if (page.type == "charts")
       bleh_charts();
     if (page.type == "settings")
@@ -57512,7 +57510,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                 <a class="inbox-message-sender-name" href="${root}user/${auth.name}">${auth.name}</a>
             </div>
             <div class="message-content">
-                <h2 class="text-18">Send a reply</h2>
+                <h2 class="text-18">${tl2(trans.send_a_reply)}</h2>
                 <form method="post" action=${form.getAttribute("action")}>
                     ${token}
                     <div class="setting-group">
@@ -69455,14 +69453,6 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "You can choose which actions to show here by right-clicking for more options"
       }
     },
-    popup_native_settings: {
-      title: {
-        en: "Access your account settings here"
-      },
-      body: {
-        en: "You can then configure the extension by looking out for the bleh logo below"
-      }
-    },
     popup_inbox: {
       title: {
         en: "Find your inbox combined"
@@ -69502,6 +69492,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       body: {
         en: "Searching has never been easier to access, plus it hides away when you\u2019re scrolled up"
       }
+    },
+    send_a_reply: {
+      en: "Send a reply"
     }
   };
   var translation_fallback = "NO_TRANSLATION_FOUND";

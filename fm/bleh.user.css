@@ -30019,22 +30019,6 @@
                 color: hsl(var(--c2), 80%);
             }
         }
-
-        translate: 0 0;
-
-        &.has-hover {
-            transition-property: transform;
-            transition-duration: 0.3s;
-            transition-timing-function: var(--trans-function-ani);
-
-            &:hover {
-                transform: translateY(-1px);
-            }
-        }
-
-        animation: status_cafe 0.5s var(--trans-function-ani);
-        animation-delay: 0.1s;
-        animation-fill-mode: backwards;
     }
 
     @keyframes status_cafe {

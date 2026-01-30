@@ -9990,14 +9990,6 @@ export const trans = {
             en: 'You can choose which actions to show here by right-clicking for more options'
         }
     },
-    popup_native_settings: {
-        title: {
-            en: 'Access your account settings here'
-        },
-        body: {
-            en: 'You can then configure the extension by looking out for the bleh logo below'
-        }
-    },
     popup_inbox: {
         title: {
             en: 'Find your inbox combined'
@@ -10037,6 +10029,9 @@ export const trans = {
         body: {
             en: 'Searching has never been easier to access, plus it hides away when you’re scrolled up'
         }
+    },
+    send_a_reply: {
+        en: 'Send a reply'
     }
 };
 
