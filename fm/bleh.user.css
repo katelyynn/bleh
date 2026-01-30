@@ -2049,10 +2049,9 @@
         }
     }
 
-    .bleh-logo,
+    .navigation-item,
     .inbox-item,
     .masthead-search-form,
-    .bleh--version,
     .masthead-nav-control
     {
         &:not(:hover, :focus, :focus-visible, :focus-within, [aria-expanded="true"]) {
