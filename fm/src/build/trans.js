@@ -7533,6 +7533,9 @@ export const trans = {
     },
     made_with_love: {
         // lowercase in design
+        // h: replaced with a heart symbol, so treat it like the word 'love'
+        // u: me (kate)
+        // c, /c: just leave be - translate the contributors text inside
         en: 'made with {h} by {u} and {c}contributors{/c}',
         de: 'mit {h} gemacht von {u} und {c}mitwirkenden{/c}',
         es: 'hecho con {h} por {u} y {c}contribuidores{/c}',
@@ -7540,6 +7543,12 @@ export const trans = {
         pt: 'feito com {h} por {u} e {c}contribuidores{/c}',
         sv: 'skapad med {h} av {u} och {c}bidragsgivare{/c}',
         ru: 'сделано с {h} от {u} и {c}участников{/c}'
+    },
+    supported_by: {
+        // lowercase in design
+        // ignore the curly brackets, only translate the '{c} wonderful people' thing
+        // c: replaced with a number of sponsors
+        en: '{s}{c} sponsoring{/s} ♡'
     },
     love_lower: {
         // replaces the {h} in the above sentence
@@ -9965,13 +9974,30 @@ export const trans = {
     },
     valentine_info: {
         en: 'You’re seeing this as {u} is on your bleh close friends list, you have a high compatibility, and it’s Valentines Day!'
+    },
+    got_it: {
+        // used when dismissing a popup
+        en: 'Got it'
+    },
+    tip: {
+        en: 'Tip'
+    },
+    popup_navigation_menu: {
+        title: {
+            en: 'This is your navigator'
+        },
+        body: {
+            en: 'You can choose which actions to show here by right-clicking for more options'
+        }
     }
 };
+
+export const translation_fallback = 'NO_TRANSLATION_FOUND';
 
 export function tl(key, replacements = {}) {
     if (!key) {
         log('your key is undefined', 'trans');
-        return 'NO_TRANSLATION_FOUND';
+        return translation_fallback;
     }
 
     let translation = key[lang] || key.en;

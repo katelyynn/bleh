@@ -86,9 +86,10 @@ import { prepare_music } from './components/music.js';
 import { page_menu } from './components/menu.js';
 import { seasonal_colour_switch } from './components/settings.js';
 import florence from '@tealmiku/florence';
-import tippy, { hideAll } from 'tippy.js';
+import { hideAll } from 'tippy.js';
 import { notices } from './components/notices.js';
 import { tag_page } from './components/tags.js';
+import { clear_popup_queue } from './components/popup.js';
 
 export function bleh() {
     florence({
@@ -381,7 +382,9 @@ function load_page(main_content = null) {
         clearInterval(page.state.activity_preview_timer);
 
     page.state.settings_page = '';
-    //hideAll({duration: 0});
+
+    hideAll({ duration: 0 });
+    clear_popup_queue();
 
     if (main_content) {
         auth.pro = !!main_content.querySelector(

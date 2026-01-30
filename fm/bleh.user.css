@@ -2520,29 +2520,27 @@
     .footer {
         background: transparent;
         color: hsl(var(--c3));
-        padding: 0 0 120px 0;
+        padding: 120px 0 120px 0;
 
         display: flex;
         flex-direction: column;
-        align-items: center;
-        gap: var(--card-gap);
+        gap: 4px;
+
+        width: calc(var(--content-width) - (var(--card-padding) * 2));
+        margin: 0 auto;
 
         .footer-credit {
             font-weight: var(--font-weight);
             cursor: default;
-            padding-top: 120px;
-            width: calc(var(--cards-width) - (var(--card-padding) * 2));
 
             display: flex;
-            flex-direction: column;
             align-items: center;
-            justify-content: center;
-            gap: 10px;
+            gap: var(--card-padding);
 
             & > p {
                 margin: unset;
 
-                & > a {
+                .b {
                     font-weight: var(--font-weight-medium);
                 }
             }
@@ -2552,29 +2550,56 @@
 
                 &.heart {
                     --icon: var(--icon-16-heart-solid);
-                    --icon-size: 15px;
+                    --icon-size: 14px;
                     color: hsl(var(--l3-c));
                     vertical-align: middle;
                     margin: 0 2px;
 
-                    transition-property: transform;
+                    transition-property: scale;
                     transition-duration: 0.6s;
                     transition-timing-function: var(--trans-function);
 
                     cursor: pointer;
 
+                    scale: 1;
+
+                    translate: 0 -1px;
+
                     &:hover {
-                        transform: scale(1.18);
+                        scale: 1.15;
                     }
                 }
             }
         }
         .footer-web {
+            display: flex;
+            gap: 10px;
             cursor: default;
 
-            a {
+            .footer-link {
                 cursor: pointer;
+                position: relative;
+                --icon-size: 14px;
+                padding-left: calc(var(--icon-size) + 4px);
+                --left: 0;
             }
+        }
+
+        .footer-bleh-top {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 4px var(--card-padding);
+        }
+
+        .bleh-logo-footer {
+            font-size: 32px;
+            line-height: 32px;
+            margin-top: -7px;
+            font-family: var(--font-brand);
+            font-weight: 900;
+            color: hsl(var(--c3)) !important;
+            text-decoration: none !important;
         }
 
         .footer-extras {
@@ -8730,6 +8755,7 @@
     }
 
     /*     ICON MASK     */
+    .footer-link:before,
     .show-more > a:before,
     .markdown-action:before,
     .report-dropdown-button:before,
@@ -30445,5 +30471,42 @@
 
     .not-text {
         cursor: default !important;
+    }
+
+
+    .tippy-box[data-theme="popup"] {
+        padding: 12px;
+
+        & > .tippy-content {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+
+            text-align: left;
+        }
+    }
+
+    .popup-sub {
+        display: block;
+        font-size: 11px;
+        color: hsl(var(--c3));
+        cursor: default;
+        user-select: none;
+    }
+
+    .popup-title {
+        cursor: default;
+    }
+
+    .popup-body {
+        max-width: 280px;
+        cursor: default;
+    }
+
+    .popup-action {
+        display: flex;
+        justify-content: end;
+
+        --font-size: 13px;
     }
 }

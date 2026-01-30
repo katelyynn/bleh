@@ -29319,7 +29319,7 @@
     if (badges)
       avatar2.appendChild(create_badge(badges[badges.length - 1], true));
     let image_header;
-    const popup = tippy_esm_default(parent ? parent : avatar2, {
+    const popup2 = tippy_esm_default(parent ? parent : avatar2, {
       theme: "context-menu",
       content: html.node`
             <div class="track-preview user-preview">
@@ -29378,7 +29378,7 @@
       trigger: "click",
       appendTo: document.body
     });
-    register_menu(parent ? parent : avatar2, popup);
+    register_menu(parent ? parent : avatar2, popup2);
     control_gif_pause(avatar_img);
     if (badges) return badges[badges.length - 1];
     else if (pre_existing_badge)
@@ -50152,6 +50152,73 @@
     });
   }
 
+  // src/components/popup.js
+  var popup_queue = [];
+  function queue_popup(key, host) {
+    if (!host || !host.offsetParent) {
+      log(`skipped adding ${key} as the host is not accessible (probably intentional)`, "popup", "info", { key, host });
+      return;
+    }
+    popup_queue.push({ key, host });
+    check_queue();
+  }
+  function clear_popup_queue() {
+    popup_queue = [];
+  }
+  function check_queue() {
+    const first = popup_queue[0];
+    if (!first) return;
+    popup(first.key, first.host);
+  }
+  function popup(key, host) {
+    const title = tl2(trans[`popup_${key}`]?.title);
+    const body = tl2(trans[`popup_${key}`]?.body);
+    if ([title, body].includes(translation_fallback)) {
+      log(`popup_${key} not found in translations`, "popup", "error", { title, body, key, host });
+      notify({
+        id: "popup_not_found",
+        title: tl2(trans.value_failed_to_load, { v: `${key} (popup)` }),
+        body: `Missing title and/or body for translation key popup_${key}`,
+        type: "error"
+      });
+      popup_queue = popup_queue.filter((i) => i.key != key);
+      check_queue();
+      return;
+    }
+    log(`registered for ${key}`, "popup", "info", { title, body, key, host });
+    const tooltip = tippy_esm_default(host, {
+      theme: "popup",
+      content: html.node`
+            <div class="popup-content">
+                <small class="popup-sub">${tl2(trans.tip)}</small>
+                <strong class="popup-title">${title}</strong>
+                <p class="popup-body">${body}</p>
+            </div>
+            <div class="popup-action">
+                <button class="see-more" onclick=${() => {
+        popup_queue = popup_queue.filter((i) => i.key != key);
+        tooltip.hide();
+        setTimeout(() => {
+          tooltip.destroy();
+        }, 500);
+        check_queue();
+      }}>
+                    ${tl2(trans.got_it)}
+                </button>
+            </div>
+        `,
+      interactive: true,
+      hideOnClick: false,
+      appendTo: document.body,
+      aria: {
+        expanded: false
+      },
+      trigger: "manual",
+      zIndex: 998
+    });
+    tooltip.show();
+  }
+
   // src/navigation.js
   function patch_masthead() {
     let masthead_logo = document.body.querySelector(".masthead-logo");
@@ -50423,6 +50490,7 @@
         <p class="auth-link-name">${auth.name}</p>
     `;
     auth_link2.appendChild(name);
+    queue_popup("navigation_menu", auth_link2);
     load_profile_cache_externally(auth.name).then((cache2) => {
       if (cache2.username) name.textContent = cache2.username;
     });
@@ -58144,50 +58212,58 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     render(
       footer,
       html`
-            <div class="footer-credit">
-                <p>
-                    ${{
+            <div class="footer-bleh">
+                <a class="bleh-logo-footer" href="https://bleh.katelyn.moe" target="_blank">
+                    ${version.brand}
+                </a>
+            </div>
+            <div class="footer-bleh-top">
+                <div class="footer-credit">
+                    <p>
+                        ${{
         html: tl2(trans.made_with_love, {
-          u: `<a href="${root}user/${kate}">${kate}</a>`,
-          c: '<a href="https://github.com/katelyynn/bleh/graphs/contributors" target="_blank">',
+          u: `<a class="b" href="${root}user/${kate}">${kate}</a>`,
+          c: '<a class="b" href="https://github.com/katelyynn/bleh/graphs/contributors" target="_blank">',
           "/c": "</a>",
           h: `<span class="bleh-icon heart sponsor-related colourful">${tl2(trans.love_lower)}</span>`
         })
       }}
-                </p>
-                ${lang != "en" && lang in lang_info ? html.node`
-                        <p>
-                            ${{
+                    </p>
+                    <p>
+                        <a onclick=${() => sponsor()}>${{ html: tl2(trans.supported_by, { c: 57, s: '<span class="b">', "/s": "</span>" }) }}</a>
+                    </p>
+                    ${lang != "en" && lang in lang_info ? html.node`
+                            <p>
+                                ${{
         html: tl2(trans.translations, {
           l: lang_info[lang].name,
-          u: lang_info[lang].by.map(
-            (user) => `<a href="${root}user/${user}">${user}</a>`
-          ).join(", ")
+          u: `<span class="b">${lang_info[lang].by.map((user) => `<a href="${root}user/${user}">${user}</a>`).join(", ")}</span>`
         })
       }}
-                        </p>
-                    ` : ""}
-            </div>
-            <div class="footer-web music-links">
-                <a
-                    class="music-link"
-                    data-type="source"
-                    href="https://github.com/katelyynn/bleh"
-                    target="_blank"
-                    >${tl2(trans.view_source)}</a
-                >
-                <a
-                    class="music-link"
-                    data-type="issue"
-                    href="https://github.com/katelyynn/bleh/issues/new/choose"
-                    target="_blank"
-                    >${tl2(trans.report_issue)}</a
-                >
-                <a
-                    class="more"
-                    onclick=${() => extras.toggleAttribute("aria-expanded")}
-                    ><span class="bleh-icon"
-                /></a>
+                            </p>
+                        ` : ""}
+                </div>
+                <div class="footer-web">
+                    <a
+                        class="footer-link"
+                        data-type="source"
+                        href="https://github.com/katelyynn/bleh"
+                        target="_blank"
+                        >${tl2(trans.view_source)}</a
+                    >
+                    <a
+                        class="footer-link"
+                        data-type="issue"
+                        href="https://github.com/katelyynn/bleh/issues/new/choose"
+                        target="_blank"
+                        >${tl2(trans.report_issue)}</a
+                    >
+                    <a
+                        class="more"
+                        onclick=${() => extras.toggleAttribute("aria-expanded")}
+                        ><span class="bleh-icon"
+                    /></a>
+                </div>
             </div>
             ${extras}
         `
@@ -58980,6 +59056,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     if (page.state.activity_preview_timer)
       clearInterval(page.state.activity_preview_timer);
     page.state.settings_page = "";
+    hideAll({ duration: 0 });
+    clear_popup_queue();
     if (main_content) {
       auth.pro = !!main_content.querySelector(
         ":scope > .masthead > .masthead-pro-wrap"
@@ -66885,6 +66963,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     made_with_love: {
       // lowercase in design
+      // h: replaced with a heart symbol, so treat it like the word 'love'
+      // u: me (kate)
+      // c, /c: just leave be - translate the contributors text inside
       en: "made with {h} by {u} and {c}contributors{/c}",
       de: "mit {h} gemacht von {u} und {c}mitwirkenden{/c}",
       es: "hecho con {h} por {u} y {c}contribuidores{/c}",
@@ -66892,6 +66973,12 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "feito com {h} por {u} e {c}contribuidores{/c}",
       sv: "skapad med {h} av {u} och {c}bidragsgivare{/c}",
       ru: "\u0441\u0434\u0435\u043B\u0430\u043D\u043E \u0441 {h} \u043E\u0442 {u} \u0438 {c}\u0443\u0447\u0430\u0441\u0442\u043D\u0438\u043A\u043E\u0432{/c}"
+    },
+    supported_by: {
+      // lowercase in design
+      // ignore the curly brackets, only translate the '{c} wonderful people' thing
+      // c: replaced with a number of sponsors
+      en: "{s}{c} sponsoring{/s} \u2661"
     },
     love_lower: {
       // replaces the {h} in the above sentence
@@ -69319,12 +69406,28 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     valentine_info: {
       en: "You\u2019re seeing this as {u} is on your bleh close friends list, you have a high compatibility, and it\u2019s Valentines Day!"
+    },
+    got_it: {
+      // used when dismissing a popup
+      en: "Got it"
+    },
+    tip: {
+      en: "Tip"
+    },
+    popup_navigation_menu: {
+      title: {
+        en: "This is your navigator"
+      },
+      body: {
+        en: "You can choose which actions to show here by right-clicking for more options"
+      }
     }
   };
+  var translation_fallback = "NO_TRANSLATION_FOUND";
   function tl2(key, replacements = {}) {
     if (!key) {
       log("your key is undefined", "trans");
-      return "NO_TRANSLATION_FOUND";
+      return translation_fallback;
     }
     let translation = key[lang] || key.en;
     for (const [placeholder, value] of Object.entries(replacements)) {

@@ -38,6 +38,7 @@ import { match } from './components/dynamic_theming.js';
 import { DateTime } from 'luxon';
 import { input } from './components/input.js';
 import { bleh_message_list } from './components/messages.js';
+import { queue_popup } from './components/popup.js';
 
 export function patch_masthead() {
     let masthead_logo = document.body.querySelector('.masthead-logo');
@@ -352,6 +353,8 @@ export function append_nav() {
         <p class="auth-link-name">${auth.name}</p>
     `;
     auth_link.appendChild(name);
+
+    queue_popup('navigation_menu', auth_link);
 
     load_profile_cache_externally(auth.name).then(cache => {
         if (cache.username) name.textContent = cache.username;
