@@ -25627,28 +25627,19 @@
                 display: flex;
                 gap: var(--button-list-gap);
                 flex-shrink: 0;
-
-                & > .edit {
-                    --mask: var(--icon-16-edit);
-
-                }
-
-                & > .delete {
-                    --mask: var(--icon-16-trash);
-                }
             }
         }
     }
 
     .list-action {
         --bg: transparent;
-        --bg-hov: hsl(var(--b3), 40%);
-        --bg-atv: hsl(var(--b3), 60%);
+        --bg-hov: hsl(var(--b4), 40%);
+        --bg-atv: hsl(var(--b4), 60%);
         --shadow: none;
 
         &.danger-subtle {
             --bg-hov: hsl(var(--h4), 20%);
-            --bg-atv: hsl(var(--h4), 40%);
+            --bg-atv: hsl(var(--h4), 30%);
             --col: hsl(var(--l3-c));
             --mask-colour: color-mix(
                 in hsl,
