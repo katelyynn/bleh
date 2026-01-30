@@ -14,8 +14,6 @@ import tippy from 'tippy.js';
 export function load_badges(user, solo = false) {
     if (!sponsor_list || !sponsor_list.badges) return;
 
-    if (!sponsor_list.badges.hasOwnProperty(user)) return;
-
     let badges = [];
 
     // create modern translation badges
@@ -31,26 +29,28 @@ export function load_badges(user, solo = false) {
         });
     }
 
-    if (!Array.isArray(sponsor_list.badges[user])) {
-        log('1 badge found', 'sponsor', 'info', sponsor_list.badges[user]);
-        badges.push(sponsor_list.badges[user]);
-    } else {
-        log(
-            'multiple badges found',
-            'sponsor',
-            'info',
-            sponsor_list.badges[user]
-        );
+    if (sponsor_list.badges.hasOwnProperty(user)) {
+        if (!Array.isArray(sponsor_list.badges[user])) {
+            log('1 badge found', 'sponsor', 'info', sponsor_list.badges[user]);
+            badges.push(sponsor_list.badges[user]);
+        } else {
+            log(
+                'multiple badges found',
+                'sponsor',
+                'info',
+                sponsor_list.badges[user]
+            );
 
-        badges = [...badges, ...sponsor_list.badges[user]];
+            badges = [...badges, ...sponsor_list.badges[user]];
+        }
+
+        // remove old translation badges
+        badges = badges.filter(badge => {
+            if (badge.type != 'translation') return true;
+
+            return 'translation_code' in badge;
+        });
     }
-
-    // remove old translation badges
-    badges = badges.filter(badge => {
-        if (badge.type != 'translation') return true;
-
-        return 'translation_code' in badge;
-    });
 
     // now we run thru to add missing metadata
     badges.forEach((badge) => {

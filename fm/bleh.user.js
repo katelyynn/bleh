@@ -28989,7 +28989,6 @@
   // src/components/badge.js
   function load_badges(user, solo = false) {
     if (!sponsor_list || !sponsor_list.badges) return;
-    if (!sponsor_list.badges.hasOwnProperty(user)) return;
     let badges = [];
     const trans_contributions = get_trans_contributions(user);
     log(`found ${trans_contributions.length} contribution(s) for ${user}`, "sponsor", "info", { trans_contributions });
@@ -29002,22 +29001,24 @@
         });
       });
     }
-    if (!Array.isArray(sponsor_list.badges[user])) {
-      log("1 badge found", "sponsor", "info", sponsor_list.badges[user]);
-      badges.push(sponsor_list.badges[user]);
-    } else {
-      log(
-        "multiple badges found",
-        "sponsor",
-        "info",
-        sponsor_list.badges[user]
-      );
-      badges = [...badges, ...sponsor_list.badges[user]];
+    if (sponsor_list.badges.hasOwnProperty(user)) {
+      if (!Array.isArray(sponsor_list.badges[user])) {
+        log("1 badge found", "sponsor", "info", sponsor_list.badges[user]);
+        badges.push(sponsor_list.badges[user]);
+      } else {
+        log(
+          "multiple badges found",
+          "sponsor",
+          "info",
+          sponsor_list.badges[user]
+        );
+        badges = [...badges, ...sponsor_list.badges[user]];
+      }
+      badges = badges.filter((badge) => {
+        if (badge.type != "translation") return true;
+        return "translation_code" in badge;
+      });
     }
-    badges = badges.filter((badge) => {
-      if (badge.type != "translation") return true;
-      return "translation_code" in badge;
-    });
     badges.forEach((badge) => {
       badge = process_badge(badge, user);
     });
