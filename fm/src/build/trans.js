@@ -3412,6 +3412,10 @@ export const trans = {
         // based on the default message last.fm shows
         en: 'Your compatibility with {u} is {r}.\nYou both listen to {a}.'
     },
+    subject: {
+        // as in an email/message subject
+        en: 'Subject'
+    },
     message: {
         // as in a direct message
         en: 'Message',

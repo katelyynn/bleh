@@ -359,6 +359,11 @@
             "default": false,
             "name": "Non-pro editing",
             "date": "2025-11-10"
+        },
+        "sandrone": {
+            "default": false,
+            "name": "Enable a february exclusive feature",
+            "date": "2026-01-29"
         }
     }
 }

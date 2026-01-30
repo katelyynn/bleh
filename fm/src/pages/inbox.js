@@ -4,18 +4,19 @@
 // Licensed under GPLv3
 //
 
-import {patch_avatar, return_name_from_avatar} from "../avatar";
+import {patch_avatar, return_name_from_avatar, style_name_from_badge} from "../avatar";
 import {log} from "../build/log";
-import {auth, page} from "../build/page";
-import {sanitise} from "../build/tools";
+import {auth, page, root} from "../build/page";
+import {copy, sanitise} from "../build/tools";
 import {checkup_page_structure} from "../components/structure";
 import {register_background, update_page} from "../page";
 import {bleh_notification_list} from "../components/notifications.js";
 import { tl, trans } from "../build/trans.js";
-import { html } from "lighterhtml";
+import { html, render } from "lighterhtml";
 import { load_profile_cache_externally } from "./profile.js";
 import { bleh_message_list } from "../components/messages.js";
 import { toggle } from "../components/toggle.js";
+import tippy from "tippy.js";
 
 export async function bleh_inbox() {
     page.structure.container = document.body.querySelector('.page-content');
@@ -90,19 +91,125 @@ export async function bleh_inbox() {
 
         if (alert) inbox.appendChild(alert);
 
+        const message = inbox.querySelector('.inbox-message');
 
-        let sender_panel = inbox.querySelector('.inbox-message-sender-avatar');
-        let sender_name = inbox.querySelector('.inbox-message-sender-name');
-        let sender_time = inbox.querySelector('.inbox-message-timestamp');
+        const sender_avatar = message.querySelector('.inbox-message-sender-avatar');
+        const sender_name = message.querySelector('.inbox-message-sender-name');
+        const sender_time = message.querySelector('.inbox-message-timestamp');
 
-        sender_panel.appendChild(sender_name);
-        sender_panel.appendChild(sender_time);
+        const avatar = sender_avatar.querySelector('.avatar');
+        const name_text = sender_name.textContent.trim();
+        const badge = patch_avatar(avatar, sanitise(name_text));
 
-        let avatar = sender_panel.querySelector('.avatar');
-        let name_text = sanitise(sender_name.textContent.trim());
-        let badge = patch_avatar(avatar, name_text);
+        const message_subject = message.querySelector('.inbox-message-subject');
+        const message_preview = message.querySelector('.inbox-message-preview');
+        const message_buttons = message.querySelector('.inbox-message-buttons');
 
-        sender_panel.classList.add(`user-status--bleh-${badge.type}`, `user-status--bleh-user-${name_text}`);
+        message_buttons.querySelectorAll(':is(button, a)').forEach(link => {
+            const type = link.classList[0];
+
+            link.classList.add('btn', 'inbox-button');
+
+            if (type == 'back-button') {
+                link.textContent = tl(trans.back);
+            } else if (type == 'delete-button') {
+                link.classList.add('danger-subtle');
+                link.textContent = tl(trans.delete);
+            }
+        });
+
+        inbox.insertBefore(message_buttons, message);
+
+        let sender_panel;
+
+        render(message, html`
+            <div class="message-sender colourful" ref=${el => sender_panel = el}>
+                ${sender_avatar}
+                ${sender_name}
+                ${sender_time}
+                <div class="message-sender-actions">
+                    ${() => {
+                        const btn = html.node`
+                            <button class="btn message-sender-action icon chibi" data-type="copy" onclick=${() => {
+                                copy(name_text);
+                            }}>
+                                ${tl(trans.copy_username)}
+                            </button>
+                        `;
+
+                        tippy(btn, {
+                            content: btn.textContent
+                        });
+
+                        return btn;
+                    }}
+                </div>
+            </div>
+            <div class="message-content">
+                ${message_subject}
+                ${message_preview}
+            </div>
+        `);
+
+        style_name_from_badge(sender_panel, badge);
+
+        // reply
+
+        const content_form = inbox.querySelector('.content-form');
+        if (!content_form) return;
+
+        const form = content_form.querySelector('form');
+
+        const token = form.querySelector('[name="csrfmiddlewaretoken"]');
+        const subject = form.querySelector('[name=subject]');
+        const contents = form.querySelector('[name=message]');
+
+        content_form.classList = 'message-reply-section inbox-message';
+
+        let sender_panel_own;
+
+        render(content_form, html`
+            <div class="message-sender" ref=${el => sender_panel_own = el}>
+                <div class="inbox-message-sender-avatar">
+                    <span class="avatar" ref=${el => your_avatar = el}>
+                        <img src=${auth.avatar.replace('/avatar42s/', '/avatar70s/')} alt=${auth.name} loading="lazy" />
+                    </span>
+                </div>
+                <a class="inbox-message-sender-name" href="${root}user/${auth.name}">${auth.name}</a>
+            </div>
+            <div class="message-content">
+                <h2 class="text-18">Send a reply</h2>
+                <form method="post" action=${form.getAttribute('action')}>
+                    ${token}
+                    <div class="setting-group">
+                        <div class="setting v" data-type="text">
+                            <div class="heading">
+                                <h5>${tl(trans.subject)}</h5>
+                            </div>
+                            <div class="input-container content-form wide">
+                                ${subject}
+                            </div>
+                        </div>
+                        <div class="setting v" data-type="text">
+                            <div class="heading">
+                                <h5>${tl(trans.message)}</h5>
+                            </div>
+                            <div class="input-container content-form textarea">
+                                ${contents}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="settings-footer end gap">
+                        <button class="btn primary icon" data-type="message" type="submit">
+                            ${tl(trans.send)}
+                        </button>
+                    </div>
+                </form>
+            </div>
+        `);
+
+        const your_badge = patch_avatar(your_avatar, auth.name);
+        style_name_from_badge(sender_panel_own, your_badge);
     } else if (page.subpage.endsWith('overview')) {
         let inbox = page.structure.container.querySelector('.inbox');
         page.structure.main.appendChild(inbox);

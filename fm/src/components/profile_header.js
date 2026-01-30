@@ -27,8 +27,6 @@ export function redesign_profile_header(is_own_profile, is_following) {
     let base_header = document.body.querySelector('.header-info-secondary');
     if (!base_header) return;
 
-    let katsune = ff('katsune');
-
     // taste
     let taste = '';
     let taste_percentage = '';
@@ -200,7 +198,6 @@ export function redesign_profile_header(is_own_profile, is_following) {
     if (
         !is_own_profile &&
         page.name != sponsor_list.sponsor_account &&
-        katsune &&
         auth.name
     ) {
         if (taste == '') {

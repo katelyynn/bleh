@@ -73,6 +73,7 @@ export function music_grids(search = page.structure.main, use_colour = true) {
 
         grid.style.setProperty('--delay', index * 0.04 + 's');
 
+        grid.classList.add('colourful');
         grid.setAttribute('data-bleh-music-grids', 'true');
 
         let is_album;

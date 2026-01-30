@@ -150,6 +150,9 @@
         --at-opacity: 0.6;
         --tag-opacity: 0.6;
 
+        --message-sender-width: 190px;
+        --message-width: 800px;
+
         @media (max-width: 980px) {
             --button-sides: 9px;
             --button-verts: 7px;
@@ -382,7 +385,7 @@
                 inset 0 -1px 0 0 var(--card-border-base),
                 inset 0 1px 3px hsl(var(--b7), 0.1);
             --group-shadow:
-                inset 0 1px 0 0 hsl(var(--b4), 0.4),
+                inset 0 -1px 0 0 hsl(var(--b4), 0.4),
                 inset 0 0 0 1px hsl(var(--b4), 0.4);
 
             --sidebar-bg: color-mix(in hsl, hsl(var(--b6)) 56%, hsl(var(--b5)));
@@ -420,7 +423,7 @@
             --b4: var(--hue), calc(var(--sat) * 12% * var(--sat-bg, 1)), 70%;
 
             /* card */
-            --b5: var(--hue), calc(var(--sat) * 14% * var(--sat-bg, 1)), 82%;
+            --b5: var(--hue), calc(var(--sat) * 16% * var(--sat-bg, 1)), 83%;
 
             /* root */
             --b6: var(--hue), calc(var(--sat) * 14% * var(--sat-bg, 1)), 77%;
@@ -431,12 +434,12 @@
             --card-border-base: hsl(
                 var(--hue),
                 calc(var(--sat) * 9% * var(--sat-bg, 1)),
-                75%
+                72%
             ) !important;
             --card-border-base-highlight: hsl(
                 var(--hue),
                 calc(var(--sat) * 9% * var(--sat-bg, 1)),
-                72%
+                75%
             ) !important;
 
             --normal-shadow:
@@ -450,7 +453,7 @@
                 inset 0 -1px 0 0 var(--card-border-base),
                 inset 0 1px 3px hsl(var(--b7), 0.1);
             --group-shadow:
-                inset 0 1px 0 0 hsl(var(--b4), 0.4),
+                inset 0 -1px 0 0 hsl(var(--b4), 0.4),
                 inset 0 0 0 1px hsl(var(--b4), 0.15);
 
             --sidebar-bg: color-mix(in hsl, hsl(var(--b6)) 56%, hsl(var(--b5)));
@@ -471,6 +474,8 @@
 
             --banner-overlay: hsl(var(--b5), 20%);
             --banner-mix: lighten;
+
+            --setting-group: hsl(var(--b6), 30%);
 
             --lastfm-logo-filter: none;
         }
@@ -501,7 +506,7 @@
     .vote-number,
     .changelog-version-item,
     u,
-    .grid-items-item.grid-items-item-has-colour,
+    .grid-items-item.grid-items-item-has-colour > .grid-items-cover-image,
     .toggle /* for toggles that arent buttons */,
     .bleh-icon,
     .weeklychart-change,
@@ -647,12 +652,17 @@
                 transparent 20%,
                 hsl(var(--h4), 8%)
             );
+
+            --grid-colour-shadow: var(
+                --grid-colour-shadow-override,
+                0 24px 20px hsl(var(--h4), 16%)
+            );
         }
         .theme-preview[data-bleh--theme="light"],
         [data-bleh--theme="light"]
             &:not(
                 .theme-preview,
-                .grid-items-item.grid-items-item-has-colour,
+                .grid-items-item.grid-items-item-has-colour > .grid-items-cover-image,
                 .grid-items-item-details > p > a
             ) {
             --c1: var(--hue), calc(var(--sat) * 6%), 0%;
@@ -706,15 +716,15 @@
 
             --grid-colour-shadow: var(
                 --grid-colour-shadow-override,
-                0 27px 15px hsl(var(--h4), 12%)
+                0 27px 15px hsl(var(--h4), 18%)
             );
 
             --opposite-text: var(--c1);
 
             --primary-shadow:
-                inset 0 1px 0 0 hsl(var(--h4), 30%),
+                inset 0 -1px 0 0 hsl(var(--h4), 30%),
                 inset 0 -30px 10px -20px hsl(var(--h2), 40%);
-            --bar-shadow: inset 0 1px 0 0 hsl(var(--h4), 60%);
+            --bar-shadow: inset 0 -1px 0 0 hsl(var(--h4), 40%);
 
             --shout-vote-indicator: linear-gradient(
                 90deg,
@@ -735,7 +745,7 @@
         [data-bleh--theme="ink"]
             &:not(
                 .theme-preview,
-                .grid-items-item.grid-items-item-has-colour,
+                .grid-items-item.grid-items-item-has-colour > .grid-items-cover-image,
                 .grid-items-item-details > p > a
             ) {
             --c1: var(--hue), calc(var(--sat) * 60%), 14%;
@@ -760,14 +770,14 @@
                 calc(clamp(min(0.7), var(--lit), max(1.1)) * 25%);
 
             --h3:
-                var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 32%),
+                var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 38%),
                 calc(clamp(min(0.7), var(--lit), max(1.1)) * 73%);
             --h3-s: var(--hue), 50%, 70%;
             --h3-sat: calc(clamp(min(0), var(--sat), max(1.5)) * 32%);
             --h3-lit: calc(clamp(min(0.5), var(--lit), max(1.1)) * 73%);
             --h4:
-                var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 30%),
-                calc(clamp(min(0.7), var(--lit), max(1.1)) * 55%);
+                var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 32%),
+                calc(clamp(min(0.7), var(--lit), max(1.1)) * 64%);
             --f4:
                 var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 30%),
                 calc(clamp(min(0.8), var(--lit), max(1.5)) * 60%);
@@ -788,15 +798,15 @@
 
             --grid-colour-shadow: var(
                 --grid-colour-shadow-override,
-                0 27px 15px hsl(var(--h4), 16%)
+                0 27px 15px hsl(var(--h4), 18%)
             );
 
             --opposite-text: var(--c1);
 
             --primary-shadow:
-                inset 0 1px 0 0 hsl(var(--l2-c)),
-                inset 0 -30px 10px -20px hsl(var(--l2-c), 50%);
-            --bar-shadow: inset 0 1px 0 0 hsl(var(--h4), 60%);
+                inset 0 -1px 0 0 hsl(var(--l2-c), 50%),
+                inset 0 -30px 10px -20px hsl(var(--l2-c), 30%);
+            --bar-shadow: inset 0 -1px 0 0 hsl(var(--h4), 40%);
 
             --shout-vote-indicator: linear-gradient(
                 90deg,
@@ -908,6 +918,7 @@
         --cover-size-20: 14px;
         --cover-size-32: 20px;
         --cover-size-50: 24px;
+        --cover-size-70: 32px;
         --cover-size-100: 40px;
         --cover-size-200: 72px;
         --cover-size-300: 96px;
@@ -979,8 +990,11 @@
 
         &[data-bleh--theme="ink"],
         [data-bleh--theme="ink"] > & {
-            --blur-saturate: 160%;
-            --blur-brightness: 1.2;
+            --menu-bg: var(--b5);
+            --menu-opacity: 94%;
+
+            --blur-saturate: 130%;
+            --blur-brightness: 1;
             --menu-shadow: 0 4px 40px hsla(var(--b7), 0.2);
         }
 
@@ -1674,6 +1688,7 @@
         aspect-ratio: 1 / 1;
 
         & > img {
+            position: static;
             border-radius: inherit !important;
             font-size: 0 !important;
         }
@@ -12502,53 +12517,118 @@
         width: 14px !important;
     }
 
-    .inbox-message-view .inbox-message {
-        display: block !important;
-        padding-left: 210px;
-        position: relative;
-        min-height: 300px;
-        background: transparent;
-        box-shadow: none !important;
+    .inbox-message-view {
+        display: flex;
+        flex-direction: column;
+        gap: var(--card-padding);
+
+        & > .inbox-message {
+            display: flex;
+            gap: var(--card-padding);
+            margin: unset;
+        }
     }
-    .inbox-message-view .content-form {
-        padding-left: 180px;
-        border: none !important;
+
+    .inbox-message-buttons {
+        display: flex;
+        gap: var(--button-list-gap);
+
+        padding: unset !important;
+        margin: unset !important;
     }
-    .inbox-message-view .inbox-message-sender-avatar {
-        position: absolute;
-        top: var(--card-padding);
-        left: var(--card-padding);
-        bottom: 0;
+
+    .inbox-message > .message-sender {
+        padding: 30px var(--card-padding);
         background: linear-gradient(
             180deg,
             hsl(var(--h4), 30%) 0%,
             rgba(0, 0, 0, 0) 100%
         );
-        width: 180px;
-        min-height: 300px;
 
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: var(--item-list-gap);
 
-        padding: var(--card-padding) !important;
-        margin: -20px -5px;
+        width: var(--message-sender-width);
+        min-height: 300px;
+
         border-radius: var(--card-radius);
 
-        .inbox-message-sender-name {
-            text-align: center;
-            font-size: 16px;
-            line-height: 20px;
-            font-weight: var(--font-weight-bold);
+        &:not(:hover) {
+            & > .message-sender-actions {
+                opacity: 0.4;
+
+                transition-property: opacity;
+                transition-duration: var(--trans);
+                transition-timing-function: var(--trans-function-ani);
+            }
         }
-        .inbox-message-timestamp {
-            text-align: center;
-            font-size: var(--font-size);
-            line-height: var(--line-height);
-            color: hsl(var(--c3));
-            cursor: default;
+    }
+    .inbox-message > .message-content {
+        width: 100%;
+        max-width: var(--message-width);
+    }
+
+    .message-reply-section {
+        position: relative;
+        padding-top: calc(var(--card-padding) + 1px);
+
+        &:before {
+            content: '';
+            position: absolute;
+            display: block;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: var(--separator);
+
+            width: calc(var(--message-sender-width) + var(--card-padding) + var(--message-width));
         }
+    }
+
+    .inbox-message-sender-avatar {
+        width: 70px !important;
+        height: 70px !important;
+        padding: unset !important;
+        margin: unset !important;
+
+        --mask-size: var(--cover-size-70);
+    }
+    .inbox-message-sender-name {
+        text-align: center;
+        font-size: 16px;
+        line-height: 20px;
+        font-weight: var(--font-weight-medium);
+
+        margin-top: var(--card-gap);
+        margin-bottom: 4px;
+    }
+    .inbox-message-timestamp {
+        text-align: center;
+        font-size: calc(var(--font-size) - 1px);
+        line-height: var(--line-height);
+        color: hsl(var(--c3));
+        cursor: default;
+    }
+
+    .message-sender-actions {
+        margin-top: var(--card-padding);
+
+        transition: none;
+    }
+    .message-sender-action {
+        --bg: transparent;
+        --bg-hov: hsl(var(--h3), 20%);
+        --bg-atv: hsl(var(--h3), 40%);
+        --shadow: none;
+    }
+
+    .inbox-button {
+        --bg: hsl(var(--b4), 40%);
+        --bg-hov: hsl(var(--b4), 60%);
+        --bg-atv: hsl(var(--b4), 80%);
+        --shadow: none;
     }
 
     .inbox-message-view .inbox-message {
@@ -12570,16 +12650,6 @@
     .inbox-message-view .inbox-message-message blockquote cite {
         color: hsl(var(--c3));
         display: block;
-    }
-
-    .inbox-message-view .inbox-message-buttons {
-        margin: initial;
-        padding: unset;
-        margin-top: var(--card-gap);
-        padding-top: var(--card-gap);
-        border-top: 1px solid hsl(var(--b4));
-        display: flex;
-        gap: var(--button-list-gap);
     }
 
     .back-button,
@@ -14821,7 +14891,6 @@
             --follow-button-bg-hov: hsl(var(--b4), 40%);
             --follow-button-bg-atv: hsl(var(--b4), 60%);
             --follow-button-col: hsl(var(--c3));
-            --follow-button-filter: none;
 
             &:not(:hover, :focus-within) {
                 --follow-button-opacity: 0.3;
@@ -14846,7 +14915,6 @@
 
             width: var(--button-height) !important;
             height: var(--button-height) !important;
-            --filter: var(--follow-button-filter);
 
             opacity: var(--follow-button-opacity, 1);
         }
@@ -14951,8 +15019,6 @@
                 border-radius: var(--item-big-radius);
                 height: 270px;
                 overflow: hidden;
-
-                --follow-button-filter: var(--card-blur);
 
                 .user-background {
                     position: absolute;
@@ -19335,6 +19401,7 @@
             display: flex;
             gap: var(--button-list-gap);
             margin: unset;
+            padding: unset !important;
 
             &:not(.textarea) {
                 height: var(--button-height);
@@ -19342,7 +19409,7 @@
 
             &.textarea,
             &.wide {
-                width: 400px;
+                width: 500px;
                 justify-content: end;
 
                 & > input {
@@ -19385,6 +19452,10 @@
 
         &.end {
             justify-content: end;
+        }
+
+        &.gap {
+            margin-top: var(--card-gap);
         }
     }
 
