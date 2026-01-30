@@ -9962,6 +9962,9 @@ export const trans = {
     },
     view_details: {
         en: 'View details'
+    },
+    valentine_info: {
+        en: 'You’re seeing this as {u} is on your bleh close friends list, you have a high compatibility, and it’s Valentines Day!'
     }
 };
 

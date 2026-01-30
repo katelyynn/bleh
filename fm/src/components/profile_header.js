@@ -241,7 +241,7 @@ export function redesign_profile_header(is_own_profile, is_following) {
         if (taste_artists.length > 1) {
             taste_menu = html.node`
                 <div class="taste-menu-header colourful" data-taste=${taste}>
-                    ${taste_formal}
+                    ${taste_formal} (${taste_percentage})
                 </div>
                 <a class="dropdown-menu-clickable-item" href="${root}user/${page.name}/library/music/${redirect()}${sanitise(taste_artists[0])}" data-menu-item="shared-artist">
                     <span class="menu-avatar">
@@ -302,7 +302,8 @@ export function redesign_profile_header(is_own_profile, is_following) {
         const row = listen_container.querySelector('.listener-row');
         row.after(taste_wrap);
 
-        const february = true;
+        const today = new Date();
+        const february = today.getMonth() == 1 && today.getDate() == 14;
 
         if (ff('sandrone') && february && settings.friends.includes(page.name) && ['super', 'very_high', 'high'].includes(taste)) {
             taste_wrap.classList.add('valentine');
@@ -331,6 +332,19 @@ export function redesign_profile_header(is_own_profile, is_following) {
                         </p>
                     </div>
                 </div>
+                ${() => {
+                    const info_btn = html.node`
+                        <div class="taste-hover-icon-mini">
+                            <div class="bleh-icon" />
+                        </div>
+                    `;
+
+                    tippy(info_btn, {
+                        content: tl(trans.valentine_info, { u: page.name })
+                    });
+
+                    return info_btn;
+                }}
             `);
 
             let details_btn;

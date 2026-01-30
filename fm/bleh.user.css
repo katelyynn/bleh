@@ -5517,10 +5517,6 @@
         --sat-over: 1.4;
         --lit-over: 0.95;
         --icon: url("data:image/svg+xml;base64,PHN2ZyAgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiAgd2lkdGg9IjI0IiAgaGVpZ2h0PSIyNCIgIHZpZXdCb3g9IjAgMCAyNCAyNCIgIGZpbGw9ImN1cnJlbnRDb2xvciIgIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1maWxsZWQgaWNvbi10YWJsZXItY2lyY2xlLXBlcmNlbnRhZ2UiPjxwYXRoIHN0cm9rZT0ibm9uZSIgZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPjxwYXRoIGQ9Ik0xMiAyYzUuNTIzIDAgMTAgNC40NzcgMTAgMTBhMTAgMTAgMCAwIDEgLTIwIDBsLjAwNCAtLjI4Yy4xNDggLTUuMzkzIDQuNTY2IC05LjcyIDkuOTk2IC05LjcybTMgMTIuMTJhMSAxIDAgMCAwIC0xIDF2LjAxNWExIDEgMCAwIDAgMiAwdi0uMDE1YTEgMSAwIDAgMCAtMSAtMW0uNzA3IC01Ljc1MmExIDEgMCAwIDAgLTEuNDE0IDBsLTYgNmExIDEgMCAwIDAgMS40MTQgMS40MTRsNiAtNmExIDEgMCAwIDAgMCAtMS40MTRtLTYuNzA3IC0uMjYzYTEgMSAwIDAgMCAtMSAxdi4wMTVhMSAxIDAgMSAwIDIgMHYtLjAxNWExIDEgMCAwIDAgLTEgLTEiIC8+PC9zdmc+");
-
-        &.valentine {
-            --icon: var(--icon-16-heart-solid);
-        }
     }
     [data-taste="very_high"] {
         --hue-over: 18;
@@ -26442,11 +26438,28 @@
             }
 
             &.valentine {
+                --bg-hov: var(--bg) !important;
+                --bg-atv: var(--bg) !important;
+                transform: none !important;
                 --padding: 10px var(--button-sides) !important;
                 margin: 0 calc(-1 * var(--button-sides)) !important;
 
+                cursor: default;
+
                 align-items: center;
                 flex-direction: column;
+
+                &:before {
+                    --show-icon: none !important;
+                }
+
+                .taste-hover-icon-mini {
+                    position: absolute;
+                    top: 10px;
+                    right: var(--button-sides);
+                    --icon: var(--icon-16-info);
+                    --mask-colour: hsl(var(--c3));
+                }
 
                 .valentine-pics {
                     display: flex;
@@ -26464,14 +26477,13 @@
                         margin: unset;
 
                         animation: valentine 3s var(--trans-function-ani) infinite;
+                        --icon: var(--icon-16-heart-solid);
                     }
                 }
 
                 .span {
                     text-align: center;
                 }
-
-                pointer-events: none;
             }
 
             .span {
