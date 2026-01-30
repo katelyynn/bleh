@@ -27,7 +27,7 @@ export function load_settings(skip = false) {
         for (let setting in settings_store) {
             // assign default if missing
             if (settings[setting] == null)
-                settings[setting] = settings_store[setting].default;
+                settings[setting] = structuredClone(settings_store[setting].default);
         }
 
         if (!settings.version) settings.version = 10000000;
