@@ -22,7 +22,15 @@ export function bleh_footer() {
     `;
 
     let kate = 'katelyn';
-    if (sponsor_list && sponsor_list.special) kate = sponsor_list.special[0];
+    let sponsoring = 0;
+
+    if (sponsor_list) {
+        if (sponsor_list.special)
+            kate = sponsor_list.special[0];
+
+        if (sponsor_list.sponsors && sponsor_list.sponsor_count_remove)
+            sponsoring = sponsor_list.sponsors.length - sponsor_list.sponsor_count_remove;
+    }
 
     render(
         footer,
@@ -45,7 +53,7 @@ export function bleh_footer() {
                         }}
                     </p>
                     <p>
-                        <a onclick=${() => sponsor()}>${{ html: tl(trans.supported_by, { c: 57, s: '<span class="b">', '/s': '</span>' }) }}</a>
+                        <a onclick=${() => sponsor()}>${{ html: tl(trans.supported_by, { c: sponsoring, s: '<span class="b">', '/s': '</span>' }) }}</a>
                     </p>
                     ${lang != 'en' && lang in lang_info ?
                         html.node`

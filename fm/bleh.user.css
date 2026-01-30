@@ -245,7 +245,7 @@
         --banner-mix: none;
 
         --normal-shadow:
-            inset 0 1px 0 0 hsl(var(--b2), 80%),
+            inset 0 1px 0 0 hsl(var(--b2), 70%),
             inset 0 -30px 6px -30px hsl(var(--b2), 40%);
         --input-shadow:
             inset 0 -1px 0 0 hsl(var(--b3), 70%),
@@ -375,7 +375,7 @@
             --card-border-base-highlight: hsl(0, 0%, 89%);
 
             --normal-shadow:
-                inset 0 1px 0 0 hsl(var(--b2), 60%),
+                inset 0 -1px 0 0 hsl(var(--b2), 60%),
                 inset 0 -30px 20px -20px hsl(var(--b4), 15%);
             --input-shadow:
                 inset 0 -1px 0 0 var(--card-border-base),
@@ -443,7 +443,7 @@
             ) !important;
 
             --normal-shadow:
-                inset 0 1px 0 0 hsl(var(--b2), 25%),
+                inset 0 -1px 0 0 hsl(var(--b2), 25%),
                 inset 0 -30px 20px -20px hsl(var(--b4), 20%);
             --input-shadow:
                 inset 0 -1px 0 0 var(--card-border-base),
@@ -587,7 +587,7 @@
         --avatar-generic-background: hsl(var(--b4));
 
         --primary-shadow:
-            inset 0 1px 0 0 hsl(var(--h2), 70%),
+            inset 0 1px 0 0 hsl(var(--h2), 50%),
             inset 0 -30px 6px -30px hsla(var(--h2), 55%);
         --bar-shadow: inset 0 1px 0 0 hsla(var(--h3), 25%);
 
