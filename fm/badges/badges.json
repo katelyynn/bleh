@@ -1,14 +1,14 @@
 {
-    "latest": "2026.0126",
+    "latest": "2026.0130",
     "sponsors": [
         "clairedoll", "kateshapedbox", "evangelicgirl",
         "astrablooms", "ItsProyal", "vwvwvwvwvwvwv", "Orofil",
         "EliteHimself", "iwas15with100k", "keepsweet", "fucksophie",
-        "softmancy", "carbon1k", "mousey-toy", "scidal",
+        "carbon1k", "mousey-toy", "scidal",
         "Carbonzer", "chrysalisrot", "FenrirXXII",
         "saettbyeol", "lyeule", "sewagebipolar", "unstablerate",
         "noapop", "celebrating", "myraisounds", "riskyrizey",
-        "fourohclok", "liminalvespers", "HuxP", "K40M0J1",
+        "fourohclok", "HuxP", "K40M0J1",
         "goldenstuffed", "satisfeita", "kar1x", "nojonsko",
         "urwq", "driftpsalm", "popcorniscrazy", "s0540a",
         "dylandotat", "Angel0Lust", "liminelle", "quikwise",
@@ -209,20 +209,6 @@
                 "reason": "sponsor"
             }
         ],
-        "softmancy": [
-            {
-                "type": "sponsor"
-            },
-            {
-                "type": "altar",
-                "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjI1IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLXNjcm9sbC1pY29uIGx1Y2lkZS1zY3JvbGwiPjxwYXRoIGQ9Ik0xOSAxN1Y1YTIgMiAwIDAgMC0yLTJINCIvPjxwYXRoIGQ9Ik04IDIxaDEyYTIgMiAwIDAgMCAyLTJ2LTFhMSAxIDAgMCAwLTEtMUgxMWExIDEgMCAwIDAtMSAxdjFhMiAyIDAgMSAxLTQgMFY1YTIgMiAwIDEgMC00IDB2MmExIDEgMCAwIDAgMSAxaDMiLz48L3N2Zz4=",
-                "name": "the fleshpoet",
-                "reason": "sponsor",
-                "hue": 270,
-                "sat": 0.6,
-                "lit": 1
-            }
-        ],
         "carbon1k": {
             "type": "sponsor"
         },
@@ -360,19 +346,6 @@
                 "hue": 245,
                 "sat": 0.8,
                 "lit": 0.9
-            }
-        ],
-        "liminalvespers": [
-            {
-                "type": "sponsor"
-            },
-            {
-                "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWhvdXJnbGFzcy1pY29uIGx1Y2lkZS1ob3VyZ2xhc3MiPjxwYXRoIGQ9Ik01IDIyaDE0Ii8+PHBhdGggZD0iTTUgMmgxNCIvPjxwYXRoIGQ9Ik0xNyAyMnYtNC4xNzJhMiAyIDAgMCAwLS41ODYtMS40MTRMMTIgMTJsLTQuNDE0IDQuNDE0QTIgMiAwIDAgMCA3IDE3LjgyOFYyMiIvPjxwYXRoIGQ9Ik03IDJ2NC4xNzJhMiAyIDAgMCAwIC41ODYgMS40MTRMMTIgMTJsNC40MTQtNC40MTRBMiAyIDAgMCAwIDE3IDYuMTcyVjIiLz48L3N2Zz4=",
-                "reason": "sponsor",
-                "name": "threshold archivist",
-                "hue": 36,
-                "sat": 1.44,
-                "lit": 1.1
             }
         ],
         "HuxP": [
