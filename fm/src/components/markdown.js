@@ -24,6 +24,7 @@ import { fetch_status } from './statuscafe.js';
 import tippy from 'tippy.js';
 import { DateTime } from 'luxon';
 import { input } from './input.js';
+import { queue_popup } from './popup.js';
 
 export function markdown(
     text,
@@ -1420,6 +1421,10 @@ export function markdown_field(func, options, value, name, cols, rows, placehold
             ${{ html: val }}
         `);
     }
+
+    setTimeout(() => {
+        queue_popup('markdown', actions, 'top');
+    }, 0);
 
     return field;
 }

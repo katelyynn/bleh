@@ -30966,7 +30966,8 @@
           setTimeout(() => {
             instance.popper.querySelector('[aria-checked="true"]').scrollIntoView({
               behavior: "instant",
-              block: "center"
+              block: "center",
+              container: "nearest"
             });
           }, 1);
         }
@@ -35387,6 +35388,88 @@
     return string.replace(/^[,\-–—.;:|•·]+\s*/, "").replace(/\s*[,\-–—.;:|•·]+$/, "").trim();
   }
 
+  // src/components/popup.js
+  var popup_queue = [];
+  function queue_popup(key, host, prefer = "top") {
+    if (!host || !host.offsetParent) {
+      log(`skipped adding ${key} as the host is not accessible (probably intentional)`, "popup", "info", { key, host });
+      return;
+    }
+    if (settings.popups_seen.includes(key)) {
+      log(`skipped adding ${key} as popup has previously been dismissed`, "popup", "info", { key, host });
+      return;
+    }
+    popup_queue.push({ key, host, prefer });
+    check_queue();
+  }
+  function clear_popup_queue() {
+    popup_queue = [];
+  }
+  function check_queue() {
+    const first = popup_queue[0];
+    if (!first) return;
+    if (first.visible) return;
+    popup(first);
+  }
+  function popup(instance) {
+    const key = instance.key;
+    const host = instance.host;
+    const prefer = instance.prefer;
+    const title = tl2(trans[`popup_${key}`]?.title);
+    const body = tl2(trans[`popup_${key}`]?.body);
+    if ([title, body].includes(translation_fallback)) {
+      log(`popup_${key} not found in translations`, "popup", "error", { title, body, key, host });
+      notify({
+        id: "popup_not_found",
+        title: tl2(trans.value_failed_to_load, { v: `${key} (popup)` }),
+        body: `Missing title and/or body for translation key popup_${key}`,
+        type: "error"
+      });
+      popup_queue = popup_queue.filter((i) => i.key != key);
+      check_queue();
+      return;
+    }
+    log(`registered for ${key}`, "popup", "info", { title, body, key, host });
+    instance.visible = true;
+    const tooltip = tippy_esm_default(host, {
+      theme: "popup",
+      content: html.node`
+            <div class="popup-content">
+                <small class="popup-sub">${tl2(trans.tip)}</small>
+                <strong class="popup-title">${title}</strong>
+                <p class="popup-body">${body}</p>
+            </div>
+            <div class="popup-action">
+                <button class="see-more" onclick=${() => {
+        popup_queue = popup_queue.filter((i) => i.key != key);
+        tooltip.hide();
+        settings.popups_seen.push(key);
+        save_setting("popups_seen", settings.popups_seen);
+        setTimeout(() => {
+          tooltip.destroy();
+        }, 500);
+        check_queue();
+      }}>
+                    ${tl2(trans.got_it)}
+                </button>
+            </div>
+        `,
+      interactive: true,
+      hideOnClick: false,
+      appendTo: document.body,
+      aria: {
+        expanded: false
+      },
+      trigger: "manual",
+      zIndex: 998,
+      placement: prefer
+    });
+    tooltip.show();
+    host.scrollIntoView({
+      block: "center"
+    });
+  }
+
   // src/pages/profile.js
   async function bleh_profiles() {
     if (page.subpage == "obsessions_obsession") {
@@ -35490,6 +35573,9 @@
     if (ff("profile_fonts") && settings.display_name_styles) {
       profile_name.setAttribute("data-font", cache2.font);
       profile_name.setAttribute("data-font-style", cache2.font_style);
+      setTimeout(() => {
+        queue_popup("profile_name_style", profile_name, "bottom");
+      }, 0);
     }
     if (!avatar2) {
       avatar2 = profile_header.querySelector(".header-avatar-add");
@@ -41257,9 +41343,11 @@
   }
   function compile_settings() {
     let clone6 = structuredClone(settings);
-    settings_store.feature_flags.default = {};
+    for (let s2 in clone6) {
+      console.log("settings marin before loop", s2, clone6[s2], typeof clone6[s2]);
+    }
     for (let setting2 in clone6) {
-      if (settings_store[setting2] && JSON.stringify(clone6[setting2]) == JSON.stringify(settings_store[setting2].default) && setting2 != "version") {
+      if (settings_store[setting2] && JSON.stringify(clone6[setting2]) === JSON.stringify(settings_store[setting2].default) && setting2 != "version") {
         log(
           `dropped ${setting2} as value matches default`,
           "settings",
@@ -41273,6 +41361,9 @@
       }
     }
     clone6.version = version.build;
+    for (let s2 in clone6) {
+      console.log("settings marin before stringify", s2, clone6[s2], typeof clone6[s2]);
+    }
     set_storage("bleh", JSON.stringify(clone6));
     return clone6;
   }
@@ -41282,7 +41373,7 @@
     if (!skip2) {
       for (let setting2 in settings_store) {
         if (settings[setting2] == null)
-          settings[setting2] = settings_store[setting2].default;
+          settings[setting2] = structuredClone(settings_store[setting2].default);
       }
       if (!settings.version) settings.version = 1e7;
     }
@@ -49195,6 +49286,9 @@
             ${{ html: val }}
         `);
     }
+    setTimeout(() => {
+      queue_popup("markdown", actions, "top");
+    }, 0);
     return field;
   }
 
@@ -50152,73 +50246,6 @@
     });
   }
 
-  // src/components/popup.js
-  var popup_queue = [];
-  function queue_popup(key, host) {
-    if (!host || !host.offsetParent) {
-      log(`skipped adding ${key} as the host is not accessible (probably intentional)`, "popup", "info", { key, host });
-      return;
-    }
-    popup_queue.push({ key, host });
-    check_queue();
-  }
-  function clear_popup_queue() {
-    popup_queue = [];
-  }
-  function check_queue() {
-    const first = popup_queue[0];
-    if (!first) return;
-    popup(first.key, first.host);
-  }
-  function popup(key, host) {
-    const title = tl2(trans[`popup_${key}`]?.title);
-    const body = tl2(trans[`popup_${key}`]?.body);
-    if ([title, body].includes(translation_fallback)) {
-      log(`popup_${key} not found in translations`, "popup", "error", { title, body, key, host });
-      notify({
-        id: "popup_not_found",
-        title: tl2(trans.value_failed_to_load, { v: `${key} (popup)` }),
-        body: `Missing title and/or body for translation key popup_${key}`,
-        type: "error"
-      });
-      popup_queue = popup_queue.filter((i) => i.key != key);
-      check_queue();
-      return;
-    }
-    log(`registered for ${key}`, "popup", "info", { title, body, key, host });
-    const tooltip = tippy_esm_default(host, {
-      theme: "popup",
-      content: html.node`
-            <div class="popup-content">
-                <small class="popup-sub">${tl2(trans.tip)}</small>
-                <strong class="popup-title">${title}</strong>
-                <p class="popup-body">${body}</p>
-            </div>
-            <div class="popup-action">
-                <button class="see-more" onclick=${() => {
-        popup_queue = popup_queue.filter((i) => i.key != key);
-        tooltip.hide();
-        setTimeout(() => {
-          tooltip.destroy();
-        }, 500);
-        check_queue();
-      }}>
-                    ${tl2(trans.got_it)}
-                </button>
-            </div>
-        `,
-      interactive: true,
-      hideOnClick: false,
-      appendTo: document.body,
-      aria: {
-        expanded: false
-      },
-      trigger: "manual",
-      zIndex: 998
-    });
-    tooltip.show();
-  }
-
   // src/navigation.js
   function patch_masthead() {
     let masthead_logo = document.body.querySelector(".masthead-logo");
@@ -50685,6 +50712,8 @@
       }
     }
     links.appendChild(inbox);
+    queue_popup("inbox", inbox);
+    queue_popup("search", search);
     let selected_language = document.querySelector(
       ".footer-language--active strong"
     )?.textContent;
@@ -51566,7 +51595,7 @@
             `}
         </div>
         <section class="side-actions">
-            <button class="btn side-action" data-type="import" onclick=${() => import_settings22()}>
+            <button class="btn side-action" data-type="import" onclick=${() => import_settings23()}>
                 ${tl2(trans.import)}
             </button>
             <button class="btn side-action" data-type="export" onclick=${() => export_settings()}>
@@ -51595,6 +51624,12 @@
     if (!tab) change_settings_page("general");
     else change_settings_page(tab);
     if (page.requested.setting) scroll_to_setting(page.requested.setting);
+    const profile_tab = nav.querySelector('[data-bleh-page="profile"]');
+    if (profile_tab) {
+      setTimeout(() => {
+        queue_popup("close_friends", profile_tab);
+      }, 0);
+    }
   }
   function page_loading() {
     render(page.structure.main, html`
@@ -52256,13 +52291,6 @@
                 </table>
             `);
       };
-      if (!page.state.quick_access_items) {
-        setTimeout(() => {
-          render_setting_page("interface");
-        }, 10);
-        page_loading();
-        return;
-      }
       register_skip_to([]);
       let bars;
       let track_layout;
@@ -52346,13 +52374,6 @@
                 </div>
                 <div class="setting-group">
                     ${setting({ id: "gendered_tags" })}
-                </div>
-            </section>
-            <section class="bleh--panel">
-                <h4>${tl2(trans.navigation_items.name)}</h4>
-                <div class="setting-group">
-                    ${setting({ id: "navigation_items", list: page.state.quick_access_items })}
-                    ${!page.mobile ? setting({ id: "navigation_language" }) : ""}
                 </div>
             </section>
             <section class="bleh--panel">
@@ -52868,9 +52889,7 @@
                     </ul>
                     <div class="sep"></div>
                     <h4>${tl2(trans.development)}</h4>
-                    <button
-                        class="see-more"
-                        onclick=${() => {
+                    <button class="see-more" onclick=${() => {
           if (settings.hu_tao == "develop") {
             change_settings_page("sku");
           } else {
@@ -52878,13 +52897,17 @@
               id: "hu_tao",
               title: tl2(trans.development),
               body: html.node`
-                                ${setting({ id: "hu_tao", text: false, focus: true })}
-                            `
+                                    ${setting({ id: "hu_tao", text: false, focus: true })}
+                                `
             });
           }
-        }}
-                    >
+        }}>
                         ${tl2(trans.manage_feature_flags)}
+                    </button>
+                    <button class="see-more" onclick=${() => {
+          save_setting("popups_seen", []);
+        }}>
+                        Forget which popups have been seen
                     </button>
                 </section>
             `
@@ -52905,6 +52928,13 @@
         );
         return;
       }
+      if (!page.state.quick_access_items) {
+        setTimeout(() => {
+          render_setting_page("profile");
+        }, 10);
+        page_loading();
+        return;
+      }
       register_skip_to([]);
       const cache2 = await load_profile_cache_externally(auth.name);
       let friends2;
@@ -52913,6 +52943,32 @@
       render(
         page.structure.main,
         html`
+                ${ff("friends") ? html.node`
+                    <section class="bleh--panel">
+                        <h4>${tl2(trans.close_friends)}</h4>
+                        <div class="setting-group">
+                            ${friends2 = setting({
+          id: "friends",
+          list: settings.friends,
+          func: (val) => {
+            if (!val.includes(settings.starred_friend))
+              save_setting("starred_friend", "");
+            checkup_friend_cache(val);
+            starred2.update(select_prepare_list([{ value: "", text: tl2(trans.none) }, ...val]));
+          }
+        })}
+                            ${starred2 = setting({ id: "starred_friend", list: select_prepare_list([{ value: "", text: tl2(trans.none) }, ...settings.friends]) })}
+                        </div>
+                        <p class="card-tip">${tl2(trans.friend_difference)}</p>
+                    </section>
+                ` : ""}
+                <section class="bleh--panel">
+                    <h4>${tl2(trans.navigation_items.name)}</h4>
+                    <div class="setting-group">
+                        ${setting({ id: "navigation_items", list: page.state.quick_access_items })}
+                        ${!page.mobile ? setting({ id: "navigation_language" }) : ""}
+                    </div>
+                </section>
                 <section class="bleh--panel">
                     <h4>${tl2(trans.banners)}</h4>
                     <div class="inner-preview pad">
@@ -52946,18 +53002,12 @@
                                     <div class="mockup-panel main"></div>
                                 </div>
                             </div>
-                            <div
-                                class="profile-mockup-background from-avatar"
-                                style="background-image: url(${auth.avatar.replace(
-          "/avatar42s/",
-          "/avatar300s/"
-        )})"
-                            ></div>
+                            <div class="profile-mockup-background from-avatar" style="background-image: url(${auth.avatar.replace("/avatar42s/", "/avatar300s/")})" />
                             ${cache2.banner ? html.node`
-                        <div class="profile-mockup-background from-banner" style="background-image: url(${cache2.banner})"></div>
-                        ` : html.node`
-                        <div class="profile-mockup-background from-track" style="background-image: url(https://lastfm.freetls.fastly.net/i/u/avatar300s/df927f4f88034b7f9a651636b965c9d7)"></div>
-                        `}
+                                <div class="profile-mockup-background from-banner" style="background-image: url(${cache2.banner})"></div>
+                            ` : html.node`
+                                <div class="profile-mockup-background from-track" style="background-image: url(https://lastfm.freetls.fastly.net/i/u/avatar300s/df927f4f88034b7f9a651636b965c9d7)"></div>
+                            `}
                         </div>
                     </div>
                     <div class="setting-group">
@@ -52966,38 +53016,13 @@
                                 <h5>${tl2(trans.view_backgrounds_on)}</h5>
                             </div>
                             <div class="primary-selections">
-                                ${setting({
-          id: "profile_header_own",
-          standalone: true
-        })}
-                                ${setting({
-          id: "profile_header_others",
-          standalone: true
-        })}
+                                ${setting({ id: "profile_header_own", standalone: true })}
+                                ${setting({ id: "profile_header_others", standalone: true })}
                             </div>
                         </div>
                         ${setting({ id: "profile_avi_background" })}
                     </div>
                 </section>
-                ${ff("friends") ? html.node`
-            <section class="bleh--panel">
-                <h4>${tl2(trans.close_friends)}</h4>
-                <div class="setting-group">
-                    ${friends2 = setting({
-          id: "friends",
-          list: settings.friends,
-          func: (val) => {
-            if (!val.includes(settings.starred_friend))
-              save_setting("starred_friend", "");
-            checkup_friend_cache(val);
-            starred2.update(select_prepare_list([{ value: "", text: tl2(trans.none) }, ...val]));
-          }
-        })}
-                    ${starred2 = setting({ id: "starred_friend", list: select_prepare_list([{ value: "", text: tl2(trans.none) }, ...settings.friends]) })}
-                </div>
-                <p class="card-tip">${tl2(trans.friend_difference)}</p>
-            </section>
-            ` : ""}
                 <section class="bleh--panel">
                     <h4>${tl2(trans.other)}</h4>
                     <div class="setting-group">
@@ -53703,7 +53728,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       }
     }
   }
-  function import_settings22() {
+  function import_settings23() {
     let text4;
     const modal = dialog({
       id: "import_settings",
@@ -56643,6 +56668,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         `;
     }
     page.structure.container.insertBefore(welcome, page.structure.container.firstElementChild);
+    let native_settings;
     let nav;
     if (auth.name) {
       nav = html.node`
@@ -56681,7 +56707,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                     </li>
                     ` : ""}
                     <li class="fill"></li>
-                    <li class="navlist-item secondary-nav-item secondary-nav-item--settings">
+                    <li class="navlist-item secondary-nav-item secondary-nav-item--settings" ref=${(el) => native_settings = el}>
                         <a href="${root}settings" class="secondary-nav-item-link ${page.type == "settings" ? "secondary-nav-item-link--active" : ""}">
                             ${tl2(trans.settings)}
                         </a>
@@ -56721,6 +56747,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     page.structure.nav = nav;
     welcome.after(nav);
     checkup_nav();
+    if (native_settings) queue_popup("native_settings", native_settings);
     if (page.type == "charts")
       bleh_charts();
     if (page.type == "settings")
@@ -69421,6 +69448,54 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       body: {
         en: "You can choose which actions to show here by right-clicking for more options"
       }
+    },
+    popup_native_settings: {
+      title: {
+        en: "Access your account settings here"
+      },
+      body: {
+        en: "You can then configure the extension by looking out for the bleh logo below"
+      }
+    },
+    popup_inbox: {
+      title: {
+        en: "Find your inbox combined"
+      },
+      body: {
+        en: "Your notifications and messages have been organised into this handy button"
+      }
+    },
+    popup_close_friends: {
+      title: {
+        en: "Add your close friends list"
+      },
+      body: {
+        en: "View their scrobbles on any artist, album, or track at any time"
+      }
+    },
+    popup_profile_name_style: {
+      title: {
+        en: "Choose a custom font, style, and profile colour"
+      },
+      body: {
+        en: "These are sponsor-exclusive perks as a thank you for supporting bleh"
+      }
+    },
+    popup_markdown: {
+      title: {
+        en: "Embrace styling with Markdown"
+      },
+      body: {
+        en: "Format any text, embed images and links, mention users, and much more based on the scenario"
+      }
+    },
+    popup_search: {
+      title: {
+        en: "Hover up here to search music"
+      },
+      body: {
+        en: "Searching has never been easier to access, plus it hides away when you\u2019re scrolled up"
+      }
     }
   };
   var translation_fallback = "NO_TRANSLATION_FOUND";
@@ -70716,7 +70791,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       type: "list",
       title: trans.close_friends,
       body: trans.friends_setting,
-      warn_if_matches_auth: true
+      warn_if_matches_auth: true,
+      beta: true
     },
     starred_friend: {
       default: "",
@@ -70801,6 +70877,10 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     translator_view: {
       default: "en",
       type: "select"
+    },
+    popups_seen: {
+      default: [],
+      type: "list"
     }
   };
 

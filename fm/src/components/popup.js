@@ -3,16 +3,23 @@ import tippy from "tippy.js";
 import { tl, trans, translation_fallback } from "../build/trans";
 import { notify } from "./notify";
 import { log } from "../build/log";
+import { save_setting } from "./settings";
+import { settings } from "../build/config";
 
 export let popup_queue = [];
 
-export function queue_popup(key, host) {
+export function queue_popup(key, host, prefer = 'top') {
     if (!host || !host.offsetParent) {
         log(`skipped adding ${key} as the host is not accessible (probably intentional)`, 'popup', 'info', { key, host });
         return;
     }
 
-    popup_queue.push({ key, host });
+    if (settings.popups_seen.includes(key)) {
+        log(`skipped adding ${key} as popup has previously been dismissed`, 'popup', 'info', { key, host });
+        return;
+    }
+
+    popup_queue.push({ key, host, prefer });
 
     check_queue();
 }
@@ -25,10 +32,16 @@ function check_queue() {
     const first = popup_queue[0];
     if (!first) return;
 
-    popup(first.key, first.host);
+    if (first.visible) return;
+
+    popup(first);
 }
 
-function popup(key, host) {
+function popup(instance) {
+    const key = instance.key;
+    const host = instance.host;
+    const prefer = instance.prefer;
+
     const title = tl(trans[`popup_${key}`]?.title);
     const body = tl(trans[`popup_${key}`]?.body);
 
@@ -49,6 +62,8 @@ function popup(key, host) {
 
     log(`registered for ${key}`, 'popup', 'info', { title, body, key, host });
 
+    instance.visible = true;
+
     const tooltip = tippy(host, {
         theme: 'popup',
         content: html.node`
@@ -61,6 +76,9 @@ function popup(key, host) {
                 <button class="see-more" onclick=${() => {
                     popup_queue = popup_queue.filter(i => i.key != key);
                     tooltip.hide();
+
+                    settings.popups_seen.push(key);
+                    save_setting('popups_seen', settings.popups_seen);
 
                     setTimeout(() => {
                         tooltip.destroy();
@@ -79,8 +97,13 @@ function popup(key, host) {
             expanded: false
         },
         trigger: 'manual',
-        zIndex: 998
+        zIndex: 998,
+        placement: prefer
     });
 
     tooltip.show();
+
+    host.scrollIntoView({
+        block: 'center'
+    });
 }

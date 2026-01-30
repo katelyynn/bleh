@@ -600,6 +600,9 @@ export function append_nav() {
 
     links.appendChild(inbox);
 
+    queue_popup('inbox', inbox);
+    queue_popup('search', search);
+
     // language
     let selected_language = document.querySelector(
         '.footer-language--active strong'

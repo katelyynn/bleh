@@ -1269,12 +1269,15 @@ export function seasonal_colour_switch() {
 
 export function compile_settings() {
     let clone = structuredClone(settings);
-    settings_store.feature_flags.default = {};
+
+    for (let s in clone) {
+        console.log('settings marin before loop', s, clone[s], typeof clone[s]);
+    }
 
     for (let setting in clone) {
         if (
             settings_store[setting] &&
-            JSON.stringify(clone[setting]) == JSON.stringify(settings_store[setting].default) &&
+            JSON.stringify(clone[setting]) === JSON.stringify(settings_store[setting].default) &&
             setting != 'version'
         ) {
             log(
@@ -1291,6 +1294,10 @@ export function compile_settings() {
     }
 
     clone.version = version.build;
+
+    for (let s in clone) {
+        console.log('settings marin before stringify', s, clone[s], typeof clone[s]);
+    }
 
     set_storage('bleh', JSON.stringify(clone));
 

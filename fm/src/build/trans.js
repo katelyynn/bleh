@@ -9989,6 +9989,54 @@ export const trans = {
         body: {
             en: 'You can choose which actions to show here by right-clicking for more options'
         }
+    },
+    popup_native_settings: {
+        title: {
+            en: 'Access your account settings here'
+        },
+        body: {
+            en: 'You can then configure the extension by looking out for the bleh logo below'
+        }
+    },
+    popup_inbox: {
+        title: {
+            en: 'Find your inbox combined'
+        },
+        body: {
+            en: 'Your notifications and messages have been organised into this handy button'
+        }
+    },
+    popup_close_friends: {
+        title: {
+            en: 'Add your close friends list'
+        },
+        body: {
+            en: 'View their scrobbles on any artist, album, or track at any time'
+        }
+    },
+    popup_profile_name_style: {
+        title: {
+            en: 'Choose a custom font, style, and profile colour'
+        },
+        body: {
+            en: 'These are sponsor-exclusive perks as a thank you for supporting bleh'
+        }
+    },
+    popup_markdown: {
+        title: {
+            en: 'Embrace styling with Markdown'
+        },
+        body: {
+            en: 'Format any text, embed images and links, mention users, and much more based on the scenario'
+        }
+    },
+    popup_search: {
+        title: {
+            en: 'Hover up here to search music'
+        },
+        body: {
+            en: 'Searching has never been easier to access, plus it hides away when you’re scrolled up'
+        }
     }
 };
 

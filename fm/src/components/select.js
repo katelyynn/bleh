@@ -60,7 +60,8 @@ export function select(values, initial = '', name = '', func = null, blend = fal
                         .querySelector('[aria-checked="true"]')
                         .scrollIntoView({
                             behavior: 'instant',
-                            block: 'center'
+                            block: 'center',
+                            container: 'nearest'
                         });
                 }, 1);
             }

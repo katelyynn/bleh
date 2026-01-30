@@ -52,6 +52,7 @@ import { DateTime } from 'luxon';
 import { sponsor, sponsor_manage, sponsors } from '../sponsor.js';
 import { version as florence_version } from '@tealmiku/florence';
 import { update_branding_type } from '../navigation.js';
+import { queue_popup } from '../components/popup.js';
 
 export function bleh_settings() {
     page.name = auth.name;
@@ -189,6 +190,13 @@ export function bleh_settings() {
     else change_settings_page(tab);
 
     if (page.requested.setting) scroll_to_setting(page.requested.setting);
+
+    const profile_tab = nav.querySelector('[data-bleh-page="profile"]');
+    if (profile_tab) {
+        setTimeout(() => {
+            queue_popup('close_friends', profile_tab);
+        }, 0);
+    }
 }
 
 function page_loading() {
@@ -804,14 +812,6 @@ export async function render_setting_page(page_id) {
         display_colour_presets();
         update_colour_swatches();
     } else if (page_id == 'interface') {
-        if (!page.state.quick_access_items) {
-            setTimeout(() => {
-                render_setting_page('interface');
-            }, 10);
-            page_loading();
-            return;
-        }
-
         register_skip_to([]);
 
         function chartlist_bar(value, max) {
@@ -997,13 +997,6 @@ export async function render_setting_page(page_id) {
                 </div>
                 <div class="setting-group">
                     ${setting({ id: 'gendered_tags' })}
-                </div>
-            </section>
-            <section class="bleh--panel">
-                <h4>${tl(trans.navigation_items.name)}</h4>
-                <div class="setting-group">
-                    ${setting({ id: 'navigation_items', list: page.state.quick_access_items })}
-                    ${!page.mobile ? setting({ id: 'navigation_language' }) : ''}
                 </div>
             </section>
             <section class="bleh--panel">
@@ -1547,23 +1540,25 @@ export async function render_setting_page(page_id) {
                     </ul>
                     <div class="sep"></div>
                     <h4>${tl(trans.development)}</h4>
-                    <button
-                        class="see-more"
-                        onclick=${() => {
-                    if (settings.hu_tao == 'develop') {
-                        change_settings_page('sku');
-                    } else {
-                        dialog({
-                            id: 'hu_tao',
-                            title: tl(trans.development),
-                            body: html.node`
-                                ${setting({ id: 'hu_tao', text: false, focus: true })}
-                            `
-                        });
-                    }
-                }}
-                    >
+                    <button class="see-more" onclick=${() => {
+                        if (settings.hu_tao == 'develop') {
+                            change_settings_page('sku');
+                        } else {
+                            dialog({
+                                id: 'hu_tao',
+                                title: tl(trans.development),
+                                body: html.node`
+                                    ${setting({ id: 'hu_tao', text: false, focus: true })}
+                                `
+                            });
+                        }
+                    }}>
                         ${tl(trans.manage_feature_flags)}
+                    </button>
+                    <button class="see-more" onclick=${() => {
+                        save_setting('popups_seen', []);
+                    }}>
+                        Forget which popups have been seen
                     </button>
                 </section>
             `
@@ -1585,6 +1580,14 @@ export async function render_setting_page(page_id) {
             return;
         }
 
+        if (!page.state.quick_access_items) {
+            setTimeout(() => {
+                render_setting_page('profile');
+            }, 10);
+            page_loading();
+            return;
+        }
+
         register_skip_to([]);
 
         const cache = await load_profile_cache_externally(auth.name);
@@ -1597,6 +1600,34 @@ export async function render_setting_page(page_id) {
         render(
             page.structure.main,
             html`
+                ${ff('friends') ? html.node`
+                    <section class="bleh--panel">
+                        <h4>${tl(trans.close_friends)}</h4>
+                        <div class="setting-group">
+                            ${friends = setting({
+                                id: 'friends',
+                                list: settings.friends,
+                                func: (val) => {
+                                    if (!val.includes(settings.starred_friend))
+                                        save_setting('starred_friend', '');
+
+                                    checkup_friend_cache(val);
+
+                                    starred.update(select_prepare_list([{ value: '', text: tl(trans.none) }, ...val]));
+                                }
+                            })}
+                            ${starred = setting({ id: 'starred_friend', list: select_prepare_list([{ value: '', text: tl(trans.none) }, ...settings.friends]) })}
+                        </div>
+                        <p class="card-tip">${tl(trans.friend_difference)}</p>
+                    </section>
+                ` : ''}
+                <section class="bleh--panel">
+                    <h4>${tl(trans.navigation_items.name)}</h4>
+                    <div class="setting-group">
+                        ${setting({ id: 'navigation_items', list: page.state.quick_access_items })}
+                        ${!page.mobile ? setting({ id: 'navigation_language' }) : ''}
+                    </div>
+                </section>
                 <section class="bleh--panel">
                     <h4>${tl(trans.banners)}</h4>
                     <div class="inner-preview pad">
@@ -1630,20 +1661,12 @@ export async function render_setting_page(page_id) {
                                     <div class="mockup-panel main"></div>
                                 </div>
                             </div>
-                            <div
-                                class="profile-mockup-background from-avatar"
-                                style="background-image: url(${auth.avatar.replace(
-                '/avatar42s/',
-                '/avatar300s/'
-            )})"
-                            ></div>
-                            ${cache.banner
-                    ? html.node`
-                        <div class="profile-mockup-background from-banner" style="background-image: url(${cache.banner})"></div>
-                        `
-                    : html.node`
-                        <div class="profile-mockup-background from-track" style="background-image: url(https://lastfm.freetls.fastly.net/i/u/avatar300s/df927f4f88034b7f9a651636b965c9d7)"></div>
-                        `}
+                            <div class="profile-mockup-background from-avatar" style="background-image: url(${auth.avatar.replace('/avatar42s/','/avatar300s/')})" />
+                            ${cache.banner ? html.node`
+                                <div class="profile-mockup-background from-banner" style="background-image: url(${cache.banner})"></div>
+                            ` : html.node`
+                                <div class="profile-mockup-background from-track" style="background-image: url(https://lastfm.freetls.fastly.net/i/u/avatar300s/df927f4f88034b7f9a651636b965c9d7)"></div>
+                            `}
                         </div>
                     </div>
                     <div class="setting-group">
@@ -1652,42 +1675,13 @@ export async function render_setting_page(page_id) {
                                 <h5>${tl(trans.view_backgrounds_on)}</h5>
                             </div>
                             <div class="primary-selections">
-                                ${setting({
-                        id: 'profile_header_own',
-                        standalone: true
-                    })}
-                                ${setting({
-                        id: 'profile_header_others',
-                        standalone: true
-                    })}
+                                ${setting({ id: 'profile_header_own', standalone: true })}
+                                ${setting({ id: 'profile_header_others', standalone: true })}
                             </div>
                         </div>
                         ${setting({ id: 'profile_avi_background' })}
                     </div>
                 </section>
-                ${ff('friends')
-                    ? html.node`
-            <section class="bleh--panel">
-                <h4>${tl(trans.close_friends)}</h4>
-                <div class="setting-group">
-                    ${friends = setting({
-                        id: 'friends',
-                        list: settings.friends,
-                        func: (val) => {
-                            if (!val.includes(settings.starred_friend))
-                                save_setting('starred_friend', '');
-
-                            checkup_friend_cache(val);
-
-                            starred.update(select_prepare_list([{ value: '', text: tl(trans.none) }, ...val]));
-                        }
-                    })}
-                    ${starred = setting({ id: 'starred_friend', list: select_prepare_list([{ value: '', text: tl(trans.none) }, ...settings.friends]) })}
-                </div>
-                <p class="card-tip">${tl(trans.friend_difference)}</p>
-            </section>
-            `
-                    : ''}
                 <section class="bleh--panel">
                     <h4>${tl(trans.other)}</h4>
                     <div class="setting-group">

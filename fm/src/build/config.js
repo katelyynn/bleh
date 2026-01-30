@@ -1288,7 +1288,8 @@ export let settings_store = {
         type: 'list',
         title: trans.close_friends,
         body: trans.friends_setting,
-        warn_if_matches_auth: true
+        warn_if_matches_auth: true,
+        beta: true
     },
     starred_friend: {
         default: '',
@@ -1373,5 +1374,9 @@ export let settings_store = {
     translator_view: {
         default: 'en',
         type: 'select'
+    },
+    popups_seen: {
+        default: [],
+        type: 'list'
     }
 };

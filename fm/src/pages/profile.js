@@ -56,6 +56,7 @@ import { expand_avatar } from '../avatar.js';
 import { status } from '../components/status.js';
 import { hoshino } from '../components/hoshino.js';
 import { find_pronouns } from '../components/pronouns.js';
+import { queue_popup } from '../components/popup.js';
 
 export async function bleh_profiles() {
     // the obsessions page is a user subpage but works very differently
@@ -192,6 +193,10 @@ export async function bleh_profiles() {
     if (ff('profile_fonts') && settings.display_name_styles) {
         profile_name.setAttribute('data-font', cache.font);
         profile_name.setAttribute('data-font-style', cache.font_style);
+
+        setTimeout(() => {
+            queue_popup('profile_name_style', profile_name, 'bottom');
+        }, 0);
     }
 
     // new account
