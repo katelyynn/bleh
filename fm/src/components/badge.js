@@ -6,7 +6,7 @@
 
 import { log } from '../build/log';
 import { sponsor_list } from '../build/sponsor';
-import { tl, trans } from '../build/trans';
+import { lang_info, tl, trans } from '../build/trans';
 import { html } from 'lighterhtml';
 import { sponsor } from '../sponsor.js';
 import tippy from 'tippy.js';
@@ -17,6 +17,19 @@ export function load_badges(user, solo = false) {
     if (!sponsor_list.badges.hasOwnProperty(user)) return;
 
     let badges = [];
+
+    // create modern translation badges
+    const trans_contributions = get_trans_contributions(user);
+    log(`found ${trans_contributions.length} contribution(s) for ${user}`, 'sponsor', 'info', { trans_contributions });
+    if (trans_contributions.length > 0) {
+        trans_contributions.forEach(contribution => {
+            badges.push({
+                type: 'translation',
+                translation_code: contribution.code,
+                reason: contribution.name
+            });
+        });
+    }
 
     if (!Array.isArray(sponsor_list.badges[user])) {
         log('1 badge found', 'sponsor', 'info', sponsor_list.badges[user]);
@@ -29,14 +42,15 @@ export function load_badges(user, solo = false) {
             sponsor_list.badges[user]
         );
 
-        if (solo)
-            badges.push(
-                sponsor_list.badges[user][
-                    Object.keys(sponsor_list.badges[user]).length - 1
-                ]
-            );
-        else badges = sponsor_list.badges[user];
+        badges = [...badges, ...sponsor_list.badges[user]];
     }
+
+    // remove old translation badges
+    badges = badges.filter(badge => {
+        if (badge.type != 'translation') return true;
+
+        return 'translation_code' in badge;
+    });
 
     // now we run thru to add missing metadata
     badges.forEach((badge) => {
@@ -44,7 +58,19 @@ export function load_badges(user, solo = false) {
     });
 
     log('final badge list', 'sponsor', 'info', badges);
+
+    if (solo) return badges[badges.length - 1];
+
     return badges;
+}
+
+function get_trans_contributions(user) {
+    return Object.entries(lang_info)
+        .filter(([code, info]) => info.by.includes(user) && code != 'en')
+        .map(([code, info]) => ({
+            code,
+            name: info.name
+        }));
 }
 
 export function process_badge(badge, user) {
@@ -89,7 +115,8 @@ export function create_badge(
         lit: -1,
         name: '',
         user: '',
-        inbuilt: false
+        inbuilt: false,
+        translation_code: ''
     },
     on_avatar = false,
     long = false,
@@ -104,6 +131,11 @@ export function create_badge(
             ${badge.name}
         </span>
     `;
+
+    if (badge.translation_code) {
+        elem.classList.add('translation-lang');
+        elem.style.setProperty('--flag', `url(https://katelyynn.github.io/bleh/fm/flags/${badge.translation_code}.svg)`);
+    }
 
     if (long) elem.classList.add('expand');
 

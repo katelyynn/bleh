@@ -28991,6 +28991,17 @@
     if (!sponsor_list || !sponsor_list.badges) return;
     if (!sponsor_list.badges.hasOwnProperty(user)) return;
     let badges = [];
+    const trans_contributions = get_trans_contributions(user);
+    log(`found ${trans_contributions.length} contribution(s) for ${user}`, "sponsor", "info", { trans_contributions });
+    if (trans_contributions.length > 0) {
+      trans_contributions.forEach((contribution) => {
+        badges.push({
+          type: "translation",
+          translation_code: contribution.code,
+          reason: contribution.name
+        });
+      });
+    }
     if (!Array.isArray(sponsor_list.badges[user])) {
       log("1 badge found", "sponsor", "info", sponsor_list.badges[user]);
       badges.push(sponsor_list.badges[user]);
@@ -29001,17 +29012,24 @@
         "info",
         sponsor_list.badges[user]
       );
-      if (solo)
-        badges.push(
-          sponsor_list.badges[user][Object.keys(sponsor_list.badges[user]).length - 1]
-        );
-      else badges = sponsor_list.badges[user];
+      badges = [...badges, ...sponsor_list.badges[user]];
     }
+    badges = badges.filter((badge) => {
+      if (badge.type != "translation") return true;
+      return "translation_code" in badge;
+    });
     badges.forEach((badge) => {
       badge = process_badge(badge, user);
     });
     log("final badge list", "sponsor", "info", badges);
+    if (solo) return badges[badges.length - 1];
     return badges;
+  }
+  function get_trans_contributions(user) {
+    return Object.entries(lang_info).filter(([code, info]) => info.by.includes(user) && code != "en").map(([code, info]) => ({
+      code,
+      name: info.name
+    }));
   }
   function process_badge(badge, user) {
     badge.user = user;
@@ -29044,7 +29062,8 @@
     lit: -1,
     name: "",
     user: "",
-    inbuilt: false
+    inbuilt: false,
+    translation_code: ""
   }, on_avatar = false, long = false, small = false) {
     log("creating", "badge", "info", { badge, on_avatar, long, small });
     const classlist = on_avatar ? "avatar-status-dot" : "label no-hover";
@@ -29053,6 +29072,10 @@
             ${badge.name}
         </span>
     `;
+    if (badge.translation_code) {
+      elem.classList.add("translation-lang");
+      elem.style.setProperty("--flag", `url(https://katelyynn.github.io/bleh/fm/flags/${badge.translation_code}.svg)`);
+    }
     if (long) elem.classList.add("expand");
     if (badge.icon != "" && badge.hue > -1 && badge.sat > -1 && badge.lit > -1) {
       elem.style.setProperty("--mask", `url(${badge.icon})`);
@@ -50605,7 +50628,7 @@
     });
     let badges = load_badges(auth.name, true);
     if (badges) {
-      auth_link2.appendChild(create_badge(badges[0], false, false, true));
+      auth_link2.appendChild(create_badge(badges, false, false, true));
     } else if (auth.pro) {
       auth_link2.appendChild(html.node`
             <span class="label user-status-subscriber auth-badge">${tl2(trans.badges["user-status-subscriber"].name)}</span>

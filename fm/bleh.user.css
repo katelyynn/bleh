@@ -5003,6 +5003,21 @@
             backdrop-filter: none !important;
             -webkit-backdrop-filter: none !important;
         }
+
+        &.translation-lang {
+            &:after {
+                content: '';
+                position: absolute;
+                background: var(--flag);
+
+                --flag-size: 10px;
+                width: var(--flag-size);
+                height: var(--flag-size);
+
+                left: calc(var(--sides) + var(--icon-size) - var(--flag-size));
+                top: calc(50% + var(--icon-size) / 2 - var(--flag-size));
+            }
+        }
     }
 
     .header-new-on-tour {
