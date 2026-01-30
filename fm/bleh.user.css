@@ -251,9 +251,8 @@
             inset 0 -1px 0 0 hsl(var(--b3), 70%),
             inset 0 1px 2px hsl(var(--b7), 0.2);
         --focused-input-shadow:
-            inset 0 -3px 10px 1px hsl(var(--h3), 16%),
-            inset 0 -1px 0 0 hsl(var(--b3), 70%),
-            inset 0 1px 2px hsl(var(--b7), 0.2);
+            inset 0 0 0 1px hsl(var(--h3), 40%),
+            var(--input-shadow);
         --group-shadow:
             inset 0 1px 0 0 hsl(var(--b2), 0.3),
             inset 0 0 0 1px hsl(var(--b3), 0.35);
@@ -328,9 +327,8 @@
                 inset 0 -1px 0 0 hsl(var(--b3)),
                 inset 0 1px 2px 1px hsl(var(--b3), 0.4);
             --focused-input-shadow:
-                inset 0 -3px 10px 1px hsl(var(--h3), 16%),
-                inset 0 -1px 0 0 hsl(var(--b3)),
-                inset 0 1px 2px 1px hsl(var(--b3), 0.4);
+                inset 0 0 0 1px hsl(var(--h3), 40%),
+                var(--input-shadow);
             --group-shadow:
                 inset 0 1px 0 0 hsl(var(--b2), 0.5),
                 inset 0 0 0 1px hsl(var(--b3), 0.6);
@@ -381,9 +379,8 @@
                 inset 0 -1px 0 0 var(--card-border-base),
                 inset 0 1px 3px hsl(var(--b7), 0.1);
             --focused-input-shadow:
-                inset 0 -3px 10px 1px hsl(var(--h3), 30%),
-                inset 0 -1px 0 0 var(--card-border-base),
-                inset 0 1px 3px hsl(var(--b7), 0.1);
+                inset 0 0 0 1px hsl(var(--l3-c), 30%),
+                var(--input-shadow);
             --group-shadow:
                 inset 0 -1px 0 0 hsl(var(--b4), 0.4),
                 inset 0 0 0 1px hsl(var(--b4), 0.4);
@@ -449,9 +446,8 @@
                 inset 0 -1px 0 0 var(--card-border-base),
                 inset 0 1px 3px hsl(var(--b7), 0.1);
             --focused-input-shadow:
-                inset 0 -3px 10px 1px hsl(var(--h3), 30%),
-                inset 0 -1px 0 0 var(--card-border-base),
-                inset 0 1px 3px hsl(var(--b7), 0.1);
+                inset 0 0 0 1px hsl(var(--l3-c), 30%),
+                var(--input-shadow);
             --group-shadow:
                 inset 0 -1px 0 0 hsl(var(--b4), 0.4),
                 inset 0 0 0 1px hsl(var(--b4), 0.15);
