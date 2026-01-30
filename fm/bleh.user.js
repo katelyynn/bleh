@@ -71124,7 +71124,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         date: "2025-11-10"
       },
       sandrone: {
-        default: false,
+        default: true,
         name: "Enable a february exclusive feature",
         date: "2026-01-29"
       }
