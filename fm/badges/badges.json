@@ -557,6 +557,10 @@
         },
         "thomasb2k": {
             "type": "sponsor"
+        },
+        "techplayz32": {
+            "type": "translation",
+            "reason": "Русский"
         }
     }
 }
