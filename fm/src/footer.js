@@ -55,18 +55,6 @@ export function bleh_footer() {
                     <p>
                         <a onclick=${() => sponsor()}>${{ html: tl(trans.supported_by, { c: sponsoring, s: '<span class="b">', '/s': '</span>' }) }}</a>
                     </p>
-                    ${lang != 'en' && lang in lang_info ?
-                        html.node`
-                            <p>
-                                ${{
-                                    html: tl(trans.translations, {
-                                        l: lang_info[lang].name,
-                                        u: `<span class="b">${lang_info[lang].by.map(user => `<a href="${root}user/${user}">${user}</a>`).join(', ')}</span>`
-                                    })
-                                }}
-                            </p>
-                        `
-                    :   ''}
                 </div>
                 <div class="footer-web">
                     <a
@@ -90,6 +78,20 @@ export function bleh_footer() {
                     /></a>
                 </div>
             </div>
+            ${lang != 'en' && lang in lang_info ? html.node`
+                <div class="footer-bleh-top">
+                    <div class="footer-credit">
+                        <p>
+                            ${{
+                                html: tl(trans.translations, {
+                                    l: lang_info[lang].name,
+                                    u: `<span class="b">${lang_info[lang].by.map(user => `<a href="${root}user/${user}">${user}</a>`).join(', ')}</span>`
+                                })
+                            }}
+                        </p>
+                    </div>
+                </div>
+            ` : ''}
             ${extras}
         `
     );

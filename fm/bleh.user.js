@@ -58536,16 +58536,6 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                     <p>
                         <a onclick=${() => sponsor()}>${{ html: tl2(trans.supported_by, { c: sponsoring, s: '<span class="b">', "/s": "</span>" }) }}</a>
                     </p>
-                    ${lang != "en" && lang in lang_info ? html.node`
-                            <p>
-                                ${{
-        html: tl2(trans.translations, {
-          l: lang_info[lang].name,
-          u: `<span class="b">${lang_info[lang].by.map((user) => `<a href="${root}user/${user}">${user}</a>`).join(", ")}</span>`
-        })
-      }}
-                            </p>
-                        ` : ""}
                 </div>
                 <div class="footer-web">
                     <a
@@ -58569,6 +58559,20 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                     /></a>
                 </div>
             </div>
+            ${lang != "en" && lang in lang_info ? html.node`
+                <div class="footer-bleh-top">
+                    <div class="footer-credit">
+                        <p>
+                            ${{
+        html: tl2(trans.translations, {
+          l: lang_info[lang].name,
+          u: `<span class="b">${lang_info[lang].by.map((user) => `<a href="${root}user/${user}">${user}</a>`).join(", ")}</span>`
+        })
+      }}
+                        </p>
+                    </div>
+                </div>
+            ` : ""}
             ${extras}
         `
     );
