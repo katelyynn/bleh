@@ -44580,7 +44580,7 @@
       page.state.oracle_debug.artist = artist_data;
       log("using artist data", "oracle", "info", { artist_data });
       if (page.type == "track")
-        url = `https://musicbrainz.org/ws/2/recording?query="${sanitise(clean_title(page.name), " ")}" AND ${artist_template} AND status:Official`;
+        url = `https://musicbrainz.org/ws/2/recording?inc=release-events&query="${sanitise(clean_title(page.name), " ")}" AND ${artist_template} AND status:Official`;
       else if (page.type == "album")
         url = `https://musicbrainz.org/ws/2/release?query=release:"${sanitise(clean_title(page.name), " ")}" AND ${artist_template}`;
       if (page.type == "album") {
@@ -45287,7 +45287,7 @@
                                                 <h4 class="source-album-name">${title_elem}</h4>
                                                 <p class="source-album-artist">${artist_elem2}</p>
                                                 <p class="source-album-stats oracle-stats" ref=${(el) => stats = el}>
-                                                    ${type}
+                                                    <span class="type">${type}</span>
                                                     ${match3 ? html.node`
                                                         <span class="plays">
                                                             <span class="bleh-icon" />
@@ -45306,7 +45306,7 @@
                                                 <h3 class="resource-list--release-list-item-name">${title_elem}</h3>
                                                 <p class="resource-list--release-list-item-artist">${artist_elem2}</p>
                                                 <p class="resource-list--release-list-item-aux-text resource-list--release-list-item-listeners oracle-stats" ref=${(el) => stats = el}>
-                                                    ${type}
+                                                    <span class="type">${type}</span>
                                                     ${match3 ? html.node`
                                                         <span class="plays">
                                                             <span class="bleh-icon" />
@@ -45315,7 +45315,7 @@
                                                     ` : ""}
                                                 </p>
                                                 <p class="resource-list--release-list-item-aux-text">
-                                                    year, track count
+                                                    ${tl2(trans.count_tracks, { c: release["track-count"] })}
                                                 </p>
                                                 <div class="media-item" ref=${(el) => artwork_container = el}>
                                                     ${artwork ? html.node`
@@ -60847,6 +60847,10 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       // problem with rus. language using different versions of same word for different number -- craw
       pl: "{c} odtworze\u0144",
       zh: "{c} \u6B21\u64AD\u653E"
+    },
+    count_tracks: {
+      // tracks on an album
+      en: "{c} tracks"
     },
     count_scrobbles: {
       en: "{c} scrobbles",

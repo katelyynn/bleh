@@ -1107,6 +1107,10 @@ export const trans = {
         pl: '{c} odtworzeń',
         zh: '{c} 次播放'
     },
+    count_tracks: {
+        // tracks on an album
+        en: '{c} tracks'
+    },
     count_scrobbles: {
         en: '{c} scrobbles',
         de: '{c} Scrobbles',

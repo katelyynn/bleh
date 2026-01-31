@@ -13138,24 +13138,6 @@
                 margin: unset;
                 margin-top: 4px;
 
-                &.oracle-stats {
-                    display: flex;
-                    gap: 10px;
-
-                    & > span {
-                        display: flex;
-                        align-items: center;
-                        gap: var(--icon-gap);
-
-                        --icon-size: 14px;
-                        --icon-colour: currentColor;
-
-                        &.plays {
-                            --icon: var(--icon-16-users);
-                        }
-                    }
-                }
-
                 &.oracle-loading {
                     height: 16px;
                     width: 90px;
@@ -13173,6 +13155,24 @@
             .source-album-art {
                 transform: scale(1.02);
                 filter: brightness(110%);
+            }
+        }
+    }
+
+    .oracle-stats {
+        display: flex;
+        gap: 10px;
+
+        & > span {
+            display: flex;
+            align-items: center;
+            gap: var(--icon-gap);
+
+            --icon-size: 14px;
+            --icon-colour: currentColor;
+
+            &.plays {
+                --icon: var(--icon-16-users);
             }
         }
     }

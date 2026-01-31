@@ -444,7 +444,7 @@ export function oracle_process() {
         log('using artist data', 'oracle', 'info', { artist_data });
 
         if (page.type == 'track')
-            url = `https://musicbrainz.org/ws/2/recording?query="${sanitise(clean_title(page.name), ' ')}" AND ${artist_template} AND status:Official`;
+            url = `https://musicbrainz.org/ws/2/recording?inc=release-events&query="${sanitise(clean_title(page.name), ' ')}" AND ${artist_template} AND status:Official`;
         else if (page.type == 'album')
             url = `https://musicbrainz.org/ws/2/release?query=release:"${sanitise(clean_title(page.name), ' ')}" AND ${artist_template}`;
 
@@ -1429,7 +1429,7 @@ export function oracle_process() {
                                                 <h4 class="source-album-name">${title_elem}</h4>
                                                 <p class="source-album-artist">${artist_elem}</p>
                                                 <p class="source-album-stats oracle-stats" ref=${(el) => (stats = el)}>
-                                                    ${type}
+                                                    <span class="type">${type}</span>
                                                     ${match ? html.node`
                                                         <span class="plays">
                                                             <span class="bleh-icon" />
@@ -1447,8 +1447,8 @@ export function oracle_process() {
                                             <div class="resource-list--release-list-item js-link-block">
                                                 <h3 class="resource-list--release-list-item-name">${title_elem}</h3>
                                                 <p class="resource-list--release-list-item-artist">${artist_elem}</p>
-                                                <p class="resource-list--release-list-item-aux-text resource-list--release-list-item-listeners oracle-stats" ref=${(el) => (stats = el)}>
-                                                    ${type}
+                                                <p class="resource-list--release-list-item-aux-text resource-list--release-list-item-listeners oracle-stats" ref=${el => stats = el}>
+                                                    <span class="type">${type}</span>
                                                     ${match ? html.node`
                                                         <span class="plays">
                                                             <span class="bleh-icon" />
@@ -1457,7 +1457,7 @@ export function oracle_process() {
                                                     ` : ''}
                                                 </p>
                                                 <p class="resource-list--release-list-item-aux-text">
-                                                    year, track count
+                                                    ${tl(trans.count_tracks, { c: release['track-count'] })}
                                                 </p>
                                                 <div class="media-item" ref=${el => artwork_container = el}>
                                                     ${artwork ? html.node`
