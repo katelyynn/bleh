@@ -55871,6 +55871,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           ".listeners-section-item"
         );
         listeners_section.classList = "user-list top-listeners-list small";
+        listeners_section.setAttribute("data-list-view", "grid");
         render(listeners_section, html``);
         listeners.forEach((listener, index3) => {
           listeners_section.appendChild(

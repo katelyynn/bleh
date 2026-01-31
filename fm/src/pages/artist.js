@@ -426,6 +426,7 @@ export function bleh_artists() {
             );
 
             listeners_section.classList = 'user-list top-listeners-list small';
+            listeners_section.setAttribute('data-list-view', 'grid');
             render(listeners_section, html``);
 
             listeners.forEach((listener, index) => {
