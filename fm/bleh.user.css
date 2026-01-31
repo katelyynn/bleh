@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           bleh (dev)
 @namespace      github.com/katelyynn/bleh
-@version        2026.0131
+@version        2026.0131.1
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.css
@@ -25,7 +25,7 @@
     }
 
     body {
-        --version-build: "2026.0131";
+        --version-build: "2026.0131.1";
 
         --font:
             var(--custom_font, ""), Funnel Sans, Inter, Ubuntu Sans, Spline Sans,
@@ -28055,6 +28055,7 @@
 
     .update-center-icon {
         position: relative;
+        width: fit-content;
 
         & > .update-container {
             &.spin {
