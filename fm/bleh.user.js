@@ -41094,81 +41094,79 @@
               )
             );
           }
-          render(
-            lists,
-            html`
-                        ${current.map((val) => {
-              return html.node`
-                                <button class="btn setting-list-item current" data-host=${list[val]?.host} onclick=${() => {
-                const new_list = current.filter(
-                  (item) => item != val
-                );
-                save_setting(id, new_list);
-                render_list_items(new_list);
-                if (func) func(new_list);
-              }}>
-                                    ${list[val]?.icon != null ? html.node`
-                                    <div class="bleh-icon" data-type=${list[val].icon} />
-                                    ` : ""}
-                                    <div class="info">
-                                        ${list[val]?.name || val}
-                                        ${list[val]?.new_release ? html.node`<span class="new-badge new">${tl2(trans.new)}</span>` : ""}
-                                    </div>
-                                    <div class="bleh-icon indicator" data-type="minus" />
-                                </button>
-                            `;
-            })}
-                        ${!settings_store[id].predefined ? () => {
-              const button2 = html.node`
-                                <button class="btn setting-list-item current">
-                                    <div class="info">
-                                        ${tl2(trans.add)}
-                                    </div>
-                                    <div class="bleh-icon indicator" data-type="add" />
-                                </button>
-                            `;
-              let input_box;
-              const tooltip = tippy_esm_default(button2, {
-                theme: "window",
-                content: html.node`
-                                    ${input_box = input({
-                  focus: true,
-                  func: complete_add,
-                  warn_if_matches_auth: settings_store[id].warn_if_matches_auth,
-                  warn_if_empty: true
-                })}
-                                `,
-                placement: "bottom",
-                interactive: true,
-                interactiveBorder: 10,
-                trigger: "click",
-                appendTo: document.body,
-                onShow() {
-                  input_box.focus();
-                }
-              });
-              function complete_add(val) {
-                if (val == auth.name || val.length < 1)
-                  return;
-                tooltip.destroy();
-                const new_list = [...current, val];
-                save_setting(id, new_list);
-                render_list_items(new_list);
-                if (func) func(new_list);
+          render(lists, html`
+                    ${current.map((val) => {
+            return html.node`
+                            <button class="btn setting-list-item current" data-host=${list[val]?.host} onclick=${() => {
+              const new_list = current.filter(
+                (item) => item != val
+              );
+              save_setting(id, new_list);
+              render_list_items(new_list);
+              if (func) func(new_list);
+            }}>
+                                ${list[val]?.icon != null ? html.node`
+                                <div class="bleh-icon" data-type=${list[val].icon} />
+                                ` : ""}
+                                <div class="info">
+                                    ${list[val]?.name || val}
+                                    ${list[val]?.new_release ? html.node`<span class="new-badge new">${tl2(trans.new)}</span>` : ""}
+                                </div>
+                                <div class="bleh-icon indicator" data-type="minus" />
+                            </button>
+                        `;
+          })}
+                    ${!settings_store[id].predefined ? () => {
+            const button2 = html.node`
+                            <button class="btn setting-list-item current">
+                                <div class="info">
+                                    ${tl2(trans.add)}
+                                </div>
+                                <div class="bleh-icon indicator" data-type="add" />
+                            </button>
+                        `;
+            let input_box;
+            const tooltip = tippy_esm_default(button2, {
+              theme: "window",
+              content: html.node`
+                                ${input_box = input({
+                focus: true,
+                func: complete_add,
+                warn_if_matches_auth: settings_store[id].warn_if_matches_auth,
+                warn_if_empty: true
+              })}
+                            `,
+              placement: "bottom",
+              interactive: true,
+              interactiveBorder: 10,
+              trigger: "click",
+              appendTo: document.body,
+              onShow() {
+                input_box.focus();
               }
-              return button2;
-            } : ""}
-                        ${settings_store[id].predefined ? html.node`
+            });
+            function complete_add(val) {
+              if (val == auth.name || val.length < 1)
+                return;
+              tooltip.destroy();
+              const new_list = [...current, val];
+              save_setting(id, new_list);
+              render_list_items(new_list);
+              if (func) func(new_list);
+            }
+            return button2;
+          } : ""}
+                    ${settings_store[id].predefined ? html.node`
                         ${Object.entries(available).map(([val, formal]) => {
-              return html.node`
+            return html.node`
                                 <button class="btn setting-list-item" data-host=${formal.host} onclick=${() => {
-                const new_list = [...current, val];
-                save_setting(id, new_list);
-                render_list_items(new_list);
-                if (func) func(new_list);
-              }}>
-                                    ${formal.icon != null ? html.node`
-                                    <div class="bleh-icon" data-type=${formal.icon} />
+              const new_list = [...current, val];
+              save_setting(id, new_list);
+              render_list_items(new_list);
+              if (func) func(new_list);
+            }}>
+                                    ${formal.icon ? html.node`
+                                        <div class="bleh-icon" data-type=${formal.icon} />
                                     ` : ""}
                                     <div class="info">
                                         ${formal.name}
@@ -41177,10 +41175,9 @@
                                     <div class="bleh-icon indicator" data-type="add" />
                                 </button>
                             `;
-            })}
+          })}
                     ` : ""}
-                    `
-          );
+                `);
         };
         if (!list && settings_store[id].predefined)
           return setting_fail(id, {

@@ -28746,8 +28746,6 @@
         flex-wrap: wrap;
         gap: 6px;
 
-        margin: 0 calc(-1 * var(--button-sides));
-
         .setting-list-item {
             display: flex;
             align-items: center;
@@ -28755,13 +28753,16 @@
             text-align: left;
 
             &:not(.current) {
+                --bg: hsl(var(--b4), 10%);
+                --bg-hov: hsl(var(--b4), 30%);
+                --bg-atv: hsl(var(--b4), 50%);
                 --col: hsl(var(--c3));
                 --mask-colour: hsl(var(--c3), 80%);
             }
 
-            --bg: transparent;
-            --bg-hov: hsl(var(--b4), 40%);
-            --bg-atv: hsl(var(--b4), 60%);
+            --bg: hsl(var(--b4), 60%);
+            --bg-hov: hsl(var(--b4), 80%);
+            --bg-atv: hsl(var(--b4));
             --shadow: none;
 
             --button-height: 28px;
@@ -28780,6 +28781,10 @@
 
             .indicator {
                 --icon-size: 14px;
+            }
+
+            &.current + .setting-list-item:not(.current) {
+                margin-left: var(--card-gap);
             }
         }
 
