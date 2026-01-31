@@ -32394,7 +32394,7 @@
             </button>
             ${can_block_or_report ? html.node`
                 <div class="sep" />
-                ${can_report ? html.node`
+                ${can_block ? html.node`
                 <button class="dropdown-menu-clickable-item more-item--report" data-type="block" onclick=${() => {
         block_user(page.name);
       }}>
