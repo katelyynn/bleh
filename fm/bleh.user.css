@@ -12583,7 +12583,7 @@
         align-items: center;
 
         width: var(--message-sender-width);
-        min-height: 300px;
+        height: 300px;
 
         border-radius: var(--card-radius);
 
@@ -14748,8 +14748,13 @@
             color: currentColor;
         }
 
+        &:first-child,
         &.no-margin {
             margin: unset;
+        }
+
+        & + form {
+            margin-top: var(--card-gap);
         }
     }
 
