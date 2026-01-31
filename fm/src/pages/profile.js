@@ -2023,7 +2023,7 @@ export function bleh_profile_chart_render(
 
     render(panel.querySelector('.this-month'), html`
         ${tl(trans.value_this_month, { v: this_month.toLocaleString(lang) })}
-        <span class="diff">(${tl(trans[diff > 0 ? 'value_more' : 'value_less'], { v: diff > 0 ? diff.toLocaleString(lang) : Math.abs(diff).toLocaleString(lang) })})</span>
+        ${!Number.isNaN(diff) ? html.node`<span class="diff">(${tl(trans[diff > 0 ? 'value_more' : 'value_less'], { v: diff > 0 ? diff.toLocaleString(lang) : Math.abs(diff).toLocaleString(lang) })})</span>` : ''}
     `);
 
     prep_chart_colours();
