@@ -50350,6 +50350,16 @@
       const time2 = message.querySelector(".inbox-message-timestamp");
       const subject = message.querySelector(".inbox-message-subject > span").textContent.trim();
       const content = message.querySelector(".inbox-message-message > span").textContent.trim();
+      let valentine = false;
+      if (subject.endsWith("\u2661")) {
+        for (let translation in trans.valentine) {
+          if (subject == trans.valentine[translation].replace("{u}", auth.name)) {
+            valentine = true;
+            break;
+          }
+        }
+      }
+      if (valentine) message.classList.add("valentine", "colourful");
       patch_avatar(avatar2, author);
       let checkbox;
       render(message, html`
@@ -50379,7 +50389,7 @@
             <div class="notification-avatar">${avatar2}</div>
             <div
                 class="bleh-icon"
-                data-type="message"
+                data-type=${!valentine ? "message" : "valentine"}
                 style="--icon: var(--mask)"
             />
             <div class="notification-content not-main">
@@ -57683,6 +57693,24 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                 ${message_preview}
             </div>
         `);
+      if (page.subpage != "sent_message") {
+        let valentine = false;
+        if (message_subject.textContent.trim().endsWith("\u2661")) {
+          for (let translation in trans.valentine) {
+            if (message_subject.textContent.trim() == trans.valentine[translation].replace("{u}", auth.name)) {
+              valentine = true;
+              break;
+            }
+          }
+        }
+        if (valentine) {
+          message_preview.after(html.node`
+                    <div class="alert colourful valentine-coloured" data-type="valentine">
+                        ${tl2(trans.valentine_message_footer, { u: name_text })}
+                    </div>
+                `);
+        }
+      }
       style_name_from_badge(sender_panel, badge);
       const content_form = inbox.querySelector(".content-form");
       if (!content_form) return;
@@ -69739,6 +69767,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     valentine_info: {
       en: "You\u2019re seeing this as {u} is on your bleh close friends list, you have a high compatibility, and it\u2019s Valentines Day!"
+    },
+    valentine_message_footer: {
+      en: "This message\u2019s subject line indicates it was sent via bleh and {u} picked you as their valentine \u2661"
     },
     got_it: {
       // used when dismissing a popup

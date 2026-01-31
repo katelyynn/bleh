@@ -126,6 +126,10 @@
         --hue-brand-ig: 300;
         --hue-brand-twt: 202;
 
+        --hue-valentine: 353;
+        --sat-valentine: 1.32;
+        --sat-valentine: 0.97;
+
         --trans-short: 0.2s;
         --trans: 0.2s;
         --trans-function: cubic-bezier(0.095, 0.410, 0.055, 0.960);
@@ -12347,6 +12351,17 @@
             --padding: 12px 12px;
             transform: none !important;
 
+            &.valentine {
+                --hue-over: var(--hue-valentine);
+                --sat-over: var(--sat-valentine);
+                --lit-over: var(--lit-valentine);
+
+                & > .message-content > .message-subject {
+                    color: hsl(var(--l3-c));
+                    font-weight: var(--font-weight-medium);
+                }
+            }
+
             &.mini {
                 --padding: 5px 10px;
                 width: 100%;
@@ -12672,6 +12687,8 @@
     .inbox-message-view .inbox-message-info {
         margin: initial;
         padding: unset;
+        float: unset;
+        width: var(--message-width);
     }
     .inbox-message-view .inbox-message-message blockquote {
         background: hsla(var(--b4), 40%);
@@ -14748,6 +14765,7 @@
             color: currentColor;
         }
 
+        .setting-group > &,
         &:first-child,
         &.no-margin {
             margin: unset;
@@ -30522,5 +30540,12 @@
 
     [data-type="dislike"] {
         --mask: var(--icon-16-dislike);
+    }
+
+
+    .valentine-coloured {
+        --hue-over: var(--hue-valentine);
+        --sat-over: var(--sat-valentine);
+        --lit-over: var(--lit-valentine);
     }
 }

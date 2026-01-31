@@ -45,6 +45,21 @@ export function bleh_message_list(list, mini = false, delete_btn = null, checkbo
         const subject = message.querySelector('.inbox-message-subject > span').textContent.trim();
         const content = message.querySelector('.inbox-message-message > span').textContent.trim();
 
+        let valentine = false;
+
+        if (subject.endsWith('♡')) {
+            // valentines check
+
+            for (let translation in trans.valentine) {
+                if (subject == trans.valentine[translation].replace('{u}', auth.name)) {
+                    valentine = true;
+                    break;
+                }
+            }
+        }
+
+        if (valentine) message.classList.add('valentine', 'colourful');
+
         patch_avatar(avatar, author);
 
         let checkbox;
@@ -78,7 +93,7 @@ export function bleh_message_list(list, mini = false, delete_btn = null, checkbo
             <div class="notification-avatar">${avatar}</div>
             <div
                 class="bleh-icon"
-                data-type="message"
+                data-type=${!valentine ? 'message' : 'valentine'}
                 style="--icon: var(--mask)"
             />
             <div class="notification-content not-main">

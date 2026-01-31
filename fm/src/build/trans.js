@@ -10019,6 +10019,9 @@ export const trans = {
     valentine_info: {
         en: 'You’re seeing this as {u} is on your bleh close friends list, you have a high compatibility, and it’s Valentines Day!'
     },
+    valentine_message_footer: {
+        en: 'This message’s subject line indicates it was sent via bleh and {u} picked you as their valentine ♡'
+    },
     got_it: {
         // used when dismissing a popup
         en: 'Got it'

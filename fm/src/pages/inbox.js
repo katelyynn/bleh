@@ -148,6 +148,29 @@ export async function bleh_inbox() {
             </div>
         `);
 
+        if (page.subpage != 'sent_message') {
+            let valentine = false;
+
+            if (message_subject.textContent.trim().endsWith('♡')) {
+                // valentines check
+
+                for (let translation in trans.valentine) {
+                    if (message_subject.textContent.trim() == trans.valentine[translation].replace('{u}', auth.name)) {
+                        valentine = true;
+                        break;
+                    }
+                }
+            }
+
+            if (valentine) {
+                message_preview.after(html.node`
+                    <div class="alert colourful valentine-coloured" data-type="valentine">
+                        ${tl(trans.valentine_message_footer, { u: name_text })}
+                    </div>
+                `);
+            }
+        }
+
         style_name_from_badge(sender_panel, badge);
 
         // reply
