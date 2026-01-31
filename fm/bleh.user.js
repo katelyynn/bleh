@@ -32648,7 +32648,9 @@
     }
     const manage = create_profile_top_item(profile_header, {
       name: page.name,
-      type: "manage"
+      type: "manage",
+      beta: true,
+      action: "button"
     });
     manage_user(manage);
     if (!page.mobile)
@@ -32842,11 +32844,12 @@
     action = "",
     tooltip = "",
     allow_html = false,
-    tooltip_theme = ""
+    tooltip_theme = "",
+    beta = false
   }) {
     log(`creating top item of ${name}, ${link}, ${text4}`, "profile");
     let side_action;
-    if (action === "button") {
+    if (action == "button") {
       side_action = html.node`
             <button
                 class="btn side-action"
@@ -32856,6 +32859,7 @@
                 ${text4 || tl2(trans[type])}
                 ${new_release ? html.node`<div class="new-badge">${tl2(trans.new)}</div>` : ""}
                 ${updated ? html.node`<div class="new-badge">${tl2(trans.updated)}</div>` : ""}
+                ${beta ? html.node`<div class="new-badge">${tl2(trans.beta)}</div>` : ""}
             </button>
         `;
     } else {
@@ -32868,6 +32872,7 @@
                 ${text4 || tl2(trans[type])}
                 ${new_release ? html.node`<div class="new-badge">${tl2(trans.new)}</div>` : ""}
                 ${updated ? html.node`<div class="new-badge">${tl2(trans.updated)}</div>` : ""}
+                ${beta ? html.node`<div class="new-badge">${tl2(trans.beta)}</div>` : ""}
             </a>
         `;
     }

@@ -186,7 +186,9 @@ export function redesign_profile_header(is_own_profile, is_following) {
 
     const manage = create_profile_top_item(profile_header, {
         name: page.name,
-        type: 'manage'
+        type: 'manage',
+        beta: true,
+        action: 'button'
     });
     manage_user(manage);
 
@@ -403,13 +405,14 @@ export function create_profile_top_item(
         action = '',
         tooltip = '',
         allow_html = false,
-        tooltip_theme = ''
+        tooltip_theme = '',
+        beta = false
     }
 ) {
     log(`creating top item of ${name}, ${link}, ${text}`, 'profile');
 
     let side_action;
-    if (action === 'button') {
+    if (action == 'button') {
         side_action = html.node`
             <button
                 class="btn side-action"
@@ -419,6 +422,7 @@ export function create_profile_top_item(
                 ${text || tl(trans[type])}
                 ${new_release ? html.node`<div class="new-badge">${tl(trans.new)}</div>` : ''}
                 ${updated ? html.node`<div class="new-badge">${tl(trans.updated)}</div>` : ''}
+                ${beta ? html.node`<div class="new-badge">${tl(trans.beta)}</div>` : ''}
             </button>
         `;
     } else {
@@ -431,6 +435,7 @@ export function create_profile_top_item(
                 ${text || tl(trans[type])}
                 ${new_release ? html.node`<div class="new-badge">${tl(trans.new)}</div>` : ''}
                 ${updated ? html.node`<div class="new-badge">${tl(trans.updated)}</div>` : ''}
+                ${beta ? html.node`<div class="new-badge">${tl(trans.beta)}</div>` : ''}
             </a>
         `;
     }
