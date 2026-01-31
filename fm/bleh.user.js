@@ -48859,6 +48859,66 @@
         image.after(container);
         container.appendChild(image);
       });
+      if (status_cafe_user) {
+        const status_cafe_host = body.querySelector(".status-cafe-host");
+        render(status_cafe_host, html`
+                <div class="status-cafe">
+                    <div class="status-cafe-top">
+                        <span class="status-cafe-author">${tl2(trans.current_status)}</span>
+                        <span class="status-cafe-time">...</span>
+                    </div>
+                    <div class="status-cafe-content is-loading">
+                        <span class="status-cafe-emoji">
+                            <span class="status-cafe-loading-spinner">
+                                <span class="bleh-icon" />
+                            </span>
+                        </span>
+                        <span class="status-cafe-text">${tl2(trans.loading_status, { u: status_cafe_user })}</span>
+                    </div>
+                </div>
+            `);
+        fetch_status(status_cafe_user).then((status_cafe) => {
+          render(status_cafe_host, status_cafe);
+        });
+      }
+      body.querySelectorAll("t").forEach((timestamp2) => {
+        const time2 = timestamp2.textContent;
+        const flag = timestamp2.getAttribute("data-flag");
+        const date = DateTime.fromSeconds(parseInt(time2));
+        let text5 = "";
+        if (flag == "F") {
+          text5 = tl2(trans.date_at_time, {
+            d: date.toLocaleString(DateTime.DATE_HUGE),
+            t: date.toLocaleString(DateTime.TIME_SIMPLE)
+          });
+        } else if (flag == "f") {
+          text5 = tl2(trans.date_at_time, {
+            d: date.toLocaleString(DateTime.DATE_FULL),
+            t: date.toLocaleString(DateTime.TIME_SIMPLE)
+          });
+        } else if (flag == "D") {
+          text5 = date.toLocaleString(DateTime.DATE_FULL);
+        } else if (flag == "d") {
+          text5 = date.toLocaleString(DateTime.DATE_SHORT);
+        } else if (flag == "t") {
+          text5 = date.toLocaleString(DateTime.TIME_SIMPLE);
+        } else if (flag == "T") {
+          text5 = date.toLocaleString(DateTime.TIME_WITH_SECONDS);
+        } else if (flag == "R") {
+          text5 = date.toRelative();
+        }
+        const new_timestamp = html.node`
+                <t>${text5}</t>
+            `;
+        tippy_esm_default(new_timestamp, {
+          theme: "generic",
+          content: html.node`
+                    <span>${date.toLocaleString(DateTime.DATE_FULL)}</span>
+                    <small>${date.toLocaleString(DateTime.TIME_SIMPLE)}</small>
+                `
+        });
+        timestamp2.replaceWith(new_timestamp);
+      });
     }
     if (allow_hue) {
       console.info(hue2, sat, lit);
@@ -48884,66 +48944,6 @@
         log("cleared custom accent settings", "profile", "log");
       }
     }
-    if (status_cafe_user) {
-      const status_cafe_host = body.querySelector(".status-cafe-host");
-      render(status_cafe_host, html`
-            <div class="status-cafe">
-                <div class="status-cafe-top">
-                    <span class="status-cafe-author">${tl2(trans.current_status)}</span>
-                    <span class="status-cafe-time">...</span>
-                </div>
-                <div class="status-cafe-content is-loading">
-                    <span class="status-cafe-emoji">
-                        <span class="status-cafe-loading-spinner">
-                            <span class="bleh-icon" />
-                        </span>
-                    </span>
-                    <span class="status-cafe-text">${tl2(trans.loading_status, { u: status_cafe_user })}</span>
-                </div>
-            </div>
-        `);
-      fetch_status(status_cafe_user).then((status_cafe) => {
-        render(status_cafe_host, status_cafe);
-      });
-    }
-    body.querySelectorAll("t").forEach((timestamp2) => {
-      const time2 = timestamp2.textContent;
-      const flag = timestamp2.getAttribute("data-flag");
-      const date = DateTime.fromSeconds(parseInt(time2));
-      let text5 = "";
-      if (flag == "F") {
-        text5 = tl2(trans.date_at_time, {
-          d: date.toLocaleString(DateTime.DATE_HUGE),
-          t: date.toLocaleString(DateTime.TIME_SIMPLE)
-        });
-      } else if (flag == "f") {
-        text5 = tl2(trans.date_at_time, {
-          d: date.toLocaleString(DateTime.DATE_FULL),
-          t: date.toLocaleString(DateTime.TIME_SIMPLE)
-        });
-      } else if (flag == "D") {
-        text5 = date.toLocaleString(DateTime.DATE_FULL);
-      } else if (flag == "d") {
-        text5 = date.toLocaleString(DateTime.DATE_SHORT);
-      } else if (flag == "t") {
-        text5 = date.toLocaleString(DateTime.TIME_SIMPLE);
-      } else if (flag == "T") {
-        text5 = date.toLocaleString(DateTime.TIME_WITH_SECONDS);
-      } else if (flag == "R") {
-        text5 = date.toRelative();
-      }
-      const new_timestamp = html.node`
-            <t>${text5}</t>
-        `;
-      tippy_esm_default(new_timestamp, {
-        theme: "generic",
-        content: html.node`
-                <span>${date.toLocaleString(DateTime.DATE_FULL)}</span>
-                <small>${date.toLocaleString(DateTime.TIME_SIMPLE)}</small>
-            `
-      });
-      timestamp2.replaceWith(new_timestamp);
-    });
     if (cache2 && will_cache) {
       log("finalised cache from markdown parsing", "markdown", "info", {
         cache: cache2
