@@ -60562,15 +60562,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       }
     },
     friend_difference: {
-      en: "\u2018Friends\u2019 is a bleh-exclusive feature that allows you to keep up to date on your friend\u2019s listening history, it is local and does not influence your following list.",
-      de: "\u201EFreunde\u201C ist eine exklusive bleh-Funktion, mit der du auf dem Laufenden bleiben kannst, was deine Freunde h\xF6ren. Freunde werden lokal verwaltet und beeinflussen nicht deine Follower-Liste.",
-      es: "\u2018Amigos\u2019 es una funci\xF3n exclusiva de bleh que te permite estar al d\xEDa con el historial de reproducciones de tus amigos. Es local y no influye en tu lista de seguidos.",
-      it: "\u2018Amici\u2019 \xE8 una funzione esclusiva di bleh che ti permette di restare aggiornato con la cronologia di ascolto dei tuoi amici, \xE8 locale e non influenza la tua lista dei seguiti.",
-      pt: "\u2018Amigos\u2019 \xE9 um recurso exclusivo do bleh que permite voc\xEA acompanhar o hist\xF3rico de m\xFAsicas dos seus amigos. \xC9 um recurso local que n\xE3o influencia a sua lista de seguidores.",
-      sv: "\u2019V\xE4nner\u2019 \xE4r en exklusiv del av bleh som till\xE5ter dig att h\xE5lla koll p\xE5 dina v\xE4nners lyssnarhistoria, det hanteras lokalt och r\xF6r inte din f\xF6ljarlista.",
-      ru: "\xAB\u0414\u0440\u0443\u0437\u044C\u044F\xBB \u2014 \u044D\u0442\u043E \u044D\u043A\u0441\u043A\u043B\u044E\u0437\u0438\u0432\u043D\u0430\u044F \u0444\u0443\u043D\u043A\u0446\u0438\u044F bleh, \u043A\u043E\u0442\u043E\u0440\u0430\u044F \u043F\u043E\u0437\u0432\u043E\u043B\u044F\u0435\u0442 \u0432\u0430\u043C \u0441\u043B\u0435\u0434\u0438\u0442\u044C \u0437\u0430 \u0438\u0441\u0442\u043E\u0440\u0438\u0435\u0439 \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u0439 \u0432\u0430\u0448\u0438\u0445 \u0434\u0440\u0443\u0437\u0435\u0439. \u0421\u043F\u0438\u0441\u043E\u043A \u0443\u043F\u0440\u0430\u0432\u043B\u044F\u0435\u0442\u0441\u044F \u043B\u043E\u043A\u0430\u043B\u044C\u043D\u043E \u0438 \u043D\u0435 \u0432\u043B\u0438\u044F\u0435\u0442 \u043D\u0430 \u0432\u0430\u0448 \u0441\u043F\u0438\u0441\u043E\u043A \u043F\u043E\u0434\u043F\u0438\u0441\u043E\u043A.",
-      pl: "\u2018Znajomi\u2019 to funkcja ekskluzywna do bleh kt\xF3ra pozwala na sprawdzenie historii s\u0142uchania twoich znajomych, dzia\u0142a lokalnie czyli nie wyp\u0142ywa na twoj\u0105 liste kont kt\xF3re obserwujesz.",
-      zh: "\u300C\u597D\u53CB\u300D\u662F bleh \u63D2\u4EF6\u7684\u4E13\u5C5E\u529F\u80FD\uFF0C\u8BA9\u4F60\u53EF\u4EE5\u5B9E\u65F6\u4E86\u89E3\u597D\u53CB\u7684\u6536\u542C\u5386\u53F2\u3002\u6B64\u5217\u8868\u4EC5\u5B58\u50A8\u4E8E\u672C\u5730\uFF0C\u4E0D\u4F1A\u540C\u6B65\u81F3 Last.fm \u5B98\u7F51\u7684\u5173\u6CE8\u5217\u8868\u3002"
+      en: "Close friends is a bleh system that allows you to keep up to date on your friend\u2019s listening history, it does not influence your following list."
     },
     friend_difference_min: {
       en: "bleh-only"

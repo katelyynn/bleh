@@ -916,15 +916,7 @@ export const trans = {
         }
     },
     friend_difference: {
-        en: '‘Friends’ is a bleh-exclusive feature that allows you to keep up to date on your friend’s listening history, it is local and does not influence your following list.',
-        de: '„Freunde“ ist eine exklusive bleh-Funktion, mit der du auf dem Laufenden bleiben kannst, was deine Freunde hören. Freunde werden lokal verwaltet und beeinflussen nicht deine Follower-Liste.',
-        es: '‘Amigos’ es una función exclusiva de bleh que te permite estar al día con el historial de reproducciones de tus amigos. Es local y no influye en tu lista de seguidos.',
-        it: '‘Amici’ è una funzione esclusiva di bleh che ti permette di restare aggiornato con la cronologia di ascolto dei tuoi amici, è locale e non influenza la tua lista dei seguiti.',
-        pt: '‘Amigos’ é um recurso exclusivo do bleh que permite você acompanhar o histórico de músicas dos seus amigos. É um recurso local que não influencia a sua lista de seguidores.',
-        sv: '’Vänner’ är en exklusiv del av bleh som tillåter dig att hålla koll på dina vänners lyssnarhistoria, det hanteras lokalt och rör inte din följarlista.',
-        ru: '«Друзья» — это эксклюзивная функция bleh, которая позволяет вам следить за историей прослушиваний ваших друзей. Список управляется локально и не влияет на ваш список подписок.',
-        pl: '‘Znajomi’ to funkcja ekskluzywna do bleh która pozwala na sprawdzenie historii słuchania twoich znajomych, działa lokalnie czyli nie wypływa na twoją liste kont które obserwujesz.',
-        zh: '「好友」是 bleh 插件的专属功能，让你可以实时了解好友的收听历史。此列表仅存储于本地，不会同步至 Last.fm 官网的关注列表。'
+        en: 'Close friends is a bleh system that allows you to keep up to date on your friend’s listening history, it does not influence your following list.'
     },
     friend_difference_min: {
         en: 'bleh-only'
