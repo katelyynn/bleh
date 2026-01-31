@@ -15,57 +15,65 @@ export function bleh_users() {
     const users = page.structure.main?.querySelectorAll('.user-list-item:not(.user-list-item-mobile-ad)');
 
     users.forEach((user, index) => {
-        user.style.setProperty('--delay', index * 0.04 + 's');
-
-        let avatar = user.querySelector('.user-list-avatar');
-        let name = user.querySelector('.user-list-link');
-
-        const badge = patch_avatar(avatar, name.textContent, 'follow');
-        style_name_from_badge(name, badge);
-
-        let artists = user.querySelectorAll('.user-list-shared-artists a');
-        artists.forEach((artist) => {
-            artist.textContent = correct_artist(artist.textContent);
-        });
-
-        const md = user.querySelector('.user-list-about-me');
-
-        log('patching', 'user', 'info', { user, name: name?.textContent, md });
-
-        if (name)
-            name.insertBefore(html.node`<span class="at">@</span>`, name.firstChild);
-
-        if (md) {
-            // this removes fancy markdown components
-            md.textContent = md.textContent.replace(/(?<!\!)\[[^\]]*\]/g, '');
-
-            // this removes incomplete image snippets
-            md.textContent = md.textContent.replace(/^!\[[\s\S]*?…$/gm, '…');
-
-            render(
-                md,
-                markdown(md.textContent, {
-                    allow_headers: false,
-                    line_breaks: false,
-                    allow_lists: false
-                })
-            );
-        }
-
-        const is_followed = user.querySelector('.user-follow');
-        user.setAttribute('data-is-followed', is_followed != null);
-
-        const follow = user.querySelector('.toggle-button');
-        if (follow) {
-            follow.classList.add('btn');
-        }
-
-        const img = avatar.querySelector('img');
-        if (!img.src.endsWith('818148bf682d429dc215c1705eb27b98.png')) {
-            user.appendChild(html.node`
-                <div class="user-background" style="background-image: url(${img.src.replace('/avatar70s/', '/avatar300s/')})" />
-            `);
-        }
-        img.src = img.src.replace('/avatar70s/', '/avatar170s/');
+        patch_user_list_item(user, index);
     });
+}
+
+export function patch_user_list_item(user, index) {
+    user.style.setProperty('--delay', index * 0.04 + 's');
+
+    let avatar = user.querySelector('.user-list-avatar');
+    let name = user.querySelector('.user-list-link');
+
+    const badge = patch_avatar(avatar, name.textContent, 'follow');
+    style_name_from_badge(name, badge);
+
+    let artists = user.querySelectorAll('.user-list-shared-artists a');
+    artists.forEach((artist) => {
+        artist.textContent = correct_artist(artist.textContent);
+    });
+
+    const md = user.querySelector('.user-list-about-me');
+
+    log('patching', 'user', 'info', { user, name: name?.textContent, md });
+
+    if (name) {
+        name.textContent = name.textContent.trim();
+        name.insertBefore(html.node`<span class="at">@</span>`, name.firstChild);
+    }
+
+    if (md) {
+        // this removes fancy markdown components
+        md.textContent = md.textContent.replace(/(?<!\!)\[[^\]]*\]/g, '');
+
+        // this removes incomplete image snippets
+        md.textContent = md.textContent.replace(/^!\[[\s\S]*?…$/gm, '…');
+
+        render(
+            md,
+            markdown(md.textContent, {
+                allow_headers: false,
+                line_breaks: false,
+                allow_lists: false
+            })
+        );
+    }
+
+    const is_followed = user.querySelector('.user-follow');
+    user.setAttribute('data-is-followed', is_followed != null);
+
+    const follow = user.querySelector('.toggle-button');
+    if (follow) {
+        follow.classList.add('btn');
+    }
+
+    const img = avatar.querySelector('img');
+    if (!img.src.endsWith('818148bf682d429dc215c1705eb27b98.png')) {
+        user.appendChild(html.node`
+            <div class="user-background" style="background-image: url(${img.src.replace('/avatar70s/', '/avatar300s/')})" />
+        `);
+    }
+    img.src = img.src.replace('/avatar70s/', '/avatar170s/');
+
+    return user;
 }

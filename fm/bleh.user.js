@@ -45869,6 +45869,57 @@
     });
   }
 
+  // src/pages/users.js
+  function bleh_users() {
+    const users2 = page.structure.main?.querySelectorAll(".user-list-item:not(.user-list-item-mobile-ad)");
+    users2.forEach((user, index3) => {
+      patch_user_list_item(user, index3);
+    });
+  }
+  function patch_user_list_item(user, index3) {
+    user.style.setProperty("--delay", index3 * 0.04 + "s");
+    let avatar2 = user.querySelector(".user-list-avatar");
+    let name = user.querySelector(".user-list-link");
+    const badge = patch_avatar(avatar2, name.textContent, "follow");
+    style_name_from_badge(name, badge);
+    let artists = user.querySelectorAll(".user-list-shared-artists a");
+    artists.forEach((artist) => {
+      artist.textContent = correct_artist(artist.textContent);
+    });
+    const md = user.querySelector(".user-list-about-me");
+    log("patching", "user", "info", { user, name: name?.textContent, md });
+    if (name) {
+      name.textContent = name.textContent.trim();
+      name.insertBefore(html.node`<span class="at">@</span>`, name.firstChild);
+    }
+    if (md) {
+      md.textContent = md.textContent.replace(/(?<!\!)\[[^\]]*\]/g, "");
+      md.textContent = md.textContent.replace(/^!\[[\s\S]*?…$/gm, "\u2026");
+      render(
+        md,
+        markdown(md.textContent, {
+          allow_headers: false,
+          line_breaks: false,
+          allow_lists: false
+        })
+      );
+    }
+    const is_followed = user.querySelector(".user-follow");
+    user.setAttribute("data-is-followed", is_followed != null);
+    const follow = user.querySelector(".toggle-button");
+    if (follow) {
+      follow.classList.add("btn");
+    }
+    const img = avatar2.querySelector("img");
+    if (!img.src.endsWith("818148bf682d429dc215c1705eb27b98.png")) {
+      user.appendChild(html.node`
+            <div class="user-background" style="background-image: url(${img.src.replace("/avatar70s/", "/avatar300s/")})" />
+        `);
+    }
+    img.src = img.src.replace("/avatar70s/", "/avatar170s/");
+    return user;
+  }
+
   // src/components/music.js
   unsafeWindow._other_listener = function(id) {
     other_listener(id);
@@ -47118,35 +47169,19 @@
   }
   function bleh_top_listeners() {
     if (!ff("unify_top_listeners")) return;
-    const panel = page.structure.main.querySelector(
-      ":scope > .buffer-standard"
-    );
-    let view_buttons = document.createElement("div");
-    view_buttons.classList.add("view-buttons-wrapper");
-    view_buttons.innerHTML = `
-        <div class="view-buttons">
-            <button class="btn view-item" id="toggle-list_view-1" data-toggle="list_view" data-toggle-value="1" onclick="_update_item('list_view', 1)">
-                ${tl2(trans.grid)}
-            </button>
-            <button class="btn view-item" id="toggle-list_view-0" data-toggle="list_view" data-toggle-value="0" onclick="_update_item('list_view', 0)">
-                ${tl2(trans.list)}
-            </button>
-        </div>
-    `;
-    panel.insertBefore(view_buttons, panel.firstElementChild);
-    refresh_all();
-    let legacy_top_listeners_container = panel.querySelector(".top-listeners");
-    let legacy_top_listeners = legacy_top_listeners_container.querySelectorAll(
-      ".top-listeners-item"
-    );
-    const new_container = html.node`
-        <ul class="user-list top-listeners-list" />
+    const panel = page.structure.main.querySelector(":scope > .buffer-standard");
+    panel.insertBefore(setting({ id: "list_view", func: (val) => {
+      user_list.setAttribute("data-list-view", val);
+    } }), panel.firstElementChild);
+    const legacy_top_listeners_container = panel.querySelector(".top-listeners");
+    const legacy_top_listeners = legacy_top_listeners_container.querySelectorAll(".top-listeners-item");
+    const user_list = html.node`
+        <ul class="user-list top-listeners-list" data-list-view=${settings.list_view} />
     `;
     legacy_top_listeners.forEach((listener, index3) => {
-      new_container.appendChild(convert_top_listener(listener, index3));
+      user_list.appendChild(convert_top_listener(listener, index3));
     });
-    view_buttons.after(new_container);
-    legacy_top_listeners_container.remove();
+    legacy_top_listeners_container.replaceWith(user_list);
   }
   function convert_top_listener(listener, index3, key = "top-listeners") {
     let position = index3 + 1;
@@ -47168,7 +47203,7 @@
                 </span>
                 <h4 class="user-list-name">
                     <a class="user-list-link link-block-target" href=${name_wrap.getAttribute("href")} ref=${(el) => name_link = el}>
-                        @${name}
+                        ${name}
                     </a>
                 </h4>
                 <span class="avatar user-list-avatar" ref=${(el) => user_list_avatar = el}>
@@ -47185,8 +47220,6 @@
             </div>
         </li>
     `;
-    const badge = patch_avatar(user_list_avatar, name, "listener");
-    style_name_from_badge(name_link, badge);
     if (track_wrap) {
       let track_link = about_me.querySelector("a");
       track_link.classList.add("top-track");
@@ -47206,6 +47239,7 @@
         );
       }
     }
+    patch_user_list_item(new_listener, index3);
     return new_listener;
   }
   function redirect() {
@@ -51775,7 +51809,7 @@
             `}
         </div>
         <section class="side-actions">
-            <button class="btn side-action" data-type="import" onclick=${() => import_settings23()}>
+            <button class="btn side-action" data-type="import" onclick=${() => import_settings24()}>
                 ${tl2(trans.import)}
             </button>
             <button class="btn side-action" data-type="export" onclick=${() => export_settings()}>
@@ -53924,7 +53958,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       }
     }
   }
-  function import_settings23() {
+  function import_settings24() {
     let text4;
     const modal = dialog({
       id: "import_settings",
@@ -58459,51 +58493,6 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
             </section>
         `);
     }
-  }
-
-  // src/pages/users.js
-  function bleh_users() {
-    const users2 = page.structure.main?.querySelectorAll(".user-list-item:not(.user-list-item-mobile-ad)");
-    users2.forEach((user, index3) => {
-      user.style.setProperty("--delay", index3 * 0.04 + "s");
-      let avatar2 = user.querySelector(".user-list-avatar");
-      let name = user.querySelector(".user-list-link");
-      const badge = patch_avatar(avatar2, name.textContent, "follow");
-      style_name_from_badge(name, badge);
-      let artists = user.querySelectorAll(".user-list-shared-artists a");
-      artists.forEach((artist) => {
-        artist.textContent = correct_artist(artist.textContent);
-      });
-      const md = user.querySelector(".user-list-about-me");
-      log("patching", "user", "info", { user, name: name?.textContent, md });
-      if (name)
-        name.insertBefore(html.node`<span class="at">@</span>`, name.firstChild);
-      if (md) {
-        md.textContent = md.textContent.replace(/(?<!\!)\[[^\]]*\]/g, "");
-        md.textContent = md.textContent.replace(/^!\[[\s\S]*?…$/gm, "\u2026");
-        render(
-          md,
-          markdown(md.textContent, {
-            allow_headers: false,
-            line_breaks: false,
-            allow_lists: false
-          })
-        );
-      }
-      const is_followed = user.querySelector(".user-follow");
-      user.setAttribute("data-is-followed", is_followed != null);
-      const follow = user.querySelector(".toggle-button");
-      if (follow) {
-        follow.classList.add("btn");
-      }
-      const img = avatar2.querySelector("img");
-      if (!img.src.endsWith("818148bf682d429dc215c1705eb27b98.png")) {
-        user.appendChild(html.node`
-                <div class="user-background" style="background-image: url(${img.src.replace("/avatar70s/", "/avatar300s/")})" />
-            `);
-      }
-      img.src = img.src.replace("/avatar70s/", "/avatar170s/");
-    });
   }
 
   // src/footer.js

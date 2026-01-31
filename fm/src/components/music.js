@@ -34,6 +34,8 @@ import {
     open_starred_friend_window
 } from '../pages/profile.js';
 import { oracle_credits } from './oracle.js';
+import { setting } from './settings.js';
+import { patch_user_list_item } from '../pages/users.js';
 
 unsafeWindow._other_listener = function (id) {
     other_listener(id);
@@ -1627,42 +1629,24 @@ export function bleh_music_page_charts() {
 export function bleh_top_listeners() {
     if (!ff('unify_top_listeners')) return;
 
-    const panel = page.structure.main.querySelector(
-        ':scope > .buffer-standard'
-    );
+    const panel = page.structure.main.querySelector(':scope > .buffer-standard');
 
-    // view-related buttons
-    let view_buttons = document.createElement('div');
-    view_buttons.classList.add('view-buttons-wrapper');
-    view_buttons.innerHTML = `
-        <div class="view-buttons">
-            <button class="btn view-item" id="toggle-list_view-1" data-toggle="list_view" data-toggle-value="1" onclick="_update_item('list_view', 1)">
-                ${tl(trans.grid)}
-            </button>
-            <button class="btn view-item" id="toggle-list_view-0" data-toggle="list_view" data-toggle-value="0" onclick="_update_item('list_view', 0)">
-                ${tl(trans.list)}
-            </button>
-        </div>
-    `;
-    panel.insertBefore(view_buttons, panel.firstElementChild);
+    panel.insertBefore(setting({ id: 'list_view', func: (val) => {
+        user_list.setAttribute('data-list-view', val);
+    } }), panel.firstElementChild);
 
-    refresh_all();
+    const legacy_top_listeners_container = panel.querySelector('.top-listeners');
+    const legacy_top_listeners = legacy_top_listeners_container.querySelectorAll('.top-listeners-item');
 
-    let legacy_top_listeners_container = panel.querySelector('.top-listeners');
-    let legacy_top_listeners = legacy_top_listeners_container.querySelectorAll(
-        '.top-listeners-item'
-    );
-
-    const new_container = html.node`
-        <ul class="user-list top-listeners-list" />
+    const user_list = html.node`
+        <ul class="user-list top-listeners-list" data-list-view=${settings.list_view} />
     `;
 
     legacy_top_listeners.forEach((listener, index) => {
-        new_container.appendChild(convert_top_listener(listener, index));
+        user_list.appendChild(convert_top_listener(listener, index));
     });
 
-    view_buttons.after(new_container);
-    legacy_top_listeners_container.remove();
+    legacy_top_listeners_container.replaceWith(user_list);
 }
 
 export function convert_top_listener(listener, index, key = 'top-listeners') {
@@ -1693,7 +1677,7 @@ export function convert_top_listener(listener, index, key = 'top-listeners') {
                 </span>
                 <h4 class="user-list-name">
                     <a class="user-list-link link-block-target" href=${name_wrap.getAttribute('href')} ref=${(el) => (name_link = el)}>
-                        @${name}
+                        ${name}
                     </a>
                 </h4>
                 <span class="avatar user-list-avatar" ref=${(el) => (user_list_avatar = el)}>
@@ -1714,9 +1698,6 @@ export function convert_top_listener(listener, index, key = 'top-listeners') {
             </div>
         </li>
     `;
-
-    const badge = patch_avatar(user_list_avatar, name, 'listener');
-    style_name_from_badge(name_link, badge);
 
     if (track_wrap) {
         let track_link = about_me.querySelector('a');
@@ -1739,6 +1720,8 @@ export function convert_top_listener(listener, index, key = 'top-listeners') {
             );
         }
     }
+
+    patch_user_list_item(new_listener, index);
 
     return new_listener;
 }

@@ -8289,7 +8289,8 @@
     .js-shout-reply-cancel,
     .more-items,
     .modal-close-button, .modal-action-button,
-    .tab-container > li > button
+    .tab-container > li > button,
+    .user-list-follower-btn
     {
         --bg: var(--cards-overlay-image-subtlest, none), hsl(var(--b3));
         --bg-hov:
