@@ -29340,7 +29340,7 @@
       pre_existing_badge = null;
       pre_existing_badge_type = null;
     }
-    if (badges)
+    if (badges.length > 0)
       avatar2.appendChild(create_badge(badges[badges.length - 1], true));
     let image_header;
     const popup2 = tippy_esm_default(parent ? parent : avatar2, {
@@ -44416,6 +44416,12 @@
       }, true)}
                     </div>
                     <div class="view-buttons blend blend-v2">
+                        <p class="blend-text">${tl2(trans.are_these_results_accurate)}</p>
+                        <button class="left-icon blend-v2-btn mark-incorrect" data-type="dislike" onclick=${() => {
+        report_incorrect();
+      }}>
+                            ${tl2(trans.report_incorrect)}
+                        </button>
                         ${() => {
         const btn = html.node`
                                 <button class="left-icon blend-v2-btn" data-type="settings">
@@ -45027,11 +45033,19 @@
           render(
             releases_panel,
             html`
-                        <h3 class="text-18">
-                            ${tl2(trans.albums)}<span class="new-badge beta"
-                                >${tl2(trans.beta)}</span
-                            >
-                        </h3>
+                        <div class="top-container">
+                            <h3 class="text-18">
+                                ${tl2(trans.albums)}<span class="new-badge beta">${tl2(trans.beta)}</span>
+                            </h3>
+                            <div class="view-buttons blend blend-v2">
+                                <p class="blend-text">${tl2(trans.are_these_results_accurate)}</p>
+                                <button class="left-icon blend-v2-btn mark-incorrect" data-type="dislike" onclick=${() => {
+              report_incorrect();
+            }}>
+                                    ${tl2(trans.report_incorrect)}
+                                </button>
+                            </div>
+                        </div>
                         <div class="loading-data-container">
                             <div class="loading-data-text failed">
                                 ${tl2(trans.no_releases_found)}
@@ -45182,11 +45196,19 @@
         let source_albums;
         if (releases_panel) {
           render(releases_panel, html`
-                    <h3 class="text-18">
-                        ${tl2(trans.albums)}<span class="new-badge beta"
-                            >${tl2(trans.beta)}</span
-                        >
-                    </h3>
+                    <div class="top-container">
+                        <h3 class="text-18">
+                            ${tl2(trans.albums)}<span class="new-badge beta">${tl2(trans.beta)}</span>
+                        </h3>
+                        <div class="view-buttons blend blend-v2">
+                            <p class="blend-text">${tl2(trans.are_these_results_accurate)}</p>
+                            <button class="left-icon blend-v2-btn mark-incorrect" data-type="dislike" onclick=${() => {
+            report_incorrect();
+          }}>
+                                ${tl2(trans.report_incorrect)}
+                            </button>
+                        </div>
+                    </div>
                     <div class="${page.subpage == "overview" ? "source-albums-container" : "resource-list-container"}">
                         <div class="${page.subpage == "overview" ? "source-albums" : "resource-list--release-list"}">
                             ${releases.map((release, index3) => {
@@ -45803,6 +45825,45 @@
       log("saved to cache", "oracle", "info", { oracle });
       set_storage("bleh_oracle_cache", JSON.stringify(oracle));
     }
+  }
+  function report_incorrect() {
+    if (settings.tracklist_source != "oracle" && page.type == "album")
+      return;
+    let title = `${correct_artist(page.sister)} - ${correct_item_by_artist(page.name, page.sister)}`;
+    let link = window.location.href;
+    let sources;
+    let template;
+    if (page.type == "track") {
+      template = "1-incorrect-albums-assigned-to-track.yml";
+    } else {
+      template = "2-incorrect-album-listing.yml";
+    }
+    dialog({
+      id: "oracle_correction",
+      title: tl2(trans.suggest_correction),
+      body: html.node`
+            <div class="new-scrobble-form">
+                <p class="generic-label">${tl2(trans.what_did_you_expect)}</p>
+                ${sources = input({
+        type: "textarea"
+      })}
+                <p class="form-tip">${tl2(trans[`oracle_sources_tip_${page.type}`])}</p>
+            </div>
+            <div class="modal-footer">
+                <button class="see-more cancel" onclick=${() => dialog_rm({ id: "oracle_correction" })}>
+                    ${tl2(trans.cancel)}
+                </button>
+                <div class="fill" />
+                <button class="btn primary continue" onclick=${() => {
+        open(
+          `https://github.com/katelyynn/oracle/issues/new?template=${template}&title=${sanitise(title, " ")}&link=${encodeURIComponent(link)}&sources=${sanitise(sources.value(), " ")}`
+        );
+      }}>
+                    ${tl2(trans.suggest)}
+                </button>
+            </div>
+        `
+    });
   }
 
   // src/components/music.js
@@ -54519,6 +54580,10 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
   }
   function correct_item_by_artist(item, artist) {
     if (!settings.corrections) return item;
+    if (!artist) {
+      log("could not correct_item_by_artist, artist field is missing", "lotus", "error", { item, artist });
+      return item;
+    }
     artist = artist.toLowerCase();
     try {
       if (album_track_corrections.hasOwnProperty(artist)) {
@@ -69626,6 +69691,21 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     send_a_reply: {
       en: "Send a reply"
+    },
+    are_these_results_accurate: {
+      en: "Are these results accurate?"
+    },
+    report_incorrect: {
+      en: "Mark incorrect"
+    },
+    what_did_you_expect: {
+      en: "What did you expect?"
+    },
+    oracle_sources_tip_track: {
+      en: "Which albums did you expect to be linked to, e.g. Dawn FM instead of After Hours"
+    },
+    oracle_sources_tip_album: {
+      en: "Which copy of the album did you expect to see? Provide links and some details as to why"
     }
   };
   var translation_fallback = "NO_TRANSLATION_FOUND";

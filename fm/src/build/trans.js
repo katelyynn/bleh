@@ -10041,6 +10041,21 @@ export const trans = {
     },
     send_a_reply: {
         en: 'Send a reply'
+    },
+    are_these_results_accurate: {
+        en: 'Are these results accurate?'
+    },
+    report_incorrect: {
+        en: 'Mark incorrect'
+    },
+    what_did_you_expect: {
+        en: 'What did you expect?'
+    },
+    oracle_sources_tip_track: {
+        en: 'Which albums did you expect to be linked to, e.g. Dawn FM instead of After Hours'
+    },
+    oracle_sources_tip_album: {
+        en: 'Which copy of the album did you expect to see? Provide links and some details as to why'
     }
 };
 

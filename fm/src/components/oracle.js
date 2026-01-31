@@ -27,7 +27,7 @@ import { lang, tl, trans } from '../build/trans';
 import { clean_title, fix_title } from '../build/music';
 import { version } from '../main';
 import { settings } from '../build/config';
-import { dialog } from './dialog';
+import { dialog, dialog_rm } from './dialog';
 import tippy, { followCursor } from 'tippy.js';
 import {
     hoshino_return,
@@ -38,6 +38,7 @@ import { create_avatar } from '../pages/track';
 import { DateTime } from 'luxon';
 import { select } from './select';
 import { save_setting, setting } from './settings';
+import { input } from './input';
 
 export function oracle_process() {
     log('beginning', 'oracle');
@@ -226,6 +227,12 @@ export function oracle_process() {
                         }, true)}
                     </div>
                     <div class="view-buttons blend blend-v2">
+                        <p class="blend-text">${tl(trans.are_these_results_accurate)}</p>
+                        <button class="left-icon blend-v2-btn mark-incorrect" data-type="dislike" onclick=${() => {
+                            report_incorrect();
+                        }}>
+                            ${tl(trans.report_incorrect)}
+                        </button>
                         ${() => {
                             const btn = html.node`
                                 <button class="left-icon blend-v2-btn" data-type="settings">
@@ -1085,11 +1092,19 @@ export function oracle_process() {
                 render(
                     releases_panel,
                     html`
-                        <h3 class="text-18">
-                            ${tl(trans.albums)}<span class="new-badge beta"
-                                >${tl(trans.beta)}</span
-                            >
-                        </h3>
+                        <div class="top-container">
+                            <h3 class="text-18">
+                                ${tl(trans.albums)}<span class="new-badge beta">${tl(trans.beta)}</span>
+                            </h3>
+                            <div class="view-buttons blend blend-v2">
+                                <p class="blend-text">${tl(trans.are_these_results_accurate)}</p>
+                                <button class="left-icon blend-v2-btn mark-incorrect" data-type="dislike" onclick=${() => {
+                                    report_incorrect();
+                                }}>
+                                    ${tl(trans.report_incorrect)}
+                                </button>
+                            </div>
+                        </div>
                         <div class="loading-data-container">
                             <div class="loading-data-text failed">
                                 ${tl(trans.no_releases_found)}
@@ -1313,11 +1328,19 @@ export function oracle_process() {
             let source_albums;
             if (releases_panel) {
                 render(releases_panel, html`
-                    <h3 class="text-18">
-                        ${tl(trans.albums)}<span class="new-badge beta"
-                            >${tl(trans.beta)}</span
-                        >
-                    </h3>
+                    <div class="top-container">
+                        <h3 class="text-18">
+                            ${tl(trans.albums)}<span class="new-badge beta">${tl(trans.beta)}</span>
+                        </h3>
+                        <div class="view-buttons blend blend-v2">
+                            <p class="blend-text">${tl(trans.are_these_results_accurate)}</p>
+                            <button class="left-icon blend-v2-btn mark-incorrect" data-type="dislike" onclick=${() => {
+                                report_incorrect();
+                            }}>
+                                ${tl(trans.report_incorrect)}
+                            </button>
+                        </div>
+                    </div>
                     <div class="${page.subpage == 'overview' ? 'source-albums-container' : 'resource-list-container'}">
                         <div class="${page.subpage == 'overview' ? 'source-albums' : 'resource-list--release-list'}">
                             ${releases.map((release, index) => {
@@ -2064,4 +2087,49 @@ export function manage_oracle_data() {
         log('saved to cache', 'oracle', 'info', { oracle });
         set_storage('bleh_oracle_cache', JSON.stringify(oracle));
     }
+}
+
+function report_incorrect() {
+    if (settings.tracklist_source != 'oracle' && page.type == 'album')
+        return;
+
+    let title = `${correct_artist(page.sister)} - ${correct_item_by_artist(page.name, page.sister)}`
+    let link = window.location.href;
+
+    let sources;
+
+    let template;
+
+    if (page.type == 'track') {
+        template = '1-incorrect-albums-assigned-to-track.yml';
+    } else {
+        template = '2-incorrect-album-listing.yml';
+    }
+
+    dialog({
+        id: 'oracle_correction',
+        title: tl(trans.suggest_correction),
+        body: html.node`
+            <div class="new-scrobble-form">
+                <p class="generic-label">${tl(trans.what_did_you_expect)}</p>
+                ${sources = input({
+                    type: 'textarea'
+                })}
+                <p class="form-tip">${tl(trans[`oracle_sources_tip_${page.type}`])}</p>
+            </div>
+            <div class="modal-footer">
+                <button class="see-more cancel" onclick=${() => dialog_rm({ id: 'oracle_correction' })}>
+                    ${tl(trans.cancel)}
+                </button>
+                <div class="fill" />
+                <button class="btn primary continue" onclick=${() => {
+                    open(
+                        `https://github.com/katelyynn/oracle/issues/new?template=${template}&title=${sanitise(title, ' ')}&link=${encodeURIComponent(link)}&sources=${sanitise(sources.value(), ' ')}`
+                    );
+                }}>
+                    ${tl(trans.suggest)}
+                </button>
+            </div>
+        `
+    });
 }

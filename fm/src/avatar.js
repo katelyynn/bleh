@@ -55,7 +55,7 @@ export function patch_avatar(
         pre_existing_badge_type = null;
     }
 
-    if (badges)
+    if (badges.length > 0)
         avatar.appendChild(create_badge(badges[badges.length - 1], true));
 
     let image_header;

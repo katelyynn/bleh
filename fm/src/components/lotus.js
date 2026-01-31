@@ -321,6 +321,11 @@ export function correct_generic_combo_no_artist(parent) {
 export function correct_item_by_artist(item, artist) {
     if (!settings.corrections) return item;
 
+    if (!artist) {
+        log('could not correct_item_by_artist, artist field is missing', 'lotus', 'error', { item, artist });
+        return item;
+    }
+
     artist = artist.toLowerCase();
 
     try {
