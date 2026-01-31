@@ -745,6 +745,8 @@ export function append_nav() {
             page.structure.notifications.setAttribute('data-auth-open', 'true');
             badges = load_badges(auth.name);
 
+            const update_required = localStorage.getItem('bleh_update_required') || 'false';
+
             let page_2;
             let side;
 
@@ -770,6 +772,14 @@ export function append_nav() {
             let auth_bg;
 
             instance.setContent(html.node`
+                ${update_required == 'true' ? html.node`
+                <div class="update-available-banner">
+                    <div class="update-container">
+                        <div class="bleh-icon" style="--icon: var(--icon-16-update)" />
+                    </div>
+                    <span>${tl(trans.update_available_to_install)}</span>
+                </div>
+                ` : ''}
                 <div class="auth-menu-v2" style="--page-height: ${height}px">
                     <div class="side primary">
                         <div class="auth-bg-container" ref=${el => auth_bg = el}>

@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         bleh
 // @namespace    https://last.fm/
-// @version      2026.0105
+// @version      2026.0131
 // @description  bleh!!! ^-^
 // @author       katelyn
 // @match        https://www.last.fm/*
@@ -51048,6 +51048,7 @@
       onShow: (instance) => {
         page.structure.notifications.setAttribute("data-auth-open", "true");
         badges = load_badges(auth.name);
+        const update_required2 = localStorage.getItem("bleh_update_required") || "false";
         let page_2;
         let side;
         let status_container;
@@ -51060,6 +51061,14 @@
         let auth_header;
         let auth_bg;
         instance.setContent(html.node`
+                ${update_required2 == "true" ? html.node`
+                <div class="update-available-banner">
+                    <div class="update-container">
+                        <div class="bleh-icon" style="--icon: var(--icon-16-update)" />
+                    </div>
+                    <span>${tl2(trans.update_available_to_install)}</span>
+                </div>
+                ` : ""}
                 <div class="auth-menu-v2" style="--page-height: ${height}px">
                     <div class="side primary">
                         <div class="auth-bg-container" ref=${(el) => auth_bg = el}>
@@ -71288,7 +71297,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
   // src/build/build.json
   var build_default = {
     brand: "bleh",
-    build: "2026.0105",
+    build: "2026.0131",
     sku: "shunguang",
     bio: "bleh!!! ^-^",
     author: "katelyn",

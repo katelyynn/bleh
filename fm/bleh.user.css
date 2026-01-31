@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           bleh (dev)
 @namespace      github.com/katelyynn/bleh
-@version        2026.0105
+@version        2026.0131
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.css
@@ -25,7 +25,7 @@
     }
 
     body {
-        --version-build: "2026.0105";
+        --version-build: "2026.0131";
 
         --font:
             var(--custom_font, ""), Funnel Sans, Inter, Ubuntu Sans, Spline Sans,
@@ -22970,14 +22970,6 @@
         }
 
         &.version-item-body {
-            & > ul > li {
-                font-weight: var(--font-weight-medium);
-
-                & > ul {
-                    font-weight: var(--font-weight);
-                }
-            }
-
             li {
                 list-style-type: "+ ";
 
@@ -30553,5 +30545,21 @@
         --hue-over: var(--hue-valentine);
         --sat-over: var(--sat-valentine);
         --lit-over: var(--lit-valentine);
+    }
+
+
+    .update-available-banner {
+        padding: var(--item-list-gap);
+        margin: calc(-1 * var(--item-list-gap)) calc(-1 * var(--item-list-gap)) 0;
+        font-weight: var(--font-weight-medium);
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: var(--icon-gap);
+
+        & > .update-container {
+            animation: staggered_spinner 3s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
+        }
     }
 }
