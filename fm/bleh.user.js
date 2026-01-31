@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         bleh
 // @namespace    https://last.fm/
-// @version      2025.1127
+// @version      2026.0131
 // @description  bleh!!! ^-^
 // @author       katelyn
 // @match        https://www.last.fm/*
@@ -423,7 +423,7 @@
             step((generator = generator.apply(thisArg, _arguments || [])).next());
           });
         }
-        function __generator(thisArg, body2) {
+        function __generator(thisArg, body) {
           var _ = { label: 0, sent: function() {
             if (t[0] & 1) throw t[1];
             return t[1];
@@ -481,7 +481,7 @@
                   _.trys.pop();
                   continue;
               }
-              op = body2.call(thisArg, _);
+              op = body.call(thisArg, _);
             } catch (e2) {
               op = [6, e2];
               y = 0;
@@ -534,13 +534,13 @@
           return Bounds.fromClientRect(context, node.getBoundingClientRect());
         };
         var parseDocumentSize = function(document2) {
-          var body2 = document2.body;
+          var body = document2.body;
           var documentElement = document2.documentElement;
-          if (!body2 || !documentElement) {
+          if (!body || !documentElement) {
             throw new Error("Unable to get document size");
           }
-          var width = Math.max(Math.max(body2.scrollWidth, documentElement.scrollWidth), Math.max(body2.offsetWidth, documentElement.offsetWidth), Math.max(body2.clientWidth, documentElement.clientWidth));
-          var height = Math.max(Math.max(body2.scrollHeight, documentElement.scrollHeight), Math.max(body2.offsetHeight, documentElement.offsetHeight), Math.max(body2.clientHeight, documentElement.clientHeight));
+          var width = Math.max(Math.max(body.scrollWidth, documentElement.scrollWidth), Math.max(body.offsetWidth, documentElement.offsetWidth), Math.max(body.clientWidth, documentElement.clientWidth));
+          var height = Math.max(Math.max(body.scrollHeight, documentElement.scrollHeight), Math.max(body.offsetHeight, documentElement.offsetHeight), Math.max(body.clientHeight, documentElement.clientHeight));
           return new Bounds(0, 0, width, height);
         };
         var toCodePoints$1 = function(str) {
@@ -4312,7 +4312,7 @@
         var contains2 = function(bit, value) {
           return (bit & value) !== 0;
         };
-        var content2 = {
+        var content = {
           name: "content",
           initialValue: "none",
           type: 1,
@@ -4681,7 +4681,7 @@
           /** @class */
           /* @__PURE__ */ function() {
             function CSSParsedPseudoDeclaration2(context, declaration) {
-              this.content = parse4(context, content2, declaration.content);
+              this.content = parse4(context, content, declaration.content);
               this.quotes = parse4(context, quotes, declaration.quotes);
             }
             return CSSParsedPseudoDeclaration2;
@@ -6649,15 +6649,15 @@
         var PSEUDO_HIDE_ELEMENT_CLASS_BEFORE = "___html2canvas___pseudoelement_before";
         var PSEUDO_HIDE_ELEMENT_CLASS_AFTER = "___html2canvas___pseudoelement_after";
         var PSEUDO_HIDE_ELEMENT_STYLE = '{\n    content: "" !important;\n    display: none !important;\n}';
-        var createPseudoHideStyles = function(body2) {
-          createStyles(body2, ".".concat(PSEUDO_HIDE_ELEMENT_CLASS_BEFORE).concat(PSEUDO_BEFORE).concat(PSEUDO_HIDE_ELEMENT_STYLE, "\n         .").concat(PSEUDO_HIDE_ELEMENT_CLASS_AFTER).concat(PSEUDO_AFTER).concat(PSEUDO_HIDE_ELEMENT_STYLE));
+        var createPseudoHideStyles = function(body) {
+          createStyles(body, ".".concat(PSEUDO_HIDE_ELEMENT_CLASS_BEFORE).concat(PSEUDO_BEFORE).concat(PSEUDO_HIDE_ELEMENT_STYLE, "\n         .").concat(PSEUDO_HIDE_ELEMENT_CLASS_AFTER).concat(PSEUDO_AFTER).concat(PSEUDO_HIDE_ELEMENT_STYLE));
         };
-        var createStyles = function(body2, styles) {
-          var document2 = body2.ownerDocument;
+        var createStyles = function(body, styles) {
+          var document2 = body.ownerDocument;
           if (document2) {
             var style = document2.createElement("style");
             style.textContent = styles;
-            body2.appendChild(style);
+            body.appendChild(style);
           }
         };
         var addBase = function(targetELement, referenceDocument) {
@@ -7535,14 +7535,14 @@
               var container = this._document.createElement("div");
               var img = this._document.createElement("img");
               var span = this._document.createElement("span");
-              var body2 = this._document.body;
+              var body = this._document.body;
               container.style.visibility = "hidden";
               container.style.fontFamily = fontFamily2;
               container.style.fontSize = fontSize2;
               container.style.margin = "0";
               container.style.padding = "0";
               container.style.whiteSpace = "nowrap";
-              body2.appendChild(container);
+              body.appendChild(container);
               img.src = SMALL_IMAGE;
               img.width = 1;
               img.height = 1;
@@ -7562,7 +7562,7 @@
               container.style.lineHeight = "normal";
               img.style.verticalAlign = "super";
               var middle = img.offsetTop - container.offsetTop + 2;
-              body2.removeChild(container);
+              body.removeChild(container);
               return { baseline, middle };
             };
             FontMetrics2.prototype.getMetrics = function(fontFamily2, fontSize2) {
@@ -11463,18 +11463,18 @@
                 return;
               }
               var sizingImage = document.createElement("img");
-              var body2 = document.body || document.documentElement;
+              var body = document.body || document.documentElement;
               this.sizingImage = sizingImage;
               sizingImage.onload = function() {
                 done(sizingImage.width, sizingImage.height);
                 if (!isIOSWebKit) {
-                  body2.removeChild(sizingImage);
+                  body.removeChild(sizingImage);
                 }
               };
               sizingImage.src = image.src;
               if (!isIOSWebKit) {
                 sizingImage.style.cssText = "left:0;max-height:none!important;max-width:none!important;min-height:0!important;min-width:0!important;opacity:0;position:absolute;top:0;z-index:-1;";
-                body2.appendChild(sizingImage);
+                body.appendChild(sizingImage);
               }
             }
           }, {
@@ -13668,7 +13668,7 @@
               var pres = doc2.querySelectorAll("pre"), presPH = [];
               for (var i2 = 0; i2 < pres.length; ++i2) {
                 if (pres[i2].childElementCount === 1 && pres[i2].firstChild.tagName.toLowerCase() === "code") {
-                  var content2 = pres[i2].firstChild.innerHTML.trim(), language = pres[i2].firstChild.getAttribute("data-language") || "";
+                  var content = pres[i2].firstChild.innerHTML.trim(), language = pres[i2].firstChild.getAttribute("data-language") || "";
                   if (language === "") {
                     var classes = pres[i2].firstChild.className.split(" ");
                     for (var c = 0; c < classes.length; ++c) {
@@ -13679,8 +13679,8 @@
                       }
                     }
                   }
-                  content2 = showdown2.helper.unescapeHTMLEntities(content2);
-                  presPH.push(content2);
+                  content = showdown2.helper.unescapeHTMLEntities(content);
+                  presPH.push(content);
                   pres[i2].outerHTML = '<precode language="' + language + '" precodenum="' + i2.toString() + '"></precode>';
                 } else {
                   presPH.push(pres[i2].innerHTML);
@@ -14557,24 +14557,24 @@
             return text4;
           }
           text4 = globals.converter._dispatch("metadata.before", text4, options, globals);
-          function parseMetadataContents(content2) {
-            globals.metadata.raw = content2;
-            content2 = content2.replace(/&/g, "&amp;").replace(/"/g, "&quot;");
-            content2 = content2.replace(/\n {4}/g, " ");
-            content2.replace(/^([\S ]+): +([\s\S]+?)$/gm, function(wm, key, value) {
+          function parseMetadataContents(content) {
+            globals.metadata.raw = content;
+            content = content.replace(/&/g, "&amp;").replace(/"/g, "&quot;");
+            content = content.replace(/\n {4}/g, " ");
+            content.replace(/^([\S ]+): +([\s\S]+?)$/gm, function(wm, key, value) {
               globals.metadata.parsed[key] = value;
               return "";
             });
           }
-          text4 = text4.replace(/^\s*«««+(\S*?)\n([\s\S]+?)\n»»»+\n/, function(wholematch, format, content2) {
-            parseMetadataContents(content2);
+          text4 = text4.replace(/^\s*«««+(\S*?)\n([\s\S]+?)\n»»»+\n/, function(wholematch, format, content) {
+            parseMetadataContents(content);
             return "\xA8M";
           });
-          text4 = text4.replace(/^\s*---+(\S*?)\n([\s\S]+?)\n---+\n/, function(wholematch, format, content2) {
+          text4 = text4.replace(/^\s*---+(\S*?)\n([\s\S]+?)\n---+\n/, function(wholematch, format, content) {
             if (format) {
               globals.metadata.format = format;
             }
-            parseMetadataContents(content2);
+            parseMetadataContents(content);
             return "\xA8M";
           });
           text4 = text4.replace(/¨M/g, "");
@@ -15288,8 +15288,8 @@
   var UID = "-" + Math.random().toFixed(6) + "%";
   var UID_IE = false;
   try {
-    if (!function(template, content2, tabindex) {
-      return content2 in template && (template.innerHTML = "<p " + tabindex + '="' + UID + '"></p>', template[content2].childNodes[0].getAttribute(tabindex) == UID);
+    if (!function(template, content, tabindex) {
+      return content in template && (template.innerHTML = "<p " + tabindex + '="' + UID + '"></p>', template[content].childNodes[0].getAttribute(tabindex) == UID);
     }(document.createElement("template"), "content", "tabindex")) {
       UID = "_dt: " + UID.slice(1, -1) + ";";
       UID_IE = true;
@@ -15386,7 +15386,7 @@
       template.innerHTML = html3;
       return template.content;
     } : function(html3) {
-      var content2 = create3(FRAGMENT);
+      var content = create3(FRAGMENT);
       var template = create3(TEMPLATE);
       var childNodes = null;
       if (/^[^\S]*?<(col(?:group)?|t(?:head|body|foot|r|d|h))/i.test(html3)) {
@@ -15397,8 +15397,8 @@
         template.innerHTML = html3;
         childNodes = template.childNodes;
       }
-      append(content2, childNodes);
-      return content2;
+      append(content, childNodes);
+      return content;
     };
     return function createContent2(markup, type) {
       return (type === "svg" ? createSVG : createHTML)(markup);
@@ -15412,11 +15412,11 @@
       return element === FRAGMENT ? document2.createDocumentFragment() : document2.createElementNS("http://www.w3.org/1999/xhtml", element);
     }
     function createSVG(svg3) {
-      var content2 = create3(FRAGMENT);
+      var content = create3(FRAGMENT);
       var template = create3("div");
       template.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg">' + svg3 + "</svg>";
-      append(content2, template.firstChild.childNodes);
-      return content2;
+      append(content, template.firstChild.childNodes);
+      return content;
     }
   }(document);
   var esm_default4 = createContent;
@@ -15493,8 +15493,8 @@
     var fragment = document2.createDocumentFragment();
     fragment[appendChild](document2[createTextNode]("g"));
     fragment[appendChild](document2[createTextNode](""));
-    var content2 = native ? document2[importNode2](fragment, true) : fragment[cloneNode](true);
-    return content2.childNodes.length < 2 ? function importNode3(node, deep) {
+    var content = native ? document2[importNode2](fragment, true) : fragment[cloneNode](true);
+    return content.childNodes.length < 2 ? function importNode3(node, deep) {
       var clone6 = node[cloneNode]();
       for (var childNodes = node.childNodes || [], length = childNodes.length, i = 0; deep && i < length; i++) {
         clone6[appendChild](importNode3(childNodes[i], deep));
@@ -15672,20 +15672,20 @@
     var transform2 = options.transform;
     if (transform2)
       markup = transform2(markup);
-    var content2 = esm_default4(markup, options.type);
-    cleanContent(content2);
+    var content = esm_default4(markup, options.type);
+    cleanContent(content);
     var holes = [];
-    parse(content2, holes, template.slice(0), []);
+    parse(content, holes, template.slice(0), []);
     return {
-      content: content2,
-      updates: function(content3) {
+      content,
+      updates: function(content2) {
         var updates = [];
         var len = holes.length;
         var i = 0;
         var off = 0;
         while (i < len) {
           var info = holes[i++];
-          var node = find(content3, info.path);
+          var node = find(content2, info.path);
           switch (info.type) {
             case "any":
               updates.push({ fn: options.any(node, []), sparse: false });
@@ -15730,7 +15730,7 @@
             } else
               update.fn(arguments[i2++]);
           }
-          return content3;
+          return content2;
         };
       }
     };
@@ -16762,10 +16762,10 @@
   };
   function effect3(_ref) {
     var state = _ref.state, instance = _ref.instance, options = _ref.options;
-    var _options$scroll = options.scroll, scroll2 = _options$scroll === void 0 ? true : _options$scroll, _options$resize = options.resize, resize = _options$resize === void 0 ? true : _options$resize;
+    var _options$scroll = options.scroll, scroll = _options$scroll === void 0 ? true : _options$scroll, _options$resize = options.resize, resize = _options$resize === void 0 ? true : _options$resize;
     var window2 = getWindow(state.elements.popper);
     var scrollParents = [].concat(state.scrollParents.reference, state.scrollParents.popper);
-    if (scroll2) {
+    if (scroll) {
       scrollParents.forEach(function(scrollParent) {
         scrollParent.addEventListener("scroll", instance.update, passive);
       });
@@ -16774,7 +16774,7 @@
       window2.addEventListener("resize", instance.update, passive);
     }
     return function() {
-      if (scroll2) {
+      if (scroll) {
         scrollParents.forEach(function(scrollParent) {
           scrollParent.removeEventListener("scroll", instance.update, passive);
         });
@@ -16865,13 +16865,13 @@
     var _element$ownerDocumen;
     var html3 = getDocumentElement(element);
     var winScroll = getWindowScroll(element);
-    var body2 = (_element$ownerDocumen = element.ownerDocument) == null ? void 0 : _element$ownerDocumen.body;
-    var width = max(html3.scrollWidth, html3.clientWidth, body2 ? body2.scrollWidth : 0, body2 ? body2.clientWidth : 0);
-    var height = max(html3.scrollHeight, html3.clientHeight, body2 ? body2.scrollHeight : 0, body2 ? body2.clientHeight : 0);
+    var body = (_element$ownerDocumen = element.ownerDocument) == null ? void 0 : _element$ownerDocumen.body;
+    var width = max(html3.scrollWidth, html3.clientWidth, body ? body.scrollWidth : 0, body ? body.clientWidth : 0);
+    var height = max(html3.scrollHeight, html3.clientHeight, body ? body.scrollHeight : 0, body ? body.clientHeight : 0);
     var x = -winScroll.scrollLeft + getWindowScrollBarX(element);
     var y = -winScroll.scrollTop;
-    if (getComputedStyle2(body2 || html3).direction === "rtl") {
-      x += max(html3.clientWidth, body2 ? body2.clientWidth : 0) - width;
+    if (getComputedStyle2(body || html3).direction === "rtl") {
+      x += max(html3.clientWidth, body ? body.clientWidth : 0) - width;
     }
     return {
       width,
@@ -17440,7 +17440,7 @@
     var offsetParentIsScaled = isHTMLElement(offsetParent) && isElementScaled(offsetParent);
     var documentElement = getDocumentElement(offsetParent);
     var rect = getBoundingClientRect(elementOrVirtualElement, offsetParentIsScaled, isFixed);
-    var scroll2 = {
+    var scroll = {
       scrollLeft: 0,
       scrollTop: 0
     };
@@ -17451,7 +17451,7 @@
     if (isOffsetParentAnElement || !isOffsetParentAnElement && !isFixed) {
       if (getNodeName(offsetParent) !== "body" || // https://github.com/popperjs/popper-core/issues/1078
       isScrollParent(documentElement)) {
-        scroll2 = getNodeScroll(offsetParent);
+        scroll = getNodeScroll(offsetParent);
       }
       if (isHTMLElement(offsetParent)) {
         offsets = getBoundingClientRect(offsetParent, true);
@@ -17462,8 +17462,8 @@
       }
     }
     return {
-      x: rect.left + scroll2.scrollLeft - offsets.x,
-      y: rect.top + scroll2.scrollTop - offsets.y,
+      x: rect.left + scroll.scrollLeft - offsets.x,
+      y: rect.top + scroll.scrollTop - offsets.y,
       width: rect.width,
       height: rect.height
     };
@@ -18097,15 +18097,15 @@
     }
     return arrow2;
   }
-  function setContent(content2, props) {
+  function setContent(content, props) {
     if (isElement2(props.content)) {
-      dangerouslySetInnerHTML(content2, "");
-      content2.appendChild(props.content);
+      dangerouslySetInnerHTML(content, "");
+      content.appendChild(props.content);
     } else if (typeof props.content !== "function") {
       if (props.allowHTML) {
-        dangerouslySetInnerHTML(content2, props.content);
+        dangerouslySetInnerHTML(content, props.content);
       } else {
-        content2.textContent = props.content;
+        content.textContent = props.content;
       }
     }
   }
@@ -18131,15 +18131,15 @@
     box.className = BOX_CLASS;
     box.setAttribute("data-state", "hidden");
     box.setAttribute("tabindex", "-1");
-    var content2 = div();
-    content2.className = CONTENT_CLASS;
-    content2.setAttribute("data-state", "hidden");
-    setContent(content2, instance.props);
+    var content = div();
+    content.className = CONTENT_CLASS;
+    content.setAttribute("data-state", "hidden");
+    setContent(content, instance.props);
     popper2.appendChild(box);
-    box.appendChild(content2);
+    box.appendChild(content);
     onUpdate(instance.props, instance.props);
     function onUpdate(prevProps, nextProps) {
-      var _getChildren = getChildren(popper2), box2 = _getChildren.box, content3 = _getChildren.content, arrow2 = _getChildren.arrow;
+      var _getChildren = getChildren(popper2), box2 = _getChildren.box, content2 = _getChildren.content, arrow2 = _getChildren.arrow;
       if (nextProps.theme) {
         box2.setAttribute("data-theme", nextProps.theme);
       } else {
@@ -18162,7 +18162,7 @@
         box2.removeAttribute("role");
       }
       if (prevProps.content !== nextProps.content || prevProps.allowHTML !== nextProps.allowHTML) {
-        setContent(content3, instance.props);
+        setContent(content2, instance.props);
       }
       if (nextProps.arrow) {
         if (!arrow2) {
@@ -18754,9 +18754,9 @@
       }
       invokeHook("onAfterUpdate", [instance, partialProps]);
     }
-    function setContent2(content2) {
+    function setContent2(content) {
       instance.setProps({
-        content: content2
+        content
       });
     }
     function show() {
@@ -18788,8 +18788,8 @@
         popper2.style.transition = "none";
       }
       if (getIsDefaultRenderFn()) {
-        var _getDefaultTemplateCh2 = getDefaultTemplateChildren(), box = _getDefaultTemplateCh2.box, content2 = _getDefaultTemplateCh2.content;
-        setTransitionDuration([box, content2], 0);
+        var _getDefaultTemplateCh2 = getDefaultTemplateChildren(), box = _getDefaultTemplateCh2.box, content = _getDefaultTemplateCh2.content;
+        setTransitionDuration([box, content], 0);
       }
       onFirstUpdate = function onFirstUpdate2() {
         var _instance$popperInsta2;
@@ -18844,10 +18844,10 @@
       removeDocumentPress();
       handleStyles(true);
       if (getIsDefaultRenderFn()) {
-        var _getDefaultTemplateCh4 = getDefaultTemplateChildren(), box = _getDefaultTemplateCh4.box, content2 = _getDefaultTemplateCh4.content;
+        var _getDefaultTemplateCh4 = getDefaultTemplateChildren(), box = _getDefaultTemplateCh4.box, content = _getDefaultTemplateCh4.content;
         if (instance.props.animation) {
-          setTransitionDuration([box, content2], duration);
-          setVisibilityState([box, content2], "hidden");
+          setTransitionDuration([box, content], duration);
+          setVisibilityState([box, content], "hidden");
         }
       }
       handleAriaContentAttribute();
@@ -20310,7 +20310,7 @@
   function notify({
     id,
     title,
-    body: body2,
+    body,
     icon,
     classname,
     actions = [],
@@ -20323,7 +20323,7 @@
     log(`creating ${title}`, "notification", "info", {
       id,
       title,
-      body: body2,
+      body,
       icon,
       classname,
       persist,
@@ -20367,8 +20367,8 @@
         >
             <div class="notification-information" ref=${(el) => information = el}>
                 <div class="notification-title">${title}</div>
-                ${body2 ? html.node`
-                <div class="notification-body">${body2}</div>
+                ${body ? html.node`
+                <div class="notification-body">${body}</div>
                 ` : ""}
             </div>
             ${!persist ? html.node`
@@ -20377,7 +20377,7 @@
             <div class="notification-actions">
                 ${actions.length > 0 ? actions.map((action) => () => {
       let button2 = html.node`
-                        <button class="notification-action" data-type=${action.type} onclick=${action.action}>${action.text}</button>
+                        <button class="btn notification-action" data-type=${action.type} onclick=${action.action}>${action.text}</button>
                     `;
       tippy_esm_default(button2, {
         content: action.text
@@ -20394,11 +20394,11 @@
     notif.set = (value) => {
       bar.style.setProperty("width", `${value}%`);
     };
-    notif.set_body = (body3) => {
+    notif.set_body = (body2) => {
       render(information, html`
             <div class="notification-title">${title}</div>
-            ${body3 ? html.node`
-            <div class="notification-body">${body3}</div>
+            ${body2 ? html.node`
+            <div class="notification-body">${body2}</div>
             ` : ""}
         `);
     };
@@ -27820,7 +27820,7 @@
       document.body.appendChild(notification_host);
     }
   }
-  function status({ title, body: body2, type }) {
+  function status({ title, body, type }) {
     let icon = "icon-16-info";
     if (type == "error") {
       icon = "icon-16-x";
@@ -27831,7 +27831,7 @@
                 <div class="bleh-icon" style="--icon: var(--${icon})" />
             </div>
             <div class="status-title">${title}</div>
-            ${body2 ? html.node`<div class="status-body">${body2}</div>` : ""}
+            ${body ? html.node`<div class="status-body">${body}</div>` : ""}
         </div>
     `;
     setTimeout(() => {
@@ -27976,7 +27976,7 @@
     );
     observer.observe(elem);
   }
-  function copy(text4) {
+  function copy(text4, silent = false) {
     if (text4.trim().length == 0) return;
     navigator.clipboard.writeText(text4).then(() => {
       log("copied", "copy", "info", { text: text4 });
@@ -27993,19 +27993,21 @@
   function redo() {
     document.execCommand("redo");
   }
-  async function paste() {
+  async function paste(elem = null, silent = false) {
     try {
       const text4 = await navigator.clipboard.readText();
-      const elem = document.activeElement;
-      if (!elem) return;
+      if (!elem) elem = document.activeElement;
+      if (!elem) return log("no element", "paste", "error");
       if (elem.isContentEditable) {
         document.execCommand("insertText", false, text4);
         log("pasted", "paste", "info", { text: text4 });
-        status({
-          id: "paste",
-          title: tl2(trans.pasted_text),
-          body: text4
-        });
+        if (!silent) {
+          status({
+            id: "paste",
+            title: tl2(trans.pasted_text),
+            body: text4
+          });
+        }
         return;
       }
       if (["INPUT", "TEXTAREA"].includes(elem.tagName)) {
@@ -28013,19 +28015,23 @@
         const end2 = elem.selectionEnd;
         elem.setRangeText(text4, start2, end2, "end");
         log("pasted", "paste", "info", { text: text4 });
-        status({
-          id: "paste",
-          title: tl2(trans.pasted_text),
-          body: text4
-        });
+        if (!silent) {
+          status({
+            id: "paste",
+            title: tl2(trans.pasted_text),
+            body: text4
+          });
+        }
       }
     } catch (e) {
       log("failed", "paste", "info", { text, e });
-      status({
-        id: "paste",
-        title: tl2(trans.failed),
-        body: e.message ? e.message : e
-      });
+      if (!silent) {
+        status({
+          id: "paste",
+          title: tl2(trans.failed),
+          body: e.message ? e.message : e
+        });
+      }
     }
   }
   function download_with_progress(url, func) {
@@ -28270,911 +28276,284 @@
   };
   var includes = {
     guests: [
-      "feat ",
-      "feat.",
-      "featuring",
-      "- feat",
-      "[feat.",
-      "- with",
-      "(with",
-      "[with",
-      "w/ ",
-      "ft.",
-      "ref.",
-      "(hosted by",
-      "(re:"
+      /\sfeat\s/i,
+      /\sfeat\./i,
+      /\sfeaturing\s/i,
+      /(?:-\s?|\(|\[|\{)feat/i,
+      /(?:-\s?|\(|\[|\{)with /i,
+      /w\/\s/i,
+      /ft\./i,
+      /ref\./i,
+      /\(hosted by/i,
+      /\(re:/i
       // re this is why paramore
     ],
     versions: [
-      "(taylor",
-      "- spotify singles",
-      "[taylor",
-      "(+",
-      "- vers\xE3o",
-      "(vers\xE3o",
-      "[vers\xE3o",
-      "- without dialogue",
-      "(without dialogue",
-      "[without dialogue",
-      "- no dialogue",
-      "(no dialogue",
-      "[no dialogue",
-      "- pop version",
-      "(pop version",
-      "[pop version",
-      "- rock version",
-      "(rock version",
-      "[rock version",
-      "- pop mix",
-      "(pop mix",
-      "[pop mix",
-      "- emo version",
-      "(emo version",
-      "[emo version",
-      "- version",
-      "(version",
-      "[version",
-      "(s.a.d. version",
+      /(?:-\s?|\(|\[)taylor/i,
+      /[-\(]spotify singles/i,
+      /\(\+/i,
+      /(?:-\s?|\(|\[)versão/i,
+      /(?:-\s?|\(|\[)without dialogue/i,
+      /(?:-\s?|\(|\[)no dialogue/i,
+      /(?:-\s?|\(|\[)pop version/i,
+      /(?:-\s?|\(|\[)rock version/i,
+      /(?:-\s?|\(|\[)pop mix/i,
+      /(?:-\s?|\(|\[)emo version/i,
+      /(?:-\s?|\(|\[)version/i,
+      /\(s\.a\.d\. version/i,
       "- s.a.d.",
-      "- vocoded",
-      "- pa version",
-      "(pa version",
-      "[pa version",
-      "- u.s. pa version",
-      "(u.s. pa version",
-      "[u.s. pa version"
+      /[-\(]vocoded/i,
+      /(?:-\s?|\(|\[)pa version/i,
+      /(?:-\s?|\(|\[)u\.s\. pa version/i,
+      /(?:-\s?|\(|\[)main/i
     ],
     remasters: [
-      "- remaster",
-      "(remaster",
-      "[remaster",
-      "- remasterizado",
-      "(remasterizado",
-      "[remasterizado",
-      ": high resolution remasters",
-      "- high resolution remasters",
-      "(high resolution remasters",
-      ": the high resolution remasters",
-      "- the high resolution remasters",
-      "(the high resolution remasters",
+      /(?:-\s?|\(|\[)remaster/i,
+      /:\s?high resolution remasters/i,
+      /[-\(]high resolution remasters/i,
+      /:\s?the high resolution remasters/i,
+      /[-\(]the high resolution remasters/i,
       // Pink Floyd bootleg remaster boxsets
-      "- 2012 - remaster"
+      /[-\(]2012 - remaster/i
       // black sabbath
     ],
     mixes: [
-      "- devonshire mix",
-      "(devonshire mix",
+      /[-\(]devonshire mix/i,
       "mike dean master",
-      "- remix",
-      "(remix",
-      "[remix",
+      /(?:-\s?|\(|\[)remix/i,
       "-reloaded-",
       // deco*27
-      "- reloaded",
-      "(reloaded",
-      "[reloaded",
-      "(best friend remix",
+      /(?:-\s?|\(|\[)reloaded/i,
+      /\(best friend remix/i,
       // deco*27
-      "- live",
-      "(live",
-      ": the live",
-      "( the live",
-      "- the live",
-      "- online live",
-      "online live",
-      "(online live",
-      "- ao vivo",
-      "(ao vivo",
-      "[ao vivo",
-      "- en vivo",
-      "(en vivo",
-      "[en vivo",
-      "- multishow ao vivo",
-      "(multishow ao vivo",
-      "[multishow ao vivo",
-      "- demo",
-      "(demo",
-      "[demo",
-      "- early demo",
-      "(early demo",
-      "[early demo",
-      "- early version",
-      "(early version",
-      "[early version",
-      "- rehearsal",
-      "(rehearsal",
-      "- sample clearance",
-      "(sample clearance",
-      "[sample clearance",
-      "- home demo",
-      "(home demo",
-      "- solo acoustic",
-      "(solo acoustic",
-      "- acoustic",
-      "(acoustic",
-      "[acoustic",
-      "- piano ver",
-      "(piano ver",
-      "[piano ver",
-      ": self-serenade",
-      "- self-serenade",
-      "- alt",
-      "(alt",
-      "[alt",
-      "- chopped",
-      "(chopped",
-      "[chopped",
+      /[-\(]live/i,
+      /:\s?the live/i,
+      /\(\s?the live/i,
+      /[-\(]the live/i,
+      /[-\(]online live/i,
+      /\sonline live/i,
+      /(?:-\s?|\(|\[)ao vivo/i,
+      /(?:-\s?|\(|\[)en vivo/i,
+      /(?:-\s?|\(|\[)multishow ao vivo/i,
+      /(?:-\s?|\(|\[)demo/i,
+      /(?:-\s?|\(|\[)early demo/i,
+      /(?:-\s?|\(|\[)early version/i,
+      /[-\(]rehearsal/i,
+      /(?:-\s?|\(|\[)sample clearance/i,
+      /[-\(]home demo/i,
+      /[-\(]solo acoustic/i,
+      /(?:-\s?|\(|\[)acoustic/i,
+      /(?:-\s?|\(|\[)piano ver/i,
+      /:\s?self-serenade/i,
+      /[-\(]self-serenade/i,
+      /(?:-\s?|\(|\[)alt/i,
+      /(?:-\s?|\(|\[)chopped/i,
       "(kate",
       "(asmr",
       "(agressive",
       "(aggressive",
       "brazilian phonk",
       // lol
-      "- sped up",
-      "(sped up",
-      "[sped up",
-      "- slow",
-      "(slow",
-      "[slow",
-      "- nightcore",
-      "(nightcore",
-      "[nightcore",
+      /(?:-\s?|\(|\[)sped up/i,
+      /(?:-\s?|\(|\[)slow/i,
+      /(?:-\s?|\(|\[)nightcore/i,
       "a. g. cook remix",
       "- charli xcx & a.g. cook remix",
       "- rina sawayama & clarence clarity remix",
-      "- planningtorock remix",
-      "- lsdxoxo remix",
       "- bree runway & jimmy edgar remix",
-      "- doss remix",
-      "- pabllo vittar remix",
-      "- ashnikko remix",
-      "- arca remix",
-      "- dorian electra remix",
       "- chester lockhart, mood killer & lil texas remix",
       "- shygirl & mura masa remix",
       "- coucou chloe remix",
       // https://www.last.fm/music/+noredirect/lady+gaga/dawn+of+chromatica
-      "- starsmith remix",
-      "(starsmith remix",
-      "- gesaffelstein remix",
-      "(gesaffelstein remix",
-      "(george daniel remix",
-      "- george daniel remix",
       "(george daniel & charli xcx remix",
       "- george daniel & charli xcx remix",
-      "(elvira remix",
-      "[elvira remix",
-      "- elvira remix",
-      "(bloodpop\xAE remix",
-      "- bloodpop\xAE remix",
-      "(bloodpop remix",
-      "- bloodpop remix",
-      "(r3hab remix",
-      "- r3hab remix",
-      "(sawyr and ryan tedder mix",
-      "- sawyr and ryan tedder mix",
-      "(seed remix",
-      "- seed remix",
-      "(clean bandit remix",
-      "- clean bandit remix",
-      "(first dance remix",
-      "- first dance remix",
-      "(digital dog remix",
-      "- digital dog remix",
-      "(csi remix",
-      "- csi remix",
-      "(fat max g remix",
-      "- fat max g remix",
-      "(roosevelt remix",
-      "- roosevelt remix",
-      "(kungs remix",
-      "- kungs remix",
-      "(jayda g remix",
-      "- jayda g remix",
-      "(illenium remix",
-      "- illenium remix",
-      "(felix jaehn remix",
-      "- felix jaehn remix",
-      "(tensnake remix",
-      "- tensnake remix",
-      "(snakehips remix",
-      "- snakehips remix",
-      "(jungle remix",
-      "- jungle remix",
-      "(lp giobbi remix",
-      "- lp giobbi remix",
-      "(blond:ish remix",
-      "[blond:ish remix",
-      "- blond:ish remix",
-      "(cults remix",
-      "- cults remix",
-      "(dombresky remix",
-      "- dombresky remix",
-      "(astronomyy remix",
-      "- astronomyy remix",
-      "(sofi tukker remix",
-      "- sofi tukker remix",
-      "(troyboi remix",
-      "- troyboi remix",
-      "(foster the people remix",
-      "- foster the people remix",
-      "(dutch uncles remix",
-      "- dutch uncles remix",
-      "(kye kye remix",
-      "- kye kye remix",
-      "(smash mode remix",
-      "- smash mode remix",
-      "(blackbear remix",
-      "- blackbear remix",
-      "(goldhouse remix",
-      "- goldhouse remix",
-      "(cautious clay remix",
-      "- cautious clay remix",
-      "(jerry folk remix",
-      "- jerry folk remix",
-      "(aire atlantica remix",
-      "- aire atlantica remix",
-      "(marian hill remix",
-      "- marian hill remix",
-      "(the motion retrowave remix",
-      "- the motion retrowave remix",
-      "(dj kk remix",
-      "[dj kk remix",
-      "- dj kk remix",
-      "- kyle shearer remix",
-      "(kyle shearer remix",
-      "- rostam remix",
-      "(rostam remix",
-      "- chromeo remix",
-      "(chromeo remix",
-      "- flume remix",
-      "(flume remix",
-      "- fffrrannno remix",
-      "(fffrrannno remix",
-      "- el-p remix",
-      "(el-p remix",
-      "- ryan hemsworth remix",
-      "(ryan hemsworth remix",
-      "- end of the world remix",
-      "(end of the world remix",
-      "- salute interstellar remix",
-      "(salute interstellar remix",
-      "- seiho remix",
-      "(seiho remix",
-      "- bree runway remix",
-      "(bree runway remix",
-      "- chus & ceballos remix",
-      "(chus & ceballos remix",
-      "- psb maxi-mix",
-      "(psb maxi\u2010mix",
-      "(psb maxi-mix",
-      // different dashes
-      "- jacques lu cont mix",
-      "(jacques lu cont mix",
-      "- axwell remix",
-      "(axwell remix",
-      "- archigram remix",
-      "(archigram remix",
-      "- quiet storm demo",
-      "(quiet storm demo",
-      "- allstar new single",
-      "(allstar new single",
+      // simple remixes
+      new RegExp(
+        "(?:-\\s|[\\(\\[])(?:starsmith|gesaffelstein|elvira|bloodpop\xAE?|r3hab|sawyr and ryan tedder|seed|clean bandit|first dance|digital dog|csi|fat max g|roosevelt|kungs|jayda g|illenium|felix jaehn|tensnake|snakehips|jungle|lp giobbi|blond:ish|cults|dombresky|astronomyy|sofi tukker|troyboi|foster the people|dutch uncles|kye kye|smash mode|blackbear|goldhouse|cautious clay|jerry folk|aire atlantica|marian hill|the motion retrowave|dj kk|kyle shearer|rostam|chromeo|flume|fffrrannno|el-p|ryan hemsworth|end of the world|salute interstellar|seiho|bree runway|chus & ceballos|axwell|archigram|dance club|flying lotus|sports bar|doss|pabllo vittar|ashnikko|arca|dorian electra|planningtorock|lsdxoxo|coucou chloe|george daniel|jacques lu cont|sasha twilo|flying lotus|chris lord-alge|cla|club 69 speed|the color|meltdown|underground|ihs|classic club|naughty main|og|rough|sports bar|new|short|dance club|electronic|tv|tvd|the ultimate|the)\\s+(?:remix|mix)\\b",
+        "i"
+      ),
+      new RegExp(
+        "(?:-\\s|[\\(\\[])(?:album version|album edition|us album version|uk album version|u\\.s\\. version|u\\.s\\. remix|english version|japanese version|spanish version|english cover|french ver|soundtrack|the original movie soundtrack|twilight soundtrack version|transformers soundtrack version|babygirl original soundtrack|tv size|cut ver|short version|short edit|long version|full length|non-stop|old timey|club edit|rain|the witch collection|dancing witch version|lonely witch version|moonlit witch version|cabin in candlelight version|haus labs version|twerk version|esher|first|hummed|second|songwriting|strings|widescreen|take|unnumbered|vocal|without|mono|stereo|anime|game edit|official|offline|radio|orchestra|self-titled demo|j stax radio|triple j)\\b",
+        "i"
+      ),
+      /[-\(]quiet storm demo/i,
+      /[-\(]allstar new single/i,
       "- bt & sasha\u2019s bucklodge ashram new",
       "(bt & sasha\u2019s bucklodge ashram new",
       "- bt & sasha's bucklodge ashram new",
       // different apostrophe
       "(bt & sasha's bucklodge ashram new",
-      "- howie tee new",
-      "(howie tee new",
-      "- sasha twilo mix",
-      "(sasho twilo mix",
-      "- the collaboration remix",
-      "(the collaboration remix",
-      "- collaboration remix",
-      "(collaboration remix",
-      "- club 69 speed mix",
-      "(club 69 speed mix",
-      "- victor calderone future new",
-      "(victor calderone future new",
+      /[-\(]howie tee new/i,
+      /\(sasho twilo mix/i,
+      /[-\(](?:the )?collaboration remix/i,
+      /[-\(]victor calderone future new/i,
       "- fabien's good god mix",
       "(fabien's good god mix",
       "- fabien\u2019s good god mix",
       "(fabien\u2019s good god mix",
-      "- dj paulo & jackinsky full vocal",
-      "(dj paulo & jackinsky full vocal",
-      "- funk generation & h3drush dub",
-      "(funk generation & h3drush dub",
-      "- the color mix",
-      "(the color mix",
-      "- meltdown mix",
-      "(meltdown mix",
-      "- underground mix",
-      "(underground mix",
-      "- william orbit drum",
-      "(william orbit drum",
-      "- victor calderone drum",
-      "(victor calderone drum",
-      "- thriller 25th anniversary",
-      "(thriller 25th anniversary",
-      "- ihs mix",
-      "(ihs mix",
-      "- classic club mix",
-      "(classic club mix",
-      "- d.m. extended r&b mix",
-      "(d.m. extended r&b mix",
-      "- pressurized dub",
-      "(pressurized dub",
-      "- pressurised dub",
-      "(pressurised dub",
+      /[-\(]dj paulo & jackinsky full vocal/i,
+      /[-\(]funk generation & h3drush dub/i,
+      /[-\(]william orbit drum/i,
+      /[-\(]victor calderone drum/i,
+      /[-\(]thriller 25th anniversary/i,
+      /[-\(]d\.m\. extended r&b mix/i,
+      /[-\(]pressuri[sz]ed dub/i,
       `- dave "jam" hall's extended urban remix`,
       `(dave "jam" hall's extended urban remix`,
       // hope this is the correct way to escape a string with " and '
-      "- naughty main mix",
-      "(naughty main mix",
-      "- kanye west rework",
-      "(kanye west rework",
-      "- the white panda mash-up",
-      "(the white panda mash-up",
-      "- haus labs version",
-      "- twerk version",
-      // real lorde listing lolz
-      "(twerk version",
-      "- offline",
-      "- og mix",
-      "- club edit",
-      "(club edit",
-      "- radio",
-      "(radio",
-      "- orchestra",
-      "(orchestra",
-      "- self-titled demo",
-      "(self-titled demo",
-      "- album version",
-      "(album version",
-      "[album version",
-      "- album edition",
-      "(album edition",
-      "[album edition",
-      "- us album version",
-      "(us album version",
-      "[us album version",
-      "- uk album version",
-      "(uk album version",
-      "[uk album version",
-      "- u.s. version",
-      "(u.s. version",
-      "[u.s. version",
-      "- u.s. remix",
-      "(u.s. remix",
-      "[u.s. remix",
-      "- twilight soundtrack version",
-      "- transformers soundtrack version",
-      "- studio",
-      "(studio",
-      "[studio",
+      /[-\(]kanye west rework/i,
+      /[-\(]the white panda mash-up/i,
       "(fifty shades darker",
-      "- j stax radio",
-      // fearless international version
-      "(10 minute",
-      "- old timey",
-      "(old timey",
-      "[old timey",
-      "- official",
-      "(official",
-      "[official",
-      "- english version",
-      "(english version",
-      "[english version",
-      "- japanese version",
-      "(japanese version",
-      "[japanese version",
-      "- spanish version",
-      "(spanish version",
-      "[spanish version",
-      "(english cover",
-      "[english cover",
-      "- english cover",
-      "- french ver",
-      "(french ver",
-      "[french ver",
-      ": twin ver",
-      "(twin ver",
-      "- twin ver",
-      "\u2013 twin ver",
-      "- soundtrack",
-      "(soundtrack",
-      "[soundtrack",
-      "- the original movie soundtrack",
-      "(the original movie soundtrack",
-      "[the original movie soundtrack",
-      "- babygirl original soundtrack",
-      "(babygirl original soundtrack",
-      "- the ultimate mix",
-      "(the ultimate mix",
-      "[the ultimate mix",
-      "- tv size",
-      "(tv size",
-      "[tv size",
-      "- cut ver",
-      "(cut ver",
-      "[cut ver",
-      "- short edit",
-      "(short edit",
-      "short edit",
-      "- short version",
-      "(short version",
-      "[short version",
-      "- short mix",
-      "(short mix",
-      "[short mix",
-      "- long version",
-      "(long version",
-      "[long version",
-      "- full length",
-      "(full length",
-      "[full length",
-      '- 12"',
+      /[-–:\(]twin ver/i,
+      /[\(\[]12"/i,
       // 12 inch versions, mixes of songs
-      '(12"',
-      '[12"',
-      "- non-stop",
-      "(non-stop",
-      "[non-stop",
-      "- electronic mix",
-      "(electronic mix",
-      "[electronic mix",
-      "- new mix",
-      "(new mix",
-      "[new mix",
-      '- "new" mix',
-      '("new" mix',
-      '["new" mix',
+      /[\(\[][""]new[""] mix/i,
       "[over now",
       // billie eilish l'amour de ma vie
-      "- the remix",
-      "(the remix",
-      "[the remix",
-      ": the remix",
-      "- the witch collection",
-      "(the witch collection",
-      "[the witch collection",
-      "- dancing witch version",
-      "(dancing witch version",
-      "[dancing witch version",
-      "- lonely witch version",
-      "(lonely witch version",
-      "- moonlit witch version",
-      "(moonlit witch version",
-      "- cabin in candlelight version",
-      "(cabin in candelight version",
-      "- 90's trend remix",
-      "(90's trend remix",
-      "- triple j",
-      "(triple j",
-      "(unfinished original recordings of de-loused in the comatorium",
-      "[unfinished original recordings of de-loused in the comatorium",
-      "- unfinished original recordings of de-loused in the comatorium",
+      /(?:-\s?|\(|\[)unfinished original recordings of de-loused in the comatorium/i,
       // landscape tantrums
-      "- esher",
-      "(esher",
-      "[esher",
-      "- first",
-      "(first",
-      "[first",
-      "- hummed",
-      "(hummed",
-      "[hummed",
-      "- second",
-      "(second",
-      "[second",
-      "- songwriting",
-      "(songwriting",
-      "[songwriting",
-      "- strings",
-      "(strings",
-      "[strings",
-      "- widescreen",
-      "(widescreen",
-      "[widescreen",
-      "- take",
-      "(take",
-      "[take",
-      "- unnumbered",
-      "(unnumbered",
-      "[unnumbered",
-      "- vocal",
-      "(vocal",
-      "[vocal",
-      "- without",
-      "(without",
-      "[without",
-      "- cla mix",
-      "(cla mix",
-      "[cla mix",
-      "- chris lord-alge mix",
-      "(chris lord-alge mix",
-      "[chris lord-alge mix",
-      "- mono",
-      "(mono",
-      "[mono",
-      "- stereo",
-      "(stereo",
-      "[stereo",
-      "- anime",
-      "(anime",
-      "[anime",
-      "- game edit",
-      "(game edit",
-      "[game edit"
+      "(holiday ",
+      // illit holiday party/night
+      /(?:-\s?|\(|\[)mr\. dupri no rap radio mix/i
     ],
     mixes_numbers: [
-      "(v1",
-      "(v2",
-      "(v3",
-      "(v4",
-      "(v5",
-      "(v6",
-      "(v7",
-      "(v8",
-      "(v9",
-      "[v1",
-      "[v2",
-      "[v3",
-      "[v4",
-      "[v5",
-      "[v6",
-      "[v7",
-      "[v8",
-      "[v9",
-      "- mixed",
-      "- mix ",
-      "(mix "
+      /[\(\[\{]v[1-9]/i,
+      /[-\(]mixed/i,
+      /[-\(]mix\s/i
     ],
     stems: [
-      "- acapella",
-      "(acapella",
-      "[acapella",
-      "- a cappella",
-      "(a cappella",
-      "[a cappella",
-      "- instrumental",
-      "(instrumental",
-      "[instrumental",
-      "- karaoke",
-      "(karaoke",
-      "[karaoke",
-      "- session",
-      "(session",
-      "[session",
-      "- studio session",
-      "(studio session",
-      "[studio session",
-      "- smart session",
-      "(smart session",
-      "[smart session",
-      "- boombox",
-      "(boombox",
-      "- mtv unplugged",
-      "(mtv unplugged",
-      "- unplugged",
-      "(unplugged",
+      /(?:-\s?|\(|\[)\s*(?:a\s*cappella|acapella|accapella)/i,
+      /(?:-\s?|\(|\[)instrumental/i,
+      /(?:-\s?|\(|\[)karaoke/i,
+      /(?:-\s?|\(|\[)session/i,
+      /(?:-\s?|\(|\[)studio session/i,
+      /(?:-\s?|\(|\[)smart session/i,
+      /[-\(]boombox/i,
+      /[-\(]mtv unplugged/i,
+      /[-\(]unplugged/i,
       "-unplugged",
       // no space intentionally, soma saito tracks
-      "- ac\xFAstico",
-      "- \xE1custico",
-      "(ac\xFAstico",
-      "[ac\xFAstico",
-      "- the long pond studio",
-      "(the long pond studio",
-      ": the long pond studio",
-      "- recorded at",
-      "(recorded at",
-      "[recorded at",
-      "- recorded live at",
-      "(recorded live at",
-      "[recorded live at",
-      ": sad girl autumn version",
-      "(sad girl autumn",
-      "[sad girl autumn"
+      /[-\(]acústico/i,
+      /[-\(]ácustico/i,
+      /(?:-\s?|\(|\[)acústico/i,
+      /[-\(:]the long pond studio/i,
+      /(?:-\s?|\(|\[)recorded at/i,
+      /(?:-\s?|\(|\[)recorded live at/i,
+      /:\s?sad girl autumn version/i,
+      /(?:-\s?|\(|\[)sad girl autumn/i
     ],
     bonus: [
-      "- intro",
-      "(intro",
-      "[intro",
-      "- outro",
-      "(outro",
-      "[outro",
+      /(?:-\s?|\(|\[)intro/i,
+      /(?:-\s?|\(|\[)outro/i,
       "dean outro",
-      "- interlude",
-      "(interlude",
-      "[interlude",
-      "- bonus",
-      "(bonus",
-      "[bonus",
+      /(?:-\s?|\(|\[)intermission/i,
+      /(?:-\s?|\(|\[)interlude/i,
+      /(?:-\s?|\(|\[)bonus/i,
+      "(whitearmor interlude",
+      "(ripsquadd outro",
       "the bonus tracks",
       // beyonce i am sasha fierce
-      "- secret track",
+      /[-:\(]secret track/i,
       // track added for clarity
-      ": secret track",
-      "(secret track",
-      "- edit",
-      "(edit",
-      "[edit",
-      "- from",
-      "(from",
-      "[from",
-      "- music from",
-      "(music from",
-      "- theme from",
-      "(theme from",
-      "- skit",
-      "(skit",
-      "- original",
-      "(original",
-      "[original",
-      "- deluxe",
-      "(deluxe",
-      "[deluxe",
-      "- digital deluxe",
-      "(digital deluxe",
-      "[digital deluxe",
+      /(?:-\s?|\(|\[)edit/i,
+      /(?:-\s?|\(|\[)from/i,
+      /[-\(]music from/i,
+      /[-\(]theme from/i,
+      /[-\(]skit/i,
+      /(?:-\s?|\(|\[)original/i,
+      /(?:-\s?|\(|\[)deluxe/i,
+      /(?:-\s?|\(|\[)digital deluxe/i,
       "d.l.x.",
       // https://www.last.fm/music/taylor+swift/1989+d.l.x.
-      " deluxe edition",
-      // added edition to the end because 'deluxe' can have some false positives
-      " deluxe version",
-      // same as above
-      "super deluxe edition",
-      "super deluxe version",
-      "- complete edition",
-      "(complete edition",
-      "[complete edition",
-      ": edi\xE7\xE3o",
-      "- edi\xE7\xE3o",
-      "(edi\xE7\xE3o",
-      "[edi\xE7\xE3o",
-      "- edicion",
-      "- edici\xF3n",
-      "(edicion",
-      "(edici\xF3n",
-      "- extended",
-      "(extended",
-      "[extended",
-      "- the extended edition",
+      /\s(?:super\s)?deluxe (?:edition|version)/i,
+      /(?:super\s)?deluxe (?:edition|version)$/i,
+      /(?:-\s?|\(|\[)complete edition/i,
+      /[-:\(\[]edi[cç][ãi]o/i,
+      /[-\(]edicion/i,
+      /[-\(]edición/i,
+      /(?:-\s?|\(|\[)extended/i,
+      /[-\(]the extended edition/i,
       // denzel
-      "- expanded",
-      "(expanded",
-      "[expanded",
-      "- anniversary",
-      "(anniversary",
-      "[anniversary",
-      "- b-side",
-      "- c-side",
-      "(b-side",
-      "(c-side",
-      "- lp",
-      "- ep",
-      "(lp",
-      "(ep",
+      /(?:-\s?|\(|\[)expanded/i,
+      /(?:-\s?|\(|\[)anniversary/i,
+      /[-\(]b-side/i,
+      /[-\(]c-side/i,
+      /[-\(]lp/i,
+      /[-\(]ep/i,
       "remix ep",
-      "- single",
-      "(single",
-      "- rough single",
-      "(rough single",
+      /[-\(]single/i,
+      /[-\(]rough single/i,
       // bedtime stories untold chapter
-      "- mixtape",
-      "(mixtape",
-      "- box set",
-      "(box set",
-      "- spilled",
-      "(spilled",
-      "[spilled",
+      /[-\(]mixtape/i,
+      /[-\(]box set/i,
+      /(?:-\s?|\(|\[)spilled/i,
       // olivia rodrigo
-      "- slightly deluxe",
-      "(slightly deluxe",
-      "[slightly deluxe",
+      /(?:-\s?|\(|\[)slightly deluxe/i,
       // ariana grande
-      ": self-titled deluxe",
-      "(self-titled deluxe",
-      "[self-titled deluxe",
+      /[-:\(\[]self-titled deluxe/i,
       // paramore
-      ": the anthology",
-      "(the anthology",
-      "[the anthology",
-      "- 3am edition",
-      "(3am edition",
-      "[3am edition",
-      "- the til dawn edition",
-      "(the til dawn edition",
-      "[the til dawn edition",
-      "- til dawn edition",
-      "(til dawn edition",
-      "[til dawn edition",
-      "- late night edition",
-      "(late night edition",
-      "[late night edition",
-      "- the late night edition",
-      "(the late night edition",
-      "[the late night edition",
-      "- big machine radio release special",
-      "(big machine radio release special",
-      "[big machine radio release special",
-      ": platinum",
-      "- platinum",
-      "(platinum",
-      "[platinum",
-      ": the platinum",
-      "platinum edition",
-      // added edition to the end because 'platinum' can have some false positives
-      "platinum version",
-      // same as above
-      "- international",
-      "(international",
-      "[international",
+      /[-:\(\[]the anthology/i,
+      /(?:-\s?|\(|\[)3am edition/i,
+      /(?:-\s?|\(|\[)(?:the )?til dawn edition/i,
+      /(?:-\s?|\(|\[)(?:the )?late night edition/i,
+      /(?:-\s?|\(|\[)big machine radio release special/i,
+      /[-:\(\[]platinum/i,
+      /:\s?the platinum/i,
+      /platinum (?:edition|version)/i,
+      // added edition/version as 'platinum' can have false positives
+      /(?:-\s?|\(|\[)international/i,
       // taylor swift
       "(int'l",
       // think i escaped this character correctly?
-      "- uk deluxe",
-      "(uk deluxe",
-      "[uk deluxe",
-      "- magic city edition",
-      "(magic city edition",
-      "[magic city edition",
-      "- japan edition",
-      "(japan edition",
-      "[japan edition",
-      // added edition to some for safety
-      "- japan version",
-      "(japan version",
-      "[japan version",
-      "- australian version",
-      "(australian version",
-      "[australian version",
-      "- after school - deluxe",
-      "(after school - deluxe",
-      "[after school - deluxe",
+      /(?:-\s?|\(|\[)uk deluxe/i,
+      /(?:-\s?|\(|\[)magic city edition/i,
+      /(?:-\s?|\(|\[)japan (?:edition|version)/i,
+      // added edition/version for safety
+      /(?:-\s?|\(|\[)australian version/i,
+      /(?:-\s?|\(|\[)after school - deluxe/i,
       // melanie martinez
-      "- revised",
-      "(revised",
-      "[revised",
-      ": the complete",
-      "(the complete",
-      "[the complete",
-      "- the moonlight",
-      "(the moonlight",
-      "[the moonlight",
-      "- moonlight",
-      "(moonlight",
-      "[moonlight",
+      /(?:-\s?|\(|\[)revised/i,
+      /[-:\(\[]the complete/i,
+      /(?:-\s?|\(|\[)(?:the )?moonlight/i,
       // dua lipa
-      "- tour",
-      "(tour",
-      "[tour",
+      /(?:-\s?|\(|\[)tour/i,
       "music from and inspired by",
       // on the end of black panther the album
-      "- music inspired",
-      "(music inspired",
-      "[music inspired",
-      "- featured in",
-      "(featured in",
-      "[featured in",
-      "- best weekend ever edition",
-      "(best weekend ever edition",
-      "[best weekend ever edition",
-      "- double disc",
-      "(double disc",
-      "[double disc",
-      "- re-issue",
-      "(re-issue",
-      "[re-issue",
-      "- reissue",
-      "(reissue",
-      "[reissue",
-      "(12 reg. tracks",
+      /(?:-\s?|\(|\[)music inspired/i,
+      /(?:-\s?|\(|\[)featured in/i,
+      /(?:-\s?|\(|\[)best weekend ever edition/i,
+      /(?:-\s?|\(|\[)double disc/i,
+      /(?:-\s?|\(|\[)re-?issue/i,
+      /\(12 reg\. tracks/i,
       // confessions madonna
-      "- special",
-      "(special",
-      "[special",
-      "- limited",
-      "(limited",
-      "[limited",
-      "- store exclusive",
-      "(store exclusive",
-      "[store exclusive",
-      "- highlights from",
-      "(highlights from",
-      "[highlights from",
-      "- track by track",
-      ": track by track",
-      "(track by track",
-      "- disc ",
-      "(disc ",
-      "[disc ",
-      //,
-      "- 19",
-      "- 20",
-      "(19",
-      "(20",
-      "[19",
-      "[20",
-      "- 1st",
-      "- 2nd",
-      "- 3rd",
-      "- 4th",
-      "- 5th",
-      "- 10th",
-      "- 25th",
-      "- 30th",
-      "- 35th",
-      "- 40th",
-      "- 50th",
-      "- 60th",
-      "(1st",
-      // soma saito track
-      "\uFF081st",
-      // thats not a space thats a stupid alternate bracket
-      "(2nd",
-      "(3rd",
-      "(4th",
-      "(5th",
-      "(10th",
-      "(20th",
-      "(25th",
-      "(30th",
-      "(35th",
-      "(40th",
-      "(50th",
-      "(60th",
-      "- tenth anniversary",
-      "fifth anniversary",
-      "5th anniversary",
-      "10th anniversary",
-      "20th anniversary",
-      "25th anniversary",
-      "(tenth anniversary",
-      "(fifth anniversary",
-      ": the tenth anniversary",
+      /(?:-\s?|\(|\[)special/i,
+      /(?:-\s?|\(|\[)limited/i,
+      /(?:-\s?|\(|\[)store exclusive/i,
+      /(?:-\s?|\(|\[)highlights from/i,
+      /[-:\(]track by track/i,
+      /(?:-\s?|\(|\[)disc\s/i,
+      //
+      /(?:-\s?|\(|\[)(?:19|20)\d{2}/i,
+      /[-\(（](?:1st|2nd|3rd|4th|5th|10th|20th|25th|30th|35th|40th|50th|60th)/i,
+      /(?:tenth|fifth|5th|10th|20th|25th)\s+anniversary/i,
+      /[-\(]tenth anniversary/i,
+      /:\s?(?:the tenth anniversary|25th anniversary expanded edition|30th anniversary edition)/i,
       "the tenth anniversary",
       // lady gaga born this way
-      "- twenty years edition",
-      "(twenty years edition",
-      "[twenty years edition",
-      "- 10 year",
-      "- 20 year",
-      "- 25 year",
-      "-30 year",
-      "-35 year",
-      "- 40 year",
-      "- 50 year",
-      "- 60 year",
-      "(10 year",
-      "(20 year",
-      "(25 year",
-      "(30 year",
-      "(35 year",
-      "(40 year",
-      "(50 year",
-      "(60 year",
-      "- transition",
-      "(transition",
-      "[transition",
-      "- reprise",
-      "(reprise",
-      "[reprise",
-      "(director",
+      /(?:-\s?|\(|\[)twenty years edition/i,
+      /[-\(](?:10|20|25|30|35|40|50|60)\s+year/i,
+      /(?:-\s?|\(|\[)transition/i,
+      /(?:-\s?|\(|\[)reprise/i,
+      /\(director/i,
       "(soma saito's",
       "- soma saito's",
-      "- so punk on the internet ver",
+      /(?:-\s?|\(|\[)so punk on the internet ver/i,
       // taylor swift showgirl variants :(
-      "(so punk on the internet ver",
-      "[so punk on the internet ver",
-      "- including",
-      "(including",
-      "- poem",
-      "(poem",
-      "[poem"
+      /[-\(]including/i,
+      /(?:-\s?|\(|\[)poem/i,
+      /(?:-\s?|\(|\[)hidden/i
     ],
-    form: ["(clean", "[clean", "(explicit", "[explicit", "(spotify)", "\u{1F174}"]
+    form: [/[\(\[]clean/i, /[\(\[]explicit/i, "(spotify)", "\u{1F174}"]
   };
   function clean_title(title) {
     return name_includes(title)[0];
@@ -29277,7 +28656,7 @@
     id = "",
     title,
     subtitle,
-    body: body2 = html.node``,
+    body = html.node``,
     dismiss = true,
     type = "",
     has_overlays = true,
@@ -29293,7 +28672,7 @@
       id,
       title,
       subtitle,
-      body: body2,
+      body,
       dismiss,
       type,
       has_overlays,
@@ -29356,7 +28735,7 @@
     let modal_body = document.createElement("div");
     modal_body.classList.add("bleh-modal-body");
     modal_body.setAttribute("data-allow-scroll", allow_scroll);
-    modal_body.appendChild(body2);
+    modal_body.appendChild(body);
     modal.appendChild(modal_body);
     dialogs[id] = {
       instance: modal
@@ -29457,8 +28836,8 @@
       }
     }
   }
-  function sponsor_request(notify2 = false, func = null) {
-    log(`initiating request with notify ${notify2}`, "sponsor");
+  function sponsor_request(should_notify = false, func = null) {
+    log(`initiating request with notify ${should_notify}`, "sponsor");
     let button2 = document.body.querySelector('[onclick="_sponsor_check()"]');
     if (button2) button2.setAttribute("disabled", "");
     let xhr = new XMLHttpRequest();
@@ -29475,30 +28854,44 @@
         api_expire.setHours(api_expire.getHours() + 1);
       }
       if (xhr.status == 200) {
-        if (sponsor_list.latest != 0 || sponsor_list && parseFloat(JSON.parse(this.response).latest) >= parseFloat(sponsor_list.latest)) {
-          for (const member in sponsor_list) delete sponsor_list[member];
-          Object.assign(sponsor_list, JSON.parse(this.response));
-          if (sponsor_list) {
-            auth.sponsor = sponsor_list.sponsors.includes(auth.name);
-            auth.sponsor_full = !sponsor_list.sponsors_one_time.includes(auth.name);
-            if (sponsor_list.badges?.[auth.name]) {
-              const old_badges = JSON.parse(localStorage.getItem("kat_sponsor_cache")) || {};
-              if (JSON.stringify(old_badges) != JSON.stringify(sponsor_list.badges[auth.name])) {
-                console.info("sponsor request", old_badges, sponsor_list.badges[auth.name]);
-                set_storage("kat_sponsor_cache", JSON.stringify(sponsor_list.badges[auth.name]));
-                new_badges(sponsor_list.badges[auth.name]);
+        try {
+          if (sponsor_list.latest != 0 || sponsor_list && parseFloat(JSON.parse(this.response).latest) >= parseFloat(sponsor_list.latest)) {
+            for (const member in sponsor_list) delete sponsor_list[member];
+            Object.assign(sponsor_list, JSON.parse(this.response));
+            if (sponsor_list) {
+              auth.sponsor = sponsor_list.sponsors.includes(auth.name);
+              auth.sponsor_full = !sponsor_list.sponsors_one_time.includes(auth.name);
+              if (sponsor_list.badges?.[auth.name]) {
+                const old_badges = JSON.parse(localStorage.getItem("kat_sponsor_cache")) || {};
+                if (JSON.stringify(old_badges) != JSON.stringify(sponsor_list.badges[auth.name])) {
+                  console.info("sponsor request", old_badges, sponsor_list.badges[auth.name]);
+                  set_storage("kat_sponsor_cache", JSON.stringify(sponsor_list.badges[auth.name]));
+                  new_badges(sponsor_list.badges[auth.name]);
+                }
               }
             }
+            if (should_notify)
+              status({
+                title: tl2(trans.downloaded_value, { v: tl2(trans.sponsor_details) })
+              });
+            set_storage("kat_sponsors", this.response);
+            if (func) func();
+            api_expire.setHours(api_expire.getHours() + 4);
+            log(`list cached until ${api_expire}`, "sponsor");
           }
-          if (notify2)
-            status({
-              title: tl2(trans.downloaded_value, { v: tl2(trans.sponsor_details) })
-            });
-          set_storage("kat_sponsors", this.response);
-          if (func) func();
+        } catch (e) {
+          log("parsing list failed", "sponsor", "error", { e });
+          notify({
+            id: "sponsor_failed",
+            title: tl2(trans.value_failed_to_load, { v: tl2(trans.sponsor_details) }),
+            body: e.message || e,
+            type: "error",
+            persist: true
+          });
+          if (func) func(false);
+          api_expire.setHours(api_expire.getMinutes() + 30);
+          log(`list cached until ${api_expire}`, "sponsor");
         }
-        api_expire.setHours(api_expire.getHours() + 4);
-        log(`list cached until ${api_expire}`, "sponsor");
       }
       set_storage("kat_sponsors_expire", api_expire);
       if (button2 != null) button2.removeAttribute("disabled");
@@ -29596,29 +28989,48 @@
   // src/components/badge.js
   function load_badges(user, solo = false) {
     if (!sponsor_list || !sponsor_list.badges) return;
-    if (!sponsor_list.badges.hasOwnProperty(user)) return;
     let badges = [];
-    if (!Array.isArray(sponsor_list.badges[user])) {
-      log("1 badge found", "sponsor", "info", sponsor_list.badges[user]);
-      badges.push(sponsor_list.badges[user]);
-    } else {
-      log(
-        "multiple badges found",
-        "sponsor",
-        "info",
-        sponsor_list.badges[user]
-      );
-      if (solo)
-        badges.push(
-          sponsor_list.badges[user][Object.keys(sponsor_list.badges[user]).length - 1]
+    const trans_contributions = get_trans_contributions(user);
+    log(`found ${trans_contributions.length} contribution(s) for ${user}`, "sponsor", "info", { trans_contributions });
+    if (trans_contributions.length > 0) {
+      trans_contributions.forEach((contribution) => {
+        badges.push({
+          type: "translation",
+          translation_code: contribution.code,
+          reason: contribution.name
+        });
+      });
+    }
+    if (sponsor_list.badges.hasOwnProperty(user)) {
+      if (!Array.isArray(sponsor_list.badges[user])) {
+        log("1 badge found", "sponsor", "info", sponsor_list.badges[user]);
+        badges.push(sponsor_list.badges[user]);
+      } else {
+        log(
+          "multiple badges found",
+          "sponsor",
+          "info",
+          sponsor_list.badges[user]
         );
-      else badges = sponsor_list.badges[user];
+        badges = [...badges, ...sponsor_list.badges[user]];
+      }
+      badges = badges.filter((badge) => {
+        if (badge.type != "translation") return true;
+        return "translation_code" in badge;
+      });
     }
     badges.forEach((badge) => {
       badge = process_badge(badge, user);
     });
     log("final badge list", "sponsor", "info", badges);
+    if (solo) return badges[badges.length - 1];
     return badges;
+  }
+  function get_trans_contributions(user) {
+    return Object.entries(lang_info).filter(([code, info]) => info.by.includes(user) && code != "en").map(([code, info]) => ({
+      code,
+      name: info.name
+    }));
   }
   function process_badge(badge, user) {
     badge.user = user;
@@ -29651,7 +29063,8 @@
     lit: -1,
     name: "",
     user: "",
-    inbuilt: false
+    inbuilt: false,
+    translation_code: ""
   }, on_avatar = false, long = false, small = false) {
     log("creating", "badge", "info", { badge, on_avatar, long, small });
     const classlist = on_avatar ? "avatar-status-dot" : "label no-hover";
@@ -29660,6 +29073,10 @@
             ${badge.name}
         </span>
     `;
+    if (badge.translation_code) {
+      elem.classList.add("translation-lang");
+      elem.style.setProperty("--flag", `url(https://katelyynn.github.io/bleh/fm/flags/${badge.translation_code}.svg)`);
+    }
     if (long) elem.classList.add("expand");
     if (badge.icon != "" && badge.hue > -1 && badge.sat > -1 && badge.lit > -1) {
       elem.style.setProperty("--mask", `url(${badge.icon})`);
@@ -29842,16 +29259,19 @@
                 </a>
             ` : ""}
             ${valid_for_text ? html.node`
+                <a class="dropdown-menu-clickable-item" data-type="cut" onclick=${() => {
+        document.execCommand("cut");
+      }}>
+                    ${tl2(trans.cut)}
+                </a>
                 <a class="dropdown-menu-clickable-item" data-type="copy" onclick=${() => {
-        if (selected) copy(selected);
-        else if (value) copy(value);
+        if (selected) copy(selected, true);
+        else if (value) copy(value, true);
       }}>
                     ${tl2(trans.copy)}
                 </a>
-            ` : ""}
-            ${valid_for_text ? html.node`
                 <a class="dropdown-menu-clickable-item" data-type="paste" onclick=${() => {
-        paste();
+        paste(elem, true);
       }}>
                     ${tl2(trans.paste)}
                 </a>
@@ -29920,10 +29340,10 @@
       pre_existing_badge = null;
       pre_existing_badge_type = null;
     }
-    if (badges)
+    if (badges.length > 0)
       avatar2.appendChild(create_badge(badges[badges.length - 1], true));
     let image_header;
-    const popup = tippy_esm_default(parent ? parent : avatar2, {
+    const popup2 = tippy_esm_default(parent ? parent : avatar2, {
       theme: "context-menu",
       content: html.node`
             <div class="track-preview user-preview">
@@ -29982,7 +29402,7 @@
       trigger: "click",
       appendTo: document.body
     });
-    register_menu(parent ? parent : avatar2, popup);
+    register_menu(parent ? parent : avatar2, popup2);
     control_gif_pause(avatar_img);
     if (badges) return badges[badges.length - 1];
     else if (pre_existing_badge)
@@ -30013,11 +29433,9 @@
                 </div>
                 <div class="modal-footer">
                     <div class="fill"></div>
-                    <div class="button-group">
-                        <a class="btn primary open" href=${src} target="_blank">
-                            ${tl2(trans.open_new_tab)}
-                        </a>
-                    </div>
+                    <a class="btn primary open" href=${src} target="_blank">
+                        ${tl2(trans.open_new_tab)}
+                    </a>
                     <div class="fill"></div>
                 </div>
             </div>
@@ -30317,6 +29735,15 @@
         patch_wiki_contents(wiki_block);
     }
   }
+  function can_trust_link(href) {
+    const url = new URL(href);
+    const scheme = url.protocol;
+    const hostname = url.hostname;
+    let dangerous = false;
+    if (!scheme || !scheme.startsWith("http")) dangerous = true;
+    if (settings.trusted_sites.includes(hostname)) return { trusted: true, dangerous };
+    return { trusted: false, dangerous };
+  }
   function patch_wiki_contents(wiki_block) {
     let links = wiki_block.querySelectorAll("a");
     links.forEach((link) => {
@@ -30553,17 +29980,17 @@
     });
     register_menu(date_display, menu);
     function render_popup() {
-      let inner;
+      let inner2;
       if (view.level === "year") {
-        inner = render_year_view();
+        inner2 = render_year_view();
       } else if (view.level === "month") {
-        inner = render_month_view();
+        inner2 = render_month_view();
       } else if (view.level === "manual") {
-        inner = render_manual_view();
+        inner2 = render_manual_view();
       } else {
-        inner = render_day_view();
+        inner2 = render_day_view();
       }
-      tooltip.setContent(html.node`<div class="calendar">${inner}</div>`);
+      tooltip.setContent(html.node`<div class="calendar">${inner2}</div>`);
       if (date_button) tippy_esm_default(date_button, { content: tl2(trans.change_zoom) });
       if (manual_button)
         tippy_esm_default(manual_button, { content: manual_button.textContent });
@@ -30574,17 +30001,17 @@
     function render_day_view() {
       return html.node`
             <div class="calendar-header">
-                <button class="month-year" type="button" ref=${(el) => date_button = el} onclick=${on_month_year_click} disabled=${!can_nav_month_view()}>
+                <button class="btn month-year" type="button" ref=${(el) => date_button = el} onclick=${on_month_year_click} disabled=${!can_nav_month_view()}>
                     ${months2[view.month - 1]} ${view.year}
                 </button>
                 <div class="fill" />
-                <button class="chibi icon" data-type="manual" ref=${(el) => manual_button = el} type="button" onclick=${() => {
+                <button class="btn chibi icon" data-type="manual" ref=${(el) => manual_button = el} type="button" onclick=${() => {
         view.level = "manual";
         render_popup();
       }}>
                     ${tl2(trans.manual)}
                 </button>
-                <button class="chibi icon" data-type="up" ref=${(el) => up_button = el} disabled=${!can_prev()} type="button" onclick=${() => {
+                <button class="btn chibi icon" data-type="up" ref=${(el) => up_button = el} disabled=${!can_prev()} type="button" onclick=${() => {
         if (!can_prev()) return;
         view.month--;
         if (view.month < 1) {
@@ -30596,7 +30023,7 @@
       }}>
                     ${tl2(trans.back)}
                 </button>
-                <button class="chibi icon" data-type="down" ref=${(el) => down_button = el} disabled=${!can_next()} type="button" onclick=${() => {
+                <button class="btn chibi icon" data-type="down" ref=${(el) => down_button = el} disabled=${!can_next()} type="button" onclick=${() => {
         if (!can_next()) return;
         view.month++;
         if (view.month > 12) {
@@ -30614,8 +30041,8 @@
             </div>
             <div class="days" data-last-action=${last_action}>
                 ${days(view.year, view.month).map(
-        (cell) => cell.type == "empty" ? html.node`<button class="day empty" type="button" disabled />` : html.node`
-                            <button class="day" type="button" aria-selected=${cell.day == state.day && cell.date >= min_date && cell.date <= max_date && cell.month == view.month ? "true" : "false"} disabled=${cell.date < min_date || cell.date > max_date} onclick=${() => {
+        (cell) => cell.type == "empty" ? html.node`<button class="btn day empty" type="button" disabled />` : html.node`
+                            <button class="btn day" type="button" aria-selected=${cell.day == state.day && cell.date >= min_date && cell.date <= max_date && cell.month == view.month ? "true" : "false"} disabled=${cell.date < min_date || cell.date > max_date} onclick=${() => {
           state.day = cell.day;
           state.year = view.year;
           state.month = view.month;
@@ -30634,17 +30061,17 @@
       const max_year = max_date.getFullYear();
       return html.node`
             <div class="calendar-header">
-                <button class="month-year" type="button" ref=${(el) => date_button = el} onclick=${on_month_year_click} disabled=${!can_nav_year_view()}>
+                <button class="btn month-year" type="button" ref=${(el) => date_button = el} onclick=${on_month_year_click} disabled=${!can_nav_year_view()}>
                     ${view.year}
                 </button>
                 <div class="fill" />
-                <button class="chibi icon" data-type="manual" ref=${(el) => manual_button = el} type="button" onclick=${() => {
+                <button class="btn chibi icon" data-type="manual" ref=${(el) => manual_button = el} type="button" onclick=${() => {
         view.level = "manual";
         render_popup();
       }}>
                     ${tl2(trans.manual)}
                 </button>
-                <button class="chibi icon" data-type="up" ref=${(el) => up_button = el} type="button" disabled=${view.year <= min_year} onclick=${() => {
+                <button class="btn chibi icon" data-type="up" ref=${(el) => up_button = el} type="button" disabled=${view.year <= min_year} onclick=${() => {
         if (view.year < min_year) return;
         view.year--;
         last_action = "prev";
@@ -30652,7 +30079,7 @@
       }}>
                     ${tl2(trans.back)}
                 </button>
-                <button class="chibi icon" data-type="down" ref=${(el) => down_button = el} type="button" disabled=${view.year >= max_year} onclick=${() => {
+                <button class="btn chibi icon" data-type="down" ref=${(el) => down_button = el} type="button" disabled=${view.year >= max_year} onclick=${() => {
         if (view.year > max_year) return;
         view.year++;
         last_action = "next";
@@ -30674,7 +30101,7 @@
           999
         );
         return html.node`
-                        <button class="month" aria-selected=${view.year === state.year && i + 1 === state.month} disabled=${month_end < min_date || month_start > max_date} onclick=${() => {
+                        <button class="btn month" aria-selected=${view.year === state.year && i + 1 === state.month} disabled=${month_end < min_date || month_start > max_date} onclick=${() => {
           view.month = i + 1;
           view.level = "day";
           last_action = "";
@@ -30695,24 +30122,24 @@
       const decade_start = Math.floor(view.year / 10) * 10;
       return html.node`
             <div class="calendar-header">
-                <button class="month-year" ref=${(el) => date_button = el} onclick=${on_month_year_click}>
+                <button class="btn month-year" ref=${(el) => date_button = el} onclick=${on_month_year_click}>
                     ${decade_start} – ${decade_start + 9}
                 </button>
                 <div class="fill" />
-                <button class="chibi icon" data-type="manual" ref=${(el) => manual_button = el} type="button" onclick=${() => {
+                <button class="btn chibi icon" data-type="manual" ref=${(el) => manual_button = el} type="button" onclick=${() => {
         view.level = "manual";
         render_popup();
       }}>
                     ${tl2(trans.manual)}
                 </button>
-                <button class="chibi icon" data-type="up" ref=${(el) => up_button = el} disabled=${decade_start - 10 < min_year} onclick=${() => {
+                <button class="btn chibi icon" data-type="up" ref=${(el) => up_button = el} disabled=${decade_start - 10 < min_year} onclick=${() => {
         if (decade_start - 10 < min_year) return;
         view.year -= 10;
         render_popup();
       }}>
                     ${tl2(trans.back)}
                 </button>
-                <button class="chibi icon" data-type="down" ref=${(el) => down_button = el} disabled=${decade_start + 10 > max_year} onclick=${() => {
+                <button class="btn chibi icon" data-type="down" ref=${(el) => down_button = el} disabled=${decade_start + 10 > max_year} onclick=${() => {
         if (decade_start + 10 > max_year) return;
         view.year += 10;
         render_popup();
@@ -30724,7 +30151,7 @@
                 ${Array.from({ length: 10 }, (_, i) => decade_start + i).map(
         (yr) => {
           return html.node`
-                        <button class="year" aria-selected=${yr === state.year} disabled=${yr < min_date.getFullYear() || yr > max_date.getFullYear()} onclick=${() => {
+                        <button class="btn year" aria-selected=${yr === state.year} disabled=${yr < min_date.getFullYear() || yr > max_date.getFullYear()} onclick=${() => {
             view.year = yr;
             view.level = "month";
             render_popup();
@@ -30752,17 +30179,17 @@
       let manual_date;
       let elem = html.node`
             <div class="calendar-header">
-                <button class="month-year" ref=${(el) => date_button = el} onclick=${on_month_year_click}>
+                <button class="btn month-year" ref=${(el) => date_button = el} onclick=${on_month_year_click}>
                     ${tl2(trans.manual)}
                 </button>
                 <div class="fill" />
-                <button class="chibi icon" data-type="manual" ref=${(el) => manual_button = el} type="button" disabled>
+                <button class="btn chibi icon" data-type="manual" ref=${(el) => manual_button = el} type="button" disabled>
                     ${tl2(trans.manual)}
                 </button>
-                <button class="chibi icon" data-type="up" ref=${(el) => up_button = el} disabled>
+                <button class="btn chibi icon" data-type="up" ref=${(el) => up_button = el} disabled>
                     ${tl2(trans.back)}
                 </button>
-                <button class="chibi icon" data-type="down" ref=${(el) => down_button = el} disabled>
+                <button class="btn chibi icon" data-type="down" ref=${(el) => down_button = el} disabled>
                     ${tl2(trans.next)}
                 </button>
             </div>
@@ -30894,8 +30321,13 @@
     name,
     func,
     func_esc,
+    func_select,
+    func_mouseup,
     submit_on_character = false,
-    value_in_iso = false
+    value_in_iso = false,
+    cols,
+    rows,
+    required = false
   }) {
     if (type == "date") {
       return calendar({
@@ -30912,15 +30344,20 @@
     let error_tooltip;
     let colour_block;
     let container = html.node`
-        <div class="content-form input-container colourful" data-type=${type} data-has-error="false">
+        <div class="content-form input-container colourful ${type == "textarea" ? "textarea" : ""}" data-type=${type} data-has-error="false">
             ${type == "colour" ? html.node`<span class="colour-block" ref=${(el) => colour_block = el} />` : ""}
             ${type == "textarea" ? html.node`
-                <textarea class="modern-input" disabled=${disabled} autofocus=${focus} value=${value} placeholder=${placeholder} min=${min2} max=${max2} maxlength=${maxlength} ref=${(el) => input_box = el} />
+                <textarea class="modern-input" name=${name} disabled=${disabled} autofocus=${focus} value=${value} placeholder=${placeholder} min=${min2} max=${max2} maxlength=${maxlength} cols=${cols} rows=${rows} required=${required} ref=${(el) => input_box = el} />
             ` : html.node`
-                <input class="modern-input" name=${name} disabled=${disabled} autofocus=${focus} type=${type} value=${value} placeholder=${placeholder} min=${min2} max=${max2} maxlength=${maxlength} ref=${(el) => input_box = el} />
+                <input class="modern-input" name=${name} disabled=${disabled} autofocus=${focus} type=${type} value=${value} placeholder=${placeholder} min=${min2} max=${max2} maxlength=${maxlength} required=${required} ref=${(el) => input_box = el} />
             `}
         </div>
     `;
+    if (focus) {
+      setTimeout(() => {
+        input_box.focus();
+      }, 1);
+    }
     error_tooltip = tippy_esm_default(input_box, {
       theme: "error",
       placement: "top",
@@ -30944,6 +30381,18 @@
         }, 1);
       }
     });
+    input_box.addEventListener("select", () => {
+      if (func_select) func_select(input_box, input_box.value);
+    });
+    input_box.addEventListener("mouseup", () => {
+      if (func_mouseup) func_mouseup(input_box, input_box.value);
+    });
+    input_box.addEventListener("blur", () => {
+      if (func_mouseup) func_mouseup(input_box, input_box.value);
+    });
+    container.editor = () => {
+      return input_box;
+    };
     container.submit = () => {
       if (func) func(input_box.value);
     };
@@ -30962,6 +30411,9 @@
       if (state === true) input_box.setAttribute("disabled", "true");
       else input_box.removeAttribute("disabled");
       return state;
+    };
+    container.range = (start2, end2) => {
+      input_box.setSelectionRange(start2, end2);
     };
     return container;
     function update_input(skip_most = false) {
@@ -31203,6 +30655,7 @@
       let is_loading = grid.querySelector(".grid-items-empty-inner") != null;
       if (is_loading) return;
       grid.style.setProperty("--delay", index3 * 0.04 + "s");
+      grid.classList.add("colourful");
       grid.setAttribute("data-bleh-music-grids", "true");
       let is_album;
       if (page.type == "search") {
@@ -31500,7 +30953,7 @@
   function update_inbuilt_select(id, value) {
     document.documentElement.setAttribute(`data-bleh--inbuilt-${id}`, value);
   }
-  function select(values, initial = "", name = "", func = null, blend = false) {
+  function select(values, initial = "", name = "", func = null, blend = false, title_func = null, hide2 = false) {
     let select2;
     let button2;
     if (!values || values.length == 0) return html.node`
@@ -31521,7 +30974,7 @@
                     `;
     })}
             </select>
-            <button class="select-button ${blend ? "link-select blend-v2-btn" : ""}" type="button" ref=${(el) => button2 = el} />
+            <button class="select-button ${blend ? "link-select blend-v2-btn" : ""}" data-hide=${hide2} type="button" ref=${(el) => button2 = el} />
         </div>
     `;
     let menu = tippy_esm_default(button2, {
@@ -31537,7 +30990,8 @@
           setTimeout(() => {
             instance.popper.querySelector('[aria-checked="true"]').scrollIntoView({
               behavior: "instant",
-              block: "center"
+              block: "center",
+              container: "nearest"
             });
           }, 1);
         }
@@ -31552,9 +31006,14 @@
     };
     return container;
     function set_select(selected, bubble = true) {
+      render(button2, html`${tl2(trans.unavailable)}`);
       values.some((value) => {
         if (value.value == selected) {
-          render(button2, html`${value.text}`);
+          if (!title_func) {
+            render(button2, html`${value.text}`);
+          } else {
+            render(button2, title_func(value));
+          }
           return false;
         }
       });
@@ -31564,7 +31023,10 @@
           `data-bleh--inbuilt-id_${name}`,
           selected
         );
-      if (func && bubble) func(selected);
+      if (func && bubble) {
+        func(selected);
+        menu.hide();
+      }
       menu.setContent(html.node`
             ${values.map((value) => {
         if (value.value == null) {
@@ -31598,6 +31060,12 @@
       if (typeof item === "string") return { value: item, text: item, icon };
       return item;
     });
+  }
+  function select_prepare_convert_from_setting(list) {
+    return Object.entries(list).map(([key, val]) => ({
+      value: key,
+      text: val.name
+    }));
   }
   function custom_select(select2, element_to_append) {
     console.info(select2);
@@ -31687,12 +31155,13 @@
     type = "toggle",
     name = "",
     title = "",
-    body: body2 = "",
+    body = "",
     small = "",
     disabled = false,
     data: data2 = "",
     func = null,
-    standalone = true
+    standalone = true,
+    id = ""
   }) {
     let checkbox;
     let state;
@@ -31706,19 +31175,19 @@
     }}>
             <div class="heading">
                 <h5>${title}</h5>
-                ${body2 != "" ? html.node`<p>${body2}</p>` : ""}
+                ${body != "" ? html.node`<p>${body}</p>` : ""}
                 ${small != "" ? html.node`<small>${small}</small>` : ""}
             </div>
             ${type == "toggle" ? html.node`
             <div class="toggle-wrap">
-                <input type="checkbox" ref=${(el) => checkbox = el} name=${name} value=${data2} checked=${value} />
-                <button class="toggle" ref=${(el) => state = el} aria-checked=${value}>
+                <input type="checkbox" ref=${(el) => checkbox = el} id=${id} name=${name} value=${data2} checked=${value} />
+                <button class="btn toggle" ref=${(el) => state = el} aria-checked=${value}>
                     <div class="dot" />
                 </button>
             </div>
             ` : html.node`
             <div class="check">
-                <input type="checkbox" ref=${(el) => checkbox = el} name=${name} value=${data2} checked=${value} disabled=${disabled} />
+                <input type="checkbox" ref=${(el) => checkbox = el} id=${id} name=${name} value=${data2} checked=${value} disabled=${disabled} />
                 <div class="box" ref=${(el) => state = el} aria-checked=${value} disabled=${disabled}>
                     <div class="bleh-icon" />
                 </div>
@@ -31738,8 +31207,10 @@
       checkbox.checked = false;
       state.setAttribute("aria-checked", false);
     };
-    elem.checked = () => {
-      return checkbox.checked;
+    elem.checked = (val) => {
+      if (val == null) return checkbox.checked;
+      if (val) elem.check();
+      else elem.uncheck();
     };
     elem.disabled = (state2 = null) => {
       if (state2 === null) return checkbox.getAttribute("disabled") || false;
@@ -31948,9 +31419,7 @@
       );
       return;
     }
-    const tracklists = search.querySelectorAll(
-      ".chartlist:not(.chartlist__placeholder)"
-    );
+    const tracklists = search.querySelectorAll(".chartlist:not(.chartlist__placeholder)");
     let insights = {
       artist: {
         display: false,
@@ -32014,9 +31483,7 @@
         track.appendChild(html.node`
                 <div class="kate-placeholder" />
             `);
-        let track_title = track.querySelector(
-          ".chartlist-name a:not(.offset-section-anchor)"
-        );
+        let track_title = track.querySelector(".chartlist-name a:not(.offset-section-anchor)");
         if (!track_title) return;
         if (track_title.hasAttribute("title")) {
           track_title.setAttribute(
@@ -32061,6 +31528,9 @@
           track.setAttribute("data-track-type", "user");
           if (settings.colourful_counts)
             patch_artist_ranks_in_list_view(track);
+          render(track_title, html`
+                    <span><span class="at">@</span>${track_title.textContent}</span>
+                `);
           log("finished user stuff, returning", "tracks", "log");
           return;
         }
@@ -32116,19 +31586,17 @@
               insights.track.highest.value = value;
           }
         }
-        const is_active = track.classList.contains(
-          "chartlist-row--now-scrobbling"
-        );
+        const is_active = track.classList.contains("chartlist-row--now-scrobbling");
         const has_bar = track.querySelector(":scope > .chartlist-bar");
         let track_legacy_menu = track.querySelector(".chartlist-more-menu");
-        let track_timestamp = track.querySelector(
-          ".chartlist-timestamp span"
-        );
+        let track_timestamp = track.querySelector(".chartlist-timestamp span");
         let track_timestamp_contents;
         if (track_timestamp && !is_active) {
           track_timestamp_contents = track_timestamp.getAttribute("title");
+          if (!track_timestamp_contents) track_timestamp_contents = track_timestamp.getAttribute("data-title");
           if (track_timestamp_contents) {
-            track_timestamp.setAttribute("title", "");
+            track_timestamp.removeAttribute("title");
+            track_timestamp.setAttribute("data-title", track_timestamp_contents);
             tippy_esm_default(track_timestamp, {
               content: track_timestamp_contents
             });
@@ -32447,6 +31915,7 @@
                 form.querySelector('[name="timestamp"]').value
               );
             }
+            console.info("more button", bulk_edit_button);
             let album_name = sanitise(
               image ? correct_item_by_artist(
                 image.getAttribute("alt"),
@@ -32458,44 +31927,44 @@
               content: html.node`
                             ${track.preview}
                             ${can_edit ? html.node`
-                            <div class="button-combo">
-                                ${() => {
+                                <div class="button-combo">
+                                    ${() => {
                 if (is_album) {
                   return html.node`
+                                                <form style="margin: 0" method="POST" action=${track.getAttribute("data-action")} data-edit-scrobble="">
+                                                    <input type="hidden" name="csrfmiddlewaretoken" value=${page.token}>
+                                                    <input type="hidden" name="album_name" value=${track.getAttribute("data-album-name")}>
+                                                    <input type="hidden" name="album_artist_name" value=${track.getAttribute("data-album-artist-name")}>
+                                                    <input type="hidden" name="album_image" value=${track.getAttribute("data-album-image")}>
+                                                    <input type="hidden" name="album_name_original" value=${track.getAttribute("data-album-name-original")}>
+                                                    <input type="hidden" name="album_artist_name_original" value=${track.getAttribute("data-album-artist-name-original")}>
+                                                    <input type="hidden" name="count" value=${track.getAttribute("data-count")}>
+                                                    <button class="dropdown-menu-clickable-item" data-type="edit">
+                                                        ${tl2(trans.edit)}
+                                                    </button>
+                                                </form>
+                                            `;
+                }
+                return html.node`
                                             <form style="margin: 0" method="POST" action=${track.getAttribute("data-action")} data-edit-scrobble="">
                                                 <input type="hidden" name="csrfmiddlewaretoken" value=${page.token}>
+                                                <input type="hidden" name="artist_name" value=${track.getAttribute("data-artist-name")}>
+                                                <input type="hidden" name="track_name" value=${track.getAttribute("data-track-name")}>
                                                 <input type="hidden" name="album_name" value=${track.getAttribute("data-album-name")}>
                                                 <input type="hidden" name="album_artist_name" value=${track.getAttribute("data-album-artist-name")}>
-                                                <input type="hidden" name="album_image" value=${track.getAttribute("data-album-image")}>
-                                                <input type="hidden" name="album_name_original" value=${track.getAttribute("data-album-name-original")}>
-                                                <input type="hidden" name="album_artist_name_original" value=${track.getAttribute("data-album-artist-name-original")}>
-                                                <input type="hidden" name="count" value=${track.getAttribute("data-count")}>
+                                                <input type="hidden" name="timestamp" value=${track.getAttribute("data-timestamp")}>
                                                 <button class="dropdown-menu-clickable-item" data-type="edit">
                                                     ${tl2(trans.edit)}
                                                 </button>
                                             </form>
                                         `;
-                }
-                return html.node`
-                                        <form style="margin: 0" method="POST" action=${track.getAttribute("data-action")} data-edit-scrobble="">
-                                            <input type="hidden" name="csrfmiddlewaretoken" value=${page.token}>
-                                            <input type="hidden" name="artist_name" value=${track.getAttribute("data-artist-name")}>
-                                            <input type="hidden" name="track_name" value=${track.getAttribute("data-track-name")}>
-                                            <input type="hidden" name="album_name" value=${track.getAttribute("data-album-name")}>
-                                            <input type="hidden" name="album_artist_name" value=${track.getAttribute("data-album-artist-name")}>
-                                            <input type="hidden" name="timestamp" value=${track.getAttribute("data-timestamp")}>
-                                            <button class="dropdown-menu-clickable-item" data-type="edit">
-                                                ${tl2(trans.edit)}
-                                            </button>
-                                        </form>
-                                    `;
               }}
-                                ${bulk_edit_button ? html.node`
-                                    <div class="button-combo-sep" />
-                                    ${() => {
+                                    ${bulk_edit_button ? html.node`
+                                        <div class="button-combo-sep" />
+                                        ${() => {
                 let button2 = track_legacy_menu.querySelector(
                   '[data-analytics-action="BulkEditScrobblesOpen"]'
-                );
+                ).cloneNode();
                 button2.classList = "dropdown-menu-clickable-item chibi";
                 button2.textContent = tl2(
                   trans.bulk_edit
@@ -32509,10 +31978,10 @@
                 });
                 return button2;
               }}
-                                ` : ""}
-                            </div>
-                            ${can_copy_scrobble ? html.node`
-                                <button class="dropdown-menu-clickable-item" data-type="copy_scrobble" onclick=${() => {
+                                    ` : ""}
+                                </div>
+                                ${can_copy_scrobble ? html.node`
+                                    <button class="dropdown-menu-clickable-item" data-type="copy_scrobble" onclick=${() => {
                 submit_scrobble({
                   pre_track: track_title.getAttribute("data-name"),
                   pre_artist: track_artist,
@@ -32521,10 +31990,10 @@
                   pre_timestamp: timestamp
                 });
               }}>
-                                    ${tl2(trans.copy)}
-                                </button>
-                            ` : ""}
-                            <div class="sep" />
+                                        ${tl2(trans.copy)}
+                                    </button>
+                                ` : ""}
+                                <div class="sep" />
                             ` : can_copy_scrobble ? html.node`
                                 <button class="dropdown-menu-clickable-item" data-type="copy_scrobble" onclick=${() => {
                 submit_scrobble({
@@ -32537,6 +32006,21 @@
               }}>
                                     ${tl2(trans.copy)}
                                 </button>
+                                <div class="sep" />
+                            ` : bulk_edit_button ? html.node`
+                                ${() => {
+                let button2 = track_legacy_menu.querySelector(
+                  '[data-analytics-action="BulkEditScrobblesOpen"]'
+                );
+                button2.textContent = tl2(
+                  trans.bulk_edit
+                );
+                button2.setAttribute(
+                  "data-type",
+                  "bulk-edit"
+                );
+                return button2;
+              }}
                                 <div class="sep" />
                             ` : ""}
                             ${() => {
@@ -32714,9 +32198,7 @@
                       notify({
                         id: "delete",
                         title: tl2(trans.deleted),
-                        body: track_title.getAttribute(
-                          "data-name"
-                        ),
+                        body: track_title.getAttribute("data-name"),
                         icon: "icon-16-trash",
                         type: "error"
                       });
@@ -32775,6 +32257,13 @@
             track_title.getAttribute("data-name")
           );
         }
+        const love = track.querySelector(".chartlist-love-button");
+        if (love) {
+          love.classList.add("btn");
+          tippy_esm_default(love, {
+            content: tl2(trans.love_track)
+          });
+        }
         let album_text = track.querySelector(
           ".chartlist-album.custom-album-text"
         );
@@ -32791,7 +32280,7 @@
           if (!settings.colourful_tracks_all && !is_active) return;
           image.setAttribute("crossorigin", "anonymous");
           try {
-            image.addEventListener("load", function() {
+            image.addEventListener("load", () => {
               let thief = new import_color_thief_browser2.default();
               let colour2 = thief.getColor(image);
               let hsl = rgb_to_hsl(colour2[0], colour2[1], colour2[2]);
@@ -32801,6 +32290,7 @@
               const to_colour = track.querySelectorAll(
                 ".chartlist-count-bar, .chartlist-loved"
               );
+              track.classList.add("colourful");
               if (is_active) {
                 track.style.setProperty("--hue-over", hue2);
                 track.style.setProperty("--sat-over", sat);
@@ -32884,14 +32374,156 @@
   // src/components/collage.js
   var import_html2canvas_pro = __toESM(require_html2canvas_pro(), 1);
 
+  // src/components/manage_user.js
+  function manage_user(button2) {
+    const can_block = ff("can_block_in_menu");
+    const can_report = ff("can_report_in_menu");
+    const can_block_or_report = (can_block || can_report) && page.name != auth.name;
+    tippy_esm_default(button2, {
+      theme: "context-menu",
+      content: html.node`
+            <button class="dropdown-menu-clickable-item" data-type="copy" onclick=${() => {
+        copy(page.name);
+      }}>
+                ${tl2(trans.copy_username)}
+            </button>
+            <button class="dropdown-menu-clickable-item" data-type="share" onclick=${() => {
+        share(window.location.href);
+      }}>
+                ${tl2(trans.share)}
+            </button>
+            ${can_block_or_report ? html.node`
+                <div class="sep" />
+                ${can_block ? html.node`
+                <button class="dropdown-menu-clickable-item more-item--report" data-type="block" onclick=${() => {
+        block_user(page.name);
+      }}>
+                    ${tl2(trans.block)}
+                </button>
+                ` : ""}
+                ${can_report ? html.node`
+                <button class="dropdown-menu-clickable-item more-item--report" data-type="report" onclick=${() => {
+        report_user(page.name);
+      }}>
+                    <div class="auth-dropdown-item-row">
+                        <span class="auth-dropdown-item-left">
+                            ${tl2(trans.report)}
+                        </span>
+                        <span class="auth-dropdown-item-right">
+                            <div class="bleh-icon external" />
+                        </span>
+                    </div>
+                </button>
+                ` : ""}
+            ` : ""}
+        `,
+      trigger: "click",
+      placement: "bottom",
+      interactive: true,
+      interactiveBorder: 10,
+      onMount(instance) {
+        instance.popper.addEventListener("click", (event3) => {
+          instance.hide();
+        });
+      }
+    });
+  }
+  function block_user(user = page.name) {
+  }
+  function report_user(user = page.name) {
+  }
+
+  // src/components/popup.js
+  var popup_queue = [];
+  function queue_popup(key, host, prefer = "top") {
+    if (!host || !host.offsetParent) {
+      log(`skipped adding ${key} as the host is not accessible (probably intentional)`, "popup", "info", { key, host });
+      return;
+    }
+    if (settings.popups_seen.includes(key)) {
+      log(`skipped adding ${key} as popup has previously been dismissed`, "popup", "info", { key, host });
+      return;
+    }
+    popup_queue.push({ key, host, prefer });
+    check_queue();
+  }
+  function clear_popup_queue() {
+    popup_queue = [];
+  }
+  function check_queue() {
+    const first = popup_queue[0];
+    if (!first) return;
+    if (first.visible) return;
+    popup(first);
+  }
+  function popup(instance) {
+    const key = instance.key;
+    const host = instance.host;
+    const prefer = instance.prefer;
+    const title = tl2(trans[`popup_${key}`]?.title);
+    const body = tl2(trans[`popup_${key}`]?.body);
+    if ([title, body].includes(translation_fallback)) {
+      log(`popup_${key} not found in translations`, "popup", "error", { title, body, key, host });
+      notify({
+        id: "popup_not_found",
+        title: tl2(trans.value_failed_to_load, { v: `${key} (popup)` }),
+        body: `Missing title and/or body for translation key popup_${key}`,
+        type: "error"
+      });
+      popup_queue = popup_queue.filter((i) => i.key != key);
+      check_queue();
+      return;
+    }
+    log(`registered for ${key}`, "popup", "info", { title, body, key, host });
+    instance.visible = true;
+    const tooltip = tippy_esm_default(host, {
+      theme: "popup",
+      content: html.node`
+            <div class="popup-content">
+                <small class="popup-sub">${tl2(trans.tip)}</small>
+                <strong class="popup-title">${title}</strong>
+                <p class="popup-body">${body}</p>
+            </div>
+            <div class="popup-action">
+                <button class="see-more" onclick=${() => {
+        popup_queue = popup_queue.filter((i) => i.key != key);
+        tooltip.hide();
+        settings.popups_seen.push(key);
+        save_setting("popups_seen", settings.popups_seen);
+        setTimeout(() => {
+          tooltip.destroy();
+        }, 500);
+        check_queue();
+      }}>
+                    ${tl2(trans.got_it)}
+                </button>
+            </div>
+        `,
+      interactive: true,
+      hideOnClick: false,
+      appendTo: document.body,
+      aria: {
+        expanded: false
+      },
+      trigger: "manual",
+      zIndex: 998,
+      placement: prefer
+    });
+    tooltip.show();
+    host.scrollIntoView({
+      block: "center"
+    });
+  }
+
   // src/components/profile_header.js
   function redesign_profile_header(is_own_profile, is_following) {
+    if (!auth.name) return;
     let base_header = document.body.querySelector(".header-info-secondary");
     if (!base_header) return;
-    let katsune = ff("katsune");
     let taste = "";
     let taste_percentage = "";
     let taste_artists = [];
+    let taste_formal = "NONE";
     if (!is_own_profile && page.name != sponsor_list.sponsor_account) {
       let taste_meter = base_header.querySelector(".tasteometer");
       if (taste_meter) {
@@ -32899,21 +32531,19 @@
         let artists = taste_meter.querySelectorAll("a");
         artists.forEach((artist) => {
           taste_artists.push(
-            correct_artist(artist.getAttribute("title"))
+            romanise(correct_artist(artist.getAttribute("title")))
           );
         });
+        taste_formal = taste_meter.querySelector("span.tasteometer-compat-colour")?.textContent;
         taste_percentage = taste_meter.querySelector(".tasteometer-viz").getAttribute("title");
         if (taste_percentage == "99%") taste_percentage = "100%";
       }
     }
-    let about_me = page.structure.container.querySelector(".about-me-sidebar");
     let profile_header = html.node`
         <section class="side-actions" />
     `;
     if (!is_own_profile && page.name != sponsor_list.sponsor_account && auth.name) {
-      let follow_wrap = document.body.querySelector(
-        ".header-avatar .class > div"
-      );
+      let follow_wrap = document.body.querySelector(".header-avatar .class > div");
       if (follow_wrap) {
         let follow_btn = follow_wrap.querySelector("button");
         follow_btn.classList.add("btn", "side-action");
@@ -32921,37 +32551,28 @@
         follow_btn.setAttribute("data-type", "follow");
         profile_header.appendChild(follow_wrap);
         if (is_following) follow_btn.setAttribute("data-followed", "true");
-        let mutual_text = document.createElement("i");
-        mutual_text.textContent = tl2(trans.following_mutuals);
-        follow_btn.appendChild(mutual_text);
-        if (!katsune)
-          tippy_esm_default(follow_btn, {
-            content: follow_btn.textContent
-          });
-        follow_btn.addEventListener("click", () => {
-          window.setTimeout(() => {
-            follow_btn._tippy.setContent(follow_btn.textContent);
-          }, 50);
-        });
+        follow_btn.appendChild(html.node`
+                <i>${tl2(trans.following_mutuals)}</i>
+            `);
+        follow_btn.parentElement.classList.add("follow-combo");
+        friends_button(follow_btn.parentElement);
       } else {
-        let follow_placeholder = document.createElement("button");
-        follow_placeholder.classList.add("btn", "side-action");
-        follow_placeholder.setAttribute("data-type", "follow");
-        follow_placeholder.textContent = tl2(trans.blocked);
-        follow_placeholder.setAttribute("disabled", "true");
-        follow_placeholder.setAttribute("data-ignored", "true");
-        profile_header.appendChild(follow_placeholder);
+        profile_header.appendChild(html.node`
+                <button class="btn side-action" data-type="follow" disabled="true" data-ignored="true">
+                    ${tl2(trans.blocked)}
+                </button>
+            `);
       }
     }
     if (!is_own_profile) {
       let msg_button = document.body.querySelector(".header-message-user");
       if (msg_button) {
         if (page.name != sponsor_list.sponsor_account) {
-          friends_button(profile_header);
           create_profile_top_item(profile_header, {
             name: page.name,
             type: "message",
-            link: msg_button.getAttribute("href")
+            link: msg_button.getAttribute("href"),
+            text: tl2(trans.send_message)
           });
           if (page.name == sponsor_list.special[0]) {
             create_profile_top_item(profile_header, {
@@ -32981,28 +32602,36 @@
           create_profile_top_item(profile_header, {
             name: page.name,
             type: "compare",
-            link: `${root}bleh/minis/compare?profile=${page.name}`
+            link: `${root}bleh/minis/compare?profile=${page.name}`,
+            text: tl2(trans.compare_plays)
           });
         }
-      }
-      if (page.structure.container.querySelector(".user-status-staff")) {
-        create_profile_top_item(profile_header, {
-          name: page.name,
-          type: "support",
-          link: "https://support.last.fm"
-        });
       }
     } else {
       create_profile_top_item(profile_header, {
         name: page.name,
         type: "edit",
+        text: tl2(trans.edit_profile),
         link: `${root}settings`
+      });
+      create_profile_top_item(profile_header, {
+        name: page.name,
+        type: "collage",
+        link: `${root}bleh/minis/collage`,
+        text: tl2(trans.create_collage)
+      });
+      create_profile_top_item(profile_header, {
+        name: page.name,
+        type: "obsession",
+        text: tl2(trans.set_obsession),
+        link: `${root}user/${page.name}/obsessions/set`
       });
       if (ff("minis")) {
         create_profile_top_item(profile_header, {
           name: page.name,
           type: "minis",
-          link: `${root}bleh/minis`
+          link: `${root}bleh/minis`,
+          text: tl2(trans.explore_minis)
         });
       } else {
         create_profile_top_item(profile_header, {
@@ -33013,24 +32642,17 @@
                     <strong>${tl2(trans.labs_by_last)}</strong>
                     <p>${tl2(trans.labs_by_last.tagline)}</p>
                 `,
-          tooltip_style: "stack",
-          allow_html: true
-        });
-      }
-      create_profile_top_item(profile_header, {
-        name: page.name,
-        type: "obsession",
-        link: `${root}user/${page.name}/obsessions/set`
-      });
-      if (ff("charts")) {
-        create_profile_top_item(profile_header, {
-          name: page.name,
-          type: "collage",
-          link: `${root}bleh/minis/collage`,
-          text: tl2(trans.collage)
+          tooltip_style: "stack"
         });
       }
     }
+    const manage = create_profile_top_item(profile_header, {
+      name: page.name,
+      type: "manage",
+      beta: true,
+      action: "button"
+    });
+    manage_user(manage);
     if (!page.mobile)
       page.structure.side.insertBefore(
         profile_header,
@@ -33042,7 +32664,7 @@
         page.structure.main.firstElementChild
       );
     let listen_container = page.structure.row.querySelector(".listen-panel");
-    if (!is_own_profile && page.name != sponsor_list.sponsor_account && katsune && auth.name) {
+    if (!is_own_profile && page.name != sponsor_list.sponsor_account && auth.name) {
       if (taste == "") {
         listen_container.appendChild(html.node`
                 <div class="loading-data-container">
@@ -33060,71 +32682,156 @@
                     <img class="view-item-avatar" src=${auth.avatar} alt=${auth.name}>
                     <img class="view-item-avatar" src=${page.avatar} alt=${page.name}>
                     <div class="info">
-                        <h3>${html.node([
-        tl2(trans.you_share_count_with).replace(
-          "{c}",
-          `<span class="colourful" data-taste=${taste}>${taste_percentage}</span>`
-        )
-      ])}</h3>
+                        <h3>
+                            ${{ html: tl2(trans.you_share_count_with, { c: `<span class="colourful" data-taste=${taste}>${taste_percentage}</span>` }) }}
+                        </h3>
                         <p>
                             ${taste_artists.length == 1 ? taste_artists[0] : ""}
-                            ${taste_artists.length == 2 ? tl2(trans.you_share_count_with.two).replace("{artist1}", taste_artists[0]).replace("{artist2}", taste_artists[1]) : ""}
-                            ${taste_artists.length == 3 ? tl2(trans.you_share_count_with.three).replace("{artist1}", taste_artists[0]).replace("{artist2}", taste_artists[1]).replace("{artist3}", taste_artists[2]) : ""}
+                            ${taste_artists.length == 2 ? tl2(trans.you_share_count_with.two, { artist1: taste_artists[0], artist2: taste_artists[1] }) : ""}
+                            ${taste_artists.length == 3 ? tl2(trans.you_share_count_with.three, { artist1: taste_artists[0], artist2: taste_artists[1], artist3: taste_artists[2] }) : ""}
                         </p>
                     </div>
                 </div>
+                <div class="taste-hover-icon">
+                    <div class="bleh-icon" />
+                </div>
             </div>
         `;
-      tippy_esm_default(taste_wrap, {
-        theme: "stack",
-        content: html.node`
-                <span>
-                    ${tl2(trans.taste_similarity)}
-                </span>
-                <div class="hint">${tl2(trans.click_for_more_options)}</div>
-            `
-      });
+      const other_avi = page.avatar.replace("/avatar300s/", "/avatar42s/");
+      let taste_menu;
       if (taste_artists.length > 1) {
-        tippy_esm_default(taste_wrap, {
-          theme: "context-menu",
-          content: html.node`
-                    <h4 class="menu-header">${tl2(trans.compare_plays)}</h4>
-                    <a class="dropdown-menu-clickable-item" href="${root}user/${page.name}/library/music/${redirect()}${sanitise(taste_artists[0])}" data-menu-item="shared-artist">
-                        <img class="view-item-avatar" src="${page.avatar}" alt="${page.name}">${taste_artists[0]}
-                    </a>
-                    <a class="dropdown-menu-clickable-item" href="${root}user/${auth.name}/library/music/${redirect()}${sanitise(taste_artists[0])}" data-menu-item="shared-artist">
-                        <img class="view-item-avatar" src="${auth.avatar}" alt="${auth.name}">${taste_artists[0]}
-                    </a>
-                    ${taste_artists.length >= 2 ? html.node`
-                    <div class="sep"></div>
-                    <a class="dropdown-menu-clickable-item" href="${root}user/${page.name}/library/music/${redirect()}${sanitise(taste_artists[1])}" data-menu-item="shared-artist">
-                        <img class="view-item-avatar" src="${page.avatar}" alt="${page.name}">${taste_artists[1]}
-                    </a>
-                    <a class="dropdown-menu-clickable-item" href="${root}user/${auth.name}/library/music/${redirect()}${sanitise(taste_artists[1])}" data-menu-item="shared-artist">
-                        <img class="view-item-avatar" src="${auth.avatar}" alt="${auth.name}">${taste_artists[1]}
-                    </a>
-                    ` : ""}
-                    ${taste_artists.length >= 3 ? html.node`
-                    <div class="sep"></div>
-                    <a class="dropdown-menu-clickable-item" href="${root}user/${page.name}/library/music/${redirect()}${sanitise(taste_artists[2])}" data-menu-item="shared-artist">
-                        <img class="view-item-avatar" src="${page.avatar}" alt="${page.name}">${taste_artists[2]}
-                    </a>
-                    <a class="dropdown-menu-clickable-item" href="${root}user/${auth.name}/library/music/${redirect()}${sanitise(taste_artists[2])}" data-menu-item="shared-artist">
-                        <img class="view-item-avatar" src="${auth.avatar}" alt="${auth.name}">${taste_artists[2]}
-                    </a>
-                    ` : ""}
-                    <div class="sep"></div>
-                    <a class="dropdown-menu-clickable-item" data-type="compare" href="${root}bleh/minis/compare?profile=${page.name}">${tl2(trans.compare)}</a>
-                `,
-          trigger: "click",
-          placement: "bottom",
-          interactive: true,
-          interactiveBorder: 10,
-          offset: [0, 0]
-        });
+        taste_menu = html.node`
+                <div class="taste-menu-header colourful" data-taste=${taste}>
+                    ${taste_formal} (${taste_percentage})
+                </div>
+                <a class="dropdown-menu-clickable-item" href="${root}user/${page.name}/library/music/${redirect()}${sanitise(taste_artists[0])}" data-menu-item="shared-artist">
+                    <span class="menu-avatar">
+                        <img src=${other_avi} alt=${page.name}>
+                    </span>
+                    ${taste_artists[0]}
+                </a>
+                <a class="dropdown-menu-clickable-item" href="${root}user/${auth.name}/library/music/${redirect()}${sanitise(taste_artists[0])}" data-menu-item="shared-artist">
+                    <span class="menu-avatar">
+                        <img src=${auth.avatar} alt=${auth.name}>
+                    </span>
+                    ${taste_artists[0]}
+                </a>
+                ${taste_artists.length >= 2 ? html.node`
+                <div class="sep"></div>
+                <a class="dropdown-menu-clickable-item" href="${root}user/${page.name}/library/music/${redirect()}${sanitise(taste_artists[1])}" data-menu-item="shared-artist">
+                    <span class="menu-avatar">
+                        <img src=${other_avi} alt=${page.name}>
+                    </span>
+                    ${taste_artists[1]}
+                </a>
+                <a class="dropdown-menu-clickable-item" href="${root}user/${auth.name}/library/music/${redirect()}${sanitise(taste_artists[1])}" data-menu-item="shared-artist">
+                    <span class="menu-avatar">
+                        <img src=${auth.avatar} alt=${auth.name}>
+                    </span>
+                    ${taste_artists[1]}
+                </a>
+                ` : ""}
+                ${taste_artists.length >= 3 ? html.node`
+                <div class="sep"></div>
+                <a class="dropdown-menu-clickable-item" href="${root}user/${page.name}/library/music/${redirect()}${sanitise(taste_artists[2])}" data-menu-item="shared-artist">
+                    <span class="menu-avatar">
+                        <img src=${other_avi} alt=${page.name}>
+                    </span>
+                    ${taste_artists[2]}
+                </a>
+                <a class="dropdown-menu-clickable-item" href="${root}user/${auth.name}/library/music/${redirect()}${sanitise(taste_artists[2])}" data-menu-item="shared-artist">
+                    <span class="menu-avatar">
+                        <img src=${auth.avatar} alt=${auth.name}>
+                    </span>
+                    ${taste_artists[2]}
+                </a>
+                ` : ""}
+                <div class="sep"></div>
+                <a class="dropdown-menu-clickable-item" data-type="compare" href="${root}bleh/minis/compare?profile=${page.name}">${tl2(trans.compare)}</a>
+                <button class="dropdown-menu-clickable-item" data-type="copy" onclick=${() => {
+          copy(tl2(trans.generic_lastfm_compatibility_message, {
+            u: page.name,
+            r: taste_formal,
+            a: taste_artists.join(tl2(trans.comma))
+          }));
+        }}>
+                    ${tl2(trans.copy)}
+                </button>
+            `;
       }
       const row = listen_container.querySelector(".listener-row");
       row.after(taste_wrap);
+      const today = /* @__PURE__ */ new Date();
+      const february = today.getMonth() == 1 && today.getDate() == 14;
+      if (ff("sandrone") && february && settings.friends.includes(page.name) && ["super", "very_high", "high"].includes(taste)) {
+        taste_wrap.classList.add("valentine");
+        render(taste_wrap, html`
+                <div class="valentine-pics">
+                    <div class="taste-avatar avatar">
+                        <img src=${auth.avatar.replace("/avatar42s/", "/avatar300s/")} alt=${auth.name}>
+                    </div>
+                    <div class="taste-icon colourful valentine" data-taste=${taste}>
+                        <div class="bleh-icon" />
+                    </div>
+                    <div class="taste-avatar avatar">
+                        <img src=${page.avatar} alt=${page.name}>
+                    </div>
+                </div>
+                <div class="span">
+                    <div class="info">
+                        <h3>
+                            ${{ html: tl2(trans.you_are_a_value_match, { u: page.name, v: `<span class="colourful" data-taste=${taste}>${taste_formal}</span>` }) }}
+                        </h3>
+                        <p>
+                            ${taste_artists.length == 1 ? taste_artists[0] : ""}
+                            ${taste_artists.length == 2 ? tl2(trans.you_share_count_with.two, { artist1: taste_artists[0], artist2: taste_artists[1] }) : ""}
+                            ${taste_artists.length == 3 ? tl2(trans.you_share_count_with.three, { artist1: taste_artists[0], artist2: taste_artists[1], artist3: taste_artists[2] }) : ""}
+                        </p>
+                    </div>
+                </div>
+                ${() => {
+          const info_btn = html.node`
+                        <div class="taste-hover-icon-mini">
+                            <div class="bleh-icon" />
+                        </div>
+                    `;
+          tippy_esm_default(info_btn, {
+            content: tl2(trans.valentine_info, { u: page.name })
+          });
+          return info_btn;
+        }}
+            `);
+        let details_btn;
+        taste_wrap.after(html.node`
+                <div class="valentines">
+                    <button class="btn icon select-button" data-type="details" ref=${(el) => details_btn = el}>${tl2(trans.view_details)}</button>
+                    <button class="btn icon primary colourful" data-taste=${taste} data-type="valentine" onclick=${() => {
+          open(`${root}inbox/compose?to=${page.name}&subject=${encodeURIComponent(tl2(trans.valentine, { u: page.name }))}`);
+        }}>${tl2(trans.send_valentine)}</button>
+                </div>
+            `);
+        if (taste_artists.length > 1) {
+          tippy_esm_default(details_btn, {
+            theme: "context-menu",
+            content: taste_menu,
+            trigger: "click",
+            placement: "bottom",
+            interactive: true,
+            interactiveBorder: 10
+          });
+        }
+      } else {
+        if (taste_artists.length > 1) {
+          tippy_esm_default(taste_wrap, {
+            theme: "context-menu",
+            content: taste_menu,
+            trigger: "click",
+            placement: "bottom",
+            interactive: true,
+            interactiveBorder: 10
+          });
+        }
+      }
     }
   }
   function create_profile_top_item(parent, {
@@ -33137,20 +32844,22 @@
     action = "",
     tooltip = "",
     allow_html = false,
-    tooltip_theme = ""
+    tooltip_theme = "",
+    beta = false
   }) {
     log(`creating top item of ${name}, ${link}, ${text4}`, "profile");
     let side_action;
-    if (action === "button") {
+    if (action == "button") {
       side_action = html.node`
             <button
                 class="btn side-action"
                 data-type=${type}
                 onclick=${link}
             >
-                ${tl2(trans[type])}
+                ${text4 || tl2(trans[type])}
                 ${new_release ? html.node`<div class="new-badge">${tl2(trans.new)}</div>` : ""}
                 ${updated ? html.node`<div class="new-badge">${tl2(trans.updated)}</div>` : ""}
+                ${beta ? html.node`<div class="new-badge">${tl2(trans.beta)}</div>` : ""}
             </button>
         `;
     } else {
@@ -33160,9 +32869,10 @@
                 data-type=${type}
                 href=${link}
             >
-                ${tl2(trans[type])}
+                ${text4 || tl2(trans[type])}
                 ${new_release ? html.node`<div class="new-badge">${tl2(trans.new)}</div>` : ""}
                 ${updated ? html.node`<div class="new-badge">${tl2(trans.updated)}</div>` : ""}
+                ${beta ? html.node`<div class="new-badge">${tl2(trans.beta)}</div>` : ""}
             </a>
         `;
     }
@@ -33170,7 +32880,6 @@
     return side_action;
   }
   function friends_button(parent) {
-    return;
     let friend_state = settings.friends.includes(page.name);
     let star_state = settings.starred_friend == page.name;
     if (!friend_state && star_state) {
@@ -33178,13 +32887,13 @@
       save_setting("starred_friend", "");
     }
     const elem = html.node`
-        <button class="btn side-action" data-type="friends" onclick=${() => {
+        <button class="btn side-action" data-type="close_friends" type="button" onclick=${() => {
       if (friend_state) {
         dialog({
           id: "remove_friend",
           title: tl2(trans.remove_friend.name),
           body: html.node`
-                        <p>${tl2(trans.remove_friend.body).replace("{u}", page.name)}</p>
+                        <p>${{ html: tl2(trans.remove_friend.body, { u: `<strong>${page.name}</strong>` }) }}</p>
                         <div class="modal-footer">
                             <button class="see-more cancel" onclick=${() => dialog_rm({ id: "remove_friend" })}>
                                 ${tl2(trans.cancel)}
@@ -33197,7 +32906,7 @@
               (item) => item != page.name
             );
             save_setting("friends", new_list);
-            save_setting("starred_friend", "");
+            if (page.name == settings.starred_friend) save_setting("starred_friend", "");
             dialog_rm({ id: "remove_friend" });
             update_visual();
             notify({
@@ -33228,8 +32937,12 @@
       }
     }} />
     `;
-    tippy_esm_default(elem, {
-      content: tl2(trans.friend_difference)
+    const tip = tippy_esm_default(elem, {
+      theme: "stack",
+      content: html.node`
+            <span></span>
+            <div class="hint">${tl2(trans.friend_difference_min)}</div>
+        `
     });
     const menu = tippy_esm_default(elem, {
       theme: "context-menu",
@@ -33239,12 +32952,13 @@
       interactive: true,
       interactiveBorder: 10,
       offset: [0, 0],
+      appendTo: document.body,
       onShow(instance) {
         instance.popper.addEventListener("click", (event3) => {
           instance.hide();
         });
         instance.setContent(html.node`
-                <button class="dropdown-menu-clickable-item" data-type="starred_friend" data-is-shortcut=${star_state} onclick=${() => {
+                <button class="dropdown-menu-clickable-item" data-type="starred_friend" data-starred="true" onclick=${() => {
           if (star_state) {
             star_state = false;
             save_setting("starred_friend", "");
@@ -33281,12 +32995,19 @@
       if (star_state) {
         elem.textContent = tl2(trans.starred_friend.name);
       } else if (friend_state) {
-        elem.textContent = tl2(trans.friends);
+        elem.textContent = tl2(trans.close_friends);
       } else {
         elem.textContent = tl2(trans.add_as_friend);
       }
+      tip.setContent(html.node`
+            <span>${elem.textContent} (${tl2(trans.friend_difference_min)})</span>
+            <div class="hint">${tl2(trans.right_click_for_more_options)}</div>
+        `);
     }
     parent.appendChild(elem);
+    setTimeout(() => {
+      queue_popup("close_friends", elem);
+    }, 0);
   }
 
   // src/components/structure.js
@@ -33302,7 +33023,8 @@
       tab: params.get("tab"),
       page: params.get("page"),
       token: params.get("token"),
-      collage: params.get("collage")
+      collage: params.get("collage"),
+      subject: params.get("subject")
     };
     if (!page.structure.container || !document.body.contains(page.structure.container)) {
       log("page missing container, creating", "page structure");
@@ -34057,7 +33779,7 @@
     });
   }
   function patch_settings_profile_panel(token, update_picture) {
-    const bio_max_length = 485;
+    const bio_max_length = 500;
     update_picture.classList.add("bleh--panel");
     const upload_form = update_picture.querySelector(".avatar-upload-form");
     const avatar_url = update_picture.querySelector(".image-upload-preview img").getAttribute("src");
@@ -34066,13 +33788,12 @@
       const id = page.state.avatar_changer.getAttribute("data-modal-id");
       dialog_rm({ id });
     }
+    const update_profile2 = page.structure.main.querySelector("#update-profile");
+    const alert2 = update_profile2.querySelector(".alert");
     let form_display_name = document.getElementById("id_full_name").value;
     let form_website = document.getElementById("id_homepage").value;
     let form_country = document.getElementById("id_country");
     let form_about_me = document.getElementById("id_about_me").textContent;
-    let chars;
-    let about;
-    let preview;
     const markdown_settings = {
       allow_headers: true,
       allow_banners: true,
@@ -34082,9 +33803,12 @@
       cache: true,
       take_effect: false,
       allow_socials: true,
-      allow_alignment: true
+      allow_alignment: true,
+      allow_lists: true
     };
-    let banner_setting;
+    let chars;
+    const about = markdown_field(update_about, markdown_settings, form_about_me, "about_me", 40, 10, tl2(trans.anything_you_can_imagine));
+    let preview;
     let accent_setting;
     let font_setting;
     render(page.structure.side, html`
@@ -34095,203 +33819,240 @@
     `);
     let profile_cache = JSON.parse(localStorage.getItem("bleh_profile_cache")) || {};
     let cache2 = profile_cache[auth.name];
-    render(
-      update_picture,
-      html`
-            <h4>${tl2(trans.profile)}</h4>
-            <form
-                class="dont-move"
-                action="${root}settings#update-profile"
-                name="profile-form"
-                data-form-type="identity"
-                method="post"
-            >
+    render(update_picture, html`
+        <h4>${tl2(trans.profile)}</h4>
+        ${alert2}
+        <form
+            class="dont-move"
+            action="${root}settings#update-profile"
+            name="profile-form"
+            data-form-type="identity"
+            method="post"
+        >
+            <input
+                type="hidden"
+                name="csrfmiddlewaretoken"
+                value="${token}"
+            />
+            <div class="setting-group">
+                <div class="setting" data-type="info">
+                    <div class="heading">
+                        <h5>${tl2(trans.avatar)}</h5>
+                        <p>${tl2(trans.avatar_desc)}</p>
+                    </div>
+                    <div class="info">
+                        <div class="avatar image-uploader" onclick=${() => avatar(token)}>
+                            <img
+                                src=${avatar_url}
+                                alt=${tl2(trans.your_avatar)}
+                                loading="lazy"
+                            />
+                            <div class="avatar-overlay" />
+                        </div>
+                    </div>
+                </div>
+                ${() => {
+      const username_regex = /\[name=([^\]]+)\]/;
+      const elem = html.node`
+                        <div class="setting" data-type="text" disabled=${!auth.sponsor}>
+                            <div class="heading">
+                                <h5>${tl2(trans.display_name.name)}<span class="new-badge sponsor-related">${tl2(trans.sponsors_only)}</span></h5>
+                                <p>${tl2(trans.display_name.body)}</p>
+                            </div>
+                            ${input({
+        value: cache2.username,
+        placeholder: auth.name,
+        func: (val) => {
+          const match3 = about.value().match(username_regex);
+          const new_name = `[name=${val}]`;
+          if (match3) {
+            about.value(about.value().replace(username_regex, new_name));
+          } else {
+            const trimmed = about.value().trimEnd();
+            if (trimmed.length == 0) {
+              about.value(new_name);
+            } else {
+              about.value(trimmed + "\n\n" + new_name);
+            }
+          }
+        },
+        submit_on_character: true
+      })}
+                        </div>
+                    `;
+      return elem;
+    }}
+                ${ff("profile_fonts") ? html.node`
+                <div
+                    class="setting"
+                    data-type="info"
+                    disabled=${!auth.sponsor}
+                    ref=${(el) => font_setting = el}
+                />
+                ` : ""}
+                <div class="setting" data-type="text">
+                    <div class="heading">
+                        <h5>${tl2(trans.profile_title)}</h5>
+                        <p>${tl2(trans.pronoun_tip)}</p>
+                    </div>
+                    <div class="input-container content-form">
+                        <input
+                            type="text"
+                            name="full_name"
+                            value=${form_display_name}
+                            maxlength="36"
+                            id="id_full_name"
+                            data-form-type="other"
+                        />
+                    </div>
+                </div>
+                <div class="setting" data-type="text">
+                    <div class="heading">
+                        <h5>${tl2(trans.website)}</h5>
+                    </div>
+                    <div class="input-container content-form">
+                        <input
+                            type="url"
+                            name="homepage"
+                            value=${form_website}
+                            id="id_homepage"
+                            data-form-type="website"
+                        />
+                    </div>
+                </div>
+                <div class="setting" data-type="select">
+                    <div class="heading">
+                        <h5>${tl2(trans.country)}</h5>
+                    </div>
+                    <div class="select-wrap custom-selector">
+                        ${select(
+      select_prepare(form_country),
+      form_country.value,
+      "country"
+    )}
+                    </div>
+                </div>
+                ${() => {
+      const banner_regex = /\[banner=([^\]]+)\]/;
+      const match3 = about.value().match(banner_regex);
+      const pre_existing = match3 ? match3[1] : "";
+      let preview2;
+      const elem = html.node`
+                        <div class="setting" data-type="text">
+                            <div class="heading">
+                                <h5>${tl2(trans.profile_banner.name)}</h5>
+                                <p>${tl2(trans.profile_banner.body)}</p>
+                            </div>
+                            <div class="info v">
+                                ${input({
+        value: pre_existing,
+        func: (val) => {
+          const match4 = about.value().match(banner_regex);
+          const new_banner = `[banner=${val}]`;
+          if (match4) {
+            about.value(about.value().replace(banner_regex, new_banner));
+          } else {
+            const trimmed = about.value().trimEnd();
+            if (trimmed.length == 0) {
+              about.value(new_banner);
+            } else {
+              about.value(trimmed + "\n\n" + new_banner);
+            }
+          }
+          preview2.style.setProperty("background-image", `url(${val})`);
+        },
+        submit_on_character: true
+      })}
+                                <div class="banner-image" ref=${(el) => preview2 = el} />
+                            </div>
+                        </div>
+                    `;
+      preview2.style.setProperty("background-image", `url(${pre_existing})`);
+      return elem;
+    }}
+                <div
+                    class="setting"
+                    data-type="info"
+                    disabled=${!auth.sponsor}
+                    ref=${(el) => accent_setting = el}
+                />
+                ${() => {
+      const status_regex = /\[status=([^\]]+)\]/;
+      const match3 = about.value().match(status_regex);
+      const pre_existing = match3 ? match3[1] : "";
+      const elem = html.node`
+                        <div class="setting" data-type="text">
+                            <div class="heading">
+                                <h5><a href="https://status.cafe" target="_blank">status.cafe</a><span class="new-badge new">${tl2(trans.new)}</span></h5>
+                                <p>${tl2(trans.status_cafe.body)}</p>
+                            </div>
+                            ${input({
+        value: pre_existing,
+        func: (val) => {
+          const match4 = about.value().match(status_regex);
+          const new_status = `[status=${val}]`;
+          if (match4) {
+            about.value(about.value().replace(status_regex, new_status));
+          } else {
+            const trimmed = about.value().trimEnd();
+            if (trimmed.length == 0) {
+              about.value(new_status);
+            } else {
+              about.value(trimmed + "\n\n" + new_status);
+            }
+          }
+        },
+        submit_on_character: true
+      })}
+                        </div>
+                    `;
+      return elem;
+    }}
+                <div class="setting" data-type="text">
+                    <div class="heading">
+                        <h5>${tl2(trans.about)}</h5>
+                        <p class="tip characters" ref=${(el) => chars = el}>
+                            ${tl2(
+      trans.value_characters_max,
+      { v: bio_max_length }
+    )}
+                        </p>
+                    </div>
+                    <div class="${!ff("cosplay") ? "input-container content-form textarea" : "limitless"}">
+                        ${about}
+                    </div>
+                </div>
+            </div>
+            <div class="settings-footer end">
+                <button
+                    type="submit"
+                    class="btn-primary save"
+                    data-form-type="action"
+                >
+                    ${tl2(trans.save)}
+                </button>
                 <input
                     type="hidden"
-                    name="csrfmiddlewaretoken"
-                    value="${token}"
+                    value="profile"
+                    name="submit"
                 />
-                <div class="setting-group">
-                    <div class="setting" data-type="info">
-                        <div class="heading">
-                            <h5>${tl2(trans.avatar)}</h5>
-                        </div>
-                        <div class="info">
-                            <div class="avatar image-uploader" onclick=${() => avatar(token)}>
-                                <img
-                                    src=${avatar_url}
-                                    alt=${tl2(trans.your_avatar)}
-                                    loading="lazy"
-                                />
-                                <div class="avatar-overlay" />
-                            </div>
-                        </div>
-                    </div>
-                    ${() => {
-        const username_regex = /\[name=([^\]]+)\]/;
-        const elem = html.node`
-                            <div class="setting" data-type="text" disabled=${!auth.sponsor}>
-                                <div class="heading">
-                                    <h5>${tl2(trans.display_name.name)}<span class="new-badge sponsor-related">${tl2(trans.sponsors_only)}</span><span class="new-badge new">${tl2(trans.new)}</span></h5>
-                                    <p>${tl2(trans.display_name.body)}</p>
-                                </div>
-                                ${input({
-          value: cache2.username,
-          placeholder: auth.name,
-          func: (val) => {
-            const match3 = about.value.match(username_regex);
-            const new_name = `[name=${val}]`;
-            if (match3) {
-              about.value = about.value.replace(username_regex, new_name);
-            } else {
-              const trimmed = about.value.trimEnd();
-              if (trimmed.length == 0) {
-                about.value = new_name;
-              } else {
-                about.value = trimmed + "\n\n" + new_name;
-              }
-            }
-            about.dispatchEvent(
-              new InputEvent("input", {
-                bubbles: true,
-                cancelable: true
-              })
-            );
-          },
-          submit_on_character: true
-        })}
-                            </div>
-                        `;
-        return elem;
-      }}
-                    ${ff("profile_fonts") ? html.node`
-                    <div
-                        class="setting"
-                        data-type="info"
-                        disabled=${!auth.sponsor}
-                        ref=${(el) => font_setting = el}
-                    />
-                    ` : ""}
-                    <div class="setting" data-type="text">
-                        <div class="heading">
-                            <h5>${tl2(trans.subtitle)}</h5>
-                            <p>${tl2(trans.pronoun_tip)}</p>
-                        </div>
-                        <div class="input-container content-form">
-                            <input
-                                type="text"
-                                name="full_name"
-                                value=${form_display_name}
-                                maxlength="36"
-                                id="id_full_name"
-                                data-form-type="other"
-                            />
-                        </div>
-                    </div>
-                    <div class="setting" data-type="text">
-                        <div class="heading">
-                            <h5>${tl2(trans.website)}</h5>
-                        </div>
-                        <div class="input-container content-form">
-                            <input
-                                type="url"
-                                name="homepage"
-                                value=${form_website}
-                                id="id_homepage"
-                                data-form-type="website"
-                            />
-                        </div>
-                    </div>
-                    <div class="setting" data-type="select">
-                        <div class="heading">
-                            <h5>${tl2(trans.country)}</h5>
-                        </div>
-                        <div class="select-wrap custom-selector">
-                            ${select(
-        select_prepare(form_country),
-        form_country.value,
-        "country"
-      )}
-                        </div>
-                    </div>
-                    <div
-                        class="setting"
-                        data-type="info"
-                        ref=${(el) => banner_setting = el}
-                    />
-                    <div
-                        class="setting"
-                        data-type="info"
-                        disabled=${!auth.sponsor}
-                        ref=${(el) => accent_setting = el}
-                    />
-                    <div class="setting" data-type="text">
-                        <div class="heading">
-                            <h5>${tl2(trans.about)}</h5>
-                            <p class="tip markdown-enabled" onclick=${() => {
-        markdown_prompt(markdown_settings);
-      }}>
-                                ${tl2(trans.supports_markdown)}
-                            </p>
-                            <p class="tip characters" ref=${(el) => chars = el}>
-                                ${tl2(
-        trans.value_characters_max,
-        { v: bio_max_length }
-      )}
-                            </p>
-                        </div>
-                        <div class="input-container content-form textarea">
-                            <textarea
-                                name="about_me"
-                                placeholder=${tl2(
-        trans.anything_you_can_imagine
-      )}
-                                cols="40"
-                                rows="10"
-                                class="textarea--s"
-                                maxlength=${bio_max_length}
-                                id="id_about_me"
-                                oninput=${() => update_about()}
-                                ref=${(el) => about = el}
-                                data-form-type="other"
-                            >
-                                ${form_about_me}
-                            </textarea>
-                        </div>
-                    </div>
-                </div>
-                <div class="settings-footer end">
-                    <button
-                        type="submit"
-                        class="btn-primary save"
-                        data-form-type="action"
-                    >
-                        ${tl2(trans.save)}
-                    </button>
-                    <input
-                        type="hidden"
-                        value="profile"
-                        name="submit"
-                    />
-                </div>
-            </form>
-            <div class="setting-group">
-                ${setting({ id: "avatar_radius" })}
             </div>
-        `
-    );
+        </form>
+        <div class="setting-group">
+            ${setting({ id: "avatar_radius" })}
+        </div>
+    `);
     page.structure.main.removeChild(
       page.structure.main.querySelector("#update-profile")
     );
     update_about();
     function len(text4) {
-      return text4.length;
+      return text4.replace(/\n/g, "\r\n").length;
       const normalised = text4.replace(/\r\n/g, "\n");
       return new TextEncoder().encode(normalised).length;
     }
-    function update_about() {
+    function update_about(value = about.value()) {
       log("re-rendering", "about", "log");
-      const value = about.value;
       const length = len(value);
       chars.textContent = tl2(trans.value_characters_max, {
         v: `${length}/${bio_max_length}`
@@ -34301,38 +34062,11 @@
       let profile_cache2 = JSON.parse(localStorage.getItem("bleh_profile_cache")) || {};
       let cache3 = profile_cache2[auth.name];
       console.info("cache", cache3);
-      render(
-        banner_setting,
-        html`
-                <div class="heading">
-                    <h5>${tl2(trans.profile_banner.name)}</h5>
-                    <p>${tl2(trans.profile_banner.body)}</p>
-                    ${cache3.banner_orig ? html.node`
-                        <p>${tl2(trans.current_banner_value).replace("{v}", cache3.banner_orig)}</p>
-                    ` : ""}
-                </div>
-                ${() => {
-          if (!cache3.banner_orig)
-            return html.node`
-                        <div class="info">
-                            <p>${tl2(trans.none)}</p>
-                        </div>
-                    `;
-          let banner_image = html.node`
-                        <div class="banner-image" style="background-image: url(${cache3.banner})" />
-                    `;
-          tippy_esm_default(banner_image, {
-            content: cache3.banner_orig
-          });
-          return banner_image;
-        }}
-            `
-      );
       const accent_regex = /\[accent=([0-9]{1,3}),([0-9]*\.?[0-9]+),([0-9]*\.?[0-9]+)\]/;
       const font_regex = /\[font=([^\]]+)\]/;
       console.info(
         "cache update",
-        about.value,
+        about.value(),
         cache3.hue,
         cache3.sat,
         cache3.lit
@@ -34358,10 +34092,7 @@
         let hue_range;
         let sat_range;
         let lit_range;
-        settings_store.profile_hue.default = settings.hue;
-        settings_store.profile_sat.default = settings.sat;
-        settings_store.profile_lit.default = settings.lit;
-        const match3 = about.value.match(accent_regex);
+        const match3 = about.value().match(accent_regex);
         if (match3) {
           save_setting(
             "profile_hue",
@@ -34425,27 +34156,66 @@
                                             ${tl2(trans.back)}
                                         </button>
                                         <div class="fill"></div>
-                                        <button class="btn primary continue" onclick=${() => {
+                                        <div class="button-group">
+                                            ${() => {
+            const btn = html.node`
+                                                    <button class="btn icon select-button" data-type="copy">
+                                                        ${tl2(trans.copy)}
+                                                    </button>
+                                                `;
+            tippy_esm_default(btn, {
+              theme: "context-menu",
+              content: html.node`
+                                                        <button class="dropdown-menu-clickable-item" data-type="profile" onclick=${() => {
+                hue_range.set(settings.hue);
+                sat_range.set(settings.sat);
+                lit_range.set(settings.lit);
+              }}>${tl2(trans.apply_global_accent)}</button>
+                                                        <button class="dropdown-menu-clickable-item" data-type="global" onclick=${() => {
+                const warn = notify({
+                  id: "confirm_accent",
+                  title: tl2(trans.are_you_sure),
+                  body: tl2(trans.this_will_replace_your_global_accent),
+                  type: "warning",
+                  actions: [
+                    {
+                      type: "check",
+                      action: () => {
+                        notify_rm(warn);
+                        save_setting("hue", settings.profile_hue);
+                        save_setting("sat", settings.profile_sat);
+                        save_setting("lit", settings.profile_lit);
+                      },
+                      text: tl2(trans.continue)
+                    }
+                  ],
+                  persist: true
+                });
+              }}>${tl2(trans.apply_profile_accent)}</button>
+                                                    `,
+              trigger: "click",
+              placement: "bottom",
+              interactive: true,
+              interactiveBorder: 10,
+              offset: [0, 0]
+            });
+            return btn;
+          }}
+                                            <button class="btn primary continue" onclick=${() => {
             const new_accent = `[accent=${settings.profile_hue},${settings.profile_sat},${settings.profile_lit}]`;
             if (match3) {
-              about.value = about.value.replace(
+              about.value(about.value().replace(
                 accent_regex,
                 new_accent
-              );
+              ));
             } else {
-              const trimmed = about.value.trimEnd();
+              const trimmed = about.value().trimEnd();
               if (trimmed.length == 0) {
-                about.value = new_accent;
+                about.value(new_accent);
               } else {
-                about.value = trimmed + "\n\n" + new_accent;
+                about.value(trimmed + "\n\n" + new_accent);
               }
             }
-            about.dispatchEvent(
-              new InputEvent("input", {
-                bubbles: true,
-                cancelable: true
-              })
-            );
             dialog_rm({ id: "profile_accent" });
             status({
               title: tl2(
@@ -34453,8 +34223,9 @@
               )
             });
           }}>
-                                            ${tl2(trans.change)}
-                                        </button>
+                                                ${tl2(trans.change)}
+                                            </button>
+                                        </div>
                                     </div>
                                 `
         });
@@ -34480,7 +34251,7 @@
         render(font_setting, html``);
         render(font_setting, html`
                 <div class="heading">
-                    <h5>${tl2(trans.profile_font.name)}<span class="new-badge sponsor-related">${tl2(trans.sponsors_only)}</span><span class="new-badge new">${tl2(trans.new)}</span></h5>
+                    <h5>${tl2(trans.profile_font.name)}<span class="new-badge sponsor-related">${tl2(trans.sponsors_only)}</span></h5>
                     <p>${tl2(trans.profile_font.body)}</p>
                 </div>
                 <div class="info">
@@ -34493,7 +34264,7 @@
                             ref=${(el) => font_edit = el}
                             type="button"
                             onclick=${() => {
-          const match3 = about.value.match(font_regex);
+          const match3 = about.value().match(font_regex);
           if (match3) {
             save_setting(
               "profile_hue",
@@ -34526,7 +34297,7 @@
                                                 ${Object.entries(page.state.fonts).map(([font, family]) => {
               if (family == "") family = tl2(trans.none);
               const elem = html.node`
-                                                        <button class="font-selection" data-font=${font} aria-checked=${font == font_name} onclick=${() => {
+                                                        <button class="btn font-selection" data-font=${font} aria-checked=${font == font_name} onclick=${() => {
                 font_name = font;
                 font_preview.setAttribute("data-font", font);
                 font_tile.setAttribute("data-font", font);
@@ -34549,7 +34320,7 @@
                                             <div class="font-options">
                                                 ${["solid", "pop", "out", "glow"].map((style) => {
               const elem = html.node`
-                                                        <button class="font-selection font-style" data-font-style=${style} aria-checked=${style == font_style} onclick=${() => {
+                                                        <button class="btn font-selection font-style" data-font-style=${style} aria-checked=${style == font_style} onclick=${() => {
                 font_style = style;
                 font_preview.setAttribute("data-font-style", style);
                 font_tile.setAttribute("data-font-style", style);
@@ -34573,24 +34344,18 @@
                                             <button class="btn primary continue" onclick=${() => {
               const new_font = `[font=${font_name}${font_style != "solid" ? `,${font_style}` : ""}]`;
               if (match3) {
-                about.value = about.value.replace(
+                about.value(about.value().replace(
                   font_regex,
                   new_font
-                );
+                ));
               } else {
-                const trimmed = about.value.trimEnd();
+                const trimmed = about.value().trimEnd();
                 if (trimmed.length == 0) {
-                  about.value = new_font;
+                  about.value(new_font);
                 } else {
-                  about.value = trimmed + "\n\n" + new_font;
+                  about.value(trimmed + "\n\n" + new_font);
                 }
               }
-              about.dispatchEvent(
-                new InputEvent("input", {
-                  bubbles: true,
-                  cancelable: true
-                })
-              );
               dialog_rm({ id: "profile_font" });
               status({
                 title: tl2(
@@ -34622,12 +34387,6 @@
       }
     }
   }
-  function use_pronouns(value) {
-    value = value.replaceAll(" ", "");
-    if (value.startsWith("she/") || value.startsWith("he/") || value.startsWith("they/") || value.startsWith("it/") || value.startsWith("xe/") || value.startsWith("any/"))
-      return true;
-    return false;
-  }
   function avatar(token = "") {
     if (!token) token = page.token;
     else page.token = token;
@@ -34654,7 +34413,7 @@
                 <form action="${root}settings/avatar/delete" method="post">
                     <input type="hidden" name="csrfmiddlewaretoken" value=${page.token}>
                     <div class="form-group delete-avatar">
-                        <button class="mimic-link image-upload-remove" type="submit" value="delete-avatar" name="delete-avatar">${tl2(trans.delete)}</button>
+                        <button class="btn image-upload-remove" type="submit" value="delete-avatar" name="delete-avatar">${tl2(trans.delete)}</button>
                     </div>
                 </form>
             </div>
@@ -34775,6 +34534,7 @@
     let profile_notes = JSON.parse(localStorage.getItem("bleh_profile_notes")) || {};
     let panel = page.structure.main.querySelector("#ignorelist");
     panel.classList.add("bleh--panel");
+    const alert2 = panel.querySelector(".alert");
     let list = panel.querySelectorAll(".ignore-list tr");
     let new_list = document.createElement("div");
     new_list.classList.add(
@@ -34785,12 +34545,15 @@
     let exceeded = false;
     let exceed_amount = 10;
     let amount = 0;
-    list.forEach((item, index3) => {
+    Array.from(list).reverse().forEach((item, index3) => {
       let name = item.querySelector("td").textContent.trim();
       let form2 = item.querySelector("form");
       let button2 = form2.querySelector("button");
-      button2.classList.add("icon", "chibi", "danger-subtle");
-      button2.setAttribute("data-type", "trash");
+      button2.classList.add("btn", "icon", "chibi", "danger-subtle", "list-action");
+      button2.setAttribute("data-type", "x");
+      tippy_esm_default(button2, {
+        content: tl2(trans.remove)
+      });
       let entry = html.node`
             <div class="generic-table-list-entry user-vertical-list-item">
                 <div class="name">
@@ -34828,83 +34591,83 @@
     let form = page.structure.main.querySelector('[name="ignorelist"]');
     if (page.token == "")
       page.token = form.querySelector('[name="csrfmiddlewaretoken"]').getAttribute("value");
-    render(
-      panel,
-      html`
-            <h4>${tl2(trans.block_list)}</h4>
-            <div class="user-top-panel">
-                <div class="user-top-avatar user-top-avatar-side-left">
-                    <div class="bleh-icon"></div>
-                </div>
-                <img
-                    class="user-top-avatar user-top-avatar-main"
-                    src=${auth.avatar.replace("avatar42s", "avatar300s")}
-                    alt=${auth.name}
-                />
-                <div class="user-top-avatar user-top-avatar-side-right">
-                    <div class="bleh-icon"></div>
-                </div>
+    render(panel, html`
+        <h4>${tl2(trans.block_list)}</h4>
+        <div class="user-top-panel">
+            <div class="user-top-avatar user-top-avatar-side-left">
+                <div class="bleh-icon"></div>
             </div>
-            <div class="setting" data-type="text">
-                <div class="heading">
-                    <h5>${tl2(trans.profile)}</h5>
-                    <form
-                        action="${root}settings/privacy#ignorelist"
-                        name="ignorelist"
-                        method="post"
-                    >
+            <img
+                class="user-top-avatar user-top-avatar-main"
+                src=${auth.avatar.replace("avatar42s", "avatar300s")}
+                alt=${auth.name}
+            />
+            <div class="user-top-avatar user-top-avatar-side-right">
+                <div class="bleh-icon"></div>
+            </div>
+        </div>
+        ${alert2}
+        <div class="setting" data-type="text">
+            <div class="heading">
+                <h5>${tl2(trans.profile)}</h5>
+                <form
+                    action="${root}settings/privacy#ignorelist"
+                    name="ignorelist"
+                    method="post"
+                >
+                    <input
+                        type="hidden"
+                        name="csrfmiddlewaretoken"
+                        value=${page.token}
+                    />
+                    <div class="input-container">
+                        <input
+                            type="text"
+                            maxlength="80"
+                            id="id_user"
+                            name="user"
+                            placeholder=${tl2(trans.enter_username)}
+                        />
                         <input
                             type="hidden"
-                            name="csrfmiddlewaretoken"
-                            value=${page.token}
+                            name="listaction"
+                            value="add"
                         />
-                        <div class="input-container">
-                            <input
-                                type="text"
-                                maxlength="80"
-                                id="id_user"
-                                name="user"
-                                placeholder=${tl2(trans.enter_username)}
-                            />
-                            <input
-                                type="hidden"
-                                name="listaction"
-                                value="add"
-                            />
-                            <input
-                                type="hidden"
-                                name="submit"
-                                value="ignorelist"
-                            />
-                            <button
-                                class="bleh--btn primary icon block"
-                                type="submit"
-                            >
-                                ${tl2(trans.block)}
-                            </button>
-                        </div>
-                    </form>
-                </div>
+                        <input
+                            type="hidden"
+                            name="submit"
+                            value="ignorelist"
+                        />
+                        <button
+                            class="btn primary icon block"
+                            type="submit"
+                        >
+                            ${tl2(trans.block)}
+                        </button>
+                    </div>
+                </form>
             </div>
-            <div class="alert alert-info">
-                ${tl2(trans.blocked_count).replace("{c}", amount)}
-            </div>
+        </div>
+        <div class="alert alert-info">
+            ${tl2(trans.blocked_count, { c: amount })}
+        </div>
+        <div class="setting-group">
             ${new_list}
-            <div class="sep" />
-            <h5>${tl2(trans.when_blocked)}</h5>
-            <div class="to-consider">
-                <ul class="to-consider-good">
-                    <li>${tl2(trans.blocked_user_public)}</li>
-                    <li>${tl2(trans.blocked_user_message)}</li>
-                    <li>${tl2(trans.blocked_user_new_shouts)}</li>
-                </ul>
-                <ul class="to-consider-bad">
-                    <li>${tl2(trans.blocked_user_old_shouts)}</li>
-                    <li>${tl2(trans.blocked_user_view_profile)}</li>
-                </ul>
-            </div>
-        `
-    );
+        </div>
+        <div class="sep" />
+        <h5>${tl2(trans.when_blocked)}</h5>
+        <div class="to-consider">
+            <ul class="to-consider-good">
+                <li>${tl2(trans.blocked_user_public)}</li>
+                <li>${tl2(trans.blocked_user_message)}</li>
+                <li>${tl2(trans.blocked_user_new_shouts)}</li>
+            </ul>
+            <ul class="to-consider-bad">
+                <li>${tl2(trans.blocked_user_old_shouts)}</li>
+                <li>${tl2(trans.blocked_user_view_profile)}</li>
+            </ul>
+        </div>
+    `);
   }
   function patch_settings_privacy_panel(token, privacy_panel) {
     privacy_panel.classList.add("bleh--panel");
@@ -35071,11 +34834,13 @@
       email: page.structure.main.querySelector('[name="email"]').value,
       captcha: page.structure.main.querySelector(".lfm-recaptcha")
     };
+    const alert2 = update_profile.querySelector(".alert");
     render(
       page.structure.main,
       html`
             <section class="bleh--panel">
                 <h4>${tl2(trans.information)}</h4>
+                ${alert2}
                 <div class="setting-group">
                     <form
                         action="${root}settings/change-username/send-email"
@@ -35712,7 +35477,9 @@
     let manage = obsession_container.querySelector("form");
     if (manage) {
       quote.appendChild(manage);
-      quote.querySelector("button").textContent = tl2(trans.delete);
+      const trash = quote.querySelector("button");
+      trash.classList.add("btn");
+      trash.textContent = tl2(trans.delete);
     }
     page.structure.main.insertBefore(
       quote,
@@ -35763,8 +35530,8 @@
       let header = document.createElement("h2");
       header.textContent = tl2(trans.shared_with_others);
       related.appendChild(header);
-      let users = shared_users.querySelectorAll(".avatar");
-      users.forEach((user) => {
+      let users2 = shared_users.querySelectorAll(".avatar");
+      users2.forEach((user) => {
         let name = user.querySelector("img").getAttribute("alt");
         patch_avatar(user, name);
       });
@@ -35773,6 +35540,33 @@
     quote.after(related);
     let pages = obsession_container.querySelector(".obsession-pagination");
     if (pages) page.structure.container.appendChild(pages);
+  }
+
+  // src/components/pronouns.js
+  function find_pronouns(string) {
+    const regex = /\b[a-z]{1,4}\s*\/\s*[a-z]{1,4}(?:\s*\/\s*[a-z]{1,4})?\b/i;
+    const start2 = string.match(new RegExp(`^(${regex.source})\\s*(.*)$`, "i"));
+    if (start2) {
+      return {
+        pronouns: start2[1].trim(),
+        text: fix_up_string(start2[2].trim() || null)
+      };
+    }
+    const end2 = string.match(new RegExp(`^(.*)\\s+(${regex.source})$`, "i"));
+    if (end2) {
+      return {
+        pronouns: end2[2].trim(),
+        text: fix_up_string(end2[1].trim() || null)
+      };
+    }
+    return {
+      pronouns: null,
+      text: string
+    };
+  }
+  function fix_up_string(string) {
+    if (!string) return null;
+    return string.replace(/^[,\-–—.;:|•·/]+\s*/, "").replace(/\s*[,\-–—.;:|•·/]+$/, "").trim();
   }
 
   // src/pages/profile.js
@@ -35842,17 +35636,27 @@
     let title_wrap = profile_header.querySelector(".header-title-label-wrap");
     let sub_wrap = profile_header.querySelector(".header-title-secondary");
     log(`querying badges for ${page.name}`, "profile");
+    page.state.follows_user = false;
     if (ff("badges")) {
       let stock_badges = title_wrap.querySelectorAll(".label");
       stock_badges.forEach((badge) => {
-        if (badge.classList[1] == "user-status-None") return;
+        const type = badge.classList[1];
+        if (type == "user-status-None") {
+          badge.remove();
+          return;
+        }
         if (!page.mobile) badge.classList.add("expand");
+        if (type == "label--fade") {
+          page.state.follows_user = true;
+          badge.remove();
+          return;
+        }
         tippy_esm_default(badge, {
           theme: "badge",
           placement: "bottom",
           content: html.node`
                     <div class="badge-name">${badge.textContent}</div>
-                    <div class="badge-reason">${tl2(trans.badges[badge.classList[1]].reason)}</div>
+                    <div class="badge-reason">${tl2(trans.badges[type].reason)}</div>
                 `
         });
       });
@@ -35868,6 +35672,11 @@
     if (ff("profile_fonts") && settings.display_name_styles) {
       profile_name.setAttribute("data-font", cache2.font);
       profile_name.setAttribute("data-font-style", cache2.font_style);
+      if (cache2.font || cache2.font_style) {
+        setTimeout(() => {
+          queue_popup("profile_name_style", profile_name, "bottom");
+        }, 0);
+      }
     }
     if (!avatar2) {
       avatar2 = profile_header.querySelector(".header-avatar-add");
@@ -35876,17 +35685,8 @@
     if (sponsor_list && sponsor_list.special && sponsor_list.special.includes(page.name)) {
       title_wrap.querySelector(".header-title a").classList.add("bleh--name-is-cute");
     }
-    let pronouns;
-    if (cache2.aka) pronouns = use_pronouns(cache2.aka);
     if (cache2.username) {
       profile_name.textContent = cache2.username;
-      if (sub_wrap) {
-        sub_wrap.insertBefore(html.node`
-                <span class="header-username">
-                    <a href="${root}user/${page.name}">@${page.name}</a>
-                </span>
-            `, sub_wrap.firstElementChild);
-      }
     }
     let expander;
     let redesigned_profile_header = html.node`
@@ -35898,30 +35698,14 @@
                 <div class="main-info">
                     <div class="sub-text">${tl2(trans.profile)}</div>
                     <div class="title-container">${title_wrap}</div>
-                    ${sub_wrap ? sub_wrap : cache2.aka || cache2.created ? html.node`
-                        <p class="header-title-secondary">
-                            ${cache2.username ? html.node`
-                            <span class="header-username">
-                                <a href="${root}user/${page.name}">@${page.name}</a>
-                            </span>
-                            ` : ""}
-                            ${cache2.aka ? html.node`
-                            <span class="header-title-secondary--pre">
-                                ${pronouns ? tl2(trans.account_pronouns) : tl2(trans.aka)}
-                            </span>
-                            <span class="header-title-display-name">
-                                ${cache2.aka}
-                            </span>
-                            ` : ""}
-                            <span class="header-title-secondary--pre">
-                                ${tl2(trans.account_created)}
-                            </span>
-                            <span class="header-scrobble-since">
-                                ${cache2.created}
-                            </span>
-                        </p>
-                    ` : ""}
                 </div>
+                ${sub_wrap ? sub_wrap : cache2.username || cache2.aka || cache2.created ? () => {
+      const elem = html.node`
+                        <p class="header-title-secondary" />
+                    `;
+      render_sub_text(elem, cache2.aka, cache2.created, cache2.username);
+      return elem;
+    } : ""}
                 ${badge_elements.length > 0 ? html.node`
                 <div class="badges">
                     ${badge_elements.map((badge) => html.node`
@@ -35933,7 +35717,11 @@
         </section>
     `;
     const avatar_img = avatar2.querySelector(":scope > img");
-    if (avatar_img) cache2.avatar = avatar_img.src;
+    if (avatar_img) {
+      avatar_img.src = avatar_img.src.replace("/avatar170s/", "/avatar300s/");
+      cache2.avatar = avatar_img.src;
+      page.avatar = avatar_img.src;
+    }
     if (page.name == auth.name && !settings.profile_header_own) {
       register_background(null, "hidden");
     } else if (page.name != auth.name && !settings.profile_header_others) {
@@ -35965,11 +35753,9 @@
       page.structure.container.firstElementChild
     );
     profile_header.classList.add("legacy-header");
-    if (!new_account) {
-      const src = avatar_img.src;
-      page.avatar = src;
+    if (avatar_img) {
       avatar2.addEventListener("click", () => {
-        expand_avatar(src.replace("/avatar170s/", "/ar0/"));
+        expand_avatar(avatar_img.src.replace("/avatar300s/", "/ar0/"));
       });
     }
     control_gif_pause(avatar_img);
@@ -35985,7 +35771,7 @@
     );
     if (loved_tab) loved_tab.textContent = tl2(trans.loved);
     if (!is_subpage) {
-      let is_following = page.structure.container.querySelector(".label.user-follow");
+      let is_following = page.state.follows_user;
       profile_recents();
       profile_artists();
       profile_albums();
@@ -36220,19 +36006,15 @@
         bleh_user_library();
       } else if (page.subpage == "events") {
         convert_to_toolbar();
-        const no_events = page.structure.main.querySelector(
-          ":scope > .no-events"
-        );
-        if (!no_events) bleh_profile_events();
+        const no_events = page.structure.main.querySelector(":scope > .no-events");
+        bleh_profile_events(no_events);
       } else if (page.subpage.startsWith("listening-report")) {
         page.structure.content_top.classList.add(
           "listening-report-navlist"
         );
         page.structure.row.classList.add("listening-report");
         convert_to_toolbar();
-        let report_box_container = document.body.querySelector(
-          ".report-box-container--overview"
-        );
+        const report_box_container = document.body.querySelector(".report-box-container--overview");
         if (report_box_container) {
           document.documentElement.setAttribute(
             "data-bleh--theme",
@@ -36243,8 +36025,29 @@
             "dark"
           );
           page.structure.row.after(report_box_container);
+          const share_row = document.body.querySelector(".share-button-row");
+          if (share_row) {
+            const title = document.body.querySelector(".report-headline-title").textContent.trim();
+            const split = window.location.pathname.split("/");
+            const len = split.length - 1;
+            const year = split[len] == "year";
+            const items = document.body.querySelectorAll(".listening-report-top-item-wrap");
+            items.forEach((item) => {
+              const type = item.querySelector(".listening-report-top-item").getAttribute("id").replace("listening-report-top-item-", "");
+              const buttons = item.querySelector(".top-item-buttons");
+              const album_grid = buttons.querySelector(".album-grid-button");
+              if (album_grid) album_grid.remove();
+              if (year) {
+                buttons.insertBefore(html.node`
+                                <a class="btn album-grid-button icon" data-type="collage" href="${root}bleh/minis/collage?type=${type}s&timeframe=from=${title}-01-01%26rangetype=year" target="_blank">
+                                    ${tl2(trans.collage)} (${version.brand})
+                                </a>
+                            `, buttons.firstElementChild);
+              }
+            });
+          }
         } else {
-          let dashboard = page.structure.container.querySelector(".user-dashboard");
+          const dashboard = page.structure.container.querySelector(".user-dashboard");
           if (dashboard) {
             dialog({
               id: "listening_report_v2",
@@ -36462,26 +36265,37 @@
     let note;
     about_me_sidebar.after(html.node`
         <section class="bleh--panel bleh--profile-note-panel">
-            <h2>${tl2(trans.notes)}</h2>
-            <div class="content-form">
-                <textarea id="bleh--profile-note" placeholder=${tl2(trans.anything_you_can_imagine)} ref=${(el) => note = el}>${has_note ?? has_note}</textarea>
-            </div>
-            <div class="actions">
-                <button class="see-more cancel" onclick=${() => {
+            <div class="top-container">
+                <h2>${tl2(trans.notes)}</h2>
+                <div class="view-buttons blend blend-v2">
+                    <button class="see-more left-icon blend-v2-btn" data-type="delete" onclick=${() => {
       let notes = JSON.parse(
         localStorage.getItem("bleh_profile_notes")
       ) || {};
       delete notes[page.name];
       note.value = "";
       set_storage("bleh_profile_notes", JSON.stringify(notes));
+      status({
+        id: "note",
+        title: tl2(trans.cleared_note_for_user, { u: page.name })
+      });
     }}>${tl2(trans.clear)}</button>
-                <button class="btn primary icon" data-type="save" onclick=${() => {
+                    <button class="see-more left-icon blend-v2-btn" data-type="save" onclick=${() => {
       let notes = JSON.parse(
         localStorage.getItem("bleh_profile_notes")
       ) || {};
-      notes[page.name] = note.value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+      notes[page.name] = note.value;
       set_storage("bleh_profile_notes", JSON.stringify(notes));
+      status({
+        id: "note",
+        title: tl2(trans.saved_note_for_user, { u: page.name }),
+        body: note.value
+      });
     }}>${tl2(trans.save)}</button>
+                </div>
+            </div>
+            <div class="content-form">
+                <textarea id="bleh--profile-note" placeholder=${tl2(trans.anything_you_can_imagine)} ref=${(el) => note = el}>${has_note ?? has_note}</textarea>
             </div>
         </section>
     `);
@@ -36546,26 +36360,24 @@
             <div class="new-badge count-badge">${count}</div>
         `);
     }
-    let view_buttons = document.createElement("div");
-    view_buttons.classList.add("view-buttons-wrapper");
-    view_buttons.innerHTML = `
-        <div class="view-buttons">
-            <button class="btn view-item" id="toggle-list_view-1" data-toggle="list_view" data-toggle-value="1" onclick="_update_item('list_view', 1)">
-                ${tl2(trans.grid)}
-            </button>
-            <button class="btn view-item" id="toggle-list_view-0" data-toggle="list_view" data-toggle-value="0" onclick="_update_item('list_view', 0)">
-                ${tl2(trans.list)}
-            </button>
-        </div>
-    `;
-    const user_panel = html.node`
+    const no_data = page.structure.main.querySelector(".no-data-message");
+    const pagination = page.structure.main.querySelector(".pagination");
+    let no_data_neighbours = page.structure.main.querySelector(":scope > p");
+    if (no_data_neighbours) no_data_neighbours.classList.add("no-data-message");
+    const user_list = page.structure.main.querySelector(".user-list");
+    user_list?.setAttribute("data-list-view", settings.list_view);
+    if (user_list) no_data_neighbours = null;
+    render(page.structure.main, html.node`
         <section class="users">
-            ${view_buttons}
-            ${html.node([page.structure.main.innerHTML])}
+            ${!no_data && !no_data_neighbours ? setting({ id: "list_view", func: (val) => {
+      user_list?.setAttribute("data-list-view", val);
+    } }) : ""}
+            ${no_data}
+            ${no_data_neighbours}
+            ${user_list}
+            ${pagination}
         </section>
-    `;
-    render(page.structure.main, user_panel);
-    refresh_all();
+    `);
   }
   function refresh_tracks(button2, { quiet = false }) {
     let panel = page.structure.main.querySelector("#recent-tracks-section");
@@ -36631,33 +36443,13 @@
         song_title = formatted_title[0];
         song_tags = formatted_title[1];
       }
-      render(
-        name_elem,
-        html.node`
-            <div class="title">${romanise(song_title.trim())}</div>
-            ${song_tags.map(
-          (tag) => html.node`
-                <div class="feat" data-bleh--tag-type="${tag.type}" data-bleh--tag-group="${tag.group}">${romanise(tag.text)}</div>
-            `
-        )}
-        `
-      );
+      name_elem.classList.add("smart-title");
+      render(name_elem, smart_title(song_title, song_tags));
       artist_elem_full = html.node`
             <div class="source-album-artist">
-                <a href="${root}music/${redirect()}${sanitise(formatted_title[2])}">${romanise(formatted_title[2])}</a>
+                ${smart_artists(formatted_title[2], formatted_title[3])}
             </div>
         `;
-      let song_guests = formatted_title[3];
-      for (let guest in song_guests) {
-        artist_elem_full.innerHTML = `${artist_elem_full.innerHTML},`;
-        let guest_element = document.createElement("a");
-        guest_element.setAttribute(
-          "href",
-          `${root}music/${redirect()}${sanitise(song_guests[guest])}`
-        );
-        guest_element.textContent = romanise(song_guests[guest]);
-        artist_elem_full.appendChild(guest_element);
-      }
     } else if (settings.corrections) {
       name_elem.textContent = romanise(
         correct_item_by_artist(
@@ -36691,7 +36483,7 @@
                 </div>
                 `}
             </div>
-            <div class="source-album js-link-block link-block">
+            <div class="source-album js-link-block link-block featured-item">
                 <div class="source-album-art small">
                     ${img}
                 </div>
@@ -36768,86 +36560,85 @@
       recent_realtime: form.querySelector("#id_auto_refresh_recent_tracks").checked
     };
     form.classList = "";
-    render(
-      form,
-      html`
-            <input
-                type="hidden"
-                name="csrfmiddlewaretoken"
-                value="${page.token}"
-            />
-            <div class="setting-group blend">
-                <div class="setting" data-type="select">
-                    <div class="heading">
-                        <h5>${tl2(trans.amount_to_display)}</h5>
-                    </div>
-                    ${select(
-        select_prepare(count),
-        count.value,
-        "chart_length_recent_tracks"
-      )}
+    render(form, html`
+        <input
+            type="hidden"
+            name="csrfmiddlewaretoken"
+            value="${page.token}"
+        />
+        <div class="setting-group blend">
+            <div class="setting" data-type="select">
+                <div class="heading">
+                    <h5>${tl2(trans.amount_to_display)}</h5>
                 </div>
-                <div
-                    class="setting"
-                    data-type="toggle"
-                    id="container-recent_artwork"
-                    onclick="_update_inbuilt_item('recent_artwork')"
-                >
-                    <div class="heading">
-                        <h5>${tl2(trans.recent_artwork)}</h5>
-                    </div>
-                    <div class="toggle-wrap">
-                        <input
-                            class="companion-checkbox"
-                            type="checkbox"
-                            name="show_recent_tracks_artwork"
-                            id="inbuilt-companion-checkbox-recent_artwork"
-                        />
-                        <span
-                            class="btn toggle"
-                            id="toggle-recent_artwork"
-                            aria-checked="false"
-                        >
-                            <div class="dot"></div>
-                        </span>
-                    </div>
+                ${select(
+      select_prepare(count),
+      count.value,
+      "chart_length_recent_tracks"
+    )}
+            </div>
+            <div
+                class="setting"
+                data-type="toggle"
+                id="container-recent_artwork"
+                onclick="_update_inbuilt_item('recent_artwork')"
+            >
+                <div class="heading">
+                    <h5>${tl2(trans.recent_artwork)}</h5>
                 </div>
-                <div
-                    class="setting"
-                    data-type="toggle"
-                    id="container-recent_realtime"
-                    onclick="_update_inbuilt_item('recent_realtime')"
-                >
-                    <div class="heading">
-                        <h5>${tl2(trans.recent_realtime.name)}</h5>
-                        <p>${tl2(trans.recent_realtime.body)}</p>
-                    </div>
-                    <div class="toggle-wrap">
-                        <input
-                            class="companion-checkbox"
-                            type="checkbox"
-                            name="auto_refresh_recent_tracks"
-                            id="inbuilt-companion-checkbox-recent_realtime"
-                        />
-                        <span
-                            class="btn toggle"
-                            id="toggle-recent_realtime"
-                            aria-checked="false"
-                            type="button"
-                        >
-                            <div class="dot"></div>
-                        </span>
-                    </div>
-                </div>
-                ${setting({ id: "format_guest_features" })}
-                <div class="settings-footer">
-                    <button type="submit" class="btn-primary save">
-                        ${tl2(trans.save)}
-                    </button>
+                <div class="toggle-wrap">
+                    <input
+                        class="companion-checkbox"
+                        type="checkbox"
+                        name="show_recent_tracks_artwork"
+                        id="inbuilt-companion-checkbox-recent_artwork"
+                    />
+                    <span
+                        class="btn toggle"
+                        id="toggle-recent_artwork"
+                        aria-checked="false"
+                    >
+                        <div class="dot"></div>
+                    </span>
                 </div>
             </div>
-        `
-    );
+            <div
+                class="setting"
+                data-type="toggle"
+                id="container-recent_realtime"
+                onclick="_update_inbuilt_item('recent_realtime')"
+            >
+                <div class="heading">
+                    <h5>${tl2(trans.recent_realtime.name)}</h5>
+                    <p>${tl2(trans.recent_realtime.body)}</p>
+                </div>
+                <div class="toggle-wrap">
+                    <input
+                        class="companion-checkbox"
+                        type="checkbox"
+                        name="auto_refresh_recent_tracks"
+                        id="inbuilt-companion-checkbox-recent_realtime"
+                    />
+                    <span
+                        class="btn toggle"
+                        id="toggle-recent_realtime"
+                        aria-checked="false"
+                        type="button"
+                    >
+                        <div class="dot"></div>
+                    </span>
+                </div>
+            </div>
+            ${setting({ id: "format_guest_features" })}
+            <div class="settings-footer">
+                <button type="submit" class="btn-primary save" onclick=${() => {
+      tooltip.hide();
+    }}>
+                    ${tl2(trans.save)}
+                </button>
+            </div>
+        </div>
+    `);
     for (let setting2 in original_chart_settings) {
       update_inbuilt_item(
         setting2,
@@ -36868,9 +36659,8 @@
       appendTo: document.body,
       hideOnClick: "toggle",
       onClickOutside(instance) {
-        if (instance.popper.querySelector('[aria-expanded="true"]')) {
+        if (instance.popper.querySelector('[aria-expanded="true"]'))
           return;
-        }
         instance.hide();
       }
     });
@@ -36933,6 +36723,7 @@
     let chartlist_length = form.querySelector(
       '[name="artists_chartlist_length"]'
     );
+    let tooltip;
     form.classList = "";
     render(
       form,
@@ -36984,14 +36775,16 @@
       )}
                 </div>
                 <div class="settings-footer">
-                    <button type="submit" class="btn-primary save">
+                    <button type="submit" class="btn-primary save" onclick=${() => {
+        tooltip.hide();
+      }}>
                         ${tl2(trans.save)}
                     </button>
                 </div>
             </div>
         `
     );
-    tippy_esm_default(settings_btn, {
+    tooltip = tippy_esm_default(settings_btn, {
       theme: "window",
       content: form,
       placement: "bottom",
@@ -37065,6 +36858,7 @@
     let chartlist_length = form.querySelector(
       '[name="albums_chartlist_length"]'
     );
+    let tooltip;
     form.classList = "";
     render(
       form,
@@ -37116,14 +36910,16 @@
       )}
                 </div>
                 <div class="settings-footer">
-                    <button type="submit" class="btn-primary save">
+                    <button type="submit" class="btn-primary save" onclick=${() => {
+        tooltip.hide();
+      }}>
                         ${tl2(trans.save)}
                     </button>
                 </div>
             </div>
         `
     );
-    tippy_esm_default(settings_btn, {
+    tooltip = tippy_esm_default(settings_btn, {
       theme: "window",
       content: form,
       placement: "bottom",
@@ -37195,6 +36991,7 @@
     let chartlist_length = form.querySelector(
       '[name="chart_length_top_tracks"]'
     );
+    let tooltip;
     form.classList = "";
     render(
       form,
@@ -37229,14 +37026,16 @@
                 ${setting({ id: "format_guest_features" })}
                 ${setting({ id: "show_guest_features" })}
                 <div class="settings-footer">
-                    <button type="submit" class="btn-primary save">
+                    <button type="submit" class="btn-primary save" onclick=${() => {
+        tooltip.hide();
+      }}>
                         ${tl2(trans.save)}
                     </button>
                 </div>
             </div>
         `
     );
-    tippy_esm_default(settings_btn, {
+    tooltip = tippy_esm_default(settings_btn, {
       theme: "window",
       content: form,
       placement: "bottom",
@@ -37267,7 +37066,8 @@
         cache: cache2,
         take_effect,
         allow_socials: true,
-        allow_alignment: true
+        allow_alignment: true,
+        allow_lists: true
       })
     );
     if (!temp.hasChildNodes()) {
@@ -37328,6 +37128,7 @@
     if (!table) table = panel.querySelector("table");
     if (!table) return;
     let entries2 = table.querySelectorAll("tbody tr");
+    if (entries2.length == 0) return;
     let labels = [];
     let links = [];
     let values = [];
@@ -37342,7 +37143,13 @@
         `${root}user/${page.name}/library` + period.getAttribute("href")
       );
     });
-    panel.querySelector(".this-month").textContent = tl2(trans.value_this_month, { v: parseInt(values[values.length - 1]).toLocaleString(lang) });
+    const last_month = parseInt(values[values.length - 2]);
+    const this_month = parseInt(values[values.length - 1]);
+    const diff = this_month - last_month;
+    render(panel.querySelector(".this-month"), html`
+        ${tl2(trans.value_this_month, { v: this_month.toLocaleString(lang) })}
+        ${!Number.isNaN(diff) ? html.node`<span class="diff">(${tl2(trans[diff > 0 ? "value_more" : "value_less"], { v: diff > 0 ? diff.toLocaleString(lang) : Math.abs(diff).toLocaleString(lang) })})</span>` : ""}
+    `);
     prep_chart_colours();
     let scrobble_canvas_container = panel.querySelector(
       ".scrobble-canvas-container"
@@ -37418,17 +37225,28 @@
       });
     }
   }
-  function open_starred_friend_window() {
+  function open_starred_friend_window(friend_func = null) {
     dialog({
       id: "starred_friend",
-      title: tl2(trans.friends),
+      title: tl2(trans.close_friends),
       body: html.node`
             <div class="setting-group">
-                ${starred = setting({ id: "starred_friend", list: select_prepare_list([{ value: "", text: tl2(trans.none) }, ...settings.friends]) })}
+                ${friends = setting({
+        id: "friends",
+        list: settings.friends,
+        func: (val) => {
+          if (!val.includes(settings.starred_friend))
+            save_setting("starred_friend", "");
+          checkup_friend_cache(val);
+          starred.update(select_prepare_list([{ value: "", text: tl2(trans.none) }, ...val]));
+          if (friend_func) friend_func();
+        }
+      })}
+                ${starred = setting({ id: "starred_friend", list: select_prepare_list([{ value: "", text: tl2(trans.none) }, ...settings.friends]), func: () => {
+        if (friend_func) friend_func();
+      } })}
             </div>
-            <div class="alert alert-info">
-                ${tl2(trans.starred_friend.notice)}
-            </div>
+            <p class="card-tip">${tl2(trans.friend_difference)}</p>
         `
     });
   }
@@ -37439,7 +37257,7 @@
     let cache2 = profile_cache[name];
     if (cache2) {
       if (cache2.hue || cache2.sat || cache2.lit) {
-        if (!sponsor_list || sponsor_list && !sponsor_list.sponsors.includes(name)) {
+        if (!sponsor_list || sponsor_list && sponsor_list.sponsors && !sponsor_list.sponsors.includes(name)) {
           delete cache2.hue;
           delete cache2.sat;
           delete cache2.lit;
@@ -37510,34 +37328,72 @@
     });
   }
   function parse_sub_text(profile_sub_text, name = page.name, cache2) {
-    const display_name = profile_sub_text.querySelector(
-      ".header-title-display-name"
-    );
-    const scrobble_since = profile_sub_text.querySelector(
-      ".header-scrobble-since"
-    );
+    const display_name = profile_sub_text.querySelector(".header-title-display-name");
+    const scrobble_since = profile_sub_text.querySelector(".header-scrobble-since");
     scrobble_since.textContent = scrobble_since.textContent.slice(2).replace(tl2(trans.account_scrobbling_since_replace), "");
-    const pronouns = use_pronouns(display_name.textContent);
-    profile_sub_text.insertBefore(
-      html.node`
-        <span class="header-title-secondary--pre">
-            ${pronouns ? tl2(trans.account_pronouns) : tl2(trans.aka)}
-        </span>
-    `,
-      display_name
-    );
-    profile_sub_text.insertBefore(
-      html.node`
-        <span class="header-title-secondary--pre">
-            ${tl2(trans.account_created)}
-        </span>
-    `,
-      scrobble_since
-    );
     cache2.aka = display_name.textContent.trim();
     cache2.created = scrobble_since.textContent.trim();
+    render_sub_text(profile_sub_text, cache2.aka, cache2.created, cache2.username);
   }
-  function bleh_profile_events() {
+  function render_sub_text(parent, aka, created, display_name) {
+    render(parent, html``);
+    if (display_name) {
+      parent.appendChild(html.node`
+            <dl class="sub-text-pair">
+                ${sub_text_label("username", tl2(trans.username.name))}
+                <dd class="sub-text-item not-text">${page.name}</dd>
+            </dl>
+        `);
+    }
+    if (aka) {
+      const result = find_pronouns(aka);
+      if (result.pronouns) {
+        parent.appendChild(html.node`
+                <dl class="sub-text-pair">
+                    ${sub_text_label("pronouns", tl2(trans.account_pronouns))}
+                    <dd class="sub-text-item">${result.pronouns}</dd>
+                </dl>
+            `);
+      }
+      if (result.text && result.text != page.name) {
+        parent.appendChild(html.node`
+                <dl class="sub-text-pair">
+                    ${sub_text_label("aka", tl2(trans.profile_title))}
+                    <dd class="sub-text-item">${result.text}</dd>
+                </dl>
+            `);
+      }
+    }
+    if (created) {
+      parent.appendChild(html.node`
+            <dl class="sub-text-pair">
+                ${sub_text_label("created", tl2(trans.account_creation))}
+                <dd class="sub-text-item not-text">${created}</dd>
+            </dl>
+        `);
+    }
+    if (page.state.follows_user) {
+      parent.appendChild(html.node`
+            <dl class="sub-text-pair sub-text-follow">
+                ${sub_text_label("follow", tl2(trans.following))}
+                <dd class="sub-text-item not-text">${tl2(trans.follows_you)}</dd>
+            </dl>
+        `);
+    }
+  }
+  function sub_text_label(type, text4) {
+    const elem = html.node`
+        <dt class="sub-text-label" data-type=${type}>
+            <span class="bleh-icon" style="--icon: var(--mask)" />
+            <span class="sub-text-label-sr">${text4}</span>
+        </dt>
+    `;
+    tippy_esm_default(elem, {
+      content: text4
+    });
+    return elem;
+  }
+  function bleh_profile_events(no_events) {
     const selected_tab = page.structure.toolbar?.querySelector(
       ".secondary-nav-item-link--active"
     );
@@ -37603,7 +37459,7 @@
     let type;
     let settings_btn;
     let submit;
-    let body2;
+    let body;
     let value = 3;
     let min2 = 1;
     let max2 = 20;
@@ -37697,7 +37553,7 @@
         <div
             class="compare-body"
             data-filled="false"
-            ref=${(el) => body2 = el}
+            ref=${(el) => body = el}
         >
             <div class="loading-data-container">
                 <div class="loading-data-text info">
@@ -37714,38 +37570,27 @@
         },
         {
           value: "date_preset=LAST_7_DAYS",
-          text: tl2(trans.last_count_days).replace(
-            "{c}",
-            "7"
-          )
+          text: tl2(trans.last_count_days, { c: "7" })
         },
         {
           value: "date_preset=LAST_30_DAYS",
-          text: tl2(trans.last_count_days).replace(
-            "{c}",
-            "30"
-          )
+          text: tl2(trans.last_count_days, { c: "30" })
         },
         {
           value: "date_preset=LAST_90_DAYS",
-          text: tl2(trans.last_count_days).replace(
-            "{c}",
-            "90"
-          )
+          text: tl2(trans.last_count_days, { c: "90" })
         },
         {
           value: "date_preset=LAST_180_DAYS",
-          text: tl2(trans.last_count_days).replace(
-            "{c}",
-            "180"
-          )
+          text: tl2(trans.last_count_days, { c: "180" })
         },
         {
           value: "date_preset=LAST_365_DAYS",
-          text: tl2(trans.last_count_days).replace(
-            "{c}",
-            "365"
-          )
+          text: tl2(trans.last_count_days, { c: "365" })
+        },
+        {
+          value: "date_preset=ALL",
+          text: tl2(trans.all_time)
         }
       ];
       timeframe = select(
@@ -37832,7 +37677,7 @@
       }}
                         ${() => {
         let btn = html.node`
-                            <button class="btn chibi icon" data-type="starred_friend" data-is-shortcut=${settings.starred_friend != ""} onclick=${() => {
+                            <button class="btn chibi icon" data-type="starred_friend" data-starred=${settings.starred_friend != ""} onclick=${() => {
           if (settings.starred_friend == "") return;
           inputter2.value = settings.starred_friend;
           inputter2.dispatchEvent(new Event("change"));
@@ -37915,7 +37760,7 @@
     }
     function get_grid(current_page, pages) {
       render(
-        body2,
+        body,
         html`
                 <div class="loading-data-container">
                     <div class="loading-data-text">
@@ -37973,7 +37818,7 @@
       log("gathered initial values", "collage", "info", page.state.collage);
       if (page.state.collage.length == 0) {
         render(
-          body2,
+          body,
           html`
                     <div class="loading-data-container">
                         <div class="loading-data-text failed">
@@ -38077,7 +37922,7 @@
             </div>
         `;
       render(
-        body2,
+        body,
         html`
                 <div class="loading-data-container">
                     <div class="loading-data-text">
@@ -38138,11 +37983,11 @@
             `${date.getFullYear()}-${pad2(date.getMonth() + 1)}-${pad2(date.getDate())}`
           );
           render(
-            body2,
+            body,
             html`
-                        <div class="collage-finished">
-                            <strong>${tl2(trans.your_collage_is_ready)}</strong>
-                            <div class="button-group">
+                        <div class="collage-canvas">
+                            ${canvas}
+                            <div class="collage-canvas-actions">
                                 <button
                                     class="btn primary icon"
                                     data-type="download"
@@ -38159,7 +38004,6 @@
                                 </button>
                             </div>
                         </div>
-                        ${canvas}
                     `
           );
           type.querySelector("button").disabled = false;
@@ -38491,73 +38335,12 @@
   // src/components/plot.js
   function plot({ host, sidebar } = {}) {
     if (!host || !sidebar) return;
-    let timeframe;
+    let data_points = [];
     let current_year = (/* @__PURE__ */ new Date()).getFullYear();
     let previous_year = current_year - 1;
-    const default_timeframe = page.requested.timeframe || "date_preset=LAST_90_DAYS";
-    let users = [page.name];
-    let users_elem;
+    let body;
+    let timeframe;
     render(host, html`
-        <div class="compare-header">
-            <div class="compare-users for-plot" ref=${(el) => users_elem = el} />
-            <div class="compare-selection">
-                ${timeframe = select(
-      [
-        {
-          text: tl2(trans.timeframe)
-        },
-        {
-          value: "date_preset=LAST_7_DAYS",
-          text: tl2(trans.last_count_days).replace(
-            "{c}",
-            "7"
-          )
-        },
-        {
-          value: "date_preset=LAST_30_DAYS",
-          text: tl2(trans.last_count_days).replace(
-            "{c}",
-            "30"
-          )
-        },
-        {
-          value: "date_preset=LAST_90_DAYS",
-          text: tl2(trans.last_count_days).replace(
-            "{c}",
-            "90"
-          )
-        },
-        {
-          value: "date_preset=LAST_180_DAYS",
-          text: tl2(trans.last_count_days).replace(
-            "{c}",
-            "180"
-          )
-        },
-        {
-          value: "date_preset=LAST_365_DAYS",
-          text: tl2(trans.last_count_days).replace(
-            "{c}",
-            "365"
-          )
-        },
-        {
-          value: "date_preset=ALL",
-          text: tl2(trans.all_time)
-        },
-        {
-          value: `from=${current_year}-01-01&rangetype=year`,
-          text: current_year
-        },
-        {
-          value: `from=${previous_year}-01-01&rangetype=year`,
-          text: previous_year
-        }
-      ],
-      default_timeframe
-    )}
-            </div>
-        </div>
         <div
             class="compare-body"
             data-filled="false"
@@ -38570,7 +38353,6 @@
             </div>
         </div>
     `);
-    render_users();
     function render_users() {
       render(users_elem, html`
             ${users.map((user) => html.node`
@@ -38627,6 +38409,8 @@
             ${render_user(name, avatar2, elem)}
         `);
       return elem;
+    }
+    function fetch_data_set(user, media = null) {
     }
   }
 
@@ -38731,7 +38515,7 @@
                     ${Object.entries(valid_minis).map(([id, mini2]) => {
         if (mini2.hide_if) return html.node``;
         return html.node`
-                            <button class="mini" data-type=${id} data-mini=${id} onclick=${() => {
+                            <button class="btn mini" data-type=${id} data-mini=${id} onclick=${() => {
           window.history.replaceState(
             id,
             "",
@@ -38781,14 +38565,14 @@
     `;
   }
   function bleh_minis_collage() {
-    let content2;
+    let content;
     let mini_settings;
     render(
       page.structure.main,
       html`
             <section class="minis">
                 ${return_to_minis("collage")}
-                <div class="minis-content" ref=${(el) => content2 = el} />
+                <div class="minis-content" ref=${(el) => content = el} />
             </section>
         `
     );
@@ -38810,19 +38594,19 @@
         `
     );
     collage({
-      host: content2,
+      host: content,
       sidebar: mini_settings
     });
   }
   function bleh_minis_compare() {
-    let content2;
+    let content;
     let mini_settings;
     render(
       page.structure.main,
       html`
             <section class="minis">
                 ${return_to_minis("compare")}
-                <div class="minis-content" ref=${(el) => content2 = el} />
+                <div class="minis-content" ref=${(el) => content = el} />
             </section>
         `
     );
@@ -38844,19 +38628,19 @@
         `
     );
     compare({
-      host: content2,
+      host: content,
       sidebar: mini_settings
     });
   }
   function bleh_minis_plot() {
-    let content2;
+    let content;
     let mini_settings;
     render(
       page.structure.main,
       html`
             <section class="minis">
                 ${return_to_minis("plot")}
-                <div class="minis-content" ref=${(el) => content2 = el} />
+                <div class="minis-content" ref=${(el) => content = el} />
             </section>
         `
     );
@@ -38878,12 +38662,12 @@
         `
     );
     plot({
-      host: content2,
+      host: content,
       sidebar: mini_settings
     });
   }
   function bleh_minis_pixel() {
-    let content2;
+    let content;
     let mini_settings;
     render(
       page.structure.main,
@@ -38892,7 +38676,7 @@
                 ${return_to_minis("pixel")}
                 <div
                     class="minis-content pixel-content"
-                    ref=${(el) => content2 = el}
+                    ref=${(el) => content = el}
                 />
             </section>
         `
@@ -38915,7 +38699,7 @@
         `
     );
     pixel({
-      host: content2,
+      host: content,
       sidebar: mini_settings
     });
   }
@@ -38984,7 +38768,7 @@
     let timeframe;
     let type;
     let submit;
-    let body2;
+    let body;
     if (page.name == auth.name) {
       page.name = "";
       page.avatar = "";
@@ -39149,7 +38933,7 @@
             <div
                 class="compare-body"
                 data-filled="false"
-                ref=${(el) => body2 = el}
+                ref=${(el) => body = el}
             >
                 <div class="loading-data-container">
                     <div class="loading-data-text info">
@@ -39198,7 +38982,7 @@
                         />
                         ${() => {
         let btn = html.node`
-                            <button class="btn chibi icon" data-type="starred_friend" data-is-shortcut=${settings.starred_friend != ""} onclick=${() => {
+                            <button class="btn chibi icon" data-type="starred_friend" data-starred=${settings.starred_friend != ""} onclick=${() => {
           if (settings.starred_friend == "") return;
           inputter.value = settings.starred_friend;
           inputter.dispatchEvent(new Event("change"));
@@ -39271,7 +39055,7 @@
     }
     function get_grid(user2, current_page, page_count, next_user = null) {
       render(
-        body2,
+        body,
         html`
                 <div class="loading-data-container">
                     <div class="loading-data-text">
@@ -39357,10 +39141,10 @@
         (a, b) => b.plays.shared - a.plays.shared
       );
       log("gathered shared values", "compare", "info", page.state.compare);
-      body2.innerHTML = "";
+      body.innerHTML = "";
       if (page.state.compare.shared.length == 0) {
         render(
-          body2,
+          body,
           html`
                     <div class="loading-data-container">
                         <div class="loading-data-text failed">
@@ -39422,7 +39206,7 @@
                     </li>
                 `);
         });
-        render(body2, grid);
+        render(body, grid);
         music_grids(grid);
       } else {
         let table = document.createElement("table");
@@ -39485,8 +39269,8 @@
                     </tr>
                 `);
         });
-        body2.appendChild(table);
-        patch_titles(body2);
+        body.appendChild(table);
+        patch_titles(body);
       }
     }
   }
@@ -39585,6 +39369,7 @@
                 </div>
                 <div class="version-item-body markdown-body">
                     ${markdown(changelog[version4].bio, {
+        allow_lists: true,
         allow_headers: true,
         starting_header: 5,
         in_dialog: true
@@ -40733,7 +40518,8 @@
     focus = false,
     standalone = false,
     func,
-    list
+    list,
+    center = true
   }) {
     try {
       let value = settings[id];
@@ -40747,7 +40533,7 @@
         });
       const type = settings_store[id].type || "toggle";
       const title = settings_store[id].title ? tl2(settings_store[id].title) : id;
-      let body2 = settings_store[id].body ? tl2(settings_store[id].body) : null;
+      let body = settings_store[id].body ? tl2(settings_store[id].body) : null;
       const icon = settings_store[id].icon;
       if (![
         "toggle",
@@ -40764,8 +40550,8 @@
         });
       const incompatible_with = settings_store[id].incompatible;
       const hide_if_incompatible = settings_store[id].hide_if_incompatible || false;
-      if (!body2 && settings_store[id].keybind)
-        body2 = keybind(settings_store[id].keybind);
+      if (!body && settings_store[id].keybind)
+        body = keybind(settings_store[id].keybind);
       let disabled = false;
       let disabled_reason = "";
       if (settings_store[id].platforms && !settings_store[id].platforms.includes(page.platform)) {
@@ -40808,7 +40594,7 @@
           let val = settings[id];
           toggle2.setAttribute("aria-checked", !val);
           save_setting(id, !val);
-          if (func) func(val);
+          if (func) func(!val);
         };
         let toggle2;
         const elem = html.node`
@@ -40821,7 +40607,7 @@
                     ${text4 ? html.node`
                     <div class="heading">
                         <h5>${html_title}</h5>
-                        ${body2 ? html.node`<p>${body2}</p>` : ""}
+                        ${body ? html.node`<p>${body}</p>` : ""}
                     </div>
                     ` : ""}
                     ${settings_store[id].extensions ? html.node`
@@ -40845,7 +40631,7 @@
                     ` : ""}
                     ${setting_incompatible_block(settings_store[id].incompatible)}
                     <div class="toggle-wrap">
-                        <button class="toggle" ref=${(el) => toggle2 = el} aria-checked=${value}>
+                        <button class="btn toggle" ref=${(el) => toggle2 = el} aria-checked=${value}>
                             <div class="dot"></div>
                         </button>
                     </div>
@@ -40903,8 +40689,8 @@
                 <div class="setting v2 ${standalone ? "standalone" : ""} ${settings_store[id].vertical ? "v" : ""}" data-type="range" disabled=${disabled} data-hide=${hide_if_incompatible} ref=${(el) => option = el} data-modified=${value != settings_store[id].default}>
                     ${text4 ? html.node`
                     <div class="heading">
-                        <h5>${html_title}<button class="reset" ref=${(el) => reset_btn = el} onclick=${() => reset_range()}>${tl2(trans.reset)}</button></h5>
-                        ${body2 ? html.node`<p>${body2}</p>` : ""}
+                        <h5>${html_title}<button class="btn reset" ref=${(el) => reset_btn = el} onclick=${() => reset_range()}>${tl2(trans.reset)}</button></h5>
+                        ${body ? html.node`<p>${body}</p>` : ""}
                     </div>
                     ` : ""}
                     ${settings_store[id].extensions ? html.node`
@@ -40985,8 +40771,8 @@
                     ` : ""}
                     ${text4 ? html.node`
                     <div class="heading">
-                        <h5>${html_title}<button class="reset" ref=${(el) => reset_btn = el} onclick=${() => reset_text(id, input2, submit, option, reset_btn, avatar2)}>${tl2(trans.reset)}</button></h5>
-                        ${body2 ? html.node`<p>${body2}</p>` : ""}
+                        <h5>${html_title}<button class="btn reset" ref=${(el) => reset_btn = el} onclick=${() => reset_text(id, input2, submit, option, reset_btn, avatar2)}>${tl2(trans.reset)}</button></h5>
+                        ${body ? html.node`<p>${body}</p>` : ""}
                     </div>
                     ` : ""}
                     ${settings_store[id].extensions ? html.node`
@@ -41017,7 +40803,7 @@
                     </div>
                     ` : ""}
                     <div class="input-container content-form in-settings can-submit" data-has-error="false" ref=${(el) => input_container = el}>
-                        <input type="text" maxlength=${max2} value=${value} style="--max: ${max2}px" ref=${(el) => input2 = el} placeholder=${placeholder} />
+                        <input type="text" maxlength=${max2} value=${value} style="--max: ${max2}px; --min: ${min2}px" ref=${(el) => input2 = el} placeholder=${placeholder} />
                         <button class="btn chibi icon submit" ref=${(el) => submit = el} onclick=${() => update_text(id, input2, submit, option, input2.value, reset_btn, avatar2)}>${tl2(trans.save)}</button>
                     </div>
                 </div>
@@ -41118,7 +40904,7 @@
                     ${text4 ? html.node`
                     <div class="heading">
                         <h5>${html_title}</h5>
-                        ${body2 ? html.node`<p>${body2}</p>` : ""}
+                        ${body ? html.node`<p>${body}</p>` : ""}
                     </div>
                     ` : ""}
                     ${settings_store[id].extensions ? html.node`
@@ -41170,32 +40956,33 @@
           return setting_fail(id, {
             message: "Tabs type requires you to either define values in config or pass a list to instance."
           });
-        const tabs = html.node`
-                <div class="view-buttons view-buttons-middle">
-                    ${Object.entries(values).map(
-          ([key, val]) => {
-            const icon2 = val.icon || key;
-            const button2 = html.node`
-                            <button class="btn view-item" data-type=${icon2} data-value=${key} onclick=${() => {
-              save_setting(id, key);
-              buttons.forEach((btn) => {
-                btn.setAttribute(
-                  "aria-checked",
-                  btn.getAttribute("data-value") == key
-                );
-              });
-              if (func) func(key);
-            }} aria-checked=${value == key}>
-                                ${typeof val.name == "object" ? tl2(val.name) : val.name}
-                            </button>
-                        `;
-            buttons.push(button2);
-            return button2;
-          }
-        )}
+        const inner2 = html.node`
+                ${Object.entries(values).map(([key, val]) => {
+          const icon2 = val.icon || key;
+          const button2 = html.node`
+                        <button class="btn view-item" data-type=${icon2} data-value=${key} onclick=${() => {
+            save_setting(id, key);
+            buttons.forEach((btn) => {
+              btn.setAttribute(
+                "aria-checked",
+                btn.getAttribute("data-value") == key
+              );
+            });
+            if (func) func(key);
+          }} aria-checked=${value == key}>
+                            ${typeof val.name == "object" ? tl2(val.name) : val.name}
+                        </button>
+                    `;
+          buttons.push(button2);
+          return button2;
+        })}
+            `;
+        if (standalone) return inner2;
+        return html.node`
+                <div class="view-buttons ${center ? "view-buttons-middle" : ""}">
+                    ${inner2}
                 </div>
             `;
-        return tabs;
       } else if (type == "radio") {
         let update_radio = function(val) {
           save_setting(id, val);
@@ -41227,8 +41014,8 @@
                     ` : ""}
                     ${text4 ? html.node`
                     <div class="heading">
-                        <h5>${html_title}<button class="reset" ref=${(el) => reset_btn = el} onclick=${() => reset_radio()}>${tl2(trans.reset)}</button></h5>
-                        ${body2 ? html.node`<p>${body2}</p>` : ""}
+                        <h5>${html_title}<button class="btn reset" ref=${(el) => reset_btn = el} onclick=${() => reset_radio()}>${tl2(trans.reset)}</button></h5>
+                        ${body ? html.node`<p>${body}</p>` : ""}
                     </div>
                     ` : ""}
                     ${settings_store[id].extensions ? html.node`
@@ -41307,84 +41094,79 @@
               )
             );
           }
-          render(
-            lists,
-            html`
-                        ${current.map((val) => {
-              return html.node`
-                                <button class="setting-list-item current" data-host=${list[val]?.host} onclick=${() => {
-                const new_list = current.filter(
-                  (item) => item != val
-                );
-                save_setting(id, new_list);
-                render_list_items(new_list);
-                if (func) func(new_list);
-              }}>
-                                    ${list[val]?.icon != null ? html.node`
-                                    <div class="bleh-icon" data-type=${list[val].icon} />
-                                    ` : ""}
-                                    <div class="info">
-                                        ${list[val]?.name || val}
-                                        ${list[val]?.new_release ? html.node`<span class="new-badge new">${tl2(trans.new)}</span>` : ""}
-                                    </div>
-                                    <div class="bleh-icon indicator" data-type="minus" />
-                                </button>
-                            `;
-            })}
-                        ${!settings_store[id].predefined ? html.node`
-                            <button class="setting-list-item current" onclick=${() => {
-              let input_box;
-              dialog({
-                id: `add_to_list_${id}`,
-                title,
-                body: html.node`
-                                        ${input_box = input({
-                  focus: true,
-                  func: complete_add,
-                  warn_if_matches_auth: settings_store[id].warn_if_matches_auth,
-                  warn_if_empty: true
-                })}
-                                        <div class="modal-footer">
-                                            <button class="see-more cancel" onclick=${() => dialog_rm({ id: `add_to_list_${id}` })}>
-                                                ${tl2(trans.cancel)}
-                                            </button>
-                                            <div class="fill"></div>
-                                            <button class="btn primary icon" data-type="add" onclick=${() => complete_add(input_box.value())}>
-                                                ${tl2(trans.add)}
-                                            </button>
-                                        </div>
-                                    `
-              });
-              setTimeout(() => {
-                input_box.focus();
-              }, 1);
-              function complete_add(val) {
-                if (val == auth.name || val.length < 1)
-                  return;
-                dialog_rm({ id: `add_to_list_${id}` });
-                const new_list = [...current, val];
-                save_setting(id, new_list);
-                render_list_items(new_list);
-                if (func) func(new_list);
-              }
+          render(lists, html`
+                    ${current.map((val) => {
+            return html.node`
+                            <button class="btn setting-list-item current" data-host=${list[val]?.host} onclick=${() => {
+              const new_list = current.filter(
+                (item) => item != val
+              );
+              save_setting(id, new_list);
+              render_list_items(new_list);
+              if (func) func(new_list);
             }}>
+                                ${list[val]?.icon != null ? html.node`
+                                <div class="bleh-icon" data-type=${list[val].icon} />
+                                ` : ""}
+                                <div class="info">
+                                    ${list[val]?.name || val}
+                                    ${list[val]?.new_release ? html.node`<span class="new-badge new">${tl2(trans.new)}</span>` : ""}
+                                </div>
+                                <div class="bleh-icon indicator" data-type="minus" />
+                            </button>
+                        `;
+          })}
+                    ${!settings_store[id].predefined ? () => {
+            const button2 = html.node`
+                            <button class="btn setting-list-item current">
                                 <div class="info">
                                     ${tl2(trans.add)}
                                 </div>
                                 <div class="bleh-icon indicator" data-type="add" />
                             </button>
-                        ` : ""}
-                        ${settings_store[id].predefined ? html.node`
+                        `;
+            let input_box;
+            const tooltip = tippy_esm_default(button2, {
+              theme: "window",
+              content: html.node`
+                                ${input_box = input({
+                focus: true,
+                func: complete_add,
+                warn_if_matches_auth: settings_store[id].warn_if_matches_auth,
+                warn_if_empty: true
+              })}
+                            `,
+              placement: "bottom",
+              interactive: true,
+              interactiveBorder: 10,
+              trigger: "click",
+              appendTo: document.body,
+              onShow() {
+                input_box.focus();
+              }
+            });
+            function complete_add(val) {
+              if (val == auth.name || val.length < 1)
+                return;
+              tooltip.destroy();
+              const new_list = [...current, val];
+              save_setting(id, new_list);
+              render_list_items(new_list);
+              if (func) func(new_list);
+            }
+            return button2;
+          } : ""}
+                    ${settings_store[id].predefined ? html.node`
                         ${Object.entries(available).map(([val, formal]) => {
-              return html.node`
-                                <button class="setting-list-item" data-host=${formal.host} onclick=${() => {
-                const new_list = [...current, val];
-                save_setting(id, new_list);
-                render_list_items(new_list);
-                if (func) func(new_list);
-              }}>
-                                    ${formal.icon != null ? html.node`
-                                    <div class="bleh-icon" data-type=${formal.icon} />
+            return html.node`
+                                <button class="btn setting-list-item" data-host=${formal.host} onclick=${() => {
+              const new_list = [...current, val];
+              save_setting(id, new_list);
+              render_list_items(new_list);
+              if (func) func(new_list);
+            }}>
+                                    ${formal.icon ? html.node`
+                                        <div class="bleh-icon" data-type=${formal.icon} />
                                     ` : ""}
                                     <div class="info">
                                         ${formal.name}
@@ -41393,10 +41175,9 @@
                                     <div class="bleh-icon indicator" data-type="add" />
                                 </button>
                             `;
-            })}
+          })}
                     ` : ""}
-                    `
-          );
+                `);
         };
         if (!list && settings_store[id].predefined)
           return setting_fail(id, {
@@ -41413,7 +41194,7 @@
                     ${text4 ? html.node`
                     <div class="heading">
                         <h5>${html_title}</h5>
-                        ${body2 ? html.node`<p>${body2}</p>` : ""}
+                        ${body ? html.node`<p>${body}</p>` : ""}
                     </div>
                     ` : ""}
                     <div class="setting-lists" ref=${(el) => lists = el} />
@@ -41436,7 +41217,13 @@
         render_list_items(value);
         return elem;
       } else if (type == "select") {
-        let update_select = function(val) {
+        let render_select = function(use_list = list, use_value = value) {
+          render(select_hook, html`
+                    ${menu = select(use_list, use_value, "", (val) => {
+            update_select(val);
+          })}
+                `);
+        }, update_select = function(val) {
           if (!elem) return;
           save_setting(id, val);
           elem.setAttribute(
@@ -41457,9 +41244,9 @@
         if (func) func(value);
         let reset_btn;
         let menu;
-        if (list.length === 0) disabled = true;
-        let elem;
-        elem = html.node`
+        if (list.length == 0) disabled = true;
+        let select_hook;
+        let elem = html.node`
                 <div class="setting v2" data-type="options" disabled=${disabled} data-hide=${hide_if_incompatible} data-modified=${value != settings_store[id].default}>
                     ${icon ? html.node`
                     <div class="icon">
@@ -41468,8 +41255,8 @@
                     ` : ""}
                     ${text4 ? html.node`
                     <div class="heading">
-                        <h5>${html_title}<button class="reset" ref=${(el) => reset_btn = el} onclick=${() => reset_select()}>${tl2(trans.reset)}</button></h5>
-                        ${body2 ? html.node`<p>${body2}</p>` : ""}
+                        <h5>${html_title}<button class="btn reset" ref=${(el) => reset_btn = el} onclick=${() => reset_select()}>${tl2(trans.reset)}</button></h5>
+                        ${body ? html.node`<p>${body}</p>` : ""}
                     </div>
                     ` : ""}
                     ${settings_store[id].extensions ? html.node`
@@ -41492,11 +41279,14 @@
                     </div>
                     ` : ""}
                     ${setting_incompatible_block(settings_store[id].incompatible)}
-                    ${menu = select(list, value, "", (val) => {
-          update_select(val);
-        })}
+                    <div class="select-hook" ref=${(el) => select_hook = el} />
                 </div>
             `;
+        render_select();
+        elem.update = (new_list) => {
+          const new_value = settings[id];
+          render_select(new_list, new_value);
+        };
         elem.compat = () => {
           if (!incompatible_with) return;
           elem.setAttribute("disabled", "false");
@@ -41662,8 +41452,11 @@
   }
   function compile_settings() {
     let clone6 = structuredClone(settings);
+    for (let s2 in clone6) {
+      console.log("settings marin before loop", s2, clone6[s2], typeof clone6[s2]);
+    }
     for (let setting2 in clone6) {
-      if (settings_store[setting2] && JSON.stringify(clone6[setting2]) == JSON.stringify(settings_store[setting2].default) && setting2 != "version") {
+      if (settings_store[setting2] && JSON.stringify(clone6[setting2]) === JSON.stringify(settings_store[setting2].default) && setting2 != "version") {
         log(
           `dropped ${setting2} as value matches default`,
           "settings",
@@ -41677,6 +41470,9 @@
       }
     }
     clone6.version = version.build;
+    for (let s2 in clone6) {
+      console.log("settings marin before stringify", s2, clone6[s2], typeof clone6[s2]);
+    }
     set_storage("bleh", JSON.stringify(clone6));
     return clone6;
   }
@@ -41686,7 +41482,7 @@
     if (!skip2) {
       for (let setting2 in settings_store) {
         if (settings[setting2] == null)
-          settings[setting2] = settings_store[setting2].default;
+          settings[setting2] = structuredClone(settings_store[setting2].default);
       }
       if (!settings.version) settings.version = 1e7;
     }
@@ -41712,6 +41508,16 @@
         settings.font_weight_medium = settings_store.font_weight_medium.default;
       if (settings.font_weight_bold == 730 || settings.font_weight_bold == 760 || settings.font_weight_bold == 680)
         settings.font_weight_bold = settings_store.font_weight_bold.default;
+    }
+    if (settings.version < 2026.0201) {
+      if (settings.noise == 0.5) settings.noise = settings_store.noise.default;
+    }
+    if (Number.isInteger(settings.list_view)) {
+      if (settings.list_view == 0) {
+        settings.list_view = "list";
+      } else {
+        settings.list_view = "cards";
+      }
     }
     if (settings.profile_shortcut) {
       settings.friends = [settings.profile_shortcut];
@@ -42096,39 +41902,14 @@
     }
     if (!ff("glacier_library")) return;
     if (settings.glacier_library_graphs && date_items.length > 0) {
-      let chart_view_selector = document.createElement("div");
-      chart_view_selector.classList.add(
-        "view-buttons",
-        "chart-view-selector",
-        "view-buttons-middle"
-      );
-      chart_view_selector.innerHTML = `
-            <button class="btn view-item" id="toggle-chart_view-line" data-toggle="chart_view" data-toggle-value="line" onclick="_update_item('chart_view', 'line')">
-                ${tl2(trans.line)}
-            </button>
-            <button class="btn view-item" id="toggle-chart_view-pie" data-toggle="chart_view" data-toggle-value="pie" onclick="_update_item('chart_view', 'pie')">
-                ${tl2(trans.pie)}
-            </button>
-            <button class="btn view-item" id="toggle-chart_view-bar" data-toggle="chart_view" data-toggle-value="bar" onclick="_update_item('chart_view', 'bar')">
-                ${tl2(trans.bar)}
-            </button>
-        `;
-      page.structure.glacier.selector.after(chart_view_selector);
-      let chart_axis_selector = document.createElement("div");
-      chart_axis_selector.classList.add(
-        "view-buttons",
-        "chart-axis-selector",
-        "view-buttons-middle"
-      );
-      chart_axis_selector.innerHTML = `
-            <button class="btn view-item" id="toggle-chart_bar_axis-horizontal" data-toggle="chart_bar_axis" data-toggle-value="horizontal" onclick="_update_item('chart_bar_axis', 'horizontal')">
-                ${tl2(trans.horizontal)}
-            </button>
-            <button class="btn view-item" id="toggle-chart_bar_axis-vertical" data-toggle="chart_bar_axis" data-toggle-value="vertical" onclick="_update_item('chart_bar_axis', 'vertical')">
-                ${tl2(trans.vertical)}
-            </button>
-        `;
-      chart_view_selector.after(chart_axis_selector);
+      page.structure.glacier.selector.after(html.node`
+            <div class="view-buttons chart-view-selector view-buttons-middle">
+                ${setting({ id: "chart_view", standalone: true, func: bleh_glacier_date_graph_generate })}
+            </div>
+            <div class="view-buttons chart-axis-selector view-buttons-middle">
+                ${setting({ id: "chart_bar_axis", standalone: true, func: bleh_glacier_date_graph_generate })}
+            </div>
+        `);
       refresh_all(page.structure.glacier.date_panel);
     }
     if (date_items.length > 0) bleh_glacier_library_date();
@@ -42202,7 +41983,7 @@
     );
     if (old_date_btn) old_date_btn.remove();
     let date_btn = html.node`
-        <button class="date-range-picker-button">${button2.querySelector(".date-range-picker-button-inner").textContent}</button>
+        <button class="btn date-range-picker-button">${button2.querySelector(".date-range-picker-button-inner").textContent}</button>
     `;
     date_picker.appendChild(date_btn);
     let picker_content = page.structure.glacier.date_panel.querySelector(
@@ -42826,9 +42607,7 @@
     });
     prep_chart_colours();
     let new_run = false;
-    let scrobble_canvas_container = page.structure.glacier.date_panel.querySelector(
-      ".scrobble-canvas-container"
-    );
+    let scrobble_canvas_container = page.structure.glacier.date_panel.querySelector(".scrobble-canvas-container");
     if (scrobble_canvas_container == null) {
       scrobble_canvas_container = document.createElement("div");
       scrobble_canvas_container.classList.add("scrobble-canvas-container");
@@ -42838,6 +42617,7 @@
     }
     let scrobble_canvas = document.createElement("canvas");
     scrobble_canvas.classList.add("scrobble-canvas");
+    scrobble_canvas_container.setAttribute("data-view", settings.chart_view);
     Chart.defaults.color = page.state.chart_colours.text_col;
     Chart.defaults.font.family = page.state.chart_colours.font;
     if (settings.chart_view == "line") {
@@ -43589,6 +43369,10 @@
       image_details.querySelector("[data-image-url]").appendChild(description);
     }
     let buttons = image_details.querySelector(".gallery-image-buttons");
+    buttons.querySelectorAll("button").forEach((btn) => {
+      btn.classList.add("btn");
+      btn.removeAttribute("title");
+    });
     let button_container = document.createElement("div");
     button_container.classList.add("button-container-wrapper");
     button_container.appendChild(buttons);
@@ -43622,7 +43406,7 @@
     button_container.appendChild(buttons_extra);
     image_details.appendChild(button_container);
     let open_button = html.node`
-        <button class="image-open-button" onclick=${() => expand_gallery_image()}>
+        <button class="btn image-open-button" onclick=${() => expand_gallery_image()}>
             ${tl2(trans.expand)}
         </button>
     `;
@@ -43631,29 +43415,32 @@
     });
     buttons_extra.appendChild(open_button);
     let share_button = html.node`
-        <button class="image-share-button" onclick=${() => share(window.location.href)}>
+        <button class="btn image-share-button" onclick=${() => share(window.location.href)}>
             ${tl2(trans.share)}
         </button>
     `;
     buttons_extra.appendChild(share_button);
     share_button.after(create_divider());
     let delete_button = image_details.querySelector(".gallery-image-delete");
-    if (delete_button) buttons_extra.appendChild(delete_button);
-    let report_button = image_details.querySelector(
-      ".gallery-image-report-form"
-    );
-    let report_text = report_button.querySelector("button");
-    tippy_esm_default(report_text, {
-      content: report_text.textContent
+    if (delete_button) {
+      delete_button.querySelector("button").classList = "btn";
+      buttons_extra.appendChild(delete_button);
+    }
+    const report_form = image_details.querySelector(".gallery-image-report-form");
+    const report = report_form.querySelector("button");
+    report.classList.add("btn");
+    tippy_esm_default(report, {
+      content: report.textContent
     });
-    report_text.textContent = tl2(trans.report);
-    buttons_extra.appendChild(report_button);
-    let star_buttons = image_details.querySelectorAll(
-      ".gallery-image-preferred-button :is(button, a)"
-    );
+    report.textContent = tl2(trans.report);
+    const reported = report_form.querySelector(".gallery-image-report--reported");
+    reported.classList.add("btn");
+    buttons_extra.appendChild(report_form);
+    let star_buttons = image_details.querySelectorAll(".gallery-image-preferred-button :is(button, a)");
     star_buttons.forEach((star_button) => {
+      star_button.classList.add("btn");
       star_button.removeAttribute("title");
-      let text4 = star_button.querySelector(".gallery-image-preferred-states");
+      const text4 = star_button.querySelector(".gallery-image-preferred-states");
       text4.textContent = tl2(trans.star);
     });
     let view_all_container = page.structure.main.querySelector(
@@ -43752,7 +43539,7 @@
             ${alert2}
             <form method="post" action=${form.getAttribute("action")} enctype=${form.getAttribute("enctype")}>
                 ${token}
-                <div style="display: none">
+                <div class="hidden-file-input">
                     ${file_input}
                 </div>
                 <div class="setting-group">
@@ -44002,7 +43789,7 @@
       }
     }
     const save_btn = html.node`
-        <button class="bleh--gallery-bookmark-image-btn btn--has-icon" data-bleh--image-is-bookmarked=${image_is_bookmarked} onclick=${() => update_image_bookmark(save_btn, focused_image_id)}>
+        <button class="btn bleh--gallery-bookmark-image-btn btn--has-icon" data-bleh--image-is-bookmarked=${image_is_bookmarked} onclick=${() => update_image_bookmark(save_btn, focused_image_id)}>
             ${tl2(trans.save)}
         </button>
     `;
@@ -44149,8 +43936,8 @@
             <div class="about-artist-panel">
                 <div class="avatar-side">
                     ${avatar2 ? html.node`
-                    <img src=${avatar2.getAttribute("src")}>
-                    <a onclick=${() => expand_avatar(avatar2.getAttribute("src").replace("/300x300/", "/ar0/"))} class="bleh--avatar-clickable-link"></a>
+                    <img src=${avatar2.src.replace("/300x300/", "/500x500/")}>
+                    <a onclick=${() => expand_avatar(avatar2.src.replace("/300x300/", "/ar0/"))} class="bleh--avatar-clickable-link"></a>
                 ` : html.node`
                     <img class="missing-artist">
                 `}
@@ -44390,13 +44177,7 @@
       bleh_music_page_charts();
       bleh_about_artist();
       bleh_tags_mini();
-      let similar_tracks = page.structure.main.querySelector(
-        ".track-similar-tracks"
-      );
-      if (similar_tracks) {
-        let similar_panel = similar_tracks.parentElement;
-        similar_panel.classList.add("similar-panel");
-      }
+      similar_items();
     } else {
       let btn_add = page.structure.side.querySelector(".add-button");
       if (btn_add != null)
@@ -44550,7 +44331,7 @@
     if (page.type == "track" && page.subpage == "overview") {
       releases_panel = html.node`
             <section class="oracle-releases">
-                <h3 class="text-18">${tl2(trans.releases)}</h3>
+                <h3 class="text-18">${tl2(trans.albums)}</h3>
                 <div class="source-albums">
                     <div class="source-album oracle-loading">
                         <div class="source-album-art">
@@ -44580,6 +44361,32 @@
             </section>
         `;
       info_panel.after(releases_panel);
+    } else if (page.type == "track" && page.subpage == "albums") {
+      const no_data = page.structure.main.querySelector(".no-data-message");
+      if (no_data) no_data.remove();
+      const explainer = page.structure.main.querySelector(":scope > p");
+      if (explainer) explainer.remove();
+      releases_panel = html.node`
+            <section class="oracle-releases-full">
+                <h3 class="text-18">${tl2(trans.albums)}</h3>
+                <div class="resource-list--release-list">
+                    <div class="resource-list--release-list-item-wrap">
+                        <div class="resource-list--release-list-item oracle-loading">
+                            <h3 class="resource-list--release-list-item-name oracle-loading" />
+                            <p class="resource-list--release-list-item-artist oracle-loading" />
+                            <p class="resource-list--release-list-item-aux-text resource-list--release-list-item-listeners oracle-stats oracle-loading" />
+                            <p class="resource-list--release-list-item-aux-text oracle-loading" />
+                            <div class="media-item">
+                                <span class="resource-list--release-list-item-image cover-art oracle-loading">
+                                    <img class="empty">
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        `;
+      page.structure.main.appendChild(releases_panel);
     } else if (page.type == "album" && page.subpage == "overview") {
       let source_own_tracklist = function() {
         fetch(`${root}user/${auth.name}/library/music/${page.sister}/${page.name}`).then((res) => {
@@ -44612,6 +44419,12 @@
       }, true)}
                     </div>
                     <div class="view-buttons blend blend-v2">
+                        <p class="blend-text">${tl2(trans.are_these_results_accurate)}</p>
+                        <button class="left-icon blend-v2-btn mark-incorrect" data-type="dislike" onclick=${() => {
+        report_incorrect();
+      }}>
+                            ${tl2(trans.report_incorrect)}
+                        </button>
                         ${() => {
         const btn = html.node`
                                 <button class="left-icon blend-v2-btn" data-type="settings">
@@ -44764,7 +44577,7 @@
       page.state.oracle_debug.artist = artist_data;
       log("using artist data", "oracle", "info", { artist_data });
       if (page.type == "track")
-        url = `https://musicbrainz.org/ws/2/recording?query="${sanitise(clean_title(page.name), " ")}" AND ${artist_template} AND status:Official`;
+        url = `https://musicbrainz.org/ws/2/recording?inc=release-events&query="${sanitise(clean_title(page.name), " ")}" AND ${artist_template} AND status:Official`;
       else if (page.type == "album")
         url = `https://musicbrainz.org/ws/2/release?query=release:"${sanitise(clean_title(page.name), " ")}" AND ${artist_template}`;
       if (page.type == "album") {
@@ -45223,11 +45036,19 @@
           render(
             releases_panel,
             html`
-                        <h3 class="text-18">
-                            ${tl2(trans.releases)}<span class="new-badge beta"
-                                >${tl2(trans.beta)}</span
-                            >
-                        </h3>
+                        <div class="top-container">
+                            <h3 class="text-18">
+                                ${tl2(trans.albums)}<span class="new-badge beta">${tl2(trans.beta)}</span>
+                            </h3>
+                            <div class="view-buttons blend blend-v2">
+                                <p class="blend-text">${tl2(trans.are_these_results_accurate)}</p>
+                                <button class="left-icon blend-v2-btn mark-incorrect" data-type="dislike" onclick=${() => {
+              report_incorrect();
+            }}>
+                                    ${tl2(trans.report_incorrect)}
+                                </button>
+                            </div>
+                        </div>
                         <div class="loading-data-container">
                             <div class="loading-data-text failed">
                                 ${tl2(trans.no_releases_found)}
@@ -45374,132 +45195,173 @@
           releases
         });
         const allow_overflow = false;
+        if (page.subpage == "overview") releases = releases.slice(0, 2);
         let source_albums;
         if (releases_panel) {
-          render(
-            releases_panel,
-            html`
+          render(releases_panel, html`
+                    <div class="top-container">
                         <h3 class="text-18">
-                            ${tl2(trans.releases)}<span class="new-badge beta"
-                                >${tl2(trans.beta)}</span
-                            >
+                            ${tl2(trans.albums)}<span class="new-badge beta">${tl2(trans.beta)}</span>
                         </h3>
-                        <div class="source-albums-container">
-                            <div class="source-albums">
-                                ${releases.map((release, index3) => {
-              if (index3 > 1) return html.node``;
-              log("release", "oracle", "log", {
-                release
-              });
-              let title = release.title;
-              const artist2 = fix_title(
-                oracle_aliases(
-                  release["artist-credit"]?.[0] || recording["artist-credit"][0],
-                  page.sister
-                )
+                        <div class="view-buttons blend blend-v2">
+                            <p class="blend-text">${tl2(trans.are_these_results_accurate)}</p>
+                            <button class="left-icon blend-v2-btn mark-incorrect" data-type="dislike" onclick=${() => {
+            report_incorrect();
+          }}>
+                                ${tl2(trans.report_incorrect)}
+                            </button>
+                        </div>
+                    </div>
+                    <div class="${page.subpage == "overview" ? "source-albums-container" : "resource-list-container"}">
+                        <div class="${page.subpage == "overview" ? "source-albums" : "resource-list--release-list"}">
+                            ${releases.map((release, index3) => {
+            log("release", "oracle", "log", {
+              release
+            });
+            let title = release.title;
+            const artist2 = fix_title(
+              oracle_aliases(
+                release["artist-credit"]?.[0] || recording["artist-credit"][0],
+                page.sister
+              )
+            );
+            const types = {
+              album: tl2(trans.album),
+              single: tl2(trans.single),
+              ep: "EP",
+              other: tl2(trans.other)
+            };
+            let type = release["release-group"]["primary-type"];
+            if (type && type.toLowerCase() in types)
+              type = types[type.toLowerCase()];
+            const match3 = lastfm_releases.find(
+              (r) => r.title == title && r.artist == artist2
+            );
+            let plays = 0;
+            let artwork;
+            if (match3) {
+              plays = match3.plays;
+              artwork = match3.artwork;
+            }
+            let artwork_container;
+            let stats;
+            let title_elem;
+            let artist_elem2;
+            if (settings.format_guest_features) {
+              const formatted = name_includes(
+                title,
+                artist2
               );
-              const types = {
-                album: tl2(trans.album),
-                single: tl2(trans.single),
-                ep: "EP",
-                other: tl2(trans.other)
-              };
-              let type = release["release-group"]["primary-type"];
-              if (type && type.toLowerCase() in types)
-                type = types[type.toLowerCase()];
-              const match3 = lastfm_releases.find(
-                (r) => r.title == title && r.artist == artist2
-              );
-              let plays = 0;
-              let artwork;
-              if (match3) {
-                plays = match3.plays;
-                artwork = match3.artwork;
-              }
-              let artwork_container;
-              let stats;
-              let title_elem;
-              let artist_elem2;
-              if (settings.format_guest_features) {
-                const formatted = name_includes(
+              title_elem = html.node`<a class="smart-title">${smart_title(formatted[0], formatted[1])}</a>`;
+              artist_elem2 = html.node`${smart_artists(formatted[2], formatted[3])}`;
+            } else {
+              title_elem = romanise(
+                correct_item_by_artist(
                   title,
                   artist2
-                );
-                title_elem = html.node`<a class="smart-title">${smart_title(formatted[0], formatted[1])}</a>`;
-                artist_elem2 = html.node`${smart_artists(formatted[2], formatted[3])}`;
-              } else {
-                title_elem = romanise(
-                  correct_item_by_artist(
-                    title,
-                    artist2
-                  )
-                );
-                artist_elem2 = romanise(
-                  correct_artist(artist2)
-                );
-              }
-              const elem = html.node`
+                )
+              );
+              artist_elem2 = romanise(
+                correct_artist(artist2)
+              );
+            }
+            let elem;
+            if (page.subpage == "overview") {
+              elem = html.node`
                                         <div class="source-album js-link-block link-block-cover-link">
                                             <div class="source-album-art" ref=${(el) => artwork_container = el}>
                                                 ${artwork ? html.node`
-                                                            <span class="cover-art">
-                                                                <img src=${artwork} alt=${title}>
-                                                            </span>
-                                                        ` : html.node`
-                                                        <span class="cover-art">
-                                                            <img class="missing-album" />
-                                                        </span>
-                                                    `}
+                                                    <span class="cover-art">
+                                                        <img src=${artwork} alt=${title}>
+                                                    </span>
+                                                ` : html.node`
+                                                    <span class="cover-art">
+                                                        <img class="missing-album" />
+                                                    </span>
+                                                `}
                                             </div>
                                             <div class="source-album-details" data-kate-processed="true">
                                                 <h4 class="source-album-name">${title_elem}</h4>
                                                 <p class="source-album-artist">${artist_elem2}</p>
                                                 <p class="source-album-stats oracle-stats" ref=${(el) => stats = el}>
-                                                    ${type}
+                                                    <span class="type">${type}</span>
                                                     ${match3 ? html.node`
-                                                                <span class="plays">
-                                                                    <span class="bleh-icon" />
-                                                                    ${plays.toLocaleString(lang)}
-                                                                </span>
-                                                            ` : ""}
+                                                        <span class="plays">
+                                                            <span class="bleh-icon" />
+                                                            ${plays.toLocaleString(lang)}
+                                                        </span>
+                                                    ` : ""}
                                                 </p>
                                                 <a class="js-link-block-cover-link link-block-cover-link" href="${root}music/${sanitise(artist2)}/${sanitise(title)}" tabindex="-1" aria-hidden="true" />
                                             </div>
                                         </div>
                                     `;
-              if (index3 == 0) {
-                cache2.track.name = title;
-                cache2.track.sister = artist2;
-                cache2.track.link = `${root}music/${sanitise(artist2)}/${sanitise(title)}`;
-                if (artwork) {
-                  create_avatar(
-                    page.state.avatar_side,
-                    artwork,
-                    page.state.avatar_side_override
-                  );
-                  save_hoshino_artwork(
-                    artwork,
-                    title,
-                    artist2,
-                    plays
-                  );
-                }
-              }
-              if (!artwork && index3 < 2)
-                load_cover_art(
-                  artwork_container,
+            } else {
+              elem = html.node`
+                                        <div class="resource-list--release-list-item-wrap">
+                                            <div class="resource-list--release-list-item js-link-block">
+                                                <h3 class="resource-list--release-list-item-name">${title_elem}</h3>
+                                                <p class="resource-list--release-list-item-artist">${artist_elem2}</p>
+                                                <p class="resource-list--release-list-item-aux-text resource-list--release-list-item-listeners oracle-stats" ref=${(el) => stats = el}>
+                                                    <span class="type">${type}</span>
+                                                    ${match3 ? html.node`
+                                                        <span class="plays">
+                                                            <span class="bleh-icon" />
+                                                            ${plays.toLocaleString(lang)}
+                                                        </span>
+                                                    ` : ""}
+                                                </p>
+                                                <p class="resource-list--release-list-item-aux-text">
+                                                    ${tl2(trans.count_tracks, { c: release["track-count"] })}
+                                                </p>
+                                                <div class="media-item" ref=${(el) => artwork_container = el}>
+                                                    ${artwork ? html.node`
+                                                        <span class="resource-list--release-list-item-image cover-art">
+                                                            <img src=${artwork} alt=${title}>
+                                                        </span>
+                                                    ` : html.node`
+                                                        <span class="resource-list--release-list-item-image cover-art">
+                                                            <img class="missing-album" />
+                                                        </span>
+                                                    `}
+                                                </div>
+                                                <a class="js-link-block-cover-link link-block-cover-link" href="${root}music/${sanitise(artist2)}/${sanitise(title)}" tabindex="-1" aria-hidden="true" />
+                                            </div>
+                                        </div>
+                                    `;
+            }
+            if (index3 == 0) {
+              cache2.track.name = title;
+              cache2.track.sister = artist2;
+              cache2.track.link = `${root}music/${sanitise(artist2)}/${sanitise(title)}`;
+              if (artwork) {
+                create_avatar(
+                  page.state.avatar_side,
+                  artwork,
+                  page.state.avatar_side_override
+                );
+                save_hoshino_artwork(
+                  artwork,
                   title,
                   artist2,
-                  stats,
-                  type,
-                  index3
+                  plays
                 );
-              return elem;
-            })}
-                            </div>
+              }
+            }
+            if (!artwork && index3 < 2)
+              load_cover_art(
+                artwork_container,
+                title,
+                artist2,
+                stats,
+                type,
+                index3
+              );
+            return elem;
+          })}
                         </div>
-                    `
-          );
+                    </div>
+                `);
           oracle_save_cache("track", false);
         }
         const artist_elem = header.querySelector("h2");
@@ -45515,7 +45377,7 @@
         if (releases_panel) {
           render(releases_panel, html`
                     <h3 class="text-18">
-                        ${tl2(trans.releases)}<span class="new-badge beta"
+                        ${tl2(trans.albums)}<span class="new-badge beta"
                             >${tl2(trans.beta)}</span
                         >
                     </h3>
@@ -45967,6 +45829,96 @@
       set_storage("bleh_oracle_cache", JSON.stringify(oracle));
     }
   }
+  function report_incorrect() {
+    if (settings.tracklist_source != "oracle" && page.type == "album")
+      return;
+    let title = `${correct_artist(page.sister)} - ${correct_item_by_artist(page.name, page.sister)}`;
+    let link = window.location.href;
+    let sources;
+    let template;
+    if (page.type == "track") {
+      template = "1-incorrect-albums-assigned-to-track.yml";
+    } else {
+      template = "2-incorrect-album-listing.yml";
+    }
+    dialog({
+      id: "oracle_correction",
+      title: tl2(trans.suggest_correction),
+      body: html.node`
+            <div class="new-scrobble-form">
+                <p class="generic-label">${tl2(trans.what_did_you_expect)}</p>
+                ${sources = input({
+        type: "textarea"
+      })}
+                <p class="form-tip">${tl2(trans[`oracle_sources_tip_${page.type}`])}</p>
+            </div>
+            <div class="modal-footer">
+                <button class="see-more cancel" onclick=${() => dialog_rm({ id: "oracle_correction" })}>
+                    ${tl2(trans.cancel)}
+                </button>
+                <div class="fill" />
+                <button class="btn primary continue" onclick=${() => {
+        open(
+          `https://github.com/katelyynn/oracle/issues/new?template=${template}&title=${sanitise(title, " ")}&link=${encodeURIComponent(link)}&sources=${sanitise(sources.value(), " ")}`
+        );
+      }}>
+                    ${tl2(trans.suggest)}
+                </button>
+            </div>
+        `
+    });
+  }
+
+  // src/pages/users.js
+  function bleh_users() {
+    const users2 = page.structure.main?.querySelectorAll(".user-list-item:not(.user-list-item-mobile-ad)");
+    users2.forEach((user, index3) => {
+      patch_user_list_item(user, index3);
+    });
+  }
+  function patch_user_list_item(user, index3) {
+    user.style.setProperty("--delay", index3 * 0.04 + "s");
+    let avatar2 = user.querySelector(".user-list-avatar");
+    let name = user.querySelector(".user-list-link");
+    const badge = patch_avatar(avatar2, name.textContent, "follow");
+    style_name_from_badge(name, badge);
+    let artists = user.querySelectorAll(".user-list-shared-artists a");
+    artists.forEach((artist) => {
+      artist.textContent = correct_artist(artist.textContent);
+    });
+    const md = user.querySelector(".user-list-about-me");
+    log("patching", "user", "info", { user, name: name?.textContent, md });
+    if (name) {
+      name.textContent = name.textContent.trim();
+      name.insertBefore(html.node`<span class="at">@</span>`, name.firstChild);
+    }
+    if (md) {
+      md.textContent = md.textContent.replace(/(?<!\!)\[[^\]]*\]/g, "");
+      md.textContent = md.textContent.replace(/^!\[[\s\S]*?…$/gm, "\u2026");
+      render(
+        md,
+        markdown(md.textContent, {
+          allow_headers: false,
+          line_breaks: false,
+          allow_lists: false
+        })
+      );
+    }
+    const is_followed = user.querySelector(".user-follow");
+    user.setAttribute("data-is-followed", is_followed != null);
+    const follow = user.querySelector(".toggle-button");
+    if (follow) {
+      follow.classList.add("btn");
+    }
+    const img = avatar2.querySelector("img");
+    if (!img.src.endsWith("818148bf682d429dc215c1705eb27b98.png")) {
+      user.appendChild(html.node`
+            <div class="user-background" style="background-image: url(${img.src.replace("/avatar70s/", "/avatar300s/")})" />
+        `);
+    }
+    img.src = img.src.replace("/avatar70s/", "/avatar170s/");
+    return user;
+  }
 
   // src/components/music.js
   unsafeWindow._other_listener = function(id) {
@@ -45992,53 +45944,53 @@
         tabs.appendChild(html.node`
                 <ul class="navlist-items">
                     <li class="navlist-item secondary-nav-item secondary-nav-item--overview">
-                        <a class="secondary-nav-item-link secondary-nav-item-link--active" href="${window.location.href}">
+                        <a class="secondary-nav-item-link secondary-nav-item-link--active" href="${window.location.pathname}">
                             ${tl2(trans.home)}
                         </a>
                     </li>
                     <li class="navlist-item secondary-nav-item secondary-nav-item--tracks">
-                        <a class="secondary-nav-item-link" href="${window.location.href}/+tracks">
+                        <a class="secondary-nav-item-link" href="${window.location.pathname}/+tracks">
                             ${tl2(trans.tracks)}
                         </a>
                     </li>
                     <li class="navlist-item secondary-nav-item secondary-nav-item--albums">
-                        <a class="secondary-nav-item-link" href="${window.location.href}/+albums">
+                        <a class="secondary-nav-item-link" href="${window.location.pathname}/+albums">
                             ${tl2(trans.albums)}
                         </a>
                     </li>
                     ${!page_is_blocked ? html.node`
                     <li class="navlist-item secondary-nav-item secondary-nav-item--images">
-                        <a class="secondary-nav-item-link" href="${window.location.href}/+images">
+                        <a class="secondary-nav-item-link" href="${window.location.pathname}/+images">
                             ${tl2(trans.photos)}
                         </a>
                     </li>
                     <li class="navlist-item secondary-nav-item secondary-nav-item--similar">
-                        <a class="secondary-nav-item-link" href="${window.location.href}/+similar">
+                        <a class="secondary-nav-item-link" href="${window.location.pathname}/+similar">
                             ${tl2(trans.similar_artists)}
                         </a>
                     </li>
                     <li class="navlist-item secondary-nav-item secondary-nav-item--wiki">
-                        <a class="secondary-nav-item-link" href="${window.location.href}/+wiki">
+                        <a class="secondary-nav-item-link" href="${window.location.pathname}/+wiki">
                             ${tl2(trans.biography)}
                         </a>
                     </li>
                     <li class="navlist-item secondary-nav-item secondary-nav-item--listeners">
-                        <a class="secondary-nav-item-link" href="${window.location.href}/+listeners">
+                        <a class="secondary-nav-item-link" href="${window.location.pathname}/+listeners">
                             ${tl2(trans.listeners)}
                         </a>
                     </li>
                     <li class="navlist-item secondary-nav-item secondary-nav-item--shoutbox">
-                        <a class="secondary-nav-item-link" href="${window.location.href}/+shoutbox">
+                        <a class="secondary-nav-item-link" href="${window.location.pathname}/+shoutbox">
                             ${tl2(trans.shouts)}
                         </a>
                     </li>
                     <li class="navlist-item secondary-nav-item secondary-nav-item--events">
-                        <a class="secondary-nav-item-link" href="${window.location.href}/+events">
+                        <a class="secondary-nav-item-link" href="${window.location.pathname}/+events">
                             ${tl2(trans.events)}
                         </a>
                     </li>
                     <li class="navlist-item secondary-nav-item secondary-nav-item--tags">
-                        <a class="secondary-nav-item-link" href="${window.location.href}/+tags">
+                        <a class="secondary-nav-item-link" href="${window.location.pathname}/+tags">
                             ${tl2(trans.tags)}
                         </a>
                     </li>
@@ -46049,28 +46001,28 @@
         tabs.appendChild(html.node`
                 <ul class="navlist-items">
                     <li class="navlist-item secondary-nav-item secondary-nav-item--overview">
-                        <a class="secondary-nav-item-link secondary-nav-item-link--active" href="${window.location.href}">
+                        <a class="secondary-nav-item-link secondary-nav-item-link--active" href="${window.location.pathname}">
                             ${tl2(trans.home)}
                         </a>
                     </li>
                     ${!page_is_blocked ? html.node`
                     <li class="navlist-item secondary-nav-item secondary-nav-item--wiki">
-                        <a class="secondary-nav-item-link" href="${window.location.href}/+wiki">
+                        <a class="secondary-nav-item-link" href="${window.location.pathname}/+wiki">
                             ${tl2(trans.wiki)}
                         </a>
                     </li>
                     <li class="navlist-item secondary-nav-item secondary-nav-item--images">
-                        <a class="secondary-nav-item-link" href="${window.location.href}/+images">
+                        <a class="secondary-nav-item-link" href="${window.location.pathname}/+images">
                             ${tl2(trans.artwork)}
                         </a>
                     </li>
                     <li class="navlist-item secondary-nav-item secondary-nav-item--shoutbox">
-                        <a class="secondary-nav-item-link" href="${window.location.href}/+shoutbox">
+                        <a class="secondary-nav-item-link" href="${window.location.pathname}/+shoutbox">
                             ${tl2(trans.shouts)}
                         </a>
                     </li>
                     <li class="navlist-item secondary-nav-item secondary-nav-item--tags">
-                        <a class="secondary-nav-item-link" href="${window.location.href}/+tags">
+                        <a class="secondary-nav-item-link" href="${window.location.pathname}/+tags">
                             ${tl2(trans.tags)}
                         </a>
                     </li>
@@ -46081,28 +46033,28 @@
         tabs.appendChild(html.node`
                 <ul class="navlist-items">
                     <li class="navlist-item secondary-nav-item secondary-nav-item--overview">
-                        <a class="secondary-nav-item-link secondary-nav-item-link--active" href="${window.location.href}">
+                        <a class="secondary-nav-item-link secondary-nav-item-link--active" href="${window.location.pathname}">
                             ${tl2(trans.home)}
                         </a>
                     </li>
                     <li class="navlist-item secondary-nav-item secondary-nav-item--albums">
-                        <a class="secondary-nav-item-link" href="${window.location.href}/+albums">
+                        <a class="secondary-nav-item-link" href="${window.location.pathname}/+albums">
                             ${tl2(trans.albums)}
                         </a>
                     </li>
                     ${!page_is_blocked ? html.node`
                     <li class="navlist-item secondary-nav-item secondary-nav-item--wiki">
-                        <a class="secondary-nav-item-link" href="${window.location.href}/+wiki">
+                        <a class="secondary-nav-item-link" href="${window.location.pathname}/+wiki">
                             ${tl2(trans.wiki)}
                         </a>
                     </li>
                     <li class="navlist-item secondary-nav-item secondary-nav-item--shoutbox">
-                        <a class="secondary-nav-item-link" href="${window.location.href}/+shoutbox">
+                        <a class="secondary-nav-item-link" href="${window.location.pathname}/+shoutbox">
                             ${tl2(trans.shouts)}
                         </a>
                     </li>
                     <li class="navlist-item secondary-nav-item secondary-nav-item--tags">
-                        <a class="secondary-nav-item-link" href="${window.location.href}/+tags">
+                        <a class="secondary-nav-item-link" href="${window.location.pathname}/+tags">
                             ${tl2(trans.tags)}
                         </a>
                     </li>
@@ -46137,7 +46089,7 @@
     listen_container.classList.add("listen-container");
     const no_auth_callout = page.structure.main.querySelector(".catalogue-callout");
     if (no_auth_callout) no_auth_callout.remove();
-    let page_url = window.location.href;
+    let page_url = window.location.pathname;
     let page_url_split = page_url.split("/");
     let page_url_length = page_url_split.length - 1;
     let scrobble_page = page_url_split[page_url_length];
@@ -46251,7 +46203,7 @@
     if (!katsune)
       col_main.insertBefore(top_container, col_main.firstElementChild);
     else
-      page.structure.container.querySelector(".bleh-background").after(top_container);
+      page.structure.container.insertBefore(top_container, page.structure.container.firstElementChild);
     if (page.type == "artist") {
       let other_container = col_main.querySelector(
         ".personal-stats-item--listeners"
@@ -46294,9 +46246,10 @@
         interact_container.removeChild(button2.parentElement);
       if (button2.classList[1] == "header-new-love-button") {
         button2.setAttribute("data-type", "love");
-        button2.appendChild(html.node`
-                <span>${tl2(trans.love_track)}</span>
-            `);
+        button2.textContent = tl2(trans.love_track);
+      } else if (button2.classList[1] == "header-new-bookmark-button") {
+        button2.setAttribute("data-type", "bookmark");
+        button2.textContent = tl2(trans.bookmark_item, { v: tl2(trans[`${page.type}_lower`]) });
       }
     });
     let links = interact_container.querySelectorAll("a");
@@ -46312,7 +46265,7 @@
       let obsession_btn = obsession_form.querySelector("button");
       obsession_btn.classList = "btn side-action";
       obsession_btn.setAttribute("data-type", "obsession");
-      obsession_btn.textContent = tl2(trans.obsession);
+      obsession_btn.textContent = tl2(trans.set_obsession);
       interact_container.appendChild(obsession_form);
     }
     if (ff("submit_scrobble")) {
@@ -46812,6 +46765,18 @@
                 ${tags}
             </div>
         `);
+      const add = tags.querySelector(".tags-add");
+      if (add) {
+        tippy_esm_default(add, {
+          content: tl2(trans.add)
+        });
+      }
+      const all = tags.querySelector(".tags-view-all");
+      if (all) {
+        tippy_esm_default(all, {
+          content: tl2(trans.view_all)
+        });
+      }
     }
     const no_info = col_main.querySelector(
       ":scope > .section-with-separator.buffer-4"
@@ -46956,7 +46921,7 @@
       );
       listen_item.setAttribute(
         "href",
-        `${window.location.href}/+listeners/you-know`
+        `${window.location.pathname}/+listeners/you-know`
       );
     }
     if (settings.colourful_counts && listens > -1 && header_type == "artist") {
@@ -47204,35 +47169,19 @@
   }
   function bleh_top_listeners() {
     if (!ff("unify_top_listeners")) return;
-    const panel = page.structure.main.querySelector(
-      ":scope > .buffer-standard"
-    );
-    let view_buttons = document.createElement("div");
-    view_buttons.classList.add("view-buttons-wrapper");
-    view_buttons.innerHTML = `
-        <div class="view-buttons">
-            <button class="btn view-item" id="toggle-list_view-1" data-toggle="list_view" data-toggle-value="1" onclick="_update_item('list_view', 1)">
-                ${tl2(trans.grid)}
-            </button>
-            <button class="btn view-item" id="toggle-list_view-0" data-toggle="list_view" data-toggle-value="0" onclick="_update_item('list_view', 0)">
-                ${tl2(trans.list)}
-            </button>
-        </div>
-    `;
-    panel.insertBefore(view_buttons, panel.firstElementChild);
-    refresh_all();
-    let legacy_top_listeners_container = panel.querySelector(".top-listeners");
-    let legacy_top_listeners = legacy_top_listeners_container.querySelectorAll(
-      ".top-listeners-item"
-    );
-    const new_container = html.node`
-        <ul class="user-list top-listeners-list" />
+    const panel = page.structure.main.querySelector(":scope > .buffer-standard");
+    panel.insertBefore(setting({ id: "list_view", func: (val) => {
+      user_list.setAttribute("data-list-view", val);
+    } }), panel.firstElementChild);
+    const legacy_top_listeners_container = panel.querySelector(".top-listeners");
+    const legacy_top_listeners = legacy_top_listeners_container.querySelectorAll(".top-listeners-item");
+    const user_list = html.node`
+        <ul class="user-list top-listeners-list" data-list-view=${settings.list_view} />
     `;
     legacy_top_listeners.forEach((listener, index3) => {
-      new_container.appendChild(convert_top_listener(listener, index3));
+      user_list.appendChild(convert_top_listener(listener, index3));
     });
-    view_buttons.after(new_container);
-    legacy_top_listeners_container.remove();
+    legacy_top_listeners_container.replaceWith(user_list);
   }
   function convert_top_listener(listener, index3, key = "top-listeners") {
     let position = index3 + 1;
@@ -47254,7 +47203,7 @@
                 </span>
                 <h4 class="user-list-name">
                     <a class="user-list-link link-block-target" href=${name_wrap.getAttribute("href")} ref=${(el) => name_link = el}>
-                        @${name}
+                        ${name}
                     </a>
                 </h4>
                 <span class="avatar user-list-avatar" ref=${(el) => user_list_avatar = el}>
@@ -47271,8 +47220,6 @@
             </div>
         </li>
     `;
-    const badge = patch_avatar(user_list_avatar, name, "listener");
-    style_name_from_badge(name_link, badge);
     if (track_wrap) {
       let track_link = about_me.querySelector("a");
       track_link.classList.add("top-track");
@@ -47292,6 +47239,7 @@
         );
       }
     }
+    patch_user_list_item(new_listener, index3);
     return new_listener;
   }
   function redirect() {
@@ -47401,6 +47349,43 @@
       code: "Google Sans Code",
       zpix: "Zpix"
     };
+  }
+  function similar_items() {
+    const artists = page.type == "artist" ? page.structure.main.querySelector(".catalogue-overview-similar-artists-full-width")?.parentElement : page.structure.main.querySelector(".catalogue-overview-similar-artists")?.parentElement;
+    if (artists) {
+      artists.classList = "artists-like";
+      const controls = artists.querySelector(".section-controls");
+      const station = controls.querySelector(".stationlink");
+      station.classList = "left-icon blend-v2-btn play-radio";
+      controls.replaceWith(html.node`
+            <div class="top-container">
+                <h2>${tl2(trans.more_like_name, { n: page.type == "artist" ? romanise(correct_artist(page.name)) : romanise(correct_artist(page.sister)) })}</h2>
+                <div class="view-buttons blend blend-v2">
+                    ${station}
+                </div>
+            </div>
+        `);
+    }
+    const albums = page.structure.main.querySelector(".similar-albums")?.parentElement;
+    if (albums) {
+      albums.classList = "albums-like";
+      const head = albums.querySelector("h3");
+      head.textContent = tl2(trans.more_like_name, { n: romanise(correct_item_by_artist(page.name, page.sister)) });
+    }
+    const tracks = page.structure.main.querySelector(".track-similar-tracks")?.parentElement;
+    if (tracks) {
+      tracks.classList = "tracks-like";
+      const head = tracks.querySelector("h3");
+      head.textContent = tl2(trans.more_like_name, { n: romanise(correct_item_by_artist(page.name, page.sister)) });
+    }
+    if (!artists && !tracks && !albums) return;
+    page.structure.main.appendChild(html.node`
+        <section class="music-like">
+            ${albums}
+            ${tracks}
+            ${artists}
+        </section>
+    `);
   }
 
   // src/components/markdown.js
@@ -48011,14 +47996,14 @@
         } catch (_) {
         }
       }
-      const body2 = doc.body || doc.documentElement;
+      const body = doc.body || doc.documentElement;
       if (dirty && leadingWhitespace) {
-        body2.insertBefore(document2.createTextNode(leadingWhitespace), body2.childNodes[0] || null);
+        body.insertBefore(document2.createTextNode(leadingWhitespace), body.childNodes[0] || null);
       }
       if (NAMESPACE === HTML_NAMESPACE) {
         return getElementsByTagName.call(doc, WHOLE_DOCUMENT ? "html" : "body")[0];
       }
-      return WHOLE_DOCUMENT ? doc.documentElement : body2;
+      return WHOLE_DOCUMENT ? doc.documentElement : body;
     };
     const _createNodeIterator = function _createNodeIterator2(root2) {
       return createNodeIterator.call(
@@ -48041,7 +48026,7 @@
       });
     }
     const _sanitizeElements = function _sanitizeElements2(currentNode) {
-      let content2 = null;
+      let content = null;
       _executeHooks(hooks.beforeSanitizeElements, currentNode, null);
       if (_isClobbered(currentNode)) {
         _forceRemove(currentNode);
@@ -48097,15 +48082,15 @@
         return true;
       }
       if (SAFE_FOR_TEMPLATES && currentNode.nodeType === NODE_TYPE.text) {
-        content2 = currentNode.textContent;
+        content = currentNode.textContent;
         arrayForEach([MUSTACHE_EXPR2, ERB_EXPR2, TMPLIT_EXPR2], (expr) => {
-          content2 = stringReplace(content2, expr, " ");
+          content = stringReplace(content, expr, " ");
         });
-        if (currentNode.textContent !== content2) {
+        if (currentNode.textContent !== content) {
           arrayPush(DOMPurify.removed, {
             element: currentNode.cloneNode()
           });
-          currentNode.textContent = content2;
+          currentNode.textContent = content;
         }
       }
       _executeHooks(hooks.afterSanitizeElements, currentNode, null);
@@ -48252,7 +48237,7 @@
     };
     DOMPurify.sanitize = function(dirty) {
       let cfg = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {};
-      let body2 = null;
+      let body = null;
       let importedNode = null;
       let currentNode = null;
       let returnNode = null;
@@ -48288,29 +48273,29 @@
           }
         }
       } else if (dirty instanceof Node2) {
-        body2 = _initDocument("<!---->");
-        importedNode = body2.ownerDocument.importNode(dirty, true);
+        body = _initDocument("<!---->");
+        importedNode = body.ownerDocument.importNode(dirty, true);
         if (importedNode.nodeType === NODE_TYPE.element && importedNode.nodeName === "BODY") {
-          body2 = importedNode;
+          body = importedNode;
         } else if (importedNode.nodeName === "HTML") {
-          body2 = importedNode;
+          body = importedNode;
         } else {
-          body2.appendChild(importedNode);
+          body.appendChild(importedNode);
         }
       } else {
         if (!RETURN_DOM && !SAFE_FOR_TEMPLATES && !WHOLE_DOCUMENT && // eslint-disable-next-line unicorn/prefer-includes
         dirty.indexOf("<") === -1) {
           return trustedTypesPolicy && RETURN_TRUSTED_TYPE ? trustedTypesPolicy.createHTML(dirty) : dirty;
         }
-        body2 = _initDocument(dirty);
-        if (!body2) {
+        body = _initDocument(dirty);
+        if (!body) {
           return RETURN_DOM ? null : RETURN_TRUSTED_TYPE ? emptyHTML : "";
         }
       }
-      if (body2 && FORCE_BODY) {
-        _forceRemove(body2.firstChild);
+      if (body && FORCE_BODY) {
+        _forceRemove(body.firstChild);
       }
-      const nodeIterator = _createNodeIterator(IN_PLACE ? dirty : body2);
+      const nodeIterator = _createNodeIterator(IN_PLACE ? dirty : body);
       while (currentNode = nodeIterator.nextNode()) {
         _sanitizeElements(currentNode);
         _sanitizeAttributes(currentNode);
@@ -48323,21 +48308,21 @@
       }
       if (RETURN_DOM) {
         if (RETURN_DOM_FRAGMENT) {
-          returnNode = createDocumentFragment.call(body2.ownerDocument);
-          while (body2.firstChild) {
-            returnNode.appendChild(body2.firstChild);
+          returnNode = createDocumentFragment.call(body.ownerDocument);
+          while (body.firstChild) {
+            returnNode.appendChild(body.firstChild);
           }
         } else {
-          returnNode = body2;
+          returnNode = body;
         }
         if (ALLOWED_ATTR.shadowroot || ALLOWED_ATTR.shadowrootmode) {
           returnNode = importNode2.call(originalDocument, returnNode, true);
         }
         return returnNode;
       }
-      let serializedHTML = WHOLE_DOCUMENT ? body2.outerHTML : body2.innerHTML;
-      if (WHOLE_DOCUMENT && ALLOWED_TAGS["!doctype"] && body2.ownerDocument && body2.ownerDocument.doctype && body2.ownerDocument.doctype.name && regExpTest(DOCTYPE_NAME, body2.ownerDocument.doctype.name)) {
-        serializedHTML = "<!DOCTYPE " + body2.ownerDocument.doctype.name + ">\n" + serializedHTML;
+      let serializedHTML = WHOLE_DOCUMENT ? body.outerHTML : body.innerHTML;
+      if (WHOLE_DOCUMENT && ALLOWED_TAGS["!doctype"] && body.ownerDocument && body.ownerDocument.doctype && body.ownerDocument.doctype.name && regExpTest(DOCTYPE_NAME, body.ownerDocument.doctype.name)) {
+        serializedHTML = "<!DOCTYPE " + body.ownerDocument.doctype.name + ">\n" + serializedHTML;
       }
       if (SAFE_FOR_TEMPLATES) {
         arrayForEach([MUSTACHE_EXPR2, ERB_EXPR2, TMPLIT_EXPR2], (expr) => {
@@ -48386,6 +48371,88 @@
   }
   var purify = createDOMPurify();
 
+  // src/components/statuscafe.js
+  async function fetch_status(username2) {
+    const current = /* @__PURE__ */ new Date();
+    const next_fetch = new Date(localStorage.getItem("next_status_cafe_fetch")) || current;
+    if (current >= next_fetch) {
+      return await fetch_status_api(username2);
+    } else {
+      return html.node`
+            <div class="status-cafe">
+                <div class="status-cafe-top">
+                    <span class="status-cafe-author">${tl2(trans.current_status)}</span>
+                    <span class="status-cafe-time">...</span>
+                </div>
+                <div class="status-cafe-content is-loading">
+                    <span class="status-cafe-emoji">
+                        <span class="bleh-icon" />
+                    </span>
+                    <span class="status-cafe-text">${tl2(trans.status_cafe_too_many_requests)}</span>
+                </div>
+            </div>
+        `;
+    }
+  }
+  async function fetch_status_api(username2) {
+    log(`fetching for ${username2}`, "status.cafe");
+    const new_date = /* @__PURE__ */ new Date();
+    new_date.setSeconds(new_date.getSeconds() + 2.3);
+    set_storage("next_status_cafe_fetch", new_date.toString());
+    return fetch(`https://status.cafe/users/${username2}/status.json`).then((res) => {
+      if (!res.ok) {
+        log(`error fetching for ${username2}`, "status.cafe", "error", { res });
+        return {
+          author: username2,
+          content: "status.cafe is unavailable right now..",
+          face: "",
+          timeAgo: ""
+        };
+      }
+      return res.json();
+    }).then((data2) => {
+      if (data2.face == null) data2.face = "";
+      if (data2.content == null) data2.content = "...";
+      if (data2.timeAgo == null) data2.timeAgo = "...";
+      const status_link = `https://status.cafe/users/${username2}`;
+      const { trusted, dangerous } = can_trust_link(status_link);
+      return html.node`
+                <div class="status-cafe has-hover" onclick=${() => {
+        if (trusted) {
+          open(status_link);
+          return;
+        }
+        external_url_prompt(status_link);
+      }}>
+                    <div class="status-cafe-top">
+                        <span class="status-cafe-author">${tl2(trans.current_status)}</span>
+                        <span class="status-cafe-time">${data2.timeAgo}</span>
+                    </div>
+                    <div class="status-cafe-content">
+                        <span class="status-cafe-emoji">${data2.face}</span>
+                        <span class="status-cafe-text">${data2.content}</span>
+                    </div>
+                </div>
+            `;
+    }).catch((e) => {
+      log(`error processing for ${username2}`, "status.cafe", "error", { e });
+      return html.node`
+                <div class="status-cafe">
+                    <div class="status-cafe-top">
+                        <span class="status-cafe-author">${tl2(trans.current_status)}</span>
+                        <span class="status-cafe-time">...</span>
+                    </div>
+                    <div class="status-cafe-content is-loading">
+                        <span class="status-cafe-emoji">
+                            <span class="bleh-icon" />
+                        </span>
+                        <span class="status-cafe-text">${e && e.message ? e.message : ""}</span>
+                    </div>
+                </div>
+            `;
+    });
+  }
+
   // src/components/markdown.js
   function markdown(text4, {
     allow_headers = false,
@@ -48400,7 +48467,7 @@
     take_effect = false,
     cache: cache2 = false,
     allow_socials = false,
-    allow_lists = true,
+    allow_lists = false,
     allow_alignment = false,
     name = page.name
   } = {}) {
@@ -48413,7 +48480,6 @@
       "u",
       "strong",
       "a",
-      "br",
       "code",
       "pre",
       "img",
@@ -48422,7 +48488,9 @@
       "h2",
       "h3",
       "h4",
-      "h5"
+      "h5",
+      "t",
+      "del"
     ];
     let ALLOWED_ATTR = [
       "href",
@@ -48434,15 +48502,23 @@
       "style",
       "data-hue",
       "data-sat",
-      "data-lit"
+      "data-lit",
+      "data-flag"
     ];
     if (allow_lists) {
       ALLOWED_TAGS.push("ul", "ol", "li");
+    }
+    if (line_breaks) {
+      ALLOWED_TAGS.push("br");
+    }
+    if (allow_alignment) {
+      ALLOWED_TAGS.push("hr");
     }
     let hue2;
     let sat;
     let lit;
     let links = [];
+    let status_cafe_user;
     const banner = () => [
       {
         type: "lang",
@@ -48466,13 +48542,13 @@
       {
         type: "lang",
         regex: /\[(center|left|right)]\s*([\s\S]*?)\s*\[\/\1]/g,
-        replace: (_, align, content2, offset3, text5) => {
+        replace: (_, align, content, offset3, text5) => {
           let backticks = 0;
           for (let i = 0; i < offset3; i++)
             if (text5[i] == "`") backticks++;
           if (backticks % 2 == 1) return _;
-          const inner = converter.makeHtml(content2.trim());
-          const clean2 = purify.sanitize(inner, {
+          const inner2 = converter.makeHtml(content.trim());
+          const clean2 = purify.sanitize(inner2, {
             ALLOWED_TAGS,
             ALLOWED_ATTR
           });
@@ -48546,12 +48622,31 @@
         }
       }
     ];
+    const status2 = () => [
+      {
+        type: "lang",
+        regex: /\[status=([^\]]+)\]/g,
+        replace: (_, user) => {
+          status_cafe_user = encodeURIComponent(user);
+          return '<div class="status-cafe-host"></div>';
+        }
+      }
+    ];
+    const timestamp = () => [
+      {
+        type: "lang",
+        regex: /<t:(\d{9,})(?::([FfDdTtR]))?>/g,
+        replace: (_, time2, flag) => {
+          return `<t data-flag="${flag || "F"}">${time2}</t>`;
+        }
+      }
+    ];
     const social_links = () => [
       {
         type: "lang",
         regex: /\[links\]([\s\S]*?)\[\/links\]/g,
-        replace: (_, content2) => {
-          const lines = content2.trim().split(/\n+/);
+        replace: (_, content) => {
+          const lines = content.trim().split(/\n+/);
           lines.forEach((line) => {
             line = line.trim();
             if (!line) return;
@@ -48619,11 +48714,11 @@
     if (line_breaks) extensions.push(blockquotes());
     if (allow_banners) extensions.push(banner());
     if (allow_icons) extensions.push(icons());
-    if (allow_hue) extensions.push(accent(), display_name());
+    if (allow_hue) extensions.push(accent(), display_name(), status2());
     if (allow_fonts) extensions.push(font());
     if (allow_socials) extensions.push(social_links());
     if (!allow_headers) extensions.push(header_minify());
-    extensions.push(mentions());
+    extensions.push(mentions(), timestamp());
     let profile_cache;
     const will_cache = cache2 === true;
     log(`prepare new cache is ${will_cache}`, "markdown", "log", { cache: cache2 });
@@ -48644,7 +48739,8 @@
       strikethrough: true,
       underline: true,
       ghCodeBlocks: false,
-      smartIndentationFix: true
+      smartIndentationFix: true,
+      ellipsis: false
     });
     const markdown2 = text4.replace(
       /\[artist\]([^[\]]+)\[\/artist\]/g,
@@ -48667,8 +48763,8 @@
       ALLOWED_TAGS,
       ALLOWED_ATTR
     });
-    const body2 = html.node([parsed2]);
-    log("rendered", "markdown", "info", { body: body2 });
+    const body = html.node([parsed2]);
+    log("rendered", "markdown", "info", { body });
     const link_strings = {
       "open.spotify.com": "Spotify",
       "spotify.com": "Spotify",
@@ -48697,7 +48793,7 @@
       "tidal.com": "Tidal"
     };
     if (links.length > 0) {
-      body2.appendChild(html.node`
+      body.appendChild(html.node`
             <div class="social-links-container">
                 <div class="sub-text music-small-header">
                     ${tl2(trans.links)}
@@ -48720,10 +48816,10 @@
             </div>
         `);
     }
-    if (body2.nodeName != "#text") patch_wiki_contents(body2);
-    if (line_breaks && body2.nodeName != "#text") {
-      local_restriction(body2);
-      body2.querySelectorAll("p").forEach((text5) => {
+    if (body.nodeName != "#text") patch_wiki_contents(body);
+    if (line_breaks && body.nodeName != "#text") {
+      local_restriction(body);
+      body.querySelectorAll("p").forEach((text5) => {
         local_restriction(text5);
       });
     }
@@ -48731,8 +48827,8 @@
       if (!sponsor_list || sponsor_list && !sponsor_list.sponsors.includes(name))
         allow_hue = false;
     }
-    if (body2.nodeName != "#text") {
-      body2.querySelectorAll("img").forEach((image) => {
+    if (body.nodeName != "#text") {
+      body.querySelectorAll("img").forEach((image) => {
         if (!line_breaks) {
           image.remove();
           return;
@@ -48788,137 +48884,73 @@
         log("cleared custom accent settings", "profile", "log");
       }
     }
+    if (status_cafe_user) {
+      const status_cafe_host = body.querySelector(".status-cafe-host");
+      render(status_cafe_host, html`
+            <div class="status-cafe">
+                <div class="status-cafe-top">
+                    <span class="status-cafe-author">${tl2(trans.current_status)}</span>
+                    <span class="status-cafe-time">...</span>
+                </div>
+                <div class="status-cafe-content is-loading">
+                    <span class="status-cafe-emoji">
+                        <span class="status-cafe-loading-spinner">
+                            <span class="bleh-icon" />
+                        </span>
+                    </span>
+                    <span class="status-cafe-text">${tl2(trans.loading_status, { u: status_cafe_user })}</span>
+                </div>
+            </div>
+        `);
+      fetch_status(status_cafe_user).then((status_cafe) => {
+        render(status_cafe_host, status_cafe);
+      });
+    }
+    body.querySelectorAll("t").forEach((timestamp2) => {
+      const time2 = timestamp2.textContent;
+      const flag = timestamp2.getAttribute("data-flag");
+      const date = DateTime.fromSeconds(parseInt(time2));
+      let text5 = "";
+      if (flag == "F") {
+        text5 = tl2(trans.date_at_time, {
+          d: date.toLocaleString(DateTime.DATE_HUGE),
+          t: date.toLocaleString(DateTime.TIME_SIMPLE)
+        });
+      } else if (flag == "f") {
+        text5 = tl2(trans.date_at_time, {
+          d: date.toLocaleString(DateTime.DATE_FULL),
+          t: date.toLocaleString(DateTime.TIME_SIMPLE)
+        });
+      } else if (flag == "D") {
+        text5 = date.toLocaleString(DateTime.DATE_FULL);
+      } else if (flag == "d") {
+        text5 = date.toLocaleString(DateTime.DATE_SHORT);
+      } else if (flag == "t") {
+        text5 = date.toLocaleString(DateTime.TIME_SIMPLE);
+      } else if (flag == "T") {
+        text5 = date.toLocaleString(DateTime.TIME_WITH_SECONDS);
+      } else if (flag == "R") {
+        text5 = date.toRelative();
+      }
+      const new_timestamp = html.node`
+            <t>${text5}</t>
+        `;
+      tippy_esm_default(new_timestamp, {
+        theme: "generic",
+        content: html.node`
+                <span>${date.toLocaleString(DateTime.DATE_FULL)}</span>
+                <small>${date.toLocaleString(DateTime.TIME_SIMPLE)}</small>
+            `
+      });
+      timestamp2.replaceWith(new_timestamp);
+    });
     if (cache2 && will_cache) {
       log("finalised cache from markdown parsing", "markdown", "info", {
         cache: cache2
       });
       save_profile_cache(cache2, profile_cache, name);
     }
-    return body2;
-  }
-  function markdown_prompt({
-    allow_headers = false,
-    starting_header = 3,
-    allow_links = true,
-    line_breaks = true,
-    allow_banners = false,
-    allow_icons = false,
-    allow_hue = false,
-    allow_socials = false,
-    allow_lists = true,
-    allow_alignment = false
-  } = {}) {
-    if (!line_breaks) allow_alignment = false;
-    const examples = [
-      {
-        name: tl2(trans.supports_markdown.header.name),
-        string: tl2(trans.supports_markdown.header.string),
-        hide_if: !allow_headers
-      },
-      {
-        name: tl2(trans.supports_markdown.bold.name),
-        string: tl2(trans.supports_markdown.bold.string)
-      },
-      {
-        name: tl2(trans.supports_markdown.italics.name),
-        string: tl2(trans.supports_markdown.italics.string)
-      },
-      {
-        name: tl2(trans.supports_markdown.bold_italics.name),
-        string: tl2(trans.supports_markdown.bold_italics.string)
-      },
-      {
-        name: tl2(trans.supports_markdown.underlined.name),
-        string: tl2(trans.supports_markdown.underlined.string)
-      },
-      {
-        name: "Fancy link",
-        string: "[example >~<](https://katelyn.moe)",
-        hide_if: !allow_links
-      },
-      {
-        name: "Simple link",
-        string: `https://last.fm${root}user/${auth.name}`,
-        hide_if: !allow_links
-      },
-      {
-        name: "Mentioned user",
-        string: `@${auth.name}`
-      },
-      {
-        name: "Image",
-        string: `![alt text](${auth.avatar})`,
-        string_display: "![alt text](image url here)",
-        hide_if: !line_breaks
-      },
-      {
-        name: "Left-alignment",
-        string: "[left]text[/left]",
-        hide_if: !allow_alignment
-      },
-      {
-        name: "Center-alignment",
-        string: "[center]text[/center]",
-        hide_if: !allow_alignment
-      },
-      {
-        name: "Right-alignment",
-        string: "[right]text[/right]",
-        hide_if: !allow_alignment
-      }
-    ];
-    dialog({
-      id: "markdown",
-      title: tl2(trans.supports_markdown),
-      body: html.node`
-            <p>You can write fancy text here using Markdown, which lets you make your words pretty with simple shortcuts.</p>
-            <table class="fancy-table">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>How</th>
-                        <th>Result</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    ${examples.map((example) => {
-        if (example.hide_if) return html.node``;
-        return html.node`
-                            <tr>
-                                <td>${example.name}</td>
-                                <td class="subtle">${example.string_display ? example.string_display : example.string}</td>
-                                ${example.explain ? html.node`
-                                    <td>
-                                        <div class="icon-combo">
-                                            <div class="bleh-icon" data-type="info" style="--icon: var(--mask)" />
-                                            ${example.explain}
-                                        </div>
-                                    </td>
-                                ` : html.node`
-                                    <td class="markdown-body">${markdown(
-          example.string,
-          {
-            allow_headers,
-            starting_header,
-            allow_links,
-            line_breaks,
-            allow_banners,
-            allow_icons,
-            allow_hue,
-            allow_socials,
-            allow_lists,
-            allow_alignment,
-            in_dialog: true
-          }
-        )}</td>
-                                `}
-                            </tr>
-                        `;
-      })}
-                </tbody>
-            </table>
-        `
-    });
+    return body;
   }
   function markdown_preview(text4, {
     allow_headers = false,
@@ -49045,6 +49077,424 @@
         `
     });
   }
+  function markdown_field(func, options, value, name, cols, rows, placeholder, maxlength, mini = false, autofocus = false) {
+    const use_md = mini ? settings.shout_markdown : settings.bio_markdown;
+    options = {
+      allow_headers: false,
+      starting_header: 3,
+      allow_links: true,
+      line_breaks: true,
+      allow_banners: false,
+      in_dialog: false,
+      allow_icons: true,
+      allow_hue: false,
+      allow_fonts: false,
+      allow_socials: false,
+      allow_lists: false,
+      allow_alignment: false,
+      ...options
+    };
+    const textarea = input({
+      type: "textarea",
+      value,
+      name,
+      cols,
+      rows,
+      placeholder,
+      func: () => {
+        on_selection(null, null, false);
+        if (func) func(textarea.value());
+        render_overlay();
+      },
+      func_mouseup: () => {
+        on_selection(null, null, false);
+      },
+      func_select: on_selection,
+      submit_on_character: true,
+      required: true,
+      maxlength,
+      focus: autofocus
+    });
+    let overlay;
+    const editor = textarea.editor();
+    let is_bold_selected;
+    function on_selection(editor2, val, has_selection = true) {
+      let sel_start;
+      let sel_end;
+      let selected = "";
+      if (has_selection) {
+        sel_start = editor2.selectionStart;
+        sel_end = editor2.selectionEnd;
+        selected = val.slice(sel_start, sel_end);
+      }
+      Object.values(action_lookup).forEach((item) => {
+        if (item.start == null && item.end == null) return;
+        if (item.end == null && item.start != null) item.end = item.start;
+        let is_selected = selected.startsWith(item.start) && selected.endsWith(item.end) && selected.length >= item.start.length + item.end.length;
+        if (item.type == "bold") is_bold_selected = is_selected;
+        if (item.type == "italic" && is_bold_selected) is_selected = false;
+        item.button.setAttribute("aria-checked", is_selected);
+      });
+    }
+    const action_lookup = {};
+    const action_list = [
+      [
+        {
+          type: "header",
+          name: tl2(trans.header),
+          start: "# ",
+          end: "",
+          hide: !options.allow_headers
+        },
+        {
+          type: "bold",
+          name: tl2(trans.bold),
+          start: "**"
+        },
+        {
+          type: "italic",
+          name: tl2(trans.italic),
+          start: "*"
+        },
+        {
+          type: "strike",
+          name: tl2(trans.strikethrough),
+          start: "~~"
+        },
+        {
+          type: "underline",
+          name: tl2(trans.underline),
+          start: "__"
+        }
+      ],
+      [
+        {
+          type: "link",
+          name: tl2(trans.link),
+          func: () => {
+            return new Promise((resolve2) => {
+              let link;
+              let alt;
+              dialog({
+                id: "link",
+                title: tl2(trans.create_link),
+                body: html.node`
+                                <div class="new-scrobble-form">
+                                    <p class="generic-label">${tl2(trans.link)}</p>
+                                    ${link = input({
+                  type: "text",
+                  placeholder: tl2(trans.example, { v: "https://katelyn.moe" }),
+                  func: () => {
+                    submit_link();
+                  },
+                  focus: true
+                })}
+                                    <p class="generic-label">${tl2(trans.text)}</p>
+                                    ${alt = input({
+                  type: "text",
+                  func: () => {
+                    submit_link();
+                  }
+                })}
+                                </div>
+                                <div class="modal-footer">
+                                <button class="see-more cancel" onclick=${() => {
+                  dialog_rm({ id: "link" });
+                  resolve2(null);
+                }}>
+                                    ${tl2(trans.cancel)}
+                                </button>
+                                <div class="fill" />
+                                <button class="btn primary continue" onclick=${() => {
+                  submit_link();
+                }}>
+                                    ${tl2(trans.finish)}
+                                </button>
+                                </div>
+                            `
+              });
+              function submit_link() {
+                let alt_text = alt.value();
+                let link_text = link.value();
+                if (!link_text) return;
+                dialog_rm({ id: "link" });
+                let output;
+                if (alt_text != link_text && alt_text) {
+                  output = `[${alt_text}](${link_text})`;
+                } else {
+                  output = link_text;
+                }
+                resolve2(output);
+              }
+            });
+          },
+          hide: !options.allow_links
+        },
+        {
+          type: "mention",
+          name: tl2(trans.mention_user),
+          start: "@",
+          end: "",
+          hide: true
+        },
+        {
+          type: "quote",
+          name: tl2(trans.quote),
+          start: "> ",
+          end: "",
+          hide: true
+        },
+        {
+          type: "code",
+          name: tl2(trans.code_block),
+          start: "`",
+          end: "`"
+        },
+        {
+          type: "image",
+          name: tl2(trans.image),
+          func: () => {
+            return new Promise((resolve2) => {
+              let link;
+              let alt;
+              dialog({
+                id: "link",
+                title: tl2(trans.attach_image),
+                body: html.node`
+                                <div class="new-scrobble-form">
+                                    <p class="generic-label">${tl2(trans.link)}</p>
+                                    ${link = input({
+                  type: "text",
+                  placeholder: tl2(trans.example, { v: "https://link.to/an_image_here" }),
+                  func: () => {
+                    submit_link();
+                  },
+                  focus: true
+                })}
+                                    <p class="generic-label">${tl2(trans.text)}</p>
+                                    ${alt = input({
+                  type: "text",
+                  func: () => {
+                    submit_link();
+                  }
+                })}
+                                </div>
+                                <div class="modal-footer">
+                                <button class="see-more cancel" onclick=${() => {
+                  dialog_rm({ id: "link" });
+                  resolve2(null);
+                }}>
+                                    ${tl2(trans.cancel)}
+                                </button>
+                                <div class="fill" />
+                                <button class="btn primary continue" onclick=${() => {
+                  submit_link();
+                }}>
+                                    ${tl2(trans.finish)}
+                                </button>
+                                </div>
+                            `
+              });
+              function submit_link() {
+                let alt_text = alt.value();
+                let link_text = link.value();
+                if (!link_text) return;
+                dialog_rm({ id: "link" });
+                let output;
+                if (alt_text != link_text && alt_text) {
+                  output = `![${alt_text}](${link_text})`;
+                } else {
+                  output = `![](${link_text})`;
+                }
+                resolve2(output);
+              }
+            });
+          },
+          hide: !options.allow_links
+        }
+      ],
+      [
+        {
+          type: "ul",
+          name: tl2(trans.list),
+          start: "- ",
+          end: "",
+          hide: !options.allow_lists
+        },
+        {
+          type: "ol",
+          name: tl2(trans.numbered_list),
+          start: "1. ",
+          end: "",
+          hide: !options.allow_lists
+        }
+      ],
+      [
+        {
+          type: "align-left",
+          name: tl2(trans.left_align),
+          start: "[left]",
+          end: "[/left]",
+          hide: !options.allow_alignment
+        },
+        {
+          type: "align-center",
+          name: tl2(trans.center_align),
+          start: "[center]",
+          end: "[/center]",
+          hide: !options.allow_alignment
+        },
+        {
+          type: "align-right",
+          name: tl2(trans.right_align),
+          start: "[right]",
+          end: "[/right]",
+          hide: !options.allow_alignment
+        }
+      ]
+    ];
+    const actions = html.node`
+        <div class="markdown-actions">
+            ${action_list.map((group, index3) => {
+      const elem = html.node`
+                    <div class="group">
+                        ${group.map((item) => {
+        if (item.hide) return html.node``;
+        const button2 = html.node`
+                                <button class="btn markdown-action" data-type=${item.type} aria-checked="false" type="button" onclick=${() => {
+          const sel_start = editor.selectionStart;
+          const sel_end = editor.selectionEnd;
+          const val = textarea.value();
+          if (item.func) {
+            item.func().then((replacement) => {
+              if (!replacement) return;
+              textarea.value(val.slice(0, sel_start) + replacement + val.slice(sel_end));
+              textarea.focus();
+              textarea.range(sel_start, sel_start + replacement.length);
+              if (func) func(textarea.value());
+              render_overlay();
+            });
+            return;
+          }
+          if (item.end == null && item.start != null) item.end = item.start;
+          if (item.start != null && item.end != null) {
+            const selected = val.slice(sel_start, sel_end);
+            let replacement;
+            if (selected.startsWith(item.start) && selected.endsWith(item.end)) {
+              let replace_end = -1 * item.end.length;
+              if (replace_end != 0) {
+                replacement = selected.slice(item.start.length, replace_end);
+              } else {
+                replacement = selected.slice(item.start.length);
+              }
+            } else {
+              replacement = `${item.start}${selected}${item.end}`;
+            }
+            textarea.value(val.slice(0, sel_start) + replacement + val.slice(sel_end));
+            textarea.focus();
+            textarea.range(sel_start, sel_start + replacement.length);
+            if (func) func(textarea.value());
+            render_overlay();
+            log("action", "markdown", "info", {
+              sel_start,
+              sel_end,
+              selected,
+              val,
+              item,
+              replacement
+            });
+          }
+        }}>
+                                    ${item.name}
+                                </button>
+                            `;
+        action_lookup[item.type] = {
+          type: item.type,
+          button: button2,
+          start: item.start,
+          end: item.end
+        };
+        console.info("markdown added to lookup", action_lookup, action_lookup[item.type]);
+        tippy_esm_default(button2, {
+          content: item.name
+        });
+        return button2;
+      })}
+                    </div>
+                `;
+      if (elem.childElementCount == 0)
+        return html.node``;
+      return html.node`
+                    ${elem}
+                    ${index3 < action_list.length - 1 ? html.node`
+                        <div class="group-sep" />
+                    ` : ""}
+                `;
+    })}
+        </div>
+    `;
+    const field = html.node`
+        <div class="markdown-field ${mini ? "mini" : ""}">
+            ${use_md ? actions : ""}
+            <div class="markdown-field-text">
+                <div class="markdown-field-overlay" ref=${(el) => overlay = el} />
+                ${textarea}
+            </div>
+        </div>
+    `;
+    render_overlay();
+    editor.addEventListener("scroll", () => {
+      overlay.scrollTop = editor.scrollTop;
+    });
+    field.value = (val) => {
+      if (!val) return textarea.value();
+      textarea.value(val);
+      if (func) func(val);
+      render_overlay(val);
+    };
+    function render_overlay(val = textarea.value()) {
+      val = val.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+      if (use_md) {
+        val = val.replace(/\[(left|center|right|links)\]/gi, (text4) => {
+          if (!options.allow_alignment) return text4;
+          return `<span class="md-tag-wrap">${text4}</span>`;
+        });
+        val = val.replace(/\[\/(left|center|right|links)\]/gi, (text4) => {
+          if (!options.allow_alignment) return text4;
+          return `<span class="md-tag-wrap">${text4}</span>`;
+        });
+        val = val.replace(/\[([a-z]+)=([^\]]+)\]/gi, (match3, tag, val2) => {
+          if (!["status", "name", "font", "accent", "banner"].includes(tag)) return match3;
+          if (!options.allow_hue && tag == "accent") return match3;
+          if (!options.allow_alignment) return match3;
+          if (tag == "accent") {
+            const split = val2.split(",");
+            if (split.length == 3 && parseFloat(split[0]) >= 0 && parseFloat(split[1]) >= 0 && parseFloat(split[2]) >= 0) {
+              return `<span class="md-tag">[${tag}=<span class="md-val md-accent colourful" style="--hue-over: ${parseFloat(split[0])}; --sat-over: ${parseFloat(split[1])}; --lit-over: ${parseFloat(split[2])}">${val2}</span>]</span>`;
+            } else {
+              return match3;
+            }
+          }
+          return `<span class="md-tag">[${tag}=<span class="md-val">${val2}</span>]</span>`;
+        });
+        val = val.replace(/!\[([^\]]*)\]\(([^)]+)\)/gi, (match3, label, url) => {
+          if (!options.allow_links) return match3;
+          return `<span class="md-link">![<span class="md-label">${label}</span>](<span class="md-url">${url}</span>)</span>`;
+        });
+        val = val.replace(/\[([^\]]+)\]\(([^)]+)\)/gi, (match3, label, url) => {
+          if (!options.allow_links) return match3;
+          return `<span class="md-link">[<span class="md-label">${label}</span>](<span class="md-url">${url}</span>)</span>`;
+        });
+      }
+      render(overlay, html`
+            ${{ html: val }}
+        `);
+    }
+    setTimeout(() => {
+      queue_popup("markdown", actions, "top");
+    }, 0);
+    return field;
+  }
 
   // src/seasonal.js
   function set_season() {
@@ -49128,7 +49578,8 @@
           let snowflakes_enabled = true;
           let snowflakes_count = season.snowflakes.count;
           if (settings.seasonal_particles == "less" && snowflakes_count > 10)
-            snowflakes_count = snowflakes_count * 0.45;
+            snowflakes_count *= 0.45;
+          if (page.mobile && snowflakes_count > 10) snowflakes_count *= 0.5;
           begin_snowflakes(snowflakes_enabled, snowflakes_count);
         }
         if (last_season_seen != "" && last_season_seen != season.id) {
@@ -49197,7 +49648,8 @@
         <span class="season-colour-name colourful" data-season=${stored_season.id}>${tl2(trans.seasonal.listing[stored_season.id])}</span>
         <span class="season-exclusive">${tl2(trans.seasonal.live)}</span>
     `);
-    page.header.season.classList.add("live");
+    page.header.season.setAttribute("data-live", true);
+    page.header.season.classList.toggle("chibi", !stored_season.new_years_eve);
   }
   function seasonal_timer_end() {
     if (stored_season.new_years_eve) return;
@@ -49210,11 +49662,13 @@
         <span class="season-colour-name colourful" data-season=${stored_season.id}>${tl2(trans.seasonal.listing[stored_season.id])}</span>
         <span class="season-exclusive">${tl2(trans.seasonal.notice)}</span>
     `);
-    page.header.season.classList.remove("live");
+    page.header.season.setAttribute("data-live", false);
+    page.header.season.classList.toggle("chibi", !stored_season.new_years_eve);
   }
   function update_season_nav() {
     if (!page.header.season) return;
     page.header.season.setAttribute("data-season", stored_season.id);
+    page.header.season.classList.toggle("chibi", !stored_season.new_years_eve);
     if (!stored_season.new_years_eve) {
       page.header.season.textContent = DateTime.fromISO(
         stored_season.end.replace("y0", stored_season.year).replace("{offset}", stored_season.offset)
@@ -49225,6 +49679,7 @@
         next = stored_season.next_start.replace("y0", stored_season.year + 1).replace("{offset}", stored_season.offset);
       let time_until = new Date(next) - /* @__PURE__ */ new Date();
       page.header.season.textContent = countdown_to(time_until);
+      page.header.season.setAttribute("data-live", true);
       page.header.season_tooltip.setContent(html.node`
             <span class="season-colour-name">${tl2(trans.seasonal.listing[stored_season.id])}</span>
             <span class="season-exclusive">${tl2(trans.seasonal.live)}</span>
@@ -49262,18 +49717,19 @@
   }
   function begin_snowflakes(enabled, count) {
     if (!enabled) return;
-    const flakes = Array.from({ length: count }, () => {
-      const x = (Math.random() * 100).toFixed(2);
-      const drift = (Math.random() * 20 - 10).toFixed(2);
-      const scale = (Math.random() * 1.1 + 0.3).toFixed(2);
-      const duration = (Math.random() * 60 + 10).toFixed(2);
-      const delay = (Math.random() * -30).toFixed(2);
-      const opacity = (Math.random() * 0.7 + 0.3).toFixed(2);
-      return { x, drift, scale, duration, delay, opacity };
+    const flakes = Array.from({ length: count * 0.7 }, () => {
+      const x = (Math.random() * 100).toFixed(1);
+      const drift = (Math.random() * 40 - 10).toFixed(1);
+      const scale = (Math.random() * 0.9 + 0.4).toFixed(1);
+      const size = 8 * scale;
+      const duration = (Math.random() * 64 + 20).toFixed(1);
+      const delay = (Math.random() * -30).toFixed(1);
+      const opacity = (Math.random() * 0.7 + 0.2).toFixed(1);
+      return { x, drift, scale, size, duration, delay, opacity };
     });
     render(page.state.snow, html`
         ${flakes.map((flake) => html.node`
-            <div class="snow" style="--x: ${flake.x}vw; --x-end: calc(${flake.x}vw + ${flake.drift}vw); --s: ${flake.scale}; animation-duration: ${flake.duration}s; animation-delay: ${flake.delay}s; opacity: ${flake.opacity}" />
+            <div class="snow" style="width: ${flake.size}px; height: ${flake.size}px; --x: ${flake.x}vw; --x-end: calc(${flake.x}vw + ${flake.drift}vw); --s: ${flake.scale}; animation-duration: ${flake.duration}s; animation-delay: ${flake.delay}s; opacity: ${flake.opacity}" />
         `)}
     `);
   }
@@ -49289,8 +49745,7 @@
     let cached_style = localStorage.getItem("bleh_cached_style") || "";
     const split = window.location.pathname.replace(root, "").split("/");
     const length = split.length - 1;
-    if (split[length] == "playback" && split[2] == "listening-report" || split[0] == "labs") {
-      if (split[length] == "playback" && split[2] == "listening-report") document.body?.classList.add("playback-2024");
+    if (split[0] == "labs") {
       log("disabled loading for special interface", "style");
       return;
     }
@@ -49567,7 +50022,7 @@
         "color: unset"
       );
   }
-  var version2 = "2025.1126.2";
+  var version2 = "2026.0104.2";
   var last_page_type = {
     state: void 0
   };
@@ -49584,6 +50039,7 @@
     on_error,
     on_dedicated_page
   }) {
+    let abort_loading = false;
     log2("starting florence", "load", "info", {
       page: page2,
       on_head_load,
@@ -49596,6 +50052,13 @@
     });
     let head_observer = new MutationObserver(() => {
       if (document.head) {
+        const split = window.location.pathname.split("/");
+        const length = split.length - 1;
+        if (split[length] == "playback" && split[length - 3] == "listening-report") {
+          head_observer.disconnect();
+          abort_loading = true;
+          return;
+        }
         document.documentElement.classList.add("florence-supports-loading");
         if (on_head_load) on_head_load();
         head_observer.disconnect();
@@ -49605,6 +50068,10 @@
       childList: true
     });
     let pre_observer = new MutationObserver((mutations) => {
+      if (abort_loading) {
+        pre_observer.disconnect();
+        return;
+      }
       log2("pre", "load", "info", { mutations });
       if (document.body) {
         log2(`${JSON.stringify(document.body.classList)}`, "load");
@@ -49715,6 +50182,1550 @@
     }
   }
 
+  // src/components/notifications.js
+  function bleh_notification_list(list, mini = false) {
+    list.classList = "notification-list";
+    if (mini) list.classList.add("mini");
+    let notifications = list.querySelectorAll(".inbox-notifications__item");
+    notifications.forEach((notification, index3) => {
+      if (mini && index3 > 4) notification.style.display = "none";
+      const link = notification.querySelector(
+        ".inbox-notifications__item-link"
+      );
+      const href = link.getAttribute("href");
+      const active = link.classList.contains(
+        "inbox-notifications__item--highlight"
+      );
+      notification.classList = "notification";
+      if (active) notification.classList.add("active");
+      if (mini) notification.classList.add("mini");
+      let type = "shoutbox";
+      let context = {
+        name: null,
+        sister: null
+      };
+      let involved = [];
+      const strongs = link.querySelectorAll("strong");
+      let split = href.replace(root, "").split("/");
+      const avatar2 = notification.querySelector(".avatar");
+      avatar2.classList = "avatar";
+      const time2 = notification.querySelector("time");
+      let is_reply = false;
+      let others_included = 0;
+      if (href.endsWith("/obsessions/set")) {
+        type = "obsession";
+        involved.push(split[1]);
+        const desc = strongs[0].textContent;
+        const desc_split = desc.split(" \u2014 ");
+        context.type = "track";
+        context.sister = correct_artist(desc_split[0]);
+        context.name = correct_item_by_artist(
+          desc_split[1],
+          context.sister
+        );
+        patch_avatar(avatar2, involved[0]);
+      } else if (href.endsWith("/listening-report/month")) {
+        type = "listening-report";
+        involved.push(strongs[0].textContent);
+        let img = avatar2.querySelector("img");
+        img.src = auth.avatar;
+        img.alt = auth.name;
+        let label = avatar2.querySelector(".avatar-status-dot");
+        if (auth.pro) {
+          label.classList = "avatar-status-dot avatar-status-dot--subscriber";
+        } else {
+          label.remove();
+        }
+        context.type = "profile";
+        context.name = split[1];
+        patch_avatar(avatar2, split[1]);
+      } else if (href.startsWith(`${root}user/`)) {
+        context.type = "profile";
+        context.name = split[1];
+        strongs.forEach((strong, index4) => {
+          if (index4 == strongs.length - 1 && strongs.length > 1) {
+            obtain_additional_info(
+              strong.previousSibling.textContent,
+              strong.nextSibling.textContent
+            );
+            return;
+          } else if (index4 == strongs.length - 1 && strongs.length == 1) {
+            obtain_additional_info(strong.nextSibling.textContent);
+          }
+          involved.push(strong.textContent);
+        });
+        patch_avatar(avatar2, involved[0]);
+      } else if (href.startsWith(`${root}music/`)) {
+        if (split[2].startsWith("+")) {
+          context.type = "artist";
+          context.name = correct_artist(desanitise(split[1]));
+        } else if (split[2] == "_") {
+          context.type = "track";
+          context.sister = correct_artist(desanitise(split[1]));
+          context.name = correct_item_by_artist(
+            desanitise(split[3]),
+            context.sister
+          );
+        } else {
+          context.type = "album";
+          context.sister = correct_artist(desanitise(split[1]));
+          context.name = correct_item_by_artist(
+            desanitise(split[2]),
+            context.sister
+          );
+        }
+        strongs.forEach((strong, index4) => {
+          if (index4 == strongs.length - 1) {
+            obtain_additional_info(
+              strong.previousSibling.textContent,
+              strong.nextSibling.textContent
+            );
+            return;
+          }
+          involved.push(strong.textContent);
+        });
+        patch_avatar(avatar2, involved[0]);
+      } else if (href.startsWith(`${root}tag/`)) {
+        context.type = "tag";
+        context.name = split[1];
+        strongs.forEach((strong, index4) => {
+          if (index4 == strongs.length - 1) {
+            obtain_additional_info(
+              strong.previousSibling.textContent,
+              strong.nextSibling.textContent
+            );
+            return;
+          }
+          involved.push(strong.textContent);
+        });
+        patch_avatar(avatar2, involved[0]);
+      }
+      render(
+        notification,
+        html`
+                <div class="notification-avatar">${avatar2}</div>
+                <div
+                    class="bleh-icon"
+                    data-type=${type}
+                    style="--icon: var(--mask)"
+                />
+                <div class="notification-content">
+                    <div class="notification-title">
+                        ${type == "shoutbox" ? html.node`
+                    ${others_included == 0 ? html.node`
+                        ${is_reply ? tl2(trans.user_replied).replace("{u}", involved.join(", ")) : tl2(trans.user_commented).replace("{u}", involved.join(", "))}
+                    ` : html.node`
+                        ${is_reply ? tl2(trans.users_replied).replace("{u}", involved.join(", ")).replace("{c}", others_included) : tl2(trans.users_commented).replace("{u}", involved.join(", ")).replace("{c}", others_included)}
+                    `}
+                    ` : type == "obsession" ? tl2(trans.obsession_expired) : type == "listening-report" ? tl2(trans.listening_report_available).replace(
+          "{m}",
+          involved[0]
+        ) : ""}
+                    </div>
+                    <div class="notification-context">
+                        <span
+                            class="bleh-icon"
+                            style="--icon: var(--icon-16-indent)"
+                        />
+                        <span
+                            class="notification-type"
+                            data-type=${context.type}
+                        >
+                            <span
+                                class="bleh-icon"
+                                style="--icon: var(--mask)"
+                            />
+                            <span
+                                >${context.sister ? `${context.name} ${tl2(trans.by)} ${context.sister}` : context.name}</span
+                            >
+                        </span>
+                    </div>
+                </div>
+                <div class="notification-time">${time2}</div>
+                <a
+                    class="link-block-cover-link"
+                    href=${link.getAttribute("href")}
+                />
+            `
+      );
+      function obtain_additional_info(text4, backup_text = null) {
+        const match3 = text4.match(/\d+/);
+        if (match3) others_included = parseInt(match3[0]);
+        if (text4.includes(tl2(trans.notification_replied_ctx)))
+          is_reply = true;
+        else if (backup_text && backup_text.trim().includes(tl2(trans.notification_replied_ctx)))
+          is_reply = true;
+      }
+    });
+  }
+
+  // src/components/messages.js
+  function bleh_message_list(list, mini = false, delete_btn = null, checkboxes = []) {
+    list.classList = "notification-list";
+    if (mini) list.classList.add("mini");
+    const sent_to = page.subpage == "sent_overview";
+    let selected_messages = [];
+    const messages = list.querySelectorAll(".inbox-message");
+    messages.forEach((message, index3) => {
+      if (mini && index3 > 4) message.style.display = "none";
+      const link = message.querySelector(".inbox-message-preview > a");
+      const href = link.getAttribute("href");
+      const active = message.classList.contains("inbox-message--unviewed");
+      message.classList = "notification message";
+      if (active) message.classList.add("active");
+      if (mini) message.classList.add("mini");
+      const avatar2 = message.querySelector(".avatar");
+      avatar2.classList = "avatar";
+      const id = message.querySelector("input").value;
+      const author = message.querySelector(".inbox-message-sender-name").textContent.trim();
+      const time2 = message.querySelector(".inbox-message-timestamp");
+      const subject = message.querySelector(".inbox-message-subject > span").textContent.trim();
+      const content = message.querySelector(".inbox-message-message > span").textContent.trim();
+      let valentine = false;
+      if (subject.endsWith("\u2661")) {
+        for (let translation in trans.valentine) {
+          if (subject == trans.valentine[translation].replace("{u}", auth.name)) {
+            valentine = true;
+            break;
+          }
+        }
+      }
+      if (valentine) message.classList.add("valentine", "colourful");
+      patch_avatar(avatar2, author);
+      let checkbox;
+      render(message, html`
+            ${!mini ? html.node`
+                <div class="message-checkbox">
+                    ${checkbox = toggle({
+        type: "checkbox",
+        name: "message_id",
+        id,
+        data: id,
+        func: (val) => {
+          message.setAttribute("aria-checked", val);
+          if (val) {
+            selected_messages.push(message);
+          } else {
+            selected_messages = selected_messages.filter((selected_msg) => selected_msg != message);
+          }
+          if (selected_messages.length > 0) {
+            delete_btn.removeAttribute("disabled");
+          } else {
+            delete_btn.setAttribute("disabled", "true");
+          }
+        }
+      })}
+                </div>
+            ` : ""}
+            <div class="notification-avatar">${avatar2}</div>
+            <div
+                class="bleh-icon"
+                data-type=${!valentine ? "message" : "valentine"}
+                style="--icon: var(--mask)"
+            />
+            <div class="notification-content not-main">
+                ${sent_to ? html.node`
+                    <div class="notification-context">
+                        <span class="notification-type">
+                            ${tl2(trans.you_sent_to)}
+                        </span>
+                    </div>
+                ` : ""}
+                <div class="notification-title">
+                    ${author}
+                </div>
+                ${!sent_to ? html.node`
+                    <div class="notification-context">
+                        <span class="notification-type">
+                            ${tl2(trans.sent_to_you)}
+                        </span>
+                    </div>
+                ` : ""}
+            </div>
+            <div class="message-content">
+                <div class="message-subject">
+                    ${subject}
+                </div>
+                <div class="message-summary">
+                    ${content}
+                </div>
+            </div>
+            <div class="notification-time">${time2}</div>
+            <a
+                class="link-block-cover-link"
+                href=${href}
+            />
+        `);
+      checkboxes.push(checkbox);
+    });
+  }
+
+  // src/navigation.js
+  function patch_masthead() {
+    let masthead_logo = document.body.querySelector(".masthead-logo");
+    if (!masthead_logo) return;
+    if (!masthead_logo.hasAttribute("data-kate-processed")) {
+      masthead_logo.setAttribute("data-kate-processed", "true");
+      update_masthead(masthead_logo);
+    }
+  }
+  function update_branding_type(state = settings.branding_type) {
+    if (state == "bleh") {
+      render(page.state.home_link, html`
+            <div class="home-logo bleh-logo">${version.brand}</div>
+        `);
+    } else if (state == "lastfm") {
+      render(page.state.home_link, html`
+            <div class="home-logo lastfm-logo">Last.fm</div>
+        `);
+    }
+  }
+  function update_masthead(masthead_logo = document.body.querySelector(".masthead-logo")) {
+    const update_required = localStorage.getItem("bleh_update_required") || "false";
+    let home_link;
+    render(masthead_logo, html``);
+    render(masthead_logo, html`
+        <a class="hidden-link" style="display: none !important" href="/">Last.fm</a>
+        <a class="navigation-item home-link" href="${root}music" ref=${(el) => home_link = el} />
+    `);
+    page.state.home_link = home_link;
+    update_branding_type();
+    const head_menu = tippy_esm_default(home_link, {
+      theme: "window",
+      content: html.node`
+            <div class="setting-group blend">
+                ${setting({ id: "branding_type", func: update_branding_type })}
+            </div>
+        `,
+      placement: "right-start",
+      trigger: "manual",
+      interactive: true,
+      interactiveBorder: 10,
+      offset: [0, 0],
+      onShow(instance) {
+        instance.popper.addEventListener("click", (event3) => {
+          instance.hide();
+        });
+      }
+    });
+    register_menu(home_link, head_menu);
+    let link;
+    if (update_required === "false") {
+      link = html.node`
+            <a class="navigation-item home-version" href="${root}bleh">
+                ${version.build}
+                <div class="new-badge sku spacing">
+                    ${version.sku}
+                    ${settings.dev ? html.node`
+                        <span class="bleh-icon-container">
+                            <span class="bleh-icon" data-type="dev" style="--icon: var(--mask)"/>
+                        </span>
+                    ` : ""}
+                </div>
+            </a>
+        `;
+    } else {
+      link = html.node`
+            <a class="navigation-item home-version" onclick=${() => prompt_for_update()}>
+                <div class="update-container">
+                    <div class="bleh-icon" style="--icon: var(--icon-16-update)" />
+                </div>
+                ${version.build}
+                <div class="new-badge sku spacing">
+                    ${version.sku}
+                    ${settings.dev ? html.node`
+                        <span class="bleh-icon-container">
+                            <span class="bleh-icon" data-type="dev" style="--icon: var(--mask)"/>
+                        </span>
+                    ` : ""}
+                </div>
+            </a>
+        `;
+      tippy_esm_default(link, {
+        content: tl2(trans.update_available_to_install)
+      });
+    }
+    const last_checked = localStorage.getItem("bleh_update_checked") || null;
+    const link_menu = tippy_esm_default(link, {
+      theme: "context-menu",
+      content: html.node`
+            <a class="dropdown-menu-clickable-item" data-type="update" href="${root}bleh/general">
+                ${last_checked ? tl2(trans.last_checked_date).replace(
+        "{d}",
+        DateTime.fromJSDate(
+          new Date(last_checked)
+        ).toRelative()
+      ) : tl2(trans.never_checked)}
+            </a>
+        `,
+      placement: "right-start",
+      trigger: "manual",
+      interactive: true,
+      interactiveBorder: 10,
+      offset: [0, 0],
+      onShow(instance) {
+        instance.popper.addEventListener("click", (event3) => {
+          instance.hide();
+        });
+      }
+    });
+    register_menu(link, link_menu);
+    masthead_logo.appendChild(link);
+  }
+  function append_nav() {
+    if (ff("developer") && !page.structure.indicator) {
+      let page_indicator2 = document.createElement("div");
+      page_indicator2.classList.add("page-indicator");
+      document.documentElement.appendChild(page_indicator2);
+      page.structure.indicator = page_indicator2;
+    }
+    if (!page.structure.loader) {
+      const loader = html.node`
+            <div class="loader">
+                <div class="loader-bar">
+                    <div class="loader-bar-fill" />
+                </div>
+            </div>
+        `;
+      document.body.appendChild(loader);
+      page.structure.loader = loader;
+    }
+    if (!page.structure.style_warning) {
+      const style_warning = html.node`
+            <div class="style-warning" style="position: fixed; top: 0; left: 0; right: 0; padding: 20px; background: #fff; z-index: 1000000000; display: flex; align-items: center; gap: 30px">
+                <strong>${tl2(trans.style_warning)}</strong>
+                <button class="btn primary" onclick=${() => {
+        save_setting("branch", "uwu");
+      }}>
+                    Reset branch to release (uwu)
+                </button>
+                <button class="btn-primary" onclick=${() => {
+        save_setting("dev", false);
+        window.location.reload();
+      }}>${tl2(trans.re_enable_style_loading)}</button>
+            </div>
+        `;
+      document.body.appendChild(style_warning);
+      page.structure.style_warning = style_warning;
+    }
+    const update_required = localStorage.getItem("bleh_update_required") || "false";
+    page.state.quick_access_items = {
+      home: {
+        name: tl2(trans.home),
+        icon: "home",
+        url: `${root}music`
+      },
+      reports: {
+        name: tl2(trans.reports),
+        icon: "reports",
+        url: `${root}user/${auth.name}/listening-report`
+      },
+      library: {
+        name: tl2(trans.library),
+        icon: "library",
+        url: `${root}user/${auth.name}/library`
+      },
+      shouts: {
+        name: tl2(trans.shouts),
+        icon: "shouts",
+        url: `${root}user/${auth.name}/shoutbox`
+      },
+      obsessions: {
+        name: tl2(trans.obsessions),
+        icon: "obsessions",
+        url: `${root}user/${auth.name}/obsessions`
+      },
+      bookmarks: {
+        name: tl2(trans.bookmarks),
+        icon: "bookmark",
+        url: `${root}music/+bookmarks`
+      },
+      friends: {
+        name: tl2(trans.friends),
+        icon: "friends",
+        url: `${root}user/${auth.name}/friends`
+      },
+      notifications: {
+        name: tl2(trans.notifications),
+        icon: "notifications",
+        url: `${root}inbox/notifications`
+      },
+      messages: {
+        name: tl2(trans.messages),
+        icon: "messages",
+        url: `${root}inbox`
+      },
+      collage: {
+        name: tl2(trans.collage),
+        icon: "collage",
+        url: `${root}bleh/minis/collage`
+      },
+      compare: {
+        name: tl2(trans.compare),
+        icon: "compare",
+        url: `${root}bleh/minis/compare`
+      },
+      scrobble: {
+        name: tl2(trans.scrobble),
+        icon: "add",
+        action: () => submit_scrobble()
+      }
+    };
+    const masthead = document.body.querySelector(".masthead");
+    const inner2 = masthead.querySelector(".masthead-inner-wrap");
+    const navs = inner2.querySelector(".masthead-nav-wrap");
+    const search = inner2.querySelector(".masthead-search-form");
+    const form = search.querySelector(".masthead-search-field");
+    form.placeholder = tl2(trans.search_for_anything);
+    inner2.insertBefore(
+      html.node`
+        <div class="masthead-search-wrap">
+            ${search}
+        </div>
+    `,
+      navs
+    );
+    let new_auth = masthead.querySelector(".auth-dropdown-menu");
+    let links = masthead.querySelector(".masthead-nav .navlist-items");
+    render(links, html``);
+    let auth_link2 = masthead.querySelector(
+      ".masthead-nav-wrap > .site-auth .auth-link"
+    );
+    if (!auth_link2) {
+      render(
+        links,
+        html`
+                ${() => {
+          const elem = html.node`
+                    <li class="masthead-nav-item">
+                        <a class="masthead-nav-control chibi" href="${root}bleh" data-label="bleh_no_auth">
+                            ${tl2(trans.bleh_settings)}
+                        </a>
+                    </li>
+                `;
+          tippy_esm_default(elem, {
+            content: tl2(trans.bleh_settings)
+          });
+          return elem;
+        }}
+            `
+      );
+      masthead.appendChild(html.node`
+            <div class="mobile-controls">
+                <a class="btn mobile-control" data-type="register" href="${root}join">
+                    ${tl2(trans.sign_up)}
+                </a>
+                <a class="btn mobile-control" aria-checked=${page.type == "settings" || page.type == "bleh_settings"} data-menu-item="settings" href="${root}bleh">
+                    ${tl2(trans.settings)}
+                </a>
+                <a class="btn mobile-control" data-type="login" href="${root}login">
+                    ${tl2(trans.log_in)}
+                </a>
+            </div>
+        `);
+      return;
+    }
+    if (auth_link2.hasAttribute("data-bleh")) return;
+    auth_link2.setAttribute("data-bleh", "true");
+    const name = html.node`
+        <p class="auth-link-name">${auth.name}</p>
+    `;
+    auth_link2.appendChild(name);
+    queue_popup("navigation_menu", auth_link2);
+    load_profile_cache_externally(auth.name).then((cache2) => {
+      if (cache2.username) name.textContent = cache2.username;
+    });
+    let badges = load_badges(auth.name, true);
+    if (badges) {
+      auth_link2.appendChild(create_badge(badges, false, false, true));
+    } else if (auth.pro) {
+      auth_link2.appendChild(html.node`
+            <span class="label user-status-subscriber auth-badge">${tl2(trans.badges["user-status-subscriber"].name)}</span>
+        `);
+    }
+    const more_button = html.node`
+        <button class="masthead-nav-control chibi icon" data-type="more">
+            ${tl2(trans.more)}
+        </button>
+    `;
+    tippy_esm_default(more_button, {
+      content: more_button.textContent
+    });
+    const more_menu = tippy_esm_default(more_button, {
+      content: html.node`
+            <a class="dropdown-menu-clickable-item accent" data-type="discord" href="https://discord.gg/${discord}" target="_blank">
+                ${tl2(trans.join_discord)}
+            </a>
+            <button class="dropdown-menu-clickable-item sponsor" onclick=${() => sponsor()}>
+                ${tl2(trans.sponsor)}
+            </button>
+            <a class="dropdown-menu-clickable-item lotus" href="https://github.com/katelyynn/lotus/issues/new/choose" target="_blank">
+                ${tl2(trans.suggest_correction)}
+            </a>
+            <div class="sep" />
+            <a class="dropdown-menu-clickable-item" data-type="update" href="${root}bleh/general">
+                ${tl2(trans.updates)}
+            </a>
+            <button class="dropdown-menu-clickable-item" data-menu-item="news" onclick=${() => news()}>
+                ${tl2(trans.news)}
+            </button>
+            <a class="dropdown-menu-clickable-item issues" href="https://github.com/katelyynn/bleh/issues" target="_blank">
+                ${tl2(trans.report_issue)}
+            </a>
+        `,
+      theme: "menu",
+      placement: "top",
+      interactive: true,
+      interactiveBorder: 10,
+      trigger: "click",
+      onShow(instance) {
+        instance.popper.addEventListener("click", (event3) => {
+          instance.hide();
+        });
+      }
+    });
+    links.appendChild(more_button);
+    let bleh_container = html.node`
+        <li class="masthead-nav-item">
+            <a class="masthead-nav-control ${stored_season.new_years_eve ? "" : "chibi"}" href="${root}bleh${stored_season.id != "none" ? "/seasonal" : ""}" data-label="bleh" data-season="${stored_season.id}" data-season-active="${stored_season.id != "none" ? "true" : "false"}" data-live="false">
+                ${stored_season.id == "none" ? tl2(trans.bleh_settings) : DateTime.fromISO(stored_season.end.replace("y0", stored_season.year).replace("{offset}", stored_season.offset)).toRelative(DateTime.fromISO(stored_season.now))}
+            </a>
+        </li>
+    `;
+    if (stored_season.id == "none") {
+      tippy_esm_default(bleh_container, {
+        content: tl2(trans.bleh_settings)
+      });
+    } else {
+      page.header.season_tooltip = tippy_esm_default(bleh_container, {
+        theme: "seasonal-swatch",
+        content: html.node`
+                <span class="season-colour-name colourful" data-season=${stored_season.id}>${tl2(trans.seasonal.listing[stored_season.id])}</span>
+                <span class="season-exclusive">${tl2(trans.seasonal.notice)}</span>
+            `
+      });
+    }
+    links.appendChild(bleh_container);
+    page.header.season = bleh_container.querySelector("a");
+    let notif_count = new_auth.querySelector(
+      '[data-analytics-label="notifications"] + .auth-avatar-notification-count-badge'
+    );
+    if (!notif_count) notif_count = "0";
+    else notif_count = notif_count.textContent;
+    let inbox_count = new_auth.querySelector(
+      '[data-analytics-label="inbox"] + .auth-avatar-notification-count-badge'
+    );
+    if (!inbox_count) inbox_count = "0";
+    else inbox_count = inbox_count.textContent;
+    const count = parseInt(notif_count) + parseInt(inbox_count);
+    const inbox = html.node`
+        <a class="inbox-item chibi" href="${root}inbox/notifications">
+            <div class="counter" data-count=${count}>${count}</div>
+        </a>
+    `;
+    tippy_esm_default(inbox, {
+      theme: "stack",
+      content: html.node`
+            <strong>${tl2(trans.inbox)}</strong>
+            <div class="inbox-info">
+                <div class="inbox-info-item">
+                    <div class="bleh-icon" data-type="notifications" />
+                    ${notif_count}
+                </div>
+                <div class="inbox-sep" />
+                <div class="inbox-info-item">
+                    <div class="bleh-icon" data-type="messages" />
+                    ${inbox_count}
+                </div>
+            </div>
+        `
+    });
+    inbox.addEventListener("click", (e) => {
+      const cmd = e.getModifierState("Control") || e.getModifierState("Meta");
+      const new_tab = e.button === 1 || cmd;
+      if (!new_tab) e.preventDefault();
+    });
+    tippy_esm_default(inbox, {
+      content: html.node`
+            <div class="window-header">
+                <div class="bleh-icon" data-type="inbox" style="--icon: var(--mask)" />
+                <div class="window-title">${tl2(trans.inbox)}</div>
+            </div>
+            ${setting({ id: "inbox_view", func: render_inbox })}
+            <div class="window-content" />
+        `,
+      theme: "nav-window",
+      placement: "top",
+      interactive: true,
+      interactiveBorder: 10,
+      trigger: "click",
+      onShow(instance) {
+        console.info("navigation instance MAIN", instance, instance.popper);
+        page.state.inbox_content = instance.popper.querySelector(".window-content");
+        render_inbox();
+      }
+    });
+    function render_notifications(notifications) {
+      if (settings.inbox_view != "notifications") return;
+      bleh_notification_list(notifications, true);
+      render(
+        page.state.inbox_content,
+        html`
+                <div class="mini-notifications">
+                    ${notifications}
+                    <p class="more-link">
+                        <a href="${root}inbox/notifications"
+                            >${tl2(trans.read_more)}</a
+                        >
+                    </p>
+                </div>
+            `
+      );
+    }
+    function render_messages(messages) {
+      if (settings.inbox_view != "messages") return;
+      bleh_message_list(messages, true);
+      render(
+        page.state.inbox_content,
+        html`
+                <div class="mini-notifications">
+                    ${messages}
+                    <p class="more-link">
+                        <a href="${root}inbox">${tl2(trans.read_more)}</a>
+                    </p>
+                </div>
+            `
+      );
+    }
+    function render_inbox() {
+      const view = settings.inbox_view;
+      let content = page.state.inbox_content;
+      log(`rendering view ${view}`, "navigation", "info", { content });
+      if (!content) return;
+      render(
+        content,
+        html`
+                <div class="mini-notifications content-loading">
+                    <div class="loading-data-container">
+                        <div class="loading-data-text">
+                            ${tl2(trans.loading)}
+                        </div>
+                    </div>
+                </div>
+            `
+      );
+      if (view == "notifications") {
+        if (page.notifications.list)
+          render_notifications(page.notifications.list);
+        fetch_notifications().then(
+          (notifications) => render_notifications(notifications)
+        );
+      } else {
+        if (page.messages.list) render_messages(page.messages.list);
+        fetch_messages().then((messages) => render_messages(messages));
+      }
+    }
+    links.appendChild(inbox);
+    queue_popup("inbox", inbox);
+    queue_popup("search", search);
+    let selected_language = document.querySelector(
+      ".footer-language--active strong"
+    )?.textContent;
+    let language_options = document.querySelectorAll(".footer-language-form");
+    const language_menu = html.node`
+        <div class="language-menu">
+            <button class="dropdown-menu-clickable-item v2" aria-selected="true">
+                <div class="auth-dropdown-item-row">
+                    <span class="auth-dropdown-item-left">
+                        <span class="flag" style="background-image: url(https://katelyynn.github.io/bleh/fm/flags/${lang}.svg)" />
+                        ${selected_language}
+                    </span>
+                    ${lang in lang_info ? html.node`
+                            <span class="auth-dropdown-item-right">
+                                <div class="bleh-icon checkmark" />
+                            </span>
+                        ` : ""}
+                </div>
+            </button>
+            <div class="sep"></div>
+        </div>
+    `;
+    language_options.forEach((language_option) => {
+      const button2 = language_option.querySelector("button");
+      if (!button2) {
+        log(
+          "random last.fm error where this button is non existent",
+          "language",
+          "error",
+          {
+            language_options,
+            language_option,
+            raw: language_option.innerHTML,
+            raw_options: language_options.innerHTML
+          }
+        );
+        return;
+      }
+      const key = button2.getAttribute("name");
+      button2.classList.remove("mimic-link");
+      button2.classList.add(
+        "dropdown-menu-clickable-item",
+        "v2",
+        "flex-button"
+      );
+      render(
+        button2,
+        html`
+                <div class="auth-dropdown-item-row">
+                    <span class="auth-dropdown-item-left">
+                        <span
+                            class="flag"
+                            style="background-image: url(https://katelyynn.github.io/bleh/fm/flags/${key}.svg)"
+                        />
+                        ${button2.textContent}
+                    </span>
+                    ${key in lang_info ? html.node`
+                            <span class="auth-dropdown-item-right">
+                                <div class="bleh-icon checkmark" />
+                            </span>
+                        ` : ""}
+                </div>
+            `
+      );
+      language_menu.appendChild(language_option);
+    });
+    let themes = [
+      {
+        id: "adaptive",
+        name: tl2(trans.auto),
+        hide: !ff("adaptive_theme"),
+        new_release: true
+      },
+      {
+        id: "glass",
+        type: "light",
+        name: tl2(trans.glass),
+        hide: !ff("glass"),
+        new_release: true
+      },
+      {
+        id: "light",
+        type: "light",
+        name: tl2(trans.themes.light)
+      },
+      {
+        id: "ink",
+        type: "light",
+        name: tl2(trans.themes.ink)
+      },
+      {
+        id: "dark",
+        formal: "ash",
+        type: "dark",
+        name: tl2(trans.themes.dark)
+      },
+      {
+        id: "darker",
+        formal: "dark",
+        type: "darker",
+        name: tl2(trans.themes.darker)
+      },
+      {
+        id: "oled",
+        formal: "void",
+        type: "oled",
+        name: tl2(trans.themes.oled)
+      }
+    ];
+    const token = new_auth.querySelector('[name="csrfmiddlewaretoken"]').getAttribute("value");
+    page.token = token;
+    let auth_menu = tippy_esm_default(auth_link2, {
+      theme: "auth-menu-v2",
+      placement: "top",
+      interactive: true,
+      interactiveBorder: 10,
+      trigger: "click",
+      onShow: (instance) => {
+        page.structure.notifications.setAttribute("data-auth-open", "true");
+        badges = load_badges(auth.name);
+        const update_required2 = localStorage.getItem("bleh_update_required") || "false";
+        let page_2;
+        let side;
+        let status_container;
+        const current = settings.navigation_items;
+        let length = current.length;
+        if (length < 2) length = 2;
+        const show_language = settings.navigation_language == true ? 1 : 0;
+        const height = (length + 3 + show_language) * 30;
+        const themes_disabled = page.subpage.startsWith("listening-report") || page.state.settings_page == "visual";
+        let auth_header;
+        let auth_bg;
+        instance.setContent(html.node`
+                ${update_required2 == "true" ? html.node`
+                <div class="update-available-banner">
+                    <div class="update-container">
+                        <div class="bleh-icon" style="--icon: var(--icon-16-update)" />
+                    </div>
+                    <span>${tl2(trans.update_available_to_install)}</span>
+                </div>
+                ` : ""}
+                <div class="auth-menu-v2" style="--page-height: ${height}px">
+                    <div class="side primary">
+                        <div class="auth-bg-container" ref=${(el) => auth_bg = el}>
+                            ${!auth.avatar.endsWith("818148bf682d429dc215c1705eb27b98.png") ? html.node`
+                            <div class="bg" style="background-image: url(${auth.avatar.replace("avatar42s", "avatar170s")})" />
+                            ` : ""}
+                        </div>
+                        <div class="auth-menu-header" ref=${(el) => auth_header = el}>
+                            <div class="avatar">
+                                <img src=${auth.avatar.replace("avatar42s", "avatar170s")} alt=${auth.name} />
+                            </div>
+                            <div class="name"><span class="at">@</span>${auth.name}</div>
+                            ${auth.pro ? html.node`
+                                <div class="badges">
+                                    ${auth.pro ? () => {
+          const elem = html.node`
+                                            <span class="label user-status-subscriber no-hover">
+                                                ${tl2(trans.badges["user-status-subscriber"].name)}
+                                            </span>
+                                        `;
+          tippy_esm_default(elem, {
+            theme: "badge",
+            placement: "bottom",
+            content: html.node`
+                                                <div class="badge-name">${tl2(trans.badges["user-status-subscriber"].name)}</div>
+                                                <div class="badge-reason">${tl2(trans.badges["user-status-subscriber"].reason)}</div>
+                                            `
+          });
+          return elem;
+        } : ""}
+                                </div>
+                            ` : ""}
+                            <a class="link-block-cover-link" href="${root}user/${auth.name}" />
+                        </div>
+                        <div class="floating button-group">
+                            ${() => {
+          let button2;
+          let form2 = html.node`
+                                    <form>
+                                        <input type="hidden" name="csrfmiddlewaretoken" value="${token}">
+                                        <a class="dropdown-menu-clickable-item chibi" ref=${(el) => button2 = el} data-menu-item="logout" href="${root}logout">
+                                            ${tl2(trans.logout)}
+                                        </a>
+                                    </form>
+                                `;
+          tippy_esm_default(button2, {
+            content: tl2(trans.logout)
+          });
+          return form2;
+        }}
+                            ${settings.starred_friend != "" ? () => {
+          let button2 = html.node`
+                                    <a class="dropdown-menu-clickable-item chibi" data-type="starred_friend" data-starred="true" href="${root}user/${settings.starred_friend}">${settings.starred_friend}</a>
+                                `;
+          tippy_esm_default(button2, {
+            content: settings.starred_friend
+          });
+          return button2;
+        } : () => {
+          let button2 = html.node`
+                                    <button class="dropdown-menu-clickable-item chibi" data-type="starred_friend" data-is-shortcut="false" onclick=${() => open_starred_friend_window()}>${tl2(trans.starred_friend.name)}</button>
+                                `;
+          tippy_esm_default(button2, {
+            content: tl2(
+              trans.starred_friend.name
+            )
+          });
+          return button2;
+        }}
+                        </div>
+                    </div>
+                    <div class="vertical-sep" />
+                    <div class="side" ref=${(el) => side = el} data-page="1">
+                        <div class="side-page" data-page="1">
+                            ${current.map((val) => {
+          let elem;
+          const formal = page.state.quick_access_items[val];
+          if (formal.url)
+            elem = html.node`<a href=${formal.url} />`;
+          else
+            elem = html.node`<button onclick=${() => {
+              formal.action();
+              instance.hide();
+            }} />`;
+          elem.classList = "dropdown-menu-clickable-item";
+          elem.setAttribute("data-type", formal.icon);
+          elem.textContent = formal.name;
+          let count2 = 0;
+          if (val == "notifications") count2 = notif_count;
+          else if (val == "messages") count2 = inbox_count;
+          if (count2) {
+            render(elem, html`
+                                        <div class="auth-dropdown-item-row">
+                                            <span class="auth-dropdown-item-left">
+                                                ${formal.name}
+                                            </span>
+                                            <span class="auth-dropdown-item-right">
+                                                ${count2}
+                                            </span>
+                                        </div>
+                                    `);
+          }
+          if (val == "friends") {
+            elem = html.node`
+                                        <div class="button-combo">
+                                            <a class="dropdown-menu-clickable-item" data-type=${formal.icon} href=${formal.url}>
+                                                ${formal.name}
+                                            </a>
+                                            <div class="button-combo-sep" />
+                                            <button class="dropdown-menu-clickable-item chibi" data-type="continue" onclick=${() => {
+              const friends2 = settings.friends.filter((friend) => friend != settings.starred_friend);
+              render(page_2, html``);
+              render(page_2, html`
+                                                    <button class="dropdown-menu-clickable-item" data-type="back" onclick=${() => {
+                side.setAttribute("data-page", "1");
+              }}>
+                                                        ${tl2(trans.back)}
+                                                    </button>
+                                                    ${settings.starred_friend ? html.node`
+                                                    <a class="dropdown-menu-clickable-item" data-type="profile" href="${root}user/${settings.starred_friend}">
+                                                        <span><span class="at">@</span>${settings.starred_friend}</span>
+                                                        <span class="star-icon colourful">
+                                                            <span class="bleh-icon" />
+                                                        </span>
+                                                    </a>
+                                                    ` : ""}
+                                                    ${friends2.map((friend) => html.node`
+                                                    <a class="dropdown-menu-clickable-item" data-type="profile" href="${root}user/${friend}">
+                                                        <span><span class="at">@</span>${friend}</span>
+                                                    </a>
+                                                    `)}
+                                                    <div class="sep" />
+                                                    <button class="dropdown-menu-clickable-item" data-type="edit" onclick=${() => {
+                open_starred_friend_window();
+                instance.hide();
+              }}>
+                                                        ${tl2(trans.edit_close_friends)}
+                                                    </button>
+                                                `);
+              side.setAttribute("data-page", "2");
+            }}>
+                                                ${tl2(trans.more)}
+                                            </button>
+                                        </div>
+                                    `;
+          }
+          return elem;
+        })}
+                            <div class="button-combo">
+                                <button class="dropdown-menu-clickable-item" data-menu-item="themes" disabled=${themes_disabled} onclick=${() => toggle_theme()}>
+                                    ${tl2(trans.themes.name)}
+                                </button>
+                                <div class="button-combo-sep" />
+                                <button class="dropdown-menu-clickable-item chibi" data-type="continue" disabled=${themes_disabled} onclick=${() => {
+          let buttons = [];
+          render(page_2, html``);
+          render(page_2, html`
+                                        <button class="dropdown-menu-clickable-item" data-type="back" onclick=${() => {
+            side.setAttribute("data-page", "1");
+          }}>
+                                            ${tl2(trans.back)}
+                                        </button>
+                                        ${themes.map((theme) => {
+            if (theme.hide)
+              return html.node``;
+            if (!theme.formal)
+              theme.formal = theme.id;
+            const btn = html.node`
+                                                <button class="dropdown-menu-clickable-item theme-item-in-menu" aria-selected=${!settings.theme_schedule ? settings.theme == theme.id : theme.id == "adaptive"} data-bleh-theme=${theme.id} data-type="theme_${theme.formal}" onclick="${() => {
+              if (theme.id != "adaptive") {
+                save_setting("theme_schedule", false);
+                save_setting("theme", theme.id);
+              } else {
+                save_setting("theme_schedule", true);
+                match2();
+              }
+              buttons.forEach(
+                (button2) => {
+                  const type = button2.getAttribute(
+                    "data-bleh-theme"
+                  );
+                  if (!settings.theme_schedule) {
+                    button2.setAttribute(
+                      "aria-selected",
+                      settings.theme == type
+                    );
+                  } else if (type == "adaptive") {
+                    button2.setAttribute(
+                      "aria-selected",
+                      true
+                    );
+                  } else {
+                    button2.setAttribute(
+                      "aria-selected",
+                      false
+                    );
+                  }
+                }
+              );
+            }}">
+                                                    ${theme.name}
+                                                </button>
+                                            `;
+            buttons.push(btn);
+            return btn;
+          })}
+                                    `);
+          side.setAttribute("data-page", "2");
+        }}>
+                                    ${tl2(trans.more)}
+                                </button>
+                            </div>
+                            ${show_language ? html.node`
+                            <div class="button-combo">
+                                <button class="dropdown-menu-clickable-item" data-menu-item="language" onclick=${() => {
+          render(page_2, html`
+                                        <button
+                                            class="dropdown-menu-clickable-item"
+                                            data-type="back"
+                                            onclick=${() => {
+            side.setAttribute(
+              "data-page",
+              "1"
+            );
+          }}
+                                        >
+                                            ${tl2(trans.back)}
+                                        </button>
+                                        ${language_menu}
+                                    `);
+          side.setAttribute("data-page", "2");
+        }}>
+                                    ${tl2(trans.language)}
+                                </button>
+                                <div class="button-combo-sep" />
+                                <button class="dropdown-menu-clickable-item chibi" data-type="continue" onclick=${() => {
+          render(page_2, html`
+                                        <button
+                                            class="dropdown-menu-clickable-item"
+                                            data-type="back"
+                                            onclick=${() => {
+            side.setAttribute(
+              "data-page",
+              "1"
+            );
+          }}
+                                        >
+                                            ${tl2(trans.back)}
+                                        </button>
+                                        ${language_menu}
+                                    `);
+          side.setAttribute("data-page", "2");
+        }}>
+                                    ${tl2(trans.more)}
+                                </button>
+                            </div>
+                            ` : ""}
+                            <div class="button-combo">
+                                <a class="dropdown-menu-clickable-item" data-type="mini" href="${root}bleh/minis">
+                                    ${tl2(trans.minis)}
+                                </a>
+                                <div class="button-combo-sep" />
+                                <button class="dropdown-menu-clickable-item chibi" data-menu-item="news" onclick=${() => {
+          news();
+          instance.hide();
+        }}>
+                                    ${tl2(trans.news)}
+                                </button>
+                            </div>
+
+                            <div class="button-combo">
+                                <a class="dropdown-menu-clickable-item" data-menu-item="bleh" href="${root}bleh">
+                                    ${tl2(trans.settings)}
+                                </a>
+                                <div class="button-combo-sep" />
+                                <a class="dropdown-menu-clickable-item chibi" data-type="settings" href="${root}settings">
+                                    ${tl2(trans.settings)}
+                                </a>
+                            </div>
+                        </div>
+                        <div class="side-page" data-page="2" ref=${(el) => page_2 = el} />
+                    </div>
+                </div>
+                ${ff("status_in_menu") && auth.pro ? html.node`
+                <div class="auth-menu-status" ref=${(el) => status_container = el}>
+                    <div class="status">
+                        <div class="loading-data-container">
+                            <div class="loading-data-text">${tl2(trans.loading)}</div>
+                        </div>
+                    </div>
+                </div>
+                ` : ""}
+            `);
+        load_profile_cache_externally(auth.name).then((cache2) => {
+          render(auth_bg, html`
+                    ${cache2.banner ? html.node`
+                    <div class="bg" style="background-image: url(${cache2.banner})" />
+                    ` : !auth.avatar.endsWith("818148bf682d429dc215c1705eb27b98.png") ? html.node`
+                    <div class="bg" style="background-image: url(${auth.avatar.replace("avatar42s", "avatar170s")})" />
+                    ` : ""}
+                `);
+          render(auth_header, html`
+                    <div class="avatar">
+                        <img src=${auth.avatar.replace("avatar42s", "avatar170s")} alt=${auth.name} />
+                    </div>
+                    <div class="name">${cache2.username ? cache2.username : `@${auth.name}`}</div>
+                    ${badges || auth.pro ? html.node`
+                        <div class="badges">
+                            ${badges ? badges.map((badge) => create_badge(badge)) : ""}
+                            ${auth.pro ? () => {
+            const elem = html.node`
+                                    <span class="label user-status-subscriber no-hover">
+                                        ${tl2(trans.badges["user-status-subscriber"].name)}
+                                    </span>
+                                `;
+            tippy_esm_default(elem, {
+              theme: "badge",
+              placement: "bottom",
+              content: html.node`
+                                        <div class="badge-name">${tl2(trans.badges["user-status-subscriber"].name)}</div>
+                                        <div class="badge-reason">${tl2(trans.badges["user-status-subscriber"].reason)}</div>
+                                    `
+            });
+            return elem;
+          } : ""}
+                        </div>
+                    ` : ""}
+                    <a class="link-block-cover-link" href="${root}user/${auth.name}" />
+                `);
+        });
+        function render_status_container(status2) {
+          if (!status2) return;
+          render(
+            status_container,
+            html`
+                        <div class="status">
+                            <div class="bleh-icon" />
+                            <div
+                                class="status-bg"
+                                style="background-image: url(${status2.avatar})"
+                            />
+                            <div class="status-text">
+                                ${status2.name} ${tl2(trans.by)} ${status2.artist}
+                            </div>
+                        </div>
+                    `
+          );
+        }
+        if (ff("status_in_menu") && auth.pro) {
+          if (page.now.name) render_status_container(page.now);
+          live_status().then((status2) => render_status_container(status2));
+        }
+      },
+      onHide(instance) {
+        page.structure.notifications.setAttribute(
+          "data-auth-open",
+          "false"
+        );
+      }
+    });
+    const auth_drop_menu = tippy_esm_default(auth_link2, {
+      theme: "context-menu",
+      content: html.node`
+            <a class="dropdown-menu-clickable-item" data-type="quick_access" href="${root}bleh/interface">
+                ${tl2(trans.edit_quick_access)}
+            </a>
+            <button class="dropdown-menu-clickable-item" data-type="copy" onclick=${() => copy(auth.name)}>
+                ${tl2(trans.copy_username)}
+            </button>
+            <div class="sep" />
+            ${generic_link_menu(`${root}user/${auth.name}`, `https://www.last.fm${root}user/${auth.name}`)}
+        `,
+      placement: "right-start",
+      trigger: "manual",
+      interactive: true,
+      interactiveBorder: 10,
+      offset: [0, 0],
+      onShow(instance) {
+        instance.popper.addEventListener("click", (event3) => {
+          instance.hide();
+        });
+      }
+    });
+    register_menu(auth_link2, auth_drop_menu);
+    let container = new_auth.parentElement;
+    container.parentElement.removeChild(container);
+    auth_link2.removeAttribute("aria-controls");
+    auth_link2.removeAttribute("data-disclose-hover");
+    auth_link2.removeAttribute("data-disclose-hover--allow-enter-open");
+    auth_link2.addEventListener("click", (e) => {
+      const cmd = e.getModifierState("Control") || e.getModifierState("Meta");
+      const new_tab = e.button === 1 || cmd;
+      if (!new_tab) e.preventDefault();
+    });
+    masthead.appendChild(html.node`
+        <div class="mobile-controls">
+            <a class="btn mobile-control" aria-checked=${page.type == "overview" || page.type == "recommended" || page.type == "releases" || page.type == "bookmarks" || page.type == "charts"} data-menu-item="home" href="${root}music">
+                ${tl2(trans.home)}
+            </a>
+            ${() => {
+      const btn = html.node`
+                    <a class="btn mobile-control" aria-checked=${page.type == "search"} data-menu-item="search">
+                        ${tl2(trans.search)}
+                    </a>
+                `;
+      let search_input;
+      tippy_esm_default(btn, {
+        theme: "mobile",
+        content: html.node`
+                        <div class="window-header">
+                            <div class="bleh-icon" data-type="search" style="--icon: var(--mask)" />
+                            <div class="window-title">${tl2(trans.search)}</div>
+                        </div>
+                        ${() => {
+          const form2 = html.node`
+                                <form action="${root}search" method="get">
+                                    ${search_input = input({
+            name: "q",
+            func: () => {
+              form2.submit();
+            }
+          })}
+                                </form>
+                            `;
+          return form2;
+        }}
+                    `,
+        placement: "top",
+        interactive: true,
+        interactiveBorder: 10,
+        trigger: "click",
+        appendTo: document.body,
+        onShow() {
+          search_input.focus();
+        }
+      });
+      return btn;
+    }}
+            ${() => {
+      const btn = html.node`
+                    <a class="btn mobile-control" aria-checked=${page.type == "user" && page.name == auth.name} data-menu-item="profile_mobile">
+                        <span class="avatar">
+                            <img src=${auth.avatar} alt=${auth.name}>
+                        </span>
+                        ${auth.name}
+                    </a>
+                `;
+      tippy_esm_default(btn, {
+        theme: "mobile",
+        content: html.node`
+                        <div class="window-menu-items">
+                            <form>
+                                <input type="hidden" name="csrfmiddlewaretoken" value="${token}">
+                                <a class="dropdown-menu-clickable-item" ref=${(el) => button = el} data-menu-item="logout" href="${root}logout">
+                                    ${tl2(trans.logout)}
+                                </a>
+                            </form>
+                            <button class="dropdown-menu-clickable-item" data-menu-item="news" onclick=${() => {
+          news();
+        }}>
+                                ${tl2(trans.news)}
+                            </button>
+                            ${settings.navigation_items.map((val) => {
+          let elem;
+          const formal = page.state.quick_access_items[val];
+          if (formal.url)
+            elem = html.node`<a href=${formal.url} />`;
+          else
+            elem = html.node`<button onclick=${formal.action} />`;
+          elem.classList = "dropdown-menu-clickable-item";
+          elem.setAttribute("data-type", formal.icon);
+          elem.textContent = formal.name;
+          let count2 = 0;
+          if (val == "notifications") count2 = notif_count;
+          else if (val == "messages") count2 = inbox_count;
+          if (count2) {
+            render(
+              elem,
+              html`
+                                            <div class="auth-dropdown-item-row">
+                                                <span
+                                                    class="auth-dropdown-item-left"
+                                                >
+                                                    ${formal.name}
+                                                </span>
+                                                <span
+                                                    class="auth-dropdown-item-right"
+                                                >
+                                                    ${count2}
+                                                </span>
+                                            </div>
+                                        `
+            );
+          }
+          return elem;
+        })}
+                            ${settings.starred_friend != "" ? html.node`
+                                        <a class="dropdown-menu-clickable-item no-colour" data-type="starred_friend" data-is-shortcut="true" href="${root}user/${settings.starred_friend}">
+                                            ${settings.starred_friend}
+                                        </a>
+                                    ` : ""}
+                            <a class="dropdown-menu-clickable-item" data-type="user" href="${root}user/${auth.name}">
+                                ${auth.name}
+                            </a>
+                        </div>
+                    `,
+        placement: "top",
+        interactive: true,
+        interactiveBorder: 10,
+        trigger: "click",
+        appendTo: document.body
+      });
+      return btn;
+    }}
+            ${() => {
+      const btn = html.node`
+                    <a class="btn mobile-control" aria-checked=${page.type == "inbox"} data-type="inbox">
+                        ${tl2(trans.inbox)}
+                        ${count > 0 ? html.node`<div class="notification-count-badge"></div>` : ""}
+                    </a>
+                `;
+      tippy_esm_default(btn, {
+        theme: "mobile",
+        content: html.node`
+                        <div class="window-header">
+                            <div class="bleh-icon" data-type="inbox" style="--icon: var(--mask)" />
+                            <div class="window-title">${tl2(trans.inbox)}</div>
+                        </div>
+                        ${setting({ id: "inbox_view", func: render_inbox })}
+                        <div class="window-content" />
+                    `,
+        placement: "top",
+        interactive: true,
+        interactiveBorder: 10,
+        trigger: "click",
+        appendTo: document.body,
+        onShow(instance) {
+          console.info(
+            "navigation instance",
+            instance,
+            instance.popper
+          );
+          page.state.inbox_content = instance.popper.querySelector(".window-content");
+          render_inbox();
+        }
+      });
+      return btn;
+    }}
+            <a class="btn mobile-control" aria-checked=${page.type == "settings" || page.type == "bleh_settings"} data-menu-item="settings" href="${root}bleh">
+                ${tl2(trans.settings)}
+                ${update_required === "true" ? html.node`<div class="notification-count-badge"></div>` : ""}
+            </a>
+        </div>
+    `);
+  }
+  async function live_status() {
+    if (page.now.next_fetch && Date.now() < page.now.next_fetch)
+      return page.now;
+    try {
+      const res = await fetch(`${root}user/${auth.name}/partial/now`);
+      if (!res.ok) {
+        log("failed to fetch", "live", "error", { res });
+        return;
+      }
+      const dom = await res.text();
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(dom, "text/html");
+      const intro = doc.querySelector(".user-now-intro");
+      let active = true;
+      if (intro.textContent.trim() === tl2(trans.last_scrobbled_replace).replace("{u}", auth.name))
+        active = false;
+      const track = doc.querySelector(".user-now-track a");
+      const links = doc.querySelectorAll(".user-now-artist-and-album a");
+      let artist = links[0];
+      const album = links[1];
+      const avatar2 = doc.querySelector(".cover-art img")?.src;
+      track.removeAttribute("target");
+      artist.removeAttribute("target");
+      album.removeAttribute("target");
+      let next = /* @__PURE__ */ new Date();
+      next.setMinutes(next.getMinutes() + 1);
+      if (settings.format_guest_features) {
+        const formatted = name_includes(
+          track.textContent,
+          artist.textContent
+        );
+        track.classList.add("smart-title");
+        render(track, smart_title(formatted[0], formatted[1]));
+        artist = html.node`<span class="artist">${smart_artists(formatted[2], formatted[3])}</span>`;
+      } else if (settings.corrections) {
+        track.textContent = romanise(
+          correct_item_by_artist(track.textContent, artist.textContent)
+        );
+        artist.textContent = romanise(correct_artist(artist.textContent));
+      }
+      page.now = {
+        next_fetch: next,
+        name: track,
+        artist,
+        album,
+        avatar: avatar2,
+        active
+      };
+      return page.now;
+    } catch (error) {
+      log("exception during fetch", "live", "error", { error });
+    }
+  }
+  async function fetch_notifications() {
+    if (page.notifications.next_fetch && Date.now() < page.notifications.next_fetch)
+      return page.notifications.list;
+    try {
+      const res = await fetch(`${root}inbox/notifications`);
+      if (!res.ok) {
+        log("failed to fetch", "live", "error", { res });
+        return;
+      }
+      const dom = await res.text();
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(dom, "text/html");
+      const list = doc.querySelector(".inbox-notifications");
+      let next = /* @__PURE__ */ new Date();
+      next.setMinutes(next.getMinutes() + 2);
+      page.notifications.next_fetch = next;
+      if (list) {
+        page.notifications.list = list;
+        return list;
+      }
+    } catch (error) {
+      log("exception during fetch", "live", "error", { error });
+    }
+  }
+  async function fetch_messages() {
+    if (page.messages.next_fetch && Date.now() < page.messages.next_fetch)
+      return page.messages.list;
+    try {
+      const res = await fetch(`${root}inbox`);
+      if (!res.ok) {
+        log("failed to fetch", "live", "error", { res });
+        return;
+      }
+      const dom = await res.text();
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(dom, "text/html");
+      const list = doc.querySelector(".inbox-table tbody");
+      let next = /* @__PURE__ */ new Date();
+      next.setMinutes(next.getMinutes() + 2);
+      page.messages.next_fetch = next;
+      if (list) {
+        page.messages.list = list;
+        return list;
+      }
+    } catch (error) {
+      log("exception during fetch", "live", "error", { error });
+    }
+  }
+
   // src/pages/bleh_config.js
   function bleh_settings() {
     page.name = auth.name;
@@ -49807,7 +51818,7 @@
             `}
         </div>
         <section class="side-actions">
-            <button class="btn side-action" data-type="import" onclick=${() => import_settings21()}>
+            <button class="btn side-action" data-type="import" onclick=${() => import_settings24()}>
                 ${tl2(trans.import)}
             </button>
             <button class="btn side-action" data-type="export" onclick=${() => export_settings()}>
@@ -49836,6 +51847,12 @@
     if (!tab) change_settings_page("general");
     else change_settings_page(tab);
     if (page.requested.setting) scroll_to_setting(page.requested.setting);
+    const profile_tab = nav.querySelector('[data-bleh-page="profile"]');
+    if (profile_tab) {
+      setTimeout(() => {
+        queue_popup("close_friends", profile_tab);
+      }, 0);
+    }
   }
   function page_loading() {
     render(page.structure.main, html`
@@ -49849,7 +51866,7 @@
   async function render_setting_page(page_id) {
     page_loading();
     if (page_id == "general") {
-      if (auth.pro === null) {
+      if (auth.pro == null) {
         setTimeout(() => {
           render_setting_page("general");
         }, 10);
@@ -49874,42 +51891,47 @@
         page.structure.main,
         html`
                 <section class="bleh--panel">
-                    <div class="update-center-header">
-                        ${paused === "true" ? html.node`
-                            <div class="update-center-icon">
-                                <div class="update-container">
-                                    <div class="bleh-icon" data-type="update" />
+                    <h4>${tl2(trans.updates)}</h4>
+                    <div class="setting-group">
+                        <div class="setting" data-type="action">
+                            ${paused === "true" ? html.node`
+                                <div class="setting-v2-icon update-center-icon">
+                                    <div class="update-container">
+                                        <div class="bleh-icon" data-type="update" />
+                                    </div>
+                                    <div class="check-circle paused colourful">
+                                        <div class="bleh-icon" data-type="paused" />
+                                    </div>
                                 </div>
-                                <div class="check-circle paused colourful">
-                                    <div class="bleh-icon" data-type="paused" />
+                                <div class="heading">
+                                    <h5>${tl2(trans.updates_paused)}</h5>
+                                    <p class="last-checked">${tl2(trans.paused_until_date).replace("{d}", DateTime.fromJSDate(new Date(paused_until)).toRelative())}</p>
                                 </div>
-                            </div>
-                            <div class="update-center-details">
-                                <h2>${tl2(trans.updates_paused)}</h2>
-                                <p class="last-checked">${tl2(trans.paused_until_date).replace("{d}", DateTime.fromJSDate(new Date(paused_until)).toRelative())}</p>
-                            </div>
-                            <button class="btn primary icon" data-type="update" ref=${(el) => update_btn = el} disabled>${tl2(trans.check)}</button>
-                        ` : update_required === "false" ? html.node`
-                            <div class="update-center-icon">
-                                <div class="update-container">
-                                    <div class="bleh-icon" data-type="update" />
+                                <div class="toggle-wrap">
+                                    <button class="btn primary icon" data-type="update" ref=${(el) => update_btn = el} disabled>${tl2(trans.check)}</button>
                                 </div>
-                                ${last_checked ? html.node`
-                                <div class="check-circle colourful">
-                                    <div class="bleh-icon" data-type="check-thick" />
+                            ` : update_required === "false" ? html.node`
+                                <div class="setting-v2-icon update-center-icon">
+                                    <div class="update-container">
+                                        <div class="bleh-icon" data-type="update" />
+                                    </div>
+                                    ${last_checked ? html.node`
+                                    <div class="check-circle colourful">
+                                        <div class="bleh-icon" data-type="check-thick" />
+                                    </div>
+                                    ` : ""}
                                 </div>
-                                ` : ""}
-                            </div>
-                            <div class="update-center-details">
-                                ${last_checked ? html.node`
-                                <h2>${tl2(trans.you_are_up_to_date)}</h2>
-                                <p class="last-checked">${tl2(trans.last_checked_date).replace("{d}", DateTime.fromJSDate(new Date(last_checked)).toRelative())}</p>
-                                ` : html.node`
-                                <h2>${tl2(trans.missing_updates)}</h2>
-                                <p class="last-checked">${tl2(trans.never_checked)}</p>
-                                `}
-                            </div>
-                            <button class="btn icon" data-type="update" ref=${(el) => update_btn = el} onclick=${() => update_check(true, update_btn, () => {
+                                <div class="heading">
+                                    ${last_checked ? html.node`
+                                        <h5>${tl2(trans.you_are_up_to_date)}</h5>
+                                        <p class="last-checked">${tl2(trans.last_checked_date).replace("{d}", DateTime.fromJSDate(new Date(last_checked)).toRelative())}</p>
+                                    ` : html.node`
+                                        <h5>${tl2(trans.missing_updates)}</h5>
+                                        <p class="last-checked">${tl2(trans.never_checked)}</p>
+                                    `}
+                                </div>
+                                <div class="toggle-wrap">
+                                    <button class="btn icon" data-type="update" ref=${(el) => update_btn = el} onclick=${() => update_check(true, update_btn, () => {
           notify({
             id: "update",
             title: tl2(trans.updates),
@@ -49918,22 +51940,24 @@
           });
           render_setting_page("general");
         })}>${tl2(trans.check)}</button>
-                        ` : html.node`
-                            <div class="update-center-icon">
-                                <div class="update-container spin">
-                                    <div class="bleh-icon" data-type="update" />
                                 </div>
-                            </div>
-                            <div class="update-center-details">
-                                <h2>${tl2(trans.update_available_to_install)}</h2>
-                                ${last_checked ? html.node`
-                                    <p class="last-checked">${tl2(trans.last_checked_date, { d: DateTime.fromJSDate(new Date(last_checked)).toRelative() })}</p>
-                                ` : html.node`
-                                    <p class="last-checked">${tl2(trans.never_checked)}</p>
-                                `}
-                            </div>
-                            <div class="button-group">
-                                <button class="btn icon" data-type="update" ref=${(el) => update_btn = el} onclick=${() => update_check(true, update_btn, () => {
+                            ` : html.node`
+                                <div class="setting-v2-icon update-center-icon">
+                                    <div class="update-container spin">
+                                        <div class="bleh-icon" data-type="update" />
+                                    </div>
+                                </div>
+                                <div class="heading">
+                                    <h5>${tl2(trans.update_available_to_install)}</h5>
+                                    ${last_checked ? html.node`
+                                        <p class="last-checked">${tl2(trans.last_checked_date, { d: DateTime.fromJSDate(new Date(last_checked)).toRelative() })}</p>
+                                    ` : html.node`
+                                        <p class="last-checked">${tl2(trans.never_checked)}</p>
+                                    `}
+                                </div>
+                                <div class="toggle-wrap">
+                                    <div class="button-group">
+                                        <button class="btn icon" data-type="update" ref=${(el) => update_btn = el} onclick=${() => update_check(true, update_btn, () => {
           notify({
             id: "update",
             title: tl2(trans.updates),
@@ -49942,15 +51966,29 @@
           });
           render_setting_page("general");
         })}>${tl2(trans.check)}</button>
-                                <button class="btn primary icon" data-type="update" ref=${(el) => update_btn = el} onclick=${() => start_update()}>${tl2(trans.install_now)}</button>
-                            </div>
-                        `}
+                                        <button class="btn primary icon" data-type="update" ref=${(el) => update_btn = el} onclick=${() => start_update()}>${tl2(trans.install_now)}</button>
+                                    </div>
+                                </div>
+                            `}
+                        </div>
+                        <div class="setting" data-type="info">
+                            ${last_checked && paused === "false" && update_required === "true" ? html.node`
+                                <div class="heading">
+                                    <h5>${tl2(trans.updating_to_version)}</h5>
+                                </div>
+                                <div class="info">
+                                    <p>${version_to_install}</p>
+                                </div>
+                            ` : html.node`
+                                <div class="heading">
+                                    <h5>${tl2(trans.current_version)}</h5>
+                                </div>
+                                <div class="info">
+                                    <p>${version.build}</p>
+                                </div>
+                            `}
+                        </div>
                     </div>
-                    ${last_checked && paused === "false" && update_required === "true" ? html.node`
-                        <div class="alert alert-info">${tl2(trans.you_are_installing_version, { v: version_to_install })}</div>
-                    ` : html.node`
-                        <div class="alert alert-info">${tl2(trans.you_are_running_version, { v: version.build })}</div>
-                    `}
                 </section>
                 <section class="bleh--panel">
                     <h4>${tl2(trans.profile)}</h4>
@@ -50033,7 +52071,7 @@
                             <div class="setting" data-type="action">
                                 <div class="heading">
                                     <h5>${tl2(trans.news_sponsor_cta)}</h5>
-                                    <p>${tl2(trans.api.body)}</p>
+                                    <p>${tl2(trans.sponsor_get_badge)}</p>
                                 </div>
                                 <div class="toggle-wrap">
                                     <button class="btn primary icon sponsor" data-type="sponsor" onclick=${() => sponsor()}>
@@ -50061,7 +52099,7 @@
                     <section class="bleh--panel">
                         <h4>${tl2(trans.branding)}</h4>
                         <div class="setting-group">
-                            ${setting({ id: "branding_type" })}
+                            ${setting({ id: "branding_type", func: update_branding_type })}
                         </div>
                     </section>
                 ` : ""}
@@ -50476,13 +52514,6 @@
                 </table>
             `);
       };
-      if (!page.state.quick_access_items) {
-        setTimeout(() => {
-          render_setting_page("interface");
-        }, 10);
-        page_loading();
-        return;
-      }
       register_skip_to([]);
       let bars;
       let track_layout;
@@ -50566,13 +52597,6 @@
                 </div>
                 <div class="setting-group">
                     ${setting({ id: "gendered_tags" })}
-                </div>
-            </section>
-            <section class="bleh--panel">
-                <h4>${tl2(trans.navigation_items.name)}</h4>
-                <div class="setting-group">
-                    ${setting({ id: "navigation_items", list: page.state.quick_access_items })}
-                    ${!page.mobile ? setting({ id: "navigation_language" }) : ""}
                 </div>
             </section>
             <section class="bleh--panel">
@@ -51088,9 +53112,7 @@
                     </ul>
                     <div class="sep"></div>
                     <h4>${tl2(trans.development)}</h4>
-                    <button
-                        class="see-more"
-                        onclick=${() => {
+                    <button class="see-more" onclick=${() => {
           if (settings.hu_tao == "develop") {
             change_settings_page("sku");
           } else {
@@ -51098,13 +53120,17 @@
               id: "hu_tao",
               title: tl2(trans.development),
               body: html.node`
-                                ${setting({ id: "hu_tao", text: false, focus: true })}
-                            `
+                                    ${setting({ id: "hu_tao", text: false, focus: true })}
+                                `
             });
           }
-        }}
-                    >
+        }}>
                         ${tl2(trans.manage_feature_flags)}
+                    </button>
+                    <button class="see-more" onclick=${() => {
+          save_setting("popups_seen", []);
+        }}>
+                        Forget which popups have been seen
                     </button>
                 </section>
             `
@@ -51125,14 +53151,47 @@
         );
         return;
       }
+      if (!page.state.quick_access_items) {
+        setTimeout(() => {
+          render_setting_page("profile");
+        }, 10);
+        page_loading();
+        return;
+      }
       register_skip_to([]);
       const cache2 = await load_profile_cache_externally(auth.name);
-      let friends;
+      let friends2;
       let starred2;
       console.info("friends", settings.friends, settings);
       render(
         page.structure.main,
         html`
+                ${ff("friends") ? html.node`
+                    <section class="bleh--panel">
+                        <h4>${tl2(trans.close_friends)}</h4>
+                        <div class="setting-group">
+                            ${friends2 = setting({
+          id: "friends",
+          list: settings.friends,
+          func: (val) => {
+            if (!val.includes(settings.starred_friend))
+              save_setting("starred_friend", "");
+            checkup_friend_cache(val);
+            starred2.update(select_prepare_list([{ value: "", text: tl2(trans.none) }, ...val]));
+          }
+        })}
+                            ${starred2 = setting({ id: "starred_friend", list: select_prepare_list([{ value: "", text: tl2(trans.none) }, ...settings.friends]) })}
+                        </div>
+                        <p class="card-tip">${tl2(trans.friend_difference)}</p>
+                    </section>
+                ` : ""}
+                <section class="bleh--panel">
+                    <h4>${tl2(trans.navigation_items.name)}</h4>
+                    <div class="setting-group">
+                        ${setting({ id: "navigation_items", list: page.state.quick_access_items })}
+                        ${!page.mobile ? setting({ id: "navigation_language" }) : ""}
+                    </div>
+                </section>
                 <section class="bleh--panel">
                     <h4>${tl2(trans.banners)}</h4>
                     <div class="inner-preview pad">
@@ -51166,18 +53225,12 @@
                                     <div class="mockup-panel main"></div>
                                 </div>
                             </div>
-                            <div
-                                class="profile-mockup-background from-avatar"
-                                style="background-image: url(${auth.avatar.replace(
-          "/avatar42s/",
-          "/avatar300s/"
-        )})"
-                            ></div>
+                            <div class="profile-mockup-background from-avatar" style="background-image: url(${auth.avatar.replace("/avatar42s/", "/avatar300s/")})" />
                             ${cache2.banner ? html.node`
-                        <div class="profile-mockup-background from-banner" style="background-image: url(${cache2.banner})"></div>
-                        ` : html.node`
-                        <div class="profile-mockup-background from-track" style="background-image: url(https://lastfm.freetls.fastly.net/i/u/avatar300s/df927f4f88034b7f9a651636b965c9d7)"></div>
-                        `}
+                                <div class="profile-mockup-background from-banner" style="background-image: url(${cache2.banner})"></div>
+                            ` : html.node`
+                                <div class="profile-mockup-background from-track" style="background-image: url(https://lastfm.freetls.fastly.net/i/u/avatar300s/df927f4f88034b7f9a651636b965c9d7)"></div>
+                            `}
                         </div>
                     </div>
                     <div class="setting-group">
@@ -51186,38 +53239,13 @@
                                 <h5>${tl2(trans.view_backgrounds_on)}</h5>
                             </div>
                             <div class="primary-selections">
-                                ${setting({
-          id: "profile_header_own",
-          standalone: true
-        })}
-                                ${setting({
-          id: "profile_header_others",
-          standalone: true
-        })}
+                                ${setting({ id: "profile_header_own", standalone: true })}
+                                ${setting({ id: "profile_header_others", standalone: true })}
                             </div>
                         </div>
                         ${setting({ id: "profile_avi_background" })}
                     </div>
                 </section>
-                ${ff("friends") ? html.node`
-            <section class="bleh--panel">
-                <h4>${tl2(trans.friends)}</h4>
-                <div class="setting-group">
-                    ${friends = setting({
-          id: "friends",
-          list: settings.friends,
-          func: (val) => {
-            if (!val.includes(settings.starred_friend))
-              save_setting("starred_friend", "");
-            checkup_friend_cache(val);
-            render_setting_page("profile");
-          }
-        })}
-                    ${starred2 = setting({ id: "starred_friend", list: select_prepare_list([{ value: "", text: tl2(trans.none) }, ...settings.friends]) })}
-                </div>
-                <p class="card-tip">${tl2(trans.friend_difference)}</p>
-            </section>
-            ` : ""}
                 <section class="bleh--panel">
                     <h4>${tl2(trans.other)}</h4>
                     <div class="setting-group">
@@ -51361,7 +53389,7 @@
                                 </div>
                                 <div class="toggle-wrap">
                                     <input type="checkbox" ref=${(el) => checkbox = el} value=${value} checked=${value} />
-                                    <button class="toggle" aria-checked=${value} ref=${(el) => state = el}>
+                                    <button class="btn toggle" aria-checked=${value} ref=${(el) => state = el}>
                                         <div class="dot" />
                                     </button>
                                 </div>
@@ -51375,10 +53403,6 @@
       let translation_view = function(lang2) {
         const language = lang_info[lang2];
         render(translation_view_container, html`
-                <div class="language-header">
-                    <span class="flag" style="background-image: url(https://katelyynn.github.io/bleh/fm/flags/${lang2}.svg)" />
-                    <p>${language.name}</p>
-                </div>
                 <div class="language-sub">
                     <div class="language-info colourful translated"><span class="bleh-icon" />${tl2(trans.amount_translated, { c: language.translated })} (${language.percent}%)</div>
                     ${() => {
@@ -51417,7 +53441,12 @@
       let translation_view_container;
       render(page.structure.main, html`
             <section class="bleh--panel">
-                ${setting({ id: "translator_view", list: lang_info, func: translation_view })}
+                ${select(select_prepare_convert_from_setting(lang_info), settings.translator_view, "", translation_view, false, (val) => html.node`
+                    <span class="language-header">
+                        <span class="flag" style="background-image: url(https://katelyynn.github.io/bleh/fm/flags/${val.value}.svg)" />
+                        <p>${val.text}</p>
+                    </span>
+                `, true)}
                 <div class="translation-view" ref=${(el) => translation_view_container = el} />
             </section>
         `);
@@ -51459,15 +53488,11 @@
     window.history.pushState(page_id, "", `${root}bleh/${page_id}`);
     page.state.settings_page = page_id;
     page.structure.main.innerHTML = "";
-    let btns = document.querySelectorAll(".bleh--nav");
+    let btns = page.structure.container.querySelectorAll(".bleh--nav");
     btns.forEach((btn) => {
       const id = btn.getAttribute("data-bleh-page");
       btn.setAttribute("data-hide", page_id != id);
-      if (page_id != id) {
-        btn.classList.remove("secondary-nav-item-link--active");
-      } else {
-        btn.classList.add("secondary-nav-item-link--active");
-      }
+      btn.classList.toggle("secondary-nav-item-link--active", page_id == id);
     });
     if (page_id == "seasonal") seasonal_timer_start();
     else seasonal_timer_end();
@@ -51839,15 +53864,31 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                     <a class="mention" href="${root}user/${user}">@${user}</a>
                 </div>
                 <div class="text preview">
-                    <p id="profile-note-row-preview--${user}">${{ html: profile_notes[user] }}</p>
+                    <p id="profile-note-row-preview--${user}">${profile_notes[user]}</p>
                 </div>
                 <div class="actions">
-                    <button class="icon chibi edit" onclick=${() => edit_profile_note(user)}>
-                        ${tl2(trans.delete)}
-                    </button>
-                    <button class="icon chibi delete danger-subtle" onclick=${() => delete_profile_note(user)}>
-                        ${tl2(trans.delete)}
-                    </button>
+                    ${() => {
+        const btn = html.node`
+                            <button class="btn icon chibi list-action" data-type="edit" onclick=${() => edit_profile_note(user)}>
+                                ${tl2(trans.edit)}
+                            </button>
+                        `;
+        tippy_esm_default(btn, {
+          content: btn.textContent
+        });
+        return btn;
+      }}
+                    ${() => {
+        const btn = html.node`
+                            <button class="btn icon chibi danger-subtle list-action" data-type="delete" onclick=${() => delete_profile_note(user)}>
+                                ${tl2(trans.delete)}
+                            </button>
+                        `;
+        tippy_esm_default(btn, {
+          content: btn.textContent
+        });
+        return btn;
+      }}
                 </div>
             </div>
         `);
@@ -51926,7 +53967,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       }
     }
   }
-  function import_settings21() {
+  function import_settings24() {
     let text4;
     const modal = dialog({
       id: "import_settings",
@@ -52384,15 +54425,21 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
 
   // src/components/lotus.js
   var flat_patterns = [];
-  Object.entries(includes).forEach(([group, pats]) => {
-    pats.forEach((pat) => {
+  Object.entries(includes).forEach(([group, patterns]) => {
+    patterns.forEach((pattern) => {
       flat_patterns.push({
         group,
-        pat: pat.toLowerCase()
+        pattern,
+        regex: pattern instanceof RegExp
       });
     });
   });
-  flat_patterns.sort((a, b) => b.pat.length - a.pat.length);
+  flat_patterns.sort((a, b) => {
+    const a_length = a.regex ? a.pattern.source.length : a.pattern.length;
+    const b_length = b.regex ? b.pattern.source.length : b.pattern.length;
+    return b_length - a_length;
+  });
+  log("finalised flat patterns", "lotus", "info", { flat_patterns });
   function lotus(force = false) {
     if (!settings.corrections) return;
     let lotus_artist = localStorage.getItem("lotus_artist");
@@ -52589,6 +54636,10 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
   }
   function correct_item_by_artist(item, artist) {
     if (!settings.corrections) return item;
+    if (!artist) {
+      log("could not correct_item_by_artist, artist field is missing", "lotus", "error", { item, artist });
+      return item;
+    }
     artist = artist.toLowerCase();
     try {
       if (album_track_corrections.hasOwnProperty(artist)) {
@@ -52646,24 +54697,35 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       }
     }
     const lower_title = formatted_title.toLowerCase();
-    const matches = flat_patterns.map(({ group, pat }) => ({
-      group,
-      pat,
-      idx: lower_title.indexOf(pat)
-    })).filter((m) => {
-      if (m.idx < 1) return false;
-      return !(m.group === "remasters" && !lower_title.includes(" remaster") && !lower_title.includes("(remaster"));
-    }).sort((a, b) => a.idx - b.idx);
+    const matches = flat_patterns.map(({ group, pattern, regex }) => {
+      let index3 = -1;
+      if (regex) {
+        const match3 = lower_title.match(pattern);
+        index3 = match3 ? match3.index : -1;
+      } else {
+        index3 = lower_title.indexOf(pattern.toLowerCase());
+      }
+      return {
+        group,
+        pattern,
+        regex,
+        index: index3
+      };
+    }).filter((match3) => {
+      if (match3.index < 1) return false;
+      return !(match3.group === "remasters" && !lower_title.includes(" remaster") && !lower_title.includes("(remaster"));
+    }).sort((a, b) => a.index - b.index);
+    log("found tag matches", "lotus", "info", { lower_title, matches });
     if (artist_corrections.hasOwnProperty(original_artist) && settings.corrections) {
       original_artist = correct_artist(artist_corrections[original_artist]);
     }
     let cleaned_title = formatted_title;
     let extras = [];
     if (matches.length > 0) {
-      cleaned_title = formatted_title.slice(0, matches[0].idx).trim().replace(/[\(\[\{]+$/, "").trim();
+      cleaned_title = formatted_title.slice(0, matches[0].index).trim().replace(/[\(\[\{]+$/, "").trim();
       extras = matches.map((match3, i) => {
-        const start2 = match3.idx;
-        const end2 = i + 1 < matches.length ? matches[i + 1].idx : formatted_title.length;
+        const start2 = match3.index;
+        const end2 = i + 1 < matches.length ? matches[i + 1].index : formatted_title.length;
         const tag_text = formatted_title.slice(start2, end2).replace(/^[\(\[\{\)\]\}\-\:\s]+|[\(\[\{\)\]\}\-\:\s]+$/g, "").trim();
         return {
           group: match3.group,
@@ -52884,7 +54946,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                 <div class="fill" />
                 <button class="btn primary continue" onclick=${() => {
         open(
-          `https://github.com/katelyynn/lotus/issues/new?template=${template}&title=${sanitise(title, " ")}&current=${sanitise(current, " ")}&correction=${sanitise(correction.value(), " ")}&link=${link}&sources=${sanitise(sources.value(), " ")}`
+          `https://github.com/katelyynn/lotus/issues/new?template=${template}&title=${sanitise(title, " ")}&current=${sanitise(current, " ")}&correction=${sanitise(correction.value(), " ")}&link=${encodeURIComponent(link)}&sources=${sanitise(sources.value(), " ")}`
         );
       }}>
                     ${tl2(trans.suggest)}
@@ -52997,13 +55059,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           log("heard", "event", "info", event3);
           let action = btn.getAttribute("data-analytics-action");
           if (btn.getAttribute("data-type") == "love") {
-            setTimeout(() => {
-              if (!btn.querySelector("span")) {
-                btn.appendChild(html.node`
-                                <span>${tl2(trans.love_track)}</span>
-                            `);
-              }
-            }, 1);
+            btn.textContent = tl2(trans.love_track);
+          } else if (btn.getAttribute("data-type") == "bookmark") {
+            btn.textContent = tl2(trans.bookmark_item, { v: tl2(trans[`${page.type}_lower`]) });
           }
           register_activity(
             action == "LoveTrack" ? "love" : "unlove",
@@ -53214,1406 +55272,6 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     });
   }
 
-  // src/components/notifications.js
-  function bleh_notification_list(list, mini = false) {
-    list.classList = "notification-list";
-    if (mini) list.classList.add("mini");
-    let notifications = list.querySelectorAll(".inbox-notifications__item");
-    notifications.forEach((notification, index3) => {
-      if (mini && index3 > 4) notification.style.display = "none";
-      const link = notification.querySelector(
-        ".inbox-notifications__item-link"
-      );
-      const href = link.getAttribute("href");
-      const active = link.classList.contains(
-        "inbox-notifications__item--highlight"
-      );
-      notification.classList = "notification";
-      if (active) notification.classList.add("active");
-      if (mini) notification.classList.add("mini");
-      let type = "shoutbox";
-      let context = {
-        name: null,
-        sister: null
-      };
-      let involved = [];
-      const strongs = link.querySelectorAll("strong");
-      let split = href.replace(root, "").split("/");
-      const avatar2 = notification.querySelector(".avatar");
-      avatar2.classList = "avatar";
-      const time2 = notification.querySelector("time");
-      let is_reply = false;
-      let others_included = 0;
-      if (href.endsWith("/obsessions/set")) {
-        type = "obsession";
-        involved.push(split[1]);
-        const desc = strongs[0].textContent;
-        const desc_split = desc.split(" \u2014 ");
-        context.type = "track";
-        context.sister = correct_artist(desc_split[0]);
-        context.name = correct_item_by_artist(
-          desc_split[1],
-          context.sister
-        );
-      } else if (href.endsWith("/listening-report/month")) {
-        type = "listening-report";
-        involved.push(strongs[0].textContent);
-        let img = avatar2.querySelector("img");
-        img.src = auth.avatar;
-        img.alt = auth.name;
-        let label = avatar2.querySelector(".avatar-status-dot");
-        if (auth.pro) {
-          label.classList = "avatar-status-dot avatar-status-dot--subscriber";
-        } else {
-          label.remove();
-        }
-        context.type = "profile";
-        context.name = split[1];
-      } else if (href.startsWith(`${root}user/`)) {
-        context.type = "profile";
-        context.name = split[1];
-        strongs.forEach((strong, index4) => {
-          if (index4 == strongs.length - 1 && strongs.length > 1) {
-            obtain_additional_info(
-              strong.previousSibling.textContent,
-              strong.nextSibling.textContent
-            );
-            return;
-          } else if (index4 == strongs.length - 1 && strongs.length == 1) {
-            obtain_additional_info(strong.nextSibling.textContent);
-          }
-          involved.push(strong.textContent);
-        });
-      } else if (href.startsWith(`${root}music/`)) {
-        if (split[2].startsWith("+")) {
-          context.type = "artist";
-          context.name = correct_artist(desanitise(split[1]));
-        } else if (split[2] == "_") {
-          context.type = "track";
-          context.sister = correct_artist(desanitise(split[1]));
-          context.name = correct_item_by_artist(
-            desanitise(split[3]),
-            context.sister
-          );
-        } else {
-          context.type = "album";
-          context.sister = correct_artist(desanitise(split[1]));
-          context.name = correct_item_by_artist(
-            desanitise(split[2]),
-            context.sister
-          );
-        }
-        strongs.forEach((strong, index4) => {
-          if (index4 == strongs.length - 1) {
-            obtain_additional_info(
-              strong.previousSibling.textContent,
-              strong.nextSibling.textContent
-            );
-            return;
-          }
-          involved.push(strong.textContent);
-        });
-      } else if (href.startsWith(`${root}tag/`)) {
-        context.type = "tag";
-        context.name = split[1];
-        strongs.forEach((strong, index4) => {
-          if (index4 == strongs.length - 1) {
-            obtain_additional_info(
-              strong.previousSibling.textContent,
-              strong.nextSibling.textContent
-            );
-            return;
-          }
-          involved.push(strong.textContent);
-        });
-      }
-      console.info(split, context, type, involved);
-      patch_avatar(avatar2, involved[0]);
-      render(
-        notification,
-        html`
-                <div class="notification-avatar">${avatar2}</div>
-                <div
-                    class="bleh-icon"
-                    data-type=${type}
-                    style="--icon: var(--mask)"
-                />
-                <div class="notification-content">
-                    <div class="notification-title">
-                        ${type == "shoutbox" ? html.node`
-                    ${others_included == 0 ? html.node`
-                        ${is_reply ? tl2(trans.user_replied).replace("{u}", involved.join(", ")) : tl2(trans.user_commented).replace("{u}", involved.join(", "))}
-                    ` : html.node`
-                        ${is_reply ? tl2(trans.users_replied).replace("{u}", involved.join(", ")).replace("{c}", others_included) : tl2(trans.users_commented).replace("{u}", involved.join(", ")).replace("{c}", others_included)}
-                    `}
-                    ` : type == "obsession" ? tl2(trans.obsession_expired) : type == "listening-report" ? tl2(trans.listening_report_available).replace(
-          "{m}",
-          involved[0]
-        ) : ""}
-                    </div>
-                    <div class="notification-context">
-                        <span
-                            class="bleh-icon"
-                            style="--icon: var(--icon-16-indent)"
-                        />
-                        <span
-                            class="notification-type"
-                            data-type=${context.type}
-                        >
-                            <span
-                                class="bleh-icon"
-                                style="--icon: var(--mask)"
-                            />
-                            <span
-                                >${context.sister ? `${context.name} ${tl2(trans.by)} ${context.sister}` : context.name}</span
-                            >
-                        </span>
-                    </div>
-                </div>
-                <div class="notification-time">${time2}</div>
-                <a
-                    class="link-block-cover-link"
-                    href=${link.getAttribute("href")}
-                />
-            `
-      );
-      function obtain_additional_info(text4, backup_text = null) {
-        const match3 = text4.match(/\d+/);
-        if (match3) others_included = parseInt(match3[0]);
-        if (text4.includes(tl2(trans.notification_replied_ctx)))
-          is_reply = true;
-        else if (backup_text && backup_text.trim().includes(tl2(trans.notification_replied_ctx)))
-          is_reply = true;
-      }
-    });
-  }
-
-  // src/navigation.js
-  function patch_masthead() {
-    let masthead_logo = document.body.querySelector(".masthead-logo");
-    if (!masthead_logo) return;
-    if (!masthead_logo.hasAttribute("data-kate-processed")) {
-      masthead_logo.setAttribute("data-kate-processed", "true");
-      update_masthead(masthead_logo);
-    }
-  }
-  function update_masthead(masthead_logo = document.body.querySelector(".masthead-logo")) {
-    const update_required = localStorage.getItem("bleh_update_required") || "false";
-    let home_link;
-    render(masthead_logo, html``);
-    render(
-      masthead_logo,
-      html`
-            <a href="/">Last.fm</a>
-            <a
-                class="home-link"
-                href="${root}music"
-                ref=${(el) => home_link = el}
-            >
-                <div class="bleh-logo">${version.brand}</div>
-                <div class="lastfm-logo">Last.fm</div>
-            </a>
-        `
-    );
-    const head_menu = tippy_esm_default(home_link, {
-      theme: "window",
-      content: html.node`
-            <div class="setting-group blend">
-                ${setting({ id: "branding_type" })}
-            </div>
-        `,
-      placement: "right-start",
-      trigger: "manual",
-      interactive: true,
-      interactiveBorder: 10,
-      offset: [0, 0],
-      onShow(instance) {
-        instance.popper.addEventListener("click", (event3) => {
-          instance.hide();
-        });
-      }
-    });
-    register_menu(home_link, head_menu);
-    let link;
-    if (update_required === "false") {
-      link = html.node`
-            <a class="bleh--version" href="${root}bleh">
-                ${version.build}
-                <div class="new-badge sku spacing">
-                    ${version.sku}
-                    ${settings.dev ? html.node`
-                    <span class="bleh-icon-container">
-                        <span class="bleh-icon" data-type="dev" style="--icon: var(--mask)"/>
-                    </span>
-                    ` : ""}
-                </div>
-            </a>
-        `;
-    } else {
-      link = html.node`
-            <a class="bleh--version" onclick=${() => prompt_for_update()}>
-                <div class="update-container">
-                    <div class="bleh-icon" style="--icon: var(--icon-16-update)" />
-                </div>
-                ${version.build}
-                <div class="new-badge sku spacing">
-                    ${version.sku}
-                    ${settings.dev ? html.node`
-                    <span class="bleh-icon-container">
-                        <span class="bleh-icon" data-type="dev" style="--icon: var(--mask)"/>
-                    </span>
-                    ` : ""}
-                </div>
-            </a>
-        `;
-      tippy_esm_default(link, {
-        content: tl2(trans.update_available_to_install)
-      });
-    }
-    const last_checked = localStorage.getItem("bleh_update_checked") || null;
-    const link_menu = tippy_esm_default(link, {
-      theme: "context-menu",
-      content: html.node`
-            <a class="dropdown-menu-clickable-item" data-type="update" href="${root}bleh/general">
-                ${last_checked ? tl2(trans.last_checked_date).replace(
-        "{d}",
-        DateTime.fromJSDate(
-          new Date(last_checked)
-        ).toRelative()
-      ) : tl2(trans.never_checked)}
-            </a>
-        `,
-      placement: "right-start",
-      trigger: "manual",
-      interactive: true,
-      interactiveBorder: 10,
-      offset: [0, 0],
-      onShow(instance) {
-        instance.popper.addEventListener("click", (event3) => {
-          instance.hide();
-        });
-      }
-    });
-    register_menu(link, link_menu);
-    masthead_logo.appendChild(link);
-  }
-  function append_nav() {
-    if (ff("developer") && !page.structure.indicator) {
-      let page_indicator2 = document.createElement("div");
-      page_indicator2.classList.add("page-indicator");
-      document.documentElement.appendChild(page_indicator2);
-      page.structure.indicator = page_indicator2;
-    }
-    if (!page.structure.loader) {
-      const loader = html.node`
-            <div class="loader">
-                <div class="loader-bar">
-                    <div class="loader-bar-fill" />
-                </div>
-            </div>
-        `;
-      document.body.appendChild(loader);
-      page.structure.loader = loader;
-    }
-    if (!page.structure.style_warning) {
-      const style_warning = html.node`
-            <div class="style-warning" style="position: fixed; top: 0; left: 0; right: 0; padding: 20px; background: #fff; z-index: 1000000000; display: flex; align-items: center; gap: 30px">
-                <strong>${tl2(trans.style_warning)}</strong>
-                <button class="btn primary" onclick=${() => {
-        save_setting("branch", "uwu");
-      }}>
-                    Reset branch to release (uwu)
-                </button>
-                <button class="btn-primary" onclick=${() => {
-        save_setting("dev", false);
-        window.location.reload();
-      }}>${tl2(trans.re_enable_style_loading)}</button>
-            </div>
-        `;
-      document.body.appendChild(style_warning);
-      page.structure.style_warning = style_warning;
-    }
-    const update_required = localStorage.getItem("bleh_update_required") || "false";
-    page.state.quick_access_items = {
-      home: {
-        name: tl2(trans.home),
-        icon: "home",
-        url: `${root}music`
-      },
-      reports: {
-        name: tl2(trans.reports),
-        icon: "reports",
-        url: `${root}user/${auth.name}/listening-report`
-      },
-      library: {
-        name: tl2(trans.library),
-        icon: "library",
-        url: `${root}user/${auth.name}/library`
-      },
-      shouts: {
-        name: tl2(trans.shouts),
-        icon: "shouts",
-        url: `${root}user/${auth.name}/shoutbox`
-      },
-      obsessions: {
-        name: tl2(trans.obsessions),
-        icon: "obsessions",
-        url: `${root}user/${auth.name}/obsessionss`
-      },
-      bookmarks: {
-        name: tl2(trans.bookmarks),
-        icon: "bookmark",
-        url: `${root}music/+bookmarks`
-      },
-      friends: {
-        name: tl2(trans.friends),
-        icon: "friends",
-        url: `${root}user/${auth.name}/friends`
-      },
-      notifications: {
-        name: tl2(trans.notifications),
-        icon: "notifications",
-        url: `${root}inbox/notifications`
-      },
-      messages: {
-        name: tl2(trans.messages),
-        icon: "messages",
-        url: `${root}inbox`
-      },
-      collage: {
-        name: tl2(trans.collage),
-        icon: "collage",
-        url: `${root}bleh/minis/collage`
-      },
-      compare: {
-        name: tl2(trans.compare),
-        icon: "compare",
-        url: `${root}bleh/minis/compare`
-      },
-      scrobble: {
-        name: tl2(trans.scrobble),
-        icon: "add",
-        action: () => submit_scrobble(),
-        new_release: true
-      }
-    };
-    const masthead = document.body.querySelector(".masthead");
-    const inner = masthead.querySelector(".masthead-inner-wrap");
-    const navs = inner.querySelector(".masthead-nav-wrap");
-    const search = inner.querySelector(".masthead-search-form");
-    const form = search.querySelector(".masthead-search-field");
-    form.placeholder = tl2(trans.search);
-    inner.insertBefore(
-      html.node`
-        <div class="masthead-search-wrap">
-            ${search}
-        </div>
-    `,
-      navs
-    );
-    let new_auth = masthead.querySelector(".auth-dropdown-menu");
-    let links = masthead.querySelector(".masthead-nav .navlist-items");
-    render(links, html``);
-    let auth_link2 = masthead.querySelector(
-      ".masthead-nav-wrap > .site-auth .auth-link"
-    );
-    if (!auth_link2) {
-      render(
-        links,
-        html`
-                ${() => {
-          const elem = html.node`
-                    <li class="masthead-nav-item">
-                        <a class="masthead-nav-control chibi" href="${root}bleh" data-label="bleh_no_auth">
-                            ${tl2(trans.bleh_settings)}
-                        </a>
-                    </li>
-                `;
-          tippy_esm_default(elem, {
-            content: tl2(trans.bleh_settings)
-          });
-          return elem;
-        }}
-            `
-      );
-      masthead.appendChild(html.node`
-            <div class="mobile-controls">
-                <a class="btn mobile-control" data-type="register" href="${root}join">
-                    ${tl2(trans.sign_up)}
-                </a>
-                <a class="btn mobile-control" aria-checked=${page.type == "settings" || page.type == "bleh_settings"} data-menu-item="settings" href="${root}bleh">
-                    ${tl2(trans.settings)}
-                </a>
-                <a class="btn mobile-control" data-type="login" href="${root}login">
-                    ${tl2(trans.log_in)}
-                </a>
-            </div>
-        `);
-      return;
-    }
-    if (auth_link2.hasAttribute("data-bleh")) return;
-    auth_link2.setAttribute("data-bleh", "true");
-    auth_link2.appendChild(html.node`
-        <p>${auth.name}</p>
-    `);
-    let badges = load_badges(auth.name, true);
-    if (badges) {
-      auth_link2.appendChild(create_badge(badges[0], false, false, true));
-    } else if (auth.pro) {
-      auth_link2.appendChild(html.node`
-            <span class="label user-status-subscriber auth-badge">${tl2(trans.badges["user-status-subscriber"].name)}</span>
-        `);
-    }
-    const more_button = html.node`
-        <button class="masthead-nav-control chibi icon" data-type="more">
-            ${tl2(trans.more)}
-        </button>
-    `;
-    tippy_esm_default(more_button, {
-      content: more_button.textContent
-    });
-    const more_menu = tippy_esm_default(more_button, {
-      content: html.node`
-            <a class="dropdown-menu-clickable-item accent" data-type="discord" href="https://discord.gg/${discord}" target="_blank">
-                ${tl2(trans.join_discord)}
-            </a>
-            <button class="dropdown-menu-clickable-item sponsor" onclick=${() => sponsor()}>
-                ${tl2(trans.sponsor)}
-            </button>
-            <a class="dropdown-menu-clickable-item lotus" href="https://github.com/katelyynn/lotus/issues/new/choose" target="_blank">
-                ${tl2(trans.suggest_correction)}
-            </a>
-            <div class="sep" />
-            <a class="dropdown-menu-clickable-item" data-type="update" href="${root}bleh/general">
-                ${tl2(trans.updates)}
-            </a>
-            <button class="dropdown-menu-clickable-item" data-menu-item="news" onclick=${() => news()}>
-                ${tl2(trans.news)}
-            </button>
-            <a class="dropdown-menu-clickable-item issues" href="https://github.com/katelyynn/bleh/issues" target="_blank">
-                ${tl2(trans.report_issue)}
-            </a>
-        `,
-      theme: "menu",
-      placement: "top",
-      interactive: true,
-      interactiveBorder: 10,
-      trigger: "click",
-      onShow(instance) {
-        instance.popper.addEventListener("click", (event3) => {
-          instance.hide();
-        });
-      }
-    });
-    links.appendChild(more_button);
-    let bleh_container = html.node`
-            <li class="masthead-nav-item">
-                <a class="masthead-nav-control chibi" href="${root}bleh${stored_season.id != "none" ? "/seasonal" : ""}" data-label="bleh" data-season="${stored_season.id}" data-season-active="${stored_season.id != "none" ? "true" : "false"}">
-                    ${stored_season.id == "none" ? tl2(trans.bleh_settings) : DateTime.fromISO(stored_season.end.replace("y0", stored_season.year).replace("{offset}", stored_season.offset)).toRelative(DateTime.fromISO(stored_season.now))}
-                </a>
-            </li>
-        `;
-    if (stored_season.id == "none") {
-      tippy_esm_default(bleh_container, {
-        content: tl2(trans.bleh_settings)
-      });
-    } else {
-      page.header.season_tooltip = tippy_esm_default(bleh_container, {
-        theme: "seasonal-swatch",
-        content: html.node`
-                    <span class="season-colour-name colourful" data-season=${stored_season.id}>${tl2(trans.seasonal.listing[stored_season.id])}</span>
-                    <span class="season-exclusive">${tl2(trans.seasonal.notice)}</span>
-                `
-      });
-    }
-    links.appendChild(bleh_container);
-    page.header.season = bleh_container.querySelector("a");
-    let notif_count = new_auth.querySelector(
-      '[data-analytics-label="notifications"] + .auth-avatar-notification-count-badge'
-    );
-    if (!notif_count) notif_count = "0";
-    else notif_count = notif_count.textContent;
-    let inbox_count = new_auth.querySelector(
-      '[data-analytics-label="inbox"] + .auth-avatar-notification-count-badge'
-    );
-    if (!inbox_count) inbox_count = "0";
-    else inbox_count = inbox_count.textContent;
-    const count = parseInt(notif_count) + parseInt(inbox_count);
-    const inbox = html.node`
-        <a class="inbox-item chibi" href="${root}inbox/notifications">
-            <div class="counter" data-count=${count}>${count}</div>
-        </a>
-    `;
-    tippy_esm_default(inbox, {
-      theme: "stack",
-      content: html.node`
-            <strong>${tl2(trans.inbox)}</strong>
-            <div class="inbox-info">
-                <div class="inbox-info-item">
-                    <div class="bleh-icon" data-type="notifications" />
-                    ${notif_count}
-                </div>
-                <div class="inbox-sep" />
-                <div class="inbox-info-item">
-                    <div class="bleh-icon" data-type="messages" />
-                    ${inbox_count}
-                </div>
-            </div>
-        `
-    });
-    inbox.addEventListener("click", (e) => {
-      const cmd = e.getModifierState("Control") || e.getModifierState("Meta");
-      const new_tab = e.button === 1 || cmd;
-      if (!new_tab) e.preventDefault();
-    });
-    tippy_esm_default(inbox, {
-      content: html.node`
-            <div class="window-header">
-                <div class="bleh-icon" data-type="inbox" style="--icon: var(--mask)" />
-                <div class="window-title">${tl2(trans.inbox)}</div>
-            </div>
-            ${setting({ id: "inbox_view", func: render_inbox })}
-            <div class="window-content" />
-        `,
-      theme: "nav-window",
-      placement: "top",
-      interactive: true,
-      interactiveBorder: 10,
-      trigger: "click",
-      onShow(instance) {
-        console.info("navigation instance MAIN", instance, instance.popper);
-        page.state.inbox_content = instance.popper.querySelector(".window-content");
-        render_inbox();
-      }
-    });
-    function render_notifications(notifications) {
-      if (settings.inbox_view != "notifications") return;
-      bleh_notification_list(notifications, true);
-      render(
-        page.state.inbox_content,
-        html`
-                <div class="mini-notifications">
-                    ${notifications}
-                    <p class="more-link">
-                        <a href="${root}inbox/notifications"
-                            >${tl2(trans.read_more)}</a
-                        >
-                    </p>
-                </div>
-            `
-      );
-    }
-    function render_messages(messages) {
-      if (settings.inbox_view != "messages") return;
-      render(
-        page.state.inbox_content,
-        html`
-                <div class="mini-notifications">
-                    <div class="alert alert-danger">
-                        This is a work in progress, sorry! >_<
-                    </div>
-                    <p class="more-link">
-                        <a href="${root}inbox">${tl2(trans.read_more)}</a>
-                    </p>
-                </div>
-            `
-      );
-      return;
-      render(
-        content,
-        html`
-                <div class="mini-notifications">
-                    ${messages}
-                    <p class="more-link">
-                        <a href="${root}inbox">${tl2(trans.read_more)}</a>
-                    </p>
-                </div>
-            `
-      );
-    }
-    function render_inbox() {
-      const view = settings.inbox_view;
-      let content2 = page.state.inbox_content;
-      log(`rendering view ${view}`, "navigation", "info", { content: content2 });
-      if (!content2) return;
-      render(
-        content2,
-        html`
-                <div class="mini-notifications content-loading">
-                    <div class="loading-data-container">
-                        <div class="loading-data-text">
-                            ${tl2(trans.loading)}
-                        </div>
-                    </div>
-                </div>
-            `
-      );
-      if (view == "notifications") {
-        if (page.notifications.list)
-          render_notifications(page.notifications.list);
-        fetch_notifications().then(
-          (notifications) => render_notifications(notifications)
-        );
-      } else {
-        if (page.messages.list) render_messages(page.messages.list);
-        fetch_messages().then((messages) => render_messages(messages));
-      }
-    }
-    links.appendChild(inbox);
-    let selected_language = document.querySelector(
-      ".footer-language--active strong"
-    )?.textContent;
-    let language_options = document.querySelectorAll(".footer-language-form");
-    const language_menu = html.node`
-        <div class="language-menu">
-            <button class="dropdown-menu-clickable-item v2" aria-selected="true">
-                <div class="auth-dropdown-item-row">
-                    <span class="auth-dropdown-item-left">
-                        <span class="flag" style="background-image: url(https://katelyynn.github.io/bleh/fm/flags/${lang}.svg)" />
-                        ${selected_language}
-                    </span>
-                    ${lang in lang_info ? html.node`
-                            <span class="auth-dropdown-item-right">
-                                <div class="bleh-icon checkmark" />
-                            </span>
-                        ` : ""}
-                </div>
-            </button>
-            <div class="sep"></div>
-        </div>
-    `;
-    language_options.forEach((language_option) => {
-      const button2 = language_option.querySelector("button");
-      if (!button2) {
-        log(
-          "random last.fm error where this button is non existent",
-          "language",
-          "error",
-          {
-            language_options,
-            language_option,
-            raw: language_option.innerHTML,
-            raw_options: language_options.innerHTML
-          }
-        );
-        return;
-      }
-      const key = button2.getAttribute("name");
-      button2.classList.remove("mimic-link");
-      button2.classList.add(
-        "dropdown-menu-clickable-item",
-        "v2",
-        "flex-button"
-      );
-      render(
-        button2,
-        html`
-                <div class="auth-dropdown-item-row">
-                    <span class="auth-dropdown-item-left">
-                        <span
-                            class="flag"
-                            style="background-image: url(https://katelyynn.github.io/bleh/fm/flags/${key}.svg)"
-                        />
-                        ${button2.textContent}
-                    </span>
-                    ${key in lang_info ? html.node`
-                            <span class="auth-dropdown-item-right">
-                                <div class="bleh-icon checkmark" />
-                            </span>
-                        ` : ""}
-                </div>
-            `
-      );
-      language_menu.appendChild(language_option);
-    });
-    let themes = [
-      {
-        id: "adaptive",
-        name: tl2(trans.auto),
-        hide: !ff("adaptive_theme"),
-        new_release: true
-      },
-      {
-        id: "glass",
-        type: "light",
-        name: tl2(trans.glass),
-        hide: !ff("glass"),
-        new_release: true
-      },
-      {
-        id: "light",
-        type: "light",
-        name: tl2(trans.themes.light)
-      },
-      {
-        id: "ink",
-        type: "light",
-        name: tl2(trans.themes.ink)
-      },
-      {
-        id: "dark",
-        formal: "ash",
-        type: "dark",
-        name: tl2(trans.themes.dark)
-      },
-      {
-        id: "darker",
-        formal: "dark",
-        type: "darker",
-        name: tl2(trans.themes.darker)
-      },
-      {
-        id: "oled",
-        formal: "void",
-        type: "oled",
-        name: tl2(trans.themes.oled)
-      }
-    ];
-    const token = new_auth.querySelector('[name="csrfmiddlewaretoken"]').getAttribute("value");
-    page.token = token;
-    let auth_menu = tippy_esm_default(auth_link2, {
-      theme: "auth-menu-v2",
-      placement: "top",
-      interactive: true,
-      interactiveBorder: 10,
-      trigger: "click",
-      onShow: (instance) => {
-        page.structure.notifications.setAttribute("data-auth-open", "true");
-        badges = load_badges(auth.name);
-        let page_2;
-        let side;
-        let status_container;
-        const current = settings.navigation_items;
-        let length = current.length;
-        if (length < 2) length = 2;
-        const show_language = settings.navigation_language == true ? 1 : 0;
-        const height = (length + 3 + show_language) * 30;
-        const themes_disabled = page.subpage.startsWith("listening-report") || page.state.settings_page == "visual";
-        let auth_header;
-        instance.setContent(html.node`
-                <div class="auth-menu-v2" style="--page-height: ${height}px">
-                    <div class="side primary">
-                        <div class="auth-menu-header" ref=${(el) => auth_header = el}>
-                            <div class="avatar">
-                                <img src=${auth.avatar.replace("avatar42s", "avatar170s")} alt=${auth.name} />
-                            </div>
-                            ${!auth.avatar.endsWith("818148bf682d429dc215c1705eb27b98.png") ? html.node`
-                            <div class="bg" style="background-image: url(${auth.avatar.replace("avatar42s", "avatar170s")})" />
-                            ` : ""}
-                            <div class="name">@${auth.name}</div>
-                            ${auth.pro ? html.node`
-                                <div class="badges">
-                                    ${auth.pro ? () => {
-          const elem = html.node`
-                                            <span class="label user-status-subscriber no-hover">
-                                                ${tl2(trans.badges["user-status-subscriber"].name)}
-                                            </span>
-                                        `;
-          tippy_esm_default(elem, {
-            theme: "badge",
-            placement: "bottom",
-            content: html.node`
-                                                <div class="badge-name">${tl2(trans.badges["user-status-subscriber"].name)}</div>
-                                                <div class="badge-reason">${tl2(trans.badges["user-status-subscriber"].reason)}</div>
-                                            `
-          });
-          return elem;
-        } : ""}
-                                </div>
-                            ` : ""}
-                            <a class="link-block-cover-link" href="${root}user/${auth.name}" />
-                        </div>
-                        <div class="floating button-group">
-                            ${() => {
-          let button2;
-          let form2 = html.node`
-                                    <form>
-                                        <input type="hidden" name="csrfmiddlewaretoken" value="${token}">
-                                        <a class="dropdown-menu-clickable-item chibi" ref=${(el) => button2 = el} data-menu-item="logout" href="${root}logout">
-                                            ${tl2(trans.logout)}
-                                        </a>
-                                    </form>
-                                `;
-          tippy_esm_default(button2, {
-            content: tl2(trans.logout)
-          });
-          return form2;
-        }}
-                            ${settings.starred_friend != "" ? () => {
-          let button2 = html.node`
-                                    <a class="dropdown-menu-clickable-item chibi" data-type="starred_friend" data-is-shortcut="true" href="${root}user/${settings.starred_friend}">${settings.starred_friend}</a>
-                                `;
-          tippy_esm_default(button2, {
-            content: settings.starred_friend
-          });
-          return button2;
-        } : () => {
-          let button2 = html.node`
-                                    <button class="dropdown-menu-clickable-item chibi" data-type="starred_friend" data-is-shortcut="false" onclick=${() => open_starred_friend_window()}>${tl2(trans.starred_friend.name)}</button>
-                                `;
-          tippy_esm_default(button2, {
-            content: tl2(
-              trans.starred_friend.name
-            )
-          });
-          return button2;
-        }}
-                        </div>
-                    </div>
-                    <div class="vertical-sep" />
-                    <div class="side" ref=${(el) => side = el} data-page="1">
-                        <div class="side-page" data-page="1">
-                            ${current.map((val) => {
-          let elem;
-          const formal = page.state.quick_access_items[val];
-          if (formal.url)
-            elem = html.node`<a href=${formal.url} />`;
-          else
-            elem = html.node`<button onclick=${formal.action} />`;
-          elem.classList = "dropdown-menu-clickable-item";
-          elem.setAttribute("data-type", formal.icon);
-          elem.textContent = formal.name;
-          let count2 = 0;
-          if (val == "notifications") count2 = notif_count;
-          else if (val == "messages") count2 = inbox_count;
-          if (count2) {
-            render(
-              elem,
-              html`
-                                            <div class="auth-dropdown-item-row">
-                                                <span
-                                                    class="auth-dropdown-item-left"
-                                                >
-                                                    ${formal.name}
-                                                </span>
-                                                <span
-                                                    class="auth-dropdown-item-right"
-                                                >
-                                                    ${count2}
-                                                </span>
-                                            </div>
-                                        `
-            );
-          }
-          return elem;
-        })}
-                            <div class="button-combo">
-                                <button class="dropdown-menu-clickable-item" data-menu-item="themes" disabled=${themes_disabled} onclick=${() => toggle_theme()}>
-                                    ${tl2(trans.themes.name)}
-                                </button>
-                                <div class="button-combo-sep" />
-                                <button class="dropdown-menu-clickable-item chibi" data-type="continue" disabled=${themes_disabled} onclick=${() => {
-          let buttons = [];
-          render(page_2, html``);
-          render(
-            page_2,
-            html`
-                                            <button
-                                                class="dropdown-menu-clickable-item"
-                                                data-type="back"
-                                                onclick=${() => {
-              side.setAttribute(
-                "data-page",
-                "1"
-              );
-            }}
-                                            >
-                                                ${tl2(trans.back)}
-                                            </button>
-                                            ${themes.map((theme) => {
-              if (theme.hide)
-                return html.node``;
-              if (!theme.formal)
-                theme.formal = theme.id;
-              const btn = html.node`
-                                                <button class="dropdown-menu-clickable-item theme-item-in-menu" aria-selected=${!settings.theme_schedule ? settings.theme == theme.id : theme.id == "adaptive"} data-bleh-theme=${theme.id} data-type="theme_${theme.formal}" onclick="${() => {
-                if (theme.id != "adaptive") {
-                  save_setting("theme_schedule", false);
-                  save_setting("theme", theme.id);
-                } else {
-                  save_setting("theme_schedule", true);
-                  match2();
-                }
-                buttons.forEach(
-                  (button2) => {
-                    const type = button2.getAttribute(
-                      "data-bleh-theme"
-                    );
-                    if (!settings.theme_schedule) {
-                      button2.setAttribute(
-                        "aria-selected",
-                        settings.theme == type
-                      );
-                    } else if (type == "adaptive") {
-                      button2.setAttribute(
-                        "aria-selected",
-                        true
-                      );
-                    } else {
-                      button2.setAttribute(
-                        "aria-selected",
-                        false
-                      );
-                    }
-                  }
-                );
-              }}">
-                                                    ${theme.name}
-                                                </button>
-                                            `;
-              buttons.push(btn);
-              return btn;
-            })}
-                                        `
-          );
-          side.setAttribute("data-page", "2");
-        }}>
-                                    ${tl2(trans.more)}
-                                </button>
-                            </div>
-                            ${show_language ? html.node`
-                            <div class="button-combo">
-                                <button class="dropdown-menu-clickable-item" data-menu-item="language" onclick=${() => {
-          render(page_2, html`
-                                        <button
-                                            class="dropdown-menu-clickable-item"
-                                            data-type="back"
-                                            onclick=${() => {
-            side.setAttribute(
-              "data-page",
-              "1"
-            );
-          }}
-                                        >
-                                            ${tl2(trans.back)}
-                                        </button>
-                                        ${language_menu}
-                                    `);
-          side.setAttribute("data-page", "2");
-        }}>
-                                    ${tl2(trans.language)}
-                                </button>
-                                <div class="button-combo-sep" />
-                                <button class="dropdown-menu-clickable-item chibi" data-type="continue" onclick=${() => {
-          render(page_2, html`
-                                        <button
-                                            class="dropdown-menu-clickable-item"
-                                            data-type="back"
-                                            onclick=${() => {
-            side.setAttribute(
-              "data-page",
-              "1"
-            );
-          }}
-                                        >
-                                            ${tl2(trans.back)}
-                                        </button>
-                                        ${language_menu}
-                                    `);
-          side.setAttribute("data-page", "2");
-        }}>
-                                    ${tl2(trans.more)}
-                                </button>
-                            </div>
-                            ` : ""}
-                            <div class="button-combo">
-                                <a class="dropdown-menu-clickable-item" data-type="mini" href="${root}bleh/minis">
-                                    ${tl2(trans.minis)}
-                                </a>
-                                <div class="button-combo-sep" />
-                                <button class="dropdown-menu-clickable-item chibi" data-menu-item="news" onclick=${() => {
-          news();
-          instance.hide();
-        }}>
-                                    ${tl2(trans.news)}
-                                </button>
-                            </div>
-
-                            <div class="button-combo">
-                                <a class="dropdown-menu-clickable-item" data-menu-item="bleh" href="${root}bleh">
-                                    ${tl2(trans.settings)}
-                                </a>
-                                <div class="button-combo-sep" />
-                                <a class="dropdown-menu-clickable-item chibi" data-type="settings" href="${root}settings">
-                                    ${tl2(trans.settings)}
-                                </a>
-                            </div>
-                        </div>
-                        <div class="side-page" data-page="2" ref=${(el) => page_2 = el} />
-                    </div>
-                </div>
-                ${ff("status_in_menu") && auth.pro ? html.node`
-                <div class="auth-menu-status" ref=${(el) => status_container = el}>
-                    <div class="status">
-                        <div class="loading-data-container">
-                            <div class="loading-data-text">${tl2(trans.loading)}</div>
-                        </div>
-                    </div>
-                </div>
-                ` : ""}
-            `);
-        load_profile_cache_externally(auth.name).then((cache2) => {
-          render(auth_header, html`
-                    <div class="avatar">
-                        <img src=${auth.avatar.replace("avatar42s", "avatar170s")} alt=${auth.name} />
-                    </div>
-                    ${cache2.banner ? html.node`
-                    <div class="bg" style="background-image: url(${cache2.banner})" />
-                    ` : !auth.avatar.endsWith("818148bf682d429dc215c1705eb27b98.png") ? html.node`
-                    <div class="bg" style="background-image: url(${auth.avatar.replace("avatar42s", "avatar170s")})" />
-                    ` : ""}
-                    <div class="name">${cache2.username ? cache2.username : `@${auth.name}`}</div>
-                    ${badges || auth.pro ? html.node`
-                        <div class="badges">
-                            ${badges ? badges.map((badge) => create_badge(badge)) : ""}
-                            ${auth.pro ? () => {
-            const elem = html.node`
-                                    <span class="label user-status-subscriber no-hover">
-                                        ${tl2(trans.badges["user-status-subscriber"].name)}
-                                    </span>
-                                `;
-            tippy_esm_default(elem, {
-              theme: "badge",
-              placement: "bottom",
-              content: html.node`
-                                        <div class="badge-name">${tl2(trans.badges["user-status-subscriber"].name)}</div>
-                                        <div class="badge-reason">${tl2(trans.badges["user-status-subscriber"].reason)}</div>
-                                    `
-            });
-            return elem;
-          } : ""}
-                        </div>
-                    ` : ""}
-                    <a class="link-block-cover-link" href="${root}user/${auth.name}" />
-                `);
-        });
-        function render_status_container(status2) {
-          if (!status2) return;
-          render(
-            status_container,
-            html`
-                        <div class="status">
-                            <div class="bleh-icon" />
-                            <div
-                                class="status-bg"
-                                style="background-image: url(${status2.avatar})"
-                            />
-                            <div class="status-text">
-                                ${status2.name} ${tl2(trans.by)} ${status2.artist}
-                            </div>
-                        </div>
-                    `
-          );
-        }
-        if (ff("status_in_menu") && auth.pro) {
-          if (page.now.name) render_status_container(page.now);
-          live_status().then((status2) => render_status_container(status2));
-        }
-      },
-      onHide(instance) {
-        page.structure.notifications.setAttribute(
-          "data-auth-open",
-          "false"
-        );
-      }
-    });
-    const auth_drop_menu = tippy_esm_default(auth_link2, {
-      theme: "context-menu",
-      content: html.node`
-            <a class="dropdown-menu-clickable-item" data-type="quick_access" href="${root}bleh/interface">
-                ${tl2(trans.edit_quick_access)}
-            </a>
-            <button class="dropdown-menu-clickable-item" data-type="copy" onclick=${() => copy(auth.name)}>
-                ${tl2(trans.copy_username)}
-            </button>
-            <div class="sep" />
-            ${generic_link_menu(`${root}user/${auth.name}`, `https://www.last.fm${root}user/${auth.name}`)}
-        `,
-      placement: "right-start",
-      trigger: "manual",
-      interactive: true,
-      interactiveBorder: 10,
-      offset: [0, 0],
-      onShow(instance) {
-        instance.popper.addEventListener("click", (event3) => {
-          instance.hide();
-        });
-      }
-    });
-    register_menu(auth_link2, auth_drop_menu);
-    let container = new_auth.parentElement;
-    container.parentElement.removeChild(container);
-    auth_link2.removeAttribute("aria-controls");
-    auth_link2.removeAttribute("data-disclose-hover");
-    auth_link2.removeAttribute("data-disclose-hover--allow-enter-open");
-    auth_link2.addEventListener("click", (e) => {
-      const cmd = e.getModifierState("Control") || e.getModifierState("Meta");
-      const new_tab = e.button === 1 || cmd;
-      if (!new_tab) e.preventDefault();
-    });
-    masthead.appendChild(html.node`
-        <div class="mobile-controls">
-            <a class="btn mobile-control" aria-checked=${page.type == "overview" || page.type == "recommended" || page.type == "releases" || page.type == "bookmarks" || page.type == "charts"} data-menu-item="home" href="${root}music">
-                ${tl2(trans.home)}
-            </a>
-            ${() => {
-      const btn = html.node`
-                    <a class="btn mobile-control" aria-checked=${page.type == "search"} data-menu-item="search">
-                        ${tl2(trans.search)}
-                    </a>
-                `;
-      let search_input;
-      tippy_esm_default(btn, {
-        theme: "mobile",
-        content: html.node`
-                        <div class="window-header">
-                            <div class="bleh-icon" data-type="search" style="--icon: var(--mask)" />
-                            <div class="window-title">${tl2(trans.search)}</div>
-                        </div>
-                        ${() => {
-          const form2 = html.node`
-                                <form action="${root}search" method="get">
-                                    ${search_input = input({
-            name: "q",
-            func: () => {
-              form2.submit();
-            }
-          })}
-                                </form>
-                            `;
-          return form2;
-        }}
-                    `,
-        placement: "top",
-        interactive: true,
-        interactiveBorder: 10,
-        trigger: "click",
-        appendTo: document.body,
-        onShow() {
-          search_input.focus();
-        }
-      });
-      return btn;
-    }}
-            ${() => {
-      const btn = html.node`
-                    <a class="btn mobile-control" aria-checked=${page.type == "user" && page.name == auth.name} data-menu-item="profile_mobile">
-                        <span class="avatar">
-                            <img src=${auth.avatar} alt=${auth.name}>
-                        </span>
-                        ${auth.name}
-                    </a>
-                `;
-      tippy_esm_default(btn, {
-        theme: "mobile",
-        content: html.node`
-                        <div class="window-menu-items">
-                            <form>
-                                <input type="hidden" name="csrfmiddlewaretoken" value="${token}">
-                                <a class="dropdown-menu-clickable-item" ref=${(el) => button = el} data-menu-item="logout" href="${root}logout">
-                                    ${tl2(trans.logout)}
-                                </a>
-                            </form>
-                            <button class="dropdown-menu-clickable-item" data-menu-item="news" onclick=${() => {
-          news();
-        }}>
-                                ${tl2(trans.news)}
-                            </button>
-                            ${settings.navigation_items.map((val) => {
-          let elem;
-          const formal = page.state.quick_access_items[val];
-          if (formal.url)
-            elem = html.node`<a href=${formal.url} />`;
-          else
-            elem = html.node`<button onclick=${formal.action} />`;
-          elem.classList = "dropdown-menu-clickable-item";
-          elem.setAttribute("data-type", formal.icon);
-          elem.textContent = formal.name;
-          let count2 = 0;
-          if (val == "notifications") count2 = notif_count;
-          else if (val == "messages") count2 = inbox_count;
-          if (count2) {
-            render(
-              elem,
-              html`
-                                            <div class="auth-dropdown-item-row">
-                                                <span
-                                                    class="auth-dropdown-item-left"
-                                                >
-                                                    ${formal.name}
-                                                </span>
-                                                <span
-                                                    class="auth-dropdown-item-right"
-                                                >
-                                                    ${count2}
-                                                </span>
-                                            </div>
-                                        `
-            );
-          }
-          return elem;
-        })}
-                            ${settings.starred_friend != "" ? html.node`
-                                        <a class="dropdown-menu-clickable-item no-colour" data-type="starred_friend" data-is-shortcut="true" href="${root}user/${settings.starred_friend}">
-                                            ${settings.starred_friend}
-                                        </a>
-                                    ` : ""}
-                            <a class="dropdown-menu-clickable-item" data-type="user" href="${root}user/${auth.name}">
-                                ${auth.name}
-                            </a>
-                        </div>
-                    `,
-        placement: "top",
-        interactive: true,
-        interactiveBorder: 10,
-        trigger: "click",
-        appendTo: document.body
-      });
-      return btn;
-    }}
-            ${() => {
-      const btn = html.node`
-                    <a class="btn mobile-control" aria-checked=${page.type == "inbox"} data-type="inbox">
-                        ${tl2(trans.inbox)}
-                        ${count > 0 ? html.node`<div class="notification-count-badge"></div>` : ""}
-                    </a>
-                `;
-      tippy_esm_default(btn, {
-        theme: "mobile",
-        content: html.node`
-                        <div class="window-header">
-                            <div class="bleh-icon" data-type="inbox" style="--icon: var(--mask)" />
-                            <div class="window-title">${tl2(trans.inbox)}</div>
-                        </div>
-                        ${setting({ id: "inbox_view", func: render_inbox })}
-                        <div class="window-content" />
-                    `,
-        placement: "top",
-        interactive: true,
-        interactiveBorder: 10,
-        trigger: "click",
-        appendTo: document.body,
-        onShow(instance) {
-          console.info(
-            "navigation instance",
-            instance,
-            instance.popper
-          );
-          page.state.inbox_content = instance.popper.querySelector(".window-content");
-          render_inbox();
-        }
-      });
-      return btn;
-    }}
-            <a class="btn mobile-control" aria-checked=${page.type == "settings" || page.type == "bleh_settings"} data-menu-item="settings" href="${root}bleh">
-                ${tl2(trans.settings)}
-                ${update_required === "true" ? html.node`<div class="notification-count-badge"></div>` : ""}
-            </a>
-        </div>
-    `);
-  }
-  async function live_status() {
-    if (page.now.next_fetch && Date.now() < page.now.next_fetch)
-      return page.now;
-    try {
-      const res = await fetch(`${root}user/${auth.name}/partial/now`);
-      if (!res.ok) {
-        log("failed to fetch", "live", "error", { res });
-        return;
-      }
-      const dom = await res.text();
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(dom, "text/html");
-      const intro = doc.querySelector(".user-now-intro");
-      let active = true;
-      if (intro.textContent.trim() === tl2(trans.last_scrobbled_replace).replace("{u}", auth.name))
-        active = false;
-      const track = doc.querySelector(".user-now-track a");
-      const links = doc.querySelectorAll(".user-now-artist-and-album a");
-      let artist = links[0];
-      const album = links[1];
-      const avatar2 = doc.querySelector(".cover-art img")?.src;
-      track.removeAttribute("target");
-      artist.removeAttribute("target");
-      album.removeAttribute("target");
-      let next = /* @__PURE__ */ new Date();
-      next.setMinutes(next.getMinutes() + 1);
-      if (settings.format_guest_features) {
-        const formatted = name_includes(
-          track.textContent,
-          artist.textContent
-        );
-        track.classList.add("smart-title");
-        render(track, smart_title(formatted[0], formatted[1]));
-        artist = html.node`<span class="artist">${smart_artists(formatted[2], formatted[3])}</span>`;
-      } else if (settings.corrections) {
-        track.textContent = romanise(
-          correct_item_by_artist(track.textContent, artist.textContent)
-        );
-        artist.textContent = romanise(correct_artist(artist.textContent));
-      }
-      page.now = {
-        next_fetch: next,
-        name: track,
-        artist,
-        album,
-        avatar: avatar2,
-        active
-      };
-      return page.now;
-    } catch (error) {
-      log("exception during fetch", "live", "error", { error });
-    }
-  }
-  async function fetch_notifications() {
-    if (page.notifications.next_fetch && Date.now() < page.notifications.next_fetch)
-      return page.notifications.list;
-    try {
-      const res = await fetch(`${root}inbox/notifications`);
-      if (!res.ok) {
-        log("failed to fetch", "live", "error", { res });
-        return;
-      }
-      const dom = await res.text();
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(dom, "text/html");
-      const list = doc.querySelector(".inbox-notifications");
-      let next = /* @__PURE__ */ new Date();
-      next.setMinutes(next.getMinutes() + 2);
-      page.notifications.next_fetch = next;
-      if (list) {
-        page.notifications.list = list;
-        return list;
-      }
-    } catch (error) {
-      log("exception during fetch", "live", "error", { error });
-    }
-  }
-  async function fetch_messages() {
-    if (page.messages.next_fetch && Date.now() < page.messages.next_fetch)
-      return page.messages.list;
-    try {
-      const res = await fetch(`${root}inbox`);
-      if (!res.ok) {
-        log("failed to fetch", "live", "error", { res });
-        return;
-      }
-      const dom = await res.text();
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(dom, "text/html");
-      const list = doc.querySelector(".inbox-table");
-      let next = /* @__PURE__ */ new Date();
-      next.setMinutes(next.getMinutes() + 2);
-      page.messages.next_fetch = next;
-      if (list) {
-        page.messages.list = list;
-        return list;
-      }
-    } catch (error) {
-      log("exception during fetch", "live", "error", { error });
-    }
-  }
-
   // src/pages/album.js
   function bleh_albums() {
     let album_header = document.body.querySelector(".header-new--album");
@@ -54773,11 +55431,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       album_missing_a_tracklist();
       bleh_about_artist();
       bleh_tags_mini();
-      let similar_albums = page.structure.main.querySelector(".similar-albums");
-      if (similar_albums) {
-        let similar_panel = similar_albums.parentElement;
-        similar_panel.classList.add("similar-panel");
-      }
+      similar_items();
     } else {
       let btn_add = page.structure.side.querySelector(".add-button");
       if (btn_add) btn_add.setAttribute("data-page-subpage", page.subpage);
@@ -54981,20 +55635,22 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                     <a class="bleh--avatar-clickable-link"></a>
                     ` : html.node`<img class="missing-artist">`}
                 </div>
-                <div class="info-side">
-                    ${page.multi ? html.node`
-                    <div class="sub-text">
-                        ${tl2(trans.artists)}
-                        <div class="info-tip" ref=${(el) => multi_info_box = el}>
-                            <div class="bleh-icon bleh-info-icon"></div>
+                <div class="info-side has-main-info">
+                    <div class="main-info">
+                        ${page.multi ? html.node`
+                        <div class="sub-text">
+                            ${tl2(trans.artists)}
+                            <div class="info-tip" ref=${(el) => multi_info_box = el}>
+                                <div class="bleh-icon bleh-info-icon"></div>
+                            </div>
                         </div>
-                    </div>
-                    ` : html.node`
-                    <div class="sub-text">${tl2(trans.artist)}</div>
-                    `}
-                    <div class="title-container" data-multi=${page.multi}>
-                        ${title}
-                        ${position}
+                        ` : html.node`
+                        <div class="sub-text">${tl2(trans.artist)}</div>
+                        `}
+                        <div class="title-container" data-multi=${page.multi}>
+                            ${title}
+                            ${position}
+                        </div>
                     </div>
                     ${on_tour ? html.node`
                     <div class="badges">
@@ -55065,6 +55721,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       show_your_scrobbles();
       bleh_music_page_charts();
       bleh_tags_mini();
+      similar_items();
       let top_tracks = page.structure.main.querySelector("#top-tracks");
       if (top_tracks) {
         let settings_btn;
@@ -55223,6 +55880,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           ".listeners-section-item"
         );
         listeners_section.classList = "user-list top-listeners-list small";
+        listeners_section.setAttribute("data-list-view", "grid");
         render(listeners_section, html``);
         listeners.forEach((listener, index3) => {
           listeners_section.appendChild(
@@ -55400,38 +56058,41 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
             `
       );
     }
-    const friends = settings.friends.filter(
-      (friend) => friend != settings.starred_friend
-    );
-    page.structure.side.appendChild(html.node`
-        <section class="side-actions">
+    const friends_panel = html.node`
+        <section class="side-actions" />
+    `;
+    render_friends();
+    page.structure.side.appendChild(friends_panel);
+    function render_friends() {
+      const friends2 = settings.friends.filter((friend) => friend != settings.starred_friend);
+      render(friends_panel, html`
             <a class="btn side-action" data-type="profile" href="${root}user/${auth.name}/library/music/${redirect()}${sanitise(page.name)}">
-                ${auth.name}
+                <span><span class="at">@</span>${auth.name}</span>
             </a>
             ${settings.starred_friend != "" ? html.node`
             <a class="btn side-action" data-type="profile" href="${root}user/${settings.starred_friend}/library/music/${redirect()}${sanitise(page.name)}">
-                ${settings.starred_friend}
+                <span><span class="at">@</span>${settings.starred_friend}</span>
                 <span class="star-icon colourful">
                     <span class="bleh-icon" />
                 </span>
             </a>
             ` : ""}
-            ${friends.map(
-      (friend) => html.node`
+            ${friends2.map((friend) => html.node`
             <a class="btn side-action" data-type="profile" href="${root}user/${friend}/library/music/${redirect()}${sanitise(page.name)}">
-                ${friend}
+                <span><span class="at">@</span>${friend}</span>
             </a>
-            `
-    )}
-            <a class="btn side-action" data-type="add" href="${root}bleh/profile">
-                ${tl2(trans.add_friends)}
-            </a>
+            `)}
+            <button class="btn side-action" data-type="edit" onclick=${() => open_starred_friend_window(() => {
+        render_friends();
+      })}>
+                ${tl2(trans.edit_close_friends)}
+            </button>
             <div class="sep" />
             <button class="btn side-action" data-type="add" onclick=${() => other_listener(sanitise(page.name))}>
                 ${tl2(trans.custom)}
             </button>
-        </section>
-    `);
+        `);
+    }
   }
 
   // src/pages/bleh_setup.js
@@ -55506,12 +56167,18 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     setTimeout(function() {
       page.structure.setup.setAttribute("data-animating", "false");
       render(page.structure.setup_content, html`
-            <p>${{ html: tl2(trans.welcome_to_bleh) }}</p>
+            <p>${{ html: tl2(trans.welcome_to_bleh, { b: version.brand }) }}</p>
         `);
       render(page.structure.setup_footer, html`
+            ${auth.name ? html.node`
             <a class="see-more cancel" href="${root}user/${auth.name}">
                 ${tl2(trans.skip)}
             </a>
+            ` : html.node`
+            <a class="see-more cancel" href="${root}dashboard">
+                ${tl2(trans.skip)}
+            </a>
+            `}
             <div class="fill"></div>
             <button class="btn primary continue" onclick=${() => setup_accessibility()}>
                 ${tl2(trans.next)}
@@ -55680,7 +56347,13 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                 <p>${tl2(trans.accessibility_explain)}</p>
                 <div class="settings">
                     <div class="setting-group">
-                        ${setting({ id: "reduced_motion" })}
+                        ${setting({ id: "reduced_motion", func: (val) => {
+          if (val) {
+            page.state.trans = 0;
+          } else {
+            page.state.trans = 200;
+          }
+        } })}
                         ${setting({ id: "underline_links" })}
                     </div>
                 </div>
@@ -55879,50 +56552,31 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
   function setup_end() {
     page.structure.setup.setAttribute("data-page", "end");
     page.structure.setup.setAttribute("data-animating", "true");
-    setTimeout(function() {
+    setTimeout(() => {
       page.structure.setup.setAttribute("data-animating", "false");
-      render(
-        page.structure.setup_content,
-        html`
-                <p>
-                    ${{
-          html: tl2(trans.setup_end).replace("{a}", `<a href="${root}bleh">`).replace("{/a}", "</a>")
-        }}
-                </p>
-                <div class="mini-list">
-                    <a
-                        class="btn mini"
-                        href="https://discord.gg/${discord}"
-                        target="_blank"
-                    >
-                        <div class="mini-icon colourful" data-type="discord">
-                            <div class="bleh-icon" />
-                        </div>
-                        <div class="mini-info">
-                            <h5>${tl2(trans.join_discord)}</h5>
-                        </div>
-                        <div
-                            class="bleh-icon mini-arrow"
-                            style="--icon: var(--mask)"
-                            data-type="arrow-right"
-                        ></div>
-                    </a>
-                    <button class="btn mini" onclick=${() => sponsor()}>
-                        <div class="mini-icon colourful" data-type="sponsor">
-                            <div class="bleh-icon" />
-                        </div>
-                        <div class="mini-info">
-                            <h5>${tl2(trans.sponsor)}</h5>
-                        </div>
-                        <div
-                            class="bleh-icon mini-arrow"
-                            style="--icon: var(--mask)"
-                            data-type="arrow-right"
-                        ></div>
-                    </button>
-                </div>
-            `
-      );
+      render(page.structure.setup_content, html`
+            <p>${{ html: tl2(trans.setup_end, { a: `<a href="${root}bleh">`, "/a": "</a>", b: version.brand }) }}</p>
+            <div class="mini-list">
+                <a class="btn mini" href="https://discord.gg/${discord}" target="_blank">
+                    <div class="mini-icon colourful" data-type="discord">
+                        <div class="bleh-icon" />
+                    </div>
+                    <div class="mini-info">
+                        <h5>${tl2(trans.join_discord)}</h5>
+                    </div>
+                    <div class="bleh-icon mini-arrow" style="--icon: var(--mask)" data-type="arrow-right" />
+                </a>
+                <button class="btn mini" onclick=${() => sponsor()}>
+                    <div class="mini-icon colourful" data-type="sponsor">
+                        <div class="bleh-icon" />
+                    </div>
+                    <div class="mini-info">
+                        <h5>${tl2(trans.sponsor)}</h5>
+                    </div>
+                    <div class="bleh-icon mini-arrow" style="--icon: var(--mask)" data-type="arrow-right" />
+                </button>
+            </div>
+        `);
       if (auth.name) {
         render(page.structure.setup_footer, html`
                 <button class="see-more cancel" onclick=${() => setup_layout()}>
@@ -55988,26 +56642,28 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     page_content.classList.add("has-error");
     render(page_content, html`
         <div class="row">
-            <div class="col-main">
-                <section class="error-panel sour">
-                    <div class="info">
-                        <h1>${tl2(trans.erm)}</h1>
-                        <div class="subtle">${error_content.textContent}</div>
-                    </div>
-                    <div class="error-content">
-                        ${reason}
-                    </div>
-                    <div class="subtle">${window.location.pathname}</div>
-                    <div class="error-footer">
-                        <a class="see-more cancel" href="${back_link.getAttribute("href")}">
-                            ${tl2(trans.back)}
-                        </a>
-                        <a class="btn primary continue" href="${root}user/${auth.name}">
-                            ${tl2(trans.profile)}
-                        </a>
-                    </div>
-                </section>
-            </div>
+            <main class="content cards-view">
+                <div class="col-main">
+                    <section class="error-panel sour">
+                        <div class="info">
+                            <h1>${tl2(trans.erm)}</h1>
+                            <div class="subtle">${error_content.textContent}</div>
+                        </div>
+                        <div class="error-content">
+                            ${reason}
+                        </div>
+                        <div class="subtle">${window.location.pathname}</div>
+                        <div class="error-footer">
+                            <a class="see-more cancel" href="${back_link.getAttribute("href")}">
+                                ${tl2(trans.back)}
+                            </a>
+                            <a class="btn primary continue" href="${root}user/${auth.name}">
+                                ${tl2(trans.profile)}
+                            </a>
+                        </div>
+                    </section>
+                </div>
+            </main>
         </div>
     `);
   }
@@ -56209,7 +56865,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                     <div class="avatar" onclick=${() => {
         expand_avatar(auth.avatar.replace("/avatar42s/", "/ar0/"));
       }}>
-                        <img src=${auth.avatar.replace("/avatar42s/", "/avatar170s/")} alt=${tl2(trans.your_avatar)}>
+                        <img src=${auth.avatar.replace("/avatar42s/", "/avatar300s/")} alt=${tl2(trans.your_avatar)}>
                     </div>
                 </div>
                 <div class="info-side has-main-info">
@@ -56220,7 +56876,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                         <div class="title-container">
                             <div class="header-title-label-wrap">
                                 <h1 class="header-title">
-                                    <a class="profile-name" href="${root}user/${auth.name}" ref=${(el) => profile_name = el}>${cache2.username ? cache2.username : auth.name}</a>
+                                    <a class="profile-name" ref=${(el) => profile_name = el}>${cache2.username ? cache2.username : auth.name}</a>
                                 </h1>
                             </div>
                         </div>
@@ -56413,11 +57069,11 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         });
       }
     } else if (page.type == "releases") {
-      let content2 = page.structure.main.querySelectorAll(":scope > *");
+      let content = page.structure.main.querySelectorAll(":scope > *");
       let panel = html.node`
             <section class="releases-panel" />
         `;
-      content2.forEach((element) => {
+      content.forEach((element) => {
         panel.appendChild(element);
       });
       render(page.structure.main, panel);
@@ -56691,25 +57347,15 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     }
     page.name = event_header.querySelector(".header-title").textContent.trim();
     page.sister = event_header.querySelector(".header-title").textContent.trim();
-    let event_description = event_header.querySelector(".header-title-secondary");
-    if (settings.corrections) {
-      let links = event_description.querySelectorAll("a");
-      links.forEach((link) => {
-        link.textContent = correct_artist(link.textContent);
-      });
-    }
     let redesigned_event_header = document.createElement("section");
     redesigned_event_header.classList.add("redesigned-header", "redesigned-event-header", "no-background");
     redesigned_event_header.innerHTML = `
-        <div class="calendar-side">
-            <div class="calendar">
-                ${event_header.querySelector(".calendar-icon").innerHTML}
-            </div>
+        <div class="tag-side">
+            <div class="tag-icon event-icon"></div>
         </div>
         <div class="info-side">
             <div class="sub-text">${tl2(trans.event)}</div>
             <h1>${page.name}</h1>
-            <p class="sub-info">${event_description.innerHTML}</p>
         </div>
     `;
     let background = document.body.querySelector(".header-background--has-image");
@@ -56718,7 +57364,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     else
       register_background(null);
     page.structure.container.insertBefore(redesigned_event_header, page.structure.container.firstElementChild);
-    document.body.querySelector(".header").classList.add("legacy-header");
+    event_header.classList.add("legacy-header");
     if (!is_subpage) {
       let header_meta = document.body.querySelector(".header-metadata");
       header_meta.classList.add("profile-header-metadata-legacy");
@@ -56735,7 +57381,10 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       });
       let side_actions = document.createElement("section");
       side_actions.classList.add("side-actions");
-      page.structure.side.appendChild(side_actions);
+      if (!page.mobile)
+        page.structure.side.appendChild(side_actions);
+      else
+        page.structure.main.appendChild(side_actions);
       let form = document.body.querySelector(".attendance-control");
       let buttons = form.querySelectorAll("button");
       buttons.forEach((button2) => {
@@ -56745,6 +57394,97 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       let main_panel = page.structure.main.querySelector(".event-summary-with-poster");
       if (!main_panel)
         main_panel = page.structure.main.querySelector(".event-details");
+      if (main_panel.parentElement != page.structure.main) main_panel.parentElement.replaceWith(main_panel);
+      const date = main_panel.querySelector('[itemprop="startDate"]');
+      const details = main_panel.querySelectorAll('[itemprop="location"] > p');
+      let address;
+      let tel;
+      let web;
+      let maps;
+      details.forEach((detail) => {
+        const type = detail.classList?.[0]?.replace("event-detail-", "") || "";
+        if (type == "address") {
+          address = {
+            head: detail.querySelector('[itemprop="name"]')?.textContent,
+            street: detail.querySelector('[itemprop="streetAddress"]')?.textContent,
+            locality: detail.querySelector('[itemprop="addressLocality"]')?.textContent,
+            postal: detail.querySelector('[itemprop="postalCode"]')?.textContent,
+            country: detail.querySelector('[itemprop="addressCountry"]')?.textContent
+          };
+        } else if (type == "tel") {
+          tel = detail.querySelector('[itemprop="telephone"]').textContent;
+        } else if (type == "web") {
+          web = detail.querySelector("a").href;
+        } else {
+          maps = detail.querySelector("a").href;
+        }
+      });
+      const added_by = main_panel.querySelector(".event-metadata a")?.textContent;
+      const new_panel = html.node`
+            <section class="events-panel">
+                <div class="metadata-and-wiki-row full-w">
+                    <div class="metadata-column">
+                        <div class="metadata-group primary">
+                            <dt class="catalogue-metadata-heading">${tl2(trans.located)}</dt>
+                            <dd class="catalogue-metadata-description address">
+                                <strong>${address.head}</strong>
+                                <p>${address.street ? `${address.street}, ` : ""}${address.locality}</p>
+                                <p>${address.postal ? `${address.postal}, ` : ""}${address.country}</p>
+                            </dd>
+                        </div>
+                        <div class="metadata-group">
+                            <dt class="catalogue-metadata-heading">${tl2(trans.date)}</dt>
+                            <dd class="catalogue-metadata-description address">
+                                ${() => {
+        const date_object = DateTime.fromISO(date.getAttribute("content"));
+        const values = date.querySelectorAll("strong");
+        let hour;
+        if (values.length > 1) {
+          hour = values[1];
+        }
+        const elem = html.node`
+                                        <strong>${date_object.toLocaleString(DateTime.DATE_FULL)}</strong>
+                                        ${hour ? html.node`<p>${hour.textContent}</p>` : ""}
+                                    `;
+        return elem;
+      }}
+                            </dd>
+                        </div>
+                        ${tel ? html.node`
+                            <div class="metadata-group">
+                                <dt class="catalogue-metadata-heading">${tl2(trans.contact)}</dt>
+                                <dd class="catalogue-metadata-description">${tel}</dd>
+                            </div>
+                        ` : ""}
+                    </div>
+                </div>
+                <div class="metadata-row">
+                    <div class="metadata-group">
+                        <div class="sub-text music-small-header">${tl2(trans.find_on)}</div>
+                        <div class="music-links">
+                            ${web ? html.node`
+                                <a class="resource-external-link resource-external-link--homepage music-link" href=${web} target="_blank">
+                                    ${tl2(trans.website)}
+                                </a>
+                            ` : ""}
+                            ${maps ? html.node`
+                                <a class="music-link" data-host="maps.google.com" data-host-unknown="true" href=${maps} target="_blank" style="--favi: url(https://icons.duckduckgo.com/ip3/maps.google.com.ico)">
+                                    ${tl2(trans.show_on_map)}
+                                </a>
+                            ` : ""}
+                        </div>
+                    </div>
+                </div>
+            </section>
+        `;
+      main_panel.replaceWith(new_panel);
+      if (added_by) {
+        page.structure.side.appendChild(html.node`
+                <section>
+                    <p class="card-tip">${{ html: tl2(trans.added_by, { u: `<a class="mention" href="${root}user/${added_by}">@${added_by}</a>` }) }}</p>
+                </section>
+            `);
+      }
       let edit_button = main_panel.querySelector(".event-metadata + .event-metadata a");
       if (edit_button) {
         let sep = document.createElement("div");
@@ -56766,11 +57506,13 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         side_actions.appendChild(sep2);
         side_actions.appendChild(poster_panel);
       }
-      let users = page.structure.main.querySelectorAll(".attendee-summary-user-inner-wrap");
-      users.forEach((user) => {
+      let users2 = page.structure.main.querySelectorAll(".attendee-summary-user-inner-wrap");
+      users2.forEach((user) => {
         let avatar2 = user.querySelector(".attendee-summary-user-avatar");
-        let name = user.querySelector(".attendee-summary-user-link").textContent;
-        patch_avatar(avatar2, name, "event");
+        let name = user.querySelector(".attendee-summary-user-link");
+        let badge = patch_avatar(avatar2, name.textContent, "event");
+        if (badge)
+          style_name_from_badge(name, badge);
       });
       let cancelled = page.structure.main.querySelector(".event-status--cancelled");
       if (cancelled) {
@@ -56804,8 +57546,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
             `;
         render(page.structure.main, user_panel);
         refresh_all();
-        let users = page.structure.main.querySelectorAll(".user-list-inner-wrap");
-        users.forEach((user) => {
+        let users2 = page.structure.main.querySelectorAll(".user-list-inner-wrap");
+        users2.forEach((user) => {
           let avatar2 = user.querySelector(".user-list-avatar");
           let name = user.querySelector(".user-list-link").textContent;
           let badge = patch_avatar(avatar2, name, "follow");
@@ -56896,6 +57638,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       log("unable to find elements", "page structure");
     }
     let content_top = document.body.querySelector(".content-top");
+    const page_alert = content_top.querySelector(".notification > .alert");
     checkup_page_structure(false, content_top);
     log("status is", "page", "info", page);
     update_page();
@@ -56932,6 +57675,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       let pagination = page.structure.container.querySelector(".pagination");
       page.structure.main.appendChild(html.node`
             <section class="inbox-panel notifications-panel">
+                ${page_alert}
                 ${form}
                 ${notifications}
                 ${pagination}
@@ -56939,29 +57683,225 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         `);
       if (!notifications) return;
       bleh_notification_list(notifications);
+    } else if (page.subpage == "message_overview" || page.subpage == "sent_message" || page.subpage == "message_reply") {
+      let inbox = page.structure.container.querySelector(".inbox-message-view");
+      page.structure.main.appendChild(inbox);
+      const message = inbox.querySelector(".inbox-message");
+      const sender_avatar = message.querySelector(".inbox-message-sender-avatar");
+      const sender_name = message.querySelector(".inbox-message-sender-name");
+      const sender_time = message.querySelector(".inbox-message-timestamp");
+      const avatar2 = sender_avatar.querySelector(".avatar");
+      const name_text = sender_name.textContent.trim();
+      const badge = patch_avatar(avatar2, sanitise(name_text));
+      const message_subject = message.querySelector(".inbox-message-subject");
+      const message_preview = message.querySelector(".inbox-message-preview");
+      const message_buttons = message.querySelector(".inbox-message-buttons");
+      message_buttons.querySelectorAll(":is(button, a)").forEach((link) => {
+        const type = link.classList[0];
+        link.classList.add("btn", "inbox-button");
+        if (type == "back-button") {
+          link.textContent = tl2(trans.back);
+        } else if (type == "delete-button") {
+          link.classList.add("danger-subtle");
+          link.textContent = tl2(trans.delete);
+        }
+      });
+      inbox.insertBefore(message_buttons, message);
+      let sender_panel;
+      render(message, html`
+            <div class="message-sender colourful" ref=${(el) => sender_panel = el}>
+                ${sender_avatar}
+                ${sender_name}
+                ${sender_time}
+                <div class="message-sender-actions">
+                    ${() => {
+        const btn = html.node`
+                            <button class="btn message-sender-action icon chibi" data-type="copy" onclick=${() => {
+          copy(name_text);
+        }}>
+                                ${tl2(trans.copy_username)}
+                            </button>
+                        `;
+        tippy_esm_default(btn, {
+          content: btn.textContent
+        });
+        return btn;
+      }}
+                </div>
+            </div>
+            <div class="message-content">
+                ${message_subject}
+                ${message_preview}
+            </div>
+        `);
+      if (page.subpage != "sent_message") {
+        let valentine = false;
+        if (message_subject.textContent.trim().endsWith("\u2661")) {
+          for (let translation in trans.valentine) {
+            if (message_subject.textContent.trim() == trans.valentine[translation].replace("{u}", auth.name)) {
+              valentine = true;
+              break;
+            }
+          }
+        }
+        if (valentine) {
+          message_preview.after(html.node`
+                    <div class="alert colourful valentine-coloured" data-type="valentine">
+                        ${tl2(trans.valentine_message_footer, { u: name_text })}
+                    </div>
+                `);
+        }
+      }
+      style_name_from_badge(sender_panel, badge);
+      const content_form = inbox.querySelector(".content-form");
+      if (!content_form) return;
+      const form = content_form.querySelector("form");
+      const token = form.querySelector('[name="csrfmiddlewaretoken"]');
+      const subject = form.querySelector("[name=subject]");
+      const contents = form.querySelector("[name=message]");
+      const alert2 = form.querySelector(":scope > .alert");
+      content_form.classList = "message-reply-section inbox-message";
+      let sender_panel_own;
+      render(content_form, html`
+            <div class="message-sender colourful" ref=${(el) => sender_panel_own = el}>
+                <div class="inbox-message-sender-avatar">
+                    <span class="avatar" ref=${(el) => your_avatar = el}>
+                        <img src=${auth.avatar.replace("/avatar42s/", "/avatar70s/")} alt=${auth.name} loading="lazy" />
+                    </span>
+                </div>
+                <a class="inbox-message-sender-name" href="${root}user/${auth.name}">${auth.name}</a>
+            </div>
+            <div class="message-content">
+                <h2 class="text-18">${tl2(trans.send_a_reply)}</h2>
+                ${alert2}
+                <form method="post" action=${form.getAttribute("action")}>
+                    ${token}
+                    <div class="setting-group">
+                        <div class="setting v" data-type="text">
+                            <div class="heading">
+                                <h5>${tl2(trans.subject)}</h5>
+                            </div>
+                            <div class="input-container content-form wide">
+                                ${subject}
+                            </div>
+                        </div>
+                        <div class="setting v" data-type="text">
+                            <div class="heading">
+                                <h5>${tl2(trans.message)}</h5>
+                            </div>
+                            <div class="input-container content-form textarea">
+                                ${contents}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="settings-footer end gap">
+                        <button class="btn primary icon" data-type="message" type="submit">
+                            ${tl2(trans.send)}
+                        </button>
+                    </div>
+                </form>
+            </div>
+        `);
+      const your_badge = patch_avatar(your_avatar, auth.name);
+      style_name_from_badge(sender_panel_own, your_badge);
     } else if (page.subpage.endsWith("overview")) {
       let inbox = page.structure.container.querySelector(".inbox");
       page.structure.main.appendChild(inbox);
+      if (page_alert) inbox.insertBefore(page_alert, inbox.firstChild);
       const header = page.structure.main.querySelector(".inbox-buttons");
       const select_all = header.querySelector(".inbox-select-all");
-    } else if (page.subpage == "message_overview" || page.subpage == "sent_message") {
-      let inbox = page.structure.container.querySelector(".inbox-message-view");
-      page.structure.main.appendChild(inbox);
-      let sender_panel = inbox.querySelector(".inbox-message-sender-avatar");
-      let sender_name = inbox.querySelector(".inbox-message-sender-name");
-      let sender_time = inbox.querySelector(".inbox-message-timestamp");
-      sender_panel.appendChild(sender_name);
-      sender_panel.appendChild(sender_time);
-      let avatar2 = sender_panel.querySelector(".avatar");
-      let name_text = sanitise(sender_name.textContent.trim());
-      let badge = patch_avatar(avatar2, name_text);
-      sender_panel.classList.add(`user-status--bleh-${badge.type}`, `user-status--bleh-user-${name_text}`);
+      const delete_btn = header.querySelector(".inbox-delete-button");
+      delete_btn?.classList.add("btn");
+      const table = inbox.querySelector(".inbox-table");
+      if (!table) return;
+      table.classList = "inbox-table-legacy";
+      const checkboxes = [];
+      bleh_message_list(table.querySelector("tbody"), false, delete_btn, checkboxes);
+      select_all.replaceWith(toggle({
+        type: "checkbox",
+        func: (val) => {
+          if (val) {
+            checkboxes.forEach((checkbox) => {
+              if (!checkbox.checked()) checkbox.checked(true);
+            });
+          } else {
+            checkboxes.forEach((checkbox) => {
+              if (checkbox.checked()) checkbox.checked(false);
+            });
+          }
+        }
+      }));
     } else if (page.subpage == "compose") {
       let inbox = page.structure.container.querySelector(".inbox-compose-view");
+      inbox.classList = "inbox-message-view";
       page.structure.main.appendChild(inbox);
+      const content_form = inbox.querySelector(".content-form");
+      if (!content_form) return;
+      const form = content_form.querySelector("form");
+      const token = form.querySelector('[name="csrfmiddlewaretoken"]');
+      const recipient = form.querySelector("[name=recipient_name]");
+      const subject = form.querySelector("[name=subject]");
+      const contents = form.querySelector("[name=message]");
+      content_form.classList = "message-compose-section inbox-message";
+      let sender_panel_own;
+      if (page.requested.subject) subject.value = page.requested.subject;
+      const alert2 = form.querySelector(":scope > .alert");
+      const disclaimer = form.querySelector(".form-disclaimer > .alert");
+      render(content_form, html`
+            <div class="message-sender colourful" ref=${(el) => sender_panel_own = el}>
+                <div class="inbox-message-sender-avatar">
+                    <span class="avatar" ref=${(el) => your_avatar = el}>
+                        <img src=${auth.avatar.replace("/avatar42s/", "/avatar70s/")} alt=${auth.name} loading="lazy" />
+                    </span>
+                </div>
+                <a class="inbox-message-sender-name" href="${root}user/${auth.name}">${auth.name}</a>
+            </div>
+            <div class="message-content">
+                <h2 class="text-18">${tl2(trans.send_message)}</h2>
+                ${alert2}
+                <form method="post" action=${form.getAttribute("action")}>
+                    ${token}
+                    <div class="setting-group">
+                        <div class="setting v" data-type="text">
+                            <div class="heading">
+                                <h5>${tl2(trans.username.name)}</h5>
+                            </div>
+                            <div class="input-container content-form wide">
+                                ${recipient}
+                            </div>
+                        </div>
+                        <div class="setting v" data-type="text">
+                            <div class="heading">
+                                <h5>${tl2(trans.subject)}</h5>
+                            </div>
+                            <div class="input-container content-form wide">
+                                ${subject}
+                            </div>
+                        </div>
+                        <div class="setting v" data-type="text">
+                            <div class="heading">
+                                <h5>${tl2(trans.message)}</h5>
+                            </div>
+                            <div class="input-container content-form textarea">
+                                ${contents}
+                            </div>
+                        </div>
+                        ${disclaimer}
+                    </div>
+                    <div class="settings-footer end gap">
+                        <button class="btn primary icon" data-type="message" type="submit">
+                            ${tl2(trans.send)}
+                        </button>
+                    </div>
+                </form>
+            </div>
+        `);
+      const your_badge = patch_avatar(your_avatar, auth.name);
+      style_name_from_badge(sender_panel_own, your_badge);
     } else {
       let inbox = page.structure.container.querySelector(".inbox");
       page.structure.main.appendChild(inbox);
+      if (alert) inbox.appendChild(alert);
     }
   }
 
@@ -57122,6 +58062,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
   // src/shout.js
   function patch_shouts() {
     if (!page.structure.main) return;
+    const use_md = settings.shout_markdown;
     let shout_controls = page.structure.main.querySelector(
       ".shoutbox-controls-wrapper:not([data-shouts])"
     );
@@ -57149,7 +58090,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         let shout_name = shout.querySelector(".shout-user a");
         if (!shout_name) return;
         let shout_name_text = shout_name.textContent;
-        shout_name.textContent = `@${shout_name_text}`;
+        shout_name.insertBefore(html.node`<span class="at">@</span>`, shout_name.firstChild);
         let shout_avatar = shout.querySelector(".shout-user-avatar");
         let badge = patch_avatar(shout_avatar, shout_name_text, "shout");
         if (badge) {
@@ -57173,15 +58114,15 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           });
           shout_timestamp.removeAttribute("title");
         }
-        let actions = shout.querySelectorAll(
-          ".shout-actions .shout-action"
-        );
+        let actions = shout.querySelectorAll(".shout-actions .shout-action");
         actions.forEach((action) => {
           let buttons2 = action.querySelectorAll("button, a");
           buttons2.forEach((button2) => {
             button2.classList.add("shout-action-button", "see-more");
           });
         });
+        const more_button = shout.querySelector(".shout-more-actions");
+        if (more_button) more_button.classList.add("see-more", "shout-action-button");
         const form = shout.querySelector(".vote-button-toggle");
         const voted_button = form.querySelector(".vote-button--voted");
         const unvote_button = form.querySelector(
@@ -57228,9 +58169,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     });
     if (settings.shout_markdown && shout_parse_queue.length > 0)
       parse_shout_queue();
-    const shout_forms = document.querySelectorAll(
-      ".shout-form:not([data-kate-processed])"
-    );
+    const shout_forms = document.querySelectorAll(".shout-form:not([data-kate-processed])");
     shout_forms.forEach((shout_form) => {
       shout_form.setAttribute("data-kate-processed", "true");
       let shout_avatar = shout_form.querySelector(".shout-user-avatar");
@@ -57239,39 +58178,42 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       shout_send(send_button);
       const help_text = shout_form.querySelector(".form-row-help-text");
       help_text.classList.add("dual-tip");
-      const textarea = shout_form.querySelector("textarea");
+      const legacy_textarea = shout_form.querySelector("textarea");
+      let placeholder = legacy_textarea.placeholder;
+      const is_reply = placeholder.includes(auth.name);
+      if (!is_reply) {
+        if (page.type == "user") {
+          placeholder = tl2(trans.shoutbox_placeholder_user, {
+            u: auth.name,
+            v: page.name
+          });
+        } else {
+          placeholder = tl2(trans.shoutbox_placeholder, {
+            u: auth.name,
+            v: page.type == "artist" ? romanise(correct_artist(page.name)) : ["album", "track"].includes(page.type) ? romanise(correct_item_by_artist(page.name, page.sister)) : page.name
+          });
+        }
+      }
+      const textarea = markdown_field((val) => {
+        chars.textContent = tl2(trans.value_characters_max, {
+          v: `${val.length}/1000`
+        });
+        chars.setAttribute("data-exceeded", val.length >= 1e3);
+        if (use_md) preview.setAttribute("disabled", val.length <= 0);
+      }, {}, "", "body", null, null, placeholder, legacy_textarea.maxLength, true, !is_reply);
+      legacy_textarea.replaceWith(textarea);
       let chars;
       let preview;
-      render(
-        help_text,
-        html`
-                <div
-                    class="tip markdown-enabled"
-                    onclick=${() => markdown_prompt()}
-                >
-                    ${tl2(trans.supports_markdown)}
-                </div>
-                <div
-                    class="tip preview"
-                    onclick=${() => markdown_preview(textarea.value)}
-                    ref=${(el) => preview = el}
-                    disabled="true"
-                >
+      render(help_text, html`
+            ${use_md ? html.node`
+                <div class="tip preview" onclick=${() => markdown_preview(textarea.value())} ref=${(el) => preview = el} disabled="true">
                     ${tl2(trans.preview)}
                 </div>
-                <div class="tip characters" ref=${(el) => chars = el}>
-                    ${tl2(trans.value_characters_max, { v: "0/1000" })}
-                </div>
-            `
-      );
-      textarea.addEventListener("input", () => {
-        const value = textarea.value;
-        chars.textContent = tl2(trans.value_characters_max, {
-          v: `${value.length}/1000`
-        });
-        chars.setAttribute("data-exceeded", value.length >= 1e3);
-        preview.setAttribute("disabled", value.length <= 0);
-      });
+            ` : ""}
+            <div class="tip characters" ref=${(el) => chars = el}>
+                ${tl2(trans.value_characters_max, { v: "0/1000" })}
+            </div>
+        `);
       shout_form.addEventListener("keydown", (e) => {
         if (e.ctrlKey && e.keyCode == 13) {
           e.preventDefault();
@@ -57292,6 +58234,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     if (!button2) return;
     button2.classList.add("btn-send-shout-generic");
     button2.textContent = tl2(trans.send);
+    button2.removeAttribute("disabled");
     if (page.mobile) return;
     tippy_esm_default(button2, {
       content: tl2(trans.send_quickly_with).replace(
@@ -57401,7 +58344,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     }
   }
   function parse_shout_queue() {
-    if (shout_parse_queue.length === 0) return;
+    if (shout_parse_queue.length == 0) return;
     const shout = shout_parse_queue.shift();
     const parsed2 = markdown(shout.element.textContent);
     shout.element.classList.add("markdown-body");
@@ -57562,34 +58505,6 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     }
   }
 
-  // src/pages/users.js
-  function bleh_users() {
-    const users = page.structure.main?.querySelectorAll(".user-list-item:not(.user-list-item-mobile-ad)");
-    users.forEach((user) => {
-      let avatar2 = user.querySelector(".user-list-avatar");
-      let name = user.querySelector(".user-list-link");
-      const badge = patch_avatar(avatar2, name.textContent, "follow");
-      style_name_from_badge(name, badge);
-      let artists = user.querySelectorAll(".user-list-shared-artists a");
-      artists.forEach((artist) => {
-        artist.textContent = correct_artist(artist.textContent);
-      });
-      const md = user.querySelector(".user-list-about-me");
-      log("patching", "user", "info", { user, name: name?.textContent, md });
-      if (name) name.textContent = `@${name.textContent}`;
-      if (md) {
-        render(
-          md,
-          markdown(md.textContent, {
-            allow_headers: false,
-            line_breaks: false,
-            allow_lists: false
-          })
-        );
-      }
-    });
-  }
-
   // src/footer.js
   function bleh_footer() {
     let footer = document.body.querySelector("footer.footer");
@@ -57600,55 +58515,73 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         </div>
     `;
     let kate = "katelyn";
-    if (sponsor_list && sponsor_list.special) kate = sponsor_list.special[0];
+    let sponsoring = 0;
+    if (sponsor_list) {
+      if (sponsor_list.special)
+        kate = sponsor_list.special[0];
+      if (sponsor_list.sponsors && sponsor_list.sponsor_count_remove)
+        sponsoring = sponsor_list.sponsors.length - sponsor_list.sponsor_count_remove;
+    }
     render(
       footer,
       html`
-            <div class="footer-credit">
-                <p>
-                    ${{
+            <div class="footer-bleh">
+                <a class="bleh-logo-footer" href="https://bleh.katelyn.moe" target="_blank">
+                    ${version.brand}
+                </a>
+            </div>
+            <div class="footer-bleh-top">
+                <div class="footer-credit">
+                    <p>
+                        ${{
         html: tl2(trans.made_with_love, {
-          u: `<a href="${root}user/${kate}">${kate}</a>`,
-          c: '<a href="https://github.com/katelyynn/bleh/graphs/contributors" target="_blank">',
+          u: `<a class="b" href="${root}user/${kate}">${kate}</a>`,
+          c: '<a class="b" href="https://github.com/katelyynn/bleh/graphs/contributors" target="_blank">',
           "/c": "</a>",
-          h: `<span class="bleh-icon heart sponsor-related">${tl2(trans.love_lower)}</span>`
+          h: `<span class="bleh-icon heart sponsor-related colourful">${tl2(trans.love_lower)}</span>`
         })
       }}
-                </p>
-                ${lang != "en" && lang in lang_info ? html.node`
+                    </p>
+                    <p>
+                        <a onclick=${() => sponsor()}>${{ html: tl2(trans.supported_by, { c: sponsoring, s: '<span class="b">', "/s": "</span>" }) }}</a>
+                    </p>
+                </div>
+                <div class="footer-web">
+                    <a
+                        class="footer-link"
+                        data-type="source"
+                        href="https://github.com/katelyynn/bleh"
+                        target="_blank"
+                        >${tl2(trans.view_source)}</a
+                    >
+                    <a
+                        class="footer-link"
+                        data-type="issue"
+                        href="https://github.com/katelyynn/bleh/issues/new/choose"
+                        target="_blank"
+                        >${tl2(trans.report_issue)}</a
+                    >
+                    <a
+                        class="more"
+                        onclick=${() => extras.toggleAttribute("aria-expanded")}
+                        ><span class="bleh-icon"
+                    /></a>
+                </div>
+            </div>
+            ${lang != "en" && lang in lang_info ? html.node`
+                <div class="footer-bleh-top">
+                    <div class="footer-credit">
                         <p>
                             ${{
         html: tl2(trans.translations, {
           l: lang_info[lang].name,
-          u: lang_info[lang].by.map(
-            (user) => `<a href="${root}user/${user}">${user}</a>`
-          ).join(", ")
+          u: `<span class="b">${lang_info[lang].by.map((user) => `<a href="${root}user/${user}">${user}</a>`).join(", ")}</span>`
         })
       }}
                         </p>
-                    ` : ""}
-            </div>
-            <div class="footer-web music-links">
-                <a
-                    class="music-link"
-                    data-type="source"
-                    href="https://github.com/katelyynn/bleh"
-                    target="_blank"
-                    >${tl2(trans.view_source)}</a
-                >
-                <a
-                    class="music-link"
-                    data-type="issue"
-                    href="https://github.com/katelyynn/bleh/issues/new/choose"
-                    target="_blank"
-                    >${tl2(trans.report_issue)}</a
-                >
-                <a
-                    class="more"
-                    onclick=${() => extras.toggleAttribute("aria-expanded")}
-                    ><span class="bleh-icon"
-                /></a>
-            </div>
+                    </div>
+                </div>
+            ` : ""}
             ${extras}
         `
     );
@@ -57668,9 +58601,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       );
       if (!modal_dialog) return;
       modal_dialog.setAttribute("data-dialog-extender", "true");
-      let body2 = modal_dialog.querySelector(".modal-body");
-      let title = body2.querySelector(".modal-title");
-      let contents = body2.querySelector(":scope > div");
+      let body = modal_dialog.querySelector(".modal-body");
+      let title = body.querySelector(".modal-title");
+      let contents = body.querySelector(":scope > div");
       let form = contents.querySelector("form");
       if (!form) return;
       let dismiss = modal_dialog.querySelector(".modal-dismiss");
@@ -57733,14 +58666,14 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                     </form>
                 `
         );
-      } else if (body2.classList.contains("automatic-edit-modal-body-v2")) {
+      } else if (body.classList.contains("automatic-edit-modal-body-v2")) {
         let bulk_edit_active = false;
-        let edit_all = body2.querySelector('[name="edit_all"]');
+        let edit_all = body.querySelector('[name="edit_all"]');
         if (edit_all && edit_all.disabled) bulk_edit_active = true;
         if (!bulk_edit_active) title.textContent = tl2(trans.edit_scrobble);
         else title.textContent = tl2(trans.edit_scrobbles_in_bulk);
         modal_dialog.classList.add("automatic-edit-modal");
-        let checkboxes = body2.querySelectorAll(".checkbox");
+        let checkboxes = body.querySelectorAll(".checkbox");
         checkboxes.forEach((checkbox) => {
           let input_el = checkbox.querySelector("input");
           let value = input_el.checked;
@@ -57761,15 +58694,15 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                     `
           );
         });
-        let original_fields = body2.querySelectorAll(
+        let original_fields = body.querySelectorAll(
           ".edit-scrobble-label--originally"
         );
         original_fields.forEach((field) => {
           field.textContent = field.textContent.trim().replace(/"([^"]*)"/g, "\u2018$1\u2019");
         });
-        let submit = body2.querySelector(".form-group--submit");
+        let submit = body.querySelector(".form-group--submit");
         submit.classList = "modal-footer";
-        let delete_form = body2.querySelector(".edit-scrobble-form-delete");
+        let delete_form = body.querySelector(".edit-scrobble-form-delete");
         let delete_btn;
         if (delete_form)
           delete_btn = delete_form.querySelector(".btn-delete");
@@ -57803,18 +58736,18 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                     </div>
                 `
         );
-      } else if (body2.querySelector(".lastfm-bulk-edit-list")) {
+      } else if (body.querySelector(".lastfm-bulk-edit-list")) {
         let checks;
-        let controls = body2.querySelector(
+        let controls = body.querySelector(
           ".lastfm-bulk-edit-form-group-controls"
         );
         if (controls) {
           let parent = controls.parentElement;
           parent.parentElement.removeChild(parent);
-          let disclaimer = body2.querySelector(".form-disclaimer");
+          let disclaimer = body.querySelector(".form-disclaimer");
           disclaimer.after(html.node`
                     <div class="button-group">
-                        <button class="flex-button" onclick=${() => {
+                        <button class="btn flex-button" onclick=${() => {
             checks.forEach((check) => {
               check.check();
             });
@@ -57822,7 +58755,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                             <div class="bleh-icon" data-type="select-all" style="--icon: var(--mask)" />
                             ${tl2(trans.select_all)}
                         </button>
-                        <button class="flex-button" onclick=${() => {
+                        <button class="btn flex-button" onclick=${() => {
             checks.forEach((check) => {
               check.uncheck();
             });
@@ -57833,7 +58766,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                     </div>
                 `);
         }
-        let list = body2.querySelector(".lastfm-bulk-edit-list");
+        let list = body.querySelector(".lastfm-bulk-edit-list");
         let checkboxes = list.querySelectorAll(".checkbox");
         checkboxes.forEach((checkbox) => {
           let input_el = checkbox.querySelector("input");
@@ -57865,7 +58798,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           );
         });
         checks = list.querySelectorAll(".setting");
-        let footer = body2.querySelector(".form-group--submit");
+        let footer = body.querySelector(".form-group--submit");
         footer.classList = "modal-footer";
         render(
           footer,
@@ -58029,6 +58962,17 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     update_page();
     page.structure.row.removeChild(page.structure.row.firstElementChild);
     page.structure.row.removeChild(page.structure.row.firstElementChild);
+    let md_body;
+    let md_options = {
+      allow_headers: true,
+      allow_banners: true,
+      allow_icons: true,
+      allow_hue: true,
+      allow_fonts: true,
+      allow_socials: true,
+      allow_alignment: true,
+      allow_lists: true
+    };
     render(
       page.structure.main,
       html`
@@ -58130,6 +59074,22 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                     Open dialog loop
                 </button>
             </section>
+            <section class="flexy">
+                <h2>Markdown (with bio settings)</h2>
+                ${markdown_field((val) => {
+        render(md_body, markdown(val, md_options));
+      }, md_options)}
+                <div class="sep" />
+                <div class="markdown-body" ref=${(el) => md_body = el} />
+            </section>
+            <section class="flexy">
+                <h2>Markdown (with defaults)</h2>
+                ${markdown_field((val) => {
+        render(md_body_default, markdown(val));
+      })}
+                <div class="sep" />
+                <div class="markdown-body" ref=${(el) => md_body_default = el} />
+            </section>
         `
     );
   }
@@ -58146,6 +59106,74 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
 
   // src/components/dismissed.js
   function load_dismissed() {
+  }
+
+  // src/components/notices.js
+  function notices() {
+    const res = localStorage.getItem("bleh_notices");
+    const expire = Number(localStorage.getItem("bleh_notices_expire"));
+    const now2 = Date.now();
+    if (!res || now2 >= expire) {
+      fetch_notices();
+      return;
+    }
+    let parse4;
+    try {
+      parse4 = JSON.parse(res);
+    } catch (e) {
+      fetch_notices();
+      return;
+    }
+    load_notices(parse4);
+  }
+  function fetch_notices() {
+    fetch(`https://katelyynn.github.io/bleh/dynamic/notices.json?${Math.random()}`).then((res) => {
+      if (!res.ok)
+        throw new Error();
+      return res.json();
+    }).then((res) => {
+      set_storage("bleh_notices", JSON.stringify(res));
+      set_storage("bleh_notices_expire", Date.now() + 60 * 60 * 1e3);
+      load_notices(res);
+    }).catch((e) => {
+      set_storage("bleh_notices_expire", Date.now() + 30 * 60 * 1e3);
+    });
+  }
+  function load_notices(res) {
+    document.body.appendChild(html.node`
+        <div class="bleh-notices">
+            ${res.map((notice) => {
+      const date = DateTime.fromISO(notice.date);
+      return html.node`
+                    <div class="bleh-notice colourful">
+                        <div class="notice-header" data-type=${notice.type}>
+                            <span>${tl2(trans.notice)}</span>
+                            <span>${date.toRelative()}</span>
+                        </div>
+                        <div class="notice-content">
+                            ${notice.message}
+                        </div>
+                    </div>
+                `;
+    })}
+        </div>
+    `);
+  }
+
+  // src/components/tags.js
+  function tag_page() {
+    if (!page.structure.main) return;
+    const tags = page.structure.main.querySelectorAll(".big-tags-item:not([data-tagged])");
+    tags.forEach((tag) => {
+      tag.setAttribute("data-tagged", true);
+      const ctx = tag.querySelector(".big-tags-item-context");
+      if (ctx) {
+        const links = ctx.querySelectorAll("a");
+        links.forEach((link) => {
+          link.textContent = romanise(correct_artist(link.textContent));
+        });
+      }
+    });
   }
 
   // src/page.js
@@ -58171,12 +59199,15 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         load_dialogs();
         register_rabbit();
         lookup_lang();
+        notices();
         theme_version.state = getComputedStyle(document.body).getPropertyValue("--version-build").replaceAll("'", "").replaceAll('"', "");
         update_check(false, null, update_masthead);
         patch_masthead();
         load_notifications();
         load_status();
         checkup_friend_cache();
+        detect_mobile();
+        page.platform = detect_platform();
         set_season();
         start_rain();
         load_activities();
@@ -58329,6 +59360,11 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         bg.style.setProperty("background", cover);
       });
     }
+    if (["artist", "album", "track"].includes(page.type)) {
+      if (page.subpage == "tags_overview") {
+        tag_page();
+      }
+    }
     shout_messages();
     subscribe_to_events();
     dialog_extender();
@@ -58337,6 +59373,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     if (page.state.activity_preview_timer)
       clearInterval(page.state.activity_preview_timer);
     page.state.settings_page = "";
+    hideAll({ duration: 0 });
+    clear_popup_queue();
     if (main_content) {
       auth.pro = !!main_content.querySelector(
         ":scope > .masthead > .masthead-pro-wrap"
@@ -58344,6 +59382,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     }
     page.structure.notifications.setAttribute("data-auth-open", "false");
     lookup_lang();
+    detect_mobile();
+    page.platform = detect_platform();
     set_season();
     seasonal_timer_end();
     bleh_footer();
@@ -58353,13 +59393,10 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     });
     detect_scroll();
     function detect_scroll() {
-      return;
-      if (scroll > 30) masthead.classList.add("scrolled");
+      if (window.scrollY > 10) masthead.classList.add("scrolled");
       else masthead.classList.remove("scrolled");
     }
     prepare_music();
-    detect_mobile();
-    page.platform = detect_platform();
     if (window.location.pathname.startsWith(setup_url.replace("{root}", root))) {
       bleh_setup();
     } else if (window.location.pathname.startsWith(sponsor_url.replace("{root}", root))) {
@@ -58407,7 +59444,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         bleh_home();
       else if (page.type == "api") bleh_api();
       else if (page.type == "labs") bleh_labs();
-      if (page.type == "user" || page.type == "events") {
+      if (["user", "events"].includes(page.type) && ["following", "followers", "neighbours", "event_attendance_going", "event_attendance_maybe"].includes(page.subpage)) {
         bleh_users();
       }
       if ((page.type == "artist" || page.type == "album" || page.type == "track" || page.type == "tag") && page.subpage == "overview")
@@ -58633,12 +59670,13 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
   async function register_background(url, origin = null) {
     if (url && url.endsWith("c6f59c1e5e7240a4c0d427abd71f3dbb.jpg")) url = "";
     log(`requested register of ${url} from ${origin}`, "background", "log");
-    let background = page.structure.container.querySelector(":scope > .bleh-background");
+    let background = page.structure.background;
     if (!background) {
       background = html.node`
             <div class="bleh-background katsune-bleh-background" />
         `;
-      page.structure.container.insertBefore(background, page.structure.container.firstElementChild);
+      document.body.appendChild(background);
+      page.structure.background = background;
     }
     background.setAttribute("data-page-type", page.type);
     background.setAttribute("data-page-subpage", page.subpage);
@@ -58661,6 +59699,40 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       }
     }
     log(`registered ${url} from ${origin}`, "background");
+    register_banner(url, origin);
+    return background;
+  }
+  function register_banner(url, origin = null) {
+    let background = page.structure.banner;
+    if (!background) {
+      background = html.node`
+            <div class="page-banner" />
+        `;
+      document.body.appendChild(background);
+      page.structure.banner = background;
+    }
+    background.setAttribute("data-page-type", page.type);
+    background.setAttribute("data-page-subpage", page.subpage);
+    background.setAttribute("data-background-origin", origin);
+    background.setAttribute("data-background-coloured", settings.hue_from_album);
+    render(background, html``);
+    render(background, html`
+        <span class="background-inner" ref=${(el) => inner = el} />
+    `);
+    if (url) {
+      if (url == "accent") {
+        inner.setAttribute("data-accent-based", true);
+      } else {
+        inner.style.setProperty("background-image", `url(${url})`);
+      }
+    }
+    if (page.type == "user") {
+      if (page.name == auth.name) {
+        background.setAttribute("data-page-user-is-self", "true");
+      } else {
+        background.setAttribute("data-page-user-is-self", "false");
+      }
+    }
     return background;
   }
   function favi() {
@@ -58688,26 +59760,31 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     de: {
       name: "Deutsch",
       by: ["evangelicgirl", "myraisounds", "clairedoll"],
-      last_updated: "2025-10-01"
+      last_updated: "2026-01-08"
     },
     es: {
       name: "Espa\xF1ol",
       by: ["soleilth"],
-      last_updated: "2025-11-13"
+      last_updated: "2025-11-27"
     },
     it: {
       name: "Italiano",
       by: ["cutotopo"],
       last_updated: "2025-11-14"
     },
+    ja: {
+      name: "\u65E5\u672C\u8A9E",
+      by: ["humansongs"],
+      last_updated: "2026-01-23"
+    },
     pl: {
       name: "Polski",
-      by: ["iwas15with100k"],
-      last_updated: "2024-06-17"
+      by: ["zaktusii", "iwas15with100k"],
+      last_updated: "2025-12-12"
     },
     pt: {
       name: "Portugu\xEAs",
-      by: ["ArthRMH", "auwora", "fr0r", "urwq"],
+      by: ["ArthRMH", "satisfeita", "fr0r", "urwq"],
       last_updated: "2025-11-25"
     },
     sv: {
@@ -58717,11 +59794,31 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     ru: {
       name: "\u0420\u0443\u0441\u0441\u043A\u0438\u0439",
-      by: ["crawqxx"],
-      last_updated: "2025-11-05"
+      by: ["crawqxx", "techplayz32"],
+      last_updated: "2025-12-16"
+    },
+    zh: {
+      name: "\u7B80\u4F53\u4E2D\u6587",
+      by: ["Dnzzk2"],
+      last_updated: "2025-12-29"
     }
   };
   var trans = {
+    comma: {
+      // yes this is just a comma
+      // yes the space on the end is intentional and should be
+      // there if the language puts spaces in lists
+      en: ", ",
+      de: ", ",
+      es: ", ",
+      it: ", ",
+      pt: ", ",
+      sv: ", ",
+      ru: ", ",
+      pl: ", ",
+      zh: ", ",
+      ja: "\u3001"
+    },
     page_templates: {
       // these are used for browser tab titles
       // {page} is something like "Home" or "Profile"
@@ -58735,7 +59832,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         it: "{page} su {brand} {build}.{sku}",
         pt: "{page} no {brand} {build}.{sku}",
         sv: "{page} p\xE5 {brand} {build}.{sku}",
-        ru: "{page} \u0432 {brand} {build}.{sku}"
+        ru: "{page} \u0432 {brand} {build}.{sku}",
+        pl: "{page} na {brand} {build}.{sku}",
+        zh: "{page} - {brand} {build}.{sku}"
       },
       name_type: {
         en: "{name} - {page} on {brand} {build}.{sku}",
@@ -58744,7 +59843,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         it: "{name} - {page} su {brand} {build}.{sku}",
         pt: "{name} - {page} no {brand} {build}.{sku}",
         sv: "{name} - {page} p\xE5 {brand} {build}.{sku}",
-        ru: "{name} - {page} \u0432 {brand} {build}.{sku}"
+        ru: "{name} - {page} \u0432 {brand} {build}.{sku}",
+        pl: "{name} - {page} na {brand} {build}.{sku}",
+        zh: "{name} - {page} - {brand} {build}.{sku}"
       },
       name_sister_type: {
         en: "{name} by {sister} - {page} on {brand} {build}.{sku}",
@@ -58753,7 +59854,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         it: "{name} di {sister} - {page} su {brand} {build}.{sku}",
         pt: "{name} por {sister} - {page} no {brand} {build}.{sku}",
         sv: "{name} av {sister} - {page} p\xE5 {brand} {build}.{sku}",
-        ru: "{name} \u043E\u0442 {sister} - {page} \u0432 {brand} {build}.{sku}"
+        ru: "{name} \u043E\u0442 {sister} - {page} \u0432 {brand} {build}.{sku}",
+        pl: "{name} od {sister} - {page} na {brand} {build}.{sku}",
+        zh: "{name} - {sister} - {page} - {brand} {build}.{sku}"
       }
     },
     badges: {
@@ -58763,9 +59866,12 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           de: "Keine Abzeichen",
           es: "Sin emblemas",
           it: "Nessun distintivo",
+          ja: "\u30D0\u30C3\u30B8\u306A\u3057",
           pt: "Sem emblemas",
           sv: "Inga emblem",
-          ru: "\u041D\u0435\u0442\u0443 \u0437\u043D\u0430\u0447\u043A\u0430"
+          ru: "\u041D\u0435\u0442\u0443 \u0437\u043D\u0430\u0447\u043A\u0430",
+          pl: "Brak odznak",
+          zh: "\u6682\u65E0\u5FBD\u7AE0"
         },
         reason: {
           en: "Become a sponsor to get a badge!",
@@ -58774,7 +59880,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           it: "Diventa uno sponsor per ottenere un distintivo!",
           pt: "Se torne um apoiador para ganhar um emblema!",
           sv: "Bli en sponsor f\xF6r att f\xE5 ett emblem!",
-          ru: "\u0421\u0442\u0430\u043D\u044C \u0441\u043F\u043E\u043D\u0441\u043E\u0440\u043E\u043C \u0434\u043B\u044F \u043F\u043E\u043B\u0443\u0447\u0435\u043D\u0438\u044F \u0437\u043D\u0430\u0447\u043A\u0430!"
+          ru: "\u0421\u0442\u0430\u043D\u044C \u0441\u043F\u043E\u043D\u0441\u043E\u0440\u043E\u043C \u0434\u043B\u044F \u043F\u043E\u043B\u0443\u0447\u0435\u043D\u0438\u044F \u0437\u043D\u0430\u0447\u043A\u0430!",
+          pl: "Zosta\u0144 sponosrem \u017Ceby otrzyma\u0107 t\u0119 odznak\u0119!",
+          zh: "\u6210\u4E3A\u8D5E\u52A9\u8005\u4EE5\u83B7\u5F97\u5FBD\u7AE0\uFF01"
         }
       },
       "user-status-subscriber": {
@@ -58783,9 +59891,12 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           de: "Last.fm Pro",
           es: "Last.fm Pro",
           it: "Last.fm Pro",
+          ja: "Last.fm Pro",
           pt: "Last.fm Pro",
           sv: "Last.fm Pro",
-          ru: "Last.fm \u041F\u0440\u043E"
+          ru: "Last.fm \u041F\u0440\u043E",
+          pl: "Last.fm Pro",
+          zh: "Last.fm Pro"
         },
         reason: {
           en: "Active Pro subscription",
@@ -58794,7 +59905,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           it: "Abbonamento Pro attivo",
           pt: "Plano Pro ativo",
           sv: "Aktiv Pro prenumeration",
-          ru: "\u0410\u043A\u0442\u0438\u0432\u043D\u0430 \u041F\u0440\u043E \u043F\u043E\u0434\u043F\u0438\u0441\u043A\u0430"
+          ru: "\u0410\u043A\u0442\u0438\u0432\u043D\u0430 \u041F\u0440\u043E \u043F\u043E\u0434\u043F\u0438\u0441\u043A\u0430",
+          pl: "Aktywna subskrypcja Pro",
+          zh: "\u6709\u6548\u7684 Pro \u8BA2\u9605"
         }
       },
       "user-status-staff": {
@@ -58803,9 +59916,12 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           de: "Mitarbeiter",
           es: "Personal",
           it: "Personale",
+          ja: "\u30B9\u30BF\u30C3\u30D5",
           pt: "Equipe",
           sv: "Personal",
-          ru: "\u0410\u0434\u043C\u0438\u043D\u0438\u0441\u0442\u0440\u0430\u0442\u043E\u0440\u044B"
+          ru: "\u0410\u0434\u043C\u0438\u043D\u0438\u0441\u0442\u0440\u0430\u0442\u043E\u0440\u044B",
+          pl: "Personel",
+          zh: "\u5B98\u65B9\u6210\u5458"
         },
         reason: {
           en: "Official member of Last.fm",
@@ -58814,7 +59930,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           it: "Membro ufficiale di Last.fm",
           pt: "Membro oficial da Last.fm",
           sv: "Officiell medlem p\xE5 Last.fm",
-          ru: "\u041E\u0444\u0444\u0438\u0446\u0438\u0430\u043B\u044C\u043D\u044B\u0439 \u0443\u0447\u0430\u0441\u0442\u043D\u0438\u043A Last.fm"
+          ru: "\u041E\u0444\u0444\u0438\u0446\u0438\u0430\u043B\u044C\u043D\u044B\u0439 \u0443\u0447\u0430\u0441\u0442\u043D\u0438\u043A Last.fm",
+          pl: "Oficjalny cz\u0142onek Last.fm",
+          zh: "Last.fm \u5B98\u65B9\u6210\u5458"
         }
       },
       "user-status-mod": {
@@ -58823,9 +59941,12 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           de: "Moderator",
           es: "Moderador",
           it: "Moderatore",
+          ja: "\u30E2\u30C7\u30EC\u30FC\u30BF\u30FC",
           pt: "Moderador(a)",
           sv: "Moderator",
-          ru: "\u041C\u043E\u0434\u0435\u0440\u0430\u0442\u043E\u0440"
+          ru: "\u041C\u043E\u0434\u0435\u0440\u0430\u0442\u043E\u0440",
+          pl: "Moderator",
+          zh: "\u7248\u4E3B"
         },
         reason: {
           en: "Official member of Last.fm",
@@ -58834,25 +59955,31 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           it: "Membro ufficiale di Last.fm",
           pt: "Membro oficial do Last.fm",
           sv: "Officiell medlem p\xE5 Last.fm",
-          ru: "\u041E\u0444\u0444\u0438\u0446\u0438\u0430\u043B\u044C\u043D\u044B\u0439 \u0443\u0447\u0430\u0441\u0442\u043D\u0438\u043A Last.fm"
+          ru: "\u041E\u0444\u0444\u0438\u0446\u0438\u0430\u043B\u044C\u043D\u044B\u0439 \u0443\u0447\u0430\u0441\u0442\u043D\u0438\u043A Last.fm",
+          pl: "Oficjalny cz\u0142onek Last.fm",
+          zh: "Last.fm \u5B98\u65B9\u6210\u5458"
         }
       },
       "user-status-alum": {
         name: {
           en: "Alum",
+          de: "Absolvent",
           es: "Graduado",
           sv: "Alumn",
           ru: "\u0412\u044B\u043F\u0443\u0441\u043A\u043D\u0438\u043A",
-          pt: "Formado"
+          pt: "Formado",
+          zh: "\u5F80\u5C4A\u6210\u5458"
         },
         reason: {
           en: "Former member of Last.fm",
-          de: "Ehemaliger Mitarbeiter von Last.fm",
+          de: "Ehemalige:r Mitarbeiter:in von Last.fm",
           es: "Antiguo miembro de Last.fm",
           it: "Ex-membro dello staff di Last.fm",
           sv: "F\xF6re-detta medlem p\xE5 Last.fm",
           ru: "\u0411\u044B\u0432\u0448\u0438\u0439 \u0443\u0447\u0430\u0441\u0442\u043D\u0438\u043A Last.fm",
-          pt: "Ex-membro da equipe do Last.fm"
+          pt: "Ex-membro da equipe do Last.fm",
+          pl: "By\u0142y cz\u0142onek Last.fm",
+          zh: "\u66FE\u4EFB Last.fm \u5B98\u65B9\u6210\u5458"
         }
       },
       "label--fade": {
@@ -58863,7 +59990,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           it: "Ti segue!",
           pt: "Ele(a) te segue!",
           sv: "Denna medlem f\xF6ljer dig!",
-          ru: "\u041E\u043D\u0438 \u043D\u0430 \u0432\u0430\u0441 \u043F\u043E\u0434\u043F\u0438\u0441\u0430\u043D\u044B!"
+          ru: "\u041E\u043D\u0438 \u043D\u0430 \u0432\u0430\u0441 \u043F\u043E\u0434\u043F\u0438\u0441\u0430\u043D\u044B!",
+          pl: "Obserwuje ci\u0119!",
+          zh: "\u5173\u6CE8\u4E86\u4F60\uFF01"
         }
       },
       contributor: {
@@ -58874,7 +60003,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           it: "Contributore",
           pt: "Contribuidor(a)",
           sv: "Bidragsgivare",
-          ru: "\u0423\u0447\u0430\u0441\u0442\u043D\u0438\u043A"
+          ru: "\u0423\u0447\u0430\u0441\u0442\u043D\u0438\u043A",
+          pl: "Kontrybutor",
+          zh: "\u8D21\u732E\u8005"
         },
         reason: {
           en: "Has worked on bleh or bwaa",
@@ -58883,7 +60014,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           it: "Ha contribuito a bleh o bwaa",
           pt: "Contribuiu para o bleh ou bwaa",
           sv: "Har arbetat p\xE5 bleh eller bwaa",
-          ru: "\u041F\u043E\u043C\u043E\u0433\u0430\u043B \u0440\u0430\u0437\u0440\u0430\u0431\u043E\u0442\u043A\u0435 bleh \u0438\u043B\u0438 bwaa"
+          ru: "\u041F\u043E\u043C\u043E\u0433\u0430\u043B \u0440\u0430\u0437\u0440\u0430\u0431\u043E\u0442\u043A\u0435 bleh \u0438\u043B\u0438 bwaa",
+          pl: "Pracowali nad bleh lub bwaa",
+          zh: "\u66FE\u53C2\u4E0E bleh \u6216 bwaa \u7684\u5F00\u53D1\u5DE5\u4F5C"
         }
       },
       translation: {
@@ -58892,9 +60025,12 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           de: "\xDCbersetzungen",
           es: "Traducciones",
           it: "Traduzioni",
+          ja: "\u7FFB\u8A33",
           pt: "Tradu\xE7\xF5es",
           sv: "\xD6vers\xE4ttningar",
-          ru: "\u041F\u0435\u0440\u0435\u0432\u043E\u0434\u044B"
+          ru: "\u041F\u0435\u0440\u0435\u0432\u043E\u0434\u044B",
+          pl: "T\u0142umaczenia",
+          zh: "\u7FFB\u8BD1"
         }
       },
       cat: {
@@ -58903,9 +60039,12 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           de: "ein K\xE4tzchen!!!",
           es: "\xA1\xA1es un gatito!!",
           it: "\xE8 un gattino!!!",
+          ja: "\u30B3\u30CD\u30B3\u3060\u3088\uFF01\uFF01",
           pt: "\xE9 um(a) gatinho(a)!!",
           sv: "en kissekatt!!",
-          ru: "\u044D\u0442\u043E \u043A\u043E\u0442\u0438\u043A\u043A!!!"
+          ru: "\u044D\u0442\u043E \u043A\u043E\u0442\u0438\u043A\u043A!!!",
+          pl: "Kotek!",
+          zh: "\u662F\u4E00\u53EA\u5C0F\u732B\u54AA\uFF01\uFF01"
         }
       },
       sponsor: {
@@ -58914,9 +60053,12 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           de: "Sponsor",
           es: "Patrocinador",
           it: "Sponsor",
+          ja: "\u30B9\u30DD\u30F3\u30B5\u30FC",
           pt: "Apoiador(a)",
           sv: "Sponsor",
-          ru: "\u0421\u043F\u043E\u043D\u0441\u043E\u0440"
+          ru: "\u0421\u043F\u043E\u043D\u0441\u043E\u0440",
+          pl: "Sponsor",
+          zh: "\u8D5E\u52A9\u8005"
         },
         reason: {
           en: "thank you from kate <3",
@@ -58925,7 +60067,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           it: "grazie da parte di kate <3",
           pt: "obrigad\xE3o da kate <3",
           sv: "tack ifr\xE5n kate <3",
-          ru: "\u0441\u043F\u0430\u0441\u0438\u0431\u043E \u043E\u0442 \u043A\u0435\u0439\u0442 <3"
+          ru: "\u0441\u043F\u0430\u0441\u0438\u0431\u043E \u043E\u0442 \u043A\u0435\u0439\u0442 <3",
+          pl: "Podzi\u0119kowania od kate <3",
+          zh: "\u6765\u81EA kate \u7684\u611F\u8C22 <3"
         }
       },
       cute: {
@@ -58936,7 +60080,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           it: "Riservato",
           pt: "Reservado",
           sv: "Exklusiv",
-          ru: "\u0417\u0430\u0440\u0435\u0437\u0435\u0440\u0432\u0438\u0440\u043E\u0432\u0430\u043D\u043D\u044B\u0439"
+          ru: "\u0417\u0430\u0440\u0435\u0437\u0435\u0440\u0432\u0438\u0440\u043E\u0432\u0430\u043D\u043D\u044B\u0439",
+          zh: "\u4E13\u5C5E"
         }
       },
       reserved: {
@@ -58947,7 +60092,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           it: "Riservato",
           pt: "Reservado",
           sv: "Exklusiv",
-          ru: "\u0417\u0430\u0440\u0435\u0437\u0435\u0440\u0432\u0438\u0440\u043E\u0432\u0430\u043D\u043D\u044B\u0439"
+          ru: "\u0417\u0430\u0440\u0435\u0437\u0435\u0440\u0432\u0438\u0440\u043E\u0432\u0430\u043D\u043D\u044B\u0439",
+          pl: "Zarezerwowany",
+          zh: "\u4E13\u5C5E"
         }
       },
       plaster: {
@@ -58958,7 +60105,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           it: "cerotto",
           sv: "l\xE5ster",
           ru: "\u043F\u043B\u0430\u0441\u0442\u044B\u0440\u044C",
-          pt: "atadura"
+          pt: "atadura",
+          pl: "plaster",
+          zh: "\u521B\u53EF\u8D34"
         },
         reason: {
           en: "the sillyness caught up to me",
@@ -58967,24 +60116,31 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           it: "la stupidit\xE0 mi ha preso",
           sv: "det roliga kom ikapp mig",
           ru: "\u043C\u0438\u043B\u043E\u0442\u0430 \u043D\u0430 \u043C\u0435\u043D\u044F \u043D\u0430\u043F\u0430\u043B\u0430",
-          pt: "a bobeira me alcan\xE7ou"
+          pt: "a bobeira me alcan\xE7ou",
+          zh: "\u7531\u4E8E\u64CD\u4F5C\u8FC7\u4E8E\u5446\u840C\u2026\u2026"
         }
       },
       "bubble-tea": {
         name: {
           en: "escoffier :3",
+          de: "escoffier :3",
           es: "escoffier :3",
           sv: "escoffier :3",
           ru: "\u0435\u0441\u043A\u043E\u0444\u0444\u044C\u0435\u0440 :3",
-          pt: "escoffier :3"
+          pt: "escoffier :3",
+          pl: "escoffier :3",
+          zh: "escoffier :3"
         },
         reason: {
           en: "katelyn\u2019s wife ~",
+          de: "katelyns frau ~",
           es: "esposa de katelyn ~",
           pt: "esposa de katelyn ~",
           it: "moglie di katelyn ~",
           sv: "katelyn\u2019s fru ~",
-          ru: "\u0436\u0435\u043D\u0430 \u043A\u0435\u0439\u0442\u043B\u0438\u043D ~"
+          ru: "\u0436\u0435\u043D\u0430 \u043A\u0435\u0439\u0442\u043B\u0438\u043D ~",
+          pl: "\u017Cona katelyn ~",
+          zh: "katelyn \u7684\u59BB\u5B50 ~"
         }
       }
     },
@@ -58995,16 +60151,21 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Richiede una versione pi\xF9 recente di bleh",
       pt: "Requer a vers\xE3o mais recente do bleh",
       sv: "Beh\xF6ver en nyare version av bleh",
-      ru: "\u0422\u0440\u0435\u0431\u0443\u0435\u0442\u0441\u044F \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u043D\u0430\u044F \u0432\u0435\u0440\u0441\u0438\u044F bleh"
+      ru: "\u0422\u0440\u0435\u0431\u0443\u0435\u0442\u0441\u044F \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u043D\u0430\u044F \u0432\u0435\u0440\u0441\u0438\u044F bleh",
+      pl: "Wymaga nowszej wersji bleh",
+      zh: "\u9700\u8981\u66F4\u9AD8\u7248\u672C\u7684 bleh"
     },
     home: {
       en: "Home",
       de: "Startseite",
       es: "Inicio",
       it: "Pagina iniziale",
+      ja: "\u30DB\u30FC\u30E0\u30DA\u30FC\u30B8",
       pt: "In\xEDcio",
       sv: "Startsida",
-      ru: "\u0414\u043E\u043C"
+      ru: "\u0414\u043E\u043C",
+      pl: "Dom",
+      zh: "\u6982\u89C8"
     },
     library: {
       en: "Library",
@@ -59014,16 +60175,21 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       ja: "\u30E9\u30A4\u30D6\u30E9\u30EA",
       pt: "Biblioteca",
       sv: "Bibliotek",
-      ru: "\u0411\u0438\u0431\u043B\u0438\u043E\u0442\u0435\u043A\u0430"
+      ru: "\u0411\u0438\u0431\u043B\u0438\u043E\u0442\u0435\u043A\u0430",
+      pl: "Biblioteka",
+      zh: "\u97F3\u4E50\u5E93"
     },
     playlists: {
       en: "Playlists",
       de: "Playlists",
       es: "Playlists",
       it: "Playlists",
+      ja: "\u30D7\u30EC\u30A4\u30EA\u30B9\u30C8",
       sv: "Spellistor",
       ru: "\u041F\u043B\u0435\u0439\u043B\u0438\u0441\u0442\u044B",
-      pt: "Playlists"
+      pt: "Playlists",
+      pl: "Playlista",
+      zh: "\u64AD\u653E\u5217\u8868"
     },
     shouts: {
       en: "Shouts",
@@ -59033,8 +60199,10 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Mensagens",
       ja: "\u30B7\u30E3\u30A6\u30C8",
       sv: "Hojtningar",
-      ru: "\u041E\u0442\u0437\u044B\u0432\u044B"
+      ru: "\u041E\u0442\u0437\u044B\u0432\u044B",
       // i'm not really sure with this one, it's like either comments or shouts, but trnaslated directly as "shouts", but "comments" could be mroe cleare here -- craw
+      pl: "Wiadomo\u015Bci",
+      zh: "\u7559\u8A00"
     },
     send_quickly_with: {
       // send a shout quickly with (keyboard shortcut)
@@ -59044,16 +60212,21 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Invia rapidamente con {kbd}",
       pt: "Enviar rapidamente com {kbd}",
       sv: "Skicka snabbt med {kbd}",
-      ru: "\u0411\u044B\u0441\u0442\u0440\u0430\u044F \u043E\u0442\u043F\u0440\u0430\u0432\u043A\u0430 \u043F\u043E {kbd}"
+      ru: "\u0411\u044B\u0441\u0442\u0440\u0430\u044F \u043E\u0442\u043F\u0440\u0430\u0432\u043A\u0430 \u043F\u043E {kbd}",
+      pl: "Wy\u015Bli szybko u\u017Cywaj\u0105c {kbd}",
+      zh: "\u4F7F\u7528 {kbd} \u5FEB\u901F\u53D1\u9001"
     },
     cant_shout: {
       en: "You cannot leave shouts here",
       de: "Du kannst hier keine Shouts hinterlassen",
-      es: "No puedes poner notas aqu\xED",
+      es: "No puedes dejar notas aqu\xED",
       it: "Non puoi lasciare note qui",
+      ja: "\u3053\u3053\u306B\u30B7\u30E3\u30A6\u30C8\u306F\u66F8\u304D\u8FBC\u3081\u306A\u3044",
       sv: "Du kan inte hojta h\xE4r",
       ru: "\u0412\u044B \u043D\u0435 \u043C\u043E\u0436\u0435\u0442\u0435 \u043E\u0441\u0442\u0430\u0432\u043B\u044F\u0442\u044C \u0442\u0443\u0442 \u043E\u0442\u0437\u044B\u0432\u044B",
-      pt: "Voc\xEA n\xE3o pode deixar coment\xE1rios aqui"
+      pt: "Voc\xEA n\xE3o pode deixar coment\xE1rios aqui",
+      pl: "Nie mo\u017Cesz zostawia\u0107 tu wiadomo\u015Bci",
+      zh: "\u6B64\u5904\u65E0\u6CD5\u7559\u8A00\u54E6"
     },
     failed_to_send: {
       en: "Failed to send",
@@ -59062,24 +60235,33 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Invio non riuscito",
       pt: "Falha ao enviar",
       sv: "Gick inte att skicka",
-      ru: "\u041D\u0435 \u0443\u0434\u0430\u043B\u043E\u0441\u044C \u043E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u044C"
+      ru: "\u041D\u0435 \u0443\u0434\u0430\u043B\u043E\u0441\u044C \u043E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u044C",
+      pl: "B\u0142\u0105d wysy\u0142ania",
+      zh: "\u53D1\u9001\u5931\u8D25"
     },
     sent: {
       en: "Sent",
       de: "Gesendet",
       es: "Publicado",
       it: "Inviato",
+      ja: "\u9001\u3089\u308C\u305F",
+      //I assume we're going for casual language (compared to vanilla Last.fm) with bleh?
       pt: "Enviado",
       sv: "Skickat",
-      ru: "\u041E\u0442\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u043E"
+      ru: "\u041E\u0442\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u043E",
+      pl: "Wy\u015Bli",
+      zh: "\u5DF2\u53D1\u9001"
     },
     single_shout: {
       en: "viewing a single shout",
+      de: "ein einzelner Shout wird angezeigt",
       es: "viendo una sola nota",
       it: "visualizzando una singola nota",
       pt: "visualizando uma mensagem",
       sv: "visar en enda hojtning",
-      ru: "\u043F\u0440\u043E\u0441\u043C\u043E\u0442\u0440 \u0435\u0434\u0438\u043D\u0441\u0442\u0432\u0435\u043D\u043D\u043E\u0433\u043E \u043E\u0442\u0437\u044B\u0432\u0430"
+      ru: "\u043F\u0440\u043E\u0441\u043C\u043E\u0442\u0440 \u0435\u0434\u0438\u043D\u0441\u0442\u0432\u0435\u043D\u043D\u043E\u0433\u043E \u043E\u0442\u0437\u044B\u0432\u0430",
+      pl: "wy\u015Bwiatlanie jednej wiadomo\u015Bci",
+      zh: "\u6B63\u5728\u67E5\u770B\u5355\u6761\u7559\u8A00"
     },
     about: {
       // about me panel
@@ -59087,9 +60269,12 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       de: "\xDCber",
       es: "Sobre m\xED",
       it: "Informazioni",
+      ja: "\u81EA\u5206\u306B\u3064\u3044\u3066",
       pt: "Sobre mim",
       sv: "Om",
-      ru: "\u041E \u0441\u0435\u0431\u0435"
+      ru: "\u041E \u0441\u0435\u0431\u0435",
+      pl: "O mnie",
+      zh: "\u5173\u4E8E\u6211"
     },
     about_me_preview: {
       // About Me
@@ -59097,29 +60282,37 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       de: "\xDCber (Vorschau)",
       es: "Sobre m\xED (vista previa)",
       it: "Informazioni (anteprima)",
+      ja: "\u81EA\u5206\u306B\u3064\u3044\u3066\uFF08\u30D7\u30EC\u30D3\u30E5\u30FC\uFF09",
       pt: "Sobre mim (pr\xE9via)",
       //"Sobre mim" is just more natural in that context
       sv: "Om (f\xF6rhandsvisning)",
-      ru: "\u041E \u0441\u0435\u0431\u0435 (\u043F\u0440\u0435\u0432\u044C\u044E)"
+      ru: "\u041E \u0441\u0435\u0431\u0435 (\u043F\u0440\u0435\u0432\u044C\u044E)",
+      pl: "O mnie (podgl\u0105d)",
+      zh: "\u5173\u4E8E\u6211 (\u9884\u89C8)"
     },
     no_about: {
       // username
       en: "{u} is keeping quiet",
       de: "{u} ist wohl etwas schweigsam",
-      es: "{u} se est\xE1 quedando callado",
+      es: "{u} est\xE1 guardando silencio",
       it: "{u} sta rimanendo in silenzio",
       pt: "{u} est\xE1 bem quietinho(a)",
       sv: "{u} h\xE5ller sig tyst",
-      ru: "{u} \u043D\u0438\u0447\u0435\u0433\u043E \u043D\u0435 \u043D\u0430\u043F\u0438\u0441\u0430\u043B \u043E \u0441\u0435\u0431\u0435"
+      ru: "{u} \u043D\u0438\u0447\u0435\u0433\u043E \u043D\u0435 \u043D\u0430\u043F\u0438\u0441\u0430\u043B \u043E \u0441\u0435\u0431\u0435",
+      pl: "{u} siedzi cicho",
+      zh: "{u} \u8FD8\u5728\u4FDD\u6301\u795E\u79D8"
     },
     edit_wiki: {
       en: "Edit wiki",
       de: "Wiki bearbeiten",
       es: "Editar wiki",
       it: "Modifica wiki",
+      ja: "\u30A6\u30A3\u30AD\u3092\u7DE8\u96C6",
       pt: "Editar wiki",
       sv: "Redigera wiki",
-      ru: "\u0420\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u0438\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u044E"
+      ru: "\u0420\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u0438\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u044E",
+      pl: "Edytuj wiki",
+      zh: "\u7F16\u8F91 wiki"
     },
     read_more: {
       en: "Read more",
@@ -59129,25 +60322,33 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Ler mais",
       ja: "\u3082\u3063\u3068\u8AAD\u3080",
       sv: "L\xE4s mer",
-      ru: "\u0427\u0438\u0442\u0430\u0442\u044C \u0431\u043E\u043B\u0435\u0435"
+      ru: "\u0427\u0438\u0442\u0430\u0442\u044C \u0431\u043E\u043B\u0435\u0435",
+      pl: "Czytaj wi\u0119cej",
+      zh: "\u9605\u8BFB\u66F4\u591A"
     },
     refresh: {
       en: "Refresh",
       de: "Aktualisieren",
       es: "Recargar",
       it: "Aggiorna",
+      ja: "\u30EA\u30D5\u30EC\u30C3\u30B7\u30E5",
       pt: "Atualizar",
       sv: "Ladda om",
-      ru: "\u041F\u0435\u0440\u0435\u0437\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044C"
+      ru: "\u041F\u0435\u0440\u0435\u0437\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044C",
+      pl: "Od\u015Bwie\u017C",
+      zh: "\u5237\u65B0"
     },
     refreshed: {
       en: "Refreshed",
       de: "Aktualisiert",
       es: "Recargado",
       it: "Aggiornato",
+      ja: "\u30EA\u30D5\u30EC\u30C3\u30B7\u30E5\u3055\u308C\u305F",
       pt: "Atualizado",
       sv: "Laddats om",
-      ru: "\u041F\u0435\u0440\u0435\u0437\u0430\u0433\u0440\u0443\u0436\u0435\u043D\u043E"
+      ru: "\u041F\u0435\u0440\u0435\u0437\u0430\u0433\u0440\u0443\u0436\u0435\u043D\u043E",
+      pl: "Od\u015Bwie\u017Cono",
+      zh: "\u5DF2\u5237\u65B0"
     },
     refresh_tracks: {
       en: "Refresh tracks",
@@ -59156,7 +60357,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Aggiorna brani",
       pt: "Atualizar faixas",
       sv: "Ladda om l\xE5tar",
-      ru: "\u041F\u0435\u0440\u0435\u0437\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044C \u0442\u0440\u0435\u043A\u0438"
+      ru: "\u041F\u0435\u0440\u0435\u0437\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044C \u0442\u0440\u0435\u043A\u0438",
+      pl: "Od\u015Bwie\u017C utwory",
+      zh: "\u5237\u65B0\u66F2\u76EE"
     },
     unavailable: {
       en: "Unavailable",
@@ -59165,17 +60368,31 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Non disponibile",
       pt: "Indispon\xEDvel",
       sv: "Otillg\xE4nglig",
-      ru: "\u041D\u0435\u0434\u043E\u0441\u0442\u0443\u043F\u043D\u043E"
+      ru: "\u041D\u0435\u0434\u043E\u0441\u0442\u0443\u043F\u043D\u043E",
+      pl: "Niedost\u0119pne",
+      zh: "\u4E0D\u53EF\u7528"
     },
-    set_obsession: {
+    obsess: {
       en: "Obsess",
       de: "Obsessen",
       es: "Obsesionar",
       it: "Imposta passione",
-      // last.fm calls them 'passioni' in italian, so i will work with that from now on ~cuto
+      // Last.fm calls them 'passioni' in italian, so i will work with that from now on ~cuto
       pt: "Obsess\xE3o",
       sv: "Besatthet",
-      ru: "\u0417\u0430\u0432\u0438\u0441\u0438\u043C\u043E\u0441\u0442\u044C"
+      ru: "\u0417\u0430\u0432\u0438\u0441\u0438\u043C\u043E\u0441\u0442\u044C",
+      pl: "Ustaw obsesj\u0119",
+      zh: "\u8BBE\u4E3A\u70ED\u64AD\u5355\u66F2"
+    },
+    set_obsession: {
+      en: "Set obsession",
+      de: "Als Obsession festlegen",
+      es: "Establecer como obsesi\xF3n",
+      it: "Imposta come passione",
+      pt: "Definir como obsess\xE3o",
+      sv: "St\xE4ll in som besatthet",
+      ru: "\u0421\u0434\u0435\u043B\u0430\u0442\u044C \u0437\u0430\u0432\u0438\u0441\u0438\u043C\u043E\u0439",
+      pl: "Daj jako obsesj\u0119"
     },
     obsession_first: {
       en: "First to claim this obsession!",
@@ -59184,7 +60401,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Il primo ad avere questa passione!",
       pt: "Primeiro(a) a ter esta obsess\xE3o!",
       sv: "Den f\xF6rsta personen att bli besatt av denna!",
-      ru: "\u041F\u0435\u0440\u0432\u044B\u0439 \u043A\u0442\u043E \u0438\u043C\u0435\u0435\u0442 \u044D\u0442\u0443 \u0437\u0430\u0432\u0438\u0441\u0438\u043C\u043E\u0441\u0442\u044C!"
+      ru: "\u041F\u0435\u0440\u0432\u044B\u0439 \u043A\u0442\u043E \u0438\u043C\u0435\u0435\u0442 \u044D\u0442\u0443 \u0437\u0430\u0432\u0438\u0441\u0438\u043C\u043E\u0441\u0442\u044C!",
+      pl: "Pierwsi do ustawienia tej obsesji!",
+      zh: "\u4F60\u662F\u9996\u4F4D\u5C06\u6B64\u8BBE\u4E3A\u70ED\u64AD\u5355\u66F2\u7684\u4EBA\uFF01"
     },
     compare: {
       en: "Compare",
@@ -59193,7 +60412,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Confronta",
       pt: "Comparar",
       sv: "J\xE4mf\xF6r",
-      ru: "\u0421\u0440\u0430\u0432\u043D\u0438\u0442\u044C"
+      ru: "\u0421\u0440\u0430\u0432\u043D\u0438\u0442\u044C",
+      pl: "Por\xF3wnaj",
+      zh: "\u5BF9\u6BD4"
     },
     compare_plays: {
       en: "Compare plays",
@@ -59202,7 +60423,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Confronta riproduzioni",
       pt: "Comparar reprodu\xE7\xF5es",
       sv: "J\xE4mf\xF6r spelningar",
-      ru: "\u0421\u0440\u0430\u0432\u043D\u0438\u0442\u044C \u0441\u044B\u0433\u0440\u0430\u043D\u043D\u043E\u0435"
+      ru: "\u0421\u0440\u0430\u0432\u043D\u0438\u0442\u044C \u0441\u044B\u0433\u0440\u0430\u043D\u043D\u043E\u0435",
+      pl: "Por\xF3wnaj odtworzenia",
+      zh: "\u6536\u542C\u5BF9\u6BD4"
     },
     inverse_compare: {
       name: {
@@ -59212,7 +60435,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         it: "Confronto inverso",
         sv: "Invertera j\xE4mf\xF6relse",
         ru: "\u041E\u0431\u0440\u0430\u0442\u043D\u044B\u0439 \u043C\u0435\u0442\u043E\u0434 \u0441\u0440\u0430\u0432\u043D\u0435\u043D\u0438\u044F",
-        pt: "M\xE9todo de compara\xE7\xE3o inversa"
+        pt: "M\xE9todo de compara\xE7\xE3o inversa",
+        pl: "Odwr\xF3\u0107 metod\u0119 por\xF3wnania",
+        zh: "\u5DEE\u5F02\u5BF9\u6BD4\u6A21\u5F0F"
       },
       body: {
         en: "Show items you do not share instead",
@@ -59221,7 +60446,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         it: "Mostra gli elementi che non condividete",
         sv: "Visa ist\xE4llet objekt ni inte delar alls",
         ru: "\u0412\u043C\u0435\u0441\u0442\u043E \u044D\u0442\u043E\u0433\u043E \u043F\u043E\u043A\u0430\u0437\u0430\u0442\u044C \u043D\u0435\u0441\u043E\u0432\u043F\u0430\u0434\u0430\u044E\u0449\u0438\u0435 \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u044B",
-        pt: "Em vez disso, mostre itens que voc\xEA n\xE3o compartilha"
+        pt: "Em vez disso, mostre itens que voc\xEA n\xE3o compartilha",
+        zh: "\u6539\u4E3A\u663E\u793A\u53CC\u65B9\u672A\u5171\u6709\u7684\u9879\u76EE"
       }
     },
     one_page: {
@@ -59231,7 +60457,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "1 pagina",
       pt: "1 p\xE1gina",
       sv: "1 sida",
-      ru: "1 \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u0430"
+      ru: "1 \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u0430",
+      pl: "1 strona",
+      zh: "1 \u9875"
     },
     count_pages: {
       en: "{c} pages",
@@ -59240,8 +60468,10 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "{c} pagine",
       pt: "{c} p\xE1ginas",
       sv: "{c} sidor",
-      ru: "{c} \u0441\u0442\u0440\u0430\u043D\u0438\u0446"
+      ru: "{c} \u0441\u0442\u0440\u0430\u043D\u0438\u0446",
       // can't have the exact here due to russian have "3 страницы" and "5 страниц"
+      pl: "{c} stron",
+      zh: "{c} \u9875"
     },
     gathering_plays_for_user_pages: {
       en: "Gathering plays for {u} ({current_page}/{pages})",
@@ -59250,7 +60480,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Raccogliendo le riproduzioni per {u} ({current_page}/{pages})",
       pt: "Reunindo reprodu\xE7\xF5es para {u} ({current_page}/{pages})",
       sv: "Samlar spelningar av {u} ({current_page}/{pages})",
-      ru: "\u0421\u0431\u043E\u0440 \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u0439 \u0434\u043B\u044F {u} (\u0441\u0442\u0440\u0430\u043D\u0438\u0446\u0430 {current_page} \u0438\u0437 {pages})"
+      ru: "\u0421\u0431\u043E\u0440 \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u0439 \u0434\u043B\u044F {u} (\u0441\u0442\u0440\u0430\u043D\u0438\u0446\u0430 {current_page} \u0438\u0437 {pages})",
+      pl: "Zbieranie odtworze\u0144 dla {u} ({curremt_page}/{pages})",
+      zh: "\u6B63\u5728\u83B7\u53D6 {u} \u7684\u64AD\u653E\u8BB0\u5F55 ({current_page}/{pages})"
     },
     nothing_in_common: {
       en: "Nothing in common (\u0E51-\uFE4F-\u0E51)",
@@ -59259,7 +60491,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Niente in comune (\u0E51-\uFE4F-\u0E51)",
       pt: "Nada em comum (\u0E51-\uFE4F-\u0E51)",
       sv: "Inget gemensamt (\u0E51-\uFE4F-\u0E51)",
-      ru: "\u041D\u0438\u0447\u0435\u0433\u043E \u043E\u0431\u0449\u0435\u0433\u043E (\u0E51-\uFE4F-\u0E51)"
+      ru: "\u041D\u0438\u0447\u0435\u0433\u043E \u043E\u0431\u0449\u0435\u0433\u043E (\u0E51-\uFE4F-\u0E51)",
+      pl: "Nic wsp\xF3lnego (\u0E51-\uFE4F-\u0E51)",
+      zh: "\u6682\u65E0\u5171\u540C\u70B9 (\u0E51-\uFE4F-\u0E51)"
     },
     others_featured: {
       // guest features on a song or album
@@ -59269,7 +60503,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Altri partecipanti",
       pt: "Outros em destaque",
       sv: "G\xE4startister",
-      ru: "\u0414\u0440\u0443\u0433\u0438\u0435 \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u0438"
+      ru: "\u0414\u0440\u0443\u0433\u0438\u0435 \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u0438",
+      pl: "Inni z udzia\u0142em",
+      zh: "\u5176\u4ED6\u5BA2\u4E32\u827A\u672F\u5BB6"
     },
     your_scrobbles: {
       en: "Your scrobbles",
@@ -59278,7 +60514,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "I tuoi scrobbling",
       pt: "Seus scrobbles",
       sv: "Dina skrobblingar",
-      ru: "\u0412\u0430\u0448\u0438 \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u044B"
+      ru: "\u0412\u0430\u0448\u0438 \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u044B",
+      pl: "Twoje scrobble",
+      zh: "\u4F60\u7684 Scrobble \u8BB0\u5F55"
     },
     play: {
       // play a song
@@ -59288,7 +60526,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Riproduci",
       sv: "Spela upp",
       ru: "\u0412\u043E\u0441\u043F\u0440\u043E\u0438\u0437\u0432\u0435\u0441\u0442\u0438",
-      pt: "Reproduzir"
+      pt: "Reproduzir",
+      pl: "Odtw\xF3rz",
+      zh: "\u64AD\u653E"
     },
     plays: {
       // your play count on a song or album or whatever
@@ -59298,7 +60538,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Riproduzioni",
       pt: "Reprodu\xE7\xF5es",
       sv: "Spelningar",
-      ru: "\u041F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u044F"
+      ru: "\u041F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u044F",
+      pl: "Ods\u0142uchania",
+      zh: "\u64AD\u653E\u6B21\u6570"
     },
     try_again: {
       en: "Try again",
@@ -59307,7 +60549,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Riprova",
       pt: "Tentar novamente",
       sv: "F\xF6rs\xF6k igen",
-      ru: "\u041F\u043E\u0432\u0442\u043E\u0440\u0438\u0442\u044C"
+      ru: "\u041F\u043E\u0432\u0442\u043E\u0440\u0438\u0442\u044C",
+      pl: "Spr\xF3buj ponownie",
+      zh: "\u91CD\u8BD5"
     },
     back: {
       en: "Back",
@@ -59316,7 +60560,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Indietro",
       pt: "Voltar",
       sv: "Tillbaks",
-      ru: "\u041D\u0430\u0437\u0430\u0434"
+      ru: "\u041D\u0430\u0437\u0430\u0434",
+      pl: "Cofnij",
+      zh: "\u8FD4\u56DE"
     },
     settings: {
       en: "Settings",
@@ -59326,7 +60572,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Configura\xE7\xF5es",
       ja: "\u8A2D\u5B9A",
       sv: "Inst\xE4llningar",
-      ru: "\u041D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438"
+      ru: "\u041D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438",
+      pl: "Ustawienia",
+      zh: "\u8BBE\u7F6E"
     },
     on_ignore_list: {
       en: "Ignored",
@@ -59335,7 +60583,13 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Ignorato",
       pt: "Ignorados",
       sv: "Ignorerad",
-      ru: "\u0418\u0433\u043D\u043E\u0440\u0438\u0440\u0443\u0435\u0442\u0441\u044F"
+      ru: "\u0418\u0433\u043D\u043E\u0440\u0438\u0440\u0443\u0435\u0442\u0441\u044F",
+      pl: "Ignorowani",
+      zh: "\u5DF2\u5FFD\u7565"
+    },
+    close_friends: {
+      en: "Close friends",
+      de: "Engen Freunde"
     },
     friends: {
       en: "Friends",
@@ -59344,7 +60598,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Amici",
       pt: "Amigos",
       sv: "V\xE4nner",
-      ru: "\u0414\u0440\u0443\u0437\u044C\u044F"
+      ru: "\u0414\u0440\u0443\u0437\u044C\u044F",
+      pl: "Znajomi",
+      zh: "\u597D\u53CB"
     },
     friends_setting: {
       en: "Keep up to date on what your friends are listening to",
@@ -59353,16 +60609,16 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Resta aggiornato su quello che i tuoi amici stanno ascoltando",
       pt: "Fique por dentro do que seus amigos est\xE3o ouvindo",
       sv: "H\xE5ll koll p\xE5 vad dina v\xE4nner lyssnar p\xE5",
-      ru: "\u0421\u043B\u0435\u0434\u0438\u0442\u0435 \u0437\u0430 \u0442\u0435\u043C, \u0447\u0442\u043E \u0441\u043B\u0443\u0448\u0430\u044E\u0442 \u0432\u0430\u0448\u0438 \u0434\u0440\u0443\u0437\u044C\u044F"
+      ru: "\u0421\u043B\u0435\u0434\u0438\u0442\u0435 \u0437\u0430 \u0442\u0435\u043C, \u0447\u0442\u043E \u0441\u043B\u0443\u0448\u0430\u044E\u0442 \u0432\u0430\u0448\u0438 \u0434\u0440\u0443\u0437\u044C\u044F",
+      pl: "Sprawd\u017A czego s\u0142uchaj\u0105 twoi znajomi",
+      zh: "\u5B9E\u65F6\u5173\u6CE8\u597D\u53CB\u7684\u6536\u542C\u52A8\u6001"
     },
     add_friends: {
-      en: "Add friends",
-      de: "Freunde hinzuf\xFCgen",
-      es: "A\xF1adir amigos",
-      it: "Aggiungi amici",
-      pt: "Adicionar amigos",
-      sv: "L\xE4gg till v\xE4nner",
-      ru: "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0434\u0440\u0443\u0437\u0435\u0439"
+      en: "Add close friends",
+      de: "Engen Freunde hinzuf\xFCgen"
+    },
+    edit_close_friends: {
+      en: "Edit close friends"
     },
     starred_friend: {
       name: {
@@ -59372,7 +60628,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         it: "Amico preferito",
         pt: "Amigo(a) favorito(a)",
         sv: "Stj\xE4rnm\xE4rkt v\xE4n",
-        ru: "\u0418\u0437\u0431\u0440\u0430\u043D\u043D\u044B\u0439 \u0434\u0440\u0443\u0433"
+        ru: "\u0418\u0437\u0431\u0440\u0430\u043D\u043D\u044B\u0439 \u0434\u0440\u0443\u0433",
+        pl: "Znajomi oznaczeni jako ulubieni",
+        zh: "\u7279\u522B\u5173\u6CE8"
       },
       body: {
         en: "View their scrobbles alongside yours at all times",
@@ -59381,7 +60639,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         it: "Visualizza i loro scrobbling vicino i tuoi in ogni momento",
         pt: "Veja os scrobbles dele(a) junto aos seus o tempo todo",
         sv: "Se deras skrobblingar bredvid dina hela tiden",
-        ru: "\u041F\u043E\u0441\u0442\u043E\u044F\u043D\u043D\u043E \u043F\u0440\u043E\u0441\u043C\u0430\u0442\u0440\u0438\u0432\u0430\u0442\u044C \u0438\u0445 \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u044F \u0440\u044F\u0434\u043E\u043C \u0441 \u0432\u0430\u0448\u0438\u043C\u0438"
+        ru: "\u041F\u043E\u0441\u0442\u043E\u044F\u043D\u043D\u043E \u043F\u0440\u043E\u0441\u043C\u0430\u0442\u0440\u0438\u0432\u0430\u0442\u044C \u0438\u0445 \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u044F \u0440\u044F\u0434\u043E\u043C \u0441 \u0432\u0430\u0448\u0438\u043C\u0438",
+        pl: "Zawsze wy\u015Bwietlaj ich scrobble \u0142\u0105cznie z twoimi",
+        zh: "\u968F\u65F6\u5C06\u4ED6\u4EEC\u7684 Scrobble \u8BB0\u5F55\u4E0E\u4F60\u7684\u5E76\u5217\u663E\u793A"
       },
       notice: {
         en: "Not seeing the options you\u2019re after? Fill out your friends list in the settings.",
@@ -59390,64 +60650,37 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         it: "Non vedi le opzioni che cerchi? Imposta la tua lista amici nelle impostazioni.",
         pt: "N\xE3o est\xE1 encontrando as op\xE7\xF5es que voc\xEA quer? Preencha sua lista de amigos nas configura\xE7\xF5es.",
         sv: "Ser du inte inst\xE4llningar du letar efter? Fyll upp din v\xE4nlista i inst\xE4llningarna.",
-        ru: "\u041D\u0435 \u0432\u0438\u0434\u0438\u0442\u0435 \u043D\u0443\u0436\u043D\u044B\u0445 \u043E\u043F\u0446\u0438\u0439? \u0417\u0430\u043F\u043E\u043B\u043D\u0438\u0442\u0435 \u0441\u0432\u043E\u0439 \u0441\u043F\u0438\u0441\u043E\u043A \u0434\u0440\u0443\u0437\u0435\u0439 \u0432 \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0430\u0445."
+        ru: "\u041D\u0435 \u0432\u0438\u0434\u0438\u0442\u0435 \u043D\u0443\u0436\u043D\u044B\u0445 \u043E\u043F\u0446\u0438\u0439? \u0417\u0430\u043F\u043E\u043B\u043D\u0438\u0442\u0435 \u0441\u0432\u043E\u0439 \u0441\u043F\u0438\u0441\u043E\u043A \u0434\u0440\u0443\u0437\u0435\u0439 \u0432 \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0430\u0445.",
+        pl: "Nie ma czego szukasz? Wype\u0142ni swoj\u0105 liste znajomych w ustawieniach.",
+        zh: "\u6CA1\u6709\u770B\u5230\u60F3\u8981\u7684\u9009\u9879\uFF1F\u8BF7\u5728\u8BBE\u7F6E\u4E2D\u5B8C\u5584\u4F60\u7684\u597D\u53CB\u5217\u8868\u3002"
       }
     },
     friend_difference: {
-      en: "\u2018Friends\u2019 is a bleh-exclusive feature that allows you to keep up to date on your friend\u2019s listening history, it is local and does not influence your following list.",
-      de: "\u201EFreunde\u201C ist eine exklusive bleh-Funktion, mit der du auf dem Laufenden bleiben kannst, was deine Freunde h\xF6ren. Freunde werden lokal verwaltet und beeinflussen nicht deine Follower-Liste.",
-      es: "\u2018Amigos\u2019 es una funci\xF3n exclusiva de bleh que te permite estar al d\xEDa con el historial de reproducciones de tus amigos. Es local y no influye en tu lista de seguidos.",
-      it: "\u2018Amici\u2019 \xE8 una funzione esclusiva di bleh che ti permette di restare aggiornato con la cronologia di ascolto dei tuoi amici, \xE8 locale e non influenza la tua lista dei seguiti.",
-      pt: "\u2018Amigos\u2019 \xE9 um recurso exclusivo do bleh que permite voc\xEA acompanhar o hist\xF3rico de m\xFAsicas dos seus amigos. \xC9 um recurso local que n\xE3o influencia a sua lista de seguidores.",
-      sv: "\u2019V\xE4nner\u2019 \xE4r en exklusiv del av bleh som till\xE5ter dig att h\xE5lla koll p\xE5 dina v\xE4nners lyssnarhistoria, det hanteras lokalt och r\xF6r inte din f\xF6ljarlista.",
-      ru: "\xAB\u0414\u0440\u0443\u0437\u044C\u044F\xBB \u2014 \u044D\u0442\u043E \u044D\u043A\u0441\u043A\u043B\u044E\u0437\u0438\u0432\u043D\u0430\u044F \u0444\u0443\u043D\u043A\u0446\u0438\u044F bleh, \u043A\u043E\u0442\u043E\u0440\u0430\u044F \u043F\u043E\u0437\u0432\u043E\u043B\u044F\u0435\u0442 \u0432\u0430\u043C \u0441\u043B\u0435\u0434\u0438\u0442\u044C \u0437\u0430 \u0438\u0441\u0442\u043E\u0440\u0438\u0435\u0439 \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u0439 \u0432\u0430\u0448\u0438\u0445 \u0434\u0440\u0443\u0437\u0435\u0439. \u0421\u043F\u0438\u0441\u043E\u043A \u0443\u043F\u0440\u0430\u0432\u043B\u044F\u0435\u0442\u0441\u044F \u043B\u043E\u043A\u0430\u043B\u044C\u043D\u043E \u0438 \u043D\u0435 \u0432\u043B\u0438\u044F\u0435\u0442 \u043D\u0430 \u0432\u0430\u0448 \u0441\u043F\u0438\u0441\u043E\u043A \u043F\u043E\u0434\u043F\u0438\u0441\u043E\u043A."
+      en: "Close friends is a bleh system that allows you to keep up to date on your friend\u2019s listening history, it does not influence your following list."
+    },
+    friend_difference_min: {
+      en: "bleh-only"
     },
     add_as_friend: {
-      en: "Add as friend",
-      de: "Als Freund hinzuf\xFCgen",
-      es: "A\xF1adir como amigo",
-      it: "Aggiungi come amico",
-      pt: "Adicionar como amigo",
-      sv: "L\xE4gg till som v\xE4n",
-      ru: "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u043A\u0430\u043A \u0434\u0440\u0443\u0433\u0430"
+      en: "Add as close friend",
+      de: "Als engen Freund hinzuf\xFCgen"
     },
     remove_friend: {
       name: {
-        en: "Remove friend",
-        de: "Freund entfernen",
-        es: "Eliminar amigo",
-        it: "Rimuovi amico",
-        pt: "Desfazer amizade",
-        sv: "Ta bort v\xE4n",
-        ru: "\u0423\u0434\u0430\u043B\u0438\u0442\u044C \u0434\u0440\u0443\u0433\u0430"
+        en: "Remove close friend",
+        de: "Engen Freund entfernen"
       },
       body: {
-        en: "Are you sure you want to remove {u} as a friend, you will stay following them - it\u2018s only local.",
-        de: "Bist du sicher, dass du {u} als Freund entfernen m\xF6chtest? Du folgst der Person weiterhin - die Freundesliste wird lokal verwaltet.",
-        es: "\xBFSeguro de que quieres eliminar a {u} como amigo? Seguir\xE1s sigui\xE9ndolo \u2014 es solo local.",
-        it: "Sei sicuro di voler rimuovere {u} come amico? Continuerai a seguirlo - \xE8 solamente locale.",
-        pt: "Tem certeza de que quer remover {u} da sua lista de amigos? Voc\xEA continuar\xE1 o/a seguindo - \xE9 s\xF3 algo local.",
-        sv: "\xC4r du s\xE4ker p\xE5 att du vill ta bort {u} som v\xE4n? Du f\xF6ljer dem fortfarande - v\xE4nlistan hanteras lokalt.",
-        ru: "\u0412\u044B \u0443\u0432\u0435\u0440\u0435\u043D\u044B, \u0447\u0442\u043E \u0445\u043E\u0442\u0438\u0442\u0435 \u0443\u0434\u0430\u043B\u0438\u0442\u044C {u} \u0438\u0437 \u0434\u0440\u0443\u0437\u0435\u0439? \u0412\u044B \u043E\u0441\u0442\u0430\u043D\u0435\u0442\u0435\u0441\u044C \u043F\u043E\u0434\u043F\u0438\u0441\u0430\u043D\u044B \u043D\u0430 \u043D\u0435\u0433\u043E/\u043D\u0435\u0435 \u2014 \u044D\u0442\u043E \u043B\u043E\u043A\u0430\u043B\u044C\u043D\u044B\u0439 \u0441\u043F\u0438\u0441\u043E\u043A."
+        en: "Continue removing {u} as a close friend? (bleh-only)"
       }
     },
     added_as_friend: {
-      en: "Added friend",
-      de: "Freund hinzugef\xFCgt",
-      es: "Amigo a\xF1adido",
-      it: "Amico aggiunto",
-      pt: "Amigo(a) adicionado(a)",
-      sv: "Lagt till som v\xE4n",
-      ru: "\u0414\u0440\u0443\u0433 \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D"
+      en: "Added close friend",
+      de: "Engen Freund hinzugef\xFCgt"
     },
     removed_friend: {
-      en: "Removed friend",
-      de: "Freund entfernt",
-      es: "Amigo eliminado",
-      it: "Amico rimosso",
-      pt: "Amigo(a) removido(a)",
-      sv: "Tagit bort v\xE4n",
-      ru: "\u0414\u0440\u0443\u0433 \u0443\u0434\u0430\u043B\u0435\u043D"
+      en: "Removed close friend",
+      de: "Engen Freund entfernt"
     },
     added_star: {
       en: "Added star status",
@@ -59456,7 +60689,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Impostato come preferito",
       pt: "Status de favorito adicionado",
       sv: "Stj\xE4rnm\xE4rkte",
-      ru: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D \u0432 \u0438\u0437\u0431\u0440\u0430\u043D\u043D\u043E\u0435"
+      ru: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D \u0432 \u0438\u0437\u0431\u0440\u0430\u043D\u043D\u043E\u0435",
+      pl: "Dodano do ulubionych",
+      zh: "\u5DF2\u8BBE\u4E3A\u7279\u522B\u5173\u6CE8"
     },
     add_as_starred_friend: {
       en: "Star friend",
@@ -59465,25 +60700,31 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Imposta come preferito",
       pt: "Favoritar amigo(a)",
       sv: "Stj\xE4rnm\xE4rk v\xE4n",
-      ru: "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0434\u0440\u0443\u0433\u0430 \u0432 \u0438\u0437\u0431\u0440\u0430\u043D\u043D\u043E\u0435"
+      ru: "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0434\u0440\u0443\u0433\u0430 \u0432 \u0438\u0437\u0431\u0440\u0430\u043D\u043D\u043E\u0435",
+      pl: "Oznacz znajomego jako ulubieni",
+      zh: "\u8BBE\u4E3A\u7279\u522B\u5173\u6CE8"
     },
     removed_star: {
       en: "Removed star status",
       de: "Markierung entfernt",
-      es: "Eliminado de favoritos",
+      es: "Removido de favoritos",
       it: "Rimosso dai preferiti",
       pt: "Status de favorito removido",
       sv: "Tog bort stj\xE4rnm\xE4rke",
-      ru: "\u0423\u0434\u0430\u043B\u0435\u043D \u0438\u0437 \u0438\u0437\u0431\u0440\u0430\u043D\u043D\u043E\u0433\u043E"
+      ru: "\u0423\u0434\u0430\u043B\u0435\u043D \u0438\u0437 \u0438\u0437\u0431\u0440\u0430\u043D\u043D\u043E\u0433\u043E",
+      pl: "Usuni\u0119to z ulubionych",
+      zh: "\u5DF2\u53D6\u6D88\u7279\u522B\u5173\u6CE8"
     },
     remove_as_star_friend: {
       en: "Remove star status",
       de: "Markierung entfernen",
-      es: "Eliminar de favoritos",
+      es: "Remover de favoritos",
       it: "Rimuovi dai preferiti",
       pt: "Remover estado de favorito",
       sv: "Ta bort stj\xE4rnm\xE4rke",
-      ru: "\u0423\u0434\u0430\u043B\u0438\u0442\u044C \u0438\u0437 \u0438\u0437\u0431\u0440\u0430\u043D\u043D\u043E\u0433\u043E"
+      ru: "\u0423\u0434\u0430\u043B\u0438\u0442\u044C \u0438\u0437 \u0438\u0437\u0431\u0440\u0430\u043D\u043D\u043E\u0433\u043E",
+      pl: "Usu\u0144 z ulubionych",
+      zh: "\u53D6\u6D88\u7279\u522B\u5173\u6CE8"
     },
     aka: {
       en: "aka.",
@@ -59492,29 +60733,28 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "alias",
       pt: "vulgo",
       sv: "ocks\xE5 k\xE4nd som",
-      ru: "\u043E\u043D \u0436\u0435"
+      ru: "\u043E\u043D \u0436\u0435",
+      pl: "znani r\xF3wnie\u017C jako",
+      zh: "\u53C8\u540D"
     },
     account_pronouns: {
-      en: "pronouns",
-      de: "pronomen",
-      es: "pronombres",
-      it: "pronomi",
-      pt: "pronomes",
-      sv: "pronomen",
-      ru: "\u043C\u0435\u0441\u0442\u043E\u0438\u043C\u0435\u043D\u0438\u044F"
+      en: "Pronouns",
+      de: "Pronomen",
+      es: "Pronombres",
+      it: "Pronomi",
+      pt: "Pronomes",
+      sv: "Pronomen",
+      ru: "\u043C\u0435\u0441\u0442\u043E\u0438\u043C\u0435\u043D\u0438\u044F",
+      pl: "zaimki",
+      zh: "\u4EE3\u8BCD"
     },
-    account_created: {
-      // dont translate to "scrobbling since", instead just "created"
-      en: "created",
-      de: "erstellt",
-      es: "creado",
-      it: "creato",
-      pt: "criada",
-      sv: "skapades",
-      ru: "\u0441\u043E\u0437\u0434\u0430\u043D"
+    account_creation: {
+      // dont translate to "scrobbling since"
+      en: "Account creation date"
     },
     account_scrobbling_since_replace: {
       // copy this from last.fm 1:1 (including the space at the end if there)
+      // !!!!!!!!! dont change this please
       en: "scrobbling since ",
       de: "scrobbelt seit ",
       es: "scrobbling desde ",
@@ -59522,7 +60762,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "em scrobble desde ",
       ja: "\u3088\u308Ascrobble",
       sv: "skrobblar sedan ",
-      ru: "\u0441\u043A\u0440\u043E\u0431\u0431\u043B\u0438\u043D\u0433 \u0441 "
+      ru: "\u0441\u043A\u0440\u043E\u0431\u0431\u043B\u0438\u043D\u0433 \u0441 ",
+      pl: "scrobbluje od ",
+      zh: "\u97F3\u4E50\u8BB0\u5F55\u59CB\u4E8E "
     },
     edit: {
       en: "Edit",
@@ -59531,17 +60773,21 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Modifica",
       pt: "Editar",
       sv: "Redigera",
-      ru: "\u0420\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C"
+      ru: "\u0420\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C",
+      pl: "Edytuj",
+      zh: "\u7F16\u8F91"
     },
     bulk_edit: {
-      // as in the last.fm "Bulk Edit" open-source extension
+      // as in the Last.fm "Bulk Edit" open-source extension
       en: "Bulk edit",
       de: "Mehrere bearbeiten",
       es: "Editar en masa",
       it: "Modifica in massa",
       pt: "Edi\xE7\xE3o em massa",
       sv: "Bulkredigera",
-      ru: "\u041C\u0430\u0441\u0441\u043E\u0432\u043E\u0435 \u0440\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435"
+      ru: "\u041C\u0430\u0441\u0441\u043E\u0432\u043E\u0435 \u0440\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435",
+      pl: "Edytuj masowo",
+      zh: "\u6279\u91CF\u7F16\u8F91"
     },
     scrobble: {
       en: "Scrobble",
@@ -59550,13 +60796,18 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Scrobbling",
       pt: "Scrobble",
       sv: "Skrobbla",
-      ru: "\u0421\u043A\u0440\u043E\u0431\u0431\u043B"
+      ru: "\u0421\u043A\u0440\u043E\u0431\u0431\u043B",
+      pl: "Scrobble",
+      zh: "Scrobble"
     },
     scrobble_value: {
       en: "Scrobble {v}",
-      es: "Hacer {v} scrobblings",
+      de: "{v} scrobbeln",
+      es: "Hacer scrobbling al {v}",
       ru: "\u0421\u043A\u0440\u043E\u0431\u0431\u043B\u0438\u0442\u044C {v}",
-      pt: "Scrobble {v}"
+      pt: "Scrobble {v}",
+      pl: "Scrobble {v}",
+      zh: "Scrobble {v}"
     },
     average: {
       // scrobble average
@@ -59566,7 +60817,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Media",
       pt: "M\xE9dia",
       sv: "Genomsnitt",
-      ru: "\u0421\u0440\u0435\u0434\u043D\u0435\u0435"
+      ru: "\u0421\u0440\u0435\u0434\u043D\u0435\u0435",
+      pl: "\u015Arednio",
+      zh: "\u5E73\u5747"
     },
     scrobbles: {
       en: "Scrobbles",
@@ -59576,7 +60829,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Scrobbles",
       ja: "Scrobble",
       sv: "Skrobblingar",
-      ru: "\u041F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u044F"
+      ru: "\u041F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u044F",
+      pl: "Scrobble",
+      zh: "Scrobble"
     },
     count_plays: {
       // e.g. 20 plays in a music grid
@@ -59588,8 +60843,14 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "{c} scrobbling",
       pt: "{c} scrobbles",
       sv: "{c} skrobblingar",
-      ru: "{c} \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u0439"
+      ru: "{c} \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u0439",
       // problem with rus. language using different versions of same word for different number -- craw
+      pl: "{c} odtworze\u0144",
+      zh: "{c} \u6B21\u64AD\u653E"
+    },
+    count_tracks: {
+      // tracks on an album
+      en: "{c} tracks"
     },
     count_scrobbles: {
       en: "{c} scrobbles",
@@ -59598,11 +60859,13 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "{c} scrobbling",
       pt: "{c} scrobbles",
       sv: "{c} skrobblingar",
-      ru: "{c} \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u043E\u0432"
+      ru: "{c} \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u043E\u0432",
       // same here -- craw
+      pl: "{c} scrobbli",
+      zh: "{c} \u6B21 Scrobble"
     },
     listens: {
-      // base on native last.fm ui
+      // base on native Last.fm ui
       en: "listens",
       de: "Scrobbles",
       es: "scrobblings",
@@ -59610,6 +60873,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "scrobbles",
       sv: "skrobblingar",
       ru: "\u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u044F",
+      zh: "\u97F3\u4E50\u8BB0\u5F55",
       count: {
         en: "{c} listens",
         de: "{c} Scrobbles",
@@ -59617,8 +60881,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         it: "{c} scrobbling",
         pt: "{c} scrobbles",
         sv: "{c} skrobblingar",
-        ru: "{c} \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u0439"
+        ru: "{c} \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u0439",
         // and here -- craw
+        zh: "{c} \u6B21\u64AD\u653E"
       }
     },
     new_scrobble: {
@@ -59628,7 +60893,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Nuovo scrobbling",
       pt: "Novo scrobble",
       sv: "Ny skrobbel",
-      ru: "\u041D\u043E\u0432\u044B\u0439 \u0441\u043A\u0440\u043E\u0431\u0431\u043B"
+      ru: "\u041D\u043E\u0432\u044B\u0439 \u0441\u043A\u0440\u043E\u0431\u0431\u043B",
+      pl: "Nowe scrobble",
+      zh: "\u65B0\u5EFA Scrobble"
     },
     scrobble_failed: {
       en: "Scrobble could not be sent",
@@ -59637,18 +60904,22 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Non \xE8 stato possibile inviare lo scrobbling",
       de: "Scrobble konnte nicht gesendet werden",
       sv: "Skrobblingen kunde inte skickas",
-      ru: "\u041D\u0435 \u0443\u0434\u0430\u043B\u043E\u0441\u044C \u043E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u044C \u0441\u043A\u0440\u043E\u0431\u0431\u043B"
+      ru: "\u041D\u0435 \u0443\u0434\u0430\u043B\u043E\u0441\u044C \u043E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u044C \u0441\u043A\u0440\u043E\u0431\u0431\u043B",
+      pl: "Nie uda\u0142o si\u0119 wys\u0142a\u0107 scrobbla",
+      zh: "\u65E0\u6CD5\u53D1\u9001 Scrobble"
     },
     scrobble_error_codes: {
-      // https://www.last.fm/api/show/track.scrobble
+      // https://www.Last.fm/api/show/track.scrobble
       1: {
         en: "Artist name was ignored",
         de: "K\xFCnstlername wurde ignoriert",
         es: "El nombre del artista fue ignorado",
-        it: "Il nome dell'artista \xE8 stato ignorato",
+        it: "Il nome dell\u2019artista \xE8 stato ignorato",
         pt: "O nome do(a) artista foi ignorado",
         sv: "Artistnamnet var ignorerad",
-        ru: "\u0418\u043C\u044F \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044F \u043F\u0440\u043E\u0438\u0433\u043D\u043E\u0440\u0438\u0440\u043E\u0432\u0430\u043D\u043E"
+        ru: "\u0418\u043C\u044F \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044F \u043F\u0440\u043E\u0438\u0433\u043D\u043E\u0440\u0438\u0440\u043E\u0432\u0430\u043D\u043E",
+        pl: "Imie artysty zignorowane",
+        zh: "\u827A\u672F\u5BB6\u540D\u79F0\u88AB\u5FFD\u7565"
       },
       2: {
         en: "Track name was ignored",
@@ -59657,7 +60928,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         it: "Il nome del brano \xE8 stato ignorato",
         pt: "O nome da faixa foi ignorado",
         sv: "L\xE5ttiteln var ignorerad",
-        ru: "\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u0442\u0440\u0435\u043A\u0430 \u043F\u0440\u043E\u0438\u0433\u043D\u043E\u0440\u0438\u0440\u043E\u0432\u0430\u043D\u043E"
+        ru: "\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u0442\u0440\u0435\u043A\u0430 \u043F\u0440\u043E\u0438\u0433\u043D\u043E\u0440\u0438\u0440\u043E\u0432\u0430\u043D\u043E",
+        pl: "Tytu\u0142 utworu zignorowany",
+        zh: "\u5355\u66F2\u540D\u79F0\u88AB\u5FFD\u7565"
       },
       3: {
         en: "Timestamp is too old",
@@ -59666,7 +60939,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         it: "La data impostata \xE8 troppo indietro nel tempo",
         pt: "O timestamp \xE9 muito antigo",
         sv: "Tidsst\xE4mpeln \xE4r f\xF6r gammal",
-        ru: "\u0412\u0440\u0435\u043C\u0435\u043D\u043D\u0430\u044F \u043C\u0435\u0442\u043A\u0430 \u0441\u043B\u0438\u0448\u043A\u043E\u043C \u0441\u0442\u0430\u0440\u0430\u044F"
+        ru: "\u0412\u0440\u0435\u043C\u0435\u043D\u043D\u0430\u044F \u043C\u0435\u0442\u043A\u0430 \u0441\u043B\u0438\u0448\u043A\u043E\u043C \u0441\u0442\u0430\u0440\u0430\u044F",
+        pl: "Timestamp jest za stary",
+        zh: "\u65F6\u95F4\u6233\u8FC7\u65E9"
       },
       4: {
         en: "Timestamp is too new",
@@ -59675,15 +60950,20 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         it: "La data impostata \xE8 troppo avanti nel tempo",
         pt: "O timestamp \xE9 muito novo",
         sv: "Tidsst\xE4mpeln \xE4r f\xF6r ny",
-        ru: "\u0412\u0440\u0435\u043C\u0435\u043D\u043D\u0430\u044F \u043C\u0435\u0442\u043A\u0430 \u0441\u043B\u0438\u0448\u043A\u043E\u043C \u043D\u043E\u0432\u0430\u044F"
+        ru: "\u0412\u0440\u0435\u043C\u0435\u043D\u043D\u0430\u044F \u043C\u0435\u0442\u043A\u0430 \u0441\u043B\u0438\u0448\u043A\u043E\u043C \u043D\u043E\u0432\u0430\u044F",
+        pl: "Timestamp jest zbyt nowy",
+        zh: "\u65F6\u95F4\u6233\u8FC7\u665A"
       },
       5: {
         en: "Daily scrobble limit exceeded",
+        de: "T\xE4gliches Scrobble-Limit \xFCberschritten",
         es: "L\xEDmite diario de scrobblings excedido",
         it: "Limite giornaliero di scrobbling superato",
         pt: "Limite di\xE1rio de scrobbles excedido",
         sv: "Max dagliga skrobblingar har n\xE5tts",
-        ru: "\u041F\u0440\u0435\u0432\u044B\u0448\u0435\u043D \u0434\u043D\u0435\u0432\u043D\u043E\u0439 \u043B\u0438\u043C\u0438\u0442 \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u043E\u0432"
+        ru: "\u041F\u0440\u0435\u0432\u044B\u0448\u0435\u043D \u0434\u043D\u0435\u0432\u043D\u043E\u0439 \u043B\u0438\u043C\u0438\u0442 \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u043E\u0432",
+        pl: "Przekroczono dzienny limit scrobbli",
+        zh: "\u5DF2\u8D85\u51FA\u6BCF\u65E5 Scrobble \u4E0A\u9650"
       }
     },
     artist: {
@@ -59693,7 +60973,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Artista",
       pt: "Artista",
       sv: "Artist",
-      ru: "\u0418\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C"
+      ru: "\u0418\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C",
+      pl: "Artysta",
+      zh: "\u827A\u672F\u5BB6"
     },
     artists: {
       en: "Artists",
@@ -59703,16 +60985,20 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Artistas",
       ja: "\u30A2\u30FC\u30C6\u30A3\u30B9\u30C8",
       sv: "Artister",
-      ru: "\u0418\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u0438"
+      ru: "\u0418\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u0438",
+      pl: "Arty\u015Bci",
+      zh: "\u827A\u672F\u5BB6"
     },
     artists_tooltip: {
       en: "Multiple artists are grouped into this profile",
-      de: "Mehrere K\xFCnstler sind auf diesem Profil gruppiert",
+      de: "Mehrere K\xFCnstler:innen sind unter diesem Profil gruppiert",
       es: "M\xFAltiples artistas est\xE1n agrupados en este perfil",
       it: "Pi\xF9 artisti sono raggruppati in questo profilo",
       pt: "M\xFAltiplos artistas est\xE3o agrupados neste perfil",
       sv: "Flera artister delar denna profil",
-      ru: "\u0412 \u044D\u0442\u043E\u043C \u043F\u0440\u043E\u0444\u0438\u043B\u0435 \u0441\u0433\u0440\u0443\u043F\u043F\u0438\u0440\u043E\u0432\u0430\u043D\u044B \u043D\u0435\u0441\u043A\u043E\u043B\u044C\u043A\u043E \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u0435\u0439"
+      ru: "\u0412 \u044D\u0442\u043E\u043C \u043F\u0440\u043E\u0444\u0438\u043B\u0435 \u0441\u0433\u0440\u0443\u043F\u043F\u0438\u0440\u043E\u0432\u0430\u043D\u044B \u043D\u0435\u0441\u043A\u043E\u043B\u044C\u043A\u043E \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u0435\u0439",
+      pl: "Paru artyst\xF3w ugrupowano na ten profil",
+      zh: "\u8BE5\u8D44\u6599\u9875\u6C47\u603B\u4E86\u591A\u4F4D\u827A\u672F\u5BB6\u7684\u4FE1\u606F"
     },
     album: {
       en: "Album",
@@ -59721,7 +61007,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Album",
       pt: "\xC1lbum",
       sv: "Album",
-      ru: "\u0410\u043B\u044C\u0431\u043E\u043C"
+      ru: "\u0410\u043B\u044C\u0431\u043E\u043C",
+      pl: "Album",
+      zh: "\u4E13\u8F91"
     },
     albums: {
       en: "Albums",
@@ -59731,33 +61019,43 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "\xC1lbuns",
       ja: "\u30A2\u30EB\u30D0\u30E0",
       sv: "Album",
-      ru: "\u0410\u043B\u044C\u0431\u043E\u043C\u044B"
+      ru: "\u0410\u043B\u044C\u0431\u043E\u043C\u044B",
+      pl: "Albumy",
+      zh: "\u4E13\u8F91"
     },
     albums_and_tracks: {
       en: "Albums and tracks",
+      de: "Alben und Titel",
       es: "\xC1lbumes y temas",
       it: "Album e brani",
       pt: "\xC1lbuns e faixas",
       sv: "Album och l\xE5tar",
-      ru: "\u0410\u043B\u044C\u0431\u043E\u043C\u044B \u0438 \u0442\u0440\u0435\u043A\u0438"
+      ru: "\u0410\u043B\u044C\u0431\u043E\u043C\u044B \u0438 \u0442\u0440\u0435\u043A\u0438",
+      pl: "Albumy i utwory",
+      zh: "\u4E13\u8F91\u4E0E\u5355\u66F2"
     },
     album_artist: {
       en: "Album Artist",
       de: "Albumk\xFCnstler",
       es: "Artista del \xE1lbum",
-      it: "Artista dell'album",
+      it: "Artista dell\u2019album",
       pt: "Artista do \xE1lbum",
       sv: "Albumartist",
-      ru: "\u0418\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C \u0430\u043B\u044C\u0431\u043E\u043C\u0430"
+      ru: "\u0418\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C \u0430\u043B\u044C\u0431\u043E\u043C\u0430",
+      pl: "Arty\u015Bci albumu",
+      zh: "\u4E13\u8F91\u827A\u672F\u5BB6"
     },
     single: {
       // release type
       en: "Single",
+      de: "Single",
       es: "Sencillo",
       it: "Singolo",
       pt: "Single",
       sv: "Singel",
-      ru: "\u0421\u0438\u043D\u0433\u043B"
+      ru: "\u0421\u0438\u043D\u0433\u043B",
+      pl: "Singiel",
+      zh: "\u5355\u66F2"
     },
     track: {
       en: "Track",
@@ -59766,7 +61064,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Brano",
       pt: "Faixa",
       sv: "L\xE5t",
-      ru: "\u0422\u0440\u0435\u043A"
+      ru: "\u0422\u0440\u0435\u043A",
+      pl: "Utw\xF3r",
+      zh: "\u5355\u66F2"
     },
     tracks: {
       en: "Tracks",
@@ -59776,7 +61076,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Faixas",
       ja: "\u30C8\u30E9\u30C3\u30AF",
       sv: "L\xE5tar",
-      ru: "\u0422\u0440\u0435\u043A\u0438"
+      ru: "\u0422\u0440\u0435\u043A\u0438",
+      pl: "Utwory",
+      zh: "\u5355\u66F2"
     },
     appearance: {
       en: "Appearance",
@@ -59785,7 +61087,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Aspetto",
       pt: "Apar\xEAncia",
       sv: "Uts\xE9ende",
-      ru: "\u0412\u043D\u0435\u0448\u043D\u0438\u0439 \u0432\u0438\u0434"
+      ru: "\u0412\u043D\u0435\u0448\u043D\u0438\u0439 \u0432\u0438\u0434",
+      pl: "Wygl\u0105d",
+      zh: "\u5916\u89C2"
     },
     visual: {
       en: "Visual",
@@ -59794,16 +61098,20 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Visualizzazione",
       pt: "Visual",
       sv: "Visuellt",
-      ru: "\u041E\u0444\u043E\u0440\u043C\u043B\u0435\u043D\u0438\u0435"
+      ru: "\u041E\u0444\u043E\u0440\u043C\u043B\u0435\u043D\u0438\u0435",
+      pl: "Wizualizacja",
+      zh: "\u89C6\u89C9"
     },
     theme: {
       en: "Theme",
       de: "Farbschema",
-      es: "Tema",
+      es: "Aspecto",
       it: "Tema",
       pt: "Tema",
       sv: "Tema",
-      ru: "\u0422\u0435\u043C\u0430"
+      ru: "\u0422\u0435\u043C\u0430",
+      pl: "Motyw",
+      zh: "\u4E3B\u9898"
     },
     theme_day: {
       name: {
@@ -59813,7 +61121,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         it: "Giorno",
         pt: "Dia",
         sv: "Dag",
-        ru: "\u0421\u0432\u0435\u0442\u043B\u0430\u044F"
+        ru: "\u0421\u0432\u0435\u0442\u043B\u0430\u044F",
+        pl: "Dzie\u0144",
+        zh: "\u6D45\u8272\u6A21\u5F0F"
       },
       body: {
         en: "When your system reports light theme",
@@ -59822,7 +61132,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         it: "Quando il tuo sistema indica il tema chiaro",
         pt: "Quando o seu sistema indica tema claro",
         sv: "N\xE4r ditt system rapporterar ett ljust tema",
-        ru: "\u041A\u043E\u0433\u0434\u0430 \u0432 \u0441\u0438\u0441\u0442\u0435\u043C\u0435 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0435\u0442\u0441\u044F \u0441\u0432\u0435\u0442\u043B\u0430\u044F \u0442\u0435\u043C\u0430"
+        ru: "\u041A\u043E\u0433\u0434\u0430 \u0432 \u0441\u0438\u0441\u0442\u0435\u043C\u0435 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0435\u0442\u0441\u044F \u0441\u0432\u0435\u0442\u043B\u0430\u044F \u0442\u0435\u043C\u0430",
+        pl: "Jak w systemie jest wybrany jasny motyw",
+        zh: "\u5F53\u7CFB\u7EDF\u5904\u4E8E\u6D45\u8272\u4E3B\u9898\u65F6\u5E94\u7528"
       }
     },
     theme_night: {
@@ -59833,7 +61145,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         it: "Notte",
         pt: "Noite",
         sv: "Natt",
-        ru: "\u041D\u043E\u0447\u043D\u0430\u044F"
+        ru: "\u041D\u043E\u0447\u043D\u0430\u044F",
+        pl: "Noc",
+        zh: "\u6DF1\u8272\u6A21\u5F0F"
       },
       body: {
         en: "When your system reports dark theme",
@@ -59842,7 +61156,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         it: "Quando il tuo sistema indica il tema scuro",
         pt: "Quando o seu sistema indica tema escuro",
         sv: "N\xE4r ditt system rapporterar ett m\xF6rk tema",
-        ru: "\u041A\u043E\u0433\u0434\u0430 \u0432 \u0441\u0438\u0441\u0442\u0435\u043C\u0435 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0435\u0442\u0441\u044F \u0442\u0435\u043C\u043D\u0430\u044F \u0442\u0435\u043C\u0430"
+        ru: "\u041A\u043E\u0433\u0434\u0430 \u0432 \u0441\u0438\u0441\u0442\u0435\u043C\u0435 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0435\u0442\u0441\u044F \u0442\u0435\u043C\u043D\u0430\u044F \u0442\u0435\u043C\u0430",
+        pl: "Jak w systemie jest wybran ciemny motyw",
+        zh: "\u5F53\u7CFB\u7EDF\u5904\u4E8E\u6DF1\u8272\u4E3B\u9898\u65F6\u5E94\u7528"
       }
     },
     theme_schedule: {
@@ -59852,7 +61168,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Seleziona quali impostazioni del tema applicare in base al tuo tema di sistema.",
       pt: "Escolha qual prefer\xEAncia de tema aplicar com base no tema do seu sistema.",
       sv: "V\xE4lj f\xF6redraget tema att till\xE4mpa utg\xE5ende fr\xE5n ditt systemtema.",
-      ru: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u0442\u0435\u043C\u0443, \u043A\u043E\u0442\u043E\u0440\u0430\u044F \u0431\u0443\u0434\u0435\u0442 \u043F\u0440\u0438\u043C\u0435\u043D\u044F\u0442\u044C\u0441\u044F \u0432 \u0437\u0430\u0432\u0438\u0441\u0438\u043C\u043E\u0441\u0442\u0438 \u043E\u0442 \u0441\u0438\u0441\u0442\u0435\u043C\u043D\u043E\u0439 \u0442\u0435\u043C\u044B."
+      ru: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u0442\u0435\u043C\u0443, \u043A\u043E\u0442\u043E\u0440\u0430\u044F \u0431\u0443\u0434\u0435\u0442 \u043F\u0440\u0438\u043C\u0435\u043D\u044F\u0442\u044C\u0441\u044F \u0432 \u0437\u0430\u0432\u0438\u0441\u0438\u043C\u043E\u0441\u0442\u0438 \u043E\u0442 \u0441\u0438\u0441\u0442\u0435\u043C\u043D\u043E\u0439 \u0442\u0435\u043C\u044B.",
+      pl: "Wybierz jaki motyw ustawi\u0107 bazuj\u0105c na motywie systemu",
+      zh: "\u6839\u636E\u7CFB\u7EDF\u4E3B\u9898\u504F\u597D\u9009\u62E9\u8981\u5E94\u7528\u7684\u4E3B\u9898\u3002"
     },
     themes: {
       name: {
@@ -59862,7 +61180,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         it: "Temi",
         pt: "Temas",
         sv: "Teman",
-        ru: "\u0422\u0435\u043C\u044B"
+        ru: "\u0422\u0435\u043C\u044B",
+        pl: "Motywy",
+        zh: "\u4E3B\u9898"
       },
       light: {
         en: "Light",
@@ -59871,7 +61191,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         it: "Chiaro",
         pt: "Claro",
         sv: "Ljus",
-        ru: "\u0421\u0432\u0435\u0442\u043B\u0430\u044F"
+        ru: "\u0421\u0432\u0435\u0442\u043B\u0430\u044F",
+        pl: "Jasny",
+        zh: "\u6D45\u8272"
       },
       ink: {
         en: "Ink",
@@ -59880,7 +61202,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         it: "Inchiostro",
         pt: "Tinta",
         sv: "Bl\xE4ck",
-        ru: "\u0427\u0435\u0440\u043D\u0438\u043B\u0430"
+        ru: "\u0427\u0435\u0440\u043D\u0438\u043B\u0430",
+        pl: "Tusz",
+        zh: "\u58A8\u8272"
       },
       dark: {
         en: "Ash",
@@ -59889,8 +61213,10 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         it: "Cenere",
         pt: "Cinza",
         sv: "Aska",
-        ru: "\u041F\u0435\u043F\u0435\u043B"
+        ru: "\u041F\u0435\u043F\u0435\u043B",
         // straight translate of word "ash" -- craw
+        pl: "Kurz",
+        zh: "\u70DF\u7070"
       },
       darker: {
         en: "Dark",
@@ -59899,7 +61225,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         it: "Scuro",
         pt: "Escuro",
         sv: "M\xF6rk",
-        ru: "\u0422\u0435\u043C\u043D\u0430\u044F"
+        ru: "\u0422\u0435\u043C\u043D\u0430\u044F",
+        pl: "Ciemny",
+        zh: "\u6DF1\u8272"
       },
       oled: {
         en: "Void",
@@ -59908,7 +61236,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         it: "Vuoto",
         pt: "Vazio",
         sv: "Tomhet",
-        ru: "\u041F\u0443\u0441\u0442\u043E\u0442\u0430"
+        ru: "\u041F\u0443\u0441\u0442\u043E\u0442\u0430",
+        pl: "Pr\xF3\u017Cny",
+        zh: "\u865A\u7A7A"
       }
     },
     colours: {
@@ -59918,7 +61248,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Colori",
       pt: "Cores",
       sv: "F\xE4rger",
-      ru: "\u0426\u0432\u0435\u0442\u0430"
+      ru: "\u0426\u0432\u0435\u0442\u0430",
+      pl: "Kolory",
+      zh: "\u989C\u8272"
     },
     adaptive: {
       en: "Adaptive",
@@ -59927,17 +61259,21 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Adattivo",
       pt: "Adaptativo",
       sv: "Adaptiv",
-      ru: "\u0410\u0434\u0430\u043F\u0442\u0438\u0432\u043D\u044B\u0439"
+      ru: "\u0410\u0434\u0430\u043F\u0442\u0438\u0432\u043D\u044B\u0439",
+      pl: "Adaptacyjny",
+      zh: "\u81EA\u9002\u5E94"
     },
     adaptive_tip: {
-      // the space on the end is intentional
+      // the space on the end is intentional, its followed by the translation change_schedule right after
       en: "Your theme preference will be either {day} or {night}, based on your system. ",
       de: "Dein bevorzugtes Farbschema wird entweder {day} oder {night} sein, basierend auf deinem System. ",
       es: "El aspecto elegido ser\xE1 {day} o {night}, bas\xE1ndose en tu dispositivo. ",
       it: "Il tuo tema selezionato sar\xE0 {day} o {night}, in base al tuo tema di sistema. ",
       pt: "Sua prefer\xEAncia de tema ser\xE1 {day} ou {night}, com base no seu sistema. ",
       sv: "Ditt f\xF6redragna tema blir antigen {day} eller {night}, beroende p\xE5 ditt system. ",
-      ru: "\u041F\u0440\u0435\u0434\u043F\u043E\u0447\u0442\u0438\u0442\u0435\u043B\u044C\u043D\u0430\u044F \u0442\u0435\u043C\u0430 \u0431\u0443\u0434\u0435\u0442 {day} \u0438\u043B\u0438 {night} \u0432 \u0437\u0430\u0432\u0438\u0441\u0438\u043C\u043E\u0441\u0442\u0438 \u043E\u0442 \u043D\u0430\u0441\u0442\u0440\u043E\u0435\u043A \u0432\u0430\u0448\u0435\u0439 \u0441\u0438\u0441\u0442\u0435\u043C\u044B. "
+      ru: "\u041F\u0440\u0435\u0434\u043F\u043E\u0447\u0442\u0438\u0442\u0435\u043B\u044C\u043D\u0430\u044F \u0442\u0435\u043C\u0430 \u0431\u0443\u0434\u0435\u0442 {day} \u0438\u043B\u0438 {night} \u0432 \u0437\u0430\u0432\u0438\u0441\u0438\u043C\u043E\u0441\u0442\u0438 \u043E\u0442 \u043D\u0430\u0441\u0442\u0440\u043E\u0435\u043A \u0432\u0430\u0448\u0435\u0439 \u0441\u0438\u0441\u0442\u0435\u043C\u044B. ",
+      pl: "Tw\xF3j motyw ustawi si\u0119 jako {day} albo {night}, bazuj\u0105c na ustawieniach twojego systemu. ",
+      zh: "\u5C06\u6839\u636E\u7CFB\u7EDF\u8BBE\u7F6E\uFF0C\u4E3A\u60A8\u5E94\u7528 {day} \u6216 {night}\u3002 "
     },
     change_schedule: {
       en: "Change schedule",
@@ -59946,26 +61282,34 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Cambia orari",
       pt: "Alterar cronograma",
       sv: "\xC4ndra schema",
-      ru: "\u0418\u0437\u043C\u0435\u043D\u0438\u0442\u044C \u0440\u0430\u0441\u043F\u0438\u0441\u0430\u043D\u0438\u0435"
+      ru: "\u0418\u0437\u043C\u0435\u043D\u0438\u0442\u044C \u0440\u0430\u0441\u043F\u0438\u0441\u0430\u043D\u0438\u0435",
+      pl: "Zmie\u0144 harmonogram",
+      zh: "\u66F4\u6539\u8BA1\u5212"
     },
     change_my_colour_when: {
       name: {
+        // this is followed by options which describe contexts the user
+        // may want their colour to be changed
         en: "Use a context-based accent colour when",
         de: "Kontextbasierte Akzentfarbe verwenden, wenn",
         es: "Usar un color de acento basado en contexto al",
         it: "Usa un colore di accento basato sul contesto quando",
         pt: "Usar uma cor de destaque baseada no contexto quando",
         sv: "Anv\xE4nd kontextbaserad accentf\xE4rg n\xE4r",
-        ru: "\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u044C \u043A\u043E\u043D\u0442\u0435\u043A\u0441\u0442\u043D\u044B\u0439 \u0430\u043A\u0446\u0435\u043D\u0442\u043D\u044B\u0439 \u0446\u0432\u0435\u0442, \u043A\u043E\u0433\u0434\u0430"
+        ru: "\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u044C \u043A\u043E\u043D\u0442\u0435\u043A\u0441\u0442\u043D\u044B\u0439 \u0430\u043A\u0446\u0435\u043D\u0442\u043D\u044B\u0439 \u0446\u0432\u0435\u0442, \u043A\u043E\u0433\u0434\u0430",
+        pl: "U\u017Cywaj akcentu bazuj\u0105cego na kontek\u015Bcie kiedy",
+        zh: "\u5728\u4EE5\u4E0B\u60C5\u51B5\u4F7F\u7528\u81EA\u9002\u5E94\u5F3A\u8C03\u8272"
       },
       body: {
         en: "Temporarily override your selected accent to match album art",
         de: "\xDCberschreibe vor\xFCbergehend deine ausgew\xE4hlte Akzentfarbe, damit sie zum Albumcover passt",
         es: "Substituye temporalmente el color de acento seleccionado para combinar con la car\xE1tula del \xE1lbum",
-        it: "Sovrascrivi temporaneamente il tuo colore di accento selezionato per abbinarsi con la copertina dell'album",
+        it: "Sovrascrivi temporaneamente il tuo colore di accento selezionato per abbinarsi con la copertina dell\u2019album",
         pt: "Substituir temporariamente sua cor de destaque selecionada para combinar com a arte do \xE1lbum",
         sv: "\xC4ndra tillf\xE4lligt din valda accentf\xE4rg f\xF6r att matcha albumkonsten",
-        ru: "\u0412\u0440\u0435\u043C\u0435\u043D\u043D\u043E \u0437\u0430\u043C\u0435\u043D\u044F\u0442\u044C \u0432\u044B\u0431\u0440\u0430\u043D\u043D\u044B\u0439 \u0430\u043A\u0446\u0435\u043D\u0442\u043D\u044B\u0439 \u0446\u0432\u0435\u0442 \u043D\u0430 \u0446\u0432\u0435\u0442 \u043E\u0431\u043B\u043E\u0436\u043A\u0438 \u0430\u043B\u044C\u0431\u043E\u043C\u0430"
+        ru: "\u0412\u0440\u0435\u043C\u0435\u043D\u043D\u043E \u0437\u0430\u043C\u0435\u043D\u044F\u0442\u044C \u0432\u044B\u0431\u0440\u0430\u043D\u043D\u044B\u0439 \u0430\u043A\u0446\u0435\u043D\u0442\u043D\u044B\u0439 \u0446\u0432\u0435\u0442 \u043D\u0430 \u0446\u0432\u0435\u0442 \u043E\u0431\u043B\u043E\u0436\u043A\u0438 \u0430\u043B\u044C\u0431\u043E\u043C\u0430",
+        pl: "Tymczasowo nadpisz tw\xF3j wybrany akcent \u017Ceby dopasowa\u0107 do ok\u0142adki albumu",
+        zh: "\u6839\u636E\u4E13\u8F91\u5C01\u9762\u8272\u5F69\u4E34\u65F6\u66FF\u6362\u4F60\u9009\u62E9\u7684\u5F3A\u8C03\u8272"
       }
     },
     hue_from_album: {
@@ -59976,7 +61320,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Navigo tra le pagine degli album",
       pt: "Navegando pelas p\xE1ginas de \xE1lbuns",
       sv: "Du \xE4r p\xE5 albumsidor",
-      ru: "\u041F\u0440\u043E\u0441\u043C\u0430\u0442\u0440\u0438\u0432\u0430\u044E\u0442\u0441\u044F \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u044B \u0430\u043B\u044C\u0431\u043E\u043C\u043E\u0432"
+      ru: "\u041F\u0440\u043E\u0441\u043C\u0430\u0442\u0440\u0438\u0432\u0430\u044E\u0442\u0441\u044F \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u044B \u0430\u043B\u044C\u0431\u043E\u043C\u043E\u0432",
+      pl: "Przegl\u0105dania album\xF3w",
+      zh: "\u6D4F\u89C8\u4E13\u8F91\u9875\u9762\u65F6"
     },
     colourful_active: {
       // a sub-option for change_my_colour_when
@@ -59986,7 +61332,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Sto facendo lo scrobbling di un brano",
       pt: "Scrobblando uma faixa ativamente",
       sv: "Aktivt skrobblar en l\xE5t",
-      ru: "\u041F\u0440\u043E\u0438\u0441\u0445\u043E\u0434\u0438\u0442 \u0430\u043A\u0442\u0438\u0432\u043D\u044B\u0439 \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u0438\u043D\u0433 \u0442\u0440\u0435\u043A\u0430"
+      ru: "\u041F\u0440\u043E\u0438\u0441\u0445\u043E\u0434\u0438\u0442 \u0430\u043A\u0442\u0438\u0432\u043D\u044B\u0439 \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u0438\u043D\u0433 \u0442\u0440\u0435\u043A\u0430",
+      pl: "Aktualnie scrobbluje utw\xF3r",
+      zh: "\u6B63\u5728 Scrobble \u5355\u66F2\u65F6"
     },
     colourful_all: {
       // a sub-option for change_my_colour_when
@@ -59996,7 +61344,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Sto visualizzando un brano",
       pt: "Visualizando qualquer faixa",
       sv: "Visar en l\xE5t",
-      ru: "\u041F\u0440\u043E\u0441\u043C\u0430\u0442\u0440\u0438\u0432\u0430\u0435\u0442\u0441\u044F \u043B\u044E\u0431\u043E\u0439 \u0442\u0440\u0435\u043A"
+      ru: "\u041F\u0440\u043E\u0441\u043C\u0430\u0442\u0440\u0438\u0432\u0430\u0435\u0442\u0441\u044F \u043B\u044E\u0431\u043E\u0439 \u0442\u0440\u0435\u043A",
+      pl: "Ogl\u0105dania utworu",
+      zh: "\u67E5\u770B\u4EFB\u4F55\u5355\u66F2\u65F6"
     },
     configure: {
       en: "Configure",
@@ -60005,7 +61355,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Configura",
       pt: "Configurar",
       sv: "Konfigurera",
-      ru: "\u041D\u0430\u0441\u0442\u0440\u043E\u0438\u0442\u044C"
+      ru: "\u041D\u0430\u0441\u0442\u0440\u043E\u0438\u0442\u044C",
+      pl: "Konfiguruj",
+      zh: "\u914D\u7F6E"
     },
     links: {
       en: "Links",
@@ -60014,7 +61366,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Collegamenti",
       pt: "Links",
       sv: "L\xE4nkar",
-      ru: "\u0421\u0441\u044B\u043B\u043A\u0438"
+      ru: "\u0421\u0441\u044B\u043B\u043A\u0438",
+      pl: "Linki",
+      zh: "\u94FE\u63A5"
     },
     event: {
       en: "Event",
@@ -60023,7 +61377,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Evento",
       pt: "Evento",
       sv: "Evenemang",
-      ru: "\u0421\u043E\u0431\u044B\u0442\u0438\u0435"
+      ru: "\u0421\u043E\u0431\u044B\u0442\u0438\u0435",
+      pl: "Wydarzenie",
+      zh: "\u6D3B\u52A8"
     },
     events: {
       en: "Events",
@@ -60033,16 +61389,21 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Eventos",
       ja: "\u30A4\u30D9\u30F3\u30C8",
       sv: "Evenemang",
-      ru: "\u0421\u043E\u0431\u044B\u0442\u0438\u044F"
+      ru: "\u0421\u043E\u0431\u044B\u0442\u0438\u044F",
+      pl: "Wydarzenia",
+      zh: "\u6D3B\u52A8"
     },
     lineup: {
+      // for an event
       en: "Line-up",
       de: "Line-up",
       es: "Cartel",
       it: "Programmazione",
       pt: "Programa\xE7\xE3o",
       sv: "Spelschema",
-      ru: "\u0423\u0447\u0430\u0441\u0442\u043D\u0438\u043A\u0438"
+      ru: "\u0423\u0447\u0430\u0441\u0442\u043D\u0438\u043A\u0438",
+      pl: "Line-up",
+      zh: "\u9635\u5BB9"
     },
     attendance: {
       en: "Attendance",
@@ -60051,16 +61412,21 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Partecipazione",
       pt: "Comparecimento",
       sv: "N\xE4rvarande",
-      ru: "\u041F\u043E\u0441\u0435\u0449\u0430\u0435\u043C\u043E\u0441\u0442\u044C"
+      ru: "\u041F\u043E\u0441\u0435\u0449\u0430\u0435\u043C\u043E\u0441\u0442\u044C",
+      pl: "Udzia\u0142",
+      zh: "\u53C2\u4E0E\u60C5\u51B5"
     },
     top_badge: {
+      // a profile's top badge
       en: "Top Badge",
       de: "Top-Abzeichen",
       es: "Emblema superior",
       it: "Distintivo superiore",
       pt: "Emblema superior",
       sv: "Toppemblem",
-      ru: "\u0422\u043E\u043F \u0437\u043D\u0430\u0447\u043E\u043A"
+      ru: "\u0422\u043E\u043F \u0437\u043D\u0430\u0447\u043E\u043A",
+      pl: "Najlepsza odznaka",
+      zh: "\u81F3\u81FB\u5FBD\u7AE0"
     },
     general: {
       en: "General",
@@ -60069,7 +61435,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Generale",
       pt: "Geral",
       sv: "Generellt",
-      ru: "\u041E\u0431\u0449\u0438\u0435"
+      ru: "\u041E\u0431\u0449\u0438\u0435",
+      zh: "\u901A\u7528"
     },
     interface: {
       en: "Interface",
@@ -60078,7 +61445,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Interfaccia",
       pt: "Interface",
       sv: "Interface",
-      ru: "\u0418\u043D\u0442\u0435\u0440\u0444\u0435\u0439\u0441"
+      ru: "\u0418\u043D\u0442\u0435\u0440\u0444\u0435\u0439\u0441",
+      pl: "Interfejs",
+      zh: "\u754C\u9762"
     },
     music: {
       en: "Music",
@@ -60088,15 +61457,20 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "M\xFAsica",
       ja: "\u97F3\u697D",
       sv: "Musik",
-      ru: "\u041C\u0443\u0437\u044B\u043A\u0430"
+      ru: "\u041C\u0443\u0437\u044B\u043A\u0430",
+      pl: "Muzyka",
+      zh: "\u97F3\u4E50"
     },
     smart_music_titles: {
       en: "Smart music titles",
+      de: "Intelligente Musiktitel",
       es: "T\xEDtulos inteligentes de m\xFAsica",
       it: "Titoli intelligenti per la musica",
       pt: "T\xEDtulos de m\xFAsicas inteligentes",
       sv: "Smarta musiktitlar",
-      ru: "\u0423\u043C\u043D\u044B\u0435 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u044F \u0442\u0440\u0435\u043A\u043E\u0432"
+      ru: "\u0423\u043C\u043D\u044B\u0435 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u044F \u0442\u0440\u0435\u043A\u043E\u0432",
+      pl: "Inteligente tytu\u0142y utwor\xF3w",
+      zh: "\u667A\u80FD\u97F3\u4E50\u6807\u9898"
     },
     playback: {
       en: "Playback",
@@ -60105,7 +61479,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Riproduzione",
       pt: "Reprodu\xE7\xE3o",
       sv: "Uppspelning",
-      ru: "\u0412\u043E\u0441\u043F\u0440\u043E\u0438\u0437\u0432\u0435\u0434\u0435\u043D\u0438\u0435"
+      ru: "\u0412\u043E\u0441\u043F\u0440\u043E\u0438\u0437\u0432\u0435\u0434\u0435\u043D\u0438\u0435",
+      zh: "\u64AD\u653E"
     },
     profile: {
       en: "Profile",
@@ -60115,7 +61490,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Perfil",
       pl: "Profil",
       sv: "Profil",
-      ru: "\u041F\u0440\u043E\u0444\u0438\u043B\u044C"
+      ru: "\u041F\u0440\u043E\u0444\u0438\u043B\u044C",
+      zh: "\u4E2A\u4EBA\u8D44\u6599"
     },
     view_profile: {
       en: "View profile",
@@ -60124,7 +61500,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       es: "Ver perfil",
       pt: "Ver perfil",
       sv: "Visa profil",
-      ru: "\u041F\u043E\u0441\u043C\u043E\u0442\u0440\u0435\u0442\u044C \u043F\u0440\u043E\u0444\u0438\u043B\u044C"
+      ru: "\u041F\u043E\u0441\u043C\u043E\u0442\u0440\u0435\u0442\u044C \u043F\u0440\u043E\u0444\u0438\u043B\u044C",
+      pl: "Poka\u017C profil",
+      zh: "\u67E5\u770B\u4E2A\u4EBA\u8D44\u6599"
     },
     edit_profile: {
       en: "Edit profile",
@@ -60133,7 +61511,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Modifica profilo",
       pt: "Editar perfil",
       sv: "Redigera profil",
-      ru: "\u0420\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u043F\u0440\u043E\u0444\u0438\u043B\u044C"
+      ru: "\u0420\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u043F\u0440\u043E\u0444\u0438\u043B\u044C",
+      pl: "Edytuj profil",
+      zh: "\u7F16\u8F91\u4E2A\u4EBA\u8D44\u6599"
     },
     current_season: {
       en: "Current season",
@@ -60142,7 +61522,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Stagione corrente",
       pt: "Esta\xE7\xE3o atual",
       sv: "Nuvarande \xE5rstid",
-      ru: "\u0422\u0435\u043A\u0443\u0449\u0438\u0439 \u0441\u0435\u0437\u043E\u043D"
+      ru: "\u0422\u0435\u043A\u0443\u0449\u0438\u0439 \u0441\u0435\u0437\u043E\u043D",
+      pl: "Aktualny sezon",
+      zh: "\u5F53\u524D\u65F6\u4EE4"
     },
     seasonal: {
       name: {
@@ -60153,7 +61535,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         it: "Stagione",
         pt: "Esta\xE7\xF5es",
         sv: "\xC5rstider",
-        ru: "\u0421\u0435\u0437\u043E\u043D\u044B"
+        ru: "\u0421\u0435\u0437\u043E\u043D\u044B",
+        pl: "Sezonowe",
+        zh: "\u65F6\u4EE4"
       },
       listing: {
         none: {
@@ -60163,7 +61547,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           it: "Nessuna attiva",
           pt: "Nenhuma ativa",
           sv: "Ingen aktiv",
-          ru: "\u041D\u0435\u0442 \u0430\u043A\u0442\u0438\u0432\u043D\u044B\u0445"
+          ru: "\u041D\u0435\u0442 \u0430\u043A\u0442\u0438\u0432\u043D\u044B\u0445",
+          pl: "Nieaktywne",
+          zh: "\u65E0\u6D3B\u52A8"
         },
         easter: {
           en: "Easter",
@@ -60172,7 +61558,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           it: "Pasqua",
           pt: "P\xE1scoa",
           sv: "P\xE5sk",
-          ru: "\u041F\u0430\u0441\u0445\u0430"
+          ru: "\u041F\u0430\u0441\u0445\u0430",
+          pl: "Wielkanoc",
+          zh: "\u590D\u6D3B\u8282"
         },
         pride: {
           en: "Pride",
@@ -60181,7 +61569,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           it: "Pride",
           pt: "Orgulho",
           sv: "Pride",
-          ru: "\u041F\u0440\u0430\u0439\u0434\u0430"
+          ru: "\u041F\u0440\u0430\u0439\u0434\u0430",
+          pl: "Duma",
+          zh: "\u5F69\u8679\u6708"
         },
         halloween: {
           en: "Halloween",
@@ -60190,7 +61580,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           it: "Halloween",
           pt: "Dia das Bruxas",
           sv: "Halloween",
-          ru: "\u0425\u044D\u043B\u043B\u043E\u0443\u0438\u043D"
+          ru: "\u0425\u044D\u043B\u043B\u043E\u0443\u0438\u043D",
+          pl: "Halloween",
+          zh: "\u4E07\u5723\u8282"
         },
         pre_fall: {
           en: "Autumn",
@@ -60199,14 +61591,19 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           it: "Autunno",
           pt: "Outono",
           sv: "H\xF6st",
-          ru: "\u041E\u0441\u0435\u043D\u044C"
+          ru: "\u041E\u0441\u0435\u043D\u044C",
+          pl: "Jesie\u0144",
+          zh: "\u79CB\u5B63"
         },
         fall: {
           en: "Winter",
+          de: "Winter",
           es: "Invierno",
           it: "Inverno",
           ru: "\u0417\u0438\u043C\u0430",
-          pt: "Inverno"
+          pt: "Inverno",
+          pl: "Zima",
+          zh: "\u51AC\u5B63"
         },
         christmas: {
           en: "Christmas",
@@ -60215,7 +61612,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           it: "Natale",
           pt: "Natal",
           sv: "Jul",
-          ru: "\u0420\u043E\u0436\u0434\u0435\u0441\u0442\u0432\u043E"
+          ru: "\u0420\u043E\u0436\u0434\u0435\u0441\u0442\u0432\u043E",
+          pl: "\u015Awi\u0119ta",
+          zh: "\u5723\u8BDE\u8282"
         },
         new_years: {
           en: "New Years",
@@ -60224,85 +61623,115 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           it: "Anno nuovo",
           pt: "Ano Novo",
           sv: "Ny\xE5r",
-          ru: "\u041D\u043E\u0432\u044B\u0439 \u0433\u043E\u0434"
+          ru: "\u041D\u043E\u0432\u044B\u0439 \u0433\u043E\u0434",
+          pl: "Sylwester",
+          zh: "\u65B0\u5E74"
         }
       },
       notice: {
+        // shows in a tooltip, refers to the next translation
         en: "Open the live counter",
-        es: "Abre el contador en vivo",
+        de: "Live-Z\xE4hler \xF6ffnen",
+        es: "Abrir el contador en vivo",
         it: "Apri il contatore in tempo reale",
         pt: "Abrir o contador ao vivo",
         sv: "\xD6ppna live-nedr\xE4kningen",
-        ru: "\u041E\u0442\u043A\u0440\u044B\u0442\u044C \u0436\u0438\u0432\u043E\u0439 \u0441\u0447\u0435\u0442\u0447\u0438\u043A"
+        ru: "\u041E\u0442\u043A\u0440\u044B\u0442\u044C \u0436\u0438\u0432\u043E\u0439 \u0441\u0447\u0435\u0442\u0447\u0438\u043A",
+        pl: "Otw\xF3rz licznik aktualizaj\u0105cy si\u0119 na \u017Cywo"
       },
       live: {
+        // used as a status when the timer is counting down live
         en: "Counter is updating live",
+        de: "Z\xE4hler wird live aktualisiert",
         es: "El contador est\xE1 siendo actualizado en tiempo real",
         it: "Il contatore si sta aggiornando in tempo reale",
         pt: "O contador est\xE1 sendo atualizado em tempo real",
         sv: "Nedr\xE4kningen uppdateras live",
-        ru: "\u041E\u0442\u043A\u0440\u044B\u0442\u044C \u0441\u0447\u0435\u0442\u0447\u0438\u043A \u0432 \u0440\u0435\u0430\u043B\u044C\u043D\u043E\u043C \u0432\u0440\u0435\u043C\u0435\u043D\u0438"
+        ru: "\u041E\u0442\u043A\u0440\u044B\u0442\u044C \u0441\u0447\u0435\u0442\u0447\u0438\u043A \u0432 \u0440\u0435\u0430\u043B\u044C\u043D\u043E\u043C \u0432\u0440\u0435\u043C\u0435\u043D\u0438",
+        pl: "Licznik aktualizuje si\u0119 na \u017Cywo"
       },
       presets: {
-        // these are seasonal exclusive colour presets
+        // these are colour presets only available
+        // in certain seasons
         nonsense: {
           // reference to https://open.spotify.com/track/7yogx3TwxGwSxO2QITsT2q
           en: "A Nonsense Christmas",
+          de: "Ein sinnloses Weihnachten",
           es: "Una Navidad Sin Sentido",
           it: "Un Natale senza senso",
           pt: "Um Natal Sem Sentido",
           sv: "A Nonsense Christmas",
-          ru: "\u0411\u0435\u0441\u0441\u043C\u044B\u0441\u043B\u0435\u043D\u043D\u043E\u0435 \u0420\u043E\u0436\u0434\u0435\u0441\u0442\u0432\u043E"
+          ru: "\u0411\u0435\u0441\u0441\u043C\u044B\u0441\u043B\u0435\u043D\u043D\u043E\u0435 \u0420\u043E\u0436\u0434\u0435\u0441\u0442\u0432\u043E",
+          pl: "Bezsensowne \u015Awi\u0119ta",
+          zh: "\u80E1\u95F9\u5723\u8BDE"
         },
         fruitcake: {
           // reference to https://open.spotify.com/album/7EisdwWcodpmHxgpGVE5Pg
           en: "fruitcake",
+          de: "Stollen",
           es: "pastel de fruta",
           it: "torta di frutta",
           sv: "fruitcake",
           pt: "bolo de frutas",
-          ru: "\u0444\u0440\u0443\u043A\u0442\u043E\u0432\u044B\u0439 \u043A\u0435\u043A\u0441"
+          ru: "\u0444\u0440\u0443\u043A\u0442\u043E\u0432\u044B\u0439 \u043A\u0435\u043A\u0441",
+          pl: "fruitcake",
+          zh: "\u6C34\u679C\u86CB\u7CD5"
         },
         mistletoe: {
           en: "Mistletoe",
+          de: "Mistelzweig",
           es: "Mu\xE9rdago",
           it: "Vischio",
           sv: "Mistel",
           pt: "Visco",
-          ru: "\u041E\u043C\u0435\u043B\u0430"
+          ru: "\u041E\u043C\u0435\u043B\u0430",
+          zh: "\u69F2\u5BC4\u751F"
         },
         festival: {
           en: "Christmas Eve",
+          de: "Heiligabend",
           es: "V\xEDspera de Navidad",
           it: "Vigilia di Natale",
           sv: "Julafton",
           pt: "V\xE9spera de Natal",
-          ru: "\u0421\u043E\u0447\u0435\u043B\u044C\u043D\u0438\u043A"
+          ru: "\u0421\u043E\u0447\u0435\u043B\u044C\u043D\u0438\u043A",
+          pl: "Wigilia",
+          zh: "\u5E73\u5B89\u591C"
         }
       },
       exclusive: {
+        // used as a tooltip for colours only available in certain seasons
         en: "Limited time",
-        pt: "Tempo limitado"
+        de: "Nur f\xFCr kurze Zeit",
+        es: "Tiempo limitado",
+        pt: "Tempo limitado",
+        pl: "Tymczasowe",
+        ru: "\u041E\u0433\u0440\u0430\u043D\u0438\u0447\u0435\u043D\u043D\u043E\u0435 \u0432\u0440\u0435\u043C\u044F",
+        zh: "\u9650\u65F6"
       }
     },
     new_season: {
+      // used to announce a new season since last visit
       en: "New Season!",
       de: "Neue Jahreszeit!",
       es: "\xA1Nueva Temporada!",
       it: "Nuova stagione!",
       pt: "Nova Esta\xE7\xE3o!",
       sv: "Ny \xE5rstid!",
-      ru: "\u041D\u043E\u0432\u044B\u0439 \u0441\u0435\u0437\u043E\u043D!"
+      ru: "\u041D\u043E\u0432\u044B\u0439 \u0441\u0435\u0437\u043E\u043D!",
+      pl: "Nowy sezon!",
+      zh: "\u65B0\u65F6\u4EE4\u5F00\u542F\uFF01"
     },
     value_for_time: {
       // e.g. (Halloween) ends (in 3 days)
-      //
-      // shouldn't the "in" and "days" be outside the parentheses? -soleil
       en: "{v} ends {time}",
+      de: "{v} endet {time}",
       es: "{v} termina {time}",
       it: "{v} termina {time}",
       ru: "{v} \u0437\u0430\u043A\u043E\u043D\u0447\u0438\u0442\u0441\u044F {time}",
-      pt: "{v} termina {time}"
+      pt: "{v} termina {time}",
+      pl: "{v} ko\u0144cz si\u0119 za {time}",
+      zh: "{v} \u5C06\u4E8E {time} \u540E\u7ED3\u675F"
     },
     seasonal_timeline: {
       en: "Seasonal timeline",
@@ -60311,7 +61740,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Calendario delle stagioni",
       pt: "Linha do tempo sazonal",
       sv: "Tidslinje f\xF6r \xE5rstider",
-      ru: "\u0421\u0435\u0437\u043E\u043D\u043D\u0430\u044F \u0448\u043A\u0430\u043B\u0430 \u0432\u0440\u0435\u043C\u0435\u043D\u0438"
+      ru: "\u0421\u0435\u0437\u043E\u043D\u043D\u0430\u044F \u0448\u043A\u0430\u043B\u0430 \u0432\u0440\u0435\u043C\u0435\u043D\u0438",
+      pl: "Przebieg sezonu",
+      zh: "\u65F6\u4EE4\u65F6\u95F4\u8F74"
     },
     enable_seasons: {
       // translate to seasons if it reads better
@@ -60322,7 +61753,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         it: "Adatta automaticamente alle stagioni",
         pt: "Adaptar automaticamente a eventos sazonais",
         sv: "Adaptera automatiskt f\xF6r \xE5rstider",
-        ru: "\u0410\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u0435\u0441\u043A\u0438 \u0430\u0434\u0430\u043F\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C\u0441\u044F \u043A \u0441\u0435\u0437\u043E\u043D\u043D\u044B\u043C \u0441\u043E\u0431\u044B\u0442\u0438\u044F\u043C"
+        ru: "\u0410\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u0435\u0441\u043A\u0438 \u0430\u0434\u0430\u043F\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C\u0441\u044F \u043A \u0441\u0435\u0437\u043E\u043D\u043D\u044B\u043C \u0441\u043E\u0431\u044B\u0442\u0438\u044F\u043C",
+        pl: "Automatycznie adaptuj do wydarze\u0144 sezonowych",
+        zh: "\u81EA\u52A8\u9002\u914D\u65F6\u4EE4\u6D3B\u52A8"
       },
       body: {
         en: "Adapts the default colour, iconset, and shows particles depending on the season",
@@ -60331,7 +61764,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         it: "Adatta il colore e le icone standard, e mostra delle particelle in base alla stagione",
         pt: "Adapta a cor padr\xE3o, \xEDcones e exibe part\xEDculas dependendo da sazonalidade",
         sv: "Adaptera f\xE4rg, ikoner, och visa partiklar beroende p\xE5 \xE5rstiden",
-        ru: "\u0410\u0434\u0430\u043F\u0442\u0438\u0440\u0443\u0435\u0442 \u0446\u0432\u0435\u0442 \u043F\u043E \u0443\u043C\u043E\u043B\u0447\u0430\u043D\u0438\u044E, \u043D\u0430\u0431\u043E\u0440 \u0437\u043D\u0430\u0447\u043A\u043E\u0432 \u0438 \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0435\u0442 \u0447\u0430\u0441\u0442\u0438\u0446\u044B \u0432 \u0437\u0430\u0432\u0438\u0441\u0438\u043C\u043E\u0441\u0442\u0438 \u043E\u0442 \u0441\u0435\u0437\u043E\u043D\u0430"
+        ru: "\u0410\u0434\u0430\u043F\u0442\u0438\u0440\u0443\u0435\u0442 \u0446\u0432\u0435\u0442 \u043F\u043E \u0443\u043C\u043E\u043B\u0447\u0430\u043D\u0438\u044E, \u043D\u0430\u0431\u043E\u0440 \u0437\u043D\u0430\u0447\u043A\u043E\u0432 \u0438 \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0435\u0442 \u0447\u0430\u0441\u0442\u0438\u0446\u044B \u0432 \u0437\u0430\u0432\u0438\u0441\u0438\u043C\u043E\u0441\u0442\u0438 \u043E\u0442 \u0441\u0435\u0437\u043E\u043D\u0430",
+        pl: "Adaptuje domy\u015Blny kolor, ikony, oraz pokazuje efekty zale\u017Cne od sezonu",
+        zh: "\u6839\u636E\u5F53\u524D\u65F6\u4EE4\u6216\u8282\u65E5\uFF0C\u81EA\u52A8\u8C03\u6574\u9ED8\u8BA4\u989C\u8272\u3001\u56FE\u6807\u96C6\u5E76\u663E\u793A\u7C92\u5B50\u52A8\u6001\u6548\u679C"
       }
     },
     seasonal_particles_fps: {
@@ -60342,34 +61777,44 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         it: "Riduci la qualit\xE0 delle particelle",
         pt: "Reduzir qualidade das part\xEDculas",
         sv: "S\xE4nk partiklarnas kvalitet",
-        ru: "\u0421\u043D\u0438\u0437\u0438\u0442\u044C \u043A\u0430\u0447\u0435\u0441\u0442\u0432\u043E \u0447\u0430\u0441\u0442\u0438\u0446"
+        ru: "\u0421\u043D\u0438\u0437\u0438\u0442\u044C \u043A\u0430\u0447\u0435\u0441\u0442\u0432\u043E \u0447\u0430\u0441\u0442\u0438\u0446",
+        pl: "Zmniejsz jako\u015B\u0107 efekt\xF3w",
+        zh: "\u964D\u4F4E\u7C92\u5B50\u8D28\u91CF"
       },
       body: {
         en: "Snow particles use a drop-shadow glow for aesthetics with the added processing cost",
         de: "Schneepartikel verwenden f\xFCr die \xC4sthetik einen Glanzeffekt \u2013 erfordert zus\xE4tzliche Rechenleistung",
         es: "Las part\xEDculas de nieve usan un brillo de sombra paralela para mayor est\xE9tica, con costo adicional de procesamiento",
-        it: "Le particelle di neve brillano utilizzando un effetto ad ombra per un'estetica migliore, richiedendo pi\xF9 risorse",
+        it: "Le particelle di neve brillano utilizzando un effetto ad ombra per un\u2019estetica migliore, richiedendo pi\xF9 risorse",
         pt: "As part\xEDculas de neve usam um efeito de brilho com sombra projetada para est\xE9tica, com o custo adicional de processamento",
         sv: "Sn\xF6partiklarna anv\xE4nder en gl\xF6deffekt f\xF6r estetiska sj\xE4l, med lite extra datorbelastning",
-        ru: "\u0421\u043D\u0435\u0436\u043D\u044B\u0435 \u0447\u0430\u0441\u0442\u0438\u0446\u044B \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u044E\u0442 \u044D\u0444\u0444\u0435\u043A\u0442 \u0441\u0432\u0435\u0447\u0435\u043D\u0438\u044F \u0434\u043B\u044F \u044D\u0441\u0442\u0435\u0442\u0438\u043A\u0438 \u0446\u0435\u043D\u043E\u0439 \u0434\u043E\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0445 \u0437\u0430\u0442\u0440\u0430\u0442 \u0440\u0435\u0441\u0443\u0440\u0441\u043E\u0432"
+        ru: "\u0421\u043D\u0435\u0436\u043D\u044B\u0435 \u0447\u0430\u0441\u0442\u0438\u0446\u044B \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u044E\u0442 \u044D\u0444\u0444\u0435\u043A\u0442 \u0441\u0432\u0435\u0447\u0435\u043D\u0438\u044F \u0434\u043B\u044F \u044D\u0441\u0442\u0435\u0442\u0438\u043A\u0438 \u0446\u0435\u043D\u043E\u0439 \u0434\u043E\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0445 \u0437\u0430\u0442\u0440\u0430\u0442 \u0440\u0435\u0441\u0443\u0440\u0441\u043E\u0432",
+        pl: "P\u0142atki \u015Bniegu u\u017Cywaj\u0105 pod\u015Bwietlonych cieni dla estetyki - co powoduje wi\u0119ksze zu\u017Cycie zasob\xF3w",
+        zh: "\u96EA\u82B1\u7C92\u5B50\u4F7F\u7528\u4E86\u9634\u5F71\u53D1\u5149\u6548\u679C\u4EE5\u63D0\u5347\u89C6\u89C9\u7F8E\u611F\uFF0C\u4F46\u8FD9\u4F1A\u589E\u52A0\u989D\u5916\u7684\u6027\u80FD\u5F00\u9500"
       }
     },
     seasonal_overlays: {
       name: {
         en: "Display additional seasonal effects",
+        de: "Zus\xE4tzliche saisonale Effekte anzeigen",
         es: "Mostrar efectos de temporada adicionales",
         it: "Mostra effetti stagionali aggiuntivi",
         pt: "Exibir efeitos sazonais adicionais",
         sv: "Visa extra \xE5rstidseffekter",
-        ru: "\u041E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0442\u044C \u0434\u043E\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0435 \u0441\u0435\u0437\u043E\u043D\u043D\u044B\u0435 \u044D\u0444\u0444\u0435\u043A\u0442\u044B"
+        ru: "\u041E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0442\u044C \u0434\u043E\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0435 \u0441\u0435\u0437\u043E\u043D\u043D\u044B\u0435 \u044D\u0444\u0444\u0435\u043A\u0442\u044B",
+        pl: "Poka\u017C dodatkowe efekty sezonowe",
+        zh: "\u663E\u793A\u989D\u5916\u7684\u65F6\u4EE4\u7279\u6548"
       },
       body: {
         en: "During winter seasons this applies a coat of ice to panels, otherwise mainly gradients",
-        es: "Durante las temporadas invernales, aplica una capa de hielo a los paneles, de lo contrario, aplica principalmente gradientes",
+        de: "W\xE4hrend der Wintersaisons wird eine Eisschicht auf die Panels angewendet, ansonsten haupts\xE4chlich Farbverl\xE4ufe",
+        es: "Durante temporadas invernales, aplica una capa de hielo a los paneles, de lo contrario, aplica principalmente gradientes",
         it: "Durante le stagioni invernali, applica un mantello di ghiacchi ai pannelli, altrimenti principalmente gradienti",
         pt: "Durante o inverno, isso aplica uma camada de gelo aos pain\xE9is; fora dessa \xE9poca, aplica principalmente gradientes",
         sv: "Under vinters\xE4songen l\xE4ggs ett lager is p\xE5 paneler, annars mest bildgradienter",
-        ru: "\u041E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0442\u044C \u0434\u043E\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0435 \u0441\u0435\u0437\u043E\u043D\u043D\u044B\u0435 \u044D\u0444\u0444\u0435\u043A\u0442\u044B"
+        ru: "\u041E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0442\u044C \u0434\u043E\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0435 \u0441\u0435\u0437\u043E\u043D\u043D\u044B\u0435 \u044D\u0444\u0444\u0435\u043A\u0442\u044B",
+        pl: "Podczas sezonu zimowego dodaje l\xF3d do paneli, w wi\u0119kszo\u015Bci gradienty ",
+        zh: "\u51AC\u5B63\u65F6\u4F1A\u4E3A\u754C\u9762\u62AB\u4E0A\u4E00\u5C42\u51B0\u971C\u8D28\u611F\uFF0C\u5176\u4ED6\u65F6\u4EE4\u5219\u4E3B\u8981\u4EE5\u8272\u5F69\u6E10\u53D8\u5448\u73B0"
       }
     },
     seasonal_offset: {
@@ -60379,47 +61824,65 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Gli eventi stagionali sono attivati in base al tuo fuso orario, che abbiamo calcolato come {offset}",
       pt: "Eventos sazonais s\xE3o realizados em seu fuso hor\xE1rio, que calculamos como {offset}",
       sv: "\xC5rstidsevenemang h\xE5lls i din tidszon, som vi r\xE4knade ut vara {offset}",
-      ru: "\u0421\u0435\u0437\u043E\u043D\u043D\u044B\u0435 \u0441\u043E\u0431\u044B\u0442\u0438\u044F \u043F\u0440\u043E\u0432\u043E\u0434\u044F\u0442\u0441\u044F \u043F\u043E \u0432\u0430\u0448\u0435\u043C\u0443 \u0447\u0430\u0441\u043E\u0432\u043E\u043C\u0443 \u043F\u043E\u044F\u0441\u0443, \u043A\u043E\u0442\u043E\u0440\u044B\u0439 \u043C\u044B \u043E\u043F\u0440\u0435\u0434\u0435\u043B\u0438\u043B\u0438 \u043A\u0430\u043A {offset}"
+      ru: "\u0421\u0435\u0437\u043E\u043D\u043D\u044B\u0435 \u0441\u043E\u0431\u044B\u0442\u0438\u044F \u043F\u0440\u043E\u0432\u043E\u0434\u044F\u0442\u0441\u044F \u043F\u043E \u0432\u0430\u0448\u0435\u043C\u0443 \u0447\u0430\u0441\u043E\u0432\u043E\u043C\u0443 \u043F\u043E\u044F\u0441\u0443, \u043A\u043E\u0442\u043E\u0440\u044B\u0439 \u043C\u044B \u043E\u043F\u0440\u0435\u0434\u0435\u043B\u0438\u043B\u0438 \u043A\u0430\u043A {offset}",
+      pl: "Sezonowe wydarzenia odbywaj\u0105 si\u0119 w twojej strefie czasowej, kt\xF3r\u0105 liczymy jako {offset}",
+      zh: "\u65F6\u4EE4\u6D3B\u52A8\u5C06\u6839\u636E\u60A8\u6240\u5728\u7684\u672C\u5730\u65F6\u533A\u8FD0\u884C\uFF0C\u6211\u4EEC\u6D4B\u7B97\u7684\u504F\u79FB\u91CF\u4E3A {offset}"
     },
     calculated_offset: {
-      // timezone offset
+      // timezone offset from UTC
       en: "Calculated offset based on timezone",
       de: "Berechnete Verschiebung basierend auf der Zeitzone",
       es: "Diferencia calculada con base en tu zona horaria",
       it: "Differenza calcolata in base al fuso orario",
       pt: "Offset calculado com base no fuso hor\xE1rio",
       sv: "F\xF6rskjutning kalkylerats fr\xE5n tidszon",
-      ru: "\u0420\u0430\u0441\u0441\u0447\u0438\u0442\u0430\u043D\u043D\u043E\u0435 \u0441\u043C\u0435\u0449\u0435\u043D\u0438\u0435 \u043D\u0430 \u043E\u0441\u043D\u043E\u0432\u0435 \u0447\u0430\u0441\u043E\u0432\u043E\u0433\u043E \u043F\u043E\u044F\u0441\u0430"
+      ru: "\u0420\u0430\u0441\u0441\u0447\u0438\u0442\u0430\u043D\u043D\u043E\u0435 \u0441\u043C\u0435\u0449\u0435\u043D\u0438\u0435 \u043D\u0430 \u043E\u0441\u043D\u043E\u0432\u0435 \u0447\u0430\u0441\u043E\u0432\u043E\u0433\u043E \u043F\u043E\u044F\u0441\u0430",
+      zh: "\u6839\u636E\u65F6\u533A\u6D4B\u7B97\u7684\u504F\u79FB\u91CF"
     },
     started: {
       // season start date
       // start date: 1 day ago
       en: "Start date",
+      de: "Startdatum",
       es: "Fecha de inicio",
       it: "Data di inizio",
       pt: "Data de in\xEDcio",
       sv: "Startdatum",
-      ru: "\u0414\u0430\u0442\u0430 \u043D\u0430\u0447\u0430\u043B\u0430"
+      ru: "\u0414\u0430\u0442\u0430 \u043D\u0430\u0447\u0430\u043B\u0430",
+      pl: "Data rozpocz\u0119cia",
+      zh: "\u5F00\u59CB\u65E5\u671F"
     },
     next_in: {
       // season next date
       // next season: in 3 days
       en: "Next season",
+      de: "N\xE4chste Saison",
       es: "Pr\xF3xima temporada",
       it: "Prossima stagione",
       pt: "Pr\xF3xima esta\xE7\xE3o",
       sv: "N\xE4sta \xE5rstid",
-      ru: "\u0421\u043B\u0435\u0434\u0443\u044E\u0449\u0438\u0439 \u0441\u0435\u0437\u043E\u043D"
+      ru: "\u0421\u043B\u0435\u0434\u0443\u044E\u0449\u0438\u0439 \u0441\u0435\u0437\u043E\u043D",
+      pl: "Nast\u0119pny sezon",
+      zh: "\u4E0B\u4E2A\u65F6\u4EE4"
     },
     ends_in: {
       // season end date
       // end date: in 2 days
       en: "End date",
+      de: "Enddatum",
       es: "Fecha de finalizaci\xF3n",
       it: "Data di fine",
       pt: "Dia de t\xE9rmino",
       sv: "Slutdatum",
-      ru: "\u0414\u0430\u0442\u0430 \u043E\u043A\u043E\u043D\u0447\u0430\u043D\u0438\u044F"
+      ru: "\u0414\u0430\u0442\u0430 \u043E\u043A\u043E\u043D\u0447\u0430\u043D\u0438\u044F",
+      pl: "Ko\u0144czy si\u0119",
+      zh: "\u7ED3\u675F\u65E5\u671F"
+    },
+    link: {
+      en: "Link"
+    },
+    create_link: {
+      en: "Create link"
     },
     text: {
       en: "Text",
@@ -60428,7 +61891,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Testo",
       pt: "Texto",
       sv: "Text",
-      ru: "\u0422\u0435\u043A\u0441\u0442"
+      ru: "\u0422\u0435\u043A\u0441\u0442",
+      pl: "Tekst",
+      zh: "\u6587\u672C"
     },
     accessibility: {
       en: "Accessibility",
@@ -60437,7 +61902,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Accessibilit\xE0",
       pt: "Acessibilidade",
       sv: "Tillg\xE4ngligthet",
-      ru: "\u0414\u043E\u0441\u0442\u0443\u043F\u043D\u043E\u0441\u0442\u044C"
+      ru: "\u0414\u043E\u0441\u0442\u0443\u043F\u043D\u043E\u0441\u0442\u044C",
+      pl: "Dost\u0119pno\u015B\u0107",
+      zh: "\u8F85\u52A9\u529F\u80FD"
     },
     troubleshooting: {
       en: "Advanced",
@@ -60446,7 +61913,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Avanzate",
       pt: "Avan\xE7ado",
       sv: "Advancerat",
-      ru: "\u0414\u043E\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C\u043D\u043E"
+      ru: "\u0414\u043E\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C\u043D\u043E",
+      pl: "Zaawansowane",
+      zh: "\u9AD8\u7EA7"
     },
     recommendations: {
       en: "Suggested",
@@ -60455,7 +61924,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Suggerimenti",
       pt: "Sugest\xF5es",
       sv: "F\xF6rslag",
-      ru: "\u0420\u0435\u043A\u043E\u043C\u0435\u043D\u0434\u043E\u0432\u0430\u043D\u043D\u044B\u0435"
+      ru: "\u0420\u0435\u043A\u043E\u043C\u0435\u043D\u0434\u043E\u0432\u0430\u043D\u043D\u044B\u0435",
+      pl: "Polecane",
+      zh: "\u63A8\u8350"
     },
     releases: {
       en: "Releases",
@@ -60464,29 +61935,41 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Pubblicazioni",
       pt: "Lan\xE7amentos",
       sv: "Skivsl\xE4pp",
-      ru: "\u0420\u0435\u043B\u0438\u0437\u044B"
+      ru: "\u0420\u0435\u043B\u0438\u0437\u044B",
+      pl: "Polecane",
+      zh: "\u53D1\u884C"
     },
     no_releases_found: {
       en: "No releases found here",
+      de: "Keine Ver\xF6ffentlichungen gefunden",
       es: "No se encontraron nuevos lanzamientos",
       it: "Nessuna pubblicazione trovata",
       ru: "\u0417\u0434\u0435\u0441\u044C \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D\u043E \u043D\u0438 \u043E\u0434\u043D\u043E\u0433\u043E \u0440\u0435\u043B\u0438\u0437\u0430",
-      pt: "Nenhum lan\xE7amento encontrado aqui"
+      pt: "Nenhum lan\xE7amento encontrado aqui",
+      pl: "Nie znaleziono tutaj \u017Cadnych wyda\u0144",
+      zh: "\u672A\u53D1\u73B0\u76F8\u5173\u53D1\u884C\u5185\u5BB9"
     },
     tracklist_source: {
       name: {
         en: "Preferred tracklist source",
+        de: "Bevorzugte Quelle f\xFCr die Titelliste",
         es: "Fuente preferida para la lista de temas",
         it: "Fonte preferita per la lista dei brani",
         ru: "\u041F\u0440\u0435\u0434\u043F\u043E\u0447\u0438\u0442\u0430\u0435\u043C\u044B\u0439 \u0438\u0441\u0442\u043E\u0447\u043D\u0438\u043A \u0442\u0440\u0435\u043A\u043B\u0438\u0441\u0442\u0430",
-        pt: "Fonte preferida da lista de faixas"
+        pt: "Fonte preferida da lista de faixas",
+        pl: "Preferowane \u017Ar\xF3d\u0142o listy utwor\xF3w",
+        zh: "\u9996\u9009\u66F2\u76EE\u5217\u8868\u6765\u6E90"
       },
       body: {
+        // streaming service
         en: "Choose which service to display for album tracklists",
+        de: "W\xE4hle aus, von welchem Dienst die Titellisten von Alben angezeigt werden sollen",
         es: "Elige cu\xE1l servicio mostrar para la lista de temas",
         it: "Seleziona che servizio mostrare per la lista dei brani",
         ru: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u0441\u0435\u0440\u0432\u0438\u0441, \u043A\u043E\u0442\u043E\u0440\u044B\u0439 \u0431\u0443\u0434\u0435\u0442 \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0442\u044C\u0441\u044F \u0434\u043B\u044F \u0442\u0440\u0435\u043A\u043B\u0438\u0441\u0442\u043E\u0432 \u0430\u043B\u044C\u0431\u043E\u043C\u043E\u0432",
-        pt: "Escolha qual servi\xE7o exibir para as listas de faixas dos \xE1lbuns"
+        pt: "Escolha qual servi\xE7o exibir para as listas de faixas dos \xE1lbuns",
+        pl: "Wybierz z jakiego serwisu wy\u015Bwietla\u0107 listy utwor\xF3w album\xF3w",
+        zh: "\u9009\u62E9\u7528\u4E8E\u663E\u793A\u4E13\u8F91\u66F2\u76EE\u5217\u8868\u7684\u6570\u636E\u6E90"
       }
     },
     bookmarks: {
@@ -60497,7 +61980,13 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Marcadores",
       ja: "\u30D6\u30C3\u30AF\u30DE\u30FC\u30AF",
       sv: "Bokm\xE4rken",
-      ru: "\u0417\u0430\u043A\u043B\u0430\u0434\u043A\u0438"
+      ru: "\u0417\u0430\u043A\u043B\u0430\u0434\u043A\u0438",
+      pl: "Zak\u0142adki",
+      zh: "\u6536\u85CF"
+    },
+    bookmark_item: {
+      // bookmark track/artist/album
+      en: "Bookmark {v}"
     },
     charts: {
       en: "Charts",
@@ -60507,14 +61996,17 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Paradas",
       ja: "\u30C1\u30E3\u30FC\u30C8",
       sv: "Topplistor",
-      ru: "\u0427\u0430\u0440\u0442\u044B"
+      ru: "\u0427\u0430\u0440\u0442\u044B",
+      zh: "\u699C\u5355"
     },
     view_the_charts: {
       en: "View the charts",
+      de: "Charts ansehen",
       es: "Ver las listas",
       it: "Visualizza le classifiche",
       pt: "Ver as paradas",
-      ru: "\u041F\u043E\u0441\u043C\u043E\u0442\u0440\u0435\u0442\u044C \u0447\u0430\u0440\u0442\u044B"
+      ru: "\u041F\u043E\u0441\u043C\u043E\u0442\u0440\u0435\u0442\u044C \u0447\u0430\u0440\u0442\u044B",
+      zh: "\u67E5\u770B\u699C\u5355"
     },
     welcome_back_user: {
       en: "Welcome back {user}!",
@@ -60523,7 +62015,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Bentornato, {user}!",
       pt: "Bem-vindo(a) {user}!",
       sv: "V\xE4lkommen tillbaka, {user}!",
-      ru: "\u0421 \u0432\u043E\u0437\u0432\u0440\u0430\u0449\u0435\u043D\u0438\u0435\u043C, {user}!"
+      ru: "\u0421 \u0432\u043E\u0437\u0432\u0440\u0430\u0449\u0435\u043D\u0438\u0435\u043C, {user}!",
+      pl: "Witaj ponownie {user}!",
+      zh: "\u6B22\u8FCE\u56DE\u6765\uFF0C{user}\uFF01"
     },
     // TODO(stel): is my capitalisation correct here at all lol ; yes cutie, well done <3
     good_morning_user: {
@@ -60533,7 +62027,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Buongiorno",
       pt: "Bom dia",
       sv: "God morgon",
-      ru: "\u0414\u043E\u0431\u0440\u043E\u0435 \u0443\u0442\u0440\u043E"
+      ru: "\u0414\u043E\u0431\u0440\u043E\u0435 \u0443\u0442\u0440\u043E",
+      pl: "Dzie\u0144 dobry",
+      zh: "\u4E0A\u5348\u597D"
     },
     good_afternoon_user: {
       en: "Good afternoon",
@@ -60542,7 +62038,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Buon pomeriggio",
       pt: "Boa tarde",
       sv: "God eftermiddag",
-      ru: "\u0414\u043E\u0431\u0440\u044B\u0439 \u0434\u0435\u043D\u044C"
+      ru: "\u0414\u043E\u0431\u0440\u044B\u0439 \u0434\u0435\u043D\u044C",
+      pl: "Dzie\u0144 dobry",
+      zh: "\u4E0B\u5348\u597D"
     },
     good_evening_user: {
       en: "Good evening",
@@ -60551,7 +62049,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Buonasera",
       pt: "Boa noite",
       sv: "God kv\xE4ll",
-      ru: "\u0414\u043E\u0431\u0440\u044B\u0439 \u0432\u0435\u0447\u0435\u0440"
+      ru: "\u0414\u043E\u0431\u0440\u044B\u0439 \u0432\u0435\u0447\u0435\u0440",
+      pl: "Dobry wiecz\xF3r",
+      zh: "\u665A\u4E0A\u597D"
     },
     good_night_user: {
       en: "Goodnight",
@@ -60560,7 +62060,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Buonanotte",
       pt: "Boa noite",
       sv: "God natt",
-      ru: "\u0421\u043F\u043E\u043A\u043E\u0439\u043D\u043E\u0439 \u043D\u043E\u0447\u0438"
+      ru: "\u0421\u043F\u043E\u043A\u043E\u0439\u043D\u043E\u0439 \u043D\u043E\u0447\u0438",
+      pl: "Dobranoc",
+      zh: "\u665A\u5B89"
     },
     bleh_settings: {
       en: "bleh Settings",
@@ -60569,7 +62071,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Impostazioni di bleh",
       pt: "Configura\xE7\xF5es do bleh",
       sv: "bleh-inst\xE4llningar",
-      ru: "\u041D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438 bleh"
+      ru: "\u041D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438 bleh",
+      pl: "Ustawienia bleh",
+      zh: "bleh \u8BBE\u7F6E"
     },
     bleh_setup: {
       en: "Setup",
@@ -60578,7 +62082,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Installazione",
       pt: "Instala\xE7\xE3o",
       sv: "Installation",
-      ru: "\u041D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0430"
+      ru: "\u041D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0430",
+      pl: "Instalacja",
+      zh: "\u521D\u59CB\u5316"
     },
     import: {
       en: "Import",
@@ -60588,22 +62094,29 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Importar",
       pl: "Importuj",
       sv: "Importera",
-      ru: "\u0418\u043C\u043F\u043E\u0440\u0442"
+      ru: "\u0418\u043C\u043F\u043E\u0440\u0442",
+      zh: "\u5BFC\u5165"
     },
     import_failed: {
       en: "Import failed",
+      de: "Import fehlgeschlagen",
       es: "Error al importar",
       it: "Importazione non riuscita",
       pt: "Falha na importa\xE7\xE3o",
       sv: "Importering misslyckades",
       ru: "\u0421\u0431\u043E\u0439 \u0438\u043C\u043F\u043E\u0440\u0442\u0430",
+      pl: "B\u0142\u0105d importowania",
+      zh: "\u5BFC\u5165\u5931\u8D25",
       notice: {
         en: "The settings you attempted to import failed to parse, no changes were made.",
+        de: "Die Einstellungen, die du versucht hast, zu importieren, konnten nicht verarbeitet werden. Es wurden keine \xC4nderungen vorgenommen.",
         es: "La configuraci\xF3n que intentaste importar fall\xF3 al procesarse, no se realizaron cambios.",
         it: "Non \xE8 stato possibile processare le impostazioni che hai cercato di importare, non sono state effettuate modifiche.",
         pt: "As configura\xE7\xF5es que voc\xEA tentou importar n\xE3o puderam ser processadas; nenhuma altera\xE7\xE3o foi feita.",
         sv: "Inst\xE4llningarna du f\xF6rs\xF6kte importera kunde inte l\xE4sas, inga \xE4ndringar har gjorts.",
-        ru: "\u041D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438, \u043A\u043E\u0442\u043E\u0440\u044B\u0435 \u0432\u044B \u043F\u044B\u0442\u0430\u043B\u0438\u0441\u044C \u0438\u043C\u043F\u043E\u0440\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C, \u043D\u0435 \u0443\u0434\u0430\u043B\u043E\u0441\u044C \u043E\u0431\u0440\u0430\u0431\u043E\u0442\u0430\u0442\u044C. \u0418\u0437\u043C\u0435\u043D\u0435\u043D\u0438\u044F \u043D\u0435 \u0431\u044B\u043B\u0438 \u0432\u043D\u0435\u0441\u0435\u043D\u044B."
+        ru: "\u041D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438, \u043A\u043E\u0442\u043E\u0440\u044B\u0435 \u0432\u044B \u043F\u044B\u0442\u0430\u043B\u0438\u0441\u044C \u0438\u043C\u043F\u043E\u0440\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C, \u043D\u0435 \u0443\u0434\u0430\u043B\u043E\u0441\u044C \u043E\u0431\u0440\u0430\u0431\u043E\u0442\u0430\u0442\u044C. \u0418\u0437\u043C\u0435\u043D\u0435\u043D\u0438\u044F \u043D\u0435 \u0431\u044B\u043B\u0438 \u0432\u043D\u0435\u0441\u0435\u043D\u044B.",
+        pl: "Nie uda\u0142o si\u0119 przenie\u015B\u0107 twoich ustawie\u0144, nie dosz\u0142o do \u017Cadnych zmian.",
+        zh: "\u60A8\u5C1D\u8BD5\u5BFC\u5165\u7684\u8BBE\u7F6E\u65E0\u6CD5\u89E3\u6790\uFF0C\u672A\u8FDB\u884C\u4EFB\u4F55\u66F4\u6539\u3002"
       }
     },
     import_settings: {
@@ -60613,16 +62126,20 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Importa configurazione",
       pt: "Importar configura\xE7\xF5es",
       sv: "Importera inst\xE4llningar",
-      ru: "\u0418\u043C\u043F\u043E\u0440\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438"
+      ru: "\u0418\u043C\u043F\u043E\u0440\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438",
+      pl: "Importuj ustawienia",
+      zh: "\u5BFC\u5165\u8BBE\u7F6E"
     },
     import_notice: {
       en: "This is a permanent action, beware of where you are copying from",
       de: "Dieser Vorgang ist unwiderruflich \u2013 sei vorsichtig, von wo du kopierst",
       es: "Esta es una acci\xF3n permanente, ten cuidado del lugar de donde copias",
-      it: "Questa \xE8 un'azione permanente, fai attenzione da dove stai copiando",
+      it: "Questa \xE8 un\u2019azione permanente, fai attenzione da dove stai copiando",
       pt: "Esta \xE9 uma a\xE7\xE3o permanente, cuidado com o lugar de onde voc\xEA est\xE1 copiando",
       sv: "Det h\xE4r \xE4r permanent, oberoende av vart du kopierar ifr\xE5n",
-      ru: "\u042D\u0442\u043E \u0434\u0435\u0439\u0441\u0442\u0432\u0438\u0435 \u043D\u0435\u043E\u0431\u0440\u0430\u0442\u0438\u043C\u043E, \u0431\u0443\u0434\u044C\u0442\u0435 \u0432\u043D\u0438\u043C\u0430\u0442\u0435\u043B\u044C\u043D\u044B \u043A \u0438\u0441\u0442\u043E\u0447\u043D\u0438\u043A\u0443 \u043A\u043E\u043F\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u044F"
+      ru: "\u042D\u0442\u043E \u0434\u0435\u0439\u0441\u0442\u0432\u0438\u0435 \u043D\u0435\u043E\u0431\u0440\u0430\u0442\u0438\u043C\u043E, \u0431\u0443\u0434\u044C\u0442\u0435 \u0432\u043D\u0438\u043C\u0430\u0442\u0435\u043B\u044C\u043D\u044B \u043A \u0438\u0441\u0442\u043E\u0447\u043D\u0438\u043A\u0443 \u043A\u043E\u043F\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u044F",
+      pl: "Importowanie jest permanentne, uwa\u017Caj sk\u0105d kopiujesz",
+      zh: "\u6B64\u64CD\u4F5C\u4E0D\u53EF\u9006\uFF0C\u8BF7\u786E\u4FDD\u6570\u636E\u6765\u6E90\u53EF\u9760\u3002"
     },
     export: {
       en: "Export",
@@ -60632,7 +62149,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Exportar",
       pl: "Eksportuj",
       sv: "Exportera",
-      ru: "\u042D\u043A\u0441\u043F\u043E\u0440\u0442"
+      ru: "\u042D\u043A\u0441\u043F\u043E\u0440\u0442",
+      zh: "\u5BFC\u51FA"
     },
     export_settings: {
       en: "Export settings",
@@ -60641,7 +62159,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Esporta configurazione",
       pt: "Exportar configura\xE7\xF5es",
       sv: "Exportera inst\xE4llningar",
-      ru: "\u042D\u043A\u0441\u043F\u043E\u0440\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438"
+      ru: "\u042D\u043A\u0441\u043F\u043E\u0440\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438",
+      pl: "Eksportuj ustawienia",
+      zh: "\u5BFC\u51FA\u8BBE\u7F6E"
     },
     reset: {
       en: "Reset",
@@ -60651,7 +62171,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Restaurar",
       pl: "Resetuj",
       sv: "\xC5terst\xE4ll",
-      ru: "\u0421\u0431\u0440\u043E\u0441\u0438\u0442\u044C"
+      ru: "\u0421\u0431\u0440\u043E\u0441\u0438\u0442\u044C",
+      zh: "\u91CD\u7F6E"
     },
     reset_settings: {
       en: "Reset settings to default",
@@ -60660,7 +62181,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Ripristina le impostazioni ai valori predefiniti",
       pt: "Restaurar as configura\xE7\xF5es para o padr\xE3o",
       sv: "\xC5terst\xE4ll alla inst\xE4llningar till det vanliga",
-      ru: "\u0421\u0431\u0440\u043E\u0441\u0438\u0442\u044C \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438 \u0434\u043E \u0437\u043D\u0430\u0447\u0435\u043D\u0438\u0439 \u043F\u043E \u0443\u043C\u043E\u043B\u0447\u0430\u043D\u0438\u044E"
+      ru: "\u0421\u0431\u0440\u043E\u0441\u0438\u0442\u044C \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438 \u0434\u043E \u0437\u043D\u0430\u0447\u0435\u043D\u0438\u0439 \u043F\u043E \u0443\u043C\u043E\u043B\u0447\u0430\u043D\u0438\u044E",
+      pl: "Resetuj ustawienia",
+      zh: "\u6062\u590D\u9ED8\u8BA4\u8BBE\u7F6E"
     },
     reset_notice: {
       en: "Your settings will be permanently reset, are you sure?",
@@ -60669,7 +62192,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Le tue impostazioni saranno ripristinate permanentemente, ne sei sicuro?",
       pt: "Sua configura\xE7\xE3o vai ser permanentemente restaurada ao padr\xE3o, voc\xEA tem certeza?",
       sv: "\xC4r du s\xE4ker p\xE5 att du vill \xE5terst\xE4lla alla inst\xE4llningar? Det \xE4r permanent.",
-      ru: "\u0412\u0430\u0448\u0438 \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438 \u0431\u0443\u0434\u0443\u0442 \u0431\u0435\u0437\u0432\u043E\u0437\u0432\u0440\u0430\u0442\u043D\u043E \u0441\u0431\u0440\u043E\u0448\u0435\u043D\u044B, \u0432\u044B \u0443\u0432\u0435\u0440\u0435\u043D\u044B?"
+      ru: "\u0412\u0430\u0448\u0438 \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438 \u0431\u0443\u0434\u0443\u0442 \u0431\u0435\u0437\u0432\u043E\u0437\u0432\u0440\u0430\u0442\u043D\u043E \u0441\u0431\u0440\u043E\u0448\u0435\u043D\u044B, \u0432\u044B \u0443\u0432\u0435\u0440\u0435\u043D\u044B?",
+      pl: "Twoje ustawienia zostan\u0105 permanentnie usuni\u0119te, czy napewno chcesz je zresetowa\u0107?",
+      zh: "\u8BBE\u7F6E\u5C06\u88AB\u6C38\u4E45\u91CD\u7F6E\u4E14\u4E0D\u53EF\u64A4\u9500\uFF0C\u786E\u5B9A\u8981\u7EE7\u7EED\u5417\uFF1F"
     },
     reset_item_to_default: {
       en: "Reset item to default",
@@ -60678,7 +62203,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Opzione ripristinata alle impostazioni predefinite",
       pt: "Restaurar itens para o padr\xE3o",
       sv: "\xC5terst\xE4ll till standard",
-      ru: "\u0421\u0431\u0440\u043E\u0441\u0438\u0442\u044C \u044D\u043B\u0435\u043C\u0435\u043D\u0442 \u0434\u043E \u0437\u043D\u0430\u0447\u0435\u043D\u0438\u044F \u043F\u043E \u0443\u043C\u043E\u043B\u0447\u0430\u043D\u0438\u044E"
+      ru: "\u0421\u0431\u0440\u043E\u0441\u0438\u0442\u044C \u044D\u043B\u0435\u043C\u0435\u043D\u0442 \u0434\u043E \u0437\u043D\u0430\u0447\u0435\u043D\u0438\u044F \u043F\u043E \u0443\u043C\u043E\u043B\u0447\u0430\u043D\u0438\u044E",
+      pl: "Zresetuj przedmioty do ustawie\u0144 fabrycznych",
+      zh: "\u5C06\u6B64\u9879\u91CD\u7F6E\u4E3A\u9ED8\u8BA4"
     },
     make_a_backup: {
       en: "Make a backup",
@@ -60687,7 +62214,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Fai un backup",
       pt: "Fa\xE7a um backup",
       sv: "Skapa en backup",
-      ru: "\u0421\u043E\u0437\u0434\u0430\u0442\u044C \u0440\u0435\u0437\u0435\u0440\u0432\u043D\u0443\u044E \u043A\u043E\u043F\u0438\u044E"
+      ru: "\u0421\u043E\u0437\u0434\u0430\u0442\u044C \u0440\u0435\u0437\u0435\u0440\u0432\u043D\u0443\u044E \u043A\u043E\u043F\u0438\u044E",
+      pl: "Utw\xF3rz backup",
+      zh: "\u521B\u5EFA\u5907\u4EFD"
     },
     news: {
       en: "News",
@@ -60697,23 +62226,32 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Not\xEDcias",
       sv: "Nytt",
       ru: "\u041D\u043E\u0432\u043E\u0441\u0442\u0438",
+      pl: "Aktualno\u015Bci",
+      zh: "\u66F4\u65B0\u65E5\u5FD7",
+      // 不太确定
       type: {
         major: {
+          // used for an update
           en: "Major release",
           es: "Lanzamiento principal",
           it: "Aggiornamento importante",
           // should be 'maggiore' as literal translation of 'major', but it sounds awful so falling back to 'important' ~cuto
           pt: "Lan\xE7amento principal",
           sv: "St\xF6rre utg\xE5va",
-          ru: "\u041A\u0440\u0443\u043F\u043D\u044B\u0439 \u0440\u0435\u043B\u0438\u0437"
+          ru: "\u041A\u0440\u0443\u043F\u043D\u044B\u0439 \u0440\u0435\u043B\u0438\u0437",
+          pl: "G\u0142owne wydanie",
+          zh: "\u91CD\u5927\u66F4\u65B0"
         },
         minor: {
+          // used for an update
           en: "Minor release",
           es: "Lanzamiento secundario",
           it: "Aggiornamento secondario",
           sv: "Mindre utg\xE5va",
           pt: "Lan\xE7amento secundario",
-          ru: "\u041C\u0435\u043B\u043A\u0438\u0439 \u0440\u0435\u043B\u0438\u0437"
+          ru: "\u041C\u0435\u043B\u043A\u0438\u0439 \u0440\u0435\u043B\u0438\u0437",
+          pl: "Ma\u0142a aktualizacja",
+          zh: "\u5C0F\u5E45\u8FED\u4EE3"
         }
       }
     },
@@ -60724,7 +62262,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Novit\xE0 da {user}",
       pt: "Not\xEDcias de {user}",
       sv: "Nytt fr\xE5n {user}",
-      ru: "\u041D\u043E\u0432\u043E\u0441\u0442\u0438 \u043E\u0442 {user}"
+      ru: "\u041D\u043E\u0432\u043E\u0441\u0442\u0438 \u043E\u0442 {user}",
+      pl: "Aktualno\u015Bci od {user}",
+      zh: "\u6765\u81EA {user} \u7684\u6D88\u606F"
     },
     default: {
       en: "Default",
@@ -60733,7 +62273,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Predefinito",
       pt: "Padr\xE3o",
       sv: "Standard",
-      ru: "\u041F\u043E \u0443\u043C\u043E\u043B\u0447\u0430\u043D\u0438\u044E"
+      ru: "\u041F\u043E \u0443\u043C\u043E\u043B\u0447\u0430\u043D\u0438\u044E",
+      zh: "\u9ED8\u8BA4"
     },
     avatar: {
       en: "Avatar",
@@ -60742,7 +62283,13 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Foto profilo",
       pt: "Foto de perfil",
       sv: "Profilbild",
-      ru: "\u0410\u0432\u0430\u0442\u0430\u0440"
+      ru: "\u0410\u0432\u0430\u0442\u0430\u0440",
+      pl: "Awatar",
+      zh: "\u5934\u50CF"
+    },
+    avatar_desc: {
+      // shown as a description when setting your avatar
+      en: "Present yourself site-wide in your own style"
     },
     customise: {
       en: "Customise",
@@ -60751,7 +62298,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Personalizza",
       pt: "Customizar",
       sv: "Anpassa",
-      ru: "\u041D\u0430\u0441\u0442\u0440\u043E\u0438\u0442\u044C"
+      ru: "\u041D\u0430\u0441\u0442\u0440\u043E\u0438\u0442\u044C",
+      pl: "Dostosuj",
+      zh: "\u81EA\u5B9A\u4E49"
     },
     convert: {
       en: "Convert",
@@ -60760,7 +62309,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Converti",
       pt: "Converter",
       sv: "Konvertera",
-      ru: "\u041A\u043E\u043D\u0432\u0435\u0440\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C"
+      ru: "\u041A\u043E\u043D\u0432\u0435\u0440\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C",
+      pl: "Konwertuj",
+      zh: "\u8F6C\u6362"
     },
     convert_from_hex: {
       en: "Convert colour",
@@ -60769,7 +62320,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Converti colore",
       pt: "Converter cor",
       sv: "Konvertera f\xE4rg",
-      ru: "\u041A\u043E\u043D\u0432\u0435\u0440\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u0446\u0432\u0435\u0442"
+      ru: "\u041A\u043E\u043D\u0432\u0435\u0440\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u0446\u0432\u0435\u0442",
+      pl: "Konwertuj kolor",
+      zh: "\u989C\u8272\u8F6C\u6362"
     },
     fonts: {
       en: "Fonts",
@@ -60778,7 +62331,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Font",
       pt: "Fontes",
       sv: "Typsnitt",
-      ru: "\u0428\u0440\u0438\u0444\u0442\u044B"
+      ru: "\u0428\u0440\u0438\u0444\u0442\u044B",
+      pl: "Czcionki",
+      zh: "\u5B57\u4F53"
     },
     hue: {
       en: "Accent colour",
@@ -60788,7 +62343,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Cor de destaque",
       pl: "Kolor akcentu (hue)",
       sv: "Accentf\xE4rg",
-      ru: "\u041E\u0441\u043D\u043E\u0432\u043D\u043E\u0439 \u0446\u0432\u0435\u0442"
+      ru: "\u041E\u0441\u043D\u043E\u0432\u043D\u043E\u0439 \u0446\u0432\u0435\u0442",
+      zh: "\u5F3A\u8C03\u8272"
     },
     sat: {
       en: "Vibrancy",
@@ -60798,7 +62354,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Vivacidade",
       pl: "Nasycenie (saturation)",
       sv: "F\xE4rgm\xE4ttnad",
-      ru: "\u041D\u0430\u0441\u044B\u0449\u0435\u043D\u043D\u043E\u0441\u0442\u044C"
+      ru: "\u041D\u0430\u0441\u044B\u0449\u0435\u043D\u043D\u043E\u0441\u0442\u044C",
+      zh: "\u9C9C\u8273\u5EA6"
     },
     lit: {
       en: "Lightness",
@@ -60808,7 +62365,23 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Claridade",
       pl: "Jasno\u015B\u0107 (lightness)",
       sv: "Ljushet",
-      ru: "\u042F\u0440\u043A\u043E\u0441\u0442\u044C"
+      ru: "\u042F\u0440\u043A\u043E\u0441\u0442\u044C",
+      zh: "\u4EAE\u5EA6"
+    },
+    apply_profile_accent: {
+      // global accent: the one set in bleh settings
+      // profile accent: the sponsor-exclusive colour in account settings
+      en: "Use profile accent globally"
+    },
+    apply_global_accent: {
+      // global accent: the one set in bleh settings
+      // profile accent: the sponsor-exclusive colour in account settings
+      en: "Copy current accent to profile"
+    },
+    this_will_replace_your_global_accent: {
+      // global accent: the one set in bleh settings
+      // profile accent: the sponsor-exclusive colour in account settings
+      en: "This will replace your global accent (the one in use right now)"
     },
     solarium: {
       name: {
@@ -60818,7 +62391,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         it: "Attiva effetti di vetro del solario",
         pt: "Ativar efeitos de vidro Solarium",
         sv: "Aktivera solariumsglaseffekter",
-        ru: "\u0412\u043A\u043B\u044E\u0447\u0438\u0442\u044C \u044D\u0444\u0444\u0435\u043A\u0442 \u043C\u0430\u0442\u043E\u0432\u043E\u0433\u043E \u0441\u0442\u0435\u043A\u043B\u0430 Solarium"
+        ru: "\u0412\u043A\u043B\u044E\u0447\u0438\u0442\u044C \u044D\u0444\u0444\u0435\u043A\u0442 \u043C\u0430\u0442\u043E\u0432\u043E\u0433\u043E \u0441\u0442\u0435\u043A\u043B\u0430 Solarium",
+        pl: "W\u0142\u0105cz efekty szk\u0142a solarnego",
+        zh: "\u5F00\u542F\u6BDB\u73BB\u7483\u7279\u6548"
       },
       body: {
         en: "Apply a see-through glassy material to many surfaces, which may degrade performance on some devices",
@@ -60827,7 +62402,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         it: "Applica un materiale vetrato traslucido a molte superfici, che potrebbe degradare le prestazioni su alcuni dispositivi",
         pt: "Aplicar um material transl\xFAcido e vidrado a v\xE1rias superf\xEDcies, o que pode reduzir o desempenho em alguns dispositivos",
         sv: "L\xE4g till ett genomskinligt glasliknande material till m\xE5nga ytor, som kan degradera prestanda p\xE5 vissa enheter",
-        ru: "\u041F\u0440\u0438\u043C\u0435\u043D\u044F\u0435\u0442 \u043F\u043E\u043B\u0443\u043F\u0440\u043E\u0437\u0440\u0430\u0447\u043D\u044B\u0439 \u0441\u0442\u0435\u043A\u043B\u044F\u043D\u043D\u044B\u0439 \u043C\u0430\u0442\u0435\u0440\u0438\u0430\u043B \u043A\u043E \u043C\u043D\u043E\u0433\u0438\u043C \u043F\u043E\u0432\u0435\u0440\u0445\u043D\u043E\u0441\u0442\u044F\u043C, \u0447\u0442\u043E \u043C\u043E\u0436\u0435\u0442 \u0441\u043D\u0438\u0437\u0438\u0442\u044C \u043F\u0440\u043E\u0438\u0437\u0432\u043E\u0434\u0438\u0442\u0435\u043B\u044C\u043D\u043E\u0441\u0442\u044C \u043D\u0430 \u043D\u0435\u043A\u043E\u0442\u043E\u0440\u044B\u0445 \u0443\u0441\u0442\u0440\u043E\u0439\u0441\u0442\u0432\u0430\u0445"
+        ru: "\u041F\u0440\u0438\u043C\u0435\u043D\u044F\u0435\u0442 \u043F\u043E\u043B\u0443\u043F\u0440\u043E\u0437\u0440\u0430\u0447\u043D\u044B\u0439 \u0441\u0442\u0435\u043A\u043B\u044F\u043D\u043D\u044B\u0439 \u043C\u0430\u0442\u0435\u0440\u0438\u0430\u043B \u043A\u043E \u043C\u043D\u043E\u0433\u0438\u043C \u043F\u043E\u0432\u0435\u0440\u0445\u043D\u043E\u0441\u0442\u044F\u043C, \u0447\u0442\u043E \u043C\u043E\u0436\u0435\u0442 \u0441\u043D\u0438\u0437\u0438\u0442\u044C \u043F\u0440\u043E\u0438\u0437\u0432\u043E\u0434\u0438\u0442\u0435\u043B\u044C\u043D\u043E\u0441\u0442\u044C \u043D\u0430 \u043D\u0435\u043A\u043E\u0442\u043E\u0440\u044B\u0445 \u0443\u0441\u0442\u0440\u043E\u0439\u0441\u0442\u0432\u0430\u0445",
+        pl: "W\u0142\u0105cz przezroczyste szk\u0142o na wielu powierzchniach, kt\xF3re mo\u017Ce mie\u0107 wp\u0142yw na wydajno\u015B\u0107 na niekt\xF3rych urz\u0105dzeniach",
+        zh: "\u4E3A\u591A\u4E2A\u754C\u9762\u5C42\u7EA7\u62AB\u4E0A\u4E00\u5C42\u534A\u900F\u660E\u73BB\u7483\u8D28\u611F\u3002\u8FD9\u80FD\u63D0\u5347\u89C6\u89C9\u6DF1\u5EA6\uFF0C\u4F46\u5728\u90E8\u5206\u8BBE\u5907\u4E0A\u53EF\u80FD\u4F1A\u589E\u52A0\u6027\u80FD\u5F00\u9500"
       }
     },
     seasonal_warning: {
@@ -60837,44 +62414,52 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Questa stagione ha un colore di accento predefinito personalizzato!",
       pt: "Esta esta\xE7\xE3o tem uma cor de destaque personalizada!",
       sv: "Denna \xE5rstid har en anpassad f\xE4rg!",
-      ru: "\u042D\u0442\u043E\u0442 \u0441\u0435\u0437\u043E\u043D \u0438\u043C\u0435\u0435\u0442 \u0441\u043E\u0431\u0441\u0442\u0432\u0435\u043D\u043D\u044B\u0439 \u0430\u043A\u0446\u0435\u043D\u0442\u043D\u044B\u0439 \u0446\u0432\u0435\u0442 \u043F\u043E \u0443\u043C\u043E\u043B\u0447\u0430\u043D\u0438\u044E!"
+      ru: "\u042D\u0442\u043E\u0442 \u0441\u0435\u0437\u043E\u043D \u0438\u043C\u0435\u0435\u0442 \u0441\u043E\u0431\u0441\u0442\u0432\u0435\u043D\u043D\u044B\u0439 \u0430\u043A\u0446\u0435\u043D\u0442\u043D\u044B\u0439 \u0446\u0432\u0435\u0442 \u043F\u043E \u0443\u043C\u043E\u043B\u0447\u0430\u043D\u0438\u044E!",
+      pl: "Ten sezon ma w\u0142asne domy\u015Blne kolory akcentu!"
     },
     card_background_saturation: {
       name: {
+        // saturation
         en: "Card background vibrancy",
         de: "S\xE4ttigung des Kartenhintergrunds",
         es: "Intensidad del fondo de la tarjeta",
         it: "Vivacit\xE0 dello sfondo delle carte",
         pt: "Vivacidade de fundo do cart\xE3o",
         sv: "Bakgrundsf\xE4rg",
-        ru: "\u041D\u0430\u0441\u044B\u0449\u0435\u043D\u043D\u043E\u0441\u0442\u044C \u0444\u043E\u043D\u0430 \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0438"
+        ru: "\u041D\u0430\u0441\u044B\u0449\u0435\u043D\u043D\u043E\u0441\u0442\u044C \u0444\u043E\u043D\u0430 \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0438",
+        pl: "Nasycenie t\u0142a kart"
       },
       body: {
         en: "Bring some colour into your world (or reduce it)",
         de: "Bringe etwas Farbe in deine Welt (oder reduziere sie)",
         es: "Trae un poco de color a tu mundo (o red\xFAcelo)",
-        it: "Porta un po' di colore nella tua vita (o riducilo)",
+        it: "Porta un po\u2019 di colore nella tua vita (o riducilo)",
         pt: "Traz algumas cores ao mundo (ou diminui elas)",
         sv: "Skaffa lite f\xE4rg i din v\xE4rld (eller minska den)",
-        ru: "\u0414\u043E\u0431\u0430\u0432\u044C\u0442\u0435 \u043A\u0440\u0430\u0441\u043E\u043A \u0432 \u0441\u0432\u043E\u0439 \u043C\u0438\u0440 (\u0438\u043B\u0438 \u0443\u043C\u0435\u043D\u044C\u0448\u0438\u0442\u0435 \u0438\u0445)"
+        ru: "\u0414\u043E\u0431\u0430\u0432\u044C\u0442\u0435 \u043A\u0440\u0430\u0441\u043E\u043A \u0432 \u0441\u0432\u043E\u0439 \u043C\u0438\u0440 (\u0438\u043B\u0438 \u0443\u043C\u0435\u043D\u044C\u0448\u0438\u0442\u0435 \u0438\u0445)",
+        pl: "Doadaj troche koloru do swojego \u015Bwiata (albo si\u0119 go pozb\u0105d\u017A)"
       }
     },
     noise: {
       name: {
         en: "Noise overlay opacity",
+        de: "Deckkraft des K\xF6rnungseffekts",
         es: "Opacidad de la capa de ruido",
         it: "Opacit\xE0 della sovrapposizione di rumore",
         sv: "Brus\xF6verl\xE4ggsopacitet",
         ru: "\u041D\u0435\u043F\u0440\u043E\u0437\u0440\u0430\u0447\u043D\u043E\u0441\u0442\u044C \u043D\u0430\u043B\u043E\u0436\u0435\u043D\u0438\u044F \u0448\u0443\u043C\u0430",
-        pt: "Opacidade da sobreposi\xE7\xE3o de ru\xEDdo"
+        pt: "Opacidade da sobreposi\xE7\xE3o de ru\xEDdo",
+        pl: "Nakrycie nak\u0142adki szumu"
       },
       body: {
         en: "Apply a coat of subtle noise to add variation to solid backgrounds",
+        de: "F\xFCgt eine feine K\xF6rnung hinzu, um einfarbigen Hintergr\xFCnden mehr Variation zu verleihen",
         es: "Aplica una capa de ruido para a\xF1adir variedad a los fondos s\xF3lidos",
         it: "Applica un mantello di rumore leggero per aggiungere variet\xE0 agli sfondi solidi",
         sv: "Till\xE4mpa ett brus\xF6verl\xE4gg f\xF6r lite variation p\xE5 enf\xE4rgade bakgrunder",
         ru: "\u041D\u0430\u043B\u043E\u0436\u0438\u0442\u044C \u0442\u043E\u043D\u043A\u0438\u0439 \u0441\u043B\u043E\u0439 \u0448\u0443\u043C\u0430, \u0447\u0442\u043E\u0431\u044B \u0434\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0440\u0430\u0437\u043D\u043E\u043E\u0431\u0440\u0430\u0437\u0438\u044F \u043E\u0434\u043D\u043E\u0442\u043E\u043D\u043D\u044B\u043C \u0444\u043E\u043D\u0430\u043C",
-        pt: "Aplica uma camada de ru\xEDdo sutil para adicionar varia\xE7\xE3o a fundos s\xF3lidos"
+        pt: "Aplica uma camada de ru\xEDdo sutil para adicionar varia\xE7\xE3o a fundos s\xF3lidos",
+        pl: "Dodaj troche szumum \u017Ceby otrzyma\u0107 nasycenie na statycznych t\u0142ach"
       }
     },
     save: {
@@ -60904,7 +62489,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Aggiungi",
       pt: "Adicionar",
       sv: "L\xE4gg till",
-      ru: "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C"
+      ru: "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C",
+      pl: "Dodaj"
     },
     remove: {
       en: "Remove",
@@ -60913,7 +62499,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Rimuovi",
       pt: "Remover",
       sv: "Radera",
-      ru: "\u0423\u0434\u0430\u043B\u0438\u0442\u044C"
+      ru: "\u0423\u0434\u0430\u043B\u0438\u0442\u044C",
+      pl: "Usu\u0144"
     },
     clear: {
       en: "Clear",
@@ -60942,7 +62529,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Vai",
       pt: "Ir",
       sv: "G\xE5",
-      ru: "\u041F\u0435\u0440\u0435\u0439\u0442\u0438"
+      ru: "\u041F\u0435\u0440\u0435\u0439\u0442\u0438",
+      pl: "Id\u017A"
     },
     skip: {
       en: "Skip",
@@ -60951,7 +62539,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Salta",
       pt: "Pular",
       sv: "Hoppa \xF6ver",
-      ru: "\u041F\u0440\u043E\u043F\u0443\u0441\u0442\u0438\u0442\u044C"
+      ru: "\u041F\u0440\u043E\u043F\u0443\u0441\u0442\u0438\u0442\u044C",
+      pl: "Pomi\u0144"
     },
     send: {
       en: "Send",
@@ -60960,7 +62549,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Invia",
       pt: "Enviar",
       sv: "Skicka",
-      ru: "\u041E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u044C"
+      ru: "\u041E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u044C",
+      pl: "Wy\u015Bli"
     },
     done: {
       en: "Done",
@@ -60979,7 +62569,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Termina",
       pt: "Terminar",
       sv: "Klart",
-      ru: "\u0417\u0430\u0432\u0435\u0440\u0448\u0438\u0442\u044C"
+      ru: "\u0417\u0430\u0432\u0435\u0440\u0448\u0438\u0442\u044C",
+      pl: "Zako\u0144cz"
     },
     continue: {
       en: "Continue",
@@ -60998,7 +62589,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Clicca per pi\xF9 opzioni",
       sv: "Tryck f\xF6r mer alternativ",
       ru: "\u041D\u0430\u0436\u043C\u0438\u0442\u0435, \u0447\u0442\u043E\u0431\u044B \u0443\u0432\u0438\u0434\u0435\u0442\u044C \u0431\u043E\u043B\u044C\u0448\u0435 \u043E\u043F\u0446\u0438\u0439",
-      pt: "Clique para mais op\xE7\xF5es"
+      pt: "Clique para mais op\xE7\xF5es",
+      pl: "Kliknij \u017Ceby zobaczy\u0107 wi\u0119cej opcji"
     },
     right_click_for_more_options: {
       en: "Right-click for more options",
@@ -61007,7 +62599,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Tasto destro per pi\xF9 opzioni",
       pt: "Clique esquerdo para mais op\xE7\xF5es",
       sv: "H\xF6gerklicka f\xF6r mer alternativ",
-      ru: "\u041D\u0430\u0436\u043C\u0438\u0442\u0435 \u043F\u0440\u0430\u0432\u043E\u0439 \u043A\u043D\u043E\u043F\u043A\u043E\u0439 \u043C\u044B\u0448\u0438 \u0434\u043B\u044F \u0434\u043E\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0445 \u043E\u043F\u0446\u0438\u0439"
+      ru: "\u041D\u0430\u0436\u043C\u0438\u0442\u0435 \u043F\u0440\u0430\u0432\u043E\u0439 \u043A\u043D\u043E\u043F\u043A\u043E\u0439 \u043C\u044B\u0448\u0438 \u0434\u043B\u044F \u0434\u043E\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0445 \u043E\u043F\u0446\u0438\u0439",
+      pl: "Naci\u015Bnij prawy przycisk myszy aby zobaczy\u0107 wi\u0119cej opcji"
     },
     refresh_pending: {
       name: {
@@ -61017,16 +62610,18 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         it: "Aggiornamento in attesa",
         pt: "Atualizar pend\xEAncias",
         sv: "F\xF6rv\xE4ntar omladdning",
-        ru: "\u0422\u0440\u0435\u0431\u0443\u0435\u0442\u0441\u044F \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u0435"
+        ru: "\u0422\u0440\u0435\u0431\u0443\u0435\u0442\u0441\u044F \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u0435",
+        pl: "Oczekuje na od\u015Bwie\u017Cenie"
       },
       body: {
         en: "A setting you changed requires a page refresh",
         de: "Eine von dir ge\xE4nderte Einstellung erfordert eine Seitenaktualisierung, damit sie wirksam wird",
         es: "Una opci\xF3n que cambiaste requiere que recargues la p\xE1gina",
-        it: "Un'opzione che hai cambiato richiede un aggiornamento della pagina",
+        it: "Un\u2019opzione che hai cambiato richiede un aggiornamento della pagina",
         pt: "Uma configura\xE7\xE3o que voc\xEA mudou exige uma atualiza\xE7\xE3o de p\xE1gina",
         sv: "En inst\xE4llning du \xE4ndrade p\xE5 beh\xF6ver at sidan laddas om",
-        ru: "\u0418\u0437\u043C\u0435\u043D\u0451\u043D\u043D\u0430\u044F \u0432\u0430\u043C\u0438 \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0430 \u0442\u0440\u0435\u0431\u0443\u0435\u0442 \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u044F \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u044B"
+        ru: "\u0418\u0437\u043C\u0435\u043D\u0451\u043D\u043D\u0430\u044F \u0432\u0430\u043C\u0438 \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0430 \u0442\u0440\u0435\u0431\u0443\u0435\u0442 \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u044F \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u044B",
+        pl: "Jedno z ustawie\u0144 kt\xF3re zmienili\u015Bcie wymaga od\u015Bwie\u017Cenia strony"
       }
     },
     new: {
@@ -61036,7 +62631,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Nuovo",
       pt: "Nova",
       sv: "Ny",
-      ru: "\u041D\u043E\u0432\u043E\u0435"
+      ru: "\u041D\u043E\u0432\u043E\u0435",
+      pl: "Nowe"
     },
     beta: {
       en: "Beta",
@@ -61045,7 +62641,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Beta",
       sv: "Beta",
       ru: "\u0411\u0435\u0442\u0430",
-      pt: "Beta"
+      pt: "Beta",
+      pl: "Beta"
     },
     more: {
       en: "More",
@@ -61054,7 +62651,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Altro",
       pt: "Mais",
       sv: "Mer",
-      ru: "\u0415\u0449\u0435"
+      ru: "\u0415\u0449\u0435",
+      pl: "Wi\u0119cej"
     },
     inbox: {
       en: "Inbox",
@@ -61063,7 +62661,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Posta in arrivo",
       pt: "Caixa de entrada",
       sv: "Brevl\xE5da",
-      ru: "\u0412\u0445\u043E\u0434\u044F\u0449\u0438\u0435"
+      ru: "\u0412\u0445\u043E\u0434\u044F\u0449\u0438\u0435",
+      pl: "Poczta"
     },
     notifications: {
       en: "Notifications",
@@ -61072,7 +62671,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Notifiche",
       pt: "Notifica\xE7\xF5es",
       sv: "Notiser",
-      ru: "\u0423\u0432\u0435\u0434\u043E\u043C\u043B\u0435\u043D\u0438\u044F"
+      ru: "\u0423\u0432\u0435\u0434\u043E\u043C\u043B\u0435\u043D\u0438\u044F",
+      pl: "Powiadomienia"
     },
     messages: {
       en: "Messages",
@@ -61081,7 +62681,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Messaggi",
       pt: "Mensagens",
       sv: "Meddelanden",
-      ru: "\u0421\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u044F"
+      ru: "\u0421\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u044F",
+      pl: "Wiadomo\u015Bci"
     },
     preview: {
       en: "Preview",
@@ -61090,7 +62691,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Anteprima",
       sv: "F\xF6rhandsvisning",
       ru: "\u041F\u0440\u0435\u0434\u043F\u0440\u043E\u0441\u043C\u043E\u0442\u0440",
-      pt: "Pr\xE9-visualiza\xE7\xE3o"
+      pt: "Pr\xE9-visualiza\xE7\xE3o",
+      pl: "Podgl\u0105d"
     },
     find_on: {
       // music services to find an artist/album/track on
@@ -61100,7 +62702,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Trova su",
       pt: "Encontre em",
       sv: "S\xF6k upp p\xE5",
-      ru: "\u041D\u0430\u0439\u0442\u0438 \u043D\u0430"
+      ru: "\u041D\u0430\u0439\u0442\u0438 \u043D\u0430",
+      pl: "Dost\u0119pne na"
     },
     following: {
       en: "Following",
@@ -61109,7 +62712,20 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Following",
       pt: "Seguindo",
       sv: "F\xF6ljer",
-      ru: "\u041F\u043E\u0434\u043F\u0438\u0441\u043A\u0438"
+      ru: "\u041F\u043E\u0434\u043F\u0438\u0441\u043A\u0438",
+      pl: "Obserwuje"
+    },
+    following_mutuals: {
+      // this is appended after the following button text if mutuals
+      // eg. Following (mutually)
+      en: "(mutually)",
+      de: "(gegenseitig)",
+      es: "(mutualmente)",
+      it: "(a vicenda)",
+      pt: "(mutualmente)",
+      sv: "(varandra)",
+      ru: "(\u0432\u0437\u0430\u0438\u043C\u043D\u043E)",
+      pl: "(nawzajem)"
     },
     followers: {
       en: "Followers",
@@ -61118,7 +62734,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Follower",
       pt: "Seguidores",
       sv: "F\xF6ljare",
-      ru: "\u041F\u043E\u0434\u043F\u0438\u0441\u0447\u0438\u043A\u0438"
+      ru: "\u041F\u043E\u0434\u043F\u0438\u0441\u0447\u0438\u043A\u0438",
+      pl: "Obserwuj\u0105cy"
     },
     neighbours: {
       en: "Neighbours",
@@ -61127,7 +62744,14 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Vicini",
       pt: "Vizinhos",
       sv: "Grannar",
-      ru: "\u0421\u043E\u0441\u0435\u0434\u0438"
+      ru: "\u0421\u043E\u0441\u0435\u0434\u0438",
+      pl: "S\u0105siedzi"
+    },
+    follows_you: {
+      en: "Follows you!"
+    },
+    user_follows_you: {
+      en: "{u} follows you!"
     },
     website: {
       en: "Website",
@@ -61136,7 +62760,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Sito web",
       sv: "Hemsida",
       ru: "\u0412\u0435\u0431\u0441\u0430\u0439\u0442",
-      pt: "Website"
+      pt: "Website",
+      pl: "Strona"
     },
     overview: {
       en: "Overview",
@@ -61146,7 +62771,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Vis\xE3o geral",
       ja: "\u30C0\u30A4\u30B8\u30A7\u30B9\u30C8",
       sv: "\xD6versikt",
-      ru: "\u041E\u0431\u0437\u043E\u0440"
+      ru: "\u041E\u0431\u0437\u043E\u0440",
+      pl: "Przegl\u0105d"
     },
     photos: {
       en: "Photos",
@@ -61156,7 +62782,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Fotos",
       ja: "\u5199\u771F",
       sv: "Foton",
-      ru: "\u0424\u043E\u0442\u043E\u0433\u0440\u0430\u0444\u0438\u0438"
+      ru: "\u0424\u043E\u0442\u043E\u0433\u0440\u0430\u0444\u0438\u0438",
+      pl: "Zdj\u0119cia"
     },
     artwork: {
       en: "Artwork",
@@ -61165,32 +62792,30 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Copertina",
       pt: "Arte de capa",
       sv: "Konst",
-      ru: "\u041E\u0431\u043B\u043E\u0436\u043A\u0430"
+      ru: "\u041E\u0431\u043B\u043E\u0436\u043A\u0430",
+      pl: "Ok\u0142adka"
     },
     gallery_sum: {
+      // used as a tooltip when hovering over the combined number
+      // of votes on a gallery image
       en: "This is the sum of votes for ordering",
+      de: "Dies ist die Summe der Stimmen f\xFCr die Reihenfolge",
       es: "Esta es la suma de votos para ordenar",
-      it: "Questa \xE8 la somma dei voti per l'ordinamento",
+      it: "Questa \xE8 la somma dei voti per l\u2019ordinamento",
       sv: "Det h\xE4r \xE4r summan r\xF6ster f\xF6r bildordning",
       ru: "\u042D\u0442\u043E \u0441\u0443\u043C\u043C\u0430 \u0433\u043E\u043B\u043E\u0441\u043E\u0432 \u0434\u043B\u044F \u0441\u043E\u0440\u0442\u0438\u0440\u043E\u0432\u043A\u0438",
-      pt: "Esta \xE9 a soma dos votos para ordena\xE7\xE3o"
-    },
-    view_saved: {
-      en: "View all saved photos",
-      es: "Ver todas las fotos guardadas",
-      it: "Visualizza tutte le foto salvate",
-      sv: "Visa alla sparade foton",
-      ru: "\u041F\u043E\u0441\u043C\u043E\u0442\u0440\u0435\u0442\u044C \u0432\u0441\u0435 \u0441\u043E\u0445\u0440\u0430\u043D\u0435\u043D\u043D\u044B\u0435 \u0444\u043E\u0442\u043E\u0433\u0440\u0430\u0444\u0438\u0438",
-      pt: "Veja todas as fotos salvas"
+      pt: "Esta \xE9 a soma dos votos para ordena\xE7\xE3o",
+      pl: "Suma g\u0142os\xF3w za zam\xF3wieniem"
     },
     dropzone: {
       en: "Drag-and-drop an image or click here",
       de: "Bild hierher ziehen oder hier klicken",
       es: "Arrastra una imagen o haz clic aqu\xED",
-      it: "Trascina e rilascia un'immagine, o clicca qui",
+      it: "Trascina e rilascia un\u2019immagine, o clicca qui",
       sv: "Dra och sl\xE4pp en bild eller klicka h\xE4r",
       ru: "\u041F\u0435\u0440\u0435\u0442\u0430\u0449\u0438\u0442\u0435 \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435 \u0438\u043B\u0438 \u043D\u0430\u0436\u043C\u0438\u0442\u0435 \u0437\u0434\u0435\u0441\u044C",
-      pt: "Arraste e solte uma imagem ou clique aqui"
+      pt: "Arraste e solte uma imagem ou clique aqui",
+      pl: "Przeci\u0105gnij i upu\u015B\u0107 zdj\u0119cie lub kliknij tutaj"
     },
     similar_artists: {
       en: "Similar Artists",
@@ -61199,7 +62824,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Artisti simili",
       pt: "Artistas similares",
       sv: "Liknande artister",
-      ru: "\u041F\u043E\u0445\u043E\u0436\u0438\u0435 \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u0438"
+      ru: "\u041F\u043E\u0445\u043E\u0436\u0438\u0435 \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u0438",
+      pl: "Podobni arty\u015Bci"
     },
     artists_similar_to_name: {
       en: "Artists similar to {n}",
@@ -61208,7 +62834,13 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Artisti simili a {n}",
       sv: "Liknande artister till {n}",
       pt: "Artistas similares a {n}",
-      ru: "\u0418\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u0438, \u043F\u043E\u0445\u043E\u0436\u0438\u0435 \u043D\u0430 {n}"
+      ru: "\u0418\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u0438, \u043F\u043E\u0445\u043E\u0436\u0438\u0435 \u043D\u0430 {n}",
+      pl: "Arty\u015Bci podobni do {n}"
+    },
+    more_like_name: {
+      // more artists like kitagawa
+      // more albums like etc.
+      en: "More like {n}"
     },
     biography: {
       en: "Biography",
@@ -61218,7 +62850,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Biografia",
       ja: "\u30D0\u30A4\u30AA\u30B0\u30E9\u30D5\u30A3\u30FC",
       sv: "Biografi",
-      ru: "\u0411\u0438\u043E\u0433\u0440\u0430\u0444\u0438\u044F"
+      ru: "\u0411\u0438\u043E\u0433\u0440\u0430\u0444\u0438\u044F",
+      pl: "Biografia"
     },
     wiki: {
       en: "Wiki",
@@ -61227,7 +62860,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Wiki",
       sv: "Wiki",
       ru: "\u0418\u043D\u0444\u043E",
-      pt: "Wiki"
+      pt: "Wiki",
+      pl: "Wiki"
     },
     listeners: {
       en: "Listeners",
@@ -61236,7 +62870,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Ascoltatori",
       pt: "Ouvintes",
       sv: "Lyssnare",
-      ru: "\u0421\u043B\u0443\u0448\u0430\u0442\u0435\u043B\u0438"
+      ru: "\u0421\u043B\u0443\u0448\u0430\u0442\u0435\u043B\u0438",
+      pl: "S\u0142uchacze"
     },
     listeners_you_know: {
       en: "Listeners You Know",
@@ -61245,7 +62880,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Ascoltatori che conosci",
       pt: "Ouvintes que voc\xEA conhece",
       sv: "Lyssnare du k\xE4nner",
-      ru: "\u0417\u043D\u0430\u043A\u043E\u043C\u044B\u0435 \u0441\u043B\u0443\u0448\u0430\u0442\u0435\u043B\u0438"
+      ru: "\u0417\u043D\u0430\u043A\u043E\u043C\u044B\u0435 \u0441\u043B\u0443\u0448\u0430\u0442\u0435\u043B\u0438",
+      pl: "S\u0142uchacze kt\xF3rych znasz"
     },
     count_listeners: {
       en: "{c} listeners",
@@ -61254,7 +62890,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "{c} ascoltatori",
       pt: "{c} ouvintes",
       sv: "{c} lyssnare",
-      ru: "{c} \u0441\u043B\u0443\u0448\u0430\u0442\u0435\u043B\u0435\u0439"
+      ru: "{c} \u0441\u043B\u0443\u0448\u0430\u0442\u0435\u043B\u0435\u0439",
+      pl: "{c} s\u0142uchaczy"
     },
     tag: {
       en: "Tag",
@@ -61263,7 +62900,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Tag",
       sv: "Tagg",
       ru: "\u0422\u0435\u0433",
-      pt: "Tag"
+      pt: "Tag",
+      pl: "Tag"
     },
     tags: {
       en: "Tags",
@@ -61273,10 +62911,11 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       ja: "\u30BF\u30B0",
       sv: "Taggar",
       ru: "\u0422\u0435\u0433\u0438",
-      pt: "Tags"
+      pt: "Tags",
+      pl: "Tagi"
     },
     reports: {
-      // last.fm listening reports
+      // Last.fm listening reports
       en: "Reports",
       de: "Berichte",
       es: "Informes",
@@ -61284,7 +62923,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       ja: "\u30EC\u30DD\u30FC\u30C8",
       pt: "Relat\xF3rio",
       sv: "Lyssningsrapport",
-      ru: "\u041E\u0442\u0447\u0435\u0442\u044B"
+      ru: "\u041E\u0442\u0447\u0435\u0442\u044B",
+      pl: "Reporty"
     },
     artist_lower: {
       // used inside a sentence not on its own,
@@ -61295,7 +62935,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "artista",
       pt: "artista",
       sv: "artistnamnet",
-      ru: "\u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C"
+      ru: "\u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C",
+      pl: "artysta"
     },
     album_lower: {
       // used inside a sentence not on its own,
@@ -61306,7 +62947,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "album",
       pt: "\xE1lbum",
       sv: "albumtiteln",
-      ru: "\u0430\u043B\u044C\u0431\u043E\u043C"
+      ru: "\u0430\u043B\u044C\u0431\u043E\u043C",
+      pl: "album"
     },
     track_lower: {
       // used inside a sentence not on its own,
@@ -61317,7 +62959,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "brano",
       pt: "faixa",
       sv: "l\xE5ten",
-      ru: "\u0442\u0440\u0435\u043A"
+      ru: "\u0442\u0440\u0435\u043A",
+      pl: "utw\xF3r"
     },
     lotus_cta: {
       // {t} is replaced by one of the 3 above
@@ -61329,19 +62972,21 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "This {t} is being re-capitalised, is it correct?",
         de: "Die Gro\xDF-/Kleinschreibung dieses {t} wird korrigiert, ist das korrekt?",
         es: "La capitalizaci\xF3n de este {t} est\xE1 siendo modificada, \xBFes correcta?",
-        it: "L'uso delle maiuscole per questo {t} sta venendo modificato, \xE8 corretto?",
+        it: "L\u2019uso delle maiuscole per questo {t} sta venendo modificato, \xE8 corretto?",
         pt: "{t} teve a capitaliza\xE7\xE3o ajustada, est\xE1 correto?",
         sv: "Nuvarande {t} har \xE4ndrad kapitalisering, st\xE4mmer det h\xE4r?",
-        ru: "\u0412 \u044D\u0442\u043E\u043C {t} \u0438\u0441\u043F\u0440\u0430\u0432\u043B\u044F\u0435\u0442\u0441\u044F \u0440\u0435\u0433\u0438\u0441\u0442\u0440, \u044F\u0432\u043B\u044F\u0435\u0442\u0441\u044F \u043B\u0438 \u043E\u043D \u043F\u0440\u0430\u0432\u0438\u043B\u044C\u043D\u044B\u043C?"
+        ru: "\u0412 \u044D\u0442\u043E\u043C {t} \u0438\u0441\u043F\u0440\u0430\u0432\u043B\u044F\u0435\u0442\u0441\u044F \u0440\u0435\u0433\u0438\u0441\u0442\u0440, \u044F\u0432\u043B\u044F\u0435\u0442\u0441\u044F \u043B\u0438 \u043E\u043D \u043F\u0440\u0430\u0432\u0438\u043B\u044C\u043D\u044B\u043C?",
+        pl: "{t} zosta\u0142 innaczej skapitalizowany, czy tak jest poprawnie?"
       },
       false: {
         en: "Is this {t} capitalised correctly?",
         de: "Ist die Gro\xDF-/Kleinschreibung dieses {t} richtig?",
         es: "\xBFEst\xE1 este {t} capitalizado correctamente?",
-        it: "L'uso delle maiuscole per questo {t} \xE8 corretto?",
+        it: "L\u2019uso delle maiuscole per questo {t} \xE8 corretto?",
         pt: "Esse(a) {t} est\xE1 capitalizado(a) corretamente?",
         sv: "St\xE4mmer kapitaliseringen p\xE5 {t}?",
-        ru: "\u041F\u0440\u0430\u0432\u0438\u043B\u044C\u043D\u043E \u043B\u0438 \u043D\u0430\u043F\u0438\u0441\u0430\u043D \u0440\u0435\u0433\u0438\u0441\u0442\u0440 \u044D\u0442\u043E\u0433\u043E {t}?"
+        ru: "\u041F\u0440\u0430\u0432\u0438\u043B\u044C\u043D\u043E \u043B\u0438 \u043D\u0430\u043F\u0438\u0441\u0430\u043D \u0440\u0435\u0433\u0438\u0441\u0442\u0440 \u044D\u0442\u043E\u0433\u043E {t}?",
+        pl: "Czy {t} jest poprawnie skapitalizowany?"
       }
     },
     current: {
@@ -61351,16 +62996,18 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Attuale",
       sv: "Nuvarande",
       ru: "\u0422\u0435\u043A\u0443\u0449\u0438\u0439",
-      pt: "Atual"
+      pt: "Atual",
+      pl: "Aktualny"
     },
     current_tip: {
       en: "This is the original capitalisation present on Last.fm",
       de: "Dies ist die originale Gro\xDF-/Kleinschreibung auf Last.fm",
       es: "Esta es la capitalizaci\xF3n original presente en Last.fm",
-      it: "Questo \xE8 l'uso delle maiuscole originale presente su Last.fm",
+      it: "Questo \xE8 l\u2019uso delle maiuscole originale presente su Last.fm",
       sv: "Det h\xE4r \xE4r den originella kapitaliseringen som finns p\xE5 Last.fm",
       ru: "\u042D\u0442\u043E \u0438\u0441\u0445\u043E\u0434\u043D\u044B\u0439 \u0440\u0435\u0433\u0438\u0441\u0442\u0440, \u043F\u0440\u0435\u0434\u043E\u0441\u0442\u0430\u0432\u043B\u0435\u043D\u043D\u044B\u0439 \u043D\u0430 Last.fm",
-      pt: "Esta \xE9 a capitaliza\xE7\xE3o original presente no Last.fm"
+      pt: "Esta \xE9 a capitaliza\xE7\xE3o original presente no Last.fm",
+      pl: "To jest orginalna kapitalizacja z Last.fm"
     },
     correction: {
       en: "Correction",
@@ -61369,16 +63016,18 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Correzione",
       pt: "Corre\xE7\xE3o",
       sv: "Korrigering",
-      ru: "\u0418\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435"
+      ru: "\u0418\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435",
+      pl: "Poprawa"
     },
     correction_tip: {
       en: "This is the correct capitalisation, as decided by the artist",
-      de: "Dies ist die korrekte Gro\xDF-/Kleinschreibung, wie sie vom K\xFCnstler festgelegt wurde",
+      de: "Dies ist die korrekte Gro\xDF-/Kleinschreibung, wie sie von den K\xFCnstler:innen festgelegt wurde",
       es: "Esta es la capitalizaci\xF3n correcta, decidida por el artista",
-      it: "Questo \xE8 l'uso delle maiuscole corretto, come deciso dall'artista",
+      it: "Questo \xE8 l\u2019uso delle maiuscole corretto, come deciso dall\u2019artista",
       sv: "Det h\xE4r \xE4r r\xE4tt kapitalisering, som best\xE4md av artisten",
       ru: "\u042D\u0442\u043E \u043F\u0440\u0430\u0432\u0438\u043B\u044C\u043D\u044B\u0439 \u0440\u0435\u0433\u0438\u0441\u0442\u0440, \u043E\u043F\u0440\u0435\u0434\u0435\u043B\u0435\u043D\u043D\u044B\u0439 \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u0435\u043C",
-      pt: "Esta \xE9 a capitaliza\xE7\xE3o correta, conforme decidido pelo artista"
+      pt: "Esta \xE9 a capitaliza\xE7\xE3o correta, conforme decidido pelo artista",
+      pl: "To jest poprawna kapitalizacja, wed\u0142ug artysty"
     },
     sources: {
       en: "Sources",
@@ -61387,7 +63036,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Sorgenti",
       sv: "K\xE4llor",
       ru: "\u0418\u0441\u0442\u043E\u0447\u043D\u0438\u043A\u0438",
-      pt: "Fontes"
+      pt: "Fontes",
+      pl: "\u0179r\xF3d\u0142a"
     },
     sources_tip: {
       en: "Provide reputable sources where this capitalisation is present, excluding sites like Wikipedia, RYM, AOTY, and MusicBrainz",
@@ -61396,7 +63046,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Fornisci sorgenti attendibili dove questo uso delle maiuscole \xE8 presente, esclusi siti come Wikipedia, RYM, AOTY o MusicBrainz",
       sv: "Visa p\xE5litliga k\xE4llor d\xE4r man kan se att denna kapitalisering st\xE4mmer, f\xF6rutom sidor som Wikipedia, RYM, AOTY och MusicBrainz",
       ru: "\u0423\u043A\u0430\u0436\u0438\u0442\u0435 \u0430\u0432\u0442\u043E\u0440\u0438\u0442\u0435\u0442\u043D\u044B\u0435 \u0438\u0441\u0442\u043E\u0447\u043D\u0438\u043A\u0438, \u0433\u0434\u0435 \u043F\u0440\u0438\u0441\u0443\u0442\u0441\u0442\u0432\u0443\u0435\u0442 \u044D\u0442\u043E\u0442 \u0440\u0435\u0433\u0438\u0441\u0442\u0440, \u0438\u0441\u043A\u043B\u044E\u0447\u0430\u044F \u0442\u0430\u043A\u0438\u0435 \u0441\u0430\u0439\u0442\u044B, \u043A\u0430\u043A Wikipedia, RYM, AOTY \u0438 MusicBrainz",
-      pt: "Forne\xE7a fontes confi\xE1veis onde esta capitaliza\xE7\xE3o est\xE1 presente, excluindo sites como Wikipedia, RYM, AOTY e MusicBrainz"
+      pt: "Forne\xE7a fontes confi\xE1veis onde esta capitaliza\xE7\xE3o est\xE1 presente, excluindo sites como Wikipedia, RYM, AOTY e MusicBrainz",
+      pl: "Podaj zaufane \u017Ar\xF3d\u0142o gdzie tak jest podana kapitalizacja, poza stronami jak Wikipedia, RYM, AOTY i MusicBrainz"
     },
     suggest: {
       en: "Suggest",
@@ -61405,16 +63056,18 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Suggerisci",
       sv: "F\xF6resl\xE5",
       ru: "\u041F\u0440\u0435\u0434\u043B\u043E\u0436\u0438\u0442\u044C",
-      pt: "Sugerir"
+      pt: "Sugerir",
+      pl: "Zasugeruj"
     },
     please_match_the_format: {
       en: "Only capitalisation changes are allowed",
       de: "Nur \xC4nderungen der Gro\xDF-/Kleinschreibung sind erlaubt",
       es: "Solo se permiten cambios a la capitalizaci\xF3n",
-      it: "Sono consentiti solo i cambi relativi all'uso delle maiuscole",
+      it: "Sono consentiti solo i cambi relativi all\u2019uso delle maiuscole",
       sv: "Endast \xE4ndringar p\xE5 kapitalisering \xE4r till\xE5tet",
       ru: "\u0414\u043E\u043F\u0443\u0441\u043A\u0430\u044E\u0442\u0441\u044F \u0442\u043E\u043B\u044C\u043A\u043E \u0438\u0437\u043C\u0435\u043D\u0435\u043D\u0438\u044F \u0440\u0435\u0433\u0438\u0441\u0442\u0440\u0430",
-      pt: "Apenas mudan\xE7as de capitaliza\xE7\xE3o s\xE3o permitidas"
+      pt: "Apenas mudan\xE7as de capitaliza\xE7\xE3o s\xE3o permitidas",
+      pl: "Tylko zmiany kapitalizacji s\u0105 dozwolone"
     },
     suggest_correction: {
       // suggest a correction for the above system
@@ -61424,7 +63077,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Suggerisci una correzione",
       pt: "Sugira uma corre\xE7\xE3o",
       sv: "F\xF6resl\xE5 en \xE4ndring",
-      ru: "\u041F\u0440\u0435\u0434\u043B\u043E\u0436\u0438\u0442\u044C \u0438\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435"
+      ru: "\u041F\u0440\u0435\u0434\u043B\u043E\u0436\u0438\u0442\u044C \u0438\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435",
+      pl: "Zasugeruj poprawe"
     },
     recent_tracks: {
       en: "Recent Tracks",
@@ -61434,7 +63088,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Faixas recentes",
       ja: "\u6700\u8FD1\u306E\u30C8\u30E9\u30C3\u30AF",
       sv: "Nyligen spelat",
-      ru: "\u041D\u0435\u0434\u0430\u0432\u043D\u0438\u0435 \u0442\u0440\u0435\u043A\u0438"
+      ru: "\u041D\u0435\u0434\u0430\u0432\u043D\u0438\u0435 \u0442\u0440\u0435\u043A\u0438",
+      pl: "Ostatnie utwory"
     },
     top_artists: {
       en: "Top Artists",
@@ -61444,7 +63099,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Top Artistas",
       ja: "\u30C8\u30C3\u30D7\u30A2\u30FC\u30C6\u30A3\u30B9\u30C8",
       sv: "Toppartister",
-      ru: "\u041B\u0443\u0447\u0448\u0438\u0435 \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u0438"
+      ru: "\u041B\u0443\u0447\u0448\u0438\u0435 \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u0438",
+      pl: "Najpopularniejsi wykonawcy"
     },
     top_albums: {
       en: "Top Albums",
@@ -61454,7 +63110,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Top \xC1lbuns",
       ja: "\u4EBA\u6C17\u30A2\u30EB\u30D0\u30E0",
       sv: "Toppalbum",
-      ru: "\u041B\u0443\u0447\u0448\u0438\u0435 \u0430\u043B\u044C\u0431\u043E\u043C\u044B"
+      ru: "\u041B\u0443\u0447\u0448\u0438\u0435 \u0430\u043B\u044C\u0431\u043E\u043C\u044B",
+      pl: "Najpopularniejsze albumy"
     },
     top_tracks: {
       en: "Top Tracks",
@@ -61464,7 +63121,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Top Faixas",
       ja: "\u4EBA\u6C17\u30C8\u30E9\u30C3\u30AF",
       sv: "Toppl\xE5tar",
-      ru: "\u041B\u0443\u0447\u0448\u0438\u0435 \u0442\u0440\u0435\u043A\u0438"
+      ru: "\u041B\u0443\u0447\u0448\u0438\u0435 \u0442\u0440\u0435\u043A\u0438",
+      pl: "Najpopularniejsze utwory"
     },
     top_track: {
       en: "Top Track",
@@ -61473,7 +63131,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Brano pi\xF9 ascoltato",
       pt: "Top Faixa",
       sv: "Toppl\xE5t",
-      ru: "\u041B\u0443\u0447\u0448\u0438\u0439 \u0442\u0440\u0435\u043A"
+      ru: "\u041B\u0443\u0447\u0448\u0438\u0439 \u0442\u0440\u0435\u043A",
+      pl: "Najpopularniejszy utw\xF3r"
     },
     you_share_count_with: {
       // as in your musical taste % between you and someone else
@@ -61485,6 +63144,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Voce \xE9 {c} compat\xEDvel",
       sv: "Du \xE4r {c} kompatibel",
       ru: "\u0412\u0430\u0448\u0430 \u0441\u043E\u0432\u043C\u0435\u0441\u0442\u0438\u043C\u043E\u0441\u0442\u044C {c}",
+      pl: "Jeste\u015Bcie kompatybilni w {c}",
       two: {
         en: "{artist1}, {artist2}",
         de: "{artist1}, {artist2}",
@@ -61493,7 +63153,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         pt: "{artist1}, {artist2}",
         sv: "{artist1}, {artist2}",
         ja: "{artist1}\u3001{artist2}",
-        ru: "{artist1}, {artist2}"
+        ru: "{artist1}, {artist2}",
+        pl: "{artist1}, {artist2}"
       },
       three: {
         en: "{artist1}, {artist2}, {artist3}",
@@ -61503,8 +63164,15 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         pt: "{artist1}, {artist2}, {artist3}",
         sv: "{artist1}, {artist2}, {artist3}",
         ja: "{artist1}\u3001{artist2}\u3001{artist3}",
-        ru: "{artist1}, {artist2}, {artist3}"
+        ru: "{artist1}, {artist2}, {artist3}",
+        pl: "{artist1}, {artist2}, {artist3}"
       }
+    },
+    you_are_a_value_match: {
+      // valentines easter egg
+      // u: username
+      // v: Super / Low / Very Low etc.
+      en: "You and {u} are a {v} match"
     },
     taste_similarity: {
       en: "Taste similarity",
@@ -61513,7 +63181,17 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Similarit\xE0 dei gusti",
       pt: "Similaridade de gostos",
       sv: "Smaklikhet",
-      ru: "\u0421\u0445\u043E\u0436\u0435\u0441\u0442\u044C \u0432\u043A\u0443\u0441\u043E\u0432"
+      ru: "\u0421\u0445\u043E\u0436\u0435\u0441\u0442\u044C \u0432\u043A\u0443\u0441\u043E\u0432",
+      pl: "Podobie\u0144stwo gustu"
+    },
+    generic_lastfm_compatibility_message: {
+      // based on the default message last.fm shows
+      // \n is a new line
+      en: "Your compatibility with {u} is {r}.\nYou both listen to {a}."
+    },
+    subject: {
+      // as in an email/message subject
+      en: "Subject"
     },
     message: {
       // as in a direct message
@@ -61523,7 +63201,11 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Invia messaggio",
       pt: "Mensagem",
       sv: "Meddela",
-      ru: "\u0421\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u0435"
+      ru: "\u0421\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u0435",
+      pl: "Wiadomo\u015B\u0107"
+    },
+    send_message: {
+      en: "Send message"
     },
     join_discord: {
       en: "Join Discord",
@@ -61532,7 +63214,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Unisciti al Discord",
       sv: "G\xE5 med i Discord",
       ru: "\u041F\u0440\u0438\u0441\u043E\u0435\u0434\u0438\u043D\u0438\u0442\u044C\u0441\u044F \u043A Discord",
-      pt: "Junte-se ao Discord"
+      pt: "Junte-se ao Discord",
+      pl: "Do\u0142\u0105cz na Discord"
     },
     sponsor_details: {
       en: "Sponsor and badge details",
@@ -61541,7 +63224,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Dettagli sponsorizzazione e distintivo",
       sv: "Sponsor och emblemdetaljer",
       ru: "\u0421\u0432\u0435\u0434\u0435\u043D\u0438\u044F \u043E \u0441\u043F\u043E\u043D\u0441\u043E\u0440\u0435 \u0438 \u0437\u043D\u0430\u0447\u043A\u0435",
-      pt: "Detalhes do apoiador e do emblema"
+      pt: "Detalhes do apoiador e do emblema",
+      pl: "Detale sponsora i odznaki"
     },
     sponsor_data: {
       en: "Sponsor and badge data version {v}",
@@ -61550,7 +63234,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Versione dei dati di sponsor e distintivi {v}",
       pt: "Vers\xE3o da data de apoiador e emblemas",
       sv: "Sponsor-och-emblemdata, version {v}",
-      ru: "\u0414\u0430\u043D\u043D\u044B\u0435 \u043E \u0441\u043F\u043E\u043D\u0441\u043E\u0440\u0430\u0445 \u0438 \u0437\u043D\u0430\u0447\u043A\u0430\u0445, \u0432\u0435\u0440\u0441\u0438\u044F {v}"
+      ru: "\u0414\u0430\u043D\u043D\u044B\u0435 \u043E \u0441\u043F\u043E\u043D\u0441\u043E\u0440\u0430\u0445 \u0438 \u0437\u043D\u0430\u0447\u043A\u0430\u0445, \u0432\u0435\u0440\u0441\u0438\u044F {v}",
+      pl: "Dane sponsora i odznaki, wersja {v}"
     },
     sponsor: {
       en: "Become a sponsor",
@@ -61559,7 +63244,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Diventa uno sponsor",
       pt: "Torne-se um apoiador",
       sv: "Bli en sponsor",
-      ru: "\u0421\u0442\u0430\u0442\u044C \u0441\u043F\u043E\u043D\u0441\u043E\u0440\u043E\u043C"
+      ru: "\u0421\u0442\u0430\u0442\u044C \u0441\u043F\u043E\u043D\u0441\u043E\u0440\u043E\u043C",
+      pl: "Zosta\u0144 sponsorem"
     },
     message_sponsor: {
       // rewards meaning a badge for example
@@ -61569,7 +63255,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Ricevi ricompense da sponsor",
       pt: "Receba recompensas de apoiador",
       sv: "F\xE5 sponsorpriser",
-      ru: "\u041F\u043E\u043B\u0443\u0447\u0438\u0442\u044C \u043D\u0430\u0433\u0440\u0430\u0434\u044B \u0441\u043F\u043E\u043D\u0441\u043E\u0440\u0430"
+      ru: "\u041F\u043E\u043B\u0443\u0447\u0438\u0442\u044C \u043D\u0430\u0433\u0440\u0430\u0434\u044B \u0441\u043F\u043E\u043D\u0441\u043E\u0440\u0430",
+      pl: "Otrzymaj nagrody za sponsora"
     },
     news_sponsor_cta: {
       en: "Want to support future development of bleh?",
@@ -61578,7 +63265,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Vuoi supportare il futuro sviluppo di bleh?",
       pt: "Quer apoiar o desenvolvimento futuro do bleh?",
       sv: "Vill du st\xF6dja blehs framtida utveckling?",
-      ru: "\u0425\u043E\u0442\u0438\u0442\u0435 \u043F\u043E\u0434\u0434\u0435\u0440\u0436\u0430\u0442\u044C \u0431\u0443\u0434\u0443\u0449\u0443\u044E \u0440\u0430\u0437\u0440\u0430\u0431\u043E\u0442\u043A\u0443 bleh?"
+      ru: "\u0425\u043E\u0442\u0438\u0442\u0435 \u043F\u043E\u0434\u0434\u0435\u0440\u0436\u0430\u0442\u044C \u0431\u0443\u0434\u0443\u0449\u0443\u044E \u0440\u0430\u0437\u0440\u0430\u0431\u043E\u0442\u043A\u0443 bleh?",
+      pl: "Czy chcesz wesprze\u0107 przysz\u0142y rozw\xF3j bleh?"
     },
     support_future_development: {
       // in the context of sponsoring
@@ -61588,7 +63276,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Supporta lo sviluppo futuro",
       pt: "Apoie o desenvolvimento futuro",
       sv: "St\xF6d framtida utveckling",
-      ru: "\u041F\u043E\u0434\u0434\u0435\u0440\u0436\u0430\u0442\u044C \u0431\u0443\u0434\u0443\u0449\u0443\u044E \u0440\u0430\u0437\u0440\u0430\u0431\u043E\u0442\u043A\u0443"
+      ru: "\u041F\u043E\u0434\u0434\u0435\u0440\u0436\u0430\u0442\u044C \u0431\u0443\u0434\u0443\u0449\u0443\u044E \u0440\u0430\u0437\u0440\u0430\u0431\u043E\u0442\u043A\u0443",
+      pl: "Wesprzyj przysz\u0142y rozw\xF3j"
     },
     why_sponsor: {
       en: "Receive a profile badge and a big thank you from katelyn <3",
@@ -61597,7 +63286,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Ricevi un distintivo del profilo e un grande grazie da katelyn <3",
       pt: "Receba um emblema no seu perfil e um obrigad\xE3o da katelyn por apoiar <3",
       sv: "F\xE5 ett emblem p\xE5 din profil och ett stort tack fr\xE5n katelyn <3",
-      ru: "\u041F\u043E\u043B\u0443\u0447\u0438\u0442\u0435 \u0437\u043D\u0430\u0447\u043E\u043A \u043F\u0440\u043E\u0444\u0438\u043B\u044F \u0438 \u0431\u043E\u043B\u044C\u0448\u0443\u044E \u0431\u043B\u0430\u0433\u043E\u0434\u0430\u0440\u043D\u043E\u0441\u0442\u044C \u043E\u0442 katelyn <3"
+      ru: "\u041F\u043E\u043B\u0443\u0447\u0438\u0442\u0435 \u0437\u043D\u0430\u0447\u043E\u043A \u043F\u0440\u043E\u0444\u0438\u043B\u044F \u0438 \u0431\u043E\u043B\u044C\u0448\u0443\u044E \u0431\u043B\u0430\u0433\u043E\u0434\u0430\u0440\u043D\u043E\u0441\u0442\u044C \u043E\u0442 katelyn <3",
+      pl: "Otrzymasz odznake na profile oraz wielkie podzi\u0119kowanie od katelyn <3"
     },
     you_are_a_sponsor: {
       en: "You are a sponsor, thank you! :3",
@@ -61606,7 +63296,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Sei uno sponsor, grazie! :3",
       pt: "Voc\xEA \xE9 um apoiador, muito obrigado! :3",
       sv: "Du \xE4r en sponsor, tack s\xE5 mycket! :3",
-      ru: "\u0412\u044B \u044F\u0432\u043B\u044F\u0435\u0442\u0435\u0441\u044C \u0441\u043F\u043E\u043D\u0441\u043E\u0440\u043E\u043C, \u0441\u043F\u0430\u0441\u0438\u0431\u043E! :3"
+      ru: "\u0412\u044B \u044F\u0432\u043B\u044F\u0435\u0442\u0435\u0441\u044C \u0441\u043F\u043E\u043D\u0441\u043E\u0440\u043E\u043C, \u0441\u043F\u0430\u0441\u0438\u0431\u043E! :3",
+      pl: "Jeste\u015B sponsorem, dzi\u0119ki wielkie! :3"
     },
     sponsor_get_badge: {
       en: "A monthly sponsorship grants you a custom badge of your choosing",
@@ -61615,7 +63306,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Una sponsorizzazione mensile ti permette di ottenere un distintivo personalizzato a tua scelta",
       pt: "Um apoio mensal lhe d\xE1 um emblema personalizado de sua escolha",
       sv: "Med ett m\xE5natligt sponsorskap f\xE5r du ett emblem du sj\xE4lv kan anpassa",
-      ru: "\u0415\u0436\u0435\u043C\u0435\u0441\u044F\u0447\u043D\u043E\u0435 \u0441\u043F\u043E\u043D\u0441\u043E\u0440\u0441\u0442\u0432\u043E \u043F\u0440\u0435\u0434\u043E\u0441\u0442\u0430\u0432\u043B\u044F\u0435\u0442 \u0432\u0430\u043C \u043D\u0430 \u0432\u044B\u0431\u043E\u0440 \u043F\u0435\u0440\u0441\u043E\u043D\u0430\u043B\u0438\u0437\u0438\u0440\u043E\u0432\u0430\u043D\u043D\u044B\u0439 \u0437\u043D\u0430\u0447\u043E\u043A"
+      ru: "\u0415\u0436\u0435\u043C\u0435\u0441\u044F\u0447\u043D\u043E\u0435 \u0441\u043F\u043E\u043D\u0441\u043E\u0440\u0441\u0442\u0432\u043E \u043F\u0440\u0435\u0434\u043E\u0441\u0442\u0430\u0432\u043B\u044F\u0435\u0442 \u0432\u0430\u043C \u043D\u0430 \u0432\u044B\u0431\u043E\u0440 \u043F\u0435\u0440\u0441\u043E\u043D\u0430\u043B\u0438\u0437\u0438\u0440\u043E\u0432\u0430\u043D\u043D\u044B\u0439 \u0437\u043D\u0430\u0447\u043E\u043A",
+      pl: "Miesi\u0119czne wsparcie daje ci w\u0142asn\u0105 odznak\u0119 do wyboru"
     },
     sponsor_no_badge: {
       en: "A custom badge is only available with a monthly sponsorship.",
@@ -61624,7 +63316,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Un distintivo personalizzato \xE8 disponibile solo con una sponsorizzazione mensile.",
       pt: "Um emblema personalizado s\xF3 est\xE1 dispon\xEDvel com um apoio mensal.",
       sv: "Ett eget anpassat emblem finns bara tillg\xE4ngligt med m\xE5natligt sponsorskap.",
-      ru: "\u041F\u0435\u0440\u0441\u043E\u043D\u0430\u043B\u0438\u0437\u0438\u0440\u043E\u0432\u0430\u043D\u043D\u044B\u0439 \u0437\u043D\u0430\u0447\u043E\u043A \u0434\u043E\u0441\u0442\u0443\u043F\u0435\u043D \u0442\u043E\u043B\u044C\u043A\u043E \u043F\u0440\u0438 \u0435\u0436\u0435\u043C\u0435\u0441\u044F\u0447\u043D\u043E\u043C \u0441\u043F\u043E\u043D\u0441\u043E\u0440\u0441\u0442\u0432\u0435."
+      ru: "\u041F\u0435\u0440\u0441\u043E\u043D\u0430\u043B\u0438\u0437\u0438\u0440\u043E\u0432\u0430\u043D\u043D\u044B\u0439 \u0437\u043D\u0430\u0447\u043E\u043A \u0434\u043E\u0441\u0442\u0443\u043F\u0435\u043D \u0442\u043E\u043B\u044C\u043A\u043E \u043F\u0440\u0438 \u0435\u0436\u0435\u043C\u0435\u0441\u044F\u0447\u043D\u043E\u043C \u0441\u043F\u043E\u043D\u0441\u043E\u0440\u0441\u0442\u0432\u0435.",
+      pl: "W\u0142asna odznaka wymaga mie\u015Bi\u0119cznego wsparcia."
     },
     manage_sponsor: {
       en: "Manage sponsorship",
@@ -61633,7 +63326,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Gestione sponsorizzazione",
       pt: "Gerenciar apoio",
       sv: "Sponsorskapsinst\xE4llningar",
-      ru: "\u0423\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435 \u0441\u043F\u043E\u043D\u0441\u043E\u0440\u0441\u0442\u0432\u043E\u043C"
+      ru: "\u0423\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435 \u0441\u043F\u043E\u043D\u0441\u043E\u0440\u0441\u0442\u0432\u043E\u043C",
+      pl: "Zarz\u0105dzaj sponsorem"
     },
     view: {
       en: "View",
@@ -61642,7 +63336,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Visualizza",
       pt: "Ver",
       sv: "Visa",
-      ru: "\u041F\u0440\u043E\u0441\u043C\u043E\u0442\u0440\u0435\u0442\u044C"
+      ru: "\u041F\u0440\u043E\u0441\u043C\u043E\u0442\u0440\u0435\u0442\u044C",
+      pl: "Poka\u017C"
     },
     profile_and_badges: {
       en: "Profile, {c} badges",
@@ -61651,7 +63346,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Profilo, {c} distintivi",
       pt: "Perfil, {c} emblemas",
       sv: "Profil, {c} emblem",
-      ru: "\u041F\u0440\u043E\u0444\u0438\u043B\u044C, {c} \u0437\u043D\u0430\u0447\u043A\u043E\u0432"
+      ru: "\u041F\u0440\u043E\u0444\u0438\u043B\u044C, {c} \u0437\u043D\u0430\u0447\u043A\u043E\u0432",
+      pl: "Profil, {c} odznak"
     },
     current_version: {
       en: "Current version",
@@ -61660,25 +63356,32 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Versione corrente",
       pt: "Vers\xE3o atual",
       sv: "Nuvarande version",
-      ru: "\u0422\u0435\u043A\u0443\u0449\u0430\u044F \u0432\u0435\u0440\u0441\u0438\u044F"
+      ru: "\u0422\u0435\u043A\u0443\u0449\u0430\u044F \u0432\u0435\u0440\u0441\u0438\u044F",
+      pl: "Aktualna wersja"
+    },
+    updating_to_version: {
+      en: "Updating to version"
     },
     manage_data: {
       en: "Manage data",
+      de: "Daten verwalten",
       es: "Gestionar datos",
       it: "Gestione dati",
       sv: "Hantera data",
       ru: "\u0423\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435 \u0434\u0430\u043D\u043D\u044B\u043C\u0438",
-      pt: "Gerenciar dados"
+      pt: "Gerenciar dados",
+      pl: "Zarz\u0105dzaj danymi"
     },
     labs: {
-      // labs by last.fm
+      // labs by Last.fm
       en: "Labs",
       de: "Labs",
       es: "Labs",
       it: "Labs",
       sv: "Labs",
       ru: "\u041B\u0430\u0431\u043E\u0440\u0430\u0442\u043E\u0440\u0438\u044F",
-      pt: "Labs"
+      pt: "Labs",
+      pl: "Laboratorium"
     },
     sponsor_info: {
       en: "This is a special bleh-managed profile to handle sponsors",
@@ -61687,7 +63390,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Questo \xE8 un profilo speciale controllato da bleh per la gestione delle sponsorizzazioni",
       pt: "Este \xE9 um perfil especial gerenciado pelo bleh para lidar com apoiadores",
       sv: "Detta \xE4r en speciell profil fr\xE5n bleh f\xF6r att hantera sponsorskap",
-      ru: "\u042D\u0442\u043E \u0441\u043F\u0435\u0446\u0438\u0430\u043B\u044C\u043D\u044B\u0439 \u043F\u0440\u043E\u0444\u0438\u043B\u044C, \u0443\u043F\u0440\u0430\u0432\u043B\u044F\u0435\u043C\u044B\u0439 bleh \u0434\u043B\u044F \u0440\u0430\u0431\u043E\u0442\u044B \u0441\u043E \u0441\u043F\u043E\u043D\u0441\u043E\u0440\u0430\u043C\u0438"
+      ru: "\u042D\u0442\u043E \u0441\u043F\u0435\u0446\u0438\u0430\u043B\u044C\u043D\u044B\u0439 \u043F\u0440\u043E\u0444\u0438\u043B\u044C, \u0443\u043F\u0440\u0430\u0432\u043B\u044F\u0435\u043C\u044B\u0439 bleh \u0434\u043B\u044F \u0440\u0430\u0431\u043E\u0442\u044B \u0441\u043E \u0441\u043F\u043E\u043D\u0441\u043E\u0440\u0430\u043C\u0438",
+      pl: "Ten specjalny profil zarz\u0105dzany przez bleh s\u0142u\u017Cy to ogarniania sponsor\xF3w"
     },
     sponsors_only: {
       en: "Sponsors only",
@@ -61696,7 +63400,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Solo per gli sponsor",
       sv: "Endast sponsorer",
       ru: "\u0422\u043E\u043B\u044C\u043A\u043E \u0434\u043B\u044F \u0441\u043F\u043E\u043D\u0441\u043E\u0440\u043E\u0432",
-      pt: "Apenas para apoiadores"
+      pt: "Apenas para apoiadores",
+      pl: "Tylko dla sponsor\xF3w"
     },
     downloaded_value: {
       // filename
@@ -61706,7 +63411,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "{v} scaricato",
       sv: "Laddat ned {v}",
       ru: "\u0417\u0430\u0433\u0440\u0443\u0436\u0435\u043D\u043E {v}",
-      pt: "{v} baixado"
+      pt: "{v} baixado",
+      pl: "Pobrano {v}"
     },
     loading: {
       en: "Loading",
@@ -61715,7 +63421,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Caricamento",
       pt: "Carregando",
       sv: "Laddar",
-      ru: "\u0417\u0430\u0433\u0440\u0443\u0437\u043A\u0430"
+      ru: "\u0417\u0430\u0433\u0440\u0443\u0437\u043A\u0430",
+      pl: "\u0141aduj\u0119"
     },
     loading_count_days: {
       en: "Collecting the last {c} days",
@@ -61724,7 +63431,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Raccogliendo gli ultimi {c} giorni",
       pt: "Coletando os \xFAltimos {c} dias",
       sv: "Samlar de senaste {c} dagarna",
-      ru: "\u0421\u0431\u043E\u0440 \u0434\u0430\u043D\u043D\u044B\u0445 \u0437\u0430 \u043F\u043E\u0441\u043B\u0435\u0434\u043D\u0438\u0435 {c} \u0434\u043D\u0435\u0439"
+      ru: "\u0421\u0431\u043E\u0440 \u0434\u0430\u043D\u043D\u044B\u0445 \u0437\u0430 \u043F\u043E\u0441\u043B\u0435\u0434\u043D\u0438\u0435 {c} \u0434\u043D\u0435\u0439",
+      pl: "\u0141adowanie ostatnich {c} dni"
     },
     gathering_plays: {
       en: "Gathering plays",
@@ -61733,18 +63441,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Raccogliendo le riproduzioni",
       pt: "Coletando reprodu\xE7\xF5es",
       sv: "Samlar spelningar",
-      ru: "\u0421\u0431\u043E\u0440 \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u0439"
-    },
-    following_mutuals: {
-      // this is appended after the following button text if mutuals
-      // eg. Following (mutually)
-      en: "(mutually)",
-      de: "(gegenseitig)",
-      es: "(mutualmente)",
-      it: "(a vicenda)",
-      pt: "(mutualmente)",
-      sv: "(varandra)",
-      ru: "(\u0432\u0437\u0430\u0438\u043C\u043D\u043E)"
+      ru: "\u0421\u0431\u043E\u0440 \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u0439",
+      pl: "Zbieranie odtworze\u0144"
     },
     language: {
       en: "Language",
@@ -61753,7 +63451,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Lingua",
       pt: "Idioma",
       sv: "Spr\xE5k",
-      ru: "\u042F\u0437\u044B\u043A"
+      ru: "\u042F\u0437\u044B\u043A",
+      pl: "J\u0119zyk"
     },
     symbol_presets: {
       // as in a selection of characters (symbols, text) that can
@@ -61764,7 +63463,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Raccolta di simboli",
       pt: "Predefini\xE7\xF5es de s\xEDmbolos",
       sv: "Symboler",
-      ru: "\u041D\u0430\u0431\u043E\u0440\u044B \u0441\u0438\u043C\u0432\u043E\u043B\u043E\u0432"
+      ru: "\u041D\u0430\u0431\u043E\u0440\u044B \u0441\u0438\u043C\u0432\u043E\u043B\u043E\u0432",
+      pl: "Dost\u0119pne symbole"
     },
     fancy_syntax: {
       // hyperlink as in a link to a website or something,
@@ -61775,7 +63475,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Guida agli ipertesti",
       pt: "Guia de hiperlink",
       sv: "L\xE4nkguide",
-      ru: "\u0420\u0443\u043A\u043E\u0432\u043E\u0434\u0441\u0442\u0432\u043E \u043F\u043E \u0433\u0438\u043F\u0435\u0440\u0441\u0441\u044B\u043B\u043A\u0430\u043C"
+      ru: "\u0420\u0443\u043A\u043E\u0432\u043E\u0434\u0441\u0442\u0432\u043E \u043F\u043E \u0433\u0438\u043F\u0435\u0440\u0441\u0441\u044B\u043B\u043A\u0430\u043C",
+      pl: "Poradnik do hiper\u0142\u0105czy"
     },
     links_to: {
       // used in wiki editing, {this example} links to {link}
@@ -61785,7 +63486,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Collega a {link}",
       pt: "Links para {link}",
       sv: "L\xE4nkas till {link}",
-      ru: "\u0421\u0441\u044B\u043B\u043A\u0438 \u043D\u0430 {link}"
+      ru: "\u0421\u0441\u044B\u043B\u043A\u0438 \u043D\u0430 {link}",
+      pl: "\u0141\u0105czy do {link}"
     },
     explore_in_library: {
       en: "Explore in library",
@@ -61794,7 +63496,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Esplora nella libreria",
       pt: "Explorar na biblioteca",
       sv: "Utforska i bibliotek",
-      ru: "\u0418\u0441\u0441\u043B\u0435\u0434\u043E\u0432\u0430\u0442\u044C \u0432 \u0431\u0438\u0431\u043B\u0438\u043E\u0442\u0435\u043A\u0435"
+      ru: "\u0418\u0441\u0441\u043B\u0435\u0434\u043E\u0432\u0430\u0442\u044C \u0432 \u0431\u0438\u0431\u043B\u0438\u043E\u0442\u0435\u043A\u0435",
+      pl: "Eksploruj w bibliotece"
     },
     add_note: {
       // as in a profile note
@@ -61804,7 +63507,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Aggiungi una nota",
       pt: "Adicionar nota",
       sv: "L\xE4gg till anteckning",
-      ru: "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0437\u0430\u043C\u0435\u0442\u043A\u0443"
+      ru: "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0437\u0430\u043C\u0435\u0442\u043A\u0443",
+      pl: "Dodaj notatk\u0119"
     },
     radio: {
       en: "Radio",
@@ -61813,7 +63517,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Radio",
       pt: "R\xE1dio",
       sv: "Radio",
-      ru: "\u0420\u0430\u0434\u0438\u043E"
+      ru: "\u0420\u0430\u0434\u0438\u043E",
+      pl: "Radio"
     },
     mix: {
       // as in a playlist mix of music
@@ -61823,7 +63528,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Mix",
       sv: "Mix",
       ru: "\u041C\u0438\u043A\u0441",
-      pt: "Mix"
+      pt: "Mix",
+      pl: "Miks"
     },
     recommended: {
       // recommended music
@@ -61833,7 +63539,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Suggerimenti",
       pt: "Recomenda\xE7\xF5es",
       sv: "Rekommenderad",
-      ru: "\u0420\u0435\u043A\u043E\u043C\u0435\u043D\u0434\u043E\u0432\u0430\u043D\u043D\u043E\u0435"
+      ru: "\u0420\u0435\u043A\u043E\u043C\u0435\u043D\u0434\u043E\u0432\u0430\u043D\u043D\u043E\u0435",
+      pl: "Polecane"
     },
     listening: {
       // used as the card header for radios and listening reports
@@ -61852,16 +63559,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Tu",
       pt: "Voc\xEA",
       sv: "Du",
-      ru: "\u0412\u044B"
-    },
-    open: {
-      en: "Open",
-      de: "\xD6ffnen",
-      es: "Abrir",
-      it: "Apri",
-      pt: "Abrir",
-      sv: "\xD6ppen",
-      ru: "\u041E\u0442\u043A\u0440\u044B\u0442\u044C"
+      ru: "\u0412\u044B",
+      pl: "Ty"
     },
     expand: {
       en: "Expand",
@@ -61870,7 +63569,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Espandi",
       pt: "Expandir",
       sv: "Expandera",
-      ru: "\u0420\u0430\u0437\u0432\u0435\u0440\u043D\u0443\u0442\u044C"
+      ru: "\u0420\u0430\u0437\u0432\u0435\u0440\u043D\u0443\u0442\u044C",
+      pl: "Rozwi\u0144"
     },
     expand_to_full_resolution: {
       en: "Expand to full resolution",
@@ -61879,24 +63579,29 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Espandi a risoluzione completa",
       pt: "Expandir para resolu\xE7\xE3o total",
       sv: "Expandera till full uppl\xF6sning",
-      ru: "\u0420\u0430\u0437\u0432\u0435\u0440\u043D\u0443\u0442\u044C \u0434\u043E \u043F\u043E\u043B\u043D\u043E\u0433\u043E \u0440\u0430\u0437\u0440\u0435\u0448\u0435\u043D\u0438\u044F"
+      ru: "\u0420\u0430\u0437\u0432\u0435\u0440\u043D\u0443\u0442\u044C \u0434\u043E \u043F\u043E\u043B\u043D\u043E\u0433\u043E \u0440\u0430\u0437\u0440\u0435\u0448\u0435\u043D\u0438\u044F",
+      pl: "Rozwi\u0144 do pe\u0142nej rozdzielczo\u015Bci"
     },
     default_avatar_action: {
       name: {
         en: "Default avatar action",
+        de: "Standardverhalten von Profilbildern",
         es: "Acci\xF3n de avatar por defecto",
         it: "Azione di default per gli avatar",
         sv: "Standard bildbet\xE9ende",
         ru: "\u0414\u0435\u0439\u0441\u0442\u0432\u0438\u0435 \u043F\u043E \u0443\u043C\u043E\u043B\u0447\u0430\u043D\u0438\u044E \u043F\u0440\u0438 \u043D\u0430\u0436\u0430\u0442\u0438\u0438 \u043D\u0430 \u0430\u0432\u0430\u0442\u0430\u0440",
-        pt: "A\xE7\xE3o padr\xE3o do avatar"
+        pt: "A\xE7\xE3o padr\xE3o do avatar",
+        pl: "Podstawowa akcja awatar\xF3w"
       },
       body: {
         en: "Which action should be performed when you click an avatar",
+        de: "Welche Aktion ausgef\xFChrt werden soll, wenn du auf ein Profilbild klickst",
         es: "Cu\xE1l acci\xF3n deber\xEDa realizarse cuando haces clic a un avatar",
         it: "Quale azione dovrebbe essere effettuata quando fai click su un avatar?",
         sv: "Hur ska sidan bet\xE9 sig n\xE4r du trycker p\xE5 en profilbild",
         ru: "\u041A\u0430\u043A\u043E\u0435 \u0434\u0435\u0439\u0441\u0442\u0432\u0438\u0435 \u0434\u043E\u043B\u0436\u043D\u043E \u0431\u044B\u0442\u044C \u0432\u044B\u043F\u043E\u043B\u043D\u0435\u043D\u043E \u043F\u0440\u0438 \u043D\u0430\u0436\u0430\u0442\u0438\u0438 \u043D\u0430 \u0430\u0432\u0430\u0442\u0430\u0440",
-        pt: "Qual a\xE7\xE3o deveria ser realizada quando voc\xEA clica em um avatar"
+        pt: "Qual a\xE7\xE3o deveria ser realizada quando voc\xEA clica em um avatar",
+        pl: "Co powinno si\u0119 wydarzy\u0107 jak klikniecie na awatar"
       }
     },
     share: {
@@ -61906,7 +63611,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Condividi",
       pt: "Compartilhar",
       sv: "Dela",
-      ru: "\u041F\u043E\u0434\u0435\u043B\u0438\u0442\u044C\u0441\u044F"
+      ru: "\u041F\u043E\u0434\u0435\u043B\u0438\u0442\u044C\u0441\u044F",
+      pl: "Udost\u0119pni"
     },
     copy: {
       en: "Copy",
@@ -61915,13 +63621,17 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Copia",
       pt: "Copiar",
       sv: "Kopiera",
-      ru: "\u041A\u043E\u043F\u0438\u0440\u043E\u0432\u0430\u0442\u044C"
+      ru: "\u041A\u043E\u043F\u0438\u0440\u043E\u0432\u0430\u0442\u044C",
+      pl: "Kopiuj"
     },
     copy_text: {
       en: "Copy text",
+      de: "Text kopieren",
       es: "Copiar texto",
       it: "Copia testo",
-      pt: "Copiar texto"
+      pt: "Copiar texto",
+      pl: "Kopiuj tekst",
+      ru: "\u0421\u043A\u043E\u043F\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u0442\u0435\u043A\u0441\u0442"
     },
     copy_username: {
       en: "Copy username",
@@ -61930,7 +63640,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Copia username",
       sv: "Kopiera anv\xE4ndarnamn",
       ru: "\u0421\u043A\u043E\u043F\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u0438\u043C\u044F \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F",
-      pt: "Copiar nome de usu\xE1rio"
+      pt: "Copiar nome de usu\xE1rio",
+      pl: "Kopiuj nazw\u0119 u\u017Cytkownika"
     },
     copy_link: {
       en: "Copy link",
@@ -61939,7 +63650,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Copia link",
       sv: "Kopiera l\xE4nk",
       ru: "\u0421\u043A\u043E\u043F\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u0441\u0441\u044B\u043B\u043A\u0443",
-      pt: "Copiar link"
+      pt: "Copiar link",
+      pl: "Kopiuj link"
     },
     copied_to_clipboard: {
       en: "Copied to clipboard",
@@ -61948,7 +63660,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Copiato negli appunti",
       pt: "Copiado para a \xE1rea de transfer\xEAncia",
       sv: "Kopierats till urklipp",
-      ru: "\u0421\u043A\u043E\u043F\u0438\u0440\u043E\u0432\u0430\u043D\u043E \u0432 \u0431\u0443\u0444\u0435\u0440 \u043E\u0431\u043C\u0435\u043D\u0430"
+      ru: "\u0421\u043A\u043E\u043F\u0438\u0440\u043E\u0432\u0430\u043D\u043E \u0432 \u0431\u0443\u0444\u0435\u0440 \u043E\u0431\u043C\u0435\u043D\u0430",
+      pl: "Skopiowano do schowka"
     },
     click_to_copy: {
       en: "Click to copy",
@@ -61957,27 +63670,50 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Clicca per copiare",
       pt: "Clique para copiar",
       sv: "Klicka f\xF6r att kopiera",
-      ru: "\u041D\u0430\u0436\u043C\u0438\u0442\u0435, \u0447\u0442\u043E\u0431\u044B \u0441\u043A\u043E\u043F\u0438\u0440\u043E\u0432\u0430\u0442\u044C"
+      ru: "\u041D\u0430\u0436\u043C\u0438\u0442\u0435, \u0447\u0442\u043E\u0431\u044B \u0441\u043A\u043E\u043F\u0438\u0440\u043E\u0432\u0430\u0442\u044C",
+      pl: "Kliknij aby skopiowa\u0107"
+    },
+    cut: {
+      en: "Cut"
     },
     paste: {
       en: "Paste",
-      pt: "Colar"
+      de: "Einf\xFCgen",
+      es: "Pegar",
+      pt: "Colar",
+      pl: "Wklej",
+      ru: "\u0412\u0441\u0442\u0430\u0432\u0438\u0442\u044C"
     },
     paste_text: {
       en: "Paste text",
-      pt: "Colar texto"
+      de: "Text einf\xFCgen",
+      es: "Pegar texto",
+      pt: "Colar texto",
+      pl: "Wklej tekst"
     },
     undo: {
       en: "Undo",
-      pt: "Desfazer"
+      de: "R\xFCckg\xE4ngig",
+      es: "Deshacer",
+      pt: "Desfazer",
+      pl: "Cofnij",
+      ru: "\u041E\u0442\u043C\u0435\u043D\u0438\u0442\u044C"
     },
     redo: {
       en: "Redo",
-      pt: "Refazer"
+      de: "Wiederholen",
+      es: "Rehacer",
+      pt: "Refazer",
+      pl: "Powt\xF3rz",
+      ru: "\u041F\u043E\u0432\u0442\u043E\u0440\u0438\u0442\u044C"
     },
     pasted_text: {
       en: "Pasted text",
-      pt: "Texto colado"
+      de: "Eingef\xFCgter Text",
+      es: "Texto pegado",
+      pt: "Texto colado",
+      pl: "Wklejono tekst",
+      ru: "\u0412\u0441\u0442\u0430\u0432\u043B\u0435\u043D\u043D\u044B\u0439 \u0442\u0435\u043A\u0441\u0442"
     },
     wiki_standard_tracks: {
       en: "Track titles should be wrapped in quotation marks (\u201C \u201D)",
@@ -61986,7 +63722,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "I nomi dei brani dovrebbero essere collocati tra virgolette (\u201C \u201D)",
       pt: "Os t\xEDtulos das faixas devem ser colocados entre aspas (\u201C \u201D)",
       sv: "L\xE5tnamn ska omges av citattecken (\u201C \u201D)",
-      ru: "\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u044F \u0442\u0440\u0435\u043A\u043E\u0432 \u0434\u043E\u043B\u0436\u043D\u044B \u0431\u044B\u0442\u044C \u0437\u0430\u043A\u043B\u044E\u0447\u0435\u043D\u044B \u0432 \u043A\u0430\u0432\u044B\u0447\u043A\u0438 (\u201C \u201D)"
+      ru: "\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u044F \u0442\u0440\u0435\u043A\u043E\u0432 \u0434\u043E\u043B\u0436\u043D\u044B \u0431\u044B\u0442\u044C \u0437\u0430\u043A\u043B\u044E\u0447\u0435\u043D\u044B \u0432 \u043A\u0430\u0432\u044B\u0447\u043A\u0438 (\u201C \u201D)",
+      pl: "Tytu\u0142y utwor\xF3w powinny by\u0107 oznaczone cudzys\u0142owiem (\u201C \u201D)"
     },
     wiki_standard_artists: {
       en: "Album and artist names are left without quotes",
@@ -61995,16 +63732,18 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "I nomi di album e artisti sono scritti senza virgolette",
       pt: "Os nomes dos \xE1lbuns e artistas n\xE3o devem ser colocados entre aspas",
       sv: "Album och artistnamn ska skrivas utan citattecken",
-      ru: "\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u044F \u0430\u043B\u044C\u0431\u043E\u043C\u043E\u0432 \u0438 \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u0435\u0439 \u043F\u0438\u0448\u0443\u0442\u0441\u044F \u0431\u0435\u0437 \u043A\u0430\u0432\u044B\u0447\u0435\u043A"
+      ru: "\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u044F \u0430\u043B\u044C\u0431\u043E\u043C\u043E\u0432 \u0438 \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u0435\u0439 \u043F\u0438\u0448\u0443\u0442\u0441\u044F \u0431\u0435\u0437 \u043A\u0430\u0432\u044B\u0447\u0435\u043A",
+      pl: "Nie dawaj do cytatu nazw album\xF3w oraz imion artyst\xF3w"
     },
     wiki_standard_quotations: {
       en: "Use \u2018 \u2019 for quotations from the artist or elsewhere",
       de: "Verwende \u2018 \u2019 f\xFCr Zitate des K\xFCnstlers oder aus anderen Quellen",
       es: "Usa \u2018 \u2019 para citas provenientes del artista u otro lugar",
-      it: "Usa \u2018 \u2019 per citazioni dall'artista o altre fonti",
+      it: "Usa \u2018 \u2019 per citazioni dall\u2019artista o altre fonti",
       pt: "Use \u2018 \u2019 para cita\xE7\xF5es do artista ou de outras fontes",
       sv: "Anv\xE4nd \u2018 \u2019 f\xF6r citat fr\xE5n artisten eller fr\xE5n annanstans",
-      ru: "\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0439\u0442\u0435 \u2018 \u2019 \u0434\u043B\u044F \u0446\u0438\u0442\u0430\u0442 \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044F \u0438\u043B\u0438 \u0438\u0437 \u0434\u0440\u0443\u0433\u0438\u0445 \u0438\u0441\u0442\u043E\u0447\u043D\u0438\u043A\u043E\u0432"
+      ru: "\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0439\u0442\u0435 \u2018 \u2019 \u0434\u043B\u044F \u0446\u0438\u0442\u0430\u0442 \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044F \u0438\u043B\u0438 \u0438\u0437 \u0434\u0440\u0443\u0433\u0438\u0445 \u0438\u0441\u0442\u043E\u0447\u043D\u0438\u043A\u043E\u0432",
+      pl: "U\u017Cyj \u2018 \u2019 do cytat\xF3w artyst\xF3w lub z innych \u017Ar\xF3de\u0142"
     },
     activity: {
       en: "Activity",
@@ -62014,6 +63753,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Atividade",
       sv: "Aktivitet",
       ru: "\u0410\u043A\u0442\u0438\u0432\u043D\u043E\u0441\u0442\u044C",
+      pl: "Aktywno\u015B\u0107",
       listing: {
         shout: {
           en: "Shout",
@@ -62022,7 +63762,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           it: "Nota aggiunta",
           pt: "Enviou mensagem",
           sv: "Hojt",
-          ru: "\u0421\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u0435"
+          ru: "\u0421\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u0435",
+          pl: "Wiadomo\u015B\u0107"
         },
         image_upload: {
           en: "Uploaded image",
@@ -62031,7 +63772,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           it: "Immagine caricata",
           pt: "Enviou imagem",
           sv: "Laddat upp bild",
-          ru: "\u0417\u0430\u0433\u0440\u0443\u0436\u0435\u043D\u043E \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435"
+          ru: "\u0417\u0430\u0433\u0440\u0443\u0436\u0435\u043D\u043E \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435",
+          pl: "Opublikowano zdj\u0119cie"
         },
         image_star: {
           en: "Starred image",
@@ -62040,7 +63782,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           it: "Immagine impostata come preferita",
           pt: "Favoritou imagem",
           sv: "Valt favoritbild",
-          ru: "\u0418\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435 \u043E\u0442\u043C\u0435\u0447\u0435\u043D\u043E"
+          ru: "\u0418\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435 \u043E\u0442\u043C\u0435\u0447\u0435\u043D\u043E",
+          pl: "Ulubione zdj\u0119cie"
         },
         obsess: {
           en: "Obsessed",
@@ -62049,7 +63792,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           it: "Passione impostata",
           pt: "Obcecou",
           sv: "Besatthet",
-          ru: "\u0417\u0430\u0432\u0438\u0441\u0438\u043C\u043E\u0441\u0442\u044C"
+          ru: "\u0417\u0430\u0432\u0438\u0441\u0438\u043C\u043E\u0441\u0442\u044C",
+          pl: "Obsesja"
         },
         unobsess: {
           en: "Removed obsession",
@@ -62058,7 +63802,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           it: "Passione rimossa",
           pt: "Desobcecou",
           sv: "Tagit bort besatthet",
-          ru: "\u0417\u0430\u0432\u0438\u0441\u0438\u043C\u043E\u0441\u0442\u044C \u0443\u0434\u0430\u043B\u0435\u043D\u0430"
+          ru: "\u0417\u0430\u0432\u0438\u0441\u0438\u043C\u043E\u0441\u0442\u044C \u0443\u0434\u0430\u043B\u0435\u043D\u0430",
+          pl: "Usuni\u0119to obsesj\u0119"
         },
         love: {
           en: "Loved",
@@ -62067,7 +63812,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           it: "Preferito",
           pt: "Favoritou",
           sv: "\xC4lskade l\xE5t",
-          ru: "\u041F\u043E\u043D\u0440\u0430\u0432\u0438\u043B\u043E\u0441\u044C"
+          ru: "\u041F\u043E\u043D\u0440\u0430\u0432\u0438\u043B\u043E\u0441\u044C",
+          pl: "Ulubione"
         },
         unlove: {
           en: "Removed love",
@@ -62076,7 +63822,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           it: "Preferito rimosso",
           pt: "Desfavoritou",
           sv: "Tog bort som \xE4lskad",
-          ru: "\u0423\u0434\u0430\u043B\u0435\u043D\u043E \u0438\u0437 \u043F\u043E\u043D\u0440\u0430\u0432\u0438\u0432\u0448\u0438\u0445\u0441\u044F"
+          ru: "\u0423\u0434\u0430\u043B\u0435\u043D\u043E \u0438\u0437 \u043F\u043E\u043D\u0440\u0430\u0432\u0438\u0432\u0448\u0438\u0445\u0441\u044F",
+          pl: "Usu\u0144 z ulubionych"
         },
         install_bwaa: {
           en: "Installed bwaa",
@@ -62085,7 +63832,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           it: "bwaa installato",
           pt: "Instalou o bwaa",
           sv: "Installerade bwaa",
-          ru: "\u0423\u0441\u0442\u0430\u043D\u043E\u0432\u043B\u0435\u043D bwaa"
+          ru: "\u0423\u0441\u0442\u0430\u043D\u043E\u0432\u043B\u0435\u043D bwaa",
+          pl: "Pomy\u015Blnie zainstalowano bwaa"
         },
         update_bwaa: {
           en: "Updated bwaa",
@@ -62094,7 +63842,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           it: "bwaa aggiornato",
           pt: "Atualizou o bwaa",
           sv: "Uppdaterade bwaa",
-          ru: "\u041E\u0431\u043D\u043E\u0432\u043B\u0435\u043D bwaa"
+          ru: "\u041E\u0431\u043D\u043E\u0432\u043B\u0435\u043D bwaa",
+          pl: "Pomy\u015Blnie zaktualizowano bwaa"
         },
         install_bleh: {
           en: "Installed bleh",
@@ -62103,7 +63852,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           it: "bleh installato",
           pt: "Instalou o bleh",
           sv: "Installerade bleh",
-          ru: "\u0423\u0441\u0442\u0430\u043D\u043E\u0432\u043B\u0435\u043D bleh"
+          ru: "\u0423\u0441\u0442\u0430\u043D\u043E\u0432\u043B\u0435\u043D bleh",
+          pl: "Pomy\u015Blnie zainstalowano bleh"
         },
         update_bleh: {
           en: "Updated bleh",
@@ -62112,7 +63862,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           it: "bleh aggiornato",
           pt: "Atualizou o bleh",
           sv: "Uppdaterade bleh",
-          ru: "\u041E\u0431\u043D\u043E\u0432\u043B\u0435\u043D bleh"
+          ru: "\u041E\u0431\u043D\u043E\u0432\u043B\u0435\u043D bleh",
+          pl: "Pomy\u015Blnie zaktualizowano bleh"
         },
         bookmark: {
           en: "Bookmarked",
@@ -62121,7 +63872,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           it: "Segnalibro aggiunto",
           pt: "Adicionou marca\xE7\xE3o",
           sv: "Bokm\xE4rkte",
-          ru: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u043E \u0432 \u0437\u0430\u043A\u043B\u0430\u0434\u043A\u0438"
+          ru: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u043E \u0432 \u0437\u0430\u043A\u043B\u0430\u0434\u043A\u0438",
+          pl: "Dodano do zak\u0142adek"
         },
         unbookmark: {
           en: "Removed bookmark",
@@ -62130,7 +63882,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           it: "Segnalibro rimosso",
           pt: "Removeu marca\xE7\xE3o",
           sv: "Tog bort bokm\xE4rke",
-          ru: "\u0417\u0430\u043A\u043B\u0430\u0434\u043A\u0430 \u0443\u0434\u0430\u043B\u0435\u043D\u0430"
+          ru: "\u0417\u0430\u043A\u043B\u0430\u0434\u043A\u0430 \u0443\u0434\u0430\u043B\u0435\u043D\u0430",
+          pl: "Usuni\u0119to z zak\u0142adek"
         },
         wiki: {
           en: "Edited",
@@ -62139,7 +63892,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           it: "Modificato",
           pt: "Editou",
           sv: "Redigerade",
-          ru: "\u041E\u0442\u0440\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u043D\u043E"
+          ru: "\u041E\u0442\u0440\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u043D\u043E",
+          pl: "Edytowane"
         }
       },
       types: {
@@ -62150,7 +63904,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           it: "Commenti e risposte da te in tutto il sito",
           pt: "Seus coment\xE1rios e respostas ao redor do site",
           sv: "Kommentarer och svar fr\xE5n dig \xF6ver hela sidan",
-          ru: "\u0412\u0430\u0448\u0438 \u043A\u043E\u043C\u043C\u0435\u043D\u0442\u0430\u0440\u0438\u0438 \u0438 \u043E\u0442\u0432\u0435\u0442\u044B \u043D\u0430 \u0441\u0430\u0439\u0442\u0435"
+          ru: "\u0412\u0430\u0448\u0438 \u043A\u043E\u043C\u043C\u0435\u043D\u0442\u0430\u0440\u0438\u0438 \u0438 \u043E\u0442\u0432\u0435\u0442\u044B \u043D\u0430 \u0441\u0430\u0439\u0442\u0435",
+          pl: "Twoje wszystkie komentarze i odpowiedzi ze strony"
         },
         image: {
           en: "Uploading images and starring for your layout",
@@ -62160,7 +63915,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           // 'star'/'to star' sounds incredibly bad to me in this context, falling back to 'selection' here ~cuto
           pt: "Imagens enviadas e favoritos do seu layout",
           sv: "Uppladdning av bilder och v\xE4ljer favoritbilder",
-          ru: "\u0417\u0430\u0433\u0440\u0443\u0437\u043A\u0430 \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0439 \u0438 \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u0438\u0435 \u0438\u0445 \u0432 \u0438\u0437\u0431\u0440\u0430\u043D\u043D\u043E\u0435 \u0434\u043B\u044F \u0432\u0430\u0448\u0435\u0433\u043E \u043C\u0430\u043A\u0435\u0442\u0430"
+          ru: "\u0417\u0430\u0433\u0440\u0443\u0437\u043A\u0430 \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0439 \u0438 \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u0438\u0435 \u0438\u0445 \u0432 \u0438\u0437\u0431\u0440\u0430\u043D\u043D\u043E\u0435 \u0434\u043B\u044F \u0432\u0430\u0448\u0435\u0433\u043E \u043C\u0430\u043A\u0435\u0442\u0430",
+          pl: "Przesy\u0142anie zdj\u0119\u0107 i polubienie do twojego uk\u0142adu"
         },
         obsess: {
           en: "Tracks you have on loop",
@@ -62169,7 +63925,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           it: "Brani che ascolti a ripetizione",
           pt: "Faixas que voc\xEA tem em loop",
           sv: "L\xE5tar du \xE4r besatt av",
-          ru: "\u0422\u0440\u0435\u043A\u0438, \u043A\u043E\u0442\u043E\u0440\u044B\u0435 \u0432\u044B \u0441\u043B\u0443\u0448\u0430\u0435\u0442\u0435 \u043D\u0430 \u043F\u043E\u0432\u0442\u043E\u0440\u0435"
+          ru: "\u0422\u0440\u0435\u043A\u0438, \u043A\u043E\u0442\u043E\u0440\u044B\u0435 \u0432\u044B \u0441\u043B\u0443\u0448\u0430\u0435\u0442\u0435 \u043D\u0430 \u043F\u043E\u0432\u0442\u043E\u0440\u0435",
+          pl: "Utwory kt\xF3rych ci\u0105gle s\u0142uchasz"
         },
         love: {
           en: "Tracks you love",
@@ -62178,7 +63935,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           it: "Brani che adori",
           pt: "Faixas que voc\xEA ama",
           sv: "L\xE5tar du \xE4lskar",
-          ru: "\u0422\u0440\u0435\u043A\u0438, \u043A\u043E\u0442\u043E\u0440\u044B\u0435 \u0432\u0430\u043C \u043D\u0440\u0430\u0432\u044F\u0442\u0441\u044F"
+          ru: "\u0422\u0440\u0435\u043A\u0438, \u043A\u043E\u0442\u043E\u0440\u044B\u0435 \u0432\u0430\u043C \u043D\u0440\u0430\u0432\u044F\u0442\u0441\u044F",
+          pl: "Twoje ukochane utwory"
         },
         bookmark: {
           en: "Music you want to check out",
@@ -62187,7 +63945,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           it: "Musica che vuoi ascoltare",
           pt: "M\xFAsica que voc\xEA quer conferir",
           sv: "Musik du vill komma ih\xE5g till senare",
-          ru: "\u041C\u0443\u0437\u044B\u043A\u0430, \u043A\u043E\u0442\u043E\u0440\u0443\u044E \u0432\u044B \u0445\u043E\u0442\u0438\u0442\u0435 \u043F\u043E\u0441\u043B\u0443\u0448\u0430\u0442\u044C"
+          ru: "\u041C\u0443\u0437\u044B\u043A\u0430, \u043A\u043E\u0442\u043E\u0440\u0443\u044E \u0432\u044B \u0445\u043E\u0442\u0438\u0442\u0435 \u043F\u043E\u0441\u043B\u0443\u0448\u0430\u0442\u044C",
+          pl: "Muzyka kt\xF3r\u0105 masz w planach pos\u0142ucha\u0107"
         },
         wiki: {
           en: "Editing of any wiki",
@@ -62196,7 +63955,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           it: "Modifica di qualsiasi wiki",
           pt: "Editando de qualquer wiki",
           sv: "Wikiredigering",
-          ru: "\u0420\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435 \u043B\u044E\u0431\u043E\u0439 \u0432\u0438\u043A\u0438"
+          ru: "\u0420\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435 \u043B\u044E\u0431\u043E\u0439 \u0432\u0438\u043A\u0438",
+          pl: "Edytowanie jakiejkolwiek wiki"
         },
         install: {
           en: "First installations and updating",
@@ -62205,7 +63965,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           it: "Prime installazioni ed aggiornamenti",
           pt: "Primeiras instala\xE7\xF5es e atualiza\xE7\xF5es",
           sv: "F\xF6rsta installationen och uppdateringar",
-          ru: "\u041F\u0435\u0440\u0432\u044B\u0435 \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043A\u0438 \u0438 \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u044F"
+          ru: "\u041F\u0435\u0440\u0432\u044B\u0435 \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043A\u0438 \u0438 \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u044F",
+          pl: "Pierwsza instalacja i aktualizacja"
         }
       }
     },
@@ -62216,7 +63977,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Tieni traccia delle tue attivit\xE0 pi\xF9 recenti localmente sul tuo profilo",
       pt: "Acompanhe suas atividades mais recentes localmente em seu perfil",
       sv: "H\xE5ll koll p\xE5 dina senaste aktiviteter lokalt p\xE5 din profil",
-      ru: "\u041E\u0442\u0441\u043B\u0435\u0436\u0438\u0432\u0430\u0439\u0442\u0435 \u0441\u0432\u043E\u044E \u043D\u0435\u0434\u0430\u0432\u043D\u044E\u044E \u0430\u043A\u0442\u0438\u0432\u043D\u043E\u0441\u0442\u044C \u043B\u043E\u043A\u0430\u043B\u044C\u043D\u043E \u0432 \u0441\u0432\u043E\u0435\u043C \u043F\u0440\u043E\u0444\u0438\u043B\u0435"
+      ru: "\u041E\u0442\u0441\u043B\u0435\u0436\u0438\u0432\u0430\u0439\u0442\u0435 \u0441\u0432\u043E\u044E \u043D\u0435\u0434\u0430\u0432\u043D\u044E\u044E \u0430\u043A\u0442\u0438\u0432\u043D\u043E\u0441\u0442\u044C \u043B\u043E\u043A\u0430\u043B\u044C\u043D\u043E \u0432 \u0441\u0432\u043E\u0435\u043C \u043F\u0440\u043E\u0444\u0438\u043B\u0435",
+      pl: "\u015Aled\u017A wi\u0119kszo\u015B\u0107 swoich ostatnich aktywno\u015Bci lokalnie na swoim profilu "
     },
     activity_tracking: {
       name: {
@@ -62226,7 +63988,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         it: "Registra le mie attivit\xE0",
         pt: "Acompanhar minhas atividades",
         sv: "Sp\xE5ra mina aktiviteter",
-        ru: "\u041E\u0442\u0441\u043B\u0435\u0436\u0438\u0432\u0430\u0442\u044C \u043C\u043E\u044E \u0430\u043A\u0442\u0438\u0432\u043D\u043E\u0441\u0442\u044C"
+        ru: "\u041E\u0442\u0441\u043B\u0435\u0436\u0438\u0432\u0430\u0442\u044C \u043C\u043E\u044E \u0430\u043A\u0442\u0438\u0432\u043D\u043E\u0441\u0442\u044C",
+        pl: "\u015Aled\u017A moje aktywno\u015Bci"
       },
       body: {
         en: "Activities will only be registered while enabled",
@@ -62235,7 +63998,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         it: "Le attivit\xE0 saranno registrate solo quando abilitato",
         pt: "As atividades s\xF3 ser\xE3o registradas enquanto estiverem habilitadas",
         sv: "Aktiviteter l\xE4ggs bara till n\xE4r inst\xE4llningen \xE4r aktiverad",
-        ru: "\u0410\u043A\u0442\u0438\u0432\u043D\u043E\u0441\u0442\u044C \u0431\u0443\u0434\u0435\u0442 \u0440\u0435\u0433\u0438\u0441\u0442\u0440\u0438\u0440\u043E\u0432\u0430\u0442\u044C\u0441\u044F \u0442\u043E\u043B\u044C\u043A\u043E \u043F\u0440\u0438 \u0432\u043A\u043B\u044E\u0447\u0435\u043D\u0438\u0438"
+        ru: "\u0410\u043A\u0442\u0438\u0432\u043D\u043E\u0441\u0442\u044C \u0431\u0443\u0434\u0435\u0442 \u0440\u0435\u0433\u0438\u0441\u0442\u0440\u0438\u0440\u043E\u0432\u0430\u0442\u044C\u0441\u044F \u0442\u043E\u043B\u044C\u043A\u043E \u043F\u0440\u0438 \u0432\u043A\u043B\u044E\u0447\u0435\u043D\u0438\u0438",
+        pl: "Aktywno\u015Bci b\u0119d\u0105 rejestrowane tylko kiedy s\u0105 w\u0142\u0105czone"
       }
     },
     clear_history: {
@@ -62245,7 +64009,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Cancella cronologia",
       pt: "Limpar hist\xF3rico",
       sv: "T\xF6m historia",
-      ru: "\u041E\u0447\u0438\u0441\u0442\u0438\u0442\u044C \u0438\u0441\u0442\u043E\u0440\u0438\u044E"
+      ru: "\u041E\u0447\u0438\u0441\u0442\u0438\u0442\u044C \u0438\u0441\u0442\u043E\u0440\u0438\u044E",
+      pl: "Wyczy\u015B\u0107 histori\u0119"
     },
     cleared_activity_history: {
       en: "Cleared your activity history",
@@ -62254,7 +64019,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Cronologia delle attivit\xE0 cancellata",
       pt: "Hist\xF3rico de atividades limpo",
       sv: "T\xF6mde din aktivitetshistoria",
-      ru: "\u0412\u0430\u0448\u0430 \u0438\u0441\u0442\u043E\u0440\u0438\u044F \u0430\u043A\u0442\u0438\u0432\u043D\u043E\u0441\u0442\u0438 \u043E\u0447\u0438\u0449\u0435\u043D\u0430"
+      ru: "\u0412\u0430\u0448\u0430 \u0438\u0441\u0442\u043E\u0440\u0438\u044F \u0430\u043A\u0442\u0438\u0432\u043D\u043E\u0441\u0442\u0438 \u043E\u0447\u0438\u0449\u0435\u043D\u0430",
+      pl: "Wyczyszczono histori\u0119 twoich aktywno\u015Bci"
     },
     activity_settings: {
       en: "Activity settings",
@@ -62263,7 +64029,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Impostazioni delle attivit\xE0",
       pt: "Configura\xE7\xF5es de atividade",
       sv: "Redigera dina aktiviteter",
-      ru: "\u041D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438 \u0430\u043A\u0442\u0438\u0432\u043D\u043E\u0441\u0442\u0438"
+      ru: "\u041D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438 \u0430\u043A\u0442\u0438\u0432\u043D\u043E\u0441\u0442\u0438",
+      pl: "Ustawienia aktywno\u015Bci"
     },
     installation: {
       en: "Installation",
@@ -62272,7 +64039,12 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Installazione",
       pt: "Instala\xE7\xE3o",
       sv: "Installation",
-      ru: "\u0423\u0441\u0442\u0430\u043D\u043E\u0432\u043A\u0430"
+      ru: "\u0423\u0441\u0442\u0430\u043D\u043E\u0432\u043A\u0430",
+      pl: "Instalacja"
+    },
+    cards: {
+      // as in the view mode
+      en: "Cards"
     },
     grid: {
       // as in the view mode
@@ -62282,7 +64054,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Griglia",
       pt: "Grade",
       sv: "Bildruta",
-      ru: "\u0421\u0435\u0442\u043A\u0430"
+      ru: "\u0421\u0435\u0442\u043A\u0430",
+      pl: "Siatka"
     },
     list: {
       // as in the view mode
@@ -62292,7 +64065,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Lista",
       pt: "Linha",
       sv: "Lista",
-      ru: "\u0421\u043F\u0438\u0441\u043E\u043A"
+      ru: "\u0421\u043F\u0438\u0441\u043E\u043A",
+      pl: "Lista"
     },
     line: {
       // as in the type of chart (a line graph)
@@ -62302,7 +64076,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Linea",
       pt: "Lista",
       sv: "Linjediagram",
-      ru: "\u041B\u0438\u043D\u0435\u0439\u043D\u044B\u0439"
+      ru: "\u041B\u0438\u043D\u0435\u0439\u043D\u044B\u0439",
+      pl: "Liniowy"
     },
     pie: {
       // as in the type of chart (a pie chart)
@@ -62312,7 +64087,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Torta",
       pt: "Pizza",
       sv: "Cirkeldiagram",
-      ru: "\u041A\u0440\u0443\u0433\u043E\u0432\u0430\u044F"
+      ru: "\u041A\u0440\u0443\u0433\u043E\u0432\u0430\u044F",
+      pl: "Ko\u0142owy"
     },
     bar: {
       // as in the type of chart (a bar chart)
@@ -62322,7 +64098,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Barre",
       pt: "Coluna",
       sv: "Stapeldiagram",
-      ru: "\u0421\u0442\u043E\u043B\u0431\u0447\u0430\u0442\u0430\u044F"
+      ru: "\u0421\u0442\u043E\u043B\u0431\u0447\u0430\u0442\u0430\u044F",
+      pl: "S\u0142upkowy"
     },
     horizontal: {
       en: "Horizontal",
@@ -62331,7 +64108,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Orizzontale",
       sv: "V\xE5gr\xE4tt",
       ru: "\u0413\u043E\u0440\u0438\u0437\u043E\u043D\u0442\u0430\u043B\u044C\u043D\u044B\u0439",
-      pt: "Horizontal"
+      pt: "Horizontal",
+      pl: "Poziomy"
     },
     vertical: {
       en: "Vertical",
@@ -62340,56 +64118,65 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Verticale",
       sv: "Lodr\xE4tt",
       ru: "\u0412\u0435\u0440\u0442\u0438\u043A\u0430\u043B\u044C\u043D\u044B\u0439",
-      pt: "Vertical"
+      pt: "Vertical",
+      pl: "Pionowy"
     },
     this_year: {
       en: "This year",
       de: "Dieses Jahr",
       es: "Este a\xF1o",
-      it: "Quest'anno",
+      it: "Quest\u2019anno",
+      ja: "\u4ECA\u5E74",
       pt: "Este ano",
       sv: "Detta \xE5r",
-      ru: "\u042D\u0442\u043E\u0442 \u0433\u043E\u0434"
+      ru: "\u042D\u0442\u043E\u0442 \u0433\u043E\u0434",
+      pl: "Ten rok"
     },
     last_year: {
       en: "Last year",
       de: "Letztes Jahr",
       es: "A\xF1o pasado",
-      it: "L'anno scorso",
+      it: "L\u2019anno scorso",
+      ja: "\u53BB\u5E74",
       pt: "Ano passado",
       sv: "F\xF6rra \xE5ret",
-      ru: "\u041F\u0440\u043E\u0448\u043B\u044B\u0439 \u0433\u043E\u0434"
+      ru: "\u041F\u0440\u043E\u0448\u043B\u044B\u0439 \u0433\u043E\u0434",
+      pl: "W tamtym roku"
     },
     love: {
       // as in loving tracks as a concept
       en: "Love",
-      de: "Als Lieblingssong markieren",
+      de: "Markieren",
       es: "Favorito",
       it: "Preferito",
       pt: "Favoritas",
       sv: "\xC4lska",
-      ru: "\u041F\u043E\u043D\u0440\u0430\u0432\u0438\u043B\u043E\u0441\u044C"
+      ru: "\u041F\u043E\u043D\u0440\u0430\u0432\u0438\u043B\u043E\u0441\u044C",
+      pl: "Polub"
     },
     love_track: {
       en: "Love track",
+      de: "Als Lieblingssong markieren",
       es: "Marcar como favorito",
       it: "Imposta come preferito",
       ru: "\u041E\u0442\u043C\u0435\u0442\u0438\u0442\u044C \u0442\u0440\u0435\u043A \u043A\u0430\u043A \u043B\u044E\u0431\u0438\u043C\u044B\u0439",
-      pt: "Marcar como favorito"
+      pt: "Marcar como favorito",
+      pl: "Polub utw\xF3r"
     },
     loved: {
       // as in loved tracks, this can be seen
-      // in the native last.fm ui
+      // in the native Last.fm ui
       en: "Loved",
       de: "Lieblingssongs",
-      es: "Favorito",
+      es: "Favoritos",
       it: "Preferiti",
       pt: "Favoritadas",
       sv: "\xC4lskade l\xE5tar",
-      ru: "\u041F\u043E\u043D\u0440\u0430\u0432\u0438\u0432\u0448\u0438\u0435\u0441\u044F"
+      ru: "\u041F\u043E\u043D\u0440\u0430\u0432\u0438\u0432\u0448\u0438\u0435\u0441\u044F",
+      pl: "Ulubione"
     },
     velocity: {
-      // as in the last.fm labs 'Velocity' tool
+      // as in the Last.fm labs 'Velocity' tool
       en: "Velocity",
       de: "Dynamik",
       es: "Velocity",
@@ -62397,7 +64184,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Rapidez",
       // velocity is often mistakenly translated to 'velocidade' in portuguese
       sv: "Velocitet",
-      ru: "\u0421\u043A\u043E\u0440\u043E\u0441\u0442\u044C"
+      ru: "\u0421\u043A\u043E\u0440\u043E\u0441\u0442\u044C",
+      pl: "Pr\u0119dko\u015B\u0107"
     },
     logout: {
       en: "Logout",
@@ -62407,17 +64195,20 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Sair",
       ja: "\u30ED\u30B0\u30A2\u30A6\u30C8",
       sv: "Logga ut",
-      ru: "\u0412\u044B\u0439\u0442\u0438"
+      ru: "\u0412\u044B\u0439\u0442\u0438",
+      pl: "Wyloguj"
     },
     tracklist: {
-      // please copy from native last.fm ui
+      // please copy from native Last.fm ui
       en: "Tracklist",
       de: "Titelliste",
       es: "Lista de temas",
       it: "Elenco dei brani",
+      ja: "\u30C8\u30E9\u30C3\u30AF\u30EA\u30B9\u30C8",
       pt: "Lista de faixas",
       sv: "Spellista",
-      ru: "\u0421\u043F\u0438\u0441\u043E\u043A \u0442\u0440\u0435\u043A\u043E\u0432"
+      ru: "\u0421\u043F\u0438\u0441\u043E\u043A \u0442\u0440\u0435\u043A\u043E\u0432",
+      pl: "Lista utwor\xF3w"
     },
     tracklist_from_plays_info: {
       en: "Retrieved own plays as official tracklist is unavailable",
@@ -62426,7 +64217,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Il recupero dei propri ascolti come elenco ufficiale dei brani non \xE8 disponibile",
       pt: "Reprodu\xE7\xF5es pr\xF3prias recuperadas, pois a lista de faixas oficial n\xE3o est\xE1 dispon\xEDvel",
       sv: "H\xE4mtade dina spelningar f\xF6r en officiell spellista finns inte tillg\xE4nglig",
-      ru: "\u041F\u043E\u043B\u0443\u0447\u0435\u043D\u044B \u0432\u0430\u0448\u0438 \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u044F, \u0442\u0430\u043A \u043A\u0430\u043A \u043E\u0444\u0438\u0446\u0438\u0430\u043B\u044C\u043D\u044B\u0439 \u0441\u043F\u0438\u0441\u043E\u043A \u0442\u0440\u0435\u043A\u043E\u0432 \u043D\u0435\u0434\u043E\u0441\u0442\u0443\u043F\u0435\u043D"
+      ru: "\u041F\u043E\u043B\u0443\u0447\u0435\u043D\u044B \u0432\u0430\u0448\u0438 \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u044F, \u0442\u0430\u043A \u043A\u0430\u043A \u043E\u0444\u0438\u0446\u0438\u0430\u043B\u044C\u043D\u044B\u0439 \u0441\u043F\u0438\u0441\u043E\u043A \u0442\u0440\u0435\u043A\u043E\u0432 \u043D\u0435\u0434\u043E\u0441\u0442\u0443\u043F\u0435\u043D",
+      pl: "Otrzymano w\u0142asne odtworzenia poniewa\u017C oficjalna lista utwor\xF3w jest niedost\u0119pna"
     },
     from_the_album: {
       en: "From {album}",
@@ -62435,7 +64227,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Da {album}",
       pt: "Do {album}",
       sv: "Fr\xE5n {album}",
-      ru: "\u0421 {album}"
+      ru: "\u0421 {album}",
+      pl: "Z {album}"
     },
     others_count: {
       // the amount of other users
@@ -62445,7 +64238,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "{c} altri",
       pt: "{c} outros",
       sv: "{c} andra",
-      ru: "{c} \u0434\u0440\u0443\u0433\u0438\u0445"
+      ru: "{c} \u0434\u0440\u0443\u0433\u0438\u0445",
+      pl: "{c} innych"
     },
     loading_album_plays: {
       en: "Collecting your album plays",
@@ -62454,7 +64248,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Raccogliendo le tue riproduzioni di album",
       pt: "Coletando suas reprodu\xE7\xF5es de \xE1lbuns",
       sv: "Samlar ihop dina albumspelningar",
-      ru: "\u0421\u0431\u043E\u0440 \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u0439 \u0432\u0430\u0448\u0438\u0445 \u0430\u043B\u044C\u0431\u043E\u043C\u043E\u0432"
+      ru: "\u0421\u0431\u043E\u0440 \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u0439 \u0432\u0430\u0448\u0438\u0445 \u0430\u043B\u044C\u0431\u043E\u043C\u043E\u0432",
+      pl: "Zbieranie twoich odtworze\u0144 albumu"
     },
     fail_album_plays: {
       en: "No plays could be found",
@@ -62463,16 +64258,18 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Non sono state trovate riproduzioni",
       pt: "Nenhuma reprodu\xE7\xE3o p\xF4de ser encontrada",
       sv: "Kunde inte hitta p\xE5 albumspelningar",
-      ru: "\u041F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u044F \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D\u044B"
+      ru: "\u041F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u044F \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D\u044B",
+      pl: "Nie znaleziono \u017Cadnych odtworze\u0144"
     },
     open_album_as_track: {
       en: "Open album title as track",
       de: "Albumtitel als Song \xF6ffnen",
       es: "Abrir t\xEDtulo del \xE1lbum como tema",
-      it: "Apri il titolo dell'album come brano",
+      it: "Apri il titolo dell\u2019album come brano",
       pt: "Abrir t\xEDtulo do \xE1lbum como faixa",
       sv: "\xD6ppna albumtitel som egen l\xE5t",
-      ru: "\u041E\u0442\u043A\u0440\u044B\u0442\u044C \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u0430\u043B\u044C\u0431\u043E\u043C\u0430 \u043A\u0430\u043A \u0442\u0440\u0435\u043A"
+      ru: "\u041E\u0442\u043A\u0440\u044B\u0442\u044C \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u0430\u043B\u044C\u0431\u043E\u043C\u0430 \u043A\u0430\u043A \u0442\u0440\u0435\u043A",
+      pl: "Otw\xF3rz tytu\u0142 albumu jako utw\xF3r"
     },
     ignored: {
       en: "Ignored",
@@ -62481,7 +64278,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Ignorato",
       pt: "Ignorados",
       sv: "Ignorerad",
-      ru: "\u0418\u0433\u043D\u043E\u0440\u0438\u0440\u0443\u0435\u043C\u044B\u0435"
+      ru: "\u0418\u0433\u043D\u043E\u0440\u0438\u0440\u0443\u0435\u043C\u044B\u0435",
+      pl: "Ignorowany"
     },
     count_total: {
       en: "{c} total",
@@ -62490,16 +64288,18 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "{c} in totale",
       sv: "{c} totalt",
       ru: "{c} \u0432\u0441\u0435\u0433\u043E",
-      pt: "{c} no total"
+      pt: "{c} no total",
+      pl: "{c} \u0142\u0105cznie"
     },
     video_removed: {
       en: "Video removed by Last.fm",
       de: "Video von Last.fm entfernt",
-      es: "Video eliminado por Last.fm",
+      es: "Video removido por Last.fm",
       it: "Video rimosso da Last.fm",
       pt: "V\xEDdeo removido pela Last.fm",
       sv: "Video borttagen av Last.fm",
-      ru: "\u0412\u0438\u0434\u0435\u043E \u0443\u0434\u0430\u043B\u0435\u043D\u043E Last.fm"
+      ru: "\u0412\u0438\u0434\u0435\u043E \u0443\u0434\u0430\u043B\u0435\u043D\u043E Last.fm",
+      pl: "Wideo usuni\u0119te przez Last.fm"
     },
     blocked_page: {
       en: "This page has been limited by Last.fm",
@@ -62508,7 +64308,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Questa pagina \xE8 stata limitata da Last.fm",
       pt: "Esta p\xE1gina foi limitada pela Last.fm",
       sv: "Denna sida har begr\xE4nsats av Last.fm",
-      ru: "\u042D\u0442\u0430 \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u0430 \u043E\u0433\u0440\u0430\u043D\u0438\u0447\u0435\u043D\u0430 Last.fm"
+      ru: "\u042D\u0442\u0430 \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u0430 \u043E\u0433\u0440\u0430\u043D\u0438\u0447\u0435\u043D\u0430 Last.fm",
+      pl: "Ta strona zosta\u0142a ograniczona przez Last.fm"
     },
     results_for: {
       // used as a header above the actual search e.g.
@@ -62520,7 +64321,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Risultati per",
       pt: "Resultados para",
       sv: "S\xF6kresultat f\xF6r",
-      ru: "\u0420\u0435\u0437\u0443\u043B\u044C\u0442\u0430\u0442\u044B \u0434\u043B\u044F"
+      ru: "\u0420\u0435\u0437\u0443\u043B\u044C\u0442\u0430\u0442\u044B \u0434\u043B\u044F",
+      pl: "Wyniki dla"
     },
     create_new_event: {
       en: "Create new event",
@@ -62529,7 +64331,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Crea nuovo evento",
       pt: "Criar novo evento",
       sv: "Skapa ett nytt evenemang",
-      ru: "\u0421\u043E\u0437\u0434\u0430\u0442\u044C \u043D\u043E\u0432\u043E\u0435 \u0441\u043E\u0431\u044B\u0442\u0438\u0435"
+      ru: "\u0421\u043E\u0437\u0434\u0430\u0442\u044C \u043D\u043E\u0432\u043E\u0435 \u0441\u043E\u0431\u044B\u0442\u0438\u0435",
+      pl: "Utw\xF3rz nowe wydarzenie"
     },
     related_to: {
       // used for similar tags
@@ -62539,7 +64342,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Correlato a",
       pt: "Relacionado a",
       sv: "F\xF6rknippad med",
-      ru: "\u0421\u0432\u044F\u0437\u0430\u043D\u043D\u044B\u0435 \u0441"
+      ru: "\u0421\u0432\u044F\u0437\u0430\u043D\u043D\u044B\u0435 \u0441",
+      pl: "Podobne do"
     },
     personal_tag: {
       en: "Personal tag",
@@ -62548,7 +64352,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Tag personale",
       pt: "Marcador pessoal",
       sv: "Din tagg",
-      ru: "\u041B\u0438\u0447\u043D\u044B\u0439 \u0442\u0435\u0433"
+      ru: "\u041B\u0438\u0447\u043D\u044B\u0439 \u0442\u0435\u0433",
+      pl: "Tagi personalne"
     },
     your_avatar: {
       en: "Your avatar",
@@ -62557,21 +64362,23 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "La tua foto profilo",
       pt: "Sua foto de perfil",
       sv: "Din profilbild",
-      ru: "\u0412\u0430\u0448 \u0430\u0432\u0430\u0442\u0430\u0440"
+      ru: "\u0412\u0430\u0448 \u0430\u0432\u0430\u0442\u0430\u0440",
+      pl: "Tw\xF3j awatar"
     },
     avatar_for_user: {
       // this is used to replace the text and extract the
       // username, so make this text everything BUT where
       // the username goes (including spaces)
-      // you can find this text in the last.fm ui as every
+      // you can find this text in the Last.fm ui as every
       // avatar's (except your own) alt text
       en: "Avatar for ",
       de: "Profilbild von ",
       es: "Avatar para ",
       it: "Avatar di ",
-      pt: "Foto de perfil de",
+      pt: "Foto de perfil de ",
       sv: "Avatar f\xF6r ",
-      ru: "\u0410\u0432\u0430\u0442\u0430\u0440 \u0434\u043B\u044F "
+      ru: "\u0410\u0432\u0430\u0442\u0430\u0440 \u0434\u043B\u044F ",
+      pl: "Awatar dla "
     },
     by: {
       en: "by",
@@ -62580,7 +64387,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "di",
       pt: "por",
       sv: "av",
-      ru: "\u043E\u0442"
+      ru: "\u043E\u0442",
+      pl: "od"
     },
     by_user: {
       en: "by {u}",
@@ -62589,7 +64397,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "di {u}",
       pt: "por {u}",
       sv: "av {u}",
-      ru: "\u043E\u0442 {u}"
+      ru: "\u043E\u0442 {u}",
+      pl: "od {u}"
     },
     by_artist: {
       // {name} by {artist} - hence the space in english
@@ -62599,7 +64408,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: " di {a}",
       pt: " por {a}",
       sv: " av {a}",
-      ru: " \u043E\u0442 {a}"
+      ru: " \u043E\u0442 {a}",
+      pl: " od {a}"
     },
     value_by_user: {
       en: "{v} by {u}",
@@ -62607,7 +64417,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       es: "{v} por {v}",
       it: "{v} di {u}",
       pt: "{v} por {u}",
-      ru: "{v} \u043E\u0442 {u}"
+      ru: "{v} \u043E\u0442 {u}",
+      pl: "{v} od {u}"
     },
     from_user: {
       en: "from {u}",
@@ -62616,7 +64427,18 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "da {u}",
       pt: "de {u}",
       sv: "fr\xE5n {u}",
-      ru: "\u043E\u0442 {u}"
+      ru: "\u043E\u0442 {u}",
+      pl: "od {u}"
+    },
+    open: {
+      en: "Open",
+      de: "\xD6ffnen",
+      es: "Abrir",
+      it: "Apri",
+      pt: "Abrir",
+      sv: "\xD6ppen",
+      ru: "\u041E\u0442\u043A\u0440\u044B\u0442\u044C",
+      pl: "Otwarte"
     },
     open_new_tab: {
       en: "Open in a new tab",
@@ -62625,40 +64447,51 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Apri in una nuova scheda",
       pt: "Abrir em nova aba",
       sv: "\xD6ppna i ny flik",
-      ru: "\u041E\u0442\u043A\u0440\u044B\u0442\u044C \u0432 \u043D\u043E\u0432\u043E\u0439 \u0432\u043A\u043B\u0430\u0434\u043A\u0435"
+      ru: "\u041E\u0442\u043A\u0440\u044B\u0442\u044C \u0432 \u043D\u043E\u0432\u043E\u0439 \u0432\u043A\u043B\u0430\u0434\u043A\u0435",
+      pl: "Otw\xF3rz w nowej karcie"
     },
     view_image: {
       en: "View image",
+      de: "Bild ansehen",
       pt: "Visualizar imagem",
       es: "Ver imagen",
       it: "Visualizza immagine",
       sv: "Visa bild",
-      ru: "\u041F\u0440\u043E\u0441\u043C\u043E\u0442\u0440\u0435\u0442\u044C \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435"
+      ru: "\u041F\u0440\u043E\u0441\u043C\u043E\u0442\u0440\u0435\u0442\u044C \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435",
+      pl: "Wy\u015Bwietl zdj\u0119cie"
     },
     view_image_unsafe: {
       en: "View unsafe image",
+      de: "Unangemessenes Bild ansehen",
       es: "Ver imagen no segura",
       it: "Mostra immagine non sicura",
-      pt: "Visualizar imagem n\xE3o segura"
+      pt: "Visualizar imagem n\xE3o segura",
+      pl: "Wy\u015Bwietl nieodpowiednie zdj\u0119cie",
+      ru: "\u041F\u0440\u043E\u0441\u043C\u043E\u0442\u0440\u0435\u0442\u044C \u043D\u0435\u0431\u0435\u0437\u043E\u043F\u0430\u0441\u043D\u043E\u0435 \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435"
     },
     open_link: {
       en: "Open link",
+      de: "Link \xF6ffnen",
       es: "Abrir v\xEDnculo",
       it: "Apri link",
-      pt: "Abrir link"
+      pt: "Abrir link",
+      pl: "Otw\xF3rz link",
+      ru: "\u041E\u0442\u043A\u0440\u044B\u0442\u044C \u0441\u0441\u044B\u043B\u043A\u0443"
     },
     event_cancelled: {
       // obviously remove the emoji or replace it as
       // you see fit if desired
       //
       // why would you remove him, he's just a little guy -soleil
+      // never remove him, he's precious and loved. –myrai
       en: "This event has been cancelled (\u2565\uFE4F\u2565)",
       de: "Dieses Event wurde abgesagt (\u2565\uFE4F\u2565)",
       es: "Este evento ha sido cancelado (\u2565\uFE4F\u2565)",
       it: "Questo evento \xE8 stato annullato (\u2565\uFE4F\u2565)",
       pt: "Este evento foi cancelado (\u2565\uFE4F\u2565)",
       sv: "Detta evenemang har avbrutits (\u2565\uFE4F\u2565)",
-      ru: "\u042D\u0442\u043E \u0441\u043E\u0431\u044B\u0442\u0438\u0435 \u0431\u044B\u043B\u043E \u043E\u0442\u043C\u0435\u043D\u0435\u043D\u043E (\u2565\uFE4F\u2565)"
+      ru: "\u042D\u0442\u043E \u0441\u043E\u0431\u044B\u0442\u0438\u0435 \u0431\u044B\u043B\u043E \u043E\u0442\u043C\u0435\u043D\u0435\u043D\u043E (\u2565\uFE4F\u2565)",
+      pl: "To wydarzenie zosta\u0142o odwo\u0142ane (\u2565\uFE4F\u2565)"
     },
     format_guest_features: {
       name: {
@@ -62668,7 +64501,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         it: "Tag intelligenti per artisti e brani",
         pt: "Tags inteligentes de artistas e m\xFAsicas",
         sv: "Smartformat f\xF6r g\xE4startister och l\xE5ttaggar",
-        ru: "\u0423\u043C\u043D\u043E\u0435 \u0444\u043E\u0440\u043C\u0430\u0442\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435 \u043F\u0440\u0438\u0433\u043B\u0430\u0448\u0435\u043D\u043D\u044B\u0445 \u0430\u0440\u0442\u0438\u0441\u0442\u043E\u0432 \u0438 \u0442\u0435\u0433\u043E\u0432 \u043F\u0435\u0441\u0435\u043D"
+        ru: "\u0423\u043C\u043D\u043E\u0435 \u0444\u043E\u0440\u043C\u0430\u0442\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435 \u043F\u0440\u0438\u0433\u043B\u0430\u0448\u0435\u043D\u043D\u044B\u0445 \u0430\u0440\u0442\u0438\u0441\u0442\u043E\u0432 \u0438 \u0442\u0435\u0433\u043E\u0432 \u043F\u0435\u0441\u0435\u043D",
+        pl: "Inteligentnie podani autorzy i tagi utwor\xF3w"
       },
       body: {
         en: "Analyses album and track titles into their guests, versions, remixes, etc.",
@@ -62677,7 +64511,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         it: "Analizza i titoli di album e brani ed estrae artisti partecipanti, versioni, remix, ecc.",
         pt: "Analisa t\xEDtulos de \xE1lbuns e faixas e os separa em seus convidados, vers\xF5es, remixes etc.",
         sv: "Analyserar album och l\xE5ttitlar till g\xE4startister, olika versioner, remixar osv.",
-        ru: "\u0410\u043D\u0430\u043B\u0438\u0437\u0438\u0440\u0443\u0435\u0442 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u044F \u0430\u043B\u044C\u0431\u043E\u043C\u043E\u0432 \u0438 \u0442\u0440\u0435\u043A\u043E\u0432 \u043D\u0430 \u043F\u0440\u0435\u0434\u043C\u0435\u0442 \u043F\u0440\u0438\u0433\u043B\u0430\u0448\u0435\u043D\u043D\u044B\u0445 \u0430\u0440\u0442\u0438\u0441\u0442\u043E\u0432, \u0432\u0435\u0440\u0441\u0438\u0439, \u0440\u0435\u043C\u0438\u043A\u0441\u043E\u0432 \u0438 \u0442.\u0434."
+        ru: "\u0410\u043D\u0430\u043B\u0438\u0437\u0438\u0440\u0443\u0435\u0442 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u044F \u0430\u043B\u044C\u0431\u043E\u043C\u043E\u0432 \u0438 \u0442\u0440\u0435\u043A\u043E\u0432 \u043D\u0430 \u043F\u0440\u0435\u0434\u043C\u0435\u0442 \u043F\u0440\u0438\u0433\u043B\u0430\u0448\u0435\u043D\u043D\u044B\u0445 \u0430\u0440\u0442\u0438\u0441\u0442\u043E\u0432, \u0432\u0435\u0440\u0441\u0438\u0439, \u0440\u0435\u043C\u0438\u043A\u0441\u043E\u0432 \u0438 \u0442.\u0434.",
+        pl: "Analizuje tytu\u0142y album\xF3w i utwor\xF3w dziel\u0105c je na artyst\xF3w z udzia\u0142em, wersje, remiksy, itp."
       }
     },
     show_guest_features: {
@@ -62688,121 +64523,145 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         it: "Duplica gli artisti partecipanti nel titolo",
         pt: "Artistas creditados duplicados no t\xEDtulo",
         sv: "Duplicera artistnamn i l\xE5ttitel",
-        ru: "\u0414\u0443\u0431\u043B\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u043F\u0440\u0438\u0433\u043B\u0430\u0448\u0435\u043D\u043D\u044B\u0445 \u0430\u0440\u0442\u0438\u0441\u0442\u043E\u0432 \u0432 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0438"
+        ru: "\u0414\u0443\u0431\u043B\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u043F\u0440\u0438\u0433\u043B\u0430\u0448\u0435\u043D\u043D\u044B\u0445 \u0430\u0440\u0442\u0438\u0441\u0442\u043E\u0432 \u0432 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0438",
+        pl: "Duplikuj podanych autor\xF3w w tytule"
       },
       body: {
         en: "Otherwise guests are neatly placed next to the primary artist",
         de: "Ansonsten werden gefeaturete K\xFCnstler:innen neben dem/der Hauptk\xFCnstler:in platziert",
         es: "De lo contrario, los colaboradores son organizados limpiamente al lado del artista principal",
-        it: "Altrimenti gli artisti partecipanti sono disposti in modo pulito vicino all'artista principale",
+        it: "Altrimenti gli artisti partecipanti sono disposti in modo pulito vicino all\u2019artista principale",
         pt: "Caso contr\xE1rio os convidados s\xE3o organizados de forma elegante ao lado do artista principal",
         sv: "Annars placeras g\xE4startister fint bredvid huvudartisten",
-        ru: "\u0412 \u043F\u0440\u043E\u0442\u0438\u0432\u043D\u043E\u043C \u0441\u043B\u0443\u0447\u0430\u0435 \u043F\u0440\u0438\u0433\u043B\u0430\u0448\u0435\u043D\u043D\u044B\u0435 \u0430\u0440\u0442\u0438\u0441\u0442\u044B \u0430\u043A\u043A\u0443\u0440\u0430\u0442\u043D\u043E \u0440\u0430\u0437\u043C\u0435\u0449\u0430\u044E\u0442\u0441\u044F \u0440\u044F\u0434\u043E\u043C \u0441 \u043E\u0441\u043D\u043E\u0432\u043D\u044B\u043C \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u0435\u043C"
+        ru: "\u0412 \u043F\u0440\u043E\u0442\u0438\u0432\u043D\u043E\u043C \u0441\u043B\u0443\u0447\u0430\u0435 \u043F\u0440\u0438\u0433\u043B\u0430\u0448\u0435\u043D\u043D\u044B\u0435 \u0430\u0440\u0442\u0438\u0441\u0442\u044B \u0430\u043A\u043A\u0443\u0440\u0430\u0442\u043D\u043E \u0440\u0430\u0437\u043C\u0435\u0449\u0430\u044E\u0442\u0441\u044F \u0440\u044F\u0434\u043E\u043C \u0441 \u043E\u0441\u043D\u043E\u0432\u043D\u044B\u043C \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u0435\u043C",
+        pl: "W przeciwnym razie arty\u015Bci z udzia\u0142em zo zgrabnie u\u0142o\u017Ceni obok g\u0142\xF3wnego artysty"
       }
     },
     track_layout: {
       name: {
         en: "Track layout",
+        de: "Titellayout",
         es: "Dise\xF1o de tema",
         it: "Layout dei brani",
         sv: "L\xE5tlayout",
         ru: "\u0420\u0430\u0441\u043F\u043E\u043B\u043E\u0436\u0435\u043D\u0438\u0435 \u0442\u0440\u0435\u043A\u0430",
-        pt: "Layout da faixa"
+        pt: "Layout da faixa",
+        pl: "Uk\u0142ad utworu"
       },
       body: {
         en: "Choose which axis to display track information on",
+        de: "W\xE4hle, auf welcher Achse Titelinformationen angezeigt werden sollen",
         es: "Elige en qu\xE9 eje mostrar la informaci\xF3n del tema",
         it: "Seleziona su quale asse mostrare le informazioni dei brani",
         sv: "V\xE4lj vilken axis att visa l\xE5tinformation p\xE5",
         ru: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u043E\u0441\u044C, \u043D\u0430 \u043A\u043E\u0442\u043E\u0440\u043E\u0439 \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0442\u044C \u0438\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u044E \u043E \u0442\u0440\u0435\u043A\u0435",
-        pt: "Escolha em qual eixo exibir as informa\xE7\xF5es da faixa"
+        pt: "Escolha em qual eixo exibir as informa\xE7\xF5es da faixa",
+        pl: "Wybierz na kt\xF3rej osi wy\u015Bwietla\u0107 informacje o utworach"
       },
       column: {
         en: "Place title and artist vertically",
+        de: "Titel und K\xFCnstler:in vertikal anordnen",
         es: "Colocar t\xEDtulo y artista verticalmente",
         it: "Disponi titolo e artista verticalmente",
         sv: "Placera titel och artist lodr\xE4tt",
         ru: "\u0420\u0430\u0437\u043C\u0435\u0441\u0442\u0438\u0442\u044C \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u0438 \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044F \u0432\u0435\u0440\u0442\u0438\u043A\u0430\u043B\u044C\u043D\u043E",
-        pt: "Colocar t\xEDtulo e artista verticalmente"
+        pt: "Colocar t\xEDtulo e artista verticalmente",
+        pl: "U\u0142\xF3\u017C tytu\u0142 i artyst\u0119 pionowo"
       },
       row: {
         en: "Place title and artist horizontally",
+        de: "Titel und K\xFCnstler:in horizontal anordnen",
         es: "Colocar t\xEDtulo y artista horizontalmente",
         it: "Disponi titolo e artista orizzontalmente",
         sv: "Placera titel och artist v\xE5gr\xE4tt",
         ru: "\u0420\u0430\u0437\u043C\u0435\u0441\u0442\u0438\u0442\u044C \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u0438 \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044F \u0433\u043E\u0440\u0438\u0437\u043E\u043D\u0442\u0430\u043B\u044C\u043D\u043E",
-        pt: "Colocar t\xEDtulo e artista horizontalmente"
+        pt: "Colocar t\xEDtulo e artista horizontalmente",
+        pl: "U\u0142\xF3\u017C tytu\u0142 i artyst\u0119 poziomo"
       }
     },
     track_album_name_location: {
       name: {
         en: "Album name location",
+        de: "Position des Albumtitels",
         es: "Ubicaci\xF3n del nombre del \xE1lbum",
-        it: "Posizione del nome dell'album",
+        it: "Posizione del nome dell\u2019album",
         sv: "Albumtitelsplats",
         ru: "\u0420\u0430\u0441\u043F\u043E\u043B\u043E\u0436\u0435\u043D\u0438\u0435 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u044F \u0430\u043B\u044C\u0431\u043E\u043C\u0430",
-        pt: "Localiza\xE7\xE3o do nome do \xE1lbum"
+        pt: "Localiza\xE7\xE3o do nome do \xE1lbum",
+        pl: "Lokacja nazwy albumu"
       },
       body: {
         en: "Choose which axis to display said album name on",
+        de: "W\xE4hle, auf welcher Achse der Albumtitel angezeigt werden soll",
         es: "Elige en qu\xE9 eje mostrar el nombre del \xE1lbum",
-        it: "Seleziona su quale asse mostrare il nome dell'album",
+        it: "Seleziona su quale asse mostrare il nome dell\u2019album",
         sv: "V\xE4lj vilken axis att visa albumtitel p\xE5",
         ru: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u043E\u0441\u044C, \u043D\u0430 \u043A\u043E\u0442\u043E\u0440\u043E\u0439 \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0442\u044C \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u0430\u043B\u044C\u0431\u043E\u043C\u0430",
-        pt: "Escolha em qual eixo exibir o nome do \xE1lbum"
+        pt: "Escolha em qual eixo exibir o nome do \xE1lbum",
+        pl: "Wybierz na kt\xF3rej osi wy\u015Bwietla\u0107 nazw\u0119 albumu"
       },
       column: {
         en: "Place below title and artist",
+        de: "Unter Titel und K\xFCnstler:in anordnen",
         es: "Colocar debajo del t\xEDtulo y artista",
         it: "Disponi sotto titolo e artista",
         sv: "Placera under l\xE5ttitel och artist",
         ru: "\u0420\u0430\u0437\u043C\u0435\u0441\u0442\u0438\u0442\u044C \u043F\u043E\u0434 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435\u043C \u0438 \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u0435\u043C",
-        pt: "Colocar abaixo do t\xEDtulo e artista"
+        pt: "Colocar abaixo do t\xEDtulo e artista",
+        pl: "Podaj poni\u017Cej tytu\u0142 i artyst\u0119"
       },
       row: {
         en: "Place to the side of title and artist",
+        de: "Neben Titel und K\xFCnstler:in anordnen",
         es: "Colocar al lado del t\xEDtulo y artista",
         it: "Disponi a fianco di titolo e artista",
         sv: "Placera bredvid l\xE5ttitel och artist",
         ru: "\u0420\u0430\u0437\u043C\u0435\u0441\u0442\u0438\u0442\u044C \u0440\u044F\u0434\u043E\u043C \u0441 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435\u043C \u0438 \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u0435\u043C",
-        pt: "Colocar ao lado do t\xEDtulo e artista"
+        pt: "Colocar ao lado do t\xEDtulo e artista",
+        pl: "Umie\u015B\u0107 obok tytu\u0142u i artysty"
       }
     },
     expand_tracks: {
       name: {
         en: "Show associated album for tracks",
+        de: "Zugeh\xF6riges Album f\xFCr Titel anzeigen",
         es: "Mostrar \xE1lbum asociado al tema",
         it: "Mostra album associato per i brani",
         sv: "Visa associerade album f\xF6r l\xE5tar",
         ru: "\u041F\u043E\u043A\u0430\u0437\u044B\u0432\u0430\u0442\u044C \u0441\u0432\u044F\u0437\u0430\u043D\u043D\u044B\u0439 \u0430\u043B\u044C\u0431\u043E\u043C \u0434\u043B\u044F \u0442\u0440\u0435\u043A\u043E\u0432",
-        pt: "Mostrar \xE1lbum associado para faixas"
+        pt: "Mostrar \xE1lbum associado para faixas",
+        pl: "Poka\u017C powi\u0105zane albumy dla utwor\xF3w"
       },
       body: {
         en: "Places the track\u2019s associated album name if there\u2019s room",
+        de: "Zeigt den Namen des zugeh\xF6rigen Albums des Titels an, wenn genug Platz vorhanden ist",
         es: "Coloca el nombre del \xE1lbum asociado al tema si hay espacio",
-        it: "Inserisce il nome dell'album associato ai brani se c'\xE8 spazio",
+        it: "Inserisce il nome dell\u2019album associato ai brani se c\u2019\xE8 spazio",
         sv: "Placerar l\xE5tens associerade album om det finns plats",
         ru: "\u041E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0435\u0442 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u0441\u0432\u044F\u0437\u0430\u043D\u043D\u043E\u0433\u043E \u0430\u043B\u044C\u0431\u043E\u043C\u0430 \u0442\u0440\u0435\u043A\u0430, \u0435\u0441\u043B\u0438 \u0435\u0441\u0442\u044C \u043C\u0435\u0441\u0442\u043E",
-        pt: "Coloca o nome do \xE1lbum associado \xE0 faixa, se houver espa\xE7o"
+        pt: "Coloca o nome do \xE1lbum associado \xE0 faixa, se houver espa\xE7o",
+        pl: "Umieszcza nazw\u0119 powi\u0105zanego albumu je\u015Bli jest na to miejsce"
       }
     },
     expand_tracks_when_active: {
       en: "Only when actively scrobbling",
+      de: "Nur beim aktiven Scrobbeln",
       es: "Solo activo cuando se hace scrobbling",
-      de: "Nur w\xE4hrend des aktiven Scrobbelns",
       it: "Solo quando si sta effettuando lo scrobbling",
       sv: "Endast n\xE4r du skrobblar",
       ru: "\u0422\u043E\u043B\u044C\u043A\u043E \u043F\u0440\u0438 \u0430\u043A\u0442\u0438\u0432\u043D\u043E\u043C \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u0438\u043D\u0433\u0435",
-      pt: "Apenas quando estiver ativamente scrobblando"
+      pt: "Apenas quando estiver ativamente scrobblando",
+      pl: "Tylko gdy aktualnie scrobbluje"
     },
     expand_tracks_always: {
       en: "Always when possible",
-      es: "Siempre cuando sea posible",
       de: "Immer, wenn m\xF6glich",
+      es: "Siempre cuando sea posible",
       it: "Sempre quando possibile",
       sv: "Alltid, n\xE4r det \xE4r m\xF6jligt",
       ru: "\u0412\u0441\u0435\u0433\u0434\u0430, \u043A\u043E\u0433\u0434\u0430 \u0432\u043E\u0437\u043C\u043E\u0436\u043D\u043E",
-      pt: "Sempre que poss\xEDvel"
+      pt: "Sempre que poss\xEDvel",
+      pl: "Zawsze kiedy mo\u017Cliwe"
     },
     show_remaster_tags: {
       en: "Show remaster tags",
@@ -62811,7 +64670,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Mostra tag dei remaster",
       pt: "Mostrar as tags de remaster",
       sv: "Visa remaster-taggar",
-      ru: "\u041F\u043E\u043A\u0430\u0437\u044B\u0432\u0430\u0442\u044C \u0442\u0435\u0433\u0438 \u0440\u0435\u043C\u0430\u0441\u0442\u0435\u0440\u0438\u043D\u0433\u0430"
+      ru: "\u041F\u043E\u043A\u0430\u0437\u044B\u0432\u0430\u0442\u044C \u0442\u0435\u0433\u0438 \u0440\u0435\u043C\u0430\u0441\u0442\u0435\u0440\u0438\u043D\u0433\u0430",
+      pl: "Poka\u017C tagi remasteru"
     },
     recent_realtime: {
       name: {
@@ -62821,7 +64681,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         it: "Aggiorna brani automaticamente",
         pt: "Atualizar faixas automaticamente",
         sv: "Automatiskt uppdatera l\xE5tar",
-        ru: "\u0410\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u0435\u0441\u043A\u0438 \u043E\u0431\u043D\u043E\u0432\u043B\u044F\u0442\u044C \u0442\u0440\u0435\u043A\u0438"
+        ru: "\u0410\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u0435\u0441\u043A\u0438 \u043E\u0431\u043D\u043E\u0432\u043B\u044F\u0442\u044C \u0442\u0440\u0435\u043A\u0438",
+        pl: "Od\u015Bwie\u017Caj utwory automatycznie"
       },
       body: {
         en: "View your listening history in realtime",
@@ -62830,7 +64691,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         it: "Visualizza la tua cronologia di ascolto in tempo reale",
         pt: "Veja seu hist\xF3rico de scrobbles em tempo real",
         sv: "Visa din lyssningshistorik i realtid",
-        ru: "\u041F\u0440\u043E\u0441\u043C\u043E\u0442\u0440 \u0438\u0441\u0442\u043E\u0440\u0438\u0438 \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u044F \u0432 \u0440\u0435\u0430\u043B\u044C\u043D\u043E\u043C \u0432\u0440\u0435\u043C\u0435\u043D\u0438"
+        ru: "\u041F\u0440\u043E\u0441\u043C\u043E\u0442\u0440 \u0438\u0441\u0442\u043E\u0440\u0438\u0438 \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u044F \u0432 \u0440\u0435\u0430\u043B\u044C\u043D\u043E\u043C \u0432\u0440\u0435\u043C\u0435\u043D\u0438",
+        pl: "Zobacz swoj\u0105 histori\u0119 s\u0142uchania w prawdziwym czasie"
       }
     },
     amount_to_display: {
@@ -62841,7 +64703,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Quantit\xE0 di brani da mostrare",
       pt: "Quantidade a ser exibida",
       sv: "M\xE4ngd att visa",
-      ru: "\u041A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u043E \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0435\u043C\u044B\u0445 \u0442\u0440\u0435\u043A\u043E\u0432"
+      ru: "\u041A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u043E \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0435\u043C\u044B\u0445 \u0442\u0440\u0435\u043A\u043E\u0432",
+      pl: "Ile wy\u015Bwietla\u0107 utwor\xF3w"
     },
     recent_artwork: {
       en: "Accompany tracks with artwork",
@@ -62850,7 +64713,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Accompagna i brani con le copertine",
       pt: "Mostrar as faixas juntamente a capa",
       sv: "Visa skivomslag vid l\xE5t",
-      ru: "\u0421\u043E\u043F\u0440\u043E\u0432\u043E\u0436\u0434\u0430\u0442\u044C \u0442\u0440\u0435\u043A\u0438 \u043E\u0431\u043B\u043E\u0436\u043A\u043E\u0439"
+      ru: "\u0421\u043E\u043F\u0440\u043E\u0432\u043E\u0436\u0434\u0430\u0442\u044C \u0442\u0440\u0435\u043A\u0438 \u043E\u0431\u043B\u043E\u0436\u043A\u043E\u0439",
+      pl: "Pokazuj utwory wraz z ok\u0142adk\u0105"
     },
     default_timeframe: {
       en: "Default timeframe",
@@ -62860,7 +64724,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Per\xEDodo padr\xE3o",
       ja: "\u30C7\u30D5\u30A9\u30EB\u30C8\u671F\u9593",
       sv: "Standardtidsram",
-      ru: "\u041F\u0435\u0440\u0438\u043E\u0434 \u043F\u043E \u0443\u043C\u043E\u043B\u0447\u0430\u043D\u0438\u044E"
+      ru: "\u041F\u0435\u0440\u0438\u043E\u0434 \u043F\u043E \u0443\u043C\u043E\u043B\u0447\u0430\u043D\u0438\u044E",
+      pl: "Domy\u015Blna rama czasowa"
     },
     timeframe: {
       en: "Timeframe",
@@ -62869,16 +64734,19 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Durata",
       pt: "Per\xEDodo",
       sv: "Tidsram",
-      ru: "\u041F\u0435\u0440\u0438\u043E\u0434"
+      ru: "\u041F\u0435\u0440\u0438\u043E\u0434",
+      pl: "Rama czasowa"
     },
     item_type: {
+      // artist, album, or track
       en: "Item type",
       de: "Objekttyp",
       es: "Tipo de \xEDtem",
       it: "Tipo di oggetto",
       pt: "Tipo de item",
       sv: "Objekttyp",
-      ru: "\u0422\u0438\u043F \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u0430"
+      ru: "\u0422\u0438\u043F \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u0430",
+      pl: "Typy przedmiotu"
     },
     page_count: {
       en: "Page count",
@@ -62887,9 +64755,11 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Numero di pagine",
       pt: "Total de p\xE1ginas",
       sv: "M\xE4ngd sidor",
-      ru: "\u041A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u043E \u0441\u0442\u0440\u0430\u043D\u0438\u0446"
+      ru: "\u041A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u043E \u0441\u0442\u0440\u0430\u043D\u0438\u0446",
+      pl: "Ilo\u015B\u0107 stron"
     },
     chart_style: {
+      // show artist/album/track chart as a grid or a list
       en: "Chart style",
       de: "Diagrammstil",
       es: "Estilo de lista",
@@ -62897,16 +64767,19 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Estilo da tabela",
       ja: "\u30C1\u30E3\u30FC\u30C8\u30B9\u30BF\u30A4\u30EB",
       sv: "Liststil",
-      ru: "\u0421\u0442\u0438\u043B\u044C \u0433\u0440\u0430\u0444\u0438\u043A\u0430"
+      ru: "\u0421\u0442\u0438\u043B\u044C \u0433\u0440\u0430\u0444\u0438\u043A\u0430",
+      pl: "Styl wykresu"
     },
     chart_size: {
+      // how many items
       en: "Chart size",
       de: "Diagrammgr\xF6\xDFe",
       es: "Tama\xF1o de lista",
       it: "Dimensione della vista",
       pt: "Tamanho da tabela",
       sv: "Liststorlek",
-      ru: "\u0420\u0430\u0437\u043C\u0435\u0440 \u0433\u0440\u0430\u0444\u0438\u043A\u0430"
+      ru: "\u0420\u0430\u0437\u043C\u0435\u0440 \u0433\u0440\u0430\u0444\u0438\u043A\u0430",
+      pl: "Wielko\u015B\u0107 wykresu"
     },
     country: {
       en: "Country",
@@ -62915,24 +64788,29 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Paese",
       pt: "Pa\xEDs",
       sv: "Land",
-      ru: "\u0421\u0442\u0440\u0430\u043D\u0430"
+      ru: "\u0421\u0442\u0440\u0430\u043D\u0430",
+      pl: "Kraj"
     },
     display_name: {
       name: {
         en: "Display name",
+        de: "Anzeigename",
         es: "Nombre para mostrar",
         it: "Nome visualizzato",
         sv: "Visningsnamn",
         ru: "\u041E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0435\u043C\u043E\u0435 \u0438\u043C\u044F",
-        pt: "Nome de exibi\xE7\xE3o"
+        pt: "Nome de exibi\xE7\xE3o",
+        pl: "Wy\u015Bwietlana nazwa"
       },
       body: {
         en: "Changes your name on your profile, with your real @username shown below",
+        de: "\xC4ndert deinen Namen in deinem Profil, mit deinem echten @Benutzernamen darunter",
         es: "Cambia tu nombre en tu perfil, con tu nombre de usuario mostrado debajo",
         it: "Cambia il tuo nome sul tuo profilo, con il tuo @username visualizzato sotto",
         sv: "\xC4ndrar namnet p\xE5 din profil och l\xE4gger ditt riktiga @anv\xE4ndarnamn under\xE5t",
         ru: "\u0418\u0437\u043C\u0435\u043D\u044F\u0435\u0442 \u0432\u0430\u0448\u0435 \u0438\u043C\u044F \u0432 \u043F\u0440\u043E\u0444\u0438\u043B\u0435, \u043F\u0440\u0438 \u044D\u0442\u043E\u043C \u0432\u0430\u0448 \u0440\u0435\u0430\u043B\u044C\u043D\u044B\u0439 @\u043D\u0438\u043A\u043D\u0435\u0439\u043C \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0435\u0442\u0441\u044F \u043D\u0438\u0436\u0435",
-        pt: "Altera seu nome em seu perfil, com seu @nome de usu\xE1rio real mostrado abaixo"
+        pt: "Altera seu nome em seu perfil, com seu @nome de usu\xE1rio real mostrado abaixo",
+        pl: "Zmienia twoj\u0105 nazw\u0119 na profilu, na twoj\u0105 nazw\u0119 u\u017Cytkownika widoczn\u0105 poni\u017Cej"
       }
     },
     subtitle: {
@@ -62942,16 +64820,14 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Sottotitolo",
       pt: "Legenda",
       sv: "Undertext",
-      ru: "\u041F\u043E\u0434\u0437\u0430\u0433\u043E\u043B\u043E\u0432\u043E\u043A"
+      ru: "\u041F\u043E\u0434\u0437\u0430\u0433\u043E\u043B\u043E\u0432\u043E\u043A",
+      pl: "Podtytu\u0142"
+    },
+    profile_title: {
+      en: "Profile title"
     },
     pronoun_tip: {
-      en: "Pronouns are specially supported if placed first",
-      de: "Pronomen werden unterst\xFCtzt, wenn sie an erster Stelle stehen",
-      es: "Los pronombres son especialmente compatibles si son colocados primero",
-      it: "I pronomi sono supportati specialmente se collocati per primi",
-      pt: "Os pronomes s\xE3o especialmente apoiados se colocados primeiro",
-      sv: "Pronomen har speciellt st\xF6d om det placeras f\xF6rst",
-      ru: "\u041C\u0435\u0441\u0442\u043E\u0438\u043C\u0435\u043D\u0438\u044F \u043F\u043E\u0434\u0434\u0435\u0440\u0436\u0438\u0432\u0430\u044E\u0442\u0441\u044F, \u0435\u0441\u043B\u0438 \u043E\u043D\u0438 \u0440\u0430\u0441\u043F\u043E\u043B\u043E\u0436\u0435\u043D\u044B \u043F\u0435\u0440\u0432\u044B\u043C\u0438"
+      en: "Include pronouns at the start or end of your title to separate them visually"
     },
     block_list: {
       en: "Block list",
@@ -62960,7 +64836,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Lista di utenti bloccati",
       pt: "Lista de bloqueados",
       sv: "Blocklista",
-      ru: "\u0421\u043F\u0438\u0441\u043E\u043A \u0431\u043B\u043E\u043A\u0438\u0440\u043E\u0432\u043A\u0438"
+      ru: "\u0421\u043F\u0438\u0441\u043E\u043A \u0431\u043B\u043E\u043A\u0438\u0440\u043E\u0432\u043A\u0438",
+      pl: "Lista zablokowanych"
     },
     when_blocked: {
       en: "What happens with blocked users?",
@@ -62969,7 +64846,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Cosa succede agli utenti bloccati?",
       pt: "O que acontece com os usu\xE1rios bloqueados?",
       sv: "Vad h\xE4nder med blockerade anv\xE4ndare?",
-      ru: "\u0427\u0442\u043E \u043F\u0440\u043E\u0438\u0441\u0445\u043E\u0434\u0438\u0442 \u0441 \u0437\u0430\u0431\u043B\u043E\u043A\u0438\u0440\u043E\u0432\u0430\u043D\u043D\u044B\u043C\u0438 \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F\u043C\u0438?"
+      ru: "\u0427\u0442\u043E \u043F\u0440\u043E\u0438\u0441\u0445\u043E\u0434\u0438\u0442 \u0441 \u0437\u0430\u0431\u043B\u043E\u043A\u0438\u0440\u043E\u0432\u0430\u043D\u043D\u044B\u043C\u0438 \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F\u043C\u0438?",
+      pl: "Co si\u0119 dzieje z zablokowanymi u\u017Cytkownikami?"
     },
     blocked_count: {
       en: "You have blocked {c} profiles",
@@ -62978,7 +64856,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Hai bloccato {c} profili",
       pt: "Voc\xEA bloqueou {c} perfis",
       sv: "Du har blockerat {c} profiler",
-      ru: "\u0412\u044B \u0437\u0430\u0431\u043B\u043E\u043A\u0438\u0440\u043E\u0432\u0430\u043B\u0438 {c} \u043F\u0440\u043E\u0444\u0438\u043B\u0435\u0439"
+      ru: "\u0412\u044B \u0437\u0430\u0431\u043B\u043E\u043A\u0438\u0440\u043E\u0432\u0430\u043B\u0438 {c} \u043F\u0440\u043E\u0444\u0438\u043B\u0435\u0439",
+      pl: "Zablokowali\u015Bcie {c} profili"
     },
     enter_username: {
       en: "Enter username",
@@ -62987,7 +64866,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Inserisci nome utente",
       pt: "Insira o nome de usu\xE1rio",
       sv: "Skriv anv\xE4ndarnamn",
-      ru: "\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0438\u043C\u044F \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F"
+      ru: "\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0438\u043C\u044F \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F",
+      pl: "Podaj nazw\u0119 u\u017Cytkownika"
     },
     block: {
       en: "Block",
@@ -62996,7 +64876,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Blocca",
       pt: "Bloquear",
       sv: "Blockera",
-      ru: "\u0417\u0430\u0431\u043B\u043E\u043A\u0438\u0440\u043E\u0432\u0430\u0442\u044C"
+      ru: "\u0417\u0430\u0431\u043B\u043E\u043A\u0438\u0440\u043E\u0432\u0430\u0442\u044C",
+      pl: "Zablokuj"
     },
     blocked: {
       en: "Blocked",
@@ -63005,7 +64886,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Bloccato",
       pt: "Bloqueado",
       sv: "Blockerad",
-      ru: "\u0417\u0430\u0431\u043B\u043E\u043A\u0438\u0440\u043E\u0432\u0430\u043D\u043E"
+      ru: "\u0417\u0430\u0431\u043B\u043E\u043A\u0438\u0440\u043E\u0432\u0430\u043D\u043E",
+      pl: "Zablokowani"
     },
     blocked_user_public: {
       en: "Can leave shouts but not viewable to you",
@@ -63014,7 +64896,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Pu\xF2 lasciare note, ma non saranno visibili a te",
       pt: "Podem deixar mensagens, mas elas n\xE3o s\xE3o vis\xEDveis para voc\xEA",
       sv: "Hojtningar p\xE5 allm\xE4na profiler syns inte f\xF6r dig",
-      ru: "\u041C\u043E\u0433\u0443\u0442 \u043E\u0441\u0442\u0430\u0432\u043B\u044F\u0442\u044C \u0441\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u044F, \u043D\u043E \u0432\u044B \u0438\u0445 \u043D\u0435 \u0443\u0432\u0438\u0434\u0438\u0442\u0435"
+      ru: "\u041C\u043E\u0433\u0443\u0442 \u043E\u0441\u0442\u0430\u0432\u043B\u044F\u0442\u044C \u0441\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u044F, \u043D\u043E \u0432\u044B \u0438\u0445 \u043D\u0435 \u0443\u0432\u0438\u0434\u0438\u0442\u0435",
+      pl: "Mog\u0105 zostawia\u0107 wiadomo\u015Bci ale b\u0119d\u0105 dla ciebie niewidoczne"
     },
     blocked_user_message: {
       en: "Cannot direct message you",
@@ -63023,7 +64906,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Non pu\xF2 inviarti messaggi privati",
       pt: "N\xE3o podem lhe enviar mensagens diretas",
       sv: "Kan inte skicka privat meddelande till dig",
-      ru: "\u041D\u0435 \u043C\u043E\u0433\u0443\u0442 \u043E\u0442\u043F\u0440\u0430\u0432\u043B\u044F\u0442\u044C \u0432\u0430\u043C \u043B\u0438\u0447\u043D\u044B\u0435 \u0441\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u044F"
+      ru: "\u041D\u0435 \u043C\u043E\u0433\u0443\u0442 \u043E\u0442\u043F\u0440\u0430\u0432\u043B\u044F\u0442\u044C \u0432\u0430\u043C \u043B\u0438\u0447\u043D\u044B\u0435 \u0441\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u044F",
+      pl: "Nie mog\u0105 bezpo\u015Brednio wysy\u0142a\u0107 ci wiadomo\u015Bci"
     },
     blocked_user_new_shouts: {
       en: "Cannot leave shouts or reply to you",
@@ -63032,7 +64916,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Non pu\xF2 lasciare note o risponderti",
       pt: "N\xE3o podem deixar mensagens na sua caixa de mensagens ou lhe responder",
       sv: "Kan inte l\xE4mna hojtningar p\xE5 din profil eller svara p\xE5 dina hojtningar",
-      ru: "\u041D\u0435 \u043C\u043E\u0433\u0443\u0442 \u043E\u0441\u0442\u0430\u0432\u043B\u044F\u0442\u044C \u0441\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u044F \u0438\u043B\u0438 \u043E\u0442\u0432\u0435\u0447\u0430\u0442\u044C \u0432\u0430\u043C"
+      ru: "\u041D\u0435 \u043C\u043E\u0433\u0443\u0442 \u043E\u0441\u0442\u0430\u0432\u043B\u044F\u0442\u044C \u0441\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u044F \u0438\u043B\u0438 \u043E\u0442\u0432\u0435\u0447\u0430\u0442\u044C \u0432\u0430\u043C",
+      pl: "Nie mog\u0105 zostawi\u0107 wiadomo\u015Bci albo tobie opowiedzie\u0107"
     },
     blocked_user_old_shouts: {
       en: "You cannot delete pre-existing shouts on your profile",
@@ -63041,7 +64926,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Non puoi eliminare note gi\xE0 esistenti sul tuo profilo",
       pt: "Voc\xEA n\xE3o pode deletar mensagens j\xE1 existentes em seu perfil",
       sv: "Du kan inte ta bort deras tidigare hojtningar fr\xE5n din profil",
-      ru: "\u0412\u044B \u043D\u0435 \u043C\u043E\u0436\u0435\u0442\u0435 \u0443\u0434\u0430\u043B\u0438\u0442\u044C \u0440\u0430\u043D\u0435\u0435 \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u043E\u0432\u0430\u0432\u0448\u0438\u0435 \u0441\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u044F \u0432 \u0432\u0430\u0448\u0435\u043C \u043F\u0440\u043E\u0444\u0438\u043B\u0435"
+      ru: "\u0412\u044B \u043D\u0435 \u043C\u043E\u0436\u0435\u0442\u0435 \u0443\u0434\u0430\u043B\u0438\u0442\u044C \u0440\u0430\u043D\u0435\u0435 \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u043E\u0432\u0430\u0432\u0448\u0438\u0435 \u0441\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u044F \u0432 \u0432\u0430\u0448\u0435\u043C \u043F\u0440\u043E\u0444\u0438\u043B\u0435",
+      pl: "Nie mo\u017Cesz usun\u0105c ju\u017C istniej\u0105cych wiadomo\u015Bci z twojego profilu"
     },
     blocked_user_view_profile: {
       en: "They can still view your profile",
@@ -63050,7 +64936,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Possono ancora vedere il tuo profilo",
       pt: "Eles ainda podem ver seu perfil",
       sv: "Dem kan fortfarande se din profil",
-      ru: "\u041E\u043D\u0438 \u043F\u043E-\u043F\u0440\u0435\u0436\u043D\u0435\u043C\u0443 \u043C\u043E\u0433\u0443\u0442 \u043F\u0440\u043E\u0441\u043C\u0430\u0442\u0440\u0438\u0432\u0430\u0442\u044C \u0432\u0430\u0448 \u043F\u0440\u043E\u0444\u0438\u043B\u044C"
+      ru: "\u041E\u043D\u0438 \u043F\u043E-\u043F\u0440\u0435\u0436\u043D\u0435\u043C\u0443 \u043C\u043E\u0433\u0443\u0442 \u043F\u0440\u043E\u0441\u043C\u0430\u0442\u0440\u0438\u0432\u0430\u0442\u044C \u0432\u0430\u0448 \u043F\u0440\u043E\u0444\u0438\u043B\u044C",
+      pl: "Dalej b\u0119d\u0105 mogli ogl\u0105da\u0107 tw\xF3j profil"
     },
     shared_with_others: {
       en: "Shared with others",
@@ -63059,7 +64946,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Condiviso con altri",
       pt: "Compartilhado com outros",
       sv: "Delades med andra",
-      ru: "\u041F\u043E\u0434\u0435\u043B\u0438\u043B\u0438\u0441\u044C \u0441 \u0434\u0440\u0443\u0433\u0438\u043C\u0438"
+      ru: "\u041F\u043E\u0434\u0435\u043B\u0438\u043B\u0438\u0441\u044C \u0441 \u0434\u0440\u0443\u0433\u0438\u043C\u0438",
+      pl: "Udost\u0119pnione dla innych"
     },
     others_from_profile: {
       en: "More from {user}",
@@ -63068,16 +64956,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Altro da {user}",
       pt: "Mais de {user}",
       sv: "Mer fr\xE5n {user}",
-      ru: "\u0411\u043E\u043B\u044C\u0448\u0435 \u043E\u0442 {user}"
-    },
-    obsess: {
-      en: "Obsess",
-      de: "Als Obsession festlegen",
-      es: "Establecer como obsesi\xF3n",
-      it: "Imposta come passione",
-      pt: "Definir como obsess\xE3o",
-      sv: "St\xE4ll in som besatthet",
-      ru: "\u0421\u0434\u0435\u043B\u0430\u0442\u044C \u0437\u0430\u0432\u0438\u0441\u0438\u043C\u043E\u0439"
+      ru: "\u0411\u043E\u043B\u044C\u0448\u0435 \u043E\u0442 {user}",
+      pl: "Wi\u0119cej od {user}"
     },
     obsession: {
       en: "Obsession",
@@ -63086,7 +64966,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Passione",
       pt: "Obsess\xE3o",
       sv: "Aktuell besatthet",
-      ru: "\u0417\u0430\u0432\u0438\u0441\u0438\u043C\u0430\u044F \u0438\u0434\u0435\u044F"
+      ru: "\u0417\u0430\u0432\u0438\u0441\u0438\u043C\u0430\u044F \u0438\u0434\u0435\u044F",
+      pl: "Obsesja"
     },
     obsessions: {
       en: "Obsessions",
@@ -63095,7 +64976,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Passioni",
       pt: "Obsess\xF5es",
       sv: "Besattheter",
-      ru: "\u0417\u0430\u0432\u0438\u0441\u0438\u043C\u044B\u0435 \u0438\u0434\u0435\u0438"
+      ru: "\u0417\u0430\u0432\u0438\u0441\u0438\u043C\u044B\u0435 \u0438\u0434\u0435\u0438",
+      pl: "Obsesje"
     },
     finding_your_tracks: {
       en: "Finding your tracks",
@@ -63104,7 +64986,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Cercando i tuoi brani",
       pt: "Encontrando suas faixas",
       sv: "Hittar p\xE5 dinna l\xE5tar",
-      ru: "\u041F\u043E\u0438\u0441\u043A \u0432\u0430\u0448\u0438\u0445 \u0442\u0440\u0435\u043A\u043E\u0432"
+      ru: "\u041F\u043E\u0438\u0441\u043A \u0432\u0430\u0448\u0438\u0445 \u0442\u0440\u0435\u043A\u043E\u0432",
+      pl: "Szukanie twoich utwor\xF3w"
     },
     update_check: {
       en: "Check for updates",
@@ -63113,15 +64996,19 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Controlla aggiornamenti",
       pt: "Procurar atualiza\xE7\xF5es",
       sv: "Kolla efter uppdateringar",
-      ru: "\u041F\u0440\u043E\u0432\u0435\u0440\u0438\u0442\u044C \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u044F"
+      ru: "\u041F\u0440\u043E\u0432\u0435\u0440\u0438\u0442\u044C \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u044F",
+      pl: "Sprawd\u017A dost\u0119pne aktualizacj\u0119"
     },
     redirected_from: {
+      // the redirection is placed below this text
       en: "Redirected from",
+      de: "Weitergeleitet von",
       es: "Redireccionado de",
       it: "Reindirizzato da",
       sv: "Omdirigerades fr\xE5n",
       ru: "\u041F\u0435\u0440\u0435\u043D\u0430\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u043E \u0441",
-      pt: "Redirecionado de"
+      pt: "Redirecionado de",
+      pl: "Przekierowano z"
     },
     music_corrections: {
       en: "Music corrections",
@@ -63130,7 +65017,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Correzioni della musica",
       pt: "Corre\xE7\xF5es de m\xFAsica",
       sv: "Musikredigeringar",
-      ru: "\u041C\u0443\u0437\u044B\u043A\u0430\u043B\u044C\u043D\u044B\u0435 \u0438\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F"
+      ru: "\u041C\u0443\u0437\u044B\u043A\u0430\u043B\u044C\u043D\u044B\u0435 \u0438\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F",
+      pl: "Korekty muzyczne"
     },
     corrections_loaded: {
       en: "Corrections loaded",
@@ -63139,7 +65027,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Correzioni caricate",
       sv: "Dina redigeringar har laddat",
       ru: "\u0418\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F \u0437\u0430\u0433\u0440\u0443\u0436\u0435\u043D\u044B",
-      pt: "Corre\xE7\xF5es carregadas"
+      pt: "Corre\xE7\xF5es carregadas",
+      pl: "Wczytano korekty"
     },
     corrections_loaded_value: {
       en: "{c1} artists, {c2} albums and tracks",
@@ -63148,7 +65037,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "{c1} artisti, {c2} album e brani",
       sv: "{c1} artister, {c2} album och l\xE5tar",
       ru: "{c1} \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u0435\u0439, {c2} \u0430\u043B\u044C\u0431\u043E\u043C\u043E\u0432 \u0438 \u0442\u0440\u0435\u043A\u043E\u0432",
-      pt: "{c1} artistas, {c2} \xE1lbuns e faixas"
+      pt: "{c1} artistas, {c2} \xE1lbuns e faixas",
+      pl: "{c1} artyst\xF3w, {c2} ablum\xF3w i utwor\xF3w"
     },
     brand_version: {
       // used for the lotus header where:
@@ -63160,7 +65050,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "versione di {brand}",
       pt: "{brand} vers\xE3o",
       sv: "{brand} version",
-      ru: "{brand} \u0432\u0435\u0440\u0441\u0438\u0438"
+      ru: "{brand} \u0432\u0435\u0440\u0441\u0438\u0438",
+      pl: "{brand} wersja"
     },
     brand_version_number: {
       // used for the lotus header where:
@@ -63173,7 +65064,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "{brand} versione {number}",
       pt: "{brand} vers\xE3o {number}",
       sv: "{brand} version {number}",
-      ru: "{brand} \u0432\u0435\u0440\u0441\u0438\u0438 {number}"
+      ru: "{brand} \u0432\u0435\u0440\u0441\u0438\u0438 {number}",
+      pl: "{brand} wersja {number}"
     },
     lotus: {
       artist: {
@@ -63183,7 +65075,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         it: "Correzioni degli artisti",
         sv: "Artistredigeringar",
         ru: "\u0418\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F \u0430\u0440\u0442\u0438\u0441\u0442\u043E\u0432",
-        pt: "Corre\xE7\xF5es de artista"
+        pt: "Corre\xE7\xF5es de artista",
+        pl: "Korekty artyst\xF3w"
       },
       album_track: {
         en: "Album and track corrections",
@@ -63192,7 +65085,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         it: "Correzioni di album e brani",
         sv: "Album och sp\xE5rredigeringar",
         ru: "\u0418\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F \u0430\u043B\u044C\u0431\u043E\u043C\u043E\u0432 \u0438 \u0442\u0440\u0435\u043A\u043E\u0432",
-        pt: "Corre\xE7\xF5es de \xE1lbuns e faixas"
+        pt: "Corre\xE7\xF5es de \xE1lbuns e faixas",
+        pl: "Korekty alum\xF3w i utwor\xF3w"
       },
       combined_artists: {
         en: "Combined artist profiles",
@@ -63201,7 +65095,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         it: "Profili combinati degli artisti",
         sv: "Kombinerade artistprofiler",
         ru: "\u041E\u0431\u044A\u0435\u0434\u0438\u043D\u0435\u043D\u043D\u044B\u0435 \u043F\u0440\u043E\u0444\u0438\u043B\u0438 \u0430\u0440\u0442\u0438\u0441\u0442\u043E\u0432",
-        pt: "Perfis de artista combinados"
+        pt: "Perfis de artista combinados",
+        pl: "Po\u0142\u0105czone profile artyst\xF3w"
       }
     },
     correct_titles_with_lotus: {
@@ -63212,16 +65107,18 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         it: "Correggi titoli con lotus",
         pt: "Corrigir t\xEDtulos com lotus",
         sv: "Redigera titlar med lotus",
-        ru: "\u0418\u0441\u043F\u0440\u0430\u0432\u0438\u0442\u044C \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u044F \u0441 \u043F\u043E\u043C\u043E\u0449\u044C\u044E lotus"
+        ru: "\u0418\u0441\u043F\u0440\u0430\u0432\u0438\u0442\u044C \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u044F \u0441 \u043F\u043E\u043C\u043E\u0449\u044C\u044E lotus",
+        pl: "Skorektuj tytu\u0142u za pomoc\u0105 lotus"
       },
       body: {
         en: "Re-capitalise artists, albums, and tracks based on community contributions",
         de: "Korrigiert die Schreibweise von K\xFCnstler:innen, Alben und Titeln basierend auf Community-Beitr\xE4gen",
         es: "Recapitaliza artista, \xE1lbumes y temas con base en contribuciones de la comunidad",
-        it: "Corregge l'uso delle maiuscole in artisti, album e brani in base alle contribuzioni della comunit\xE0",
+        it: "Corregge l\u2019uso delle maiuscole in artisti, album e brani in base alle contribuzioni della comunit\xE0",
         pt: "Recapitalize artistas, \xE1lbuns e faixas com base nas contribui\xE7\xF5es da comunidade",
         sv: "\xC4ndra kapitalisering p\xE5 artister, album, och l\xE5tar fr\xE5n gemenskapsbidrag",
-        ru: "\u0418\u0437\u043C\u0435\u043D\u0438\u0442\u044C \u043D\u0430\u043F\u0438\u0441\u0430\u043D\u0438\u0435 \u0430\u0440\u0442\u0438\u0441\u0442\u043E\u0432, \u0430\u043B\u044C\u0431\u043E\u043C\u043E\u0432 \u0438 \u0442\u0440\u0435\u043A\u043E\u0432 \u043D\u0430 \u043E\u0441\u043D\u043E\u0432\u0435 \u0432\u043A\u043B\u0430\u0434\u0430 \u0441\u043E\u043E\u0431\u0449\u0435\u0441\u0442\u0432\u0430"
+        ru: "\u0418\u0437\u043C\u0435\u043D\u0438\u0442\u044C \u043D\u0430\u043F\u0438\u0441\u0430\u043D\u0438\u0435 \u0430\u0440\u0442\u0438\u0441\u0442\u043E\u0432, \u0430\u043B\u044C\u0431\u043E\u043C\u043E\u0432 \u0438 \u0442\u0440\u0435\u043A\u043E\u0432 \u043D\u0430 \u043E\u0441\u043D\u043E\u0432\u0435 \u0432\u043A\u043B\u0430\u0434\u0430 \u0441\u043E\u043E\u0431\u0449\u0435\u0441\u0442\u0432\u0430",
+        pl: "Rekapitalizuj artyst\xF3w, albumy i utwory bazuj\u0105c na spo\u0142eczno\u015Bci"
       }
     },
     prefer_no_redirect: {
@@ -63232,7 +65129,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         it: "Evita i reindirizzamenti degli artisti durante la navigazione",
         pt: "Evitar redirecionamentos de artistas ao navegar",
         sv: "Undvik artistomdirigeringar n\xE4r du surfar",
-        ru: "\u0418\u0437\u0431\u0435\u0433\u0430\u0442\u044C \u043F\u0435\u0440\u0435\u043D\u0430\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0439 \u0430\u0440\u0442\u0438\u0441\u0442\u043E\u0432 \u043F\u0440\u0438 \u043D\u0430\u0432\u0438\u0433\u0430\u0446\u0438\u0438"
+        ru: "\u0418\u0437\u0431\u0435\u0433\u0430\u0442\u044C \u043F\u0435\u0440\u0435\u043D\u0430\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0439 \u0430\u0440\u0442\u0438\u0441\u0442\u043E\u0432 \u043F\u0440\u0438 \u043D\u0430\u0432\u0438\u0433\u0430\u0446\u0438\u0438",
+        pl: "Unikaj przekierowywania artyst\xF3w podczas nawigacji"
       },
       body: {
         en: "Automatically adds +noredirect to artist links to avoid being sent to pages like Travi$ Scott",
@@ -63241,7 +65139,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         it: "Aggiunge automaticamente +noredirect ai link degli artisti per evitare di essere inviato a pagine come Travi$ Scott",
         pt: "Adiciona automaticamente +noredirect em links de artistas para evitar ser redirecionado para p\xE1ginas como Travi$ Scott",
         sv: "L\xE4gger automatiskt +noredirect p\xE5 artistl\xE4nkar f\xF6r att undvika att bli skickad till sidor som t.ex. Travi$ Scott",
-        ru: "\u0410\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u0435\u0441\u043A\u0438 \u0434\u043E\u0431\u0430\u0432\u043B\u044F\u0435\u0442 +noredirect \u043A \u0441\u0441\u044B\u043B\u043A\u0430\u043C \u0430\u0440\u0442\u0438\u0441\u0442\u043E\u0432, \u0447\u0442\u043E\u0431\u044B \u0438\u0437\u0431\u0435\u0436\u0430\u0442\u044C \u043F\u0435\u0440\u0435\u043D\u0430\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F \u043D\u0430 \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u044B \u0442\u0438\u043F\u0430 Travi$ Scott"
+        ru: "\u0410\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u0435\u0441\u043A\u0438 \u0434\u043E\u0431\u0430\u0432\u043B\u044F\u0435\u0442 +noredirect \u043A \u0441\u0441\u044B\u043B\u043A\u0430\u043C \u0430\u0440\u0442\u0438\u0441\u0442\u043E\u0432, \u0447\u0442\u043E\u0431\u044B \u0438\u0437\u0431\u0435\u0436\u0430\u0442\u044C \u043F\u0435\u0440\u0435\u043D\u0430\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F \u043D\u0430 \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u044B \u0442\u0438\u043F\u0430 Travi$ Scott",
+        pl: "Automatycznie dodaje +noredirect do link\xF3w artyst\xF3w \u017Ceby nie odsy\u0142a\u0107 do stron takich jak Travi$ Scott"
       }
     },
     view_all: {
@@ -63251,7 +65150,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Visualizza tutto",
       pt: "Ver tudo",
       sv: "Visa alla",
-      ru: "\u041F\u043E\u0441\u043C\u043E\u0442\u0440\u0435\u0442\u044C \u0432\u0441\u0435"
+      ru: "\u041F\u043E\u0441\u043C\u043E\u0442\u0440\u0435\u0442\u044C \u0432\u0441\u0435",
+      pl: "Poka\u017C wszystkie"
     },
     help_contribute: {
       en: "Help contribute",
@@ -63260,7 +65160,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Aiuta a contribuire",
       pt: "Ajude a contribuir",
       sv: "Bidra",
-      ru: "\u041F\u043E\u043C\u043E\u0447\u044C \u0432\u043D\u0435\u0441\u0442\u0438 \u0432\u043A\u043B\u0430\u0434"
+      ru: "\u041F\u043E\u043C\u043E\u0447\u044C \u0432\u043D\u0435\u0441\u0442\u0438 \u0432\u043A\u043B\u0430\u0434",
+      pl: "Pom\xF3\u017C nam"
     },
     delete: {
       en: "Delete",
@@ -63272,6 +65173,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       ru: "\u0423\u0434\u0430\u043B\u0438\u0442\u044C"
     },
     deleted: {
+      // the item that was deleted is placed under this text
       en: "Deleted",
       de: "Gel\xF6scht",
       es: "Eliminado",
@@ -63288,6 +65190,10 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Pesquisar",
       sv: "S\xF6k",
       ru: "\u041F\u043E\u0438\u0441\u043A"
+    },
+    search_for_anything: {
+      // used as a placeholder for the global search bar
+      en: "Search for anything"
     },
     search_guest: {
       en: "Search guest appearances",
@@ -63306,9 +65212,11 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Qualsiasi cosa tu possa immaginare...",
       pt: "Tudo que voc\xEA pode imaginar...",
       sv: "Vad som helst du kan f\xF6rest\xE4lla dig...",
-      ru: "\u0412\u0441\u0435, \u0447\u0442\u043E \u0432\u044B \u043C\u043E\u0436\u0435\u0442\u0435 \u0441\u0435\u0431\u0435 \u043F\u0440\u0435\u0434\u0441\u0442\u0430\u0432\u0438\u0442\u044C..."
+      ru: "\u0412\u0441\u0435, \u0447\u0442\u043E \u0432\u044B \u043C\u043E\u0436\u0435\u0442\u0435 \u0441\u0435\u0431\u0435 \u043F\u0440\u0435\u0434\u0441\u0442\u0430\u0432\u0438\u0442\u044C...",
+      pl: "Cokolwiek chcesz, czegokolwiek pragniesz..."
     },
     supports_markdown: {
+      // signals this textbox supports markdown
       // markdown: https://www.markdownguide.org/cheat-sheet/
       en: "Supports Markdown",
       de: "Unterst\xFCtzt Markdown",
@@ -63317,6 +65225,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Suporta o Markdown",
       sv: "St\xF6der Markdown",
       ru: "\u041F\u043E\u0434\u0434\u0435\u0440\u0436\u0438\u0432\u0430\u0435\u0442 Markdown",
+      pl: "Wspiera Markdown",
       header: {
         name: {
           en: "Header",
@@ -63324,7 +65233,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           es: "Encabezado",
           it: "Intestazione",
           sv: "Rubrik",
-          ru: "\u0417\u0430\u0433\u043E\u043B\u043E\u0432\u043E\u043A"
+          ru: "\u0417\u0430\u0433\u043E\u043B\u043E\u0432\u043E\u043A",
+          pl: "Nag\u0142\xF3wek"
         },
         string: {
           en: "# hi!!",
@@ -63332,7 +65242,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           es: "# \xA1\xA1hola!!",
           it: "# ciao!!",
           sv: "# hej!!",
-          ru: "# \u043F\u0440\u0438\u0432\u0435\u0442!!"
+          ru: "# \u043F\u0440\u0438\u0432\u0435\u0442!!",
+          pl: "# hejo!!"
         }
       },
       bold: {
@@ -63343,7 +65254,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           it: "Grassetto",
           pt: "Negrito",
           sv: "Fet text",
-          ru: "\u041F\u043E\u043B\u0443\u0436\u0438\u0440\u043D\u044B\u0439"
+          ru: "\u041F\u043E\u043B\u0443\u0436\u0438\u0440\u043D\u044B\u0439",
+          pl: "Pogrubienie"
         },
         string: {
           en: "**bold**",
@@ -63352,7 +65264,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           it: "**grassetto**",
           pt: "**negrito**",
           sv: "**fet stil**",
-          ru: "**\u043F\u043E\u043B\u0443\u0436\u0438\u0440\u043D\u044B\u0439**"
+          ru: "**\u043F\u043E\u043B\u0443\u0436\u0438\u0440\u043D\u044B\u0439**",
+          pl: "**pogrubiony**"
         }
       },
       italics: {
@@ -63363,7 +65276,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           it: "Corsivo",
           pt: "It\xE1lico",
           sv: "Kursiv",
-          ru: "\u041A\u0443\u0440\u0441\u0438\u0432"
+          ru: "\u041A\u0443\u0440\u0441\u0438\u0432",
+          pl: "Kursywa"
         },
         string: {
           en: "*slanted*",
@@ -63372,7 +65286,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           it: "*corsivo*",
           pt: "*inclinado*",
           sv: "*kursiv*",
-          ru: "*\u043D\u0430\u043A\u043B\u043E\u043D\u043D\u044B\u0439*"
+          ru: "*\u043D\u0430\u043A\u043B\u043E\u043D\u043D\u044B\u0439*",
+          pl: "*pochylony*"
         }
       },
       bold_italics: {
@@ -63383,7 +65298,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           it: "Grassetto corsivo",
           pt: "Negrito it\xE1lico",
           sv: "Fet kursiv stil",
-          ru: "\u041F\u043E\u043B\u0443\u0436\u0438\u0440\u043D\u044B\u0439 \u043A\u0443\u0440\u0441\u0438\u0432"
+          ru: "\u041F\u043E\u043B\u0443\u0436\u0438\u0440\u043D\u044B\u0439 \u043A\u0443\u0440\u0441\u0438\u0432",
+          pl: "Pogrubiona kursywa"
         },
         string: {
           en: "***slanted but bold***",
@@ -63392,7 +65308,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           it: "***corsivo, ma in grassetto***",
           pt: "***inclinado, mas em negrito***",
           sv: "***fet och kursiv samtidigt***",
-          ru: "***\u043D\u0430\u043A\u043B\u043E\u043D\u043D\u044B\u0439, \u043D\u043E \u043F\u043E\u043B\u0443\u0436\u0438\u0440\u043D\u044B\u0439***"
+          ru: "***\u043D\u0430\u043A\u043B\u043E\u043D\u043D\u044B\u0439, \u043D\u043E \u043F\u043E\u043B\u0443\u0436\u0438\u0440\u043D\u044B\u0439***",
+          pl: "***pogrubiony i pochylony***"
         }
       },
       underlined: {
@@ -63403,7 +65320,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           it: "Sottolineato",
           pt: "Sublinhado",
           sv: "Understrykt",
-          ru: "\u041F\u043E\u0434\u0447\u0435\u0440\u043A\u043D\u0443\u0442\u044B\u0439"
+          ru: "\u041F\u043E\u0434\u0447\u0435\u0440\u043A\u043D\u0443\u0442\u044B\u0439",
+          pl: "Podkre\u015Bl"
         },
         string: {
           en: "__underlined__",
@@ -63412,19 +65330,22 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           it: "__sottolineato__",
           pt: "__sublinhado__",
           sv: "__understrykt__",
-          ru: "__\u043F\u043E\u0434\u0447\u0435\u0440\u043A\u043D\u0443\u0442\u044B\u0439__"
+          ru: "__\u043F\u043E\u0434\u0447\u0435\u0440\u043A\u043D\u0443\u0442\u044B\u0439__",
+          pl: "__podkre\u015Blony__"
         }
       }
     },
     value_characters_max: {
-      // number/max (24/100) of characters allowed in e.g. your bio
+      // v: 24/100
+      // number/max of characters allowed in e.g. your bio
       en: "{v} characters max",
       de: "Maximal {v} Zeichen",
       es: "m\xE1ximo {v} caracteres",
       it: "massimo {v} caratteri",
       pt: "m\xE1ximo de {v} caracteres",
       sv: "max {v} tecken",
-      ru: "\u041C\u0430\u043A\u0441\u0438\u043C\u0443\u043C {v} \u0441\u0438\u043C\u0432\u043E\u043B\u043E\u0432"
+      ru: "\u041C\u0430\u043A\u0441\u0438\u043C\u0443\u043C {v} \u0441\u0438\u043C\u0432\u043E\u043B\u043E\u0432",
+      pl: "maksymalnie {v} znak\xF3w"
     },
     profile_shortcut: {
       name: {
@@ -63434,7 +65355,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         it: "Scorciatoia del profilo",
         pt: "Atalho de perfil",
         sv: "Profilgenv\xE4g",
-        ru: "\u042F\u0440\u043B\u044B\u043A \u043F\u0440\u043E\u0444\u0438\u043B\u044F"
+        ru: "\u042F\u0440\u043B\u044B\u043A \u043F\u0440\u043E\u0444\u0438\u043B\u044F",
+        pl: "Skr\xF3t do profilu"
       },
       body: {
         en: "View their scrobbles alongside yours at all times",
@@ -63443,7 +65365,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         it: "Vedi i loro scrobbling vicino ai tuoi in qualsiasi momento",
         pt: "Veja os scrobbles dele(a) junto aos seus o tempo todo",
         sv: "Visa deras skrobblingar bredvid dina hela tiden",
-        ru: "\u041F\u0440\u043E\u0441\u043C\u043E\u0442\u0440 \u0438\u0445 \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u043E\u0432 \u0440\u044F\u0434\u043E\u043C \u0441 \u0432\u0430\u0448\u0438\u043C\u0438 \u0432\u0441\u0435\u0433\u0434\u0430"
+        ru: "\u041F\u0440\u043E\u0441\u043C\u043E\u0442\u0440 \u0438\u0445 \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u043E\u0432 \u0440\u044F\u0434\u043E\u043C \u0441 \u0432\u0430\u0448\u0438\u043C\u0438 \u0432\u0441\u0435\u0433\u0434\u0430",
+        pl: "Zawsze wy\u015Bwietlaj ich scrobble \u0142\u0105cznie z twoimi"
       },
       linked: {
         en: "Linked with {u}",
@@ -63452,7 +65375,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         it: "Collegato a {u}",
         pt: "Ligado com {u}",
         sv: "L\xE4nkad ihop med {u}",
-        ru: "\u0421\u0432\u044F\u0437\u0430\u043D\u043E \u0441 {u}"
+        ru: "\u0421\u0432\u044F\u0437\u0430\u043D\u043E \u0441 {u}",
+        pl: "Po\u0142\u0105czeni z {u}"
       },
       notice: {
         en: "You already have {u} as your shortcut, are you sure?",
@@ -63461,7 +65385,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         it: "Hai gi\xE0 {u} come scorciatoia, sei sicuro?",
         pt: "Voc\xEA j\xE1 tem {u} como seu atalho, voc\xEA tem certeza?",
         sv: "Du har redan {u} som din genv\xE4g, \xE4r du s\xE4ker?",
-        ru: "\u0423 \u0432\u0430\u0441 \u0443\u0436\u0435 \u0435\u0441\u0442\u044C {u} \u0432 \u043A\u0430\u0447\u0435\u0441\u0442\u0432\u0435 \u044F\u0440\u043B\u044B\u043A\u0430, \u0432\u044B \u0443\u0432\u0435\u0440\u0435\u043D\u044B?"
+        ru: "\u0423 \u0432\u0430\u0441 \u0443\u0436\u0435 \u0435\u0441\u0442\u044C {u} \u0432 \u043A\u0430\u0447\u0435\u0441\u0442\u0432\u0435 \u044F\u0440\u043B\u044B\u043A\u0430, \u0432\u044B \u0443\u0432\u0435\u0440\u0435\u043D\u044B?",
+        pl: "Masz ju\u017C ustawiony profil {u} jako skr\xF3t, czy napewno chesz to zrobi\u0107?"
       }
     },
     failed_to_find_profile: {
@@ -63471,7 +65396,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Impossibile trovare il profilo",
       pt: "Falha ao achar perfil",
       sv: "Kunde ej hitta profilen",
-      ru: "\u041D\u0435 \u0443\u0434\u0430\u043B\u043E\u0441\u044C \u043D\u0430\u0439\u0442\u0438 \u043F\u0440\u043E\u0444\u0438\u043B\u044C"
+      ru: "\u041D\u0435 \u0443\u0434\u0430\u043B\u043E\u0441\u044C \u043D\u0430\u0439\u0442\u0438 \u043F\u0440\u043E\u0444\u0438\u043B\u044C",
+      pl: "Nieuda\u0142o si\u0119 wczyta\u0107 profilu"
     },
     replace: {
       en: "Replace",
@@ -63480,7 +65406,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Sostituire",
       pt: "Substituir",
       sv: "Ers\xE4tt",
-      ru: "\u0417\u0430\u043C\u0435\u043D\u0438\u0442\u044C"
+      ru: "\u0417\u0430\u043C\u0435\u043D\u0438\u0442\u044C",
+      pl: "Zamie\u0144"
     },
     view_others_library: {
       en: "View others library",
@@ -63489,17 +65416,19 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Visualizza la libreria degli altri",
       pt: "Ver a biblioteca dos outros",
       sv: "Visa andra personers bibliotek",
-      ru: "\u041F\u0440\u043E\u0441\u043C\u043E\u0442\u0440 \u0431\u0438\u0431\u043B\u0438\u043E\u0442\u0435\u043A\u0438 \u0434\u0440\u0443\u0433\u0438\u0445"
+      ru: "\u041F\u0440\u043E\u0441\u043C\u043E\u0442\u0440 \u0431\u0438\u0431\u043B\u0438\u043E\u0442\u0435\u043A\u0438 \u0434\u0440\u0443\u0433\u0438\u0445",
+      pl: "Poka\u017C bibliotek\u0119 innych"
     },
     avatar_radius: {
       name: {
         en: "Profile avatar shape",
         de: "Form des Profilbildes",
         es: "Forma del avatar del perfil",
-        it: "Forma dell'immagine del profilo",
+        it: "Forma dell\u2019immagine del profilo",
         pt: "Formato da imagem de perfil",
         sv: "Profilbildsform",
-        ru: "\u0424\u043E\u0440\u043C\u0430 \u0430\u0432\u0430\u0442\u0430\u0440\u0430 \u043F\u0440\u043E\u0444\u0438\u043B\u044F"
+        ru: "\u0424\u043E\u0440\u043C\u0430 \u0430\u0432\u0430\u0442\u0430\u0440\u0430 \u043F\u0440\u043E\u0444\u0438\u043B\u044F",
+        pl: "Kszta\u0142t awataru profilu"
       },
       body: {
         en: "Applies to all profiles, only visible to you",
@@ -63508,7 +65437,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         it: "Si applica a tutti i profili, \xE8 visibile solo a te",
         sv: "Till\xE4mpas p\xE5 alla profiler, syns bara f\xF6r dig",
         ru: "\u041F\u0440\u0438\u043C\u0435\u043D\u044F\u0435\u0442\u0441\u044F \u043A\u043E \u0432\u0441\u0435\u043C \u043F\u0440\u043E\u0444\u0438\u043B\u044F\u043C, \u0432\u0438\u0434\u043D\u043E \u0442\u043E\u043B\u044C\u043A\u043E \u0432\u0430\u043C",
-        pt: "Aplica-se a todos os perfis, vis\xEDvel apenas para voc\xEA"
+        pt: "Aplica-se a todos os perfis, vis\xEDvel apenas para voc\xEA",
+        pl: "Dotyczy wszystkich profili, widoczne tylko dla ciebie"
       }
     },
     notes: {
@@ -63519,7 +65449,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Note",
       pt: "Notas",
       sv: "Anteckningar",
-      ru: "\u0417\u0430\u043C\u0435\u0442\u043A\u0438"
+      ru: "\u0417\u0430\u043C\u0435\u0442\u043A\u0438",
+      pl: "Notatki"
     },
     no_notes: {
       // no profiles in your notes list
@@ -63529,7 +65460,26 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Nessun profilo qui (\uFF61\u2022\u0301\uFE3F\u2022\u0300\uFF61)",
       pt: "Sem perfis aqui... (\uFF61\u2022\u0301\uFE3F\u2022\u0300\uFF61)",
       sv: "Inga profiler h\xE4r... (\uFF61\u2022\u0301\uFE3F\u2022\u0300\uFF61)",
-      ru: "\u0417\u0434\u0435\u0441\u044C \u043D\u0435\u0442 \u043F\u0440\u043E\u0444\u0438\u043B\u0435\u0439... (\uFF61\u2022\u0301\uFE3F\u2022\u0300\uFF61)"
+      ru: "\u0417\u0434\u0435\u0441\u044C \u043D\u0435\u0442 \u043F\u0440\u043E\u0444\u0438\u043B\u0435\u0439... (\uFF61\u2022\u0301\uFE3F\u2022\u0300\uFF61)",
+      pl: "A profili brak... (\uFF61\u2022\u0301\uFE3F\u2022\u0300\uFF61)"
+    },
+    edit_profile_note: {
+      en: "Edit profile note",
+      de: "Profilnotiz bearbeiten",
+      es: "Editar anotaci\xF3n de perfil",
+      it: "Modifica nota del profilo",
+      pt: "Editar recado de perfil",
+      sv: "\xC4ndra profilanteckning",
+      ru: "\u0420\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u0437\u0430\u043C\u0435\u0442\u043A\u0443 \u043F\u0440\u043E\u0444\u0438\u043B\u044F"
+    },
+    saved_note_for_user: {
+      en: "Saved note for {u}"
+    },
+    cleared_note_for_user: {
+      en: "Cleared note for {u}"
+    },
+    manage: {
+      en: "Manage"
     },
     font: {
       name: {
@@ -63539,7 +65489,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         it: "Selezione del font",
         pt: "Escolha de fonte",
         sv: "Typsnitt",
-        ru: "\u0412\u044B\u0431\u043E\u0440 \u0448\u0440\u0438\u0444\u0442\u0430"
+        ru: "\u0412\u044B\u0431\u043E\u0440 \u0448\u0440\u0438\u0444\u0442\u0430",
+        pl: "Wyb\xF3r czcionki"
       },
       body: {
         en: "Choose a custom selection of fonts that suit you",
@@ -63548,42 +65499,52 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         it: "Definisci una selezione di font personalizzata adatta a te",
         pt: "Selecione uma fonte customizada que te agrada",
         sv: "V\xE4lj ett typsnitt som b\xE4st passar dig",
-        ru: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044C\u0441\u043A\u0438\u0439 \u043D\u0430\u0431\u043E\u0440 \u0448\u0440\u0438\u0444\u0442\u043E\u0432, \u043A\u043E\u0442\u043E\u0440\u044B\u0439 \u0432\u0430\u043C \u043F\u043E\u0434\u0445\u043E\u0434\u0438\u0442"
+        ru: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044C\u0441\u043A\u0438\u0439 \u043D\u0430\u0431\u043E\u0440 \u0448\u0440\u0438\u0444\u0442\u043E\u0432, \u043A\u043E\u0442\u043E\u0440\u044B\u0439 \u0432\u0430\u043C \u043F\u043E\u0434\u0445\u043E\u0434\u0438\u0442",
+        pl: "Wybierz w\u0142asne czcionki kt\xF3re ci pasuj\u0105"
       }
     },
     font_style: {
       en: "Font style",
+      de: "Schriftstil",
       es: "Estilo de fuente",
       it: "Stile del font",
       sv: "Typsnittsstil",
       ru: "\u0421\u0442\u0438\u043B\u044C \u0448\u0440\u0438\u0444\u0442\u0430",
       pt: "Estilo da fonte",
+      pl: "Styl czcionki",
       solid: {
         en: "Solid",
+        de: "Fest",
         es: "S\xF3lido",
         it: "Solido",
         sv: "Fast",
         ru: "\u0421\u043F\u043B\u043E\u0448\u043D\u043E\u0439",
-        pt: "S\xF3lido"
+        pt: "S\xF3lido",
+        pl: "Solidna"
       },
       pop: {
         en: "Pop",
+        de: "Pop",
         es: "Pop",
         it: "Pop",
         sv: "Poppande",
         ru: "\u042F\u0440\u043A\u0438\u0439",
-        pt: "Pop"
+        pt: "Pop",
+        pl: "Pop"
       },
       out: {
-        en: "Outline"
+        en: "Outline",
+        de: "Umriss"
       },
       glow: {
         en: "Glow",
+        de: "Leuchten",
         es: "Brillo",
         it: "Brillante",
         sv: "Gl\xF6dande",
         ru: "\u0421\u0432\u0435\u0447\u0435\u043D\u0438\u0435",
-        pt: "Brilhante"
+        pt: "Brilhante",
+        pl: "Rozb\u0142ysk"
       }
     },
     font_weight: {
@@ -63594,7 +65555,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         it: "Spessore del font",
         pt: "Espessura da fonte",
         sv: "Typsnittsvikt",
-        ru: "\u0422\u043E\u043B\u0449\u0438\u043D\u0430 \u0448\u0440\u0438\u0444\u0442\u0430"
+        ru: "\u0422\u043E\u043B\u0449\u0438\u043D\u0430 \u0448\u0440\u0438\u0444\u0442\u0430",
+        pl: "Wielko\u015B\u0107 czcionki"
       },
       body: {
         en: "Used for regular text paragraphs",
@@ -63603,7 +65565,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         it: "Utilizzato per paragrafi regolari di testo",
         pt: "Usado para par\xE1grafos regulares de texto",
         sv: "Anv\xE4nds f\xF6r vanliga textstycke",
-        ru: "\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0435\u0442\u0441\u044F \u0434\u043B\u044F \u043E\u0431\u044B\u0447\u043D\u044B\u0445 \u0442\u0435\u043A\u0441\u0442\u043E\u0432\u044B\u0445 \u0430\u0431\u0437\u0430\u0446\u0435\u0432"
+        ru: "\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0435\u0442\u0441\u044F \u0434\u043B\u044F \u043E\u0431\u044B\u0447\u043D\u044B\u0445 \u0442\u0435\u043A\u0441\u0442\u043E\u0432\u044B\u0445 \u0430\u0431\u0437\u0430\u0446\u0435\u0432",
+        pl: "U\u017Cywany do regularnych akapit\xF3w"
       }
     },
     font_weight_medium: {
@@ -63614,7 +65577,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         it: "Spessore del font medio",
         pt: "Espessura m\xE9dia de fonte",
         sv: "Mindre typsnittsvikt",
-        ru: "\u0421\u0440\u0435\u0434\u043D\u044F\u044F \u0442\u043E\u043B\u0449\u0438\u043D\u0430 \u0448\u0440\u0438\u0444\u0442\u0430"
+        ru: "\u0421\u0440\u0435\u0434\u043D\u044F\u044F \u0442\u043E\u043B\u0449\u0438\u043D\u0430 \u0448\u0440\u0438\u0444\u0442\u0430",
+        pl: "\u015Arednia wielko\u015B\u0107 czcionki"
       },
       body: {
         en: "Used for button text and small headers",
@@ -63623,7 +65587,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         it: "Utilizzato per il testo dei pulsanti e per piccole intestazioni",
         pt: "Usada para texto de bot\xF5es e pequenos cabe\xE7alhos",
         sv: "Anv\xE4nds f\xF6r knappar och sm\xE5a rubriker",
-        ru: "\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0435\u0442\u0441\u044F \u0434\u043B\u044F \u0442\u0435\u043A\u0441\u0442\u0430 \u043A\u043D\u043E\u043F\u043E\u043A \u0438 \u043D\u0435\u0431\u043E\u043B\u044C\u0448\u0438\u0445 \u0437\u0430\u0433\u043E\u043B\u043E\u0432\u043A\u043E\u0432"
+        ru: "\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0435\u0442\u0441\u044F \u0434\u043B\u044F \u0442\u0435\u043A\u0441\u0442\u0430 \u043A\u043D\u043E\u043F\u043E\u043A \u0438 \u043D\u0435\u0431\u043E\u043B\u044C\u0448\u0438\u0445 \u0437\u0430\u0433\u043E\u043B\u043E\u0432\u043A\u043E\u0432",
+        pl: "U\u017Cywany do tekst\xF3w na przyciskach i ma\u0142ych nag\u0142\xF3wek\xF3w"
       }
     },
     font_weight_bold: {
@@ -63634,7 +65599,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         it: "Spessore del font in grassetto",
         pt: "Espessura da fonte em negrito",
         sv: "Fet typsnittsvikt",
-        ru: "\u0416\u0438\u0440\u043D\u0430\u044F \u0442\u043E\u043B\u0449\u0438\u043D\u0430 \u0448\u0440\u0438\u0444\u0442\u0430"
+        ru: "\u0416\u0438\u0440\u043D\u0430\u044F \u0442\u043E\u043B\u0449\u0438\u043D\u0430 \u0448\u0440\u0438\u0444\u0442\u0430",
+        pl: "Wielko\u015B\u0107 grubej czcionki"
       },
       body: {
         en: "Used for large headers",
@@ -63643,7 +65609,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         it: "Utilizzato per grandi intestazioni",
         pt: "Usado para cabe\xE7alhos grandes",
         sv: "Anv\xE4nds f\xF6r stora rubriker",
-        ru: "\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0435\u0442\u0441\u044F \u0434\u043B\u044F \u0431\u043E\u043B\u044C\u0448\u0438\u0445 \u0437\u0430\u0433\u043E\u043B\u043E\u0432\u043A\u043E\u0432"
+        ru: "\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0435\u0442\u0441\u044F \u0434\u043B\u044F \u0431\u043E\u043B\u044C\u0448\u0438\u0445 \u0437\u0430\u0433\u043E\u043B\u043E\u0432\u043A\u043E\u0432",
+        pl: "U\u017Cywany do wielkich nag\u0142\xF3wk\xF3w"
       }
     },
     font_emoji: {
@@ -63654,7 +65621,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         it: "Compatibilit\xE0 con le emoji",
         pt: "Compatibilidade de emojis",
         sv: "Emoji-kompatibilitet",
-        ru: "\u0421\u043E\u0432\u043C\u0435\u0441\u0442\u0438\u043C\u043E\u0441\u0442\u044C \u0441 \u044D\u043C\u043E\u0434\u0437\u0438"
+        ru: "\u0421\u043E\u0432\u043C\u0435\u0441\u0442\u0438\u043C\u043E\u0441\u0442\u044C \u0441 \u044D\u043C\u043E\u0434\u0437\u0438",
+        pl: "Kompatybilno\u015B\u0107 emoji"
       },
       body: {
         en: "Required to render emoji properly before Windows 11",
@@ -63663,24 +65631,29 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         it: "Richiesto per visualizzare correttamente le emoji prima di Windows 11",
         pt: "Necess\xE1rio para renderizar emojis corretamente antes do Windows 11",
         sv: "Kr\xE4vs f\xF6r att visa emojis korrekt innan Windows 11",
-        ru: "\u0422\u0440\u0435\u0431\u0443\u0435\u0442\u0441\u044F \u0434\u043B\u044F \u043F\u0440\u0430\u0432\u0438\u043B\u044C\u043D\u043E\u0433\u043E \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u044F \u044D\u043C\u043E\u0434\u0437\u0438 \u0434\u043E Windows 11"
+        ru: "\u0422\u0440\u0435\u0431\u0443\u0435\u0442\u0441\u044F \u0434\u043B\u044F \u043F\u0440\u0430\u0432\u0438\u043B\u044C\u043D\u043E\u0433\u043E \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u044F \u044D\u043C\u043E\u0434\u0437\u0438 \u0434\u043E Windows 11",
+        pl: "Wymagane do poprawnego renderowania emoji przed Windows 11"
       }
     },
     font_example: {
       // the trans flag is used to demonstrate the improper
       // emoji font found in windows 10, whether people like it or not
       //
-      // this text is common sample text used in english,
-      // if there's something more fitting for your language,
-      // then feel free to adjust it
+      // "the quick brown fox" is common sample text used in english to
+      // showcase every letter a font supports. if your language has
+      // a better sample sentence to use here, go ahead
+      //
+      // -
       //
       // not sure by what was meant by "fitting for your language"
       // but i used a sentence that has all letters on rus language, like an english example
       en: "The quick brown fox jumps over the lazy dog \u{1F3F3}\uFE0F\u200D\u26A7\uFE0F",
+      de: "Franz jagt im komplett verwahrlosten Taxi quer durch Bayern \u{1F3F3}\uFE0F\u200D\u26A7\uFE0F",
       es: "El veloz murci\xE9lago hind\xFA com\xEDa feliz cardillo y kiwi. La cig\xFCe\xF1a tocaba el saxof\xF3n detr\xE1s del palenque de paja. \u{1F3F3}\uFE0F\u200D\u26A7\uFE0F",
       sv: "Flygande b\xE4ckasiner s\xF6ka hwila p\xE5 mjuka tuvor qxz \u{1F3F3}\uFE0F\u200D\u26A7\uFE0F",
       ru: "\u0421\u044A\u0435\u0448\u044C \u0435\u0449\u0451 \u044D\u0442\u0438\u0445 \u043C\u044F\u0433\u043A\u0438\u0445 \u0444\u0440\u0430\u043D\u0446\u0443\u0437\u0441\u043A\u0438\u0445 \u0431\u0443\u043B\u043E\u043A, \u0434\u0430 \u0432\u044B\u043F\u0435\u0439 \u0447\u0430\u044E \u{1F3F3}\uFE0F\u200D\u26A7\uFE0F",
-      pt: "A r\xE1pida raposa marrom pula sobre o c\xE3o pregui\xE7oso \u{1F3F3}\uFE0F\u200D\u26A7\uFE0F"
+      pt: "A r\xE1pida raposa marrom pula sobre o c\xE3o pregui\xE7oso \u{1F3F3}\uFE0F\u200D\u26A7\uFE0F",
+      pl: "O, m\xF3g\u0142\u017Ce s\u0119p chla\u0144 wyj\u015B\u0107 furtk\u0105 b\u017Adzin?!... \u{1F3F3}\uFE0F\u200D\u26A7\uFE0F"
     },
     enter_font_names: {
       en: "Enter installed font name(s), separated by commas",
@@ -63689,7 +65662,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Inserisci nomi di font installati, separati da virgole",
       pt: "Nomes das fontes instaladas, separados por v\xEDrgulas",
       sv: "Skriv installerade typsnittsnamn, separerade av kommatecken",
-      ru: "\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435(\u044F) \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043B\u0435\u043D\u043D\u043E\u0433\u043E(\u044B\u0445) \u0448\u0440\u0438\u0444\u0442\u0430(\u043E\u0432), \u0440\u0430\u0437\u0434\u0435\u043B\u044F\u044F \u0437\u0430\u043F\u044F\u0442\u044B\u043C\u0438"
+      ru: "\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435(\u044F) \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043B\u0435\u043D\u043D\u043E\u0433\u043E(\u044B\u0445) \u0448\u0440\u0438\u0444\u0442\u0430(\u043E\u0432), \u0440\u0430\u0437\u0434\u0435\u043B\u044F\u044F \u0437\u0430\u043F\u044F\u0442\u044B\u043C\u0438",
+      pl: "Podaj nazw\u0119(-wy) zainstalowanej(-nych) czcionki(-nek), oddzielone przecinkiem"
     },
     change_now: {
       en: "Change now",
@@ -63698,7 +65672,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Cambia ora",
       pt: "Mudar agora",
       sv: "\xC4ndra nu",
-      ru: "\u0418\u0437\u043C\u0435\u043D\u0438\u0442\u044C \u0441\u0435\u0439\u0447\u0430\u0441"
+      ru: "\u0418\u0437\u043C\u0435\u043D\u0438\u0442\u044C \u0441\u0435\u0439\u0447\u0430\u0441",
+      pl: "Zmie\u0144 teraz"
     },
     profiles: {
       en: "Profiles",
@@ -63707,7 +65682,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Profili",
       pt: "Perfis",
       sv: "Profiler",
-      ru: "\u041F\u0440\u043E\u0444\u0438\u043B\u0438"
+      ru: "\u041F\u0440\u043E\u0444\u0438\u043B\u0438",
+      pl: "Profile"
     },
     redirections: {
       en: "Redirections",
@@ -63716,7 +65692,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       it: "Reindirizzamenti",
       pt: "Redirecionamentos",
       sv: "Omdirigeringar",
-      ru: "\u041F\u0435\u0440\u0435\u043D\u0430\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F"
+      ru: "\u041F\u0435\u0440\u0435\u043D\u0430\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F",
+      pl: "Przekierowania"
     },
     legacy_redirects: {
       name: {
@@ -63726,7 +65703,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         it: "Reindirizzamento legacy degli scrobbling",
         pt: "Redirecionamento de scrobble legado",
         sv: "Legacy skrobbelomdirigeringar",
-        ru: "\u0423\u0441\u0442\u0430\u0440\u0435\u0432\u0448\u0435\u0435 \u043F\u0435\u0440\u0435\u043D\u0430\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435 \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u043E\u0432"
+        ru: "\u0423\u0441\u0442\u0430\u0440\u0435\u0432\u0448\u0435\u0435 \u043F\u0435\u0440\u0435\u043D\u0430\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435 \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u043E\u0432",
+        pl: "Tradycyjne przekierowania scrobbli"
       },
       body: {
         en: "By default, scrobbles will be corrected to faulty replacements that are a decade out of date. Disabling does not fully fix the system but keeps artist names in your library intact.",
@@ -63735,7 +65713,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         it: "Per impostazione predefinita, gli scrobbling saranno corretti in base a sostituzioni erronee obsolete da un decennio. Disattivare questa opzione non risolve completamente i problemi ma mantiene intatti i nomi degli artisti nella tua libreria.",
         pt: 'Por padr\xE3o, a Last.fm ir\xE1 "corrigir automaticamente" alguns dos seus scrobbles para redirecionamentos (na maioria) defeituosos. Desativar essa op\xE7\xE3o n\xE3o corrige completamente o sistema, mas mant\xE9m os nomes dos artistas na sua biblioteca intactos.',
         sv: "Vanligtvis omdirigeras skrobblar till felers\xE4ttningar som \xE4r \xF6ver tio \xE5r gamla. Att avaktivera det fixar inte problemet totalt men artistnamn i ditt egna bibliotek visar r\xE4tt profil.",
-        ru: "\u041F\u043E \u0443\u043C\u043E\u043B\u0447\u0430\u043D\u0438\u044E \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u044B \u0431\u0443\u0434\u0443\u0442 \u0438\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u044B \u043D\u0430 \u043D\u0435\u0438\u0441\u043F\u0440\u0430\u0432\u043D\u044B\u0435 \u0437\u0430\u043C\u0435\u043D\u044B, \u043A\u043E\u0442\u043E\u0440\u044B\u043C \u0443\u0436\u0435 \u0434\u0435\u0441\u044F\u0442\u044C \u043B\u0435\u0442. \u041E\u0442\u043A\u043B\u044E\u0447\u0435\u043D\u0438\u0435 \u043D\u0435 \u043F\u043E\u043B\u043D\u043E\u0441\u0442\u044C\u044E \u0438\u0441\u043F\u0440\u0430\u0432\u043B\u044F\u0435\u0442 \u0441\u0438\u0441\u0442\u0435\u043C\u0443, \u043D\u043E \u0441\u043E\u0445\u0440\u0430\u043D\u044F\u0435\u0442 \u0438\u043C\u0435\u043D\u0430 \u0430\u0440\u0442\u0438\u0441\u0442\u043E\u0432 \u0432 \u0432\u0430\u0448\u0435\u0439 \u0431\u0438\u0431\u043B\u0438\u043E\u0442\u0435\u043A\u0435 \u043D\u0435\u0442\u0440\u043E\u043D\u0443\u0442\u044B\u043C\u0438."
+        ru: "\u041F\u043E \u0443\u043C\u043E\u043B\u0447\u0430\u043D\u0438\u044E \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u044B \u0431\u0443\u0434\u0443\u0442 \u0438\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u044B \u043D\u0430 \u043D\u0435\u0438\u0441\u043F\u0440\u0430\u0432\u043D\u044B\u0435 \u0437\u0430\u043C\u0435\u043D\u044B, \u043A\u043E\u0442\u043E\u0440\u044B\u043C \u0443\u0436\u0435 \u0434\u0435\u0441\u044F\u0442\u044C \u043B\u0435\u0442. \u041E\u0442\u043A\u043B\u044E\u0447\u0435\u043D\u0438\u0435 \u043D\u0435 \u043F\u043E\u043B\u043D\u043E\u0441\u0442\u044C\u044E \u0438\u0441\u043F\u0440\u0430\u0432\u043B\u044F\u0435\u0442 \u0441\u0438\u0441\u0442\u0435\u043C\u0443, \u043D\u043E \u0441\u043E\u0445\u0440\u0430\u043D\u044F\u0435\u0442 \u0438\u043C\u0435\u043D\u0430 \u0430\u0440\u0442\u0438\u0441\u0442\u043E\u0432 \u0432 \u0432\u0430\u0448\u0435\u0439 \u0431\u0438\u0431\u043B\u0438\u043E\u0442\u0435\u043A\u0435 \u043D\u0435\u0442\u0440\u043E\u043D\u0443\u0442\u044B\u043C\u0438.",
+        pl: "Domy\u015Blnie, scrobble b\u0119d\u0105 poprawiane na b\u0142\u0119dne zamiennik je\u015Bli s\u0105 dekad\u0119 za stare. Wy\u0142\u0105czanie tego nie do ko\u0144ca naprawia ten system ale zostawia imiona artyst\xF3w bez zmian."
       }
     },
     redirect_messages: {
@@ -63746,7 +65725,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         it: "Rimuovi le notifiche di reindirizzamento tra le pagine",
         pt: "Remover notifica\xE7\xF5es de redirecionamento de p\xE1gina",
         sv: "Ta bort omdirigeringsnotifikationer",
-        ru: "\u0423\u0434\u0430\u043B\u0438\u0442\u044C \u0443\u0432\u0435\u0434\u043E\u043C\u043B\u0435\u043D\u0438\u044F \u043E \u043F\u0435\u0440\u0435\u043D\u0430\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0438 \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u044B"
+        ru: "\u0423\u0434\u0430\u043B\u0438\u0442\u044C \u0443\u0432\u0435\u0434\u043E\u043C\u043B\u0435\u043D\u0438\u044F \u043E \u043F\u0435\u0440\u0435\u043D\u0430\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0438 \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u044B",
+        pl: "Usu\u0144 powiadomienia o przekierowaniu stron"
       },
       body: {
         en: "These notifications can let you undo redirections Last.fm forced upon you, but can also be annoying",
@@ -63755,18 +65735,21 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         it: "Queste notifiche possono permetterti di annullare dei reindirizzamenti che Last.fm ti ha imposto, ma possono anche essere fastidiose",
         pt: "Essas notifica\xE7\xF5es podem permitir que voc\xEA desfa\xE7a redirecionamentos que a Last.fm imp\xF4s a voc\xEA, mas tamb\xE9m podem ser irritantes",
         sv: "Dessa notiser l\xE5ter dig \xE5ngra omdirigeringar Last.fm tvingade p\xE5 dig, men dem kan ocks\xE5 vara st\xF6rande",
-        ru: "\u042D\u0442\u0438 \u0443\u0432\u0435\u0434\u043E\u043C\u043B\u0435\u043D\u0438\u044F \u043C\u043E\u0433\u0443\u0442 \u043F\u043E\u0437\u0432\u043E\u043B\u0438\u0442\u044C \u0432\u0430\u043C \u043E\u0442\u043C\u0435\u043D\u0438\u0442\u044C \u043F\u0435\u0440\u0435\u043D\u0430\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F, \u043D\u0430\u0432\u044F\u0437\u0430\u043D\u043D\u044B\u0435 Last.fm, \u043D\u043E \u0442\u0430\u043A\u0436\u0435 \u043C\u043E\u0433\u0443\u0442 \u0431\u044B\u0442\u044C \u0440\u0430\u0437\u0434\u0440\u0430\u0436\u0430\u044E\u0449\u0438\u043C\u0438"
+        ru: "\u042D\u0442\u0438 \u0443\u0432\u0435\u0434\u043E\u043C\u043B\u0435\u043D\u0438\u044F \u043C\u043E\u0433\u0443\u0442 \u043F\u043E\u0437\u0432\u043E\u043B\u0438\u0442\u044C \u0432\u0430\u043C \u043E\u0442\u043C\u0435\u043D\u0438\u0442\u044C \u043F\u0435\u0440\u0435\u043D\u0430\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F, \u043D\u0430\u0432\u044F\u0437\u0430\u043D\u043D\u044B\u0435 Last.fm, \u043D\u043E \u0442\u0430\u043A\u0436\u0435 \u043C\u043E\u0433\u0443\u0442 \u0431\u044B\u0442\u044C \u0440\u0430\u0437\u0434\u0440\u0430\u0436\u0430\u044E\u0449\u0438\u043C\u0438",
+        pl: "Te powiadomienia pozwalaj\u0105 ci cofa\u0107 z przekierowywa\u0144 od Last.fm, ale mog\u0105 r\xF3wnie\u017C by\u0107 irytuj\u0105ce"
       }
     },
     colourful_counts: {
       name: {
+        // rank-based means ordered based on scrobble counts
         en: "Rank-based colours for artist charts",
         de: "Rangbasierte Farben f\xFCr K\xFCnstlerdiagramme",
         es: "Colores basados en rankings para la lista de artistas",
         it: "Colori basati sulla posizione nelle classifiche degli artisti",
         pt: "Cores baseadas em classifica\xE7\xE3o para paradas de artistas",
         sv: "Rangbaserade f\xE4rger f\xF6r artistlistor",
-        ru: "\u0426\u0432\u0435\u0442\u0430 \u043D\u0430 \u043E\u0441\u043D\u043E\u0432\u0435 \u0440\u0430\u043D\u0433\u0430 \u0434\u043B\u044F \u0447\u0430\u0440\u0442\u043E\u0432 \u0430\u0440\u0442\u0438\u0441\u0442\u043E\u0432"
+        ru: "\u0426\u0432\u0435\u0442\u0430 \u043D\u0430 \u043E\u0441\u043D\u043E\u0432\u0435 \u0440\u0430\u043D\u0433\u0430 \u0434\u043B\u044F \u0447\u0430\u0440\u0442\u043E\u0432 \u0430\u0440\u0442\u0438\u0441\u0442\u043E\u0432",
+        pl: "Kolory bazowane na rankingach do wykres\xF3w artyst\xF3w"
       },
       body: {
         en: "Assigns a colour based on an artist\u2019s all-time ranking in your library",
@@ -63775,7 +65758,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         it: "Assegna un colore basato sulla sua posizione nella classifica della tua libreria",
         pt: "Define uma cor pela coloca\xE7\xE3o do artista no ranking geral da sua biblioteca",
         sv: "Till\xE4mpar en f\xE4rg baserad p\xE5 en artists alltidsranking i ditt bibliotek",
-        ru: "\u041D\u0430\u0437\u043D\u0430\u0447\u0430\u0435\u0442 \u0446\u0432\u0435\u0442 \u0432 \u0437\u0430\u0432\u0438\u0441\u0438\u043C\u043E\u0441\u0442\u0438 \u043E\u0442 \u043E\u0431\u0449\u0435\u0433\u043E \u0440\u0435\u0439\u0442\u0438\u043D\u0433\u0430 \u0430\u0440\u0442\u0438\u0441\u0442\u0430 \u0432 \u0432\u0430\u0448\u0435\u0439 \u0431\u0438\u0431\u043B\u0438\u043E\u0442\u0435\u043A\u0435"
+        ru: "\u041D\u0430\u0437\u043D\u0430\u0447\u0430\u0435\u0442 \u0446\u0432\u0435\u0442 \u0432 \u0437\u0430\u0432\u0438\u0441\u0438\u043C\u043E\u0441\u0442\u0438 \u043E\u0442 \u043E\u0431\u0449\u0435\u0433\u043E \u0440\u0435\u0439\u0442\u0438\u043D\u0433\u0430 \u0430\u0440\u0442\u0438\u0441\u0442\u0430 \u0432 \u0432\u0430\u0448\u0435\u0439 \u0431\u0438\u0431\u043B\u0438\u043E\u0442\u0435\u043A\u0435",
+        pl: "Przypisuje kolor bazowany na rankingu artysty w ca\u0142ym zakresie czasowym w twojej bibliotece"
       }
     },
     glacier_graphs: {
@@ -63786,7 +65770,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         it: "Visualizza meglio i grafici degli scrobbling",
         pt: "Visualize melhor os gr\xE1ficos de scrobble",
         sv: "B\xE4ttre visualisera skrobbeldiagram",
-        ru: "\u041B\u0443\u0447\u0448\u0435 \u0432\u0438\u0437\u0443\u0430\u043B\u0438\u0437\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u0433\u0440\u0430\u0444\u0438\u043A\u0438 \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u043E\u0432"
+        ru: "\u041B\u0443\u0447\u0448\u0435 \u0432\u0438\u0437\u0443\u0430\u043B\u0438\u0437\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u0433\u0440\u0430\u0444\u0438\u043A\u0438 \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u043E\u0432",
+        pl: "Lepiej wizualizuj wykresy scrobbli"
       },
       body: {
         en: "Choose between a tiny delay for a wide range of graph options or legacy Last.fm graphs",
@@ -63795,7 +65780,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         it: "Seleziona tra un piccolo ritardo per una vasta selezione di opzioni per i grafici, o utilizza i grafici normali di Last.fm",
         pt: "Escolha entre um pequeno atraso para ter mais op\xE7\xF5es de gr\xE1ficos ou usar os gr\xE1ficos cl\xE1ssicos da Last.fm",
         sv: "V\xE4lj mellan en liten f\xF6rdr\xF6jning f\xF6r en stor m\xE4ngd olika diagramalternativ eller anv\xE4nd \xE4ldre Last.fm-diagram",
-        ru: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u043C\u0435\u0436\u0434\u0443 \u043D\u0435\u0431\u043E\u043B\u044C\u0448\u043E\u0439 \u0437\u0430\u0434\u0435\u0440\u0436\u043A\u043E\u0439 \u0434\u043B\u044F \u0448\u0438\u0440\u043E\u043A\u043E\u0433\u043E \u0441\u043F\u0435\u043A\u0442\u0440\u0430 \u043E\u043F\u0446\u0438\u0439 \u0433\u0440\u0430\u0444\u0438\u043A\u0430 \u0438\u043B\u0438 \u0443\u0441\u0442\u0430\u0440\u0435\u0432\u0448\u0438\u043C\u0438 \u0433\u0440\u0430\u0444\u0438\u043A\u0430\u043C\u0438 Last.fm"
+        ru: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u043C\u0435\u0436\u0434\u0443 \u043D\u0435\u0431\u043E\u043B\u044C\u0448\u043E\u0439 \u0437\u0430\u0434\u0435\u0440\u0436\u043A\u043E\u0439 \u0434\u043B\u044F \u0448\u0438\u0440\u043E\u043A\u043E\u0433\u043E \u0441\u043F\u0435\u043A\u0442\u0440\u0430 \u043E\u043F\u0446\u0438\u0439 \u0433\u0440\u0430\u0444\u0438\u043A\u0430 \u0438\u043B\u0438 \u0443\u0441\u0442\u0430\u0440\u0435\u0432\u0448\u0438\u043C\u0438 \u0433\u0440\u0430\u0444\u0438\u043A\u0430\u043C\u0438 Last.fm",
+        pl: "Wybierz pomi\u0119dzy ma\u0142ym op\xF3\u017Anieniem w zamian za wi\u0119kszy wyb\xF3r wykres\xF3w lub u\u017Cywaj tradycyjnych wykres\xF3w z Last.fm"
       }
     },
     gendered_tags: {
@@ -63806,7 +65792,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         it: "Nascondi i tag basati sul genere",
         pt: "Esconder tags baseadas em g\xEAnero",
         sv: "G\xF6m k\xF6nsbaserade taggar",
-        ru: "\u0421\u043A\u0440\u044B\u0442\u044C \u0442\u0435\u0433\u0438, \u043E\u0441\u043D\u043E\u0432\u0430\u043D\u043D\u044B\u0435 \u043D\u0430 \u0433\u0435\u043D\u0434\u0435\u0440\u0435"
+        ru: "\u0421\u043A\u0440\u044B\u0442\u044C \u0442\u0435\u0433\u0438, \u043E\u0441\u043D\u043E\u0432\u0430\u043D\u043D\u044B\u0435 \u043D\u0430 \u0433\u0435\u043D\u0434\u0435\u0440\u0435",
+        pl: "Ukryj tagi bazowane na p\u0142ci"
       },
       body: {
         en: "These tags are often redundant and can never apply to the full range they\u2019re intending",
@@ -64021,7 +66008,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Deletion will take 14 days to complete, after this time your account will either be deleted, anonymised, or put beyond use and cannot be recovered. Once deleted, your username will no longer be available.",
         de: "Die L\xF6schung dauert 14 Tage. Nach Ablauf dieser Frist wird dein Konto entweder gel\xF6scht, anonymisiert, oder unbrauchbar gemacht und kann nicht wiederhergestellt werden. Nach der L\xF6schung ist dein Benutzername nicht mehr verf\xFCgbar.",
         es: "La eliminaci\xF3n tardar\xE1 14 d\xEDas en completarse. Despu\xE9s de ese periodo, tu cuenta ser\xE1 eliminada, anonimizada, o se pondr\xE1 fuera de uso y no podr\xE1 recuperarse. Una vez eliminada, tu nombre de usuario ya no estar\xE1 disponible.",
-        it: "L'eliminazione impiegher\xE0 14 giorni per essere completata, dopo questo tempo il tuo account sar\xE0 cancellato, anonimizzato o reso inutilizzabile e non potr\xE0 essere recuperato. Una volta eliminato, il tuo username non sar\xE0 pi\xF9 disponibile.",
+        it: "L\u2019eliminazione impiegher\xE0 14 giorni per essere completata, dopo questo tempo il tuo account sar\xE0 cancellato, anonimizzato o reso inutilizzabile e non potr\xE0 essere recuperato. Una volta eliminato, il tuo username non sar\xE0 pi\xF9 disponibile.",
         pt: "A exclus\xE3o levar\xE1 14 dias para ser conclu\xEDda. Ap\xF3s esse per\xEDodo, sua conta ser\xE1 exclu\xEDda, anonimizada ou desativada, e n\xE3o poder\xE1 ser recuperada. Depois de exclu\xEDdo, seu nome de usu\xE1rio n\xE3o estar\xE1 mais dispon\xEDvel.",
         sv: "Det tar 14 dagar att ta bort ditt konto. Efter denna tid blir dit konto antingen borttaget, anonymiserad, eller g\xF6rs oanv\xE4ndbar och kan inte f\xE5s tillbaka. N\xE4r det \xE4r borttaget kan ditt anv\xE4ndarnamn inte bli anv\xE4nt igen.",
         ru: "\u0423\u0434\u0430\u043B\u0435\u043D\u0438\u0435 \u0437\u0430\u0439\u043C\u0435\u0442 14 \u0434\u043D\u0435\u0439. \u041F\u043E \u0438\u0441\u0442\u0435\u0447\u0435\u043D\u0438\u0438 \u044D\u0442\u043E\u0433\u043E \u0432\u0440\u0435\u043C\u0435\u043D\u0438 \u0432\u0430\u0448\u0430 \u0443\u0447\u0435\u0442\u043D\u0430\u044F \u0437\u0430\u043F\u0438\u0441\u044C \u0431\u0443\u0434\u0435\u0442 \u043B\u0438\u0431\u043E \u0443\u0434\u0430\u043B\u0435\u043D\u0430, \u043B\u0438\u0431\u043E \u0430\u043D\u043E\u043D\u0438\u043C\u0438\u0437\u0438\u0440\u043E\u0432\u0430\u043D\u0430, \u043B\u0438\u0431\u043E \u0432\u044B\u0432\u0435\u0434\u0435\u043D\u0430 \u0438\u0437 \u044D\u043A\u0441\u043F\u043B\u0443\u0430\u0442\u0430\u0446\u0438\u0438 \u0438 \u043D\u0435 \u043C\u043E\u0436\u0435\u0442 \u0431\u044B\u0442\u044C \u0432\u043E\u0441\u0441\u0442\u0430\u043D\u043E\u0432\u043B\u0435\u043D\u0430. \u041F\u043E\u0441\u043B\u0435 \u0443\u0434\u0430\u043B\u0435\u043D\u0438\u044F \u0432\u0430\u0448\u0435 \u0438\u043C\u044F \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F \u0431\u043E\u043B\u044C\u0448\u0435 \u043D\u0435 \u0431\u0443\u0434\u0435\u0442 \u0434\u043E\u0441\u0442\u0443\u043F\u043D\u043E."
@@ -64048,6 +66035,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     applications: {
       en: "Applications",
+      de: "Anwendungen",
       es: "Aplicaciones",
       it: "Applicazioni",
       sv: "Applikationer",
@@ -64056,9 +66044,10 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     applications_intro: {
       en: "Connect your account to third-party services for a better scrobbling experience. Make sure you trust the services below.",
+      de: "Verbinde dein Konto mit Drittanbieterdiensten f\xFCr ein besseres Scrobbling-Erlebnis. Stelle sicher, dass du den unten aufgef\xFChrten Diensten vertraust.",
       es: "Conecta tu cuenta a servicios externos para una mejor experiencia al hacer scrobbling. Aseg\xFArate de que conf\xEDas en los servicios que hay debajo.",
       it: "Connetti il tuo account a servizi di terze parti per una migliore esperienza di scrobbling. Assicurati di fidarti dei servizi che seguono.",
-      sv: "Anslut ditt konto till tredjepartstj\xE4nster f\xF6r b\xE4ttre skrobblingsupplevelse. Var s\xE4ker p\xE5 att du litar p\xE5 nedre tj\xE4nster",
+      sv: "Anslut ditt konto till tredjepartstj\xE4nster f\xF6r b\xE4ttre skrobblingsupplevelse. Var s\xE4ker p\xE5 att du litar p\xE5 nedre tj\xE4nster.",
       ru: "\u041F\u043E\u0434\u043A\u043B\u044E\u0447\u0438\u0442\u0435 \u0441\u0432\u043E\u0439 \u0430\u043A\u043A\u0430\u0443\u043D\u0442 \u043A \u0441\u0442\u043E\u0440\u043E\u043D\u043D\u0438\u043C \u0441\u0435\u0440\u0432\u0438\u0441\u0430\u043C \u0434\u043B\u044F \u043B\u0443\u0447\u0448\u0435\u0433\u043E \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u0438\u043D\u0433\u0430. \u0423\u0431\u0435\u0434\u0438\u0442\u0435\u0441\u044C, \u0447\u0442\u043E \u0432\u044B \u0434\u043E\u0432\u0435\u0440\u044F\u0435\u0442\u0435 \u0443\u043A\u0430\u0437\u0430\u043D\u043D\u044B\u043C \u043D\u0438\u0436\u0435 \u0441\u0435\u0440\u0432\u0438\u0441\u0430\u043C.",
       pt: "Conecte sua conta a servi\xE7os de terceiros para uma melhor experi\xEAncia de scrobbling. Certifique-se de que voc\xEA confia nos servi\xE7os abaixo."
     },
@@ -64082,6 +66071,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     suggested: {
       en: "Suggested",
+      de: "Vorgeschlagen",
       es: "Sugerido",
       it: "Suggerito",
       sv: "F\xF6reslaget",
@@ -64111,7 +66101,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Unlock additional API features",
         de: "Schalte zus\xE4tzliche API-Funktionen frei",
         es: "Desbloquea funciones adicionales de API",
-        it: "Sblocca ulteriori funzionalit\xE0 dell'API",
+        it: "Sblocca ulteriori funzionalit\xE0 dell\u2019API",
         pt: "Desbloqueie recursos adicionais da API",
         sv: "L\xE5s upp flera API-funktioner",
         ru: "\u0420\u0430\u0437\u0431\u043B\u043E\u043A\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u0434\u043E\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0435 \u0444\u0443\u043D\u043A\u0446\u0438\u0438 API"
@@ -64120,7 +66110,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Link your account to allow API access such as scrobbling",
         de: "Verkn\xFCpfe dein Konto, um API-Zugriffe wie Scrobbling zu erm\xF6glichen",
         es: "Conecta tu cuenta para permitir el acceso a la API, como el scrobbling",
-        it: "Connetti il tuo account per attivare l'accesso all'API, ad esempio per lo scrobbling",
+        it: "Connetti il tuo account per attivare l\u2019accesso all\u2019API, ad esempio per lo scrobbling",
         pt: "Conecte sua conta para permitir o acesso \xE0 API, como o scrobbling",
         sv: "Koppla ditt konto f\xF6r att till\xE5ta API-\xE5tkomster, som att skrobbla",
         ru: "\u041F\u0440\u0438\u0432\u044F\u0436\u0438\u0442\u0435 \u0441\u0432\u043E\u0439 \u0430\u043A\u043A\u0430\u0443\u043D\u0442, \u0447\u0442\u043E\u0431\u044B \u0440\u0430\u0437\u0440\u0435\u0448\u0438\u0442\u044C \u0434\u043E\u0441\u0442\u0443\u043F \u043A API, \u043D\u0430\u043F\u0440\u0438\u043C\u0435\u0440, \u0434\u043B\u044F \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u0438\u043D\u0433\u0430"
@@ -64165,7 +66155,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     ensure_you_trust: {
       // API applications
-      // last.fm/settings/applications
+      // Last.fm/settings/applications
       en: "Make sure you trust this application",
       de: "Stelle sicher, dass du dieser Anwendung vertraust",
       es: "Aseg\xFArate de que conf\xEDas en esta aplicaci\xF3n",
@@ -64195,7 +66185,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     manage_applications: {
       // API applications
-      // last.fm/settings/applications
+      // Last.fm/settings/applications
       en: "Manage applications",
       de: "Anwendungen verwalten",
       es: "Gestionar aplicaciones",
@@ -64218,7 +66208,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Allows the use of line breaks, bold text, italics, and images in all \u201CAbout Me\u201D panels",
         de: "Erm\xF6glicht die Verwendung von Zeilenumbr\xFCchen, fettem Text, Kursivschrift und Bildern in allen \u201E\xDCber mich\u201C-Bereichen",
         es: 'Permite el uso de saltos de l\xEDnea, negrita, cursiva, e im\xE1genes en todos los paneles "Sobre m\xED"',
-        it: `Permette l'uso di interruzioni di linea, grassetto, corsivo e immagini in tutti i pannelli "Informazioni"`,
+        it: 'Permette l\u2019uso di interruzioni di linea, grassetto, corsivo e immagini in tutti i pannelli "Informazioni"',
         pt: "Permite o uso de quebras de linha, texto em negrito, it\xE1lico e imagens em todos os pain\xE9is \u201CSobre mim\u201D",
         sv: "Till\xE5ter radbrytning, fet stil, kursiv stil, och bilder inom alla \u201COm mig\u201D-paneler",
         ru: "\u0420\u0430\u0437\u0440\u0435\u0448\u0430\u0435\u0442 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u043D\u0438\u0435 \u043F\u0435\u0440\u0435\u043D\u043E\u0441\u043E\u0432 \u0441\u0442\u0440\u043E\u043A, \u0436\u0438\u0440\u043D\u043E\u0433\u043E \u0442\u0435\u043A\u0441\u0442\u0430, \u043A\u0443\u0440\u0441\u0438\u0432\u0430 \u0438 \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0439 \u0432\u043E \u0432\u0441\u0435\u0445 \u043F\u0430\u043D\u0435\u043B\u044F\u0445 \xAB\u041E\u0431\u043E \u043C\u043D\u0435\xBB"
@@ -64238,7 +66228,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Allows the use of line breaks, bold text, italics, and images in all shouts",
         de: "Erm\xF6glicht die Verwendung von Zeilenumbr\xFCchen, fettem Text, Kursivschrift und Bildern in allen Shouts",
         es: "Permite el uso de saltos de l\xEDnea, negrita, cursiva, e im\xE1genes en todas las notas",
-        it: "Permette l'uso di interruzioni di linea, grassetto, corsivo e immagini in tutte le note",
+        it: "Permette l\u2019uso di interruzioni di linea, grassetto, corsivo e immagini in tutte le note",
         pt: "Permite o uso de quebras de linha, texto em negrito, it\xE1lico e imagens em todas as caixas de mensagens",
         sv: "Till\xE5ter radbrytning, fet stil, kursiv stil, och bilder inom alla hojtningar",
         ru: "\u0420\u0430\u0437\u0440\u0435\u0448\u0430\u0435\u0442 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u043D\u0438\u0435 \u043F\u0435\u0440\u0435\u043D\u043E\u0441\u043E\u0432 \u0441\u0442\u0440\u043E\u043A, \u0436\u0438\u0440\u043D\u043E\u0433\u043E \u0442\u0435\u043A\u0441\u0442\u0430, \u043A\u0443\u0440\u0441\u0438\u0432\u0430 \u0438 \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0439 \u0432\u043E \u0432\u0441\u0435\u0445 \u0448\u0430\u0443\u0442\u0430\u0445"
@@ -64274,6 +66264,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     own_plays: {
       // tracklist source menu option that enables the thing below
       en: "Own plays",
+      de: "Eigene Plays",
       es: "Reproducciones personales",
       it: "Riproduzioni personali",
       sv: "Egna spelningar",
@@ -64312,13 +66303,13 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     welcome_to_bleh: {
       // <br> is a line break
-      en: "Welcome to bleh, thank you for installing!<br>You can continue through this quick setup to get you started or skip right to your profile and figure it all out yourself <3",
-      de: "Willkommen bei bleh, danke f\xFCr die Installation!<br>Du kannst diesen schnellen Einrichtungsassistenten durchlaufen, um loszulegen, oder direkt zu deinem Profil springen und alles selbst herausfinden <3",
-      es: "\xA1Bienvenido a bleh, gracias por instalar!<br>Puedes continuar con la instalaci\xF3n para ayudarte a empezar o puedes saltar directamente a tu perfil y averiguar por ti mismo <3",
-      it: "Benvenuto in bleh, grazie per l'installazione!<br>Puoi continuare con questa veloce configurazione iniziale, oppure saltare direttamente al tuo profilo e scoprire tutto da solo <3",
-      pt: "Bem-vindo ao bleh, obrigado por instalar!<br>Voc\xEA pode seguir este r\xE1pido guia de configura\xE7\xE3o para come\xE7ar, ou pular direto para seu perfil e descobrir tudo por conta pr\xF3pria <3",
-      sv: "V\xE4lkommen till bleh, tack f\xF6r att du har installerat!<br>Du kan forts\xE4tta genom den h\xE4r snabba setupen f\xF6r att starta eller hoppa rakt till din profil och klura ut det helt sj\xE4lv <3",
-      ru: "\u0414\u043E\u0431\u0440\u043E \u043F\u043E\u0436\u0430\u043B\u043E\u0432\u0430\u0442\u044C \u0432 bleh, \u0441\u043F\u0430\u0441\u0438\u0431\u043E \u0437\u0430 \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043A\u0443!<br>\u0412\u044B \u043C\u043E\u0436\u0435\u0442\u0435 \u043F\u0440\u043E\u0439\u0442\u0438 \u044D\u0442\u0443 \u0431\u044B\u0441\u0442\u0440\u0443\u044E \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0443, \u0447\u0442\u043E\u0431\u044B \u043D\u0430\u0447\u0430\u0442\u044C, \u0438\u043B\u0438 \u0441\u0440\u0430\u0437\u0443 \u043F\u0435\u0440\u0435\u0439\u0442\u0438 \u043A \u0441\u0432\u043E\u0435\u043C\u0443 \u043F\u0440\u043E\u0444\u0438\u043B\u044E \u0438 \u0440\u0430\u0437\u043E\u0431\u0440\u0430\u0442\u044C\u0441\u044F \u0432\u043E \u0432\u0441\u0435\u043C \u0441\u0430\u043C\u043E\u0441\u0442\u043E\u044F\u0442\u0435\u043B\u044C\u043D\u043E <3"
+      en: "Welcome to {b}, thank you for installing!<br>You can continue through this quick setup to get you started or skip right to your profile and figure it all out yourself <3",
+      de: "Willkommen bei {b}, danke f\xFCr die Installation!<br>Du kannst diesen schnellen Einrichtungsassistenten durchlaufen, um loszulegen, oder direkt zu deinem Profil springen und alles selbst herausfinden <3",
+      es: "\xA1Bienvenido a {b}, gracias por instalar!<br>Puedes continuar con la instalaci\xF3n para ayudarte a empezar o puedes saltar directamente a tu perfil y averiguar por ti mismo <3",
+      it: "Benvenuto in {b}, grazie per l\u2019installazione!<br>Puoi continuare con questa veloce configurazione iniziale, oppure saltare direttamente al tuo profilo e scoprire tutto da solo <3",
+      pt: "Bem-vindo ao {b}, obrigado por instalar!<br>Voc\xEA pode seguir este r\xE1pido guia de configura\xE7\xE3o para come\xE7ar, ou pular direto para seu perfil e descobrir tudo por conta pr\xF3pria <3",
+      sv: "V\xE4lkommen till {b}, tack f\xF6r att du har installerat!<br>Du kan forts\xE4tta genom den h\xE4r snabba setupen f\xF6r att starta eller hoppa rakt till din profil och klura ut det helt sj\xE4lv <3",
+      ru: "\u0414\u043E\u0431\u0440\u043E \u043F\u043E\u0436\u0430\u043B\u043E\u0432\u0430\u0442\u044C \u0432 {b}, \u0441\u043F\u0430\u0441\u0438\u0431\u043E \u0437\u0430 \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043A\u0443!<br>\u0412\u044B \u043C\u043E\u0436\u0435\u0442\u0435 \u043F\u0440\u043E\u0439\u0442\u0438 \u044D\u0442\u0443 \u0431\u044B\u0441\u0442\u0440\u0443\u044E \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0443, \u0447\u0442\u043E\u0431\u044B \u043D\u0430\u0447\u0430\u0442\u044C, \u0438\u043B\u0438 \u0441\u0440\u0430\u0437\u0443 \u043F\u0435\u0440\u0435\u0439\u0442\u0438 \u043A \u0441\u0432\u043E\u0435\u043C\u0443 \u043F\u0440\u043E\u0444\u0438\u043B\u044E \u0438 \u0440\u0430\u0437\u043E\u0431\u0440\u0430\u0442\u044C\u0441\u044F \u0432\u043E \u0432\u0441\u0435\u043C \u0441\u0430\u043C\u043E\u0441\u0442\u043E\u044F\u0442\u0435\u043B\u044C\u043D\u043E <3"
     },
     next: {
       en: "Next",
@@ -64366,13 +66357,13 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       ru: "\u041C\u044B \u043F\u0440\u0435\u0434\u043B\u0430\u0433\u0430\u0435\u043C \u043C\u043D\u043E\u0436\u0435\u0441\u0442\u0432\u043E \u043E\u043F\u0446\u0438\u0439, \u0447\u0442\u043E\u0431\u044B \u043F\u043E\u043C\u043E\u0447\u044C \u0432\u0430\u043C \u0443\u043F\u0440\u0430\u0432\u043B\u044F\u0442\u044C \u0432\u0430\u0448\u0435\u0439 \u043C\u0443\u0437\u044B\u043A\u0430\u043B\u044C\u043D\u043E\u0439 \u0431\u0438\u0431\u043B\u0438\u043E\u0442\u0435\u043A\u043E\u0439."
     },
     setup_end: {
-      en: "That\u2019s all for now, to configure your bleh installation in the future head to {a}the settings{/a} in your menu!",
-      de: "Das war\u2019s f\xFCrs Erste. Um deine bleh-Installation in Zukunft zu konfigurieren, gehe zu {a}den Einstellungen{/a} in deinem Men\xFC!",
-      es: "\xA1Eso es todo por ahora, para modificar tu instalaci\xF3n de bleh en el futuro, ve a {a}la configuraci\xF3n{/a} en tu men\xFA!",
-      it: "\xC8 tutto per ora, per configurare la tua installazione di bleh in futuro vai alle {a}impostazioni{a} dal tuo menu!",
-      pt: "Por enquanto isso \xE9 tudo, para configurar sua instala\xE7\xE3o do bleh futuramente, v\xE1 at\xE9 {a}nas configura\xE7\xF5es{/a} no seu menu!",
-      sv: "Det var allt just nu, f\xF6r att konfigurera din bleh-installation i framtiden g\xE5 in p\xE5 {a}inst\xE4llningarna{/a} i menyn!",
-      ru: "\u041D\u0430 \u044D\u0442\u043E\u043C \u043F\u043E\u043A\u0430 \u0432\u0441\u0435, \u0447\u0442\u043E\u0431\u044B \u043D\u0430\u0441\u0442\u0440\u043E\u0438\u0442\u044C \u0432\u0430\u0448\u0443 \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043A\u0443 bleh \u0432 \u0431\u0443\u0434\u0443\u0449\u0435\u043C, \u043F\u0435\u0440\u0435\u0439\u0434\u0438\u0442\u0435 \u0432 {a}\u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438{/a} \u0432 \u0432\u0430\u0448\u0435\u043C \u043C\u0435\u043D\u044E!"
+      en: "That\u2019s all for now, to configure your {b} installation in the future head to {a}the settings{/a} in your menu!",
+      de: "Das war\u2019s f\xFCrs Erste. Um deine {b}-Installation in Zukunft zu konfigurieren, gehe zu {a}den Einstellungen{/a} in deinem Men\xFC!",
+      es: "\xA1Eso es todo por ahora, para modificar tu instalaci\xF3n de {b} en el futuro, ve a {a}la configuraci\xF3n{/a} en tu men\xFA!",
+      it: "\xC8 tutto per ora, per configurare la tua installazione di {b} in futuro vai alle {a}impostazioni{a} dal tuo menu!",
+      pt: "Por enquanto isso \xE9 tudo, para configurar sua instala\xE7\xE3o do {b} futuramente, v\xE1 at\xE9 {a}nas configura\xE7\xF5es{/a} no seu menu!",
+      sv: "Det var allt just nu, f\xF6r att konfigurera din {b}-installation i framtiden g\xE5 in p\xE5 {a}inst\xE4llningarna{/a} i menyn!",
+      ru: "\u041D\u0430 \u044D\u0442\u043E\u043C \u043F\u043E\u043A\u0430 \u0432\u0441\u0435, \u0447\u0442\u043E\u0431\u044B \u043D\u0430\u0441\u0442\u0440\u043E\u0438\u0442\u044C \u0432\u0430\u0448\u0443 \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043A\u0443 {b} \u0432 \u0431\u0443\u0434\u0443\u0449\u0435\u043C, \u043F\u0435\u0440\u0435\u0439\u0434\u0438\u0442\u0435 \u0432 {a}\u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438{/a} \u0432 \u0432\u0430\u0448\u0435\u043C \u043C\u0435\u043D\u044E!"
     },
     seasonal_particles: {
       name: {
@@ -64434,7 +66425,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       name: {
         en: "Force re-download styles",
         de: "Erneutes Herunterladen von Stylesheets erzwingen",
-        es: "Forzar redescarga de los estilos",
+        es: "Forzar redescarga de estilos",
         it: "Forza il re-download degli stili",
         pt: "For\xE7ar o re-download dos estilos",
         sv: "Tvinga omladdning av stiler",
@@ -64673,7 +66664,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "There was a network error",
       de: "Netzwerkfehler",
       es: "Hubo un error de red",
-      it: "C'\xE8 stato un errore di rete",
+      it: "C\u2019\xE8 stato un errore di rete",
       pt: "Ocorreu um erro de rede",
       sv: "Ett n\xE4tverksfel har intr\xE4ffat",
       ru: "\u041F\u0440\u043E\u0438\u0437\u043E\u0448\u043B\u0430 \u043E\u0448\u0438\u0431\u043A\u0430 \u0441\u0435\u0442\u0438"
@@ -64720,6 +66711,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     display_name_styles: {
       name: {
         en: "Show display name styles",
+        de: "Zeige Anzeigenamen-Stile",
         es: "Mostrar estilos de nombre a mostrar",
         it: "Mostra gli stili del nome visualizzato",
         sv: "Se visningsnamnsstiler",
@@ -64728,8 +66720,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       },
       body: {
         en: "Sponsors can choose a custom font and shadow style for their profile name",
+        de: "Sponsoren k\xF6nnen eine benutzerdefinierte Schriftart und einen Schattenstil f\xFCr ihren Profilnamen w\xE4hlen",
         es: "Los patrocinadores pueden elegir una fuente y estilo de sombra personalizados para su nombre de perfil",
-        it: "Gli sponsor possono scegliere un font e uno stile d'ombra personalizzato per il loro nome profilo",
+        it: "Gli sponsor possono scegliere un font e uno stile d\u2019ombra personalizzato per il loro nome profilo",
         sv: "Sponsorer kan v\xE4lja valfri typsnitt och skugga f\xF6r deras profilnamn",
         ru: "\u0421\u043F\u043E\u043D\u0441\u043E\u0440\u044B \u043C\u043E\u0433\u0443\u0442 \u0432\u044B\u0431\u0438\u0440\u0430\u0442\u044C \u0441\u043E\u0431\u0441\u0442\u0432\u0435\u043D\u043D\u044B\u0439 \u0448\u0440\u0438\u0444\u0442 \u0438 \u0441\u0442\u0438\u043B\u044C \u0442\u0435\u043D\u0438 \u0434\u043B\u044F \u0438\u043C\u0435\u043D\u0438 \u0432 \u0441\u0432\u043E\u0435\u043C \u043F\u0440\u043E\u0444\u0438\u043B\u0435",
         pt: "Patrocinadores podem escolher uma fonte personalizada e estilo de sombra para o nome do perfil deles"
@@ -64813,6 +66806,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     no_title: {
       en: "No title",
+      de: "Kein Titel",
       es: "Sin t\xEDtulo",
       it: "Senza titolo",
       sv: "Ingen titel",
@@ -64830,11 +66824,18 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     no_description: {
       en: "No description",
+      de: "Keine Beschreibung",
       es: "Sin descripci\xF3n",
       it: "Nessuna descrizione",
       sv: "Ingen beskrivning",
       ru: "\u0411\u0435\u0437 \u043E\u043F\u0438\u0441\u0430\u043D\u0438\u044F",
       pt: "Sem descri\xE7\xE3o"
+    },
+    image: {
+      en: "Image"
+    },
+    attach_image: {
+      en: "Attach image"
     },
     change_avatar: {
       en: "Change avatar",
@@ -64858,19 +66859,10 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Use your scroll wheel to zoom in and out, click and drag to move the image.",
       de: "Verwende dein Mausrad, um rein- und rauszuzoomen. Klicke und ziehe, um das Bild zu verschieben.",
       es: "Usa la rueda del rat\xF3n para acercar o alejar, haz clic y arrastra para mover la imagen.",
-      it: "Usa la rotella del mouse per ingrandire o rimpicciolire, trascina e rilascia per muovere l'immagine.",
+      it: "Usa la rotella del mouse per ingrandire o rimpicciolire, trascina e rilascia per muovere l\u2019immagine.",
       pt: "Use a scroll do seu mouse para dar zoom in e zoom out, clicar e arrastar para mover a imagem.",
       sv: "Anv\xE4nd ditt scrollhjul f\xF6r att zooma in och ut, klicka och dra f\xF6r att flytta p\xE5 bilden.",
       ru: "\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0439\u0442\u0435 \u043A\u043E\u043B\u0435\u0441\u043E \u043F\u0440\u043E\u043A\u0440\u0443\u0442\u043A\u0438 \u0434\u043B\u044F \u043F\u0440\u0438\u0431\u043B\u0438\u0436\u0435\u043D\u0438\u044F \u0438 \u043E\u0442\u0434\u0430\u043B\u0435\u043D\u0438\u044F, \u043D\u0430\u0436\u043C\u0438\u0442\u0435 \u0438 \u043F\u0435\u0440\u0435\u0442\u0430\u0449\u0438\u0442\u0435, \u0447\u0442\u043E\u0431\u044B \u043F\u0435\u0440\u0435\u043C\u0435\u0441\u0442\u0438\u0442\u044C \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435."
-    },
-    edit_profile_note: {
-      en: "Edit profile note",
-      de: "Profilnotiz bearbeiten",
-      es: "Editar anotaci\xF3n de perfil",
-      it: "Modifica nota del profilo",
-      pt: "Editar recado de perfil",
-      sv: "\xC4ndra profilanteckning",
-      ru: "\u0420\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u0437\u0430\u043C\u0435\u0442\u043A\u0443 \u043F\u0440\u043E\u0444\u0438\u043B\u044F"
     },
     update_to_version: {
       en: "Update to {v}",
@@ -64894,7 +66886,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     saved: {
       // saved/bookmarked photos
       en: "Saved",
-      de: "Gespeichert",
+      de: "Markiert",
       es: "Guardado",
       it: "Salvate",
       pt: "Salvo",
@@ -64903,6 +66895,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     remove_save: {
       en: "Remove save",
+      de: "Markierung entfernen",
       es: "Remover guardado",
       it: "Rimuovi salvataggio",
       sv: "Ta bort bokm\xE4rkning",
@@ -64911,17 +66904,27 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     no_images_saved: {
       en: "No photos saved",
-      de: "Keine Bilder gespeichert",
+      de: "Keine Bilder markiert",
       es: "No hay fotos guardadas",
       it: "Nessuna immagine salvata",
       pt: "Nenhuma foto salva",
       sv: "Inga foton sparade",
       ru: "\u041D\u0435\u0442 \u0441\u043E\u0445\u0440\u0430\u043D\u0435\u043D\u043D\u044B\u0445 \u0444\u043E\u0442\u043E\u0433\u0440\u0430\u0444\u0438\u0439"
     },
+    view_saved: {
+      en: "View all saved photos",
+      de: "Alle gespeicherten Fotos ansehen",
+      es: "Ver todas las fotos guardadas",
+      it: "Visualizza tutte le foto salvate",
+      sv: "Visa alla sparade foton",
+      ru: "\u041F\u043E\u0441\u043C\u043E\u0442\u0440\u0435\u0442\u044C \u0432\u0441\u0435 \u0441\u043E\u0445\u0440\u0430\u043D\u0435\u043D\u043D\u044B\u0435 \u0444\u043E\u0442\u043E\u0433\u0440\u0430\u0444\u0438\u0438",
+      pt: "Veja todas as fotos salvas",
+      pl: "Poka\u017C wszystkie zapisane zdj\u0119cia"
+    },
     going: {
       // going as in attending an event
       //
-      // last.fm official spanish translation uses plural version of word when there's more than one person going -soleil
+      // Last.fm official spanish translation uses plural version of word when there's more than one person going -soleil
       en: "Going",
       de: "Zugesagt",
       es: "Ir\xE1n",
@@ -64974,7 +66977,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Requires extension \u2018{v}\u2019",
       de: "Ben\xF6tigt die Erweiterung \u201E{v}\u201C",
       es: "Requiere la extensi\xF3n \u2018{v}\u2019",
-      it: "Richiede l'estensione \u2018{v}\u2019",
+      it: "Richiede l\u2019estensione \u2018{v}\u2019",
       pt: "Requer extens\xE3o \u2018{v}\u2019",
       sv: "Beh\xF6ver till\xE4gget \u2018{v}\u2019",
       ru: "\u0422\u0440\u0435\u0431\u0443\u0435\u0442\u0441\u044F \u0440\u0430\u0441\u0448\u0438\u0440\u0435\u043D\u0438\u0435 \xAB{v}\xBB"
@@ -64998,6 +67001,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Incompat\xEDvel com as configura\xE7\xF5es atuais"
     },
     bulk_edit_extension: {
+      // yes the extension
       en: "Last.fm Bulk Edit",
       de: "Last.fm-Massenbearbeitung",
       es: "Edici\xF3n en masa de Last.fm",
@@ -65067,7 +67071,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Keep within the range",
       de: "Bleibe innerhalb des Zeichenlimits",
       es: "Mantente dentro del rango",
-      it: "Mantieniti all'interno dell'intervallo",
+      it: "Mantieniti all\u2019interno dell\u2019intervallo",
       pt: "Manter dentro do intervalo",
       sv: "H\xE5ll dig inom gr\xE4nsen",
       ru: "\u041E\u0441\u0442\u0430\u0432\u0430\u0439\u0442\u0435\u0441\u044C \u0432 \u043F\u0440\u0435\u0434\u0435\u043B\u0430\u0445 \u0434\u0438\u0430\u043F\u0430\u0437\u043E\u043D\u0430"
@@ -65110,6 +67114,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       ru: "\u0412\u0430\u0448\u0438 \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438 \u043D\u0435\u0434\u0435\u0439\u0441\u0442\u0432\u0438\u0442\u0435\u043B\u044C\u043D\u044B"
     },
     top_type: {
+      // top artists, top albums, top tracks
       en: "Top {type}",
       de: "Top-{type}",
       es: "Top {type}",
@@ -65128,6 +67133,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       ru: "\u0421\u043A\u0430\u0447\u0430\u0442\u044C"
     },
     downloaded: {
+      // the filename is displayed below this text
       en: "Downloaded",
       de: "Heruntergeladen",
       es: "Descargado",
@@ -65165,6 +67171,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     waiting_for_images: {
       en: "Waiting for images",
+      de: "Warte auf Bilder",
       es: "Esperando im\xE1genes",
       it: "In attesa delle immagini",
       pt: "Aguardando imagens",
@@ -65243,13 +67250,14 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Similar to the look of other collage solutions",
         de: "\xC4hnlicher Stil wie andere Collagenl\xF6sungen",
         es: "Similar al estilo visual de otros editores de collage",
-        it: "Simile all'aspetto di altre soluzioni per collage",
+        it: "Simile all\u2019aspetto di altre soluzioni per collage",
         sv: "Mer lik till hur andra collagegenererare g\xF6r det",
         ru: "\u041F\u043E\u0445\u043E\u0436\u0435 \u043D\u0430 \u0432\u043D\u0435\u0448\u043D\u0438\u0439 \u0432\u0438\u0434 \u0434\u0440\u0443\u0433\u0438\u0445 \u0440\u0435\u0448\u0435\u043D\u0438\u0439 \u0434\u043B\u044F \u043A\u043E\u043B\u043B\u0430\u0436\u0435\u0439",
         pt: "Semelhante \xE0 apar\xEAncia de outras solu\xE7\xF5es de colagem"
       }
     },
     organising_plays: {
+      // plays as in listens as in scrobbles
       en: "Organising plays",
       de: "Plays werden organisiert",
       es: "Organizando reproducciones",
@@ -65314,6 +67322,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     made_with_love: {
       // lowercase in design
+      // h: replaced with a heart symbol, so treat it like the word 'love'
+      // u: me (kate)
+      // c, /c: just leave be - translate the contributors text inside
       en: "made with {h} by {u} and {c}contributors{/c}",
       de: "mit {h} gemacht von {u} und {c}mitwirkenden{/c}",
       es: "hecho con {h} por {u} y {c}contribuidores{/c}",
@@ -65321,6 +67332,12 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "feito com {h} por {u} e {c}contribuidores{/c}",
       sv: "skapad med {h} av {u} och {c}bidragsgivare{/c}",
       ru: "\u0441\u0434\u0435\u043B\u0430\u043D\u043E \u0441 {h} \u043E\u0442 {u} \u0438 {c}\u0443\u0447\u0430\u0441\u0442\u043D\u0438\u043A\u043E\u0432{/c}"
+    },
+    supported_by: {
+      // lowercase in design
+      // ignore the curly brackets, only translate the '{c} wonderful people' thing
+      // c: replaced with a number of sponsors
+      en: "{s}{c} sponsoring{/s} \u2661"
     },
     love_lower: {
       // replaces the {h} in the above sentence
@@ -65336,7 +67353,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       // lowercase in design
       en: "{l} translation by {u}",
       de: "Deutsche \xDCbersetzung von {u}",
-      es: "{l} traducci\xF3n por {u}",
+      es: "Traducci\xF3n al {l} por {u}",
       it: "traduzione in {l} di {u}",
       sv: "Svensk \xF6vers\xE4ttning av {u}",
       ru: "\u041F\u0435\u0440\u0435\u0432\u043E\u0434 {l} \u043E\u0442 {u}",
@@ -65515,7 +67532,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Select an option",
       de: "W\xE4hle eine Option",
       es: "Selecciona una opci\xF3n",
-      it: "Seleziona un'opzione",
+      it: "Seleziona un\u2019opzione",
       pt: "Selecione uma op\xE7\xE3o",
       sv: "V\xE4lj ett alternativ",
       ru: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u0432\u0430\u0440\u0438\u0430\u043D\u0442"
@@ -65528,6 +67545,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Nada corresponde \xE0 sua pesquisa",
       sv: "Inga resultat matchar din s\xF6kning",
       ru: "\u041D\u0438\u0447\u0435\u0433\u043E \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D\u043E \u043F\u043E \u0432\u0430\u0448\u0435\u043C\u0443 \u0437\u0430\u043F\u0440\u043E\u0441\u0443"
+    },
+    create_collage: {
+      en: "Create collage"
     },
     create_a_collage: {
       en: "Create a collage of your choosing",
@@ -65602,7 +67622,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       ru: "\u041D\u0430\u0439\u0434\u0438\u0442\u0435 \u0432\u0430\u0448\u0438 \u0437\u0430\u043A\u043B\u0430\u0434\u043A\u0438 \u043D\u0430 \u0414\u043E\u043C\u0430\u0448\u043D\u0435\u0439 \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u0435 \u0438\u043B\u0438 {link}"
     },
     go_there_now_lower: {
-      // in sentence above
+      // replaces {link} above
       en: "go there now",
       de: "schaue sie dir direkt an",
       es: "ve ah\xED ahora",
@@ -65716,6 +67736,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       de: "Glas",
       es: "Vidrio",
       it: "Vetro",
+      ja: "\u30AC\u30E9\u30B9",
       sv: "Glas",
       ru: "\u0421\u0442\u0435\u043A\u043B\u043E",
       pt: "Vidro"
@@ -65820,7 +67841,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Update available to install",
       de: "Ein Update ist bereit zur Installation",
       es: "Actualizaci\xF3n disponible para instalar",
-      it: "Aggiornamento disponibile per l'installazione",
+      it: "Aggiornamento disponibile per l\u2019installazione",
       pt: "Atualiza\xE7\xE3o dispon\xEDvel para instalar",
       sv: "Ny uppdatering finns tillg\xE4nglig",
       ru: "\u0414\u043E\u0441\u0442\u0443\u043F\u043D\u043E \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u0435 \u0434\u043B\u044F \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043A\u0438"
@@ -65994,7 +68015,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Use current time",
       de: "Aktuelle Zeit verwenden",
       es: "Usar hora actual",
-      it: "Usa l'ora attuale",
+      it: "Usa l\u2019ora attuale",
       sv: "Anv\xE4nd nuvarande tid",
       ru: "\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u044C \u0442\u0435\u043A\u0443\u0449\u0435\u0435 \u0432\u0440\u0435\u043C\u044F",
       pt: "Usar hora atual"
@@ -66021,7 +68042,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Requires API access in Settings",
       de: "Erfordert API-Zugang in den Einstellungen",
       es: "Requiere acceso a la API en Configuraci\xF3n",
-      it: "Richiede l'accesso API nelle impostazioni",
+      it: "Richiede l\u2019accesso API nelle impostazioni",
       sv: "Beh\xF6ver API-\xE5tkomst i inst\xE4llningar",
       ru: "\u0422\u0440\u0435\u0431\u0443\u0435\u0442\u0441\u044F \u0434\u043E\u0441\u0442\u0443\u043F \u043A API \u0432 \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0430\u0445",
       pt: "Requer acesso \xE0 API nas Configura\xE7\xF5es"
@@ -66078,7 +68099,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Decreases the intensity of animations, hover effects, and other moving parts",
         de: "Verringert die Intensit\xE4t von Animationen, Hover-Effekten und anderen beweglichen Komponenten",
         es: "Reduce la intensidad de las animaciones, efectos al pasar el cursor, y otras partes m\xF3viles",
-        it: "Riduce l'intensit\xE0 delle animazioni, degli effetti al passare del mouse e di altre parti in movimento",
+        it: "Riduce l\u2019intensit\xE0 delle animazioni, degli effetti al passare del mouse e di altre parti in movimento",
         sv: "Minskar intensiteten av animationer, effekter vid hovring, och andra r\xF6rande delar",
         ru: "\u0423\u043C\u0435\u043D\u044C\u0448\u0430\u0435\u0442 \u0438\u043D\u0442\u0435\u043D\u0441\u0438\u0432\u043D\u043E\u0441\u0442\u044C \u0430\u043D\u0438\u043C\u0430\u0446\u0438\u0439, \u044D\u0444\u0444\u0435\u043A\u0442\u043E\u0432 \u043F\u0440\u0438 \u043D\u0430\u0432\u0435\u0434\u0435\u043D\u0438\u0438 \u0438 \u0434\u0440\u0443\u0433\u0438\u0445 \u0434\u0432\u0438\u0436\u0443\u0449\u0438\u0445\u0441\u044F \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u043E\u0432",
         pt: "Diminui a intensidade das anima\xE7\xF5es, efeitos de hover e outras partes m\xF3veis"
@@ -66103,6 +68124,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Ver banners em"
     },
     own_profile: {
+      // sub-option for view_backgrounds_on
       en: "Own profile",
       de: "Meinem Profil",
       es: "Perfil personal",
@@ -66112,6 +68134,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Seu pr\xF3prio perfil"
     },
     other_profiles: {
+      // sub-option for view_backgrounds_on
       en: "Other profiles",
       de: "Anderen Profilen",
       es: "Otros perfiles",
@@ -66125,7 +68148,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Prefer avatar image for profiles without a banner",
         de: "Bevorzuge Profilbild f\xFCr Profile ohne Banner",
         es: "Preferir imagen del avatar para perfiles sin un banner",
-        it: "Preferire l'immagine dell'immagine profilo per profili senza un banner",
+        it: "Preferire l\u2019immagine dell\u2019immagine profilo per profili senza un banner",
         sv: "F\xF6redra profilbild f\xF6r profiler utan en banner",
         ru: "\u041F\u0440\u0435\u0434\u043F\u043E\u0447\u0438\u0442\u0430\u0442\u044C \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435 \u0430\u0432\u0430\u0442\u0430\u0440\u0430 \u0434\u043B\u044F \u043F\u0440\u043E\u0444\u0438\u043B\u0435\u0439 \u0431\u0435\u0437 \u0431\u0430\u043D\u043D\u0435\u0440\u0430",
         pt: "Preferir imagem do avatar para perfis sem banner"
@@ -66134,7 +68157,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "All artist-based banner images will be replaced by the user\u2019s avatar",
         de: "Alle k\xFCnstlerbasierten Bannerbilder werden durch das Profilbild des Benutzers ersetzt",
         es: "Todos los banners con im\xE1genes de artistas ser\xE1n reemplazados por el avatar del usuario",
-        it: "Tutte le immagini banner basate sugli artisti saranno sostituite dall'immagine profilo dell'utente",
+        it: "Tutte le immagini banner basate sugli artisti saranno sostituite dall\u2019immagine profilo dell\u2019utente",
         sv: "Alla artistbaserade bannerbilder blir ers\xE4tt av anv\xE4ndarens profilbild",
         ru: "\u0412\u0441\u0435 \u0431\u0430\u043D\u043D\u0435\u0440\u044B \u043D\u0430 \u043E\u0441\u043D\u043E\u0432\u0435 \u0430\u0440\u0442\u0438\u0441\u0442\u043E\u0432 \u0431\u0443\u0434\u0443\u0442 \u0437\u0430\u043C\u0435\u043D\u0435\u043D\u044B \u0430\u0432\u0430\u0442\u0430\u0440\u043E\u043C \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F",
         pt: "Todas as imagens de banner baseadas em artistas ser\xE3o substitu\xEDdas pelo avatar do usu\xE1rio"
@@ -66151,17 +68174,12 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         pt: "Banner do perfil"
       },
       body: {
-        en: "Add your own custom banner image to your profile with [banner=url] in your bio",
-        de: "F\xFCge deinem Profil ein eigenes Bannerbild hinzu, indem du deiner Biografie [banner=url] hinzuf\xFCgst",
-        es: "A\xF1ade una imagen de banner personalizada a tu perfil con [banner=url] en tu biograf\xEDa",
-        it: "Aggiungi il tuo banner personalizzato al tuo profilo con [banner=url] nella tua biografia",
-        sv: "L\xE4g till en egen banner till din profil genom att s\xE4tta [banner=url] i din biografi",
-        ru: "\u0414\u043E\u0431\u0430\u0432\u044C\u0442\u0435 \u0441\u043E\u0431\u0441\u0442\u0432\u0435\u043D\u043D\u043E\u0435 \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435 \u0431\u0430\u043D\u043D\u0435\u0440\u0430 \u0432 \u0441\u0432\u043E\u0439 \u043F\u0440\u043E\u0444\u0438\u043B\u044C \u0441 \u043F\u043E\u043C\u043E\u0449\u044C\u044E [banner=url] \u0432 \u0432\u0430\u0448\u0435\u0439 \u0431\u0438\u043E\u0433\u0440\u0430\u0444\u0438\u0438",
-        pt: "Adicione seu pr\xF3prio banner personalizado ao seu perfil com [banner=url] em sua biografia"
+        en: "Showcase an image of your choosing across your profile"
       }
     },
     profile_accent: {
       name: {
+        // profile colour
         en: "Profile accent",
         de: "Profilakzent",
         es: "Acento de perfil",
@@ -66184,7 +68202,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Changed your accent, don\u2019t forget to save!",
         de: "Du hast deinen Akzent ge\xE4ndert, vergiss\u2019 nicht zu speichern!",
         es: "Acento cambiado, \xA1no te olvides de guardar!",
-        it: "Hai cambiato l'accento, non dimenticarti di salvare!",
+        it: "Hai cambiato l\u2019accento, non dimenticarti di salvare!",
         sv: "\xC4ndrade din accentf\xE4rg, gl\xF6m inte att spara!",
         ru: "\u0412\u044B \u0438\u0437\u043C\u0435\u043D\u0438\u043B\u0438 \u0430\u043A\u0446\u0435\u043D\u0442, \u043D\u0435 \u0437\u0430\u0431\u0443\u0434\u044C\u0442\u0435 \u0441\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C!",
         pt: "Toque de cor alterado, n\xE3o se esque\xE7a de salvar!"
@@ -66193,6 +68211,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     profile_font: {
       name: {
         en: "Profile name font",
+        de: "Schriftart des Profilnamens",
         es: "Fuente del nombre de perfil",
         it: "Font del nome del profilo",
         ru: "\u0428\u0440\u0438\u0444\u0442 \u0438\u043C\u0435\u043D\u0438 \u043F\u0440\u043E\u0444\u0438\u043B\u044F",
@@ -66200,6 +68219,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       },
       body: {
         en: "Customise the font family used for your username, only visible on your profile",
+        de: "Passe die Schriftart an, die f\xFCr deinen Benutzernamen verwendet wird. Nur sichtbar auf deinem Profil",
         es: "Customiza la familia tipogr\xE1fica usada en tu nombre de usuario, solo visible en tu perfil",
         it: "Personalizza la famiglia di font utilizzata per il tuo nome utente, visibile solo sul tuo profilo",
         ru: "\u041D\u0430\u0441\u0442\u0440\u043E\u0439\u0442\u0435 \u0441\u0435\u043C\u0435\u0439\u0441\u0442\u0432\u043E \u0448\u0440\u0438\u0444\u0442\u043E\u0432, \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0435\u043C\u043E\u0435 \u0434\u043B\u044F \u0432\u0430\u0448\u0435\u0433\u043E \u0438\u043C\u0435\u043D\u0438 \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F; \u043E\u043D\u043E \u0431\u0443\u0434\u0435\u0442 \u0432\u0438\u0434\u043D\u043E \u0442\u043E\u043B\u044C\u043A\u043E \u0432 \u0432\u0430\u0448\u0435\u043C \u043F\u0440\u043E\u0444\u0438\u043B\u0435",
@@ -66207,6 +68227,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       },
       reminder: {
         en: "Changed your name font, don\u2019t forget to save!",
+        de: "Du hast die Schriftart deines Namens ge\xE4ndert, vergiss\u2019 nicht zu speichern!",
         es: "Fuente del nombre cambiada, \xA1no te olvides de guardar!",
         it: "Hai cambiato il font del tuo nome, non dimenticarti di salvare!",
         ru: "\u0428\u0440\u0438\u0444\u0442 \u0438\u043C\u0435\u043D\u0438 \u0438\u0437\u043C\u0435\u043D\u0435\u043D, \u043D\u0435 \u0437\u0430\u0431\u0443\u0434\u044C\u0442\u0435 \u0441\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C!",
@@ -66408,6 +68429,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     minis: {
       // 'Minis' is the word i eventually settled on for
       // the games and tools integrated into bleh
+      // its a really weird name i know but i thought of it as like
+      // mini games and mini tools, so theyre minis :3
       en: "Minis",
       de: "Minis",
       es: "Minis",
@@ -66415,6 +68438,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       sv: "Mini",
       ru: "\u041C\u0438\u043D\u0438",
       pt: "Minis"
+    },
+    explore_minis: {
+      en: "Explore minis"
     },
     minis_description: {
       en: "Play mini-games, puzzles, and interact with tools all powered by your listening history",
@@ -66448,7 +68474,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Guess the album from its pixelated artwork and clues",
         de: "Errate das Album anhand des verpixelten Albumcovers und Hinweisen",
         es: "Averigua el \xE1lbum usando su c\xE1ratula pixelada y pistas",
-        it: "Indovina l'album dalla sua copertina pixellata e indizi",
+        it: "Indovina l\u2019album dalla sua copertina pixellata e indizi",
         sv: "Gissa albumet fr\xE5n sin pixellerad konst och ledtr\xE5dar",
         ru: "\u0423\u0433\u0430\u0434\u0430\u0439\u0442\u0435 \u0430\u043B\u044C\u0431\u043E\u043C \u043F\u043E \u0435\u0433\u043E \u043F\u0438\u043A\u0441\u0435\u043B\u044C\u043D\u043E\u043C\u0443 \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u044E \u0438 \u043F\u043E\u0434\u0441\u043A\u0430\u0437\u043A\u0430\u043C",
         pt: "Adivinhe o \xE1lbum a partir de sua arte pixelada e pistas"
@@ -66498,7 +68524,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Generate a personalised image based on your listening history and options",
       de: "Erstelle ein personalisiertes Bild basierend auf deinem H\xF6rverlauf und deinen Einstellungen",
       es: "Genera una imagen personalizada basada en tu historial de reproducciones y opciones",
-      it: "Genera un'immagine personalizzata basata sulla tua cronologia di riproduzione e opzioni",
+      it: "Genera un\u2019immagine personalizzata basata sulla tua cronologia di riproduzione e opzioni",
       sv: "Skapa en personlig bild baserad p\xE5 din lyssningshistoria och inst\xE4llningar",
       ru: "\u0421\u043E\u0437\u0434\u0430\u0442\u044C \u043F\u0435\u0440\u0441\u043E\u043D\u0430\u043B\u0438\u0437\u0438\u0440\u043E\u0432\u0430\u043D\u043D\u043E\u0435 \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435 \u043D\u0430 \u043E\u0441\u043D\u043E\u0432\u0435 \u0432\u0430\u0448\u0435\u0439 \u0438\u0441\u0442\u043E\u0440\u0438\u0438 \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u0439 \u0438 \u043D\u0430\u0441\u0442\u0440\u043E\u0435\u043A",
       pt: "Gere uma imagem personalizada com base no seu hist\xF3rico de reprodu\xE7\xE3o e op\xE7\xF5es"
@@ -66572,6 +68598,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     lyrics: {
       // lyrics
       en: "Lyrics",
+      de: "Songtext",
       es: "Letra",
       it: "Testo",
       pt: "Letra",
@@ -66580,6 +68607,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       name: {
         // the game
         en: "Lyrics",
+        de: "Songtexte",
         es: "Letra",
         it: "Testo",
         pt: "Letra",
@@ -66627,7 +68655,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Guess the album name with the pixelated cover, jumbled title, and hints!",
       de: "Errate den Albumtitel mit verpixeltem Cover, durcheinandergew\xFCrfeltem Titel und Hinweisen!",
       es: "\xA1Averigua el nombre del \xE1lbum usando la c\xE1ratula pixelada, t\xEDtulo desordenado, y pistas!",
-      it: "Indovina il nome dell'album con la cover pixellata, il titolo distorto, e indizi!",
+      it: "Indovina il nome dell\u2019album con la cover pixellata, il titolo distorto, e indizi!",
       pt: "Adivinhe o nome do \xE1lbum com a capa pixelada, t\xEDtulo embaralhado e dicas!",
       sv: "Gissa albumtiteln med pixellerad konst, omr\xF6rd titel, och ledtr\xE5dar!",
       ru: "\u0423\u0433\u0430\u0434\u0430\u0439\u0442\u0435 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u0430\u043B\u044C\u0431\u043E\u043C\u0430 \u043F\u043E \u043F\u0438\u043A\u0441\u0435\u043B\u044C\u043D\u043E\u043C\u0443 \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u044E, \u043F\u0435\u0440\u0435\u043F\u0443\u0442\u0430\u043D\u043D\u043E\u043C\u0443 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u044E \u0438 \u043F\u043E\u0434\u0441\u043A\u0430\u0437\u043A\u0430\u043C!"
@@ -66698,7 +68726,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Album was released on {v}",
         de: "Das Album wurde am {v} ver\xF6ffentlicht",
         es: "El {\xE1lbum} fue lanzado en {v}",
-        it: "L'album \xE8 stato rilasciato il {v}",
+        it: "L\u2019album \xE8 stato rilasciato il {v}",
         pt: "O \xE1lbum foi lan\xE7ado em {v}",
         sv: "Albumet sl\xE4pptes {v}",
         ru: "\u0410\u043B\u044C\u0431\u043E\u043C \u0431\u044B\u043B \u0432\u044B\u043F\u0443\u0449\u0435\u043D {v}"
@@ -66707,7 +68735,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "The artist is tagged with {v}",
         de: "Der/die K\xFCnstler:in ist mit {v} getaggt",
         es: "El artista tiene {v} como tags",
-        it: "L'artista \xE8 taggato come {v}",
+        it: "L\u2019artista \xE8 taggato come {v}",
         pt: "O artista foi marcado com {v}",
         sv: "Artisten har taggats som {v}",
         ru: "\u0418\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C \u043E\u0442\u043C\u0435\u0447\u0435\u043D \u0442\u0435\u0433\u043E\u043C {v}"
@@ -66716,7 +68744,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "The artist was born {v}",
         de: "Der/die K\xFCnstler:in wurde {v} geboren",
         es: "El artista naci\xF3 en {v}",
-        it: "L'artista \xE8 nato il {v}",
+        it: "L\u2019artista \xE8 nato il {v}",
         pt: "O artista nasceu em {v}",
         sv: "Artisten var f\xF6dd {v}",
         ru: "\u0418\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C \u0440\u043E\u0434\u0438\u043B\u0441\u044F {v}"
@@ -66726,7 +68754,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "The album was {name} by {artist}",
       de: "Das Album war {name} von {artist}",
       es: "El \xE1lbum era {name} por {artist}",
-      it: "Il nome dell'album era {name} di {artist}",
+      it: "Il nome dell\u2019album era {name} di {artist}",
       pt: "O \xE1lbum era {name} de {artist}",
       sv: "Albumet var {name} av {artist}",
       ru: "\u0410\u043B\u044C\u0431\u043E\u043C\u043E\u043C \u0431\u044B\u043B {name} \u043E\u0442 {artist}"
@@ -66759,7 +68787,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       ru: "\u0412\u0437\u0430\u0438\u043C\u043D\u044B\u0435 \u043F\u043E\u0434\u043F\u0438\u0441\u043A\u0438"
     },
     missing_component: {
-      // cases when last.fm simply doesn't provide a tasteometer or other things
+      // cases when Last.fm simply doesn't provide a tasteometer or other things
       en: "Last.fm failed to load this component",
       de: "Last.fm konnte diese Komponente nicht laden",
       es: "Last.fm fall\xF3 al cargar este componente",
@@ -66769,7 +68797,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     last_scrobbled_replace: {
       // dont translate this, its replaced
-      // literally word for word from the last.fm text
+      // literally word for word from the Last.fm text
       // for use in code
       en: "{u} last scrobbled\u2026",
       de: "{u} scrobbelte zuletzt\u2026",
@@ -66788,7 +68816,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       // notifications can include text with valuable info such as:
       // and 7 others replied to your shout on
       // this is searching for the word "replied"
-      // dont re-translate this, as its copied from last.fm
+      // >> dont re-translate this, as its copied from last.fm
       en: "replied",
       de: "hat geantwortet",
       fr: "a r\xE9pondu",
@@ -66848,6 +68876,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       ru: "\u0412\u0430\u0448\u0430 \u043E\u0434\u0435\u0440\u0436\u0438\u043C\u043E\u0441\u0442\u044C \u0438\u0441\u0442\u0435\u043A\u043B\u0430"
     },
     listening_report_available: {
+      // m: month name
       en: "View your {m} listening report",
       de: "Schaue deinen H\xF6rbericht an",
       es: "Ver tu informe de reproducci\xF3n de {m}",
@@ -66944,7 +68973,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "Decide which branding source to use for the header",
         de: "W\xE4hle aus, welches Branding f\xFCr die Kopfzeile verwendet werden soll",
         es: "Elige cu\xE1l logo usar para el encabezado",
-        it: "Decidi quale sorgente di branding utilizzare per l'intestazione",
+        it: "Decidi quale sorgente di branding utilizzare per l\u2019intestazione",
         pt: "Escolha qual logo usar para o cabe\xE7alho",
         sv: "V\xE4lj vilken sorts branding f\xF6r att anv\xE4nda p\xE5 sidhuvudet",
         ru: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435, \u043A\u0430\u043A\u043E\u0439 \u0438\u0441\u0442\u043E\u0447\u043D\u0438\u043A \u0431\u0440\u0435\u043D\u0434\u0438\u043D\u0433\u0430 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u044C \u0434\u043B\u044F \u0437\u0430\u0433\u043E\u043B\u043E\u0432\u043A\u0430"
@@ -66983,7 +69012,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Control animation of GIFs",
       de: "Steuere die Animation von GIFs",
       es: "Controlar animaci\xF3n de GIFs",
-      it: "Controlla l'animazione di GIF",
+      it: "Controlla l\u2019animazione di GIF",
       pt: "Controlar anima\xE7\xE3o de GIFs",
       sv: "Kontrollera GIF-animation",
       ru: "\u0423\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435 \u0430\u043D\u0438\u043C\u0430\u0446\u0438\u0435\u0439 GIF"
@@ -67094,7 +69123,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "This link can open an application on your device",
         de: "Dieser Link kann eine Anwendung auf deinem Ger\xE4t \xF6ffnen",
         es: "Este link puede abrir una aplicaci\xF3n en tu dispositivo",
-        it: "Questo link pu\xF2 aprire un'applicazione sul tuo dispositivo",
+        it: "Questo link pu\xF2 aprire un\u2019applicazione sul tuo dispositivo",
         pt: "Este link pode abrir um aplicativo no seu dispositivo",
         sv: "L\xE4nken kan \xF6ppna en applikation p\xE5 din enhet",
         ru: "\u042D\u0442\u0430 \u0441\u0441\u044B\u043B\u043A\u0430 \u043C\u043E\u0436\u0435\u0442 \u043E\u0442\u043A\u0440\u044B\u0442\u044C \u043F\u0440\u0438\u043B\u043E\u0436\u0435\u043D\u0438\u0435 \u043D\u0430 \u0432\u0430\u0448\u0435\u043C \u0443\u0441\u0442\u0440\u043E\u0439\u0441\u0442\u0432\u0435"
@@ -67140,7 +69169,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       },
       warning: {
         en: "This setting should be turned off to ensure scrobbles are correctly stored for each artist.",
-        de: "Diese Einstellung sollte deaktiviert werden, um sicherzustellen, dass Scrobbles f\xFCr jeden K\xFCnstler korrekt gespeichert werden.",
+        de: "Diese Einstellung sollte deaktiviert werden, um sicherzustellen, dass Scrobbles f\xFCr jeden K\xFCnstler/jede K\xFCnstlerin korrekt gespeichert werden.",
         pt: "Esta configura\xE7\xE3o deve ser desativada para garantir que os scrobbles sejam armazenados corretamente para cada artista.",
         it: "Questa impostazione dovrebbe essere disattivata per assicurarsi che gli scrobbling siano correttamente memorizzati per ciascun artista.",
         es: "Esta opci\xF3n deber\xEDa estar desactivada para garantizar que los scrobblings se almacenen correctamente para cada artista.",
@@ -67149,6 +69178,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       },
       false: {
         en: "Do not apply corrections (recommended)",
+        de: "Keine Korrekturen anwenden (empfohlen)",
         es: "No aplicar correcciones (recomendado)",
         it: "Non applicare correzioni (consigliato)",
         pt: "N\xE3o aplicar corre\xE7\xF5es (recomendado)",
@@ -67157,6 +69187,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       },
       true: {
         en: "Auto correct my scrobbles (legacy)",
+        de: "Meine Scrobbles automatisch korrigieren (veraltet)",
         es: "Corregir autom\xE1ticamente mis scrobblings (cl\xE1sico)",
         it: "Correggi automaticamente i miei scrobbling (obsoleto)",
         sv: "Autokorrigera mina skrobblingar (gammal)",
@@ -67167,6 +69198,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     preferred_affiliate: {
       name: {
         en: "Preferred playback source",
+        de: "Bevorzugte Wiedergabequelle",
         es: "Fuente de reproducci\xF3n preferida",
         it: "Sorgente di riproduzione preferita",
         pt: "Fonte de reprodu\xE7\xE3o preferida",
@@ -67175,8 +69207,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       },
       body: {
         en: "Choose which service to use when interacting with playables across the site",
+        de: "W\xE4hle aus, welchen Dienst du beim Interagieren mit abspielbaren Inhalten auf der gesamten Seite verwenden m\xF6chtest",
         es: "Elige cu\xE1l servicio usar al interactuar con elementos reproducibles a trav\xE9s del sitio",
-        it: "Seleziona quale servizio utilizzare all'interazione con elementi riproducibili in tutto il sito",
+        it: "Seleziona quale servizio utilizzare all\u2019interazione con elementi riproducibili in tutto il sito",
         sv: "V\xE4lj vilken service att anv\xE4nda n\xE4r du spelar upp l\xE5tar",
         ru: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435, \u043A\u0430\u043A\u043E\u0439 \u0441\u0435\u0440\u0432\u0438\u0441 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u044C \u043F\u0440\u0438 \u0432\u0437\u0430\u0438\u043C\u043E\u0434\u0435\u0439\u0441\u0442\u0432\u0438\u0438 \u0441 \u0432\u043E\u0441\u043F\u0440\u043E\u0438\u0437\u0432\u043E\u0434\u0438\u043C\u044B\u043C \u043A\u043E\u043D\u0442\u0435\u043D\u0442\u043E\u043C \u043D\u0430 \u0441\u0430\u0439\u0442\u0435",
         pt: "Escolha qual servi\xE7o usar ao interagir com elementos reproduz\xEDveis em todo o site"
@@ -67224,7 +69257,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "You need to be logged in",
       de: "Du musst eingeloggt sein",
       es: "Necesitas iniciar sesi\xF3n",
-      it: "Devi aver effettuato l'accesso",
+      it: "Devi aver effettuato l\u2019accesso",
       pt: "Voc\xEA precisa estar logado",
       sv: "Du l\xE4r vara inloggad",
       ru: "\u0412\u0430\u043C \u043D\u0435\u043E\u0431\u0445\u043E\u0434\u0438\u043C\u043E \u0432\u043E\u0439\u0442\u0438 \u0432 \u0441\u0438\u0441\u0442\u0435\u043C\u0443"
@@ -67240,6 +69273,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     debug: {
       en: "Debug",
+      de: "Debug",
       es: "Debug",
       it: "Debug",
       pt: "Debug",
@@ -67278,7 +69312,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "A redesigned album and track view sourcing data from MusicBrainz. May be released in the future or scrapped. Please send feedback from usage.",
         de: "Eine neu gestaltete Album- und Titelseite, die Daten von MusicBrainz bezieht. Kann in Zukunft ver\xF6ffentlicht oder verworfen werden. Bitte sende Feedback basierend auf deiner Nutzung.",
         es: "Un estilo redise\xF1ado de \xE1lbumes y temas usando datos provenientes de MusicBrainz. Puede ser lanzado en un futuro o ser descartado. Por favor env\xEDa feedback de uso.",
-        it: "Una vista per album e brani ridisegnata che attinge ai dati di MusicBrainz. Potrebbe essere rilasciata in futuro o scartata. Per favore inviate del feedback dall'utilizzo.",
+        it: "Una vista per album e brani ridisegnata che attinge ai dati di MusicBrainz. Potrebbe essere rilasciata in futuro o scartata. Per favore inviate del feedback dall\u2019utilizzo.",
         pt: "Um estilo redesenhado de \xE1lbuns e faixas que utiliza dados do MusicBrainz. Pode ser lan\xE7ado no futuro ou descartado. Por favor, envie feedback sobre o uso.",
         sv: "Omdesignade album och l\xE5tsidor med data fr\xE5n MusicBrainz. Kan sl\xE4ppas eller skr\xE4pas i framtiden. Skicka g\xE4rna feedback fr\xE5n anv\xE4ndning.",
         ru: "\u041E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u043D\u044B\u0439 \u0432\u0438\u0434 \u0430\u043B\u044C\u0431\u043E\u043C\u043E\u0432 \u0438 \u0442\u0440\u0435\u043A\u043E\u0432, \u043F\u043E\u043B\u0443\u0447\u0430\u044E\u0449\u0438\u0439 \u0434\u0430\u043D\u043D\u044B\u0435 \u0438\u0437 MusicBrainz. \u041C\u043E\u0436\u0435\u0442 \u0431\u044B\u0442\u044C \u0432\u044B\u043F\u0443\u0449\u0435\u043D \u0432 \u0431\u0443\u0434\u0443\u0449\u0435\u043C \u0438\u043B\u0438 \u043E\u0442\u043C\u0435\u043D\u0435\u043D. \u041F\u043E\u0436\u0430\u043B\u0443\u0439\u0441\u0442\u0430, \u043E\u0442\u043F\u0440\u0430\u0432\u043B\u044F\u0439\u0442\u0435 \u043E\u0442\u0437\u044B\u0432\u044B \u043E\u0431 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u043D\u0438\u0438."
@@ -67340,6 +69374,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     romanise_require: {
       en: "Romanisation requires either lotus corrections or smart song tags be enabled",
+      de: "Die Romanisierung erfordert, dass entweder lotus-Korrekturen oder intelligente Song-Tags aktiviert sind",
       es: "La romanizaci\xF3n requiere que las correcciones de lotus o los tags inteligentes de temas est\xE9n activos",
       it: "La romanizzazione richiede che le correzioni lotus o i tag intelligenti per i brani siano attivati",
       pt: "A romaniza\xE7\xE3o requer que as corre\xE7\xF5es lotus ou as tags inteligentes de m\xFAsicas estejam ativas",
@@ -67387,6 +69422,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     amount_translated: {
       // number of strings translated
       en: "{c} translated",
+      de: "{c} \xFCbersetzt",
       es: "{c} traducidos",
       it: "{c} tradotte",
       pt: "{c} traduzidos",
@@ -67396,6 +69432,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     missing_translated: {
       // number of strings missing
       en: "{c} missing",
+      de: "{c} fehlen",
       es: "{c} faltantes",
       it: "{c} mancanti",
       pt: "{c} ausentes",
@@ -67405,6 +69442,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     simulate_scroll: {
       name: {
         en: "Simulate horizontal scrolling",
+        de: "Horizontales Scrollen simulieren",
         es: "Simular scrolling horizontal",
         it: "Simula scorrimento orizzontale",
         pt: "Simular rolagem horizontal",
@@ -67413,6 +69451,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       },
       body: {
         en: "Only recommended for desktop devices",
+        de: "Nur f\xFCr Desktop-Ger\xE4te empfohlen",
         es: "Recomendado solo en dispositivos de escritorio",
         it: "Raccomandato solo per dispositivi desktop",
         pt: "Recomendado apenas para computadores de mesa",
@@ -67422,6 +69461,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     credits: {
       en: "Credits",
+      de: "Credits",
       es: "Cr\xE9ditos",
       it: "Crediti",
       pt: "Cr\xE9ditos",
@@ -67430,6 +69470,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     view_credits: {
       en: "View credits",
+      de: "Credits ansehen",
       es: "Ver cr\xE9ditos",
       it: "Visualizza crediti",
       pt: "Ver cr\xE9ditos",
@@ -67438,6 +69479,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     credits_for_value: {
       en: "Credits for {v}",
+      de: "Credits f\xFCr {v}",
       es: "Cr\xE9ditos para {v}",
       it: "Crediti per {v}",
       pt: "Cr\xE9ditos para {v}",
@@ -67445,9 +69487,11 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       ru: "\u041A\u0440\u0435\u0434\u0438\u0442\u044B \u0434\u043B\u044F {v}"
     },
     branch: {
+      // as in git branches
       name: {
         en: "Choose branch",
-        es: "Elige la rama",
+        de: "Branch w\xE4hlen",
+        es: "Elegir rama",
         it: "Seleziona branch",
         // we are talking about git branches, leaving it as is to avoid creating confusion for people who will want to change this ~cuto
         pt: "Escolha a branch",
@@ -67456,6 +69500,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       },
       body: {
         en: "Default release branch is \u2018uwu\u2019, do not change unless you know what you\u2019re doing",
+        de: "Der Standard-Release-Branch ist \u201Euwu\u201C, \xE4ndere ihn nicht, wenn du nicht wei\xDFt, was du tust",
         es: "La rama de lanzamiento actual es \u2018uwu\u2019, no la cambies a menos de que sepas lo que haces",
         it: "Il branch release predefinito \xE8 \u2018uwu\u2019, non cambiare questo valore se non si sa cosa si sta facendo",
         sv: "Standardbranshen \xE4r \u2018uwu\u2019, \xE4ndra inte om du inte vet vad du g\xF6r",
@@ -67465,6 +69510,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     log_in: {
       en: "Log in",
+      de: "Einloggen",
       es: "Iniciar sesi\xF3n",
       it: "Accedi",
       pt: "Iniciar Sess\xE3o",
@@ -67473,6 +69519,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     sign_up: {
       en: "Sign up",
+      de: "Registrieren",
       es: "Registrarse",
       it: "Registrati",
       pt: "Registrar-se",
@@ -67482,6 +69529,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     plot: {
       name: {
         en: "Plot",
+        de: "Diagramm",
         es: "Plot",
         it: "Grafico",
         sv: "Rita",
@@ -67490,6 +69538,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       },
       body: {
         en: "Create graphs from user libraries",
+        de: "Erstelle Diagramme aus Benutzerbibliotheken",
         es: "Crea gr\xE1ficos con base en las colecciones de usuario",
         it: "Crea grafici dalle librerie degli utenti",
         pt: "Crie gr\xE1ficos a partir de bibliotecas de usu\xE1rios",
@@ -67499,26 +69548,41 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     your_recent_30_days: {
       en: "Your recent 30 days",
+      de: "Deine letzten 30 Tage",
       es: "Tus \xFAltimos 30 d\xEDas",
       it: "I tuoi ultimi 30 giorni",
-      pt: "Seus \xFAltimos 30 dias"
+      pt: "Seus \xFAltimos 30 dias",
+      ru: "\u0412\u0430\u0448\u0438 \u043F\u043E\u0441\u043B\u0435\u0434\u043D\u0438\u0435 30 \u0434\u043D\u0435\u0439"
     },
     value_this_month: {
       // number of scrobbles
       en: "{v} this month",
+      de: "{v} diesen Monat",
       es: "{v} este mes",
       it: "{v} questo mese",
-      pt: "{v} este m\xEAs"
+      pt: "{v} este m\xEAs",
+      ru: "{v} \u044D\u0442\u043E\u0442 \u043C\u0435\u0441\u044F\u0446"
+    },
+    value_less: {
+      // 50 less than last month
+      en: "{v} less"
+    },
+    value_more: {
+      // 50 more than last month
+      en: "{v} more"
     },
     menu_replacement: {
       name: {
         en: "Replace native browser right-click menus",
+        de: "Native Rechtsklick-Men\xFCs des Browsers ersetzen",
         es: "Reemplazar men\xFAs de clic derecho nativos del navegador",
         it: "Sostituisci i menu contestuali nativi del browser",
-        pt: "Substituir menus de clique direito nativos do navegador"
+        pt: "Substituir menus de clique direito nativos do navegador",
+        ru: "\u0417\u0430\u043C\u0435\u043D\u0438\u0442\u044C \u0432\u0441\u0442\u0440\u043E\u0435\u043D\u043D\u044B\u0435 \u043C\u0435\u043D\u044E \u043F\u0440\u0430\u0432\u043E\u0439 \u043A\u043D\u043E\u043F\u043A\u0438 \u043C\u044B\u0448\u0438 \u0431\u0440\u0430\u0443\u0437\u0435\u0440\u0430"
       },
       body: {
         en: "Provide bleh context-specific actions when right-clicking",
+        de: "bleh-kontextspezifische Aktionen beim Rechtsklick anzeigen",
         es: "Proporciona acciones espec\xEDficas de bleh al hacer clic derecho",
         it: "Fornisci azioni specifiche a bleh nei menu contestuali",
         pt: "Fornecer a\xE7\xF5es espec\xEDficas do bleh ao clicar com o bot\xE3o direito"
@@ -67526,58 +69590,270 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     you_have_new_badges: {
       en: "You have new badges!",
+      de: "Du hast neue Abzeichen!",
       es: "\xA1Tienes nuevos emblemas!",
       it: "Hai dei nuovi distintivi!",
-      pt: "Voc\xEA tem novas ins\xEDgnias!"
+      pt: "Voc\xEA tem novas ins\xEDgnias!",
+      ru: "\u0423 \u0432\u0430\u0441 \u0435\u0441\u0442\u044C \u043D\u043E\u0432\u044B\u0435 \u0437\u043D\u0430\u0447\u043A\u0438!"
     },
     translator: {
       name: {
         en: "Show translator tools",
-        pt: "Mostrar ferramentas de tradu\xE7\xE3o"
+        de: "\xDCbersetzer-Werkzeuge anzeigen",
+        es: "Mostrar herramientas de traducci\xF3n",
+        pt: "Mostrar ferramentas de tradu\xE7\xE3o",
+        ru: "\u041F\u043E\u043A\u0430\u0437\u0430\u0442\u044C \u0438\u043D\u0441\u0442\u0440\u0443\u043C\u0435\u043D\u0442\u044B \u043F\u0435\u0440\u0435\u0432\u043E\u0434\u0447\u0438\u043A\u0430"
       },
       body: {
         en: "View expanded details on all languages for use when translating",
+        de: "Erweiterte Details zu allen Sprachen ansehen, die bei der \xDCbersetzung verwendet werden k\xF6nnen",
+        es: "Ve detalles ampliados de todos los idiomas para usar al traducir",
         pt: "Veja detalhes expandidos sobre todos os idiomas para uso ao traduzir"
       }
     },
     translate: {
       en: "Translate",
-      pt: "Traduza"
+      de: "\xDCbersetzen",
+      es: "Traducir",
+      pt: "Traduza",
+      ru: "\u041F\u0435\u0440\u0435\u0432\u0435\u0441\u0442\u0438"
     },
     translation_key: {
       // a key such as 'you_have_new_badges' above
       en: "Translation key",
+      de: "\xDCbersetzungsschl\xFCssel",
+      es: "Clave de traducci\xF3n",
       pt: "Chave de tradu\xE7\xE3o"
     },
     original: {
       en: "Original",
-      pt: "Original"
+      de: "Original",
+      es: "Original",
+      pt: "Original",
+      ru: "\u041E\u0440\u0438\u0433\u0438\u043D\u0430\u043B"
     },
     user_is_listening_to: {
       // (claire) is listening to
       // (song name)
       en: "{u} is listening to",
-      pt: "{u} est\xE1 ouvindo"
+      de: "{u} h\xF6rt gerade",
+      es: "{u} est\xE1 escuchando",
+      pt: "{u} est\xE1 ouvindo",
+      ru: "{u} \u0441\u043B\u0443\u0448\u0430\u0435\u0442"
     },
     user_listened_time: {
       // (claire) listened (5 hours ago)
       // (song name)
       en: "{u} listened {time}",
-      pt: "{u} ouviu h\xE1 {time}"
+      de: "{u} h\xF6rte {time}",
+      es: "{u} escuch\xF3 {time} a",
+      pt: "{u} ouviu h\xE1 {time}",
+      ru: "{u} \u043F\u043E\u0441\u043B\u0443\u0448\u0430\u043B {time}"
     },
     now_notice: {
       name: {
-        en: "This page is not properly supported in bleh, but.."
+        en: "This page is not properly supported in bleh, but..",
+        es: "Esta p\xE1gina no es compatible con bleh, pero...",
+        de: "Diese Seite wird in bleh nicht richtig unterst\xFCtzt, aber...",
+        ru: "\u042D\u0442\u043E \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u0430 \u043D\u0435 \u043F\u043E\u0434\u0434\u0435\u0440\u0436\u0438\u0432\u0430\u0435\u0442\u0441\u044F \u0432 bleh, \u043D\u043E..."
       },
       body: {
-        en: "If you are a Last.fm Pro subscriber, you can view your current active track in your profile menu at all times"
+        en: "If you are a Last.fm Pro subscriber, you can view your current active track in your profile menu at all times",
+        de: "Wenn du ein Last.fm Pro-Abonnent bist, kannst du deinen aktuell aktiven Titel jederzeit in deinem Profilmen\xFC ansehen",
+        es: "Si eres un suscriptor de Last.fm Pro, puedes ver tu tema activo actual en el men\xFA de tu perfil en cualquier momento",
+        ru: "\u0415\u0441\u043B\u0438 \u0432\u044B \u044F\u0432\u043B\u044F\u0435\u0442\u0435\u0441\u044C \u043F\u043E\u0434\u043F\u0438\u0441\u0447\u0438\u043A\u043E\u043C Last.fm Pro, \u0432\u044B \u043C\u043E\u0436\u0435\u0442\u0435 \u0432 \u043B\u044E\u0431\u043E\u0435 \u0432\u0440\u0435\u043C\u044F \u043F\u0440\u043E\u0441\u043C\u0430\u0442\u0440\u0438\u0432\u0430\u0442\u044C \u0442\u0435\u043A\u0443\u0449\u0438\u0439 \u0430\u043A\u0442\u0438\u0432\u043D\u044B\u0439 \u0442\u0440\u0435\u043A \u0432 \u043C\u0435\u043D\u044E \u0441\u0432\u043E\u0435\u0433\u043E \u043F\u0440\u043E\u0444\u0438\u043B\u044F"
       }
+    },
+    current_status: {
+      en: "Current status"
+    },
+    status_cafe_too_many_requests: {
+      en: "paused loading temporarily @w@"
+    },
+    loading_status: {
+      en: "loading status"
+    },
+    status_cafe: {
+      // status.cafe
+      body: {
+        en: "Embed your current status onto your profile, can be moved around freely by editing your about me"
+      }
+    },
+    date_at_time: {
+      // date is automatically translated with luxon
+      en: "{d} at {t}"
+    },
+    you_sent_to: {
+      // messages in your inbox
+      en: "You sent to"
+    },
+    sent_to_you: {
+      // messages in your inbox
+      en: "Sent to you"
+    },
+    shoutbox_placeholder: {
+      // u: username
+      // v: album/artist/track
+      en: "{u}, share your thoughts on {v}..."
+    },
+    shoutbox_placeholder_user: {
+      en: "{u}, leave a shout for {v}..."
+    },
+    mention_user: {
+      en: "Mention user"
+    },
+    quote: {
+      en: "Quote"
+    },
+    code_block: {
+      // block that surrounds code text:
+      // `this is code`
+      en: "Code block"
+    },
+    numbered_list: {
+      en: "Numbered list"
+    },
+    left_align: {
+      en: "Left align"
+    },
+    center_align: {
+      en: "Center align"
+    },
+    right_align: {
+      en: "Right align"
+    },
+    header: {
+      en: "Header"
+    },
+    bold: {
+      en: "Bold"
+    },
+    italic: {
+      en: "Italic"
+    },
+    strikethrough: {
+      en: "Strikethrough"
+    },
+    underline: {
+      en: "Underline"
+    },
+    located: {
+      en: "Located"
+    },
+    date: {
+      en: "Date"
+    },
+    contact: {
+      en: "Contact"
+    },
+    show_on_map: {
+      en: "Show on map"
+    },
+    added_by: {
+      en: "Added by {u}"
+    },
+    notice: {
+      en: "Notice"
+    },
+    send_valentine: {
+      // valentines easter egg
+      // sends a message to the user
+      en: "Let them know"
+    },
+    valentine: {
+      // valentines easter egg
+      // is used as the subject line of the message
+      // u: username
+      en: "to the one i love most, {u} \u2661"
+    },
+    view_details: {
+      en: "View details"
+    },
+    valentine_info: {
+      en: "You\u2019re seeing this as {u} is on your bleh close friends list, you have a high compatibility, and it\u2019s Valentines Day!"
+    },
+    valentine_message_footer: {
+      en: "This message\u2019s subject line indicates it was sent via bleh and {u} picked you as their valentine \u2661"
+    },
+    got_it: {
+      // used when dismissing a popup
+      en: "Got it"
+    },
+    tip: {
+      en: "Tip"
+    },
+    popup_navigation_menu: {
+      title: {
+        en: "This is your navigator"
+      },
+      body: {
+        en: "You can choose which actions to show here by right-clicking for more options"
+      }
+    },
+    popup_inbox: {
+      title: {
+        en: "Find your inbox combined"
+      },
+      body: {
+        en: "Your notifications and messages have been organised into this handy button"
+      }
+    },
+    popup_close_friends: {
+      title: {
+        en: "Add your close friends list"
+      },
+      body: {
+        en: "View their scrobbles on any artist, album, or track at any time"
+      }
+    },
+    popup_profile_name_style: {
+      title: {
+        en: "Choose a custom font, style, and profile colour"
+      },
+      body: {
+        en: "These are sponsor-exclusive perks as a thank you for supporting bleh"
+      }
+    },
+    popup_markdown: {
+      title: {
+        en: "Embrace styling with Markdown"
+      },
+      body: {
+        en: "Format any text, embed images and links, mention users, and much more based on the scenario"
+      }
+    },
+    popup_search: {
+      title: {
+        en: "Hover up here to search music"
+      },
+      body: {
+        en: "Searching has never been easier to access, plus it hides away when you\u2019re scrolled up"
+      }
+    },
+    send_a_reply: {
+      en: "Send a reply"
+    },
+    are_these_results_accurate: {
+      en: "Are these results accurate?"
+    },
+    report_incorrect: {
+      en: "Mark incorrect"
+    },
+    what_did_you_expect: {
+      en: "What did you expect?"
+    },
+    oracle_sources_tip_track: {
+      en: "Which albums did you expect to be linked to, e.g. Dawn FM instead of After Hours"
+    },
+    oracle_sources_tip_album: {
+      en: "Which copy of the album did you expect to see? Provide links and some details as to why"
     }
   };
+  var translation_fallback = "NO_TRANSLATION_FOUND";
   function tl2(key, replacements = {}) {
     if (!key) {
       log("your key is undefined", "trans");
-      return "NO_TRANSLATION_FOUND";
+      return translation_fallback;
     }
     let translation = key[lang] || key.en;
     for (const [placeholder, value] of Object.entries(replacements)) {
@@ -67659,7 +69935,11 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     }
     lang = document.documentElement.getAttribute("lang");
     lang_browser = navigator.language || navigator.userLanguage;
-    Settings.defaultLocale = lang;
+    if (["en"].includes(lang)) {
+      Settings.defaultLocale = lang_browser;
+    } else {
+      Settings.defaultLocale = lang;
+    }
   }
   function get_trans_key(key) {
     return key.split(".").reduce((trans2, key2) => trans2[key2], trans);
@@ -68234,7 +70514,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     noise: {
       css: "noise-opacity",
-      default: 0.5,
+      default: 0.35,
       type: "range",
       min: 0,
       max: 1,
@@ -68388,16 +70668,46 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       body: trans.redirect_messages.body
     },
     list_view: {
-      default: 1,
-      type: "radio"
+      default: "cards",
+      type: "tabs",
+      values: {
+        cards: {
+          name: trans.cards
+        },
+        grid: {
+          name: trans.grid
+        },
+        list: {
+          name: trans.list
+        }
+      }
     },
     chart_view: {
       default: "line",
-      type: "radio"
+      type: "tabs",
+      values: {
+        line: {
+          name: trans.line
+        },
+        pie: {
+          name: trans.pie
+        },
+        bar: {
+          name: trans.bar
+        }
+      }
     },
     chart_bar_axis: {
       default: "horizontal",
-      type: "radio"
+      type: "tabs",
+      values: {
+        horizontal: {
+          name: trans.horizontal
+        },
+        vertical: {
+          name: trans.vertical
+        }
+      }
     },
     chart_insights_view: {
       default: "pie",
@@ -68830,9 +71140,10 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     friends: {
       default: [],
       type: "list",
-      title: trans.friends,
+      title: trans.close_friends,
       body: trans.friends_setting,
-      warn_if_matches_auth: true
+      warn_if_matches_auth: true,
+      beta: true
     },
     starred_friend: {
       default: "",
@@ -68848,8 +71159,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       default: false,
       title: trans.oracle_beta.name,
       body: trans.oracle_beta.body,
-      beta: true,
-      new_release: true
+      beta: true
     },
     romanise_jp: {
       default: false,
@@ -68900,7 +71210,6 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       type: "select",
       title: trans.tracklist_source.name,
       body: trans.tracklist_source.body,
-      new_release: true,
       incompatible: { oracle_beta: false }
     },
     menu_replacement: {
@@ -68914,12 +71223,15 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       default: false,
       title: trans.translator.name,
       body: trans.translator.body,
-      new_release: true,
       require_reload: true
     },
     translator_view: {
       default: "en",
-      type: "tabs"
+      type: "select"
+    },
+    popups_seen: {
+      default: [],
+      type: "list"
     }
   };
 
@@ -68985,8 +71297,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
   // src/build/build.json
   var build_default = {
     brand: "bleh",
-    build: "2025.1127",
-    sku: "layla",
+    build: "2026.0131",
+    sku: "shunguang",
     bio: "bleh!!! ^-^",
     author: "katelyn",
     url: "https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.js",
@@ -69344,6 +71656,21 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         default: false,
         name: "Non-pro editing",
         date: "2025-11-10"
+      },
+      sandrone: {
+        default: true,
+        name: "Enable a february exclusive feature",
+        date: "2026-01-29"
+      },
+      can_block_in_menu: {
+        default: false,
+        name: "Can block user from menu",
+        date: "2026-01-30"
+      },
+      can_report_in_menu: {
+        default: false,
+        name: "Can report user from menu",
+        date: "2026-01-30"
       }
     }
   };
@@ -78884,13 +81211,13 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
   function drawBorder(ctx, element, offset3, spacing, circular) {
     const { fullCircles, startAngle, circumference, options } = element;
     const { borderWidth, borderJoinStyle, borderDash, borderDashOffset, borderRadius } = options;
-    const inner = options.borderAlign === "inner";
+    const inner2 = options.borderAlign === "inner";
     if (!borderWidth) {
       return;
     }
     ctx.setLineDash(borderDash || []);
     ctx.lineDashOffset = borderDashOffset;
-    if (inner) {
+    if (inner2) {
       ctx.lineWidth = borderWidth * 2;
       ctx.lineJoin = borderJoinStyle || "round";
     } else {
@@ -78907,7 +81234,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         endAngle = startAngle + (circumference % TAU || TAU);
       }
     }
-    if (inner) {
+    if (inner2) {
       clipArc(ctx, element, endAngle);
     }
     if (options.selfJoin && endAngle - startAngle >= PI && borderRadius === 0 && borderJoinStyle !== "miter") {
@@ -79539,19 +81866,19 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     }
     draw(ctx) {
       const { inflateAmount, options: { borderColor, backgroundColor } } = this;
-      const { inner, outer: outer2 } = boundingRects(this);
+      const { inner: inner2, outer: outer2 } = boundingRects(this);
       const addRectPath = hasRadius(outer2.radius) ? addRoundedRectPath : addNormalRectPath;
       ctx.save();
-      if (outer2.w !== inner.w || outer2.h !== inner.h) {
+      if (outer2.w !== inner2.w || outer2.h !== inner2.h) {
         ctx.beginPath();
-        addRectPath(ctx, inflateRect(outer2, inflateAmount, inner));
+        addRectPath(ctx, inflateRect(outer2, inflateAmount, inner2));
         ctx.clip();
-        addRectPath(ctx, inflateRect(inner, -inflateAmount, outer2));
+        addRectPath(ctx, inflateRect(inner2, -inflateAmount, outer2));
         ctx.fillStyle = borderColor;
         ctx.fill("evenodd");
       }
       ctx.beginPath();
-      addRectPath(ctx, inflateRect(inner, inflateAmount));
+      addRectPath(ctx, inflateRect(inner2, inflateAmount));
       ctx.fillStyle = backgroundColor;
       ctx.fill();
       ctx.restore();
@@ -81333,18 +83660,18 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
   }
   function getTooltipSize(tooltip, options) {
     const ctx = tooltip.chart.ctx;
-    const { body: body2, footer, title } = tooltip;
+    const { body, footer, title } = tooltip;
     const { boxWidth, boxHeight } = options;
     const bodyFont = toFont(options.bodyFont);
     const titleFont = toFont(options.titleFont);
     const footerFont = toFont(options.footerFont);
     const titleLineCount = title.length;
     const footerLineCount = footer.length;
-    const bodyLineItemCount = body2.length;
+    const bodyLineItemCount = body.length;
     const padding = toPadding(options.padding);
     let height = padding.height;
     let width = 0;
-    let combinedBodyLength = body2.reduce((count, bodyItem) => count + bodyItem.before.length + bodyItem.lines.length + bodyItem.after.length, 0);
+    let combinedBodyLength = body.reduce((count, bodyItem) => count + bodyItem.before.length + bodyItem.lines.length + bodyItem.after.length, 0);
     combinedBodyLength += tooltip.beforeBody.length + tooltip.afterBody.length;
     if (titleLineCount) {
       height += titleLineCount * titleFont.lineHeight + (titleLineCount - 1) * options.titleSpacing + options.titleMarginBottom;
@@ -81366,7 +83693,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     ctx.font = bodyFont.string;
     each(tooltip.beforeBody.concat(tooltip.afterBody), maxLineWidth);
     widthPadding = options.displayColors ? boxWidth + 2 + options.boxPadding : 0;
-    each(body2, (bodyItem) => {
+    each(body, (bodyItem) => {
       each(bodyItem.before, maxLineWidth);
       each(bodyItem.lines, maxLineWidth);
       each(bodyItem.after, maxLineWidth);
@@ -81874,7 +84201,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       ctx.fillStyle = this.labelTextColors[i];
     }
     drawBody(pt, ctx, options) {
-      const { body: body2 } = this;
+      const { body } = this;
       const { bodySpacing, bodyAlign, displayColors, boxHeight, boxWidth, boxPadding } = options;
       const bodyFont = toFont(options.bodyFont);
       let bodyLineHeight = bodyFont.lineHeight;
@@ -81893,8 +84220,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       ctx.fillStyle = options.bodyColor;
       each(this.beforeBody, fillLineOfText);
       xLinePadding = displayColors && bodyAlignForCalculation !== "right" ? bodyAlign === "center" ? boxWidth / 2 + boxPadding : boxWidth + 2 + boxPadding : 0;
-      for (i = 0, ilen = body2.length; i < ilen; ++i) {
-        bodyItem = body2[i];
+      for (i = 0, ilen = body.length; i < ilen; ++i) {
+        bodyItem = body[i];
         textColor = this.labelTextColors[i];
         ctx.fillStyle = textColor;
         each(bodyItem.before, fillLineOfText);

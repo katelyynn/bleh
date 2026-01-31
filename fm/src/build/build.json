@@ -1,7 +1,7 @@
 {
     "brand": "bleh",
-    "build": "2025.1127",
-    "sku": "layla",
+    "build": "2026.0131",
+    "sku": "shunguang",
     "bio": "bleh!!! ^-^",
     "author": "katelyn",
     "url": "https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.js",
@@ -359,6 +359,21 @@
             "default": false,
             "name": "Non-pro editing",
             "date": "2025-11-10"
+        },
+        "sandrone": {
+            "default": true,
+            "name": "Enable a february exclusive feature",
+            "date": "2026-01-29"
+        },
+        "can_block_in_menu": {
+            "default": false,
+            "name": "Can block user from menu",
+            "date": "2026-01-30"
+        },
+        "can_report_in_menu": {
+            "default": false,
+            "name": "Can report user from menu",
+            "date": "2026-01-30"
         }
     }
 }

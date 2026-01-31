@@ -14,6 +14,7 @@ import { ff } from './sku';
 import { status } from './components/status';
 import { set_storage } from './build/tools';
 import { create_badge, process_badge } from './components/badge';
+import { notify } from './components/notify';
 
 export function sponsors(force = false, func = null) {
     if (!ff('sponsor')) return;
@@ -57,8 +58,8 @@ export function sponsors(force = false, func = null) {
     }
 }
 
-function sponsor_request(notify = false, func = null) {
-    log(`initiating request with notify ${notify}`, 'sponsor');
+function sponsor_request(should_notify = false, func = null) {
+    log(`initiating request with notify ${should_notify}`, 'sponsor');
 
     let button = document.body.querySelector('[onclick="_sponsor_check()"]');
     if (button) button.setAttribute('disabled', '');
@@ -82,37 +83,52 @@ function sponsor_request(notify = false, func = null) {
         }
 
         if (xhr.status == 200) {
-            if (sponsor_list.latest != 0.0 || (sponsor_list && parseFloat(JSON.parse(this.response).latest) >= parseFloat(sponsor_list.latest))) {
-                for (const member in sponsor_list) delete sponsor_list[member];
-                Object.assign(sponsor_list, JSON.parse(this.response));
+            try {
+                if (sponsor_list.latest != 0.0 || (sponsor_list && parseFloat(JSON.parse(this.response).latest) >= parseFloat(sponsor_list.latest))) {
+                    for (const member in sponsor_list) delete sponsor_list[member];
+                    Object.assign(sponsor_list, JSON.parse(this.response));
 
-                if (sponsor_list) {
-                    auth.sponsor = sponsor_list.sponsors.includes(auth.name);
-                    auth.sponsor_full = !sponsor_list.sponsors_one_time.includes(auth.name);
+                    if (sponsor_list) {
+                        auth.sponsor = sponsor_list.sponsors.includes(auth.name);
+                        auth.sponsor_full = !sponsor_list.sponsors_one_time.includes(auth.name);
 
-                    if (sponsor_list.badges?.[auth.name]) {
-                        const old_badges = JSON.parse(localStorage.getItem('kat_sponsor_cache')) || {};
+                        if (sponsor_list.badges?.[auth.name]) {
+                            const old_badges = JSON.parse(localStorage.getItem('kat_sponsor_cache')) || {};
 
-                        if (JSON.stringify(old_badges) != JSON.stringify(sponsor_list.badges[auth.name])) {
-                            console.info('sponsor request', old_badges, sponsor_list.badges[auth.name]);
-                            set_storage('kat_sponsor_cache', JSON.stringify(sponsor_list.badges[auth.name]));
-                            new_badges(sponsor_list.badges[auth.name]);
+                            if (JSON.stringify(old_badges) != JSON.stringify(sponsor_list.badges[auth.name])) {
+                                console.info('sponsor request', old_badges, sponsor_list.badges[auth.name]);
+                                set_storage('kat_sponsor_cache', JSON.stringify(sponsor_list.badges[auth.name]));
+                                new_badges(sponsor_list.badges[auth.name]);
+                            }
                         }
                     }
+
+                    if (should_notify)
+                        status({
+                            title: tl(trans.downloaded_value, { v: tl(trans.sponsor_details) })
+                        });
+
+                    // save to cache for next page load
+                    set_storage('kat_sponsors', this.response);
+                    if (func) func();
+
+                    api_expire.setHours(api_expire.getHours() + 4);
+                    log(`list cached until ${api_expire}`, 'sponsor');
                 }
+            } catch (e) {
+                log('parsing list failed', 'sponsor', 'error', { e });
+                notify({
+                    id: 'sponsor_failed',
+                    title: tl(trans.value_failed_to_load, { v: tl(trans.sponsor_details) }),
+                    body: e.message || e,
+                    type: 'error',
+                    persist: true
+                });
+                if (func) func(false);
 
-                if (notify)
-                    status({
-                        title: tl(trans.downloaded_value, { v: tl(trans.sponsor_details) })
-                    });
-
-                // save to cache for next page load
-                set_storage('kat_sponsors', this.response);
-                if (func) func();
+                api_expire.setHours(api_expire.getMinutes() + 30);
+                log(`list cached until ${api_expire}`, 'sponsor');
             }
-
-            api_expire.setHours(api_expire.getHours() + 4);
-            log(`list cached until ${api_expire}`, 'sponsor');
         }
 
         set_storage('kat_sponsors_expire', api_expire);

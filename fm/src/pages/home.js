@@ -21,6 +21,7 @@ import { redirect } from "../components/music.js";
 import { settings } from "../build/config.js";
 import { expand_avatar } from "../avatar.js";
 import tippy from "tippy.js";
+import { queue_popup } from "../components/popup.js";
 
 export async function bleh_home() {
     page.structure.container = document.body.querySelector('.page-content');
@@ -75,7 +76,7 @@ export async function bleh_home() {
                     <div class="avatar" onclick=${() => {
                         expand_avatar(auth.avatar.replace('/avatar42s/', '/ar0/'));
                     }}>
-                        <img src=${auth.avatar.replace('/avatar42s/', '/avatar170s/')} alt=${tl(trans.your_avatar)}>
+                        <img src=${auth.avatar.replace('/avatar42s/', '/avatar300s/')} alt=${tl(trans.your_avatar)}>
                     </div>
                 </div>
                 <div class="info-side has-main-info">
@@ -86,7 +87,7 @@ export async function bleh_home() {
                         <div class="title-container">
                             <div class="header-title-label-wrap">
                                 <h1 class="header-title">
-                                    <a class="profile-name" href="${root}user/${auth.name}" ref=${el => profile_name = el}>${cache.username ? cache.username : auth.name}</a>
+                                    <a class="profile-name" ref=${el => profile_name = el}>${cache.username ? cache.username : auth.name}</a>
                                 </h1>
                             </div>
                         </div>

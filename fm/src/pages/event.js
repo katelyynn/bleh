@@ -4,7 +4,8 @@
 // Licensed under GPLv3
 //
 
-import {patch_avatar} from "../avatar";
+import tippy from "tippy.js";
+import {patch_avatar, style_name_from_badge} from "../avatar";
 import {settings} from "../build/config";
 import {log} from "../build/log";
 import {auth, page, root} from "../build/page";
@@ -16,6 +17,7 @@ import {refresh_all} from "../config";
 import {register_background, update_page} from "../page";
 import {bleh_home} from './home';
 import {html, render} from "lighterhtml";
+import { DateTime } from 'luxon';
 
 export function bleh_events() {
     if (page.subpage == 'overview') {
@@ -62,27 +64,15 @@ export function bleh_events() {
     page.name = event_header.querySelector('.header-title').textContent.trim();
     page.sister = event_header.querySelector('.header-title').textContent.trim();
 
-
-    let event_description = event_header.querySelector('.header-title-secondary');
-    if (settings.corrections) {
-        let links = event_description.querySelectorAll('a');
-        links.forEach((link) => {
-            link.textContent = correct_artist(link.textContent);
-        });
-    }
-
     let redesigned_event_header = document.createElement('section');
     redesigned_event_header.classList.add('redesigned-header', 'redesigned-event-header', 'no-background');
     redesigned_event_header.innerHTML = (`
-        <div class="calendar-side">
-            <div class="calendar">
-                ${event_header.querySelector('.calendar-icon').innerHTML}
-            </div>
+        <div class="tag-side">
+            <div class="tag-icon event-icon"></div>
         </div>
         <div class="info-side">
             <div class="sub-text">${tl(trans.event)}</div>
             <h1>${page.name}</h1>
-            <p class="sub-info">${event_description.innerHTML}</p>
         </div>
     `);
 
@@ -93,7 +83,7 @@ export function bleh_events() {
         register_background(null);
 
     page.structure.container.insertBefore(redesigned_event_header, page.structure.container.firstElementChild);
-    document.body.querySelector('.header').classList.add('legacy-header');
+    event_header.classList.add('legacy-header');
 
 
     if (!is_subpage) {
@@ -120,7 +110,10 @@ export function bleh_events() {
         let side_actions = document.createElement('section');
         side_actions.classList.add('side-actions');
 
-        page.structure.side.appendChild(side_actions);
+        if (!page.mobile)
+            page.structure.side.appendChild(side_actions);
+        else
+            page.structure.main.appendChild(side_actions);
 
         let form = document.body.querySelector('.attendance-control');
         let buttons = form.querySelectorAll('button');
@@ -134,6 +127,108 @@ export function bleh_events() {
         let main_panel = page.structure.main.querySelector('.event-summary-with-poster');
         if (!main_panel)
             main_panel = page.structure.main.querySelector('.event-details');
+
+        if (main_panel.parentElement != page.structure.main) main_panel.parentElement.replaceWith(main_panel);
+
+        const date = main_panel.querySelector('[itemprop="startDate"]');
+        const details = main_panel.querySelectorAll('[itemprop="location"] > p');
+
+        let address;
+        let tel;
+        let web;
+        let maps;
+
+        details.forEach(detail => {
+            const type = detail.classList?.[0]?.replace('event-detail-', '') || '';
+
+            if (type == 'address') {
+                address = {
+                    head: detail.querySelector('[itemprop="name"]')?.textContent,
+                    street: detail.querySelector('[itemprop="streetAddress"]')?.textContent,
+                    locality: detail.querySelector('[itemprop="addressLocality"]')?.textContent,
+                    postal: detail.querySelector('[itemprop="postalCode"]')?.textContent,
+                    country: detail.querySelector('[itemprop="addressCountry"]')?.textContent
+                }
+            } else if (type == 'tel') {
+                tel = detail.querySelector('[itemprop="telephone"]').textContent;
+            } else if (type == 'web') {
+                web = detail.querySelector('a').href;
+            } else {
+                maps = detail.querySelector('a').href;
+            }
+        });
+
+        const added_by = main_panel.querySelector('.event-metadata a')?.textContent;
+
+        const new_panel = html.node`
+            <section class="events-panel">
+                <div class="metadata-and-wiki-row full-w">
+                    <div class="metadata-column">
+                        <div class="metadata-group primary">
+                            <dt class="catalogue-metadata-heading">${tl(trans.located)}</dt>
+                            <dd class="catalogue-metadata-description address">
+                                <strong>${address.head}</strong>
+                                <p>${address.street ? `${address.street}, ` : ''}${address.locality}</p>
+                                <p>${address.postal ? `${address.postal}, ` : ''}${address.country}</p>
+                            </dd>
+                        </div>
+                        <div class="metadata-group">
+                            <dt class="catalogue-metadata-heading">${tl(trans.date)}</dt>
+                            <dd class="catalogue-metadata-description address">
+                                ${() => {
+                                    const date_object = DateTime.fromISO(date.getAttribute('content'));
+
+                                    const values = date.querySelectorAll('strong');
+                                    let hour;
+                                    if (values.length > 1) {
+                                        hour = values[1];
+                                    }
+
+                                    const elem = html.node`
+                                        <strong>${date_object.toLocaleString(DateTime.DATE_FULL)}</strong>
+                                        ${hour ? html.node`<p>${hour.textContent}</p>` : ''}
+                                    `;
+
+                                    return elem;
+                                }}
+                            </dd>
+                        </div>
+                        ${tel ? html.node`
+                            <div class="metadata-group">
+                                <dt class="catalogue-metadata-heading">${tl(trans.contact)}</dt>
+                                <dd class="catalogue-metadata-description">${tel}</dd>
+                            </div>
+                        ` : ''}
+                    </div>
+                </div>
+                <div class="metadata-row">
+                    <div class="metadata-group">
+                        <div class="sub-text music-small-header">${tl(trans.find_on)}</div>
+                        <div class="music-links">
+                            ${web ? html.node`
+                                <a class="resource-external-link resource-external-link--homepage music-link" href=${web} target="_blank">
+                                    ${tl(trans.website)}
+                                </a>
+                            ` : ''}
+                            ${maps ? html.node`
+                                <a class="music-link" data-host="maps.google.com" data-host-unknown="true" href=${maps} target="_blank" style="--favi: url(https://icons.duckduckgo.com/ip3/maps.google.com.ico)">
+                                    ${tl(trans.show_on_map)}
+                                </a>
+                            ` : ''}
+                        </div>
+                    </div>
+                </div>
+            </section>
+        `;
+        main_panel.replaceWith(new_panel);
+
+        if (added_by) {
+            page.structure.side.appendChild(html.node`
+                <section>
+                    <p class="card-tip">${{ html: tl(trans.added_by, { u: `<a class="mention" href="${root}user/${added_by}">@${added_by}</a>` }) }}</p>
+                </section>
+            `);
+        }
 
 
 
@@ -176,9 +271,12 @@ export function bleh_events() {
         let users = page.structure.main.querySelectorAll('.attendee-summary-user-inner-wrap');
         users.forEach((user) => {
             let avatar = user.querySelector('.attendee-summary-user-avatar');
-            let name = user.querySelector('.attendee-summary-user-link').textContent;
+            let name = user.querySelector('.attendee-summary-user-link');
 
-            patch_avatar(avatar, name, 'event');
+            let badge = patch_avatar(avatar, name.textContent, 'event');
+
+            if (badge)
+                style_name_from_badge(name, badge);
         });
 
 

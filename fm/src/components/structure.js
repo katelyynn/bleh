@@ -42,7 +42,8 @@ export function checkup_page_structure(is_subpage = false, header = null) {
         tab: params.get('tab'),
         page: params.get('page'),
         token: params.get('token'),
-        collage: params.get('collage')
+        collage: params.get('collage'),
+        subject: params.get('subject')
     };
 
     if (

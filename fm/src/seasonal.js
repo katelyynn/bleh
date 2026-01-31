@@ -134,11 +134,10 @@ export function set_season() {
                 let snowflakes_enabled = true;
                 let snowflakes_count = season.snowflakes.count;
 
-                if (
-                    settings.seasonal_particles == 'less' &&
-                    snowflakes_count > 10
-                )
-                    snowflakes_count = snowflakes_count * 0.45;
+                if (settings.seasonal_particles == 'less' && snowflakes_count > 10)
+                    snowflakes_count *= 0.45;
+
+                if (page.mobile && snowflakes_count > 10) snowflakes_count *= 0.5;
 
                 begin_snowflakes(snowflakes_enabled, snowflakes_count);
             }
@@ -237,7 +236,8 @@ export function seasonal_timer_start(bypass = false) {
         <span class="season-exclusive">${tl(trans.seasonal.live)}</span>
     `);
 
-    page.header.season.classList.add('live');
+    page.header.season.setAttribute('data-live', true);
+    page.header.season.classList.toggle('chibi', !stored_season.new_years_eve);
 }
 export function seasonal_timer_end() {
     if (stored_season.new_years_eve) return;
@@ -255,13 +255,15 @@ export function seasonal_timer_end() {
         <span class="season-exclusive">${tl(trans.seasonal.notice)}</span>
     `);
 
-    page.header.season.classList.remove('live');
+    page.header.season.setAttribute('data-live', false);
+    page.header.season.classList.toggle('chibi', !stored_season.new_years_eve);
 }
 
 function update_season_nav() {
     if (!page.header.season) return;
 
     page.header.season.setAttribute('data-season', stored_season.id);
+    page.header.season.classList.toggle('chibi', !stored_season.new_years_eve);
 
     if (!stored_season.new_years_eve) {
         page.header.season.textContent = DateTime.fromISO(
@@ -281,6 +283,7 @@ function update_season_nav() {
         let time_until = new Date(next) - new Date();
 
         page.header.season.textContent = countdown_to(time_until);
+        page.header.season.setAttribute('data-live', true);
 
         page.header.season_tooltip.setContent(html.node`
             <span class="season-colour-name">${tl(trans.seasonal.listing[stored_season.id])}</span>
@@ -332,20 +335,21 @@ function prep_snow() {
 function begin_snowflakes(enabled, count) {
     if (!enabled) return;
 
-    const flakes = Array.from({ length: count }, () => {
-        const x = (Math.random() * 100).toFixed(2);
-        const drift = (Math.random() * 20 - 10).toFixed(2);
-        const scale = (Math.random() * 1.1 + 0.3).toFixed(2);
-        const duration = (Math.random() * 60 + 10).toFixed(2);
-        const delay = (Math.random() * -30).toFixed(2);
-        const opacity = (Math.random() * 0.7 + 0.3).toFixed(2);
+    const flakes = Array.from({ length: count * 0.7 }, () => {
+        const x = (Math.random() * 100).toFixed(1);
+        const drift = (Math.random() * 40 - 10).toFixed(1);
+        const scale = (Math.random() * 0.9 + 0.4).toFixed(1);
+        const size = 8 * scale;
+        const duration = (Math.random() * 64 + 20).toFixed(1);
+        const delay = (Math.random() * -30).toFixed(1);
+        const opacity = (Math.random() * 0.7 + 0.2).toFixed(1);
 
-        return { x, drift, scale, duration, delay, opacity };
+        return { x, drift, scale, size, duration, delay, opacity };
     });
 
     render(page.state.snow, html`
         ${flakes.map(flake => html.node`
-            <div class="snow" style="--x: ${flake.x}vw; --x-end: calc(${flake.x}vw + ${flake.drift}vw); --s: ${flake.scale}; animation-duration: ${flake.duration}s; animation-delay: ${flake.delay}s; opacity: ${flake.opacity}" />
+            <div class="snow" style="width: ${flake.size}px; height: ${flake.size}px; --x: ${flake.x}vw; --x-end: calc(${flake.x}vw + ${flake.drift}vw); --s: ${flake.scale}; animation-duration: ${flake.duration}s; animation-delay: ${flake.delay}s; opacity: ${flake.opacity}" />
         `)}
     `);
 }

@@ -5,7 +5,7 @@
 //
 
 import { auth, page, root } from '../build/page';
-import { html } from 'lighterhtml';
+import { html, render } from 'lighterhtml';
 import { patch_wiki_contents } from '../pages/wiki.js';
 import { redirect } from './music.js';
 import showdown from 'showdown';
@@ -20,6 +20,11 @@ import { toggle } from './toggle.js';
 import { save_setting } from './settings.js';
 import { load_chart_colours } from '../chart.js';
 import { sponsor_list } from '../build/sponsor.js';
+import { fetch_status } from './statuscafe.js';
+import tippy from 'tippy.js';
+import { DateTime } from 'luxon';
+import { input } from './input.js';
+import { queue_popup } from './popup.js';
 
 export function markdown(
     text,
@@ -36,7 +41,7 @@ export function markdown(
         take_effect = false,
         cache = false,
         allow_socials = false,
-        allow_lists = true,
+        allow_lists = false,
         allow_alignment = false,
         name = page.name
     } = {}
@@ -51,7 +56,6 @@ export function markdown(
         'u',
         'strong',
         'a',
-        'br',
         'code',
         'pre',
         'img',
@@ -60,7 +64,9 @@ export function markdown(
         'h2',
         'h3',
         'h4',
-        'h5'
+        'h5',
+        't',
+        'del'
     ];
     let ALLOWED_ATTR = [
         'href',
@@ -72,11 +78,20 @@ export function markdown(
         'style',
         'data-hue',
         'data-sat',
-        'data-lit'
+        'data-lit',
+        'data-flag'
     ];
 
     if (allow_lists) {
         ALLOWED_TAGS.push('ul', 'ol', 'li');
+    }
+
+    if (line_breaks) {
+        ALLOWED_TAGS.push('br');
+    }
+
+    if (allow_alignment) {
+        ALLOWED_TAGS.push('hr');
     }
 
     let hue;
@@ -84,6 +99,8 @@ export function markdown(
     let lit;
 
     let links = [];
+
+    let status_cafe_user;
 
     const banner = () => [
         {
@@ -216,6 +233,28 @@ export function markdown(
         }
     ];
 
+    // display a status from status.cafe
+    const status = () => [
+        {
+            type: 'lang',
+            regex: /\[status=([^\]]+)\]/g,
+            replace: (_, user) => {
+                status_cafe_user = encodeURIComponent(user);
+                return '<div class="status-cafe-host"></div>';
+            }
+        }
+    ];
+
+    const timestamp = () => [
+        {
+            type: 'lang',
+            regex: /<t:(\d{9,})(?::([FfDdTtR]))?>/g,
+            replace: (_, time, flag) => {
+                return `<t data-flag="${flag || 'F'}">${time}</t>`;
+            }
+        }
+    ];
+
     // retrieves social links if a user supplies them
     const social_links = () => [
         {
@@ -307,11 +346,11 @@ export function markdown(
     if (line_breaks) extensions.push(blockquotes());
     if (allow_banners) extensions.push(banner());
     if (allow_icons) extensions.push(icons());
-    if (allow_hue) extensions.push(accent(), display_name());
+    if (allow_hue) extensions.push(accent(), display_name(), status());
     if (allow_fonts) extensions.push(font());
     if (allow_socials) extensions.push(social_links());
     if (!allow_headers) extensions.push(header_minify());
-    extensions.push(mentions());
+    extensions.push(mentions(), timestamp());
 
     let profile_cache;
 
@@ -337,7 +376,8 @@ export function markdown(
         strikethrough: true,
         underline: true,
         ghCodeBlocks: false,
-        smartIndentationFix: true
+        smartIndentationFix: true,
+        ellipsis: false
     });
     const markdown = text
         .replace(
@@ -524,6 +564,76 @@ export function markdown(
         }
     }
 
+    if (status_cafe_user) {
+        const status_cafe_host = body.querySelector('.status-cafe-host');
+
+        render(status_cafe_host, html`
+            <div class="status-cafe">
+                <div class="status-cafe-top">
+                    <span class="status-cafe-author">${tl(trans.current_status)}</span>
+                    <span class="status-cafe-time">...</span>
+                </div>
+                <div class="status-cafe-content is-loading">
+                    <span class="status-cafe-emoji">
+                        <span class="status-cafe-loading-spinner">
+                            <span class="bleh-icon" />
+                        </span>
+                    </span>
+                    <span class="status-cafe-text">${tl(trans.loading_status, { u: status_cafe_user })}</span>
+                </div>
+            </div>
+        `);
+
+        fetch_status(status_cafe_user).then(status_cafe => {
+            render(status_cafe_host, status_cafe);
+        });
+    }
+
+    body.querySelectorAll('t').forEach(timestamp => {
+        const time = timestamp.textContent;
+        const flag = timestamp.getAttribute('data-flag');
+
+        const date = DateTime.fromSeconds(parseInt(time));
+
+        let text = '';
+
+        if (flag == 'F') {
+            text = tl(trans.date_at_time, {
+                d: date.toLocaleString(DateTime.DATE_HUGE),
+                t: date.toLocaleString(DateTime.TIME_SIMPLE)
+            });
+        } else if (flag == 'f') {
+            text = tl(trans.date_at_time, {
+                d: date.toLocaleString(DateTime.DATE_FULL),
+                t: date.toLocaleString(DateTime.TIME_SIMPLE)
+            });
+        } else if (flag == 'D') {
+            text = date.toLocaleString(DateTime.DATE_FULL);
+        } else if (flag == 'd') {
+            text = date.toLocaleString(DateTime.DATE_SHORT);
+        } else if (flag == 't') {
+            text = date.toLocaleString(DateTime.TIME_SIMPLE);
+        } else if (flag == 'T') {
+            text = date.toLocaleString(DateTime.TIME_WITH_SECONDS);
+        } else if (flag == 'R') {
+            text = date.toRelative();
+        }
+
+        const new_timestamp = html.node`
+            <t>${text}</t>
+        `;
+
+        tippy(new_timestamp, {
+            theme: 'generic',
+            content: html.node`
+                <span>${date.toLocaleString(DateTime.DATE_FULL)}</span>
+                <small>${date.toLocaleString(DateTime.TIME_SIMPLE)}</small>
+            `
+        });
+
+        timestamp.replaceWith(new_timestamp);
+    });
+
     if (cache && will_cache) {
         log('finalised cache from markdown parsing', 'markdown', 'info', {
             cache
@@ -603,6 +713,11 @@ export function markdown_prompt({
         {
             name: 'Right-alignment',
             string: '[right]text[/right]',
+            hide_if: !allow_alignment
+        },
+        {
+            name: 'Divider line',
+            string: '---',
             hide_if: !allow_alignment
         }
     ];
@@ -820,4 +935,496 @@ export function external_url_prompt(url, dangerous = false) {
             </div>
         `
     });
+}
+
+export function markdown_field(func, options, value, name, cols, rows, placeholder, maxlength, mini = false, autofocus = false) {
+    const use_md = mini ? settings.shout_markdown : settings.bio_markdown;
+
+    options = {
+        allow_headers: false,
+        starting_header: 3,
+        allow_links: true,
+        line_breaks: true,
+        allow_banners: false,
+        in_dialog: false,
+        allow_icons: true,
+        allow_hue: false,
+        allow_fonts: false,
+        allow_socials: false,
+        allow_lists: false,
+        allow_alignment: false,
+        ...options
+    };
+
+    const textarea = input({
+        type: 'textarea',
+        value,
+        name,
+        cols,
+        rows,
+        placeholder,
+        func: () => {
+            on_selection(null, null, false);
+            if (func) func(textarea.value());
+            render_overlay();
+        },
+        func_mouseup: () => {
+            on_selection(null, null, false);
+        },
+        func_select: on_selection,
+        submit_on_character: true,
+        required: true,
+        maxlength,
+        focus: autofocus
+    });
+    let overlay;
+
+    const editor = textarea.editor();
+
+    let is_bold_selected;
+
+    function on_selection(editor, val, has_selection = true) {
+        let sel_start;
+        let sel_end;
+        let selected = '';
+
+        if (has_selection) {
+            sel_start = editor.selectionStart;
+            sel_end = editor.selectionEnd;
+
+            selected = val.slice(sel_start, sel_end);
+        }
+
+        Object.values(action_lookup).forEach(item => {
+            if (item.start == null && item.end == null) return;
+
+            if (item.end == null && item.start != null) item.end = item.start;
+
+            let is_selected = selected.startsWith(item.start) && selected.endsWith(item.end) && selected.length >= item.start.length + item.end.length;
+            if (item.type == 'bold') is_bold_selected = is_selected;
+
+            if (item.type == 'italic' && is_bold_selected) is_selected = false;
+
+            item.button.setAttribute('aria-checked', is_selected);
+        });
+    }
+
+    const action_lookup = {};
+
+    const action_list = [
+        [
+            {
+                type: 'header',
+                name: tl(trans.header),
+                start: '# ',
+                end: '',
+                hide: !options.allow_headers
+            },
+            {
+                type: 'bold',
+                name: tl(trans.bold),
+                start: '**'
+            },
+            {
+                type: 'italic',
+                name: tl(trans.italic),
+                start: '*'
+            },
+            {
+                type: 'strike',
+                name: tl(trans.strikethrough),
+                start: '~~'
+            },
+            {
+                type: 'underline',
+                name: tl(trans.underline),
+                start: '__'
+            }
+        ],
+        [
+            {
+                type: 'link',
+                name: tl(trans.link),
+                func: () => {
+                    return new Promise(resolve => {
+                        let link;
+                        let alt;
+
+                        dialog({
+                            id: 'link',
+                            title: tl(trans.create_link),
+                            body: html.node`
+                                <div class="new-scrobble-form">
+                                    <p class="generic-label">${tl(trans.link)}</p>
+                                    ${link = input({
+                                        type: 'text',
+                                        placeholder: tl(trans.example, { v: 'https://katelyn.moe' }),
+                                        func: () => {
+                                            submit_link();
+                                        },
+                                        focus: true
+                                    })}
+                                    <p class="generic-label">${tl(trans.text)}</p>
+                                    ${alt = input({
+                                        type: 'text',
+                                        func: () => {
+                                            submit_link();
+                                        }
+                                    })}
+                                </div>
+                                <div class="modal-footer">
+                                <button class="see-more cancel" onclick=${() => {
+                                    dialog_rm({ id: 'link' });
+                                    resolve(null);
+                                }}>
+                                    ${tl(trans.cancel)}
+                                </button>
+                                <div class="fill" />
+                                <button class="btn primary continue" onclick=${() => {
+                                    submit_link();
+                                }}>
+                                    ${tl(trans.finish)}
+                                </button>
+                                </div>
+                            `
+                        });
+
+                        function submit_link() {
+                            let alt_text = alt.value();
+                            let link_text = link.value();
+
+                            if (!link_text) return;
+
+                            dialog_rm({ id: 'link' });
+
+                            let output;
+
+                            if (alt_text != link_text && alt_text) {
+                                output = `[${alt_text}](${link_text})`;
+                            } else {
+                                output = link_text;
+                            }
+
+                            resolve(output);
+                        }
+                    });
+                },
+                hide: !options.allow_links
+            },
+            {
+                type: 'mention',
+                name: tl(trans.mention_user),
+                start: '@',
+                end: '',
+                hide: true
+            },
+            {
+                type: 'quote',
+                name: tl(trans.quote),
+                start: '> ',
+                end: '',
+                hide: true
+            },
+            {
+                type: 'code',
+                name: tl(trans.code_block),
+                start: '`',
+                end: '`'
+            },
+            {
+                type: 'image',
+                name: tl(trans.image),
+                func: () => {
+                    return new Promise(resolve => {
+                        let link;
+                        let alt;
+
+                        dialog({
+                            id: 'link',
+                            title: tl(trans.attach_image),
+                            body: html.node`
+                                <div class="new-scrobble-form">
+                                    <p class="generic-label">${tl(trans.link)}</p>
+                                    ${link = input({
+                                        type: 'text',
+                                        placeholder: tl(trans.example, { v: 'https://link.to/an_image_here' }),
+                                        func: () => {
+                                            submit_link();
+                                        },
+                                        focus: true
+                                    })}
+                                    <p class="generic-label">${tl(trans.text)}</p>
+                                    ${alt = input({
+                                        type: 'text',
+                                        func: () => {
+                                            submit_link();
+                                        }
+                                    })}
+                                </div>
+                                <div class="modal-footer">
+                                <button class="see-more cancel" onclick=${() => {
+                                    dialog_rm({ id: 'link' });
+                                    resolve(null);
+                                }}>
+                                    ${tl(trans.cancel)}
+                                </button>
+                                <div class="fill" />
+                                <button class="btn primary continue" onclick=${() => {
+                                    submit_link();
+                                }}>
+                                    ${tl(trans.finish)}
+                                </button>
+                                </div>
+                            `
+                        });
+
+                        function submit_link() {
+                            let alt_text = alt.value();
+                            let link_text = link.value();
+
+                            if (!link_text) return;
+
+                            dialog_rm({ id: 'link' });
+
+                            let output;
+
+                            if (alt_text != link_text && alt_text) {
+                                output = `![${alt_text}](${link_text})`;
+                            } else {
+                                output = `![](${link_text})`;
+                            }
+
+                            resolve(output);
+                        }
+                    });
+                },
+                hide: !options.allow_links
+            }
+        ],
+        [
+            {
+                type: 'ul',
+                name: tl(trans.list),
+                start: '- ',
+                end: '',
+                hide: !options.allow_lists
+            },
+            {
+                type: 'ol',
+                name: tl(trans.numbered_list),
+                start: '1. ',
+                end: '',
+                hide: !options.allow_lists
+            }
+        ],
+        [
+            {
+                type: 'align-left',
+                name: tl(trans.left_align),
+                start: '[left]',
+                end: '[/left]',
+                hide: !options.allow_alignment
+            },
+            {
+                type: 'align-center',
+                name: tl(trans.center_align),
+                start: '[center]',
+                end: '[/center]',
+                hide: !options.allow_alignment
+            },
+            {
+                type: 'align-right',
+                name: tl(trans.right_align),
+                start: '[right]',
+                end: '[/right]',
+                hide: !options.allow_alignment
+            }
+        ]
+    ];
+
+    const actions = html.node`
+        <div class="markdown-actions">
+            ${action_list.map((group, index) => {
+                const elem = html.node`
+                    <div class="group">
+                        ${group.map(item => {
+                            if (item.hide) return html.node``;
+
+                            const button = html.node`
+                                <button class="btn markdown-action" data-type=${item.type} aria-checked="false" type="button" onclick=${() => {
+                                    const sel_start = editor.selectionStart;
+                                    const sel_end = editor.selectionEnd;
+
+                                    const val = textarea.value();
+
+                                    if (item.func) {
+                                        item.func().then(replacement => {
+                                            if (!replacement) return;
+
+                                            textarea.value(val.slice(0, sel_start) + replacement + val.slice(sel_end));
+
+                                            textarea.focus();
+                                            textarea.range(sel_start, sel_start + replacement.length);
+
+                                            if (func) func(textarea.value());
+
+                                            render_overlay();
+                                        });
+
+                                        return;
+                                    }
+
+                                    if (item.end == null && item.start != null) item.end = item.start;
+
+                                    if (item.start != null && item.end != null) {
+                                        const selected = val.slice(sel_start, sel_end);
+                                        let replacement;
+
+                                        if (selected.startsWith(item.start) && selected.endsWith(item.end)) {
+                                            let replace_end = -1 * item.end.length;
+
+                                            if (replace_end != 0) {
+                                                replacement = selected.slice(item.start.length, replace_end);
+                                            } else {
+                                                replacement = selected.slice(item.start.length);
+                                            }
+                                        } else {
+                                            replacement = `${item.start}${selected}${item.end}`;
+                                        }
+
+                                        textarea.value(val.slice(0, sel_start) + replacement + val.slice(sel_end));
+
+                                        textarea.focus();
+                                        textarea.range(sel_start, sel_start + replacement.length);
+
+                                        if (func) func(textarea.value());
+
+                                        render_overlay();
+
+                                        log('action', 'markdown', 'info', {
+                                            sel_start,
+                                            sel_end,
+                                            selected,
+                                            val,
+                                            item,
+                                            replacement
+                                        });
+                                    }
+                                }}>
+                                    ${item.name}
+                                </button>
+                            `;
+
+                            action_lookup[item.type] = {
+                                type: item.type,
+                                button,
+                                start: item.start,
+                                end: item.end
+                            };
+                            console.info('markdown added to lookup', action_lookup, action_lookup[item.type]);
+
+                            tippy(button, {
+                                content: item.name
+                            });
+
+                            return button;
+                        })}
+                    </div>
+                `;
+
+                if (elem.childElementCount == 0)
+                    return html.node``;
+
+                return html.node`
+                    ${elem}
+                    ${index < action_list.length - 1 ? html.node`
+                        <div class="group-sep" />
+                    ` : ''}
+                `;
+            })}
+        </div>
+    `;
+
+    const field = html.node`
+        <div class="markdown-field ${mini ? 'mini' : ''}">
+            ${use_md ? actions : ''}
+            <div class="markdown-field-text">
+                <div class="markdown-field-overlay" ref=${el => overlay = el} />
+                ${textarea}
+            </div>
+        </div>
+    `;
+
+    render_overlay();
+
+    editor.addEventListener('scroll', () => {
+        overlay.scrollTop = editor.scrollTop;
+    });
+
+    field.value = (val) => {
+        if (!val) return textarea.value();
+
+        textarea.value(val);
+        if (func) func(val);
+
+        render_overlay(val);
+    }
+
+    function render_overlay(val = textarea.value()) {
+        val = val.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+        if (use_md) {
+            val = val.replace(/\[(left|center|right|links)\]/gi, text => {
+                if (!options.allow_alignment) return text;
+
+                return `<span class="md-tag-wrap">${text}</span>`;
+            });
+            val = val.replace(/\[\/(left|center|right|links)\]/gi, text => {
+                if (!options.allow_alignment) return text;
+
+                return `<span class="md-tag-wrap">${text}</span>`;
+            });
+
+            val = val.replace(/\[([a-z]+)=([^\]]+)\]/gi, (match, tag, val) => {
+                if (!['status', 'name', 'font', 'accent', 'banner'].includes(tag)) return match;
+
+                if (!options.allow_hue && tag == 'accent') return match;
+
+                if (!options.allow_alignment) return match;
+
+                if (tag == 'accent') {
+                    const split = val.split(',');
+                    if (split.length == 3 && parseFloat(split[0]) >= 0 && parseFloat(split[1]) >= 0 && parseFloat(split[2]) >= 0) {
+                        return `<span class="md-tag">[${tag}=<span class="md-val md-accent colourful" style="--hue-over: ${parseFloat(split[0])}; --sat-over: ${parseFloat(split[1])}; --lit-over: ${parseFloat(split[2])}">${val}</span>]</span>`;
+                    } else {
+                        return match;
+                    }
+                }
+
+                return `<span class="md-tag">[${tag}=<span class="md-val">${val}</span>]</span>`;
+            });
+
+            val = val.replace(/!\[([^\]]*)\]\(([^)]+)\)/gi, (match, label, url) => {
+                if (!options.allow_links) return match;
+
+                return `<span class="md-link">![<span class="md-label">${label}</span>](<span class="md-url">${url}</span>)</span>`;
+            });
+
+            val = val.replace(/\[([^\]]+)\]\(([^)]+)\)/gi, (match, label, url) => {
+                if (!options.allow_links) return match;
+
+                return `<span class="md-link">[<span class="md-label">${label}</span>](<span class="md-url">${url}</span>)</span>`;
+            });
+        }
+
+        render(overlay, html`
+            ${{ html: val }}
+        `);
+    }
+
+    setTimeout(() => {
+        queue_popup('markdown', actions, 'top');
+    }, 0);
+
+    return field;
 }

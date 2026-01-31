@@ -370,6 +370,20 @@ export function patch_wiki() {
     }
 }
 
+export function can_trust_link(href) {
+    const url = new URL(href);
+    const scheme = url.protocol;
+    const hostname = url.hostname;
+
+    let dangerous = false;
+
+    if (!scheme || !scheme.startsWith('http')) dangerous = true;
+
+    if (settings.trusted_sites.includes(hostname)) return { trusted: true, dangerous };
+
+    return { trusted: false, dangerous };
+}
+
 export function patch_wiki_contents(wiki_block) {
     let links = wiki_block.querySelectorAll('a');
     links.forEach((link) => {

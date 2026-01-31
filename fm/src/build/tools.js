@@ -275,7 +275,7 @@ export function lazy(elem, func, options = {}) {
  * Copies text to the clipboard
  * @param {string} text
  */
-export function copy(text) {
+export function copy(text, silent = false) {
     if (text.trim().length == 0) return;
 
     navigator.clipboard.writeText(text).then(() => {
@@ -296,21 +296,29 @@ export function redo() {
     document.execCommand('redo');
 }
 
-export async function paste() {
+export function cut() {
+    document.execCommand('cut');
+}
+
+export async function paste(elem = null, silent = false) {
     try {
         const text = await navigator.clipboard.readText();
-        const elem = document.activeElement;
+        if (!elem) elem = document.activeElement;
 
-        if (!elem) return;
+        if (!elem) return log('no element', 'paste', 'error');
 
         if (elem.isContentEditable) {
             document.execCommand('insertText', false, text);
             log('pasted', 'paste', 'info', { text });
-            status({
-                id: 'paste',
-                title: tl(trans.pasted_text),
-                body: text
-            });
+
+            if (!silent) {
+                status({
+                    id: 'paste',
+                    title: tl(trans.pasted_text),
+                    body: text
+                });
+            }
+
             return;
         }
 
@@ -320,19 +328,25 @@ export async function paste() {
 
             elem.setRangeText(text, start, end, 'end');
             log('pasted', 'paste', 'info', { text });
-            status({
-                id: 'paste',
-                title: tl(trans.pasted_text),
-                body: text
-            });
+
+            if (!silent) {
+                status({
+                    id: 'paste',
+                    title: tl(trans.pasted_text),
+                    body: text
+                });
+            }
         }
     } catch(e) {
         log('failed', 'paste', 'info', { text, e });
-        status({
-            id: 'paste',
-            title: tl(trans.failed),
-            body: e.message ? e.message : e
-        });
+
+        if (!silent) {
+            status({
+                id: 'paste',
+                title: tl(trans.failed),
+                body: e.message ? e.message : e
+            });
+        }
     }
 }
 

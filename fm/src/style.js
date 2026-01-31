@@ -28,13 +28,7 @@ export function append_style() {
     const length = split.length - 1;
 
     // style is neither fetched nor applied in these interfaces
-    if (
-        (split[length] == 'playback' && split[2] == 'listening-report') ||
-        split[0] == 'labs'
-    ) {
-        // this sometimes fixes last.fm just not appending classes and i dont know why
-        if (split[length] == 'playback' && split[2] == 'listening-report') document.body?.classList.add('playback-2024');
-
+    if (split[0] == 'labs') {
         log('disabled loading for special interface', 'style');
         return;
     }

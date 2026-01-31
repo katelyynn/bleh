@@ -16,7 +16,8 @@ export function toggle({
     disabled = false,
     data = '',
     func = null,
-    standalone = true
+    standalone = true,
+    id = ''
 }) {
     let checkbox;
     let state;
@@ -41,15 +42,15 @@ export function toggle({
                 type == 'toggle' ?
                     html.node`
             <div class="toggle-wrap">
-                <input type="checkbox" ref=${(el) => (checkbox = el)} name=${name} value=${data} checked=${value} />
-                <button class="toggle" ref=${(el) => (state = el)} aria-checked=${value}>
+                <input type="checkbox" ref=${(el) => (checkbox = el)} id=${id} name=${name} value=${data} checked=${value} />
+                <button class="btn toggle" ref=${(el) => (state = el)} aria-checked=${value}>
                     <div class="dot" />
                 </button>
             </div>
             `
                 :   html.node`
             <div class="check">
-                <input type="checkbox" ref=${(el) => (checkbox = el)} name=${name} value=${data} checked=${value} disabled=${disabled} />
+                <input type="checkbox" ref=${(el) => (checkbox = el)} id=${id} name=${name} value=${data} checked=${value} disabled=${disabled} />
                 <div class="box" ref=${(el) => (state = el)} aria-checked=${value} disabled=${disabled}>
                     <div class="bleh-icon" />
                 </div>
@@ -77,8 +78,11 @@ export function toggle({
         state.setAttribute('aria-checked', false);
     };
 
-    elem.checked = () => {
-        return checkbox.checked;
+    elem.checked = (val) => {
+        if (val == null) return checkbox.checked;
+
+        if (val) elem.check();
+        else elem.uncheck();
     };
 
     elem.disabled = (state = null) => {

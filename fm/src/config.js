@@ -27,7 +27,7 @@ export function load_settings(skip = false) {
         for (let setting in settings_store) {
             // assign default if missing
             if (settings[setting] == null)
-                settings[setting] = settings_store[setting].default;
+                settings[setting] = structuredClone(settings_store[setting].default);
         }
 
         if (!settings.version) settings.version = 10000000;
@@ -67,6 +67,18 @@ export function load_settings(skip = false) {
             settings.font_weight_bold == 680
         )
             settings.font_weight_bold = settings_store.font_weight_bold.default;
+    }
+
+    if (settings.version < 2026.0201) {
+        if (settings.noise == 0.5) settings.noise = settings_store.noise.default;
+    }
+
+    if (Number.isInteger(settings.list_view)) {
+        if (settings.list_view == 0) {
+            settings.list_view = 'list';
+        } else {
+            settings.list_view = 'cards';
+        }
     }
 
     if (settings.profile_shortcut) {

@@ -23,7 +23,8 @@ import {
     bleh_top_listeners,
     convert_top_listener,
     redirect,
-    show_your_scrobbles
+    show_your_scrobbles,
+    similar_items
 } from '../components/music';
 import { checkup_page_structure } from '../components/structure';
 import { register_background, update_page } from '../page';
@@ -36,6 +37,7 @@ import { expand_avatar } from '../avatar.js';
 import { other_listener } from '../components/profile_shortcut.js';
 import { setting } from '../components/settings.js';
 import tippy from 'tippy.js';
+import { open_starred_friend_window } from './profile.js';
 
 export function bleh_artists() {
     let artist_header = document.body.querySelector('.header-new--artist');
@@ -118,20 +120,22 @@ export function bleh_artists() {
                     <a class="bleh--avatar-clickable-link"></a>
                     ` : html.node`<img class="missing-artist">`}
                 </div>
-                <div class="info-side">
-                    ${page.multi ? html.node`
-                    <div class="sub-text">
-                        ${tl(trans.artists)}
-                        <div class="info-tip" ref=${(el) => (multi_info_box = el)}>
-                            <div class="bleh-icon bleh-info-icon"></div>
+                <div class="info-side has-main-info">
+                    <div class="main-info">
+                        ${page.multi ? html.node`
+                        <div class="sub-text">
+                            ${tl(trans.artists)}
+                            <div class="info-tip" ref=${(el) => (multi_info_box = el)}>
+                                <div class="bleh-icon bleh-info-icon"></div>
+                            </div>
                         </div>
-                    </div>
-                    ` : html.node`
-                    <div class="sub-text">${tl(trans.artist)}</div>
-                    `}
-                    <div class="title-container" data-multi=${page.multi}>
-                        ${title}
-                        ${position}
+                        ` : html.node`
+                        <div class="sub-text">${tl(trans.artist)}</div>
+                        `}
+                        <div class="title-container" data-multi=${page.multi}>
+                            ${title}
+                            ${position}
+                        </div>
                     </div>
                     ${on_tour ? html.node`
                     <div class="badges">
@@ -218,6 +222,8 @@ export function bleh_artists() {
         bleh_music_page_charts();
 
         bleh_tags_mini();
+
+        similar_items();
 
         let top_tracks = page.structure.main.querySelector('#top-tracks');
         if (top_tracks) {
@@ -420,6 +426,7 @@ export function bleh_artists() {
             );
 
             listeners_section.classList = 'user-list top-listeners-list small';
+            listeners_section.setAttribute('data-list-view', 'grid');
             render(listeners_section, html``);
 
             listeners.forEach((listener, index) => {
@@ -634,42 +641,44 @@ function bleh_listeners() {
         );
     }
 
-    const friends = settings.friends.filter(
-        (friend) => friend != settings.starred_friend
-    );
-
     // i could just render away the ad here but courtesy
-    page.structure.side.appendChild(html.node`
-        <section class="side-actions">
+    const friends_panel = html.node`
+        <section class="side-actions" />
+    `;
+
+    render_friends();
+
+    page.structure.side.appendChild(friends_panel);
+
+    function render_friends() {
+        const friends = settings.friends.filter(friend => friend != settings.starred_friend);
+
+        render(friends_panel, html`
             <a class="btn side-action" data-type="profile" href="${root}user/${auth.name}/library/music/${redirect()}${sanitise(page.name)}">
-                ${auth.name}
+                <span><span class="at">@</span>${auth.name}</span>
             </a>
-            ${
-                settings.starred_friend != '' ?
-                    html.node`
+            ${settings.starred_friend != '' ? html.node`
             <a class="btn side-action" data-type="profile" href="${root}user/${settings.starred_friend}/library/music/${redirect()}${sanitise(page.name)}">
-                ${settings.starred_friend}
+                <span><span class="at">@</span>${settings.starred_friend}</span>
                 <span class="star-icon colourful">
                     <span class="bleh-icon" />
                 </span>
             </a>
-            `
-                :   ''
-            }
-            ${friends.map(
-                (friend) => html.node`
+            ` : ''}
+            ${friends.map(friend => html.node`
             <a class="btn side-action" data-type="profile" href="${root}user/${friend}/library/music/${redirect()}${sanitise(page.name)}">
-                ${friend}
+                <span><span class="at">@</span>${friend}</span>
             </a>
-            `
-            )}
-            <a class="btn side-action" data-type="add" href="${root}bleh/profile">
-                ${tl(trans.add_friends)}
-            </a>
+            `)}
+            <button class="btn side-action" data-type="edit" onclick=${() => open_starred_friend_window(() => {
+                render_friends();
+            })}>
+                ${tl(trans.edit_close_friends)}
+            </button>
             <div class="sep" />
             <button class="btn side-action" data-type="add" onclick=${() => other_listener(sanitise(page.name))}>
                 ${tl(trans.custom)}
             </button>
-        </section>
-    `);
+        `);
+    }
 }

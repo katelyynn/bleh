@@ -152,38 +152,27 @@ export function collage({ host, sidebar } = {}) {
             },
             {
                 value: 'date_preset=LAST_7_DAYS',
-                text: tl(trans.last_count_days).replace(
-                    '{c}',
-                    '7'
-                )
+                text: tl(trans.last_count_days, { c: '7' })
             },
             {
                 value: 'date_preset=LAST_30_DAYS',
-                text: tl(trans.last_count_days).replace(
-                    '{c}',
-                    '30'
-                )
+                text: tl(trans.last_count_days, { c: '30' })
             },
             {
                 value: 'date_preset=LAST_90_DAYS',
-                text: tl(trans.last_count_days).replace(
-                    '{c}',
-                    '90'
-                )
+                text: tl(trans.last_count_days, { c: '90' })
             },
             {
                 value: 'date_preset=LAST_180_DAYS',
-                text: tl(trans.last_count_days).replace(
-                    '{c}',
-                    '180'
-                )
+                text: tl(trans.last_count_days, { c: '180' })
             },
             {
                 value: 'date_preset=LAST_365_DAYS',
-                text: tl(trans.last_count_days).replace(
-                    '{c}',
-                    '365'
-                )
+                text: tl(trans.last_count_days, { c: '365' })
+            },
+            {
+                value: 'date_preset=ALL',
+                text: tl(trans.all_time)
             }
         ];
 
@@ -285,7 +274,7 @@ export function collage({ host, sidebar } = {}) {
                         }}
                         ${() => {
                             let btn = html.node`
-                            <button class="btn chibi icon" data-type="starred_friend" data-is-shortcut=${settings.starred_friend != ''} onclick=${() => {
+                            <button class="btn chibi icon" data-type="starred_friend" data-starred=${settings.starred_friend != ''} onclick=${() => {
                                 if (settings.starred_friend == '') return;
 
                                 inputter.value = settings.starred_friend;
@@ -697,9 +686,9 @@ export function collage({ host, sidebar } = {}) {
                 render(
                     body,
                     html`
-                        <div class="collage-finished">
-                            <strong>${tl(trans.your_collage_is_ready)}</strong>
-                            <div class="button-group">
+                        <div class="collage-canvas">
+                            ${canvas}
+                            <div class="collage-canvas-actions">
                                 <button
                                     class="btn primary icon"
                                     data-type="download"
@@ -717,7 +706,6 @@ export function collage({ host, sidebar } = {}) {
                                 </button>
                             </div>
                         </div>
-                        ${canvas}
                     `
                 );
 

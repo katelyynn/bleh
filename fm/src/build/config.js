@@ -660,7 +660,7 @@ export let settings_store = {
     },
     noise: {
         css: 'noise-opacity',
-        default: 0.5,
+        default: 0.35,
         type: 'range',
         min: 0,
         max: 1,
@@ -814,16 +814,46 @@ export let settings_store = {
         body: trans.redirect_messages.body
     },
     list_view: {
-        default: 1,
-        type: 'radio'
+        default: 'cards',
+        type: 'tabs',
+        values: {
+            cards: {
+                name: trans.cards
+            },
+            grid: {
+                name: trans.grid
+            },
+            list: {
+                name: trans.list
+            }
+        }
     },
     chart_view: {
         default: 'line',
-        type: 'radio'
+        type: 'tabs',
+        values: {
+            line: {
+                name: trans.line
+            },
+            pie: {
+                name: trans.pie
+            },
+            bar: {
+                name: trans.bar
+            }
+        }
     },
     chart_bar_axis: {
         default: 'horizontal',
-        type: 'radio'
+        type: 'tabs',
+        values: {
+            horizontal: {
+                name: trans.horizontal
+            },
+            vertical: {
+                name: trans.vertical
+            }
+        }
     },
     chart_insights_view: {
         default: 'pie',
@@ -1256,9 +1286,10 @@ export let settings_store = {
     friends: {
         default: [],
         type: 'list',
-        title: trans.friends,
+        title: trans.close_friends,
         body: trans.friends_setting,
-        warn_if_matches_auth: true
+        warn_if_matches_auth: true,
+        beta: true
     },
     starred_friend: {
         default: '',
@@ -1274,8 +1305,7 @@ export let settings_store = {
         default: false,
         title: trans.oracle_beta.name,
         body: trans.oracle_beta.body,
-        beta: true,
-        new_release: true
+        beta: true
     },
     romanise_jp: {
         default: false,
@@ -1326,7 +1356,6 @@ export let settings_store = {
         type: 'select',
         title: trans.tracklist_source.name,
         body: trans.tracklist_source.body,
-        new_release: true,
         incompatible: { oracle_beta: false }
     },
     menu_replacement: {
@@ -1340,11 +1369,14 @@ export let settings_store = {
         default: false,
         title: trans.translator.name,
         body: trans.translator.body,
-        new_release: true,
         require_reload: true
     },
     translator_view: {
         default: 'en',
-        type: 'tabs'
+        type: 'select'
+    },
+    popups_seen: {
+        default: [],
+        type: 'list'
     }
 };

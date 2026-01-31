@@ -17,6 +17,7 @@ import { create_divider } from '../pages/gallery';
 import { ff } from '../sku';
 import { parse_scrobbles_as_rank } from './colourful_counts';
 import {
+    correct_artist,
     correct_item_by_artist,
     create_correction,
     name_includes,
@@ -33,6 +34,8 @@ import {
     open_starred_friend_window
 } from '../pages/profile.js';
 import { oracle_credits } from './oracle.js';
+import { setting } from './settings.js';
+import { patch_user_list_item } from '../pages/users.js';
 
 unsafeWindow._other_listener = function (id) {
     other_listener(id);
@@ -63,17 +66,17 @@ export async function show_your_scrobbles() {
             tabs.appendChild(html.node`
                 <ul class="navlist-items">
                     <li class="navlist-item secondary-nav-item secondary-nav-item--overview">
-                        <a class="secondary-nav-item-link secondary-nav-item-link--active" href="${window.location.href}">
+                        <a class="secondary-nav-item-link secondary-nav-item-link--active" href="${window.location.pathname}">
                             ${tl(trans.home)}
                         </a>
                     </li>
                     <li class="navlist-item secondary-nav-item secondary-nav-item--tracks">
-                        <a class="secondary-nav-item-link" href="${window.location.href}/+tracks">
+                        <a class="secondary-nav-item-link" href="${window.location.pathname}/+tracks">
                             ${tl(trans.tracks)}
                         </a>
                     </li>
                     <li class="navlist-item secondary-nav-item secondary-nav-item--albums">
-                        <a class="secondary-nav-item-link" href="${window.location.href}/+albums">
+                        <a class="secondary-nav-item-link" href="${window.location.pathname}/+albums">
                             ${tl(trans.albums)}
                         </a>
                     </li>
@@ -81,37 +84,37 @@ export async function show_your_scrobbles() {
                         !page_is_blocked ?
                             html.node`
                     <li class="navlist-item secondary-nav-item secondary-nav-item--images">
-                        <a class="secondary-nav-item-link" href="${window.location.href}/+images">
+                        <a class="secondary-nav-item-link" href="${window.location.pathname}/+images">
                             ${tl(trans.photos)}
                         </a>
                     </li>
                     <li class="navlist-item secondary-nav-item secondary-nav-item--similar">
-                        <a class="secondary-nav-item-link" href="${window.location.href}/+similar">
+                        <a class="secondary-nav-item-link" href="${window.location.pathname}/+similar">
                             ${tl(trans.similar_artists)}
                         </a>
                     </li>
                     <li class="navlist-item secondary-nav-item secondary-nav-item--wiki">
-                        <a class="secondary-nav-item-link" href="${window.location.href}/+wiki">
+                        <a class="secondary-nav-item-link" href="${window.location.pathname}/+wiki">
                             ${tl(trans.biography)}
                         </a>
                     </li>
                     <li class="navlist-item secondary-nav-item secondary-nav-item--listeners">
-                        <a class="secondary-nav-item-link" href="${window.location.href}/+listeners">
+                        <a class="secondary-nav-item-link" href="${window.location.pathname}/+listeners">
                             ${tl(trans.listeners)}
                         </a>
                     </li>
                     <li class="navlist-item secondary-nav-item secondary-nav-item--shoutbox">
-                        <a class="secondary-nav-item-link" href="${window.location.href}/+shoutbox">
+                        <a class="secondary-nav-item-link" href="${window.location.pathname}/+shoutbox">
                             ${tl(trans.shouts)}
                         </a>
                     </li>
                     <li class="navlist-item secondary-nav-item secondary-nav-item--events">
-                        <a class="secondary-nav-item-link" href="${window.location.href}/+events">
+                        <a class="secondary-nav-item-link" href="${window.location.pathname}/+events">
                             ${tl(trans.events)}
                         </a>
                     </li>
                     <li class="navlist-item secondary-nav-item secondary-nav-item--tags">
-                        <a class="secondary-nav-item-link" href="${window.location.href}/+tags">
+                        <a class="secondary-nav-item-link" href="${window.location.pathname}/+tags">
                             ${tl(trans.tags)}
                         </a>
                     </li>
@@ -124,7 +127,7 @@ export async function show_your_scrobbles() {
             tabs.appendChild(html.node`
                 <ul class="navlist-items">
                     <li class="navlist-item secondary-nav-item secondary-nav-item--overview">
-                        <a class="secondary-nav-item-link secondary-nav-item-link--active" href="${window.location.href}">
+                        <a class="secondary-nav-item-link secondary-nav-item-link--active" href="${window.location.pathname}">
                             ${tl(trans.home)}
                         </a>
                     </li>
@@ -132,22 +135,22 @@ export async function show_your_scrobbles() {
                         !page_is_blocked ?
                             html.node`
                     <li class="navlist-item secondary-nav-item secondary-nav-item--wiki">
-                        <a class="secondary-nav-item-link" href="${window.location.href}/+wiki">
+                        <a class="secondary-nav-item-link" href="${window.location.pathname}/+wiki">
                             ${tl(trans.wiki)}
                         </a>
                     </li>
                     <li class="navlist-item secondary-nav-item secondary-nav-item--images">
-                        <a class="secondary-nav-item-link" href="${window.location.href}/+images">
+                        <a class="secondary-nav-item-link" href="${window.location.pathname}/+images">
                             ${tl(trans.artwork)}
                         </a>
                     </li>
                     <li class="navlist-item secondary-nav-item secondary-nav-item--shoutbox">
-                        <a class="secondary-nav-item-link" href="${window.location.href}/+shoutbox">
+                        <a class="secondary-nav-item-link" href="${window.location.pathname}/+shoutbox">
                             ${tl(trans.shouts)}
                         </a>
                     </li>
                     <li class="navlist-item secondary-nav-item secondary-nav-item--tags">
-                        <a class="secondary-nav-item-link" href="${window.location.href}/+tags">
+                        <a class="secondary-nav-item-link" href="${window.location.pathname}/+tags">
                             ${tl(trans.tags)}
                         </a>
                     </li>
@@ -160,12 +163,12 @@ export async function show_your_scrobbles() {
             tabs.appendChild(html.node`
                 <ul class="navlist-items">
                     <li class="navlist-item secondary-nav-item secondary-nav-item--overview">
-                        <a class="secondary-nav-item-link secondary-nav-item-link--active" href="${window.location.href}">
+                        <a class="secondary-nav-item-link secondary-nav-item-link--active" href="${window.location.pathname}">
                             ${tl(trans.home)}
                         </a>
                     </li>
                     <li class="navlist-item secondary-nav-item secondary-nav-item--albums">
-                        <a class="secondary-nav-item-link" href="${window.location.href}/+albums">
+                        <a class="secondary-nav-item-link" href="${window.location.pathname}/+albums">
                             ${tl(trans.albums)}
                         </a>
                     </li>
@@ -173,17 +176,17 @@ export async function show_your_scrobbles() {
                         !page_is_blocked ?
                             html.node`
                     <li class="navlist-item secondary-nav-item secondary-nav-item--wiki">
-                        <a class="secondary-nav-item-link" href="${window.location.href}/+wiki">
+                        <a class="secondary-nav-item-link" href="${window.location.pathname}/+wiki">
                             ${tl(trans.wiki)}
                         </a>
                     </li>
                     <li class="navlist-item secondary-nav-item secondary-nav-item--shoutbox">
-                        <a class="secondary-nav-item-link" href="${window.location.href}/+shoutbox">
+                        <a class="secondary-nav-item-link" href="${window.location.pathname}/+shoutbox">
                             ${tl(trans.shouts)}
                         </a>
                     </li>
                     <li class="navlist-item secondary-nav-item secondary-nav-item--tags">
-                        <a class="secondary-nav-item-link" href="${window.location.href}/+tags">
+                        <a class="secondary-nav-item-link" href="${window.location.pathname}/+tags">
                             ${tl(trans.tags)}
                         </a>
                     </li>
@@ -236,7 +239,7 @@ export async function show_your_scrobbles() {
     if (no_auth_callout) no_auth_callout.remove();
 
     // page url
-    let page_url = window.location.href;
+    let page_url = window.location.pathname;
     let page_url_split = page_url.split('/');
     let page_url_length = page_url_split.length - 1;
 
@@ -387,9 +390,7 @@ export async function show_your_scrobbles() {
     if (!katsune)
         col_main.insertBefore(top_container, col_main.firstElementChild);
     else
-        page.structure.container
-            .querySelector('.bleh-background')
-            .after(top_container);
+        page.structure.container.insertBefore(top_container, page.structure.container.firstElementChild);
 
     // other listeners
     if (page.type == 'artist') {
@@ -453,9 +454,10 @@ export async function show_your_scrobbles() {
 
         if (button.classList[1] == 'header-new-love-button') {
             button.setAttribute('data-type', 'love');
-            button.appendChild(html.node`
-                <span>${tl(trans.love_track)}</span>
-            `);
+            button.textContent = tl(trans.love_track);
+        } else if (button.classList[1] == 'header-new-bookmark-button') {
+            button.setAttribute('data-type', 'bookmark');
+            button.textContent = tl(trans.bookmark_item, { v: tl(trans[`${page.type}_lower`]) });
         }
     });
     let links = interact_container.querySelectorAll('a');
@@ -473,7 +475,7 @@ export async function show_your_scrobbles() {
         let obsession_btn = obsession_form.querySelector('button');
         obsession_btn.classList = 'btn side-action';
         obsession_btn.setAttribute('data-type', 'obsession');
-        obsession_btn.textContent = tl(trans.obsession);
+        obsession_btn.textContent = tl(trans.set_obsession);
 
         interact_container.appendChild(obsession_form);
     }
@@ -1104,6 +1106,20 @@ export async function show_your_scrobbles() {
                 ${tags}
             </div>
         `);
+
+        const add = tags.querySelector('.tags-add');
+        if (add) {
+            tippy(add, {
+                content: tl(trans.add)
+            });
+        }
+
+        const all = tags.querySelector('.tags-view-all');
+        if (all) {
+            tippy(all, {
+                content: tl(trans.view_all)
+            });
+        }
     }
 
     // no album info
@@ -1286,7 +1302,7 @@ function create_listen_item(
         );
         listen_item.setAttribute(
             'href',
-            `${window.location.href}/+listeners/you-know`
+            `${window.location.pathname}/+listeners/you-know`
         );
     }
 
@@ -1613,42 +1629,24 @@ export function bleh_music_page_charts() {
 export function bleh_top_listeners() {
     if (!ff('unify_top_listeners')) return;
 
-    const panel = page.structure.main.querySelector(
-        ':scope > .buffer-standard'
-    );
+    const panel = page.structure.main.querySelector(':scope > .buffer-standard');
 
-    // view-related buttons
-    let view_buttons = document.createElement('div');
-    view_buttons.classList.add('view-buttons-wrapper');
-    view_buttons.innerHTML = `
-        <div class="view-buttons">
-            <button class="btn view-item" id="toggle-list_view-1" data-toggle="list_view" data-toggle-value="1" onclick="_update_item('list_view', 1)">
-                ${tl(trans.grid)}
-            </button>
-            <button class="btn view-item" id="toggle-list_view-0" data-toggle="list_view" data-toggle-value="0" onclick="_update_item('list_view', 0)">
-                ${tl(trans.list)}
-            </button>
-        </div>
-    `;
-    panel.insertBefore(view_buttons, panel.firstElementChild);
+    panel.insertBefore(setting({ id: 'list_view', func: (val) => {
+        user_list.setAttribute('data-list-view', val);
+    } }), panel.firstElementChild);
 
-    refresh_all();
+    const legacy_top_listeners_container = panel.querySelector('.top-listeners');
+    const legacy_top_listeners = legacy_top_listeners_container.querySelectorAll('.top-listeners-item');
 
-    let legacy_top_listeners_container = panel.querySelector('.top-listeners');
-    let legacy_top_listeners = legacy_top_listeners_container.querySelectorAll(
-        '.top-listeners-item'
-    );
-
-    const new_container = html.node`
-        <ul class="user-list top-listeners-list" />
+    const user_list = html.node`
+        <ul class="user-list top-listeners-list" data-list-view=${settings.list_view} />
     `;
 
     legacy_top_listeners.forEach((listener, index) => {
-        new_container.appendChild(convert_top_listener(listener, index));
+        user_list.appendChild(convert_top_listener(listener, index));
     });
 
-    view_buttons.after(new_container);
-    legacy_top_listeners_container.remove();
+    legacy_top_listeners_container.replaceWith(user_list);
 }
 
 export function convert_top_listener(listener, index, key = 'top-listeners') {
@@ -1679,7 +1677,7 @@ export function convert_top_listener(listener, index, key = 'top-listeners') {
                 </span>
                 <h4 class="user-list-name">
                     <a class="user-list-link link-block-target" href=${name_wrap.getAttribute('href')} ref=${(el) => (name_link = el)}>
-                        @${name}
+                        ${name}
                     </a>
                 </h4>
                 <span class="avatar user-list-avatar" ref=${(el) => (user_list_avatar = el)}>
@@ -1700,9 +1698,6 @@ export function convert_top_listener(listener, index, key = 'top-listeners') {
             </div>
         </li>
     `;
-
-    const badge = patch_avatar(user_list_avatar, name, 'listener');
-    style_name_from_badge(name_link, badge);
 
     if (track_wrap) {
         let track_link = about_me.querySelector('a');
@@ -1725,6 +1720,8 @@ export function convert_top_listener(listener, index, key = 'top-listeners') {
             );
         }
     }
+
+    patch_user_list_item(new_listener, index);
 
     return new_listener;
 }
@@ -1840,4 +1837,51 @@ export function prepare_music() {
         code: 'Google Sans Code',
         zpix: 'Zpix'
     };
+}
+
+export function similar_items() {
+    const artists = page.type == 'artist' ? page.structure.main.querySelector('.catalogue-overview-similar-artists-full-width')?.parentElement : page.structure.main.querySelector('.catalogue-overview-similar-artists')?.parentElement;
+
+    if (artists) {
+        artists.classList = 'artists-like';
+        const controls = artists.querySelector('.section-controls');
+        const station = controls.querySelector('.stationlink');
+
+        station.classList = 'left-icon blend-v2-btn play-radio';
+
+        controls.replaceWith(html.node`
+            <div class="top-container">
+                <h2>${tl(trans.more_like_name, { n: page.type == 'artist' ? romanise(correct_artist(page.name)) : romanise(correct_artist(page.sister)) })}</h2>
+                <div class="view-buttons blend blend-v2">
+                    ${station}
+                </div>
+            </div>
+        `);
+    }
+
+    const albums = page.structure.main.querySelector('.similar-albums')?.parentElement;
+
+    if (albums) {
+        albums.classList = 'albums-like';
+        const head = albums.querySelector('h3');
+        head.textContent = tl(trans.more_like_name, { n: romanise(correct_item_by_artist(page.name, page.sister)) });
+    }
+
+    const tracks = page.structure.main.querySelector('.track-similar-tracks')?.parentElement;
+
+    if (tracks) {
+        tracks.classList = 'tracks-like';
+        const head = tracks.querySelector('h3');
+        head.textContent = tl(trans.more_like_name, { n: romanise(correct_item_by_artist(page.name, page.sister)) });
+    }
+
+    if (!artists && !tracks && !albums) return;
+
+    page.structure.main.appendChild(html.node`
+        <section class="music-like">
+            ${albums}
+            ${tracks}
+            ${artists}
+        </section>
+    `);
 }

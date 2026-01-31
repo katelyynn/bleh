@@ -37,6 +37,8 @@ import { submit_scrobble } from './components/scrobble.js';
 import { match } from './components/dynamic_theming.js';
 import { DateTime } from 'luxon';
 import { input } from './components/input.js';
+import { bleh_message_list } from './components/messages.js';
+import { queue_popup } from './components/popup.js';
 
 export function patch_masthead() {
     let masthead_logo = document.body.querySelector('.masthead-logo');
@@ -49,6 +51,18 @@ export function patch_masthead() {
     }
 }
 
+export function update_branding_type(state = settings.branding_type) {
+    if (state == 'bleh') {
+        render(page.state.home_link, html`
+            <div class="home-logo bleh-logo">${version.brand}</div>
+        `);
+    } else if (state == 'lastfm') {
+        render(page.state.home_link, html`
+            <div class="home-logo lastfm-logo">Last.fm</div>
+        `);
+    }
+}
+
 export function update_masthead(
     masthead_logo = document.body.querySelector('.masthead-logo')
 ) {
@@ -57,26 +71,20 @@ export function update_masthead(
     let home_link;
 
     render(masthead_logo, html``);
-    render(
-        masthead_logo,
-        html`
-            <a href="/">Last.fm</a>
-            <a
-                class="home-link"
-                href="${root}music"
-                ref=${(el) => (home_link = el)}
-            >
-                <div class="bleh-logo">${version.brand}</div>
-                <div class="lastfm-logo">Last.fm</div>
-            </a>
-        `
-    );
+    render(masthead_logo, html`
+        <a class="hidden-link" style="display: none !important" href="/">Last.fm</a>
+        <a class="navigation-item home-link" href="${root}music" ref=${el => home_link = el} />
+    `);
+
+    page.state.home_link = home_link;
+
+    update_branding_type();
 
     const head_menu = tippy(home_link, {
         theme: 'window',
         content: html.node`
             <div class="setting-group blend">
-                ${setting({ id: 'branding_type' })}
+                ${setting({ id: 'branding_type', func: update_branding_type })}
             </div>
         `,
         placement: 'right-start',
@@ -97,40 +105,32 @@ export function update_masthead(
     let link;
     if (update_required === 'false') {
         link = html.node`
-            <a class="bleh--version" href="${root}bleh">
+            <a class="navigation-item home-version" href="${root}bleh">
                 ${version.build}
                 <div class="new-badge sku spacing">
                     ${version.sku}
-                    ${
-                        settings.dev ?
-                            html.node`
-                    <span class="bleh-icon-container">
-                        <span class="bleh-icon" data-type="dev" style="--icon: var(--mask)"/>
-                    </span>
-                    `
-                        :   ''
-                    }
+                    ${settings.dev ? html.node`
+                        <span class="bleh-icon-container">
+                            <span class="bleh-icon" data-type="dev" style="--icon: var(--mask)"/>
+                        </span>
+                    ` : ''}
                 </div>
             </a>
         `;
     } else {
         link = html.node`
-            <a class="bleh--version" onclick=${() => prompt_for_update()}>
+            <a class="navigation-item home-version" onclick=${() => prompt_for_update()}>
                 <div class="update-container">
                     <div class="bleh-icon" style="--icon: var(--icon-16-update)" />
                 </div>
                 ${version.build}
                 <div class="new-badge sku spacing">
                     ${version.sku}
-                    ${
-                        settings.dev ?
-                            html.node`
-                    <span class="bleh-icon-container">
-                        <span class="bleh-icon" data-type="dev" style="--icon: var(--mask)"/>
-                    </span>
-                    `
-                        :   ''
-                    }
+                    ${settings.dev ? html.node`
+                        <span class="bleh-icon-container">
+                            <span class="bleh-icon" data-type="dev" style="--icon: var(--mask)"/>
+                        </span>
+                    ` : ''}
                 </div>
             </a>
         `;
@@ -277,8 +277,7 @@ export function append_nav() {
         scrobble: {
             name: tl(trans.scrobble),
             icon: 'add',
-            action: () => submit_scrobble(),
-            new_release: true
+            action: () => submit_scrobble()
         }
     };
 
@@ -289,7 +288,7 @@ export function append_nav() {
 
     const search = inner.querySelector('.masthead-search-form');
     const form = search.querySelector('.masthead-search-field');
-    form.placeholder = tl(trans.search);
+    form.placeholder = tl(trans.search_for_anything);
     inner.insertBefore(
         html.node`
         <div class="masthead-search-wrap">
@@ -350,14 +349,21 @@ export function append_nav() {
     if (auth_link.hasAttribute('data-bleh')) return;
     auth_link.setAttribute('data-bleh', 'true');
 
-    auth_link.appendChild(html.node`
-        <p>${auth.name}</p>
-    `);
+    const name = html.node`
+        <p class="auth-link-name">${auth.name}</p>
+    `;
+    auth_link.appendChild(name);
+
+    queue_popup('navigation_menu', auth_link);
+
+    load_profile_cache_externally(auth.name).then(cache => {
+        if (cache.username) name.textContent = cache.username;
+    });
 
     let badges = load_badges(auth.name, true);
 
     if (badges) {
-        auth_link.appendChild(create_badge(badges[0], false, false, true));
+        auth_link.appendChild(create_badge(badges, false, false, true));
     } else if (auth.pro) {
         auth_link.appendChild(html.node`
             <span class="label user-status-subscriber auth-badge">${tl(trans.badges['user-status-subscriber'].name)}</span>
@@ -427,12 +433,12 @@ export function append_nav() {
 
     // configure bleh
     let bleh_container = html.node`
-            <li class="masthead-nav-item">
-                <a class="masthead-nav-control chibi" href="${root}bleh${stored_season.id != 'none' ? '/seasonal' : ''}" data-label="bleh" data-season="${stored_season.id}" data-season-active="${stored_season.id != 'none' ? 'true' : 'false'}">
-                    ${stored_season.id == 'none' ? tl(trans.bleh_settings) : DateTime.fromISO(stored_season.end.replace('y0', stored_season.year).replace('{offset}', stored_season.offset)).toRelative(DateTime.fromISO(stored_season.now))}
-                </a>
-            </li>
-        `;
+        <li class="masthead-nav-item">
+            <a class="masthead-nav-control ${stored_season.new_years_eve ? '' : 'chibi'}" href="${root}bleh${stored_season.id != 'none' ? '/seasonal' : ''}" data-label="bleh" data-season="${stored_season.id}" data-season-active="${stored_season.id != 'none' ? 'true' : 'false'}" data-live="false">
+                ${stored_season.id == 'none' ? tl(trans.bleh_settings) : DateTime.fromISO(stored_season.end.replace('y0', stored_season.year).replace('{offset}', stored_season.offset)).toRelative(DateTime.fromISO(stored_season.now))}
+            </a>
+        </li>
+    `;
     if (stored_season.id == 'none') {
         tippy(bleh_container, {
             content: tl(trans.bleh_settings)
@@ -441,9 +447,9 @@ export function append_nav() {
         page.header.season_tooltip = tippy(bleh_container, {
             theme: 'seasonal-swatch',
             content: html.node`
-                    <span class="season-colour-name colourful" data-season=${stored_season.id}>${tl(trans.seasonal.listing[stored_season.id])}</span>
-                    <span class="season-exclusive">${tl(trans.seasonal.notice)}</span>
-                `
+                <span class="season-colour-name colourful" data-season=${stored_season.id}>${tl(trans.seasonal.listing[stored_season.id])}</span>
+                <span class="season-exclusive">${tl(trans.seasonal.notice)}</span>
+            `
         });
     }
     links.appendChild(bleh_container);
@@ -542,24 +548,10 @@ export function append_nav() {
     function render_messages(messages) {
         if (settings.inbox_view != 'messages') return;
 
+        bleh_message_list(messages, true);
+
         render(
             page.state.inbox_content,
-            html`
-                <div class="mini-notifications">
-                    <div class="alert alert-danger">
-                        This is a work in progress, sorry! >_<
-                    </div>
-                    <p class="more-link">
-                        <a href="${root}inbox">${tl(trans.read_more)}</a>
-                    </p>
-                </div>
-            `
-        );
-
-        return;
-
-        render(
-            content,
             html`
                 <div class="mini-notifications">
                     ${messages}
@@ -607,6 +599,9 @@ export function append_nav() {
     }
 
     links.appendChild(inbox);
+
+    queue_popup('inbox', inbox);
+    queue_popup('search', search);
 
     // language
     let selected_language = document.querySelector(
@@ -750,6 +745,8 @@ export function append_nav() {
             page.structure.notifications.setAttribute('data-auth-open', 'true');
             badges = load_badges(auth.name);
 
+            const update_required = localStorage.getItem('bleh_update_required') || 'false';
+
             let page_2;
             let side;
 
@@ -772,18 +769,29 @@ export function append_nav() {
                 page.state.settings_page == 'visual';
 
             let auth_header;
+            let auth_bg;
 
             instance.setContent(html.node`
+                ${update_required == 'true' ? html.node`
+                <div class="update-available-banner">
+                    <div class="update-container">
+                        <div class="bleh-icon" style="--icon: var(--icon-16-update)" />
+                    </div>
+                    <span>${tl(trans.update_available_to_install)}</span>
+                </div>
+                ` : ''}
                 <div class="auth-menu-v2" style="--page-height: ${height}px">
                     <div class="side primary">
+                        <div class="auth-bg-container" ref=${el => auth_bg = el}>
+                            ${!auth.avatar.endsWith('818148bf682d429dc215c1705eb27b98.png') ? html.node`
+                            <div class="bg" style="background-image: url(${auth.avatar.replace('avatar42s', 'avatar170s')})" />
+                            ` : ''}
+                        </div>
                         <div class="auth-menu-header" ref=${el => auth_header = el}>
                             <div class="avatar">
                                 <img src=${auth.avatar.replace('avatar42s', 'avatar170s')} alt=${auth.name} />
                             </div>
-                            ${!auth.avatar.endsWith('818148bf682d429dc215c1705eb27b98.png') ? html.node`
-                            <div class="bg" style="background-image: url(${auth.avatar.replace('avatar42s', 'avatar170s')})" />
-                            ` : ''}
-                            <div class="name">@${auth.name}</div>
+                            <div class="name"><span class="at">@</span>${auth.name}</div>
                             ${auth.pro ? html.node`
                                 <div class="badges">
                                     ${auth.pro ? () => {
@@ -830,7 +838,7 @@ export function append_nav() {
                                 settings.starred_friend != '' ?
                                     () => {
                                         let button = html.node`
-                                    <a class="dropdown-menu-clickable-item chibi" data-type="starred_friend" data-is-shortcut="true" href="${root}user/${settings.starred_friend}">${settings.starred_friend}</a>
+                                    <a class="dropdown-menu-clickable-item chibi" data-type="starred_friend" data-starred="true" href="${root}user/${settings.starred_friend}">${settings.starred_friend}</a>
                                 `;
 
                                         tippy(button, {
@@ -867,7 +875,10 @@ export function append_nav() {
                                 if (formal.url)
                                     elem = html.node`<a href=${formal.url} />`;
                                 else
-                                    elem = html.node`<button onclick=${formal.action} />`;
+                                    elem = html.node`<button onclick=${() => {
+                                        formal.action();
+                                        instance.hide();
+                                    }} />`;
 
                                 elem.classList = 'dropdown-menu-clickable-item';
                                 elem.setAttribute('data-type', formal.icon);
@@ -879,23 +890,62 @@ export function append_nav() {
                                 else if (val == 'messages') count = inbox_count;
 
                                 if (count) {
-                                    render(
-                                        elem,
-                                        html`
-                                            <div class="auth-dropdown-item-row">
-                                                <span
-                                                    class="auth-dropdown-item-left"
-                                                >
-                                                    ${formal.name}
-                                                </span>
-                                                <span
-                                                    class="auth-dropdown-item-right"
-                                                >
-                                                    ${count}
-                                                </span>
-                                            </div>
-                                        `
-                                    );
+                                    render(elem, html`
+                                        <div class="auth-dropdown-item-row">
+                                            <span class="auth-dropdown-item-left">
+                                                ${formal.name}
+                                            </span>
+                                            <span class="auth-dropdown-item-right">
+                                                ${count}
+                                            </span>
+                                        </div>
+                                    `);
+                                }
+
+                                if (val == 'friends') {
+                                    elem = html.node`
+                                        <div class="button-combo">
+                                            <a class="dropdown-menu-clickable-item" data-type=${formal.icon} href=${formal.url}>
+                                                ${formal.name}
+                                            </a>
+                                            <div class="button-combo-sep" />
+                                            <button class="dropdown-menu-clickable-item chibi" data-type="continue" onclick=${() => {
+                                                const friends = settings.friends.filter(friend => friend != settings.starred_friend);
+
+                                                render(page_2, html``); // fix crash
+                                                render(page_2, html`
+                                                    <button class="dropdown-menu-clickable-item" data-type="back" onclick=${() => {
+                                                        side.setAttribute('data-page', '1');
+                                                    }}>
+                                                        ${tl(trans.back)}
+                                                    </button>
+                                                    ${settings.starred_friend ? html.node`
+                                                    <a class="dropdown-menu-clickable-item" data-type="profile" href="${root}user/${settings.starred_friend}">
+                                                        <span><span class="at">@</span>${settings.starred_friend}</span>
+                                                        <span class="star-icon colourful">
+                                                            <span class="bleh-icon" />
+                                                        </span>
+                                                    </a>
+                                                    ` : ''}
+                                                    ${friends.map(friend => html.node`
+                                                    <a class="dropdown-menu-clickable-item" data-type="profile" href="${root}user/${friend}">
+                                                        <span><span class="at">@</span>${friend}</span>
+                                                    </a>
+                                                    `)}
+                                                    <div class="sep" />
+                                                    <button class="dropdown-menu-clickable-item" data-type="edit" onclick=${() => {
+                                                        open_starred_friend_window();
+                                                        instance.hide();
+                                                    }}>
+                                                        ${tl(trans.edit_close_friends)}
+                                                    </button>
+                                                `);
+                                                side.setAttribute('data-page', '2');
+                                            }}>
+                                                ${tl(trans.more)}
+                                            </button>
+                                        </div>
+                                    `;
                                 }
 
                                 return elem;
@@ -909,33 +959,22 @@ export function append_nav() {
                                     let buttons = [];
 
                                     render(page_2, html``); // fix crash
-                                    render(
-                                        page_2,
-                                        html`
-                                            <button
-                                                class="dropdown-menu-clickable-item"
-                                                data-type="back"
-                                                onclick=${() => {
-                                                    side.setAttribute(
-                                                        'data-page',
-                                                        '1'
-                                                    );
-                                                }}
-                                            >
-                                                ${tl(trans.back)}
-                                            </button>
-                                            ${themes.map((theme) => {
-                                                if (theme.hide)
-                                                    return html.node``;
+                                    render(page_2, html`
+                                        <button class="dropdown-menu-clickable-item" data-type="back" onclick=${() => {
+                                            side.setAttribute('data-page', '1');
+                                        }}>
+                                            ${tl(trans.back)}
+                                        </button>
+                                        ${themes.map((theme) => {
+                                            if (theme.hide)
+                                                return html.node``;
 
-                                                if (!theme.formal)
-                                                    theme.formal = theme.id;
+                                            if (!theme.formal)
+                                                theme.formal = theme.id;
 
-                                                const btn = html.node`
+                                            const btn = html.node`
                                                 <button class="dropdown-menu-clickable-item theme-item-in-menu" aria-selected=${!settings.theme_schedule ? settings.theme == theme.id : theme.id == 'adaptive'} data-bleh-theme=${theme.id} data-type="theme_${theme.formal}" onclick="${() => {
-                                                    if (
-                                                        theme.id != 'adaptive'
-                                                    ) {
+                                                    if (theme.id != 'adaptive') {
                                                         save_setting('theme_schedule', false);
                                                         save_setting('theme', theme.id);
                                                     } else {
@@ -979,11 +1018,10 @@ export function append_nav() {
                                                 </button>
                                             `;
 
-                                                buttons.push(btn);
-                                                return btn;
-                                            })}
-                                        `
-                                    );
+                                            buttons.push(btn);
+                                            return btn;
+                                        })}
+                                    `);
                                     side.setAttribute('data-page', '2');
                                 }}>
                                     ${tl(trans.more)}
@@ -1076,15 +1114,17 @@ export function append_nav() {
             `);
 
             load_profile_cache_externally(auth.name).then(cache => {
-                render(auth_header, html`
-                    <div class="avatar">
-                        <img src=${auth.avatar.replace('avatar42s', 'avatar170s')} alt=${auth.name} />
-                    </div>
+                render(auth_bg, html`
                     ${cache.banner ? html.node`
                     <div class="bg" style="background-image: url(${cache.banner})" />
                     ` : !auth.avatar.endsWith('818148bf682d429dc215c1705eb27b98.png') ? html.node`
                     <div class="bg" style="background-image: url(${auth.avatar.replace('avatar42s', 'avatar170s')})" />
                     ` : ''}
+                `);
+                render(auth_header, html`
+                    <div class="avatar">
+                        <img src=${auth.avatar.replace('avatar42s', 'avatar170s')} alt=${auth.name} />
+                    </div>
                     <div class="name">${cache.username ? cache.username : `@${auth.name}`}</div>
                     ${badges || auth.pro ? html.node`
                         <div class="badges">
@@ -1496,7 +1536,7 @@ export async function fetch_messages() {
         const parser = new DOMParser();
         const doc = parser.parseFromString(dom, 'text/html');
 
-        const list = doc.querySelector('.inbox-table');
+        const list = doc.querySelector('.inbox-table tbody');
 
         let next = new Date();
         next.setMinutes(next.getMinutes() + 2);

@@ -44,13 +44,15 @@ import {
     checkup_friend_cache,
     load_profile_cache_externally
 } from './profile.js';
-import { select_prepare_list } from '../components/select.js';
+import { select, select_prepare_convert_from_setting, select_prepare_list } from '../components/select.js';
 import { match } from '../components/dynamic_theming.js';
 import { manage_oracle_data, oracle_data } from '../components/oracle.js';
 import { render_activity } from '../activity.js';
 import { DateTime } from 'luxon';
 import { sponsor, sponsor_manage, sponsors } from '../sponsor.js';
 import { version as florence_version } from '@tealmiku/florence';
+import { update_branding_type } from '../navigation.js';
+import { queue_popup } from '../components/popup.js';
 
 export function bleh_settings() {
     page.name = auth.name;
@@ -188,6 +190,13 @@ export function bleh_settings() {
     else change_settings_page(tab);
 
     if (page.requested.setting) scroll_to_setting(page.requested.setting);
+
+    const profile_tab = nav.querySelector('[data-bleh-page="profile"]');
+    if (profile_tab) {
+        setTimeout(() => {
+            queue_popup('close_friends', profile_tab);
+        }, 0);
+    }
 }
 
 function page_loading() {
@@ -204,7 +213,7 @@ export async function render_setting_page(page_id) {
     page_loading();
 
     if (page_id == 'general') {
-        if (auth.pro === null) {
+        if (auth.pro == null) {
             setTimeout(() => {
                 render_setting_page('general');
             }, 10);
@@ -236,86 +245,104 @@ export async function render_setting_page(page_id) {
 
         render(page.structure.main, html`
                 <section class="bleh--panel">
-                    <div class="update-center-header">
-                        ${paused === 'true' ? html.node`
-                            <div class="update-center-icon">
-                                <div class="update-container">
-                                    <div class="bleh-icon" data-type="update" />
+                    <h4>${tl(trans.updates)}</h4>
+                    <div class="setting-group">
+                        <div class="setting" data-type="action">
+                            ${paused === 'true' ? html.node`
+                                <div class="setting-v2-icon update-center-icon">
+                                    <div class="update-container">
+                                        <div class="bleh-icon" data-type="update" />
+                                    </div>
+                                    <div class="check-circle paused colourful">
+                                        <div class="bleh-icon" data-type="paused" />
+                                    </div>
                                 </div>
-                                <div class="check-circle paused colourful">
-                                    <div class="bleh-icon" data-type="paused" />
+                                <div class="heading">
+                                    <h5>${tl(trans.updates_paused)}</h5>
+                                    <p class="last-checked">${tl(trans.paused_until_date).replace('{d}', DateTime.fromJSDate(new Date(paused_until)).toRelative())}</p>
                                 </div>
-                            </div>
-                            <div class="update-center-details">
-                                <h2>${tl(trans.updates_paused)}</h2>
-                                <p class="last-checked">${tl(trans.paused_until_date).replace('{d}', DateTime.fromJSDate(new Date(paused_until)).toRelative())}</p>
-                            </div>
-                            <button class="btn primary icon" data-type="update" ref=${(el) => (update_btn = el)} disabled>${tl(trans.check)}</button>
-                        ` : update_required === 'false' ? html.node`
-                            <div class="update-center-icon">
-                                <div class="update-container">
-                                    <div class="bleh-icon" data-type="update" />
+                                <div class="toggle-wrap">
+                                    <button class="btn primary icon" data-type="update" ref=${(el) => (update_btn = el)} disabled>${tl(trans.check)}</button>
                                 </div>
-                                ${last_checked ? html.node`
-                                <div class="check-circle colourful">
-                                    <div class="bleh-icon" data-type="check-thick" />
+                            ` : update_required === 'false' ? html.node`
+                                <div class="setting-v2-icon update-center-icon">
+                                    <div class="update-container">
+                                        <div class="bleh-icon" data-type="update" />
+                                    </div>
+                                    ${last_checked ? html.node`
+                                    <div class="check-circle colourful">
+                                        <div class="bleh-icon" data-type="check-thick" />
+                                    </div>
+                                    ` : ''}
                                 </div>
-                                ` : ''}
-                            </div>
-                            <div class="update-center-details">
-                                ${last_checked
-                                        ? html.node`
-                                <h2>${tl(trans.you_are_up_to_date)}</h2>
-                                <p class="last-checked">${tl(trans.last_checked_date).replace('{d}', DateTime.fromJSDate(new Date(last_checked)).toRelative())}</p>
-                                `
-                                        : html.node`
-                                <h2>${tl(trans.missing_updates)}</h2>
-                                <p class="last-checked">${tl(trans.never_checked)}</p>
-                                `
-                                    }
-                            </div>
-                            <button class="btn icon" data-type="update" ref=${(el) => (update_btn = el)} onclick=${() => update_check(true, update_btn, () => {
-                                notify({
-                                    id: 'update',
-                                    title: tl(trans.updates),
-                                    body: tl(trans.checked_for_updates),
-                                    icon: 'icon-16-update'
-                                });
-                                render_setting_page('general');
-                            })}>${tl(trans.check)}</button>
-                        ` : html.node`
-                            <div class="update-center-icon">
-                                <div class="update-container spin">
-                                    <div class="bleh-icon" data-type="update" />
+                                <div class="heading">
+                                    ${last_checked ? html.node`
+                                        <h5>${tl(trans.you_are_up_to_date)}</h5>
+                                        <p class="last-checked">${tl(trans.last_checked_date).replace('{d}', DateTime.fromJSDate(new Date(last_checked)).toRelative())}</p>
+                                    ` : html.node`
+                                        <h5>${tl(trans.missing_updates)}</h5>
+                                        <p class="last-checked">${tl(trans.never_checked)}</p>
+                                    `}
                                 </div>
-                            </div>
-                            <div class="update-center-details">
-                                <h2>${tl(trans.update_available_to_install)}</h2>
-                                ${last_checked ? html.node`
-                                    <p class="last-checked">${tl(trans.last_checked_date, { d: DateTime.fromJSDate(new Date(last_checked)).toRelative() })}</p>
-                                ` : html.node`
-                                    <p class="last-checked">${tl(trans.never_checked)}</p>
-                                `}
-                            </div>
-                            <div class="button-group">
-                                <button class="btn icon" data-type="update" ref=${(el) => (update_btn = el)} onclick=${() => update_check(true, update_btn, () => {
-                                    notify({
-                                        id: 'update',
-                                        title: tl(trans.updates),
-                                        body: tl(trans.checked_for_updates),
-                                        icon: 'icon-16-update'
-                                    });
-                                    render_setting_page('general');
-                                })}>${tl(trans.check)}</button>
-                                <button class="btn primary icon" data-type="update" ref=${(el) => (update_btn = el)} onclick=${() => start_update()}>${tl(trans.install_now)}</button>
-                            </div>
-                        `}
+                                <div class="toggle-wrap">
+                                    <button class="btn icon" data-type="update" ref=${(el) => (update_btn = el)} onclick=${() => update_check(true, update_btn, () => {
+                                        notify({
+                                            id: 'update',
+                                            title: tl(trans.updates),
+                                            body: tl(trans.checked_for_updates),
+                                            icon: 'icon-16-update'
+                                        });
+                                        render_setting_page('general');
+                                    })}>${tl(trans.check)}</button>
+                                </div>
+                            ` : html.node`
+                                <div class="setting-v2-icon update-center-icon">
+                                    <div class="update-container spin">
+                                        <div class="bleh-icon" data-type="update" />
+                                    </div>
+                                </div>
+                                <div class="heading">
+                                    <h5>${tl(trans.update_available_to_install)}</h5>
+                                    ${last_checked ? html.node`
+                                        <p class="last-checked">${tl(trans.last_checked_date, { d: DateTime.fromJSDate(new Date(last_checked)).toRelative() })}</p>
+                                    ` : html.node`
+                                        <p class="last-checked">${tl(trans.never_checked)}</p>
+                                    `}
+                                </div>
+                                <div class="toggle-wrap">
+                                    <div class="button-group">
+                                        <button class="btn icon" data-type="update" ref=${(el) => (update_btn = el)} onclick=${() => update_check(true, update_btn, () => {
+                                            notify({
+                                                id: 'update',
+                                                title: tl(trans.updates),
+                                                body: tl(trans.checked_for_updates),
+                                                icon: 'icon-16-update'
+                                            });
+                                            render_setting_page('general');
+                                        })}>${tl(trans.check)}</button>
+                                        <button class="btn primary icon" data-type="update" ref=${(el) => (update_btn = el)} onclick=${() => start_update()}>${tl(trans.install_now)}</button>
+                                    </div>
+                                </div>
+                            `}
+                        </div>
+                        <div class="setting" data-type="info">
+                            ${last_checked && paused === 'false' && update_required === 'true' ? html.node`
+                                <div class="heading">
+                                    <h5>${tl(trans.updating_to_version)}</h5>
+                                </div>
+                                <div class="info">
+                                    <p>${version_to_install}</p>
+                                </div>
+                            ` : html.node`
+                                <div class="heading">
+                                    <h5>${tl(trans.current_version)}</h5>
+                                </div>
+                                <div class="info">
+                                    <p>${version.build}</p>
+                                </div>
+                            `}
+                        </div>
                     </div>
-                    ${last_checked && paused === 'false' && update_required === 'true' ? html.node`
-                        <div class="alert alert-info">${tl(trans.you_are_installing_version, { v: version_to_install })}</div>
-                    ` : html.node`
-                        <div class="alert alert-info">${tl(trans.you_are_running_version, { v: version.build })}</div>
-                    `}
                 </section>
                 <section class="bleh--panel">
                     <h4>${tl(trans.profile)}</h4>
@@ -404,7 +431,7 @@ export async function render_setting_page(page_id) {
                             <div class="setting" data-type="action">
                                 <div class="heading">
                                     <h5>${tl(trans.news_sponsor_cta)}</h5>
-                                    <p>${tl(trans.api.body)}</p>
+                                    <p>${tl(trans.sponsor_get_badge)}</p>
                                 </div>
                                 <div class="toggle-wrap">
                                     <button class="btn primary icon sponsor" data-type="sponsor" onclick=${() => sponsor()}>
@@ -432,7 +459,7 @@ export async function render_setting_page(page_id) {
                     <section class="bleh--panel">
                         <h4>${tl(trans.branding)}</h4>
                         <div class="setting-group">
-                            ${setting({ id: 'branding_type' })}
+                            ${setting({ id: 'branding_type', func: update_branding_type })}
                         </div>
                     </section>
                 ` : ''}
@@ -785,14 +812,6 @@ export async function render_setting_page(page_id) {
         display_colour_presets();
         update_colour_swatches();
     } else if (page_id == 'interface') {
-        if (!page.state.quick_access_items) {
-            setTimeout(() => {
-                render_setting_page('interface');
-            }, 10);
-            page_loading();
-            return;
-        }
-
         register_skip_to([]);
 
         function chartlist_bar(value, max) {
@@ -978,13 +997,6 @@ export async function render_setting_page(page_id) {
                 </div>
                 <div class="setting-group">
                     ${setting({ id: 'gendered_tags' })}
-                </div>
-            </section>
-            <section class="bleh--panel">
-                <h4>${tl(trans.navigation_items.name)}</h4>
-                <div class="setting-group">
-                    ${setting({ id: 'navigation_items', list: page.state.quick_access_items })}
-                    ${!page.mobile ? setting({ id: 'navigation_language' }) : ''}
                 </div>
             </section>
             <section class="bleh--panel">
@@ -1528,23 +1540,25 @@ export async function render_setting_page(page_id) {
                     </ul>
                     <div class="sep"></div>
                     <h4>${tl(trans.development)}</h4>
-                    <button
-                        class="see-more"
-                        onclick=${() => {
-                    if (settings.hu_tao == 'develop') {
-                        change_settings_page('sku');
-                    } else {
-                        dialog({
-                            id: 'hu_tao',
-                            title: tl(trans.development),
-                            body: html.node`
-                                ${setting({ id: 'hu_tao', text: false, focus: true })}
-                            `
-                        });
-                    }
-                }}
-                    >
+                    <button class="see-more" onclick=${() => {
+                        if (settings.hu_tao == 'develop') {
+                            change_settings_page('sku');
+                        } else {
+                            dialog({
+                                id: 'hu_tao',
+                                title: tl(trans.development),
+                                body: html.node`
+                                    ${setting({ id: 'hu_tao', text: false, focus: true })}
+                                `
+                            });
+                        }
+                    }}>
                         ${tl(trans.manage_feature_flags)}
+                    </button>
+                    <button class="see-more" onclick=${() => {
+                        save_setting('popups_seen', []);
+                    }}>
+                        Forget which popups have been seen
                     </button>
                 </section>
             `
@@ -1566,6 +1580,14 @@ export async function render_setting_page(page_id) {
             return;
         }
 
+        if (!page.state.quick_access_items) {
+            setTimeout(() => {
+                render_setting_page('profile');
+            }, 10);
+            page_loading();
+            return;
+        }
+
         register_skip_to([]);
 
         const cache = await load_profile_cache_externally(auth.name);
@@ -1578,6 +1600,34 @@ export async function render_setting_page(page_id) {
         render(
             page.structure.main,
             html`
+                ${ff('friends') ? html.node`
+                    <section class="bleh--panel">
+                        <h4>${tl(trans.close_friends)}</h4>
+                        <div class="setting-group">
+                            ${friends = setting({
+                                id: 'friends',
+                                list: settings.friends,
+                                func: (val) => {
+                                    if (!val.includes(settings.starred_friend))
+                                        save_setting('starred_friend', '');
+
+                                    checkup_friend_cache(val);
+
+                                    starred.update(select_prepare_list([{ value: '', text: tl(trans.none) }, ...val]));
+                                }
+                            })}
+                            ${starred = setting({ id: 'starred_friend', list: select_prepare_list([{ value: '', text: tl(trans.none) }, ...settings.friends]) })}
+                        </div>
+                        <p class="card-tip">${tl(trans.friend_difference)}</p>
+                    </section>
+                ` : ''}
+                <section class="bleh--panel">
+                    <h4>${tl(trans.navigation_items.name)}</h4>
+                    <div class="setting-group">
+                        ${setting({ id: 'navigation_items', list: page.state.quick_access_items })}
+                        ${!page.mobile ? setting({ id: 'navigation_language' }) : ''}
+                    </div>
+                </section>
                 <section class="bleh--panel">
                     <h4>${tl(trans.banners)}</h4>
                     <div class="inner-preview pad">
@@ -1611,20 +1661,12 @@ export async function render_setting_page(page_id) {
                                     <div class="mockup-panel main"></div>
                                 </div>
                             </div>
-                            <div
-                                class="profile-mockup-background from-avatar"
-                                style="background-image: url(${auth.avatar.replace(
-                '/avatar42s/',
-                '/avatar300s/'
-            )})"
-                            ></div>
-                            ${cache.banner
-                    ? html.node`
-                        <div class="profile-mockup-background from-banner" style="background-image: url(${cache.banner})"></div>
-                        `
-                    : html.node`
-                        <div class="profile-mockup-background from-track" style="background-image: url(https://lastfm.freetls.fastly.net/i/u/avatar300s/df927f4f88034b7f9a651636b965c9d7)"></div>
-                        `}
+                            <div class="profile-mockup-background from-avatar" style="background-image: url(${auth.avatar.replace('/avatar42s/','/avatar300s/')})" />
+                            ${cache.banner ? html.node`
+                                <div class="profile-mockup-background from-banner" style="background-image: url(${cache.banner})"></div>
+                            ` : html.node`
+                                <div class="profile-mockup-background from-track" style="background-image: url(https://lastfm.freetls.fastly.net/i/u/avatar300s/df927f4f88034b7f9a651636b965c9d7)"></div>
+                            `}
                         </div>
                     </div>
                     <div class="setting-group">
@@ -1633,42 +1675,13 @@ export async function render_setting_page(page_id) {
                                 <h5>${tl(trans.view_backgrounds_on)}</h5>
                             </div>
                             <div class="primary-selections">
-                                ${setting({
-                        id: 'profile_header_own',
-                        standalone: true
-                    })}
-                                ${setting({
-                        id: 'profile_header_others',
-                        standalone: true
-                    })}
+                                ${setting({ id: 'profile_header_own', standalone: true })}
+                                ${setting({ id: 'profile_header_others', standalone: true })}
                             </div>
                         </div>
                         ${setting({ id: 'profile_avi_background' })}
                     </div>
                 </section>
-                ${ff('friends')
-                    ? html.node`
-            <section class="bleh--panel">
-                <h4>${tl(trans.friends)}</h4>
-                <div class="setting-group">
-                    ${(friends = setting({
-                        id: 'friends',
-                        list: settings.friends,
-                        func: (val) => {
-                            if (!val.includes(settings.starred_friend))
-                                save_setting('starred_friend', '');
-
-                            checkup_friend_cache(val);
-
-                            render_setting_page('profile');
-                        }
-                    }))}
-                    ${(starred = setting({ id: 'starred_friend', list: select_prepare_list([{ value: '', text: tl(trans.none) }, ...settings.friends]) }))}
-                </div>
-                <p class="card-tip">${tl(trans.friend_difference)}</p>
-            </section>
-            `
-                    : ''}
                 <section class="bleh--panel">
                     <h4>${tl(trans.other)}</h4>
                     <div class="setting-group">
@@ -1819,7 +1832,7 @@ export async function render_setting_page(page_id) {
                                 </div>
                                 <div class="toggle-wrap">
                                     <input type="checkbox" ref=${(el) => (checkbox = el)} value=${value} checked=${value} />
-                                    <button class="toggle" aria-checked=${value} ref=${(el) => (state = el)}>
+                                    <button class="btn toggle" aria-checked=${value} ref=${(el) => (state = el)}>
                                         <div class="dot" />
                                     </button>
                                 </div>
@@ -1834,7 +1847,12 @@ export async function render_setting_page(page_id) {
 
         render(page.structure.main, html`
             <section class="bleh--panel">
-                ${setting({id: 'translator_view', list: lang_info, func: translation_view})}
+                ${select(select_prepare_convert_from_setting(lang_info), settings.translator_view, '', translation_view, false, (val) => html.node`
+                    <span class="language-header">
+                        <span class="flag" style="background-image: url(https://katelyynn.github.io/bleh/fm/flags/${val.value}.svg)" />
+                        <p>${val.text}</p>
+                    </span>
+                `, true)}
                 <div class="translation-view" ref=${el => translation_view_container = el} />
             </section>
         `);
@@ -1843,10 +1861,6 @@ export async function render_setting_page(page_id) {
             const language = lang_info[lang];
 
             render(translation_view_container, html`
-                <div class="language-header">
-                    <span class="flag" style="background-image: url(https://katelyynn.github.io/bleh/fm/flags/${lang}.svg)" />
-                    <p>${language.name}</p>
-                </div>
                 <div class="language-sub">
                     <div class="language-info colourful translated"><span class="bleh-icon" />${tl(trans.amount_translated, { c: language.translated })} (${language.percent}%)</div>
                     ${() => {
@@ -1938,17 +1952,13 @@ export function change_settings_page(page_id, setting = null) {
 
     page.structure.main.innerHTML = '';
 
-    let btns = document.querySelectorAll('.bleh--nav');
+    let btns = page.structure.container.querySelectorAll('.bleh--nav');
     btns.forEach((btn) => {
         const id = btn.getAttribute('data-bleh-page');
 
         btn.setAttribute('data-hide', page_id != id);
 
-        if (page_id != id) {
-            btn.classList.remove('secondary-nav-item-link--active');
-        } else {
-            btn.classList.add('secondary-nav-item-link--active');
-        }
+        btn.classList.toggle('secondary-nav-item-link--active', page_id == id);
     });
 
     if (page_id == 'seasonal') seasonal_timer_start();
@@ -2298,37 +2308,34 @@ export function display_colour_presets() {
                 content: html.node`
                     <div class="dialog-settings">
                         <div class="setting-group blend">
-                            ${ff('colour_based_on_hex')
-                        ? html.node`
+                            ${ff('colour_based_on_hex') ? html.node`
                             <div class="setting" data-type="text">
                                 <div class="heading">
                                     <h5>${tl(trans.convert_from_hex)}</h5>
                                 </div>
                                 <div class="input-container content-form">
                                     ${(colour = input({
-                            type: 'colour',
-                            value: '#999999',
-                            maxlength: 7,
-                            warn_if_empty: true
-                        }))}
+                                        type: 'colour',
+                                        value: '#999999',
+                                        maxlength: 7,
+                                        warn_if_empty: true
+                                    }))}
                                     <button class="btn primary icon convert" onclick=${() => {
-                                const value = colour.value();
-                                const hsl = hex_to_hsl(value);
+                                        const value = colour.value();
+                                        const hsl = hex_to_hsl(value);
 
-                                hue_range.set(hsl.h);
-                                sat_range.set(
-                                    clamp_sat((hsl.s / 100) * 3)
-                                );
-                                lit_range.set(hsl.l / 100 + 0.35);
-                            }}>${tl(trans.convert)}</button>
+                                        hue_range.set(hsl.h);
+                                        sat_range.set(
+                                            clamp_sat((hsl.s / 100) * 3)
+                                        );
+                                        lit_range.set(hsl.l / 100 + 0.35);
+                                    }}>${tl(trans.convert)}</button>
                                 </div>
                             </div>
-                            `
-                        : ''
-                    }
-                            ${(hue_range = setting({ id: 'hue', func: update_colour_swatches }))}
-                            ${(sat_range = setting({ id: 'sat', func: update_colour_swatches }))}
-                            ${(lit_range = setting({ id: 'lit', func: update_colour_swatches }))}
+                            ` : ''}
+                            ${hue_range = setting({ id: 'hue', func: update_colour_swatches })}
+                            ${sat_range = setting({ id: 'sat', func: update_colour_swatches })}
+                            ${lit_range = setting({ id: 'lit', func: update_colour_swatches })}
                         </div>
                     </div>
                 `,
@@ -2393,15 +2400,35 @@ function init_profile_notes() {
                     <a class="mention" href="${root}user/${user}">@${user}</a>
                 </div>
                 <div class="text preview">
-                    <p id="profile-note-row-preview--${user}">${{ html: profile_notes[user] }}</p>
+                    <p id="profile-note-row-preview--${user}">${profile_notes[user]}</p>
                 </div>
                 <div class="actions">
-                    <button class="icon chibi edit" onclick=${() => edit_profile_note(user)}>
-                        ${tl(trans.delete)}
-                    </button>
-                    <button class="icon chibi delete danger-subtle" onclick=${() => delete_profile_note(user)}>
-                        ${tl(trans.delete)}
-                    </button>
+                    ${() => {
+                        const btn = html.node`
+                            <button class="btn icon chibi list-action" data-type="edit" onclick=${() => edit_profile_note(user)}>
+                                ${tl(trans.edit)}
+                            </button>
+                        `;
+
+                        tippy(btn, {
+                            content: btn.textContent
+                        });
+
+                        return btn;
+                    }}
+                    ${() => {
+                        const btn = html.node`
+                            <button class="btn icon chibi danger-subtle list-action" data-type="delete" onclick=${() => delete_profile_note(user)}>
+                                ${tl(trans.delete)}
+                            </button>
+                        `;
+
+                        tippy(btn, {
+                            content: btn.textContent
+                        });
+
+                        return btn;
+                    }}
                 </div>
             </div>
         `);

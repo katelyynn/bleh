@@ -86,7 +86,10 @@ import { prepare_music } from './components/music.js';
 import { page_menu } from './components/menu.js';
 import { seasonal_colour_switch } from './components/settings.js';
 import florence from '@tealmiku/florence';
-import tippy, { hideAll } from 'tippy.js';
+import { hideAll } from 'tippy.js';
+import { notices } from './components/notices.js';
+import { tag_page } from './components/tags.js';
+import { clear_popup_queue } from './components/popup.js';
 
 export function bleh() {
     florence({
@@ -122,6 +125,8 @@ export function bleh() {
 
             lookup_lang();
 
+            notices();
+
             theme_version.state = getComputedStyle(document.body)
                 .getPropertyValue('--version-build')
                 .replaceAll("'", '')
@@ -134,6 +139,9 @@ export function bleh() {
             load_status();
 
             checkup_friend_cache();
+
+            detect_mobile();
+            page.platform = detect_platform();
 
             // load seasonal data
             set_season();
@@ -356,6 +364,12 @@ function main_flow() {
         });
     }
 
+    if (['artist', 'album', 'track'].includes(page.type)) {
+        if (page.subpage == 'tags_overview') {
+            tag_page();
+        }
+    }
+
     shout_messages();
 
     subscribe_to_events();
@@ -368,7 +382,9 @@ function load_page(main_content = null) {
         clearInterval(page.state.activity_preview_timer);
 
     page.state.settings_page = '';
-    //hideAll({duration: 0});
+
+    hideAll({ duration: 0 });
+    clear_popup_queue();
 
     if (main_content) {
         auth.pro = !!main_content.querySelector(
@@ -379,6 +395,9 @@ function load_page(main_content = null) {
     page.structure.notifications.setAttribute('data-auth-open', 'false');
 
     lookup_lang();
+
+    detect_mobile();
+    page.platform = detect_platform();
 
     set_season();
     seasonal_timer_end();
@@ -393,16 +412,11 @@ function load_page(main_content = null) {
     detect_scroll();
 
     function detect_scroll() {
-        return;
-
-        if (scroll > 30) masthead.classList.add('scrolled');
+        if (window.scrollY > 10) masthead.classList.add('scrolled');
         else masthead.classList.remove('scrolled');
     }
 
     prepare_music();
-
-    detect_mobile();
-    page.platform = detect_platform();
 
     if (
         window.location.pathname.startsWith(setup_url.replace('{root}', root))
@@ -480,7 +494,7 @@ function load_page(main_content = null) {
         else if (page.type == 'api') bleh_api();
         else if (page.type == 'labs') bleh_labs();
 
-        if (page.type == 'user' || page.type == 'events') {
+        if (['user', 'events'].includes(page.type) && ['following', 'followers', 'neighbours', 'event_attendance_going', 'event_attendance_maybe'].includes(page.subpage)) {
             bleh_users();
         }
 
@@ -773,14 +787,15 @@ export async function register_background(url, origin = null) {
     if (url && url.endsWith('c6f59c1e5e7240a4c0d427abd71f3dbb.jpg')) url = '';
 
     log(`requested register of ${url} from ${origin}`, 'background', 'log');
-    let background = page.structure.container.querySelector(':scope > .bleh-background');
+    let background = page.structure.background;
 
     if (!background) {
         background = html.node`
             <div class="bleh-background katsune-bleh-background" />
         `;
 
-        page.structure.container.insertBefore(background, page.structure.container.firstElementChild);
+        document.body.appendChild(background);
+        page.structure.background = background;
     }
 
     /*
@@ -818,6 +833,48 @@ export async function register_background(url, origin = null) {
     }
 
     log(`registered ${url} from ${origin}`, 'background');
+
+    register_banner(url, origin);
+
+    return background;
+}
+
+export function register_banner(url, origin = null) {
+    let background = page.structure.banner;
+
+    if (!background) {
+        background = html.node`
+            <div class="page-banner" />
+        `;
+        document.body.appendChild(background);
+        page.structure.banner = background;
+    }
+
+    background.setAttribute('data-page-type', page.type);
+    background.setAttribute('data-page-subpage', page.subpage);
+    background.setAttribute('data-background-origin', origin);
+    background.setAttribute('data-background-coloured', settings.hue_from_album);
+
+    render(background, html``);
+    render(background, html`
+        <span class="background-inner" ref=${el => inner = el} />
+    `);
+
+    if (url) {
+        if (url == 'accent') {
+            inner.setAttribute('data-accent-based', true);
+        } else {
+            inner.style.setProperty('background-image', `url(${url})`);
+        }
+    }
+
+    if (page.type == 'user') {
+        if (page.name == auth.name) {
+            background.setAttribute('data-page-user-is-self', 'true');
+        } else {
+            background.setAttribute('data-page-user-is-self', 'false');
+        }
+    }
 
     return background;
 }

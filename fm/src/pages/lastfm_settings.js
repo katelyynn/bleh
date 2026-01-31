@@ -16,7 +16,7 @@ import {
 } from '../components/select';
 import { update_inbuilt_item } from '../config';
 import { ff } from '../sku';
-import { markdown, markdown_prompt } from '../components/markdown';
+import { markdown, markdown_field, markdown_prompt } from '../components/markdown';
 import { html, render } from 'lighterhtml';
 import tippy from 'tippy.js';
 import Cropper from 'cropperjs';
@@ -28,6 +28,7 @@ import { log } from '../build/log';
 import { toggle } from '../components/toggle';
 import { status } from '../components/status';
 import { radio, radio_convert } from '../components/radio_toggle';
+import { notify, notify_rm } from '../components/notify';
 
 let cropper;
 
@@ -497,8 +498,7 @@ function patch_settings_charts_panel(token) {
 }
 
 function patch_settings_profile_panel(token, update_picture) {
-    // some testing, probably not accurate
-    const bio_max_length = 485;
+    const bio_max_length = 500;
 
     update_picture.classList.add('bleh--panel');
 
@@ -513,14 +513,13 @@ function patch_settings_profile_panel(token, update_picture) {
         dialog_rm({ id });
     }
 
+    const update_profile = page.structure.main.querySelector('#update-profile');
+    const alert = update_profile.querySelector('.alert');
+
     let form_display_name = document.getElementById('id_full_name').value;
     let form_website = document.getElementById('id_homepage').value;
     let form_country = document.getElementById('id_country');
     let form_about_me = document.getElementById('id_about_me').textContent;
-
-    let chars;
-    let about;
-    let preview;
 
     const markdown_settings = {
         allow_headers: true,
@@ -531,10 +530,14 @@ function patch_settings_profile_panel(token, update_picture) {
         cache: true,
         take_effect: false,
         allow_socials: true,
-        allow_alignment: true
+        allow_alignment: true,
+        allow_lists: true
     };
 
-    let banner_setting;
+    let chars;
+    const about = markdown_field(update_about, markdown_settings, form_about_me, 'about_me', 40, 10, tl(trans.anything_you_can_imagine));
+    let preview;
+
     let accent_setting;
     let font_setting;
 
@@ -548,200 +551,248 @@ function patch_settings_profile_panel(token, update_picture) {
     let profile_cache = JSON.parse(localStorage.getItem('bleh_profile_cache')) || {};
     let cache = profile_cache[auth.name];
 
-    render(
-        update_picture,
-        html`
-            <h4>${tl(trans.profile)}</h4>
-            <form
-                class="dont-move"
-                action="${root}settings#update-profile"
-                name="profile-form"
-                data-form-type="identity"
-                method="post"
-            >
-                <input
-                    type="hidden"
-                    name="csrfmiddlewaretoken"
-                    value="${token}"
-                />
-                <div class="setting-group">
-                    <div class="setting" data-type="info">
-                        <div class="heading">
-                            <h5>${tl(trans.avatar)}</h5>
-                        </div>
-                        <div class="info">
-                            <div class="avatar image-uploader" onclick=${() => avatar(token)}>
-                                <img
-                                    src=${avatar_url}
-                                    alt=${tl(trans.your_avatar)}
-                                    loading="lazy"
-                                />
-                                <div class="avatar-overlay" />
-                            </div>
+    render(update_picture, html`
+        <h4>${tl(trans.profile)}</h4>
+        ${alert}
+        <form
+            class="dont-move"
+            action="${root}settings#update-profile"
+            name="profile-form"
+            data-form-type="identity"
+            method="post"
+        >
+            <input
+                type="hidden"
+                name="csrfmiddlewaretoken"
+                value="${token}"
+            />
+            <div class="setting-group">
+                <div class="setting" data-type="info">
+                    <div class="heading">
+                        <h5>${tl(trans.avatar)}</h5>
+                        <p>${tl(trans.avatar_desc)}</p>
+                    </div>
+                    <div class="info">
+                        <div class="avatar image-uploader" onclick=${() => avatar(token)}>
+                            <img
+                                src=${avatar_url}
+                                alt=${tl(trans.your_avatar)}
+                                loading="lazy"
+                            />
+                            <div class="avatar-overlay" />
                         </div>
                     </div>
-                    ${() => {
-                        const username_regex = /\[name=([^\]]+)\]/;
+                </div>
+                ${() => {
+                    const username_regex = /\[name=([^\]]+)\]/;
 
-                        const elem = html.node`
-                            <div class="setting" data-type="text" disabled=${!auth.sponsor}>
-                                <div class="heading">
-                                    <h5>${tl(trans.display_name.name)}<span class="new-badge sponsor-related">${tl(trans.sponsors_only)}</span><span class="new-badge new">${tl(trans.new)}</span></h5>
-                                    <p>${tl(trans.display_name.body)}</p>
-                                </div>
+                    const elem = html.node`
+                        <div class="setting" data-type="text" disabled=${!auth.sponsor}>
+                            <div class="heading">
+                                <h5>${tl(trans.display_name.name)}<span class="new-badge sponsor-related">${tl(trans.sponsors_only)}</span></h5>
+                                <p>${tl(trans.display_name.body)}</p>
+                            </div>
+                            ${input({
+                                value: cache.username,
+                                placeholder: auth.name,
+                                func: (val) => {
+                                    const match = about.value().match(username_regex);
+
+                                    const new_name = `[name=${val}]`;
+
+                                    if (match) {
+                                        about.value(about.value().replace(username_regex, new_name));
+                                    } else {
+                                        const trimmed = about.value().trimEnd();
+
+                                        if (trimmed.length == 0) {
+                                            about.value(new_name);
+                                        } else {
+                                            about.value(trimmed + '\n\n' + new_name);
+                                        }
+                                    }
+                                },
+                                submit_on_character: true
+                            })}
+                        </div>
+                    `;
+
+                    return elem;
+                }}
+                ${ff('profile_fonts') ? html.node`
+                <div
+                    class="setting"
+                    data-type="info"
+                    disabled=${!auth.sponsor}
+                    ref=${(el) => (font_setting = el)}
+                />
+                ` : ''}
+                <div class="setting" data-type="text">
+                    <div class="heading">
+                        <h5>${tl(trans.profile_title)}</h5>
+                        <p>${tl(trans.pronoun_tip)}</p>
+                    </div>
+                    <div class="input-container content-form">
+                        <input
+                            type="text"
+                            name="full_name"
+                            value=${form_display_name}
+                            maxlength="36"
+                            id="id_full_name"
+                            data-form-type="other"
+                        />
+                    </div>
+                </div>
+                <div class="setting" data-type="text">
+                    <div class="heading">
+                        <h5>${tl(trans.website)}</h5>
+                    </div>
+                    <div class="input-container content-form">
+                        <input
+                            type="url"
+                            name="homepage"
+                            value=${form_website}
+                            id="id_homepage"
+                            data-form-type="website"
+                        />
+                    </div>
+                </div>
+                <div class="setting" data-type="select">
+                    <div class="heading">
+                        <h5>${tl(trans.country)}</h5>
+                    </div>
+                    <div class="select-wrap custom-selector">
+                        ${select(
+                            select_prepare(form_country),
+                            form_country.value,
+                            'country'
+                        )}
+                    </div>
+                </div>
+                ${() => {
+                    const banner_regex = /\[banner=([^\]]+)\]/;
+                    const match = about.value().match(banner_regex);
+
+                    const pre_existing = match ? match[1] : '';
+                    let preview;
+
+                    const elem = html.node`
+                        <div class="setting" data-type="text">
+                            <div class="heading">
+                                <h5>${tl(trans.profile_banner.name)}</h5>
+                                <p>${tl(trans.profile_banner.body)}</p>
+                            </div>
+                            <div class="info v">
                                 ${input({
-                                    value: cache.username,
-                                    placeholder: auth.name,
+                                    value: pre_existing,
                                     func: (val) => {
-                                        const match = about.value.match(username_regex);
+                                        const match = about.value().match(banner_regex);
 
-                                        const new_name = `[name=${val}]`;
+                                        const new_banner = `[banner=${val}]`;
 
                                         if (match) {
-                                            about.value = about.value.replace(username_regex, new_name);
+                                            about.value(about.value().replace(banner_regex, new_banner));
                                         } else {
-                                            const trimmed = about.value.trimEnd();
+                                            const trimmed = about.value().trimEnd();
 
                                             if (trimmed.length == 0) {
-                                                about.value = new_name;
+                                                about.value(new_banner);
                                             } else {
-                                                about.value =
-                                                    trimmed +
-                                                    '\n\n' +
-                                                    new_name;
+                                                about.value(trimmed + '\n\n' + new_banner);
                                             }
                                         }
 
-                                        about.dispatchEvent(
-                                            new InputEvent('input', {
-                                                bubbles: true,
-                                                cancelable: true
-                                            })
-                                        );
+                                        preview.style.setProperty('background-image', `url(${val})`);
                                     },
                                     submit_on_character: true
                                 })}
+                                <div class="banner-image" ref=${el => preview = el} />
                             </div>
-                        `;
+                        </div>
+                    `;
 
-                        return elem;
-                    }}
-                    ${ff('profile_fonts') ? html.node`
-                    <div
-                        class="setting"
-                        data-type="info"
-                        disabled=${!auth.sponsor}
-                        ref=${(el) => (font_setting = el)}
-                    />
-                    ` : ''}
-                    <div class="setting" data-type="text">
-                        <div class="heading">
-                            <h5>${tl(trans.subtitle)}</h5>
-                            <p>${tl(trans.pronoun_tip)}</p>
+                    preview.style.setProperty('background-image', `url(${pre_existing})`);
+
+                    return elem;
+                }}
+                <div
+                    class="setting"
+                    data-type="info"
+                    disabled=${!auth.sponsor}
+                    ref=${(el) => (accent_setting = el)}
+                />
+                ${() => {
+                    const status_regex = /\[status=([^\]]+)\]/;
+                    const match = about.value().match(status_regex);
+
+                    const pre_existing = match ? match[1] : '';
+
+                    const elem = html.node`
+                        <div class="setting" data-type="text">
+                            <div class="heading">
+                                <h5><a href="https://status.cafe" target="_blank">status.cafe</a><span class="new-badge new">${tl(trans.new)}</span></h5>
+                                <p>${tl(trans.status_cafe.body)}</p>
+                            </div>
+                            ${input({
+                                value: pre_existing,
+                                func: (val) => {
+                                    const match = about.value().match(status_regex);
+
+                                    const new_status = `[status=${val}]`;
+
+                                    if (match) {
+                                        about.value(about.value().replace(status_regex, new_status));
+                                    } else {
+                                        const trimmed = about.value().trimEnd();
+
+                                        if (trimmed.length == 0) {
+                                            about.value(new_status);
+                                        } else {
+                                            about.value(trimmed + '\n\n' + new_status);
+                                        }
+                                    }
+                                },
+                                submit_on_character: true
+                            })}
                         </div>
-                        <div class="input-container content-form">
-                            <input
-                                type="text"
-                                name="full_name"
-                                value=${form_display_name}
-                                maxlength="36"
-                                id="id_full_name"
-                                data-form-type="other"
-                            />
-                        </div>
-                    </div>
-                    <div class="setting" data-type="text">
-                        <div class="heading">
-                            <h5>${tl(trans.website)}</h5>
-                        </div>
-                        <div class="input-container content-form">
-                            <input
-                                type="url"
-                                name="homepage"
-                                value=${form_website}
-                                id="id_homepage"
-                                data-form-type="website"
-                            />
-                        </div>
-                    </div>
-                    <div class="setting" data-type="select">
-                        <div class="heading">
-                            <h5>${tl(trans.country)}</h5>
-                        </div>
-                        <div class="select-wrap custom-selector">
-                            ${select(
-                                select_prepare(form_country),
-                                form_country.value,
-                                'country'
+                    `;
+
+                    return elem;
+                }}
+                <div class="setting" data-type="text">
+                    <div class="heading">
+                        <h5>${tl(trans.about)}</h5>
+                        <p class="tip characters" ref=${(el) => (chars = el)}>
+                            ${tl(
+                                trans.value_characters_max,
+                                { v: bio_max_length }
                             )}
-                        </div>
+                        </p>
                     </div>
-                    <div
-                        class="setting"
-                        data-type="info"
-                        ref=${(el) => (banner_setting = el)}
-                    />
-                    <div
-                        class="setting"
-                        data-type="info"
-                        disabled=${!auth.sponsor}
-                        ref=${(el) => (accent_setting = el)}
-                    />
-                    <div class="setting" data-type="text">
-                        <div class="heading">
-                            <h5>${tl(trans.about)}</h5>
-                            <p class="tip markdown-enabled" onclick=${() => {
-                                markdown_prompt(markdown_settings);
-                            }}>
-                                ${tl(trans.supports_markdown)}
-                            </p>
-                            <p class="tip characters" ref=${(el) => (chars = el)}>
-                                ${tl(
-                                    trans.value_characters_max,
-                                    { v: bio_max_length }
-                                )}
-                            </p>
-                        </div>
-                        <div class="input-container content-form textarea">
-                            <textarea
-                                name="about_me"
-                                placeholder=${tl(
-                                    trans.anything_you_can_imagine
-                                )}
-                                cols="40"
-                                rows="10"
-                                class="textarea--s"
-                                maxlength=${bio_max_length}
-                                id="id_about_me"
-                                oninput=${() => update_about()}
-                                ref=${(el) => (about = el)}
-                                data-form-type="other"
-                            >
-                                ${form_about_me}
-                            </textarea>
-                        </div>
+                    <div class="${!ff('cosplay') ? 'input-container content-form textarea' : 'limitless'}">
+                        ${about}
                     </div>
                 </div>
-                <div class="settings-footer end">
-                    <button
-                        type="submit"
-                        class="btn-primary save"
-                        data-form-type="action"
-                    >
-                        ${tl(trans.save)}
-                    </button>
-                    <input
-                        type="hidden"
-                        value="profile"
-                        name="submit"
-                    />
-                </div>
-            </form>
-            <div class="setting-group">
-                ${setting({ id: 'avatar_radius' })}
             </div>
-        `
-    );
+            <div class="settings-footer end">
+                <button
+                    type="submit"
+                    class="btn-primary save"
+                    data-form-type="action"
+                >
+                    ${tl(trans.save)}
+                </button>
+                <input
+                    type="hidden"
+                    value="profile"
+                    name="submit"
+                />
+            </div>
+        </form>
+        <div class="setting-group">
+            ${setting({ id: 'avatar_radius' })}
+        </div>
+    `);
 
     page.structure.main.removeChild(
         page.structure.main.querySelector('#update-profile')
@@ -751,7 +802,7 @@ function patch_settings_profile_panel(token, update_picture) {
     update_about();
 
     function len(text) {
-        return text.length;
+        return text.replace(/\n/g, '\r\n').length;
 
         // utf-8 or something i dont know
         const normalised = text.replace(/\r\n/g, '\n');
@@ -759,10 +810,9 @@ function patch_settings_profile_panel(token, update_picture) {
         return new TextEncoder().encode(normalised).length;
     }
 
-    function update_about() {
+    function update_about(value = about.value()) {
         log('re-rendering', 'about', 'log');
 
-        const value = about.value;
         const length = len(value);
         chars.textContent = tl(trans.value_characters_max, {
             v: `${length}/${bio_max_length}`
@@ -776,43 +826,12 @@ function patch_settings_profile_panel(token, update_picture) {
 
         console.info('cache', cache);
 
-        render(
-            banner_setting,
-            html`
-                <div class="heading">
-                    <h5>${tl(trans.profile_banner.name)}</h5>
-                    <p>${tl(trans.profile_banner.body)}</p>
-                    ${cache.banner_orig ? html.node`
-                        <p>${tl(trans.current_banner_value).replace('{v}', cache.banner_orig)}</p>
-                    ` : ''}
-                </div>
-                ${() => {
-                    if (!cache.banner_orig)
-                        return html.node`
-                        <div class="info">
-                            <p>${tl(trans.none)}</p>
-                        </div>
-                    `;
-
-                    let banner_image = html.node`
-                        <div class="banner-image" style="background-image: url(${cache.banner})" />
-                    `;
-
-                    tippy(banner_image, {
-                        content: cache.banner_orig
-                    });
-
-                    return banner_image;
-                }}
-            `
-        );
-
         const accent_regex = /\[accent=([0-9]{1,3}),([0-9]*\.?[0-9]+),([0-9]*\.?[0-9]+)\]/;
         const font_regex = /\[font=([^\]]+)\]/;
 
         console.info(
             'cache update',
-            about.value,
+            about.value(),
             cache.hue,
             cache.sat,
             cache.lit
@@ -840,11 +859,7 @@ function patch_settings_profile_panel(token, update_picture) {
                             let sat_range;
                             let lit_range;
 
-                            settings_store.profile_hue.default = settings.hue;
-                            settings_store.profile_sat.default = settings.sat;
-                            settings_store.profile_lit.default = settings.lit;
-
-                            const match = about.value.match(accent_regex);
+                            const match = about.value().match(accent_regex);
 
                             if (match) {
                                 save_setting(
@@ -916,43 +931,82 @@ function patch_settings_profile_panel(token, update_picture) {
                                             ${tl(trans.back)}
                                         </button>
                                         <div class="fill"></div>
-                                        <button class="btn primary continue" onclick=${() => {
-                                            const new_accent = `[accent=${settings.profile_hue},${settings.profile_sat},${settings.profile_lit}]`;
+                                        <div class="button-group">
+                                            ${() => {
+                                                const btn = html.node`
+                                                    <button class="btn icon select-button" data-type="copy">
+                                                        ${tl(trans.copy)}
+                                                    </button>
+                                                `;
 
-                                            if (match) {
-                                                about.value = about.value.replace(
-                                                    accent_regex,
-                                                    new_accent
-                                                );
-                                            } else {
-                                                const trimmed = about.value.trimEnd();
+                                                tippy(btn, {
+                                                    theme: 'context-menu',
+                                                    content: html.node`
+                                                        <button class="dropdown-menu-clickable-item" data-type="profile" onclick=${() => {
+                                                            hue_range.set(settings.hue);
+                                                            sat_range.set(settings.sat);
+                                                            lit_range.set(settings.lit);
+                                                        }}>${tl(trans.apply_global_accent)}</button>
+                                                        <button class="dropdown-menu-clickable-item" data-type="global" onclick=${() => {
+                                                            const warn = notify({
+                                                                id: 'confirm_accent',
+                                                                title: tl(trans.are_you_sure),
+                                                                body: tl(trans.this_will_replace_your_global_accent),
+                                                                type: 'warning',
+                                                                actions: [
+                                                                    {
+                                                                        type: 'check',
+                                                                        action: () => {
+                                                                            notify_rm(warn);
 
-                                                if (trimmed.length == 0) {
-                                                    about.value = new_accent;
+                                                                            save_setting('hue', settings.profile_hue);
+                                                                            save_setting('sat', settings.profile_sat);
+                                                                            save_setting('lit', settings.profile_lit);
+                                                                        },
+                                                                        text: tl(trans.continue)
+                                                                    }
+                                                                ],
+                                                                persist: true
+                                                            })
+                                                        }}>${tl(trans.apply_profile_accent)}</button>
+                                                    `,
+                                                    trigger: 'click',
+                                                    placement: 'bottom',
+                                                    interactive: true,
+                                                    interactiveBorder: 10,
+                                                    offset: [0, 0]
+                                                });
+
+                                                return btn;
+                                            }}
+                                            <button class="btn primary continue" onclick=${() => {
+                                                const new_accent = `[accent=${settings.profile_hue},${settings.profile_sat},${settings.profile_lit}]`;
+
+                                                if (match) {
+                                                    about.value(about.value().replace(
+                                                        accent_regex,
+                                                        new_accent
+                                                    ));
                                                 } else {
-                                                    about.value =
-                                                        trimmed +
-                                                        '\n\n' +
-                                                        new_accent;
+                                                    const trimmed = about.value().trimEnd();
+
+                                                    if (trimmed.length == 0) {
+                                                        about.value(new_accent);
+                                                    } else {
+                                                        about.value(trimmed + '\n\n' + new_accent);
+                                                    }
                                                 }
-                                            }
 
-                                            about.dispatchEvent(
-                                                new InputEvent('input', {
-                                                    bubbles: true,
-                                                    cancelable: true
-                                                })
-                                            );
-
-                                            dialog_rm({ id: 'profile_accent' });
-                                            status({
-                                                title: tl(
-                                                    trans.profile_accent.reminder
-                                                )
-                                            });
-                                        }}>
-                                            ${tl(trans.change)}
-                                        </button>
+                                                dialog_rm({ id: 'profile_accent' });
+                                                status({
+                                                    title: tl(
+                                                        trans.profile_accent.reminder
+                                                    )
+                                                });
+                                            }}>
+                                                ${tl(trans.change)}
+                                            </button>
+                                        </div>
                                     </div>
                                 `
                                     });
@@ -981,7 +1035,7 @@ function patch_settings_profile_panel(token, update_picture) {
             render(font_setting, html``);
             render(font_setting, html`
                 <div class="heading">
-                    <h5>${tl(trans.profile_font.name)}<span class="new-badge sponsor-related">${tl(trans.sponsors_only)}</span><span class="new-badge new">${tl(trans.new)}</span></h5>
+                    <h5>${tl(trans.profile_font.name)}<span class="new-badge sponsor-related">${tl(trans.sponsors_only)}</span></h5>
                     <p>${tl(trans.profile_font.body)}</p>
                 </div>
                 <div class="info">
@@ -994,7 +1048,7 @@ function patch_settings_profile_panel(token, update_picture) {
                             ref=${(el) => (font_edit = el)}
                             type="button"
                             onclick=${() => {
-                                const match = about.value.match(font_regex);
+                                const match = about.value().match(font_regex);
 
                                 if (match) {
                                     save_setting(
@@ -1032,7 +1086,7 @@ function patch_settings_profile_panel(token, update_picture) {
                                                     if (family == '') family = tl(trans.none);
 
                                                     const elem = html.node`
-                                                        <button class="font-selection" data-font=${font} aria-checked=${font == font_name} onclick=${() => {
+                                                        <button class="btn font-selection" data-font=${font} aria-checked=${font == font_name} onclick=${() => {
                                                             font_name = font;
 
                                                             font_preview.setAttribute('data-font', font);
@@ -1058,7 +1112,7 @@ function patch_settings_profile_panel(token, update_picture) {
                                             <div class="font-options">
                                                 ${['solid', 'pop', 'out', 'glow'].map(style => {
                                                     const elem = html.node`
-                                                        <button class="font-selection font-style" data-font-style=${style} aria-checked=${style == font_style} onclick=${() => {
+                                                        <button class="btn font-selection font-style" data-font-style=${style} aria-checked=${style == font_style} onclick=${() => {
                                                             font_style = style;
 
                                                             font_preview.setAttribute('data-font-style', style);
@@ -1085,29 +1139,19 @@ function patch_settings_profile_panel(token, update_picture) {
                                                 const new_font = `[font=${font_name}${font_style != 'solid' ? `,${font_style}` : ''}]`;
 
                                                 if (match) {
-                                                    about.value = about.value.replace(
+                                                    about.value(about.value().replace(
                                                         font_regex,
                                                         new_font
-                                                    );
+                                                    ));
                                                 } else {
-                                                    const trimmed = about.value.trimEnd();
+                                                    const trimmed = about.value().trimEnd();
 
                                                     if (trimmed.length == 0) {
-                                                        about.value = new_font;
+                                                        about.value(new_font);
                                                     } else {
-                                                        about.value =
-                                                            trimmed +
-                                                            '\n\n' +
-                                                            new_font;
+                                                        about.value(trimmed + '\n\n' + new_font);
                                                     }
                                                 }
-
-                                                about.dispatchEvent(
-                                                    new InputEvent('input', {
-                                                        bubbles: true,
-                                                        cancelable: true
-                                                    })
-                                                );
 
                                                 dialog_rm({ id: 'profile_font' });
                                                 status({
@@ -1187,7 +1231,7 @@ function avatar(token = '') {
                 <form action="${root}settings/avatar/delete" method="post">
                     <input type="hidden" name="csrfmiddlewaretoken" value=${page.token}>
                     <div class="form-group delete-avatar">
-                        <button class="mimic-link image-upload-remove" type="submit" value="delete-avatar" name="delete-avatar">${tl(trans.delete)}</button>
+                        <button class="btn image-upload-remove" type="submit" value="delete-avatar" name="delete-avatar">${tl(trans.delete)}</button>
                     </div>
                 </form>
             </div>
@@ -1348,6 +1392,8 @@ function bleh_communication_panel(token) {
     let panel = page.structure.main.querySelector('#ignorelist');
     panel.classList.add('bleh--panel');
 
+    const alert = panel.querySelector('.alert');
+
     let list = panel.querySelectorAll('.ignore-list tr');
 
     let new_list = document.createElement('div');
@@ -1361,13 +1407,16 @@ function bleh_communication_panel(token) {
     let exceed_amount = 10;
     let amount = 0;
 
-    list.forEach((item, index) => {
+    Array.from(list).reverse().forEach((item, index) => {
         let name = item.querySelector('td').textContent.trim();
         let form = item.querySelector('form');
         let button = form.querySelector('button');
 
-        button.classList.add('icon', 'chibi', 'danger-subtle');
-        button.setAttribute('data-type', 'trash');
+        button.classList.add('btn', 'icon', 'chibi', 'danger-subtle', 'list-action');
+        button.setAttribute('data-type', 'x');
+        tippy(button, {
+            content: tl(trans.remove)
+        });
 
         let entry = html.node`
             <div class="generic-table-list-entry user-vertical-list-item">
@@ -1375,13 +1424,9 @@ function bleh_communication_panel(token) {
                     <a class="mention" href="${root}user/${name}" target="_blank">@${name}</a>
                 </div>
                 <div class="text preview">
-                    ${
-                        profile_notes.hasOwnProperty(name) ?
-                            html.node`
+                    ${profile_notes.hasOwnProperty(name) ? html.node`
                         <p id="profile-note-row-preview--${name}">${{ html: profile_notes[name] }}</p>
-                    `
-                        :   ''
-                    }
+                    ` : ''}
                 </div>
                 <div class="actions">
                     ${form}
@@ -1422,83 +1467,83 @@ function bleh_communication_panel(token) {
             .querySelector('[name="csrfmiddlewaretoken"]')
             .getAttribute('value');
 
-    render(
-        panel,
-        html`
-            <h4>${tl(trans.block_list)}</h4>
-            <div class="user-top-panel">
-                <div class="user-top-avatar user-top-avatar-side-left">
-                    <div class="bleh-icon"></div>
-                </div>
-                <img
-                    class="user-top-avatar user-top-avatar-main"
-                    src=${auth.avatar.replace('avatar42s', 'avatar300s')}
-                    alt=${auth.name}
-                />
-                <div class="user-top-avatar user-top-avatar-side-right">
-                    <div class="bleh-icon"></div>
-                </div>
+    render(panel, html`
+        <h4>${tl(trans.block_list)}</h4>
+        <div class="user-top-panel">
+            <div class="user-top-avatar user-top-avatar-side-left">
+                <div class="bleh-icon"></div>
             </div>
-            <div class="setting" data-type="text">
-                <div class="heading">
-                    <h5>${tl(trans.profile)}</h5>
-                    <form
-                        action="${root}settings/privacy#ignorelist"
-                        name="ignorelist"
-                        method="post"
-                    >
+            <img
+                class="user-top-avatar user-top-avatar-main"
+                src=${auth.avatar.replace('avatar42s', 'avatar300s')}
+                alt=${auth.name}
+            />
+            <div class="user-top-avatar user-top-avatar-side-right">
+                <div class="bleh-icon"></div>
+            </div>
+        </div>
+        ${alert}
+        <div class="setting" data-type="text">
+            <div class="heading">
+                <h5>${tl(trans.profile)}</h5>
+                <form
+                    action="${root}settings/privacy#ignorelist"
+                    name="ignorelist"
+                    method="post"
+                >
+                    <input
+                        type="hidden"
+                        name="csrfmiddlewaretoken"
+                        value=${page.token}
+                    />
+                    <div class="input-container">
+                        <input
+                            type="text"
+                            maxlength="80"
+                            id="id_user"
+                            name="user"
+                            placeholder=${tl(trans.enter_username)}
+                        />
                         <input
                             type="hidden"
-                            name="csrfmiddlewaretoken"
-                            value=${page.token}
+                            name="listaction"
+                            value="add"
                         />
-                        <div class="input-container">
-                            <input
-                                type="text"
-                                maxlength="80"
-                                id="id_user"
-                                name="user"
-                                placeholder=${tl(trans.enter_username)}
-                            />
-                            <input
-                                type="hidden"
-                                name="listaction"
-                                value="add"
-                            />
-                            <input
-                                type="hidden"
-                                name="submit"
-                                value="ignorelist"
-                            />
-                            <button
-                                class="bleh--btn primary icon block"
-                                type="submit"
-                            >
-                                ${tl(trans.block)}
-                            </button>
-                        </div>
-                    </form>
-                </div>
+                        <input
+                            type="hidden"
+                            name="submit"
+                            value="ignorelist"
+                        />
+                        <button
+                            class="btn primary icon block"
+                            type="submit"
+                        >
+                            ${tl(trans.block)}
+                        </button>
+                    </div>
+                </form>
             </div>
-            <div class="alert alert-info">
-                ${tl(trans.blocked_count).replace('{c}', amount)}
-            </div>
+        </div>
+        <div class="alert alert-info">
+            ${tl(trans.blocked_count, { c: amount })}
+        </div>
+        <div class="setting-group">
             ${new_list}
-            <div class="sep" />
-            <h5>${tl(trans.when_blocked)}</h5>
-            <div class="to-consider">
-                <ul class="to-consider-good">
-                    <li>${tl(trans.blocked_user_public)}</li>
-                    <li>${tl(trans.blocked_user_message)}</li>
-                    <li>${tl(trans.blocked_user_new_shouts)}</li>
-                </ul>
-                <ul class="to-consider-bad">
-                    <li>${tl(trans.blocked_user_old_shouts)}</li>
-                    <li>${tl(trans.blocked_user_view_profile)}</li>
-                </ul>
-            </div>
-        `
-    );
+        </div>
+        <div class="sep" />
+        <h5>${tl(trans.when_blocked)}</h5>
+        <div class="to-consider">
+            <ul class="to-consider-good">
+                <li>${tl(trans.blocked_user_public)}</li>
+                <li>${tl(trans.blocked_user_message)}</li>
+                <li>${tl(trans.blocked_user_new_shouts)}</li>
+            </ul>
+            <ul class="to-consider-bad">
+                <li>${tl(trans.blocked_user_old_shouts)}</li>
+                <li>${tl(trans.blocked_user_view_profile)}</li>
+            </ul>
+        </div>
+    `);
 }
 
 function patch_settings_privacy_panel(token, privacy_panel) {
@@ -1678,11 +1723,14 @@ function bleh_accounts() {
         captcha: page.structure.main.querySelector('.lfm-recaptcha')
     };
 
+    const alert = update_profile.querySelector('.alert');
+
     render(
         page.structure.main,
         html`
             <section class="bleh--panel">
                 <h4>${tl(trans.information)}</h4>
+                ${alert}
                 <div class="setting-group">
                     <form
                         action="${root}settings/change-username/send-email"

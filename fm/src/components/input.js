@@ -27,8 +27,13 @@ export function input({
     name,
     func,
     func_esc,
+    func_select,
+    func_mouseup,
     submit_on_character = false,
-    value_in_iso = false
+    value_in_iso = false,
+    cols,
+    rows,
+    required = false
 }) {
     if (type == 'date') {
         return calendar({
@@ -48,19 +53,25 @@ export function input({
     let colour_block;
 
     let container = html.node`
-        <div class="content-form input-container colourful" data-type=${type} data-has-error="false">
+        <div class="content-form input-container colourful ${type == 'textarea' ? 'textarea' : ''}" data-type=${type} data-has-error="false">
             ${type == 'colour' ? html.node`<span class="colour-block" ref=${(el) => (colour_block = el)} />` : ''}
             ${
                 type == 'textarea' ?
                     html.node`
-                <textarea class="modern-input" disabled=${disabled} autofocus=${focus} value=${value} placeholder=${placeholder} min=${min} max=${max} maxlength=${maxlength} ref=${(el) => (input_box = el)} />
+                <textarea class="modern-input" name=${name} disabled=${disabled} autofocus=${focus} value=${value} placeholder=${placeholder} min=${min} max=${max} maxlength=${maxlength} cols=${cols} rows=${rows} required=${required} ref=${(el) => (input_box = el)} />
             `
                 :   html.node`
-                <input class="modern-input" name=${name} disabled=${disabled} autofocus=${focus} type=${type} value=${value} placeholder=${placeholder} min=${min} max=${max} maxlength=${maxlength} ref=${(el) => (input_box = el)} />
+                <input class="modern-input" name=${name} disabled=${disabled} autofocus=${focus} type=${type} value=${value} placeholder=${placeholder} min=${min} max=${max} maxlength=${maxlength} required=${required} ref=${(el) => (input_box = el)} />
             `
             }
         </div>
     `;
+
+    if (focus) {
+        setTimeout(() => {
+            input_box.focus();
+        }, 1);
+    }
 
     error_tooltip = tippy(input_box, {
         theme: 'error',
@@ -90,6 +101,22 @@ export function input({
         }
     });
 
+    input_box.addEventListener('select', () => {
+        if (func_select) func_select(input_box, input_box.value);
+    });
+
+    input_box.addEventListener('mouseup', () => {
+        if (func_mouseup) func_mouseup(input_box, input_box.value);
+    });
+
+    input_box.addEventListener('blur', () => {
+        if (func_mouseup) func_mouseup(input_box, input_box.value);
+    });
+
+    container.editor = () => {
+        return input_box;
+    };
+
     container.submit = () => {
         if (func) func(input_box.value);
     };
@@ -114,6 +141,10 @@ export function input({
         else input_box.removeAttribute('disabled');
 
         return state;
+    };
+
+    container.range = (start, end) => {
+        input_box.setSelectionRange(start, end);
     };
 
     return container;

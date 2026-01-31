@@ -105,42 +105,14 @@ export function bleh_user_library() {
     if (!ff('glacier_library')) return;
 
     if (settings.glacier_library_graphs && date_items.length > 0) {
-        let chart_view_selector = document.createElement('div');
-        chart_view_selector.classList.add(
-            'view-buttons',
-            'chart-view-selector',
-            'view-buttons-middle'
-        );
-        chart_view_selector.innerHTML = `
-            <button class="btn view-item" id="toggle-chart_view-line" data-toggle="chart_view" data-toggle-value="line" onclick="_update_item('chart_view', 'line')">
-                ${tl(trans.line)}
-            </button>
-            <button class="btn view-item" id="toggle-chart_view-pie" data-toggle="chart_view" data-toggle-value="pie" onclick="_update_item('chart_view', 'pie')">
-                ${tl(trans.pie)}
-            </button>
-            <button class="btn view-item" id="toggle-chart_view-bar" data-toggle="chart_view" data-toggle-value="bar" onclick="_update_item('chart_view', 'bar')">
-                ${tl(trans.bar)}
-            </button>
-        `;
-
-        page.structure.glacier.selector.after(chart_view_selector);
-
-        let chart_axis_selector = document.createElement('div');
-        chart_axis_selector.classList.add(
-            'view-buttons',
-            'chart-axis-selector',
-            'view-buttons-middle'
-        );
-        chart_axis_selector.innerHTML = `
-            <button class="btn view-item" id="toggle-chart_bar_axis-horizontal" data-toggle="chart_bar_axis" data-toggle-value="horizontal" onclick="_update_item('chart_bar_axis', 'horizontal')">
-                ${tl(trans.horizontal)}
-            </button>
-            <button class="btn view-item" id="toggle-chart_bar_axis-vertical" data-toggle="chart_bar_axis" data-toggle-value="vertical" onclick="_update_item('chart_bar_axis', 'vertical')">
-                ${tl(trans.vertical)}
-            </button>
-        `;
-
-        chart_view_selector.after(chart_axis_selector);
+        page.structure.glacier.selector.after(html.node`
+            <div class="view-buttons chart-view-selector view-buttons-middle">
+                ${setting({ id: 'chart_view', standalone: true, func: bleh_glacier_date_graph_generate })}
+            </div>
+            <div class="view-buttons chart-axis-selector view-buttons-middle">
+                ${setting({ id: 'chart_bar_axis', standalone: true, func: bleh_glacier_date_graph_generate })}
+            </div>
+        `);
 
         refresh_all(page.structure.glacier.date_panel);
     }
@@ -241,7 +213,7 @@ function bleh_glacier_library_date() {
     if (old_date_btn) old_date_btn.remove();
 
     let date_btn = html.node`
-        <button class="date-range-picker-button">${button.querySelector('.date-range-picker-button-inner').textContent}</button>
+        <button class="btn date-range-picker-button">${button.querySelector('.date-range-picker-button-inner').textContent}</button>
     `;
     date_picker.appendChild(date_btn);
 
@@ -1063,10 +1035,7 @@ export function bleh_glacier_date_graph_generate() {
     prep_chart_colours();
 
     let new_run = false;
-    let scrobble_canvas_container =
-        page.structure.glacier.date_panel.querySelector(
-            '.scrobble-canvas-container'
-        );
+    let scrobble_canvas_container = page.structure.glacier.date_panel.querySelector('.scrobble-canvas-container');
     if (scrobble_canvas_container == null) {
         scrobble_canvas_container = document.createElement('div');
         scrobble_canvas_container.classList.add('scrobble-canvas-container');
@@ -1077,6 +1046,8 @@ export function bleh_glacier_date_graph_generate() {
 
     let scrobble_canvas = document.createElement('canvas');
     scrobble_canvas.classList.add('scrobble-canvas');
+
+    scrobble_canvas_container.setAttribute('data-view', settings.chart_view);
 
     Chart.defaults.color = page.state.chart_colours.text_col;
     Chart.defaults.font.family = page.state.chart_colours.font;

@@ -14,15 +14,18 @@ import { html, render } from 'lighterhtml';
 import { setting } from './components/settings.js';
 import {
     markdown,
-    markdown_preview,
-    markdown_prompt
+    markdown_field,
+    markdown_preview
 } from './components/markdown.js';
-import { copy } from './build/tools.js';
+import { copy, romanise } from './build/tools.js';
 import tippy from 'tippy.js';
 import { keybind } from './components/rabbit.js';
+import { correct_artist, correct_item_by_artist } from './components/lotus.js';
 
 export function patch_shouts() {
     if (!page.structure.main) return;
+
+    const use_md = settings.shout_markdown;
 
     let shout_controls = page.structure.main.querySelector(
         '.shoutbox-controls-wrapper:not([data-shouts])'
@@ -45,7 +48,8 @@ export function patch_shouts() {
             if (!shout_name) return;
 
             let shout_name_text = shout_name.textContent;
-            shout_name.textContent = `@${shout_name_text}`;
+
+            shout_name.insertBefore(html.node`<span class="at">@</span>`, shout_name.firstChild);
 
             let shout_avatar = shout.querySelector('.shout-user-avatar');
 
@@ -79,15 +83,16 @@ export function patch_shouts() {
                 shout_timestamp.removeAttribute('title');
             }
 
-            let actions = shout.querySelectorAll(
-                '.shout-actions .shout-action'
-            );
+            let actions = shout.querySelectorAll('.shout-actions .shout-action');
             actions.forEach((action) => {
                 let buttons = action.querySelectorAll('button, a');
                 buttons.forEach((button) => {
                     button.classList.add('shout-action-button', 'see-more');
                 });
             });
+
+            const more_button = shout.querySelector('.shout-more-actions');
+            if (more_button) more_button.classList.add('see-more', 'shout-action-button');
 
             // detect vote status
             const form = shout.querySelector('.vote-button-toggle');
@@ -166,9 +171,7 @@ export function patch_shouts() {
         parse_shout_queue();
 
     // enter a shout field
-    const shout_forms = document.querySelectorAll(
-        '.shout-form:not([data-kate-processed])'
-    );
+    const shout_forms = document.querySelectorAll('.shout-form:not([data-kate-processed])');
     shout_forms.forEach((shout_form) => {
         shout_form.setAttribute('data-kate-processed', 'true');
         let shout_avatar = shout_form.querySelector('.shout-user-avatar');
@@ -181,42 +184,49 @@ export function patch_shouts() {
         const help_text = shout_form.querySelector('.form-row-help-text');
         help_text.classList.add('dual-tip');
 
-        const textarea = shout_form.querySelector('textarea');
+        const legacy_textarea = shout_form.querySelector('textarea');
+
+        let placeholder = legacy_textarea.placeholder;
+
+        const is_reply = placeholder.includes(auth.name);
+
+        if (!is_reply) {
+            if (page.type == 'user') {
+                placeholder = tl(trans.shoutbox_placeholder_user, {
+                    u: auth.name,
+                    v: page.name
+                });
+            } else {
+                placeholder = tl(trans.shoutbox_placeholder, {
+                    u: auth.name,
+                    v: page.type == 'artist' ? romanise(correct_artist(page.name)) : ['album', 'track'].includes(page.type) ? romanise(correct_item_by_artist(page.name, page.sister)) : page.name
+                });
+            }
+        }
+
+        const textarea = markdown_field((val) => {
+            chars.textContent = tl(trans.value_characters_max, {
+                v: `${val.length}/1000`
+            });
+            chars.setAttribute('data-exceeded', val.length >= 1000);
+
+            if (use_md) preview.setAttribute('disabled', val.length <= 0);
+        }, {}, '', 'body', null, null, placeholder, legacy_textarea.maxLength, true, !is_reply);
+
+        legacy_textarea.replaceWith(textarea);
 
         let chars;
         let preview;
-        render(
-            help_text,
-            html`
-                <div
-                    class="tip markdown-enabled"
-                    onclick=${() => markdown_prompt()}
-                >
-                    ${tl(trans.supports_markdown)}
-                </div>
-                <div
-                    class="tip preview"
-                    onclick=${() => markdown_preview(textarea.value)}
-                    ref=${(el) => (preview = el)}
-                    disabled="true"
-                >
+        render(help_text, html`
+            ${use_md ? html.node`
+                <div class="tip preview" onclick=${() => markdown_preview(textarea.value())} ref=${(el) => (preview = el)} disabled="true">
                     ${tl(trans.preview)}
                 </div>
-                <div class="tip characters" ref=${(el) => (chars = el)}>
-                    ${tl(trans.value_characters_max, { v: '0/1000' })}
-                </div>
-            `
-        );
-
-        textarea.addEventListener('input', () => {
-            const value = textarea.value;
-            chars.textContent = tl(trans.value_characters_max, {
-                v: `${value.length}/1000`
-            });
-            chars.setAttribute('data-exceeded', value.length >= 1000);
-
-            preview.setAttribute('disabled', value.length <= 0);
-        });
+            ` : ''}
+            <div class="tip characters" ref=${(el) => (chars = el)}>
+                ${tl(trans.value_characters_max, { v: '0/1000' })}
+            </div>
+        `);
 
         shout_form.addEventListener('keydown', (e) => {
             // CTRL + ENTER
@@ -243,6 +253,7 @@ function shout_send(send_button) {
 
     button.classList.add('btn-send-shout-generic');
     button.textContent = tl(trans.send);
+    button.removeAttribute('disabled');
 
     if (page.mobile) return;
 
@@ -371,7 +382,7 @@ export function shout_header(shout_controls) {
 }
 
 export function parse_shout_queue() {
-    if (shout_parse_queue.length === 0) return;
+    if (shout_parse_queue.length == 0) return;
 
     const shout = shout_parse_queue.shift();
 

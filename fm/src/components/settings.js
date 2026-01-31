@@ -28,7 +28,8 @@ export function setting({
     focus = false,
     standalone = false,
     func,
-    list
+    list,
+    center = true
 }) {
     try {
         let value = settings[id];
@@ -160,7 +161,7 @@ export function setting({
                     }
                     ${setting_incompatible_block(settings_store[id].incompatible)}
                     <div class="toggle-wrap">
-                        <button class="toggle" ref=${(el) => (toggle = el)} aria-checked=${value}>
+                        <button class="btn toggle" ref=${(el) => (toggle = el)} aria-checked=${value}>
                             <div class="dot"></div>
                         </button>
                     </div>
@@ -180,7 +181,7 @@ export function setting({
                 toggle.setAttribute('aria-checked', !val);
 
                 save_setting(id, !val);
-                if (func) func(val);
+                if (func) func(!val);
             }
 
             elem.compat = () => {
@@ -231,7 +232,7 @@ export function setting({
                         text ?
                             html.node`
                     <div class="heading">
-                        <h5>${html_title}<button class="reset" ref=${(el) => (reset_btn = el)} onclick=${() => reset_range()}>${tl(trans.reset)}</button></h5>
+                        <h5>${html_title}<button class="btn reset" ref=${(el) => (reset_btn = el)} onclick=${() => reset_range()}>${tl(trans.reset)}</button></h5>
                         ${body ? html.node`<p>${body}</p>` : ''}
                     </div>
                     `
@@ -365,7 +366,7 @@ export function setting({
                         text ?
                             html.node`
                     <div class="heading">
-                        <h5>${html_title}<button class="reset" ref=${(el) => (reset_btn = el)} onclick=${() => reset_text(id, input, submit, option, reset_btn, avatar)}>${tl(trans.reset)}</button></h5>
+                        <h5>${html_title}<button class="btn reset" ref=${(el) => (reset_btn = el)} onclick=${() => reset_text(id, input, submit, option, reset_btn, avatar)}>${tl(trans.reset)}</button></h5>
                         ${body ? html.node`<p>${body}</p>` : ''}
                     </div>
                     `
@@ -407,7 +408,7 @@ export function setting({
                         :   ''
                     }
                     <div class="input-container content-form in-settings can-submit" data-has-error="false" ref=${(el) => (input_container = el)}>
-                        <input type="text" maxlength=${max} value=${value} style="--max: ${max}px" ref=${(el) => (input = el)} placeholder=${placeholder} />
+                        <input type="text" maxlength=${max} value=${value} style="--max: ${max}px; --min: ${min}px" ref=${(el) => (input = el)} placeholder=${placeholder} />
                         <button class="btn chibi icon submit" ref=${(el) => (submit = el)} onclick=${() => update_text(id, input, submit, option, input.value, reset_btn, avatar)}>${tl(trans.save)}</button>
                     </div>
                 </div>
@@ -611,37 +612,39 @@ export function setting({
                     message: 'Tabs type requires you to either define values in config or pass a list to instance.'
                 });
 
-            const tabs = html.node`
-                <div class="view-buttons view-buttons-middle">
-                    ${Object.entries(values).map(
-                        ([key, val]) => {
-                            const icon = val.icon || key;
+            const inner = html.node`
+                ${Object.entries(values).map(([key, val]) => {
+                    const icon = val.icon || key;
 
-                            const button = html.node`
-                            <button class="btn view-item" data-type=${icon} data-value=${key} onclick=${() => {
-                                save_setting(id, key);
+                    const button = html.node`
+                        <button class="btn view-item" data-type=${icon} data-value=${key} onclick=${() => {
+                            save_setting(id, key);
 
-                                buttons.forEach((btn) => {
-                                    btn.setAttribute(
-                                        'aria-checked',
-                                        btn.getAttribute('data-value') == key
-                                    );
-                                });
+                            buttons.forEach((btn) => {
+                                btn.setAttribute(
+                                    'aria-checked',
+                                    btn.getAttribute('data-value') == key
+                                );
+                            });
 
-                                if (func) func(key);
-                            }} aria-checked=${value == key}>
-                                ${typeof val.name == 'object' ? tl(val.name) : val.name}
-                            </button>
-                        `;
+                            if (func) func(key);
+                        }} aria-checked=${value == key}>
+                            ${typeof val.name == 'object' ? tl(val.name) : val.name}
+                        </button>
+                    `;
 
-                            buttons.push(button);
-                            return button;
-                        }
-                    )}
-                </div>
+                    buttons.push(button);
+                    return button;
+                })}
             `;
 
-            return tabs;
+            if (standalone) return inner;
+
+            return html.node`
+                <div class="view-buttons ${center ? 'view-buttons-middle' : ''}">
+                    ${inner}
+                </div>
+            `;
         } else if (type == 'radio') {
             let buttons = [];
 
@@ -662,7 +665,7 @@ export function setting({
                         text ?
                             html.node`
                     <div class="heading">
-                        <h5>${html_title}<button class="reset" ref=${(el) => (reset_btn = el)} onclick=${() => reset_radio()}>${tl(trans.reset)}</button></h5>
+                        <h5>${html_title}<button class="btn reset" ref=${(el) => (reset_btn = el)} onclick=${() => reset_radio()}>${tl(trans.reset)}</button></h5>
                         ${body ? html.node`<p>${body}</p>` : ''}
                     </div>
                     `
@@ -788,25 +791,17 @@ export function setting({
 
             const elem = html.node`
                 <div class="setting v2" data-type="list">
-                    ${
-                        icon ?
-                            html.node`
+                    ${icon ? html.node`
                     <div class="icon">
                         <div class="bleh-icon" style="--icon: var(--${icon})" />
                     </div>
-                    `
-                        :   ''
-                    }
-                    ${
-                        text ?
-                            html.node`
+                    ` : ''}
+                    ${text ? html.node`
                     <div class="heading">
                         <h5>${html_title}</h5>
                         ${body ? html.node`<p>${body}</p>` : ''}
                     </div>
-                    `
-                        :   ''
-                    }
+                    ` : ''}
                     <div class="setting-lists" ref=${(el) => (lists = el)} />
                 </div>
             `;
@@ -843,94 +838,86 @@ export function setting({
                     );
                 }
 
-                render(
-                    lists,
-                    html`
-                        ${current.map((val) => {
-                            return html.node`
-                                <button class="setting-list-item current" data-host=${list[val]?.host} onclick=${() => {
-                                    const new_list = current.filter(
-                                        (item) => item != val
-                                    );
+                render(lists, html`
+                    ${current.map((val) => {
+                        return html.node`
+                            <button class="btn setting-list-item current" data-host=${list[val]?.host} onclick=${() => {
+                                const new_list = current.filter(
+                                    (item) => item != val
+                                );
 
-                                    save_setting(id, new_list);
-                                    render_list_items(new_list);
+                                save_setting(id, new_list);
+                                render_list_items(new_list);
 
-                                    if (func) func(new_list);
-                                }}>
-                                    ${
-                                        list[val]?.icon != null ?
-                                            html.node`
-                                    <div class="bleh-icon" data-type=${list[val].icon} />
-                                    `
-                                        :   ''
-                                    }
-                                    <div class="info">
-                                        ${list[val]?.name || val}
-                                        ${list[val]?.new_release ? html.node`<span class="new-badge new">${tl(trans.new)}</span>` : ''}
-                                    </div>
-                                    <div class="bleh-icon indicator" data-type="minus" />
-                                </button>
-                            `;
-                        })}
-                        ${!settings_store[id].predefined ?
-                            html.node`
-                            <button class="setting-list-item current" onclick=${() => {
-                                let input_box;
-
-                                dialog({
-                                    id: `add_to_list_${id}`,
-                                    title,
-                                    body: html.node`
-                                        ${(input_box = input({
-                                            focus: true,
-                                            func: complete_add,
-                                            warn_if_matches_auth:
-                                                settings_store[id]
-                                                    .warn_if_matches_auth,
-                                            warn_if_empty: true
-                                        }))}
-                                        <div class="modal-footer">
-                                            <button class="see-more cancel" onclick=${() => dialog_rm({ id: `add_to_list_${id}` })}>
-                                                ${tl(trans.cancel)}
-                                            </button>
-                                            <div class="fill"></div>
-                                            <button class="btn primary icon" data-type="add" onclick=${() => complete_add(input_box.value())}>
-                                                ${tl(trans.add)}
-                                            </button>
-                                        </div>
-                                    `
-                                });
-
-                                setTimeout(() => {
-                                    input_box.focus();
-                                }, 1);
-
-                                function complete_add(val) {
-                                    if (val == auth.name || val.length < 1)
-                                        return;
-
-                                    dialog_rm({ id: `add_to_list_${id}` });
-
-                                    const new_list = [...current, val];
-                                    save_setting(id, new_list);
-                                    render_list_items(new_list);
-
-                                    if (func) func(new_list);
-                                }
+                                if (func) func(new_list);
                             }}>
+                                ${
+                                    list[val]?.icon != null ?
+                                        html.node`
+                                <div class="bleh-icon" data-type=${list[val].icon} />
+                                `
+                                    :   ''
+                                }
+                                <div class="info">
+                                    ${list[val]?.name || val}
+                                    ${list[val]?.new_release ? html.node`<span class="new-badge new">${tl(trans.new)}</span>` : ''}
+                                </div>
+                                <div class="bleh-icon indicator" data-type="minus" />
+                            </button>
+                        `;
+                    })}
+                    ${!settings_store[id].predefined ? () => {
+                        const button = html.node`
+                            <button class="btn setting-list-item current">
                                 <div class="info">
                                     ${tl(trans.add)}
                                 </div>
                                 <div class="bleh-icon indicator" data-type="add" />
                             </button>
-                        `
-                        :   ''}
-                        ${settings_store[id].predefined ?
-                            html.node`
+                        `;
+
+                        let input_box;
+
+                        const tooltip = tippy(button, {
+                            theme: 'window',
+                            content: html.node`
+                                ${input_box = input({
+                                    focus: true,
+                                    func: complete_add,
+                                    warn_if_matches_auth: settings_store[id].warn_if_matches_auth,
+                                    warn_if_empty: true
+                                })}
+                            `,
+                            placement: 'bottom',
+                            interactive: true,
+                            interactiveBorder: 10,
+                            trigger: 'click',
+                            appendTo: document.body,
+
+                            onShow() {
+                                input_box.focus();
+                            }
+                        });
+
+                        function complete_add(val) {
+                            if (val == auth.name || val.length < 1)
+                                return;
+
+                            tooltip.destroy();
+
+                            const new_list = [...current, val];
+                            save_setting(id, new_list);
+                            render_list_items(new_list);
+
+                            if (func) func(new_list);
+                        }
+
+                        return button;
+                    } : ''}
+                    ${settings_store[id].predefined ? html.node`
                         ${Object.entries(available).map(([val, formal]) => {
                             return html.node`
-                                <button class="setting-list-item" data-host=${formal.host} onclick=${() => {
+                                <button class="btn setting-list-item" data-host=${formal.host} onclick=${() => {
                                     const new_list = [...current, val];
 
                                     save_setting(id, new_list);
@@ -938,13 +925,9 @@ export function setting({
 
                                     if (func) func(new_list);
                                 }}>
-                                    ${
-                                        formal.icon != null ?
-                                            html.node`
-                                    <div class="bleh-icon" data-type=${formal.icon} />
-                                    `
-                                        :   ''
-                                    }
+                                    ${formal.icon ? html.node`
+                                        <div class="bleh-icon" data-type=${formal.icon} />
+                                    ` : ''}
                                     <div class="info">
                                         ${formal.name}
                                         ${formal.new_release ? html.node`<span class="new-badge new">${tl(trans.new)}</span>` : ''}
@@ -953,10 +936,8 @@ export function setting({
                                 </button>
                             `;
                         })}
-                    `
-                        :   ''}
-                    `
-                );
+                    ` : ''}
+                `);
             }
 
             return elem;
@@ -972,10 +953,11 @@ export function setting({
 
             let menu;
 
-            if (list.length === 0) disabled = true;
+            if (list.length == 0) disabled = true;
 
-            let elem;
-            elem = html.node`
+            let select_hook;
+
+            let elem = html.node`
                 <div class="setting v2" data-type="options" disabled=${disabled} data-hide=${hide_if_incompatible} data-modified=${value != settings_store[id].default}>
                     ${
                         icon ?
@@ -990,7 +972,7 @@ export function setting({
                         text ?
                             html.node`
                     <div class="heading">
-                        <h5>${html_title}<button class="reset" ref=${(el) => (reset_btn = el)} onclick=${() => reset_select()}>${tl(trans.reset)}</button></h5>
+                        <h5>${html_title}<button class="btn reset" ref=${(el) => (reset_btn = el)} onclick=${() => reset_select()}>${tl(trans.reset)}</button></h5>
                         ${body ? html.node`<p>${body}</p>` : ''}
                     </div>
                     `
@@ -1020,11 +1002,25 @@ export function setting({
                         :   ''
                     }
                     ${setting_incompatible_block(settings_store[id].incompatible)}
-                    ${(menu = select(list, value, '', (val) => {
-                        update_select(val);
-                    }))}
+                    <div class="select-hook" ref=${el => select_hook = el} />
                 </div>
             `;
+
+            render_select();
+
+            function render_select(use_list = list, use_value = value) {
+                render(select_hook, html`
+                    ${menu = select(use_list, use_value, '', (val) => {
+                        update_select(val);
+                    })}
+                `);
+            }
+
+            elem.update = (new_list) => {
+                const new_value = settings[id];
+
+                render_select(new_list, new_value);
+            }
 
             elem.compat = () => {
                 if (!incompatible_with) return;
@@ -1265,11 +1261,14 @@ export function seasonal_colour_switch() {
 export function compile_settings() {
     let clone = structuredClone(settings);
 
+    for (let s in clone) {
+        console.log('settings marin before loop', s, clone[s], typeof clone[s]);
+    }
+
     for (let setting in clone) {
         if (
             settings_store[setting] &&
-            JSON.stringify(clone[setting]) ==
-                JSON.stringify(settings_store[setting].default) &&
+            JSON.stringify(clone[setting]) === JSON.stringify(settings_store[setting].default) &&
             setting != 'version'
         ) {
             log(
@@ -1286,6 +1285,10 @@ export function compile_settings() {
     }
 
     clone.version = version.build;
+
+    for (let s in clone) {
+        console.log('settings marin before stringify', s, clone[s], typeof clone[s]);
+    }
 
     set_storage('bleh', JSON.stringify(clone));
 
