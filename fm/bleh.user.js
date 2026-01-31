@@ -71532,7 +71532,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         date: "2026-01-30"
       },
       can_report_in_menu: {
-        default: true,
+        default: false,
         name: "Can report user from menu",
         date: "2026-01-30"
       }
