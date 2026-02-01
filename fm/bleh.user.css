@@ -308,7 +308,7 @@
         .theme-preview[data-bleh--theme="oled"],
         [data-bleh--theme="oled"] &:not(.theme-preview) {
             /* any additional highlights */
-            --b2: 0, 0%, 21%;
+            --b2: 0, 0%, 30%;
             --b3: 0, 0%, 11%;
 
             /* card border */
@@ -28757,6 +28757,7 @@
                 --bg: hsl(var(--b4), 10%);
                 --bg-hov: hsl(var(--b4), 30%);
                 --bg-atv: hsl(var(--b4), 50%);
+                --shadow: none;
                 --col: hsl(var(--c3));
                 --mask-colour: hsl(var(--c3), 80%);
             }
@@ -28764,7 +28765,7 @@
             --bg: hsl(var(--b4), 60%);
             --bg-hov: hsl(var(--b4), 80%);
             --bg-atv: hsl(var(--b4));
-            --shadow: none;
+            --shadow: var(--normal-shadow);
 
             --button-height: 28px;
             --btn-top: 5px;
