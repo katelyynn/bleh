@@ -23791,7 +23791,8 @@
             position: absolute;
             inset: 0;
             background-position: center;
-            background-size: cover;
+            background-size: 100%;
+            background-repeat: no-repeat;
 
             --mask: linear-gradient(90deg, transparent 0%, white 40%, white 60%, transparent 100%);
             mask-image: var(--mask);
