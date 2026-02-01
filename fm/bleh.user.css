@@ -647,7 +647,7 @@
                 calc(clamp(min(0.5), var(--lit), max(1.5)) * 55%);
             --f4:
                 var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 32%),
-                calc(clamp(min(0.8), var(--lit), max(1.5)) * 25%);
+                calc(clamp(min(0.8), var(--lit), max(1.5)) * 40%);
             --k4:
                 var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 32%),
                 calc(clamp(min(0.8), var(--lit), max(1.5)) * 45%);
@@ -15591,7 +15591,7 @@
             --sat-over: 1;
             --lit-over: 1;
 
-            background: hsl(var(--f4), 40%) !important;
+            background: hsl(var(--f4), 20%) !important;
             border: unset !important;
             padding: var(--card-padding) !important;
             box-shadow: unset !important;
