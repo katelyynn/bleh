@@ -29,7 +29,7 @@ export let lang_info = {
     es: {
         name: 'Español',
         by: ['soleilth'],
-        last_updated: '2025-11-27'
+        last_updated: '2026-02-01'
     },
     it: {
         name: "Italiano",
@@ -849,7 +849,8 @@ export const trans = {
     },
     close_friends: {
         en: 'Close friends',
-        de: 'Engen Freunde'
+        de: 'Engen Freunde',
+        es: 'Amigos cercanos'
     },
     friends: {
         en: 'Friends',
@@ -875,10 +876,12 @@ export const trans = {
     },
     add_friends: {
         en: 'Add close friends',
-        de: 'Engen Freunde hinzufügen'
+        de: 'Engen Freunde hinzufügen',
+        es: 'Añadir amigos cercanos'
     },
     edit_close_friends: {
-        en: 'Edit close friends'
+        en: 'Edit close friends',
+        es: 'Editar amigos cercanos'
     },
     starred_friend: {
         name: {
@@ -916,31 +919,40 @@ export const trans = {
         }
     },
     friend_difference: {
-        en: 'Close friends is a bleh system that allows you to keep up to date on your friend’s listening history, it does not influence your following list.'
+        en: 'Close friends is a bleh system that allows you to keep up to date on your friend’s listening history, it does not influence your following list.',
+        es: 'Amigos cercanos es un sistema de bleh que te permite estar al día con el historial de escucha de tus amigos, no afecta tu lista de seguidos.'
+
     },
     friend_difference_min: {
-        en: 'bleh-only'
+        en: 'bleh-only',
+        es: 'Solo en bleh'
     },
     add_as_friend: {
         en: 'Add as close friend',
-        de: 'Als engen Freund hinzufügen'
+        de: 'Als engen Freund hinzufügen',
+        es: 'Añadir como amigo cercano'
     },
     remove_friend: {
         name: {
             en: 'Remove close friend',
-            de: 'Engen Freund entfernen'
+            de: 'Engen Freund entfernen',
+            es: 'Remover amigo cercano'
         },
         body: {
-            en: 'Continue removing {u} as a close friend? (bleh-only)'
+            en: 'Continue removing {u} as a close friend? (bleh-only)',
+            es: '¿Continuar y remover a {u} como amigo cercano? (Solo en bleh)'
         }
     },
     added_as_friend: {
         en: 'Added close friend',
-        de: 'Engen Freund hinzugefügt'
+        de: 'Engen Freund hinzugefügt',
+        es: 'Amigo cercano añadido'
+
     },
     removed_friend: {
         en: 'Removed close friend',
-        de: 'Engen Freund entfernt'
+        de: 'Engen Freund entfernt',
+        es: 'Amigo cercano removido'
     },
     added_star: {
         en: 'Added star status',
@@ -967,7 +979,7 @@ export const trans = {
     removed_star: {
         en: 'Removed star status',
         de: 'Markierung entfernt',
-        es: 'Removido de favoritos',
+        es: 'Favorito removido',
         it: 'Rimosso dai preferiti',
         pt: 'Status de favorito removido',
         sv: 'Tog bort stjärnmärke',
@@ -1010,7 +1022,8 @@ export const trans = {
     },
     account_creation: {
         // dont translate to "scrobbling since"
-        en: 'Account creation date'
+        en: 'Account creation date',
+        es: 'Fecha de creación de cuenta'
     },
     account_scrobbling_since_replace: {
         // copy this from last.fm 1:1 (including the space at the end if there)
@@ -1109,7 +1122,8 @@ export const trans = {
     },
     count_tracks: {
         // tracks on an album
-        en: '{c} tracks'
+        en: '{c} tracks',
+        es: '{c} temas'
     },
     count_scrobbles: {
         en: '{c} scrobbles',
@@ -2135,10 +2149,12 @@ export const trans = {
         zh: '结束日期'
     },
     link: {
-        en: 'Link'
+        en: 'Link',
+        es: 'Vínculo'
     },
     create_link: {
-        en: 'Create link'
+        en: 'Create link',
+        es: 'Crear vínculo'
     },
     text: {
         en: 'Text',
@@ -2242,7 +2258,8 @@ export const trans = {
     },
     bookmark_item: {
         // bookmark track/artist/album
-        en: 'Bookmark {v}'
+        en: 'Bookmark {v}',
+        es: 'Marcar {v}'
     },
     charts: {
         en: 'Charts',
@@ -2543,7 +2560,8 @@ export const trans = {
     },
     avatar_desc: {
         // shown as a description when setting your avatar
-        en: 'Present yourself site-wide in your own style'
+        en: 'Present yourself site-wide in your own style',
+        es: 'Preséntate con tu propio estilo por todo el sitio'
     },
     customise: {
         en: 'Customise',
@@ -2625,17 +2643,20 @@ export const trans = {
     apply_profile_accent: {
         // global accent: the one set in bleh settings
         // profile accent: the sponsor-exclusive colour in account settings
-        en: 'Use profile accent globally'
+        en: 'Use profile accent globally',
+        es: 'Usar acento de perfil globalmente'
     },
     apply_global_accent: {
         // global accent: the one set in bleh settings
         // profile accent: the sponsor-exclusive colour in account settings
-        en: 'Copy current accent to profile'
+        en: 'Copy current accent to profile',
+        es: 'Copiar acento actual al perfil'
     },
     this_will_replace_your_global_accent: {
         // global accent: the one set in bleh settings
         // profile accent: the sponsor-exclusive colour in account settings
-        en: 'This will replace your global accent (the one in use right now)'
+        en: 'This will replace your global accent (the one in use right now)',
+        es: 'Esto reemplazará tu acento global (el que estás usando ahora mismo)'
     },
     solarium: {
         name: {
@@ -2759,7 +2780,7 @@ export const trans = {
     clear: {
         en: 'Clear',
         de: 'Löschen',
-        es: 'Limpiar',
+        es: 'Borrar',
         it: 'Cancella',
         pt: 'Limpar',
         pl: 'Wyczyść',
@@ -3002,10 +3023,12 @@ export const trans = {
         pl: 'Sąsiedzi'
     },
     follows_you: {
-        en: 'Follows you!'
+        en: 'Follows you!',
+        es: '¡Te sigue!'
     },
     user_follows_you: {
-        en: '{u} follows you!'
+        en: '{u} follows you!',
+        es: '¡{u} te sigue!'
     },
     website: {
         en: 'Website',
@@ -3094,7 +3117,8 @@ export const trans = {
     more_like_name: {
         // more artists like kitagawa
         // more albums like etc.
-        en: 'More like {n}'
+        en: 'More like {n}',
+        es: 'Más como {n}'
     },
     biography: {
         en: 'Biography',
@@ -3427,7 +3451,8 @@ export const trans = {
         // valentines easter egg
         // u: username
         // v: Super / Low / Very Low etc.
-        en: 'You and {u} are a {v} match'
+        en: 'You and {u} are a {v} match',
+        es: 'Tú y {u} tienen una compatiblidad {v}'
     },
     taste_similarity: {
         en: 'Taste similarity',
@@ -3442,11 +3467,13 @@ export const trans = {
     generic_lastfm_compatibility_message: {
         // based on the default message last.fm shows
         // \n is a new line
-        en: 'Your compatibility with {u} is {r}.\nYou both listen to {a}.'
+        en: 'Your compatibility with {u} is {r}.\nYou both listen to {a}.',
+        es: 'Tu compatibilidad con {u} es {r}. \nAmbos escuchan a {a}.'
     },
     subject: {
         // as in an email/message subject
-        en: 'Subject'
+        en: 'Subject',
+        es: 'Asunto'
     },
     message: {
         // as in a direct message
@@ -3460,12 +3487,13 @@ export const trans = {
         pl: 'Wiadomość'
     },
     send_message: {
-        en: 'Send message'
+        en: 'Send message',
+        es: 'Enviar mensaje'
     },
     join_discord: {
         en: 'Join Discord',
         de: 'Discord beitreten',
-        es: 'Unirse al Discord',
+        es: 'Únete al Discord',
         it: 'Unisciti al Discord',
         sv: 'Gå med i Discord',
         ru: 'Присоединиться к Discord',
@@ -3615,7 +3643,8 @@ export const trans = {
         pl: 'Aktualna wersja'
     },
     updating_to_version: {
-        en: 'Updating to version'
+        en: 'Updating to version',
+        es: 'Actualizando a versión'
     },
     manage_data: {
         en: 'Manage data',
@@ -3929,7 +3958,8 @@ export const trans = {
         pl: 'Kliknij aby skopiować'
     },
     cut: {
-        en: 'Cut'
+        en: 'Cut',
+        es: 'Cortar'
     },
     paste: {
         en: 'Paste',
@@ -4298,7 +4328,8 @@ export const trans = {
     },
     cards: {
         // as in the view mode
-        en: 'Cards'
+        en: 'Cards',
+        es: 'Tarjetas'
     },
     grid: {
         // as in the view mode
@@ -4411,7 +4442,7 @@ export const trans = {
     love_track: {
         en: 'Love track',
         de: 'Als Lieblingssong markieren',
-        es: 'Marcar como favorito',
+        es: 'Añadir a favoritos',
         it: 'Imposta come preferito',
         ru: 'Отметить трек как любимый',
         pt: 'Marcar como favorito',
@@ -5077,10 +5108,12 @@ export const trans = {
         pl: 'Podtytuł'
     },
     profile_title: {
-        en: 'Profile title'
+        en: 'Profile title',
+        es: 'Título de perfil'
     },
     pronoun_tip: {
-        en: 'Include pronouns at the start or end of your title to separate them visually'
+        en: 'Include pronouns at the start or end of your title to separate them visually',
+        es: 'Incluye pronombres al inicio o final de tu título para separarlos visualmente'
     },
     block_list: {
         en: 'Block list',
@@ -5155,7 +5188,7 @@ export const trans = {
     blocked_user_message: {
         en: 'Cannot direct message you',
         de: 'Kann dir keine Direktnachrichten senden',
-        es: 'No pueden mandarte mensajes directos',
+        es: 'No pueden enviarte mensajes directos',
         it: 'Non può inviarti messaggi privati',
         pt: 'Não podem lhe enviar mensagens diretas',
         sv: 'Kan inte skicka privat meddelande till dig',
@@ -5446,7 +5479,8 @@ export const trans = {
     },
     search_for_anything: {
         // used as a placeholder for the global search bar
-        en: 'Search for anything'
+        en: 'Search for anything',
+        es: 'Busca cualquier cosa'
     },
     search_guest: {
         en: 'Search guest appearances',
@@ -5726,13 +5760,16 @@ export const trans = {
         ru: 'Редактировать заметку профиля'
     },
     saved_note_for_user: {
-        en: 'Saved note for {u}'
+        en: 'Saved note for {u}',
+        es: 'Anotación para {u} guardada'
     },
     cleared_note_for_user: {
-        en: 'Cleared note for {u}'
+        en: 'Cleared note for {u}',
+        es: 'Anotación para {u} borrada'
     },
     manage: {
-        en: 'Manage'
+        en: 'Manage',
+        es: 'Gestionar'
     },
     font: {
         name: {
@@ -5911,7 +5948,7 @@ export const trans = {
     enter_font_names: {
         en: 'Enter installed font name(s), separated by commas',
         de: 'Gebe die installierte Schriftart durch Kommas getrennt ein',
-        es: 'Ingresa los nombres de fuentes instaladas, separados por comas',
+        es: 'Ingresa fuentes instaladas, separadas por comas',
         it: 'Inserisci nomi di font installati, separati da virgole',
         pt: 'Nomes das fontes instaladas, separados por vírgulas',
         sv: 'Skriv installerade typsnittsnamn, separerade av kommatecken',
@@ -6204,7 +6241,7 @@ export const trans = {
         body: {
             en: 'Last.fm can optionally send promotional emails from time to time',
             de: 'Last.fm kann optional gelegentlich Werbe-E-Mails senden',
-            es: 'Last.fm puede opcionalmente mandarte correos electrónicos promocionales de vez en cuando',
+            es: 'Last.fm puede opcionalmente enviarte correos electrónicos promocionales de vez en cuando',
             it: 'Last.fm può opzionalmente inviare email promozionali ogni tanto',
             pt: 'A Last.fm pode, opcionalmente, enviar e-mails promocionais de tempos em tempos',
             sv: 'Last.fm kan valfritt skicka reklammejl då och då',
@@ -6372,7 +6409,7 @@ export const trans = {
     api_status: {
         en: 'API status',
         de: 'API-Status',
-        es: 'Estatus de API',
+        es: 'Estado de API',
         it: 'Stato API',
         pt: 'Status da API',
         sv: 'API-status',
@@ -7085,10 +7122,12 @@ export const trans = {
         pt: 'Sem descrição'
     },
     image: {
-        en: 'Image'
+        en: 'Image',
+        es: 'Imagen'
     },
     attach_image: {
-        en: 'Attach image'
+        en: 'Attach image',
+        es: 'Adjuntar imagen'
     },
     change_avatar: {
         en: 'Change avatar',
@@ -7590,7 +7629,8 @@ export const trans = {
         // lowercase in design
         // ignore the curly brackets, only translate the '{c} wonderful people' thing
         // c: replaced with a number of sponsors
-        en: '{s}{c} sponsoring{/s} ♡'
+        en: '{s}{c} sponsoring{/s} ♡',
+        es: '{s}{c} patrocinando{/s} ♡'
     },
     love_lower: {
         // replaces the {h} in the above sentence
@@ -7800,7 +7840,8 @@ export const trans = {
         ru: 'Ничего не найдено по вашему запросу'
     },
     create_collage: {
-        en: 'Create collage'
+        en: 'Create collage',
+        es: 'Crear collage'
     },
     create_a_collage: {
         en: 'Create a collage of your choosing',
@@ -8312,7 +8353,7 @@ export const trans = {
     example: {
         en: 'e.g. {v}',
         de: 'z.B. {v}',
-        es: 'e.g. {v}',
+        es: 'p. ej. {v}',
         it: 'es. {v}',
         pt: 'ex.: {v}',
         sv: 't.ex. {v}',
@@ -8427,7 +8468,8 @@ export const trans = {
             pt: 'Banner do perfil'
         },
         body: {
-            en: 'Showcase an image of your choosing across your profile'
+            en: 'Showcase an image of your choosing across your profile',
+            es: 'Muestra una imagen de tu elección en tu perfil'
         }
     },
     profile_accent: {
@@ -8692,7 +8734,8 @@ export const trans = {
         pt: 'Minis'
     },
     explore_minis: {
-        en: 'Explore minis'
+        en: 'Explore minis',
+        es: 'Explorar minis'
     },
     minis_description: {
         en: 'Play mini-games, puzzles, and interact with tools all powered by your listening history',
@@ -8977,7 +9020,7 @@ export const trans = {
         release: {
             en: 'Album was released on {v}',
             de: 'Das Album wurde am {v} veröffentlicht',
-            es: 'El {álbum} fue lanzado en {v}',
+            es: 'El álbum fue lanzado en {v}',
             it: 'L’album è stato rilasciato il {v}',
             pt: 'O álbum foi lançado em {v}',
             sv: 'Albumet släpptes {v}',
@@ -9695,7 +9738,7 @@ export const trans = {
         name: {
             en: 'Simulate horizontal scrolling',
             de: 'Horizontales Scrollen simulieren',
-            es: 'Simular scrolling horizontal',
+            es: 'Simular desplazamiento horizontal',
             it: 'Simula scorrimento orizzontale',
             pt: 'Simular rolagem horizontal',
             sv: 'Simulera vågrät skrollning',
@@ -9816,11 +9859,13 @@ export const trans = {
     },
     value_less: {
         // 50 less than last month
-        en: '{v} less'
+        en: '{v} less',
+        es: '{v} menos'
     },
     value_more: {
         // 50 more than last month
-        en: '{v} more'
+        en: '{v} more',
+        es: '{v} más'
     },
     menu_replacement: {
         name: {
@@ -9916,188 +9961,240 @@ export const trans = {
         }
     },
     current_status: {
-        en: 'Current status'
+        en: 'Current status',
+        es: 'Estado actual'
     },
     status_cafe_too_many_requests: {
-        en: 'paused loading temporarily @w@'
+        en: 'paused loading temporarily @w@',
+        es: 'carga temporalmente pausada @w@'
     },
     loading_status: {
-        en: 'loading status'
+        en: 'loading status',
+        es: 'Estado de carga'
     },
     status_cafe: {
         // status.cafe
         body: {
-            en: 'Embed your current status onto your profile, can be moved around freely by editing your about me'
+            en: 'Embed your current status onto your profile, can be moved around freely by editing your about me',
+            es: 'Añade tu estado actual a tu perfil, puede ser movido libremente al editar tu sobre mí'
         }
     },
     date_at_time: {
         // date is automatically translated with luxon
-        en: '{d} at {t}'
+        en: '{d} at {t}',
+        es: '{d} a las {t}'
     },
     you_sent_to: {
         // messages in your inbox
-        en: 'You sent to'
+        en: 'You sent to',
+        es: 'Has enviado a'
     },
     sent_to_you: {
         // messages in your inbox
-        en: 'Sent to you'
+        en: 'Sent to you',
+        es: 'Te han enviado'
     },
     shoutbox_placeholder: {
         // u: username
         // v: album/artist/track
-        en: '{u}, share your thoughts on {v}...'
+        en: '{u}, share your thoughts on {v}...',
+        es: '{u}, comparte lo que piensas sobre {v}...'
     },
     shoutbox_placeholder_user: {
-        en: '{u}, leave a shout for {v}...'
+        en: '{u}, leave a shout for {v}...',
+        es: '{u}, deja una nota para {v}...'
     },
     mention_user: {
-        en: 'Mention user'
+        en: 'Mention user',
+        es: 'Mencionar usuario'
     },
     quote: {
-        en: 'Quote'
+        en: 'Quote',
+        es: 'Citar'
     },
     code_block: {
         // block that surrounds code text:
         // `this is code`
-        en: 'Code block'
+        en: 'Code block',
+        es: 'Bloque de código'
     },
     numbered_list: {
-        en: 'Numbered list'
+        en: 'Numbered list',
+        es: 'Lista enumerada'
     },
     left_align: {
-        en: 'Left align'
+        en: 'Left align',
+        es: 'Alinear a la izquierda'
     },
     center_align: {
-        en: 'Center align'
+        en: 'Center align',
+        es: 'Centrar'
     },
     right_align: {
-        en: 'Right align'
+        en: 'Right align',
+        es: 'Alinear a la derecha'
     },
     header: {
-        en: 'Header'
+        en: 'Header',
+        es: 'Encabezado'
     },
     bold: {
-        en: 'Bold'
+        en: 'Bold',
+        es: 'Negrita'
     },
     italic: {
-        en: 'Italic'
+        en: 'Italic',
+        es: 'Cursiva'
     },
     strikethrough: {
-        en: 'Strikethrough'
+        en: 'Strikethrough',
+        es: 'Tachado'
     },
     underline: {
-        en: 'Underline'
+        en: 'Underline',
+        es: 'Subrayado'
     },
     located: {
-        en: 'Located'
+        en: 'Located',
+        es: 'Ubicado'
     },
     date: {
-        en: 'Date'
+        en: 'Date',
+        es: 'Fecha'
     },
     contact: {
-        en: 'Contact'
+        en: 'Contact',
+        es: 'Contacto'
     },
     show_on_map: {
-        en: 'Show on map'
+        en: 'Show on map',
+        es: 'Ver en mapa'
     },
     added_by: {
-        en: 'Added by {u}'
+        en: 'Added by {u}',
+        es: 'Añadido por {u}'
     },
     notice: {
-        en: 'Notice'
+        en: 'Notice',
+        es: 'Noticia'
     },
     send_valentine: {
         // valentines easter egg
         // sends a message to the user
-        en: 'Let them know'
+        en: 'Let them know',
+        es: 'Hazle saber'
     },
     valentine: {
         // valentines easter egg
         // is used as the subject line of the message
         // u: username
-        en: 'to the one i love most, {u} ♡'
+        en: 'to the one i love most, {u} ♡',
+        es: 'a la persona que más amo, {u} ♡'
     },
     view_details: {
-        en: 'View details'
+        en: 'View details',
+        es: 'Ver detalles'
     },
     valentine_info: {
-        en: 'You’re seeing this as {u} is on your bleh close friends list, you have a high compatibility, and it’s Valentines Day!'
+        en: 'You’re seeing this as {u} is on your bleh close friends list, you have a high compatibility, and it’s Valentines Day!',
+        es: '¡Estás viendo esto ya que {u} está en tu lista de amigos cercanos de bleh, tienen alta compatibilidad, y es San Valentín!'
     },
     valentine_message_footer: {
-        en: 'This message’s subject line indicates it was sent via bleh and {u} picked you as their valentine ♡'
+        en: 'This message’s subject line indicates it was sent via bleh and {u} picked you as their valentine ♡',
+        es: 'El asunto de este mensaje indica que fue enviado a través de bleh y {u} te escogió como su San Valentín ♡'
     },
     got_it: {
         // used when dismissing a popup
-        en: 'Got it'
+        en: 'Got it',
+        es: 'Entendido'
     },
     tip: {
-        en: 'Tip'
+        en: 'Tip',
+        es: 'Tip'
     },
     popup_navigation_menu: {
         title: {
-            en: 'This is your navigator'
+            en: 'This is your navigator',
+            es: 'Este es tu navegador'
         },
         body: {
-            en: 'You can choose which actions to show here by right-clicking for more options'
+            en: 'You can choose which actions to show here by right-clicking for more options',
+            es: 'Puedes elegir cuáles acciones mostrar aquí haciendo clic derecho para más opciones'
         }
     },
     popup_inbox: {
         title: {
-            en: 'Find your inbox combined'
+            en: 'Find your inbox combined',
+            es: 'Encuentra tu buzón combinado'
         },
         body: {
-            en: 'Your notifications and messages have been organised into this handy button'
+            en: 'Your notifications and messages have been organised into this handy button',
+            es: 'Tus notificaciones y mensajes han sido organizados en este útil botón'
         }
     },
     popup_close_friends: {
         title: {
-            en: 'Add your close friends list'
+            en: 'Add your close friends list',
+            es: 'Añadir tu lista de amigos cercanos'
         },
         body: {
-            en: 'View their scrobbles on any artist, album, or track at any time'
+            en: 'View their scrobbles on any artist, album, or track at any time',
+            es: 'Mira sus scrobbles en cualquier artista, álbum, o tema en cualquier momento'
         }
     },
     popup_profile_name_style: {
         title: {
-            en: 'Choose a custom font, style, and profile colour'
+            en: 'Choose a custom font, style, and profile colour',
+            es: 'Elegir una fuente, estilo, y color de perfil personalizados'
         },
         body: {
-            en: 'These are sponsor-exclusive perks as a thank you for supporting bleh'
+            en: 'These are sponsor-exclusive perks as a thank you for supporting bleh',
+            es: 'Estas son ventajas exclusivas para patrocinadores como agradecimiento por apoyar a bleh'
         }
     },
     popup_markdown: {
         title: {
-            en: 'Embrace styling with Markdown'
+            en: 'Embrace styling with Markdown',
+            es: 'Adoptar estilo con Markdown'
         },
         body: {
-            en: 'Format any text, embed images and links, mention users, and much more based on the scenario'
+            en: 'Format any text, embed images and links, mention users, and much more based on the scenario',
+            es: 'Formatea cualquier texto, añade imágenes y vínculos, menciona usuarios, y mucho más basado en el escenario'
         }
     },
     popup_search: {
         title: {
-            en: 'Hover up here to search music'
+            en: 'Hover up here to search music',
+            es: 'Pasar el cursor por aquí para buscar música'
         },
         body: {
-            en: 'Searching has never been easier to access, plus it hides away when you’re scrolled up'
+            en: 'Searching has never been easier to access, plus it hides away when you’re scrolled up',
+            es: 'Buscar nunca ha sido más fácil, además se oculta cuando te desplazas hacia arriba'
         }
     },
     send_a_reply: {
-        en: 'Send a reply'
+        en: 'Send a reply',
+        es: 'Enviar una respuesta'
     },
     are_these_results_accurate: {
-        en: 'Are these results accurate?'
+        en: 'Are these results accurate?',
+        es: '¿Son estos resultados correctos?'
     },
     report_incorrect: {
-        en: 'Mark incorrect'
+        en: 'Mark incorrect',
+        es: 'Marcar como incorrecto'
     },
     what_did_you_expect: {
-        en: 'What did you expect?'
+        en: 'What did you expect?',
+        es: '¿Qué esperabas?'
     },
     oracle_sources_tip_track: {
-        en: 'Which albums did you expect to be linked to, e.g. Dawn FM instead of After Hours'
+        en: 'Which albums did you expect to be linked to, e.g. Dawn FM instead of After Hours',
+        es: 'A qué álbumes esperabas ser llevado, p. ej. Dawn FM en vez de After Hours'
     },
     oracle_sources_tip_album: {
-        en: 'Which copy of the album did you expect to see? Provide links and some details as to why'
+        en: 'Which copy of the album did you expect to see? Provide links and some details as to why',
+        es: '¿Qué copia del álbum esperabas ver? Proporciona vínculos y algunos detalles sobre el porqué'
     }
 };
 
