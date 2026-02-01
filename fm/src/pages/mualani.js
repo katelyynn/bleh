@@ -59,16 +59,16 @@ export function mualani() {
             <section class="flexy">
                 <h2>Buttons</h2>
                 <div class="flexy h">
-                    <button>Button</button>
-                    <button class="primary">Button</button>
-                    <button disabled>Button</button>
-                    <button class="primary" disabled>Button</button>
+                    <button class="btn">Button</button>
+                    <button class="btn primary">Button</button>
+                    <button class="btn" disabled>Button</button>
+                    <button class="btn primary" disabled>Button</button>
                 </div>
                 <div class="flexy h">
-                    <button class="danger-subtle">Button</button>
-                    <button class="primary danger">Button</button>
-                    <button class="danger-subtle" disabled>Button</button>
-                    <button class="primary danger" disabled>Button</button>
+                    <button class="btn danger-subtle">Button</button>
+                    <button class="btn primary danger">Button</button>
+                    <button class="btn danger-subtle" disabled>Button</button>
+                    <button class="btn primary danger" disabled>Button</button>
                 </div>
             </section>
             <section class="flexy">
@@ -87,7 +87,7 @@ export function mualani() {
                 <h2>Notifications</h2>
                 <div class="flexy h">
                     <button
-                        class="continue"
+                        class="btn continue"
                         onclick=${() =>
                             notify({
                                 id: 'test',
@@ -98,7 +98,7 @@ export function mualani() {
                         Deliver notification
                     </button>
                     <button
-                        class="continue"
+                        class="btn continue"
                         onclick=${() =>
                             notify({
                                 id: 'test',
@@ -110,7 +110,7 @@ export function mualani() {
                         Deliver persistent notification
                     </button>
                     <button
-                        class="continue"
+                        class="btn continue"
                         onclick=${() => {
                             let notification = notify({
                                 id: 'async',
@@ -144,7 +144,7 @@ export function mualani() {
             <section class="flexy">
                 <h2>Status alerts</h2>
                 <button
-                    class="continue"
+                    class="btn continue"
                     onclick=${() =>
                         status({
                             title: 'test alert',
@@ -156,7 +156,7 @@ export function mualani() {
             </section>
             <section class="flexy">
                 <h2>Modals</h2>
-                <button class="continue" onclick=${() => dialog_loop()}>
+                <button class="btn continue" onclick=${() => dialog_loop()}>
                     Open dialog loop
                 </button>
             </section>

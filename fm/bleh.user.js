@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         bleh
 // @namespace    https://last.fm/
-// @version      2026.0131.1
+// @version      2026.0201
 // @description  bleh!!! ^-^
 // @author       katelyn
 // @match        https://www.last.fm/*
@@ -58979,16 +58979,16 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
             <section class="flexy">
                 <h2>Buttons</h2>
                 <div class="flexy h">
-                    <button>Button</button>
-                    <button class="primary">Button</button>
-                    <button disabled>Button</button>
-                    <button class="primary" disabled>Button</button>
+                    <button class="btn">Button</button>
+                    <button class="btn primary">Button</button>
+                    <button class="btn" disabled>Button</button>
+                    <button class="btn primary" disabled>Button</button>
                 </div>
                 <div class="flexy h">
-                    <button class="danger-subtle">Button</button>
-                    <button class="primary danger">Button</button>
-                    <button class="danger-subtle" disabled>Button</button>
-                    <button class="primary danger" disabled>Button</button>
+                    <button class="btn danger-subtle">Button</button>
+                    <button class="btn primary danger">Button</button>
+                    <button class="btn danger-subtle" disabled>Button</button>
+                    <button class="btn primary danger" disabled>Button</button>
                 </div>
             </section>
             <section class="flexy">
@@ -59007,7 +59007,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                 <h2>Notifications</h2>
                 <div class="flexy h">
                     <button
-                        class="continue"
+                        class="btn continue"
                         onclick=${() => notify({
         id: "test",
         title: "testing!",
@@ -59017,7 +59017,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                         Deliver notification
                     </button>
                     <button
-                        class="continue"
+                        class="btn continue"
                         onclick=${() => notify({
         id: "test",
         title: "testing!",
@@ -59028,7 +59028,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                         Deliver persistent notification
                     </button>
                     <button
-                        class="continue"
+                        class="btn continue"
                         onclick=${() => {
         let notification = notify({
           id: "async",
@@ -59059,7 +59059,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
             <section class="flexy">
                 <h2>Status alerts</h2>
                 <button
-                    class="continue"
+                    class="btn continue"
                     onclick=${() => status({
         title: "test alert",
         body: "haiaiai nothing to worry about >_<"
@@ -59070,7 +59070,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
             </section>
             <section class="flexy">
                 <h2>Modals</h2>
-                <button class="continue" onclick=${() => dialog_loop()}>
+                <button class="btn continue" onclick=${() => dialog_loop()}>
                     Open dialog loop
                 </button>
             </section>
@@ -71297,8 +71297,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
   // src/build/build.json
   var build_default = {
     brand: "bleh",
-    build: "2026.0131.1",
-    sku: "shunguang",
+    build: "2026.0201",
+    sku: "kurumi",
     bio: "bleh!!! ^-^",
     author: "katelyn",
     url: "https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.js",
