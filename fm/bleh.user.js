@@ -58706,33 +58706,28 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         let delete_btn;
         if (delete_form)
           delete_btn = delete_form.querySelector(".btn-delete");
+        const submit_input = submit.querySelector("input");
+        const submit_button = submit.querySelector('[type="submit"]');
+        submit_button.classList = "btn primary icon";
+        submit_button.setAttribute("data-type", "item-edit");
+        submit_button.textContent = tl2(trans.edit);
         render(
           submit,
           html`
-                    <button
-                        class="see-more cancel"
-                        type="button"
-                        onclick=${() => dismiss.click()}
-                    >
+                    <button class="see-more cancel" type="button" onclick=${() => dismiss.click()}>
                         ${tl2(trans.cancel)}
                     </button>
                     <div class="fill" />
                     <div class="button-group">
                         ${delete_form ? html.node`
-                    <button class="btn icon danger-subtle" data-type="delete" type="button" onclick=${() => {
+                        <button class="btn icon danger-subtle" data-type="delete" type="button" onclick=${() => {
             delete_btn.click();
           }}>
-                        ${tl2(trans.delete)}
-                    </button>
-                    ` : ""}
-                        ${submit.querySelector("input")}
-                        <button
-                            class="btn primary icon"
-                            data-type="item-edit"
-                            type="submit"
-                        >
-                            ${tl2(trans.edit)}
+                            ${tl2(trans.delete)}
                         </button>
+                        ` : ""}
+                        ${submit_input}
+                        ${submit_button}
                     </div>
                 `
         );

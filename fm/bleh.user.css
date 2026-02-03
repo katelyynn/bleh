@@ -12377,6 +12377,7 @@
                     & > .avatar {
                         width: 32px;
                         height: 32px;
+                        --mask-size: var(--cover-size-32);
 
                         & > .avatar-status-dot {
                             --mask-size: 14px;
@@ -12414,6 +12415,7 @@
                     background: hsl(var(--b5));
                     width: 42px;
                     height: 42px;
+                    --mask-size: var(--cover-size-50);
 
                     & > img {
                         position: static;
