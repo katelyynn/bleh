@@ -1,5 +1,5 @@
 {
-    "latest": "2026.0201",
+    "latest": "2026.0204",
     "sponsors": [
         "clairedoll", "kateshapedbox", "evangelicgirl",
         "astrablooms", "ItsProyal", "vwvwvwvwvwvwv", "Orofil",
@@ -14,7 +14,7 @@
         "dylandotat", "Angel0Lust", "liminelle", "quikwise",
         "BosozokuGF", "tainaronian", "NozomiBear", "nin0dev",
         "milkdrinker3000", "wiichicken", "duskwitch", "rgoracz",
-        "thomasb2k"
+        "thomasb2k", "ThatJumpyFrog"
     ],
     "sponsors_one_time": [
         "kateshapedbox",
@@ -504,6 +504,9 @@
             "type": "sponsor"
         },
         "thomasb2k": {
+            "type": "sponsor"
+        },
+        "ThatJumpyFrog": {
             "type": "sponsor"
         }
     }
