@@ -5111,7 +5111,8 @@ export const trans = {
         ru: 'Заголовок профиля'
     },
     pronoun_tip: {
-        en: 'Include pronouns at the start or end of your title to separate them visually'
+        en: 'Include pronouns at the start or end of your title to separate them visually',
+        ru: 'Разместить местоимения в начале или в конце заголовка, чтобы визуально отделить их'
     },
     block_list: {
         en: 'Block list',
@@ -9871,14 +9872,15 @@ export const trans = {
             es: 'Reemplazar menús de clic derecho nativos del navegador',
             it: 'Sostituisci i menu contestuali nativi del browser',
             pt: 'Substituir menus de clique direito nativos do navegador',
-            ru: 'Заменить встроенные меню правой кнопки мыши браузера'
+            ru: 'Заменить нативные контекстные меню браузера'
         },
         body: {
             en: 'Provide bleh context-specific actions when right-clicking',
             de: 'bleh-kontextspezifische Aktionen beim Rechtsklick anzeigen',
             es: 'Proporciona acciones específicas de bleh al hacer clic derecho',
             it: 'Fornisci azioni specifiche a bleh nei menu contestuali',
-            pt: 'Fornecer ações específicas do bleh ao clicar com o botão direito'
+            pt: 'Fornecer ações específicas do bleh ao clicar com o botão direito',
+            ru: 'Показывать контекстно‑зависимые действия bleh при щелчке правой кнопкой мыши'
         }
     },
     you_have_new_badges: {
@@ -9974,7 +9976,8 @@ export const trans = {
     status_cafe: {
         // status.cafe
         body: {
-            en: 'Embed your current status onto your profile, can be moved around freely by editing your about me'
+            en: 'Embed your current status onto your profile, can be moved around freely by editing your about me',
+            ru: 'Вставьте свой текущий статус в профиль, его можно перемещать по свободному пространству, редактируя свой профиль'
         }
     },
     date_at_time: {
@@ -10111,19 +10114,22 @@ export const trans = {
     },
     popup_navigation_menu: {
         title: {
-            en: 'This is your navigator'
+            en: 'This is your navigator',
+            ru: 'Это ваш навигатор'
         },
         body: {
-            en: 'You can choose which actions to show here by right-clicking for more options'
+            en: 'You can choose which actions to show here by right-clicking for more options',
+            ru: 'Вы можете выбрать, какие действия показывать здесь: щёлкните правой кнопкой мыши, чтобы открыть дополнительные параметры'
         }
     },
     popup_inbox: {
         title: {
-            en: 'Find your inbox combined'
+            en: 'Find your inbox combined',
+            ru: 'Найдите вашу почту'
         },
         body: {
             en: 'Your notifications and messages have been organised into this handy button',
-            ru: 'Ваша почта и уведомления были объединены в эту удобную кнопку'
+            ru: 'Ваша уведомления и сообщения были объединены в эту удобную кнопку'
         }
     },
     popup_close_friends: {
