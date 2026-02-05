@@ -849,7 +849,8 @@ export const trans = {
     },
     close_friends: {
         en: 'Close friends',
-        de: 'Engen Freunde'
+        de: 'Engen Freunde',
+        ru: 'Близкие друзья',
     },
     friends: {
         en: 'Friends',
@@ -875,10 +876,12 @@ export const trans = {
     },
     add_friends: {
         en: 'Add close friends',
-        de: 'Engen Freunde hinzufügen'
+        de: 'Engen Freunde hinzufügen',
+        ru: 'Добавить близких друзей',
     },
     edit_close_friends: {
-        en: 'Edit close friends'
+        en: 'Edit close friends',
+        ru: 'Редактировать близких друзей',
     },
     starred_friend: {
         name: {
@@ -916,31 +919,38 @@ export const trans = {
         }
     },
     friend_difference: {
-        en: 'Close friends is a bleh system that allows you to keep up to date on your friend’s listening history, it does not influence your following list.'
+        en: 'Close friends is a bleh system that allows you to keep up to date on your friend’s listening history, it does not influence your following list.',
+        ru: 'Близкие друзья - это функция bleh, которая позволяет следить за историей прослушиваний ваших друзей и не влияет на список ваших подписок.',
     },
     friend_difference_min: {
-        en: 'bleh-only'
+        en: 'bleh-only',
+        ru: 'только в bleh'
     },
     add_as_friend: {
         en: 'Add as close friend',
-        de: 'Als engen Freund hinzufügen'
+        de: 'Als engen Freund hinzufügen',
+        ru: 'Добавить в список близких друзей',
     },
     remove_friend: {
         name: {
             en: 'Remove close friend',
-            de: 'Engen Freund entfernen'
+            de: 'Engen Freund entfernen',
+            ru: 'Удалить из списка близких друзей',
         },
         body: {
-            en: 'Continue removing {u} as a close friend? (bleh-only)'
+            en: 'Continue removing {u} as a close friend? (bleh-only)',
+            ru: 'Продолжить удаление {u} из списка близких друзей? (bleh-only)',
         }
     },
     added_as_friend: {
         en: 'Added close friend',
-        de: 'Engen Freund hinzugefügt'
+        de: 'Engen Freund hinzugefügt',
+        ru: 'Добавлен в список близких друзей',
     },
     removed_friend: {
         en: 'Removed close friend',
-        de: 'Engen Freund entfernt'
+        de: 'Engen Freund entfernt',
+        ru: 'Удален из списка близких друзей',
     },
     added_star: {
         en: 'Added star status',
@@ -1010,7 +1020,8 @@ export const trans = {
     },
     account_creation: {
         // dont translate to "scrobbling since"
-        en: 'Account creation date'
+        en: 'Account creation date',
+        ru: 'Дата создания аккаунта'
     },
     account_scrobbling_since_replace: {
         // copy this from last.fm 1:1 (including the space at the end if there)
@@ -1109,7 +1120,8 @@ export const trans = {
     },
     count_tracks: {
         // tracks on an album
-        en: '{c} tracks'
+        en: '{c} tracks',
+        ru: '{c} треков'
     },
     count_scrobbles: {
         en: '{c} scrobbles',
@@ -2135,10 +2147,12 @@ export const trans = {
         zh: '结束日期'
     },
     link: {
-        en: 'Link'
+        en: 'Link',
+        ru: 'Ссылка'
     },
     create_link: {
-        en: 'Create link'
+        en: 'Create link',
+        ru: 'Создать ссылку'
     },
     text: {
         en: 'Text',
@@ -2242,7 +2256,8 @@ export const trans = {
     },
     bookmark_item: {
         // bookmark track/artist/album
-        en: 'Bookmark {v}'
+        en: 'Bookmark {v}',
+        ru: 'Добавить {v} в закладки'
     },
     charts: {
         en: 'Charts',
@@ -2543,7 +2558,8 @@ export const trans = {
     },
     avatar_desc: {
         // shown as a description when setting your avatar
-        en: 'Present yourself site-wide in your own style'
+        en: 'Present yourself site-wide in your own style',
+        ru: 'Представьте себя по всему сайту в вашем стиле'
     },
     customise: {
         en: 'Customise',
@@ -2625,17 +2641,20 @@ export const trans = {
     apply_profile_accent: {
         // global accent: the one set in bleh settings
         // profile accent: the sponsor-exclusive colour in account settings
-        en: 'Use profile accent globally'
+        en: 'Use profile accent globally',
+        ru: 'Использовать цвет профиля глобально'
     },
     apply_global_accent: {
         // global accent: the one set in bleh settings
         // profile accent: the sponsor-exclusive colour in account settings
-        en: 'Copy current accent to profile'
+        en: 'Copy current accent to profile',
+        ru: 'Скопировать текущий акцент в профиль'
     },
     this_will_replace_your_global_accent: {
         // global accent: the one set in bleh settings
         // profile accent: the sponsor-exclusive colour in account settings
-        en: 'This will replace your global accent (the one in use right now)'
+        en: 'This will replace your global accent (the one in use right now)',
+        ru: 'Это заменит ваш глобальный акцент (тот, который используется сейчас)'
     },
     solarium: {
         name: {
@@ -3002,10 +3021,12 @@ export const trans = {
         pl: 'Sąsiedzi'
     },
     follows_you: {
-        en: 'Follows you!'
+        en: 'Follows you!',
+        ru: 'Подписан на вас!'
     },
     user_follows_you: {
-        en: '{u} follows you!'
+        en: '{u} follows you!',
+        ru: '{u} подписан на вас!'
     },
     website: {
         en: 'Website',
@@ -3094,7 +3115,8 @@ export const trans = {
     more_like_name: {
         // more artists like kitagawa
         // more albums like etc.
-        en: 'More like {n}'
+        en: 'More like {n}',
+        ru: 'Похожие на {n}'
     },
     biography: {
         en: 'Biography',
@@ -3427,7 +3449,8 @@ export const trans = {
         // valentines easter egg
         // u: username
         // v: Super / Low / Very Low etc.
-        en: 'You and {u} are a {v} match'
+        en: 'You and {u} are a {v} match',
+        ru: 'Вы и {u} - у вас {v} совпадение',
     },
     taste_similarity: {
         en: 'Taste similarity',
@@ -3442,11 +3465,13 @@ export const trans = {
     generic_lastfm_compatibility_message: {
         // based on the default message last.fm shows
         // \n is a new line
-        en: 'Your compatibility with {u} is {r}.\nYou both listen to {a}.'
+        en: 'Your compatibility with {u} is {r}.\nYou both listen to {a}.',
+        ru: 'Ваша совместимость с {u} составляет {r}.\nВы оба слушаете {a}.'
     },
     subject: {
         // as in an email/message subject
-        en: 'Subject'
+        en: 'Subject',
+        ru: 'Тема'
     },
     message: {
         // as in a direct message
@@ -3460,7 +3485,8 @@ export const trans = {
         pl: 'Wiadomość'
     },
     send_message: {
-        en: 'Send message'
+        en: 'Send message',
+        ru: 'Отправить сообщение'
     },
     join_discord: {
         en: 'Join Discord',
@@ -3615,7 +3641,8 @@ export const trans = {
         pl: 'Aktualna wersja'
     },
     updating_to_version: {
-        en: 'Updating to version'
+        en: 'Updating to version',
+        ru: 'Обновление до версии'
     },
     manage_data: {
         en: 'Manage data',
@@ -3929,7 +3956,8 @@ export const trans = {
         pl: 'Kliknij aby skopiować'
     },
     cut: {
-        en: 'Cut'
+        en: 'Cut',
+        ru: 'Вырезать'
     },
     paste: {
         en: 'Paste',
@@ -3944,7 +3972,8 @@ export const trans = {
         de: 'Text einfügen',
         es: 'Pegar texto',
         pt: 'Colar texto',
-        pl: 'Wklej tekst'
+        pl: 'Wklej tekst',
+        ru: 'Вставить текст'
     },
     undo: {
         en: 'Undo',
@@ -4298,7 +4327,8 @@ export const trans = {
     },
     cards: {
         // as in the view mode
-        en: 'Cards'
+        en: 'Cards',
+        ru: 'Карточки'
     },
     grid: {
         // as in the view mode
@@ -5077,7 +5107,8 @@ export const trans = {
         pl: 'Podtytuł'
     },
     profile_title: {
-        en: 'Profile title'
+        en: 'Profile title',
+        ru: 'Заголовок профиля'
     },
     pronoun_tip: {
         en: 'Include pronouns at the start or end of your title to separate them visually'
@@ -5446,7 +5477,8 @@ export const trans = {
     },
     search_for_anything: {
         // used as a placeholder for the global search bar
-        en: 'Search for anything'
+        en: 'Search for anything',
+        ru: 'Найти что угодно'
     },
     search_guest: {
         en: 'Search guest appearances',
@@ -5726,10 +5758,12 @@ export const trans = {
         ru: 'Редактировать заметку профиля'
     },
     saved_note_for_user: {
-        en: 'Saved note for {u}'
+        en: 'Saved note for {u}',
+        ru: "Заметка сохранена для {u}"
     },
     cleared_note_for_user: {
-        en: 'Cleared note for {u}'
+        en: 'Cleared note for {u}',
+        ru: "Заметка удалена для {u}"
     },
     manage: {
         en: 'Manage'
@@ -7085,10 +7119,12 @@ export const trans = {
         pt: 'Sem descrição'
     },
     image: {
-        en: 'Image'
+        en: 'Image',
+        ru: 'Изображение'
     },
     attach_image: {
-        en: 'Attach image'
+        en: 'Attach image',
+        ru: 'Прикрепить изображение'
     },
     change_avatar: {
         en: 'Change avatar',
@@ -7590,7 +7626,8 @@ export const trans = {
         // lowercase in design
         // ignore the curly brackets, only translate the '{c} wonderful people' thing
         // c: replaced with a number of sponsors
-        en: '{s}{c} sponsoring{/s} ♡'
+        en: '{s}{c} sponsoring{/s} ♡',
+        ru: '{s}{c} замечательных людей{/s} ♡'
     },
     love_lower: {
         // replaces the {h} in the above sentence
@@ -7800,7 +7837,8 @@ export const trans = {
         ru: 'Ничего не найдено по вашему запросу'
     },
     create_collage: {
-        en: 'Create collage'
+        en: 'Create collage',
+        ru: 'Создать коллаж'
     },
     create_a_collage: {
         en: 'Create a collage of your choosing',
@@ -8427,7 +8465,8 @@ export const trans = {
             pt: 'Banner do perfil'
         },
         body: {
-            en: 'Showcase an image of your choosing across your profile'
+            en: 'Showcase an image of your choosing across your profile',
+            ru: 'Показать изображение, выбранное вами, в вашем профиле'
         }
     },
     profile_accent: {
@@ -8692,7 +8731,8 @@ export const trans = {
         pt: 'Minis'
     },
     explore_minis: {
-        en: 'Explore minis'
+        en: 'Explore minis',
+        ru: 'Исследуй мини'
     },
     minis_description: {
         en: 'Play mini-games, puzzles, and interact with tools all powered by your listening history',
@@ -9816,11 +9856,13 @@ export const trans = {
     },
     value_less: {
         // 50 less than last month
-        en: '{v} less'
+        en: '{v} less',
+        ru: '{v} меньше'
     },
     value_more: {
         // 50 more than last month
-        en: '{v} more'
+        en: '{v} more',
+        ru: '{v} больше'
     },
     menu_replacement: {
         name: {
@@ -9859,7 +9901,8 @@ export const trans = {
             en: 'View expanded details on all languages for use when translating',
             de: 'Erweiterte Details zu allen Sprachen ansehen, die bei der Übersetzung verwendet werden können',
             es: 'Ve detalles ampliados de todos los idiomas para usar al traducir',
-            pt: 'Veja detalhes expandidos sobre todos os idiomas para uso ao traduzir'
+            pt: 'Veja detalhes expandidos sobre todos os idiomas para uso ao traduzir',
+            ru: 'Просмотр расширенных сведений о всех языках для использования при переводе'
         }
     },
     translate: {
@@ -9874,7 +9917,8 @@ export const trans = {
         en: 'Translation key',
         de: 'Übersetzungsschlüssel',
         es: 'Clave de traducción',
-        pt: 'Chave de tradução'
+        pt: 'Chave de tradução',
+        ru: 'Ключ перевода' // this is kinda hard to translate, especially the word 'key', so this is what i came up with -tech
     },
     original: {
         en: 'Original',
@@ -9916,13 +9960,16 @@ export const trans = {
         }
     },
     current_status: {
-        en: 'Current status'
+        en: 'Current status',
+        ru: 'Текущий статус'
     },
     status_cafe_too_many_requests: {
-        en: 'paused loading temporarily @w@'
+        en: 'paused loading temporarily @w@',
+        ru: 'загрузка статуса временно приостановлена @w@'
     },
     loading_status: {
-        en: 'loading status'
+        en: 'loading status',
+        ru: 'загрузка статуса'
     },
     status_cafe: {
         // status.cafe
@@ -9932,106 +9979,135 @@ export const trans = {
     },
     date_at_time: {
         // date is automatically translated with luxon
-        en: '{d} at {t}'
+        en: '{d} at {t}',
+        ru: '{d} в {t}'
     },
     you_sent_to: {
         // messages in your inbox
-        en: 'You sent to'
+        en: 'You sent to',
+        ru: 'Вы отправили'
     },
     sent_to_you: {
         // messages in your inbox
-        en: 'Sent to you'
+        en: 'Sent to you',
+        ru: 'Отправлено вам'
     },
     shoutbox_placeholder: {
         // u: username
         // v: album/artist/track
-        en: '{u}, share your thoughts on {v}...'
+        en: '{u}, share your thoughts on {v}...',
+        ru: '{u}, поделитесь своими мыслями о {v}...'
     },
     shoutbox_placeholder_user: {
-        en: '{u}, leave a shout for {v}...'
+        en: '{u}, leave a shout for {v}...',
+        ru: '{u}, оставьте комментарий для {v}...'
     },
     mention_user: {
-        en: 'Mention user'
+        en: 'Mention user',
+        ru: 'Упомянуть пользователя'
     },
     quote: {
-        en: 'Quote'
+        en: 'Quote',
+        ru: 'Цитировать'
     },
     code_block: {
         // block that surrounds code text:
         // `this is code`
-        en: 'Code block'
+        en: 'Code block',
+        ru: 'Блок кода'
     },
     numbered_list: {
-        en: 'Numbered list'
+        en: 'Numbered list',
+        ru: 'Нумерованный список'
     },
     left_align: {
-        en: 'Left align'
+        en: 'Left align',
+        ru: 'Выровнять по левому краю'
     },
     center_align: {
-        en: 'Center align'
+        en: 'Center align',
+        ru: 'Выровнять по центру'
     },
     right_align: {
-        en: 'Right align'
+        en: 'Right align',
+        ru: 'Выровнять по правому краю'
     },
     header: {
-        en: 'Header'
+        en: 'Header',
+        ru: 'Заголовок'
     },
     bold: {
-        en: 'Bold'
+        en: 'Bold',
+        ru: 'Полужирный'
     },
     italic: {
-        en: 'Italic'
+        en: 'Italic',
+        ru: 'Курсив'
     },
     strikethrough: {
-        en: 'Strikethrough'
+        en: 'Strikethrough',
+        ru: 'Зачеркнутый'
     },
     underline: {
-        en: 'Underline'
+        en: 'Underline',
+        ru: 'Подчеркнутый'
     },
     located: {
-        en: 'Located'
+        en: 'Located',
+        ru: 'Расположение'
     },
     date: {
-        en: 'Date'
+        en: 'Date',
+        ru: 'Дата'
     },
     contact: {
         en: 'Contact'
     },
     show_on_map: {
-        en: 'Show on map'
+        en: 'Show on map',
+        ru: 'Показать на карте'
     },
     added_by: {
-        en: 'Added by {u}'
+        en: 'Added by {u}',
+        ru: 'Добавлено {u}'
     },
     notice: {
-        en: 'Notice'
+        en: 'Notice',
+
     },
     send_valentine: {
         // valentines easter egg
         // sends a message to the user
-        en: 'Let them know'
+        en: 'Let them know',
+        ru: "Отправить сообщение"
     },
     valentine: {
         // valentines easter egg
         // is used as the subject line of the message
         // u: username
-        en: 'to the one i love most, {u} ♡'
+        en: 'to the one i love most, {u} ♡',
+        ru: 'тому, кого я люблю больше всего, {u} ♡'
     },
     view_details: {
-        en: 'View details'
+        en: 'View details',
+        ru: 'Просмотреть детали'
     },
     valentine_info: {
-        en: 'You’re seeing this as {u} is on your bleh close friends list, you have a high compatibility, and it’s Valentines Day!'
+        en: 'You’re seeing this as {u} is on your bleh close friends list, you have a high compatibility, and it’s Valentines Day!',
+        ru: 'Вы видите это, потому что {u} находится в вашем списке близких друзей в bleh, у вас высокая совместимость и сегодня День Влюбленных!'
     },
     valentine_message_footer: {
-        en: 'This message’s subject line indicates it was sent via bleh and {u} picked you as their valentine ♡'
+        en: 'This message’s subject line indicates it was sent via bleh and {u} picked you as their valentine ♡',
+        ru: 'Заголовок этого сообщения указывает, что оно было отправлено через bleh и {u} выбрал вас своим влюбленным ♡'
     },
     got_it: {
         // used when dismissing a popup
-        en: 'Got it'
+        en: 'Got it',
+        ru: 'Понятно'
     },
     tip: {
-        en: 'Tip'
+        en: 'Tip',
+        ru: 'Подсказка'
     },
     popup_navigation_menu: {
         title: {
@@ -10046,58 +10122,73 @@ export const trans = {
             en: 'Find your inbox combined'
         },
         body: {
-            en: 'Your notifications and messages have been organised into this handy button'
+            en: 'Your notifications and messages have been organised into this handy button',
+            ru: 'Ваша почта и уведомления были объединены в эту удобную кнопку'
         }
     },
     popup_close_friends: {
         title: {
-            en: 'Add your close friends list'
+            en: 'Add your close friends list',
+            ru: 'Добавьте ваш список близких друзей'
         },
         body: {
-            en: 'View their scrobbles on any artist, album, or track at any time'
+            en: 'View their scrobbles on any artist, album, or track at any time',
+            ru: 'Просматривайте их скробблы на любом исполнителе, альбоме или треке в любое время'
         }
     },
     popup_profile_name_style: {
         title: {
-            en: 'Choose a custom font, style, and profile colour'
+            en: 'Choose a custom font, style, and profile colour',
+            ru: 'Выберите пользовательский шрифт, стиль и цвет профиля'
         },
         body: {
-            en: 'These are sponsor-exclusive perks as a thank you for supporting bleh'
+            en: 'These are sponsor-exclusive perks as a thank you for supporting bleh',
+            ru: 'Это эксклюзивные преимущества для спонсоров, как благодарность за поддержку bleh' // don't really know how to translate 'perks'
         }
     },
     popup_markdown: {
         title: {
-            en: 'Embrace styling with Markdown'
+            en: 'Embrace styling with Markdown',
+            ru: 'Стилизуйте текст с Markdown'
         },
         body: {
-            en: 'Format any text, embed images and links, mention users, and much more based on the scenario'
+            en: 'Format any text, embed images and links, mention users, and much more based on the scenario',
+            ru: 'Форматируйте любой текст, вставляйте изображения и ссылки, упоминайте пользователей и многое другое в зависимости от сценария'
         }
     },
     popup_search: {
         title: {
-            en: 'Hover up here to search music'
+            en: 'Hover up here to search music',
+            ru: 'Наведите курсор здесь, чтобы найти музыку'
         },
         body: {
-            en: 'Searching has never been easier to access, plus it hides away when you’re scrolled up'
+            en: 'Searching has never been easier to access, plus it hides away when you’re scrolled up',
+            ru: 'Поиск никогда не был таким простым, а когда вы прокручиваете вверх, он скрывается'
         }
     },
     send_a_reply: {
-        en: 'Send a reply'
+        en: 'Send a reply',
+        ru: 'Отправить ответ'
     },
     are_these_results_accurate: {
-        en: 'Are these results accurate?'
+        en: 'Are these results accurate?',
+        ru: 'Точные ли эти результаты?'
     },
     report_incorrect: {
-        en: 'Mark incorrect'
+        en: 'Mark incorrect',
+        ru: 'Отметить как неверный'
     },
     what_did_you_expect: {
-        en: 'What did you expect?'
+        en: 'What did you expect?',
+        ru: 'Что вы ожидали увидеть?'
     },
     oracle_sources_tip_track: {
-        en: 'Which albums did you expect to be linked to, e.g. Dawn FM instead of After Hours'
+        en: 'Which albums did you expect to be linked to, e.g. Dawn FM instead of After Hours',
+        ru: 'Какие альбомы вы ожидали увидеть, например, Dawn FM вместо After Hours'
     },
     oracle_sources_tip_album: {
-        en: 'Which copy of the album did you expect to see? Provide links and some details as to why'
+        en: 'Which copy of the album did you expect to see? Provide links and some details as to why',
+        ru: 'Какой копии альбома вы ожидали увидеть? Укажите ссылки и некоторые подробности о том, почему'
     }
 };
 
