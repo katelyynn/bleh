@@ -12,11 +12,10 @@ import { log } from '../build/log.js';
 import { correct_artist, correct_item_by_artist } from './lotus.js';
 
 export function dialog_extender() {
-    log('dialog extender', 'loop');
     // data-processed=true is signature of bulk edit
-    let wrappers = document.body.querySelectorAll(
-        ':scope > .popup_wrapper, :scope > div > .popup_wrapper'
-    );
+    const wrappers = document.body.querySelectorAll(':scope > .popup_wrapper, :scope > div > .popup_wrapper');
+
+    log(`found ${Array.from(wrappers).length} dialog(s)`, 'loop', 'log', { wrappers });
 
     wrappers.forEach((wrapper) => {
         let modal_dialog = wrapper.querySelector(

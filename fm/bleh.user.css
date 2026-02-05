@@ -1349,6 +1349,7 @@
         --icon-season: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWNhbGVuZGFyLWNsb2NrIj48cGF0aCBkPSJNMjEgNy41VjZhMiAyIDAgMCAwLTItMkg1YTIgMiAwIDAgMC0yIDJ2MTRhMiAyIDAgMCAwIDIgMmgzLjUiLz48cGF0aCBkPSJNMTYgMnY0Ii8+PHBhdGggZD0iTTggMnY0Ii8+PHBhdGggZD0iTTMgMTBoNSIvPjxwYXRoIGQ9Ik0xNy41IDE3LjUgMTYgMTYuM1YxNCIvPjxjaXJjbGUgY3g9IjE2IiBjeT0iMTYiIHI9IjYiLz48L3N2Zz4=");
         --icon-error: url("data:image/svg+xml;base64,PHN2ZyAgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiAgd2lkdGg9IjI0IiAgaGVpZ2h0PSIyNCIgIHZpZXdCb3g9IjAgMCAyNCAyNCIgIGZpbGw9ImN1cnJlbnRDb2xvciIgIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1maWxsZWQgaWNvbi10YWJsZXItYm9tYiI+PHBhdGggc3Ryb2tlPSJub25lIiBkPSJNMCAwaDI0djI0SDB6IiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTE0LjQ5OSAzLjk5NmEyLjIgMi4yIDAgMCAxIDEuNTU2IC42NDVsMy4zMDIgMy4zMDFhMi4yIDIuMiAwIDAgMSAwIDMuMTEzbC0uNTY3IC41NjdsLjA0MyAuMTkyYTguNSA4LjUgMCAwIDEgLTMuNzMyIDguODNsLS4yMyAuMTQ0YTguNSA4LjUgMCAxIDEgLTIuNjg3IC0xNS42MjNsLjE5MiAuMDQybC41NjcgLS41NjZhMi4yIDIuMiAwIDAgMSAxLjM2MiAtLjYzNnptLTQuNDk5IDUuMDA0YTQgNCAwIDAgMCAtNCA0YTEgMSAwIDAgMCAyIDBhMiAyIDAgMCAxIDIgLTJhMSAxIDAgMCAwIDAgLTJ6IiAvPjxwYXRoIGQ9Ik0yMSAyYTEgMSAwIDAgMSAuMTE3IDEuOTkzbC0uMTE3IC4wMDdoLTFjMCAuODMgLS4zMDIgMS42MjkgLS44NDYgMi4yNWwtLjE1NCAuMTYzbC0xLjI5MyAxLjI5M2ExIDEgMCAwIDEgLTEuNDk3IC0xLjMybC4wODMgLS4wOTRsMS4yOTMgLTEuMjkyYy4yMzIgLS4yMzIgLjM3NSAtLjUzNyAuNDA3IC0uODZsLjAwNyAtLjE0YTIgMiAwIDAgMSAxLjg1IC0xLjk5NWwuMTUgLS4wMDVoMXoiIC8+PC9zdmc+");
 
+        --icon-16-create-from-scratch: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1vdXRsaW5lIGljb24tdGFibGVyLXBlbmNpbC1wbHVzIj48cGF0aCBzdHJva2U9Im5vbmUiIGQ9Ik0wIDBoMjR2MjRIMHoiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJNNCAyMGg0bDEwLjUgLTEwLjVhMi44MjggMi44MjggMCAxIDAgLTQgLTRsLTEwLjUgMTAuNXY0IiAvPjxwYXRoIGQ9Ik0xMy41IDYuNWw0IDQiIC8+PHBhdGggZD0iTTE2IDE5aDYiIC8+PHBhdGggZD0iTTE5IDE2djYiIC8+PC9zdmc+");
         --icon-16-dislike: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1vdXRsaW5lIGljb24tdGFibGVyLXRodW1iLWRvd24iPjxwYXRoIHN0cm9rZT0ibm9uZSIgZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPjxwYXRoIGQ9Ik03IDEzdi04YTEgMSAwIDAgMCAtMSAtMWgtMmExIDEgMCAwIDAgLTEgMXY3YTEgMSAwIDAgMCAxIDFoM2E0IDQgMCAwIDEgNCA0djFhMiAyIDAgMCAwIDQgMHYtNWgzYTIgMiAwIDAgMCAyIC0ybC0xIC01YTIgMyAwIDAgMCAtMiAtMmgtN2EzIDMgMCAwIDAgLTMgMyIgLz48L3N2Zz4=");
 
         --snow: snow;
@@ -3144,7 +3145,6 @@
     .wiki-history,
     /* error 500 */ .container:has(#marvin),
     :is(.namespace--music_track_tags_add, .namespace--music_artist_tags_add, .namespace--music_album_tags_add) .col-main,
-    /* make a playlist */ .playlisting-create-options,
     /* home page recommendations */ .homefeed .col-main,
     /* playlist content */ .playlisting-playlist-header + .page-content > .row,
     /* event lineup */ .big-artist-list,
@@ -17436,9 +17436,13 @@
     /*     MAKE A PLAYLIST     */
     .playlisting-create-options {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
         gap: var(--card-gap);
+
+        margin: var(--card-gap) 0 0 0;
+        padding: unset;
     }
+
     .playlisting-create-option-wrap {
         padding: unset;
         margin: unset !important;
@@ -17449,18 +17453,25 @@
     .playlisting-create-option {
         display: flex;
         flex-direction: column;
-        gap: 6px;
+        justify-content: center;
+        gap: 0;
+
+        --button-verts: 50px;
+        --button-sides: 20px;
+
+        height: 240px;
     }
 
     .playlisting-create-option-icon {
-        width: 32px;
-        height: 32px;
-        margin: 6px 0;
+        --mask-size: 24px;
+
+        width: var(--mask-size);
+        height: var(--mask-size);
+        margin-bottom: 20px;
         padding-top: unset;
         --left: 0;
         --top: 0;
         --margin-top: 0;
-        --mask-size: 32px;
     }
 
     h2.playlisting-create-option-title {
@@ -21370,6 +21381,16 @@
             );
         }
     }
+
+    .accented {
+        --col: hsl(var(--l3-c));
+        --mask-colour: color-mix(
+            in hsl,
+            hsl(var(--l3-c)),
+            hsl(var(--l4-c)) 30%
+        );
+    }
+
     [data-type="block"],
     .block {
         --mask: var(--icon-16-block);
@@ -23525,6 +23546,9 @@
                 &.bookmarks-icon {
                     --mask: var(--icon-16-bookmark);
                 }
+                &.playlist-icon {
+                    --mask: var(--icon-16-playlist);
+                }
             }
         }
 
@@ -25432,42 +25456,46 @@
 
     .page-indicator {
         position: fixed;
-        top: 0;
+        top: 1px;
         left: 0;
         z-index: 10000000000;
         pointer-events: none;
 
         &:not(:hover) {
-            opacity: 0.4;
-
-            & > div:nth-child(2),
-            & > div:nth-child(4),
-            & > div:nth-child(5),
-            & > div:nth-child(6) {
-                display: none;
-            }
+            opacity: 0.2;
         }
 
-        div {
-            font-family: system-ui;
+        display: flex;
+        flex-direction: column;
+
+        .page-indicator-elem {
+            font-family: Funnel Sans, system-ui;
             font-size: 14px;
             line-height: 18px;
-            background: #000;
             color: #fff;
             display: flex;
+            gap: 2px;
             width: fit-content;
             pointer-events: auto;
             cursor: default;
 
-            strong {
+            border-radius: 4px;
+
+            padding: 1px 2px;
+
+            .page-indicator-head {
                 width: 65px;
                 padding: 0 6px;
+                background: #000 !important;
+                font-weight: 500 !important;
             }
 
-            span {
+            .page-indicator-sub {
                 background: rgba(255, 255, 255, 0.15);
                 display: flex;
                 padding: 0 6px;
+
+                border-radius: 4px;
 
                 &:nth-child(3) {
                     background: rgba(255, 255, 255, 0.25);
@@ -25484,9 +25512,6 @@
             }
         }
 
-        display: flex;
-        flex-direction: column;
-
         &::selection,
         ::selection {
             background: red;
@@ -25497,7 +25522,7 @@
         }
     }
     .logs {
-        font-family: system-ui;
+        font-family: Funnel Sans, system-ui;
         font-size: 14px;
         line-height: 18px;
 
@@ -25505,16 +25530,24 @@
         flex-direction: column;
 
         position: fixed;
-        bottom: 0;
-        right: 0;
+        bottom: 2px;
+        left: 2px;
         z-index: 10000000000;
-        max-width: 980px;
+        max-width: 480px;
         max-height: 72px;
         overflow: hidden;
         opacity: 0.3;
         transition-property: opacity, max-width, max-height;
         transition-duration: 0.2s;
         transition-delay: 0.2s;
+
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+
+        background: rgba(0, 0, 0, 75%);
+        padding: 2px;
+        border-radius: 4px;
 
         @media (max-width: 980px) {
             bottom: 100px;
@@ -25523,23 +25556,36 @@
         &:hover {
             overflow-y: scroll;
             opacity: 1;
-            max-width: 700px;
             max-height: 700px;
         }
 
         .log {
-            background: #000;
             color: #fff;
 
             &[data-type="log"] {
                 display: var(--log-show, none);
             }
-        }
 
-        .setting {
-            position: fixed;
-            bottom: 0;
-            right: 0;
+            .system {
+                color: rgba(0, 0, 0, 80%);
+                font-weight: 600;
+                padding: 0 4px;
+                border-radius: 4px;
+            }
+
+            cursor: default;
+        }
+    }
+
+    .log-copy {
+        cursor: pointer;
+        color: lightgray;
+        font-weight: 500;
+
+        margin-left: 10px;
+
+        &:hover {
+            color: #fff;
         }
     }
 
@@ -30572,5 +30618,14 @@
         & > .update-container {
             animation: staggered_spinner 3s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
         }
+    }
+
+
+    .inbox-button {
+        position: relative;
+    }
+
+    [data-type="create-from-scratch"] {
+        --mask: var(--icon-16-create-from-scratch);
     }
 }

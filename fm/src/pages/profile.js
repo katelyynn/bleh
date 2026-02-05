@@ -14,7 +14,6 @@ import {
     control_gif_pause,
     lazy,
     romanise,
-    sanitise,
     set_storage
 } from '../build/tools';
 import { lang, tl, trans } from '../build/trans';
@@ -29,7 +28,6 @@ import {
     smart_title
 } from '../components/lotus';
 import { markdown } from '../components/markdown';
-import { notify } from '../components/notify';
 import { redesign_profile_header } from '../components/profile_header';
 import {
     select,
@@ -44,12 +42,10 @@ import { refresh_all, update_inbuilt_item } from '../config';
 import { register_background, update_page } from '../page';
 import { ff } from '../sku';
 import { bleh_user_library } from './glacier';
-import { use_pronouns } from './lastfm_settings';
 import { bleh_obsession } from './obsession';
 import { html, render } from 'lighterhtml';
 import { save_setting, setting } from '../components/settings.js';
 import { submit_scrobble } from '../components/scrobble.js';
-import { redirect } from '../components/music.js';
 import tippy from 'tippy.js';
 import { Chart, version } from '../main.js';
 import { expand_avatar } from '../avatar.js';
@@ -57,11 +53,15 @@ import { status } from '../components/status.js';
 import { hoshino } from '../components/hoshino.js';
 import { find_pronouns } from '../components/pronouns.js';
 import { queue_popup } from '../components/popup.js';
+import { bleh_playlist } from './playlist.js';
 
 export async function bleh_profiles() {
     // the obsessions page is a user subpage but works very differently
     if (page.subpage == 'obsessions_obsession') {
         bleh_obsession();
+        return;
+    } else if (page.subpage.startsWith('playlists') && page.subpage != 'playlists_playlists') {
+        bleh_playlist();
         return;
     }
 

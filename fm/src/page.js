@@ -587,7 +587,7 @@ function page_title() {
                     page.type == 'artist' ||
                     page.type == 'events' ||
                     page.type == 'tag') &&
-                page.subpage != 'home'
+                page.subpage != 'home' && !(page.subpage.startsWith('playlists_') && page.subpage.endsWith('_overview'))
             )
                 template = tl(trans.page_templates.name_type);
             else if (page.type == 'album' || page.type == 'track')
@@ -653,7 +653,7 @@ function page_title() {
         else if (page.subpage.startsWith('event_attendance'))
             title = tl(trans.attendance);
         else if (page.subpage == 'event_lineup') title = tl(trans.lineup);
-        else if (page.subpage == 'playlists_playlists')
+        else if (page.subpage == 'playlists_playlists' || (page.subpage.startsWith('playlists_') && page.subpage.endsWith('_overview')))
             title = tl(trans.playlists);
         else if (page.subpage == 'auth') title = tl(trans.connect_app);
         else if (page.subpage.startsWith('image') && page.type == 'artist')
@@ -741,36 +741,36 @@ function page_indicator() {
     render(
         page.structure.indicator,
         html`
-            <div class="bleh">
-                <strong>ver</strong>
-                <span>${version.brand}</span>
-                <span>${version.build}</span>
-                <span>${version.sku}</span>
+            <div class="page-indicator-elem bleh">
+                <strong class="page-indicator-sub page-indicator-head">ver</strong>
+                <span class="page-indicator-sub">${version.brand}</span>
+                <span class="page-indicator-sub">${version.build}</span>
+                <span class="page-indicator-sub">${version.sku}</span>
             </div>
-            <div class="page">
-                <strong>auth</strong>
-                <span>${auth.name}</span>
-                <span>${lang}</span>
+            <div class="page-indicator-elem page">
+                <strong class="page-indicator-sub page-indicator-head">auth</strong>
+                <span class="page-indicator-sub">${auth.name}</span>
+                <span class="page-indicator-sub">${lang}</span>
             </div>
-            <div class="page">
-                <strong onclick=${() => console.info(page)}>page</strong>
-                <span>${page.type}</span>
-                <span>${page.subpage}</span>
+            <div class="page-indicator-elem page">
+                <strong class="page-indicator-sub page-indicator-head" onclick=${() => console.info(page)}>page</strong>
+                <span class="page-indicator-sub">${page.type}</span>
+                <span class="page-indicator-sub">${page.subpage}</span>
             </div>
-            <div class="page">
-                <strong></strong>
-                <span>${page.name}</span>
-                <span>${page.sister}</span>
+            <div class="page-indicator-elem page">
+                <strong class="page-indicator-sub page-indicator-head"></strong>
+                <span class="page-indicator-sub">${page.name || '?'}</span>
+                <span class="page-indicator-sub">${page.sister || '?'}</span>
             </div>
-            <div class="page">
-                <strong>season</strong>
-                <span>${stored_season.id}</span>
-                <span>${stored_season.year}</span>
-                <span>${stored_season.offset}</span>
+            <div class="page-indicator-elem page">
+                <strong class="page-indicator-sub page-indicator-head">season</strong>
+                <span class="page-indicator-sub">${stored_season.id}</span>
+                <span class="page-indicator-sub">${stored_season.year}</span>
+                <span class="page-indicator-sub">${stored_season.offset}</span>
             </div>
-            <div class="page">
-                <strong>solarium</strong>
-                <span>${settings.solarium}</span>
+            <div class="page-indicator-elem page">
+                <strong class="page-indicator-sub page-indicator-head">solarium</strong>
+                <span class="page-indicator-sub">${settings.solarium}</span>
             </div>
         `
     );

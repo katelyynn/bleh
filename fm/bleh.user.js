@@ -8888,2731 +8888,6 @@
     }
   });
 
-  // node_modules/cropperjs/dist/cropper.js
-  var require_cropper = __commonJS({
-    "node_modules/cropperjs/dist/cropper.js"(exports, module) {
-      (function(global, factory) {
-        typeof exports === "object" && typeof module !== "undefined" ? module.exports = factory() : typeof define === "function" && define.amd ? define(factory) : (global = typeof globalThis !== "undefined" ? globalThis : global || self, global.Cropper = factory());
-      })(exports, function() {
-        "use strict";
-        function ownKeys(object, enumerableOnly) {
-          var keys2 = Object.keys(object);
-          if (Object.getOwnPropertySymbols) {
-            var symbols = Object.getOwnPropertySymbols(object);
-            enumerableOnly && (symbols = symbols.filter(function(sym) {
-              return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-            })), keys2.push.apply(keys2, symbols);
-          }
-          return keys2;
-        }
-        function _objectSpread2(target) {
-          for (var i = 1; i < arguments.length; i++) {
-            var source = null != arguments[i] ? arguments[i] : {};
-            i % 2 ? ownKeys(Object(source), true).forEach(function(key) {
-              _defineProperty(target, key, source[key]);
-            }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function(key) {
-              Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
-            });
-          }
-          return target;
-        }
-        function _typeof(obj) {
-          "@babel/helpers - typeof";
-          return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(obj2) {
-            return typeof obj2;
-          } : function(obj2) {
-            return obj2 && "function" == typeof Symbol && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
-          }, _typeof(obj);
-        }
-        function _classCallCheck(instance, Constructor) {
-          if (!(instance instanceof Constructor)) {
-            throw new TypeError("Cannot call a class as a function");
-          }
-        }
-        function _defineProperties(target, props) {
-          for (var i = 0; i < props.length; i++) {
-            var descriptor = props[i];
-            descriptor.enumerable = descriptor.enumerable || false;
-            descriptor.configurable = true;
-            if ("value" in descriptor) descriptor.writable = true;
-            Object.defineProperty(target, descriptor.key, descriptor);
-          }
-        }
-        function _createClass(Constructor, protoProps, staticProps) {
-          if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-          if (staticProps) _defineProperties(Constructor, staticProps);
-          Object.defineProperty(Constructor, "prototype", {
-            writable: false
-          });
-          return Constructor;
-        }
-        function _defineProperty(obj, key, value) {
-          if (key in obj) {
-            Object.defineProperty(obj, key, {
-              value,
-              enumerable: true,
-              configurable: true,
-              writable: true
-            });
-          } else {
-            obj[key] = value;
-          }
-          return obj;
-        }
-        function _toConsumableArray(arr) {
-          return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
-        }
-        function _arrayWithoutHoles(arr) {
-          if (Array.isArray(arr)) return _arrayLikeToArray(arr);
-        }
-        function _iterableToArray(iter) {
-          if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
-        }
-        function _unsupportedIterableToArray(o, minLen) {
-          if (!o) return;
-          if (typeof o === "string") return _arrayLikeToArray(o, minLen);
-          var n2 = Object.prototype.toString.call(o).slice(8, -1);
-          if (n2 === "Object" && o.constructor) n2 = o.constructor.name;
-          if (n2 === "Map" || n2 === "Set") return Array.from(o);
-          if (n2 === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n2)) return _arrayLikeToArray(o, minLen);
-        }
-        function _arrayLikeToArray(arr, len) {
-          if (len == null || len > arr.length) len = arr.length;
-          for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
-          return arr2;
-        }
-        function _nonIterableSpread() {
-          throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-        }
-        var IS_BROWSER = typeof window !== "undefined" && typeof window.document !== "undefined";
-        var WINDOW = IS_BROWSER ? window : {};
-        var IS_TOUCH_DEVICE = IS_BROWSER && WINDOW.document.documentElement ? "ontouchstart" in WINDOW.document.documentElement : false;
-        var HAS_POINTER_EVENT = IS_BROWSER ? "PointerEvent" in WINDOW : false;
-        var NAMESPACE = "cropper";
-        var ACTION_ALL = "all";
-        var ACTION_CROP = "crop";
-        var ACTION_MOVE = "move";
-        var ACTION_ZOOM = "zoom";
-        var ACTION_EAST = "e";
-        var ACTION_WEST = "w";
-        var ACTION_SOUTH = "s";
-        var ACTION_NORTH = "n";
-        var ACTION_NORTH_EAST = "ne";
-        var ACTION_NORTH_WEST = "nw";
-        var ACTION_SOUTH_EAST = "se";
-        var ACTION_SOUTH_WEST = "sw";
-        var CLASS_CROP = "".concat(NAMESPACE, "-crop");
-        var CLASS_DISABLED = "".concat(NAMESPACE, "-disabled");
-        var CLASS_HIDDEN = "".concat(NAMESPACE, "-hidden");
-        var CLASS_HIDE = "".concat(NAMESPACE, "-hide");
-        var CLASS_INVISIBLE = "".concat(NAMESPACE, "-invisible");
-        var CLASS_MODAL = "".concat(NAMESPACE, "-modal");
-        var CLASS_MOVE = "".concat(NAMESPACE, "-move");
-        var DATA_ACTION = "".concat(NAMESPACE, "Action");
-        var DATA_PREVIEW = "".concat(NAMESPACE, "Preview");
-        var DRAG_MODE_CROP = "crop";
-        var DRAG_MODE_MOVE = "move";
-        var DRAG_MODE_NONE = "none";
-        var EVENT_CROP = "crop";
-        var EVENT_CROP_END = "cropend";
-        var EVENT_CROP_MOVE = "cropmove";
-        var EVENT_CROP_START = "cropstart";
-        var EVENT_DBLCLICK = "dblclick";
-        var EVENT_TOUCH_START = IS_TOUCH_DEVICE ? "touchstart" : "mousedown";
-        var EVENT_TOUCH_MOVE = IS_TOUCH_DEVICE ? "touchmove" : "mousemove";
-        var EVENT_TOUCH_END = IS_TOUCH_DEVICE ? "touchend touchcancel" : "mouseup";
-        var EVENT_POINTER_DOWN = HAS_POINTER_EVENT ? "pointerdown" : EVENT_TOUCH_START;
-        var EVENT_POINTER_MOVE = HAS_POINTER_EVENT ? "pointermove" : EVENT_TOUCH_MOVE;
-        var EVENT_POINTER_UP = HAS_POINTER_EVENT ? "pointerup pointercancel" : EVENT_TOUCH_END;
-        var EVENT_READY = "ready";
-        var EVENT_RESIZE = "resize";
-        var EVENT_WHEEL = "wheel";
-        var EVENT_ZOOM = "zoom";
-        var MIME_TYPE_JPEG = "image/jpeg";
-        var REGEXP_ACTIONS = /^e|w|s|n|se|sw|ne|nw|all|crop|move|zoom$/;
-        var REGEXP_DATA_URL = /^data:/;
-        var REGEXP_DATA_URL_JPEG = /^data:image\/jpeg;base64,/;
-        var REGEXP_TAG_NAME = /^img|canvas$/i;
-        var MIN_CONTAINER_WIDTH = 200;
-        var MIN_CONTAINER_HEIGHT = 100;
-        var DEFAULTS = {
-          // Define the view mode of the cropper
-          viewMode: 0,
-          // 0, 1, 2, 3
-          // Define the dragging mode of the cropper
-          dragMode: DRAG_MODE_CROP,
-          // 'crop', 'move' or 'none'
-          // Define the initial aspect ratio of the crop box
-          initialAspectRatio: NaN,
-          // Define the aspect ratio of the crop box
-          aspectRatio: NaN,
-          // An object with the previous cropping result data
-          data: null,
-          // A selector for adding extra containers to preview
-          preview: "",
-          // Re-render the cropper when resize the window
-          responsive: true,
-          // Restore the cropped area after resize the window
-          restore: true,
-          // Check if the current image is a cross-origin image
-          checkCrossOrigin: true,
-          // Check the current image's Exif Orientation information
-          checkOrientation: true,
-          // Show the black modal
-          modal: true,
-          // Show the dashed lines for guiding
-          guides: true,
-          // Show the center indicator for guiding
-          center: true,
-          // Show the white modal to highlight the crop box
-          highlight: true,
-          // Show the grid background
-          background: true,
-          // Enable to crop the image automatically when initialize
-          autoCrop: true,
-          // Define the percentage of automatic cropping area when initializes
-          autoCropArea: 0.8,
-          // Enable to move the image
-          movable: true,
-          // Enable to rotate the image
-          rotatable: true,
-          // Enable to scale the image
-          scalable: true,
-          // Enable to zoom the image
-          zoomable: true,
-          // Enable to zoom the image by dragging touch
-          zoomOnTouch: true,
-          // Enable to zoom the image by wheeling mouse
-          zoomOnWheel: true,
-          // Define zoom ratio when zoom the image by wheeling mouse
-          wheelZoomRatio: 0.1,
-          // Enable to move the crop box
-          cropBoxMovable: true,
-          // Enable to resize the crop box
-          cropBoxResizable: true,
-          // Toggle drag mode between "crop" and "move" when click twice on the cropper
-          toggleDragModeOnDblclick: true,
-          // Size limitation
-          minCanvasWidth: 0,
-          minCanvasHeight: 0,
-          minCropBoxWidth: 0,
-          minCropBoxHeight: 0,
-          minContainerWidth: MIN_CONTAINER_WIDTH,
-          minContainerHeight: MIN_CONTAINER_HEIGHT,
-          // Shortcuts of events
-          ready: null,
-          cropstart: null,
-          cropmove: null,
-          cropend: null,
-          crop: null,
-          zoom: null
-        };
-        var TEMPLATE = '<div class="cropper-container" touch-action="none"><div class="cropper-wrap-box"><div class="cropper-canvas"></div></div><div class="cropper-drag-box"></div><div class="cropper-crop-box"><span class="cropper-view-box"></span><span class="cropper-dashed dashed-h"></span><span class="cropper-dashed dashed-v"></span><span class="cropper-center"></span><span class="cropper-face"></span><span class="cropper-line line-e" data-cropper-action="e"></span><span class="cropper-line line-n" data-cropper-action="n"></span><span class="cropper-line line-w" data-cropper-action="w"></span><span class="cropper-line line-s" data-cropper-action="s"></span><span class="cropper-point point-e" data-cropper-action="e"></span><span class="cropper-point point-n" data-cropper-action="n"></span><span class="cropper-point point-w" data-cropper-action="w"></span><span class="cropper-point point-s" data-cropper-action="s"></span><span class="cropper-point point-ne" data-cropper-action="ne"></span><span class="cropper-point point-nw" data-cropper-action="nw"></span><span class="cropper-point point-sw" data-cropper-action="sw"></span><span class="cropper-point point-se" data-cropper-action="se"></span></div></div>';
-        var isNaN2 = Number.isNaN || WINDOW.isNaN;
-        function isNumber3(value) {
-          return typeof value === "number" && !isNaN2(value);
-        }
-        var isPositiveNumber = function isPositiveNumber2(value) {
-          return value > 0 && value < Infinity;
-        };
-        function isUndefined2(value) {
-          return typeof value === "undefined";
-        }
-        function isObject2(value) {
-          return _typeof(value) === "object" && value !== null;
-        }
-        var hasOwnProperty3 = Object.prototype.hasOwnProperty;
-        function isPlainObject(value) {
-          if (!isObject2(value)) {
-            return false;
-          }
-          try {
-            var _constructor = value.constructor;
-            var prototype = _constructor.prototype;
-            return _constructor && prototype && hasOwnProperty3.call(prototype, "isPrototypeOf");
-          } catch (error) {
-            return false;
-          }
-        }
-        function isFunction2(value) {
-          return typeof value === "function";
-        }
-        var slice2 = Array.prototype.slice;
-        function toArray(value) {
-          return Array.from ? Array.from(value) : slice2.call(value);
-        }
-        function forEach(data2, callback2) {
-          if (data2 && isFunction2(callback2)) {
-            if (Array.isArray(data2) || isNumber3(data2.length)) {
-              toArray(data2).forEach(function(value, key) {
-                callback2.call(data2, value, key, data2);
-              });
-            } else if (isObject2(data2)) {
-              Object.keys(data2).forEach(function(key) {
-                callback2.call(data2, data2[key], key, data2);
-              });
-            }
-          }
-          return data2;
-        }
-        var assign = Object.assign || function assign2(target) {
-          for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-            args[_key - 1] = arguments[_key];
-          }
-          if (isObject2(target) && args.length > 0) {
-            args.forEach(function(arg) {
-              if (isObject2(arg)) {
-                Object.keys(arg).forEach(function(key) {
-                  target[key] = arg[key];
-                });
-              }
-            });
-          }
-          return target;
-        };
-        var REGEXP_DECIMALS = /\.\d*(?:0|9){12}\d*$/;
-        function normalizeDecimalNumber(value) {
-          var times = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : 1e11;
-          return REGEXP_DECIMALS.test(value) ? Math.round(value * times) / times : value;
-        }
-        var REGEXP_SUFFIX = /^width|height|left|top|marginLeft|marginTop$/;
-        function setStyle2(element, styles) {
-          var style = element.style;
-          forEach(styles, function(value, property) {
-            if (REGEXP_SUFFIX.test(property) && isNumber3(value)) {
-              value = "".concat(value, "px");
-            }
-            style[property] = value;
-          });
-        }
-        function hasClass(element, value) {
-          return element.classList ? element.classList.contains(value) : element.className.indexOf(value) > -1;
-        }
-        function addClass(element, value) {
-          if (!value) {
-            return;
-          }
-          if (isNumber3(element.length)) {
-            forEach(element, function(elem) {
-              addClass(elem, value);
-            });
-            return;
-          }
-          if (element.classList) {
-            element.classList.add(value);
-            return;
-          }
-          var className = element.className.trim();
-          if (!className) {
-            element.className = value;
-          } else if (className.indexOf(value) < 0) {
-            element.className = "".concat(className, " ").concat(value);
-          }
-        }
-        function removeClass(element, value) {
-          if (!value) {
-            return;
-          }
-          if (isNumber3(element.length)) {
-            forEach(element, function(elem) {
-              removeClass(elem, value);
-            });
-            return;
-          }
-          if (element.classList) {
-            element.classList.remove(value);
-            return;
-          }
-          if (element.className.indexOf(value) >= 0) {
-            element.className = element.className.replace(value, "");
-          }
-        }
-        function toggleClass(element, value, added) {
-          if (!value) {
-            return;
-          }
-          if (isNumber3(element.length)) {
-            forEach(element, function(elem) {
-              toggleClass(elem, value, added);
-            });
-            return;
-          }
-          if (added) {
-            addClass(element, value);
-          } else {
-            removeClass(element, value);
-          }
-        }
-        var REGEXP_CAMEL_CASE = /([a-z\d])([A-Z])/g;
-        function toParamCase(value) {
-          return value.replace(REGEXP_CAMEL_CASE, "$1-$2").toLowerCase();
-        }
-        function getData(element, name) {
-          if (isObject2(element[name])) {
-            return element[name];
-          }
-          if (element.dataset) {
-            return element.dataset[name];
-          }
-          return element.getAttribute("data-".concat(toParamCase(name)));
-        }
-        function setData(element, name, data2) {
-          if (isObject2(data2)) {
-            element[name] = data2;
-          } else if (element.dataset) {
-            element.dataset[name] = data2;
-          } else {
-            element.setAttribute("data-".concat(toParamCase(name)), data2);
-          }
-        }
-        function removeData(element, name) {
-          if (isObject2(element[name])) {
-            try {
-              delete element[name];
-            } catch (error) {
-              element[name] = void 0;
-            }
-          } else if (element.dataset) {
-            try {
-              delete element.dataset[name];
-            } catch (error) {
-              element.dataset[name] = void 0;
-            }
-          } else {
-            element.removeAttribute("data-".concat(toParamCase(name)));
-          }
-        }
-        var REGEXP_SPACES = /\s\s*/;
-        var onceSupported = function() {
-          var supported = false;
-          if (IS_BROWSER) {
-            var once = false;
-            var listener = function listener2() {
-            };
-            var options = Object.defineProperty({}, "once", {
-              get: function get() {
-                supported = true;
-                return once;
-              },
-              /**
-               * This setter can fix a `TypeError` in strict mode
-               * {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Errors/Getter_only}
-               * @param {boolean} value - The value to set
-               */
-              set: function set2(value) {
-                once = value;
-              }
-            });
-            WINDOW.addEventListener("test", listener, options);
-            WINDOW.removeEventListener("test", listener, options);
-          }
-          return supported;
-        }();
-        function removeListener2(element, type, listener) {
-          var options = arguments.length > 3 && arguments[3] !== void 0 ? arguments[3] : {};
-          var handler = listener;
-          type.trim().split(REGEXP_SPACES).forEach(function(event3) {
-            if (!onceSupported) {
-              var listeners = element.listeners;
-              if (listeners && listeners[event3] && listeners[event3][listener]) {
-                handler = listeners[event3][listener];
-                delete listeners[event3][listener];
-                if (Object.keys(listeners[event3]).length === 0) {
-                  delete listeners[event3];
-                }
-                if (Object.keys(listeners).length === 0) {
-                  delete element.listeners;
-                }
-              }
-            }
-            element.removeEventListener(event3, handler, options);
-          });
-        }
-        function addListener2(element, type, listener) {
-          var options = arguments.length > 3 && arguments[3] !== void 0 ? arguments[3] : {};
-          var _handler = listener;
-          type.trim().split(REGEXP_SPACES).forEach(function(event3) {
-            if (options.once && !onceSupported) {
-              var _element$listeners = element.listeners, listeners = _element$listeners === void 0 ? {} : _element$listeners;
-              _handler = function handler() {
-                delete listeners[event3][listener];
-                element.removeEventListener(event3, _handler, options);
-                for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-                  args[_key2] = arguments[_key2];
-                }
-                listener.apply(element, args);
-              };
-              if (!listeners[event3]) {
-                listeners[event3] = {};
-              }
-              if (listeners[event3][listener]) {
-                element.removeEventListener(event3, listeners[event3][listener], options);
-              }
-              listeners[event3][listener] = _handler;
-              element.listeners = listeners;
-            }
-            element.addEventListener(event3, _handler, options);
-          });
-        }
-        function dispatchEvent(element, type, data2) {
-          var event3;
-          if (isFunction2(Event) && isFunction2(CustomEvent)) {
-            event3 = new CustomEvent(type, {
-              detail: data2,
-              bubbles: true,
-              cancelable: true
-            });
-          } else {
-            event3 = document.createEvent("CustomEvent");
-            event3.initCustomEvent(type, true, true, data2);
-          }
-          return element.dispatchEvent(event3);
-        }
-        function getOffset(element) {
-          var box = element.getBoundingClientRect();
-          return {
-            left: box.left + (window.pageXOffset - document.documentElement.clientLeft),
-            top: box.top + (window.pageYOffset - document.documentElement.clientTop)
-          };
-        }
-        var location = WINDOW.location;
-        var REGEXP_ORIGINS = /^(\w+:)\/\/([^:/?#]*):?(\d*)/i;
-        function isCrossOriginURL(url) {
-          var parts = url.match(REGEXP_ORIGINS);
-          return parts !== null && (parts[1] !== location.protocol || parts[2] !== location.hostname || parts[3] !== location.port);
-        }
-        function addTimestamp(url) {
-          var timestamp = "timestamp=".concat((/* @__PURE__ */ new Date()).getTime());
-          return url + (url.indexOf("?") === -1 ? "?" : "&") + timestamp;
-        }
-        function getTransforms(_ref) {
-          var rotate2 = _ref.rotate, scaleX = _ref.scaleX, scaleY = _ref.scaleY, translateX = _ref.translateX, translateY = _ref.translateY;
-          var values = [];
-          if (isNumber3(translateX) && translateX !== 0) {
-            values.push("translateX(".concat(translateX, "px)"));
-          }
-          if (isNumber3(translateY) && translateY !== 0) {
-            values.push("translateY(".concat(translateY, "px)"));
-          }
-          if (isNumber3(rotate2) && rotate2 !== 0) {
-            values.push("rotate(".concat(rotate2, "deg)"));
-          }
-          if (isNumber3(scaleX) && scaleX !== 1) {
-            values.push("scaleX(".concat(scaleX, ")"));
-          }
-          if (isNumber3(scaleY) && scaleY !== 1) {
-            values.push("scaleY(".concat(scaleY, ")"));
-          }
-          var transform2 = values.length ? values.join(" ") : "none";
-          return {
-            WebkitTransform: transform2,
-            msTransform: transform2,
-            transform: transform2
-          };
-        }
-        function getMaxZoomRatio(pointers) {
-          var pointers2 = _objectSpread2({}, pointers);
-          var maxRatio = 0;
-          forEach(pointers, function(pointer, pointerId) {
-            delete pointers2[pointerId];
-            forEach(pointers2, function(pointer2) {
-              var x1 = Math.abs(pointer.startX - pointer2.startX);
-              var y1 = Math.abs(pointer.startY - pointer2.startY);
-              var x2 = Math.abs(pointer.endX - pointer2.endX);
-              var y2 = Math.abs(pointer.endY - pointer2.endY);
-              var z1 = Math.sqrt(x1 * x1 + y1 * y1);
-              var z2 = Math.sqrt(x2 * x2 + y2 * y2);
-              var ratio = (z2 - z1) / z1;
-              if (Math.abs(ratio) > Math.abs(maxRatio)) {
-                maxRatio = ratio;
-              }
-            });
-          });
-          return maxRatio;
-        }
-        function getPointer(_ref2, endOnly) {
-          var pageX = _ref2.pageX, pageY = _ref2.pageY;
-          var end2 = {
-            endX: pageX,
-            endY: pageY
-          };
-          return endOnly ? end2 : _objectSpread2({
-            startX: pageX,
-            startY: pageY
-          }, end2);
-        }
-        function getPointersCenter(pointers) {
-          var pageX = 0;
-          var pageY = 0;
-          var count = 0;
-          forEach(pointers, function(_ref3) {
-            var startX = _ref3.startX, startY = _ref3.startY;
-            pageX += startX;
-            pageY += startY;
-            count += 1;
-          });
-          pageX /= count;
-          pageY /= count;
-          return {
-            pageX,
-            pageY
-          };
-        }
-        function getAdjustedSizes(_ref4) {
-          var aspectRatio = _ref4.aspectRatio, height = _ref4.height, width = _ref4.width;
-          var type = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : "contain";
-          var isValidWidth = isPositiveNumber(width);
-          var isValidHeight = isPositiveNumber(height);
-          if (isValidWidth && isValidHeight) {
-            var adjustedWidth = height * aspectRatio;
-            if (type === "contain" && adjustedWidth > width || type === "cover" && adjustedWidth < width) {
-              height = width / aspectRatio;
-            } else {
-              width = height * aspectRatio;
-            }
-          } else if (isValidWidth) {
-            height = width / aspectRatio;
-          } else if (isValidHeight) {
-            width = height * aspectRatio;
-          }
-          return {
-            width,
-            height
-          };
-        }
-        function getRotatedSizes(_ref5) {
-          var width = _ref5.width, height = _ref5.height, degree = _ref5.degree;
-          degree = Math.abs(degree) % 180;
-          if (degree === 90) {
-            return {
-              width: height,
-              height: width
-            };
-          }
-          var arc = degree % 90 * Math.PI / 180;
-          var sinArc = Math.sin(arc);
-          var cosArc = Math.cos(arc);
-          var newWidth = width * cosArc + height * sinArc;
-          var newHeight = width * sinArc + height * cosArc;
-          return degree > 90 ? {
-            width: newHeight,
-            height: newWidth
-          } : {
-            width: newWidth,
-            height: newHeight
-          };
-        }
-        function getSourceCanvas(image, _ref6, _ref7, _ref8) {
-          var imageAspectRatio = _ref6.aspectRatio, imageNaturalWidth = _ref6.naturalWidth, imageNaturalHeight = _ref6.naturalHeight, _ref6$rotate = _ref6.rotate, rotate2 = _ref6$rotate === void 0 ? 0 : _ref6$rotate, _ref6$scaleX = _ref6.scaleX, scaleX = _ref6$scaleX === void 0 ? 1 : _ref6$scaleX, _ref6$scaleY = _ref6.scaleY, scaleY = _ref6$scaleY === void 0 ? 1 : _ref6$scaleY;
-          var aspectRatio = _ref7.aspectRatio, naturalWidth = _ref7.naturalWidth, naturalHeight = _ref7.naturalHeight;
-          var _ref8$fillColor = _ref8.fillColor, fillColor = _ref8$fillColor === void 0 ? "transparent" : _ref8$fillColor, _ref8$imageSmoothingE = _ref8.imageSmoothingEnabled, imageSmoothingEnabled = _ref8$imageSmoothingE === void 0 ? true : _ref8$imageSmoothingE, _ref8$imageSmoothingQ = _ref8.imageSmoothingQuality, imageSmoothingQuality = _ref8$imageSmoothingQ === void 0 ? "low" : _ref8$imageSmoothingQ, _ref8$maxWidth = _ref8.maxWidth, maxWidth = _ref8$maxWidth === void 0 ? Infinity : _ref8$maxWidth, _ref8$maxHeight = _ref8.maxHeight, maxHeight = _ref8$maxHeight === void 0 ? Infinity : _ref8$maxHeight, _ref8$minWidth = _ref8.minWidth, minWidth = _ref8$minWidth === void 0 ? 0 : _ref8$minWidth, _ref8$minHeight = _ref8.minHeight, minHeight = _ref8$minHeight === void 0 ? 0 : _ref8$minHeight;
-          var canvas = document.createElement("canvas");
-          var context = canvas.getContext("2d");
-          var maxSizes = getAdjustedSizes({
-            aspectRatio,
-            width: maxWidth,
-            height: maxHeight
-          });
-          var minSizes = getAdjustedSizes({
-            aspectRatio,
-            width: minWidth,
-            height: minHeight
-          }, "cover");
-          var width = Math.min(maxSizes.width, Math.max(minSizes.width, naturalWidth));
-          var height = Math.min(maxSizes.height, Math.max(minSizes.height, naturalHeight));
-          var destMaxSizes = getAdjustedSizes({
-            aspectRatio: imageAspectRatio,
-            width: maxWidth,
-            height: maxHeight
-          });
-          var destMinSizes = getAdjustedSizes({
-            aspectRatio: imageAspectRatio,
-            width: minWidth,
-            height: minHeight
-          }, "cover");
-          var destWidth = Math.min(destMaxSizes.width, Math.max(destMinSizes.width, imageNaturalWidth));
-          var destHeight = Math.min(destMaxSizes.height, Math.max(destMinSizes.height, imageNaturalHeight));
-          var params = [-destWidth / 2, -destHeight / 2, destWidth, destHeight];
-          canvas.width = normalizeDecimalNumber(width);
-          canvas.height = normalizeDecimalNumber(height);
-          context.fillStyle = fillColor;
-          context.fillRect(0, 0, width, height);
-          context.save();
-          context.translate(width / 2, height / 2);
-          context.rotate(rotate2 * Math.PI / 180);
-          context.scale(scaleX, scaleY);
-          context.imageSmoothingEnabled = imageSmoothingEnabled;
-          context.imageSmoothingQuality = imageSmoothingQuality;
-          context.drawImage.apply(context, [image].concat(_toConsumableArray(params.map(function(param) {
-            return Math.floor(normalizeDecimalNumber(param));
-          }))));
-          context.restore();
-          return canvas;
-        }
-        var fromCharCode = String.fromCharCode;
-        function getStringFromCharCode(dataView, start2, length) {
-          var str = "";
-          length += start2;
-          for (var i = start2; i < length; i += 1) {
-            str += fromCharCode(dataView.getUint8(i));
-          }
-          return str;
-        }
-        var REGEXP_DATA_URL_HEAD = /^data:.*,/;
-        function dataURLToArrayBuffer(dataURL) {
-          var base64 = dataURL.replace(REGEXP_DATA_URL_HEAD, "");
-          var binary = atob(base64);
-          var arrayBuffer = new ArrayBuffer(binary.length);
-          var uint8 = new Uint8Array(arrayBuffer);
-          forEach(uint8, function(value, i) {
-            uint8[i] = binary.charCodeAt(i);
-          });
-          return arrayBuffer;
-        }
-        function arrayBufferToDataURL(arrayBuffer, mimeType) {
-          var chunks = [];
-          var chunkSize = 8192;
-          var uint8 = new Uint8Array(arrayBuffer);
-          while (uint8.length > 0) {
-            chunks.push(fromCharCode.apply(null, toArray(uint8.subarray(0, chunkSize))));
-            uint8 = uint8.subarray(chunkSize);
-          }
-          return "data:".concat(mimeType, ";base64,").concat(btoa(chunks.join("")));
-        }
-        function resetAndGetOrientation(arrayBuffer) {
-          var dataView = new DataView(arrayBuffer);
-          var orientation;
-          try {
-            var littleEndian;
-            var app1Start;
-            var ifdStart;
-            if (dataView.getUint8(0) === 255 && dataView.getUint8(1) === 216) {
-              var length = dataView.byteLength;
-              var offset3 = 2;
-              while (offset3 + 1 < length) {
-                if (dataView.getUint8(offset3) === 255 && dataView.getUint8(offset3 + 1) === 225) {
-                  app1Start = offset3;
-                  break;
-                }
-                offset3 += 1;
-              }
-            }
-            if (app1Start) {
-              var exifIDCode = app1Start + 4;
-              var tiffOffset = app1Start + 10;
-              if (getStringFromCharCode(dataView, exifIDCode, 4) === "Exif") {
-                var endianness = dataView.getUint16(tiffOffset);
-                littleEndian = endianness === 18761;
-                if (littleEndian || endianness === 19789) {
-                  if (dataView.getUint16(tiffOffset + 2, littleEndian) === 42) {
-                    var firstIFDOffset = dataView.getUint32(tiffOffset + 4, littleEndian);
-                    if (firstIFDOffset >= 8) {
-                      ifdStart = tiffOffset + firstIFDOffset;
-                    }
-                  }
-                }
-              }
-            }
-            if (ifdStart) {
-              var _length = dataView.getUint16(ifdStart, littleEndian);
-              var _offset;
-              var i;
-              for (i = 0; i < _length; i += 1) {
-                _offset = ifdStart + i * 12 + 2;
-                if (dataView.getUint16(_offset, littleEndian) === 274) {
-                  _offset += 8;
-                  orientation = dataView.getUint16(_offset, littleEndian);
-                  dataView.setUint16(_offset, 1, littleEndian);
-                  break;
-                }
-              }
-            }
-          } catch (error) {
-            orientation = 1;
-          }
-          return orientation;
-        }
-        function parseOrientation(orientation) {
-          var rotate2 = 0;
-          var scaleX = 1;
-          var scaleY = 1;
-          switch (orientation) {
-            // Flip horizontal
-            case 2:
-              scaleX = -1;
-              break;
-            // Rotate left 180°
-            case 3:
-              rotate2 = -180;
-              break;
-            // Flip vertical
-            case 4:
-              scaleY = -1;
-              break;
-            // Flip vertical and rotate right 90°
-            case 5:
-              rotate2 = 90;
-              scaleY = -1;
-              break;
-            // Rotate right 90°
-            case 6:
-              rotate2 = 90;
-              break;
-            // Flip horizontal and rotate right 90°
-            case 7:
-              rotate2 = 90;
-              scaleX = -1;
-              break;
-            // Rotate left 90°
-            case 8:
-              rotate2 = -90;
-              break;
-          }
-          return {
-            rotate: rotate2,
-            scaleX,
-            scaleY
-          };
-        }
-        var render3 = {
-          render: function render4() {
-            this.initContainer();
-            this.initCanvas();
-            this.initCropBox();
-            this.renderCanvas();
-            if (this.cropped) {
-              this.renderCropBox();
-            }
-          },
-          initContainer: function initContainer() {
-            var element = this.element, options = this.options, container = this.container, cropper2 = this.cropper;
-            var minWidth = Number(options.minContainerWidth);
-            var minHeight = Number(options.minContainerHeight);
-            addClass(cropper2, CLASS_HIDDEN);
-            removeClass(element, CLASS_HIDDEN);
-            var containerData = {
-              width: Math.max(container.offsetWidth, minWidth >= 0 ? minWidth : MIN_CONTAINER_WIDTH),
-              height: Math.max(container.offsetHeight, minHeight >= 0 ? minHeight : MIN_CONTAINER_HEIGHT)
-            };
-            this.containerData = containerData;
-            setStyle2(cropper2, {
-              width: containerData.width,
-              height: containerData.height
-            });
-            addClass(element, CLASS_HIDDEN);
-            removeClass(cropper2, CLASS_HIDDEN);
-          },
-          // Canvas (image wrapper)
-          initCanvas: function initCanvas2() {
-            var containerData = this.containerData, imageData = this.imageData;
-            var viewMode = this.options.viewMode;
-            var rotated = Math.abs(imageData.rotate) % 180 === 90;
-            var naturalWidth = rotated ? imageData.naturalHeight : imageData.naturalWidth;
-            var naturalHeight = rotated ? imageData.naturalWidth : imageData.naturalHeight;
-            var aspectRatio = naturalWidth / naturalHeight;
-            var canvasWidth = containerData.width;
-            var canvasHeight = containerData.height;
-            if (containerData.height * aspectRatio > containerData.width) {
-              if (viewMode === 3) {
-                canvasWidth = containerData.height * aspectRatio;
-              } else {
-                canvasHeight = containerData.width / aspectRatio;
-              }
-            } else if (viewMode === 3) {
-              canvasHeight = containerData.width / aspectRatio;
-            } else {
-              canvasWidth = containerData.height * aspectRatio;
-            }
-            var canvasData = {
-              aspectRatio,
-              naturalWidth,
-              naturalHeight,
-              width: canvasWidth,
-              height: canvasHeight
-            };
-            this.canvasData = canvasData;
-            this.limited = viewMode === 1 || viewMode === 2;
-            this.limitCanvas(true, true);
-            canvasData.width = Math.min(Math.max(canvasData.width, canvasData.minWidth), canvasData.maxWidth);
-            canvasData.height = Math.min(Math.max(canvasData.height, canvasData.minHeight), canvasData.maxHeight);
-            canvasData.left = (containerData.width - canvasData.width) / 2;
-            canvasData.top = (containerData.height - canvasData.height) / 2;
-            canvasData.oldLeft = canvasData.left;
-            canvasData.oldTop = canvasData.top;
-            this.initialCanvasData = assign({}, canvasData);
-          },
-          limitCanvas: function limitCanvas(sizeLimited, positionLimited) {
-            var options = this.options, containerData = this.containerData, canvasData = this.canvasData, cropBoxData = this.cropBoxData;
-            var viewMode = options.viewMode;
-            var aspectRatio = canvasData.aspectRatio;
-            var cropped = this.cropped && cropBoxData;
-            if (sizeLimited) {
-              var minCanvasWidth = Number(options.minCanvasWidth) || 0;
-              var minCanvasHeight = Number(options.minCanvasHeight) || 0;
-              if (viewMode > 1) {
-                minCanvasWidth = Math.max(minCanvasWidth, containerData.width);
-                minCanvasHeight = Math.max(minCanvasHeight, containerData.height);
-                if (viewMode === 3) {
-                  if (minCanvasHeight * aspectRatio > minCanvasWidth) {
-                    minCanvasWidth = minCanvasHeight * aspectRatio;
-                  } else {
-                    minCanvasHeight = minCanvasWidth / aspectRatio;
-                  }
-                }
-              } else if (viewMode > 0) {
-                if (minCanvasWidth) {
-                  minCanvasWidth = Math.max(minCanvasWidth, cropped ? cropBoxData.width : 0);
-                } else if (minCanvasHeight) {
-                  minCanvasHeight = Math.max(minCanvasHeight, cropped ? cropBoxData.height : 0);
-                } else if (cropped) {
-                  minCanvasWidth = cropBoxData.width;
-                  minCanvasHeight = cropBoxData.height;
-                  if (minCanvasHeight * aspectRatio > minCanvasWidth) {
-                    minCanvasWidth = minCanvasHeight * aspectRatio;
-                  } else {
-                    minCanvasHeight = minCanvasWidth / aspectRatio;
-                  }
-                }
-              }
-              var _getAdjustedSizes = getAdjustedSizes({
-                aspectRatio,
-                width: minCanvasWidth,
-                height: minCanvasHeight
-              });
-              minCanvasWidth = _getAdjustedSizes.width;
-              minCanvasHeight = _getAdjustedSizes.height;
-              canvasData.minWidth = minCanvasWidth;
-              canvasData.minHeight = minCanvasHeight;
-              canvasData.maxWidth = Infinity;
-              canvasData.maxHeight = Infinity;
-            }
-            if (positionLimited) {
-              if (viewMode > (cropped ? 0 : 1)) {
-                var newCanvasLeft = containerData.width - canvasData.width;
-                var newCanvasTop = containerData.height - canvasData.height;
-                canvasData.minLeft = Math.min(0, newCanvasLeft);
-                canvasData.minTop = Math.min(0, newCanvasTop);
-                canvasData.maxLeft = Math.max(0, newCanvasLeft);
-                canvasData.maxTop = Math.max(0, newCanvasTop);
-                if (cropped && this.limited) {
-                  canvasData.minLeft = Math.min(cropBoxData.left, cropBoxData.left + (cropBoxData.width - canvasData.width));
-                  canvasData.minTop = Math.min(cropBoxData.top, cropBoxData.top + (cropBoxData.height - canvasData.height));
-                  canvasData.maxLeft = cropBoxData.left;
-                  canvasData.maxTop = cropBoxData.top;
-                  if (viewMode === 2) {
-                    if (canvasData.width >= containerData.width) {
-                      canvasData.minLeft = Math.min(0, newCanvasLeft);
-                      canvasData.maxLeft = Math.max(0, newCanvasLeft);
-                    }
-                    if (canvasData.height >= containerData.height) {
-                      canvasData.minTop = Math.min(0, newCanvasTop);
-                      canvasData.maxTop = Math.max(0, newCanvasTop);
-                    }
-                  }
-                }
-              } else {
-                canvasData.minLeft = -canvasData.width;
-                canvasData.minTop = -canvasData.height;
-                canvasData.maxLeft = containerData.width;
-                canvasData.maxTop = containerData.height;
-              }
-            }
-          },
-          renderCanvas: function renderCanvas(changed, transformed) {
-            var canvasData = this.canvasData, imageData = this.imageData;
-            if (transformed) {
-              var _getRotatedSizes = getRotatedSizes({
-                width: imageData.naturalWidth * Math.abs(imageData.scaleX || 1),
-                height: imageData.naturalHeight * Math.abs(imageData.scaleY || 1),
-                degree: imageData.rotate || 0
-              }), naturalWidth = _getRotatedSizes.width, naturalHeight = _getRotatedSizes.height;
-              var width = canvasData.width * (naturalWidth / canvasData.naturalWidth);
-              var height = canvasData.height * (naturalHeight / canvasData.naturalHeight);
-              canvasData.left -= (width - canvasData.width) / 2;
-              canvasData.top -= (height - canvasData.height) / 2;
-              canvasData.width = width;
-              canvasData.height = height;
-              canvasData.aspectRatio = naturalWidth / naturalHeight;
-              canvasData.naturalWidth = naturalWidth;
-              canvasData.naturalHeight = naturalHeight;
-              this.limitCanvas(true, false);
-            }
-            if (canvasData.width > canvasData.maxWidth || canvasData.width < canvasData.minWidth) {
-              canvasData.left = canvasData.oldLeft;
-            }
-            if (canvasData.height > canvasData.maxHeight || canvasData.height < canvasData.minHeight) {
-              canvasData.top = canvasData.oldTop;
-            }
-            canvasData.width = Math.min(Math.max(canvasData.width, canvasData.minWidth), canvasData.maxWidth);
-            canvasData.height = Math.min(Math.max(canvasData.height, canvasData.minHeight), canvasData.maxHeight);
-            this.limitCanvas(false, true);
-            canvasData.left = Math.min(Math.max(canvasData.left, canvasData.minLeft), canvasData.maxLeft);
-            canvasData.top = Math.min(Math.max(canvasData.top, canvasData.minTop), canvasData.maxTop);
-            canvasData.oldLeft = canvasData.left;
-            canvasData.oldTop = canvasData.top;
-            setStyle2(this.canvas, assign({
-              width: canvasData.width,
-              height: canvasData.height
-            }, getTransforms({
-              translateX: canvasData.left,
-              translateY: canvasData.top
-            })));
-            this.renderImage(changed);
-            if (this.cropped && this.limited) {
-              this.limitCropBox(true, true);
-            }
-          },
-          renderImage: function renderImage(changed) {
-            var canvasData = this.canvasData, imageData = this.imageData;
-            var width = imageData.naturalWidth * (canvasData.width / canvasData.naturalWidth);
-            var height = imageData.naturalHeight * (canvasData.height / canvasData.naturalHeight);
-            assign(imageData, {
-              width,
-              height,
-              left: (canvasData.width - width) / 2,
-              top: (canvasData.height - height) / 2
-            });
-            setStyle2(this.image, assign({
-              width: imageData.width,
-              height: imageData.height
-            }, getTransforms(assign({
-              translateX: imageData.left,
-              translateY: imageData.top
-            }, imageData))));
-            if (changed) {
-              this.output();
-            }
-          },
-          initCropBox: function initCropBox() {
-            var options = this.options, canvasData = this.canvasData;
-            var aspectRatio = options.aspectRatio || options.initialAspectRatio;
-            var autoCropArea = Number(options.autoCropArea) || 0.8;
-            var cropBoxData = {
-              width: canvasData.width,
-              height: canvasData.height
-            };
-            if (aspectRatio) {
-              if (canvasData.height * aspectRatio > canvasData.width) {
-                cropBoxData.height = cropBoxData.width / aspectRatio;
-              } else {
-                cropBoxData.width = cropBoxData.height * aspectRatio;
-              }
-            }
-            this.cropBoxData = cropBoxData;
-            this.limitCropBox(true, true);
-            cropBoxData.width = Math.min(Math.max(cropBoxData.width, cropBoxData.minWidth), cropBoxData.maxWidth);
-            cropBoxData.height = Math.min(Math.max(cropBoxData.height, cropBoxData.minHeight), cropBoxData.maxHeight);
-            cropBoxData.width = Math.max(cropBoxData.minWidth, cropBoxData.width * autoCropArea);
-            cropBoxData.height = Math.max(cropBoxData.minHeight, cropBoxData.height * autoCropArea);
-            cropBoxData.left = canvasData.left + (canvasData.width - cropBoxData.width) / 2;
-            cropBoxData.top = canvasData.top + (canvasData.height - cropBoxData.height) / 2;
-            cropBoxData.oldLeft = cropBoxData.left;
-            cropBoxData.oldTop = cropBoxData.top;
-            this.initialCropBoxData = assign({}, cropBoxData);
-          },
-          limitCropBox: function limitCropBox(sizeLimited, positionLimited) {
-            var options = this.options, containerData = this.containerData, canvasData = this.canvasData, cropBoxData = this.cropBoxData, limited = this.limited;
-            var aspectRatio = options.aspectRatio;
-            if (sizeLimited) {
-              var minCropBoxWidth = Number(options.minCropBoxWidth) || 0;
-              var minCropBoxHeight = Number(options.minCropBoxHeight) || 0;
-              var maxCropBoxWidth = limited ? Math.min(containerData.width, canvasData.width, canvasData.width + canvasData.left, containerData.width - canvasData.left) : containerData.width;
-              var maxCropBoxHeight = limited ? Math.min(containerData.height, canvasData.height, canvasData.height + canvasData.top, containerData.height - canvasData.top) : containerData.height;
-              minCropBoxWidth = Math.min(minCropBoxWidth, containerData.width);
-              minCropBoxHeight = Math.min(minCropBoxHeight, containerData.height);
-              if (aspectRatio) {
-                if (minCropBoxWidth && minCropBoxHeight) {
-                  if (minCropBoxHeight * aspectRatio > minCropBoxWidth) {
-                    minCropBoxHeight = minCropBoxWidth / aspectRatio;
-                  } else {
-                    minCropBoxWidth = minCropBoxHeight * aspectRatio;
-                  }
-                } else if (minCropBoxWidth) {
-                  minCropBoxHeight = minCropBoxWidth / aspectRatio;
-                } else if (minCropBoxHeight) {
-                  minCropBoxWidth = minCropBoxHeight * aspectRatio;
-                }
-                if (maxCropBoxHeight * aspectRatio > maxCropBoxWidth) {
-                  maxCropBoxHeight = maxCropBoxWidth / aspectRatio;
-                } else {
-                  maxCropBoxWidth = maxCropBoxHeight * aspectRatio;
-                }
-              }
-              cropBoxData.minWidth = Math.min(minCropBoxWidth, maxCropBoxWidth);
-              cropBoxData.minHeight = Math.min(minCropBoxHeight, maxCropBoxHeight);
-              cropBoxData.maxWidth = maxCropBoxWidth;
-              cropBoxData.maxHeight = maxCropBoxHeight;
-            }
-            if (positionLimited) {
-              if (limited) {
-                cropBoxData.minLeft = Math.max(0, canvasData.left);
-                cropBoxData.minTop = Math.max(0, canvasData.top);
-                cropBoxData.maxLeft = Math.min(containerData.width, canvasData.left + canvasData.width) - cropBoxData.width;
-                cropBoxData.maxTop = Math.min(containerData.height, canvasData.top + canvasData.height) - cropBoxData.height;
-              } else {
-                cropBoxData.minLeft = 0;
-                cropBoxData.minTop = 0;
-                cropBoxData.maxLeft = containerData.width - cropBoxData.width;
-                cropBoxData.maxTop = containerData.height - cropBoxData.height;
-              }
-            }
-          },
-          renderCropBox: function renderCropBox() {
-            var options = this.options, containerData = this.containerData, cropBoxData = this.cropBoxData;
-            if (cropBoxData.width > cropBoxData.maxWidth || cropBoxData.width < cropBoxData.minWidth) {
-              cropBoxData.left = cropBoxData.oldLeft;
-            }
-            if (cropBoxData.height > cropBoxData.maxHeight || cropBoxData.height < cropBoxData.minHeight) {
-              cropBoxData.top = cropBoxData.oldTop;
-            }
-            cropBoxData.width = Math.min(Math.max(cropBoxData.width, cropBoxData.minWidth), cropBoxData.maxWidth);
-            cropBoxData.height = Math.min(Math.max(cropBoxData.height, cropBoxData.minHeight), cropBoxData.maxHeight);
-            this.limitCropBox(false, true);
-            cropBoxData.left = Math.min(Math.max(cropBoxData.left, cropBoxData.minLeft), cropBoxData.maxLeft);
-            cropBoxData.top = Math.min(Math.max(cropBoxData.top, cropBoxData.minTop), cropBoxData.maxTop);
-            cropBoxData.oldLeft = cropBoxData.left;
-            cropBoxData.oldTop = cropBoxData.top;
-            if (options.movable && options.cropBoxMovable) {
-              setData(this.face, DATA_ACTION, cropBoxData.width >= containerData.width && cropBoxData.height >= containerData.height ? ACTION_MOVE : ACTION_ALL);
-            }
-            setStyle2(this.cropBox, assign({
-              width: cropBoxData.width,
-              height: cropBoxData.height
-            }, getTransforms({
-              translateX: cropBoxData.left,
-              translateY: cropBoxData.top
-            })));
-            if (this.cropped && this.limited) {
-              this.limitCanvas(true, true);
-            }
-            if (!this.disabled) {
-              this.output();
-            }
-          },
-          output: function output() {
-            this.preview();
-            dispatchEvent(this.element, EVENT_CROP, this.getData());
-          }
-        };
-        var preview = {
-          initPreview: function initPreview() {
-            var element = this.element, crossOrigin = this.crossOrigin;
-            var preview2 = this.options.preview;
-            var url = crossOrigin ? this.crossOriginUrl : this.url;
-            var alt = element.alt || "The image to preview";
-            var image = document.createElement("img");
-            if (crossOrigin) {
-              image.crossOrigin = crossOrigin;
-            }
-            image.src = url;
-            image.alt = alt;
-            this.viewBox.appendChild(image);
-            this.viewBoxImage = image;
-            if (!preview2) {
-              return;
-            }
-            var previews = preview2;
-            if (typeof preview2 === "string") {
-              previews = element.ownerDocument.querySelectorAll(preview2);
-            } else if (preview2.querySelector) {
-              previews = [preview2];
-            }
-            this.previews = previews;
-            forEach(previews, function(el) {
-              var img = document.createElement("img");
-              setData(el, DATA_PREVIEW, {
-                width: el.offsetWidth,
-                height: el.offsetHeight,
-                html: el.innerHTML
-              });
-              if (crossOrigin) {
-                img.crossOrigin = crossOrigin;
-              }
-              img.src = url;
-              img.alt = alt;
-              img.style.cssText = 'display:block;width:100%;height:auto;min-width:0!important;min-height:0!important;max-width:none!important;max-height:none!important;image-orientation:0deg!important;"';
-              el.innerHTML = "";
-              el.appendChild(img);
-            });
-          },
-          resetPreview: function resetPreview() {
-            forEach(this.previews, function(element) {
-              var data2 = getData(element, DATA_PREVIEW);
-              setStyle2(element, {
-                width: data2.width,
-                height: data2.height
-              });
-              element.innerHTML = data2.html;
-              removeData(element, DATA_PREVIEW);
-            });
-          },
-          preview: function preview2() {
-            var imageData = this.imageData, canvasData = this.canvasData, cropBoxData = this.cropBoxData;
-            var cropBoxWidth = cropBoxData.width, cropBoxHeight = cropBoxData.height;
-            var width = imageData.width, height = imageData.height;
-            var left2 = cropBoxData.left - canvasData.left - imageData.left;
-            var top2 = cropBoxData.top - canvasData.top - imageData.top;
-            if (!this.cropped || this.disabled) {
-              return;
-            }
-            setStyle2(this.viewBoxImage, assign({
-              width,
-              height
-            }, getTransforms(assign({
-              translateX: -left2,
-              translateY: -top2
-            }, imageData))));
-            forEach(this.previews, function(element) {
-              var data2 = getData(element, DATA_PREVIEW);
-              var originalWidth = data2.width;
-              var originalHeight = data2.height;
-              var newWidth = originalWidth;
-              var newHeight = originalHeight;
-              var ratio = 1;
-              if (cropBoxWidth) {
-                ratio = originalWidth / cropBoxWidth;
-                newHeight = cropBoxHeight * ratio;
-              }
-              if (cropBoxHeight && newHeight > originalHeight) {
-                ratio = originalHeight / cropBoxHeight;
-                newWidth = cropBoxWidth * ratio;
-                newHeight = originalHeight;
-              }
-              setStyle2(element, {
-                width: newWidth,
-                height: newHeight
-              });
-              setStyle2(element.getElementsByTagName("img")[0], assign({
-                width: width * ratio,
-                height: height * ratio
-              }, getTransforms(assign({
-                translateX: -left2 * ratio,
-                translateY: -top2 * ratio
-              }, imageData))));
-            });
-          }
-        };
-        var events = {
-          bind: function bind() {
-            var element = this.element, options = this.options, cropper2 = this.cropper;
-            if (isFunction2(options.cropstart)) {
-              addListener2(element, EVENT_CROP_START, options.cropstart);
-            }
-            if (isFunction2(options.cropmove)) {
-              addListener2(element, EVENT_CROP_MOVE, options.cropmove);
-            }
-            if (isFunction2(options.cropend)) {
-              addListener2(element, EVENT_CROP_END, options.cropend);
-            }
-            if (isFunction2(options.crop)) {
-              addListener2(element, EVENT_CROP, options.crop);
-            }
-            if (isFunction2(options.zoom)) {
-              addListener2(element, EVENT_ZOOM, options.zoom);
-            }
-            addListener2(cropper2, EVENT_POINTER_DOWN, this.onCropStart = this.cropStart.bind(this));
-            if (options.zoomable && options.zoomOnWheel) {
-              addListener2(cropper2, EVENT_WHEEL, this.onWheel = this.wheel.bind(this), {
-                passive: false,
-                capture: true
-              });
-            }
-            if (options.toggleDragModeOnDblclick) {
-              addListener2(cropper2, EVENT_DBLCLICK, this.onDblclick = this.dblclick.bind(this));
-            }
-            addListener2(element.ownerDocument, EVENT_POINTER_MOVE, this.onCropMove = this.cropMove.bind(this));
-            addListener2(element.ownerDocument, EVENT_POINTER_UP, this.onCropEnd = this.cropEnd.bind(this));
-            if (options.responsive) {
-              addListener2(window, EVENT_RESIZE, this.onResize = this.resize.bind(this));
-            }
-          },
-          unbind: function unbind() {
-            var element = this.element, options = this.options, cropper2 = this.cropper;
-            if (isFunction2(options.cropstart)) {
-              removeListener2(element, EVENT_CROP_START, options.cropstart);
-            }
-            if (isFunction2(options.cropmove)) {
-              removeListener2(element, EVENT_CROP_MOVE, options.cropmove);
-            }
-            if (isFunction2(options.cropend)) {
-              removeListener2(element, EVENT_CROP_END, options.cropend);
-            }
-            if (isFunction2(options.crop)) {
-              removeListener2(element, EVENT_CROP, options.crop);
-            }
-            if (isFunction2(options.zoom)) {
-              removeListener2(element, EVENT_ZOOM, options.zoom);
-            }
-            removeListener2(cropper2, EVENT_POINTER_DOWN, this.onCropStart);
-            if (options.zoomable && options.zoomOnWheel) {
-              removeListener2(cropper2, EVENT_WHEEL, this.onWheel, {
-                passive: false,
-                capture: true
-              });
-            }
-            if (options.toggleDragModeOnDblclick) {
-              removeListener2(cropper2, EVENT_DBLCLICK, this.onDblclick);
-            }
-            removeListener2(element.ownerDocument, EVENT_POINTER_MOVE, this.onCropMove);
-            removeListener2(element.ownerDocument, EVENT_POINTER_UP, this.onCropEnd);
-            if (options.responsive) {
-              removeListener2(window, EVENT_RESIZE, this.onResize);
-            }
-          }
-        };
-        var handlers = {
-          resize: function resize() {
-            if (this.disabled) {
-              return;
-            }
-            var options = this.options, container = this.container, containerData = this.containerData;
-            var ratioX = container.offsetWidth / containerData.width;
-            var ratioY = container.offsetHeight / containerData.height;
-            var ratio = Math.abs(ratioX - 1) > Math.abs(ratioY - 1) ? ratioX : ratioY;
-            if (ratio !== 1) {
-              var canvasData;
-              var cropBoxData;
-              if (options.restore) {
-                canvasData = this.getCanvasData();
-                cropBoxData = this.getCropBoxData();
-              }
-              this.render();
-              if (options.restore) {
-                this.setCanvasData(forEach(canvasData, function(n2, i) {
-                  canvasData[i] = n2 * ratio;
-                }));
-                this.setCropBoxData(forEach(cropBoxData, function(n2, i) {
-                  cropBoxData[i] = n2 * ratio;
-                }));
-              }
-            }
-          },
-          dblclick: function dblclick() {
-            if (this.disabled || this.options.dragMode === DRAG_MODE_NONE) {
-              return;
-            }
-            this.setDragMode(hasClass(this.dragBox, CLASS_CROP) ? DRAG_MODE_MOVE : DRAG_MODE_CROP);
-          },
-          wheel: function wheel(event3) {
-            var _this = this;
-            var ratio = Number(this.options.wheelZoomRatio) || 0.1;
-            var delta = 1;
-            if (this.disabled) {
-              return;
-            }
-            event3.preventDefault();
-            if (this.wheeling) {
-              return;
-            }
-            this.wheeling = true;
-            setTimeout(function() {
-              _this.wheeling = false;
-            }, 50);
-            if (event3.deltaY) {
-              delta = event3.deltaY > 0 ? 1 : -1;
-            } else if (event3.wheelDelta) {
-              delta = -event3.wheelDelta / 120;
-            } else if (event3.detail) {
-              delta = event3.detail > 0 ? 1 : -1;
-            }
-            this.zoom(-delta * ratio, event3);
-          },
-          cropStart: function cropStart(event3) {
-            var buttons = event3.buttons, button2 = event3.button;
-            if (this.disabled || (event3.type === "mousedown" || event3.type === "pointerdown" && event3.pointerType === "mouse") && // No primary button (Usually the left button)
-            (isNumber3(buttons) && buttons !== 1 || isNumber3(button2) && button2 !== 0 || event3.ctrlKey)) {
-              return;
-            }
-            var options = this.options, pointers = this.pointers;
-            var action;
-            if (event3.changedTouches) {
-              forEach(event3.changedTouches, function(touch) {
-                pointers[touch.identifier] = getPointer(touch);
-              });
-            } else {
-              pointers[event3.pointerId || 0] = getPointer(event3);
-            }
-            if (Object.keys(pointers).length > 1 && options.zoomable && options.zoomOnTouch) {
-              action = ACTION_ZOOM;
-            } else {
-              action = getData(event3.target, DATA_ACTION);
-            }
-            if (!REGEXP_ACTIONS.test(action)) {
-              return;
-            }
-            if (dispatchEvent(this.element, EVENT_CROP_START, {
-              originalEvent: event3,
-              action
-            }) === false) {
-              return;
-            }
-            event3.preventDefault();
-            this.action = action;
-            this.cropping = false;
-            if (action === ACTION_CROP) {
-              this.cropping = true;
-              addClass(this.dragBox, CLASS_MODAL);
-            }
-          },
-          cropMove: function cropMove(event3) {
-            var action = this.action;
-            if (this.disabled || !action) {
-              return;
-            }
-            var pointers = this.pointers;
-            event3.preventDefault();
-            if (dispatchEvent(this.element, EVENT_CROP_MOVE, {
-              originalEvent: event3,
-              action
-            }) === false) {
-              return;
-            }
-            if (event3.changedTouches) {
-              forEach(event3.changedTouches, function(touch) {
-                assign(pointers[touch.identifier] || {}, getPointer(touch, true));
-              });
-            } else {
-              assign(pointers[event3.pointerId || 0] || {}, getPointer(event3, true));
-            }
-            this.change(event3);
-          },
-          cropEnd: function cropEnd(event3) {
-            if (this.disabled) {
-              return;
-            }
-            var action = this.action, pointers = this.pointers;
-            if (event3.changedTouches) {
-              forEach(event3.changedTouches, function(touch) {
-                delete pointers[touch.identifier];
-              });
-            } else {
-              delete pointers[event3.pointerId || 0];
-            }
-            if (!action) {
-              return;
-            }
-            event3.preventDefault();
-            if (!Object.keys(pointers).length) {
-              this.action = "";
-            }
-            if (this.cropping) {
-              this.cropping = false;
-              toggleClass(this.dragBox, CLASS_MODAL, this.cropped && this.options.modal);
-            }
-            dispatchEvent(this.element, EVENT_CROP_END, {
-              originalEvent: event3,
-              action
-            });
-          }
-        };
-        var change = {
-          change: function change2(event3) {
-            var options = this.options, canvasData = this.canvasData, containerData = this.containerData, cropBoxData = this.cropBoxData, pointers = this.pointers;
-            var action = this.action;
-            var aspectRatio = options.aspectRatio;
-            var left2 = cropBoxData.left, top2 = cropBoxData.top, width = cropBoxData.width, height = cropBoxData.height;
-            var right2 = left2 + width;
-            var bottom2 = top2 + height;
-            var minLeft = 0;
-            var minTop = 0;
-            var maxWidth = containerData.width;
-            var maxHeight = containerData.height;
-            var renderable = true;
-            var offset3;
-            if (!aspectRatio && event3.shiftKey) {
-              aspectRatio = width && height ? width / height : 1;
-            }
-            if (this.limited) {
-              minLeft = cropBoxData.minLeft;
-              minTop = cropBoxData.minTop;
-              maxWidth = minLeft + Math.min(containerData.width, canvasData.width, canvasData.left + canvasData.width);
-              maxHeight = minTop + Math.min(containerData.height, canvasData.height, canvasData.top + canvasData.height);
-            }
-            var pointer = pointers[Object.keys(pointers)[0]];
-            var range = {
-              x: pointer.endX - pointer.startX,
-              y: pointer.endY - pointer.startY
-            };
-            var check = function check2(side) {
-              switch (side) {
-                case ACTION_EAST:
-                  if (right2 + range.x > maxWidth) {
-                    range.x = maxWidth - right2;
-                  }
-                  break;
-                case ACTION_WEST:
-                  if (left2 + range.x < minLeft) {
-                    range.x = minLeft - left2;
-                  }
-                  break;
-                case ACTION_NORTH:
-                  if (top2 + range.y < minTop) {
-                    range.y = minTop - top2;
-                  }
-                  break;
-                case ACTION_SOUTH:
-                  if (bottom2 + range.y > maxHeight) {
-                    range.y = maxHeight - bottom2;
-                  }
-                  break;
-              }
-            };
-            switch (action) {
-              // Move crop box
-              case ACTION_ALL:
-                left2 += range.x;
-                top2 += range.y;
-                break;
-              // Resize crop box
-              case ACTION_EAST:
-                if (range.x >= 0 && (right2 >= maxWidth || aspectRatio && (top2 <= minTop || bottom2 >= maxHeight))) {
-                  renderable = false;
-                  break;
-                }
-                check(ACTION_EAST);
-                width += range.x;
-                if (width < 0) {
-                  action = ACTION_WEST;
-                  width = -width;
-                  left2 -= width;
-                }
-                if (aspectRatio) {
-                  height = width / aspectRatio;
-                  top2 += (cropBoxData.height - height) / 2;
-                }
-                break;
-              case ACTION_NORTH:
-                if (range.y <= 0 && (top2 <= minTop || aspectRatio && (left2 <= minLeft || right2 >= maxWidth))) {
-                  renderable = false;
-                  break;
-                }
-                check(ACTION_NORTH);
-                height -= range.y;
-                top2 += range.y;
-                if (height < 0) {
-                  action = ACTION_SOUTH;
-                  height = -height;
-                  top2 -= height;
-                }
-                if (aspectRatio) {
-                  width = height * aspectRatio;
-                  left2 += (cropBoxData.width - width) / 2;
-                }
-                break;
-              case ACTION_WEST:
-                if (range.x <= 0 && (left2 <= minLeft || aspectRatio && (top2 <= minTop || bottom2 >= maxHeight))) {
-                  renderable = false;
-                  break;
-                }
-                check(ACTION_WEST);
-                width -= range.x;
-                left2 += range.x;
-                if (width < 0) {
-                  action = ACTION_EAST;
-                  width = -width;
-                  left2 -= width;
-                }
-                if (aspectRatio) {
-                  height = width / aspectRatio;
-                  top2 += (cropBoxData.height - height) / 2;
-                }
-                break;
-              case ACTION_SOUTH:
-                if (range.y >= 0 && (bottom2 >= maxHeight || aspectRatio && (left2 <= minLeft || right2 >= maxWidth))) {
-                  renderable = false;
-                  break;
-                }
-                check(ACTION_SOUTH);
-                height += range.y;
-                if (height < 0) {
-                  action = ACTION_NORTH;
-                  height = -height;
-                  top2 -= height;
-                }
-                if (aspectRatio) {
-                  width = height * aspectRatio;
-                  left2 += (cropBoxData.width - width) / 2;
-                }
-                break;
-              case ACTION_NORTH_EAST:
-                if (aspectRatio) {
-                  if (range.y <= 0 && (top2 <= minTop || right2 >= maxWidth)) {
-                    renderable = false;
-                    break;
-                  }
-                  check(ACTION_NORTH);
-                  height -= range.y;
-                  top2 += range.y;
-                  width = height * aspectRatio;
-                } else {
-                  check(ACTION_NORTH);
-                  check(ACTION_EAST);
-                  if (range.x >= 0) {
-                    if (right2 < maxWidth) {
-                      width += range.x;
-                    } else if (range.y <= 0 && top2 <= minTop) {
-                      renderable = false;
-                    }
-                  } else {
-                    width += range.x;
-                  }
-                  if (range.y <= 0) {
-                    if (top2 > minTop) {
-                      height -= range.y;
-                      top2 += range.y;
-                    }
-                  } else {
-                    height -= range.y;
-                    top2 += range.y;
-                  }
-                }
-                if (width < 0 && height < 0) {
-                  action = ACTION_SOUTH_WEST;
-                  height = -height;
-                  width = -width;
-                  top2 -= height;
-                  left2 -= width;
-                } else if (width < 0) {
-                  action = ACTION_NORTH_WEST;
-                  width = -width;
-                  left2 -= width;
-                } else if (height < 0) {
-                  action = ACTION_SOUTH_EAST;
-                  height = -height;
-                  top2 -= height;
-                }
-                break;
-              case ACTION_NORTH_WEST:
-                if (aspectRatio) {
-                  if (range.y <= 0 && (top2 <= minTop || left2 <= minLeft)) {
-                    renderable = false;
-                    break;
-                  }
-                  check(ACTION_NORTH);
-                  height -= range.y;
-                  top2 += range.y;
-                  width = height * aspectRatio;
-                  left2 += cropBoxData.width - width;
-                } else {
-                  check(ACTION_NORTH);
-                  check(ACTION_WEST);
-                  if (range.x <= 0) {
-                    if (left2 > minLeft) {
-                      width -= range.x;
-                      left2 += range.x;
-                    } else if (range.y <= 0 && top2 <= minTop) {
-                      renderable = false;
-                    }
-                  } else {
-                    width -= range.x;
-                    left2 += range.x;
-                  }
-                  if (range.y <= 0) {
-                    if (top2 > minTop) {
-                      height -= range.y;
-                      top2 += range.y;
-                    }
-                  } else {
-                    height -= range.y;
-                    top2 += range.y;
-                  }
-                }
-                if (width < 0 && height < 0) {
-                  action = ACTION_SOUTH_EAST;
-                  height = -height;
-                  width = -width;
-                  top2 -= height;
-                  left2 -= width;
-                } else if (width < 0) {
-                  action = ACTION_NORTH_EAST;
-                  width = -width;
-                  left2 -= width;
-                } else if (height < 0) {
-                  action = ACTION_SOUTH_WEST;
-                  height = -height;
-                  top2 -= height;
-                }
-                break;
-              case ACTION_SOUTH_WEST:
-                if (aspectRatio) {
-                  if (range.x <= 0 && (left2 <= minLeft || bottom2 >= maxHeight)) {
-                    renderable = false;
-                    break;
-                  }
-                  check(ACTION_WEST);
-                  width -= range.x;
-                  left2 += range.x;
-                  height = width / aspectRatio;
-                } else {
-                  check(ACTION_SOUTH);
-                  check(ACTION_WEST);
-                  if (range.x <= 0) {
-                    if (left2 > minLeft) {
-                      width -= range.x;
-                      left2 += range.x;
-                    } else if (range.y >= 0 && bottom2 >= maxHeight) {
-                      renderable = false;
-                    }
-                  } else {
-                    width -= range.x;
-                    left2 += range.x;
-                  }
-                  if (range.y >= 0) {
-                    if (bottom2 < maxHeight) {
-                      height += range.y;
-                    }
-                  } else {
-                    height += range.y;
-                  }
-                }
-                if (width < 0 && height < 0) {
-                  action = ACTION_NORTH_EAST;
-                  height = -height;
-                  width = -width;
-                  top2 -= height;
-                  left2 -= width;
-                } else if (width < 0) {
-                  action = ACTION_SOUTH_EAST;
-                  width = -width;
-                  left2 -= width;
-                } else if (height < 0) {
-                  action = ACTION_NORTH_WEST;
-                  height = -height;
-                  top2 -= height;
-                }
-                break;
-              case ACTION_SOUTH_EAST:
-                if (aspectRatio) {
-                  if (range.x >= 0 && (right2 >= maxWidth || bottom2 >= maxHeight)) {
-                    renderable = false;
-                    break;
-                  }
-                  check(ACTION_EAST);
-                  width += range.x;
-                  height = width / aspectRatio;
-                } else {
-                  check(ACTION_SOUTH);
-                  check(ACTION_EAST);
-                  if (range.x >= 0) {
-                    if (right2 < maxWidth) {
-                      width += range.x;
-                    } else if (range.y >= 0 && bottom2 >= maxHeight) {
-                      renderable = false;
-                    }
-                  } else {
-                    width += range.x;
-                  }
-                  if (range.y >= 0) {
-                    if (bottom2 < maxHeight) {
-                      height += range.y;
-                    }
-                  } else {
-                    height += range.y;
-                  }
-                }
-                if (width < 0 && height < 0) {
-                  action = ACTION_NORTH_WEST;
-                  height = -height;
-                  width = -width;
-                  top2 -= height;
-                  left2 -= width;
-                } else if (width < 0) {
-                  action = ACTION_SOUTH_WEST;
-                  width = -width;
-                  left2 -= width;
-                } else if (height < 0) {
-                  action = ACTION_NORTH_EAST;
-                  height = -height;
-                  top2 -= height;
-                }
-                break;
-              // Move canvas
-              case ACTION_MOVE:
-                this.move(range.x, range.y);
-                renderable = false;
-                break;
-              // Zoom canvas
-              case ACTION_ZOOM:
-                this.zoom(getMaxZoomRatio(pointers), event3);
-                renderable = false;
-                break;
-              // Create crop box
-              case ACTION_CROP:
-                if (!range.x || !range.y) {
-                  renderable = false;
-                  break;
-                }
-                offset3 = getOffset(this.cropper);
-                left2 = pointer.startX - offset3.left;
-                top2 = pointer.startY - offset3.top;
-                width = cropBoxData.minWidth;
-                height = cropBoxData.minHeight;
-                if (range.x > 0) {
-                  action = range.y > 0 ? ACTION_SOUTH_EAST : ACTION_NORTH_EAST;
-                } else if (range.x < 0) {
-                  left2 -= width;
-                  action = range.y > 0 ? ACTION_SOUTH_WEST : ACTION_NORTH_WEST;
-                }
-                if (range.y < 0) {
-                  top2 -= height;
-                }
-                if (!this.cropped) {
-                  removeClass(this.cropBox, CLASS_HIDDEN);
-                  this.cropped = true;
-                  if (this.limited) {
-                    this.limitCropBox(true, true);
-                  }
-                }
-                break;
-            }
-            if (renderable) {
-              cropBoxData.width = width;
-              cropBoxData.height = height;
-              cropBoxData.left = left2;
-              cropBoxData.top = top2;
-              this.action = action;
-              this.renderCropBox();
-            }
-            forEach(pointers, function(p) {
-              p.startX = p.endX;
-              p.startY = p.endY;
-            });
-          }
-        };
-        var methods = {
-          // Show the crop box manually
-          crop: function crop() {
-            if (this.ready && !this.cropped && !this.disabled) {
-              this.cropped = true;
-              this.limitCropBox(true, true);
-              if (this.options.modal) {
-                addClass(this.dragBox, CLASS_MODAL);
-              }
-              removeClass(this.cropBox, CLASS_HIDDEN);
-              this.setCropBoxData(this.initialCropBoxData);
-            }
-            return this;
-          },
-          // Reset the image and crop box to their initial states
-          reset: function reset() {
-            if (this.ready && !this.disabled) {
-              this.imageData = assign({}, this.initialImageData);
-              this.canvasData = assign({}, this.initialCanvasData);
-              this.cropBoxData = assign({}, this.initialCropBoxData);
-              this.renderCanvas();
-              if (this.cropped) {
-                this.renderCropBox();
-              }
-            }
-            return this;
-          },
-          // Clear the crop box
-          clear: function clear() {
-            if (this.cropped && !this.disabled) {
-              assign(this.cropBoxData, {
-                left: 0,
-                top: 0,
-                width: 0,
-                height: 0
-              });
-              this.cropped = false;
-              this.renderCropBox();
-              this.limitCanvas(true, true);
-              this.renderCanvas();
-              removeClass(this.dragBox, CLASS_MODAL);
-              addClass(this.cropBox, CLASS_HIDDEN);
-            }
-            return this;
-          },
-          /**
-           * Replace the image's src and rebuild the cropper
-           * @param {string} url - The new URL.
-           * @param {boolean} [hasSameSize] - Indicate if the new image has the same size as the old one.
-           * @returns {Cropper} this
-           */
-          replace: function replace(url) {
-            var hasSameSize = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : false;
-            if (!this.disabled && url) {
-              if (this.isImg) {
-                this.element.src = url;
-              }
-              if (hasSameSize) {
-                this.url = url;
-                this.image.src = url;
-                if (this.ready) {
-                  this.viewBoxImage.src = url;
-                  forEach(this.previews, function(element) {
-                    element.getElementsByTagName("img")[0].src = url;
-                  });
-                }
-              } else {
-                if (this.isImg) {
-                  this.replaced = true;
-                }
-                this.options.data = null;
-                this.uncreate();
-                this.load(url);
-              }
-            }
-            return this;
-          },
-          // Enable (unfreeze) the cropper
-          enable: function enable() {
-            if (this.ready && this.disabled) {
-              this.disabled = false;
-              removeClass(this.cropper, CLASS_DISABLED);
-            }
-            return this;
-          },
-          // Disable (freeze) the cropper
-          disable: function disable() {
-            if (this.ready && !this.disabled) {
-              this.disabled = true;
-              addClass(this.cropper, CLASS_DISABLED);
-            }
-            return this;
-          },
-          /**
-           * Destroy the cropper and remove the instance from the image
-           * @returns {Cropper} this
-           */
-          destroy: function destroy() {
-            var element = this.element;
-            if (!element[NAMESPACE]) {
-              return this;
-            }
-            element[NAMESPACE] = void 0;
-            if (this.isImg && this.replaced) {
-              element.src = this.originalUrl;
-            }
-            this.uncreate();
-            return this;
-          },
-          /**
-           * Move the canvas with relative offsets
-           * @param {number} offsetX - The relative offset distance on the x-axis.
-           * @param {number} [offsetY=offsetX] - The relative offset distance on the y-axis.
-           * @returns {Cropper} this
-           */
-          move: function move(offsetX) {
-            var offsetY = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : offsetX;
-            var _this$canvasData = this.canvasData, left2 = _this$canvasData.left, top2 = _this$canvasData.top;
-            return this.moveTo(isUndefined2(offsetX) ? offsetX : left2 + Number(offsetX), isUndefined2(offsetY) ? offsetY : top2 + Number(offsetY));
-          },
-          /**
-           * Move the canvas to an absolute point
-           * @param {number} x - The x-axis coordinate.
-           * @param {number} [y=x] - The y-axis coordinate.
-           * @returns {Cropper} this
-           */
-          moveTo: function moveTo(x) {
-            var y = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : x;
-            var canvasData = this.canvasData;
-            var changed = false;
-            x = Number(x);
-            y = Number(y);
-            if (this.ready && !this.disabled && this.options.movable) {
-              if (isNumber3(x)) {
-                canvasData.left = x;
-                changed = true;
-              }
-              if (isNumber3(y)) {
-                canvasData.top = y;
-                changed = true;
-              }
-              if (changed) {
-                this.renderCanvas(true);
-              }
-            }
-            return this;
-          },
-          /**
-           * Zoom the canvas with a relative ratio
-           * @param {number} ratio - The target ratio.
-           * @param {Event} _originalEvent - The original event if any.
-           * @returns {Cropper} this
-           */
-          zoom: function zoom(ratio, _originalEvent) {
-            var canvasData = this.canvasData;
-            ratio = Number(ratio);
-            if (ratio < 0) {
-              ratio = 1 / (1 - ratio);
-            } else {
-              ratio = 1 + ratio;
-            }
-            return this.zoomTo(canvasData.width * ratio / canvasData.naturalWidth, null, _originalEvent);
-          },
-          /**
-           * Zoom the canvas to an absolute ratio
-           * @param {number} ratio - The target ratio.
-           * @param {Object} pivot - The zoom pivot point coordinate.
-           * @param {Event} _originalEvent - The original event if any.
-           * @returns {Cropper} this
-           */
-          zoomTo: function zoomTo(ratio, pivot, _originalEvent) {
-            var options = this.options, canvasData = this.canvasData;
-            var width = canvasData.width, height = canvasData.height, naturalWidth = canvasData.naturalWidth, naturalHeight = canvasData.naturalHeight;
-            ratio = Number(ratio);
-            if (ratio >= 0 && this.ready && !this.disabled && options.zoomable) {
-              var newWidth = naturalWidth * ratio;
-              var newHeight = naturalHeight * ratio;
-              if (dispatchEvent(this.element, EVENT_ZOOM, {
-                ratio,
-                oldRatio: width / naturalWidth,
-                originalEvent: _originalEvent
-              }) === false) {
-                return this;
-              }
-              if (_originalEvent) {
-                var pointers = this.pointers;
-                var offset3 = getOffset(this.cropper);
-                var center = pointers && Object.keys(pointers).length ? getPointersCenter(pointers) : {
-                  pageX: _originalEvent.pageX,
-                  pageY: _originalEvent.pageY
-                };
-                canvasData.left -= (newWidth - width) * ((center.pageX - offset3.left - canvasData.left) / width);
-                canvasData.top -= (newHeight - height) * ((center.pageY - offset3.top - canvasData.top) / height);
-              } else if (isPlainObject(pivot) && isNumber3(pivot.x) && isNumber3(pivot.y)) {
-                canvasData.left -= (newWidth - width) * ((pivot.x - canvasData.left) / width);
-                canvasData.top -= (newHeight - height) * ((pivot.y - canvasData.top) / height);
-              } else {
-                canvasData.left -= (newWidth - width) / 2;
-                canvasData.top -= (newHeight - height) / 2;
-              }
-              canvasData.width = newWidth;
-              canvasData.height = newHeight;
-              this.renderCanvas(true);
-            }
-            return this;
-          },
-          /**
-           * Rotate the canvas with a relative degree
-           * @param {number} degree - The rotate degree.
-           * @returns {Cropper} this
-           */
-          rotate: function rotate2(degree) {
-            return this.rotateTo((this.imageData.rotate || 0) + Number(degree));
-          },
-          /**
-           * Rotate the canvas to an absolute degree
-           * @param {number} degree - The rotate degree.
-           * @returns {Cropper} this
-           */
-          rotateTo: function rotateTo(degree) {
-            degree = Number(degree);
-            if (isNumber3(degree) && this.ready && !this.disabled && this.options.rotatable) {
-              this.imageData.rotate = degree % 360;
-              this.renderCanvas(true, true);
-            }
-            return this;
-          },
-          /**
-           * Scale the image on the x-axis.
-           * @param {number} scaleX - The scale ratio on the x-axis.
-           * @returns {Cropper} this
-           */
-          scaleX: function scaleX(_scaleX) {
-            var scaleY = this.imageData.scaleY;
-            return this.scale(_scaleX, isNumber3(scaleY) ? scaleY : 1);
-          },
-          /**
-           * Scale the image on the y-axis.
-           * @param {number} scaleY - The scale ratio on the y-axis.
-           * @returns {Cropper} this
-           */
-          scaleY: function scaleY(_scaleY) {
-            var scaleX = this.imageData.scaleX;
-            return this.scale(isNumber3(scaleX) ? scaleX : 1, _scaleY);
-          },
-          /**
-           * Scale the image
-           * @param {number} scaleX - The scale ratio on the x-axis.
-           * @param {number} [scaleY=scaleX] - The scale ratio on the y-axis.
-           * @returns {Cropper} this
-           */
-          scale: function scale(scaleX) {
-            var scaleY = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : scaleX;
-            var imageData = this.imageData;
-            var transformed = false;
-            scaleX = Number(scaleX);
-            scaleY = Number(scaleY);
-            if (this.ready && !this.disabled && this.options.scalable) {
-              if (isNumber3(scaleX)) {
-                imageData.scaleX = scaleX;
-                transformed = true;
-              }
-              if (isNumber3(scaleY)) {
-                imageData.scaleY = scaleY;
-                transformed = true;
-              }
-              if (transformed) {
-                this.renderCanvas(true, true);
-              }
-            }
-            return this;
-          },
-          /**
-           * Get the cropped area position and size data (base on the original image)
-           * @param {boolean} [rounded=false] - Indicate if round the data values or not.
-           * @returns {Object} The result cropped data.
-           */
-          getData: function getData2() {
-            var rounded = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : false;
-            var options = this.options, imageData = this.imageData, canvasData = this.canvasData, cropBoxData = this.cropBoxData;
-            var data2;
-            if (this.ready && this.cropped) {
-              data2 = {
-                x: cropBoxData.left - canvasData.left,
-                y: cropBoxData.top - canvasData.top,
-                width: cropBoxData.width,
-                height: cropBoxData.height
-              };
-              var ratio = imageData.width / imageData.naturalWidth;
-              forEach(data2, function(n2, i) {
-                data2[i] = n2 / ratio;
-              });
-              if (rounded) {
-                var bottom2 = Math.round(data2.y + data2.height);
-                var right2 = Math.round(data2.x + data2.width);
-                data2.x = Math.round(data2.x);
-                data2.y = Math.round(data2.y);
-                data2.width = right2 - data2.x;
-                data2.height = bottom2 - data2.y;
-              }
-            } else {
-              data2 = {
-                x: 0,
-                y: 0,
-                width: 0,
-                height: 0
-              };
-            }
-            if (options.rotatable) {
-              data2.rotate = imageData.rotate || 0;
-            }
-            if (options.scalable) {
-              data2.scaleX = imageData.scaleX || 1;
-              data2.scaleY = imageData.scaleY || 1;
-            }
-            return data2;
-          },
-          /**
-           * Set the cropped area position and size with new data
-           * @param {Object} data - The new data.
-           * @returns {Cropper} this
-           */
-          setData: function setData2(data2) {
-            var options = this.options, imageData = this.imageData, canvasData = this.canvasData;
-            var cropBoxData = {};
-            if (this.ready && !this.disabled && isPlainObject(data2)) {
-              var transformed = false;
-              if (options.rotatable) {
-                if (isNumber3(data2.rotate) && data2.rotate !== imageData.rotate) {
-                  imageData.rotate = data2.rotate;
-                  transformed = true;
-                }
-              }
-              if (options.scalable) {
-                if (isNumber3(data2.scaleX) && data2.scaleX !== imageData.scaleX) {
-                  imageData.scaleX = data2.scaleX;
-                  transformed = true;
-                }
-                if (isNumber3(data2.scaleY) && data2.scaleY !== imageData.scaleY) {
-                  imageData.scaleY = data2.scaleY;
-                  transformed = true;
-                }
-              }
-              if (transformed) {
-                this.renderCanvas(true, true);
-              }
-              var ratio = imageData.width / imageData.naturalWidth;
-              if (isNumber3(data2.x)) {
-                cropBoxData.left = data2.x * ratio + canvasData.left;
-              }
-              if (isNumber3(data2.y)) {
-                cropBoxData.top = data2.y * ratio + canvasData.top;
-              }
-              if (isNumber3(data2.width)) {
-                cropBoxData.width = data2.width * ratio;
-              }
-              if (isNumber3(data2.height)) {
-                cropBoxData.height = data2.height * ratio;
-              }
-              this.setCropBoxData(cropBoxData);
-            }
-            return this;
-          },
-          /**
-           * Get the container size data.
-           * @returns {Object} The result container data.
-           */
-          getContainerData: function getContainerData() {
-            return this.ready ? assign({}, this.containerData) : {};
-          },
-          /**
-           * Get the image position and size data.
-           * @returns {Object} The result image data.
-           */
-          getImageData: function getImageData() {
-            return this.sized ? assign({}, this.imageData) : {};
-          },
-          /**
-           * Get the canvas position and size data.
-           * @returns {Object} The result canvas data.
-           */
-          getCanvasData: function getCanvasData() {
-            var canvasData = this.canvasData;
-            var data2 = {};
-            if (this.ready) {
-              forEach(["left", "top", "width", "height", "naturalWidth", "naturalHeight"], function(n2) {
-                data2[n2] = canvasData[n2];
-              });
-            }
-            return data2;
-          },
-          /**
-           * Set the canvas position and size with new data.
-           * @param {Object} data - The new canvas data.
-           * @returns {Cropper} this
-           */
-          setCanvasData: function setCanvasData(data2) {
-            var canvasData = this.canvasData;
-            var aspectRatio = canvasData.aspectRatio;
-            if (this.ready && !this.disabled && isPlainObject(data2)) {
-              if (isNumber3(data2.left)) {
-                canvasData.left = data2.left;
-              }
-              if (isNumber3(data2.top)) {
-                canvasData.top = data2.top;
-              }
-              if (isNumber3(data2.width)) {
-                canvasData.width = data2.width;
-                canvasData.height = data2.width / aspectRatio;
-              } else if (isNumber3(data2.height)) {
-                canvasData.height = data2.height;
-                canvasData.width = data2.height * aspectRatio;
-              }
-              this.renderCanvas(true);
-            }
-            return this;
-          },
-          /**
-           * Get the crop box position and size data.
-           * @returns {Object} The result crop box data.
-           */
-          getCropBoxData: function getCropBoxData() {
-            var cropBoxData = this.cropBoxData;
-            var data2;
-            if (this.ready && this.cropped) {
-              data2 = {
-                left: cropBoxData.left,
-                top: cropBoxData.top,
-                width: cropBoxData.width,
-                height: cropBoxData.height
-              };
-            }
-            return data2 || {};
-          },
-          /**
-           * Set the crop box position and size with new data.
-           * @param {Object} data - The new crop box data.
-           * @returns {Cropper} this
-           */
-          setCropBoxData: function setCropBoxData(data2) {
-            var cropBoxData = this.cropBoxData;
-            var aspectRatio = this.options.aspectRatio;
-            var widthChanged;
-            var heightChanged;
-            if (this.ready && this.cropped && !this.disabled && isPlainObject(data2)) {
-              if (isNumber3(data2.left)) {
-                cropBoxData.left = data2.left;
-              }
-              if (isNumber3(data2.top)) {
-                cropBoxData.top = data2.top;
-              }
-              if (isNumber3(data2.width) && data2.width !== cropBoxData.width) {
-                widthChanged = true;
-                cropBoxData.width = data2.width;
-              }
-              if (isNumber3(data2.height) && data2.height !== cropBoxData.height) {
-                heightChanged = true;
-                cropBoxData.height = data2.height;
-              }
-              if (aspectRatio) {
-                if (widthChanged) {
-                  cropBoxData.height = cropBoxData.width / aspectRatio;
-                } else if (heightChanged) {
-                  cropBoxData.width = cropBoxData.height * aspectRatio;
-                }
-              }
-              this.renderCropBox();
-            }
-            return this;
-          },
-          /**
-           * Get a canvas drawn the cropped image.
-           * @param {Object} [options={}] - The config options.
-           * @returns {HTMLCanvasElement} - The result canvas.
-           */
-          getCroppedCanvas: function getCroppedCanvas() {
-            var options = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : {};
-            if (!this.ready || !window.HTMLCanvasElement) {
-              return null;
-            }
-            var canvasData = this.canvasData;
-            var source = getSourceCanvas(this.image, this.imageData, canvasData, options);
-            if (!this.cropped) {
-              return source;
-            }
-            var _this$getData = this.getData(), initialX = _this$getData.x, initialY = _this$getData.y, initialWidth = _this$getData.width, initialHeight = _this$getData.height;
-            var ratio = source.width / Math.floor(canvasData.naturalWidth);
-            if (ratio !== 1) {
-              initialX *= ratio;
-              initialY *= ratio;
-              initialWidth *= ratio;
-              initialHeight *= ratio;
-            }
-            var aspectRatio = initialWidth / initialHeight;
-            var maxSizes = getAdjustedSizes({
-              aspectRatio,
-              width: options.maxWidth || Infinity,
-              height: options.maxHeight || Infinity
-            });
-            var minSizes = getAdjustedSizes({
-              aspectRatio,
-              width: options.minWidth || 0,
-              height: options.minHeight || 0
-            }, "cover");
-            var _getAdjustedSizes = getAdjustedSizes({
-              aspectRatio,
-              width: options.width || (ratio !== 1 ? source.width : initialWidth),
-              height: options.height || (ratio !== 1 ? source.height : initialHeight)
-            }), width = _getAdjustedSizes.width, height = _getAdjustedSizes.height;
-            width = Math.min(maxSizes.width, Math.max(minSizes.width, width));
-            height = Math.min(maxSizes.height, Math.max(minSizes.height, height));
-            var canvas = document.createElement("canvas");
-            var context = canvas.getContext("2d");
-            canvas.width = normalizeDecimalNumber(width);
-            canvas.height = normalizeDecimalNumber(height);
-            context.fillStyle = options.fillColor || "transparent";
-            context.fillRect(0, 0, width, height);
-            var _options$imageSmoothi = options.imageSmoothingEnabled, imageSmoothingEnabled = _options$imageSmoothi === void 0 ? true : _options$imageSmoothi, imageSmoothingQuality = options.imageSmoothingQuality;
-            context.imageSmoothingEnabled = imageSmoothingEnabled;
-            if (imageSmoothingQuality) {
-              context.imageSmoothingQuality = imageSmoothingQuality;
-            }
-            var sourceWidth = source.width;
-            var sourceHeight = source.height;
-            var srcX = initialX;
-            var srcY = initialY;
-            var srcWidth;
-            var srcHeight;
-            var dstX;
-            var dstY;
-            var dstWidth;
-            var dstHeight;
-            if (srcX <= -initialWidth || srcX > sourceWidth) {
-              srcX = 0;
-              srcWidth = 0;
-              dstX = 0;
-              dstWidth = 0;
-            } else if (srcX <= 0) {
-              dstX = -srcX;
-              srcX = 0;
-              srcWidth = Math.min(sourceWidth, initialWidth + srcX);
-              dstWidth = srcWidth;
-            } else if (srcX <= sourceWidth) {
-              dstX = 0;
-              srcWidth = Math.min(initialWidth, sourceWidth - srcX);
-              dstWidth = srcWidth;
-            }
-            if (srcWidth <= 0 || srcY <= -initialHeight || srcY > sourceHeight) {
-              srcY = 0;
-              srcHeight = 0;
-              dstY = 0;
-              dstHeight = 0;
-            } else if (srcY <= 0) {
-              dstY = -srcY;
-              srcY = 0;
-              srcHeight = Math.min(sourceHeight, initialHeight + srcY);
-              dstHeight = srcHeight;
-            } else if (srcY <= sourceHeight) {
-              dstY = 0;
-              srcHeight = Math.min(initialHeight, sourceHeight - srcY);
-              dstHeight = srcHeight;
-            }
-            var params = [srcX, srcY, srcWidth, srcHeight];
-            if (dstWidth > 0 && dstHeight > 0) {
-              var scale = width / initialWidth;
-              params.push(dstX * scale, dstY * scale, dstWidth * scale, dstHeight * scale);
-            }
-            context.drawImage.apply(context, [source].concat(_toConsumableArray(params.map(function(param) {
-              return Math.floor(normalizeDecimalNumber(param));
-            }))));
-            return canvas;
-          },
-          /**
-           * Change the aspect ratio of the crop box.
-           * @param {number} aspectRatio - The new aspect ratio.
-           * @returns {Cropper} this
-           */
-          setAspectRatio: function setAspectRatio(aspectRatio) {
-            var options = this.options;
-            if (!this.disabled && !isUndefined2(aspectRatio)) {
-              options.aspectRatio = Math.max(0, aspectRatio) || NaN;
-              if (this.ready) {
-                this.initCropBox();
-                if (this.cropped) {
-                  this.renderCropBox();
-                }
-              }
-            }
-            return this;
-          },
-          /**
-           * Change the drag mode.
-           * @param {string} mode - The new drag mode.
-           * @returns {Cropper} this
-           */
-          setDragMode: function setDragMode(mode) {
-            var options = this.options, dragBox = this.dragBox, face = this.face;
-            if (this.ready && !this.disabled) {
-              var croppable = mode === DRAG_MODE_CROP;
-              var movable = options.movable && mode === DRAG_MODE_MOVE;
-              mode = croppable || movable ? mode : DRAG_MODE_NONE;
-              options.dragMode = mode;
-              setData(dragBox, DATA_ACTION, mode);
-              toggleClass(dragBox, CLASS_CROP, croppable);
-              toggleClass(dragBox, CLASS_MOVE, movable);
-              if (!options.cropBoxMovable) {
-                setData(face, DATA_ACTION, mode);
-                toggleClass(face, CLASS_CROP, croppable);
-                toggleClass(face, CLASS_MOVE, movable);
-              }
-            }
-            return this;
-          }
-        };
-        var AnotherCropper = WINDOW.Cropper;
-        var Cropper2 = /* @__PURE__ */ function() {
-          function Cropper3(element) {
-            var options = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {};
-            _classCallCheck(this, Cropper3);
-            if (!element || !REGEXP_TAG_NAME.test(element.tagName)) {
-              throw new Error("The first argument is required and must be an <img> or <canvas> element.");
-            }
-            this.element = element;
-            this.options = assign({}, DEFAULTS, isPlainObject(options) && options);
-            this.cropped = false;
-            this.disabled = false;
-            this.pointers = {};
-            this.ready = false;
-            this.reloading = false;
-            this.replaced = false;
-            this.sized = false;
-            this.sizing = false;
-            this.init();
-          }
-          _createClass(Cropper3, [{
-            key: "init",
-            value: function init() {
-              var element = this.element;
-              var tagName2 = element.tagName.toLowerCase();
-              var url;
-              if (element[NAMESPACE]) {
-                return;
-              }
-              element[NAMESPACE] = this;
-              if (tagName2 === "img") {
-                this.isImg = true;
-                url = element.getAttribute("src") || "";
-                this.originalUrl = url;
-                if (!url) {
-                  return;
-                }
-                url = element.src;
-              } else if (tagName2 === "canvas" && window.HTMLCanvasElement) {
-                url = element.toDataURL();
-              }
-              this.load(url);
-            }
-          }, {
-            key: "load",
-            value: function load(url) {
-              var _this = this;
-              if (!url) {
-                return;
-              }
-              this.url = url;
-              this.imageData = {};
-              var element = this.element, options = this.options;
-              if (!options.rotatable && !options.scalable) {
-                options.checkOrientation = false;
-              }
-              if (!options.checkOrientation || !window.ArrayBuffer) {
-                this.clone();
-                return;
-              }
-              if (REGEXP_DATA_URL.test(url)) {
-                if (REGEXP_DATA_URL_JPEG.test(url)) {
-                  this.read(dataURLToArrayBuffer(url));
-                } else {
-                  this.clone();
-                }
-                return;
-              }
-              var xhr = new XMLHttpRequest();
-              var clone6 = this.clone.bind(this);
-              this.reloading = true;
-              this.xhr = xhr;
-              xhr.onabort = clone6;
-              xhr.onerror = clone6;
-              xhr.ontimeout = clone6;
-              xhr.onprogress = function() {
-                if (xhr.getResponseHeader("content-type") !== MIME_TYPE_JPEG) {
-                  xhr.abort();
-                }
-              };
-              xhr.onload = function() {
-                _this.read(xhr.response);
-              };
-              xhr.onloadend = function() {
-                _this.reloading = false;
-                _this.xhr = null;
-              };
-              if (options.checkCrossOrigin && isCrossOriginURL(url) && element.crossOrigin) {
-                url = addTimestamp(url);
-              }
-              xhr.open("GET", url, true);
-              xhr.responseType = "arraybuffer";
-              xhr.withCredentials = element.crossOrigin === "use-credentials";
-              xhr.send();
-            }
-          }, {
-            key: "read",
-            value: function read2(arrayBuffer) {
-              var options = this.options, imageData = this.imageData;
-              var orientation = resetAndGetOrientation(arrayBuffer);
-              var rotate2 = 0;
-              var scaleX = 1;
-              var scaleY = 1;
-              if (orientation > 1) {
-                this.url = arrayBufferToDataURL(arrayBuffer, MIME_TYPE_JPEG);
-                var _parseOrientation = parseOrientation(orientation);
-                rotate2 = _parseOrientation.rotate;
-                scaleX = _parseOrientation.scaleX;
-                scaleY = _parseOrientation.scaleY;
-              }
-              if (options.rotatable) {
-                imageData.rotate = rotate2;
-              }
-              if (options.scalable) {
-                imageData.scaleX = scaleX;
-                imageData.scaleY = scaleY;
-              }
-              this.clone();
-            }
-          }, {
-            key: "clone",
-            value: function clone6() {
-              var element = this.element, url = this.url;
-              var crossOrigin = element.crossOrigin;
-              var crossOriginUrl = url;
-              if (this.options.checkCrossOrigin && isCrossOriginURL(url)) {
-                if (!crossOrigin) {
-                  crossOrigin = "anonymous";
-                }
-                crossOriginUrl = addTimestamp(url);
-              }
-              this.crossOrigin = crossOrigin;
-              this.crossOriginUrl = crossOriginUrl;
-              var image = document.createElement("img");
-              if (crossOrigin) {
-                image.crossOrigin = crossOrigin;
-              }
-              image.src = crossOriginUrl || url;
-              image.alt = element.alt || "The image to crop";
-              this.image = image;
-              image.onload = this.start.bind(this);
-              image.onerror = this.stop.bind(this);
-              addClass(image, CLASS_HIDE);
-              element.parentNode.insertBefore(image, element.nextSibling);
-            }
-          }, {
-            key: "start",
-            value: function start2() {
-              var _this2 = this;
-              var image = this.image;
-              image.onload = null;
-              image.onerror = null;
-              this.sizing = true;
-              var isIOSWebKit = WINDOW.navigator && /(?:iPad|iPhone|iPod).*?AppleWebKit/i.test(WINDOW.navigator.userAgent);
-              var done = function done2(naturalWidth, naturalHeight) {
-                assign(_this2.imageData, {
-                  naturalWidth,
-                  naturalHeight,
-                  aspectRatio: naturalWidth / naturalHeight
-                });
-                _this2.initialImageData = assign({}, _this2.imageData);
-                _this2.sizing = false;
-                _this2.sized = true;
-                _this2.build();
-              };
-              if (image.naturalWidth && !isIOSWebKit) {
-                done(image.naturalWidth, image.naturalHeight);
-                return;
-              }
-              var sizingImage = document.createElement("img");
-              var body = document.body || document.documentElement;
-              this.sizingImage = sizingImage;
-              sizingImage.onload = function() {
-                done(sizingImage.width, sizingImage.height);
-                if (!isIOSWebKit) {
-                  body.removeChild(sizingImage);
-                }
-              };
-              sizingImage.src = image.src;
-              if (!isIOSWebKit) {
-                sizingImage.style.cssText = "left:0;max-height:none!important;max-width:none!important;min-height:0!important;min-width:0!important;opacity:0;position:absolute;top:0;z-index:-1;";
-                body.appendChild(sizingImage);
-              }
-            }
-          }, {
-            key: "stop",
-            value: function stop() {
-              var image = this.image;
-              image.onload = null;
-              image.onerror = null;
-              image.parentNode.removeChild(image);
-              this.image = null;
-            }
-          }, {
-            key: "build",
-            value: function build() {
-              if (!this.sized || this.ready) {
-                return;
-              }
-              var element = this.element, options = this.options, image = this.image;
-              var container = element.parentNode;
-              var template = document.createElement("div");
-              template.innerHTML = TEMPLATE;
-              var cropper2 = template.querySelector(".".concat(NAMESPACE, "-container"));
-              var canvas = cropper2.querySelector(".".concat(NAMESPACE, "-canvas"));
-              var dragBox = cropper2.querySelector(".".concat(NAMESPACE, "-drag-box"));
-              var cropBox = cropper2.querySelector(".".concat(NAMESPACE, "-crop-box"));
-              var face = cropBox.querySelector(".".concat(NAMESPACE, "-face"));
-              this.container = container;
-              this.cropper = cropper2;
-              this.canvas = canvas;
-              this.dragBox = dragBox;
-              this.cropBox = cropBox;
-              this.viewBox = cropper2.querySelector(".".concat(NAMESPACE, "-view-box"));
-              this.face = face;
-              canvas.appendChild(image);
-              addClass(element, CLASS_HIDDEN);
-              container.insertBefore(cropper2, element.nextSibling);
-              removeClass(image, CLASS_HIDE);
-              this.initPreview();
-              this.bind();
-              options.initialAspectRatio = Math.max(0, options.initialAspectRatio) || NaN;
-              options.aspectRatio = Math.max(0, options.aspectRatio) || NaN;
-              options.viewMode = Math.max(0, Math.min(3, Math.round(options.viewMode))) || 0;
-              addClass(cropBox, CLASS_HIDDEN);
-              if (!options.guides) {
-                addClass(cropBox.getElementsByClassName("".concat(NAMESPACE, "-dashed")), CLASS_HIDDEN);
-              }
-              if (!options.center) {
-                addClass(cropBox.getElementsByClassName("".concat(NAMESPACE, "-center")), CLASS_HIDDEN);
-              }
-              if (options.background) {
-                addClass(cropper2, "".concat(NAMESPACE, "-bg"));
-              }
-              if (!options.highlight) {
-                addClass(face, CLASS_INVISIBLE);
-              }
-              if (options.cropBoxMovable) {
-                addClass(face, CLASS_MOVE);
-                setData(face, DATA_ACTION, ACTION_ALL);
-              }
-              if (!options.cropBoxResizable) {
-                addClass(cropBox.getElementsByClassName("".concat(NAMESPACE, "-line")), CLASS_HIDDEN);
-                addClass(cropBox.getElementsByClassName("".concat(NAMESPACE, "-point")), CLASS_HIDDEN);
-              }
-              this.render();
-              this.ready = true;
-              this.setDragMode(options.dragMode);
-              if (options.autoCrop) {
-                this.crop();
-              }
-              this.setData(options.data);
-              if (isFunction2(options.ready)) {
-                addListener2(element, EVENT_READY, options.ready, {
-                  once: true
-                });
-              }
-              dispatchEvent(element, EVENT_READY);
-            }
-          }, {
-            key: "unbuild",
-            value: function unbuild() {
-              if (!this.ready) {
-                return;
-              }
-              this.ready = false;
-              this.unbind();
-              this.resetPreview();
-              var parentNode = this.cropper.parentNode;
-              if (parentNode) {
-                parentNode.removeChild(this.cropper);
-              }
-              removeClass(this.element, CLASS_HIDDEN);
-            }
-          }, {
-            key: "uncreate",
-            value: function uncreate() {
-              if (this.ready) {
-                this.unbuild();
-                this.ready = false;
-                this.cropped = false;
-              } else if (this.sizing) {
-                this.sizingImage.onload = null;
-                this.sizing = false;
-                this.sized = false;
-              } else if (this.reloading) {
-                this.xhr.onabort = null;
-                this.xhr.abort();
-              } else if (this.image) {
-                this.stop();
-              }
-            }
-            /**
-             * Get the no conflict cropper class.
-             * @returns {Cropper} The cropper class.
-             */
-          }], [{
-            key: "noConflict",
-            value: function noConflict() {
-              window.Cropper = AnotherCropper;
-              return Cropper3;
-            }
-            /**
-             * Change the default options.
-             * @param {Object} options - The new default options.
-             */
-          }, {
-            key: "setDefaults",
-            value: function setDefaults(options) {
-              assign(DEFAULTS, isPlainObject(options) && options);
-            }
-          }]);
-          return Cropper3;
-        }();
-        assign(Cropper2.prototype, render3, preview, events, handlers, change, methods);
-        return Cropper2;
-      });
-    }
-  });
-
   // node_modules/showdown/dist/showdown.js
   var require_showdown = __commonJS({
     "node_modules/showdown/dist/showdown.js"(exports, module) {
@@ -15245,6 +12520,2731 @@
           root2.showdown = showdown2;
         }
       }).call(exports);
+    }
+  });
+
+  // node_modules/cropperjs/dist/cropper.js
+  var require_cropper = __commonJS({
+    "node_modules/cropperjs/dist/cropper.js"(exports, module) {
+      (function(global, factory) {
+        typeof exports === "object" && typeof module !== "undefined" ? module.exports = factory() : typeof define === "function" && define.amd ? define(factory) : (global = typeof globalThis !== "undefined" ? globalThis : global || self, global.Cropper = factory());
+      })(exports, function() {
+        "use strict";
+        function ownKeys(object, enumerableOnly) {
+          var keys2 = Object.keys(object);
+          if (Object.getOwnPropertySymbols) {
+            var symbols = Object.getOwnPropertySymbols(object);
+            enumerableOnly && (symbols = symbols.filter(function(sym) {
+              return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+            })), keys2.push.apply(keys2, symbols);
+          }
+          return keys2;
+        }
+        function _objectSpread2(target) {
+          for (var i = 1; i < arguments.length; i++) {
+            var source = null != arguments[i] ? arguments[i] : {};
+            i % 2 ? ownKeys(Object(source), true).forEach(function(key) {
+              _defineProperty(target, key, source[key]);
+            }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function(key) {
+              Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+            });
+          }
+          return target;
+        }
+        function _typeof(obj) {
+          "@babel/helpers - typeof";
+          return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(obj2) {
+            return typeof obj2;
+          } : function(obj2) {
+            return obj2 && "function" == typeof Symbol && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
+          }, _typeof(obj);
+        }
+        function _classCallCheck(instance, Constructor) {
+          if (!(instance instanceof Constructor)) {
+            throw new TypeError("Cannot call a class as a function");
+          }
+        }
+        function _defineProperties(target, props) {
+          for (var i = 0; i < props.length; i++) {
+            var descriptor = props[i];
+            descriptor.enumerable = descriptor.enumerable || false;
+            descriptor.configurable = true;
+            if ("value" in descriptor) descriptor.writable = true;
+            Object.defineProperty(target, descriptor.key, descriptor);
+          }
+        }
+        function _createClass(Constructor, protoProps, staticProps) {
+          if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+          if (staticProps) _defineProperties(Constructor, staticProps);
+          Object.defineProperty(Constructor, "prototype", {
+            writable: false
+          });
+          return Constructor;
+        }
+        function _defineProperty(obj, key, value) {
+          if (key in obj) {
+            Object.defineProperty(obj, key, {
+              value,
+              enumerable: true,
+              configurable: true,
+              writable: true
+            });
+          } else {
+            obj[key] = value;
+          }
+          return obj;
+        }
+        function _toConsumableArray(arr) {
+          return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
+        }
+        function _arrayWithoutHoles(arr) {
+          if (Array.isArray(arr)) return _arrayLikeToArray(arr);
+        }
+        function _iterableToArray(iter) {
+          if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
+        }
+        function _unsupportedIterableToArray(o, minLen) {
+          if (!o) return;
+          if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+          var n2 = Object.prototype.toString.call(o).slice(8, -1);
+          if (n2 === "Object" && o.constructor) n2 = o.constructor.name;
+          if (n2 === "Map" || n2 === "Set") return Array.from(o);
+          if (n2 === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n2)) return _arrayLikeToArray(o, minLen);
+        }
+        function _arrayLikeToArray(arr, len) {
+          if (len == null || len > arr.length) len = arr.length;
+          for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+          return arr2;
+        }
+        function _nonIterableSpread() {
+          throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+        }
+        var IS_BROWSER = typeof window !== "undefined" && typeof window.document !== "undefined";
+        var WINDOW = IS_BROWSER ? window : {};
+        var IS_TOUCH_DEVICE = IS_BROWSER && WINDOW.document.documentElement ? "ontouchstart" in WINDOW.document.documentElement : false;
+        var HAS_POINTER_EVENT = IS_BROWSER ? "PointerEvent" in WINDOW : false;
+        var NAMESPACE = "cropper";
+        var ACTION_ALL = "all";
+        var ACTION_CROP = "crop";
+        var ACTION_MOVE = "move";
+        var ACTION_ZOOM = "zoom";
+        var ACTION_EAST = "e";
+        var ACTION_WEST = "w";
+        var ACTION_SOUTH = "s";
+        var ACTION_NORTH = "n";
+        var ACTION_NORTH_EAST = "ne";
+        var ACTION_NORTH_WEST = "nw";
+        var ACTION_SOUTH_EAST = "se";
+        var ACTION_SOUTH_WEST = "sw";
+        var CLASS_CROP = "".concat(NAMESPACE, "-crop");
+        var CLASS_DISABLED = "".concat(NAMESPACE, "-disabled");
+        var CLASS_HIDDEN = "".concat(NAMESPACE, "-hidden");
+        var CLASS_HIDE = "".concat(NAMESPACE, "-hide");
+        var CLASS_INVISIBLE = "".concat(NAMESPACE, "-invisible");
+        var CLASS_MODAL = "".concat(NAMESPACE, "-modal");
+        var CLASS_MOVE = "".concat(NAMESPACE, "-move");
+        var DATA_ACTION = "".concat(NAMESPACE, "Action");
+        var DATA_PREVIEW = "".concat(NAMESPACE, "Preview");
+        var DRAG_MODE_CROP = "crop";
+        var DRAG_MODE_MOVE = "move";
+        var DRAG_MODE_NONE = "none";
+        var EVENT_CROP = "crop";
+        var EVENT_CROP_END = "cropend";
+        var EVENT_CROP_MOVE = "cropmove";
+        var EVENT_CROP_START = "cropstart";
+        var EVENT_DBLCLICK = "dblclick";
+        var EVENT_TOUCH_START = IS_TOUCH_DEVICE ? "touchstart" : "mousedown";
+        var EVENT_TOUCH_MOVE = IS_TOUCH_DEVICE ? "touchmove" : "mousemove";
+        var EVENT_TOUCH_END = IS_TOUCH_DEVICE ? "touchend touchcancel" : "mouseup";
+        var EVENT_POINTER_DOWN = HAS_POINTER_EVENT ? "pointerdown" : EVENT_TOUCH_START;
+        var EVENT_POINTER_MOVE = HAS_POINTER_EVENT ? "pointermove" : EVENT_TOUCH_MOVE;
+        var EVENT_POINTER_UP = HAS_POINTER_EVENT ? "pointerup pointercancel" : EVENT_TOUCH_END;
+        var EVENT_READY = "ready";
+        var EVENT_RESIZE = "resize";
+        var EVENT_WHEEL = "wheel";
+        var EVENT_ZOOM = "zoom";
+        var MIME_TYPE_JPEG = "image/jpeg";
+        var REGEXP_ACTIONS = /^e|w|s|n|se|sw|ne|nw|all|crop|move|zoom$/;
+        var REGEXP_DATA_URL = /^data:/;
+        var REGEXP_DATA_URL_JPEG = /^data:image\/jpeg;base64,/;
+        var REGEXP_TAG_NAME = /^img|canvas$/i;
+        var MIN_CONTAINER_WIDTH = 200;
+        var MIN_CONTAINER_HEIGHT = 100;
+        var DEFAULTS = {
+          // Define the view mode of the cropper
+          viewMode: 0,
+          // 0, 1, 2, 3
+          // Define the dragging mode of the cropper
+          dragMode: DRAG_MODE_CROP,
+          // 'crop', 'move' or 'none'
+          // Define the initial aspect ratio of the crop box
+          initialAspectRatio: NaN,
+          // Define the aspect ratio of the crop box
+          aspectRatio: NaN,
+          // An object with the previous cropping result data
+          data: null,
+          // A selector for adding extra containers to preview
+          preview: "",
+          // Re-render the cropper when resize the window
+          responsive: true,
+          // Restore the cropped area after resize the window
+          restore: true,
+          // Check if the current image is a cross-origin image
+          checkCrossOrigin: true,
+          // Check the current image's Exif Orientation information
+          checkOrientation: true,
+          // Show the black modal
+          modal: true,
+          // Show the dashed lines for guiding
+          guides: true,
+          // Show the center indicator for guiding
+          center: true,
+          // Show the white modal to highlight the crop box
+          highlight: true,
+          // Show the grid background
+          background: true,
+          // Enable to crop the image automatically when initialize
+          autoCrop: true,
+          // Define the percentage of automatic cropping area when initializes
+          autoCropArea: 0.8,
+          // Enable to move the image
+          movable: true,
+          // Enable to rotate the image
+          rotatable: true,
+          // Enable to scale the image
+          scalable: true,
+          // Enable to zoom the image
+          zoomable: true,
+          // Enable to zoom the image by dragging touch
+          zoomOnTouch: true,
+          // Enable to zoom the image by wheeling mouse
+          zoomOnWheel: true,
+          // Define zoom ratio when zoom the image by wheeling mouse
+          wheelZoomRatio: 0.1,
+          // Enable to move the crop box
+          cropBoxMovable: true,
+          // Enable to resize the crop box
+          cropBoxResizable: true,
+          // Toggle drag mode between "crop" and "move" when click twice on the cropper
+          toggleDragModeOnDblclick: true,
+          // Size limitation
+          minCanvasWidth: 0,
+          minCanvasHeight: 0,
+          minCropBoxWidth: 0,
+          minCropBoxHeight: 0,
+          minContainerWidth: MIN_CONTAINER_WIDTH,
+          minContainerHeight: MIN_CONTAINER_HEIGHT,
+          // Shortcuts of events
+          ready: null,
+          cropstart: null,
+          cropmove: null,
+          cropend: null,
+          crop: null,
+          zoom: null
+        };
+        var TEMPLATE = '<div class="cropper-container" touch-action="none"><div class="cropper-wrap-box"><div class="cropper-canvas"></div></div><div class="cropper-drag-box"></div><div class="cropper-crop-box"><span class="cropper-view-box"></span><span class="cropper-dashed dashed-h"></span><span class="cropper-dashed dashed-v"></span><span class="cropper-center"></span><span class="cropper-face"></span><span class="cropper-line line-e" data-cropper-action="e"></span><span class="cropper-line line-n" data-cropper-action="n"></span><span class="cropper-line line-w" data-cropper-action="w"></span><span class="cropper-line line-s" data-cropper-action="s"></span><span class="cropper-point point-e" data-cropper-action="e"></span><span class="cropper-point point-n" data-cropper-action="n"></span><span class="cropper-point point-w" data-cropper-action="w"></span><span class="cropper-point point-s" data-cropper-action="s"></span><span class="cropper-point point-ne" data-cropper-action="ne"></span><span class="cropper-point point-nw" data-cropper-action="nw"></span><span class="cropper-point point-sw" data-cropper-action="sw"></span><span class="cropper-point point-se" data-cropper-action="se"></span></div></div>';
+        var isNaN2 = Number.isNaN || WINDOW.isNaN;
+        function isNumber3(value) {
+          return typeof value === "number" && !isNaN2(value);
+        }
+        var isPositiveNumber = function isPositiveNumber2(value) {
+          return value > 0 && value < Infinity;
+        };
+        function isUndefined2(value) {
+          return typeof value === "undefined";
+        }
+        function isObject2(value) {
+          return _typeof(value) === "object" && value !== null;
+        }
+        var hasOwnProperty3 = Object.prototype.hasOwnProperty;
+        function isPlainObject(value) {
+          if (!isObject2(value)) {
+            return false;
+          }
+          try {
+            var _constructor = value.constructor;
+            var prototype = _constructor.prototype;
+            return _constructor && prototype && hasOwnProperty3.call(prototype, "isPrototypeOf");
+          } catch (error) {
+            return false;
+          }
+        }
+        function isFunction2(value) {
+          return typeof value === "function";
+        }
+        var slice2 = Array.prototype.slice;
+        function toArray(value) {
+          return Array.from ? Array.from(value) : slice2.call(value);
+        }
+        function forEach(data2, callback2) {
+          if (data2 && isFunction2(callback2)) {
+            if (Array.isArray(data2) || isNumber3(data2.length)) {
+              toArray(data2).forEach(function(value, key) {
+                callback2.call(data2, value, key, data2);
+              });
+            } else if (isObject2(data2)) {
+              Object.keys(data2).forEach(function(key) {
+                callback2.call(data2, data2[key], key, data2);
+              });
+            }
+          }
+          return data2;
+        }
+        var assign = Object.assign || function assign2(target) {
+          for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+            args[_key - 1] = arguments[_key];
+          }
+          if (isObject2(target) && args.length > 0) {
+            args.forEach(function(arg) {
+              if (isObject2(arg)) {
+                Object.keys(arg).forEach(function(key) {
+                  target[key] = arg[key];
+                });
+              }
+            });
+          }
+          return target;
+        };
+        var REGEXP_DECIMALS = /\.\d*(?:0|9){12}\d*$/;
+        function normalizeDecimalNumber(value) {
+          var times = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : 1e11;
+          return REGEXP_DECIMALS.test(value) ? Math.round(value * times) / times : value;
+        }
+        var REGEXP_SUFFIX = /^width|height|left|top|marginLeft|marginTop$/;
+        function setStyle2(element, styles) {
+          var style = element.style;
+          forEach(styles, function(value, property) {
+            if (REGEXP_SUFFIX.test(property) && isNumber3(value)) {
+              value = "".concat(value, "px");
+            }
+            style[property] = value;
+          });
+        }
+        function hasClass(element, value) {
+          return element.classList ? element.classList.contains(value) : element.className.indexOf(value) > -1;
+        }
+        function addClass(element, value) {
+          if (!value) {
+            return;
+          }
+          if (isNumber3(element.length)) {
+            forEach(element, function(elem) {
+              addClass(elem, value);
+            });
+            return;
+          }
+          if (element.classList) {
+            element.classList.add(value);
+            return;
+          }
+          var className = element.className.trim();
+          if (!className) {
+            element.className = value;
+          } else if (className.indexOf(value) < 0) {
+            element.className = "".concat(className, " ").concat(value);
+          }
+        }
+        function removeClass(element, value) {
+          if (!value) {
+            return;
+          }
+          if (isNumber3(element.length)) {
+            forEach(element, function(elem) {
+              removeClass(elem, value);
+            });
+            return;
+          }
+          if (element.classList) {
+            element.classList.remove(value);
+            return;
+          }
+          if (element.className.indexOf(value) >= 0) {
+            element.className = element.className.replace(value, "");
+          }
+        }
+        function toggleClass(element, value, added) {
+          if (!value) {
+            return;
+          }
+          if (isNumber3(element.length)) {
+            forEach(element, function(elem) {
+              toggleClass(elem, value, added);
+            });
+            return;
+          }
+          if (added) {
+            addClass(element, value);
+          } else {
+            removeClass(element, value);
+          }
+        }
+        var REGEXP_CAMEL_CASE = /([a-z\d])([A-Z])/g;
+        function toParamCase(value) {
+          return value.replace(REGEXP_CAMEL_CASE, "$1-$2").toLowerCase();
+        }
+        function getData(element, name) {
+          if (isObject2(element[name])) {
+            return element[name];
+          }
+          if (element.dataset) {
+            return element.dataset[name];
+          }
+          return element.getAttribute("data-".concat(toParamCase(name)));
+        }
+        function setData(element, name, data2) {
+          if (isObject2(data2)) {
+            element[name] = data2;
+          } else if (element.dataset) {
+            element.dataset[name] = data2;
+          } else {
+            element.setAttribute("data-".concat(toParamCase(name)), data2);
+          }
+        }
+        function removeData(element, name) {
+          if (isObject2(element[name])) {
+            try {
+              delete element[name];
+            } catch (error) {
+              element[name] = void 0;
+            }
+          } else if (element.dataset) {
+            try {
+              delete element.dataset[name];
+            } catch (error) {
+              element.dataset[name] = void 0;
+            }
+          } else {
+            element.removeAttribute("data-".concat(toParamCase(name)));
+          }
+        }
+        var REGEXP_SPACES = /\s\s*/;
+        var onceSupported = function() {
+          var supported = false;
+          if (IS_BROWSER) {
+            var once = false;
+            var listener = function listener2() {
+            };
+            var options = Object.defineProperty({}, "once", {
+              get: function get() {
+                supported = true;
+                return once;
+              },
+              /**
+               * This setter can fix a `TypeError` in strict mode
+               * {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Errors/Getter_only}
+               * @param {boolean} value - The value to set
+               */
+              set: function set2(value) {
+                once = value;
+              }
+            });
+            WINDOW.addEventListener("test", listener, options);
+            WINDOW.removeEventListener("test", listener, options);
+          }
+          return supported;
+        }();
+        function removeListener2(element, type, listener) {
+          var options = arguments.length > 3 && arguments[3] !== void 0 ? arguments[3] : {};
+          var handler = listener;
+          type.trim().split(REGEXP_SPACES).forEach(function(event3) {
+            if (!onceSupported) {
+              var listeners = element.listeners;
+              if (listeners && listeners[event3] && listeners[event3][listener]) {
+                handler = listeners[event3][listener];
+                delete listeners[event3][listener];
+                if (Object.keys(listeners[event3]).length === 0) {
+                  delete listeners[event3];
+                }
+                if (Object.keys(listeners).length === 0) {
+                  delete element.listeners;
+                }
+              }
+            }
+            element.removeEventListener(event3, handler, options);
+          });
+        }
+        function addListener2(element, type, listener) {
+          var options = arguments.length > 3 && arguments[3] !== void 0 ? arguments[3] : {};
+          var _handler = listener;
+          type.trim().split(REGEXP_SPACES).forEach(function(event3) {
+            if (options.once && !onceSupported) {
+              var _element$listeners = element.listeners, listeners = _element$listeners === void 0 ? {} : _element$listeners;
+              _handler = function handler() {
+                delete listeners[event3][listener];
+                element.removeEventListener(event3, _handler, options);
+                for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+                  args[_key2] = arguments[_key2];
+                }
+                listener.apply(element, args);
+              };
+              if (!listeners[event3]) {
+                listeners[event3] = {};
+              }
+              if (listeners[event3][listener]) {
+                element.removeEventListener(event3, listeners[event3][listener], options);
+              }
+              listeners[event3][listener] = _handler;
+              element.listeners = listeners;
+            }
+            element.addEventListener(event3, _handler, options);
+          });
+        }
+        function dispatchEvent(element, type, data2) {
+          var event3;
+          if (isFunction2(Event) && isFunction2(CustomEvent)) {
+            event3 = new CustomEvent(type, {
+              detail: data2,
+              bubbles: true,
+              cancelable: true
+            });
+          } else {
+            event3 = document.createEvent("CustomEvent");
+            event3.initCustomEvent(type, true, true, data2);
+          }
+          return element.dispatchEvent(event3);
+        }
+        function getOffset(element) {
+          var box = element.getBoundingClientRect();
+          return {
+            left: box.left + (window.pageXOffset - document.documentElement.clientLeft),
+            top: box.top + (window.pageYOffset - document.documentElement.clientTop)
+          };
+        }
+        var location = WINDOW.location;
+        var REGEXP_ORIGINS = /^(\w+:)\/\/([^:/?#]*):?(\d*)/i;
+        function isCrossOriginURL(url) {
+          var parts = url.match(REGEXP_ORIGINS);
+          return parts !== null && (parts[1] !== location.protocol || parts[2] !== location.hostname || parts[3] !== location.port);
+        }
+        function addTimestamp(url) {
+          var timestamp = "timestamp=".concat((/* @__PURE__ */ new Date()).getTime());
+          return url + (url.indexOf("?") === -1 ? "?" : "&") + timestamp;
+        }
+        function getTransforms(_ref) {
+          var rotate2 = _ref.rotate, scaleX = _ref.scaleX, scaleY = _ref.scaleY, translateX = _ref.translateX, translateY = _ref.translateY;
+          var values = [];
+          if (isNumber3(translateX) && translateX !== 0) {
+            values.push("translateX(".concat(translateX, "px)"));
+          }
+          if (isNumber3(translateY) && translateY !== 0) {
+            values.push("translateY(".concat(translateY, "px)"));
+          }
+          if (isNumber3(rotate2) && rotate2 !== 0) {
+            values.push("rotate(".concat(rotate2, "deg)"));
+          }
+          if (isNumber3(scaleX) && scaleX !== 1) {
+            values.push("scaleX(".concat(scaleX, ")"));
+          }
+          if (isNumber3(scaleY) && scaleY !== 1) {
+            values.push("scaleY(".concat(scaleY, ")"));
+          }
+          var transform2 = values.length ? values.join(" ") : "none";
+          return {
+            WebkitTransform: transform2,
+            msTransform: transform2,
+            transform: transform2
+          };
+        }
+        function getMaxZoomRatio(pointers) {
+          var pointers2 = _objectSpread2({}, pointers);
+          var maxRatio = 0;
+          forEach(pointers, function(pointer, pointerId) {
+            delete pointers2[pointerId];
+            forEach(pointers2, function(pointer2) {
+              var x1 = Math.abs(pointer.startX - pointer2.startX);
+              var y1 = Math.abs(pointer.startY - pointer2.startY);
+              var x2 = Math.abs(pointer.endX - pointer2.endX);
+              var y2 = Math.abs(pointer.endY - pointer2.endY);
+              var z1 = Math.sqrt(x1 * x1 + y1 * y1);
+              var z2 = Math.sqrt(x2 * x2 + y2 * y2);
+              var ratio = (z2 - z1) / z1;
+              if (Math.abs(ratio) > Math.abs(maxRatio)) {
+                maxRatio = ratio;
+              }
+            });
+          });
+          return maxRatio;
+        }
+        function getPointer(_ref2, endOnly) {
+          var pageX = _ref2.pageX, pageY = _ref2.pageY;
+          var end2 = {
+            endX: pageX,
+            endY: pageY
+          };
+          return endOnly ? end2 : _objectSpread2({
+            startX: pageX,
+            startY: pageY
+          }, end2);
+        }
+        function getPointersCenter(pointers) {
+          var pageX = 0;
+          var pageY = 0;
+          var count = 0;
+          forEach(pointers, function(_ref3) {
+            var startX = _ref3.startX, startY = _ref3.startY;
+            pageX += startX;
+            pageY += startY;
+            count += 1;
+          });
+          pageX /= count;
+          pageY /= count;
+          return {
+            pageX,
+            pageY
+          };
+        }
+        function getAdjustedSizes(_ref4) {
+          var aspectRatio = _ref4.aspectRatio, height = _ref4.height, width = _ref4.width;
+          var type = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : "contain";
+          var isValidWidth = isPositiveNumber(width);
+          var isValidHeight = isPositiveNumber(height);
+          if (isValidWidth && isValidHeight) {
+            var adjustedWidth = height * aspectRatio;
+            if (type === "contain" && adjustedWidth > width || type === "cover" && adjustedWidth < width) {
+              height = width / aspectRatio;
+            } else {
+              width = height * aspectRatio;
+            }
+          } else if (isValidWidth) {
+            height = width / aspectRatio;
+          } else if (isValidHeight) {
+            width = height * aspectRatio;
+          }
+          return {
+            width,
+            height
+          };
+        }
+        function getRotatedSizes(_ref5) {
+          var width = _ref5.width, height = _ref5.height, degree = _ref5.degree;
+          degree = Math.abs(degree) % 180;
+          if (degree === 90) {
+            return {
+              width: height,
+              height: width
+            };
+          }
+          var arc = degree % 90 * Math.PI / 180;
+          var sinArc = Math.sin(arc);
+          var cosArc = Math.cos(arc);
+          var newWidth = width * cosArc + height * sinArc;
+          var newHeight = width * sinArc + height * cosArc;
+          return degree > 90 ? {
+            width: newHeight,
+            height: newWidth
+          } : {
+            width: newWidth,
+            height: newHeight
+          };
+        }
+        function getSourceCanvas(image, _ref6, _ref7, _ref8) {
+          var imageAspectRatio = _ref6.aspectRatio, imageNaturalWidth = _ref6.naturalWidth, imageNaturalHeight = _ref6.naturalHeight, _ref6$rotate = _ref6.rotate, rotate2 = _ref6$rotate === void 0 ? 0 : _ref6$rotate, _ref6$scaleX = _ref6.scaleX, scaleX = _ref6$scaleX === void 0 ? 1 : _ref6$scaleX, _ref6$scaleY = _ref6.scaleY, scaleY = _ref6$scaleY === void 0 ? 1 : _ref6$scaleY;
+          var aspectRatio = _ref7.aspectRatio, naturalWidth = _ref7.naturalWidth, naturalHeight = _ref7.naturalHeight;
+          var _ref8$fillColor = _ref8.fillColor, fillColor = _ref8$fillColor === void 0 ? "transparent" : _ref8$fillColor, _ref8$imageSmoothingE = _ref8.imageSmoothingEnabled, imageSmoothingEnabled = _ref8$imageSmoothingE === void 0 ? true : _ref8$imageSmoothingE, _ref8$imageSmoothingQ = _ref8.imageSmoothingQuality, imageSmoothingQuality = _ref8$imageSmoothingQ === void 0 ? "low" : _ref8$imageSmoothingQ, _ref8$maxWidth = _ref8.maxWidth, maxWidth = _ref8$maxWidth === void 0 ? Infinity : _ref8$maxWidth, _ref8$maxHeight = _ref8.maxHeight, maxHeight = _ref8$maxHeight === void 0 ? Infinity : _ref8$maxHeight, _ref8$minWidth = _ref8.minWidth, minWidth = _ref8$minWidth === void 0 ? 0 : _ref8$minWidth, _ref8$minHeight = _ref8.minHeight, minHeight = _ref8$minHeight === void 0 ? 0 : _ref8$minHeight;
+          var canvas = document.createElement("canvas");
+          var context = canvas.getContext("2d");
+          var maxSizes = getAdjustedSizes({
+            aspectRatio,
+            width: maxWidth,
+            height: maxHeight
+          });
+          var minSizes = getAdjustedSizes({
+            aspectRatio,
+            width: minWidth,
+            height: minHeight
+          }, "cover");
+          var width = Math.min(maxSizes.width, Math.max(minSizes.width, naturalWidth));
+          var height = Math.min(maxSizes.height, Math.max(minSizes.height, naturalHeight));
+          var destMaxSizes = getAdjustedSizes({
+            aspectRatio: imageAspectRatio,
+            width: maxWidth,
+            height: maxHeight
+          });
+          var destMinSizes = getAdjustedSizes({
+            aspectRatio: imageAspectRatio,
+            width: minWidth,
+            height: minHeight
+          }, "cover");
+          var destWidth = Math.min(destMaxSizes.width, Math.max(destMinSizes.width, imageNaturalWidth));
+          var destHeight = Math.min(destMaxSizes.height, Math.max(destMinSizes.height, imageNaturalHeight));
+          var params = [-destWidth / 2, -destHeight / 2, destWidth, destHeight];
+          canvas.width = normalizeDecimalNumber(width);
+          canvas.height = normalizeDecimalNumber(height);
+          context.fillStyle = fillColor;
+          context.fillRect(0, 0, width, height);
+          context.save();
+          context.translate(width / 2, height / 2);
+          context.rotate(rotate2 * Math.PI / 180);
+          context.scale(scaleX, scaleY);
+          context.imageSmoothingEnabled = imageSmoothingEnabled;
+          context.imageSmoothingQuality = imageSmoothingQuality;
+          context.drawImage.apply(context, [image].concat(_toConsumableArray(params.map(function(param) {
+            return Math.floor(normalizeDecimalNumber(param));
+          }))));
+          context.restore();
+          return canvas;
+        }
+        var fromCharCode = String.fromCharCode;
+        function getStringFromCharCode(dataView, start2, length) {
+          var str = "";
+          length += start2;
+          for (var i = start2; i < length; i += 1) {
+            str += fromCharCode(dataView.getUint8(i));
+          }
+          return str;
+        }
+        var REGEXP_DATA_URL_HEAD = /^data:.*,/;
+        function dataURLToArrayBuffer(dataURL) {
+          var base64 = dataURL.replace(REGEXP_DATA_URL_HEAD, "");
+          var binary = atob(base64);
+          var arrayBuffer = new ArrayBuffer(binary.length);
+          var uint8 = new Uint8Array(arrayBuffer);
+          forEach(uint8, function(value, i) {
+            uint8[i] = binary.charCodeAt(i);
+          });
+          return arrayBuffer;
+        }
+        function arrayBufferToDataURL(arrayBuffer, mimeType) {
+          var chunks = [];
+          var chunkSize = 8192;
+          var uint8 = new Uint8Array(arrayBuffer);
+          while (uint8.length > 0) {
+            chunks.push(fromCharCode.apply(null, toArray(uint8.subarray(0, chunkSize))));
+            uint8 = uint8.subarray(chunkSize);
+          }
+          return "data:".concat(mimeType, ";base64,").concat(btoa(chunks.join("")));
+        }
+        function resetAndGetOrientation(arrayBuffer) {
+          var dataView = new DataView(arrayBuffer);
+          var orientation;
+          try {
+            var littleEndian;
+            var app1Start;
+            var ifdStart;
+            if (dataView.getUint8(0) === 255 && dataView.getUint8(1) === 216) {
+              var length = dataView.byteLength;
+              var offset3 = 2;
+              while (offset3 + 1 < length) {
+                if (dataView.getUint8(offset3) === 255 && dataView.getUint8(offset3 + 1) === 225) {
+                  app1Start = offset3;
+                  break;
+                }
+                offset3 += 1;
+              }
+            }
+            if (app1Start) {
+              var exifIDCode = app1Start + 4;
+              var tiffOffset = app1Start + 10;
+              if (getStringFromCharCode(dataView, exifIDCode, 4) === "Exif") {
+                var endianness = dataView.getUint16(tiffOffset);
+                littleEndian = endianness === 18761;
+                if (littleEndian || endianness === 19789) {
+                  if (dataView.getUint16(tiffOffset + 2, littleEndian) === 42) {
+                    var firstIFDOffset = dataView.getUint32(tiffOffset + 4, littleEndian);
+                    if (firstIFDOffset >= 8) {
+                      ifdStart = tiffOffset + firstIFDOffset;
+                    }
+                  }
+                }
+              }
+            }
+            if (ifdStart) {
+              var _length = dataView.getUint16(ifdStart, littleEndian);
+              var _offset;
+              var i;
+              for (i = 0; i < _length; i += 1) {
+                _offset = ifdStart + i * 12 + 2;
+                if (dataView.getUint16(_offset, littleEndian) === 274) {
+                  _offset += 8;
+                  orientation = dataView.getUint16(_offset, littleEndian);
+                  dataView.setUint16(_offset, 1, littleEndian);
+                  break;
+                }
+              }
+            }
+          } catch (error) {
+            orientation = 1;
+          }
+          return orientation;
+        }
+        function parseOrientation(orientation) {
+          var rotate2 = 0;
+          var scaleX = 1;
+          var scaleY = 1;
+          switch (orientation) {
+            // Flip horizontal
+            case 2:
+              scaleX = -1;
+              break;
+            // Rotate left 180°
+            case 3:
+              rotate2 = -180;
+              break;
+            // Flip vertical
+            case 4:
+              scaleY = -1;
+              break;
+            // Flip vertical and rotate right 90°
+            case 5:
+              rotate2 = 90;
+              scaleY = -1;
+              break;
+            // Rotate right 90°
+            case 6:
+              rotate2 = 90;
+              break;
+            // Flip horizontal and rotate right 90°
+            case 7:
+              rotate2 = 90;
+              scaleX = -1;
+              break;
+            // Rotate left 90°
+            case 8:
+              rotate2 = -90;
+              break;
+          }
+          return {
+            rotate: rotate2,
+            scaleX,
+            scaleY
+          };
+        }
+        var render3 = {
+          render: function render4() {
+            this.initContainer();
+            this.initCanvas();
+            this.initCropBox();
+            this.renderCanvas();
+            if (this.cropped) {
+              this.renderCropBox();
+            }
+          },
+          initContainer: function initContainer() {
+            var element = this.element, options = this.options, container = this.container, cropper2 = this.cropper;
+            var minWidth = Number(options.minContainerWidth);
+            var minHeight = Number(options.minContainerHeight);
+            addClass(cropper2, CLASS_HIDDEN);
+            removeClass(element, CLASS_HIDDEN);
+            var containerData = {
+              width: Math.max(container.offsetWidth, minWidth >= 0 ? minWidth : MIN_CONTAINER_WIDTH),
+              height: Math.max(container.offsetHeight, minHeight >= 0 ? minHeight : MIN_CONTAINER_HEIGHT)
+            };
+            this.containerData = containerData;
+            setStyle2(cropper2, {
+              width: containerData.width,
+              height: containerData.height
+            });
+            addClass(element, CLASS_HIDDEN);
+            removeClass(cropper2, CLASS_HIDDEN);
+          },
+          // Canvas (image wrapper)
+          initCanvas: function initCanvas2() {
+            var containerData = this.containerData, imageData = this.imageData;
+            var viewMode = this.options.viewMode;
+            var rotated = Math.abs(imageData.rotate) % 180 === 90;
+            var naturalWidth = rotated ? imageData.naturalHeight : imageData.naturalWidth;
+            var naturalHeight = rotated ? imageData.naturalWidth : imageData.naturalHeight;
+            var aspectRatio = naturalWidth / naturalHeight;
+            var canvasWidth = containerData.width;
+            var canvasHeight = containerData.height;
+            if (containerData.height * aspectRatio > containerData.width) {
+              if (viewMode === 3) {
+                canvasWidth = containerData.height * aspectRatio;
+              } else {
+                canvasHeight = containerData.width / aspectRatio;
+              }
+            } else if (viewMode === 3) {
+              canvasHeight = containerData.width / aspectRatio;
+            } else {
+              canvasWidth = containerData.height * aspectRatio;
+            }
+            var canvasData = {
+              aspectRatio,
+              naturalWidth,
+              naturalHeight,
+              width: canvasWidth,
+              height: canvasHeight
+            };
+            this.canvasData = canvasData;
+            this.limited = viewMode === 1 || viewMode === 2;
+            this.limitCanvas(true, true);
+            canvasData.width = Math.min(Math.max(canvasData.width, canvasData.minWidth), canvasData.maxWidth);
+            canvasData.height = Math.min(Math.max(canvasData.height, canvasData.minHeight), canvasData.maxHeight);
+            canvasData.left = (containerData.width - canvasData.width) / 2;
+            canvasData.top = (containerData.height - canvasData.height) / 2;
+            canvasData.oldLeft = canvasData.left;
+            canvasData.oldTop = canvasData.top;
+            this.initialCanvasData = assign({}, canvasData);
+          },
+          limitCanvas: function limitCanvas(sizeLimited, positionLimited) {
+            var options = this.options, containerData = this.containerData, canvasData = this.canvasData, cropBoxData = this.cropBoxData;
+            var viewMode = options.viewMode;
+            var aspectRatio = canvasData.aspectRatio;
+            var cropped = this.cropped && cropBoxData;
+            if (sizeLimited) {
+              var minCanvasWidth = Number(options.minCanvasWidth) || 0;
+              var minCanvasHeight = Number(options.minCanvasHeight) || 0;
+              if (viewMode > 1) {
+                minCanvasWidth = Math.max(minCanvasWidth, containerData.width);
+                minCanvasHeight = Math.max(minCanvasHeight, containerData.height);
+                if (viewMode === 3) {
+                  if (minCanvasHeight * aspectRatio > minCanvasWidth) {
+                    minCanvasWidth = minCanvasHeight * aspectRatio;
+                  } else {
+                    minCanvasHeight = minCanvasWidth / aspectRatio;
+                  }
+                }
+              } else if (viewMode > 0) {
+                if (minCanvasWidth) {
+                  minCanvasWidth = Math.max(minCanvasWidth, cropped ? cropBoxData.width : 0);
+                } else if (minCanvasHeight) {
+                  minCanvasHeight = Math.max(minCanvasHeight, cropped ? cropBoxData.height : 0);
+                } else if (cropped) {
+                  minCanvasWidth = cropBoxData.width;
+                  minCanvasHeight = cropBoxData.height;
+                  if (minCanvasHeight * aspectRatio > minCanvasWidth) {
+                    minCanvasWidth = minCanvasHeight * aspectRatio;
+                  } else {
+                    minCanvasHeight = minCanvasWidth / aspectRatio;
+                  }
+                }
+              }
+              var _getAdjustedSizes = getAdjustedSizes({
+                aspectRatio,
+                width: minCanvasWidth,
+                height: minCanvasHeight
+              });
+              minCanvasWidth = _getAdjustedSizes.width;
+              minCanvasHeight = _getAdjustedSizes.height;
+              canvasData.minWidth = minCanvasWidth;
+              canvasData.minHeight = minCanvasHeight;
+              canvasData.maxWidth = Infinity;
+              canvasData.maxHeight = Infinity;
+            }
+            if (positionLimited) {
+              if (viewMode > (cropped ? 0 : 1)) {
+                var newCanvasLeft = containerData.width - canvasData.width;
+                var newCanvasTop = containerData.height - canvasData.height;
+                canvasData.minLeft = Math.min(0, newCanvasLeft);
+                canvasData.minTop = Math.min(0, newCanvasTop);
+                canvasData.maxLeft = Math.max(0, newCanvasLeft);
+                canvasData.maxTop = Math.max(0, newCanvasTop);
+                if (cropped && this.limited) {
+                  canvasData.minLeft = Math.min(cropBoxData.left, cropBoxData.left + (cropBoxData.width - canvasData.width));
+                  canvasData.minTop = Math.min(cropBoxData.top, cropBoxData.top + (cropBoxData.height - canvasData.height));
+                  canvasData.maxLeft = cropBoxData.left;
+                  canvasData.maxTop = cropBoxData.top;
+                  if (viewMode === 2) {
+                    if (canvasData.width >= containerData.width) {
+                      canvasData.minLeft = Math.min(0, newCanvasLeft);
+                      canvasData.maxLeft = Math.max(0, newCanvasLeft);
+                    }
+                    if (canvasData.height >= containerData.height) {
+                      canvasData.minTop = Math.min(0, newCanvasTop);
+                      canvasData.maxTop = Math.max(0, newCanvasTop);
+                    }
+                  }
+                }
+              } else {
+                canvasData.minLeft = -canvasData.width;
+                canvasData.minTop = -canvasData.height;
+                canvasData.maxLeft = containerData.width;
+                canvasData.maxTop = containerData.height;
+              }
+            }
+          },
+          renderCanvas: function renderCanvas(changed, transformed) {
+            var canvasData = this.canvasData, imageData = this.imageData;
+            if (transformed) {
+              var _getRotatedSizes = getRotatedSizes({
+                width: imageData.naturalWidth * Math.abs(imageData.scaleX || 1),
+                height: imageData.naturalHeight * Math.abs(imageData.scaleY || 1),
+                degree: imageData.rotate || 0
+              }), naturalWidth = _getRotatedSizes.width, naturalHeight = _getRotatedSizes.height;
+              var width = canvasData.width * (naturalWidth / canvasData.naturalWidth);
+              var height = canvasData.height * (naturalHeight / canvasData.naturalHeight);
+              canvasData.left -= (width - canvasData.width) / 2;
+              canvasData.top -= (height - canvasData.height) / 2;
+              canvasData.width = width;
+              canvasData.height = height;
+              canvasData.aspectRatio = naturalWidth / naturalHeight;
+              canvasData.naturalWidth = naturalWidth;
+              canvasData.naturalHeight = naturalHeight;
+              this.limitCanvas(true, false);
+            }
+            if (canvasData.width > canvasData.maxWidth || canvasData.width < canvasData.minWidth) {
+              canvasData.left = canvasData.oldLeft;
+            }
+            if (canvasData.height > canvasData.maxHeight || canvasData.height < canvasData.minHeight) {
+              canvasData.top = canvasData.oldTop;
+            }
+            canvasData.width = Math.min(Math.max(canvasData.width, canvasData.minWidth), canvasData.maxWidth);
+            canvasData.height = Math.min(Math.max(canvasData.height, canvasData.minHeight), canvasData.maxHeight);
+            this.limitCanvas(false, true);
+            canvasData.left = Math.min(Math.max(canvasData.left, canvasData.minLeft), canvasData.maxLeft);
+            canvasData.top = Math.min(Math.max(canvasData.top, canvasData.minTop), canvasData.maxTop);
+            canvasData.oldLeft = canvasData.left;
+            canvasData.oldTop = canvasData.top;
+            setStyle2(this.canvas, assign({
+              width: canvasData.width,
+              height: canvasData.height
+            }, getTransforms({
+              translateX: canvasData.left,
+              translateY: canvasData.top
+            })));
+            this.renderImage(changed);
+            if (this.cropped && this.limited) {
+              this.limitCropBox(true, true);
+            }
+          },
+          renderImage: function renderImage(changed) {
+            var canvasData = this.canvasData, imageData = this.imageData;
+            var width = imageData.naturalWidth * (canvasData.width / canvasData.naturalWidth);
+            var height = imageData.naturalHeight * (canvasData.height / canvasData.naturalHeight);
+            assign(imageData, {
+              width,
+              height,
+              left: (canvasData.width - width) / 2,
+              top: (canvasData.height - height) / 2
+            });
+            setStyle2(this.image, assign({
+              width: imageData.width,
+              height: imageData.height
+            }, getTransforms(assign({
+              translateX: imageData.left,
+              translateY: imageData.top
+            }, imageData))));
+            if (changed) {
+              this.output();
+            }
+          },
+          initCropBox: function initCropBox() {
+            var options = this.options, canvasData = this.canvasData;
+            var aspectRatio = options.aspectRatio || options.initialAspectRatio;
+            var autoCropArea = Number(options.autoCropArea) || 0.8;
+            var cropBoxData = {
+              width: canvasData.width,
+              height: canvasData.height
+            };
+            if (aspectRatio) {
+              if (canvasData.height * aspectRatio > canvasData.width) {
+                cropBoxData.height = cropBoxData.width / aspectRatio;
+              } else {
+                cropBoxData.width = cropBoxData.height * aspectRatio;
+              }
+            }
+            this.cropBoxData = cropBoxData;
+            this.limitCropBox(true, true);
+            cropBoxData.width = Math.min(Math.max(cropBoxData.width, cropBoxData.minWidth), cropBoxData.maxWidth);
+            cropBoxData.height = Math.min(Math.max(cropBoxData.height, cropBoxData.minHeight), cropBoxData.maxHeight);
+            cropBoxData.width = Math.max(cropBoxData.minWidth, cropBoxData.width * autoCropArea);
+            cropBoxData.height = Math.max(cropBoxData.minHeight, cropBoxData.height * autoCropArea);
+            cropBoxData.left = canvasData.left + (canvasData.width - cropBoxData.width) / 2;
+            cropBoxData.top = canvasData.top + (canvasData.height - cropBoxData.height) / 2;
+            cropBoxData.oldLeft = cropBoxData.left;
+            cropBoxData.oldTop = cropBoxData.top;
+            this.initialCropBoxData = assign({}, cropBoxData);
+          },
+          limitCropBox: function limitCropBox(sizeLimited, positionLimited) {
+            var options = this.options, containerData = this.containerData, canvasData = this.canvasData, cropBoxData = this.cropBoxData, limited = this.limited;
+            var aspectRatio = options.aspectRatio;
+            if (sizeLimited) {
+              var minCropBoxWidth = Number(options.minCropBoxWidth) || 0;
+              var minCropBoxHeight = Number(options.minCropBoxHeight) || 0;
+              var maxCropBoxWidth = limited ? Math.min(containerData.width, canvasData.width, canvasData.width + canvasData.left, containerData.width - canvasData.left) : containerData.width;
+              var maxCropBoxHeight = limited ? Math.min(containerData.height, canvasData.height, canvasData.height + canvasData.top, containerData.height - canvasData.top) : containerData.height;
+              minCropBoxWidth = Math.min(minCropBoxWidth, containerData.width);
+              minCropBoxHeight = Math.min(minCropBoxHeight, containerData.height);
+              if (aspectRatio) {
+                if (minCropBoxWidth && minCropBoxHeight) {
+                  if (minCropBoxHeight * aspectRatio > minCropBoxWidth) {
+                    minCropBoxHeight = minCropBoxWidth / aspectRatio;
+                  } else {
+                    minCropBoxWidth = minCropBoxHeight * aspectRatio;
+                  }
+                } else if (minCropBoxWidth) {
+                  minCropBoxHeight = minCropBoxWidth / aspectRatio;
+                } else if (minCropBoxHeight) {
+                  minCropBoxWidth = minCropBoxHeight * aspectRatio;
+                }
+                if (maxCropBoxHeight * aspectRatio > maxCropBoxWidth) {
+                  maxCropBoxHeight = maxCropBoxWidth / aspectRatio;
+                } else {
+                  maxCropBoxWidth = maxCropBoxHeight * aspectRatio;
+                }
+              }
+              cropBoxData.minWidth = Math.min(minCropBoxWidth, maxCropBoxWidth);
+              cropBoxData.minHeight = Math.min(minCropBoxHeight, maxCropBoxHeight);
+              cropBoxData.maxWidth = maxCropBoxWidth;
+              cropBoxData.maxHeight = maxCropBoxHeight;
+            }
+            if (positionLimited) {
+              if (limited) {
+                cropBoxData.minLeft = Math.max(0, canvasData.left);
+                cropBoxData.minTop = Math.max(0, canvasData.top);
+                cropBoxData.maxLeft = Math.min(containerData.width, canvasData.left + canvasData.width) - cropBoxData.width;
+                cropBoxData.maxTop = Math.min(containerData.height, canvasData.top + canvasData.height) - cropBoxData.height;
+              } else {
+                cropBoxData.minLeft = 0;
+                cropBoxData.minTop = 0;
+                cropBoxData.maxLeft = containerData.width - cropBoxData.width;
+                cropBoxData.maxTop = containerData.height - cropBoxData.height;
+              }
+            }
+          },
+          renderCropBox: function renderCropBox() {
+            var options = this.options, containerData = this.containerData, cropBoxData = this.cropBoxData;
+            if (cropBoxData.width > cropBoxData.maxWidth || cropBoxData.width < cropBoxData.minWidth) {
+              cropBoxData.left = cropBoxData.oldLeft;
+            }
+            if (cropBoxData.height > cropBoxData.maxHeight || cropBoxData.height < cropBoxData.minHeight) {
+              cropBoxData.top = cropBoxData.oldTop;
+            }
+            cropBoxData.width = Math.min(Math.max(cropBoxData.width, cropBoxData.minWidth), cropBoxData.maxWidth);
+            cropBoxData.height = Math.min(Math.max(cropBoxData.height, cropBoxData.minHeight), cropBoxData.maxHeight);
+            this.limitCropBox(false, true);
+            cropBoxData.left = Math.min(Math.max(cropBoxData.left, cropBoxData.minLeft), cropBoxData.maxLeft);
+            cropBoxData.top = Math.min(Math.max(cropBoxData.top, cropBoxData.minTop), cropBoxData.maxTop);
+            cropBoxData.oldLeft = cropBoxData.left;
+            cropBoxData.oldTop = cropBoxData.top;
+            if (options.movable && options.cropBoxMovable) {
+              setData(this.face, DATA_ACTION, cropBoxData.width >= containerData.width && cropBoxData.height >= containerData.height ? ACTION_MOVE : ACTION_ALL);
+            }
+            setStyle2(this.cropBox, assign({
+              width: cropBoxData.width,
+              height: cropBoxData.height
+            }, getTransforms({
+              translateX: cropBoxData.left,
+              translateY: cropBoxData.top
+            })));
+            if (this.cropped && this.limited) {
+              this.limitCanvas(true, true);
+            }
+            if (!this.disabled) {
+              this.output();
+            }
+          },
+          output: function output() {
+            this.preview();
+            dispatchEvent(this.element, EVENT_CROP, this.getData());
+          }
+        };
+        var preview = {
+          initPreview: function initPreview() {
+            var element = this.element, crossOrigin = this.crossOrigin;
+            var preview2 = this.options.preview;
+            var url = crossOrigin ? this.crossOriginUrl : this.url;
+            var alt = element.alt || "The image to preview";
+            var image = document.createElement("img");
+            if (crossOrigin) {
+              image.crossOrigin = crossOrigin;
+            }
+            image.src = url;
+            image.alt = alt;
+            this.viewBox.appendChild(image);
+            this.viewBoxImage = image;
+            if (!preview2) {
+              return;
+            }
+            var previews = preview2;
+            if (typeof preview2 === "string") {
+              previews = element.ownerDocument.querySelectorAll(preview2);
+            } else if (preview2.querySelector) {
+              previews = [preview2];
+            }
+            this.previews = previews;
+            forEach(previews, function(el) {
+              var img = document.createElement("img");
+              setData(el, DATA_PREVIEW, {
+                width: el.offsetWidth,
+                height: el.offsetHeight,
+                html: el.innerHTML
+              });
+              if (crossOrigin) {
+                img.crossOrigin = crossOrigin;
+              }
+              img.src = url;
+              img.alt = alt;
+              img.style.cssText = 'display:block;width:100%;height:auto;min-width:0!important;min-height:0!important;max-width:none!important;max-height:none!important;image-orientation:0deg!important;"';
+              el.innerHTML = "";
+              el.appendChild(img);
+            });
+          },
+          resetPreview: function resetPreview() {
+            forEach(this.previews, function(element) {
+              var data2 = getData(element, DATA_PREVIEW);
+              setStyle2(element, {
+                width: data2.width,
+                height: data2.height
+              });
+              element.innerHTML = data2.html;
+              removeData(element, DATA_PREVIEW);
+            });
+          },
+          preview: function preview2() {
+            var imageData = this.imageData, canvasData = this.canvasData, cropBoxData = this.cropBoxData;
+            var cropBoxWidth = cropBoxData.width, cropBoxHeight = cropBoxData.height;
+            var width = imageData.width, height = imageData.height;
+            var left2 = cropBoxData.left - canvasData.left - imageData.left;
+            var top2 = cropBoxData.top - canvasData.top - imageData.top;
+            if (!this.cropped || this.disabled) {
+              return;
+            }
+            setStyle2(this.viewBoxImage, assign({
+              width,
+              height
+            }, getTransforms(assign({
+              translateX: -left2,
+              translateY: -top2
+            }, imageData))));
+            forEach(this.previews, function(element) {
+              var data2 = getData(element, DATA_PREVIEW);
+              var originalWidth = data2.width;
+              var originalHeight = data2.height;
+              var newWidth = originalWidth;
+              var newHeight = originalHeight;
+              var ratio = 1;
+              if (cropBoxWidth) {
+                ratio = originalWidth / cropBoxWidth;
+                newHeight = cropBoxHeight * ratio;
+              }
+              if (cropBoxHeight && newHeight > originalHeight) {
+                ratio = originalHeight / cropBoxHeight;
+                newWidth = cropBoxWidth * ratio;
+                newHeight = originalHeight;
+              }
+              setStyle2(element, {
+                width: newWidth,
+                height: newHeight
+              });
+              setStyle2(element.getElementsByTagName("img")[0], assign({
+                width: width * ratio,
+                height: height * ratio
+              }, getTransforms(assign({
+                translateX: -left2 * ratio,
+                translateY: -top2 * ratio
+              }, imageData))));
+            });
+          }
+        };
+        var events = {
+          bind: function bind() {
+            var element = this.element, options = this.options, cropper2 = this.cropper;
+            if (isFunction2(options.cropstart)) {
+              addListener2(element, EVENT_CROP_START, options.cropstart);
+            }
+            if (isFunction2(options.cropmove)) {
+              addListener2(element, EVENT_CROP_MOVE, options.cropmove);
+            }
+            if (isFunction2(options.cropend)) {
+              addListener2(element, EVENT_CROP_END, options.cropend);
+            }
+            if (isFunction2(options.crop)) {
+              addListener2(element, EVENT_CROP, options.crop);
+            }
+            if (isFunction2(options.zoom)) {
+              addListener2(element, EVENT_ZOOM, options.zoom);
+            }
+            addListener2(cropper2, EVENT_POINTER_DOWN, this.onCropStart = this.cropStart.bind(this));
+            if (options.zoomable && options.zoomOnWheel) {
+              addListener2(cropper2, EVENT_WHEEL, this.onWheel = this.wheel.bind(this), {
+                passive: false,
+                capture: true
+              });
+            }
+            if (options.toggleDragModeOnDblclick) {
+              addListener2(cropper2, EVENT_DBLCLICK, this.onDblclick = this.dblclick.bind(this));
+            }
+            addListener2(element.ownerDocument, EVENT_POINTER_MOVE, this.onCropMove = this.cropMove.bind(this));
+            addListener2(element.ownerDocument, EVENT_POINTER_UP, this.onCropEnd = this.cropEnd.bind(this));
+            if (options.responsive) {
+              addListener2(window, EVENT_RESIZE, this.onResize = this.resize.bind(this));
+            }
+          },
+          unbind: function unbind() {
+            var element = this.element, options = this.options, cropper2 = this.cropper;
+            if (isFunction2(options.cropstart)) {
+              removeListener2(element, EVENT_CROP_START, options.cropstart);
+            }
+            if (isFunction2(options.cropmove)) {
+              removeListener2(element, EVENT_CROP_MOVE, options.cropmove);
+            }
+            if (isFunction2(options.cropend)) {
+              removeListener2(element, EVENT_CROP_END, options.cropend);
+            }
+            if (isFunction2(options.crop)) {
+              removeListener2(element, EVENT_CROP, options.crop);
+            }
+            if (isFunction2(options.zoom)) {
+              removeListener2(element, EVENT_ZOOM, options.zoom);
+            }
+            removeListener2(cropper2, EVENT_POINTER_DOWN, this.onCropStart);
+            if (options.zoomable && options.zoomOnWheel) {
+              removeListener2(cropper2, EVENT_WHEEL, this.onWheel, {
+                passive: false,
+                capture: true
+              });
+            }
+            if (options.toggleDragModeOnDblclick) {
+              removeListener2(cropper2, EVENT_DBLCLICK, this.onDblclick);
+            }
+            removeListener2(element.ownerDocument, EVENT_POINTER_MOVE, this.onCropMove);
+            removeListener2(element.ownerDocument, EVENT_POINTER_UP, this.onCropEnd);
+            if (options.responsive) {
+              removeListener2(window, EVENT_RESIZE, this.onResize);
+            }
+          }
+        };
+        var handlers = {
+          resize: function resize() {
+            if (this.disabled) {
+              return;
+            }
+            var options = this.options, container = this.container, containerData = this.containerData;
+            var ratioX = container.offsetWidth / containerData.width;
+            var ratioY = container.offsetHeight / containerData.height;
+            var ratio = Math.abs(ratioX - 1) > Math.abs(ratioY - 1) ? ratioX : ratioY;
+            if (ratio !== 1) {
+              var canvasData;
+              var cropBoxData;
+              if (options.restore) {
+                canvasData = this.getCanvasData();
+                cropBoxData = this.getCropBoxData();
+              }
+              this.render();
+              if (options.restore) {
+                this.setCanvasData(forEach(canvasData, function(n2, i) {
+                  canvasData[i] = n2 * ratio;
+                }));
+                this.setCropBoxData(forEach(cropBoxData, function(n2, i) {
+                  cropBoxData[i] = n2 * ratio;
+                }));
+              }
+            }
+          },
+          dblclick: function dblclick() {
+            if (this.disabled || this.options.dragMode === DRAG_MODE_NONE) {
+              return;
+            }
+            this.setDragMode(hasClass(this.dragBox, CLASS_CROP) ? DRAG_MODE_MOVE : DRAG_MODE_CROP);
+          },
+          wheel: function wheel(event3) {
+            var _this = this;
+            var ratio = Number(this.options.wheelZoomRatio) || 0.1;
+            var delta = 1;
+            if (this.disabled) {
+              return;
+            }
+            event3.preventDefault();
+            if (this.wheeling) {
+              return;
+            }
+            this.wheeling = true;
+            setTimeout(function() {
+              _this.wheeling = false;
+            }, 50);
+            if (event3.deltaY) {
+              delta = event3.deltaY > 0 ? 1 : -1;
+            } else if (event3.wheelDelta) {
+              delta = -event3.wheelDelta / 120;
+            } else if (event3.detail) {
+              delta = event3.detail > 0 ? 1 : -1;
+            }
+            this.zoom(-delta * ratio, event3);
+          },
+          cropStart: function cropStart(event3) {
+            var buttons = event3.buttons, button2 = event3.button;
+            if (this.disabled || (event3.type === "mousedown" || event3.type === "pointerdown" && event3.pointerType === "mouse") && // No primary button (Usually the left button)
+            (isNumber3(buttons) && buttons !== 1 || isNumber3(button2) && button2 !== 0 || event3.ctrlKey)) {
+              return;
+            }
+            var options = this.options, pointers = this.pointers;
+            var action;
+            if (event3.changedTouches) {
+              forEach(event3.changedTouches, function(touch) {
+                pointers[touch.identifier] = getPointer(touch);
+              });
+            } else {
+              pointers[event3.pointerId || 0] = getPointer(event3);
+            }
+            if (Object.keys(pointers).length > 1 && options.zoomable && options.zoomOnTouch) {
+              action = ACTION_ZOOM;
+            } else {
+              action = getData(event3.target, DATA_ACTION);
+            }
+            if (!REGEXP_ACTIONS.test(action)) {
+              return;
+            }
+            if (dispatchEvent(this.element, EVENT_CROP_START, {
+              originalEvent: event3,
+              action
+            }) === false) {
+              return;
+            }
+            event3.preventDefault();
+            this.action = action;
+            this.cropping = false;
+            if (action === ACTION_CROP) {
+              this.cropping = true;
+              addClass(this.dragBox, CLASS_MODAL);
+            }
+          },
+          cropMove: function cropMove(event3) {
+            var action = this.action;
+            if (this.disabled || !action) {
+              return;
+            }
+            var pointers = this.pointers;
+            event3.preventDefault();
+            if (dispatchEvent(this.element, EVENT_CROP_MOVE, {
+              originalEvent: event3,
+              action
+            }) === false) {
+              return;
+            }
+            if (event3.changedTouches) {
+              forEach(event3.changedTouches, function(touch) {
+                assign(pointers[touch.identifier] || {}, getPointer(touch, true));
+              });
+            } else {
+              assign(pointers[event3.pointerId || 0] || {}, getPointer(event3, true));
+            }
+            this.change(event3);
+          },
+          cropEnd: function cropEnd(event3) {
+            if (this.disabled) {
+              return;
+            }
+            var action = this.action, pointers = this.pointers;
+            if (event3.changedTouches) {
+              forEach(event3.changedTouches, function(touch) {
+                delete pointers[touch.identifier];
+              });
+            } else {
+              delete pointers[event3.pointerId || 0];
+            }
+            if (!action) {
+              return;
+            }
+            event3.preventDefault();
+            if (!Object.keys(pointers).length) {
+              this.action = "";
+            }
+            if (this.cropping) {
+              this.cropping = false;
+              toggleClass(this.dragBox, CLASS_MODAL, this.cropped && this.options.modal);
+            }
+            dispatchEvent(this.element, EVENT_CROP_END, {
+              originalEvent: event3,
+              action
+            });
+          }
+        };
+        var change = {
+          change: function change2(event3) {
+            var options = this.options, canvasData = this.canvasData, containerData = this.containerData, cropBoxData = this.cropBoxData, pointers = this.pointers;
+            var action = this.action;
+            var aspectRatio = options.aspectRatio;
+            var left2 = cropBoxData.left, top2 = cropBoxData.top, width = cropBoxData.width, height = cropBoxData.height;
+            var right2 = left2 + width;
+            var bottom2 = top2 + height;
+            var minLeft = 0;
+            var minTop = 0;
+            var maxWidth = containerData.width;
+            var maxHeight = containerData.height;
+            var renderable = true;
+            var offset3;
+            if (!aspectRatio && event3.shiftKey) {
+              aspectRatio = width && height ? width / height : 1;
+            }
+            if (this.limited) {
+              minLeft = cropBoxData.minLeft;
+              minTop = cropBoxData.minTop;
+              maxWidth = minLeft + Math.min(containerData.width, canvasData.width, canvasData.left + canvasData.width);
+              maxHeight = minTop + Math.min(containerData.height, canvasData.height, canvasData.top + canvasData.height);
+            }
+            var pointer = pointers[Object.keys(pointers)[0]];
+            var range = {
+              x: pointer.endX - pointer.startX,
+              y: pointer.endY - pointer.startY
+            };
+            var check = function check2(side) {
+              switch (side) {
+                case ACTION_EAST:
+                  if (right2 + range.x > maxWidth) {
+                    range.x = maxWidth - right2;
+                  }
+                  break;
+                case ACTION_WEST:
+                  if (left2 + range.x < minLeft) {
+                    range.x = minLeft - left2;
+                  }
+                  break;
+                case ACTION_NORTH:
+                  if (top2 + range.y < minTop) {
+                    range.y = minTop - top2;
+                  }
+                  break;
+                case ACTION_SOUTH:
+                  if (bottom2 + range.y > maxHeight) {
+                    range.y = maxHeight - bottom2;
+                  }
+                  break;
+              }
+            };
+            switch (action) {
+              // Move crop box
+              case ACTION_ALL:
+                left2 += range.x;
+                top2 += range.y;
+                break;
+              // Resize crop box
+              case ACTION_EAST:
+                if (range.x >= 0 && (right2 >= maxWidth || aspectRatio && (top2 <= minTop || bottom2 >= maxHeight))) {
+                  renderable = false;
+                  break;
+                }
+                check(ACTION_EAST);
+                width += range.x;
+                if (width < 0) {
+                  action = ACTION_WEST;
+                  width = -width;
+                  left2 -= width;
+                }
+                if (aspectRatio) {
+                  height = width / aspectRatio;
+                  top2 += (cropBoxData.height - height) / 2;
+                }
+                break;
+              case ACTION_NORTH:
+                if (range.y <= 0 && (top2 <= minTop || aspectRatio && (left2 <= minLeft || right2 >= maxWidth))) {
+                  renderable = false;
+                  break;
+                }
+                check(ACTION_NORTH);
+                height -= range.y;
+                top2 += range.y;
+                if (height < 0) {
+                  action = ACTION_SOUTH;
+                  height = -height;
+                  top2 -= height;
+                }
+                if (aspectRatio) {
+                  width = height * aspectRatio;
+                  left2 += (cropBoxData.width - width) / 2;
+                }
+                break;
+              case ACTION_WEST:
+                if (range.x <= 0 && (left2 <= minLeft || aspectRatio && (top2 <= minTop || bottom2 >= maxHeight))) {
+                  renderable = false;
+                  break;
+                }
+                check(ACTION_WEST);
+                width -= range.x;
+                left2 += range.x;
+                if (width < 0) {
+                  action = ACTION_EAST;
+                  width = -width;
+                  left2 -= width;
+                }
+                if (aspectRatio) {
+                  height = width / aspectRatio;
+                  top2 += (cropBoxData.height - height) / 2;
+                }
+                break;
+              case ACTION_SOUTH:
+                if (range.y >= 0 && (bottom2 >= maxHeight || aspectRatio && (left2 <= minLeft || right2 >= maxWidth))) {
+                  renderable = false;
+                  break;
+                }
+                check(ACTION_SOUTH);
+                height += range.y;
+                if (height < 0) {
+                  action = ACTION_NORTH;
+                  height = -height;
+                  top2 -= height;
+                }
+                if (aspectRatio) {
+                  width = height * aspectRatio;
+                  left2 += (cropBoxData.width - width) / 2;
+                }
+                break;
+              case ACTION_NORTH_EAST:
+                if (aspectRatio) {
+                  if (range.y <= 0 && (top2 <= minTop || right2 >= maxWidth)) {
+                    renderable = false;
+                    break;
+                  }
+                  check(ACTION_NORTH);
+                  height -= range.y;
+                  top2 += range.y;
+                  width = height * aspectRatio;
+                } else {
+                  check(ACTION_NORTH);
+                  check(ACTION_EAST);
+                  if (range.x >= 0) {
+                    if (right2 < maxWidth) {
+                      width += range.x;
+                    } else if (range.y <= 0 && top2 <= minTop) {
+                      renderable = false;
+                    }
+                  } else {
+                    width += range.x;
+                  }
+                  if (range.y <= 0) {
+                    if (top2 > minTop) {
+                      height -= range.y;
+                      top2 += range.y;
+                    }
+                  } else {
+                    height -= range.y;
+                    top2 += range.y;
+                  }
+                }
+                if (width < 0 && height < 0) {
+                  action = ACTION_SOUTH_WEST;
+                  height = -height;
+                  width = -width;
+                  top2 -= height;
+                  left2 -= width;
+                } else if (width < 0) {
+                  action = ACTION_NORTH_WEST;
+                  width = -width;
+                  left2 -= width;
+                } else if (height < 0) {
+                  action = ACTION_SOUTH_EAST;
+                  height = -height;
+                  top2 -= height;
+                }
+                break;
+              case ACTION_NORTH_WEST:
+                if (aspectRatio) {
+                  if (range.y <= 0 && (top2 <= minTop || left2 <= minLeft)) {
+                    renderable = false;
+                    break;
+                  }
+                  check(ACTION_NORTH);
+                  height -= range.y;
+                  top2 += range.y;
+                  width = height * aspectRatio;
+                  left2 += cropBoxData.width - width;
+                } else {
+                  check(ACTION_NORTH);
+                  check(ACTION_WEST);
+                  if (range.x <= 0) {
+                    if (left2 > minLeft) {
+                      width -= range.x;
+                      left2 += range.x;
+                    } else if (range.y <= 0 && top2 <= minTop) {
+                      renderable = false;
+                    }
+                  } else {
+                    width -= range.x;
+                    left2 += range.x;
+                  }
+                  if (range.y <= 0) {
+                    if (top2 > minTop) {
+                      height -= range.y;
+                      top2 += range.y;
+                    }
+                  } else {
+                    height -= range.y;
+                    top2 += range.y;
+                  }
+                }
+                if (width < 0 && height < 0) {
+                  action = ACTION_SOUTH_EAST;
+                  height = -height;
+                  width = -width;
+                  top2 -= height;
+                  left2 -= width;
+                } else if (width < 0) {
+                  action = ACTION_NORTH_EAST;
+                  width = -width;
+                  left2 -= width;
+                } else if (height < 0) {
+                  action = ACTION_SOUTH_WEST;
+                  height = -height;
+                  top2 -= height;
+                }
+                break;
+              case ACTION_SOUTH_WEST:
+                if (aspectRatio) {
+                  if (range.x <= 0 && (left2 <= minLeft || bottom2 >= maxHeight)) {
+                    renderable = false;
+                    break;
+                  }
+                  check(ACTION_WEST);
+                  width -= range.x;
+                  left2 += range.x;
+                  height = width / aspectRatio;
+                } else {
+                  check(ACTION_SOUTH);
+                  check(ACTION_WEST);
+                  if (range.x <= 0) {
+                    if (left2 > minLeft) {
+                      width -= range.x;
+                      left2 += range.x;
+                    } else if (range.y >= 0 && bottom2 >= maxHeight) {
+                      renderable = false;
+                    }
+                  } else {
+                    width -= range.x;
+                    left2 += range.x;
+                  }
+                  if (range.y >= 0) {
+                    if (bottom2 < maxHeight) {
+                      height += range.y;
+                    }
+                  } else {
+                    height += range.y;
+                  }
+                }
+                if (width < 0 && height < 0) {
+                  action = ACTION_NORTH_EAST;
+                  height = -height;
+                  width = -width;
+                  top2 -= height;
+                  left2 -= width;
+                } else if (width < 0) {
+                  action = ACTION_SOUTH_EAST;
+                  width = -width;
+                  left2 -= width;
+                } else if (height < 0) {
+                  action = ACTION_NORTH_WEST;
+                  height = -height;
+                  top2 -= height;
+                }
+                break;
+              case ACTION_SOUTH_EAST:
+                if (aspectRatio) {
+                  if (range.x >= 0 && (right2 >= maxWidth || bottom2 >= maxHeight)) {
+                    renderable = false;
+                    break;
+                  }
+                  check(ACTION_EAST);
+                  width += range.x;
+                  height = width / aspectRatio;
+                } else {
+                  check(ACTION_SOUTH);
+                  check(ACTION_EAST);
+                  if (range.x >= 0) {
+                    if (right2 < maxWidth) {
+                      width += range.x;
+                    } else if (range.y >= 0 && bottom2 >= maxHeight) {
+                      renderable = false;
+                    }
+                  } else {
+                    width += range.x;
+                  }
+                  if (range.y >= 0) {
+                    if (bottom2 < maxHeight) {
+                      height += range.y;
+                    }
+                  } else {
+                    height += range.y;
+                  }
+                }
+                if (width < 0 && height < 0) {
+                  action = ACTION_NORTH_WEST;
+                  height = -height;
+                  width = -width;
+                  top2 -= height;
+                  left2 -= width;
+                } else if (width < 0) {
+                  action = ACTION_SOUTH_WEST;
+                  width = -width;
+                  left2 -= width;
+                } else if (height < 0) {
+                  action = ACTION_NORTH_EAST;
+                  height = -height;
+                  top2 -= height;
+                }
+                break;
+              // Move canvas
+              case ACTION_MOVE:
+                this.move(range.x, range.y);
+                renderable = false;
+                break;
+              // Zoom canvas
+              case ACTION_ZOOM:
+                this.zoom(getMaxZoomRatio(pointers), event3);
+                renderable = false;
+                break;
+              // Create crop box
+              case ACTION_CROP:
+                if (!range.x || !range.y) {
+                  renderable = false;
+                  break;
+                }
+                offset3 = getOffset(this.cropper);
+                left2 = pointer.startX - offset3.left;
+                top2 = pointer.startY - offset3.top;
+                width = cropBoxData.minWidth;
+                height = cropBoxData.minHeight;
+                if (range.x > 0) {
+                  action = range.y > 0 ? ACTION_SOUTH_EAST : ACTION_NORTH_EAST;
+                } else if (range.x < 0) {
+                  left2 -= width;
+                  action = range.y > 0 ? ACTION_SOUTH_WEST : ACTION_NORTH_WEST;
+                }
+                if (range.y < 0) {
+                  top2 -= height;
+                }
+                if (!this.cropped) {
+                  removeClass(this.cropBox, CLASS_HIDDEN);
+                  this.cropped = true;
+                  if (this.limited) {
+                    this.limitCropBox(true, true);
+                  }
+                }
+                break;
+            }
+            if (renderable) {
+              cropBoxData.width = width;
+              cropBoxData.height = height;
+              cropBoxData.left = left2;
+              cropBoxData.top = top2;
+              this.action = action;
+              this.renderCropBox();
+            }
+            forEach(pointers, function(p) {
+              p.startX = p.endX;
+              p.startY = p.endY;
+            });
+          }
+        };
+        var methods = {
+          // Show the crop box manually
+          crop: function crop() {
+            if (this.ready && !this.cropped && !this.disabled) {
+              this.cropped = true;
+              this.limitCropBox(true, true);
+              if (this.options.modal) {
+                addClass(this.dragBox, CLASS_MODAL);
+              }
+              removeClass(this.cropBox, CLASS_HIDDEN);
+              this.setCropBoxData(this.initialCropBoxData);
+            }
+            return this;
+          },
+          // Reset the image and crop box to their initial states
+          reset: function reset() {
+            if (this.ready && !this.disabled) {
+              this.imageData = assign({}, this.initialImageData);
+              this.canvasData = assign({}, this.initialCanvasData);
+              this.cropBoxData = assign({}, this.initialCropBoxData);
+              this.renderCanvas();
+              if (this.cropped) {
+                this.renderCropBox();
+              }
+            }
+            return this;
+          },
+          // Clear the crop box
+          clear: function clear() {
+            if (this.cropped && !this.disabled) {
+              assign(this.cropBoxData, {
+                left: 0,
+                top: 0,
+                width: 0,
+                height: 0
+              });
+              this.cropped = false;
+              this.renderCropBox();
+              this.limitCanvas(true, true);
+              this.renderCanvas();
+              removeClass(this.dragBox, CLASS_MODAL);
+              addClass(this.cropBox, CLASS_HIDDEN);
+            }
+            return this;
+          },
+          /**
+           * Replace the image's src and rebuild the cropper
+           * @param {string} url - The new URL.
+           * @param {boolean} [hasSameSize] - Indicate if the new image has the same size as the old one.
+           * @returns {Cropper} this
+           */
+          replace: function replace(url) {
+            var hasSameSize = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : false;
+            if (!this.disabled && url) {
+              if (this.isImg) {
+                this.element.src = url;
+              }
+              if (hasSameSize) {
+                this.url = url;
+                this.image.src = url;
+                if (this.ready) {
+                  this.viewBoxImage.src = url;
+                  forEach(this.previews, function(element) {
+                    element.getElementsByTagName("img")[0].src = url;
+                  });
+                }
+              } else {
+                if (this.isImg) {
+                  this.replaced = true;
+                }
+                this.options.data = null;
+                this.uncreate();
+                this.load(url);
+              }
+            }
+            return this;
+          },
+          // Enable (unfreeze) the cropper
+          enable: function enable() {
+            if (this.ready && this.disabled) {
+              this.disabled = false;
+              removeClass(this.cropper, CLASS_DISABLED);
+            }
+            return this;
+          },
+          // Disable (freeze) the cropper
+          disable: function disable() {
+            if (this.ready && !this.disabled) {
+              this.disabled = true;
+              addClass(this.cropper, CLASS_DISABLED);
+            }
+            return this;
+          },
+          /**
+           * Destroy the cropper and remove the instance from the image
+           * @returns {Cropper} this
+           */
+          destroy: function destroy() {
+            var element = this.element;
+            if (!element[NAMESPACE]) {
+              return this;
+            }
+            element[NAMESPACE] = void 0;
+            if (this.isImg && this.replaced) {
+              element.src = this.originalUrl;
+            }
+            this.uncreate();
+            return this;
+          },
+          /**
+           * Move the canvas with relative offsets
+           * @param {number} offsetX - The relative offset distance on the x-axis.
+           * @param {number} [offsetY=offsetX] - The relative offset distance on the y-axis.
+           * @returns {Cropper} this
+           */
+          move: function move(offsetX) {
+            var offsetY = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : offsetX;
+            var _this$canvasData = this.canvasData, left2 = _this$canvasData.left, top2 = _this$canvasData.top;
+            return this.moveTo(isUndefined2(offsetX) ? offsetX : left2 + Number(offsetX), isUndefined2(offsetY) ? offsetY : top2 + Number(offsetY));
+          },
+          /**
+           * Move the canvas to an absolute point
+           * @param {number} x - The x-axis coordinate.
+           * @param {number} [y=x] - The y-axis coordinate.
+           * @returns {Cropper} this
+           */
+          moveTo: function moveTo(x) {
+            var y = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : x;
+            var canvasData = this.canvasData;
+            var changed = false;
+            x = Number(x);
+            y = Number(y);
+            if (this.ready && !this.disabled && this.options.movable) {
+              if (isNumber3(x)) {
+                canvasData.left = x;
+                changed = true;
+              }
+              if (isNumber3(y)) {
+                canvasData.top = y;
+                changed = true;
+              }
+              if (changed) {
+                this.renderCanvas(true);
+              }
+            }
+            return this;
+          },
+          /**
+           * Zoom the canvas with a relative ratio
+           * @param {number} ratio - The target ratio.
+           * @param {Event} _originalEvent - The original event if any.
+           * @returns {Cropper} this
+           */
+          zoom: function zoom(ratio, _originalEvent) {
+            var canvasData = this.canvasData;
+            ratio = Number(ratio);
+            if (ratio < 0) {
+              ratio = 1 / (1 - ratio);
+            } else {
+              ratio = 1 + ratio;
+            }
+            return this.zoomTo(canvasData.width * ratio / canvasData.naturalWidth, null, _originalEvent);
+          },
+          /**
+           * Zoom the canvas to an absolute ratio
+           * @param {number} ratio - The target ratio.
+           * @param {Object} pivot - The zoom pivot point coordinate.
+           * @param {Event} _originalEvent - The original event if any.
+           * @returns {Cropper} this
+           */
+          zoomTo: function zoomTo(ratio, pivot, _originalEvent) {
+            var options = this.options, canvasData = this.canvasData;
+            var width = canvasData.width, height = canvasData.height, naturalWidth = canvasData.naturalWidth, naturalHeight = canvasData.naturalHeight;
+            ratio = Number(ratio);
+            if (ratio >= 0 && this.ready && !this.disabled && options.zoomable) {
+              var newWidth = naturalWidth * ratio;
+              var newHeight = naturalHeight * ratio;
+              if (dispatchEvent(this.element, EVENT_ZOOM, {
+                ratio,
+                oldRatio: width / naturalWidth,
+                originalEvent: _originalEvent
+              }) === false) {
+                return this;
+              }
+              if (_originalEvent) {
+                var pointers = this.pointers;
+                var offset3 = getOffset(this.cropper);
+                var center = pointers && Object.keys(pointers).length ? getPointersCenter(pointers) : {
+                  pageX: _originalEvent.pageX,
+                  pageY: _originalEvent.pageY
+                };
+                canvasData.left -= (newWidth - width) * ((center.pageX - offset3.left - canvasData.left) / width);
+                canvasData.top -= (newHeight - height) * ((center.pageY - offset3.top - canvasData.top) / height);
+              } else if (isPlainObject(pivot) && isNumber3(pivot.x) && isNumber3(pivot.y)) {
+                canvasData.left -= (newWidth - width) * ((pivot.x - canvasData.left) / width);
+                canvasData.top -= (newHeight - height) * ((pivot.y - canvasData.top) / height);
+              } else {
+                canvasData.left -= (newWidth - width) / 2;
+                canvasData.top -= (newHeight - height) / 2;
+              }
+              canvasData.width = newWidth;
+              canvasData.height = newHeight;
+              this.renderCanvas(true);
+            }
+            return this;
+          },
+          /**
+           * Rotate the canvas with a relative degree
+           * @param {number} degree - The rotate degree.
+           * @returns {Cropper} this
+           */
+          rotate: function rotate2(degree) {
+            return this.rotateTo((this.imageData.rotate || 0) + Number(degree));
+          },
+          /**
+           * Rotate the canvas to an absolute degree
+           * @param {number} degree - The rotate degree.
+           * @returns {Cropper} this
+           */
+          rotateTo: function rotateTo(degree) {
+            degree = Number(degree);
+            if (isNumber3(degree) && this.ready && !this.disabled && this.options.rotatable) {
+              this.imageData.rotate = degree % 360;
+              this.renderCanvas(true, true);
+            }
+            return this;
+          },
+          /**
+           * Scale the image on the x-axis.
+           * @param {number} scaleX - The scale ratio on the x-axis.
+           * @returns {Cropper} this
+           */
+          scaleX: function scaleX(_scaleX) {
+            var scaleY = this.imageData.scaleY;
+            return this.scale(_scaleX, isNumber3(scaleY) ? scaleY : 1);
+          },
+          /**
+           * Scale the image on the y-axis.
+           * @param {number} scaleY - The scale ratio on the y-axis.
+           * @returns {Cropper} this
+           */
+          scaleY: function scaleY(_scaleY) {
+            var scaleX = this.imageData.scaleX;
+            return this.scale(isNumber3(scaleX) ? scaleX : 1, _scaleY);
+          },
+          /**
+           * Scale the image
+           * @param {number} scaleX - The scale ratio on the x-axis.
+           * @param {number} [scaleY=scaleX] - The scale ratio on the y-axis.
+           * @returns {Cropper} this
+           */
+          scale: function scale(scaleX) {
+            var scaleY = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : scaleX;
+            var imageData = this.imageData;
+            var transformed = false;
+            scaleX = Number(scaleX);
+            scaleY = Number(scaleY);
+            if (this.ready && !this.disabled && this.options.scalable) {
+              if (isNumber3(scaleX)) {
+                imageData.scaleX = scaleX;
+                transformed = true;
+              }
+              if (isNumber3(scaleY)) {
+                imageData.scaleY = scaleY;
+                transformed = true;
+              }
+              if (transformed) {
+                this.renderCanvas(true, true);
+              }
+            }
+            return this;
+          },
+          /**
+           * Get the cropped area position and size data (base on the original image)
+           * @param {boolean} [rounded=false] - Indicate if round the data values or not.
+           * @returns {Object} The result cropped data.
+           */
+          getData: function getData2() {
+            var rounded = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : false;
+            var options = this.options, imageData = this.imageData, canvasData = this.canvasData, cropBoxData = this.cropBoxData;
+            var data2;
+            if (this.ready && this.cropped) {
+              data2 = {
+                x: cropBoxData.left - canvasData.left,
+                y: cropBoxData.top - canvasData.top,
+                width: cropBoxData.width,
+                height: cropBoxData.height
+              };
+              var ratio = imageData.width / imageData.naturalWidth;
+              forEach(data2, function(n2, i) {
+                data2[i] = n2 / ratio;
+              });
+              if (rounded) {
+                var bottom2 = Math.round(data2.y + data2.height);
+                var right2 = Math.round(data2.x + data2.width);
+                data2.x = Math.round(data2.x);
+                data2.y = Math.round(data2.y);
+                data2.width = right2 - data2.x;
+                data2.height = bottom2 - data2.y;
+              }
+            } else {
+              data2 = {
+                x: 0,
+                y: 0,
+                width: 0,
+                height: 0
+              };
+            }
+            if (options.rotatable) {
+              data2.rotate = imageData.rotate || 0;
+            }
+            if (options.scalable) {
+              data2.scaleX = imageData.scaleX || 1;
+              data2.scaleY = imageData.scaleY || 1;
+            }
+            return data2;
+          },
+          /**
+           * Set the cropped area position and size with new data
+           * @param {Object} data - The new data.
+           * @returns {Cropper} this
+           */
+          setData: function setData2(data2) {
+            var options = this.options, imageData = this.imageData, canvasData = this.canvasData;
+            var cropBoxData = {};
+            if (this.ready && !this.disabled && isPlainObject(data2)) {
+              var transformed = false;
+              if (options.rotatable) {
+                if (isNumber3(data2.rotate) && data2.rotate !== imageData.rotate) {
+                  imageData.rotate = data2.rotate;
+                  transformed = true;
+                }
+              }
+              if (options.scalable) {
+                if (isNumber3(data2.scaleX) && data2.scaleX !== imageData.scaleX) {
+                  imageData.scaleX = data2.scaleX;
+                  transformed = true;
+                }
+                if (isNumber3(data2.scaleY) && data2.scaleY !== imageData.scaleY) {
+                  imageData.scaleY = data2.scaleY;
+                  transformed = true;
+                }
+              }
+              if (transformed) {
+                this.renderCanvas(true, true);
+              }
+              var ratio = imageData.width / imageData.naturalWidth;
+              if (isNumber3(data2.x)) {
+                cropBoxData.left = data2.x * ratio + canvasData.left;
+              }
+              if (isNumber3(data2.y)) {
+                cropBoxData.top = data2.y * ratio + canvasData.top;
+              }
+              if (isNumber3(data2.width)) {
+                cropBoxData.width = data2.width * ratio;
+              }
+              if (isNumber3(data2.height)) {
+                cropBoxData.height = data2.height * ratio;
+              }
+              this.setCropBoxData(cropBoxData);
+            }
+            return this;
+          },
+          /**
+           * Get the container size data.
+           * @returns {Object} The result container data.
+           */
+          getContainerData: function getContainerData() {
+            return this.ready ? assign({}, this.containerData) : {};
+          },
+          /**
+           * Get the image position and size data.
+           * @returns {Object} The result image data.
+           */
+          getImageData: function getImageData() {
+            return this.sized ? assign({}, this.imageData) : {};
+          },
+          /**
+           * Get the canvas position and size data.
+           * @returns {Object} The result canvas data.
+           */
+          getCanvasData: function getCanvasData() {
+            var canvasData = this.canvasData;
+            var data2 = {};
+            if (this.ready) {
+              forEach(["left", "top", "width", "height", "naturalWidth", "naturalHeight"], function(n2) {
+                data2[n2] = canvasData[n2];
+              });
+            }
+            return data2;
+          },
+          /**
+           * Set the canvas position and size with new data.
+           * @param {Object} data - The new canvas data.
+           * @returns {Cropper} this
+           */
+          setCanvasData: function setCanvasData(data2) {
+            var canvasData = this.canvasData;
+            var aspectRatio = canvasData.aspectRatio;
+            if (this.ready && !this.disabled && isPlainObject(data2)) {
+              if (isNumber3(data2.left)) {
+                canvasData.left = data2.left;
+              }
+              if (isNumber3(data2.top)) {
+                canvasData.top = data2.top;
+              }
+              if (isNumber3(data2.width)) {
+                canvasData.width = data2.width;
+                canvasData.height = data2.width / aspectRatio;
+              } else if (isNumber3(data2.height)) {
+                canvasData.height = data2.height;
+                canvasData.width = data2.height * aspectRatio;
+              }
+              this.renderCanvas(true);
+            }
+            return this;
+          },
+          /**
+           * Get the crop box position and size data.
+           * @returns {Object} The result crop box data.
+           */
+          getCropBoxData: function getCropBoxData() {
+            var cropBoxData = this.cropBoxData;
+            var data2;
+            if (this.ready && this.cropped) {
+              data2 = {
+                left: cropBoxData.left,
+                top: cropBoxData.top,
+                width: cropBoxData.width,
+                height: cropBoxData.height
+              };
+            }
+            return data2 || {};
+          },
+          /**
+           * Set the crop box position and size with new data.
+           * @param {Object} data - The new crop box data.
+           * @returns {Cropper} this
+           */
+          setCropBoxData: function setCropBoxData(data2) {
+            var cropBoxData = this.cropBoxData;
+            var aspectRatio = this.options.aspectRatio;
+            var widthChanged;
+            var heightChanged;
+            if (this.ready && this.cropped && !this.disabled && isPlainObject(data2)) {
+              if (isNumber3(data2.left)) {
+                cropBoxData.left = data2.left;
+              }
+              if (isNumber3(data2.top)) {
+                cropBoxData.top = data2.top;
+              }
+              if (isNumber3(data2.width) && data2.width !== cropBoxData.width) {
+                widthChanged = true;
+                cropBoxData.width = data2.width;
+              }
+              if (isNumber3(data2.height) && data2.height !== cropBoxData.height) {
+                heightChanged = true;
+                cropBoxData.height = data2.height;
+              }
+              if (aspectRatio) {
+                if (widthChanged) {
+                  cropBoxData.height = cropBoxData.width / aspectRatio;
+                } else if (heightChanged) {
+                  cropBoxData.width = cropBoxData.height * aspectRatio;
+                }
+              }
+              this.renderCropBox();
+            }
+            return this;
+          },
+          /**
+           * Get a canvas drawn the cropped image.
+           * @param {Object} [options={}] - The config options.
+           * @returns {HTMLCanvasElement} - The result canvas.
+           */
+          getCroppedCanvas: function getCroppedCanvas() {
+            var options = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : {};
+            if (!this.ready || !window.HTMLCanvasElement) {
+              return null;
+            }
+            var canvasData = this.canvasData;
+            var source = getSourceCanvas(this.image, this.imageData, canvasData, options);
+            if (!this.cropped) {
+              return source;
+            }
+            var _this$getData = this.getData(), initialX = _this$getData.x, initialY = _this$getData.y, initialWidth = _this$getData.width, initialHeight = _this$getData.height;
+            var ratio = source.width / Math.floor(canvasData.naturalWidth);
+            if (ratio !== 1) {
+              initialX *= ratio;
+              initialY *= ratio;
+              initialWidth *= ratio;
+              initialHeight *= ratio;
+            }
+            var aspectRatio = initialWidth / initialHeight;
+            var maxSizes = getAdjustedSizes({
+              aspectRatio,
+              width: options.maxWidth || Infinity,
+              height: options.maxHeight || Infinity
+            });
+            var minSizes = getAdjustedSizes({
+              aspectRatio,
+              width: options.minWidth || 0,
+              height: options.minHeight || 0
+            }, "cover");
+            var _getAdjustedSizes = getAdjustedSizes({
+              aspectRatio,
+              width: options.width || (ratio !== 1 ? source.width : initialWidth),
+              height: options.height || (ratio !== 1 ? source.height : initialHeight)
+            }), width = _getAdjustedSizes.width, height = _getAdjustedSizes.height;
+            width = Math.min(maxSizes.width, Math.max(minSizes.width, width));
+            height = Math.min(maxSizes.height, Math.max(minSizes.height, height));
+            var canvas = document.createElement("canvas");
+            var context = canvas.getContext("2d");
+            canvas.width = normalizeDecimalNumber(width);
+            canvas.height = normalizeDecimalNumber(height);
+            context.fillStyle = options.fillColor || "transparent";
+            context.fillRect(0, 0, width, height);
+            var _options$imageSmoothi = options.imageSmoothingEnabled, imageSmoothingEnabled = _options$imageSmoothi === void 0 ? true : _options$imageSmoothi, imageSmoothingQuality = options.imageSmoothingQuality;
+            context.imageSmoothingEnabled = imageSmoothingEnabled;
+            if (imageSmoothingQuality) {
+              context.imageSmoothingQuality = imageSmoothingQuality;
+            }
+            var sourceWidth = source.width;
+            var sourceHeight = source.height;
+            var srcX = initialX;
+            var srcY = initialY;
+            var srcWidth;
+            var srcHeight;
+            var dstX;
+            var dstY;
+            var dstWidth;
+            var dstHeight;
+            if (srcX <= -initialWidth || srcX > sourceWidth) {
+              srcX = 0;
+              srcWidth = 0;
+              dstX = 0;
+              dstWidth = 0;
+            } else if (srcX <= 0) {
+              dstX = -srcX;
+              srcX = 0;
+              srcWidth = Math.min(sourceWidth, initialWidth + srcX);
+              dstWidth = srcWidth;
+            } else if (srcX <= sourceWidth) {
+              dstX = 0;
+              srcWidth = Math.min(initialWidth, sourceWidth - srcX);
+              dstWidth = srcWidth;
+            }
+            if (srcWidth <= 0 || srcY <= -initialHeight || srcY > sourceHeight) {
+              srcY = 0;
+              srcHeight = 0;
+              dstY = 0;
+              dstHeight = 0;
+            } else if (srcY <= 0) {
+              dstY = -srcY;
+              srcY = 0;
+              srcHeight = Math.min(sourceHeight, initialHeight + srcY);
+              dstHeight = srcHeight;
+            } else if (srcY <= sourceHeight) {
+              dstY = 0;
+              srcHeight = Math.min(initialHeight, sourceHeight - srcY);
+              dstHeight = srcHeight;
+            }
+            var params = [srcX, srcY, srcWidth, srcHeight];
+            if (dstWidth > 0 && dstHeight > 0) {
+              var scale = width / initialWidth;
+              params.push(dstX * scale, dstY * scale, dstWidth * scale, dstHeight * scale);
+            }
+            context.drawImage.apply(context, [source].concat(_toConsumableArray(params.map(function(param) {
+              return Math.floor(normalizeDecimalNumber(param));
+            }))));
+            return canvas;
+          },
+          /**
+           * Change the aspect ratio of the crop box.
+           * @param {number} aspectRatio - The new aspect ratio.
+           * @returns {Cropper} this
+           */
+          setAspectRatio: function setAspectRatio(aspectRatio) {
+            var options = this.options;
+            if (!this.disabled && !isUndefined2(aspectRatio)) {
+              options.aspectRatio = Math.max(0, aspectRatio) || NaN;
+              if (this.ready) {
+                this.initCropBox();
+                if (this.cropped) {
+                  this.renderCropBox();
+                }
+              }
+            }
+            return this;
+          },
+          /**
+           * Change the drag mode.
+           * @param {string} mode - The new drag mode.
+           * @returns {Cropper} this
+           */
+          setDragMode: function setDragMode(mode) {
+            var options = this.options, dragBox = this.dragBox, face = this.face;
+            if (this.ready && !this.disabled) {
+              var croppable = mode === DRAG_MODE_CROP;
+              var movable = options.movable && mode === DRAG_MODE_MOVE;
+              mode = croppable || movable ? mode : DRAG_MODE_NONE;
+              options.dragMode = mode;
+              setData(dragBox, DATA_ACTION, mode);
+              toggleClass(dragBox, CLASS_CROP, croppable);
+              toggleClass(dragBox, CLASS_MOVE, movable);
+              if (!options.cropBoxMovable) {
+                setData(face, DATA_ACTION, mode);
+                toggleClass(face, CLASS_CROP, croppable);
+                toggleClass(face, CLASS_MOVE, movable);
+              }
+            }
+            return this;
+          }
+        };
+        var AnotherCropper = WINDOW.Cropper;
+        var Cropper2 = /* @__PURE__ */ function() {
+          function Cropper3(element) {
+            var options = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {};
+            _classCallCheck(this, Cropper3);
+            if (!element || !REGEXP_TAG_NAME.test(element.tagName)) {
+              throw new Error("The first argument is required and must be an <img> or <canvas> element.");
+            }
+            this.element = element;
+            this.options = assign({}, DEFAULTS, isPlainObject(options) && options);
+            this.cropped = false;
+            this.disabled = false;
+            this.pointers = {};
+            this.ready = false;
+            this.reloading = false;
+            this.replaced = false;
+            this.sized = false;
+            this.sizing = false;
+            this.init();
+          }
+          _createClass(Cropper3, [{
+            key: "init",
+            value: function init() {
+              var element = this.element;
+              var tagName2 = element.tagName.toLowerCase();
+              var url;
+              if (element[NAMESPACE]) {
+                return;
+              }
+              element[NAMESPACE] = this;
+              if (tagName2 === "img") {
+                this.isImg = true;
+                url = element.getAttribute("src") || "";
+                this.originalUrl = url;
+                if (!url) {
+                  return;
+                }
+                url = element.src;
+              } else if (tagName2 === "canvas" && window.HTMLCanvasElement) {
+                url = element.toDataURL();
+              }
+              this.load(url);
+            }
+          }, {
+            key: "load",
+            value: function load(url) {
+              var _this = this;
+              if (!url) {
+                return;
+              }
+              this.url = url;
+              this.imageData = {};
+              var element = this.element, options = this.options;
+              if (!options.rotatable && !options.scalable) {
+                options.checkOrientation = false;
+              }
+              if (!options.checkOrientation || !window.ArrayBuffer) {
+                this.clone();
+                return;
+              }
+              if (REGEXP_DATA_URL.test(url)) {
+                if (REGEXP_DATA_URL_JPEG.test(url)) {
+                  this.read(dataURLToArrayBuffer(url));
+                } else {
+                  this.clone();
+                }
+                return;
+              }
+              var xhr = new XMLHttpRequest();
+              var clone6 = this.clone.bind(this);
+              this.reloading = true;
+              this.xhr = xhr;
+              xhr.onabort = clone6;
+              xhr.onerror = clone6;
+              xhr.ontimeout = clone6;
+              xhr.onprogress = function() {
+                if (xhr.getResponseHeader("content-type") !== MIME_TYPE_JPEG) {
+                  xhr.abort();
+                }
+              };
+              xhr.onload = function() {
+                _this.read(xhr.response);
+              };
+              xhr.onloadend = function() {
+                _this.reloading = false;
+                _this.xhr = null;
+              };
+              if (options.checkCrossOrigin && isCrossOriginURL(url) && element.crossOrigin) {
+                url = addTimestamp(url);
+              }
+              xhr.open("GET", url, true);
+              xhr.responseType = "arraybuffer";
+              xhr.withCredentials = element.crossOrigin === "use-credentials";
+              xhr.send();
+            }
+          }, {
+            key: "read",
+            value: function read2(arrayBuffer) {
+              var options = this.options, imageData = this.imageData;
+              var orientation = resetAndGetOrientation(arrayBuffer);
+              var rotate2 = 0;
+              var scaleX = 1;
+              var scaleY = 1;
+              if (orientation > 1) {
+                this.url = arrayBufferToDataURL(arrayBuffer, MIME_TYPE_JPEG);
+                var _parseOrientation = parseOrientation(orientation);
+                rotate2 = _parseOrientation.rotate;
+                scaleX = _parseOrientation.scaleX;
+                scaleY = _parseOrientation.scaleY;
+              }
+              if (options.rotatable) {
+                imageData.rotate = rotate2;
+              }
+              if (options.scalable) {
+                imageData.scaleX = scaleX;
+                imageData.scaleY = scaleY;
+              }
+              this.clone();
+            }
+          }, {
+            key: "clone",
+            value: function clone6() {
+              var element = this.element, url = this.url;
+              var crossOrigin = element.crossOrigin;
+              var crossOriginUrl = url;
+              if (this.options.checkCrossOrigin && isCrossOriginURL(url)) {
+                if (!crossOrigin) {
+                  crossOrigin = "anonymous";
+                }
+                crossOriginUrl = addTimestamp(url);
+              }
+              this.crossOrigin = crossOrigin;
+              this.crossOriginUrl = crossOriginUrl;
+              var image = document.createElement("img");
+              if (crossOrigin) {
+                image.crossOrigin = crossOrigin;
+              }
+              image.src = crossOriginUrl || url;
+              image.alt = element.alt || "The image to crop";
+              this.image = image;
+              image.onload = this.start.bind(this);
+              image.onerror = this.stop.bind(this);
+              addClass(image, CLASS_HIDE);
+              element.parentNode.insertBefore(image, element.nextSibling);
+            }
+          }, {
+            key: "start",
+            value: function start2() {
+              var _this2 = this;
+              var image = this.image;
+              image.onload = null;
+              image.onerror = null;
+              this.sizing = true;
+              var isIOSWebKit = WINDOW.navigator && /(?:iPad|iPhone|iPod).*?AppleWebKit/i.test(WINDOW.navigator.userAgent);
+              var done = function done2(naturalWidth, naturalHeight) {
+                assign(_this2.imageData, {
+                  naturalWidth,
+                  naturalHeight,
+                  aspectRatio: naturalWidth / naturalHeight
+                });
+                _this2.initialImageData = assign({}, _this2.imageData);
+                _this2.sizing = false;
+                _this2.sized = true;
+                _this2.build();
+              };
+              if (image.naturalWidth && !isIOSWebKit) {
+                done(image.naturalWidth, image.naturalHeight);
+                return;
+              }
+              var sizingImage = document.createElement("img");
+              var body = document.body || document.documentElement;
+              this.sizingImage = sizingImage;
+              sizingImage.onload = function() {
+                done(sizingImage.width, sizingImage.height);
+                if (!isIOSWebKit) {
+                  body.removeChild(sizingImage);
+                }
+              };
+              sizingImage.src = image.src;
+              if (!isIOSWebKit) {
+                sizingImage.style.cssText = "left:0;max-height:none!important;max-width:none!important;min-height:0!important;min-width:0!important;opacity:0;position:absolute;top:0;z-index:-1;";
+                body.appendChild(sizingImage);
+              }
+            }
+          }, {
+            key: "stop",
+            value: function stop() {
+              var image = this.image;
+              image.onload = null;
+              image.onerror = null;
+              image.parentNode.removeChild(image);
+              this.image = null;
+            }
+          }, {
+            key: "build",
+            value: function build() {
+              if (!this.sized || this.ready) {
+                return;
+              }
+              var element = this.element, options = this.options, image = this.image;
+              var container = element.parentNode;
+              var template = document.createElement("div");
+              template.innerHTML = TEMPLATE;
+              var cropper2 = template.querySelector(".".concat(NAMESPACE, "-container"));
+              var canvas = cropper2.querySelector(".".concat(NAMESPACE, "-canvas"));
+              var dragBox = cropper2.querySelector(".".concat(NAMESPACE, "-drag-box"));
+              var cropBox = cropper2.querySelector(".".concat(NAMESPACE, "-crop-box"));
+              var face = cropBox.querySelector(".".concat(NAMESPACE, "-face"));
+              this.container = container;
+              this.cropper = cropper2;
+              this.canvas = canvas;
+              this.dragBox = dragBox;
+              this.cropBox = cropBox;
+              this.viewBox = cropper2.querySelector(".".concat(NAMESPACE, "-view-box"));
+              this.face = face;
+              canvas.appendChild(image);
+              addClass(element, CLASS_HIDDEN);
+              container.insertBefore(cropper2, element.nextSibling);
+              removeClass(image, CLASS_HIDE);
+              this.initPreview();
+              this.bind();
+              options.initialAspectRatio = Math.max(0, options.initialAspectRatio) || NaN;
+              options.aspectRatio = Math.max(0, options.aspectRatio) || NaN;
+              options.viewMode = Math.max(0, Math.min(3, Math.round(options.viewMode))) || 0;
+              addClass(cropBox, CLASS_HIDDEN);
+              if (!options.guides) {
+                addClass(cropBox.getElementsByClassName("".concat(NAMESPACE, "-dashed")), CLASS_HIDDEN);
+              }
+              if (!options.center) {
+                addClass(cropBox.getElementsByClassName("".concat(NAMESPACE, "-center")), CLASS_HIDDEN);
+              }
+              if (options.background) {
+                addClass(cropper2, "".concat(NAMESPACE, "-bg"));
+              }
+              if (!options.highlight) {
+                addClass(face, CLASS_INVISIBLE);
+              }
+              if (options.cropBoxMovable) {
+                addClass(face, CLASS_MOVE);
+                setData(face, DATA_ACTION, ACTION_ALL);
+              }
+              if (!options.cropBoxResizable) {
+                addClass(cropBox.getElementsByClassName("".concat(NAMESPACE, "-line")), CLASS_HIDDEN);
+                addClass(cropBox.getElementsByClassName("".concat(NAMESPACE, "-point")), CLASS_HIDDEN);
+              }
+              this.render();
+              this.ready = true;
+              this.setDragMode(options.dragMode);
+              if (options.autoCrop) {
+                this.crop();
+              }
+              this.setData(options.data);
+              if (isFunction2(options.ready)) {
+                addListener2(element, EVENT_READY, options.ready, {
+                  once: true
+                });
+              }
+              dispatchEvent(element, EVENT_READY);
+            }
+          }, {
+            key: "unbuild",
+            value: function unbuild() {
+              if (!this.ready) {
+                return;
+              }
+              this.ready = false;
+              this.unbind();
+              this.resetPreview();
+              var parentNode = this.cropper.parentNode;
+              if (parentNode) {
+                parentNode.removeChild(this.cropper);
+              }
+              removeClass(this.element, CLASS_HIDDEN);
+            }
+          }, {
+            key: "uncreate",
+            value: function uncreate() {
+              if (this.ready) {
+                this.unbuild();
+                this.ready = false;
+                this.cropped = false;
+              } else if (this.sizing) {
+                this.sizingImage.onload = null;
+                this.sizing = false;
+                this.sized = false;
+              } else if (this.reloading) {
+                this.xhr.onabort = null;
+                this.xhr.abort();
+              } else if (this.image) {
+                this.stop();
+              }
+            }
+            /**
+             * Get the no conflict cropper class.
+             * @returns {Cropper} The cropper class.
+             */
+          }], [{
+            key: "noConflict",
+            value: function noConflict() {
+              window.Cropper = AnotherCropper;
+              return Cropper3;
+            }
+            /**
+             * Change the default options.
+             * @param {Object} options - The new default options.
+             */
+          }, {
+            key: "setDefaults",
+            value: function setDefaults(options) {
+              assign(DEFAULTS, isPlainObject(options) && options);
+            }
+          }]);
+          return Cropper3;
+        }();
+        assign(Cropper2.prototype, render3, preview, events, handlers, change, methods);
+        return Cropper2;
+      });
     }
   });
 
@@ -29066,7 +29066,7 @@
     inbuilt: false,
     translation_code: ""
   }, on_avatar = false, long = false, small = false) {
-    log("creating", "badge", "info", { badge, on_avatar, long, small });
+    log(`creating '${badge.name}' for @${badge.user}`, "badge", "info", { badge, on_avatar, long, small });
     const classlist = on_avatar ? "avatar-status-dot" : "label no-hover";
     let elem = html.node`
         <span class=${classlist}>
@@ -33267,2032 +33267,6 @@
     page.structure.content_top.style.display = "none";
   }
 
-  // src/components/auto_edit.js
-  function bleh_auto_edits() {
-    let corrections_panel = document.body.querySelector("#subscription-corrections");
-    page.structure.main.appendChild(corrections_panel);
-    let nav = page.structure.container.querySelector("nav[data-more-string] .navlist-items");
-    nav.insertBefore(html.node`
-        <li class="navlist-item secondary-nav-item secondary-nav-item--back">
-            <a class="secondary-nav-item-link" href="${root}settings/subscription">
-                ${tl2(trans.back)}
-            </a>
-        </li>
-    `, nav.firstElementChild);
-  }
-
-  // src/pages/lastfm_settings.js
-  var import_cropperjs = __toESM(require_cropper(), 1);
-
-  // src/components/radio_toggle.js
-  function radio({ name, value, values = {} }) {
-    let buttons = [];
-    let elem = html.node`
-        <div class="primary-selections">
-        ${Object.entries(values).map(([key, val]) => {
-      const icon = val.icon;
-      let input2;
-      const button2 = html.node`
-                <div class="setting v2 standalone" data-type="radio" data-value=${key} onclick=${() => {
-        update_radio(key);
-      }}>
-                    <div class="radio-cont">
-                        <input type="radio" name=${name} value=${key} required ref=${(el) => input2 = el}>
-                        <div class="radio" aria-checked=${value == key} />
-                    </div>
-                    ${icon ? html.node`
-                                <div class="icon">
-                                    <div class="bleh-icon" style="--icon: var(--${icon})" />
-                                </div>
-                            ` : ""}
-                    <div class="heading">
-                        <h5>${typeof val.name == "object" ? tl(val.name) : val.name}</h5>
-                    </div>
-                </div>
-            `;
-      input2.checked = value == key;
-      buttons.push(button2);
-      return button2;
-    })}
-        </div>
-    `;
-    function update_radio(val) {
-      buttons.forEach((btn) => {
-        btn.querySelector("input").checked = btn.getAttribute("data-value") == val;
-        btn.querySelector(".radio").setAttribute(
-          "aria-checked",
-          btn.getAttribute("data-value") == val
-        );
-      });
-    }
-    return elem;
-  }
-  function radio_convert(existing) {
-    if (!existing) return {};
-    let values = {};
-    existing.forEach((item) => {
-      const input2 = item.querySelector("input");
-      const label = item.querySelector("label");
-      values[input2.value] = {
-        name: label.textContent.trim()
-      };
-    });
-    return values;
-  }
-
-  // src/pages/lastfm_settings.js
-  var cropper;
-  function bleh_native_settings() {
-    const no_data = page.structure.container.querySelector(":scope > .no-data-message");
-    if (no_data) page.structure.main.appendChild(no_data);
-    if (page.subpage == "overview") {
-      patch_settings_profile_tab();
-    } else if (page.subpage == "privacy") {
-      patch_settings_privacy_tab();
-    } else if (page.subpage == "subscription_overview") {
-      let panel = page.structure.container.querySelector(".row + div");
-      let subscription = panel.querySelector("#current-subscription");
-      let edits = panel.querySelector("#automatic-edits");
-      let merch_h = panel.querySelector(":scope > h2");
-      let merch = panel.querySelector("#mechandise-discount");
-      let history = panel.querySelector("#pro-history");
-      merch.insertBefore(merch_h, merch.firstElementChild);
-      page.structure.main.appendChild(subscription);
-      page.structure.main.appendChild(edits);
-      page.structure.main.appendChild(merch);
-      page.structure.main.appendChild(history);
-      let button2 = subscription.querySelector(".btn-primary");
-      if (button2)
-        button2.classList.add("subscription-button", "icon", "primary");
-      let more_link_wrap = edits.querySelector(".more-link");
-      if (more_link_wrap) {
-        more_link_wrap.classList = "";
-        let edit_buttons = more_link_wrap.querySelectorAll("a");
-        edit_buttons.forEach((edit_button, index3) => {
-          edit_button.classList.add(
-            "btn",
-            "edit-lead-button",
-            "icon",
-            "primary"
-          );
-          if (index3 == 0) edit_button.classList.add("edit-album");
-          else edit_button.classList.add("edit-track");
-        });
-      }
-    } else if (page.subpage.startsWith("subscription_automatic-edits")) {
-      bleh_auto_edits();
-    } else if (page.subpage == "account_overview") {
-      bleh_accounts();
-    } else if (page.subpage == "website") {
-      bleh_website();
-    } else if (page.subpage == "change-username_overview") {
-      bleh_name_change();
-    } else if (page.subpage == "applications_overview") {
-      bleh_applications();
-    }
-  }
-  function patch_settings_profile_tab() {
-    let update_picture = page.structure.main.querySelector("#update-picture");
-    if (!update_picture) return;
-    let token = document.body.querySelector('[name="csrfmiddlewaretoken"]').getAttribute("value");
-    patch_settings_profile_panel(token, update_picture);
-    patch_settings_charts_panel(token);
-  }
-  function patch_settings_charts_panel(token) {
-    let charts_panel = document.getElementById("update-chart");
-    if (charts_panel.hasAttribute("data-kate-processed")) return;
-    charts_panel.setAttribute("data-kate-processed", "true");
-    charts_panel.classList.add("bleh--panel");
-    let original_chart_settings = {
-      recent: {
-        recent_artwork: document.getElementById(
-          "id_show_recent_tracks_artwork"
-        ).checked,
-        count: document.getElementById("id_chart_length_recent_tracks").outerHTML,
-        recent_realtime: document.getElementById(
-          "id_auto_refresh_recent_tracks"
-        ).checked
-      },
-      artists: {
-        timeframe: document.getElementById("id_chart_range_top_artists").outerHTML,
-        style: document.getElementById(
-          "id_chart_style_and_length_top_artists"
-        ).outerHTML
-      },
-      albums: {
-        timeframe: document.getElementById("id_chart_range_top_albums").outerHTML,
-        style: document.getElementById(
-          "id_chart_style_and_length_top_albums"
-        ).outerHTML
-      },
-      tracks: {
-        count: document.getElementById("id_chart_length_top_tracks").outerHTML,
-        timeframe: document.getElementById("id_chart_range_top_tracks").outerHTML
-      }
-    };
-    charts_panel.innerHTML = `
-        <h4>${tl2(trans.recent_tracks)}</h4>
-        <form action="${root}settings#update-chart" name="chart-form" method="post">
-            <input type="hidden" name="csrfmiddlewaretoken" value="${token}">
-            <div class="inner-preview pad">
-                <div class="tracks recent">
-                    <div class="track realtime">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="artist"></div>
-                        <div class="time"></div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="artist"></div>
-                        <div class="time"></div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="artist"></div>
-                        <div class="time"></div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="artist"></div>
-                        <div class="time"></div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="artist"></div>
-                        <div class="time"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="setting-group">
-                <div class="setting" data-type="select">
-                    <div class="heading">
-                        <h5>${tl2(trans.amount_to_display)}</h5>
-                    </div>
-                    <div class="select-wrap custom-selector" id="id_chart_length_recent_tracks_select">
-                        ${original_chart_settings.recent.count}
-                    </div>
-                </div>
-                <div class="setting" data-type="toggle" onclick="_update_inbuilt_item('recent_artwork')" id="container-recent_artwork">
-                    <button class="btn reset" onclick="_reset_inbuilt_item('recent_artwork')">Reset to default</button>
-                    <div class="heading">
-                        <h5>${tl2(trans.recent_artwork)}</h5>
-                    </div>
-                    <div class="toggle-wrap">
-                        <input class="companion-checkbox" type="checkbox" name="show_recent_tracks_artwork" id="inbuilt-companion-checkbox-recent_artwork">
-                        <span class="btn toggle" id="toggle-recent_artwork" aria-checked="false">
-                            <div class="dot"></div>
-                        </span>
-                    </div>
-                </div>
-                <div class="setting" data-type="toggle" onclick="_update_inbuilt_item('recent_realtime')" id="container-recent_realtime">
-                    <button class="btn reset" onclick="_reset_inbuilt_item('recent_realtime')">Reset to default</button>
-                    <div class="heading">
-                        <h5>${tl2(trans.recent_realtime.name)}</h5>
-                        <p>${tl2(trans.recent_realtime.body)}</p>
-                    </div>
-                    <div class="toggle-wrap">
-                        <input class="companion-checkbox" type="checkbox" name="auto_refresh_recent_tracks" id="inbuilt-companion-checkbox-recent_realtime">
-                        <span class="btn toggle" id="toggle-recent_realtime" aria-checked="false">
-                            <div class="dot"></div>
-                        </span>
-                    </div>
-                </div>
-            </div>
-            <h4>${tl2(trans.top_artists)}</h4>
-            <div class="inner-preview pad">
-                <div class="item-grid artist">
-                    <div class="grid-primary artist">
-                        <div class="grid-item"></div>
-                    </div>
-                    <div class="grid-mains">
-                        <div class="grid-main artist">
-                            <div class="grid-item grid-item--extra artist"></div>
-                            <div class="grid-item grid-item--extra artist"></div>
-                            <div class="grid-item"></div>
-                            <div class="grid-item"></div>
-                        </div>
-                        <div class="grid-main artist">
-                            <div class="grid-item grid-item--extra artist"></div>
-                            <div class="grid-item grid-item--extra artist"></div>
-                            <div class="grid-item"></div>
-                            <div class="grid-item"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="tracks artist">
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="bar">
-                            <div class="fill" style="width: 100%"></div>
-                        </div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="bar">
-                            <div class="fill" style="width: 85%"></div>
-                        </div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="bar">
-                            <div class="fill" style="width: 60%"></div>
-                        </div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="bar">
-                            <div class="fill" style="width: 30%"></div>
-                        </div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="bar">
-                            <div class="fill" style="width: 5%"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="setting-group">
-                <div class="setting" data-type="select">
-                    <div class="heading">
-                        <h5>${tl2(trans.default_timeframe)}</h5>
-                    </div>
-                    <div class="select-wrap custom-selector" id="id_chart_range_top_artists_select">
-                        ${original_chart_settings.artists.timeframe}
-                    </div>
-                </div>
-                <div class="setting" data-type="select">
-                    <div class="heading">
-                        <h5>${tl2(trans.chart_style)}</h5>
-                    </div>
-                    <div class="select-wrap custom-selector" id="id_chart_style_and_length_top_artists_select">
-                        ${original_chart_settings.artists.style}
-                    </div>
-                </div>
-            </div>
-            <h4>${tl2(trans.top_albums)}</h4>
-            <div class="inner-preview pad">
-                <div class="item-grid album">
-                    <div class="grid-primary album">
-                        <div class="grid-item"></div>
-                    </div>
-                    <div class="grid-mains">
-                        <div class="grid-main album">
-                            <div class="grid-item"></div>
-                            <div class="grid-item"></div>
-                            <div class="grid-item grid-item--extra album"></div>
-                            <div class="grid-item grid-item--extra album"></div>
-                        </div>
-                        <div class="grid-main album">
-                            <div class="grid-item"></div>
-                            <div class="grid-item"></div>
-                            <div class="grid-item grid-item--extra album"></div>
-                            <div class="grid-item grid-item--extra album"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="tracks album">
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="bar">
-                            <div class="fill" style="width: 100%"></div>
-                        </div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="bar">
-                            <div class="fill" style="width: 85%"></div>
-                        </div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="bar">
-                            <div class="fill" style="width: 60%"></div>
-                        </div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="bar">
-                            <div class="fill" style="width: 30%"></div>
-                        </div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="bar">
-                            <div class="fill" style="width: 5%"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="setting-group">
-                <div class="setting" data-type="select">
-                    <div class="heading">
-                        <h5>${tl2(trans.default_timeframe)}</h5>
-                    </div>
-                    <div class="select-wrap custom-selector" id="id_chart_range_top_albums_select">
-                        ${original_chart_settings.albums.timeframe}
-                    </div>
-                </div>
-                <div class="setting" data-type="select">
-                    <div class="heading">
-                        <h5>${tl2(trans.chart_style)}</h5>
-                    </div>
-                    <div class="select-wrap custom-selector" id="id_chart_style_and_length_top_albums_select">
-                        ${original_chart_settings.albums.style}
-                    </div>
-                </div>
-            </div>
-            <h4>${tl2(trans.top_tracks)}</h4>
-            <div class="inner-preview pad">
-                <div class="tracks">
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="artist"></div>
-                        <div class="bar">
-                            <div class="fill" style="width: 100%"></div>
-                        </div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="artist"></div>
-                        <div class="bar">
-                            <div class="fill" style="width: 85%"></div>
-                        </div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="artist"></div>
-                        <div class="bar">
-                            <div class="fill" style="width: 60%"></div>
-                        </div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="artist"></div>
-                        <div class="bar">
-                            <div class="fill" style="width: 30%"></div>
-                        </div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="artist"></div>
-                        <div class="bar">
-                            <div class="fill" style="width: 5%"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="setting-group">
-                <div class="setting" data-type="select">
-                    <div class="heading">
-                        <h5>${tl2(trans.default_timeframe)}</h5>
-                    </div>
-                    <div class="select-wrap custom-selector" id="id_chart_range_top_tracks_select">
-                        ${original_chart_settings.tracks.timeframe}
-                    </div>
-                </div>
-                <div class="setting" data-type="select">
-                    <div class="heading">
-                        <h5>${tl2(trans.amount_to_display)}</h5>
-                    </div>
-                    <div class="select-wrap custom-selector" id="id_chart_length_top_tracks_select">
-                        ${original_chart_settings.tracks.count}
-                    </div>
-                </div>
-            </div>
-            <div class="settings-footer">
-                <button type="submit" class="btn-primary save">
-                    ${tl2(trans.save)}
-                </button>
-                <input type="hidden" value="chart" name="submit">
-            </div>
-        </form>
-    `;
-    custom_select(
-      charts_panel.querySelector("#id_chart_length_recent_tracks"),
-      charts_panel.querySelector("#id_chart_length_recent_tracks_select")
-    );
-    custom_select(
-      charts_panel.querySelector("#id_chart_range_top_artists"),
-      charts_panel.querySelector("#id_chart_range_top_artists_select")
-    );
-    custom_select(
-      charts_panel.querySelector("#id_chart_style_and_length_top_artists"),
-      charts_panel.querySelector(
-        "#id_chart_style_and_length_top_artists_select"
-      )
-    );
-    custom_select(
-      charts_panel.querySelector("#id_chart_range_top_albums"),
-      charts_panel.querySelector("#id_chart_range_top_albums_select")
-    );
-    custom_select(
-      charts_panel.querySelector("#id_chart_style_and_length_top_albums"),
-      charts_panel.querySelector(
-        "#id_chart_style_and_length_top_albums_select"
-      )
-    );
-    custom_select(
-      charts_panel.querySelector("#id_chart_range_top_tracks"),
-      charts_panel.querySelector("#id_chart_range_top_tracks_select")
-    );
-    custom_select(
-      charts_panel.querySelector("#id_chart_length_top_tracks"),
-      charts_panel.querySelector("#id_chart_length_top_tracks_select")
-    );
-    for (let category in original_chart_settings) {
-      for (let setting2 in original_chart_settings[category]) {
-        update_inbuilt_item(
-          setting2,
-          original_chart_settings[category][setting2],
-          false
-        );
-      }
-    }
-    let selects = document.body.querySelectorAll("select");
-    selects.forEach((select2) => {
-      select2.setAttribute(
-        "onchange",
-        `_update_inbuilt_select('${select2.getAttribute("id")}', this.value)`
-      );
-      update_inbuilt_select(select2.getAttribute("id"), select2.value);
-    });
-  }
-  function patch_settings_profile_panel(token, update_picture) {
-    const bio_max_length = 500;
-    update_picture.classList.add("bleh--panel");
-    const upload_form = update_picture.querySelector(".avatar-upload-form");
-    const avatar_url = update_picture.querySelector(".image-upload-preview img").getAttribute("src");
-    const upload_finished = update_picture.querySelector(".alert-success");
-    if (page.state.avatar_changer && upload_finished) {
-      const id = page.state.avatar_changer.getAttribute("data-modal-id");
-      dialog_rm({ id });
-    }
-    const update_profile2 = page.structure.main.querySelector("#update-profile");
-    const alert2 = update_profile2.querySelector(".alert");
-    let form_display_name = document.getElementById("id_full_name").value;
-    let form_website = document.getElementById("id_homepage").value;
-    let form_country = document.getElementById("id_country");
-    let form_about_me = document.getElementById("id_about_me").textContent;
-    const markdown_settings = {
-      allow_headers: true,
-      allow_banners: true,
-      allow_icons: true,
-      allow_hue: true,
-      allow_fonts: true,
-      cache: true,
-      take_effect: false,
-      allow_socials: true,
-      allow_alignment: true,
-      allow_lists: true
-    };
-    let chars;
-    const about = markdown_field(update_about, markdown_settings, form_about_me, "about_me", 40, 10, tl2(trans.anything_you_can_imagine));
-    let preview;
-    let accent_setting;
-    let font_setting;
-    render(page.structure.side, html`
-        <section>
-            <h2>${tl2(trans.about_me_preview)}</h2>
-            <span class="bleh--about-me-preview markdown-body" ref=${(el) => preview = el} />
-        </section>
-    `);
-    let profile_cache = JSON.parse(localStorage.getItem("bleh_profile_cache")) || {};
-    let cache2 = profile_cache[auth.name];
-    render(update_picture, html`
-        <h4>${tl2(trans.profile)}</h4>
-        ${alert2}
-        <form
-            class="dont-move"
-            action="${root}settings#update-profile"
-            name="profile-form"
-            data-form-type="identity"
-            method="post"
-        >
-            <input
-                type="hidden"
-                name="csrfmiddlewaretoken"
-                value="${token}"
-            />
-            <div class="setting-group">
-                <div class="setting" data-type="info">
-                    <div class="heading">
-                        <h5>${tl2(trans.avatar)}</h5>
-                        <p>${tl2(trans.avatar_desc)}</p>
-                    </div>
-                    <div class="info">
-                        <div class="avatar image-uploader" onclick=${() => avatar(token)}>
-                            <img
-                                src=${avatar_url}
-                                alt=${tl2(trans.your_avatar)}
-                                loading="lazy"
-                            />
-                            <div class="avatar-overlay" />
-                        </div>
-                    </div>
-                </div>
-                ${() => {
-      const username_regex = /\[name=([^\]]+)\]/;
-      const elem = html.node`
-                        <div class="setting" data-type="text" disabled=${!auth.sponsor}>
-                            <div class="heading">
-                                <h5>${tl2(trans.display_name.name)}<span class="new-badge sponsor-related">${tl2(trans.sponsors_only)}</span></h5>
-                                <p>${tl2(trans.display_name.body)}</p>
-                            </div>
-                            ${input({
-        value: cache2.username,
-        placeholder: auth.name,
-        func: (val) => {
-          const match3 = about.value().match(username_regex);
-          const new_name = `[name=${val}]`;
-          if (match3) {
-            about.value(about.value().replace(username_regex, new_name));
-          } else {
-            const trimmed = about.value().trimEnd();
-            if (trimmed.length == 0) {
-              about.value(new_name);
-            } else {
-              about.value(trimmed + "\n\n" + new_name);
-            }
-          }
-        },
-        submit_on_character: true
-      })}
-                        </div>
-                    `;
-      return elem;
-    }}
-                ${ff("profile_fonts") ? html.node`
-                <div
-                    class="setting"
-                    data-type="info"
-                    disabled=${!auth.sponsor}
-                    ref=${(el) => font_setting = el}
-                />
-                ` : ""}
-                <div class="setting" data-type="text">
-                    <div class="heading">
-                        <h5>${tl2(trans.profile_title)}</h5>
-                        <p>${tl2(trans.pronoun_tip)}</p>
-                    </div>
-                    <div class="input-container content-form">
-                        <input
-                            type="text"
-                            name="full_name"
-                            value=${form_display_name}
-                            maxlength="36"
-                            id="id_full_name"
-                            data-form-type="other"
-                        />
-                    </div>
-                </div>
-                <div class="setting" data-type="text">
-                    <div class="heading">
-                        <h5>${tl2(trans.website)}</h5>
-                    </div>
-                    <div class="input-container content-form">
-                        <input
-                            type="url"
-                            name="homepage"
-                            value=${form_website}
-                            id="id_homepage"
-                            data-form-type="website"
-                        />
-                    </div>
-                </div>
-                <div class="setting" data-type="select">
-                    <div class="heading">
-                        <h5>${tl2(trans.country)}</h5>
-                    </div>
-                    <div class="select-wrap custom-selector">
-                        ${select(
-      select_prepare(form_country),
-      form_country.value,
-      "country"
-    )}
-                    </div>
-                </div>
-                ${() => {
-      const banner_regex = /\[banner=([^\]]+)\]/;
-      const match3 = about.value().match(banner_regex);
-      const pre_existing = match3 ? match3[1] : "";
-      let preview2;
-      const elem = html.node`
-                        <div class="setting" data-type="text">
-                            <div class="heading">
-                                <h5>${tl2(trans.profile_banner.name)}</h5>
-                                <p>${tl2(trans.profile_banner.body)}</p>
-                            </div>
-                            <div class="info v">
-                                ${input({
-        value: pre_existing,
-        func: (val) => {
-          const match4 = about.value().match(banner_regex);
-          const new_banner = `[banner=${val}]`;
-          if (match4) {
-            about.value(about.value().replace(banner_regex, new_banner));
-          } else {
-            const trimmed = about.value().trimEnd();
-            if (trimmed.length == 0) {
-              about.value(new_banner);
-            } else {
-              about.value(trimmed + "\n\n" + new_banner);
-            }
-          }
-          preview2.style.setProperty("background-image", `url(${val})`);
-        },
-        submit_on_character: true
-      })}
-                                <div class="banner-image" ref=${(el) => preview2 = el} />
-                            </div>
-                        </div>
-                    `;
-      preview2.style.setProperty("background-image", `url(${pre_existing})`);
-      return elem;
-    }}
-                <div
-                    class="setting"
-                    data-type="info"
-                    disabled=${!auth.sponsor}
-                    ref=${(el) => accent_setting = el}
-                />
-                ${() => {
-      const status_regex = /\[status=([^\]]+)\]/;
-      const match3 = about.value().match(status_regex);
-      const pre_existing = match3 ? match3[1] : "";
-      const elem = html.node`
-                        <div class="setting" data-type="text">
-                            <div class="heading">
-                                <h5><a href="https://status.cafe" target="_blank">status.cafe</a><span class="new-badge new">${tl2(trans.new)}</span></h5>
-                                <p>${tl2(trans.status_cafe.body)}</p>
-                            </div>
-                            ${input({
-        value: pre_existing,
-        func: (val) => {
-          const match4 = about.value().match(status_regex);
-          const new_status = `[status=${val}]`;
-          if (match4) {
-            about.value(about.value().replace(status_regex, new_status));
-          } else {
-            const trimmed = about.value().trimEnd();
-            if (trimmed.length == 0) {
-              about.value(new_status);
-            } else {
-              about.value(trimmed + "\n\n" + new_status);
-            }
-          }
-        },
-        submit_on_character: true
-      })}
-                        </div>
-                    `;
-      return elem;
-    }}
-                <div class="setting" data-type="text">
-                    <div class="heading">
-                        <h5>${tl2(trans.about)}</h5>
-                        <p class="tip characters" ref=${(el) => chars = el}>
-                            ${tl2(
-      trans.value_characters_max,
-      { v: bio_max_length }
-    )}
-                        </p>
-                    </div>
-                    <div class="${!ff("cosplay") ? "input-container content-form textarea" : "limitless"}">
-                        ${about}
-                    </div>
-                </div>
-            </div>
-            <div class="settings-footer end">
-                <button
-                    type="submit"
-                    class="btn-primary save"
-                    data-form-type="action"
-                >
-                    ${tl2(trans.save)}
-                </button>
-                <input
-                    type="hidden"
-                    value="profile"
-                    name="submit"
-                />
-            </div>
-        </form>
-        <div class="setting-group">
-            ${setting({ id: "avatar_radius" })}
-        </div>
-    `);
-    page.structure.main.removeChild(
-      page.structure.main.querySelector("#update-profile")
-    );
-    update_about();
-    function len(text4) {
-      return text4.replace(/\n/g, "\r\n").length;
-      const normalised = text4.replace(/\r\n/g, "\n");
-      return new TextEncoder().encode(normalised).length;
-    }
-    function update_about(value = about.value()) {
-      log("re-rendering", "about", "log");
-      const length = len(value);
-      chars.textContent = tl2(trans.value_characters_max, {
-        v: `${length}/${bio_max_length}`
-      });
-      chars.setAttribute("data-exceeded", length > bio_max_length);
-      render(preview, markdown(value, markdown_settings));
-      let profile_cache2 = JSON.parse(localStorage.getItem("bleh_profile_cache")) || {};
-      let cache3 = profile_cache2[auth.name];
-      console.info("cache", cache3);
-      const accent_regex = /\[accent=([0-9]{1,3}),([0-9]*\.?[0-9]+),([0-9]*\.?[0-9]+)\]/;
-      const font_regex = /\[font=([^\]]+)\]/;
-      console.info(
-        "cache update",
-        about.value(),
-        cache3.hue,
-        cache3.sat,
-        cache3.lit
-      );
-      let accent_edit;
-      render(accent_setting, html``);
-      render(accent_setting, html`
-            <div class="heading">
-                <h5>${tl2(trans.profile_accent.name)}<span class="new-badge sponsor-related">${tl2(trans.sponsors_only)}</span></h5>
-                <p>${tl2(trans.profile_accent.body)}</p>
-            </div>
-            <div class="info">
-                <div
-                    class="colour-tile colourful"
-                    style="--hue-over: ${cache3.hue}; --sat-over: ${cache3.sat}; --lit-over: ${cache3.lit}"
-                />
-                <div class="swatch-group palette">
-                    <button
-                        class="swatch-container"
-                        ref=${(el) => accent_edit = el}
-                        type="button"
-                        onclick=${() => {
-        let hue_range;
-        let sat_range;
-        let lit_range;
-        const match3 = about.value().match(accent_regex);
-        if (match3) {
-          save_setting(
-            "profile_hue",
-            parseInt(match3[1], 10)
-          );
-          save_setting(
-            "profile_sat",
-            parseFloat(match3[2])
-          );
-          save_setting(
-            "profile_lit",
-            parseFloat(match3[3])
-          );
-        }
-        let accent_preview2;
-        dialog({
-          id: "profile_accent",
-          title: tl2(trans.profile_accent.name),
-          body: html.node`
-                                    <div class="setting-group">
-                                        <div class="setting" data-type="info">
-                                            <div class="heading">
-                                                <h5>${tl2(trans.preview)}</h5>
-                                            </div>
-                                            <div class="info">
-                                                <div class="colour-tile colourful" ref=${(el) => accent_preview2 = el} style="--hue-over: ${settings.profile_hue}; --sat-over: ${settings.profile_sat}; --lit-over: ${settings.profile_lit}" />
-                                            </div>
-                                        </div>
-                                        ${ff("colour_based_on_hex") ? html.node`
-                                        <div class="setting" data-type="text">
-                                            <div class="heading">
-                                                <h5>${tl2(trans.convert_from_hex)}</h5>
-                                            </div>
-                                            <div class="input-container content-form">
-                                                ${colour = input({
-            type: "colour",
-            value: "#999999",
-            maxlength: 7,
-            warn_if_empty: true
-          })}
-                                                <button class="btn primary icon convert" onclick=${() => {
-            const value2 = colour.value();
-            const hsl = hex_to_hsl(value2);
-            hue_range.set(hsl.h);
-            sat_range.set(
-              clamp_sat(hsl.s / 100 * 3)
-            );
-            lit_range.set(
-              hsl.l / 100 + 0.35
-            );
-          }}>${tl2(trans.convert)}</button>
-                                            </div>
-                                        </div>
-                                        ` : ""}
-                                        ${hue_range = setting({ id: "profile_hue", func: update_colour_preview })}
-                                        ${sat_range = setting({ id: "profile_sat", func: update_colour_preview })}
-                                        ${lit_range = setting({ id: "profile_lit", func: update_colour_preview })}
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button class="see-more cancel" onclick=${() => dialog_rm({ id: "profile_accent" })}>
-                                            ${tl2(trans.back)}
-                                        </button>
-                                        <div class="fill"></div>
-                                        <div class="button-group">
-                                            ${() => {
-            const btn = html.node`
-                                                    <button class="btn icon select-button" data-type="copy">
-                                                        ${tl2(trans.copy)}
-                                                    </button>
-                                                `;
-            tippy_esm_default(btn, {
-              theme: "context-menu",
-              content: html.node`
-                                                        <button class="dropdown-menu-clickable-item" data-type="profile" onclick=${() => {
-                hue_range.set(settings.hue);
-                sat_range.set(settings.sat);
-                lit_range.set(settings.lit);
-              }}>${tl2(trans.apply_global_accent)}</button>
-                                                        <button class="dropdown-menu-clickable-item" data-type="global" onclick=${() => {
-                const warn = notify({
-                  id: "confirm_accent",
-                  title: tl2(trans.are_you_sure),
-                  body: tl2(trans.this_will_replace_your_global_accent),
-                  type: "warning",
-                  actions: [
-                    {
-                      type: "check",
-                      action: () => {
-                        notify_rm(warn);
-                        save_setting("hue", settings.profile_hue);
-                        save_setting("sat", settings.profile_sat);
-                        save_setting("lit", settings.profile_lit);
-                      },
-                      text: tl2(trans.continue)
-                    }
-                  ],
-                  persist: true
-                });
-              }}>${tl2(trans.apply_profile_accent)}</button>
-                                                    `,
-              trigger: "click",
-              placement: "bottom",
-              interactive: true,
-              interactiveBorder: 10,
-              offset: [0, 0]
-            });
-            return btn;
-          }}
-                                            <button class="btn primary continue" onclick=${() => {
-            const new_accent = `[accent=${settings.profile_hue},${settings.profile_sat},${settings.profile_lit}]`;
-            if (match3) {
-              about.value(about.value().replace(
-                accent_regex,
-                new_accent
-              ));
-            } else {
-              const trimmed = about.value().trimEnd();
-              if (trimmed.length == 0) {
-                about.value(new_accent);
-              } else {
-                about.value(trimmed + "\n\n" + new_accent);
-              }
-            }
-            dialog_rm({ id: "profile_accent" });
-            status({
-              title: tl2(
-                trans.profile_accent.reminder
-              )
-            });
-          }}>
-                                                ${tl2(trans.change)}
-                                            </button>
-                                        </div>
-                                    </div>
-                                `
-        });
-        function update_colour_preview() {
-          accent_preview2.style = `--hue-over: ${settings.profile_hue}; --sat-over: ${settings.profile_sat}; --lit-over: ${settings.profile_lit}`;
-        }
-      }}
-                        >
-                            <div
-                                class="swatch colourful"
-                                data-swatch-type="customise"
-                            />
-                        </button>
-                    </div>
-                </div>
-            `);
-      tippy_esm_default(accent_edit, {
-        content: tl2(trans.edit)
-      });
-      if (font_setting) {
-        let font_edit;
-        let font_tile;
-        render(font_setting, html``);
-        render(font_setting, html`
-                <div class="heading">
-                    <h5>${tl2(trans.profile_font.name)}<span class="new-badge sponsor-related">${tl2(trans.sponsors_only)}</span></h5>
-                    <p>${tl2(trans.profile_font.body)}</p>
-                </div>
-                <div class="info">
-                    <div class="font-tile">
-                        <span class="preview-style" data-font=${cache3.font} data-font-style=${cache3.font_style} ref=${(el) => font_tile = el}>Aa</span>
-                    </div>
-                    <div class="swatch-group palette">
-                        <button
-                            class="swatch-container"
-                            ref=${(el) => font_edit = el}
-                            type="button"
-                            onclick=${() => {
-          const match3 = about.value().match(font_regex);
-          if (match3) {
-            save_setting(
-              "profile_hue",
-              parseInt(match3[1], 10)
-            );
-            save_setting(
-              "profile_sat",
-              parseFloat(match3[2])
-            );
-            save_setting(
-              "profile_lit",
-              parseFloat(match3[3])
-            );
-          }
-          let font_name = cache3.font;
-          let font_style = cache3.font_style;
-          let font_preview;
-          let font_buttons = [];
-          let font_style_buttons = [];
-          dialog({
-            id: "profile_font",
-            title: tl2(trans.profile_font.name),
-            body: html.node`
-                                        <div class="font-name-preview">
-                                            <span data-font=${font_name} data-font-style=${font_style} ref=${(el) => font_preview = el}>${cache3.username ? cache3.username : auth.name}</span>
-                                        </div>
-                                        <div class="font-name-options">
-                                            <h4 class="font-options-header">${tl2(trans.font.name)}</h4>
-                                            <div class="font-options">
-                                                ${Object.entries(page.state.fonts).map(([font, family]) => {
-              if (family == "") family = tl2(trans.none);
-              const elem = html.node`
-                                                        <button class="btn font-selection" data-font=${font} aria-checked=${font == font_name} onclick=${() => {
-                font_name = font;
-                font_preview.setAttribute("data-font", font);
-                font_tile.setAttribute("data-font", font);
-                font_buttons.forEach((btn) => {
-                  btn.setAttribute("aria-checked", btn.getAttribute("data-font") == font);
-                });
-              }}>
-                                                            <span data-font=${font}>Aa</span>
-                                                        </button>
-                                                    `;
-              tippy_esm_default(elem, {
-                content: family,
-                delay: [500, 0]
-              });
-              font_buttons.push(elem);
-              return elem;
-            })}
-                                            </div>
-                                            <h4 class="font-options-header">${tl2(trans.font_style)}</h4>
-                                            <div class="font-options">
-                                                ${["solid", "pop", "out", "glow"].map((style) => {
-              const elem = html.node`
-                                                        <button class="btn font-selection font-style" data-font-style=${style} aria-checked=${style == font_style} onclick=${() => {
-                font_style = style;
-                font_preview.setAttribute("data-font-style", style);
-                font_tile.setAttribute("data-font-style", style);
-                font_style_buttons.forEach((btn) => {
-                  btn.setAttribute("aria-checked", btn.getAttribute("data-font-style") == style);
-                });
-              }}>
-                                                            <span class="preview-style" data-font-style=${style}>${tl2(trans.font_style[style])}</span>
-                                                        </button>
-                                                    `;
-              font_style_buttons.push(elem);
-              return elem;
-            })}
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button class="see-more cancel" onclick=${() => dialog_rm({ id: "profile_font" })}>
-                                                ${tl2(trans.back)}
-                                            </button>
-                                            <div class="fill"></div>
-                                            <button class="btn primary continue" onclick=${() => {
-              const new_font = `[font=${font_name}${font_style != "solid" ? `,${font_style}` : ""}]`;
-              if (match3) {
-                about.value(about.value().replace(
-                  font_regex,
-                  new_font
-                ));
-              } else {
-                const trimmed = about.value().trimEnd();
-                if (trimmed.length == 0) {
-                  about.value(new_font);
-                } else {
-                  about.value(trimmed + "\n\n" + new_font);
-                }
-              }
-              dialog_rm({ id: "profile_font" });
-              status({
-                title: tl2(
-                  trans.profile_font.reminder
-                )
-              });
-            }}>
-                                                ${tl2(trans.change)}
-                                            </button>
-                                        </div>
-                                    `
-          });
-          function update_colour_preview() {
-            accent_preview.style = `--hue-over: ${settings.profile_hue}; --sat-over: ${settings.profile_sat}; --lit-over: ${settings.profile_lit}`;
-          }
-        }}
-                            >
-                                <div
-                                    class="swatch colourful"
-                                    data-swatch-type="customise"
-                                />
-                            </button>
-                        </div>
-                    </div>
-                `);
-        tippy_esm_default(font_edit, {
-          content: tl2(trans.edit)
-        });
-      }
-    }
-  }
-  function avatar(token = "") {
-    if (!token) token = page.token;
-    else page.token = token;
-    page.state.avatar_changer = dialog({
-      id: "edit_avatar",
-      title: tl2(trans.change_avatar),
-      body: html.node`
-            <div class="forms">
-                <form action="${root}settings" name="avatar-form" method="post" enctype="multipart/form-data">
-                    <input type="hidden" name="csrfmiddlewaretoken" value=${page.token}>
-                    <div class="form-group form-group--avatar js-form-group upload-avatar">
-                        <div class="js-form-group-controls form-group-controls">
-                            <span class="btn-secondary btn primary btn-file" data-kate-processed="true">
-                                ${tl2(trans.upload)}
-                                <input type="file" onchange=${() => update_avatar(event)} name="avatar" data-require="components/file-input" data-file-input-copy="${tl2(trans.upload)}" data-no-file-copy="No file chosen" accept="image/*" required="" id="id_avatar" data-kate-processed="true">
-                            </span>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn-primary save" id="avatar_saver">
-                        ${tl2(trans.save)}
-                    </button>
-                    <input type="hidden" value="avatar" name="submit">
-                </form>
-                <form action="${root}settings/avatar/delete" method="post">
-                    <input type="hidden" name="csrfmiddlewaretoken" value=${page.token}>
-                    <div class="form-group delete-avatar">
-                        <button class="btn image-upload-remove" type="submit" value="delete-avatar" name="delete-avatar">${tl2(trans.delete)}</button>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button class="see-more cancel" onclick=${() => dialog_rm({ id: "edit_avatar" })}>${tl2(trans.cancel)}</button>
-                <div class="fill"></div>
-                <button class="btn primary save" onclick=${() => save_avatar()} disabled>${tl2(trans.save)}</button>
-            </div>
-        `
-    });
-    page.state.avatar_changer.querySelector('[name="avatar-form"]').onsubmit = finish_saving_avatar;
-    const file_button = page.state.avatar_changer.querySelector(".btn-file");
-    const save_button = page.state.avatar_changer.querySelector(
-      ".modal-footer .primary"
-    );
-    let form;
-    function update_avatar(e) {
-      console.info(e);
-      if (!e.target.files || !e.target.files[0]) return;
-      form = page.state.avatar_changer.querySelector(".bleh-modal-body");
-      if (e.target.files[0].type == "image/gif") {
-        save_avatar();
-        finish_saving_avatar();
-        return;
-      }
-      let reader = new FileReader();
-      reader.onload = function() {
-        crop(reader.result);
-        save_button.removeAttribute("disabled");
-      };
-      reader.readAsDataURL(e.target.files[0]);
-    }
-    function save_avatar() {
-      page.state.avatar_changer.querySelector("#avatar_saver").click();
-    }
-    function finish_saving_avatar() {
-      page.state.avatar_changer.setAttribute("data-loading", "true");
-      page.state.avatar_changer.querySelectorAll(".bleh-modal-body button").forEach((button2) => {
-        button2.setAttribute("disabled", "true");
-        button2.removeAttribute("onclick");
-      });
-    }
-    function crop(file) {
-      let crop_image;
-      let save;
-      const crop_dialog = dialog({
-        id: "crop",
-        title: tl2(trans.crop_avatar),
-        body: html.node`
-                <div class="crop">
-                    <img src=${file} ref=${(el) => crop_image = el}>
-                </div>
-                <div class="alert alert-info">
-                    ${tl2(trans.crop_notice)}
-                </div>
-                <div class="modal-footer">
-                    <button class="see-more cancel" onclick=${() => {
-          if (cropper && cropper.destroy) cropper.destroy();
-          cropper = null;
-          avatar();
-        }}>${tl2(trans.cancel)}</button>
-                    <div class="fill"></div>
-                    <button class="btn primary save" onclick=${() => {
-          if (!cropper) return;
-          crop_dialog.querySelectorAll(".bleh-modal-body button").forEach((button2) => {
-            button2.setAttribute("disabled", "true");
-            button2.removeAttribute("onclick");
-          });
-          const canvas = cropper.getCroppedCanvas();
-          canvas.toBlob((blob) => {
-            const cropped_file = new File(
-              [blob],
-              "avatar.png",
-              { type: "image/png" }
-            );
-            const inner_form = form.querySelector("form");
-            inner_form.style.display = "none";
-            crop_dialog.querySelector(".bleh-modal-body").appendChild(inner_form);
-            const file_input = inner_form.querySelector('input[type="file"]');
-            const data_transfer = new DataTransfer();
-            data_transfer.items.add(cropped_file);
-            file_input.files = data_transfer.files;
-            inner_form.querySelector("#avatar_saver").click();
-          }, "image/png");
-        }} ref=${(el) => save = el} disabled>${tl2(trans.save)}</button>
-                </div>
-            `
-      });
-      page.state.avatar_changer = crop_dialog;
-      crop_image.onload = () => {
-        if (cropper && cropper.destroy) cropper.destroy();
-        crop_image.style.maxWidth = "none";
-        crop_image.style.width = crop_image.naturalWidth + "px";
-        crop_image.style.height = crop_image.naturalHeight + "px";
-        cropper = new import_cropperjs.default(crop_image, {
-          viewMode: 3,
-          dragMode: "crop",
-          movable: true,
-          zoomable: true,
-          scalable: false,
-          cropBoxMovable: true,
-          cropBoxResizable: true,
-          background: false,
-          guides: true,
-          autoCropArea: 1
-        });
-        save.removeAttribute("disabled");
-      };
-    }
-  }
-  function patch_settings_privacy_tab() {
-    let privacy_panel = document.getElementById("privacy");
-    let token = document.body.querySelector('[name="csrfmiddlewaretoken"]').getAttribute("value");
-    bleh_communication_panel(token);
-    patch_settings_privacy_panel(token, privacy_panel);
-  }
-  function bleh_communication_panel(token) {
-    let profile_notes = JSON.parse(localStorage.getItem("bleh_profile_notes")) || {};
-    let panel = page.structure.main.querySelector("#ignorelist");
-    panel.classList.add("bleh--panel");
-    const alert2 = panel.querySelector(".alert");
-    let list = panel.querySelectorAll(".ignore-list tr");
-    let new_list = document.createElement("div");
-    new_list.classList.add(
-      "generic-table-list",
-      "user-vertical-list",
-      "take-space"
-    );
-    let exceeded = false;
-    let exceed_amount = 10;
-    let amount = 0;
-    Array.from(list).reverse().forEach((item, index3) => {
-      let name = item.querySelector("td").textContent.trim();
-      let form2 = item.querySelector("form");
-      let button2 = form2.querySelector("button");
-      button2.classList.add("btn", "icon", "chibi", "danger-subtle", "list-action");
-      button2.setAttribute("data-type", "x");
-      tippy_esm_default(button2, {
-        content: tl2(trans.remove)
-      });
-      let entry = html.node`
-            <div class="generic-table-list-entry user-vertical-list-item">
-                <div class="name">
-                    <a class="mention" href="${root}user/${name}" target="_blank">@${name}</a>
-                </div>
-                <div class="text preview">
-                    ${profile_notes.hasOwnProperty(name) ? html.node`
-                        <p id="profile-note-row-preview--${name}">${{ html: profile_notes[name] }}</p>
-                    ` : ""}
-                </div>
-                <div class="actions">
-                    ${form2}
-                </div>
-            </div>
-        `;
-      if (index3 > exceed_amount && !exceeded) exceeded = true;
-      if (exceeded) entry.classList.add("entry-is-exceeded");
-      new_list.appendChild(entry);
-      amount += 1;
-    });
-    if (exceeded) {
-      let remainder = amount - exceed_amount;
-      new_list.classList.add("list-is-exceeded");
-      new_list.setAttribute("data-expanded", "false");
-      let expand = html.node`
-            <button class="see-more expand-down" onclick=${() => {
-        expand.style.display = "none";
-        new_list.setAttribute("data-expanded", "true");
-      }}>
-                ${tl2(trans.view_count_more).replace("{c}", remainder.toString())}
-            </button>
-        `;
-      new_list.appendChild(expand);
-    }
-    let form = page.structure.main.querySelector('[name="ignorelist"]');
-    if (page.token == "")
-      page.token = form.querySelector('[name="csrfmiddlewaretoken"]').getAttribute("value");
-    render(panel, html`
-        <h4>${tl2(trans.block_list)}</h4>
-        <div class="user-top-panel">
-            <div class="user-top-avatar user-top-avatar-side-left">
-                <div class="bleh-icon"></div>
-            </div>
-            <img
-                class="user-top-avatar user-top-avatar-main"
-                src=${auth.avatar.replace("avatar42s", "avatar300s")}
-                alt=${auth.name}
-            />
-            <div class="user-top-avatar user-top-avatar-side-right">
-                <div class="bleh-icon"></div>
-            </div>
-        </div>
-        ${alert2}
-        <div class="setting" data-type="text">
-            <div class="heading">
-                <h5>${tl2(trans.profile)}</h5>
-                <form
-                    action="${root}settings/privacy#ignorelist"
-                    name="ignorelist"
-                    method="post"
-                >
-                    <input
-                        type="hidden"
-                        name="csrfmiddlewaretoken"
-                        value=${page.token}
-                    />
-                    <div class="input-container">
-                        <input
-                            type="text"
-                            maxlength="80"
-                            id="id_user"
-                            name="user"
-                            placeholder=${tl2(trans.enter_username)}
-                        />
-                        <input
-                            type="hidden"
-                            name="listaction"
-                            value="add"
-                        />
-                        <input
-                            type="hidden"
-                            name="submit"
-                            value="ignorelist"
-                        />
-                        <button
-                            class="btn primary icon block"
-                            type="submit"
-                        >
-                            ${tl2(trans.block)}
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <div class="alert alert-info">
-            ${tl2(trans.blocked_count, { c: amount })}
-        </div>
-        <div class="setting-group">
-            ${new_list}
-        </div>
-        <div class="sep" />
-        <h5>${tl2(trans.when_blocked)}</h5>
-        <div class="to-consider">
-            <ul class="to-consider-good">
-                <li>${tl2(trans.blocked_user_public)}</li>
-                <li>${tl2(trans.blocked_user_message)}</li>
-                <li>${tl2(trans.blocked_user_new_shouts)}</li>
-            </ul>
-            <ul class="to-consider-bad">
-                <li>${tl2(trans.blocked_user_old_shouts)}</li>
-                <li>${tl2(trans.blocked_user_view_profile)}</li>
-            </ul>
-        </div>
-    `);
-  }
-  function patch_settings_privacy_panel(token, privacy_panel) {
-    privacy_panel.classList.add("bleh--panel");
-    let original_privacy_settings = {
-      recent_listening: document.getElementById("id_hide_realtime").checked,
-      receiving_msgs: document.getElementById("id_message_privacy").outerHTML,
-      disable_shoutbox: document.getElementById("id_shoutbox_disabled").checked
-    };
-    privacy_panel.innerHTML = `
-        <h4>${tl2(trans.privacy)}</h4>
-        <form action="${root}settings/privacy" name="privacy" method="post">
-            <input type="hidden" name="csrfmiddlewaretoken" value="${token}">
-            <div class="inner-preview pad">
-                <div class="tracks recent_listening">
-                    <div class="track realtime">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="artist"></div>
-                        <div class="time"></div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="artist"></div>
-                        <div class="time"></div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="artist"></div>
-                        <div class="time"></div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="artist"></div>
-                        <div class="time"></div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="artist"></div>
-                        <div class="time"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="setting-group">
-                <div class="setting" data-type="toggle" onclick="_update_inbuilt_item('recent_listening')" id="container-recent_listening">
-                    <button class="btn reset" onclick="_reset_inbuilt_item('recent_listening')">Reset to default</button>
-                    <div class="heading">
-                        <h5>${tl2(trans.recent_listening.name)}</h5>
-                        <p>${tl2(trans.recent_listening.body)}</p>
-                    </div>
-                    <div class="toggle-wrap">
-                        <input class="companion-checkbox" type="checkbox" name="hide_realtime" id="inbuilt-companion-checkbox-recent_listening">
-                        <span class="btn toggle" id="toggle-recent_listening" aria-checked="false">
-                            <div class="dot"></div>
-                        </span>
-                    </div>
-                </div>
-                <div class="setting" data-type="options">
-                    <div class="heading">
-                        <h5>${tl2(trans.allow_messages_from)}</h5>
-                    </div>
-                    <div class="primary-selections">
-                        ${original_privacy_settings.receiving_msgs}
-                        <div class="btn primary-selection" id="primary-selection-receiving_msgs-everyone" onclick="_update_inbuilt_selection('id_message_privacy', 0)">
-                            <h5>${tl2(trans.everyone)}</h5>
-                        </div>
-                        <div class="btn primary-selection" id="primary-selection-receiving_msgs-neighbours" onclick="_update_inbuilt_selection('id_message_privacy', 1)">
-                            <h5>${tl2(trans.following_and_neighbours)}</h5>
-                        </div>
-                        <div class="btn primary-selection" id="primary-selection-receiving_msgs-follow" onclick="_update_inbuilt_selection('id_message_privacy', 2)">
-                            <h5>${tl2(trans.following)}</h5>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="inner-preview pad">
-                <div class="shouts">
-                    <div class="shout-preview">
-                        <div class="avatar-side">
-                            <div class="shout-avatar-placeholder"></div>
-                        </div>
-                        <div class="info-side">
-                            <div class="header">
-                                <div class="shout-username"></div>
-                                <div class="shout-time"></div>
-                            </div>
-                            <div class="shout-contents"></div>
-                            <div class="shout-contents"></div>
-                        </div>
-                    </div>
-                    <div class="shout-preview">
-                        <div class="avatar-side">
-                            <div class="shout-avatar-placeholder"></div>
-                        </div>
-                        <div class="info-side">
-                            <div class="header">
-                                <div class="shout-username"></div>
-                                <div class="shout-time"></div>
-                            </div>
-                            <div class="shout-contents"></div>
-                            <div class="shout-contents"></div>
-                        </div>
-                    </div>
-                    <div class="shout-preview">
-                        <div class="avatar-side">
-                            <div class="shout-avatar-placeholder"></div>
-                        </div>
-                        <div class="info-side">
-                            <div class="header">
-                                <div class="shout-username"></div>
-                                <div class="shout-time"></div>
-                            </div>
-                            <div class="shout-contents"></div>
-                            <div class="shout-contents"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="setting-group">
-                <div class="setting" data-type="toggle" onclick="_update_inbuilt_item('disable_shoutbox')" id="container-disable_shoutbox">
-                    <button class="btn reset" onclick="_reset_inbuilt_item('disable_shoutbox')">Reset to default</button>
-                    <div class="heading">
-                        <h5>${tl2(trans.close_shouts.name)}</h5>
-                        <p>${tl2(trans.close_shouts.body)}</p>
-                    </div>
-                    <div class="toggle-wrap">
-                        <input class="companion-checkbox" type="checkbox" name="shoutbox_disabled" id="inbuilt-companion-checkbox-disable_shoutbox">
-                        <span class="btn toggle" id="toggle-disable_shoutbox" aria-checked="false">
-                            <div class="dot"></div>
-                        </span>
-                    </div>
-                </div>
-            </div>
-            <div class="settings-footer">
-                <button type="submit" class="btn-primary save">
-                    ${tl2(trans.save)}
-                </button>
-                <input type="hidden" value="privacy" name="submit">
-            </div>
-        </form>
-    `;
-    for (let setting2 in original_privacy_settings) {
-      update_inbuilt_item(setting2, original_privacy_settings[setting2], false);
-    }
-    let selects = document.body.querySelectorAll("select");
-    selects.forEach((select2) => {
-      select2.setAttribute(
-        "onchange",
-        `_update_inbuilt_select('${select2.getAttribute("id")}', this.value)`
-      );
-      update_inbuilt_select(select2.getAttribute("id"), select2.value);
-    });
-  }
-  function bleh_accounts() {
-    let token = page.structure.main.querySelector('[name="csrfmiddlewaretoken"]').getAttribute("value");
-    let original_settings = {
-      email_language: page.structure.main.querySelector('[name="language"]'),
-      marketing_emails: page.structure.main.querySelector(
-        '[name="opt_in_marketing"]'
-      ),
-      email: page.structure.main.querySelector('[name="email"]').value,
-      captcha: page.structure.main.querySelector(".lfm-recaptcha")
-    };
-    const alert2 = update_profile.querySelector(".alert");
-    render(
-      page.structure.main,
-      html`
-            <section class="bleh--panel">
-                <h4>${tl2(trans.information)}</h4>
-                ${alert2}
-                <div class="setting-group">
-                    <form
-                        action="${root}settings/change-username/send-email"
-                        method="post"
-                    >
-                        <input
-                            type="hidden"
-                            name="csrfmiddlewaretoken"
-                            value="${token}"
-                        />
-                        <div class="setting" data-type="text">
-                            <div class="heading">
-                                <h5>${tl2(trans.username.name)}</h5>
-                                <p>
-                                    ${{
-        html: tl2(trans.username.body).replace(
-          "{a}",
-          `<a href="https://support.last.fm/" target="_blank">`
-        ).replace("{/a}", "</a>")
-      }}
-                                </p>
-                            </div>
-                            <div class="input-container content-form">
-                                <input
-                                    id="id_current_username"
-                                    type="text"
-                                    name="current_username"
-                                    value="${auth.name}"
-                                    disabled
-                                    required
-                                />
-                                <button class="btn chibi icon primary submit">
-                                    ${tl2(trans.send)}
-                                </button>
-                                <input
-                                    type="hidden"
-                                    value="change_username"
-                                    name="submit"
-                                />
-                            </div>
-                        </div>
-                    </form>
-                    <form
-                        action="${root}settings/account"
-                        name="change-email"
-                        method="post"
-                    >
-                        <input
-                            type="hidden"
-                            name="csrfmiddlewaretoken"
-                            value="${token}"
-                        />
-                        <div class="setting" data-type="text">
-                            <div class="heading">
-                                <h5>${tl2(trans.email)}</h5>
-                            </div>
-                            <div class="input-container content-form">
-                                <input
-                                    id="id_email"
-                                    type="text"
-                                    name="email"
-                                    value="${original_settings.email}"
-                                    required
-                                />
-                                <button class="btn chibi icon primary submit">
-                                    ${tl2(trans.save)}
-                                </button>
-                                <input
-                                    type="hidden"
-                                    value="email_update"
-                                    name="submit"
-                                />
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <form
-                    class="password-container"
-                    action="${root}settings/account/password#change-password"
-                    name="change-password"
-                    method="post"
-                >
-                    <input
-                        type="hidden"
-                        name="csrfmiddlewaretoken"
-                        value="${token}"
-                    />
-                    <div class="setting-group">
-                        <div class="setting" data-type="text">
-                            <div class="heading">
-                                <h5>${tl2(trans.password)}</h5>
-                            </div>
-                            <div class="input-container content-form">
-                                <input
-                                    id="id_password"
-                                    type="password"
-                                    name="password"
-                                    required
-                                />
-                            </div>
-                        </div>
-                        <div class="setting" data-type="text">
-                            <div class="heading">
-                                <h5>${tl2(trans.new_password)}</h5>
-                            </div>
-                            <div class="input-container content-form">
-                                <input
-                                    id="id_new_password"
-                                    type="password"
-                                    name="new_password"
-                                    required
-                                />
-                            </div>
-                        </div>
-                        <div class="setting" data-type="text">
-                            <div class="heading">
-                                <h5>${tl2(trans.confirm_password)}</h5>
-                            </div>
-                            <div class="input-container content-form">
-                                <input
-                                    id="id_new_password_confirmation"
-                                    type="password"
-                                    name="new_password_confirmation"
-                                    required
-                                />
-                            </div>
-                        </div>
-                        ${original_settings.captcha}
-                    </div>
-                    <div class="settings-footer end">
-                        <button class="btn-primary save" type="submit">
-                            ${tl2(trans.change)}
-                        </button>
-                    </div>
-                </form>
-            </section>
-            <section class="bleh--panel">
-                <h4>${tl2(trans.communication)}</h4>
-                <form
-                    action="${root}settings/account"
-                    name="email-settings"
-                    method="post"
-                >
-                    <input
-                        type="hidden"
-                        name="csrfmiddlewaretoken"
-                        value="${token}"
-                    />
-                    <div class="setting-group">
-                        <div class="setting" data-type="select">
-                            <div class="heading">
-                                <h5>${tl2(trans.email_language)}</h5>
-                            </div>
-                            <div class="select-wrap custom-selector">
-                                ${select(
-        select_prepare(
-          original_settings.email_language
-        ),
-        original_settings.email_language.value,
-        original_settings.email_language.name
-      )}
-                            </div>
-                        </div>
-                        ${toggle({
-        value: original_settings.marketing_emails.checked,
-        name: original_settings.marketing_emails.name,
-        title: tl2(trans.marketing_emails.name),
-        body: tl2(trans.marketing_emails.body),
-        standalone: false
-      })}
-                    </div>
-                    <div class="settings-footer end">
-                        <button class="btn-primary save" type="submit">
-                            ${tl2(trans.save)}
-                        </button>
-                        <input
-                            type="hidden"
-                            value="email_settings"
-                            name="submit"
-                        />
-                    </div>
-                </form>
-            </section>
-            <section class="bleh--panel">
-                <h4>${tl2(trans.security)}</h4>
-                <form
-                    action="${root}settings/account"
-                    name="email-settings"
-                    method="post"
-                >
-                    <input
-                        type="hidden"
-                        name="csrfmiddlewaretoken"
-                        value="${token}"
-                    />
-                    <div class="setting-group">
-                        <div class="setting" data-type="action">
-                            <div class="heading">
-                                <h5>${tl2(trans.logout_everywhere)}</h5>
-                            </div>
-                            <div class="toggle-wrap">
-                                <a
-                                    class="see-more danger logout"
-                                    href="${root}settings/account/logout-everywhere"
-                                >
-                                    ${tl2(trans.logout)}
-                                </a>
-                            </div>
-                        </div>
-                        <div class="setting" data-type="action">
-                            <div class="heading">
-                                <h5>${tl2(trans.delete_account.name)}</h5>
-                                <p>${tl2(trans.delete_account.body)}</p>
-                            </div>
-                            <div class="toggle-wrap">
-                                <a
-                                    class="see-more danger delete-account"
-                                    href="${root}settings/account/delete"
-                                >
-                                    ${tl2(
-        trans.delete_account_permanently
-      ).replace("{u}", auth.name)}
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </section>
-        `
-    );
-    for (let setting2 in original_settings) {
-      update_inbuilt_item(setting2, original_settings[setting2], false);
-    }
-  }
-  function bleh_name_change() {
-    let token = page.structure.row.querySelector('[name="csrfmiddlewaretoken"]').getAttribute("value");
-    return;
-  }
-  function bleh_website() {
-    const token = page.structure.row.querySelector('[name="csrfmiddlewaretoken"]').getAttribute("value");
-    const auto_correct = page.structure.main.querySelector(
-      '[name="corrections_enabled"]:checked'
-    );
-    const preferred_affiliate = page.structure.main.querySelector(
-      '[name="preferred_affiliate"]:checked'
-    );
-    const timezone = page.structure.main.querySelector('[name="timezone"]');
-    const help_text = page.structure.main.querySelector(".js-field-help-text");
-    const location = page.structure.main.querySelector(
-      '[data-require="components/location-form-field-v2"]'
-    );
-    const radius = page.structure.main.querySelector('[name="event_radius"]');
-    let timezone_text;
-    page.structure.main.insertBefore(
-      html.node`
-            <form class="dont-move" action="${root}settings/website" method="post">
-                <input type="hidden" name="csrfmiddlewaretoken" value="${token}">
-                <section class="bleh--panel">
-                    <h4>${tl2(trans.website)}</h4>
-                    <div class="setting-group">
-                        <div class="setting v2" data-type="options">
-                            <div class="heading">
-                                <h5>${tl2(trans.auto_correct_scrobbles.name)}</h5>
-                                <p>${tl2(trans.auto_correct_scrobbles.body)}</p>
-                            </div>
-                            ${radio({
-        name: auto_correct.name,
-        value: auto_correct.value,
-        values: {
-          False: {
-            name: tl2(
-              trans.auto_correct_scrobbles.false
-            )
-          },
-          True: {
-            name: tl2(
-              trans.auto_correct_scrobbles.true
-            )
-          }
-        }
-      })}
-                        </div>
-                    </div>
-                    <div class="alert alert-danger">
-                        ${tl2(trans.auto_correct_scrobbles.warning)}
-                    </div>
-                </section>
-                <section class="bleh--panel">
-                    <h4>${tl2(trans.events)}</h4>
-                    <div class="setting-group">
-                        <div class="setting v2" data-type="select">
-                            <div class="heading">
-                                <h5>${tl2(trans.timezone)}</h5>
-                                <p ref=${(el) => timezone_text = el}>${help_text.textContent.trim()}</p>
-                            </div>
-                            ${select(
-        select_prepare(timezone),
-        timezone.value,
-        timezone.name,
-        (val) => {
-          fetch(
-            `${root}settings/partial/timezone-help-text?tz=${val}&ajax=1`
-          ).then((res) => res.text()).then((dom) => {
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(
-              dom,
-              "text/html"
-            );
-            const text4 = doc.querySelector("p");
-            if (!text4) return;
-            timezone_text.textContent = text4.textContent;
-          }).catch(
-            (e) => log(
-              "unable to get text",
-              "timezone",
-              "error",
-              { e }
-            )
-          );
-        }
-      )}
-                        </div>
-                        <div class="setting v2" data-type="action">
-                            <div class="heading">
-                                <h5>${tl2(trans.location.name)}</h5>
-                                <p>${tl2(trans.location.body)}</p>
-                            </div>
-                            <div class="toggle-wrap">
-                                ${location}
-                            </div>
-                        </div>
-                        <div class="setting v2" data-type="select">
-                            <div class="heading">
-                                <h5>${tl2(trans.event_radius)}</h5>
-                            </div>
-                            ${select(select_prepare(radius), radius.value, radius.name)}
-                        </div>
-                    </div>
-                    <div class="settings-footer end">
-                        <button type="submit" class="btn-primary save">
-                            ${tl2(trans.save)}
-                        </button>
-                        <input type="hidden" value="website" name="submit">
-                    </div>
-                </section>
-            </form>
-            <section class="bleh--panel">
-                <h4>${tl2(trans.playback)}</h4>
-                <form action="${root}settings/website" method="post">
-                    <input type="hidden" name="csrfmiddlewaretoken" value=${token}>
-                    <div class="setting-group">
-                        <div class="setting v2" data-type="options">
-                            <div class="heading">
-                                <h5>${tl2(trans.preferred_affiliate.name)}</h5>
-                                <p>${tl2(trans.preferred_affiliate.body)}</p>
-                            </div>
-                            ${radio({
-        name: preferred_affiliate.name,
-        value: preferred_affiliate.value,
-        values: radio_convert(
-          page.structure.main.querySelectorAll(
-            "#id_preferred_affiliate > .lfm-form-radio"
-          )
-        )
-      })}
-                        </div>
-                    </div>
-                    <div class="settings-footer end">
-                        <button type="submit" class="btn-primary save">
-                            ${tl2(trans.save)}
-                        </button>
-                        <input type="hidden" value="playback" name="submit">
-                    </div>
-                </form>
-            </section>
-        `,
-      page.structure.main.firstElementChild
-    );
-    const website = page.structure.main.querySelector("#website");
-    website.remove();
-    const playback = page.structure.main.querySelector("#playback");
-    playback.remove();
-  }
-  function bleh_applications() {
-    let session_types = page.structure.main.querySelectorAll(".api-sessions");
-    let suggested;
-    let connected;
-    if (session_types.length > 1) {
-      suggested = session_types[0];
-      connected = session_types[1];
-    } else {
-      connected = session_types[0];
-    }
-    render(
-      page.structure.main,
-      html`
-            <section class="applications">
-                <div class="section-intro">
-                    <h3>${tl2(trans.applications)}</h3>
-                    <p>${tl2(trans.applications_intro)}</p>
-                </div>
-                ${suggested ? html`
-                        <h2>${tl2(trans.suggested)}</h2>
-                        ${suggested}
-                    ` : ""}
-                <h2>${tl2(trans.connected)}</h2>
-                ${connected}
-            </section>
-        `
-    );
-    session_types.forEach((session_type) => {
-      let sessions = session_type.querySelectorAll(".api-session");
-      sessions.forEach((session) => {
-        const details = session.querySelector(".api-session-details");
-        const form = session.querySelector("form");
-        const button2 = form.querySelector("button");
-        button2.classList.add("chibi");
-        tippy_esm_default(button2, {
-          content: button2.textContent
-        });
-        const name = details.querySelector(".api-session-app-name");
-        const desc = details.querySelector(".api-session-app-description");
-        const status2 = details.querySelector(".api-session-status");
-        const image = details.querySelector(".api-session-app-image");
-        image.classList = "";
-        const default_image = image.src.endsWith(
-          "14d19fbdca555c1782176cd789e81af7.png"
-        );
-        render(
-          session,
-          html`
-                    <div class="session-header">
-                        <div
-                            class="session-image"
-                            data-default-image=${default_image}
-                        >
-                            ${image}
-                        </div>
-                        <div class="session-details">${name} ${desc}</div>
-                        ${form}
-                    </div>
-                    ${status2 ? html.node`
-                <div class="session-footer">
-                    ${status2}
-                </div>
-                ` : ""}
-                `
-        );
-      });
-    });
-  }
-
   // src/pages/obsession.js
   function bleh_obsession() {
     let obsession_container = document.querySelector(".obsession-container");
@@ -35569,10 +33543,82 @@
     return string.replace(/^[,\-–—.;:|•·/]+\s*/, "").replace(/\s*[,\-–—.;:|•·/]+$/, "").trim();
   }
 
+  // src/pages/playlist.js
+  async function bleh_playlist() {
+    page.structure.container = document.body.querySelector(".page-content");
+    try {
+      page.structure.row = page.structure.container.querySelector(".row");
+      page.structure.main = page.structure.row.querySelector(".col-main");
+      page.structure.side = page.structure.row.querySelector(".col-sidebar");
+    } catch (e) {
+      log("unable to find elements", "page structure");
+    }
+    let content_top = document.body.querySelector(".content-top");
+    checkup_page_structure(false, content_top);
+    log("status is", "page", "info", page);
+    update_page();
+    const value = page.structure.container.querySelector(".content-top-header")?.textContent;
+    page.structure.container.insertBefore(html.node`
+        <section class="redesigned-header search-header no-background">
+            <div class="tag-side">
+                <div class="tag-icon playlist-icon"></div>
+            </div>
+            <div class="info-side">
+                <div class="sub-text">${tl2(trans.playlists)}</div>
+                <h1>${value}</h1>
+            </div>
+        </section>
+    `, page.structure.container.firstElementChild);
+    let cache2;
+    if (auth.name) {
+      cache2 = await load_profile_cache_externally(auth.name);
+      if (cache2.banner)
+        register_background(cache2.banner);
+      else if (auth.avatar && !auth.avatar.endsWith("818148bf682d429dc215c1705eb27b98.png"))
+        register_background(auth.avatar.replace("/avatar42s/", "/ar0/"));
+      else
+        register_background(null);
+    } else {
+      register_background(null);
+    }
+    const options = page.structure.container.querySelector(".playlisting-create-options");
+    const generate = page.structure.container.querySelector(".playlisting-generate-search-container");
+    if (options) {
+      const back = page.structure.container.querySelector(".content-top-back-link");
+      const back_link = back.querySelector("a");
+      back.remove();
+      const form = page.structure.container.querySelector(":scope > .buffer-standard > form");
+      const form_btn = form.querySelector("button");
+      form_btn.classList = "btn inbox-button accented icon";
+      form_btn.setAttribute("data-type", "create-from-scratch");
+      form.parentElement.remove();
+      page.structure.main.appendChild(html.node`
+            <section class="playlist-creator">
+                <div class="inbox-message-buttons">
+                    <a class="back-button btn inbox-button" href=${back_link.getAttribute("href")}>
+                        ${tl2(trans.back)}
+                    </a>
+                    ${form}
+                </div>
+                ${options}
+            </section>
+        `);
+    } else if (generate) {
+      page.structure.main.appendChild(html.node`
+            <section class="playlist-generator">
+                ${generate}
+            </section>
+        `);
+    }
+  }
+
   // src/pages/profile.js
   async function bleh_profiles() {
     if (page.subpage == "obsessions_obsession") {
       bleh_obsession();
+      return;
+    } else if (page.subpage.startsWith("playlists") && page.subpage != "playlists_playlists") {
+      bleh_playlist();
       return;
     }
     let profile_header = document.body.querySelector(".header--user");
@@ -51818,7 +49864,7 @@
             `}
         </div>
         <section class="side-actions">
-            <button class="btn side-action" data-type="import" onclick=${() => import_settings24()}>
+            <button class="btn side-action" data-type="import" onclick=${() => import_settings23()}>
                 ${tl2(trans.import)}
             </button>
             <button class="btn side-action" data-type="export" onclick=${() => export_settings()}>
@@ -53967,7 +52013,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       }
     }
   }
-  function import_settings24() {
+  function import_settings23() {
     let text4;
     const modal = dialog({
       id: "import_settings",
@@ -56818,6 +54864,2032 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     );
   }
 
+  // src/components/auto_edit.js
+  function bleh_auto_edits() {
+    let corrections_panel = document.body.querySelector("#subscription-corrections");
+    page.structure.main.appendChild(corrections_panel);
+    let nav = page.structure.container.querySelector("nav[data-more-string] .navlist-items");
+    nav.insertBefore(html.node`
+        <li class="navlist-item secondary-nav-item secondary-nav-item--back">
+            <a class="secondary-nav-item-link" href="${root}settings/subscription">
+                ${tl2(trans.back)}
+            </a>
+        </li>
+    `, nav.firstElementChild);
+  }
+
+  // src/pages/lastfm_settings.js
+  var import_cropperjs = __toESM(require_cropper(), 1);
+
+  // src/components/radio_toggle.js
+  function radio({ name, value, values = {} }) {
+    let buttons = [];
+    let elem = html.node`
+        <div class="primary-selections">
+        ${Object.entries(values).map(([key, val]) => {
+      const icon = val.icon;
+      let input2;
+      const button2 = html.node`
+                <div class="setting v2 standalone" data-type="radio" data-value=${key} onclick=${() => {
+        update_radio(key);
+      }}>
+                    <div class="radio-cont">
+                        <input type="radio" name=${name} value=${key} required ref=${(el) => input2 = el}>
+                        <div class="radio" aria-checked=${value == key} />
+                    </div>
+                    ${icon ? html.node`
+                                <div class="icon">
+                                    <div class="bleh-icon" style="--icon: var(--${icon})" />
+                                </div>
+                            ` : ""}
+                    <div class="heading">
+                        <h5>${typeof val.name == "object" ? tl(val.name) : val.name}</h5>
+                    </div>
+                </div>
+            `;
+      input2.checked = value == key;
+      buttons.push(button2);
+      return button2;
+    })}
+        </div>
+    `;
+    function update_radio(val) {
+      buttons.forEach((btn) => {
+        btn.querySelector("input").checked = btn.getAttribute("data-value") == val;
+        btn.querySelector(".radio").setAttribute(
+          "aria-checked",
+          btn.getAttribute("data-value") == val
+        );
+      });
+    }
+    return elem;
+  }
+  function radio_convert(existing) {
+    if (!existing) return {};
+    let values = {};
+    existing.forEach((item) => {
+      const input2 = item.querySelector("input");
+      const label = item.querySelector("label");
+      values[input2.value] = {
+        name: label.textContent.trim()
+      };
+    });
+    return values;
+  }
+
+  // src/pages/lastfm_settings.js
+  var cropper;
+  function bleh_native_settings() {
+    const no_data = page.structure.container.querySelector(":scope > .no-data-message");
+    if (no_data) page.structure.main.appendChild(no_data);
+    if (page.subpage == "overview") {
+      patch_settings_profile_tab();
+    } else if (page.subpage == "privacy") {
+      patch_settings_privacy_tab();
+    } else if (page.subpage == "subscription_overview") {
+      let panel = page.structure.container.querySelector(".row + div");
+      let subscription = panel.querySelector("#current-subscription");
+      let edits = panel.querySelector("#automatic-edits");
+      let merch_h = panel.querySelector(":scope > h2");
+      let merch = panel.querySelector("#mechandise-discount");
+      let history = panel.querySelector("#pro-history");
+      merch.insertBefore(merch_h, merch.firstElementChild);
+      page.structure.main.appendChild(subscription);
+      page.structure.main.appendChild(edits);
+      page.structure.main.appendChild(merch);
+      page.structure.main.appendChild(history);
+      let button2 = subscription.querySelector(".btn-primary");
+      if (button2)
+        button2.classList.add("subscription-button", "icon", "primary");
+      let more_link_wrap = edits.querySelector(".more-link");
+      if (more_link_wrap) {
+        more_link_wrap.classList = "";
+        let edit_buttons = more_link_wrap.querySelectorAll("a");
+        edit_buttons.forEach((edit_button, index3) => {
+          edit_button.classList.add(
+            "btn",
+            "edit-lead-button",
+            "icon",
+            "primary"
+          );
+          if (index3 == 0) edit_button.classList.add("edit-album");
+          else edit_button.classList.add("edit-track");
+        });
+      }
+    } else if (page.subpage.startsWith("subscription_automatic-edits")) {
+      bleh_auto_edits();
+    } else if (page.subpage == "account_overview") {
+      bleh_accounts();
+    } else if (page.subpage == "website") {
+      bleh_website();
+    } else if (page.subpage == "change-username_overview") {
+      bleh_name_change();
+    } else if (page.subpage == "applications_overview") {
+      bleh_applications();
+    }
+  }
+  function patch_settings_profile_tab() {
+    let update_picture = page.structure.main.querySelector("#update-picture");
+    if (!update_picture) return;
+    let token = document.body.querySelector('[name="csrfmiddlewaretoken"]').getAttribute("value");
+    patch_settings_profile_panel(token, update_picture);
+    patch_settings_charts_panel(token);
+  }
+  function patch_settings_charts_panel(token) {
+    let charts_panel = document.getElementById("update-chart");
+    if (charts_panel.hasAttribute("data-kate-processed")) return;
+    charts_panel.setAttribute("data-kate-processed", "true");
+    charts_panel.classList.add("bleh--panel");
+    let original_chart_settings = {
+      recent: {
+        recent_artwork: document.getElementById(
+          "id_show_recent_tracks_artwork"
+        ).checked,
+        count: document.getElementById("id_chart_length_recent_tracks").outerHTML,
+        recent_realtime: document.getElementById(
+          "id_auto_refresh_recent_tracks"
+        ).checked
+      },
+      artists: {
+        timeframe: document.getElementById("id_chart_range_top_artists").outerHTML,
+        style: document.getElementById(
+          "id_chart_style_and_length_top_artists"
+        ).outerHTML
+      },
+      albums: {
+        timeframe: document.getElementById("id_chart_range_top_albums").outerHTML,
+        style: document.getElementById(
+          "id_chart_style_and_length_top_albums"
+        ).outerHTML
+      },
+      tracks: {
+        count: document.getElementById("id_chart_length_top_tracks").outerHTML,
+        timeframe: document.getElementById("id_chart_range_top_tracks").outerHTML
+      }
+    };
+    charts_panel.innerHTML = `
+        <h4>${tl2(trans.recent_tracks)}</h4>
+        <form action="${root}settings#update-chart" name="chart-form" method="post">
+            <input type="hidden" name="csrfmiddlewaretoken" value="${token}">
+            <div class="inner-preview pad">
+                <div class="tracks recent">
+                    <div class="track realtime">
+                        <div class="cover"></div>
+                        <div class="title"></div>
+                        <div class="artist"></div>
+                        <div class="time"></div>
+                    </div>
+                    <div class="track">
+                        <div class="cover"></div>
+                        <div class="title"></div>
+                        <div class="artist"></div>
+                        <div class="time"></div>
+                    </div>
+                    <div class="track">
+                        <div class="cover"></div>
+                        <div class="title"></div>
+                        <div class="artist"></div>
+                        <div class="time"></div>
+                    </div>
+                    <div class="track">
+                        <div class="cover"></div>
+                        <div class="title"></div>
+                        <div class="artist"></div>
+                        <div class="time"></div>
+                    </div>
+                    <div class="track">
+                        <div class="cover"></div>
+                        <div class="title"></div>
+                        <div class="artist"></div>
+                        <div class="time"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="setting-group">
+                <div class="setting" data-type="select">
+                    <div class="heading">
+                        <h5>${tl2(trans.amount_to_display)}</h5>
+                    </div>
+                    <div class="select-wrap custom-selector" id="id_chart_length_recent_tracks_select">
+                        ${original_chart_settings.recent.count}
+                    </div>
+                </div>
+                <div class="setting" data-type="toggle" onclick="_update_inbuilt_item('recent_artwork')" id="container-recent_artwork">
+                    <button class="btn reset" onclick="_reset_inbuilt_item('recent_artwork')">Reset to default</button>
+                    <div class="heading">
+                        <h5>${tl2(trans.recent_artwork)}</h5>
+                    </div>
+                    <div class="toggle-wrap">
+                        <input class="companion-checkbox" type="checkbox" name="show_recent_tracks_artwork" id="inbuilt-companion-checkbox-recent_artwork">
+                        <span class="btn toggle" id="toggle-recent_artwork" aria-checked="false">
+                            <div class="dot"></div>
+                        </span>
+                    </div>
+                </div>
+                <div class="setting" data-type="toggle" onclick="_update_inbuilt_item('recent_realtime')" id="container-recent_realtime">
+                    <button class="btn reset" onclick="_reset_inbuilt_item('recent_realtime')">Reset to default</button>
+                    <div class="heading">
+                        <h5>${tl2(trans.recent_realtime.name)}</h5>
+                        <p>${tl2(trans.recent_realtime.body)}</p>
+                    </div>
+                    <div class="toggle-wrap">
+                        <input class="companion-checkbox" type="checkbox" name="auto_refresh_recent_tracks" id="inbuilt-companion-checkbox-recent_realtime">
+                        <span class="btn toggle" id="toggle-recent_realtime" aria-checked="false">
+                            <div class="dot"></div>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <h4>${tl2(trans.top_artists)}</h4>
+            <div class="inner-preview pad">
+                <div class="item-grid artist">
+                    <div class="grid-primary artist">
+                        <div class="grid-item"></div>
+                    </div>
+                    <div class="grid-mains">
+                        <div class="grid-main artist">
+                            <div class="grid-item grid-item--extra artist"></div>
+                            <div class="grid-item grid-item--extra artist"></div>
+                            <div class="grid-item"></div>
+                            <div class="grid-item"></div>
+                        </div>
+                        <div class="grid-main artist">
+                            <div class="grid-item grid-item--extra artist"></div>
+                            <div class="grid-item grid-item--extra artist"></div>
+                            <div class="grid-item"></div>
+                            <div class="grid-item"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tracks artist">
+                    <div class="track">
+                        <div class="cover"></div>
+                        <div class="title"></div>
+                        <div class="bar">
+                            <div class="fill" style="width: 100%"></div>
+                        </div>
+                    </div>
+                    <div class="track">
+                        <div class="cover"></div>
+                        <div class="title"></div>
+                        <div class="bar">
+                            <div class="fill" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    <div class="track">
+                        <div class="cover"></div>
+                        <div class="title"></div>
+                        <div class="bar">
+                            <div class="fill" style="width: 60%"></div>
+                        </div>
+                    </div>
+                    <div class="track">
+                        <div class="cover"></div>
+                        <div class="title"></div>
+                        <div class="bar">
+                            <div class="fill" style="width: 30%"></div>
+                        </div>
+                    </div>
+                    <div class="track">
+                        <div class="cover"></div>
+                        <div class="title"></div>
+                        <div class="bar">
+                            <div class="fill" style="width: 5%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="setting-group">
+                <div class="setting" data-type="select">
+                    <div class="heading">
+                        <h5>${tl2(trans.default_timeframe)}</h5>
+                    </div>
+                    <div class="select-wrap custom-selector" id="id_chart_range_top_artists_select">
+                        ${original_chart_settings.artists.timeframe}
+                    </div>
+                </div>
+                <div class="setting" data-type="select">
+                    <div class="heading">
+                        <h5>${tl2(trans.chart_style)}</h5>
+                    </div>
+                    <div class="select-wrap custom-selector" id="id_chart_style_and_length_top_artists_select">
+                        ${original_chart_settings.artists.style}
+                    </div>
+                </div>
+            </div>
+            <h4>${tl2(trans.top_albums)}</h4>
+            <div class="inner-preview pad">
+                <div class="item-grid album">
+                    <div class="grid-primary album">
+                        <div class="grid-item"></div>
+                    </div>
+                    <div class="grid-mains">
+                        <div class="grid-main album">
+                            <div class="grid-item"></div>
+                            <div class="grid-item"></div>
+                            <div class="grid-item grid-item--extra album"></div>
+                            <div class="grid-item grid-item--extra album"></div>
+                        </div>
+                        <div class="grid-main album">
+                            <div class="grid-item"></div>
+                            <div class="grid-item"></div>
+                            <div class="grid-item grid-item--extra album"></div>
+                            <div class="grid-item grid-item--extra album"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tracks album">
+                    <div class="track">
+                        <div class="cover"></div>
+                        <div class="title"></div>
+                        <div class="bar">
+                            <div class="fill" style="width: 100%"></div>
+                        </div>
+                    </div>
+                    <div class="track">
+                        <div class="cover"></div>
+                        <div class="title"></div>
+                        <div class="bar">
+                            <div class="fill" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    <div class="track">
+                        <div class="cover"></div>
+                        <div class="title"></div>
+                        <div class="bar">
+                            <div class="fill" style="width: 60%"></div>
+                        </div>
+                    </div>
+                    <div class="track">
+                        <div class="cover"></div>
+                        <div class="title"></div>
+                        <div class="bar">
+                            <div class="fill" style="width: 30%"></div>
+                        </div>
+                    </div>
+                    <div class="track">
+                        <div class="cover"></div>
+                        <div class="title"></div>
+                        <div class="bar">
+                            <div class="fill" style="width: 5%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="setting-group">
+                <div class="setting" data-type="select">
+                    <div class="heading">
+                        <h5>${tl2(trans.default_timeframe)}</h5>
+                    </div>
+                    <div class="select-wrap custom-selector" id="id_chart_range_top_albums_select">
+                        ${original_chart_settings.albums.timeframe}
+                    </div>
+                </div>
+                <div class="setting" data-type="select">
+                    <div class="heading">
+                        <h5>${tl2(trans.chart_style)}</h5>
+                    </div>
+                    <div class="select-wrap custom-selector" id="id_chart_style_and_length_top_albums_select">
+                        ${original_chart_settings.albums.style}
+                    </div>
+                </div>
+            </div>
+            <h4>${tl2(trans.top_tracks)}</h4>
+            <div class="inner-preview pad">
+                <div class="tracks">
+                    <div class="track">
+                        <div class="cover"></div>
+                        <div class="title"></div>
+                        <div class="artist"></div>
+                        <div class="bar">
+                            <div class="fill" style="width: 100%"></div>
+                        </div>
+                    </div>
+                    <div class="track">
+                        <div class="cover"></div>
+                        <div class="title"></div>
+                        <div class="artist"></div>
+                        <div class="bar">
+                            <div class="fill" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    <div class="track">
+                        <div class="cover"></div>
+                        <div class="title"></div>
+                        <div class="artist"></div>
+                        <div class="bar">
+                            <div class="fill" style="width: 60%"></div>
+                        </div>
+                    </div>
+                    <div class="track">
+                        <div class="cover"></div>
+                        <div class="title"></div>
+                        <div class="artist"></div>
+                        <div class="bar">
+                            <div class="fill" style="width: 30%"></div>
+                        </div>
+                    </div>
+                    <div class="track">
+                        <div class="cover"></div>
+                        <div class="title"></div>
+                        <div class="artist"></div>
+                        <div class="bar">
+                            <div class="fill" style="width: 5%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="setting-group">
+                <div class="setting" data-type="select">
+                    <div class="heading">
+                        <h5>${tl2(trans.default_timeframe)}</h5>
+                    </div>
+                    <div class="select-wrap custom-selector" id="id_chart_range_top_tracks_select">
+                        ${original_chart_settings.tracks.timeframe}
+                    </div>
+                </div>
+                <div class="setting" data-type="select">
+                    <div class="heading">
+                        <h5>${tl2(trans.amount_to_display)}</h5>
+                    </div>
+                    <div class="select-wrap custom-selector" id="id_chart_length_top_tracks_select">
+                        ${original_chart_settings.tracks.count}
+                    </div>
+                </div>
+            </div>
+            <div class="settings-footer">
+                <button type="submit" class="btn-primary save">
+                    ${tl2(trans.save)}
+                </button>
+                <input type="hidden" value="chart" name="submit">
+            </div>
+        </form>
+    `;
+    custom_select(
+      charts_panel.querySelector("#id_chart_length_recent_tracks"),
+      charts_panel.querySelector("#id_chart_length_recent_tracks_select")
+    );
+    custom_select(
+      charts_panel.querySelector("#id_chart_range_top_artists"),
+      charts_panel.querySelector("#id_chart_range_top_artists_select")
+    );
+    custom_select(
+      charts_panel.querySelector("#id_chart_style_and_length_top_artists"),
+      charts_panel.querySelector(
+        "#id_chart_style_and_length_top_artists_select"
+      )
+    );
+    custom_select(
+      charts_panel.querySelector("#id_chart_range_top_albums"),
+      charts_panel.querySelector("#id_chart_range_top_albums_select")
+    );
+    custom_select(
+      charts_panel.querySelector("#id_chart_style_and_length_top_albums"),
+      charts_panel.querySelector(
+        "#id_chart_style_and_length_top_albums_select"
+      )
+    );
+    custom_select(
+      charts_panel.querySelector("#id_chart_range_top_tracks"),
+      charts_panel.querySelector("#id_chart_range_top_tracks_select")
+    );
+    custom_select(
+      charts_panel.querySelector("#id_chart_length_top_tracks"),
+      charts_panel.querySelector("#id_chart_length_top_tracks_select")
+    );
+    for (let category in original_chart_settings) {
+      for (let setting2 in original_chart_settings[category]) {
+        update_inbuilt_item(
+          setting2,
+          original_chart_settings[category][setting2],
+          false
+        );
+      }
+    }
+    let selects = document.body.querySelectorAll("select");
+    selects.forEach((select2) => {
+      select2.setAttribute(
+        "onchange",
+        `_update_inbuilt_select('${select2.getAttribute("id")}', this.value)`
+      );
+      update_inbuilt_select(select2.getAttribute("id"), select2.value);
+    });
+  }
+  function patch_settings_profile_panel(token, update_picture) {
+    const bio_max_length = 500;
+    update_picture.classList.add("bleh--panel");
+    const upload_form = update_picture.querySelector(".avatar-upload-form");
+    const avatar_url = update_picture.querySelector(".image-upload-preview img").getAttribute("src");
+    const upload_finished = update_picture.querySelector(".alert-success");
+    if (page.state.avatar_changer && upload_finished) {
+      const id = page.state.avatar_changer.getAttribute("data-modal-id");
+      dialog_rm({ id });
+    }
+    const update_profile2 = page.structure.main.querySelector("#update-profile");
+    const alert2 = update_profile2.querySelector(".alert");
+    let form_display_name = document.getElementById("id_full_name").value;
+    let form_website = document.getElementById("id_homepage").value;
+    let form_country = document.getElementById("id_country");
+    let form_about_me = document.getElementById("id_about_me").textContent;
+    const markdown_settings = {
+      allow_headers: true,
+      allow_banners: true,
+      allow_icons: true,
+      allow_hue: true,
+      allow_fonts: true,
+      cache: true,
+      take_effect: false,
+      allow_socials: true,
+      allow_alignment: true,
+      allow_lists: true
+    };
+    let chars;
+    const about = markdown_field(update_about, markdown_settings, form_about_me, "about_me", 40, 10, tl2(trans.anything_you_can_imagine));
+    let preview;
+    let accent_setting;
+    let font_setting;
+    render(page.structure.side, html`
+        <section>
+            <h2>${tl2(trans.about_me_preview)}</h2>
+            <span class="bleh--about-me-preview markdown-body" ref=${(el) => preview = el} />
+        </section>
+    `);
+    let profile_cache = JSON.parse(localStorage.getItem("bleh_profile_cache")) || {};
+    let cache2 = profile_cache[auth.name];
+    render(update_picture, html`
+        <h4>${tl2(trans.profile)}</h4>
+        ${alert2}
+        <form
+            class="dont-move"
+            action="${root}settings#update-profile"
+            name="profile-form"
+            data-form-type="identity"
+            method="post"
+        >
+            <input
+                type="hidden"
+                name="csrfmiddlewaretoken"
+                value="${token}"
+            />
+            <div class="setting-group">
+                <div class="setting" data-type="info">
+                    <div class="heading">
+                        <h5>${tl2(trans.avatar)}</h5>
+                        <p>${tl2(trans.avatar_desc)}</p>
+                    </div>
+                    <div class="info">
+                        <div class="avatar image-uploader" onclick=${() => avatar(token)}>
+                            <img
+                                src=${avatar_url}
+                                alt=${tl2(trans.your_avatar)}
+                                loading="lazy"
+                            />
+                            <div class="avatar-overlay" />
+                        </div>
+                    </div>
+                </div>
+                ${() => {
+      const username_regex = /\[name=([^\]]+)\]/;
+      const elem = html.node`
+                        <div class="setting" data-type="text" disabled=${!auth.sponsor}>
+                            <div class="heading">
+                                <h5>${tl2(trans.display_name.name)}<span class="new-badge sponsor-related">${tl2(trans.sponsors_only)}</span></h5>
+                                <p>${tl2(trans.display_name.body)}</p>
+                            </div>
+                            ${input({
+        value: cache2.username,
+        placeholder: auth.name,
+        func: (val) => {
+          const match3 = about.value().match(username_regex);
+          const new_name = `[name=${val}]`;
+          if (match3) {
+            about.value(about.value().replace(username_regex, new_name));
+          } else {
+            const trimmed = about.value().trimEnd();
+            if (trimmed.length == 0) {
+              about.value(new_name);
+            } else {
+              about.value(trimmed + "\n\n" + new_name);
+            }
+          }
+        },
+        submit_on_character: true
+      })}
+                        </div>
+                    `;
+      return elem;
+    }}
+                ${ff("profile_fonts") ? html.node`
+                <div
+                    class="setting"
+                    data-type="info"
+                    disabled=${!auth.sponsor}
+                    ref=${(el) => font_setting = el}
+                />
+                ` : ""}
+                <div class="setting" data-type="text">
+                    <div class="heading">
+                        <h5>${tl2(trans.profile_title)}</h5>
+                        <p>${tl2(trans.pronoun_tip)}</p>
+                    </div>
+                    <div class="input-container content-form">
+                        <input
+                            type="text"
+                            name="full_name"
+                            value=${form_display_name}
+                            maxlength="36"
+                            id="id_full_name"
+                            data-form-type="other"
+                        />
+                    </div>
+                </div>
+                <div class="setting" data-type="text">
+                    <div class="heading">
+                        <h5>${tl2(trans.website)}</h5>
+                    </div>
+                    <div class="input-container content-form">
+                        <input
+                            type="url"
+                            name="homepage"
+                            value=${form_website}
+                            id="id_homepage"
+                            data-form-type="website"
+                        />
+                    </div>
+                </div>
+                <div class="setting" data-type="select">
+                    <div class="heading">
+                        <h5>${tl2(trans.country)}</h5>
+                    </div>
+                    <div class="select-wrap custom-selector">
+                        ${select(
+      select_prepare(form_country),
+      form_country.value,
+      "country"
+    )}
+                    </div>
+                </div>
+                ${() => {
+      const banner_regex = /\[banner=([^\]]+)\]/;
+      const match3 = about.value().match(banner_regex);
+      const pre_existing = match3 ? match3[1] : "";
+      let preview2;
+      const elem = html.node`
+                        <div class="setting" data-type="text">
+                            <div class="heading">
+                                <h5>${tl2(trans.profile_banner.name)}</h5>
+                                <p>${tl2(trans.profile_banner.body)}</p>
+                            </div>
+                            <div class="info v">
+                                ${input({
+        value: pre_existing,
+        func: (val) => {
+          const match4 = about.value().match(banner_regex);
+          const new_banner = `[banner=${val}]`;
+          if (match4) {
+            about.value(about.value().replace(banner_regex, new_banner));
+          } else {
+            const trimmed = about.value().trimEnd();
+            if (trimmed.length == 0) {
+              about.value(new_banner);
+            } else {
+              about.value(trimmed + "\n\n" + new_banner);
+            }
+          }
+          preview2.style.setProperty("background-image", `url(${val})`);
+        },
+        submit_on_character: true
+      })}
+                                <div class="banner-image" ref=${(el) => preview2 = el} />
+                            </div>
+                        </div>
+                    `;
+      preview2.style.setProperty("background-image", `url(${pre_existing})`);
+      return elem;
+    }}
+                <div
+                    class="setting"
+                    data-type="info"
+                    disabled=${!auth.sponsor}
+                    ref=${(el) => accent_setting = el}
+                />
+                ${() => {
+      const status_regex = /\[status=([^\]]+)\]/;
+      const match3 = about.value().match(status_regex);
+      const pre_existing = match3 ? match3[1] : "";
+      const elem = html.node`
+                        <div class="setting" data-type="text">
+                            <div class="heading">
+                                <h5><a href="https://status.cafe" target="_blank">status.cafe</a><span class="new-badge new">${tl2(trans.new)}</span></h5>
+                                <p>${tl2(trans.status_cafe.body)}</p>
+                            </div>
+                            ${input({
+        value: pre_existing,
+        func: (val) => {
+          const match4 = about.value().match(status_regex);
+          const new_status = `[status=${val}]`;
+          if (match4) {
+            about.value(about.value().replace(status_regex, new_status));
+          } else {
+            const trimmed = about.value().trimEnd();
+            if (trimmed.length == 0) {
+              about.value(new_status);
+            } else {
+              about.value(trimmed + "\n\n" + new_status);
+            }
+          }
+        },
+        submit_on_character: true
+      })}
+                        </div>
+                    `;
+      return elem;
+    }}
+                <div class="setting" data-type="text">
+                    <div class="heading">
+                        <h5>${tl2(trans.about)}</h5>
+                        <p class="tip characters" ref=${(el) => chars = el}>
+                            ${tl2(
+      trans.value_characters_max,
+      { v: bio_max_length }
+    )}
+                        </p>
+                    </div>
+                    <div class="${!ff("cosplay") ? "input-container content-form textarea" : "limitless"}">
+                        ${about}
+                    </div>
+                </div>
+            </div>
+            <div class="settings-footer end">
+                <button
+                    type="submit"
+                    class="btn-primary save"
+                    data-form-type="action"
+                >
+                    ${tl2(trans.save)}
+                </button>
+                <input
+                    type="hidden"
+                    value="profile"
+                    name="submit"
+                />
+            </div>
+        </form>
+        <div class="setting-group">
+            ${setting({ id: "avatar_radius" })}
+        </div>
+    `);
+    page.structure.main.removeChild(
+      page.structure.main.querySelector("#update-profile")
+    );
+    update_about();
+    function len(text4) {
+      return text4.replace(/\n/g, "\r\n").length;
+      const normalised = text4.replace(/\r\n/g, "\n");
+      return new TextEncoder().encode(normalised).length;
+    }
+    function update_about(value = about.value()) {
+      log("re-rendering", "about", "log");
+      const length = len(value);
+      chars.textContent = tl2(trans.value_characters_max, {
+        v: `${length}/${bio_max_length}`
+      });
+      chars.setAttribute("data-exceeded", length > bio_max_length);
+      render(preview, markdown(value, markdown_settings));
+      let profile_cache2 = JSON.parse(localStorage.getItem("bleh_profile_cache")) || {};
+      let cache3 = profile_cache2[auth.name];
+      console.info("cache", cache3);
+      const accent_regex = /\[accent=([0-9]{1,3}),([0-9]*\.?[0-9]+),([0-9]*\.?[0-9]+)\]/;
+      const font_regex = /\[font=([^\]]+)\]/;
+      console.info(
+        "cache update",
+        about.value(),
+        cache3.hue,
+        cache3.sat,
+        cache3.lit
+      );
+      let accent_edit;
+      render(accent_setting, html``);
+      render(accent_setting, html`
+            <div class="heading">
+                <h5>${tl2(trans.profile_accent.name)}<span class="new-badge sponsor-related">${tl2(trans.sponsors_only)}</span></h5>
+                <p>${tl2(trans.profile_accent.body)}</p>
+            </div>
+            <div class="info">
+                <div
+                    class="colour-tile colourful"
+                    style="--hue-over: ${cache3.hue}; --sat-over: ${cache3.sat}; --lit-over: ${cache3.lit}"
+                />
+                <div class="swatch-group palette">
+                    <button
+                        class="swatch-container"
+                        ref=${(el) => accent_edit = el}
+                        type="button"
+                        onclick=${() => {
+        let hue_range;
+        let sat_range;
+        let lit_range;
+        const match3 = about.value().match(accent_regex);
+        if (match3) {
+          save_setting(
+            "profile_hue",
+            parseInt(match3[1], 10)
+          );
+          save_setting(
+            "profile_sat",
+            parseFloat(match3[2])
+          );
+          save_setting(
+            "profile_lit",
+            parseFloat(match3[3])
+          );
+        }
+        let accent_preview2;
+        dialog({
+          id: "profile_accent",
+          title: tl2(trans.profile_accent.name),
+          body: html.node`
+                                    <div class="setting-group">
+                                        <div class="setting" data-type="info">
+                                            <div class="heading">
+                                                <h5>${tl2(trans.preview)}</h5>
+                                            </div>
+                                            <div class="info">
+                                                <div class="colour-tile colourful" ref=${(el) => accent_preview2 = el} style="--hue-over: ${settings.profile_hue}; --sat-over: ${settings.profile_sat}; --lit-over: ${settings.profile_lit}" />
+                                            </div>
+                                        </div>
+                                        ${ff("colour_based_on_hex") ? html.node`
+                                        <div class="setting" data-type="text">
+                                            <div class="heading">
+                                                <h5>${tl2(trans.convert_from_hex)}</h5>
+                                            </div>
+                                            <div class="input-container content-form">
+                                                ${colour = input({
+            type: "colour",
+            value: "#999999",
+            maxlength: 7,
+            warn_if_empty: true
+          })}
+                                                <button class="btn primary icon convert" onclick=${() => {
+            const value2 = colour.value();
+            const hsl = hex_to_hsl(value2);
+            hue_range.set(hsl.h);
+            sat_range.set(
+              clamp_sat(hsl.s / 100 * 3)
+            );
+            lit_range.set(
+              hsl.l / 100 + 0.35
+            );
+          }}>${tl2(trans.convert)}</button>
+                                            </div>
+                                        </div>
+                                        ` : ""}
+                                        ${hue_range = setting({ id: "profile_hue", func: update_colour_preview })}
+                                        ${sat_range = setting({ id: "profile_sat", func: update_colour_preview })}
+                                        ${lit_range = setting({ id: "profile_lit", func: update_colour_preview })}
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button class="see-more cancel" onclick=${() => dialog_rm({ id: "profile_accent" })}>
+                                            ${tl2(trans.back)}
+                                        </button>
+                                        <div class="fill"></div>
+                                        <div class="button-group">
+                                            ${() => {
+            const btn = html.node`
+                                                    <button class="btn icon select-button" data-type="copy">
+                                                        ${tl2(trans.copy)}
+                                                    </button>
+                                                `;
+            tippy_esm_default(btn, {
+              theme: "context-menu",
+              content: html.node`
+                                                        <button class="dropdown-menu-clickable-item" data-type="profile" onclick=${() => {
+                hue_range.set(settings.hue);
+                sat_range.set(settings.sat);
+                lit_range.set(settings.lit);
+              }}>${tl2(trans.apply_global_accent)}</button>
+                                                        <button class="dropdown-menu-clickable-item" data-type="global" onclick=${() => {
+                const warn = notify({
+                  id: "confirm_accent",
+                  title: tl2(trans.are_you_sure),
+                  body: tl2(trans.this_will_replace_your_global_accent),
+                  type: "warning",
+                  actions: [
+                    {
+                      type: "check",
+                      action: () => {
+                        notify_rm(warn);
+                        save_setting("hue", settings.profile_hue);
+                        save_setting("sat", settings.profile_sat);
+                        save_setting("lit", settings.profile_lit);
+                      },
+                      text: tl2(trans.continue)
+                    }
+                  ],
+                  persist: true
+                });
+              }}>${tl2(trans.apply_profile_accent)}</button>
+                                                    `,
+              trigger: "click",
+              placement: "bottom",
+              interactive: true,
+              interactiveBorder: 10,
+              offset: [0, 0]
+            });
+            return btn;
+          }}
+                                            <button class="btn primary continue" onclick=${() => {
+            const new_accent = `[accent=${settings.profile_hue},${settings.profile_sat},${settings.profile_lit}]`;
+            if (match3) {
+              about.value(about.value().replace(
+                accent_regex,
+                new_accent
+              ));
+            } else {
+              const trimmed = about.value().trimEnd();
+              if (trimmed.length == 0) {
+                about.value(new_accent);
+              } else {
+                about.value(trimmed + "\n\n" + new_accent);
+              }
+            }
+            dialog_rm({ id: "profile_accent" });
+            status({
+              title: tl2(
+                trans.profile_accent.reminder
+              )
+            });
+          }}>
+                                                ${tl2(trans.change)}
+                                            </button>
+                                        </div>
+                                    </div>
+                                `
+        });
+        function update_colour_preview() {
+          accent_preview2.style = `--hue-over: ${settings.profile_hue}; --sat-over: ${settings.profile_sat}; --lit-over: ${settings.profile_lit}`;
+        }
+      }}
+                        >
+                            <div
+                                class="swatch colourful"
+                                data-swatch-type="customise"
+                            />
+                        </button>
+                    </div>
+                </div>
+            `);
+      tippy_esm_default(accent_edit, {
+        content: tl2(trans.edit)
+      });
+      if (font_setting) {
+        let font_edit;
+        let font_tile;
+        render(font_setting, html``);
+        render(font_setting, html`
+                <div class="heading">
+                    <h5>${tl2(trans.profile_font.name)}<span class="new-badge sponsor-related">${tl2(trans.sponsors_only)}</span></h5>
+                    <p>${tl2(trans.profile_font.body)}</p>
+                </div>
+                <div class="info">
+                    <div class="font-tile">
+                        <span class="preview-style" data-font=${cache3.font} data-font-style=${cache3.font_style} ref=${(el) => font_tile = el}>Aa</span>
+                    </div>
+                    <div class="swatch-group palette">
+                        <button
+                            class="swatch-container"
+                            ref=${(el) => font_edit = el}
+                            type="button"
+                            onclick=${() => {
+          const match3 = about.value().match(font_regex);
+          if (match3) {
+            save_setting(
+              "profile_hue",
+              parseInt(match3[1], 10)
+            );
+            save_setting(
+              "profile_sat",
+              parseFloat(match3[2])
+            );
+            save_setting(
+              "profile_lit",
+              parseFloat(match3[3])
+            );
+          }
+          let font_name = cache3.font;
+          let font_style = cache3.font_style;
+          let font_preview;
+          let font_buttons = [];
+          let font_style_buttons = [];
+          dialog({
+            id: "profile_font",
+            title: tl2(trans.profile_font.name),
+            body: html.node`
+                                        <div class="font-name-preview">
+                                            <span data-font=${font_name} data-font-style=${font_style} ref=${(el) => font_preview = el}>${cache3.username ? cache3.username : auth.name}</span>
+                                        </div>
+                                        <div class="font-name-options">
+                                            <h4 class="font-options-header">${tl2(trans.font.name)}</h4>
+                                            <div class="font-options">
+                                                ${Object.entries(page.state.fonts).map(([font, family]) => {
+              if (family == "") family = tl2(trans.none);
+              const elem = html.node`
+                                                        <button class="btn font-selection" data-font=${font} aria-checked=${font == font_name} onclick=${() => {
+                font_name = font;
+                font_preview.setAttribute("data-font", font);
+                font_tile.setAttribute("data-font", font);
+                font_buttons.forEach((btn) => {
+                  btn.setAttribute("aria-checked", btn.getAttribute("data-font") == font);
+                });
+              }}>
+                                                            <span data-font=${font}>Aa</span>
+                                                        </button>
+                                                    `;
+              tippy_esm_default(elem, {
+                content: family,
+                delay: [500, 0]
+              });
+              font_buttons.push(elem);
+              return elem;
+            })}
+                                            </div>
+                                            <h4 class="font-options-header">${tl2(trans.font_style)}</h4>
+                                            <div class="font-options">
+                                                ${["solid", "pop", "out", "glow"].map((style) => {
+              const elem = html.node`
+                                                        <button class="btn font-selection font-style" data-font-style=${style} aria-checked=${style == font_style} onclick=${() => {
+                font_style = style;
+                font_preview.setAttribute("data-font-style", style);
+                font_tile.setAttribute("data-font-style", style);
+                font_style_buttons.forEach((btn) => {
+                  btn.setAttribute("aria-checked", btn.getAttribute("data-font-style") == style);
+                });
+              }}>
+                                                            <span class="preview-style" data-font-style=${style}>${tl2(trans.font_style[style])}</span>
+                                                        </button>
+                                                    `;
+              font_style_buttons.push(elem);
+              return elem;
+            })}
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="see-more cancel" onclick=${() => dialog_rm({ id: "profile_font" })}>
+                                                ${tl2(trans.back)}
+                                            </button>
+                                            <div class="fill"></div>
+                                            <button class="btn primary continue" onclick=${() => {
+              const new_font = `[font=${font_name}${font_style != "solid" ? `,${font_style}` : ""}]`;
+              if (match3) {
+                about.value(about.value().replace(
+                  font_regex,
+                  new_font
+                ));
+              } else {
+                const trimmed = about.value().trimEnd();
+                if (trimmed.length == 0) {
+                  about.value(new_font);
+                } else {
+                  about.value(trimmed + "\n\n" + new_font);
+                }
+              }
+              dialog_rm({ id: "profile_font" });
+              status({
+                title: tl2(
+                  trans.profile_font.reminder
+                )
+              });
+            }}>
+                                                ${tl2(trans.change)}
+                                            </button>
+                                        </div>
+                                    `
+          });
+          function update_colour_preview() {
+            accent_preview.style = `--hue-over: ${settings.profile_hue}; --sat-over: ${settings.profile_sat}; --lit-over: ${settings.profile_lit}`;
+          }
+        }}
+                            >
+                                <div
+                                    class="swatch colourful"
+                                    data-swatch-type="customise"
+                                />
+                            </button>
+                        </div>
+                    </div>
+                `);
+        tippy_esm_default(font_edit, {
+          content: tl2(trans.edit)
+        });
+      }
+    }
+  }
+  function avatar(token = "") {
+    if (!token) token = page.token;
+    else page.token = token;
+    page.state.avatar_changer = dialog({
+      id: "edit_avatar",
+      title: tl2(trans.change_avatar),
+      body: html.node`
+            <div class="forms">
+                <form action="${root}settings" name="avatar-form" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="csrfmiddlewaretoken" value=${page.token}>
+                    <div class="form-group form-group--avatar js-form-group upload-avatar">
+                        <div class="js-form-group-controls form-group-controls">
+                            <span class="btn-secondary btn primary btn-file" data-kate-processed="true">
+                                ${tl2(trans.upload)}
+                                <input type="file" onchange=${() => update_avatar(event)} name="avatar" data-require="components/file-input" data-file-input-copy="${tl2(trans.upload)}" data-no-file-copy="No file chosen" accept="image/*" required="" id="id_avatar" data-kate-processed="true">
+                            </span>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-primary save" id="avatar_saver">
+                        ${tl2(trans.save)}
+                    </button>
+                    <input type="hidden" value="avatar" name="submit">
+                </form>
+                <form action="${root}settings/avatar/delete" method="post">
+                    <input type="hidden" name="csrfmiddlewaretoken" value=${page.token}>
+                    <div class="form-group delete-avatar">
+                        <button class="btn image-upload-remove" type="submit" value="delete-avatar" name="delete-avatar">${tl2(trans.delete)}</button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="see-more cancel" onclick=${() => dialog_rm({ id: "edit_avatar" })}>${tl2(trans.cancel)}</button>
+                <div class="fill"></div>
+                <button class="btn primary save" onclick=${() => save_avatar()} disabled>${tl2(trans.save)}</button>
+            </div>
+        `
+    });
+    page.state.avatar_changer.querySelector('[name="avatar-form"]').onsubmit = finish_saving_avatar;
+    const file_button = page.state.avatar_changer.querySelector(".btn-file");
+    const save_button = page.state.avatar_changer.querySelector(
+      ".modal-footer .primary"
+    );
+    let form;
+    function update_avatar(e) {
+      console.info(e);
+      if (!e.target.files || !e.target.files[0]) return;
+      form = page.state.avatar_changer.querySelector(".bleh-modal-body");
+      if (e.target.files[0].type == "image/gif") {
+        save_avatar();
+        finish_saving_avatar();
+        return;
+      }
+      let reader = new FileReader();
+      reader.onload = function() {
+        crop(reader.result);
+        save_button.removeAttribute("disabled");
+      };
+      reader.readAsDataURL(e.target.files[0]);
+    }
+    function save_avatar() {
+      page.state.avatar_changer.querySelector("#avatar_saver").click();
+    }
+    function finish_saving_avatar() {
+      page.state.avatar_changer.setAttribute("data-loading", "true");
+      page.state.avatar_changer.querySelectorAll(".bleh-modal-body button").forEach((button2) => {
+        button2.setAttribute("disabled", "true");
+        button2.removeAttribute("onclick");
+      });
+    }
+    function crop(file) {
+      let crop_image;
+      let save;
+      const crop_dialog = dialog({
+        id: "crop",
+        title: tl2(trans.crop_avatar),
+        body: html.node`
+                <div class="crop">
+                    <img src=${file} ref=${(el) => crop_image = el}>
+                </div>
+                <div class="alert alert-info">
+                    ${tl2(trans.crop_notice)}
+                </div>
+                <div class="modal-footer">
+                    <button class="see-more cancel" onclick=${() => {
+          if (cropper && cropper.destroy) cropper.destroy();
+          cropper = null;
+          avatar();
+        }}>${tl2(trans.cancel)}</button>
+                    <div class="fill"></div>
+                    <button class="btn primary save" onclick=${() => {
+          if (!cropper) return;
+          crop_dialog.querySelectorAll(".bleh-modal-body button").forEach((button2) => {
+            button2.setAttribute("disabled", "true");
+            button2.removeAttribute("onclick");
+          });
+          const canvas = cropper.getCroppedCanvas();
+          canvas.toBlob((blob) => {
+            const cropped_file = new File(
+              [blob],
+              "avatar.png",
+              { type: "image/png" }
+            );
+            const inner_form = form.querySelector("form");
+            inner_form.style.display = "none";
+            crop_dialog.querySelector(".bleh-modal-body").appendChild(inner_form);
+            const file_input = inner_form.querySelector('input[type="file"]');
+            const data_transfer = new DataTransfer();
+            data_transfer.items.add(cropped_file);
+            file_input.files = data_transfer.files;
+            inner_form.querySelector("#avatar_saver").click();
+          }, "image/png");
+        }} ref=${(el) => save = el} disabled>${tl2(trans.save)}</button>
+                </div>
+            `
+      });
+      page.state.avatar_changer = crop_dialog;
+      crop_image.onload = () => {
+        if (cropper && cropper.destroy) cropper.destroy();
+        crop_image.style.maxWidth = "none";
+        crop_image.style.width = crop_image.naturalWidth + "px";
+        crop_image.style.height = crop_image.naturalHeight + "px";
+        cropper = new import_cropperjs.default(crop_image, {
+          viewMode: 3,
+          dragMode: "crop",
+          movable: true,
+          zoomable: true,
+          scalable: false,
+          cropBoxMovable: true,
+          cropBoxResizable: true,
+          background: false,
+          guides: true,
+          autoCropArea: 1
+        });
+        save.removeAttribute("disabled");
+      };
+    }
+  }
+  function patch_settings_privacy_tab() {
+    let privacy_panel = document.getElementById("privacy");
+    let token = document.body.querySelector('[name="csrfmiddlewaretoken"]').getAttribute("value");
+    bleh_communication_panel(token);
+    patch_settings_privacy_panel(token, privacy_panel);
+  }
+  function bleh_communication_panel(token) {
+    let profile_notes = JSON.parse(localStorage.getItem("bleh_profile_notes")) || {};
+    let panel = page.structure.main.querySelector("#ignorelist");
+    panel.classList.add("bleh--panel");
+    const alert2 = panel.querySelector(".alert");
+    let list = panel.querySelectorAll(".ignore-list tr");
+    let new_list = document.createElement("div");
+    new_list.classList.add(
+      "generic-table-list",
+      "user-vertical-list",
+      "take-space"
+    );
+    let exceeded = false;
+    let exceed_amount = 10;
+    let amount = 0;
+    Array.from(list).reverse().forEach((item, index3) => {
+      let name = item.querySelector("td").textContent.trim();
+      let form2 = item.querySelector("form");
+      let button2 = form2.querySelector("button");
+      button2.classList.add("btn", "icon", "chibi", "danger-subtle", "list-action");
+      button2.setAttribute("data-type", "x");
+      tippy_esm_default(button2, {
+        content: tl2(trans.remove)
+      });
+      let entry = html.node`
+            <div class="generic-table-list-entry user-vertical-list-item">
+                <div class="name">
+                    <a class="mention" href="${root}user/${name}" target="_blank">@${name}</a>
+                </div>
+                <div class="text preview">
+                    ${profile_notes.hasOwnProperty(name) ? html.node`
+                        <p id="profile-note-row-preview--${name}">${{ html: profile_notes[name] }}</p>
+                    ` : ""}
+                </div>
+                <div class="actions">
+                    ${form2}
+                </div>
+            </div>
+        `;
+      if (index3 > exceed_amount && !exceeded) exceeded = true;
+      if (exceeded) entry.classList.add("entry-is-exceeded");
+      new_list.appendChild(entry);
+      amount += 1;
+    });
+    if (exceeded) {
+      let remainder = amount - exceed_amount;
+      new_list.classList.add("list-is-exceeded");
+      new_list.setAttribute("data-expanded", "false");
+      let expand = html.node`
+            <button class="see-more expand-down" onclick=${() => {
+        expand.style.display = "none";
+        new_list.setAttribute("data-expanded", "true");
+      }}>
+                ${tl2(trans.view_count_more).replace("{c}", remainder.toString())}
+            </button>
+        `;
+      new_list.appendChild(expand);
+    }
+    let form = page.structure.main.querySelector('[name="ignorelist"]');
+    if (page.token == "")
+      page.token = form.querySelector('[name="csrfmiddlewaretoken"]').getAttribute("value");
+    render(panel, html`
+        <h4>${tl2(trans.block_list)}</h4>
+        <div class="user-top-panel">
+            <div class="user-top-avatar user-top-avatar-side-left">
+                <div class="bleh-icon"></div>
+            </div>
+            <img
+                class="user-top-avatar user-top-avatar-main"
+                src=${auth.avatar.replace("avatar42s", "avatar300s")}
+                alt=${auth.name}
+            />
+            <div class="user-top-avatar user-top-avatar-side-right">
+                <div class="bleh-icon"></div>
+            </div>
+        </div>
+        ${alert2}
+        <div class="setting" data-type="text">
+            <div class="heading">
+                <h5>${tl2(trans.profile)}</h5>
+                <form
+                    action="${root}settings/privacy#ignorelist"
+                    name="ignorelist"
+                    method="post"
+                >
+                    <input
+                        type="hidden"
+                        name="csrfmiddlewaretoken"
+                        value=${page.token}
+                    />
+                    <div class="input-container">
+                        <input
+                            type="text"
+                            maxlength="80"
+                            id="id_user"
+                            name="user"
+                            placeholder=${tl2(trans.enter_username)}
+                        />
+                        <input
+                            type="hidden"
+                            name="listaction"
+                            value="add"
+                        />
+                        <input
+                            type="hidden"
+                            name="submit"
+                            value="ignorelist"
+                        />
+                        <button
+                            class="btn primary icon block"
+                            type="submit"
+                        >
+                            ${tl2(trans.block)}
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="alert alert-info">
+            ${tl2(trans.blocked_count, { c: amount })}
+        </div>
+        <div class="setting-group">
+            ${new_list}
+        </div>
+        <div class="sep" />
+        <h5>${tl2(trans.when_blocked)}</h5>
+        <div class="to-consider">
+            <ul class="to-consider-good">
+                <li>${tl2(trans.blocked_user_public)}</li>
+                <li>${tl2(trans.blocked_user_message)}</li>
+                <li>${tl2(trans.blocked_user_new_shouts)}</li>
+            </ul>
+            <ul class="to-consider-bad">
+                <li>${tl2(trans.blocked_user_old_shouts)}</li>
+                <li>${tl2(trans.blocked_user_view_profile)}</li>
+            </ul>
+        </div>
+    `);
+  }
+  function patch_settings_privacy_panel(token, privacy_panel) {
+    privacy_panel.classList.add("bleh--panel");
+    let original_privacy_settings = {
+      recent_listening: document.getElementById("id_hide_realtime").checked,
+      receiving_msgs: document.getElementById("id_message_privacy").outerHTML,
+      disable_shoutbox: document.getElementById("id_shoutbox_disabled").checked
+    };
+    privacy_panel.innerHTML = `
+        <h4>${tl2(trans.privacy)}</h4>
+        <form action="${root}settings/privacy" name="privacy" method="post">
+            <input type="hidden" name="csrfmiddlewaretoken" value="${token}">
+            <div class="inner-preview pad">
+                <div class="tracks recent_listening">
+                    <div class="track realtime">
+                        <div class="cover"></div>
+                        <div class="title"></div>
+                        <div class="artist"></div>
+                        <div class="time"></div>
+                    </div>
+                    <div class="track">
+                        <div class="cover"></div>
+                        <div class="title"></div>
+                        <div class="artist"></div>
+                        <div class="time"></div>
+                    </div>
+                    <div class="track">
+                        <div class="cover"></div>
+                        <div class="title"></div>
+                        <div class="artist"></div>
+                        <div class="time"></div>
+                    </div>
+                    <div class="track">
+                        <div class="cover"></div>
+                        <div class="title"></div>
+                        <div class="artist"></div>
+                        <div class="time"></div>
+                    </div>
+                    <div class="track">
+                        <div class="cover"></div>
+                        <div class="title"></div>
+                        <div class="artist"></div>
+                        <div class="time"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="setting-group">
+                <div class="setting" data-type="toggle" onclick="_update_inbuilt_item('recent_listening')" id="container-recent_listening">
+                    <button class="btn reset" onclick="_reset_inbuilt_item('recent_listening')">Reset to default</button>
+                    <div class="heading">
+                        <h5>${tl2(trans.recent_listening.name)}</h5>
+                        <p>${tl2(trans.recent_listening.body)}</p>
+                    </div>
+                    <div class="toggle-wrap">
+                        <input class="companion-checkbox" type="checkbox" name="hide_realtime" id="inbuilt-companion-checkbox-recent_listening">
+                        <span class="btn toggle" id="toggle-recent_listening" aria-checked="false">
+                            <div class="dot"></div>
+                        </span>
+                    </div>
+                </div>
+                <div class="setting" data-type="options">
+                    <div class="heading">
+                        <h5>${tl2(trans.allow_messages_from)}</h5>
+                    </div>
+                    <div class="primary-selections">
+                        ${original_privacy_settings.receiving_msgs}
+                        <div class="btn primary-selection" id="primary-selection-receiving_msgs-everyone" onclick="_update_inbuilt_selection('id_message_privacy', 0)">
+                            <h5>${tl2(trans.everyone)}</h5>
+                        </div>
+                        <div class="btn primary-selection" id="primary-selection-receiving_msgs-neighbours" onclick="_update_inbuilt_selection('id_message_privacy', 1)">
+                            <h5>${tl2(trans.following_and_neighbours)}</h5>
+                        </div>
+                        <div class="btn primary-selection" id="primary-selection-receiving_msgs-follow" onclick="_update_inbuilt_selection('id_message_privacy', 2)">
+                            <h5>${tl2(trans.following)}</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="inner-preview pad">
+                <div class="shouts">
+                    <div class="shout-preview">
+                        <div class="avatar-side">
+                            <div class="shout-avatar-placeholder"></div>
+                        </div>
+                        <div class="info-side">
+                            <div class="header">
+                                <div class="shout-username"></div>
+                                <div class="shout-time"></div>
+                            </div>
+                            <div class="shout-contents"></div>
+                            <div class="shout-contents"></div>
+                        </div>
+                    </div>
+                    <div class="shout-preview">
+                        <div class="avatar-side">
+                            <div class="shout-avatar-placeholder"></div>
+                        </div>
+                        <div class="info-side">
+                            <div class="header">
+                                <div class="shout-username"></div>
+                                <div class="shout-time"></div>
+                            </div>
+                            <div class="shout-contents"></div>
+                            <div class="shout-contents"></div>
+                        </div>
+                    </div>
+                    <div class="shout-preview">
+                        <div class="avatar-side">
+                            <div class="shout-avatar-placeholder"></div>
+                        </div>
+                        <div class="info-side">
+                            <div class="header">
+                                <div class="shout-username"></div>
+                                <div class="shout-time"></div>
+                            </div>
+                            <div class="shout-contents"></div>
+                            <div class="shout-contents"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="setting-group">
+                <div class="setting" data-type="toggle" onclick="_update_inbuilt_item('disable_shoutbox')" id="container-disable_shoutbox">
+                    <button class="btn reset" onclick="_reset_inbuilt_item('disable_shoutbox')">Reset to default</button>
+                    <div class="heading">
+                        <h5>${tl2(trans.close_shouts.name)}</h5>
+                        <p>${tl2(trans.close_shouts.body)}</p>
+                    </div>
+                    <div class="toggle-wrap">
+                        <input class="companion-checkbox" type="checkbox" name="shoutbox_disabled" id="inbuilt-companion-checkbox-disable_shoutbox">
+                        <span class="btn toggle" id="toggle-disable_shoutbox" aria-checked="false">
+                            <div class="dot"></div>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="settings-footer">
+                <button type="submit" class="btn-primary save">
+                    ${tl2(trans.save)}
+                </button>
+                <input type="hidden" value="privacy" name="submit">
+            </div>
+        </form>
+    `;
+    for (let setting2 in original_privacy_settings) {
+      update_inbuilt_item(setting2, original_privacy_settings[setting2], false);
+    }
+    let selects = document.body.querySelectorAll("select");
+    selects.forEach((select2) => {
+      select2.setAttribute(
+        "onchange",
+        `_update_inbuilt_select('${select2.getAttribute("id")}', this.value)`
+      );
+      update_inbuilt_select(select2.getAttribute("id"), select2.value);
+    });
+  }
+  function bleh_accounts() {
+    let token = page.structure.main.querySelector('[name="csrfmiddlewaretoken"]').getAttribute("value");
+    let original_settings = {
+      email_language: page.structure.main.querySelector('[name="language"]'),
+      marketing_emails: page.structure.main.querySelector(
+        '[name="opt_in_marketing"]'
+      ),
+      email: page.structure.main.querySelector('[name="email"]').value,
+      captcha: page.structure.main.querySelector(".lfm-recaptcha")
+    };
+    const alert2 = update_profile.querySelector(".alert");
+    render(
+      page.structure.main,
+      html`
+            <section class="bleh--panel">
+                <h4>${tl2(trans.information)}</h4>
+                ${alert2}
+                <div class="setting-group">
+                    <form
+                        action="${root}settings/change-username/send-email"
+                        method="post"
+                    >
+                        <input
+                            type="hidden"
+                            name="csrfmiddlewaretoken"
+                            value="${token}"
+                        />
+                        <div class="setting" data-type="text">
+                            <div class="heading">
+                                <h5>${tl2(trans.username.name)}</h5>
+                                <p>
+                                    ${{
+        html: tl2(trans.username.body).replace(
+          "{a}",
+          `<a href="https://support.last.fm/" target="_blank">`
+        ).replace("{/a}", "</a>")
+      }}
+                                </p>
+                            </div>
+                            <div class="input-container content-form">
+                                <input
+                                    id="id_current_username"
+                                    type="text"
+                                    name="current_username"
+                                    value="${auth.name}"
+                                    disabled
+                                    required
+                                />
+                                <button class="btn chibi icon primary submit">
+                                    ${tl2(trans.send)}
+                                </button>
+                                <input
+                                    type="hidden"
+                                    value="change_username"
+                                    name="submit"
+                                />
+                            </div>
+                        </div>
+                    </form>
+                    <form
+                        action="${root}settings/account"
+                        name="change-email"
+                        method="post"
+                    >
+                        <input
+                            type="hidden"
+                            name="csrfmiddlewaretoken"
+                            value="${token}"
+                        />
+                        <div class="setting" data-type="text">
+                            <div class="heading">
+                                <h5>${tl2(trans.email)}</h5>
+                            </div>
+                            <div class="input-container content-form">
+                                <input
+                                    id="id_email"
+                                    type="text"
+                                    name="email"
+                                    value="${original_settings.email}"
+                                    required
+                                />
+                                <button class="btn chibi icon primary submit">
+                                    ${tl2(trans.save)}
+                                </button>
+                                <input
+                                    type="hidden"
+                                    value="email_update"
+                                    name="submit"
+                                />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <form
+                    class="password-container"
+                    action="${root}settings/account/password#change-password"
+                    name="change-password"
+                    method="post"
+                >
+                    <input
+                        type="hidden"
+                        name="csrfmiddlewaretoken"
+                        value="${token}"
+                    />
+                    <div class="setting-group">
+                        <div class="setting" data-type="text">
+                            <div class="heading">
+                                <h5>${tl2(trans.password)}</h5>
+                            </div>
+                            <div class="input-container content-form">
+                                <input
+                                    id="id_password"
+                                    type="password"
+                                    name="password"
+                                    required
+                                />
+                            </div>
+                        </div>
+                        <div class="setting" data-type="text">
+                            <div class="heading">
+                                <h5>${tl2(trans.new_password)}</h5>
+                            </div>
+                            <div class="input-container content-form">
+                                <input
+                                    id="id_new_password"
+                                    type="password"
+                                    name="new_password"
+                                    required
+                                />
+                            </div>
+                        </div>
+                        <div class="setting" data-type="text">
+                            <div class="heading">
+                                <h5>${tl2(trans.confirm_password)}</h5>
+                            </div>
+                            <div class="input-container content-form">
+                                <input
+                                    id="id_new_password_confirmation"
+                                    type="password"
+                                    name="new_password_confirmation"
+                                    required
+                                />
+                            </div>
+                        </div>
+                        ${original_settings.captcha}
+                    </div>
+                    <div class="settings-footer end">
+                        <button class="btn-primary save" type="submit">
+                            ${tl2(trans.change)}
+                        </button>
+                    </div>
+                </form>
+            </section>
+            <section class="bleh--panel">
+                <h4>${tl2(trans.communication)}</h4>
+                <form
+                    action="${root}settings/account"
+                    name="email-settings"
+                    method="post"
+                >
+                    <input
+                        type="hidden"
+                        name="csrfmiddlewaretoken"
+                        value="${token}"
+                    />
+                    <div class="setting-group">
+                        <div class="setting" data-type="select">
+                            <div class="heading">
+                                <h5>${tl2(trans.email_language)}</h5>
+                            </div>
+                            <div class="select-wrap custom-selector">
+                                ${select(
+        select_prepare(
+          original_settings.email_language
+        ),
+        original_settings.email_language.value,
+        original_settings.email_language.name
+      )}
+                            </div>
+                        </div>
+                        ${toggle({
+        value: original_settings.marketing_emails.checked,
+        name: original_settings.marketing_emails.name,
+        title: tl2(trans.marketing_emails.name),
+        body: tl2(trans.marketing_emails.body),
+        standalone: false
+      })}
+                    </div>
+                    <div class="settings-footer end">
+                        <button class="btn-primary save" type="submit">
+                            ${tl2(trans.save)}
+                        </button>
+                        <input
+                            type="hidden"
+                            value="email_settings"
+                            name="submit"
+                        />
+                    </div>
+                </form>
+            </section>
+            <section class="bleh--panel">
+                <h4>${tl2(trans.security)}</h4>
+                <form
+                    action="${root}settings/account"
+                    name="email-settings"
+                    method="post"
+                >
+                    <input
+                        type="hidden"
+                        name="csrfmiddlewaretoken"
+                        value="${token}"
+                    />
+                    <div class="setting-group">
+                        <div class="setting" data-type="action">
+                            <div class="heading">
+                                <h5>${tl2(trans.logout_everywhere)}</h5>
+                            </div>
+                            <div class="toggle-wrap">
+                                <a
+                                    class="see-more danger logout"
+                                    href="${root}settings/account/logout-everywhere"
+                                >
+                                    ${tl2(trans.logout)}
+                                </a>
+                            </div>
+                        </div>
+                        <div class="setting" data-type="action">
+                            <div class="heading">
+                                <h5>${tl2(trans.delete_account.name)}</h5>
+                                <p>${tl2(trans.delete_account.body)}</p>
+                            </div>
+                            <div class="toggle-wrap">
+                                <a
+                                    class="see-more danger delete-account"
+                                    href="${root}settings/account/delete"
+                                >
+                                    ${tl2(
+        trans.delete_account_permanently
+      ).replace("{u}", auth.name)}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </section>
+        `
+    );
+    for (let setting2 in original_settings) {
+      update_inbuilt_item(setting2, original_settings[setting2], false);
+    }
+  }
+  function bleh_name_change() {
+    let token = page.structure.row.querySelector('[name="csrfmiddlewaretoken"]').getAttribute("value");
+    return;
+  }
+  function bleh_website() {
+    const token = page.structure.row.querySelector('[name="csrfmiddlewaretoken"]').getAttribute("value");
+    const auto_correct = page.structure.main.querySelector(
+      '[name="corrections_enabled"]:checked'
+    );
+    const preferred_affiliate = page.structure.main.querySelector(
+      '[name="preferred_affiliate"]:checked'
+    );
+    const timezone = page.structure.main.querySelector('[name="timezone"]');
+    const help_text = page.structure.main.querySelector(".js-field-help-text");
+    const location = page.structure.main.querySelector(
+      '[data-require="components/location-form-field-v2"]'
+    );
+    const radius = page.structure.main.querySelector('[name="event_radius"]');
+    let timezone_text;
+    page.structure.main.insertBefore(
+      html.node`
+            <form class="dont-move" action="${root}settings/website" method="post">
+                <input type="hidden" name="csrfmiddlewaretoken" value="${token}">
+                <section class="bleh--panel">
+                    <h4>${tl2(trans.website)}</h4>
+                    <div class="setting-group">
+                        <div class="setting v2" data-type="options">
+                            <div class="heading">
+                                <h5>${tl2(trans.auto_correct_scrobbles.name)}</h5>
+                                <p>${tl2(trans.auto_correct_scrobbles.body)}</p>
+                            </div>
+                            ${radio({
+        name: auto_correct.name,
+        value: auto_correct.value,
+        values: {
+          False: {
+            name: tl2(
+              trans.auto_correct_scrobbles.false
+            )
+          },
+          True: {
+            name: tl2(
+              trans.auto_correct_scrobbles.true
+            )
+          }
+        }
+      })}
+                        </div>
+                    </div>
+                    <div class="alert alert-danger">
+                        ${tl2(trans.auto_correct_scrobbles.warning)}
+                    </div>
+                </section>
+                <section class="bleh--panel">
+                    <h4>${tl2(trans.events)}</h4>
+                    <div class="setting-group">
+                        <div class="setting v2" data-type="select">
+                            <div class="heading">
+                                <h5>${tl2(trans.timezone)}</h5>
+                                <p ref=${(el) => timezone_text = el}>${help_text.textContent.trim()}</p>
+                            </div>
+                            ${select(
+        select_prepare(timezone),
+        timezone.value,
+        timezone.name,
+        (val) => {
+          fetch(
+            `${root}settings/partial/timezone-help-text?tz=${val}&ajax=1`
+          ).then((res) => res.text()).then((dom) => {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(
+              dom,
+              "text/html"
+            );
+            const text4 = doc.querySelector("p");
+            if (!text4) return;
+            timezone_text.textContent = text4.textContent;
+          }).catch(
+            (e) => log(
+              "unable to get text",
+              "timezone",
+              "error",
+              { e }
+            )
+          );
+        }
+      )}
+                        </div>
+                        <div class="setting v2" data-type="action">
+                            <div class="heading">
+                                <h5>${tl2(trans.location.name)}</h5>
+                                <p>${tl2(trans.location.body)}</p>
+                            </div>
+                            <div class="toggle-wrap">
+                                ${location}
+                            </div>
+                        </div>
+                        <div class="setting v2" data-type="select">
+                            <div class="heading">
+                                <h5>${tl2(trans.event_radius)}</h5>
+                            </div>
+                            ${select(select_prepare(radius), radius.value, radius.name)}
+                        </div>
+                    </div>
+                    <div class="settings-footer end">
+                        <button type="submit" class="btn-primary save">
+                            ${tl2(trans.save)}
+                        </button>
+                        <input type="hidden" value="website" name="submit">
+                    </div>
+                </section>
+            </form>
+            <section class="bleh--panel">
+                <h4>${tl2(trans.playback)}</h4>
+                <form action="${root}settings/website" method="post">
+                    <input type="hidden" name="csrfmiddlewaretoken" value=${token}>
+                    <div class="setting-group">
+                        <div class="setting v2" data-type="options">
+                            <div class="heading">
+                                <h5>${tl2(trans.preferred_affiliate.name)}</h5>
+                                <p>${tl2(trans.preferred_affiliate.body)}</p>
+                            </div>
+                            ${radio({
+        name: preferred_affiliate.name,
+        value: preferred_affiliate.value,
+        values: radio_convert(
+          page.structure.main.querySelectorAll(
+            "#id_preferred_affiliate > .lfm-form-radio"
+          )
+        )
+      })}
+                        </div>
+                    </div>
+                    <div class="settings-footer end">
+                        <button type="submit" class="btn-primary save">
+                            ${tl2(trans.save)}
+                        </button>
+                        <input type="hidden" value="playback" name="submit">
+                    </div>
+                </form>
+            </section>
+        `,
+      page.structure.main.firstElementChild
+    );
+    const website = page.structure.main.querySelector("#website");
+    website.remove();
+    const playback = page.structure.main.querySelector("#playback");
+    playback.remove();
+  }
+  function bleh_applications() {
+    let session_types = page.structure.main.querySelectorAll(".api-sessions");
+    let suggested;
+    let connected;
+    if (session_types.length > 1) {
+      suggested = session_types[0];
+      connected = session_types[1];
+    } else {
+      connected = session_types[0];
+    }
+    render(
+      page.structure.main,
+      html`
+            <section class="applications">
+                <div class="section-intro">
+                    <h3>${tl2(trans.applications)}</h3>
+                    <p>${tl2(trans.applications_intro)}</p>
+                </div>
+                ${suggested ? html`
+                        <h2>${tl2(trans.suggested)}</h2>
+                        ${suggested}
+                    ` : ""}
+                <h2>${tl2(trans.connected)}</h2>
+                ${connected}
+            </section>
+        `
+    );
+    session_types.forEach((session_type) => {
+      let sessions = session_type.querySelectorAll(".api-session");
+      sessions.forEach((session) => {
+        const details = session.querySelector(".api-session-details");
+        const form = session.querySelector("form");
+        const button2 = form.querySelector("button");
+        button2.classList.add("chibi");
+        tippy_esm_default(button2, {
+          content: button2.textContent
+        });
+        const name = details.querySelector(".api-session-app-name");
+        const desc = details.querySelector(".api-session-app-description");
+        const status2 = details.querySelector(".api-session-status");
+        const image = details.querySelector(".api-session-app-image");
+        image.classList = "";
+        const default_image = image.src.endsWith(
+          "14d19fbdca555c1782176cd789e81af7.png"
+        );
+        render(
+          session,
+          html`
+                    <div class="session-header">
+                        <div
+                            class="session-image"
+                            data-default-image=${default_image}
+                        >
+                            ${image}
+                        </div>
+                        <div class="session-details">${name} ${desc}</div>
+                        ${form}
+                    </div>
+                    ${status2 ? html.node`
+                <div class="session-footer">
+                    ${status2}
+                </div>
+                ` : ""}
+                `
+        );
+      });
+    });
+  }
+
   // src/pages/home.js
   async function bleh_home() {
     page.structure.container = document.body.querySelector(".page-content");
@@ -58591,10 +58663,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
 
   // src/components/dialog_extender.js
   function dialog_extender() {
-    log("dialog extender", "loop");
-    let wrappers = document.body.querySelectorAll(
-      ":scope > .popup_wrapper, :scope > div > .popup_wrapper"
-    );
+    const wrappers = document.body.querySelectorAll(":scope > .popup_wrapper, :scope > div > .popup_wrapper");
+    log(`found ${Array.from(wrappers).length} dialog(s)`, "loop", "log", { wrappers });
     wrappers.forEach((wrapper) => {
       let modal_dialog = wrapper.querySelector(
         ".modal-dialog:not([data-dialog-extender])"
@@ -59502,7 +59572,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     if (ff("page_title")) {
       let template = tl2(trans.page_templates.type);
       if (!page.state.error) {
-        if ((page.type == "user" || page.type == "artist" || page.type == "events" || page.type == "tag") && page.subpage != "home")
+        if ((page.type == "user" || page.type == "artist" || page.type == "events" || page.type == "tag") && page.subpage != "home" && !(page.subpage.startsWith("playlists_") && page.subpage.endsWith("_overview")))
           template = tl2(trans.page_templates.name_type);
         else if (page.type == "album" || page.type == "track")
           template = tl2(trans.page_templates.name_sister_type);
@@ -59551,7 +59621,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       else if (page.subpage.startsWith("event_attendance"))
         title = tl2(trans.attendance);
       else if (page.subpage == "event_lineup") title = tl2(trans.lineup);
-      else if (page.subpage == "playlists_playlists")
+      else if (page.subpage == "playlists_playlists" || page.subpage.startsWith("playlists_") && page.subpage.endsWith("_overview"))
         title = tl2(trans.playlists);
       else if (page.subpage == "auth") title = tl2(trans.connect_app);
       else if (page.subpage.startsWith("image") && page.type == "artist")
@@ -59622,36 +59692,36 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     render(
       page.structure.indicator,
       html`
-            <div class="bleh">
-                <strong>ver</strong>
-                <span>${version.brand}</span>
-                <span>${version.build}</span>
-                <span>${version.sku}</span>
+            <div class="page-indicator-elem bleh">
+                <strong class="page-indicator-sub page-indicator-head">ver</strong>
+                <span class="page-indicator-sub">${version.brand}</span>
+                <span class="page-indicator-sub">${version.build}</span>
+                <span class="page-indicator-sub">${version.sku}</span>
             </div>
-            <div class="page">
-                <strong>auth</strong>
-                <span>${auth.name}</span>
-                <span>${lang}</span>
+            <div class="page-indicator-elem page">
+                <strong class="page-indicator-sub page-indicator-head">auth</strong>
+                <span class="page-indicator-sub">${auth.name}</span>
+                <span class="page-indicator-sub">${lang}</span>
             </div>
-            <div class="page">
-                <strong onclick=${() => console.info(page)}>page</strong>
-                <span>${page.type}</span>
-                <span>${page.subpage}</span>
+            <div class="page-indicator-elem page">
+                <strong class="page-indicator-sub page-indicator-head" onclick=${() => console.info(page)}>page</strong>
+                <span class="page-indicator-sub">${page.type}</span>
+                <span class="page-indicator-sub">${page.subpage}</span>
             </div>
-            <div class="page">
-                <strong></strong>
-                <span>${page.name}</span>
-                <span>${page.sister}</span>
+            <div class="page-indicator-elem page">
+                <strong class="page-indicator-sub page-indicator-head"></strong>
+                <span class="page-indicator-sub">${page.name || "?"}</span>
+                <span class="page-indicator-sub">${page.sister || "?"}</span>
             </div>
-            <div class="page">
-                <strong>season</strong>
-                <span>${stored_season.id}</span>
-                <span>${stored_season.year}</span>
-                <span>${stored_season.offset}</span>
+            <div class="page-indicator-elem page">
+                <strong class="page-indicator-sub page-indicator-head">season</strong>
+                <span class="page-indicator-sub">${stored_season.id}</span>
+                <span class="page-indicator-sub">${stored_season.year}</span>
+                <span class="page-indicator-sub">${stored_season.offset}</span>
             </div>
-            <div class="page">
-                <strong>solarium</strong>
-                <span>${settings.solarium}</span>
+            <div class="page-indicator-elem page">
+                <strong class="page-indicator-sub page-indicator-head">solarium</strong>
+                <span class="page-indicator-sub">${settings.solarium}</span>
             </div>
         `
     );
@@ -71272,19 +71342,26 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         system_colour = "#C8DD88";
         break;
     }
-    if (Object.keys(append).length > 0)
+    const has_append = Object.keys(append).length > 0;
+    if (has_append)
       console[type](`%c${system}%c ${text4}`, `background: ${system_colour}; display: block; width: fit-content; font-weight: bold; color: #000; padding: 0 4px; border-radius: 4px`, "color: unset", append);
     else
       console[type](`%c${system}%c ${text4}`, `background: ${system_colour}; display: block; width: fit-content; font-weight: bold; color: #000; padding: 0 4px; border-radius: 4px`, "color: unset");
     if (settings && settings.feature_flags) {
       if (settings.feature_flags.developer == true) {
-        page.structure.logs.appendChild(
-          html.node`
-            <div class="log" data-type=${type}>
-                <span class="system" style="color: ${system_colour}">${system}</span>
-                <span class="text">${text4}</span>
-            </div>`
-        );
+        page.structure.logs.appendChild(html.node`
+                <div class="log" data-type=${type}>
+                    <span class="system" style="background: ${system_colour}">${system}</span>
+                    <span class="text">${text4}</span>
+                    ${has_append ? html.node`
+                    <span class="log-copy" onclick=${() => {
+          copy(JSON.stringify(append));
+        }}>
+                        (copy)
+                    </span>
+                    ` : ""}
+                </div>
+            `);
       }
     }
   }
@@ -86258,6 +86335,9 @@ html2canvas-pro/dist/html2canvas-pro.js:
    * Released under MIT License
    *)
 
+showdown/dist/showdown.js:
+  (*! showdown v 2.1.0 - 21-04-2022 *)
+
 cropperjs/dist/cropper.js:
   (*!
    * Cropper.js v1.5.13
@@ -86268,9 +86348,6 @@ cropperjs/dist/cropper.js:
    *
    * Date: 2022-11-20T05:30:46.114Z
    *)
-
-showdown/dist/showdown.js:
-  (*! showdown v 2.1.0 - 21-04-2022 *)
 
 @ungap/weakmap/esm/index.js:
 domconstants/esm/index.js:

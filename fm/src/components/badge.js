@@ -122,7 +122,7 @@ export function create_badge(
     long = false,
     small = false
 ) {
-    log('creating', 'badge', 'info', { badge, on_avatar, long, small });
+    log(`creating '${badge.name}' for @${badge.user}`, 'badge', 'info', { badge, on_avatar, long, small });
 
     const classlist = on_avatar ? 'avatar-status-dot' : 'label no-hover';
 
