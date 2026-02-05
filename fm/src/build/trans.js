@@ -59,7 +59,7 @@ export let lang_info = {
     ru: {
         name: 'Русский',
         by: ['crawqxx', 'techplayz32'],
-        last_updated: '2025-12-16'
+        last_updated: '2026-02-05'
     },
     zh: {
         name: '简体中文',
