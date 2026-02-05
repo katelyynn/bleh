@@ -87,6 +87,13 @@ async function fetch_status_api(username) {
         })
         .catch(e => {
             log(`error processing for ${username}`, 'status.cafe', 'error', { e });
+
+            let error = e && e.message ? e.message : '';
+
+            if (e instanceof TypeError) {
+                error = `${username} was not found on status.cafe`;
+            }
+
             return html.node`
                 <div class="status-cafe">
                     <div class="status-cafe-top">
@@ -97,7 +104,7 @@ async function fetch_status_api(username) {
                         <span class="status-cafe-emoji">
                             <span class="bleh-icon" />
                         </span>
-                        <span class="status-cafe-text">${e && e.message ? e.message : ''}</span>
+                        <span class="status-cafe-text">${error}</span>
                     </div>
                 </div>
             `;
