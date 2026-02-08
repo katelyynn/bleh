@@ -157,7 +157,7 @@ export let includes = {
         '-reloaded-', // deco*27
         /(?:-\s?|\(|\[)reloaded/i,
         /\(best friend remix/i, // deco*27
-        /[-\(]live/i,
+        /(?:-\s?|\(|\[)live/i,
         /:\s?the live/i,
         /\(\s?the live/i,
         /[-\(]the live/i,
