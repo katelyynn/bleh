@@ -57,10 +57,8 @@ export function hex_to_hsl(hex) {
     }
 
     h = Math.round(h * 360);
-    s = s * 100;
-    s = Math.round(s);
-    l = l * 100;
-    l = Math.round(l);
+    s = round_two(s * 100);
+    l = round_two(l * 100);
 
     console.log('converted', hex, 'to', h, s, l);
 
@@ -116,8 +114,8 @@ export function clamp_lit(sat, lit) {
     return round_two(lit);
 }
 
-function round_two(value) {
-    return Math.round(value * 100) / 100;
+export function round_two(num) {
+    return Math.round((num + Number.EPSILON) * 100) / 100;
 }
 
 /**

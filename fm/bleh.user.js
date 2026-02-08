@@ -27877,10 +27877,8 @@
       h /= 6;
     }
     h = Math.round(h * 360);
-    s2 = s2 * 100;
-    s2 = Math.round(s2);
-    l2 = l2 * 100;
-    l2 = Math.round(l2);
+    s2 = round_two(s2 * 100);
+    l2 = round_two(l2 * 100);
     console.log("converted", hex2, "to", h, s2, l2);
     return {
       h,
@@ -27907,8 +27905,8 @@
     if (sat >= 1.3 && lit < 0.8) return 0.8;
     return round_two(lit);
   }
-  function round_two(value) {
-    return Math.round(value * 100) / 100;
+  function round_two(num) {
+    return Math.round((num + Number.EPSILON) * 100) / 100;
   }
   function clean_number(string) {
     if (!string) return 0;
