@@ -1,0 +1,763 @@
+//
+// bleh, an extension for the music site Last.fm
+// Copyright (c) 2025 katelyn and contributors
+// Licensed under GPLv3
+//
+
+import { expand_avatar } from '../components/avatar.js';
+import { log } from '../build/log';
+import { page, root } from '../build/page';
+import { tl, trans } from '../build/trans';
+import { register_menu } from '../components/menu';
+import { ff } from '../sku';
+import { html, render } from 'lighterhtml';
+import { share } from '../components/share.js';
+import tippy from 'tippy.js';
+import { correct_artist, correct_item_by_artist } from '../components/music/lotus.js';
+import { set_storage } from '../build/tools.js';
+
+export function bleh_gallery() {
+    if (page.subpage != 'image') return;
+
+    log('focusing on image', 'gallery');
+
+    let image_sidebar = page.structure.side.querySelector(
+        '.js-gallery-image-details > div'
+    );
+    if (!image_sidebar) return;
+
+    if (image_sidebar.hasAttribute('data-bleh-gallery')) return;
+    image_sidebar.setAttribute('data-bleh-gallery', 'true');
+
+    if (!ff('new_gallery_experience')) {
+        patch_gallery_focused_image(
+            image_sidebar,
+            page.structure.container.querySelector('.gallery-image-buttons')
+        );
+        return;
+    }
+
+    // move image to its own spot above
+    let image_details;
+    let gallery_section;
+    let first = false;
+    try {
+        gallery_section = page.structure.main.querySelector('.gallery-section');
+        if (gallery_section) {
+            first = true;
+
+            if (ff('short'))
+                page.structure.row.insertBefore(
+                    gallery_section,
+                    page.structure.content
+                );
+            else page.structure.nav.after(gallery_section);
+
+            // move image details to main column
+            image_details = html.node`
+                <section class="image-details" />
+            `;
+        } else {
+            image_details = page.structure.main.querySelector('.image-details');
+            image_details.innerHTML = '';
+        }
+    } catch (e) {
+        gallery_section =
+            page.structure.container.querySelector('.gallery-section');
+
+        image_details = page.structure.main.querySelector('.image-details');
+        image_details.innerHTML = '';
+    }
+    image_details.appendChild(image_sidebar);
+
+    // top title
+    let image_title = image_details.querySelector('.gallery-image-title');
+    let image_date = image_details.querySelector('.gallery-image-uploaded-by');
+
+    if (image_title.textContent.trim() == '') {
+        image_title.classList.add('gallery-image-title-empty');
+        image_title.textContent = tl(trans.no_title);
+    }
+
+    let breadcrumbs = document.body.querySelector('.content-top-lower-row');
+    let breadcrumb_root = breadcrumbs.querySelector('a');
+    let breadcrumb_name = breadcrumbs.querySelector('.subpage-title');
+
+    let image_title_container = document.createElement('div');
+    image_title_container.classList.add('image-title-container');
+    image_title_container.innerHTML = `
+        <div class="sub-text">
+            <div class="breadcrumb">
+                ${breadcrumb_root.outerHTML}
+                <div class="breadcrumb-name">
+                    ${breadcrumb_name.textContent}
+                </div>
+            </div>
+            ${image_date.outerHTML}
+        </div>
+        <div class="title-layer">
+            ${image_title.outerHTML}
+            <div class="vote-number" data-side="pos">+0</div>
+        </div>
+    `;
+
+    image_details.insertBefore(image_title_container, image_sidebar);
+    breadcrumbs.style.setProperty('display', 'none');
+
+    page.structure.main.insertBefore(
+        image_details,
+        page.structure.main.firstElementChild
+    );
+    if (first) image_details.after(html.node`<div class="sep" />`);
+
+    let description = image_details.querySelector('.gallery-image-description');
+    if (!description) {
+        description = document.createElement('p');
+        description.classList.add(
+            'gallery-image-description',
+            'gallery-image-description-empty'
+        );
+        description.textContent = tl(trans.no_description);
+
+        image_details
+            .querySelector('[data-image-url]')
+            .appendChild(description);
+    }
+
+    let buttons = image_details.querySelector('.gallery-image-buttons');
+
+    buttons.querySelectorAll('button').forEach(btn => {
+        btn.classList.add('btn');
+        btn.removeAttribute('title');
+    });
+
+    // button container, to split into two
+    let button_container = document.createElement('div');
+    button_container.classList.add('button-container-wrapper');
+
+    button_container.appendChild(buttons);
+
+    // divider after vote btns
+    let vote_buttons = buttons.querySelector('.gallery-image-vote-buttons');
+    vote_buttons.after(create_divider());
+
+    // determine current vote number
+    const positive_btn = vote_buttons
+        .querySelector(
+            ':is([data-ajax-form-state=""] .gallery-image-vote-up-off, [data-ajax-form-state="up-voted"] .gallery-image-vote-up-on, [data-ajax-form-state="down-voted"] .gallery-image-vote-up-off)'
+        )
+        .cloneNode(true);
+    const negative_btn = vote_buttons
+        .querySelector(
+            ':is([data-ajax-form-state=""] .gallery-image-vote-down-off, [data-ajax-form-state="up-voted"] .gallery-image-vote-down-off, [data-ajax-form-state="down-voted"] .gallery-image-vote-down-on)'
+        )
+        .cloneNode(true);
+
+    const positive = parseInt(
+        positive_btn
+            .querySelector('.gallery-image-votes')
+            .lastChild.textContent.trim()
+    );
+    const negative = parseInt(
+        negative_btn
+            .querySelector('.gallery-image-votes')
+            .lastChild.textContent.trim()
+    );
+
+    const number = positive - negative;
+    const is_negative = number < 0;
+
+    let vote_badge = image_title_container.querySelector('.vote-number');
+    vote_badge.textContent = `${is_negative ? '' : '+'}${number}`;
+    vote_badge.setAttribute('data-side', is_negative ? 'neg' : 'pos');
+
+    tippy(vote_badge, {
+        content: tl(trans.gallery_sum)
+    });
+
+    // 2nd side
+    let buttons_extra = document.createElement('div');
+    buttons_extra.classList.add(
+        'gallery-image-buttons',
+        'gallery-image-buttons-extra'
+    );
+
+    button_container.appendChild(buttons_extra);
+
+    image_details.appendChild(button_container);
+
+    // open in a new tab button
+    let open_button = html.node`
+        <button class="btn image-open-button" onclick=${() => expand_gallery_image()}>
+            ${tl(trans.expand)}
+        </button>
+    `;
+    tippy(open_button, {
+        content: tl(trans.expand_to_full_resolution)
+    });
+
+    buttons_extra.appendChild(open_button);
+
+    // share button
+    let share_button = html.node`
+        <button class="btn image-share-button" onclick=${() => share(window.location.href)}>
+            ${tl(trans.share)}
+        </button>
+    `;
+
+    buttons_extra.appendChild(share_button);
+    share_button.after(create_divider());
+
+    // delete
+    let delete_button = image_details.querySelector('.gallery-image-delete');
+    if (delete_button) {
+        delete_button.querySelector('button').classList = 'btn';
+        buttons_extra.appendChild(delete_button);
+    }
+
+    // report
+    const report_form = image_details.querySelector('.gallery-image-report-form');
+
+    const report = report_form.querySelector('button');
+    report.classList.add('btn');
+    tippy(report, {
+        content: report.textContent
+    });
+    report.textContent = tl(trans.report);
+
+    const reported = report_form.querySelector('.gallery-image-report--reported');
+    reported.classList.add('btn');
+
+    buttons_extra.appendChild(report_form);
+
+    // star
+    let star_buttons = image_details.querySelectorAll('.gallery-image-preferred-button :is(button, a)');
+    star_buttons.forEach(star_button => {
+        star_button.classList.add('btn');
+        star_button.removeAttribute('title');
+
+        const text = star_button.querySelector('.gallery-image-preferred-states');
+
+        /*tippy(star_button, {
+            content: star_button.textContent
+        });*/
+        text.textContent = tl(trans.star);
+    });
+
+    // view all artwork
+    let view_all_container = page.structure.main.querySelector(
+        '.more-link-fullwidth-right-flush-top'
+    );
+    if (view_all_container) {
+        let side_actions = document.createElement('section');
+        side_actions.classList.add('side-actions');
+
+        if (!page.mobile) page.structure.side.appendChild(side_actions);
+        else page.structure.main.appendChild(side_actions);
+
+        let view_all = view_all_container.querySelector('a');
+        view_all.classList.add('btn', 'side-action');
+        view_all.setAttribute('data-type', 'gallery');
+
+        side_actions.appendChild(view_all);
+
+        page.structure.main.removeChild(view_all_container);
+
+        // saved button
+        if (page.type == 'artist' || ff('display_album_bookmark')) {
+            let view_saved = document.createElement('a');
+            view_saved.classList.add('btn', 'side-action');
+            view_saved.setAttribute(
+                'href',
+                `${view_all.getAttribute('href')}?tab=saved`
+            );
+            view_saved.setAttribute('data-type', 'gallery-saved');
+            view_saved.textContent = tl(trans.view_saved);
+
+            side_actions.appendChild(view_saved);
+        }
+    }
+
+    // extra thumbnails for clarity
+    // doesnt work :(
+    /*let gallery_thumbnail_panel = document.createElement('section');
+    gallery_thumbnail_panel.classList.add('gallery-thumbnail-panel');
+    gallery_thumbnail_panel.innerHTML = page.structure.container.querySelector('.gallery-thumbnail-container').innerHTML;
+
+    view_all_panel.after(gallery_thumbnail_panel);*/
+
+    // bookmark-related info
+    if (page.type == 'artist' || ff('display_album_bookmark'))
+        patch_gallery_focused_image(image_sidebar, buttons);
+
+    /*let gallery_slides = gallery_section.querySelectorAll('.gallery-slide');
+    gallery_slides.forEach((slide) => {
+        console.info(slide);
+        let left = parseInt(slide.style.getPropertyValue('left').replace('%', ''));
+        console.info(left);
+
+        slide.style.setProperty('left', `${left / 10}%`)
+    });*/
+}
+
+function expand_gallery_image() {
+    let image_src = page.structure.container
+        .querySelector('.active-slide .js-gallery-image')
+        .getAttribute('src')
+        .replace('770x0', 'ar0');
+    expand_avatar(image_src);
+}
+
+export function create_divider() {
+    let divider = document.createElement('div');
+    divider.classList.add('listen-divider');
+
+    return divider;
+}
+
+export function bleh_gallery_upload() {
+    // remove content top
+    let content_top = document.body.querySelector('.page-content');
+    content_top.innerHTML = '';
+
+    if (!ff('mesmerizer')) {
+        page.structure.row.insertBefore(
+            html.node`
+            <section class="gallery-section gallery--initialised">
+                <div class="gallery-image-container">
+                    <div class="gallery-slides">
+                        <div class="gallery-image gallery-slide image-preview active-slide">
+                            <img class="image-preview-hook" ref=${(el) => (page.state.image_preview = el)} />
+                        </div>
+                    </div>
+                </div>
+            </section>
+        `,
+            page.structure.row.firstElementChild
+        );
+
+        // apply card style to form
+        let form = page.structure.main.querySelector('.form-horizontal');
+        form.classList.add('panel-form');
+
+        // upload rules
+        let upload_rules_group = form.querySelector(
+            '.form-group--description + .form-group'
+        );
+        let rules = upload_rules_group.querySelector('.gallery-upload-rules');
+
+        let rules_panel = document.createElement('section');
+        rules_panel.classList.add('rules-panel');
+        rules_panel.innerHTML = rules.innerHTML;
+
+        page.structure.side.appendChild(rules_panel);
+
+        form.removeChild(upload_rules_group);
+
+        return;
+    }
+
+    const form = page.structure.main.querySelector(':scope > form');
+
+    // upload rules
+    const upload_rules_group = form.querySelector(
+        '.form-group--description + .form-group'
+    );
+    const rules = upload_rules_group.querySelector('.gallery-upload-rules');
+
+    page.structure.side.appendChild(html.node`
+        <section class="rules-panel">
+            ${{ html: rules.innerHTML }}
+        </section>
+    `);
+    form.removeChild(upload_rules_group);
+
+    const token = form.querySelector(':scope > [name="csrfmiddlewaretoken"]');
+
+    const title = form.querySelector('[name="title"]');
+    const description = form.querySelector('[name="description"]');
+    const alert = form.querySelector('.alert');
+
+    const file_input = form.querySelector('input[type="file"]');
+
+    const formats = form.querySelector('.form-row-help-text');
+
+    if (page.type == 'artist') {
+        title.value = correct_artist(page.name);
+    } else {
+        title.value = correct_item_by_artist(page.name, page.sister);
+    }
+
+    const panel = html.node`
+        <section class="gallery-upload-panel bleh--panel">
+            <h4>${tl(trans.image_details)}</h4>
+            ${alert}
+            <form method="post" action=${form.getAttribute('action')} enctype=${form.getAttribute('enctype')}>
+                ${token}
+                <div class="hidden-file-input">
+                    ${file_input}
+                </div>
+                <div class="setting-group">
+                    <div class="setting" data-type="text">
+                        <div class="heading">
+                            <h5>${tl(trans.title)}</h5>
+                        </div>
+                        <div class="input-container content-form wide">
+                            ${title}
+                        </div>
+                    </div>
+                    <div class="setting" data-type="text">
+                        <div class="heading">
+                            <h5>${tl(trans.description)}</h5>
+                        </div>
+                        <div class="input-container content-form textarea">
+                            ${description}
+                        </div>
+                    </div>
+                </div>
+                <div class="settings-footer end">
+                    <button class="btn primary icon" data-type="upload" type="submit">
+                        ${tl(trans.upload)}
+                    </button>
+                </div>
+            </form>
+        </section>
+    `;
+
+    page.structure.main.appendChild(panel);
+
+    let dropzone;
+    let container;
+
+    page.structure.row.insertBefore(
+        html.node`
+        <section class="gallery-section gallery--initialised">
+            <div class="dropzone" ref=${(el) => (dropzone = el)} onclick=${() => {
+                file_input.click();
+            }}>
+                <div class="dropzone-message">${tl(trans.dropzone)}</div>
+                <div class="card-tip">${formats.textContent}</div>
+            </div>
+            <div class="gallery-image-container" ref=${(el) => (container = el)}>
+                <div class="gallery-slides">
+                    <div class="gallery-image gallery-slide image-preview active-slide">
+                        <img class="image-preview-hook" ref=${(el) => (page.state.image_preview = el)} />
+                    </div>
+                </div>
+            </div>
+        </section>
+    `,
+        page.structure.row.firstElementChild
+    );
+
+    ['dragenter', 'dragover'].forEach((type) => {
+        dropzone.addEventListener(type, (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+
+            container.setAttribute('data-dragging', true);
+            dropzone.setAttribute('data-dragging', true);
+        });
+    });
+
+    ['dragleave', 'drop'].forEach((type) => {
+        dropzone.addEventListener(type, (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+
+            container.setAttribute('data-dragging', false);
+            dropzone.setAttribute('data-dragging', false);
+        });
+    });
+
+    dropzone.addEventListener('drop', (e) => {
+        const files = e.dataTransfer.files;
+        if (files.length) file_input.files = files;
+
+        file_input.dispatchEvent(new Event('change'));
+    });
+
+    file_input.addEventListener('change', () => {
+        log('file input changed', 'gallery', 'info', {
+            files: file_input.files
+        });
+        if (!file_input.files.length) return;
+
+        const file = file_input.files[0];
+        const reader = new FileReader();
+
+        dropzone.setAttribute('data-has-file', true);
+
+        reader.onload = (event) => {
+            page.state.image_preview.src = event.target.result;
+        };
+
+        reader.readAsDataURL(file);
+    });
+
+    form.style.setProperty('display', 'none');
+}
+
+export function bleh_gallery_upload_check() {
+    if (page.subpage != 'images_image-upload' || !page.state.image_preview)
+        return;
+
+    if (ff('mesmerizer')) {
+        const artwork_finder = page.structure.main.querySelector(
+            '#lfmmaf-widget:not([data-bleh])'
+        );
+
+        if (artwork_finder) {
+            artwork_finder.setAttribute('data-bleh', true);
+
+            const group = page.structure.main.querySelector('.setting-group');
+            const controls = artwork_finder.querySelectorAll(
+                '.form-group-controls > *'
+            );
+
+            let info;
+
+            group.insertBefore(
+                html.node`
+                <div class="setting" data-type="info">
+                    <div class="heading">
+                        <h5>${{ html: artwork_finder.querySelector('label').innerHTML }}</h5>
+                    </div>
+                    <div class="info artwork-finder-info" ref=${(el) => (info = el)} />
+                </div>
+            `,
+                group.firstElementChild
+            );
+
+            controls.forEach((control) => {
+                info.appendChild(control);
+            });
+        }
+
+        return;
+    }
+
+    // update image preview
+    const image_preview = page.structure.main.querySelector(
+        '.form-image-preview'
+    );
+    if (!image_preview) return;
+
+    page.state.image_preview.setAttribute(
+        'src',
+        image_preview.getAttribute('src')
+    );
+}
+
+export function bleh_gallery_list() {
+    let upload_btn = page.structure.main.querySelector('.btn-add');
+    if (upload_btn) {
+        upload_btn.classList = 'btn view-all-button back upload-button';
+
+        let upload_panel = document.createElement('section');
+        upload_panel.classList.add('view-all-panel', 'upload-panel');
+
+        upload_panel.appendChild(upload_btn);
+        page.structure.side.insertBefore(
+            upload_panel,
+            page.structure.side.firstElementChild
+        );
+    }
+
+    page.structure.main.classList.add('bleh--gallery');
+
+    if (page.type == 'artist') patch_gallery_image_listing();
+}
+
+// gallery main page
+function patch_gallery_image_listing() {
+    let bookmarked_images =
+        JSON.parse(localStorage.getItem('bleh_bookmarked_images')) || {};
+
+    if (page.requested.tab != 'saved' || page.requested.page != null)
+        page.structure.container.setAttribute('data-bleh--gallery-tab', 'all');
+    else
+        page.structure.container.setAttribute(
+            'data-bleh--gallery-tab',
+            'saved'
+        );
+
+    // create nav
+    let nav = html.node`
+        <div class="toolbar">
+            <nav class="navlist secondary-nav navlist--more redesigned-navigation">
+                <ul class="navlist-items">
+                    <li class="navlist-item secondary-nav-item secondary-nav-item--gallery-overview">
+                        <a class="secondary-nav-item-link" onclick=${() => gallery_tab('all')}>
+                            ${tl(trans.photos)}
+                        </a>
+                    </li>
+                    <li class="navlist-item secondary-nav-item secondary-nav-item--gallery-bookmarks">
+                        <a class="secondary-nav-item-link" onclick=${() => gallery_tab('saved')}>
+                            ${tl(trans.saved)}
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    `;
+
+    page.structure.row.insertBefore(nav, page.structure.content);
+
+    // content
+    let bookmarks_panel;
+    page.structure.main.after(html.node`
+        <div class="col-main bleh--bookmarks not-a-panel">
+            <section class="bookmarks-panel" ref=${(el) => (bookmarks_panel = el)}>
+                <ul class="image-list" data-kate-processed="true"></ul>
+            </section>
+        </div>
+    `);
+
+    // append images
+    if (bookmarked_images.hasOwnProperty(page.name)) {
+        bookmarked_images[page.name].forEach((image) => {
+            let image_element = document.createElement('li');
+            image_element.classList.add('image-list-item-wrapper');
+            image_element.setAttribute('data-image-id', image);
+            image_element.innerHTML = `
+                <a class="image-list-item" href="${root}music/+noredirect/${page.name}/+images/${image}">
+                    <img src="https://lastfm.freetls.fastly.net/i/u/avatar170s/${image}" alt=${image} loading="lazy">
+                </a>
+            `;
+
+            page.structure.container
+                .querySelector('.bookmarks-panel .image-list')
+                .appendChild(image_element);
+
+            if (ff('remove_bookmark')) {
+                let menu = tippy(image_element, {
+                    theme: 'context-menu',
+                    content: html.node`
+                        <button class="dropdown-menu-clickable-item" onclick=${() => update_image_bookmark(image_element, image, false)} data-menu-item="remove-bookmark" data-bleh--image-is-bookmarked="true">
+                            ${tl(trans.remove_save)}
+                        </button>
+                    `,
+                    placement: 'right-start',
+                    trigger: 'manual',
+                    interactive: true,
+                    interactiveBorder: 10,
+                    offset: [0, 0],
+
+                    onShow(instance) {
+                        instance.popper.addEventListener('click', (event) => {
+                            instance.hide();
+                        });
+                    }
+                });
+
+                register_menu(image_element, menu);
+            }
+        });
+
+        // mark images as bookmarked
+        let image_list =
+            page.structure.main.querySelectorAll('.image-list-item');
+        image_list.forEach((image_list_item) => {
+            let image_id_split = image_list_item
+                .getAttribute('href')
+                .split('/');
+            let image_id_length = image_id_split.length;
+            let image_id = image_id_split[image_id_length - 1];
+
+            if (bookmarked_images[page.name].includes(image_id)) {
+                image_list_item.classList.add('image-list-item-bookmarked');
+            }
+        });
+    } else {
+        render(
+            bookmarks_panel,
+            html`
+                <div class="loading-data-container">
+                    <div class="loading-data-text failed">
+                        ${tl(trans.no_images_saved)}
+                    </div>
+                </div>
+            `
+        );
+    }
+}
+
+function gallery_tab(id) {
+    page.structure.container.setAttribute('data-bleh--gallery-tab', id);
+
+    // remove ?tab=saved
+    /*if (page.requested.tab == 'saved') {
+        let params = new URLSearchParams(document.location.search);
+        params.delete('tab');
+        // https://stackoverflow.com/a/43440356
+        // location.hash preserves #
+        history.replaceState(null, '', '?' + params + location.hash);
+    }*/
+}
+
+// gallery focused image
+function patch_gallery_focused_image(
+    focused_image_details,
+    gallery_interactions
+) {
+    let focused_image_id_split = focused_image_details
+        .getAttribute('data-image-url')
+        .split('/');
+    let focused_image_id_length = focused_image_id_split.length - 1;
+
+    let focused_image_id = focused_image_id_split[focused_image_id_length];
+
+    let bookmarked_images =
+        JSON.parse(localStorage.getItem('bleh_bookmarked_images')) || {};
+    let image_is_bookmarked = false;
+    if (bookmarked_images.hasOwnProperty(page.name)) {
+        if (bookmarked_images[page.name].includes(focused_image_id)) {
+            image_is_bookmarked = true;
+            log('focused is bookmarked', 'gallery');
+        }
+    }
+
+    // append a bookmark button
+    const save_btn = html.node`
+        <button class="btn bleh--gallery-bookmark-image-btn btn--has-icon" data-bleh--image-is-bookmarked=${image_is_bookmarked} onclick=${() => update_image_bookmark(save_btn, focused_image_id)}>
+            ${tl(trans.save)}
+        </button>
+    `;
+
+    gallery_interactions.appendChild(save_btn);
+}
+
+function update_image_bookmark(button, id) {
+    let bookmarked_images =
+        JSON.parse(localStorage.getItem('bleh_bookmarked_images')) || {};
+    let is_bookmarked =
+        button.getAttribute('data-bleh--image-is-bookmarked') == 'true';
+
+    if (!bookmarked_images.hasOwnProperty(page.name))
+        bookmarked_images[page.name] = [];
+
+    if (is_bookmarked) {
+        // remove from bookmarks
+
+        button.setAttribute('data-bleh--image-is-bookmarked', 'false');
+
+        let new_artist_bookmarks = [];
+        for (let image in bookmarked_images[page.name]) {
+            if (bookmarked_images[page.name][image] != id) {
+                new_artist_bookmarks.push(bookmarked_images[page.name][image]);
+            }
+        }
+        bookmarked_images[page.name] = new_artist_bookmarks;
+
+        log(`image ${id} from ${page.name} removed from bookmarks`, 'gallery');
+    } else {
+        // add to bookmarks
+
+        button.setAttribute('data-bleh--image-is-bookmarked', 'true');
+        bookmarked_images[page.name].push(id);
+        log(`image ${id} from ${page.name} added to bookmarks`, 'gallery');
+    }
+
+    set_storage('bleh_bookmarked_images', JSON.stringify(bookmarked_images));
+}

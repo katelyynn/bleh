@@ -4,17 +4,17 @@
 // Licensed under GPLv3
 //
 
-import { register_activity } from '../activity';
+import { register_activity } from '../components/activity.js';
 import { log } from '../build/log';
 import { auth, discord, page, root } from '../build/page';
 import { tl, trans } from '../build/trans';
-import { request_changelog } from '../news.js';
+import { request_changelog } from '../components/news.js';
 import { notify } from '../components/notify';
 import { checkup_page_structure } from '../components/structure';
 import { refresh_all, update_colour_swatches } from '../config';
 import { version } from '../main';
 import { register_background, update_page } from '../page';
-import { display_colour_presets, theme_bubbles } from './bleh_config';
+import { display_colour_presets, theme_bubbles } from './bleh_settings/bleh_settings.js';
 import { html, render } from 'lighterhtml';
 import { setting } from '../components/settings.js';
 import { ff } from '../sku.js';

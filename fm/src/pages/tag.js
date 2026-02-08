@@ -8,7 +8,7 @@ import {log} from "../build/log";
 import {page} from "../build/page";
 import {desanitise} from "../build/tools";
 import {tl, trans} from "../build/trans";
-import {patch_header_title} from "../components/lotus";
+import {patch_header_title} from "../components/music/lotus";
 import {checkup_page_structure} from "../components/structure";
 import {register_background, update_page} from "../page";
 import {ff} from "../sku";

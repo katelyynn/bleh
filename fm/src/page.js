@@ -4,7 +4,7 @@
 // Licensed under GPLv3
 //
 
-import { load_activities, subscribe_to_events } from './activity';
+import { load_activities, subscribe_to_events } from './components/activity.js';
 import { settings } from './build/config';
 import { log } from './build/log';
 import {
@@ -30,17 +30,17 @@ import {
     correct_generic_combo_no_artist,
     correct_item_by_artist,
     lotus
-} from './components/lotus';
+} from './components/music/lotus.js';
 import { music_grids } from './components/music_grid';
 import { nag_bar } from './components/nag_bar';
 import { load_notifications, notify } from './components/notify';
-import { patch_titles } from './components/track';
+import { patch_titles } from './components/music/track.js';
 import { load_settings } from './config';
 import { theme_version, version } from './main';
-import { append_nav, patch_masthead, update_masthead } from './navigation';
+import { append_nav, patch_masthead, update_masthead } from './components/navigation.js';
 import { bleh_albums } from './pages/album';
 import { bleh_artists } from './pages/artist';
-import { bleh_settings } from './pages/bleh_config';
+import { bleh_settings } from './pages/bleh_settings/bleh_settings.js';
 import { bleh_setup, notify_if_new_update } from './pages/bleh_setup';
 import { bleh_error } from './pages/error';
 import { bleh_events } from './pages/event';
@@ -48,30 +48,30 @@ import { bleh_gallery, bleh_gallery_upload_check } from './pages/gallery';
 import {
     bleh_glacier_library,
     bleh_glacier_library_bulk_edit
-} from './pages/glacier';
+} from './pages/profile/glacier.js';
 import { bleh_home, bleh_home_legacy } from './pages/home';
 import { bleh_inbox } from './pages/inbox';
-import { bleh_profiles, checkup_friend_cache } from './pages/profile';
+import { bleh_profiles, checkup_friend_cache } from './pages/profile/profile.js';
 import { bleh_search } from './pages/search';
 import { bleh_tags } from './pages/tag';
 import { bleh_tracks } from './pages/track';
 import { patch_wiki } from './pages/wiki';
-import { start_rain } from './rain';
-import { seasonal_timer_end, set_season } from './seasonal';
+import { start_rain } from './components/rain.js';
+import { seasonal_timer_end, set_season } from './components/seasonal.js';
 import {
     parse_shout_queue,
     patch_shouts,
     shout_header,
     shout_messages
-} from './shout';
+} from './components/shout.js';
 import { ff } from './sku';
 import { bleh_sponsor_page, sponsors } from './sponsor';
 import { append_style, update_check } from './style';
 import { bleh_radio } from './components/radio';
 import { bleh_api } from './pages/api';
-import { bleh_users } from './pages/users';
+import { bleh_users } from './components/users.js';
 import { html, render } from 'lighterhtml';
-import { bleh_footer } from './footer.js';
+import { bleh_footer } from './components/footer.js';
 import { register_rabbit } from './components/rabbit.js';
 import { dialog_extender } from './components/dialog_extender.js';
 import { bleh_auth } from './pages/auth.js';

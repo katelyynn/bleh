@@ -16,7 +16,7 @@ import {
     correct_item_by_artist,
     name_includes,
     smart_title
-} from '../components/lotus';
+} from '../components/music/lotus.js';
 import { register_menu } from '../components/menu';
 import {
     bleh_music_page_charts,
@@ -33,11 +33,11 @@ import { bleh_gallery_list, bleh_gallery_upload } from './gallery';
 import { bleh_tags_mini } from './tag';
 import { bleh_wiki, bleh_wiki_editor, bleh_wiki_history } from './wiki';
 import { html, render } from 'lighterhtml';
-import { expand_avatar } from '../avatar.js';
+import { expand_avatar } from '../components/avatar.js';
 import { other_listener } from '../components/profile_shortcut.js';
 import { setting } from '../components/settings.js';
 import tippy from 'tippy.js';
-import { open_starred_friend_window } from './profile.js';
+import { open_starred_friend_window } from './profile/profile.js';
 
 export function bleh_artists() {
     let artist_header = document.body.querySelector('.header-new--artist');

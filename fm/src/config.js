@@ -15,10 +15,10 @@ import { log } from './build/log';
 import { page, reload_pending } from './build/page';
 import { stored_season } from './build/seasonal';
 import { tl, trans } from './build/trans';
-import { chart_reflow, load_chart_colours } from './chart';
+import { chart_reflow, load_chart_colours } from './components/music/chart.js';
 import { notify } from './components/notify';
-import { load_skus } from './pages/bleh_config';
-import { bleh_glacier_date_graph_generate } from './pages/glacier';
+import { load_skus } from './pages/bleh_settings/bleh_settings.js';
+import { bleh_glacier_date_graph_generate } from './pages/profile/glacier.js';
 import { compile_settings, save_setting } from './components/settings.js';
 
 // load settings

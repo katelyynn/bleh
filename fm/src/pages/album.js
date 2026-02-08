@@ -16,9 +16,9 @@ import {
     sanitise
 } from '../build/tools';
 import { tl, trans } from '../build/trans';
-import { load_chart_colours } from '../chart';
-import { bleh_about_artist } from '../components/about_artist';
-import { patch_header_title } from '../components/lotus';
+import { load_chart_colours } from '../components/music/chart.js';
+import { bleh_about_artist } from '../components/music/about_artist.js';
+import { patch_header_title } from '../components/music/lotus.js';
 import { register_menu } from '../components/menu';
 import {
     bleh_music_page_charts,
@@ -33,11 +33,11 @@ import { bleh_gallery_list, bleh_gallery_upload } from './gallery';
 import { bleh_tags_mini } from './tag';
 import { bleh_wiki, bleh_wiki_editor, bleh_wiki_history } from './wiki';
 import { html, render } from 'lighterhtml';
-import { expand_avatar } from '../avatar.js';
+import { expand_avatar } from '../components/avatar.js';
 import { setting } from '../components/settings.js';
 import tippy from 'tippy.js';
 import { oracle_process } from '../components/oracle.js';
-import { save_hoshino_artwork } from '../components/hoshino.js';
+import { save_hoshino_artwork } from '../components/music/hoshino.js';
 
 export function bleh_albums() {
     let album_header = document.body.querySelector('.header-new--album');

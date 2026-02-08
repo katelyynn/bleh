@@ -4,7 +4,7 @@
 // Licensed under GPLv3
 //
 
-import {render_activity_list} from "../activity";
+import {render_activity_list} from "../components/activity.js";
 import {log} from "../build/log";
 import {auth, page, root} from "../build/page";
 import {tl, trans} from "../build/trans";
@@ -14,12 +14,12 @@ import {bleh_charts} from "./chart";
 import {bleh_native_settings} from './lastfm_settings';
 import {html, render} from "lighterhtml";
 import {ff} from "../sku.js";
-import { load_profile_cache_externally } from './profile.js';
-import { correct_artist, correct_item_by_artist, name_includes, smart_artists, smart_title } from "../components/lotus.js";
+import { load_profile_cache_externally } from './profile/profile.js';
+import { correct_artist, correct_item_by_artist, name_includes, smart_artists, smart_title } from "../components/music/lotus.js";
 import { romanise, sanitise } from "../build/tools.js";
 import { redirect } from "../components/music.js";
 import { settings } from "../build/config.js";
-import { expand_avatar } from "../avatar.js";
+import { expand_avatar } from "../components/avatar.js";
 import tippy from "tippy.js";
 import { queue_popup } from "../components/popup.js";
 

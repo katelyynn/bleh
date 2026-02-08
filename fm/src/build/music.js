@@ -4,7 +4,7 @@
 // Licensed under GPLv3
 //
 
-import { name_includes } from '../components/lotus';
+import { name_includes } from '../components/music/lotus';
 import { trans } from './trans';
 
 export let artist_corrections = {};

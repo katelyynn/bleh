@@ -5,13 +5,13 @@
 //
 
 import tippy from "tippy.js";
-import {patch_avatar, style_name_from_badge} from "../avatar";
+import {patch_avatar, style_name_from_badge} from "../components/avatar";
 import {settings} from "../build/config";
 import {log} from "../build/log";
 import {auth, page, root} from "../build/page";
 import {clean_number} from "../build/tools";
 import {tl, trans} from "../build/trans";
-import {correct_artist} from "../components/lotus";
+import {correct_artist} from "../components/music/lotus";
 import {checkup_page_structure, convert_to_toolbar} from "../components/structure";
 import {refresh_all} from "../config";
 import {register_background, update_page} from "../page";

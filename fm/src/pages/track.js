@@ -8,8 +8,8 @@ import { settings } from '../build/config';
 import { log } from '../build/log';
 import { auth, page, root } from '../build/page';
 import { tl, trans } from '../build/trans';
-import { bleh_about_artist } from '../components/about_artist';
-import { patch_header_title } from '../components/lotus';
+import { bleh_about_artist } from '../components/music/about_artist.js';
+import { patch_header_title } from '../components/music/lotus.js';
 import { register_menu } from '../components/menu';
 import {
     bleh_music_page_charts,
@@ -22,10 +22,10 @@ import { ff } from '../sku';
 import { bleh_tags_mini } from './tag';
 import { bleh_wiki, bleh_wiki_editor, bleh_wiki_history } from './wiki';
 import { html, render } from 'lighterhtml';
-import { expand_avatar } from '../avatar.js';
+import { expand_avatar } from '../components/avatar.js';
 import tippy from 'tippy.js';
 import { oracle_process } from '../components/oracle.js';
-import { hoshino_return } from '../components/hoshino.js';
+import { hoshino_return } from '../components/music/hoshino.js';
 
 export function bleh_tracks() {
     let track_header = document.body.querySelector('.header-new--track');
