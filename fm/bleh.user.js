@@ -44204,10 +44204,7 @@
                         <div class="info">
                             <h3>${shortcut_listens.name}</h3>
                             <p class="colourful" ref=${(el) => p = el}>
-                                ${tl2(trans.listens.count).replace(
-            "{c}",
-            listens.toLocaleString(lang)
-          )}
+                                ${tl2(trans.count_plays, { c: listens.toLocaleString(lang) })}
                             </p>
                         </div>
                     `
@@ -44877,10 +44874,7 @@
                 <div class="info">
                     <h3>${name}</h3>
                     <p class="colourful" ref=${(el) => p = el}>
-                        ${tl2(trans.listens.count).replace(
-          "{c}",
-          listens.toLocaleString(lang)
-        )}
+                        ${tl2(trans.count_plays, { c: listens.toLocaleString(lang) })}
                     </p>
                 </div>
             `
@@ -44915,7 +44909,7 @@
                 <div class="info">
                     <h3>${name}</h3>
                     <p class="colourful" ref=${(el) => p = el}>
-                        ${tl2(trans.listens)}
+                        ${tl2(trans.count_plays, { c: " " })}
                     </p>
                 </div>
             `

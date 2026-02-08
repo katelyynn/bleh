@@ -336,10 +336,7 @@ export async function show_your_scrobbles() {
                         <div class="info">
                             <h3>${shortcut_listens.name}</h3>
                             <p class="colourful" ref=${(el) => (p = el)}>
-                                ${tl(trans.listens.count).replace(
-                                    '{c}',
-                                    listens.toLocaleString(lang)
-                                )}
+                                ${tl(trans.count_plays, { c: listens.toLocaleString(lang) })}
                             </p>
                         </div>
                     `
@@ -1196,10 +1193,7 @@ function create_listen_item(
                 <div class="info">
                     <h3>${name}</h3>
                     <p class="colourful" ref=${(el) => (p = el)}>
-                        ${tl(trans.listens.count).replace(
-                            '{c}',
-                            listens.toLocaleString(lang)
-                        )}
+                        ${tl(trans.count_plays, { c: listens.toLocaleString(lang) })}
                     </p>
                 </div>
             `
@@ -1238,7 +1232,7 @@ function create_listen_item(
                 <div class="info">
                     <h3>${name}</h3>
                     <p class="colourful" ref=${(el) => (p = el)}>
-                        ${tl(trans.listens)}
+                        ${tl(trans.count_plays, { c: ' ' })}
                     </p>
                 </div>
             `
