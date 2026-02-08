@@ -539,36 +539,36 @@
         --l4: var(--hue), calc(var(--sat) * 70%), calc(var(--lit) * 50%);
 
         --l2-c:
-            var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 40%),
-            calc(clamp(min(0.5), var(--lit), max(1.5)) * 83%);
+            var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 40%),
+            calc(clamp(min(0.8), var(--lit), max(2)) * 82%);
         --l3-c:
-            var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 50%),
-            calc(clamp(min(0.5), var(--lit), max(1.5)) * 70%);
-        --l3-c-sat: calc(clamp(min(0), var(--sat), max(1.5)) * 50%);
-        --l3-c-lit: calc(clamp(min(0.5), var(--lit), max(1.5)) * 70%);
+            var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 50%),
+            calc(clamp(min(0.5), var(--lit), max(2)) * 70%);
+        --l3-c-sat: calc(clamp(min(0), var(--sat), max(2)) * 50%);
+        --l3-c-lit: calc(clamp(min(0.5), var(--lit), max(2)) * 70%);
         --l4-c:
-            var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 55%),
-            calc(clamp(min(0.5), var(--lit), max(1.5)) * 55%);
+            var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 55%),
+            calc(clamp(min(0.5), var(--lit), max(2)) * 55%);
 
         --h2: var(--l2-c);
         --h3: var(--l3-c);
         --h3-s: var(--hue), 50%, 70%;
-        --h3-sat: calc(clamp(min(0), var(--sat), max(1.5)) * 60%);
-        --h3-lit: calc(clamp(min(0.5), var(--lit), max(1.5)) * 70%);
+        --h3-sat: calc(clamp(min(0), var(--sat), max(2)) * 60%);
+        --h3-lit: calc(clamp(min(0.5), var(--lit), max(2)) * 70%);
         --h4: var(--l4-c);
         --f4:
-            var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 40%),
-            calc(clamp(min(0.8), var(--lit), max(1.5)) * 42%);
+            var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 40%),
+            calc(clamp(min(0.8), var(--lit), max(2)) * 42%);
         --k4: var(--f4);
         --g4:
-            var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 60%),
-            calc(clamp(min(0.5), var(--lit), max(1.5)) * 15%);
+            var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 60%),
+            calc(clamp(min(0.5), var(--lit), max(2)) * 15%);
 
         --s3:
-            var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 50%),
+            var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 50%),
             calc(clamp(min(0.5), var(--lit), max(1)) * 63%);
         --s4:
-            var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 55%),
+            var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 55%),
             calc(clamp(min(0.5), var(--lit), max(1.1)) * 56%);
 
         --p3: var(--s3);
@@ -629,31 +629,31 @@
             --l4: var(--hue), calc(var(--sat) * 60%), calc(var(--lit) * 45%);
 
             --l3-c:
-                var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 50%),
-                calc(clamp(min(0.5), var(--lit), max(1.5)) * 70%);
-            --l3-c-sat: calc(clamp(min(0), var(--sat), max(1.5)) * 50%);
-            --l3-c-lit: calc(clamp(min(0.5), var(--lit), max(1.5)) * 70%);
+                var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 50%),
+                calc(clamp(min(0.5), var(--lit), max(2)) * 70%);
+            --l3-c-sat: calc(clamp(min(0), var(--sat), max(2)) * 50%);
+            --l3-c-lit: calc(clamp(min(0.5), var(--lit), max(2)) * 70%);
             --l4-c:
-                var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 55%),
-                calc(clamp(min(0.5), var(--lit), max(1.5)) * 45%);
+                var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 55%),
+                calc(clamp(min(0.5), var(--lit), max(2)) * 45%);
 
             --h2: var(--l2-c);
             --h3: var(--l3-c);
             --h3-s: var(--hue), 50%, 70%;
-            --h3-sat: calc(clamp(min(0), var(--sat), max(1.5)) * 50%);
-            --h3-lit: calc(clamp(min(0.5), var(--lit), max(1.5)) * 70%);
+            --h3-sat: calc(clamp(min(0), var(--sat), max(2)) * 50%);
+            --h3-lit: calc(clamp(min(0.5), var(--lit), max(2)) * 70%);
             --h4:
-                var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 65%),
-                calc(clamp(min(0.5), var(--lit), max(1.5)) * 55%);
+                var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 65%),
+                calc(clamp(min(0.5), var(--lit), max(2)) * 55%);
             --f4:
-                var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 32%),
-                calc(clamp(min(0.8), var(--lit), max(1.5)) * 40%);
+                var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 32%),
+                calc(clamp(min(0.8), var(--lit), max(2)) * 40%);
             --k4:
-                var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 32%),
-                calc(clamp(min(0.8), var(--lit), max(1.5)) * 45%);
+                var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 32%),
+                calc(clamp(min(0.8), var(--lit), max(2)) * 45%);
             --g4:
-                var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 60%),
-                calc(clamp(min(0.5), var(--lit), max(1.5)) * 10%);
+                var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 60%),
+                calc(clamp(min(0.5), var(--lit), max(2)) * 10%);
 
             --shout-vote-indicator: linear-gradient(
                 90deg,
@@ -683,35 +683,35 @@
             --l4: var(--hue), calc(var(--sat) * 60%), calc(var(--lit) * 22%);
 
             --l2-c:
-                var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 70%),
+                var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 70%),
                 calc(clamp(min(0.7), var(--lit), max(1.1)) * 86%);
             --l3-c:
-                var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 50%),
+                var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 50%),
                 calc(clamp(min(0.7), var(--lit), max(1.1)) * 36%);
-            --l3-c-sat: calc(clamp(min(0), var(--sat), max(1.5)) * 50%);
+            --l3-c-sat: calc(clamp(min(0), var(--sat), max(2)) * 50%);
             --l3-c-lit: calc(clamp(min(0.5), var(--lit), max(1.1)) * 40%);
-            --l4-c: var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 60%), calc(clamp(min(0.7), var(--lit), max(1.1)) * 26%);
+            --l4-c: var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 60%), calc(clamp(min(0.7), var(--lit), max(1.1)) * 26%);
 
             --h3:
-                var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 50%),
+                var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 50%),
                 calc(clamp(min(0.85), var(--lit), max(1.1)) * 86%);
             --h3-s: var(--hue), 50%, 70%;
-            --h3-sat: calc(clamp(min(0), var(--sat), max(1.5)) * 50%);
+            --h3-sat: calc(clamp(min(0), var(--sat), max(2)) * 50%);
             --h3-lit: calc(clamp(min(0.5), var(--lit), max(1.1)) * 86%);
             --h4:
-                var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 60%),
+                var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 60%),
                 calc(clamp(min(0.7), var(--lit), max(1.1)) * 73%);
             --f4:
-                var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 60%),
-                calc(clamp(min(0.8), var(--lit), max(1.5)) * 80%);
+                var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 60%),
+                calc(clamp(min(0.8), var(--lit), max(2)) * 80%);
             --k4:
-                var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 42%),
-                calc(clamp(min(0.8), var(--lit), max(1.5)) * 76%);
+                var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 42%),
+                calc(clamp(min(0.8), var(--lit), max(2)) * 76%);
             --g4:
-                var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 70%), 92%;
+                var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 70%), 92%;
 
             --p3:
-                var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 50%),
+                var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 50%),
                 calc(clamp(min(0.85), var(--lit), max(1.1)) * 90%);
 
             /* l2-c in dark modes, l4-c in light modes */
@@ -740,7 +740,7 @@
                 hsl(var(--h4), 15%)
             );
 
-            --glow: hsl(var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 80%), calc(clamp(min(0.7), var(--lit), max(1.1)) * 30%), 20%);
+            --glow: hsl(var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 80%), calc(clamp(min(0.7), var(--lit), max(1.1)) * 30%), 20%);
 
             --g-red: hsl(8, 42%, 50%);
             --g-orange: hsl(24, 66%, 50%);
@@ -768,37 +768,37 @@
             --l4: var(--hue), calc(var(--sat) * 60%), calc(var(--lit) * 22%);
 
             --l2-c:
-                var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 40%),
+                var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 40%),
                 calc(clamp(min(0.7), var(--lit), max(1.1)) * 63%);
             --l3-c:
-                var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 50%),
+                var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 50%),
                 calc(clamp(min(0.7), var(--lit), max(1.1)) * 30%);
-            --l3-c-sat: calc(clamp(min(0), var(--sat), max(1.5)) * 50%);
+            --l3-c-sat: calc(clamp(min(0), var(--sat), max(2)) * 50%);
             --l3-c-lit: calc(clamp(min(0.5), var(--lit), max(1.1)) * 40%);
             --l4-c:
-                var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 60%),
+                var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 60%),
                 calc(clamp(min(0.7), var(--lit), max(1.1)) * 25%);
 
             --h3:
-                var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 38%),
+                var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 38%),
                 calc(clamp(min(0.7), var(--lit), max(1.1)) * 73%);
             --h3-s: var(--hue), 50%, 70%;
-            --h3-sat: calc(clamp(min(0), var(--sat), max(1.5)) * 32%);
+            --h3-sat: calc(clamp(min(0), var(--sat), max(2)) * 32%);
             --h3-lit: calc(clamp(min(0.5), var(--lit), max(1.1)) * 73%);
             --h4:
-                var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 32%),
+                var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 32%),
                 calc(clamp(min(0.7), var(--lit), max(1.1)) * 64%);
             --f4:
-                var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 30%),
-                calc(clamp(min(0.8), var(--lit), max(1.5)) * 60%);
+                var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 30%),
+                calc(clamp(min(0.8), var(--lit), max(2)) * 60%);
             --k4:
-                var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 45%),
-                calc(clamp(min(0.8), var(--lit), max(1.5)) * 60%);
+                var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 45%),
+                calc(clamp(min(0.8), var(--lit), max(2)) * 60%);
             --g4:
-                var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 25%), 75%;
+                var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 25%), 75%;
 
             --p3:
-                var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 50%),
+                var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 50%),
                 calc(clamp(min(0.85), var(--lit), max(1.1)) * 90%);
 
             /* l2-c in dark modes, l4-c in light modes */
@@ -824,7 +824,7 @@
                 hsl(var(--h4), 15%)
             );
 
-            --glow: hsl(var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 80%), calc(clamp(min(0.7), var(--lit), max(1.1)) * 30%), 20%);
+            --glow: hsl(var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 80%), calc(clamp(min(0.7), var(--lit), max(1.1)) * 30%), 20%);
 
             --badge: hsl(var(--f4), 55%);
             --badge-hov: hsl(var(--f4), 65%);
@@ -7321,12 +7321,12 @@
             text-decoration: none !important;
 
             .chartlist-count-bar-slug {
-                background: hsl(var(--h4), 40%) !important;
+                background: hsl(var(--h4), 50%) !important;
                 box-shadow: var(--bar-shadow) !important;
             }
 
             .chartlist-count-bar-value {
-                color: hsl(var(--l3-c-theme-switch)) !important;
+                color: hsl(var(--l2-c-theme-switch)) !important;
                 --hue-over: unset !important;
                 --sat-over: unset !important;
                 --lit-over: unset !important;
