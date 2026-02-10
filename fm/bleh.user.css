@@ -29638,8 +29638,11 @@
             --mask: radial-gradient(at center, white, transparent);
             mask-image: var(--mask);
             -webkit-mask-image: var(--mask);
-            filter: blur(8px);
+
+            filter: blur(6px);
             opacity: 0.5;
+
+            scale: 1.05;
         }
 
         & > .campfire-items {
