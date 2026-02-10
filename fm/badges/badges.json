@@ -1,5 +1,5 @@
 {
-    "latest": "2026.0130",
+    "latest": "2026.0204",
     "sponsors": [
         "clairedoll", "kateshapedbox", "evangelicgirl",
         "astrablooms", "ItsProyal", "vwvwvwvwvwvwv", "Orofil",
@@ -14,7 +14,7 @@
         "dylandotat", "Angel0Lust", "liminelle", "quikwise",
         "BosozokuGF", "tainaronian", "NozomiBear", "nin0dev",
         "milkdrinker3000", "wiichicken", "duskwitch", "rgoracz",
-        "thomasb2k"
+        "thomasb2k", "ThatJumpyFrog"
     ],
     "sponsors_one_time": [
         "kateshapedbox",
@@ -42,10 +42,10 @@
                 "name": "cute"
             },
             {
-                "name": " ִֶָ۶ৎ˖ִ ˚",
-                "reason": "in service to my darling",
-                "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1vdXRsaW5lIGljb24tdGFibGVyLW1pbmltaXplIj48cGF0aCBzdHJva2U9Im5vbmUiIGQ9Ik0wIDBoMjR2MjRIMHoiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJNMTUgMTl2LTJhMiAyIDAgMCAxIDIgLTJoMiIgLz48cGF0aCBkPSJNMTUgNXYyYTIgMiAwIDAgMCAyIDJoMiIgLz48cGF0aCBkPSJNNSAxNWgyYTIgMiAwIDAgMSAyIDJ2MiIgLz48cGF0aCBkPSJNNSA5aDJhMiAyIDAgMCAwIDIgLTJ2LTIiIC8+PC9zdmc+",
-                "hue": 352,
+                "name": "刻々帝",
+                "reason": "the angel of time ♡",
+                "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJjdXJyZW50Q29sb3IiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1maWxsZWQgaWNvbi10YWJsZXItY2xvY2staG91ci0zIj48cGF0aCBzdHJva2U9Im5vbmUiIGQ9Ik0wIDBoMjR2MjRIMHoiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJNMTcgMy4zNGExMCAxMCAwIDEgMSAtMTUgOC42NmwuMDA1IC0uMzI0YTEwIDEwIDAgMCAxIDE0Ljk5NSAtOC4zMzZtLTUgMi42NmExIDEgMCAwIDAgLTEgMXY1YTEgMSAwIDAgMCAxIDFoMy41YTEgMSAwIDAgMCAwIC0yaC0yLjV2LTRhMSAxIDAgMCAwIC0uODgzIC0uOTkzeiIgLz48L3N2Zz4=",
+                "hue": 31,
                 "sat": 2,
                 "lit": 0.96
             }
@@ -53,10 +53,6 @@
         "evangelicgirl": [
             {
                 "type": "contributor"
-            },
-            {
-                "type": "translation",
-                "reason": "Deutsch"
             },
             {
                 "type": "sponsor"
@@ -104,10 +100,6 @@
         "iwas15with100k": [
             {
                 "type": "cat"
-            },
-            {
-                "type": "translation",
-                "reason": "Polski"
             },
             {
                 "type": "contributor"
@@ -218,10 +210,6 @@
         "scidal": {
             "type": "sponsor"
         },
-        "ArthRMH": {
-            "type": "translation",
-            "reason": "Português"
-        },
         "Carbonzer": {
             "type": "sponsor"
         },
@@ -261,10 +249,6 @@
         "fr0r": [
             {
                 "type": "contributor"
-            },
-            {
-                "type": "translation",
-                "reason": "Português"
             }
         ],
         "saettbyeol": {
@@ -302,15 +286,7 @@
                 "lit": 1
             }
         ],
-        "Lrexie": {
-            "type": "translation",
-            "reason": "Svenska"
-        },
         "myraisounds": [
-            {
-                "type": "translation",
-                "reason": "Deutsch"
-            },
             {
                 "type": "sponsor"
             }
@@ -327,15 +303,7 @@
         "fourohclok": {
             "type": "sponsor"
         },
-        "crawqxx": {
-            "type": "translation",
-            "reason": "Русский"
-        },
         "satisfeita": [
-            {
-                "type": "translation",
-                "reason": "Português"
-            },
             {
                 "type": "sponsor"
             },
@@ -375,10 +343,6 @@
         },
         "urwq": [
             {
-                "type": "translation",
-                "reason": "Português"
-            },
-            {
                 "type": "sponsor"
             },
             {
@@ -390,14 +354,6 @@
                 "lit": 0.95
             }
         ],
-        "cutotopo": {
-            "type": "translation",
-            "reason": "Italiano"
-        },
-        "soleilth": {
-            "type": "translation",
-            "reason": "Español"
-        },
         "driftpsalm": [
             {
                 "type": "sponsor"
@@ -525,10 +481,6 @@
         "nin0dev": {
             "type": "sponsor"
         },
-        "Dnzzk2": {
-            "type": "translation",
-            "reason": "简体中文"
-        },
         "milkdrinker3000": {
             "type": "sponsor"
         },
@@ -548,19 +500,14 @@
                 "lit": 0.86
             }
         ],
-        "humansongs": {
-            "type": "translation",
-            "reason": "日本語"
-        },
         "rgoracz": {
             "type": "sponsor"
         },
         "thomasb2k": {
             "type": "sponsor"
         },
-        "techplayz32": {
-            "type": "translation",
-            "reason": "Русский"
+        "ThatJumpyFrog": {
+            "type": "sponsor"
         }
     }
 }
