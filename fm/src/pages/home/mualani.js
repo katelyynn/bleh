@@ -4,17 +4,17 @@
 // Licensed under GPLv3
 //
 
-import { register_background, update_page } from '../page.js';
-import { auth, page } from '../build/page.js';
-import { log } from '../build/log.js';
-import { checkup_page_structure } from '../components/structure.js';
+import { register_background, update_page } from '@/page';
+import { auth, page } from '@/build/page.js';
+import { log } from '@/build/log.js';
+import { checkup_page_structure } from '@/components/page/structure.js';
 import { html, render } from 'lighterhtml';
-import { notify } from '../components/notify.js';
-import { download_with_progress } from '../build/tools.js';
-import { status } from '../components/status.js';
-import { dialog } from '../components/dialog.js';
-import { setting } from '../components/settings.js';
-import { markdown, markdown_field } from '../components/markdown.js';
+import { notify } from '@/components/dialog/notify.js';
+import { download_with_progress } from '@/build/tools';
+import { status } from '@/components/dialog/status.js';
+import { dialog } from '@/components/dialog/dialog';
+import { setting } from '@/components/settings/settings';
+import { markdown, markdown_field } from '@/components/shared/markdown';
 
 export function mualani() {
     page.structure.container = document.body.querySelector('.page-content');

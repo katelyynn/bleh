@@ -4,7 +4,7 @@
 // Licensed under GPLv3
 //
 
-import { trans } from './trans.js';
+import { trans } from '@/build/trans';
 
 export let settings = {};
 export let settings_template = {

@@ -4,28 +4,28 @@
 // Licensed under GPLv3
 //
 
-import { settings } from '../build/config';
-import { log } from '../build/log';
-import { auth, page, root } from '../build/page';
-import { tl, trans } from '../build/trans';
-import { bleh_about_artist } from '../components/music/about_artist.js';
-import { patch_header_title } from '../components/music/lotus.js';
-import { register_menu } from '../components/menu';
+import { settings } from '@/build/config';
+import { log } from '@/build/log';
+import { auth, page, root } from '@/build/page';
+import { tl, trans } from '@/build/trans';
+import { bleh_about_artist } from '@/components/music/about_artist.js';
+import { patch_header_title } from '@/components/music/lotus.js';
+import { register_menu } from '@/components/menu';
 import {
     bleh_music_page_charts,
     show_your_scrobbles,
     similar_items
-} from '../components/music';
-import { checkup_page_structure } from '../components/structure';
-import { register_background, update_page } from '../page';
-import { ff } from '../sku';
-import { bleh_tags_mini } from './tag';
-import { bleh_wiki, bleh_wiki_editor, bleh_wiki_history } from './wiki';
+} from '@/components/music/music';
+import { checkup_page_structure } from '@/components/page/structure';
+import { register_background, update_page } from '@/page';
+import { ff } from '@/components/settings/sku';
+import { bleh_tags_mini } from '@/pages/tag';
+import { bleh_wiki, bleh_wiki_editor, bleh_wiki_history } from '@/pages/music/wiki';
 import { html, render } from 'lighterhtml';
-import { expand_avatar } from '../components/avatar.js';
+import { expand_avatar } from '@/components/shared/avatar';
 import tippy from 'tippy.js';
-import { oracle_process } from '../components/oracle.js';
-import { hoshino_return } from '../components/music/hoshino.js';
+import { oracle_process } from '@/components/music/oracle';
+import { hoshino_return } from '@/components/music/hoshino.js';
 
 export function bleh_tracks() {
     let track_header = document.body.querySelector('.header-new--track');

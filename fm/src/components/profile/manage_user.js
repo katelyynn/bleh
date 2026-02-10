@@ -1,10 +1,10 @@
 import tippy from "tippy.js";
-import { auth, page } from "../build/page";
+import { auth, page } from "@/build/page";
 import { html } from "lighterhtml";
-import { tl, trans } from "../build/trans";
-import { copy } from "../build/tools";
-import { share } from "./share";
-import { ff } from "../sku";
+import { tl, trans } from "@/build/trans";
+import { copy } from "@/build/tools";
+import { share } from "@/components/dialog/share";
+import { ff } from "@/components/settings/sku";
 
 export function manage_user(button) {
     const can_block = ff('can_block_in_menu');

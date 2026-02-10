@@ -4,8 +4,8 @@
 // Licensed under GPLv3
 //
 
-import { settings } from '../../build/config.js';
-import { album_track_corrections, artist_corrections } from '../../build/music.js';
+import { settings } from '@/build/config.js';
+import { album_track_corrections, artist_corrections } from '@/build/music.js';
 import {
     api_key,
     auth,
@@ -15,46 +15,44 @@ import {
     page,
     root,
     theme_preview
-} from '../../build/page.js';
-import { stored_season } from '../../build/seasonal.js';
-import { sponsor_list } from '../../build/sponsor.js';
-import { clamp_sat, copy, hex_to_hsl, set_storage, time } from '../../build/tools.js';
-import { get_trans_key, lang, lang_browser, lang_info, tl, trans } from '../../build/trans.js';
-import { load_badges } from '../../components/badge.js';
-import { dialog, dialog_rm } from '../../components/dialog.js';
-import { markdown } from '../../components/markdown.js';
-import { notify } from '../../components/notify.js';
+} from '@/build/page.js';
+import { stored_season } from '@/build/seasonal.js';
+import { sponsor_list } from '@/build/sponsor.js';
+import { clamp_sat, copy, hex_to_hsl, set_storage, time } from '@/build/tools';
+import { get_trans_key, lang, lang_browser, lang_info, tl, trans } from '@/build/trans';
+import { load_badges } from '@/components/shared/badge';
+import { dialog, dialog_rm } from '@/components/dialog/dialog';
+import { markdown } from '@/components/shared/markdown';
+import { notify } from '@/components/dialog/notify';
 import { load_settings, refresh_all, update_colour_swatches } from '../../config.js';
-import { version } from '../../main.js';
-import { update_page } from '../../page.js';
-import { seasonal_timer_end, seasonal_timer_start } from '../../components/seasonal.js';
-import { ff } from '../../sku.js';
+import { version } from '@/main';
+import { update_page } from '@/page.js';
+import { seasonal_timer_end, seasonal_timer_start } from '@/components/seasonal.js';
+import { ff } from '@/components/settings/sku.js';
 import { html, render } from 'lighterhtml';
 import {
     compile_settings,
     save_setting,
     setting
-} from '../../components/settings.js';
-import { parse_scrobbles_as_rank } from '../../components/colourful_counts.js';
-import { input } from '../../components/input.js';
-import { share } from '../../components/share.js';
-import { force_refresh_style, start_update, update_check } from '../../style.js';
+} from '@/components/settings/settings';
+import { parse_scrobbles_as_rank } from '@/components/music/colourful_counts';
+import { input } from '@/components/settings/input';
+import { share } from '@/components/dialog/share';
+import { force_refresh_style, start_update, update_check } from '@/components/page/style';
 import tippy from 'tippy.js';
 import {
     checkup_friend_cache,
     load_profile_cache_externally
-} from '../profile/profile.js';
-import { select, select_prepare_convert_from_setting, select_prepare_list } from '../../components/select.js';
-import { match } from '../../components/dynamic_theming.js';
-import { manage_oracle_data, oracle_data } from '../../components/oracle.js';
-import { render_activity } from '../../components/activity.js';
+} from '../profile/profile';
+import { select, select_prepare_convert_from_setting, select_prepare_list } from '@/components/settings/select';
+import { manage_oracle_data, oracle_data } from '@/components/music/oracle';
+import { render_activity } from '@/components/shared/activity';
 import { DateTime } from 'luxon';
-import { sponsor, sponsor_manage, sponsors } from '../../sponsor.js';
+import { sponsor, sponsor_manage, sponsors } from '@/components/sponsor';
 import { version as florence_version } from '@tealmiku/florence';
-import { update_branding_type } from '../../components/navigation.js';
-import { queue_popup } from '../../components/popup.js';
-import { visual } from './visual.js';
-import { general } from './general.js';
+import { queue_popup } from '@/components/dialog/popup';
+import { visual } from '@/pages/bleh_settings/visual';
+import { general } from '@/pages/bleh_settings/general';
 
 export function bleh_settings() {
     page.name = auth.name;

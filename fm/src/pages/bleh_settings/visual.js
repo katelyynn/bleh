@@ -1,11 +1,11 @@
 import { html, render } from "lighterhtml";
-import { auth, page } from "../../build/page";
-import { tl, trans } from "../../build/trans";
-import { setting } from "../../components/settings";
-import { update_colour_swatches } from "../../config";
+import { auth, page } from "@/build/page";
+import { tl, trans } from "@/build/trans";
+import { setting } from "@/components/settings/settings";
+import { update_colour_swatches } from "@/config";
 import { display_colour_presets, page_loading, register_skip_to, render_setting_page, theme_bubbles } from "./bleh_settings";
-import { ff } from "../../sku";
-import { settings } from "../../build/config";
+import { ff } from "@/components/settings/sku";
+import { settings } from "@/build/config";
 
 export function visual() {
     if (

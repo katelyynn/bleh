@@ -5,14 +5,14 @@
 //
 
 import { html } from 'lighterhtml';
-import { random_list, root } from '../../build/page.js';
-import { tl, trans } from '../../build/trans.js';
-import { dialog, dialog_rm } from './dialog';
-import { input } from '../input.js';
-import { notify } from './notify.js';
-import { log } from '../../build/log.js';
-import { toggle } from '../toggle.js';
-import { pad2 } from '../../build/tools.js';
+import { random_list, root } from '@/build/page.js';
+import { tl, trans } from '@/build/trans';
+import { dialog, dialog_rm } from '@/components/dialog/dialog';
+import { input } from '@/components/settings/input';
+import { notify } from '@/components/dialog/notify';
+import { log } from '@/build/log.js';
+import { toggle } from '@/components/settings/toggle';
+import { pad2 } from '@/build/tools';
 
 export function submit_scrobble({
     pre_track = '',

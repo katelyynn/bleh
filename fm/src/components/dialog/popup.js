@@ -1,10 +1,10 @@
 import { html } from "lighterhtml";
 import tippy from "tippy.js";
-import { tl, trans, translation_fallback } from "../build/trans";
+import { tl, trans, translation_fallback } from "@/build/trans";
 import { notify } from "./notify";
-import { log } from "../build/log";
-import { save_setting } from "./settings";
-import { settings } from "../build/config";
+import { log } from "@/build/log";
+import { save_setting } from "@/components/settings/settings";
+import { settings } from "@/build/config";
 
 export let popup_queue = [];
 

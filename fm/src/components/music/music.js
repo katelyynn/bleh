@@ -5,37 +5,36 @@
 //
 
 import { html, render } from 'lighterhtml';
-import { patch_avatar, style_name_from_badge } from '../avatar.js';
-import { settings } from '../../build/config.js';
-import { log } from '../../build/log.js';
-import { auth, page, root } from '../../build/page.js';
-import { clean_number, romanise, sanitise } from '../../build/tools.js';
-import { lang, tl, trans } from '../../build/trans.js';
-import { prep_chart_colours } from './chart.js';
+import { settings } from '@/build/config.js';
+import { log } from '@/build/log.js';
+import { auth, page, root } from '@/build/page.js';
+import { clean_number, romanise, sanitise } from '@/build/tools';
+import { lang, tl, trans } from '@/build/trans';
+import { prep_chart_colours } from '@/components/music/chart';
 import { refresh_all } from '../../config.js';
-import { create_divider } from '../../pages/gallery.js';
-import { ff } from '../sku';
-import { parse_scrobbles_as_rank } from './colourful_counts';
+import { create_divider } from '@/pages/music/gallery';
+import { ff } from '@/components/settings/sku';
+import { parse_scrobbles_as_rank } from '@/components/music/colourful_counts';
 import {
     correct_artist,
     correct_item_by_artist,
     create_correction,
     name_includes,
     smart_title
-} from './lotus.js';
-import { register_menu } from '../menu.js';
-import { other_listener } from './profile_shortcut';
-import { submit_scrobble } from './scrobble.js';
+} from '@/components/music/lotus';
+import { register_menu } from '@/components/menu';
+import { other_listener } from '@/components/profile/profile_shortcut';
+import { submit_scrobble } from '@/components/music/scrobble';
 import tippy from 'tippy.js';
-import { Chart } from '../../main.js';
+import { Chart } from '@/main';
 import { DateTime } from 'luxon';
 import {
     load_profile_cache_externally,
     open_starred_friend_window
-} from '../../pages/profile/profile.js';
-import { oracle_credits } from './oracle.js';
-import { setting } from '../settings.js';
-import { patch_user_list_item } from '../users.js';
+} from '@/pages/profile/profile.js';
+import { oracle_credits } from '@/components/music/oracle';
+import { setting } from '@/components/settings/settings';
+import { patch_user_list_item } from '@/components/shared/users';
 
 unsafeWindow._other_listener = function (id) {
     other_listener(id);

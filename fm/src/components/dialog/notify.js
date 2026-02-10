@@ -4,10 +4,10 @@
 // Licensed under GPLv3
 //
 
-import {log} from "../build/log";
-import {page} from "../build/page";
+import {log} from "@/build/log";
+import {page} from "@/build/page";
 import {html, render} from "lighterhtml";
-import {tl, trans} from "../build/trans.js";
+import {tl, trans} from "@/build/trans";
 import tippy from "tippy.js";
 
 export function load_notifications() {

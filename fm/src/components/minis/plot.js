@@ -1,10 +1,9 @@
 import { html, render } from "lighterhtml";
-import { auth, dialogs, page } from "../build/page";
-import { render_user } from "../pages/minis";
-import { select } from "./select";
-import { tl, trans } from "../build/trans";
-import { dialog, dialog_rm } from "./dialog";
-import { input } from "./input";
+import { auth, dialogs, page } from "@/build/page";
+import { render_user } from "@/pages/home/minis";
+import { tl, trans } from "@/build/trans";
+import { dialog, dialog_rm } from "@/components/dialog/dialog";
+import { input } from "@/components/settings/input";
 
 export function plot({ host, sidebar } = {}) {
     if (!host || !sidebar) return;
@@ -99,6 +98,6 @@ export function plot({ host, sidebar } = {}) {
     }
 
     function fetch_data_set(user, media = null) {
-        
+
     }
 }

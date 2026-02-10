@@ -5,8 +5,8 @@
 //
 
 import { html } from 'lighterhtml';
-import { dialog, dialog_rm } from './dialog';
-import { tl, trans } from '../build/trans';
+import { dialog, dialog_rm } from '@/components/dialog/dialog';
+import { tl, trans } from '@/build/trans';
 
 export function report_issue() {
     let summary;

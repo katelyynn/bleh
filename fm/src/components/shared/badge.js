@@ -4,11 +4,11 @@
 // Licensed under GPLv3
 //
 
-import { log } from '../build/log';
-import { sponsor_list } from '../build/sponsor';
-import { lang_info, tl, trans } from '../build/trans';
+import { log } from '@/build/log';
+import { sponsor_list } from '@/build/sponsor';
+import { lang_info, tl, trans } from '@/build/trans';
 import { html } from 'lighterhtml';
-import { sponsor } from '../sponsor.js';
+import { sponsor } from '@/components/sponsor';
 import tippy from 'tippy.js';
 
 export function load_badges(user, solo = false) {

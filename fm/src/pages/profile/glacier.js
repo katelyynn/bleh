@@ -5,21 +5,21 @@
 //
 
 import { html, render } from 'lighterhtml';
-import { settings } from '../build/config';
-import { log } from '../build/log';
-import { auth, page, root } from '../build/page';
-import { desanitise, sanitise, sanitise_text, year_from_date } from '../build/tools';
-import { tl, trans } from '../build/trans';
-import { prep_chart_colours } from '../chart';
-import { correct_artist, correct_item_by_artist } from '../components/lotus';
-import { refresh_all } from '../config';
-import { ff } from '../sku';
-import { input } from '../components/input.js';
-import { setting } from '../components/settings.js';
-import { redirect } from '../components/music.js';
+import { settings } from '@/build/config';
+import { log } from '@/build/log';
+import { auth, page, root } from '@/build/page';
+import { desanitise, sanitise, sanitise_text, year_from_date } from '@/build/tools';
+import { tl, trans } from '@/build/trans';
+import { prep_chart_colours } from '@/components/music/chart';
+import { correct_artist, correct_item_by_artist } from '@/components/music/lotus';
+import { refresh_all } from '@/config';
+import { ff } from '@/components/settings/sku';
+import { input } from '@/components/settings/input.js';
+import { setting } from '@/components/settings/settings';
+import { redirect } from '@/components/music/music';
 import tippy from 'tippy.js';
-import { Chart } from '../main.js';
-import { load_profile_cache_externally } from './profile/profile.js';
+import { Chart } from '@/main';
+import { load_profile_cache_externally } from '@/pages/profile/profile.js';
 
 export function bleh_user_library() {
     // date sidebar into its own panel

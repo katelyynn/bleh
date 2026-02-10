@@ -4,15 +4,15 @@
 // Licensed under GPLv3
 //
 
-import {patch_avatar} from "../components/avatar";
-import {auth, page, root} from "../build/page";
-import {copy, desanitise, is_link_external} from "../build/tools";
-import {tl, trans} from "../build/trans";
-import {ff} from "../sku";
+import {patch_avatar} from "@/components/shared/avatar";
+import {auth, page, root} from "@/build/page";
+import {copy, desanitise, is_link_external} from "@/build/tools";
+import {tl, trans} from "@/build/trans";
+import {ff} from "@/components/settings/sku";
 import {html} from "lighterhtml";
 import tippy from "tippy.js";
-import { external_url_prompt } from '../components/markdown';
-import { settings } from '../build/config';
+import { external_url_prompt } from '@/components/shared/markdown';
+import { settings } from '@/build/config';
 
 export function bleh_wiki() {
     // make a new panel

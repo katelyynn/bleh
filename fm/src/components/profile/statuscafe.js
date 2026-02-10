@@ -5,11 +5,11 @@
 //
 
 import { html } from "lighterhtml";
-import { log } from "../build/log";
-import { set_storage } from "../build/tools";
-import { tl, trans } from "../build/trans";
-import { external_url_prompt } from "./markdown";
-import { can_trust_link } from "../pages/wiki";
+import { log } from "@/build/log";
+import { set_storage } from "@/build/tools";
+import { tl, trans } from "@/build/trans";
+import { external_url_prompt } from "@/components/shared/markdown";
+import { can_trust_link } from "@/pages/music/wiki";
 
 export async function fetch_status(username) {
     const current = new Date();

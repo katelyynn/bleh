@@ -4,10 +4,10 @@
 // Licensed under GPLv3
 //
 
-import { settings } from '../build/config';
-import { page } from '../build/page';
-import { tl, trans } from '../build/trans';
-import { notify } from './notify';
+import { settings } from '@/build/config';
+import { page } from '@/build/page';
+import { tl, trans } from '@/build/trans';
+import { notify } from '@/components/dialog/notify';
 
 export function nag_bar() {
     /*if (!page.structure.nag_bar) {

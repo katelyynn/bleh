@@ -4,10 +4,10 @@
 // Licensed under GPLv3
 //
 
-import { handle_error_500 } from '../page';
-import { log } from './log';
-import { auth, auth_link, setRoot } from './page';
-import { clamp_lit, clamp_sat, rgb_to_hsl } from './tools';
+import { handle_error_500 } from '@/page';
+import { log } from '@/build/log';
+import { auth, auth_link, setRoot } from '@/build/page';
+import { clamp_lit, clamp_sat, rgb_to_hsl } from '@/build/tools';
 import ColorThief from 'color-thief-browser';
 import { Settings } from 'luxon';
 

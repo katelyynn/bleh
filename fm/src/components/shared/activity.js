@@ -4,20 +4,20 @@
 // Licensed under GPLv3
 //
 
-import { settings } from './build/config';
-import { log } from './build/log';
-import { auth, page, recent_activity_list, root } from './build/page';
-import { romanise, sanitise, set_storage } from './build/tools';
-import { tl, trans } from './build/trans';
+import { settings } from '@/build/config';
+import { log } from '@/build/log';
+import { auth, page, recent_activity_list, root } from '@/build/page';
+import { romanise, sanitise, set_storage } from '@/build/tools';
+import { tl, trans } from '@/build/trans';
 import {
     correct_artist,
     correct_item_by_artist,
     name_includes,
     smart_artists,
     smart_title
-} from './components/lotus';
+} from '@/components/music/lotus';
 import { html, render } from 'lighterhtml';
-import { redirect } from './components/music.js';
+import { redirect } from '@/components/music/music';
 import tippy from 'tippy.js';
 import { DateTime } from 'luxon';
 

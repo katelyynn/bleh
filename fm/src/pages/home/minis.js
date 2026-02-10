@@ -4,15 +4,15 @@
 // Licensed under GPLv3
 //
 
-import { update_page } from '../../page.js';
-import { auth, page, root } from '../../build/page.js';
+import { update_page } from '@/page';
+import { auth, page, root } from '@/build/page';
 import { html, render } from 'lighterhtml';
-import { tl, trans } from '../../build/trans.js';
-import { collage } from '../components/collage.js';
-import { compare } from '../components/compare.js';
-import { pixel } from '../components/pixel.js';
-import { ff } from '../sku.js';
-import { plot } from '../components/plot.js';
+import { tl, trans } from '@/build/trans';
+import { collage } from '@/components/minis/collage';
+import { compare } from '@/components/minis/compare';
+import { pixel } from '@/components/minis/pixel';
+import { ff } from '@/components/settings/sku';
+import { plot } from '@/components/minis/plot';
 
 let valid_minis;
 

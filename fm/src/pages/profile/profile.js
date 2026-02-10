@@ -4,56 +4,56 @@
 // Licensed under GPLv3
 //
 
-import { render_activity_list } from '../../components/activity.js';
-import { settings } from '../../build/config.js';
-import { log } from '../../build/log.js';
-import { auth, page, root } from '../../build/page.js';
-import { sponsor_list } from '../../build/sponsor.js';
+import { render_activity_list } from '@/components/shared/activity';
+import { settings } from '@/build/config.js';
+import { log } from '@/build/log.js';
+import { auth, page, root } from '@/build/page.js';
+import { sponsor_list } from '@/build/sponsor.js';
 import {
     clean_number,
     control_gif_pause,
     lazy,
     romanise,
     set_storage
-} from '../../build/tools.js';
-import { lang, tl, trans } from '../../build/trans.js';
-import { prep_chart_colours } from '../../components/music/chart.js';
-import { create_badge, load_badges } from '../../components/badge.js';
-import { dialog } from '../../components/dialog.js';
+} from '@/build/tools';
+import { lang, tl, trans } from '@/build/trans';
+import { prep_chart_colours } from '@/components/music/chart.js';
+import { create_badge, load_badges } from '@/components/shared/badge';
+import { dialog } from '@/components/dialog/dialog';
 import {
     correct_artist,
     correct_item_by_artist,
     name_includes,
     smart_artists,
     smart_title
-} from '../../components/music/lotus.js';
-import { markdown } from '../../components/markdown.js';
-import { redesign_profile_header } from '../../components/profile_header.js';
+} from '@/components/music/lotus.js';
+import { markdown } from '@/components/shared/markdown';
+import { redesign_profile_header } from '@/components/profile/profile_header';
 import {
     select,
     select_prepare,
     select_prepare_list
-} from '../../components/select.js';
+} from '@/components/settings/select';
 import {
     checkup_page_structure,
     convert_to_toolbar
-} from '../../components/structure.js';
-import { refresh_all, update_inbuilt_item } from '../../config.js';
-import { register_background, update_page } from '../../page.js';
-import { ff } from '../../sku.js';
-import { bleh_user_library } from './glacier.js';
-import { bleh_obsession } from './obsession.js';
+} from '@/components/page/structure.js';
+import { refresh_all, update_inbuilt_item } from '@/config';
+import { register_background, update_page } from '@/page';
+import { ff } from '@/components/settings/sku';
+import { bleh_user_library } from '@/pages/profile/glacier';
+import { bleh_obsession } from '@/pages/profile/obsession';
 import { html, render } from 'lighterhtml';
-import { save_setting, setting } from '../../components/settings.js';
-import { submit_scrobble } from '../../components/scrobble.js';
+import { save_setting, setting } from '@/components/settings/settings';
+import { submit_scrobble } from '@/components/music/scrobble';
 import tippy from 'tippy.js';
-import { Chart, version } from '../../main.js';
-import { expand_avatar } from '../../components/avatar.js';
-import { status } from '../../components/status.js';
-import { hoshino } from '../../components/music/hoshino.js';
-import { find_pronouns } from '../../components/pronouns.js';
-import { queue_popup } from '../../components/popup.js';
-import { bleh_playlist } from './playlist.js';
+import { Chart, version } from '@/main';
+import { expand_avatar } from '@/components/shared/avatar.js';
+import { status } from '@/components/dialog/status.js';
+import { hoshino } from '@/components/music/hoshino.js';
+import { find_pronouns } from '@/components/profile/pronouns';
+import { queue_popup } from '@/components/dialog/popup';
+import { bleh_playlist } from '@/pages/profile/playlist';
 
 export async function bleh_profiles() {
     // the obsessions page is a user subpage but works very differently

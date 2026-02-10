@@ -4,13 +4,13 @@
 // Licensed under GPLv3
 //
 
-import { auth, page, root } from '../build/page.js';
-import { desanitise } from '../build/tools.js';
-import { correct_artist, correct_item_by_artist } from './lotus.js';
+import { auth, page, root } from '@/build/page.js';
+import { desanitise } from '@/build/tools';
+import { correct_artist, correct_item_by_artist } from '@/components/music/lotus';
 import { html, render } from 'lighterhtml';
-import { tl, trans } from '../build/trans.js';
-import { patch_avatar } from './avatar.js';
-import { toggle } from './toggle.js';
+import { tl, trans } from '@/build/trans';
+import { patch_avatar } from '@/components/shared/avatar';
+import { toggle } from '@/components/settings/toggle';
 
 export function bleh_message_list(list, mini = false, delete_btn = null, checkboxes = []) {
     list.classList = 'notification-list';

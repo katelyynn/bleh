@@ -4,27 +4,27 @@
 // Licensed under GPLv3
 //
 
-import { auth, page, root } from '../build/page';
+import { auth, page, root } from '@/build/page';
 import { html, render } from 'lighterhtml';
-import { patch_wiki_contents } from '../pages/wiki.js';
-import { redirect } from './music.js';
+import { patch_wiki_contents } from '@/pages/music/wiki';
+import { redirect } from '@/components/music/music';
 import showdown from 'showdown';
 import DOMPurify from 'dompurify';
-import { expand_avatar } from './avatar.js';
-import { tl, trans } from '../build/trans.js';
-import { dialog, dialog_rm } from './dialog.js';
-import { settings, settings_store } from '../build/config.js';
-import { log } from '../build/log.js';
-import { save_profile_cache } from '../pages/profile/profile.js';
-import { toggle } from './toggle.js';
-import { save_setting } from './settings.js';
-import { load_chart_colours } from './music/chart.js';
-import { sponsor_list } from '../build/sponsor.js';
-import { fetch_status } from './statuscafe.js';
+import { expand_avatar } from '@/components/shared/avatar';
+import { tl, trans } from '@/build/trans';
+import { dialog, dialog_rm } from '@/components/dialog/dialog';
+import { settings, settings_store } from '@/build/config.js';
+import { log } from '@/build/log.js';
+import { save_profile_cache } from '@/pages/profile/profile';
+import { toggle } from '@/components/settings/toggle';
+import { save_setting } from '@/components/settings/settings';
+import { load_chart_colours } from '@/components/music/chart.js';
+import { sponsor_list } from '@/build/sponsor.js';
+import { fetch_status } from '@/components/profile/statuscafe';
 import tippy from 'tippy.js';
 import { DateTime } from 'luxon';
-import { input } from './input.js';
-import { queue_popup } from './popup.js';
+import { input } from '@/components/settings/input';
+import { queue_popup } from '@/components/dialog/popup';
 
 export function markdown(
     text,

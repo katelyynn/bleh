@@ -4,14 +4,14 @@
 // Licensed under GPLv3
 //
 
-import { auth, page, root } from '../build/page.js';
-import { register_background, update_page } from '../page.js';
-import { log } from '../build/log.js';
-import { checkup_page_structure } from '../components/structure.js';
+import { auth, page, root } from '@/build/page.js';
+import { register_background, update_page } from '@/page';
+import { log } from '@/build/log.js';
+import { checkup_page_structure } from '@/components/page/structure.js';
 import { html, render } from 'lighterhtml';
-import { tl, trans } from '../build/trans.js';
-import { load_profile_cache_externally } from './profile/profile.js';
-import { set_storage } from '../build/tools.js';
+import { tl, trans } from '@/build/trans';
+import { load_profile_cache_externally } from '@/pages/profile/profile.js';
+import { set_storage } from '@/build/tools';
 
 export async function bleh_auth() {
     page.structure.container = document.body.querySelector('.page-content');

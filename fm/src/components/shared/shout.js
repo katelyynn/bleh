@@ -4,23 +4,23 @@
 // Licensed under GPLv3
 //
 
-import { patch_avatar, style_name_from_badge } from './avatar.js';
-import { settings } from '../build/config.js';
-import { log } from '../build/log.js';
-import { auth, page, shout_parse_queue } from '../build/page.js';
-import { tl, trans } from '../build/trans.js';
-import { notify } from './notify.js';
+import { patch_avatar, style_name_from_badge } from '@/components/shared/avatar';
+import { settings } from '@/build/config.js';
+import { log } from '@/build/log.js';
+import { auth, page, shout_parse_queue } from '@/build/page.js';
+import { tl, trans } from '@/build/trans';
+import { notify } from '@/components/dialog/notify';
 import { html, render } from 'lighterhtml';
-import { setting } from './settings.js';
+import { setting } from '@/components/settings/settings';
 import {
     markdown,
     markdown_field,
     markdown_preview
-} from './markdown.js';
-import { copy, romanise } from '../build/tools.js';
+} from '@/components/shared/markdown';
+import { copy, romanise } from '@/build/tools';
 import tippy from 'tippy.js';
-import { keybind } from './rabbit.js';
-import { correct_artist, correct_item_by_artist } from './music/lotus.js';
+import { keybind } from '@/components/dialog/rabbit';
+import { correct_artist, correct_item_by_artist } from '@/components/music/lotus.js';
 
 export function patch_shouts() {
     if (!page.structure.main) return;

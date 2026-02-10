@@ -5,14 +5,14 @@
 //
 
 import { html } from 'lighterhtml';
-import { log } from './build/log';
-import { page, root } from './build/page';
-import { tl, trans } from './build/trans';
-import { dialog, dialog_rm } from './components/dialog';
-import { sponsor_list } from './build/sponsor.js';
-import { markdown } from './components/markdown.js';
-import { set_storage } from './build/tools.js';
-import { sponsor } from './sponsor.js';
+import { log } from '@/build/log';
+import { page, root } from '@/build/page';
+import { tl, trans } from '@/build/trans';
+import { dialog, dialog_rm } from '@/components/dialog/dialog';
+import { sponsor_list } from '@/build/sponsor.js';
+import { markdown } from '@/components/shared/markdown';
+import { set_storage } from '@/build/tools.js';
+import { sponsor } from '@/components/sponsor';
 
 export function news() {
     let changelog = localStorage.getItem('bleh_changelog');

@@ -4,8 +4,8 @@
 // Licensed under GPLv3
 //
 
-import { settings } from '../build/config';
-import { page, root } from '../build/page';
+import { settings } from '@/build/config';
+import { page, root } from '@/build/page';
 import {
     clamp_lit,
     clamp_sat,
@@ -13,17 +13,17 @@ import {
     int_from_string,
     rgb_to_hsl,
     romanise
-} from '../build/tools';
-import { lang, tl, trans } from '../build/trans';
-import { bleh_glacier_insights } from '../pages/profile/glacier';
-import { parse_scrobbles_as_rank } from './colourful_counts';
-import { correct_artist, correct_item_by_artist, name_includes } from './lotus';
+} from '@/build/tools';
+import { lang, tl, trans } from '@/build/trans';
+import { bleh_glacier_insights } from '@/pages/profile/glacier';
+import { parse_scrobbles_as_rank } from '@/components/music/colourful_counts';
+import { correct_artist, correct_item_by_artist, name_includes } from '@/components/music/lotus';
 import { html, render } from 'lighterhtml';
 import ColorThief from 'color-thief-browser';
-import { register_menu } from './menu';
+import { register_menu } from '@/components/menu';
 import tippy from 'tippy.js';
-import { expand_avatar } from './avatar';
-import { save_hoshino_artwork } from './hoshino';
+import { expand_avatar } from '@/components/shared/avatar';
+import { save_hoshino_artwork } from '@/components/music/hoshino';
 
 export function music_grids(search = page.structure.main, use_colour = true) {
     if (!search) return;

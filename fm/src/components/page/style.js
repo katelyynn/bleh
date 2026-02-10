@@ -5,16 +5,16 @@
 //
 
 import { html } from 'lighterhtml';
-import { settings } from './build/config';
-import { log } from './build/log';
-import { tl, trans } from './build/trans';
-import { chart_reflow } from './components/chart.js';
-import { dialog, dialog_rm } from './components/dialog';
-import { invoke_reload } from './config';
-import { version } from './main';
-import { download_with_progress, set_storage } from './build/tools.js';
+import { settings } from '@/build/config';
+import { log } from '@/build/log';
+import { tl, trans } from '@/build/trans';
+import { chart_reflow } from '@/components/music/chart';
+import { dialog, dialog_rm } from '@/components/dialog/dialog';
+import { invoke_reload } from '@/config';
+import { version } from '@/main';
+import { download_with_progress, set_storage } from '@/build/tools.js';
 import cropper_css from 'cropperjs/dist/cropper.min.css';
-import { root } from './build/page.js';
+import { root } from '@/build/page.js';
 
 export function append_style() {
     document.documentElement.classList.add('florence-supports-loading');

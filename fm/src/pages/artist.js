@@ -4,11 +4,11 @@
 // Licensed under GPLv3
 //
 
-import { settings } from '../build/config';
-import { log } from '../build/log';
-import { auth, page, root } from '../build/page';
-import { romanise, sanitise } from '../build/tools';
-import { tl, trans } from '../build/trans';
+import { settings } from '@/build/config';
+import { log } from '@/build/log';
+import { auth, page, root } from '@/build/page';
+import { romanise, sanitise } from '@/build/tools';
+import { tl, trans } from '@/build/trans';
 import {
     artist_title,
     correct_artist,
@@ -16,8 +16,8 @@ import {
     correct_item_by_artist,
     name_includes,
     smart_title
-} from '../components/music/lotus.js';
-import { register_menu } from '../components/menu';
+} from '@/components/music/lotus.js';
+import { register_menu } from '@/components/menu';
 import {
     bleh_music_page_charts,
     bleh_top_listeners,
@@ -25,19 +25,19 @@ import {
     redirect,
     show_your_scrobbles,
     similar_items
-} from '../components/music';
-import { checkup_page_structure } from '../components/structure';
-import { register_background, update_page } from '../page';
-import { ff } from '../sku';
-import { bleh_gallery_list, bleh_gallery_upload } from './gallery';
-import { bleh_tags_mini } from './tag';
-import { bleh_wiki, bleh_wiki_editor, bleh_wiki_history } from './wiki';
+} from '@/components/music/music';
+import { checkup_page_structure } from '@/components/page/structure';
+import { register_background, update_page } from '@/page';
+import { ff } from '@/components/settings/sku';
+import { bleh_gallery_list, bleh_gallery_upload } from '@/pages/music/gallery';
+import { bleh_tags_mini } from '@/pages/tag';
+import { bleh_wiki, bleh_wiki_editor, bleh_wiki_history } from '@/pages/music/wiki';
 import { html, render } from 'lighterhtml';
-import { expand_avatar } from '../components/avatar.js';
-import { other_listener } from '../components/profile_shortcut.js';
-import { setting } from '../components/settings.js';
+import { expand_avatar } from '@/components/shared/avatar';
+import { other_listener } from '@/components/profile/profile_shortcut';
+import { setting } from '@/components/settings/settings';
 import tippy from 'tippy.js';
-import { open_starred_friend_window } from './profile/profile.js';
+import { open_starred_friend_window } from '@/pages/profile/profile.js';
 
 export function bleh_artists() {
     let artist_header = document.body.querySelector('.header-new--artist');

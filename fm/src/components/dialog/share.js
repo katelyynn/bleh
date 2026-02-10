@@ -5,10 +5,10 @@
 //
 
 import {html} from "lighterhtml";
-import {notify} from "./notify";
-import {dialog} from "./dialog.js";
-import {tl, trans} from "../build/trans.js";
-import {log} from "../build/log.js";
+import {notify} from "@/components/dialog/notify";
+import {dialog} from "@/components/dialog/dialog";
+import {tl, trans} from "@/build/trans";
+import {log} from "@/build/log.js";
 
 export function share(url) {
     let input;
@@ -24,7 +24,7 @@ export function share(url) {
                     class="share-input"
                     ref=${el => input = el}
                 />
-                <button 
+                <button
                     class="btn primary icon copy"
                     onclick=${() => {
                         input.select();
@@ -37,12 +37,12 @@ export function share(url) {
                 >${tl(trans.copy)}</button>
             </div>
             <div class="share-links">
-                <a 
+                <a
                     href=${`https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}`}
                     target="_blank"
                     class="share-link share-link-twitter"
                 >Twitter</a>
-                <a 
+                <a
                     href=${`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`}
                     target="_blank"
                     class="share-link share-link-facebook"

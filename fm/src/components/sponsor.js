@@ -5,16 +5,16 @@
 //
 
 import { html } from 'lighterhtml';
-import { log } from '../build/log';
-import { auth, page, root } from '../build/page';
-import { sponsor_list } from '../build/sponsor';
-import { tl, trans } from '../build/trans';
-import { dialog } from './dialog';
-import { ff } from './sku';
-import { status } from './status';
-import { set_storage } from '../build/tools';
-import { create_badge, process_badge } from './badge';
-import { notify } from './notify';
+import { log } from '@/build/log';
+import { auth, page, root } from '@/build/page';
+import { sponsor_list } from '@/build/sponsor';
+import { tl, trans } from '@/build/trans';
+import { dialog } from '@/components/dialog/dialog';
+import { ff } from '@/components/settings/sku';
+import { status } from '@/components/dialog/status';
+import { set_storage } from '@/build/tools';
+import { create_badge, process_badge } from '@/components/shared/badge';
+import { notify } from '@/components/dialog/notify';
 
 export function sponsors(force = false, func = null) {
     if (!ff('sponsor')) return;

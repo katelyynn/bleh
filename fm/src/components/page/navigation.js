@@ -4,41 +4,41 @@
 // Licensed under GPLv3
 //
 
-import { settings } from '../build/config.js';
-import { auth, discord, page, root } from '../build/page.js';
-import { stored_season } from '../build/seasonal.js';
-import { lang, lang_info, tl, trans } from '../build/trans.js';
-import { create_badge, load_badges } from './badge.js';
-import { version } from '../main.js';
-import { ff } from '../sku.js';
+import { settings } from '@/build/config.js';
+import { auth, discord, page, root } from '@/build/page.js';
+import { stored_season } from '@/build/seasonal.js';
+import { lang, lang_info, tl, trans } from '@/build/trans';
+import { create_badge, load_badges } from '@/components/shared/badge';
+import { version } from '@/main';
+import { ff } from '@/components/settings/sku';
 import { html, render } from 'lighterhtml';
-import { news } from './news.js';
-import { toggle_theme } from '../config.js';
-import { save_setting, setting } from './settings.js';
-import { prompt_for_update } from '../style.js';
-import { log } from '../build/log.js';
+import { news } from '@/components/news';
+import { toggle_theme } from '@/config';
+import { save_setting, setting } from '@/components/settings/settings';
+import { prompt_for_update } from '@/components/page/style';
+import { log } from '@/build/log.js';
 import {
     correct_artist,
     correct_item_by_artist,
     name_includes,
     smart_artists,
     smart_title
-} from './lotus.js';
-import { bleh_notification_list } from './notifications.js';
+} from '@/components/music/lotus';
+import { bleh_notification_list } from '@/components/inbox/notifications';
 import tippy from 'tippy.js';
 import {
     load_profile_cache_externally,
     open_starred_friend_window
-} from '../pages/profile/profile.js';
-import { sponsor } from '../sponsor.js';
-import { generic_link_menu, register_menu } from './menu.js';
-import { copy, romanise } from '../build/tools.js';
-import { submit_scrobble } from './scrobble.js';
-import { match } from './dynamic_theming.js';
+} from '@/pages/profile/profile';
+import { sponsor } from '@/components/sponsor';
+import { generic_link_menu, register_menu } from '@/components/menu';
+import { copy, romanise } from '@/build/tools';
+import { submit_scrobble } from '@/components/music/scrobble';
+import { match } from '@/components/settings/dynamic_theming';
 import { DateTime } from 'luxon';
-import { input } from './input.js';
-import { bleh_message_list } from './messages.js';
-import { queue_popup } from './popup.js';
+import { input } from '@/components/settings/input';
+import { bleh_message_list } from '@/components/inbox/messages';
+import { queue_popup } from '@/components/dialog/popup';
 
 export function patch_masthead() {
     let masthead_logo = document.body.querySelector('.masthead-logo');

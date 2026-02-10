@@ -4,12 +4,12 @@
 // Licensed under GPLv3
 //
 
-import { log } from '../build/log';
-import { page, root } from '../build/page';
-import { load_chart_colours } from './chart.js';
-import { ff } from '../sku';
+import { log } from '@/build/log';
+import { page, root } from '@/build/page';
+import { load_chart_colours } from '@/components/music/chart';
+import { ff } from '@/components/settings/sku';
 import { html, render } from 'lighterhtml';
-import { tl, trans } from '../build/trans.js';
+import { tl, trans } from '@/build/trans';
 
 export function basic_page_structure() {
     page.structure.container = document.body.querySelector('.page-content');

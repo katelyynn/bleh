@@ -4,13 +4,13 @@
 // Licensed under GPLv3
 //
 
-import {log} from '../build/log';
-import {auth, page, root} from '../build/page';
-import {tl, trans} from '../build/trans';
-import {checkup_page_structure} from '../components/structure';
-import {register_background, update_page} from '../page';
+import {log} from '@/build/log';
+import {auth, page, root} from '@/build/page';
+import {tl, trans} from '@/build/trans';
+import {checkup_page_structure} from '@/components/page/structure';
+import {register_background, update_page} from '@/page';
 import {html, render} from "lighterhtml";
-import { load_profile_cache_externally } from './profile/profile';
+import { load_profile_cache_externally } from '@/pages/profile/profile';
 
 export async function bleh_api() {
     if (page.subpage == 'docs') return;

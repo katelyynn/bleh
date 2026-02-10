@@ -5,20 +5,20 @@
 //
 
 import { html, render } from 'lighterhtml';
-import { log } from '../build/log';
-import { auth, page, root } from '../build/page';
-import { clean_number, sanitise } from '../build/tools';
-import { lang, tl, trans } from '../build/trans';
-import { music_grids } from './music_grid';
-import { notify, notify_rm } from './notify';
-import { select } from './select';
-import { patch_titles } from './track';
-import { render_user } from '../pages/minis.js';
-import { settings } from '../build/config.js';
-import { redirect } from './music.js';
+import { log } from '@/build/log';
+import { auth, page, root } from '@/build/page';
+import { clean_number, sanitise } from '@/build/tools';
+import { lang, tl, trans } from '@/build/trans';
+import { music_grids } from '@/components/music/music_grid';
+import { notify, notify_rm } from '@/components/dialog/notify';
+import { select } from '@/components/settings/select';
+import { patch_titles } from '@/components/music/track';
+import { render_user } from '@/pages/home/minis.js';
+import { settings } from '@/build/config.js';
+import { redirect } from '@/components/music/music';
 import tippy from 'tippy.js';
-import { ff } from '../sku.js';
-import { setting } from './settings.js';
+import { ff } from '@/components/settings/sku';
+import { setting } from '@/components/settings/settings';
 
 export function compare({ host, sidebar } = {}) {
     if (!host || !sidebar) return;

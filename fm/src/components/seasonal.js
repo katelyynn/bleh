@@ -4,18 +4,18 @@
 // Licensed under GPLv3
 //
 
-import { settings } from './build/config';
-import { log } from './build/log';
-import { page } from './build/page';
+import { settings } from '@/build/config';
+import { log } from '@/build/log';
+import { page } from '@/build/page';
 import {
     seasonal_events,
     seasonal_timer,
     stored_season
-} from './build/seasonal';
-import { set_storage } from './build/tools';
-import { tl, trans } from './build/trans';
-import { load_chart_colours } from './music/chart';
-import { notify } from './components/notify';
+} from '@/build/seasonal';
+import { set_storage } from '@/build/tools';
+import { tl, trans } from '@/build/trans';
+import { load_chart_colours } from '@/components/music/chart';
+import { notify } from '@/components/dialog/notify';
 import { html, render } from 'lighterhtml';
 import { DateTime, Duration } from 'luxon';
 

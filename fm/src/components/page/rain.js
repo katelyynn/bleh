@@ -4,9 +4,9 @@
 // Licensed under GPLv3
 //
 
-import {settings} from "./build/config";
+import {settings} from "@/build/config";
 import {html, render} from "lighterhtml";
-import { page } from './build/page';
+import { page } from '@/build/page';
 
 export function rain() {
     let rain_container = html.node`

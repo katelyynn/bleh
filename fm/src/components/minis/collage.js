@@ -4,24 +4,24 @@
 // Licensed under GPLv3
 //
 
-import { lang, tl, trans } from '../../build/trans.js';
+import { lang, tl, trans } from '@/build/trans';
 import { html, render } from 'lighterhtml';
-import { select } from '../select.js';
-import { setting } from '../settings.js';
-import { input } from '../input.js';
-import { auth, page, root } from '../../build/page.js';
-import { notify, notify_rm } from '../notify.js';
-import { clean_number, pad2, sanitise, year_from_date } from '../../build/tools.js';
-import { log } from '../../build/log.js';
-import { music_grids } from '../music_grid.js';
-import { settings } from '../../build/config.js';
-import { version } from '../../main.js';
-import { download } from '../share.js';
-import { render_user } from '../../pages/minis.js';
-import { redirect } from '../music.js';
+import { select } from '@/components/settings/select';
+import { setting } from '@/components/settings/settings';
+import { input } from '@/components/settings/input';
+import { auth, page, root } from '@/build/page.js';
+import { notify, notify_rm } from '@/components/dialog/notify';
+import { clean_number, pad2, sanitise, year_from_date } from '@/build/tools';
+import { log } from '@/build/log.js';
+import { music_grids } from '@/components/music/music_grid';
+import { settings } from '@/build/config.js';
+import { version } from '@/main';
+import { download } from '@/components/dialog/share';
+import { render_user } from '@/pages/home/minis.js';
+import { redirect } from '@/components/music/music';
 import tippy from 'tippy.js';
 import html2canvas from 'html2canvas-pro';
-import { load_profile_cache_externally } from '../../pages/profile/profile.js';
+import { load_profile_cache_externally } from '@/pages/profile/profile.js';
 
 export function collage({ host, sidebar } = {}) {
     if (!host || !sidebar) return;

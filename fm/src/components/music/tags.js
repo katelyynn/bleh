@@ -1,5 +1,5 @@
-import { page } from "../build/page";
-import { romanise } from "../build/tools";
+import { page } from "@/build/page";
+import { romanise } from "@/build/tools";
 import { correct_artist } from "./lotus";
 
 export function tag_page() {

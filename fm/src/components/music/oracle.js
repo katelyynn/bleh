@@ -5,7 +5,7 @@
 //
 
 import { html, render } from 'lighterhtml';
-import { log } from '../../build/log';
+import { log } from '@/build/log';
 import {
     auth,
     oracle_albums,
@@ -13,32 +13,32 @@ import {
     oracle_tracks,
     page,
     root
-} from '../../build/page';
-import { clean_number, romanise, sanitise, set_storage } from '../../build/tools';
-import { ff } from '../sku';
+} from '@/build/page';
+import { clean_number, romanise, sanitise, set_storage } from '@/build/tools';
+import { ff } from '@/components/settings/sku';
 import {
     correct_artist,
     correct_item_by_artist,
     name_includes,
     smart_artists,
     smart_title
-} from './lotus';
-import { lang, tl, trans } from '../../build/trans';
-import { clean_title, fix_title } from '../../build/music';
+} from '@/components/music/lotus';
+import { lang, tl, trans } from '@/build/trans';
+import { clean_title, fix_title } from '@/build/music';
 import { version } from '../../main';
-import { settings } from '../../build/config';
-import { dialog, dialog_rm } from './dialog';
+import { settings } from '@/build/config';
+import { dialog, dialog_rm } from '@/components/dialog/dialog';
 import tippy, { followCursor } from 'tippy.js';
 import {
     hoshino_return,
     load_hoshino_artwork,
     save_hoshino_artwork
-} from './hoshino';
-import { create_avatar } from '../../pages/track';
+} from '@/components/music/hoshino';
+import { create_avatar } from '@/pages/track';
 import { DateTime } from 'luxon';
-import { select } from '../select';
-import { save_setting, setting } from '../settings';
-import { input } from '../input';
+import { select } from '@/components/settings/select';
+import { save_setting, setting } from '@/components/settings/settings';
+import { input } from '@/components/settings/input';
 
 export function oracle_process() {
     log('beginning', 'oracle');

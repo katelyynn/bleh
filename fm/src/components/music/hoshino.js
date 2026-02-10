@@ -1,7 +1,7 @@
 import { html } from 'lighterhtml';
-import { log } from '../build/log';
-import { ff } from '../sku';
-import { set_storage } from '../build/tools';
+import { log } from '@/build/log';
+import { ff } from '@/components/settings/sku';
+import { set_storage } from '@/build/tools';
 
 export function hoshino(artwork, name, sister, link = null) {
     if (!ff('hoshino')) return;

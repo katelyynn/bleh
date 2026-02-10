@@ -4,12 +4,12 @@
 // Licensed under GPLv3
 //
 
-import { auth, root } from '../build/page.js';
-import { desanitise } from '../build/tools.js';
-import { correct_artist, correct_item_by_artist } from './lotus.js';
+import { auth, root } from '@/build/page.js';
+import { desanitise } from '@/build/tools';
+import { correct_artist, correct_item_by_artist } from '@/components/music/lotus';
 import { html, render } from 'lighterhtml';
-import { tl, trans } from '../build/trans.js';
-import { patch_avatar } from './avatar.js';
+import { tl, trans } from '@/build/trans';
+import { patch_avatar } from '@/components/shared/avatar';
 
 export function bleh_notification_list(list, mini = false) {
     list.classList = 'notification-list';

@@ -5,11 +5,11 @@
 //
 
 import { html } from 'lighterhtml';
-import { tl, trans } from '../build/trans.js';
-import { log } from '../build/log.js';
+import { tl, trans } from '@/build/trans';
+import { log } from '@/build/log.js';
 import tippy from 'tippy.js';
-import { calendar } from './calendar.js';
-import { auth } from '../build/page.js';
+import { calendar } from '@/components/dialog/calendar';
+import { auth } from '@/build/page.js';
 
 export function input({
     type = 'text',

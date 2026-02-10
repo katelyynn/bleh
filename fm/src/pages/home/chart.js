@@ -4,14 +4,14 @@
 // Licensed under GPLv3
 //
 
-import { settings } from '../build/config';
-import { page } from '../build/page';
-import { tl, trans } from '../build/trans';
-import { correct_artist, correct_item_by_artist } from '../components/music/lotus';
+import { settings } from '@/build/config';
+import { page } from '@/build/page';
+import { tl, trans } from '@/build/trans';
+import { correct_artist, correct_item_by_artist } from '@/components/music/lotus';
 import { html } from 'lighterhtml';
 import tippy from 'tippy.js';
 import { DateTime } from 'luxon';
-import { setting } from '../components/settings';
+import { setting } from '@/components/settings/settings';
 
 export function bleh_charts() {
     if (page.subpage != 'overview') return;

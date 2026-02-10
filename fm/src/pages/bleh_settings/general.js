@@ -1,17 +1,17 @@
 import { html, render } from "lighterhtml";
 import { page_loading, register_skip_to, render_setting_page } from "./bleh_settings";
-import { api_key, auth, page, root } from "../../build/page";
-import { load_badges } from "../../components/badge";
-import { dialog } from "../../components/dialog";
-import { lang, lang_info, tl, trans } from "../../build/trans";
-import { setting } from "../../components/settings";
+import { api_key, auth, page, root } from "@/build/page";
+import { load_badges } from "@/components/shared/badge";
+import { dialog } from "@/components/dialog/dialog";
+import { lang, lang_info, tl, trans } from "@/build/trans";
+import { setting } from "@/components/settings/settings";
 import { DateTime } from "luxon";
-import { version } from "../../main";
-import { sponsor_list } from "../../build/sponsor";
-import { update_branding_type } from "../../components/navigation";
+import { version } from "@/main";
+import { sponsor_list } from "@/build/sponsor";
+import { update_branding_type } from "@/components/page/navigation";
 import tippy from "tippy.js";
-import { update_check } from "../../style";
-import { notify } from "../../components/notify";
+import { update_check } from "@/components/page/style";
+import { notify } from "@/components/dialog/notify";
 
 export function general() {
     if (auth.pro == null) {

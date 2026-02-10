@@ -5,9 +5,9 @@
 //
 
 import { html, render } from 'lighterhtml';
-import { settings } from '../../build/config.js';
-import { log } from '../../build/log.js';
-import { auth, page, root } from '../../build/page.js';
+import { settings } from '@/build/config.js';
+import { log } from '@/build/log.js';
+import { auth, page, root } from '@/build/page.js';
 import {
     clamp_lit,
     clamp_sat,
@@ -16,24 +16,24 @@ import {
     rgb_to_hsl,
     romanise,
     sanitise
-} from '../../build/tools.js';
-import { bleh_glacier_insights } from '../../pages/profile/glacier.js';
-import { patch_artist_ranks_in_list_view } from './colourful_counts';
+} from '@/build/tools';
+import { bleh_glacier_insights } from '@/pages/profile/glacier.js';
+import { patch_artist_ranks_in_list_view } from '@/components/music/colourful_counts';
 import {
     correct_artist,
     correct_item_by_artist,
     name_includes,
     smart_artists,
     smart_title
-} from './lotus.js';
-import { register_menu } from '../menu.js';
-import { tl, trans } from '../../build/trans.js';
-import { notify } from './notify.js';
-import { redirect } from './music.js';
+} from '@/components/music/lotus';
+import { register_menu } from '@/components/menu';
+import { tl, trans } from '@/build/trans';
+import { notify } from '@/components/dialog/notify';
+import { redirect } from '@/components/music/music';
 import tippy from 'tippy.js';
 import ColorThief from 'color-thief-browser';
-import { hoshino } from './hoshino.js';
-import { submit_scrobble } from './scrobble.js';
+import { hoshino } from '@/components/music/hoshino';
+import { submit_scrobble } from '@/components/music/scrobble';
 
 export function patch_titles(search = page.structure.main) {
     if (page.subpage == 'tags_overview') return;

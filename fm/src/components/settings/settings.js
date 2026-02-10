@@ -5,22 +5,22 @@
 //
 
 import { html, render } from 'lighterhtml';
-import { settings, settings_store } from '../build/config.js';
-import { tl, trans } from '../build/trans.js';
-import { notify } from './notify.js';
-import { auth, page } from '../build/page.js';
-import { request_reload } from '../config.js';
-import { log } from '../build/log.js';
-import { change_settings_page } from '../pages/bleh_settings/bleh_settings.js';
-import { dialog, dialog_rm } from './dialog.js';
-import { keybind } from './rabbit.js';
+import { settings, settings_store } from '@/build/config.js';
+import { tl, trans } from '@/build/trans';
+import { notify } from '@/components/dialog/notify';
+import { auth, page } from '@/build/page.js';
+import { request_reload } from '@/config';
+import { log } from '@/build/log.js';
+import { change_settings_page } from '@/pages/bleh_settings/bleh_settings.js';
+import { dialog, dialog_rm } from '@/components/dialog/dialog';
+import { keybind } from '@/components/dialog/rabbit';
 import tippy from 'tippy.js';
-import { version } from '../main.js';
-import { select } from './select.js';
-import { input } from './input.js';
-import { status } from './status.js';
-import { chart_reflow } from './music/chart.js';
-import { set_storage } from '../build/tools.js';
+import { version } from '@/main';
+import { select } from '@/components/settings/select';
+import { input } from '@/components/settings/input';
+import { status } from '@/components/dialog/status';
+import { chart_reflow } from '@/components/music/chart.js';
+import { set_storage } from '@/build/tools';
 
 export function setting({
     id = '',

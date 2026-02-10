@@ -6,7 +6,7 @@
 
 import { html } from 'lighterhtml';
 import tippy from 'tippy.js';
-import { version } from '../main';
+import { version } from '@/main';
 // require page reload
 export let reload_pending = {
     state: false

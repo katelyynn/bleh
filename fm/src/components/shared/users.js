@@ -5,11 +5,11 @@
 //
 
 import { html, render } from 'lighterhtml';
-import { page } from '../build/page.js';
-import { markdown } from './markdown.js';
-import { patch_avatar, style_name_from_badge } from './avatar.js';
-import { correct_artist } from './music/lotus.js';
-import { log } from '../build/log.js';
+import { page } from '@/build/page.js';
+import { markdown } from '@/components/shared/markdown';
+import { patch_avatar, style_name_from_badge } from '@/components/shared/avatar';
+import { correct_artist } from '@/components/music/lotus.js';
+import { log } from '@/build/log.js';
 
 export function bleh_users() {
     const users = page.structure.main?.querySelectorAll('.user-list-item:not(.user-list-item-mobile-ad)');

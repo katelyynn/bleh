@@ -4,10 +4,10 @@
 // Licensed under GPLv3
 //
 
-import { settings } from '../build/config';
-import { log } from '../build/log';
-import { page } from '../build/page';
-import { save_setting } from './settings';
+import { settings } from '@/build/config';
+import { log } from '@/build/log';
+import { page } from '@/build/page';
+import { save_setting } from '@/components/settings/settings';
 
 export function dynamic_theming() {
     const media = window.matchMedia('(prefers-color-scheme: dark)');

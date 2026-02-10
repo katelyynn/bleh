@@ -4,31 +4,31 @@
 // Licensed under GPLv3
 //
 
-import { auth, page, root } from '../build/page';
-import { tl, trans } from '../build/trans';
-import { bleh_auto_edits } from '../components/auto_edit';
-import { dialog, dialog_rm } from '../components/dialog';
+import { auth, page, root } from '@/build/page';
+import { tl, trans } from '@/build/trans';
+import { bleh_auto_edits } from '@/components/dialog/auto_edit';
+import { dialog, dialog_rm } from '@/components/dialog/dialog';
 import {
     custom_select,
     select,
     select_prepare,
     update_inbuilt_select
-} from '../components/select';
+} from '@/components/settings/select';
 import { update_inbuilt_item } from '../config';
-import { ff } from '../sku';
-import { markdown, markdown_field, markdown_prompt } from '../components/markdown';
+import { ff } from '@/components/settings/sku';
+import { markdown, markdown_field, markdown_prompt } from '@/components/shared/markdown';
 import { html, render } from 'lighterhtml';
 import tippy from 'tippy.js';
 import Cropper from 'cropperjs';
-import { save_setting, setting } from '../components/settings';
-import { settings, settings_store } from '../build/config';
-import { input } from '../components/input';
-import { hex_to_hsl } from '../build/tools';
-import { log } from '../build/log';
-import { toggle } from '../components/toggle';
-import { status } from '../components/status';
-import { radio, radio_convert } from '../components/radio_toggle';
-import { notify, notify_rm } from '../components/notify';
+import { save_setting, setting } from '@/components/settings/settings';
+import { settings, settings_store } from '@/build/config';
+import { input } from '@/components/settings/input';
+import { hex_to_hsl } from '@/build/tools';
+import { log } from '@/build/log';
+import { toggle } from '@/components/settings/toggle';
+import { status } from '@/components/dialog/status';
+import { radio, radio_convert } from '@/components/radio/radio_toggle';
+import { notify, notify_rm } from '@/components/dialog/notify';
 
 let cropper;
 

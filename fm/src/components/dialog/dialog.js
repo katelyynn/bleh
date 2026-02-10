@@ -5,8 +5,8 @@
 //
 
 import { html, render } from 'lighterhtml';
-import { log } from '../build/log';
-import { dialogs, page } from '../build/page';
+import { log } from '@/build/log';
+import { dialogs, page } from '@/build/page';
 
 export function load_dialogs() {
     let dialogs = document.createElement('div');

@@ -4,18 +4,18 @@
 // Licensed under GPLv3
 //
 
-import {patch_avatar, return_name_from_avatar, style_name_from_badge} from "../components/avatar.js";
-import {log} from "../build/log";
-import {auth, page, root} from "../build/page";
-import {copy, sanitise} from "../build/tools";
-import {checkup_page_structure} from "../components/structure";
+import {patch_avatar, style_name_from_badge} from "@/components/shared/avatar.js";
+import {log} from "@/build/log";
+import {auth, page, root} from "@/build/page";
+import {copy, sanitise} from "@/build/tools";
+import {checkup_page_structure} from "@/components/page/structure";
 import {register_background, update_page} from "../page";
-import {bleh_notification_list} from "../components/notifications.js";
-import { tl, trans } from "../build/trans.js";
+import {bleh_notification_list} from "@/components/inbox/notifications";
+import { tl, trans } from "@/build/trans";
 import { html, render } from "lighterhtml";
 import { load_profile_cache_externally } from "./profile/profile.js";
-import { bleh_message_list } from "../components/messages.js";
-import { toggle } from "../components/toggle.js";
+import { bleh_message_list } from "@/components/inbox/messages";
+import { toggle } from "@/components/settings/toggle.js";
 import tippy from "tippy.js";
 
 export async function bleh_inbox() {

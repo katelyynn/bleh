@@ -4,9 +4,9 @@
 // Licensed under GPLv3
 //
 
-import { settings } from '../build/config';
-import { log } from '../build/log';
-import { auth, page, root } from '../build/page';
+import { settings } from '@/build/config';
+import { log } from '@/build/log';
+import { auth, page, root } from '@/build/page';
 import {
     clamp_lit,
     clamp_sat,
@@ -14,30 +14,30 @@ import {
     desanitise,
     hex_to_hsl,
     sanitise
-} from '../build/tools';
-import { tl, trans } from '../build/trans';
-import { load_chart_colours } from '../components/music/chart.js';
-import { bleh_about_artist } from '../components/music/about_artist.js';
-import { patch_header_title } from '../components/music/lotus.js';
-import { register_menu } from '../components/menu';
+} from '@/build/tools';
+import { tl, trans } from '@/build/trans';
+import { load_chart_colours } from '@/components/music/chart.js';
+import { bleh_about_artist } from '@/components/music/about_artist.js';
+import { patch_header_title } from '@/components/music/lotus.js';
+import { register_menu } from '@/components/menu';
 import {
     bleh_music_page_charts,
     redirect,
     show_your_scrobbles,
     similar_items
-} from '../components/music';
-import { checkup_page_structure } from '../components/structure';
-import { register_background, update_page } from '../page';
-import { ff } from '../sku';
-import { bleh_gallery_list, bleh_gallery_upload } from './gallery';
-import { bleh_tags_mini } from './tag';
-import { bleh_wiki, bleh_wiki_editor, bleh_wiki_history } from './wiki';
+} from '@/components/music/music';
+import { checkup_page_structure } from '@/components/page/structure';
+import { register_background, update_page } from '@/page';
+import { ff } from '@/components/settings/sku';
+import { bleh_gallery_list, bleh_gallery_upload } from '@/pages/music/gallery';
+import { bleh_tags_mini } from '@/pages/tag';
+import { bleh_wiki, bleh_wiki_editor, bleh_wiki_history } from '@/pages/music/wiki';
 import { html, render } from 'lighterhtml';
-import { expand_avatar } from '../components/avatar.js';
-import { setting } from '../components/settings.js';
+import { expand_avatar } from '@/components/shared/avatar';
+import { setting } from '@/components/settings/settings';
 import tippy from 'tippy.js';
-import { oracle_process } from '../components/oracle.js';
-import { save_hoshino_artwork } from '../components/music/hoshino.js';
+import { oracle_process } from '@/components/music/oracle';
+import { save_hoshino_artwork } from '@/components/music/hoshino.js';
 
 export function bleh_albums() {
     let album_header = document.body.querySelector('.header-new--album');

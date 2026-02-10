@@ -4,24 +4,24 @@
 // Licensed under GPLv3
 //
 
-import { settings } from '../build/config';
-import { log } from '../build/log';
-import { auth, page, root } from '../build/page';
-import { sponsor_list } from '../build/sponsor';
-import { copy, romanise, sanitise } from '../build/tools';
-import { tl, trans } from '../build/trans';
-import { ff } from '../sku';
-import { correct_artist } from './lotus';
+import { settings } from '@/build/config';
+import { log } from '@/build/log';
+import { auth, page, root } from '@/build/page';
+import { sponsor_list } from '@/build/sponsor';
+import { copy, romanise, sanitise } from '@/build/tools';
+import { tl, trans } from '@/build/trans';
+import { ff } from '@/components/settings/sku';
+import { correct_artist } from '@/components/music/lotus';
 import { html, render } from 'lighterhtml';
-import { sponsor } from '../sponsor.js';
-import { redirect } from './music.js';
+import { sponsor } from '@/components/sponsor';
+import { redirect } from '@/components/music/music';
 import tippy from 'tippy.js';
-import { register_menu } from './menu.js';
-import { notify } from './notify.js';
-import { dialog, dialog_rm } from './dialog.js';
-import { save_setting } from './settings.js';
-import { manage_user } from './manage_user.js';
-import { queue_popup } from './popup.js';
+import { register_menu } from '@/components/menu';
+import { notify } from '@/components/dialog/notify';
+import { dialog, dialog_rm } from '@/components/dialog/dialog';
+import { save_setting } from '@/components/settings/settings';
+import { manage_user } from '@/components/profile/manage_user';
+import { queue_popup } from '@/components/dialog/popup';
 
 export function redesign_profile_header(is_own_profile, is_following) {
     if (!auth.name) return;

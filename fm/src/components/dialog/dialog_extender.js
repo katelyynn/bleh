@@ -4,12 +4,12 @@
 // Licensed under GPLv3
 //
 
-import { page, root } from '../build/page.js';
-import { tl, trans } from '../build/trans.js';
+import { page, root } from '@/build/page.js';
+import { tl, trans } from '@/build/trans';
 import { html, render } from 'lighterhtml';
-import { toggle } from './toggle.js';
-import { log } from '../build/log.js';
-import { correct_artist, correct_item_by_artist } from './lotus.js';
+import { toggle } from '@/components/settings/toggle';
+import { log } from '@/build/log.js';
+import { correct_artist, correct_item_by_artist } from '@/components/music/lotus';
 
 export function dialog_extender() {
     // data-processed=true is signature of bulk edit

@@ -5,12 +5,12 @@
 //
 
 import { html, render } from 'lighterhtml';
-import { page, root } from '../build/page';
-import { sanitise } from '../build/tools';
-import { tl, trans } from '../build/trans';
-import { expand_avatar } from './avatar.js';
-import { correct_artist } from './music/lotus.js';
-import { redirect } from './music.js';
+import { page, root } from '@/build/page';
+import { sanitise } from '@/build/tools';
+import { tl, trans } from '@/build/trans';
+import { expand_avatar } from '@/components/shared/avatar';
+import { correct_artist } from '@/components/music/lotus.js';
+import { redirect } from '@/components/music/music';
 
 export function bleh_about_artist() {
     let legacy_container = page.structure.main.querySelector('.about-artist');

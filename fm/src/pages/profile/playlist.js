@@ -1,9 +1,9 @@
 import { html } from "lighterhtml";
-import { log } from "../../build/log";
-import { auth, page } from "../../build/page";
-import { tl, trans } from "../../build/trans";
-import { checkup_page_structure } from "../../components/structure";
-import { register_background, update_page } from "../../page";
+import { log } from "@/build/log";
+import { auth, page } from "@/build/page";
+import { tl, trans } from "@/build/trans";
+import { checkup_page_structure } from "@/components/page/structure";
+import { register_background, update_page } from "@/page";
 import { load_profile_cache_externally } from "./profile";
 
 export async function bleh_playlist() {

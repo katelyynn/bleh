@@ -5,7 +5,7 @@
 //
 
 import { html } from 'lighterhtml';
-import { page } from '../../build/page';
+import { page } from '@/build/page';
 
 export function load_status() {
     if (!page.structure.status) {

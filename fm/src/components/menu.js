@@ -6,12 +6,12 @@
 
 import { html } from 'lighterhtml';
 import tippy from 'tippy.js';
-import { tl, trans } from '../build/trans';
-import { ff } from '../sku';
-import { log } from '../build/log';
-import { copy, paste, redo, undo } from '../build/tools';
-import { settings } from '../build/config';
-import { external_url_prompt } from './markdown';
+import { tl, trans } from '@/build/trans';
+import { ff } from '@/components/settings/sku';
+import { log } from '@/build/log';
+import { copy, paste, redo, undo } from '@/build/tools';
+import { settings } from '@/build/config';
+import { external_url_prompt } from '@/components/shared/markdown';
 
 export function register_menu(element, menu) {
     element.setAttribute('data-has-bleh-menu', true);

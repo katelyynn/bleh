@@ -4,16 +4,16 @@
 // Licensed under GPLv3
 //
 
-import { log } from './log.js';
-import { notify } from '../components/notify.js';
-import { tl, trans } from './trans.js';
-import { settings } from './config.js';
+import { log } from '@/build/log';
+import { notify } from '@/components/dialog/notify.js';
+import { tl, trans } from '@/build/trans';
+import { settings } from '@/build/config';
 import { html } from 'lighterhtml';
-import { root } from './page.js';
 import * as wanakana from 'wanakana';
 import * as hangulRomanization from 'hangul-romanization';
 import { DateTime } from 'luxon';
-import { status } from '../components/status.js';
+import { status } from '@/components/dialog/status.js';
+import { root } from '@/build/page';
 
 // https://stackoverflow.com/questions/46432335/hex-to-hsl-convert-javascript
 /**

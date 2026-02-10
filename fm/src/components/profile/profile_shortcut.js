@@ -5,14 +5,14 @@
 //
 
 import { html } from 'lighterhtml';
-import { settings } from '../build/config';
-import { auth, page, root } from '../build/page';
-import { tl, trans } from '../build/trans';
-import { dialog, dialog_rm } from './dialog';
-import { notify } from './notify';
-import { save_setting, setting } from './settings.js';
+import { settings } from '@/build/config';
+import { auth, page, root } from '@/build/page';
+import { tl, trans } from '@/build/trans';
+import { dialog, dialog_rm } from '@/components/dialog/dialog';
+import { notify } from '@/components/dialog/notify';
+import { save_setting, setting } from '@/components/settings/settings';
 import tippy from 'tippy.js';
-import { set_storage } from '../build/tools.js';
+import { set_storage } from '@/build/tools';
 
 unsafeWindow._open_profile_shortcut_window = function () {
     open_profile_shortcut_window();

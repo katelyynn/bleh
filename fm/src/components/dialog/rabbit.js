@@ -4,21 +4,21 @@
 // Licensed under GPLv3
 //
 
-import { auth, page, root } from '../build/page.js';
-import { dialog, dialog_rm } from './dialog.js';
+import { auth, page, root } from '@/build/page.js';
+import { dialog, dialog_rm } from '@/components/dialog/dialog';
 import { html, render } from 'lighterhtml';
-import { input } from './input.js';
-import { tl, trans } from '../build/trans.js';
-import { save_setting } from './settings.js';
-import { sanitise } from '../build/tools.js';
-import { compare } from './compare.js';
-import { collage } from './collage.js';
-import { settings } from '../build/config.js';
-import { news } from './news.js';
-import { ff } from '../sku.js';
-import { redirect } from './music.js';
-import { open_starred_friend_window } from '../pages/profile/profile.js';
-import { match } from './dynamic_theming.js';
+import { input } from '@/components/settings/input';
+import { tl, trans } from '@/build/trans';
+import { save_setting } from '@/components/settings/settings';
+import { sanitise } from '@/build/tools';
+import { compare } from '@/components/minis/compare';
+import { collage } from '@/components/minis/collage';
+import { settings } from '@/build/config.js';
+import { news } from '@/components/news';
+import { ff } from '@/components/settings/sku';
+import { redirect } from '@/components/music/music';
+import { open_starred_friend_window } from '@/pages/profile/profile';
+import { match } from '@/components/settings/dynamic_theming';
 
 export function register_rabbit() {
     let input_box;

@@ -4,29 +4,29 @@
 // Licensed under GPLv3
 //
 
-import { settings } from '../../build/config.js';
-import { log } from '../../build/log.js';
+import { settings } from '@/build/config.js';
+import { log } from '@/build/log.js';
 import {
     album_track_corrections,
     artist_corrections,
     combined_artists,
     includes
-} from '../../build/music.js';
-import { page, root } from '../../build/page.js';
+} from '@/build/music.js';
+import { page, root } from '@/build/page.js';
 import {
     desanitise,
     return_artist_from_generic,
     romanise,
     sanitise,
     set_storage
-} from '../../build/tools.js';
-import { tl, trans } from '../../build/trans.js';
-import { prepare_corrections_page, render_setting_page } from '../../pages/bleh_settings/bleh_settings.js';
-import { dialog, dialog_rm } from './dialog';
+} from '@/build/tools';
+import { tl, trans } from '@/build/trans';
+import { prepare_corrections_page, render_setting_page } from '@/pages/bleh_settings/bleh_settings.js';
+import { dialog, dialog_rm } from '@/components/dialog/dialog';
 import { html, render } from 'lighterhtml';
-import { redirect } from './music.js';
-import { status } from './status.js';
-import { input } from '../input.js';
+import { redirect } from '@/components/music/music';
+import { status } from '@/components/dialog/status';
+import { input } from '@/components/settings/input';
 
 const flat_patterns = [];
 

@@ -4,9 +4,9 @@
 // Licensed under GPLv3
 //
 
-import {settings} from "./build/config";
-import {log} from "./build/log";
-import {version} from "./main";
+import {settings} from "@/build/config";
+import {log} from "@/build/log";
+import {version} from "@/main";
 
 export function ff(flag) {
     log(`parsing ${flag}`, 'flag', 'log', {

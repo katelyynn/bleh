@@ -4,18 +4,18 @@
 // Licensed under GPLv3
 //
 
-import { patch_avatar } from '../avatar';
-import { settings } from '../build/config';
-import { log } from '../build/log';
-import { artist_corrections } from '../build/music';
-import { page, root } from '../build/page';
-import { clamp_sat, rgb_to_hsl, sanitise } from '../build/tools';
-import { tl, trans } from '../build/trans';
-import { correct_item_by_artist, name_includes } from '../components/lotus';
-import { checkup_page_structure } from '../components/structure';
-import { register_background, update_page } from '../page';
+import { patch_avatar } from '@/components/shared/avatar';
+import { settings } from '@/build/config';
+import { log } from '@/build/log';
+import { artist_corrections } from '@/build/music';
+import { page, root } from '@/build/page';
+import { clamp_sat, rgb_to_hsl, sanitise } from '@/build/tools';
+import { tl, trans } from '@/build/trans';
+import { correct_item_by_artist, name_includes } from '@/components/music/lotus';
+import { checkup_page_structure } from '@/components/page/structure';
+import { register_background, update_page } from '@/page';
 import { html, render } from 'lighterhtml';
-import { redirect } from '../components/music.js';
+import { redirect } from '@/components/music/music';
 
 export function bleh_obsession() {
     let obsession_container = document.querySelector('.obsession-container');

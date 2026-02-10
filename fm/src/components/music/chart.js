@@ -4,14 +4,14 @@
 // Licensed under GPLv3
 //
 
-import {page} from "../../build/page.js";
+import {page} from "@/build/page.js";
 import {
     bleh_glacier_date_graph_generate,
     bleh_glacier_insights,
     bleh_glacier_library_open_index
-} from "../../pages/profile/glacier.js";
+} from "@/pages/profile/glacier.js";
 import {bleh_music_page_charts} from "./music.js";
-import {bleh_profile_chart_render} from "../../pages/profile/profile.js";
+import {bleh_profile_chart_render} from "@/pages/profile/profile.js";
 
 export function chart_reflow() {
     if (!document.body) return;
