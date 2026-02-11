@@ -13309,8 +13309,8 @@
             scaleY
           };
         }
-        var render3 = {
-          render: function render4() {
+        var render4 = {
+          render: function render5() {
             this.initContainer();
             this.initCanvas();
             this.initCropBox();
@@ -15242,7 +15242,7 @@
           }]);
           return Cropper3;
         }();
-        assign(Cropper2.prototype, render3, preview, events, handlers, change, methods);
+        assign(Cropper2.prototype, render4, preview, events, handlers, change, methods);
         return Cropper2;
       });
     }
@@ -20297,7 +20297,7 @@
     }
   ];
 
-  // src/components/dialog/notify.js
+  // src/components/dialog/notify.ts
   function load_notifications() {
     if (!page.structure.notifications) {
       let notification_host = html.node`
@@ -20351,20 +20351,8 @@
     });
     if (progress && persist) persist = false;
     let information;
-    let notif = html.node`
-        <div
-            class=${[
-      "bleh-notification",
-      icon ? "with-icon" : "",
-      classname ? classname : "",
-      long ? "long" : "",
-      colourful ? "colourful" : ""
-    ].join(" ")}
-            data-type=${type}
-            style=${[
-      icon ? `--mask: var(--${icon})` : ""
-    ].join(";")}
-        >
+    const notif = html.node`
+        <div class="bleh-notification" data-type=${type} style="--mask: var(--${icon})">
             <div class="notification-information" ref=${(el) => information = el}>
                 <div class="notification-title">${title}</div>
                 ${body ? html.node`
@@ -20387,6 +20375,10 @@
             </div>
         </div>
     `;
+    if (icon) notif.classList.add("with-icon");
+    if (classname) notif.classList.add(classname);
+    if (long) notif.classList.add("long");
+    if (colourful) notif.classList.add("colourful");
     page.structure.notifications.appendChild(notif);
     notif.remove = () => {
       notify_rm(notif);
@@ -28643,10 +28635,11 @@
     badges: {}
   };
 
-  // src/components/dialog/dialog.js
+  // src/components/dialog/dialog.ts
   function load_dialogs() {
-    let dialogs2 = document.createElement("div");
-    dialogs2.classList.add("bleh-modals");
+    const dialogs2 = html.node`
+        <div class="bleh-modals" />
+    `;
     document.body.appendChild(dialogs2);
     page.structure.dialogs = dialogs2;
   }
@@ -28712,14 +28705,16 @@
         `);
     }
     if (dismiss) {
-      let modal_close = document.createElement("button");
-      modal_close.classList.add("modal-close-button");
-      modal_close.setAttribute("onclick", `_dialog_rm({id: "${id}"})`);
-      modal.appendChild(modal_close);
-      page.structure.dialogs.setAttribute(
-        "onclick",
-        "_dialog_rm({all: true, modal_bg: true})"
-      );
+      modal.appendChild(html.node`
+            <button class="modal-close-button" onclick=${() => {
+        dialog_rm({ id });
+      }}>
+                ${tl2(trans.close)}
+            </button>
+        `);
+      page.structure.dialogs.onclick = () => {
+        dialog_rm({ all: true, modal_bg: true });
+      };
     } else {
       page.structure.dialogs.removeAttribute("onclick");
     }
@@ -28730,11 +28725,11 @@
         }
       });
     }
-    let modal_body = document.createElement("div");
-    modal_body.classList.add("bleh-modal-body");
-    modal_body.setAttribute("data-allow-scroll", allow_scroll);
-    modal_body.appendChild(body);
-    modal.appendChild(modal_body);
+    modal.appendChild(html.node`
+        <div class="bleh-modal-body" data-allow-scroll=${allow_scroll}>
+            ${body}
+        </div>
+    `);
     dialogs[id] = {
       instance: modal
     };
@@ -28747,25 +28742,16 @@
     page.structure.dialogs.classList.add("has-dialog");
     return modal;
   }
-  unsafeWindow._dialog_rm = function({
-    id = null,
+  function dialog_rm({
+    id = "",
     all = false,
     modal_bg = false
   }) {
-    dialog_rm({
-      id,
-      all,
-      modal_bg
-    });
-  };
-  function dialog_rm({ id, all = false, modal_bg = false }) {
     if (all) {
       if (modal_bg) {
-        console.log(event);
         if (event.target.classList[0] != "bleh-modals") return;
       }
-      log("requested kill all", "window");
-      console.info(dialogs);
+      log("requested kill all", "window", "info", { dialogs });
       for (let dialog3 in dialogs) {
         dialog_rm({
           id: dialog3
@@ -46765,8 +46751,9 @@
     extensions.push(mentions(), timestamp());
     let profile_cache;
     const will_cache = cache2 === true;
-    log(`prepare new cache is ${will_cache}`, "markdown", "log", { cache: cache2 });
-    if ((allow_banners || allow_hue) && will_cache) {
+    const available = allow_banners || allow_hue;
+    log(`prepare new cache is ${will_cache}, caching features available is ${available}`, "markdown", "log", { cache: cache2 });
+    if (available && will_cache) {
       profile_cache = JSON.parse(localStorage.getItem("bleh_profile_cache")) || {};
       cache2 = profile_cache[name] || {};
     }
@@ -52046,7 +52033,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
             <br>
             <textarea class="modal-text" ref=${(el) => text4 = el} />
             <div class="modal-footer">
-                <button class="see-more cancel" onclick="_dialog_rm({id: 'import_settings'})">
+                <button class="see-more cancel" onclick=${() => {
+        dialog_rm({ id: "import_settings" });
+      }}>
                     ${tl2(trans.cancel)}
                 </button>
                 <div class="fill"></div>

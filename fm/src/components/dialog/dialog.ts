@@ -7,33 +7,35 @@
 import { html, render } from 'lighterhtml';
 import { log } from '@/build/log';
 import { dialogs, page } from '@/build/page';
+import { tl, trans } from '@/build/trans';
 
 export function load_dialogs() {
-    let dialogs = document.createElement('div');
-    dialogs.classList.add('bleh-modals');
+    const dialogs = html.node`
+        <div class="bleh-modals" />
+    `;
 
     document.body.appendChild(dialogs);
-
     page.structure.dialogs = dialogs;
 }
 
-/**
- * Present a fullscreen dialog to the user
- * @param {string} id - Exclusive id for future reference
- * @param {string} title - Dialog title
- * @param {string} subtitle - Dialog subtitle (placed below main title)
- * @param {HTMLElement} body - Inner contents of dialog, use html.node`` to create
- * @param {boolean} dismiss - Allows the user to dismiss with the close button or by clicking out
- * @param {string} type - Applies a data-modal-type=${type} tag to the dialog instance
- * @param has_overlays
- * @param {boolean} replace - Replaces a specific dialog id
- * @param {boolean} replace_if_possible - Automatically replaces the dialog prior if it exists
- * @param {string} replace_id - Dialog id to replace (requires replace=true)
- * @param {boolean} allow_scroll - Automatically style this dialog to scroll if necessary
- * @param {boolean} colourful - Allow custom colouring (links only)
- * @param {boolean} colourful_bg - Allow custom colouring (background only)
- * @returns {HTMLElement} - Dialog instance
- */
+type dialog = {
+    id: string,
+    title: string,
+    subtitle?: string,
+    body: HTMLElement,
+    dismiss?: boolean,
+    type?: string,
+    has_overlays?: boolean,
+    replace?: boolean,
+    replace_if_possible?: boolean,
+    replace_id?: string,
+    allow_scroll?: boolean,
+    colourful?: boolean,
+    colourful_bg?: boolean,
+    handle_escape_manually?: boolean
+}
+
+// Present a fullscreen dialog to the user
 export function dialog({
     id = '',
     title,
@@ -49,7 +51,7 @@ export function dialog({
     colourful = false,
     colourful_bg = false,
     handle_escape_manually = false
-}) {
+}: dialog): HTMLElement {
     log(`creating ${id}`, 'window', 'info', {
         id: id,
         title: title,
@@ -102,17 +104,18 @@ export function dialog({
     }
 
     if (dismiss) {
-        let modal_close = document.createElement('button');
-        modal_close.classList.add('modal-close-button');
-        modal_close.setAttribute('onclick', `_dialog_rm({id: "${id}"})`);
-
-        modal.appendChild(modal_close);
+        modal.appendChild(html.node`
+            <button class="modal-close-button" onclick=${() => {
+                dialog_rm({ id });
+            }}>
+                ${tl(trans.close)}
+            </button>
+        `);
 
         // allow clicking out of the modal to close
-        page.structure.dialogs.setAttribute(
-            'onclick',
-            '_dialog_rm({all: true, modal_bg: true})'
-        );
+        page.structure.dialogs.onclick = () => {
+            dialog_rm({ all: true, modal_bg: true });
+        }
     } else {
         page.structure.dialogs.removeAttribute('onclick');
     }
@@ -125,13 +128,11 @@ export function dialog({
         });
     }
 
-    let modal_body = document.createElement('div');
-    modal_body.classList.add('bleh-modal-body');
-    modal_body.setAttribute('data-allow-scroll', allow_scroll);
-
-    modal_body.appendChild(body);
-
-    modal.appendChild(modal_body);
+    modal.appendChild(html.node`
+        <div class="bleh-modal-body" data-allow-scroll=${allow_scroll}>
+            ${body}
+        </div>
+    `);
 
     dialogs[id] = {
         instance: modal
@@ -149,27 +150,21 @@ export function dialog({
 
     return modal;
 }
-unsafeWindow._dialog_rm = function ({
-    id = null,
+
+export function dialog_rm({
+    id = '',
     all = false,
     modal_bg = false
 }) {
-    dialog_rm({
-        id: id,
-        all: all,
-        modal_bg: modal_bg
-    });
-};
-export function dialog_rm({ id, all = false, modal_bg = false }) {
     if (all) {
         // prevents clicks inside modal being broken
         if (modal_bg) {
-            console.log(event);
+            // @ts-ignore
             if (event.target.classList[0] != 'bleh-modals') return;
         }
 
-        log('requested kill all', 'window');
-        console.info(dialogs);
+        log('requested kill all', 'window', 'info', { dialogs });
+
         for (let dialog in dialogs) {
             dialog_rm({
                 id: dialog

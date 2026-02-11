@@ -24,7 +24,7 @@ export function load_notifications() {
  * @deprecated Automatically redirects to notify
  * @see notify
  */
-export function deliver_notif(content, persist=false, has_icon=false, append_class=null, action='') {
+export function deliver_notif(content: string, persist=false, has_icon=false, append_class=null, action='') {
     // redirect
     return notify({
         id: 'legacy_notification',
@@ -34,17 +34,27 @@ export function deliver_notif(content, persist=false, has_icon=false, append_cla
     });
 }
 
-/**
- * Delivers a top-right flyout notification
- * @param {string|null} id - Unique identifier
- * @param {string|null} title - Bold header
- * @param {string|null} body - Main content
- * @param {string|null} icon - Accompanying icon name e.g., icon-16-x
- * @param {string|null} classname - Unique classname for styling
- * @param {boolean} persist - Automatically dismiss or wait on action?
- * @param {'generic'|'error'|'success'} type - Generic type preset
- * @returns Notification element
- */
+type notify = {
+    id: string,
+    title: string,
+    body?: string | HTMLElement,
+    icon?: string,
+    classname?: string,
+    actions?: notify_action[],
+    persist?: boolean,
+    type?: string,
+    long?: boolean,
+    colourful?: boolean,
+    progress?: boolean
+}
+
+type notify_action = {
+    type: string,
+    action: Function,
+    text: string
+}
+
+// Delivers a top-right flyout notification
 export function notify({
     id,
     title,
@@ -57,7 +67,7 @@ export function notify({
     long = false,
     colourful = false,
     progress = false
-}) {
+}: notify) {
     log(`creating ${title}`, 'notification', 'info', {
         id: id,
         title: title,
@@ -96,27 +106,15 @@ export function notify({
 
     let information;
 
-    let notif = html.node`
-        <div
-            class=${[
-                'bleh-notification',
-                icon ? 'with-icon' : '',
-                classname ? classname : '',
-                long ? 'long' : '',
-                colourful ? 'colourful' : ''
-                ].join(' ')}
-            data-type=${type}
-            style=${[
-                icon ? `--mask: var(--${icon})` : '',
-                ].join(';')}
-        >
+    const notif = html.node`
+        <div class="bleh-notification" data-type=${type} style="--mask: var(--${icon})">
             <div class="notification-information" ref=${el => information = el}>
                 <div class="notification-title">${title}</div>
-                ${(body) ? html.node`
+                ${body ? html.node`
                 <div class="notification-body">${body}</div>
                 ` : ''}
             </div>
-            ${(!persist) ? html.node`
+            ${!persist ? html.node`
             <div class="notification-progress"><div class="fill" ref=${el => bar = el} /></div>
             ` : ''}
             <div class="notification-actions">
@@ -134,16 +132,24 @@ export function notify({
             </div>
         </div>
     `;
+
+    if (icon) notif.classList.add('with-icon');
+    if (classname) notif.classList.add(classname);
+    if (long) notif.classList.add('long');
+    if (colourful) notif.classList.add('colourful');
+
     page.structure.notifications.appendChild(notif);
 
     notif.remove = () => {
         notify_rm(notif);
     }
 
+    // @ts-ignore
     notif.set = (value) => {
         bar.style.setProperty('width', `${value}%`);
     }
 
+    // @ts-ignore
     notif.set_body = (body) => {
         render(information, html`
             <div class="notification-title">${title}</div>
@@ -176,8 +182,9 @@ export function notify({
     return notif;
 }
 
-export function notify_rm(notif) {
+export function notify_rm(notif: HTMLElement) {
     notif.classList.add('fade-out');
+
     setTimeout(function() {
         page.structure.notifications.removeChild(notif);
     }, 400);

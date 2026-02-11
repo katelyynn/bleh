@@ -9,7 +9,7 @@ import { auth, page } from '@/build/page.js';
 import { log } from '@/build/log.js';
 import { checkup_page_structure } from '@/components/page/structure.js';
 import { html, render } from 'lighterhtml';
-import { notify } from '@/components/dialog/notify.js';
+import { notify } from '@/components/dialog/notify';
 import { download_with_progress } from '@/build/tools';
 import { status } from '@/components/dialog/status.js';
 import { dialog } from '@/components/dialog/dialog';

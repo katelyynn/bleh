@@ -29,7 +29,7 @@ import { markdown_options } from '@/types/markdown';
 import { profile_cache_list } from '@/types/profile';
 
 export function markdown(
-    text,
+    text: string,
     {
         allow_headers = false,
         starting_header = 3,
@@ -96,13 +96,13 @@ export function markdown(
         ALLOWED_TAGS.push('hr');
     }
 
-    let hue;
-    let sat;
-    let lit;
+    let hue: number | undefined;
+    let sat: number | undefined;
+    let lit: number | undefined;
 
     let links = [];
 
-    let status_cafe_user;
+    let status_cafe_user: string | undefined;
 
     const banner = () => [
         {
@@ -357,9 +357,10 @@ export function markdown(
     let profile_cache: profile_cache_list;
 
     const will_cache = cache === true;
-    log(`prepare new cache is ${will_cache}`, 'markdown', 'log', { cache });
+    const available = allow_banners || allow_hue;
+    log(`prepare new cache is ${will_cache}, caching features available is ${available}`, 'markdown', 'log', { cache });
 
-    if ((allow_banners || allow_hue) && will_cache) {
+    if (available && will_cache) {
         profile_cache =
             JSON.parse(localStorage.getItem('bleh_profile_cache')) || {};
         cache = profile_cache[name] || {};

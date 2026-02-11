@@ -960,6 +960,8 @@
         --solarium-dark: var(--card-blur) var(--dark) url(#solarium);
         --card-blur: blur(6px) saturate(var(--blur-saturate)) brightness(var(--blur-brightness)) contrast(1);
 
+        --solarium-percent: 1;
+
         @supports (-moz-appearance: none) {
             --solarium: var(--card-blur);
             --solarium-bright: var(--card-blur) var(--bright);
@@ -984,6 +986,8 @@
             --solarium-dark: none !important;
             --solarium-opacity: 1;
             --solarium-display: none;
+
+            --solarium-percent: 0;
         }
 
         &[data-bleh--theme="light"],
@@ -11655,7 +11659,7 @@
         }
 
         &.to-remove {
-            filter: blur(3px);
+            filter: blur(calc(var(--solarium-percent) * 3px));
             transform: scale(0.98);
             opacity: 0;
         }
@@ -11725,6 +11729,7 @@
             --shadow: none;
             --col: hsl(var(--c3));
             --mask-colour: currentColor;
+            --font-size: 0;
             position: absolute;
             top: calc(var(--card-padding) - ((var(--modal-close-size) - 20px) / 2));
             right: calc(var(--card-padding) - ((var(--modal-close-size) - 20px) / 2));
@@ -13802,7 +13807,7 @@
 
     @keyframes solarium {
         from {
-            filter: blur(3px);
+            filter: blur(calc(var(--solarium-percent) * 3px));
             transform: scale(0.98);
         }
         to {
@@ -13813,7 +13818,7 @@
 
     @keyframes solarium_menu {
         from {
-            filter: blur(3px);
+            filter: blur(calc(var(--solarium-percent) * 3px));
             transform-origin: top;
             transform: scaleY(0.95);
         }

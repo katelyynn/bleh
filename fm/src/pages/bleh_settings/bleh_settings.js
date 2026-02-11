@@ -1968,7 +1968,9 @@ function import_settings() {
             <br>
             <textarea class="modal-text" ref=${(el) => (text = el)} />
             <div class="modal-footer">
-                <button class="see-more cancel" onclick="_dialog_rm({id: 'import_settings'})">
+                <button class="see-more cancel" onclick=${() => {
+                    dialog_rm({ id: 'import_settings' });
+                }}>
                     ${tl(trans.cancel)}
                 </button>
                 <div class="fill"></div>

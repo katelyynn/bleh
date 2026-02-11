@@ -5,7 +5,7 @@
 //
 
 import { log } from '@/build/log';
-import { notify } from '@/components/dialog/notify.js';
+import { notify } from '@/components/dialog/notify';
 import { tl, trans } from '@/build/trans';
 import { settings } from '@/build/config';
 import { html } from 'lighterhtml';
