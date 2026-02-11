@@ -13475,6 +13475,8 @@
 
             font-size: var(--font-size);
 
+            animation: var(--motion, solarium_menu 0.22s var(--trans-function));
+
             background-image:
                 var(--cards-overlay-image-subtle, unset),
                 var(--cards-overlay-mini) !important;
@@ -13805,6 +13807,19 @@
         }
         to {
             filter: blur(0);
+            transform: scale(1);
+        }
+    }
+
+    @keyframes solarium_menu {
+        from {
+            filter: blur(3px);
+            transform-origin: top;
+            transform: scaleY(0.95);
+        }
+        to {
+            filter: blur(0);
+            transform-origin: top;
             transform: scale(1);
         }
     }

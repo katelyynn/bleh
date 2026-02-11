@@ -65,11 +65,14 @@ export function page_menu() {
 
         e.preventDefault();
 
-        const elem = e.target;
+        const elem: any = e.target;
+
         const value = elem.value?.trim();
         const is_image = elem.tagName == 'IMG';
         const link = elem.href;
         const unsafe_link = elem.getAttribute('data-unsafe-href');
+
+        const src = elem.src;
 
         const text = elem.textContent?.trim();
         const valid_for_text = ['TEXTAREA', 'INPUT'].includes(elem.tagName);
@@ -88,7 +91,7 @@ export function page_menu() {
             ${is_image ? html.node`
                 ${unsafe_link ? html.node`
                     <div class="button-combo">
-                        <a class="dropdown-menu-clickable-item" data-type="image" href=${elem.src} target="_blank">
+                        <a class="dropdown-menu-clickable-item" data-type="image" href=${src} target="_blank">
                             ${tl(trans.view_image)}
                         </a>
                         <div class="button-combo-sep" />
@@ -149,12 +152,12 @@ export function page_menu() {
                         }}
                     </div>
                 ` : html.node`
-                    <a class="dropdown-menu-clickable-item" data-type="image" href=${elem.src} target="_blank">
+                    <a class="dropdown-menu-clickable-item" data-type="image" href=${src} target="_blank">
                         ${tl(trans.view_image)}
                     </a>
                 `}
                 <a class="dropdown-menu-clickable-item" data-type="link" onclick=${() => {
-                    copy(unsafe_link ? unsafe_link : elem.src);
+                    copy(unsafe_link ? unsafe_link : src);
                 }}>
                     ${tl(trans.copy_link)}
                 </a>
@@ -207,6 +210,7 @@ export function page_menu() {
             return;
 
         menu.setProps({
+            // @ts-ignore
             getReferenceClientRect: () => ({
                 width: 0,
                 height: 0,
@@ -232,13 +236,13 @@ function show_menu(e) {
     return true;
 }
 
-export function generic_link_menu(link, copy_link = link) {
+export function generic_link_menu(link: string, copy_link: string = link) {
     return html.node`
         <a class="dropdown-menu-clickable-item" data-type="web" href=${link} target="_blank">
             ${tl(trans.open_link)}
         </a>
         <a class="dropdown-menu-clickable-item" data-type="link" onclick=${() => {
-            copy(link);
+            copy(copy_link);
         }}>
             ${tl(trans.copy_link)}
         </a>

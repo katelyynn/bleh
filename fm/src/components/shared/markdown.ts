@@ -25,6 +25,8 @@ import tippy from 'tippy.js';
 import { DateTime } from 'luxon';
 import { input } from '@/components/settings/input';
 import { queue_popup } from '@/components/dialog/popup';
+import { markdown_options } from '@/types/markdown';
+import { profile_cache_list } from '@/types/profile';
 
 export function markdown(
     text,
@@ -44,7 +46,7 @@ export function markdown(
         allow_lists = false,
         allow_alignment = false,
         name = page.name
-    } = {}
+    }: markdown_options = {}
 ) {
     log('rendering', 'markdown', 'log', { text });
 
@@ -352,7 +354,7 @@ export function markdown(
     if (!allow_headers) extensions.push(header_minify());
     extensions.push(mentions(), timestamp());
 
-    let profile_cache;
+    let profile_cache: profile_cache_list;
 
     const will_cache = cache === true;
     log(`prepare new cache is ${will_cache}`, 'markdown', 'log', { cache });
@@ -382,28 +384,28 @@ export function markdown(
     const markdown = text
         .replace(
             /\[artist\]([^[\]]+)\[\/artist\]/g,
-            (match, artist) =>
+            (match, artist: string) =>
                 `[${artist}](${root}music/${redirect()}${encodeURIComponent(artist)})`
         )
         .replace(
             /\[album artist=([^[\]]+)\]([^[\]]+)\[\/album\]/g,
-            (match, artist, album) =>
+            (match, artist: string, album: string) =>
                 `[${album}](${root}music/` +
                 `${encodeURIComponent(artist)}/${encodeURIComponent(album)})`
         )
         .replace(
             /\[track artist=([^[\]]+)\]([^[\]]+)\[\/track\]/g,
-            (match, artist, track) =>
+            (match, artist: string, track: string) =>
                 `[${track}](${root}music/` +
                 `${encodeURIComponent(artist)}/_/${encodeURIComponent(track)})`
         )
         .replace(
             /\[url=([^[\]]+)\]([^[\]]+)\[\/url\]/g,
-            (match, url, text) => `[${text}](${encodeURI(url)})`
+            (match, url: string, text: string) => `[${text}](${encodeURI(url)})`
         )
         .replace(
             /\[url\]([^[\]]+)\[\/url\]/g,
-            (match, url) => `[${url}](${encodeURI(url)})`
+            (match, url: string) => `[${url}](${encodeURI(url)})`
         );
 
     const raw_html = converter.makeHtml(markdown);

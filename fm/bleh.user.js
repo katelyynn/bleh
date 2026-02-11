@@ -29102,7 +29102,7 @@
     return elem;
   }
 
-  // src/components/menu.js
+  // src/components/menu.ts
   function register_menu(element, menu) {
     element.setAttribute("data-has-bleh-menu", true);
     element.addEventListener(
@@ -29151,6 +29151,7 @@
       const is_image = elem.tagName == "IMG";
       const link = elem.href;
       const unsafe_link = elem.getAttribute("data-unsafe-href");
+      const src = elem.src;
       const text4 = elem.textContent?.trim();
       const valid_for_text = ["TEXTAREA", "INPUT"].includes(elem.tagName);
       const alt = elem.getAttribute("alt")?.trim();
@@ -29171,7 +29172,7 @@
             ${is_image ? html.node`
                 ${unsafe_link ? html.node`
                     <div class="button-combo">
-                        <a class="dropdown-menu-clickable-item" data-type="image" href=${elem.src} target="_blank">
+                        <a class="dropdown-menu-clickable-item" data-type="image" href=${src} target="_blank">
                             ${tl2(trans.view_image)}
                         </a>
                         <div class="button-combo-sep" />
@@ -29226,12 +29227,12 @@
       }}
                     </div>
                 ` : html.node`
-                    <a class="dropdown-menu-clickable-item" data-type="image" href=${elem.src} target="_blank">
+                    <a class="dropdown-menu-clickable-item" data-type="image" href=${src} target="_blank">
                         ${tl2(trans.view_image)}
                     </a>
                 `}
                 <a class="dropdown-menu-clickable-item" data-type="link" onclick=${() => {
-        copy(unsafe_link ? unsafe_link : elem.src);
+        copy(unsafe_link ? unsafe_link : src);
       }}>
                     ${tl2(trans.copy_link)}
                 </a>
@@ -29280,6 +29281,7 @@
       ))
         return;
       menu.setProps({
+        // @ts-ignore
         getReferenceClientRect: () => ({
           width: 0,
           height: 0,
@@ -29305,7 +29307,7 @@
             ${tl2(trans.open_link)}
         </a>
         <a class="dropdown-menu-clickable-item" data-type="link" onclick=${() => {
-      copy(link);
+      copy(copy_link);
     }}>
             ${tl2(trans.copy_link)}
         </a>
@@ -45426,7 +45428,7 @@
     `);
   }
 
-  // src/components/shared/markdown.js
+  // src/components/shared/markdown.ts
   var import_showdown = __toESM(require_showdown(), 1);
 
   // node_modules/dompurify/dist/purify.es.mjs
@@ -46495,7 +46497,7 @@
     });
   }
 
-  // src/components/shared/markdown.js
+  // src/components/shared/markdown.ts
   function markdown(text4, {
     allow_headers = false,
     starting_header = 3,
