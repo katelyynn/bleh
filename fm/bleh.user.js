@@ -11399,8 +11399,8 @@
         showdown2.subParser("hashCodeTags", function(text4, options, globals) {
           "use strict";
           text4 = globals.converter._dispatch("hashCodeTags.before", text4, options, globals);
-          var repFunc = function(wholeMatch, match4, left2, right2) {
-            var codeblock = left2 + showdown2.subParser("encodeCode")(match4, options, globals) + right2;
+          var repFunc = function(wholeMatch, match3, left2, right2) {
+            var codeblock = left2 + showdown2.subParser("encodeCode")(match3, options, globals) + right2;
             return "\xA8C" + (globals.gHtmlSpans.push(codeblock) - 1) + "C";
           };
           text4 = showdown2.helper.replaceRecursiveRegExp(text4, repFunc, "<code\\b[^>]*>", "</code>", "gim");
@@ -11456,10 +11456,10 @@
             "output",
             "video",
             "p"
-          ], repFunc = function(wholeMatch, match4, left2, right2) {
+          ], repFunc = function(wholeMatch, match3, left2, right2) {
             var txt = wholeMatch;
             if (left2.search(/\bmarkdown\b/) !== -1) {
-              txt = left2 + globals.converter.makeHtml(match4) + right2;
+              txt = left2 + globals.converter.makeHtml(match3) + right2;
             }
             return "\n\n\xA8K" + (globals.gHtmlBlocks.push(txt) - 1) + "K\n\n";
           };
@@ -11535,8 +11535,8 @@
         showdown2.subParser("hashPreCodeTags", function(text4, options, globals) {
           "use strict";
           text4 = globals.converter._dispatch("hashPreCodeTags.before", text4, options, globals);
-          var repFunc = function(wholeMatch, match4, left2, right2) {
-            var codeblock = left2 + showdown2.subParser("encodeCode")(match4, options, globals) + right2;
+          var repFunc = function(wholeMatch, match3, left2, right2) {
+            var codeblock = left2 + showdown2.subParser("encodeCode")(match3, options, globals) + right2;
             return "\n\n\xA8G" + (globals.ghCodeBlocks.push({ text: wholeMatch, codeblock }) - 1) + "G\n\n";
           };
           text4 = showdown2.helper.replaceRecursiveRegExp(text4, repFunc, "^ {0,3}<pre\\b[^>]*>\\s*<code\\b[^>]*>", "^ {0,3}</code>\\s*</pre>", "gim");
@@ -11567,9 +11567,9 @@
           function headerId(m) {
             var title, prefix;
             if (options.customizedHeaderId) {
-              var match4 = m.match(/\{([^{]+?)}\s*$/);
-              if (match4 && match4[1]) {
-                m = match4[1];
+              var match3 = m.match(/\{([^{]+?)}\s*$/);
+              if (match3 && match3[1]) {
+                m = match3[1];
               }
             }
             title = m;
@@ -23483,11 +23483,11 @@
     return [null, null];
   }
   function simpleParse(...keys2) {
-    return (match4, cursor) => {
+    return (match3, cursor) => {
       const ret = {};
       let i;
       for (i = 0; i < keys2.length; i++) {
-        ret[keys2[i]] = parseInteger(match4[cursor + i]);
+        ret[keys2[i]] = parseInteger(match3[cursor + i]);
       }
       return [ret, null, cursor + i];
     };
@@ -23507,39 +23507,39 @@
     `${isoTimeBaseRegex.source} ?(?:${offsetRegex.source}|(${ianaRegex.source}))?`
   );
   var sqlTimeExtensionRegex = RegExp(`(?: ${sqlTimeRegex.source})?`);
-  function int(match4, pos, fallback) {
-    const m = match4[pos];
+  function int(match3, pos, fallback) {
+    const m = match3[pos];
     return isUndefined(m) ? fallback : parseInteger(m);
   }
-  function extractISOYmd(match4, cursor) {
+  function extractISOYmd(match3, cursor) {
     const item = {
-      year: int(match4, cursor),
-      month: int(match4, cursor + 1, 1),
-      day: int(match4, cursor + 2, 1)
+      year: int(match3, cursor),
+      month: int(match3, cursor + 1, 1),
+      day: int(match3, cursor + 2, 1)
     };
     return [item, null, cursor + 3];
   }
-  function extractISOTime(match4, cursor) {
+  function extractISOTime(match3, cursor) {
     const item = {
-      hours: int(match4, cursor, 0),
-      minutes: int(match4, cursor + 1, 0),
-      seconds: int(match4, cursor + 2, 0),
-      milliseconds: parseMillis(match4[cursor + 3])
+      hours: int(match3, cursor, 0),
+      minutes: int(match3, cursor + 1, 0),
+      seconds: int(match3, cursor + 2, 0),
+      milliseconds: parseMillis(match3[cursor + 3])
     };
     return [item, null, cursor + 4];
   }
-  function extractISOOffset(match4, cursor) {
-    const local = !match4[cursor] && !match4[cursor + 1], fullOffset = signedOffset(match4[cursor + 1], match4[cursor + 2]), zone = local ? null : FixedOffsetZone.instance(fullOffset);
+  function extractISOOffset(match3, cursor) {
+    const local = !match3[cursor] && !match3[cursor + 1], fullOffset = signedOffset(match3[cursor + 1], match3[cursor + 2]), zone = local ? null : FixedOffsetZone.instance(fullOffset);
     return [{}, zone, cursor + 3];
   }
-  function extractIANAZone(match4, cursor) {
-    const zone = match4[cursor] ? IANAZone.create(match4[cursor]) : null;
+  function extractIANAZone(match3, cursor) {
+    const zone = match3[cursor] ? IANAZone.create(match3[cursor]) : null;
     return [{}, zone, cursor + 1];
   }
   var isoTimeOnly = RegExp(`^T?${isoTimeBaseRegex.source}$`);
   var isoDuration = /^-?P(?:(?:(-?\d{1,20}(?:\.\d{1,20})?)Y)?(?:(-?\d{1,20}(?:\.\d{1,20})?)M)?(?:(-?\d{1,20}(?:\.\d{1,20})?)W)?(?:(-?\d{1,20}(?:\.\d{1,20})?)D)?(?:T(?:(-?\d{1,20}(?:\.\d{1,20})?)H)?(?:(-?\d{1,20}(?:\.\d{1,20})?)M)?(?:(-?\d{1,20})(?:[.,](-?\d{1,20}))?S)?)?)$/;
-  function extractISODuration(match4) {
-    const [s2, yearStr, monthStr, weekStr, dayStr, hourStr, minuteStr, secondStr, millisecondsStr] = match4;
+  function extractISODuration(match3) {
+    const [s2, yearStr, monthStr, weekStr, dayStr, hourStr, minuteStr, secondStr, millisecondsStr] = match3;
     const hasNegativePrefix = s2[0] === "-";
     const negativeSeconds = secondStr && secondStr[0] === "-";
     const maybeNegate = (num, force = false) => num !== void 0 && (force || num && hasNegativePrefix) ? -num : num;
@@ -23582,7 +23582,7 @@
     return result;
   }
   var rfc2822 = /^(?:(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s)?(\d{1,2})\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s(\d{2,4})\s(\d\d):(\d\d)(?::(\d\d))?\s(?:(UT|GMT|[ECMP][SD]T)|([Zz])|(?:([+-]\d\d)(\d\d)))$/;
-  function extractRFC2822(match4) {
+  function extractRFC2822(match3) {
     const [
       ,
       weekdayStr,
@@ -23596,7 +23596,7 @@
       milOffset,
       offHourStr,
       offMinuteStr
-    ] = match4, result = fromStrings(weekdayStr, yearStr, monthStr, dayStr, hourStr, minuteStr, secondStr);
+    ] = match3, result = fromStrings(weekdayStr, yearStr, monthStr, dayStr, hourStr, minuteStr, secondStr);
     let offset3;
     if (obsOffset) {
       offset3 = obsOffsets[obsOffset];
@@ -23613,12 +23613,12 @@
   var rfc1123 = /^(Mon|Tue|Wed|Thu|Fri|Sat|Sun), (\d\d) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) (\d{4}) (\d\d):(\d\d):(\d\d) GMT$/;
   var rfc850 = /^(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday), (\d\d)-(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)-(\d\d) (\d\d):(\d\d):(\d\d) GMT$/;
   var ascii = /^(Mon|Tue|Wed|Thu|Fri|Sat|Sun) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) ( \d|\d\d) (\d\d):(\d\d):(\d\d) (\d{4})$/;
-  function extractRFC1123Or850(match4) {
-    const [, weekdayStr, dayStr, monthStr, yearStr, hourStr, minuteStr, secondStr] = match4, result = fromStrings(weekdayStr, yearStr, monthStr, dayStr, hourStr, minuteStr, secondStr);
+  function extractRFC1123Or850(match3) {
+    const [, weekdayStr, dayStr, monthStr, yearStr, hourStr, minuteStr, secondStr] = match3, result = fromStrings(weekdayStr, yearStr, monthStr, dayStr, hourStr, minuteStr, secondStr);
     return [result, FixedOffsetZone.utcInstance];
   }
-  function extractASCII(match4) {
-    const [, weekdayStr, monthStr, dayStr, hourStr, minuteStr, secondStr, yearStr] = match4, result = fromStrings(weekdayStr, yearStr, monthStr, dayStr, hourStr, minuteStr, secondStr);
+  function extractASCII(match3) {
+    const [, weekdayStr, monthStr, dayStr, hourStr, minuteStr, secondStr, yearStr] = match3, result = fromStrings(weekdayStr, yearStr, monthStr, dayStr, hourStr, minuteStr, secondStr);
     return [result, FixedOffsetZone.utcInstance];
   }
   var isoYmdWithTimeExtensionRegex = combineRegexes(isoYmdRegex, isoTimeExtensionRegex);
@@ -25544,7 +25544,7 @@
     const re = units.map((u) => u.regex).reduce((f, r) => `${f}(${r.source})`, "");
     return [`^${re}$`, units];
   }
-  function match2(input2, regex, handlers) {
+  function match(input2, regex, handlers) {
     const matches = input2.match(regex);
     if (matches) {
       const all = {};
@@ -25671,7 +25671,7 @@
       if (!this.isValid) {
         return { input: input2, tokens: this.tokens, invalidReason: this.invalidReason };
       } else {
-        const [rawMatches, matches] = match2(input2, this.regex, this.handlers), [result, zone, specificOffset] = matches ? dateTimeFromMatches(matches) : [null, null, void 0];
+        const [rawMatches, matches] = match(input2, this.regex, this.handlers), [result, zone, specificOffset] = matches ? dateTimeFromMatches(matches) : [null, null, void 0];
         if (hasOwnProperty2(matches, "a") && hasOwnProperty2(matches, "H")) {
           throw new ConflictingSpecificationError(
             "Can't include meridiem when specifying 24-hour format"
@@ -28137,8 +28137,8 @@
     return date.toFormat("HH:mm:ss Z");
   }
   function int_from_string(string) {
-    const match4 = string.match(/[\d.,\s\u00A0\u202F]+/);
-    if (match4) return clean_number(match4[0]);
+    const match3 = string.match(/[\d.,\s\u00A0\u202F]+/);
+    if (match3) return clean_number(match3[0]);
     return string;
   }
   function set_storage(key, val) {
@@ -28158,8 +28158,8 @@
     }
   }
   function year_from_date(string) {
-    const match4 = string.match(/\b(\d{4})\b/);
-    return match4 ? match4[1] : 0;
+    const match3 = string.match(/\b(\d{4})\b/);
+    return match3 ? match3[1] : 0;
   }
 
   // src/build/music.js
@@ -37423,10 +37423,10 @@
   function dynamic_theming() {
     const media = window.matchMedia("(prefers-color-scheme: dark)");
     page.state.media = media;
-    match3(media);
-    media.addEventListener("change", match3);
+    match2(media);
+    media.addEventListener("change", match2);
   }
-  function match3(media = page.state.media) {
+  function match2(media = page.state.media) {
     if (!settings.theme_schedule) return;
     if (media.matches) apply_theme("night");
     else apply_theme("day");
@@ -37746,14 +37746,14 @@
         feed.forEach((item) => {
           let extended = `${item.text} ${item.body} ${item.keywords.join(" ")} ${item.keybind ? item.keybind.join(" ").replace("\u2318", "Ctrl").replace("\u21E7", "Shift") : ""}`.toLowerCase();
           let words = value.split(" ");
-          let match4 = false;
+          let match3 = false;
           words.forEach((word) => {
             if (extended.includes(word)) {
-              match4 = true;
+              match3 = true;
             }
           });
-          if (item.hide) match4 = false;
-          if (match4) matches.push(item);
+          if (item.hide) match3 = false;
+          if (match3) matches.push(item);
         });
         render(
           rabbit_hole,
@@ -37862,7 +37862,7 @@
           keywords: ["system"],
           action: () => {
             save_setting("theme_schedule", true);
-            match3();
+            match2();
           },
           hide: !ff("adaptive_theme")
         },
@@ -43266,14 +43266,14 @@
             let type = release["release-group"]["primary-type"];
             if (type && type.toLowerCase() in types)
               type = types[type.toLowerCase()];
-            const match4 = lastfm_releases.find(
+            const match3 = lastfm_releases.find(
               (r) => r.title == title && r.artist == artist2
             );
             let plays = 0;
             let artwork;
-            if (match4) {
-              plays = match4.plays;
-              artwork = match4.artwork;
+            if (match3) {
+              plays = match3.plays;
+              artwork = match3.artwork;
             }
             let artwork_container;
             let stats;
@@ -43317,7 +43317,7 @@
                                                 <p class="source-album-artist">${artist_elem2}</p>
                                                 <p class="source-album-stats oracle-stats" ref=${(el) => stats = el}>
                                                     <span class="type">${type}</span>
-                                                    ${match4 ? html.node`
+                                                    ${match3 ? html.node`
                                                         <span class="plays">
                                                             <span class="bleh-icon" />
                                                             ${plays.toLocaleString(lang)}
@@ -43336,7 +43336,7 @@
                                                 <p class="resource-list--release-list-item-artist">${artist_elem2}</p>
                                                 <p class="resource-list--release-list-item-aux-text resource-list--release-list-item-listeners oracle-stats" ref=${(el) => stats = el}>
                                                     <span class="type">${type}</span>
-                                                    ${match4 ? html.node`
+                                                    ${match3 ? html.node`
                                                         <span class="plays">
                                                             <span class="bleh-icon" />
                                                             ${plays.toLocaleString(lang)}
@@ -46775,19 +46775,19 @@
     });
     const markdown2 = text4.replace(
       /\[artist\]([^[\]]+)\[\/artist\]/g,
-      (match4, artist) => `[${artist}](${root}music/${redirect()}${encodeURIComponent(artist)})`
+      (match3, artist) => `[${artist}](${root}music/${redirect()}${encodeURIComponent(artist)})`
     ).replace(
       /\[album artist=([^[\]]+)\]([^[\]]+)\[\/album\]/g,
-      (match4, artist, album) => `[${album}](${root}music/${encodeURIComponent(artist)}/${encodeURIComponent(album)})`
+      (match3, artist, album) => `[${album}](${root}music/${encodeURIComponent(artist)}/${encodeURIComponent(album)})`
     ).replace(
       /\[track artist=([^[\]]+)\]([^[\]]+)\[\/track\]/g,
-      (match4, artist, track) => `[${track}](${root}music/${encodeURIComponent(artist)}/_/${encodeURIComponent(track)})`
+      (match3, artist, track) => `[${track}](${root}music/${encodeURIComponent(artist)}/_/${encodeURIComponent(track)})`
     ).replace(
       /\[url=([^[\]]+)\]([^[\]]+)\[\/url\]/g,
-      (match4, url, text5) => `[${text5}](${encodeURI(url)})`
+      (match3, url, text5) => `[${text5}](${encodeURI(url)})`
     ).replace(
       /\[url\]([^[\]]+)\[\/url\]/g,
-      (match4, url) => `[${url}](${encodeURI(url)})`
+      (match3, url) => `[${url}](${encodeURI(url)})`
     );
     const raw_html = converter.makeHtml(markdown2);
     const parsed2 = purify.sanitize(raw_html, {
@@ -47494,26 +47494,26 @@
           if (!options.allow_alignment) return text4;
           return `<span class="md-tag-wrap">${text4}</span>`;
         });
-        val = val.replace(/\[([a-z]+)=([^\]]+)\]/gi, (match4, tag, val2) => {
-          if (!["status", "name", "font", "accent", "banner"].includes(tag)) return match4;
-          if (!options.allow_hue && tag == "accent") return match4;
-          if (!options.allow_alignment) return match4;
+        val = val.replace(/\[([a-z]+)=([^\]]+)\]/gi, (match3, tag, val2) => {
+          if (!["status", "name", "font", "accent", "banner"].includes(tag)) return match3;
+          if (!options.allow_hue && tag == "accent") return match3;
+          if (!options.allow_alignment) return match3;
           if (tag == "accent") {
             const split = val2.split(",");
             if (split.length == 3 && parseFloat(split[0]) >= 0 && parseFloat(split[1]) >= 0 && parseFloat(split[2]) >= 0) {
               return `<span class="md-tag">[${tag}=<span class="md-val md-accent colourful" style="--hue-over: ${parseFloat(split[0])}; --sat-over: ${parseFloat(split[1])}; --lit-over: ${parseFloat(split[2])}">${val2}</span>]</span>`;
             } else {
-              return match4;
+              return match3;
             }
           }
           return `<span class="md-tag">[${tag}=<span class="md-val">${val2}</span>]</span>`;
         });
-        val = val.replace(/!\[([^\]]*)\]\(([^)]+)\)/gi, (match4, label, url) => {
-          if (!options.allow_links) return match4;
+        val = val.replace(/!\[([^\]]*)\]\(([^)]+)\)/gi, (match3, label, url) => {
+          if (!options.allow_links) return match3;
           return `<span class="md-link">![<span class="md-label">${label}</span>](<span class="md-url">${url}</span>)</span>`;
         });
-        val = val.replace(/\[([^\]]+)\]\(([^)]+)\)/gi, (match4, label, url) => {
-          if (!options.allow_links) return match4;
+        val = val.replace(/\[([^\]]+)\]\(([^)]+)\)/gi, (match3, label, url) => {
+          if (!options.allow_links) return match3;
           return `<span class="md-link">[<span class="md-label">${label}</span>](<span class="md-url">${url}</span>)</span>`;
         });
       }
@@ -48268,7 +48268,7 @@
             func: () => {
               render_tip();
               bubbles.re_render();
-              match();
+              match2();
             }
           })}
                             ${theme_night = setting({
@@ -48298,7 +48298,7 @@
             func: () => {
               render_tip();
               bubbles.re_render();
-              match();
+              match2();
             }
           })}
                         </div>
@@ -48322,7 +48322,7 @@
                         ${bubbles = theme_bubbles(() => {
       sat_bg2.compat();
       render_tip();
-      match();
+      match2();
     })}
                         <p class="card-tip" ref=${(el) => adaptive_tip = el} />
                     </div>
@@ -48605,8 +48605,8 @@
             `
       );
       function obtain_additional_info(text4, backup_text = null) {
-        const match4 = text4.match(/\d+/);
-        if (match4) others_included = parseInt(match4[0]);
+        const match3 = text4.match(/\d+/);
+        if (match3) others_included = parseInt(match3[0]);
         if (text4.includes(tl2(trans.notification_replied_ctx)))
           is_reply = true;
         else if (backup_text && backup_text.trim().includes(tl2(trans.notification_replied_ctx)))
@@ -49499,7 +49499,7 @@
                 save_setting("theme", theme.id);
               } else {
                 save_setting("theme_schedule", true);
-                match3();
+                match2();
               }
               buttons.forEach(
                 (button2) => {
@@ -52758,8 +52758,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     const matches = flat_patterns.map(({ group, pattern, regex }) => {
       let index3 = -1;
       if (regex) {
-        const match4 = lower_title.match(pattern);
-        index3 = match4 ? match4.index : -1;
+        const match3 = lower_title.match(pattern);
+        index3 = match3 ? match3.index : -1;
       } else {
         index3 = lower_title.indexOf(pattern.toLowerCase());
       }
@@ -52769,9 +52769,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         regex,
         index: index3
       };
-    }).filter((match4) => {
-      if (match4.index < 1) return false;
-      return !(match4.group === "remasters" && !lower_title.includes(" remaster") && !lower_title.includes("(remaster"));
+    }).filter((match3) => {
+      if (match3.index < 1) return false;
+      return !(match3.group === "remasters" && !lower_title.includes(" remaster") && !lower_title.includes("(remaster"));
     }).sort((a, b) => a.index - b.index);
     log("found tag matches", "lotus", "info", { lower_title, matches });
     if (artist_corrections.hasOwnProperty(original_artist) && settings.corrections) {
@@ -52781,12 +52781,12 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     let extras = [];
     if (matches.length > 0) {
       cleaned_title = formatted_title.slice(0, matches[0].index).trim().replace(/[\(\[\{]+$/, "").trim();
-      extras = matches.map((match4, i) => {
-        const start2 = match4.index;
+      extras = matches.map((match3, i) => {
+        const start2 = match3.index;
         const end2 = i + 1 < matches.length ? matches[i + 1].index : formatted_title.length;
         const tag_text = formatted_title.slice(start2, end2).replace(/^[\(\[\{\)\]\}\-\:\s]+|[\(\[\{\)\]\}\-\:\s]+$/g, "").trim();
         return {
-          group: match4.group,
+          group: match3.group,
           text: tag_text
         };
       });
@@ -54094,8 +54094,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     const no_data = buffer.querySelector(":scope > .no-data-message");
     if (!no_data) {
       const p = buffer.querySelector(":scope > p");
-      const match4 = p.textContent.match(/\d+/);
-      const count = parseInt(match4[0]);
+      const match3 = p.textContent.match(/\d+/);
+      const count = parseInt(match3[0]);
       p.remove();
       buffer.insertBefore(
         html.node`
@@ -54292,7 +54292,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
               func: () => {
                 render_tip();
                 bubbles.re_render();
-                match3();
+                match2();
               }
             })}
                             ${theme_night = setting({
@@ -54322,7 +54322,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
               func: () => {
                 render_tip();
                 bubbles.re_render();
-                match3();
+                match2();
               }
             })}
                         </div>
@@ -54349,7 +54349,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                             ${bubbles = theme_bubbles(() => {
           sat_bg.compat();
           render_tip();
-          match3();
+          match2();
         })}
                             <p
                                 class="card-tip"
@@ -55472,9 +55472,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         value: cache2.username,
         placeholder: auth.name,
         func: (val) => {
-          const match4 = about.value().match(username_regex);
+          const match3 = about.value().match(username_regex);
           const new_name = `[name=${val}]`;
-          if (match4) {
+          if (match3) {
             about.value(about.value().replace(username_regex, new_name));
           } else {
             const trimmed = about.value().trimEnd();
@@ -55543,8 +55543,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                 </div>
                 ${() => {
       const banner_regex = /\[banner=([^\]]+)\]/;
-      const match4 = about.value().match(banner_regex);
-      const pre_existing = match4 ? match4[1] : "";
+      const match3 = about.value().match(banner_regex);
+      const pre_existing = match3 ? match3[1] : "";
       let preview2;
       const elem = html.node`
                         <div class="setting" data-type="text">
@@ -55556,9 +55556,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                                 ${input({
         value: pre_existing,
         func: (val) => {
-          const match5 = about.value().match(banner_regex);
+          const match4 = about.value().match(banner_regex);
           const new_banner = `[banner=${val}]`;
-          if (match5) {
+          if (match4) {
             about.value(about.value().replace(banner_regex, new_banner));
           } else {
             const trimmed = about.value().trimEnd();
@@ -55587,8 +55587,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                 />
                 ${() => {
       const status_regex = /\[status=([^\]]+)\]/;
-      const match4 = about.value().match(status_regex);
-      const pre_existing = match4 ? match4[1] : "";
+      const match3 = about.value().match(status_regex);
+      const pre_existing = match3 ? match3[1] : "";
       const elem = html.node`
                         <div class="setting" data-type="text">
                             <div class="heading">
@@ -55598,9 +55598,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                             ${input({
         value: pre_existing,
         func: (val) => {
-          const match5 = about.value().match(status_regex);
+          const match4 = about.value().match(status_regex);
           const new_status = `[status=${val}]`;
-          if (match5) {
+          if (match4) {
             about.value(about.value().replace(status_regex, new_status));
           } else {
             const trimmed = about.value().trimEnd();
@@ -55701,19 +55701,19 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         let hue_range;
         let sat_range;
         let lit_range;
-        const match4 = about.value().match(accent_regex);
-        if (match4) {
+        const match3 = about.value().match(accent_regex);
+        if (match3) {
           save_setting(
             "profile_hue",
-            parseInt(match4[1], 10)
+            parseInt(match3[1], 10)
           );
           save_setting(
             "profile_sat",
-            parseFloat(match4[2])
+            parseFloat(match3[2])
           );
           save_setting(
             "profile_lit",
-            parseFloat(match4[3])
+            parseFloat(match3[3])
           );
         }
         let accent_preview2;
@@ -55812,7 +55812,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           }}
                                             <button class="btn primary continue" onclick=${() => {
             const new_accent = `[accent=${settings.profile_hue},${settings.profile_sat},${settings.profile_lit}]`;
-            if (match4) {
+            if (match3) {
               about.value(about.value().replace(
                 accent_regex,
                 new_accent
@@ -55873,19 +55873,19 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                             ref=${(el) => font_edit = el}
                             type="button"
                             onclick=${() => {
-          const match4 = about.value().match(font_regex);
-          if (match4) {
+          const match3 = about.value().match(font_regex);
+          if (match3) {
             save_setting(
               "profile_hue",
-              parseInt(match4[1], 10)
+              parseInt(match3[1], 10)
             );
             save_setting(
               "profile_sat",
-              parseFloat(match4[2])
+              parseFloat(match3[2])
             );
             save_setting(
               "profile_lit",
-              parseFloat(match4[3])
+              parseFloat(match3[3])
             );
           }
           let font_name = cache3.font;
@@ -55952,7 +55952,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                                             <div class="fill"></div>
                                             <button class="btn primary continue" onclick=${() => {
               const new_font = `[font=${font_name}${font_style != "solid" ? `,${font_style}` : ""}]`;
-              if (match4) {
+              if (match3) {
                 about.value(about.value().replace(
                   font_regex,
                   new_font

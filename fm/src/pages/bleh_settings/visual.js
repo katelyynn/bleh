@@ -6,6 +6,7 @@ import { update_colour_swatches } from "@/config";
 import { display_colour_presets, page_loading, register_skip_to, render_setting_page, theme_bubbles } from "./bleh_settings";
 import { ff } from "@/components/settings/sku";
 import { settings } from "@/build/config";
+import { match } from "@/components/settings/dynamic_theming";
 
 export function visual() {
     if (
