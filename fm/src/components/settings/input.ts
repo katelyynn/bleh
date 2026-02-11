@@ -11,6 +11,31 @@ import tippy from 'tippy.js';
 import { calendar } from '@/components/dialog/calendar';
 import { auth } from '@/build/page.js';
 
+type input = {
+    type?: string,
+    value?: string | number,
+    placeholder?: string,
+    min?: number | string,
+    max?: number | string,
+    maxlength?: number,
+    warn_if_empty?: boolean,
+    warn_if_matches_auth?: boolean,
+    warn_if_not_matching_lower?: string,
+    focus?: boolean,
+    disabled?: boolean,
+    show_time?: boolean,
+    name?: string,
+    func?: Function,
+    func_esc?: Function,
+    func_select?: Function,
+    func_mouseup?: Function,
+    submit_on_character?: boolean,
+    value_in_iso?: boolean,
+    cols?: number,
+    rows?: number,
+    required?: boolean
+}
+
 export function input({
     type = 'text',
     value,
@@ -34,7 +59,7 @@ export function input({
     cols,
     rows,
     required = false
-}) {
+}: input) {
     if (type == 'date') {
         return calendar({
             value,
@@ -131,6 +156,7 @@ export function input({
         if (val == null) return input_box.value;
 
         input_box.value = val;
+        update_input();
         return val;
     };
 

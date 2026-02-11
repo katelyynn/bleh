@@ -30290,7 +30290,7 @@
     return container;
   }
 
-  // src/components/settings/input.js
+  // src/components/settings/input.ts
   function input({
     type = "text",
     value,
@@ -30390,6 +30390,7 @@
     container.value = (val = null) => {
       if (val == null) return input_box.value;
       input_box.value = val;
+      update_input();
       return val;
     };
     container.disabled = (state = null) => {
@@ -31207,7 +31208,7 @@
     return elem;
   }
 
-  // src/components/music/scrobble.js
+  // src/components/music/scrobble.ts
   function submit_scrobble({
     pre_track = "",
     pre_album = "",
@@ -31248,32 +31249,76 @@
       title: tl2(trans.new_scrobble),
       body: html.node`
             <div class="new-scrobble-form">
-                <p class="generic-label">${tl2(trans.track)}</p>
-                ${track = input({
+                <div class="form-combo">
+                    <div class="form-inner">
+                        <p class="generic-label">${tl2(trans.track)}</p>
+                        ${track = input({
         type: "text",
         value: pre_track,
         placeholder: tl2(trans.example, { v: random.track }),
         warn_if_empty: true
       })}
-                <p class="generic-label">${tl2(trans.album)}</p>
-                ${album = input({
+                        <p class="generic-label">${tl2(trans.album)}</p>
+                        ${album = input({
         type: "text",
         value: pre_album,
         placeholder: tl2(trans.example, { v: random.album })
       })}
-                <p class="generic-label">${tl2(trans.artist)}</p>
-                ${artist = input({
+                    </div>
+                    <div class="form-actions">
+                        ${() => {
+        const btn = html.node`
+                                <button class="btn chibi icon subtle" data-type="switch" onclick=${() => {
+          const track_val = track.value();
+          const album_val = album.value();
+          track.value(album_val);
+          album.value(track_val);
+        }}>
+                                    ${tl2(trans.switch)}
+                                </button>
+                            `;
+        tippy_esm_default(btn, {
+          content: btn.textContent
+        });
+        return btn;
+      }}
+                    </div>
+                </div>
+                <div class="form-combo">
+                    <div class="form-inner">
+                        <p class="generic-label">${tl2(trans.artist)}</p>
+                        ${artist = input({
         type: "text",
         value: pre_artist,
         placeholder: tl2(trans.example, { v: random.artist }),
         warn_if_empty: true
       })}
-                <p class="generic-label">${tl2(trans.album_artist)}</p>
-                ${album_artist = input({
+                        <p class="generic-label">${tl2(trans.album_artist)}</p>
+                        ${album_artist = input({
         type: "text",
         value: pre_album_artist,
         placeholder: tl2(trans.example, { v: random.album_artist })
       })}
+                    </div>
+                    <div class="form-actions">
+                        ${() => {
+        const btn = html.node`
+                                <button class="btn chibi icon subtle" data-type="switch" onclick=${() => {
+          const artist_val = artist.value();
+          const album_artist_val = album_artist.value();
+          artist.value(album_artist_val);
+          album_artist.value(artist_val);
+        }}>
+                                    ${tl2(trans.switch)}
+                                </button>
+                            `;
+        tippy_esm_default(btn, {
+          content: btn.textContent
+        });
+        return btn;
+      }}
+                    </div>
+                </div>
                 <p class="generic-label">${tl2(trans.time)}</p>
                 <div class="toggle-and-time">
                     ${use_current = toggle({
@@ -31298,7 +31343,9 @@
                     ${tl2(trans.cancel)}
                 </button>
                 <div class="fill" />
-                <button class="btn primary icon" data-type="add" ref=${(el) => create_scrobble = el} onclick=${async () => {
+                <div class="button-group extra">
+                    ${setting({ id: "auto_close_scrobble_modal", standalone: true })}
+                    <button class="btn primary icon" data-type="add" ref=${(el) => create_scrobble = el} onclick=${async () => {
         if (track.value() == "" || artist.value() == "") {
           notify({
             id: "submit_scrobble",
@@ -31383,11 +31430,24 @@
           body: params.track,
           type: "success"
         });
-        dialog_rm({ id: "submit_scrobble" });
+        if (settings.auto_close_scrobble_modal) {
+          dialog_rm({ id: "submit_scrobble" });
+        } else {
+          submit_scrobble({
+            pre_track,
+            pre_album,
+            pre_artist,
+            pre_album_artist,
+            pre_timestamp,
+            func,
+            can_api
+          });
+        }
         if (func) func();
       }}>
-                    ${tl2(trans.new)}
-                </button>
+                        ${tl2(trans.new)}
+                    </button>
+                </div>
             </div>
         `
     });
@@ -50419,7 +50479,7 @@
             `}
         </div>
         <section class="side-actions">
-            <button class="btn side-action" data-type="import" onclick=${() => import_settings25()}>
+            <button class="btn side-action" data-type="import" onclick=${() => import_settings26()}>
                 ${tl2(trans.import)}
             </button>
             <button class="btn side-action" data-type="export" onclick=${() => export_settings()}>
@@ -52023,7 +52083,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       }
     }
   }
-  function import_settings25() {
+  function import_settings26() {
     let text4;
     const modal = dialog2({
       id: "import_settings",
@@ -70120,6 +70180,14 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Which copy of the album did you expect to see? Provide links and some details as to why",
       ru: "\u041A\u0430\u043A\u043E\u0439 \u043A\u043E\u043F\u0438\u0438 \u0430\u043B\u044C\u0431\u043E\u043C\u0430 \u0432\u044B \u043E\u0436\u0438\u0434\u0430\u043B\u0438 \u0443\u0432\u0438\u0434\u0435\u0442\u044C? \u0423\u043A\u0430\u0436\u0438\u0442\u0435 \u0441\u0441\u044B\u043B\u043A\u0438 \u0438 \u043D\u0435\u043A\u043E\u0442\u043E\u0440\u044B\u0435 \u043F\u043E\u0434\u0440\u043E\u0431\u043D\u043E\u0441\u0442\u0438 \u043E \u0442\u043E\u043C, \u043F\u043E\u0447\u0435\u043C\u0443",
       es: "\xBFQu\xE9 copia del \xE1lbum esperabas ver? Proporciona v\xEDnculos y algunos detalles sobre el porqu\xE9"
+    },
+    switch: {
+      // like switch places
+      en: "Switch"
+    },
+    auto_close: {
+      // auto close dialog after action
+      en: "Auto close"
     }
   };
   var translation_fallback = "NO_TRANSLATION_FOUND";
@@ -71505,6 +71573,11 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     popups_seen: {
       default: [],
       type: "list"
+    },
+    auto_close_scrobble_modal: {
+      default: true,
+      type: "checkbox",
+      title: trans.auto_close
     }
   };
 

@@ -14,7 +14,7 @@ import { prep_chart_colours } from '@/components/music/chart';
 import { correct_artist, correct_item_by_artist } from '@/components/music/lotus';
 import { refresh_all } from '@/config';
 import { ff } from '@/components/settings/sku';
-import { input } from '@/components/settings/input.js';
+import { input } from '@/components/settings/input';
 import { setting } from '@/components/settings/settings';
 import { redirect } from '@/components/music/music';
 import tippy from 'tippy.js';

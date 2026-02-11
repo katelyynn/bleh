@@ -10291,6 +10291,14 @@ export const trans = {
         en: 'Which copy of the album did you expect to see? Provide links and some details as to why',
         ru: 'Какой копии альбома вы ожидали увидеть? Укажите ссылки и некоторые подробности о том, почему',
         es: '¿Qué copia del álbum esperabas ver? Proporciona vínculos y algunos detalles sobre el porqué'
+    },
+    switch: {
+        // like switch places
+        en: 'Switch'
+    },
+    auto_close: {
+        // auto close dialog after action
+        en: 'Auto close'
     }
 };
 

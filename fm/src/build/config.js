@@ -1378,5 +1378,10 @@ export let settings_store = {
     popups_seen: {
         default: [],
         type: 'list'
+    },
+    auto_close_scrobble_modal: {
+        default: true,
+        type: 'checkbox',
+        title: trans.auto_close
     }
 };

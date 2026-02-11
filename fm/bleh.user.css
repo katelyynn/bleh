@@ -8387,7 +8387,7 @@
             transition-property: padding, transform, filter !important;
             transition-duration: var(--trans) !important;
             transition-timing-function: var(--trans-function) !important;
-            --transition-property: opacity, left;
+            --transition-property: opacity, left, transform;
             /*box-shadow: var(--shadow-hov) !important;*/
 
             background-repeat: repeat-x !important;
@@ -8551,6 +8551,10 @@
         & > .bleh-icon {
             --icon-size: 14px;
             --icon-colour: hsl(var(--c3));
+        }
+
+        &.extra {
+            gap: var(--card-gap);
         }
     }
     .icon-combo {
@@ -8974,7 +8978,8 @@
             --transition-property,
             opacity,
             left,
-            background
+            background,
+            transform
         ) !important;
         transition-duration: var(--trans) !important;
         transition-timing-function: var(--trans-function) !important;
@@ -19113,7 +19118,7 @@
             }
         }
 
-        &:not(.v) {
+        &:not(.v, .standalone) {
             & > .heading {
                 min-width: 150px;
             }
@@ -22616,32 +22621,12 @@
         width: 600px;
         max-width: 95vw;
     }
+
+    .edit-scrobble-top-box {
+        display: none !important;
+    }
+
     .automatic-edit-modal-body-v2 {
-        .edit-scrobble-top-box {
-            display: none !important;
-            border: 1px solid var(--card-border-base);
-            border-radius: var(--card-radius);
-            box-shadow: unset;
-            padding: var(--card-gap);
-
-            .edit-scrobble-top-box__track-name,
-            .edit-scrobble-top-box__album-name {
-                font-weight: var(--font-weight-medium) !important;
-            }
-            .edit-scrobble-top-box__bottom {
-                color: hsl(var(--c2), 80%) !important;
-            }
-            .scrobble-count {
-                color: hsl(var(--c3)) !important;
-                font: inherit !important;
-            }
-
-            .timestamp {
-                color: hsl(var(--c3)) !important;
-                font-size: var(--font-size-sm) !important;
-                line-height: var(--line-height-sm) !important;
-            }
-        }
         .edit-scrobble-form {
             margin-top: unset !important;
 
@@ -22751,23 +22736,44 @@
         width: 530px;
         max-width: 100%;
     }
+
+    .new-scrobble-form, .form-inner {
+        display: flex;
+        flex-direction: column;
+        gap: var(--item-list-gap);
+    }
+
     .generic-label {
         color: hsl(var(--c2), 70%);
         font-weight: var(--font-weight) !important;
-        margin-bottom: 4px;
+        margin-bottom: calc(-1 * (var(--item-list-gap) - 4px));
         cursor: default;
-
-        .form-tip + &,
-        .input-container + & {
-            margin: var(--item-list-gap) 0 4px;
-        }
     }
+
     .form-tip {
         font-size: 13px;
         color: hsl(var(--c3));
         cursor: default;
-        margin-top: 6px;
+        margin-top: calc(-1 * (var(--item-list-gap) - 6px));
     }
+
+
+    .form-combo {
+        display: flex;
+        gap: var(--item-list-gap);
+
+        & > .form-inner {
+            flex: 1;
+        }
+    }
+
+    .form-actions {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
 
     /*.modal-dialog--changelog {
         width: 700px !important;
@@ -30650,5 +30656,25 @@
 
     [data-type="create-from-scratch"] {
         --mask: var(--icon-16-create-from-scratch);
+    }
+
+
+    .subtle {
+        --bg: transparent;
+        --bg-hov: hsl(var(--b4), 40%);
+        --bg-atv: hsl(var(--b4), 60%);
+        --shadow: none;
+        --col: hsl(var(--c2), 80%);
+        --mask-colour: currentColor;
+    }
+
+    [data-type="switch"] {
+        --mask: var(--icon-16-arrows);
+    }
+
+    .btn[data-type="switch"] {
+        &:hover:before {
+            transform: scaleY(-1);
+        }
     }
 }
