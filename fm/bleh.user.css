@@ -10624,7 +10624,7 @@
     .auth-dropdown-menu,
     .navlist-hidden-list-wrap .navlist-hidden-list {
         padding: 4px !important;
-        animation: solarium 0.25s var(--trans-function);
+        animation: solarium_menu 0.25s var(--trans-function);
     }
     .dropdown-menu-item-dark,
     .dropdown-menu-clickable-item,
