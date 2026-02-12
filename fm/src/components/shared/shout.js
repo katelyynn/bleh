@@ -435,7 +435,7 @@ export function join_the_conversation() {
     //
 
     const shoutbox = html.node`
-        <section class="shoutbox-preview">
+        <section class="shoutbox-preview" id="shoutbox">
             <h2>${tl(trans.shouts)}</h2>
             <div class="loading-data-container">
                 <div class="loading-data-text">${tl(trans.loading_conversations)}</div>
@@ -444,4 +444,34 @@ export function join_the_conversation() {
     `;
 
     join.replaceWith(shoutbox);
+
+    fetch(url)
+        .then(res => {
+            if (!res.ok)
+                throw new Error;
+
+            return res.text();
+        })
+        .then(res => {
+            const doc = new DOMParser().parseFromString(res, 'text/html');
+
+            const new_shoutbox = doc.querySelector('.shoutbox');
+            if (!new_shoutbox) throw new Error();
+
+            render(shoutbox, html`
+                ${new_shoutbox}
+            `);
+        })
+        .catch(e => {
+            handle_shout_error(e);
+        });
+
+    function handle_shout_error(e) {
+        render(shoutbox, html`
+            <h2>${tl(trans.shouts)}</h2>
+            <div class="loading-data-container">
+                <div class="alert alert-error">${e && e.message ? e.message : tl(trans.shoutbox_failed)}</div>
+            </div>
+        `);
+    }
 }

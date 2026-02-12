@@ -44332,7 +44332,7 @@
     const partial = !ff("use_full_shoutbox") ? "partial/" : "";
     const url = `${window.location.pathname}/+${partial}shoutbox`;
     const shoutbox = html.node`
-        <section class="shoutbox-preview">
+        <section class="shoutbox-preview" id="shoutbox">
             <h2>${tl2(trans.shouts)}</h2>
             <div class="loading-data-container">
                 <div class="loading-data-text">${tl2(trans.loading_conversations)}</div>
@@ -44340,6 +44340,28 @@
         </section>
     `;
     join.replaceWith(shoutbox);
+    fetch(url).then((res) => {
+      if (!res.ok)
+        throw new Error();
+      return res.text();
+    }).then((res) => {
+      const doc = new DOMParser().parseFromString(res, "text/html");
+      const new_shoutbox = doc.querySelector(".shoutbox");
+      if (!new_shoutbox) throw new Error();
+      render(shoutbox, html`
+                ${new_shoutbox}
+            `);
+    }).catch((e) => {
+      handle_shout_error(e);
+    });
+    function handle_shout_error(e) {
+      render(shoutbox, html`
+            <h2>${tl2(trans.shouts)}</h2>
+            <div class="loading-data-container">
+                <div class="alert alert-error">${e && e.message ? e.message : tl2(trans.shoutbox_failed)}</div>
+            </div>
+        `);
+    }
   }
 
   // src/components/music/music.js
@@ -70205,6 +70227,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     loading_conversations: {
       en: "Loading conversations"
+    },
+    shoutbox_failed: {
+      en: "There was an error loading conversations \u201C(\u30CE _ <,, )"
     }
   };
   var translation_fallback = "NO_TRANSLATION_FOUND";

@@ -10302,6 +10302,9 @@ export const trans = {
     },
     loading_conversations: {
         en: 'Loading conversations'
+    },
+    shoutbox_failed: {
+        en: 'There was an error loading conversations “(ノ _ <,, )'
     }
 };
 
