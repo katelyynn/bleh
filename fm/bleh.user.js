@@ -44019,7 +44019,7 @@
   async function show_your_scrobbles() {
     let katsune = ff("katsune");
     show_numbers_on_side(page.type);
-    const page_is_blocked = !page.structure.main.querySelector("#shoutbox");
+    const page_is_blocked = false;
     log(
       `${page_is_blocked ? "page is blocked" : "page is not blocked"}`,
       "music"
@@ -44485,14 +44485,11 @@
       }
     }
     if (page_is_blocked) {
-      page.structure.main.insertBefore(
-        html.node`
+      page.structure.main.insertBefore(html.node`
             <section class="cta blocked-cta">
                 <strong>${tl2(trans.blocked_page)}</strong>
             </section>
-        `,
-        page.structure.main.firstElementChild
-      );
+        `, page.structure.main.firstElementChild);
       return;
     }
     let play_on;

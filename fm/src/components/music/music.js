@@ -46,7 +46,13 @@ export async function show_your_scrobbles() {
 
     // commonly nsbm pages are stripped of all social interaction and only have three tabs,
     // this is a simple way to detect it
-    const page_is_blocked = !page.structure.main.querySelector('#shoutbox');
+    // quick test page: https://www.last.fm/music/Haftbefehl
+    //
+    // WARN: as of 2025-02-19, last.fm reworked shoutbox previews and this check no longer works
+    // it has been switched off for now
+
+    //const page_is_blocked = !page.structure.main.querySelector('#shoutbox');
+    const page_is_blocked = false;
     log(
         `${page_is_blocked ? 'page is blocked' : 'page is not blocked'}`,
         'music'
@@ -648,14 +654,11 @@ export async function show_your_scrobbles() {
     }
 
     if (page_is_blocked) {
-        page.structure.main.insertBefore(
-            html.node`
+        page.structure.main.insertBefore(html.node`
             <section class="cta blocked-cta">
                 <strong>${tl(trans.blocked_page)}</strong>
             </section>
-        `,
-            page.structure.main.firstElementChild
-        );
+        `, page.structure.main.firstElementChild);
 
         return;
     }
