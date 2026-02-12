@@ -6963,6 +6963,7 @@
         gap: 6px;
         font-weight: inherit;
         text-decoration: var(--force-underline, none) !important;
+        width: fit-content;
     }
 
     .smart-title {
