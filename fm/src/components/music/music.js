@@ -48,7 +48,7 @@ export async function show_your_scrobbles() {
     // this is a simple way to detect it
     // quick test page: https://www.last.fm/music/Haftbefehl
     //
-    // WARN: as of 2025-02-12, last.fm reworked shoutbox previews and this check no longer works
+    // WARN: as of 2026-02-12, last.fm reworked shoutbox previews and this check no longer works
     // it has been switched off for now
 
     //const page_is_blocked = !page.structure.main.querySelector('#shoutbox');

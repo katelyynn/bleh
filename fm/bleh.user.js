@@ -71724,7 +71724,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
   // src/build/build.json
   var build_default = {
     brand: "bleh",
-    build: "2026.0201",
+    build: "2026.0212",
     sku: "kurumi",
     bio: "bleh!!! ^-^",
     author: "katelyn",
@@ -72102,12 +72102,12 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       join_the_conversation: {
         default: true,
         name: "Replace 'Join the conversation' with an actual shoutbox",
-        date: "2025-02-12"
+        date: "2026-02-12"
       },
       use_full_shoutbox: {
         default: false,
         name: "When 'Join the conversation' is replaced, use the full shoutbox instead of a preview",
-        date: "2025-02-12"
+        date: "2026-02-12"
       }
     }
   };
