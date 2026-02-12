@@ -10299,6 +10299,9 @@ export const trans = {
     auto_close: {
         // auto close dialog after action
         en: 'Auto close'
+    },
+    loading_conversations: {
+        en: 'Loading conversations'
     }
 };
 

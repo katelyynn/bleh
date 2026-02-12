@@ -7,7 +7,7 @@
 import { patch_avatar, style_name_from_badge } from '@/components/shared/avatar';
 import { settings } from '@/build/config.js';
 import { log } from '@/build/log.js';
-import { auth, page, shout_parse_queue } from '@/build/page.js';
+import { auth, page, root, shout_parse_queue } from '@/build/page.js';
 import { tl, trans } from '@/build/trans';
 import { notify } from '@/components/dialog/notify';
 import { html, render } from 'lighterhtml';
@@ -21,6 +21,7 @@ import { copy, romanise } from '@/build/tools';
 import tippy from 'tippy.js';
 import { keybind } from '@/components/dialog/rabbit';
 import { correct_artist, correct_item_by_artist } from '@/components/music/lotus.js';
+import { ff } from '../settings/sku';
 
 export function patch_shouts() {
     if (!page.structure.main) return;
@@ -418,4 +419,29 @@ export function shout_messages() {
 
         alert.remove();
     });
+}
+
+
+export function join_the_conversation() {
+    if (!ff('join_the_conversation')) return;
+
+    const join = page.structure.main.querySelector('.btn-shouts-join');
+    if (!join) return;
+
+    const partial = !ff('use_full_shoutbox') ? 'partial/' : '';
+
+    const url = `${window.location.pathname}/+${partial}shoutbox`;
+
+    //
+
+    const shoutbox = html.node`
+        <section class="shoutbox-preview">
+            <h2>${tl(trans.shouts)}</h2>
+            <div class="loading-data-container">
+                <div class="loading-data-text">${tl(trans.loading_conversations)}</div>
+            </div>
+        </section>
+    `;
+
+    join.replaceWith(shoutbox);
 }

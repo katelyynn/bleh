@@ -44012,6 +44012,336 @@
     return user;
   }
 
+  // src/components/shared/shout.js
+  function patch_shouts() {
+    if (!page.structure.main) return;
+    const use_md = settings.shout_markdown;
+    let shout_controls = page.structure.main.querySelector(
+      ".shoutbox-controls-wrapper:not([data-shouts])"
+    );
+    if (shout_controls) {
+      shout_controls.setAttribute("data-shouts", "true");
+      shout_header(shout_controls);
+    }
+    let shouts = page.structure.main.querySelectorAll(
+      ".shout:not([data-kate-processed])"
+    );
+    shouts.forEach((shout, index3) => {
+      try {
+        let vote_button = function() {
+          setTimeout(() => {
+            const modified = form.getAttribute("data-ajax-form-state") == "modified-state";
+            const current_is_voted = initial_is_voted != modified;
+            indicator.setAttribute(
+              "aria-checked",
+              current_is_voted.toString()
+            );
+          }, 0);
+        };
+        shout.setAttribute("data-kate-processed", "true");
+        shout.style.setProperty("--delay", index3 * 0.04 + "s");
+        let shout_name = shout.querySelector(".shout-user a");
+        if (!shout_name) return;
+        let shout_name_text = shout_name.textContent;
+        shout_name.insertBefore(html.node`<span class="at">@</span>`, shout_name.firstChild);
+        let shout_avatar = shout.querySelector(".shout-user-avatar");
+        let badge = patch_avatar(shout_avatar, shout_name_text, "shout");
+        if (badge) {
+          if (badge.type && badge.type == "avatar-status-dot--staff")
+            shout.classList.add("staff-shout");
+          style_name_from_badge(shout_name, badge);
+        }
+        const shout_body = shout.querySelector(".shout-body p");
+        const shout_text = shout_body.textContent.trim();
+        if (settings.shout_markdown) {
+          shout_parse_queue.push({ element: shout_body });
+        }
+        const indicator = html.node`
+                <div class="shout-vote-indicator colourful" aria-checked="false" />
+            `;
+        shout.appendChild(indicator);
+        let shout_timestamp = shout.querySelector(".shout-timestamp time");
+        if (shout_timestamp) {
+          tippy_esm_default(shout_timestamp, {
+            content: shout_timestamp.getAttribute("title")
+          });
+          shout_timestamp.removeAttribute("title");
+        }
+        let actions = shout.querySelectorAll(".shout-actions .shout-action");
+        actions.forEach((action) => {
+          let buttons2 = action.querySelectorAll("button, a");
+          buttons2.forEach((button2) => {
+            button2.classList.add("shout-action-button", "see-more");
+          });
+        });
+        const more_button = shout.querySelector(".shout-more-actions");
+        if (more_button) more_button.classList.add("see-more", "shout-action-button");
+        const form = shout.querySelector(".vote-button-toggle");
+        const voted_button = form.querySelector(".vote-button--voted");
+        const unvote_button = form.querySelector(
+          ".vote-button:not(.vote-button--voted)"
+        );
+        if (!voted_button || !unvote_button) return;
+        const initial_is_voted = voted_button.getAttribute("data-ajax-form-sets-state") == "modified-state";
+        indicator.setAttribute("aria-checked", initial_is_voted.toString());
+        voted_button.addEventListener("click", (e) => vote_button());
+        unvote_button.addEventListener("click", (e) => vote_button());
+        const menu = shout.querySelector(".shout-more-actions-menu");
+        const buttons = menu.querySelectorAll("button");
+        buttons.forEach((button2) => {
+          const type = button2.classList[1];
+          if (type == "more-item--delete") {
+            button2.textContent = tl2(trans.delete);
+          } else if (type == "more-item--report") {
+            button2.textContent = tl2(trans.report);
+          }
+        });
+        menu.insertBefore(
+          html.node`
+                <button class="dropdown-menu-clickable-item" data-type="copy" onclick=${() => {
+            copy(shout_text);
+          }}>
+                    ${tl2(trans.copy)}
+                </button>
+                <div class="sep" />
+            `,
+          menu.firstElementChild
+        );
+        let send_button = shout.querySelector(".form-group--submit");
+        shout_send(send_button);
+      } catch (e) {
+        notify({
+          id: "shout",
+          title: tl2(trans.shouts),
+          body: "Failed to be modified :(",
+          type: "error",
+          icon: "icon-16-shoutbox"
+        });
+        log("failed to modify", "shout", "error", { error: e });
+      }
+    });
+    if (settings.shout_markdown && shout_parse_queue.length > 0)
+      parse_shout_queue();
+    const shout_forms = document.querySelectorAll(".shout-form:not([data-kate-processed])");
+    shout_forms.forEach((shout_form) => {
+      shout_form.setAttribute("data-kate-processed", "true");
+      let shout_avatar = shout_form.querySelector(".shout-user-avatar");
+      patch_avatar(shout_avatar, auth.name);
+      let send_button = shout_form.querySelector(".form-group--submit");
+      shout_send(send_button);
+      const help_text = shout_form.querySelector(".form-row-help-text");
+      help_text.classList.add("dual-tip");
+      const legacy_textarea = shout_form.querySelector("textarea");
+      let placeholder = legacy_textarea.placeholder;
+      const is_reply = placeholder.includes(auth.name);
+      if (!is_reply) {
+        if (page.type == "user") {
+          placeholder = tl2(trans.shoutbox_placeholder_user, {
+            u: auth.name,
+            v: page.name
+          });
+        } else {
+          placeholder = tl2(trans.shoutbox_placeholder, {
+            u: auth.name,
+            v: page.type == "artist" ? romanise(correct_artist(page.name)) : ["album", "track"].includes(page.type) ? romanise(correct_item_by_artist(page.name, page.sister)) : page.name
+          });
+        }
+      }
+      const textarea = markdown_field((val) => {
+        chars.textContent = tl2(trans.value_characters_max, {
+          v: `${val.length}/1000`
+        });
+        chars.setAttribute("data-exceeded", val.length >= 1e3);
+        if (use_md) preview.setAttribute("disabled", val.length <= 0);
+      }, {}, "", "body", null, null, placeholder, legacy_textarea.maxLength, true, !is_reply);
+      legacy_textarea.replaceWith(textarea);
+      let chars;
+      let preview;
+      render(help_text, html`
+            ${use_md ? html.node`
+                <div class="tip preview" onclick=${() => markdown_preview(textarea.value())} ref=${(el) => preview = el} disabled="true">
+                    ${tl2(trans.preview)}
+                </div>
+            ` : ""}
+            <div class="tip characters" ref=${(el) => chars = el}>
+                ${tl2(trans.value_characters_max, { v: "0/1000" })}
+            </div>
+        `);
+      shout_form.addEventListener("keydown", (e) => {
+        if (e.ctrlKey && e.keyCode == 13) {
+          e.preventDefault();
+          send_button.querySelector(".btn-post-shout").click();
+          notify({
+            id: "shout",
+            title: tl2(trans.shouts),
+            body: tl2(trans.sent),
+            icon: "icon-16-shoutbox"
+          });
+        }
+      });
+    });
+  }
+  function shout_send(send_button) {
+    if (!send_button) return;
+    let button2 = send_button.querySelector(".btn-post-shout");
+    if (!button2) return;
+    button2.classList.add("btn-send-shout-generic");
+    button2.textContent = tl2(trans.send);
+    button2.removeAttribute("disabled");
+    if (page.mobile) return;
+    tippy_esm_default(button2, {
+      content: tl2(trans.send_quickly_with).replace(
+        "{kbd}",
+        keybind(["\u2318", "\u23CE"]).outerHTML
+      ),
+      allowHTML: true,
+      delay: [500, 0]
+    });
+  }
+  function shout_header(shout_controls) {
+    let panel;
+    let settings_btn;
+    if (page.subpage == "shoutbox_shout") {
+      panel = page.structure.main.querySelector(":scope > section");
+      let link = window.location.href;
+      panel.insertBefore(
+        html.node`
+            <div class="top-container">
+                <h2>
+                    <a class="text-colour-link" href=${link}>${tl2(trans.shouts)}</a>
+                </h2>
+                <div class="accompany view-buttons blend blend-v2">
+                    <p class="notice">${tl2(trans.single_shout)}</p>
+                </div>
+                <div class="view-buttons blend blend-v2">
+                    <button class="left-icon blend-v2-btn" data-type="settings" ref=${(el) => settings_btn = el}>
+                        ${tl2(trans.settings)}
+                    </button>
+                </div>
+            </div>
+        `,
+        panel.firstElementChild
+      );
+    } else if (shout_controls) {
+      panel = shout_controls.parentElement;
+      let select_btn = panel.querySelector(".dropdown-menu-clickable-button");
+      let header = panel.querySelector("h2");
+      if (header) header.parentElement.removeChild(header);
+      let link = window.location.href;
+      let shoutbox_link = "+shoutbox";
+      if (page.type == "user" || page.type == "event")
+        shoutbox_link = "shoutbox";
+      if (!page.subpage.startsWith("shoutbox")) link += `/${shoutbox_link}`;
+      panel.insertBefore(
+        html.node`
+            <div class="top-container">
+                <h2>
+                    <a class="text-colour-link" href=${link}>${tl2(trans.shouts)}</a>
+                </h2>
+                ${select_btn ? html.node`
+                    <div class="accompany view-buttons blend blend-v2">
+                        ${() => {
+          select_btn.classList.add(
+            "select-button",
+            "link-select",
+            "blend-v2-btn"
+          );
+          select_btn.classList.remove(
+            "section-control",
+            "dropdown-menu-clickable-button"
+          );
+          return shout_controls;
+        }}
+                    </div>
+                ` : ""}
+                <div class="view-buttons blend blend-v2">
+                    <button class="left-icon blend-v2-btn" data-type="settings" ref=${(el) => settings_btn = el}>
+                        ${tl2(trans.settings)}
+                    </button>
+                </div>
+            </div>
+        `,
+        panel.firstElementChild
+      );
+    }
+    if (!settings_btn) return;
+    tippy_esm_default(settings_btn, {
+      theme: "window",
+      content: html.node`
+            <div class="dialog-settings">
+                <div class="setting-group blend">
+                    ${setting({ id: "shout_markdown" })}
+                    ${setting({ id: "accessible_name_colours" })}
+                    ${setting({ id: "underline_links" })}
+                </div>
+            </div>
+        `,
+      placement: "bottom",
+      interactive: true,
+      interactiveBorder: 10,
+      trigger: "click",
+      appendTo: document.body
+    });
+    const cant_shout = panel.querySelector(".shouting-unavailable");
+    if (cant_shout) {
+      render(
+        cant_shout,
+        html`
+                <div class="loading-data-container">
+                    <div class="loading-data-text static" data-type="shouts">
+                        ${tl2(trans.cant_shout)}
+                    </div>
+                </div>
+            `
+      );
+    }
+  }
+  function parse_shout_queue() {
+    if (shout_parse_queue.length == 0) return;
+    const shout = shout_parse_queue.shift();
+    const parsed2 = markdown(shout.element.textContent);
+    shout.element.classList.add("markdown-body");
+    render(shout.element, html.node`${parsed2}`);
+    log("parsed one shout", "shout", "log");
+    if (shout_parse_queue.length > 0) setTimeout(parse_shout_queue, 50);
+  }
+  function shout_messages() {
+    if (!page.structure.main) return;
+    let alerts = page.structure.main.querySelectorAll(
+      ".shout-messages > .alert"
+    );
+    alerts.forEach((alert2) => {
+      if (alert2.classList.contains("alert-danger")) {
+        notify({
+          id: "shout",
+          title: tl2(trans.shouts),
+          body: tl2(trans.failed_to_send),
+          type: "error",
+          icon: "icon-16-shoutbox"
+        });
+      } else {
+        return;
+      }
+      alert2.remove();
+    });
+  }
+  function join_the_conversation() {
+    if (!ff("join_the_conversation")) return;
+    const join = page.structure.main.querySelector(".btn-shouts-join");
+    if (!join) return;
+    const partial = !ff("use_full_shoutbox") ? "partial/" : "";
+    const url = `${window.location.pathname}/+${partial}shoutbox`;
+    const shoutbox = html.node`
+        <section class="shoutbox-preview">
+            <h2>${tl2(trans.shouts)}</h2>
+            <div class="loading-data-container">
+                <div class="loading-data-text">${tl2(trans.loading_conversations)}</div>
+            </div>
+        </section>
+    `;
+    join.replaceWith(shoutbox);
+  }
+
   // src/components/music/music.js
   unsafeWindow._other_listener = function(id) {
     other_listener(id);
@@ -44024,6 +44354,7 @@
       `${page_is_blocked ? "page is blocked" : "page is not blocked"}`,
       "music"
     );
+    join_the_conversation();
     if (page.subpage == "overview") {
       let tabs = document.createElement("nav");
       tabs.classList.add(
@@ -50476,7 +50807,7 @@
             `}
         </div>
         <section class="side-actions">
-            <button class="btn side-action" data-type="import" onclick=${() => import_settings26()}>
+            <button class="btn side-action" data-type="import" onclick=${() => import_settings27()}>
                 ${tl2(trans.import)}
             </button>
             <button class="btn side-action" data-type="export" onclick=${() => export_settings()}>
@@ -52080,7 +52411,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       }
     }
   }
-  function import_settings26() {
+  function import_settings27() {
     let text4;
     const modal = dialog2({
       id: "import_settings",
@@ -58198,320 +58529,6 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
   }
   function start_rain() {
     if (settings.rain) rain();
-  }
-
-  // src/components/shared/shout.js
-  function patch_shouts() {
-    if (!page.structure.main) return;
-    const use_md = settings.shout_markdown;
-    let shout_controls = page.structure.main.querySelector(
-      ".shoutbox-controls-wrapper:not([data-shouts])"
-    );
-    if (shout_controls) {
-      shout_controls.setAttribute("data-shouts", "true");
-      shout_header(shout_controls);
-    }
-    let shouts = page.structure.main.querySelectorAll(
-      ".shout:not([data-kate-processed])"
-    );
-    shouts.forEach((shout, index3) => {
-      try {
-        let vote_button = function() {
-          setTimeout(() => {
-            const modified = form.getAttribute("data-ajax-form-state") == "modified-state";
-            const current_is_voted = initial_is_voted != modified;
-            indicator.setAttribute(
-              "aria-checked",
-              current_is_voted.toString()
-            );
-          }, 0);
-        };
-        shout.setAttribute("data-kate-processed", "true");
-        shout.style.setProperty("--delay", index3 * 0.04 + "s");
-        let shout_name = shout.querySelector(".shout-user a");
-        if (!shout_name) return;
-        let shout_name_text = shout_name.textContent;
-        shout_name.insertBefore(html.node`<span class="at">@</span>`, shout_name.firstChild);
-        let shout_avatar = shout.querySelector(".shout-user-avatar");
-        let badge = patch_avatar(shout_avatar, shout_name_text, "shout");
-        if (badge) {
-          if (badge.type && badge.type == "avatar-status-dot--staff")
-            shout.classList.add("staff-shout");
-          style_name_from_badge(shout_name, badge);
-        }
-        const shout_body = shout.querySelector(".shout-body p");
-        const shout_text = shout_body.textContent.trim();
-        if (settings.shout_markdown) {
-          shout_parse_queue.push({ element: shout_body });
-        }
-        const indicator = html.node`
-                <div class="shout-vote-indicator colourful" aria-checked="false" />
-            `;
-        shout.appendChild(indicator);
-        let shout_timestamp = shout.querySelector(".shout-timestamp time");
-        if (shout_timestamp) {
-          tippy_esm_default(shout_timestamp, {
-            content: shout_timestamp.getAttribute("title")
-          });
-          shout_timestamp.removeAttribute("title");
-        }
-        let actions = shout.querySelectorAll(".shout-actions .shout-action");
-        actions.forEach((action) => {
-          let buttons2 = action.querySelectorAll("button, a");
-          buttons2.forEach((button2) => {
-            button2.classList.add("shout-action-button", "see-more");
-          });
-        });
-        const more_button = shout.querySelector(".shout-more-actions");
-        if (more_button) more_button.classList.add("see-more", "shout-action-button");
-        const form = shout.querySelector(".vote-button-toggle");
-        const voted_button = form.querySelector(".vote-button--voted");
-        const unvote_button = form.querySelector(
-          ".vote-button:not(.vote-button--voted)"
-        );
-        if (!voted_button || !unvote_button) return;
-        const initial_is_voted = voted_button.getAttribute("data-ajax-form-sets-state") == "modified-state";
-        indicator.setAttribute("aria-checked", initial_is_voted.toString());
-        voted_button.addEventListener("click", (e) => vote_button());
-        unvote_button.addEventListener("click", (e) => vote_button());
-        const menu = shout.querySelector(".shout-more-actions-menu");
-        const buttons = menu.querySelectorAll("button");
-        buttons.forEach((button2) => {
-          const type = button2.classList[1];
-          if (type == "more-item--delete") {
-            button2.textContent = tl2(trans.delete);
-          } else if (type == "more-item--report") {
-            button2.textContent = tl2(trans.report);
-          }
-        });
-        menu.insertBefore(
-          html.node`
-                <button class="dropdown-menu-clickable-item" data-type="copy" onclick=${() => {
-            copy(shout_text);
-          }}>
-                    ${tl2(trans.copy)}
-                </button>
-                <div class="sep" />
-            `,
-          menu.firstElementChild
-        );
-        let send_button = shout.querySelector(".form-group--submit");
-        shout_send(send_button);
-      } catch (e) {
-        notify({
-          id: "shout",
-          title: tl2(trans.shouts),
-          body: "Failed to be modified :(",
-          type: "error",
-          icon: "icon-16-shoutbox"
-        });
-        log("failed to modify", "shout", "error", { error: e });
-      }
-    });
-    if (settings.shout_markdown && shout_parse_queue.length > 0)
-      parse_shout_queue();
-    const shout_forms = document.querySelectorAll(".shout-form:not([data-kate-processed])");
-    shout_forms.forEach((shout_form) => {
-      shout_form.setAttribute("data-kate-processed", "true");
-      let shout_avatar = shout_form.querySelector(".shout-user-avatar");
-      patch_avatar(shout_avatar, auth.name);
-      let send_button = shout_form.querySelector(".form-group--submit");
-      shout_send(send_button);
-      const help_text = shout_form.querySelector(".form-row-help-text");
-      help_text.classList.add("dual-tip");
-      const legacy_textarea = shout_form.querySelector("textarea");
-      let placeholder = legacy_textarea.placeholder;
-      const is_reply = placeholder.includes(auth.name);
-      if (!is_reply) {
-        if (page.type == "user") {
-          placeholder = tl2(trans.shoutbox_placeholder_user, {
-            u: auth.name,
-            v: page.name
-          });
-        } else {
-          placeholder = tl2(trans.shoutbox_placeholder, {
-            u: auth.name,
-            v: page.type == "artist" ? romanise(correct_artist(page.name)) : ["album", "track"].includes(page.type) ? romanise(correct_item_by_artist(page.name, page.sister)) : page.name
-          });
-        }
-      }
-      const textarea = markdown_field((val) => {
-        chars.textContent = tl2(trans.value_characters_max, {
-          v: `${val.length}/1000`
-        });
-        chars.setAttribute("data-exceeded", val.length >= 1e3);
-        if (use_md) preview.setAttribute("disabled", val.length <= 0);
-      }, {}, "", "body", null, null, placeholder, legacy_textarea.maxLength, true, !is_reply);
-      legacy_textarea.replaceWith(textarea);
-      let chars;
-      let preview;
-      render(help_text, html`
-            ${use_md ? html.node`
-                <div class="tip preview" onclick=${() => markdown_preview(textarea.value())} ref=${(el) => preview = el} disabled="true">
-                    ${tl2(trans.preview)}
-                </div>
-            ` : ""}
-            <div class="tip characters" ref=${(el) => chars = el}>
-                ${tl2(trans.value_characters_max, { v: "0/1000" })}
-            </div>
-        `);
-      shout_form.addEventListener("keydown", (e) => {
-        if (e.ctrlKey && e.keyCode == 13) {
-          e.preventDefault();
-          send_button.querySelector(".btn-post-shout").click();
-          notify({
-            id: "shout",
-            title: tl2(trans.shouts),
-            body: tl2(trans.sent),
-            icon: "icon-16-shoutbox"
-          });
-        }
-      });
-    });
-  }
-  function shout_send(send_button) {
-    if (!send_button) return;
-    let button2 = send_button.querySelector(".btn-post-shout");
-    if (!button2) return;
-    button2.classList.add("btn-send-shout-generic");
-    button2.textContent = tl2(trans.send);
-    button2.removeAttribute("disabled");
-    if (page.mobile) return;
-    tippy_esm_default(button2, {
-      content: tl2(trans.send_quickly_with).replace(
-        "{kbd}",
-        keybind(["\u2318", "\u23CE"]).outerHTML
-      ),
-      allowHTML: true,
-      delay: [500, 0]
-    });
-  }
-  function shout_header(shout_controls) {
-    let panel;
-    let settings_btn;
-    if (page.subpage == "shoutbox_shout") {
-      panel = page.structure.main.querySelector(":scope > section");
-      let link = window.location.href;
-      panel.insertBefore(
-        html.node`
-            <div class="top-container">
-                <h2>
-                    <a class="text-colour-link" href=${link}>${tl2(trans.shouts)}</a>
-                </h2>
-                <div class="accompany view-buttons blend blend-v2">
-                    <p class="notice">${tl2(trans.single_shout)}</p>
-                </div>
-                <div class="view-buttons blend blend-v2">
-                    <button class="left-icon blend-v2-btn" data-type="settings" ref=${(el) => settings_btn = el}>
-                        ${tl2(trans.settings)}
-                    </button>
-                </div>
-            </div>
-        `,
-        panel.firstElementChild
-      );
-    } else if (shout_controls) {
-      panel = shout_controls.parentElement;
-      let select_btn = panel.querySelector(".dropdown-menu-clickable-button");
-      let header = panel.querySelector("h2");
-      if (header) header.parentElement.removeChild(header);
-      let link = window.location.href;
-      let shoutbox_link = "+shoutbox";
-      if (page.type == "user" || page.type == "event")
-        shoutbox_link = "shoutbox";
-      if (!page.subpage.startsWith("shoutbox")) link += `/${shoutbox_link}`;
-      panel.insertBefore(
-        html.node`
-            <div class="top-container">
-                <h2>
-                    <a class="text-colour-link" href=${link}>${tl2(trans.shouts)}</a>
-                </h2>
-                ${select_btn ? html.node`
-                    <div class="accompany view-buttons blend blend-v2">
-                        ${() => {
-          select_btn.classList.add(
-            "select-button",
-            "link-select",
-            "blend-v2-btn"
-          );
-          select_btn.classList.remove(
-            "section-control",
-            "dropdown-menu-clickable-button"
-          );
-          return shout_controls;
-        }}
-                    </div>
-                ` : ""}
-                <div class="view-buttons blend blend-v2">
-                    <button class="left-icon blend-v2-btn" data-type="settings" ref=${(el) => settings_btn = el}>
-                        ${tl2(trans.settings)}
-                    </button>
-                </div>
-            </div>
-        `,
-        panel.firstElementChild
-      );
-    }
-    if (!settings_btn) return;
-    tippy_esm_default(settings_btn, {
-      theme: "window",
-      content: html.node`
-            <div class="dialog-settings">
-                <div class="setting-group blend">
-                    ${setting({ id: "shout_markdown" })}
-                    ${setting({ id: "accessible_name_colours" })}
-                    ${setting({ id: "underline_links" })}
-                </div>
-            </div>
-        `,
-      placement: "bottom",
-      interactive: true,
-      interactiveBorder: 10,
-      trigger: "click",
-      appendTo: document.body
-    });
-    const cant_shout = panel.querySelector(".shouting-unavailable");
-    if (cant_shout) {
-      render(
-        cant_shout,
-        html`
-                <div class="loading-data-container">
-                    <div class="loading-data-text static" data-type="shouts">
-                        ${tl2(trans.cant_shout)}
-                    </div>
-                </div>
-            `
-      );
-    }
-  }
-  function parse_shout_queue() {
-    if (shout_parse_queue.length == 0) return;
-    const shout = shout_parse_queue.shift();
-    const parsed2 = markdown(shout.element.textContent);
-    shout.element.classList.add("markdown-body");
-    render(shout.element, html.node`${parsed2}`);
-    log("parsed one shout", "shout", "log");
-    if (shout_parse_queue.length > 0) setTimeout(parse_shout_queue, 50);
-  }
-  function shout_messages() {
-    if (!page.structure.main) return;
-    let alerts = page.structure.main.querySelectorAll(
-      ".shout-messages > .alert"
-    );
-    alerts.forEach((alert2) => {
-      if (alert2.classList.contains("alert-danger")) {
-        notify({
-          id: "shout",
-          title: tl2(trans.shouts),
-          body: tl2(trans.failed_to_send),
-          type: "error",
-          icon: "icon-16-shoutbox"
-        });
-      } else {
-        return;
-      }
-      alert2.remove();
-    });
   }
 
   // src/components/radio/radio.js
@@ -70185,6 +70202,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     auto_close: {
       // auto close dialog after action
       en: "Auto close"
+    },
+    loading_conversations: {
+      en: "Loading conversations"
     }
   };
   var translation_fallback = "NO_TRANSLATION_FOUND";
@@ -72021,6 +72041,16 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         default: false,
         name: "Can report user from menu",
         date: "2026-01-30"
+      },
+      join_the_conversation: {
+        default: true,
+        name: "Replace 'Join the conversation' with an actual shoutbox",
+        date: "2025-02-12"
+      },
+      use_full_shoutbox: {
+        default: false,
+        name: "When 'Join the conversation' is replaced, use the full shoutbox instead of a preview",
+        date: "2025-02-12"
       }
     }
   };

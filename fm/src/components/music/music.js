@@ -35,6 +35,7 @@ import {
 import { oracle_credits } from '@/components/music/oracle';
 import { setting } from '@/components/settings/settings';
 import { patch_user_list_item } from '@/components/shared/users';
+import { join_the_conversation } from '../shared/shout.js';
 
 unsafeWindow._other_listener = function (id) {
     other_listener(id);
@@ -48,7 +49,7 @@ export async function show_your_scrobbles() {
     // this is a simple way to detect it
     // quick test page: https://www.last.fm/music/Haftbefehl
     //
-    // WARN: as of 2025-02-19, last.fm reworked shoutbox previews and this check no longer works
+    // WARN: as of 2025-02-12, last.fm reworked shoutbox previews and this check no longer works
     // it has been switched off for now
 
     //const page_is_blocked = !page.structure.main.querySelector('#shoutbox');
@@ -57,6 +58,8 @@ export async function show_your_scrobbles() {
         `${page_is_blocked ? 'page is blocked' : 'page is not blocked'}`,
         'music'
     );
+
+    join_the_conversation();
 
     if (page.subpage == 'overview') {
         let tabs = document.createElement('nav');
