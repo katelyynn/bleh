@@ -44329,7 +44329,12 @@
     if (!ff("join_the_conversation")) return;
     const join = page.structure.main.querySelector(".btn-shouts-join");
     if (!join) return;
-    const partial = !ff("use_full_shoutbox") ? "partial/" : "";
+    const use_partial = !ff("use_full_shoutbox");
+    const partial = use_partial ? "partial/" : "";
+    let search = window.location.search;
+    if (!use_partial) {
+      search = search.replace("shoutbox-sort=", "sort=");
+    }
     const url = `${window.location.pathname}/+${partial}shoutbox${window.location.search}`;
     const shoutbox = html.node`
         <section class="shoutbox-preview" id="shoutbox">
@@ -44346,11 +44351,16 @@
       return res.text();
     }).then((res) => {
       const doc = new DOMParser().parseFromString(res, "text/html");
-      const new_shoutbox = doc.querySelector(".shoutbox");
+      const new_shoutbox = doc.querySelector(use_partial ? ".shoutbox" : ".col-main > section");
       if (!new_shoutbox) throw new Error();
-      render(shoutbox, html`
-                ${new_shoutbox}
-            `);
+      if (use_partial) {
+        render(shoutbox, html`
+                    ${new_shoutbox}
+                `);
+      } else {
+        shoutbox.replaceWith(new_shoutbox);
+        shout_header(new_shoutbox.querySelector(".section-controls"));
+      }
     }).catch((e) => {
       handle_shout_error(e);
     });
