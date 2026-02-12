@@ -10305,6 +10305,15 @@ export const trans = {
     },
     shoutbox_failed: {
         en: 'There was an error loading conversations “(ノ _ <,, )'
+    },
+    track_name: {
+        en: 'Track name'
+    },
+    artist_name: {
+        en: 'Artist name'
+    },
+    album_name: {
+        en: 'Album name'
     }
 };
 

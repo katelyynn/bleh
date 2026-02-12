@@ -50955,14 +50955,14 @@
                             <td class="kate-placeholder" />
                             <td class="track-info" data-has-bar="false">
                                 <span class="chartlist-name">
-                                    <a>Track name</a>
+                                    <a>${tl2(trans.track_name)}</a>
                                 </span>
                                 <span class="chartlist-artist">
-                                    <a>Artist name</a>
+                                    <a>${tl2(trans.artist_name)}</a>
                                 </span>
                                 ${settings.expand_tracks != "never" && settings.track_layout == "column" ? html.node`
                                     <span class="chartlist-album custom-album-text">
-                                        <a>Album name</a>
+                                        <a>${tl2(trans.album_name)}</a>
                                     </span>
                                 ` : ""}
                             </td>
@@ -50980,14 +50980,14 @@
                             <td class="kate-placeholder" />
                             <td class="track-info" data-has-bar="false">
                                 <span class="chartlist-name">
-                                    <a>Track name</a>
+                                    <a>${tl2(trans.track_name)}</a>
                                 </span>
                                 <span class="chartlist-artist">
-                                    <a>Artist name</a>
+                                    <a>${tl2(trans.artist_name)}</a>
                                 </span>
                                 ${settings.expand_tracks == "always" && settings.expand_tracks != "never" && settings.track_layout == "column" ? html.node`
                                     <span class="chartlist-album custom-album-text">
-                                        <a>Album name</a>
+                                        <a>${tl2(trans.album_name)}</a>
                                     </span>
                                 ` : ""}
                             </td>
@@ -70246,6 +70246,15 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     shoutbox_failed: {
       en: "There was an error loading conversations \u201C(\u30CE _ <,, )"
+    },
+    track_name: {
+      en: "Track name"
+    },
+    artist_name: {
+      en: "Artist name"
+    },
+    album_name: {
+      en: "Album name"
     }
   };
   var translation_fallback = "NO_TRANSLATION_FOUND";

@@ -293,14 +293,14 @@ export async function render_setting_page(page_id) {
                             <td class="kate-placeholder" />
                             <td class="track-info" data-has-bar="false">
                                 <span class="chartlist-name">
-                                    <a>Track name</a>
+                                    <a>${tl(trans.track_name)}</a>
                                 </span>
                                 <span class="chartlist-artist">
-                                    <a>Artist name</a>
+                                    <a>${tl(trans.artist_name)}</a>
                                 </span>
                                 ${settings.expand_tracks != 'never' && settings.track_layout == 'column' ? html.node`
                                     <span class="chartlist-album custom-album-text">
-                                        <a>Album name</a>
+                                        <a>${tl(trans.album_name)}</a>
                                     </span>
                                 ` : ''}
                             </td>
@@ -318,14 +318,14 @@ export async function render_setting_page(page_id) {
                             <td class="kate-placeholder" />
                             <td class="track-info" data-has-bar="false">
                                 <span class="chartlist-name">
-                                    <a>Track name</a>
+                                    <a>${tl(trans.track_name)}</a>
                                 </span>
                                 <span class="chartlist-artist">
-                                    <a>Artist name</a>
+                                    <a>${tl(trans.artist_name)}</a>
                                 </span>
                                 ${settings.expand_tracks == 'always' && settings.expand_tracks != 'never' &&settings.track_layout == 'column' ? html.node`
                                     <span class="chartlist-album custom-album-text">
-                                        <a>Album name</a>
+                                        <a>${tl(trans.album_name)}</a>
                                     </span>
                                 ` : ''}
                             </td>
