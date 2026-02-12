@@ -4,7 +4,7 @@
 // Licensed under GPLv3
 //
 
-import { trans } from './trans.js';
+import { trans } from '@/build/trans';
 
 export let settings = {};
 export let settings_template = {
@@ -1378,5 +1378,10 @@ export let settings_store = {
     popups_seen: {
         default: [],
         type: 'list'
+    },
+    auto_close_scrobble_modal: {
+        default: true,
+        type: 'checkbox',
+        title: trans.auto_close
     }
 };

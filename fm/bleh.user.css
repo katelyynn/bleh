@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           bleh (dev)
 @namespace      github.com/katelyynn/bleh
-@version        2026.0131.1
+@version        2026.0212
 @license        GPL-3.0
 @author         kate
 @updateURL      https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.css
@@ -25,7 +25,7 @@
     }
 
     body {
-        --version-build: "2026.0131.1";
+        --version-build: "2026.0212";
 
         --font:
             var(--custom_font, ""), Funnel Sans, Inter, Ubuntu Sans, Spline Sans,
@@ -308,14 +308,14 @@
         .theme-preview[data-bleh--theme="oled"],
         [data-bleh--theme="oled"] &:not(.theme-preview) {
             /* any additional highlights */
-            --b2: 0, 0%, 21%;
-            --b3: 0, 0%, 11%;
+            --b2: var(--hue), calc(var(--sat) * 5% * var(--sat-bg, 1)), 23%;
+            --b3: var(--hue), calc(var(--sat) * 5% * var(--sat-bg, 1)), 11%;
 
             /* card border */
-            --b4: 0, 0%, 19%;
+            --b4: var(--hue), calc(var(--sat) * 6% * var(--sat-bg, 1)), 10%;
 
             /* card */
-            --b5: 0, 0%, 0%;
+            --b5: var(--hue), calc(var(--sat) * 6% * var(--sat-bg, 1)), 4%;
 
             /* root */
             --b6: 0, 0%, 0%;
@@ -359,7 +359,7 @@
         [data-bleh--theme="light"] &:not(.theme-preview) {
             /* any additional highlights */
             --b2: 0, 0%, 82%;
-            --b3: 0, 0%, 100%;
+            --b3: 0, 0%, 98%;
 
             /* card border */
             --b4: 0, 0%, 91%;
@@ -411,14 +411,17 @@
             --banner-overlay: hsl(var(--b5), 20%);
             --banner-mix: lighten;
 
-            --setting-group: hsl(var(--b6), 30%);
+            --setting-group: hsl(var(--b6), 8%);
 
             --lastfm-logo-filter: none;
+
+            --textarea: hsl(var(--b6), 40%);
+            --textarea-hov: hsl(var(--b6), 70%);
         }
         .theme-preview[data-bleh--theme="ink"],
         [data-bleh--theme="ink"] &:not(.theme-preview) {
             /* any additional highlights */
-            --b3: var(--hue), calc(var(--sat) * 14% * var(--sat-bg, 1)), 85%;
+            --b3: var(--hue), calc(var(--sat) * 18% * var(--sat-bg, 1)), 86%;
 
             /* card border */
             --b4: var(--hue), calc(var(--sat) * 12% * var(--sat-bg, 1)), 70%;
@@ -475,9 +478,12 @@
             --banner-overlay: hsl(var(--b5), 20%);
             --banner-mix: lighten;
 
-            --setting-group: hsl(var(--b6), 30%);
+            --setting-group: hsl(var(--b6), 14%);
 
             --lastfm-logo-filter: none;
+
+            --textarea: hsl(var(--b6), 30%);
+            --textarea-hov: hsl(var(--b6), 60%);
         }
     }
 
@@ -533,36 +539,36 @@
         --l4: var(--hue), calc(var(--sat) * 70%), calc(var(--lit) * 50%);
 
         --l2-c:
-            var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 40%),
-            calc(clamp(min(0.5), var(--lit), max(1.5)) * 83%);
+            var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 40%),
+            calc(clamp(min(0.8), var(--lit), max(2)) * 82%);
         --l3-c:
-            var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 50%),
-            calc(clamp(min(0.5), var(--lit), max(1.5)) * 70%);
-        --l3-c-sat: calc(clamp(min(0), var(--sat), max(1.5)) * 50%);
-        --l3-c-lit: calc(clamp(min(0.5), var(--lit), max(1.5)) * 70%);
+            var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 50%),
+            calc(clamp(min(0.5), var(--lit), max(2)) * 70%);
+        --l3-c-sat: calc(clamp(min(0), var(--sat), max(2)) * 50%);
+        --l3-c-lit: calc(clamp(min(0.5), var(--lit), max(2)) * 70%);
         --l4-c:
-            var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 55%),
-            calc(clamp(min(0.5), var(--lit), max(1.5)) * 55%);
+            var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 55%),
+            calc(clamp(min(0.5), var(--lit), max(2)) * 55%);
 
         --h2: var(--l2-c);
         --h3: var(--l3-c);
         --h3-s: var(--hue), 50%, 70%;
-        --h3-sat: calc(clamp(min(0), var(--sat), max(1.5)) * 60%);
-        --h3-lit: calc(clamp(min(0.5), var(--lit), max(1.5)) * 70%);
+        --h3-sat: calc(clamp(min(0), var(--sat), max(2)) * 60%);
+        --h3-lit: calc(clamp(min(0.5), var(--lit), max(2)) * 70%);
         --h4: var(--l4-c);
         --f4:
-            var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 40%),
-            calc(clamp(min(0.8), var(--lit), max(1.5)) * 42%);
+            var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 40%),
+            calc(clamp(min(0.8), var(--lit), max(2)) * 42%);
         --k4: var(--f4);
         --g4:
-            var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 60%),
-            calc(clamp(min(0.5), var(--lit), max(1.5)) * 15%);
+            var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 60%),
+            calc(clamp(min(0.5), var(--lit), max(2)) * 15%);
 
         --s3:
-            var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 50%),
+            var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 50%),
             calc(clamp(min(0.5), var(--lit), max(1)) * 63%);
         --s4:
-            var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 55%),
+            var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 55%),
             calc(clamp(min(0.5), var(--lit), max(1.1)) * 56%);
 
         --p3: var(--s3);
@@ -587,7 +593,7 @@
         --avatar-generic-background: hsl(var(--b4));
 
         --primary-shadow:
-            inset 0 1px 0 0 hsl(var(--h2), 50%),
+            inset 0 1px 0 0 hsl(var(--h2), 70%),
             inset 0 -30px 6px -30px hsla(var(--h2), 55%);
         --bar-shadow: inset 0 1px 0 0 hsla(var(--h3), 25%);
 
@@ -613,41 +619,39 @@
 
         .theme-preview[data-bleh--theme="oled"],
         [data-bleh--theme="oled"] &:not(.theme-preview) {
-            --c1:
-                var(--hue), calc(clamp(min(0), var(--sat), max(1)) * 30%), 100%;
-            --c2:
-                var(--hue), calc(clamp(min(0), var(--sat), max(1)) * 20%), 84%;
-            --c3: var(--hue), calc(clamp(min(0), var(--sat), max(1)) * 4%), 50%;
+            --c1: var(--hue), calc(clamp(min(0), var(--sat), max(1)) * 30%), 96%;
+            --c2: var(--hue), calc(clamp(min(0), var(--sat), max(1)) * 30%), 87%;
+            --c3: var(--hue), calc(clamp(min(0), var(--sat), max(1)) * 7%), 60%;
 
             --l3: var(--hue), calc(var(--sat) * 50%), calc(var(--lit) * 75%);
             --l4: var(--hue), calc(var(--sat) * 60%), calc(var(--lit) * 45%);
 
             --l3-c:
-                var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 50%),
-                calc(clamp(min(0.5), var(--lit), max(1.5)) * 70%);
-            --l3-c-sat: calc(clamp(min(0), var(--sat), max(1.5)) * 50%);
-            --l3-c-lit: calc(clamp(min(0.5), var(--lit), max(1.5)) * 70%);
+                var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 50%),
+                calc(clamp(min(0.5), var(--lit), max(2)) * 70%);
+            --l3-c-sat: calc(clamp(min(0), var(--sat), max(2)) * 50%);
+            --l3-c-lit: calc(clamp(min(0.5), var(--lit), max(2)) * 70%);
             --l4-c:
-                var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 55%),
-                calc(clamp(min(0.5), var(--lit), max(1.5)) * 45%);
+                var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 55%),
+                calc(clamp(min(0.5), var(--lit), max(2)) * 45%);
 
             --h2: var(--l2-c);
             --h3: var(--l3-c);
             --h3-s: var(--hue), 50%, 70%;
-            --h3-sat: calc(clamp(min(0), var(--sat), max(1.5)) * 50%);
-            --h3-lit: calc(clamp(min(0.5), var(--lit), max(1.5)) * 70%);
+            --h3-sat: calc(clamp(min(0), var(--sat), max(2)) * 50%);
+            --h3-lit: calc(clamp(min(0.5), var(--lit), max(2)) * 70%);
             --h4:
-                var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 65%),
-                calc(clamp(min(0.5), var(--lit), max(1.5)) * 55%);
+                var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 65%),
+                calc(clamp(min(0.5), var(--lit), max(2)) * 55%);
             --f4:
-                var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 32%),
-                calc(clamp(min(0.8), var(--lit), max(1.5)) * 25%);
+                var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 32%),
+                calc(clamp(min(0.8), var(--lit), max(2)) * 40%);
             --k4:
-                var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 32%),
-                calc(clamp(min(0.8), var(--lit), max(1.5)) * 45%);
+                var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 32%),
+                calc(clamp(min(0.8), var(--lit), max(2)) * 45%);
             --g4:
-                var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 60%),
-                calc(clamp(min(0.5), var(--lit), max(1.5)) * 10%);
+                var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 60%),
+                calc(clamp(min(0.5), var(--lit), max(2)) * 10%);
 
             --shout-vote-indicator: linear-gradient(
                 90deg,
@@ -677,35 +681,35 @@
             --l4: var(--hue), calc(var(--sat) * 60%), calc(var(--lit) * 22%);
 
             --l2-c:
-                var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 70%),
+                var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 70%),
                 calc(clamp(min(0.7), var(--lit), max(1.1)) * 86%);
             --l3-c:
-                var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 50%),
+                var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 50%),
                 calc(clamp(min(0.7), var(--lit), max(1.1)) * 36%);
-            --l3-c-sat: calc(clamp(min(0), var(--sat), max(1.5)) * 50%);
+            --l3-c-sat: calc(clamp(min(0), var(--sat), max(2)) * 50%);
             --l3-c-lit: calc(clamp(min(0.5), var(--lit), max(1.1)) * 40%);
-            --l4-c: var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 60%), calc(clamp(min(0.7), var(--lit), max(1.1)) * 26%);
+            --l4-c: var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 60%), calc(clamp(min(0.7), var(--lit), max(1.1)) * 26%);
 
             --h3:
-                var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 50%),
+                var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 50%),
                 calc(clamp(min(0.85), var(--lit), max(1.1)) * 86%);
             --h3-s: var(--hue), 50%, 70%;
-            --h3-sat: calc(clamp(min(0), var(--sat), max(1.5)) * 50%);
+            --h3-sat: calc(clamp(min(0), var(--sat), max(2)) * 50%);
             --h3-lit: calc(clamp(min(0.5), var(--lit), max(1.1)) * 86%);
             --h4:
-                var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 60%),
+                var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 60%),
                 calc(clamp(min(0.7), var(--lit), max(1.1)) * 73%);
             --f4:
-                var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 60%),
-                calc(clamp(min(0.8), var(--lit), max(1.5)) * 80%);
+                var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 60%),
+                calc(clamp(min(0.8), var(--lit), max(2)) * 80%);
             --k4:
-                var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 42%),
-                calc(clamp(min(0.8), var(--lit), max(1.5)) * 76%);
+                var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 42%),
+                calc(clamp(min(0.8), var(--lit), max(2)) * 76%);
             --g4:
-                var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 70%), 92%;
+                var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 70%), 92%;
 
             --p3:
-                var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 50%),
+                var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 50%),
                 calc(clamp(min(0.85), var(--lit), max(1.1)) * 90%);
 
             /* l2-c in dark modes, l4-c in light modes */
@@ -734,7 +738,7 @@
                 hsl(var(--h4), 15%)
             );
 
-            --glow: hsl(var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 80%), calc(clamp(min(0.7), var(--lit), max(1.1)) * 30%), 20%);
+            --glow: hsl(var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 80%), calc(clamp(min(0.7), var(--lit), max(1.1)) * 30%), 20%);
 
             --g-red: hsl(8, 42%, 50%);
             --g-orange: hsl(24, 66%, 50%);
@@ -762,37 +766,37 @@
             --l4: var(--hue), calc(var(--sat) * 60%), calc(var(--lit) * 22%);
 
             --l2-c:
-                var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 40%),
+                var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 40%),
                 calc(clamp(min(0.7), var(--lit), max(1.1)) * 63%);
             --l3-c:
-                var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 50%),
+                var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 50%),
                 calc(clamp(min(0.7), var(--lit), max(1.1)) * 30%);
-            --l3-c-sat: calc(clamp(min(0), var(--sat), max(1.5)) * 50%);
+            --l3-c-sat: calc(clamp(min(0), var(--sat), max(2)) * 50%);
             --l3-c-lit: calc(clamp(min(0.5), var(--lit), max(1.1)) * 40%);
             --l4-c:
-                var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 60%),
+                var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 60%),
                 calc(clamp(min(0.7), var(--lit), max(1.1)) * 25%);
 
             --h3:
-                var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 38%),
+                var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 38%),
                 calc(clamp(min(0.7), var(--lit), max(1.1)) * 73%);
             --h3-s: var(--hue), 50%, 70%;
-            --h3-sat: calc(clamp(min(0), var(--sat), max(1.5)) * 32%);
+            --h3-sat: calc(clamp(min(0), var(--sat), max(2)) * 32%);
             --h3-lit: calc(clamp(min(0.5), var(--lit), max(1.1)) * 73%);
             --h4:
-                var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 32%),
+                var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 32%),
                 calc(clamp(min(0.7), var(--lit), max(1.1)) * 64%);
             --f4:
-                var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 30%),
-                calc(clamp(min(0.8), var(--lit), max(1.5)) * 60%);
+                var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 30%),
+                calc(clamp(min(0.8), var(--lit), max(2)) * 60%);
             --k4:
-                var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 45%),
-                calc(clamp(min(0.8), var(--lit), max(1.5)) * 60%);
+                var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 45%),
+                calc(clamp(min(0.8), var(--lit), max(2)) * 60%);
             --g4:
-                var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 25%), 75%;
+                var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 25%), 75%;
 
             --p3:
-                var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 50%),
+                var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 50%),
                 calc(clamp(min(0.85), var(--lit), max(1.1)) * 90%);
 
             /* l2-c in dark modes, l4-c in light modes */
@@ -818,7 +822,7 @@
                 hsl(var(--h4), 15%)
             );
 
-            --glow: hsl(var(--hue), calc(clamp(min(0), var(--sat), max(1.5)) * 80%), calc(clamp(min(0.7), var(--lit), max(1.1)) * 30%), 20%);
+            --glow: hsl(var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 80%), calc(clamp(min(0.7), var(--lit), max(1.1)) * 30%), 20%);
 
             --badge: hsl(var(--f4), 55%);
             --badge-hov: hsl(var(--f4), 65%);
@@ -954,6 +958,8 @@
         --solarium-dark: var(--card-blur) var(--dark) url(#solarium);
         --card-blur: blur(6px) saturate(var(--blur-saturate)) brightness(var(--blur-brightness)) contrast(1);
 
+        --solarium-percent: 1;
+
         @supports (-moz-appearance: none) {
             --solarium: var(--card-blur);
             --solarium-bright: var(--card-blur) var(--bright);
@@ -978,6 +984,8 @@
             --solarium-dark: none !important;
             --solarium-opacity: 1;
             --solarium-display: none;
+
+            --solarium-percent: 0;
         }
 
         &[data-bleh--theme="light"],
@@ -1343,6 +1351,7 @@
         --icon-season: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWNhbGVuZGFyLWNsb2NrIj48cGF0aCBkPSJNMjEgNy41VjZhMiAyIDAgMCAwLTItMkg1YTIgMiAwIDAgMC0yIDJ2MTRhMiAyIDAgMCAwIDIgMmgzLjUiLz48cGF0aCBkPSJNMTYgMnY0Ii8+PHBhdGggZD0iTTggMnY0Ii8+PHBhdGggZD0iTTMgMTBoNSIvPjxwYXRoIGQ9Ik0xNy41IDE3LjUgMTYgMTYuM1YxNCIvPjxjaXJjbGUgY3g9IjE2IiBjeT0iMTYiIHI9IjYiLz48L3N2Zz4=");
         --icon-error: url("data:image/svg+xml;base64,PHN2ZyAgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiAgd2lkdGg9IjI0IiAgaGVpZ2h0PSIyNCIgIHZpZXdCb3g9IjAgMCAyNCAyNCIgIGZpbGw9ImN1cnJlbnRDb2xvciIgIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1maWxsZWQgaWNvbi10YWJsZXItYm9tYiI+PHBhdGggc3Ryb2tlPSJub25lIiBkPSJNMCAwaDI0djI0SDB6IiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTE0LjQ5OSAzLjk5NmEyLjIgMi4yIDAgMCAxIDEuNTU2IC42NDVsMy4zMDIgMy4zMDFhMi4yIDIuMiAwIDAgMSAwIDMuMTEzbC0uNTY3IC41NjdsLjA0MyAuMTkyYTguNSA4LjUgMCAwIDEgLTMuNzMyIDguODNsLS4yMyAuMTQ0YTguNSA4LjUgMCAxIDEgLTIuNjg3IC0xNS42MjNsLjE5MiAuMDQybC41NjcgLS41NjZhMi4yIDIuMiAwIDAgMSAxLjM2MiAtLjYzNnptLTQuNDk5IDUuMDA0YTQgNCAwIDAgMCAtNCA0YTEgMSAwIDAgMCAyIDBhMiAyIDAgMCAxIDIgLTJhMSAxIDAgMCAwIDAgLTJ6IiAvPjxwYXRoIGQ9Ik0yMSAyYTEgMSAwIDAgMSAuMTE3IDEuOTkzbC0uMTE3IC4wMDdoLTFjMCAuODMgLS4zMDIgMS42MjkgLS44NDYgMi4yNWwtLjE1NCAuMTYzbC0xLjI5MyAxLjI5M2ExIDEgMCAwIDEgLTEuNDk3IC0xLjMybC4wODMgLS4wOTRsMS4yOTMgLTEuMjkyYy4yMzIgLS4yMzIgLjM3NSAtLjUzNyAuNDA3IC0uODZsLjAwNyAtLjE0YTIgMiAwIDAgMSAxLjg1IC0xLjk5NWwuMTUgLS4wMDVoMXoiIC8+PC9zdmc+");
 
+        --icon-16-create-from-scratch: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1vdXRsaW5lIGljb24tdGFibGVyLXBlbmNpbC1wbHVzIj48cGF0aCBzdHJva2U9Im5vbmUiIGQ9Ik0wIDBoMjR2MjRIMHoiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJNNCAyMGg0bDEwLjUgLTEwLjVhMi44MjggMi44MjggMCAxIDAgLTQgLTRsLTEwLjUgMTAuNXY0IiAvPjxwYXRoIGQ9Ik0xMy41IDYuNWw0IDQiIC8+PHBhdGggZD0iTTE2IDE5aDYiIC8+PHBhdGggZD0iTTE5IDE2djYiIC8+PC9zdmc+");
         --icon-16-dislike: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1vdXRsaW5lIGljb24tdGFibGVyLXRodW1iLWRvd24iPjxwYXRoIHN0cm9rZT0ibm9uZSIgZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPjxwYXRoIGQ9Ik03IDEzdi04YTEgMSAwIDAgMCAtMSAtMWgtMmExIDEgMCAwIDAgLTEgMXY3YTEgMSAwIDAgMCAxIDFoM2E0IDQgMCAwIDEgNCA0djFhMiAyIDAgMCAwIDQgMHYtNWgzYTIgMiAwIDAgMCAyIC0ybC0xIC01YTIgMyAwIDAgMCAtMiAtMmgtN2EzIDMgMCAwIDAgLTMgMyIgLz48L3N2Zz4=");
 
         --snow: snow;
@@ -1770,7 +1779,7 @@
         }
 
         &.scrolled,
-        &:hover {
+        &:hover, &:focus-within {
             &:before {
                 opacity: 0.7;
                 translate: 0 0;
@@ -3138,7 +3147,6 @@
     .wiki-history,
     /* error 500 */ .container:has(#marvin),
     :is(.namespace--music_track_tags_add, .namespace--music_artist_tags_add, .namespace--music_album_tags_add) .col-main,
-    /* make a playlist */ .playlisting-create-options,
     /* home page recommendations */ .homefeed .col-main,
     /* playlist content */ .playlisting-playlist-header + .page-content > .row,
     /* event lineup */ .big-artist-list,
@@ -6453,10 +6461,9 @@
                 font-size: calc(var(--font-size) - 1px);
             }
 
-            [data-bleh--track_layout="column"][data-bleh--track_album_name_location="row"]
-                &:not([data-has-bar="true"]) {
+            [data-bleh--track_layout="column"][data-bleh--track_album_name_location="row"] &:not([data-has-bar="true"]) {
                 display: grid;
-                grid-template-columns: 1fr 1fr;
+                grid-template-columns: 60% 40%;
                 grid-template-rows: auto auto;
                 gap: 0 var(--item-list-gap);
                 align-items: center;
@@ -6464,17 +6471,20 @@
                 & > .chartlist-name {
                     grid-column: 1 / 2;
                     grid-row: 1 / 2;
+                    max-width: 100%;
                 }
 
                 & > .chartlist-artist {
                     grid-column: 1 / 2;
                     grid-row: 2 / 3;
+                    max-width: 100%;
                 }
 
                 & > .chartlist-album {
                     grid-column: 2 / 3;
                     grid-row: 1 / 3;
                     align-self: center;
+                    max-width: 100%;
                 }
             }
 
@@ -6951,6 +6961,7 @@
         gap: 6px;
         font-weight: inherit;
         text-decoration: var(--force-underline, none) !important;
+        width: fit-content;
     }
 
     .smart-title {
@@ -7315,12 +7326,12 @@
             text-decoration: none !important;
 
             .chartlist-count-bar-slug {
-                background: hsl(var(--h4), 40%) !important;
+                background: hsl(var(--h4), 50%) !important;
                 box-shadow: var(--bar-shadow) !important;
             }
 
             .chartlist-count-bar-value {
-                color: hsl(var(--l3-c-theme-switch)) !important;
+                color: hsl(var(--l2-c-theme-switch)) !important;
                 --hue-over: unset !important;
                 --sat-over: unset !important;
                 --lit-over: unset !important;
@@ -8377,7 +8388,7 @@
             transition-property: padding, transform, filter !important;
             transition-duration: var(--trans) !important;
             transition-timing-function: var(--trans-function) !important;
-            --transition-property: opacity, left;
+            --transition-property: opacity, left, transform;
             /*box-shadow: var(--shadow-hov) !important;*/
 
             background-repeat: repeat-x !important;
@@ -8541,6 +8552,10 @@
         & > .bleh-icon {
             --icon-size: 14px;
             --icon-colour: hsl(var(--c3));
+        }
+
+        &.extra {
+            gap: var(--card-gap);
         }
     }
     .icon-combo {
@@ -8964,7 +8979,8 @@
             --transition-property,
             opacity,
             left,
-            background
+            background,
+            transform
         ) !important;
         transition-duration: var(--trans) !important;
         transition-timing-function: var(--trans-function) !important;
@@ -10609,7 +10625,7 @@
     .auth-dropdown-menu,
     .navlist-hidden-list-wrap .navlist-hidden-list {
         padding: 4px !important;
-        animation: solarium 0.25s var(--trans-function);
+        animation: solarium_menu 0.25s var(--trans-function);
     }
     .dropdown-menu-item-dark,
     .dropdown-menu-clickable-item,
@@ -11649,7 +11665,7 @@
         }
 
         &.to-remove {
-            filter: blur(3px);
+            filter: blur(calc(var(--solarium-percent) * 3px));
             transform: scale(0.98);
             opacity: 0;
         }
@@ -11719,6 +11735,7 @@
             --shadow: none;
             --col: hsl(var(--c3));
             --mask-colour: currentColor;
+            --font-size: 0;
             position: absolute;
             top: calc(var(--card-padding) - ((var(--modal-close-size) - 20px) / 2));
             right: calc(var(--card-padding) - ((var(--modal-close-size) - 20px) / 2));
@@ -12371,6 +12388,7 @@
                     & > .avatar {
                         width: 32px;
                         height: 32px;
+                        --mask-size: var(--cover-size-32);
 
                         & > .avatar-status-dot {
                             --mask-size: 14px;
@@ -12408,6 +12426,7 @@
                     background: hsl(var(--b5));
                     width: 42px;
                     height: 42px;
+                    --mask-size: var(--cover-size-50);
 
                     & > img {
                         position: static;
@@ -13467,6 +13486,8 @@
 
             font-size: var(--font-size);
 
+            animation: var(--motion, solarium_menu 0.22s var(--trans-function));
+
             background-image:
                 var(--cards-overlay-image-subtle, unset),
                 var(--cards-overlay-mini) !important;
@@ -13792,11 +13813,24 @@
 
     @keyframes solarium {
         from {
-            filter: blur(3px);
+            filter: blur(calc(var(--solarium-percent) * 3px));
             transform: scale(0.98);
         }
         to {
             filter: blur(0);
+            transform: scale(1);
+        }
+    }
+
+    @keyframes solarium_menu {
+        from {
+            filter: blur(calc(var(--solarium-percent) * 3px));
+            transform-origin: top;
+            transform: scaleY(0.95);
+        }
+        to {
+            filter: blur(0);
+            transform-origin: top;
             transform: scale(1);
         }
     }
@@ -15585,7 +15619,7 @@
             --sat-over: 1;
             --lit-over: 1;
 
-            background: hsl(var(--f4), 40%) !important;
+            background: hsl(var(--f4), 20%) !important;
             border: unset !important;
             padding: var(--card-padding) !important;
             box-shadow: unset !important;
@@ -17428,9 +17462,13 @@
     /*     MAKE A PLAYLIST     */
     .playlisting-create-options {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
         gap: var(--card-gap);
+
+        margin: var(--card-gap) 0 0 0;
+        padding: unset;
     }
+
     .playlisting-create-option-wrap {
         padding: unset;
         margin: unset !important;
@@ -17441,18 +17479,25 @@
     .playlisting-create-option {
         display: flex;
         flex-direction: column;
-        gap: 6px;
+        justify-content: center;
+        gap: 0;
+
+        --button-verts: 50px;
+        --button-sides: 20px;
+
+        height: 240px;
     }
 
     .playlisting-create-option-icon {
-        width: 32px;
-        height: 32px;
-        margin: 6px 0;
+        --mask-size: 24px;
+
+        width: var(--mask-size);
+        height: var(--mask-size);
+        margin-bottom: 20px;
         padding-top: unset;
         --left: 0;
         --top: 0;
         --margin-top: 0;
-        --mask-size: 32px;
     }
 
     h2.playlisting-create-option-title {
@@ -19074,7 +19119,7 @@
             }
         }
 
-        &:not(.v) {
+        &:not(.v, .standalone) {
             & > .heading {
                 min-width: 150px;
             }
@@ -19440,7 +19485,7 @@
                     color: hsl(var(--c3));
                     --mask: var(--icon-16-spinner);
 
-                    img {
+                    & > img {
                         opacity: 0;
                     }
 
@@ -19453,12 +19498,12 @@
                         var(--trans-function);
                 }
 
-                img {
+                & > img {
                     width: 100%;
                     height: 100%;
 
                     --mask: var(--icon-16-user);
-                    --mask-size: 18px;
+                    --mask-size: 14px;
                     transition-property: opacity;
                     transition-duration: var(--trans);
                     transition-timing-function: var(--trans-function);
@@ -21362,6 +21407,16 @@
             );
         }
     }
+
+    .accented {
+        --col: hsl(var(--l3-c));
+        --mask-colour: color-mix(
+            in hsl,
+            hsl(var(--l3-c)),
+            hsl(var(--l4-c)) 30%
+        );
+    }
+
     [data-type="block"],
     .block {
         --mask: var(--icon-16-block);
@@ -22567,32 +22622,12 @@
         width: 600px;
         max-width: 95vw;
     }
+
+    .edit-scrobble-top-box {
+        display: none !important;
+    }
+
     .automatic-edit-modal-body-v2 {
-        .edit-scrobble-top-box {
-            display: none !important;
-            border: 1px solid var(--card-border-base);
-            border-radius: var(--card-radius);
-            box-shadow: unset;
-            padding: var(--card-gap);
-
-            .edit-scrobble-top-box__track-name,
-            .edit-scrobble-top-box__album-name {
-                font-weight: var(--font-weight-medium) !important;
-            }
-            .edit-scrobble-top-box__bottom {
-                color: hsl(var(--c2), 80%) !important;
-            }
-            .scrobble-count {
-                color: hsl(var(--c3)) !important;
-                font: inherit !important;
-            }
-
-            .timestamp {
-                color: hsl(var(--c3)) !important;
-                font-size: var(--font-size-sm) !important;
-                line-height: var(--line-height-sm) !important;
-            }
-        }
         .edit-scrobble-form {
             margin-top: unset !important;
 
@@ -22702,23 +22737,44 @@
         width: 530px;
         max-width: 100%;
     }
+
+    .new-scrobble-form, .form-inner {
+        display: flex;
+        flex-direction: column;
+        gap: var(--item-list-gap);
+    }
+
     .generic-label {
         color: hsl(var(--c2), 70%);
         font-weight: var(--font-weight) !important;
-        margin-bottom: 4px;
+        margin-bottom: calc(-1 * (var(--item-list-gap) - 4px));
         cursor: default;
-
-        .form-tip + &,
-        .input-container + & {
-            margin: var(--item-list-gap) 0 4px;
-        }
     }
+
     .form-tip {
         font-size: 13px;
         color: hsl(var(--c3));
         cursor: default;
-        margin-top: 6px;
+        margin-top: calc(-1 * (var(--item-list-gap) - 6px));
     }
+
+
+    .form-combo {
+        display: flex;
+        gap: var(--item-list-gap);
+
+        & > .form-inner {
+            flex: 1;
+        }
+    }
+
+    .form-actions {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
 
     /*.modal-dialog--changelog {
         width: 700px !important;
@@ -23517,6 +23573,9 @@
                 &.bookmarks-icon {
                     --mask: var(--icon-16-bookmark);
                 }
+                &.playlist-icon {
+                    --mask: var(--icon-16-playlist);
+                }
             }
         }
 
@@ -23785,7 +23844,8 @@
             position: absolute;
             inset: 0;
             background-position: center;
-            background-size: cover;
+            background-size: 100%;
+            background-repeat: no-repeat;
 
             --mask: linear-gradient(90deg, transparent 0%, white 40%, white 60%, transparent 100%);
             mask-image: var(--mask);
@@ -25423,42 +25483,46 @@
 
     .page-indicator {
         position: fixed;
-        top: 0;
+        top: 1px;
         left: 0;
         z-index: 10000000000;
         pointer-events: none;
 
         &:not(:hover) {
-            opacity: 0.4;
-
-            & > div:nth-child(2),
-            & > div:nth-child(4),
-            & > div:nth-child(5),
-            & > div:nth-child(6) {
-                display: none;
-            }
+            opacity: 0.2;
         }
 
-        div {
-            font-family: system-ui;
+        display: flex;
+        flex-direction: column;
+
+        .page-indicator-elem {
+            font-family: Funnel Sans, system-ui;
             font-size: 14px;
             line-height: 18px;
-            background: #000;
             color: #fff;
             display: flex;
+            gap: 2px;
             width: fit-content;
             pointer-events: auto;
             cursor: default;
 
-            strong {
+            border-radius: 4px;
+
+            padding: 1px 2px;
+
+            .page-indicator-head {
                 width: 65px;
                 padding: 0 6px;
+                background: #000 !important;
+                font-weight: 500 !important;
             }
 
-            span {
+            .page-indicator-sub {
                 background: rgba(255, 255, 255, 0.15);
                 display: flex;
                 padding: 0 6px;
+
+                border-radius: 4px;
 
                 &:nth-child(3) {
                     background: rgba(255, 255, 255, 0.25);
@@ -25475,9 +25539,6 @@
             }
         }
 
-        display: flex;
-        flex-direction: column;
-
         &::selection,
         ::selection {
             background: red;
@@ -25488,7 +25549,7 @@
         }
     }
     .logs {
-        font-family: system-ui;
+        font-family: Funnel Sans, system-ui;
         font-size: 14px;
         line-height: 18px;
 
@@ -25496,16 +25557,24 @@
         flex-direction: column;
 
         position: fixed;
-        bottom: 0;
-        right: 0;
+        bottom: 2px;
+        left: 2px;
         z-index: 10000000000;
-        max-width: 980px;
+        max-width: 480px;
         max-height: 72px;
         overflow: hidden;
         opacity: 0.3;
         transition-property: opacity, max-width, max-height;
         transition-duration: 0.2s;
         transition-delay: 0.2s;
+
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+
+        background: rgba(0, 0, 0, 75%);
+        padding: 2px;
+        border-radius: 4px;
 
         @media (max-width: 980px) {
             bottom: 100px;
@@ -25514,23 +25583,36 @@
         &:hover {
             overflow-y: scroll;
             opacity: 1;
-            max-width: 700px;
             max-height: 700px;
         }
 
         .log {
-            background: #000;
             color: #fff;
 
             &[data-type="log"] {
                 display: var(--log-show, none);
             }
-        }
 
-        .setting {
-            position: fixed;
-            bottom: 0;
-            right: 0;
+            .system {
+                color: rgba(0, 0, 0, 80%);
+                font-weight: 600;
+                padding: 0 4px;
+                border-radius: 4px;
+            }
+
+            cursor: default;
+        }
+    }
+
+    .log-copy {
+        cursor: pointer;
+        color: lightgray;
+        font-weight: 500;
+
+        margin-left: 10px;
+
+        &:hover {
+            color: #fff;
         }
     }
 
@@ -25754,7 +25836,7 @@
 
             & > h5,
             & > p {
-                max-width: 180px;
+                max-width: 200px;
                 white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;
@@ -28750,6 +28832,7 @@
                 --bg: hsl(var(--b4), 10%);
                 --bg-hov: hsl(var(--b4), 30%);
                 --bg-atv: hsl(var(--b4), 50%);
+                --shadow: none;
                 --col: hsl(var(--c3));
                 --mask-colour: hsl(var(--c3), 80%);
             }
@@ -28757,7 +28840,7 @@
             --bg: hsl(var(--b4), 60%);
             --bg-hov: hsl(var(--b4), 80%);
             --bg-atv: hsl(var(--b4));
-            --shadow: none;
+            --shadow: var(--normal-shadow);
 
             --button-height: 28px;
             --btn-top: 5px;
@@ -29582,8 +29665,11 @@
             --mask: radial-gradient(at center, white, transparent);
             mask-image: var(--mask);
             -webkit-mask-image: var(--mask);
-            filter: blur(8px);
+
+            filter: blur(6px);
             opacity: 0.5;
+
+            scale: 1.05;
         }
 
         & > .campfire-items {
@@ -30561,6 +30647,35 @@
 
         & > .update-container {
             animation: staggered_spinner 3s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
+        }
+    }
+
+
+    .inbox-button {
+        position: relative;
+    }
+
+    [data-type="create-from-scratch"] {
+        --mask: var(--icon-16-create-from-scratch);
+    }
+
+
+    .subtle {
+        --bg: transparent;
+        --bg-hov: hsl(var(--b4), 40%);
+        --bg-atv: hsl(var(--b4), 60%);
+        --shadow: none;
+        --col: hsl(var(--c2), 80%);
+        --mask-colour: currentColor;
+    }
+
+    [data-type="switch"] {
+        --mask: var(--icon-16-arrows);
+    }
+
+    .btn[data-type="switch"] {
+        &:hover:before {
+            transform: scaleY(-1);
         }
     }
 }

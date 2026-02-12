@@ -4,10 +4,10 @@
 // Licensed under GPLv3
 //
 
-import { handle_error_500 } from '../page';
-import { log } from './log';
-import { auth, auth_link, setRoot } from './page';
-import { clamp_lit, clamp_sat, rgb_to_hsl } from './tools';
+import { handle_error_500 } from '@/page';
+import { log } from '@/build/log';
+import { auth, auth_link, setRoot } from '@/build/page';
+import { clamp_lit, clamp_sat, rgb_to_hsl } from '@/build/tools';
 import ColorThief from 'color-thief-browser';
 import { Settings } from 'luxon';
 
@@ -10379,6 +10379,29 @@ export const trans = {
         en: 'Which copy of the album did you expect to see? Provide links and some details as to why',
         ru: 'Какой копии альбома вы ожидали увидеть? Укажите ссылки и некоторые подробности о том, почему',
         es: '¿Qué copia del álbum esperabas ver? Proporciona vínculos y algunos detalles sobre el porqué'
+    },
+    switch: {
+        // like switch places
+        en: 'Switch'
+    },
+    auto_close: {
+        // auto close dialog after action
+        en: 'Auto close'
+    },
+    loading_conversations: {
+        en: 'Loading conversations'
+    },
+    shoutbox_failed: {
+        en: 'There was an error loading conversations “(ノ _ <,, )'
+    },
+    track_name: {
+        en: 'Track name'
+    },
+    artist_name: {
+        en: 'Artist name'
+    },
+    album_name: {
+        en: 'Album name'
     }
 };
 

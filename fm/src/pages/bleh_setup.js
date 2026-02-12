@@ -4,25 +4,25 @@
 // Licensed under GPLv3
 //
 
-import { register_activity } from '../activity';
-import { log } from '../build/log';
-import { auth, discord, page, root } from '../build/page';
-import { tl, trans } from '../build/trans';
-import { request_changelog } from '../news.js';
-import { notify } from '../components/notify';
-import { checkup_page_structure } from '../components/structure';
-import { refresh_all, update_colour_swatches } from '../config';
-import { version } from '../main';
-import { register_background, update_page } from '../page';
-import { display_colour_presets, theme_bubbles } from './bleh_config';
+import { register_activity } from '@/components/shared/activity';
+import { log } from '@/build/log';
+import { auth, discord, page, root } from '@/build/page';
+import { tl, trans } from '@/build/trans';
+import { request_changelog } from '@/components/news.js';
+import { notify } from '@/components/dialog/notify';
+import { checkup_page_structure } from '@/components/page/structure';
+import { update_colour_swatches } from '../config';
+import { version } from '@/main';
+import { register_background, update_page } from '@/page';
+import { display_colour_presets, theme_bubbles } from '@/pages/bleh_settings/bleh_settings';
 import { html, render } from 'lighterhtml';
-import { setting } from '../components/settings.js';
-import { ff } from '../sku.js';
-import { sponsor } from '../sponsor.js';
-import { settings } from '../build/config.js';
-import { dialog } from '../components/dialog.js';
-import { match } from '../components/dynamic_theming.js';
-import { set_storage } from '../build/tools.js';
+import { setting } from '@/components/settings/settings';
+import { ff } from '@/components/settings/sku';
+import { sponsor } from '@/components/sponsor';
+import { settings } from '@/build/config.js';
+import { dialog } from '@/components/dialog/dialog';
+import { match } from '@/components/settings/dynamic_theming';
+import { set_storage } from '@/build/tools';
 
 export function bleh_setup() {
     page.structure.container = document.body.querySelector('.page-content');
