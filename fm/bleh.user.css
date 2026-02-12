@@ -19484,7 +19484,7 @@
                     color: hsl(var(--c3));
                     --mask: var(--icon-16-spinner);
 
-                    img {
+                    & > img {
                         opacity: 0;
                     }
 
@@ -19497,12 +19497,12 @@
                         var(--trans-function);
                 }
 
-                img {
+                & > img {
                     width: 100%;
                     height: 100%;
 
                     --mask: var(--icon-16-user);
-                    --mask-size: 18px;
+                    --mask-size: 14px;
                     transition-property: opacity;
                     transition-duration: var(--trans);
                     transition-timing-function: var(--trans-function);
