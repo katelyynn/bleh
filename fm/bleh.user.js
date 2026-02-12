@@ -44347,24 +44347,26 @@
         </section>
     `;
     join.replaceWith(shoutbox);
-    fetch(url).then((res) => {
-      if (!res.ok)
-        throw new Error();
-      return res.text();
-    }).then((res) => {
-      const doc = new DOMParser().parseFromString(res, "text/html");
-      const new_shoutbox = doc.querySelector(use_partial ? ".shoutbox" : ".col-main > section");
-      if (!new_shoutbox) throw new Error();
-      if (use_partial) {
-        render(shoutbox, html`
-                    ${new_shoutbox}
-                `);
-      } else {
-        shoutbox.replaceWith(new_shoutbox);
-        shout_header(new_shoutbox.querySelector(".section-controls"));
-      }
-    }).catch((e) => {
-      handle_shout_error(e);
+    lazy(shoutbox, () => {
+      fetch(url).then((res) => {
+        if (!res.ok)
+          throw new Error();
+        return res.text();
+      }).then((res) => {
+        const doc = new DOMParser().parseFromString(res, "text/html");
+        const new_shoutbox = doc.querySelector(use_partial ? ".shoutbox" : ".col-main > section");
+        if (!new_shoutbox) throw new Error();
+        if (use_partial) {
+          render(shoutbox, html`
+                        ${new_shoutbox}
+                    `);
+        } else {
+          shoutbox.replaceWith(new_shoutbox);
+          shout_header(new_shoutbox.querySelector(".section-controls"));
+        }
+      }).catch((e) => {
+        handle_shout_error(e);
+      });
     });
     function handle_shout_error(e) {
       render(shoutbox, html`

@@ -17,7 +17,7 @@ import {
     markdown_field,
     markdown_preview
 } from '@/components/shared/markdown';
-import { copy, romanise } from '@/build/tools';
+import { copy, lazy, romanise } from '@/build/tools';
 import tippy from 'tippy.js';
 import { keybind } from '@/components/dialog/rabbit';
 import { correct_artist, correct_item_by_artist } from '@/components/music/lotus.js';
@@ -452,31 +452,33 @@ export function join_the_conversation() {
 
     join.replaceWith(shoutbox);
 
-    fetch(url)
-        .then(res => {
-            if (!res.ok)
-                throw new Error;
+    lazy(shoutbox, () => {
+        fetch(url)
+            .then(res => {
+                if (!res.ok)
+                    throw new Error;
 
-            return res.text();
-        })
-        .then(res => {
-            const doc = new DOMParser().parseFromString(res, 'text/html');
+                return res.text();
+            })
+            .then(res => {
+                const doc = new DOMParser().parseFromString(res, 'text/html');
 
-            const new_shoutbox = doc.querySelector(use_partial ? '.shoutbox' : '.col-main > section');
-            if (!new_shoutbox) throw new Error();
+                const new_shoutbox = doc.querySelector(use_partial ? '.shoutbox' : '.col-main > section');
+                if (!new_shoutbox) throw new Error();
 
-            if (use_partial) {
-                render(shoutbox, html`
-                    ${new_shoutbox}
-                `);
-            } else {
-                shoutbox.replaceWith(new_shoutbox);
-                shout_header(new_shoutbox.querySelector('.section-controls'));
-            }
-        })
-        .catch(e => {
-            handle_shout_error(e);
-        });
+                if (use_partial) {
+                    render(shoutbox, html`
+                        ${new_shoutbox}
+                    `);
+                } else {
+                    shoutbox.replaceWith(new_shoutbox);
+                    shout_header(new_shoutbox.querySelector('.section-controls'));
+                }
+            })
+            .catch(e => {
+                handle_shout_error(e);
+            });
+    });
 
     function handle_shout_error(e) {
         render(shoutbox, html`
