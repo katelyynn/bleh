@@ -88,6 +88,8 @@ export function submit_scrobble({
                                     const track_val = track.value();
                                     const album_val = album.value();
 
+                                    if (!track_val && !album_val) return;
+
                                     track.value(album_val);
                                     album.value(track_val);
                                 }}>
@@ -125,6 +127,8 @@ export function submit_scrobble({
                                 <button class="btn chibi icon subtle" data-type="switch" onclick=${() => {
                                     const artist_val = artist.value();
                                     const album_artist_val = album_artist.value();
+
+                                    if (!artist_val && !album_artist_val) return;
 
                                     artist.value(album_artist_val);
                                     album_artist.value(artist_val);
