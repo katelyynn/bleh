@@ -67,6 +67,9 @@ export function patch_user_list_item(user, index) {
         follow.classList.add('btn');
     }
 
+    const tooltip = user.querySelector('.user-library-controls-tooltip');
+    if (tooltip) tooltip.remove();
+
     const img = avatar.querySelector('img');
     if (!img.src.endsWith('818148bf682d429dc215c1705eb27b98.png')) {
         user.appendChild(html.node`
