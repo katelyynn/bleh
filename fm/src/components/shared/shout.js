@@ -430,7 +430,7 @@ export function join_the_conversation() {
 
     const partial = !ff('use_full_shoutbox') ? 'partial/' : '';
 
-    const url = `${window.location.pathname}/+${partial}shoutbox`;
+    const url = `${window.location.pathname}/+${partial}shoutbox${window.location.search}`;
 
     //
 

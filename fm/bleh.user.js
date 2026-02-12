@@ -44330,7 +44330,7 @@
     const join = page.structure.main.querySelector(".btn-shouts-join");
     if (!join) return;
     const partial = !ff("use_full_shoutbox") ? "partial/" : "";
-    const url = `${window.location.pathname}/+${partial}shoutbox`;
+    const url = `${window.location.pathname}/+${partial}shoutbox${window.location.search}`;
     const shoutbox = html.node`
         <section class="shoutbox-preview" id="shoutbox">
             <h2>${tl2(trans.shouts)}</h2>
