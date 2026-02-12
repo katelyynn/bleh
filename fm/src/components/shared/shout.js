@@ -422,11 +422,16 @@ export function shout_messages() {
 }
 
 
-export function join_the_conversation() {
+export function join_the_conversation(blocked) {
     if (!ff('join_the_conversation')) return;
 
     const join = page.structure.main.querySelector('.btn-shouts-join');
     if (!join) return;
+
+    if (blocked) {
+        join.remove();
+        return;
+    }
 
     const use_partial = !ff('use_full_shoutbox');
 

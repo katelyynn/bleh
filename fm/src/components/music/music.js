@@ -5,13 +5,12 @@
 //
 
 import { html, render } from 'lighterhtml';
-import { settings } from '@/build/config.js';
-import { log } from '@/build/log.js';
-import { auth, page, root } from '@/build/page.js';
+import { settings } from '@/build/config';
+import { log } from '@/build/log';
+import { auth, page, root } from '@/build/page';
 import { clean_number, romanise, sanitise } from '@/build/tools';
 import { lang, tl, trans } from '@/build/trans';
 import { prep_chart_colours } from '@/components/music/chart';
-import { refresh_all } from '../../config.js';
 import { create_divider } from '@/pages/music/gallery';
 import { ff } from '@/components/settings/sku';
 import { parse_scrobbles_as_rank } from '@/components/music/colourful_counts';
@@ -53,13 +52,44 @@ export async function show_your_scrobbles() {
     // it has been switched off for now
 
     //const page_is_blocked = !page.structure.main.querySelector('#shoutbox');
-    const page_is_blocked = false;
+
+    let col_main = page.structure.container.querySelector('.top-overview-panel');
+    if (!col_main) col_main = document.body.querySelector('.col-main');
+
+    if (page.type == 'track') {
+        let new_panel = document.createElement('section');
+        new_panel.classList.add('track-info-panel');
+        new_panel.innerHTML = col_main.innerHTML;
+
+        page.structure.main.insertBefore(
+            new_panel,
+            page.structure.main.firstElementChild
+        );
+
+        col_main.style.setProperty('display', 'none');
+        // make last-child
+        page.structure.row.appendChild(col_main);
+
+        console.info(col_main, new_panel);
+
+        // now redirect later code
+        col_main = new_panel;
+    }
+
+    let page_is_blocked;
+
+    if (page.type == 'artist') {
+        page_is_blocked = col_main.querySelector('.metadata-and-wiki-row, .cta-copy') == null;
+    } else if (page.type == 'album' || page.type == 'track') {
+        page_is_blocked = col_main.querySelector('.catalogue-tags') == null;
+    }
+
     log(
         `${page_is_blocked ? 'page is blocked' : 'page is not blocked'}`,
         'music'
     );
 
-    join_the_conversation();
+    join_the_conversation(page_is_blocked);
 
     if (page.subpage == 'overview') {
         let tabs = document.createElement('nav');
@@ -207,31 +237,6 @@ export async function show_your_scrobbles() {
 
         page.structure.container.insertBefore(tabs, page.structure.row);
         page.structure.tabs = tabs;
-    }
-
-    let col_main = page.structure.container.querySelector(
-        '.top-overview-panel'
-    );
-    if (!col_main) col_main = document.body.querySelector('.col-main');
-
-    if (page.type == 'track') {
-        let new_panel = document.createElement('section');
-        new_panel.classList.add('track-info-panel');
-        new_panel.innerHTML = col_main.innerHTML;
-
-        page.structure.main.insertBefore(
-            new_panel,
-            page.structure.main.firstElementChild
-        );
-
-        col_main.style.setProperty('display', 'none');
-        // make last-child
-        page.structure.row.appendChild(col_main);
-
-        console.info(col_main, new_panel);
-
-        // now redirect later code
-        col_main = new_panel;
     }
 
     // create container
