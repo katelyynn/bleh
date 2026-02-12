@@ -308,14 +308,14 @@
         .theme-preview[data-bleh--theme="oled"],
         [data-bleh--theme="oled"] &:not(.theme-preview) {
             /* any additional highlights */
-            --b2: 0, 0%, 30%;
-            --b3: 0, 0%, 11%;
+            --b2: var(--hue), calc(var(--sat) * 5% * var(--sat-bg, 1)), 23%;
+            --b3: var(--hue), calc(var(--sat) * 5% * var(--sat-bg, 1)), 11%;
 
             /* card border */
-            --b4: 0, 0%, 19%;
+            --b4: var(--hue), calc(var(--sat) * 6% * var(--sat-bg, 1)), 10%;
 
             /* card */
-            --b5: 0, 0%, 0%;
+            --b5: var(--hue), calc(var(--sat) * 6% * var(--sat-bg, 1)), 4%;
 
             /* root */
             --b6: 0, 0%, 0%;
@@ -619,11 +619,9 @@
 
         .theme-preview[data-bleh--theme="oled"],
         [data-bleh--theme="oled"] &:not(.theme-preview) {
-            --c1:
-                var(--hue), calc(clamp(min(0), var(--sat), max(1)) * 30%), 100%;
-            --c2:
-                var(--hue), calc(clamp(min(0), var(--sat), max(1)) * 20%), 84%;
-            --c3: var(--hue), calc(clamp(min(0), var(--sat), max(1)) * 4%), 50%;
+            --c1: var(--hue), calc(clamp(min(0), var(--sat), max(1)) * 30%), 96%;
+            --c2: var(--hue), calc(clamp(min(0), var(--sat), max(1)) * 30%), 87%;
+            --c3: var(--hue), calc(clamp(min(0), var(--sat), max(1)) * 7%), 60%;
 
             --l3: var(--hue), calc(var(--sat) * 50%), calc(var(--lit) * 75%);
             --l4: var(--hue), calc(var(--sat) * 60%), calc(var(--lit) * 45%);
